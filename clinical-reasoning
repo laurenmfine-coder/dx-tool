@@ -1,0 +1,2542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinical Reasoning Tool v5</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+        }
+        .selected-choice {
+            background-color: #dbeafe;
+            border: 2px solid #3b82f6;
+        }
+        .excellent-choice {
+            background-color: #dcfce7;
+            border: 2px solid #16a34a;
+        }
+        .good-choice {
+            background-color: #dbeafe;
+            border: 2px solid #3b82f6;
+        }
+        .fair-choice {
+            background-color: #fef3c7;
+            border: 2px solid #f59e0b;
+        }
+        .low-priority-choice {
+            background-color: #fee2e2;
+            border: 2px solid #dc2626;
+        }
+        .section-header {
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .section-header:hover {
+            background-color: #f3f4f6;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState } = React;
+
+        const ClinicalReasoningTool = () => {
+          const [selectedCase, setSelectedCase] = useState(0);
+          const [currentStage, setCurrentStage] = useState('initial');
+          const [selectedDifferentials, setSelectedDifferentials] = useState([]);
+          const [showDifferentialFeedback, setShowDifferentialFeedback] = useState(false);
+          const [selectedHistory, setSelectedHistory] = useState([]);
+          const [selectedPhysical, setSelectedPhysical] = useState([]);
+          const [selectedNextSteps, setSelectedNextSteps] = useState([]);
+          const [showHistoryFeedback, setShowHistoryFeedback] = useState(false);
+          const [showPhysicalFeedback, setShowPhysicalFeedback] = useState(false);
+          const [showNextStepsFeedback, setShowNextStepsFeedback] = useState(false);
+          const [expandedDxSystems, setExpandedDxSystems] = useState([]);
+          const [expandedRosSystems, setExpandedRosSystems] = useState([]);
+          const [expandedPESystems, setExpandedPESystems] = useState([]);
+
+          const differentialsBySystem = {
+            'Cardiac': [
+              'Myocardial infarction (MI)',
+              'Angina/ACS',
+              'Heart failure',
+              'Pericarditis',
+              'Arrhythmia'
+            ],
+            'Gastrointestinal': [
+              'Gastritis',
+              'GERD',
+              'Peptic ulcer disease (PUD)',
+              'Pancreatitis',
+              'Cholecystitis/gallbladder disease',
+              'Gastroenteritis',
+              'Esophageal pathology',
+              'Bowel obstruction',
+              'Hepatitis'
+            ],
+            'Gynecologic/Reproductive': [
+              'Pregnancy',
+              'Ectopic pregnancy',
+              'Ovarian cyst/rupture',
+              'Ovarian torsion',
+              'PID',
+              'Endometriosis'
+            ],
+            'Endocrine': [
+              'Hyperprolactinemia/prolactinoma',
+              'PCOS',
+              'Hypothalamic amenorrhea',
+              'Thyroid disease',
+              'Pituitary tumor',
+              'Diabetes',
+              'Adrenal insufficiency'
+            ],
+            'Pulmonary': [
+              'Pneumonia',
+              'Viral URI/common cold',
+              'Acute bronchitis',
+              'Bacterial sinusitis',
+              'Asthma exacerbation',
+              'COPD exacerbation',
+              'Pulmonary embolism',
+              'Allergic rhinitis'
+            ],
+            'Abdominal/Surgical': [
+              'Appendicitis',
+              'Bowel obstruction',
+              'Perforated viscus',
+              'Crohn\'s disease',
+              'Diverticulitis'
+            ],
+            'Other': [
+              'Medication-induced',
+              'Musculoskeletal pain',
+              'Anxiety/stress-related',
+              'Anemia'
+            ]
+          };
+
+          const cases = [
+            {
+              id: 1,
+              title: "Epigastric Pain",
+              doorNote: {
+                name: "Robert Hayes",
+                age: 62,
+                sex: "Male",
+                location: "Outpatient Primary Care Clinic",
+                chiefComplaint: "I have pain in the upper middle part of my belly.",
+                vitals: "BP 138/82, Temp 98.6°F, HR 88, RR 18, O2 Sat 98% RA, BMI 27.3"
+              },
+              briefHPI: "62-year-old man with 2 days of epigastric pain. Dull ache with occasional burning, 6/10, constant but worse after meals. Mild nausea, no vomiting. Occasional heartburn at night over past few months. Uses ibuprofen several times weekly for knee pain. Denies chest pain, SOB, melena, hematemesis. Worried about ulcer or heart problem.",
+
+              expectedDifferential: [
+                { 
+                  diagnosis: "Gastritis (NSAID-induced)", 
+                  priority: "Most likely",
+                  reasoning: "Epigastric pain + frequent NSAID use + worse with meals = classic gastritis"
+                },
+                { 
+                  diagnosis: "GERD", 
+                  priority: "Common",
+                  reasoning: "Burning pain, nocturnal heartburn. Often overlaps with gastritis."
+                },
+                { 
+                  diagnosis: "Peptic ulcer disease (PUD)", 
+                  priority: "Common with NSAIDs",
+                  reasoning: "NSAID use is major PUD risk factor. Can present identically to gastritis."
+                },
+                { 
+                  diagnosis: "Myocardial infarction (MI)", 
+                  priority: "MUST-NOT-MISS",
+                  reasoning: "62yo male + cardiac risk factors. Epigastric pain CAN BE atypical MI presentation."
+                },
+                { 
+                  diagnosis: "Pancreatitis", 
+                  priority: "Must consider",
+                  reasoning: "Would expect severe pain radiating to back, vomiting. Less likely here but consider."
+                },
+                { 
+                  diagnosis: "Cholecystitis/gallbladder disease", 
+                  priority: "Consider",
+                  reasoning: "Would expect RUQ pain worse with fatty foods. Less likely with epigastric location."
+                }
+              ],
+
+              historyQuestions: {
+                hpiFollowUp: [
+                  {
+                    id: "hpi1",
+                    question: "Does the pain happen after every meal, or just certain foods?",
+                    quality: "excellent",
+                    rationale: "Gastritis/GERD: worse with food. PUD: may improve with food initially. Biliary: fatty food trigger. Timing is CRITICAL.",
+                    impactsDx: ["Gastritis - worse with meals", "PUD - variable", "Biliary - fatty foods"]
+                  },
+                  {
+                    id: "hpi2",
+                    question: "Does the pain stay in your upper belly, or does it move anywhere?",
+                    quality: "excellent",
+                    rationale: "Radiation is KEY. MI: jaw/arm/back. Pancreatitis: back. Biliary: right shoulder.",
+                    impactsDx: ["MI - chest/arm/jaw", "Pancreatitis - back", "Biliary - right shoulder"]
+                  },
+                  {
+                    id: "hpi3",
+                    question: "Does the pain radiate to your back?",
+                    quality: "excellent",
+                    rationale: "Pancreatitis classically radiates to back. MI can also radiate posteriorly.",
+                    impactsDx: ["Pancreatitis - epigastric to back", "MI - can radiate to back"]
+                  },
+                  {
+                    id: "hpi4",
+                    question: "Does the pain radiate to your chest?",
+                    quality: "excellent",
+                    rationale: "Critical for ruling out MI. Epigastric pain radiating to chest is MI until proven otherwise.",
+                    impactsDx: ["MI - CRITICAL question"]
+                  },
+                  {
+                    id: "hpi5",
+                    question: "Does the pain radiate to your jaw or arms?",
+                    quality: "excellent",
+                    rationale: "Classic MI radiation patterns. Must actively screen for cardiac symptoms.",
+                    impactsDx: ["MI - classic radiation"]
+                  },
+                  {
+                    id: "hpi6",
+                    question: "Does the pain radiate to your right shoulder?",
+                    quality: "excellent",
+                    rationale: "Biliary colic classically radiates to right shoulder (referred pain).",
+                    impactsDx: ["Cholecystitis - right shoulder radiation"]
+                  },
+                  {
+                    id: "hpi7",
+                    question: "How often do you take ibuprofen?",
+                    quality: "excellent",
+                    rationale: "Frequency of NSAID use is THE most important factor for gastritis/PUD risk.",
+                    impactsDx: ["NSAID gastritis/PUD - frequency determines risk"]
+                  },
+                  {
+                    id: "hpi8",
+                    question: "How many ibuprofen pills do you take at a time?",
+                    quality: "excellent",
+                    rationale: "Dose matters for GI toxicity. 800mg TID >> 200mg PRN.",
+                    impactsDx: ["NSAID gastritis/PUD - dose determines risk"]
+                  },
+                  {
+                    id: "hpi9",
+                    question: "Do you take ibuprofen on an empty stomach?",
+                    quality: "excellent",
+                    rationale: "NSAIDs on empty stomach dramatically increase gastritis risk.",
+                    impactsDx: ["NSAID gastritis/PUD - empty stomach increases risk"]
+                  },
+                  {
+                    id: "hpi10",
+                    question: "Does the pain wake you up at night?",
+                    quality: "good",
+                    rationale: "Night pain suggests PUD (duodenal ulcer - pain when stomach empty).",
+                    impactsDx: ["PUD - night pain suggests duodenal ulcer"]
+                  },
+                  {
+                    id: "hpi11",
+                    question: "Does eating food make the pain better?",
+                    quality: "good",
+                    rationale: "Duodenal ulcer improves with food. Gastritis typically worsens.",
+                    impactsDx: ["Duodenal ulcer - improves", "Gastritis - worsens"]
+                  },
+                  {
+                    id: "hpi12",
+                    question: "What makes the pain better?",
+                    quality: "fair",
+                    rationale: "Good opening, but be MORE SPECIFIC: 'Does food help? Do antacids help?' Generic questions need targeted follow-up.",
+                    impactsDx: ["Low yield unless specific"]
+                  },
+                  {
+                    id: "hpi13",
+                    question: "What makes the pain worse besides eating?",
+                    quality: "fair",
+                    rationale: "Ask specifically: 'Worse lying flat?' (GERD), 'Worse with fatty foods?' (biliary).",
+                    impactsDx: ["Moderate yield if specific"]
+                  },
+                  {
+                    id: "hpi14",
+                    question: "On a scale of 1-10, how bad is your pain right now?",
+                    quality: "low-priority",
+                    rationale: "You already know it's 6/10 from HPI. Focus on questions you don't have answers to.",
+                    impactsDx: ["Minimal - already have this"]
+                  }
+                ],
+                
+                rosBySystem: {
+                  'Constitutional': [
+                    {
+                      id: "ros_const1",
+                      question: "Have you had any fever or chills?",
+                      quality: "fair",
+                      rationale: "Fever suggests infection, pancreatitis, cholecystitis. Worth asking briefly.",
+                      impactsDx: ["Pancreatitis", "Cholecystitis", "Infection"]
+                    },
+                    {
+                      id: "ros_const2",
+                      question: "Any night sweats?",
+                      quality: "low-priority",
+                      rationale: "Not related to acute epigastric pain. Would suggest chronic infection, malignancy.",
+                      impactsDx: ["Minimal"]
+                    },
+                    {
+                      id: "ros_const3",
+                      question: "Any fatigue or feeling more tired than usual?",
+                      quality: "fair",
+                      rationale: "Could indicate anemia from chronic bleeding. But symptoms are acute (2 days).",
+                      impactsDx: ["Chronic anemia - less likely given timeline"]
+                    },
+                    {
+                      id: "ros_const4",
+                      question: "Have you lost any weight without trying?",
+                      quality: "excellent",
+                      rationale: "Unintentional weight loss = red flag for cancer (gastric, pancreatic). Critical in older adult.",
+                      impactsDx: ["Gastric cancer", "Pancreatic cancer", "Severe PUD"]
+                    }
+                  ],
+                  
+                  'HEENT': [
+                    {
+                      id: "ros_heent1",
+                      question: "Any difficulty swallowing?",
+                      quality: "excellent",
+                      rationale: "Dysphagia suggests esophageal pathology - GERD complications (stricture), cancer. Important red flag.",
+                      impactsDx: ["GERD with stricture", "Esophageal cancer"]
+                    },
+                    {
+                      id: "ros_heent2",
+                      question: "Does food ever feel like it gets stuck?",
+                      quality: "excellent",
+                      rationale: "Helps distinguish mechanical obstruction (stricture, cancer) from motility issues.",
+                      impactsDx: ["Esophageal stricture", "Cancer"]
+                    },
+                    {
+                      id: "ros_heent3",
+                      question: "Any vision changes?",
+                      quality: "low-priority",
+                      rationale: "Not related to epigastric pain differential. Skip unrelated systems.",
+                      impactsDx: ["No impact"]
+                    },
+                    {
+                      id: "ros_heent4",
+                      question: "Any hearing problems?",
+                      quality: "low-priority",
+                      rationale: "Not related to epigastric pain. Pure checklist ROS.",
+                      impactsDx: ["No impact"]
+                    }
+                  ],
+                  
+                  'Cardiac': [
+                    {
+                      id: "ros_card1",
+                      question: "Any chest discomfort or pressure?",
+                      quality: "excellent",
+                      rationale: "CRITICAL - epigastric pain in 62yo male CAN BE MI. Must actively screen.",
+                      impactsDx: ["MI - MUST-NOT-MISS"]
+                    },
+                    {
+                      id: "ros_card2",
+                      question: "Any chest tightness or squeezing sensation?",
+                      quality: "excellent",
+                      rationale: "Classic MI symptom. Older adults may have atypical presentation.",
+                      impactsDx: ["MI - classic symptom"]
+                    },
+                    {
+                      id: "ros_card3",
+                      question: "Any pain in your jaw?",
+                      quality: "excellent",
+                      rationale: "MI can present with jaw pain, especially with epigastric discomfort.",
+                      impactsDx: ["MI - referred pain pattern"]
+                    },
+                    {
+                      id: "ros_card4",
+                      question: "Any pain in your left arm or right arm?",
+                      quality: "excellent",
+                      rationale: "Classic MI radiation. Can be left OR right arm.",
+                      impactsDx: ["MI - classic radiation"]
+                    },
+                    {
+                      id: "ros_card5",
+                      question: "Any shortness of breath?",
+                      quality: "excellent",
+                      rationale: "Dyspnea + epigastric pain = MI until proven otherwise.",
+                      impactsDx: ["MI - associated symptom"]
+                    },
+                    {
+                      id: "ros_card6",
+                      question: "Any sweating or feeling clammy?",
+                      quality: "excellent",
+                      rationale: "Diaphoresis is classic MI symptom. Very concerning combination.",
+                      impactsDx: ["MI - diaphoresis classic"]
+                    },
+                    {
+                      id: "ros_card7",
+                      question: "Any feeling like you're going to pass out?",
+                      quality: "excellent",
+                      rationale: "Syncope/presyncope suggests hemodynamic instability. Could be MI, bleeding.",
+                      impactsDx: ["MI, bleeding - serious symptoms"]
+                    },
+                    {
+                      id: "ros_card8",
+                      question: "Any palpitations or feeling like your heart is racing?",
+                      quality: "good",
+                      rationale: "Cardiac symptom. Relevant in older adult with possible MI.",
+                      impactsDx: ["Arrhythmia", "MI"]
+                    },
+                    {
+                      id: "ros_card9",
+                      question: "Any leg swelling?",
+                      quality: "fair",
+                      rationale: "Suggests heart failure, but patient has no other HF symptoms.",
+                      impactsDx: ["Heart failure - low suspicion"]
+                    },
+                    {
+                      id: "ros_card10",
+                      question: "Do you get short of breath when lying flat?",
+                      quality: "fair",
+                      rationale: "Orthopnea suggests heart failure. Could also be GERD.",
+                      impactsDx: ["Heart failure", "GERD"]
+                    },
+                    {
+                      id: "ros_card11",
+                      question: "Do you wake up at night short of breath?",
+                      quality: "fair",
+                      rationale: "PND suggests heart failure. Lower priority given no other HF symptoms.",
+                      impactsDx: ["Heart failure - low suspicion"]
+                    }
+                  ],
+                  
+                  'Respiratory': [
+                    {
+                      id: "ros_resp1",
+                      question: "Any cough?",
+                      quality: "low-priority",
+                      rationale: "Not related to epigastric pain differential. Focus on GI/cardiac systems.",
+                      impactsDx: ["No impact"]
+                    },
+                    {
+                      id: "ros_resp2",
+                      question: "Any wheezing?",
+                      quality: "low-priority",
+                      rationale: "Not relevant to epigastric pain. Skip unrelated systems.",
+                      impactsDx: ["No impact"]
+                    },
+                    {
+                      id: "ros_resp3",
+                      question: "Have you coughed up any blood?",
+                      quality: "low-priority",
+                      rationale: "Hemoptysis not related to epigastric pain. Checklist ROS thinking.",
+                      impactsDx: ["No impact"]
+                    }
+                  ],
+                  
+                  'Gastrointestinal': [
+                    {
+                      id: "ros_gi1",
+                      question: "Have you noticed any black, tarry stools?",
+                      quality: "excellent",
+                      rationale: "Melena = upper GI bleed. If positive, this becomes URGENT. Critical for severity.",
+                      impactsDx: ["Bleeding PUD - URGENT if positive"]
+                    },
+                    {
+                      id: "ros_gi2",
+                      question: "Have you seen bright red blood in your stool?",
+                      quality: "excellent",
+                      rationale: "Hematochezia usually lower GI, but brisk upper GI bleed can present this way.",
+                      impactsDx: ["GI bleeding - assesses severity"]
+                    },
+                    {
+                      id: "ros_gi3",
+                      question: "Have you vomited any blood or coffee-ground material?",
+                      quality: "excellent",
+                      rationale: "Hematemesis or coffee-ground emesis = upper GI bleed. URGENT if positive.",
+                      impactsDx: ["Bleeding PUD/gastritis - URGENT"]
+                    },
+                    {
+                      id: "ros_gi4",
+                      question: "Any nausea?",
+                      quality: "good",
+                      rationale: "Patient already mentioned mild nausea. Relevant for GI conditions.",
+                      impactsDx: ["Multiple GI conditions"]
+                    },
+                    {
+                      id: "ros_gi5",
+                      question: "Any vomiting?",
+                      quality: "good",
+                      rationale: "Vomiting with epigastric pain suggests pancreatitis, obstruction.",
+                      impactsDx: ["Pancreatitis", "Obstruction"]
+                    },
+                    {
+                      id: "ros_gi6",
+                      question: "Any heartburn or acid reflux?",
+                      quality: "good",
+                      rationale: "Patient mentioned occasional heartburn. Directly relevant to GERD.",
+                      impactsDx: ["GERD"]
+                    },
+                    {
+                      id: "ros_gi7",
+                      question: "Any change in your appetite?",
+                      quality: "good",
+                      rationale: "Early satiety suggests gastric pathology. Anorexia indicates serious disease.",
+                      impactsDx: ["Gastric outlet obstruction", "Cancer"]
+                    },
+                    {
+                      id: "ros_gi8",
+                      question: "Any bloating or feeling full quickly?",
+                      quality: "good",
+                      rationale: "Early satiety can indicate gastric pathology. Bloating common but nonspecific.",
+                      impactsDx: ["Gastric pathology", "Functional dyspepsia"]
+                    },
+                    {
+                      id: "ros_gi9",
+                      question: "Any diarrhea?",
+                      quality: "fair",
+                      rationale: "Not typically associated with epigastric pain (gastritis, PUD, MI). Lower priority.",
+                      impactsDx: ["Minimal for this differential"]
+                    },
+                    {
+                      id: "ros_gi10",
+                      question: "Any constipation?",
+                      quality: "fair",
+                      rationale: "Not directly relevant to epigastric pain differential.",
+                      impactsDx: ["Minimal for this differential"]
+                    },
+                    {
+                      id: "ros_gi11",
+                      question: "Any abdominal cramping?",
+                      quality: "fair",
+                      rationale: "Patient's pain is dull ache/burning, not cramping. Suggests different etiology.",
+                      impactsDx: ["Suggests bowel pathology if present"]
+                    }
+                  ],
+                  
+                  'Genitourinary': [
+                    {
+                      id: "ros_gu1",
+                      question: "Any burning when you urinate?",
+                      quality: "low-priority",
+                      rationale: "Dysuria not related to epigastric pain. Skip unrelated systems.",
+                      impactsDx: ["No impact"]
+                    },
+                    {
+                      id: "ros_gu2",
+                      question: "Any blood in your urine?",
+                      quality: "low-priority",
+                      rationale: "Hematuria not related to epigastric pain. Checklist thinking.",
+                      impactsDx: ["No impact"]
+                    },
+                    {
+                      id: "ros_gu3",
+                      question: "Any urinary frequency or urgency?",
+                      quality: "low-priority",
+                      rationale: "Urinary symptoms not related to epigastric pain. Focus on relevant systems.",
+                      impactsDx: ["No impact"]
+                    }
+                  ],
+                  
+                  'Musculoskeletal': [
+                    {
+                      id: "ros_msk1",
+                      question: "Any joint pain or swelling?",
+                      quality: "low-priority",
+                      rationale: "Patient has knee pain (why he takes ibuprofen), but not related to epigastric pain.",
+                      impactsDx: ["No impact on epigastric pain"]
+                    },
+                    {
+                      id: "ros_msk2",
+                      question: "Any muscle aches?",
+                      quality: "low-priority",
+                      rationale: "Myalgias not related to epigastric pain. Checklist thinking.",
+                      impactsDx: ["No impact"]
+                    },
+                    {
+                      id: "ros_msk3",
+                      question: "Any back pain?",
+                      quality: "fair",
+                      rationale: "Already asked about pain radiation to back (critical for pancreatitis). Asking again is lower yield.",
+                      impactsDx: ["Already addressed in HPI"]
+                    }
+                  ],
+                  
+                  'Neurological': [
+                    {
+                      id: "ros_neuro1",
+                      question: "Any headaches?",
+                      quality: "low-priority",
+                      rationale: "Not related to epigastric pain differential. Skip unless patient volunteers.",
+                      impactsDx: ["No impact"]
+                    },
+                    {
+                      id: "ros_neuro2",
+                      question: "Any dizziness?",
+                      quality: "fair",
+                      rationale: "Could indicate orthostatic hypotension from bleeding. Worth asking briefly.",
+                      impactsDx: ["GI bleeding if severe"]
+                    },
+                    {
+                      id: "ros_neuro3",
+                      question: "Any weakness?",
+                      quality: "fair",
+                      rationale: "Severe weakness could indicate anemia from chronic bleeding. Less likely given acute timeline.",
+                      impactsDx: ["Chronic bleeding/anemia - less likely"]
+                    },
+                    {
+                      id: "ros_neuro4",
+                      question: "Any numbness or tingling?",
+                      quality: "low-priority",
+                      rationale: "Not related to epigastric pain. Checklist ROS. Stay focused.",
+                      impactsDx: ["No impact"]
+                    }
+                  ],
+                  
+                  'Skin': [
+                    {
+                      id: "ros_skin1",
+                      question: "Any rashes?",
+                      quality: "low-priority",
+                      rationale: "Not related to epigastric pain. Pure checklist ROS.",
+                      impactsDx: ["No impact"]
+                    },
+                    {
+                      id: "ros_skin2",
+                      question: "Have you noticed any yellowing of your skin or eyes?",
+                      quality: "fair",
+                      rationale: "Jaundice relevant for biliary/pancreatic disease. Better to examine than ask.",
+                      impactsDx: ["Biliary obstruction - better to examine"]
+                    },
+                    {
+                      id: "ros_skin3",
+                      question: "Any easy bruising or bleeding?",
+                      quality: "low-priority",
+                      rationale: "Could suggest coagulopathy/liver disease, but not relevant to acute presentation.",
+                      impactsDx: ["Minimal"]
+                    }
+                  ]
+                },
+                
+                pmh: {
+                  general: [
+                    {
+                      id: "pmh_gen1",
+                      question: "Do you have any medical problems?",
+                      quality: "fair",
+                      rationale: "Good opening question! After patient answers, ask specifically about heart disease, ulcers, pancreatitis, gallbladder disease. Generic questions need specific follow-up to be high-yield.",
+                      impactsDx: ["Low yield unless you follow up with specifics"],
+                      followUpNote: "After patient answers, ask specifically: 'Ever had heart attack? Ulcer? Diabetes? High blood pressure?'"
+                    },
+                    {
+                      id: "pmh_gen2",
+                      question: "Have you ever had any surgeries?",
+                      quality: "fair",
+                      rationale: "Prior gastric surgery can cause complications. Worth asking briefly but lower priority than cardiac/PUD history.",
+                      impactsDx: ["Post-surgical complications"],
+                      followUpNote: "If yes, ask specifically about abdominal or cardiac surgeries"
+                    },
+                    {
+                      id: "pmh_gen3",
+                      question: "Have you ever been hospitalized?",
+                      quality: "low-priority",
+                      rationale: "Too broad for time-limited encounter. Better: 'Any hospitalizations for heart or stomach problems?'",
+                      impactsDx: ["Minimal unless specific"],
+                      followUpNote: "Be more targeted to save time"
+                    }
+                  ],
+                  
+                  specific: [
+                    {
+                      id: "pmh_sp1",
+                      question: "Have you ever had a heart attack?",
+                      quality: "excellent",
+                      rationale: "Prior MI = VERY HIGH RISK for recurrent MI. This dramatically changes pre-test probability. Must ask!",
+                      impactsDx: ["MI - prior MI is strongest risk factor"]
+                    },
+                    {
+                      id: "pmh_sp2",
+                      question: "Have you ever had angina or chest pain?",
+                      quality: "excellent",
+                      rationale: "History of angina indicates CAD. Epigastric pain could be anginal equivalent.",
+                      impactsDx: ["MI/ACS - known CAD"]
+                    },
+                    {
+                      id: "pmh_sp3",
+                      question: "Do you have diabetes?",
+                      quality: "excellent",
+                      rationale: "Major cardiac risk factor. Diabetics can have atypical/silent MI. Essential for risk stratification.",
+                      impactsDx: ["MI risk - diabetics have atypical presentations"]
+                    },
+                    {
+                      id: "pmh_sp4",
+                      question: "Do you have high blood pressure?",
+                      quality: "excellent",
+                      rationale: "You can see HTN in vitals (BP 138/82), but asking about history/treatment is important. Major cardiac risk factor.",
+                      impactsDx: ["MI risk - HTN is major risk factor"]
+                    },
+                    {
+                      id: "pmh_sp5",
+                      question: "Do you have high cholesterol?",
+                      quality: "excellent",
+                      rationale: "Major cardiac risk factor. Multiple risk factors compound MI risk significantly.",
+                      impactsDx: ["MI risk - hyperlipidemia increases risk"]
+                    },
+                    {
+                      id: "pmh_sp6",
+                      question: "Have you ever had an ulcer?",
+                      quality: "excellent",
+                      rationale: "Prior PUD dramatically increases risk of recurrence, especially with NSAIDs. Direct relevant history.",
+                      impactsDx: ["PUD recurrence - very high risk if prior history"]
+                    },
+                    {
+                      id: "pmh_sp7",
+                      question: "Have you ever been tested for H. pylori?",
+                      quality: "excellent",
+                      rationale: "H. pylori is major cause of PUD. Prior infection increases risk.",
+                      impactsDx: ["PUD - H. pylori is major cause"]
+                    },
+                    {
+                      id: "pmh_sp8",
+                      question: "Have you ever had pancreatitis?",
+                      quality: "excellent",
+                      rationale: "Prior pancreatitis dramatically increases risk of recurrence. Directly relevant.",
+                      impactsDx: ["Recurrent pancreatitis"]
+                    },
+                    {
+                      id: "pmh_sp9",
+                      question: "Have you ever had gallbladder problems or gallstones?",
+                      quality: "excellent",
+                      rationale: "Prior biliary disease increases risk. Gallstones also cause pancreatitis.",
+                      impactsDx: ["Biliary disease", "Pancreatitis risk"]
+                    },
+                    {
+                      id: "pmh_sp10",
+                      question: "Do you have kidney disease?",
+                      quality: "fair",
+                      rationale: "Relevant because NSAIDs can worsen kidney function, but doesn't directly impact epigastric pain differential.",
+                      impactsDx: ["NSAID complications, but not epigastric pain directly"]
+                    },
+                    {
+                      id: "pmh_sp11",
+                      question: "Do you have liver disease?",
+                      quality: "fair",
+                      rationale: "Could affect GI symptoms. Worth asking briefly but not top priority.",
+                      impactsDx: ["GI symptoms, varices"]
+                    },
+                    {
+                      id: "pmh_sp12",
+                      question: "Do you have asthma or lung disease?",
+                      quality: "low-priority",
+                      rationale: "Not related to epigastric pain. Focus on cardiac/GI history.",
+                      impactsDx: ["No impact on epigastric pain"]
+                    },
+                    {
+                      id: "pmh_sp13",
+                      question: "Do you have thyroid problems?",
+                      quality: "low-priority",
+                      rationale: "Not related to acute epigastric pain. Skip unrelated PMH.",
+                      impactsDx: ["No impact"]
+                    }
+                  ]
+                },
+                
+                socialHistory: {
+                  general: [
+                    {
+                      id: "sh_gen1",
+                      question: "Smoking history",
+                      quality: "excellent",
+                      rationale: "Smoking is MAJOR risk factor for both CAD (2-4x risk) and PUD (doubles risk). Essential question for both top diagnoses.",
+                      impactsDx: ["MI risk", "PUD risk"],
+                      followUpNote: "Ask: Do you smoke or have you ever smoked? If yes: How many packs per day? For how many years?"
+                    },
+                    {
+                      id: "sh_gen2",
+                      question: "Alcohol use",
+                      quality: "excellent",
+                      rationale: "Heavy alcohol is #1 cause of pancreatitis. Also causes gastritis. Must quantify - drinks/day and frequency matter.",
+                      impactsDx: ["Alcoholic gastritis", "Pancreatitis"],
+                      followUpNote: "Ask: Do you drink alcohol? If yes: How many drinks per day? How many days per week?"
+                    },
+                    {
+                      id: "sh_gen3",
+                      question: "What medications do you take?",
+                      quality: "excellent",
+                      rationale: "Critical question. Looking for: aspirin (adds to NSAID GI risk), antacids (suggests chronic GERD), cardiac meds.",
+                      impactsDx: ["Medication-related GI toxicity", "Cardiac history"],
+                      followUpNote: "After patient answers, ask specifically about aspirin, other NSAIDs, blood thinners, antacids"
+                    },
+                    {
+                      id: "sh_gen4",
+                      question: "Does anyone in your family have medical problems?",
+                      quality: "good",
+                      rationale: "Family history of CAD increases MI risk. Family history of gastric cancer is red flag.",
+                      impactsDx: ["MI risk", "Gastric cancer risk"],
+                      followUpNote: "After patient answers, ask specifically about heart disease, stomach cancer, ulcers"
+                    }
+                  ],
+                  
+                  specific: [
+                    {
+                      id: "sh_sp1",
+                      question: "Do you take aspirin?",
+                      quality: "excellent",
+                      rationale: "Aspirin + NSAID = VERY HIGH GI bleed risk. Critical medication interaction. Must ask specifically.",
+                      impactsDx: ["GI bleeding risk - aspirin + NSAID is very high risk"]
+                    },
+                    {
+                      id: "sh_sp2",
+                      question: "Do you take any blood thinners?",
+                      quality: "excellent",
+                      rationale: "Anticoagulants + NSAIDs = increased bleeding risk. Also tells you about cardiac history.",
+                      impactsDx: ["GI bleeding risk", "Cardiac history"]
+                    },
+                    {
+                      id: "sh_sp3",
+                      question: "Do you take any over-the-counter medicines or supplements?",
+                      quality: "good",
+                      rationale: "Good comprehensive question. Patients may not consider OTC as 'real medications.'",
+                      impactsDx: ["Medication interactions"]
+                    },
+                    {
+                      id: "sh_sp4",
+                      question: "Does anyone in your family have heart disease?",
+                      quality: "good",
+                      rationale: "Family history of CAD increases MI risk. Important detail for risk stratification.",
+                      impactsDx: ["MI - family history increases risk"]
+                    },
+                    {
+                      id: "sh_sp5",
+                      question: "Does anyone in your family have stomach cancer?",
+                      quality: "good",
+                      rationale: "Family history of gastric cancer is red flag, especially in Asian ancestry. Relevant but lower priority than cardiac history.",
+                      impactsDx: ["Gastric cancer risk"]
+                    },
+                    {
+                      id: "sh_sp6",
+                      question: "Does anyone in your family have ulcers?",
+                      quality: "fair",
+                      rationale: "Family history of PUD is relevant but weaker risk factor than patient's own NSAID use.",
+                      impactsDx: ["PUD - family history is weak risk factor"]
+                    },
+                    {
+                      id: "sh_sp7",
+                      question: "What is your occupation?",
+                      quality: "fair",
+                      rationale: "Could be relevant for stress (worsens GERD/gastritis). Worth asking briefly as part of social history.",
+                      impactsDx: ["Minimal direct impact"]
+                    },
+                    {
+                      id: "sh_sp8",
+                      question: "Are you under any unusual stress lately?",
+                      quality: "fair",
+                      rationale: "Stress can worsen GERD/gastritis but doesn't cause PUD. Lower priority question.",
+                      impactsDx: ["Minimal - stress doesn't cause ulcers"]
+                    },
+                    {
+                      id: "sh_sp9",
+                      question: "What is your housing situation?",
+                      quality: "low-priority",
+                      rationale: "Not relevant to epigastric pain differential. Focus on smoking, alcohol, medications.",
+                      impactsDx: ["No impact"]
+                    },
+                    {
+                      id: "sh_sp10",
+                      question: "Who do you live with?",
+                      quality: "low-priority",
+                      rationale: "While social support matters, this doesn't impact your differential diagnosis.",
+                      impactsDx: ["No impact"]
+                    }
+                  ]
+                }
+              },
+
+              physicalExam: {
+                'Vitals': [
+                  {
+                    id: "pe_vital1",
+                    maneuver: "Check blood pressure",
+                    quality: "good",
+                    rationale: "Already have vitals, but hypotension could suggest bleeding, MI. Important to note.",
+                    finding: "BP 138/82 - normal",
+                    impactsDx: "Stable BP makes bleeding, cardiogenic shock unlikely"
+                  },
+                  {
+                    id: "pe_vital2",
+                    maneuver: "Check heart rate",
+                    quality: "good",
+                    rationale: "Tachycardia could suggest pain, bleeding, MI. Already have vitals showing HR 88.",
+                    finding: "HR 88 - normal",
+                    impactsDx: "Normal heart rate reassuring"
+                  },
+                  {
+                    id: "pe_vital3",
+                    maneuver: "Check respiratory rate",
+                    quality: "fair",
+                    rationale: "Tachypnea could suggest pain, MI. But lower priority for epigastric pain.",
+                    finding: "RR 18 - normal",
+                    impactsDx: "Normal respiratory rate"
+                  },
+                  {
+                    id: "pe_vital4",
+                    maneuver: "Check temperature",
+                    quality: "fair",
+                    rationale: "Fever suggests infection, pancreatitis, cholecystitis. Already have in vitals.",
+                    finding: "Temp 98.6°F - afebrile",
+                    impactsDx: "Afebrile - makes infection less likely"
+                  },
+                  {
+                    id: "pe_vital5",
+                    maneuver: "Check oxygen saturation",
+                    quality: "fair",
+                    rationale: "Hypoxia could suggest MI, PE. Already have O2 sat 98%.",
+                    finding: "O2 Sat 98% RA - normal",
+                    impactsDx: "Normal oxygenation"
+                  },
+                  {
+                    id: "pe_vital6",
+                    maneuver: "Check orthostatic vital signs",
+                    quality: "good",
+                    rationale: "Orthostatic hypotension suggests volume depletion, possibly from GI bleeding. Good test if concerned about bleeding.",
+                    finding: "No orthostatic changes",
+                    impactsDx: "No significant bleeding"
+                  }
+                ],
+                
+                'General Appearance': [
+                  {
+                    id: "pe_gen1",
+                    maneuver: "Assess general appearance and distress level",
+                    quality: "good",
+                    rationale: "Overall impression matters. Appears ill/in pain vs comfortable affects urgency.",
+                    finding: "Well-appearing, no acute distress",
+                    impactsDx: "Reassuring - not in severe pain"
+                  },
+                  {
+                    id: "pe_gen2",
+                    maneuver: "Assess body habitus and nutritional status",
+                    quality: "fair",
+                    rationale: "Cachexia could suggest malignancy. BMI already provided (27.3). Lower priority.",
+                    finding: "Well-nourished, BMI 27.3",
+                    impactsDx: "No cachexia"
+                  }
+                ],
+                
+                'HEENT': [
+                  {
+                    id: "pe_heent1",
+                    maneuver: "Check conjunctiva for pallor",
+                    quality: "fair",
+                    rationale: "Pallor suggests anemia, possibly from chronic GI bleeding. Less likely in acute (2-day) presentation.",
+                    finding: "Conjunctivae pink, no pallor",
+                    impactsDx: "No anemia, makes chronic bleeding less likely"
+                  },
+                  {
+                    id: "pe_heent2",
+                    maneuver: "Check sclera for icterus",
+                    quality: "fair",
+                    rationale: "Jaundice suggests biliary obstruction, hepatitis. Relevant if considering biliary/pancreatic disease.",
+                    finding: "No scleral icterus",
+                    impactsDx: "Makes biliary obstruction less likely"
+                  },
+                  {
+                    id: "pe_heent3",
+                    maneuver: "Examine oral mucosa",
+                    quality: "low-priority",
+                    rationale: "Not relevant to epigastric pain evaluation. Skip in time-limited exam.",
+                    finding: "Oral mucosa moist, no lesions",
+                    impactsDx: "No impact on differential"
+                  },
+                  {
+                    id: "pe_heent4",
+                    maneuver: "Examine oropharynx",
+                    quality: "low-priority",
+                    rationale: "Not relevant to epigastric pain. Focus on abdominal and cardiac exam.",
+                    finding: "Oropharynx clear",
+                    impactsDx: "No impact"
+                  }
+                ],
+                
+                'Neck': [
+                  {
+                    id: "pe_neck1",
+                    maneuver: "Assess jugular venous pressure (JVP)",
+                    quality: "fair",
+                    rationale: "Elevated JVP suggests heart failure. Patient has no other HF symptoms. Lower priority.",
+                    finding: "JVP normal",
+                    impactsDx: "Makes heart failure less likely"
+                  },
+                  {
+                    id: "pe_neck2",
+                    maneuver: "Palpate for lymphadenopathy",
+                    quality: "low-priority",
+                    rationale: "Not relevant to acute epigastric pain. Would be relevant for malignancy workup.",
+                    finding: "No cervical lymphadenopathy",
+                    impactsDx: "No impact on acute differential"
+                  }
+                ],
+                
+                'Cardiac': [
+                  {
+                    id: "pe_card1",
+                    maneuver: "Auscultate heart sounds",
+                    quality: "excellent",
+                    rationale: "CRITICAL in older adult with epigastric pain. Epigastric pain CAN BE cardiac. Must do cardiac exam!",
+                    finding: "Regular rate and rhythm, no murmurs",
+                    impactsDx: "Normal cardiac exam doesn't rule out MI but reassuring"
+                  },
+                  {
+                    id: "pe_card2",
+                    maneuver: "Listen for S3 gallop",
+                    quality: "good",
+                    rationale: "S3 indicates heart failure. Relevant if considering cardiac cause.",
+                    finding: "No S3 heard",
+                    impactsDx: "Makes heart failure less likely"
+                  },
+                  {
+                    id: "pe_card3",
+                    maneuver: "Listen for S4 gallop",
+                    quality: "good",
+                    rationale: "S4 indicates stiff ventricle, often in HTN/ischemia. Relevant for cardiac evaluation.",
+                    finding: "No S4 heard",
+                    impactsDx: "Normal finding"
+                  },
+                  {
+                    id: "pe_card4",
+                    maneuver: "Listen for murmurs",
+                    quality: "good",
+                    rationale: "Murmurs indicate valvular disease. Relevant for overall cardiac assessment.",
+                    finding: "No murmurs",
+                    impactsDx: "No valvular disease"
+                  },
+                  {
+                    id: "pe_card5",
+                    maneuver: "Palpate chest wall for tenderness",
+                    quality: "good",
+                    rationale: "If chest wall tender, suggests musculoskeletal cause, makes cardiac less likely. Simple reassuring test.",
+                    finding: "No chest wall tenderness",
+                    impactsDx: "Doesn't exclude MI but no MSK cause"
+                  },
+                  {
+                    id: "pe_card6",
+                    maneuver: "Palpate point of maximal impulse (PMI)",
+                    quality: "fair",
+                    rationale: "Displaced PMI suggests cardiomegaly. Relevant but lower yield in this presentation.",
+                    finding: "PMI normal position",
+                    impactsDx: "No cardiomegaly"
+                  },
+                  {
+                    id: "pe_card7",
+                    maneuver: "Check peripheral pulses",
+                    quality: "low-priority",
+                    rationale: "Peripheral vascular disease not related to epigastric pain. Lower priority.",
+                    finding: "Pulses 2+ throughout",
+                    impactsDx: "Minimal impact"
+                  }
+                ],
+                
+                'Pulmonary': [
+                  {
+                    id: "pe_pulm1",
+                    maneuver: "Auscultate lung fields",
+                    quality: "low-priority",
+                    rationale: "Not relevant to epigastric pain unless considering pneumonia (not in differential). Focus on abdomen and cardiac.",
+                    finding: "Clear lung fields bilaterally",
+                    impactsDx: "No impact on epigastric pain differential"
+                  },
+                  {
+                    id: "pe_pulm2",
+                    maneuver: "Percuss lungs",
+                    quality: "low-priority",
+                    rationale: "Not relevant to epigastric pain evaluation. Skip in time-limited exam.",
+                    finding: "Resonant throughout",
+                    impactsDx: "No impact"
+                  },
+                  {
+                    id: "pe_pulm3",
+                    maneuver: "Assess tactile fremitus",
+                    quality: "low-priority",
+                    rationale: "Not relevant to epigastric pain. Wastes valuable time.",
+                    finding: "Normal tactile fremitus",
+                    impactsDx: "Wastes time, no impact"
+                  }
+                ],
+                
+                'Abdominal': [
+                  {
+                    id: "pe_abd1",
+                    maneuver: "Inspect abdomen",
+                    quality: "good",
+                    rationale: "Always start with inspection. Look for distention, scars, masses, pulsations. Quick and important.",
+                    finding: "Abdomen appears flat, no distention, no visible masses",
+                    impactsDx: "Normal appearance, no obvious pathology"
+                  },
+                  {
+                    id: "pe_abd2",
+                    maneuver: "Auscultate for bowel sounds",
+                    quality: "good",
+                    rationale: "Standard abdominal exam component. Absent sounds suggest ileus/obstruction. Hyperactive suggest gastroenteritis.",
+                    finding: "Normal bowel sounds present",
+                    impactsDx: "Makes obstruction unlikely"
+                  },
+                  {
+                    id: "pe_abd3",
+                    maneuver: "Light palpation of entire abdomen",
+                    quality: "excellent",
+                    rationale: "Start with gentle palpation to identify areas of tenderness without causing guarding. Essential first step.",
+                    finding: "Mild discomfort in epigastric region, no guarding",
+                    impactsDx: "Localizes tenderness, no peritonitis"
+                  },
+                  {
+                    id: "pe_abd4",
+                    maneuver: "Deep palpation of epigastric region",
+                    quality: "excellent",
+                    rationale: "After light palpation, deep palpation of symptomatic area. Epigastric tenderness supports gastritis/PUD.",
+                    finding: "Moderate tenderness to deep palpation in epigastrium",
+                    impactsDx: "Supports gastritis/PUD"
+                  },
+                  {
+                    id: "pe_abd5",
+                    maneuver: "Check for rebound tenderness",
+                    quality: "excellent",
+                    rationale: "Rebound tenderness indicates peritoneal irritation - suggests perforation, pancreatitis. Critical to assess severity.",
+                    finding: "No rebound tenderness",
+                    impactsDx: "Makes perforation/peritonitis unlikely"
+                  },
+                  {
+                    id: "pe_abd6",
+                    maneuver: "Check for guarding",
+                    quality: "excellent",
+                    rationale: "Involuntary guarding indicates peritonitis. Must-not-miss finding. Absence is reassuring.",
+                    finding: "No guarding",
+                    impactsDx: "Makes perforation/peritonitis unlikely"
+                  },
+                  {
+                    id: "pe_abd7",
+                    maneuver: "Murphy's sign - palpate RUQ during deep inspiration",
+                    quality: "excellent",
+                    rationale: "Tests for cholecystitis. Positive Murphy's = gallbladder disease. Important to rule in/out biliary cause.",
+                    finding: "Murphy's sign negative, no RUQ tenderness",
+                    impactsDx: "Makes cholecystitis unlikely"
+                  },
+                  {
+                    id: "pe_abd8",
+                    maneuver: "Palpate RUQ for tenderness and masses",
+                    quality: "good",
+                    rationale: "RUQ tenderness suggests biliary disease. Separate from Murphy's sign. Worth checking.",
+                    finding: "No RUQ tenderness or masses",
+                    impactsDx: "Makes biliary disease less likely"
+                  },
+                  {
+                    id: "pe_abd9",
+                    maneuver: "Palpate LUQ for splenomegaly",
+                    quality: "fair",
+                    rationale: "Splenomegaly not related to acute epigastric pain. Lower priority in time-limited exam.",
+                    finding: "No splenomegaly",
+                    impactsDx: "Minimal impact on differential"
+                  },
+                  {
+                    id: "pe_abd10",
+                    maneuver: "Palpate for abdominal aortic aneurysm (AAA)",
+                    quality: "good",
+                    rationale: "Important in older male with abdominal pain. Pulsatile mass suggests AAA - life-threatening. Worth checking.",
+                    finding: "No pulsatile mass, normal aortic pulsations",
+                    impactsDx: "Makes AAA less likely"
+                  },
+                  {
+                    id: "pe_abd11",
+                    maneuver: "Percuss abdomen",
+                    quality: "fair",
+                    rationale: "Percussion helps identify organomegaly, ascites. Lower priority for epigastric pain evaluation.",
+                    finding: "Tympanic throughout, no dullness",
+                    impactsDx: "Normal, no ascites or organomegaly"
+                  },
+                  {
+                    id: "pe_abd12",
+                    maneuver: "Percuss liver span",
+                    quality: "fair",
+                    rationale: "Hepatomegaly could indicate liver disease. Relevant if considering hepatobiliary disease.",
+                    finding: "Normal liver span",
+                    impactsDx: "No hepatomegaly"
+                  },
+                  {
+                    id: "pe_abd13",
+                    maneuver: "Check for shifting dullness",
+                    quality: "low-priority",
+                    rationale: "Tests for ascites. Not relevant to acute epigastric pain presentation.",
+                    finding: "No shifting dullness",
+                    impactsDx: "No impact on differential"
+                  },
+                  {
+                    id: "pe_abd14",
+                    maneuver: "Check for costovertebral angle (CVA) tenderness",
+                    quality: "low-priority",
+                    rationale: "CVA tenderness indicates kidney pathology. Not related to epigastric pain. Skip in time-limited exam.",
+                    finding: "No CVA tenderness",
+                    impactsDx: "No impact on differential"
+                  },
+                  {
+                    id: "pe_abd15",
+                    maneuver: "Psoas sign",
+                    quality: "low-priority",
+                    rationale: "Tests for appendicitis/retroperitoneal irritation. Not relevant to epigastric pain.",
+                    finding: "Psoas sign negative",
+                    impactsDx: "No impact"
+                  },
+                  {
+                    id: "pe_abd16",
+                    maneuver: "Obturator sign",
+                    quality: "low-priority",
+                    rationale: "Tests for appendicitis/pelvic inflammation. Not relevant to epigastric pain.",
+                    finding: "Obturator sign negative",
+                    impactsDx: "No impact"
+                  }
+                ],
+                
+                'Extremities': [
+                  {
+                    id: "pe_ext1",
+                    maneuver: "Check for lower extremity edema",
+                    quality: "fair",
+                    rationale: "Edema suggests heart failure, but patient has no other HF symptoms. Lower priority.",
+                    finding: "No lower extremity edema",
+                    impactsDx: "Makes heart failure less likely"
+                  },
+                  {
+                    id: "pe_ext2",
+                    maneuver: "Check capillary refill",
+                    quality: "fair",
+                    rationale: "Delayed capillary refill suggests poor perfusion from bleeding, shock. Quick test.",
+                    finding: "Capillary refill <2 seconds",
+                    impactsDx: "Good perfusion, no shock"
+                  },
+                  {
+                    id: "pe_ext3",
+                    maneuver: "Examine for clubbing",
+                    quality: "low-priority",
+                    rationale: "Clubbing not relevant to acute epigastric pain. Would be relevant for chronic conditions.",
+                    finding: "No clubbing",
+                    impactsDx: "No impact on acute differential"
+                  }
+                ],
+                
+                'Skin': [
+                  {
+                    id: "pe_skin1",
+                    maneuver: "Assess skin for jaundice",
+                    quality: "fair",
+                    rationale: "Jaundice suggests biliary obstruction, hepatitis. Already checked sclera (better).",
+                    finding: "No jaundice",
+                    impactsDx: "Makes biliary disease less likely"
+                  },
+                  {
+                    id: "pe_skin2",
+                    maneuver: "Check for rashes",
+                    quality: "low-priority",
+                    rationale: "Not relevant to epigastric pain evaluation. Skip in time-limited exam.",
+                    finding: "No rashes",
+                    impactsDx: "No impact"
+                  }
+                ],
+                
+                'Neurological': [
+                  {
+                    id: "pe_neuro1",
+                    maneuver: "Assess mental status and orientation",
+                    quality: "fair",
+                    rationale: "Altered mental status could suggest severe metabolic derangement. Quick assessment worthwhile.",
+                    finding: "Alert and oriented x3",
+                    impactsDx: "No altered mental status"
+                  },
+                  {
+                    id: "pe_neuro2",
+                    maneuver: "Perform complete neurological exam",
+                    quality: "low-priority",
+                    rationale: "Not relevant to epigastric pain differential. Wastes valuable time. Focus on exams that distinguish your diagnoses.",
+                    finding: "Neurologically intact",
+                    impactsDx: "Wastes time, no impact"
+                  }
+                ]
+              },
+
+              nextSteps: {
+                diagnosticTests: [
+                  {
+                    id: "dx1",
+                    test: "ECG",
+                    quality: "excellent",
+                    rationale: "ESSENTIAL to rule out MI in 62yo male with epigastric pain. Quick, non-invasive, life-saving. ALWAYS get ECG in older adult with epigastric symptoms.",
+                    impactsDx: "Rules out STEMI, detects ischemic changes"
+                  },
+                  {
+                    id: "dx2",
+                    test: "Troponin",
+                    quality: "excellent",
+                    rationale: "Cardiac biomarker for MI. If ECG normal but still concerned, troponin can detect NSTEMI. Essential if any cardiac concern.",
+                    impactsDx: "Detects myocardial injury"
+                  },
+                  {
+                    id: "dx3",
+                    test: "Complete blood count (CBC)",
+                    quality: "good",
+                    rationale: "Checks for anemia (GI bleeding), elevated WBC (infection, pancreatitis). Good baseline test.",
+                    impactsDx: "Detects anemia from bleeding, leukocytosis from inflammation"
+                  },
+                  {
+                    id: "dx4",
+                    test: "Comprehensive metabolic panel (CMP)",
+                    quality: "good",
+                    rationale: "Checks electrolytes, kidney/liver function. Elevated transaminases suggest hepatobiliary disease. Good baseline.",
+                    impactsDx: "Assesses organ function, electrolyte abnormalities"
+                  },
+                  {
+                    id: "dx5",
+                    test: "Lipase",
+                    quality: "good",
+                    rationale: "Elevated lipase diagnostic for pancreatitis. Order if pain radiates to back or concerned about pancreatitis.",
+                    impactsDx: "Diagnoses pancreatitis"
+                  },
+                  {
+                    id: "dx6",
+                    test: "Liver function tests (LFTs)",
+                    quality: "fair",
+                    rationale: "Elevated if hepatobiliary disease. If considering cholecystitis, but lower priority than cardiac/GI workup.",
+                    impactsDx: "Evaluates hepatobiliary disease"
+                  },
+                  {
+                    id: "dx7",
+                    test: "H. pylori testing (stool antigen or urea breath test)",
+                    quality: "good",
+                    rationale: "If suspect PUD, testing for H. pylori essential for treatment. Can do now or after empiric PPI trial.",
+                    impactsDx: "Identifies H. pylori for eradication therapy"
+                  },
+                  {
+                    id: "dx8",
+                    test: "Stool occult blood test",
+                    quality: "fair",
+                    rationale: "Screens for GI bleeding. Less sensitive than asking about melena/hematemesis. Can do but lower priority.",
+                    impactsDx: "Detects occult GI bleeding"
+                  },
+                  {
+                    id: "dx9",
+                    test: "Chest X-ray",
+                    quality: "fair",
+                    rationale: "Can detect free air (perforation), pneumonia. Order if concerned about complications, but not first-line.",
+                    impactsDx: "Detects perforation, pneumonia"
+                  },
+                  {
+                    id: "dx10",
+                    test: "Abdominal ultrasound",
+                    quality: "fair",
+                    rationale: "First-line imaging for biliary disease (gallstones, cholecystitis). Order if RUQ pain or concerned about biliary cause.",
+                    impactsDx: "Evaluates gallbladder, biliary tree"
+                  },
+                  {
+                    id: "dx11",
+                    test: "Upper endoscopy (EGD)",
+                    quality: "good",
+                    rationale: "Gold standard for visualizing gastric/esophageal mucosa. Order if no improvement on PPI or alarm symptoms. Not urgent/emergent unless bleeding.",
+                    impactsDx: "Directly visualizes upper GI tract, can biopsy"
+                  },
+                  {
+                    id: "dx12",
+                    test: "CT abdomen/pelvis",
+                    quality: "fair",
+                    rationale: "Evaluates for serious intra-abdominal pathology (pancreatitis, perforation, masses). Order if critically ill or peritoneal signs. Not first-line for uncomplicated gastritis.",
+                    impactsDx: "Comprehensive abdominal imaging"
+                  },
+                  {
+                    id: "dx13",
+                    test: "Cardiac stress test or catheterization",
+                    quality: "fair",
+                    rationale: "If ECG/troponin concerning or high cardiac risk. Not first-line but consider if cardiac cause suspected.",
+                    impactsDx: "Evaluates for coronary artery disease"
+                  },
+                  {
+                    id: "dx14",
+                    test: "Urinalysis",
+                    quality: "low-priority",
+                    rationale: "Not relevant to epigastric pain differential. Would order if concerned about UTI/kidney stone, but that's not this presentation.",
+                    impactsDx: "No impact on epigastric pain differential"
+                  }
+                ],
+                
+                treatments: [
+                  {
+                    id: "tx1",
+                    treatment: "Start proton pump inhibitor (PPI) - omeprazole 20-40mg daily",
+                    quality: "excellent",
+                    rationale: "First-line treatment for gastritis, GERD, PUD. Start empirically while awaiting workup. Most likely diagnosis needs PPI.",
+                    impactsDx: "Treats acid-related disorders"
+                  },
+                  {
+                    id: "tx2",
+                    treatment: "Stop NSAIDs immediately",
+                    quality: "excellent",
+                    rationale: "CRITICAL intervention. NSAIDs are THE cause of his gastritis. Continuing NSAIDs undermines all other treatment. Discuss alternatives for knee pain.",
+                    impactsDx: "Removes cause of NSAID-induced gastritis"
+                  },
+                  {
+                    id: "tx3",
+                    treatment: "Dietary modifications (avoid triggers: spicy, fatty, acidic foods; small frequent meals)",
+                    quality: "good",
+                    rationale: "Supportive care for gastritis/GERD. Helps symptom management. Not curative but helpful adjunct.",
+                    impactsDx: "Reduces symptom triggers"
+                  },
+                  {
+                    id: "tx4",
+                    treatment: "Antacids PRN for symptom relief",
+                    quality: "good",
+                    rationale: "Quick symptom relief for breakthrough pain. Not definitive treatment but good for immediate relief.",
+                    impactsDx: "Symptomatic relief"
+                  },
+                  {
+                    id: "tx5",
+                    treatment: "Aspirin for MI if ECG shows STEMI",
+                    quality: "fair",
+                    rationale: "ONLY if MI confirmed. Do NOT give empirically - aspirin increases GI bleeding risk and he's already on NSAIDs. Wait for cardiac workup.",
+                    impactsDx: "Treats MI but increases bleeding risk"
+                  },
+                  {
+                    id: "tx6",
+                    treatment: "IV fluids",
+                    quality: "low-priority",
+                    rationale: "Patient is stable, taking PO, no signs of dehydration. IV fluids not indicated for outpatient management.",
+                    impactsDx: "Not indicated for stable patient"
+                  },
+                  {
+                    id: "tx7",
+                    treatment: "Antibiotics",
+                    quality: "low-priority",
+                    rationale: "No indication for antibiotics. Would need if H. pylori positive (specific regimen), but not empirically.",
+                    impactsDx: "No indication currently"
+                  }
+                ],
+                
+                disposition: [
+                  {
+                    id: "disp1",
+                    disposition: "Follow-up in 2 weeks to reassess symptoms",
+                    quality: "excellent",
+                    rationale: "Essential follow-up. PPI takes several days to work. Need to ensure symptoms improving and patient stopped NSAIDs. Reassess need for further workup.",
+                    impactsDx: "Monitors response to treatment"
+                  },
+                  {
+                    id: "disp2",
+                    disposition: "GI referral for endoscopy if symptoms persist or worsen",
+                    quality: "excellent",
+                    rationale: "If no improvement on PPI after 4-8 weeks, needs EGD to visualize mucosa, biopsy for H. pylori, rule out malignancy.",
+                    impactsDx: "Definitive diagnosis if empiric treatment fails"
+                  },
+                  {
+                    id: "disp3",
+                    disposition: "Cardiology referral if ECG/troponin abnormal",
+                    quality: "fair",
+                    rationale: "ONLY if cardiac workup concerning. Not needed if ECG/troponin normal and low clinical suspicion.",
+                    impactsDx: "Further cardiac evaluation if indicated"
+                  },
+                  {
+                    id: "disp4",
+                    disposition: "Discharge home with precautions",
+                    quality: "excellent",
+                    rationale: "Appropriate for stable patient with likely gastritis. Give return precautions: severe pain, bleeding, chest pain, SOB.",
+                    impactsDx: "Safe for outpatient management"
+                  },
+                  {
+                    id: "disp5",
+                    disposition: "Admit to hospital",
+                    quality: "low-priority",
+                    rationale: "Not indicated. Patient is stable, no peritoneal signs, no evidence of bleeding or MI. Can manage outpatient.",
+                    impactsDx: "Not medically necessary"
+                  },
+                  {
+                    id: "disp6",
+                    disposition: "Emergency surgery consultation",
+                    quality: "low-priority",
+                    rationale: "No indication for surgery. No perforation, no acute abdomen. Would only need if evidence of perforation or bleeding requiring intervention.",
+                    impactsDx: "No surgical indication"
+                  }
+                ]
+              },
+
+              finalDifferential: [
+                {
+                  diagnosis: "NSAID-induced gastritis",
+                  likelihood: "Most likely",
+                  support: "Epigastric pain worse with meals + frequent ibuprofen use + epigastric tenderness. Classic presentation. NSAID use is THE key historical feature.",
+                  nextSteps: "Stop NSAIDs, PPI (omeprazole 20-40mg daily), H. pylori testing, dietary modifications, follow-up in 2 weeks"
+                },
+                {
+                  diagnosis: "Myocardial infarction",
+                  likelihood: "Must rule out",
+                  support: "62yo male with HTN, family history of CAD. Epigastric pain CAN BE atypical MI. Low suspicion given presentation, but MUST rule out.",
+                  nextSteps: "ECG now, troponin if any concern, consider stress test if symptoms persist"
+                },
+                {
+                  diagnosis: "Peptic ulcer disease",
+                  likelihood: "Possible",
+                  support: "NSAID use is major risk factor. No GI bleeding (reassuring). Could overlap with gastritis.",
+                  nextSteps: "If no improvement on PPI, consider endoscopy"
+                },
+                {
+                  diagnosis: "Pancreatitis",
+                  likelihood: "Unlikely",
+                  support: "No radiation to back, no severe pain, no vomiting, no alcohol use. Doesn't fit clinically.",
+                  nextSteps: "If pain worsens or radiates to back, check lipase"
+                }
+              ],
+
+              teachingPoints: [
+                "CRITICAL: Epigastric pain in older adults CAN BE myocardial infarction - ALWAYS get ECG",
+                "MUST do cardiac exam even when chief complaint is 'abdominal pain'",
+                "NSAIDs are a MAJOR preventable cause of gastritis and PUD",
+                "Stopping NSAIDs is as important as starting PPI",
+                "Always screen for GI bleeding: melena, hematemesis, hematochezia",
+                "ROS should be organized by body systems, not random checklist questions",
+                "Physical exam should be systematic head-to-toe, focusing on relevant systems",
+                "Management requires diagnostic testing, treatment, AND appropriate disposition",
+                "Follow-up is ESSENTIAL - PPI takes days to work, need to reassess",
+                "Return precautions: severe pain, bleeding, chest pain, SOB → return immediately"
+              ]
+            }
+          ];
+
+          const currentCase = cases[selectedCase];
+
+          const toggleSelection = (item, selectedList, setSelectedList) => {
+            if (selectedList.includes(item)) {
+              setSelectedList(selectedList.filter(i => i !== item));
+            } else {
+              setSelectedList([...selectedList, item]);
+            }
+          };
+
+          const toggleSystemExpansion = (system, expandedList, setExpandedList) => {
+            if (expandedList.includes(system)) {
+              setExpandedList(expandedList.filter(s => s !== system));
+            } else {
+              setExpandedList([...expandedList, system]);
+            }
+          };
+
+          const getQualityStyles = (quality) => {
+            switch(quality) {
+              case 'excellent': return 'excellent-choice';
+              case 'good': return 'good-choice';
+              case 'fair': return 'fair-choice';
+              case 'low-priority': return 'low-priority-choice';
+              default: return 'border-gray-200';
+            }
+          };
+
+          const getQualityBadge = (quality) => {
+            switch(quality) {
+              case 'excellent': return 'bg-green-600 text-white';
+              case 'good': return 'bg-blue-500 text-white';
+              case 'fair': return 'bg-yellow-500 text-gray-900';
+              case 'low-priority': return 'bg-orange-500 text-white';
+              default: return 'bg-gray-400 text-white';
+            }
+          };
+
+          const getComparisonData = (allQuestions, selectedItems) => {
+            const optimalQuestions = allQuestions.filter(q => q.quality === 'excellent' || q.quality === 'good');
+            const optimalIds = optimalQuestions.map(q => q.id);
+            
+            const selectedOptimal = selectedItems.filter(id => optimalIds.includes(id));
+            const missedOptimal = optimalIds.filter(id => !selectedItems.includes(id));
+            const lowPrioritySelected = selectedItems.filter(id => {
+              const q = allQuestions.find(q => q.id === id);
+              return q && (q.quality === 'low-priority' || q.quality === 'fair');
+            });
+            
+            return {
+              totalSelected: selectedItems.length,
+              totalOptimal: optimalIds.length,
+              selectedOptimal: selectedOptimal.length,
+              missedOptimal: missedOptimal.length,
+              lowPrioritySelected: lowPrioritySelected.length,
+              missedOptimalQuestions: allQuestions.filter(q => missedOptimal.includes(q.id)),
+              lowPriorityQuestions: allQuestions.filter(q => lowPrioritySelected.includes(q.id)),
+              efficiency: Math.round((selectedOptimal.length / Math.max(selectedItems.length, 1)) * 100)
+            };
+          };
+
+          const renderComparisonView = (data) => (
+            <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">📊 Performance Analysis</h3>
+              
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="bg-blue-50 p-4 rounded-lg">
+                  <div className="text-3xl font-bold text-blue-900">{data.totalSelected}</div>
+                  <div className="text-sm text-blue-700">Items You Selected</div>
+                </div>
+                <div className="bg-green-50 p-4 rounded-lg">
+                  <div className="text-3xl font-bold text-green-900">{data.totalOptimal}</div>
+                  <div className="text-sm text-green-700">Optimal High-Yield Items</div>
+                </div>
+                <div className="bg-emerald-50 p-4 rounded-lg">
+                  <div className="text-3xl font-bold text-emerald-900">{data.selectedOptimal}</div>
+                  <div className="text-sm text-emerald-700">High-Yield Items You Selected</div>
+                </div>
+                <div className="bg-orange-50 p-4 rounded-lg">
+                  <div className="text-3xl font-bold text-orange-900">{data.efficiency}%</div>
+                  <div className="text-sm text-orange-700">Efficiency Score</div>
+                </div>
+              </div>
+
+              {data.missedOptimal > 0 && (
+                <div className="bg-red-50 border-2 border-red-300 p-4 rounded-lg mb-4">
+                  <h4 className="font-bold text-red-900 mb-2">⚠️ You Missed {data.missedOptimal} High-Yield Items:</h4>
+                  <ul className="space-y-2">
+                    {data.missedOptimalQuestions.slice(0, 5).map((q) => (
+                      <li key={q.id} className="text-sm text-red-800">
+                        <span className="font-semibold">• {q.question || q.maneuver || q.test || q.treatment || q.disposition}</span>
+                        <p className="text-xs text-red-700 ml-4 mt-1">Why important: {q.rationale}</p>
+                      </li>
+                    ))}
+                  </ul>
+                  {data.missedOptimalQuestions.length > 5 && (
+                    <p className="text-sm text-red-700 mt-2">...and {data.missedOptimalQuestions.length - 5} more</p>
+                  )}
+                </div>
+              )}
+
+              {data.lowPrioritySelected > 0 && (
+                <div className="bg-yellow-50 border-2 border-yellow-300 p-4 rounded-lg">
+                  <h4 className="font-bold text-yellow-900 mb-2">💡 You Selected {data.lowPrioritySelected} Lower-Priority Items:</h4>
+                  <p className="text-sm text-yellow-800 mb-2">These aren't "wrong," but in a time-limited setting, they're lower priority.</p>
+                  <ul className="space-y-2">
+                    {data.lowPriorityQuestions.slice(0, 5).map((q) => (
+                      <li key={q.id} className="text-sm text-yellow-800">
+                        <span className="font-semibold">• {q.question || q.maneuver || q.test || q.treatment || q.disposition}</span>
+                        <p className="text-xs text-yellow-700 ml-4 mt-1">{q.rationale}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              <div className="mt-4 p-4 bg-indigo-50 rounded-lg">
+                <h4 className="font-semibold text-indigo-900 mb-2">💡 Interpretation:</h4>
+                {data.efficiency >= 80 && (
+                  <p className="text-indigo-800">Excellent! You focused on high-yield items and avoided lower-priority choices. This approach will serve you well in time-limited encounters.</p>
+                )}
+                {data.efficiency >= 60 && data.efficiency < 80 && (
+                  <p className="text-indigo-800">Good job! You selected many high-yield items. Consider being even more targeted by focusing on items that directly distinguish between diagnoses.</p>
+                )}
+                {data.efficiency < 60 && (
+                  <p className="text-indigo-800">You selected many items, but some were lower priority. In time-limited encounters, focus first on EXCELLENT or GOOD quality items.</p>
+                )}
+              </div>
+            </div>
+          );
+
+          const renderInitialStage = () => (
+            <div className="space-y-6">
+              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-blue-500 p-6 rounded-lg">
+                <h2 className="text-2xl font-bold text-gray-900 mb-4">Door Note</h2>
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div><span className="font-semibold">Patient:</span> {currentCase.doorNote.name}</div>
+                  <div><span className="font-semibold">Age:</span> {currentCase.doorNote.age}</div>
+                  <div><span className="font-semibold">Sex:</span> {currentCase.doorNote.sex}</div>
+                  <div><span className="font-semibold">Location:</span> {currentCase.doorNote.location}</div>
+                  <div className="col-span-2"><span className="font-semibold">Chief Complaint:</span> "{currentCase.doorNote.chiefComplaint}"</div>
+                  <div className="col-span-2"><span className="font-semibold">Vitals:</span> {currentCase.doorNote.vitals}</div>
+                </div>
+              </div>
+
+              <div className="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-lg">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Brief HPI</h3>
+                <p className="text-gray-800">{currentCase.briefHPI}</p>
+              </div>
+
+              <div className="bg-indigo-100 border-2 border-indigo-500 p-6 rounded-lg">
+                <h3 className="text-lg font-semibold text-indigo-900 mb-2">Your First Task</h3>
+                <p className="text-indigo-800 mb-4">
+                  Before taking history, generate your differential diagnosis. What are the most likely causes of this patient's presentation?
+                </p>
+                <p className="text-indigo-700 text-sm">
+                  In the next step, you'll select your top 3-5 diagnoses and get feedback on your clinical reasoning.
+                </p>
+              </div>
+
+              <button
+                onClick={() => setCurrentStage('differential')}
+                className="w-full bg-indigo-600 text-white py-4 px-6 rounded-lg font-semibold text-lg hover:bg-indigo-700 transition-colors"
+              >
+                Generate My Differential Diagnosis →
+              </button>
+            </div>
+          );
+
+          const renderDifferentialStage = () => (
+            <div className="space-y-6">
+              <div className="bg-orange-50 border-l-4 border-orange-500 p-6 rounded-lg">
+                <h3 className="text-lg font-semibold text-orange-900 mb-2">Generate Your Differential</h3>
+                <p className="text-orange-800">
+                  Select your top 3-5 most likely diagnoses based on the patient's presentation. Click on body systems to expand and see possible diagnoses.
+                </p>
+              </div>
+
+              <div className="bg-white rounded-lg shadow-lg p-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Select Diagnoses by System</h3>
+                <div className="space-y-2">
+                  {Object.keys(differentialsBySystem).map((system) => (
+                    <div key={system} className="border-2 border-gray-200 rounded-lg overflow-hidden">
+                      <div
+                        className="section-header p-4 bg-gray-50 flex justify-between items-center"
+                        onClick={() => toggleSystemExpansion(system, expandedDxSystems, setExpandedDxSystems)}
+                      >
+                        <h4 className="font-semibold text-gray-900">{system}</h4>
+                        <span className="text-gray-600">
+                          {expandedDxSystems.includes(system) ? '▼' : '▶'}
+                        </span>
+                      </div>
+                      {expandedDxSystems.includes(system) && (
+                        <div className="p-4 space-y-2 bg-white">
+                          {differentialsBySystem[system].map((dx) => {
+                            const isSelected = selectedDifferentials.includes(dx);
+                            return (
+                              <div
+                                key={dx}
+                                className={`p-3 border-2 rounded cursor-pointer transition-all ${
+                                  isSelected ? 'selected-choice' : 'border-gray-200 hover:border-gray-400'
+                                }`}
+                                onClick={() => toggleSelection(dx, selectedDifferentials, setSelectedDifferentials)}
+                              >
+                                <div className="flex items-center justify-between">
+                                  <span className="text-gray-900">{dx}</span>
+                                  <input
+                                    type="checkbox"
+                                    checked={isSelected}
+                                    onChange={() => {}}
+                                    className="w-5 h-5"
+                                  />
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {selectedDifferentials.length > 0 && (
+                <div className="bg-blue-50 border-2 border-blue-500 p-4 rounded-lg">
+                  <h4 className="font-semibold text-blue-900 mb-2">
+                    Your Selected Differential ({selectedDifferentials.length} diagnoses):
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedDifferentials.map((dx) => (
+                      <span key={dx} className="bg-blue-200 text-blue-900 px-3 py-1 rounded-full text-sm">
+                        {dx}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div className="flex gap-4">
+                <button
+                  onClick={() => setShowDifferentialFeedback(true)}
+                  className="flex-1 bg-green-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-700 transition-colors"
+                  disabled={showDifferentialFeedback || selectedDifferentials.length === 0}
+                >
+                  Get Feedback on My Differential
+                </button>
+                
+                {showDifferentialFeedback && (
+                  <button
+                    onClick={() => setCurrentStage('history')}
+                    className="flex-1 bg-indigo-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-indigo-700 transition-colors"
+                  >
+                    Move to History Taking →
+                  </button>
+                )}
+              </div>
+
+              {showDifferentialFeedback && (
+                <div className="bg-white rounded-lg shadow-lg p-6 space-y-4">
+                  <h3 className="text-xl font-bold text-gray-900">Expected Differential & Feedback</h3>
+                  
+                  <div className="space-y-3">
+                    {currentCase.expectedDifferential.map((dx, idx) => {
+                      const wasSelected = selectedDifferentials.includes(dx.diagnosis);
+                      return (
+                        <div key={idx} className={`p-4 rounded-lg ${wasSelected ? 'bg-green-50 border-2 border-green-500' : 'bg-gray-50 border-2 border-gray-300'}`}>
+                          <div className="flex justify-between items-start mb-2">
+                            <h4 className="font-bold text-gray-900">{dx.diagnosis}</h4>
+                            <div className="flex items-center gap-2">
+                              {wasSelected && <span className="text-green-600 font-semibold">✓ You included this</span>}
+                              <span className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-semibold">
+                                {dx.priority}
+                              </span>
+                            </div>
+                          </div>
+                          <p className="text-gray-700 text-sm">{dx.reasoning}</p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+
+const renderHistoryStage = () => {
+            const allHistoryQuestions = [
+              ...currentCase.historyQuestions.hpiFollowUp,
+              ...Object.values(currentCase.historyQuestions.rosBySystem).flat(),
+              ...currentCase.historyQuestions.pmh.general,
+              ...currentCase.historyQuestions.pmh.specific,
+              ...currentCase.historyQuestions.socialHistory.general,
+              ...currentCase.historyQuestions.socialHistory.specific
+            ];
+
+            return (
+              <div className="space-y-6">
+                <div className="bg-orange-50 border-l-4 border-orange-500 p-6 rounded-lg">
+                  <h3 className="text-lg font-semibold text-orange-900 mb-2">⏱️ Time-Limited OSCE Context</h3>
+                  <p className="text-orange-800">
+                    You have approximately <span className="font-bold">10 minutes for the history...first.</span> Select the questions you would ask, prioritizing the MOST important questions.
+                  </p>
+                  <p className="text-orange-700 text-sm mt-2">
+                    <strong>Remember:</strong> Open-ended questions are good, but follow up with targeted specifics. Generic questions need specific follow-up to be high-yield.
+                  </p>
+                </div>
+
+                {/* HPI Follow-Up */}
+                <div className="bg-white rounded-lg shadow-lg p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">HPI Follow-Up Questions</h3>
+                  <div className="space-y-3">
+                    {currentCase.historyQuestions.hpiFollowUp.map((q) => {
+                      const isSelected = selectedHistory.includes(q.id);
+                      const showFeedback = showHistoryFeedback;
+                      
+                      let className = "p-4 border-2 rounded-lg cursor-pointer transition-all ";
+                      if (showFeedback) {
+                        className += getQualityStyles(q.quality);
+                      } else if (isSelected) {
+                        className += 'selected-choice';
+                      } else {
+                        className += 'border-gray-200 hover:border-gray-400';
+                      }
+                      
+                      return (
+                        <div key={q.id} className={className} onClick={() => !showFeedback && toggleSelection(q.id, selectedHistory, setSelectedHistory)}>
+                          <div className="flex items-start justify-between">
+                            <div className="flex-1">
+                              <p className="font-medium text-gray-900">{q.question}</p>
+                              {showFeedback && (
+                                <div className="mt-3 space-y-2">
+                                  <div className={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${getQualityBadge(q.quality)}`}>
+                                    {q.quality.toUpperCase().replace('-', ' ')}
+                                  </div>
+                                  <p className="text-sm text-gray-700 mt-2"><span className="font-semibold">Why:</span> {q.rationale}</p>
+                                  <p className="text-sm text-indigo-700 mt-1"><span className="font-semibold">Impacts:</span> {q.impactsDx}</p>
+                                </div>
+                              )}
+                            </div>
+                            {!showFeedback && (
+                              <div className="ml-4">
+                                <input type="checkbox" checked={isSelected} onChange={() => {}} className="w-5 h-5" />
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* ROS by System */}
+                <div className="bg-white rounded-lg shadow-lg p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">Review of Systems (by Body System)</h3>
+                  <div className="space-y-2">
+                    {Object.keys(currentCase.historyQuestions.rosBySystem).map((system) => (
+                      <div key={system} className="border-2 border-gray-200 rounded-lg overflow-hidden">
+                        <div
+                          className="section-header p-4 bg-gray-50 flex justify-between items-center"
+                          onClick={() => toggleSystemExpansion(system, expandedRosSystems, setExpandedRosSystems)}
+                        >
+                          <h4 className="font-semibold text-gray-900">{system}</h4>
+                          <span className="text-gray-600">
+                            {expandedRosSystems.includes(system) ? '▼' : '▶'}
+                          </span>
+                        </div>
+                        {expandedRosSystems.includes(system) && (
+                          <div className="p-4 space-y-3 bg-white">
+                            {currentCase.historyQuestions.rosBySystem[system].map((q) => {
+                              const isSelected = selectedHistory.includes(q.id);
+                              const showFeedback = showHistoryFeedback;
+                              
+                              let className = "p-4 border-2 rounded-lg cursor-pointer transition-all ";
+                              if (showFeedback) {
+                                className += getQualityStyles(q.quality);
+                              } else if (isSelected) {
+                                className += 'selected-choice';
+                              } else {
+                                className += 'border-gray-200 hover:border-gray-400';
+                              }
+                              
+                              return (
+                                <div key={q.id} className={className} onClick={() => !showFeedback && toggleSelection(q.id, selectedHistory, setSelectedHistory)}>
+                                  <div className="flex items-start justify-between">
+                                    <div className="flex-1">
+                                      <p className="font-medium text-gray-900">{q.question}</p>
+                                      {showFeedback && (
+                                        <div className="mt-3 space-y-2">
+                                          <div className={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${getQualityBadge(q.quality)}`}>
+                                            {q.quality.toUpperCase().replace('-', ' ')}
+                                          </div>
+                                          <p className="text-sm text-gray-700 mt-2"><span className="font-semibold">Why:</span> {q.rationale}</p>
+                                          <p className="text-sm text-indigo-700 mt-1"><span className="font-semibold">Impacts:</span> {q.impactsDx}</p>
+                                        </div>
+                                      )}
+                                    </div>
+                                    {!showFeedback && (
+                                      <div className="ml-4">
+                                        <input type="checkbox" checked={isSelected} onChange={() => {}} className="w-5 h-5" />
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* PMH */}
+                <div className="bg-white rounded-lg shadow-lg p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">Past Medical History</h3>
+                  
+                  <h4 className="font-semibold text-gray-700 mb-3 text-sm">General Questions First:</h4>
+                  <div className="space-y-3 mb-6">
+                    {currentCase.historyQuestions.pmh.general.map((q) => {
+                      const isSelected = selectedHistory.includes(q.id);
+                      const showFeedback = showHistoryFeedback;
+                      
+                      let className = "p-4 border-2 rounded-lg cursor-pointer transition-all ";
+                      if (showFeedback) {
+                        className += getQualityStyles(q.quality);
+                      } else if (isSelected) {
+                        className += 'selected-choice';
+                      } else {
+                        className += 'border-gray-200 hover:border-gray-400';
+                      }
+                      
+                      return (
+                        <div key={q.id} className={className} onClick={() => !showFeedback && toggleSelection(q.id, selectedHistory, setSelectedHistory)}>
+                          <div className="flex items-start justify-between">
+                            <div className="flex-1">
+                              <p className="font-medium text-gray-900">{q.question}</p>
+                              {q.followUpNote && !showFeedback && (
+                                <div className="mt-2 p-2 bg-blue-50 border-l-4 border-blue-500 rounded">
+                                  <p className="text-sm text-blue-800"><span className="font-semibold">Follow-up:</span> {q.followUpNote}</p>
+                                </div>
+                              )}
+                              {showFeedback && (
+                                <div className="mt-3 space-y-2">
+                                  <div className={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${getQualityBadge(q.quality)}`}>
+                                    {q.quality.toUpperCase().replace('-', ' ')}
+                                  </div>
+                                  <p className="text-sm text-gray-700 mt-2"><span className="font-semibold">Why:</span> {q.rationale}</p>
+                                  <p className="text-sm text-indigo-700 mt-1"><span className="font-semibold">Impacts:</span> {q.impactsDx}</p>
+                                  {q.followUpNote && (
+                                    <div className="mt-2 p-2 bg-blue-50 border-l-4 border-blue-500 rounded">
+                                      <p className="text-sm text-blue-800"><span className="font-semibold">Follow-up note:</span> {q.followUpNote}</p>
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                            {!showFeedback && (
+                              <div className="ml-4">
+                                <input type="checkbox" checked={isSelected} onChange={() => {}} className="w-5 h-5" />
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  <h4 className="font-semibold text-gray-700 mb-3 text-sm">Then Specific Questions:</h4>
+                  <div className="space-y-3">
+                    {currentCase.historyQuestions.pmh.specific.map((q) => {
+                      const isSelected = selectedHistory.includes(q.id);
+                      const showFeedback = showHistoryFeedback;
+                      
+                      let className = "p-4 border-2 rounded-lg cursor-pointer transition-all ";
+                      if (showFeedback) {
+                        className += getQualityStyles(q.quality);
+                      } else if (isSelected) {
+                        className += 'selected-choice';
+                      } else {
+                        className += 'border-gray-200 hover:border-gray-400';
+                      }
+                      
+                      return (
+                        <div key={q.id} className={className} onClick={() => !showFeedback && toggleSelection(q.id, selectedHistory, setSelectedHistory)}>
+                          <div className="flex items-start justify-between">
+                            <div className="flex-1">
+                              <p className="font-medium text-gray-900">{q.question}</p>
+                              {showFeedback && (
+                                <div className="mt-3 space-y-2">
+                                  <div className={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${getQualityBadge(q.quality)}`}>
+                                    {q.quality.toUpperCase().replace('-', ' ')}
+                                  </div>
+                                  <p className="text-sm text-gray-700 mt-2"><span className="font-semibold">Why:</span> {q.rationale}</p>
+                                  <p className="text-sm text-indigo-700 mt-1"><span className="font-semibold">Impacts:</span> {q.impactsDx}</p>
+                                </div>
+                              )}
+                            </div>
+                            {!showFeedback && (
+                              <div className="ml-4">
+                                <input type="checkbox" checked={isSelected} onChange={() => {}} className="w-5 h-5" />
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Social History */}
+                <div className="bg-white rounded-lg shadow-lg p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">Social History</h3>
+                  
+                  <h4 className="font-semibold text-gray-700 mb-3 text-sm">General Questions with Follow-Up Guidance:</h4>
+                  <div className="space-y-3 mb-6">
+                    {currentCase.historyQuestions.socialHistory.general.map((q) => {
+                      const isSelected = selectedHistory.includes(q.id);
+                      const showFeedback = showHistoryFeedback;
+                      
+                      let className = "p-4 border-2 rounded-lg cursor-pointer transition-all ";
+                      if (showFeedback) {
+                        className += getQualityStyles(q.quality);
+                      } else if (isSelected) {
+                        className += 'selected-choice';
+                      } else {
+                        className += 'border-gray-200 hover:border-gray-400';
+                      }
+                      
+                      return (
+                        <div key={q.id} className={className} onClick={() => !showFeedback && toggleSelection(q.id, selectedHistory, setSelectedHistory)}>
+                          <div className="flex items-start justify-between">
+                            <div className="flex-1">
+                              <p className="font-medium text-gray-900">{q.question}</p>
+                              {q.followUpNote && !showFeedback && (
+                                <div className="mt-2 p-2 bg-purple-50 border-l-4 border-purple-500 rounded">
+                                  <p className="text-sm text-purple-800"><span className="font-semibold">How to ask:</span> {q.followUpNote}</p>
+                                </div>
+                              )}
+                              {showFeedback && (
+                                <div className="mt-3 space-y-2">
+                                  <div className={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${getQualityBadge(q.quality)}`}>
+                                    {q.quality.toUpperCase().replace('-', ' ')}
+                                  </div>
+                                  <p className="text-sm text-gray-700 mt-2"><span className="font-semibold">Why:</span> {q.rationale}</p>
+                                  <p className="text-sm text-indigo-700 mt-1"><span className="font-semibold">Impacts:</span> {q.impactsDx}</p>
+                                  {q.followUpNote && (
+                                    <div className="mt-2 p-2 bg-purple-50 border-l-4 border-purple-500 rounded">
+                                      <p className="text-sm text-purple-800"><span className="font-semibold">How to ask:</span> {q.followUpNote}</p>
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                            {!showFeedback && (
+                              <div className="ml-4">
+                                <input type="checkbox" checked={isSelected} onChange={() => {}} className="w-5 h-5" />
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  <h4 className="font-semibold text-gray-700 mb-3 text-sm">Then Specific Questions:</h4>
+                  <div className="space-y-3">
+                    {currentCase.historyQuestions.socialHistory.specific.map((q) => {
+                      const isSelected = selectedHistory.includes(q.id);
+                      const showFeedback = showHistoryFeedback;
+                      
+                      let className = "p-4 border-2 rounded-lg cursor-pointer transition-all ";
+                      if (showFeedback) {
+                        className += getQualityStyles(q.quality);
+                      } else if (isSelected) {
+                        className += 'selected-choice';
+                      } else {
+                        className += 'border-gray-200 hover:border-gray-400';
+                      }
+                      
+                      return (
+                        <div key={q.id} className={className} onClick={() => !showFeedback && toggleSelection(q.id, selectedHistory, setSelectedHistory)}>
+                          <div className="flex items-start justify-between">
+                            <div className="flex-1">
+                              <p className="font-medium text-gray-900">{q.question}</p>
+                              {showFeedback && (
+                                <div className="mt-3 space-y-2">
+                                  <div className={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${getQualityBadge(q.quality)}`}>
+                                    {q.quality.toUpperCase().replace('-', ' ')}
+                                  </div>
+                                  <p className="text-sm text-gray-700 mt-2"><span className="font-semibold">Why:</span> {q.rationale}</p>
+                                  <p className="text-sm text-indigo-700 mt-1"><span className="font-semibold">Impacts:</span> {q.impactsDx}</p>
+                                </div>
+                              )}
+                            </div>
+                            {!showFeedback && (
+                              <div className="ml-4">
+                                <input type="checkbox" checked={isSelected} onChange={() => {}} className="w-5 h-5" />
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <button
+                    onClick={() => setShowHistoryFeedback(true)}
+                    className="flex-1 bg-green-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-700 transition-colors"
+                    disabled={showHistoryFeedback || selectedHistory.length === 0}
+                  >
+                    Get Feedback on My History
+                  </button>
+                  
+                  {showHistoryFeedback && (
+                    <button
+                      onClick={() => setCurrentStage('physical')}
+                      className="flex-1 bg-indigo-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-indigo-700 transition-colors"
+                    >
+                      Move to Physical Exam →
+                    </button>
+                  )}
+                </div>
+
+                {showHistoryFeedback && renderComparisonView(getComparisonData(allHistoryQuestions, selectedHistory))}
+              </div>
+            );
+          };
+
+          const renderPhysicalStage = () => {
+            const allPhysicalExams = Object.values(currentCase.physicalExam).flat();
+
+            return (
+              <div className="space-y-6">
+                <div className="bg-orange-50 border-l-4 border-orange-500 p-6 rounded-lg">
+                  <h3 className="text-lg font-semibold text-orange-900 mb-2">⏱️ Time-Limited Physical Exam</h3>
+                  <p className="text-orange-800">
+                    Select the physical exam maneuvers you would perform. Focus on maneuvers that help you test your differential diagnosis. Prioritize exam findings that distinguish between diagnoses.
+                  </p>
+                </div>
+
+                {/* Physical Exam by System */}
+                {Object.keys(currentCase.physicalExam).map((system) => (
+                  <div key={system} className="bg-white rounded-lg shadow-lg p-6">
+                    <div
+                      className="section-header flex justify-between items-center mb-4"
+                      onClick={() => toggleSystemExpansion(system, expandedPESystems, setExpandedPESystems)}
+                    >
+                      <h3 className="text-xl font-bold text-gray-900">{system}</h3>
+                      <span className="text-gray-600 text-xl">
+                        {expandedPESystems.includes(system) ? '▼' : '▶'}
+                      </span>
+                    </div>
+                    
+                    {(expandedPESystems.includes(system) || expandedPESystems.length === 0) && (
+                      <div className="space-y-3">
+                        {currentCase.physicalExam[system].map((exam) => {
+                          const isSelected = selectedPhysical.includes(exam.id);
+                          const showFeedback = showPhysicalFeedback;
+                          
+                          let className = "p-4 border-2 rounded-lg cursor-pointer transition-all ";
+                          if (showFeedback) {
+                            className += getQualityStyles(exam.quality);
+                          } else if (isSelected) {
+                            className += 'selected-choice';
+                          } else {
+                            className += 'border-gray-200 hover:border-gray-400';
+                          }
+                          
+                          return (
+                            <div key={exam.id} className={className} onClick={() => !showFeedback && toggleSelection(exam.id, selectedPhysical, setSelectedPhysical)}>
+                              <div className="flex items-start justify-between">
+                                <div className="flex-1">
+                                  <p className="font-medium text-gray-900">{exam.maneuver}</p>
+                                  {showFeedback && (
+                                    <div className="mt-3 space-y-2">
+                                      <div className={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${getQualityBadge(exam.quality)}`}>
+                                        {exam.quality.toUpperCase().replace('-', ' ')}
+                                      </div>
+                                      <p className="text-sm text-gray-700 mt-2"><span className="font-semibold">Why:</span> {exam.rationale}</p>
+                                      <div className="bg-blue-50 border-l-4 border-blue-500 p-3 mt-2">
+                                        <p className="text-sm font-semibold text-blue-900">Finding:</p>
+                                        <p className="text-sm text-blue-800">{exam.finding}</p>
+                                      </div>
+                                      <p className="text-sm text-indigo-700 mt-1"><span className="font-semibold">Impact:</span> {exam.impactsDx}</p>
+                                    </div>
+                                  )}
+                                </div>
+                                {!showFeedback && (
+                                  <div className="ml-4">
+                                    <input type="checkbox" checked={isSelected} onChange={() => {}} className="w-5 h-5" />
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                ))}
+
+                <div className="flex gap-4">
+                  <button
+                    onClick={() => setShowPhysicalFeedback(true)}
+                    className="flex-1 bg-green-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-700 transition-colors"
+                    disabled={showPhysicalFeedback || selectedPhysical.length === 0}
+                  >
+                    Get Feedback on My Physical Exam
+                  </button>
+                  
+                  {showPhysicalFeedback && (
+                    <button
+                      onClick={() => setCurrentStage('nextsteps')}
+                      className="flex-1 bg-indigo-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-indigo-700 transition-colors"
+                    >
+                      Move to Next Steps →
+                    </button>
+                  )}
+                </div>
+
+                {showPhysicalFeedback && renderComparisonView(getComparisonData(allPhysicalExams, selectedPhysical))}
+              </div>
+            );
+          };
+
+          const renderNextStepsStage = () => {
+            const allNextSteps = [
+              ...currentCase.nextSteps.diagnosticTests,
+              ...currentCase.nextSteps.treatments,
+              ...currentCase.nextSteps.disposition
+            ];
+
+            return (
+              <div className="space-y-6">
+                <div className="bg-purple-50 border-l-4 border-purple-500 p-6 rounded-lg">
+                  <h3 className="text-lg font-semibold text-purple-900 mb-2">🎯 Next Steps: Diagnostic Testing, Treatment & Disposition</h3>
+                  <p className="text-purple-800">
+                    Based on your history and physical exam, select the appropriate diagnostic tests, treatments, and disposition for this patient.
+                  </p>
+                </div>
+
+                {/* Diagnostic Tests */}
+                <div className="bg-white rounded-lg shadow-lg p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">Diagnostic Tests</h3>
+                  <div className="space-y-3">
+                    {currentCase.nextSteps.diagnosticTests.map((test) => {
+                      const isSelected = selectedNextSteps.includes(test.id);
+                      const showFeedback = showNextStepsFeedback;
+                      
+                      let className = "p-4 border-2 rounded-lg cursor-pointer transition-all ";
+                      if (showFeedback) {
+                        className += getQualityStyles(test.quality);
+                      } else if (isSelected) {
+                        className += 'selected-choice';
+                      } else {
+                        className += 'border-gray-200 hover:border-gray-400';
+                      }
+                      
+                      return (
+                        <div key={test.id} className={className} onClick={() => !showFeedback && toggleSelection(test.id, selectedNextSteps, setSelectedNextSteps)}>
+                          <div className="flex items-start justify-between">
+                            <div className="flex-1">
+                              <p className="font-medium text-gray-900">{test.test}</p>
+                              {showFeedback && (
+                                <div className="mt-3 space-y-2">
+                                  <div className={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${getQualityBadge(test.quality)}`}>
+                                    {test.quality.toUpperCase().replace('-', ' ')}
+                                  </div>
+                                  <p className="text-sm text-gray-700 mt-2"><span className="font-semibold">Why:</span> {test.rationale}</p>
+                                  <p className="text-sm text-indigo-700 mt-1"><span className="font-semibold">Impact:</span> {test.impactsDx}</p>
+                                </div>
+                              )}
+                            </div>
+                            {!showFeedback && (
+                              <div className="ml-4">
+                                <input type="checkbox" checked={isSelected} onChange={() => {}} className="w-5 h-5" />
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Treatments */}
+                <div className="bg-white rounded-lg shadow-lg p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">Treatments</h3>
+                  <div className="space-y-3">
+                    {currentCase.nextSteps.treatments.map((treatment) => {
+                      const isSelected = selectedNextSteps.includes(treatment.id);
+                      const showFeedback = showNextStepsFeedback;
+                      
+                      let className = "p-4 border-2 rounded-lg cursor-pointer transition-all ";
+                      if (showFeedback) {
+                        className += getQualityStyles(treatment.quality);
+                      } else if (isSelected) {
+                        className += 'selected-choice';
+                      } else {
+                        className += 'border-gray-200 hover:border-gray-400';
+                      }
+                      
+                      return (
+                        <div key={treatment.id} className={className} onClick={() => !showFeedback && toggleSelection(treatment.id, selectedNextSteps, setSelectedNextSteps)}>
+                          <div className="flex items-start justify-between">
+                            <div className="flex-1">
+                              <p className="font-medium text-gray-900">{treatment.treatment}</p>
+                              {showFeedback && (
+                                <div className="mt-3 space-y-2">
+                                  <div className={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${getQualityBadge(treatment.quality)}`}>
+                                    {treatment.quality.toUpperCase().replace('-', ' ')}
+                                  </div>
+                                  <p className="text-sm text-gray-700 mt-2"><span className="font-semibold">Why:</span> {treatment.rationale}</p>
+                                  <p className="text-sm text-indigo-700 mt-1"><span className="font-semibold">Impact:</span> {treatment.impactsDx}</p>
+                                </div>
+                              )}
+                            </div>
+                            {!showFeedback && (
+                              <div className="ml-4">
+                                <input type="checkbox" checked={isSelected} onChange={() => {}} className="w-5 h-5" />
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Disposition */}
+                <div className="bg-white rounded-lg shadow-lg p-6">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">Referrals & Disposition</h3>
+                  <div className="space-y-3">
+                    {currentCase.nextSteps.disposition.map((disp) => {
+                      const isSelected = selectedNextSteps.includes(disp.id);
+                      const showFeedback = showNextStepsFeedback;
+                      
+                      let className = "p-4 border-2 rounded-lg cursor-pointer transition-all ";
+                      if (showFeedback) {
+                        className += getQualityStyles(disp.quality);
+                      } else if (isSelected) {
+                        className += 'selected-choice';
+                      } else {
+                        className += 'border-gray-200 hover:border-gray-400';
+                      }
+                      
+                      return (
+                        <div key={disp.id} className={className} onClick={() => !showFeedback && toggleSelection(disp.id, selectedNextSteps, setSelectedNextSteps)}>
+                          <div className="flex items-start justify-between">
+                            <div className="flex-1">
+                              <p className="font-medium text-gray-900">{disp.disposition}</p>
+                              {showFeedback && (
+                                <div className="mt-3 space-y-2">
+                                  <div className={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${getQualityBadge(disp.quality)}`}>
+                                    {disp.quality.toUpperCase().replace('-', ' ')}
+                                  </div>
+                                  <p className="text-sm text-gray-700 mt-2"><span className="font-semibold">Why:</span> {disp.rationale}</p>
+                                  <p className="text-sm text-indigo-700 mt-1"><span className="font-semibold">Impact:</span> {disp.impactsDx}</p>
+                                </div>
+                              )}
+                            </div>
+                            {!showFeedback && (
+                              <div className="ml-4">
+                                <input type="checkbox" checked={isSelected} onChange={() => {}} className="w-5 h-5" />
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <button
+                    onClick={() => setShowNextStepsFeedback(true)}
+                    className="flex-1 bg-green-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-700 transition-colors"
+                    disabled={showNextStepsFeedback || selectedNextSteps.length === 0}
+                  >
+                    Get Feedback on My Next Steps
+                  </button>
+                  
+                  {showNextStepsFeedback && (
+                    <button
+                      onClick={() => setCurrentStage('conclusion')}
+                      className="flex-1 bg-indigo-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-indigo-700 transition-colors"
+                    >
+                      See Final Teaching Points →
+                    </button>
+                  )}
+                </div>
+
+                {showNextStepsFeedback && renderComparisonView(getComparisonData(allNextSteps, selectedNextSteps))}
+              </div>
+            );
+          };
+
+          const renderConclusionStage = () => (
+            <div className="space-y-6">
+              <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-l-4 border-green-500 p-6 rounded-lg">
+                <h2 className="text-2xl font-bold text-gray-900 mb-4">Final Differential Diagnosis</h2>
+                <div className="space-y-4">
+                  {currentCase.finalDifferential.map((dx, idx) => (
+                    <div key={idx} className="bg-white p-4 rounded-lg shadow">
+                      <div className="flex justify-between items-start mb-2">
+                        <h3 className="text-lg font-bold text-gray-900">{dx.diagnosis}</h3>
+                        <span className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-semibold">
+                          {dx.likelihood}
+                        </span>
+                      </div>
+                      <p className="text-gray-700 mb-2"><span className="font-semibold">Support:</span> {dx.support}</p>
+                      <p className="text-green-700"><span className="font-semibold">Next Steps:</span> {dx.nextSteps}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-gradient-to-r from-purple-50 to-pink-50 border-l-4 border-purple-500 p-6 rounded-lg">
+                <h2 className="text-2xl font-bold text-gray-900 mb-4">Key Teaching Points</h2>
+                <ul className="space-y-3">
+                  {currentCase.teachingPoints.map((point, idx) => (
+                    <li key={idx} className="flex items-start">
+                      <span className="text-purple-600 font-bold mr-2">{idx + 1}.</span>
+                      <span className="text-gray-800">{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <button
+                onClick={() => {
+                  setCurrentStage('initial');
+                  setSelectedDifferentials([]);
+                  setShowDifferentialFeedback(false);
+                  setSelectedHistory([]);
+                  setSelectedPhysical([]);
+                  setSelectedNextSteps([]);
+                  setShowHistoryFeedback(false);
+                  setShowPhysicalFeedback(false);
+                  setShowNextStepsFeedback(false);
+                  setExpandedDxSystems([]);
+                  setExpandedRosSystems([]);
+                  setExpandedPESystems([]);
+                }}
+                className="w-full bg-gray-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-gray-700 transition-colors"
+              >
+                Start Over with This Case
+              </button>
+            </div>
+          );
+
+          return (
+            <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 p-4 md:p-8">
+              <div className="max-w-5xl mx-auto">
+                <div className="bg-white rounded-lg shadow-xl p-6 md:p-8 mb-6">
+                  <h1 className="text-3xl md:text-4xl font-bold text-indigo-900 mb-2">
+                    Clinical Reasoning Tool
+                  </h1>
+                  <p className="text-gray-600 mb-4">
+                    Learn hypothesis-driven history taking and targeted physical examination
+                  </p>
+
+                  <div className="flex flex-wrap gap-3 mb-6">
+                    {cases.map((c, idx) => (
+                      <button
+                        key={c.id}
+                        onClick={() => {
+                          setSelectedCase(idx);
+                          setCurrentStage('initial');
+                          setSelectedDifferentials([]);
+                          setShowDifferentialFeedback(false);
+                          setSelectedHistory([]);
+                          setSelectedPhysical([]);
+                          setSelectedNextSteps([]);
+                          setShowHistoryFeedback(false);
+                          setShowPhysicalFeedback(false);
+                          setShowNextStepsFeedback(false);
+                          setExpandedDxSystems([]);
+                          setExpandedRosSystems([]);
+                          setExpandedPESystems([]);
+                        }}
+                        className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
+                          selectedCase === idx
+                            ? 'bg-indigo-600 text-white'
+                            : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                        }`}
+                      >
+                        {c.title}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="flex gap-2 mb-6 overflow-x-auto">
+                    <button className={`px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap ${currentStage === 'initial' ? 'bg-indigo-200 text-indigo-900' : 'bg-gray-100 text-gray-600'}`}>
+                      1. Initial
+                    </button>
+                    <button className={`px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap ${currentStage === 'differential' ? 'bg-indigo-200 text-indigo-900' : 'bg-gray-100 text-gray-600'}`}>
+                      2. Differential
+                    </button>
+                    <button className={`px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap ${currentStage === 'history' ? 'bg-indigo-200 text-indigo-900' : 'bg-gray-100 text-gray-600'}`}>
+                      3. History
+                    </button>
+                    <button className={`px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap ${currentStage === 'physical' ? 'bg-indigo-200 text-indigo-900' : 'bg-gray-100 text-gray-600'}`}>
+                      4. Physical
+                    </button>
+                    <button className={`px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap ${currentStage === 'nextsteps' ? 'bg-indigo-200 text-indigo-900' : 'bg-gray-100 text-gray-600'}`}>
+                      5. Next Steps
+                    </button>
+                    <button className={`px-4 py-2 rounded-lg text-sm font-semibold whitespace-nowrap ${currentStage === 'conclusion' ? 'bg-indigo-200 text-indigo-900' : 'bg-gray-100 text-gray-600'}`}>
+                      6. Conclusion
+                    </button>
+                  </div>
+                </div>
+
+                {currentStage === 'initial' && renderInitialStage()}
+                {currentStage === 'differential' && renderDifferentialStage()}
+                {currentStage === 'history' && renderHistoryStage()}
+                {currentStage === 'physical' && renderPhysicalStage()}
+                {currentStage === 'nextsteps' && renderNextStepsStage()}
+                {currentStage === 'conclusion' && renderConclusionStage()}
+              </div>
+            </div>
+          );
+        };
+
+        ReactDOM.render(<ClinicalReasoningTool />, document.getElementById('root'));
+    </script>
+</body>
+</html>
