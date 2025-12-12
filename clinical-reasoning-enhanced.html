@@ -1,0 +1,1861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinical Reasoning Tool - Enhanced</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+            min-height: 100vh;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        @keyframes scorePop { 
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-40px) scale(1.2); }
+        }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+        @keyframes glow { 0%, 100% { box-shadow: 0 0 5px rgba(59, 130, 246, 0.5); } 50% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.8); } }
+        
+        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        .slide-in { animation: slideIn 0.3s ease-out forwards; }
+        .pulse { animation: pulse 0.3s ease-out; }
+        .score-pop { animation: scorePop 0.8s ease-out forwards; }
+        .shake { animation: shake 0.4s ease-out; }
+        .glow { animation: glow 2s ease-in-out infinite; }
+        
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+        }
+        .card:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+        
+        /* Gender/Age Selection */
+        .variant-card {
+            border: 3px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .variant-card:hover { border-color: #3b82f6; transform: translateY(-2px); }
+        .variant-card.selected { border-color: #3b82f6; background: #eff6ff; }
+        
+        /* Question buttons */
+        .question-btn {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 12px 16px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+        .question-btn:hover:not(:disabled) { border-color: #3b82f6; background: #f8fafc; }
+        .question-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        .question-btn.selected { border-color: #3b82f6; background: #eff6ff; }
+        .question-btn.excellent { border-color: #22c55e; background: #f0fdf4; }
+        .question-btn.good { border-color: #3b82f6; background: #eff6ff; }
+        .question-btn.fair { border-color: #f59e0b; background: #fffbeb; }
+        .question-btn.low-priority { border-color: #ef4444; background: #fef2f2; }
+        
+        /* Refinement buttons */
+        .refine-btn {
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+        .refine-btn.more { background: #dcfce7; color: #166534; }
+        .refine-btn.more:hover, .refine-btn.more.selected { background: #22c55e; color: white; }
+        .refine-btn.less { background: #fef3c7; color: #92400e; }
+        .refine-btn.less:hover, .refine-btn.less.selected { background: #f59e0b; color: white; }
+        .refine-btn.unchanged { background: #e5e7eb; color: #374151; }
+        .refine-btn.unchanged:hover, .refine-btn.unchanged.selected { background: #6b7280; color: white; }
+        .refine-btn.ruled-out { background: #fee2e2; color: #991b1b; }
+        .refine-btn.ruled-out:hover, .refine-btn.ruled-out.selected { background: #ef4444; color: white; }
+        
+        /* Findings card */
+        .finding-item {
+            background: #f8fafc;
+            border-left: 4px solid #3b82f6;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        /* Timer warning */
+        .timer-warning { animation: pulse 0.5s ease-in-out infinite; color: #ef4444; }
+        
+        /* Progress bar */
+        .progress-bar {
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transition: width 0.3s ease;
+        }
+        
+        /* Feedback badges */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .badge-excellent { background: #dcfce7; color: #166534; }
+        .badge-good { background: #dbeafe; color: #1e40af; }
+        .badge-fair { background: #fef3c7; color: #92400e; }
+        .badge-low { background: #fee2e2; color: #991b1b; }
+        .badge-correct { background: #dcfce7; color: #166534; }
+        .badge-incorrect { background: #fee2e2; color: #991b1b; }
+        .badge-partial { background: #fef3c7; color: #92400e; }
+        
+        /* Must not miss indicator */
+        .must-not-miss {
+            background: linear-gradient(135deg, #fef2f2, #fee2e2);
+            border: 2px solid #ef4444;
+        }
+        
+        /* Score popup */
+        .score-popup {
+            position: fixed;
+            font-weight: bold;
+            font-size: 24px;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        .score-popup.positive { color: #22c55e; }
+        .score-popup.negative { color: #ef4444; }
+        
+        /* HUD */
+        .game-hud {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: linear-gradient(135deg, #1e3a5f, #2d5a87);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        
+        /* Star rating */
+        .star { font-size: 48px; opacity: 0.3; transition: all 0.3s ease; }
+        .star.earned { opacity: 1; transform: scale(1.1); }
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script>
+        // ==================== GAME CONFIGURATION ====================
+        const LEVELS = [
+            { level: 1, title: "Medical Student", xpRequired: 0, icon: "📚" },
+            { level: 2, title: "Clinical Clerk", xpRequired: 500, icon: "🩺" },
+            { level: 3, title: "Sub-Intern", xpRequired: 1200, icon: "📋" },
+            { level: 4, title: "Intern", xpRequired: 2500, icon: "💉" },
+            { level: 5, title: "Resident", xpRequired: 4500, icon: "🔬" },
+            { level: 6, title: "Senior Resident", xpRequired: 7500, icon: "📊" },
+            { level: 7, title: "Chief Resident", xpRequired: 12000, icon: "⭐" },
+            { level: 8, title: "Attending", xpRequired: 18000, icon: "👨‍⚕️" },
+            { level: 9, title: "Master Diagnostician", xpRequired: 30000, icon: "🏆" },
+            { level: 10, title: "Legendary Clinician", xpRequired: 50000, icon: "👑" }
+        ];
+
+        const STAGE_TIME_LIMIT = 300; // 5 minutes per stage
+        const POINTS = {
+            excellent: 150,
+            good: 100,
+            fair: 50,
+            "low-priority": -50,
+            streakBonus: 25,
+            maxStreakMultiplier: 5,
+            mustNotMissBonus: 200,
+            mustNotMissPenalty: -150,
+            speedBonusMultiplier: 1.5,
+            refinementCorrect: 100,
+            refinementPartial: 50,
+            refinementIncorrect: -50,
+            incorrectRuledOut: -100
+        };
+
+        // ==================== CASE DATA ====================
+        const CASES = [
+            {
+                id: "epigastric-pain",
+                title: "Epigastric Pain",
+                category: "GI",
+                icon: "🔥",
+                
+                variants: {
+                    "male-58": {
+                        name: "R.H.",
+                        age: 58,
+                        gender: "male",
+                        genderDisplay: "Male",
+                        pronouns: { subject: "he", object: "him", possessive: "his", Subject: "He", Object: "Him", Possessive: "His" },
+                        chiefComplaint: "Burning stomach pain for 3 days",
+                        vitalSigns: "BP 145/88, HR 78, RR 16, Temp 98.6°F, SpO2 98%",
+                        
+                        initialDifferential: [
+                            { name: "GERD", mustNotMiss: false },
+                            { name: "Peptic Ulcer Disease (PUD)", mustNotMiss: false },
+                            { name: "Acute Myocardial Infarction", mustNotMiss: true },
+                            { name: "Acute Pancreatitis", mustNotMiss: false },
+                            { name: "Gastritis", mustNotMiss: false },
+                            { name: "Abdominal Aortic Aneurysm (AAA)", mustNotMiss: true },
+                            { name: "Biliary Colic/Cholecystitis", mustNotMiss: false },
+                            { name: "Esophageal Spasm", mustNotMiss: false }
+                        ],
+                        
+                        historyFindings: {
+                            "onset": { answer: "Started about 3 days ago, came on gradually over a few hours", displayed: false },
+                            "character": { answer: "It's a burning feeling, right here (points to epigastrium)", displayed: false },
+                            "severity": { answer: "I'd say about 6 out of 10, sometimes worse after eating", displayed: false },
+                            "radiation": { answer: "No, it pretty much stays in one spot", displayed: false },
+                            "timing": { answer: "It's there most of the time, but definitely worse after meals", displayed: false },
+                            "aggravating": { answer: "Eating makes it worse, especially spicy food or coffee", displayed: false },
+                            "alleviating": { answer: "Antacids help a little, but it comes back", displayed: false },
+                            "associated_nausea": { answer: "Yeah, I've felt a bit queasy, but no vomiting", displayed: false },
+                            "associated_vomiting": { answer: "No vomiting", displayed: false },
+                            "hematemesis": { answer: "No, nothing like that", displayed: false },
+                            "melena": { answer: "Actually, my stool has looked a bit darker lately", displayed: false },
+                            "weight_loss": { answer: "Maybe a few pounds, I haven't been eating as much", displayed: false },
+                            "dysphagia": { answer: "No trouble swallowing", displayed: false },
+                            "chest_pain": { answer: "No chest pain, just the stomach", displayed: false },
+                            "sob": { answer: "No shortness of breath", displayed: false },
+                            "diaphoresis": { answer: "No unusual sweating", displayed: false },
+                            "palpitations": { answer: "No", displayed: false },
+                            "nsaid_use": { answer: "Yeah, I take ibuprofen almost daily for my back - probably 4-6 tablets a day for the past few months", displayed: false },
+                            "alcohol": { answer: "I have a few beers most nights, maybe 3-4", displayed: false },
+                            "smoking": { answer: "Used to smoke, quit about 5 years ago. Smoked a pack a day for 30 years", displayed: false },
+                            "caffeine": { answer: "Lots of coffee, maybe 4-5 cups a day", displayed: false },
+                            "recent_travel": { answer: "No recent travel", displayed: false },
+                            "sick_contacts": { answer: "No one else sick at home", displayed: false },
+                            "prior_episodes": { answer: "I've had some heartburn before, but nothing this bad", displayed: false },
+                            "pmh_cardiac": { answer: "I have high blood pressure, take lisinopril for it", displayed: false },
+                            "pmh_gi": { answer: "No history of ulcers or GI problems", displayed: false },
+                            "pmh_diabetes": { answer: "No diabetes", displayed: false },
+                            "family_cardiac": { answer: "My dad had a heart attack at 65", displayed: false },
+                            "family_gi": { answer: "My mother had stomach problems, not sure exactly what", displayed: false },
+                            "family_cancer": { answer: "No cancer that I know of", displayed: false },
+                            "stress": { answer: "Work has been pretty stressful lately", displayed: false }
+                        },
+                        
+                        postHistoryRefinement: {
+                            "GERD": { correct: "more", rationale: "Burning quality, worse after eating, relieved partially by antacids, and high caffeine intake all support GERD." },
+                            "Peptic Ulcer Disease (PUD)": { correct: "more", rationale: "Daily NSAID use for months is a major risk factor. Dark stools suggest possible GI bleeding. Alcohol use adds risk." },
+                            "Acute Myocardial Infarction": { correct: "less", rationale: "Gradual onset over 3 days, burning quality, food-related symptoms, and no chest pain/SOB/diaphoresis make MI less likely - but don't rule it out given his age and risk factors." },
+                            "Acute Pancreatitis": { correct: "less", rationale: "No radiation to back, no severe constant pain, no vomiting. Alcohol use is a risk factor, but presentation doesn't fit classic pancreatitis." },
+                            "Gastritis": { correct: "more", rationale: "NSAIDs, alcohol, and coffee are all gastric irritants. Burning epigastric pain with nausea fits well." },
+                            "Abdominal Aortic Aneurysm (AAA)": { correct: "less", rationale: "Gradual onset, burning quality, and food-related pattern are atypical for AAA. However, age 58 with HTN and smoking history means we can't ignore it." },
+                            "Biliary Colic/Cholecystitis": { correct: "unchanged", rationale: "Pain worse after eating could fit, but burning quality and lack of RUQ focus make this less typical. Keep on differential." },
+                            "Esophageal Spasm": { correct: "less", rationale: "No dysphagia, no chest pain radiation. The constant nature doesn't fit typical spasm pattern." }
+                        },
+                        
+                        physicalFindings: {
+                            "general_appearance": { finding: "Alert, mildly uncomfortable, no acute distress", displayed: false },
+                            "vital_signs": { finding: "BP 145/88, HR 78, RR 16, Temp 98.6°F, SpO2 98% on RA", displayed: false },
+                            "cardiac_auscultation": { finding: "Regular rate and rhythm, no murmurs, rubs, or gallops", displayed: false },
+                            "lung_auscultation": { finding: "Clear to auscultation bilaterally", displayed: false },
+                            "abdominal_inspection": { finding: "Soft, non-distended, no visible masses or pulsations", displayed: false },
+                            "abdominal_auscultation": { finding: "Normal bowel sounds in all quadrants", displayed: false },
+                            "epigastric_palpation": { finding: "Moderate tenderness to palpation in epigastrium, no guarding or rebound", displayed: false },
+                            "ruq_palpation": { finding: "Mild tenderness, no Murphy's sign", displayed: false },
+                            "luq_palpation": { finding: "Non-tender", displayed: false },
+                            "llq_palpation": { finding: "Non-tender", displayed: false },
+                            "rlq_palpation": { finding: "Non-tender", displayed: false },
+                            "murphy_sign": { finding: "Negative", displayed: false },
+                            "rebound_tenderness": { finding: "Absent", displayed: false },
+                            "guarding": { finding: "Absent", displayed: false },
+                            "aortic_palpation": { finding: "No pulsatile mass appreciated", displayed: false },
+                            "cvat": { finding: "No costovertebral angle tenderness bilaterally", displayed: false },
+                            "rectal_exam": { finding: "Stool is dark brown, guaiac positive", displayed: false },
+                            "peripheral_pulses": { finding: "2+ bilateral, symmetric", displayed: false },
+                            "lower_extremity_edema": { finding: "No edema", displayed: false },
+                            "skin_exam": { finding: "No jaundice, no pallor", displayed: false }
+                        },
+                        
+                        postPhysicalRefinement: {
+                            "GERD": { correct: "unchanged", rationale: "Physical exam is often normal in GERD. Epigastric tenderness is non-specific." },
+                            "Peptic Ulcer Disease (PUD)": { correct: "more", rationale: "Guaiac positive stool confirms GI bleeding! Combined with NSAID use and epigastric tenderness, PUD/gastritis with bleeding is now top of differential." },
+                            "Acute Myocardial Infarction": { correct: "less", rationale: "Normal cardiac exam, stable vitals, no signs of heart failure. Still need EKG/troponin to definitively exclude." },
+                            "Acute Pancreatitis": { correct: "less", rationale: "No severe tenderness, no guarding. Exam doesn't support pancreatitis." },
+                            "Gastritis": { correct: "more", rationale: "Guaiac positive stool plus epigastric tenderness with NSAID/alcohol history strongly supports erosive gastritis." },
+                            "Abdominal Aortic Aneurysm (AAA)": { correct: "less", rationale: "No pulsatile mass on exam. AAA much less likely but would confirm with imaging in this age group." },
+                            "Biliary Colic/Cholecystitis": { correct: "less", rationale: "Negative Murphy's sign, minimal RUQ tenderness. Biliary pathology unlikely." },
+                            "Esophageal Spasm": { correct: "less", rationale: "GI bleeding doesn't fit esophageal spasm. Much less likely now." }
+                        },
+                        
+                        actualDiagnosis: {
+                            name: "NSAID-induced Gastritis with GI Bleeding",
+                            keyFindings: [
+                                "Daily NSAID use for months (major risk factor)",
+                                "Burning epigastric pain worse with eating",
+                                "Dark stools reported + guaiac positive (confirms GI bleed)",
+                                "Alcohol and caffeine as additional irritants",
+                                "Epigastric tenderness on exam"
+                            ],
+                            teachingPoints: [
+                                "NSAIDs inhibit prostaglandin synthesis, reducing gastric mucosal protection",
+                                "Always ask about OTC medication use - patients often don't consider these 'medications'",
+                                "Dark stools (melena) indicate upper GI bleeding - always do a rectal exam",
+                                "GI bleeding can be subtle - guaiac testing is essential",
+                                "Combination of NSAIDs + alcohol dramatically increases bleeding risk"
+                            ],
+                            workup: [
+                                "CBC (check for anemia from blood loss)",
+                                "BMP (renal function, electrolytes)",
+                                "EKG (rule out cardiac cause given age/risk factors)",
+                                "Troponin (if any concern for ACS)",
+                                "Upper endoscopy (EGD) - gold standard for diagnosis and treatment"
+                            ]
+                        }
+                    },
+                    
+                    "female-58": {
+                        name: "R.H.",
+                        age: 58,
+                        gender: "female",
+                        genderDisplay: "Female (Post-menopausal)",
+                        pronouns: { subject: "she", object: "her", possessive: "her", Subject: "She", Object: "Her", Possessive: "Her" },
+                        chiefComplaint: "Burning stomach pain for 3 days",
+                        vitalSigns: "BP 142/86, HR 82, RR 16, Temp 98.4°F, SpO2 98%",
+                        
+                        initialDifferential: [
+                            { name: "GERD", mustNotMiss: false },
+                            { name: "Peptic Ulcer Disease (PUD)", mustNotMiss: false },
+                            { name: "Acute Myocardial Infarction", mustNotMiss: true },
+                            { name: "Acute Pancreatitis", mustNotMiss: false },
+                            { name: "Gastritis", mustNotMiss: false },
+                            { name: "Abdominal Aortic Aneurysm (AAA)", mustNotMiss: true },
+                            { name: "Biliary Colic/Cholecystitis", mustNotMiss: false },
+                            { name: "Esophageal Spasm", mustNotMiss: false }
+                        ],
+                        
+                        historyFindings: {
+                            "onset": { answer: "Started about 3 days ago, came on gradually over a few hours", displayed: false },
+                            "character": { answer: "It's a burning feeling, right here (points to epigastrium)", displayed: false },
+                            "severity": { answer: "I'd say about 6 out of 10, sometimes worse after eating", displayed: false },
+                            "radiation": { answer: "No, it pretty much stays in one spot", displayed: false },
+                            "timing": { answer: "It's there most of the time, but definitely worse after meals", displayed: false },
+                            "aggravating": { answer: "Eating makes it worse, especially spicy food or coffee", displayed: false },
+                            "alleviating": { answer: "Antacids help a little, but it comes back", displayed: false },
+                            "associated_nausea": { answer: "Yeah, I've felt a bit queasy, but no vomiting", displayed: false },
+                            "associated_vomiting": { answer: "No vomiting", displayed: false },
+                            "hematemesis": { answer: "No, nothing like that", displayed: false },
+                            "melena": { answer: "Actually, my stool has looked a bit darker lately", displayed: false },
+                            "weight_loss": { answer: "Maybe a few pounds, I haven't been eating as much", displayed: false },
+                            "dysphagia": { answer: "No trouble swallowing", displayed: false },
+                            "chest_pain": { answer: "No chest pain, just the stomach", displayed: false },
+                            "sob": { answer: "No shortness of breath", displayed: false },
+                            "diaphoresis": { answer: "No unusual sweating", displayed: false },
+                            "palpitations": { answer: "No", displayed: false },
+                            "nsaid_use": { answer: "Yeah, I take ibuprofen almost daily for my arthritis - probably 4-6 tablets a day for the past few months", displayed: false },
+                            "alcohol": { answer: "Just wine with dinner, maybe a glass or two", displayed: false },
+                            "smoking": { answer: "Never smoked", displayed: false },
+                            "caffeine": { answer: "Lots of coffee, maybe 4-5 cups a day", displayed: false },
+                            "recent_travel": { answer: "No recent travel", displayed: false },
+                            "sick_contacts": { answer: "No one else sick at home", displayed: false },
+                            "prior_episodes": { answer: "I've had some heartburn before, but nothing this bad", displayed: false },
+                            "pmh_cardiac": { answer: "I have high blood pressure and high cholesterol", displayed: false },
+                            "pmh_gi": { answer: "No history of ulcers or GI problems", displayed: false },
+                            "pmh_diabetes": { answer: "No diabetes", displayed: false },
+                            "menstrual": { answer: "I went through menopause about 6 years ago", displayed: false },
+                            "family_cardiac": { answer: "My mother had a heart attack at 70", displayed: false },
+                            "family_gi": { answer: "No GI problems in my family", displayed: false },
+                            "family_cancer": { answer: "No cancer that I know of", displayed: false },
+                            "stress": { answer: "Work has been pretty stressful lately", displayed: false }
+                        },
+                        
+                        postHistoryRefinement: {
+                            "GERD": { correct: "more", rationale: "Burning quality, worse after eating, relieved partially by antacids, and high caffeine intake all support GERD." },
+                            "Peptic Ulcer Disease (PUD)": { correct: "more", rationale: "Daily NSAID use for months is a major risk factor. Dark stools suggest possible GI bleeding." },
+                            "Acute Myocardial Infarction": { correct: "unchanged", rationale: "Women often have atypical MI presentations - epigastric pain, nausea, and fatigue can BE the presentation. HTN and hyperlipidemia are risk factors. Post-menopausal women lose cardioprotective effect of estrogen. Keep high on differential!" },
+                            "Acute Pancreatitis": { correct: "less", rationale: "No radiation to back, no severe constant pain, no vomiting. Low alcohol use. Doesn't fit classic pancreatitis." },
+                            "Gastritis": { correct: "more", rationale: "NSAIDs and coffee are gastric irritants. Burning epigastric pain with nausea fits well." },
+                            "Abdominal Aortic Aneurysm (AAA)": { correct: "less", rationale: "Much less common in women, and no smoking history. Gradual onset with food-related pattern atypical." },
+                            "Biliary Colic/Cholecystitis": { correct: "unchanged", rationale: "Women have higher incidence of gallbladder disease. Pain worse after eating could fit. Keep on differential." },
+                            "Esophageal Spasm": { correct: "less", rationale: "No dysphagia, no chest pain radiation. The constant nature doesn't fit typical spasm pattern." }
+                        },
+                        
+                        physicalFindings: {
+                            "general_appearance": { finding: "Alert, mildly uncomfortable, no acute distress", displayed: false },
+                            "vital_signs": { finding: "BP 142/86, HR 82, RR 16, Temp 98.4°F, SpO2 98% on RA", displayed: false },
+                            "cardiac_auscultation": { finding: "Regular rate and rhythm, no murmurs, rubs, or gallops", displayed: false },
+                            "lung_auscultation": { finding: "Clear to auscultation bilaterally", displayed: false },
+                            "abdominal_inspection": { finding: "Soft, non-distended, no visible masses", displayed: false },
+                            "abdominal_auscultation": { finding: "Normal bowel sounds in all quadrants", displayed: false },
+                            "epigastric_palpation": { finding: "Moderate tenderness to palpation in epigastrium, no guarding or rebound", displayed: false },
+                            "ruq_palpation": { finding: "Mild tenderness, no Murphy's sign", displayed: false },
+                            "luq_palpation": { finding: "Non-tender", displayed: false },
+                            "llq_palpation": { finding: "Non-tender", displayed: false },
+                            "rlq_palpation": { finding: "Non-tender", displayed: false },
+                            "murphy_sign": { finding: "Negative", displayed: false },
+                            "rebound_tenderness": { finding: "Absent", displayed: false },
+                            "guarding": { finding: "Absent", displayed: false },
+                            "cvat": { finding: "No costovertebral angle tenderness bilaterally", displayed: false },
+                            "rectal_exam": { finding: "Stool is dark brown, guaiac positive", displayed: false },
+                            "peripheral_pulses": { finding: "2+ bilateral, symmetric", displayed: false },
+                            "lower_extremity_edema": { finding: "Trace bilateral ankle edema", displayed: false },
+                            "skin_exam": { finding: "No jaundice, mild pallor", displayed: false }
+                        },
+                        
+                        postPhysicalRefinement: {
+                            "GERD": { correct: "unchanged", rationale: "Physical exam is often normal in GERD. Epigastric tenderness is non-specific." },
+                            "Peptic Ulcer Disease (PUD)": { correct: "more", rationale: "Guaiac positive stool confirms GI bleeding! Combined with NSAID use, pallor, and epigastric tenderness, PUD/gastritis with bleeding is now top of differential." },
+                            "Acute Myocardial Infarction": { correct: "unchanged", rationale: "Pallor and trace edema could suggest anemia from GI bleed OR could be subtle heart failure. EKG and troponin essential. Don't lower this diagnosis yet!" },
+                            "Acute Pancreatitis": { correct: "less", rationale: "No severe tenderness, no guarding. Exam doesn't support pancreatitis." },
+                            "Gastritis": { correct: "more", rationale: "Guaiac positive stool plus epigastric tenderness with NSAID history strongly supports erosive gastritis." },
+                            "Abdominal Aortic Aneurysm (AAA)": { correct: "ruled-out", rationale: "Very rare in non-smoking women. No pulsatile mass. Can reasonably exclude." },
+                            "Biliary Colic/Cholecystitis": { correct: "less", rationale: "Negative Murphy's sign, minimal RUQ tenderness. Biliary pathology unlikely." },
+                            "Esophageal Spasm": { correct: "less", rationale: "GI bleeding doesn't fit esophageal spasm. Much less likely now." }
+                        },
+                        
+                        actualDiagnosis: {
+                            name: "NSAID-induced Gastritis with GI Bleeding",
+                            keyFindings: [
+                                "Daily NSAID use for months (major risk factor)",
+                                "Burning epigastric pain worse with eating",
+                                "Dark stools reported + guaiac positive (confirms GI bleed)",
+                                "Pallor on exam suggesting anemia",
+                                "Epigastric tenderness on exam"
+                            ],
+                            teachingPoints: [
+                                "NSAIDs inhibit prostaglandin synthesis, reducing gastric mucosal protection",
+                                "Women can have atypical MI presentations - always maintain appropriate suspicion with risk factors",
+                                "Dark stools (melena) indicate upper GI bleeding - always do a rectal exam",
+                                "Pallor may be the only physical sign of significant blood loss",
+                                "Post-menopausal women lose cardiovascular protection - treat cardiac risk factors seriously"
+                            ],
+                            workup: [
+                                "CBC (check for anemia from blood loss)",
+                                "BMP (renal function, electrolytes)",
+                                "EKG (important in women with atypical symptoms)",
+                                "Troponin (rule out ACS - women have atypical presentations)",
+                                "Upper endoscopy (EGD) - gold standard for diagnosis and treatment"
+                            ]
+                        }
+                    },
+                    
+                    "female-28": {
+                        name: "R.H.",
+                        age: 28,
+                        gender: "female",
+                        genderDisplay: "Female (Reproductive Age)",
+                        pronouns: { subject: "she", object: "her", possessive: "her", Subject: "She", Object: "Her", Possessive: "Her" },
+                        chiefComplaint: "Burning stomach pain for 3 days",
+                        vitalSigns: "BP 118/72, HR 88, RR 16, Temp 98.8°F, SpO2 99%",
+                        
+                        initialDifferential: [
+                            { name: "GERD", mustNotMiss: false },
+                            { name: "Peptic Ulcer Disease (PUD)", mustNotMiss: false },
+                            { name: "Gastritis", mustNotMiss: false },
+                            { name: "Ectopic Pregnancy", mustNotMiss: true },
+                            { name: "Biliary Colic/Cholecystitis", mustNotMiss: false },
+                            { name: "Acute Pancreatitis", mustNotMiss: false },
+                            { name: "Ovarian Pathology (Cyst/Torsion)", mustNotMiss: true },
+                            { name: "Acute Myocardial Infarction", mustNotMiss: true },
+                            { name: "Esophageal Spasm", mustNotMiss: false }
+                        ],
+                        
+                        historyFindings: {
+                            "onset": { answer: "Started about 3 days ago, came on gradually", displayed: false },
+                            "character": { answer: "It's a burning feeling, mostly right here (points to epigastrium)", displayed: false },
+                            "severity": { answer: "Maybe 5 out of 10, worse after I eat", displayed: false },
+                            "radiation": { answer: "No, stays in one spot", displayed: false },
+                            "timing": { answer: "It's there on and off, worse after meals", displayed: false },
+                            "aggravating": { answer: "Eating makes it worse, especially coffee and spicy food", displayed: false },
+                            "alleviating": { answer: "Tums help a little bit", displayed: false },
+                            "associated_nausea": { answer: "Yes, I've been feeling nauseous, especially in the mornings", displayed: false },
+                            "associated_vomiting": { answer: "I threw up once yesterday morning", displayed: false },
+                            "hematemesis": { answer: "No blood when I vomited", displayed: false },
+                            "melena": { answer: "No, my stool looks normal", displayed: false },
+                            "weight_loss": { answer: "No weight loss", displayed: false },
+                            "dysphagia": { answer: "No trouble swallowing", displayed: false },
+                            "chest_pain": { answer: "No chest pain", displayed: false },
+                            "sob": { answer: "No shortness of breath", displayed: false },
+                            "lmp": { answer: "Um, let me think... it's been about 6 weeks? Maybe 7? I'm usually pretty regular but I've been stressed", displayed: false },
+                            "pregnancy_possible": { answer: "I mean, I guess it's possible. I'm not on birth control right now", displayed: false },
+                            "vaginal_bleeding": { answer: "No bleeding or spotting", displayed: false },
+                            "vaginal_discharge": { answer: "Nothing unusual", displayed: false },
+                            "dysuria": { answer: "No pain with urination", displayed: false },
+                            "sexual_history": { answer: "I'm sexually active with my boyfriend", displayed: false },
+                            "contraception": { answer: "We use condoms but not always consistently", displayed: false },
+                            "prior_pregnancies": { answer: "Never been pregnant before", displayed: false },
+                            "nsaid_use": { answer: "Sometimes ibuprofen for cramps, but not recently", displayed: false },
+                            "alcohol": { answer: "Socially on weekends, maybe a few drinks", displayed: false },
+                            "smoking": { answer: "No, never smoked", displayed: false },
+                            "caffeine": { answer: "A lot of coffee, probably 4-5 cups a day with finals coming up", displayed: false },
+                            "stress": { answer: "Yes, I'm in grad school and finals are in two weeks", displayed: false },
+                            "pmh_gi": { answer: "I've had heartburn before during stressful times", displayed: false },
+                            "pmh_gyn": { answer: "No gynecologic problems, normal periods usually", displayed: false }
+                        },
+                        
+                        postHistoryRefinement: {
+                            "GERD": { correct: "more", rationale: "Burning quality, coffee intake, stress, worse with eating, helped by antacids - classic GERD symptoms." },
+                            "Peptic Ulcer Disease (PUD)": { correct: "unchanged", rationale: "No regular NSAID use, young age. Less likely but high caffeine could contribute." },
+                            "Gastritis": { correct: "more", rationale: "Stress and high caffeine intake during finals are risk factors. Burning pain fits." },
+                            "Ectopic Pregnancy": { correct: "more", rationale: "CRITICAL: Last menstrual period 6-7 weeks ago in a sexually active woman with inconsistent contraception. Morning nausea and vomiting. MUST rule out ectopic pregnancy!" },
+                            "Biliary Colic/Cholecystitis": { correct: "unchanged", rationale: "Young women can have gallbladder disease. Pain with eating could fit. Keep on differential." },
+                            "Acute Pancreatitis": { correct: "less", rationale: "No significant alcohol use, no severe pain, no radiation to back. Less likely." },
+                            "Ovarian Pathology (Cyst/Torsion)": { correct: "less", rationale: "Pain is epigastric, not pelvic. No acute severe onset. Less likely but need to consider given delayed LMP." },
+                            "Acute Myocardial Infarction": { correct: "less", rationale: "Age 28 with no risk factors. Very unlikely but technically possible." },
+                            "Esophageal Spasm": { correct: "less", rationale: "No dysphagia, no chest pain. Pattern doesn't fit." }
+                        },
+                        
+                        physicalFindings: {
+                            "general_appearance": { finding: "Alert, mildly uncomfortable, appears anxious", displayed: false },
+                            "vital_signs": { finding: "BP 118/72, HR 88, RR 16, Temp 98.8°F, SpO2 99% on RA", displayed: false },
+                            "cardiac_auscultation": { finding: "Regular rate and rhythm, no murmurs", displayed: false },
+                            "lung_auscultation": { finding: "Clear to auscultation bilaterally", displayed: false },
+                            "abdominal_inspection": { finding: "Flat, soft, no distension", displayed: false },
+                            "abdominal_auscultation": { finding: "Normal bowel sounds", displayed: false },
+                            "epigastric_palpation": { finding: "Mild tenderness in epigastrium, no guarding", displayed: false },
+                            "ruq_palpation": { finding: "Non-tender, no Murphy's sign", displayed: false },
+                            "luq_palpation": { finding: "Non-tender", displayed: false },
+                            "suprapubic_palpation": { finding: "Non-tender, no masses", displayed: false },
+                            "llq_palpation": { finding: "Non-tender", displayed: false },
+                            "rlq_palpation": { finding: "Non-tender", displayed: false },
+                            "murphy_sign": { finding: "Negative", displayed: false },
+                            "rebound_tenderness": { finding: "Absent", displayed: false },
+                            "guarding": { finding: "Absent", displayed: false },
+                            "cvat": { finding: "No costovertebral angle tenderness", displayed: false },
+                            "pelvic_exam": { finding: "Cervix closed, no cervical motion tenderness, no adnexal masses or tenderness, small amount of white discharge", displayed: false },
+                            "urine_pregnancy": { finding: "POSITIVE", displayed: false },
+                            "breast_exam": { finding: "Mild bilateral breast tenderness, no masses", displayed: false }
+                        },
+                        
+                        postPhysicalRefinement: {
+                            "GERD": { correct: "less", rationale: "While symptoms fit, the positive pregnancy test changes everything. Morning sickness and pregnancy-related reflux are now the more likely explanation." },
+                            "Peptic Ulcer Disease (PUD)": { correct: "less", rationale: "Positive pregnancy test makes this less relevant as the primary diagnosis." },
+                            "Gastritis": { correct: "less", rationale: "Symptoms now better explained by early pregnancy." },
+                            "Ectopic Pregnancy": { correct: "more", rationale: "POSITIVE PREGNANCY TEST with 6-7 weeks LMP. No adnexal tenderness or CMT is reassuring but does NOT rule out ectopic. Need quantitative hCG and transvaginal ultrasound URGENTLY." },
+                            "Biliary Colic/Cholecystitis": { correct: "ruled-out", rationale: "Negative Murphy's, non-tender RUQ, and positive pregnancy test redirects diagnosis." },
+                            "Acute Pancreatitis": { correct: "ruled-out", rationale: "Benign abdominal exam, no severe pain. Not pancreatitis." },
+                            "Ovarian Pathology (Cyst/Torsion)": { correct: "less", rationale: "No adnexal tenderness or masses. Ovarian pathology less likely." },
+                            "Acute Myocardial Infarction": { correct: "ruled-out", rationale: "Age 28, positive pregnancy test, no risk factors. Can exclude MI." },
+                            "Esophageal Spasm": { correct: "ruled-out", rationale: "Symptoms explained by pregnancy. Not esophageal spasm." }
+                        },
+                        
+                        actualDiagnosis: {
+                            name: "Early Intrauterine Pregnancy with Pregnancy-Related Nausea (must rule out Ectopic Pregnancy)",
+                            keyFindings: [
+                                "Positive urine pregnancy test",
+                                "Last menstrual period 6-7 weeks ago",
+                                "Morning nausea and vomiting (classic first trimester symptoms)",
+                                "Sexually active with inconsistent contraception",
+                                "No adnexal tenderness or cervical motion tenderness (reassuring but not definitive)"
+                            ],
+                            teachingPoints: [
+                                "ALWAYS check pregnancy test in reproductive-age females with abdominal pain/nausea",
+                                "Ectopic pregnancy can present before rupture with minimal symptoms - don't be falsely reassured",
+                                "A negative pelvic exam does NOT rule out ectopic pregnancy",
+                                "Quantitative β-hCG + transvaginal ultrasound is the workup for pregnancy of unknown location",
+                                "β-hCG > 1500-2000 should show intrauterine pregnancy on TVUS; if not seen, suspect ectopic",
+                                "Morning nausea, breast tenderness, and food aversions are common early pregnancy symptoms"
+                            ],
+                            workup: [
+                                "Quantitative β-hCG level",
+                                "Transvaginal ultrasound (confirm IUP vs ectopic)",
+                                "Blood type and Rh status",
+                                "If ectopic suspected: serial β-hCG levels q48h (should double in normal IUP)",
+                                "CBC, BMP (baseline)"
+                            ]
+                        }
+                    }
+                },
+                
+                // History questions - available based on variant
+                historyQuestions: [
+                    // HPI - Onset/Character/Severity
+                    { id: "onset", text: "When did this pain start?", quality: "excellent", category: "HPI", forAll: true },
+                    { id: "character", text: "Can you describe the pain? What does it feel like?", quality: "excellent", category: "HPI", forAll: true },
+                    { id: "severity", text: "On a scale of 1-10, how bad is the pain?", quality: "good", category: "HPI", forAll: true },
+                    { id: "radiation", text: "Does the pain go anywhere else?", quality: "excellent", category: "HPI", forAll: true },
+                    { id: "timing", text: "Is the pain constant or does it come and go?", quality: "good", category: "HPI", forAll: true },
+                    { id: "aggravating", text: "What makes the pain worse?", quality: "excellent", category: "HPI", forAll: true },
+                    { id: "alleviating", text: "What makes the pain better?", quality: "excellent", category: "HPI", forAll: true },
+                    
+                    // Associated symptoms - GI
+                    { id: "associated_nausea", text: "Have you had any nausea?", quality: "excellent", category: "Associated", forAll: true },
+                    { id: "associated_vomiting", text: "Have you had any vomiting?", quality: "excellent", category: "Associated", forAll: true },
+                    { id: "hematemesis", text: "Have you vomited any blood?", quality: "excellent", category: "Associated", forAll: true },
+                    { id: "melena", text: "Have you noticed any dark or bloody stools?", quality: "excellent", category: "Associated", forAll: true },
+                    { id: "weight_loss", text: "Have you had any unintentional weight loss?", quality: "good", category: "Associated", forAll: true },
+                    { id: "dysphagia", text: "Do you have trouble swallowing?", quality: "good", category: "Associated", forAll: true },
+                    
+                    // Associated symptoms - Cardiac
+                    { id: "chest_pain", text: "Have you had any chest pain?", quality: "excellent", category: "Associated", forAll: true },
+                    { id: "sob", text: "Have you had any shortness of breath?", quality: "excellent", category: "Associated", forAll: true },
+                    { id: "diaphoresis", text: "Have you had any unusual sweating?", quality: "good", category: "Associated", forAll: true },
+                    { id: "palpitations", text: "Have you felt your heart racing or skipping beats?", quality: "fair", category: "Associated", forAll: true },
+                    
+                    // GYN History - Female only
+                    { id: "lmp", text: "When was your last menstrual period?", quality: "excellent", category: "GYN", forFemaleReproductive: true },
+                    { id: "pregnancy_possible", text: "Is there any chance you could be pregnant?", quality: "excellent", category: "GYN", forFemaleReproductive: true },
+                    { id: "vaginal_bleeding", text: "Have you had any vaginal bleeding or spotting?", quality: "excellent", category: "GYN", forFemaleReproductive: true },
+                    { id: "vaginal_discharge", text: "Have you noticed any unusual vaginal discharge?", quality: "good", category: "GYN", forFemaleReproductive: true },
+                    { id: "dysuria", text: "Do you have any pain or burning with urination?", quality: "good", category: "GYN", forFemaleReproductive: true },
+                    { id: "sexual_history", text: "Are you sexually active?", quality: "excellent", category: "GYN", forFemaleReproductive: true },
+                    { id: "contraception", text: "What form of contraception do you use?", quality: "excellent", category: "GYN", forFemaleReproductive: true },
+                    { id: "prior_pregnancies", text: "Have you ever been pregnant before?", quality: "good", category: "GYN", forFemaleReproductive: true },
+                    { id: "menstrual", text: "Tell me about your menstrual history", quality: "fair", category: "GYN", forFemalePostmenopausal: true },
+                    
+                    // Social History
+                    { id: "nsaid_use", text: "Do you take any anti-inflammatory medications like ibuprofen or aspirin?", quality: "excellent", category: "Social", forAll: true },
+                    { id: "alcohol", text: "How much alcohol do you drink?", quality: "excellent", category: "Social", forAll: true },
+                    { id: "smoking", text: "Do you smoke or have you ever smoked?", quality: "good", category: "Social", forAll: true },
+                    { id: "caffeine", text: "How much caffeine do you consume daily?", quality: "good", category: "Social", forAll: true },
+                    { id: "recent_travel", text: "Have you traveled recently?", quality: "low-priority", category: "Social", forAll: true },
+                    { id: "sick_contacts", text: "Has anyone around you been sick?", quality: "low-priority", category: "Social", forAll: true },
+                    { id: "stress", text: "Have you been under any unusual stress?", quality: "fair", category: "Social", forAll: true },
+                    
+                    // Past Medical History
+                    { id: "prior_episodes", text: "Have you had anything like this before?", quality: "good", category: "PMH", forAll: true },
+                    { id: "pmh_cardiac", text: "Do you have any heart problems or high blood pressure?", quality: "excellent", category: "PMH", forAll: true },
+                    { id: "pmh_gi", text: "Do you have any history of stomach problems or ulcers?", quality: "excellent", category: "PMH", forAll: true },
+                    { id: "pmh_diabetes", text: "Do you have diabetes?", quality: "good", category: "PMH", forAll: true },
+                    { id: "pmh_gyn", text: "Do you have any gynecologic conditions?", quality: "good", category: "PMH", forFemale: true },
+                    
+                    // Family History
+                    { id: "family_cardiac", text: "Does anyone in your family have heart disease?", quality: "good", category: "FH", forAll: true },
+                    { id: "family_gi", text: "Does anyone in your family have stomach or GI problems?", quality: "fair", category: "FH", forAll: true },
+                    { id: "family_cancer", text: "Is there any cancer in your family?", quality: "fair", category: "FH", forAll: true }
+                ],
+                
+                // Physical exam maneuvers
+                physicalExamManeuvers: [
+                    { id: "general_appearance", text: "Assess general appearance", quality: "excellent", category: "General", forAll: true },
+                    { id: "vital_signs", text: "Review vital signs", quality: "excellent", category: "General", forAll: true },
+                    { id: "cardiac_auscultation", text: "Auscultate heart", quality: "excellent", category: "Cardiac", forAll: true },
+                    { id: "lung_auscultation", text: "Auscultate lungs", quality: "good", category: "Pulmonary", forAll: true },
+                    { id: "abdominal_inspection", text: "Inspect abdomen", quality: "excellent", category: "Abdominal", forAll: true },
+                    { id: "abdominal_auscultation", text: "Auscultate bowel sounds", quality: "good", category: "Abdominal", forAll: true },
+                    { id: "epigastric_palpation", text: "Palpate epigastrium", quality: "excellent", category: "Abdominal", forAll: true },
+                    { id: "ruq_palpation", text: "Palpate right upper quadrant", quality: "excellent", category: "Abdominal", forAll: true },
+                    { id: "luq_palpation", text: "Palpate left upper quadrant", quality: "good", category: "Abdominal", forAll: true },
+                    { id: "suprapubic_palpation", text: "Palpate suprapubic region", quality: "good", category: "Abdominal", forFemale: true },
+                    { id: "llq_palpation", text: "Palpate left lower quadrant", quality: "fair", category: "Abdominal", forAll: true },
+                    { id: "rlq_palpation", text: "Palpate right lower quadrant", quality: "fair", category: "Abdominal", forAll: true },
+                    { id: "murphy_sign", text: "Check Murphy's sign", quality: "excellent", category: "Abdominal", forAll: true },
+                    { id: "rebound_tenderness", text: "Check for rebound tenderness", quality: "excellent", category: "Abdominal", forAll: true },
+                    { id: "guarding", text: "Assess for guarding", quality: "excellent", category: "Abdominal", forAll: true },
+                    { id: "aortic_palpation", text: "Palpate for aortic pulsation", quality: "excellent", category: "Abdominal", forMale: true },
+                    { id: "aortic_palpation", text: "Palpate for aortic pulsation", quality: "fair", category: "Abdominal", forFemale: true },
+                    { id: "cvat", text: "Check costovertebral angle tenderness", quality: "good", category: "Back", forAll: true },
+                    { id: "rectal_exam", text: "Perform rectal examination", quality: "excellent", category: "Rectal", forAll: true },
+                    { id: "pelvic_exam", text: "Perform pelvic examination", quality: "excellent", category: "GYN", forFemaleReproductive: true },
+                    { id: "urine_pregnancy", text: "Check urine pregnancy test", quality: "excellent", category: "GYN", forFemaleReproductive: true },
+                    { id: "breast_exam", text: "Perform breast examination", quality: "fair", category: "GYN", forFemaleReproductive: true },
+                    { id: "peripheral_pulses", text: "Check peripheral pulses", quality: "good", category: "Vascular", forAll: true },
+                    { id: "lower_extremity_edema", text: "Check for lower extremity edema", quality: "good", category: "Vascular", forAll: true },
+                    { id: "skin_exam", text: "Examine skin (jaundice, pallor)", quality: "good", category: "General", forAll: true }
+                ]
+            }
+        ];
+
+        // ==================== GAME STATE ====================
+        let state = {
+            screen: 'menu', // menu, variantSelect, case, results, profile, achievements
+            mode: 'practice', // practice, game
+            currentCase: null,
+            currentVariant: null,
+            variantKey: null,
+            stage: 'differential', // differential, history, historyFindings, refinement1, physical, physicalFindings, refinement2, diagnosis
+            
+            // Selections
+            selectedDifferential: [],
+            selectedHistory: [],
+            selectedPhysical: [],
+            refinement1: {}, // { diagnosisName: 'more'|'less'|'unchanged'|'ruled-out' }
+            refinement2: {},
+            
+            // Scoring
+            score: 0,
+            streak: 0,
+            maxStreak: 0,
+            stageStartTime: null,
+            stageTimeRemaining: STAGE_TIME_LIMIT,
+            timerInterval: null,
+            
+            // Player stats (persisted)
+            stats: {
+                totalXp: 0,
+                totalPoints: 0,
+                casesCompleted: 0,
+                badges: [],
+                caseScores: {}
+            }
+        };
+
+        // ==================== UTILITY FUNCTIONS ====================
+        function loadStats() {
+            const saved = localStorage.getItem('clinicalReasoningStats');
+            if (saved) {
+                state.stats = JSON.parse(saved);
+            }
+        }
+
+        function saveStats() {
+            localStorage.setItem('clinicalReasoningStats', JSON.stringify(state.stats));
+        }
+
+        function getLevelInfo(xp) {
+            let currentLevel = LEVELS[0];
+            let nextLevel = LEVELS[1];
+            
+            for (let i = LEVELS.length - 1; i >= 0; i--) {
+                if (xp >= LEVELS[i].xpRequired) {
+                    currentLevel = LEVELS[i];
+                    nextLevel = LEVELS[i + 1] || null;
+                    break;
+                }
+            }
+            
+            const progress = nextLevel 
+                ? ((xp - currentLevel.xpRequired) / (nextLevel.xpRequired - currentLevel.xpRequired)) * 100
+                : 100;
+            
+            return { current: currentLevel, next: nextLevel, progress };
+        }
+
+        function getAvailableQuestions(questions, variantKey) {
+            return questions.filter(q => {
+                if (q.forAll) return true;
+                if (q.forMale && variantKey.includes('male')) return true;
+                if (q.forFemale && variantKey.includes('female')) return true;
+                if (q.forFemaleReproductive && variantKey === 'female-28') return true;
+                if (q.forFemalePostmenopausal && variantKey === 'female-58') return true;
+                return false;
+            });
+        }
+
+        function showScorePopup(points, x, y) {
+            if (state.mode !== 'game') return;
+            
+            const popup = document.createElement('div');
+            popup.className = `score-popup score-pop ${points >= 0 ? 'positive' : 'negative'}`;
+            popup.textContent = points >= 0 ? `+${points}` : points;
+            popup.style.left = `${x}px`;
+            popup.style.top = `${y}px`;
+            document.body.appendChild(popup);
+            
+            setTimeout(() => popup.remove(), 800);
+        }
+
+        function startTimer() {
+            if (state.mode !== 'game') return;
+            
+            state.stageStartTime = Date.now();
+            state.stageTimeRemaining = STAGE_TIME_LIMIT;
+            
+            if (state.timerInterval) clearInterval(state.timerInterval);
+            
+            state.timerInterval = setInterval(() => {
+                const elapsed = Math.floor((Date.now() - state.stageStartTime) / 1000);
+                state.stageTimeRemaining = Math.max(0, STAGE_TIME_LIMIT - elapsed);
+                
+                // Update timer display
+                const timerEl = document.getElementById('timer');
+                if (timerEl) {
+                    const mins = Math.floor(state.stageTimeRemaining / 60);
+                    const secs = state.stageTimeRemaining % 60;
+                    timerEl.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+                    timerEl.className = state.stageTimeRemaining < 60 ? 'timer-warning font-bold' : 'font-bold';
+                }
+                
+                if (state.stageTimeRemaining <= 0) {
+                    clearInterval(state.timerInterval);
+                    advanceStage();
+                }
+            }, 1000);
+        }
+
+        function stopTimer() {
+            if (state.timerInterval) {
+                clearInterval(state.timerInterval);
+                state.timerInterval = null;
+            }
+        }
+
+        // ==================== RENDER FUNCTIONS ====================
+        function render() {
+            const app = document.getElementById('app');
+            
+            switch(state.screen) {
+                case 'menu':
+                    app.innerHTML = renderMenu();
+                    break;
+                case 'variantSelect':
+                    app.innerHTML = renderVariantSelect();
+                    break;
+                case 'case':
+                    app.innerHTML = renderCase();
+                    break;
+                case 'results':
+                    app.innerHTML = renderResults();
+                    break;
+                case 'profile':
+                    app.innerHTML = renderProfile();
+                    break;
+                default:
+                    app.innerHTML = renderMenu();
+            }
+        }
+
+        function renderMenu() {
+            const level = getLevelInfo(state.stats.totalXp);
+            
+            return `
+                <div class="min-h-screen p-6">
+                    <div class="max-w-4xl mx-auto">
+                        <!-- Header -->
+                        <div class="text-center mb-8 pt-8">
+                            <h1 class="text-4xl font-bold text-white mb-2">🩺 Clinical Reasoning Tool</h1>
+                            <p class="text-blue-200">Enhanced Edition with Differential Refinement</p>
+                        </div>
+                        
+                        <!-- Mode Selection -->
+                        <div class="grid md:grid-cols-2 gap-6 mb-8">
+                            <div class="card p-6 cursor-pointer hover:ring-4 ring-green-400" onclick="selectMode('game')">
+                                <div class="text-4xl mb-3">🎮</div>
+                                <h2 class="text-xl font-bold text-gray-800 mb-2">Game Mode</h2>
+                                <p class="text-gray-600 text-sm mb-4">Timed challenges, earn points, level up!</p>
+                                <div class="flex gap-2">
+                                    <span class="badge badge-excellent">⏱️ Timed</span>
+                                    <span class="badge" style="background:#fef3c7;color:#92400e">🏆 XP</span>
+                                </div>
+                            </div>
+                            
+                            <div class="card p-6 cursor-pointer hover:ring-4 ring-blue-400" onclick="selectMode('practice')">
+                                <div class="text-4xl mb-3">📚</div>
+                                <h2 class="text-xl font-bold text-gray-800 mb-2">Practice Mode</h2>
+                                <p class="text-gray-600 text-sm mb-4">Learn at your own pace, no pressure</p>
+                                <div class="flex gap-2">
+                                    <span class="badge badge-good">Self-Paced</span>
+                                    <span class="badge" style="background:#e5e7eb;color:#374151">Feedback</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Stats Card -->
+                        <div class="card p-6 mb-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="font-bold text-gray-800">Your Progress</h3>
+                                <button onclick="showProfile()" class="text-blue-600 text-sm font-semibold hover:underline">View Profile →</button>
+                            </div>
+                            <div class="grid grid-cols-4 gap-4 text-center">
+                                <div>
+                                    <div class="text-2xl font-bold text-gray-800">${level.current.icon}</div>
+                                    <div class="text-xs text-gray-500">${level.current.title}</div>
+                                </div>
+                                <div>
+                                    <div class="text-2xl font-bold text-gray-800">${state.stats.casesCompleted}</div>
+                                    <div class="text-xs text-gray-500">Cases Done</div>
+                                </div>
+                                <div>
+                                    <div class="text-2xl font-bold text-gray-800">${state.stats.totalPoints.toLocaleString()}</div>
+                                    <div class="text-xs text-gray-500">Total Points</div>
+                                </div>
+                                <div>
+                                    <div class="text-2xl font-bold text-gray-800">${state.stats.badges.length}</div>
+                                    <div class="text-xs text-gray-500">Badges</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Back Link -->
+                        <div class="text-center">
+                            <a href="index.html" class="text-blue-200 hover:text-white">← Back to All Tools</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderVariantSelect() {
+            const caseData = CASES.find(c => c.id === state.currentCase);
+            
+            return `
+                <div class="min-h-screen p-6">
+                    <div class="max-w-3xl mx-auto">
+                        <button onclick="goToMenu()" class="text-blue-200 hover:text-white mb-6 inline-block">← Back to Menu</button>
+                        
+                        <div class="card p-8">
+                            <div class="text-center mb-6">
+                                <div class="text-5xl mb-3">${caseData.icon}</div>
+                                <h1 class="text-2xl font-bold text-gray-800">${caseData.title}</h1>
+                                <p class="text-gray-600">Select patient demographics</p>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <p class="text-sm text-gray-500 mb-4 text-center">
+                                    Patient demographics affect the differential diagnosis, available history questions, and physical exam maneuvers.
+                                </p>
+                            </div>
+                            
+                            <div class="grid gap-4 mb-6">
+                                ${Object.entries(caseData.variants).map(([key, variant]) => `
+                                    <div class="variant-card card p-4 ${state.variantKey === key ? 'selected' : ''}" onclick="selectVariant('${key}')">
+                                        <div class="flex items-center gap-4">
+                                            <div class="text-3xl">${variant.gender === 'male' ? '👨' : '👩'}</div>
+                                            <div class="flex-1">
+                                                <div class="font-bold text-gray-800">${variant.name}, ${variant.age}-year-old ${variant.genderDisplay}</div>
+                                                <div class="text-sm text-gray-600">"${variant.chiefComplaint}"</div>
+                                            </div>
+                                            ${state.variantKey === key ? '<div class="text-green-500 text-xl">✓</div>' : ''}
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            
+                            <button 
+                                onclick="startCase()" 
+                                class="w-full py-3 rounded-lg font-bold text-white ${state.variantKey ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-300 cursor-not-allowed'}"
+                                ${!state.variantKey ? 'disabled' : ''}
+                            >
+                                ${state.mode === 'game' ? '🎮 Start Game' : '📚 Start Practice'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderCase() {
+            const caseData = CASES.find(c => c.id === state.currentCase);
+            const variant = caseData.variants[state.variantKey];
+            
+            let content = '';
+            
+            switch(state.stage) {
+                case 'differential':
+                    content = renderDifferentialStage(caseData, variant);
+                    break;
+                case 'history':
+                    content = renderHistoryStage(caseData, variant);
+                    break;
+                case 'historyFindings':
+                    content = renderHistoryFindingsStage(caseData, variant);
+                    break;
+                case 'refinement1':
+                    content = renderRefinementStage(caseData, variant, 1);
+                    break;
+                case 'physical':
+                    content = renderPhysicalStage(caseData, variant);
+                    break;
+                case 'physicalFindings':
+                    content = renderPhysicalFindingsStage(caseData, variant);
+                    break;
+                case 'refinement2':
+                    content = renderRefinementStage(caseData, variant, 2);
+                    break;
+                case 'diagnosis':
+                    content = renderDiagnosisStage(caseData, variant);
+                    break;
+            }
+            
+            return `
+                ${state.mode === 'game' ? renderHUD(caseData, variant) : renderPracticeHeader(caseData, variant)}
+                <div class="max-w-4xl mx-auto p-6">
+                    ${content}
+                </div>
+            `;
+        }
+
+        function renderHUD(caseData, variant) {
+            const mins = Math.floor(state.stageTimeRemaining / 60);
+            const secs = state.stageTimeRemaining % 60;
+            
+            return `
+                <div class="game-hud">
+                    <button onclick="quitCase()" class="text-white hover:text-red-300">✕ Quit</button>
+                    <div class="text-white font-semibold">${caseData.title} - ${variant.genderDisplay}</div>
+                    <div class="flex items-center gap-4">
+                        ${state.streak > 0 ? `<div class="text-orange-400">🔥 ${state.streak}x</div>` : ''}
+                        <div class="text-yellow-400 font-bold">${state.score} pts</div>
+                        <div class="text-white">⏱️ <span id="timer" class="${state.stageTimeRemaining < 60 ? 'timer-warning' : ''} font-bold">${mins}:${secs.toString().padStart(2, '0')}</span></div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderPracticeHeader(caseData, variant) {
+            return `
+                <div class="bg-gradient-to-r from-blue-600 to-indigo-700 p-4">
+                    <div class="max-w-4xl mx-auto flex justify-between items-center">
+                        <button onclick="quitCase()" class="text-white hover:text-blue-200">← Exit Case</button>
+                        <div class="text-white font-semibold">${caseData.title} - ${variant.genderDisplay}</div>
+                        <div class="text-blue-200">Practice Mode</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderDifferentialStage(caseData, variant) {
+            const stageNames = ['Initial Differential', 'History', 'Review History', 'Refine Differential', 'Physical Exam', 'Review Exam', 'Refine Differential', 'Final Diagnosis'];
+            
+            return `
+                <div class="card p-6 mb-6 fade-in">
+                    <!-- Progress -->
+                    <div class="mb-6">
+                        <div class="flex justify-between text-sm text-gray-500 mb-2">
+                            <span>Stage 1 of 8</span>
+                            <span>Initial Differential</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 12.5%"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Patient Info -->
+                    <div class="bg-blue-50 rounded-lg p-4 mb-6">
+                        <div class="flex items-start gap-4">
+                            <div class="text-4xl">${variant.gender === 'male' ? '👨' : '👩'}</div>
+                            <div>
+                                <h2 class="font-bold text-gray-800">${variant.name}, ${variant.age}yo ${variant.gender === 'male' ? 'M' : 'F'}</h2>
+                                <p class="text-gray-700"><strong>Chief Complaint:</strong> "${variant.chiefComplaint}"</p>
+                                <p class="text-gray-600 text-sm"><strong>Vitals:</strong> ${variant.vitalSigns}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Instructions -->
+                    <div class="mb-6">
+                        <h3 class="font-bold text-gray-800 mb-2">Generate Your Initial Differential Diagnosis</h3>
+                        <p class="text-gray-600 text-sm">Based only on the chief complaint, age, and gender, select the diagnoses you want to consider. Include "must-not-miss" diagnoses!</p>
+                    </div>
+                    
+                    <!-- Differential Options -->
+                    <div class="grid gap-3 mb-6">
+                        ${variant.initialDifferential.map(dx => `
+                            <button 
+                                class="question-btn ${state.selectedDifferential.includes(dx.name) ? 'selected' : ''} ${dx.mustNotMiss ? 'must-not-miss' : ''}"
+                                onclick="toggleDifferential('${dx.name}')"
+                            >
+                                <div class="flex items-center justify-between">
+                                    <span>${dx.name}</span>
+                                    <div class="flex items-center gap-2">
+                                        ${dx.mustNotMiss ? '<span class="badge badge-low">Must Not Miss</span>' : ''}
+                                        ${state.selectedDifferential.includes(dx.name) ? '<span class="text-blue-600">✓</span>' : ''}
+                                    </div>
+                                </div>
+                            </button>
+                        `).join('')}
+                    </div>
+                    
+                    <button 
+                        onclick="advanceStage()"
+                        class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold"
+                    >
+                        Continue to History Taking →
+                    </button>
+                </div>
+            `;
+        }
+
+        function renderHistoryStage(caseData, variant) {
+            const availableQuestions = getAvailableQuestions(caseData.historyQuestions, state.variantKey);
+            const categories = [...new Set(availableQuestions.map(q => q.category))];
+            
+            return `
+                <div class="card p-6 mb-6 fade-in">
+                    <!-- Progress -->
+                    <div class="mb-6">
+                        <div class="flex justify-between text-sm text-gray-500 mb-2">
+                            <span>Stage 2 of 8</span>
+                            <span>History Taking</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 25%"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Instructions -->
+                    <div class="mb-6">
+                        <h3 class="font-bold text-gray-800 mb-2">Select History Questions</h3>
+                        <p class="text-gray-600 text-sm">Choose the questions you would ask this patient. Focus on hypothesis-driven questions that will help narrow your differential.</p>
+                    </div>
+                    
+                    <!-- Questions by Category -->
+                    ${categories.map(cat => `
+                        <div class="mb-6">
+                            <h4 class="font-semibold text-gray-700 mb-3">${cat}</h4>
+                            <div class="grid gap-2">
+                                ${availableQuestions.filter(q => q.category === cat).map(q => `
+                                    <button 
+                                        class="question-btn ${state.selectedHistory.includes(q.id) ? (state.mode === 'game' ? q.quality : 'selected') : ''}"
+                                        onclick="selectHistory('${q.id}', event)"
+                                        ${state.selectedHistory.includes(q.id) ? 'disabled' : ''}
+                                    >
+                                        <div class="flex items-center justify-between">
+                                            <span>${q.text}</span>
+                                            ${state.selectedHistory.includes(q.id) ? `<span class="badge badge-${q.quality === 'low-priority' ? 'low' : q.quality}">${q.quality}</span>` : ''}
+                                        </div>
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `).join('')}
+                    
+                    <div class="flex gap-4">
+                        <button 
+                            onclick="goToPreviousStage()"
+                            class="flex-1 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-bold"
+                        >
+                            ← Back
+                        </button>
+                        <button 
+                            onclick="advanceStage()"
+                            class="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold"
+                        >
+                            See Patient Responses →
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderHistoryFindingsStage(caseData, variant) {
+            const availableQuestions = getAvailableQuestions(caseData.historyQuestions, state.variantKey);
+            const selectedQuestions = availableQuestions.filter(q => state.selectedHistory.includes(q.id));
+            
+            return `
+                <div class="card p-6 mb-6 fade-in">
+                    <!-- Progress -->
+                    <div class="mb-6">
+                        <div class="flex justify-between text-sm text-gray-500 mb-2">
+                            <span>Stage 3 of 8</span>
+                            <span>History Findings</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 37.5%"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Instructions -->
+                    <div class="mb-6">
+                        <h3 class="font-bold text-gray-800 mb-2">📋 Patient's Responses</h3>
+                        <p class="text-gray-600 text-sm">Here's what ${variant.name} told you. Review these findings carefully - you'll use them to refine your differential.</p>
+                    </div>
+                    
+                    <!-- Findings -->
+                    <div class="mb-6">
+                        ${selectedQuestions.length > 0 ? selectedQuestions.map(q => `
+                            <div class="finding-item slide-in">
+                                <div class="font-semibold text-gray-700 text-sm">${q.text}</div>
+                                <div class="text-gray-800 mt-1">"${variant.historyFindings[q.id]?.answer || 'No response available'}"</div>
+                            </div>
+                        `).join('') : `
+                            <div class="text-center py-8 text-gray-500">
+                                <p>You didn't ask any history questions.</p>
+                                <p class="text-sm">In practice, you should always take a thorough history!</p>
+                            </div>
+                        `}
+                    </div>
+                    
+                    <!-- Key findings summary -->
+                    ${selectedQuestions.length > 0 ? `
+                        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+                            <h4 class="font-semibold text-yellow-800 mb-2">💡 Consider these key findings:</h4>
+                            <ul class="text-sm text-yellow-700 space-y-1">
+                                ${getKeyHistoryFindings(variant, selectedQuestions).map(f => `<li>• ${f}</li>`).join('')}
+                            </ul>
+                        </div>
+                    ` : ''}
+                    
+                    <button 
+                        onclick="advanceStage()"
+                        class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold"
+                    >
+                        Refine Your Differential →
+                    </button>
+                </div>
+            `;
+        }
+
+        function renderRefinementStage(caseData, variant, refinementNumber) {
+            const refinementData = refinementNumber === 1 ? variant.postHistoryRefinement : variant.postPhysicalRefinement;
+            const currentRefinement = refinementNumber === 1 ? state.refinement1 : state.refinement2;
+            const stageNum = refinementNumber === 1 ? 4 : 7;
+            const progress = refinementNumber === 1 ? 50 : 87.5;
+            const title = refinementNumber === 1 ? 'Refine Based on History' : 'Refine Based on Physical Exam';
+            
+            return `
+                <div class="card p-6 mb-6 fade-in">
+                    <!-- Progress -->
+                    <div class="mb-6">
+                        <div class="flex justify-between text-sm text-gray-500 mb-2">
+                            <span>Stage ${stageNum} of 8</span>
+                            <span>${title}</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${progress}%"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Instructions -->
+                    <div class="mb-6">
+                        <h3 class="font-bold text-gray-800 mb-2">🔄 ${title}</h3>
+                        <p class="text-gray-600 text-sm">Based on the ${refinementNumber === 1 ? 'history' : 'physical exam'} findings, how does each diagnosis change in likelihood?</p>
+                        <p class="text-gray-500 text-xs mt-2">⚠️ <strong>Note:</strong> "Ruled Out" should be used rarely - history and physical exam usually shift probabilities, not definitively exclude diagnoses.</p>
+                    </div>
+                    
+                    <!-- Diagnoses to refine -->
+                    <div class="space-y-4 mb-6">
+                        ${state.selectedDifferential.map(dx => `
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <div class="font-semibold text-gray-800 mb-3">${dx}</div>
+                                <div class="flex flex-wrap gap-2">
+                                    <button class="refine-btn more ${currentRefinement[dx] === 'more' ? 'selected' : ''}" onclick="setRefinement(${refinementNumber}, '${dx}', 'more')">
+                                        ⬆️ More Likely
+                                    </button>
+                                    <button class="refine-btn unchanged ${currentRefinement[dx] === 'unchanged' ? 'selected' : ''}" onclick="setRefinement(${refinementNumber}, '${dx}', 'unchanged')">
+                                        ➡️ Unchanged
+                                    </button>
+                                    <button class="refine-btn less ${currentRefinement[dx] === 'less' ? 'selected' : ''}" onclick="setRefinement(${refinementNumber}, '${dx}', 'less')">
+                                        ⬇️ Less Likely
+                                    </button>
+                                    <button class="refine-btn ruled-out ${currentRefinement[dx] === 'ruled-out' ? 'selected' : ''}" onclick="setRefinement(${refinementNumber}, '${dx}', 'ruled-out')">
+                                        ❌ Ruled Out
+                                    </button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="flex gap-4">
+                        <button 
+                            onclick="goToPreviousStage()"
+                            class="flex-1 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-bold"
+                        >
+                            ← Back
+                        </button>
+                        <button 
+                            onclick="submitRefinement(${refinementNumber})"
+                            class="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold"
+                        >
+                            ${refinementNumber === 1 ? 'Continue to Physical Exam →' : 'See Final Diagnosis →'}
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderPhysicalStage(caseData, variant) {
+            const availableManeuvers = getAvailableQuestions(caseData.physicalExamManeuvers, state.variantKey);
+            const categories = [...new Set(availableManeuvers.map(m => m.category))];
+            
+            return `
+                <div class="card p-6 mb-6 fade-in">
+                    <!-- Progress -->
+                    <div class="mb-6">
+                        <div class="flex justify-between text-sm text-gray-500 mb-2">
+                            <span>Stage 5 of 8</span>
+                            <span>Physical Examination</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 62.5%"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Instructions -->
+                    <div class="mb-6">
+                        <h3 class="font-bold text-gray-800 mb-2">Select Physical Exam Maneuvers</h3>
+                        <p class="text-gray-600 text-sm">Choose the physical exam components you would perform. Be targeted based on your refined differential.</p>
+                    </div>
+                    
+                    <!-- Maneuvers by Category -->
+                    ${categories.map(cat => `
+                        <div class="mb-6">
+                            <h4 class="font-semibold text-gray-700 mb-3">${cat}</h4>
+                            <div class="grid gap-2">
+                                ${availableManeuvers.filter(m => m.category === cat).map(m => `
+                                    <button 
+                                        class="question-btn ${state.selectedPhysical.includes(m.id) ? (state.mode === 'game' ? m.quality : 'selected') : ''}"
+                                        onclick="selectPhysical('${m.id}', event)"
+                                        ${state.selectedPhysical.includes(m.id) ? 'disabled' : ''}
+                                    >
+                                        <div class="flex items-center justify-between">
+                                            <span>${m.text}</span>
+                                            ${state.selectedPhysical.includes(m.id) ? `<span class="badge badge-${m.quality === 'low-priority' ? 'low' : m.quality}">${m.quality}</span>` : ''}
+                                        </div>
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `).join('')}
+                    
+                    <div class="flex gap-4">
+                        <button 
+                            onclick="goToPreviousStage()"
+                            class="flex-1 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-bold"
+                        >
+                            ← Back
+                        </button>
+                        <button 
+                            onclick="advanceStage()"
+                            class="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold"
+                        >
+                            See Exam Findings →
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderPhysicalFindingsStage(caseData, variant) {
+            const availableManeuvers = getAvailableQuestions(caseData.physicalExamManeuvers, state.variantKey);
+            const selectedManeuvers = availableManeuvers.filter(m => state.selectedPhysical.includes(m.id));
+            
+            return `
+                <div class="card p-6 mb-6 fade-in">
+                    <!-- Progress -->
+                    <div class="mb-6">
+                        <div class="flex justify-between text-sm text-gray-500 mb-2">
+                            <span>Stage 6 of 8</span>
+                            <span>Physical Exam Findings</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Instructions -->
+                    <div class="mb-6">
+                        <h3 class="font-bold text-gray-800 mb-2">🩺 Physical Examination Findings</h3>
+                        <p class="text-gray-600 text-sm">Here are the findings from your physical exam of ${variant.name}.</p>
+                    </div>
+                    
+                    <!-- Findings -->
+                    <div class="mb-6">
+                        ${selectedManeuvers.length > 0 ? selectedManeuvers.map(m => `
+                            <div class="finding-item slide-in ${isSignificantFinding(variant.physicalFindings[m.id]?.finding) ? 'border-l-orange-500' : ''}">
+                                <div class="font-semibold text-gray-700 text-sm">${m.text}</div>
+                                <div class="text-gray-800 mt-1">${variant.physicalFindings[m.id]?.finding || 'Not performed'}</div>
+                            </div>
+                        `).join('') : `
+                            <div class="text-center py-8 text-gray-500">
+                                <p>You didn't perform any physical exam maneuvers.</p>
+                                <p class="text-sm">The physical exam provides crucial diagnostic information!</p>
+                            </div>
+                        `}
+                    </div>
+                    
+                    <!-- Key findings highlight -->
+                    ${selectedManeuvers.length > 0 ? `
+                        <div class="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-6">
+                            <h4 class="font-semibold text-orange-800 mb-2">🔍 Significant Findings:</h4>
+                            <ul class="text-sm text-orange-700 space-y-1">
+                                ${getKeyPhysicalFindings(variant, selectedManeuvers).map(f => `<li>• ${f}</li>`).join('')}
+                            </ul>
+                        </div>
+                    ` : ''}
+                    
+                    <button 
+                        onclick="advanceStage()"
+                        class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold"
+                    >
+                        Final Differential Refinement →
+                    </button>
+                </div>
+            `;
+        }
+
+        function renderDiagnosisStage(caseData, variant) {
+            return `
+                <div class="card p-6 mb-6 fade-in">
+                    <!-- Progress -->
+                    <div class="mb-6">
+                        <div class="flex justify-between text-sm text-gray-500 mb-2">
+                            <span>Stage 8 of 8</span>
+                            <span>Final Diagnosis</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Diagnosis Reveal -->
+                    <div class="text-center mb-6">
+                        <div class="text-6xl mb-4">🎯</div>
+                        <h2 class="text-2xl font-bold text-gray-800 mb-2">Final Diagnosis</h2>
+                        <div class="bg-green-100 text-green-800 text-xl font-bold py-4 px-6 rounded-lg inline-block">
+                            ${variant.actualDiagnosis.name}
+                        </div>
+                    </div>
+                    
+                    <!-- Key Findings -->
+                    <div class="bg-blue-50 rounded-lg p-4 mb-6">
+                        <h3 class="font-bold text-blue-800 mb-3">🔑 Key Findings That Led to This Diagnosis:</h3>
+                        <ul class="space-y-2">
+                            ${variant.actualDiagnosis.keyFindings.map(f => `
+                                <li class="flex items-start gap-2 text-blue-700">
+                                    <span class="text-green-500 mt-1">✓</span>
+                                    <span>${f}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                    
+                    <!-- Teaching Points -->
+                    <div class="bg-purple-50 rounded-lg p-4 mb-6">
+                        <h3 class="font-bold text-purple-800 mb-3">📚 Teaching Points:</h3>
+                        <ul class="space-y-2">
+                            ${variant.actualDiagnosis.teachingPoints.map(t => `
+                                <li class="flex items-start gap-2 text-purple-700">
+                                    <span class="text-purple-500 mt-1">•</span>
+                                    <span>${t}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                    
+                    <!-- Recommended Workup -->
+                    <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                        <h3 class="font-bold text-gray-800 mb-3">🧪 Recommended Workup:</h3>
+                        <ul class="space-y-1">
+                            ${variant.actualDiagnosis.workup.map(w => `
+                                <li class="text-gray-700">• ${w}</li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                    
+                    <button 
+                        onclick="completeCase()"
+                        class="w-full py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-bold"
+                    >
+                        ${state.mode === 'game' ? 'See Your Results →' : 'Complete Case →'}
+                    </button>
+                </div>
+            `;
+        }
+
+        function renderResults() {
+            const caseData = CASES.find(c => c.id === state.currentCase);
+            const variant = caseData.variants[state.variantKey];
+            const level = getLevelInfo(state.stats.totalXp);
+            
+            const stars = state.score >= 1700 ? 3 : state.score >= 1200 ? 2 : state.score >= 700 ? 1 : 0;
+            
+            return `
+                <div class="min-h-screen p-6">
+                    <div class="max-w-2xl mx-auto">
+                        <div class="card p-8 text-center">
+                            <!-- Stars -->
+                            <div class="mb-6">
+                                <div class="text-6xl mb-2">
+                                    ${'⭐'.repeat(stars)}${'☆'.repeat(3-stars)}
+                                </div>
+                                <h1 class="text-2xl font-bold text-gray-800">Case Complete!</h1>
+                                <p class="text-gray-600">${caseData.title} - ${variant.genderDisplay}</p>
+                            </div>
+                            
+                            ${state.mode === 'game' ? `
+                                <!-- Score -->
+                                <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl p-6 mb-6">
+                                    <div class="text-5xl font-bold mb-2">${state.score}</div>
+                                    <div class="text-blue-100">Total Points</div>
+                                </div>
+                                
+                                <!-- Stats Grid -->
+                                <div class="grid grid-cols-3 gap-4 mb-6">
+                                    <div class="bg-gray-50 rounded-lg p-3">
+                                        <div class="text-xl font-bold text-gray-800">${Math.round(state.score * 0.1)}</div>
+                                        <div class="text-xs text-gray-500">XP Earned</div>
+                                    </div>
+                                    <div class="bg-gray-50 rounded-lg p-3">
+                                        <div class="text-xl font-bold text-gray-800">🔥 ${state.maxStreak}</div>
+                                        <div class="text-xs text-gray-500">Best Streak</div>
+                                    </div>
+                                    <div class="bg-gray-50 rounded-lg p-3">
+                                        <div class="text-xl font-bold text-gray-800">${level.current.icon}</div>
+                                        <div class="text-xs text-gray-500">${level.current.title}</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Level Progress -->
+                                <div class="mb-6">
+                                    <div class="flex justify-between text-sm text-gray-600 mb-1">
+                                        <span>${level.current.title}</span>
+                                        <span>${level.next ? level.next.title : 'Max Level'}</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: ${level.progress}%"></div>
+                                    </div>
+                                    <div class="text-xs text-gray-500 mt-1">${state.stats.totalXp} / ${level.next?.xpRequired || 'MAX'} XP</div>
+                                </div>
+                            ` : `
+                                <div class="bg-green-50 rounded-lg p-4 mb-6">
+                                    <p class="text-green-800">Great practice session! Review the teaching points above to reinforce your learning.</p>
+                                </div>
+                            `}
+                            
+                            <!-- Actions -->
+                            <div class="flex gap-4">
+                                <button onclick="goToMenu()" class="flex-1 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-bold">
+                                    Main Menu
+                                </button>
+                                <button onclick="replayCase()" class="flex-1 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold">
+                                    Play Again
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderProfile() {
+            const level = getLevelInfo(state.stats.totalXp);
+            
+            return `
+                <div class="min-h-screen p-6">
+                    <div class="max-w-2xl mx-auto">
+                        <button onclick="goToMenu()" class="text-blue-200 hover:text-white mb-6 inline-block">← Back to Menu</button>
+                        
+                        <div class="card p-8">
+                            <div class="text-center mb-6">
+                                <div class="text-6xl mb-2">${level.current.icon}</div>
+                                <h1 class="text-2xl font-bold text-gray-800">${level.current.title}</h1>
+                                <p class="text-gray-600">Level ${level.current.level}</p>
+                            </div>
+                            
+                            <!-- XP Progress -->
+                            <div class="mb-8">
+                                <div class="flex justify-between text-sm text-gray-600 mb-2">
+                                    <span>${state.stats.totalXp} XP</span>
+                                    <span>${level.next ? `${level.next.xpRequired} XP` : 'MAX'}</span>
+                                </div>
+                                <div class="progress-bar h-4">
+                                    <div class="progress-fill" style="width: ${level.progress}%"></div>
+                                </div>
+                                ${level.next ? `<p class="text-xs text-gray-500 mt-2 text-center">${level.next.xpRequired - state.stats.totalXp} XP to ${level.next.title}</p>` : ''}
+                            </div>
+                            
+                            <!-- Stats -->
+                            <div class="grid grid-cols-2 gap-4 mb-6">
+                                <div class="bg-gray-50 rounded-lg p-4 text-center">
+                                    <div class="text-3xl font-bold text-gray-800">${state.stats.casesCompleted}</div>
+                                    <div class="text-sm text-gray-500">Cases Completed</div>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-4 text-center">
+                                    <div class="text-3xl font-bold text-gray-800">${state.stats.totalPoints.toLocaleString()}</div>
+                                    <div class="text-sm text-gray-500">Total Points</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Badges -->
+                            <h3 class="font-bold text-gray-800 mb-3">Badges Earned (${state.stats.badges.length})</h3>
+                            <div class="flex flex-wrap gap-2">
+                                ${state.stats.badges.length > 0 ? state.stats.badges.map(b => `
+                                    <span class="badge badge-excellent">${b}</span>
+                                `).join('') : '<p class="text-gray-500">No badges yet. Complete cases to earn badges!</p>'}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ==================== HELPER FUNCTIONS ====================
+        function getKeyHistoryFindings(variant, selectedQuestions) {
+            const keyFindings = [];
+            
+            selectedQuestions.forEach(q => {
+                const answer = variant.historyFindings[q.id]?.answer || '';
+                
+                // Check for significant findings
+                if (q.id === 'nsaid_use' && answer.toLowerCase().includes('daily')) {
+                    keyFindings.push('Daily NSAID use - major risk factor for gastric pathology');
+                }
+                if (q.id === 'melena' && answer.toLowerCase().includes('dark')) {
+                    keyFindings.push('Dark stools reported - possible upper GI bleeding');
+                }
+                if (q.id === 'lmp' && answer.includes('6') && answer.includes('week')) {
+                    keyFindings.push('Delayed menstrual period (6-7 weeks) - pregnancy must be considered');
+                }
+                if (q.id === 'pregnancy_possible' && answer.toLowerCase().includes('possible')) {
+                    keyFindings.push('Pregnancy is possible - requires testing');
+                }
+                if (q.id === 'alcohol' && (answer.includes('3-4') || answer.includes('few beers'))) {
+                    keyFindings.push('Moderate alcohol use - additional GI irritant');
+                }
+                if (q.id === 'character' && answer.toLowerCase().includes('burning')) {
+                    keyFindings.push('Burning quality - suggests acid-related pathology');
+                }
+                if (q.id === 'aggravating' && answer.toLowerCase().includes('eat')) {
+                    keyFindings.push('Symptoms worse with eating - typical of gastric/esophageal pathology');
+                }
+            });
+            
+            return keyFindings.length > 0 ? keyFindings : ['Review the patient responses carefully for diagnostic clues'];
+        }
+
+        function getKeyPhysicalFindings(variant, selectedManeuvers) {
+            const keyFindings = [];
+            
+            selectedManeuvers.forEach(m => {
+                const finding = variant.physicalFindings[m.id]?.finding || '';
+                
+                if (m.id === 'rectal_exam' && finding.toLowerCase().includes('guaiac positive')) {
+                    keyFindings.push('Guaiac positive stool - confirms GI bleeding!');
+                }
+                if (m.id === 'urine_pregnancy' && finding.toLowerCase().includes('positive')) {
+                    keyFindings.push('POSITIVE pregnancy test - critical finding!');
+                }
+                if (m.id === 'epigastric_palpation' && finding.toLowerCase().includes('tender')) {
+                    keyFindings.push('Epigastric tenderness - localizes pathology');
+                }
+                if (m.id === 'murphy_sign' && finding.toLowerCase().includes('negative')) {
+                    keyFindings.push('Negative Murphy\'s sign - cholecystitis less likely');
+                }
+                if (m.id === 'skin_exam' && finding.toLowerCase().includes('pallor')) {
+                    keyFindings.push('Pallor present - possible anemia from blood loss');
+                }
+                if (m.id === 'pelvic_exam' && finding.toLowerCase().includes('no') && finding.toLowerCase().includes('tenderness')) {
+                    keyFindings.push('No adnexal/cervical motion tenderness - reassuring but doesn\'t rule out ectopic');
+                }
+            });
+            
+            return keyFindings.length > 0 ? keyFindings : ['No major abnormalities detected on exam'];
+        }
+
+        function isSignificantFinding(finding) {
+            if (!finding) return false;
+            const significant = ['positive', 'tender', 'abnormal', 'mass', 'guaiac', 'pallor', 'edema'];
+            return significant.some(s => finding.toLowerCase().includes(s));
+        }
+
+        // ==================== EVENT HANDLERS ====================
+        function selectMode(mode) {
+            state.mode = mode;
+            state.currentCase = CASES[0].id; // Start with first case
+            state.screen = 'variantSelect';
+            state.variantKey = null;
+            render();
+        }
+
+        function selectVariant(key) {
+            state.variantKey = key;
+            render();
+        }
+
+        function startCase() {
+            if (!state.variantKey) return;
+            
+            const caseData = CASES.find(c => c.id === state.currentCase);
+            state.currentVariant = caseData.variants[state.variantKey];
+            state.screen = 'case';
+            state.stage = 'differential';
+            state.selectedDifferential = [];
+            state.selectedHistory = [];
+            state.selectedPhysical = [];
+            state.refinement1 = {};
+            state.refinement2 = {};
+            state.score = 0;
+            state.streak = 0;
+            state.maxStreak = 0;
+            
+            if (state.mode === 'game') {
+                startTimer();
+            }
+            
+            render();
+        }
+
+        function toggleDifferential(name) {
+            if (state.selectedDifferential.includes(name)) {
+                state.selectedDifferential = state.selectedDifferential.filter(d => d !== name);
+            } else {
+                state.selectedDifferential.push(name);
+            }
+            render();
+        }
+
+        function selectHistory(id, event) {
+            if (state.selectedHistory.includes(id)) return;
+            
+            state.selectedHistory.push(id);
+            
+            if (state.mode === 'game') {
+                const caseData = CASES.find(c => c.id === state.currentCase);
+                const question = caseData.historyQuestions.find(q => q.id === id);
+                const points = POINTS[question.quality] || 0;
+                
+                if (question.quality === 'low-priority') {
+                    state.streak = 0;
+                } else {
+                    state.streak++;
+                    state.maxStreak = Math.max(state.maxStreak, state.streak);
+                }
+                
+                const streakBonus = question.quality !== 'low-priority' ? Math.min(state.streak, POINTS.maxStreakMultiplier) * POINTS.streakBonus : 0;
+                const totalPoints = points + streakBonus;
+                state.score += totalPoints;
+                
+                showScorePopup(totalPoints, event.clientX, event.clientY);
+            }
+            
+            render();
+        }
+
+        function selectPhysical(id, event) {
+            if (state.selectedPhysical.includes(id)) return;
+            
+            state.selectedPhysical.push(id);
+            
+            if (state.mode === 'game') {
+                const caseData = CASES.find(c => c.id === state.currentCase);
+                const maneuver = getAvailableQuestions(caseData.physicalExamManeuvers, state.variantKey).find(m => m.id === id);
+                const points = POINTS[maneuver.quality] || 0;
+                
+                if (maneuver.quality === 'low-priority') {
+                    state.streak = 0;
+                } else {
+                    state.streak++;
+                    state.maxStreak = Math.max(state.maxStreak, state.streak);
+                }
+                
+                const streakBonus = maneuver.quality !== 'low-priority' ? Math.min(state.streak, POINTS.maxStreakMultiplier) * POINTS.streakBonus : 0;
+                const totalPoints = points + streakBonus;
+                state.score += totalPoints;
+                
+                showScorePopup(totalPoints, event.clientX, event.clientY);
+            }
+            
+            render();
+        }
+
+        function setRefinement(refinementNumber, diagnosis, value) {
+            if (refinementNumber === 1) {
+                state.refinement1[diagnosis] = value;
+            } else {
+                state.refinement2[diagnosis] = value;
+            }
+            render();
+        }
+
+        function submitRefinement(refinementNumber) {
+            const caseData = CASES.find(c => c.id === state.currentCase);
+            const variant = caseData.variants[state.variantKey];
+            const refinementData = refinementNumber === 1 ? variant.postHistoryRefinement : variant.postPhysicalRefinement;
+            const studentRefinement = refinementNumber === 1 ? state.refinement1 : state.refinement2;
+            
+            if (state.mode === 'game') {
+                // Score the refinement
+                state.selectedDifferential.forEach(dx => {
+                    const correct = refinementData[dx]?.correct;
+                    const student = studentRefinement[dx];
+                    
+                    if (student && correct) {
+                        if (student === correct) {
+                            state.score += POINTS.refinementCorrect;
+                        } else if (student === 'ruled-out' && correct !== 'ruled-out') {
+                            // Penalty for incorrect ruled-out
+                            state.score += POINTS.incorrectRuledOut;
+                        } else if ((student === 'more' && correct === 'less') || (student === 'less' && correct === 'more')) {
+                            // Wrong direction
+                            state.score += POINTS.refinementIncorrect;
+                        } else {
+                            // Partial credit for close answers
+                            state.score += POINTS.refinementPartial;
+                        }
+                    }
+                });
+            }
+            
+            // Show feedback briefly then advance
+            advanceStage();
+        }
+
+        function advanceStage() {
+            const stages = ['differential', 'history', 'historyFindings', 'refinement1', 'physical', 'physicalFindings', 'refinement2', 'diagnosis'];
+            const currentIndex = stages.indexOf(state.stage);
+            
+            if (currentIndex < stages.length - 1) {
+                state.stage = stages[currentIndex + 1];
+                if (state.mode === 'game' && ['history', 'physical'].includes(state.stage)) {
+                    startTimer();
+                }
+            }
+            
+            render();
+        }
+
+        function goToPreviousStage() {
+            const stages = ['differential', 'history', 'historyFindings', 'refinement1', 'physical', 'physicalFindings', 'refinement2', 'diagnosis'];
+            const currentIndex = stages.indexOf(state.stage);
+            
+            if (currentIndex > 0) {
+                state.stage = stages[currentIndex - 1];
+            }
+            
+            render();
+        }
+
+        function completeCase() {
+            stopTimer();
+            
+            // Update stats
+            if (state.mode === 'game') {
+                const xpEarned = Math.round(state.score * 0.1);
+                state.stats.totalXp += xpEarned;
+                state.stats.totalPoints += state.score;
+            }
+            state.stats.casesCompleted++;
+            saveStats();
+            
+            state.screen = 'results';
+            render();
+        }
+
+        function quitCase() {
+            stopTimer();
+            state.screen = 'menu';
+            render();
+        }
+
+        function goToMenu() {
+            stopTimer();
+            state.screen = 'menu';
+            render();
+        }
+
+        function showProfile() {
+            state.screen = 'profile';
+            render();
+        }
+
+        function replayCase() {
+            state.screen = 'variantSelect';
+            state.variantKey = null;
+            render();
+        }
+
+        // ==================== INITIALIZATION ====================
+        loadStats();
+        render();
+    </script>
+</body>
+</html>
