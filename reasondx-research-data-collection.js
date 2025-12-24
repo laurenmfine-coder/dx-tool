@@ -32,7 +32,7 @@
         apiKey: '', // For authenticated submissions
         
         // Microsoft 365 Integration (Recommended)
-        powerAutomateUrl: '', // Your Power Automate HTTP POST URL
+        powerAutomateUrl: '', // https://default2c2b2d312e3e4df1b571fb37c042ff.1b.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/90e355cf75594bafad88d77ec604797d/triggers/manual/paths/invoke?api-version=1
         
         // Google Sheets integration (alternative to server)
         googleScriptUrl: '', // Google Apps Script web app URL
