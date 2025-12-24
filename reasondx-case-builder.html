@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReasonDx Clinical Skills Case Builder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .section-card { @apply bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6; }
+        .input-label { @apply block text-sm font-medium text-gray-700 mb-1; }
+        .input-field { @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-sm; }
+        .input-textarea { @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-sm resize-none; }
+        .btn-primary { @apply px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium transition-colors; }
+        .btn-secondary { @apply px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 font-medium transition-colors; }
+        .btn-success { @apply px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 font-medium transition-colors; }
+        .btn-danger { @apply px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 font-medium transition-colors; }
+        .chip { @apply inline-flex items-center gap-1 px-2 py-1 bg-blue-100 text-blue-700 rounded text-sm; }
+        .chip-remove { @apply hover:bg-blue-200 rounded-full p-0.5 cursor-pointer; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="max-w-5xl mx-auto py-8 px-4">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">🏥 Clinical Skills Case Builder</h1>
+            <p class="text-gray-600">Create standardized patient cases for ReasonDx assessments</p>
+        </div>
+
+        <!-- Progress Indicator -->
+        <div class="flex items-center justify-center gap-2 mb-8">
+            <button onclick="goToSection(0)" class="section-nav px-3 py-1 rounded-full text-sm font-medium bg-blue-600 text-white">1. Basic Info</button>
+            <div class="w-8 h-0.5 bg-gray-300"></div>
+            <button onclick="goToSection(1)" class="section-nav px-3 py-1 rounded-full text-sm font-medium bg-gray-200 text-gray-600">2. Door Note</button>
+            <div class="w-8 h-0.5 bg-gray-300"></div>
+            <button onclick="goToSection(2)" class="section-nav px-3 py-1 rounded-full text-sm font-medium bg-gray-200 text-gray-600">3. Diagnoses</button>
+            <div class="w-8 h-0.5 bg-gray-300"></div>
+            <button onclick="goToSection(3)" class="section-nav px-3 py-1 rounded-full text-sm font-medium bg-gray-200 text-gray-600">4. Expected Findings</button>
+            <div class="w-8 h-0.5 bg-gray-300"></div>
+            <button onclick="goToSection(4)" class="section-nav px-3 py-1 rounded-full text-sm font-medium bg-gray-200 text-gray-600">5. Review & Export</button>
+        </div>
+
+        <!-- Section 0: Basic Info -->
+        <div id="section-0" class="section-card">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">📋 Basic Case Information</h2>
+            
+            <div class="grid grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label class="input-label">Case Title *</label>
+                    <input type="text" id="case-title" class="input-field" placeholder="e.g., Acute Chest Pain Evaluation">
+                </div>
+                <div>
+                    <label class="input-label">Case ID (auto-generated or custom)</label>
+                    <input type="text" id="case-id" class="input-field" placeholder="cs_chest_pain_01">
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-3 gap-4 mb-4">
+                <div>
+                    <label class="input-label">Category *</label>
+                    <select id="case-category" class="input-field">
+                        <option value="">Select category...</option>
+                        <option value="Cardiovascular">Cardiovascular</option>
+                        <option value="Pulmonary">Pulmonary</option>
+                        <option value="Gastrointestinal">Gastrointestinal</option>
+                        <option value="Neurological">Neurological</option>
+                        <option value="Musculoskeletal">Musculoskeletal</option>
+                        <option value="Infectious Disease">Infectious Disease</option>
+                        <option value="Endocrine">Endocrine</option>
+                        <option value="Renal/GU">Renal/GU</option>
+                        <option value="Hematology/Oncology">Hematology/Oncology</option>
+                        <option value="Psychiatry">Psychiatry</option>
+                        <option value="Dermatology">Dermatology</option>
+                        <option value="OB/GYN">OB/GYN</option>
+                        <option value="Pediatrics">Pediatrics</option>
+                        <option value="Geriatrics">Geriatrics</option>
+                        <option value="Emergency">Emergency</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="input-label">Difficulty *</label>
+                    <select id="case-difficulty" class="input-field">
+                        <option value="foundational">Foundational</option>
+                        <option value="intermediate" selected>Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="input-label">Time Limit (minutes)</label>
+                    <input type="number" id="case-time-limit" class="input-field" value="15" min="5" max="60">
+                </div>
+            </div>
+            
+            <div class="mb-4">
+                <label class="input-label">Learning Objectives (one per line)</label>
+                <textarea id="case-objectives" class="input-textarea" rows="3" placeholder="Recognize ACS presentation&#10;Identify cardiac risk factors&#10;Prioritize time-sensitive workup"></textarea>
+            </div>
+            
+            <div class="flex justify-end">
+                <button onclick="goToSection(1)" class="btn-primary">Next: Door Note →</button>
+            </div>
+        </div>
+
+        <!-- Section 1: Door Note -->
+        <div id="section-1" class="section-card hidden">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">🚪 Door Note Information</h2>
+            <p class="text-gray-600 text-sm mb-4">This is what students see before entering the room - keep it brief!</p>
+            
+            <div class="grid grid-cols-3 gap-4 mb-4">
+                <div>
+                    <label class="input-label">Patient Name *</label>
+                    <input type="text" id="patient-name" class="input-field" placeholder="Mr. Johnson">
+                </div>
+                <div>
+                    <label class="input-label">Age *</label>
+                    <input type="number" id="patient-age" class="input-field" placeholder="58" min="0" max="120">
+                </div>
+                <div>
+                    <label class="input-label">Gender *</label>
+                    <select id="patient-gender" class="input-field">
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                        <option value="NB">Non-binary</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="mb-4">
+                <label class="input-label">Chief Complaint *</label>
+                <input type="text" id="chief-complaint" class="input-field" placeholder="Chest pain for 2 hours">
+            </div>
+            
+            <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                <h3 class="font-semibold text-gray-700 mb-3">Vital Signs</h3>
+                <div class="grid grid-cols-5 gap-3">
+                    <div>
+                        <label class="input-label">BP</label>
+                        <input type="text" id="vital-bp" class="input-field text-center" placeholder="120/80">
+                    </div>
+                    <div>
+                        <label class="input-label">HR</label>
+                        <input type="text" id="vital-hr" class="input-field text-center" placeholder="72">
+                    </div>
+                    <div>
+                        <label class="input-label">RR</label>
+                        <input type="text" id="vital-rr" class="input-field text-center" placeholder="16">
+                    </div>
+                    <div>
+                        <label class="input-label">Temp</label>
+                        <input type="text" id="vital-temp" class="input-field text-center" placeholder="98.6°F">
+                    </div>
+                    <div>
+                        <label class="input-label">SpO2</label>
+                        <input type="text" id="vital-spo2" class="input-field text-center" placeholder="98%">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex justify-between">
+                <button onclick="goToSection(0)" class="btn-secondary">← Back</button>
+                <button onclick="goToSection(2)" class="btn-primary">Next: Diagnoses →</button>
+            </div>
+        </div>
+
+        <!-- Section 2: Diagnoses -->
+        <div id="section-2" class="section-card hidden">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">🎯 Diagnoses</h2>
+            
+            <div class="mb-6">
+                <label class="input-label">Correct Diagnosis *</label>
+                <input type="text" id="correct-diagnosis" class="input-field" placeholder="Acute Coronary Syndrome">
+                <p class="text-xs text-gray-500 mt-1">The primary/working diagnosis for this case</p>
+            </div>
+            
+            <div class="mb-6">
+                <label class="input-label">Must-Not-Miss Diagnoses *</label>
+                <p class="text-xs text-gray-500 mb-2">Critical diagnoses that would be dangerous to miss (including the correct one if applicable)</p>
+                <div class="flex gap-2 mb-2">
+                    <input type="text" id="mnm-input" class="input-field flex-1" placeholder="Type a diagnosis and press Add">
+                    <button onclick="addMustNotMiss()" class="btn-secondary">+ Add</button>
+                </div>
+                <div id="mnm-list" class="flex flex-wrap gap-2">
+                    <!-- Chips will be added here -->
+                </div>
+            </div>
+            
+            <div class="mb-6">
+                <label class="input-label">Other Differential Diagnoses (optional)</label>
+                <p class="text-xs text-gray-500 mb-2">Additional reasonable diagnoses students might consider</p>
+                <div class="flex gap-2 mb-2">
+                    <input type="text" id="other-dx-input" class="input-field flex-1" placeholder="Type a diagnosis and press Add">
+                    <button onclick="addOtherDx()" class="btn-secondary">+ Add</button>
+                </div>
+                <div id="other-dx-list" class="flex flex-wrap gap-2">
+                    <!-- Chips will be added here -->
+                </div>
+            </div>
+            
+            <div class="flex justify-between">
+                <button onclick="goToSection(1)" class="btn-secondary">← Back</button>
+                <button onclick="goToSection(3)" class="btn-primary">Next: Expected Findings →</button>
+            </div>
+        </div>
+
+        <!-- Section 3: Expected Findings -->
+        <div id="section-3" class="section-card hidden">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">📝 Expected Findings (for Scoring)</h2>
+            <p class="text-gray-600 text-sm mb-4">Define what students should ask/examine/order. These are used to score their performance.</p>
+            
+            <!-- History -->
+            <div class="mb-6 bg-blue-50 rounded-lg p-4">
+                <h3 class="font-semibold text-blue-800 mb-2">📋 Expected History Elements</h3>
+                <p class="text-xs text-blue-600 mb-2">Key history questions students should ask</p>
+                <div class="flex gap-2 mb-2">
+                    <input type="text" id="history-input" class="input-field flex-1" placeholder="e.g., onset, character, radiation, risk factors">
+                    <button onclick="addHistoryItem()" class="btn-secondary">+ Add</button>
+                </div>
+                <div id="history-list" class="flex flex-wrap gap-2">
+                    <!-- Chips will be added here -->
+                </div>
+            </div>
+            
+            <!-- Physical Exam -->
+            <div class="mb-6 bg-green-50 rounded-lg p-4">
+                <h3 class="font-semibold text-green-800 mb-2">🩺 Expected Physical Exam Elements</h3>
+                <p class="text-xs text-green-600 mb-2">Key exam maneuvers students should perform</p>
+                <div class="flex gap-2 mb-2">
+                    <input type="text" id="physical-input" class="input-field flex-1" placeholder="e.g., cardiac_auscultation, lung_sounds, JVD_assessment">
+                    <button onclick="addPhysicalItem()" class="btn-secondary">+ Add</button>
+                </div>
+                <div id="physical-list" class="flex flex-wrap gap-2">
+                    <!-- Chips will be added here -->
+                </div>
+            </div>
+            
+            <!-- Workup -->
+            <div class="mb-6 bg-purple-50 rounded-lg p-4">
+                <h3 class="font-semibold text-purple-800 mb-2">🔬 Expected Workup/Tests</h3>
+                <p class="text-xs text-purple-600 mb-2">Key tests/labs/imaging students should order</p>
+                <div class="flex gap-2 mb-2">
+                    <input type="text" id="workup-input" class="input-field flex-1" placeholder="e.g., ECG, Troponin, CXR, BMP">
+                    <button onclick="addWorkupItem()" class="btn-secondary">+ Add</button>
+                </div>
+                <div id="workup-list" class="flex flex-wrap gap-2">
+                    <!-- Chips will be added here -->
+                </div>
+            </div>
+            
+            <!-- Scoring Weights -->
+            <div class="mb-6 bg-gray-50 rounded-lg p-4">
+                <h3 class="font-semibold text-gray-800 mb-2">⚖️ Scoring Weights (%)</h3>
+                <p class="text-xs text-gray-600 mb-3">How much each component contributes to the total score (should sum to 100)</p>
+                <div class="grid grid-cols-4 gap-4">
+                    <div>
+                        <label class="input-label">History</label>
+                        <input type="number" id="weight-history" class="input-field text-center" value="30" min="0" max="100">
+                    </div>
+                    <div>
+                        <label class="input-label">Physical</label>
+                        <input type="number" id="weight-physical" class="input-field text-center" value="25" min="0" max="100">
+                    </div>
+                    <div>
+                        <label class="input-label">Differential</label>
+                        <input type="number" id="weight-differential" class="input-field text-center" value="25" min="0" max="100">
+                    </div>
+                    <div>
+                        <label class="input-label">Workup</label>
+                        <input type="number" id="weight-workup" class="input-field text-center" value="20" min="0" max="100">
+                    </div>
+                </div>
+                <div id="weight-total" class="text-sm text-gray-500 mt-2 text-right">Total: 100%</div>
+            </div>
+            
+            <div class="flex justify-between">
+                <button onclick="goToSection(2)" class="btn-secondary">← Back</button>
+                <button onclick="goToSection(4)" class="btn-primary">Next: Review & Export →</button>
+            </div>
+        </div>
+
+        <!-- Section 4: Review & Export -->
+        <div id="section-4" class="section-card hidden">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">✅ Review & Export</h2>
+            
+            <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                <h3 class="font-semibold text-gray-700 mb-3">Case Preview</h3>
+                <div id="case-preview" class="text-sm">
+                    <!-- Preview will be rendered here -->
+                </div>
+            </div>
+            
+            <div class="bg-blue-50 rounded-lg p-4 mb-6">
+                <h3 class="font-semibold text-blue-800 mb-3">📤 Export Options</h3>
+                
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between p-3 bg-white rounded-lg">
+                        <div>
+                            <div class="font-medium">Download JSON</div>
+                            <div class="text-xs text-gray-500">For importing into ReasonDx platform</div>
+                        </div>
+                        <button onclick="downloadJSON()" class="btn-primary">Download .json</button>
+                    </div>
+                    
+                    <div class="flex items-center justify-between p-3 bg-white rounded-lg">
+                        <div>
+                            <div class="font-medium">Copy JavaScript Code</div>
+                            <div class="text-xs text-gray-500">To paste into reasondx-clinical-skills-cases.js</div>
+                        </div>
+                        <button onclick="copyJSCode()" class="btn-secondary">Copy to Clipboard</button>
+                    </div>
+                    
+                    <div class="flex items-center justify-between p-3 bg-white rounded-lg">
+                        <div>
+                            <div class="font-medium">Add to Local Storage</div>
+                            <div class="text-xs text-gray-500">For immediate testing in ReasonDx</div>
+                        </div>
+                        <button onclick="addToLocalStorage()" class="btn-success">Add Case</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex justify-between">
+                <button onclick="goToSection(3)" class="btn-secondary">← Back</button>
+                <button onclick="startNewCase()" class="btn-danger">Start New Case</button>
+            </div>
+        </div>
+
+        <!-- Generated Code Modal -->
+        <div id="code-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+            <div class="bg-white rounded-xl max-w-3xl w-full mx-4 max-h-[80vh] overflow-hidden">
+                <div class="p-4 border-b flex justify-between items-center">
+                    <h3 class="font-bold text-lg">Generated Code</h3>
+                    <button onclick="closeCodeModal()" class="text-gray-500 hover:text-gray-700">✕</button>
+                </div>
+                <div class="p-4 overflow-auto max-h-[60vh]">
+                    <pre id="generated-code" class="bg-gray-900 text-green-400 p-4 rounded-lg text-sm overflow-x-auto"></pre>
+                </div>
+                <div class="p-4 border-t flex justify-end gap-2">
+                    <button onclick="copyGeneratedCode()" class="btn-primary">Copy Code</button>
+                    <button onclick="closeCodeModal()" class="btn-secondary">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Case data storage
+        const caseData = {
+            mustNotMiss: [],
+            otherDx: [],
+            history: [],
+            physical: [],
+            workup: []
+        };
+
+        // Section navigation
+        let currentSection = 0;
+        
+        function goToSection(idx) {
+            // Hide all sections
+            document.querySelectorAll('[id^="section-"]').forEach(el => el.classList.add('hidden'));
+            // Show target section
+            document.getElementById(`section-${idx}`).classList.remove('hidden');
+            // Update nav buttons
+            document.querySelectorAll('.section-nav').forEach((btn, i) => {
+                if (i <= idx) {
+                    btn.classList.remove('bg-gray-200', 'text-gray-600');
+                    btn.classList.add('bg-blue-600', 'text-white');
+                } else {
+                    btn.classList.remove('bg-blue-600', 'text-white');
+                    btn.classList.add('bg-gray-200', 'text-gray-600');
+                }
+            });
+            currentSection = idx;
+            
+            // Update preview if on review section
+            if (idx === 4) {
+                updatePreview();
+            }
+        }
+
+        // Chip management functions
+        function createChip(text, listId, dataArray) {
+            const chip = document.createElement('span');
+            chip.className = 'chip';
+            chip.innerHTML = `
+                ${text}
+                <span class="chip-remove" onclick="removeChip(this, '${listId}', '${text}')">✕</span>
+            `;
+            document.getElementById(listId).appendChild(chip);
+            dataArray.push(text);
+        }
+
+        function removeChip(el, listId, text) {
+            el.parentElement.remove();
+            const arrayMap = {
+                'mnm-list': caseData.mustNotMiss,
+                'other-dx-list': caseData.otherDx,
+                'history-list': caseData.history,
+                'physical-list': caseData.physical,
+                'workup-list': caseData.workup
+            };
+            const arr = arrayMap[listId];
+            const idx = arr.indexOf(text);
+            if (idx > -1) arr.splice(idx, 1);
+        }
+
+        function addMustNotMiss() {
+            const input = document.getElementById('mnm-input');
+            if (input.value.trim()) {
+                createChip(input.value.trim(), 'mnm-list', caseData.mustNotMiss);
+                input.value = '';
+            }
+        }
+
+        function addOtherDx() {
+            const input = document.getElementById('other-dx-input');
+            if (input.value.trim()) {
+                createChip(input.value.trim(), 'other-dx-list', caseData.otherDx);
+                input.value = '';
+            }
+        }
+
+        function addHistoryItem() {
+            const input = document.getElementById('history-input');
+            if (input.value.trim()) {
+                createChip(input.value.trim(), 'history-list', caseData.history);
+                input.value = '';
+            }
+        }
+
+        function addPhysicalItem() {
+            const input = document.getElementById('physical-input');
+            if (input.value.trim()) {
+                createChip(input.value.trim(), 'physical-list', caseData.physical);
+                input.value = '';
+            }
+        }
+
+        function addWorkupItem() {
+            const input = document.getElementById('workup-input');
+            if (input.value.trim()) {
+                createChip(input.value.trim(), 'workup-list', caseData.workup);
+                input.value = '';
+            }
+        }
+
+        // Handle Enter key for inputs
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                if (e.target.id === 'mnm-input') addMustNotMiss();
+                if (e.target.id === 'other-dx-input') addOtherDx();
+                if (e.target.id === 'history-input') addHistoryItem();
+                if (e.target.id === 'physical-input') addPhysicalItem();
+                if (e.target.id === 'workup-input') addWorkupItem();
+            }
+        });
+
+        // Update weight total
+        document.querySelectorAll('[id^="weight-"]').forEach(input => {
+            if (input.type === 'number') {
+                input.addEventListener('input', updateWeightTotal);
+            }
+        });
+
+        function updateWeightTotal() {
+            const h = parseInt(document.getElementById('weight-history').value) || 0;
+            const p = parseInt(document.getElementById('weight-physical').value) || 0;
+            const d = parseInt(document.getElementById('weight-differential').value) || 0;
+            const w = parseInt(document.getElementById('weight-workup').value) || 0;
+            const total = h + p + d + w;
+            const display = document.getElementById('weight-total');
+            display.textContent = `Total: ${total}%`;
+            display.className = total === 100 ? 'text-sm text-green-600 mt-2 text-right font-medium' : 'text-sm text-red-600 mt-2 text-right font-medium';
+        }
+
+        // Build case object
+        function buildCaseObject() {
+            const title = document.getElementById('case-title').value.trim();
+            const caseId = document.getElementById('case-id').value.trim() || 
+                          'cs_' + title.toLowerCase().replace(/[^a-z0-9]+/g, '_').substring(0, 30) + '_' + Date.now().toString().slice(-4);
+            
+            return {
+                id: caseId,
+                title: title,
+                category: document.getElementById('case-category').value,
+                difficulty: document.getElementById('case-difficulty').value,
+                doorNote: {
+                    name: document.getElementById('patient-name').value.trim(),
+                    age: parseInt(document.getElementById('patient-age').value) || 0,
+                    gender: document.getElementById('patient-gender').value,
+                    chiefComplaint: document.getElementById('chief-complaint').value.trim(),
+                    vitalSigns: {
+                        BP: document.getElementById('vital-bp').value.trim(),
+                        HR: document.getElementById('vital-hr').value.trim(),
+                        RR: document.getElementById('vital-rr').value.trim(),
+                        Temp: document.getElementById('vital-temp').value.trim(),
+                        SpO2: document.getElementById('vital-spo2').value.trim()
+                    }
+                },
+                correctDiagnosis: document.getElementById('correct-diagnosis').value.trim(),
+                mustNotMissDiagnoses: [...caseData.mustNotMiss],
+                otherDifferentials: [...caseData.otherDx],
+                expectedFindings: {
+                    history: [...caseData.history],
+                    physical: [...caseData.physical],
+                    workup: [...caseData.workup]
+                },
+                learningObjectives: document.getElementById('case-objectives').value.trim().split('\n').filter(l => l.trim()),
+                timeLimit: parseInt(document.getElementById('case-time-limit').value) || 15,
+                assessmentWeight: {
+                    history: parseInt(document.getElementById('weight-history').value) || 25,
+                    physical: parseInt(document.getElementById('weight-physical').value) || 25,
+                    differential: parseInt(document.getElementById('weight-differential').value) || 25,
+                    workup: parseInt(document.getElementById('weight-workup').value) || 25
+                }
+            };
+        }
+
+        // Preview
+        function updatePreview() {
+            const caseObj = buildCaseObject();
+            const preview = document.getElementById('case-preview');
+            
+            preview.innerHTML = `
+                <div class="space-y-3">
+                    <div><strong>Title:</strong> ${caseObj.title || '(not set)'}</div>
+                    <div><strong>ID:</strong> ${caseObj.id}</div>
+                    <div><strong>Category:</strong> ${caseObj.category || '(not set)'} | <strong>Difficulty:</strong> ${caseObj.difficulty}</div>
+                    <hr class="my-2">
+                    <div><strong>Patient:</strong> ${caseObj.doorNote.name}, ${caseObj.doorNote.age}${caseObj.doorNote.gender}</div>
+                    <div><strong>Chief Complaint:</strong> "${caseObj.doorNote.chiefComplaint}"</div>
+                    <div><strong>Vitals:</strong> BP ${caseObj.doorNote.vitalSigns.BP}, HR ${caseObj.doorNote.vitalSigns.HR}, RR ${caseObj.doorNote.vitalSigns.RR}, T ${caseObj.doorNote.vitalSigns.Temp}, SpO2 ${caseObj.doorNote.vitalSigns.SpO2}</div>
+                    <hr class="my-2">
+                    <div><strong>Correct Diagnosis:</strong> ${caseObj.correctDiagnosis || '(not set)'}</div>
+                    <div><strong>Must-Not-Miss:</strong> ${caseObj.mustNotMissDiagnoses.join(', ') || '(none)'}</div>
+                    <hr class="my-2">
+                    <div><strong>Expected History:</strong> ${caseObj.expectedFindings.history.join(', ') || '(none)'}</div>
+                    <div><strong>Expected Physical:</strong> ${caseObj.expectedFindings.physical.join(', ') || '(none)'}</div>
+                    <div><strong>Expected Workup:</strong> ${caseObj.expectedFindings.workup.join(', ') || '(none)'}</div>
+                    <hr class="my-2">
+                    <div><strong>Time Limit:</strong> ${caseObj.timeLimit} minutes</div>
+                    <div><strong>Scoring Weights:</strong> History ${caseObj.assessmentWeight.history}%, Physical ${caseObj.assessmentWeight.physical}%, Differential ${caseObj.assessmentWeight.differential}%, Workup ${caseObj.assessmentWeight.workup}%</div>
+                </div>
+            `;
+        }
+
+        // Export functions
+        function downloadJSON() {
+            const caseObj = buildCaseObject();
+            const blob = new Blob([JSON.stringify(caseObj, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${caseObj.id}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function copyJSCode() {
+            const caseObj = buildCaseObject();
+            const code = `// Add this case to ClinicalSkillsCases.cases array
+{
+    id: '${caseObj.id}',
+    title: '${caseObj.title}',
+    category: '${caseObj.category}',
+    difficulty: '${caseObj.difficulty}',
+    doorNote: {
+        name: '${caseObj.doorNote.name}',
+        age: ${caseObj.doorNote.age},
+        gender: '${caseObj.doorNote.gender}',
+        chiefComplaint: '${caseObj.doorNote.chiefComplaint}',
+        vitalSigns: {
+            BP: '${caseObj.doorNote.vitalSigns.BP}',
+            HR: '${caseObj.doorNote.vitalSigns.HR}',
+            RR: '${caseObj.doorNote.vitalSigns.RR}',
+            Temp: '${caseObj.doorNote.vitalSigns.Temp}',
+            SpO2: '${caseObj.doorNote.vitalSigns.SpO2}'
+        }
+    },
+    correctDiagnosis: '${caseObj.correctDiagnosis}',
+    mustNotMissDiagnoses: ${JSON.stringify(caseObj.mustNotMissDiagnoses)},
+    expectedFindings: {
+        history: ${JSON.stringify(caseObj.expectedFindings.history)},
+        physical: ${JSON.stringify(caseObj.expectedFindings.physical)},
+        workup: ${JSON.stringify(caseObj.expectedFindings.workup)}
+    },
+    learningObjectives: ${JSON.stringify(caseObj.learningObjectives)},
+    timeLimit: ${caseObj.timeLimit},
+    assessmentWeight: { history: ${caseObj.assessmentWeight.history}, physical: ${caseObj.assessmentWeight.physical}, differential: ${caseObj.assessmentWeight.differential}, workup: ${caseObj.assessmentWeight.workup} }
+}`;
+            
+            document.getElementById('generated-code').textContent = code;
+            document.getElementById('code-modal').classList.remove('hidden');
+            document.getElementById('code-modal').classList.add('flex');
+        }
+
+        function closeCodeModal() {
+            document.getElementById('code-modal').classList.add('hidden');
+            document.getElementById('code-modal').classList.remove('flex');
+        }
+
+        function copyGeneratedCode() {
+            const code = document.getElementById('generated-code').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                alert('Code copied to clipboard!');
+            });
+        }
+
+        function addToLocalStorage() {
+            const caseObj = buildCaseObject();
+            
+            // Get existing custom cases
+            let customCases = JSON.parse(localStorage.getItem('reasondx_cs_cases') || '[]');
+            
+            // Check if case with same ID exists
+            const existingIdx = customCases.findIndex(c => c.id === caseObj.id);
+            if (existingIdx > -1) {
+                if (!confirm('A case with this ID already exists. Replace it?')) return;
+                customCases[existingIdx] = caseObj;
+            } else {
+                customCases.push(caseObj);
+            }
+            
+            localStorage.setItem('reasondx_cs_cases', JSON.stringify(customCases));
+            alert(`Case "${caseObj.title}" added to local storage! It will appear in ReasonDx Clinical Skills Cases.`);
+        }
+
+        function startNewCase() {
+            if (!confirm('Start a new case? Current data will be lost.')) return;
+            
+            // Reset all fields
+            document.querySelectorAll('input[type="text"], input[type="number"], textarea').forEach(el => {
+                if (el.id.startsWith('weight-')) {
+                    el.value = el.id === 'weight-history' ? '30' : el.id === 'weight-physical' ? '25' : el.id === 'weight-differential' ? '25' : '20';
+                } else if (el.id === 'case-time-limit') {
+                    el.value = '15';
+                } else {
+                    el.value = '';
+                }
+            });
+            document.querySelectorAll('select').forEach(el => el.selectedIndex = 0);
+            
+            // Clear chips
+            ['mnm-list', 'other-dx-list', 'history-list', 'physical-list', 'workup-list'].forEach(id => {
+                document.getElementById(id).innerHTML = '';
+            });
+            
+            // Reset data
+            caseData.mustNotMiss = [];
+            caseData.otherDx = [];
+            caseData.history = [];
+            caseData.physical = [];
+            caseData.workup = [];
+            
+            // Go to first section
+            goToSection(0);
+        }
+
+        // Initialize
+        updateWeightTotal();
+    </script>
+</body>
+</html>
