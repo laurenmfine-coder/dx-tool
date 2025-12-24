@@ -23,7 +23,7 @@
         // Institution info
         institutionName: 'NSU Dr. Kiran C. Patel College of Allopathic Medicine',
         studyTitle: 'ReasonDx Clinical Reasoning Study',
-        piName: 'Lauren Mazzurco, DO',
+        piName: 'Lauren Fine, MD, FAAAAI',
         irbNumber: '', // Fill in when approved
         
         // Data collection endpoints (optional - for server-based collection)
