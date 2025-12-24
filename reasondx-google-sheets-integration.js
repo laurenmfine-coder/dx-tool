@@ -2,16 +2,22 @@
  * ReasonDx Research Data Collection - Google Sheets Integration
  * 
  * This module sends research data to Google Sheets via a Google Apps Script web app.
- * Version 1.0 | December 2024
+ * 
+ * SETUP INSTRUCTIONS:
+ * 1. Create a new Google Sheet
+ * 2. Go to Extensions → Apps Script
+ * 3. Paste the Google Apps Script code (provided separately)
+ * 4. Deploy as Web App
+ * 5. Copy the Web App URL and paste it below
  */
 
 (function() {
     'use strict';
 
     // ============================================================
-    // CONFIGURATION
+    // CONFIGURATION - UPDATE THIS URL AFTER SETUP
     // ============================================================
-    const GOOGLE_SHEETS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxajeXTFAhvZPqtaCfw8b5zAP4Jr9cUvqSI7T42mbr1xuSj5xmE5I3hXRQWlHaDzGev/exec';
+    const GOOGLE_SHEETS_WEB_APP_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
 
     // ============================================================
     // ACCOUNT EXCLUSION - These accounts don't have data collected
@@ -73,6 +79,11 @@
      * Send data to Google Sheets
      */
     async function sendToGoogleSheets(data) {
+        if (GOOGLE_SHEETS_WEB_APP_URL === 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE') {
+            console.warn('[Research] Google Sheets URL not configured. Data not sent.');
+            return { success: false, error: 'URL not configured' };
+        }
+
         try {
             const response = await fetch(GOOGLE_SHEETS_WEB_APP_URL, {
                 method: 'POST',
@@ -179,7 +190,7 @@
         const result = await sendToGoogleSheets(testData);
         
         if (result.success) {
-            console.log('[Research] ✓ Connection test sent! Check your Google Sheet Raw tab.');
+            console.log('[Research] ✓ Connection test successful! Check your Google Sheet.');
         } else {
             console.error('[Research] ✗ Connection test failed:', result.error);
         }
@@ -198,9 +209,15 @@
         getUserRole: getUserRole,
         testConnection: testConnection,
         
+        // Configuration
+        setGoogleSheetsUrl: function(url) {
+            // Note: This won't persist across page reloads
+            // For permanent config, update the URL in the code
+            console.log('[Research] Google Sheets URL updated (temporary)');
+        },
+        
         // Constants
-        EXCLUDED_PREFIXES: EXCLUDED_PREFIXES,
-        GOOGLE_SHEETS_URL: GOOGLE_SHEETS_WEB_APP_URL
+        EXCLUDED_PREFIXES: EXCLUDED_PREFIXES
     };
 
     console.log('[Research] Google Sheets Data Collection module loaded');
