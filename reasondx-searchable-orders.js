@@ -770,17 +770,27 @@
             const test = this.findTestById(orderId);
             if (!test) return;
             
-            // Create modal
+            // Create modal - MOBILE FRIENDLY with scrolling
             const modalHtml = `
-                <div id="justification-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+                <div id="justification-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 overflow-y-auto p-2 sm:p-4"
                      onclick="if(event.target.id === 'justification-modal') SearchableOrdersPanel.closeJustificationModal()">
-                    <div class="bg-white rounded-xl shadow-2xl max-w-md w-full mx-4 overflow-hidden" onclick="event.stopPropagation()">
-                        <div class="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4">
-                            <h3 class="font-bold text-lg">Justify Your Order</h3>
-                            <p class="text-blue-100 text-sm mt-1">📋 ${test.name}</p>
+                    <div class="bg-white rounded-xl shadow-2xl max-w-md w-full mx-auto my-2 sm:my-4 flex flex-col max-h-[90vh] sm:max-h-[85vh] overflow-hidden" onclick="event.stopPropagation()">
+                        <div class="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-3 sm:p-4 flex-shrink-0">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="font-bold text-lg">Justify Your Order</h3>
+                                    <p class="text-blue-100 text-sm mt-1">📋 ${test.name}</p>
+                                </div>
+                                <button onclick="SearchableOrdersPanel.closeJustificationModal()" 
+                                        class="text-white hover:bg-blue-500 rounded-full p-2 transition-colors">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                         
-                        <div class="p-4">
+                        <div class="p-3 sm:p-4 overflow-y-auto flex-1">
                             <p class="text-gray-700 mb-4 font-medium">Why are you ordering this test?</p>
                             
                             <!-- Reasoning Options -->
@@ -828,7 +838,7 @@
                             </div>
                         </div>
                         
-                        <div class="border-t p-4 flex gap-3 bg-gray-50">
+                        <div class="border-t p-3 sm:p-4 flex gap-2 sm:gap-3 bg-gray-50 flex-shrink-0">
                             <button onclick="SearchableOrdersPanel.closeJustificationModal()"
                                     class="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-gray-700 
                                            hover:bg-gray-100 transition-colors">
@@ -847,6 +857,7 @@
             `;
             
             document.body.insertAdjacentHTML('beforeend', modalHtml);
+            document.body.style.overflow = 'hidden';
             
             // Store state
             this._currentOrderId = orderId;
@@ -912,7 +923,7 @@
         
         closeJustificationModal: function() {
             const modal = document.getElementById('justification-modal');
-            if (modal) modal.remove();
+            if (modal) { modal.remove(); document.body.style.overflow = ''; }
             this._currentOrderId = null;
             this._selectedReason = null;
             this._selectedDiagnoses = [];
