@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MechanismDx - ECG Patterns</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>body{background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);min-height:100vh;}
+.header { background: #ffffff; border-bottom: 1px solid #e4e4e7; }
+.header-inner { max-width: 1200px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+.logo-link { text-decoration: none; color: #18181b; display: flex; align-items: center; gap: 20px; }
+.tagline { font-style: italic; font-size: 13px; color: #71717a; padding-left: 20px; border-left: 1px solid #e4e4e7; }
+.header-nav { display: flex; gap: 8px; }
+.nav-link { padding: 8px 14px; color: #71717a; text-decoration: none; font-size: 14px; font-weight: 500; border-radius: 8px; transition: all 0.15s; }
+.nav-link:hover { background: #f4f4f5; color: #18181b; }
+.nav-link.active { color: #18181b; }
+@media (max-width: 768px) { .tagline { display: none; } }
+
+</style>
+</head>
+<body class="text-white">
+    <header class="header">
+    <div class="header-inner">
+        <a href="index.html" class="logo-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 70" style="height: 36px; width: auto;">
+                <text x="5" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor" letter-spacing="-1">Mechanism</text>
+                <text x="213" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor">D</text>
+                <line x1="247" y1="24" x2="263" y2="45" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                <ellipse cx="245" cy="22" rx="2" ry="3.5" transform="rotate(-28 245 22)" fill="currentColor"/>
+                <path d="M 263 24 L 253 35 Q 249 40 249 47 Q 249 54 254 58 Q 259 62 259 68" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <ellipse cx="265" cy="22" rx="2" ry="3.5" transform="rotate(28 265 22)" fill="currentColor"/>
+                <circle cx="259" cy="68" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
+                <circle cx="259" cy="68" r="3.5" fill="currentColor"/>
+            </svg>
+            <span class="tagline">The right mechanism unlocks everything.</span>
+        </a>
+        <nav class="header-nav">
+            <a href="/" class="nav-link">ReasonDx</a>
+            <a href="/mechanism/" class="nav-link active">Mechanisms</a>
+            <a href="/fingerprint-dashboard.html" class="nav-link">Progress</a>
+        </nav>
+    </div>
+</header>
+
+    <main class="max-w-5xl mx-auto p-6">
+        <!-- Interactive Quiz -->
+        <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 mb-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-lg font-bold">ECG Quiz</h2>
+                <div id="scoreDisplay" class="text-sm text-green-400">Score: 0/0</div>
+            </div>
+            <div id="quizArea">
+                <div id="scenario" class="bg-slate-700 rounded-lg p-4 mb-4"></div>
+                <div id="options" class="grid grid-cols-2 gap-3 mb-4"></div>
+                <div id="feedback" class="hidden rounded-lg p-4 mb-4"></div>
+                <button onclick="nextQ()" id="nextBtn" class="hidden w-full bg-blue-600 hover:bg-blue-700 py-2 rounded-lg">Next</button>
+                <button onclick="startQuiz()" id="startBtn" class="w-full bg-green-600 hover:bg-green-700 py-2 rounded-lg">Start Quiz</button>
+            </div>
+        </div>
+
+        <!-- Reference Cards -->
+        <div class="space-y-4">
+            <div class="bg-red-500/10 border border-red-500/30 rounded-xl p-4">
+                <h3 class="text-red-400 font-bold mb-3">🚨 Life-Threatening</h3>
+                <div class="grid md:grid-cols-2 gap-3 text-sm">
+                    <div class="bg-slate-700 rounded p-3">
+                        <b class="text-amber-400">STEMI:</b>
+                        <span class="text-gray-300"> ST elevation ≥1mm limb/≥2mm precordial, reciprocal changes, hyperacute T waves</span>
+                    </div>
+                    <div class="bg-slate-700 rounded p-3">
+                        <b class="text-amber-400">VT:</b>
+                        <span class="text-gray-300"> Wide QRS >120ms, regular, fast 100-250, AV dissociation, concordance</span>
+                    </div>
+                    <div class="bg-slate-700 rounded p-3">
+                        <b class="text-amber-400">VFib:</b>
+                        <span class="text-gray-300"> Chaotic, no QRS. Shock immediately.</span>
+                    </div>
+                    <div class="bg-slate-700 rounded p-3">
+                        <b class="text-amber-400">Complete Heart Block:</b>
+                        <span class="text-gray-300"> P waves march through, no relation to QRS, slow escape</span>
+                    </div>
+                    <div class="bg-slate-700 rounded p-3">
+                        <b class="text-amber-400">Torsades:</b>
+                        <span class="text-gray-300"> Polymorphic VT, twisting axis, long QT. Tx: Magnesium</span>
+                    </div>
+                    <div class="bg-slate-700 rounded p-3">
+                        <b class="text-amber-400">Hyperkalemia:</b>
+                        <span class="text-gray-300"> Peaked T → Wide QRS → No P waves → Sine wave</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4">
+                <h3 class="text-amber-400 font-bold mb-3">⚡ Arrhythmias</h3>
+                <div class="grid md:grid-cols-2 gap-3 text-sm">
+                    <div class="bg-slate-700 rounded p-3">
+                        <b class="text-amber-400">AFib:</b>
+                        <span class="text-gray-300"> Irregularly irregular, no P waves, fibrillatory baseline</span>
+                    </div>
+                    <div class="bg-slate-700 rounded p-3">
+                        <b class="text-amber-400">Aflutter:</b>
+                        <span class="text-gray-300"> Sawtooth waves ~300/min, regular rate (2:1, 3:1, 4:1)</span>
+                    </div>
+                    <div class="bg-slate-700 rounded p-3">
+                        <b class="text-amber-400">SVT:</b>
+                        <span class="text-gray-300"> Regular, narrow, 150-250. Pseudo-R' V1 or pseudo-S inferior</span>
+                    </div>
+                    <div class="bg-slate-700 rounded p-3">
+                        <b class="text-amber-400">WPW:</b>
+                        <span class="text-gray-300"> Short PR <120ms, delta wave, wide QRS</span>
+                    </div>
+                    <div class="bg-slate-700 rounded p-3">
+                        <b class="text-amber-400">Mobitz I:</b>
+                        <span class="text-gray-300"> Progressive PR prolongation → dropped QRS. Usually benign.</span>
+                    </div>
+                    <div class="bg-slate-700 rounded p-3">
+                        <b class="text-amber-400">Mobitz II:</b>
+                        <span class="text-gray-300"> Constant PR, sudden dropped QRS. Needs pacing.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-4">
+                <h3 class="text-blue-400 font-bold mb-3">📊 Other Patterns</h3>
+                <div class="grid md:grid-cols-2 gap-3 text-sm">
+                    <div class="bg-slate-700 rounded p-3">
+                        <b class="text-amber-400">LBBB:</b>
+                        <span class="text-gray-300"> QRS >120ms, deep S in V1, tall R in I/V6. WiLLiaM</span>
+                    </div>
+                    <div class="bg-slate-700 rounded p-3">
+                        <b class="text-amber-400">RBBB:</b>
+                        <span class="text-gray-300"> QRS >120ms, RSR' "bunny ears" V1, wide S in I/V6. MaRRoW</span>
+                    </div>
+                    <div class="bg-slate-700 rounded p-3">
+                        <b class="text-amber-400">PE:</b>
+                        <span class="text-gray-300"> S1Q3T3, sinus tach, new RBBB, T inv V1-V4</span>
+                    </div>
+                    <div class="bg-slate-700 rounded p-3">
+                        <b class="text-amber-400">Pericarditis:</b>
+                        <span class="text-gray-300"> Diffuse ST elevation, PR depression, no reciprocal</span>
+                    </div>
+                    <div class="bg-slate-700 rounded p-3">
+                        <b class="text-amber-400">Long QT:</b>
+                        <span class="text-gray-300"> QTc >460 (M) / >470 (F). Risk of Torsades.</span>
+                    </div>
+                    <div class="bg-slate-700 rounded p-3">
+                        <b class="text-amber-400">Brugada:</b>
+                        <span class="text-gray-300"> Coved ST elevation V1-V2 + T inversion. ICD needed.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+    const cases = [
+        {q:"68yo, palpitations. Irregularly irregular, no P waves, narrow QRS", a:"Atrial Fibrillation", opts:["Atrial Fibrillation","Atrial Flutter","SVT","Sinus Arrhythmia"]},
+        {q:"55yo, chest pain. ST elevation 4mm V1-V4, reciprocal ST depression inferior", a:"Anterior STEMI", opts:["Anterior STEMI","Pericarditis","Early Repolarization","LBBB"]},
+        {q:"78yo, HR 35. P waves march through at 85/min, no relation to QRS at 32/min", a:"Complete Heart Block", opts:["Complete Heart Block","Mobitz II","Sinus Bradycardia","Junctional Rhythm"]},
+        {q:"62yo, prior MI. Wide QRS 160ms, regular at 180, AV dissociation, concordance", a:"Ventricular Tachycardia", opts:["Ventricular Tachycardia","SVT with Aberrancy","Atrial Flutter","AFib with RVR"]},
+        {q:"ESRD patient. K+ 7.8, peaked T waves, wide QRS, flattened P waves", a:"Hyperkalemia", opts:["Hyperkalemia","Acute MI","LBBB","Hypothermia"]},
+        {q:"25yo, palpitations. Short PR 100ms, delta wave, wide QRS 130ms", a:"WPW", opts:["WPW","LBBB","LVH","Hyperkalemia"]},
+        {q:"72yo, regular pulse 150. Sawtooth waves in inferior leads ~300/min, 2:1 conduction", a:"Atrial Flutter", opts:["Atrial Flutter","SVT","Sinus Tach","AFib"]},
+        {q:"32yo, pleuritic chest pain. Diffuse ST elevation, PR depression, no reciprocal changes", a:"Pericarditis", opts:["Pericarditis","STEMI","Early Repol","Myocarditis"]},
+        {q:"Pulseless after methadone. Polymorphic VT, twisting QRS, QTc 580ms", a:"Torsades de Pointes", opts:["Torsades de Pointes","Monomorphic VT","VFib","AFib with WPW"]},
+        {q:"65yo. Wide QRS 160ms, deep QS in V1, tall R in V6, appropriate discordance", a:"LBBB", opts:["LBBB","RBBB","WPW","Ventricular Paced"]}
+    ];
+    let idx=0, score=0, total=0, answered=false;
+    
+    function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+    
+    function startQuiz(){
+        shuffle(cases); idx=0; score=0; total=0; 
+        document.getElementById('startBtn').classList.add('hidden');
+        document.getElementById('scoreDisplay').textContent='Score: 0/0';
+        showQ();
+    }
+    
+    function showQ(){
+        answered=false;
+        const c=cases[idx];
+        document.getElementById('scenario').innerHTML=`<div class="text-gray-400 text-sm mb-2">Scenario:</div><div class="text-white">${c.q}</div>`;
+        const opts=shuffle([...c.opts]);
+        document.getElementById('options').innerHTML=opts.map(o=>`<button onclick="check('${o}')" class="bg-slate-600 hover:bg-slate-500 p-3 rounded-lg text-left transition">${o}</button>`).join('');
+        document.getElementById('feedback').classList.add('hidden');
+        document.getElementById('nextBtn').classList.add('hidden');
+    }
+    
+    function check(ans){
+        if(answered)return;
+        answered=true; total++;
+        const c=cases[idx], correct=ans===c.a;
+        if(correct)score++;
+        document.getElementById('scoreDisplay').textContent=`Score: ${score}/${total}`;
+        const fb=document.getElementById('feedback');
+        fb.classList.remove('hidden');
+        fb.className=`rounded-lg p-4 mb-4 ${correct?'bg-green-500/20 border border-green-500/50':'bg-red-500/20 border border-red-500/50'}`;
+        fb.innerHTML=correct?`<span class="text-green-400 font-bold">✓ Correct!</span>`:`<span class="text-red-400 font-bold">✗ Incorrect.</span> Answer: <span class="text-amber-400">${c.a}</span>`;
+        document.getElementById('nextBtn').classList.remove('hidden');
+    }
+    
+    function nextQ(){
+        idx++;
+        if(idx>=cases.length){
+            document.getElementById('scenario').innerHTML=`<div class="text-center py-8"><div class="text-2xl font-bold text-green-400">Quiz Complete!</div><div class="text-gray-300 mt-2">Final Score: ${score}/${total} (${Math.round(score/total*100)}%)</div></div>`;
+            document.getElementById('options').innerHTML='';
+            document.getElementById('feedback').classList.add('hidden');
+            document.getElementById('nextBtn').classList.add('hidden');
+            document.getElementById('startBtn').classList.remove('hidden');
+            document.getElementById('startBtn').textContent='Restart Quiz';
+        } else showQ();
+    }
+    </script>
+</body>
+</html>
