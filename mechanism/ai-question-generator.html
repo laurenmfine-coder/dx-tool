@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MechanismX - AI Question Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); min-height: 100vh; }
+        .generating { animation: pulse 1.5s infinite; }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .option-card { transition: all 0.2s; }
+        .option-card:hover:not(.disabled) { transform: translateX(4px); }
+        .option-card.selected { border-color: #3b82f6; background: rgba(59, 130, 246, 0.1); }
+        .option-card.correct { border-color: #22c55e; background: rgba(34, 197, 94, 0.15); }
+        .option-card.incorrect { border-color: #ef4444; background: rgba(239, 68, 68, 0.15); }
+        .option-card.missed { border-color: #22c55e; border-style: dashed; }
+    </style>
+</head>
+<body class="text-white">
+    <nav class="bg-slate-800/80 backdrop-blur border-b border-slate-700 px-6 py-4">
+        <div class="max-w-4xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="text-gray-400 hover:text-white text-sm">← MechanismX</a>
+                <h1 class="text-xl font-bold">🤖 AI Question Generator</h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <select id="topic-select" onchange="setTopic(this.value)" class="bg-slate-700 rounded px-3 py-1.5 text-sm">
+                    <option value="heart_failure">Heart Failure</option>
+                    <option value="aki">Acute Kidney Injury</option>
+                    <option value="sepsis">Sepsis</option>
+                    <option value="diabetes">Diabetes</option>
+                    <option value="respiratory">Respiratory</option>
+                </select>
+                <select id="difficulty-select" onchange="setDifficulty(this.value)" class="bg-slate-700 rounded px-3 py-1.5 text-sm">
+                    <option value="ume">UME (MS1-2)</option>
+                    <option value="step1" selected>Step 1 Level</option>
+                    <option value="step2">Step 2 Level</option>
+                    <option value="advanced">Advanced/GME</option>
+                </select>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-4xl mx-auto p-6">
+        <!-- Generator Controls -->
+        <div class="bg-slate-800 rounded-xl p-4 border border-slate-700 mb-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="font-semibold">Generate Mechanism Questions</h2>
+                    <p class="text-sm text-gray-400">AI creates unique questions targeting specific pathway connections</p>
+                </div>
+                <button onclick="generateQuestion()" id="generate-btn" class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg font-medium flex items-center gap-2">
+                    <span>⚡</span> Generate
+                </button>
+            </div>
+        </div>
+
+        <!-- Question Display -->
+        <div id="question-container" class="hidden">
+            <!-- Question Stem -->
+            <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 mb-4">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="bg-blue-500/20 text-blue-400 text-xs px-2 py-1 rounded" id="q-topic">Heart Failure</span>
+                    <span class="bg-purple-500/20 text-purple-400 text-xs px-2 py-1 rounded" id="q-mechanism">RAAS Pathway</span>
+                    <span class="bg-amber-500/20 text-amber-400 text-xs px-2 py-1 rounded" id="q-difficulty">Step 1</span>
+                </div>
+                <div id="question-stem" class="text-lg leading-relaxed"></div>
+            </div>
+
+            <!-- Answer Options -->
+            <div id="options-container" class="space-y-3 mb-4"></div>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center justify-between">
+                <button onclick="showHint()" id="hint-btn" class="text-amber-400 hover:text-amber-300 text-sm">
+                    💡 Show Hint
+                </button>
+                <div class="flex gap-3">
+                    <button onclick="submitAnswer()" id="submit-btn" class="bg-green-600 hover:bg-green-700 px-6 py-2 rounded-lg font-medium">
+                        Submit
+                    </button>
+                    <button onclick="generateQuestion()" id="next-btn" class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg font-medium hidden">
+                        Next Question →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hint Panel -->
+            <div id="hint-panel" class="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4 mt-4 hidden">
+                <div class="text-sm text-amber-400 font-semibold mb-1">💡 Hint</div>
+                <div id="hint-text" class="text-sm text-gray-300"></div>
+            </div>
+
+            <!-- Explanation Panel -->
+            <div id="explanation-panel" class="bg-slate-800 rounded-xl p-6 border border-slate-700 mt-4 hidden">
+                <div class="flex items-center gap-2 mb-3">
+                    <span id="result-icon" class="text-2xl"></span>
+                    <span id="result-text" class="font-semibold text-lg"></span>
+                </div>
+                <div id="explanation-content" class="text-gray-300 space-y-3"></div>
+                
+                <!-- Mechanism Visualization -->
+                <div class="mt-4 pt-4 border-t border-slate-700">
+                    <div class="text-sm text-gray-400 mb-2">Related Mechanism Pathway:</div>
+                    <div id="mechanism-viz" class="bg-slate-700/50 rounded-lg p-4"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="text-center py-16">
+            <div class="text-6xl mb-4">🧠</div>
+            <h2 class="text-xl font-semibold mb-2">Ready to Generate Questions</h2>
+            <p class="text-gray-400 mb-6">Select a topic and difficulty, then click Generate to create a unique mechanism-based question.</p>
+            <button onclick="generateQuestion()" class="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-lg font-medium text-lg">
+                ⚡ Generate First Question
+            </button>
+        </div>
+
+        <!-- Stats -->
+        <div class="bg-slate-800 rounded-xl p-4 border border-slate-700 mt-6">
+            <div class="grid grid-cols-4 gap-4 text-center">
+                <div>
+                    <div id="stat-generated" class="text-2xl font-bold">0</div>
+                    <div class="text-xs text-gray-400">Generated</div>
+                </div>
+                <div>
+                    <div id="stat-correct" class="text-2xl font-bold text-green-400">0</div>
+                    <div class="text-xs text-gray-400">Correct</div>
+                </div>
+                <div>
+                    <div id="stat-accuracy" class="text-2xl font-bold">--%</div>
+                    <div class="text-xs text-gray-400">Accuracy</div>
+                </div>
+                <div>
+                    <div id="stat-streak" class="text-2xl font-bold">0 🔥</div>
+                    <div class="text-xs text-gray-400">Streak</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+<script>
+// ============================================================================
+// AI QUESTION GENERATOR ENGINE
+// Generates unlimited mechanism-based questions from pathway templates
+// ============================================================================
+
+const QUESTION_TEMPLATES = {
+    heart_failure: {
+        mechanisms: [
+            {
+                id: 'raas_activation',
+                name: 'RAAS Pathway',
+                pathway: ['↓CO', '↓Renal Perfusion', 'RAAS↑', 'AngII↑', 'Aldosterone↑', 'Na Retention', 'Volume Overload'],
+                questions: [
+                    {
+                        stem: "A 68-year-old man with heart failure presents with worsening lower extremity edema despite taking furosemide 40mg daily. Labs show Na 134, K 3.2, Cr 1.4. Which mechanism best explains his hypokalemia?",
+                        correct: "Increased distal sodium delivery leads to enhanced potassium secretion via principal cells",
+                        distractors: [
+                            "Direct potassium wasting in the thick ascending limb",
+                            "Decreased aldosterone secretion from improved cardiac output",
+                            "Inhibition of the Na-K-ATPase pump in collecting duct"
+                        ],
+                        explanation: "Loop diuretics block NKCC2 in the thick ascending limb, delivering more sodium to the collecting duct. This increased sodium is reabsorbed via ENaC in exchange for potassium secretion. Secondary hyperaldosteronism from HF further enhances this K+ loss.",
+                        hint: "Think about where loop diuretics work and what happens to sodium downstream."
+                    },
+                    {
+                        stem: "A patient with HFrEF is started on lisinopril. Which pathway does this medication primarily interrupt?",
+                        correct: "Angiotensin-converting enzyme catalyzes the conversion of angiotensin I to angiotensin II",
+                        distractors: [
+                            "Renin release from juxtaglomerular cells",
+                            "Aldosterone binding to mineralocorticoid receptors",
+                            "Angiotensin II binding to AT1 receptors"
+                        ],
+                        explanation: "ACE inhibitors block the enzyme that converts angiotensin I to angiotensin II. This reduces vasoconstriction, aldosterone release, and cardiac remodeling. ARBs work downstream by blocking AT1 receptors.",
+                        hint: "The drug name gives you a clue about its mechanism."
+                    }
+                ]
+            },
+            {
+                id: 'forward_backward_failure',
+                name: 'Forward/Backward Failure',
+                pathway: ['LV Dysfunction', 'Forward Failure (↓CO)', 'Backward Failure (Congestion)', 'Pulmonary Edema', 'Peripheral Edema'],
+                questions: [
+                    {
+                        stem: "A 72-year-old woman with new-onset dyspnea has bilateral crackles and an S3 gallop. Echo shows EF 25%. Her dyspnea is primarily caused by:",
+                        correct: "Elevated left atrial pressure transmitted to pulmonary capillaries causing transudation",
+                        distractors: [
+                            "Decreased oxygen-carrying capacity from anemia",
+                            "Primary pulmonary parenchymal disease",
+                            "Increased dead space ventilation"
+                        ],
+                        explanation: "In left heart failure, elevated LV end-diastolic pressure backs up into the LA, then pulmonary veins, then pulmonary capillaries. When hydrostatic pressure exceeds oncotic pressure, fluid leaks into the interstitium and alveoli causing pulmonary edema and dyspnea.",
+                        hint: "Trace the pressure backward from the failing ventricle."
+                    }
+                ]
+            },
+            {
+                id: 'neurohormonal',
+                name: 'Neurohormonal Activation',
+                pathway: ['↓CO', 'Baroreceptor Unloading', 'SNS Activation', 'RAAS Activation', 'ADH Release', 'Cardiac Remodeling'],
+                questions: [
+                    {
+                        stem: "Beta-blockers improve survival in HFrEF primarily by:",
+                        correct: "Blocking chronic sympathetic activation that promotes adverse cardiac remodeling",
+                        distractors: [
+                            "Increasing heart rate to improve cardiac output",
+                            "Directly increasing myocardial contractility",
+                            "Reducing preload through venodilation"
+                        ],
+                        explanation: "Chronic SNS activation in HF leads to myocyte apoptosis, fibrosis, and adverse remodeling. Beta-blockers interrupt this by blocking catecholamine effects on the heart. Though they may initially reduce CO, long-term they improve EF and survival.",
+                        hint: "Think about why we use drugs that seem counterintuitive in heart failure."
+                    }
+                ]
+            }
+        ]
+    },
+    aki: {
+        mechanisms: [
+            {
+                id: 'prerenal',
+                name: 'Prerenal AKI',
+                pathway: ['↓Effective Circulating Volume', '↓Renal Perfusion', '↓GFR', 'RAAS Activation', 'Avid Na Reabsorption', 'Concentrated Urine'],
+                questions: [
+                    {
+                        stem: "A 78-year-old man with diarrhea for 3 days presents with Cr 2.8 (baseline 1.0). UA shows SG 1.030, no casts. FeNa is 0.4%. This pattern indicates:",
+                        correct: "Intact tubular function with appropriate sodium conservation",
+                        distractors: [
+                            "Acute tubular necrosis with impaired sodium handling",
+                            "Glomerulonephritis with nephrotic-range proteinuria",
+                            "Obstructive uropathy with hydronephrosis"
+                        ],
+                        explanation: "In prerenal AKI, tubules are intact and respond appropriately to hypovolemia by avidly reabsorbing sodium (FeNa <1%) and concentrating urine (SG >1.020). ATN would show FeNa >2% and isosthenuria due to tubular damage.",
+                        hint: "What should healthy tubules do when the body is volume depleted?"
+                    },
+                    {
+                        stem: "The BUN:Cr ratio in prerenal AKI is typically elevated (>20:1) because:",
+                        correct: "Urea is passively reabsorbed with water in the proximal tubule during low flow states",
+                        distractors: [
+                            "Creatinine secretion is enhanced in the distal tubule",
+                            "BUN production is increased by hepatic stress response",
+                            "Creatinine is diluted by increased urine output"
+                        ],
+                        explanation: "In prerenal states, slow tubular flow allows more time for passive urea reabsorption in the proximal tubule, disproportionately increasing BUN. Creatinine is not reabsorbed, so its rise reflects GFR decline alone.",
+                        hint: "Think about what happens to filtrate when it moves slowly through tubules."
+                    }
+                ]
+            },
+            {
+                id: 'atn',
+                name: 'Acute Tubular Necrosis',
+                pathway: ['Ischemia/Toxin', 'Tubular Cell Injury', 'Cell Sloughing', 'Cast Formation', 'Tubular Obstruction', '↓GFR'],
+                questions: [
+                    {
+                        stem: "A patient develops AKI 3 days after cardiac surgery with prolonged bypass time. UA shows muddy brown casts. The casts are composed of:",
+                        correct: "Sloughed tubular epithelial cells and cellular debris",
+                        distractors: [
+                            "Red blood cells from glomerular injury",
+                            "White blood cells from pyelonephritis",
+                            "Hyaline protein from concentrated urine"
+                        ],
+                        explanation: "Muddy brown (granular) casts are pathognomonic for ATN. They form when injured tubular epithelial cells slough into the lumen, mix with Tamm-Horsfall protein, and form casts. This distinguishes ATN from prerenal AKI.",
+                        hint: "The 'muddy brown' color tells you about the cellular origin."
+                    }
+                ]
+            }
+        ]
+    },
+    sepsis: {
+        mechanisms: [
+            {
+                id: 'distributive_shock',
+                name: 'Distributive Shock',
+                pathway: ['Infection', 'Cytokine Release', 'Vasodilation', '↓SVR', 'Hypotension', 'Tissue Hypoperfusion'],
+                questions: [
+                    {
+                        stem: "A patient with septic shock has warm extremities, bounding pulses, and requires norepinephrine. The hemodynamic profile shows low SVR and high cardiac output. These findings result from:",
+                        correct: "Cytokine-mediated vasodilation causing distributive shock",
+                        distractors: [
+                            "Cardiac depression causing cardiogenic shock",
+                            "Hypovolemia causing hemorrhagic shock",
+                            "Pulmonary embolism causing obstructive shock"
+                        ],
+                        explanation: "Septic shock is a distributive shock characterized by inappropriate vasodilation from inflammatory mediators. This causes low SVR despite high cardiac output. Warm extremities and bounding pulses reflect the hyperdynamic state.",
+                        hint: "What type of shock has high cardiac output but still causes hypoperfusion?"
+                    }
+                ]
+            },
+            {
+                id: 'lactate',
+                name: 'Lactate Production',
+                pathway: ['Tissue Hypoperfusion', 'Anaerobic Metabolism', 'Pyruvate → Lactate', '↑Lactate', 'Metabolic Acidosis'],
+                questions: [
+                    {
+                        stem: "A septic patient has lactate of 6.2 mmol/L. The lactate elevation primarily indicates:",
+                        correct: "Inadequate tissue oxygen delivery relative to metabolic demand",
+                        distractors: [
+                            "Liver failure with impaired lactate clearance only",
+                            "Excessive carbohydrate intake",
+                            "Respiratory alkalosis compensation"
+                        ],
+                        explanation: "In sepsis, lactate rises primarily from anaerobic metabolism due to tissue hypoperfusion and mitochondrial dysfunction. While impaired clearance contributes, elevated lactate is a marker of inadequate oxygen delivery and carries prognostic significance.",
+                        hint: "What happens to cellular metabolism when oxygen delivery is insufficient?"
+                    }
+                ]
+            }
+        ]
+    },
+    diabetes: {
+        mechanisms: [
+            {
+                id: 'dka',
+                name: 'DKA Pathophysiology',
+                pathway: ['Insulin Deficiency', '↑Glucagon', '↑Lipolysis', '↑Ketogenesis', 'Ketoacidosis', 'Osmotic Diuresis'],
+                questions: [
+                    {
+                        stem: "A 22-year-old with type 1 diabetes presents with blood glucose 480, pH 7.18, and positive ketones. The acidosis is caused by:",
+                        correct: "Hepatic ketone body production from unregulated lipolysis",
+                        distractors: [
+                            "Lactic acid from glucose fermentation",
+                            "Renal tubular acidosis from hyperglycemia",
+                            "Carbonic acid from respiratory failure"
+                        ],
+                        explanation: "In DKA, absolute insulin deficiency combined with glucagon excess causes unregulated lipolysis. Free fatty acids are converted to ketone bodies (beta-hydroxybutyrate, acetoacetate) in the liver, causing anion gap metabolic acidosis.",
+                        hint: "Insulin normally suppresses which metabolic pathway?"
+                    }
+                ]
+            }
+        ]
+    },
+    respiratory: {
+        mechanisms: [
+            {
+                id: 'vq_mismatch',
+                name: 'V/Q Mismatch',
+                pathway: ['Regional Lung Pathology', 'V/Q Mismatch', 'Hypoxemia', 'Compensatory Changes'],
+                questions: [
+                    {
+                        stem: "A patient with pneumonia has hypoxemia that improves with supplemental oxygen. This response suggests the primary mechanism is:",
+                        correct: "V/Q mismatch with blood flowing past poorly ventilated alveoli",
+                        distractors: [
+                            "True shunt with blood bypassing alveoli entirely",
+                            "Diffusion limitation at the alveolar-capillary membrane",
+                            "Hypoventilation from respiratory muscle weakness"
+                        ],
+                        explanation: "V/Q mismatch responds to supplemental oxygen because increasing FiO2 improves oxygen content even in poorly ventilated units. True shunt (blood bypassing alveoli) does NOT respond to O2 because shunted blood never contacts alveolar gas.",
+                        hint: "What distinguishes V/Q mismatch from true shunt in terms of oxygen responsiveness?"
+                    }
+                ]
+            }
+        ]
+    }
+};
+
+let state = {
+    topic: 'heart_failure',
+    difficulty: 'step1',
+    currentQuestion: null,
+    selectedAnswer: null,
+    submitted: false,
+    stats: { generated: 0, correct: 0, streak: 0 }
+};
+
+function setTopic(topic) {
+    state.topic = topic;
+}
+
+function setDifficulty(diff) {
+    state.difficulty = diff;
+}
+
+function generateQuestion() {
+    const btn = document.getElementById('generate-btn');
+    btn.innerHTML = '<span class="generating">⚡</span> Generating...';
+    btn.disabled = true;
+    
+    // Simulate AI generation delay
+    setTimeout(() => {
+        const topicData = QUESTION_TEMPLATES[state.topic];
+        if (!topicData) {
+            alert('Topic not yet available');
+            btn.innerHTML = '<span>⚡</span> Generate';
+            btn.disabled = false;
+            return;
+        }
+        
+        // Pick random mechanism and question
+        const mechanism = topicData.mechanisms[Math.floor(Math.random() * topicData.mechanisms.length)];
+        const question = mechanism.questions[Math.floor(Math.random() * mechanism.questions.length)];
+        
+        state.currentQuestion = { ...question, mechanism };
+        state.selectedAnswer = null;
+        state.submitted = false;
+        state.stats.generated++;
+        
+        renderQuestion();
+        
+        btn.innerHTML = '<span>⚡</span> Generate';
+        btn.disabled = false;
+    }, 800);
+}
+
+function renderQuestion() {
+    document.getElementById('empty-state').classList.add('hidden');
+    document.getElementById('question-container').classList.remove('hidden');
+    
+    const q = state.currentQuestion;
+    
+    // Set tags
+    document.getElementById('q-topic').textContent = state.topic.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase());
+    document.getElementById('q-mechanism').textContent = q.mechanism.name;
+    document.getElementById('q-difficulty').textContent = state.difficulty.toUpperCase();
+    
+    // Set stem
+    document.getElementById('question-stem').textContent = q.stem;
+    
+    // Create shuffled options
+    const options = [
+        { text: q.correct, isCorrect: true },
+        ...q.distractors.map(d => ({ text: d, isCorrect: false }))
+    ];
+    
+    // Shuffle
+    for (let i = options.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [options[i], options[j]] = [options[j], options[i]];
+    }
+    
+    // Render options
+    const container = document.getElementById('options-container');
+    container.innerHTML = options.map((opt, idx) => `
+        <div class="option-card bg-slate-800 border-2 border-slate-600 rounded-lg p-4 cursor-pointer"
+             data-index="${idx}" data-correct="${opt.isCorrect}" onclick="selectAnswer(${idx})">
+            <div class="flex items-start gap-3">
+                <div class="w-6 h-6 rounded-full border-2 border-slate-500 flex items-center justify-center flex-shrink-0 mt-0.5" id="radio-${idx}">
+                    <span class="text-sm font-medium">${String.fromCharCode(65 + idx)}</span>
+                </div>
+                <span class="text-gray-200">${opt.text}</span>
+            </div>
+        </div>
+    `).join('');
+    
+    // Reset UI
+    document.getElementById('submit-btn').classList.remove('hidden');
+    document.getElementById('next-btn').classList.add('hidden');
+    document.getElementById('hint-panel').classList.add('hidden');
+    document.getElementById('explanation-panel').classList.add('hidden');
+    document.getElementById('hint-btn').classList.remove('hidden');
+    
+    updateStats();
+}
+
+function selectAnswer(idx) {
+    if (state.submitted) return;
+    
+    state.selectedAnswer = idx;
+    
+    document.querySelectorAll('.option-card').forEach((card, i) => {
+        card.classList.toggle('selected', i === idx);
+        const radio = document.getElementById(`radio-${i}`);
+        radio.innerHTML = i === idx ? '●' : String.fromCharCode(65 + i);
+    });
+}
+
+function submitAnswer() {
+    if (state.selectedAnswer === null) {
+        alert('Please select an answer');
+        return;
+    }
+    
+    state.submitted = true;
+    
+    const selectedCard = document.querySelector(`[data-index="${state.selectedAnswer}"]`);
+    const isCorrect = selectedCard.dataset.correct === 'true';
+    
+    // Update stats
+    if (isCorrect) {
+        state.stats.correct++;
+        state.stats.streak++;
+    } else {
+        state.stats.streak = 0;
+    }
+    
+    // Mark answers
+    document.querySelectorAll('.option-card').forEach(card => {
+        card.classList.add('disabled');
+        if (card.dataset.correct === 'true') {
+            card.classList.add('correct');
+        } else if (card.dataset.index == state.selectedAnswer) {
+            card.classList.add('incorrect');
+        }
+    });
+    
+    // Show explanation
+    const panel = document.getElementById('explanation-panel');
+    document.getElementById('result-icon').textContent = isCorrect ? '✅' : '❌';
+    document.getElementById('result-text').textContent = isCorrect ? 'Correct!' : 'Incorrect';
+    document.getElementById('result-text').className = `font-semibold text-lg ${isCorrect ? 'text-green-400' : 'text-red-400'}`;
+    
+    document.getElementById('explanation-content').innerHTML = `
+        <p>${state.currentQuestion.explanation}</p>
+    `;
+    
+    // Show pathway visualization
+    const pathwayViz = state.currentQuestion.mechanism.pathway.map((step, i) => 
+        `<span class="inline-flex items-center">
+            <span class="bg-slate-600 px-2 py-1 rounded text-xs">${step}</span>
+            ${i < state.currentQuestion.mechanism.pathway.length - 1 ? '<span class="mx-1 text-blue-400">→</span>' : ''}
+        </span>`
+    ).join('');
+    document.getElementById('mechanism-viz').innerHTML = `<div class="flex flex-wrap gap-1 items-center">${pathwayViz}</div>`;
+    
+    panel.classList.remove('hidden');
+    
+    // Toggle buttons
+    document.getElementById('submit-btn').classList.add('hidden');
+    document.getElementById('next-btn').classList.remove('hidden');
+    document.getElementById('hint-btn').classList.add('hidden');
+    
+    updateStats();
+}
+
+function showHint() {
+    document.getElementById('hint-text').textContent = state.currentQuestion.hint;
+    document.getElementById('hint-panel').classList.remove('hidden');
+}
+
+function updateStats() {
+    document.getElementById('stat-generated').textContent = state.stats.generated;
+    document.getElementById('stat-correct').textContent = state.stats.correct;
+    document.getElementById('stat-accuracy').textContent = state.stats.generated > 0 
+        ? Math.round((state.stats.correct / state.stats.generated) * 100) + '%' 
+        : '--%';
+    document.getElementById('stat-streak').textContent = state.stats.streak + ' 🔥';
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', updateStats);
+</script>
+</body>
+</html>
