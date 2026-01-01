@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MechanismX - Sepsis Deep Dive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); min-height: 100vh; }
+        .layer-card { transition: all 0.3s; }
+        .layer-card:hover { transform: translateX(4px); }
+        .layer-card.active { border-left: 4px solid #f59e0b; background: rgba(245, 158, 11, 0.1); }
+        .node { transition: all 0.3s; cursor: pointer; }
+        .node:hover { transform: scale(1.05); }
+        .connection-line { stroke: #60a5fa; stroke-width: 2; fill: none; }
+        .pulse { animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body class="text-white">
+    <nav class="bg-slate-800/80 backdrop-blur border-b border-slate-700 px-6 py-4 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="text-gray-400 hover:text-white text-sm">← MechanismX</a>
+                <h1 class="text-xl font-bold">🦠 Sepsis Mechanism Module</h1>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="text-sm text-gray-400">Progress:</span>
+                <div class="w-32 h-2 bg-slate-700 rounded-full">
+                    <div id="progress-bar" class="h-full bg-amber-500 rounded-full transition-all" style="width: 0%"></div>
+                </div>
+                <span id="progress-text" class="text-sm text-amber-400">0%</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-6xl mx-auto p-6 flex gap-6">
+        <!-- Left: Layer Navigation -->
+        <div class="w-64 flex-shrink-0 space-y-2">
+            <div class="bg-slate-800 rounded-xl p-4 border border-slate-700 mb-4">
+                <h3 class="text-xs text-gray-400 uppercase mb-2">Module Layers</h3>
+                <div class="space-y-2">
+                    <div class="layer-card p-3 rounded-lg bg-slate-700/50 cursor-pointer active" onclick="loadLayer(1)" id="layer-1">
+                        <div class="flex items-center justify-between">
+                            <span class="font-medium text-sm">Layer 1</span>
+                            <span class="text-xs text-gray-400">~15 min</span>
+                        </div>
+                        <div class="text-xs text-gray-400 mt-1">Host Response Basics</div>
+                    </div>
+                    <div class="layer-card p-3 rounded-lg bg-slate-700/50 cursor-pointer" onclick="loadLayer(2)" id="layer-2">
+                        <div class="flex items-center justify-between">
+                            <span class="font-medium text-sm">Layer 2</span>
+                            <span class="text-xs text-gray-400">~20 min</span>
+                        </div>
+                        <div class="text-xs text-gray-400 mt-1">Inflammatory Cascade</div>
+                    </div>
+                    <div class="layer-card p-3 rounded-lg bg-slate-700/50 cursor-pointer" onclick="loadLayer(3)" id="layer-3">
+                        <div class="flex items-center justify-between">
+                            <span class="font-medium text-sm">Layer 3</span>
+                            <span class="text-xs text-gray-400">~20 min</span>
+                        </div>
+                        <div class="text-xs text-gray-400 mt-1">Organ Dysfunction</div>
+                    </div>
+                    <div class="layer-card p-3 rounded-lg bg-slate-700/50 cursor-pointer" onclick="loadLayer(4)" id="layer-4">
+                        <div class="flex items-center justify-between">
+                            <span class="font-medium text-sm">Layer 4</span>
+                            <span class="text-xs text-gray-400">~25 min</span>
+                        </div>
+                        <div class="text-xs text-gray-400 mt-1">Treatment Rationale</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-slate-800 rounded-xl p-4 border border-slate-700">
+                <h3 class="text-xs text-gray-400 uppercase mb-2">Key Concepts</h3>
+                <div id="key-concepts" class="space-y-2 text-sm">
+                    <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-red-500"></span>
+                        <span class="text-gray-300">SIRS vs Sepsis</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                        <span class="text-gray-300">Cytokine Storm</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                        <span class="text-gray-300">Distributive Shock</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="flex-1">
+            <div id="layer-content" class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
+                <!-- Layer 1 Content -->
+                <div id="content-layer-1">
+                    <div class="p-6 border-b border-slate-700">
+                        <h2 class="text-2xl font-bold mb-2">Layer 1: Host Response Basics</h2>
+                        <p class="text-gray-400">Understanding the difference between appropriate and dysregulated immune responses</p>
+                    </div>
+                    
+                    <div class="p-6">
+                        <!-- Definition Section -->
+                        <div class="bg-slate-700/30 rounded-xl p-5 mb-6">
+                            <h3 class="text-lg font-semibold text-amber-400 mb-3">🔑 Core Definition</h3>
+                            <div class="text-gray-300 space-y-3">
+                                <p><strong>Sepsis</strong> = Life-threatening organ dysfunction caused by a <em>dysregulated host response</em> to infection.</p>
+                                <p class="text-sm text-gray-400">Key insight: The problem isn't just the infection—it's the body's <span class="text-red-400">overreaction</span> to it.</p>
+                            </div>
+                        </div>
+
+                        <!-- Comparison -->
+                        <div class="grid md:grid-cols-2 gap-4 mb-6">
+                            <div class="bg-green-500/10 border border-green-500/30 rounded-xl p-4">
+                                <h4 class="text-green-400 font-semibold mb-2">✓ Normal Response</h4>
+                                <ul class="text-sm text-gray-300 space-y-1">
+                                    <li>• Localized inflammation</li>
+                                    <li>• Contained to infection site</li>
+                                    <li>• Appropriate cytokine levels</li>
+                                    <li>• Pathogen clearance</li>
+                                    <li>• Resolution & healing</li>
+                                </ul>
+                            </div>
+                            <div class="bg-red-500/10 border border-red-500/30 rounded-xl p-4">
+                                <h4 class="text-red-400 font-semibold mb-2">✗ Sepsis Response</h4>
+                                <ul class="text-sm text-gray-300 space-y-1">
+                                    <li>• Systemic inflammation</li>
+                                    <li>• Spreads beyond infection</li>
+                                    <li>• Cytokine storm</li>
+                                    <li>• Collateral organ damage</li>
+                                    <li>• Multi-organ dysfunction</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- SIRS Criteria -->
+                        <div class="bg-slate-700/30 rounded-xl p-5 mb-6">
+                            <h3 class="text-lg font-semibold mb-3">SIRS Criteria (Historical Context)</h3>
+                            <p class="text-sm text-gray-400 mb-3">≥2 of the following:</p>
+                            <div class="grid md:grid-cols-2 gap-3">
+                                <div class="bg-slate-600/30 rounded-lg p-3">
+                                    <div class="text-amber-400 font-medium">Temperature</div>
+                                    <div class="text-sm text-gray-300">&gt;38°C or &lt;36°C</div>
+                                </div>
+                                <div class="bg-slate-600/30 rounded-lg p-3">
+                                    <div class="text-amber-400 font-medium">Heart Rate</div>
+                                    <div class="text-sm text-gray-300">&gt;90 bpm</div>
+                                </div>
+                                <div class="bg-slate-600/30 rounded-lg p-3">
+                                    <div class="text-amber-400 font-medium">Respiratory Rate</div>
+                                    <div class="text-sm text-gray-300">&gt;20/min or PaCO2 &lt;32</div>
+                                </div>
+                                <div class="bg-slate-600/30 rounded-lg p-3">
+                                    <div class="text-amber-400 font-medium">WBC</div>
+                                    <div class="text-sm text-gray-300">&gt;12K or &lt;4K or &gt;10% bands</div>
+                                </div>
+                            </div>
+                            <div class="mt-4 p-3 bg-blue-500/10 border border-blue-500/30 rounded-lg">
+                                <p class="text-sm text-blue-300">💡 <strong>Clinical Pearl:</strong> SIRS is sensitive but not specific—running up stairs can trigger SIRS criteria! That's why Sepsis-3 moved to qSOFA and SOFA scores focusing on organ dysfunction.</p>
+                            </div>
+                        </div>
+
+                        <!-- Sepsis-3 -->
+                        <div class="bg-slate-700/30 rounded-xl p-5 mb-6">
+                            <h3 class="text-lg font-semibold mb-3">Sepsis-3 Definitions (Current)</h3>
+                            <div class="space-y-4">
+                                <div class="border-l-4 border-amber-500 pl-4">
+                                    <div class="font-semibold text-amber-400">Sepsis</div>
+                                    <div class="text-sm text-gray-300">Infection + SOFA score increase ≥2</div>
+                                </div>
+                                <div class="border-l-4 border-red-500 pl-4">
+                                    <div class="font-semibold text-red-400">Septic Shock</div>
+                                    <div class="text-sm text-gray-300">Sepsis + vasopressors needed to maintain MAP ≥65 + lactate &gt;2 despite adequate fluid resuscitation</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Check Understanding -->
+                        <div class="bg-purple-500/10 border border-purple-500/30 rounded-xl p-5">
+                            <h3 class="text-lg font-semibold text-purple-400 mb-3">🧠 Check Your Understanding</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="text-gray-300 mb-2">A patient has pneumonia with fever (39°C), HR 105, and a new creatinine rise from 1.0 to 2.2. Does this patient have sepsis?</p>
+                                    <div class="flex gap-2 mt-2">
+                                        <button onclick="checkAnswer(1, true)" class="bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded-lg text-sm">Yes</button>
+                                        <button onclick="checkAnswer(1, false)" class="bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded-lg text-sm">No</button>
+                                    </div>
+                                    <div id="answer-1" class="mt-2 text-sm hidden"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end mt-6">
+                            <button onclick="loadLayer(2)" class="bg-amber-600 hover:bg-amber-700 px-6 py-2 rounded-lg font-medium">
+                                Continue to Layer 2 →
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Layer 2 Content (Hidden by default) -->
+                <div id="content-layer-2" class="hidden">
+                    <div class="p-6 border-b border-slate-700">
+                        <h2 class="text-2xl font-bold mb-2">Layer 2: The Inflammatory Cascade</h2>
+                        <p class="text-gray-400">How the immune system spirals out of control</p>
+                    </div>
+                    
+                    <div class="p-6">
+                        <!-- Pathway Visualization -->
+                        <div class="bg-slate-700/30 rounded-xl p-5 mb-6">
+                            <h3 class="text-lg font-semibold mb-4">The Sepsis Cascade</h3>
+                            <div class="relative">
+                                <svg class="absolute inset-0 w-full h-full pointer-events-none" style="z-index: 0;">
+                                    <!-- Connection lines drawn here -->
+                                </svg>
+                                <div class="space-y-4 relative" style="z-index: 1;">
+                                    <!-- Row 1: Trigger -->
+                                    <div class="flex justify-center">
+                                        <div class="node bg-red-600 rounded-xl px-6 py-3 text-center">
+                                            <div class="font-semibold">🦠 Infection</div>
+                                            <div class="text-xs text-red-200">PAMPs released</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-center text-2xl text-gray-500">↓</div>
+                                    
+                                    <!-- Row 2: Recognition -->
+                                    <div class="flex justify-center">
+                                        <div class="node bg-purple-600 rounded-xl px-6 py-3 text-center">
+                                            <div class="font-semibold">🔍 Pattern Recognition</div>
+                                            <div class="text-xs text-purple-200">TLRs on immune cells</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-center text-2xl text-gray-500">↓</div>
+                                    
+                                    <!-- Row 3: Cytokine Storm -->
+                                    <div class="flex justify-center gap-4">
+                                        <div class="node bg-amber-600 rounded-xl px-4 py-3 text-center">
+                                            <div class="font-semibold">TNF-α</div>
+                                            <div class="text-xs text-amber-200">Pro-inflammatory</div>
+                                        </div>
+                                        <div class="node bg-amber-600 rounded-xl px-4 py-3 text-center">
+                                            <div class="font-semibold">IL-1β</div>
+                                            <div class="text-xs text-amber-200">Fever, activation</div>
+                                        </div>
+                                        <div class="node bg-amber-600 rounded-xl px-4 py-3 text-center">
+                                            <div class="font-semibold">IL-6</div>
+                                            <div class="text-xs text-amber-200">Acute phase</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-center text-2xl text-gray-500">↓</div>
+                                    
+                                    <!-- Row 4: Effects -->
+                                    <div class="flex justify-center gap-4">
+                                        <div class="node bg-blue-600 rounded-xl px-4 py-3 text-center">
+                                            <div class="font-semibold">Vasodilation</div>
+                                            <div class="text-xs text-blue-200">↑ NO production</div>
+                                        </div>
+                                        <div class="node bg-blue-600 rounded-xl px-4 py-3 text-center">
+                                            <div class="font-semibold">Capillary Leak</div>
+                                            <div class="text-xs text-blue-200">Endothelial injury</div>
+                                        </div>
+                                        <div class="node bg-blue-600 rounded-xl px-4 py-3 text-center">
+                                            <div class="font-semibold">Coagulopathy</div>
+                                            <div class="text-xs text-blue-200">DIC pathway</div>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-center text-2xl text-gray-500">↓</div>
+                                    
+                                    <!-- Row 5: Shock -->
+                                    <div class="flex justify-center">
+                                        <div class="node bg-red-700 rounded-xl px-6 py-3 text-center pulse">
+                                            <div class="font-semibold">💔 Distributive Shock</div>
+                                            <div class="text-xs text-red-200">↓SVR, Hypotension, ↑Lactate</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Deep Dive: Cytokines -->
+                        <div class="bg-slate-700/30 rounded-xl p-5 mb-6">
+                            <h3 class="text-lg font-semibold mb-3">Cytokine Deep Dive</h3>
+                            <div class="space-y-3">
+                                <div class="bg-slate-600/30 rounded-lg p-4">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="font-semibold text-amber-400">TNF-α (Tumor Necrosis Factor)</span>
+                                        <span class="text-xs bg-red-500/20 text-red-400 px-2 py-1 rounded">Pro-inflammatory</span>
+                                    </div>
+                                    <ul class="text-sm text-gray-300 space-y-1">
+                                        <li>• Released within minutes by macrophages</li>
+                                        <li>• Activates endothelium → adhesion molecules</li>
+                                        <li>• Induces fever (hypothalamic PGE2)</li>
+                                        <li>• Triggers apoptosis</li>
+                                        <li>• <span class="text-red-400">High levels = poor prognosis</span></li>
+                                    </ul>
+                                </div>
+                                <div class="bg-slate-600/30 rounded-lg p-4">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="font-semibold text-amber-400">IL-6 (Interleukin-6)</span>
+                                        <span class="text-xs bg-amber-500/20 text-amber-400 px-2 py-1 rounded">Acute Phase</span>
+                                    </div>
+                                    <ul class="text-sm text-gray-300 space-y-1">
+                                        <li>• Triggers hepatic acute phase response</li>
+                                        <li>• ↑ CRP, fibrinogen, ferritin</li>
+                                        <li>• Correlates with severity</li>
+                                        <li>• Target for some therapeutics (tocilizumab)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Why Vasodilation? -->
+                        <div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-5 mb-6">
+                            <h3 class="text-lg font-semibold text-blue-400 mb-3">🎯 Why Does Vasodilation Happen?</h3>
+                            <div class="text-gray-300 space-y-2">
+                                <p>Cytokines activate <strong>inducible nitric oxide synthase (iNOS)</strong> in vascular smooth muscle.</p>
+                                <p>↑ NO → ↑ cGMP → smooth muscle relaxation → <span class="text-red-400">profound vasodilation</span></p>
+                                <p class="text-sm text-gray-400 mt-2">This is why septic shock is "distributive" - blood volume is normal but it's distributed to a vastly expanded vascular space.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between mt-6">
+                            <button onclick="loadLayer(1)" class="bg-slate-700 hover:bg-slate-600 px-6 py-2 rounded-lg">← Layer 1</button>
+                            <button onclick="loadLayer(3)" class="bg-amber-600 hover:bg-amber-700 px-6 py-2 rounded-lg font-medium">Continue to Layer 3 →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Layer 3 Content -->
+                <div id="content-layer-3" class="hidden">
+                    <div class="p-6 border-b border-slate-700">
+                        <h2 class="text-2xl font-bold mb-2">Layer 3: Organ Dysfunction</h2>
+                        <p class="text-gray-400">How sepsis damages multiple organ systems</p>
+                    </div>
+                    
+                    <div class="p-6">
+                        <!-- SOFA Score -->
+                        <div class="bg-slate-700/30 rounded-xl p-5 mb-6">
+                            <h3 class="text-lg font-semibold mb-3">SOFA Score Components</h3>
+                            <p class="text-sm text-gray-400 mb-4">Sequential Organ Failure Assessment - tracks dysfunction across 6 systems</p>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="bg-slate-600/30 rounded-lg p-4">
+                                    <div class="text-red-400 font-semibold mb-2">🫁 Respiratory</div>
+                                    <div class="text-sm text-gray-300">PaO2/FiO2 ratio</div>
+                                    <div class="text-xs text-gray-400 mt-1">↓ due to ARDS, pulmonary edema</div>
+                                </div>
+                                <div class="bg-slate-600/30 rounded-lg p-4">
+                                    <div class="text-red-400 font-semibold mb-2">❤️ Cardiovascular</div>
+                                    <div class="text-sm text-gray-300">MAP & vasopressor requirement</div>
+                                    <div class="text-xs text-gray-400 mt-1">↓ due to vasodilation, myocardial depression</div>
+                                </div>
+                                <div class="bg-slate-600/30 rounded-lg p-4">
+                                    <div class="text-amber-400 font-semibold mb-2">🫀 Hepatic</div>
+                                    <div class="text-sm text-gray-300">Bilirubin level</div>
+                                    <div class="text-xs text-gray-400 mt-1">↑ due to cholestasis, ischemia</div>
+                                </div>
+                                <div class="bg-slate-600/30 rounded-lg p-4">
+                                    <div class="text-purple-400 font-semibold mb-2">🩸 Coagulation</div>
+                                    <div class="text-sm text-gray-300">Platelet count</div>
+                                    <div class="text-xs text-gray-400 mt-1">↓ due to DIC, consumption</div>
+                                </div>
+                                <div class="bg-slate-600/30 rounded-lg p-4">
+                                    <div class="text-blue-400 font-semibold mb-2">🫘 Renal</div>
+                                    <div class="text-sm text-gray-300">Creatinine & urine output</div>
+                                    <div class="text-xs text-gray-400 mt-1">↑ Cr due to hypoperfusion, ATN</div>
+                                </div>
+                                <div class="bg-slate-600/30 rounded-lg p-4">
+                                    <div class="text-green-400 font-semibold mb-2">🧠 Neurologic</div>
+                                    <div class="text-sm text-gray-300">Glasgow Coma Scale</div>
+                                    <div class="text-xs text-gray-400 mt-1">↓ due to encephalopathy</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mechanism of Each Organ Failure -->
+                        <div class="bg-slate-700/30 rounded-xl p-5 mb-6">
+                            <h3 class="text-lg font-semibold mb-3">Why Each Organ Fails</h3>
+                            <div class="space-y-4">
+                                <div class="border-l-4 border-red-500 pl-4">
+                                    <div class="font-semibold">Sepsis-Induced AKI</div>
+                                    <div class="text-sm text-gray-300 mt-1">
+                                        <span class="text-amber-400">Hypoperfusion</span> + <span class="text-amber-400">Inflammation</span> + <span class="text-amber-400">Microcirculatory dysfunction</span>
+                                    </div>
+                                    <div class="text-xs text-gray-400 mt-1">Unlike pure prerenal, septic AKI has direct tubular injury from inflammatory mediators</div>
+                                </div>
+                                <div class="border-l-4 border-blue-500 pl-4">
+                                    <div class="font-semibold">Sepsis-Induced Cardiomyopathy</div>
+                                    <div class="text-sm text-gray-300 mt-1">
+                                        Cytokines (TNF-α, IL-1) → myocardial depression → ↓ EF
+                                    </div>
+                                    <div class="text-xs text-gray-400 mt-1">Usually reversible if patient survives</div>
+                                </div>
+                                <div class="border-l-4 border-purple-500 pl-4">
+                                    <div class="font-semibold">DIC (Disseminated Intravascular Coagulation)</div>
+                                    <div class="text-sm text-gray-300 mt-1">
+                                        Tissue factor release → widespread microthrombi → consumption of clotting factors → bleeding
+                                    </div>
+                                    <div class="text-xs text-gray-400 mt-1">Paradox: Both clotting AND bleeding simultaneously</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Lactate -->
+                        <div class="bg-red-500/10 border border-red-500/30 rounded-xl p-5 mb-6">
+                            <h3 class="text-lg font-semibold text-red-400 mb-3">📈 Why Lactate Rises</h3>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <div class="font-semibold text-amber-400 mb-2">Type A (Hypoxic)</div>
+                                    <ul class="text-sm text-gray-300 space-y-1">
+                                        <li>• Tissue hypoperfusion</li>
+                                        <li>• Anaerobic metabolism</li>
+                                        <li>• Can't use oxygen → make lactate</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-amber-400 mb-2">Type B (Non-hypoxic)</div>
+                                    <ul class="text-sm text-gray-300 space-y-1">
+                                        <li>• Accelerated aerobic glycolysis</li>
+                                        <li>• Mitochondrial dysfunction</li>
+                                        <li>• Decreased hepatic clearance</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mt-4 p-3 bg-slate-700/50 rounded-lg">
+                                <p class="text-sm text-gray-300"><strong>Clinical Pearl:</strong> Lactate clearance (&gt;10% decrease in 2-6 hours) predicts survival better than absolute value.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between mt-6">
+                            <button onclick="loadLayer(2)" class="bg-slate-700 hover:bg-slate-600 px-6 py-2 rounded-lg">← Layer 2</button>
+                            <button onclick="loadLayer(4)" class="bg-amber-600 hover:bg-amber-700 px-6 py-2 rounded-lg font-medium">Continue to Layer 4 →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Layer 4 Content -->
+                <div id="content-layer-4" class="hidden">
+                    <div class="p-6 border-b border-slate-700">
+                        <h2 class="text-2xl font-bold mb-2">Layer 4: Treatment Rationale</h2>
+                        <p class="text-gray-400">Why we do what we do - mechanism-based therapy</p>
+                    </div>
+                    
+                    <div class="p-6">
+                        <!-- Hour-1 Bundle -->
+                        <div class="bg-amber-500/10 border border-amber-500/30 rounded-xl p-5 mb-6">
+                            <h3 class="text-lg font-semibold text-amber-400 mb-3">⏱️ Hour-1 Bundle (Surviving Sepsis)</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-4">
+                                    <div class="bg-amber-600 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">1</div>
+                                    <div>
+                                        <div class="font-semibold">Measure Lactate</div>
+                                        <div class="text-sm text-gray-400">Marker of tissue hypoperfusion; guides resuscitation</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="bg-amber-600 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">2</div>
+                                    <div>
+                                        <div class="font-semibold">Obtain Blood Cultures Before Antibiotics</div>
+                                        <div class="text-sm text-gray-400">Identify organism for de-escalation; don't delay abx</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="bg-amber-600 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">3</div>
+                                    <div>
+                                        <div class="font-semibold">Administer Broad-Spectrum Antibiotics</div>
+                                        <div class="text-sm text-gray-400">Each hour delay increases mortality 7.6%</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="bg-amber-600 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">4</div>
+                                    <div>
+                                        <div class="font-semibold">Rapid Fluid Resuscitation (30 mL/kg crystalloid)</div>
+                                        <div class="text-sm text-gray-400">Address relative hypovolemia from vasodilation</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="bg-amber-600 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">5</div>
+                                    <div>
+                                        <div class="font-semibold">Vasopressors if Hypotensive During/After Fluids</div>
+                                        <div class="text-sm text-gray-400">Norepinephrine first-line; counteracts vasodilation</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mechanism-Treatment Connection -->
+                        <div class="bg-slate-700/30 rounded-xl p-5 mb-6">
+                            <h3 class="text-lg font-semibold mb-3">Mechanism → Treatment Logic</h3>
+                            <div class="space-y-4">
+                                <div class="grid md:grid-cols-3 gap-2 items-center">
+                                    <div class="bg-red-600/20 rounded-lg p-3 text-center">
+                                        <div class="text-sm font-semibold text-red-400">Mechanism</div>
+                                        <div class="text-sm">Vasodilation (↓SVR)</div>
+                                    </div>
+                                    <div class="text-center text-2xl">→</div>
+                                    <div class="bg-green-600/20 rounded-lg p-3 text-center">
+                                        <div class="text-sm font-semibold text-green-400">Treatment</div>
+                                        <div class="text-sm">Norepinephrine (α1 agonist)</div>
+                                    </div>
+                                </div>
+                                <div class="grid md:grid-cols-3 gap-2 items-center">
+                                    <div class="bg-red-600/20 rounded-lg p-3 text-center">
+                                        <div class="text-sm font-semibold text-red-400">Mechanism</div>
+                                        <div class="text-sm">Capillary leak (↓ intravascular volume)</div>
+                                    </div>
+                                    <div class="text-center text-2xl">→</div>
+                                    <div class="bg-green-600/20 rounded-lg p-3 text-center">
+                                        <div class="text-sm font-semibold text-green-400">Treatment</div>
+                                        <div class="text-sm">IV fluids (expand volume)</div>
+                                    </div>
+                                </div>
+                                <div class="grid md:grid-cols-3 gap-2 items-center">
+                                    <div class="bg-red-600/20 rounded-lg p-3 text-center">
+                                        <div class="text-sm font-semibold text-red-400">Mechanism</div>
+                                        <div class="text-sm">Myocardial depression</div>
+                                    </div>
+                                    <div class="text-center text-2xl">→</div>
+                                    <div class="bg-green-600/20 rounded-lg p-3 text-center">
+                                        <div class="text-sm font-semibold text-green-400">Treatment</div>
+                                        <div class="text-sm">Dobutamine (if low CO despite fluids)</div>
+                                    </div>
+                                </div>
+                                <div class="grid md:grid-cols-3 gap-2 items-center">
+                                    <div class="bg-red-600/20 rounded-lg p-3 text-center">
+                                        <div class="text-sm font-semibold text-red-400">Mechanism</div>
+                                        <div class="text-sm">Relative adrenal insufficiency</div>
+                                    </div>
+                                    <div class="text-center text-2xl">→</div>
+                                    <div class="bg-green-600/20 rounded-lg p-3 text-center">
+                                        <div class="text-sm font-semibold text-green-400">Treatment</div>
+                                        <div class="text-sm">Hydrocortisone (if refractory shock)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Module Complete -->
+                        <div class="bg-green-500/10 border border-green-500/30 rounded-xl p-6 text-center">
+                            <div class="text-4xl mb-3">🎉</div>
+                            <h3 class="text-xl font-bold text-green-400 mb-2">Module Complete!</h3>
+                            <p class="text-gray-300 mb-4">You've completed the Sepsis Mechanism deep dive.</p>
+                            <div class="flex justify-center gap-4">
+                                <a href="pathway-builder.html" class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg">Build the Pathway</a>
+                                <a href="index.html" class="bg-slate-700 hover:bg-slate-600 px-6 py-2 rounded-lg">Back to Modules</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+let currentLayer = 1;
+const totalLayers = 4;
+
+function loadLayer(layerNum) {
+    currentLayer = layerNum;
+    
+    // Hide all content
+    for (let i = 1; i <= totalLayers; i++) {
+        document.getElementById(`content-layer-${i}`).classList.add('hidden');
+        document.getElementById(`layer-${i}`).classList.remove('active');
+    }
+    
+    // Show selected
+    document.getElementById(`content-layer-${layerNum}`).classList.remove('hidden');
+    document.getElementById(`layer-${layerNum}`).classList.add('active');
+    
+    // Update progress
+    const progress = (layerNum / totalLayers) * 100;
+    document.getElementById('progress-bar').style.width = `${progress}%`;
+    document.getElementById('progress-text').textContent = `${Math.round(progress)}%`;
+    
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function checkAnswer(questionNum, answer) {
+    const answerDiv = document.getElementById(`answer-${questionNum}`);
+    answerDiv.classList.remove('hidden');
+    
+    if (questionNum === 1) {
+        if (answer === true) {
+            answerDiv.innerHTML = '<span class="text-green-400">✓ Correct!</span> Yes - this patient has infection (pneumonia) + organ dysfunction (AKI with creatinine doubling). This meets Sepsis-3 criteria.';
+        } else {
+            answerDiv.innerHTML = '<span class="text-red-400">✗ Not quite.</span> This patient DOES have sepsis. Infection (pneumonia) + organ dysfunction (new AKI) = Sepsis by Sepsis-3 criteria.';
+        }
+    }
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    loadLayer(1);
+});
+</script>
+</body>
+</html>

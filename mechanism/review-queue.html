@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MechanismX - Review Queue</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); min-height: 100vh; }
+        .card-flip { perspective: 1000px; }
+        .card-inner { transition: transform 0.6s; transform-style: preserve-3d; }
+        .card-flip.flipped .card-inner { transform: rotateY(180deg); }
+        .card-front, .card-back { backface-visibility: hidden; }
+        .card-back { transform: rotateY(180deg); }
+        .strength-bar { transition: width 0.5s; }
+    </style>
+</head>
+<body class="text-white">
+    <nav class="bg-slate-800/80 backdrop-blur border-b border-slate-700 px-6 py-4">
+        <div class="max-w-3xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="text-gray-400 hover:text-white text-sm">← MechanismX</a>
+                <h1 class="text-xl font-bold">📚 Review Queue</h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="text-sm">
+                    <span class="text-gray-400">Due today:</span>
+                    <span id="due-count" class="text-amber-400 font-bold ml-1">0</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-3xl mx-auto p-6">
+        <!-- Progress Bar -->
+        <div class="bg-slate-800 rounded-xl p-4 border border-slate-700 mb-6">
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-sm text-gray-400">Today's Progress</span>
+                <span class="text-sm"><span id="reviewed-count">0</span> / <span id="total-due">0</span></span>
+            </div>
+            <div class="h-2 bg-slate-700 rounded-full overflow-hidden">
+                <div id="progress-bar" class="h-full bg-green-500 strength-bar" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <!-- Flashcard -->
+        <div id="card-container" class="mb-6">
+            <div class="card-flip h-80" id="flashcard" onclick="flipCard()">
+                <div class="card-inner relative w-full h-full">
+                    <!-- Front -->
+                    <div class="card-front absolute w-full h-full bg-slate-800 rounded-xl border border-slate-700 p-6 flex flex-col">
+                        <div class="flex items-center gap-2 mb-4">
+                            <span id="card-topic" class="bg-blue-500/20 text-blue-400 text-xs px-2 py-1 rounded">Topic</span>
+                            <span id="card-type" class="bg-purple-500/20 text-purple-400 text-xs px-2 py-1 rounded">Connection</span>
+                        </div>
+                        <div class="flex-1 flex items-center justify-center">
+                            <div id="card-question" class="text-xl text-center"></div>
+                        </div>
+                        <div class="text-center text-gray-500 text-sm">
+                            Click to reveal answer
+                        </div>
+                    </div>
+                    
+                    <!-- Back -->
+                    <div class="card-back absolute w-full h-full bg-slate-800 rounded-xl border border-green-500/50 p-6 flex flex-col">
+                        <div class="text-sm text-green-400 mb-2">Answer:</div>
+                        <div id="card-answer" class="text-lg mb-4"></div>
+                        <div class="flex-1">
+                            <div class="text-sm text-gray-400 mb-2">Mechanism:</div>
+                            <div id="card-mechanism" class="text-sm text-gray-300"></div>
+                        </div>
+                        <div class="text-center text-gray-500 text-sm">
+                            Rate your recall below
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rating Buttons -->
+        <div id="rating-buttons" class="grid grid-cols-4 gap-3 mb-6 hidden">
+            <button onclick="rateCard(1)" class="bg-red-600 hover:bg-red-700 py-3 rounded-lg text-sm">
+                <div class="font-semibold">Again</div>
+                <div class="text-xs opacity-75">< 1 min</div>
+            </button>
+            <button onclick="rateCard(2)" class="bg-amber-600 hover:bg-amber-700 py-3 rounded-lg text-sm">
+                <div class="font-semibold">Hard</div>
+                <div class="text-xs opacity-75" id="hard-interval">1 day</div>
+            </button>
+            <button onclick="rateCard(3)" class="bg-green-600 hover:bg-green-700 py-3 rounded-lg text-sm">
+                <div class="font-semibold">Good</div>
+                <div class="text-xs opacity-75" id="good-interval">3 days</div>
+            </button>
+            <button onclick="rateCard(4)" class="bg-blue-600 hover:bg-blue-700 py-3 rounded-lg text-sm">
+                <div class="font-semibold">Easy</div>
+                <div class="text-xs opacity-75" id="easy-interval">7 days</div>
+            </button>
+        </div>
+
+        <!-- Connection Strength -->
+        <div class="bg-slate-800 rounded-xl p-4 border border-slate-700 mb-6">
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-sm text-gray-400">Connection Strength</span>
+                <span id="strength-value" class="text-sm font-medium">0%</span>
+            </div>
+            <div class="h-3 bg-slate-700 rounded-full overflow-hidden">
+                <div id="strength-bar" class="h-full bg-gradient-to-r from-red-500 via-amber-500 to-green-500 strength-bar" style="width: 0%"></div>
+            </div>
+            <div class="flex justify-between text-xs text-gray-500 mt-1">
+                <span>Weak</span>
+                <span>Learning</span>
+                <span>Strong</span>
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="text-center py-12 hidden">
+            <div class="text-6xl mb-4">🎉</div>
+            <h2 class="text-xl font-semibold mb-2">All caught up!</h2>
+            <p class="text-gray-400 mb-6">No more connections due for review today.</p>
+            <a href="pathway-builder.html" class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg inline-block">
+                Learn New Connections
+            </a>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-3 gap-4">
+            <div class="bg-slate-800 rounded-xl p-4 border border-slate-700 text-center">
+                <div id="stat-mastered" class="text-2xl font-bold text-green-400">0</div>
+                <div class="text-xs text-gray-400">Mastered</div>
+            </div>
+            <div class="bg-slate-800 rounded-xl p-4 border border-slate-700 text-center">
+                <div id="stat-learning" class="text-2xl font-bold text-amber-400">0</div>
+                <div class="text-xs text-gray-400">Learning</div>
+            </div>
+            <div class="bg-slate-800 rounded-xl p-4 border border-slate-700 text-center">
+                <div id="stat-new" class="text-2xl font-bold text-blue-400">0</div>
+                <div class="text-xs text-gray-400">New</div>
+            </div>
+        </div>
+    </main>
+
+<script>
+// ============================================================================
+// SPACED REPETITION SYSTEM
+// Modified SM-2 algorithm adapted for mechanism connections
+// ============================================================================
+
+// Sample connection cards (would be populated from MCFS in real implementation)
+const SAMPLE_CARDS = [
+    {
+        id: 'hf_co_to_renal',
+        topic: 'Heart Failure',
+        type: 'Cause → Effect',
+        question: 'What happens to renal perfusion when cardiac output decreases?',
+        answer: 'Renal perfusion decreases proportionally, triggering compensatory mechanisms',
+        mechanism: '↓CO → ↓Renal blood flow → ↓GFR → RAAS activation → Na/H2O retention',
+        interval: 1,
+        easeFactor: 2.5,
+        repetitions: 0,
+        dueDate: new Date(),
+        strength: 0.3
+    },
+    {
+        id: 'hf_raas_to_aldo',
+        topic: 'Heart Failure',
+        type: 'Pathway Step',
+        question: 'RAAS activation leads to increased _____ which causes sodium retention',
+        answer: 'Aldosterone',
+        mechanism: 'RAAS → Angiotensin II → Adrenal cortex → Aldosterone → ENaC activation → Na reabsorption',
+        interval: 1,
+        easeFactor: 2.5,
+        repetitions: 0,
+        dueDate: new Date(),
+        strength: 0.2
+    },
+    {
+        id: 'hf_aldo_effect',
+        topic: 'Heart Failure',
+        type: 'Drug Target',
+        question: 'Why do we use spironolactone in heart failure?',
+        answer: 'Blocks aldosterone → reduces Na retention, K wasting, and cardiac fibrosis',
+        mechanism: 'MRA blocks mineralocorticoid receptor → ↓Na reabsorption, ↓K secretion, ↓cardiac remodeling',
+        interval: 3,
+        easeFactor: 2.5,
+        repetitions: 1,
+        dueDate: new Date(),
+        strength: 0.5
+    },
+    {
+        id: 'aki_prerenal_fena',
+        topic: 'AKI',
+        type: 'Diagnostic',
+        question: 'In prerenal AKI, FeNa is typically _____ because _____',
+        answer: '< 1% because intact tubules avidly reabsorb sodium in response to hypovolemia',
+        mechanism: 'Hypovolemia → RAAS → Aldosterone → Avid Na reabsorption → FeNa < 1%',
+        interval: 1,
+        easeFactor: 2.5,
+        repetitions: 0,
+        dueDate: new Date(),
+        strength: 0.4
+    },
+    {
+        id: 'sepsis_lactate',
+        topic: 'Sepsis',
+        type: 'Pathophysiology',
+        question: 'Why does lactate rise in sepsis even with normal oxygen saturation?',
+        answer: 'Tissue hypoperfusion and mitochondrial dysfunction cause anaerobic metabolism',
+        mechanism: 'Microcirculatory dysfunction → Tissue hypoxia → Anaerobic glycolysis → Pyruvate → Lactate',
+        interval: 1,
+        easeFactor: 2.5,
+        repetitions: 0,
+        dueDate: new Date(),
+        strength: 0.35
+    }
+];
+
+let state = {
+    cards: [],
+    currentIndex: 0,
+    flipped: false,
+    reviewed: 0
+};
+
+function init() {
+    // Load cards from localStorage or use samples
+    const saved = localStorage.getItem('review_cards');
+    state.cards = saved ? JSON.parse(saved) : SAMPLE_CARDS.map(c => ({
+        ...c,
+        dueDate: new Date(c.dueDate)
+    }));
+    
+    // Filter to due cards
+    const now = new Date();
+    state.cards = state.cards.filter(c => new Date(c.dueDate) <= now);
+    
+    updateUI();
+    
+    if (state.cards.length > 0) {
+        showCard(0);
+    } else {
+        showEmptyState();
+    }
+}
+
+function showCard(index) {
+    if (index >= state.cards.length) {
+        showEmptyState();
+        return;
+    }
+    
+    state.currentIndex = index;
+    state.flipped = false;
+    
+    const card = state.cards[index];
+    
+    document.getElementById('card-topic').textContent = card.topic;
+    document.getElementById('card-type').textContent = card.type;
+    document.getElementById('card-question').textContent = card.question;
+    document.getElementById('card-answer').textContent = card.answer;
+    document.getElementById('card-mechanism').textContent = card.mechanism;
+    
+    // Update strength display
+    const strength = Math.round(card.strength * 100);
+    document.getElementById('strength-value').textContent = strength + '%';
+    document.getElementById('strength-bar').style.width = strength + '%';
+    
+    // Calculate intervals
+    const intervals = calculateIntervals(card);
+    document.getElementById('hard-interval').textContent = formatInterval(intervals.hard);
+    document.getElementById('good-interval').textContent = formatInterval(intervals.good);
+    document.getElementById('easy-interval').textContent = formatInterval(intervals.easy);
+    
+    // Reset flip state
+    document.getElementById('flashcard').classList.remove('flipped');
+    document.getElementById('rating-buttons').classList.add('hidden');
+    document.getElementById('card-container').classList.remove('hidden');
+    document.getElementById('empty-state').classList.add('hidden');
+}
+
+function flipCard() {
+    state.flipped = !state.flipped;
+    document.getElementById('flashcard').classList.toggle('flipped');
+    
+    if (state.flipped) {
+        document.getElementById('rating-buttons').classList.remove('hidden');
+    }
+}
+
+function calculateIntervals(card) {
+    const ef = card.easeFactor;
+    const interval = card.interval;
+    
+    return {
+        again: 0.01, // 1 minute
+        hard: Math.max(1, interval * 1.2),
+        good: card.repetitions === 0 ? 1 : (card.repetitions === 1 ? 3 : interval * ef),
+        easy: card.repetitions === 0 ? 4 : interval * ef * 1.3
+    };
+}
+
+function formatInterval(days) {
+    if (days < 0.1) return '< 1 min';
+    if (days < 1) return Math.round(days * 24) + ' hours';
+    if (days < 30) return Math.round(days) + ' days';
+    return Math.round(days / 30) + ' months';
+}
+
+function rateCard(rating) {
+    const card = state.cards[state.currentIndex];
+    const intervals = calculateIntervals(card);
+    
+    // Update card based on rating (SM-2 algorithm)
+    if (rating === 1) { // Again
+        card.repetitions = 0;
+        card.interval = 0.01;
+        card.strength = Math.max(0, card.strength - 0.2);
+    } else if (rating === 2) { // Hard
+        card.interval = intervals.hard;
+        card.easeFactor = Math.max(1.3, card.easeFactor - 0.15);
+        card.strength = Math.min(1, card.strength + 0.05);
+    } else if (rating === 3) { // Good
+        card.repetitions++;
+        card.interval = intervals.good;
+        card.strength = Math.min(1, card.strength + 0.1);
+    } else { // Easy
+        card.repetitions++;
+        card.interval = intervals.easy;
+        card.easeFactor += 0.15;
+        card.strength = Math.min(1, card.strength + 0.15);
+    }
+    
+    // Set next due date
+    card.dueDate = new Date(Date.now() + card.interval * 24 * 60 * 60 * 1000);
+    
+    // Save to localStorage
+    saveCards();
+    
+    // Move to next card
+    state.reviewed++;
+    state.cards.splice(state.currentIndex, 1);
+    
+    updateUI();
+    
+    if (state.cards.length > 0) {
+        showCard(0);
+    } else {
+        showEmptyState();
+    }
+}
+
+function showEmptyState() {
+    document.getElementById('card-container').classList.add('hidden');
+    document.getElementById('rating-buttons').classList.add('hidden');
+    document.getElementById('empty-state').classList.remove('hidden');
+}
+
+function saveCards() {
+    // In real implementation, this would sync with MCFS backend
+    const allCards = JSON.parse(localStorage.getItem('all_review_cards') || '[]');
+    
+    // Merge updated cards
+    state.cards.forEach(card => {
+        const idx = allCards.findIndex(c => c.id === card.id);
+        if (idx >= 0) {
+            allCards[idx] = card;
+        } else {
+            allCards.push(card);
+        }
+    });
+    
+    localStorage.setItem('all_review_cards', JSON.stringify(allCards));
+}
+
+function updateUI() {
+    document.getElementById('due-count').textContent = state.cards.length;
+    document.getElementById('total-due').textContent = state.cards.length + state.reviewed;
+    document.getElementById('reviewed-count').textContent = state.reviewed;
+    
+    const progress = state.reviewed + state.cards.length > 0 
+        ? (state.reviewed / (state.reviewed + state.cards.length)) * 100 
+        : 100;
+    document.getElementById('progress-bar').style.width = progress + '%';
+    
+    // Stats (would come from MCFS)
+    const allCards = JSON.parse(localStorage.getItem('all_review_cards') || '[]');
+    document.getElementById('stat-mastered').textContent = allCards.filter(c => c.strength >= 0.8).length;
+    document.getElementById('stat-learning').textContent = allCards.filter(c => c.strength >= 0.3 && c.strength < 0.8).length;
+    document.getElementById('stat-new').textContent = allCards.filter(c => c.strength < 0.3).length;
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>

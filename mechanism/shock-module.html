@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MechanismX - Shock Differentiation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); min-height: 100vh; }
+        .shock-card { transition: all 0.3s; cursor: pointer; }
+        .shock-card:hover { transform: scale(1.02); }
+        .shock-card.active { border-width: 3px; }
+        .param-bar { transition: width 0.5s ease-out; }
+    </style>
+</head>
+<body class="text-white">
+    <nav class="bg-slate-800/80 backdrop-blur border-b border-slate-700 px-6 py-4">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="text-gray-400 hover:text-white text-sm">← MechanismX</a>
+                <h1 class="text-xl font-bold">🩺 Shock Differentiation</h1>
+            </div>
+            <div class="text-sm text-gray-400">
+                Click a shock type to explore its mechanism
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto p-6">
+        <!-- Overview -->
+        <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 mb-6">
+            <h2 class="text-2xl font-bold mb-2">Understanding Shock: A Hemodynamic Framework</h2>
+            <p class="text-gray-400 mb-4">Shock = inadequate tissue perfusion. The key is understanding WHY perfusion is inadequate.</p>
+            
+            <div class="bg-slate-700 rounded-lg p-4 text-center">
+                <div class="text-lg font-mono mb-2">
+                    <span class="text-red-400">MAP</span> = <span class="text-blue-400">CO</span> × <span class="text-green-400">SVR</span>
+                </div>
+                <div class="text-lg font-mono">
+                    <span class="text-blue-400">CO</span> = <span class="text-amber-400">HR</span> × <span class="text-purple-400">SV</span>
+                </div>
+                <div class="text-sm text-gray-400 mt-2">
+                    SV depends on: Preload, Contractility, Afterload
+                </div>
+            </div>
+        </div>
+
+        <!-- Shock Type Selection -->
+        <div class="grid md:grid-cols-4 gap-4 mb-6">
+            <div class="shock-card bg-gradient-to-br from-red-600/20 to-red-800/20 border-2 border-red-500/50 rounded-xl p-4"
+                 onclick="selectShock('cardiogenic')" id="card-cardiogenic">
+                <div class="text-3xl mb-2">💔</div>
+                <h3 class="font-bold text-red-400">Cardiogenic</h3>
+                <p class="text-xs text-gray-400">Pump failure</p>
+            </div>
+            
+            <div class="shock-card bg-gradient-to-br from-blue-600/20 to-blue-800/20 border-2 border-blue-500/50 rounded-xl p-4"
+                 onclick="selectShock('hypovolemic')" id="card-hypovolemic">
+                <div class="text-3xl mb-2">🩸</div>
+                <h3 class="font-bold text-blue-400">Hypovolemic</h3>
+                <p class="text-xs text-gray-400">Volume loss</p>
+            </div>
+            
+            <div class="shock-card bg-gradient-to-br from-amber-600/20 to-amber-800/20 border-2 border-amber-500/50 rounded-xl p-4"
+                 onclick="selectShock('distributive')" id="card-distributive">
+                <div class="text-3xl mb-2">🔥</div>
+                <h3 class="font-bold text-amber-400">Distributive</h3>
+                <p class="text-xs text-gray-400">Vasodilation</p>
+            </div>
+            
+            <div class="shock-card bg-gradient-to-br from-purple-600/20 to-purple-800/20 border-2 border-purple-500/50 rounded-xl p-4"
+                 onclick="selectShock('obstructive')" id="card-obstructive">
+                <div class="text-3xl mb-2">🚫</div>
+                <h3 class="font-bold text-purple-400">Obstructive</h3>
+                <p class="text-xs text-gray-400">Mechanical barrier</p>
+            </div>
+        </div>
+
+        <!-- Hemodynamic Profile Display -->
+        <div class="grid md:grid-cols-2 gap-6 mb-6">
+            <!-- Parameters -->
+            <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                <h3 class="font-semibold mb-4">Hemodynamic Parameters</h3>
+                <div class="space-y-4">
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span>Cardiac Output (CO)</span>
+                            <span id="param-co-value" class="font-mono">--</span>
+                        </div>
+                        <div class="h-4 bg-slate-700 rounded-full overflow-hidden">
+                            <div id="param-co-bar" class="param-bar h-full bg-blue-500" style="width: 50%"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span>SVR (Systemic Vascular Resistance)</span>
+                            <span id="param-svr-value" class="font-mono">--</span>
+                        </div>
+                        <div class="h-4 bg-slate-700 rounded-full overflow-hidden">
+                            <div id="param-svr-bar" class="param-bar h-full bg-green-500" style="width: 50%"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span>CVP (Central Venous Pressure)</span>
+                            <span id="param-cvp-value" class="font-mono">--</span>
+                        </div>
+                        <div class="h-4 bg-slate-700 rounded-full overflow-hidden">
+                            <div id="param-cvp-bar" class="param-bar h-full bg-purple-500" style="width: 50%"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span>PCWP (Pulmonary Capillary Wedge)</span>
+                            <span id="param-pcwp-value" class="font-mono">--</span>
+                        </div>
+                        <div class="h-4 bg-slate-700 rounded-full overflow-hidden">
+                            <div id="param-pcwp-bar" class="param-bar h-full bg-pink-500" style="width: 50%"></div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span>SvO₂ (Mixed Venous O₂ Sat)</span>
+                            <span id="param-svo2-value" class="font-mono">--</span>
+                        </div>
+                        <div class="h-4 bg-slate-700 rounded-full overflow-hidden">
+                            <div id="param-svo2-bar" class="param-bar h-full bg-red-500" style="width: 50%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clinical Features -->
+            <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                <h3 class="font-semibold mb-4">Clinical Features</h3>
+                <div id="clinical-features" class="space-y-3">
+                    <p class="text-gray-500 italic">Select a shock type to see clinical features</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mechanism Deep Dive -->
+        <div id="mechanism-panel" class="bg-slate-800 rounded-xl p-6 border border-slate-700 mb-6 hidden">
+            <h3 class="font-semibold mb-4">Mechanism Deep Dive</h3>
+            <div id="mechanism-content"></div>
+        </div>
+
+        <!-- Treatment Approach -->
+        <div id="treatment-panel" class="bg-slate-800 rounded-xl p-6 border border-slate-700 hidden">
+            <h3 class="font-semibold mb-4">Treatment Targets</h3>
+            <div id="treatment-content"></div>
+        </div>
+    </main>
+
+<script>
+const SHOCK_DATA = {
+    cardiogenic: {
+        name: 'Cardiogenic Shock',
+        color: 'red',
+        params: {
+            co: { value: '↓↓', level: 20, desc: 'Pump failure → low output' },
+            svr: { value: '↑↑', level: 85, desc: 'Compensatory vasoconstriction' },
+            cvp: { value: '↑', level: 75, desc: 'Backed up from failing heart' },
+            pcwp: { value: '↑↑', level: 90, desc: 'LV failure → high filling pressure' },
+            svo2: { value: '↓↓', level: 25, desc: 'Increased O₂ extraction (low delivery)' }
+        },
+        clinical: [
+            { feature: 'Extremities', value: 'Cold, clammy', reason: 'Vasoconstriction to maintain BP' },
+            { feature: 'JVD', value: 'Present', reason: 'Elevated right-sided pressures' },
+            { feature: 'Lung sounds', value: 'Crackles/rales', reason: 'Pulmonary edema from high PCWP' },
+            { feature: 'Heart sounds', value: 'S3, murmurs possible', reason: 'Volume overload, valvular dysfunction' },
+            { feature: 'Urine output', value: 'Decreased', reason: 'Poor renal perfusion' }
+        ],
+        mechanism: `
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="bg-red-600 rounded px-3 py-2">LV Damage</div>
+                    <span>→</span>
+                    <div class="bg-red-600 rounded px-3 py-2">↓ Contractility</div>
+                    <span>→</span>
+                    <div class="bg-red-600 rounded px-3 py-2">↓ Stroke Volume</div>
+                    <span>→</span>
+                    <div class="bg-red-600 rounded px-3 py-2">↓ CO</div>
+                </div>
+                <div class="text-sm text-gray-400">
+                    <strong>Causes:</strong> MI (most common), cardiomyopathy, severe valvular disease, arrhythmias, myocarditis
+                </div>
+                <div class="bg-red-500/10 border border-red-500/30 rounded-lg p-3 mt-4">
+                    <strong class="text-red-400">The Vicious Cycle:</strong>
+                    <p class="text-sm text-gray-300 mt-1">↓CO → ↓Coronary perfusion → More ischemia → Worse contractility → Even lower CO</p>
+                </div>
+            </div>
+        `,
+        treatment: `
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-slate-700/50 rounded-lg p-4">
+                    <h4 class="text-red-400 font-medium mb-2">Improve Contractility</h4>
+                    <ul class="text-sm text-gray-300 space-y-1">
+                        <li>• <strong>Dobutamine</strong> (β1 agonist) - ↑ contractility</li>
+                        <li>• <strong>Milrinone</strong> (PDE inhibitor) - ↑ contractility + vasodilation</li>
+                    </ul>
+                </div>
+                <div class="bg-slate-700/50 rounded-lg p-4">
+                    <h4 class="text-blue-400 font-medium mb-2">Maintain Perfusion</h4>
+                    <ul class="text-sm text-gray-300 space-y-1">
+                        <li>• <strong>Norepinephrine</strong> if severe hypotension</li>
+                        <li>• <strong>IABP/Impella</strong> - mechanical support</li>
+                    </ul>
+                </div>
+                <div class="bg-slate-700/50 rounded-lg p-4">
+                    <h4 class="text-green-400 font-medium mb-2">Reduce Afterload</h4>
+                    <ul class="text-sm text-gray-300 space-y-1">
+                        <li>• Be cautious - may drop BP further</li>
+                        <li>• Beneficial if BP can tolerate</li>
+                    </ul>
+                </div>
+                <div class="bg-slate-700/50 rounded-lg p-4">
+                    <h4 class="text-amber-400 font-medium mb-2">Address Cause</h4>
+                    <ul class="text-sm text-gray-300 space-y-1">
+                        <li>• <strong>Revascularization</strong> for MI</li>
+                        <li>• <strong>Valve surgery</strong> if needed</li>
+                    </ul>
+                </div>
+            </div>
+        `
+    },
+    hypovolemic: {
+        name: 'Hypovolemic Shock',
+        color: 'blue',
+        params: {
+            co: { value: '↓↓', level: 25, desc: 'Low preload → low SV → low CO' },
+            svr: { value: '↑↑', level: 85, desc: 'Compensatory vasoconstriction' },
+            cvp: { value: '↓↓', level: 15, desc: 'Empty tank' },
+            pcwp: { value: '↓↓', level: 15, desc: 'Low filling pressures' },
+            svo2: { value: '↓↓', level: 25, desc: 'Increased extraction (low delivery)' }
+        },
+        clinical: [
+            { feature: 'Extremities', value: 'Cold, pale', reason: 'Vasoconstriction to preserve core' },
+            { feature: 'Neck veins', value: 'Flat', reason: 'Low venous pressure' },
+            { feature: 'Heart rate', value: '↑ Tachycardia', reason: 'Compensating for low SV' },
+            { feature: 'Skin turgor', value: 'Decreased', reason: 'Dehydration' },
+            { feature: 'Urine output', value: 'Decreased, concentrated', reason: 'Renal conservation' }
+        ],
+        mechanism: `
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="bg-blue-600 rounded px-3 py-2">Volume Loss</div>
+                    <span>→</span>
+                    <div class="bg-blue-600 rounded px-3 py-2">↓ Preload</div>
+                    <span>→</span>
+                    <div class="bg-blue-600 rounded px-3 py-2">↓ SV (Starling)</div>
+                    <span>→</span>
+                    <div class="bg-blue-600 rounded px-3 py-2">↓ CO</div>
+                </div>
+                <div class="text-sm text-gray-400">
+                    <strong>Hemorrhagic:</strong> Trauma, GI bleed, AAA rupture, postpartum<br>
+                    <strong>Non-hemorrhagic:</strong> Diarrhea, vomiting, burns, third-spacing
+                </div>
+                <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-3 mt-4">
+                    <strong class="text-blue-400">Shock Classes (Hemorrhage):</strong>
+                    <div class="grid grid-cols-4 gap-2 mt-2 text-xs">
+                        <div class="bg-slate-700 p-2 rounded">
+                            <div class="font-bold">Class I</div>
+                            <div>&lt;15% loss</div>
+                            <div>HR normal</div>
+                        </div>
+                        <div class="bg-slate-700 p-2 rounded">
+                            <div class="font-bold">Class II</div>
+                            <div>15-30% loss</div>
+                            <div>HR 100-120</div>
+                        </div>
+                        <div class="bg-slate-700 p-2 rounded">
+                            <div class="font-bold">Class III</div>
+                            <div>30-40% loss</div>
+                            <div>HR 120-140</div>
+                        </div>
+                        <div class="bg-slate-700 p-2 rounded">
+                            <div class="font-bold">Class IV</div>
+                            <div>&gt;40% loss</div>
+                            <div>HR &gt;140</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `,
+        treatment: `
+            <div class="space-y-4">
+                <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+                    <h4 class="text-blue-400 font-medium mb-2">Primary: Volume Replacement</h4>
+                    <ul class="text-sm text-gray-300 space-y-1">
+                        <li>• <strong>Crystalloid</strong> (LR or NS) - first line</li>
+                        <li>• <strong>Blood products</strong> if hemorrhagic (1:1:1 in massive transfusion)</li>
+                        <li>• Target: Restore preload → restore CO</li>
+                    </ul>
+                </div>
+                <div class="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+                    <h4 class="text-red-400 font-medium mb-2">Control Source</h4>
+                    <ul class="text-sm text-gray-300 space-y-1">
+                        <li>• Hemorrhage: Surgery, IR embolization, direct pressure</li>
+                        <li>• GI losses: Treat underlying cause</li>
+                    </ul>
+                </div>
+                <div class="text-sm text-amber-400 mt-2">
+                    ⚠️ Vasopressors are a temporizing measure - the tank is empty, you need to fill it!
+                </div>
+            </div>
+        `
+    },
+    distributive: {
+        name: 'Distributive Shock',
+        color: 'amber',
+        params: {
+            co: { value: '↑ or N', level: 70, desc: 'Often HIGH (hyperdynamic)' },
+            svr: { value: '↓↓', level: 15, desc: 'Pathologic vasodilation' },
+            cvp: { value: 'Variable', level: 50, desc: 'Depends on volume status' },
+            pcwp: { value: 'Variable', level: 50, desc: 'Depends on volume status' },
+            svo2: { value: '↑', level: 75, desc: 'O₂ delivery OK but extraction impaired' }
+        },
+        clinical: [
+            { feature: 'Extremities', value: 'Warm, flushed (early)', reason: 'Vasodilation' },
+            { feature: 'Pulse', value: 'Bounding', reason: 'Wide pulse pressure from low SVR' },
+            { feature: 'Fever', value: 'Often present', reason: 'Inflammatory response' },
+            { feature: 'Mental status', value: 'Altered', reason: 'Poor perfusion despite high CO' },
+            { feature: 'Flash cap refill', value: '<1 second', reason: 'Excessive vasodilation' }
+        ],
+        mechanism: `
+            <div class="space-y-4">
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-3">
+                        <h4 class="text-amber-400 font-medium">Septic</h4>
+                        <p class="text-xs text-gray-300 mt-1">Infection → Cytokines → iNOS → NO → Vasodilation</p>
+                    </div>
+                    <div class="bg-pink-500/10 border border-pink-500/30 rounded-lg p-3">
+                        <h4 class="text-pink-400 font-medium">Anaphylactic</h4>
+                        <p class="text-xs text-gray-300 mt-1">IgE → Mast cells → Histamine → Vasodilation + Capillary leak</p>
+                    </div>
+                    <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-3">
+                        <h4 class="text-purple-400 font-medium">Neurogenic</h4>
+                        <p class="text-xs text-gray-300 mt-1">Spinal injury → Loss of sympathetic tone → Vasodilation</p>
+                    </div>
+                </div>
+                <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-3 mt-4">
+                    <strong class="text-amber-400">The Paradox:</strong>
+                    <p class="text-sm text-gray-300 mt-1">High CO but poor tissue perfusion. Why? Microcirculatory dysfunction + mitochondrial dysfunction + maldistribution of blood flow</p>
+                </div>
+            </div>
+        `,
+        treatment: `
+            <div class="space-y-4">
+                <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+                    <h4 class="text-amber-400 font-medium mb-2">Restore Vascular Tone</h4>
+                    <ul class="text-sm text-gray-300 space-y-1">
+                        <li>• <strong>Norepinephrine</strong> (first-line for septic shock)</li>
+                        <li>• <strong>Vasopressin</strong> (catecholamine-sparing, V1 receptor)</li>
+                        <li>• <strong>Epinephrine</strong> (for anaphylaxis - first line)</li>
+                    </ul>
+                </div>
+                <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+                    <h4 class="text-blue-400 font-medium mb-2">Volume (Judicious)</h4>
+                    <ul class="text-sm text-gray-300 space-y-1">
+                        <li>• 30 mL/kg crystalloid for sepsis (Hour-1 bundle)</li>
+                        <li>• Capillary leak may limit effectiveness</li>
+                    </ul>
+                </div>
+                <div class="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+                    <h4 class="text-red-400 font-medium mb-2">Treat Cause</h4>
+                    <ul class="text-sm text-gray-300 space-y-1">
+                        <li>• Sepsis: Antibiotics + source control</li>
+                        <li>• Anaphylaxis: Remove allergen + epinephrine</li>
+                        <li>• Neurogenic: Stabilize spine, pressors</li>
+                    </ul>
+                </div>
+            </div>
+        `
+    },
+    obstructive: {
+        name: 'Obstructive Shock',
+        color: 'purple',
+        params: {
+            co: { value: '↓↓', level: 20, desc: 'Mechanical obstruction to filling or ejection' },
+            svr: { value: '↑↑', level: 85, desc: 'Compensatory vasoconstriction' },
+            cvp: { value: '↑↑', level: 85, desc: 'Backup behind obstruction (PE, tamponade)' },
+            pcwp: { value: 'Variable', level: 40, desc: 'Low in PE, variable in tamponade' },
+            svo2: { value: '↓↓', level: 25, desc: 'Increased extraction' }
+        },
+        clinical: [
+            { feature: 'JVD', value: 'Present', reason: 'Backup of venous return' },
+            { feature: 'Pulsus paradoxus', value: 'Present (tamponade)', reason: '>10mmHg BP drop with inspiration' },
+            { feature: 'Heart sounds', value: 'Muffled (tamponade)', reason: 'Fluid around heart' },
+            { feature: 'Tracheal deviation', value: 'Away (tension PTX)', reason: 'Mediastinal shift' },
+            { feature: 'Unilateral breath sounds', value: 'Absent (tension PTX)', reason: 'Collapsed lung' }
+        ],
+        mechanism: `
+            <div class="space-y-4">
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-3">
+                        <h4 class="text-purple-400 font-medium">Cardiac Tamponade</h4>
+                        <p class="text-xs text-gray-300 mt-1">Pericardial fluid → External compression → ↓ Ventricular filling → ↓ SV</p>
+                        <p class="text-xs text-amber-400 mt-1">Beck's triad: JVD + Hypotension + Muffled heart sounds</p>
+                    </div>
+                    <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-3">
+                        <h4 class="text-blue-400 font-medium">Tension Pneumothorax</h4>
+                        <p class="text-xs text-gray-300 mt-1">Air trapping → ↑ Intrathoracic pressure → Compressed vena cava → ↓ Venous return</p>
+                        <p class="text-xs text-amber-400 mt-1">Tracheal deviation, absent breath sounds, hypotension</p>
+                    </div>
+                    <div class="bg-red-500/10 border border-red-500/30 rounded-lg p-3">
+                        <h4 class="text-red-400 font-medium">Massive PE</h4>
+                        <p class="text-xs text-gray-300 mt-1">Clot → ↑ PVR → RV failure → ↓ LV filling → ↓ CO</p>
+                        <p class="text-xs text-amber-400 mt-1">JVD, RV strain, hypoxia, sudden onset</p>
+                    </div>
+                    <div class="bg-green-500/10 border border-green-500/30 rounded-lg p-3">
+                        <h4 class="text-green-400 font-medium">Constrictive Pericarditis</h4>
+                        <p class="text-xs text-gray-300 mt-1">Fibrotic pericardium → Restricted filling → ↓ SV</p>
+                        <p class="text-xs text-amber-400 mt-1">Kussmaul's sign, pericardial knock</p>
+                    </div>
+                </div>
+            </div>
+        `,
+        treatment: `
+            <div class="space-y-4">
+                <div class="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+                    <h4 class="text-red-400 font-medium mb-2">⚡ Remove the Obstruction (Emergent!)</h4>
+                    <ul class="text-sm text-gray-300 space-y-2">
+                        <li><strong>Tamponade:</strong> Pericardiocentesis or pericardial window</li>
+                        <li><strong>Tension PTX:</strong> Needle decompression → Chest tube</li>
+                        <li><strong>Massive PE:</strong> Thrombolytics, thrombectomy, or ECMO</li>
+                    </ul>
+                </div>
+                <div class="text-sm text-amber-400">
+                    ⚠️ Fluids and pressors are temporizing only - definitive treatment is removing the obstruction!
+                </div>
+            </div>
+        `
+    }
+};
+
+let currentShock = null;
+
+function selectShock(type) {
+    currentShock = type;
+    const data = SHOCK_DATA[type];
+    
+    // Update card selection
+    document.querySelectorAll('.shock-card').forEach(card => {
+        card.classList.remove('active');
+    });
+    document.getElementById(`card-${type}`).classList.add('active');
+    
+    // Update parameters
+    Object.keys(data.params).forEach(param => {
+        const p = data.params[param];
+        document.getElementById(`param-${param}-value`).textContent = p.value;
+        document.getElementById(`param-${param}-bar`).style.width = `${p.level}%`;
+    });
+    
+    // Update clinical features
+    const featuresHtml = data.clinical.map(f => `
+        <div class="bg-slate-700/50 rounded-lg p-3">
+            <div class="flex justify-between">
+                <span class="text-gray-400">${f.feature}</span>
+                <span class="font-medium text-${data.color}-400">${f.value}</span>
+            </div>
+            <div class="text-xs text-gray-500 mt-1">${f.reason}</div>
+        </div>
+    `).join('');
+    document.getElementById('clinical-features').innerHTML = featuresHtml;
+    
+    // Show mechanism
+    document.getElementById('mechanism-content').innerHTML = data.mechanism;
+    document.getElementById('mechanism-panel').classList.remove('hidden');
+    
+    // Show treatment
+    document.getElementById('treatment-content').innerHTML = data.treatment;
+    document.getElementById('treatment-panel').classList.remove('hidden');
+}
+
+// Initialize with cardiogenic
+document.addEventListener('DOMContentLoaded', () => selectShock('cardiogenic'));
+</script>
+</body>
+</html>
