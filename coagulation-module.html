@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MechanismX - Coagulation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>body{background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);min-height:100vh;}
+    .factor{transition:all 0.2s;cursor:pointer}.factor:hover{transform:scale(1.1)}</style>
+</head>
+<body class="text-white">
+    <nav class="bg-slate-800/80 backdrop-blur border-b border-slate-700 px-6 py-4">
+        <div class="max-w-6xl mx-auto flex items-center gap-4">
+            <a href="index.html" class="text-gray-400 hover:text-white text-sm">← MechanismX</a>
+            <h1 class="text-xl font-bold">🩹 Coagulation Cascade</h1>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto p-6">
+        <!-- Overview -->
+        <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 mb-6">
+            <h2 class="text-2xl font-bold mb-2">The Coagulation Cascade</h2>
+            <p class="text-gray-400">Understanding the cascade helps you predict which labs are affected and which drugs work where</p>
+        </div>
+
+        <!-- Visual Cascade -->
+        <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 mb-6">
+            <h3 class="font-semibold mb-4">The Cascade (Simplified)</h3>
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Intrinsic -->
+                <div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-4">
+                    <h4 class="text-blue-400 font-bold text-center mb-3">Intrinsic Pathway</h4>
+                    <p class="text-xs text-gray-400 text-center mb-3">Measured by PTT</p>
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="factor bg-blue-600 rounded px-3 py-1 text-sm">XII → XIIa</div>
+                        <div class="text-gray-500">↓</div>
+                        <div class="factor bg-blue-600 rounded px-3 py-1 text-sm">XI → XIa</div>
+                        <div class="text-gray-500">↓</div>
+                        <div class="factor bg-blue-600 rounded px-3 py-1 text-sm">IX → IXa</div>
+                        <div class="text-gray-500">↓</div>
+                        <div class="factor bg-purple-600 rounded px-3 py-1 text-sm">VIII + IXa</div>
+                        <div class="text-gray-500">↓</div>
+                        <div class="text-amber-400 font-bold">→ Common Pathway</div>
+                    </div>
+                    <div class="mt-3 text-xs text-gray-400">
+                        <div class="text-blue-400">Heparin works here</div>
+                        <div>Hemophilia A (VIII) & B (IX)</div>
+                    </div>
+                </div>
+
+                <!-- Extrinsic -->
+                <div class="bg-red-500/10 border border-red-500/30 rounded-xl p-4">
+                    <h4 class="text-red-400 font-bold text-center mb-3">Extrinsic Pathway</h4>
+                    <p class="text-xs text-gray-400 text-center mb-3">Measured by PT/INR</p>
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="factor bg-red-600 rounded px-3 py-1 text-sm">Tissue Factor</div>
+                        <div class="text-gray-500">↓</div>
+                        <div class="factor bg-red-600 rounded px-3 py-1 text-sm">VII → VIIa</div>
+                        <div class="text-gray-500">↓</div>
+                        <div class="text-amber-400 font-bold">→ Common Pathway</div>
+                    </div>
+                    <div class="mt-3 text-xs text-gray-400">
+                        <div class="text-red-400">Warfarin affects this first</div>
+                        <div>VII has shortest half-life</div>
+                    </div>
+                </div>
+
+                <!-- Common -->
+                <div class="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4">
+                    <h4 class="text-amber-400 font-bold text-center mb-3">Common Pathway</h4>
+                    <p class="text-xs text-gray-400 text-center mb-3">Both PT & PTT affected</p>
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="factor bg-amber-600 rounded px-3 py-1 text-sm">X → Xa</div>
+                        <div class="text-gray-500">↓</div>
+                        <div class="factor bg-amber-600 rounded px-3 py-1 text-sm">V + Xa + Ca²⁺</div>
+                        <div class="text-gray-500">↓</div>
+                        <div class="factor bg-green-600 rounded px-3 py-1 text-sm">II (Prothrombin) → IIa (Thrombin)</div>
+                        <div class="text-gray-500">↓</div>
+                        <div class="factor bg-green-600 rounded px-3 py-1 text-sm">Fibrinogen → Fibrin</div>
+                        <div class="text-gray-500">↓</div>
+                        <div class="factor bg-green-600 rounded px-3 py-1 text-sm">XIII cross-links fibrin</div>
+                    </div>
+                    <div class="mt-3 text-xs text-gray-400">
+                        <div class="text-amber-400">DOACs work here (Xa or IIa)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lab Interpretation -->
+        <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 mb-6">
+            <h3 class="font-semibold mb-4">Lab Patterns & Differential</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead class="text-gray-400 border-b border-slate-700">
+                        <tr>
+                            <th class="text-left py-2">Pattern</th>
+                            <th class="text-center">PT/INR</th>
+                            <th class="text-center">PTT</th>
+                            <th class="text-left">Think...</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-300">
+                        <tr class="border-b border-slate-700/50">
+                            <td class="py-3">Isolated ↑PT</td>
+                            <td class="text-center text-red-400">↑</td>
+                            <td class="text-center text-green-400">N</td>
+                            <td>Factor VII deficiency, early warfarin, early liver disease</td>
+                        </tr>
+                        <tr class="border-b border-slate-700/50">
+                            <td class="py-3">Isolated ↑PTT</td>
+                            <td class="text-center text-green-400">N</td>
+                            <td class="text-center text-red-400">↑</td>
+                            <td>Heparin, Hemophilia A/B, vWD, Factor XI/XII def, Lupus anticoagulant</td>
+                        </tr>
+                        <tr class="border-b border-slate-700/50">
+                            <td class="py-3">Both ↑PT & ↑PTT</td>
+                            <td class="text-center text-red-400">↑</td>
+                            <td class="text-center text-red-400">↑</td>
+                            <td>Common pathway (X, V, II, I), DIC, liver failure, supratherapeutic warfarin, vitamin K def</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3">Normal PT & PTT but bleeding</td>
+                            <td class="text-center text-green-400">N</td>
+                            <td class="text-center text-green-400">N</td>
+                            <td>Platelet disorder, Factor XIII def, mild vWD, fibrinolysis</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Mixing Study -->
+        <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 mb-6">
+            <h3 class="font-semibold mb-4">The Mixing Study: Factor Deficiency vs Inhibitor</h3>
+            <div class="bg-slate-700 rounded-lg p-4 mb-4">
+                <p class="text-sm text-gray-300">When PTT is elevated, mix patient plasma 1:1 with normal plasma:</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
+                    <h4 class="text-green-400 font-medium mb-2">PTT Corrects</h4>
+                    <p class="text-sm text-gray-300">= Factor DEFICIENCY</p>
+                    <p class="text-xs text-gray-400 mt-2">Normal plasma provides the missing factor</p>
+                    <p class="text-xs text-amber-400 mt-1">Think: Hemophilia, other factor deficiencies</p>
+                </div>
+                <div class="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+                    <h4 class="text-red-400 font-medium mb-2">PTT Does NOT Correct</h4>
+                    <p class="text-sm text-gray-300">= INHIBITOR present</p>
+                    <p class="text-xs text-gray-400 mt-2">Something is blocking the cascade</p>
+                    <p class="text-xs text-amber-400 mt-1">Think: Lupus anticoagulant, Factor VIII inhibitor, heparin</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Anticoagulant Mechanisms -->
+        <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 mb-6">
+            <h3 class="font-semibold mb-4">Anticoagulant Mechanisms & Monitoring</h3>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-slate-700/50 rounded-lg p-4">
+                    <h4 class="text-blue-400 font-medium mb-2">Heparin (UFH)</h4>
+                    <div class="text-sm text-gray-300 space-y-1">
+                        <div><span class="text-gray-400">Mechanism:</span> Potentiates Antithrombin III → Inhibits IIa, Xa, IXa</div>
+                        <div><span class="text-gray-400">Monitoring:</span> PTT (target 1.5-2.5x normal)</div>
+                        <div><span class="text-gray-400">Reversal:</span> Protamine sulfate</div>
+                    </div>
+                </div>
+                <div class="bg-slate-700/50 rounded-lg p-4">
+                    <h4 class="text-cyan-400 font-medium mb-2">LMWH (Enoxaparin)</h4>
+                    <div class="text-sm text-gray-300 space-y-1">
+                        <div><span class="text-gray-400">Mechanism:</span> Mainly anti-Xa (less anti-IIa than UFH)</div>
+                        <div><span class="text-gray-400">Monitoring:</span> Usually none; Anti-Xa if needed</div>
+                        <div><span class="text-gray-400">Reversal:</span> Protamine (partial)</div>
+                    </div>
+                </div>
+                <div class="bg-slate-700/50 rounded-lg p-4">
+                    <h4 class="text-red-400 font-medium mb-2">Warfarin</h4>
+                    <div class="text-sm text-gray-300 space-y-1">
+                        <div><span class="text-gray-400">Mechanism:</span> Blocks vitamin K epoxide reductase → ↓II, VII, IX, X, Protein C & S</div>
+                        <div><span class="text-gray-400">Monitoring:</span> PT/INR</div>
+                        <div><span class="text-gray-400">Reversal:</span> Vitamin K, FFP, PCC</div>
+                    </div>
+                </div>
+                <div class="bg-slate-700/50 rounded-lg p-4">
+                    <h4 class="text-amber-400 font-medium mb-2">DOACs</h4>
+                    <div class="text-sm text-gray-300 space-y-1">
+                        <div><span class="text-gray-400">Xa inhibitors:</span> Rivaroxaban, Apixaban, Edoxaban</div>
+                        <div><span class="text-gray-400">IIa inhibitor:</span> Dabigatran</div>
+                        <div><span class="text-gray-400">Reversal:</span> Andexanet alfa (Xa), Idarucizumab (dabigatran)</div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4 bg-red-500/10 border border-red-500/30 rounded-lg p-3">
+                <span class="text-red-400 font-medium">⚠️ Warfarin Skin Necrosis: </span>
+                <span class="text-sm text-gray-300">Protein C has shortest half-life → drops first → transient hypercoagulability → skin necrosis. Bridge with heparin!</span>
+            </div>
+        </div>
+
+        <!-- DIC -->
+        <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+            <h3 class="font-semibold mb-4">DIC: When Everything Goes Wrong</h3>
+            <div class="bg-slate-700 rounded-lg p-4 mb-4">
+                <div class="text-center">
+                    <span class="text-red-400 font-bold">Trigger</span>
+                    <span class="text-gray-400"> → Massive coagulation activation → </span>
+                    <span class="text-amber-400 font-bold">Consume all factors & platelets</span>
+                    <span class="text-gray-400"> → </span>
+                    <span class="text-blue-400 font-bold">Bleeding + Thrombosis</span>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                    <h4 class="text-amber-400 font-medium mb-2">Causes (STOP Making Thrombin)</h4>
+                    <ul class="text-sm text-gray-300 space-y-1">
+                        <li>• <b>S</b>epsis</li>
+                        <li>• <b>T</b>rauma / burns</li>
+                        <li>• <b>O</b>bstetric (abruption, amniotic embolism)</li>
+                        <li>• <b>P</b>ancreatitis</li>
+                        <li>• <b>M</b>alignancy (esp. APL, adenocarcinoma)</li>
+                        <li>• <b>T</b>ransfusion reaction</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-amber-400 font-medium mb-2">Lab Findings</h4>
+                    <ul class="text-sm text-gray-300 space-y-1">
+                        <li>• ↑PT, ↑PTT (consuming factors)</li>
+                        <li>• ↓Platelets (consumed)</li>
+                        <li>• ↓Fibrinogen (consumed)</li>
+                        <li>• ↑D-dimer (fibrin breakdown)</li>
+                        <li>• Schistocytes on smear (microthrombi shear RBCs)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-4 bg-green-500/10 border border-green-500/30 rounded-lg p-3">
+                <span class="text-green-400 font-medium">Treatment: </span>
+                <span class="text-sm text-gray-300">Treat underlying cause! Supportive: platelets, FFP, cryoprecipitate (fibrinogen) as needed.</span>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

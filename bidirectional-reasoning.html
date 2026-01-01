@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MechanismX - Bidirectional Reasoning</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); min-height: 100vh; }
+        .prediction-card { transition: all 0.2s; }
+        .prediction-card:hover { transform: scale(1.02); }
+        .prediction-card.selected { border-color: #3b82f6; background: rgba(59, 130, 246, 0.1); }
+        .prediction-card.correct { border-color: #22c55e; background: rgba(34, 197, 94, 0.1); }
+        .prediction-card.incorrect { border-color: #ef4444; background: rgba(239, 68, 68, 0.1); }
+        .direction-arrow { font-size: 32px; animation: bounce 1s infinite; }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body class="text-white">
+    <nav class="bg-slate-800/80 backdrop-blur border-b border-slate-700 px-6 py-4">
+        <div class="max-w-5xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="text-gray-400 hover:text-white text-sm">← MechanismX</a>
+                <h1 class="text-xl font-bold">🔄 Bidirectional Reasoning</h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="text-sm text-gray-400">
+                    Mode: <span id="current-mode" class="text-blue-400 font-semibold">Forward</span>
+                </div>
+                <div class="bg-slate-700 rounded-lg px-3 py-1">
+                    <span class="text-gray-400 text-sm">Score:</span>
+                    <span id="score" class="font-bold text-green-400 ml-1">0</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-5xl mx-auto p-6">
+        <!-- Question Card -->
+        <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 mb-6">
+            <div class="flex items-center gap-3 mb-4">
+                <span id="direction-icon" class="direction-arrow">⬇️</span>
+                <div>
+                    <div id="mode-label" class="text-sm text-blue-400 font-semibold">FORWARD PREDICTION</div>
+                    <div id="mode-instruction" class="text-xs text-gray-400">Given the cause, predict the downstream effects</div>
+                </div>
+            </div>
+            
+            <div class="bg-slate-700/50 rounded-lg p-4 mb-4">
+                <div class="text-sm text-gray-400 mb-1">Given:</div>
+                <div id="given-condition" class="text-xl font-semibold text-amber-400">Loading...</div>
+            </div>
+            
+            <div class="text-gray-300 mb-2" id="question-prompt">What downstream effects would you expect?</div>
+            <div class="text-xs text-gray-500" id="selection-hint">Select all that apply, then click Submit</div>
+        </div>
+
+        <!-- Answer Options -->
+        <div id="options-grid" class="grid md:grid-cols-2 gap-3 mb-6">
+            <!-- Options populated by JS -->
+        </div>
+
+        <!-- Controls -->
+        <div class="flex items-center justify-between">
+            <button onclick="showHint()" class="bg-amber-600 hover:bg-amber-700 px-4 py-2 rounded-lg text-sm">
+                💡 Hint
+            </button>
+            <div class="flex gap-3">
+                <button onclick="submitAnswer()" id="submit-btn" class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg font-medium">
+                    Submit Answer
+                </button>
+                <button onclick="nextQuestion()" id="next-btn" class="bg-green-600 hover:bg-green-700 px-6 py-2 rounded-lg font-medium hidden">
+                    Next Question →
+                </button>
+            </div>
+        </div>
+
+        <!-- Explanation Panel (hidden until submit) -->
+        <div id="explanation-panel" class="bg-slate-800 rounded-xl p-6 border border-slate-700 mt-6 hidden">
+            <h3 class="font-semibold mb-3 flex items-center gap-2">
+                <span id="result-icon">✓</span>
+                <span id="result-text">Explanation</span>
+            </h3>
+            <div id="explanation-content" class="text-gray-300 text-sm space-y-2"></div>
+        </div>
+
+        <!-- Progress -->
+        <div class="bg-slate-800 rounded-xl p-4 border border-slate-700 mt-6">
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-sm text-gray-400">Question <span id="q-num">1</span> of <span id="q-total">10</span></span>
+                <span class="text-sm text-gray-400">Accuracy: <span id="accuracy">--%</span></span>
+            </div>
+            <div class="h-2 bg-slate-700 rounded-full overflow-hidden">
+                <div id="progress-bar" class="h-full bg-blue-500 transition-all" style="width: 10%"></div>
+            </div>
+        </div>
+    </main>
+
+<script>
+// ============================================================================
+// BIDIRECTIONAL REASONING ENGINE
+// ============================================================================
+
+const QUESTIONS = [
+    // FORWARD: Cause → Effects
+    {
+        mode: 'forward',
+        given: 'Decreased Cardiac Output',
+        prompt: 'What downstream effects would you expect?',
+        correct: ['Decreased renal perfusion', 'RAAS activation', 'Sympathetic activation', 'Tissue hypoperfusion'],
+        incorrect: ['Decreased aldosterone', 'Vasodilation', 'Increased GFR', 'Hyperkalemia'],
+        explanation: 'Decreased CO triggers compensatory mechanisms: SNS activation increases HR/contractility, reduced renal perfusion activates RAAS causing Na/water retention, and tissues become hypoperfused leading to fatigue and lactate production.'
+    },
+    {
+        mode: 'forward',
+        given: 'RAAS Activation',
+        prompt: 'What effects does this cause?',
+        correct: ['Increased angiotensin II', 'Increased aldosterone', 'Sodium retention', 'Vasoconstriction'],
+        incorrect: ['Decreased preload', 'Potassium retention', 'Vasodilation', 'Natriuresis'],
+        explanation: 'RAAS activation leads to angiotensin II (vasoconstriction, cardiac remodeling) and aldosterone (Na retention in collecting duct with K excretion). This increases preload and afterload.'
+    },
+    {
+        mode: 'forward',
+        given: 'Severe Dehydration',
+        prompt: 'What physiological changes occur?',
+        correct: ['Decreased renal perfusion', 'Increased ADH', 'Concentrated urine', 'Tachycardia'],
+        incorrect: ['Dilute urine', 'Decreased heart rate', 'Peripheral vasodilation', 'Hypervolemia'],
+        explanation: 'Dehydration reduces intravascular volume, triggering baroreceptor-mediated tachycardia, ADH release (concentrates urine), and decreased renal perfusion which can lead to prerenal AKI.'
+    },
+    
+    // BACKWARD: Effect → Causes
+    {
+        mode: 'backward',
+        given: 'Bilateral Lower Extremity Edema',
+        prompt: 'What upstream mechanisms could cause this?',
+        correct: ['Right heart failure', 'Hypoalbuminemia', 'Venous insufficiency', 'Sodium retention'],
+        incorrect: ['Left heart failure alone', 'Dehydration', 'Hyperthyroidism', 'Anemia'],
+        explanation: 'Peripheral edema requires either: increased hydrostatic pressure (RHF, venous insufficiency), decreased oncotic pressure (hypoalbuminemia from nephrotic syndrome or cirrhosis), or Na/water retention. Left HF alone causes pulmonary edema first.'
+    },
+    {
+        mode: 'backward',
+        given: 'Elevated BNP (1200 pg/mL)',
+        prompt: 'What conditions cause this?',
+        correct: ['Heart failure', 'Ventricular wall stress', 'Volume overload', 'Pulmonary embolism'],
+        incorrect: ['Dehydration', 'Hypovolemia', 'Anemia alone', 'Hyperthyroidism'],
+        explanation: 'BNP is released from ventricular myocytes in response to wall stretch/stress. Causes include HF (most common), PE (RV strain), renal failure (volume overload), and any cause of ventricular dilation.'
+    },
+    {
+        mode: 'backward',
+        given: 'Metabolic Acidosis with Elevated Anion Gap',
+        prompt: 'What could cause this?',
+        correct: ['Lactic acidosis', 'Diabetic ketoacidosis', 'Uremia', 'Toxic ingestion (methanol, ethylene glycol)'],
+        incorrect: ['Diarrhea', 'RTA', 'Normal saline infusion', 'Hyperventilation'],
+        explanation: 'Elevated AG acidosis = unmeasured anions. MUDPILES: Methanol, Uremia, DKA, Propylene glycol, INH/Iron, Lactic acidosis, Ethylene glycol, Salicylates. Diarrhea and RTA cause non-AG acidosis.'
+    },
+    
+    // LATERAL: If X is true, what else should be true?
+    {
+        mode: 'lateral',
+        given: 'You believe the patient has active RAAS activation',
+        prompt: 'What other findings should be present if your reasoning is correct?',
+        correct: ['Low-normal potassium', 'Metabolic alkalosis', 'Sodium retention', 'Elevated aldosterone'],
+        incorrect: ['Hyperkalemia', 'Metabolic acidosis', 'Hyponatremia', 'Low renin'],
+        explanation: 'RAAS activation means high renin → high angiotensin II → high aldosterone. Aldosterone causes Na retention (can cause edema) and K excretion (hypokalemia) with H+ excretion (metabolic alkalosis).'
+    },
+    {
+        mode: 'lateral',
+        given: 'You suspect prerenal AKI from hypovolemia',
+        prompt: 'What findings would support your hypothesis?',
+        correct: ['BUN:Cr ratio > 20:1', 'FeNa < 1%', 'Concentrated urine', 'Bland sediment'],
+        incorrect: ['FeNa > 2%', 'Muddy brown casts', 'BUN:Cr ratio 10:1', 'Isosthenuria'],
+        explanation: 'In prerenal AKI, tubules are intact and avidly reabsorbing Na (FeNa <1%) and urea (elevated BUN:Cr). Urine is concentrated as ADH works. Muddy brown casts indicate ATN, not prerenal.'
+    },
+    {
+        mode: 'lateral',
+        given: 'You think the patient has septic shock',
+        prompt: 'What else should be true?',
+        correct: ['Warm extremities initially', 'Low SVR', 'High cardiac output', 'Elevated lactate'],
+        incorrect: ['Cool extremities', 'High SVR', 'Low cardiac output', 'Normal lactate'],
+        explanation: 'Septic shock is distributive: cytokines cause vasodilation (low SVR, warm extremities) with compensatory high CO. Lactate rises from tissue hypoperfusion despite adequate CO. Cool extremities suggest cardiogenic or late septic shock.'
+    },
+    {
+        mode: 'lateral',
+        given: 'You diagnose the patient with HFpEF',
+        prompt: 'What characteristics should this patient have?',
+        correct: ['Preserved EF (≥50%)', 'Diastolic dysfunction', 'Often elderly/female/HTN', 'Elevated filling pressures'],
+        incorrect: ['Low EF (<40%)', 'Dilated LV', 'Young male', 'Normal BNP'],
+        explanation: 'HFpEF = preserved EF with impaired relaxation/filling. Typically older, female, with HTN/DM/obesity. LV is often hypertrophied (not dilated). BNP elevated from wall stress despite preserved EF.'
+    }
+];
+
+let state = {
+    currentQuestion: 0,
+    score: 0,
+    answered: 0,
+    selected: new Set(),
+    submitted: false
+};
+
+function init() {
+    shuffleQuestions();
+    loadQuestion();
+}
+
+function shuffleQuestions() {
+    // Fisher-Yates shuffle
+    for (let i = QUESTIONS.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [QUESTIONS[i], QUESTIONS[j]] = [QUESTIONS[j], QUESTIONS[i]];
+    }
+}
+
+function loadQuestion() {
+    const q = QUESTIONS[state.currentQuestion];
+    state.selected.clear();
+    state.submitted = false;
+    
+    // Update mode display
+    const modeConfig = {
+        forward: { icon: '⬇️', label: 'FORWARD PREDICTION', instruction: 'Given the cause, predict downstream effects', color: 'text-blue-400' },
+        backward: { icon: '⬆️', label: 'BACKWARD REASONING', instruction: 'Given the effect, identify possible causes', color: 'text-purple-400' },
+        lateral: { icon: '↔️', label: 'LATERAL INFERENCE', instruction: 'If your hypothesis is correct, what else should be true?', color: 'text-green-400' }
+    };
+    
+    const mode = modeConfig[q.mode];
+    document.getElementById('direction-icon').textContent = mode.icon;
+    document.getElementById('mode-label').textContent = mode.label;
+    document.getElementById('mode-label').className = `text-sm font-semibold ${mode.color}`;
+    document.getElementById('mode-instruction').textContent = mode.instruction;
+    document.getElementById('current-mode').textContent = q.mode.charAt(0).toUpperCase() + q.mode.slice(1);
+    
+    // Set question content
+    document.getElementById('given-condition').textContent = q.given;
+    document.getElementById('question-prompt').textContent = q.prompt;
+    
+    // Create options (mix correct and incorrect, then shuffle)
+    const allOptions = [
+        ...q.correct.map(o => ({ text: o, isCorrect: true })),
+        ...q.incorrect.map(o => ({ text: o, isCorrect: false }))
+    ];
+    
+    // Shuffle options
+    for (let i = allOptions.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [allOptions[i], allOptions[j]] = [allOptions[j], allOptions[i]];
+    }
+    
+    // Render options
+    const grid = document.getElementById('options-grid');
+    grid.innerHTML = allOptions.map((opt, idx) => `
+        <div class="prediction-card bg-slate-800 border-2 border-slate-600 rounded-lg p-4 cursor-pointer"
+             data-index="${idx}" data-correct="${opt.isCorrect}" onclick="toggleOption(${idx})">
+            <div class="flex items-center gap-3">
+                <div class="w-5 h-5 border-2 border-slate-500 rounded flex items-center justify-center" id="check-${idx}"></div>
+                <span>${opt.text}</span>
+            </div>
+        </div>
+    `).join('');
+    
+    // Update progress
+    document.getElementById('q-num').textContent = state.currentQuestion + 1;
+    document.getElementById('q-total').textContent = QUESTIONS.length;
+    document.getElementById('progress-bar').style.width = `${((state.currentQuestion + 1) / QUESTIONS.length) * 100}%`;
+    
+    // Reset buttons
+    document.getElementById('submit-btn').classList.remove('hidden');
+    document.getElementById('next-btn').classList.add('hidden');
+    document.getElementById('explanation-panel').classList.add('hidden');
+}
+
+function toggleOption(idx) {
+    if (state.submitted) return;
+    
+    const card = document.querySelector(`[data-index="${idx}"]`);
+    const check = document.getElementById(`check-${idx}`);
+    
+    if (state.selected.has(idx)) {
+        state.selected.delete(idx);
+        card.classList.remove('selected');
+        check.innerHTML = '';
+    } else {
+        state.selected.add(idx);
+        card.classList.add('selected');
+        check.innerHTML = '✓';
+    }
+}
+
+function submitAnswer() {
+    if (state.selected.size === 0) {
+        alert('Please select at least one option');
+        return;
+    }
+    
+    state.submitted = true;
+    state.answered++;
+    
+    const q = QUESTIONS[state.currentQuestion];
+    let correctSelected = 0;
+    let incorrectSelected = 0;
+    let totalCorrect = q.correct.length;
+    
+    // Check each option
+    document.querySelectorAll('.prediction-card').forEach(card => {
+        const idx = parseInt(card.dataset.index);
+        const isCorrect = card.dataset.correct === 'true';
+        const wasSelected = state.selected.has(idx);
+        
+        if (wasSelected && isCorrect) {
+            card.classList.add('correct');
+            correctSelected++;
+        } else if (wasSelected && !isCorrect) {
+            card.classList.add('incorrect');
+            incorrectSelected++;
+        } else if (!wasSelected && isCorrect) {
+            // Missed correct answer - show it
+            card.style.border = '2px dashed #22c55e';
+            card.querySelector('div > div').innerHTML = '○';
+        }
+    });
+    
+    // Calculate score for this question
+    // Full credit only if all correct selected and no incorrect
+    const questionScore = (correctSelected === totalCorrect && incorrectSelected === 0) ? 1 :
+                         (correctSelected > 0 && incorrectSelected === 0) ? 0.5 : 0;
+    
+    state.score += questionScore;
+    document.getElementById('score').textContent = state.score.toFixed(1);
+    document.getElementById('accuracy').textContent = `${Math.round((state.score / state.answered) * 100)}%`;
+    
+    // Show explanation
+    const panel = document.getElementById('explanation-panel');
+    const resultIcon = document.getElementById('result-icon');
+    const resultText = document.getElementById('result-text');
+    
+    if (questionScore === 1) {
+        resultIcon.textContent = '✓';
+        resultIcon.className = 'text-green-400';
+        resultText.textContent = 'Perfect!';
+        resultText.className = 'text-green-400';
+    } else if (questionScore === 0.5) {
+        resultIcon.textContent = '◐';
+        resultIcon.className = 'text-amber-400';
+        resultText.textContent = 'Partial Credit';
+        resultText.className = 'text-amber-400';
+    } else {
+        resultIcon.textContent = '✗';
+        resultIcon.className = 'text-red-400';
+        resultText.textContent = 'Review the mechanism';
+        resultText.className = 'text-red-400';
+    }
+    
+    document.getElementById('explanation-content').innerHTML = `
+        <p>${q.explanation}</p>
+        <div class="mt-3 pt-3 border-t border-slate-700">
+            <div class="text-xs text-gray-500">Correct answers: ${q.correct.join(', ')}</div>
+        </div>
+    `;
+    
+    panel.classList.remove('hidden');
+    
+    // Toggle buttons
+    document.getElementById('submit-btn').classList.add('hidden');
+    document.getElementById('next-btn').classList.remove('hidden');
+    
+    // Log for MCFS
+    logMechanismAttempt(q, questionScore);
+}
+
+function nextQuestion() {
+    state.currentQuestion++;
+    
+    if (state.currentQuestion >= QUESTIONS.length) {
+        showResults();
+    } else {
+        loadQuestion();
+    }
+}
+
+function showHint() {
+    const q = QUESTIONS[state.currentQuestion];
+    alert(`💡 Hint: There are ${q.correct.length} correct answers for this question.`);
+}
+
+function showResults() {
+    const accuracy = Math.round((state.score / QUESTIONS.length) * 100);
+    
+    document.querySelector('main').innerHTML = `
+        <div class="bg-slate-800 rounded-xl p-8 border border-slate-700 text-center max-w-lg mx-auto mt-12">
+            <div class="text-6xl mb-4">${accuracy >= 80 ? '🎉' : accuracy >= 60 ? '👍' : '📚'}</div>
+            <h2 class="text-2xl font-bold mb-2">Assessment Complete!</h2>
+            <div class="text-4xl font-bold ${accuracy >= 80 ? 'text-green-400' : accuracy >= 60 ? 'text-amber-400' : 'text-red-400'} mb-4">
+                ${accuracy}%
+            </div>
+            <p class="text-gray-400 mb-6">
+                You scored ${state.score.toFixed(1)} out of ${QUESTIONS.length} on bidirectional reasoning.
+            </p>
+            <div class="space-y-2 text-sm text-left bg-slate-700/50 rounded-lg p-4 mb-6">
+                <div class="flex justify-between">
+                    <span class="text-gray-400">Forward Reasoning:</span>
+                    <span>Tested</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-400">Backward Reasoning:</span>
+                    <span>Tested</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-400">Lateral Inference:</span>
+                    <span>Tested</span>
+                </div>
+            </div>
+            <div class="flex gap-3 justify-center">
+                <button onclick="location.reload()" class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg">
+                    Try Again
+                </button>
+                <a href="index.html" class="bg-slate-700 hover:bg-slate-600 px-6 py-2 rounded-lg">
+                    Back to MechanismX
+                </a>
+            </div>
+        </div>
+    `;
+}
+
+function logMechanismAttempt(question, score) {
+    // For MCFS integration
+    const log = JSON.parse(localStorage.getItem('bidirectional_log') || '[]');
+    log.push({
+        timestamp: Date.now(),
+        mode: question.mode,
+        given: question.given,
+        score: score,
+        selected: Array.from(state.selected)
+    });
+    localStorage.setItem('bidirectional_log', JSON.stringify(log));
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>

@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MechanismX - Cross-System Explorer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); min-height: 100vh; }
+        
+        .organ-node {
+            width: 120px; height: 120px; border-radius: 50%;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            cursor: pointer; transition: all 0.3s;
+            border: 3px solid transparent;
+        }
+        .organ-node:hover { transform: scale(1.1); }
+        .organ-node.selected { border-color: #3b82f6; box-shadow: 0 0 30px rgba(59, 130, 246, 0.5); }
+        .organ-node.affected { animation: pulse-affected 1.5s infinite; }
+        
+        @keyframes pulse-affected {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+            50% { box-shadow: 0 0 20px 10px rgba(239, 68, 68, 0.2); }
+        }
+        
+        .connection-line {
+            position: absolute;
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            transform-origin: left center;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .connection-line.active { opacity: 1; }
+        
+        .syndrome-card {
+            transition: all 0.2s;
+        }
+        .syndrome-card:hover { transform: translateY(-2px); }
+    </style>
+</head>
+<body class="text-white">
+    <nav class="bg-slate-800/80 backdrop-blur border-b border-slate-700 px-6 py-4">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="text-gray-400 hover:text-white text-sm">← MechanismX</a>
+                <h1 class="text-xl font-bold">🔗 Cross-System Explorer</h1>
+            </div>
+            <div class="text-sm text-gray-400">
+                Click an organ to explore its connections
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto p-6">
+        <div class="grid grid-cols-3 gap-6">
+            <!-- Left: Organ Map -->
+            <div class="col-span-2 bg-slate-800 rounded-xl p-6 border border-slate-700 relative" style="min-height: 500px;">
+                <div id="organ-map" class="relative w-full h-full">
+                    <!-- Central body outline hint -->
+                    <div class="absolute inset-0 flex items-center justify-center opacity-10">
+                        <svg viewBox="0 0 200 300" class="h-96">
+                            <ellipse cx="100" cy="80" rx="40" ry="50" fill="none" stroke="white" stroke-width="1"/>
+                            <rect x="60" y="120" width="80" height="100" rx="10" fill="none" stroke="white" stroke-width="1"/>
+                        </svg>
+                    </div>
+                    
+                    <!-- Organ Nodes -->
+                    <div class="organ-node bg-gradient-to-br from-red-600 to-red-800 absolute" style="top: 20%; left: 35%;"
+                         onclick="selectOrgan('heart')" id="organ-heart">
+                        <span class="text-3xl">❤️</span>
+                        <span class="text-xs mt-1">Heart</span>
+                    </div>
+                    
+                    <div class="organ-node bg-gradient-to-br from-pink-600 to-pink-800 absolute" style="top: 15%; left: 55%;"
+                         onclick="selectOrgan('lung')" id="organ-lung">
+                        <span class="text-3xl">🫁</span>
+                        <span class="text-xs mt-1">Lungs</span>
+                    </div>
+                    
+                    <div class="organ-node bg-gradient-to-br from-amber-600 to-amber-800 absolute" style="top: 45%; left: 25%;"
+                         onclick="selectOrgan('liver')" id="organ-liver">
+                        <span class="text-3xl">🫀</span>
+                        <span class="text-xs mt-1">Liver</span>
+                    </div>
+                    
+                    <div class="organ-node bg-gradient-to-br from-purple-600 to-purple-800 absolute" style="top: 50%; left: 60%;"
+                         onclick="selectOrgan('kidney')" id="organ-kidney">
+                        <span class="text-3xl">🫘</span>
+                        <span class="text-xs mt-1">Kidneys</span>
+                    </div>
+                    
+                    <div class="organ-node bg-gradient-to-br from-blue-600 to-blue-800 absolute" style="top: 5%; left: 45%;"
+                         onclick="selectOrgan('brain')" id="organ-brain">
+                        <span class="text-3xl">🧠</span>
+                        <span class="text-xs mt-1">Brain</span>
+                    </div>
+                    
+                    <div class="organ-node bg-gradient-to-br from-green-600 to-green-800 absolute" style="top: 70%; left: 45%;"
+                         onclick="selectOrgan('gut')" id="organ-gut">
+                        <span class="text-3xl">🦠</span>
+                        <span class="text-xs mt-1">GI Tract</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right: Connection Details -->
+            <div class="space-y-4">
+                <div class="bg-slate-800 rounded-xl p-4 border border-slate-700">
+                    <h3 class="text-sm font-semibold text-gray-400 mb-3">SELECTED ORGAN</h3>
+                    <div id="selected-organ-display" class="text-center py-4">
+                        <span class="text-gray-500 text-sm">Click an organ to explore</span>
+                    </div>
+                </div>
+                
+                <div class="bg-slate-800 rounded-xl p-4 border border-slate-700">
+                    <h3 class="text-sm font-semibold text-gray-400 mb-3">CROSS-SYSTEM SYNDROMES</h3>
+                    <div id="syndromes-list" class="space-y-2">
+                        <p class="text-gray-500 text-sm italic">Select an organ to see related syndromes</p>
+                    </div>
+                </div>
+                
+                <div class="bg-slate-800 rounded-xl p-4 border border-slate-700">
+                    <h3 class="text-sm font-semibold text-gray-400 mb-3">CONNECTED SYSTEMS</h3>
+                    <div id="connections-list" class="space-y-2">
+                        <p class="text-gray-500 text-sm italic">Select an organ to see connections</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Detailed Syndrome Modal -->
+        <div id="syndrome-modal" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50">
+            <div class="bg-slate-800 rounded-xl max-w-2xl w-full mx-4 max-h-[80vh] overflow-y-auto">
+                <div class="p-6 border-b border-slate-700 flex justify-between items-center sticky top-0 bg-slate-800">
+                    <h2 id="syndrome-title" class="text-xl font-bold"></h2>
+                    <button onclick="closeModal()" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+                </div>
+                <div id="syndrome-content" class="p-6"></div>
+            </div>
+        </div>
+    </main>
+
+<script>
+// Cross-System Connection Database
+const ORGAN_DATA = {
+    heart: {
+        name: 'Heart',
+        emoji: '❤️',
+        connections: ['kidney', 'lung', 'liver', 'brain'],
+        syndromes: [
+            {
+                id: 'cardiorenal',
+                name: 'Cardiorenal Syndrome',
+                connectedOrgan: 'kidney',
+                types: [
+                    { type: 1, desc: 'Acute HF → Acute AKI', mechanism: 'Decreased CO → decreased renal perfusion → prerenal AKI' },
+                    { type: 2, desc: 'Chronic HF → Chronic CKD', mechanism: 'Chronic low CO + venous congestion → progressive nephron loss' },
+                    { type: 3, desc: 'Acute AKI → Acute cardiac dysfunction', mechanism: 'Uremia, volume overload, acidosis → myocardial depression' },
+                    { type: 4, desc: 'CKD → Chronic cardiac disease', mechanism: 'HTN, LVH, accelerated atherosclerosis' }
+                ],
+                clinicalPearl: 'Worsening renal function during HF treatment may be acceptable if the patient is "decongesting" - follow clinical status, not just creatinine.'
+            },
+            {
+                id: 'corpulmonale',
+                name: 'Cor Pulmonale',
+                connectedOrgan: 'lung',
+                types: [
+                    { type: 'Acute', desc: 'Massive PE → acute RV failure', mechanism: 'Sudden ↑ PA pressure overwhelms RV' },
+                    { type: 'Chronic', desc: 'Chronic lung disease → RV hypertrophy/failure', mechanism: 'Chronic hypoxia → pulmonary vasoconstriction → pulmonary HTN → RV strain' }
+                ],
+                clinicalPearl: 'Look for loud P2 (pulmonic component of S2), RV heave, peripheral edema, and JVD.'
+            }
+        ]
+    },
+    kidney: {
+        name: 'Kidneys',
+        emoji: '🫘',
+        connections: ['heart', 'liver', 'lung'],
+        syndromes: [
+            {
+                id: 'hepatorenal',
+                name: 'Hepatorenal Syndrome',
+                connectedOrgan: 'liver',
+                types: [
+                    { type: 1, desc: 'Rapidly progressive (Type 1)', mechanism: 'Severe splanchnic vasodilation → extreme renal vasoconstriction → rapid GFR decline' },
+                    { type: 2, desc: 'Slowly progressive (Type 2)', mechanism: 'Less severe, often with refractory ascites' }
+                ],
+                clinicalPearl: 'Key feature: Kidneys are structurally NORMAL. HRS can reverse with liver transplant. Look for FeNa <1% and bland sediment.',
+                diagnosticCriteria: ['Cirrhosis with ascites', 'Cr >1.5', 'No improvement with albumin challenge', 'No shock', 'No nephrotoxins', 'No parenchymal kidney disease']
+            },
+            {
+                id: 'pulmonaryrenal',
+                name: 'Pulmonary-Renal Syndromes',
+                connectedOrgan: 'lung',
+                types: [
+                    { type: 'Goodpasture', desc: 'Anti-GBM disease', mechanism: 'Antibodies attack type IV collagen in glomerular AND alveolar basement membranes' },
+                    { type: 'ANCA vasculitis', desc: 'GPA, MPA', mechanism: 'Small vessel vasculitis affecting glomeruli and pulmonary capillaries' }
+                ],
+                clinicalPearl: 'Hemoptysis + hematuria = pulmonary-renal syndrome until proven otherwise. Check ANCA and anti-GBM urgently.'
+            }
+        ]
+    },
+    liver: {
+        name: 'Liver',
+        emoji: '🫀',
+        connections: ['kidney', 'heart', 'brain', 'gut'],
+        syndromes: [
+            {
+                id: 'hepatopulmonary',
+                name: 'Hepatopulmonary Syndrome',
+                connectedOrgan: 'lung',
+                types: [
+                    { type: 'Classic', desc: 'Intrapulmonary vascular dilations', mechanism: 'Liver dysfunction → ↑ pulmonary vasodilators (NO) → V/Q mismatch → hypoxemia' }
+                ],
+                clinicalPearl: 'Platypnea-orthodeoxia: dyspnea and hypoxemia that WORSEN when upright (blood shunts through dilated basilar vessels).'
+            },
+            {
+                id: 'hepaticenceph',
+                name: 'Hepatic Encephalopathy',
+                connectedOrgan: 'brain',
+                types: [
+                    { type: 'Acute', desc: 'In acute liver failure', mechanism: 'Rapid ammonia accumulation → cerebral edema' },
+                    { type: 'Chronic', desc: 'In cirrhosis', mechanism: 'Portosystemic shunting bypasses liver → ammonia reaches brain → astrocyte dysfunction' }
+                ],
+                clinicalPearl: 'Precipitants: GI bleed (protein load), infection, constipation, medications (benzos, opioids), hypokalemia, alkalosis.'
+            }
+        ]
+    },
+    lung: {
+        name: 'Lungs',
+        emoji: '🫁',
+        connections: ['heart', 'kidney', 'liver'],
+        syndromes: [
+            {
+                id: 'ards',
+                name: 'ARDS & Multi-Organ Failure',
+                connectedOrgan: 'all',
+                types: [
+                    { type: 'Primary', desc: 'Direct lung injury', mechanism: 'Pneumonia, aspiration, inhalation → alveolar damage' },
+                    { type: 'Secondary', desc: 'Indirect lung injury', mechanism: 'Sepsis, pancreatitis, trauma → systemic inflammation → lung involvement' }
+                ],
+                clinicalPearl: 'ARDS is often part of multi-organ dysfunction. Protective ventilation (low tidal volumes) improves survival.'
+            }
+        ]
+    },
+    brain: {
+        name: 'Brain',
+        emoji: '🧠',
+        connections: ['heart', 'liver', 'kidney'],
+        syndromes: [
+            {
+                id: 'cardiogenic_stroke',
+                name: 'Cardioembolic Stroke',
+                connectedOrgan: 'heart',
+                types: [
+                    { type: 'AFib', desc: 'Most common', mechanism: 'Stasis in LAA → thrombus formation → embolization to brain' },
+                    { type: 'Endocarditis', desc: 'Septic emboli', mechanism: 'Vegetation fragments embolize → stroke + mycotic aneurysms' }
+                ],
+                clinicalPearl: 'Sudden onset maximal deficit suggests embolic source. Always get echo and telemetry.'
+            },
+            {
+                id: 'uremic_enceph',
+                name: 'Uremic Encephalopathy',
+                connectedOrgan: 'kidney',
+                types: [
+                    { type: 'Classic', desc: 'In severe AKI/CKD', mechanism: 'Uremic toxins cross BBB → neuronal dysfunction' }
+                ],
+                clinicalPearl: 'Asterixis, myoclonus, confusion. Improves with dialysis. Can have seizures.'
+            }
+        ]
+    },
+    gut: {
+        name: 'GI Tract',
+        emoji: '🦠',
+        connections: ['liver', 'heart', 'kidney'],
+        syndromes: [
+            {
+                id: 'mesenteric_ischemia',
+                name: 'Mesenteric Ischemia',
+                connectedOrgan: 'heart',
+                types: [
+                    { type: 'Embolic', desc: 'From cardiac source', mechanism: 'AFib/LV thrombus → SMA embolus → bowel infarction' },
+                    { type: 'Low-flow', desc: 'Cardiogenic shock', mechanism: 'Hypoperfusion → non-occlusive mesenteric ischemia' }
+                ],
+                clinicalPearl: '"Pain out of proportion to exam" - severe abdominal pain but soft abdomen early on. High mortality.'
+            }
+        ]
+    }
+};
+
+let selectedOrgan = null;
+
+function selectOrgan(organId) {
+    // Clear previous selection
+    document.querySelectorAll('.organ-node').forEach(node => {
+        node.classList.remove('selected', 'affected');
+    });
+    
+    selectedOrgan = organId;
+    const organ = ORGAN_DATA[organId];
+    
+    // Highlight selected
+    document.getElementById(`organ-${organId}`).classList.add('selected');
+    
+    // Highlight connected organs
+    organ.connections.forEach(connId => {
+        document.getElementById(`organ-${connId}`).classList.add('affected');
+    });
+    
+    // Update display
+    document.getElementById('selected-organ-display').innerHTML = `
+        <span class="text-5xl">${organ.emoji}</span>
+        <h3 class="text-xl font-bold mt-2">${organ.name}</h3>
+    `;
+    
+    // Update syndromes list
+    const syndromesList = document.getElementById('syndromes-list');
+    if (organ.syndromes && organ.syndromes.length > 0) {
+        syndromesList.innerHTML = organ.syndromes.map(s => `
+            <div class="syndrome-card bg-slate-700/50 rounded-lg p-3 cursor-pointer hover:bg-slate-700"
+                 onclick="showSyndrome('${organId}', '${s.id}')">
+                <div class="flex items-center justify-between">
+                    <span class="font-medium text-sm">${s.name}</span>
+                    <span class="text-xs text-gray-400">→</span>
+                </div>
+                <div class="text-xs text-gray-400 mt-1">
+                    Connects: ${organ.name} ↔ ${ORGAN_DATA[s.connectedOrgan]?.name || 'Multiple'}
+                </div>
+            </div>
+        `).join('');
+    } else {
+        syndromesList.innerHTML = '<p class="text-gray-500 text-sm">No specific syndromes defined</p>';
+    }
+    
+    // Update connections list
+    document.getElementById('connections-list').innerHTML = organ.connections.map(connId => {
+        const connOrgan = ORGAN_DATA[connId];
+        return `
+            <div class="flex items-center gap-2 text-sm">
+                <span>${connOrgan.emoji}</span>
+                <span class="text-gray-300">${connOrgan.name}</span>
+            </div>
+        `;
+    }).join('');
+}
+
+function showSyndrome(organId, syndromeId) {
+    const organ = ORGAN_DATA[organId];
+    const syndrome = organ.syndromes.find(s => s.id === syndromeId);
+    
+    document.getElementById('syndrome-title').textContent = syndrome.name;
+    
+    let content = `
+        <div class="mb-4">
+            <div class="text-sm text-gray-400 mb-2">Connection</div>
+            <div class="flex items-center gap-2">
+                <span class="text-2xl">${organ.emoji}</span>
+                <span class="text-blue-400">↔</span>
+                <span class="text-2xl">${ORGAN_DATA[syndrome.connectedOrgan]?.emoji || '🔗'}</span>
+            </div>
+        </div>
+        
+        <div class="mb-4">
+            <div class="text-sm text-gray-400 mb-2">Types</div>
+            <div class="space-y-3">
+                ${syndrome.types.map(t => `
+                    <div class="bg-slate-700/50 rounded-lg p-3">
+                        <div class="font-medium text-amber-400 text-sm">Type ${t.type}: ${t.desc}</div>
+                        <div class="text-sm text-gray-300 mt-1">${t.mechanism}</div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+        
+        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+            <div class="text-sm text-blue-400 font-semibold mb-1">💡 Clinical Pearl</div>
+            <div class="text-sm text-gray-300">${syndrome.clinicalPearl}</div>
+        </div>
+    `;
+    
+    if (syndrome.diagnosticCriteria) {
+        content += `
+            <div class="mt-4 bg-slate-700/50 rounded-lg p-4">
+                <div class="text-sm text-gray-400 mb-2">Diagnostic Criteria</div>
+                <ul class="text-sm text-gray-300 space-y-1">
+                    ${syndrome.diagnosticCriteria.map(c => `<li>• ${c}</li>`).join('')}
+                </ul>
+            </div>
+        `;
+    }
+    
+    document.getElementById('syndrome-content').innerHTML = content;
+    
+    document.getElementById('syndrome-modal').classList.remove('hidden');
+    document.getElementById('syndrome-modal').classList.add('flex');
+}
+
+function closeModal() {
+    document.getElementById('syndrome-modal').classList.add('hidden');
+    document.getElementById('syndrome-modal').classList.remove('flex');
+}
+
+// Initialize with heart selected
+document.addEventListener('DOMContentLoaded', () => {
+    selectOrgan('heart');
+});
+</script>
+</body>
+</html>

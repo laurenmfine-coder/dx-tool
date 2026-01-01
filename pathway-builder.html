@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MechanismX - Visual Pathway Builder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); min-height: 100vh; }
+        
+        .pathway-node {
+            position: absolute; padding: 10px 16px; border-radius: 10px; cursor: grab;
+            user-select: none; transition: all 0.2s; min-width: 120px; text-align: center;
+            font-size: 13px; font-weight: 500;
+        }
+        .pathway-node:hover { transform: scale(1.05); z-index: 100; }
+        .pathway-node.selected { box-shadow: 0 0 0 3px #3b82f6, 0 0 20px rgba(59,130,246,0.5); }
+        
+        .node-trigger { background: linear-gradient(135deg, #dc2626, #b91c1c); border: 2px solid #fca5a5; color: white; }
+        .node-mechanism { background: linear-gradient(135deg, #2563eb, #1d4ed8); border: 2px solid #93c5fd; color: white; }
+        .node-effect { background: linear-gradient(135deg, #16a34a, #15803d); border: 2px solid #86efac; color: white; }
+        .node-clinical { background: linear-gradient(135deg, #f59e0b, #d97706); border: 2px solid #fde047; color: white; }
+        .node-treatment { background: linear-gradient(135deg, #0891b2, #0e7490); border: 2px solid #67e8f9; color: white; }
+        
+        .pathway-canvas {
+            position: relative; width: 100%; height: 500px;
+            background: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 25px 25px; border-radius: 12px; overflow: hidden;
+        }
+        
+        .toolbox-item { padding: 8px 12px; border-radius: 8px; cursor: grab; font-size: 12px; margin-bottom: 4px; }
+        .toolbox-item:hover { transform: translateX(3px); }
+    </style>
+</head>
+<body class="text-white">
+    <nav class="bg-slate-800/80 border-b border-slate-700 px-4 py-3">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <a href="index.html" class="text-gray-400 hover:text-white text-sm">← Back</a>
+                <h1 class="text-lg font-bold">🔨 Pathway Builder</h1>
+            </div>
+            <div class="flex items-center gap-2">
+                <select id="challenge-select" onchange="loadChallenge(this.value)" class="bg-slate-700 border-slate-600 rounded px-3 py-1.5 text-sm">
+                    <option value="hf_edema">Heart Failure → Edema</option>
+                    <option value="aki_prerenal">Prerenal AKI</option>
+                    <option value="sepsis_cascade">Sepsis Cascade</option>
+                </select>
+                <button onclick="checkPathway()" class="bg-green-600 hover:bg-green-700 px-4 py-1.5 rounded text-sm font-medium">✓ Check</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto p-4 flex gap-4">
+        <!-- Left: Toolbox -->
+        <div class="w-52 space-y-3">
+            <div class="bg-slate-800 rounded-xl p-3 border border-slate-700">
+                <div class="text-xs text-gray-400 mb-2">CHALLENGE</div>
+                <div id="challenge-title" class="font-semibold text-sm mb-1">Heart Failure → Edema</div>
+                <div id="challenge-desc" class="text-xs text-gray-400 mb-2">Connect decreased CO to peripheral edema</div>
+                <div class="text-xs"><span class="text-gray-400">Progress:</span> <span id="progress-count" class="text-blue-400 font-bold">0/6</span></div>
+            </div>
+            
+            <div class="bg-slate-800 rounded-xl p-3 border border-slate-700">
+                <div class="text-xs text-gray-400 mb-2">DRAG TO CANVAS</div>
+                <div id="toolbox-nodes"></div>
+            </div>
+            
+            <div class="bg-slate-800 rounded-xl p-3 border border-slate-700">
+                <button onclick="getHint()" class="w-full bg-amber-600 hover:bg-amber-700 py-2 rounded text-sm">💡 Hint</button>
+                <div id="hint-text" class="text-xs text-gray-400 mt-2 hidden"></div>
+            </div>
+        </div>
+        
+        <!-- Center: Canvas -->
+        <div class="flex-1">
+            <div id="canvas" class="pathway-canvas border border-slate-700">
+                <svg id="svg-connections" class="absolute inset-0 w-full h-full pointer-events-none">
+                    <defs>
+                        <marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#60a5fa"/>
+                        </marker>
+                        <marker id="arrow-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#22c55e"/>
+                        </marker>
+                        <marker id="arrow-red" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#ef4444"/>
+                        </marker>
+                    </defs>
+                </svg>
+            </div>
+            <div class="flex justify-between mt-2 text-xs text-gray-500">
+                <span>Click two nodes to connect them • Double-click to remove</span>
+                <button onclick="clearCanvas()" class="text-gray-400 hover:text-white">🗑️ Clear</button>
+            </div>
+        </div>
+        
+        <!-- Right: Feedback -->
+        <div class="w-56 space-y-3">
+            <div class="bg-slate-800 rounded-xl p-3 border border-slate-700">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-xs text-gray-400">ACCURACY</span>
+                    <span id="accuracy" class="text-xl font-bold text-green-400">--%</span>
+                </div>
+                <div class="h-2 bg-slate-700 rounded-full overflow-hidden">
+                    <div id="accuracy-bar" class="h-full bg-green-500 transition-all" style="width:0%"></div>
+                </div>
+            </div>
+            
+            <div class="bg-slate-800 rounded-xl p-3 border border-slate-700">
+                <div class="text-xs text-gray-400 mb-2">FEEDBACK</div>
+                <div id="feedback" class="text-sm text-gray-300">Drag nodes and connect them to build the pathway.</div>
+            </div>
+            
+            <div class="bg-slate-800 rounded-xl p-3 border border-slate-700">
+                <div class="text-xs text-gray-400 mb-2">STATS</div>
+                <div class="space-y-1 text-xs">
+                    <div class="flex justify-between"><span class="text-gray-400">Pathways Built</span><span id="stat-built">0</span></div>
+                    <div class="flex justify-between"><span class="text-gray-400">Connections Learned</span><span id="stat-conn">0</span></div>
+                    <div class="flex justify-between"><span class="text-gray-400">Streak</span><span id="stat-streak">0 🔥</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="modal" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
+        <div class="bg-slate-800 rounded-xl p-6 max-w-sm text-center">
+            <div class="text-5xl mb-3">🎉</div>
+            <h2 class="text-xl font-bold mb-2">Pathway Complete!</h2>
+            <p class="text-gray-400 text-sm mb-4">You correctly built the mechanism pathway.</p>
+            <div class="flex gap-3 justify-center">
+                <button onclick="nextChallenge()" class="bg-blue-600 hover:bg-blue-700 px-5 py-2 rounded-lg text-sm">Next →</button>
+                <button onclick="closeModal()" class="bg-slate-700 hover:bg-slate-600 px-5 py-2 rounded-lg text-sm">Review</button>
+            </div>
+        </div>
+    </div>
+
+<script>
+// ============================================================================
+// PATHWAY BUILDER ENGINE
+// ============================================================================
+
+const CHALLENGES = {
+    hf_edema: {
+        title: "Heart Failure → Edema",
+        description: "Connect decreased cardiac output to peripheral edema",
+        nodes: [
+            { label: "↓ Cardiac Output", type: "trigger" },
+            { label: "↓ Renal Perfusion", type: "mechanism" },
+            { label: "RAAS Activation", type: "mechanism" },
+            { label: "↑ Aldosterone", type: "mechanism" },
+            { label: "↑ Angiotensin II", type: "mechanism" },
+            { label: "Na+ Retention", type: "effect" },
+            { label: "H2O Retention", type: "effect" },
+            { label: "Vasoconstriction", type: "effect" },
+            { label: "↑ Preload", type: "effect" },
+            { label: "Peripheral Edema", type: "clinical" },
+            { label: "↑ JVP", type: "clinical" },
+            { label: "Pulmonary Edema", type: "clinical" }
+        ],
+        required: [
+            ["↓ Cardiac Output", "↓ Renal Perfusion"],
+            ["↓ Renal Perfusion", "RAAS Activation"],
+            ["RAAS Activation", "↑ Aldosterone"],
+            ["↑ Aldosterone", "Na+ Retention"],
+            ["Na+ Retention", "H2O Retention"],
+            ["H2O Retention", "Peripheral Edema"]
+        ],
+        valid: [
+            ["RAAS Activation", "↑ Angiotensin II"],
+            ["↑ Angiotensin II", "Vasoconstriction"],
+            ["H2O Retention", "↑ Preload"],
+            ["↑ Preload", "↑ JVP"],
+            ["↑ Preload", "Pulmonary Edema"]
+        ]
+    },
+    aki_prerenal: {
+        title: "Prerenal AKI",
+        description: "Show how hypovolemia leads to prerenal azotemia",
+        nodes: [
+            { label: "Hypovolemia", type: "trigger" },
+            { label: "↓ Renal Perfusion", type: "mechanism" },
+            { label: "↓ GFR", type: "mechanism" },
+            { label: "RAAS Activation", type: "mechanism" },
+            { label: "Tubular Na+ Reabsorption", type: "mechanism" },
+            { label: "↑ BUN", type: "effect" },
+            { label: "↑ Creatinine", type: "effect" },
+            { label: "BUN:Cr > 20:1", type: "clinical" },
+            { label: "FeNa < 1%", type: "clinical" },
+            { label: "Concentrated Urine", type: "clinical" }
+        ],
+        required: [
+            ["Hypovolemia", "↓ Renal Perfusion"],
+            ["↓ Renal Perfusion", "↓ GFR"],
+            ["↓ GFR", "↑ BUN"],
+            ["↓ GFR", "↑ Creatinine"],
+            ["↓ Renal Perfusion", "RAAS Activation"],
+            ["RAAS Activation", "Tubular Na+ Reabsorption"]
+        ],
+        valid: [
+            ["Tubular Na+ Reabsorption", "FeNa < 1%"],
+            ["↑ BUN", "BUN:Cr > 20:1"]
+        ]
+    },
+    sepsis_cascade: {
+        title: "Sepsis Cascade",
+        description: "Map the pathway from infection to organ dysfunction",
+        nodes: [
+            { label: "Infection", type: "trigger" },
+            { label: "Cytokine Release", type: "mechanism" },
+            { label: "Vasodilation", type: "mechanism" },
+            { label: "Capillary Leak", type: "mechanism" },
+            { label: "↓ SVR", type: "effect" },
+            { label: "Hypotension", type: "effect" },
+            { label: "Tissue Hypoperfusion", type: "effect" },
+            { label: "↑ Lactate", type: "clinical" },
+            { label: "Organ Dysfunction", type: "clinical" },
+            { label: "AKI", type: "clinical" }
+        ],
+        required: [
+            ["Infection", "Cytokine Release"],
+            ["Cytokine Release", "Vasodilation"],
+            ["Vasodilation", "↓ SVR"],
+            ["↓ SVR", "Hypotension"],
+            ["Hypotension", "Tissue Hypoperfusion"],
+            ["Tissue Hypoperfusion", "↑ Lactate"]
+        ],
+        valid: [
+            ["Cytokine Release", "Capillary Leak"],
+            ["Tissue Hypoperfusion", "Organ Dysfunction"],
+            ["Tissue Hypoperfusion", "AKI"]
+        ]
+    }
+};
+
+let state = {
+    challenge: 'hf_edema',
+    nodes: [],
+    connections: [],
+    selected: null,
+    nodeId: 0,
+    stats: JSON.parse(localStorage.getItem('pathway_stats') || '{"built":0,"conn":0,"streak":0}')
+};
+
+function init() {
+    loadChallenge('hf_edema');
+    updateStats();
+    setupCanvas();
+}
+
+function loadChallenge(id) {
+    state.challenge = id;
+    state.nodes = [];
+    state.connections = [];
+    state.selected = null;
+    
+    const c = CHALLENGES[id];
+    document.getElementById('challenge-title').textContent = c.title;
+    document.getElementById('challenge-desc').textContent = c.description;
+    document.getElementById('progress-count').textContent = `0/${c.required.length}`;
+    document.getElementById('accuracy').textContent = '--%';
+    document.getElementById('accuracy-bar').style.width = '0%';
+    document.getElementById('feedback').textContent = 'Drag nodes and connect them to build the pathway.';
+    
+    // Render toolbox
+    const toolbox = document.getElementById('toolbox-nodes');
+    toolbox.innerHTML = c.nodes.map(n => `
+        <div class="toolbox-item node-${n.type}" draggable="true" 
+             ondragstart="onDragStart(event, '${n.type}', '${n.label}')">${n.label}</div>
+    `).join('');
+    
+    // Clear canvas
+    document.querySelectorAll('.pathway-node').forEach(el => el.remove());
+    document.querySelectorAll('#svg-connections path').forEach(el => el.remove());
+}
+
+function setupCanvas() {
+    const canvas = document.getElementById('canvas');
+    
+    canvas.ondragover = e => { e.preventDefault(); };
+    canvas.ondrop = e => {
+        e.preventDefault();
+        const type = e.dataTransfer.getData('type');
+        const label = e.dataTransfer.getData('label');
+        if (type && label) {
+            const rect = canvas.getBoundingClientRect();
+            addNode(type, label, e.clientX - rect.left - 60, e.clientY - rect.top - 20);
+        }
+    };
+    
+    canvas.onclick = e => {
+        if (e.target === canvas) deselectAll();
+    };
+}
+
+function onDragStart(e, type, label) {
+    e.dataTransfer.setData('type', type);
+    e.dataTransfer.setData('label', label);
+}
+
+function addNode(type, label, x, y) {
+    // Check if already exists
+    if (state.nodes.find(n => n.label === label)) return;
+    
+    const id = 'node_' + state.nodeId++;
+    const node = { id, type, label, x: Math.max(10, Math.min(x, 500)), y: Math.max(10, Math.min(y, 440)) };
+    state.nodes.push(node);
+    
+    const el = document.createElement('div');
+    el.id = id;
+    el.className = `pathway-node node-${type}`;
+    el.textContent = label;
+    el.style.left = node.x + 'px';
+    el.style.top = node.y + 'px';
+    
+    el.onmousedown = e => startDrag(e, node);
+    el.onclick = e => { e.stopPropagation(); handleClick(node); };
+    el.ondblclick = e => { e.stopPropagation(); removeNode(id); };
+    
+    document.getElementById('canvas').appendChild(el);
+}
+
+function startDrag(e, node) {
+    const el = document.getElementById(node.id);
+    const startX = e.clientX - node.x;
+    const startY = e.clientY - node.y;
+    
+    const onMove = e => {
+        node.x = Math.max(10, Math.min(e.clientX - startX, 500));
+        node.y = Math.max(10, Math.min(e.clientY - startY, 440));
+        el.style.left = node.x + 'px';
+        el.style.top = node.y + 'px';
+        renderConnections();
+    };
+    
+    const onUp = () => {
+        document.removeEventListener('mousemove', onMove);
+        document.removeEventListener('mouseup', onUp);
+    };
+    
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onUp);
+}
+
+function handleClick(node) {
+    if (!state.selected) {
+        state.selected = node;
+        document.getElementById(node.id).classList.add('selected');
+    } else if (state.selected.id === node.id) {
+        deselectAll();
+    } else {
+        addConnection(state.selected, node);
+        deselectAll();
+    }
+}
+
+function deselectAll() {
+    state.selected = null;
+    document.querySelectorAll('.pathway-node.selected').forEach(el => el.classList.remove('selected'));
+}
+
+function addConnection(from, to) {
+    if (state.connections.find(c => c.from === from.id && c.to === to.id)) return;
+    state.connections.push({ from: from.id, to: to.id, fromLabel: from.label, toLabel: to.label, status: 'pending' });
+    renderConnections();
+    updateProgress();
+}
+
+function removeNode(id) {
+    state.nodes = state.nodes.filter(n => n.id !== id);
+    state.connections = state.connections.filter(c => c.from !== id && c.to !== id);
+    document.getElementById(id)?.remove();
+    renderConnections();
+    updateProgress();
+}
+
+function renderConnections() {
+    const svg = document.getElementById('svg-connections');
+    svg.querySelectorAll('path').forEach(p => p.remove());
+    
+    state.connections.forEach(conn => {
+        const fromEl = document.getElementById(conn.from);
+        const toEl = document.getElementById(conn.to);
+        if (!fromEl || !toEl) return;
+        
+        const fr = fromEl.getBoundingClientRect();
+        const tr = toEl.getBoundingClientRect();
+        const sr = svg.getBoundingClientRect();
+        
+        const x1 = fr.left + fr.width/2 - sr.left;
+        const y1 = fr.top + fr.height/2 - sr.top;
+        const x2 = tr.left + tr.width/2 - sr.left;
+        const y2 = tr.top + tr.height/2 - sr.top;
+        
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', `M ${x1} ${y1} L ${x2} ${y2}`);
+        path.setAttribute('stroke', conn.status === 'correct' ? '#22c55e' : conn.status === 'incorrect' ? '#ef4444' : '#60a5fa');
+        path.setAttribute('stroke-width', conn.status === 'pending' ? '2' : '3');
+        path.setAttribute('fill', 'none');
+        path.setAttribute('marker-end', `url(#arrow${conn.status === 'correct' ? '-green' : conn.status === 'incorrect' ? '-red' : ''})`);
+        if (conn.status === 'incorrect') path.setAttribute('stroke-dasharray', '5,5');
+        
+        svg.appendChild(path);
+    });
+}
+
+function updateProgress() {
+    const c = CHALLENGES[state.challenge];
+    const correct = state.connections.filter(conn => 
+        c.required.some(r => r[0] === conn.fromLabel && r[1] === conn.toLabel) ||
+        c.valid.some(v => v[0] === conn.fromLabel && v[1] === conn.toLabel)
+    ).length;
+    
+    const reqDone = c.required.filter(r => 
+        state.connections.some(conn => conn.fromLabel === r[0] && conn.toLabel === r[1])
+    ).length;
+    
+    document.getElementById('progress-count').textContent = `${reqDone}/${c.required.length}`;
+}
+
+function checkPathway() {
+    const c = CHALLENGES[state.challenge];
+    let correct = 0, incorrect = 0;
+    
+    state.connections.forEach(conn => {
+        const isValid = c.required.some(r => r[0] === conn.fromLabel && r[1] === conn.toLabel) ||
+                       c.valid.some(v => v[0] === conn.fromLabel && v[1] === conn.toLabel);
+        conn.status = isValid ? 'correct' : 'incorrect';
+        if (isValid) correct++; else incorrect++;
+    });
+    
+    renderConnections();
+    
+    const missing = c.required.filter(r => 
+        !state.connections.some(conn => conn.fromLabel === r[0] && conn.toLabel === r[1])
+    );
+    
+    const acc = state.connections.length > 0 ? Math.round(correct / state.connections.length * 100) : 0;
+    document.getElementById('accuracy').textContent = acc + '%';
+    document.getElementById('accuracy-bar').style.width = acc + '%';
+    
+    let fb = '';
+    if (incorrect > 0) fb += `<span class="text-red-400">❌ ${incorrect} incorrect</span><br>`;
+    if (missing.length > 0) fb += `<span class="text-amber-400">⚠️ ${missing.length} missing</span><br>`;
+    if (correct > 0) fb += `<span class="text-green-400">✓ ${correct} correct</span>`;
+    
+    document.getElementById('feedback').innerHTML = fb || 'Add connections to check.';
+    
+    if (missing.length === 0 && incorrect === 0 && correct > 0) {
+        state.stats.built++;
+        state.stats.conn += correct;
+        state.stats.streak++;
+        localStorage.setItem('pathway_stats', JSON.stringify(state.stats));
+        updateStats();
+        document.getElementById('modal').classList.remove('hidden');
+        document.getElementById('modal').classList.add('flex');
+    } else if (incorrect > 0) {
+        state.stats.streak = 0;
+        localStorage.setItem('pathway_stats', JSON.stringify(state.stats));
+        updateStats();
+    }
+}
+
+function getHint() {
+    const c = CHALLENGES[state.challenge];
+    const missing = c.required.find(r => 
+        !state.connections.some(conn => conn.fromLabel === r[0] && conn.toLabel === r[1])
+    );
+    
+    const hint = document.getElementById('hint-text');
+    hint.classList.remove('hidden');
+    hint.textContent = missing ? `💡 Try connecting "${missing[0]}" → ...` : 'Check for incorrect connections!';
+}
+
+function clearCanvas() {
+    state.nodes = [];
+    state.connections = [];
+    document.querySelectorAll('.pathway-node').forEach(el => el.remove());
+    document.querySelectorAll('#svg-connections path').forEach(el => el.remove());
+    updateProgress();
+}
+
+function updateStats() {
+    document.getElementById('stat-built').textContent = state.stats.built;
+    document.getElementById('stat-conn').textContent = state.stats.conn;
+    document.getElementById('stat-streak').textContent = state.stats.streak + ' 🔥';
+}
+
+function nextChallenge() {
+    closeModal();
+    const keys = Object.keys(CHALLENGES);
+    const idx = (keys.indexOf(state.challenge) + 1) % keys.length;
+    document.getElementById('challenge-select').value = keys[idx];
+    loadChallenge(keys[idx]);
+}
+
+function closeModal() {
+    document.getElementById('modal').classList.add('hidden');
+    document.getElementById('modal').classList.remove('flex');
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
