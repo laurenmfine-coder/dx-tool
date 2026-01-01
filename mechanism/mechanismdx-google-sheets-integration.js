@@ -19,7 +19,7 @@
     // ============================================================
     // CONFIGURATION - UPDATE THIS URL AFTER DEPLOYING APPS SCRIPT
     // ============================================================
-    const GOOGLE_SHEETS_WEB_APP_URL = 'YOUR_WEB_APP_URL_HERE';
+    const GOOGLE_SHEETS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxJQRYCzmH8VJSHaA2-q6JvykqtYDlfgDOQzmMDqM5jWMwRehFkHjFb5mBuVZ6J1_5H/exec';
 
     // ============================================================
     // ACCOUNT EXCLUSION - These accounts don't have data collected
