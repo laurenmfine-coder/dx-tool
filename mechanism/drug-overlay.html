@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MechanismX - Drug Overlay System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); min-height: 100vh; }
+        
+        .pathway-node {
+            padding: 12px 20px; border-radius: 10px; text-align: center;
+            font-size: 13px; font-weight: 500; transition: all 0.3s;
+        }
+        .pathway-node.blocked { opacity: 0.3; text-decoration: line-through; }
+        .pathway-node.enhanced { box-shadow: 0 0 15px rgba(34, 197, 94, 0.6); }
+        .pathway-node.reduced { box-shadow: 0 0 15px rgba(239, 68, 68, 0.5); }
+        
+        .drug-toggle { transition: all 0.2s; }
+        .drug-toggle.active { ring: 2px; ring-color: white; transform: scale(1.05); }
+        
+        .arrow { font-size: 24px; color: #60a5fa; }
+        .arrow.blocked { color: #ef4444; opacity: 0.3; }
+    </style>
+</head>
+<body class="text-white p-6">
+    <nav class="max-w-6xl mx-auto mb-6 flex items-center justify-between">
+        <div class="flex items-center gap-4">
+            <a href="index.html" class="text-gray-400 hover:text-white text-sm">← Back</a>
+            <h1 class="text-xl font-bold">💊 Drug Mechanism Overlay</h1>
+        </div>
+        <select id="disease-select" onchange="loadDisease(this.value)" class="bg-slate-700 border-slate-600 rounded px-4 py-2">
+            <option value="heart_failure">Heart Failure</option>
+            <option value="hypertension">Hypertension</option>
+            <option value="diabetes">Diabetes</option>
+        </select>
+    </nav>
+
+    <div class="max-w-6xl mx-auto grid grid-cols-4 gap-6">
+        <!-- Drug Panel -->
+        <div class="col-span-1 space-y-4">
+            <div class="bg-slate-800 rounded-xl p-4 border border-slate-700">
+                <h3 class="text-sm font-semibold text-gray-400 mb-3">TOGGLE DRUGS</h3>
+                <div id="drug-toggles" class="space-y-2"></div>
+            </div>
+            
+            <div class="bg-slate-800 rounded-xl p-4 border border-slate-700">
+                <h3 class="text-sm font-semibold text-gray-400 mb-3">ACTIVE EFFECTS</h3>
+                <div id="active-effects" class="text-sm text-gray-300 space-y-1">
+                    <p class="text-gray-500 italic">No drugs selected</p>
+                </div>
+            </div>
+            
+            <div class="bg-slate-800 rounded-xl p-4 border border-slate-700">
+                <h3 class="text-sm font-semibold text-gray-400 mb-3">CLINICAL OUTCOME</h3>
+                <div id="clinical-outcome" class="space-y-2">
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-400">Mortality ↓</span>
+                        <span id="mortality-benefit">0%</span>
+                    </div>
+                    <div class="flex justify-between text-sm">
+                        <span class="text-gray-400">Hospitalization ↓</span>
+                        <span id="hosp-benefit">0%</span>
+                    </div>
+                    <div class="h-2 bg-slate-700 rounded-full overflow-hidden mt-2">
+                        <div id="benefit-bar" class="h-full bg-green-500 transition-all" style="width:0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pathway Visualization -->
+        <div class="col-span-3 bg-slate-800 rounded-xl p-6 border border-slate-700">
+            <div id="pathway-display" class="space-y-6"></div>
+        </div>
+    </div>
+
+    <!-- Drug Comparison Modal -->
+    <div id="compare-modal" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
+        <div class="bg-slate-800 rounded-xl p-6 max-w-2xl w-full mx-4 max-h-[80vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold">Drug Comparison</h2>
+                <button onclick="closeCompare()" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+            </div>
+            <div id="compare-content"></div>
+        </div>
+    </div>
+
+<script>
+const DISEASES = {
+    heart_failure: {
+        name: "Heart Failure",
+        pathway: [
+            { id: "trigger", label: "↓ Cardiac Output", type: "trigger", row: 0 },
+            { id: "renal", label: "↓ Renal Perfusion", type: "mechanism", row: 1 },
+            { id: "sns", label: "SNS Activation", type: "mechanism", row: 1 },
+            { id: "raas", label: "RAAS Activation", type: "mechanism", row: 2 },
+            { id: "angio", label: "↑ Angiotensin II", type: "effect", row: 3 },
+            { id: "aldo", label: "↑ Aldosterone", type: "effect", row: 3 },
+            { id: "vasocon", label: "Vasoconstriction", type: "effect", row: 4 },
+            { id: "na_retain", label: "Na+ Retention", type: "effect", row: 4 },
+            { id: "remodel", label: "Cardiac Remodeling", type: "effect", row: 4 },
+            { id: "edema", label: "Volume Overload", type: "clinical", row: 5 },
+            { id: "symptoms", label: "HF Symptoms", type: "clinical", row: 5 }
+        ],
+        connections: [
+            ["trigger", "renal"], ["trigger", "sns"],
+            ["renal", "raas"], ["sns", "raas"],
+            ["raas", "angio"], ["raas", "aldo"],
+            ["angio", "vasocon"], ["angio", "remodel"],
+            ["aldo", "na_retain"], ["aldo", "remodel"],
+            ["vasocon", "symptoms"], ["na_retain", "edema"],
+            ["remodel", "symptoms"], ["edema", "symptoms"]
+        ],
+        drugs: [
+            {
+                id: "acei",
+                name: "ACE Inhibitor",
+                color: "#3b82f6",
+                targets: [{ node: "angio", action: "block" }, { node: "aldo", action: "reduce" }],
+                sideEffects: ["Cough (10-15%)", "Hyperkalemia", "Angioedema (rare)"],
+                mortality: 16,
+                hospitalization: 20
+            },
+            {
+                id: "arb",
+                name: "ARB",
+                color: "#8b5cf6",
+                targets: [{ node: "angio", action: "block" }],
+                sideEffects: ["Hyperkalemia", "Hypotension"],
+                mortality: 13,
+                hospitalization: 17
+            },
+            {
+                id: "bb",
+                name: "β-Blocker",
+                color: "#10b981",
+                targets: [{ node: "sns", action: "block" }, { node: "remodel", action: "block" }],
+                sideEffects: ["Bradycardia", "Fatigue", "Bronchospasm"],
+                mortality: 34,
+                hospitalization: 28
+            },
+            {
+                id: "mra",
+                name: "MRA (Spironolactone)",
+                color: "#f59e0b",
+                targets: [{ node: "aldo", action: "block" }, { node: "remodel", action: "reduce" }],
+                sideEffects: ["Hyperkalemia", "Gynecomastia"],
+                mortality: 30,
+                hospitalization: 35
+            },
+            {
+                id: "sglt2",
+                name: "SGLT2 Inhibitor",
+                color: "#ec4899",
+                targets: [{ node: "na_retain", action: "block" }, { node: "edema", action: "reduce" }],
+                sideEffects: ["UTI", "Genital infections", "Euglycemic DKA"],
+                mortality: 20,
+                hospitalization: 30
+            },
+            {
+                id: "loop",
+                name: "Loop Diuretic",
+                color: "#06b6d4",
+                targets: [{ node: "edema", action: "block" }],
+                sideEffects: ["Hypokalemia", "Hyponatremia", "Ototoxicity"],
+                mortality: 0,
+                hospitalization: 15
+            }
+        ]
+    },
+    hypertension: {
+        name: "Hypertension",
+        pathway: [
+            { id: "bp", label: "↑ Blood Pressure", type: "trigger", row: 0 },
+            { id: "raas", label: "RAAS", type: "mechanism", row: 1 },
+            { id: "sns", label: "SNS", type: "mechanism", row: 1 },
+            { id: "vasocon", label: "Vasoconstriction", type: "effect", row: 2 },
+            { id: "na", label: "Na+ Retention", type: "effect", row: 2 },
+            { id: "co", label: "↑ Cardiac Output", type: "effect", row: 2 },
+            { id: "organ", label: "End Organ Damage", type: "clinical", row: 3 }
+        ],
+        connections: [
+            ["bp", "raas"], ["bp", "sns"],
+            ["raas", "vasocon"], ["raas", "na"],
+            ["sns", "co"], ["sns", "vasocon"],
+            ["vasocon", "organ"], ["na", "organ"], ["co", "organ"]
+        ],
+        drugs: [
+            { id: "acei", name: "ACE Inhibitor", color: "#3b82f6", targets: [{ node: "raas", action: "block" }], mortality: 10, hospitalization: 15, sideEffects: ["Cough", "Hyperkalemia"] },
+            { id: "ccb", name: "CCB (Amlodipine)", color: "#10b981", targets: [{ node: "vasocon", action: "block" }], mortality: 8, hospitalization: 12, sideEffects: ["Edema", "Headache"] },
+            { id: "thiazide", name: "Thiazide", color: "#f59e0b", targets: [{ node: "na", action: "block" }], mortality: 12, hospitalization: 18, sideEffects: ["Hypokalemia", "Hyperglycemia"] },
+            { id: "bb", name: "β-Blocker", color: "#8b5cf6", targets: [{ node: "sns", action: "block" }, { node: "co", action: "reduce" }], mortality: 5, hospitalization: 10, sideEffects: ["Bradycardia", "Fatigue"] }
+        ]
+    },
+    diabetes: {
+        name: "Type 2 Diabetes",
+        pathway: [
+            { id: "ir", label: "Insulin Resistance", type: "trigger", row: 0 },
+            { id: "glucose", label: "↑ Blood Glucose", type: "mechanism", row: 1 },
+            { id: "beta", label: "β-Cell Dysfunction", type: "mechanism", row: 1 },
+            { id: "glucagon", label: "↑ Glucagon", type: "effect", row: 2 },
+            { id: "liver", label: "↑ Hepatic Glucose", type: "effect", row: 2 },
+            { id: "a1c", label: "↑ HbA1c", type: "clinical", row: 3 },
+            { id: "complic", label: "Complications", type: "clinical", row: 3 }
+        ],
+        connections: [
+            ["ir", "glucose"], ["ir", "beta"],
+            ["beta", "glucagon"], ["glucagon", "liver"],
+            ["liver", "glucose"], ["glucose", "a1c"],
+            ["a1c", "complic"]
+        ],
+        drugs: [
+            { id: "met", name: "Metformin", color: "#3b82f6", targets: [{ node: "liver", action: "block" }, { node: "ir", action: "reduce" }], mortality: 15, hospitalization: 20, sideEffects: ["GI upset", "B12 deficiency", "Lactic acidosis (rare)"] },
+            { id: "sglt2", name: "SGLT2 Inhibitor", color: "#ec4899", targets: [{ node: "glucose", action: "reduce" }], mortality: 20, hospitalization: 30, sideEffects: ["UTI", "DKA"] },
+            { id: "glp1", name: "GLP-1 Agonist", color: "#10b981", targets: [{ node: "glucagon", action: "block" }, { node: "beta", action: "enhance" }], mortality: 18, hospitalization: 25, sideEffects: ["Nausea", "Pancreatitis"] },
+            { id: "su", name: "Sulfonylurea", color: "#f59e0b", targets: [{ node: "beta", action: "enhance" }], mortality: 0, hospitalization: 5, sideEffects: ["Hypoglycemia", "Weight gain"] }
+        ]
+    }
+};
+
+let state = {
+    disease: 'heart_failure',
+    activeDrugs: new Set()
+};
+
+function init() {
+    loadDisease('heart_failure');
+}
+
+function loadDisease(id) {
+    state.disease = id;
+    state.activeDrugs.clear();
+    renderDrugToggles();
+    renderPathway();
+    updateEffects();
+}
+
+function renderDrugToggles() {
+    const disease = DISEASES[state.disease];
+    const container = document.getElementById('drug-toggles');
+    
+    container.innerHTML = disease.drugs.map(drug => `
+        <button onclick="toggleDrug('${drug.id}')" id="toggle-${drug.id}"
+                class="drug-toggle w-full text-left px-3 py-2 rounded-lg text-sm font-medium"
+                style="background: ${drug.color}30; border: 2px solid ${drug.color}">
+            ${drug.name}
+        </button>
+    `).join('') + `
+        <button onclick="showCompare()" class="w-full mt-3 bg-slate-700 hover:bg-slate-600 px-3 py-2 rounded-lg text-sm">
+            📊 Compare Drugs
+        </button>
+    `;
+}
+
+function toggleDrug(drugId) {
+    if (state.activeDrugs.has(drugId)) {
+        state.activeDrugs.delete(drugId);
+    } else {
+        state.activeDrugs.add(drugId);
+    }
+    
+    // Update toggle button
+    const btn = document.getElementById(`toggle-${drugId}`);
+    btn.classList.toggle('active', state.activeDrugs.has(drugId));
+    
+    renderPathway();
+    updateEffects();
+}
+
+function renderPathway() {
+    const disease = DISEASES[state.disease];
+    const container = document.getElementById('pathway-display');
+    
+    // Group nodes by row
+    const rows = {};
+    disease.pathway.forEach(node => {
+        if (!rows[node.row]) rows[node.row] = [];
+        rows[node.row].push(node);
+    });
+    
+    // Get blocked nodes
+    const blocked = new Set();
+    const reduced = new Set();
+    
+    state.activeDrugs.forEach(drugId => {
+        const drug = disease.drugs.find(d => d.id === drugId);
+        drug.targets.forEach(t => {
+            if (t.action === 'block') blocked.add(t.node);
+            if (t.action === 'reduce') reduced.add(t.node);
+        });
+    });
+    
+    // Render rows
+    let html = '';
+    Object.keys(rows).sort((a,b) => a-b).forEach((rowNum, idx) => {
+        const nodes = rows[rowNum];
+        
+        html += `<div class="flex justify-center gap-4 items-center">`;
+        
+        nodes.forEach((node, nodeIdx) => {
+            const isBlocked = blocked.has(node.id);
+            const isReduced = reduced.has(node.id);
+            
+            const colors = {
+                trigger: 'bg-red-600',
+                mechanism: 'bg-blue-600',
+                effect: 'bg-green-600',
+                clinical: 'bg-amber-600'
+            };
+            
+            html += `
+                <div class="pathway-node ${colors[node.type]} ${isBlocked ? 'blocked' : ''} ${isReduced ? 'reduced' : ''}"
+                     id="node-${node.id}">
+                    ${node.label}
+                    ${isBlocked ? '<div class="text-xs mt-1">🚫 BLOCKED</div>' : ''}
+                    ${isReduced ? '<div class="text-xs mt-1">↓ reduced</div>' : ''}
+                </div>
+            `;
+            
+            if (nodeIdx < nodes.length - 1) {
+                html += `<span class="text-gray-600 text-2xl">+</span>`;
+            }
+        });
+        
+        html += `</div>`;
+        
+        // Add arrows between rows
+        if (idx < Object.keys(rows).length - 1) {
+            html += `<div class="flex justify-center"><span class="arrow">↓</span></div>`;
+        }
+    });
+    
+    // Add drug indicators
+    state.activeDrugs.forEach(drugId => {
+        const drug = disease.drugs.find(d => d.id === drugId);
+        drug.targets.forEach(t => {
+            // Drug badge will be shown near node via CSS
+        });
+    });
+    
+    container.innerHTML = html;
+}
+
+function updateEffects() {
+    const disease = DISEASES[state.disease];
+    const effectsContainer = document.getElementById('active-effects');
+    
+    if (state.activeDrugs.size === 0) {
+        effectsContainer.innerHTML = '<p class="text-gray-500 italic">No drugs selected</p>';
+        document.getElementById('mortality-benefit').textContent = '0%';
+        document.getElementById('hosp-benefit').textContent = '0%';
+        document.getElementById('benefit-bar').style.width = '0%';
+        return;
+    }
+    
+    let effects = [];
+    let totalMortality = 0;
+    let totalHosp = 0;
+    
+    state.activeDrugs.forEach(drugId => {
+        const drug = disease.drugs.find(d => d.id === drugId);
+        effects.push(`<div class="text-sm"><span style="color:${drug.color}">●</span> ${drug.name}</div>`);
+        drug.targets.forEach(t => {
+            const node = disease.pathway.find(n => n.id === t.node);
+            effects.push(`<div class="text-xs text-gray-400 ml-3">→ ${t.action}s ${node.label}</div>`);
+        });
+        
+        // Non-additive benefits (diminishing returns)
+        totalMortality = totalMortality + (100 - totalMortality) * (drug.mortality / 100);
+        totalHosp = totalHosp + (100 - totalHosp) * (drug.hospitalization / 100);
+    });
+    
+    effectsContainer.innerHTML = effects.join('');
+    
+    document.getElementById('mortality-benefit').textContent = Math.round(totalMortality) + '%';
+    document.getElementById('hosp-benefit').textContent = Math.round(totalHosp) + '%';
+    document.getElementById('benefit-bar').style.width = Math.min(totalMortality, 100) + '%';
+}
+
+function showCompare() {
+    const disease = DISEASES[state.disease];
+    const modal = document.getElementById('compare-modal');
+    const content = document.getElementById('compare-content');
+    
+    let html = `
+        <table class="w-full text-sm">
+            <thead>
+                <tr class="text-left text-gray-400 border-b border-slate-700">
+                    <th class="pb-2">Drug</th>
+                    <th class="pb-2">Target</th>
+                    <th class="pb-2">Mortality ↓</th>
+                    <th class="pb-2">Hosp ↓</th>
+                    <th class="pb-2">Side Effects</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+    
+    disease.drugs.forEach(drug => {
+        const targets = drug.targets.map(t => {
+            const node = disease.pathway.find(n => n.id === t.node);
+            return node ? node.label : t.node;
+        }).join(', ');
+        
+        html += `
+            <tr class="border-b border-slate-700/50">
+                <td class="py-3"><span style="color:${drug.color}">●</span> ${drug.name}</td>
+                <td class="py-3 text-gray-400">${targets}</td>
+                <td class="py-3 text-green-400">${drug.mortality}%</td>
+                <td class="py-3 text-blue-400">${drug.hospitalization}%</td>
+                <td class="py-3 text-gray-400 text-xs">${drug.sideEffects.join(', ')}</td>
+            </tr>
+        `;
+    });
+    
+    html += '</tbody></table>';
+    content.innerHTML = html;
+    
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+}
+
+function closeCompare() {
+    document.getElementById('compare-modal').classList.add('hidden');
+    document.getElementById('compare-modal').classList.remove('flex');
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
