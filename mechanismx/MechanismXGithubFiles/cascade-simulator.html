@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MechanismX - Cascade Failure Simulator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); min-height: 100vh; }
+        
+        .node {
+            padding: 14px 20px; border-radius: 12px; text-align: center;
+            font-size: 14px; font-weight: 500; transition: all 0.5s;
+            cursor: pointer; position: relative;
+        }
+        .node.normal { opacity: 1; }
+        .node.damaged { opacity: 0.4; background: #ef4444 !important; border-color: #ef4444 !important; }
+        .node.affected { opacity: 0.6; border: 2px dashed #f59e0b !important; }
+        .node.compensating { box-shadow: 0 0 15px rgba(34, 197, 94, 0.5); }
+        
+        .node:hover:not(.damaged) { transform: scale(1.05); }
+        
+        .timeline-marker {
+            width: 12px; height: 12px; border-radius: 50%;
+            background: #3b82f6; border: 2px solid #1e293b;
+        }
+        .timeline-marker.active { background: #22c55e; animation: pulse 1s infinite; }
+        
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5); }
+            50% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+        }
+        
+        .cascade-arrow {
+            color: #60a5fa; font-size: 20px;
+            transition: all 0.5s;
+        }
+        .cascade-arrow.broken { color: #ef4444; opacity: 0.3; }
+    </style>
+</head>
+<body class="text-white p-6">
+    <nav class="max-w-5xl mx-auto mb-6 flex items-center justify-between">
+        <div class="flex items-center gap-4">
+            <a href="index.html" class="text-gray-400 hover:text-white text-sm">← Back</a>
+            <h1 class="text-xl font-bold">💥 Cascade Failure Simulator</h1>
+        </div>
+        <div class="flex items-center gap-3">
+            <select id="scenario" onchange="loadScenario(this.value)" class="bg-slate-700 rounded px-4 py-2 text-sm">
+                <option value="mi">Myocardial Infarction</option>
+                <option value="sepsis">Sepsis</option>
+                <option value="pe">Pulmonary Embolism</option>
+            </select>
+            <button onclick="resetSimulation()" class="bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded text-sm">🔄 Reset</button>
+        </div>
+    </nav>
+
+    <div class="max-w-5xl mx-auto grid grid-cols-3 gap-6">
+        <!-- Instructions -->
+        <div class="col-span-1 space-y-4">
+            <div class="bg-slate-800 rounded-xl p-4 border border-slate-700">
+                <h3 class="text-sm font-semibold text-amber-400 mb-2">💥 BREAK MODE</h3>
+                <p class="text-sm text-gray-300 mb-3">Click any node to "damage" it and watch the cascade of downstream effects unfold.</p>
+                <div class="space-y-2 text-xs">
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 rounded bg-red-500"></div>
+                        <span class="text-gray-400">Damaged (primary insult)</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 rounded border-2 border-dashed border-amber-500"></div>
+                        <span class="text-gray-400">Affected (downstream)</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-3 h-3 rounded bg-green-500"></div>
+                        <span class="text-gray-400">Compensating</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-slate-800 rounded-xl p-4 border border-slate-700">
+                <h3 class="text-sm font-semibold text-gray-400 mb-2">TIMELINE</h3>
+                <div id="timeline" class="space-y-3"></div>
+            </div>
+            
+            <div class="bg-slate-800 rounded-xl p-4 border border-slate-700">
+                <h3 class="text-sm font-semibold text-gray-400 mb-2">CLINICAL MANIFESTATIONS</h3>
+                <div id="manifestations" class="space-y-2 text-sm">
+                    <p class="text-gray-500 italic">Click a node to see effects...</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Cascade View -->
+        <div class="col-span-2 bg-slate-800 rounded-xl p-6 border border-slate-700">
+            <div id="cascade-view" class="space-y-4"></div>
+        </div>
+    </div>
+
+    <!-- Teaching Modal -->
+    <div id="teach-modal" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
+        <div class="bg-slate-800 rounded-xl p-6 max-w-lg mx-4">
+            <h2 id="teach-title" class="text-xl font-bold mb-3"></h2>
+            <div id="teach-content" class="text-gray-300 text-sm space-y-3"></div>
+            <button onclick="closeTeach()" class="mt-4 bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg">Got it</button>
+        </div>
+    </div>
+
+<script>
+const SCENARIOS = {
+    mi: {
+        name: "Myocardial Infarction",
+        nodes: [
+            { id: "coronary", label: "Coronary Occlusion", type: "trigger", row: 0 },
+            { id: "ischemia", label: "Myocardial Ischemia", type: "mechanism", row: 1 },
+            { id: "necrosis", label: "Cardiomyocyte Death", type: "mechanism", row: 2 },
+            { id: "contractility", label: "↓ Contractility", type: "effect", row: 3 },
+            { id: "co", label: "↓ Cardiac Output", type: "effect", row: 3 },
+            { id: "sns", label: "SNS Activation", type: "compensation", row: 4 },
+            { id: "raas", label: "RAAS Activation", type: "compensation", row: 4 },
+            { id: "remodel", label: "Ventricular Remodeling", type: "effect", row: 5 },
+            { id: "hf", label: "Heart Failure", type: "clinical", row: 6 }
+        ],
+        connections: [
+            ["coronary", "ischemia"],
+            ["ischemia", "necrosis"],
+            ["necrosis", "contractility"],
+            ["contractility", "co"],
+            ["co", "sns"],
+            ["co", "raas"],
+            ["sns", "remodel"],
+            ["raas", "remodel"],
+            ["remodel", "hf"]
+        ],
+        cascadeEffects: {
+            coronary: {
+                timeline: ["Immediate: Chest pain, ST changes", "Minutes: Troponin rise begins", "Hours: Peak troponin, wall motion abnormality", "Days: Risk of arrhythmia, mechanical complications"],
+                manifestations: ["Chest pain/pressure", "Diaphoresis", "ST elevation", "New Q waves", "Elevated troponin"]
+            },
+            ischemia: {
+                timeline: ["Seconds: ATP depletion", "Minutes: Anaerobic metabolism", "20-40 min: Irreversible injury begins"],
+                manifestations: ["ECG changes", "Lactate production", "Cell membrane dysfunction"]
+            },
+            necrosis: {
+                timeline: ["Hours: Inflammatory response", "Days: Scar formation begins", "Weeks: Scar maturation"],
+                manifestations: ["Troponin elevation", "CK-MB rise", "Wall motion abnormality", "Risk of free wall rupture"]
+            },
+            co: {
+                timeline: ["Immediate: Hypotension risk", "Hours: Compensatory mechanisms activate", "Days-Weeks: Remodeling begins"],
+                manifestations: ["Hypotension", "Tachycardia", "Cool extremities", "Oliguria"]
+            }
+        },
+        teachingPoints: {
+            coronary: "Coronary occlusion (usually from plaque rupture + thrombosis) cuts off oxygen supply. Time is muscle - every minute counts!",
+            ischemia: "Without oxygen, myocytes switch to anaerobic metabolism. ATP depletes rapidly, leading to cell dysfunction.",
+            necrosis: "After ~20-40 minutes of ischemia, cell death becomes irreversible. This is why door-to-balloon time matters!",
+            co: "Reduced cardiac output triggers compensatory mechanisms that help short-term but cause long-term harm.",
+            sns: "Sympathetic activation increases heart rate and contractility to maintain CO, but increases oxygen demand on already stressed heart.",
+            raas: "RAAS activation causes fluid retention and vasoconstriction - helpful acutely but promotes remodeling chronically."
+        }
+    },
+    sepsis: {
+        name: "Sepsis",
+        nodes: [
+            { id: "infection", label: "Infection", type: "trigger", row: 0 },
+            { id: "cytokines", label: "Cytokine Storm", type: "mechanism", row: 1 },
+            { id: "vasodilation", label: "Vasodilation", type: "effect", row: 2 },
+            { id: "capillary", label: "Capillary Leak", type: "effect", row: 2 },
+            { id: "hypotension", label: "Hypotension", type: "effect", row: 3 },
+            { id: "hypoperfusion", label: "Tissue Hypoperfusion", type: "effect", row: 4 },
+            { id: "lactate", label: "↑ Lactate", type: "clinical", row: 5 },
+            { id: "mods", label: "Multi-Organ Dysfunction", type: "clinical", row: 5 }
+        ],
+        connections: [
+            ["infection", "cytokines"],
+            ["cytokines", "vasodilation"],
+            ["cytokines", "capillary"],
+            ["vasodilation", "hypotension"],
+            ["capillary", "hypotension"],
+            ["hypotension", "hypoperfusion"],
+            ["hypoperfusion", "lactate"],
+            ["hypoperfusion", "mods"]
+        ],
+        cascadeEffects: {
+            infection: {
+                timeline: ["Hours: Bacteremia develops", "6-12h: Systemic response", "24h+: Organ dysfunction risk"],
+                manifestations: ["Fever/hypothermia", "Tachycardia", "Tachypnea", "Altered WBC"]
+            },
+            cytokines: {
+                timeline: ["Hours: TNF-α, IL-1, IL-6 surge", "Progressive: Endothelial activation"],
+                manifestations: ["Fever", "Vasodilation", "Coagulopathy"]
+            }
+        },
+        teachingPoints: {
+            infection: "Sepsis is a dysregulated host response to infection. The problem isn't just the bug - it's the body's overreaction.",
+            cytokines: "Pro-inflammatory cytokines cause widespread endothelial activation, leading to vasodilation and capillary leak.",
+            hypotension: "Distributive shock from vasodilation + hypovolemia from capillary leak = profound hypotension despite high cardiac output."
+        }
+    },
+    pe: {
+        name: "Pulmonary Embolism",
+        nodes: [
+            { id: "clot", label: "Venous Thrombosis", type: "trigger", row: 0 },
+            { id: "embolization", label: "Embolization to PA", type: "mechanism", row: 1 },
+            { id: "obstruction", label: "PA Obstruction", type: "mechanism", row: 2 },
+            { id: "rvstrain", label: "RV Strain", type: "effect", row: 3 },
+            { id: "vqmismatch", label: "V/Q Mismatch", type: "effect", row: 3 },
+            { id: "hypoxia", label: "Hypoxemia", type: "clinical", row: 4 },
+            { id: "rvfailure", label: "RV Failure", type: "clinical", row: 4 },
+            { id: "shock", label: "Obstructive Shock", type: "clinical", row: 5 }
+        ],
+        connections: [
+            ["clot", "embolization"],
+            ["embolization", "obstruction"],
+            ["obstruction", "rvstrain"],
+            ["obstruction", "vqmismatch"],
+            ["vqmismatch", "hypoxia"],
+            ["rvstrain", "rvfailure"],
+            ["rvfailure", "shock"]
+        ],
+        cascadeEffects: {
+            obstruction: {
+                timeline: ["Immediate: ↑ PA pressure", "Minutes: RV dilation", "Hours: RV failure if massive"],
+                manifestations: ["Dyspnea", "Tachycardia", "Hypoxia", "Elevated RV pressure"]
+            }
+        },
+        teachingPoints: {
+            clot: "Virchow's triad: stasis, endothelial injury, hypercoagulability. Most PEs originate from DVTs.",
+            rvstrain: "The RV is a thin-walled chamber not designed for high pressure. Acute PA obstruction causes rapid RV failure.",
+            vqmismatch: "Blood flows past unventilated lung (shunt) AND ventilation is wasted on unperfused lung (dead space)."
+        }
+    }
+};
+
+let state = {
+    scenario: 'mi',
+    damagedNodes: new Set(),
+    affectedNodes: new Set(),
+    currentTime: 0
+};
+
+function init() {
+    loadScenario('mi');
+}
+
+function loadScenario(id) {
+    state.scenario = id;
+    state.damagedNodes.clear();
+    state.affectedNodes.clear();
+    state.currentTime = 0;
+    renderCascade();
+    document.getElementById('timeline').innerHTML = '<p class="text-gray-500 text-sm italic">Click a node to start simulation...</p>';
+    document.getElementById('manifestations').innerHTML = '<p class="text-gray-500 text-sm italic">Click a node to see effects...</p>';
+}
+
+function resetSimulation() {
+    loadScenario(state.scenario);
+}
+
+function renderCascade() {
+    const scenario = SCENARIOS[state.scenario];
+    const container = document.getElementById('cascade-view');
+    
+    // Group by row
+    const rows = {};
+    scenario.nodes.forEach(n => {
+        if (!rows[n.row]) rows[n.row] = [];
+        rows[n.row].push(n);
+    });
+    
+    let html = '';
+    Object.keys(rows).sort((a,b) => a-b).forEach((rowNum, idx) => {
+        const nodes = rows[rowNum];
+        
+        html += `<div class="flex justify-center gap-4 items-center">`;
+        nodes.forEach((node, i) => {
+            const isDamaged = state.damagedNodes.has(node.id);
+            const isAffected = state.affectedNodes.has(node.id);
+            
+            const colors = {
+                trigger: 'bg-red-600 border-red-400',
+                mechanism: 'bg-blue-600 border-blue-400',
+                effect: 'bg-green-600 border-green-400',
+                compensation: 'bg-purple-600 border-purple-400',
+                clinical: 'bg-amber-600 border-amber-400'
+            };
+            
+            html += `
+                <div class="node ${colors[node.type]} border-2 ${isDamaged ? 'damaged' : ''} ${isAffected ? 'affected' : 'normal'}"
+                     onclick="damageNode('${node.id}')">
+                    ${node.label}
+                </div>
+            `;
+            
+            if (i < nodes.length - 1) html += `<span class="text-gray-600">+</span>`;
+        });
+        html += `</div>`;
+        
+        if (idx < Object.keys(rows).length - 1) {
+            html += `<div class="flex justify-center"><span class="cascade-arrow">↓</span></div>`;
+        }
+    });
+    
+    container.innerHTML = html;
+}
+
+function damageNode(nodeId) {
+    if (state.damagedNodes.has(nodeId)) return;
+    
+    const scenario = SCENARIOS[state.scenario];
+    state.damagedNodes.add(nodeId);
+    
+    // Show teaching point
+    if (scenario.teachingPoints[nodeId]) {
+        showTeaching(scenario.nodes.find(n => n.id === nodeId).label, scenario.teachingPoints[nodeId]);
+    }
+    
+    // Calculate downstream effects
+    propagateEffects(nodeId);
+    
+    // Update timeline
+    updateTimeline(nodeId);
+    
+    // Update manifestations
+    updateManifestations(nodeId);
+    
+    // Re-render
+    renderCascade();
+}
+
+function propagateEffects(startNodeId) {
+    const scenario = SCENARIOS[state.scenario];
+    
+    // Find all downstream nodes
+    const downstream = [];
+    const visited = new Set();
+    
+    function findDownstream(nodeId) {
+        if (visited.has(nodeId)) return;
+        visited.add(nodeId);
+        
+        scenario.connections.forEach(([from, to]) => {
+            if (from === nodeId && !state.damagedNodes.has(to)) {
+                downstream.push(to);
+                state.affectedNodes.add(to);
+                findDownstream(to);
+            }
+        });
+    }
+    
+    findDownstream(startNodeId);
+    
+    // Animate downstream effects with delay
+    downstream.forEach((nodeId, idx) => {
+        setTimeout(() => {
+            renderCascade();
+        }, (idx + 1) * 500);
+    });
+}
+
+function updateTimeline(nodeId) {
+    const scenario = SCENARIOS[state.scenario];
+    const effects = scenario.cascadeEffects[nodeId];
+    
+    const container = document.getElementById('timeline');
+    
+    if (!effects) {
+        container.innerHTML += `
+            <div class="flex items-start gap-2">
+                <div class="timeline-marker active mt-1"></div>
+                <div class="text-sm text-gray-300">${scenario.nodes.find(n => n.id === nodeId).label} damaged</div>
+            </div>
+        `;
+        return;
+    }
+    
+    let html = '';
+    effects.timeline.forEach((event, idx) => {
+        html += `
+            <div class="flex items-start gap-2">
+                <div class="timeline-marker ${idx === 0 ? 'active' : ''} mt-1"></div>
+                <div class="text-sm ${idx === 0 ? 'text-amber-400' : 'text-gray-400'}">${event}</div>
+            </div>
+        `;
+    });
+    
+    container.innerHTML = html;
+}
+
+function updateManifestations(nodeId) {
+    const scenario = SCENARIOS[state.scenario];
+    const effects = scenario.cascadeEffects[nodeId];
+    
+    const container = document.getElementById('manifestations');
+    
+    if (!effects || !effects.manifestations) {
+        container.innerHTML = '<p class="text-gray-500 italic text-sm">No specific manifestations defined</p>';
+        return;
+    }
+    
+    container.innerHTML = effects.manifestations.map(m => `
+        <div class="flex items-center gap-2 text-sm">
+            <span class="text-amber-400">•</span>
+            <span class="text-gray-300">${m}</span>
+        </div>
+    `).join('');
+}
+
+function showTeaching(title, content) {
+    document.getElementById('teach-title').textContent = title;
+    document.getElementById('teach-content').innerHTML = `<p>${content}</p>`;
+    document.getElementById('teach-modal').classList.remove('hidden');
+    document.getElementById('teach-modal').classList.add('flex');
+}
+
+function closeTeach() {
+    document.getElementById('teach-modal').classList.add('hidden');
+    document.getElementById('teach-modal').classList.remove('flex');
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>

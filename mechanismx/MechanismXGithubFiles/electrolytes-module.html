@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MechanismX - Electrolyte Mastery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); min-height: 100vh; }
+        .electrolyte-btn { transition: all 0.2s; }
+        .electrolyte-btn:hover { transform: scale(1.05); }
+        .electrolyte-btn.active { ring: 2px; }
+        .mechanism-flow { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+        .mechanism-flow .node { background: #334155; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; }
+        .mechanism-flow .arrow { color: #64748b; }
+    </style>
+</head>
+<body class="text-white">
+    <nav class="bg-slate-800/80 backdrop-blur border-b border-slate-700 px-6 py-4">
+        <div class="max-w-5xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="text-gray-400 hover:text-white text-sm">← MechanismX</a>
+                <h1 class="text-xl font-bold">⚡ Electrolyte Mastery</h1>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-5xl mx-auto p-6">
+        <!-- Electrolyte Selection -->
+        <div class="flex flex-wrap gap-3 mb-6">
+            <button onclick="showElectrolyte('sodium')" id="btn-sodium" class="electrolyte-btn bg-blue-600 px-4 py-2 rounded-lg font-medium">
+                Na⁺ Sodium
+            </button>
+            <button onclick="showElectrolyte('potassium')" id="btn-potassium" class="electrolyte-btn bg-slate-700 px-4 py-2 rounded-lg font-medium">
+                K⁺ Potassium
+            </button>
+            <button onclick="showElectrolyte('calcium')" id="btn-calcium" class="electrolyte-btn bg-slate-700 px-4 py-2 rounded-lg font-medium">
+                Ca²⁺ Calcium
+            </button>
+            <button onclick="showElectrolyte('magnesium')" id="btn-magnesium" class="electrolyte-btn bg-slate-700 px-4 py-2 rounded-lg font-medium">
+                Mg²⁺ Magnesium
+            </button>
+            <button onclick="showElectrolyte('phosphate')" id="btn-phosphate" class="electrolyte-btn bg-slate-700 px-4 py-2 rounded-lg font-medium">
+                PO₄ Phosphate
+            </button>
+        </div>
+
+        <!-- Content Panels -->
+        <div id="content-sodium" class="electrolyte-content">
+            <!-- Sodium Overview -->
+            <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 mb-6">
+                <h2 class="text-2xl font-bold mb-2">Sodium Disorders</h2>
+                <p class="text-gray-400 mb-4">Sodium determines serum osmolality and water distribution</p>
+                
+                <div class="bg-slate-700 rounded-lg p-4 text-center mb-4">
+                    <div class="text-lg font-mono">
+                        Serum Osm ≈ 2×[Na⁺] + [Glucose]/18 + [BUN]/2.8
+                    </div>
+                    <div class="text-sm text-gray-400 mt-1">
+                        Sodium is THE major determinant of osmolality
+                    </div>
+                </div>
+
+                <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+                    <h4 class="text-amber-400 font-medium mb-2">🔑 Key Concept: Sodium = Water Problem</h4>
+                    <p class="text-sm text-gray-300">
+                        Hyponatremia usually means <strong>too much water</strong> relative to sodium.<br>
+                        Hypernatremia usually means <strong>too little water</strong> relative to sodium.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Hyponatremia -->
+            <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 mb-6">
+                <h3 class="text-xl font-bold text-blue-400 mb-4">Hyponatremia (Na⁺ < 135)</h3>
+                
+                <!-- Step 1: Osmolality -->
+                <div class="mb-6">
+                    <h4 class="font-semibold mb-3">Step 1: Check Serum Osmolality</h4>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-slate-700/50 rounded-lg p-4">
+                            <div class="text-green-400 font-medium mb-2">Hypotonic (&lt;280)</div>
+                            <div class="text-sm text-gray-300">TRUE hyponatremia</div>
+                            <div class="text-xs text-gray-500 mt-1">Proceed to Step 2</div>
+                        </div>
+                        <div class="bg-slate-700/50 rounded-lg p-4">
+                            <div class="text-amber-400 font-medium mb-2">Isotonic (280-295)</div>
+                            <div class="text-sm text-gray-300">Pseudohyponatremia</div>
+                            <div class="text-xs text-gray-500 mt-1">↑ Lipids or proteins displacing water</div>
+                        </div>
+                        <div class="bg-slate-700/50 rounded-lg p-4">
+                            <div class="text-red-400 font-medium mb-2">Hypertonic (&gt;295)</div>
+                            <div class="text-sm text-gray-300">Translocational</div>
+                            <div class="text-xs text-gray-500 mt-1">Hyperglycemia, mannitol pulling water</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Volume Status -->
+                <div class="mb-6">
+                    <h4 class="font-semibold mb-3">Step 2: Assess Volume Status (for Hypotonic)</h4>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+                            <div class="text-blue-400 font-medium mb-2">Hypovolemic</div>
+                            <div class="text-xs text-gray-400 mb-2">Low total body Na AND water</div>
+                            <ul class="text-sm text-gray-300 space-y-1">
+                                <li>• GI losses (vomiting, diarrhea)</li>
+                                <li>• Diuretics</li>
+                                <li>• Cerebral salt wasting</li>
+                                <li>• Adrenal insufficiency</li>
+                            </ul>
+                            <div class="mt-2 text-xs text-green-400">Tx: NS (give salt AND water)</div>
+                        </div>
+                        <div class="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
+                            <div class="text-green-400 font-medium mb-2">Euvolemic</div>
+                            <div class="text-xs text-gray-400 mb-2">Normal Na, excess free water</div>
+                            <ul class="text-sm text-gray-300 space-y-1">
+                                <li>• <strong>SIADH</strong> (most common)</li>
+                                <li>• Hypothyroidism</li>
+                                <li>• Psychogenic polydipsia</li>
+                                <li>• Beer potomania</li>
+                            </ul>
+                            <div class="mt-2 text-xs text-green-400">Tx: Fluid restriction</div>
+                        </div>
+                        <div class="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+                            <div class="text-red-400 font-medium mb-2">Hypervolemic</div>
+                            <div class="text-xs text-gray-400 mb-2">↑ Total body Na, even more ↑ water</div>
+                            <ul class="text-sm text-gray-300 space-y-1">
+                                <li>• Heart failure</li>
+                                <li>• Cirrhosis</li>
+                                <li>• Nephrotic syndrome</li>
+                                <li>• Kidney failure</li>
+                            </ul>
+                            <div class="mt-2 text-xs text-green-400">Tx: Diuresis + fluid restrict</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SIADH Deep Dive -->
+                <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 mb-4">
+                    <h4 class="text-purple-400 font-medium mb-2">SIADH Mechanism</h4>
+                    <div class="mechanism-flow mb-2">
+                        <span class="node">Inappropriate ADH</span>
+                        <span class="arrow">→</span>
+                        <span class="node">↑ Water reabsorption</span>
+                        <span class="arrow">→</span>
+                        <span class="node">Dilutional ↓Na⁺</span>
+                        <span class="arrow">→</span>
+                        <span class="node">Volume expansion</span>
+                        <span class="arrow">→</span>
+                        <span class="node">↓ Aldosterone</span>
+                        <span class="arrow">→</span>
+                        <span class="node">Na⁺ wasting</span>
+                    </div>
+                    <div class="text-xs text-gray-400">
+                        <strong>Causes:</strong> CNS disorders, lung disease, malignancy, drugs (SSRIs, carbamazepine), pain, nausea
+                    </div>
+                    <div class="text-xs text-amber-400 mt-1">
+                        <strong>Diagnosis:</strong> Euvolemic + Uosm > 100 + UNa > 40 + low uric acid
+                    </div>
+                </div>
+
+                <!-- Correction Warning -->
+                <div class="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+                    <h4 class="text-red-400 font-medium mb-2">⚠️ Correction Speed Matters!</h4>
+                    <div class="text-sm text-gray-300">
+                        <strong>Chronic hyponatremia (>48h):</strong> Correct ≤8-10 mEq/L per 24h<br>
+                        <strong>Risk of overcorrection:</strong> Osmotic Demyelination Syndrome (ODS)
+                    </div>
+                    <div class="mt-2 text-xs text-gray-400">
+                        Brain adapts to low osmolality by extruding osmoles. Rapid correction → brain cell shrinkage → pontine myelinolysis
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hypernatremia -->
+            <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                <h3 class="text-xl font-bold text-red-400 mb-4">Hypernatremia (Na⁺ > 145)</h3>
+                <p class="text-gray-400 mb-4">Almost always a water deficit problem (not salt excess)</p>
+
+                <div class="grid md:grid-cols-3 gap-4 mb-4">
+                    <div class="bg-slate-700/50 rounded-lg p-4">
+                        <div class="text-blue-400 font-medium mb-2">↓ Water Intake</div>
+                        <ul class="text-sm text-gray-300 space-y-1">
+                            <li>• Altered mental status</li>
+                            <li>• No access to water</li>
+                            <li>• Impaired thirst (elderly)</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-700/50 rounded-lg p-4">
+                        <div class="text-amber-400 font-medium mb-2">↑ Water Loss</div>
+                        <ul class="text-sm text-gray-300 space-y-1">
+                            <li>• Diabetes insipidus</li>
+                            <li>• Osmotic diuresis</li>
+                            <li>• Diarrhea, sweating</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-700/50 rounded-lg p-4">
+                        <div class="text-red-400 font-medium mb-2">↑ Sodium Gain (rare)</div>
+                        <ul class="text-sm text-gray-300 space-y-1">
+                            <li>• Hypertonic saline</li>
+                            <li>• NaHCO₃ infusion</li>
+                            <li>• Salt tablets</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+                    <h4 class="text-amber-400 font-medium mb-2">Diabetes Insipidus Mechanism</h4>
+                    <div class="grid md:grid-cols-2 gap-4 text-sm">
+                        <div>
+                            <strong class="text-blue-400">Central DI:</strong>
+                            <div class="text-gray-300">↓ ADH production (pituitary)</div>
+                            <div class="text-xs text-gray-500">Causes: surgery, trauma, tumor, infiltration</div>
+                        </div>
+                        <div>
+                            <strong class="text-green-400">Nephrogenic DI:</strong>
+                            <div class="text-gray-300">Kidney resistant to ADH</div>
+                            <div class="text-xs text-gray-500">Causes: lithium, hypercalcemia, hypokalemia</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Potassium Content -->
+        <div id="content-potassium" class="electrolyte-content hidden">
+            <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 mb-6">
+                <h2 class="text-2xl font-bold mb-2">Potassium Disorders</h2>
+                <p class="text-gray-400 mb-4">K⁺ is critical for membrane potential and cardiac conduction</p>
+
+                <div class="bg-red-500/10 border border-red-500/30 rounded-lg p-4 mb-4">
+                    <h4 class="text-red-400 font-medium mb-2">⚠️ Potassium Can Kill</h4>
+                    <p class="text-sm text-gray-300">
+                        Both hypo- and hyperkalemia cause fatal arrhythmias. Always check K⁺ and get an ECG!
+                    </p>
+                </div>
+
+                <div class="bg-slate-700 rounded-lg p-4">
+                    <h4 class="font-medium mb-2">Normal K⁺ Distribution</h4>
+                    <div class="flex items-center gap-4">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-blue-400">98%</div>
+                            <div class="text-sm text-gray-400">Intracellular</div>
+                        </div>
+                        <div class="text-4xl text-gray-600">|</div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-amber-400">2%</div>
+                            <div class="text-sm text-gray-400">Extracellular</div>
+                        </div>
+                    </div>
+                    <div class="text-xs text-gray-500 mt-2">Na⁺/K⁺-ATPase maintains this gradient. Small shifts cause big serum changes!</div>
+                </div>
+            </div>
+
+            <!-- Hypokalemia -->
+            <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 mb-6">
+                <h3 class="text-xl font-bold text-blue-400 mb-4">Hypokalemia (K⁺ < 3.5)</h3>
+                
+                <div class="grid md:grid-cols-2 gap-6 mb-4">
+                    <div>
+                        <h4 class="font-semibold mb-3">Mechanisms</h4>
+                        <div class="space-y-3">
+                            <div class="bg-slate-700/50 rounded-lg p-3">
+                                <div class="text-amber-400 font-medium">Transcellular Shift</div>
+                                <ul class="text-sm text-gray-300 mt-1">
+                                    <li>• Insulin (drives K⁺ into cells)</li>
+                                    <li>• β-agonists (albuterol)</li>
+                                    <li>• Alkalosis (H⁺/K⁺ exchange)</li>
+                                </ul>
+                            </div>
+                            <div class="bg-slate-700/50 rounded-lg p-3">
+                                <div class="text-blue-400 font-medium">GI Losses</div>
+                                <ul class="text-sm text-gray-300 mt-1">
+                                    <li>• Diarrhea (direct K⁺ loss)</li>
+                                    <li>• Vomiting (metabolic alkalosis → renal K⁺ wasting)</li>
+                                </ul>
+                            </div>
+                            <div class="bg-slate-700/50 rounded-lg p-3">
+                                <div class="text-green-400 font-medium">Renal Losses</div>
+                                <ul class="text-sm text-gray-300 mt-1">
+                                    <li>• Diuretics (loop, thiazide)</li>
+                                    <li>• Hyperaldosteronism</li>
+                                    <li>• RTA types 1 and 2</li>
+                                    <li>• Hypomagnesemia</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold mb-3">ECG Changes</h4>
+                        <div class="bg-slate-700 rounded-lg p-4 space-y-2">
+                            <div class="flex items-center gap-2">
+                                <span class="text-amber-400">Mild:</span>
+                                <span class="text-sm">T wave flattening</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-amber-400">Moderate:</span>
+                                <span class="text-sm">ST depression, U waves</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-red-400">Severe:</span>
+                                <span class="text-sm">Prolonged QT, arrhythmias</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 bg-purple-500/10 border border-purple-500/30 rounded-lg p-3">
+                            <h5 class="text-purple-400 font-medium text-sm">Why U waves?</h5>
+                            <p class="text-xs text-gray-300 mt-1">
+                                Hypokalemia → hyperpolarization → delayed repolarization of Purkinje fibers
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+                    <h4 class="text-amber-400 font-medium mb-2">🔑 Check Magnesium!</h4>
+                    <p class="text-sm text-gray-300">
+                        Hypokalemia is often refractory until hypomagnesemia is corrected. Mg²⁺ is needed to close ROMK channels.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Hyperkalemia -->
+            <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                <h3 class="text-xl font-bold text-red-400 mb-4">Hyperkalemia (K⁺ > 5.0)</h3>
+                
+                <div class="grid md:grid-cols-2 gap-6 mb-4">
+                    <div>
+                        <h4 class="font-semibold mb-3">Mechanisms</h4>
+                        <div class="space-y-3">
+                            <div class="bg-slate-700/50 rounded-lg p-3">
+                                <div class="text-red-400 font-medium">↓ Excretion</div>
+                                <ul class="text-sm text-gray-300 mt-1">
+                                    <li>• Kidney failure (most common)</li>
+                                    <li>• Hypoaldosteronism</li>
+                                    <li>• K⁺-sparing diuretics</li>
+                                    <li>• ACEi/ARB, NSAIDs</li>
+                                </ul>
+                            </div>
+                            <div class="bg-slate-700/50 rounded-lg p-3">
+                                <div class="text-amber-400 font-medium">Transcellular Shift</div>
+                                <ul class="text-sm text-gray-300 mt-1">
+                                    <li>• Acidosis (H⁺/K⁺ exchange)</li>
+                                    <li>• Insulin deficiency (DKA)</li>
+                                    <li>• β-blockers</li>
+                                    <li>• Cell lysis (rhabdo, TLS)</li>
+                                </ul>
+                            </div>
+                            <div class="bg-slate-700/50 rounded-lg p-3">
+                                <div class="text-purple-400 font-medium">Pseudohyperkalemia</div>
+                                <ul class="text-sm text-gray-300 mt-1">
+                                    <li>• Hemolyzed sample</li>
+                                    <li>• Fist clenching during draw</li>
+                                    <li>• Extreme leukocytosis/thrombocytosis</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold mb-3">ECG Progression</h4>
+                        <div class="bg-slate-700 rounded-lg p-4 space-y-2">
+                            <div class="flex items-center gap-2">
+                                <span class="text-amber-400">5.5-6.5:</span>
+                                <span class="text-sm">Peaked T waves</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-amber-400">6.5-7.5:</span>
+                                <span class="text-sm">PR prolongation, P wave flattening</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-red-400">7.5-8.0:</span>
+                                <span class="text-sm">QRS widening</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-red-400">>8.0:</span>
+                                <span class="text-sm">Sine wave → VF → Asystole</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Treatment Algorithm -->
+                <div class="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+                    <h4 class="text-red-400 font-medium mb-3">Emergency Treatment (Mechanism-Based)</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-3">
+                            <div class="bg-red-600 rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 text-sm">1</div>
+                            <div>
+                                <div class="font-medium">Calcium gluconate</div>
+                                <div class="text-sm text-gray-400">Stabilizes cardiac membrane (doesn't lower K⁺)</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="bg-amber-600 rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 text-sm">2</div>
+                            <div>
+                                <div class="font-medium">Insulin + Glucose / β-agonists / Bicarb</div>
+                                <div class="text-sm text-gray-400">Shift K⁺ INTO cells (temporary)</div>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="bg-green-600 rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 text-sm">3</div>
+                            <div>
+                                <div class="font-medium">Kayexalate / Lokelma / Diuretics / Dialysis</div>
+                                <div class="text-sm text-gray-400">Remove K⁺ from body (definitive)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calcium Content -->
+        <div id="content-calcium" class="electrolyte-content hidden">
+            <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 mb-6">
+                <h2 class="text-2xl font-bold mb-2">Calcium Disorders</h2>
+                <p class="text-gray-400 mb-4">Calcium is essential for muscle contraction, nerve function, and bone health</p>
+
+                <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4 mb-4">
+                    <h4 class="text-amber-400 font-medium mb-2">🔑 Always Correct for Albumin!</h4>
+                    <div class="font-mono text-sm">
+                        Corrected Ca = Measured Ca + 0.8 × (4 - Albumin)
+                    </div>
+                    <p class="text-xs text-gray-400 mt-1">~40% of calcium is albumin-bound. Low albumin = falsely low total Ca</p>
+                </div>
+
+                <div class="bg-slate-700 rounded-lg p-4">
+                    <h4 class="font-medium mb-2">Calcium Regulation</h4>
+                    <div class="grid md:grid-cols-3 gap-4 text-center text-sm">
+                        <div class="bg-slate-600 rounded p-3">
+                            <div class="text-amber-400 font-medium">PTH</div>
+                            <div class="text-gray-300">↑ Bone resorption</div>
+                            <div class="text-gray-300">↑ Renal reabsorption</div>
+                            <div class="text-gray-300">↑ 1,25-D activation</div>
+                        </div>
+                        <div class="bg-slate-600 rounded p-3">
+                            <div class="text-green-400 font-medium">Vitamin D</div>
+                            <div class="text-gray-300">↑ GI absorption</div>
+                            <div class="text-gray-300">↑ Bone resorption</div>
+                        </div>
+                        <div class="bg-slate-600 rounded p-3">
+                            <div class="text-blue-400 font-medium">Calcitonin</div>
+                            <div class="text-gray-300">↓ Bone resorption</div>
+                            <div class="text-gray-300">(minor role)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hypercalcemia -->
+            <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 mb-6">
+                <h3 class="text-xl font-bold text-red-400 mb-4">Hypercalcemia (Ca > 10.5)</h3>
+                
+                <div class="mb-4">
+                    <h4 class="font-semibold mb-2">Symptoms: "Stones, Bones, Groans, Moans"</h4>
+                    <div class="grid grid-cols-4 gap-2 text-sm text-center">
+                        <div class="bg-slate-700 rounded p-2">
+                            <div class="text-amber-400">Stones</div>
+                            <div class="text-xs text-gray-400">Kidney stones</div>
+                        </div>
+                        <div class="bg-slate-700 rounded p-2">
+                            <div class="text-amber-400">Bones</div>
+                            <div class="text-xs text-gray-400">Bone pain</div>
+                        </div>
+                        <div class="bg-slate-700 rounded p-2">
+                            <div class="text-amber-400">Groans</div>
+                            <div class="text-xs text-gray-400">Constipation</div>
+                        </div>
+                        <div class="bg-slate-700 rounded p-2">
+                            <div class="text-amber-400">Moans</div>
+                            <div class="text-xs text-gray-400">Psych sx</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                    <div class="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+                        <h4 class="text-red-400 font-medium mb-2">PTH-Dependent (PTH ↑)</h4>
+                        <ul class="text-sm text-gray-300 space-y-1">
+                            <li>• <strong>Primary hyperparathyroidism</strong> (adenoma)</li>
+                            <li>• Familial hypocalciuric hypercalcemia</li>
+                            <li>• Lithium-induced</li>
+                        </ul>
+                    </div>
+                    <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+                        <h4 class="text-purple-400 font-medium mb-2">PTH-Independent (PTH ↓)</h4>
+                        <ul class="text-sm text-gray-300 space-y-1">
+                            <li>• <strong>Malignancy</strong> (PTHrP, mets, myeloma)</li>
+                            <li>• Granulomatous disease (↑ 1,25-D)</li>
+                            <li>• Vitamin D toxicity</li>
+                            <li>• Thiazides, immobilization</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-green-500/10 border border-green-500/30 rounded-lg p-4">
+                    <h4 class="text-green-400 font-medium mb-2">Treatment Principles</h4>
+                    <ol class="text-sm text-gray-300 space-y-1 list-decimal list-inside">
+                        <li><strong>Volume:</strong> NS to restore intravascular volume and ↑ Ca excretion</li>
+                        <li><strong>Loop diuretic:</strong> After volume replete (blocks Ca reabsorption)</li>
+                        <li><strong>Bisphosphonates:</strong> ↓ Bone resorption (takes 2-4 days)</li>
+                        <li><strong>Calcitonin:</strong> Rapid but transient effect</li>
+                        <li><strong>Dialysis:</strong> If severe/refractory</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Hypocalcemia -->
+            <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                <h3 class="text-xl font-bold text-blue-400 mb-4">Hypocalcemia (Ca < 8.5)</h3>
+                
+                <div class="mb-4">
+                    <h4 class="font-semibold mb-2">Symptoms: Neuromuscular Irritability</h4>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-slate-700/50 rounded-lg p-3">
+                            <div class="text-amber-400 font-medium">Chvostek's Sign</div>
+                            <p class="text-sm text-gray-300">Facial twitching when tapping facial nerve</p>
+                        </div>
+                        <div class="bg-slate-700/50 rounded-lg p-3">
+                            <div class="text-amber-400 font-medium">Trousseau's Sign</div>
+                            <p class="text-sm text-gray-300">Carpopedal spasm with BP cuff inflation</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+                        <h4 class="text-blue-400 font-medium mb-2">Causes</h4>
+                        <ul class="text-sm text-gray-300 space-y-1">
+                            <li>• Hypoparathyroidism (post-surgical)</li>
+                            <li>• Vitamin D deficiency</li>
+                            <li>• CKD (↓ 1,25-D production)</li>
+                            <li>• Hypomagnesemia (blocks PTH)</li>
+                            <li>• Acute pancreatitis (saponification)</li>
+                            <li>• Hungry bone syndrome</li>
+                        </ul>
+                    </div>
+                    <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+                        <h4 class="text-amber-400 font-medium mb-2">ECG: Prolonged QT</h4>
+                        <p class="text-sm text-gray-300">
+                            Low Ca → delayed phase 2 repolarization → ↑ QT → risk of Torsades de Pointes
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Magnesium Content -->
+        <div id="content-magnesium" class="electrolyte-content hidden">
+            <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 mb-6">
+                <h2 class="text-2xl font-bold mb-2">Magnesium Disorders</h2>
+                <p class="text-gray-400 mb-4">The forgotten electrolyte - critical for enzymatic reactions and electrolyte homeostasis</p>
+
+                <div class="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+                    <h4 class="text-purple-400 font-medium mb-2">🔑 Mg Affects Everything</h4>
+                    <p class="text-sm text-gray-300">
+                        Hypomagnesemia causes <strong>refractory hypokalemia</strong> and <strong>refractory hypocalcemia</strong>. 
+                        Always check and replace Mg when treating K⁺ or Ca²⁺ disorders!
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                    <h3 class="text-xl font-bold text-blue-400 mb-4">Hypomagnesemia</h3>
+                    <div class="space-y-4">
+                        <div class="bg-slate-700/50 rounded-lg p-3">
+                            <div class="text-amber-400 font-medium">GI Losses</div>
+                            <p class="text-sm text-gray-300">Diarrhea, malabsorption, PPI use</p>
+                        </div>
+                        <div class="bg-slate-700/50 rounded-lg p-3">
+                            <div class="text-amber-400 font-medium">Renal Losses</div>
+                            <p class="text-sm text-gray-300">Diuretics, alcohol, aminoglycosides</p>
+                        </div>
+                        <div class="bg-slate-700/50 rounded-lg p-3">
+                            <div class="text-amber-400 font-medium">Symptoms</div>
+                            <p class="text-sm text-gray-300">Tremor, seizures, arrhythmias, Torsades</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                    <h3 class="text-xl font-bold text-red-400 mb-4">Hypermagnesemia</h3>
+                    <div class="space-y-4">
+                        <div class="bg-slate-700/50 rounded-lg p-3">
+                            <div class="text-amber-400 font-medium">Causes</div>
+                            <p class="text-sm text-gray-300">Renal failure + Mg intake (antacids, laxatives)</p>
+                        </div>
+                        <div class="bg-slate-700/50 rounded-lg p-3">
+                            <div class="text-red-400 font-medium">Symptoms (by level)</div>
+                            <ul class="text-sm text-gray-300">
+                                <li>4-6: ↓ DTRs</li>
+                                <li>6-10: Hypotension, bradycardia</li>
+                                <li>>10: Respiratory paralysis, cardiac arrest</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-700/50 rounded-lg p-3">
+                            <div class="text-green-400 font-medium">Treatment</div>
+                            <p class="text-sm text-gray-300">IV calcium (antagonist), dialysis</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phosphate Content -->
+        <div id="content-phosphate" class="electrolyte-content hidden">
+            <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 mb-6">
+                <h2 class="text-2xl font-bold mb-2">Phosphate Disorders</h2>
+                <p class="text-gray-400 mb-4">Essential for ATP, bone, and acid-base buffering</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                    <h3 class="text-xl font-bold text-blue-400 mb-4">Hypophosphatemia</h3>
+                    <div class="space-y-4">
+                        <div class="bg-slate-700/50 rounded-lg p-3">
+                            <div class="text-amber-400 font-medium">Causes</div>
+                            <ul class="text-sm text-gray-300">
+                                <li>• Refeeding syndrome</li>
+                                <li>• Respiratory alkalosis</li>
+                                <li>• DKA treatment (insulin shifts)</li>
+                                <li>• Vitamin D deficiency</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-500/10 border border-red-500/30 rounded-lg p-3">
+                            <div class="text-red-400 font-medium">Refeeding Syndrome</div>
+                            <p class="text-sm text-gray-300">
+                                Carb intake → Insulin → PO₄ shifts into cells for ATP synthesis → Severe hypophosphatemia → Cardiac/respiratory failure
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                    <h3 class="text-xl font-bold text-red-400 mb-4">Hyperphosphatemia</h3>
+                    <div class="space-y-4">
+                        <div class="bg-slate-700/50 rounded-lg p-3">
+                            <div class="text-amber-400 font-medium">Causes</div>
+                            <ul class="text-sm text-gray-300">
+                                <li>• Renal failure (most common)</li>
+                                <li>• Tumor lysis syndrome</li>
+                                <li>• Rhabdomyolysis</li>
+                                <li>• Hypoparathyroidism</li>
+                            </ul>
+                        </div>
+                        <div class="bg-amber-500/10 border border-amber-500/30 rounded-lg p-3">
+                            <div class="text-amber-400 font-medium">Consequences</div>
+                            <p class="text-sm text-gray-300">
+                                High PO₄ binds Ca → ↓ Ca → Secondary hyperparathyroidism → Metastatic calcification
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+<script>
+function showElectrolyte(electrolyte) {
+    // Hide all content
+    document.querySelectorAll('.electrolyte-content').forEach(c => c.classList.add('hidden'));
+    // Show selected
+    document.getElementById(`content-${electrolyte}`).classList.remove('hidden');
+    
+    // Update buttons
+    document.querySelectorAll('.electrolyte-btn').forEach(btn => {
+        btn.classList.remove('bg-blue-600');
+        btn.classList.add('bg-slate-700');
+    });
+    document.getElementById(`btn-${electrolyte}`).classList.remove('bg-slate-700');
+    document.getElementById(`btn-${electrolyte}`).classList.add('bg-blue-600');
+}
+</script>
+</body>
+</html>
