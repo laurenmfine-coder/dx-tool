@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heart Failure: Maria's Journey - MechanismDx</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root { --bg-page: #f8f9fa; --bg-white: #ffffff; --bg-subtle: #f1f3f5; --text-primary: #1a1a1a; --text-secondary: #5c5c5c; --text-muted: #8c8c8c; --border: #e9ecef; --accent-primary: #2563eb; --accent-green: #16a34a; --accent-amber: #d97706; --accent-red: #dc2626; --accent-purple: #7c3aed; --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-page); color: var(--text-primary); line-height: 1.6; }
+
+/* Header - matching MechanismDx */
+.header { background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 0 24px; }
+.header-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
+.logo-link { display: flex; align-items: center; gap: 16px; text-decoration: none; color: inherit; }
+.tagline { font-family: 'Newsreader', Georgia, serif; font-style: italic; color: var(--text-muted); font-size: 14px; }
+.header-nav { display: flex; gap: 8px; }
+.nav-link { padding: 8px 14px; color: var(--text-secondary); text-decoration: none; font-size: 14px; font-weight: 500; border-radius: var(--radius-sm); }
+.nav-link:hover { background: var(--bg-subtle); }
+.nav-link.active { color: var(--accent-primary); background: rgba(37,99,235,0.08); }
+
+/* Module Header */
+.module-header { background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 32px 24px; }
+.module-header-inner { max-width: 1200px; margin: 0 auto; }
+.breadcrumb { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; }
+.breadcrumb a { color: var(--accent-primary); text-decoration: none; }
+.module-title { display: flex; align-items: center; gap: 16px; }
+.module-icon { width: 56px; height: 56px; background: linear-gradient(135deg, #fee2e2, #fecaca); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 28px; }
+.module-title h1 { font-size: 28px; font-weight: 600; margin-bottom: 4px; }
+.module-title p { color: var(--text-secondary); font-size: 15px; }
+
+/* Patient Banner */
+.patient-banner { background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%); color: white; padding: 20px 24px; }
+.patient-banner-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 20px; }
+.patient-avatar { width: 48px; height: 48px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+.patient-info { flex: 1; }
+.patient-name { font-size: 16px; font-weight: 600; }
+.patient-details { font-size: 13px; opacity: 0.9; }
+.patient-vitals { display: flex; gap: 20px; }
+.vital { text-align: center; padding: 8px 16px; background: rgba(255,255,255,0.1); border-radius: var(--radius-sm); }
+.vital-value { font-size: 18px; font-weight: 700; }
+.vital-label { font-size: 10px; opacity: 0.8; text-transform: uppercase; }
+
+/* Timeline */
+.timeline-nav { background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 0 24px; }
+.timeline-inner { max-width: 1200px; margin: 0 auto; display: flex; }
+.timeline-phase { flex: 1; padding: 16px 12px; cursor: pointer; border-bottom: 3px solid transparent; text-align: center; transition: all 0.2s; }
+.timeline-phase:hover { background: var(--bg-subtle); }
+.timeline-phase.active { border-bottom-color: var(--accent-primary); background: rgba(37,99,235,0.04); }
+.timeline-phase.completed { border-bottom-color: var(--accent-green); }
+.timeline-phase.locked { opacity: 0.4; cursor: not-allowed; }
+.phase-label { font-size: 12px; font-weight: 600; color: var(--text-primary); }
+.phase-time { font-size: 11px; color: var(--text-muted); }
+.phase-status { font-size: 10px; margin-top: 4px; }
+.phase-status.current { color: var(--accent-primary); }
+.phase-status.done { color: var(--accent-green); }
+
+/* Main Container */
+.main-container { max-width: 1200px; margin: 0 auto; padding: 24px; display: grid; grid-template-columns: 300px 1fr; gap: 24px; }
+@media (max-width: 900px) { .main-container { grid-template-columns: 1fr; } }
+
+/* Case Panel */
+.case-panel { position: sticky; top: 24px; height: fit-content; }
+.card { background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 20px; }
+.card-header { padding: 16px 20px; border-bottom: 1px solid var(--border); }
+.card-title { font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.card-content { padding: 20px; }
+
+.case-narrative { font-family: 'Newsreader', Georgia, serif; font-size: 14px; line-height: 1.8; color: var(--text-secondary); margin-bottom: 16px; }
+.case-narrative strong { color: var(--text-primary); }
+.case-narrative em { color: var(--accent-primary); font-style: normal; font-weight: 500; }
+
+.data-section { background: var(--bg-subtle); border-radius: var(--radius-sm); padding: 12px; margin-top: 12px; }
+.data-label { font-size: 10px; font-weight: 600; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+.data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.data-item { font-size: 11px; }
+.data-item span:first-child { color: var(--text-muted); }
+.data-item span:last-child { font-weight: 600; }
+.data-item .abnormal { color: var(--accent-red); }
+.data-item .improved { color: var(--accent-green); }
+
+/* Questions Panel */
+.phase-intro { margin-bottom: 24px; }
+.phase-intro h2 { font-size: 20px; font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+.phase-intro p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+
+.learning-box { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: var(--radius-md); padding: 16px; margin-top: 16px; }
+.learning-title { font-size: 12px; font-weight: 600; color: var(--accent-green); margin-bottom: 10px; }
+.learning-list { list-style: none; font-size: 13px; }
+.learning-list li { padding: 4px 0 4px 20px; position: relative; color: var(--text-secondary); }
+.learning-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent-green); }
+
+/* Quiz Card */
+.quiz-card { background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius-lg); margin-bottom: 20px; overflow: hidden; }
+.quiz-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.quiz-number { display: flex; align-items: center; gap: 10px; }
+.quiz-num { width: 28px; height: 28px; background: var(--accent-primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+.quiz-type { font-size: 12px; color: var(--text-muted); }
+.quiz-status { font-size: 11px; padding: 4px 10px; border-radius: 12px; font-weight: 600; background: var(--bg-subtle); color: var(--text-muted); }
+.quiz-status.correct { background: #dcfce7; color: #166534; }
+.quiz-status.incorrect { background: #fee2e2; color: #991b1b; }
+
+.quiz-context { padding: 14px 20px; background: #eff6ff; border-bottom: 1px solid #bfdbfe; }
+.context-label { font-size: 10px; font-weight: 600; text-transform: uppercase; color: var(--accent-primary); margin-bottom: 4px; }
+.context-text { font-size: 12px; color: #1e40af; line-height: 1.5; }
+
+.quiz-body { padding: 20px; }
+.quiz-stem { font-size: 14px; font-weight: 500; line-height: 1.6; margin-bottom: 16px; }
+
+.quiz-options { display: flex; flex-direction: column; gap: 8px; }
+.quiz-option { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; background: var(--bg-subtle); border: 2px solid transparent; border-radius: var(--radius-sm); cursor: pointer; transition: all 0.15s; }
+.quiz-option:hover { border-color: var(--border); background: var(--bg-white); }
+.quiz-option.selected { border-color: var(--accent-primary); background: rgba(37,99,235,0.04); }
+.quiz-option.correct { border-color: var(--accent-green); background: rgba(22,163,74,0.08); }
+.quiz-option.incorrect { border-color: var(--accent-red); background: rgba(220,38,38,0.08); }
+.quiz-option.disabled { pointer-events: none; }
+.option-letter { width: 24px; height: 24px; background: var(--bg-white); border: 2px solid var(--border); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--text-muted); flex-shrink: 0; }
+.quiz-option.selected .option-letter { border-color: var(--accent-primary); color: var(--accent-primary); }
+.quiz-option.correct .option-letter { background: var(--accent-green); border-color: var(--accent-green); color: white; }
+.quiz-option.incorrect .option-letter { background: var(--accent-red); border-color: var(--accent-red); color: white; }
+.option-text { font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
+
+.confidence-section { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.confidence-label { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; display: flex; justify-content: space-between; }
+.confidence-btns { display: flex; gap: 8px; }
+.conf-btn { flex: 1; padding: 8px; border: 2px solid var(--border); border-radius: var(--radius-sm); background: var(--bg-white); cursor: pointer; font-size: 11px; font-weight: 600; color: var(--text-secondary); }
+.conf-btn:hover { border-color: var(--accent-primary); }
+.conf-btn.selected { border-color: var(--accent-green); background: rgba(22,163,74,0.08); color: var(--accent-green); }
+
+.submit-btn { margin-top: 12px; width: 100%; padding: 12px; background: var(--accent-primary); color: white; border: none; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; cursor: pointer; }
+.submit-btn:disabled { background: var(--bg-subtle); color: var(--text-muted); cursor: not-allowed; }
+
+.explanation { margin-top: 16px; padding: 16px; border-radius: var(--radius-sm); display: none; }
+.explanation.visible { display: block; }
+.explanation.correct { background: #f0fdf4; border: 1px solid #bbf7d0; }
+.explanation.incorrect { background: #fef2f2; border: 1px solid #fecaca; }
+.explanation-title { font-size: 13px; font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.explanation.correct .explanation-title { color: #166534; }
+.explanation.incorrect .explanation-title { color: #991b1b; }
+.explanation-text { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+.explanation-text strong { color: var(--text-primary); }
+
+/* Phase Summary */
+.phase-summary { background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; margin-top: 20px; display: none; }
+.summary-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+.summary-title { font-size: 16px; font-weight: 600; }
+.summary-score { font-size: 24px; font-weight: 700; color: var(--accent-green); }
+.summary-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.stat-box { text-align: center; padding: 12px; background: var(--bg-subtle); border-radius: var(--radius-sm); }
+.stat-value { font-size: 20px; font-weight: 700; }
+.stat-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; }
+.next-btn { margin-top: 16px; width: 100%; padding: 14px; background: var(--accent-green); color: white; border: none; border-radius: var(--radius-sm); font-size: 14px; font-weight: 600; cursor: pointer; }
+
+/* Progress Bar */
+.progress-bar { background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 12px 24px; }
+.progress-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
+.progress-label { font-size: 11px; color: var(--text-muted); font-weight: 600; }
+.progress-track { flex: 1; height: 6px; background: var(--bg-subtle); border-radius: 3px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #3b82f6, #10b981); border-radius: 3px; transition: width 0.3s; }
+.progress-count { font-size: 11px; color: var(--text-muted); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<header class="header">
+    <div class="header-inner">
+        <a href="index.html" class="logo-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 70" style="height: 32px; width: auto;">
+                <text x="5" y="45" font-family="Georgia, serif" font-size="42" fill="currentColor">Mechanism</text>
+                <text x="213" y="45" font-family="Georgia, serif" font-size="42" fill="currentColor">D</text>
+                <line x1="247" y1="24" x2="263" y2="45" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+                <ellipse cx="245" cy="22" rx="2" ry="3.5" transform="rotate(-28 245 22)" fill="currentColor"/>
+                <path d="M 263 24 L 253 35 Q 249 40 249 47 Q 249 54 254 58 Q 259 62 259 68" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <ellipse cx="265" cy="22" rx="2" ry="3.5" transform="rotate(28 265 22)" fill="currentColor"/>
+                <circle cx="259" cy="68" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
+                <circle cx="259" cy="68" r="3.5" fill="currentColor"/>
+            </svg>
+            <span class="tagline">The right mechanism unlocks everything.</span>
+        </a>
+        <nav class="header-nav">
+            <a href="/" class="nav-link">ReasonDx</a>
+            <a href="index.html" class="nav-link active">Mechanisms</a>
+        </nav>
+    </div>
+</header>
+
+<div class="module-header">
+    <div class="module-header-inner">
+        <div class="breadcrumb"><a href="index.html">MechanismDx</a> › Longitudinal Cases › Heart Failure</div>
+        <div class="module-title">
+            <div class="module-icon">❤️</div>
+            <div>
+                <h1>Heart Failure: Maria's Journey</h1>
+                <p>Follow one patient through diagnosis, treatment, exacerbation, and advanced care</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="progress-bar">
+    <div class="progress-inner">
+        <span class="progress-label">Progress</span>
+        <div class="progress-track"><div class="progress-fill" id="progressFill" style="width: 0%"></div></div>
+        <span class="progress-count" id="progressCount">0/20</span>
+    </div>
+</div>
+
+<div class="patient-banner">
+    <div class="patient-banner-inner">
+        <div class="patient-avatar">👩🏻</div>
+        <div class="patient-info">
+            <div class="patient-name">Maria Santos, 58 years old</div>
+            <div class="patient-details">HTN (poorly controlled), Type 2 DM, New-onset heart failure</div>
+        </div>
+        <div class="patient-vitals">
+            <div class="vital"><div class="vital-value" id="vitalEF">32%</div><div class="vital-label">EF</div></div>
+            <div class="vital"><div class="vital-value" id="vitalNYHA">III</div><div class="vital-label">NYHA</div></div>
+            <div class="vital"><div class="vital-value" id="vitalBNP">1847</div><div class="vital-label">BNP</div></div>
+        </div>
+    </div>
+</div>
+
+<nav class="timeline-nav">
+    <div class="timeline-inner">
+        <div class="timeline-phase active" data-phase="1" onclick="goPhase(1)">
+            <div class="phase-label">Phase 1: Diagnosis</div>
+            <div class="phase-time">Day 1 - ED</div>
+            <div class="phase-status current" id="status1">Current</div>
+        </div>
+        <div class="timeline-phase locked" data-phase="2" onclick="goPhase(2)">
+            <div class="phase-label">Phase 2: GDMT</div>
+            <div class="phase-time">Week 2-4</div>
+            <div class="phase-status" id="status2">🔒</div>
+        </div>
+        <div class="timeline-phase locked" data-phase="3" onclick="goPhase(3)">
+            <div class="phase-label">Phase 3: Exacerbation</div>
+            <div class="phase-time">Month 6</div>
+            <div class="phase-status" id="status3">🔒</div>
+        </div>
+        <div class="timeline-phase locked" data-phase="4" onclick="goPhase(4)">
+            <div class="phase-label">Phase 4: Advanced</div>
+            <div class="phase-time">Year 2</div>
+            <div class="phase-status" id="status4">🔒</div>
+        </div>
+    </div>
+</nav>
+
+<div class="main-container">
+    <aside class="case-panel">
+        <div class="card">
+            <div class="card-header"><h3 class="card-title">📋 Clinical Snapshot</h3></div>
+            <div class="card-content" id="caseContent"></div>
+        </div>
+    </aside>
+    <main id="questionsPanel"></main>
+</div>
+
+<script>
+const answers = {1:'b',2:'c',3:'b',4:'a',5:'a',6:'b',7:'b',8:'b',9:'c',10:'b',11:'b',12:'b',13:'b',14:'b',15:'a',16:'b',17:'b',18:'b',19:'c',20:'b'};
+const state = {}; for(let i=1;i<=20;i++) state[i]={done:false,pick:null,conf:null,ok:false};
+let phase=1, done={1:false,2:false,3:false,4:false}, open={1:true,2:false,3:false,4:false};
+
+const vitals = {
+    1:{ef:'32%',nyha:'III-IV',bnp:'1,847'},
+    2:{ef:'35%',nyha:'II',bnp:'420'},
+    3:{ef:'28%',nyha:'IV',bnp:'2,340'},
+    4:{ef:'20%',nyha:'IV',bnp:'3,100'}
+};
+
+const cases = {
+    1:{text:'<strong>Maria Santos</strong> presents with <strong>3 weeks of progressive dyspnea</strong> and new <em>orthopnea</em>. She noticed <em>bilateral leg swelling</em> 2 weeks ago and gained <strong>12 lbs</strong> despite eating less.',vitals:[['BP','168/98',1],['HR','102, irreg',1],['RR','24',1],['SpO2','91% RA',1]],exam:[['JVP','12 cm',1],['Lungs','Bibasilar crackles',1],['Heart','S3 gallop',1],['Ext','2+ edema',1]],labs:[['BNP','1,847',1],['Cr','1.4',1],['Echo','EF 32%',1]]},
+    2:{text:'<strong>2 weeks post-discharge</strong>, Maria feels "80% better." Compliant with <em>lisinopril 5mg</em>, <em>metoprolol 25mg</em>, <em>furosemide 40mg</em>. Lost <strong>8 lbs</strong>. Can walk her dog again.',vitals:[['BP','118/72',0],['HR','68',0],['RR','16',0],['SpO2','97% RA',0]],exam:[['JVP','7 cm',2],['Lungs','Clear',2],['Heart','RRR, no S3',2],['Ext','Trace edema',2]],labs:[['BNP','420',2],['Cr','1.5',1],['Echo','EF 35%',2]]},
+    3:{text:'<strong>6 months later</strong>, Maria presents with <strong>worsening dyspnea × 5 days</strong>. She <em>ran out of meds 2 weeks ago</em>. Gained <strong>15 lbs</strong>, can\'t lie flat.',vitals:[['BP','142/88',1],['HR','112',1],['RR','28',1],['SpO2','88% RA',1]],exam:[['JVP','15 cm',1],['Lungs','Diffuse crackles',1],['Heart','S3, tachy',1],['Ext','3+ edema',1]],labs:[['BNP','2,340',1],['Cr','2.1',1],['Na','131',1]]},
+    4:{text:'<strong>2 years after diagnosis</strong>, Maria has had 4 HF hospitalizations this year despite max GDMT. Echo: <em>EF 20%</em>. ICD placed 6 months ago. On <em>continuous milrinone</em> at home.',vitals:[['BP','96/62',1],['HR','98',0],['RR','22',1],['SpO2','94% 2L',1]],exam:[['JVP','14 cm',1],['Lungs','Crackles',1],['Heart','S3, ICD',1],['Ext','2+ edema, cool',1]],labs:[['BNP','3,100',1],['Cr','2.4',1],['Na','128',1]]}
+};
+
+const intros = {
+    1:{title:'Phase 1: Initial Diagnosis',icon:'🔍',desc:'Maria presents with classic signs of new-onset heart failure. Understand the pathophysiology and classify her HF type.',obj:['Interpret volume overload signs','Understand RAAS and SNS compensation','Differentiate HFrEF from HFpEF','Recognize S3 gallop significance']},
+    2:{title:'Phase 2: GDMT Optimization',icon:'💊',desc:'Maria returns for follow-up. Optimize her guideline-directed medical therapy to improve outcomes.',obj:['Know the 4 pillars of HFrEF therapy','Titrate to target doses','Monitor for adverse effects','Understand neurohormonal blockade']},
+    3:{title:'Phase 3: Acute Exacerbation',icon:'⚠️',desc:'Maria returns with decompensated HF. Identify triggers and manage the acute episode.',obj:['Identify exacerbation triggers','Classify hemodynamic profiles','Manage diuretic resistance','Prevent readmission']},
+    4:{title:'Phase 4: Advanced Therapies',icon:'🏥',desc:'Maria has progressed to advanced HF. Understand device therapy and end-stage options.',obj:['Know ICD and CRT indications','Evaluate transplant candidacy','Recognize inotrope dependence','Integrate palliative care']}
+};
+
+const Qs = {
+1:{type:'BNP Pathophysiology',ctx:'BNP is 1,847 pg/mL (normal <100). Maria has elevated JVP and peripheral edema.',stem:'What is the PRIMARY stimulus for BNP release in Maria?',opts:[['a','Decreased renal perfusion triggering RAAS'],['b','Ventricular wall stretch from volume overload'],['c','Sympathetic nervous system activation'],['d','Hepatic congestion from right heart failure']],exp:'<strong>Ventricular wall stretch</strong> is the primary stimulus for BNP release. BNP promotes natriuresis and vasodilation to offload the heart. Levels correlate with filling pressures and prognosis.'},
+2:{type:'AFib Impact',ctx:'Maria\'s HR is 102 and "irregularly irregular." ECG confirms atrial fibrillation with RVR.',stem:'How does new-onset AFib worsen Maria\'s heart failure?',opts:[['a','It increases preload through enhanced atrial contraction'],['b','It decreases ventricular filling time only'],['c','It causes both loss of atrial kick AND reduced filling time from tachycardia'],['d','It primarily causes pulmonary hypertension']],exp:'AFib causes <strong>dual injury</strong>: loss of atrial kick (15-25% of CO) AND tachycardia reduces diastolic filling time. Rate control is essential.'},
+3:{type:'HF Classification',ctx:'Echo shows EF 32%, dilated LV, global hypokinesis. BNP is elevated.',stem:'Maria has which type of heart failure?',opts:[['a','HFpEF (preserved EF) - diastolic dysfunction'],['b','HFrEF (reduced EF) - systolic dysfunction'],['c','Right-sided heart failure only'],['d','High-output heart failure']],exp:'EF 32% = <strong>HFrEF</strong> (reduced ejection fraction, defined as EF ≤40%). This is primarily systolic dysfunction. HFpEF has EF ≥50%.'},
+4:{type:'Cardiorenal Mechanism',ctx:'Cr rose from 1.0 to 1.4 mg/dL. Maria is volume overloaded with low effective arterial volume.',stem:'What mechanism BEST explains Maria\'s renal dysfunction?',opts:[['a','RAAS activation causing efferent arteriolar constriction, maintaining GFR initially but reducing flow'],['b','Direct cardiac myocyte toxicity to kidneys'],['c','Contrast nephropathy from recent imaging'],['d','Primary glomerulonephritis']],exp:'<strong>Cardiorenal syndrome Type 1:</strong> Low CO → RAAS activation → efferent constriction maintains GFR early, but prolonged activation and venous congestion impair kidney function.'},
+5:{type:'Initial Management',ctx:'Maria is hypoxic (SpO2 91%), tachypneic (RR 24), with bilateral crackles.',stem:'What is the FIRST priority in Maria\'s initial ED management?',opts:[['a','IV loop diuretics to relieve pulmonary congestion'],['b','Start beta-blocker for rate control'],['c','Order cardiac catheterization'],['d','Begin anticoagulation for AFib']],exp:'<strong>IV diuretics</strong> are first-line for acute decompensated HF with congestion. Goal: relieve pulmonary edema, improve oxygenation. Don\'t start beta-blockers in acute decompensation.'},
+6:{type:'ACEi Titration',ctx:'Maria is on lisinopril 5mg. BP 118/72, Cr 1.5 (up from 1.4). No hypotension symptoms.',stem:'What is the MOST appropriate next step for ACEi therapy?',opts:[['a','Stop lisinopril due to rising creatinine'],['b','Increase to target dose (20-40mg daily)'],['c','Switch to ARNI immediately'],['d','Add second ACE inhibitor']],exp:'<strong>Uptitrate to target dose.</strong> Cr rise <30% is acceptable (Maria\'s is 7%). Mortality benefit is dose-dependent. "Start low, go slow, aim high."'},
+7:{type:'Beta-Blocker Selection',ctx:'Metoprolol succinate 25mg daily. Resting HR 68, BP 118/72. Mild fatigue.',stem:'Which is TRUE about beta-blockers in HFrEF?',opts:[['a','Target resting HR <60 bpm'],['b','Only carvedilol, metoprolol succinate, or bisoprolol have mortality benefit'],['c','They work by increasing contractility'],['d','Fatigue contraindicates uptitration']],exp:'<strong>Three specific beta-blockers</strong> proven in HFrEF: carvedilol (COPERNICUS), metoprolol succinate (MERIT-HF), bisoprolol (CIBIS-II). NOT metoprolol tartrate!'},
+8:{type:'Adding MRA',ctx:'Cr stable at 1.5, K 4.8 mEq/L. On maximally tolerated ACEi and BB.',stem:'Which labs would CONTRAINDICATE starting spironolactone?',opts:[['a','K 4.8, Cr 1.5 (current values)'],['b','K 5.5, Cr 2.8'],['c','BNP 420 (still elevated)'],['d','Na 138']],exp:'<strong>Contraindications:</strong> K >5.0 or eGFR <30 (Cr >2.5 men, >2.0 women). Maria\'s values are SAFE to start. RALES showed 30% mortality reduction.'},
+9:{type:'SGLT2 Benefits',ctx:'Considering dapagliflozin. Maria has diabetes (A1c 8.9%) and HFrEF.',stem:'Which is TRUE about SGLT2 inhibitors in HF?',opts:[['a','Benefit only in diabetic patients'],['b','Work primarily by lowering glucose'],['c','Reduce HF hospitalizations and CV death regardless of diabetes'],['d','Should not combine with diuretics']],exp:'<strong>SGLT2i benefit ALL HFrEF patients</strong> - DAPA-HF and EMPEROR-Reduced showed benefit regardless of diabetes. Now a pillar of GDMT.'},
+10:{type:'Monitoring',ctx:'EF improved to 35%. Planning repeat echo in 3-6 months.',stem:'Why repeat the echocardiogram?',opts:[['a','To confirm diagnosis'],['b','To assess reverse remodeling and ICD eligibility'],['c','To check for valvular disease'],['d','Only repeat if symptoms worsen']],exp:'<strong>Reassess EF after GDMT optimization.</strong> 30-40% show reverse remodeling. If EF remains ≤35% after 3+ months of GDMT, ICD is indicated.'},
+11:{type:'Trigger Identification',ctx:'Maria ran out of medications 2 weeks ago. Had a "cold" last week. Gained 15 lbs.',stem:'What is the MOST likely PRIMARY trigger?',opts:[['a','Viral myocarditis'],['b','Medication non-adherence'],['c','New coronary disease'],['d','Pulmonary embolism']],exp:'<strong>Medication non-adherence</strong> is the #1 cause of HF exacerbation. Her 2-week med gap → lost neurohormonal blockade → 15 lb fluid gain.'},
+12:{type:'Hemodynamic Profile',ctx:'JVP 15 cm, diffuse crackles, 3+ edema (wet). BP 142/88, strong pulses (warm).',stem:'Which hemodynamic profile describes Maria?',opts:[['a','Warm and Dry (Profile A)'],['b','Warm and Wet (Profile B)'],['c','Cold and Wet (Profile C)'],['d','Cold and Dry (Profile L)']],exp:'<strong>Warm and Wet (Profile B)</strong> - most common ADHF. Warm = adequate perfusion. Wet = congested. Treatment: diuretics ± vasodilators.'},
+13:{type:'Diuretic Resistance',ctx:'After 24h IV furosemide, only 800mL urine. Cr rose 2.1→2.6. Still edematous.',stem:'MOST appropriate next step?',opts:[['a','Stop diuretics for worsening renal function'],['b','Add thiazide for sequential nephron blockade'],['c','Start dobutamine'],['d','Urgent hemodialysis']],exp:'<strong>Sequential nephron blockade:</strong> Add thiazide (metolazone) to block compensatory distal reabsorption. Some Cr rise is acceptable if decongesting.'},
+14:{type:'Readmission Prevention',ctx:'Maria improving. Planning discharge after addressing triggers.',stem:'Which intervention BEST reduces 30-day readmission?',opts:[['a','More expensive medication'],['b','Early follow-up within 7 days'],['c','Home monitoring device'],['d','Strict Na restriction <1g']],exp:'<strong>Early follow-up (within 7 days)</strong> catches problems before emergencies. Address affordability, provide pill box, daily weights.'},
+15:{type:'Prognostic Markers',ctx:'Na dropped to 131 during admission. BNP still 2,340.',stem:'Which is the STRONGEST poor prognosis predictor?',opts:[['a','Hyponatremia (Na 131)'],['b','Elevated BNP'],['c','History of AFib'],['d','Age 58']],exp:'<strong>Hyponatremia</strong> is among the strongest mortality predictors - reflects severe neurohormonal activation and advanced disease.'},
+16:{type:'ICD Indication',ctx:'Maria has ICD for primary prevention after EF remained ≤35% on GDMT.',stem:'What is the PRIMARY purpose of Maria\'s ICD?',opts:[['a','Pace the heart to improve output'],['b','Prevent sudden death from ventricular arrhythmias'],['c','Monitor rhythm remotely'],['d','Treat atrial fibrillation']],exp:'<strong>Primary prevention ICD</strong> prevents sudden cardiac death from VT/VF. ~50% of HF deaths are sudden. It\'s a safety net, not a treatment.'},
+17:{type:'CRT Candidacy',ctx:'EKG: LBBB, QRS 162 ms. EF 20% with dyssynchrony. Symptomatic on max GDMT.',stem:'What makes Maria an IDEAL CRT candidate?',opts:[['a','EF of 20%'],['b','LBBB with QRS ≥150 ms'],['c','Atrial fibrillation'],['d','Narrow QRS']],exp:'<strong>LBBB + QRS ≥150 ms</strong> = best CRT response. Class I indication. 70% of LBBB patients respond. May improve EF 10-15 points!'},
+18:{type:'Inotrope Dependence',ctx:'Maria is on continuous milrinone. Without it, BP drops to <80 systolic.',stem:'What does inotrope dependence indicate?',opts:[['a','Good prognosis with continued infusion'],['b','Urgent evaluation for transplant or LVAD'],['c','Increase beta-blocker dose'],['d','Stop other HF medications']],exp:'<strong>Inotrope dependence = Stage D HF</strong> requiring urgent advanced therapy evaluation. Median survival without transplant/LVAD: 6-12 months.'},
+19:{type:'Transplant Evaluation',ctx:'Maria being evaluated. DM controlled, BMI 28, good support. Quit smoking 5 years ago.',stem:'Which would CONTRAINDICATE transplant?',opts:[['a','Age 60'],['b','Controlled diabetes'],['c','Active smoking or substance abuse'],['d','BMI 28']],exp:'<strong>Active smoking/substance abuse</strong> is absolute contraindication. Maria quit 5 years ago ✓, age 60 ✓, BMI 28 ✓, DM controlled ✓ - appears to be candidate.'},
+20:{type:'Palliative Integration',ctx:'Maria chooses quality of life over transplant/LVAD.',stem:'Which BEST describes palliative care in advanced HF?',opts:[['a','Stopping all medications'],['b','Symptom management alongside disease treatment'],['c','Only for cancer patients'],['d','Cannot change decision later']],exp:'<strong>Palliative care enhances quality of life</strong> - it\'s not "giving up." Can continue GDMT, diuretics, even inotropes. Focus on what matters to the patient.'}
+};
+
+function updateVitals(p) {
+    const v = vitals[p];
+    document.getElementById('vitalEF').textContent = v.ef;
+    document.getElementById('vitalNYHA').textContent = v.nyha;
+    document.getElementById('vitalBNP').textContent = v.bnp;
+}
+
+function renderCase(p) {
+    const c = cases[p];
+    let h = `<div class="case-narrative">${c.text}</div>`;
+    h += `<div class="data-section"><div class="data-label">Vitals</div><div class="data-grid">`;
+    c.vitals.forEach(v => h += `<div class="data-item"><span>${v[0]}:</span> <span class="${v[2]===1?'abnormal':v[2]===2?'improved':''}">${v[1]}</span></div>`);
+    h += `</div></div><div class="data-section"><div class="data-label">Exam</div><div class="data-grid">`;
+    c.exam.forEach(e => h += `<div class="data-item"><span>${e[0]}:</span> <span class="${e[2]===1?'abnormal':e[2]===2?'improved':''}">${e[1]}</span></div>`);
+    h += `</div></div><div class="data-section"><div class="data-label">Labs</div><div class="data-grid">`;
+    c.labs.forEach(l => h += `<div class="data-item"><span>${l[0]}:</span> <span class="${l[2]===1?'abnormal':l[2]===2?'improved':''}">${l[1]}</span></div>`);
+    h += `</div></div>`;
+    document.getElementById('caseContent').innerHTML = h;
+}
+
+function getQs(p) { const s=(p-1)*5+1; return [s,s+1,s+2,s+3,s+4]; }
+
+function renderQuestions(p) {
+    const intro = intros[p];
+    const qs = getQs(p);
+    let h = `<div class="phase-intro"><h2>${intro.icon} ${intro.title}</h2><p>${intro.desc}</p>`;
+    h += `<div class="learning-box"><div class="learning-title">🎯 Learning Objectives</div><ul class="learning-list">`;
+    intro.obj.forEach(o => h += `<li>${o}</li>`);
+    h += `</ul></div></div>`;
+    
+    qs.forEach((qn,i) => {
+        const q = Qs[qn];
+        const s = state[qn];
+        h += `<div class="quiz-card" id="q${qn}">`;
+        h += `<div class="quiz-header"><div class="quiz-number"><span class="quiz-num">${i+1}</span><span class="quiz-type">${q.type}</span></div>`;
+        h += `<span class="quiz-status ${s.done?(s.ok?'correct':'incorrect'):''}" id="st${qn}">${s.done?(s.ok?'Correct':'Incorrect'):'Not answered'}</span></div>`;
+        h += `<div class="quiz-context"><div class="context-label">📍 Case Context</div><div class="context-text">${q.ctx}</div></div>`;
+        h += `<div class="quiz-body"><div class="quiz-stem">${q.stem}</div><div class="quiz-options" id="opts${qn}">`;
+        q.opts.forEach(opt => {
+            let cls = s.done ? 'disabled' : '';
+            if(s.done && opt[0]===answers[qn]) cls += ' correct';
+            if(s.done && opt[0]===s.pick && !s.ok) cls += ' incorrect';
+            h += `<div class="quiz-option ${cls}" data-a="${opt[0]}" onclick="pick(${qn},this)"><span class="option-letter">${opt[0].toUpperCase()}</span><span class="option-text">${opt[1]}</span></div>`;
+        });
+        h += `</div><div class="confidence-section" id="conf${qn}" ${s.done?'style="display:none"':''}>`;
+        h += `<div class="confidence-label"><span>Confidence?</span><span id="confVal${qn}">Select</span></div><div class="confidence-btns">`;
+        h += `<button class="conf-btn" onclick="setConf(${qn},'low',this)">Guessing</button>`;
+        h += `<button class="conf-btn" onclick="setConf(${qn},'med',this)">Somewhat</button>`;
+        h += `<button class="conf-btn" onclick="setConf(${qn},'high',this)">Confident</button></div></div>`;
+        h += `<button class="submit-btn" id="sub${qn}" onclick="submit(${qn})" disabled ${s.done?'style="display:none"':''}>Submit</button>`;
+        h += `<div class="explanation ${s.done?(s.ok?'visible correct':'visible incorrect'):''}" id="exp${qn}">`;
+        h += `<div class="explanation-title">${s.done?(s.ok?'✓ Correct!':'✗ Not quite:'):'✓ Correct!'}</div>`;
+        h += `<div class="explanation-text">${q.exp}</div></div></div></div>`;
+    });
+    
+    h += `<div class="phase-summary" id="summary"><div class="summary-header"><div class="summary-title">Phase ${p} Complete! 🎉</div><div class="summary-score" id="score">0/5</div></div>`;
+    h += `<div class="summary-stats"><div class="stat-box"><div class="stat-value" id="corrCt">0</div><div class="stat-label">Correct</div></div>`;
+    h += `<div class="stat-box"><div class="stat-value" id="avgConf">--</div><div class="stat-label">Avg Confidence</div></div>`;
+    h += `<div class="stat-box"><div class="stat-value">+50</div><div class="stat-label">XP</div></div></div>`;
+    if(p<4) h += `<button class="next-btn" onclick="unlock(${p+1})">Continue to Phase ${p+1} →</button>`;
+    else h += `<p style="text-align:center;margin-top:16px;color:var(--accent-green);font-weight:600">🎓 Maria's journey complete!</p>`;
+    h += `</div>`;
+    
+    document.getElementById('questionsPanel').innerHTML = h;
+}
+
+function pick(qn, el) {
+    if(state[qn].done) return;
+    document.querySelectorAll(`#opts${qn} .quiz-option`).forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    state[qn].pick = el.dataset.a;
+    checkSub(qn);
+}
+
+function setConf(qn, lv, el) {
+    if(state[qn].done) return;
+    document.querySelectorAll(`#conf${qn} .conf-btn`).forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+    state[qn].conf = lv;
+    document.getElementById(`confVal${qn}`).textContent = {low:'33%',med:'66%',high:'90%'}[lv];
+    checkSub(qn);
+}
+
+function checkSub(qn) {
+    const btn = document.getElementById(`sub${qn}`);
+    if(btn) btn.disabled = !(state[qn].pick && state[qn].conf);
+}
+
+function submit(qn) {
+    const s = state[qn];
+    if(s.done) return;
+    s.done = true;
+    s.ok = s.pick === answers[qn];
+    
+    document.querySelectorAll(`#opts${qn} .quiz-option`).forEach(o => {
+        o.classList.add('disabled');
+        if(o.dataset.a === answers[qn]) o.classList.add('correct');
+        else if(o.dataset.a === s.pick && !s.ok) o.classList.add('incorrect');
+    });
+    
+    const exp = document.getElementById(`exp${qn}`);
+    exp.classList.add('visible', s.ok ? 'correct' : 'incorrect');
+    exp.querySelector('.explanation-title').textContent = s.ok ? '✓ Correct!' : '✗ Not quite:';
+    
+    document.getElementById(`st${qn}`).textContent = s.ok ? 'Correct' : 'Incorrect';
+    document.getElementById(`st${qn}`).className = `quiz-status ${s.ok?'correct':'incorrect'}`;
+    document.getElementById(`sub${qn}`).style.display = 'none';
+    document.getElementById(`conf${qn}`).style.display = 'none';
+    
+    updateProgress();
+    checkDone();
+}
+
+function updateProgress() {
+    const total = Object.values(state).filter(s => s.done).length;
+    document.getElementById('progressCount').textContent = `${total}/20`;
+    document.getElementById('progressFill').style.width = `${(total/20)*100}%`;
+}
+
+function checkDone() {
+    const qs = getQs(phase);
+    if(qs.every(q => state[q].done) && !done[phase]) {
+        done[phase] = true;
+        const corr = qs.filter(q => state[q].ok).length;
+        document.getElementById('score').textContent = `${corr}/5`;
+        document.getElementById('corrCt').textContent = corr;
+        const confVals = {low:33,med:66,high:90};
+        const avg = Math.round(qs.reduce((s,q) => s+confVals[state[q].conf],0)/5);
+        document.getElementById('avgConf').textContent = `${avg}%`;
+        document.getElementById('summary').style.display = 'block';
+        document.getElementById('summary').scrollIntoView({behavior:'smooth'});
+        document.querySelector(`.timeline-phase[data-phase="${phase}"]`).classList.add('completed');
+        document.getElementById(`status${phase}`).textContent = '✓ Done';
+        document.getElementById(`status${phase}`).className = 'phase-status done';
+    }
+}
+
+function unlock(np) { open[np] = true; goPhase(np); }
+
+function goPhase(p) {
+    if(!open[p]) { alert(`Complete Phase ${p-1} first!`); return; }
+    phase = p;
+    document.querySelectorAll('.timeline-phase').forEach(ph => {
+        const pn = parseInt(ph.dataset.phase);
+        ph.classList.remove('active','locked');
+        if(pn === p) ph.classList.add('active');
+        if(!open[pn]) ph.classList.add('locked');
+    });
+    for(let i=1;i<=4;i++) {
+        const st = document.getElementById(`status${i}`);
+        if(done[i]) { st.textContent = '✓ Done'; st.className = 'phase-status done'; }
+        else if(i===p) { st.textContent = 'Current'; st.className = 'phase-status current'; }
+        else if(open[i]) { st.textContent = ''; st.className = 'phase-status'; }
+        else { st.textContent = '🔒'; st.className = 'phase-status'; }
+    }
+    updateVitals(p);
+    renderCase(p);
+    renderQuestions(p);
+    window.scrollTo({top:0,behavior:'smooth'});
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    updateVitals(1);
+    renderCase(1);
+    renderQuestions(1);
+});
+</script>
+</body>
+</html>
