@@ -3,283 +3,583 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sepsis: James's Journey - MechanismDx</title>
+<title>Sepsis: James's Journey - MechanismDx Enhanced</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
-:root { --bg-page: #f8f9fa; --bg-white: #ffffff; --bg-subtle: #f1f3f5; --text-primary: #1a1a1a; --text-secondary: #5c5c5c; --text-muted: #8c8c8c; --border: #e9ecef; --accent-primary: #dc2626; --accent-green: #16a34a; --accent-amber: #d97706; --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-page); color: var(--text-primary); line-height: 1.6; }
-.header { background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 0 24px; }
-.header-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
-.logo-link { display: flex; align-items: center; gap: 16px; text-decoration: none; color: inherit; }
-.tagline { font-family: 'Newsreader', Georgia, serif; font-style: italic; color: var(--text-muted); font-size: 14px; }
-.header-nav { display: flex; gap: 8px; }
-.nav-link { padding: 8px 14px; color: var(--text-secondary); text-decoration: none; font-size: 14px; font-weight: 500; border-radius: var(--radius-sm); }
-.nav-link:hover { background: var(--bg-subtle); }
-.nav-link.active { color: var(--accent-primary); background: rgba(220,38,38,0.08); }
-.module-header { background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 32px 24px; }
-.module-header-inner { max-width: 1200px; margin: 0 auto; }
-.breadcrumb { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; }
-.breadcrumb a { color: var(--accent-primary); text-decoration: none; }
-.module-title { display: flex; align-items: center; gap: 16px; }
-.module-icon { width: 56px; height: 56px; background: linear-gradient(135deg, #fee2e2, #fecaca); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 28px; }
-.module-title h1 { font-size: 28px; font-weight: 600; margin-bottom: 4px; }
-.module-title p { color: var(--text-secondary); font-size: 15px; }
-.patient-banner { background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%); color: white; padding: 20px 24px; }
-.patient-banner-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-.patient-avatar { width: 48px; height: 48px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; }
-.patient-info { flex: 1; min-width: 200px; }
-.patient-name { font-size: 16px; font-weight: 600; }
-.patient-details { font-size: 13px; opacity: 0.9; }
-.patient-vitals { display: flex; gap: 16px; flex-wrap: wrap; }
-.vital { text-align: center; padding: 8px 14px; background: rgba(255,255,255,0.1); border-radius: var(--radius-sm); }
-.vital-value { font-size: 18px; font-weight: 700; }
-.vital-label { font-size: 10px; opacity: 0.8; text-transform: uppercase; }
-.timeline-nav { background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 0 24px; overflow-x: auto; }
-.timeline-inner { max-width: 1200px; margin: 0 auto; display: flex; min-width: max-content; }
-.timeline-phase { flex: 1; min-width: 140px; padding: 14px 12px; cursor: pointer; border-bottom: 3px solid transparent; text-align: center; transition: all 0.2s; }
-.timeline-phase:hover { background: var(--bg-subtle); }
-.timeline-phase.active { border-bottom-color: var(--accent-primary); background: rgba(220,38,38,0.04); }
-.timeline-phase.completed { border-bottom-color: var(--accent-green); }
-.timeline-phase.locked { opacity: 0.4; cursor: not-allowed; }
-.phase-label { font-size: 12px; font-weight: 600; }
-.phase-time { font-size: 10px; color: var(--text-muted); }
-.phase-status { font-size: 10px; margin-top: 4px; }
-.phase-status.current { color: var(--accent-primary); }
-.phase-status.done { color: var(--accent-green); }
-.main-container { max-width: 1200px; margin: 0 auto; padding: 24px; display: grid; grid-template-columns: 280px 1fr; gap: 24px; }
-@media (max-width: 900px) { .main-container { grid-template-columns: 1fr; } }
-.case-panel { position: sticky; top: 24px; height: fit-content; }
-.card { background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 16px; }
-.card-header { padding: 14px 16px; border-bottom: 1px solid var(--border); }
-.card-title { font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
-.card-content { padding: 16px; }
-.case-narrative { font-family: 'Newsreader', Georgia, serif; font-size: 13px; line-height: 1.7; color: var(--text-secondary); margin-bottom: 12px; }
-.case-narrative strong { color: var(--text-primary); }
-.case-narrative em { color: var(--accent-primary); font-style: normal; font-weight: 500; }
-.data-section { background: var(--bg-subtle); border-radius: var(--radius-sm); padding: 10px; margin-top: 10px; }
-.data-label { font-size: 9px; font-weight: 600; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
-.data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
-.data-item { font-size: 10px; }
-.data-item span:first-child { color: var(--text-muted); }
-.data-item span:last-child { font-weight: 600; }
-.abnormal { color: var(--accent-primary) !important; }
-.critical { color: #7f1d1d !important; font-weight: 700 !important; }
-.improved { color: var(--accent-green) !important; }
-.phase-intro { margin-bottom: 20px; }
-.phase-intro h2 { font-size: 18px; font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
-.phase-intro p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
-.hour-badge { display: inline-block; padding: 4px 10px; background: #7f1d1d; color: white; border-radius: 4px; font-size: 10px; font-weight: 700; margin-bottom: 10px; }
-.learning-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: var(--radius-md); padding: 14px; margin-top: 14px; }
-.learning-title { font-size: 11px; font-weight: 600; color: var(--accent-primary); margin-bottom: 8px; }
-.learning-list { list-style: none; font-size: 12px; }
-.learning-list li { padding: 3px 0 3px 18px; position: relative; color: var(--text-secondary); }
-.learning-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent-primary); }
-.quiz-card { background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius-lg); margin-bottom: 16px; overflow: hidden; }
-.quiz-header { padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
-.quiz-number { display: flex; align-items: center; gap: 8px; }
-.quiz-num { width: 24px; height: 24px; background: var(--accent-primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; }
-.quiz-type { font-size: 11px; color: var(--text-muted); }
-.quiz-status { font-size: 10px; padding: 3px 8px; border-radius: 10px; font-weight: 600; background: var(--bg-subtle); color: var(--text-muted); }
-.quiz-status.correct { background: #dcfce7; color: #166534; }
-.quiz-status.incorrect { background: #fee2e2; color: #991b1b; }
-.quiz-context { padding: 12px 16px; background: #fef2f2; border-bottom: 1px solid #fecaca; }
-.context-label { font-size: 9px; font-weight: 600; text-transform: uppercase; color: #991b1b; margin-bottom: 3px; }
-.context-text { font-size: 11px; color: #7f1d1d; line-height: 1.5; }
-.quiz-body { padding: 16px; }
-.quiz-stem { font-size: 13px; font-weight: 500; line-height: 1.5; margin-bottom: 14px; }
-.quiz-options { display: flex; flex-direction: column; gap: 6px; }
-.quiz-option { display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px; background: var(--bg-subtle); border: 2px solid transparent; border-radius: var(--radius-sm); cursor: pointer; transition: all 0.15s; }
-.quiz-option:hover { border-color: var(--border); background: var(--bg-white); }
-.quiz-option.selected { border-color: var(--accent-primary); background: rgba(220,38,38,0.04); }
-.quiz-option.correct { border-color: var(--accent-green); background: rgba(22,163,74,0.08); }
-.quiz-option.incorrect { border-color: var(--accent-primary); background: rgba(220,38,38,0.08); }
-.quiz-option.disabled { pointer-events: none; }
-.option-letter { width: 22px; height: 22px; background: var(--bg-white); border: 2px solid var(--border); border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: var(--text-muted); flex-shrink: 0; }
-.quiz-option.selected .option-letter { border-color: var(--accent-primary); color: var(--accent-primary); }
-.quiz-option.correct .option-letter { background: var(--accent-green); border-color: var(--accent-green); color: white; }
-.quiz-option.incorrect .option-letter { background: var(--accent-primary); border-color: var(--accent-primary); color: white; }
-.option-text { font-size: 12px; color: var(--text-secondary); line-height: 1.4; }
-.confidence-section { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); }
-.confidence-label { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; display: flex; justify-content: space-between; }
-.confidence-btns { display: flex; gap: 6px; }
-.conf-btn { flex: 1; padding: 7px; border: 2px solid var(--border); border-radius: var(--radius-sm); background: var(--bg-white); cursor: pointer; font-size: 10px; font-weight: 600; color: var(--text-secondary); }
-.conf-btn:hover { border-color: var(--accent-primary); }
-.conf-btn.selected { border-color: var(--accent-green); background: rgba(22,163,74,0.08); color: var(--accent-green); }
-.submit-btn { margin-top: 10px; width: 100%; padding: 10px; background: var(--accent-primary); color: white; border: none; border-radius: var(--radius-sm); font-size: 12px; font-weight: 600; cursor: pointer; }
-.submit-btn:disabled { background: var(--bg-subtle); color: var(--text-muted); cursor: not-allowed; }
-.explanation { margin-top: 14px; padding: 14px; border-radius: var(--radius-sm); display: none; }
-.explanation.visible { display: block; }
-.explanation.correct { background: #f0fdf4; border: 1px solid #bbf7d0; }
-.explanation.incorrect { background: #fef2f2; border: 1px solid #fecaca; }
-.explanation-title { font-size: 12px; font-weight: 600; margin-bottom: 6px; }
-.explanation.correct .explanation-title { color: #166534; }
-.explanation.incorrect .explanation-title { color: #991b1b; }
-.explanation-text { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
-.explanation-text strong { color: var(--text-primary); }
-.phase-summary { background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; margin-top: 16px; display: none; }
-.summary-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
-.summary-title { font-size: 15px; font-weight: 600; }
-.summary-score { font-size: 22px; font-weight: 700; color: var(--accent-green); }
-.summary-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-.stat-box { text-align: center; padding: 10px; background: var(--bg-subtle); border-radius: var(--radius-sm); }
-.stat-value { font-size: 18px; font-weight: 700; }
-.stat-label { font-size: 9px; color: var(--text-muted); text-transform: uppercase; }
-.next-btn { margin-top: 14px; width: 100%; padding: 12px; background: var(--accent-green); color: white; border: none; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; cursor: pointer; }
-.progress-bar { background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 10px 24px; }
-.progress-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
-.progress-label { font-size: 10px; color: var(--text-muted); font-weight: 600; }
-.progress-track { flex: 1; height: 5px; background: var(--bg-subtle); border-radius: 3px; overflow: hidden; }
-.progress-fill { height: 100%; background: linear-gradient(90deg, #ef4444, #f59e0b, #3b82f6, #10b981); border-radius: 3px; transition: width 0.3s; }
-.progress-count { font-size: 10px; color: var(--text-muted); font-weight: 600; }
+:root{--bg-page:#f8f9fa;--bg-white:#fff;--bg-subtle:#f1f3f5;--text-primary:#1a1a1a;--text-secondary:#5c5c5c;--text-muted:#8c8c8c;--border:#e9ecef;--accent-primary:#dc2626;--accent-green:#16a34a;--accent-amber:#d97706;--accent-purple:#7c3aed;--radius-sm:8px;--radius-md:12px;--radius-lg:16px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg-page);color:var(--text-primary);line-height:1.6}
+.header{background:var(--bg-white);border-bottom:1px solid var(--border);padding:0 24px}
+.header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:16px 0;flex-wrap:wrap;gap:12px}
+.logo-link{display:flex;align-items:center;gap:16px;text-decoration:none;color:inherit}
+.tagline{font-family:'Newsreader',Georgia,serif;font-style:italic;color:var(--text-muted);font-size:14px}
+.header-nav{display:flex;gap:8px}
+.nav-link{padding:8px 14px;color:var(--text-secondary);text-decoration:none;font-size:14px;font-weight:500;border-radius:var(--radius-sm)}
+.nav-link:hover{background:var(--bg-subtle)}
+.module-header{background:var(--bg-white);border-bottom:1px solid var(--border);padding:32px 24px}
+.module-header-inner{max-width:1200px;margin:0 auto}
+.breadcrumb{font-size:13px;color:var(--text-muted);margin-bottom:16px}
+.breadcrumb a{color:var(--accent-primary);text-decoration:none}
+.module-title{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.module-icon{width:56px;height:56px;background:linear-gradient(135deg,#fef9c3,#fef3c7);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-size:28px}
+.module-title h1{font-size:28px;font-weight:600;margin-bottom:4px}
+.module-title p{color:var(--text-secondary);font-size:15px}
+.enhanced-badge{display:inline-flex;align-items:center;gap:4px;background:linear-gradient(135deg,var(--accent-purple),#dc2626);color:#fff;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;margin-left:8px}
+.progress-bar{background:var(--bg-white);border-bottom:1px solid var(--border);padding:12px 24px}
+.progress-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:16px}
+.progress-label{font-size:13px;font-weight:500;color:var(--text-secondary)}
+.progress-track{flex:1;height:8px;background:var(--bg-subtle);border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent-green),var(--accent-primary));border-radius:4px;transition:width .3s}
+.progress-count{font-size:13px;font-weight:600}
+.patient-banner{background:linear-gradient(135deg,#7f1d1d,#991b1b);color:#fff;padding:20px 24px}
+.patient-banner-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.patient-avatar{width:48px;height:48px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px}
+.patient-info{flex:1;min-width:200px}
+.patient-name{font-size:16px;font-weight:600}
+.patient-details{font-size:13px;opacity:.9}
+.patient-vitals{display:flex;gap:16px;flex-wrap:wrap}
+.vital{text-align:center;padding:8px 16px;background:rgba(255,255,255,.1);border-radius:var(--radius-sm)}
+.vital-value{font-size:18px;font-weight:700}
+.vital-label{font-size:10px;opacity:.8;text-transform:uppercase}
+.timeline-nav{background:var(--bg-white);border-bottom:1px solid var(--border);padding:0 24px;overflow-x:auto}
+.timeline-inner{max-width:1200px;margin:0 auto;display:flex}
+.timeline-phase{flex:1;min-width:100px;padding:16px 8px;cursor:pointer;border-bottom:3px solid transparent;text-align:center;transition:all .2s}
+.timeline-phase:hover{background:var(--bg-subtle)}
+.timeline-phase.active{border-bottom-color:var(--accent-primary);background:rgba(220,38,38,.04)}
+.timeline-phase.completed{border-bottom-color:var(--accent-green)}
+.timeline-phase.locked{opacity:.4;cursor:not-allowed}
+.phase-label{font-size:11px;font-weight:600}
+.phase-time{font-size:10px;color:var(--text-muted)}
+.phase-status{font-size:10px;margin-top:4px}
+.phase-status.current{color:var(--accent-primary)}
+.phase-status.done{color:var(--accent-green)}
+.main-container{max-width:1200px;margin:0 auto;padding:24px;display:grid;grid-template-columns:280px 1fr;gap:24px}
+@media(max-width:900px){.main-container{grid-template-columns:1fr}}
+.case-panel{position:sticky;top:24px;height:fit-content}
+.card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:16px}
+.card-header{padding:14px 18px;border-bottom:1px solid var(--border)}
+.card-title{font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px}
+.card-content{padding:16px 18px}
+.case-narrative{font-family:'Newsreader',Georgia,serif;font-size:13px;line-height:1.7;color:var(--text-secondary);margin-bottom:12px}
+.case-narrative strong{color:var(--text-primary)}
+.case-narrative em{color:var(--accent-primary);font-style:normal;font-weight:500}
+.data-section{background:var(--bg-subtle);border-radius:var(--radius-sm);padding:10px;margin-top:10px}
+.data-label{font-size:9px;font-weight:600;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px}
+.data-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px}
+.data-item{font-size:10px}
+.data-item span:first-child{color:var(--text-muted)}
+.data-item span:last-child{font-weight:600}
+.data-item .abnormal{color:var(--accent-primary)}
+.data-item .improved{color:var(--accent-green)}
+.fp-mini{margin-top:12px;padding:14px;background:linear-gradient(135deg,#1e293b,#334155);border-radius:var(--radius-md);color:#fff}
+.fp-title{font-size:11px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.domain-bars{display:flex;flex-direction:column;gap:6px}
+.domain-bar{display:flex;align-items:center;gap:6px;font-size:10px}
+.domain-label{width:70px;color:rgba(255,255,255,.7)}
+.domain-track{flex:1;height:5px;background:rgba(255,255,255,.2);border-radius:3px;overflow:hidden}
+.domain-fill{height:100%;border-radius:3px;transition:width .3s}
+.domain-fill.mechanism{background:#a855f7}
+.domain-fill.pharm{background:#3b82f6}
+.domain-fill.patho{background:#22c55e}
+.domain-fill.micro{background:#f59e0b}
+.phase-intro{margin-bottom:20px}
+.phase-intro h2{font-size:18px;font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.phase-intro p{font-size:13px;color:var(--text-secondary)}
+.learning-box{background:#fef2f2;border:1px solid #fecaca;border-radius:var(--radius-md);padding:14px;margin-top:12px}
+.learning-title{font-size:11px;font-weight:600;color:var(--accent-primary);margin-bottom:8px}
+.learning-list{list-style:none;font-size:12px}
+.learning-list li{padding:3px 0 3px 16px;position:relative;color:var(--text-secondary)}
+.learning-list li::before{content:'→';position:absolute;left:0;color:var(--accent-primary)}
+.quiz-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:16px;overflow:hidden}
+.quiz-card.nbme{border-left:4px solid var(--accent-purple)}
+.quiz-header{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.quiz-number{display:flex;align-items:center;gap:8px}
+.quiz-num{width:26px;height:26px;background:var(--accent-primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.quiz-num.nbme{background:var(--accent-purple)}
+.quiz-type{font-size:11px;color:var(--text-muted)}
+.quiz-tags{display:flex;gap:4px;flex-wrap:wrap}
+.quiz-tag{font-size:9px;padding:2px 6px;border-radius:4px;font-weight:500}
+.quiz-tag.mechanism{background:#f3e8ff;color:#7c3aed}
+.quiz-tag.pharmacology{background:#dbeafe;color:#2563eb}
+.quiz-tag.pathophysiology{background:#dcfce7;color:#16a34a}
+.quiz-tag.microbiology{background:#fef3c7;color:#d97706}
+.quiz-tag.step1{background:#fee2e2;color:#dc2626}
+.quiz-tag.step2{background:#e0e7ff;color:#4f46e5}
+.quiz-status{font-size:13px;font-weight:600}
+.quiz-status.correct{color:var(--accent-green)}
+.quiz-status.incorrect{color:var(--accent-primary)}
+.quiz-context{padding:12px 18px;background:#fefce8;border-bottom:1px solid var(--border);font-size:12px}
+.context-label{font-size:10px;font-weight:600;color:var(--accent-amber);margin-bottom:4px}
+.nbme-vignette{padding:16px 18px;background:#f5f3ff;border-bottom:1px solid var(--border);font-size:12px;line-height:1.6}
+.vig-demo{font-weight:600;color:var(--accent-purple);margin-bottom:6px}
+.vig-section{margin-bottom:8px}
+.vig-label{font-size:10px;font-weight:600;color:var(--text-muted);text-transform:uppercase}
+.vig-labs{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:4px;margin-top:4px}
+.vig-lab{font-size:11px}
+.vig-lab .abnormal{color:var(--accent-primary);font-weight:600}
+.quiz-body{padding:18px}
+.quiz-stem{font-size:14px;font-weight:500;margin-bottom:16px;line-height:1.5}
+.quiz-options{display:flex;flex-direction:column;gap:8px}
+.quiz-option{display:flex;align-items:flex-start;gap:10px;padding:12px;border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;transition:all .15s}
+.quiz-option:hover:not(.disabled){background:var(--bg-subtle);border-color:#cbd5e1}
+.quiz-option.selected{background:#eff6ff;border-color:var(--accent-primary)}
+.quiz-option.correct{background:#dcfce7;border-color:var(--accent-green)}
+.quiz-option.incorrect{background:#fee2e2;border-color:var(--accent-primary)}
+.quiz-option.disabled{cursor:default;opacity:.8}
+.option-letter{width:24px;height:24px;background:var(--bg-subtle);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0}
+.quiz-option.selected .option-letter{background:var(--accent-primary);color:#fff}
+.quiz-option.correct .option-letter{background:var(--accent-green);color:#fff}
+.quiz-option.incorrect .option-letter{background:var(--accent-primary);color:#fff}
+.option-text{font-size:13px;line-height:1.4}
+.confidence-section{margin-top:16px;padding-top:16px;border-top:1px dashed var(--border)}
+.confidence-label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:8px}
+.confidence-btns{display:flex;gap:8px}
+.conf-btn{flex:1;padding:8px;border:1px solid var(--border);background:var(--bg-white);border-radius:var(--radius-sm);font-size:11px;cursor:pointer}
+.conf-btn:hover{background:var(--bg-subtle)}
+.conf-btn.selected{background:var(--accent-primary);color:#fff;border-color:var(--accent-primary)}
+.submit-btn{width:100%;margin-top:12px;padding:12px;background:var(--accent-primary);color:#fff;border:none;border-radius:var(--radius-sm);font-weight:600;cursor:pointer}
+.submit-btn:disabled{background:#cbd5e1;cursor:not-allowed}
+.explanation{display:none;margin-top:16px;padding:16px;border-radius:var(--radius-md);font-size:13px;line-height:1.6}
+.explanation.visible{display:block}
+.explanation.correct{background:#dcfce7;border:1px solid #86efac}
+.explanation.incorrect{background:#fee2e2;border:1px solid #fca5a5}
+.explanation-title{font-weight:600;margin-bottom:8px}
+.explanation.correct .explanation-title{color:var(--accent-green)}
+.explanation.incorrect .explanation-title{color:var(--accent-primary)}
+.deep-dive{margin-top:16px;border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden}
+.dd-toggle{width:100%;padding:12px 16px;background:var(--bg-subtle);border:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:600}
+.dd-toggle:hover{background:#e2e8f0}
+.dd-content{display:none;padding:16px;background:var(--bg-white)}
+.dd-content.open{display:block}
+.dd-tabs{display:flex;gap:4px;margin-bottom:12px;flex-wrap:wrap}
+.dd-tab{padding:6px 12px;border:1px solid var(--border);background:var(--bg-white);border-radius:var(--radius-sm);font-size:11px;cursor:pointer}
+.dd-tab:hover{background:var(--bg-subtle)}
+.dd-tab.active{background:var(--accent-primary);color:#fff;border-color:var(--accent-primary)}
+.dd-panel{display:none}
+.dd-panel.active{display:block}
+.dd-section{font-size:12px;line-height:1.6}
+.dd-section h4{font-size:13px;font-weight:600;margin:12px 0 8px;color:var(--text-primary)}
+.dd-section h4:first-child{margin-top:0}
+.dd-section p{margin-bottom:8px;color:var(--text-secondary)}
+.dd-section ul,.dd-section ol{margin:8px 0;padding-left:20px}
+.dd-section li{margin:4px 0}
+.mech-pathway{display:flex;align-items:center;flex-wrap:wrap;gap:6px;padding:12px;background:linear-gradient(135deg,#f5f3ff,#ede9fe);border-radius:var(--radius-sm);margin:8px 0}
+.mech-step{background:#fff;padding:6px 10px;border-radius:4px;font-size:11px;font-weight:500;border:1px solid #c4b5fd}
+.mech-arrow{color:var(--accent-purple);font-weight:700}
+.drug-table{width:100%;border-collapse:collapse;margin:8px 0;font-size:11px}
+.drug-table th,.drug-table td{padding:8px;border:1px solid var(--border);text-align:left}
+.drug-table th{background:var(--bg-subtle);font-weight:600}
+.drug-table tr:hover{background:#fafafa}
+.buzzwords{margin-top:12px;padding:10px;background:#fef3c7;border-radius:var(--radius-sm)}
+.bw-title{font-size:10px;font-weight:600;color:var(--accent-amber);margin-bottom:6px}
+.bw-list{display:flex;flex-wrap:wrap;gap:4px}
+.bw-item{background:#fff;padding:3px 8px;border-radius:4px;font-size:10px;border:1px solid #fcd34d}
+.distractor-section{margin-top:12px;padding:12px;background:#fef2f2;border-radius:var(--radius-sm)}
+.dist-title{font-size:10px;font-weight:600;color:var(--accent-primary);margin-bottom:8px}
+.dist-item{font-size:11px;margin:6px 0;padding-left:12px;border-left:2px solid #fca5a5}
+.dist-letter{font-weight:600;color:var(--accent-primary)}
+.phase-summary{display:none;margin-top:24px;background:linear-gradient(135deg,#1e293b,#334155);border-radius:var(--radius-lg);padding:24px;color:#fff}
+.summary-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.summary-title{font-size:18px;font-weight:600}
+.summary-score{font-size:28px;font-weight:700}
+.summary-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+.stat-box{background:rgba(255,255,255,.1);padding:16px;border-radius:var(--radius-sm);text-align:center}
+.stat-value{font-size:24px;font-weight:700}
+.stat-label{font-size:11px;opacity:.7}
+.fp-summary{background:rgba(255,255,255,.05);padding:16px;border-radius:var(--radius-sm);margin-bottom:16px}
+.fp-summary-title{font-size:12px;font-weight:600;margin-bottom:12px}
+.fp-domains{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.fp-domain{display:flex;justify-content:space-between;font-size:11px;padding:6px;background:rgba(255,255,255,.1);border-radius:4px}
+.next-btn{display:block;width:100%;padding:14px;background:var(--accent-green);color:#fff;border:none;border-radius:var(--radius-sm);font-weight:600;font-size:14px;cursor:pointer;text-align:center;text-decoration:none}
+.next-btn:hover{background:#15803d}
 </style>
 </head>
 <body>
-<header class="header"><div class="header-inner">
+<header class="header">
+<div class="header-inner">
 <a href="index.html" class="logo-link">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 70" style="height:32px"><text x="5" y="45" font-family="Georgia,serif" font-size="42" fill="currentColor">Mechanism</text><text x="213" y="45" font-family="Georgia,serif" font-size="42" fill="currentColor">D</text><line x1="247" y1="24" x2="263" y2="45" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="245" cy="22" rx="2" ry="3.5" transform="rotate(-28 245 22)" fill="currentColor"/><path d="M263 24L253 35Q249 40 249 47Q249 54 254 58Q259 62 259 68" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/><ellipse cx="265" cy="22" rx="2" ry="3.5" transform="rotate(28 265 22)" fill="currentColor"/><circle cx="259" cy="68" r="7" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="259" cy="68" r="3.5" fill="currentColor"/></svg>
-<span class="tagline">The right mechanism unlocks everything.</span></a>
-<nav class="header-nav"><a href="/" class="nav-link">ReasonDx</a><a href="index.html" class="nav-link active">Mechanisms</a></nav>
-</div></header>
-
-<div class="module-header"><div class="module-header-inner">
-<div class="breadcrumb"><a href="index.html">MechanismDx</a> › Longitudinal Cases › Sepsis</div>
-<div class="module-title"><div class="module-icon">🦠</div><div><h1>Sepsis: James's Journey</h1><p>Recognition → Resuscitation → Source Control → Recovery | Bugs & Drugs in Action</p></div></div>
-</div></div>
-
-<div class="progress-bar"><div class="progress-inner">
+<svg width="32" height="32" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#dc2626"/><circle cx="50" cy="50" r="20" fill="none" stroke="#fff" stroke-width="4"/><line x1="50" y1="15" x2="50" y2="30" stroke="#fff" stroke-width="4" stroke-linecap="round"/><line x1="50" y1="70" x2="50" y2="85" stroke="#fff" stroke-width="4" stroke-linecap="round"/><line x1="15" y1="50" x2="30" y2="50" stroke="#fff" stroke-width="4" stroke-linecap="round"/><line x1="70" y1="50" x2="85" y2="50" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg>
+<div><strong style="font-size:18px">MechanismDx</strong><div class="tagline">Why, not just what</div></div>
+</a>
+<nav class="header-nav">
+<a href="index.html" class="nav-link">Modules</a>
+<a href="challenges.html" class="nav-link">Challenges</a>
+<a href="fingerprint-dashboard.html" class="nav-link">Fingerprint</a>
+</nav>
+</div>
+</header>
+<div class="module-header">
+<div class="module-header-inner">
+<div class="breadcrumb"><a href="index.html">Modules</a> → Sepsis</div>
+<div class="module-title">
+<div class="module-icon">🦠</div>
+<div><h1>Sepsis: James's Journey<span class="enhanced-badge">✨ NBME Enhanced</span></h1><p>From recognition through resuscitation to recovery</p></div>
+</div>
+</div>
+</div>
+<div class="progress-bar">
+<div class="progress-inner">
 <span class="progress-label">Progress</span>
 <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
 <span class="progress-count" id="progressCount">0/20</span>
-</div></div>
-
-<div class="patient-banner"><div class="patient-banner-inner">
-<div class="patient-avatar">👨🏻</div>
-<div class="patient-info"><div class="patient-name">James Wilson, 67 years old</div><div class="patient-details">Type 2 DM, COPD | Fever, confusion, productive cough × 2 days</div></div>
+</div>
+</div>
+<div class="patient-banner">
+<div class="patient-banner-inner">
+<div class="patient-avatar">👴</div>
+<div class="patient-info">
+<div class="patient-name">James Mitchell</div>
+<div class="patient-details">67M • Type 2 DM, BPH • Foley catheter 5 days • ED presentation with confusion</div>
+</div>
 <div class="patient-vitals">
 <div class="vital"><div class="vital-value" id="vMAP">58</div><div class="vital-label">MAP</div></div>
 <div class="vital"><div class="vital-value" id="vLac">4.2</div><div class="vital-label">Lactate</div></div>
 <div class="vital"><div class="vital-value" id="vSOFA">8</div><div class="vital-label">SOFA</div></div>
-</div></div></div>
-
-<nav class="timeline-nav"><div class="timeline-inner">
-<div class="timeline-phase active" data-phase="1" onclick="goPhase(1)"><div class="phase-label">🚨 Recognition</div><div class="phase-time">Hour 0</div><div class="phase-status current" id="status1">Current</div></div>
-<div class="timeline-phase locked" data-phase="2" onclick="goPhase(2)"><div class="phase-label">💉 Resuscitation</div><div class="phase-time">Hours 1-3</div><div class="phase-status" id="status2">🔒</div></div>
-<div class="timeline-phase locked" data-phase="3" onclick="goPhase(3)"><div class="phase-label">🔬 Source Control</div><div class="phase-time">Hours 6-24</div><div class="phase-status" id="status3">🔒</div></div>
-<div class="timeline-phase locked" data-phase="4" onclick="goPhase(4)"><div class="phase-label">💚 Recovery</div><div class="phase-time">Days 3-7</div><div class="phase-status" id="status4">🔒</div></div>
-</div></nav>
-
+</div>
+</div>
+</div>
+<nav class="timeline-nav">
+<div class="timeline-inner">
+<div class="timeline-phase active" data-phase="1" onclick="goPhase(1)"><div class="phase-label">Phase 1</div><div class="phase-time">Recognition</div><div class="phase-status current" id="status1">Current</div></div>
+<div class="timeline-phase locked" data-phase="2" onclick="goPhase(2)"><div class="phase-label">Phase 2</div><div class="phase-time">Hour-1 Bundle</div><div class="phase-status" id="status2">🔒</div></div>
+<div class="timeline-phase locked" data-phase="3" onclick="goPhase(3)"><div class="phase-label">Phase 3</div><div class="phase-time">Septic Shock</div><div class="phase-status" id="status3">🔒</div></div>
+<div class="timeline-phase locked" data-phase="4" onclick="goPhase(4)"><div class="phase-label">Phase 4</div><div class="phase-time">Recovery</div><div class="phase-status" id="status4">🔒</div></div>
+</div>
+</nav>
 <div class="main-container">
-<aside class="case-panel"><div class="card"><div class="card-header"><h3 class="card-title">📋 Clinical Snapshot</h3></div><div class="card-content" id="caseContent"></div></div></aside>
+<aside class="case-panel">
+<div class="card">
+<div class="card-header"><div class="card-title">📋 Clinical Snapshot</div></div>
+<div class="card-content">
+<div class="case-narrative" id="caseNarrative">
+<strong>James Mitchell</strong>, 67, brought by family for <em>confusion and fever</em>. Has <strong>Foley catheter</strong> placed 5 days ago after urinary retention. History of T2DM (A1c 8.2) and BPH. Found lying on couch, <em>disoriented</em> and <em>"hot to touch"</em>.
+</div>
+<div class="data-section">
+<div class="data-label">Vitals</div>
+<div class="data-grid" id="vitalsGrid">
+<div class="data-item"><span>BP</span> <span class="abnormal">88/52</span></div>
+<div class="data-item"><span>HR</span> <span class="abnormal">112</span></div>
+<div class="data-item"><span>RR</span> <span class="abnormal">24</span></div>
+<div class="data-item"><span>Temp</span> <span class="abnormal">39.1°C</span></div>
+<div class="data-item"><span>SpO2</span> <span>94% RA</span></div>
+</div>
+</div>
+<div class="data-section">
+<div class="data-label">Exam</div>
+<div class="data-grid" id="examGrid">
+<div class="data-item"><span>Mental</span> <span class="abnormal">Confused</span></div>
+<div class="data-item"><span>Skin</span> <span class="abnormal">Warm, flushed</span></div>
+<div class="data-item"><span>CV</span> <span>Tachy, no murmur</span></div>
+<div class="data-item"><span>Abd</span> <span class="abnormal">Suprapubic TTP</span></div>
+<div class="data-item"><span>GU</span> <span class="abnormal">Cloudy urine</span></div>
+</div>
+</div>
+<div class="data-section">
+<div class="data-label">Labs</div>
+<div class="data-grid" id="labsGrid">
+<div class="data-item"><span>WBC</span> <span class="abnormal">18.2</span></div>
+<div class="data-item"><span>Lactate</span> <span class="abnormal">4.2</span></div>
+<div class="data-item"><span>Cr</span> <span class="abnormal">2.1 (bl 1.0)</span></div>
+<div class="data-item"><span>Plt</span> <span class="abnormal">98k</span></div>
+<div class="data-item"><span>INR</span> <span class="abnormal">1.4</span></div>
+<div class="data-item"><span>T.bili</span> <span>1.0</span></div>
+</div>
+</div>
+</div>
+</div>
+<div class="fp-mini">
+<div class="fp-title">🧬 Domain Fingerprint</div>
+<div class="domain-bars">
+<div class="domain-bar"><span class="domain-label">Mechanism</span><div class="domain-track"><div class="domain-fill mechanism" id="fpMech" style="width:0%"></div></div></div>
+<div class="domain-bar"><span class="domain-label">Pharm</span><div class="domain-track"><div class="domain-fill pharm" id="fpPharm" style="width:0%"></div></div></div>
+<div class="domain-bar"><span class="domain-label">Patho</span><div class="domain-track"><div class="domain-fill patho" id="fpPatho" style="width:0%"></div></div></div>
+<div class="domain-bar"><span class="domain-label">Micro</span><div class="domain-track"><div class="domain-fill micro" id="fpMicro" style="width:0%"></div></div></div>
+</div>
+</div>
+</aside>
 <main id="questionsPanel"></main>
 </div>
-
 <script>
-const answers={1:'c',2:'b',3:'a',4:'d',5:'b',6:'a',7:'c',8:'b',9:'a',10:'d',11:'b',12:'c',13:'a',14:'b',15:'c',16:'b',17:'a',18:'c',19:'b',20:'a'};
-const state={}; for(let i=1;i<=20;i++) state[i]={done:false,pick:null,conf:null,ok:false};
-let phase=1,done={1:false,2:false,3:false,4:false},open={1:true,2:false,3:false,4:false};
-const vitals={1:{map:'58',lac:'4.2',sofa:'8'},2:{map:'62',lac:'5.8',sofa:'10'},3:{map:'72',lac:'3.1',sofa:'7'},4:{map:'78',lac:'1.4',sofa:'3'}};
+var phase=1;
+var open={1:true,2:false,3:false,4:false};
+var done={1:false,2:false,3:false,4:false};
+var state={};for(var i=1;i<=20;i++)state[i]={pick:null,conf:null,done:false,ok:false};
+var fp={mechanism:{c:0,t:0},pharmacology:{c:0,t:0},pathophysiology:{c:0,t:0},microbiology:{c:0,t:0}};
 
-const cases={
-1:{text:'<strong>James Wilson</strong> presents with <strong>fever, confusion, and productive cough</strong> × 2 days. Wife says he\'s "not himself" — lethargic with <em>rigors</em>. "Looks gray."',vitals:[['Temp','102.8°F',1],['HR','118',1],['BP','88/52',2],['RR','28',1],['SpO2','89% RA',1],['MAP','58',2]],exam:[['Mental','Confused, GCS 13',1],['Lungs','RLL crackles',1],['Skin','Mottled, cool',1]],labs:[['WBC','18,400',1],['Lactate','4.2',2],['Cr','2.1',1],['Procal','12.4',1]]},
-2:{text:'<strong>Hour 1:</strong> Got <em>30 mL/kg crystalloid</em> + <strong>ceftriaxone/azithromycin</strong>. Cultures drawn. Despite 2L, BP <strong>84/48</strong>. Lactate <em>5.8</em>. Starting pressors.',vitals:[['Temp','103.2°F',1],['HR','124',1],['BP','84/48→92/58',1],['MAP','62 on NE',1],['CVP','14',0]],exam:[['Mental','GCS 11↓',1],['UOP','20 mL/hr',1],['Skin','Mottled',1]],labs:[['Lactate','5.8 (↑)',2],['Cr','2.4 (↑)',1],['pH','7.28',1],['HCO3','16',1]]},
-3:{text:'<strong>Hour 12:</strong> ICU on <em>NE 0.15</em>. CT: <strong>RLL pneumonia + 3cm abscess</strong>. Blood Cx: <em>S. pneumoniae</em> (pan-sensitive). Lactate <strong>3.1↓</strong>. Still vented.',vitals:[['Temp','100.8°F↓',3],['HR','102',1],['BP','98/62',0],['MAP','72',0]],exam:[['Mental','Sedated',0],['UOP','45 mL/hr↑',3],['Mottling','Resolved',3]],labs:[['Lactate','3.1↓',3],['Cr','2.0↓',3],['WBC','14.2K↓',3],['Procal','8.2↓',3]]},
-4:{text:'<strong>Day 5:</strong> Passed SBT. <em>Off pressors 48h</em>. Alert. Repeat cultures negative. Planning <strong>de-escalation</strong> and oral transition.',vitals:[['Temp','98.9°F',3],['HR','82',3],['BP','124/72',3],['MAP','78',3],['SpO2','96% 2L',3]],exam:[['Mental','Alert',3],['Lungs','Improving',3],['Strength','4/5',1]],labs:[['Lactate','1.4',3],['Cr','1.3↓',3],['WBC','9.8K',3],['Procal','0.8',3]]}
+var answers={1:'b',2:'a',3:'c',4:'b',5:'a',6:'b',7:'a',8:'b',9:'c',10:'c',11:'a',12:'b',13:'b',14:'c',15:'b',16:'b',17:'a',18:'c',19:'b',20:'a'};
+
+var vitals={
+1:{map:58,lac:4.2,sofa:8},
+2:{map:65,lac:3.8,sofa:7},
+3:{map:55,lac:5.6,sofa:10},
+4:{map:72,lac:1.8,sofa:4}
 };
 
-const intros={
-1:{title:'Phase 1: Sepsis Recognition',icon:'🚨',desc:'James presents with signs of sepsis. Rapidly recognize it, understand the pathophysiology, and initiate the Hour-1 Bundle.',obj:['Apply Sepsis-3 criteria (infection + SOFA ≥2)','Understand sepsis pathophysiology','Identify likely pathogen for CAP','Know Hour-1 Bundle antibiotics'],badge:true},
-2:{title:'Phase 2: Initial Resuscitation',icon:'💉',desc:'James is in septic shock despite fluids. Each hour delay increases mortality. Optimize resuscitation while avoiding overload.',obj:['Know vasopressor indications and choice','Interpret lactate as perfusion marker','Understand steroid indications','Recognize fluid overload risks']},
-3:{title:'Phase 3: Source Control & ICU',icon:'🔬',desc:'James is stabilizing. Source control and antimicrobial stewardship are essential. Narrow antibiotics based on cultures.',obj:['Understand source control urgency','De-escalate antibiotics appropriately','Manage sepsis-associated AKI','Apply lung-protective ventilation']},
-4:{title:'Phase 4: Recovery',icon:'💚',desc:'James is recovering. Safely de-escalate therapy, recognize post-sepsis syndrome, and plan safe discharge.',obj:['Determine antibiotic duration','Recognize ICU-acquired weakness','Understand post-sepsis syndrome','Plan vaccinations and follow-up']}
+var cases={
+1:{
+narrative:'<strong>James Mitchell</strong>, 67, brought by family for <em>confusion and fever</em>. Has <strong>Foley catheter</strong> placed 5 days ago after urinary retention. History of T2DM (A1c 8.2) and BPH. Found lying on couch, <em>disoriented</em> and <em>"hot to touch"</em>.',
+vitals:[['BP','88/52','abnormal'],['HR','112','abnormal'],['RR','24','abnormal'],['Temp','39.1°C','abnormal'],['SpO2','94% RA','']],
+exam:[['Mental','Confused','abnormal'],['Skin','Warm, flushed','abnormal'],['CV','Tachy, no murmur',''],['Abd','Suprapubic TTP','abnormal'],['GU','Cloudy urine','abnormal']],
+labs:[['WBC','18.2','abnormal'],['Lactate','4.2','abnormal'],['Cr','2.1 (bl 1.0)','abnormal'],['Plt','98k','abnormal'],['INR','1.4','abnormal'],['T.bili','1.0','']]
+},
+2:{
+narrative:'<strong>Hour-1 Bundle initiated.</strong> James received <em>30 mL/kg crystalloid</em> and <strong>broad-spectrum antibiotics</strong> started within 45 minutes. Blood cultures drawn. Lactate trending. Foley catheter in place producing cloudy, foul-smelling urine.',
+vitals:[['BP','92/58','abnormal'],['HR','104','abnormal'],['RR','22',''],['Temp','38.8°C','abnormal'],['SpO2','96% 2L NC','']],
+exam:[['Mental','More alert','improved'],['Skin','Less flushed','improved'],['CV','Tachy, no murmur',''],['Abd','Suprapubic TTP','abnormal'],['GU','Purulent urine','abnormal']],
+labs:[['WBC','16.8','abnormal'],['Lactate','3.8','abnormal'],['Cr','2.0','abnormal'],['Plt','102k','abnormal'],['Procalcitonin','8.4','abnormal'],['UA','+LE, +Nit, bact','abnormal']]
+},
+3:{
+narrative:'<strong>Despite fluids, James is hypotensive.</strong> MAP <55 after 3L crystalloid. Started on <em>norepinephrine</em>. Central line placed. Repeat lactate rising to 5.6. Meeting criteria for <strong>septic shock</strong>. Old Foley removed and new one placed.',
+vitals:[['BP','82/48 (MAP 59)','abnormal'],['HR','118','abnormal'],['RR','28','abnormal'],['Temp','38.2°C','abnormal'],['SpO2','94% 4L NC','abnormal']],
+exam:[['Mental','Somnolent','abnormal'],['Skin','Mottled extremities','abnormal'],['CV','Tachy, thready','abnormal'],['UOP','<0.5 mL/kg/hr','abnormal'],['CVP','12','']],
+labs:[['Lactate','5.6','abnormal'],['Cr','2.4','abnormal'],['ScvO2','58%','abnormal'],['pH','7.28','abnormal'],['HCO3','16','abnormal'],['Blood Cx','GNR pending','abnormal']]
+},
+4:{
+narrative:'<strong>Day 3: James improving.</strong> Norepinephrine weaned off. Cultures grew <em>E. coli</em> (pansensitive). De-escalated to ceftriaxone. Mental status back to baseline. Discussing antibiotic duration and discharge planning.',
+vitals:[['BP','118/72','improved'],['HR','82','improved'],['RR','16','improved'],['Temp','37.2°C','improved'],['SpO2','97% RA','improved']],
+exam:[['Mental','Alert, oriented','improved'],['Skin','Normal perfusion','improved'],['CV','RRR, no murmur','improved'],['Abd','Non-tender','improved'],['GU','Clear urine','improved']],
+labs:[['WBC','9.4','improved'],['Lactate','1.2','improved'],['Cr','1.3','improved'],['Plt','156k','improved'],['Procalcitonin','1.2 (↓)','improved'],['Blood Cx','E. coli (pansens)','abnormal']]
+}
+};
+var phases={
+1:{title:'Phase 1: Recognition',time:'ED Arrival',objectives:['Identify sepsis using Sepsis-3 criteria','Understand qSOFA screening','Recognize organ dysfunction','Initiate workup']},
+2:{title:'Phase 2: Hour-1 Bundle',time:'First Hour',objectives:['Execute Hour-1 bundle components','Select appropriate antibiotics','Understand fluid resuscitation','Monitor treatment response']},
+3:{title:'Phase 3: Septic Shock',time:'ICU Day 1',objectives:['Recognize septic shock criteria','Select vasopressors','Optimize hemodynamics','Consider adjunctive therapies']},
+4:{title:'Phase 4: Recovery',time:'Days 2-5',objectives:['De-escalate antibiotics','Determine duration of therapy','Prevent complications','Plan safe discharge']}
 };
 
-const Qs={
-1:{type:'Sepsis-3 Definition',ctx:'Fever, HR 118, RR 28, WBC 18.4K, AMS, BP 88/52, lactate 4.2, Cr 2.1',stem:'Based on <strong>Sepsis-3</strong>, which BEST identifies James as having sepsis?',opts:[['a','Meeting ≥2 SIRS criteria (fever, tachycardia, tachypnea, leukocytosis)'],['b','Positive blood cultures with fever'],['c','Suspected infection with acute organ dysfunction (SOFA ≥2)'],['d','Hypotension requiring vasopressors (that defines shock)']],exp:'<strong>Sepsis-3 (2016):</strong> Suspected infection + acute organ dysfunction (SOFA score ≥2). James has: pneumonia (infection) + AMS + hypotension + ↑Cr + ↑lactate (organ dysfunction). SIRS is sensitive but nonspecific. Hypotension requiring pressors = septic SHOCK.'},
-2:{type:'Lactate Pathophysiology',ctx:'Lactate 4.2, cool/mottled extremities despite fever.',stem:'What is the PRIMARY mechanism causing James\'s elevated lactate?',opts:[['a','Increased muscle activity from shivering'],['b','Tissue hypoperfusion → anaerobic metabolism'],['c','Liver failure preventing lactate clearance'],['d','Antibiotic-induced mitochondrial toxicity']],exp:'<strong>Tissue hypoperfusion → anaerobic metabolism.</strong> Sepsis cascade: inflammatory mediators → vasodilation + capillary leak → distributive shock → inadequate O₂ delivery → cells switch to anaerobic glycolysis → pyruvate converts to lactate. Lactate >4 mmol/L defines septic SHOCK.'},
-3:{type:'Hour-1 Bundle',ctx:'Septic shock identified. The clock starts NOW.',stem:'Which must be completed within the FIRST hour per Surviving Sepsis?',opts:[['a','Measure lactate, obtain blood cultures, give broad-spectrum antibiotics, start 30 mL/kg crystalloid'],['b','CT scan to identify source before antibiotics'],['c','Central line placement before any IV fluids'],['d','Wait for culture results to guide antibiotic choice']],exp:'<strong>Surviving Sepsis Hour-1 Bundle:</strong><br>✓ Measure lactate (repeat if >2)<br>✓ Blood cultures BEFORE antibiotics<br>✓ Broad-spectrum antibiotics ASAP<br>✓ 30 mL/kg crystalloid if hypotensive/lactate≥4<br>✓ Vasopressors if still hypotensive<br><br>Each hour of antibiotic delay increases mortality ~7%. Never delay for imaging!'},
-4:{type:'CAP Pathogen',ctx:'RLL crackles, lobar consolidation on CXR, rusty sputum, rigors.',stem:'What is the MOST likely pathogen causing James\'s pneumonia?',opts:[['a','Pseudomonas aeruginosa (hospital-acquired pathogen)'],['b','Mycoplasma pneumoniae (atypical, young adults)'],['c','Pneumocystis jirovecii (immunocompromised)'],['d','Streptococcus pneumoniae (pneumococcus)']],exp:'<strong>Streptococcus pneumoniae</strong> is the #1 cause of community-acquired pneumonia (CAP).<br><br>Classic features James has:<br>• Lobar consolidation (RLL)<br>• Rusty sputum<br>• Rapid onset with rigors<br>• Elderly with comorbidities (DM, COPD)<br>• Gram-positive diplococci<br><br>Pseudomonas = healthcare-associated. Mycoplasma = "walking pneumonia" in young adults. PJP = HIV/immunosuppressed.'},
-5:{type:'Empiric Antibiotics',ctx:'Severe CAP with septic shock. No MRSA or Pseudomonas risk factors.',stem:'What is the MOST appropriate empiric antibiotic regimen?',opts:[['a','Azithromycin alone (atypical coverage only)'],['b','Ceftriaxone + Azithromycin (β-lactam + macrolide)'],['c','Vancomycin + Piperacillin-tazobactam (broad Gram+/-)'],['d','Oral amoxicillin (outpatient therapy)']],exp:'<strong>β-lactam + macrolide</strong> for severe CAP per ATS/IDSA guidelines:<br><br>• <strong>Ceftriaxone</strong>: Covers S. pneumoniae, H. influenzae, Gram-negatives<br>• <strong>Azithromycin</strong>: Covers atypicals (Legionella, Mycoplasma, Chlamydia)<br><br>Alternative: Respiratory fluoroquinolone (levofloxacin/moxifloxacin) alone.<br><br>Don\'t need vanc/pip-tazo unless healthcare-associated or risk factors for resistant organisms.'},
-6:{type:'Fluid vs Vasopressor',ctx:'Got 30 mL/kg (2L), still MAP 58, CVP 14, lactate rose to 5.8.',stem:'What is the MOST appropriate next step?',opts:[['a','Start norepinephrine to target MAP ≥65 mmHg'],['b','Give another 2L crystalloid bolus'],['c','Start dobutamine for inotropy'],['d','Transfuse packed red blood cells']],exp:'<strong>Start vasopressors</strong> when hypotensive despite initial fluid resuscitation.<br><br>James has:<br>• Received guideline-recommended 30 mL/kg<br>• CVP 14 = adequate preload<br>• Lactate RISING = worsening perfusion<br><br>More fluid without response → harm (pulmonary edema, ARDS). <strong>Norepinephrine</strong> is first-line vasopressor. Target MAP ≥65 mmHg.'},
-7:{type:'Vasopressor Choice',ctx:'Starting vasopressors. Large-bore peripheral IV, no central line yet.',stem:'Which statement is CORRECT about vasopressor use in septic shock?',opts:[['a','Must wait for central venous catheter before any vasopressor'],['b','Dopamine is the preferred first-line agent'],['c','Norepinephrine can be started through a peripheral IV temporarily'],['d','Vasopressin should always be the first vasopressor']],exp:'<strong>Don\'t delay vasopressors for central access!</strong><br><br>• Norepinephrine CAN run through large-bore peripheral IV temporarily<br>• Extravasation risk is low with short-term peripheral use<br>• <strong>Norepinephrine > Dopamine</strong> (less arrhythmia, SOAP II trial)<br>• Vasopressin is added as SECOND agent if NE insufficient<br><br>Get central access when feasible, but don\'t let it delay treatment.'},
-8:{type:'Resuscitation Endpoint',ctx:'On NE 0.1 mcg/kg/min, MAP now 66. Assessing resuscitation adequacy.',stem:'What is the BEST indicator of improving tissue perfusion?',opts:[['a','CVP increased from 12 to 16 mmHg'],['b','Lactate decreased from 5.8 to 3.2 mmol/L'],['c','Heart rate increased from 110 to 125 bpm'],['d','Blood pressure increased to 140/90 mmHg']],exp:'<strong>Lactate clearance</strong> is the best marker of adequate resuscitation.<br><br>• Directly reflects tissue oxygen delivery and utilization<br>• Target: ≥10% decrease per 2-hour check<br>• Normalizing lactate = improving perfusion<br><br>CVP is NOT reliable for fluid responsiveness. Increasing HR may indicate WORSENING (compensation). BP can be "normal" with poor perfusion.'},
-9:{type:'Steroid Indication',ctx:'On NE 0.2 + vasopressin 0.03, MAP still only 62, escalating doses.',stem:'When is hydrocortisone indicated in septic shock?',opts:[['a','Shock refractory to adequate fluid resuscitation and vasopressor therapy'],['b','All patients with sepsis (routine use)'],['c','Only if random cortisol level <15 mcg/dL'],['d','Steroids worsen outcomes and should never be used']],exp:'<strong>Hydrocortisone 200 mg/day IV</strong> (50mg q6h or 200mg continuous) for:<br><br>• Septic shock refractory to fluids AND vasopressors<br>• May help wean vasopressors faster<br>• ADRENAL trial: faster shock reversal<br><br>Do NOT check random cortisol (unreliable in critical illness). NOT for all sepsis—only refractory shock. Usually 5-7 day course with taper.'},
-10:{type:'Avoiding Fluid Overload',ctx:'Received 4L total, SpO2 92% on 6L NC, new bilateral infiltrates, crackles.',stem:'Which strategy helps PREVENT fluid overload in sepsis resuscitation?',opts:[['a','Give standard 10 mL/kg boluses regardless of response'],['b','Target CVP >18 mmHg in all septic patients'],['c','Use only colloids instead of crystalloids'],['d','Reassess fluid responsiveness before each additional bolus']],exp:'<strong>Assess fluid responsiveness</strong> before giving more fluids!<br><br>Dynamic measures:<br>• Passive leg raise (PLR) test<br>• Pulse pressure variation (PPV) if on vent<br>• IVC collapsibility on ultrasound<br>• Small fluid challenge with response assessment<br><br>CVP is a POOR predictor. "Fluid responsive ≠ fluid required." Stop when not responsive or signs of overload.'},
-11:{type:'Source Control',ctx:'CT: RLL consolidation with 3cm abscess. Cultures: S. pneumoniae.',stem:'What is the MOST important next step for source control?',opts:[['a','Continue antibiotics alone and reimage in 2 weeks'],['b','Pulmonology/IR consult for possible drainage'],['c','Immediately switch to oral antibiotics'],['d','Add empiric antifungal coverage']],exp:'<strong>Source control is essential</strong>—antibiotics alone may not resolve abscesses.<br><br>• Lung abscess >2-3 cm often needs drainage<br>• Options: bronchoscopic drainage, CT-guided percutaneous, surgical<br>• Source control within 6-12 hours when feasible<br>• Small abscesses (<2 cm) may resolve with prolonged antibiotics<br><br>Every hour of delayed source control increases mortality in septic shock.'},
-12:{type:'Antibiotic De-escalation',ctx:'Cultures: pan-sensitive S. pneumoniae. On ceftriaxone + azithromycin × 48h, improving.',stem:'What is the MOST appropriate antibiotic adjustment?',opts:[['a','Continue both antibiotics for full 14-day course'],['b','Add vancomycin for better Gram-positive coverage'],['c','Narrow to ceftriaxone alone (discontinue azithromycin)'],['d','Switch immediately to oral amoxicillin']],exp:'<strong>De-escalate to narrowest effective spectrum</strong> once cultures return.<br><br>• Azithromycin was empiric for atypicals—STOP (not needed for pneumococcus)<br>• Ceftriaxone alone covers pan-sensitive S. pneumoniae excellently<br>• Benefits of de-escalation: ↓C. diff risk, ↓resistance selection, ↓cost<br><br>Not ready for oral yet (still ICU, recent intubation). Oral transition when: hemodynamically stable, afebrile, tolerating PO.'},
-13:{type:'Sepsis-Associated AKI',ctx:'Cr peaked 2.8 (baseline 1.0), was oliguric, now UOP 50 mL/hr, Cr 2.0.',stem:'Which statement is CORRECT about sepsis-associated AKI?',opts:[['a','Usually reversible with hemodynamic optimization and nephrotoxin avoidance'],['b','Requires urgent dialysis whenever creatinine exceeds 2.5'],['c','"Renal-dose" dopamine improves renal blood flow and prevents AKI'],['d','NSAIDs are safe since the kidneys are already damaged']],exp:'<strong>Sepsis-associated AKI is usually reversible</strong> with:<br><br>• Hemodynamic optimization (MAP ≥65)<br>• Avoiding nephrotoxins (NSAIDs, contrast, aminoglycosides)<br>• Volume management (avoid both hypovolemia and venous congestion)<br><br>"Renal-dose dopamine" is a MYTH—no benefit, may cause harm.<br><br>James is IMPROVING (↑UOP, ↓Cr)—no dialysis needed. Dialysis for: refractory hyperkalemia, severe acidosis, volume overload, uremic symptoms.'},
-14:{type:'ARDS Ventilation',ctx:'Developed ARDS: P/F ratio 120, on FiO₂ 60%, PEEP 12.',stem:'What is the recommended ventilation strategy for ARDS?',opts:[['a','High tidal volumes (12 mL/kg) to fully expand atelectatic lungs'],['b','Low tidal volume ventilation (6 mL/kg predicted body weight)'],['c','Minimize PEEP to reduce risk of barotrauma'],['d','Target SpO₂ 100% with high FiO₂']],exp:'<strong>Lung-protective ventilation</strong> for ARDS (ARDSNet protocol):<br><br>• Low Vt: <strong>6 mL/kg predicted body weight</strong> (NOT actual weight)<br>• Plateau pressure: <strong><30 cm H₂O</strong><br>• Adequate PEEP (use PEEP/FiO₂ tables)<br>• Target SpO₂: <strong>88-95%</strong> (permissive hypoxemia OK)<br>• Permissive hypercapnia if needed (pH ≥7.20)<br><br>ARDSNet showed <strong>22% relative mortality reduction</strong> with low Vt.'},
-15:{type:'Procalcitonin-Guided Therapy',ctx:'PCT was 12.4 on admission, now 4.2 on day 3 (↓66%), clinically improving.',stem:'How should procalcitonin (PCT) guide antibiotic duration?',opts:[['a','Continue antibiotics regardless of PCT until completing 14 days'],['b','PCT should never influence antibiotic decisions'],['c','PCT trending down (>80% decrease) supports considering shorter course'],['d','PCT still elevated at 4.2 means antibiotics are failing—escalate']],exp:'<strong>Procalcitonin-guided therapy</strong> can safely shorten antibiotic courses.<br><br>• PCT drops rapidly with effective treatment<br>• >80% decrease from peak OR <0.5 ng/mL = consider stopping<br>• Multiple RCTs show safe reduction in antibiotic duration<br>• Benefits: ↓antibiotic exposure, ↓resistance, ↓C. diff, ↓cost<br><br>Always combine with clinical assessment—PCT is a tool, not a mandate.'},
-16:{type:'Antibiotic Duration',ctx:'Day 5: off pressors, extubated, afebrile ×48h, PCT 0.8, small resolving abscess on repeat CT.',stem:'What is the MOST appropriate total antibiotic duration?',opts:[['a','5 days total (shortest possible)'],['b','7-10 days with transition to oral therapy'],['c','21 days IV minimum for any lung abscess'],['d','Continue until PCT is completely undetectable']],exp:'For <strong>CAP with small resolving abscess</strong>: 7-10 days total is appropriate.<br><br>Criteria for oral transition (James meets ALL):<br>• Hemodynamically stable<br>• Afebrile 24-48 hours<br>• Able to take PO<br>• Improving clinically<br>• Functioning GI tract<br><br>Oral options: amoxicillin-clavulanate or respiratory fluoroquinolone. Large/non-resolving abscesses may need 4-6 weeks.'},
-17:{type:'ICU-Acquired Weakness',ctx:'Awake but has 4/5 strength throughout. Was sedated and received paralytics × 2 days.',stem:'What is the MOST likely cause of James\'s weakness?',opts:[['a','ICU-acquired weakness (critical illness myopathy/polyneuropathy)'],['b','Acute stroke during ICU stay'],['c','Guillain-Barré syndrome'],['d','Malingering or poor effort']],exp:'<strong>ICU-acquired weakness (ICUAW)</strong> is extremely common after critical illness.<br><br>Risk factors James has:<br>• Sepsis/multi-organ dysfunction<br>• Mechanical ventilation<br>• Neuromuscular blocking agents<br>• Corticosteroids<br>• Immobility/bedrest<br>• Hyperglycemia<br><br>Prevention: Early mobilization, minimize sedation, avoid prolonged paralytics, glycemic control. Recovery takes weeks to months.'},
-18:{type:'Post-Sepsis Syndrome',ctx:'Before discharge: "Will I ever be the same?" Wife notes forgetfulness and easy fatigue.',stem:'What is CORRECT about post-sepsis syndrome?',opts:[['a','Most patients return to baseline within 2 weeks'],['b','Cognitive and physical impairments are rare (<10%)'],['c','Up to 50% have new cognitive, physical, or psychological impairments'],['d','It only affects elderly patients over 75']],exp:'<strong>Post-sepsis syndrome</strong> affects up to 50% of survivors:<br><br>• <strong>Cognitive:</strong> Memory problems, "brain fog," difficulty concentrating<br>• <strong>Physical:</strong> Weakness, fatigue, decreased exercise tolerance<br>• <strong>Psychological:</strong> Depression, anxiety, PTSD<br><br>Recovery is slow—often months, not weeks. Affects all ages. Requires follow-up, rehabilitation, and patient education. Major driver of long-term morbidity.'},
-19:{type:'Vaccination',ctx:'67 y/o with DM and COPD. Just recovered from pneumococcal pneumonia. Planning discharge.',stem:'What is the CORRECT vaccination recommendation?',opts:[['a','No pneumococcal vaccine needed—natural immunity from infection'],['b','Pneumococcal vaccination recommended before or shortly after discharge'],['c','Must wait at least 1 year after pneumonia to vaccinate'],['d','Only influenza vaccine needed, not pneumococcal']],exp:'<strong>Vaccinate!</strong> Infection with one serotype does NOT protect against all.<br><br>Pneumococcal vaccines:<br>• <strong>PCV20</strong> (Prevnar 20) alone, OR<br>• <strong>PCV15</strong> followed by <strong>PPSV23</strong><br><br>James qualifies due to: age ≥65, diabetes, COPD.<br><br>Also give: annual <strong>influenza vaccine</strong>.<br><br>S. pneumoniae has 90+ serotypes—natural infection provides limited cross-protection.'},
-20:{type:'Discharge Planning',ctx:'Ready for discharge: oral antibiotics, PT consult, 7-day follow-up scheduled.',stem:'Which element is MOST associated with reduced 30-day readmission after sepsis?',opts:[['a','Early follow-up (within 7 days) with clear return precautions'],['b','Prescribing broad-spectrum antibiotics "just in case"'],['c','Keeping patient hospitalized until fully recovered'],['d','Discharging without any scheduled follow-up']],exp:'<strong>Early follow-up within 7 days</strong> reduces 30-day readmission after sepsis.<br><br>Key discharge elements:<br>• Follow-up appointment within 7 days<br>• Medication reconciliation<br>• Clear "return precautions" (fever, worsening symptoms)<br>• PT/OT referral for deconditioning<br>• Vaccination before discharge<br><br>Sepsis survivors have ~20% 30-day readmission rate. Transitions of care are critical.'}
+var Qs={
+1:{type:'Sepsis-3 Definition',isNBME:false,domains:['pathophysiology'],tags:['Step2'],
+ctx:'James presents with suspected infection and altered mental status.',
+stem:'According to Sepsis-3, which criteria BEST defines sepsis?',
+opts:[['a','SIRS criteria plus suspected infection'],['b','Suspected infection with organ dysfunction (SOFA ≥2)'],['c','Positive blood cultures with hypotension'],['d','Temperature >38°C with tachycardia']],
+exp:'<strong>Sepsis-3 (2016):</strong> Sepsis = suspected/documented infection + acute organ dysfunction (SOFA score increase ≥2 points).',
+dd:{pathophysiology:{title:'Sepsis Definitions',content:'<div class="dd-section"><h4>Evolution of Sepsis Definitions</h4><table class="drug-table"><tr><th>Era</th><th>Definition</th><th>Criteria</th></tr><tr><td>Sepsis-1 (1991)</td><td>SIRS + infection</td><td>2+ of: T>38/&lt;36, HR>90, RR>20, WBC</td></tr><tr><td>Sepsis-2 (2001)</td><td>Expanded SIRS</td><td>Added markers, organ dysfunction</td></tr><tr><td><strong>Sepsis-3 (2016)</strong></td><td>Infection + organ dysfunction</td><td>SOFA ≥2</td></tr></table><h4>Why the Change?</h4><p>SIRS criteria were too sensitive (90% of ICU patients), not specific for sepsis mortality</p><h4>SOFA Score Components</h4><ul><li>Respiratory (PaO2/FiO2)</li><li>Coagulation (platelets)</li><li>Liver (bilirubin)</li><li>Cardiovascular (MAP, vasopressors)</li><li>CNS (GCS)</li><li>Renal (creatinine, UOP)</li></ul></div>',bw:['Sepsis-3','SOFA ≥2','Organ dysfunction']}},
+dist:{a:'SIRS criteria abandoned in Sepsis-3 - too nonspecific',c:'Blood cultures often negative in sepsis; hypotension defines shock',d:'These are SIRS criteria, not current sepsis definition'}},
+
+2:{type:'Lactate Pathophysiology',isNBME:true,domains:['mechanism','pathophysiology'],tags:['Step1','Step2'],
+vig:{demo:'67-year-old man with UTI and altered mental status',hpi:'Brought from nursing home with confusion. Foley catheter in place. Found to be hypotensive and tachycardic.',pmh:'Type 2 DM, BPH, prior stroke with mild residual weakness',meds:'Metformin, tamsulosin, aspirin',exam:{vitals:'BP 88/52, HR 112, RR 24, T 39.1°C',gen:'Confused, responds to voice',cv:'Tachycardic, regular, no murmurs',abd:'Suprapubic tenderness, cloudy urine in Foley bag'},labs:{wbc:'18,200/μL',lactate:'4.2 mmol/L (normal <2)',cr:'2.1 mg/dL (baseline 1.0)',glucose:'186 mg/dL'}},
+stem:'Which mechanism BEST explains this patient\'s elevated lactate?',
+opts:[['a','Tissue hypoperfusion causing anaerobic glycolysis'],['b','Metformin-induced mitochondrial toxicity'],['c','Hepatic failure reducing lactate clearance'],['d','Excessive muscular activity from shivering']],
+exp:'<strong>Type A lactic acidosis:</strong> Inadequate oxygen delivery → tissues shift to anaerobic metabolism → pyruvate converted to lactate instead of entering TCA cycle.',
+dd:{mechanism:{title:'Lactate Mechanism',content:'<div class="dd-section"><h4>Lactate Production Pathway</h4><div class="mech-pathway"><span class="mech-step">↓ O2 delivery</span><span class="mech-arrow">→</span><span class="mech-step">↓ Oxidative phosphorylation</span><span class="mech-arrow">→</span><span class="mech-step">↑ Anaerobic glycolysis</span><span class="mech-arrow">→</span><span class="mech-step">Pyruvate → Lactate</span></div><h4>Types of Lactic Acidosis</h4><table class="drug-table"><tr><th>Type</th><th>Cause</th><th>Examples</th></tr><tr><td><strong>Type A</strong></td><td>Hypoperfusion</td><td>Sepsis, shock, cardiac arrest</td></tr><tr><td>Type B1</td><td>Disease</td><td>Liver failure, malignancy</td></tr><tr><td>Type B2</td><td>Drugs</td><td>Metformin, NRTIs, linezolid</td></tr><tr><td>Type B3</td><td>Inborn errors</td><td>Mitochondrial disorders</td></tr></table><h4>Lactate Clearance</h4><p>Target: ≥10% decrease in 2-6 hours indicates adequate resuscitation</p></div>',bw:['Type A lactic acidosis','Anaerobic glycolysis','Lactate clearance']}},
+dist:{b:'Metformin-associated lactic acidosis is Type B2, requires higher levels and chronic use',c:'Liver function tests near normal; clearance issues cause slower rise',d:'Shivering causes mild elevation, not >4 mmol/L'}},
+
+3:{type:'qSOFA Screening',isNBME:false,domains:['pathophysiology'],tags:['Step2'],
+ctx:'ED triage nurse asks about quick sepsis screening.',
+stem:'Which bedside tool identifies patients at risk for poor outcomes outside the ICU?',
+opts:[['a','SIRS criteria'],['b','APACHE II score'],['c','qSOFA (quick SOFA)'],['d','NEWS score']],
+exp:'<strong>qSOFA</strong> (RR ≥22, SBP ≤100, altered mental status) - 2+ points identifies high-risk patients at bedside.',
+dd:{pathophysiology:{title:'qSOFA',content:'<div class="dd-section"><h4>qSOFA Components</h4><table class="drug-table"><tr><th>Criterion</th><th>Threshold</th><th>Points</th></tr><tr><td>Respiratory rate</td><td>≥22/min</td><td>1</td></tr><tr><td>Systolic BP</td><td>≤100 mmHg</td><td>1</td></tr><tr><td>Altered mental status</td><td>GCS <15</td><td>1</td></tr></table><h4>Interpretation</h4><p>≥2 points → high risk of poor outcome; prompts further evaluation</p><h4>Limitations</h4><ul><li>Lower sensitivity than SIRS</li><li>NOT a diagnostic tool</li><li>Prognostic, not for sepsis diagnosis</li><li>Use for patients OUTSIDE ICU</li></ul><p><strong>James has all 3:</strong> RR 24, SBP 88, confused = qSOFA 3</p></div>',bw:['qSOFA','RR ≥22, SBP ≤100, AMS','Prognostic tool']}},
+dist:{a:'SIRS abandoned - too sensitive, low specificity',b:'APACHE II requires ICU data, too complex for screening',d:'NEWS is early warning but not sepsis-specific'}},
+
+4:{type:'Initial Fluid Choice',isNBME:false,domains:['pharmacology'],tags:['Step2'],
+ctx:'James needs immediate fluid resuscitation.',
+stem:'Which is the FIRST-LINE fluid for sepsis resuscitation?',
+opts:[['a','5% albumin'],['b','Balanced crystalloid (LR or PlasmaLyte)'],['c','Normal saline'],['d','Hydroxyethyl starch (HES)']],
+exp:'<strong>Balanced crystalloids</strong> (LR, PlasmaLyte) preferred over NS to avoid hyperchloremic acidosis.',
+dd:{pharmacology:{title:'Fluid Selection',content:'<div class="dd-section"><h4>Crystalloid Comparison</h4><table class="drug-table"><tr><th>Fluid</th><th>Na</th><th>Cl</th><th>Buffer</th></tr><tr><td>Normal saline</td><td>154</td><td>154</td><td>None</td></tr><tr><td>Lactated Ringer</td><td>130</td><td>109</td><td>Lactate</td></tr><tr><td>PlasmaLyte</td><td>140</td><td>98</td><td>Acetate/gluconate</td></tr></table><h4>Key Trials</h4><p><strong>SMART trial:</strong> Balanced crystalloids reduced composite of death, new RRT, or persistent renal dysfunction vs NS</p><p><strong>SAFE trial:</strong> Albumin = saline for outcomes (but expensive)</p><h4>Avoid</h4><ul><li><strong>HES:</strong> Increased mortality and AKI in sepsis (VISEP, 6S, CHEST trials)</li><li><strong>Hypotonic solutions:</strong> D5W, 0.45% NS</li></ul></div>',bw:['Balanced crystalloid','SMART trial','Avoid HES']}},
+dist:{a:'Albumin non-inferior but expensive, not first-line',c:'NS causes hyperchloremic acidosis with large volumes',d:'HES increases mortality and AKI - CONTRAINDICATED in sepsis'}},
+
+5:{type:'Antibiotic Timing',isNBME:false,domains:['pharmacology','microbiology'],tags:['Step2'],
+ctx:'James diagnosed with sepsis. Cultures obtained.',
+stem:'What is the target for antibiotic administration in sepsis?',
+opts:[['a','Within 1 hour of sepsis recognition'],['b','Within 3 hours of ED arrival'],['c','After blood culture results return'],['d','Within 6 hours of admission']],
+exp:'<strong>Hour-1 Bundle:</strong> Antibiotics should be given within 1 hour. Each hour of delay increases mortality 7.6%.',
+dd:{pharmacology:{title:'Hour-1 Bundle',content:'<div class="dd-section"><h4>Surviving Sepsis Campaign Hour-1 Bundle</h4><ol><li><strong>Measure lactate</strong> (remeasure if >2)</li><li><strong>Obtain blood cultures</strong> before antibiotics</li><li><strong>Administer broad-spectrum antibiotics</strong></li><li><strong>Begin 30 mL/kg crystalloid</strong> for hypotension or lactate ≥4</li><li><strong>Vasopressors</strong> if hypotensive during/after fluids</li></ol><h4>Timing Matters</h4><p>Kumar et al: Each hour delay in antibiotics → <strong>7.6% increase in mortality</strong></p><h4>Practical Tips</h4><ul><li>Don\'t delay antibiotics for cultures if patient unstable</li><li>Broad-spectrum initially, narrow based on cultures</li><li>Cover likely pathogens based on source</li></ul></div>',bw:['Hour-1 bundle','7.6% mortality per hour','30 mL/kg crystalloid']},microbiology:{title:'Culture Timing',content:'<div class="dd-section"><h4>Blood Culture Strategy</h4><ul><li>Draw <strong>before</strong> antibiotics if possible</li><li>2 sets from 2 different sites</li><li>Do NOT delay antibiotics >45 min for cultures</li></ul><h4>Culture Yield</h4><p>Positive in only 30-40% of sepsis cases</p></div>',bw:['2 sets, 2 sites','Don\'t delay antibiotics']}},
+dist:{b:'3-hour bundle obsolete; now 1-hour target',c:'Never wait for cultures in sepsis',d:'6 hours far too long - increases mortality significantly'}},
+6:{type:'Empiric Antibiotic Selection',isNBME:true,domains:['pharmacology','microbiology'],tags:['Step2'],
+vig:{demo:'67-year-old man with sepsis from urinary source',hpi:'Foley catheter placed 5 days ago for urinary retention. Now presenting with confusion, fever, and hypotension. Cloudy, foul-smelling urine.',pmh:'Type 2 DM (A1c 8.2%), BPH, no recent hospitalizations or antibiotics',meds:'Metformin, tamsulosin',exam:{vitals:'BP 92/58, HR 104, T 38.8°C',gu:'Suprapubic tenderness, purulent urine in catheter'},labs:{ua:'3+ LE, positive nitrites, many bacteria',wbc:'16,800/μL',cr:'2.0 mg/dL',lactate:'3.8 mmol/L'}},
+stem:'Which empiric antibiotic regimen is MOST appropriate?',
+opts:[['a','Nitrofurantoin alone'],['b','Ceftriaxone plus vancomycin'],['c','Trimethoprim-sulfamethoxazole'],['d','Oral ciprofloxacin']],
+exp:'<strong>Broad-spectrum coverage</strong> for CAUTI-sepsis: Ceftriaxone (GNR coverage) + Vancomycin (empiric MRSA/Enterococcus until cultures).',
+dd:{pharmacology:{title:'Antibiotic Selection',content:'<div class="dd-section"><h4>Urosepsis Empiric Coverage</h4><table class="drug-table"><tr><th>Agent</th><th>Coverage</th><th>Notes</th></tr><tr><td>Ceftriaxone</td><td>GNR including E. coli</td><td>First-line for UTI-sepsis</td></tr><tr><td>Piperacillin-tazobactam</td><td>Broader GNR + Pseudomonas</td><td>If risk factors</td></tr><tr><td>Vancomycin</td><td>MRSA, Enterococcus</td><td>Add if catheter/recent abx</td></tr></table><h4>When to Cover Pseudomonas</h4><ul><li>Recent hospitalization</li><li>Recent antibiotics</li><li>Structural urinary abnormalities</li><li>Nursing home + catheter</li></ul><h4>IDSA Guidelines</h4><p>CAUTI → consider Enterococcus and resistant GNR</p></div>',bw:['Ceftriaxone + vancomycin','CAUTI coverage','De-escalate when cultures return']},microbiology:{title:'CAUTI Pathogens',content:'<div class="dd-section"><h4>Common CAUTI Organisms</h4><table class="drug-table"><tr><th>Organism</th><th>Frequency</th><th>Notes</th></tr><tr><td>E. coli</td><td>50-60%</td><td>Most common</td></tr><tr><td>Klebsiella</td><td>10-15%</td><td>ESBL risk</td></tr><tr><td>Enterococcus</td><td>10-15%</td><td>Catheter-associated</td></tr><tr><td>Pseudomonas</td><td>5-10%</td><td>Healthcare-associated</td></tr><tr><td>Candida</td><td>Variable</td><td>Long-term catheter</td></tr></table><h4>ESBL Risk Factors</h4><ul><li>Prior fluoroquinolone use</li><li>Recurrent UTIs</li><li>Healthcare exposure</li><li>Prior ESBL infection</li></ul></div>',bw:['E. coli most common','Enterococcus with catheter','ESBL risk factors']}},
+dist:{a:'Nitrofurantoin only for uncomplicated cystitis; no tissue penetration',c:'TMP-SMX resistance too high; oral inadequate for sepsis',d:'Oral inadequate for sepsis; FQ resistance increasing'}},
+
+7:{type:'Vasopressor Selection',isNBME:false,domains:['pharmacology','mechanism'],tags:['Step2'],
+ctx:'James remains hypotensive (MAP 58) despite 30 mL/kg fluids.',
+stem:'Which vasopressor is FIRST-LINE for septic shock?',
+opts:[['a','Norepinephrine'],['b','Dopamine'],['c','Phenylephrine'],['d','Epinephrine']],
+exp:'<strong>Norepinephrine</strong> is first-line: potent α1 agonist (vasoconstriction) with modest β1 (maintains cardiac output).',
+dd:{pharmacology:{title:'Vasopressor Comparison',content:'<div class="dd-section"><h4>Vasopressor Receptor Activity</h4><table class="drug-table"><tr><th>Drug</th><th>α1</th><th>β1</th><th>β2</th><th>Notes</th></tr><tr><td><strong>Norepinephrine</strong></td><td>+++</td><td>++</td><td>0</td><td>First-line</td></tr><tr><td>Vasopressin</td><td>V1</td><td>0</td><td>0</td><td>Second-line</td></tr><tr><td>Epinephrine</td><td>+++</td><td>+++</td><td>++</td><td>Refractory shock</td></tr><tr><td>Dopamine</td><td>++</td><td>+++</td><td>0</td><td>More arrhythmias</td></tr><tr><td>Phenylephrine</td><td>+++</td><td>0</td><td>0</td><td>Pure vasoconstrictor</td></tr></table><h4>Evidence</h4><p><strong>SOAP II trial:</strong> Norepinephrine vs dopamine → dopamine had more arrhythmias, no survival benefit</p><h4>Target MAP</h4><p>≥65 mmHg (individualize for chronic HTN)</p></div>',bw:['Norepinephrine first-line','MAP ≥65','SOAP II trial']},mechanism:{title:'Mechanism',content:'<div class="dd-section"><h4>Why Norepinephrine?</h4><div class="mech-pathway"><span class="mech-step">NE binds α1</span><span class="mech-arrow">→</span><span class="mech-step">Gq → IP3/DAG</span><span class="mech-arrow">→</span><span class="mech-step">↑ Ca²⁺</span><span class="mech-arrow">→</span><span class="mech-step">Vasoconstriction</span><span class="mech-arrow">→</span><span class="mech-step">↑ SVR → ↑ MAP</span></div><p>β1 effect maintains cardiac output without excessive tachycardia</p></div>',bw:['α1 > β1','Vasoconstriction','Maintains CO']}},
+dist:{b:'Dopamine causes more arrhythmias (SOAP II)',c:'Pure α - may decrease CO without β effect',d:'Reserved for refractory shock; more tachycardia/arrhythmias'}},
+
+8:{type:'Septic Shock Definition',isNBME:false,domains:['pathophysiology'],tags:['Step2'],
+ctx:'Despite 3L fluids, James needs norepinephrine to maintain MAP ≥65. Lactate 5.6.',
+stem:'Which combination defines septic shock per Sepsis-3?',
+opts:[['a','Sepsis + SBP <90 mmHg'],['b','Sepsis + vasopressor requirement + lactate >2 despite fluids'],['c','Sepsis + positive blood cultures'],['d','Sepsis + ICU admission']],
+exp:'<strong>Septic shock = Sepsis + vasopressor to maintain MAP ≥65 + lactate >2 mmol/L despite adequate fluid resuscitation.</strong>',
+dd:{pathophysiology:{title:'Septic Shock',content:'<div class="dd-section"><h4>Sepsis-3 Definition of Septic Shock</h4><p>Subset of sepsis with:</p><ol><li>Vasopressor requirement to maintain <strong>MAP ≥65</strong></li><li><strong>Lactate >2 mmol/L</strong></li><li>Despite adequate fluid resuscitation</li></ol><h4>Mortality</h4><p>Septic shock mortality: <strong>40%+</strong> (vs ~10% for sepsis without shock)</p><h4>James Meets Criteria</h4><ul><li>✓ Sepsis (infection + SOFA ≥2)</li><li>✓ Norepinephrine required for MAP</li><li>✓ Lactate 5.6 despite 3L fluids</li></ul></div>',bw:['Vasopressor + lactate >2','MAP ≥65 target','40% mortality']}},
+dist:{a:'SBP <90 was old Sepsis-2 criteria',c:'Blood cultures often negative in septic shock',d:'ICU admission not part of definition'}},
+
+9:{type:'Corticosteroid Indications',isNBME:false,domains:['pharmacology'],tags:['Step2'],
+ctx:'James on norepinephrine 0.25 mcg/kg/min, MAP hovering at 64.',
+stem:'When should stress-dose corticosteroids be considered in septic shock?',
+opts:[['a','All patients with septic shock'],['b','Only if adrenal insufficiency confirmed'],['c','Refractory shock despite adequate fluids and vasopressors'],['d','Never - steroids worsen outcomes in sepsis']],
+exp:'<strong>Hydrocortisone 200mg/day</strong> considered for refractory septic shock (persistent hypotension despite fluids + vasopressors).',
+dd:{pharmacology:{title:'Steroids in Sepsis',content:'<div class="dd-section"><h4>Guideline Recommendations</h4><p>Consider <strong>hydrocortisone 200mg IV daily</strong> (50mg q6h or infusion) if:</p><ul><li>Ongoing vasopressor requirement</li><li>Inadequate response to fluids + vasopressors</li></ul><h4>Key Trials</h4><table class="drug-table"><tr><th>Trial</th><th>Result</th></tr><tr><td>CORTICUS</td><td>Faster shock reversal, no mortality benefit</td></tr><tr><td>ADRENAL</td><td>No mortality benefit at 90 days</td></tr><tr><td>APROCCHSS</td><td>Mortality benefit with hydrocortisone + fludrocortisone</td></tr></table><h4>Practice</h4><p>Reasonable in refractory shock; may speed shock reversal even if no mortality benefit</p></div>',bw:['Hydrocortisone 200mg/day','Refractory shock','ADRENAL trial']}},
+dist:{a:'Not all patients - controversial mortality benefit',b:'Don\'t wait for ACTH stim test',d:'Wrong - steroids can help in refractory shock'}},
+
+10:{type:'ScvO2 Interpretation',isNBME:true,domains:['mechanism','pathophysiology'],tags:['Step1','Step2'],
+vig:{demo:'67-year-old man with septic shock in ICU',hpi:'On norepinephrine 0.3 mcg/kg/min. Central line placed. Repeat lactate 5.6 mmol/L.',pmh:'Type 2 DM, BPH',exam:{vitals:'MAP 62, HR 118, CVP 12 mmHg',ext:'Cool, mottled extremities'},labs:{hgb:'10.2 g/dL',scvo2:'58%',lactate:'5.6 mmol/L'}},
+stem:'Which mechanism BEST explains this patient\'s low ScvO2?',
+opts:[['a','Decreased arterial oxygen content'],['b','Excessive tissue oxygen delivery'],['c','Inadequate cardiac output relative to oxygen demand'],['d','Left-to-right cardiac shunt']],
+exp:'<strong>Low ScvO2 (<65-70%)</strong> indicates tissues extracting more O2 due to inadequate delivery relative to demand → suggests inadequate cardiac output.',
+dd:{mechanism:{title:'ScvO2 Physiology',content:'<div class="dd-section"><h4>Oxygen Delivery Equation</h4><div class="mech-pathway"><span class="mech-step">DO2 = CO × CaO2</span></div><p>CaO2 = (Hgb × 1.34 × SaO2) + (0.003 × PaO2)</p><h4>ScvO2 Interpretation</h4><table class="drug-table"><tr><th>ScvO2</th><th>Meaning</th><th>Cause</th></tr><tr><td><strong>&lt;65%</strong></td><td>↑ Extraction</td><td>Low CO, anemia, hypoxemia</td></tr><tr><td>65-75%</td><td>Normal</td><td>Balanced supply/demand</td></tr><tr><td>>75%</td><td>↓ Extraction</td><td>Mitochondrial dysfunction, shunting</td></tr></table><h4>In Septic Shock</h4><ul><li>Early: Low ScvO2 → inadequate delivery</li><li>Late: High ScvO2 → mitochondrial dysfunction (bad sign)</li></ul></div>',bw:['ScvO2 <65% = inadequate delivery','DO2 = CO × CaO2','High ScvO2 = mito dysfunction']},pathophysiology:{title:'Hemodynamic Goals',content:'<div class="dd-section"><h4>Rivers Early Goal-Directed Therapy</h4><p>Historical targets (EGDT):</p><ul><li>CVP 8-12</li><li>MAP ≥65</li><li>ScvO2 ≥70%</li><li>UOP ≥0.5 mL/kg/hr</li></ul><h4>Modern Approach</h4><p>ProCESS, ARISE, ProMISe trials: Protocolized EGDT not superior to usual care, but principles still guide resuscitation</p><h4>When ScvO2 Low</h4><ol><li>Optimize preload (fluids)</li><li>Transfuse if Hgb <7</li><li>Add inotrope (dobutamine) if CO inadequate</li></ol></div>',bw:['Target ScvO2 ≥70%','Consider inotrope if low']}},
+dist:{a:'SaO2 94%, so arterial O2 content adequate',b:'Low ScvO2 means INADEQUATE delivery, not excessive',d:'No evidence of congenital heart disease; shunts cause HIGH ScvO2'}},
+11:{type:'Source Control',isNBME:false,domains:['pathophysiology','microbiology'],tags:['Step2'],
+ctx:'James has been on antibiotics for 6 hours. Urine culture pending. Old Foley still in place.',
+stem:'What is the MOST important intervention for source control?',
+opts:[['a','Remove and replace the Foley catheter'],['b','Continue current antibiotics and observe'],['c','Order CT abdomen/pelvis'],['d','Consult urology for cystoscopy']],
+exp:'<strong>Source control</strong> is critical. Infected catheter should be <strong>removed and replaced</strong> (or removed entirely if possible).',
+dd:{pathophysiology:{title:'Source Control',content:'<div class="dd-section"><h4>Source Control Principles</h4><p>Antibiotics alone cannot cure infection if source persists:</p><ul><li><strong>Drain</strong> abscesses</li><li><strong>Remove</strong> infected devices</li><li><strong>Debride</strong> necrotic tissue</li><li><strong>Repair</strong> perforations</li></ul><h4>Timing</h4><p>Source control within <strong>6-12 hours</strong> when feasible</p><h4>CAUTI Specifics</h4><ul><li>Remove catheter if possible</li><li>If catheter needed, replace with new one</li><li>Biofilm on catheter harbors bacteria</li></ul></div>',bw:['Remove infected source','Within 6-12 hours','Biofilm on catheter']},microbiology:{title:'Biofilm',content:'<div class="dd-section"><h4>Catheter Biofilm</h4><p>Bacteria form biofilm on catheter surface:</p><ul><li>Protected from antibiotics</li><li>Protected from immune system</li><li>Continuous bacterial seeding</li></ul><p><strong>Only solution:</strong> Remove the device!</p></div>',bw:['Biofilm protection','Device removal essential']}},
+dist:{b:'Source control essential; antibiotics alone insufficient',c:'Source (catheter) already identified; CT not urgent',d:'Not indicated; catheter change is sufficient'}},
+
+12:{type:'Procalcitonin',isNBME:false,domains:['pathophysiology'],tags:['Step2'],
+ctx:'James Day 2. Procalcitonin (PCT) was 8.4 ng/mL on admission.',
+stem:'How should procalcitonin BEST guide antibiotic management?',
+opts:[['a','High PCT confirms bacterial infection'],['b','Serial PCT decline guides antibiotic discontinuation'],['c','Low PCT excludes sepsis'],['d','PCT level determines antibiotic choice']],
+exp:'<strong>Serial procalcitonin trending</strong> can guide antibiotic de-escalation and discontinuation in sepsis.',
+dd:{pathophysiology:{title:'Procalcitonin',content:'<div class="dd-section"><h4>PCT in Sepsis</h4><table class="drug-table"><tr><th>PCT Level</th><th>Interpretation</th></tr><tr><td>&lt;0.25</td><td>Bacterial infection unlikely</td></tr><tr><td>0.25-0.5</td><td>Possible; clinical judgment</td></tr><tr><td>0.5-2.0</td><td>Likely bacterial</td></tr><tr><td>>2.0</td><td>High probability sepsis</td></tr></table><h4>Trending Value</h4><p>More useful than single value:</p><ul><li>↓ by 80% or to <0.5 → consider stopping antibiotics</li><li>Rising PCT → treatment failure, new infection</li></ul><h4>Key Trials</h4><p><strong>PRORATA, SAPS:</strong> PCT-guided therapy safely reduced antibiotic duration without increased mortality</p></div>',bw:['PCT trending > single value','↓80% suggests response','PRORATA trial']}},
+dist:{a:'PCT elevated in some non-bacterial conditions (trauma, surgery)',c:'Low PCT reduces probability but doesn\'t exclude',d:'PCT doesn\'t guide antibiotic selection, only duration'}},
+
+13:{type:'Antibiotic Duration',isNBME:false,domains:['pharmacology','microbiology'],tags:['Step2'],
+ctx:'James improving Day 4. E. coli pansensitive. De-escalated to ceftriaxone.',
+stem:'What is the recommended antibiotic duration for uncomplicated bacteremic UTI/pyelonephritis?',
+opts:[['a','3-5 days'],['b','7-10 days'],['c','14-21 days'],['d','Until PCT normalizes']],
+exp:'<strong>7-10 days</strong> is standard for bacteremic UTI with good source control. Longer courses not beneficial.',
+dd:{pharmacology:{title:'Antibiotic Duration',content:'<div class="dd-section"><h4>Duration by Infection</h4><table class="drug-table"><tr><th>Infection</th><th>Duration</th><th>Notes</th></tr><tr><td>Simple cystitis</td><td>3-5 days</td><td>Women only</td></tr><tr><td>Pyelonephritis</td><td>7-10 days</td><td>Can be shorter with FQ</td></tr><tr><td>Bacteremic UTI</td><td>7-10 days</td><td>Source control essential</td></tr><tr><td>Complicated UTI</td><td>10-14 days</td><td>Abscess, obstruction</td></tr></table><h4>Evidence for Shorter Courses</h4><ul><li>Sepsis in general: 7-8 days often sufficient (ProACT trial)</li><li>Longer courses ↑ resistance, C. diff, side effects</li></ul></div>',bw:['7-10 days for bacteremic UTI','Shorter courses non-inferior','Source control key']},microbiology:{title:'De-escalation',content:'<div class="dd-section"><h4>De-escalation Strategy</h4><ol><li>Start broad (empiric)</li><li>Get cultures</li><li>Narrow based on susceptibilities (24-72h)</li></ol><p><strong>James:</strong> E. coli pansensitive → ceftriaxone alone sufficient</p></div>',bw:['Culture-directed therapy','Narrow spectrum when possible']}},
+dist:{a:'Too short for bacteremia',c:'Too long; increases resistance and C. diff risk',d:'PCT is adjunct, not sole determinant of duration'}},
+
+14:{type:'Vasopressor Weaning',isNBME:false,domains:['pharmacology'],tags:['Step2'],
+ctx:'James Day 3. MAP stable at 72 on low-dose norepinephrine. Lactate normalized.',
+stem:'Which parameter is MOST important to follow when weaning vasopressors?',
+opts:[['a','Heart rate'],['b','Central venous pressure'],['c','Mean arterial pressure and perfusion markers'],['d','Pulmonary capillary wedge pressure']],
+exp:'<strong>MAP and perfusion markers</strong> (lactate, UOP, mental status) guide vasopressor weaning.',
+dd:{pharmacology:{title:'Vasopressor Weaning',content:'<div class="dd-section"><h4>Weaning Approach</h4><ol><li>Ensure infection controlled</li><li>Adequate volume status</li><li>Wean slowly (decrease by 0.02-0.05 mcg/kg/min)</li><li>Monitor MAP, UOP, lactate, mental status</li></ol><h4>Targets During Weaning</h4><ul><li>MAP ≥65 (or patient baseline)</li><li>Lactate normalizing</li><li>UOP >0.5 mL/kg/hr</li><li>Clear mentation</li></ul><h4>If MAP Drops</h4><ul><li>Consider volume status</li><li>Look for new infection source</li><li>Adrenal insufficiency?</li></ul></div>',bw:['MAP + perfusion markers','Wean slowly','UOP, lactate, mental status']}},
+dist:{a:'HR can be normal with poor perfusion',b:'CVP not reliable perfusion marker',d:'PCWP requires PA catheter; not routinely used'}},
+
+15:{type:'Stress Ulcer Prophylaxis',isNBME:false,domains:['pharmacology'],tags:['Step2'],
+ctx:'James intubated, on vasopressor. Evaluating stress ulcer prophylaxis.',
+stem:'Which is the preferred agent for stress ulcer prophylaxis in ICU?',
+opts:[['a','Sucralfate'],['b','Proton pump inhibitor'],['c','H2 blocker'],['d','Antacid']],
+exp:'<strong>PPIs</strong> are generally preferred over H2 blockers for stress ulcer prophylaxis; similar efficacy with convenient dosing.',
+dd:{pharmacology:{title:'Stress Ulcer Prophylaxis',content:'<div class="dd-section"><h4>Indications for SUP</h4><ul><li>Mechanical ventilation >48h</li><li>Coagulopathy</li><li>Prior GI bleeding</li><li>2+ minor risk factors</li></ul><h4>Agent Comparison</h4><table class="drug-table"><tr><th>Agent</th><th>Pros</th><th>Cons</th></tr><tr><td>PPI</td><td>Once daily, effective</td><td>C. diff, pneumonia risk</td></tr><tr><td>H2 blocker</td><td>Less C. diff</td><td>Tachyphylaxis, BID dosing</td></tr><tr><td>Sucralfate</td><td>No pH change</td><td>Drug interactions, QID</td></tr></table><h4>SUP-ICU Trial</h4><p>Pantoprazole vs placebo: No mortality difference but ↓ GI bleeding in PPI group</p></div>',bw:['PPI or H2 blocker','Ventilator + coagulopathy','SUP-ICU trial']}},
+dist:{a:'Inconvenient dosing; drug interactions',c:'H2 blockers acceptable but tachyphylaxis develops',d:'Antacids require frequent dosing, impractical'}},
+16:{type:'DVT Prophylaxis',isNBME:false,domains:['pharmacology'],tags:['Step2'],
+ctx:'James Day 3, improving but still in ICU.',
+stem:'Which DVT prophylaxis is appropriate for James?',
+opts:[['a','No prophylaxis needed'],['b','Low-molecular-weight heparin or UFH'],['c','Warfarin'],['d','Aspirin alone']],
+exp:'<strong>Pharmacologic VTE prophylaxis</strong> (LMWH or UFH) recommended for sepsis patients without contraindications.',
+dd:{pharmacology:{title:'VTE Prophylaxis in Sepsis',content:'<div class="dd-section"><h4>Sepsis = VTE Risk</h4><p>Multiple risk factors:</p><ul><li>Immobility</li><li>Central venous catheters</li><li>Inflammation/hypercoagulable state</li><li>Dehydration</li></ul><h4>Recommendations</h4><table class="drug-table"><tr><th>Agent</th><th>Dose</th><th>Notes</th></tr><tr><td>Enoxaparin</td><td>40mg SC daily</td><td>Preferred if CrCl >30</td></tr><tr><td>UFH</td><td>5000U SC q8-12h</td><td>Renal impairment</td></tr><tr><td>Fondaparinux</td><td>2.5mg SC daily</td><td>HIT history</td></tr></table><h4>Contraindications</h4><ul><li>Active bleeding</li><li>Severe thrombocytopenia (<50k)</li><li>Recent neurosurgery</li></ul><p>If contraindicated: mechanical prophylaxis (SCDs)</p></div>',bw:['LMWH or UFH','SCDs if bleeding risk','Sepsis = hypercoagulable']}},
+dist:{a:'All ICU patients need VTE prophylaxis unless contraindicated',c:'Warfarin not for prophylaxis; requires monitoring',d:'Aspirin inadequate for VTE prevention in hospitalized patients'}},
+
+17:{type:'ICU Glucose Control',isNBME:false,domains:['pharmacology'],tags:['Step2'],
+ctx:'James glucose 186. Has T2DM. On insulin drip.',
+stem:'What is the target blood glucose range in ICU patients with sepsis?',
+opts:[['a','140-180 mg/dL'],['b','80-110 mg/dL (tight control)'],['c','180-220 mg/dL'],['d','No glucose target needed']],
+exp:'<strong>Target 140-180 mg/dL.</strong> Tight control (80-110) increases hypoglycemia without mortality benefit.',
+dd:{pharmacology:{title:'Glucose Control in ICU',content:'<div class="dd-section"><h4>Evolution of Glucose Targets</h4><table class="drug-table"><tr><th>Era</th><th>Target</th><th>Evidence</th></tr><tr><td>Pre-2001</td><td>Liberal</td><td>No data</td></tr><tr><td>Van den Berghe</td><td>80-110</td><td>↓ Mortality (single center)</td></tr><tr><td><strong>NICE-SUGAR</strong></td><td>140-180</td><td>Tight control ↑ mortality</td></tr></table><h4>NICE-SUGAR Trial</h4><p>Tight control (81-108) vs conventional (140-180):</p><ul><li>↑ Mortality in tight control</li><li>↑ Hypoglycemia (6.8% vs 0.5%)</li></ul><h4>Current SSC Recommendation</h4><p>Start insulin when glucose >180; target ≤180 (avoid <140)</p></div>',bw:['Target 140-180','NICE-SUGAR trial','Avoid tight control']}},
+dist:{b:'NICE-SUGAR showed tight control increases mortality',c:'Higher than recommended; hyperglycemia harmful',d:'Uncontrolled hyperglycemia worsens outcomes'}},
+
+18:{type:'Lactate Clearance',isNBME:false,domains:['mechanism','pathophysiology'],tags:['Step2'],
+ctx:'James lactate 4.2→3.8→2.4→1.2 over 48 hours.',
+stem:'What does lactate clearance indicate?',
+opts:[['a','Antibiotic effectiveness'],['b','Renal function improvement'],['c','Adequate tissue perfusion and resuscitation'],['d','Resolution of acidosis only']],
+exp:'<strong>Lactate clearance</strong> (≥10% in 2-6 hours) indicates adequate resuscitation and tissue perfusion.',
+dd:{mechanism:{title:'Lactate Clearance',content:'<div class="dd-section"><h4>Why Lactate Clears</h4><div class="mech-pathway"><span class="mech-step">↑ O2 delivery</span><span class="mech-arrow">→</span><span class="mech-step">↑ Aerobic metabolism</span><span class="mech-arrow">→</span><span class="mech-step">↓ Lactate production</span><span class="mech-arrow">+</span><span class="mech-step">Hepatic clearance</span></div><h4>Clearance as Resuscitation Target</h4><table class="drug-table"><tr><th>Target</th><th>Evidence</th></tr><tr><td>≥10% clearance in 2-6h</td><td>Reduced mortality</td></tr><tr><td>Normalize within 24h</td><td>Good prognostic sign</td></tr></table><h4>If Lactate Not Clearing</h4><ul><li>Ongoing hypoperfusion</li><li>Inadequate source control</li><li>Mitochondrial dysfunction</li><li>Hepatic impairment</li></ul></div>',bw:['≥10% clearance target','Resuscitation adequacy','Prognostic marker']},pathophysiology:{title:'Prognostic Value',content:'<div class="dd-section"><h4>Lactate as Prognostic Marker</h4><ul><li>Initial lactate correlates with mortality</li><li>Failure to clear = worse prognosis</li><li>Serial trending > single value</li></ul><p><strong>James:</strong> 4.2→1.2 over 48h = excellent clearance = good prognosis</p></div>',bw:['Serial trending','Clearance = good prognosis']}},
+dist:{a:'Lactate reflects perfusion, not antibiotic action directly',b:'Liver clears lactate, not kidneys',d:'Represents tissue oxygenation, not just acid-base'}},
+
+19:{type:'Post-Sepsis Syndrome',isNBME:false,domains:['pathophysiology'],tags:['Step2'],
+ctx:'James Day 5, ready for discharge. Appears fatigued.',
+stem:'Which complication should be discussed with James about post-sepsis recovery?',
+opts:[['a','Permanent renal failure'],['b','Cognitive impairment and prolonged weakness'],['c','Guaranteed recurrent sepsis'],['d','Need for lifelong antibiotics']],
+exp:'<strong>Post-sepsis syndrome:</strong> Many survivors experience prolonged physical, cognitive, and psychological effects.',
+dd:{pathophysiology:{title:'Post-Sepsis Syndrome',content:'<div class="dd-section"><h4>Post-Sepsis Complications</h4><table class="drug-table"><tr><th>Domain</th><th>Manifestations</th><th>Duration</th></tr><tr><td>Physical</td><td>Weakness, fatigue, falls</td><td>Months-years</td></tr><tr><td>Cognitive</td><td>Memory, concentration, executive function</td><td>Variable</td></tr><tr><td>Psychological</td><td>PTSD, anxiety, depression</td><td>Common</td></tr></table><h4>Statistics</h4><ul><li>40% of survivors have cognitive impairment at 1 year</li><li>60% rehospitalized within 1 year</li><li>↑ Mortality for years after sepsis</li></ul><h4>Discharge Planning</h4><ul><li>Educate patient and family</li><li>Rehabilitation referral if needed</li><li>Close follow-up</li><li>Monitor for depression</li></ul></div>',bw:['Post-sepsis syndrome','Cognitive + physical + psychological','40% cognitive impairment']}},
+dist:{a:'Most AKI from sepsis recovers',c:'Risk is increased but not guaranteed',d:'Antibiotics completed; not lifelong'}},
+
+20:{type:'Readmission Prevention',isNBME:false,domains:['pathophysiology'],tags:['Step2'],
+ctx:'James being discharged. Family asks how to prevent recurrence.',
+stem:'Which is the MOST important modifiable factor to prevent sepsis recurrence?',
+opts:[['a','Vaccination and hygiene/catheter care'],['b','Prophylactic antibiotics'],['c','Daily temperature monitoring'],['d','Avoiding all hospital contact']],
+exp:'<strong>Vaccination</strong> (flu, pneumococcal, COVID) and <strong>proper hygiene/catheter care</strong> are key modifiable factors.',
+dd:{pathophysiology:{title:'Sepsis Prevention',content:'<div class="dd-section"><h4>Modifiable Risk Factors</h4><table class="drug-table"><tr><th>Factor</th><th>Intervention</th></tr><tr><td>Infections</td><td>Vaccinations (flu, pneumococcal, COVID)</td></tr><tr><td>Devices</td><td>Remove unnecessary catheters ASAP</td></tr><tr><td>Diabetes</td><td>Glycemic control</td></tr><tr><td>Hygiene</td><td>Handwashing, wound care</td></tr></table><h4>For James Specifically</h4><ul><li>Discuss intermittent cath vs indwelling</li><li>Diabetes control (A1c 8.2 → target <7)</li><li>Vaccinations up to date</li><li>Educate on early sepsis signs</li></ul><h4>Recognition Education</h4><p>Teach patients/families: fever, confusion, rapid breathing, skin changes → seek care immediately</p></div>',bw:['Vaccination key','Remove catheters early','Diabetes control']}},
+dist:{b:'Prophylactic antibiotics cause resistance, not recommended',c:'Temperature monitoring doesn\'t prevent sepsis',d:'Avoiding care can delay treatment of other conditions'}}
 };
+-weight:400;margin-left:8px">'+ph.time+'</span></h2><p>Questions '+(getQs(p)[0])+'-'+(getQs(p)[4])+' of 20</p><div class="learning-box"><div class="learning-title">Learning Objectives</div><ul class="learning-list">';
+ph.objectives.forEach(function(o){h+='<li>'+o+'</li>'});h+='</ul></div></div>';
+var qs=getQs(p);
+qs.forEach(function(qn){
+var q=Qs[qn];var s=state[qn];
+h+='<div class="quiz-card '+(q.isNBME?'nbme':'')+'">';
+h+='<div class="quiz-header"><div class="quiz-number"><span class="quiz-num '+(q.isNBME?'nbme':'')+'">'+qn+'</span><span class="quiz-type">'+q.type+(q.isNBME?' • NBME Style':'')+'</span></div><div class="quiz-tags">';
+if(q.domains)q.domains.forEach(function(d){h+='<span class="quiz-tag '+d+'">'+d.charAt(0).toUpperCase()+d.slice(1)+'</span>'});
+if(q.tags)q.tags.forEach(function(t){h+='<span class="quiz-tag '+t.toLowerCase()+'">'+t+'</span>'});
+h+='</div><span class="quiz-status '+(s.done?(s.ok?'correct':'incorrect'):'')+'" id="st'+qn+'">'+(s.done?(s.ok?'✓':'✗'):'—')+'</span></div>';
+if(q.vig){
+h+='<div class="nbme-vignette"><div class="vig-demo">'+q.vig.demo+'</div>';
+h+='<div class="vig-section"><span class="vig-label">HPI:</span> '+q.vig.hpi+'</div>';
+if(q.vig.pmh)h+='<div class="vig-section"><span class="vig-label">PMH:</span> '+q.vig.pmh+'</div>';
+if(q.vig.meds)h+='<div class="vig-section"><span class="vig-label">Meds:</span> '+q.vig.meds+'</div>';
+if(q.vig.exam){h+='<div class="vig-section"><span class="vig-label">Exam:</span>';for(var k in q.vig.exam)h+=' '+k+': '+q.vig.exam[k]+'.';h+='</div>'}
+if(q.vig.labs){h+='<div class="vig-section"><span class="vig-label">Labs:</span><div class="vig-labs">';for(var k in q.vig.labs){var val=q.vig.labs[k];var isAbn=val.includes('↑')||val.includes('↓')||val.includes('>')||val.includes('<')||(parseFloat(val)>0&&k!='glucose');h+='<span class="vig-lab">'+k+': <span class="'+(isAbn?'abnormal':'')+'">'+val+'</span></span>'}h+='</div></div>'}
+h+='</div>';}
+else if(q.ctx)h+='<div class="quiz-context"><div class="context-label">📍 Context</div><div class="context-text">'+q.ctx+'</div></div>';
+h+='<div class="quiz-body"><div class="quiz-stem">'+q.stem+'</div><div class="quiz-options" id="opts'+qn+'">';
+q.opts.forEach(function(opt){var cls=s.done?'disabled':'';if(s.done&&opt[0]===answers[qn])cls+=' correct';if(s.done&&opt[0]===s.pick&&!s.ok)cls+=' incorrect';h+='<div class="quiz-option '+cls+'" data-a="'+opt[0]+'" onclick="pick('+qn+',this)"><span class="option-letter">'+opt[0].toUpperCase()+'</span><span class="option-text">'+opt[1]+'</span></div>'});
+h+='</div></div>';
+h+='<div class="confidence-section" id="conf'+qn+'" '+(s.done?'style="display:none"':'')+'><div class="confidence-label"><span>Confidence?</span><span id="confVal'+qn+'">Select</span></div><div class="confidence-btns"><button class="conf-btn" onclick="setConf('+qn+',\'low\',this)">Guessing</button><button class="conf-btn" onclick="setConf('+qn+',\'med\',this)">Somewhat</button><button class="conf-btn" onclick="setConf('+qn+',\'high\',this)">Confident</button></div></div>';
+h+='<button class="submit-btn" id="sub'+qn+'" onclick="submit('+qn+')" disabled '+(s.done?'style="display:none"':'')+'>Submit Answer</button>';
+h+='<div class="explanation '+(s.done?(s.ok?'visible correct':'visible incorrect'):'')+'" id="exp'+qn+'"><div class="explanation-title">'+(s.done?(s.ok?'✓ Correct!':'✗ Incorrect'):'')+'</div><div class="explanation-text">'+q.exp+'</div>';
+if(q.dd){
+h+='<div class="deep-dive"><button class="dd-toggle" onclick="toggleDD(this)">📚 Deep Dive <span>▼</span></button><div class="dd-content"><div class="dd-tabs">';
+var tabs=Object.keys(q.dd);tabs.forEach(function(t,i){h+='<button class="dd-tab '+(i===0?'active':'')+'" onclick="switchTab(this,\''+qn+t+'\')">'+q.dd[t].title+'</button>'});
+h+='</div>';
+tabs.forEach(function(t,i){h+='<div class="dd-panel '+(i===0?'active':'')+'" id="'+qn+t+'">'+q.dd[t].content;
+if(q.dd[t].bw){h+='<div class="buzzwords"><div class="bw-title">🔑 Buzzwords</div><div class="bw-list">';q.dd[t].bw.forEach(function(b){h+='<span class="bw-item">'+b+'</span>'});h+='</div></div>'}
+h+='</div>'});
+h+='</div></div>';}
+if(q.dist&&s.done){h+='<div class="distractor-section"><div class="dist-title">Why Other Answers Are Wrong</div>';for(var d in q.dist)h+='<div class="dist-item"><span class="dist-letter">'+d.toUpperCase()+':</span> '+q.dist[d]+'</div>';h+='</div>'}
+h+='</div></div>'});
+h+='<div class="phase-summary" id="summary"><div class="summary-header"><div class="summary-title">Phase '+p+' Complete! 🎉</div><div class="summary-score" id="score">0/5</div></div><div class="summary-stats"><div class="stat-box"><div class="stat-value" id="corrCt">0</div><div class="stat-label">Correct</div></div><div class="stat-box"><div class="stat-value" id="avgConf">—</div><div class="stat-label">Avg Confidence</div></div><div class="stat-box"><div class="stat-value">+50</div><div class="stat-label">XP Earned</div></div></div><div class="fp-summary"><div class="fp-summary-title">🧬 Domain Performance</div><div class="fp-domains" id="phaseFP"></div></div>';
+if(p<4)h+='<button class="next-btn" onclick="unlock('+(p+1)+')">Continue to Phase '+(p+1)+' →</button>';
+else h+='<p style="text-align:center;margin-top:12px;color:#22c55e;font-weight:600">🎓 Module Complete!</p><a href="index.html" class="next-btn" style="margin-top:12px">Back to Modules</a>';
+h+='</div>';
+document.getElementById('questionsPanel').innerHTML=h}
 
-function updateVitals(p){const v=vitals[p];document.getElementById('vMAP').textContent=v.map;document.getElementById('vLac').textContent=v.lac;document.getElementById('vSOFA').textContent=v.sofa;}
-
-function renderCase(p){const c=cases[p];let h=`<div class="case-narrative">${c.text}</div>`;
-h+=`<div class="data-section"><div class="data-label">Vitals</div><div class="data-grid">`;
-c.vitals.forEach(v=>h+=`<div class="data-item"><span>${v[0]}:</span> <span class="${v[2]===1?'abnormal':v[2]===2?'critical':v[2]===3?'improved':''}">${v[1]}</span></div>`);
-h+=`</div></div><div class="data-section"><div class="data-label">Exam</div><div class="data-grid">`;
-c.exam.forEach(e=>h+=`<div class="data-item"><span>${e[0]}:</span> <span class="${e[2]===1?'abnormal':e[2]===3?'improved':''}">${e[1]}</span></div>`);
-h+=`</div></div><div class="data-section"><div class="data-label">Labs</div><div class="data-grid">`;
-c.labs.forEach(l=>h+=`<div class="data-item"><span>${l[0]}:</span> <span class="${l[2]===1?'abnormal':l[2]===2?'critical':l[2]===3?'improved':''}">${l[1]}</span></div>`);
-h+=`</div></div>`;document.getElementById('caseContent').innerHTML=h;}
-
-function getQs(p){const s=(p-1)*5+1;return[s,s+1,s+2,s+3,s+4];}
-
-function renderQuestions(p){const intro=intros[p];const qs=getQs(p);
-let h=`<div class="phase-intro"><h2>${intro.icon} ${intro.title}</h2>`;
-if(intro.badge)h+=`<div class="hour-badge">⏱️ HOUR-1 BUNDLE — EVERY MINUTE COUNTS</div>`;
-h+=`<p>${intro.desc}</p><div class="learning-box"><div class="learning-title">🎯 Learning Objectives</div><ul class="learning-list">`;
-intro.obj.forEach(o=>h+=`<li>${o}</li>`);h+=`</ul></div></div>`;
-qs.forEach((qn,i)=>{const q=Qs[qn];const s=state[qn];
-h+=`<div class="quiz-card" id="q${qn}"><div class="quiz-header"><div class="quiz-number"><span class="quiz-num">${i+1}</span><span class="quiz-type">${q.type}</span></div><span class="quiz-status ${s.done?(s.ok?'correct':'incorrect'):''}" id="st${qn}">${s.done?(s.ok?'Correct':'Incorrect'):'Unanswered'}</span></div>`;
-h+=`<div class="quiz-context"><div class="context-label">📍 Case Connection</div><div class="context-text">${q.ctx}</div></div>`;
-h+=`<div class="quiz-body"><div class="quiz-stem">${q.stem}</div><div class="quiz-options" id="opts${qn}">`;
-q.opts.forEach(opt=>{let cls=s.done?'disabled':'';if(s.done&&opt[0]===answers[qn])cls+=' correct';if(s.done&&opt[0]===s.pick&&!s.ok)cls+=' incorrect';
-h+=`<div class="quiz-option ${cls}" data-a="${opt[0]}" onclick="pick(${qn},this)"><span class="option-letter">${opt[0].toUpperCase()}</span><span class="option-text">${opt[1]}</span></div>`;});
-h+=`</div><div class="confidence-section" id="conf${qn}" ${s.done?'style="display:none"':''}>`;
-h+=`<div class="confidence-label"><span>Confidence?</span><span id="cv${qn}">Select</span></div><div class="confidence-btns">`;
-h+=`<button class="conf-btn" onclick="setC(${qn},'low',this)">Guessing</button><button class="conf-btn" onclick="setC(${qn},'med',this)">Somewhat</button><button class="conf-btn" onclick="setC(${qn},'high',this)">Confident</button></div></div>`;
-h+=`<button class="submit-btn" id="sub${qn}" onclick="submit(${qn})" disabled ${s.done?'style="display:none"':''}>Submit Answer</button>`;
-h+=`<div class="explanation ${s.done?(s.ok?'visible correct':'visible incorrect'):''}" id="exp${qn}"><div class="explanation-title">${s.done?(s.ok?'✓ Correct!':'✗ Not quite'):'✓ Correct!'}</div><div class="explanation-text">${q.exp}</div></div></div></div>`;});
-h+=`<div class="phase-summary" id="summary"><div class="summary-header"><div class="summary-title">Phase ${p} Complete! 🎉</div><div class="summary-score" id="score">0/5</div></div>`;
-h+=`<div class="summary-stats"><div class="stat-box"><div class="stat-value" id="corrCt">0</div><div class="stat-label">Correct</div></div><div class="stat-box"><div class="stat-value" id="avgC">--</div><div class="stat-label">Avg Confidence</div></div><div class="stat-box"><div class="stat-value">+50</div><div class="stat-label">XP</div></div></div>`;
-if(p<4)h+=`<button class="next-btn" onclick="unlock(${p+1})">Continue to Phase ${p+1} →</button>`;
-else h+=`<p style="text-align:center;margin-top:14px;color:var(--accent-green);font-weight:600">🎓 James survived! You completed his sepsis journey.</p>`;
-h+=`</div>`;document.getElementById('questionsPanel').innerHTML=h;}
-
-function pick(qn,el){if(state[qn].done)return;document.querySelectorAll(`#opts${qn} .quiz-option`).forEach(o=>o.classList.remove('selected'));el.classList.add('selected');state[qn].pick=el.dataset.a;chkSub(qn);}
-function setC(qn,lv,el){if(state[qn].done)return;document.querySelectorAll(`#conf${qn} .conf-btn`).forEach(b=>b.classList.remove('selected'));el.classList.add('selected');state[qn].conf=lv;document.getElementById(`cv${qn}`).textContent={low:'33%',med:'66%',high:'90%'}[lv];chkSub(qn);}
-function chkSub(qn){const btn=document.getElementById(`sub${qn}`);if(btn)btn.disabled=!(state[qn].pick&&state[qn].conf);}
-
-function submit(qn){const s=state[qn];if(s.done)return;s.done=true;s.ok=s.pick===answers[qn];
-document.querySelectorAll(`#opts${qn} .quiz-option`).forEach(o=>{o.classList.add('disabled');if(o.dataset.a===answers[qn])o.classList.add('correct');else if(o.dataset.a===s.pick&&!s.ok)o.classList.add('incorrect');});
-const exp=document.getElementById(`exp${qn}`);exp.classList.add('visible',s.ok?'correct':'incorrect');exp.querySelector('.explanation-title').textContent=s.ok?'✓ Correct!':'✗ Not quite';
-document.getElementById(`st${qn}`).textContent=s.ok?'Correct':'Incorrect';document.getElementById(`st${qn}`).className=`quiz-status ${s.ok?'correct':'incorrect'}`;
-document.getElementById(`sub${qn}`).style.display='none';document.getElementById(`conf${qn}`).style.display='none';
-updateProgress();checkDone();}
-
-function updateProgress(){const total=Object.values(state).filter(s=>s.done).length;document.getElementById('progressCount').textContent=`${total}/20`;document.getElementById('progressFill').style.width=`${(total/20)*100}%`;}
-
-function checkDone(){const qs=getQs(phase);if(qs.every(q=>state[q].done)&&!done[phase]){done[phase]=true;
-const corr=qs.filter(q=>state[q].ok).length;document.getElementById('score').textContent=`${corr}/5`;document.getElementById('corrCt').textContent=corr;
-const cv={low:33,med:66,high:90};const avg=Math.round(qs.reduce((s,q)=>s+cv[state[q].conf],0)/5);document.getElementById('avgC').textContent=`${avg}%`;
+function toggleDD(btn){var content=btn.nextElementSibling;content.classList.toggle('open');btn.querySelector('span').textContent=content.classList.contains('open')?'▲':'▼'}
+function switchTab(btn,panelId){var parent=btn.closest('.dd-content');parent.querySelectorAll('.dd-tab').forEach(function(t){t.classList.remove('active')});parent.querySelectorAll('.dd-panel').forEach(function(p){p.classList.remove('active')});btn.classList.add('active');document.getElementById(panelId).classList.add('active')}
+function pick(qn,el){if(state[qn].done)return;document.querySelectorAll('#opts'+qn+' .quiz-option').forEach(function(o){o.classList.remove('selected')});el.classList.add('selected');state[qn].pick=el.dataset.a;checkSub(qn)}
+function setConf(qn,lv,el){if(state[qn].done)return;document.querySelectorAll('#conf'+qn+' .conf-btn').forEach(function(b){b.classList.remove('selected')});el.classList.add('selected');state[qn].conf=lv;document.getElementById('confVal'+qn).textContent={low:'33%',med:'66%',high:'90%'}[lv];checkSub(qn)}
+function checkSub(qn){var btn=document.getElementById('sub'+qn);if(btn)btn.disabled=!(state[qn].pick&&state[qn].conf)}
+function submit(qn){
+var s=state[qn];if(s.done)return;s.done=true;s.ok=s.pick===answers[qn];
+var q=Qs[qn];if(q.domains)q.domains.forEach(function(d){fp[d].t++;if(s.ok)fp[d].c++});updateFP();
+document.querySelectorAll('#opts'+qn+' .quiz-option').forEach(function(o){o.classList.add('disabled');if(o.dataset.a===answers[qn])o.classList.add('correct');else if(o.dataset.a===s.pick&&!s.ok)o.classList.add('incorrect')});
+var exp=document.getElementById('exp'+qn);exp.classList.add('visible');exp.classList.add(s.ok?'correct':'incorrect');exp.querySelector('.explanation-title').textContent=s.ok?'✓ Correct!':'✗ Incorrect';
+document.getElementById('st'+qn).textContent=s.ok?'✓':'✗';document.getElementById('st'+qn).className='quiz-status '+(s.ok?'correct':'incorrect');
+document.getElementById('sub'+qn).style.display='none';document.getElementById('conf'+qn).style.display='none';
+renderQuestions(phase);updateProgress();checkDone()}
+function updateProgress(){var total=0;for(var k in state)if(state[k].done)total++;document.getElementById('progressCount').textContent=total+'/20';document.getElementById('progressFill').style.width=(total/20)*100+'%'}
+function checkDone(){
+var qs=getQs(phase);var allDone=true;for(var i=0;i<qs.length;i++)if(!state[qs[i]].done)allDone=false;
+if(allDone&&!done[phase]){
+done[phase]=true;var corr=0;for(var i=0;i<qs.length;i++)if(state[qs[i]].ok)corr++;
+document.getElementById('score').textContent=corr+'/5';document.getElementById('corrCt').textContent=corr;
+var confVals={low:33,med:66,high:90};var sum=0;for(var i=0;i<qs.length;i++)sum+=confVals[state[qs[i]].conf];
+document.getElementById('avgConf').textContent=Math.round(sum/5)+'%';
+var fpH='';for(var d in fp){var pct=fp[d].t>0?Math.round((fp[d].c/fp[d].t)*100):0;fpH+='<div class="fp-domain"><span class="fp-domain-name">'+d.charAt(0).toUpperCase()+d.slice(1)+'</span><span class="fp-domain-score">'+pct+'%</span></div>'}
+document.getElementById('phaseFP').innerHTML=fpH;
 document.getElementById('summary').style.display='block';document.getElementById('summary').scrollIntoView({behavior:'smooth'});
-document.querySelector(`.timeline-phase[data-phase="${phase}"]`).classList.add('completed');
-document.getElementById(`status${phase}`).textContent='✓ Done';document.getElementById(`status${phase}`).className='phase-status done';}}
-
-function unlock(np){open[np]=true;goPhase(np);}
-
-function goPhase(p){if(!open[p]){alert(`Complete Phase ${p-1} first!`);return;}phase=p;
-document.querySelectorAll('.timeline-phase').forEach(ph=>{const pn=parseInt(ph.dataset.phase);ph.classList.remove('active','locked');if(pn===p)ph.classList.add('active');if(!open[pn])ph.classList.add('locked');});
-for(let i=1;i<=4;i++){const st=document.getElementById(`status${i}`);if(done[i]){st.textContent='✓ Done';st.className='phase-status done';}else if(i===p){st.textContent='Current';st.className='phase-status current';}else if(open[i]){st.textContent='';st.className='phase-status';}else{st.textContent='🔒';st.className='phase-status';}}
-updateVitals(p);renderCase(p);renderQuestions(p);window.scrollTo({top:0,behavior:'smooth'});}
-
-document.addEventListener('DOMContentLoaded',()=>{updateVitals(1);renderCase(1);renderQuestions(1);});
+document.querySelector('.timeline-phase[data-phase="'+phase+'"]').classList.add('completed');
+document.getElementById('status'+phase).textContent='✓';document.getElementById('status'+phase).className='phase-status done'}}
+function unlock(np){open[np]=true;goPhase(np)}
+function goPhase(p){
+if(!open[p]){alert('Complete Phase '+(p-1)+' first!');return}
+phase=p;document.querySelectorAll('.timeline-phase').forEach(function(ph){var pn=parseInt(ph.dataset.phase);ph.classList.remove('active','locked');if(pn===p)ph.classList.add('active');if(!open[pn])ph.classList.add('locked')});
+for(var i=1;i<=4;i++){var st=document.getElementById('status'+i);if(done[i]){st.textContent='✓';st.className='phase-status done'}else if(i===p){st.textContent='Current';st.className='phase-status current'}else if(open[i]){st.textContent='';st.className='phase-status'}else{st.textContent='🔒';st.className='phase-status'}}
+updateVitals(p);renderCase(p);renderQuestions(p);window.scrollTo({top:0,behavior:'smooth'})}
+document.addEventListener('DOMContentLoaded',function(){updateVitals(1);renderCase(1);renderQuestions(1)});
 </script>
 </body>
 </html>
