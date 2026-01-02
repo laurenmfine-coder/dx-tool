@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infectious Disease: Critical Cases - MechanismDx</title>
+<style>
+:root{--bg:#f8f9fa;--white:#fff;--subtle:#f1f3f5;--text:#1a1a1a;--muted:#5c5c5c;--border:#e9ecef;--accent:#dc2626;--green:#16a34a;--red:#dc2626}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.header{background:var(--white);border-bottom:1px solid var(--border);padding:16px 24px}
+.module-header{background:var(--white);border-bottom:1px solid var(--border);padding:24px}.module-header-inner{max-width:1200px;margin:0 auto}
+.module-title{display:flex;align-items:center;gap:16px}.module-icon{width:56px;height:56px;background:linear-gradient(135deg,#fecaca,#fca5a5);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:28px}
+.module-title h1{font-size:24px}.module-title p{color:var(--muted);font-size:14px}
+.patient-banner{background:linear-gradient(135deg,#b91c1c,#dc2626);color:#fff;padding:20px 24px}
+.patient-banner-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.patient-info{flex:1}.patient-name{font-size:16px;font-weight:600}.patient-details{font-size:13px;opacity:.9}
+.patient-vitals{display:flex;gap:16px}.vital{text-align:center;padding:8px 14px;background:rgba(255,255,255,.1);border-radius:8px}
+.vital-value{font-size:18px;font-weight:700}.vital-label{font-size:10px;opacity:.8}
+.timeline-nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 24px}
+.timeline-inner{max-width:1200px;margin:0 auto;display:flex}.timeline-phase{flex:1;padding:14px;cursor:pointer;border-bottom:3px solid transparent;text-align:center}
+.timeline-phase.active{border-bottom-color:var(--accent)}.timeline-phase.completed{border-bottom-color:var(--green)}
+.timeline-phase.locked{opacity:.4;cursor:not-allowed}.phase-label{font-size:12px;font-weight:600}.phase-time{font-size:10px;color:var(--muted)}
+.phase-status{font-size:10px;margin-top:4px}.phase-status.current{color:var(--accent)}.phase-status.done{color:var(--green)}
+.main-container{max-width:1200px;margin:0 auto;padding:24px;display:grid;grid-template-columns:280px 1fr;gap:24px}
+@media(max-width:900px){.main-container{grid-template-columns:1fr}}
+.card{background:var(--white);border:1px solid var(--border);border-radius:12px;margin-bottom:16px}
+.card-header{padding:14px 16px;border-bottom:1px solid var(--border);font-weight:600}.card-content{padding:16px}
+.case-narrative{font-size:13px;color:var(--muted)}.case-narrative strong{color:var(--text)}
+.data-section{background:var(--subtle);border-radius:8px;padding:10px;margin-top:10px}
+.data-label{font-size:9px;font-weight:600;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.data-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:10px}
+.resource-box{background:#fecaca;border-left:4px solid var(--accent);border-radius:8px;padding:12px;margin:12px 0}
+.resource-title{font-size:10px;font-weight:700;color:#b91c1c;margin-bottom:6px}.resource-links{font-size:10px}.resource-links a{color:var(--accent)}
+.learning-box{background:#fecaca;border-radius:12px;padding:14px;margin-top:14px}
+.learning-title{font-size:11px;font-weight:600;color:var(--accent);margin-bottom:8px}.learning-list{list-style:none;font-size:12px}
+.learning-list li{padding:3px 0 3px 18px;position:relative}.learning-list li::before{content:'→';position:absolute;left:0;color:var(--accent)}
+.quiz-card{background:var(--white);border:1px solid var(--border);border-radius:12px;margin-bottom:16px}
+.quiz-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between}
+.quiz-num{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.quiz-type{font-size:11px;color:var(--muted);margin-left:8px}
+.quiz-status{font-size:10px;padding:3px 8px;border-radius:10px;background:var(--subtle)}
+.quiz-status.correct{background:#dcfce7;color:#166534}.quiz-status.incorrect{background:#fee2e2;color:#991b1b}
+.quiz-context{padding:12px 16px;background:#fecaca;font-size:11px;color:#b91c1c}.quiz-body{padding:16px}
+.quiz-stem{font-size:13px;font-weight:500;margin-bottom:14px}.quiz-options{display:flex;flex-direction:column;gap:6px}
+.quiz-option{display:flex;gap:10px;padding:10px 12px;background:var(--subtle);border:2px solid transparent;border-radius:8px;cursor:pointer}
+.quiz-option:hover{border-color:var(--border)}.quiz-option.selected{border-color:var(--accent)}
+.quiz-option.correct{border-color:var(--green);background:rgba(22,163,74,.08)}.quiz-option.incorrect{border-color:var(--red);background:rgba(220,38,38,.08)}
+.quiz-option.disabled{pointer-events:none}
+.option-letter{width:22px;height:22px;border:2px solid var(--border);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+.quiz-option.correct .option-letter{background:var(--green);border-color:var(--green);color:#fff}
+.quiz-option.incorrect .option-letter{background:var(--red);border-color:var(--red);color:#fff}
+.option-text{font-size:12px;color:var(--muted)}
+.conf-section{margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
+.conf-btns{display:flex;gap:6px}.conf-btn{flex:1;padding:7px;border:2px solid var(--border);border-radius:8px;background:#fff;cursor:pointer;font-size:10px;font-weight:600}
+.conf-btn.selected{border-color:var(--green);background:rgba(22,163,74,.08);color:var(--green)}
+.submit-btn{margin-top:10px;width:100%;padding:10px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer}
+.submit-btn:disabled{background:var(--subtle);color:var(--muted)}
+.explanation{margin-top:14px;padding:14px;border-radius:8px;display:none;font-size:12px}.explanation.visible{display:block}
+.explanation.correct{background:#f0fdf4;border:1px solid #bbf7d0}.explanation.incorrect{background:#fef2f2;border:1px solid #fecaca}
+.phase-summary{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:20px;margin-top:16px;display:none}
+.summary-header{display:flex;justify-content:space-between;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.summary-score{font-size:22px;font-weight:700;color:var(--green)}
+.next-btn{margin-top:14px;width:100%;padding:12px;background:var(--green);color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer}
+.progress-bar{background:var(--white);border-bottom:1px solid var(--border);padding:10px 24px}
+.progress-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.progress-track{flex:1;height:5px;background:var(--subtle);border-radius:3px}
+.progress-fill{height:100%;background:linear-gradient(90deg,#dc2626,#10b981);transition:width .3s;border-radius:3px}
+.progress-count{font-size:10px;color:var(--muted);font-weight:600}
+</style>
+</head>
+<body>
+<header class="header"><div style="max-width:1200px;margin:0 auto;font-weight:600">MechanismDx › Infectious Disease</div></header>
+<div class="module-header"><div class="module-header-inner"><div class="module-title"><div class="module-icon">🦠</div><div><h1>Infectious Disease: Critical Cases</h1><p>HIV/AIDS → Meningitis → UTI/Pyelo → C. difficile | IDSA Guidelines</p></div></div></div></div>
+<div class="progress-bar"><div class="progress-inner"><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div><span class="progress-count" id="progressCount">0/20</span></div></div>
+<div class="patient-banner"><div class="patient-banner-inner">
+<div class="patient-info"><div class="patient-name">Multiple Patients</div><div class="patient-details">Kevin (HIV) → Emma (Meningitis) → Rachel (Pyelo) → Walter (C. diff)</div></div>
+<div class="patient-vitals"><div class="vital"><div class="vital-value" id="vCD4">45</div><div class="vital-label">CD4</div></div><div class="vital"><div class="vital-value" id="vWBC">18K</div><div class="vital-label">WBC</div></div><div class="vital"><div class="vital-value" id="vTemp">103°F</div><div class="vital-label">Temp</div></div></div>
+</div></div>
+<nav class="timeline-nav"><div class="timeline-inner">
+<div class="timeline-phase active" data-phase="1" onclick="goPhase(1)"><div class="phase-label">🔴 HIV/AIDS</div><div class="phase-time">Kevin</div><div class="phase-status current" id="status1">Current</div></div>
+<div class="timeline-phase locked" data-phase="2" onclick="goPhase(2)"><div class="phase-label">🧠 Meningitis</div><div class="phase-time">Emma</div><div class="phase-status" id="status2">🔒</div></div>
+<div class="timeline-phase locked" data-phase="3" onclick="goPhase(3)"><div class="phase-label">🔥 UTI/Pyelo</div><div class="phase-time">Rachel</div><div class="phase-status" id="status3">🔒</div></div>
+<div class="timeline-phase locked" data-phase="4" onclick="goPhase(4)"><div class="phase-label">💊 C. diff</div><div class="phase-time">Walter</div><div class="phase-status" id="status4">🔒</div></div>
+</div></nav>
+<div class="main-container">
+<aside><div class="card"><div class="card-header">📋 Clinical Snapshot</div><div class="card-content" id="caseContent"></div></div></aside>
+<main id="questionsPanel"></main>
+</div>
+<script>
+const ans={1:'b',2:'c',3:'a',4:'d',5:'c',6:'b',7:'a',8:'d',9:'c',10:'b',11:'a',12:'c',13:'b',14:'d',15:'a',16:'c',17:'b',18:'d',19:'a',20:'c'};
+const st={};for(let i=1;i<=20;i++)st[i]={done:false,pick:null,conf:null,ok:false};
+let phase=1,done={1:0,2:0,3:0,4:0},open={1:1,2:0,3:0,4:0};
+const vit={1:{cd4:'45',wbc:'4.2K',temp:'99°F'},2:{cd4:'--',wbc:'18K',temp:'103°F'},3:{cd4:'--',wbc:'15K',temp:'102°F'},4:{cd4:'--',wbc:'22K',temp:'101°F'}};
+const cases={
+1:{t:'<strong>Kevin Williams</strong>, 32M presents with <strong>weight loss, oral thrush, night sweats</strong> × 3 months. CD4 45, viral load 450,000. New HIV diagnosis.',d1:[['CD4','45'],['Viral load','450K'],['Thrush','Yes'],['Weight loss','25 lbs']],d2:[['Hgb','10.2'],['WBC','4.2K'],['Symptoms','3 months'],['Risk','MSM']]},
+2:{t:'<strong>Emma Chen</strong>, 19F college student with <strong>severe headache, fever 103°F, neck stiffness, photophobia</strong>. Petechial rash on legs.',d1:[['Fever','103°F'],['Neck stiff','Yes'],['Photophobia','Yes'],['Rash','Petechial']],d2:[['WBC','18K'],['Setting','College'],['Onset','12 hours'],['Vaccinated','Unknown']]},
+3:{t:'<strong>Rachel Torres</strong>, 28F with <strong>dysuria, frequency, flank pain, fever 102°F</strong> × 2 days. Sexually active. R CVA tenderness.',d1:[['Dysuria','Yes'],['Frequency','Yes'],['Flank pain','Right'],['Fever','102°F']],d2:[['UA WBC','>50'],['Nitrite','+'],['Bacteria','Many'],['CVA tender','R side']]},
+4:{t:'<strong>Walter Brown</strong>, 72M with <strong>watery diarrhea 10×/day, crampy abdominal pain</strong> × 5 days. Recent clindamycin for dental infection.',d1:[['Diarrhea','10×/day'],['Recent Abx','Clindamycin'],['Duration','5 days'],['Pain','Crampy']],d2:[['WBC','22K'],['Cr','1.6'],['Albumin','2.8'],['Fever','101°F']]}
+};
+const intros={
+1:{t:'Phase 1: HIV/AIDS',i:'🔴',d:'Kevin has AIDS. Learn screening, staging, OIs, and ART.',o:['Know HIV screening recommendations','Understand CD4-based OI risk','Know when to start ART','Recognize AIDS-defining illnesses'],r:'<a href="https://clinicalinfo.hiv.gov/en/guidelines">NIH HIV Guidelines</a>'},
+2:{t:'Phase 2: Bacterial Meningitis',i:'🧠',d:'Emma has meningitis. Learn emergent diagnosis and treatment.',o:['Recognize meningitis presentation','Interpret CSF findings','Know empiric antibiotics','Understand dexamethasone role'],r:'<a href="https://www.idsociety.org/practice-guideline/bacterial-meningitis/">IDSA Meningitis</a>'},
+3:{t:'Phase 3: UTI/Pyelonephritis',i:'🔥',d:'Rachel has pyelonephritis. Distinguish from cystitis and treat.',o:['Differentiate cystitis vs pyelo','Choose appropriate antibiotics','Know complicated UTI criteria','Recognize treatment failure'],r:'<a href="https://www.idsociety.org/practice-guideline/urinary-tract-infections-utis/">IDSA UTI Guidelines</a>'},
+4:{t:'Phase 4: C. difficile',i:'💊',d:'Walter has CDI. Learn severity assessment and treatment.',o:['Assess CDI severity','Know first-line treatment','Recognize fulminant CDI','Manage recurrence'],r:'<a href="https://www.idsociety.org/practice-guideline/clostridium-difficile/">IDSA CDI Guidelines</a>'}
+};
+const Qs={
+1:{ty:'HIV Screening',cx:'Who to test',s:'Who should be screened for HIV?',o:[['a','Only high-risk individuals'],['b','All persons 13-64 at least once; high-risk annually'],['c','Only if symptomatic'],['d','Only pregnant women']],e:'<strong>HIV Screening (USPSTF/CDC):</strong><br>• All persons 13-64 at least once<br>• High-risk: screen annually<br>• All pregnant women<br>• Opt-out screening recommended'},
+2:{ty:'AIDS Definition',cx:'CD4 45, thrush',s:'What defines AIDS vs HIV infection?',o:[['a','Positive HIV test'],['b','Any symptoms'],['c','CD4 <200 OR AIDS-defining illness (OI or malignancy)'],['d','Viral load >100,000']],e:'<strong>AIDS Definition:</strong><br>• CD4 <200 cells/μL, OR<br>• AIDS-defining condition:<br>&nbsp;&nbsp;- PCP, toxoplasmosis, cryptococcus<br>&nbsp;&nbsp;- CMV, MAC, Kaposi sarcoma<br>&nbsp;&nbsp;- Candida esophagitis, etc.'},
+3:{ty:'OI Prophylaxis',cx:'CD4 45',s:'Which OI prophylaxis does Kevin need with CD4 45?',o:[['a','TMP-SMX (PCP) + Azithromycin (MAC) - CD4 <200 and <50 respectively'],['b','TMP-SMX only'],['c','No prophylaxis until symptoms'],['d','Fluconazole only']],e:'<strong>OI Prophylaxis by CD4:</strong><br>• <strong>CD4 <200:</strong> TMP-SMX for PCP<br>• <strong>CD4 <150:</strong> + Toxo prophylaxis (TMP-SMX covers both)<br>• <strong>CD4 <100:</strong> Consider CMV surveillance<br>• <strong>CD4 <50:</strong> + Azithromycin for MAC'},
+4:{ty:'ART Initiation',cx:'Starting treatment',s:'When should ART be started?',o:[['a','Wait until CD4 <200'],['b','Only after treating OIs'],['c','When patient is ready'],['d','Immediately upon diagnosis regardless of CD4 (treat all)']],e:'<strong>ART: Treat ALL</strong><br>• Start ART regardless of CD4 count<br>• Early ART reduces transmission and improves outcomes<br>• Exception: Cryptococcal meningitis - delay 4-6 weeks (IRIS risk)<br>• Most OIs: Start ART within 2 weeks'},
+5:{ty:'IRIS',cx:'ART complication',s:'What is Immune Reconstitution Inflammatory Syndrome (IRIS)?',o:[['a','HIV drug resistance'],['b','Allergic reaction to ART'],['c','Paradoxical worsening after starting ART due to recovering immune response to existing OI'],['d','Treatment failure']],e:'<strong>IRIS:</strong><br>• Occurs weeks after starting ART<br>• Immune system "wakes up" → inflammation against existing pathogens<br>• Risk factors: Low CD4, high viral load, active OI<br>• Treatment: Continue ART, treat inflammation (steroids if severe)'},
+6:{ty:'Meningitis Triad',cx:'Classic presentation',s:'What is the classic triad of bacterial meningitis?',o:[['a','Cough, fever, rash'],['b','Fever, neck stiffness, altered mental status'],['c','Headache, vomiting, diarrhea'],['d','Rash, arthritis, conjunctivitis']],e:'<strong>Meningitis Triad:</strong><br>• Fever<br>• Neck stiffness (nuchal rigidity)<br>• Altered mental status<br><br>Only ~45% have all three! Also: headache, photophobia, Kernig/Brudzinski signs'},
+7:{ty:'CSF Findings',cx:'Bacterial vs viral',s:'What CSF findings indicate BACTERIAL meningitis?',o:[['a','High WBC (PMN predominant), low glucose (<40 or <2/3 serum), high protein'],['b','Lymphocyte predominant, normal glucose'],['c','Normal CSF'],['d','High eosinophils']],e:'<strong>CSF Patterns:</strong><br><br>| | Bacterial | Viral |<br>|---|---|---|<br>| WBC | ↑↑ (>1000) | ↑ (10-500) |<br>| Type | PMNs | Lymphs |<br>| Glucose | ↓↓ | Normal |<br>| Protein | ↑↑ | ↑ |'},
+8:{ty:'Empiric Treatment',cx:'Before culture results',s:'What is empiric treatment for bacterial meningitis in a 19-year-old?',o:[['a','Penicillin alone'],['b','Azithromycin'],['c','TMP-SMX'],['d','Ceftriaxone + Vancomycin + Dexamethasone']],e:'<strong>Empiric Meningitis Treatment:</strong><br><br>• <strong>Adults:</strong> Ceftriaxone + Vancomycin<br>• <strong>Age >50 or immunocompromised:</strong> Add Ampicillin (Listeria)<br>• <strong>Dexamethasone:</strong> Give BEFORE or WITH first antibiotic dose<br><br>Dex reduces mortality in pneumococcal meningitis'},
+9:{ty:'Dexamethasone',cx:'Steroid role',s:'Why give dexamethasone in bacterial meningitis?',o:[['a','Kills bacteria'],['b','Prevents seizures'],['c','Reduces inflammation and mortality (especially S. pneumoniae); give before/with antibiotics'],['d','Treats cerebral edema only']],e:'<strong>Dexamethasone in Meningitis:</strong><br>• Give BEFORE or WITH first antibiotic<br>• Reduces mortality in <strong>S. pneumoniae</strong><br>• Reduces hearing loss<br>• Mechanism: Dampens inflammatory response to bacterial lysis'},
+10:{ty:'Meningococcus',cx:'Petechial rash',s:'What does petechial rash suggest in meningitis?',o:[['a','Viral cause'],['b','N. meningitidis - need droplet precautions and prophylaxis for close contacts'],['c','S. pneumoniae'],['d','Listeria']],e:'<strong>Meningococcemia:</strong><br>• Petechial/purpuric rash = pathognomonic<br>• Can progress to DIC, shock<br>• <strong>Droplet precautions</strong> until 24h of antibiotics<br>• <strong>Prophylaxis</strong> for close contacts: Rifampin, ciprofloxacin, or ceftriaxone'},
+11:{ty:'Cystitis vs Pyelo',cx:'Differentiating',s:'What distinguishes pyelonephritis from cystitis?',o:[['a','Fever, flank pain, CVA tenderness indicate upper tract (pyelo)'],['b','Dysuria indicates pyelo'],['c','Frequency indicates pyelo'],['d','Positive UA indicates pyelo']],e:'<strong>Cystitis vs Pyelonephritis:</strong><br><br>| Cystitis | Pyelonephritis |<br>|----------|----------------|<br>| Dysuria, frequency | + Fever |<br>| Urgency | + Flank pain |<br>| Suprapubic pain | + CVA tenderness |<br>| Afebrile | + Nausea/vomiting |'},
+12:{ty:'UTI Treatment',cx:'Choosing antibiotics',s:'What is first-line treatment for uncomplicated cystitis?',o:[['a','Ciprofloxacin 7 days'],['b','Amoxicillin'],['c','Nitrofurantoin 5 days OR TMP-SMX 3 days OR Fosfomycin single dose'],['d','Ceftriaxone IV']],e:'<strong>Uncomplicated Cystitis Treatment:</strong><br>• Nitrofurantoin 100mg BID × 5 days<br>• TMP-SMX DS BID × 3 days<br>• Fosfomycin 3g single dose<br><br>Avoid fluoroquinolones for uncomplicated UTI (save for pyelo, resistance)'},
+13:{ty:'Pyelo Treatment',cx:'Upper tract infection',s:'What is treatment for outpatient pyelonephritis?',o:[['a','Nitrofurantoin'],['b','Fluoroquinolone (cipro/levo) 5-7 days OR TMP-SMX 14 days'],['c','Amoxicillin'],['d','Single dose fosfomycin']],e:'<strong>Pyelonephritis Treatment:</strong><br><br><strong>Outpatient:</strong><br>• Ciprofloxacin 500mg BID × 7 days, OR<br>• TMP-SMX DS BID × 14 days<br><br><strong>Inpatient:</strong><br>• Ceftriaxone, fluoroquinolone, or aminoglycoside<br><br>Nitrofurantoin does NOT penetrate kidney!'},
+14:{ty:'Complicated UTI',cx:'Risk factors',s:'What makes a UTI "complicated"?',o:[['a','Presence of dysuria'],['b','Female patient'],['c','First episode'],['d','Male, pregnant, catheter, obstruction, immunocompromised, anatomic abnormality']],e:'<strong>Complicated UTI:</strong><br>• Male patient<br>• Pregnancy<br>• Catheter-associated<br>• Urinary obstruction<br>• Immunocompromised<br>• Anatomic/functional abnormality<br>• Recent instrumentation<br><br>Requires longer treatment, broader coverage'},
+15:{ty:'C. diff Diagnosis',cx:'Testing',s:'How is C. difficile infection diagnosed?',o:[['a','Stool PCR for toxin gene OR GDH + toxin EIA; only test diarrheal stool'],['b','Blood culture'],['c','Colonoscopy required'],['d','CT scan']],e:'<strong>C. diff Diagnosis:</strong><br>• Only test <strong>unformed stool</strong> (diarrhea)<br>• <strong>NAAT/PCR</strong>: Most sensitive (may detect colonization)<br>• <strong>GDH + Toxin EIA</strong>: Two-step algorithm<br>• Do NOT test formed stool<br>• Do NOT test for cure'},
+16:{ty:'CDI Severity',cx:'Risk stratification',s:'What indicates SEVERE C. diff infection?',o:[['a','Any diarrhea'],['b','Positive toxin'],['c','WBC ≥15,000 OR Creatinine >1.5× baseline'],['d','Age >65 alone']],e:'<strong>CDI Severity (IDSA):</strong><br><br>• <strong>Non-severe:</strong> WBC <15K AND Cr <1.5× baseline<br>• <strong>Severe:</strong> WBC ≥15K OR Cr ≥1.5× baseline<br>• <strong>Fulminant:</strong> Hypotension, shock, ileus, megacolon<br><br>Walter: WBC 22K, Cr elevated → SEVERE'},
+17:{ty:'CDI Treatment',cx:'First-line therapy',s:'What is first-line treatment for initial C. diff episode?',o:[['a','Metronidazole'],['b','Fidaxomicin (preferred) OR Vancomycin PO'],['c','IV vancomycin'],['d','Ciprofloxacin']],e:'<strong>CDI Treatment (IDSA 2021):</strong><br><br><strong>Initial episode:</strong><br>• <strong>Fidaxomicin 200mg BID × 10d</strong> (preferred)<br>• OR Vancomycin 125mg PO QID × 10d<br><br>Metronidazole no longer first-line (inferior outcomes).<br>IV vancomycin does NOT reach colon!'},
+18:{ty:'Fulminant CDI',cx:'Severe complications',s:'What is treatment for fulminant CDI with ileus?',o:[['a','Oral vancomycin only'],['b','IV metronidazole only'],['c','Fidaxomicin'],['d','Vancomycin PO/PR + IV Metronidazole; consider surgery']],e:'<strong>Fulminant CDI:</strong><br>• Vancomycin 500mg PO QID<br>• + Vancomycin enema if ileus<br>• + IV Metronidazole 500mg q8h<br>• <strong>Surgical consult</strong> for colectomy<br><br>Mortality 30-50% without surgery'},
+19:{ty:'Recurrence',cx:'Repeat episodes',s:'How is recurrent C. diff treated?',o:[['a','Fidaxomicin OR vancomycin taper/pulse; consider fecal microbiota transplant after 2+ recurrences'],['b','Same as initial'],['c','Probiotics alone'],['d','Lifelong suppression']],e:'<strong>Recurrent CDI:</strong><br><br>• <strong>1st recurrence:</strong> Fidaxomicin or Vanco taper<br>• <strong>2nd recurrence:</strong> Vanco taper/pulse OR Fidaxomicin<br>• <strong>3rd+ recurrence:</strong> <strong>Fecal microbiota transplant (FMT)</strong><br><br>FMT 80-90% effective for recurrent CDI'},
+20:{ty:'Prevention',cx:'Infection control',s:'What are key CDI prevention measures?',o:[['a','Antibiotics for all hospitalized patients'],['b','Alcohol hand rub alone'],['c','Hand washing with soap/water (spores resist alcohol), contact precautions, antibiotic stewardship'],['d','Prophylactic vancomycin']],e:'<strong>CDI Prevention:</strong><br>• <strong>Hand washing with soap</strong> (alcohol doesn\'t kill spores)<br>• Contact precautions (gown, gloves)<br>• Private room<br>• <strong>Antibiotic stewardship</strong> - limit unnecessary abx<br>• Environmental cleaning with bleach'}
+};
+function updateV(p){const v=vit[p];document.getElementById('vCD4').textContent=v.cd4;document.getElementById('vWBC').textContent=v.wbc;document.getElementById('vTemp').textContent=v.temp;}
+function renderCase(p){const c=cases[p];let h=`<div class="case-narrative">${c.t}</div><div class="data-section"><div class="data-label">History</div><div class="data-grid">`;
+c.d1.forEach(x=>h+=`<div><span style="color:var(--muted)">${x[0]}:</span> <strong>${x[1]}</strong></div>`);
+h+=`</div></div><div class="data-section"><div class="data-label">Data</div><div class="data-grid">`;
+c.d2.forEach(x=>h+=`<div><span style="color:var(--muted)">${x[0]}:</span> <strong>${x[1]}</strong></div>`);
+h+=`</div></div>`;document.getElementById('caseContent').innerHTML=h;}
+function getQs(p){return[(p-1)*5+1,(p-1)*5+2,(p-1)*5+3,(p-1)*5+4,(p-1)*5+5];}
+function renderQs(p){const intro=intros[p],qs=getQs(p);
+let h=`<div class="phase-intro"><h2>${intro.i} ${intro.t}</h2><div class="resource-box"><div class="resource-title">📚 GUIDELINES</div><div class="resource-links">${intro.r}</div></div><p>${intro.d}</p><div class="learning-box"><div class="learning-title">🎯 Objectives</div><ul class="learning-list">`;
+intro.o.forEach(o=>h+=`<li>${o}</li>`);h+=`</ul></div></div>`;
+qs.forEach((qn,i)=>{const q=Qs[qn],s=st[qn];
+h+=`<div class="quiz-card"><div class="quiz-header"><div style="display:flex;align-items:center"><span class="quiz-num">${i+1}</span><span class="quiz-type">${q.ty}</span></div><span class="quiz-status ${s.done?(s.ok?'correct':'incorrect'):''}" id="st${qn}">${s.done?(s.ok?'✓':'✗'):'○'}</span></div>`;
+h+=`<div class="quiz-context">${q.cx}</div><div class="quiz-body"><div class="quiz-stem">${q.s}</div><div class="quiz-options" id="opts${qn}">`;
+q.o.forEach(opt=>{let cls=s.done?'disabled':'';if(s.done&&opt[0]===ans[qn])cls+=' correct';if(s.done&&opt[0]===s.pick&&!s.ok)cls+=' incorrect';
+h+=`<div class="quiz-option ${cls}" data-a="${opt[0]}" onclick="pick(${qn},this)"><span class="option-letter">${opt[0].toUpperCase()}</span><span class="option-text">${opt[1]}</span></div>`;});
+h+=`</div><div class="conf-section" id="cf${qn}" ${s.done?'style="display:none"':''}><div class="conf-btns">`;
+['low','med','high'].forEach(c=>h+=`<button class="conf-btn" onclick="setC(${qn},'${c}',this)">${{low:'Guess',med:'Some',high:'Sure'}[c]}</button>`);
+h+=`</div></div><button class="submit-btn" id="sub${qn}" onclick="submit(${qn})" disabled ${s.done?'style="display:none"':''}>Submit</button>`;
+h+=`<div class="explanation ${s.done?'visible '+(s.ok?'correct':'incorrect'):''}" id="exp${qn}"><div style="font-weight:600;margin-bottom:6px">${s.ok?'✓ Correct':'Review'}</div><div>${q.e}</div></div></div></div>`;});
+h+=`<div class="phase-summary" id="summary"><div class="summary-header"><div>Phase ${p} Complete!</div><div class="summary-score" id="score">0/5</div></div>`;
+if(p<4)h+=`<button class="next-btn" onclick="unlock(${p+1})">Continue →</button>`;
+else h+=`<p style="text-align:center;margin-top:14px;color:var(--green)">🎓 You mastered infectious disease!</p>`;
+h+=`</div>`;document.getElementById('questionsPanel').innerHTML=h;}
+function pick(qn,el){if(st[qn].done)return;document.querySelectorAll(`#opts${qn} .quiz-option`).forEach(o=>o.classList.remove('selected'));el.classList.add('selected');st[qn].pick=el.dataset.a;chk(qn);}
+function setC(qn,lv,el){if(st[qn].done)return;document.querySelectorAll(`#cf${qn} .conf-btn`).forEach(b=>b.classList.remove('selected'));el.classList.add('selected');st[qn].conf=lv;chk(qn);}
+function chk(qn){document.getElementById(`sub${qn}`).disabled=!(st[qn].pick&&st[qn].conf);}
+function submit(qn){const s=st[qn];if(s.done)return;s.done=true;s.ok=s.pick===ans[qn];
+document.querySelectorAll(`#opts${qn} .quiz-option`).forEach(o=>{o.classList.add('disabled');if(o.dataset.a===ans[qn])o.classList.add('correct');else if(o.dataset.a===s.pick&&!s.ok)o.classList.add('incorrect');});
+document.getElementById(`exp${qn}`).classList.add('visible',s.ok?'correct':'incorrect');
+document.getElementById(`st${qn}`).textContent=s.ok?'✓':'✗';document.getElementById(`st${qn}`).className=`quiz-status ${s.ok?'correct':'incorrect'}`;
+document.getElementById(`sub${qn}`).style.display='none';document.getElementById(`cf${qn}`).style.display='none';
+updProg();chkDone();}
+function updProg(){const t=Object.values(st).filter(s=>s.done).length;document.getElementById('progressCount').textContent=`${t}/20`;document.getElementById('progressFill').style.width=`${t*5}%`;}
+function chkDone(){const qs=getQs(phase);if(qs.every(q=>st[q].done)&&!done[phase]){done[phase]=1;
+document.getElementById('score').textContent=`${qs.filter(q=>st[q].ok).length}/5`;
+document.getElementById('summary').style.display='block';document.querySelector(`.timeline-phase[data-phase="${phase}"]`).classList.add('completed');
+document.getElementById(`status${phase}`).textContent='✓';document.getElementById(`status${phase}`).className='phase-status done';}}
+function unlock(np){open[np]=1;goPhase(np);}
+function goPhase(p){if(!open[p])return;phase=p;
+document.querySelectorAll('.timeline-phase').forEach(ph=>{const pn=+ph.dataset.phase;ph.classList.remove('active','locked');if(pn===p)ph.classList.add('active');if(!open[pn])ph.classList.add('locked');});
+for(let i=1;i<=4;i++){const s=document.getElementById(`status${i}`);if(done[i]){s.textContent='✓';s.className='phase-status done';}else if(i===p){s.textContent='Current';s.className='phase-status current';}else if(open[i]){s.textContent='';}else{s.textContent='🔒';}}
+updateV(p);renderCase(p);renderQs(p);window.scrollTo({top:0});}
+document.addEventListener('DOMContentLoaded',()=>{updateV(1);renderCase(1);renderQs(1);});
+</script>
+</body>
+</html>
