@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ethics & Biostatistics: Complex Cases - MechanismDx</title>
+<style>
+:root{--bg:#f8f9fa;--white:#fff;--subtle:#f1f3f5;--text:#1a1a1a;--muted:#5c5c5c;--border:#e9ecef;--accent:#059669;--green:#16a34a;--red:#dc2626}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.header{background:var(--white);border-bottom:1px solid var(--border);padding:16px 24px}
+.module-header{background:var(--white);border-bottom:1px solid var(--border);padding:24px}.module-header-inner{max-width:1200px;margin:0 auto}
+.module-title{display:flex;align-items:center;gap:16px}.module-icon{width:56px;height:56px;background:linear-gradient(135deg,#a7f3d0,#6ee7b7);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:28px}
+.module-title h1{font-size:24px}.module-title p{color:var(--muted);font-size:14px}
+.patient-banner{background:linear-gradient(135deg,#047857,#059669);color:#fff;padding:20px 24px}
+.patient-banner-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.patient-info{flex:1}.patient-name{font-size:16px;font-weight:600}.patient-details{font-size:13px;opacity:.9}
+.patient-vitals{display:flex;gap:16px}.vital{text-align:center;padding:8px 14px;background:rgba(255,255,255,.1);border-radius:8px}
+.vital-value{font-size:18px;font-weight:700}.vital-label{font-size:10px;opacity:.8}
+.timeline-nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 24px}
+.timeline-inner{max-width:1200px;margin:0 auto;display:flex}.timeline-phase{flex:1;padding:14px;cursor:pointer;border-bottom:3px solid transparent;text-align:center}
+.timeline-phase.active{border-bottom-color:var(--accent)}.timeline-phase.completed{border-bottom-color:var(--green)}
+.timeline-phase.locked{opacity:.4;cursor:not-allowed}.phase-label{font-size:12px;font-weight:600}.phase-time{font-size:10px;color:var(--muted)}
+.phase-status{font-size:10px;margin-top:4px}.phase-status.current{color:var(--accent)}.phase-status.done{color:var(--green)}
+.main-container{max-width:1200px;margin:0 auto;padding:24px;display:grid;grid-template-columns:280px 1fr;gap:24px}
+@media(max-width:900px){.main-container{grid-template-columns:1fr}}
+.card{background:var(--white);border:1px solid var(--border);border-radius:12px;margin-bottom:16px}
+.card-header{padding:14px 16px;border-bottom:1px solid var(--border);font-weight:600}.card-content{padding:16px}
+.case-narrative{font-size:13px;color:var(--muted)}.case-narrative strong{color:var(--text)}
+.data-section{background:var(--subtle);border-radius:8px;padding:10px;margin-top:10px}
+.data-label{font-size:9px;font-weight:600;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.data-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:10px}
+.resource-box{background:#a7f3d0;border-left:4px solid var(--accent);border-radius:8px;padding:12px;margin:12px 0}
+.resource-title{font-size:10px;font-weight:700;color:#047857;margin-bottom:6px}.resource-links{font-size:10px}.resource-links a{color:var(--accent)}
+.learning-box{background:#a7f3d0;border-radius:12px;padding:14px;margin-top:14px}
+.learning-title{font-size:11px;font-weight:600;color:var(--accent);margin-bottom:8px}.learning-list{list-style:none;font-size:12px}
+.learning-list li{padding:3px 0 3px 18px;position:relative}.learning-list li::before{content:'→';position:absolute;left:0;color:var(--accent)}
+.quiz-card{background:var(--white);border:1px solid var(--border);border-radius:12px;margin-bottom:16px}
+.quiz-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between}
+.quiz-num{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.quiz-type{font-size:11px;color:var(--muted);margin-left:8px}
+.quiz-status{font-size:10px;padding:3px 8px;border-radius:10px;background:var(--subtle)}
+.quiz-status.correct{background:#dcfce7;color:#166534}.quiz-status.incorrect{background:#fee2e2;color:#991b1b}
+.quiz-context{padding:12px 16px;background:#a7f3d0;font-size:11px;color:#047857}.quiz-body{padding:16px}
+.quiz-stem{font-size:13px;font-weight:500;margin-bottom:14px}.quiz-options{display:flex;flex-direction:column;gap:6px}
+.quiz-option{display:flex;gap:10px;padding:10px 12px;background:var(--subtle);border:2px solid transparent;border-radius:8px;cursor:pointer}
+.quiz-option:hover{border-color:var(--border)}.quiz-option.selected{border-color:var(--accent)}
+.quiz-option.correct{border-color:var(--green);background:rgba(22,163,74,.08)}.quiz-option.incorrect{border-color:var(--red);background:rgba(220,38,38,.08)}
+.quiz-option.disabled{pointer-events:none}
+.option-letter{width:22px;height:22px;border:2px solid var(--border);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+.quiz-option.correct .option-letter{background:var(--green);border-color:var(--green);color:#fff}
+.quiz-option.incorrect .option-letter{background:var(--red);border-color:var(--red);color:#fff}
+.option-text{font-size:12px;color:var(--muted)}
+.conf-section{margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
+.conf-btns{display:flex;gap:6px}.conf-btn{flex:1;padding:7px;border:2px solid var(--border);border-radius:8px;background:#fff;cursor:pointer;font-size:10px;font-weight:600}
+.conf-btn.selected{border-color:var(--green);background:rgba(22,163,74,.08);color:var(--green)}
+.submit-btn{margin-top:10px;width:100%;padding:10px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer}
+.submit-btn:disabled{background:var(--subtle);color:var(--muted)}
+.explanation{margin-top:14px;padding:14px;border-radius:8px;display:none;font-size:12px}.explanation.visible{display:block}
+.explanation.correct{background:#f0fdf4;border:1px solid #bbf7d0}.explanation.incorrect{background:#fef2f2;border:1px solid #fecaca}
+.phase-summary{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:20px;margin-top:16px;display:none}
+.summary-header{display:flex;justify-content:space-between;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.summary-score{font-size:22px;font-weight:700;color:var(--green)}
+.next-btn{margin-top:14px;width:100%;padding:12px;background:var(--green);color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer}
+.progress-bar{background:var(--white);border-bottom:1px solid var(--border);padding:10px 24px}
+.progress-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.progress-track{flex:1;height:5px;background:var(--subtle);border-radius:3px}
+.progress-fill{height:100%;background:linear-gradient(90deg,#059669,#10b981);transition:width .3s;border-radius:3px}
+.progress-count{font-size:10px;color:var(--muted);font-weight:600}
+</style>
+</head>
+<body>
+<header class="header"><div style="max-width:1200px;margin:0 auto;font-weight:600">MechanismDx › Ethics & Biostatistics</div></header>
+<div class="module-header"><div class="module-header-inner"><div class="module-title"><div class="module-icon">⚖️</div><div><h1>Ethics & Biostatistics</h1><p>Informed Consent → Capacity → End-of-Life → Research/Statistics</p></div></div></div></div>
+<div class="progress-bar"><div class="progress-inner"><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div><span class="progress-count" id="progressCount">0/20</span></div></div>
+<div class="patient-banner"><div class="patient-banner-inner">
+<div class="patient-info"><div class="patient-name">Multiple Scenarios</div><div class="patient-details">Ethics cases and biostatistics concepts | High-yield USMLE content</div></div>
+<div class="patient-vitals"><div class="vital"><div class="vital-value" id="vCase">Ethics</div><div class="vital-label">Domain</div></div><div class="vital"><div class="vital-value" id="vTopic">Consent</div><div class="vital-label">Topic</div></div><div class="vital"><div class="vital-value" id="vYield">High</div><div class="vital-label">Yield</div></div></div>
+</div></div>
+<nav class="timeline-nav"><div class="timeline-inner">
+<div class="timeline-phase active" data-phase="1" onclick="goPhase(1)"><div class="phase-label">📋 Consent</div><div class="phase-time">Cases 1-5</div><div class="phase-status current" id="status1">Current</div></div>
+<div class="timeline-phase locked" data-phase="2" onclick="goPhase(2)"><div class="phase-label">🧠 Capacity</div><div class="phase-time">Cases 6-10</div><div class="phase-status" id="status2">🔒</div></div>
+<div class="timeline-phase locked" data-phase="3" onclick="goPhase(3)"><div class="phase-label">🕊️ End-of-Life</div><div class="phase-time">Cases 11-15</div><div class="phase-status" id="status3">🔒</div></div>
+<div class="timeline-phase locked" data-phase="4" onclick="goPhase(4)"><div class="phase-label">📊 Biostats</div><div class="phase-time">Cases 16-20</div><div class="phase-status" id="status4">🔒</div></div>
+</div></nav>
+<div class="main-container">
+<aside><div class="card"><div class="card-header">📋 Scenario</div><div class="card-content" id="caseContent"></div></div></aside>
+<main id="questionsPanel"></main>
+</div>
+<script>
+const ans={1:'c',2:'b',3:'a',4:'d',5:'c',6:'b',7:'a',8:'d',9:'c',10:'b',11:'a',12:'c',13:'b',14:'d',15:'a',16:'c',17:'b',18:'d',19:'a',20:'c'};
+const st={};for(let i=1;i<=20;i++)st[i]={done:false,pick:null,conf:null,ok:false};
+let phase=1,done={1:0,2:0,3:0,4:0},open={1:1,2:0,3:0,4:0};
+const vit={1:{case:'Ethics',topic:'Consent',yield:'High'},2:{case:'Ethics',topic:'Capacity',yield:'High'},3:{case:'Ethics',topic:'End-of-Life',yield:'High'},4:{case:'Biostats',topic:'Analysis',yield:'High'}};
+const cases={
+1:{t:'<strong>Informed Consent Scenarios:</strong> A series of patients requiring procedures. You must determine proper consent processes, exceptions, and requirements.',d1:[['Focus','Consent elements'],['Key','Voluntariness'],['Key','Disclosure'],['Key','Competence']],d2:[['Exception','Emergency'],['Exception','Waiver'],['Minor','Emancipated'],['Minor','Mature']]},
+2:{t:'<strong>Decision-Making Capacity:</strong> Patients with varying mental states. Assess who can make their own medical decisions and what to do when they cannot.',d1:[['Element','Understand'],['Element','Appreciate'],['Element','Reason'],['Element','Communicate']],d2:[['Not capacity','Diagnosis'],['Not capacity','Age alone'],['Assess','Decision-specific'],['Surrogate','If incapacitated']]},
+3:{t:'<strong>End-of-Life Care:</strong> Patients with terminal illness, advance directives, and family disagreements. Navigate DNR, withdrawal of care, and surrogate decisions.',d1:[['Document','Living will'],['Document','DPOA-HC'],['Order','DNR/POLST'],['Principle','Autonomy']],d2:[['Surrogate','Spouse first'],['Standard','Substituted judgment'],['Fallback','Best interest'],['Always','Comfort care']]},
+4:{t:'<strong>Biostatistics & Research:</strong> Interpreting studies, calculating measures, and understanding research design. Essential for evidence-based practice.',d1:[['Sensitivity','True positive rate'],['Specificity','True negative rate'],['PPV','Post-test prob if +'],['NPV','Post-test prob if -']],d2:[['RR','Cohort studies'],['OR','Case-control'],['NNT','1/ARR'],['p-value','<0.05 significant']]}
+};
+const intros={
+1:{t:'Phase 1: Informed Consent',i:'📋',d:'Master the elements of informed consent and exceptions.',o:['Know 5 elements of informed consent','Identify consent exceptions','Handle minor consent','Understand surrogate consent'],r:'<a href="https://www.ama-assn.org/delivering-care/ethics/informed-consent">AMA Ethics</a>'},
+2:{t:'Phase 2: Decision-Making Capacity',i:'🧠',d:'Assess capacity and navigate surrogate decision-making.',o:['Apply 4 elements of capacity','Distinguish capacity from competence','Identify appropriate surrogate','Know surrogate hierarchy'],r:'<a href="https://www.ncbi.nlm.nih.gov/books/NBK470227/">Capacity StatPearls</a>'},
+3:{t:'Phase 3: End-of-Life Care',i:'🕊️',d:'Navigate advance directives, DNR, and withdrawal of care.',o:['Interpret advance directives','Apply DNR appropriately','Navigate family disagreements','Distinguish palliative from hospice'],r:'<a href="https://www.ncbi.nlm.nih.gov/books/NBK482349/">Advance Directives StatPearls</a>'},
+4:{t:'Phase 4: Biostatistics',i:'📊',d:'Interpret studies and calculate key measures.',o:['Calculate sensitivity/specificity','Understand PPV/NPV','Interpret RR, OR, NNT','Identify study types and bias'],r:'<a href="https://www.ncbi.nlm.nih.gov/books/NBK568721/">Biostats StatPearls</a>'}
+};
+const Qs={
+1:{ty:'Consent Elements',cx:'Patient needs surgery',s:'What are the required elements of informed consent?',o:[['a','Signature only'],['b','Diagnosis and treatment'],['c','Disclosure, understanding, voluntariness, competence, and decision'],['d','Witness and notary']],e:'<strong>5 Elements of Informed Consent:</strong><br>1. <strong>Disclosure</strong> - diagnosis, treatment, risks, benefits, alternatives<br>2. <strong>Understanding</strong> - patient comprehends<br>3. <strong>Voluntariness</strong> - no coercion<br>4. <strong>Competence</strong> - capacity to decide<br>5. <strong>Decision</strong> - clear choice made'},
+2:{ty:'Emergency Exception',cx:'Unconscious trauma patient',s:'When can you treat WITHOUT informed consent?',o:[['a','If family is unavailable'],['b','Medical emergency when patient cannot consent and no surrogate available'],['c','If treatment is routine'],['d','If patient is elderly']],e:'<strong>Consent Exceptions:</strong><br>• <strong>Emergency</strong> - life/limb threatening, patient incapacitated, no surrogate<br>• <strong>Waiver</strong> - patient explicitly waives right to information<br>• <strong>Therapeutic privilege</strong> - rare, info would harm patient<br>• <strong>Public health</strong> - reportable diseases'},
+3:{ty:'Minor Consent',cx:'16-year-old needs treatment',s:'Which minors can consent for their own care?',o:[['a','Emancipated minors (married, military, self-supporting) and mature minors for specific services'],['b','Any minor over 12'],['c','Only with parent present'],['d','Never without court order']],e:'<strong>Minor Consent:</strong><br><br><strong>Emancipated minors</strong> (full consent):<br>• Married, military, self-supporting, court-declared<br><br><strong>Mature minor doctrine</strong> (specific services):<br>• STIs, contraception, prenatal care<br>• Substance abuse, mental health<br>• Varies by state'},
+4:{ty:'Surrogate Consent',cx:'Patient is incapacitated',s:'What is the typical surrogate hierarchy when patient cannot consent?',o:[['a','Physician decides'],['b','Oldest family member'],['c','Anyone available'],['d','Healthcare proxy → Spouse → Adult children → Parents → Siblings']],e:'<strong>Surrogate Hierarchy:</strong><br>1. Healthcare proxy/DPOA-HC (if designated)<br>2. Spouse/domestic partner<br>3. Adult children<br>4. Parents<br>5. Adult siblings<br>6. Other relatives<br><br>May vary slightly by state.'},
+5:{ty:'Disclosure Standard',cx:'What to tell patients',s:'What standard determines how much to disclose?',o:[['a','What physician thinks is relevant'],['b','What any physician would disclose'],['c','What a reasonable patient would want to know (patient-centered standard)'],['d','Everything possible']],e:'<strong>Disclosure Standards:</strong><br><br>• <strong>Professional standard</strong> - what reasonable physician discloses<br>• <strong>Patient-centered standard</strong> (majority) - what reasonable <em>patient</em> would want to know<br>• <strong>Subjective standard</strong> - what THIS patient wants<br><br>Most jurisdictions use patient-centered.'},
+6:{ty:'Capacity Elements',cx:'Assessing decision-making',s:'What are the 4 elements of decision-making capacity?',o:[['a','Age, diagnosis, prognosis, support'],['b','Understand information, appreciate consequences, reason about options, communicate a choice'],['c','Orientation to person, place, time, situation'],['d','Memory, attention, calculation, language']],e:'<strong>4 Elements of Capacity:</strong><br>1. <strong>Understand</strong> - comprehend relevant information<br>2. <strong>Appreciate</strong> - apply to own situation<br>3. <strong>Reason</strong> - weigh options rationally<br>4. <strong>Communicate</strong> - express a choice<br><br>Must have ALL four.'},
+7:{ty:'Capacity vs Competence',cx:'Legal distinction',s:'What is the difference between capacity and competence?',o:[['a','Capacity is clinical (physician assesses); competence is legal (court determines)'],['b','They are the same'],['c','Competence is clinical'],['d','Capacity requires a judge']],e:'<strong>Capacity vs Competence:</strong><br><br>• <strong>Capacity</strong> - Clinical determination by physician, decision-specific, can fluctuate<br><br>• <strong>Competence</strong> - Legal determination by court, global, requires adjudication<br><br>Patients have capacity until proven otherwise.'},
+8:{ty:'Capacity Assessment',cx:'Patient refusing treatment',s:'A patient with schizophrenia refuses appendectomy. What determines if they can refuse?',o:[['a','Diagnosis of schizophrenia'],['b','Whether family agrees'],['c','Physician preference'],['d','Whether they have capacity for THIS decision (decision-specific assessment)']],e:'<strong>Key Principles:</strong><br><br>• Capacity is <strong>decision-specific</strong><br>• Diagnosis does NOT determine capacity<br>• Patient may have capacity for some decisions, not others<br>• Refusing treatment ≠ lacking capacity<br>• Assess the 4 elements for THIS decision'},
+9:{ty:'Incapacitated Patient',cx:'Patient lacks capacity',s:'If a patient lacks capacity and has no advance directive, who decides?',o:[['a','Physician unilaterally'],['b','Ethics committee'],['c','Surrogate using substituted judgment (what patient would want) or best interest standard'],['d','Hospital administrator']],e:'<strong>Surrogate Decision Standards:</strong><br><br>1. <strong>Substituted judgment</strong> - what would patient want? (preferred if patient\'s values known)<br><br>2. <strong>Best interest</strong> - what would reasonable person want? (fallback if values unknown)<br><br>Surrogate should NOT use their own preferences.'},
+10:{ty:'Fluctuating Capacity',cx:'Delirious patient',s:'A delirious patient agreed to surgery yesterday but refuses today. What do you do?',o:[['a','Honor yesterday\'s consent'],['b','Reassess capacity; if lacking, treat delirium and wait if possible, or use surrogate'],['c','Proceed with surgery'],['d','Discharge patient']],e:'<strong>Fluctuating Capacity:</strong><br><br>• Capacity can change (delirium, medications, time of day)<br>• If capacity fluctuates, reassess when more lucid<br>• Treat reversible causes if possible<br>• If urgent and incapacitated, use surrogate<br>• Document capacity assessment'},
+11:{ty:'Advance Directives',cx:'Patient has living will',s:'What is the difference between a living will and healthcare proxy?',o:[['a','Living will = written instructions for care; Healthcare proxy/DPOA = person designated to decide'],['b','They are the same'],['c','Living will designates a person'],['d','Proxy is written instructions']],e:'<strong>Advance Directives:</strong><br><br>• <strong>Living will</strong> - written instructions about care preferences (especially end-of-life)<br><br>• <strong>Healthcare proxy/DPOA-HC</strong> - designates a person to make decisions if incapacitated<br><br>Both together = best protection'},
+12:{ty:'DNR Orders',cx:'Discussing code status',s:'What does DNR mean?',o:[['a','Do not treat'],['b','Withhold all care'],['c','No CPR/intubation if cardiac/respiratory arrest; other treatments continue'],['d','Hospice only']],e:'<strong>DNR (Do Not Resuscitate):</strong><br><br>• NO CPR, defibrillation, intubation if arrest<br>• Other treatments CONTINUE (antibiotics, surgery, etc.)<br>• DNR ≠ DNT (do not treat)<br>• Should be discussed, not assumed<br>• POLST = portable physician orders'},
+13:{ty:'Family Disagreement',cx:'Family wants "everything"',s:'Patient has clear advance directive refusing intubation. Family demands ventilator. What do you do?',o:[['a','Follow family wishes'],['b','Follow the advance directive; patient\'s documented wishes take precedence'],['c','Ethics committee decides'],['d','Do what is easiest']],e:'<strong>Priority of Decisions:</strong><br><br>1. Patient\'s current wishes (if has capacity)<br>2. <strong>Advance directive</strong> (patient\'s prior wishes)<br>3. Healthcare proxy decision<br>4. Surrogate using substituted judgment<br><br>Family cannot override clear advance directive.'},
+14:{ty:'Withdrawal of Care',cx:'Terminal patient on ventilator',s:'Is it ethical to withdraw life-sustaining treatment?',o:[['a','Never ethical'],['b','Only if patient is brain dead'],['c','Only with court order'],['d','Yes, if consistent with patient wishes or best interest; withdrawing and withholding are ethically equivalent']],e:'<strong>Withdrawal of Care:</strong><br><br>• <strong>Ethically equivalent</strong> - withdrawing and withholding<br>• Requires informed consent or surrogate decision<br>• Must align with patient values/wishes<br>• Comfort care continues<br>• NOT euthanasia or assisted suicide'},
+15:{ty:'Palliative vs Hospice',cx:'End-of-life options',s:'What is the difference between palliative care and hospice?',o:[['a','Palliative = comfort care at any stage, can continue treatment; Hospice = terminal prognosis (<6mo), comfort-focused'],['b','They are the same'],['c','Hospice allows curative treatment'],['d','Palliative is only for cancer']],e:'<strong>Palliative vs Hospice:</strong><br><br>• <strong>Palliative care</strong>:<br>&nbsp;&nbsp;- Any serious illness, any stage<br>&nbsp;&nbsp;- Can continue curative treatment<br>&nbsp;&nbsp;- Focus on symptoms and QOL<br><br>• <strong>Hospice</strong>:<br>&nbsp;&nbsp;- Terminal prognosis (<6 months)<br>&nbsp;&nbsp;- Comfort-focused, no curative intent<br>&nbsp;&nbsp;- Medicare benefit'},
+16:{ty:'Sensitivity/Specificity',cx:'Test characteristics',s:'A test has 90% sensitivity. What does this mean?',o:[['a','90% of positive tests are true positives'],['b','90% of negative tests are true negatives'],['c','90% of people WITH disease test positive (true positive rate)'],['d','90% of people test positive']],e:'<strong>Sensitivity & Specificity:</strong><br><br>• <strong>Sensitivity</strong> = TP/(TP+FN) = true positive rate<br>&nbsp;&nbsp;"If you HAVE disease, chance of + test"<br>&nbsp;&nbsp;High sensitivity → good for ruling OUT (SnNout)<br><br>• <strong>Specificity</strong> = TN/(TN+FP) = true negative rate<br>&nbsp;&nbsp;"If you DON\'T have disease, chance of - test"<br>&nbsp;&nbsp;High specificity → good for ruling IN (SpPin)'},
+17:{ty:'PPV/NPV',cx:'Predictive values',s:'What affects PPV most?',o:[['a','Sensitivity'],['b','Prevalence of disease in population'],['c','Specificity only'],['d','Sample size']],e:'<strong>Predictive Values:</strong><br><br>• <strong>PPV</strong> = TP/(TP+FP)<br>&nbsp;&nbsp;"If + test, chance you have disease"<br><br>• <strong>NPV</strong> = TN/(TN+FN)<br>&nbsp;&nbsp;"If - test, chance you\'re disease-free"<br><br><strong>PPV increases with prevalence</strong><br>NPV decreases with prevalence<br><br>Same test, different PPV in different populations!'},
+18:{ty:'Study Types',cx:'Research design',s:'A study follows smokers and non-smokers for 20 years to see who develops lung cancer. What type?',o:[['a','Case-control'],['b','Cross-sectional'],['c','Case series'],['d','Cohort study (exposure → outcome over time)']],e:'<strong>Study Types:</strong><br><br>• <strong>Cohort</strong> - follow exposed/unexposed → outcome (calculates RR)<br>• <strong>Case-control</strong> - cases vs controls → look back at exposure (calculates OR)<br>• <strong>Cross-sectional</strong> - snapshot, prevalence<br>• <strong>RCT</strong> - randomize to intervention, gold standard<br>• <strong>Meta-analysis</strong> - combines multiple studies'},
+19:{ty:'NNT',cx:'Treatment effect',s:'A drug reduces mortality from 8% to 5%. What is NNT?',o:[['a','NNT = 1/ARR = 1/(0.08-0.05) = 1/0.03 = 33'],['b','3'],['c','5'],['d','8']],e:'<strong>NNT (Number Needed to Treat):</strong><br><br>NNT = 1/ARR<br><br>ARR (Absolute Risk Reduction) = Control rate - Treatment rate<br>ARR = 8% - 5% = 3% = 0.03<br><br>NNT = 1/0.03 = <strong>33</strong><br><br>Must treat 33 patients to prevent 1 death.'},
+20:{ty:'Bias',cx:'Identifying errors',s:'Patients who recall exposure differently based on disease status. What bias?',o:[['a','Selection bias'],['b','Lead-time bias'],['c','Recall bias (cases remember exposures differently than controls)'],['d','Confounding']],e:'<strong>Common Biases:</strong><br><br>• <strong>Recall bias</strong> - differential memory of exposure<br>• <strong>Selection bias</strong> - non-random sample<br>• <strong>Lead-time bias</strong> - early detection appears to prolong survival<br>• <strong>Confounding</strong> - third variable affects both<br>• <strong>Observer bias</strong> - assessor knows group assignment'}
+};
+function updateV(p){const v=vit[p];document.getElementById('vCase').textContent=v.case;document.getElementById('vTopic').textContent=v.topic;document.getElementById('vYield').textContent=v.yield;}
+function renderCase(p){const c=cases[p];let h=`<div class="case-narrative">${c.t}</div><div class="data-section"><div class="data-label">Key Concepts</div><div class="data-grid">`;
+c.d1.forEach(x=>h+=`<div><span style="color:var(--muted)">${x[0]}:</span> <strong>${x[1]}</strong></div>`);
+h+=`</div></div><div class="data-section"><div class="data-label">Remember</div><div class="data-grid">`;
+c.d2.forEach(x=>h+=`<div><span style="color:var(--muted)">${x[0]}:</span> <strong>${x[1]}</strong></div>`);
+h+=`</div></div>`;document.getElementById('caseContent').innerHTML=h;}
+function getQs(p){return[(p-1)*5+1,(p-1)*5+2,(p-1)*5+3,(p-1)*5+4,(p-1)*5+5];}
+function renderQs(p){const intro=intros[p],qs=getQs(p);
+let h=`<div class="phase-intro"><h2>${intro.i} ${intro.t}</h2><div class="resource-box"><div class="resource-title">📚 RESOURCES</div><div class="resource-links">${intro.r}</div></div><p>${intro.d}</p><div class="learning-box"><div class="learning-title">🎯 Objectives</div><ul class="learning-list">`;
+intro.o.forEach(o=>h+=`<li>${o}</li>`);h+=`</ul></div></div>`;
+qs.forEach((qn,i)=>{const q=Qs[qn],s=st[qn];
+h+=`<div class="quiz-card"><div class="quiz-header"><div style="display:flex;align-items:center"><span class="quiz-num">${i+1}</span><span class="quiz-type">${q.ty}</span></div><span class="quiz-status ${s.done?(s.ok?'correct':'incorrect'):''}" id="st${qn}">${s.done?(s.ok?'✓':'✗'):'○'}</span></div>`;
+h+=`<div class="quiz-context">${q.cx}</div><div class="quiz-body"><div class="quiz-stem">${q.s}</div><div class="quiz-options" id="opts${qn}">`;
+q.o.forEach(opt=>{let cls=s.done?'disabled':'';if(s.done&&opt[0]===ans[qn])cls+=' correct';if(s.done&&opt[0]===s.pick&&!s.ok)cls+=' incorrect';
+h+=`<div class="quiz-option ${cls}" data-a="${opt[0]}" onclick="pick(${qn},this)"><span class="option-letter">${opt[0].toUpperCase()}</span><span class="option-text">${opt[1]}</span></div>`;});
+h+=`</div><div class="conf-section" id="cf${qn}" ${s.done?'style="display:none"':''}><div class="conf-btns">`;
+['low','med','high'].forEach(c=>h+=`<button class="conf-btn" onclick="setC(${qn},'${c}',this)">${{low:'Guess',med:'Some',high:'Sure'}[c]}</button>`);
+h+=`</div></div><button class="submit-btn" id="sub${qn}" onclick="submit(${qn})" disabled ${s.done?'style="display:none"':''}>Submit</button>`;
+h+=`<div class="explanation ${s.done?'visible '+(s.ok?'correct':'incorrect'):''}" id="exp${qn}"><div style="font-weight:600;margin-bottom:6px">${s.ok?'✓ Correct':'Review'}</div><div>${q.e}</div></div></div></div>`;});
+h+=`<div class="phase-summary" id="summary"><div class="summary-header"><div>Phase ${p} Complete!</div><div class="summary-score" id="score">0/5</div></div>`;
+if(p<4)h+=`<button class="next-btn" onclick="unlock(${p+1})">Continue →</button>`;
+else h+=`<p style="text-align:center;margin-top:14px;color:var(--green)">🎓 You mastered ethics and biostatistics!</p>`;
+h+=`</div>`;document.getElementById('questionsPanel').innerHTML=h;}
+function pick(qn,el){if(st[qn].done)return;document.querySelectorAll(`#opts${qn} .quiz-option`).forEach(o=>o.classList.remove('selected'));el.classList.add('selected');st[qn].pick=el.dataset.a;chk(qn);}
+function setC(qn,lv,el){if(st[qn].done)return;document.querySelectorAll(`#cf${qn} .conf-btn`).forEach(b=>b.classList.remove('selected'));el.classList.add('selected');st[qn].conf=lv;chk(qn);}
+function chk(qn){document.getElementById(`sub${qn}`).disabled=!(st[qn].pick&&st[qn].conf);}
+function submit(qn){const s=st[qn];if(s.done)return;s.done=true;s.ok=s.pick===ans[qn];
+document.querySelectorAll(`#opts${qn} .quiz-option`).forEach(o=>{o.classList.add('disabled');if(o.dataset.a===ans[qn])o.classList.add('correct');else if(o.dataset.a===s.pick&&!s.ok)o.classList.add('incorrect');});
+document.getElementById(`exp${qn}`).classList.add('visible',s.ok?'correct':'incorrect');
+document.getElementById(`st${qn}`).textContent=s.ok?'✓':'✗';document.getElementById(`st${qn}`).className=`quiz-status ${s.ok?'correct':'incorrect'}`;
+document.getElementById(`sub${qn}`).style.display='none';document.getElementById(`cf${qn}`).style.display='none';
+updProg();chkDone();}
+function updProg(){const t=Object.values(st).filter(s=>s.done).length;document.getElementById('progressCount').textContent=`${t}/20`;document.getElementById('progressFill').style.width=`${t*5}%`;}
+function chkDone(){const qs=getQs(phase);if(qs.every(q=>st[q].done)&&!done[phase]){done[phase]=1;
+document.getElementById('score').textContent=`${qs.filter(q=>st[q].ok).length}/5`;
+document.getElementById('summary').style.display='block';document.querySelector(`.timeline-phase[data-phase="${phase}"]`).classList.add('completed');
+document.getElementById(`status${phase}`).textContent='✓';document.getElementById(`status${phase}`).className='phase-status done';}}
+function unlock(np){open[np]=1;goPhase(np);}
+function goPhase(p){if(!open[p])return;phase=p;
+document.querySelectorAll('.timeline-phase').forEach(ph=>{const pn=+ph.dataset.phase;ph.classList.remove('active','locked');if(pn===p)ph.classList.add('active');if(!open[pn])ph.classList.add('locked');});
+for(let i=1;i<=4;i++){const s=document.getElementById(`status${i}`);if(done[i]){s.textContent='✓';s.className='phase-status done';}else if(i===p){s.textContent='Current';s.className='phase-status current';}else if(open[i]){s.textContent='';}else{s.textContent='🔒';}}
+updateV(p);renderCase(p);renderQs(p);window.scrollTo({top:0});}
+document.addEventListener('DOMContentLoaded',()=>{updateV(1);renderCase(1);renderQs(1);});
+</script>
+</body>
+</html>
