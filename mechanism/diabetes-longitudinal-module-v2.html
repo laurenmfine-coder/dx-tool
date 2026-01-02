@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diabetes: Marcus's Journey - MechanismDx</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root { --bg-page: #f8f9fa; --bg-white: #ffffff; --bg-subtle: #f1f3f5; --text-primary: #1a1a1a; --text-secondary: #5c5c5c; --text-muted: #8c8c8c; --border: #e9ecef; --accent-primary: #d97706; --accent-green: #16a34a; --accent-red: #dc2626; --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-page); color: var(--text-primary); line-height: 1.6; }
+.header { background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 0 24px; }
+.header-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
+.logo-link { display: flex; align-items: center; gap: 16px; text-decoration: none; color: inherit; }
+.tagline { font-family: 'Newsreader', Georgia, serif; font-style: italic; color: var(--text-muted); font-size: 14px; }
+.header-nav { display: flex; gap: 8px; }
+.nav-link { padding: 8px 14px; color: var(--text-secondary); text-decoration: none; font-size: 14px; font-weight: 500; border-radius: var(--radius-sm); }
+.nav-link:hover { background: var(--bg-subtle); }
+.nav-link.active { color: var(--accent-primary); background: rgba(217,119,6,0.08); }
+.module-header { background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 32px 24px; }
+.module-header-inner { max-width: 1200px; margin: 0 auto; }
+.breadcrumb { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; }
+.breadcrumb a { color: var(--accent-primary); text-decoration: none; }
+.module-title { display: flex; align-items: center; gap: 16px; }
+.module-icon { width: 56px; height: 56px; background: linear-gradient(135deg, #fef3c7, #fde68a); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 28px; }
+.module-title h1 { font-size: 28px; font-weight: 600; margin-bottom: 4px; }
+.module-title p { color: var(--text-secondary); font-size: 15px; }
+.patient-banner { background: linear-gradient(135deg, #92400e 0%, #b45309 100%); color: white; padding: 20px 24px; }
+.patient-banner-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.patient-avatar { width: 48px; height: 48px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+.patient-info { flex: 1; min-width: 200px; }
+.patient-name { font-size: 16px; font-weight: 600; }
+.patient-details { font-size: 13px; opacity: 0.9; }
+.patient-vitals { display: flex; gap: 16px; flex-wrap: wrap; }
+.vital { text-align: center; padding: 8px 14px; background: rgba(255,255,255,0.1); border-radius: var(--radius-sm); }
+.vital-value { font-size: 18px; font-weight: 700; }
+.vital-label { font-size: 10px; opacity: 0.8; text-transform: uppercase; }
+.timeline-nav { background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 0 24px; overflow-x: auto; }
+.timeline-inner { max-width: 1200px; margin: 0 auto; display: flex; min-width: max-content; }
+.timeline-phase { flex: 1; min-width: 140px; padding: 14px 12px; cursor: pointer; border-bottom: 3px solid transparent; text-align: center; transition: all 0.2s; }
+.timeline-phase:hover { background: var(--bg-subtle); }
+.timeline-phase.active { border-bottom-color: var(--accent-primary); background: rgba(217,119,6,0.04); }
+.timeline-phase.completed { border-bottom-color: var(--accent-green); }
+.timeline-phase.locked { opacity: 0.4; cursor: not-allowed; }
+.phase-label { font-size: 12px; font-weight: 600; }
+.phase-time { font-size: 10px; color: var(--text-muted); }
+.phase-status { font-size: 10px; margin-top: 4px; }
+.phase-status.current { color: var(--accent-primary); }
+.phase-status.done { color: var(--accent-green); }
+.main-container { max-width: 1200px; margin: 0 auto; padding: 24px; display: grid; grid-template-columns: 280px 1fr; gap: 24px; }
+@media (max-width: 900px) { .main-container { grid-template-columns: 1fr; } }
+.case-panel { position: sticky; top: 24px; height: fit-content; }
+.card { background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 16px; }
+.card-header { padding: 14px 16px; border-bottom: 1px solid var(--border); }
+.card-title { font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.card-content { padding: 16px; }
+.case-narrative { font-family: 'Newsreader', Georgia, serif; font-size: 13px; line-height: 1.7; color: var(--text-secondary); margin-bottom: 12px; }
+.case-narrative strong { color: var(--text-primary); }
+.case-narrative em { color: var(--accent-primary); font-style: normal; font-weight: 500; }
+.data-section { background: var(--bg-subtle); border-radius: var(--radius-sm); padding: 10px; margin-top: 10px; }
+.data-label { font-size: 9px; font-weight: 600; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+.data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.data-item { font-size: 10px; }
+.data-item span:first-child { color: var(--text-muted); }
+.data-item span:last-child { font-weight: 600; }
+.abnormal { color: var(--accent-red) !important; }
+.improved { color: var(--accent-green) !important; }
+.target { color: var(--accent-primary) !important; }
+.phase-intro { margin-bottom: 20px; }
+.phase-intro h2 { font-size: 18px; font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+.phase-intro p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+.complication-box { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: #fef3c7; border: 1px solid #fde68a; border-radius: 4px; font-size: 10px; font-weight: 600; color: #92400e; margin: 4px 4px 4px 0; }
+.learning-box { background: #fef3c7; border: 1px solid #fde68a; border-radius: var(--radius-md); padding: 14px; margin-top: 14px; }
+.learning-title { font-size: 11px; font-weight: 600; color: var(--accent-primary); margin-bottom: 8px; }
+.learning-list { list-style: none; font-size: 12px; }
+.learning-list li { padding: 3px 0 3px 18px; position: relative; color: var(--text-secondary); }
+.learning-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent-primary); }
+.quiz-card { background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius-lg); margin-bottom: 16px; overflow: hidden; }
+.quiz-header { padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.quiz-number { display: flex; align-items: center; gap: 8px; }
+.quiz-num { width: 24px; height: 24px; background: var(--accent-primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; }
+.quiz-type { font-size: 11px; color: var(--text-muted); }
+.quiz-status { font-size: 10px; padding: 3px 8px; border-radius: 10px; font-weight: 600; background: var(--bg-subtle); color: var(--text-muted); }
+.quiz-status.correct { background: #dcfce7; color: #166534; }
+.quiz-status.incorrect { background: #fee2e2; color: #991b1b; }
+.quiz-context { padding: 12px 16px; background: #fef3c7; border-bottom: 1px solid #fde68a; }
+.context-label { font-size: 9px; font-weight: 600; text-transform: uppercase; color: #92400e; margin-bottom: 3px; }
+.context-text { font-size: 11px; color: #78350f; line-height: 1.5; }
+.quiz-body { padding: 16px; }
+.quiz-stem { font-size: 13px; font-weight: 500; line-height: 1.5; margin-bottom: 14px; }
+const Qs={
+1:{ty:'Diagnosis',cx:'DKA criteria',s:'James has glucose 425, pH 7.18, HCO3 12, positive ketones. What is the diagnosis?',o:[['a','Diabetic ketoacidosis with hyperglycemia, acidosis, and ketones'],['b','Hyperosmolar hyperglycemic state'],['c','Lactic acidosis'],['d','Starvation ketosis']],e:'<strong>DKA criteria:</strong> Glucose >250, pH <7.3, HCO3 <18, anion gap >10, positive ketones. Usually Type 1.'},
+2:{ty:'Mechanism',cx:'DKA pathophysiology',s:'What is the underlying mechanism of DKA?',o:[['a','Insulin deficiency leads to lipolysis and ketogenesis'],['b','Excess insulin causing hypoglycemia'],['c','Glucagon deficiency'],['d','Carbohydrate malabsorption']],e:'<strong>DKA mechanism:</strong> Insulin deficiency → unable to use glucose → lipolysis → ketone bodies (acetoacetate, beta-hydroxybutyrate) → acidosis.'},
+3:{ty:'Treatment',cx:'DKA fluids',s:'What is the fluid management approach in DKA?',o:[['a','NS initially, then switch based on sodium; add dextrose when glucose <200'],['b','D5W from the start'],['c','Fluid restriction'],['d','Colloids only']],e:'<strong>Fluids:</strong> NS 1-2L first hour, then based on corrected Na. Add D5 when glucose <200 (continue insulin for ketosis clearance).'},
+4:{ty:'Insulin',cx:'DKA insulin',s:'How is insulin managed in DKA?',o:[['a','IV regular insulin after fluids started and K >3.3'],['b','Subcutaneous insulin only'],['c','Hold insulin until glucose normal'],['d','Bolus without infusion']],e:'<strong>Insulin:</strong> IV regular 0.1 U/kg/hr after initial fluids AND K >3.3. Don\'t stop until anion gap closes, even if glucose normal.'},
+5:{ty:'Potassium',cx:'Electrolyte management',s:'James has initial K of 5.8 mEq/L. How is potassium managed?',o:[['a','Don\'t replace initially; K will drop with insulin; replace when <5.2'],['b','Replace immediately despite level'],['c','Potassium is not a concern in DKA'],['d','Give calcium instead']],e:'<strong>Potassium:</strong> Often high initially (acidosis shifts K out). Drops rapidly with insulin. Replace when <5.2, hold insulin if <3.3.'},
+6:{ty:'Diagnosis',cx:'HHS criteria',s:'A patient has glucose 850, pH 7.35, minimal ketones, serum osm 340. Diagnosis?',o:[['a','Hyperosmolar hyperglycemic state (HHS)'],['b','DKA'],['c','Simple hyperglycemia'],['d','Metabolic alkalosis']],e:'<strong>HHS:</strong> Glucose >600, osmolality >320, pH >7.3, minimal ketones. Usually Type 2, elderly. Higher mortality than DKA.'},
+7:{ty:'Comparison',cx:'DKA vs HHS',s:'How does HHS differ from DKA?',o:[['a','HHS: higher glucose, higher osmolality, minimal ketosis, more dehydration'],['b','Identical presentations'],['c','HHS always has acidosis'],['d','DKA has higher glucose']],e:'<strong>HHS:</strong> Higher glucose, profound dehydration, higher osmolality, minimal acidosis/ketones. Enough insulin to prevent ketosis.'},
+8:{ty:'Treatment',cx:'HHS fluids',s:'Why is fluid replacement especially critical in HHS?',o:[['a','Profound dehydration (average 9L deficit) from osmotic diuresis'],['b','Minimal dehydration occurs'],['c','Fluid restriction is preferred'],['d','Only oral fluids needed']],e:'<strong>HHS fluids:</strong> Profound dehydration (9L+ deficit). NS initially, may need more gradual correction to avoid cerebral edema.'},
+9:{ty:'Complications',cx:'Cerebral edema',s:'What complication is especially concerning in pediatric DKA treatment?',o:[['a','Cerebral edema from too-rapid correction'],['b','Hypoglycemia only'],['c','Hypernatremia'],['d','Liver failure']],e:'<strong>Cerebral edema:</strong> Risk in children, especially with rapid fluid/glucose correction. Headache, confusion, bradycardia, HTN. Mannitol/hypertonic saline.'},
+10:{ty:'Transition',cx:'Subcutaneous insulin',s:'When can you transition from IV to subcutaneous insulin in DKA?',o:[['a','When anion gap closed, glucose <200, patient eating; overlap SC and IV'],['b','Immediately when glucose normalizes'],['c','After 24 hours regardless'],['d','When ketones negative on urine']],e:'<strong>Transition:</strong> Anion gap closed, glucose <200, HCO3 >18, eating. Give SC insulin 1-2h before stopping IV (prevents rebound DKA).'},
+11:{ty:'Management',cx:'Chronic diabetes',s:'What is the A1c target for most adults with diabetes?',o:[['a','<7% for most adults; individualize based on age and comorbidities'],['b','<5% for all patients'],['c','<10% is acceptable for everyone'],['d','Only fasting glucose matters']],e:'<strong>A1c targets:</strong> <7% most adults. Higher (7.5-8.5%) for elderly, limited life expectancy, hypoglycemia risk. Lower (<6.5%) if achievable without hypoglycemia.'},
+12:{ty:'Medications',cx:'Metformin',s:'Why is metformin first-line for Type 2 diabetes?',o:[['a','Effective, low hypoglycemia risk, weight neutral, cardiovascular benefits, low cost'],['b','Strongest glucose lowering'],['c','No contraindications exist'],['d','Works in Type 1 diabetes too']],e:'<strong>Metformin first-line:</strong> Effective, weight neutral, low hypoglycemia, CV benefits, inexpensive. Avoid if eGFR <30, hold with contrast.'},
+13:{ty:'SGLT2',cx:'New agents',s:'What are the benefits of SGLT2 inhibitors beyond glucose control?',o:[['a','Cardiovascular and renal protection, weight loss, BP reduction'],['b','Weight gain expected'],['c','No other benefits besides glucose'],['d','Increase blood pressure']],e:'<strong>SGLT2i:</strong> CV benefit (empagliflozin, canagliflozin, dapagliflozin), renal protection, weight loss, BP reduction. Risk: DKA, UTI, genital infections.'},
+14:{ty:'GLP1',cx:'Incretin therapy',s:'What are the benefits of GLP-1 receptor agonists?',o:[['a','Weight loss, cardiovascular benefit, low hypoglycemia risk'],['b','Weight gain common'],['c','Only glucose lowering'],['d','Must be given IV']],e:'<strong>GLP-1 agonists:</strong> Weight loss, CV benefit (semaglutide, liraglutide), low hypoglycemia. Weekly options available. GI side effects common initially.'},
+15:{ty:'Insulin',cx:'Type 2 insulin',s:'When is insulin indicated in Type 2 diabetes?',o:[['a','Uncontrolled on oral agents, A1c very high (>10%), symptomatic hyperglycemia'],['b','First-line for all Type 2'],['c','Never used in Type 2'],['d','Only at diagnosis']],e:'<strong>Insulin in T2D:</strong> Add if A1c not at goal on oral agents. Start if A1c >10%, symptomatic, or catabolic. Basal insulin often first.'},
+16:{ty:'Hypoglycemia',cx:'Treatment',s:'James has glucose 48 mg/dL with confusion. How is this treated?',o:[['a','15-20g fast-acting carbs if conscious; IV dextrose or glucagon if unable to swallow'],['b','Insulin immediately'],['c','Wait for symptoms to resolve'],['d','Only IV fluids needed']],e:'<strong>Hypoglycemia:</strong> Conscious: 15-20g fast carbs, recheck in 15 min. Severe: IV D50 (25g) or glucagon IM if no IV access.'},
+17:{ty:'Screening',cx:'Complications',s:'What complications should be screened for in diabetes?',o:[['a','Retinopathy, nephropathy, neuropathy, cardiovascular disease, foot exams'],['b','Only if symptoms present'],['c','No routine screening needed'],['d','Only A1c monitoring']],e:'<strong>Screening:</strong> Annual dilated eye exam, annual urine albumin/Cr, annual foot exam, CV risk assessment. More frequent if abnormal.'},
+18:{ty:'Nephropathy',cx:'Kidney protection',s:'What medication classes protect kidneys in diabetic nephropathy?',o:[['a','ACEi/ARBs and SGLT2 inhibitors for albuminuria and CKD progression'],['b','NSAIDs for protection'],['c','No medications help kidneys'],['d','Only blood pressure control matters']],e:'<strong>Nephroprotection:</strong> ACEi/ARB for albuminuria. SGLT2i for additional protection (CREDENCE, DAPA-CKD trials). Avoid NSAIDs.'},
+19:{ty:'Neuropathy',cx:'Symptoms',s:'What are symptoms of diabetic peripheral neuropathy?',o:[['a','Numbness, tingling, burning pain in stocking-glove distribution'],['b','Only motor weakness'],['c','Proximal pain only'],['d','Asymmetric weakness']],e:'<strong>DPN:</strong> Symmetric, distal, sensory > motor. Numbness, tingling, burning, "pins and needles." Length-dependent stocking-glove pattern.'},
+20:{ty:'Foot Care',cx:'Prevention',s:'What foot care prevents diabetic foot complications?',o:[['a','Daily inspection, proper footwear, professional foot exams, monofilament testing'],['b','No specific care needed'],['c','Only if ulcer present'],['d','Barefoot walking recommended']],e:'<strong>Foot care:</strong> Daily self-inspection, proper footwear, avoid barefoot, annual monofilament exam, prompt treatment of injuries. Prevent ulcers/amputation.'}
+};
+.explanation.correct { background: #f0fdf4; border: 1px solid #bbf7d0; }
+.explanation.incorrect { background: #fef2f2; border: 1px solid #fecaca; }
+.explanation-title { font-size: 12px; font-weight: 600; margin-bottom: 6px; }
+.explanation.correct .explanation-title { color: #166534; }
+.explanation.incorrect .explanation-title { color: #991b1b; }
+.explanation-text { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
+.explanation-text strong { color: var(--text-primary); }
+.phase-summary { background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; margin-top: 16px; display: none; }
+.summary-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+.summary-title { font-size: 15px; font-weight: 600; }
+.summary-score { font-size: 22px; font-weight: 700; color: var(--accent-green); }
+.summary-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.stat-box { text-align: center; padding: 10px; background: var(--bg-subtle); border-radius: var(--radius-sm); }
+.stat-value { font-size: 18px; font-weight: 700; }
+.stat-label { font-size: 9px; color: var(--text-muted); text-transform: uppercase; }
+.next-btn { margin-top: 14px; width: 100%; padding: 12px; background: var(--accent-green); color: white; border: none; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; cursor: pointer; }
+.progress-bar { background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 10px 24px; }
+.progress-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
+.progress-label { font-size: 10px; color: var(--text-muted); font-weight: 600; }
+.progress-track { flex: 1; height: 5px; background: var(--bg-subtle); border-radius: 3px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #f59e0b, #d97706, #16a34a, #059669); border-radius: 3px; transition: width 0.3s; }
+.progress-count { font-size: 10px; color: var(--text-muted); font-weight: 600; }
+</style>
+</head>
+<body>
+<header class="header"><div class="header-inner">
+<a href="index.html" class="logo-link">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 70" style="height:32px"><text x="5" y="45" font-family="Georgia,serif" font-size="42" fill="currentColor">Mechanism</text><text x="213" y="45" font-family="Georgia,serif" font-size="42" fill="currentColor">D</text><line x1="247" y1="24" x2="263" y2="45" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="245" cy="22" rx="2" ry="3.5" transform="rotate(-28 245 22)" fill="currentColor"/><path d="M263 24L253 35Q249 40 249 47Q249 54 254 58Q259 62 259 68" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/><ellipse cx="265" cy="22" rx="2" ry="3.5" transform="rotate(28 265 22)" fill="currentColor"/><circle cx="259" cy="68" r="7" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="259" cy="68" r="3.5" fill="currentColor"/></svg>
+<span class="tagline">The right mechanism unlocks everything.</span></a>
+<nav class="header-nav"><a href="/" class="nav-link">ReasonDx</a><a href="index.html" class="nav-link active">Mechanisms</a></nav>
+</div></header>
+
+<div class="module-header"><div class="module-header-inner">
+<div class="breadcrumb"><a href="index.html">MechanismDx</a> › Longitudinal Cases › Diabetes</div>
+<div class="module-title"><div class="module-icon">🩸</div><div><h1>Diabetes: Marcus's Journey</h1><p>From new diagnosis through complications — Eyes, Kidneys, Nerves, Heart & Feet</p></div></div>
+</div></div>
+
+<div class="progress-bar"><div class="progress-inner">
+<span class="progress-label">Progress</span>
+<div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<span class="progress-count" id="progressCount">0/20</span>
+</div></div>
+
+<div class="patient-banner"><div class="patient-banner-inner">
+<div class="patient-avatar">👨🏿</div>
+<div class="patient-info"><div class="patient-name">Marcus Johnson, 52 years old</div><div class="patient-details">BMI 34, HTN, Family hx T2DM | New polyuria, polydipsia, fatigue</div></div>
+<div class="patient-vitals">
+<div class="vital"><div class="vital-value" id="vA1c">11.2</div><div class="vital-label">A1c %</div></div>
+<div class="vital"><div class="vital-value" id="vGluc">287</div><div class="vital-label">Glucose</div></div>
+<div class="vital"><div class="vital-value" id="vUACR">--</div><div class="vital-label">UACR</div></div>
+</div></div></div>
+
+<nav class="timeline-nav"><div class="timeline-inner">
+<div class="timeline-phase active" data-phase="1" onclick="goPhase(1)"><div class="phase-label">🆕 New Diagnosis</div><div class="phase-time">Day 1</div><div class="phase-status current" id="status1">Current</div></div>
+<div class="timeline-phase locked" data-phase="2" onclick="goPhase(2)"><div class="phase-label">📊 Monitoring</div><div class="phase-time">Month 3</div><div class="phase-status" id="status2">🔒</div></div>
+<div class="timeline-phase locked" data-phase="3" onclick="goPhase(3)"><div class="phase-label">⚠️ Complications</div><div class="phase-time">Year 3</div><div class="phase-status" id="status3">🔒</div></div>
+<div class="timeline-phase locked" data-phase="4" onclick="goPhase(4)"><div class="phase-label">🎯 Optimization</div><div class="phase-time">Year 5</div><div class="phase-status" id="status4">🔒</div></div>
+</div></nav>
+
+<div class="main-container">
+<aside class="case-panel"><div class="card"><div class="card-header"><h3 class="card-title">📋 Clinical Snapshot</h3></div><div class="card-content" id="caseContent"></div></div></aside>
+<main id="questionsPanel"></main>
+</div>
+
+<script>
+const answers={1:'c',2:'b',3:'d',4:'a',5:'c',6:'b',7:'a',8:'c',9:'d',10:'b',11:'c',12:'a',13:'b',14:'d',15:'a',16:'c',17:'b',18:'a',19:'d',20:'c'};
+const state={}; for(let i=1;i<=20;i++) state[i]={done:false,pick:null,conf:null,ok:false};
+let phase=1,done={1:false,2:false,3:false,4:false},open={1:true,2:false,3:false,4:false};
+const vitals={1:{a1c:'11.2',gluc:'287',uacr:'--'},2:{a1c:'7.8',gluc:'156',uacr:'45'},3:{a1c:'9.4',gluc:'234',uacr:'180'},4:{a1c:'6.9',gluc:'128',uacr:'28'}};
+
+const cases={
+1:{text:'<strong>Marcus Johnson</strong> presents with <strong>3 weeks of polyuria, polydipsia</strong>, and fatigue. Lost 12 lbs unintentionally. No prior diabetes diagnosis. BMI 34, BP 142/88.',vitals:[['FPG','287 mg/dL',1],['A1c','11.2%',1],['BP','142/88',1],['BMI','34 kg/m²',1]],exam:[['Acanthosis','Neck, axillae',1],['Feet','Intact, pulses 2+',0],['Eyes','Fundus WNL',0]],labs:[['Cr','1.0 mg/dL',0],['eGFR','92',0],['UA','Glucose 3+',1],['Ketones','Trace',0]]},
+2:{text:'<strong>Month 3:</strong> Marcus returns for follow-up. On <em>metformin 1000mg BID</em>. Lost 8 lbs with diet changes. Checking first A1c on treatment.',vitals:[['FPG','156 mg/dL',1],['A1c','7.8%',1],['BP','132/82',0]],exam:[['Weight','↓8 lbs',3],['Feet','Monofilament intact',0],['Eyes','Dilated exam pending',0]],labs:[['Cr','1.0',0],['UACR','45 mg/g',1],['Lipids','LDL 142',1]]},
+3:{text:'<strong>Year 3:</strong> Marcus missed appointments. A1c rose to <em>9.4%</em>. Now has <strong>blurred vision, tingling feet, foamy urine</strong>. Concerned about complications.',vitals:[['FPG','234 mg/dL',1],['A1c','9.4%',1],['BP','148/92',1]],exam:[['Eyes','Microaneurysms',1],['Feet','↓Monofilament',1],['Reflexes','↓Ankle DTRs',1]],labs:[['Cr','1.4',1],['eGFR','58',1],['UACR','180 mg/g',1]]},
+4:{text:'<strong>Year 5:</strong> With intensified therapy, Marcus achieved <em>A1c 6.9%</em>. On metformin + <strong>empagliflozin + semaglutide</strong>. Lost 22 lbs total. Albuminuria improving.',vitals:[['FPG','128 mg/dL',0],['A1c','6.9%',3],['BP','124/76',3]],exam:[['Eyes','Stable NPDR',0],['Feet','Sensation improving',3],['Weight','↓22 lbs total',3]],labs:[['Cr','1.2',0],['eGFR','68',0],['UACR','28 mg/g',3]]}
+};
+
+const intros={
+1:{title:'Phase 1: New Diagnosis',icon:'🆕',desc:'Marcus has new-onset Type 2 diabetes. Understand diagnosis, pathophysiology, initial workup, and first-line therapy.',obj:['Know diagnostic criteria for diabetes','Understand insulin resistance pathophysiology','Perform baseline complication screening','Initiate first-line therapy with metformin']},
+2:{title:'Phase 2: Monitoring & Targets',icon:'📊',desc:'Marcus returns for follow-up. Learn A1c interpretation, monitoring schedules, and when to intensify therapy.',obj:['Interpret A1c and its limitations','Know screening intervals for complications','Understand UACR for nephropathy detection','Recognize when to add second agents']},
+3:{title:'Phase 3: Microvascular Complications',icon:'⚠️',desc:'Marcus developed retinopathy, nephropathy, and neuropathy. Understand glucose toxicity mechanisms and organ-specific exams.',obj:['Understand retinopathy stages and screening','Perform diabetic foot exam correctly','Interpret UACR stages of nephropathy','Know nephroprotective medications']},
+4:{title:'Phase 4: Comprehensive Optimization',icon:'🎯',desc:'Marcus achieves control with modern therapies. Learn SGLT2i and GLP-1 benefits beyond glucose.',obj:['Know cardiovascular benefits of SGLT2i/GLP-1','Understand weight loss mechanisms','Apply individualized A1c targets','Integrate cardiorenal protection']}
+};
+
+const Qs={
+1:{type:'Diagnostic Criteria',ctx:'FPG 287 mg/dL, symptoms of hyperglycemia present (polyuria, polydipsia).',stem:'Which SINGLE test confirms diabetes diagnosis in Marcus?',opts:[['a','Random glucose ≥200 mg/dL alone (no symptoms)'],['b','Fasting glucose ≥100 mg/dL'],['c','Fasting glucose ≥126 mg/dL OR random glucose ≥200 mg/dL with symptoms'],['d','A1c ≥6.0%']],exp:'<strong>Diabetes diagnostic criteria</strong> (any ONE with confirmation if asymptomatic):<br><br>• FPG ≥<strong>126</strong> mg/dL (fasting ≥8 hours)<br>• Random glucose ≥<strong>200</strong> mg/dL WITH symptoms<br>• 2-hour OGTT ≥<strong>200</strong> mg/dL<br>• A1c ≥<strong>6.5%</strong><br><br>Marcus has FPG 287 + symptoms = diagnostic. No need to repeat.'},
+2:{type:'Pathophysiology',ctx:'Marcus has BMI 34, acanthosis nigricans, family history of T2DM.',stem:'What is the PRIMARY pathophysiologic defect in Type 2 diabetes?',opts:[['a','Autoimmune destruction of beta cells'],['b','Insulin resistance with progressive beta cell dysfunction'],['c','Complete absence of insulin production'],['d','Glucagon excess without insulin involvement']],exp:'<strong>T2DM = Insulin resistance + beta cell dysfunction</strong><br><br>Sequence:<br>1. Insulin resistance (muscle, liver, adipose)<br>2. Compensatory ↑insulin secretion<br>3. Beta cell "exhaustion" over years<br>4. Relative insulin deficiency<br><br>Acanthosis nigricans = marker of insulin resistance. Type 1 = autoimmune beta cell destruction.'},
+3:{type:'Initial Workup',ctx:'New T2DM diagnosis. Planning baseline evaluation.',stem:'Which baseline test screens for diabetic KIDNEY disease at diagnosis?',opts:[['a','Serum creatinine alone'],['b','24-hour urine protein'],['c','Random urine dipstick'],['d','Spot urine albumin-to-creatinine ratio (UACR)']],exp:'<strong>UACR (urine albumin-to-creatinine ratio)</strong> is the screening test for diabetic nephropathy.<br><br>• Screen at diagnosis in T2DM (may have had undiagnosed DM for years)<br>• Screen 5 years after diagnosis in T1DM<br>• Then annually<br><br>UACR categories:<br>• <30 = normal<br>• 30-300 = moderately increased (microalbuminuria)<br>• >300 = severely increased (macroalbuminuria)<br><br>Cr alone misses early nephropathy!'},
+4:{type:'First-Line Therapy',ctx:'New T2DM, A1c 11.2%, no contraindications, eGFR 92.',stem:'What is the FIRST-LINE medication for Marcus?',opts:[['a','Metformin'],['b','Glipizide (sulfonylurea)'],['c','Insulin glargine'],['d','Sitagliptin (DPP-4 inhibitor)']],exp:'<strong>Metformin</strong> is first-line for T2DM per ADA guidelines:<br><br>Benefits:<br>• ↓Hepatic glucose production<br>• ↓A1c 1-1.5%<br>• Weight neutral or slight loss<br>• No hypoglycemia as monotherapy<br>• Low cost, proven CV safety<br><br>Contraindication: eGFR <30 (adjust dose 30-45)<br><br>With A1c 11.2%, Marcus may need dual therapy or insulin, but metformin is still the foundation.'},
+5:{type:'Metformin Mechanism',ctx:'Starting metformin 500mg BID, titrating to 1000mg BID.',stem:'What is the PRIMARY mechanism of metformin?',opts:[['a','Stimulates insulin secretion from beta cells'],['b','Blocks intestinal glucose absorption'],['c','Decreases hepatic glucose production'],['d','Increases insulin receptor sensitivity in muscle']],exp:'<strong>Metformin primarily decreases hepatic glucose production</strong> (gluconeogenesis).<br><br>Mechanisms:<br>• ↓Hepatic gluconeogenesis (primary)<br>• ↓Intestinal glucose absorption<br>• Modest ↑peripheral glucose uptake<br>• Activates AMP-kinase pathway<br><br>Does NOT stimulate insulin → no hypoglycemia.<br>GI side effects common (start low, take with food).'},
+6:{type:'A1c Interpretation',ctx:'A1c dropped from 11.2% to 7.8% over 3 months on metformin.',stem:'What does A1c represent?',opts:[['a','Average glucose over the past 2 weeks'],['b','Average glucose over the past 2-3 months (RBC lifespan)'],['c','Peak glucose level during the measurement period'],['d','Fasting glucose average only']],exp:'<strong>A1c = Average glucose over 2-3 months</strong> (RBC lifespan ~120 days).<br><br>A1c correlations (approximate):<br>• 6% ≈ 126 mg/dL<br>• 7% ≈ 154 mg/dL<br>• 8% ≈ 183 mg/dL<br>• 9% ≈ 212 mg/dL<br><br>Limitations (falsely low/high):<br>• Hemoglobinopathies<br>• Anemia, hemolysis (↓RBC lifespan)<br>• Recent transfusion<br>• Pregnancy<br>• CKD/ESRD'},
+7:{type:'Monitoring Schedule',ctx:'Planning ongoing diabetes monitoring.',stem:'How often should Marcus have dilated eye exams?',opts:[['a','Annually starting at diagnosis (T2DM)'],['b','Every 5 years'],['c','Only if vision changes'],['d','Every 6 months regardless of findings']],exp:'<strong>Annual dilated eye exam</strong> for T2DM starting at diagnosis.<br><br>Screening schedule:<br>• T2DM: At diagnosis, then annually<br>• T1DM: Within 5 years of diagnosis, then annually<br>• Can extend to every 2 years if no retinopathy AND good control<br><br>Why at diagnosis in T2DM? Many have undiagnosed DM for years → may already have retinopathy.'},
+8:{type:'UACR Interpretation',ctx:'UACR returned at 45 mg/g (normal <30).',stem:'Marcus\'s UACR of 45 mg/g indicates:',opts:[['a','Normal kidney function, no follow-up needed'],['b','Severely increased albuminuria (macroalbuminuria)'],['c','Moderately increased albuminuria — repeat to confirm'],['d','Need for immediate dialysis referral']],exp:'<strong>UACR 45 = Moderately increased albuminuria</strong> (formerly "microalbuminuria").<br><br>UACR staging:<br>• A1: <30 mg/g (normal)<br>• A2: 30-300 mg/g (moderately increased) ← Marcus<br>• A3: >300 mg/g (severely increased)<br><br>Action: Repeat in 3-6 months to confirm (can be transiently elevated). If persistent → start ACEi/ARB for nephroprotection.'},
+9:{type:'Adding Second Agent',ctx:'A1c 7.8% on metformin alone. Marcus has established CVD (prior MI).',stem:'Which second agent provides the MOST cardiovascular benefit?',opts:[['a','Glipizide (sulfonylurea)'],['b','Pioglitazone (thiazolidinedione)'],['c','Sitagliptin (DPP-4 inhibitor)'],['d','Empagliflozin (SGLT2 inhibitor) or semaglutide (GLP-1 RA)']],exp:'<strong>SGLT2 inhibitors and GLP-1 receptor agonists</strong> have proven CV benefit in patients with established ASCVD.<br><br>Trials:<br>• EMPA-REG (empagliflozin): ↓CV death 38%<br>• LEADER (liraglutide): ↓CV death 22%<br>• SUSTAIN-6 (semaglutide): ↓CV events<br><br>ADA recommends SGLT2i or GLP-1 RA as second agent when:<br>• Established CVD<br>• High CV risk<br>• Heart failure<br>• CKD'},
+10:{type:'Statin Therapy',ctx:'LDL 142 mg/dL. Age 52 with diabetes.',stem:'What is the statin recommendation for Marcus?',opts:[['a','No statin needed if LDL <160'],['b','Moderate-intensity statin for all diabetics 40-75 years'],['c','High-intensity statin only if prior MI'],['d','Statin only if 10-year ASCVD risk >20%']],exp:'<strong>All diabetics age 40-75 should be on at least moderate-intensity statin</strong> regardless of LDL.<br><br>ADA/ACC recommendations:<br>• Age 40-75 + DM: Moderate-intensity statin minimum<br>• + ASCVD or high risk: High-intensity statin<br>• Age 20-39: Consider if additional risk factors<br><br>DM is a "risk enhancer" — don\'t wait for elevated LDL or CV event.'},
+11:{type:'Retinopathy Mechanism',ctx:'Dilated exam shows microaneurysms and dot hemorrhages.',stem:'What is the MECHANISM of diabetic retinopathy?',opts:[['a','Autoimmune attack on retinal cells'],['b','Increased intraocular pressure'],['c','Hyperglycemia-induced damage to retinal capillaries → ischemia'],['d','Vitamin A deficiency from malabsorption']],exp:'<strong>Chronic hyperglycemia → microvascular damage → retinal ischemia</strong><br><br>Pathophysiology:<br>1. Hyperglycemia → pericyte loss, basement membrane thickening<br>2. Capillary occlusion → retinal ischemia<br>3. VEGF release → neovascularization<br><br>Stages:<br>• <strong>NPDR</strong> (non-proliferative): microaneurysms, dot/blot hemorrhages, cotton wool spots<br>• <strong>PDR</strong> (proliferative): neovascularization (sight-threatening)'},
+12:{type:'Foot Exam',ctx:'Marcus has tingling in feet. Performing diabetic foot exam.',stem:'Which test assesses protective sensation in the diabetic foot exam?',opts:[['a','10-g monofilament test'],['b','Ankle-brachial index (ABI)'],['c','Doppler ultrasound'],['d','X-ray of the foot']],exp:'<strong>10-gram monofilament test</strong> assesses protective sensation (large fiber neuropathy).<br><br>Complete diabetic foot exam:<br>• <strong>Monofilament</strong>: Protective sensation (test 4+ sites per foot)<br>• <strong>Vibration</strong>: 128 Hz tuning fork (large fiber)<br>• <strong>Ankle reflexes</strong>: Often diminished early<br>• <strong>Pulses</strong>: Dorsalis pedis, posterior tibial<br>• <strong>Inspection</strong>: Calluses, ulcers, deformities, nail care<br><br>Loss of protective sensation → high ulcer/amputation risk.'},
+13:{type:'Nephropathy Management',ctx:'UACR 180 mg/g (A2), eGFR 58, BP 148/92.',stem:'What medication class is FIRST-LINE for diabetic nephropathy?',opts:[['a','Calcium channel blockers'],['b','ACE inhibitors or ARBs'],['c','Beta blockers'],['d','Thiazide diuretics']],exp:'<strong>ACE inhibitors or ARBs</strong> are first-line for diabetic nephropathy with albuminuria.<br><br>Mechanism:<br>• ↓Efferent arteriolar pressure<br>• ↓Intraglomerular pressure<br>• ↓Albuminuria (even if normotensive!)<br><br>Indications:<br>• DM + HTN: First-line antihypertensive<br>• DM + albuminuria: Even if normotensive<br>• Titrate to max tolerated dose<br><br>Monitor K+ and Cr (small ↑Cr acceptable). Don\'t combine ACEi + ARB!'},
+14:{type:'Neuropathy Types',ctx:'Marcus has tingling/burning in feet in "stocking" distribution, worse at night.',stem:'Marcus\'s symptoms are MOST consistent with:',opts:[['a','Mononeuropathy (single nerve)'],['b','Autonomic neuropathy'],['c','Acute painful neuropathy from rapid glucose control'],['d','Distal symmetric polyneuropathy (DSPN)']],exp:'<strong>Distal symmetric polyneuropathy (DSPN)</strong> is the most common diabetic neuropathy.<br><br>Features:<br>• "Stocking-glove" distribution (starts distally)<br>• Sensory > motor<br>• Burning, tingling, numbness<br>• Often worse at night<br>• Progressive proximal spread<br><br>Other neuropathy types:<br>• Autonomic: GI, cardiac, sexual, bladder<br>• Mononeuropathy: CN III, carpal tunnel<br>• Radiculopathy: Dermatomal pain'},
+15:{type:'Hypoglycemia Risk',ctx:'Considering adding sulfonylurea (glipizide) for better control.',stem:'Which diabetes medications cause HYPOGLYCEMIA?',opts:[['a','Sulfonylureas and insulin'],['b','Metformin and SGLT2 inhibitors'],['c','GLP-1 agonists alone'],['d','DPP-4 inhibitors alone']],exp:'<strong>Sulfonylureas and insulin</strong> cause hypoglycemia because they work independent of glucose levels.<br><br>Hypoglycemia risk:<br>• HIGH: Insulin, sulfonylureas (glipizide, glimepiride), meglitinides<br>• LOW: Metformin, SGLT2i, GLP-1 RA, DPP-4i, TZDs<br><br>Sulfonylureas stimulate insulin secretion regardless of glucose → hypoglycemia if meals skipped. Important counseling for patients!'},
+16:{type:'SGLT2i Mechanism',ctx:'Adding empagliflozin to Marcus\'s regimen.',stem:'How do SGLT2 inhibitors lower glucose?',opts:[['a','Stimulate pancreatic insulin secretion'],['b','Increase hepatic glucose uptake'],['c','Block glucose reabsorption in the kidney → glucosuria'],['d','Slow gastric emptying']],exp:'<strong>SGLT2 inhibitors block glucose reabsorption in the proximal tubule</strong> → glucose excreted in urine.<br><br>Effects:<br>• ↓A1c 0.5-1%<br>• Weight loss (300-400 kcal/day lost as glucose)<br>• ↓BP (mild diuretic effect)<br>• <strong>CV protection</strong> (↓HF hospitalization)<br>• <strong>Renal protection</strong> (↓CKD progression)<br><br>Side effects: UTI, genital mycotic infections (yeast), euglycemic DKA (rare), volume depletion.'},
+17:{type:'GLP-1 RA Benefits',ctx:'Considering semaglutide for weight loss and glucose control.',stem:'What is a major non-glycemic benefit of GLP-1 receptor agonists?',opts:[['a','Increases appetite for better nutrition'],['b','Significant weight loss (10-15% with higher doses)'],['c','Prevents all diabetes complications'],['d','Eliminates need for other medications']],exp:'<strong>GLP-1 RAs cause significant weight loss</strong> through multiple mechanisms.<br><br>How they work:<br>• ↑Insulin secretion (glucose-dependent → low hypo risk)<br>• ↓Glucagon secretion<br>• Slow gastric emptying → satiety<br>• Central appetite suppression<br><br>Weight loss: 5-15% depending on agent/dose<br>• Semaglutide 2.4mg (Wegovy): ~15% weight loss<br><br>Also: CV benefit in ASCVD patients (LEADER, SUSTAIN-6).'},
+18:{type:'A1c Target',ctx:'Marcus is 52, otherwise healthy, motivated, on metformin + empagliflozin.',stem:'What is the appropriate A1c TARGET for Marcus?',opts:[['a','<7% for most adults with diabetes'],['b','<6% to prevent all complications'],['c','<8% for all diabetics'],['d','A1c doesn\'t matter if symptoms controlled']],exp:'<strong>A1c <7%</strong> is the target for most adults with diabetes per ADA.<br><br>Individualized targets:<br>• <7%: Most non-pregnant adults<br>• <6.5%: Select patients (short duration, no hypo risk, long life expectancy)<br>• <8%: Limited life expectancy, extensive comorbidities, hypoglycemia risk, long-standing DM<br><br>Tighter control = more microvascular benefit but more hypoglycemia risk. Individualize!'},
+19:{type:'Medications to Avoid',ctx:'Marcus\'s eGFR is now 68. Reviewing medication safety.',stem:'Which medication class should be AVOIDED or used cautiously in CKD?',opts:[['a','ACE inhibitors (always contraindicated)'],['b','SGLT2 inhibitors (always contraindicated)'],['c','All diabetes medications'],['d','Metformin (reduce dose or stop if eGFR <30)']],exp:'<strong>Metformin</strong> requires dose adjustment or discontinuation in CKD:<br><br>• eGFR ≥45: Full dose OK<br>• eGFR 30-45: Reduce dose (max 1000mg/day), monitor<br>• eGFR <30: <strong>Contraindicated</strong> (lactic acidosis risk)<br><br>SGLT2i: Can use to eGFR ~20 (renal protection even if less glucose effect)<br>ACEi/ARB: Continue for nephroprotection (monitor K+, Cr)<br>Sulfonylureas: ↑hypoglycemia risk in CKD'},
+20:{type:'Comprehensive Care',ctx:'Marcus now has A1c 6.9%, BP 124/76, on optimal therapy.',stem:'Which reflects COMPLETE diabetes care for Marcus?',opts:[['a','A1c monitoring alone'],['b','Glucose control without BP management'],['c','A1c + BP + lipids + annual eye/foot/kidney screening + vaccines'],['d','Medication management without lifestyle']],exp:'<strong>Comprehensive diabetes care</strong> = ABCs + screening + lifestyle:<br><br>• <strong>A1c</strong>: Every 3-6 months, target <7%<br>• <strong>Blood pressure</strong>: Target <130/80<br>• <strong>Cholesterol</strong>: Statin therapy<br>• <strong>Smoking</strong>: Cessation<br><br>Annual screening:<br>• Dilated eye exam<br>• Foot exam (+ monofilament)<br>• UACR + eGFR<br>• Dental exam<br><br>Vaccines: Flu (annual), pneumococcal, Hep B, COVID<br>Lifestyle: Diet, exercise, weight management'}
+};
+
+function updateVitals(p){const v=vitals[p];document.getElementById('vA1c').textContent=v.a1c;document.getElementById('vGluc').textContent=v.gluc;document.getElementById('vUACR').textContent=v.uacr;}
+
+function renderCase(p){const c=cases[p];let h=`<div class="case-narrative">${c.text}</div>`;
+h+=`<div class="data-section"><div class="data-label">Vitals/Metrics</div><div class="data-grid">`;
+c.vitals.forEach(v=>h+=`<div class="data-item"><span>${v[0]}:</span> <span class="${v[2]===1?'abnormal':v[2]===3?'improved':''}">${v[1]}</span></div>`);
+h+=`</div></div><div class="data-section"><div class="data-label">Exam Findings</div><div class="data-grid">`;
+c.exam.forEach(e=>h+=`<div class="data-item"><span>${e[0]}:</span> <span class="${e[2]===1?'abnormal':e[2]===3?'improved':''}">${e[1]}</span></div>`);
+h+=`</div></div><div class="data-section"><div class="data-label">Labs</div><div class="data-grid">`;
+c.labs.forEach(l=>h+=`<div class="data-item"><span>${l[0]}:</span> <span class="${l[2]===1?'abnormal':l[2]===3?'improved':''}">${l[1]}</span></div>`);
+h+=`</div></div>`;document.getElementById('caseContent').innerHTML=h;}
+
+function getQs(p){const s=(p-1)*5+1;return[s,s+1,s+2,s+3,s+4];}
+
+function renderQuestions(p){const intro=intros[p];const qs=getQs(p);
+let h=`<div class="phase-intro"><h2>${intro.icon} ${intro.title}</h2>`;
+h+=`<p>${intro.desc}</p><div class="learning-box"><div class="learning-title">🎯 Learning Objectives</div><ul class="learning-list">`;
+intro.obj.forEach(o=>h+=`<li>${o}</li>`);h+=`</ul></div></div>`;
+qs.forEach((qn,i)=>{const q=Qs[qn];const s=state[qn];
+h+=`<div class="quiz-card" id="q${qn}"><div class="quiz-header"><div class="quiz-number"><span class="quiz-num">${i+1}</span><span class="quiz-type">${q.type}</span></div><span class="quiz-status ${s.done?(s.ok?'correct':'incorrect'):''}" id="st${qn}">${s.done?(s.ok?'Correct':'Incorrect'):'Unanswered'}</span></div>`;
+h+=`<div class="quiz-context"><div class="context-label">📍 Case Connection</div><div class="context-text">${q.ctx}</div></div>`;
+h+=`<div class="quiz-body"><div class="quiz-stem">${q.stem}</div><div class="quiz-options" id="opts${qn}">`;
+q.opts.forEach(opt=>{let cls=s.done?'disabled':'';if(s.done&&opt[0]===answers[qn])cls+=' correct';if(s.done&&opt[0]===s.pick&&!s.ok)cls+=' incorrect';
+h+=`<div class="quiz-option ${cls}" data-a="${opt[0]}" onclick="pick(${qn},this)"><span class="option-letter">${opt[0].toUpperCase()}</span><span class="option-text">${opt[1]}</span></div>`;});
+h+=`</div><div class="confidence-section" id="conf${qn}" ${s.done?'style="display:none"':''}>`;
+h+=`<div class="confidence-label"><span>Confidence?</span><span id="cv${qn}">Select</span></div><div class="confidence-btns">`;
+h+=`<button class="conf-btn" onclick="setC(${qn},'low',this)">Guessing</button><button class="conf-btn" onclick="setC(${qn},'med',this)">Somewhat</button><button class="conf-btn" onclick="setC(${qn},'high',this)">Confident</button></div></div>`;
+h+=`<button class="submit-btn" id="sub${qn}" onclick="submit(${qn})" disabled ${s.done?'style="display:none"':''}>Submit Answer</button>`;
+h+=`<div class="explanation ${s.done?(s.ok?'visible correct':'visible incorrect'):''}" id="exp${qn}"><div class="explanation-title">${s.done?(s.ok?'✓ Correct!':'✗ Not quite'):'✓ Correct!'}</div><div class="explanation-text">${q.exp}</div></div></div></div>`;});
+h+=`<div class="phase-summary" id="summary"><div class="summary-header"><div class="summary-title">Phase ${p} Complete! 🎉</div><div class="summary-score" id="score">0/5</div></div>`;
+h+=`<div class="summary-stats"><div class="stat-box"><div class="stat-value" id="corrCt">0</div><div class="stat-label">Correct</div></div><div class="stat-box"><div class="stat-value" id="avgC">--</div><div class="stat-label">Avg Confidence</div></div><div class="stat-box"><div class="stat-value">+50</div><div class="stat-label">XP</div></div></div>`;
+if(p<4)h+=`<button class="next-btn" onclick="unlock(${p+1})">Continue to Phase ${p+1} →</button>`;
+else h+=`<p style="text-align:center;margin-top:14px;color:var(--accent-green);font-weight:600">🎓 Marcus achieved his goals! Comprehensive diabetes care works.</p>`;
+h+=`</div>`;document.getElementById('questionsPanel').innerHTML=h;}
+
+function pick(qn,el){if(state[qn].done)return;document.querySelectorAll(`#opts${qn} .quiz-option`).forEach(o=>o.classList.remove('selected'));el.classList.add('selected');state[qn].pick=el.dataset.a;chkSub(qn);}
+function setC(qn,lv,el){if(state[qn].done)return;document.querySelectorAll(`#conf${qn} .conf-btn`).forEach(b=>b.classList.remove('selected'));el.classList.add('selected');state[qn].conf=lv;document.getElementById(`cv${qn}`).textContent={low:'33%',med:'66%',high:'90%'}[lv];chkSub(qn);}
+function chkSub(qn){const btn=document.getElementById(`sub${qn}`);if(btn)btn.disabled=!(state[qn].pick&&state[qn].conf);}
+
+function submit(qn){const s=state[qn];if(s.done)return;s.done=true;s.ok=s.pick===answers[qn];
+document.querySelectorAll(`#opts${qn} .quiz-option`).forEach(o=>{o.classList.add('disabled');if(o.dataset.a===answers[qn])o.classList.add('correct');else if(o.dataset.a===s.pick&&!s.ok)o.classList.add('incorrect');});
+const exp=document.getElementById(`exp${qn}`);exp.classList.add('visible',s.ok?'correct':'incorrect');exp.querySelector('.explanation-title').textContent=s.ok?'✓ Correct!':'✗ Not quite';
+document.getElementById(`st${qn}`).textContent=s.ok?'Correct':'Incorrect';document.getElementById(`st${qn}`).className=`quiz-status ${s.ok?'correct':'incorrect'}`;
+document.getElementById(`sub${qn}`).style.display='none';document.getElementById(`conf${qn}`).style.display='none';
+updateProgress();checkDone();}
+
+function updateProgress(){const total=Object.values(state).filter(s=>s.done).length;document.getElementById('progressCount').textContent=`${total}/20`;document.getElementById('progressFill').style.width=`${(total/20)*100}%`;}
+
+function checkDone(){const qs=getQs(phase);if(qs.every(q=>state[q].done)&&!done[phase]){done[phase]=true;
+const corr=qs.filter(q=>state[q].ok).length;document.getElementById('score').textContent=`${corr}/5`;document.getElementById('corrCt').textContent=corr;
+const cv={low:33,med:66,high:90};const avg=Math.round(qs.reduce((s,q)=>s+cv[state[q].conf],0)/5);document.getElementById('avgC').textContent=`${avg}%`;
+document.getElementById('summary').style.display='block';document.getElementById('summary').scrollIntoView({behavior:'smooth'});
+document.querySelector(`.timeline-phase[data-phase="${phase}"]`).classList.add('completed');
+document.getElementById(`status${phase}`).textContent='✓ Done';document.getElementById(`status${phase}`).className='phase-status done';}}
+
+function unlock(np){open[np]=true;goPhase(np);}
+
+function goPhase(p){if(!open[p]){alert(`Complete Phase ${p-1} first!`);return;}phase=p;
+document.querySelectorAll('.timeline-phase').forEach(ph=>{const pn=parseInt(ph.dataset.phase);ph.classList.remove('active','locked');if(pn===p)ph.classList.add('active');if(!open[pn])ph.classList.add('locked');});
+for(let i=1;i<=4;i++){const st=document.getElementById(`status${i}`);if(done[i]){st.textContent='✓ Done';st.className='phase-status done';}else if(i===p){st.textContent='Current';st.className='phase-status current';}else if(open[i]){st.textContent='';st.className='phase-status';}else{st.textContent='🔒';st.className='phase-status';}}
+updateVitals(p);renderCase(p);renderQuestions(p);window.scrollTo({top:0,behavior:'smooth'});}
+
+document.addEventListener('DOMContentLoaded',()=>{updateVitals(1);renderCase(1);renderQuestions(1);});
+</script>
+</body>
+</html>

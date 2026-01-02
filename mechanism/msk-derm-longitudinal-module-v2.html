@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MSK/Derm: David's Journey - MechanismDx</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root { --bg-page: #f8f9fa; --bg-white: #ffffff; --bg-subtle: #f1f3f5; --text-primary: #1a1a1a; --text-secondary: #5c5c5c; --text-muted: #8c8c8c; --border: #e9ecef; --accent-primary: #ea580c; --accent-green: #16a34a; --accent-red: #dc2626; --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-page); color: var(--text-primary); line-height: 1.6; }
+.header { background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 0 24px; }
+.header-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
+.logo-link { display: flex; align-items: center; gap: 16px; text-decoration: none; color: inherit; }
+.tagline { font-family: 'Newsreader', Georgia, serif; font-style: italic; color: var(--text-muted); font-size: 14px; }
+.module-header { background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 32px 24px; }
+.module-header-inner { max-width: 1200px; margin: 0 auto; }
+.breadcrumb { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; }
+.breadcrumb a { color: var(--accent-primary); text-decoration: none; }
+.module-title { display: flex; align-items: center; gap: 16px; }
+.module-icon { width: 56px; height: 56px; background: linear-gradient(135deg, #fed7aa, #fdba74); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 28px; }
+.module-title h1 { font-size: 28px; font-weight: 600; margin-bottom: 4px; }
+.module-title p { color: var(--text-secondary); font-size: 15px; }
+.patient-banner { background: linear-gradient(135deg, #c2410c 0%, #ea580c 100%); color: white; padding: 20px 24px; }
+.patient-banner-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.patient-avatar { width: 48px; height: 48px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+.patient-info { flex: 1; min-width: 200px; }
+.patient-name { font-size: 16px; font-weight: 600; }
+.patient-details { font-size: 13px; opacity: 0.9; }
+.patient-vitals { display: flex; gap: 16px; flex-wrap: wrap; }
+.vital { text-align: center; padding: 8px 14px; background: rgba(255,255,255,0.1); border-radius: var(--radius-sm); }
+.vital-value { font-size: 18px; font-weight: 700; }
+.vital-label { font-size: 10px; opacity: 0.8; text-transform: uppercase; }
+.timeline-nav { background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 0 24px; overflow-x: auto; }
+.timeline-inner { max-width: 1200px; margin: 0 auto; display: flex; min-width: max-content; }
+.timeline-phase { flex: 1; min-width: 140px; padding: 14px 12px; cursor: pointer; border-bottom: 3px solid transparent; text-align: center; transition: all 0.2s; }
+.timeline-phase:hover { background: var(--bg-subtle); }
+.timeline-phase.active { border-bottom-color: var(--accent-primary); background: rgba(234,88,12,0.04); }
+.timeline-phase.completed { border-bottom-color: var(--accent-green); }
+.timeline-phase.locked { opacity: 0.4; cursor: not-allowed; }
+.phase-label { font-size: 12px; font-weight: 600; }
+.phase-time { font-size: 10px; color: var(--text-muted); }
+.phase-status { font-size: 10px; margin-top: 4px; }
+.phase-status.current { color: var(--accent-primary); }
+.phase-status.done { color: var(--accent-green); }
+.main-container { max-width: 1200px; margin: 0 auto; padding: 24px; display: grid; grid-template-columns: 280px 1fr; gap: 24px; }
+@media (max-width: 900px) { .main-container { grid-template-columns: 1fr; } }
+.case-panel { position: sticky; top: 24px; height: fit-content; }
+.card { background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 16px; }
+.card-header { padding: 14px 16px; border-bottom: 1px solid var(--border); }
+.card-title { font-size: 13px; font-weight: 600; }
+.card-content { padding: 16px; }
+.case-narrative { font-family: 'Newsreader', Georgia, serif; font-size: 13px; line-height: 1.7; color: var(--text-secondary); margin-bottom: 12px; }
+.case-narrative strong { color: var(--text-primary); }
+.case-narrative em { color: var(--accent-primary); font-style: normal; font-weight: 500; }
+.data-section { background: var(--bg-subtle); border-radius: var(--radius-sm); padding: 10px; margin-top: 10px; }
+.data-label { font-size: 9px; font-weight: 600; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+.data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.data-item { font-size: 10px; }
+.data-item span:first-child { color: var(--text-muted); }
+.data-item span:last-child { font-weight: 600; }
+.abnormal { color: var(--accent-red) !important; }
+.improved { color: var(--accent-green) !important; }
+.phase-intro { margin-bottom: 20px; }
+.phase-intro h2 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+.phase-intro p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+.resource-box { background: #fff7ed; border: 1px solid #fed7aa; border-left: 4px solid #ea580c; border-radius: var(--radius-sm); padding: 12px; margin: 12px 0; }
+.resource-title { font-size: 10px; font-weight: 700; color: #c2410c; margin-bottom: 6px; }
+.resource-links { font-size: 10px; color: #9a3412; }
+.resource-links a { color: #ea580c; text-decoration: underline; }
+.learning-box { background: #fff7ed; border: 1px solid #fed7aa; border-radius: var(--radius-md); padding: 14px; margin-top: 14px; }
+.learning-title { font-size: 11px; font-weight: 600; color: var(--accent-primary); margin-bottom: 8px; }
+.learning-list { list-style: none; font-size: 12px; }
+.learning-list li { padding: 3px 0 3px 18px; position: relative; color: var(--text-secondary); }
+.learning-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent-primary); }
+.quiz-card { background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius-lg); margin-bottom: 16px; overflow: hidden; }
+.quiz-header { padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.quiz-number { display: flex; align-items: center; gap: 8px; }
+.quiz-num { width: 24px; height: 24px; background: var(--accent-primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; }
+.quiz-type { font-size: 11px; color: var(--text-muted); }
+.quiz-status { font-size: 10px; padding: 3px 8px; border-radius: 10px; font-weight: 600; background: var(--bg-subtle); color: var(--text-muted); }
+.quiz-status.correct { background: #dcfce7; color: #166534; }
+.quiz-status.incorrect { background: #fee2e2; color: #991b1b; }
+.quiz-context { padding: 12px 16px; background: #fff7ed; border-bottom: 1px solid #fed7aa; }
+.context-label { font-size: 9px; font-weight: 600; text-transform: uppercase; color: #c2410c; margin-bottom: 3px; }
+.context-text { font-size: 11px; color: #9a3412; line-height: 1.5; }
+.quiz-body { padding: 16px; }
+.quiz-stem { font-size: 13px; font-weight: 500; line-height: 1.5; margin-bottom: 14px; }
+.quiz-options { display: flex; flex-direction: column; gap: 6px; }
+.quiz-option { display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px; background: var(--bg-subtle); border: 2px solid transparent; border-radius: var(--radius-sm); cursor: pointer; transition: all 0.15s; }
+const Qs={
+1:{ty:'Gout',cx:'Presentation',s:'James has acute monoarticular arthritis of the first MTP with redness and swelling. Diagnosis?',o:[['a','Acute gout affecting the first MTP (podagra)'],['b','Septic arthritis'],['c','Osteoarthritis'],['d','Rheumatoid arthritis']],e:'<strong>Gout:</strong> Acute monoarticular, 1st MTP classic (podagra), red/hot/swollen. Uric acid crystals (negatively birefringent).'},
+2:{ty:'Diagnosis',cx:'Crystal analysis',s:'How do you confirm gout diagnosis?',o:[['a','Joint aspiration showing negatively birefringent needle-shaped crystals'],['b','Serum uric acid level alone'],['c','X-ray findings'],['d','Clinical diagnosis only']],e:'<strong>Gout diagnosis:</strong> Arthrocentesis - negatively birefringent needle-shaped monosodium urate crystals. Serum uric acid may be normal during flare.'},
+3:{ty:'Treatment',cx:'Acute gout',s:'What is the treatment for acute gout?',o:[['a','NSAIDs, colchicine, or steroids for acute flare'],['b','Start allopurinol immediately'],['c','Antibiotics'],['d','Physical therapy only']],e:'<strong>Acute gout:</strong> NSAIDs (indomethacin), colchicine (within 36h of onset best), or steroids. Do NOT start/stop urate-lowering during flare.'},
+4:{ty:'Prevention',cx:'Chronic management',s:'When should urate-lowering therapy be started?',o:[['a','After 2+ flares/year, tophi, CKD, or urolithiasis'],['b','After first attack always'],['c','Never indicated'],['d','Only with elevated uric acid']],e:'<strong>ULT indications:</strong> ≥2 flares/year, tophi, CKD stage 3+, urolithiasis. Start after flare resolves. Target uric acid <6.'},
+5:{ty:'Pseudogout',cx:'Differentiation',s:'How does pseudogout differ from gout?',o:[['a','CPPD crystals (positively birefringent), often affects knee, associated with age'],['b','Identical presentation'],['c','Always affects small joints'],['d','Treated with allopurinol']],e:'<strong>Pseudogout (CPPD):</strong> Positively birefringent rhomboid crystals. Knee most common. Elderly, associated with hypothyroidism, hyperparathyroidism.'},
+6:{ty:'Septic',cx:'Joint infection',s:'What features suggest septic arthritis?',o:[['a','Acute monoarticular, fever, unable to bear weight, very high WBC in joint fluid'],['b','Symmetric polyarticular'],['c','No fever typically'],['d','Low joint fluid WBC']],e:'<strong>Septic arthritis:</strong> Acute monoarticular, fever, severe pain, ROM restricted. Joint WBC >50K (often >100K). S. aureus most common. Emergency.'},
+7:{ty:'Treatment',cx:'Septic arthritis Rx',s:'What is the treatment for septic arthritis?',o:[['a','IV antibiotics plus joint drainage (aspiration or surgical)'],['b','Oral antibiotics alone'],['c','NSAIDs only'],['d','Observation']],e:'<strong>Treatment:</strong> IV antibiotics (vanc + ceftriaxone empiric), PLUS joint drainage (serial aspiration vs surgical). Duration 2-4 weeks.'},
+8:{ty:'RA',cx:'Diagnosis',s:'What are the clinical features of rheumatoid arthritis?',o:[['a','Symmetric polyarthritis of small joints, morning stiffness >1 hour, systemic'],['b','Asymmetric monoarthritis'],['c','No morning stiffness'],['d','Large joints only']],e:'<strong>RA:</strong> Symmetric polyarthritis (MCPs, PIPs, wrists), morning stiffness >1h, RF/anti-CCP positive, systemic (fatigue, nodules).'},
+9:{ty:'Treatment',cx:'RA therapy',s:'What is the treatment approach for rheumatoid arthritis?',o:[['a','DMARDs early (methotrexate first-line), biologics if inadequate response'],['b','NSAIDs long-term only'],['c','Steroids as sole therapy'],['d','Treatment only when severe']],e:'<strong>RA treatment:</strong> Early DMARD (methotrexate first-line). Add biologics (TNF inhibitors, others) if inadequate response. NSAIDs/steroids as bridge.'},
+10:{ty:'OA',cx:'Features',s:'What are the clinical features of osteoarthritis?',o:[['a','Pain worse with activity, improves with rest, bony enlargement, crepitus'],['b','Morning stiffness >1 hour'],['c','Symmetric small joints'],['d','Hot swollen joints']],e:'<strong>OA:</strong> Pain with use (improves with rest), brief morning stiffness (<30min), DIPs/PIPs/CMC/knees/hips, Heberden/Bouchard nodes.'},
+11:{ty:'Treatment',cx:'OA management',s:'What is the treatment for osteoarthritis?',o:[['a','Weight loss, exercise, acetaminophen, NSAIDs, injections, surgery if severe'],['b','DMARDs required'],['c','Antibiotics'],['d','Complete rest only']],e:'<strong>OA treatment:</strong> Non-pharm (weight loss, exercise, PT), acetaminophen, NSAIDs (topical or oral), intra-articular steroids, joint replacement if refractory.'},
+12:{ty:'Low Back',cx:'Red flags',s:'What are red flags in low back pain?',o:[['a','Fever, weight loss, neuro deficits, bowel/bladder dysfunction, cancer history'],['b','Mild tenderness'],['c','Pain with activity'],['d','Duration >1 week']],e:'<strong>Red flags:</strong> Infection (fever, IVDU), cancer (history, weight loss), cauda equina (saddle anesthesia, bladder dysfunction), fracture (trauma, steroids).'},
+13:{ty:'Imaging',cx:'Back pain workup',s:'When is imaging indicated for low back pain?',o:[['a','Red flags present, or no improvement after 6 weeks of conservative treatment'],['b','All patients immediately'],['c','Never needed'],['d','Only if surgery planned']],e:'<strong>Imaging:</strong> Not routine. Indicated for red flags or failure to improve with 6 weeks conservative treatment. MRI if neuro deficits or infection.'},
+14:{ty:'Sciatica',cx:'Radiculopathy',s:'What are features of lumbar radiculopathy?',o:[['a','Pain radiating below knee, dermatomal distribution, positive straight leg raise'],['b','Only back pain'],['c','Bilateral symptoms'],['d','Improves with sitting']],e:'<strong>Radiculopathy:</strong> Pain radiating below knee, dermatomal pattern (L4, L5, S1 common), positive SLR, may have weakness/reflex changes.'},
+15:{ty:'Cauda Equina',cx:'Emergency',s:'What are signs of cauda equina syndrome?',o:[['a','Saddle anesthesia, bowel/bladder dysfunction, bilateral leg weakness'],['b','Unilateral leg pain'],['c','No bladder symptoms'],['d','Upper extremity weakness']],e:'<strong>Cauda equina:</strong> Saddle anesthesia, urinary retention/incontinence, fecal incontinence, bilateral weakness. Surgical emergency - MRI stat.'},
+16:{ty:'Psoriasis',cx:'Features',s:'What are the characteristics of psoriasis?',o:[['a','Well-demarcated erythematous plaques with silvery scale on extensor surfaces'],['b','Flexural distribution'],['c','No scale present'],['d','Vesicular lesions']],e:'<strong>Psoriasis:</strong> Well-demarcated plaques, silvery scale, extensor surfaces (elbows, knees), scalp, nails. Auspitz sign (pinpoint bleeding with scale removal).'},
+17:{ty:'Treatment',cx:'Psoriasis therapy',s:'What is the treatment for psoriasis?',o:[['a','Topical steroids, vitamin D analogs, phototherapy, systemic agents if severe'],['b','Antibiotics'],['c','Antihistamines only'],['d','No treatment available']],e:'<strong>Psoriasis treatment:</strong> Topical (steroids, calcipotriene, tazarotene), phototherapy (UVB), systemic (methotrexate, biologics) for moderate-severe.'},
+18:{ty:'Eczema',cx:'Features',s:'What are the features of atopic dermatitis?',o:[['a','Pruritic, erythematous patches in flexural areas, chronic relapsing course'],['b','Extensor surfaces'],['c','No itching'],['d','Well-demarcated plaques']],e:'<strong>Atopic dermatitis:</strong> Pruritic, flexural distribution (antecubital, popliteal), chronic relapsing, associated with atopy (asthma, allergic rhinitis).'},
+19:{ty:'Treatment',cx:'Eczema management',s:'What is the treatment for atopic dermatitis?',o:[['a','Moisturizers, topical steroids, avoid triggers, topical calcineurin inhibitors'],['b','Oral steroids long-term'],['c','Antibiotics alone'],['d','No treatment effective']],e:'<strong>Treatment:</strong> Moisturizers (mainstay), topical steroids (flares), tacrolimus/pimecrolimus (steroid-sparing), avoid triggers. Dupilumab for severe.'},
+20:{ty:'Contact',cx:'Contact dermatitis',s:'How do you differentiate allergic from irritant contact dermatitis?',o:[['a','Allergic: Type IV hypersensitivity, delayed; Irritant: direct damage, immediate'],['b','Identical presentations'],['c','Both are immediate reactions'],['d','Allergic is more common']],e:'<strong>Contact dermatitis:</strong> Allergic (poison ivy, nickel) - Type IV, sensitization required, vesicles. Irritant (chemicals) - direct damage, no sensitization.'}
+};
+.explanation-title { font-size: 12px; font-weight: 600; margin-bottom: 6px; }
+.explanation.correct .explanation-title { color: #166534; }
+.explanation.incorrect .explanation-title { color: #991b1b; }
+.explanation-text { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
+.explanation-text strong { color: var(--text-primary); }
+.explanation-text a { color: var(--accent-primary); }
+.phase-summary { background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; margin-top: 16px; display: none; }
+.summary-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+.summary-title { font-size: 15px; font-weight: 600; }
+.summary-score { font-size: 22px; font-weight: 700; color: var(--accent-green); }
+.summary-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.stat-box { text-align: center; padding: 10px; background: var(--bg-subtle); border-radius: var(--radius-sm); }
+.stat-value { font-size: 18px; font-weight: 700; }
+.stat-label { font-size: 9px; color: var(--text-muted); text-transform: uppercase; }
+.next-btn { margin-top: 14px; width: 100%; padding: 12px; background: var(--accent-green); color: white; border: none; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; cursor: pointer; }
+.progress-bar { background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 10px 24px; }
+.progress-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
+.progress-label { font-size: 10px; color: var(--text-muted); font-weight: 600; }
+.progress-track { flex: 1; height: 5px; background: var(--bg-subtle); border-radius: 3px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #ea580c, #fb923c, #10b981, #059669); border-radius: 3px; transition: width 0.3s; }
+.progress-count { font-size: 10px; color: var(--text-muted); font-weight: 600; }
+</style>
+</head>
+<body>
+<header class="header"><div class="header-inner">
+<a href="index.html" class="logo-link">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 70" style="height:32px"><text x="5" y="45" font-family="Georgia,serif" font-size="42" fill="currentColor">Mechanism</text><text x="213" y="45" font-family="Georgia,serif" font-size="42" fill="currentColor">D</text><line x1="247" y1="24" x2="263" y2="45" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="245" cy="22" rx="2" ry="3.5" transform="rotate(-28 245 22)" fill="currentColor"/><path d="M263 24L253 35Q249 40 249 47Q249 54 254 58Q259 62 259 68" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/><ellipse cx="265" cy="22" rx="2" ry="3.5" transform="rotate(28 265 22)" fill="currentColor"/><circle cx="259" cy="68" r="7" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="259" cy="68" r="3.5" fill="currentColor"/></svg>
+<span class="tagline">The right mechanism unlocks everything.</span></a>
+</div></header>
+
+<div class="module-header"><div class="module-header-inner">
+<div class="breadcrumb"><a href="index.html">MechanismDx</a> › Longitudinal Cases › MSK/Derm</div>
+<div class="module-title"><div class="module-icon">🦴</div><div><h1>MSK/Derm: David's Journey</h1><p>Joint Pain → Skin Lesions → Autoimmune → Infection | ACR/AAD Guidelines</p></div></div>
+</div></div>
+
+<div class="progress-bar"><div class="progress-inner">
+<span class="progress-label">Progress</span>
+<div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<span class="progress-count" id="progressCount">0/20</span>
+</div></div>
+
+<div class="patient-banner"><div class="patient-banner-inner">
+<div class="patient-avatar">👨🏼</div>
+<div class="patient-info"><div class="patient-name">David Park, 45 years old</div><div class="patient-details">Construction worker | Progressive joint pain, new skin changes</div></div>
+<div class="patient-vitals">
+<div class="vital"><div class="vital-value" id="vJoint">Knee</div><div class="vital-label">Affected</div></div>
+<div class="vital"><div class="vital-value" id="vUric">--</div><div class="vital-label">Uric Acid</div></div>
+<div class="vital"><div class="vital-value" id="vCRP">1.2</div><div class="vital-label">CRP</div></div>
+</div></div></div>
+
+<nav class="timeline-nav"><div class="timeline-inner">
+<div class="timeline-phase active" data-phase="1" onclick="goPhase(1)"><div class="phase-label">🦵 Acute Joint</div><div class="phase-time">Day 1</div><div class="phase-status current" id="status1">Current</div></div>
+<div class="timeline-phase locked" data-phase="2" onclick="goPhase(2)"><div class="phase-label">🔴 Skin Lesions</div><div class="phase-time">Week 2</div><div class="phase-status" id="status2">🔒</div></div>
+<div class="timeline-phase locked" data-phase="3" onclick="goPhase(3)"><div class="phase-label">🔄 Autoimmune</div><div class="phase-time">Month 2</div><div class="phase-status" id="status3">🔒</div></div>
+<div class="timeline-phase locked" data-phase="4" onclick="goPhase(4)"><div class="phase-label">🦠 Infection</div><div class="phase-time">Month 4</div><div class="phase-status" id="status4">🔒</div></div>
+</div></nav>
+
+<div class="main-container">
+<aside class="case-panel"><div class="card"><div class="card-header"><h3 class="card-title">📋 Clinical Snapshot</h3></div><div class="card-content" id="caseContent"></div></div></aside>
+<main id="questionsPanel"></main>
+</div>
+
+<script>
+const answers={1:'c',2:'b',3:'a',4:'d',5:'c',6:'b',7:'a',8:'d',9:'c',10:'b',11:'a',12:'c',13:'b',14:'d',15:'a',16:'c',17:'b',18:'d',19:'a',20:'c'};
+const state={}; for(let i=1;i<=20;i++) state[i]={done:false,pick:null,conf:null,ok:false};
+let phase=1,done={1:false,2:false,3:false,4:false},open={1:true,2:false,3:false,4:false};
+const vitals={1:{joint:'R Knee',uric:'9.2',crp:'4.8'},2:{joint:'--',uric:'--',crp:'1.0'},3:{joint:'Hands',uric:'5.1',crp:'3.2'},4:{joint:'L Knee',uric:'5.0',crp:'12.4'}};
+
+const cases={
+1:{text:'<strong>David Park</strong>, 45 y/o construction worker, presents with <strong>acute right knee pain, swelling, warmth</strong> overnight. Unable to bear weight. Denies trauma. History of HTN, drinks 2-3 beers daily. Taking HCTZ.',data1:[['Onset','12 hours',0],['Location','R knee',0],['Trauma','None',0],['Prior episodes','1 (big toe)',0]],data2:[['Swelling','3+',1],['Warmth','Yes',1],['ROM','Limited by pain',1],['Fever','100.4°F',1]],labs:[['Uric acid','9.2 mg/dL',1],['WBC','12.4K',1],['CRP','4.8',1],['Cr','1.1',0]]},
+2:{text:'<strong>Week 2:</strong> David returns with <em>new scaly, silvery plaques on elbows and knees</em>. Also has <strong>pitting of fingernails</strong>. Knee gout resolved with colchicine. Family history of "skin problems."',data1:[['Location','Elbows, knees',0],['Appearance','Silvery scale',1],['Nails','Pitting',1],['Pruritus','Mild',0]],data2:[['Plaques','Well-demarcated',0],['Auspitz sign','+',1],['Joints','Asymptomatic',0]],labs:[['CRP','1.0',0]]},
+3:{text:'<strong>Month 2:</strong> David develops <strong>symmetric pain and swelling in MCP/PIP joints, morning stiffness >1 hour</strong>. Subcutaneous nodules on elbows. Concerned about RA.',data1:[['Joints','MCPs, PIPs bilateral',1],['Stiffness','90 min AM',1],['Duration','>6 weeks',0],['Nodules','Elbows',1]],data2:[['Swelling','Symmetric',1],['Grip','Weak',1],['DIP','Spared',0]],labs:[['RF','+ (1:320)',1],['Anti-CCP','+ (85 U)',1],['CRP','3.2',1],['ESR','48',1]]},
+4:{text:'<strong>Month 4:</strong> David on methotrexate for RA. Now presents with <strong>acutely hot, swollen left knee</strong>. Fever 102°F. WBC 18K. Concern for <em>septic arthritis</em> vs RA flare.',data1:[['Onset','24 hours',0],['Fever','102°F',1],['Joint','L knee mono',1],['On MTX','Yes',0]],data2:[['Swelling','4+',1],['Warmth','Marked',1],['ROM','Severely limited',1]],labs:[['WBC','18K',1],['CRP','12.4',1],['Synovial WBC','85,000',1],['Gram stain','GPC clusters',1]]}
+};
+
+const intros={
+1:{title:'Phase 1: Acute Monoarticular Arthritis',icon:'🦵',desc:'David has acute knee pain. Differentiate gout, pseudogout, and septic arthritis. Learn ACR gout guidelines.',obj:['Differentiate crystal arthropathies from septic arthritis','Identify gout risk factors and triggers','Know synovial fluid analysis interpretation','Understand acute gout treatment (ACR guidelines)'],resources:'<a href="https://www.rheumatology.org/Practice-Quality/Clinical-Support/Clinical-Practice-Guidelines/Gout" target="_blank">ACR Gout Guidelines</a> | <a href="https://pubmed.ncbi.nlm.nih.gov/32390306/" target="_blank">2020 ACR Gout Guideline (PubMed)</a>'},
+2:{title:'Phase 2: Inflammatory Skin Disease',icon:'🔴',desc:'David develops psoriasis. Learn dermatologic diagnosis, AAD treatment guidelines, and psoriatic arthritis screening.',obj:['Recognize classic psoriasis morphology','Understand psoriasis subtypes','Know topical vs systemic treatment indications','Screen for psoriatic arthritis'],resources:'<a href="https://www.aad.org/member/clinical-quality/guidelines/psoriasis" target="_blank">AAD Psoriasis Guidelines</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK448194/" target="_blank">Psoriasis - StatPearls (Free)</a>'},
+3:{title:'Phase 3: Rheumatoid Arthritis',icon:'🔄',desc:'David develops RA. Apply ACR/EULAR classification criteria and understand DMARD therapy.',obj:['Apply 2010 ACR/EULAR RA classification criteria','Interpret RF and anti-CCP antibodies','Know DMARD treatment principles (treat-to-target)','Understand methotrexate monitoring'],resources:'<a href="https://www.rheumatology.org/Practice-Quality/Clinical-Support/Clinical-Practice-Guidelines/Rheumatoid-Arthritis" target="_blank">ACR RA Guidelines</a> | <a href="https://ard.bmj.com/content/69/9/1580" target="_blank">2010 ACR/EULAR Criteria (Free)</a>'},
+4:{title:'Phase 4: Septic Arthritis Emergency',icon:'🦠',desc:'David on immunosuppression develops septic arthritis. Recognize this emergency and know management.',obj:['Recognize septic arthritis as emergency','Know synovial fluid findings in infection','Understand empiric antibiotic choices','Know when to consult orthopedics'],resources:'<a href="https://www.idsociety.org/practice-guideline/native-joint-infections/" target="_blank">IDSA Joint Infection Guidelines</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK538176/" target="_blank">Septic Arthritis - StatPearls (Free)</a>'}
+};
+
+const Qs={
+1:{type:'Acute Monoarthritis DDx',ctx:'Acute knee swelling, warmth, fever, unable to bear weight. Prior episode in big toe.',stem:'What is the MOST important diagnosis to rule out urgently?',opts:[['a','Gout'],['b','Pseudogout'],['c','Septic arthritis (joint infection)'],['d','Osteoarthritis flare']],exp:'<strong>Septic arthritis must be ruled out emergently</strong> — delay causes joint destruction.<br><br>Red flags for septic joint:<br>• Fever<br>• Inability to bear weight<br>• Acute monoarthritis<br>• Immunocompromise<br><br><strong>Arthrocentesis is mandatory</strong> if septic arthritis suspected. Cannot distinguish gout from septic clinically — they can coexist!<br><br>📚 <a href="https://www.ncbi.nlm.nih.gov/books/NBK538176/" target="_blank">StatPearls: Septic Arthritis</a>'},
+2:{type:'Gout Risk Factors',ctx:'History of HTN on HCTZ, drinks 2-3 beers daily, uric acid 9.2.',stem:'Which medication is associated with hyperuricemia and gout?',opts:[['a','Lisinopril'],['b','Thiazide diuretics (HCTZ)'],['c','Metformin'],['d','Amlodipine']],exp:'<strong>Thiazides decrease uric acid excretion → hyperuricemia → gout.</strong><br><br>Gout risk factors:<br>• <strong>Medications:</strong> Thiazides, loop diuretics, low-dose aspirin, cyclosporine<br>• <strong>Diet:</strong> Alcohol (especially beer), red meat, shellfish, HFCS<br>• <strong>Comorbidities:</strong> CKD, obesity, metabolic syndrome<br>• <strong>Genetics:</strong> Underexcretion phenotype<br><br>Consider switching HCTZ to losartan (uricosuric effect).<br><br>📚 <a href="https://pubmed.ncbi.nlm.nih.gov/32390306/" target="_blank">ACR Gout Guideline 2020</a>'},
+3:{type:'Synovial Fluid Analysis',ctx:'Arthrocentesis performed. Fluid is cloudy yellow.',stem:'What finding confirms gout on synovial fluid analysis?',opts:[['a','Negatively birefringent needle-shaped crystals under polarized light'],['b','Positively birefringent rhomboid crystals'],['c','WBC >50,000 with >90% PMNs'],['d','Glucose <50% of serum']],exp:'<strong>Gout = Monosodium urate (MSU) crystals:</strong><br>• Needle-shaped<br>• <strong>Negatively birefringent</strong> (yellow parallel to axis)<br><br><strong>Pseudogout = Calcium pyrophosphate (CPPD):</strong><br>• Rhomboid-shaped<br>• <strong>Positively birefringent</strong> (blue parallel to axis)<br><br>Mnemonic: "Negative Needles in Gout"<br><br>WBC >50K suggests infection but crystal arthritis can also elevate WBC. Always Gram stain/culture!'},
+4:{type:'Acute Gout Treatment',ctx:'Synovial fluid shows MSU crystals. No infection. Treating acute gout.',stem:'What is first-line treatment for acute gout flare per ACR?',opts:[['a','Allopurinol (start immediately)'],['b','Probenecid'],['c','Febuxostat'],['d','NSAIDs, colchicine, or corticosteroids']],exp:'<strong>ACR: Acute gout treatment options (choose based on patient):</strong><br><br>• <strong>NSAIDs</strong> (indomethacin, naproxen) — if no contraindications<br>• <strong>Colchicine</strong> — most effective if started within 36 hours<br>• <strong>Corticosteroids</strong> (oral, IA, or IM) — if NSAIDs/colchicine contraindicated<br><br><strong>Do NOT start allopurinol during acute flare</strong> (can prolong/worsen). If already on it, continue.<br><br>📚 <a href="https://www.rheumatology.org/Practice-Quality/Clinical-Support/Clinical-Practice-Guidelines/Gout" target="_blank">ACR Gout Guidelines</a>'},
+5:{type:'Urate-Lowering Therapy',ctx:'After flare resolves, discussing long-term management.',stem:'When should urate-lowering therapy (ULT) be initiated per ACR?',opts:[['a','During the acute flare'],['b','Only after 3+ flares per year'],['c','After flare resolution, with anti-inflammatory prophylaxis; earlier if tophi, CKD, or urolithiasis'],['d','Never in first year after diagnosis']],exp:'<strong>ACR 2020 ULT Indications:</strong><br><br>Strongly recommend ULT if:<br>• ≥2 flares/year<br>• Tophi<br>• Radiographic damage<br>• CKD stage ≥3<br>• Urolithiasis<br><br>Conditionally recommend for first flare if very high uric acid or comorbidities.<br><br><strong>Start with prophylaxis</strong> (colchicine or NSAID) for 3-6 months to prevent flares.<br><br>Target: Uric acid <6 mg/dL (or <5 if tophi).'},
+6:{type:'Psoriasis Recognition',ctx:'Scaly, silvery plaques on elbows and knees. Nail pitting.',stem:'What is the MOST likely diagnosis?',opts:[['a','Eczema (atopic dermatitis)'],['b','Plaque psoriasis'],['c','Tinea corporis'],['d','Contact dermatitis']],exp:'<strong>Classic plaque psoriasis features:</strong><br><br>• <strong>Well-demarcated</strong> erythematous plaques<br>• <strong>Silvery scale</strong><br>• Extensor surfaces (elbows, knees)<br>• <strong>Nail changes:</strong> Pitting, onycholysis, oil spots<br>• <strong>Auspitz sign:</strong> Pinpoint bleeding when scale removed<br>• Koebner phenomenon (lesions at trauma sites)<br><br>Eczema: Flexural, pruritic, poorly demarcated. Tinea: Annular, central clearing, KOH+.<br><br>📚 <a href="https://www.ncbi.nlm.nih.gov/books/NBK448194/" target="_blank">StatPearls: Psoriasis</a>'},
+7:{type:'Psoriasis Treatment',ctx:'Mild-moderate plaque psoriasis, <10% BSA.',stem:'What is first-line treatment for limited plaque psoriasis?',opts:[['a','Topical corticosteroids and/or vitamin D analogs'],['b','Methotrexate'],['c','Biologics (TNF inhibitors)'],['d','Phototherapy']],exp:'<strong>Psoriasis treatment ladder:</strong><br><br><strong>Mild (<5% BSA):</strong><br>• Topical corticosteroids (first-line)<br>• Vitamin D analogs (calcipotriene)<br>• Combination products<br><br><strong>Moderate (5-10% BSA):</strong><br>• Phototherapy (UVB)<br>• Add topical retinoids<br><br><strong>Severe (>10% BSA) or refractory:</strong><br>• Systemic: MTX, cyclosporine, apremilast<br>• Biologics: TNF-α, IL-17, IL-23 inhibitors<br><br>📚 <a href="https://www.aad.org/member/clinical-quality/guidelines/psoriasis" target="_blank">AAD Psoriasis Guidelines</a>'},
+8:{type:'Psoriatic Arthritis',ctx:'Discussing screening for joint involvement.',stem:'Which feature suggests psoriatic arthritis (PsA) rather than RA?',opts:[['a','Symmetric small joint involvement'],['b','Positive RF and anti-CCP'],['c','Morning stiffness >1 hour'],['d','DIP joint involvement, dactylitis, enthesitis, asymmetric']],exp:'<strong>Psoriatic arthritis distinctive features:</strong><br><br>• <strong>DIP involvement</strong> (RA spares DIPs)<br>• <strong>Dactylitis</strong> ("sausage digits")<br>• <strong>Enthesitis</strong> (Achilles, plantar fascia)<br>• <strong>Asymmetric</strong> oligoarthritis (can be symmetric too)<br>• <strong>Axial involvement</strong> (spondylitis)<br>• Nail changes correlate with DIP arthritis<br>• <strong>RF/anti-CCP usually negative</strong><br><br>Screen all psoriasis patients for joint symptoms!'},
+9:{type:'RA Classification',ctx:'Symmetric MCP/PIP swelling >6 weeks, RF+, anti-CCP+, elevated CRP.',stem:'Which criteria are used to classify rheumatoid arthritis?',opts:[['a','Jones criteria'],['b','CASPAR criteria'],['c','2010 ACR/EULAR classification criteria'],['d','Modified Duke criteria']],exp:'<strong>2010 ACR/EULAR RA Classification Criteria:</strong><br><br>Score ≥6/10 = definite RA:<br><br><strong>Joint involvement (0-5):</strong><br>• 1 large = 0<br>• 2-10 large = 1<br>• 1-3 small = 2<br>• 4-10 small = 3<br>• >10 (≥1 small) = 5<br><br><strong>Serology (0-3):</strong> RF/anti-CCP<br><strong>Acute phase (0-1):</strong> CRP/ESR<br><strong>Duration (0-1):</strong> ≥6 weeks<br><br>📚 <a href="https://ard.bmj.com/content/69/9/1580" target="_blank">2010 Criteria (Free BMJ)</a>'},
+10:{type:'RA Serology',ctx:'Interpreting RF and anti-CCP results.',stem:'What is TRUE about anti-CCP antibodies in RA?',opts:[['a','Less specific than RF'],['b','More specific than RF (~95%) and predicts erosive disease'],['c','Only positive in late-stage RA'],['d','Should not be ordered if RF is positive']],exp:'<strong>Anti-CCP antibodies:</strong><br><br>• <strong>Sensitivity:</strong> 60-70% (similar to RF)<br>• <strong>Specificity:</strong> ~95% (much better than RF)<br>• Can be positive years before symptoms<br>• <strong>Predicts erosive/aggressive disease</strong><br>• Remains positive even with treatment<br><br><strong>RF:</strong> Sensitive but less specific (positive in Sjögren, HCV, elderly).<br><br>Double-positive (RF+ and anti-CCP+) = high risk for erosive RA.'},
+11:{type:'DMARD Therapy',ctx:'Starting treatment for new RA diagnosis.',stem:'What is first-line DMARD therapy for RA per ACR?',opts:[['a','Methotrexate monotherapy'],['b','Prednisone alone'],['c','NSAIDs only'],['d','Biologics as initial therapy']],exp:'<strong>ACR RA Treatment Guidelines:</strong><br><br><strong>First-line:</strong> Methotrexate (MTX) monotherapy<br>• Oral or subcutaneous<br>• Start 7.5-15 mg weekly, titrate to 25 mg<br>• Add folic acid 1 mg daily (reduces toxicity)<br><br><strong>If MTX contraindicated:</strong> Leflunomide, sulfasalazine, or hydroxychloroquine<br><br><strong>Treat-to-target:</strong> Escalate every 3 months if not at goal.<br><br>Biologics reserved for inadequate response to conventional DMARDs.<br><br>📚 <a href="https://www.rheumatology.org/Practice-Quality/Clinical-Support/Clinical-Practice-Guidelines/Rheumatoid-Arthritis" target="_blank">ACR RA Guidelines</a>'},
+12:{type:'MTX Monitoring',ctx:'David started on methotrexate 15mg weekly.',stem:'What monitoring is required for methotrexate?',opts:[['a','Weekly blood counts'],['b','Monthly chest X-ray'],['c','CBC, LFTs, creatinine at baseline then periodically (q1-3 months)'],['d','No monitoring needed']],exp:'<strong>Methotrexate monitoring:</strong><br><br><strong>Baseline:</strong><br>• CBC, CMP (LFTs, Cr)<br>• Hepatitis B/C serology<br>• Chest X-ray<br>• Pregnancy test (teratogenic!)<br><br><strong>Ongoing (q1-3 months):</strong><br>• CBC (myelosuppression)<br>• LFTs (hepatotoxicity)<br>• Creatinine (renally cleared)<br><br><strong>Toxicities:</strong> Cytopenias, hepatic fibrosis, pneumonitis, stomatitis. Folic acid reduces mucosal/GI toxicity.'},
+13:{type:'Septic Arthritis Recognition',ctx:'On MTX. Acute hot, swollen knee. Fever 102°F. WBC 18K.',stem:'What synovial WBC count suggests septic arthritis?',opts:[['a','>2,000 cells/μL'],['b','>50,000 cells/μL with >90% PMNs'],['c','>500 cells/μL'],['d','Any WBC elevation']],exp:'<strong>Synovial fluid interpretation:</strong><br><br>• <strong>Normal:</strong> <200 WBC, clear<br>• <strong>Non-inflammatory (OA):</strong> 200-2,000 WBC<br>• <strong>Inflammatory (RA, crystal):</strong> 2,000-50,000 WBC<br>• <strong>Septic:</strong> Usually <strong>>50,000</strong> WBC, >90% PMNs<br><br>However, 50% of septic joints have <50K WBC. <strong>Gram stain and culture are definitive.</strong><br><br>Crystal arthritis can have very high WBC — always culture!'},
+14:{type:'Septic Arthritis Organisms',ctx:'Gram stain shows gram-positive cocci in clusters.',stem:'What is the MOST common organism in native joint septic arthritis?',opts:[['a','E. coli'],['b','Streptococcus pneumoniae'],['c','Pseudomonas aeruginosa'],['d','Staphylococcus aureus (including MRSA)']],exp:'<strong>Septic arthritis microbiology:</strong><br><br>• <strong>S. aureus:</strong> Most common overall (>50%)<br>• <strong>Streptococci:</strong> Second most common<br>• <strong>N. gonorrhoeae:</strong> Young, sexually active (often polyarticular → monoarticular)<br>• <strong>Gram-negatives:</strong> IVDU, elderly, immunocompromised<br>• <strong>Pseudomonas:</strong> IVDU, diabetic foot<br><br>GPC in clusters = Staph. Treat empirically with vancomycin pending cultures.<br><br>📚 <a href="https://www.idsociety.org/practice-guideline/native-joint-infections/" target="_blank">IDSA Guidelines</a>'},
+15:{type:'Septic Arthritis Treatment',ctx:'Confirmed S. aureus septic arthritis.',stem:'What is the management of septic arthritis?',opts:[['a','IV antibiotics PLUS joint drainage (arthrocentesis, arthroscopy, or open)'],['b','Oral antibiotics alone'],['c','NSAIDs and observation'],['d','Intra-articular steroids']],exp:'<strong>Septic arthritis = Orthopedic emergency.</strong><br><br><strong>Treatment:</strong><br>1. <strong>IV antibiotics</strong> (4-6 weeks typically)<br>&nbsp;&nbsp;• Empiric: Vancomycin ± gram-negative coverage<br>&nbsp;&nbsp;• Narrow based on culture<br><br>2. <strong>Joint drainage</strong> — essential!<br>&nbsp;&nbsp;• Serial arthrocentesis<br>&nbsp;&nbsp;• Arthroscopic lavage<br>&nbsp;&nbsp;• Open surgical drainage<br><br>Hip and shoulder usually require surgical drainage. Delay → permanent cartilage damage.'},
+16:{type:'Cellulitis',ctx:'A different patient with red, warm, spreading leg erythema. No abscess.',stem:'What is first-line treatment for non-purulent cellulitis?',opts:[['a','Vancomycin IV'],['b','TMP-SMX alone'],['c','Cephalexin or dicloxacillin (cover Strep and MSSA)'],['d','Clindamycin plus fluoroquinolone']],exp:'<strong>Cellulitis treatment (IDSA 2014):</strong><br><br><strong>Non-purulent cellulitis (no abscess):</strong><br>• Likely <strong>beta-hemolytic Strep</strong> (GAS)<br>• First-line: <strong>Cephalexin, dicloxacillin, or cefazolin</strong><br>• Penicillin allergic: Clindamycin<br><br><strong>Purulent cellulitis (abscess, drainage):</strong><br>• Likely <strong>MRSA</strong><br>• I&D for abscess<br>• Antibiotics: TMP-SMX or doxycycline<br><br>📚 <a href="https://www.idsociety.org/practice-guideline/skin-and-soft-tissue-infections/" target="_blank">IDSA SSTI Guidelines</a>'},
+17:{type:'Melanoma',ctx:'A patient with changing pigmented lesion.',stem:'Which features suggest melanoma (ABCDEs)?',opts:[['a','Symmetric, uniform color, <6mm'],['b','Asymmetry, Border irregularity, Color variation, Diameter >6mm, Evolution'],['c','Raised, waxy appearance'],['d','Umbilicated center']],exp:'<strong>ABCDE criteria for melanoma:</strong><br><br>• <strong>A</strong>symmetry<br>• <strong>B</strong>order irregularity<br>• <strong>C</strong>olor variation (multiple colors)<br>• <strong>D</strong>iameter >6mm (pencil eraser)<br>• <strong>E</strong>volving (changing size, shape, color)<br><br>Also: "Ugly duckling" sign — lesion that looks different from others.<br><br>Any suspicious lesion → excisional biopsy. Breslow depth determines prognosis.<br><br>📚 <a href="https://www.aad.org/public/diseases/skin-cancer/types/common/melanoma/symptoms" target="_blank">AAD Melanoma</a>'},
+18:{type:'Skin Cancer Types',ctx:'Reviewing skin cancer morphology.',stem:'Which skin cancer presents as a pearly, telangiectatic papule with rolled borders?',opts:[['a','Melanoma'],['b','Squamous cell carcinoma'],['c','Actinic keratosis'],['d','Basal cell carcinoma']],exp:'<strong>Skin cancer morphology:</strong><br><br><strong>Basal Cell Carcinoma (BCC):</strong><br>• Most common skin cancer<br>• <strong>Pearly papule with telangiectasias</strong><br>• Rolled borders<br>• May ulcerate ("rodent ulcer")<br>• Rarely metastasizes<br><br><strong>Squamous Cell Carcinoma (SCC):</strong><br>• Scaly, keratotic, ulcerated<br>• Can metastasize<br>• Arises from actinic keratoses<br><br><strong>Melanoma:</strong> Pigmented, irregular, ABCDE features.'},
+19:{type:'Osteoarthritis',ctx:'Older patient with chronic knee pain, worse with activity, bony enlargement.',stem:'What is the FIRST-LINE treatment for knee osteoarthritis?',opts:[['a','Acetaminophen, topical NSAIDs, exercise, weight loss'],['b','Opioids'],['c','Intra-articular hyaluronic acid'],['d','Immediate total knee replacement']],exp:'<strong>ACR OA Treatment Recommendations:</strong><br><br><strong>First-line (non-pharmacologic):</strong><br>• Exercise (strengthening, aerobic)<br>• Weight loss if overweight<br>• Physical therapy<br>• Assistive devices<br><br><strong>First-line (pharmacologic):</strong><br>• <strong>Topical NSAIDs</strong> (preferred for knee)<br>• Oral NSAIDs (short courses)<br>• Acetaminophen (less effective)<br><br><strong>Adjunctive:</strong> Intra-articular steroids (short-term). Surgery for refractory, severe.<br><br>📚 <a href="https://www.rheumatology.org/Practice-Quality/Clinical-Support/Clinical-Practice-Guidelines/Osteoarthritis" target="_blank">ACR OA Guidelines</a>'},
+20:{type:'Back Pain Red Flags',ctx:'Evaluating low back pain.',stem:'Which "red flag" requires urgent workup for low back pain?',opts:[['a','Pain worse at end of day'],['b','Age 30 with no trauma'],['c','Saddle anesthesia, urinary retention, bilateral leg weakness (cauda equina)'],['d','Pain with forward flexion']],exp:'<strong>Low back pain red flags:</strong><br><br><strong>Cauda Equina Syndrome (emergency):</strong><br>• Saddle anesthesia<br>• Urinary retention/incontinence<br>• Fecal incontinence<br>• Bilateral leg weakness/numbness<br>• → MRI STAT, surgical decompression<br><br><strong>Other red flags:</strong><br>• Fever, IVDU (infection)<br>• Cancer history, weight loss, age >50<br>• Trauma, osteoporosis (fracture)<br>• Progressive neurologic deficit<br>• Night pain, no relief with rest<br><br>📚 <a href="https://www.ncbi.nlm.nih.gov/books/NBK538173/" target="_blank">StatPearls: Low Back Pain</a>'}
+};
+
+function updateVitals(p){const v=vitals[p];document.getElementById('vJoint').textContent=v.joint;document.getElementById('vUric').textContent=v.uric;document.getElementById('vCRP').textContent=v.crp;}
+
+function renderCase(p){const c=cases[p];let h=`<div class="case-narrative">${c.text}</div>`;
+h+=`<div class="data-section"><div class="data-label">History</div><div class="data-grid">`;
+c.data1.forEach(v=>h+=`<div class="data-item"><span>${v[0]}:</span> <span class="${v[2]===1?'abnormal':''}">${v[1]}</span></div>`);
+h+=`</div></div><div class="data-section"><div class="data-label">Exam</div><div class="data-grid">`;
+c.data2.forEach(e=>h+=`<div class="data-item"><span>${e[0]}:</span> <span class="${e[2]===1?'abnormal':''}">${e[1]}</span></div>`);
+h+=`</div></div><div class="data-section"><div class="data-label">Labs</div><div class="data-grid">`;
+c.labs.forEach(l=>h+=`<div class="data-item"><span>${l[0]}:</span> <span class="${l[2]===1?'abnormal':''}">${l[1]}</span></div>`);
+h+=`</div></div>`;document.getElementById('caseContent').innerHTML=h;}
+
+function getQs(p){const s=(p-1)*5+1;return[s,s+1,s+2,s+3,s+4];}
+
+function renderQuestions(p){const intro=intros[p];const qs=getQs(p);
+let h=`<div class="phase-intro"><h2>${intro.icon} ${intro.title}</h2>`;
+h+=`<div class="resource-box"><div class="resource-title">📚 SOCIETY GUIDELINES & RESOURCES</div><div class="resource-links">${intro.resources}</div></div>`;
+h+=`<p>${intro.desc}</p><div class="learning-box"><div class="learning-title">🎯 Learning Objectives</div><ul class="learning-list">`;
+intro.obj.forEach(o=>h+=`<li>${o}</li>`);h+=`</ul></div></div>`;
+qs.forEach((qn,i)=>{const q=Qs[qn];const s=state[qn];
+h+=`<div class="quiz-card" id="q${qn}"><div class="quiz-header"><div class="quiz-number"><span class="quiz-num">${i+1}</span><span class="quiz-type">${q.type}</span></div><span class="quiz-status ${s.done?(s.ok?'correct':'incorrect'):''}" id="st${qn}">${s.done?(s.ok?'Correct':'Incorrect'):'Unanswered'}</span></div>`;
+h+=`<div class="quiz-context"><div class="context-label">📍 Case Connection</div><div class="context-text">${q.ctx}</div></div>`;
+h+=`<div class="quiz-body"><div class="quiz-stem">${q.stem}</div><div class="quiz-options" id="opts${qn}">`;
+q.opts.forEach(opt=>{let cls=s.done?'disabled':'';if(s.done&&opt[0]===answers[qn])cls+=' correct';if(s.done&&opt[0]===s.pick&&!s.ok)cls+=' incorrect';
+h+=`<div class="quiz-option ${cls}" data-a="${opt[0]}" onclick="pick(${qn},this)"><span class="option-letter">${opt[0].toUpperCase()}</span><span class="option-text">${opt[1]}</span></div>`;});
+h+=`</div><div class="confidence-section" id="conf${qn}" ${s.done?'style="display:none"':''}>`;
+h+=`<div class="confidence-label"><span>Confidence?</span><span id="cv${qn}">Select</span></div><div class="confidence-btns">`;
+h+=`<button class="conf-btn" onclick="setC(${qn},'low',this)">Guessing</button><button class="conf-btn" onclick="setC(${qn},'med',this)">Somewhat</button><button class="conf-btn" onclick="setC(${qn},'high',this)">Confident</button></div></div>`;
+h+=`<button class="submit-btn" id="sub${qn}" onclick="submit(${qn})" disabled ${s.done?'style="display:none"':''}>Submit Answer</button>`;
+h+=`<div class="explanation ${s.done?(s.ok?'visible correct':'visible incorrect'):''}" id="exp${qn}"><div class="explanation-title">${s.done?(s.ok?'✓ Correct!':'✗ Not quite'):'✓ Correct!'}</div><div class="explanation-text">${q.exp}</div></div></div></div>`;});
+h+=`<div class="phase-summary" id="summary"><div class="summary-header"><div class="summary-title">Phase ${p} Complete! 🎉</div><div class="summary-score" id="score">0/5</div></div>`;
+h+=`<div class="summary-stats"><div class="stat-box"><div class="stat-value" id="corrCt">0</div><div class="stat-label">Correct</div></div><div class="stat-box"><div class="stat-value" id="avgC">--</div><div class="stat-label">Avg Confidence</div></div><div class="stat-box"><div class="stat-value">+50</div><div class="stat-label">XP</div></div></div>`;
+if(p<4)h+=`<button class="next-btn" onclick="unlock(${p+1})">Continue to Phase ${p+1} →</button>`;
+else h+=`<p style="text-align:center;margin-top:14px;color:var(--accent-green);font-weight:600">🎓 David recovered! You mastered MSK/Derm across the spectrum.</p>`;
+h+=`</div>`;document.getElementById('questionsPanel').innerHTML=h;}
+
+function pick(qn,el){if(state[qn].done)return;document.querySelectorAll(`#opts${qn} .quiz-option`).forEach(o=>o.classList.remove('selected'));el.classList.add('selected');state[qn].pick=el.dataset.a;chkSub(qn);}
+function setC(qn,lv,el){if(state[qn].done)return;document.querySelectorAll(`#conf${qn} .conf-btn`).forEach(b=>b.classList.remove('selected'));el.classList.add('selected');state[qn].conf=lv;document.getElementById(`cv${qn}`).textContent={low:'33%',med:'66%',high:'90%'}[lv];chkSub(qn);}
+function chkSub(qn){const btn=document.getElementById(`sub${qn}`);if(btn)btn.disabled=!(state[qn].pick&&state[qn].conf);}
+
+function submit(qn){const s=state[qn];if(s.done)return;s.done=true;s.ok=s.pick===answers[qn];
+document.querySelectorAll(`#opts${qn} .quiz-option`).forEach(o=>{o.classList.add('disabled');if(o.dataset.a===answers[qn])o.classList.add('correct');else if(o.dataset.a===s.pick&&!s.ok)o.classList.add('incorrect');});
+const exp=document.getElementById(`exp${qn}`);exp.classList.add('visible',s.ok?'correct':'incorrect');exp.querySelector('.explanation-title').textContent=s.ok?'✓ Correct!':'✗ Not quite';
+document.getElementById(`st${qn}`).textContent=s.ok?'Correct':'Incorrect';document.getElementById(`st${qn}`).className=`quiz-status ${s.ok?'correct':'incorrect'}`;
+document.getElementById(`sub${qn}`).style.display='none';document.getElementById(`conf${qn}`).style.display='none';
+updateProgress();checkDone();}
+
+function updateProgress(){const total=Object.values(state).filter(s=>s.done).length;document.getElementById('progressCount').textContent=`${total}/20`;document.getElementById('progressFill').style.width=`${(total/20)*100}%`;}
+
+function checkDone(){const qs=getQs(phase);if(qs.every(q=>state[q].done)&&!done[phase]){done[phase]=true;
+const corr=qs.filter(q=>state[q].ok).length;document.getElementById('score').textContent=`${corr}/5`;document.getElementById('corrCt').textContent=corr;
+const cv={low:33,med:66,high:90};const avg=Math.round(qs.reduce((s,q)=>s+cv[state[q].conf],0)/5);document.getElementById('avgC').textContent=`${avg}%`;
+document.getElementById('summary').style.display='block';document.getElementById('summary').scrollIntoView({behavior:'smooth'});
+document.querySelector(`.timeline-phase[data-phase="${phase}"]`).classList.add('completed');
+document.getElementById(`status${phase}`).textContent='✓ Done';document.getElementById(`status${phase}`).className='phase-status done';}}
+
+function unlock(np){open[np]=true;goPhase(np);}
+
+function goPhase(p){if(!open[p]){alert(`Complete Phase ${p-1} first!`);return;}phase=p;
+document.querySelectorAll('.timeline-phase').forEach(ph=>{const pn=parseInt(ph.dataset.phase);ph.classList.remove('active','locked');if(pn===p)ph.classList.add('active');if(!open[pn])ph.classList.add('locked');});
+for(let i=1;i<=4;i++){const st=document.getElementById(`status${i}`);if(done[i]){st.textContent='✓ Done';st.className='phase-status done';}else if(i===p){st.textContent='Current';st.className='phase-status current';}else if(open[i]){st.textContent='';st.className='phase-status';}else{st.textContent='🔒';st.className='phase-status';}}
+updateVitals(p);renderCase(p);renderQuestions(p);window.scrollTo({top:0,behavior:'smooth'});}
+
+document.addEventListener('DOMContentLoaded',()=>{updateVitals(1);renderCase(1);renderQuestions(1);});
+</script>
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Psychiatry: Elena's Journey - MechanismDx</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root { --bg-page: #f8f9fa; --bg-white: #ffffff; --bg-subtle: #f1f3f5; --text-primary: #1a1a1a; --text-secondary: #5c5c5c; --text-muted: #8c8c8c; --border: #e9ecef; --accent-primary: #7c3aed; --accent-green: #16a34a; --accent-red: #dc2626; --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-page); color: var(--text-primary); line-height: 1.6; }
+.header { background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 0 24px; }
+.header-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 16px 0; }
+.logo-link { display: flex; align-items: center; gap: 16px; text-decoration: none; color: inherit; }
+.tagline { font-family: 'Newsreader', Georgia, serif; font-style: italic; color: var(--text-muted); font-size: 14px; }
+.header-nav { display: flex; gap: 8px; }
+.nav-link { padding: 8px 14px; color: var(--text-secondary); text-decoration: none; font-size: 14px; font-weight: 500; border-radius: var(--radius-sm); }
+.nav-link:hover { background: var(--bg-subtle); }
+.nav-link.active { color: var(--accent-primary); background: rgba(124,58,237,0.08); }
+.module-header { background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 32px 24px; }
+.module-header-inner { max-width: 1200px; margin: 0 auto; }
+.breadcrumb { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; }
+.breadcrumb a { color: var(--accent-primary); text-decoration: none; }
+.module-title { display: flex; align-items: center; gap: 16px; }
+.module-icon { width: 56px; height: 56px; background: linear-gradient(135deg, #f3e8ff, #e9d5ff); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 28px; }
+.module-title h1 { font-size: 28px; font-weight: 600; margin-bottom: 4px; }
+.module-title p { color: var(--text-secondary); font-size: 15px; }
+.patient-banner { background: linear-gradient(135deg, #5b21b6 0%, #7c3aed 100%); color: white; padding: 20px 24px; }
+.patient-banner-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.patient-avatar { width: 48px; height: 48px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+.patient-info { flex: 1; min-width: 200px; }
+.patient-name { font-size: 16px; font-weight: 600; }
+.patient-details { font-size: 13px; opacity: 0.9; }
+.patient-vitals { display: flex; gap: 16px; flex-wrap: wrap; }
+.vital { text-align: center; padding: 8px 14px; background: rgba(255,255,255,0.1); border-radius: var(--radius-sm); }
+.vital-value { font-size: 18px; font-weight: 700; }
+.vital-label { font-size: 10px; opacity: 0.8; text-transform: uppercase; }
+.timeline-nav { background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 0 24px; overflow-x: auto; }
+.timeline-inner { max-width: 1200px; margin: 0 auto; display: flex; min-width: max-content; }
+.timeline-phase { flex: 1; min-width: 140px; padding: 14px 12px; cursor: pointer; border-bottom: 3px solid transparent; text-align: center; transition: all 0.2s; }
+.timeline-phase:hover { background: var(--bg-subtle); }
+.timeline-phase.active { border-bottom-color: var(--accent-primary); background: rgba(124,58,237,0.04); }
+.timeline-phase.completed { border-bottom-color: var(--accent-green); }
+.timeline-phase.locked { opacity: 0.4; cursor: not-allowed; }
+.phase-label { font-size: 12px; font-weight: 600; }
+.phase-time { font-size: 10px; color: var(--text-muted); }
+.phase-status { font-size: 10px; margin-top: 4px; }
+.phase-status.current { color: var(--accent-primary); }
+.phase-status.done { color: var(--accent-green); }
+.main-container { max-width: 1200px; margin: 0 auto; padding: 24px; display: grid; grid-template-columns: 280px 1fr; gap: 24px; }
+@media (max-width: 900px) { .main-container { grid-template-columns: 1fr; } }
+.case-panel { position: sticky; top: 24px; height: fit-content; }
+.card { background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 16px; }
+.card-header { padding: 14px 16px; border-bottom: 1px solid var(--border); }
+.card-title { font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.card-content { padding: 16px; }
+.case-narrative { font-family: 'Newsreader', Georgia, serif; font-size: 13px; line-height: 1.7; color: var(--text-secondary); margin-bottom: 12px; }
+.case-narrative strong { color: var(--text-primary); }
+.case-narrative em { color: var(--accent-primary); font-style: normal; font-weight: 500; }
+.data-section { background: var(--bg-subtle); border-radius: var(--radius-sm); padding: 10px; margin-top: 10px; }
+.data-label { font-size: 9px; font-weight: 600; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+.data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.data-item { font-size: 10px; }
+.data-item span:first-child { color: var(--text-muted); }
+.data-item span:last-child { font-weight: 600; }
+.abnormal { color: var(--accent-red) !important; }
+.improved { color: var(--accent-green) !important; }
+.phase-intro { margin-bottom: 20px; }
+.phase-intro h2 { font-size: 18px; font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+.phase-intro p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+.safety-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: var(--radius-md); padding: 12px; margin-bottom: 14px; }
+.safety-title { font-size: 11px; font-weight: 600; color: #991b1b; margin-bottom: 4px; }
+.safety-text { font-size: 11px; color: #7f1d1d; }
+.learning-box { background: #f3e8ff; border: 1px solid #e9d5ff; border-radius: var(--radius-md); padding: 14px; margin-top: 14px; }
+.learning-title { font-size: 11px; font-weight: 600; color: var(--accent-primary); margin-bottom: 8px; }
+.learning-list { list-style: none; font-size: 12px; }
+.learning-list li { padding: 3px 0 3px 18px; position: relative; color: var(--text-secondary); }
+.learning-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent-primary); }
+.quiz-card { background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius-lg); margin-bottom: 16px; overflow: hidden; }
+.quiz-header { padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.quiz-number { display: flex; align-items: center; gap: 8px; }
+.quiz-num { width: 24px; height: 24px; background: var(--accent-primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; }
+.quiz-type { font-size: 11px; color: var(--text-muted); }
+.quiz-status { font-size: 10px; padding: 3px 8px; border-radius: 10px; font-weight: 600; background: var(--bg-subtle); color: var(--text-muted); }
+.quiz-status.correct { background: #dcfce7; color: #166534; }
+.quiz-status.incorrect { background: #fee2e2; color: #991b1b; }
+.quiz-context { padding: 12px 16px; background: #f3e8ff; border-bottom: 1px solid #e9d5ff; }
+.context-label { font-size: 9px; font-weight: 600; text-transform: uppercase; color: #7c3aed; margin-bottom: 3px; }
+.context-text { font-size: 11px; color: #5b21b6; line-height: 1.5; }
+.quiz-body { padding: 16px; }
+const Qs={
+1:{ty:'Depression',cx:'Diagnosis',s:'What criteria diagnose major depressive disorder?',o:[['a','5+ symptoms for 2+ weeks including depressed mood or anhedonia'],['b','Sad mood for any duration'],['c','Only if suicidal'],['d','3 symptoms for 1 week']],e:'<strong>MDD criteria:</strong> ≥5 of SIGECAPS (Sleep, Interest, Guilt, Energy, Concentration, Appetite, Psychomotor, Suicidal) for ≥2 weeks. Must include depressed mood or anhedonia.'},
+2:{ty:'Treatment',cx:'Antidepressants',s:'What is first-line pharmacotherapy for depression?',o:[['a','SSRIs (sertraline, escitalopram, fluoxetine) due to efficacy and tolerability'],['b','TCAs first-line'],['c','MAOIs preferred'],['d','Benzodiazepines for depression']],e:'<strong>First-line:</strong> SSRIs (sertraline, escitalopram, fluoxetine). SNRIs also first-line. TCAs/MAOIs reserved for refractory. 4-6 weeks for full effect.'},
+3:{ty:'Side Effects',cx:'SSRI effects',s:'What are common SSRI side effects?',o:[['a','GI upset, sexual dysfunction, insomnia, headache, weight changes'],['b','No side effects'],['c','Sedation always'],['d','Weight loss only']],e:'<strong>SSRI side effects:</strong> GI (nausea, diarrhea), sexual dysfunction, insomnia or sedation, headache, weight changes, bleeding risk, serotonin syndrome if combined.'},
+4:{ty:'Suicide',cx:'Assessment',s:'What risk factors should be assessed for suicide?',o:[['a','Prior attempts, plan/intent, access to means, hopelessness, substance use, social support'],['b','Only depression diagnosis'],['c','Age alone'],['d','Only if patient mentions]'],e:'<strong>Suicide assessment:</strong> Prior attempts (#1 risk), plan/intent/means, hopelessness, substance use, psychosis, recent loss, lack of support. Ask directly.'},
+5:{ty:'Anxiety',cx:'GAD diagnosis',s:'What characterizes generalized anxiety disorder?',o:[['a','Excessive worry more days than not for ≥6 months with physical symptoms'],['b','Panic attacks only'],['c','Worry about one specific thing'],['d','Brief episodes of anxiety']],e:'<strong>GAD:</strong> Excessive worry about multiple things, ≥6 months, difficult to control, ≥3 of: restlessness, fatigue, concentration, irritability, tension, sleep disturbance.'},
+6:{ty:'Panic',cx:'Panic disorder',s:'What defines panic disorder?',o:[['a','Recurrent unexpected panic attacks with fear of future attacks'],['b','Single panic attack'],['c','Only situational anxiety'],['d','Always has agoraphobia']],e:'<strong>Panic disorder:</strong> Recurrent unexpected panic attacks + persistent concern about future attacks OR maladaptive behavior change. May have agoraphobia.'},
+7:{ty:'Treatment',cx:'Anxiety treatment',s:'What is first-line treatment for anxiety disorders?',o:[['a','SSRIs/SNRIs plus CBT; benzodiazepines for short-term acute use'],['b','Benzodiazepines long-term'],['c','Antipsychotics'],['d','No treatment effective']],e:'<strong>Anxiety treatment:</strong> SSRIs/SNRIs first-line (same as depression). CBT highly effective. Benzos for acute/short-term only (dependence risk).'},
+8:{ty:'Bipolar',cx:'Mania criteria',s:'What symptoms characterize a manic episode?',o:[['a','Elevated mood, decreased sleep, pressured speech, grandiosity, increased activity'],['b','Depressed mood'],['c','Normal energy'],['d','Increased sleep']],e:'<strong>Mania (DIGFAST):</strong> Distractibility, Insomnia (decreased need), Grandiosity, Flight of ideas, Activity increased, Speech pressured, Thoughtlessness (risk-taking). ≥1 week.'},
+9:{ty:'Treatment',cx:'Bipolar Rx',s:'What is the treatment for bipolar disorder?',o:[['a','Mood stabilizers (lithium, valproate) and/or atypical antipsychotics'],['b','Antidepressants alone'],['c','SSRIs first-line'],['d','Benzodiazepines only']],e:'<strong>Bipolar treatment:</strong> Lithium, valproate, lamotrigine (depression), atypical antipsychotics. Antidepressants risk mania (use with mood stabilizer). Lifelong treatment.'},
+10:{ty:'Lithium',cx:'Monitoring',s:'What monitoring is required for lithium?',o:[['a','Lithium levels, renal function, thyroid function, ECG'],['b','No monitoring needed'],['c','Liver function only'],['d','Blood glucose only']],e:'<strong>Lithium monitoring:</strong> Levels (0.6-1.2 mEq/L), renal function (causes DI, nephropathy), thyroid (hypothyroidism), ECG. Narrow therapeutic index.'},
+11:{ty:'PTSD',cx:'Diagnosis',s:'What symptoms characterize PTSD?',o:[['a','Re-experiencing, avoidance, negative cognitions, hyperarousal after trauma'],['b','Anxiety without trauma'],['c','Only nightmares'],['d','Brief stress response']],e:'<strong>PTSD criteria:</strong> Trauma exposure + intrusion (flashbacks, nightmares) + avoidance + negative mood/cognition + hyperarousal. >1 month duration.'},
+12:{ty:'OCD',cx:'Features',s:'What characterizes obsessive-compulsive disorder?',o:[['a','Recurrent obsessions (intrusive thoughts) and compulsions (rituals) causing distress'],['b','Obsessions only'],['c','Normal worries'],['d','Personality disorder']],e:'<strong>OCD:</strong> Obsessions (intrusive, unwanted thoughts) + Compulsions (repetitive behaviors to reduce anxiety). Time-consuming (>1h/day), causes distress. Ego-dystonic.'},
+13:{ty:'Treatment',cx:'OCD Rx',s:'What is the treatment for OCD?',o:[['a','SSRIs (higher doses) and/or exposure and response prevention (ERP)'],['b','Benzodiazepines'],['c','Antipsychotics alone'],['d','Talk therapy only']],e:'<strong>OCD treatment:</strong> SSRIs (higher doses than depression), clomipramine. ERP (CBT specialized) highly effective. Combination best.'},
+14:{ty:'Eating',cx:'Anorexia features',s:'What characterizes anorexia nervosa?',o:[['a','Restriction, low weight, fear of gaining weight, body image distortion'],['b','Binge eating only'],['c','Normal weight required'],['d','Only purging behavior']],e:'<strong>Anorexia:</strong> Restriction, significantly low weight, intense fear of weight gain, distorted body image. Restricting or binge-purge subtypes. Medical complications.'},
+15:{ty:'Complications',cx:'Anorexia medical',s:'What medical complications occur in anorexia nervosa?',o:[['a','Bradycardia, hypotension, electrolyte abnormalities, osteoporosis, amenorrhea'],['b','Hypertension'],['c','No medical effects'],['d','Only dental problems']],e:'<strong>Medical complications:</strong> Cardiac (bradycardia, arrhythmias), electrolytes (hypokalemia), endocrine (amenorrhea), bone loss, lanugo, hypothermia. Can be fatal.'},
+16:{ty:'Bulimia',cx:'Features',s:'How does bulimia nervosa differ from anorexia?',o:[['a','Binge eating with purging, often normal weight, shame about behavior'],['b','Always underweight'],['c','No binge eating'],['d','No concern about weight']],e:'<strong>Bulimia:</strong> Binge eating + compensatory behavior (purging, laxatives, exercise), often normal weight. Shame/secrecy. Dental erosion, parotid hypertrophy.'},
+17:{ty:'Personality',cx:'Borderline',s:'What characterizes borderline personality disorder?',o:[['a','Unstable relationships, identity, affect; impulsivity; fear of abandonment; self-harm'],['b','Paranoid thinking only'],['c','Antisocial behavior'],['d','Avoidance of relationships']],e:'<strong>Borderline PD:</strong> Unstable relationships, self-image, affect. Impulsivity, recurrent self-harm, chronic emptiness, intense anger, dissociation. Splitting common.'},
+18:{ty:'Treatment',cx:'BPD Rx',s:'What is the treatment for borderline personality disorder?',o:[['a','Dialectical behavior therapy (DBT), medications for target symptoms'],['b','Medications cure BPD'],['c','Long-term benzodiazepines'],['d','No effective treatment']],e:'<strong>BPD treatment:</strong> DBT (skills training, distress tolerance). Medications for target symptoms (SSRIs for mood, antipsychotics for transient psychosis). No FDA-approved meds.'},
+19:{ty:'ADHD',cx:'Diagnosis',s:'What are the core symptoms of ADHD?',o:[['a','Inattention, hyperactivity, impulsivity present before age 12 in multiple settings'],['b','Only hyperactivity'],['c','Starts in adulthood'],['d','Only at school']],e:'<strong>ADHD:</strong> Inattention AND/OR hyperactivity-impulsivity. Onset before 12, present in ≥2 settings (home, school, work), impairs function.'},
+20:{ty:'Treatment',cx:'ADHD Rx',s:'What is first-line treatment for ADHD?',o:[['a','Stimulants (methylphenidate, amphetamines) plus behavioral interventions'],['b','Benzodiazepines'],['c','Antipsychotics'],['d','SSRIs first-line']],e:'<strong>ADHD treatment:</strong> Stimulants first-line (methylphenidate, amphetamines). Non-stimulants (atomoxetine, guanfacine) if stimulants contraindicated. Behavioral therapy adjunct.'}
+};
+.explanation.visible { display: block; }
+.explanation.correct { background: #f0fdf4; border: 1px solid #bbf7d0; }
+.explanation.incorrect { background: #fef2f2; border: 1px solid #fecaca; }
+.explanation-title { font-size: 12px; font-weight: 600; margin-bottom: 6px; }
+.explanation.correct .explanation-title { color: #166534; }
+.explanation.incorrect .explanation-title { color: #991b1b; }
+.explanation-text { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
+.explanation-text strong { color: var(--text-primary); }
+.phase-summary { background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; margin-top: 16px; display: none; }
+.summary-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+.summary-title { font-size: 15px; font-weight: 600; }
+.summary-score { font-size: 22px; font-weight: 700; color: var(--accent-green); }
+.summary-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.stat-box { text-align: center; padding: 10px; background: var(--bg-subtle); border-radius: var(--radius-sm); }
+.stat-value { font-size: 18px; font-weight: 700; }
+.stat-label { font-size: 9px; color: var(--text-muted); text-transform: uppercase; }
+.next-btn { margin-top: 14px; width: 100%; padding: 12px; background: var(--accent-green); color: white; border: none; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; cursor: pointer; }
+.progress-bar { background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 10px 24px; }
+.progress-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 12px; }
+.progress-label { font-size: 10px; color: var(--text-muted); font-weight: 600; }
+.progress-track { flex: 1; height: 5px; background: var(--bg-subtle); border-radius: 3px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #7c3aed, #a78bfa, #10b981, #059669); border-radius: 3px; transition: width 0.3s; }
+.progress-count { font-size: 10px; color: var(--text-muted); font-weight: 600; }
+</style>
+</head>
+<body>
+<header class="header"><div class="header-inner">
+<a href="index.html" class="logo-link">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 70" style="height:32px"><text x="5" y="45" font-family="Georgia,serif" font-size="42" fill="currentColor">Mechanism</text><text x="213" y="45" font-family="Georgia,serif" font-size="42" fill="currentColor">D</text><line x1="247" y1="24" x2="263" y2="45" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><ellipse cx="245" cy="22" rx="2" ry="3.5" transform="rotate(-28 245 22)" fill="currentColor"/><path d="M263 24L253 35Q249 40 249 47Q249 54 254 58Q259 62 259 68" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/><ellipse cx="265" cy="22" rx="2" ry="3.5" transform="rotate(28 265 22)" fill="currentColor"/><circle cx="259" cy="68" r="7" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="259" cy="68" r="3.5" fill="currentColor"/></svg>
+<span class="tagline">The right mechanism unlocks everything.</span></a>
+<nav class="header-nav"><a href="/" class="nav-link">ReasonDx</a><a href="index.html" class="nav-link active">Mechanisms</a></nav>
+</div></header>
+
+<div class="module-header"><div class="module-header-inner">
+<div class="breadcrumb"><a href="index.html">MechanismDx</a> › Longitudinal Cases › Psychiatry</div>
+<div class="module-title"><div class="module-icon">🧠</div><div><h1>Psychiatry: Elena's Journey</h1><p>Depression → Anxiety → Bipolar → Psychosis | Diagnosis, Safety, and Treatment</p></div></div>
+</div></div>
+
+<div class="progress-bar"><div class="progress-inner">
+<span class="progress-label">Progress</span>
+<div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<span class="progress-count" id="progressCount">0/20</span>
+</div></div>
+
+<div class="patient-banner"><div class="patient-banner-inner">
+<div class="patient-avatar">👩🏻</div>
+<div class="patient-info"><div class="patient-name">Elena Rodriguez, 28 years old</div><div class="patient-details">Graduate student | Presenting with mood changes, sleep disturbance, difficulty concentrating</div></div>
+<div class="patient-vitals">
+<div class="vital"><div class="vital-value" id="vPHQ">18</div><div class="vital-label">PHQ-9</div></div>
+<div class="vital"><div class="vital-value" id="vGAD">14</div><div class="vital-label">GAD-7</div></div>
+<div class="vital"><div class="vital-value" id="vDx">MDD</div><div class="vital-label">Working Dx</div></div>
+</div></div></div>
+
+<nav class="timeline-nav"><div class="timeline-inner">
+<div class="timeline-phase active" data-phase="1" onclick="goPhase(1)"><div class="phase-label">😔 Depression</div><div class="phase-time">Initial Visit</div><div class="phase-status current" id="status1">Current</div></div>
+<div class="timeline-phase locked" data-phase="2" onclick="goPhase(2)"><div class="phase-label">😰 Anxiety</div><div class="phase-time">Week 4</div><div class="phase-status" id="status2">🔒</div></div>
+<div class="timeline-phase locked" data-phase="3" onclick="goPhase(3)"><div class="phase-label">🔄 Bipolar</div><div class="phase-time">Month 3</div><div class="phase-status" id="status3">🔒</div></div>
+<div class="timeline-phase locked" data-phase="4" onclick="goPhase(4)"><div class="phase-label">⚡ Crisis</div><div class="phase-time">Month 6</div><div class="phase-status" id="status4">🔒</div></div>
+</div></nav>
+
+<div class="main-container">
+<aside class="case-panel"><div class="card"><div class="card-header"><h3 class="card-title">📋 Clinical Snapshot</h3></div><div class="card-content" id="caseContent"></div></div></aside>
+<main id="questionsPanel"></main>
+</div>
+
+<script>
+const answers={1:'c',2:'b',3:'a',4:'d',5:'c',6:'b',7:'a',8:'c',9:'d',10:'b',11:'c',12:'a',13:'d',14:'b',15:'a',16:'c',17:'b',18:'d',19:'a',20:'c'};
+const state={}; for(let i=1;i<=20;i++) state[i]={done:false,pick:null,conf:null,ok:false};
+let phase=1,done={1:false,2:false,3:false,4:false},open={1:true,2:false,3:false,4:false};
+const vitals={1:{phq:'18',gad:'14',dx:'MDD'},2:{phq:'12',gad:'16',dx:'MDD+GAD'},3:{phq:'8',gad:'10',dx:'Bipolar II'},4:{phq:'6',gad:'8',dx:'Stable'}};
+
+const cases={
+1:{text:'<strong>Elena Rodriguez</strong>, 28 y/o graduate student, presents with <strong>2 months of depressed mood, anhedonia, fatigue</strong>. Sleeping 12+ hours but still tired. Lost 10 lbs. "I feel worthless." Difficulty concentrating on thesis.',symptoms:[['Mood','Depressed daily',1],['Interest','Anhedonia',1],['Sleep','Hypersomnia',1],['Energy','Fatigue',1]],symptoms2:[['Appetite','↓10 lbs',1],['Concentration','Poor',1],['Guilt','Worthless',1],['Suicide','Passive SI',1]],labs:[['PHQ-9','18 (severe)',1],['GAD-7','14',1],['TSH','2.1 (normal)',0],['CBC','Normal',0]]},
+2:{text:'<strong>Week 4:</strong> On sertraline 50mg × 3 weeks. Mood slightly better but now describes <strong>constant worry, racing thoughts, restlessness</strong>. Panic attack last week. "I can\'t stop thinking about everything that could go wrong."',symptoms:[['Worry','Excessive, daily',1],['Control','Can\'t stop',1],['Restless','Keyed up',1],['Muscle','Tension',1]],symptoms2:[['Sleep','Difficulty',1],['Irritable','Yes',1],['Concentrate','Poor',1],['Panic','1 attack',1]],labs:[['PHQ-9','12 (moderate)',1],['GAD-7','16 (severe)',1],['Sertraline','50mg daily',0]]},
+3:{text:'<strong>Month 3:</strong> Elena presents with <strong>4 days of decreased sleep (3h/night), increased energy, rapid speech</strong>. Started 3 new projects, spent $2000 online shopping. "I feel amazing!" Previous depressive episodes confirmed.',symptoms:[['Sleep','3 hrs (↓need)',1],['Energy','Increased',1],['Speech','Pressured',1],['Activity','↑Projects',1]],symptoms2:[['Mood','Euphoric',1],['Spending','$2000',1],['Impulsive','Yes',1],['Duration','4 days',1]],labs:[['PHQ-9','8',0],['MDQ','+Hypomania',1],['Functioning','Impaired',1]]},
+4:{text:'<strong>Month 6:</strong> On lamotrigine + therapy, Elena is stable. Presents for routine follow-up. Discusses <strong>maintenance treatment, relapse prevention</strong>. "I understand my illness now."',symptoms:[['Mood','Euthymic',3],['Sleep','7-8 hrs',3],['Energy','Normal',3],['Function','Good',3]],symptoms2:[['SI','None',3],['Mania','None',3],['Anxiety','Mild',0],['Insight','Good',3]],labs:[['PHQ-9','6',3],['GAD-7','8',0],['Lamotrigine','100mg BID',0]]}
+};
+
+const intros={
+1:{title:'Phase 1: Major Depressive Disorder',icon:'😔',desc:'Elena presents with classic depression. Learn to diagnose MDD, assess suicide risk, and initiate treatment.',obj:['Apply DSM-5 criteria for MDD','Screen for suicide risk (Columbia Protocol)','Choose appropriate first-line antidepressant','Understand SSRI mechanism and timeline'],safety:true},
+2:{title:'Phase 2: Comorbid Anxiety',icon:'😰',desc:'Elena develops prominent anxiety symptoms. Understand GAD, panic disorder, and treatment overlap with depression.',obj:['Diagnose GAD using DSM-5 criteria','Differentiate panic disorder vs GAD','Manage SSRI-related activation','Know benzodiazepine risks and benefits']},
+3:{title:'Phase 3: Bipolar Disorder Emerges',icon:'🔄',desc:'Elena has a hypomanic episode. Recognize bipolar disorder and understand why it changes management.',obj:['Recognize hypomania vs mania','Understand why SSRIs are dangerous in bipolar','Know mood stabilizer options','Apply bipolar II diagnostic criteria']},
+4:{title:'Phase 4: Maintenance & Recovery',icon:'⚡',desc:'Elena is stabilized. Learn maintenance treatment, psychotherapy options, and relapse prevention.',obj:['Know maintenance medication duration','Understand psychotherapy options (CBT, DBT)','Recognize early warning signs of relapse','Apply shared decision-making']}
+};
+
+const Qs={
+1:{type:'MDD Diagnosis',ctx:'Depressed mood, anhedonia, hypersomnia, fatigue, weight loss, poor concentration, worthlessness × 2 months.',stem:'How many symptoms are required for MDD diagnosis per DSM-5?',opts:[['a','3 symptoms for 1 week'],['b','4 symptoms for 1 month'],['c','5+ symptoms for 2+ weeks, including depressed mood or anhedonia'],['d','Any 2 symptoms for any duration']],exp:'<strong>DSM-5 MDD Criteria:</strong> ≥5 symptoms for ≥2 weeks, MUST include depressed mood OR anhedonia.<br><br><strong>SIG E CAPS:</strong><br>• <strong>S</strong>leep (↑ or ↓)<br>• <strong>I</strong>nterest (anhedonia)<br>• <strong>G</strong>uilt/worthlessness<br>• <strong>E</strong>nergy (fatigue)<br>• <strong>C</strong>oncentration<br>• <strong>A</strong>ppetite/weight<br>• <strong>P</strong>sychomotor changes<br>• <strong>S</strong>uicidal ideation<br><br>Elena has 8/9 symptoms × 2 months = definite MDD.'},
+2:{type:'Suicide Assessment',ctx:'Elena mentions "feeling worthless" and "wondering if everyone would be better off without me."',stem:'What is the MOST important next question?',opts:[['a','How long have you felt depressed?'],['b','Are you having thoughts of suicide or harming yourself?'],['c','Do you have trouble sleeping?'],['d','Have you tried antidepressants before?']],exp:'<strong>Direct suicide inquiry is essential</strong> — asking does NOT increase risk.<br><br>Columbia Protocol questions:<br>1. Wish to be dead?<br>2. Suicidal thoughts?<br>3. Thoughts with method?<br>4. Intent to act?<br>5. Plan?<br><br>Elena\'s statement suggests <strong>passive suicidal ideation</strong>. Must clarify: passive ("better off dead") vs active (plan/intent). Assess: means access, protective factors, prior attempts.'},
+3:{type:'First-Line Treatment',ctx:'MDD confirmed, PHQ-9 = 18 (severe), no prior treatment, no contraindications.',stem:'What is the FIRST-LINE pharmacotherapy for MDD?',opts:[['a','SSRI (e.g., sertraline, escitalopram)'],['b','Benzodiazepine (e.g., lorazepam)'],['c','Antipsychotic (e.g., quetiapine)'],['d','Stimulant (e.g., methylphenidate)']],exp:'<strong>SSRIs are first-line for MDD</strong> due to efficacy, safety, and tolerability.<br><br>First-line options:<br>• <strong>Sertraline</strong> (Zoloft) — fewest drug interactions<br>• <strong>Escitalopram</strong> (Lexapro) — well tolerated<br>• <strong>Fluoxetine</strong> (Prozac) — long half-life<br><br>Also first-line: SNRIs (venlafaxine, duloxetine), bupropion, mirtazapine.<br><br>Benzos: adjunct only, not monotherapy. Antipsychotics: augmentation for refractory cases.'},
+4:{type:'SSRI Mechanism',ctx:'Starting sertraline 50mg daily.',stem:'What is the mechanism of SSRIs?',opts:[['a','Block dopamine reuptake'],['b','Enhance GABA activity'],['c','Block norepinephrine reuptake'],['d','Block serotonin reuptake → ↑synaptic serotonin']],exp:'<strong>SSRIs selectively inhibit serotonin reuptake</strong> at the presynaptic terminal.<br><br>Mechanism:<br>1. Block SERT (serotonin transporter)<br>2. ↑Serotonin in synaptic cleft<br>3. Downstream receptor changes (takes weeks)<br><br>Timeline:<br>• Side effects: Days 1-7<br>• Therapeutic effect: 2-4 weeks<br>• Full effect: 6-8 weeks<br><br>Common side effects: GI upset, headache, sexual dysfunction, initial anxiety/activation.'},
+5:{type:'Treatment Timeline',ctx:'Elena asks "When will I feel better?"',stem:'When should Elena expect to notice improvement on sertraline?',opts:[['a','Within 24-48 hours'],['b','Within 1 week'],['c','2-4 weeks for initial response, 6-8 weeks for full effect'],['d','Immediate if the right medication']],exp:'<strong>Antidepressants take 2-4 weeks</strong> for initial response.<br><br>Timeline to communicate:<br>• Week 1-2: Side effects may occur first<br>• Week 2-4: Initial improvement (sleep, energy often first)<br>• Week 4-6: Mood improvement<br>• Week 6-8: Full therapeutic effect<br><br>If no response by 4-6 weeks at adequate dose → consider dose increase or switch. Counsel patients to continue despite early side effects.'},
+6:{type:'GAD Diagnosis',ctx:'Excessive worry about multiple things daily × 6 months, restlessness, muscle tension, poor sleep, difficulty controlling worry.',stem:'Which criteria BEST supports Generalized Anxiety Disorder?',opts:[['a','Panic attacks with fear of dying'],['b','Excessive worry about multiple domains for ≥6 months with ≥3 somatic symptoms'],['c','Fear of specific situation (e.g., flying)'],['d','Intrusive thoughts with compulsive behaviors']],exp:'<strong>GAD DSM-5 Criteria:</strong><br><br>• Excessive anxiety/worry about multiple events/activities<br>• ≥6 months duration<br>• Difficulty controlling worry<br>• ≥3 of 6 symptoms (adults):<br>&nbsp;&nbsp;1. Restlessness<br>&nbsp;&nbsp;2. Fatigue<br>&nbsp;&nbsp;3. Difficulty concentrating<br>&nbsp;&nbsp;4. Irritability<br>&nbsp;&nbsp;5. Muscle tension<br>&nbsp;&nbsp;6. Sleep disturbance<br><br>Key: Worry is pervasive (not specific phobia) and uncontrollable (not OCD).'},
+7:{type:'Panic Disorder',ctx:'Elena describes episode: sudden palpitations, sweating, chest tightness, "thought I was dying" lasting 10 minutes.',stem:'What BEST characterizes a panic attack?',opts:[['a','Sudden surge of intense fear with physical symptoms, peaking within minutes'],['b','Gradual onset of worry over hours'],['c','Fear only in specific situations'],['d','Symptoms lasting several hours']],exp:'<strong>Panic Attack:</strong> Sudden surge of intense fear/discomfort, peaking within minutes.<br><br>≥4 of 13 symptoms:<br>• Palpitations<br>• Sweating<br>• Trembling<br>• Shortness of breath<br>• Chest pain<br>• Nausea<br>• Dizziness<br>• Chills/hot flashes<br>• Paresthesias<br>• Derealization<br>• Fear of losing control<br>• Fear of dying<br><br><strong>Panic Disorder</strong> = recurrent panic attacks + persistent concern or behavioral change.'},
+8:{type:'Benzodiazepine Use',ctx:'Elena requests "something fast-acting" for her anxiety.',stem:'What is TRUE about benzodiazepines for anxiety?',opts:[['a','First-line monotherapy for GAD'],['b','No risk of dependence if used short-term'],['c','Effective for acute anxiety but risk of dependence with long-term use'],['d','Preferred over SSRIs for long-term anxiety treatment']],exp:'<strong>Benzodiazepines: Fast but risky</strong><br><br>Pros:<br>• Rapid onset (minutes to hours)<br>• Effective for acute anxiety/panic<br><br>Cons:<br>• Dependence/tolerance<br>• Withdrawal (can be severe/dangerous)<br>• Cognitive impairment<br>• Fall risk (elderly)<br>• Not disease-modifying<br><br>Use: Short-term bridge while SSRI takes effect, PRN for severe panic. NOT first-line monotherapy. Taper slowly if discontinuing.'},
+9:{type:'SSRI Side Effects',ctx:'Week 2 on sertraline: Elena feels more anxious and jittery.',stem:'What explains Elena\'s increased anxiety on sertraline?',opts:[['a','Sertraline is the wrong medication'],['b','Serotonin syndrome'],['c','Allergic reaction'],['d','Activation syndrome — common early SSRI side effect']],exp:'<strong>Activation syndrome</strong> is a common early SSRI side effect.<br><br>Symptoms:<br>• Increased anxiety, restlessness<br>• Insomnia, agitation<br>• Usually resolves in 1-2 weeks<br><br>Management:<br>• Reassurance and continue medication<br>• Start at lower dose next time<br>• Consider short-term benzo bridge<br>• Warn patients in advance<br><br>Not serotonin syndrome (which = fever, rigidity, clonus, AMS).'},
+10:{type:'Medication Adjustment',ctx:'Week 6: PHQ-9 improved 18→12, but still significant symptoms.',stem:'Elena has partial response to sertraline 50mg. What is the BEST next step?',opts:[['a','Stop sertraline and try a different class'],['b','Increase sertraline dose (e.g., to 100mg)'],['c','Add an antipsychotic'],['d','Add a benzodiazepine for long-term use']],exp:'<strong>Partial response → optimize dose first</strong><br><br>Treatment algorithm:<br>1. Adequate trial = therapeutic dose × 4-6 weeks<br>2. Partial response → ↑dose to maximum tolerated<br>3. No response → switch agents<br>4. Multiple failures → augmentation<br><br>Sertraline range: 50-200mg. Elena is on minimum dose with partial response — increase before switching or augmenting.'},
+11:{type:'Bipolar Recognition',ctx:'Elena now has decreased sleep need, increased energy, pressured speech, impulsive spending × 4 days.',stem:'What is the MOST likely diagnosis?',opts:[['a','Worsening depression'],['b','Panic disorder'],['c','Bipolar II disorder (hypomanic episode)'],['d','ADHD']],exp:'<strong>Hypomanic episode = Bipolar II</strong><br><br>Hypomania criteria:<br>• Elevated/irritable mood + ↑energy<br>• ≥3 symptoms (DIG FAST):<br>&nbsp;&nbsp;<strong>D</strong>istractibility<br>&nbsp;&nbsp;<strong>I</strong>mpulsivity/Indiscretion<br>&nbsp;&nbsp;<strong>G</strong>randiosity<br>&nbsp;&nbsp;<strong>F</strong>light of ideas<br>&nbsp;&nbsp;<strong>A</strong>ctivity increase<br>&nbsp;&nbsp;<strong>S</strong>leep (↓need)<br>&nbsp;&nbsp;<strong>T</strong>alkativeness<br>• ≥4 days duration<br>• NO severe impairment or psychosis (that = mania)<br><br>Bipolar II = hypomania + depression history.'},
+12:{type:'SSRI Danger in Bipolar',ctx:'Elena was on sertraline when hypomania emerged.',stem:'Why are SSRIs problematic in bipolar disorder?',opts:[['a','SSRIs can trigger mania/hypomania or rapid cycling'],['b','SSRIs are ineffective for bipolar depression'],['c','SSRIs interact with mood stabilizers'],['d','SSRIs cause weight gain in bipolar']],exp:'<strong>SSRIs can destabilize bipolar disorder:</strong><br><br>Risks:<br>• Trigger manic/hypomanic switch<br>• Induce rapid cycling<br>• May worsen long-term course<br><br>This is why <strong>bipolar screening</strong> (e.g., MDQ) is important before starting antidepressants!<br><br>Bipolar depression treatment:<br>• Mood stabilizer first (lithium, lamotrigine, valproate)<br>• If antidepressant needed: use WITH mood stabilizer<br>• Quetiapine also FDA-approved for bipolar depression'},
+13:{type:'Mood Stabilizers',ctx:'Need to start mood stabilizer for bipolar II.',stem:'Which medication is FIRST-LINE for bipolar II maintenance?',opts:[['a','Sertraline (SSRI)'],['b','Lorazepam (benzodiazepine)'],['c','Haloperidol (typical antipsychotic)'],['d','Lamotrigine or lithium (mood stabilizers)']],exp:'<strong>Mood stabilizers for bipolar II:</strong><br><br>• <strong>Lamotrigine</strong>: Best for bipolar depression prevention, few side effects, requires slow titration (SJS risk)<br>• <strong>Lithium</strong>: Gold standard, anti-suicide properties, requires monitoring (thyroid, renal, levels)<br>• <strong>Valproate</strong>: Better for mania prevention, teratogenic<br>• <strong>Quetiapine</strong>: FDA-approved for bipolar depression<br><br>Lamotrigine often preferred in bipolar II (depression-predominant).'},
+14:{type:'Lithium Monitoring',ctx:'Considering lithium for Elena.',stem:'What monitoring is required for lithium?',opts:[['a','No monitoring needed'],['b','Lithium level, TSH, creatinine/eGFR, pregnancy test'],['c','Only lithium levels'],['d','Liver function tests only']],exp:'<strong>Lithium monitoring:</strong><br><br>Baseline:<br>• BMP (Cr, eGFR) — nephrotoxic<br>• TSH — causes hypothyroidism<br>• Calcium — hyperparathyroidism<br>• Pregnancy test — teratogenic (Ebstein anomaly)<br>• ECG (if cardiac history)<br><br>Ongoing:<br>• Lithium level q3-6 months (0.6-1.2 mEq/L)<br>• TSH, Cr annually<br><br>Toxicity signs: tremor, GI upset, confusion, ataxia. Narrow therapeutic index!'},
+15:{type:'Psychotherapy',ctx:'Elena is stable on lamotrigine and wants to add therapy.',stem:'Which psychotherapy has BEST evidence for depression?',opts:[['a','Cognitive Behavioral Therapy (CBT)'],['b','Psychoanalysis'],['c','Hypnotherapy'],['d','Group therapy only']],exp:'<strong>CBT has strongest evidence</strong> for depression and anxiety.<br><br>Evidence-based therapies:<br>• <strong>CBT</strong>: Identifies/challenges negative thought patterns, behavioral activation. Best studied.<br>• <strong>IPT</strong> (Interpersonal): Focus on relationships/roles<br>• <strong>DBT</strong>: For borderline PD, suicidality, emotion dysregulation<br>• <strong>Behavioral Activation</strong>: Component of CBT<br><br>Combination (medication + therapy) often superior to either alone for moderate-severe depression.'},
+16:{type:'Treatment Duration',ctx:'Elena: "How long do I need to stay on medication?"',stem:'What is the recommended duration of antidepressant treatment after first MDD episode?',opts:[['a','Stop once symptoms resolve'],['b','2-4 weeks after improvement'],['c','Continue 6-12 months after remission, then consider taper'],['d','Lifelong treatment always required']],exp:'<strong>Continue 6-12 months after remission</strong> for first episode.<br><br>Duration guidelines:<br>• First episode: 6-12 months after remission<br>• Second episode: 2+ years<br>• Third episode or severe: Consider indefinite<br><br>Taper slowly (weeks to months) to avoid discontinuation syndrome. For bipolar: usually lifelong mood stabilizer.<br><br>Recurrence risk: 50% after first episode, 80% after second.'},
+17:{type:'Relapse Prevention',ctx:'Discussing warning signs with Elena.',stem:'What is a key strategy for relapse prevention?',opts:[['a','Avoid all stress permanently'],['b','Identify early warning signs and have action plan'],['c','Stop medications periodically to "test"'],['d','Avoid discussing illness with family']],exp:'<strong>Relapse prevention strategies:</strong><br><br>1. <strong>Early warning signs</strong>: Help patient identify their prodrome (sleep changes, irritability, withdrawal)<br>2. <strong>Action plan</strong>: What to do when warning signs appear<br>3. <strong>Medication adherence</strong>: Most common cause of relapse is stopping meds<br>4. <strong>Regular sleep schedule</strong>: Especially important in bipolar<br>5. <strong>Avoid substances</strong>: Alcohol, drugs destabilize mood<br>6. <strong>Social support</strong>: Involve family, reduce stigma<br>7. <strong>Ongoing therapy</strong>: Maintenance CBT reduces relapse'},
+18:{type:'Antidepressant Discontinuation',ctx:'Elena wants to try stopping sertraline (before bipolar diagnosis).',stem:'What is discontinuation syndrome?',opts:[['a','Return of original depression'],['b','Sign of addiction'],['c','Allergic reaction to medication'],['d','Flu-like symptoms, sensory disturbances ("brain zaps"), irritability when stopping SSRI abruptly']],exp:'<strong>SSRI Discontinuation Syndrome:</strong><br><br>Symptoms (FINISH):<br>• <strong>F</strong>lu-like symptoms<br>• <strong>I</strong>nsomnia<br>• <strong>N</strong>ausea<br>• <strong>I</strong>mbalance (dizziness)<br>• <strong>S</strong>ensory ("brain zaps")<br>• <strong>H</strong>yper-arousal (anxiety)<br><br>More common with short half-life SSRIs (paroxetine, venlafaxine). Rare with fluoxetine (long half-life).<br><br>Prevention: Taper slowly over weeks. NOT addiction — resolves within 1-2 weeks.'},
+19:{type:'Psychotic Depression',ctx:'A different patient has depression with belief that their organs are rotting inside (nihilistic delusion).',stem:'What is the treatment for MDD with psychotic features?',opts:[['a','Antidepressant PLUS antipsychotic (or ECT)'],['b','Antidepressant alone'],['c','Antipsychotic alone'],['d','Psychotherapy only']],exp:'<strong>Psychotic depression requires combination treatment:</strong><br><br>• Antidepressant + Antipsychotic (e.g., sertraline + olanzapine)<br>• OR ECT (very effective for psychotic depression)<br><br>Antidepressant alone: Only ~30% response<br>Combination: ~70% response<br><br>Psychotic features in depression:<br>• Delusions (often mood-congruent: guilt, nihilism, poverty)<br>• Hallucinations (often critical voices)<br><br>Higher suicide risk than non-psychotic depression.'},
+20:{type:'Substance Use Screening',ctx:'Comprehensive psychiatric evaluation.',stem:'Why is substance use screening essential in psychiatric assessment?',opts:[['a','To judge the patient'],['b','Only important in addiction psychiatry'],['c','Substance use can cause, mimic, or worsen psychiatric symptoms'],['d','Insurance requires it']],exp:'<strong>Substance use affects psychiatric diagnosis and treatment:</strong><br><br>Substances can:<br>• <strong>Cause</strong> psychiatric symptoms (stimulant-induced psychosis, alcohol-induced depression)<br>• <strong>Mimic</strong> disorders (cocaine = mania, withdrawal = anxiety)<br>• <strong>Worsen</strong> underlying illness (alcohol + depression)<br>• <strong>Interact</strong> with medications<br><br>Always ask about: alcohol, cannabis, stimulants, opioids, benzodiazepines.<br><br>Rule: If substance-induced, symptoms resolve with sustained abstinence. If independent disorder, symptoms persist.'}
+};
+
+function updateVitals(p){const v=vitals[p];document.getElementById('vPHQ').textContent=v.phq;document.getElementById('vGAD').textContent=v.gad;document.getElementById('vDx').textContent=v.dx;}
+
+function renderCase(p){const c=cases[p];let h=`<div class="case-narrative">${c.text}</div>`;
+h+=`<div class="data-section"><div class="data-label">Symptoms</div><div class="data-grid">`;
+c.symptoms.forEach(v=>h+=`<div class="data-item"><span>${v[0]}:</span> <span class="${v[2]===1?'abnormal':v[2]===3?'improved':''}">${v[1]}</span></div>`);
+h+=`</div></div><div class="data-section"><div class="data-label">Additional</div><div class="data-grid">`;
+c.symptoms2.forEach(e=>h+=`<div class="data-item"><span>${e[0]}:</span> <span class="${e[2]===1?'abnormal':e[2]===3?'improved':''}">${e[1]}</span></div>`);
+h+=`</div></div><div class="data-section"><div class="data-label">Screening/Labs</div><div class="data-grid">`;
+c.labs.forEach(l=>h+=`<div class="data-item"><span>${l[0]}:</span> <span class="${l[2]===1?'abnormal':l[2]===3?'improved':''}">${l[1]}</span></div>`);
+h+=`</div></div>`;document.getElementById('caseContent').innerHTML=h;}
+
+function getQs(p){const s=(p-1)*5+1;return[s,s+1,s+2,s+3,s+4];}
+
+function renderQuestions(p){const intro=intros[p];const qs=getQs(p);
+let h=`<div class="phase-intro"><h2>${intro.icon} ${intro.title}</h2>`;
+if(intro.safety)h+=`<div class="safety-box"><div class="safety-title">⚠️ Safety First</div><div class="safety-text">Always assess suicide risk. Asking about suicide does NOT increase risk — it opens dialogue and saves lives.</div></div>`;
+h+=`<p>${intro.desc}</p><div class="learning-box"><div class="learning-title">🎯 Learning Objectives</div><ul class="learning-list">`;
+intro.obj.forEach(o=>h+=`<li>${o}</li>`);h+=`</ul></div></div>`;
+qs.forEach((qn,i)=>{const q=Qs[qn];const s=state[qn];
+h+=`<div class="quiz-card" id="q${qn}"><div class="quiz-header"><div class="quiz-number"><span class="quiz-num">${i+1}</span><span class="quiz-type">${q.type}</span></div><span class="quiz-status ${s.done?(s.ok?'correct':'incorrect'):''}" id="st${qn}">${s.done?(s.ok?'Correct':'Incorrect'):'Unanswered'}</span></div>`;
+h+=`<div class="quiz-context"><div class="context-label">📍 Case Connection</div><div class="context-text">${q.ctx}</div></div>`;
+h+=`<div class="quiz-body"><div class="quiz-stem">${q.stem}</div><div class="quiz-options" id="opts${qn}">`;
+q.opts.forEach(opt=>{let cls=s.done?'disabled':'';if(s.done&&opt[0]===answers[qn])cls+=' correct';if(s.done&&opt[0]===s.pick&&!s.ok)cls+=' incorrect';
+h+=`<div class="quiz-option ${cls}" data-a="${opt[0]}" onclick="pick(${qn},this)"><span class="option-letter">${opt[0].toUpperCase()}</span><span class="option-text">${opt[1]}</span></div>`;});
+h+=`</div><div class="confidence-section" id="conf${qn}" ${s.done?'style="display:none"':''}>`;
+h+=`<div class="confidence-label"><span>Confidence?</span><span id="cv${qn}">Select</span></div><div class="confidence-btns">`;
+h+=`<button class="conf-btn" onclick="setC(${qn},'low',this)">Guessing</button><button class="conf-btn" onclick="setC(${qn},'med',this)">Somewhat</button><button class="conf-btn" onclick="setC(${qn},'high',this)">Confident</button></div></div>`;
+h+=`<button class="submit-btn" id="sub${qn}" onclick="submit(${qn})" disabled ${s.done?'style="display:none"':''}>Submit Answer</button>`;
+h+=`<div class="explanation ${s.done?(s.ok?'visible correct':'visible incorrect'):''}" id="exp${qn}"><div class="explanation-title">${s.done?(s.ok?'✓ Correct!':'✗ Not quite'):'✓ Correct!'}</div><div class="explanation-text">${q.exp}</div></div></div></div>`;});
+h+=`<div class="phase-summary" id="summary"><div class="summary-header"><div class="summary-title">Phase ${p} Complete! 🎉</div><div class="summary-score" id="score">0/5</div></div>`;
+h+=`<div class="summary-stats"><div class="stat-box"><div class="stat-value" id="corrCt">0</div><div class="stat-label">Correct</div></div><div class="stat-box"><div class="stat-value" id="avgC">--</div><div class="stat-label">Avg Confidence</div></div><div class="stat-box"><div class="stat-value">+50</div><div class="stat-label">XP</div></div></div>`;
+if(p<4)h+=`<button class="next-btn" onclick="unlock(${p+1})">Continue to Phase ${p+1} →</button>`;
+else h+=`<p style="text-align:center;margin-top:14px;color:var(--accent-green);font-weight:600">🎓 Elena is stable! You navigated the spectrum of mood disorders.</p>`;
+h+=`</div>`;document.getElementById('questionsPanel').innerHTML=h;}
+
+function pick(qn,el){if(state[qn].done)return;document.querySelectorAll(`#opts${qn} .quiz-option`).forEach(o=>o.classList.remove('selected'));el.classList.add('selected');state[qn].pick=el.dataset.a;chkSub(qn);}
+function setC(qn,lv,el){if(state[qn].done)return;document.querySelectorAll(`#conf${qn} .conf-btn`).forEach(b=>b.classList.remove('selected'));el.classList.add('selected');state[qn].conf=lv;document.getElementById(`cv${qn}`).textContent={low:'33%',med:'66%',high:'90%'}[lv];chkSub(qn);}
+function chkSub(qn){const btn=document.getElementById(`sub${qn}`);if(btn)btn.disabled=!(state[qn].pick&&state[qn].conf);}
+
+function submit(qn){const s=state[qn];if(s.done)return;s.done=true;s.ok=s.pick===answers[qn];
+document.querySelectorAll(`#opts${qn} .quiz-option`).forEach(o=>{o.classList.add('disabled');if(o.dataset.a===answers[qn])o.classList.add('correct');else if(o.dataset.a===s.pick&&!s.ok)o.classList.add('incorrect');});
+const exp=document.getElementById(`exp${qn}`);exp.classList.add('visible',s.ok?'correct':'incorrect');exp.querySelector('.explanation-title').textContent=s.ok?'✓ Correct!':'✗ Not quite';
+document.getElementById(`st${qn}`).textContent=s.ok?'Correct':'Incorrect';document.getElementById(`st${qn}`).className=`quiz-status ${s.ok?'correct':'incorrect'}`;
+document.getElementById(`sub${qn}`).style.display='none';document.getElementById(`conf${qn}`).style.display='none';
+updateProgress();checkDone();}
+
+function updateProgress(){const total=Object.values(state).filter(s=>s.done).length;document.getElementById('progressCount').textContent=`${total}/20`;document.getElementById('progressFill').style.width=`${(total/20)*100}%`;}
+
+function checkDone(){const qs=getQs(phase);if(qs.every(q=>state[q].done)&&!done[phase]){done[phase]=true;
+const corr=qs.filter(q=>state[q].ok).length;document.getElementById('score').textContent=`${corr}/5`;document.getElementById('corrCt').textContent=corr;
+const cv={low:33,med:66,high:90};const avg=Math.round(qs.reduce((s,q)=>s+cv[state[q].conf],0)/5);document.getElementById('avgC').textContent=`${avg}%`;
+document.getElementById('summary').style.display='block';document.getElementById('summary').scrollIntoView({behavior:'smooth'});
+document.querySelector(`.timeline-phase[data-phase="${phase}"]`).classList.add('completed');
+document.getElementById(`status${phase}`).textContent='✓ Done';document.getElementById(`status${phase}`).className='phase-status done';}}
+
+function unlock(np){open[np]=true;goPhase(np);}
+
+function goPhase(p){if(!open[p]){alert(`Complete Phase ${p-1} first!`);return;}phase=p;
+document.querySelectorAll('.timeline-phase').forEach(ph=>{const pn=parseInt(ph.dataset.phase);ph.classList.remove('active','locked');if(pn===p)ph.classList.add('active');if(!open[pn])ph.classList.add('locked');});
+for(let i=1;i<=4;i++){const st=document.getElementById(`status${i}`);if(done[i]){st.textContent='✓ Done';st.className='phase-status done';}else if(i===p){st.textContent='Current';st.className='phase-status current';}else if(open[i]){st.textContent='';st.className='phase-status';}else{st.textContent='🔒';st.className='phase-status';}}
+updateVitals(p);renderCase(p);renderQuestions(p);window.scrollTo({top:0,behavior:'smooth'});}
+
+document.addEventListener('DOMContentLoaded',()=>{updateVitals(1);renderCase(1);renderQuestions(1);});
+</script>
+</body>
+</html>

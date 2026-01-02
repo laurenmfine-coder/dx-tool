@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GI/Liver: Carlos's Journey - MechanismDx</title>
+<style>
+:root{--bg:#f8f9fa;--white:#fff;--subtle:#f1f3f5;--text:#1a1a1a;--muted:#5c5c5c;--border:#e9ecef;--accent:#059669;--green:#16a34a;--red:#dc2626;--radius:8px}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.header{background:var(--white);border-bottom:1px solid var(--border);padding:16px 24px}.header-inner{max-width:1200px;margin:0 auto;font-weight:600}
+.module-header{background:var(--white);border-bottom:1px solid var(--border);padding:24px}.module-header-inner{max-width:1200px;margin:0 auto}
+.module-title{display:flex;align-items:center;gap:16px}.module-icon{width:56px;height:56px;background:linear-gradient(135deg,#d1fae5,#a7f3d0);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:28px}
+.module-title h1{font-size:24px}.module-title p{color:var(--muted);font-size:14px}
+.patient-banner{background:linear-gradient(135deg,#047857,#059669);color:#fff;padding:20px 24px}
+.patient-banner-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.patient-info{flex:1}.patient-name{font-size:16px;font-weight:600}.patient-details{font-size:13px;opacity:.9}
+.patient-vitals{display:flex;gap:16px}.vital{text-align:center;padding:8px 14px;background:rgba(255,255,255,.1);border-radius:8px}
+.vital-value{font-size:18px;font-weight:700}.vital-label{font-size:10px;opacity:.8}
+.timeline-nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 24px}
+.timeline-inner{max-width:1200px;margin:0 auto;display:flex}.timeline-phase{flex:1;padding:14px;cursor:pointer;border-bottom:3px solid transparent;text-align:center}
+.timeline-phase.active{border-bottom-color:var(--accent);background:rgba(5,150,105,.04)}.timeline-phase.completed{border-bottom-color:var(--green)}
+.timeline-phase.locked{opacity:.4;cursor:not-allowed}.phase-label{font-size:12px;font-weight:600}.phase-time{font-size:10px;color:var(--muted)}
+.phase-status{font-size:10px;margin-top:4px}.phase-status.current{color:var(--accent)}.phase-status.done{color:var(--green)}
+.main-container{max-width:1200px;margin:0 auto;padding:24px;display:grid;grid-template-columns:280px 1fr;gap:24px}
+@media(max-width:900px){.main-container{grid-template-columns:1fr}}
+.card{background:var(--white);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;overflow:hidden}
+.card-header{padding:14px 16px;border-bottom:1px solid var(--border);font-weight:600}.card-content{padding:16px}
+.case-narrative{font-size:13px;line-height:1.7;color:var(--muted);margin-bottom:12px}.case-narrative strong{color:var(--text)}
+.data-section{background:var(--subtle);border-radius:8px;padding:10px;margin-top:10px}
+.data-label{font-size:9px;font-weight:600;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.data-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:10px}.abnormal{color:var(--red)!important}
+.phase-intro h2{font-size:18px;font-weight:600;margin-bottom:8px}.phase-intro p{font-size:13px;color:var(--muted)}
+.resource-box{background:#d1fae5;border-left:4px solid var(--accent);border-radius:8px;padding:12px;margin:12px 0}
+.resource-title{font-size:10px;font-weight:700;color:#047857;margin-bottom:6px}.resource-links{font-size:10px}.resource-links a{color:var(--accent)}
+.learning-box{background:#d1fae5;border-radius:12px;padding:14px;margin-top:14px}
+.learning-title{font-size:11px;font-weight:600;color:var(--accent);margin-bottom:8px}.learning-list{list-style:none;font-size:12px}
+.learning-list li{padding:3px 0 3px 18px;position:relative}.learning-list li::before{content:'→';position:absolute;left:0;color:var(--accent)}
+.quiz-card{background:var(--white);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;overflow:hidden}
+.quiz-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between}
+.quiz-num{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.quiz-type{font-size:11px;color:var(--muted);margin-left:8px}.quiz-status{font-size:10px;padding:3px 8px;border-radius:10px;background:var(--subtle)}
+.quiz-status.correct{background:#dcfce7;color:#166534}.quiz-status.incorrect{background:#fee2e2;color:#991b1b}
+.quiz-context{padding:12px 16px;background:#d1fae5;font-size:11px;color:#047857}.quiz-body{padding:16px}
+.quiz-stem{font-size:13px;font-weight:500;margin-bottom:14px}.quiz-options{display:flex;flex-direction:column;gap:6px}
+.quiz-option{display:flex;gap:10px;padding:10px 12px;background:var(--subtle);border:2px solid transparent;border-radius:8px;cursor:pointer}
+.quiz-option:hover{border-color:var(--border)}.quiz-option.selected{border-color:var(--accent)}
+.quiz-option.correct{border-color:var(--green);background:rgba(22,163,74,.08)}.quiz-option.incorrect{border-color:var(--red);background:rgba(220,38,38,.08)}
+.quiz-option.disabled{pointer-events:none}
+.option-letter{width:22px;height:22px;border:2px solid var(--border);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+.quiz-option.correct .option-letter{background:var(--green);border-color:var(--green);color:#fff}
+.quiz-option.incorrect .option-letter{background:var(--red);border-color:var(--red);color:#fff}
+.option-text{font-size:12px;color:var(--muted)}
+.confidence-section{margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
+.confidence-btns{display:flex;gap:6px}.conf-btn{flex:1;padding:7px;border:2px solid var(--border);border-radius:8px;background:#fff;cursor:pointer;font-size:10px;font-weight:600}
+.conf-btn.selected{border-color:var(--green);background:rgba(22,163,74,.08);color:var(--green)}
+.submit-btn{margin-top:10px;width:100%;padding:10px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer}
+.submit-btn:disabled{background:var(--subtle);color:var(--muted)}
+.explanation{margin-top:14px;padding:14px;border-radius:8px;display:none;font-size:12px;line-height:1.6}.explanation.visible{display:block}
+.explanation.correct{background:#f0fdf4;border:1px solid #bbf7d0}.explanation.incorrect{background:#fef2f2;border:1px solid #fecaca}
+.explanation-title{font-weight:600;margin-bottom:6px}.explanation a{color:var(--accent)}
+.phase-summary{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:20px;margin-top:16px;display:none}
+.summary-header{display:flex;justify-content:space-between;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.summary-score{font-size:22px;font-weight:700;color:var(--green)}
+.next-btn{margin-top:14px;width:100%;padding:12px;background:var(--green);color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer}
+.progress-bar{background:var(--white);border-bottom:1px solid var(--border);padding:10px 24px}
+.progress-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.progress-track{flex:1;height:5px;background:var(--subtle);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#059669,#10b981);transition:width .3s}
+.progress-count{font-size:10px;color:var(--muted);font-weight:600}
+</style>
+</head>
+<body>
+<header class="header"><div class="header-inner">MechanismDx › GI/Liver</div></header>
+<div class="module-header"><div class="module-header-inner"><div class="module-title"><div class="module-icon">🫁</div><div><h1>GI/Liver: Carlos's Journey</h1><p>Cirrhosis → GI Bleed → Hepatic Encephalopathy → Transplant Evaluation | ACG/AASLD Guidelines</p></div></div></div></div>
+<div class="progress-bar"><div class="progress-inner"><div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div><span class="progress-count" id="progressCount">0/20</span></div></div>
+<div class="patient-banner"><div class="patient-banner-inner">
+<div class="patient-info"><div class="patient-name">Carlos Mendez, 58 years old</div><div class="patient-details">Alcohol use disorder, newly diagnosed cirrhosis | Presenting with abdominal distension</div></div>
+<div class="patient-vitals"><div class="vital"><div class="vital-value" id="vMELD">18</div><div class="vital-label">MELD</div></div><div class="vital"><div class="vital-value" id="vChild">B</div><div class="vital-label">Child-Pugh</div></div><div class="vital"><div class="vital-value" id="vAsc">Mod</div><div class="vital-label">Ascites</div></div></div>
+</div></div>
+<nav class="timeline-nav"><div class="timeline-inner">
+<div class="timeline-phase active" data-phase="1" onclick="goPhase(1)"><div class="phase-label">🫁 Cirrhosis Dx</div><div class="phase-time">Day 1</div><div class="phase-status current" id="status1">Current</div></div>
+<div class="timeline-phase locked" data-phase="2" onclick="goPhase(2)"><div class="phase-label">🩸 GI Bleed</div><div class="phase-time">Month 2</div><div class="phase-status" id="status2">🔒</div></div>
+<div class="timeline-phase locked" data-phase="3" onclick="goPhase(3)"><div class="phase-label">🧠 Encephalopathy</div><div class="phase-time">Month 4</div><div class="phase-status" id="status3">🔒</div></div>
+<div class="timeline-phase locked" data-phase="4" onclick="goPhase(4)"><div class="phase-label">💚 Transplant</div><div class="phase-time">Month 6</div><div class="phase-status" id="status4">🔒</div></div>
+</div></nav>
+<div class="main-container">
+<aside><div class="card"><div class="card-header">📋 Clinical Snapshot</div><div class="card-content" id="caseContent"></div></div></aside>
+<main id="questionsPanel"></main>
+</div>
+<script>
+const Qs={
+1:{ty:'UGIB',cx:'Presentation',s:'James presents with hematemesis and melena. What is the most likely source?',o:[['a','Upper GI bleed above the ligament of Treitz'],['b','Lower GI bleed from colon'],['c','Small bowel source only'],['d','Rectal bleeding']],e:'<strong>UGIB:</strong> Hematemesis and/or melena suggest source above ligament of Treitz. Peptic ulcer most common cause.'},
+2:{ty:'Management',cx:'Initial steps',s:'What is the initial management of acute GI bleeding?',o:[['a','Resuscitation, IV access, type and cross, PPI, restrict anticoagulants'],['b','Immediate endoscopy for all'],['c','Observation only'],['d','Oral PPI is sufficient']],e:'<strong>Initial:</strong> ABC, 2 large-bore IVs, type and cross, IV PPI, hold anticoagulants. Transfuse if Hgb <7 (or <8 if CAD).'},
+3:{ty:'Scoring',cx:'Risk stratification',s:'What scoring systems help risk stratify GI bleeding?',o:[['a','Glasgow-Blatchford (need for intervention) and Rockall (mortality)'],['b','APACHE II only'],['c','Wells score'],['d','CURB-65']],e:'<strong>Scores:</strong> Glasgow-Blatchford predicts need for intervention. Rockall predicts mortality. Guide admission vs outpatient.'},
+4:{ty:'Endoscopy',cx:'Timing',s:'When should upper endoscopy be performed in UGIB?',o:[['a','Within 24 hours for most; within 12 hours if high-risk features'],['b','Immediate for all patients'],['c','After 48 hours observation'],['d','Only if rebleeding occurs']],e:'<strong>EGD timing:</strong> Within 24h for most. Earlier (12h) if high-risk: hemodynamic instability, bloody NG aspirate, high Blatchford.'},
+5:{ty:'Treatment',cx:'Variceal bleeding',s:'What is the management of suspected variceal bleeding?',o:[['a','Octreotide, antibiotics, urgent endoscopy with banding'],['b','PPI alone is sufficient'],['c','Surgery first'],['d','Observation for spontaneous resolution']],e:'<strong>Variceal:</strong> Octreotide (splanchnic vasoconstriction), antibiotics (prevent SBP), urgent EGD with band ligation. TIPS if refractory.'},
+6:{ty:'Cirrhosis',cx:'Complications',s:'What are the major complications of cirrhosis?',o:[['a','Ascites, variceal bleeding, hepatic encephalopathy, HCC, hepatorenal syndrome'],['b','Only jaundice'],['c','Gallstones only'],['d','Pancreatitis']],e:'<strong>Cirrhosis complications:</strong> Portal HTN (ascites, varices, splenomegaly), HE, HCC, hepatorenal, hepatopulmonary, coagulopathy.'},
+7:{ty:'Ascites',cx:'Evaluation',s:'How is ascites evaluated with paracentesis?',o:[['a','Cell count, albumin for SAAG, culture, total protein'],['b','Only gross appearance'],['c','Glucose only'],['d','No analysis needed']],e:'<strong>Paracentesis:</strong> Cell count (>250 PMN = SBP), SAAG (≥1.1 = portal HTN), culture, protein. Always do diagnostic tap on new ascites.'},
+8:{ty:'SBP',cx:'Diagnosis and treatment',s:'What defines SBP and how is it treated?',o:[['a','PMN >250/mm³ in ascitic fluid; treat with ceftriaxone and albumin'],['b','Positive culture required'],['c','Antibiotics only if septic'],['d','Surgical drainage needed']],e:'<strong>SBP:</strong> PMN >250 in ascites (don\'t wait for culture). Ceftriaxone (or FQ), albumin 1.5g/kg day 1, 1g/kg day 3.'},
+9:{ty:'Encephalopathy',cx:'Management',s:'What is the treatment for hepatic encephalopathy?',o:[['a','Lactulose to achieve 2-3 BM/day, rifaximin, identify precipitant'],['b','Protein restriction always'],['c','Antibiotics for all patients'],['d','Observation only']],e:'<strong>HE treatment:</strong> Lactulose (2-3 BM/day), rifaximin for recurrence. Identify precipitant (infection, GI bleed, constipation, meds).'},
+10:{ty:'Hepatorenal',cx:'Diagnosis',s:'What criteria diagnose hepatorenal syndrome?',o:[['a','Cirrhosis with ascites, Cr rise, no response to albumin, no shock/nephrotoxins'],['b','Any AKI in cirrhosis'],['c','Low urine output only'],['d','Elevated bilirubin only']],e:'<strong>HRS:</strong> Cirrhosis + ascites + AKI (Cr >1.5) + no improvement with albumin challenge + no shock/nephrotoxins + no structural kidney disease.'},
+11:{ty:'Hepatitis',cx:'Viral types',s:'How do hepatitis B and C differ in chronicity?',o:[['a','HBV: 5% chronic in adults; HCV: 75-85% become chronic'],['b','Both always resolve'],['c','Both always become chronic'],['d','HBV more likely chronic']],e:'<strong>Chronicity:</strong> HBV 5% chronic in adults (90% if perinatal). HCV 75-85% chronic. HCV now curable with DAAs.'},
+12:{ty:'Hepatitis B',cx:'Serology',s:'What does positive HBsAg with positive anti-HBc IgM indicate?',o:[['a','Acute hepatitis B infection'],['b','Chronic hepatitis B'],['c','Immunity from vaccination'],['d','Resolved past infection']],e:'<strong>Acute HBV:</strong> HBsAg+, anti-HBc IgM+. Chronic: HBsAg+ >6 months, IgM-. Immune (vaccine): anti-HBs+ only. Immune (natural): anti-HBs+ and anti-HBc+.'},
+13:{ty:'Hepatitis C',cx:'Treatment',s:'What is the current treatment for hepatitis C?',o:[['a','Direct-acting antivirals with >95% cure rate'],['b','Interferon-based therapy'],['c','No effective treatment exists'],['d','Liver transplant only option']],e:'<strong>HCV treatment:</strong> DAAs (sofosbuvir-based regimens) cure >95%. 8-12 weeks. Check genotype, fibrosis stage. SVR = cure.'},
+14:{ty:'NAFLD',cx:'Management',s:'What is the treatment for non-alcoholic fatty liver disease?',o:[['a','Weight loss, exercise, control metabolic syndrome components'],['b','No treatment available'],['c','Interferon therapy'],['d','Immediate transplant']],e:'<strong>NAFLD treatment:</strong> Lifestyle (weight loss 7-10%, exercise), control DM/HTN/lipids. Vitamin E or pioglitazone for NASH without DM. No approved drugs.'},
+15:{ty:'Alcoholic',cx:'ALD management',s:'What is the treatment for alcoholic hepatitis?',o:[['a','Abstinence, nutrition, prednisolone if severe (Maddrey ≥32)'],['b','Antibiotics for all'],['c','Immediate transplant'],['d','Continue moderate drinking']],e:'<strong>Alcoholic hepatitis:</strong> Abstinence crucial. Nutrition. Prednisolone if Maddrey DF ≥32 (severe). Pentoxifylline if steroid contraindicated.'},
+16:{ty:'IBD',cx:'Crohn\'s vs UC',s:'How do Crohn\'s disease and ulcerative colitis differ?',o:[['a','Crohn\'s: any GI location, transmural, skip lesions; UC: colon only, mucosal, continuous'],['b','Identical presentations'],['c','UC can affect small bowel'],['d','Crohn\'s only affects colon']],e:'<strong>Differences:</strong> Crohn\'s: mouth to anus, transmural, skip lesions, fistulas. UC: colon only, mucosal, continuous from rectum, bloody diarrhea.'},
+17:{ty:'Treatment',cx:'IBD therapy',s:'What are the treatment options for IBD?',o:[['a','5-ASA, steroids, immunomodulators, biologics depending on severity'],['b','Antibiotics only'],['c','Surgery for all'],['d','Diet modification alone']],e:'<strong>IBD treatment:</strong> 5-ASA (mild UC), steroids (flares), immunomodulators (azathioprine, MTX), biologics (anti-TNF, vedolizumab, ustekinumab). Surgery if refractory.'},
+18:{ty:'Complications',cx:'IBD complications',s:'What complications are associated with IBD?',o:[['a','Strictures, fistulas, abscess, toxic megacolon, colon cancer risk'],['b','No systemic complications'],['c','Only diarrhea'],['d','Self-limited always']],e:'<strong>Complications:</strong> Crohn\'s: strictures, fistulas, abscess. UC: toxic megacolon, cancer risk. Both: extraintestinal manifestations.'},
+19:{ty:'C. diff',cx:'Diagnosis',s:'How is Clostridioides difficile infection diagnosed?',o:[['a','PCR or toxin assay on unformed stool with compatible symptoms'],['b','Culture only'],['c','Colonoscopy required'],['d','Blood test available']],e:'<strong>C. diff diagnosis:</strong> PCR (sensitive) or toxin EIA (specific) on unformed stool. Only test symptomatic patients (diarrhea).'},
+20:{ty:'Treatment',cx:'C. diff therapy',s:'What is first-line treatment for C. difficile infection?',o:[['a','Fidaxomicin or oral vancomycin for initial episode'],['b','Metronidazole first-line'],['c','IV antibiotics required'],['d','No treatment needed']],e:'<strong>C. diff treatment:</strong> Fidaxomicin (preferred) or oral vancomycin for initial non-severe. IV metro + oral vanco for fulminant. Bezlotoxumab for recurrence prevention.'}
+};
+6:{ty:'Variceal Bleed Resuscitation',cx:'HR 112, BP 92/58, Hgb 7.2.',s:'What is the transfusion target in variceal bleeding?',o:[['a','Hgb >12 g/dL'],['b','Hgb 7-8 g/dL (restrictive strategy)'],['c','Hgb >10 g/dL'],['d','Transfuse only if symptomatic']],e:'<strong>Restrictive transfusion</strong> in variceal bleed:<br><br>• Target <strong>Hgb 7-8 g/dL</strong><br>• Over-transfusion increases portal pressure → more bleeding<br>• Also give: IV PPI, octreotide, antibiotics<br><br>📚 <a href="https://pubmed.ncbi.nlm.nih.gov/23281973/">Villanueva et al. NEJM 2013</a>'},
+7:{ty:'Variceal Bleed Meds',cx:'Starting medical therapy for variceal bleed.',s:'What medication REDUCES portal pressure in acute variceal bleed?',o:[['a','Octreotide (somatostatin analog)'],['b','Pantoprazole'],['c','Vitamin K'],['d','Lactulose']],e:'<strong>Octreotide</strong> reduces splanchnic blood flow → lowers portal pressure.<br><br>Acute variceal bleed management:<br>1. <strong>Resuscitation</strong> (restrictive transfusion)<br>2. <strong>Octreotide</strong> IV bolus + drip × 3-5 days<br>3. <strong>Antibiotics</strong> (ceftriaxone) × 7 days<br>4. <strong>PPI</strong><br>5. <strong>EGD within 12 hours</strong> → band ligation'},
+8:{ty:'Endoscopic Therapy',cx:'EGD shows bleeding esophageal varices.',s:'What is the preferred endoscopic treatment for esophageal varices?',o:[['a','Sclerotherapy'],['b','Clips'],['c','Cautery'],['d','Band ligation (EVL)']],e:'<strong>Endoscopic variceal ligation (EVL)</strong> is preferred.<br><br>• More effective than sclerotherapy<br>• Fewer complications<br>• Repeat until varices obliterated<br><br>TIPS considered if: Refractory bleeding despite 2 endoscopic attempts, or high-risk (Child C, active bleeding at EGD).'},
+9:{ty:'Secondary Prophylaxis',cx:'After variceal bleed, preventing rebleeding.',s:'What is used for secondary prophylaxis after variceal bleed?',o:[['a','Aspirin'],['b','Warfarin'],['c','Non-selective beta-blocker (nadolol, propranolol) + repeat EVL'],['d','Spironolactone alone']],e:'<strong>Secondary prophylaxis:</strong><br><br>• <strong>NSBB</strong> (propranolol, nadolol) — lowers portal pressure<br>• <strong>Repeat EVL</strong> until varices eradicated<br>• Combination most effective<br><br>Target HR 55-60 or 25% reduction from baseline.'},
+10:{ty:'HE Recognition',cx:'Confusion, asterixis, sleep-wake reversal.',s:'What is asterixis?',o:[['a','Tremor at rest'],['b','Flapping tremor with wrist extension — classic for hepatic encephalopathy'],['c','Pill-rolling tremor'],['d','Intention tremor']],e:'<strong>Asterixis</strong> = "liver flap"<br><br>• Negative myoclonus (loss of tone)<br>• Elicited with arms extended, wrists dorsiflexed<br>• Classic for HE (also uremia, CO2 retention)<br><br>West Haven Grades:<br>• Grade 1: Mild confusion<br>• Grade 2: Lethargy, asterixis<br>• Grade 3: Somnolent but arousable<br>• Grade 4: Coma'},
+11:{ty:'HE Precipitants',cx:'Looking for triggers of encephalopathy.',s:'What are common precipitants of hepatic encephalopathy?',o:[['a','GI bleed, infection, constipation, medications (benzos, opioids), hypokalemia, alkalosis'],['b','Excess protein restriction'],['c','Too much lactulose'],['d','Liver transplant']],e:'<strong>HE precipitants (HEPATICS):</strong><br><br>• <strong>H</strong>ypovolemia, Hypoxia<br>• <strong>E</strong>lectrolytes (↓K, ↓Na), Encephalopathy meds (benzos)<br>• <strong>P</strong>ortal vein thrombosis<br>• <strong>A</strong>lcohol, Alkalosis<br>• <strong>T</strong>ransfusion, TIPS<br>• <strong>I</strong>nfection (SBP, UTI, pneumonia)<br>• <strong>C</strong>onstipation<br>• <strong>S</strong>urgery, Sedatives<br><br>Carlos: Constipation identified.'},
+12:{ty:'HE Treatment',cx:'Treating hepatic encephalopathy.',s:'What is FIRST-LINE treatment for hepatic encephalopathy?',o:[['a','Protein restriction'],['b','Neomycin'],['c','Lactulose (titrate to 2-3 BMs/day)'],['d','Flumazenil']],e:'<strong>Lactulose</strong> is first-line for HE.<br><br>Mechanism: Acidifies colon → converts NH3 to NH4+ (trapped) → catharsis removes ammonia.<br><br>Dosing: 30-45 mL PO q1-2h until BM, then titrate to <strong>2-3 soft BMs/day</strong>.<br><br><strong>Rifaximin</strong> added for recurrent HE (reduces ammonia-producing bacteria).'},
+13:{ty:'Rifaximin',cx:'Preventing recurrent HE.',s:'What is the role of rifaximin in HE?',o:[['a','Replaces lactulose'],['b','Added to lactulose for secondary prevention of recurrent HE'],['c','Treats SBP'],['d','Reduces portal pressure']],e:'<strong>Rifaximin</strong> = non-absorbable antibiotic.<br><br>• Reduces gut bacteria producing ammonia<br>• Added to lactulose for <strong>recurrent HE</strong><br>• Expensive but effective<br>• Per AASLD: Lactulose + rifaximin for secondary prophylaxis<br><br>📚 <a href="https://pubmed.ncbi.nlm.nih.gov/20303305/">Bass et al. NEJM 2010</a>'},
+14:{ty:'Nutrition in Cirrhosis',cx:'Counseling on diet.',s:'What is the protein recommendation in cirrhosis?',o:[['a','Severely restrict protein'],['b','Moderate protein (0.5 g/kg)'],['c','No protein'],['d','Normal to high protein (1.2-1.5 g/kg) to prevent sarcopenia']],e:'<strong>Adequate protein is essential</strong> — sarcopenia worsens outcomes!<br><br>• <strong>1.2-1.5 g/kg/day protein</strong><br>• Small frequent meals<br>• Late evening snack (prevents overnight catabolism)<br>• Sodium restriction for ascites<br><br>Protein restriction is outdated and harmful.'},
+15:{ty:'Transplant Indications',cx:'Evaluating for liver transplant.',s:'What MELD score generally qualifies for transplant listing?',o:[['a','MELD ≥15 (survival benefit from transplant)'],['b','MELD ≥5'],['c','MELD ≥30 only'],['d','Child-Pugh A']],e:'<strong>Transplant listing:</strong><br><br>• <strong>MELD ≥15</strong>: Survival benefit from transplant<br>• Listed with UNOS/OPTN<br>• Higher MELD = higher priority<br>• MELD exception points for HCC, hepatopulmonary syndrome<br><br>Decompensation events (ascites, HE, variceal bleed) also indicate transplant evaluation regardless of MELD.'},
+16:{ty:'Alcohol & Transplant',cx:'Carlos has alcohol-related cirrhosis.',s:'What is the traditional sobriety requirement for alcohol-related liver disease transplant?',o:[['a','1 month'],['b','3 months'],['c','6 months of documented sobriety'],['d','Lifetime sobriety']],e:'<strong>Traditional: 6 months sobriety</strong><br><br>• Allows recovery (some patients improve enough to avoid transplant)<br>• Demonstrates commitment/compliance<br>• Addiction treatment and support required<br><br>However, recent data supports "early transplant" in select patients with severe alcoholic hepatitis who fail medical therapy.'},
+17:{ty:'Transplant Contraindications',cx:'Reviewing contraindications.',s:'Which is an ABSOLUTE contraindication to liver transplant?',o:[['a','Age >65'],['b','Active alcohol/substance use, uncontrolled infection, extrahepatic malignancy, severe cardiopulmonary disease'],['c','HIV infection'],['d','Hepatitis C']],e:'<strong>Absolute contraindications:</strong><br><br>• Active substance abuse<br>• Uncontrolled sepsis<br>• Extrahepatic malignancy<br>• Advanced cardiopulmonary disease<br>• Anatomic abnormalities precluding surgery<br>• Lack of social support/compliance<br><br>HIV and HCV are NOT contraindications with treatment.'},
+18:{ty:'HCC Screening',cx:'Screening for liver cancer.',s:'How should HCC be screened in cirrhosis?',o:[['a','CT scan annually'],['b','AFP alone'],['c','MRI every 6 months'],['d','Ultrasound ± AFP every 6 months']],e:'<strong>HCC surveillance:</strong><br><br>• <strong>Ultrasound ± AFP every 6 months</strong><br>• All cirrhosis patients regardless of etiology<br>• Chronic HBV (even without cirrhosis if high-risk)<br><br>If suspicious nodule → CT or MRI with contrast (LI-RADS).<br><br>📚 <a href="https://www.aasld.org/practice-guidelines">AASLD HCC Guidelines</a>'},
+19:{ty:'Hepatorenal Syndrome',cx:'Cr rising in cirrhosis patient.',s:'What characterizes hepatorenal syndrome?',o:[['a','Functional renal failure in cirrhosis due to splanchnic vasodilation, responds to albumin + vasoconstrictors'],['b','ATN from contrast'],['c','Obstructive uropathy'],['d','Chronic kidney disease']],e:'<strong>Hepatorenal syndrome (HRS):</strong><br><br>• Functional (kidneys structurally normal)<br>• Due to splanchnic vasodilation → renal vasoconstriction<br>• Diagnosis of exclusion (no shock, nephrotoxins, obstruction)<br><br>Treatment:<br>• <strong>Albumin</strong> + <strong>vasoconstrictor</strong> (midodrine + octreotide, or norepinephrine, or terlipressin)<br>• Definitive treatment: Liver transplant'},
+20:{ty:'Varices Primary Prophylaxis',cx:'Screening for varices.',s:'When are beta-blockers started for PRIMARY prophylaxis of variceal bleeding?',o:[['a','All cirrhosis patients'],['b','Only after first bleed'],['c','Medium-large varices or small varices with red wale marks or Child C'],['d','Never as primary prophylaxis']],e:'<strong>Primary prophylaxis:</strong><br><br>• Screen all cirrhotics for varices (EGD)<br>• <strong>NSBB</strong> (propranolol, nadolol, carvedilol) for:<br>&nbsp;&nbsp;- Medium/large varices<br>&nbsp;&nbsp;- Small varices with high-risk features (red wale, Child C)<br>• Alternative: EVL for medium/large if beta-blocker intolerant<br><br>📚 <a href="https://www.aasld.org/practice-guidelines">AASLD Portal HTN Guidelines</a>'}
+};
+
+function updateV(p){const v=vit[p];document.getElementById('vMELD').textContent=v.meld;document.getElementById('vChild').textContent=v.child;document.getElementById('vAsc').textContent=v.asc;}
+function renderCase(p){const c=cases[p];let h=`<div class="case-narrative">${c.t}</div><div class="data-section"><div class="data-label">History</div><div class="data-grid">`;
+c.d1.forEach(x=>h+=`<div><span style="color:var(--muted)">${x[0]}:</span> <strong>${x[1]}</strong></div>`);
+h+=`</div></div><div class="data-section"><div class="data-label">Labs</div><div class="data-grid">`;
+c.d2.forEach(x=>h+=`<div><span style="color:var(--muted)">${x[0]}:</span> <strong>${x[1]}</strong></div>`);
+h+=`</div></div>`;document.getElementById('caseContent').innerHTML=h;}
+function getQs(p){return[(p-1)*5+1,(p-1)*5+2,(p-1)*5+3,(p-1)*5+4,(p-1)*5+5];}
+function renderQs(p){const intro=intros[p],qs=getQs(p);
+let h=`<div class="phase-intro"><h2>${intro.i} ${intro.t}</h2><div class="resource-box"><div class="resource-title">📚 GUIDELINES</div><div class="resource-links">${intro.r}</div></div><p>${intro.d}</p><div class="learning-box"><div class="learning-title">🎯 Objectives</div><ul class="learning-list">`;
+intro.o.forEach(o=>h+=`<li>${o}</li>`);h+=`</ul></div></div>`;
+qs.forEach((qn,i)=>{const q=Qs[qn],s=st[qn];
+h+=`<div class="quiz-card"><div class="quiz-header"><div style="display:flex;align-items:center"><span class="quiz-num">${i+1}</span><span class="quiz-type">${q.ty}</span></div><span class="quiz-status ${s.done?(s.ok?'correct':'incorrect'):''}" id="st${qn}">${s.done?(s.ok?'✓':'✗'):'○'}</span></div>`;
+h+=`<div class="quiz-context">${q.cx}</div><div class="quiz-body"><div class="quiz-stem">${q.s}</div><div class="quiz-options" id="opts${qn}">`;
+q.o.forEach(opt=>{let cls=s.done?'disabled':'';if(s.done&&opt[0]===ans[qn])cls+=' correct';if(s.done&&opt[0]===s.pick&&!s.ok)cls+=' incorrect';
+h+=`<div class="quiz-option ${cls}" data-a="${opt[0]}" onclick="pick(${qn},this)"><span class="option-letter">${opt[0].toUpperCase()}</span><span class="option-text">${opt[1]}</span></div>`;});
+h+=`</div><div class="confidence-section" id="cf${qn}" ${s.done?'style="display:none"':''}><div class="confidence-btns">`;
+['low','med','high'].forEach(c=>h+=`<button class="conf-btn" onclick="setC(${qn},'${c}',this)">${{low:'Guess',med:'Some',high:'Sure'}[c]}</button>`);
+h+=`</div></div><button class="submit-btn" id="sub${qn}" onclick="submit(${qn})" disabled ${s.done?'style="display:none"':''}>Submit</button>`;
+h+=`<div class="explanation ${s.done?'visible '+(s.ok?'correct':'incorrect'):''}" id="exp${qn}"><div class="explanation-title">${s.ok?'✓ Correct!':'✗ Review:'}</div><div>${q.e}</div></div></div></div>`;});
+h+=`<div class="phase-summary" id="summary"><div class="summary-header"><div>Phase ${p} Complete!</div><div class="summary-score" id="score">0/5</div></div>`;
+if(p<4)h+=`<button class="next-btn" onclick="unlock(${p+1})">Continue →</button>`;
+else h+=`<p style="text-align:center;margin-top:14px;color:var(--green)">🎓 Carlos is listed for transplant! You mastered GI/Liver care.</p>`;
+h+=`</div>`;document.getElementById('questionsPanel').innerHTML=h;}
+function pick(qn,el){if(st[qn].done)return;document.querySelectorAll(`#opts${qn} .quiz-option`).forEach(o=>o.classList.remove('selected'));el.classList.add('selected');st[qn].pick=el.dataset.a;chk(qn);}
+function setC(qn,lv,el){if(st[qn].done)return;document.querySelectorAll(`#cf${qn} .conf-btn`).forEach(b=>b.classList.remove('selected'));el.classList.add('selected');st[qn].conf=lv;chk(qn);}
+function chk(qn){document.getElementById(`sub${qn}`).disabled=!(st[qn].pick&&st[qn].conf);}
+function submit(qn){const s=st[qn];if(s.done)return;s.done=true;s.ok=s.pick===ans[qn];
+document.querySelectorAll(`#opts${qn} .quiz-option`).forEach(o=>{o.classList.add('disabled');if(o.dataset.a===ans[qn])o.classList.add('correct');else if(o.dataset.a===s.pick&&!s.ok)o.classList.add('incorrect');});
+document.getElementById(`exp${qn}`).classList.add('visible',s.ok?'correct':'incorrect');
+document.getElementById(`st${qn}`).textContent=s.ok?'✓':'✗';document.getElementById(`st${qn}`).className=`quiz-status ${s.ok?'correct':'incorrect'}`;
+document.getElementById(`sub${qn}`).style.display='none';document.getElementById(`cf${qn}`).style.display='none';
+updateProg();checkDone();}
+function updateProg(){const t=Object.values(st).filter(s=>s.done).length;document.getElementById('progressCount').textContent=`${t}/20`;document.getElementById('progressFill').style.width=`${t*5}%`;}
+function checkDone(){const qs=getQs(phase);if(qs.every(q=>st[q].done)&&!done[phase]){done[phase]=1;
+document.getElementById('score').textContent=`${qs.filter(q=>st[q].ok).length}/5`;
+document.getElementById('summary').style.display='block';document.querySelector(`.timeline-phase[data-phase="${phase}"]`).classList.add('completed');
+document.getElementById(`status${phase}`).textContent='✓';document.getElementById(`status${phase}`).className='phase-status done';}}
+function unlock(np){open[np]=1;goPhase(np);}
+function goPhase(p){if(!open[p])return;phase=p;
+document.querySelectorAll('.timeline-phase').forEach(ph=>{const pn=+ph.dataset.phase;ph.classList.remove('active','locked');if(pn===p)ph.classList.add('active');if(!open[pn])ph.classList.add('locked');});
+for(let i=1;i<=4;i++){const s=document.getElementById(`status${i}`);if(done[i]){s.textContent='✓';s.className='phase-status done';}else if(i===p){s.textContent='Current';s.className='phase-status current';}else if(open[i]){s.textContent='';}else{s.textContent='🔒';}}
+updateV(p);renderCase(p);renderQs(p);window.scrollTo({top:0});}
+document.addEventListener('DOMContentLoaded',()=>{updateV(1);renderCase(1);renderQs(1);});
+</script>
+</body>
+</html>

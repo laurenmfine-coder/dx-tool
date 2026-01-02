@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dermatology II: Severe Reactions & Skin Cancer - MechanismDx</title>
+<style>
+:root{--bg:#f8f9fa;--white:#fff;--subtle:#f1f3f5;--text:#1a1a1a;--muted:#5c5c5c;--border:#e9ecef;--accent:#f97316;--green:#16a34a;--red:#dc2626}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.header{background:var(--white);border-bottom:1px solid var(--border);padding:16px 24px}
+.module-header{background:var(--white);border-bottom:1px solid var(--border);padding:24px}.module-header-inner{max-width:1200px;margin:0 auto}
+.module-title{display:flex;align-items:center;gap:16px}.module-icon{width:56px;height:56px;background:linear-gradient(135deg,#fed7aa,#fdba74);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:28px}
+.module-title h1{font-size:24px}.module-title p{color:var(--muted);font-size:14px}
+.patient-banner{background:linear-gradient(135deg,#c2410c,#f97316);color:#fff;padding:20px 24px}
+.patient-banner-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.patient-info{flex:1}.patient-name{font-size:16px;font-weight:600}.patient-details{font-size:13px;opacity:.9}
+.patient-vitals{display:flex;gap:16px}.vital{text-align:center;padding:8px 14px;background:rgba(255,255,255,.1);border-radius:8px}
+.vital-value{font-size:18px;font-weight:700}.vital-label{font-size:10px;opacity:.8}
+.timeline-nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 24px}
+.timeline-inner{max-width:1200px;margin:0 auto;display:flex}.timeline-phase{flex:1;padding:14px;cursor:pointer;border-bottom:3px solid transparent;text-align:center}
+.timeline-phase.active{border-bottom-color:var(--accent)}.timeline-phase.completed{border-bottom-color:var(--green)}
+.timeline-phase.locked{opacity:.4;cursor:not-allowed}.phase-label{font-size:12px;font-weight:600}.phase-time{font-size:10px;color:var(--muted)}
+.main-container{max-width:1200px;margin:0 auto;padding:24px;display:grid;grid-template-columns:280px 1fr;gap:24px}
+@media(max-width:900px){.main-container{grid-template-columns:1fr}}
+.card{background:var(--white);border:1px solid var(--border);border-radius:12px;margin-bottom:16px}
+.card-header{padding:14px 16px;border-bottom:1px solid var(--border);font-weight:600}.card-content{padding:16px}
+.case-narrative{font-size:13px;color:var(--muted)}.case-narrative strong{color:var(--text)}
+.data-section{background:var(--subtle);border-radius:8px;padding:10px;margin-top:10px}
+.data-label{font-size:9px;font-weight:600;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.data-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:10px}
+.resource-box{background:#fed7aa;border-left:4px solid var(--accent);border-radius:8px;padding:12px;margin:12px 0}
+.learning-box{background:#fed7aa;border-radius:12px;padding:14px;margin-top:14px}
+.learning-title{font-size:11px;font-weight:600;color:var(--accent);margin-bottom:8px}.learning-list{list-style:none;font-size:12px}
+.learning-list li{padding:3px 0 3px 18px;position:relative}.learning-list li::before{content:'→';position:absolute;left:0;color:var(--accent)}
+.quiz-card{background:var(--white);border:1px solid var(--border);border-radius:12px;margin-bottom:16px}
+.quiz-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between}
+.quiz-num{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.quiz-context{padding:12px 16px;background:#fed7aa;font-size:11px;color:#c2410c}.quiz-body{padding:16px}
+.quiz-stem{font-size:13px;font-weight:500;margin-bottom:14px}.quiz-options{display:flex;flex-direction:column;gap:6px}
+.quiz-option{display:flex;gap:10px;padding:10px 12px;background:var(--subtle);border:2px solid transparent;border-radius:8px;cursor:pointer}
+.quiz-option:hover{border-color:var(--border)}.quiz-option.selected{border-color:var(--accent)}
+.quiz-option.correct{border-color:var(--green);background:rgba(22,163,74,.08)}.quiz-option.incorrect{border-color:var(--red);background:rgba(220,38,38,.08)}
+.quiz-option.disabled{pointer-events:none}
+.option-letter{width:22px;height:22px;border:2px solid var(--border);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+.quiz-option.correct .option-letter{background:var(--green);border-color:var(--green);color:#fff}
+.quiz-option.incorrect .option-letter{background:var(--red);border-color:var(--red);color:#fff}
+.option-text{font-size:12px;color:var(--muted)}
+.conf-section{margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
+.conf-btns{display:flex;gap:6px}.conf-btn{flex:1;padding:7px;border:2px solid var(--border);border-radius:8px;background:#fff;cursor:pointer;font-size:10px;font-weight:600}
+.conf-btn.selected{border-color:var(--green);background:rgba(22,163,74,.08);color:var(--green)}
+.submit-btn{margin-top:10px;width:100%;padding:10px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer}
+.submit-btn:disabled{background:var(--subtle);color:var(--muted)}
+.explanation{margin-top:14px;padding:14px;border-radius:8px;display:none;font-size:12px}.explanation.visible{display:block}
+.explanation.correct{background:#f0fdf4;border:1px solid #bbf7d0}.explanation.incorrect{background:#fef2f2;border:1px solid #fecaca}
+.phase-summary{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:20px;margin-top:16px;display:none}
+.next-btn{margin-top:14px;width:100%;padding:12px;background:var(--green);color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer}
+.progress-bar{background:var(--white);border-bottom:1px solid var(--border);padding:10px 24px}
+.progress-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.progress-track{flex:1;height:5px;background:var(--subtle);border-radius:3px}
+.progress-fill{height:100%;background:linear-gradient(90deg,#f97316,#10b981);transition:width .3s;border-radius:3px}
+</style>
+</head>
+<body>
+<header class="header"><div style="max-width:1200px;margin:0 auto;font-weight:600">MechanismDx › Dermatology</div></header>
+<div class="module-header"><div class="module-header-inner"><div class="module-title"><div class="module-icon">🔥</div><div><h1>Dermatology II: Severe Reactions & Skin Cancer</h1><p>SJS/TEN → DRESS → Melanoma → Skin Infections</p></div></div></div></div>
+<div class="progress-bar"><div class="progress-inner"><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div><span id="progressCount">0/20</span></div></div>
+<div class="patient-banner"><div class="patient-banner-inner">
+<div class="patient-info"><div class="patient-name">Multiple Patients</div><div class="patient-details">Amanda (SJS) → Michael (DRESS) → Patricia (Melanoma) → James (Cellulitis)</div></div>
+<div class="patient-vitals"><div class="vital"><div class="vital-value" id="vBSA">12%</div><div class="vital-label">BSA</div></div><div class="vital"><div class="vital-value" id="vTemp">38.8</div><div class="vital-label">Temp°C</div></div><div class="vital"><div class="vital-value" id="vDrug">Allopurinol</div><div class="vital-label">Trigger</div></div></div>
+</div></div>
+<nav class="timeline-nav"><div class="timeline-inner">
+<div class="timeline-phase active" data-phase="1" onclick="goPhase(1)"><div class="phase-label">🔥 SJS/TEN</div><div class="phase-time">Amanda</div><div id="status1">Current</div></div>
+<div class="timeline-phase locked" data-phase="2" onclick="goPhase(2)"><div class="phase-label">💊 DRESS</div><div class="phase-time">Michael</div><div id="status2">🔒</div></div>
+<div class="timeline-phase locked" data-phase="3" onclick="goPhase(3)"><div class="phase-label">🔶 Melanoma</div><div class="phase-time">Patricia</div><div id="status3">🔒</div></div>
+<div class="timeline-phase locked" data-phase="4" onclick="goPhase(4)"><div class="phase-label">🦠 Skin Infections</div><div class="phase-time">James</div><div id="status4">🔒</div></div>
+</div></nav>
+<div class="main-container">
+<aside><div class="card"><div class="card-header">📋 Clinical Snapshot</div><div class="card-content" id="caseContent"></div></div></aside>
+<main id="questionsPanel"></main>
+</div>
+<script>
+const ans={1:'b',2:'c',3:'a',4:'d',5:'b',6:'c',7:'a',8:'d',9:'b',10:'c',11:'a',12:'d',13:'b',14:'c',15:'a',16:'d',17:'b',18:'a',19:'c',20:'d'};
+const st={};for(let i=1;i<=20;i++)st[i]={done:false,pick:null,conf:null,ok:false};
+let phase=1,done={1:0,2:0,3:0,4:0},open={1:1,2:0,3:0,4:0};
+const vit={1:{bsa:'12%',temp:'38.8',drug:'Allopurinol'},2:{bsa:'45%',temp:'39.2',drug:'Phenytoin'},3:{bsa:'N/A',temp:'37.0',drug:'None'},4:{bsa:'5%',temp:'38.5',drug:'None'}};
+const cases={
+1:{t:'<strong>Amanda Foster</strong>, 45F with <strong>painful rash, oral erosions, and eye irritation</strong> 2 weeks after starting allopurinol. Skin sloughing with gentle pressure. Target lesions on trunk.',d1:[['Age','45'],['New medication','Allopurinol'],['Onset','2 weeks'],['Symptoms','Pain, oral erosions']],d2:[['BSA involved','12%'],['Nikolsky sign','Positive'],['Mucosal sites','Oral, ocular'],['Temp','38.8°C']]},
+2:{t:'<strong>Michael Chen</strong>, 32M with <strong>fever, facial swelling, diffuse rash, and abnormal LFTs</strong> 4 weeks after starting phenytoin for seizures. Lymphadenopathy present.',d1:[['Age','32'],['New medication','Phenytoin'],['Onset','4 weeks'],['Symptoms','Fever, rash, facial edema']],d2:[['Rash','Morbilliform 45% BSA'],['Eosinophils','2500'],['ALT','285'],['Lymphadenopathy','Yes']]},
+3:{t:'<strong>Patricia Williams</strong>, 58F with <strong>changing mole on back</strong> × 6 months. Now asymmetric, irregular borders, varied colors, 8mm diameter. History of blistering sunburns.',d1:[['Age','58'],['Duration','6 months'],['Location','Upper back'],['Sun history','Blistering burns']],d2:[['Size','8mm'],['Borders','Irregular'],['Color','Brown, black, red'],['Symptoms','Occasional itch']]},
+4:{t:'<strong>James Thompson</strong>, 62M with <strong>red, warm, swollen lower leg</strong> × 3 days after minor cut. Diabetes, BMI 34. Expanding erythema with sharp borders. No crepitus.',d1:[['Age','62'],['Duration','3 days'],['Trigger','Minor cut'],['Comorbidities','DM, obesity']],d2:[['Erythema','Expanding, sharp border'],['Temp','38.5°C'],['WBC','14,500'],['Crepitus','Absent']]}
+const Qs={
+1:{ty:'Classification',cx:'SJS/TEN spectrum',s:'Amanda has mucosal erosions and 8% skin detachment. What is the diagnosis?',o:[['a','Stevens-Johnson syndrome with less than 10% BSA'],['b','SJS/TEN overlap with 10-30% BSA involvement'],['c','Toxic epidermal necrolysis exceeding 30% BSA'],['d','Erythema multiforme without mucosal involvement']],e:'<strong>SJS/TEN classification:</strong> SJS <10%, SJS/TEN overlap 10-30%, TEN >30% BSA detachment. Mucosal involvement ≥2 sites typical.'},
+2:{ty:'Etiology',cx:'Drug triggers',s:'Which medications are highest risk for SJS/TEN?',o:[['a','Allopurinol, sulfonamides, anticonvulsants, NSAIDs (piroxicam)'],['b','ACE inhibitors and calcium channel blockers'],['c','Beta-blockers and thiazide diuretics'],['d','Proton pump inhibitors and H2 blockers']],e:'<strong>High-risk drugs:</strong> Allopurinol (HLA-B*58:01), sulfonamides, phenytoin, carbamazepine, lamotrigine, NSAIDs (piroxicam), nevirapine.'},
+3:{ty:'Management',cx:'Initial treatment',s:'What is the MOST important initial intervention for Amanda?',o:[['a','High-dose IV corticosteroids immediately'],['b','IVIG infusion for immune modulation'],['c','Stop the causative drug immediately'],['d','Cyclosporine for immunosuppression']],e:'<strong>First priority:</strong> STOP causative drug immediately. Earlier withdrawal = better prognosis. Supportive care in burn unit/ICU.'},
+4:{ty:'Prognosis',cx:'SCORTEN',s:'What prognostic tool predicts mortality in SJS/TEN?',o:[['a','APACHE II score for ICU patients'],['b','SOFA score for organ dysfunction'],['c','Wells score for thromboembolism risk'],['d','SCORTEN using age, malignancy, BSA, BUN, glucose, bicarb, HR']],e:'<strong>SCORTEN:</strong> 7 factors (age >40, malignancy, BSA >10%, BUN >28, glucose >252, bicarb <20, HR >120). Score ≥5 = >90% mortality.'},
+5:{ty:'Complications',cx:'Long-term sequelae',s:'What is the most common long-term complication of SJS/TEN?',o:[['a','Ocular complications including scarring and vision loss'],['b','Cardiac arrhythmias and cardiomyopathy'],['c','Chronic kidney disease progression'],['d','Pulmonary fibrosis development']],e:'<strong>Ocular most common:</strong> Dry eyes, symblepharon, corneal scarring, vision impairment. Also: skin scarring, mucosal strictures, PTSD.'},
+6:{ty:'Recognition',cx:'DRESS features',s:'Michael has fever, rash, facial edema, and eosinophilia 3 weeks after starting carbamazepine. Diagnosis?',o:[['a','Simple maculopapular drug rash'],['b','DRESS syndrome with systemic involvement'],['c','Stevens-Johnson syndrome presentation'],['d','Viral exanthem unrelated to medication']],e:'<strong>DRESS:</strong> Rash + fever + facial edema + eosinophilia/atypical lymphocytes + organ involvement. Onset 2-8 weeks after drug.'},
+7:{ty:'Timing',cx:'Onset comparison',s:'How does DRESS onset differ from SJS/TEN?',o:[['a','Both have identical onset timing'],['b','DRESS is faster onset than SJS/TEN'],['c','DRESS onset 2-8 weeks; SJS/TEN typically 1-3 weeks'],['d','SJS/TEN has longer latency than DRESS']],e:'<strong>Timing:</strong> DRESS 2-8 weeks (longer latency). SJS/TEN typically 1-3 weeks. Important distinguishing feature.'},
+8:{ty:'Organs',cx:'Systemic involvement',s:'Which organ is most commonly affected in DRESS and carries highest mortality risk?',o:[['a','Kidney with interstitial nephritis'],['b','Lung with interstitial pneumonitis'],['c','Heart with myocarditis'],['d','Liver with hepatitis as leading cause of death']],e:'<strong>Liver most common</strong> (60-80%) and leading cause of mortality. Also kidney, lung, heart, thyroid (may be delayed).'},
+9:{ty:'Treatment',cx:'DRESS management',s:'What is the treatment approach for Michael\'s DRESS?',o:[['a','Antibiotics for presumed infection'],['b','Immediate plasmapheresis'],['c','Stop drug, systemic corticosteroids, slow taper'],['d','IVIG as first-line therapy']],e:'<strong>DRESS treatment:</strong> Stop drug, systemic steroids (prednisone 0.5-2 mg/kg) for moderate-severe, slow taper (may flare).'},
+10:{ty:'Viral',cx:'HHV-6 reactivation',s:'Why is HHV-6 reactivation significant in DRESS?',o:[['a','Causes the initial drug reaction'],['b','Occurs in ~60%, associated with more severe/prolonged course'],['c','Indicates bacterial superinfection'],['d','Requires antiviral treatment always']],e:'<strong>HHV-6:</strong> Reactivates in ~60% of DRESS, usually 2-3 weeks after onset. Associated with more severe, prolonged course.'},
+11:{ty:'Assessment',cx:'Melanoma recognition',s:'Patricia has an asymmetric, irregular-bordered, multicolored, 8mm evolving lesion. What are these features called?',o:[['a','ABCDE criteria for melanoma detection'],['b','Hutchinson sign for nail involvement'],['c','Dermatoscopy findings only'],['d','Breslow depth measurements']],e:'<strong>ABCDEs:</strong> Asymmetry, Border irregularity, Color variation, Diameter >6mm, Evolving. Patricia has all 5 = high suspicion.'},
+12:{ty:'Subtypes',cx:'Melanoma types',s:'Which melanoma subtype is most common overall?',o:[['a','Superficial spreading (70%), radial then vertical growth'],['b','Nodular (15-20%) with worse prognosis'],['c','Lentigo maligna on sun-damaged skin'],['d','Acral lentiginous on palms and soles']],e:'<strong>Superficial spreading</strong> 70% most common. Nodular 15-20% (vertical growth, worse prognosis). Acral most common in dark skin.'},
+13:{ty:'Prognosis',cx:'Breslow depth',s:'What is the most important prognostic factor for localized melanoma?',o:[['a','Breslow depth (tumor thickness in millimeters)'],['b','Patient age at diagnosis'],['c','Anatomic location of lesion'],['d','Presence of regression histologically']],e:'<strong>Breslow depth</strong> most important: T1 ≤1mm, T2 1-2mm, T3 2-4mm, T4 >4mm. Also ulceration, mitotic rate, sentinel node.'},
+14:{ty:'Management',cx:'Surgical approach',s:'What is the initial management for suspected melanoma?',o:[['a','Shave biopsy for convenience'],['b','Wide local excision immediately'],['c','Excisional biopsy with narrow margins for diagnosis'],['d','Punch biopsy of darkest area']],e:'<strong>Excisional biopsy:</strong> Narrow margins (1-3mm) for full histologic assessment. Avoid shave (may transect). Then WLE based on Breslow.'},
+15:{ty:'Prevention',cx:'Risk factors',s:'What is the most important modifiable risk factor for melanoma?',o:[['a','Diet and nutrition choices'],['b','Exercise and physical activity level'],['c','UV radiation exposure and sun protection'],['d','Alcohol consumption patterns']],e:'<strong>UV radiation:</strong> Most important modifiable factor. Sunscreen SPF 30+, protective clothing, avoid peak sun, no tanning beds.'},
+16:{ty:'Diagnosis',cx:'Cellulitis features',s:'James has unilateral leg erythema, warmth, and swelling with poorly demarcated borders. What is the likely diagnosis?',o:[['a','Cellulitis with spreading soft tissue infection'],['b','Deep vein thrombosis primarily'],['c','Contact dermatitis from allergen'],['d','Stasis dermatitis from venous insufficiency']],e:'<strong>Cellulitis:</strong> Unilateral erythema, warmth, swelling, poorly demarcated borders, pain. Often preceded by skin break.'},
+17:{ty:'Pathogens',cx:'Common organisms',s:'What are the most common pathogens causing cellulitis?',o:[['a','Group A Strep and Staphylococcus aureus'],['b','Pseudomonas aeruginosa primarily'],['c','Escherichia coli and Klebsiella'],['d','Anaerobic bacteria predominantly']],e:'<strong>GAS most common</strong> overall. S. aureus (including MRSA) increasingly important. Special: water (Vibrio), bites (Pasteurella).'},
+18:{ty:'Treatment',cx:'Antibiotic selection',s:'What is first-line antibiotic treatment for uncomplicated non-purulent cellulitis?',o:[['a','Vancomycin IV for all patients'],['b','TMP-SMX for MRSA coverage'],['c','Cephalexin or dicloxacillin covering strep and MSSA'],['d','Clindamycin as first choice']],e:'<strong>Non-purulent:</strong> Cephalexin or dicloxacillin (covers strep + MSSA), 5-7 days. Purulent/MRSA risk: TMP-SMX, doxycycline.'},
+19:{ty:'Emergency',cx:'Necrotizing fasciitis',s:'What findings suggest necrotizing fasciitis requiring emergent surgery?',o:[['a','Mild tenderness with localized redness'],['b','Gradual onset over one week'],['c','Pain out of proportion, rapid spread, crepitus, necrosis'],['d','Response to oral antibiotics']],e:'<strong>Nec fasc red flags:</strong> Pain out of proportion, rapid progression (hours), crepitus, necrosis, systemic toxicity, failure to respond. EMERGENCY surgery.'},
+20:{ty:'Abscess',cx:'I&D indication',s:'A patient has a fluctuant skin abscess. What is the primary treatment?',o:[['a','Incision and drainage as definitive treatment'],['b','Antibiotics alone without drainage'],['c','Warm compresses until resolution'],['d','Aspiration without incision']],e:'<strong>I&D primary treatment</strong> for fluctuant abscess. Antibiotics alone insufficient. Add antibiotics if: cellulitis, immunocompromised, systemic symptoms.'}
+};
+};
+const intros={1:{t:'Phase 1: SJS/TEN',i:'🔥',o:['Recognize SJS/TEN features','Know common drug causes','Understand management priorities','Know SCORTEN prognosis']},2:{t:'Phase 2: DRESS Syndrome',i:'💊',o:['Identify DRESS features','Understand timing differences','Know organ involvement','Recognize HHV-6 association']},3:{t:'Phase 3: Melanoma',i:'🔶',o:['Apply ABCDEs','Know melanoma subtypes','Understand Breslow depth','Know biopsy approach']},4:{t:'Phase 4: Skin Infections',i:'🦠',o:['Recognize cellulitis features','Know common pathogens','Choose appropriate antibiotics','Identify necrotizing fasciitis']}};
+function updateV(p){const v=vit[p];document.getElementById('vBSA').textContent=v.bsa;document.getElementById('vTemp').textContent=v.temp;document.getElementById('vDrug').textContent=v.drug;}
+function renderCase(p){const c=cases[p];let h=`<div class="case-narrative">${c.t}</div><div class="data-section"><div class="data-label">History</div><div class="data-grid">`;c.d1.forEach(x=>h+=`<div><span style="color:var(--muted)">${x[0]}:</span> <strong>${x[1]}</strong></div>`);h+=`</div></div><div class="data-section"><div class="data-label">Findings</div><div class="data-grid">`;c.d2.forEach(x=>h+=`<div><span style="color:var(--muted)">${x[0]}:</span> <strong>${x[1]}</strong></div>`);h+=`</div></div>`;document.getElementById('caseContent').innerHTML=h;}
+function getQs(p){return[(p-1)*5+1,(p-1)*5+2,(p-1)*5+3,(p-1)*5+4,(p-1)*5+5];}
+function renderQs(p){const intro=intros[p],qs=getQs(p);let h=`<div><h2>${intro.i} ${intro.t}</h2><div class="learning-box"><div class="learning-title">🎯 Objectives</div><ul class="learning-list">`;intro.o.forEach(o=>h+=`<li>${o}</li>`);h+=`</ul></div></div>`;
+qs.forEach((qn,i)=>{const q=Qs[qn],s=st[qn];h+=`<div class="quiz-card"><div class="quiz-header"><div style="display:flex;align-items:center"><span class="quiz-num">${i+1}</span></div><span id="st${qn}">${s.done?(s.ok?'✓':'✗'):'○'}</span></div><div class="quiz-context">${q.cx}</div><div class="quiz-body"><div class="quiz-stem">${q.s}</div><div class="quiz-options" id="opts${qn}">`;q.o.forEach(opt=>{let cls=s.done?'disabled':'';if(s.done&&opt[0]===ans[qn])cls+=' correct';if(s.done&&opt[0]===s.pick&&!s.ok)cls+=' incorrect';h+=`<div class="quiz-option ${cls}" data-a="${opt[0]}" onclick="pick(${qn},this)"><span class="option-letter">${opt[0].toUpperCase()}</span><span class="option-text">${opt[1]}</span></div>`;});h+=`</div><div class="conf-section" id="cf${qn}" ${s.done?'style="display:none"':''}><div class="conf-btns">`;['low','med','high'].forEach(c=>h+=`<button class="conf-btn" onclick="setC(${qn},'${c}',this)">${{low:'Guess',med:'Some',high:'Sure'}[c]}</button>`);h+=`</div></div><button class="submit-btn" id="sub${qn}" onclick="submit(${qn})" disabled ${s.done?'style="display:none"':''}>Submit</button><div class="explanation ${s.done?'visible '+(s.ok?'correct':'incorrect'):''}" id="exp${qn}">${q.e}</div></div></div>`;});
+h+=`<div class="phase-summary" id="summary"><div>Phase Complete! <span id="score">0/5</span></div>`;if(p<4)h+=`<button class="next-btn" onclick="unlock(${p+1})">Continue →</button>`;h+=`</div>`;document.getElementById('questionsPanel').innerHTML=h;}
+function pick(qn,el){if(st[qn].done)return;document.querySelectorAll(`#opts${qn} .quiz-option`).forEach(o=>o.classList.remove('selected'));el.classList.add('selected');st[qn].pick=el.dataset.a;chk(qn);}
+function setC(qn,lv,el){if(st[qn].done)return;document.querySelectorAll(`#cf${qn} .conf-btn`).forEach(b=>b.classList.remove('selected'));el.classList.add('selected');st[qn].conf=lv;chk(qn);}
+function chk(qn){document.getElementById(`sub${qn}`).disabled=!(st[qn].pick&&st[qn].conf);}
+function submit(qn){const s=st[qn];if(s.done)return;s.done=true;s.ok=s.pick===ans[qn];document.querySelectorAll(`#opts${qn} .quiz-option`).forEach(o=>{o.classList.add('disabled');if(o.dataset.a===ans[qn])o.classList.add('correct');else if(o.dataset.a===s.pick&&!s.ok)o.classList.add('incorrect');});document.getElementById(`exp${qn}`).classList.add('visible',s.ok?'correct':'incorrect');document.getElementById(`st${qn}`).textContent=s.ok?'✓':'✗';document.getElementById(`sub${qn}`).style.display='none';document.getElementById(`cf${qn}`).style.display='none';updProg();chkDone();}
+function updProg(){const t=Object.values(st).filter(s=>s.done).length;document.getElementById('progressCount').textContent=`${t}/20`;document.getElementById('progressFill').style.width=`${t*5}%`;}
+function chkDone(){const qs=getQs(phase);if(qs.every(q=>st[q].done)&&!done[phase]){done[phase]=1;document.getElementById('score').textContent=`${qs.filter(q=>st[q].ok).length}/5`;document.getElementById('summary').style.display='block';document.querySelector(`.timeline-phase[data-phase="${phase}"]`).classList.add('completed');}}
+function unlock(np){open[np]=1;goPhase(np);}
+function goPhase(p){if(!open[p])return;phase=p;document.querySelectorAll('.timeline-phase').forEach(ph=>{const pn=+ph.dataset.phase;ph.classList.remove('active','locked');if(pn===p)ph.classList.add('active');if(!open[pn])ph.classList.add('locked');});updateV(p);renderCase(p);renderQs(p);window.scrollTo({top:0});}
+document.addEventListener('DOMContentLoaded',()=>{updateV(1);renderCase(1);renderQs(1);});
+</script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preventive Medicine - MechanismDx</title>
+<style>
+:root{--bg:#f8f9fa;--white:#fff;--subtle:#f1f3f5;--text:#1a1a1a;--muted:#5c5c5c;--border:#e9ecef;--accent:#0891b2;--green:#16a34a;--red:#dc2626}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.header{background:var(--white);border-bottom:1px solid var(--border);padding:16px 24px}
+.module-header{background:var(--white);border-bottom:1px solid var(--border);padding:24px}.module-header-inner{max-width:1200px;margin:0 auto}
+.module-title{display:flex;align-items:center;gap:16px}.module-icon{width:56px;height:56px;background:linear-gradient(135deg,#a5f3fc,#67e8f9);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:28px}
+.module-title h1{font-size:24px}.module-title p{color:var(--muted);font-size:14px}
+.patient-banner{background:linear-gradient(135deg,#0e7490,#0891b2);color:#fff;padding:20px 24px}
+.patient-banner-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.patient-info{flex:1}.patient-name{font-size:16px;font-weight:600}.patient-details{font-size:13px;opacity:.9}
+.patient-vitals{display:flex;gap:16px}.vital{text-align:center;padding:8px 14px;background:rgba(255,255,255,.1);border-radius:8px}
+.vital-value{font-size:18px;font-weight:700}.vital-label{font-size:10px;opacity:.8}
+.timeline-nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 24px}
+.timeline-inner{max-width:1200px;margin:0 auto;display:flex}.timeline-phase{flex:1;padding:14px;cursor:pointer;border-bottom:3px solid transparent;text-align:center}
+.timeline-phase.active{border-bottom-color:var(--accent)}.timeline-phase.completed{border-bottom-color:var(--green)}
+.timeline-phase.locked{opacity:.4;cursor:not-allowed}.phase-label{font-size:12px;font-weight:600}.phase-time{font-size:10px;color:var(--muted)}
+.main-container{max-width:1200px;margin:0 auto;padding:24px;display:grid;grid-template-columns:280px 1fr;gap:24px}
+@media(max-width:900px){.main-container{grid-template-columns:1fr}}
+.card{background:var(--white);border:1px solid var(--border);border-radius:12px;margin-bottom:16px}
+.card-header{padding:14px 16px;border-bottom:1px solid var(--border);font-weight:600}.card-content{padding:16px}
+.case-narrative{font-size:13px;color:var(--muted)}.case-narrative strong{color:var(--text)}
+.data-section{background:var(--subtle);border-radius:8px;padding:10px;margin-top:10px}
+.data-label{font-size:9px;font-weight:600;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.data-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:10px}
+.learning-box{background:#a5f3fc;border-radius:12px;padding:14px;margin-top:14px}
+.learning-title{font-size:11px;font-weight:600;color:var(--accent);margin-bottom:8px}.learning-list{list-style:none;font-size:12px}
+.learning-list li{padding:3px 0 3px 18px;position:relative}.learning-list li::before{content:'→';position:absolute;left:0;color:var(--accent)}
+.quiz-card{background:var(--white);border:1px solid var(--border);border-radius:12px;margin-bottom:16px}
+.quiz-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between}
+.quiz-num{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.quiz-context{padding:12px 16px;background:#a5f3fc;font-size:11px;color:#0e7490}.quiz-body{padding:16px}
+.quiz-stem{font-size:13px;font-weight:500;margin-bottom:14px}.quiz-options{display:flex;flex-direction:column;gap:6px}
+.quiz-option{display:flex;gap:10px;padding:10px 12px;background:var(--subtle);border:2px solid transparent;border-radius:8px;cursor:pointer}
+.quiz-option:hover{border-color:var(--border)}.quiz-option.selected{border-color:var(--accent)}
+.quiz-option.correct{border-color:var(--green);background:rgba(22,163,74,.08)}.quiz-option.incorrect{border-color:var(--red);background:rgba(220,38,38,.08)}
+.quiz-option.disabled{pointer-events:none}
+.option-letter{width:22px;height:22px;border:2px solid var(--border);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+.quiz-option.correct .option-letter{background:var(--green);border-color:var(--green);color:#fff}
+.quiz-option.incorrect .option-letter{background:var(--red);border-color:var(--red);color:#fff}
+.option-text{font-size:12px;color:var(--muted)}
+.conf-section{margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
+.conf-btns{display:flex;gap:6px}.conf-btn{flex:1;padding:7px;border:2px solid var(--border);border-radius:8px;background:#fff;cursor:pointer;font-size:10px;font-weight:600}
+.conf-btn.selected{border-color:var(--green);background:rgba(22,163,74,.08);color:var(--green)}
+.submit-btn{margin-top:10px;width:100%;padding:10px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer}
+.submit-btn:disabled{background:var(--subtle);color:var(--muted)}
+.explanation{margin-top:14px;padding:14px;border-radius:8px;display:none;font-size:12px}.explanation.visible{display:block}
+.explanation.correct{background:#f0fdf4;border:1px solid #bbf7d0}.explanation.incorrect{background:#fef2f2;border:1px solid #fecaca}
+.phase-summary{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:20px;margin-top:16px;display:none}
+.next-btn{margin-top:14px;width:100%;padding:12px;background:var(--green);color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer}
+.progress-bar{background:var(--white);border-bottom:1px solid var(--border);padding:10px 24px}
+.progress-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.progress-track{flex:1;height:5px;background:var(--subtle);border-radius:3px}
+.progress-fill{height:100%;background:linear-gradient(90deg,#0891b2,#10b981);transition:width .3s;border-radius:3px}
+</style>
+</head>
+<body>
+<header class="header"><div style="max-width:1200px;margin:0 auto;font-weight:600">MechanismDx › Preventive Medicine</div></header>
+<div class="module-header"><div class="module-header-inner"><div class="module-title"><div class="module-icon">🛡️</div><div><h1>Preventive Medicine</h1><p>Cancer Screening → Immunizations → CVD Risk → Pre-Op Evaluation</p></div></div></div></div>
+<div class="progress-bar"><div class="progress-inner"><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div><span id="progressCount">0/20</span></div></div>
+<div class="patient-banner"><div class="patient-banner-inner">
+<div class="patient-info"><div class="patient-name">Multiple Patients</div><div class="patient-details">Sandra (Cancer Screen) → Michael (Vaccines) → Jennifer (CVD Risk) → Robert (Pre-Op)</div></div>
+<div class="patient-vitals"><div class="vital"><div class="vital-value" id="vAge">52</div><div class="vital-label">Age</div></div><div class="vital"><div class="vital-value" id="vRisk">Avg</div><div class="vital-label">Risk</div></div><div class="vital"><div class="vital-value" id="vDue">Screen</div><div class="vital-label">Due For</div></div></div>
+</div></div>
+<nav class="timeline-nav"><div class="timeline-inner">
+<div class="timeline-phase active" data-phase="1" onclick="goPhase(1)"><div class="phase-label">🔬 Cancer Screening</div><div class="phase-time">Sandra</div><div id="status1">Current</div></div>
+<div class="timeline-phase locked" data-phase="2" onclick="goPhase(2)"><div class="phase-label">💉 Immunizations</div><div class="phase-time">Michael</div><div id="status2">🔒</div></div>
+<div class="timeline-phase locked" data-phase="3" onclick="goPhase(3)"><div class="phase-label">❤️ CVD Risk</div><div class="phase-time">Jennifer</div><div id="status3">🔒</div></div>
+<div class="timeline-phase locked" data-phase="4" onclick="goPhase(4)"><div class="phase-label">🏥 Pre-Op Eval</div><div class="phase-time">Robert</div><div id="status4">🔒</div></div>
+</div></nav>
+<div class="main-container">
+<aside><div class="card"><div class="card-header">📋 Clinical Snapshot</div><div class="card-content" id="caseContent"></div></div></aside>
+<main id="questionsPanel"></main>
+</div>
+<script>
+const ans={1:'b',2:'c',3:'a',4:'d',5:'b',6:'c',7:'a',8:'d',9:'b',10:'c',11:'a',12:'d',13:'b',14:'c',15:'a',16:'d',17:'b',18:'c',19:'a',20:'d'};
+const st={};for(let i=1;i<=20;i++)st[i]={done:false,pick:null,conf:null,ok:false};
+let phase=1,done={1:0,2:0,3:0,4:0},open={1:1,2:0,3:0,4:0};
+const vit={1:{age:'52',risk:'Average',due:'Mammo, Colon'},2:{age:'65',risk:'Various',due:'Vaccines'},3:{age:'55',risk:'High',due:'ASCVD Rx'},4:{age:'68',risk:'Surgical',due:'Pre-op'}};
+const cases={
+1:{t:'<strong>Sandra Martinez</strong>, 52F for <strong>annual wellness visit</strong>. No significant medical history. Never had colonoscopy. Last mammogram 3 years ago. Mother had breast cancer at 62.',d1:[['Age','52'],['PMH','None significant'],['FH','Breast CA age 62'],['Smoking','Never']],d2:[['Last mammo','3 years ago'],['Colonoscopy','Never'],['Pap smear','2 years ago'],['BMI','26']]},
+2:{t:'<strong>Michael Thompson</strong>, 65M asking about <strong>recommended vaccines</strong>. Has diabetes, COPD. Got flu shot last fall. Unsure about pneumonia vaccines. Never had shingles vaccine.',d1:[['Age','65'],['Diabetes','Yes'],['COPD','Yes'],['Last flu shot','This season']],d2:[['Pneumococcal','Unknown'],['Shingles','Never'],['Tdap','10+ years ago'],['COVID','Up to date']]},
+3:{t:'<strong>Jennifer Chen</strong>, 55F with <strong>hypertension, diabetes, elevated LDL</strong>. Asking about heart disease prevention. Father had MI at 58. Current smoker 1 ppd × 30 years.',d1:[['Age','55'],['HTN','Yes'],['Diabetes','Yes'],['Smoking','30 pack-years']],d2:[['BP','142/88'],['LDL','165'],['A1c','7.8%'],['BMI','31']]},
+4:{t:'<strong>Robert Williams</strong>, 68M scheduled for <strong>elective knee replacement</strong>. History of CAD with stent 2 years ago, on aspirin and clopidogrel. Well-controlled HTN. Functional capacity 4 METs.',d1:[['Age','68'],['Surgery','Knee replacement'],['CAD','Stent 2 years ago'],['Antiplatelet','ASA + clopidogrel']],d2:[['BP','128/78'],['Cr','1.1'],['Hgb','13.8'],['METs','4']]}
+};
+const Qs={
+1:{ty:'Breast',cx:'Mammography screening',s:'When should Sandra start/continue mammography screening?',o:[['a','Start at age 40 and stop at age 65'],['b','USPSTF: Biennial age 50-74, can start at 40 with shared decision'],['c','Only screen when symptomatic with breast complaints'],['d','Annual breast MRI instead of mammography']],e:'<strong>Breast cancer screening:</strong> Age 50-74 biennial (B), Age 40-49 individual decision (C). Sandra 52 should continue biennial.'},
+2:{ty:'Colorectal',cx:'CRC screening',s:'Sandra has never had colon cancer screening. What are the options?',o:[['a','Colonoscopy is the only acceptable option'],['b','FIT stool test is the only acceptable option'],['c','Colonoscopy q10y, FIT annually, FIT-DNA q1-3y, sigmoidoscopy q5y'],['d','Screening starts at age 55 not before']],e:'<strong>CRC screening age 45-75:</strong> Colonoscopy q10y, FIT annually, FIT-DNA q1-3y, CT colonography q5y, sigmoidoscopy q5-10y.'},
+3:{ty:'Cervical',cx:'Pap smear screening',s:'Sandra had Pap smear 2 years ago. When is the next one due?',o:[['a','Age 21-29 Pap q3y; Age 30-65 Pap q3y or cotesting q5y'],['b','Annual Pap smear is required for all women'],['c','Only screen when symptomatic with abnormal bleeding'],['d','Stop all screening after age 50']],e:'<strong>Cervical screening:</strong> Age 21-29 Pap q3y; Age 30-65 Pap q3y OR Pap+HPV q5y OR HPV alone q5y. Stop at 65 if adequate prior screening.'},
+4:{ty:'Lung',cx:'Lung cancer screening',s:'A 58-year-old with 35 pack-year smoking history quit 5 years ago. Is lung cancer screening indicated?',o:[['a','No screening since patient quit smoking'],['b','Only screen if currently symptomatic'],['c','Only current smokers qualify for screening'],['d','Yes: annual LDCT age 50-80 with ≥20 pack-years, quit <15y ago']],e:'<strong>Lung cancer screening:</strong> Age 50-80, ≥20 pack-years, current or quit <15 years. Annual low-dose CT.'},
+5:{ty:'AAA',cx:'Abdominal aortic aneurysm',s:'Which patients should be screened for AAA?',o:[['a','All adults over age 50 regardless of history'],['b','One-time ultrasound for men 65-75 who ever smoked'],['c','Women are the primary target for AAA screening'],['d','Only screen if symptomatic with abdominal pain']],e:'<strong>AAA screening:</strong> One-time ultrasound men 65-75 who EVER smoked (B recommendation).'},
+6:{ty:'Pneumococcal',cx:'Pneumonia vaccines',s:'Michael is 65 with diabetes and COPD. What pneumococcal vaccines does he need?',o:[['a','PCV13 vaccine alone is sufficient'],['b','PPSV23 vaccine alone is sufficient'],['c','PCV15 or PCV20; if PCV15, follow with PPSV23'],['d','No pneumococcal vaccines are needed']],e:'<strong>Pneumococcal (ACIP 2023):</strong> PCV20 alone OR PCV15 followed by PPSV23 ≥1 year later. Michael qualifies.'},
+7:{ty:'Shingles',cx:'Herpes zoster vaccine',s:'Should Michael receive the shingles vaccine?',o:[['a','Yes: Shingrix for all adults ≥50, two doses'],['b','Only after experiencing shingles episode'],['c','Live vaccine is preferred over recombinant'],['d','Wait until age 70 to vaccinate']],e:'<strong>Shingrix:</strong> All adults ≥50, two doses 2-6 months apart, >90% effective. Even after prior shingles or Zostavax.'},
+8:{ty:'Tdap',cx:'Tetanus vaccination',s:'Michael\'s last tetanus vaccine was 12 years ago. What does he need?',o:[['a','No tetanus vaccination needed at this time'],['b','Td vaccine only without pertussis component'],['c','Tetanus immune globulin for passive immunity'],['d','Td booster needed; Tdap if never received as adult']],e:'<strong>Tetanus:</strong> Td booster q10 years. One dose should be Tdap if never received as adult. Tdap each pregnancy.'},
+9:{ty:'Influenza',cx:'Annual flu vaccine',s:'Which adults should receive annual influenza vaccination?',o:[['a','Only high-risk groups need vaccination'],['b','ALL adults annually; high-dose for age ≥65'],['c','Only during active outbreak periods'],['d','Every five years is sufficient']],e:'<strong>Influenza:</strong> ALL persons ≥6 months annually. Age ≥65: high-dose, adjuvanted, or recombinant preferred.'},
+10:{ty:'COVID',cx:'COVID-19 vaccination',s:'What is the current COVID-19 vaccination recommendation for adults?',o:[['a','COVID vaccination no longer recommended'],['b','Only for immunocompromised individuals'],['c','Updated vaccine annually; extra doses if high-risk'],['d','One-time series only without boosters']],e:'<strong>COVID-19:</strong> Updated vaccine annually for all adults. Additional doses for immunocompromised, age ≥65, high-risk.'},
+11:{ty:'ASCVD Risk',cx:'Risk calculation',s:'Jennifer has HTN, diabetes, smokes, LDL 165. How do you assess her CVD risk?',o:[['a','ASCVD Risk Calculator using age, sex, BP, cholesterol, DM, smoking'],['b','Framingham score is the only valid tool'],['c','LDL cholesterol alone determines risk category'],['d','Family history alone determines treatment']],e:'<strong>ASCVD Risk:</strong> Pooled Cohort Equations: age, sex, race, cholesterol, BP, diabetes, smoking. Jennifer likely high risk.'},
+12:{ty:'Statin Therapy',cx:'Lipid management',s:'Based on Jennifer\'s risk factors, is statin therapy indicated?',o:[['a','No, lifestyle modification only is appropriate'],['b','Only indicated if LDL exceeds 190 mg/dL'],['c','Low-intensity statin is sufficient'],['d','Yes: high-intensity statin for DM with risk factors']],e:'<strong>Statin indication:</strong> High-intensity for clinical ASCVD, LDL ≥190, diabetes + risk factors, or 10-year risk ≥20%.'},
+13:{ty:'Aspirin',cx:'Primary prevention',s:'Should Jennifer take aspirin for primary CVD prevention?',o:[['a','Yes, all diabetic patients should take aspirin'],['b','Limited: age 40-59 with ≥10% risk, not high bleed risk'],['c','Everyone over 50 should take daily aspirin'],['d','Only indicated after myocardial infarction']],e:'<strong>Aspirin primary prevention (USPSTF 2022):</strong> Age 40-59, ≥10% risk, low bleed risk may consider. Age ≥60 do NOT initiate.'},
+14:{ty:'Smoking',cx:'Cessation',s:'What is the most effective approach to help Jennifer quit smoking?',o:[['a','Willpower and motivation alone'],['b','Nicotine patch as sole intervention'],['c','Counseling plus pharmacotherapy; varenicline most effective'],['d','Gradual reduction without medication']],e:'<strong>Smoking cessation:</strong> Counseling + pharmacotherapy most effective. Varenicline, bupropion, or NRT. 5 A\'s approach.'},
+15:{ty:'BP Goals',cx:'Hypertension targets',s:'What is Jennifer\'s BP goal given her risk factors?',o:[['a','<130/80 for patients with CVD risk, DM, or CKD'],['b','<140/90 is adequate for all patients'],['c','<120/70 is the universal target'],['d','<150/90 is acceptable for diabetics']],e:'<strong>BP goals:</strong> <130/80 for CVD, 10-year risk ≥10%, diabetes, CKD. Jennifer has diabetes + high risk.'},
+16:{ty:'Risk Assessment',cx:'Cardiac risk',s:'How is Robert\'s perioperative cardiac risk assessed?',o:[['a','ECG findings alone determine risk level'],['b','Stress testing required for all surgical patients'],['c','Cardiac catheterization before any surgery'],['d','RCRI plus functional capacity assessment']],e:'<strong>Pre-op cardiac:</strong> RCRI (6 factors), functional capacity (METs). Robert: CAD = 1 point, 4 METs adequate.'},
+17:{ty:'Testing',cx:'Pre-op cardiac testing',s:'Does Robert need preoperative cardiac stress testing?',o:[['a','All surgical patients need stress testing'],['b','Not needed if ≥4 METs and stable; Robert qualifies'],['c','Required for all patients with prior stents'],['d','Cardiac catheterization always required']],e:'<strong>Stress test if:</strong> <4 METs AND elevated risk AND would change management. Robert has 4 METs, stable = no stress test.'},
+18:{ty:'Antiplatelet',cx:'Managing anticoagulation',s:'Robert is on aspirin and clopidogrel. How should these be managed for knee surgery?',o:[['a','Stop both medications 2 weeks before surgery'],['b','Continue both medications through surgery'],['c','Continue aspirin, may hold clopidogrel with cardiology input'],['d','Stop aspirin and continue clopidogrel only']],e:'<strong>Perioperative antiplatelet:</strong> Continue aspirin. May hold clopidogrel 5-7 days if high bleeding risk. Consult cardiology given stent.'},
+19:{ty:'Labs',cx:'Pre-op laboratory testing',s:'What routine pre-op labs are indicated for Robert?',o:[['a','Targeted testing based on history and surgery type'],['b','CBC, CMP, and coagulation studies for all patients'],['c','No laboratory testing ever needed preoperatively'],['d','Extensive workup required for all surgeries']],e:'<strong>Pre-op labs:</strong> Target based on comorbidities, surgery type, blood loss, meds. Not routine panels for everyone.'},
+20:{ty:'Optimization',cx:'Pre-op preparation',s:'What preoperative optimizations improve Robert\'s surgical outcomes?',o:[['a','Nothing is modifiable before surgery'],['b','Cancel surgery rather than optimize'],['c','Only prophylactic antibiotics matter'],['d','Glycemic control, BP optimization, smoking cessation, DVT planning']],e:'<strong>Pre-op optimization:</strong> Glucose, BP, smoking cessation, anemia, nutrition, medication reconciliation, DVT prophylaxis planning.'}
+};
+const intros={1:{t:'Phase 1: Cancer Screening',i:'🔬',o:['Know mammography guidelines','Understand CRC screening options','Apply cervical cancer screening','Identify lung cancer screening criteria']},2:{t:'Phase 2: Immunizations',i:'💉',o:['Know pneumococcal vaccine options','Recommend shingles vaccine','Apply tetanus guidelines','Understand flu vaccine recommendations']},3:{t:'Phase 3: CVD Risk Assessment',i:'❤️',o:['Calculate ASCVD risk','Know statin indications','Understand aspirin guidelines','Set appropriate BP goals']},4:{t:'Phase 4: Pre-Op Evaluation',i:'🏥',o:['Use RCRI for risk assessment','Know when to order stress tests','Manage perioperative antiplatelet','Order appropriate pre-op labs']}};
+function updateV(p){const v=vit[p];document.getElementById('vAge').textContent=v.age;document.getElementById('vRisk').textContent=v.risk;document.getElementById('vDue').textContent=v.due;}
+function renderCase(p){const c=cases[p];let h=`<div class="case-narrative">${c.t}</div><div class="data-section"><div class="data-label">History</div><div class="data-grid">`;c.d1.forEach(x=>h+=`<div><span style="color:var(--muted)">${x[0]}:</span> <strong>${x[1]}</strong></div>`);h+=`</div></div><div class="data-section"><div class="data-label">Findings</div><div class="data-grid">`;c.d2.forEach(x=>h+=`<div><span style="color:var(--muted)">${x[0]}:</span> <strong>${x[1]}</strong></div>`);h+=`</div></div>`;document.getElementById('caseContent').innerHTML=h;}
+function getQs(p){return[(p-1)*5+1,(p-1)*5+2,(p-1)*5+3,(p-1)*5+4,(p-1)*5+5];}
+function renderQs(p){const intro=intros[p],qs=getQs(p);let h=`<div><h2>${intro.i} ${intro.t}</h2><div class="learning-box"><div class="learning-title">🎯 Objectives</div><ul class="learning-list">`;intro.o.forEach(o=>h+=`<li>${o}</li>`);h+=`</ul></div></div>`;
+qs.forEach((qn,i)=>{const q=Qs[qn],s=st[qn];h+=`<div class="quiz-card"><div class="quiz-header"><div style="display:flex;align-items:center"><span class="quiz-num">${i+1}</span></div><span id="st${qn}">${s.done?(s.ok?'✓':'✗'):'○'}</span></div><div class="quiz-context">${q.cx}</div><div class="quiz-body"><div class="quiz-stem">${q.s}</div><div class="quiz-options" id="opts${qn}">`;q.o.forEach(opt=>{let cls=s.done?'disabled':'';if(s.done&&opt[0]===ans[qn])cls+=' correct';if(s.done&&opt[0]===s.pick&&!s.ok)cls+=' incorrect';h+=`<div class="quiz-option ${cls}" data-a="${opt[0]}" onclick="pick(${qn},this)"><span class="option-letter">${opt[0].toUpperCase()}</span><span class="option-text">${opt[1]}</span></div>`;});h+=`</div><div class="conf-section" id="cf${qn}" ${s.done?'style="display:none"':''}><div class="conf-btns">`;['low','med','high'].forEach(c=>h+=`<button class="conf-btn" onclick="setC(${qn},'${c}',this)">${{low:'Guess',med:'Some',high:'Sure'}[c]}</button>`);h+=`</div></div><button class="submit-btn" id="sub${qn}" onclick="submit(${qn})" disabled ${s.done?'style="display:none"':''}>Submit</button><div class="explanation ${s.done?'visible '+(s.ok?'correct':'incorrect'):''}" id="exp${qn}">${q.e}</div></div></div>`;});
+h+=`<div class="phase-summary" id="summary"><div>Phase Complete! <span id="score">0/5</span></div>`;if(p<4)h+=`<button class="next-btn" onclick="unlock(${p+1})">Continue →</button>`;h+=`</div>`;document.getElementById('questionsPanel').innerHTML=h;}
+function pick(qn,el){if(st[qn].done)return;document.querySelectorAll(`#opts${qn} .quiz-option`).forEach(o=>o.classList.remove('selected'));el.classList.add('selected');st[qn].pick=el.dataset.a;chk(qn);}
+function setC(qn,lv,el){if(st[qn].done)return;document.querySelectorAll(`#cf${qn} .conf-btn`).forEach(b=>b.classList.remove('selected'));el.classList.add('selected');st[qn].conf=lv;chk(qn);}
+function chk(qn){document.getElementById(`sub${qn}`).disabled=!(st[qn].pick&&st[qn].conf);}
+function submit(qn){const s=st[qn];if(s.done)return;s.done=true;s.ok=s.pick===ans[qn];document.querySelectorAll(`#opts${qn} .quiz-option`).forEach(o=>{o.classList.add('disabled');if(o.dataset.a===ans[qn])o.classList.add('correct');else if(o.dataset.a===s.pick&&!s.ok)o.classList.add('incorrect');});document.getElementById(`exp${qn}`).classList.add('visible',s.ok?'correct':'incorrect');document.getElementById(`st${qn}`).textContent=s.ok?'✓':'✗';document.getElementById(`sub${qn}`).style.display='none';document.getElementById(`cf${qn}`).style.display='none';updProg();chkDone();}
+function updProg(){const t=Object.values(st).filter(s=>s.done).length;document.getElementById('progressCount').textContent=`${t}/20`;document.getElementById('progressFill').style.width=`${t*5}%`;}
+function chkDone(){const qs=getQs(phase);if(qs.every(q=>st[q].done)&&!done[phase]){done[phase]=1;document.getElementById('score').textContent=`${qs.filter(q=>st[q].ok).length}/5`;document.getElementById('summary').style.display='block';document.querySelector(`.timeline-phase[data-phase="${phase}"]`).classList.add('completed');}}
+function unlock(np){open[np]=1;goPhase(np);}
+function goPhase(p){if(!open[p])return;phase=p;document.querySelectorAll('.timeline-phase').forEach(ph=>{const pn=+ph.dataset.phase;ph.classList.remove('active','locked');if(pn===p)ph.classList.add('active');if(!open[pn])ph.classList.add('locked');});updateV(p);renderCase(p);renderQs(p);window.scrollTo({top:0});}
+document.addEventListener('DOMContentLoaded',()=>{updateV(1);renderCase(1);renderQs(1);});
+</script>
+</body>
+</html>

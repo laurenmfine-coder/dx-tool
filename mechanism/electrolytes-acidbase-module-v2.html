@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Electrolytes & Acid-Base: Thomas's Journey - MechanismDx</title>
+<style>
+:root{--bg:#f8f9fa;--white:#fff;--subtle:#f1f3f5;--text:#1a1a1a;--muted:#5c5c5c;--border:#e9ecef;--accent:#7c3aed;--green:#16a34a;--red:#dc2626}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.header{background:var(--white);border-bottom:1px solid var(--border);padding:16px 24px}
+.module-header{background:var(--white);border-bottom:1px solid var(--border);padding:24px}.module-header-inner{max-width:1200px;margin:0 auto}
+.module-title{display:flex;align-items:center;gap:16px}.module-icon{width:56px;height:56px;background:linear-gradient(135deg,#ddd6fe,#c4b5fd);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:28px}
+.module-title h1{font-size:24px}.module-title p{color:var(--muted);font-size:14px}
+.patient-banner{background:linear-gradient(135deg,#6d28d9,#7c3aed);color:#fff;padding:20px 24px}
+.patient-banner-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.patient-info{flex:1}.patient-name{font-size:16px;font-weight:600}.patient-details{font-size:13px;opacity:.9}
+.patient-vitals{display:flex;gap:16px}.vital{text-align:center;padding:8px 14px;background:rgba(255,255,255,.1);border-radius:8px}
+.vital-value{font-size:18px;font-weight:700}.vital-label{font-size:10px;opacity:.8}
+.timeline-nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 24px}
+.timeline-inner{max-width:1200px;margin:0 auto;display:flex}.timeline-phase{flex:1;padding:14px;cursor:pointer;border-bottom:3px solid transparent;text-align:center}
+.timeline-phase.active{border-bottom-color:var(--accent)}.timeline-phase.completed{border-bottom-color:var(--green)}
+.timeline-phase.locked{opacity:.4;cursor:not-allowed}.phase-label{font-size:12px;font-weight:600}.phase-time{font-size:10px;color:var(--muted)}
+.phase-status{font-size:10px;margin-top:4px}.phase-status.current{color:var(--accent)}.phase-status.done{color:var(--green)}
+.main-container{max-width:1200px;margin:0 auto;padding:24px;display:grid;grid-template-columns:280px 1fr;gap:24px}
+@media(max-width:900px){.main-container{grid-template-columns:1fr}}
+.card{background:var(--white);border:1px solid var(--border);border-radius:12px;margin-bottom:16px}
+.card-header{padding:14px 16px;border-bottom:1px solid var(--border);font-weight:600}.card-content{padding:16px}
+.case-narrative{font-size:13px;color:var(--muted)}.case-narrative strong{color:var(--text)}
+.data-section{background:var(--subtle);border-radius:8px;padding:10px;margin-top:10px}
+.data-label{font-size:9px;font-weight:600;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.data-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:10px}
+.resource-box{background:#ddd6fe;border-left:4px solid var(--accent);border-radius:8px;padding:12px;margin:12px 0}
+.resource-title{font-size:10px;font-weight:700;color:#6d28d9;margin-bottom:6px}.resource-links{font-size:10px}.resource-links a{color:var(--accent)}
+.learning-box{background:#ddd6fe;border-radius:12px;padding:14px;margin-top:14px}
+.learning-title{font-size:11px;font-weight:600;color:var(--accent);margin-bottom:8px}.learning-list{list-style:none;font-size:12px}
+.learning-list li{padding:3px 0 3px 18px;position:relative}.learning-list li::before{content:'→';position:absolute;left:0;color:var(--accent)}
+.quiz-card{background:var(--white);border:1px solid var(--border);border-radius:12px;margin-bottom:16px}
+.quiz-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between}
+.quiz-num{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.quiz-type{font-size:11px;color:var(--muted);margin-left:8px}
+.quiz-status{font-size:10px;padding:3px 8px;border-radius:10px;background:var(--subtle)}
+.quiz-status.correct{background:#dcfce7;color:#166534}.quiz-status.incorrect{background:#fee2e2;color:#991b1b}
+.quiz-context{padding:12px 16px;background:#ddd6fe;font-size:11px;color:#6d28d9}.quiz-body{padding:16px}
+.quiz-stem{font-size:13px;font-weight:500;margin-bottom:14px}.quiz-options{display:flex;flex-direction:column;gap:6px}
+.quiz-option{display:flex;gap:10px;padding:10px 12px;background:var(--subtle);border:2px solid transparent;border-radius:8px;cursor:pointer}
+.quiz-option:hover{border-color:var(--border)}.quiz-option.selected{border-color:var(--accent)}
+.quiz-option.correct{border-color:var(--green);background:rgba(22,163,74,.08)}.quiz-option.incorrect{border-color:var(--red);background:rgba(220,38,38,.08)}
+.quiz-option.disabled{pointer-events:none}
+.option-letter{width:22px;height:22px;border:2px solid var(--border);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+.quiz-option.correct .option-letter{background:var(--green);border-color:var(--green);color:#fff}
+.quiz-option.incorrect .option-letter{background:var(--red);border-color:var(--red);color:#fff}
+.option-text{font-size:12px;color:var(--muted)}
+.conf-section{margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
+.conf-btns{display:flex;gap:6px}.conf-btn{flex:1;padding:7px;border:2px solid var(--border);border-radius:8px;background:#fff;cursor:pointer;font-size:10px;font-weight:600}
+.conf-btn.selected{border-color:var(--green);background:rgba(22,163,74,.08);color:var(--green)}
+.submit-btn{margin-top:10px;width:100%;padding:10px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer}
+.submit-btn:disabled{background:var(--subtle);color:var(--muted)}
+.explanation{margin-top:14px;padding:14px;border-radius:8px;display:none;font-size:12px}.explanation.visible{display:block}
+.explanation.correct{background:#f0fdf4;border:1px solid #bbf7d0}.explanation.incorrect{background:#fef2f2;border:1px solid #fecaca}
+.phase-summary{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:20px;margin-top:16px;display:none}
+.summary-header{display:flex;justify-content:space-between;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.summary-score{font-size:22px;font-weight:700;color:var(--green)}
+.next-btn{margin-top:14px;width:100%;padding:12px;background:var(--green);color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer}
+.progress-bar{background:var(--white);border-bottom:1px solid var(--border);padding:10px 24px}
+.progress-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.progress-track{flex:1;height:5px;background:var(--subtle);border-radius:3px}
+.progress-fill{height:100%;background:linear-gradient(90deg,#7c3aed,#10b981);transition:width .3s;border-radius:3px}
+.progress-count{font-size:10px;color:var(--muted);font-weight:600}
+</style>
+</head>
+<body>
+<header class="header"><div style="max-width:1200px;margin:0 auto;font-weight:600">MechanismDx › Electrolytes & Acid-Base</div></header>
+<div class="module-header"><div class="module-header-inner"><div class="module-title"><div class="module-icon">⚗️</div><div><h1>Electrolytes: Thomas's Journey</h1><p>Hyponatremia → Hyperkalemia → Metabolic Acidosis → Mixed Disorders</p></div></div></div></div>
+<div class="progress-bar"><div class="progress-inner"><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div><span class="progress-count" id="progressCount">0/20</span></div></div>
+<div class="patient-banner"><div class="patient-banner-inner">
+<div class="patient-info"><div class="patient-name">Thomas Wright, 72M</div><div class="patient-details">CHF, CKD stage 3, on diuretics | Confusion and weakness</div></div>
+<div class="patient-vitals"><div class="vital"><div class="vital-value" id="vNa">118</div><div class="vital-label">Na</div></div><div class="vital"><div class="vital-value" id="vK">6.2</div><div class="vital-label">K</div></div><div class="vital"><div class="vital-value" id="vpH">7.28</div><div class="vital-label">pH</div></div></div>
+</div></div>
+<nav class="timeline-nav"><div class="timeline-inner">
+<div class="timeline-phase active" data-phase="1" onclick="goPhase(1)"><div class="phase-label">💧 Hyponatremia</div><div class="phase-time">Day 1</div><div class="phase-status current" id="status1">Current</div></div>
+<div class="timeline-phase locked" data-phase="2" onclick="goPhase(2)"><div class="phase-label">⚡ Hyperkalemia</div><div class="phase-time">Day 3</div><div class="phase-status" id="status2">🔒</div></div>
+<div class="timeline-phase locked" data-phase="3" onclick="goPhase(3)"><div class="phase-label">🧪 Met Acidosis</div><div class="phase-time">Week 2</div><div class="phase-status" id="status3">🔒</div></div>
+<div class="timeline-phase locked" data-phase="4" onclick="goPhase(4)"><div class="phase-label">🔀 Mixed</div><div class="phase-time">Month 1</div><div class="phase-status" id="status4">🔒</div></div>
+</div></nav>
+<div class="main-container">
+<aside><div class="card"><div class="card-header">📋 Clinical Snapshot</div><div class="card-content" id="caseContent"></div></div></aside>
+<main id="questionsPanel"></main>
+</div>
+<script>
+const ans={1:'b',2:'c',3:'a',4:'d',5:'c',6:'b',7:'a',8:'d',9:'c',10:'b',11:'a',12:'c',13:'b',14:'d',15:'a',16:'c',17:'b',18:'d',19:'a',20:'c'};
+const Qs={
+1:{ty:'Hyponatremia',cx:'Classification',s:'Maria has sodium 124 mEq/L. How do you classify hyponatremia severity?',o:[['a','Mild 130-135, moderate 125-129, severe <125 mEq/L'],['b','Any sodium below 140 is severe'],['c','Only symptoms determine severity'],['d','Based on urine sodium alone']],e:'<strong>Severity:</strong> Mild 130-135, Moderate 125-129, Severe <125. Also assess volume status and acuity.'},
+2:{ty:'Assessment',cx:'Volume status',s:'How do you assess volume status in hyponatremia?',o:[['a','Clinical exam, urine sodium, urine osmolality, serum osmolality'],['b','Serum sodium alone'],['c','Only vital signs needed'],['d','Weight change only']],e:'<strong>Volume assessment:</strong> Exam (JVP, edema, skin turgor), urine Na (<20 hypovolemic, >40 euvolemic/SIADH), urine osm, serum osm.'},
+3:{ty:'SIADH',cx:'Diagnosis',s:'What are the diagnostic criteria for SIADH?',o:[['a','Euvolemic, low serum osm, inappropriately concentrated urine, high urine Na'],['b','Low urine sodium'],['c','High serum osmolality'],['d','Hypervolemic state']],e:'<strong>SIADH:</strong> Euvolemic, serum osm <275, urine osm >100 (inappropriately concentrated), urine Na >40, normal thyroid/adrenal.'},
+4:{ty:'Treatment',cx:'Correction rate',s:'How fast should chronic hyponatremia be corrected?',o:[['a','No more than 8-10 mEq/L in 24 hours to prevent osmotic demyelination'],['b','Rapid correction to normal is safe'],['c','20 mEq/L per day is acceptable'],['d','Only symptoms guide rate']],e:'<strong>Correction rate:</strong> ≤8-10 mEq/L in 24h, ≤18 in 48h. Faster correction risks osmotic demyelination syndrome (central pontine myelinolysis).'},
+5:{ty:'Emergency',cx:'Severe symptoms',s:'Maria has seizures from sodium 112. What is the immediate treatment?',o:[['a','3% hypertonic saline to raise Na by 4-6 mEq/L rapidly'],['b','Fluid restriction only'],['c','Normal saline bolus'],['d','Oral salt tablets']],e:'<strong>Symptomatic severe:</strong> 3% saline 100-150mL bolus, raise Na 4-6 mEq/L in first 1-2h. Then slow correction. Monitor frequently.'},
+6:{ty:'Hypernatremia',cx:'Mechanism',s:'What causes hypernatremia?',o:[['a','Water deficit from inadequate intake or excessive losses'],['b','Sodium excess always'],['c','Only diabetes insipidus'],['d','Renal sodium retention']],e:'<strong>Hypernatremia:</strong> Always a water problem. Inadequate intake (altered mental status, no access) or excessive loss (DI, osmotic diuresis).'},
+7:{ty:'Treatment',cx:'Correction',s:'How is hypernatremia corrected?',o:[['a','Free water replacement, correct no faster than 10-12 mEq/L per day'],['b','Rapid correction is safe'],['c','Hypertonic saline'],['d','Diuretics to lower sodium']],e:'<strong>Correction:</strong> Free water (D5W, oral water). Correct ≤10-12 mEq/L per day. Faster risks cerebral edema.'},
+8:{ty:'Hypokalemia',cx:'Causes',s:'What are common causes of hypokalemia?',o:[['a','GI losses, diuretics, renal wasting, intracellular shift'],['b','Only dietary deficiency'],['c','Renal failure'],['d','Metabolic acidosis']],e:'<strong>Hypokalemia causes:</strong> GI (diarrhea, vomiting), renal (diuretics, hyperaldosteronism), transcellular shift (alkalosis, insulin, beta-agonists).'},
+9:{ty:'ECG',cx:'Cardiac effects',s:'What ECG changes occur with hypokalemia?',o:[['a','Flattened T waves, U waves, ST depression, prolonged QT'],['b','Peaked T waves'],['c','Shortened QT'],['d','Wide QRS only']],e:'<strong>Hypokalemia ECG:</strong> Flattened T waves, U waves, ST depression, prolonged QT. Risk of arrhythmias (especially with digoxin).'},
+10:{ty:'Treatment',cx:'K replacement',s:'How is hypokalemia treated?',o:[['a','Oral KCl preferred; IV if severe or unable to take PO; replace Mg'],['b','IV always first'],['c','Potassium-sparing diuretics only'],['d','Sodium bicarbonate']],e:'<strong>Treatment:</strong> Oral KCl preferred (safer). IV for severe (<3.0) or symptomatic. Replace magnesium (required for K repletion).'},
+11:{ty:'Hyperkalemia',cx:'Causes',s:'What causes hyperkalemia?',o:[['a','Renal failure, medications (ACEi, K-sparing diuretics), acidosis, cell lysis'],['b','Only dietary excess'],['c','Alkalosis'],['d','Diarrhea']],e:'<strong>Hyperkalemia:</strong> Decreased excretion (CKD, ACEi, K-sparing diuretics), transcellular shift (acidosis), cell lysis (rhabdo, tumor lysis).'},
+12:{ty:'ECG',cx:'Cardiac effects',s:'What ECG changes indicate severe hyperkalemia?',o:[['a','Peaked T waves, widened QRS, loss of P waves, sine wave'],['b','U waves'],['c','Prolonged QT'],['d','ST elevation']],e:'<strong>Hyperkalemia ECG:</strong> Peaked T waves (early) → PR prolongation → loss of P waves → widened QRS → sine wave → VF/asystole.'},
+13:{ty:'Emergency',cx:'Treatment sequence',s:'K is 7.2 with wide QRS. What is the treatment sequence?',o:[['a','Calcium gluconate, insulin/glucose, then remove potassium'],['b','Dialysis first for all'],['c','Kayexalate alone'],['d','Observation']],e:'<strong>Treatment:</strong> 1) Calcium (membrane stabilization), 2) Shift K (insulin+glucose, bicarb, albuterol), 3) Remove K (diuretics, kayexalate, dialysis).'},
+14:{ty:'Metabolic Acidosis',cx:'Anion gap',s:'How do you calculate and interpret the anion gap?',o:[['a','AG = Na - (Cl + HCO3); normal 8-12; elevated indicates unmeasured anions'],['b','AG = Na + Cl - HCO3'],['c','Normal AG is 20-25'],['d','Only pH matters']],e:'<strong>Anion gap:</strong> Na - (Cl + HCO3). Normal 8-12. Elevated = unmeasured anions (lactate, ketones, uremia, toxins).'},
+15:{ty:'Causes',cx:'HAGMA',s:'What are causes of high anion gap metabolic acidosis (MUDPILES)?',o:[['a','Methanol, Uremia, DKA, Propylene glycol, INH/Iron, Lactic acid, Ethylene glycol, Salicylates'],['b','Diarrhea and RTA'],['c','Normal saline infusion'],['d','Vomiting']],e:'<strong>HAGMA (MUDPILES):</strong> Methanol, Uremia, DKA, Propylene glycol, INH/Iron, Lactic acidosis, Ethylene glycol, Salicylates.'},
+16:{ty:'Normal AG',cx:'NAGMA causes',s:'What causes normal anion gap metabolic acidosis?',o:[['a','Diarrhea, RTA, normal saline excess, ureteral diversion'],['b','DKA'],['c','Lactic acidosis'],['d','Methanol']],e:'<strong>NAGMA:</strong> GI bicarb loss (diarrhea), RTA, dilutional (NS excess), ureteral diversion. Hyperchloremic.'},
+17:{ty:'Respiratory',cx:'Compensation',s:'How do you determine if respiratory compensation is appropriate in metabolic acidosis?',o:[['a','Expected pCO2 = 1.5 × HCO3 + 8 (Winter\'s formula)'],['b','pCO2 should equal HCO3'],['c','No compensation expected'],['d','pCO2 should be 40 always']],e:'<strong>Winter\'s formula:</strong> Expected pCO2 = 1.5(HCO3) + 8 ± 2. If actual pCO2 differs, there\'s a mixed disorder.'},
+18:{ty:'Metabolic Alkalosis',cx:'Causes',s:'What are common causes of metabolic alkalosis?',o:[['a','Vomiting, NG suction, diuretics, hyperaldosteronism'],['b','Diarrhea'],['c','Renal failure'],['d','DKA']],e:'<strong>Met alkalosis:</strong> Saline-responsive (vomiting, NG suction, diuretics) or saline-resistant (hyperaldosteronism, Cushing\'s, Bartter/Gitelman).'},
+19:{ty:'Treatment',cx:'Alkalosis Rx',s:'How is metabolic alkalosis treated?',o:[['a','Saline-responsive: NS and KCl; Saline-resistant: treat underlying cause'],['b','Bicarbonate administration'],['c','Hyperventilation'],['d','Acetazolamide for all']],e:'<strong>Treatment:</strong> Saline-responsive (urine Cl <20): NS + KCl. Saline-resistant (urine Cl >20): treat cause (spironolactone for hyperaldo).'},
+20:{ty:'Mixed',cx:'Complex disorders',s:'pH 7.32, pCO2 25, HCO3 12, AG 20. What is the acid-base disorder?',o:[['a','HAGMA with appropriate respiratory compensation'],['b','Respiratory alkalosis only'],['c','Metabolic alkalosis'],['d','Normal acid-base status']],e:'<strong>Analysis:</strong> Low pH = acidemia. Low HCO3 = metabolic acidosis. AG 20 = HAGMA. Check Winter\'s: 1.5(12)+8=26. pCO2 25 ≈ expected = appropriate compensation.'}
+};
+7:{ty:'First Step',cx:'K 6.8 with ECG changes',s:'What is the FIRST treatment for hyperkalemia with ECG changes?',o:[['a','IV calcium gluconate (stabilizes membrane)'],['b','Insulin + glucose'],['c','Kayexalate'],['d','Dialysis']],e:'<strong>Hyperkalemia treatment order:</strong><br><br>1. <strong>Calcium gluconate</strong> - stabilizes cardiac membrane (does NOT lower K)<br>2. <strong>Insulin + glucose</strong> - shifts K into cells<br>3. <strong>Albuterol</strong> - shifts K<br>4. <strong>Bicarbonate</strong> - if acidotic<br>5. <strong>Kayexalate/Lokelma</strong> - removes K<br>6. <strong>Dialysis</strong> - removes K'},
+8:{ty:'K Shift',cx:'Lowering potassium',s:'Which treatment SHIFTS K into cells?',o:[['a','Calcium'],['b','Kayexalate'],['c','Dialysis'],['d','Insulin + glucose, albuterol, bicarbonate']],e:'<strong>K shifters (temporary):</strong><br>• Insulin + glucose (10u + D50)<br>• Albuterol nebulizer<br>• Sodium bicarbonate (if acidotic)<br><br><strong>K removers (definitive):</strong><br>• Kayexalate, Lokelma (GI binders)<br>• Loop diuretics<br>• Dialysis'},
+9:{ty:'Causes',cx:'Why hyperkalemia?',s:'What medications commonly cause hyperkalemia?',o:[['a','Thiazides'],['b','Loop diuretics'],['c','ACEi, ARBs, K-sparing diuretics (spironolactone), NSAIDs, TMP-SMX'],['d','Calcium channel blockers']],e:'<strong>Hyperkalemia causes:</strong><br><br>Meds: ACEi, ARB, K-sparing diuretics, NSAIDs, TMP-SMX, heparin<br><br>Other: Renal failure, acidosis, tissue breakdown (rhabdo, tumor lysis), adrenal insufficiency'},
+10:{ty:'Anion Gap',cx:'pH 7.22, HCO3 12',s:'How do you calculate anion gap?',o:[['a','Na - K - Cl'],['b','Na - (Cl + HCO3); normal 8-12'],['c','K + Cl'],['d','HCO3 + Cl']],e:'<strong>Anion Gap = Na - (Cl + HCO3)</strong><br><br>Normal: 8-12 mEq/L<br><br>Thomas: 138 - (104 + 12) = <strong>22 (elevated)</strong><br><br>High AG = unmeasured anions (lactate, ketones, uremia, toxins)'},
+11:{ty:'HAGMA Causes',cx:'AG 22',s:'What causes high anion gap metabolic acidosis (MUDPILES)?',o:[['a','Methanol, Uremia, DKA, Propylene glycol, Isoniazid/Iron, Lactic acidosis, Ethylene glycol, Salicylates'],['b','Diarrhea'],['c','RTA'],['d','Normal saline']],e:'<strong>MUDPILES:</strong><br>• <strong>M</strong>ethanol<br>• <strong>U</strong>remia<br>• <strong>D</strong>KA/starvation ketoacidosis<br>• <strong>P</strong>ropylene glycol<br>• <strong>I</strong>soniazid, Iron<br>• <strong>L</strong>actic acidosis<br>• <strong>E</strong>thylene glycol<br>• <strong>S</strong>alicylates'},
+12:{ty:'NAGMA',cx:'Non-gap acidosis',s:'What causes normal anion gap metabolic acidosis?',o:[['a','DKA'],['b','Lactic acidosis'],['c','Diarrhea, RTA, normal saline infusion (HARDASS)'],['d','Methanol']],e:'<strong>NAGMA (HARDASS):</strong><br>• Hyperalimentation<br>• Acetazolamide<br>• RTA<br>• Diarrhea<br>• Addison disease<br>• Spironolactone<br>• Saline infusion<br><br>Lost HCO3 or retained Cl'},
+13:{ty:'Compensation',cx:'Expected compensation',s:'What is expected pCO2 in metabolic acidosis?',o:[['a','Rises'],['b','Winters formula: pCO2 = 1.5(HCO3) + 8 ± 2'],['c','Unchanged'],['d','Falls to 20 always']],e:'<strong>Winters formula:</strong><br>Expected pCO2 = 1.5 × HCO3 + 8 (±2)<br><br>Thomas: 1.5 × 12 + 8 = 26 (range 24-28)<br>Actual pCO2: 28 ✓ appropriate compensation<br><br>If pCO2 higher → additional resp acidosis<br>If pCO2 lower → additional resp alkalosis'},
+14:{ty:'Delta-Delta',cx:'Checking for mixed disorder',s:'What does delta-delta ratio assess?',o:[['a','Respiratory compensation'],['b','Volume status'],['c','Renal function'],['d','Whether a concurrent NAGMA or metabolic alkalosis exists']],e:'<strong>Delta-delta ratio:</strong><br>ΔAG / ΔHCO3<br><br>• <strong>1-2:</strong> Pure HAGMA<br>• <strong><1:</strong> HAGMA + NAGMA<br>• <strong>>2:</strong> HAGMA + metabolic alkalosis<br><br>ΔAG = AG - 12<br>ΔHCO3 = 24 - measured HCO3'},
+15:{ty:'Resp Alkalosis',cx:'pH 7.48, pCO2 28',s:'What causes respiratory alkalosis?',o:[['a','Hyperventilation: anxiety, PE, sepsis, salicylates, high altitude, pregnancy'],['b','Hypoventilation'],['c','Diarrhea'],['d','Vomiting']],e:'<strong>Respiratory alkalosis (hyperventilation):</strong><br>• Anxiety/pain<br>• PE<br>• Sepsis (early)<br>• Salicylates<br>• High altitude<br>• Pregnancy<br>• CNS disease<br>• Liver failure'},
+16:{ty:'Resp Acidosis',cx:'If pCO2 elevated',s:'What causes respiratory acidosis?',o:[['a','Hyperventilation'],['b','PE'],['c','Hypoventilation: COPD, sedation, neuromuscular disease, airway obstruction'],['d','Anxiety']],e:'<strong>Respiratory acidosis (hypoventilation):</strong><br>• COPD<br>• Sedatives/opioids<br>• Neuromuscular disease (MG, GBS)<br>• Obesity hypoventilation<br>• Airway obstruction<br>• Sleep apnea'},
+17:{ty:'Met Alkalosis',cx:'If HCO3 elevated',s:'What causes metabolic alkalosis?',o:[['a','Diarrhea'],['b','Vomiting, NG suction, diuretics, hypokalemia, contraction alkalosis'],['c','RTA'],['d','Lactic acidosis']],e:'<strong>Metabolic alkalosis:</strong><br>• <strong>Saline-responsive</strong> (urine Cl <20): Vomiting, NG suction, diuretics<br>• <strong>Saline-resistant</strong> (urine Cl >20): Hyperaldosteronism, Cushing, Bartter/Gitelman<br><br>Often with hypokalemia'},
+18:{ty:'Mixed Example',cx:'pH 7.48, pCO2 28, HCO3 20',s:'What is Thomas\'s acid-base disorder?',o:[['a','Pure metabolic acidosis'],['b','Pure respiratory acidosis'],['c','Metabolic alkalosis'],['d','Respiratory alkalosis with metabolic acidosis (or mixed)']],e:'<strong>Analysis:</strong><br>• pH 7.48 = alkalemia<br>• pCO2 28 = respiratory alkalosis (primary)<br>• HCO3 20 = slightly low<br><br>Expected HCO3 for resp alk: drops 2 for each 10 pCO2 drop<br>Expected: 24 - 2.4 = 21.6<br><br>HCO3 slightly lower than expected → possible concurrent metabolic acidosis'},
+19:{ty:'ABG Approach',cx:'Systematic interpretation',s:'What is the first step in ABG interpretation?',o:[['a','Look at pH to determine acidemia or alkalemia'],['b','Calculate anion gap first'],['c','Check pO2'],['d','Check HCO3 first']],e:'<strong>ABG systematic approach:</strong><br>1. <strong>pH</strong>: Acidemia (<7.35) or alkalemia (>7.45)?<br>2. <strong>Primary disorder</strong>: Is it respiratory (pCO2) or metabolic (HCO3)?<br>3. <strong>Compensation</strong>: Is it appropriate?<br>4. <strong>Anion gap</strong>: If metabolic acidosis<br>5. <strong>Delta-delta</strong>: If HAGMA'},
+20:{ty:'Osmolar Gap',cx:'Toxic ingestion',s:'When is osmolar gap elevated?',o:[['a','Hypernatremia'],['b','DKA'],['c','Toxic alcohol ingestion (methanol, ethylene glycol), propylene glycol'],['d','Lactic acidosis']],e:'<strong>Osmolar gap = Measured osm - Calculated osm</strong><br><br>Calculated: 2(Na) + Glucose/18 + BUN/2.8<br><br>Normal: <10<br><br>Elevated in:<br>• <strong>Methanol</strong><br>• <strong>Ethylene glycol</strong><br>• Propylene glycol<br>• Isopropyl alcohol'}
+};
+function updateV(p){const v=vit[p];document.getElementById('vNa').textContent=v.na;document.getElementById('vK').textContent=v.k;document.getElementById('vpH').textContent=v.ph;}
+function renderCase(p){const c=cases[p];let h=`<div class="case-narrative">${c.t}</div><div class="data-section"><div class="data-label">History</div><div class="data-grid">`;
+c.d1.forEach(x=>h+=`<div><span style="color:var(--muted)">${x[0]}:</span> <strong>${x[1]}</strong></div>`);
+h+=`</div></div><div class="data-section"><div class="data-label">Labs</div><div class="data-grid">`;
+c.d2.forEach(x=>h+=`<div><span style="color:var(--muted)">${x[0]}:</span> <strong>${x[1]}</strong></div>`);
+h+=`</div></div>`;document.getElementById('caseContent').innerHTML=h;}
+function getQs(p){return[(p-1)*5+1,(p-1)*5+2,(p-1)*5+3,(p-1)*5+4,(p-1)*5+5];}
+function renderQs(p){const intro=intros[p],qs=getQs(p);
+let h=`<div class="phase-intro"><h2>${intro.i} ${intro.t}</h2><div class="resource-box"><div class="resource-title">📚 GUIDELINES</div><div class="resource-links">${intro.r}</div></div><p>${intro.d}</p><div class="learning-box"><div class="learning-title">🎯 Objectives</div><ul class="learning-list">`;
+intro.o.forEach(o=>h+=`<li>${o}</li>`);h+=`</ul></div></div>`;
+qs.forEach((qn,i)=>{const q=Qs[qn],s=st[qn];
+h+=`<div class="quiz-card"><div class="quiz-header"><div style="display:flex;align-items:center"><span class="quiz-num">${i+1}</span><span class="quiz-type">${q.ty}</span></div><span class="quiz-status ${s.done?(s.ok?'correct':'incorrect'):''}" id="st${qn}">${s.done?(s.ok?'✓':'✗'):'○'}</span></div>`;
+h+=`<div class="quiz-context">${q.cx}</div><div class="quiz-body"><div class="quiz-stem">${q.s}</div><div class="quiz-options" id="opts${qn}">`;
+q.o.forEach(opt=>{let cls=s.done?'disabled':'';if(s.done&&opt[0]===ans[qn])cls+=' correct';if(s.done&&opt[0]===s.pick&&!s.ok)cls+=' incorrect';
+h+=`<div class="quiz-option ${cls}" data-a="${opt[0]}" onclick="pick(${qn},this)"><span class="option-letter">${opt[0].toUpperCase()}</span><span class="option-text">${opt[1]}</span></div>`;});
+h+=`</div><div class="conf-section" id="cf${qn}" ${s.done?'style="display:none"':''}><div class="conf-btns">`;
+['low','med','high'].forEach(c=>h+=`<button class="conf-btn" onclick="setC(${qn},'${c}',this)">${{low:'Guess',med:'Some',high:'Sure'}[c]}</button>`);
+h+=`</div></div><button class="submit-btn" id="sub${qn}" onclick="submit(${qn})" disabled ${s.done?'style="display:none"':''}>Submit</button>`;
+h+=`<div class="explanation ${s.done?'visible '+(s.ok?'correct':'incorrect'):''}" id="exp${qn}"><div style="font-weight:600;margin-bottom:6px">${s.ok?'✓ Correct':'Review'}</div><div>${q.e}</div></div></div></div>`;});
+h+=`<div class="phase-summary" id="summary"><div class="summary-header"><div>Phase ${p} Complete!</div><div class="summary-score" id="score">0/5</div></div>`;
+if(p<4)h+=`<button class="next-btn" onclick="unlock(${p+1})">Continue →</button>`;
+else h+=`<p style="text-align:center;margin-top:14px;color:var(--green)">🎓 You mastered electrolytes and acid-base!</p>`;
+h+=`</div>`;document.getElementById('questionsPanel').innerHTML=h;}
+function pick(qn,el){if(st[qn].done)return;document.querySelectorAll(`#opts${qn} .quiz-option`).forEach(o=>o.classList.remove('selected'));el.classList.add('selected');st[qn].pick=el.dataset.a;chk(qn);}
+function setC(qn,lv,el){if(st[qn].done)return;document.querySelectorAll(`#cf${qn} .conf-btn`).forEach(b=>b.classList.remove('selected'));el.classList.add('selected');st[qn].conf=lv;chk(qn);}
+function chk(qn){document.getElementById(`sub${qn}`).disabled=!(st[qn].pick&&st[qn].conf);}
+function submit(qn){const s=st[qn];if(s.done)return;s.done=true;s.ok=s.pick===ans[qn];
+document.querySelectorAll(`#opts${qn} .quiz-option`).forEach(o=>{o.classList.add('disabled');if(o.dataset.a===ans[qn])o.classList.add('correct');else if(o.dataset.a===s.pick&&!s.ok)o.classList.add('incorrect');});
+document.getElementById(`exp${qn}`).classList.add('visible',s.ok?'correct':'incorrect');
+document.getElementById(`st${qn}`).textContent=s.ok?'✓':'✗';document.getElementById(`st${qn}`).className=`quiz-status ${s.ok?'correct':'incorrect'}`;
+document.getElementById(`sub${qn}`).style.display='none';document.getElementById(`cf${qn}`).style.display='none';
+updProg();chkDone();}
+function updProg(){const t=Object.values(st).filter(s=>s.done).length;document.getElementById('progressCount').textContent=`${t}/20`;document.getElementById('progressFill').style.width=`${t*5}%`;}
+function chkDone(){const qs=getQs(phase);if(qs.every(q=>st[q].done)&&!done[phase]){done[phase]=1;
+document.getElementById('score').textContent=`${qs.filter(q=>st[q].ok).length}/5`;
+document.getElementById('summary').style.display='block';document.querySelector(`.timeline-phase[data-phase="${phase}"]`).classList.add('completed');
+document.getElementById(`status${phase}`).textContent='✓';document.getElementById(`status${phase}`).className='phase-status done';}}
+function unlock(np){open[np]=1;goPhase(np);}
+function goPhase(p){if(!open[p])return;phase=p;
+document.querySelectorAll('.timeline-phase').forEach(ph=>{const pn=+ph.dataset.phase;ph.classList.remove('active','locked');if(pn===p)ph.classList.add('active');if(!open[pn])ph.classList.add('locked');});
+for(let i=1;i<=4;i++){const s=document.getElementById(`status${i}`);if(done[i]){s.textContent='✓';s.className='phase-status done';}else if(i===p){s.textContent='Current';s.className='phase-status current';}else if(open[i]){s.textContent='';}else{s.textContent='🔒';}}
+updateV(p);renderCase(p);renderQs(p);window.scrollTo({top:0});}
+document.addEventListener('DOMContentLoaded',()=>{updateV(1);renderCase(1);renderQs(1);});
+</script>
+</body>
+</html>
