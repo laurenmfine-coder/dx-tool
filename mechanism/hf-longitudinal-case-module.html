@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heart Failure: Maria's Journey - MechanismDx</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg-page: #f8f9fa; --bg-white: #ffffff; --bg-subtle: #f1f3f5;
+    --text-primary: #1a1a1a; --text-secondary: #5c5c5c; --text-muted: #8c8c8c;
+    --border: #e9ecef; --accent-primary: #2563eb; --accent-green: #16a34a;
+    --accent-amber: #d97706; --accent-red: #dc2626; --accent-purple: #7c3aed;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.04); --shadow-md: 0 2px 8px rgba(0,0,0,0.06);
+    --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+    --phase-diagnosis: #3b82f6; --phase-stable: #10b981; --phase-exacerbation: #f59e0b; --phase-advanced: #ef4444;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-page); color: var(--text-primary); line-height: 1.6; }
+
+.header { background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+.header-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+.logo-text { font-size: 20px; font-weight: 500; color: #1e293b; }
+.logo-accent { color: #2563eb; font-weight: 600; }
+.header-badge { display: flex; align-items: center; gap: 8px; padding: 6px 12px; background: linear-gradient(135deg, #fef3c7, #fde68a); border-radius: 20px; font-size: 12px; font-weight: 600; color: #92400e; }
+
+/* Patient Banner */
+.patient-banner { background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%); color: white; padding: 24px; }
+.patient-banner-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: auto 1fr auto; gap: 24px; align-items: center; }
+.patient-avatar { width: 80px; height: 80px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 36px; }
+.patient-info h1 { font-size: 24px; font-weight: 600; margin-bottom: 4px; }
+.patient-info p { font-size: 14px; opacity: 0.9; }
+.patient-vitals { display: flex; gap: 24px; }
+.vital-item { text-align: center; padding: 12px 20px; background: rgba(255,255,255,0.1); border-radius: var(--radius-md); }
+.vital-value { font-size: 20px; font-weight: 700; }
+.vital-label { font-size: 11px; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* Timeline Navigation */
+.timeline-nav { background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 0 24px; overflow-x: auto; }
+.timeline-inner { max-width: 1400px; margin: 0 auto; display: flex; gap: 0; }
+.timeline-phase { flex: 1; min-width: 200px; padding: 16px 20px; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.2s; position: relative; }
+.timeline-phase:hover { background: var(--bg-subtle); }
+.timeline-phase.active { border-bottom-color: var(--accent-primary); background: rgba(37,99,235,0.04); }
+.timeline-phase.completed { border-bottom-color: var(--accent-green); }
+.phase-header { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+.phase-icon { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; color: white; }
+.phase-icon.diagnosis { background: var(--phase-diagnosis); }
+.phase-icon.stable { background: var(--phase-stable); }
+.phase-icon.exacerbation { background: var(--phase-exacerbation); }
+.phase-icon.advanced { background: var(--phase-advanced); }
+.phase-title { font-size: 14px; font-weight: 600; }
+.phase-time { font-size: 12px; color: var(--text-muted); }
+.phase-status { position: absolute; top: 12px; right: 12px; font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
+.phase-status.current { background: #dbeafe; color: #1d4ed8; }
+.phase-status.done { background: #dcfce7; color: #166534; }
+.phase-questions { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+/* Main Content */
+.main-container { max-width: 1400px; margin: 0 auto; padding: 24px; display: grid; grid-template-columns: 320px 1fr; gap: 24px; }
+@media (max-width: 1024px) { .main-container { grid-template-columns: 1fr; } }
+
+/* Case Panel */
+.case-panel { position: sticky; top: 160px; height: fit-content; }
+.case-card { background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); }
+.case-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.case-header h3 { font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.case-phase-badge { font-size: 10px; padding: 3px 8px; border-radius: 10px; font-weight: 600; }
+.case-phase-badge.diagnosis { background: #dbeafe; color: #1d4ed8; }
+.case-phase-badge.stable { background: #dcfce7; color: #166534; }
+.case-phase-badge.exacerbation { background: #fef3c7; color: #92400e; }
+.case-phase-badge.advanced { background: #fee2e2; color: #991b1b; }
+
+.case-content { padding: 20px; }
+.case-narrative { font-family: 'Newsreader', Georgia, serif; font-size: 15px; line-height: 1.8; color: var(--text-secondary); margin-bottom: 16px; }
+.case-narrative strong { color: var(--text-primary); font-weight: 600; }
+.case-narrative em { color: var(--accent-primary); font-style: normal; font-weight: 500; }
+
+.case-data { background: var(--bg-subtle); border-radius: var(--radius-md); padding: 16px; margin-top: 16px; }
+.case-data-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 12px; }
+.data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.data-item { font-size: 12px; }
+.data-label { color: var(--text-muted); }
+.data-value { font-weight: 600; color: var(--text-primary); }
+.data-value.abnormal { color: var(--accent-red); }
+.data-value.improved { color: var(--accent-green); }
+
+.case-image { margin-top: 16px; background: #000; border-radius: var(--radius-md); padding: 16px; text-align: center; }
+.case-image img { max-width: 100%; border-radius: var(--radius-sm); }
+.case-image-caption { font-size: 11px; color: #888; margin-top: 8px; }
+
+/* Questions Panel */
+.questions-panel { }
+.phase-intro { background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; margin-bottom: 20px; }
+.phase-intro h2 { font-size: 20px; font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; }
+.phase-intro p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+.learning-objectives { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.learning-objectives h4 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-muted); margin-bottom: 10px; }
+.objective-list { list-style: none; }
+.objective-list li { font-size: 13px; color: var(--text-secondary); padding: 6px 0; padding-left: 24px; position: relative; }
+.objective-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent-primary); font-weight: bold; }
+
+/* Question Cards */
+.question-card { background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius-lg); margin-bottom: 16px; overflow: hidden; box-shadow: var(--shadow-sm); }
+.question-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.question-number { display: flex; align-items: center; gap: 10px; }
+.q-num { width: 28px; height: 28px; background: var(--accent-primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+.q-type { font-size: 12px; color: var(--text-muted); }
+.question-status { font-size: 11px; padding: 4px 10px; border-radius: 12px; font-weight: 600; }
+.question-status.unanswered { background: var(--bg-subtle); color: var(--text-muted); }
+.question-status.correct { background: #dcfce7; color: #166534; }
+.question-status.incorrect { background: #fee2e2; color: #991b1b; }
+
+.question-context { padding: 16px 20px; background: #fffbeb; border-bottom: 1px solid #fde68a; }
+.context-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #92400e; margin-bottom: 6px; }
+.context-text { font-size: 13px; color: #78350f; line-height: 1.6; }
+
+.question-body { padding: 20px; }
+.question-stem { font-size: 15px; font-weight: 500; line-height: 1.7; margin-bottom: 20px; }
+.question-stem code { background: #e0e7ff; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 13px; color: #3730a3; }
+
+.options-list { display: flex; flex-direction: column; gap: 10px; }
+.option-item { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; background: var(--bg-subtle); border: 2px solid transparent; border-radius: var(--radius-md); cursor: pointer; transition: all 0.15s; }
+.option-item:hover { background: var(--bg-white); border-color: var(--border); }
+.option-item.selected { border-color: var(--accent-primary); background: rgba(37,99,235,0.04); }
+.option-item.correct { border-color: var(--accent-green); background: rgba(22,163,74,0.08); }
+.option-item.incorrect { border-color: var(--accent-red); background: rgba(220,38,38,0.08); }
+.option-item.correct-answer { border-color: var(--accent-green); background: rgba(22,163,74,0.08); }
+.option-letter { width: 26px; height: 26px; background: var(--bg-white); border: 2px solid var(--border); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--text-muted); flex-shrink: 0; }
+.option-item.selected .option-letter { border-color: var(--accent-primary); color: var(--accent-primary); }
+.option-item.correct .option-letter, .option-item.correct-answer .option-letter { background: var(--accent-green); border-color: var(--accent-green); color: white; }
+.option-item.incorrect .option-letter { background: var(--accent-red); border-color: var(--accent-red); color: white; }
+.option-text { font-size: 14px; color: var(--text-secondary); line-height: 1.5; }
+
+.confidence-slider { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); }
+.confidence-label { font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 10px; display: flex; justify-content: space-between; }
+.confidence-track { display: flex; gap: 8px; }
+.confidence-btn { flex: 1; padding: 10px; border: 2px solid var(--border); border-radius: var(--radius-sm); background: var(--bg-white); cursor: pointer; text-align: center; font-size: 12px; font-weight: 600; color: var(--text-secondary); transition: all 0.15s; }
+.confidence-btn:hover { border-color: var(--accent-primary); }
+.confidence-btn.selected { border-color: var(--accent-primary); background: rgba(37,99,235,0.08); color: var(--accent-primary); }
+.confidence-btn.low { border-color: var(--accent-red); background: rgba(239,68,68,0.08); color: var(--accent-red); }
+.confidence-btn.medium { border-color: var(--accent-amber); background: rgba(245,158,11,0.08); color: var(--accent-amber); }
+.confidence-btn.high { border-color: var(--accent-green); background: rgba(22,163,74,0.08); color: var(--accent-green); }
+
+.submit-btn { margin-top: 16px; width: 100%; padding: 14px; background: var(--accent-primary); color: white; border: none; border-radius: var(--radius-md); font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+.submit-btn:hover { background: #1d4ed8; }
+.submit-btn:disabled { background: var(--bg-subtle); color: var(--text-muted); cursor: not-allowed; }
+
+/* Explanation */
+.explanation-panel { margin-top: 20px; padding: 20px; border-radius: var(--radius-md); display: none; }
+.explanation-panel.visible { display: block; }
+.explanation-panel.correct { background: #f0fdf4; border: 1px solid #86efac; }
+.explanation-panel.incorrect { background: #fef2f2; border: 1px solid #fecaca; }
+.explanation-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.explanation-icon { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; color: white; }
+.explanation-panel.correct .explanation-icon { background: var(--accent-green); }
+.explanation-panel.incorrect .explanation-icon { background: var(--accent-red); }
+.explanation-title { font-size: 14px; font-weight: 600; }
+.explanation-panel.correct .explanation-title { color: #166534; }
+.explanation-panel.incorrect .explanation-title { color: #991b1b; }
+.explanation-text { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+.explanation-text strong { color: var(--text-primary); }
+
+.mechanism-link { display: flex; align-items: center; gap: 12px; margin-top: 16px; padding: 12px 16px; background: rgba(37,99,235,0.08); border: 1px solid rgba(37,99,235,0.2); border-radius: var(--radius-md); text-decoration: none; }
+.mechanism-link:hover { background: rgba(37,99,235,0.12); }
+.mechanism-link-icon { width: 32px; height: 32px; background: var(--accent-primary); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; }
+.mechanism-link-text { flex: 1; }
+.mechanism-link-text h4 { font-size: 13px; font-weight: 600; color: var(--accent-primary); }
+.mechanism-link-text p { font-size: 11px; color: var(--text-muted); }
+
+/* Progress Summary */
+.phase-summary { background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; margin-top: 24px; }
+.summary-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.summary-title { font-size: 16px; font-weight: 600; }
+.summary-score { font-size: 24px; font-weight: 700; color: var(--accent-green); }
+.summary-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.summary-stat { text-align: center; padding: 16px; background: var(--bg-subtle); border-radius: var(--radius-md); }
+.summary-stat-value { font-size: 24px; font-weight: 700; }
+.summary-stat-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+.next-phase-btn { margin-top: 20px; width: 100%; padding: 16px; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: var(--radius-md); font-size: 15px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.next-phase-btn:hover { background: linear-gradient(135deg, #059669, #047857); }
+
+/* Calibration Feedback */
+.calibration-feedback { margin-top: 16px; padding: 16px; background: #faf5ff; border: 1px solid #e9d5ff; border-radius: var(--radius-md); }
+.calibration-title { font-size: 12px; font-weight: 600; color: #7c3aed; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+.calibration-text { font-size: 13px; color: #6b21a8; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<header class="header">
+    <div class="header-inner">
+        <div class="logo-text">Mechanism<span class="logo-accent">Dx</span></div>
+        <div class="header-badge">📖 Longitudinal Case Study</div>
+    </div>
+</header>
+
+<!-- Patient Banner -->
+<div class="patient-banner">
+    <div class="patient-banner-inner">
+        <div class="patient-avatar">👩🏽</div>
+        <div class="patient-info">
+            <h1>Maria Santos, 58 years old</h1>
+            <p>Follow Maria's journey from initial diagnosis through disease progression. Questions are anchored to specific moments in her care.</p>
+        </div>
+        <div class="patient-vitals">
+            <div class="vital-item">
+                <div class="vital-value" id="currentEF">--</div>
+                <div class="vital-label">Current EF</div>
+            </div>
+            <div class="vital-item">
+                <div class="vital-value" id="currentNYHA">--</div>
+                <div class="vital-label">NYHA Class</div>
+            </div>
+            <div class="vital-item">
+                <div class="vital-value" id="currentBNP">--</div>
+                <div class="vital-label">BNP</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Timeline Navigation -->
+<nav class="timeline-nav">
+    <div class="timeline-inner">
+        <div class="timeline-phase active" data-phase="1" onclick="switchPhase(1)">
+            <div class="phase-header">
+                <div class="phase-icon diagnosis">🔍</div>
+                <div>
+                    <div class="phase-title">Phase 1: Initial Diagnosis</div>
+                    <div class="phase-time">Day 1 - Emergency Department</div>
+                </div>
+            </div>
+            <div class="phase-questions">5 questions • Pathophysiology & Workup</div>
+            <span class="phase-status current">Current</span>
+        </div>
+        <div class="timeline-phase" data-phase="2" onclick="switchPhase(2)">
+            <div class="phase-header">
+                <div class="phase-icon stable">💚</div>
+                <div>
+                    <div class="phase-title">Phase 2: Stabilization</div>
+                    <div class="phase-time">Week 2-4 - Outpatient Optimization</div>
+                </div>
+            </div>
+            <div class="phase-questions">5 questions • GDMT & Monitoring</div>
+        </div>
+        <div class="timeline-phase" data-phase="3" onclick="switchPhase(3)">
+            <div class="phase-header">
+                <div class="phase-icon exacerbation">⚠️</div>
+                <div>
+                    <div class="phase-title">Phase 3: Exacerbation</div>
+                    <div class="phase-time">Month 6 - Acute Decompensation</div>
+                </div>
+            </div>
+            <div class="phase-questions">5 questions • Triggers & Acute Management</div>
+        </div>
+        <div class="timeline-phase" data-phase="4" onclick="switchPhase(4)">
+            <div class="phase-header">
+                <div class="phase-icon advanced">❤️</div>
+                <div>
+                    <div class="phase-title">Phase 4: Advanced Therapies</div>
+                    <div class="phase-time">Year 2 - Refractory HF</div>
+                </div>
+            </div>
+            <div class="phase-questions">5 questions • Devices & Transplant</div>
+        </div>
+    </div>
+</nav>
+
+<div class="main-container">
+    <!-- Case Panel (Left) -->
+    <aside class="case-panel">
+        <div class="case-card">
+            <div class="case-header">
+                <h3>📋 Clinical Snapshot</h3>
+                <span class="case-phase-badge diagnosis" id="casePhaseLabel">Phase 1</span>
+            </div>
+            <div class="case-content" id="caseContent">
+                <!-- Phase 1 Content -->
+                <div class="case-narrative">
+                    <strong>Maria Santos</strong> is a 58-year-old woman with a history of <em>hypertension</em> (poorly controlled) and <em>type 2 diabetes</em> who presents to the ED with <strong>3 weeks of progressive dyspnea on exertion</strong> and new <strong>orthopnea</strong> requiring 3 pillows to sleep.
+                    <br><br>
+                    She noticed <em>bilateral leg swelling</em> starting 2 weeks ago and has gained <strong>12 lbs</strong> in the past month despite "eating less." She denies chest pain but reports feeling her heart "racing" intermittently.
+                </div>
+                
+                <div class="case-data">
+                    <div class="case-data-title">Vital Signs</div>
+                    <div class="data-grid">
+                        <div class="data-item"><span class="data-label">BP:</span> <span class="data-value abnormal">168/98</span></div>
+                        <div class="data-item"><span class="data-label">HR:</span> <span class="data-value abnormal">102, irreg</span></div>
+                        <div class="data-item"><span class="data-label">RR:</span> <span class="data-value abnormal">24</span></div>
+                        <div class="data-item"><span class="data-label">SpO2:</span> <span class="data-value abnormal">91% RA</span></div>
+                        <div class="data-item"><span class="data-label">Temp:</span> <span class="data-value">98.4°F</span></div>
+                        <div class="data-item"><span class="data-label">Weight:</span> <span class="data-value">198 lbs</span></div>
+                    </div>
+                </div>
+                
+                <div class="case-data" style="margin-top: 12px;">
+                    <div class="case-data-title">Physical Exam</div>
+                    <div class="data-grid">
+                        <div class="data-item"><span class="data-label">JVP:</span> <span class="data-value abnormal">12 cm</span></div>
+                        <div class="data-item"><span class="data-label">Lungs:</span> <span class="data-value abnormal">Bibasilar crackles</span></div>
+                        <div class="data-item"><span class="data-label">Heart:</span> <span class="data-value abnormal">S3 gallop, irreg</span></div>
+                        <div class="data-item"><span class="data-label">Ext:</span> <span class="data-value abnormal">2+ pitting edema</span></div>
+                    </div>
+                </div>
+                
+                <div class="case-data" style="margin-top: 12px;">
+                    <div class="case-data-title">Initial Labs</div>
+                    <div class="data-grid">
+                        <div class="data-item"><span class="data-label">BNP:</span> <span class="data-value abnormal">1,847 pg/mL</span></div>
+                        <div class="data-item"><span class="data-label">Troponin:</span> <span class="data-value">0.04 ng/mL</span></div>
+                        <div class="data-item"><span class="data-label">Cr:</span> <span class="data-value abnormal">1.4 mg/dL</span></div>
+                        <div class="data-item"><span class="data-label">K:</span> <span class="data-value">4.2 mEq/L</span></div>
+                        <div class="data-item"><span class="data-label">HbA1c:</span> <span class="data-value abnormal">8.9%</span></div>
+                        <div class="data-item"><span class="data-label">TSH:</span> <span class="data-value">2.1 mIU/L</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Questions Panel (Right) -->
+    <main class="questions-panel">
+        <div class="phase-intro" id="phaseIntro">
+            <h2><span style="color: var(--phase-diagnosis);">🔍</span> Phase 1: Initial Diagnosis</h2>
+            <p>Maria presents with classic signs of new-onset heart failure. Your goal is to understand the pathophysiology driving her presentation, interpret the diagnostic workup, and classify her heart failure type.</p>
+            <div class="learning-objectives">
+                <h4>Learning Objectives</h4>
+                <ul class="objective-list">
+                    <li>Interpret signs and symptoms of volume overload</li>
+                    <li>Understand compensatory mechanisms (RAAS, SNS, natriuretic peptides)</li>
+                    <li>Differentiate HFrEF from HFpEF based on clinical and echo findings</li>
+                    <li>Recognize the significance of an S3 gallop</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Question 1 -->
+        <div class="question-card" id="q1">
+            <div class="question-header">
+                <div class="question-number">
+                    <span class="q-num">1</span>
+                    <span class="q-type">Pathophysiology</span>
+                </div>
+                <span class="question-status unanswered" id="q1-status">Not answered</span>
+            </div>
+            <div class="question-context">
+                <div class="context-label">📍 Case Connection</div>
+                <div class="context-text">Maria's BNP is markedly elevated at <strong>1,847 pg/mL</strong>. Her exam shows JVP elevation and an S3 gallop.</div>
+            </div>
+            <div class="question-body">
+                <div class="question-stem">
+                    What is the PRIMARY stimulus for BNP release in Maria's presentation?
+                </div>
+                <div class="options-list" id="q1-options">
+                    <div class="option-item" data-answer="a" onclick="selectOption(1, this)">
+                        <span class="option-letter">A</span>
+                        <span class="option-text">Myocardial ischemia causing cardiomyocyte injury</span>
+                    </div>
+                    <div class="option-item" data-answer="b" onclick="selectOption(1, this)">
+                        <span class="option-letter">B</span>
+                        <span class="option-text">Ventricular wall stretch from elevated filling pressures</span>
+                    </div>
+                    <div class="option-item" data-answer="c" onclick="selectOption(1, this)">
+                        <span class="option-letter">C</span>
+                        <span class="option-text">Sympathetic nervous system activation</span>
+                    </div>
+                    <div class="option-item" data-answer="d" onclick="selectOption(1, this)">
+                        <span class="option-letter">D</span>
+                        <span class="option-text">Renal hypoperfusion triggering RAAS</span>
+                    </div>
+                </div>
+                <div class="confidence-slider" id="q1-confidence">
+                    <div class="confidence-label">
+                        <span>How confident are you?</span>
+                        <span id="q1-conf-value">Select confidence</span>
+                    </div>
+                    <div class="confidence-track">
+                        <button class="confidence-btn" onclick="selectConfidence(1, 'low', this)">Guessing</button>
+                        <button class="confidence-btn" onclick="selectConfidence(1, 'medium', this)">Somewhat Sure</button>
+                        <button class="confidence-btn" onclick="selectConfidence(1, 'high', this)">Very Confident</button>
+                    </div>
+                </div>
+                <button class="submit-btn" id="q1-submit" onclick="submitAnswer(1)" disabled>Submit Answer</button>
+                <div class="explanation-panel" id="q1-explanation">
+                    <div class="explanation-header">
+                        <div class="explanation-icon">✓</div>
+                        <div class="explanation-title" id="q1-exp-title">Correct!</div>
+                    </div>
+                    <div class="explanation-text">
+                        <strong>BNP (B-type natriuretic peptide)</strong> is released primarily in response to <strong>ventricular wall stretch</strong> from volume or pressure overload. Maria's elevated filling pressures (evidenced by JVP elevation, S3 gallop, and pulmonary congestion) cause myocyte stretching, triggering BNP release.
+                        <br><br>
+                        BNP serves as a <strong>counter-regulatory mechanism</strong> to RAAS - it promotes natriuresis, diuresis, and vasodilation. However, in heart failure, this protective effect is overwhelmed by RAAS and SNS activation.
+                        <br><br>
+                        <strong>Clinical Pearl:</strong> The S3 gallop Maria has indicates rapid ventricular filling into a compliant but volume-overloaded ventricle - it's one of the most specific findings for elevated filling pressures.
+                    </div>
+                    <a href="#pathway-bnp" class="mechanism-link">
+                        <div class="mechanism-link-icon">🔬</div>
+                        <div class="mechanism-link-text">
+                            <h4>Explore: Natriuretic Peptide Pathway</h4>
+                            <p>See how BNP fits into the neurohormonal cascade</p>
+                        </div>
+                    </a>
+                    <div class="calibration-feedback" id="q1-calibration">
+                        <div class="calibration-title">📊 Calibration Check</div>
+                        <div class="calibration-text" id="q1-cal-text"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question-card" id="q2">
+            <div class="question-header">
+                <div class="question-number">
+                    <span class="q-num">2</span>
+                    <span class="q-type">Physical Exam</span>
+                </div>
+                <span class="question-status unanswered" id="q2-status">Not answered</span>
+            </div>
+            <div class="question-context">
+                <div class="context-label">📍 Case Connection</div>
+                <div class="context-text">Maria's heart rate is <strong>102, irregular</strong>. Her EKG shows absence of P waves with an irregularly irregular rhythm.</div>
+            </div>
+            <div class="question-body">
+                <div class="question-stem">
+                    How does Maria's new atrial fibrillation contribute to her heart failure pathophysiology?
+                </div>
+                <div class="options-list" id="q2-options">
+                    <div class="option-item" data-answer="a" onclick="selectOption(2, this)">
+                        <span class="option-letter">A</span>
+                        <span class="option-text">Increases myocardial oxygen demand through tachycardia</span>
+                    </div>
+                    <div class="option-item" data-answer="b" onclick="selectOption(2, this)">
+                        <span class="option-letter">B</span>
+                        <span class="option-text">Loss of atrial kick reduces ventricular filling by 15-25%</span>
+                    </div>
+                    <div class="option-item" data-answer="c" onclick="selectOption(2, this)">
+                        <span class="option-letter">C</span>
+                        <span class="option-text">Both A and B contribute to worsening cardiac output</span>
+                    </div>
+                    <div class="option-item" data-answer="d" onclick="selectOption(2, this)">
+                        <span class="option-letter">D</span>
+                        <span class="option-text">AFib only increases stroke risk, not hemodynamic compromise</span>
+                    </div>
+                </div>
+                <div class="confidence-slider" id="q2-confidence">
+                    <div class="confidence-label">
+                        <span>How confident are you?</span>
+                        <span id="q2-conf-value">Select confidence</span>
+                    </div>
+                    <div class="confidence-track">
+                        <button class="confidence-btn" onclick="selectConfidence(2, 'low', this)">Guessing</button>
+                        <button class="confidence-btn" onclick="selectConfidence(2, 'medium', this)">Somewhat Sure</button>
+                        <button class="confidence-btn" onclick="selectConfidence(2, 'high', this)">Very Confident</button>
+                    </div>
+                </div>
+                <button class="submit-btn" id="q2-submit" onclick="submitAnswer(2)" disabled>Submit Answer</button>
+                <div class="explanation-panel" id="q2-explanation">
+                    <div class="explanation-header">
+                        <div class="explanation-icon">✓</div>
+                        <div class="explanation-title" id="q2-exp-title">Correct!</div>
+                    </div>
+                    <div class="explanation-text">
+                        Atrial fibrillation impairs cardiac output through <strong>two mechanisms</strong>:
+                        <br><br>
+                        <strong>1. Loss of Atrial Kick:</strong> The coordinated atrial contraction normally contributes 15-25% of ventricular filling. In AFib, this "atrial kick" is lost, reducing preload and stroke volume.
+                        <br><br>
+                        <strong>2. Tachycardia:</strong> Rapid ventricular rates shorten diastolic filling time AND increase myocardial oxygen demand. This creates a supply-demand mismatch.
+                        <br><br>
+                        <strong>For Maria:</strong> Her rate of 102 with AFib means she's losing both the atrial contribution AND has reduced filling time. This is why rate control is a key early intervention.
+                    </div>
+                    <a href="#pathway-afib" class="mechanism-link">
+                        <div class="mechanism-link-icon">🔬</div>
+                        <div class="mechanism-link-text">
+                            <h4>Explore: AFib + HF Interaction</h4>
+                            <p>Bidirectional relationship between AFib and heart failure</p>
+                        </div>
+                    </a>
+                    <div class="calibration-feedback" id="q2-calibration">
+                        <div class="calibration-title">📊 Calibration Check</div>
+                        <div class="calibration-text" id="q2-cal-text"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question-card" id="q3">
+            <div class="question-header">
+                <div class="question-number">
+                    <span class="q-num">3</span>
+                    <span class="q-type">Diagnostic Interpretation</span>
+                </div>
+                <span class="question-status unanswered" id="q3-status">Not answered</span>
+            </div>
+            <div class="question-context">
+                <div class="context-label">📍 Case Connection</div>
+                <div class="context-text">Maria's echocardiogram returns: <strong>EF 32%</strong>, dilated LV (LVEDD 6.2 cm), moderate mitral regurgitation, estimated PASP 52 mmHg.</div>
+            </div>
+            <div class="question-body">
+                <div class="question-stem">
+                    Based on Maria's echocardiogram findings, which classification best describes her heart failure?
+                </div>
+                <div class="options-list" id="q3-options">
+                    <div class="option-item" data-answer="a" onclick="selectOption(3, this)">
+                        <span class="option-letter">A</span>
+                        <span class="option-text">HFpEF (Heart Failure with Preserved Ejection Fraction)</span>
+                    </div>
+                    <div class="option-item" data-answer="b" onclick="selectOption(3, this)">
+                        <span class="option-letter">B</span>
+                        <span class="option-text">HFrEF (Heart Failure with Reduced Ejection Fraction)</span>
+                    </div>
+                    <div class="option-item" data-answer="c" onclick="selectOption(3, this)">
+                        <span class="option-letter">C</span>
+                        <span class="option-text">HFmrEF (Heart Failure with Mildly Reduced Ejection Fraction)</span>
+                    </div>
+                    <div class="option-item" data-answer="d" onclick="selectOption(3, this)">
+                        <span class="option-letter">D</span>
+                        <span class="option-text">Right heart failure only</span>
+                    </div>
+                </div>
+                <div class="confidence-slider" id="q3-confidence">
+                    <div class="confidence-label">
+                        <span>How confident are you?</span>
+                        <span id="q3-conf-value">Select confidence</span>
+                    </div>
+                    <div class="confidence-track">
+                        <button class="confidence-btn" onclick="selectConfidence(3, 'low', this)">Guessing</button>
+                        <button class="confidence-btn" onclick="selectConfidence(3, 'medium', this)">Somewhat Sure</button>
+                        <button class="confidence-btn" onclick="selectConfidence(3, 'high', this)">Very Confident</button>
+                    </div>
+                </div>
+                <button class="submit-btn" id="q3-submit" onclick="submitAnswer(3)" disabled>Submit Answer</button>
+                <div class="explanation-panel" id="q3-explanation">
+                    <div class="explanation-header">
+                        <div class="explanation-icon">✓</div>
+                        <div class="explanation-title" id="q3-exp-title">Correct!</div>
+                    </div>
+                    <div class="explanation-text">
+                        Maria has <strong>HFrEF</strong> based on her EF of 32% (≤40% defines HFrEF per guidelines).
+                        <br><br>
+                        <strong>Classification Thresholds (2022 AHA/ACC/HFSA):</strong><br>
+                        • HFrEF: EF ≤40%<br>
+                        • HFmrEF: EF 41-49%<br>
+                        • HFpEF: EF ≥50%
+                        <br><br>
+                        <strong>Key Echo Findings:</strong><br>
+                        • <strong>Dilated LV (6.2 cm)</strong> - indicates eccentric remodeling from volume overload<br>
+                        • <strong>Moderate MR</strong> - often secondary to LV dilation (functional MR)<br>
+                        • <strong>Elevated PASP (52 mmHg)</strong> - indicates pulmonary hypertension from elevated left-sided pressures
+                        <br><br>
+                        <strong>Why This Matters:</strong> HFrEF has the strongest evidence for GDMT (ACEi/ARB/ARNI, beta-blockers, MRAs, SGLT2i) with mortality benefit.
+                    </div>
+                    <a href="#pathway-hfref" class="mechanism-link">
+                        <div class="mechanism-link-icon">🔬</div>
+                        <div class="mechanism-link-text">
+                            <h4>Explore: HFrEF vs HFpEF Mechanisms</h4>
+                            <p>Compare systolic vs diastolic dysfunction pathways</p>
+                        </div>
+                    </a>
+                    <div class="calibration-feedback" id="q3-calibration">
+                        <div class="calibration-title">📊 Calibration Check</div>
+                        <div class="calibration-text" id="q3-cal-text"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question-card" id="q4">
+            <div class="question-header">
+                <div class="question-number">
+                    <span class="q-num">4</span>
+                    <span class="q-type">Compensation Mechanisms</span>
+                </div>
+                <span class="question-status unanswered" id="q4-status">Not answered</span>
+            </div>
+            <div class="question-context">
+                <div class="context-label">📍 Case Connection</div>
+                <div class="context-text">Maria's creatinine is <strong>1.4 mg/dL</strong> (baseline unknown). She reports decreased urine output over the past week.</div>
+            </div>
+            <div class="question-body">
+                <div class="question-stem">
+                    Maria's renal dysfunction in the setting of heart failure is MOST likely due to which compensatory mechanism becoming maladaptive?
+                </div>
+                <div class="options-list" id="q4-options">
+                    <div class="option-item" data-answer="a" onclick="selectOption(4, this)">
+                        <span class="option-letter">A</span>
+                        <span class="option-text">RAAS activation causing efferent arteriolar vasoconstriction and reduced GFR</span>
+                    </div>
+                    <div class="option-item" data-answer="b" onclick="selectOption(4, this)">
+                        <span class="option-letter">B</span>
+                        <span class="option-text">BNP-mediated natriuresis causing excessive sodium loss</span>
+                    </div>
+                    <div class="option-item" data-answer="c" onclick="selectOption(4, this)">
+                        <span class="option-letter">C</span>
+                        <span class="option-text">Direct myocardial toxicity from elevated catecholamines</span>
+                    </div>
+                    <div class="option-item" data-answer="d" onclick="selectOption(4, this)">
+                        <span class="option-letter">D</span>
+                        <span class="option-text">Autoimmune glomerulonephritis triggered by cardiac inflammation</span>
+                    </div>
+                </div>
+                <div class="confidence-slider" id="q4-confidence">
+                    <div class="confidence-label">
+                        <span>How confident are you?</span>
+                        <span id="q4-conf-value">Select confidence</span>
+                    </div>
+                    <div class="confidence-track">
+                        <button class="confidence-btn" onclick="selectConfidence(4, 'low', this)">Guessing</button>
+                        <button class="confidence-btn" onclick="selectConfidence(4, 'medium', this)">Somewhat Sure</button>
+                        <button class="confidence-btn" onclick="selectConfidence(4, 'high', this)">Very Confident</button>
+                    </div>
+                </div>
+                <button class="submit-btn" id="q4-submit" onclick="submitAnswer(4)" disabled>Submit Answer</button>
+                <div class="explanation-panel" id="q4-explanation">
+                    <div class="explanation-header">
+                        <div class="explanation-icon">✓</div>
+                        <div class="explanation-title" id="q4-exp-title">Correct!</div>
+                    </div>
+                    <div class="explanation-text">
+                        <strong>Cardiorenal Syndrome Type 1</strong> - Acute HF causes renal dysfunction through multiple mechanisms, but RAAS activation is central:
+                        <br><br>
+                        <strong>The Maladaptive Cascade:</strong><br>
+                        1. Reduced cardiac output → decreased renal perfusion<br>
+                        2. Kidneys sense "hypovolemia" → activate RAAS<br>
+                        3. Angiotensin II constricts efferent arteriole (initially maintains GFR)<br>
+                        4. But also causes systemic vasoconstriction → increased afterload → worsening HF<br>
+                        5. Aldosterone → sodium retention → more volume overload
+                        <br><br>
+                        <strong>Clinical Implication:</strong> This is why ACEi/ARBs are cornerstone HFrEF therapy - they break this cycle. The initial Cr bump often seen is acceptable if &lt;30% and stabilizes.
+                    </div>
+                    <a href="#pathway-raas" class="mechanism-link">
+                        <div class="mechanism-link-icon">🔬</div>
+                        <div class="mechanism-link-text">
+                            <h4>Explore: RAAS in Heart Failure</h4>
+                            <p>From compensation to maladaptation</p>
+                        </div>
+                    </a>
+                    <div class="calibration-feedback" id="q4-calibration">
+                        <div class="calibration-title">📊 Calibration Check</div>
+                        <div class="calibration-text" id="q4-cal-text"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question-card" id="q5">
+            <div class="question-header">
+                <div class="question-number">
+                    <span class="q-num">5</span>
+                    <span class="q-type">Initial Management</span>
+                </div>
+                <span class="question-status unanswered" id="q5-status">Not answered</span>
+            </div>
+            <div class="question-context">
+                <div class="context-label">📍 Case Connection</div>
+                <div class="context-text">Maria is admitted with acute decompensated HFrEF. Her BP is 168/98, she's hypoxic on room air, and has significant volume overload.</div>
+            </div>
+            <div class="question-body">
+                <div class="question-stem">
+                    What is the MOST appropriate initial therapy for Maria's acute decompensation?
+                </div>
+                <div class="options-list" id="q5-options">
+                    <div class="option-item" data-answer="a" onclick="selectOption(5, this)">
+                        <span class="option-letter">A</span>
+                        <span class="option-text">IV loop diuretic (furosemide) for decongestion</span>
+                    </div>
+                    <div class="option-item" data-answer="b" onclick="selectOption(5, this)">
+                        <span class="option-letter">B</span>
+                        <span class="option-text">Start high-dose beta-blocker for rate control</span>
+                    </div>
+                    <div class="option-item" data-answer="c" onclick="selectOption(5, this)">
+                        <span class="option-letter">C</span>
+                        <span class="option-text">Dobutamine infusion for inotropic support</span>
+                    </div>
+                    <div class="option-item" data-answer="d" onclick="selectOption(5, this)">
+                        <span class="option-letter">D</span>
+                        <span class="option-text">Emergent cardioversion for atrial fibrillation</span>
+                    </div>
+                </div>
+                <div class="confidence-slider" id="q5-confidence">
+                    <div class="confidence-label">
+                        <span>How confident are you?</span>
+                        <span id="q5-conf-value">Select confidence</span>
+                    </div>
+                    <div class="confidence-track">
+                        <button class="confidence-btn" onclick="selectConfidence(5, 'low', this)">Guessing</button>
+                        <button class="confidence-btn" onclick="selectConfidence(5, 'medium', this)">Somewhat Sure</button>
+                        <button class="confidence-btn" onclick="selectConfidence(5, 'high', this)">Very Confident</button>
+                    </div>
+                </div>
+                <button class="submit-btn" id="q5-submit" onclick="submitAnswer(5)" disabled>Submit Answer</button>
+                <div class="explanation-panel" id="q5-explanation">
+                    <div class="explanation-header">
+                        <div class="explanation-icon">✓</div>
+                        <div class="explanation-title" id="q5-exp-title">Correct!</div>
+                    </div>
+                    <div class="explanation-text">
+                        <strong>IV diuretics are first-line</strong> for acute decompensated HF with volume overload ("wet" presentation).
+                        <br><br>
+                        <strong>Why Loop Diuretics First:</strong><br>
+                        • Maria is "warm and wet" (adequate perfusion + congestion)<br>
+                        • Decongestion improves symptoms AND hemodynamics<br>
+                        • Her elevated BP (168/98) indicates she can tolerate diuresis<br>
+                        • Usually 1-2x home oral dose given IV (or 40-80mg if diuretic-naive)
+                        <br><br>
+                        <strong>Why NOT the Other Options:</strong><br>
+                        • <strong>B:</strong> Never start/increase beta-blockers during acute decompensation<br>
+                        • <strong>C:</strong> Dobutamine for "cold" profiles (hypoperfusion) - Maria is "warm"<br>
+                        • <strong>D:</strong> Rate control first; cardioversion not emergent if hemodynamically stable
+                        <br><br>
+                        <strong>Next Steps:</strong> After initial diuresis, supplemental O2, will add GDMT (ACEi, beta-blocker, MRA, SGLT2i) before discharge.
+                    </div>
+                    <a href="#pathway-diuretics" class="mechanism-link">
+                        <div class="mechanism-link-icon">🔬</div>
+                        <div class="mechanism-link-text">
+                            <h4>Explore: Diuretic Mechanisms</h4>
+                            <p>Loop vs thiazide vs MRA action sites</p>
+                        </div>
+                    </a>
+                    <div class="calibration-feedback" id="q5-calibration">
+                        <div class="calibration-title">📊 Calibration Check</div>
+                        <div class="calibration-text" id="q5-cal-text"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phase Summary (hidden until complete) -->
+        <div class="phase-summary" id="phaseSummary" style="display: none;">
+            <div class="summary-header">
+                <div class="summary-title">Phase 1 Complete! 🎉</div>
+                <div class="summary-score" id="phaseScore">0/5</div>
+            </div>
+            <div class="summary-stats">
+                <div class="summary-stat">
+                    <div class="summary-stat-value" id="correctCount">0</div>
+                    <div class="summary-stat-label">Correct</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="summary-stat-value" id="avgConfidence">--</div>
+                    <div class="summary-stat-label">Avg Confidence</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="summary-stat-value" id="calibrationScore">--</div>
+                    <div class="summary-stat-label">Calibration</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="summary-stat-value">+50</div>
+                    <div class="summary-stat-label">XP Earned</div>
+                </div>
+            </div>
+            <button class="next-phase-btn" onclick="switchPhase(2)">
+                Continue to Phase 2: Stabilization →
+            </button>
+        </div>
+    </main>
+</div>
+
+<script>
+// Answer key
+const correctAnswers = {
+    1: 'b', // BNP from wall stretch
+    2: 'c', // Both tachycardia and loss of atrial kick
+    3: 'b', // HFrEF
+    4: 'a', // RAAS causing renal dysfunction
+    5: 'a'  // IV diuretics
+};
+
+// State tracking
+const questionState = {};
+for (let i = 1; i <= 5; i++) {
+    questionState[i] = { answered: false, selected: null, confidence: null, correct: false };
+}
+
+// Phase data for patient vitals
+const phaseData = {
+    1: { ef: '32%', nyha: 'III-IV', bnp: '1,847' },
+    2: { ef: '35%', nyha: 'II', bnp: '420' },
+    3: { ef: '28%', nyha: 'IV', bnp: '2,340' },
+    4: { ef: '20%', nyha: 'IV', bnp: '3,100' }
+};
+
+function updateVitals(phase) {
+    const data = phaseData[phase];
+    document.getElementById('currentEF').textContent = data.ef;
+    document.getElementById('currentNYHA').textContent = data.nyha;
+    document.getElementById('currentBNP').textContent = data.bnp;
+}
+
+function selectOption(qNum, el) {
+    if (questionState[qNum].answered) return;
+    
+    const options = document.querySelectorAll(`#q${qNum}-options .option-item`);
+    options.forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    questionState[qNum].selected = el.dataset.answer;
+    checkSubmitEnabled(qNum);
+}
+
+function selectConfidence(qNum, level, el) {
+    if (questionState[qNum].answered) return;
+    
+    const buttons = document.querySelectorAll(`#q${qNum}-confidence .confidence-btn`);
+    buttons.forEach(b => {
+        b.classList.remove('selected', 'low', 'medium', 'high');
+    });
+    el.classList.add('selected', level);
+    questionState[qNum].confidence = level;
+    
+    const labels = { low: 'Guessing (33%)', medium: 'Somewhat Sure (66%)', high: 'Very Confident (90%)' };
+    document.getElementById(`q${qNum}-conf-value`).textContent = labels[level];
+    checkSubmitEnabled(qNum);
+}
+
+function checkSubmitEnabled(qNum) {
+    const btn = document.getElementById(`q${qNum}-submit`);
+    btn.disabled = !(questionState[qNum].selected && questionState[qNum].confidence);
+}
+
+function submitAnswer(qNum) {
+    const state = questionState[qNum];
+    if (state.answered) return;
+    
+    state.answered = true;
+    state.correct = state.selected === correctAnswers[qNum];
+    
+    // Update options display
+    const options = document.querySelectorAll(`#q${qNum}-options .option-item`);
+    options.forEach(o => {
+        if (o.dataset.answer === correctAnswers[qNum]) {
+            o.classList.add('correct-answer');
+        } else if (o.dataset.answer === state.selected && !state.correct) {
+            o.classList.add('incorrect');
+        }
+    });
+    
+    // Show explanation
+    const expPanel = document.getElementById(`q${qNum}-explanation`);
+    expPanel.classList.add('visible', state.correct ? 'correct' : 'incorrect');
+    
+    const expTitle = document.getElementById(`q${qNum}-exp-title`);
+    const expIcon = expPanel.querySelector('.explanation-icon');
+    if (state.correct) {
+        expTitle.textContent = 'Correct!';
+        expIcon.textContent = '✓';
+    } else {
+        expTitle.textContent = 'Not quite - here\'s why:';
+        expIcon.textContent = '✗';
+    }
+    
+    // Calibration feedback
+    const confMap = { low: 0.33, medium: 0.66, high: 0.90 };
+    const expectedProb = confMap[state.confidence];
+    const actual = state.correct ? 1 : 0;
+    
+    let calText = '';
+    if (state.correct && state.confidence === 'high') {
+        calText = '✓ Well-calibrated: You were confident and correct!';
+    } else if (state.correct && state.confidence === 'low') {
+        calText = '📈 Underconfident: You knew more than you thought! Trust your knowledge.';
+    } else if (!state.correct && state.confidence === 'high') {
+        calText = '⚠️ Overconfident: High confidence but incorrect. This is a key learning opportunity - what made you sure?';
+    } else if (!state.correct && state.confidence === 'low') {
+        calText = '✓ Calibrated uncertainty: You recognized this was a guess. Good metacognition!';
+    } else {
+        calText = state.correct ? '✓ Reasonable confidence matched outcome.' : 'Moderate confidence, but incorrect. Review the mechanism.';
+    }
+    document.getElementById(`q${qNum}-cal-text`).textContent = calText;
+    
+    // Update status badge
+    const status = document.getElementById(`q${qNum}-status`);
+    status.textContent = state.correct ? 'Correct' : 'Incorrect';
+    status.classList.remove('unanswered');
+    status.classList.add(state.correct ? 'correct' : 'incorrect');
+    
+    // Hide submit button
+    document.getElementById(`q${qNum}-submit`).style.display = 'none';
+    
+    // Check if phase complete
+    checkPhaseComplete();
+}
+
+function checkPhaseComplete() {
+    const allAnswered = Object.values(questionState).every(q => q.answered);
+    if (allAnswered) {
+        const correct = Object.values(questionState).filter(q => q.correct).length;
+        document.getElementById('phaseScore').textContent = `${correct}/5`;
+        document.getElementById('correctCount').textContent = correct;
+        
+        // Calculate average confidence
+        const confValues = { low: 33, medium: 66, high: 90 };
+        const avgConf = Math.round(Object.values(questionState).reduce((sum, q) => sum + confValues[q.confidence], 0) / 5);
+        document.getElementById('avgConfidence').textContent = `${avgConf}%`;
+        
+        // Calibration score (simplified)
+        const expectedCorrect = Object.values(questionState).reduce((sum, q) => sum + (confValues[q.confidence] / 100), 0);
+        const calibration = Math.round(100 - Math.abs(correct - expectedCorrect) * 20);
+        document.getElementById('calibrationScore').textContent = `${calibration}%`;
+        
+        document.getElementById('phaseSummary').style.display = 'block';
+        document.getElementById('phaseSummary').scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+function switchPhase(phase) {
+    // Update timeline
+    document.querySelectorAll('.timeline-phase').forEach(p => {
+        p.classList.remove('active');
+        if (parseInt(p.dataset.phase) < phase) {
+            p.classList.add('completed');
+            p.querySelector('.phase-status')?.classList.remove('current');
+            p.querySelector('.phase-status')?.classList.add('done');
+            if (p.querySelector('.phase-status')) p.querySelector('.phase-status').textContent = 'Done';
+        }
+    });
+    document.querySelector(`.timeline-phase[data-phase="${phase}"]`).classList.add('active');
+    
+    // Update vitals
+    updateVitals(phase);
+    
+    // Update case content (would load different content for each phase)
+    const phaseLabels = ['', 'Phase 1', 'Phase 2', 'Phase 3', 'Phase 4'];
+    const phaseBadgeClasses = ['', 'diagnosis', 'stable', 'exacerbation', 'advanced'];
+    document.getElementById('casePhaseLabel').textContent = phaseLabels[phase];
+    document.getElementById('casePhaseLabel').className = `case-phase-badge ${phaseBadgeClasses[phase]}`;
+    
+    // In a full implementation, would load different case content and questions for each phase
+    if (phase > 1) {
+        alert(`Phase ${phase} content would load here with new case developments and questions specific to Maria's journey at that point in time.`);
+    }
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    updateVitals(1);
+});
+</script>
+
+</body>
+</html>
