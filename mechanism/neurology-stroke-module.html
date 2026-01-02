@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neurology: Margaret's Stroke - MechanismDx</title>
+<style>
+:root{--bg-page:#f8f9fa;--bg-white:#fff;--bg-subtle:#f1f3f5;--text-primary:#1a1a1a;--text-secondary:#5c5c5c;--text-muted:#8c8c8c;--border:#e9ecef;--accent:#7c3aed;--green:#16a34a;--red:#dc2626;--radius:8px}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Inter',system-ui,sans-serif;background:var(--bg-page);color:var(--text-primary);line-height:1.6}
+.header{background:var(--bg-white);border-bottom:1px solid var(--border);padding:16px 24px}.header-inner{max-width:1200px;margin:0 auto}
+.module-header{background:var(--bg-white);border-bottom:1px solid var(--border);padding:24px}.module-header-inner{max-width:1200px;margin:0 auto}
+.module-title{display:flex;align-items:center;gap:16px}.module-icon{width:56px;height:56px;background:linear-gradient(135deg,#ede9fe,#ddd6fe);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:28px}
+.module-title h1{font-size:24px;font-weight:600}.module-title p{color:var(--text-secondary);font-size:14px}
+.patient-banner{background:linear-gradient(135deg,#5b21b6,#7c3aed);color:#fff;padding:20px 24px}
+.patient-banner-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.patient-info{flex:1}.patient-name{font-size:16px;font-weight:600}.patient-details{font-size:13px;opacity:.9}
+.patient-vitals{display:flex;gap:16px}.vital{text-align:center;padding:8px 14px;background:rgba(255,255,255,.1);border-radius:8px}
+.vital-value{font-size:18px;font-weight:700}.vital-label{font-size:10px;opacity:.8}
+.timeline-nav{background:var(--bg-white);border-bottom:1px solid var(--border);padding:0 24px}
+.timeline-inner{max-width:1200px;margin:0 auto;display:flex}.timeline-phase{flex:1;padding:14px;cursor:pointer;border-bottom:3px solid transparent;text-align:center}
+.timeline-phase.active{border-bottom-color:var(--accent);background:rgba(124,58,237,.04)}.timeline-phase.completed{border-bottom-color:var(--green)}
+.timeline-phase.locked{opacity:.4;cursor:not-allowed}.phase-label{font-size:12px;font-weight:600}.phase-time{font-size:10px;color:var(--text-muted)}
+.phase-status{font-size:10px;margin-top:4px}.phase-status.current{color:var(--accent)}.phase-status.done{color:var(--green)}
+.main-container{max-width:1200px;margin:0 auto;padding:24px;display:grid;grid-template-columns:280px 1fr;gap:24px}
+@media(max-width:900px){.main-container{grid-template-columns:1fr}}
+.card{background:var(--bg-white);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;overflow:hidden}
+.card-header{padding:14px 16px;border-bottom:1px solid var(--border);font-size:13px;font-weight:600}.card-content{padding:16px}
+.case-narrative{font-size:13px;line-height:1.7;color:var(--text-secondary);margin-bottom:12px}.case-narrative strong{color:var(--text-primary)}
+.data-section{background:var(--bg-subtle);border-radius:8px;padding:10px;margin-top:10px}
+.data-label{font-size:9px;font-weight:600;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px}
+.data-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:10px}.abnormal{color:var(--red)!important}
+.phase-intro h2{font-size:18px;font-weight:600;margin-bottom:8px}.phase-intro p{font-size:13px;color:var(--text-secondary)}
+.resource-box{background:#ede9fe;border-left:4px solid var(--accent);border-radius:8px;padding:12px;margin:12px 0}
+.resource-title{font-size:10px;font-weight:700;color:#5b21b6;margin-bottom:6px}.resource-links{font-size:10px}.resource-links a{color:var(--accent)}
+.learning-box{background:#ede9fe;border-radius:12px;padding:14px;margin-top:14px}
+.learning-title{font-size:11px;font-weight:600;color:var(--accent);margin-bottom:8px}.learning-list{list-style:none;font-size:12px}
+.learning-list li{padding:3px 0 3px 18px;position:relative}.learning-list li::before{content:'→';position:absolute;left:0;color:var(--accent)}
+.quiz-card{background:var(--bg-white);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;overflow:hidden}
+.quiz-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between}
+.quiz-num{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.quiz-type{font-size:11px;color:var(--text-muted);margin-left:8px}.quiz-status{font-size:10px;padding:3px 8px;border-radius:10px;background:var(--bg-subtle)}
+.quiz-status.correct{background:#dcfce7;color:#166534}.quiz-status.incorrect{background:#fee2e2;color:#991b1b}
+.quiz-context{padding:12px 16px;background:#ede9fe;font-size:11px;color:#5b21b6}.quiz-body{padding:16px}
+.quiz-stem{font-size:13px;font-weight:500;margin-bottom:14px}.quiz-options{display:flex;flex-direction:column;gap:6px}
+.quiz-option{display:flex;gap:10px;padding:10px 12px;background:var(--bg-subtle);border:2px solid transparent;border-radius:8px;cursor:pointer}
+.quiz-option:hover{border-color:var(--border)}.quiz-option.selected{border-color:var(--accent)}
+.quiz-option.correct{border-color:var(--green);background:rgba(22,163,74,.08)}.quiz-option.incorrect{border-color:var(--red);background:rgba(220,38,38,.08)}
+.quiz-option.disabled{pointer-events:none}
+.option-letter{width:22px;height:22px;border:2px solid var(--border);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+.quiz-option.correct .option-letter{background:var(--green);border-color:var(--green);color:#fff}
+.quiz-option.incorrect .option-letter{background:var(--red);border-color:var(--red);color:#fff}
+.option-text{font-size:12px;color:var(--text-secondary)}
+.confidence-section{margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
+.confidence-btns{display:flex;gap:6px}.conf-btn{flex:1;padding:7px;border:2px solid var(--border);border-radius:8px;background:#fff;cursor:pointer;font-size:10px;font-weight:600}
+.conf-btn.selected{border-color:var(--green);background:rgba(22,163,74,.08);color:var(--green)}
+.submit-btn{margin-top:10px;width:100%;padding:10px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer}
+.submit-btn:disabled{background:var(--bg-subtle);color:var(--text-muted)}
+.explanation{margin-top:14px;padding:14px;border-radius:8px;display:none}.explanation.visible{display:block}
+.explanation.correct{background:#f0fdf4;border:1px solid #bbf7d0}.explanation.incorrect{background:#fef2f2;border:1px solid #fecaca}
+.explanation-title{font-size:12px;font-weight:600;margin-bottom:6px}.explanation-text{font-size:12px;line-height:1.6}
+.explanation-text a{color:var(--accent)}
+.phase-summary{background:var(--bg-white);border:1px solid var(--border);border-radius:12px;padding:20px;margin-top:16px;display:none}
+.summary-header{display:flex;justify-content:space-between;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.summary-score{font-size:22px;font-weight:700;color:var(--green)}
+.next-btn{margin-top:14px;width:100%;padding:12px;background:var(--green);color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer}
+.progress-bar{background:var(--bg-white);border-bottom:1px solid var(--border);padding:10px 24px}
+.progress-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.progress-track{flex:1;height:5px;background:var(--bg-subtle);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#7c3aed,#10b981);border-radius:3px;transition:width .3s}
+.progress-count{font-size:10px;color:var(--text-muted);font-weight:600}
+</style>
+</head>
+<body>
+<header class="header"><div class="header-inner"><strong>MechanismDx</strong> › Neurology</div></header>
+<div class="module-header"><div class="module-header-inner"><div class="module-title"><div class="module-icon">🧠</div><div><h1>Neurology: Margaret's Stroke</h1><p>Acute Stroke → Workup → Rehab → Prevention | AHA/ASA Guidelines</p></div></div></div></div>
+<div class="progress-bar"><div class="progress-inner"><div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div><span class="progress-count" id="progressCount">0/20</span></div></div>
+<div class="patient-banner"><div class="patient-banner-inner">
+<div class="patient-info"><div class="patient-name">Margaret Williams, 72 years old</div><div class="patient-details">HTN, AFib on warfarin, DM2 | Acute right-sided weakness</div></div>
+<div class="patient-vitals"><div class="vital"><div class="vital-value" id="vNIHSS">14</div><div class="vital-label">NIHSS</div></div><div class="vital"><div class="vital-value" id="vBP">178/94</div><div class="vital-label">BP</div></div><div class="vital"><div class="vital-value" id="vLKW">45m</div><div class="vital-label">LKW</div></div></div>
+</div></div>
+<nav class="timeline-nav"><div class="timeline-inner">
+<div class="timeline-phase active" data-phase="1" onclick="goPhase(1)"><div class="phase-label">🚨 Hyperacute</div><div class="phase-time">0-4.5h</div><div class="phase-status current" id="status1">Current</div></div>
+<div class="timeline-phase locked" data-phase="2" onclick="goPhase(2)"><div class="phase-label">🔍 Workup</div><div class="phase-time">Day 1-3</div><div class="phase-status" id="status2">🔒</div></div>
+<div class="timeline-phase locked" data-phase="3" onclick="goPhase(3)"><div class="phase-label">🏥 Rehab</div><div class="phase-time">Week 1-4</div><div class="phase-status" id="status3">🔒</div></div>
+<div class="timeline-phase locked" data-phase="4" onclick="goPhase(4)"><div class="phase-label">💊 Prevention</div><div class="phase-time">Long-term</div><div class="phase-status" id="status4">🔒</div></div>
+</div></nav>
+<div class="main-container">
+<aside><div class="card"><div class="card-header">📋 Clinical Snapshot</div><div class="card-content" id="caseContent"></div></div></aside>
+<main id="questionsPanel"></main>
+</div>
+<script>
+const ans={1:'b',2:'c',3:'a',4:'d',5:'c',6:'b',7:'a',8:'d',9:'c',10:'b',11:'a',12:'c',13:'b',14:'d',15:'a',16:'c',17:'b',18:'d',19:'a',20:'c'};
+const st={};for(let i=1;i<=20;i++)st[i]={done:false,pick:null,conf:null,ok:false};
+let phase=1,done={1:0,2:0,3:0,4:0},open={1:1,2:0,3:0,4:0};
+const vit={1:{n:'14',b:'178/94',l:'45m'},2:{n:'10',b:'142/88',l:'--'},3:{n:'6',b:'128/78',l:'--'},4:{n:'3',b:'124/76',l:'--'}};
+const cases={
+1:{t:'<strong>Margaret</strong>, 72F with HTN, AFib (warfarin), DM2. <strong>Right arm/leg weakness, slurred speech</strong>. Last normal 45 min ago.',d1:[['LKW','45 min'],['Symptoms','R weakness'],['INR','1.8'],['Glucose','142']],d2:[['NIHSS','14'],['R arm','0/5'],['R leg','2/5'],['Speech','Dysarthric']]},
+2:{t:'<strong>Day 2:</strong> Received tPA. MRI shows <strong>L MCA infarct</strong>. Echo shows no thrombus. Continuous telemetry confirms AFib.',d1:[['tPA','Given at 90m'],['MRI','L MCA infarct'],['Echo','No thrombus'],['Telemetry','AFib']],d2:[['NIHSS','10'],['LDL','142'],['HbA1c','7.8%']]},
+3:{t:'<strong>Week 2:</strong> Inpatient rehab. Working with PT/OT/Speech. Making progress with gait and arm strength.',d1:[['NIHSS','6'],['Mobility','Walker'],['R arm','3/5'],['Speech','Mild dysarthria']],d2:[['Swallow','Regular diet'],['Mood','Frustrated'],['ADLs','Mod assist']]},
+4:{t:'<strong>Month 3:</strong> Outpatient follow-up. Walking with cane. On DOAC, high-intensity statin. Discussing long-term prevention.',d1:[['NIHSS','3'],['Mobility','Cane'],['BP','124/76'],['LDL','68']],d2:[['A1c','7.2%'],['Anticoag','DOAC'],['Statin','Atorva 80']]}
+};
+const intros={
+1:{t:'Phase 1: Hyperacute Stroke',i:'🚨',d:'Time is brain! Rapid assessment and tPA decision.',o:['FAST recognition','tPA criteria (within 4.5h)','BP management','Door-to-needle <60min'],r:'<a href="https://www.ahajournals.org/doi/10.1161/STR.0000000000000211">AHA Acute Stroke 2019</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK535369/">StatPearls: Ischemic Stroke</a>'},
+2:{t:'Phase 2: Stroke Workup',i:'🔍',d:'Determine etiology: cardioembolic, large vessel, small vessel, or other.',o:['TOAST classification','Echo and carotid imaging','MRI interpretation','Anticoag vs antiplatelet'],r:'<a href="https://www.ahajournals.org/doi/10.1161/STR.0000000000000375">AHA Secondary Prevention 2021</a>'},
+3:{t:'Phase 3: Rehabilitation',i:'🏥',d:'Recovery through PT, OT, and speech therapy. Prevent complications.',o:['Rehab team roles','Post-stroke complications','DVT prophylaxis','Depression screening'],r:'<a href="https://www.ahajournals.org/doi/10.1161/STR.0000000000000098">AHA Stroke Rehab</a>'},
+4:{t:'Phase 4: Secondary Prevention',i:'💊',d:'Reduce recurrent stroke risk through optimal medical management.',o:['Anticoag for AFib (CHA₂DS₂-VASc)','BP target <130/80','High-intensity statin','Lifestyle modification'],r:'<a href="https://www.ahajournals.org/doi/10.1161/STR.0000000000000375">AHA Secondary Prevention 2021</a>'}
+};
+const Qs={
+1:{ty:'Recognition',cx:'Sudden right weakness and slurred speech',s:'What mnemonic identifies stroke?',o:[['a','ABCDE'],['b','FAST: Face, Arm, Speech, Time'],['c','SAMPLE'],['d','OPQRST']],e:'<strong>FAST</strong>: Face drooping, Arm weakness, Speech difficulty, Time to call 911.<br><br>BE-FAST adds Balance and Eyes.'},
+2:{ty:'First Imaging',cx:'Acute stroke symptoms, need imaging.',s:'What is FIRST imaging for suspected stroke?',o:[['a','MRI brain'],['b','Carotid US'],['c','Non-contrast CT head (rule out hemorrhage)'],['d','CTA first']],e:'<strong>NCCT</strong> rules out hemorrhage before tPA. Fast, available. MRI more sensitive but slower.'},
+3:{ty:'tPA Window',cx:'LKW 45 minutes ago.',s:'What is the tPA time window?',o:[['a','Within 4.5 hours of last known well'],['b','Within 24 hours'],['c','Within 1 hour only'],['d','No time limit']],e:'<strong>IV tPA within 4.5 hours</strong> of symptom onset.<br><br>Extended criteria (3-4.5h): Age >80, prior stroke+DM excluded in original trials but now often treated.<br><br>📚 <a href="https://www.ahajournals.org/doi/10.1161/STR.0000000000000211">AHA Guidelines</a>'},
+4:{ty:'tPA Contraindications',cx:'INR 1.8 on warfarin.',s:'Which is a contraindication to tPA?',o:[['a','Age >80'],['b','NIHSS >25'],['c','Minor symptoms'],['d','INR >1.7 or recent anticoagulation']],e:'<strong>tPA contraindications:</strong><br>• INR >1.7<br>• Platelets <100K<br>• Recent surgery/trauma<br>• Prior ICH<br>• BP >185/110 despite treatment<br>• Large infarct on CT<br><br>Margaret\'s INR 1.8 is borderline — may still treat with close monitoring.'},
+5:{ty:'BP Management',cx:'BP 178/94 in acute stroke.',s:'What is the BP threshold for tPA eligibility?',o:[['a','No BP threshold'],['b','BP must be <200/120'],['c','BP must be <185/110 before tPA'],['d','BP must be <120/80']],e:'<strong>Before tPA: BP <185/110</strong><br>After tPA: Maintain <180/105 for 24h<br><br>Without tPA: Permissive hypertension (allow up to 220/120) to maintain perfusion.<br><br>Treat with labetalol or nicardipine.'},
+6:{ty:'TOAST Classification',cx:'Determining stroke etiology.',s:'What are the TOAST stroke subtypes?',o:[['a','Hemorrhagic only'],['b','Large artery, cardioembolic, small vessel, other, cryptogenic'],['c','Left vs right hemisphere'],['d','Cortical vs subcortical']],e:'<strong>TOAST Classification:</strong><br>1. Large artery atherosclerosis<br>2. Cardioembolic (AFib, valve)<br>3. Small vessel (lacunar)<br>4. Other (dissection, hypercoag)<br>5. Cryptogenic (undetermined)<br><br>Margaret: <strong>Cardioembolic</strong> (AFib).'},
+7:{ty:'Cardioembolic Source',cx:'Patient has AFib.',s:'What makes Margaret\'s stroke likely cardioembolic?',o:[['a','Atrial fibrillation is a major source of cardiac emboli'],['b','Hypertension alone'],['c','Diabetes'],['d','Age']],e:'<strong>AFib → left atrial thrombus → embolism</strong><br><br>Cardioembolic features:<br>• Sudden maximal deficit<br>• Cortical signs (aphasia)<br>• Multiple territories<br>• Known AFib<br><br>AFib increases stroke risk 5x. Anticoagulation reduces risk ~65%.'},
+8:{ty:'Workup Components',cx:'Determining stroke workup.',s:'Which test identifies cardiac thrombus source?',o:[['a','Carotid ultrasound'],['b','MRA head'],['c','Lipid panel'],['d','Transthoracic or transesophageal echocardiogram']],e:'<strong>Echo</strong> evaluates cardiac sources:<br>• TTE: Valves, LV thrombus, EF<br>• TEE: Better for LA appendage, PFO, aortic arch<br><br>Other workup: Carotid imaging, telemetry, lipids, HbA1c, hypercoag panel if young.'},
+9:{ty:'Anticoagulation',cx:'Cardioembolic stroke from AFib.',s:'When should anticoagulation start after stroke?',o:[['a','Immediately in all strokes'],['b','Never after stroke'],['c','Typically 4-14 days post-stroke depending on infarct size'],['d','Only if INR was subtherapeutic']],e:'<strong>Anticoag timing post-stroke:</strong><br><br>• Small infarct: 4-7 days<br>• Moderate: 7-14 days<br>• Large/hemorrhagic conversion: Delay longer<br><br>"1-3-6-12 rule": Start anticoag at day 1 (TIA), 3 (small), 6 (moderate), 12 (large).'},
+10:{ty:'DOAC vs Warfarin',cx:'Choosing anticoagulation for AFib.',s:'What anticoagulant is preferred for AFib-related stroke?',o:[['a','Warfarin for all'],['b','DOACs (apixaban, rivaroxaban) preferred over warfarin'],['c','Aspirin alone'],['d','Heparin long-term']],e:'<strong>DOACs preferred over warfarin</strong> for nonvalvular AFib.<br><br>Advantages:<br>• No INR monitoring<br>• Fewer drug interactions<br>• Lower ICH risk<br>• Fixed dosing<br><br>Exceptions: Mechanical valve, severe MS → warfarin only.'},
+11:{ty:'Rehab Team',cx:'Margaret in inpatient rehabilitation.',s:'Who is part of the stroke rehab team?',o:[['a','PT, OT, SLP, nursing, physician, social work, psychology'],['b','Only physical therapy'],['c','Only physician'],['d','Family only']],e:'<strong>Interdisciplinary stroke rehab team:</strong><br>• <strong>PT:</strong> Mobility, gait, balance<br>• <strong>OT:</strong> ADLs, fine motor, cognition<br>• <strong>SLP:</strong> Speech, swallow<br>• <strong>Nursing:</strong> 24h care, skin, bowel/bladder<br>• <strong>Physician:</strong> Medical management<br>• <strong>SW/Case mgmt:</strong> Discharge planning<br>• <strong>Psychology:</strong> Depression, coping'},
+12:{ty:'DVT Prevention',cx:'Immobile stroke patient.',s:'How is DVT prevented in stroke patients?',o:[['a','No prophylaxis needed'],['b','Aspirin alone'],['c','Intermittent pneumatic compression; consider pharmacologic if low bleed risk'],['d','Early ambulation only']],e:'<strong>DVT prophylaxis in stroke:</strong><br>• <strong>IPC devices</strong> for all immobile patients<br>• <strong>Pharmacologic</strong> (LMWH, UFH) if low hemorrhage risk<br>• Early mobilization when safe<br><br>CLOTS trials: IPC reduces DVT. Compression stockings NOT effective alone.'},
+13:{ty:'Post-Stroke Depression',cx:'Margaret frustrated, tearful.',s:'How common is post-stroke depression?',o:[['a','Rare (<5%)'],['b','~30-50% of stroke survivors'],['c','Only if prior depression'],['d','Only with left hemisphere strokes']],e:'<strong>Post-stroke depression affects ~30-50%</strong> of survivors.<br><br>Risk factors: Stroke severity, disability, prior depression, social isolation.<br><br>Screen all patients. SSRIs are first-line treatment. Depression impairs rehab participation and outcomes.'},
+14:{ty:'Dysphagia',cx:'Evaluating swallow function.',s:'Why is swallow evaluation important post-stroke?',o:[['a','Cosmetic only'],['b','Prevents constipation'],['c','Legal requirement'],['d','Prevents aspiration pneumonia']],e:'<strong>Dysphagia screening prevents aspiration pneumonia</strong> — leading cause of death post-stroke.<br><br>• NPO until swallow eval<br>• Bedside screen (water swallow test)<br>• SLP formal eval if concern<br>• Modified diet if needed<br><br>~50% of stroke patients have dysphagia acutely.'},
+15:{ty:'CHA₂DS₂-VASc',cx:'Calculating stroke risk in AFib.',s:'What does CHA₂DS₂-VASc score assess?',o:[['a','Stroke risk in AFib to guide anticoagulation'],['b','Bleeding risk'],['c','Mortality risk'],['d','Rehab potential']],e:'<strong>CHA₂DS₂-VASc</strong> = stroke risk in AFib:<br>• <strong>C</strong>HF (1)<br>• <strong>H</strong>TN (1)<br>• <strong>A</strong>ge ≥75 (2)<br>• <strong>D</strong>iabetes (1)<br>• <strong>S</strong>troke/TIA (2)<br>• <strong>V</strong>ascular disease (1)<br>• <strong>A</strong>ge 65-74 (1)<br>• <strong>S</strong>ex female (1)<br><br>Margaret: ≥7 → high risk → anticoagulate.'},
+16:{ty:'BP Target',cx:'Long-term BP management.',s:'What is the BP target post-stroke per AHA?',o:[['a','<160/100'],['b','<140/90 for all'],['c','<130/80 for most stroke survivors'],['d','No target needed']],e:'<strong>AHA recommends BP <130/80</strong> for secondary stroke prevention.<br><br>• Thiazides, ACEi/ARBs preferred<br>• Start after acute phase (usually after discharge)<br>• Individualize for elderly, symptomatic hypotension'},
+17:{ty:'Statin Therapy',cx:'LDL 142 post-stroke.',s:'What statin intensity is recommended post-ischemic stroke?',o:[['a','Low-intensity'],['b','High-intensity (atorvastatin 40-80 or rosuvastatin 20-40)'],['c','No statin needed'],['d','Moderate-intensity only']],e:'<strong>High-intensity statin</strong> for atherosclerotic stroke.<br><br>• Atorvastatin 40-80 mg<br>• Rosuvastatin 20-40 mg<br>• Target LDL <70 (or <55 if very high risk)<br><br>Benefit beyond LDL lowering: Plaque stabilization, anti-inflammatory.'},
+18:{ty:'Carotid Intervention',cx:'Found to have 80% carotid stenosis.',s:'When is carotid intervention indicated?',o:[['a','Any stenosis'],['b','<50% stenosis'],['c','Asymptomatic only'],['d','Symptomatic stenosis 50-99% or asymptomatic ≥70% with good life expectancy']],e:'<strong>Carotid endarterectomy (CEA) or stenting:</strong><br><br>• <strong>Symptomatic 70-99%:</strong> Strong indication<br>• <strong>Symptomatic 50-69%:</strong> Consider if good risk<br>• <strong>Asymptomatic ≥70%:</strong> Selected patients<br><br>Timing: Within 2 weeks of stroke if stable.'},
+19:{ty:'Lifestyle Modification',cx:'Counseling on risk reduction.',s:'Which lifestyle change reduces stroke recurrence?',o:[['a','Smoking cessation, exercise, Mediterranean diet, weight loss'],['b','Bed rest'],['c','High-sodium diet'],['d','Avoiding all physical activity']],e:'<strong>Lifestyle modifications:</strong><br>• <strong>Smoking cessation</strong> (halves risk)<br>• <strong>Exercise</strong> (150 min/week)<br>• <strong>Mediterranean diet</strong><br>• <strong>Weight loss</strong> if overweight<br>• <strong>Limit alcohol</strong> (≤2 drinks/day men, ≤1 women)<br><br>Address all modifiable risk factors!'},
+20:{ty:'Dual Antiplatelet',cx:'Non-cardioembolic minor stroke.',s:'When is dual antiplatelet therapy (DAPT) used?',o:[['a','All strokes indefinitely'],['b','Cardioembolic strokes'],['c','Minor stroke/high-risk TIA: aspirin + clopidogrel for 21 days'],['d','Never used in stroke']],e:'<strong>DAPT (aspirin + clopidogrel)</strong> for 21 days in:<br>• Minor ischemic stroke (NIHSS ≤3)<br>• High-risk TIA (ABCD² ≥4)<br><br>Per POINT and CHANCE trials — reduces recurrence but increases bleeding if prolonged.<br><br>NOT for cardioembolic (use anticoagulation) or large strokes.'}
+};
+
+function updateV(p){const v=vit[p];document.getElementById('vNIHSS').textContent=v.n;document.getElementById('vBP').textContent=v.b;document.getElementById('vLKW').textContent=v.l;}
+function renderCase(p){const c=cases[p];let h=`<div class="case-narrative">${c.t}</div><div class="data-section"><div class="data-label">Key Data</div><div class="data-grid">`;
+c.d1.forEach(x=>h+=`<div><span style="color:var(--text-muted)">${x[0]}:</span> <strong>${x[1]}</strong></div>`);
+h+=`</div></div>`;if(c.d2){h+=`<div class="data-section"><div class="data-label">Exam/Labs</div><div class="data-grid">`;c.d2.forEach(x=>h+=`<div><span style="color:var(--text-muted)">${x[0]}:</span> <strong>${x[1]}</strong></div>`);h+=`</div></div>`;}
+document.getElementById('caseContent').innerHTML=h;}
+function getQs(p){const s=(p-1)*5+1;return[s,s+1,s+2,s+3,s+4];}
+function renderQs(p){const intro=intros[p],qs=getQs(p);
+let h=`<div class="phase-intro"><h2>${intro.i} ${intro.t}</h2><div class="resource-box"><div class="resource-title">📚 GUIDELINES</div><div class="resource-links">${intro.r}</div></div><p>${intro.d}</p><div class="learning-box"><div class="learning-title">🎯 Objectives</div><ul class="learning-list">`;
+intro.o.forEach(o=>h+=`<li>${o}</li>`);h+=`</ul></div></div>`;
+qs.forEach((qn,i)=>{const q=Qs[qn],s=st[qn];
+h+=`<div class="quiz-card"><div class="quiz-header"><div style="display:flex;align-items:center"><span class="quiz-num">${i+1}</span><span class="quiz-type">${q.ty}</span></div><span class="quiz-status ${s.done?(s.ok?'correct':'incorrect'):''}" id="st${qn}">${s.done?(s.ok?'✓':'✗'):'○'}</span></div>`;
+h+=`<div class="quiz-context">${q.cx}</div><div class="quiz-body"><div class="quiz-stem">${q.s}</div><div class="quiz-options" id="opts${qn}">`;
+q.o.forEach(opt=>{let cls=s.done?'disabled':'';if(s.done&&opt[0]===ans[qn])cls+=' correct';if(s.done&&opt[0]===s.pick&&!s.ok)cls+=' incorrect';
+h+=`<div class="quiz-option ${cls}" data-a="${opt[0]}" onclick="pick(${qn},this)"><span class="option-letter">${opt[0].toUpperCase()}</span><span class="option-text">${opt[1]}</span></div>`;});
+h+=`</div><div class="confidence-section" id="cf${qn}" ${s.done?'style="display:none"':''}><div style="font-size:11px;color:var(--text-muted);margin-bottom:6px">Confidence:</div><div class="confidence-btns">`;
+['low','med','high'].forEach(c=>h+=`<button class="conf-btn" onclick="setC(${qn},'${c}',this)">${{low:'Guess',med:'Some',high:'Sure'}[c]}</button>`);
+h+=`</div></div><button class="submit-btn" id="sub${qn}" onclick="submit(${qn})" disabled ${s.done?'style="display:none"':''}>Submit</button>`;
+h+=`<div class="explanation ${s.done?'visible '+(s.ok?'correct':'incorrect'):''}" id="exp${qn}"><div class="explanation-title">${s.ok?'✓ Correct!':'✗ Review:'}</div><div class="explanation-text">${q.e}</div></div></div></div>`;});
+h+=`<div class="phase-summary" id="summary"><div class="summary-header"><div>Phase ${p} Complete!</div><div class="summary-score" id="score">0/5</div></div><p id="sumMsg"></p>`;
+if(p<4)h+=`<button class="next-btn" onclick="unlock(${p+1})">Continue →</button>`;
+else h+=`<p style="text-align:center;margin-top:14px;color:var(--green)">🎓 Margaret is recovering! You mastered stroke care.</p>`;
+h+=`</div>`;document.getElementById('questionsPanel').innerHTML=h;}
+function pick(qn,el){if(st[qn].done)return;document.querySelectorAll(`#opts${qn} .quiz-option`).forEach(o=>o.classList.remove('selected'));el.classList.add('selected');st[qn].pick=el.dataset.a;chk(qn);}
+function setC(qn,lv,el){if(st[qn].done)return;document.querySelectorAll(`#cf${qn} .conf-btn`).forEach(b=>b.classList.remove('selected'));el.classList.add('selected');st[qn].conf=lv;chk(qn);}
+function chk(qn){document.getElementById(`sub${qn}`).disabled=!(st[qn].pick&&st[qn].conf);}
+function submit(qn){const s=st[qn];if(s.done)return;s.done=true;s.ok=s.pick===ans[qn];
+document.querySelectorAll(`#opts${qn} .quiz-option`).forEach(o=>{o.classList.add('disabled');if(o.dataset.a===ans[qn])o.classList.add('correct');else if(o.dataset.a===s.pick&&!s.ok)o.classList.add('incorrect');});
+document.getElementById(`exp${qn}`).classList.add('visible',s.ok?'correct':'incorrect');
+document.getElementById(`st${qn}`).textContent=s.ok?'✓':'✗';document.getElementById(`st${qn}`).className=`quiz-status ${s.ok?'correct':'incorrect'}`;
+document.getElementById(`sub${qn}`).style.display='none';document.getElementById(`cf${qn}`).style.display='none';
+updateProg();checkDone();}
+function updateProg(){const t=Object.values(st).filter(s=>s.done).length;document.getElementById('progressCount').textContent=`${t}/20`;document.getElementById('progressFill').style.width=`${t*5}%`;}
+function checkDone(){const qs=getQs(phase);if(qs.every(q=>st[q].done)&&!done[phase]){done[phase]=1;
+const c=qs.filter(q=>st[q].ok).length;document.getElementById('score').textContent=`${c}/5`;
+document.getElementById('summary').style.display='block';document.querySelector(`.timeline-phase[data-phase="${phase}"]`).classList.add('completed');
+document.getElementById(`status${phase}`).textContent='✓';document.getElementById(`status${phase}`).className='phase-status done';}}
+function unlock(np){open[np]=1;goPhase(np);}
+function goPhase(p){if(!open[p])return;phase=p;
+document.querySelectorAll('.timeline-phase').forEach(ph=>{const pn=+ph.dataset.phase;ph.classList.remove('active','locked');if(pn===p)ph.classList.add('active');if(!open[pn])ph.classList.add('locked');});
+for(let i=1;i<=4;i++){const s=document.getElementById(`status${i}`);if(done[i]){s.textContent='✓';s.className='phase-status done';}else if(i===p){s.textContent='Current';s.className='phase-status current';}else if(open[i]){s.textContent='';s.className='phase-status';}else{s.textContent='🔒';}}
+updateV(p);renderCase(p);renderQs(p);window.scrollTo({top:0,behavior:'smooth'});}
+document.addEventListener('DOMContentLoaded',()=>{updateV(1);renderCase(1);renderQs(1);});
+</script>
+</body>
+</html>
