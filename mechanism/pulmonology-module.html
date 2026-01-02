@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pulmonology: Barbara's Journey - MechanismDx</title>
+<style>
+:root{--bg:#f8f9fa;--white:#fff;--subtle:#f1f3f5;--text:#1a1a1a;--muted:#5c5c5c;--border:#e9ecef;--accent:#0284c7;--green:#16a34a;--red:#dc2626}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.header{background:var(--white);border-bottom:1px solid var(--border);padding:16px 24px}
+.module-header{background:var(--white);border-bottom:1px solid var(--border);padding:24px}.module-header-inner{max-width:1200px;margin:0 auto}
+.module-title{display:flex;align-items:center;gap:16px}.module-icon{width:56px;height:56px;background:linear-gradient(135deg,#bae6fd,#7dd3fc);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:28px}
+.module-title h1{font-size:24px}.module-title p{color:var(--muted);font-size:14px}
+.patient-banner{background:linear-gradient(135deg,#0369a1,#0284c7);color:#fff;padding:20px 24px}
+.patient-banner-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.patient-info{flex:1}.patient-name{font-size:16px;font-weight:600}.patient-details{font-size:13px;opacity:.9}
+.patient-vitals{display:flex;gap:16px}.vital{text-align:center;padding:8px 14px;background:rgba(255,255,255,.1);border-radius:8px}
+.vital-value{font-size:18px;font-weight:700}.vital-label{font-size:10px;opacity:.8}
+.timeline-nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 24px}
+.timeline-inner{max-width:1200px;margin:0 auto;display:flex}.timeline-phase{flex:1;padding:14px;cursor:pointer;border-bottom:3px solid transparent;text-align:center}
+.timeline-phase.active{border-bottom-color:var(--accent)}.timeline-phase.completed{border-bottom-color:var(--green)}
+.timeline-phase.locked{opacity:.4;cursor:not-allowed}.phase-label{font-size:12px;font-weight:600}.phase-time{font-size:10px;color:var(--muted)}
+.phase-status{font-size:10px;margin-top:4px}.phase-status.current{color:var(--accent)}.phase-status.done{color:var(--green)}
+.main-container{max-width:1200px;margin:0 auto;padding:24px;display:grid;grid-template-columns:280px 1fr;gap:24px}
+@media(max-width:900px){.main-container{grid-template-columns:1fr}}
+.card{background:var(--white);border:1px solid var(--border);border-radius:12px;margin-bottom:16px}
+.card-header{padding:14px 16px;border-bottom:1px solid var(--border);font-weight:600}.card-content{padding:16px}
+.case-narrative{font-size:13px;color:var(--muted)}.case-narrative strong{color:var(--text)}
+.data-section{background:var(--subtle);border-radius:8px;padding:10px;margin-top:10px}
+.data-label{font-size:9px;font-weight:600;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.data-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:10px}
+.resource-box{background:#bae6fd;border-left:4px solid var(--accent);border-radius:8px;padding:12px;margin:12px 0}
+.resource-title{font-size:10px;font-weight:700;color:#0369a1;margin-bottom:6px}.resource-links{font-size:10px}.resource-links a{color:var(--accent)}
+.learning-box{background:#bae6fd;border-radius:12px;padding:14px;margin-top:14px}
+.learning-title{font-size:11px;font-weight:600;color:var(--accent);margin-bottom:8px}.learning-list{list-style:none;font-size:12px}
+.learning-list li{padding:3px 0 3px 18px;position:relative}.learning-list li::before{content:'→';position:absolute;left:0;color:var(--accent)}
+.quiz-card{background:var(--white);border:1px solid var(--border);border-radius:12px;margin-bottom:16px}
+.quiz-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between}
+.quiz-num{width:24px;height:24px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.quiz-type{font-size:11px;color:var(--muted);margin-left:8px}
+.quiz-status{font-size:10px;padding:3px 8px;border-radius:10px;background:var(--subtle)}
+.quiz-status.correct{background:#dcfce7;color:#166534}.quiz-status.incorrect{background:#fee2e2;color:#991b1b}
+.quiz-context{padding:12px 16px;background:#bae6fd;font-size:11px;color:#0369a1}.quiz-body{padding:16px}
+.quiz-stem{font-size:13px;font-weight:500;margin-bottom:14px}.quiz-options{display:flex;flex-direction:column;gap:6px}
+.quiz-option{display:flex;gap:10px;padding:10px 12px;background:var(--subtle);border:2px solid transparent;border-radius:8px;cursor:pointer}
+.quiz-option:hover{border-color:var(--border)}.quiz-option.selected{border-color:var(--accent)}
+.quiz-option.correct{border-color:var(--green);background:rgba(22,163,74,.08)}.quiz-option.incorrect{border-color:var(--red);background:rgba(220,38,38,.08)}
+.quiz-option.disabled{pointer-events:none}
+.option-letter{width:22px;height:22px;border:2px solid var(--border);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+.quiz-option.correct .option-letter{background:var(--green);border-color:var(--green);color:#fff}
+.quiz-option.incorrect .option-letter{background:var(--red);border-color:var(--red);color:#fff}
+.option-text{font-size:12px;color:var(--muted)}
+.conf-section{margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
+.conf-btns{display:flex;gap:6px}.conf-btn{flex:1;padding:7px;border:2px solid var(--border);border-radius:8px;background:#fff;cursor:pointer;font-size:10px;font-weight:600}
+.conf-btn.selected{border-color:var(--green);background:rgba(22,163,74,.08);color:var(--green)}
+.submit-btn{margin-top:10px;width:100%;padding:10px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer}
+.submit-btn:disabled{background:var(--subtle);color:var(--muted)}
+.explanation{margin-top:14px;padding:14px;border-radius:8px;display:none;font-size:12px}.explanation.visible{display:block}
+.explanation.correct{background:#f0fdf4;border:1px solid #bbf7d0}.explanation.incorrect{background:#fef2f2;border:1px solid #fecaca}
+.explanation-title{font-weight:600;margin-bottom:6px}
+.phase-summary{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:20px;margin-top:16px;display:none}
+.summary-header{display:flex;justify-content:space-between;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.summary-score{font-size:22px;font-weight:700;color:var(--green)}
+.next-btn{margin-top:14px;width:100%;padding:12px;background:var(--green);color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer}
+.progress-bar{background:var(--white);border-bottom:1px solid var(--border);padding:10px 24px}
+.progress-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.progress-track{flex:1;height:5px;background:var(--subtle);border-radius:3px}
+.progress-fill{height:100%;background:linear-gradient(90deg,#0284c7,#10b981);transition:width .3s;border-radius:3px}
+.progress-count{font-size:10px;color:var(--muted);font-weight:600}
+</style>
+</head>
+<body>
+<header class="header"><div style="max-width:1200px;margin:0 auto;font-weight:600">MechanismDx › Pulmonology</div></header>
+<div class="module-header"><div class="module-header-inner"><div class="module-title"><div class="module-icon">🫁</div><div><h1>Pulmonology: Barbara's Journey</h1><p>COPD → Asthma → PE → Lung Nodule | GOLD/GINA Guidelines</p></div></div></div></div>
+<div class="progress-bar"><div class="progress-inner"><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div><span class="progress-count" id="progressCount">0/20</span></div></div>
+<div class="patient-banner"><div class="patient-banner-inner">
+<div class="patient-info"><div class="patient-name">Barbara Mitchell, 64F</div><div class="patient-details">40 pack-year smoker, COPD | Worsening dyspnea</div></div>
+<div class="patient-vitals"><div class="vital"><div class="vital-value" id="vO2">88%</div><div class="vital-label">SpO2</div></div><div class="vital"><div class="vital-value" id="vFEV">42%</div><div class="vital-label">FEV1</div></div><div class="vital"><div class="vital-value" id="vRR">24</div><div class="vital-label">RR</div></div></div>
+</div></div>
+<nav class="timeline-nav"><div class="timeline-inner">
+<div class="timeline-phase active" data-phase="1" onclick="goPhase(1)"><div class="phase-label">🌬️ COPD</div><div class="phase-time">Day 1</div><div class="phase-status current" id="status1">Current</div></div>
+<div class="timeline-phase locked" data-phase="2" onclick="goPhase(2)"><div class="phase-label">😤 Asthma</div><div class="phase-time">Month 2</div><div class="phase-status" id="status2">🔒</div></div>
+<div class="timeline-phase locked" data-phase="3" onclick="goPhase(3)"><div class="phase-label">🩸 PE</div><div class="phase-time">Month 4</div><div class="phase-status" id="status3">🔒</div></div>
+<div class="timeline-phase locked" data-phase="4" onclick="goPhase(4)"><div class="phase-label">⚠️ Lung Nodule</div><div class="phase-time">Month 6</div><div class="phase-status" id="status4">🔒</div></div>
+</div></nav>
+<div class="main-container">
+<aside><div class="card"><div class="card-header">📋 Clinical Snapshot</div><div class="card-content" id="caseContent"></div></div></aside>
+<main id="questionsPanel"></main>
+</div>
+<script>
+const ans={1:'c',2:'b',3:'a',4:'d',5:'c',6:'b',7:'a',8:'d',9:'c',10:'b',11:'a',12:'c',13:'b',14:'d',15:'a',16:'c',17:'b',18:'d',19:'a',20:'c'};
+const st={};for(let i=1;i<=20;i++)st[i]={done:false,pick:null,conf:null,ok:false};
+let phase=1,done={1:0,2:0,3:0,4:0},open={1:1,2:0,3:0,4:0};
+const vit={1:{o2:'88%',fev:'42%',rr:'24'},2:{o2:'96%',fev:'68%',rr:'18'},3:{o2:'91%',fev:'--',rr:'22'},4:{o2:'95%',fev:'45%',rr:'16'}};
+const cases={
+1:{t:'<strong>Barbara</strong>, 64F with 40 pack-year smoking, known COPD (GOLD III). <strong>Worsening dyspnea, purulent sputum, cough</strong> × 3 days.',d1:[['FEV1','42%'],['Smoking','40 pk-yr'],['Home O2','2L'],['Exacerb/yr','2']],d2:[['SpO2','88%'],['RR','24'],['Exam','Wheezes'],['Access mm','Using']]},
+2:{t:'<strong>Month 2:</strong> Barbara\'s daughter <strong>Jennifer</strong>, 28F, with <strong>episodic wheezing, chest tightness</strong> worse at night. No smoking. Allergic rhinitis.',d1:[['Age','28'],['Symptoms','Episodic'],['Triggers','Exercise'],['Atopy','Yes']],d2:[['SpO2','96%'],['Peak flow','320/450'],['FEV1/FVC','68%']]},
+3:{t:'<strong>Month 4:</strong> Barbara with <strong>sudden dyspnea, pleuritic chest pain, R leg swelling</strong>. Just returned from 6-hr flight.',d1:[['Onset','Sudden'],['Pain','Pleuritic'],['R leg','Swollen'],['Travel','6hr flight']],d2:[['HR','110'],['SpO2','91%'],['D-dimer','2.4'],['Wells','6']]},
+4:{t:'<strong>Month 6:</strong> CT shows <strong>12mm spiculated RUL nodule</strong>. PET SUV 4.2. Barbara still smokes.',d1:[['Nodule','12mm'],['Margins','Spiculated'],['PET','SUV 4.2'],['Location','RUL']],d2:[['Smoking','Continues'],['Prior CT','No nodule'],['FEV1','45%']]}
+};
+const intros={
+1:{t:'Phase 1: COPD Exacerbation',i:'🌬️',d:'Learn GOLD guidelines for COPD diagnosis and exacerbation management.',o:['Diagnose COPD with spirometry','Know GOLD staging','Treat exacerbation (ABCs)','Oxygen targets'],r:'<a href="https://goldcopd.org">GOLD Guidelines</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK559281/">COPD StatPearls</a>'},
+2:{t:'Phase 2: Asthma',i:'😤',d:'Learn GINA guidelines for asthma classification and step therapy.',o:['Distinguish asthma from COPD','Severity classification','Step therapy approach','Controller medications'],r:'<a href="https://ginasthma.org">GINA Guidelines</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK430901/">Asthma StatPearls</a>'},
+3:{t:'Phase 3: Pulmonary Embolism',i:'🩸',d:'Learn Wells criteria and PE management.',o:['Calculate Wells score','D-dimer vs CTPA','Anticoagulation choices','Massive PE management'],r:'<a href="https://www.ncbi.nlm.nih.gov/books/NBK470449/">PE StatPearls</a>'},
+4:{t:'Phase 4: Lung Nodule',i:'⚠️',d:'Learn Fleischner criteria and lung cancer workup.',o:['High-risk nodule features','Lung cancer screening','Cancer types','Workup approach'],r:'<a href="https://www.ncbi.nlm.nih.gov/books/NBK519540/">Lung Nodule StatPearls</a>'}
+};
+const Qs={
+1:{ty:'COPD Dx',cx:'FEV1 42%, FEV1/FVC <0.7',s:'What spirometry finding diagnoses COPD?',o:[['a','FEV1 <80%'],['b','Low FVC'],['c','Post-bronchodilator FEV1/FVC <0.70'],['d','Reversibility']],e:'<strong>COPD: FEV1/FVC <0.70 post-bronchodilator</strong><br><br>GOLD staging by FEV1:<br>• GOLD 1: ≥80%<br>• GOLD 2: 50-79%<br>• GOLD 3: 30-49%<br>• GOLD 4: <30%'},
+2:{ty:'Exacerbation',cx:'Increased dyspnea, purulent sputum',s:'What defines COPD exacerbation?',o:[['a','Any cough'],['b','Acute worsening of symptoms beyond normal variation requiring therapy change'],['c','Fever'],['d','Low FEV1']],e:'<strong>COPD exacerbation:</strong> Acute worsening requiring additional therapy.<br><br>Anthonisen criteria:<br>• ↑ Dyspnea<br>• ↑ Sputum volume<br>• ↑ Sputum purulence'},
+3:{ty:'Treatment',cx:'Treating exacerbation',s:'What is COPD exacerbation treatment (ABCs)?',o:[['a','Antibiotics (if purulent), Bronchodilators (SABA), Corticosteroids (prednisone 40mg × 5d)'],['b','Bronchodilators only'],['c','Antibiotics only'],['d','Intubation']],e:'<strong>ABCs:</strong><br>• <strong>A</strong>ntibiotics if purulent<br>• <strong>B</strong>ronchodilators (SABA ± SAMA)<br>• <strong>C</strong>orticosteroids 40mg × 5 days<br><br>+ O2 target 88-92%, consider BiPAP'},
+4:{ty:'O2 Target',cx:'Titrating oxygen',s:'SpO2 target in COPD exacerbation?',o:[['a','100%'],['b','95-100%'],['c','90-94%'],['d','88-92% to avoid suppressing hypoxic drive']],e:'<strong>Target 88-92%</strong> in COPD.<br><br>Higher O2 can suppress hypoxic drive → hypercapnia. Get ABG if concern.'},
+5:{ty:'GOLD ABE',cx:'Treatment classification',s:'GOLD classifies COPD for treatment by?',o:[['a','FEV1 only'],['b','Symptoms only'],['c','Exacerbation history + symptoms (ABE groups)'],['d','Smoking']],e:'<strong>GOLD ABE:</strong><br>• Group A: Low symptoms, 0-1 exacerb<br>• Group B: More symptoms, 0-1 exacerb<br>• Group E: ≥2 exacerb or ≥1 hospitalization'},
+6:{ty:'Asthma vs COPD',cx:'Differentiating',s:'Which favors asthma over COPD?',o:[['a','Fixed obstruction'],['b','Reversible obstruction, atopy, onset <40, symptom variability'],['c','40+ pk-yr smoking'],['d','Progressive decline']],e:'<strong>Asthma:</strong> Variable, reversible, atopic, younger onset<br><strong>COPD:</strong> Fixed, progressive, smokers, older'},
+7:{ty:'Controller',cx:'Starting asthma therapy',s:'Preferred controller for mild persistent asthma (GINA)?',o:[['a','Low-dose ICS-formoterol PRN or daily low-dose ICS + SABA PRN'],['b','SABA only'],['c','Oral steroids'],['d','Theophylline']],e:'<strong>GINA: ICS-containing for ALL asthmatics</strong><br><br>SABA-only no longer recommended - increases exacerbation risk.'},
+8:{ty:'Step-Up',cx:'Uncontrolled on low ICS',s:'Next step if uncontrolled on low-dose ICS?',o:[['a','Add oral steroids'],['b','Triple SABA'],['c','Stop ICS'],['d','Add LABA (ICS-LABA combination)']],e:'<strong>Step-up:</strong><br>Step 3: Low-dose ICS-LABA<br>Step 4: Medium ICS-LABA<br>Step 5: High ICS-LABA + add-ons<br><br>Never LABA without ICS!'},
+9:{ty:'Severe Asthma',cx:'ED presentation',s:'What indicates severe asthma exacerbation?',o:[['a','Mild wheeze'],['b','PEF 60-80%'],['c','Speaking in words, accessory muscles, RR>30, HR>120, SpO2<90%'],['d','Nighttime symptoms']],e:'<strong>Severe:</strong> Speaks in words, accessory muscles, RR>30, HR>120, SpO2<90%, PEF<50%<br><br><strong>Life-threatening:</strong> Silent chest, cyanosis, AMS'},
+10:{ty:'Virchow',cx:'VTE risk factors',s:'What is Virchow\'s triad?',o:[['a','Fever, rash, arthritis'],['b','Stasis, endothelial injury, hypercoagulability'],['c','Hypoxia, hypercapnia, acidosis'],['d','Cough, dyspnea, wheeze']],e:'<strong>Virchow\'s triad:</strong><br>• Stasis (travel, immobility)<br>• Endothelial injury (surgery)<br>• Hypercoagulability (cancer, pregnancy)'},
+11:{ty:'Wells PE',cx:'Calculating risk',s:'Wells PE score components?',o:[['a','DVT signs, PE likely, HR>100, immobilization, prior VTE, hemoptysis, malignancy'],['b','Fever'],['c','Cough'],['d','Age']],e:'<strong>Wells PE:</strong><br>• DVT signs (+3)<br>• PE likely (+3)<br>• HR>100 (+1.5)<br>• Immobile/surgery (+1.5)<br>• Prior VTE (+1.5)<br>• Hemoptysis (+1)<br>• Cancer (+1)'},
+12:{ty:'PE Dx',cx:'Wells 6, high risk',s:'Next step for suspected PE, Wells >4?',o:[['a','D-dimer'],['b','CXR'],['c','CT pulmonary angiography'],['d','Observation']],e:'<strong>PE likely (Wells >4):</strong> Go to CTPA<br><br><strong>PE unlikely (≤4):</strong> D-dimer first<br>• Negative rules out<br>• Positive → CTPA'},
+13:{ty:'PE Tx',cx:'Confirmed stable PE',s:'First-line anticoagulation for PE?',o:[['a','Warfarin alone'],['b','DOAC (rivaroxaban, apixaban) preferred'],['c','Aspirin'],['d','tPA for all']],e:'<strong>Stable PE:</strong> DOACs preferred<br><br><strong>Massive PE:</strong> Thrombolytics<br><br>Duration: ≥3 months'},
+14:{ty:'Massive PE',cx:'High-risk PE',s:'What defines massive PE?',o:[['a','Large clot'],['b','High troponin'],['c','Tachycardia'],['d','Sustained hypotension (SBP<90), shock, or arrest']],e:'<strong>Massive:</strong> Hypotension/shock → lytics<br><strong>Submassive:</strong> RV dysfunction<br><strong>Low-risk:</strong> Outpatient if PESI low'},
+15:{ty:'Nodule Risk',cx:'Suspicious nodule',s:'Which nodule features suggest malignancy?',o:[['a','Spiculated margins, upper lobe, >8mm, growth, PET avid'],['b','Smooth, <6mm'],['c','Calcified'],['d','Stable 2 years']],e:'<strong>High-risk:</strong> Spiculated, >8mm, upper lobe, growth, PET+, smoker'},
+16:{ty:'Screening',cx:'Lung cancer screening',s:'Who gets lung cancer screening?',o:[['a','All smokers'],['b','Anyone >50'],['c','Age 50-80, ≥20 pack-years, current or quit <15 years'],['d','Symptomatic only']],e:'<strong>USPSTF:</strong> Annual LDCT if age 50-80, ≥20 pk-yr, current/quit <15yr'},
+17:{ty:'Cancer Types',cx:'Lung cancer pathology',s:'Most common lung cancer type?',o:[['a','Small cell'],['b','Adenocarcinoma'],['c','Squamous'],['d','Large cell']],e:'<strong>NSCLC (85%):</strong><br>• Adenocarcinoma - most common<br>• Squamous - central, smokers<br><br><strong>SCLC (15%):</strong> Aggressive, chemo/RT'},
+18:{ty:'Nodule Mgmt',cx:'High-risk nodule',s:'Next step for 12mm spiculated, PET+ nodule?',o:[['a','Repeat CT 12mo'],['b','Observe'],['c','Antibiotics'],['d','Tissue diagnosis (biopsy or resection)']],e:'<strong>High-risk + PET+ → Tissue diagnosis</strong><br>• CT-guided biopsy<br>• Bronchoscopy<br>• Surgical resection'},
+19:{ty:'Lights',cx:'Pleural effusion',s:'Light\'s criteria for exudate?',o:[['a','Pleural/serum protein >0.5, OR pleural/serum LDH >0.6, OR pleural LDH >2/3 upper normal'],['b','Low protein'],['c','Low LDH'],['d','Clear fluid']],e:'<strong>Light\'s (any = exudate):</strong><br>• Protein ratio >0.5<br>• LDH ratio >0.6<br>• Pleural LDH >2/3 normal'},
+20:{ty:'ARDS',cx:'Severe pneumonia',s:'Berlin criteria for ARDS?',o:[['a','Chronic hypoxia'],['b','CHF'],['c','Acute onset, bilateral opacities, P/F≤300, not cardiac'],['d','High BNP']],e:'<strong>ARDS Berlin:</strong><br>• Acute (<1 week)<br>• Bilateral opacities<br>• Not cardiac<br>• P/F ≤300 on PEEP≥5'}
+};
+function updateV(p){const v=vit[p];document.getElementById('vO2').textContent=v.o2;document.getElementById('vFEV').textContent=v.fev;document.getElementById('vRR').textContent=v.rr;}
+function renderCase(p){const c=cases[p];let h=`<div class="case-narrative">${c.t}</div><div class="data-section"><div class="data-label">History</div><div class="data-grid">`;
+c.d1.forEach(x=>h+=`<div><span style="color:var(--muted)">${x[0]}:</span> <strong>${x[1]}</strong></div>`);
+h+=`</div></div><div class="data-section"><div class="data-label">Data</div><div class="data-grid">`;
+c.d2.forEach(x=>h+=`<div><span style="color:var(--muted)">${x[0]}:</span> <strong>${x[1]}</strong></div>`);
+h+=`</div></div>`;document.getElementById('caseContent').innerHTML=h;}
+function getQs(p){return[(p-1)*5+1,(p-1)*5+2,(p-1)*5+3,(p-1)*5+4,(p-1)*5+5];}
+function renderQs(p){const intro=intros[p],qs=getQs(p);
+let h=`<div class="phase-intro"><h2>${intro.i} ${intro.t}</h2><div class="resource-box"><div class="resource-title">📚 GUIDELINES</div><div class="resource-links">${intro.r}</div></div><p>${intro.d}</p><div class="learning-box"><div class="learning-title">🎯 Objectives</div><ul class="learning-list">`;
+intro.o.forEach(o=>h+=`<li>${o}</li>`);h+=`</ul></div></div>`;
+qs.forEach((qn,i)=>{const q=Qs[qn],s=st[qn];
+h+=`<div class="quiz-card"><div class="quiz-header"><div style="display:flex;align-items:center"><span class="quiz-num">${i+1}</span><span class="quiz-type">${q.ty}</span></div><span class="quiz-status ${s.done?(s.ok?'correct':'incorrect'):''}" id="st${qn}">${s.done?(s.ok?'✓':'✗'):'○'}</span></div>`;
+h+=`<div class="quiz-context">${q.cx}</div><div class="quiz-body"><div class="quiz-stem">${q.s}</div><div class="quiz-options" id="opts${qn}">`;
+q.o.forEach(opt=>{let cls=s.done?'disabled':'';if(s.done&&opt[0]===ans[qn])cls+=' correct';if(s.done&&opt[0]===s.pick&&!s.ok)cls+=' incorrect';
+h+=`<div class="quiz-option ${cls}" data-a="${opt[0]}" onclick="pick(${qn},this)"><span class="option-letter">${opt[0].toUpperCase()}</span><span class="option-text">${opt[1]}</span></div>`;});
+h+=`</div><div class="conf-section" id="cf${qn}" ${s.done?'style="display:none"':''}><div class="conf-btns">`;
+['low','med','high'].forEach(c=>h+=`<button class="conf-btn" onclick="setC(${qn},'${c}',this)">${{low:'Guess',med:'Some',high:'Sure'}[c]}</button>`);
+h+=`</div></div><button class="submit-btn" id="sub${qn}" onclick="submit(${qn})" disabled ${s.done?'style="display:none"':''}>Submit</button>`;
+h+=`<div class="explanation ${s.done?'visible '+(s.ok?'correct':'incorrect'):''}" id="exp${qn}"><div class="explanation-title">${s.ok?'✓ Correct':'Review'}</div><div>${q.e}</div></div></div></div>`;});
+h+=`<div class="phase-summary" id="summary"><div class="summary-header"><div>Phase ${p} Complete!</div><div class="summary-score" id="score">0/5</div></div>`;
+if(p<4)h+=`<button class="next-btn" onclick="unlock(${p+1})">Continue →</button>`;
+else h+=`<p style="text-align:center;margin-top:14px;color:var(--green)">🎓 Complete! You mastered pulmonology.</p>`;
+h+=`</div>`;document.getElementById('questionsPanel').innerHTML=h;}
+function pick(qn,el){if(st[qn].done)return;document.querySelectorAll(`#opts${qn} .quiz-option`).forEach(o=>o.classList.remove('selected'));el.classList.add('selected');st[qn].pick=el.dataset.a;chk(qn);}
+function setC(qn,lv,el){if(st[qn].done)return;document.querySelectorAll(`#cf${qn} .conf-btn`).forEach(b=>b.classList.remove('selected'));el.classList.add('selected');st[qn].conf=lv;chk(qn);}
+function chk(qn){document.getElementById(`sub${qn}`).disabled=!(st[qn].pick&&st[qn].conf);}
+function submit(qn){const s=st[qn];if(s.done)return;s.done=true;s.ok=s.pick===ans[qn];
+document.querySelectorAll(`#opts${qn} .quiz-option`).forEach(o=>{o.classList.add('disabled');if(o.dataset.a===ans[qn])o.classList.add('correct');else if(o.dataset.a===s.pick&&!s.ok)o.classList.add('incorrect');});
+document.getElementById(`exp${qn}`).classList.add('visible',s.ok?'correct':'incorrect');
+document.getElementById(`st${qn}`).textContent=s.ok?'✓':'✗';document.getElementById(`st${qn}`).className=`quiz-status ${s.ok?'correct':'incorrect'}`;
+document.getElementById(`sub${qn}`).style.display='none';document.getElementById(`cf${qn}`).style.display='none';
+updProg();chkDone();}
+function updProg(){const t=Object.values(st).filter(s=>s.done).length;document.getElementById('progressCount').textContent=`${t}/20`;document.getElementById('progressFill').style.width=`${t*5}%`;}
+function chkDone(){const qs=getQs(phase);if(qs.every(q=>st[q].done)&&!done[phase]){done[phase]=1;
+document.getElementById('score').textContent=`${qs.filter(q=>st[q].ok).length}/5`;
+document.getElementById('summary').style.display='block';document.querySelector(`.timeline-phase[data-phase="${phase}"]`).classList.add('completed');
+document.getElementById(`status${phase}`).textContent='✓';document.getElementById(`status${phase}`).className='phase-status done';}}
+function unlock(np){open[np]=1;goPhase(np);}
+function goPhase(p){if(!open[p])return;phase=p;
+document.querySelectorAll('.timeline-phase').forEach(ph=>{const pn=+ph.dataset.phase;ph.classList.remove('active','locked');if(pn===p)ph.classList.add('active');if(!open[pn])ph.classList.add('locked');});
+for(let i=1;i<=4;i++){const s=document.getElementById(`status${i}`);if(done[i]){s.textContent='✓';s.className='phase-status done';}else if(i===p){s.textContent='Current';s.className='phase-status current';}else if(open[i]){s.textContent='';}else{s.textContent='🔒';}}
+updateV(p);renderCase(p);renderQs(p);window.scrollTo({top:0});}
+document.addEventListener('DOMContentLoaded',()=>{updateV(1);renderCase(1);renderQs(1);});
+</script>
+</body>
+</html>
