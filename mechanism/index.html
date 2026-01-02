@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MechanismDx - Master Clinical Reasoning</title>
+<style>
+:root{--bg:#f8fafc;--white:#fff;--subtle:#f1f5f9;--text:#0f172a;--muted:#64748b;--border:#e2e8f0;--blue:#2563eb;--green:#16a34a;--amber:#d97706;--purple:#7c3aed;--red:#dc2626;--cyan:#0891b2}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+a{color:inherit;text-decoration:none}
+
+/* Header */
+.header{background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+.header-inner{max-width:1200px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.logo{font-size:1.4rem;font-weight:700;color:var(--text)}
+.logo span{color:var(--blue)}
+.tagline{font-size:12px;color:var(--muted);font-style:italic;padding-left:16px;border-left:1px solid var(--border)}
+.nav{display:flex;gap:6px}
+.nav-link{padding:8px 14px;font-size:13px;font-weight:500;color:var(--muted);border-radius:8px;transition:all .15s}
+.nav-link:hover{background:var(--subtle);color:var(--text)}
+.nav-link.active{background:var(--blue);color:#fff}
+
+/* Hero - NEW DESIGN */
+.hero{background:linear-gradient(135deg,#1e3a5f 0%,#2563eb 100%);color:#fff;padding:56px 24px}
+.hero-inner{max-width:1200px;margin:0 auto;text-align:center}
+.hero h1{font-size:2.8rem;margin-bottom:12px}
+.hero h1 span{color:#93c5fd}
+.hero-sub{font-size:1.2rem;opacity:.9;margin-bottom:32px;max-width:600px;margin-left:auto;margin-right:auto}
+.hero-stats{display:flex;justify-content:center;gap:48px;flex-wrap:wrap;margin-bottom:32px}
+.hero-stat{text-align:center}
+.hero-stat-value{font-size:2.5rem;font-weight:800}
+.hero-stat-label{font-size:13px;opacity:.8}
+.hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{padding:14px 28px;border-radius:10px;font-weight:600;font-size:14px;cursor:pointer;transition:all .2s;border:none}
+.btn-white{background:#fff;color:var(--blue)}
+.btn-white:hover{background:#f1f5f9}
+.btn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.3)}
+.btn-outline:hover{background:rgba(255,255,255,.1)}
+
+/* Version Banner */
+.version-banner{background:#fef3c7;border-bottom:1px solid #fcd34d;padding:10px 24px;text-align:center;font-size:13px;color:#92400e}
+.version-banner strong{color:#78350f}
+
+/* Main */
+main{max-width:1200px;margin:0 auto;padding:40px 24px}
+
+/* Section */
+.section{margin-bottom:56px}
+.section-header{margin-bottom:24px}
+.section-title{font-size:1.6rem;font-weight:700;display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.section-subtitle{color:var(--muted);font-size:14px}
+
+/* Three Learning Paths */
+.paths-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:48px}
+@media(max-width:900px){.paths-grid{grid-template-columns:1fr}}
+.path-card{background:var(--white);border:2px solid var(--border);border-radius:16px;padding:28px;transition:all .2s;cursor:pointer;position:relative;overflow:hidden}
+.path-card:hover{border-color:var(--blue);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.1)}
+.path-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+.path-card.cases::before{background:linear-gradient(90deg,var(--blue),var(--cyan))}
+.path-card.challenges::before{background:linear-gradient(90deg,var(--purple),var(--blue))}
+.path-card.tools::before{background:linear-gradient(90deg,var(--green),var(--cyan))}
+.path-icon{width:64px;height:64px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:20px}
+.path-card.cases .path-icon{background:linear-gradient(135deg,#dbeafe,#bfdbfe)}
+.path-card.challenges .path-icon{background:linear-gradient(135deg,#ede9fe,#ddd6fe)}
+.path-card.tools .path-icon{background:linear-gradient(135deg,#dcfce7,#bbf7d0)}
+.path-card h3{font-size:1.25rem;margin-bottom:8px}
+.path-card p{font-size:14px;color:var(--muted);margin-bottom:20px;min-height:60px}
+.path-stats{display:flex;gap:16px}
+.path-stat{padding:8px 14px;background:var(--subtle);border-radius:10px;font-size:12px;font-weight:600}
+
+/* Modules by System */
+.filter-tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+.filter-tab{padding:8px 16px;background:var(--white);border:1px solid var(--border);border-radius:20px;font-size:13px;cursor:pointer;transition:all .15s}
+.filter-tab:hover{border-color:var(--blue)}
+.filter-tab.active{background:var(--blue);color:#fff;border-color:var(--blue)}
+
+.modules-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.module-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:18px;display:flex;gap:14px;transition:all .2s}
+.module-card:hover{border-color:var(--blue);box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.module-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+.module-info{flex:1}
+.module-title{font-weight:600;font-size:15px;margin-bottom:4px}
+.module-desc{font-size:12px;color:var(--muted);margin-bottom:10px}
+.module-meta{display:flex;gap:8px;flex-wrap:wrap}
+.module-tag{padding:4px 10px;background:var(--subtle);border-radius:8px;font-size:11px;color:var(--muted)}
+.module-tag.new{background:#dcfce7;color:#166534}
+
+/* Tools */
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.tool-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:24px;text-align:center;transition:all .2s}
+.tool-card:hover{border-color:var(--purple);box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.tool-icon{font-size:3rem;margin-bottom:12px}
+.tool-card h4{font-size:15px;margin-bottom:6px}
+.tool-card p{font-size:12px;color:var(--muted)}
+
+/* Cross-Reference Table */
+.crossref-section{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:24px;margin-top:40px}
+.crossref-title{font-size:1.1rem;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.crossref-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;font-size:13px}
+@media(max-width:700px){.crossref-grid{grid-template-columns:1fr}}
+.crossref-header{font-weight:600;padding:10px;background:var(--subtle);border-radius:8px}
+.crossref-row{display:contents}
+.crossref-cell{padding:10px;border-bottom:1px solid var(--border)}
+
+/* Footer */
+.footer{background:var(--white);border-top:1px solid var(--border);padding:24px;text-align:center;color:var(--muted);font-size:13px;margin-top:48px}
+</style>
+</head>
+<body>
+
+<div class="version-banner">
+  <strong>✨ Platform Updated January 2026</strong> — Now with 22 longitudinal modules, 487 interactive items, and ~85% USMLE coverage!
+</div>
+
+<header class="header">
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:16px">
+      <div class="logo">Mechanism<span>Dx</span></div>
+      <div class="tagline">The right mechanism unlocks everything.</div>
+    </div>
+    <nav class="nav">
+      <a href="reasondx-landing.html" class="nav-link">ReasonDx</a>
+      <a href="fingerprint-dashboard.html" class="nav-link">My Progress</a>
+      <a href="challenges.html" class="nav-link">Challenges</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <h1>Master the <span>Why</span></h1>
+    <p class="hero-sub">Deep understanding of disease mechanisms through interactive, guideline-linked clinical cases</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-value">487</div><div class="hero-stat-label">Interactive Items</div></div>
+      <div class="hero-stat"><div class="hero-stat-value">22</div><div class="hero-stat-label">Case Modules</div></div>
+      <div class="hero-stat"><div class="hero-stat-value">47</div><div class="hero-stat-label">Challenges</div></div>
+      <div class="hero-stat"><div class="hero-stat-value">~85%</div><div class="hero-stat-label">USMLE Coverage</div></div>
+    </div>
+    <div class="hero-cta">
+      <a href="#modules" class="btn btn-white">Start Learning</a>
+      <a href="fingerprint-dashboard.html" class="btn btn-outline">View My Progress</a>
+    </div>
+  </div>
+</section>
+
+<main>
+
+<!-- THREE LEARNING PATHS -->
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">📚 Choose Your Learning Path</h2>
+    <p class="section-subtitle">Three ways to master clinical reasoning — use them together for maximum retention</p>
+  </div>
+  
+  <div class="paths-grid">
+    <a href="#modules" class="path-card cases">
+      <div class="path-icon">🏥</div>
+      <h3>Longitudinal Patient Cases</h3>
+      <p>Follow patients through 4-phase clinical journeys. Each module has 20 questions linked to major guidelines.</p>
+      <div class="path-stats">
+        <span class="path-stat">22 Modules</span>
+        <span class="path-stat">440 Questions</span>
+      </div>
+    </a>
+    
+    <a href="challenges.html" class="path-card challenges">
+      <div class="path-icon">🧩</div>
+      <h3>Active Learning Challenges</h3>
+      <p>Test your mechanism knowledge with Predict Labs, Build Pathway, What's the Link, and What If scenarios.</p>
+      <div class="path-stats">
+        <span class="path-stat">47 Challenges</span>
+        <span class="path-stat">4 Types</span>
+      </div>
+    </a>
+    
+    <a href="#tools" class="path-card tools">
+      <div class="path-icon">🔧</div>
+      <h3>Interactive Tools</h3>
+      <p>Practice specific skills with ECG interpretation, ABG analysis, and cross-system visualization.</p>
+      <div class="path-stats">
+        <span class="path-stat">5 Tools</span>
+        <span class="path-stat">Self-Paced</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ALL MODULES -->
+<section class="section" id="modules">
+  <div class="section-header">
+    <h2 class="section-title">🏥 Longitudinal Patient Cases</h2>
+    <p class="section-subtitle">22 modules covering major clinical presentations — each with 4 patients across 20 questions</p>
+  </div>
+  
+  <div class="filter-tabs">
+    <button class="filter-tab active" onclick="filterModules('all')">All (22)</button>
+    <button class="filter-tab" onclick="filterModules('cardio')">❤️ Cardio</button>
+    <button class="filter-tab" onclick="filterModules('pulm')">🫁 Pulm</button>
+    <button class="filter-tab" onclick="filterModules('gi')">🍽️ GI</button>
+    <button class="filter-tab" onclick="filterModules('renal')">🫘 Renal</button>
+    <button class="filter-tab" onclick="filterModules('neuro')">🧠 Neuro</button>
+    <button class="filter-tab" onclick="filterModules('endo')">🦋 Endo</button>
+    <button class="filter-tab" onclick="filterModules('id')">🦠 ID</button>
+    <button class="filter-tab" onclick="filterModules('other')">📋 Other</button>
+  </div>
+  
+  <div class="modules-grid" id="modulesGrid">
+    <!-- CARDIOVASCULAR -->
+    <a href="hf-longitudinal-v2.html" class="module-card" data-system="cardio">
+      <div class="module-icon" style="background:linear-gradient(135deg,#fee2e2,#fecaca)">❤️</div>
+      <div class="module-info">
+        <div class="module-title">Heart Failure</div>
+        <div class="module-desc">HFrEF progression, GDMT optimization, acute decompensation</div>
+        <div class="module-meta"><span class="module-tag">20 Qs</span><span class="module-tag">ACC/AHA</span></div>
+      </div>
+    </a>
+    
+    <a href="acs-arrhythmia-module.html" class="module-card" data-system="cardio">
+      <div class="module-icon" style="background:linear-gradient(135deg,#fee2e2,#fecaca)">💔</div>
+      <div class="module-info">
+        <div class="module-title">ACS & Arrhythmias</div>
+        <div class="module-desc">STEMI/NSTEMI management, AFib, rhythm disorders</div>
+        <div class="module-meta"><span class="module-tag">20 Qs</span><span class="module-tag">ACC/AHA</span></div>
+      </div>
+    </a>
+    
+    <a href="htn-shock-module.html" class="module-card" data-system="cardio">
+      <div class="module-icon" style="background:linear-gradient(135deg,#fee2e2,#fecaca)">🚨</div>
+      <div class="module-info">
+        <div class="module-title">HTN Emergency & Shock</div>
+        <div class="module-desc">Hypertensive emergency, cardiogenic/distributive/obstructive shock</div>
+        <div class="module-meta"><span class="module-tag">20 Qs</span><span class="module-tag new">NEW</span></div>
+      </div>
+    </a>
+    
+    <!-- PULMONARY -->
+    <a href="pulmonology-module.html" class="module-card" data-system="pulm">
+      <div class="module-icon" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe)">🫁</div>
+      <div class="module-info">
+        <div class="module-title">Pulmonology</div>
+        <div class="module-desc">COPD, Asthma, PE, respiratory failure</div>
+        <div class="module-meta"><span class="module-tag">20 Qs</span><span class="module-tag">GOLD/GINA</span></div>
+      </div>
+    </a>
+    
+    <!-- GI -->
+    <a href="gi-liver-module.html" class="module-card" data-system="gi">
+      <div class="module-icon" style="background:linear-gradient(135deg,#fef3c7,#fde68a)">🍽️</div>
+      <div class="module-info">
+        <div class="module-title">GI & Liver</div>
+        <div class="module-desc">Cirrhosis, varices, hepatic encephalopathy, GI bleeding</div>
+        <div class="module-meta"><span class="module-tag">20 Qs</span><span class="module-tag">AASLD</span></div>
+      </div>
+    </a>
+    
+    <a href="acute-abdomen-module.html" class="module-card" data-system="gi">
+      <div class="module-icon" style="background:linear-gradient(135deg,#fed7aa,#fdba74)">🔪</div>
+      <div class="module-info">
+        <div class="module-title">Acute Abdomen</div>
+        <div class="module-desc">Appendicitis, cholecystitis, SBO, pancreatitis</div>
+        <div class="module-meta"><span class="module-tag">20 Qs</span><span class="module-tag new">NEW</span></div>
+      </div>
+    </a>
+    
+    <!-- RENAL -->
+    <a href="electrolytes-module.html" class="module-card" data-system="renal">
+      <div class="module-icon" style="background:linear-gradient(135deg,#a5f3fc,#67e8f9)">⚗️</div>
+      <div class="module-info">
+        <div class="module-title">Electrolytes & Acid-Base</div>
+        <div class="module-desc">Hyponatremia, hyperkalemia, metabolic acidosis/alkalosis</div>
+        <div class="module-meta"><span class="module-tag">20 Qs</span><span class="module-tag">KDIGO</span></div>
+      </div>
+    </a>
+    
+    <a href="aki-ckd-module.html" class="module-card" data-system="renal">
+      <div class="module-icon" style="background:linear-gradient(135deg,#a5f3fc,#67e8f9)">🫘</div>
+      <div class="module-info">
+        <div class="module-title">AKI & CKD</div>
+        <div class="module-desc">Pre-renal/intrinsic AKI, CKD staging, dialysis decisions</div>
+        <div class="module-meta"><span class="module-tag">20 Qs</span><span class="module-tag new">NEW</span></div>
+      </div>
+    </a>
+    
+    <!-- NEURO -->
+    <a href="neuro-stroke-module.html" class="module-card" data-system="neuro">
+      <div class="module-icon" style="background:linear-gradient(135deg,#e9d5ff,#d8b4fe)">🧠</div>
+      <div class="module-info">
+        <div class="module-title">Neurology: Stroke</div>
+        <div class="module-desc">Ischemic/hemorrhagic stroke, TIA, thrombolytics</div>
+        <div class="module-meta"><span class="module-tag">20 Qs</span><span class="module-tag">AHA/ASA</span></div>
+      </div>
+    </a>
+    
+    <a href="neurology-seizure-headache-module.html" class="module-card" data-system="neuro">
+      <div class="module-icon" style="background:linear-gradient(135deg,#e9d5ff,#d8b4fe)">⚡</div>
+      <div class="module-info">
+        <div class="module-title">Neuro II: Seizures & Headache</div>
+        <div class="module-desc">First seizure, epilepsy, migraine, Parkinson's</div>
+        <div class="module-meta"><span class="module-tag">20 Qs</span><span class="module-tag new">NEW</span></div>
+      </div>
+    </a>
+    
+    <!-- ENDOCRINE -->
+    <a href="diabetes-longitudinal-v2.html" class="module-card" data-system="endo">
+      <div class="module-icon" style="background:linear-gradient(135deg,#bbf7d0,#86efac)">🩸</div>
+      <div class="module-info">
+        <div class="module-title">Diabetes Management</div>
+        <div class="module-desc">T2DM progression, medication selection, complications</div>
+        <div class="module-meta"><span class="module-tag">20 Qs</span><span class="module-tag">ADA</span></div>
+      </div>
+    </a>
+    
+    <a href="endocrine-emergencies-module.html" class="module-card" data-system="endo">
+      <div class="module-icon" style="background:linear-gradient(135deg,#bbf7d0,#86efac)">🚑</div>
+      <div class="module-info">
+        <div class="module-title">Endocrine Emergencies</div>
+        <div class="module-desc">DKA, HHS, thyroid storm, adrenal crisis</div>
+        <div class="module-meta"><span class="module-tag">20 Qs</span><span class="module-tag new">NEW</span></div>
+      </div>
+    </a>
+    
+    <!-- INFECTIOUS DISEASE -->
+    <a href="sepsis-longitudinal-v2.html" class="module-card" data-system="id">
+      <div class="module-icon" style="background:linear-gradient(135deg,#fecaca,#fca5a5)">🦠</div>
+      <div class="module-info">
+        <div class="module-title">Sepsis</div>
+        <div class="module-desc">Sepsis-3 criteria, bundles, vasopressor management</div>
+        <div class="module-meta"><span class="module-tag">20 Qs</span><span class="module-tag">SSC</span></div>
+      </div>
+    </a>
+    
+    <a href="infectious-disease-module.html" class="module-card" data-system="id">
+      <div class="module-icon" style="background:linear-gradient(135deg,#fecaca,#fca5a5)">🔬</div>
+      <div class="module-info">
+        <div class="module-title">Infectious Disease</div>
+        <div class="module-desc">HIV/AIDS, meningitis, UTI/pyelonephritis, C. diff</div>
+        <div class="module-meta"><span class="module-tag">20 Qs</span><span class="module-tag new">NEW</span></div>
+      </div>
+    </a>
+    
+    <!-- HEME/ONC -->
+    <a href="heme-onc-module.html" class="module-card" data-system="other">
+      <div class="module-icon" style="background:linear-gradient(135deg,#fecdd3,#fda4af)">🩸</div>
+      <div class="module-info">
+        <div class="module-title">Heme/Onc</div>
+        <div class="module-desc">Anemia workup, DVT/PE, oncologic emergencies</div>
+        <div class="module-meta"><span class="module-tag">20 Qs</span><span class="module-tag">ASH</span></div>
+      </div>
+    </a>
+    
+    <!-- PSYCHIATRY -->
+    <a href="psychiatry-module.html" class="module-card" data-system="other">
+      <div class="module-icon" style="background:linear-gradient(135deg,#c7d2fe,#a5b4fc)">🧠</div>
+      <div class="module-info">
+        <div class="module-title">Psychiatry</div>
+        <div class="module-desc">MDD, GAD, bipolar disorder, medication selection</div>
+        <div class="module-meta"><span class="module-tag">20 Qs</span><span class="module-tag">APA</span></div>
+      </div>
+    </a>
+    
+    <!-- OB/GYN -->
+    <a href="obgyn-module.html" class="module-card" data-system="other">
+      <div class="module-icon" style="background:linear-gradient(135deg,#fbcfe8,#f9a8d4)">🤰</div>
+      <div class="module-info">
+        <div class="module-title">OB/GYN</div>
+        <div class="module-desc">Prenatal care, preeclampsia, gestational diabetes</div>
+        <div class="module-meta"><span class="module-tag">20 Qs</span><span class="module-tag">ACOG</span></div>
+      </div>
+    </a>
+    
+    <!-- PEDIATRICS -->
+    <a href="pediatrics-module.html" class="module-card" data-system="other">
+      <div class="module-icon" style="background:linear-gradient(135deg,#99f6e4,#5eead4)">👶</div>
+      <div class="module-info">
+        <div class="module-title">Pediatrics</div>
+        <div class="module-desc">Well-child visits, developmental milestones, ADHD</div>
+        <div class="module-meta"><span class="module-tag">20 Qs</span><span class="module-tag">AAP</span></div>
+      </div>
+    </a>
+    
+    <!-- MSK/DERM -->
+    <a href="msk-derm-module.html" class="module-card" data-system="other">
+      <div class="module-icon" style="background:linear-gradient(135deg,#fde68a,#fcd34d)">🦴</div>
+      <div class="module-info">
+        <div class="module-title">MSK & Derm</div>
+        <div class="module-desc">Gout, RA, osteoarthritis, psoriasis</div>
+        <div class="module-meta"><span class="module-tag">20 Qs</span><span class="module-tag">ACR</span></div>
+      </div>
+    </a>
+    
+    <!-- ETHICS -->
+    <a href="ethics-biostats-module.html" class="module-card" data-system="other">
+      <div class="module-icon" style="background:linear-gradient(135deg,#d1d5db,#9ca3af)">⚖️</div>
+      <div class="module-info">
+        <div class="module-title">Ethics & Biostatistics</div>
+        <div class="module-desc">Consent, capacity, end-of-life, sensitivity/specificity, NNT</div>
+        <div class="module-meta"><span class="module-tag">20 Qs</span><span class="module-tag new">NEW</span></div>
+      </div>
+    </a>
+    
+    <!-- SPECIALTY -->
+    <a href="global-health-module.html" class="module-card" data-system="other">
+      <div class="module-icon" style="background:linear-gradient(135deg,#a7f3d0,#6ee7b7)">🌍</div>
+      <div class="module-info">
+        <div class="module-title">Global Health</div>
+        <div class="module-desc">Travel medicine, malaria, neglected tropical diseases</div>
+        <div class="module-meta"><span class="module-tag">Reference</span><span class="module-tag">CDC/WHO</span></div>
+      </div>
+    </a>
+    
+    <a href="lead-poisoning-module.html" class="module-card" data-system="other">
+      <div class="module-icon" style="background:linear-gradient(135deg,#fde68a,#fbbf24)">☣️</div>
+      <div class="module-info">
+        <div class="module-title">Environmental Medicine</div>
+        <div class="module-desc">Lead poisoning, I-CH2-OPS exposure framework</div>
+        <div class="module-meta"><span class="module-tag">Reference</span><span class="module-tag">ATSDR</span></div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- INTERACTIVE TOOLS -->
+<section class="section" id="tools">
+  <div class="section-header">
+    <h2 class="section-title">🔧 Interactive Tools</h2>
+    <p class="section-subtitle">Practice specific clinical skills with immediate feedback</p>
+  </div>
+  
+  <div class="tools-grid">
+    <a href="ecg-patterns.html" class="tool-card">
+      <div class="tool-icon">📈</div>
+      <h4>ECG Patterns</h4>
+      <p>Quiz + reference for 20+ ECG patterns</p>
+    </a>
+    
+    <a href="abg-analyzer.html" class="tool-card">
+      <div class="tool-icon">🧪</div>
+      <h4>ABG Analyzer</h4>
+      <p>Step-by-step acid-base interpretation</p>
+    </a>
+    
+    <a href="cross-system.html" class="tool-card">
+      <div class="tool-icon">🔗</div>
+      <h4>Cross-System Explorer</h4>
+      <p>Interactive organ system connections</p>
+    </a>
+    
+    <a href="question-generator.html" class="tool-card">
+      <div class="tool-icon">🎲</div>
+      <h4>Question Generator</h4>
+      <p>Adaptive mechanism quizzes</p>
+    </a>
+    
+    <a href="fingerprint-dashboard.html" class="tool-card">
+      <div class="tool-icon">📊</div>
+      <h4>Learning Dashboard</h4>
+      <p>Track your progress & patterns</p>
+    </a>
+  </div>
+</section>
+
+<!-- CROSS-REFERENCE -->
+<div class="crossref-section">
+  <div class="crossref-title">🔄 Reinforce Your Learning</div>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:20px">After completing a case module, try these related challenges and tools:</p>
+  <div class="crossref-grid">
+    <div class="crossref-header">After This Case...</div>
+    <div class="crossref-header">Try This Challenge</div>
+    <div class="crossref-header">Use This Tool</div>
+    
+    <div class="crossref-cell">Heart Failure</div>
+    <div class="crossref-cell"><a href="challenges.html" style="color:var(--blue)">RAAS Pathway Challenge</a></div>
+    <div class="crossref-cell"><a href="ecg-patterns.html" style="color:var(--purple)">ECG Patterns</a></div>
+    
+    <div class="crossref-cell">Pulmonology</div>
+    <div class="crossref-cell"><a href="challenges.html" style="color:var(--blue)">PE Pathway Challenge</a></div>
+    <div class="crossref-cell"><a href="abg-analyzer.html" style="color:var(--purple)">ABG Analyzer</a></div>
+    
+    <div class="crossref-cell">Electrolytes</div>
+    <div class="crossref-cell"><a href="challenges.html" style="color:var(--blue)">Predict Labs Challenge</a></div>
+    <div class="crossref-cell"><a href="abg-analyzer.html" style="color:var(--purple)">ABG Analyzer</a></div>
+    
+    <div class="crossref-cell">Sepsis/Shock</div>
+    <div class="crossref-cell"><a href="challenges.html" style="color:var(--blue)">Sepsis Bundle Challenge</a></div>
+    <div class="crossref-cell"><a href="cross-system.html" style="color:var(--purple)">Cross-System Explorer</a></div>
+    
+    <div class="crossref-cell">ACS/Arrhythmias</div>
+    <div class="crossref-cell"><a href="challenges.html" style="color:var(--blue)">ACS Pathway Challenge</a></div>
+    <div class="crossref-cell"><a href="ecg-patterns.html" style="color:var(--purple)">ECG Patterns</a></div>
+  </div>
+</div>
+
+</main>
+
+<footer class="footer">
+  <p>MechanismDx — A companion to <a href="reasondx-landing.html" style="color:var(--blue)">ReasonDx</a> Clinical Reasoning Platform</p>
+  <p style="margin-top:8px">© 2026 NSU Dr. Kiran C. Patel College of Allopathic Medicine</p>
+</footer>
+
+<script>
+function filterModules(system) {
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  
+  document.querySelectorAll('.module-card').forEach(card => {
+    if (system === 'all' || card.dataset.system === system) {
+      card.style.display = 'flex';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+</script>
+</body>
+</html>
