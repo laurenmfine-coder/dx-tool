@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoachDx - Teaching Session</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Inter', system-ui, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            background: #fafafa;
+            color: #18181b;
+            line-height: 1.6;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header */
+        .header {
+            background: #fff;
+            border-bottom: 1px solid #e4e4e7;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: inherit;
+        }
+        .logo-text {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .logo-text .dx { color: #8b5cf6; }
+        .case-info {
+            padding-left: 16px;
+            border-left: 1px solid #e4e4e7;
+        }
+        .case-title {
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .case-meta {
+            font-size: 12px;
+            color: #71717a;
+        }
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .timer {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: #f4f4f5;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #52525b;
+        }
+        .btn-end {
+            padding: 8px 16px;
+            background: #fff;
+            color: #71717a;
+            border: 1px solid #e4e4e7;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .btn-end:hover { border-color: #ef4444; color: #ef4444; }
+        
+        /* Main Layout */
+        .main {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: #fff;
+            border-right: 1px solid #e4e4e7;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+        .sidebar-section {
+            padding: 16px;
+            border-bottom: 1px solid #e4e4e7;
+        }
+        .sidebar-title {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #a1a1aa;
+            margin-bottom: 12px;
+        }
+        .patient-card {
+            background: #fafafa;
+            border: 1px solid #e4e4e7;
+            border-radius: 8px;
+            padding: 12px;
+        }
+        .patient-name {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+        .patient-details {
+            font-size: 12px;
+            color: #71717a;
+            line-height: 1.5;
+        }
+        
+        /* Progress Steps */
+        .progress-steps {
+            padding: 0;
+        }
+        .progress-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 10px 0;
+            position: relative;
+        }
+        .progress-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 11px;
+            top: 32px;
+            bottom: -2px;
+            width: 2px;
+            background: #e4e4e7;
+        }
+        .progress-step.completed:not(:last-child)::after { background: #22c55e; }
+        .progress-step.active:not(:last-child)::after { background: linear-gradient(to bottom, #8b5cf6 50%, #e4e4e7 50%); }
+        .step-indicator {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #f4f4f5;
+            border: 2px solid #e4e4e7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            flex-shrink: 0;
+            z-index: 1;
+        }
+        .progress-step.completed .step-indicator {
+            background: #22c55e;
+            border-color: #22c55e;
+            color: #fff;
+        }
+        .progress-step.active .step-indicator {
+            background: #8b5cf6;
+            border-color: #8b5cf6;
+            color: #fff;
+        }
+        .step-content {
+            flex: 1;
+            padding-top: 2px;
+        }
+        .step-title {
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .step-status {
+            font-size: 11px;
+            color: #71717a;
+        }
+        .progress-step.completed .step-status { color: #22c55e; }
+        .progress-step.active .step-status { color: #8b5cf6; }
+        
+        /* Teaching Notes */
+        .teaching-notes {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+        }
+        .teaching-note {
+            background: #faf5ff;
+            border: 1px solid #e9d5ff;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+        .teaching-note-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #7c3aed;
+            margin-bottom: 6px;
+        }
+        .teaching-note-text {
+            font-size: 12px;
+            color: #52525b;
+            line-height: 1.5;
+        }
+        
+        /* Chat Area */
+        .chat-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #fafafa;
+        }
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+        }
+        .message {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            max-width: 800px;
+        }
+        .message.student {
+            flex-direction: row-reverse;
+            margin-left: auto;
+        }
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+            background: #fff;
+            border: 1px solid #e4e4e7;
+        }
+        .avatar.attending { background: #faf5ff; border-color: #e9d5ff; }
+        .avatar.student { background: #f4f4f5; }
+        .message-content {
+            flex: 1;
+        }
+        .message-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+        .message-sender {
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .message-time {
+            font-size: 11px;
+            color: #a1a1aa;
+        }
+        .message-bubble {
+            padding: 14px 18px;
+            background: #fff;
+            border: 1px solid #e4e4e7;
+            border-radius: 12px;
+            border-top-left-radius: 4px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .message.student .message-bubble {
+            background: #18181b;
+            color: #fff;
+            border-color: #18181b;
+            border-radius: 12px;
+            border-top-right-radius: 4px;
+        }
+        .message.student .message-header {
+            flex-direction: row-reverse;
+        }
+        
+        /* Probing Question Highlight */
+        .probing-question {
+            background: #faf5ff;
+            border-color: #e9d5ff;
+        }
+        .probing-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            color: #7c3aed;
+            background: #ede9fe;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+        
+        /* Input Area */
+        .input-area {
+            padding: 16px 24px 24px;
+            background: #fff;
+            border-top: 1px solid #e4e4e7;
+        }
+        .input-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            gap: 12px;
+        }
+        .input-wrapper {
+            flex: 1;
+            position: relative;
+        }
+        .message-input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid #e4e4e7;
+            border-radius: 12px;
+            font-size: 14px;
+            font-family: inherit;
+            resize: none;
+            outline: none;
+            transition: border-color 0.15s;
+        }
+        .message-input:focus { border-color: #8b5cf6; }
+        .message-input::placeholder { color: #a1a1aa; }
+        .btn-send {
+            padding: 14px 24px;
+            background: #18181b;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-send:hover { background: #27272a; }
+        .btn-send:disabled { background: #e4e4e7; cursor: not-allowed; }
+        
+        /* Quick Actions */
+        .quick-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .quick-action {
+            padding: 8px 14px;
+            background: #f4f4f5;
+            border: 1px solid #e4e4e7;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #52525b;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .quick-action:hover { background: #e4e4e7; }
+        
+        /* Right Panel */
+        .right-panel {
+            width: 300px;
+            background: #fff;
+            border-left: 1px solid #e4e4e7;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+        .panel-tabs {
+            display: flex;
+            border-bottom: 1px solid #e4e4e7;
+        }
+        .panel-tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 500;
+            color: #71717a;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.15s;
+        }
+        .panel-tab:hover { color: #18181b; }
+        .panel-tab.active { color: #18181b; border-color: #18181b; }
+        .panel-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+        }
+        
+        /* Differential List */
+        .differential-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            background: #fafafa;
+            border: 1px solid #e4e4e7;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .differential-item:hover { border-color: #a1a1aa; }
+        .differential-rank {
+            width: 24px;
+            height: 24px;
+            background: #f4f4f5;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+            color: #52525b;
+        }
+        .differential-item.top .differential-rank { background: #fef3c7; color: #92400e; }
+        .differential-name {
+            flex: 1;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .differential-confidence {
+            font-size: 11px;
+            color: #71717a;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .right-panel { display: none; }
+        }
+        @media (max-width: 900px) {
+            .sidebar { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <a href="index.html" class="logo">
+                <span class="logo-text">Coach<span class="dx">Dx</span></span>
+            </a>
+            <div class="case-info">
+                <div class="case-title">Chest Pain - Emergency Department</div>
+                <div class="case-meta">52-year-old female • Started 12 min ago</div>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="timer">
+                <span>⏱</span>
+                <span id="timer">12:34</span>
+            </div>
+            <button class="btn-end">End Session</button>
+        </div>
+    </header>
+    
+    <!-- Main Layout -->
+    <main class="main">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">Patient</div>
+                <div class="patient-card">
+                    <div class="patient-name">Maria Santos</div>
+                    <div class="patient-details">
+                        52F • Chief Complaint: Chest Pain<br>
+                        Setting: Emergency Department<br>
+                        Acuity: High
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-title">Progress</div>
+                <div class="progress-steps">
+                    <div class="progress-step completed">
+                        <div class="step-indicator">✓</div>
+                        <div class="step-content">
+                            <div class="step-title">History Taking</div>
+                            <div class="step-status">Complete</div>
+                        </div>
+                    </div>
+                    <div class="progress-step active">
+                        <div class="step-indicator">2</div>
+                        <div class="step-content">
+                            <div class="step-title">Physical Exam</div>
+                            <div class="step-status">In progress</div>
+                        </div>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-indicator">3</div>
+                        <div class="step-content">
+                            <div class="step-title">Differential</div>
+                            <div class="step-status">Pending</div>
+                        </div>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-indicator">4</div>
+                        <div class="step-content">
+                            <div class="step-title">Workup</div>
+                            <div class="step-status">Pending</div>
+                        </div>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-indicator">5</div>
+                        <div class="step-content">
+                            <div class="step-title">Assessment</div>
+                            <div class="step-status">Pending</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="teaching-notes">
+                <div class="sidebar-title">Teaching Notes</div>
+                <div class="teaching-note">
+                    <div class="teaching-note-label">💡 Learning Point</div>
+                    <div class="teaching-note-text">You correctly identified the key red flags in the history. Consider how symptom timing relates to pathophysiology.</div>
+                </div>
+                <div class="teaching-note">
+                    <div class="teaching-note-label">🎯 Focus Area</div>
+                    <div class="teaching-note-text">Physical exam findings that would help differentiate cardiac from non-cardiac causes.</div>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Chat Area -->
+        <div class="chat-area">
+            <div class="chat-messages" id="chatMessages">
+                <div class="message attending">
+                    <div class="avatar attending">👨‍⚕️</div>
+                    <div class="message-content">
+                        <div class="message-header">
+                            <span class="message-sender">Dr. Attending</span>
+                            <span class="message-time">12:22 PM</span>
+                        </div>
+                        <div class="message-bubble">
+                            Good morning. Mrs. Santos is a 52-year-old woman who presented to the ED with chest pain. She's been triaged as high acuity. What would you like to know first?
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="message student">
+                    <div class="avatar student">👩‍🎓</div>
+                    <div class="message-content">
+                        <div class="message-header">
+                            <span class="message-sender">You</span>
+                            <span class="message-time">12:23 PM</span>
+                        </div>
+                        <div class="message-bubble">
+                            Can you tell me about the onset and character of her chest pain? When did it start and how would she describe it?
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="message attending">
+                    <div class="avatar attending">👨‍⚕️</div>
+                    <div class="message-content">
+                        <div class="message-header">
+                            <span class="message-sender">Dr. Attending</span>
+                            <span class="message-time">12:24 PM</span>
+                        </div>
+                        <div class="message-bubble">
+                            She describes substernal pressure that started about 2 hours ago while she was walking to work. She rates it 7/10 and says it feels like "an elephant sitting on my chest." She also mentions some sweating and nausea.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="message student">
+                    <div class="avatar student">👩‍🎓</div>
+                    <div class="message-content">
+                        <div class="message-header">
+                            <span class="message-sender">You</span>
+                            <span class="message-time">12:25 PM</span>
+                        </div>
+                        <div class="message-bubble">
+                            Those symptoms are concerning for ACS. I'd like to get an ECG and cardiac enzymes right away.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="message attending">
+                    <div class="avatar attending">👨‍⚕️</div>
+                    <div class="message-content">
+                        <div class="message-header">
+                            <span class="message-sender">Dr. Attending</span>
+                            <span class="message-time">12:26 PM</span>
+                        </div>
+                        <div class="message-bubble probing-question">
+                            <div class="probing-label">🎯 Probing Question</div>
+                            Good instinct on ordering those tests. But before we rush to the ECG - what specific finding are you looking for, and how would it change your immediate management? Think about the time-sensitive decisions you might need to make.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Input Area -->
+            <div class="input-area">
+                <div class="input-container">
+                    <div class="input-wrapper">
+                        <textarea class="message-input" id="messageInput" placeholder="Type your response..." rows="2"></textarea>
+                    </div>
+                    <button class="btn-send" id="sendBtn">
+                        Send
+                        <span>→</span>
+                    </button>
+                </div>
+                <div class="quick-actions">
+                    <button class="quick-action">Ask about vital signs</button>
+                    <button class="quick-action">Request physical exam</button>
+                    <button class="quick-action">Review medications</button>
+                    <button class="quick-action">Ask for hint</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right Panel -->
+        <aside class="right-panel">
+            <div class="panel-tabs">
+                <div class="panel-tab active">Differential</div>
+                <div class="panel-tab">Findings</div>
+                <div class="panel-tab">Orders</div>
+            </div>
+            <div class="panel-content">
+                <div class="sidebar-title">Your Working Differential</div>
+                <div class="differential-item top">
+                    <div class="differential-rank">1</div>
+                    <div class="differential-name">Acute Coronary Syndrome</div>
+                    <div class="differential-confidence">High</div>
+                </div>
+                <div class="differential-item">
+                    <div class="differential-rank">2</div>
+                    <div class="differential-name">Pulmonary Embolism</div>
+                    <div class="differential-confidence">Medium</div>
+                </div>
+                <div class="differential-item">
+                    <div class="differential-rank">3</div>
+                    <div class="differential-name">Aortic Dissection</div>
+                    <div class="differential-confidence">Medium</div>
+                </div>
+                <div class="differential-item">
+                    <div class="differential-rank">4</div>
+                    <div class="differential-name">Pericarditis</div>
+                    <div class="differential-confidence">Low</div>
+                </div>
+                <div class="differential-item">
+                    <div class="differential-rank">5</div>
+                    <div class="differential-name">GERD / Esophageal</div>
+                    <div class="differential-confidence">Low</div>
+                </div>
+            </div>
+        </aside>
+    </main>
+    
+    <script>
+        // Timer
+        let seconds = 754; // 12:34
+        function updateTimer() {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            document.getElementById('timer').textContent = 
+                `${mins}:${secs.toString().padStart(2, '0')}`;
+            seconds++;
+        }
+        setInterval(updateTimer, 1000);
+        
+        // Send message
+        const input = document.getElementById('messageInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const messages = document.getElementById('chatMessages');
+        
+        function sendMessage() {
+            const text = input.value.trim();
+            if (!text) return;
+            
+            // Add student message
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message student';
+            messageDiv.innerHTML = `
+                <div class="avatar student">👩‍🎓</div>
+                <div class="message-content">
+                    <div class="message-header">
+                        <span class="message-sender">You</span>
+                        <span class="message-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                    </div>
+                    <div class="message-bubble">${text}</div>
+                </div>
+            `;
+            messages.appendChild(messageDiv);
+            input.value = '';
+            messages.scrollTop = messages.scrollHeight;
+            
+            // Simulate attending response
+            setTimeout(() => {
+                const responses = [
+                    "That's a good thought. What physical exam findings would you expect if your hypothesis is correct?",
+                    "Interesting approach. Can you walk me through your reasoning?",
+                    "Before we order that, what specific question are you trying to answer?",
+                    "Good. Now, what would make you change your leading diagnosis?"
+                ];
+                const response = responses[Math.floor(Math.random() * responses.length)];
+                
+                const attendingMsg = document.createElement('div');
+                attendingMsg.className = 'message attending';
+                attendingMsg.innerHTML = `
+                    <div class="avatar attending">👨‍⚕️</div>
+                    <div class="message-content">
+                        <div class="message-header">
+                            <span class="message-sender">Dr. Attending</span>
+                            <span class="message-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                        </div>
+                        <div class="message-bubble probing-question">
+                            <div class="probing-label">🎯 Probing Question</div>
+                            ${response}
+                        </div>
+                    </div>
+                `;
+                messages.appendChild(attendingMsg);
+                messages.scrollTop = messages.scrollHeight;
+            }, 1500);
+        }
+        
+        sendBtn.addEventListener('click', sendMessage);
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+        
+        // Quick actions
+        document.querySelectorAll('.quick-action').forEach(btn => {
+            btn.addEventListener('click', () => {
+                input.value = btn.textContent;
+                input.focus();
+            });
+        });
+    </script>
+</body>
+</html>
