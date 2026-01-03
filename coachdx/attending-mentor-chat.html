@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Attending Mentor Chat - ReasonDx</title>
+<style>
+:root{
+    --bg-page:#f8fafc;
+    --bg-white:#fff;
+    --bg-subtle:#f1f5f9;
+    --text-primary:#0f172a;
+    --text-secondary:#475569;
+    --text-muted:#94a3b8;
+    --border:#e2e8f0;
+    --accent:#8b5cf6;
+    --accent-light:#ede9fe;
+    --accent-dark:#7c3aed;
+    --green:#059669;
+    --green-light:#d1fae5;
+    --blue:#3b82f6;
+    --blue-light:#dbeafe;
+    --orange:#f59e0b;
+    --orange-light:#fef3c7;
+    --radius-sm:8px;
+    --radius-lg:12px
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg-page);color:var(--text-primary);line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
+
+/* Header */
+.header{background:linear-gradient(135deg,#8b5cf6,#7c3aed);color:#fff;padding:14px 24px}
+.header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-icon{width:40px;height:40px;background:rgba(255,255,255,0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.logo-text{font-weight:700;font-size:18px}
+.logo-sub{font-size:12px;opacity:0.9}
+.back-link{color:#fff;text-decoration:none;font-size:13px;opacity:0.9;display:flex;align-items:center;gap:6px}
+.back-link:hover{opacity:1}
+
+/* Main Layout */
+.main-container{max-width:1200px;margin:0 auto;padding:24px;display:grid;grid-template-columns:320px 1fr;gap:24px;flex:1}
+@media(max-width:900px){.main-container{grid-template-columns:1fr}}
+
+/* Sidebar */
+.sidebar{display:flex;flex-direction:column;gap:16px}
+.card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.card-header{padding:12px 16px;border-bottom:1px solid var(--border);background:var(--bg-subtle)}
+.card-title{font-size:12px;font-weight:600;display:flex;align-items:center;gap:6px}
+.card-body{padding:16px}
+
+/* Case Selection */
+.case-list{display:flex;flex-direction:column;gap:8px}
+.case-item{padding:12px;background:var(--bg-subtle);border:2px solid transparent;border-radius:var(--radius-sm);cursor:pointer;transition:all 0.2s}
+.case-item:hover{border-color:var(--accent)}
+.case-item.active{border-color:var(--accent);background:var(--accent-light)}
+.case-name{font-size:13px;font-weight:600;margin-bottom:2px}
+.case-desc{font-size:11px;color:var(--text-secondary)}
+.case-tags{display:flex;gap:4px;margin-top:6px}
+.case-tag{font-size:9px;padding:2px 6px;background:var(--bg-white);border-radius:4px;color:var(--text-muted)}
+
+/* Attending Profile */
+.attending-profile{display:flex;align-items:center;gap:12px;padding:12px;background:var(--accent-light);border-radius:var(--radius-sm)}
+.attending-avatar{width:48px;height:48px;background:linear-gradient(135deg,var(--accent),var(--accent-dark));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px}
+.attending-name{font-size:14px;font-weight:600}
+.attending-specialty{font-size:11px;color:var(--text-secondary)}
+.attending-status{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--green);margin-top:2px}
+.status-dot{width:6px;height:6px;background:var(--green);border-radius:50%}
+
+/* Teaching Objectives */
+.objectives-list{font-size:12px}
+.objective-item{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid var(--border)}
+.objective-item:last-child{border-bottom:none}
+.objective-check{width:16px;height:16px;border:2px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0}
+.objective-item.completed .objective-check{background:var(--green);border-color:var(--green);color:#fff}
+.objective-text{color:var(--text-secondary)}
+.objective-item.completed .objective-text{color:var(--text-primary)}
+
+/* Chat Container */
+.chat-container{display:flex;flex-direction:column;background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;height:calc(100vh - 150px);min-height:500px}
+
+/* Chat Header */
+.chat-header{padding:14px 18px;border-bottom:1px solid var(--border);background:var(--bg-subtle);display:flex;align-items:center;gap:12px}
+.chat-avatar{width:40px;height:40px;background:linear-gradient(135deg,var(--accent),var(--accent-dark));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px}
+.chat-info{flex:1}
+.chat-name{font-size:14px;font-weight:600}
+.chat-status{font-size:11px;color:var(--text-secondary)}
+.chat-actions{display:flex;gap:8px}
+.chat-action-btn{padding:6px 12px;background:var(--bg-white);border:1px solid var(--border);border-radius:6px;font-size:11px;cursor:pointer;transition:all 0.2s}
+.chat-action-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* Messages Area */
+.messages-area{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:16px}
+
+/* Message Bubble */
+.message{display:flex;gap:10px;max-width:85%;animation:fadeIn 0.3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.message.attending{align-self:flex-start}
+.message.student{align-self:flex-end;flex-direction:row-reverse}
+.message-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.message.attending .message-avatar{background:linear-gradient(135deg,var(--accent),var(--accent-dark))}
+.message.student .message-avatar{background:linear-gradient(135deg,var(--blue),#2563eb)}
+.message-content{display:flex;flex-direction:column;gap:4px}
+.message-bubble{padding:12px 16px;border-radius:16px;font-size:14px;line-height:1.6}
+.message.attending .message-bubble{background:var(--bg-subtle);border-bottom-left-radius:4px}
+.message.student .message-bubble{background:var(--blue);color:#fff;border-bottom-right-radius:4px}
+.message-time{font-size:10px;color:var(--text-muted);padding:0 4px}
+.message.student .message-time{text-align:right}
+
+/* Teaching Moment */
+.teaching-moment{background:var(--accent-light);border:1px solid #c4b5fd;border-radius:var(--radius-sm);padding:12px;margin-top:8px}
+.teaching-label{font-size:10px;font-weight:600;color:var(--accent-dark);margin-bottom:6px;display:flex;align-items:center;gap:4px}
+.teaching-text{font-size:12px;color:var(--text-primary);line-height:1.5}
+
+/* Question Prompt */
+.question-prompt{background:var(--orange-light);border:1px solid #fed7aa;border-radius:var(--radius-sm);padding:12px;margin-top:8px}
+.question-label{font-size:10px;font-weight:600;color:#92400e;margin-bottom:6px;display:flex;align-items:center;gap:4px}
+.question-text{font-size:12px;color:#78350f;line-height:1.5;font-style:italic}
+
+/* Feedback */
+.feedback-positive{background:var(--green-light);border:1px solid #a7f3d0;border-radius:var(--radius-sm);padding:10px;margin-top:8px}
+.feedback-label{font-size:10px;font-weight:600;color:#065f46;margin-bottom:4px}
+.feedback-text{font-size:12px;color:#047857}
+
+/* System Message */
+.system-message{align-self:center;background:var(--bg-subtle);padding:8px 16px;border-radius:20px;font-size:11px;color:var(--text-secondary)}
+
+/* Typing Indicator */
+.typing-indicator{display:flex;gap:10px;align-self:flex-start}
+.typing-dots{display:flex;gap:4px;padding:12px 16px;background:var(--bg-subtle);border-radius:16px;border-bottom-left-radius:4px}
+.typing-dot{width:8px;height:8px;background:var(--text-muted);border-radius:50%;animation:bounce 1.4s infinite}
+.typing-dot:nth-child(2){animation-delay:0.2s}
+.typing-dot:nth-child(3){animation-delay:0.4s}
+@keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-4px)}}
+
+/* Input Area */
+.input-area{padding:16px;border-top:1px solid var(--border);background:var(--bg-subtle)}
+.input-row{display:flex;gap:10px;align-items:flex-end}
+.input-wrapper{flex:1;position:relative}
+.input-field{width:100%;padding:12px 16px;border:2px solid var(--border);border-radius:var(--radius-lg);font-size:14px;resize:none;min-height:48px;max-height:120px;font-family:inherit;transition:border-color 0.2s}
+.input-field:focus{outline:none;border-color:var(--accent)}
+.input-field::placeholder{color:var(--text-muted)}
+.send-btn{padding:12px 20px;background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border:none;border-radius:var(--radius-lg);font-weight:600;font-size:14px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:6px}
+.send-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(139,92,246,0.3)}
+.send-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+
+/* Quick Responses */
+.quick-responses{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.quick-btn{padding:6px 12px;background:var(--bg-white);border:1px solid var(--border);border-radius:20px;font-size:11px;cursor:pointer;transition:all 0.2s}
+.quick-btn:hover{border-color:var(--accent);background:var(--accent-light)}
+
+/* Hints Panel */
+.hints-toggle{width:100%;padding:10px;background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-sm);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;margin-top:8px}
+.hints-toggle:hover{border-color:var(--accent)}
+.hints-content{display:none;margin-top:8px;padding:12px;background:var(--orange-light);border-radius:var(--radius-sm);font-size:11px;color:#92400e}
+.hints-content.visible{display:block}
+.hint-item{padding:4px 0;border-bottom:1px dashed #fed7aa}
+.hint-item:last-child{border-bottom:none}
+
+/* Progress Tracker */
+.progress-tracker{margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}
+.progress-label{font-size:10px;color:var(--text-muted);margin-bottom:6px;display:flex;justify-content:space-between}
+.progress-bar{height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));transition:width 0.3s}
+
+/* Specialty Badge */
+.specialty-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;background:var(--accent-light);border-radius:4px;font-size:10px;font-weight:600;color:var(--accent-dark)}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+    <div class="header-inner">
+        <div class="logo">
+            <div class="logo-icon">👩‍⚕️</div>
+            <div>
+                <div class="logo-text">Attending Mentor Chat</div>
+                <div class="logo-sub">Socratic Clinical Teaching</div>
+            </div>
+        </div>
+        <a href="index.html" class="back-link">← Back to ReasonDx</a>
+    </div>
+</header>
+
+<!-- Main Content -->
+<main class="main-container">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        
+        <!-- Current Attending -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">👩‍⚕️ Your Attending</div>
+            </div>
+            <div class="card-body">
+                <div class="attending-profile">
+                    <div class="attending-avatar">👩‍⚕️</div>
+                    <div>
+                        <div class="attending-name">Dr. Sarah Chen</div>
+                        <div class="attending-specialty">Cardiology</div>
+                        <div class="attending-status"><div class="status-dot"></div>Online</div>
+                    </div>
+                </div>
+                <div style="margin-top:12px;font-size:11px;color:var(--text-secondary);line-height:1.5">
+                    <strong>Teaching Style:</strong> Socratic questioning, mechanism-focused, encourages independent reasoning before providing answers.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Select Case -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">📋 Select Case to Discuss</div>
+            </div>
+            <div class="card-body">
+                <div class="case-list">
+                    <div class="case-item active" onclick="selectCase(this, 'stemi')">
+                        <div class="case-name">Marcus Williams - Chest Pain</div>
+                        <div class="case-desc">58M with substernal pressure, ST elevation</div>
+                        <div class="case-tags">
+                            <span class="case-tag">ACS</span>
+                            <span class="case-tag">STEMI</span>
+                        </div>
+                    </div>
+                    <div class="case-item" onclick="selectCase(this, 'sepsis')">
+                        <div class="case-name">James Mitchell - Altered Mental Status</div>
+                        <div class="case-desc">67M from nursing home, hypotensive</div>
+                        <div class="case-tags">
+                            <span class="case-tag">Sepsis</span>
+                            <span class="case-tag">Shock</span>
+                        </div>
+                    </div>
+                    <div class="case-item" onclick="selectCase(this, 'pe')">
+                        <div class="case-name">Angela Torres - Dyspnea</div>
+                        <div class="case-desc">42F post-surgery with pleuritic chest pain</div>
+                        <div class="case-tags">
+                            <span class="case-tag">PE</span>
+                            <span class="case-tag">VTE</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Teaching Objectives -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">🎯 Teaching Objectives</div>
+            </div>
+            <div class="card-body">
+                <div class="objectives-list">
+                    <div class="objective-item completed">
+                        <div class="objective-check">✓</div>
+                        <div class="objective-text">Identify STEMI on ECG</div>
+                    </div>
+                    <div class="objective-item completed">
+                        <div class="objective-check">✓</div>
+                        <div class="objective-text">Explain pathophysiology of ACS</div>
+                    </div>
+                    <div class="objective-item">
+                        <div class="objective-check"></div>
+                        <div class="objective-text">Discuss reperfusion strategies</div>
+                    </div>
+                    <div class="objective-item">
+                        <div class="objective-check"></div>
+                        <div class="objective-text">Identify must-not-miss diagnoses</div>
+                    </div>
+                    <div class="objective-item">
+                        <div class="objective-check"></div>
+                        <div class="objective-text">Apply door-to-balloon principles</div>
+                    </div>
+                </div>
+                <div class="progress-tracker">
+                    <div class="progress-label">
+                        <span>Discussion Progress</span>
+                        <span>2/5 objectives</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width:40%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Hints -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">💡 Need Help?</div>
+            </div>
+            <div class="card-body">
+                <button class="hints-toggle" onclick="toggleHints()">
+                    <span>🤔 Show Discussion Hints</span>
+                    <span id="hintsArrow">▼</span>
+                </button>
+                <div class="hints-content" id="hintsContent">
+                    <div class="hint-item">Ask about the mechanism of ST elevation</div>
+                    <div class="hint-item">Discuss why reciprocal changes occur</div>
+                    <div class="hint-item">Compare PCI vs fibrinolysis indications</div>
+                    <div class="hint-item">Ask about contraindications to thrombolytics</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+    
+    <!-- Chat Container -->
+    <div class="chat-container">
+        
+        <!-- Chat Header -->
+        <div class="chat-header">
+            <div class="chat-avatar">👩‍⚕️</div>
+            <div class="chat-info">
+                <div class="chat-name">Dr. Sarah Chen <span class="specialty-badge">Cardiology</span></div>
+                <div class="chat-status">Discussing: Marcus Williams - Anterior STEMI</div>
+            </div>
+            <div class="chat-actions">
+                <button class="chat-action-btn" onclick="summarizeDiscussion()">📋 Summary</button>
+                <button class="chat-action-btn" onclick="newTopic()">🔄 New Topic</button>
+            </div>
+        </div>
+        
+        <!-- Messages Area -->
+        <div class="messages-area" id="messagesArea">
+            
+            <!-- System Message -->
+            <div class="system-message">
+                Discussion started • Case: Marcus Williams, 58M with Anterior STEMI
+            </div>
+            
+            <!-- Attending Welcome -->
+            <div class="message attending">
+                <div class="message-avatar">👩‍⚕️</div>
+                <div class="message-content">
+                    <div class="message-bubble">
+                        Good morning! I see you've been working on Mr. Williams' case. You correctly identified the anterior STEMI pattern on his ECG. Let's discuss this further.
+                        <div class="question-prompt">
+                            <div class="question-label">🤔 Let's think about this:</div>
+                            <div class="question-text">Can you walk me through how you identified this as a STEMI rather than another cause of ST elevation? What specific findings led you there?</div>
+                        </div>
+                    </div>
+                    <div class="message-time">8:42 AM</div>
+                </div>
+            </div>
+            
+            <!-- Student Response -->
+            <div class="message student">
+                <div class="message-avatar">🧑‍🎓</div>
+                <div class="message-content">
+                    <div class="message-bubble">
+                        The ECG showed ST elevation in V2-V4 with reciprocal ST depression in II, III, and aVF. Combined with his clinical presentation of substernal pressure, diaphoresis, and elevated troponin, this fits the pattern for an anterior STEMI.
+                    </div>
+                    <div class="message-time">8:43 AM</div>
+                </div>
+            </div>
+            
+            <!-- Attending Feedback -->
+            <div class="message attending">
+                <div class="message-avatar">👩‍⚕️</div>
+                <div class="message-content">
+                    <div class="message-bubble">
+                        <div class="feedback-positive">
+                            <div class="feedback-label">✓ Excellent reasoning!</div>
+                            <div class="feedback-text">You correctly identified the territorial distribution (V2-V4 = LAD territory) AND the reciprocal changes, which strongly supports acute occlusion rather than other causes of ST elevation.</div>
+                        </div>
+                        <div style="margin-top:12px">
+                            Now, let's go deeper on mechanism. You mentioned the troponin was elevated.
+                        </div>
+                        <div class="question-prompt">
+                            <div class="question-label">🤔 Think about this:</div>
+                            <div class="question-text">Why does troponin rise in STEMI? What's the pathophysiologic cascade from coronary occlusion to troponin elevation?</div>
+                        </div>
+                    </div>
+                    <div class="message-time">8:44 AM</div>
+                </div>
+            </div>
+            
+            <!-- Student Attempt -->
+            <div class="message student">
+                <div class="message-avatar">🧑‍🎓</div>
+                <div class="message-content">
+                    <div class="message-bubble">
+                        When the coronary artery is occluded, the myocardium becomes ischemic. The cells start dying due to lack of oxygen, and when they die, they release their intracellular contents including troponin into the bloodstream.
+                    </div>
+                    <div class="message-time">8:45 AM</div>
+                </div>
+            </div>
+            
+            <!-- Attending Teaching Moment -->
+            <div class="message attending">
+                <div class="message-avatar">👩‍⚕️</div>
+                <div class="message-content">
+                    <div class="message-bubble">
+                        Good foundation! Let me add some nuance to your understanding.
+                        <div class="teaching-moment">
+                            <div class="teaching-label">📚 Teaching Point:</div>
+                            <div class="teaching-text">
+                                <strong>The Cascade:</strong><br>
+                                1. <strong>Plaque rupture</strong> → thrombogenic core exposed<br>
+                                2. <strong>Platelet aggregation</strong> → occlusive thrombus forms<br>
+                                3. <strong>Complete occlusion</strong> → transmural ischemia (minutes)<br>
+                                4. <strong>ATP depletion</strong> → ion pump failure → membrane instability<br>
+                                5. <strong>Cell death</strong> → troponin release (hours)<br><br>
+                                Key insight: Troponin rises 3-4 hours after symptom onset. A negative troponin at presentation doesn't rule out STEMI - that's why the ECG is your friend in the first few hours!
+                            </div>
+                        </div>
+                        <div class="question-prompt">
+                            <div class="question-label">🤔 Clinical application:</div>
+                            <div class="question-text">Given this timeline, why do we say "time is muscle" in STEMI? What's the target door-to-balloon time and why?</div>
+                        </div>
+                    </div>
+                    <div class="message-time">8:46 AM</div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <!-- Input Area -->
+        <div class="input-area">
+            <div class="input-row">
+                <div class="input-wrapper">
+                    <textarea class="input-field" id="messageInput" placeholder="Discuss the case with Dr. Chen..." rows="1" onkeydown="handleKeyDown(event)"></textarea>
+                </div>
+                <button class="send-btn" onclick="sendMessage()" id="sendBtn">
+                    Send <span>→</span>
+                </button>
+            </div>
+            <div class="quick-responses">
+                <button class="quick-btn" onclick="quickResponse('explain')">Can you explain that further?</button>
+                <button class="quick-btn" onclick="quickResponse('mechanism')">What's the mechanism?</button>
+                <button class="quick-btn" onclick="quickResponse('clinical')">How does this change management?</button>
+                <button class="quick-btn" onclick="quickResponse('ddx')">What else should I consider?</button>
+                <button class="quick-btn" onclick="quickResponse('evidence')">What's the evidence?</button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+// Attending response database organized by topic and teaching style
+const attendingResponses = {
+    stemi: {
+        doorToBalloon: {
+            triggers: ['door-to-balloon', 'door to balloon', '90 minutes', 'time is muscle', 'reperfusion'],
+            response: `Exactly right on the 90-minute target! Let me expand on this:
+                <div class="teaching-moment">
+                    <div class="teaching-label">📚 Teaching Point:</div>
+                    <div class="teaching-text">
+                        <strong>Door-to-Balloon (D2B) Time:</strong><br>
+                        • Target: <90 minutes (ideally <60 minutes)<br>
+                        • Why 90? Studies show mortality increases ~7.5% for every 30-minute delay<br>
+                        • "Time is muscle" - you lose ~1-2% of at-risk myocardium per hour of occlusion<br><br>
+                        <strong>The Golden Hour Concept:</strong><br>
+                        Reperfusion within 1-2 hours can salvage significant myocardium. After 6 hours, benefit diminishes substantially but still exists up to 12 hours.
+                    </div>
+                </div>`,
+            followUp: `Now, what if the nearest PCI center is 2 hours away? What's your alternative strategy?`
+        },
+        fibrinolysis: {
+            triggers: ['fibrinolysis', 'thrombolytic', 'tpa', 'alteplase', 'tenecteplase', 'no pci'],
+            response: `Great question about fibrinolysis! This is a crucial backup strategy.
+                <div class="teaching-moment">
+                    <div class="teaching-label">📚 Teaching Point:</div>
+                    <div class="teaching-text">
+                        <strong>Fibrinolysis Indications:</strong><br>
+                        • When PCI cannot be performed within 120 minutes of first medical contact<br>
+                        • Target: Door-to-needle <30 minutes<br><br>
+                        <strong>Key Contraindications (Absolute):</strong><br>
+                        • Prior intracranial hemorrhage EVER<br>
+                        • Known structural cerebral vascular lesion<br>
+                        • Ischemic stroke within 3 months<br>
+                        • Active bleeding or bleeding diathesis<br>
+                        • Significant head trauma within 3 months
+                    </div>
+                </div>`,
+            followUp: `What would you do if the patient arrives and you give lytics, but they don't reperfuse? How would you know?`
+        },
+        aorticDissection: {
+            triggers: ['dissection', 'aortic', 'must not miss', 'tear', 'ripping'],
+            response: `Excellent clinical thinking - always considering the must-not-miss diagnoses!
+                <div class="teaching-moment">
+                    <div class="teaching-label">📚 Teaching Point:</div>
+                    <div class="teaching-text">
+                        <strong>Why Dissection Matters in ACS:</strong><br>
+                        • Type A dissection can cause coronary ostial occlusion → STEMI pattern<br>
+                        • If you give anticoagulation/antiplatelets to a dissection patient → catastrophic<br><br>
+                        <strong>Red Flags for Dissection:</strong><br>
+                        • "Tearing" or "ripping" pain radiating to back<br>
+                        • Blood pressure differential between arms (>20 mmHg)<br>
+                        • New aortic regurgitation murmur<br>
+                        • Widened mediastinum on CXR<br>
+                        • Pulse deficits
+                    </div>
+                </div>`,
+            followUp: `In our patient Mr. Williams, what features make dissection less likely? What would you check to help rule it out?`
+        }
+    },
+    general: {
+        mechanism: {
+            triggers: ['mechanism', 'pathophysiology', 'why does', 'how does'],
+            response: `I appreciate you asking about the mechanism - understanding the "why" helps you remember the "what" and apply it to new situations.`
+        },
+        differential: {
+            triggers: ['differential', 'ddx', 'what else', 'other causes', 'rule out'],
+            response: `Thinking about the differential is crucial. Let's systematically consider what else could cause this presentation.`
+        }
+    }
+};
+
+// Track conversation state
+let conversationState = {
+    case: 'stemi',
+    objectivesCompleted: 2,
+    totalObjectives: 5,
+    messageCount: 0
+};
+
+// Handle textarea auto-resize
+const messageInput = document.getElementById('messageInput');
+messageInput.addEventListener('input', function() {
+    this.style.height = 'auto';
+    this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+});
+
+// Send message
+function sendMessage() {
+    const input = document.getElementById('messageInput');
+    const text = input.value.trim();
+    if (!text) return;
+    
+    // Add user message
+    addMessage('student', text);
+    input.value = '';
+    input.style.height = 'auto';
+    
+    // Show typing indicator
+    showTyping();
+    
+    // Generate attending response after delay
+    setTimeout(() => {
+        hideTyping();
+        generateAttendingResponse(text);
+    }, 1500 + Math.random() * 1000);
+}
+
+// Add message to chat
+function addMessage(type, content, extras = {}) {
+    const messagesArea = document.getElementById('messagesArea');
+    const message = document.createElement('div');
+    message.className = `message ${type}`;
+    
+    const avatar = type === 'attending' ? '👩‍⚕️' : '🧑‍🎓';
+    const time = new Date().toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit'});
+    
+    let bubbleContent = content;
+    if (extras.teachingMoment) {
+        bubbleContent += `<div class="teaching-moment"><div class="teaching-label">📚 Teaching Point:</div><div class="teaching-text">${extras.teachingMoment}</div></div>`;
+    }
+    if (extras.question) {
+        bubbleContent += `<div class="question-prompt"><div class="question-label">🤔 Think about this:</div><div class="question-text">${extras.question}</div></div>`;
+    }
+    if (extras.feedback) {
+        bubbleContent = `<div class="feedback-positive"><div class="feedback-label">✓ ${extras.feedbackLabel || 'Good thinking!'}</div><div class="feedback-text">${extras.feedback}</div></div>` + bubbleContent;
+    }
+    
+    message.innerHTML = `
+        <div class="message-avatar">${avatar}</div>
+        <div class="message-content">
+            <div class="message-bubble">${bubbleContent}</div>
+            <div class="message-time">${time}</div>
+        </div>
+    `;
+    
+    messagesArea.appendChild(message);
+    messagesArea.scrollTop = messagesArea.scrollHeight;
+    conversationState.messageCount++;
+}
+
+// Show/hide typing indicator
+function showTyping() {
+    const messagesArea = document.getElementById('messagesArea');
+    const typing = document.createElement('div');
+    typing.className = 'typing-indicator';
+    typing.id = 'typingIndicator';
+    typing.innerHTML = `
+        <div class="message-avatar" style="background:linear-gradient(135deg,var(--accent),var(--accent-dark))">👩‍⚕️</div>
+        <div class="typing-dots">
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+        </div>
+    `;
+    messagesArea.appendChild(typing);
+    messagesArea.scrollTop = messagesArea.scrollHeight;
+}
+
+function hideTyping() {
+    const typing = document.getElementById('typingIndicator');
+    if (typing) typing.remove();
+}
+
+// Generate attending response based on student input
+function generateAttendingResponse(studentText) {
+    const lowerText = studentText.toLowerCase();
+    let response = '';
+    let extras = {};
+    
+    // Check for specific topic triggers
+    const caseResponses = attendingResponses[conversationState.case];
+    
+    for (const topic in caseResponses) {
+        const topicData = caseResponses[topic];
+        if (topicData.triggers && topicData.triggers.some(t => lowerText.includes(t))) {
+            response = topicData.response;
+            if (topicData.followUp) {
+                extras.question = topicData.followUp;
+            }
+            break;
+        }
+    }
+    
+    // Fallback responses based on general patterns
+    if (!response) {
+        if (lowerText.includes('?')) {
+            // Student asked a question
+            response = generateQuestionResponse(lowerText);
+        } else if (lowerText.length > 100) {
+            // Detailed response - give positive feedback
+            extras.feedback = "You're demonstrating good clinical reasoning by explaining your thought process thoroughly.";
+            extras.feedbackLabel = "Good approach!";
+            response = "Let me build on what you've said.";
+            extras.question = "Based on this understanding, what would be your next step in management?";
+        } else {
+            // Short response - prompt for more
+            response = "I see where you're going with that. Can you elaborate on your reasoning?";
+            extras.question = "Walk me through your thought process step by step.";
+        }
+    }
+    
+    addMessage('attending', response, extras);
+}
+
+// Generate response to student questions
+function generateQuestionResponse(text) {
+    if (text.includes('why')) {
+        return "That's a great 'why' question - understanding the mechanism helps everything else make sense. Let me explain...";
+    } else if (text.includes('how')) {
+        return "Good question about the approach. Here's how I think about it...";
+    } else if (text.includes('what if')) {
+        return "I love 'what if' questions - they show you're thinking ahead. Let's consider that scenario...";
+    } else {
+        return "Good question. Let's think through this together...";
+    }
+}
+
+// Quick response buttons
+function quickResponse(type) {
+    const responses = {
+        explain: "Can you explain that concept in more detail?",
+        mechanism: "What's the underlying mechanism here?",
+        clinical: "How does this change our management approach?",
+        ddx: "What other diagnoses should I be considering?",
+        evidence: "What's the evidence behind this recommendation?"
+    };
+    document.getElementById('messageInput').value = responses[type];
+    sendMessage();
+}
+
+// Handle Enter key
+function handleKeyDown(event) {
+    if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        sendMessage();
+    }
+}
+
+// Select case
+function selectCase(element, caseId) {
+    document.querySelectorAll('.case-item').forEach(c => c.classList.remove('active'));
+    element.classList.add('active');
+    conversationState.case = caseId;
+    
+    // Add system message
+    const messagesArea = document.getElementById('messagesArea');
+    const caseNames = {
+        stemi: 'Marcus Williams - Anterior STEMI',
+        sepsis: 'James Mitchell - Septic Shock',
+        pe: 'Angela Torres - Pulmonary Embolism'
+    };
+    
+    const sysMsg = document.createElement('div');
+    sysMsg.className = 'system-message';
+    sysMsg.textContent = `Switched to case: ${caseNames[caseId]}`;
+    messagesArea.appendChild(sysMsg);
+    messagesArea.scrollTop = messagesArea.scrollHeight;
+}
+
+// Toggle hints
+function toggleHints() {
+    const content = document.getElementById('hintsContent');
+    const arrow = document.getElementById('hintsArrow');
+    content.classList.toggle('visible');
+    arrow.textContent = content.classList.contains('visible') ? '▲' : '▼';
+}
+
+// Summary and new topic functions
+function summarizeDiscussion() {
+    addMessage('attending', `Let me summarize what we've covered so far:
+        <div class="teaching-moment">
+            <div class="teaching-label">📋 Discussion Summary:</div>
+            <div class="teaching-text">
+                <strong>Key Points Discussed:</strong><br>
+                ✓ STEMI identification on ECG (territorial ST elevation + reciprocal changes)<br>
+                ✓ Pathophysiology cascade from plaque rupture to troponin elevation<br>
+                ✓ Importance of door-to-balloon time (<90 minutes)<br><br>
+                <strong>Still to Cover:</strong><br>
+                ○ Fibrinolysis vs PCI decision-making<br>
+                ○ Must-not-miss diagnoses (aortic dissection)<br>
+                ○ Post-reperfusion care
+            </div>
+        </div>`, {});
+}
+
+function newTopic() {
+    addMessage('attending', "Let's shift gears. What aspect of this case would you like to explore next? We could discuss the management algorithm, complications to watch for, or dive deeper into any mechanism you're curious about.", 
+        { question: "What interests you most about this case?" });
+}
+</script>
+</body>
+</html>

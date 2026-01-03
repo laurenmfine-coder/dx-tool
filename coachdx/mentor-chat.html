@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mentor Chat - CoachDx</title>
+<style>
+:root {
+    --bg-page: #f8fafc;
+    --bg-white: #fff;
+    --bg-subtle: #f1f5f9;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --border: #e2e8f0;
+    --purple: #8b5cf6;
+    --purple-light: #ede9fe;
+    --purple-dark: #7c3aed;
+    --green: #059669;
+    --green-light: #d1fae5;
+    --blue: #3b82f6;
+    --blue-light: #dbeafe;
+    --orange: #f59e0b;
+    --orange-light: #fef3c7;
+    --red: #ef4444;
+    --red-light: #fee2e2;
+    --radius-sm: 8px;
+    --radius-lg: 12px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg-page); color: var(--text-primary); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
+
+/* Header */
+.header { background: linear-gradient(135deg, var(--purple), var(--purple-dark)); color: #fff; padding: 12px 24px; }
+.header-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+.logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: white; }
+.logo-icon { width: 40px; height: 40px; background: rgba(255,255,255,0.2); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+.logo-text { font-weight: 700; font-size: 18px; }
+.logo-sub { font-size: 11px; opacity: 0.9; }
+.header-nav { display: flex; align-items: center; gap: 20px; }
+.header-link { color: rgba(255,255,255,0.9); text-decoration: none; font-size: 13px; transition: opacity 0.2s; }
+.header-link:hover { opacity: 1; }
+.user-badge { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); padding: 6px 12px; border-radius: 20px; font-size: 12px; }
+
+/* Main Layout */
+.main-container { max-width: 1400px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: 300px 1fr 280px; gap: 20px; flex: 1; height: calc(100vh - 70px); }
+@media (max-width: 1100px) { .main-container { grid-template-columns: 280px 1fr; } .right-sidebar { display: none; } }
+@media (max-width: 800px) { .main-container { grid-template-columns: 1fr; } .left-sidebar { display: none; } }
+
+/* Cards */
+.card { background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+.card-header { padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--bg-subtle); }
+.card-title { font-size: 12px; font-weight: 600; display: flex; align-items: center; gap: 6px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-secondary); }
+.card-body { padding: 14px; }
+
+/* Left Sidebar */
+.left-sidebar { display: flex; flex-direction: column; gap: 16px; overflow-y: auto; }
+
+/* Attending Profile */
+.attending-profile { display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--purple-light); border-radius: var(--radius-sm); }
+.attending-avatar { width: 52px; height: 52px; background: linear-gradient(135deg, var(--purple), var(--purple-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; }
+.attending-name { font-size: 15px; font-weight: 600; }
+.attending-specialty { font-size: 11px; color: var(--text-secondary); }
+.attending-status { display: flex; align-items: center; gap: 4px; font-size: 10px; color: var(--green); margin-top: 2px; }
+.status-dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+/* Case Selection */
+.case-list { display: flex; flex-direction: column; gap: 8px; max-height: 300px; overflow-y: auto; }
+.case-item { padding: 12px; background: var(--bg-subtle); border: 2px solid transparent; border-radius: var(--radius-sm); cursor: pointer; transition: all 0.2s; }
+.case-item:hover { border-color: var(--purple); }
+.case-item.active { border-color: var(--purple); background: var(--purple-light); }
+.case-name { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+.case-chief { font-size: 11px; color: var(--text-secondary); margin-bottom: 6px; }
+.case-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+.case-tag { font-size: 9px; padding: 2px 6px; background: var(--bg-white); border-radius: 4px; color: var(--text-muted); }
+.case-difficulty { font-size: 9px; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+.case-difficulty.beginner { background: var(--green-light); color: var(--green); }
+.case-difficulty.intermediate { background: var(--orange-light); color: var(--orange); }
+.case-difficulty.advanced { background: var(--red-light); color: var(--red); }
+
+/* Chat Container */
+.chat-container { display: flex; flex-direction: column; background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+
+/* Chat Header */
+.chat-header { padding: 14px 18px; border-bottom: 1px solid var(--border); background: var(--bg-subtle); display: flex; align-items: center; justify-content: space-between; }
+.chat-case-info { display: flex; align-items: center; gap: 12px; }
+.chat-case-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--blue), #2563eb); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+.chat-case-name { font-size: 14px; font-weight: 600; }
+.chat-case-status { font-size: 11px; color: var(--text-secondary); }
+.chat-actions { display: flex; gap: 8px; }
+.chat-action-btn { padding: 8px 14px; background: var(--bg-white); border: 1px solid var(--border); border-radius: 6px; font-size: 11px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 4px; }
+.chat-action-btn:hover { border-color: var(--purple); color: var(--purple); }
+
+/* Messages Area */
+.messages-area { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+
+/* Messages */
+.message { display: flex; gap: 10px; max-width: 85%; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.message.attending { align-self: flex-start; }
+.message.student { align-self: flex-end; flex-direction: row-reverse; }
+.message-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.message.attending .message-avatar { background: linear-gradient(135deg, var(--purple), var(--purple-dark)); }
+.message.student .message-avatar { background: linear-gradient(135deg, var(--blue), #2563eb); }
+.message-content { display: flex; flex-direction: column; gap: 4px; }
+.message-bubble { padding: 14px 18px; border-radius: 18px; font-size: 14px; line-height: 1.6; }
+.message.attending .message-bubble { background: var(--bg-subtle); border-bottom-left-radius: 4px; }
+.message.student .message-bubble { background: var(--blue); color: #fff; border-bottom-right-radius: 4px; }
+.message-time { font-size: 10px; color: var(--text-muted); padding: 0 4px; }
+.message.student .message-time { text-align: right; }
+
+/* Teaching Moment */
+.teaching-moment { background: var(--purple-light); border: 1px solid #c4b5fd; border-radius: var(--radius-sm); padding: 12px; margin-top: 8px; }
+.teaching-label { font-size: 10px; font-weight: 600; color: var(--purple-dark); margin-bottom: 6px; display: flex; align-items: center; gap: 4px; }
+.teaching-text { font-size: 13px; color: var(--text-primary); line-height: 1.6; }
+
+/* Question Prompt */
+.question-prompt { background: var(--orange-light); border: 1px solid #fed7aa; border-radius: var(--radius-sm); padding: 12px; margin-top: 8px; }
+.question-label { font-size: 10px; font-weight: 600; color: #92400e; margin-bottom: 6px; display: flex; align-items: center; gap: 4px; }
+.question-text { font-size: 13px; color: #78350f; line-height: 1.5; font-style: italic; }
+
+/* Positive Feedback */
+.feedback-positive { background: var(--green-light); border: 1px solid #a7f3d0; border-radius: var(--radius-sm); padding: 10px 12px; margin-top: 8px; }
+.feedback-label { font-size: 10px; font-weight: 600; color: #065f46; margin-bottom: 4px; display: flex; align-items: center; gap: 4px; }
+.feedback-text { font-size: 12px; color: #047857; }
+
+/* System Message */
+.system-message { align-self: center; background: var(--bg-subtle); padding: 8px 16px; border-radius: 20px; font-size: 11px; color: var(--text-secondary); margin: 8px 0; }
+
+/* Typing Indicator */
+.typing-indicator { display: flex; gap: 10px; align-self: flex-start; }
+.typing-dots { display: flex; gap: 4px; padding: 14px 18px; background: var(--bg-subtle); border-radius: 18px; border-bottom-left-radius: 4px; }
+.typing-dot { width: 8px; height: 8px; background: var(--text-muted); border-radius: 50%; animation: bounce 1.4s infinite; }
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes bounce { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-4px); } }
+
+/* Input Area */
+.input-area { padding: 16px; border-top: 1px solid var(--border); background: var(--bg-subtle); }
+.input-row { display: flex; gap: 10px; align-items: flex-end; }
+.input-wrapper { flex: 1; position: relative; }
+.input-field { width: 100%; padding: 14px 18px; border: 2px solid var(--border); border-radius: var(--radius-lg); font-size: 14px; resize: none; min-height: 52px; max-height: 120px; font-family: inherit; transition: border-color 0.2s; }
+.input-field:focus { outline: none; border-color: var(--purple); }
+.send-btn { padding: 14px 24px; background: linear-gradient(135deg, var(--purple), var(--purple-dark)); color: #fff; border: none; border-radius: var(--radius-lg); font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
+.send-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(139,92,246,0.3); }
+.send-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+/* Quick Responses */
+.quick-responses { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.quick-btn { padding: 8px 14px; background: var(--bg-white); border: 1px solid var(--border); border-radius: 20px; font-size: 12px; cursor: pointer; transition: all 0.2s; }
+.quick-btn:hover { border-color: var(--purple); background: var(--purple-light); }
+
+/* Right Sidebar */
+.right-sidebar { display: flex; flex-direction: column; gap: 16px; overflow-y: auto; }
+
+/* Teaching Objectives */
+.objectives-list { font-size: 12px; }
+.objective-item { display: flex; align-items: flex-start; gap: 8px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+.objective-item:last-child { border-bottom: none; }
+.objective-check { width: 18px; height: 18px; border: 2px solid var(--border); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0; margin-top: 2px; }
+.objective-item.completed .objective-check { background: var(--green); border-color: var(--green); color: #fff; }
+.objective-text { color: var(--text-secondary); line-height: 1.5; }
+.objective-item.completed .objective-text { color: var(--text-primary); text-decoration: line-through; opacity: 0.7; }
+
+/* Progress */
+.progress-section { margin-top: 8px; }
+.progress-label { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; display: flex; justify-content: space-between; }
+.progress-bar { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--purple), var(--green)); transition: width 0.3s; border-radius: 4px; }
+
+/* Hints */
+.hints-toggle { width: 100%; padding: 10px 12px; background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
+.hints-toggle:hover { border-color: var(--purple); }
+.hints-content { display: none; margin-top: 8px; padding: 12px; background: var(--orange-light); border-radius: var(--radius-sm); font-size: 11px; color: #92400e; line-height: 1.6; }
+.hints-content.visible { display: block; }
+.hint-item { padding: 6px 0; border-bottom: 1px dashed #fed7aa; }
+.hint-item:last-child { border-bottom: none; }
+
+/* Fingerprint Mini */
+.fingerprint-mini { margin-top: 12px; padding: 12px; background: var(--bg-subtle); border-radius: var(--radius-sm); }
+.fingerprint-title { font-size: 10px; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+.fingerprint-stat { display: flex; justify-content: space-between; font-size: 11px; padding: 4px 0; }
+.fingerprint-stat-label { color: var(--text-secondary); }
+.fingerprint-stat-value { font-weight: 600; color: var(--text-primary); }
+
+/* Cross-Platform Badge */
+.cross-platform { margin-top: 12px; padding: 10px 12px; background: linear-gradient(135deg, var(--blue-light), var(--green-light)); border-radius: var(--radius-sm); font-size: 11px; }
+.cross-platform-title { font-weight: 600; color: var(--text-primary); margin-bottom: 4px; display: flex; align-items: center; gap: 4px; }
+.cross-platform-desc { color: var(--text-secondary); line-height: 1.5; }
+.cross-platform-link { color: var(--blue); text-decoration: none; font-weight: 500; }
+.cross-platform-link:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+    <div class="header-inner">
+        <a href="index.html" class="logo">
+            <div class="logo-icon">🧠</div>
+            <div>
+                <div class="logo-text">CoachDx</div>
+                <div class="logo-sub">Socratic Clinical Teaching</div>
+            </div>
+        </a>
+        <div class="header-nav">
+            <a href="case-library.html" class="header-link">📚 Case Library</a>
+            <a href="progress.html" class="header-link">📊 My Progress</a>
+            <div class="user-badge">
+                <span>👤</span>
+                <span>Student ID: STU-2026-0142</span>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<main class="main-container">
+    
+    <!-- Left Sidebar -->
+    <aside class="left-sidebar">
+        
+        <!-- Current Attending -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">👩‍⚕️ Your Attending</div>
+            </div>
+            <div class="card-body">
+                <div class="attending-profile">
+                    <div class="attending-avatar">👩‍⚕️</div>
+                    <div>
+                        <div class="attending-name">Dr. Sarah Chen</div>
+                        <div class="attending-specialty">Internal Medicine / Cardiology</div>
+                        <div class="attending-status"><div class="status-dot"></div> Online</div>
+                    </div>
+                </div>
+                <div style="margin-top:12px;font-size:11px;color:var(--text-secondary);line-height:1.6">
+                    <strong>Teaching Style:</strong> Socratic questioning, mechanism-focused. Will ask "why" before explaining. Encourages independent reasoning.
+                </div>
+            </div>
+        </div>
+        
+        <!-- Select Case -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">📋 Select Case</div>
+            </div>
+            <div class="card-body">
+                <div class="case-list" id="caseList">
+                    <div class="case-item active" data-case="stemi" onclick="selectCase('stemi')">
+                        <div class="case-name">Marcus Williams</div>
+                        <div class="case-chief">58M • Chest Pain • ST Elevation</div>
+                        <div class="case-tags">
+                            <span class="case-tag">ACS</span>
+                            <span class="case-tag">STEMI</span>
+                            <span class="case-difficulty intermediate">Intermediate</span>
+                        </div>
+                    </div>
+                    <div class="case-item" data-case="sepsis" onclick="selectCase('sepsis')">
+                        <div class="case-name">James Mitchell</div>
+                        <div class="case-chief">67M • Altered Mental Status • Hypotension</div>
+                        <div class="case-tags">
+                            <span class="case-tag">Sepsis</span>
+                            <span class="case-tag">Shock</span>
+                            <span class="case-difficulty intermediate">Intermediate</span>
+                        </div>
+                    </div>
+                    <div class="case-item" data-case="pe" onclick="selectCase('pe')">
+                        <div class="case-name">Angela Torres</div>
+                        <div class="case-chief">42F • Dyspnea • Post-Surgical</div>
+                        <div class="case-tags">
+                            <span class="case-tag">PE</span>
+                            <span class="case-tag">VTE</span>
+                            <span class="case-difficulty beginner">Beginner</span>
+                        </div>
+                    </div>
+                    <div class="case-item" data-case="dka" onclick="selectCase('dka')">
+                        <div class="case-name">Tyler Reyes</div>
+                        <div class="case-chief">24M • Vomiting • Confusion</div>
+                        <div class="case-tags">
+                            <span class="case-tag">DKA</span>
+                            <span class="case-tag">Metabolic</span>
+                            <span class="case-difficulty intermediate">Intermediate</span>
+                        </div>
+                    </div>
+                    <div class="case-item" data-case="meningitis" onclick="selectCase('meningitis')">
+                        <div class="case-name">Emma Lawson</div>
+                        <div class="case-chief">19F • Headache • Fever • Neck Stiffness</div>
+                        <div class="case-tags">
+                            <span class="case-tag">Meningitis</span>
+                            <span class="case-tag">ID</span>
+                            <span class="case-difficulty advanced">Advanced</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Cross-Platform Integration -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">🔗 Connected Platforms</div>
+            </div>
+            <div class="card-body">
+                <div class="cross-platform">
+                    <div class="cross-platform-title">🩺 ReasonDx Case Available</div>
+                    <div class="cross-platform-desc">Practice the full patient encounter for this case in ReasonDx. <a href="#" class="cross-platform-link">Open in ReasonDx →</a></div>
+                </div>
+                <div class="cross-platform" style="margin-top:8px;background:linear-gradient(135deg, #d1fae5, #dcfce7);">
+                    <div class="cross-platform-title">⚙️ MechanismDx Module</div>
+                    <div class="cross-platform-desc">Review ACS pathophysiology before discussing. <a href="#" class="cross-platform-link">Study Mechanisms →</a></div>
+                </div>
+            </div>
+        </div>
+    </aside>
+    
+    <!-- Chat Container -->
+    <div class="chat-container">
+        
+        <!-- Chat Header -->
+        <div class="chat-header">
+            <div class="chat-case-info">
+                <div class="chat-case-icon">🫀</div>
+                <div>
+                    <div class="chat-case-name">Marcus Williams - Chest Pain</div>
+                    <div class="chat-case-status">Discussing: STEMI Management</div>
+                </div>
+            </div>
+            <div class="chat-actions">
+                <button class="chat-action-btn" onclick="showSummary()">📝 Summary</button>
+                <button class="chat-action-btn" onclick="resetChat()">🔄 New Discussion</button>
+            </div>
+        </div>
+        
+        <!-- Messages Area -->
+        <div class="messages-area" id="messagesArea">
+            
+            <div class="system-message">Discussion started with Dr. Sarah Chen</div>
+            
+            <div class="message attending">
+                <div class="message-avatar">👩‍⚕️</div>
+                <div class="message-content">
+                    <div class="message-bubble">Good morning! I see you've selected the Marcus Williams case. He's a 58-year-old man presenting with substernal chest pressure. Before we dive in, tell me - what's your initial differential diagnosis based on the chief complaint alone?</div>
+                    <div class="message-time">9:00 AM</div>
+                </div>
+            </div>
+            
+            <div class="message student">
+                <div class="message-avatar">👤</div>
+                <div class="message-content">
+                    <div class="message-bubble">Based on chest pain in a 58-year-old male, I'm thinking ACS at the top of my differential - could be STEMI, NSTEMI, or unstable angina. I'd also consider aortic dissection, PE, and maybe pericarditis or musculoskeletal causes.</div>
+                    <div class="message-time">9:01 AM</div>
+                </div>
+            </div>
+            
+            <div class="message attending">
+                <div class="message-avatar">👩‍⚕️</div>
+                <div class="message-content">
+                    <div class="message-bubble">Excellent differential! You've appropriately included the life-threatening causes. Now, his ECG shows ST elevations in V1-V4. You mentioned STEMI - which coronary artery is most likely occluded, and why does that matter for management?</div>
+                    <div class="feedback-positive">
+                        <div class="feedback-label">✓ Good Reasoning</div>
+                        <div class="feedback-text">Strong differential with appropriate prioritization of dangerous diagnoses.</div>
+                    </div>
+                    <div class="message-time">9:02 AM</div>
+                </div>
+            </div>
+            
+            <div class="message student">
+                <div class="message-avatar">👤</div>
+                <div class="message-content">
+                    <div class="message-bubble">V1-V4 elevations suggest an anterior STEMI, so the LAD is probably the culprit lesion. This is concerning because the LAD supplies a large territory and anterior MIs have higher mortality.</div>
+                    <div class="message-time">9:03 AM</div>
+                </div>
+            </div>
+            
+            <div class="message attending">
+                <div class="message-avatar">👩‍⚕️</div>
+                <div class="message-content">
+                    <div class="message-bubble">Exactly right - the LAD or "widow maker." Now here's the key question: we need to get this artery open. What are our options, and what factors determine which one we choose?</div>
+                    <div class="question-prompt">
+                        <div class="question-label">🤔 Think About It</div>
+                        <div class="question-text">What's the target door-to-balloon time? When might fibrinolysis be preferred over PCI?</div>
+                    </div>
+                    <div class="message-time">9:04 AM</div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <!-- Input Area -->
+        <div class="input-area">
+            <div class="input-row">
+                <div class="input-wrapper">
+                    <textarea class="input-field" id="messageInput" placeholder="Share your thoughts, ask questions, or explain your reasoning..." rows="1" onkeydown="handleKeyDown(event)"></textarea>
+                </div>
+                <button class="send-btn" onclick="sendMessage()">
+                    Send <span>→</span>
+                </button>
+            </div>
+            <div class="quick-responses">
+                <button class="quick-btn" onclick="insertQuick('Can you explain the mechanism?')">🧬 Explain mechanism</button>
+                <button class="quick-btn" onclick="insertQuick('What would change my thinking?')">🔄 What changes thinking?</button>
+                <button class="quick-btn" onclick="insertQuick('How would I manage this?')">💊 Management approach</button>
+                <button class="quick-btn" onclick="insertQuick('What am I missing?')">❓ What am I missing?</button>
+                <button class="quick-btn" onclick="insertQuick('What\'s the evidence?')">📚 Show evidence</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Right Sidebar -->
+    <aside class="right-sidebar">
+        
+        <!-- Teaching Objectives -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">🎯 Learning Objectives</div>
+            </div>
+            <div class="card-body">
+                <div class="objectives-list">
+                    <div class="objective-item completed">
+                        <div class="objective-check">✓</div>
+                        <div class="objective-text">Recognize STEMI on ECG by territory</div>
+                    </div>
+                    <div class="objective-item completed">
+                        <div class="objective-check">✓</div>
+                        <div class="objective-text">Correlate ECG findings with coronary anatomy</div>
+                    </div>
+                    <div class="objective-item">
+                        <div class="objective-check"></div>
+                        <div class="objective-text">Compare PCI vs fibrinolysis decision factors</div>
+                    </div>
+                    <div class="objective-item">
+                        <div class="objective-check"></div>
+                        <div class="objective-text">Explain door-to-balloon time targets</div>
+                    </div>
+                    <div class="objective-item">
+                        <div class="objective-check"></div>
+                        <div class="objective-text">Identify contraindications to thrombolytics</div>
+                    </div>
+                </div>
+                <div class="progress-section">
+                    <div class="progress-label">
+                        <span>Progress</span>
+                        <span>2 of 5</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width:40%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Hints -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">💡 Hints</div>
+            </div>
+            <div class="card-body">
+                <button class="hints-toggle" onclick="toggleHints()">
+                    <span>Need a hint?</span>
+                    <span id="hintsIcon">▼</span>
+                </button>
+                <div class="hints-content" id="hintsContent">
+                    <div class="hint-item">🕐 Think about time-based targets from door to treatment</div>
+                    <div class="hint-item">🏥 Consider hospital capabilities and transfer times</div>
+                    <div class="hint-item">⚠️ What conditions make thrombolytics dangerous?</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Session Fingerprint -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">📊 Session Analytics</div>
+            </div>
+            <div class="card-body">
+                <div class="fingerprint-mini">
+                    <div class="fingerprint-title">This Discussion</div>
+                    <div class="fingerprint-stat">
+                        <span class="fingerprint-stat-label">Messages Sent</span>
+                        <span class="fingerprint-stat-value">3</span>
+                    </div>
+                    <div class="fingerprint-stat">
+                        <span class="fingerprint-stat-label">Teaching Moments</span>
+                        <span class="fingerprint-stat-value">2</span>
+                    </div>
+                    <div class="fingerprint-stat">
+                        <span class="fingerprint-stat-label">Topics Covered</span>
+                        <span class="fingerprint-stat-value">4</span>
+                    </div>
+                    <div class="fingerprint-stat">
+                        <span class="fingerprint-stat-label">Reasoning Quality</span>
+                        <span class="fingerprint-stat-value" style="color:var(--green)">Strong</span>
+                    </div>
+                </div>
+                <a href="progress.html" style="display:block;text-align:center;margin-top:12px;font-size:11px;color:var(--purple);text-decoration:none;">View Full Fingerprint →</a>
+            </div>
+        </div>
+        
+    </aside>
+</main>
+
+<script>
+// Case data
+const cases = {
+    stemi: {
+        name: "Marcus Williams",
+        chief: "Chest Pain",
+        icon: "🫀",
+        specialty: "Cardiology",
+        objectives: [
+            "Recognize STEMI on ECG by territory",
+            "Correlate ECG findings with coronary anatomy",
+            "Compare PCI vs fibrinolysis decision factors",
+            "Explain door-to-balloon time targets",
+            "Identify contraindications to thrombolytics"
+        ]
+    },
+    sepsis: {
+        name: "James Mitchell",
+        chief: "Altered Mental Status",
+        icon: "🦠",
+        specialty: "Critical Care",
+        objectives: [
+            "Apply qSOFA and SOFA criteria",
+            "Understand sepsis pathophysiology",
+            "Choose appropriate initial antibiotics",
+            "Manage fluid resuscitation",
+            "Know when to start vasopressors"
+        ]
+    },
+    pe: {
+        name: "Angela Torres",
+        chief: "Dyspnea",
+        icon: "🫁",
+        specialty: "Pulmonology",
+        objectives: [
+            "Calculate Wells score for PE",
+            "Interpret D-dimer appropriately",
+            "Understand V/Q mismatch",
+            "Select anticoagulation strategy",
+            "Recognize massive PE criteria"
+        ]
+    },
+    dka: {
+        name: "Tyler Reyes",
+        chief: "Vomiting & Confusion",
+        icon: "⚗️",
+        specialty: "Endocrinology",
+        objectives: [
+            "Calculate anion gap",
+            "Understand DKA pathophysiology",
+            "Manage insulin and fluids",
+            "Monitor potassium shifts",
+            "Identify precipitating factors"
+        ]
+    },
+    meningitis: {
+        name: "Emma Lawson",
+        chief: "Headache & Fever",
+        icon: "🧠",
+        specialty: "Infectious Disease",
+        objectives: [
+            "Recognize meningitis signs",
+            "Interpret CSF findings",
+            "Select empiric antibiotics by age",
+            "Know when to image before LP",
+            "Understand dexamethasone timing"
+        ]
+    }
+};
+
+let currentCase = 'stemi';
+
+function selectCase(caseId) {
+    currentCase = caseId;
+    const caseData = cases[caseId];
+    
+    // Update case items
+    document.querySelectorAll('.case-item').forEach(item => {
+        item.classList.remove('active');
+        if (item.dataset.case === caseId) {
+            item.classList.add('active');
+        }
+    });
+    
+    // Update chat header
+    document.querySelector('.chat-case-icon').textContent = caseData.icon;
+    document.querySelector('.chat-case-name').textContent = `${caseData.name} - ${caseData.chief}`;
+    document.querySelector('.chat-case-status').textContent = `Discussing: ${caseData.specialty}`;
+    
+    // Update objectives
+    const objectivesList = document.querySelector('.objectives-list');
+    objectivesList.innerHTML = caseData.objectives.map((obj, i) => `
+        <div class="objective-item">
+            <div class="objective-check"></div>
+            <div class="objective-text">${obj}</div>
+        </div>
+    `).join('');
+    
+    // Update progress
+    document.querySelector('.progress-label span:last-child').textContent = `0 of ${caseData.objectives.length}`;
+    document.querySelector('.progress-fill').style.width = '0%';
+    
+    // Clear messages and start fresh
+    resetChat();
+}
+
+function resetChat() {
+    const messagesArea = document.getElementById('messagesArea');
+    const caseData = cases[currentCase];
+    
+    messagesArea.innerHTML = `
+        <div class="system-message">Discussion started with Dr. Sarah Chen</div>
+        <div class="message attending">
+            <div class="message-avatar">👩‍⚕️</div>
+            <div class="message-content">
+                <div class="message-bubble">Let's discuss ${caseData.name}'s case. Based on the chief complaint of ${caseData.chief.toLowerCase()}, what's going through your mind? Walk me through your initial approach.</div>
+                <div class="message-time">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+            </div>
+        </div>
+    `;
+}
+
+function sendMessage() {
+    const input = document.getElementById('messageInput');
+    const message = input.value.trim();
+    if (!message) return;
+    
+    const messagesArea = document.getElementById('messagesArea');
+    const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    
+    // Add student message
+    messagesArea.innerHTML += `
+        <div class="message student">
+            <div class="message-avatar">👤</div>
+            <div class="message-content">
+                <div class="message-bubble">${message}</div>
+                <div class="message-time">${time}</div>
+            </div>
+        </div>
+    `;
+    
+    input.value = '';
+    messagesArea.scrollTop = messagesArea.scrollHeight;
+    
+    // Show typing indicator
+    messagesArea.innerHTML += `
+        <div class="typing-indicator" id="typingIndicator">
+            <div class="message-avatar" style="background:linear-gradient(135deg, var(--purple), var(--purple-dark));">👩‍⚕️</div>
+            <div class="typing-dots">
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            </div>
+        </div>
+    `;
+    messagesArea.scrollTop = messagesArea.scrollHeight;
+    
+    // Simulate response after delay
+    setTimeout(() => {
+        document.getElementById('typingIndicator')?.remove();
+        addAttendingResponse(message);
+    }, 1500 + Math.random() * 1000);
+}
+
+function addAttendingResponse(studentMessage) {
+    const messagesArea = document.getElementById('messagesArea');
+    const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    const lower = studentMessage.toLowerCase();
+    
+    let response = '';
+    let teachingMoment = '';
+    let questionPrompt = '';
+    let feedback = '';
+    
+    // Simple keyword-based responses (would be AI in production)
+    if (lower.includes('pci') || lower.includes('cath lab') || lower.includes('balloon')) {
+        response = "You're thinking about PCI - good. What's our target time from door to balloon inflation? And what factors might make us consider fibrinolysis instead?";
+        questionPrompt = "Consider: distance to PCI-capable facility, contraindications to thrombolytics, symptom onset time.";
+    } else if (lower.includes('fibrinolysis') || lower.includes('tpa') || lower.includes('thrombolytic')) {
+        response = "Fibrinolysis is an option. Before we give it, what absolute contraindications do we need to rule out? And why is timing so critical here?";
+        teachingMoment = "Thrombolytics work best within 12 hours of symptom onset, with maximum benefit in the first 3 hours. After 12 hours, risks often outweigh benefits.";
+    } else if (lower.includes('mechanism') || lower.includes('why')) {
+        response = "Great question about mechanism. Let me turn it back to you first - what do you think happens at the cellular level when we have prolonged ischemia? Why does time matter so much?";
+    } else if (lower.includes('90') || lower.includes('minute') || lower.includes('time')) {
+        response = "Yes, 90 minutes is our target! You're showing good knowledge of the guidelines.";
+        feedback = "Strong recall of guideline-based targets.";
+        teachingMoment = "Door-to-balloon <90 min for PCI, or door-to-needle <30 min for fibrinolysis. If PCI will take >120 min, consider fibrinolysis.";
+    } else if (lower.includes('contraindication')) {
+        response = "Walk me through the contraindications you're thinking of. Which ones are absolute vs relative?";
+        questionPrompt = "Think about bleeding risk, recent procedures, and neurological history.";
+    } else {
+        response = "Interesting perspective. Tell me more about your reasoning - what clinical features are driving your thinking here?";
+        questionPrompt = "Try to connect your answer back to the underlying pathophysiology.";
+    }
+    
+    let html = `
+        <div class="message attending">
+            <div class="message-avatar">👩‍⚕️</div>
+            <div class="message-content">
+                <div class="message-bubble">${response}</div>
+    `;
+    
+    if (feedback) {
+        html += `
+                <div class="feedback-positive">
+                    <div class="feedback-label">✓ Good Reasoning</div>
+                    <div class="feedback-text">${feedback}</div>
+                </div>
+        `;
+    }
+    
+    if (teachingMoment) {
+        html += `
+                <div class="teaching-moment">
+                    <div class="teaching-label">💡 Teaching Point</div>
+                    <div class="teaching-text">${teachingMoment}</div>
+                </div>
+        `;
+    }
+    
+    if (questionPrompt) {
+        html += `
+                <div class="question-prompt">
+                    <div class="question-label">🤔 Think Deeper</div>
+                    <div class="question-text">${questionPrompt}</div>
+                </div>
+        `;
+    }
+    
+    html += `
+                <div class="message-time">${time}</div>
+            </div>
+        </div>
+    `;
+    
+    messagesArea.innerHTML += html;
+    messagesArea.scrollTop = messagesArea.scrollHeight;
+}
+
+function handleKeyDown(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+    }
+}
+
+function insertQuick(text) {
+    const input = document.getElementById('messageInput');
+    input.value = text;
+    input.focus();
+}
+
+function toggleHints() {
+    const content = document.getElementById('hintsContent');
+    const icon = document.getElementById('hintsIcon');
+    content.classList.toggle('visible');
+    icon.textContent = content.classList.contains('visible') ? '▲' : '▼';
+}
+
+function showSummary() {
+    alert('Summary feature: This would generate a summary of the discussion, key teaching points covered, and areas for further study.');
+}
+
+// Auto-resize textarea
+document.getElementById('messageInput').addEventListener('input', function() {
+    this.style.height = 'auto';
+    this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+});
+</script>
+
+</body>
+</html>
