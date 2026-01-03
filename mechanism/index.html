@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MechanismDx - Master the Why Behind Medicine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Inter', system-ui, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            background: #fafafa;
+            color: #18181b;
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        .header {
+            background: #fff;
+            border-bottom: 1px solid #e4e4e7;
+            padding: 16px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: inherit;
+        }
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #18181b 0%, #3f3f46 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 18px;
+        }
+        .logo-text {
+            font-weight: 600;
+            font-size: 18px;
+            letter-spacing: -0.5px;
+        }
+        .logo-text span { color: #71717a; font-weight: 400; }
+        .nav-links {
+            display: flex;
+            gap: 8px;
+        }
+        .nav-link {
+            padding: 8px 16px;
+            color: #71717a;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 6px;
+            transition: all 0.15s;
+        }
+        .nav-link:hover { background: #f4f4f5; color: #18181b; }
+        .nav-link.active { background: #18181b; color: #fff; }
+        
+        /* Hero */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 24px 60px;
+            text-align: center;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #f4f4f5;
+            border: 1px solid #e4e4e7;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #52525b;
+            margin-bottom: 24px;
+        }
+        .hero-badge-dot {
+            width: 6px;
+            height: 6px;
+            background: #22c55e;
+            border-radius: 50%;
+        }
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            margin-bottom: 16px;
+            color: #18181b;
+        }
+        .hero h1 em {
+            font-style: normal;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-tagline {
+            font-size: 20px;
+            color: #71717a;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.5;
+        }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            padding: 32px 0;
+            border-top: 1px solid #e4e4e7;
+            border-bottom: 1px solid #e4e4e7;
+            margin-bottom: 60px;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #18181b;
+        }
+        .stat-label {
+            font-size: 13px;
+            color: #71717a;
+            margin-top: 4px;
+        }
+        
+        /* Main content */
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+        }
+        
+        /* Section */
+        .section {
+            margin-bottom: 48px;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .section-icon {
+            width: 32px;
+            height: 32px;
+            background: #f4f4f5;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #18181b;
+        }
+        .section-count {
+            font-size: 12px;
+            color: #71717a;
+            background: #f4f4f5;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: auto;
+        }
+        
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+        }
+        
+        /* Card */
+        .card {
+            background: #fff;
+            border: 1px solid #e4e4e7;
+            border-radius: 12px;
+            padding: 20px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+            display: block;
+        }
+        .card:hover {
+            border-color: #a1a1aa;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transform: translateY(-2px);
+        }
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            background: #f4f4f5;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        .card-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #18181b;
+            margin-bottom: 2px;
+        }
+        .card-meta {
+            display: flex;
+            gap: 6px;
+        }
+        .tag {
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        .tag-default { background: #f4f4f5; color: #52525b; }
+        .tag-green { background: #dcfce7; color: #166534; }
+        .tag-purple { background: #f3e8ff; color: #7c3aed; }
+        .tag-orange { background: #ffedd5; color: #c2410c; }
+        .card-desc {
+            font-size: 13px;
+            color: #71717a;
+            line-height: 1.5;
+        }
+        
+        /* Tool card variant */
+        .card.tool {
+            background: #fafafa;
+            border-style: dashed;
+        }
+        .card.tool:hover {
+            background: #fff;
+            border-style: solid;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #fff;
+            border-top: 1px solid #e4e4e7;
+            padding: 32px 24px;
+            text-align: center;
+        }
+        .footer-text {
+            font-size: 13px;
+            color: #71717a;
+        }
+        .footer-text a {
+            color: #18181b;
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 32px; }
+            .hero-stats { flex-wrap: wrap; gap: 24px; }
+            .nav-links { display: none; }
+        }
+        
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            body { background: #09090b; color: #fafafa; }
+            .header { background: #18181b; border-color: #27272a; }
+            .logo-icon { background: linear-gradient(135deg, #fafafa 0%, #a1a1aa 100%); color: #18181b; }
+            .nav-link { color: #a1a1aa; }
+            .nav-link:hover { background: #27272a; color: #fafafa; }
+            .nav-link.active { background: #fafafa; color: #18181b; }
+            .hero h1 { color: #fafafa; }
+            .hero-badge { background: #27272a; border-color: #3f3f46; color: #a1a1aa; }
+            .hero-stats { border-color: #27272a; }
+            .stat-value { color: #fafafa; }
+            .section-icon { background: #27272a; }
+            .section-title { color: #fafafa; }
+            .section-count { background: #27272a; }
+            .card { background: #18181b; border-color: #27272a; }
+            .card:hover { border-color: #3f3f46; }
+            .card-icon { background: #27272a; }
+            .card-title { color: #fafafa; }
+            .tag-default { background: #27272a; color: #a1a1aa; }
+            .tag-green { background: #14532d; color: #86efac; }
+            .tag-purple { background: #3b0764; color: #c4b5fd; }
+            .tag-orange { background: #431407; color: #fdba74; }
+            .card.tool { background: #0a0a0a; }
+            .footer { background: #18181b; border-color: #27272a; }
+            .footer-text a { color: #fafafa; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <a href="#" class="logo">
+                <div class="logo-icon">🔬</div>
+                <div class="logo-text">MechanismDx <span>| Deep Learning</span></div>
+            </a>
+            <nav class="nav-links">
+                <a href="/reasondx/" class="nav-link">ReasonDx</a>
+                <a href="#" class="nav-link active">Mechanisms</a>
+                <a href="fingerprint-dashboard.html" class="nav-link">Progress</a>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="hero">
+        <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            500+ Questions • 25 Modules
+        </div>
+        <h1>Master the <em>Why</em> Behind Medicine</h1>
+        <p class="hero-tagline">Deep mechanism learning that transforms pattern recognition into true understanding. Know the pathway, own the diagnosis.</p>
+        <div class="hero-stats">
+            <div class="stat">
+                <div class="stat-value">500+</div>
+                <div class="stat-label">NBME-Style Questions</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">25</div>
+                <div class="stat-label">Clinical Modules</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">7</div>
+                <div class="stat-label">Interactive Tools</div>
+            </div>
+        </div>
+    </div>
+    
+    <main class="main">
+        <!-- Cardiovascular -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">❤️</div>
+                <h2 class="section-title">Cardiovascular & Critical Care</h2>
+                <span class="section-count">4 modules</span>
+            </div>
+            <div class="grid">
+                <a href="sepsis.html" class="card">
+                    <div class="card-header">
+                        <div class="card-icon">🦠</div>
+                        <div>
+                            <div class="card-title">Sepsis & Septic Shock</div>
+                            <div class="card-meta"><span class="tag tag-green">20 Qs</span><span class="tag tag-default">Refs</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">Sepsis-3 criteria, qSOFA, Hour-1 Bundle, vasopressor selection</div>
+                </a>
+                <a href="acs.html" class="card">
+                    <div class="card-header">
+                        <div class="card-icon">💔</div>
+                        <div>
+                            <div class="card-title">Acute Coronary Syndromes</div>
+                            <div class="card-meta"><span class="tag tag-green">20 Qs</span><span class="tag tag-default">Refs</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">STEMI vs NSTEMI, troponin kinetics, reperfusion strategies</div>
+                </a>
+                <a href="heart-failure.html" class="card">
+                    <div class="card-header">
+                        <div class="card-icon">🫀</div>
+                        <div>
+                            <div class="card-title">Heart Failure</div>
+                            <div class="card-meta"><span class="tag tag-green">20 Qs</span><span class="tag tag-default">Refs</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">HFrEF vs HFpEF, GDMT quadruple therapy, decompensation</div>
+                </a>
+                <a href="stroke.html" class="card">
+                    <div class="card-header">
+                        <div class="card-icon">🧠</div>
+                        <div>
+                            <div class="card-title">Stroke</div>
+                            <div class="card-meta"><span class="tag tag-green">20 Qs</span><span class="tag tag-default">Refs</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">Ischemic vs hemorrhagic, tPA window, thrombectomy criteria</div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Pulmonary -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">🫁</div>
+                <h2 class="section-title">Pulmonary</h2>
+                <span class="section-count">2 modules</span>
+            </div>
+            <div class="grid">
+                <a href="copd.html" class="card">
+                    <div class="card-header">
+                        <div class="card-icon">💨</div>
+                        <div>
+                            <div class="card-title">COPD & Asthma</div>
+                            <div class="card-meta"><span class="tag tag-green">20 Qs</span><span class="tag tag-default">Refs</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">Exacerbation management, GOLD classification, inhaler selection</div>
+                </a>
+                <a href="pulmonary.html" class="card">
+                    <div class="card-header">
+                        <div class="card-icon">🫁</div>
+                        <div>
+                            <div class="card-title">Pulmonary Emergencies</div>
+                            <div class="card-meta"><span class="tag tag-green">20 Qs</span><span class="tag tag-default">Refs</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">PE risk stratification, ARDS Berlin criteria, pneumothorax</div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Renal -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">🧪</div>
+                <h2 class="section-title">Renal & Electrolytes</h2>
+                <span class="section-count">2 modules</span>
+            </div>
+            <div class="grid">
+                <a href="aki-ckd.html" class="card">
+                    <div class="card-header">
+                        <div class="card-icon">🫘</div>
+                        <div>
+                            <div class="card-title">AKI & CKD</div>
+                            <div class="card-meta"><span class="tag tag-green">20 Qs</span><span class="tag tag-default">Refs</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">Pre-renal vs intrinsic vs post-renal, FENa, dialysis indications</div>
+                </a>
+                <a href="electrolytes-acidbase.html" class="card">
+                    <div class="card-header">
+                        <div class="card-icon">⚗️</div>
+                        <div>
+                            <div class="card-title">Electrolytes & Acid-Base</div>
+                            <div class="card-meta"><span class="tag tag-green">20 Qs</span><span class="tag tag-default">Refs</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">Sodium/potassium disorders, anion gap, Winter's formula</div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- GI -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">🍽️</div>
+                <h2 class="section-title">GI & Hepatology</h2>
+                <span class="section-count">2 modules</span>
+            </div>
+            <div class="grid">
+                <a href="gi-hepatology.html" class="card">
+                    <div class="card-header">
+                        <div class="card-icon">🫃</div>
+                        <div>
+                            <div class="card-title">GI & Hepatology</div>
+                            <div class="card-meta"><span class="tag tag-green">20 Qs</span><span class="tag tag-default">Refs</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">GI bleeding, cirrhosis complications, pancreatitis severity</div>
+                </a>
+                <a href="acute-abdomen.html" class="card">
+                    <div class="card-header">
+                        <div class="card-icon">🚨</div>
+                        <div>
+                            <div class="card-title">Acute Abdomen</div>
+                            <div class="card-meta"><span class="tag tag-green">20 Qs</span><span class="tag tag-default">Refs</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">Surgical emergencies, bowel obstruction, mesenteric ischemia</div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Endocrine -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">⚡</div>
+                <h2 class="section-title">Endocrine & Metabolic</h2>
+                <span class="section-count">2 modules</span>
+            </div>
+            <div class="grid">
+                <a href="diabetes.html" class="card">
+                    <div class="card-header">
+                        <div class="card-icon">💉</div>
+                        <div>
+                            <div class="card-title">Diabetes Management</div>
+                            <div class="card-meta"><span class="tag tag-green">20 Qs</span><span class="tag tag-default">Refs</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">Insulin regimens, oral agent selection, inpatient glucose</div>
+                </a>
+                <a href="endocrine-emergencies.html" class="card">
+                    <div class="card-header">
+                        <div class="card-icon">🔥</div>
+                        <div>
+                            <div class="card-title">Endocrine Emergencies</div>
+                            <div class="card-meta"><span class="tag tag-green">20 Qs</span><span class="tag tag-default">Refs</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">DKA vs HHS, thyroid storm, adrenal crisis, myxedema coma</div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- ID -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">🦠</div>
+                <h2 class="section-title">Infectious Disease</h2>
+                <span class="section-count">1 module</span>
+            </div>
+            <div class="grid">
+                <a href="infectious-disease.html" class="card">
+                    <div class="card-header">
+                        <div class="card-icon">🔬</div>
+                        <div>
+                            <div class="card-title">Infectious Disease</div>
+                            <div class="card-meta"><span class="tag tag-green">20 Qs</span><span class="tag tag-default">Refs</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">Meningitis, endocarditis, HIV/AIDS, pneumonia, UTI</div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Neuro/Psych -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">🧠</div>
+                <h2 class="section-title">Neurology & Psychiatry</h2>
+                <span class="section-count">2 modules</span>
+            </div>
+            <div class="grid">
+                <a href="neurology.html" class="card">
+                    <div class="card-header">
+                        <div class="card-icon">⚡</div>
+                        <div>
+                            <div class="card-title">Neurology</div>
+                            <div class="card-meta"><span class="tag tag-green">20 Qs</span><span class="tag tag-default">Refs</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">Seizures, altered mental status, neuropharmacology</div>
+                </a>
+                <a href="psychiatry.html" class="card">
+                    <div class="card-header">
+                        <div class="card-icon">🧘</div>
+                        <div>
+                            <div class="card-title">Psychiatry</div>
+                            <div class="card-meta"><span class="tag tag-green">20 Qs</span><span class="tag tag-default">Refs</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">Mood disorders, psychosis, anxiety, psychopharmacology</div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Tox/Environmental -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">☠️</div>
+                <h2 class="section-title">Toxicology & Environmental</h2>
+                <span class="section-count">3 modules</span>
+            </div>
+            <div class="grid">
+                <a href="toxicology.html" class="card">
+                    <div class="card-header">
+                        <div class="card-icon">💀</div>
+                        <div>
+                            <div class="card-title">Toxicology</div>
+                            <div class="card-meta"><span class="tag tag-green">20 Qs</span><span class="tag tag-default">Refs</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">Toxidromes, overdose management, antidotes</div>
+                </a>
+                <a href="lead-poisoning-module.html" class="card">
+                    <div class="card-header">
+                        <div class="card-icon">🏭</div>
+                        <div>
+                            <div class="card-title">Lead Poisoning</div>
+                            <div class="card-meta"><span class="tag tag-orange">Environmental</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">Occupational exposure, chelation therapy, prevention</div>
+                </a>
+                <a href="global-health-module.html" class="card">
+                    <div class="card-header">
+                        <div class="card-icon">🌍</div>
+                        <div>
+                            <div class="card-title">Global Health</div>
+                            <div class="card-meta"><span class="tag tag-orange">Global</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">Geographic differentials, tropical diseases, travel medicine</div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- MSK/Derm -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">🦴</div>
+                <h2 class="section-title">MSK & Dermatology</h2>
+                <span class="section-count">1 module</span>
+            </div>
+            <div class="grid">
+                <a href="msk-derm.html" class="card">
+                    <div class="card-header">
+                        <div class="card-icon">🦴</div>
+                        <div>
+                            <div class="card-title">MSK & Dermatology</div>
+                            <div class="card-meta"><span class="tag tag-green">20 Qs</span><span class="tag tag-default">Refs</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">Arthritis, lupus, SJS/TEN, DRESS syndrome</div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Peds/OB -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">👶</div>
+                <h2 class="section-title">Pediatrics & OB/GYN</h2>
+                <span class="section-count">2 modules</span>
+            </div>
+            <div class="grid">
+                <a href="pediatrics.html" class="card">
+                    <div class="card-header">
+                        <div class="card-icon">👶</div>
+                        <div>
+                            <div class="card-title">Pediatrics</div>
+                            <div class="card-meta"><span class="tag tag-green">20 Qs</span><span class="tag tag-default">Refs</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">Developmental milestones, fever workup, respiratory emergencies</div>
+                </a>
+                <a href="obgyn.html" class="card">
+                    <div class="card-header">
+                        <div class="card-icon">🤰</div>
+                        <div>
+                            <div class="card-title">OB/GYN</div>
+                            <div class="card-meta"><span class="tag tag-green">20 Qs</span><span class="tag tag-default">Refs</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">Pregnancy complications, preeclampsia, labor management</div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Emergency/Trauma -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">🚑</div>
+                <h2 class="section-title">Emergency & Trauma</h2>
+                <span class="section-count">1 module</span>
+            </div>
+            <div class="grid">
+                <a href="trauma-emergency.html" class="card">
+                    <div class="card-header">
+                        <div class="card-icon">🚑</div>
+                        <div>
+                            <div class="card-title">Trauma & Emergency</div>
+                            <div class="card-meta"><span class="tag tag-green">20 Qs</span><span class="tag tag-default">Refs</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">ATLS primary survey, hemorrhagic shock, thoracic trauma, TBI</div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Geriatrics/Heme -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">👴</div>
+                <h2 class="section-title">Geriatrics & Hematology</h2>
+                <span class="section-count">2 modules</span>
+            </div>
+            <div class="grid">
+                <a href="geriatrics.html" class="card">
+                    <div class="card-header">
+                        <div class="card-icon">👴</div>
+                        <div>
+                            <div class="card-title">Geriatrics</div>
+                            <div class="card-meta"><span class="tag tag-green">20 Qs</span><span class="tag tag-default">Refs</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">Delirium vs dementia, falls, polypharmacy, goals of care</div>
+                </a>
+                <a href="hematology.html" class="card">
+                    <div class="card-header">
+                        <div class="card-icon">🩸</div>
+                        <div>
+                            <div class="card-title">Hematology</div>
+                            <div class="card-meta"><span class="tag tag-green">20 Qs</span><span class="tag tag-default">Refs</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">Anemia workup, coagulation cascade, DIC, TTP</div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Foundations -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">🛡️</div>
+                <h2 class="section-title">Preventive, Safety & Foundations</h2>
+                <span class="section-count">3 modules</span>
+            </div>
+            <div class="grid">
+                <a href="preventive-medicine.html" class="card">
+                    <div class="card-header">
+                        <div class="card-icon">🛡️</div>
+                        <div>
+                            <div class="card-title">Preventive Medicine</div>
+                            <div class="card-meta"><span class="tag tag-purple">20 Qs</span><span class="tag tag-purple">High-Yield</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">USPSTF screening, immunizations, CVD prevention, pre-op</div>
+                </a>
+                <a href="patient-safety.html" class="card">
+                    <div class="card-header">
+                        <div class="card-icon">⚠️</div>
+                        <div>
+                            <div class="card-title">Patient Safety & Quality</div>
+                            <div class="card-meta"><span class="tag tag-purple">20 Qs</span><span class="tag tag-purple">High-Yield</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">Swiss cheese model, SBAR, root cause analysis, just culture</div>
+                </a>
+                <a href="ethics-biostats-module.html" class="card">
+                    <div class="card-header">
+                        <div class="card-icon">⚖️</div>
+                        <div>
+                            <div class="card-title">Ethics & Biostatistics</div>
+                            <div class="card-meta"><span class="tag tag-purple">20 Qs</span><span class="tag tag-purple">High-Yield</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">Informed consent, capacity, sensitivity/specificity, NNT</div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Tools -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">🛠️</div>
+                <h2 class="section-title">Interactive Tools</h2>
+                <span class="section-count">7 tools</span>
+            </div>
+            <div class="grid">
+                <a href="challenges.html" class="card tool">
+                    <div class="card-header">
+                        <div class="card-icon">🎯</div>
+                        <div>
+                            <div class="card-title">Active Learning Challenges</div>
+                            <div class="card-meta"><span class="tag tag-orange">Interactive</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">Gamified mechanism practice with calibration tracking</div>
+                </a>
+                <a href="question-generator.html" class="card tool">
+                    <div class="card-header">
+                        <div class="card-icon">⚡</div>
+                        <div>
+                            <div class="card-title">Dynamic Question Generator</div>
+                            <div class="card-meta"><span class="tag tag-orange">Interactive</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">Unlimited mechanism pathway quizzes</div>
+                </a>
+                <a href="fingerprint-dashboard.html" class="card tool">
+                    <div class="card-header">
+                        <div class="card-icon">📊</div>
+                        <div>
+                            <div class="card-title">Learning Fingerprint</div>
+                            <div class="card-meta"><span class="tag tag-orange">Dashboard</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">Track your reasoning patterns and progress over time</div>
+                </a>
+                <a href="abg-analyzer.html" class="card tool">
+                    <div class="card-header">
+                        <div class="card-icon">🧪</div>
+                        <div>
+                            <div class="card-title">ABG Analyzer</div>
+                            <div class="card-meta"><span class="tag tag-orange">Interactive</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">Step-by-step arterial blood gas interpretation</div>
+                </a>
+                <a href="ecg-patterns.html" class="card tool">
+                    <div class="card-header">
+                        <div class="card-icon">💓</div>
+                        <div>
+                            <div class="card-title">ECG Patterns</div>
+                            <div class="card-meta"><span class="tag tag-orange">Interactive</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">ECG quiz with pattern recognition and reference cards</div>
+                </a>
+                <a href="cross-system.html" class="card tool">
+                    <div class="card-header">
+                        <div class="card-icon">🔗</div>
+                        <div>
+                            <div class="card-title">Cross-System Cases</div>
+                            <div class="card-meta"><span class="tag tag-orange">Advanced</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">Multi-system integration challenges</div>
+                </a>
+                <a href="academic-resources-library.html" class="card tool">
+                    <div class="card-header">
+                        <div class="card-icon">📚</div>
+                        <div>
+                            <div class="card-title">Resource Library</div>
+                            <div class="card-meta"><span class="tag tag-orange">References</span></div>
+                        </div>
+                    </div>
+                    <div class="card-desc">Curated academic references and clinical guidelines</div>
+                </a>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <p class="footer-text">
+            MechanismDx • <a href="https://medicine.nova.edu/">Nova Southeastern University</a> • Dr. Lauren Fine, MD, FAAAAI
+        </p>
+    </footer>
+</body>
+</html>
