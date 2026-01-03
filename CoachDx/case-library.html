@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoachDx - Case Library</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Inter', system-ui, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            background: #fafafa;
+            color: #18181b;
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        .header {
+            background: #fff;
+            border-bottom: 1px solid #e4e4e7;
+            padding: 16px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: inherit;
+        }
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .logo-text .dx { color: #8b5cf6; }
+        .nav-links {
+            display: flex;
+            gap: 8px;
+        }
+        .nav-link {
+            padding: 8px 16px;
+            color: #71717a;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 6px;
+            transition: all 0.15s;
+        }
+        .nav-link:hover { background: #f4f4f5; color: #18181b; }
+        .nav-link.active { background: #18181b; color: #fff; }
+        
+        /* Main */
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+        
+        /* Page Header */
+        .page-header {
+            margin-bottom: 40px;
+        }
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
+        .page-subtitle {
+            font-size: 16px;
+            color: #71717a;
+        }
+        
+        /* Filters */
+        .filters {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+        .filter-group {
+            display: flex;
+            gap: 4px;
+            padding: 4px;
+            background: #f4f4f5;
+            border-radius: 8px;
+        }
+        .filter-btn {
+            padding: 8px 14px;
+            background: transparent;
+            border: none;
+            font-size: 13px;
+            font-weight: 500;
+            color: #71717a;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .filter-btn:hover { color: #18181b; }
+        .filter-btn.active { background: #fff; color: #18181b; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+        .search-box {
+            flex: 1;
+            min-width: 200px;
+            max-width: 300px;
+            padding: 10px 14px;
+            border: 1px solid #e4e4e7;
+            border-radius: 8px;
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.15s;
+        }
+        .search-box:focus { border-color: #8b5cf6; }
+        
+        /* Stats */
+        .stats {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 32px;
+            padding: 20px;
+            background: #fff;
+            border: 1px solid #e4e4e7;
+            border-radius: 12px;
+        }
+        .stat {
+            text-align: center;
+            padding: 0 24px;
+            border-right: 1px solid #e4e4e7;
+        }
+        .stat:last-child { border-right: none; }
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #18181b;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #71717a;
+            margin-top: 4px;
+        }
+        
+        /* Case Grid */
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+        
+        /* Case Card */
+        .case-card {
+            background: #fff;
+            border: 1px solid #e4e4e7;
+            border-radius: 12px;
+            padding: 20px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.15s;
+            display: block;
+        }
+        .case-card:hover {
+            border-color: #a1a1aa;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .case-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+        .case-icon {
+            width: 44px;
+            height: 44px;
+            background: #f4f4f5;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        .case-badge {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+        .badge-new { background: #ecfdf5; color: #047857; }
+        .badge-popular { background: #fef3c7; color: #92400e; }
+        .badge-advanced { background: #ede9fe; color: #6d28d9; }
+        .case-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .case-description {
+            font-size: 13px;
+            color: #71717a;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+        .case-meta {
+            display: flex;
+            gap: 16px;
+            padding-top: 12px;
+            border-top: 1px solid #f4f4f5;
+        }
+        .case-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: #71717a;
+        }
+        .case-meta-icon {
+            font-size: 14px;
+        }
+        .difficulty-dots {
+            display: flex;
+            gap: 3px;
+        }
+        .difficulty-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #e4e4e7;
+        }
+        .difficulty-dot.filled { background: #8b5cf6; }
+        
+        /* Section */
+        .section {
+            margin-top: 48px;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .section-link {
+            font-size: 13px;
+            color: #8b5cf6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .section-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">
+                <span class="logo-text">Coach<span class="dx">Dx</span></span>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="case-library.html" class="nav-link active">Cases</a>
+                <a href="mentor-chat.html" class="nav-link">Start Session</a>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Main -->
+    <main class="main">
+        <div class="page-header">
+            <h1 class="page-title">Case Library</h1>
+            <p class="page-subtitle">Select a case to begin your Socratic teaching session</p>
+        </div>
+        
+        <!-- Stats -->
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value">48</div>
+                <div class="stat-label">Total Cases</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">12</div>
+                <div class="stat-label">Completed</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">8</div>
+                <div class="stat-label">In Progress</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">78%</div>
+                <div class="stat-label">Avg. Score</div>
+            </div>
+        </div>
+        
+        <!-- Filters -->
+        <div class="filters">
+            <div class="filter-group">
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn">Emergency</button>
+                <button class="filter-btn">Inpatient</button>
+                <button class="filter-btn">Outpatient</button>
+            </div>
+            <div class="filter-group">
+                <button class="filter-btn active">All Levels</button>
+                <button class="filter-btn">Beginner</button>
+                <button class="filter-btn">Intermediate</button>
+                <button class="filter-btn">Advanced</button>
+            </div>
+            <input type="text" class="search-box" placeholder="Search cases...">
+        </div>
+        
+        <!-- Featured Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">🔥 Continue Learning</h2>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=chest-pain-acs" class="case-card">
+                    <div class="case-header">
+                        <div class="case-icon">💔</div>
+                        <span class="case-badge badge-popular">In Progress</span>
+                    </div>
+                    <h3 class="case-title">Chest Pain - ACS Evaluation</h3>
+                    <p class="case-description">52-year-old female with substernal chest pressure. Work through the diagnostic approach with your attending.</p>
+                    <div class="case-meta">
+                        <div class="case-meta-item">
+                            <span class="case-meta-icon">🏥</span>
+                            Emergency
+                        </div>
+                        <div class="case-meta-item">
+                            <span class="case-meta-icon">⏱</span>
+                            ~30 min
+                        </div>
+                        <div class="case-meta-item">
+                            <div class="difficulty-dots">
+                                <span class="difficulty-dot filled"></span>
+                                <span class="difficulty-dot filled"></span>
+                                <span class="difficulty-dot"></span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Emergency Cases -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">🚨 Emergency Department</h2>
+                <a href="#" class="section-link">View all →</a>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=acute-dyspnea" class="case-card">
+                    <div class="case-header">
+                        <div class="case-icon">🫁</div>
+                        <span class="case-badge badge-new">New</span>
+                    </div>
+                    <h3 class="case-title">Acute Dyspnea</h3>
+                    <p class="case-description">68-year-old male with sudden onset shortness of breath. Differentiate cardiac vs pulmonary causes.</p>
+                    <div class="case-meta">
+                        <div class="case-meta-item">
+                            <span class="case-meta-icon">🏥</span>
+                            Emergency
+                        </div>
+                        <div class="case-meta-item">
+                            <span class="case-meta-icon">⏱</span>
+                            ~25 min
+                        </div>
+                        <div class="case-meta-item">
+                            <div class="difficulty-dots">
+                                <span class="difficulty-dot filled"></span>
+                                <span class="difficulty-dot filled"></span>
+                                <span class="difficulty-dot filled"></span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="mentor-chat.html?case=altered-mental-status" class="case-card">
+                    <div class="case-header">
+                        <div class="case-icon">🧠</div>
+                    </div>
+                    <h3 class="case-title">Altered Mental Status</h3>
+                    <p class="case-description">74-year-old female found confused at home. Systematic approach to AMS workup.</p>
+                    <div class="case-meta">
+                        <div class="case-meta-item">
+                            <span class="case-meta-icon">🏥</span>
+                            Emergency
+                        </div>
+                        <div class="case-meta-item">
+                            <span class="case-meta-icon">⏱</span>
+                            ~35 min
+                        </div>
+                        <div class="case-meta-item">
+                            <div class="difficulty-dots">
+                                <span class="difficulty-dot filled"></span>
+                                <span class="difficulty-dot filled"></span>
+                                <span class="difficulty-dot"></span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="mentor-chat.html?case=severe-headache" class="case-card">
+                    <div class="case-header">
+                        <div class="case-icon">🤕</div>
+                    </div>
+                    <h3 class="case-title">Severe Headache</h3>
+                    <p class="case-description">42-year-old male with "worst headache of my life." Rule out life-threatening causes.</p>
+                    <div class="case-meta">
+                        <div class="case-meta-item">
+                            <span class="case-meta-icon">🏥</span>
+                            Emergency
+                        </div>
+                        <div class="case-meta-item">
+                            <span class="case-meta-icon">⏱</span>
+                            ~20 min
+                        </div>
+                        <div class="case-meta-item">
+                            <div class="difficulty-dots">
+                                <span class="difficulty-dot filled"></span>
+                                <span class="difficulty-dot filled"></span>
+                                <span class="difficulty-dot filled"></span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Internal Medicine -->
+        <section class="section">
+            <div class="section-header">
+                <h2 class="section-title">🏥 Internal Medicine</h2>
+                <a href="#" class="section-link">View all →</a>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=fever-unknown-origin" class="case-card">
+                    <div class="case-header">
+                        <div class="case-icon">🔥</div>
+                        <span class="case-badge badge-advanced">Advanced</span>
+                    </div>
+                    <h3 class="case-title">Fever of Unknown Origin</h3>
+                    <p class="case-description">58-year-old with 3 weeks of fever despite outpatient workup. Systematic FUO approach.</p>
+                    <div class="case-meta">
+                        <div class="case-meta-item">
+                            <span class="case-meta-icon">🏥</span>
+                            Inpatient
+                        </div>
+                        <div class="case-meta-item">
+                            <span class="case-meta-icon">⏱</span>
+                            ~40 min
+                        </div>
+                        <div class="case-meta-item">
+                            <div class="difficulty-dots">
+                                <span class="difficulty-dot filled"></span>
+                                <span class="difficulty-dot filled"></span>
+                                <span class="difficulty-dot filled"></span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="mentor-chat.html?case=acute-kidney-injury" class="case-card">
+                    <div class="case-header">
+                        <div class="case-icon">💧</div>
+                    </div>
+                    <h3 class="case-title">Acute Kidney Injury</h3>
+                    <p class="case-description">65-year-old with rising creatinine post-surgery. Pre-renal vs intrinsic vs post-renal.</p>
+                    <div class="case-meta">
+                        <div class="case-meta-item">
+                            <span class="case-meta-icon">🏥</span>
+                            Inpatient
+                        </div>
+                        <div class="case-meta-item">
+                            <span class="case-meta-icon">⏱</span>
+                            ~30 min
+                        </div>
+                        <div class="case-meta-item">
+                            <div class="difficulty-dots">
+                                <span class="difficulty-dot filled"></span>
+                                <span class="difficulty-dot filled"></span>
+                                <span class="difficulty-dot"></span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="mentor-chat.html?case=anemia-workup" class="case-card">
+                    <div class="case-header">
+                        <div class="case-icon">🩸</div>
+                    </div>
+                    <h3 class="case-title">Anemia Workup</h3>
+                    <p class="case-description">45-year-old female with fatigue and Hgb 8.2. MCV-based approach to anemia.</p>
+                    <div class="case-meta">
+                        <div class="case-meta-item">
+                            <span class="case-meta-icon">🏥</span>
+                            Outpatient
+                        </div>
+                        <div class="case-meta-item">
+                            <span class="case-meta-icon">⏱</span>
+                            ~25 min
+                        </div>
+                        <div class="case-meta-item">
+                            <div class="difficulty-dots">
+                                <span class="difficulty-dot filled"></span>
+                                <span class="difficulty-dot"></span>
+                                <span class="difficulty-dot"></span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </main>
+    
+    <script>
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.parentElement.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        // Search functionality
+        const searchBox = document.querySelector('.search-box');
+        searchBox.addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            document.querySelectorAll('.case-card').forEach(card => {
+                const title = card.querySelector('.case-title').textContent.toLowerCase();
+                const desc = card.querySelector('.case-description').textContent.toLowerCase();
+                if (title.includes(query) || desc.includes(query)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
