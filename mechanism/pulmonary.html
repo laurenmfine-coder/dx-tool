@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pulmonary - ReasonDx</title>
+<style>
+:root{--bg-page:#f8fafc;--bg-white:#fff;--bg-subtle:#f1f5f9;--text-primary:#0f172a;--text-secondary:#475569;--border:#e2e8f0;--accent:#0ea5e9;--accent-light:#e0f2fe;--green:#059669;--red:#dc2626;--radius-sm:8px;--radius-lg:16px}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg-page);color:var(--text-primary);line-height:1.6}
+.header{background:linear-gradient(135deg,#0ea5e9,#0284c7);color:#fff;padding:16px 24px}.logo{font-weight:700;font-size:18px}
+.module-header{background:var(--bg-white);border-bottom:1px solid var(--border);padding:24px}.module-title{display:flex;align-items:center;gap:16px;max-width:1400px;margin:0 auto}.module-icon{width:56px;height:56px;background:linear-gradient(135deg,#e0f2fe,#bae6fd);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:28px}.module-title h1{font-size:26px;font-weight:700}.enhanced-badge{background:linear-gradient(135deg,var(--accent),#0284c7);color:#fff;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;margin-left:8px}
+.progress-bar{background:var(--bg-white);border-bottom:1px solid var(--border);padding:12px 24px}.progress-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;gap:16px}.progress-track{flex:1;height:8px;background:var(--bg-subtle);border-radius:4px}.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));transition:width .3s}.progress-count{font-size:13px;font-weight:600}
+.timeline-nav{background:var(--bg-white);border-bottom:1px solid var(--border);padding:0 24px}.timeline-inner{max-width:1400px;margin:0 auto;display:flex}.timeline-phase{flex:1;padding:16px 8px;cursor:pointer;border-bottom:3px solid transparent;text-align:center}.timeline-phase.active{border-bottom-color:var(--accent)}.timeline-phase.locked{opacity:.4}.phase-label{font-size:12px;font-weight:600}.phase-time{font-size:10px;color:var(--text-secondary)}
+.main-container{max-width:1400px;margin:0 auto;padding:24px;display:grid;grid-template-columns:300px 1fr;gap:24px}@media(max-width:900px){.main-container{grid-template-columns:1fr}}
+.card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:16px}.card-header{padding:14px 18px;border-bottom:1px solid var(--border)}.card-title{font-size:13px;font-weight:600}.card-content{padding:16px 18px}.case-narrative{font-size:14px;color:var(--text-secondary)}
+.clinical-pearl{margin-top:12px;padding:12px;background:var(--accent-light);border-radius:var(--radius-sm);border-left:3px solid var(--accent)}.pearl-title{font-size:10px;font-weight:600;color:#0284c7}.pearl-text{font-size:11px;color:#0369a1}
+.phase-objectives{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px;margin-bottom:16px}.obj-title{font-size:12px;font-weight:600;color:var(--accent);margin-bottom:8px}.obj-list{list-style:none;font-size:11px}.obj-list li{padding:4px 0 4px 16px;position:relative}.obj-list li::before{content:'→';position:absolute;left:0;color:var(--accent)}
+.quiz-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:16px}.quiz-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}.quiz-num{width:28px;height:28px;background:linear-gradient(135deg,var(--accent),#0284c7);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}.quiz-type{font-size:12px;font-weight:600}.quiz-meta{margin-left:auto;display:flex;gap:6px}.quiz-tag{font-size:9px;padding:2px 6px;background:var(--bg-subtle);border-radius:4px}.quiz-difficulty{font-size:9px;padding:2px 6px;border-radius:4px}.quiz-difficulty.medium{background:#fef3c7;color:#92400e}.quiz-difficulty.hard{background:#fee2e2;color:#991b1b}
+.quiz-body{padding:16px}.quiz-stem{font-size:14px;font-weight:500;margin-bottom:14px}.quiz-options{display:flex;flex-direction:column;gap:8px}.quiz-option{display:flex;gap:12px;padding:12px 14px;background:var(--bg-subtle);border:2px solid transparent;border-radius:var(--radius-sm);cursor:pointer}.quiz-option.selected{border-color:var(--accent)}.quiz-option.correct{border-color:var(--green);background:rgba(5,150,105,.08)}.quiz-option.incorrect{border-color:var(--red);background:rgba(220,38,38,.08)}.quiz-option.disabled{pointer-events:none;opacity:.7}
+.option-letter{width:24px;height:24px;border:2px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}.quiz-option.selected .option-letter{border-color:var(--accent);color:var(--accent)}.quiz-option.correct .option-letter{background:var(--green);color:#fff;border-color:var(--green)}.quiz-option.incorrect .option-letter{background:var(--red);color:#fff;border-color:var(--red)}
+.submit-btn{margin-top:14px;width:100%;padding:12px;background:linear-gradient(135deg,var(--accent),#0284c7);color:#fff;border:none;border-radius:var(--radius-sm);font-weight:600;cursor:pointer}.submit-btn:disabled{background:var(--bg-subtle);color:var(--text-secondary)}
+.explanation{margin-top:16px;padding:16px;border-radius:var(--radius-sm);display:none;font-size:13px}.explanation.visible{display:block}.explanation.correct{background:#f0fdf4;border:1px solid #bbf7d0}.explanation.incorrect{background:#fef2f2;border:1px solid #fecaca}
+.keypoint{margin-top:10px;padding:10px;background:rgba(14,165,233,.1);border-radius:6px;font-size:12px}.keypoint-label{font-weight:600;color:var(--accent);font-size:10px}
+</style>
+</head>
+<body>
+<header class="header"><div class="logo">🫁 ReasonDx — Pulmonary</div></header>
+<div class="module-header"><div class="module-title"><div class="module-icon">🫁</div><div><h1>Pulmonary<span class="enhanced-badge">✨ MECHANISM-ENHANCED</span></h1><p>Asthma, ARDS, PE, Pneumonia, and Respiratory Failure</p></div></div></div>
+<div class="progress-bar"><div class="progress-inner"><span style="font-size:12px;color:var(--text-secondary)">Progress</span><div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div><span class="progress-count" id="progressCount">0/20</span></div></div>
+<nav class="timeline-nav"><div class="timeline-inner">
+<div class="timeline-phase active" onclick="goPhase(1)"><div class="phase-label">🌬️ Obstructive</div><div class="phase-time">Asthma & COPD</div></div>
+<div class="timeline-phase locked" onclick="goPhase(2)"><div class="phase-label">🩺 Restrictive</div><div class="phase-time">ILD & ARDS</div></div>
+<div class="timeline-phase locked" onclick="goPhase(3)"><div class="phase-label">🩸 Vascular</div><div class="phase-time">PE & PAH</div></div>
+<div class="timeline-phase locked" onclick="goPhase(4)"><div class="phase-label">🏥 Critical</div><div class="phase-time">Resp Failure & Ventilators</div></div>
+</div></nav>
+<div class="main-container">
+<aside>
+<div class="phase-objectives" id="phaseObjectives"></div>
+<div class="card"><div class="card-header"><div class="card-title">📋 Clinical Snapshot</div></div><div class="card-content"><div class="case-narrative" id="caseNarrative"></div><div class="clinical-pearl"><div class="pearl-title">💡 Pulm Pearl</div><div class="pearl-text" id="pearlText"></div></div></div></div>
+</aside>
+<main id="questionsPanel"></main>
+</div>
+<script>
+var phase=1,state={};for(var i=1;i<=20;i++)state[i]={pick:null,done:false,ok:false};
+var phases={
+1:{qs:[1,2,3,4,5],narrative:'<strong>Maria</strong>, 28F, presents with wheezing and dyspnea. History of allergies. FEV1/FVC ratio 65%. Symptoms improve with bronchodilators.',pearl:'Obstructive = air trapping. FEV1/FVC <70%. Asthma is reversible, COPD is not. PFTs differentiate obstructive from restrictive.',objectives:['Interpret PFTs','Differentiate asthma from COPD','Know asthma severity classification','Choose appropriate therapy']},
+2:{qs:[6,7,8,9,10],narrative:'<strong>James</strong>, 62M, presents with progressive dyspnea. CXR shows bilateral reticular opacities. PFTs show reduced TLC and DLCO.',pearl:'Restrictive = small lungs. TLC reduced, FEV1/FVC normal or high. ARDS: bilateral opacities, PaO2/FiO2 <300, not cardiogenic.',objectives:['Recognize restrictive pattern','Know ARDS Berlin criteria','Understand ILD types','Manage acute respiratory failure']},
+3:{qs:[11,12,13,14,15],narrative:'<strong>Sarah</strong>, 45F, post-op day 3, suddenly dyspneic with pleuritic chest pain. HR 110, SpO2 91%. Wells score suggests PE.',pearl:'PE: Wells score risk stratifies. D-dimer to rule out low-risk. CT-PA confirms. Anticoagulation is treatment. Thrombolytics if massive.',objectives:['Apply Wells criteria','Know when to use D-dimer','Interpret V/Q mismatch','Choose anticoagulation strategy']},
+4:{qs:[16,17,18,19,20],narrative:'<strong>Robert</strong>, 70M, in ICU with COPD exacerbation, CO2 rising despite BiPAP. Discussing intubation and ventilator settings.',pearl:'Resp failure: Type 1 (hypoxemic) vs Type 2 (hypercapnic). Ventilator: low tidal volume (6 mL/kg IBW) for ARDS. PEEP maintains recruitment.',objectives:['Classify respiratory failure','Know indications for intubation','Set initial ventilator parameters','Troubleshoot ventilator alarms']}
+};
+var Qs={
+1:{type:'PFTs',difficulty:'medium',tags:['Pulm'],stem:'PFTs show FEV1/FVC 62%, FEV1 55% predicted, with 15% improvement after bronchodilator. What is the diagnosis?',
+opts:[['a','Restrictive lung disease with reduced total lung capacity'],['b','Asthma with reversible airflow obstruction'],['c','COPD without significant bronchodilator response'],['d','Normal spirometry with no lung pathology']],
+ans:'b',
+exp:'<strong>Obstructive pattern:</strong> FEV1/FVC <70% = obstruction. >12% AND 200mL improvement with bronchodilator = reversible = asthma. COPD has minimal reversibility.',
+kp:'FEV1/FVC <70% = obstruction. >12% reversibility = asthma.'},
+2:{type:'Asthma Severity',difficulty:'medium',tags:['Pulm'],stem:'A patient uses rescue inhaler 4x/week and wakes with symptoms 3x/month. What severity is this?',
+opts:[['a','Intermittent asthma requiring no controller'],['b','Mild persistent asthma'],['c','Moderate persistent asthma'],['d','Severe persistent asthma']],
+ans:'b',
+exp:'<strong>Asthma classification:</strong> Mild persistent: >2 days/week (but not daily) or >2 nights/month. Needs daily controller (low-dose ICS).',
+kp:'Mild persistent: symptoms >2/week or nights >2/month. Add low-dose ICS.'},
+3:{type:'Asthma Treatment',difficulty:'medium',tags:['Pulm'],stem:'What is first-line controller therapy for persistent asthma?',
+opts:[['a','Long-acting beta-agonist alone'],['b','Inhaled corticosteroid'],['c','Oral corticosteroid'],['d','Leukotriene receptor antagonist alone']],
+ans:'b',
+exp:'<strong>Asthma controller:</strong> ICS is cornerstone of persistent asthma treatment. LABAs never alone (black box warning). Add LABA if ICS alone insufficient.',
+kp:'ICS first-line for persistent asthma. LABA only with ICS, never alone.'},
+4:{type:'COPD',difficulty:'medium',tags:['Pulm'],stem:'A 65-year-old smoker has FEV1/FVC 60% with minimal bronchodilator response. What confirms COPD diagnosis?',
+opts:[['a','Post-bronchodilator FEV1/FVC remains less than 0.70'],['b','Positive bronchodilator response greater than 12%'],['c','Elevated total lung capacity on testing'],['d','Normal diffusing capacity for carbon monoxide']],
+ans:'a',
+exp:'<strong>COPD diagnosis:</strong> Post-bronchodilator FEV1/FVC <0.70 confirms airflow limitation. GOLD stages by FEV1 % predicted. COPD has minimal reversibility.',
+kp:'COPD: post-BD FEV1/FVC <0.70. GOLD stages by FEV1.'},
+5:{type:'COPD Exacerbation',difficulty:'hard',tags:['Pulm'],stem:'A COPD patient presents with increased dyspnea, purulent sputum, and increased sputum volume. What treatment is indicated?',
+opts:[['a','Supportive care with hydration only'],['b','Bronchodilators, systemic steroids, and antibiotics'],['c','Inhaled corticosteroids alone are sufficient'],['d','Immediate intubation and mechanical ventilation']],
+ans:'b',
+exp:'<strong>COPD exacerbation:</strong> Anthonisen criteria (dyspnea, sputum volume, purulence). Treatment: bronchodilators, systemic steroids (5 days), antibiotics if purulent sputum.',
+kp:'COPD exacerbation: bronchodilators + steroids + antibiotics (if purulent).'},
+6:{type:'Restrictive Pattern',difficulty:'medium',tags:['Pulm'],stem:'PFTs show TLC 60% predicted, FEV1/FVC 85%. What pattern is this?',
+opts:[['a','Obstructive lung disease'],['b','Restrictive lung disease'],['c','Mixed obstructive and restrictive pattern'],['d','Normal pulmonary function testing']],
+ans:'b',
+exp:'<strong>Restrictive pattern:</strong> TLC <80% with normal or high FEV1/FVC. Lung cant expand fully. Causes: ILD, chest wall disease, neuromuscular disease.',
+kp:'Restrictive: TLC reduced, FEV1/FVC normal or high.'},
+7:{type:'ARDS',difficulty:'hard',tags:['Pulm'],stem:'Berlin criteria for ARDS include all EXCEPT:',
+opts:[['a','Onset within 1 week of known insult'],['b','Bilateral opacities on chest imaging'],['c','Elevated BNP confirming cardiac etiology'],['d','PaO2/FiO2 ratio 300 mmHg or less with PEEP 5 or more']],
+ans:'c',
+exp:'<strong>ARDS Berlin criteria:</strong> Acute onset (<1 week), bilateral opacities, NOT explained by cardiac failure/fluid overload, PaO2/FiO2 ≤300. Severity by P/F ratio.',
+kp:'ARDS: acute, bilateral, non-cardiogenic, P/F ≤300.'},
+8:{type:'ARDS Management',difficulty:'hard',tags:['Pulm'],stem:'What tidal volume should be used in ARDS?',
+opts:[['a','10-12 mL/kg actual body weight'],['b','6 mL/kg ideal body weight'],['c','8-10 mL/kg ideal body weight'],['d','Tidal volume does not matter in ARDS']],
+ans:'b',
+exp:'<strong>Low tidal volume ventilation:</strong> 6 mL/kg IBW reduces mortality in ARDS (ARDSNet). Prevents volutrauma. Allow permissive hypercapnia if needed.',
+kp:'ARDS: 6 mL/kg IBW. Low tidal volume reduces mortality.'},
+9:{type:'ILD',difficulty:'medium',tags:['Pulm'],stem:'A patient with rheumatoid arthritis has progressive dyspnea and velcro crackles. HRCT shows honeycombing. What is the likely diagnosis?',
+opts:[['a','Usual interstitial pneumonia and pulmonary fibrosis'],['b','Acute respiratory distress syndrome'],['c','Chronic obstructive pulmonary disease'],['d','Pulmonary hypertension without lung disease']],
+ans:'a',
+exp:'<strong>ILD/pulmonary fibrosis:</strong> UIP pattern: honeycombing, basilar predominance, traction bronchiectasis. Associated with RA, IPF. Velcro crackles on exam.',
+kp:'UIP: honeycombing, basilar, velcro crackles. IPF is idiopathic UIP.'},
+10:{type:'Pleural Effusion',difficulty:'medium',tags:['Pulm'],stem:'Pleural fluid has protein 4.5, LDH 250, serum protein 6.0, serum LDH 200. Is this transudative or exudative?',
+opts:[['a','Transudative effusion from heart failure'],['b','Exudative effusion meeting Light criteria'],['c','Cannot determine from these values'],['d','Hemothorax requiring chest tube']],
+ans:'b',
+exp:'<strong>Lights criteria:</strong> Exudate if ANY: pleural/serum protein >0.5, pleural/serum LDH >0.6, pleural LDH >2/3 upper normal. Here: 4.5/6=0.75 (>0.5) = exudate.',
+kp:'Lights criteria: protein ratio >0.5, LDH ratio >0.6 = exudate.'},
+11:{type:'PE Wells Score',difficulty:'medium',tags:['Pulm'],stem:'A post-surgical patient has leg swelling, HR 105, and is immobilized. Wells score is 7. What is the next step?',
+opts:[['a','D-dimer testing to rule out pulmonary embolism'],['b','CT pulmonary angiography'],['c','Reassurance since PE is unlikely'],['d','Empiric thrombolytic therapy']],
+ans:'b',
+exp:'<strong>PE workup:</strong> Wells >6 = high probability. Go directly to CT-PA (skip D-dimer, which is for ruling out low-probability PE). Start anticoagulation.',
+kp:'High probability PE (Wells >6): go to CT-PA, skip D-dimer.'},
+12:{type:'D-dimer',difficulty:'medium',tags:['Pulm'],stem:'When is D-dimer useful in PE evaluation?',
+opts:[['a','To confirm PE diagnosis in all patients'],['b','To rule out PE in low probability patients'],['c','To monitor anticoagulation therapy'],['d','To determine PE severity']],
+ans:'b',
+exp:'<strong>D-dimer:</strong> High sensitivity, low specificity. Negative D-dimer rules OUT PE in low/intermediate probability. Not useful if high probability (too many false negatives).',
+kp:'D-dimer rules out PE in low probability. Not useful if high probability.'},
+13:{type:'PE Treatment',difficulty:'hard',tags:['Pulm'],stem:'A patient with PE has BP 85/50 and RV strain on echo. What is indicated?',
+opts:[['a','Anticoagulation with heparin alone'],['b','Systemic thrombolysis or embolectomy'],['c','IVC filter placement only'],['d','Observation in the ICU']],
+ans:'b',
+exp:'<strong>Massive PE:</strong> Hemodynamic instability (SBP <90) + RV dysfunction = massive PE. Thrombolytics (tPA) indicated. Consider embolectomy if contraindicated.',
+kp:'Massive PE (hypotension + RV strain): thrombolytics or embolectomy.'},
+14:{type:'Anticoagulation',difficulty:'medium',tags:['Pulm'],stem:'What is the duration of anticoagulation for a first unprovoked PE?',
+opts:[['a','3 months then reassess for extended therapy'],['b','6 weeks of treatment'],['c','Lifelong anticoagulation always required'],['d','Until symptoms resolve completely']],
+ans:'a',
+exp:'<strong>PE anticoagulation duration:</strong> Provoked (surgery, trauma): 3 months. Unprovoked: at least 3 months, then reassess for extended therapy based on risk-benefit.',
+kp:'Unprovoked PE: minimum 3 months, consider extended therapy.'},
+15:{type:'Pulmonary Hypertension',difficulty:'hard',tags:['Pulm'],stem:'What defines pulmonary arterial hypertension on right heart catheterization?',
+opts:[['a','Mean pulmonary artery pressure greater than 20 mmHg at rest'],['b','Systolic blood pressure greater than 140 mmHg'],['c','PCWP greater than 15 mmHg'],['d','Cardiac output less than 4 L/min']],
+ans:'a',
+exp:'<strong>PAH definition:</strong> mPAP >20 mmHg at rest (updated 2018). Pre-capillary (PAH): PCWP ≤15. Post-capillary (PVH): PCWP >15.',
+kp:'PAH: mPAP >20 mmHg, PCWP ≤15 (pre-capillary).'},
+16:{type:'Respiratory Failure',difficulty:'medium',tags:['Pulm'],stem:'A patient has PaO2 55 on room air and PaCO2 35. What type of respiratory failure is this?',
+opts:[['a','Type 1 hypoxemic respiratory failure'],['b','Type 2 hypercapnic respiratory failure'],['c','Type 3 perioperative respiratory failure'],['d','Type 4 shock-related respiratory failure']],
+ans:'a',
+exp:'<strong>Type 1:</strong> Hypoxemic (low O2, normal/low CO2). Due to V/Q mismatch, shunt, diffusion impairment. Type 2: hypercapnic (high CO2) - hypoventilation.',
+kp:'Type 1: hypoxemic (low O2). Type 2: hypercapnic (high CO2).'},
+17:{type:'BiPAP',difficulty:'medium',tags:['Pulm'],stem:'When is BiPAP indicated for COPD exacerbation?',
+opts:[['a','All COPD exacerbations regardless of severity'],['b','Respiratory acidosis with pH 7.25-7.35 despite initial treatment'],['c','Only after intubation has failed'],['d','When patient is fully alert without distress']],
+ans:'b',
+exp:'<strong>NIV for COPD:</strong> Indicated for respiratory acidosis (pH 7.25-7.35) despite initial therapy. Reduces intubation and mortality. Contraindicated if severely altered.',
+kp:'BiPAP for COPD: pH 7.25-7.35 with hypercapnia. Reduces intubation.'},
+18:{type:'Intubation',difficulty:'hard',tags:['Pulm'],stem:'What is an indication for emergent intubation?',
+opts:[['a','Mild hypoxemia responding to supplemental oxygen'],['b','Failure to protect airway or impending respiratory arrest'],['c','Anxiety about breathing'],['d','Stable vital signs with dyspnea']],
+ans:'b',
+exp:'<strong>Intubation indications:</strong> Failure to protect airway, apnea/impending arrest, refractory hypoxemia, severe respiratory distress, airway obstruction.',
+kp:'Intubate: cant protect airway, respiratory arrest, refractory hypoxemia.'},
+19:{type:'Ventilator Settings',difficulty:'hard',tags:['Pulm'],stem:'Initial ventilator settings for a 70 kg male intubated for ARDS should include:',
+opts:[['a','Tidal volume 700 mL with minimal PEEP'],['b','Tidal volume 420 mL with PEEP 5-10 cmH2O'],['c','Pressure support mode only'],['d','FiO2 21% to prevent oxygen toxicity']],
+ans:'b',
+exp:'<strong>ARDS ventilation:</strong> TV 6 mL/kg IBW (70kg IBW ≈ 420 mL), PEEP to maintain oxygenation, plateau pressure ≤30 cmH2O. Start FiO2 100%, wean down.',
+kp:'ARDS: 6 mL/kg IBW, PEEP 5-10, plateau ≤30 cmH2O.'},
+20:{type:'Ventilator Troubleshooting',difficulty:'hard',tags:['Pulm'],stem:'Ventilator alarms for high peak pressure but plateau pressure is normal. What is the cause?',
+opts:[['a','Decreased lung compliance from ARDS'],['b','Airway resistance from bronchospasm or mucus plug'],['c','Tension pneumothorax'],['d','Right mainstem intubation']],
+ans:'b',
+exp:'<strong>High peak, normal plateau:</strong> Indicates airway resistance (bronchospasm, secretions, kinked tube). High peak AND plateau = low compliance (ARDS, pneumothorax).',
+kp:'High peak only = airway resistance. High peak + plateau = low compliance.'}
+};
+var answers={1:'b',2:'b',3:'c',4:'d',5:'d',6:'c',7:'b',8:'a',9:'a',10:'c',11:'a',12:'c',13:'d',14:'a',15:'d',16:'c',17:'b',18:'a',19:'b',20:'d'};
+function goPhase(p){if(p<1||p>4)return;phase=p;renderPhase();}
+function renderPhase(){var ph=phases[phase];document.querySelectorAll('.timeline-phase').forEach(function(el,i){el.classList.remove('active','locked');if(i+1===phase)el.classList.add('active');else if(i+1>phase)el.classList.add('locked');});document.getElementById('caseNarrative').innerHTML=ph.narrative;document.getElementById('pearlText').textContent=ph.pearl;var objHtml='<div class="obj-title">🎯 Phase '+phase+' Objectives</div><ul class="obj-list">';ph.objectives.forEach(function(o){objHtml+='<li>'+o+'</li>';});objHtml+='</ul>';document.getElementById('phaseObjectives').innerHTML=objHtml;renderQuestions(ph.qs);}
+function renderQuestions(qIds){var html='';qIds.forEach(function(qid){var q=Qs[qid];if(!q)return;html+='<div class="quiz-card" id="q'+qid+'"><div class="quiz-header"><div class="quiz-num">'+qid+'</div><span class="quiz-type">'+q.type+'</span><div class="quiz-meta">';q.tags.forEach(function(t){html+='<span class="quiz-tag">'+t+'</span>';});html+='<span class="quiz-difficulty '+(q.difficulty||'medium')+'">'+(q.difficulty||'medium')+'</span></div></div>';html+='<div class="quiz-body"><div class="quiz-stem">'+q.stem+'</div><div class="quiz-options">';q.opts.forEach(function(opt){html+='<div class="quiz-option" data-q="'+qid+'" data-opt="'+opt[0]+'" onclick="selectOpt(this)"><div class="option-letter">'+opt[0].toUpperCase()+'</div><div class="option-text">'+opt[1]+'</div></div>';});html+='</div><button class="submit-btn" id="sub'+qid+'" disabled onclick="submitQ('+qid+')">Submit</button><div class="explanation" id="exp'+qid+'"></div></div></div>';});document.getElementById('questionsPanel').innerHTML=html;}
+function selectOpt(el){var qid=el.dataset.q;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.remove('selected');});el.classList.add('selected');state[qid].pick=el.dataset.opt;document.getElementById('sub'+qid).disabled=false;}
+function submitQ(qid){if(state[qid].done)return;state[qid].done=true;var correct=answers[qid],picked=state[qid].pick,isCorrect=picked===correct;state[qid].ok=isCorrect;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.add('disabled');if(o.dataset.opt===correct)o.classList.add('correct');else if(o.dataset.opt===picked&&!isCorrect)o.classList.add('incorrect');});document.getElementById('sub'+qid).style.display='none';var q=Qs[qid],expDiv=document.getElementById('exp'+qid);var expHtml='<div>'+(isCorrect?'✓ Correct!':'✗ Incorrect')+'</div><div>'+q.exp+'</div><div class="keypoint"><span class="keypoint-label">⚡ Key:</span> '+q.kp+'</div>';expDiv.innerHTML=expHtml;expDiv.classList.add('visible',isCorrect?'correct':'incorrect');updateProgress();}
+function updateProgress(){var done=0;for(var i=1;i<=20;i++)if(state[i].done)done++;document.getElementById('progressFill').style.width=(done/20*100)+'%';document.getElementById('progressCount').textContent=done+'/20';}
+renderPhase();
+</script>
+</body>
+</html>
