@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pulmonary: Deep Mechanisms - ReasonDx</title>
+<style>
+:root{--bg-page:#f8fafc;--bg-white:#fff;--bg-subtle:#f1f5f9;--text-primary:#0f172a;--text-secondary:#475569;--text-muted:#94a3b8;--border:#e2e8f0;--accent:#0891b2;--accent-light:#cffafe;--green:#059669;--red:#dc2626;--radius-sm:8px;--radius-md:12px;--radius-lg:16px}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg-page);color:var(--text-primary);line-height:1.6}
+.header{background:linear-gradient(135deg,#0891b2,#0e7490);color:#fff;padding:16px 24px}.header-inner{max-width:1400px;margin:0 auto}.logo{font-weight:700;font-size:18px}
+.module-header{background:var(--bg-white);border-bottom:1px solid var(--border);padding:24px}.module-header-inner{max-width:1400px;margin:0 auto}
+.module-title{display:flex;align-items:center;gap:16px}.module-icon{width:56px;height:56px;background:linear-gradient(135deg,#cffafe,#a5f3fc);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-size:28px}
+.module-title h1{font-size:26px;font-weight:700}.module-title p{color:var(--text-secondary);font-size:14px}
+.enhanced-badge{display:inline-flex;align-items:center;gap:4px;background:linear-gradient(135deg,var(--accent),#0e7490);color:#fff;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;margin-left:8px}
+.progress-bar{background:var(--bg-white);border-bottom:1px solid var(--border);padding:12px 24px}.progress-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;gap:16px}
+.progress-track{flex:1;height:8px;background:var(--bg-subtle);border-radius:4px;overflow:hidden}.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));border-radius:4px;transition:width .3s}.progress-count{font-size:13px;font-weight:600}
+.patient-banner{background:linear-gradient(135deg,#0e7490,#0891b2);color:#fff;padding:20px 24px}.patient-banner-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.patient-info{flex:1;min-width:200px}.patient-name{font-size:16px;font-weight:600}.patient-details{font-size:13px;opacity:.9}
+.patient-vitals{display:flex;gap:12px;flex-wrap:wrap}.vital{text-align:center;padding:8px 14px;background:rgba(255,255,255,.1);border-radius:var(--radius-sm);min-width:70px}.vital.critical{background:rgba(255,255,255,.25)}
+.vital-value{font-size:18px;font-weight:700}.vital-label{font-size:9px;opacity:.8;text-transform:uppercase}
+.timeline-nav{background:var(--bg-white);border-bottom:1px solid var(--border);padding:0 24px;overflow-x:auto}.timeline-inner{max-width:1400px;margin:0 auto;display:flex}
+.timeline-phase{flex:1;min-width:140px;padding:16px 8px;cursor:pointer;border-bottom:3px solid transparent;text-align:center;transition:all .2s}
+.timeline-phase:hover{background:var(--bg-subtle)}.timeline-phase.active{border-bottom-color:var(--accent);background:rgba(8,145,178,.04)}
+.timeline-phase.completed{border-bottom-color:var(--green)}.timeline-phase.locked{opacity:.4;cursor:not-allowed}
+.phase-label{font-size:12px;font-weight:600}.phase-time{font-size:10px;color:var(--text-muted)}.phase-status{font-size:10px;margin-top:4px}.phase-status.current{color:var(--accent)}
+.main-container{max-width:1400px;margin:0 auto;padding:24px;display:grid;grid-template-columns:300px 1fr;gap:24px}@media(max-width:900px){.main-container{grid-template-columns:1fr}}
+.card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:16px}
+.card-header{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.card-title{font-size:13px;font-weight:600}.card-badge{font-size:10px;padding:2px 8px;background:var(--bg-subtle);border-radius:10px;color:var(--text-muted)}
+.card-content{padding:16px 18px}.case-narrative{font-size:14px;line-height:1.7;color:var(--text-secondary)}.case-narrative strong{color:var(--text-primary)}.case-narrative em{color:var(--accent);font-style:normal;font-weight:500}
+.data-section{background:var(--bg-subtle);border-radius:var(--radius-sm);padding:10px;margin-top:10px}
+.data-label{font-size:9px;font-weight:600;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px}
+.data-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px}.data-item{font-size:10px;display:flex;justify-content:space-between}.data-item span:last-child{font-weight:600}.data-item .critical{color:#dc2626;font-weight:700}.data-item .abnormal{color:#dc2626}
+.clinical-pearl{margin-top:12px;padding:12px;background:linear-gradient(135deg,#cffafe,#a5f3fc);border-radius:var(--radius-sm);border-left:3px solid var(--accent)}
+.pearl-title{font-size:10px;font-weight:600;color:var(--accent);margin-bottom:4px}.pearl-text{font-size:11px;color:#0e7490;line-height:1.5}
+.phase-objectives{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px;margin-bottom:16px}
+.obj-title{font-size:12px;font-weight:600;color:var(--accent);margin-bottom:8px}.obj-list{list-style:none;font-size:11px}.obj-list li{padding:4px 0 4px 16px;position:relative}.obj-list li::before{content:'→';position:absolute;left:0;color:var(--accent)}
+.phase-refs{margin-top:10px;padding-top:10px;border-top:1px dashed var(--border)}.phase-refs-title{font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:4px}.phase-refs a{font-size:10px;color:#2563eb;text-decoration:none;display:block;margin:2px 0}
+.quiz-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:16px;overflow:hidden}
+.quiz-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.quiz-num{width:28px;height:28px;background:linear-gradient(135deg,var(--accent),#0e7490);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+.quiz-type{font-size:12px;font-weight:600}.quiz-meta{margin-left:auto;display:flex;gap:6px}
+.quiz-tag{font-size:9px;padding:2px 6px;background:var(--bg-subtle);border-radius:4px;color:var(--text-muted)}.quiz-tag.nbme{background:#fef3c7;color:#92400e}
+.quiz-difficulty{font-size:9px;padding:2px 6px;border-radius:4px}.quiz-difficulty.easy{background:#dcfce7;color:#166534}.quiz-difficulty.medium{background:#fef3c7;color:#92400e}.quiz-difficulty.hard{background:#fee2e2;color:#991b1b}
+.quiz-vignette{padding:14px 16px;background:linear-gradient(135deg,#f8fafc,#f1f5f9);border-bottom:1px solid var(--border);font-size:12px}
+.vig-section{margin-bottom:8px}.vig-label{font-weight:600;color:var(--text-muted);font-size:10px;text-transform:uppercase;margin-bottom:2px}
+.quiz-context{padding:10px 16px;background:var(--accent-light);font-size:11px;color:#0e7490;border-bottom:1px solid var(--border)}
+.quiz-body{padding:16px}.quiz-stem{font-size:14px;font-weight:500;margin-bottom:14px;line-height:1.5}
+.quiz-options{display:flex;flex-direction:column;gap:8px}.quiz-option{display:flex;gap:12px;padding:12px 14px;background:var(--bg-subtle);border:2px solid transparent;border-radius:var(--radius-sm);cursor:pointer;transition:all .15s}
+.quiz-option:hover{border-color:var(--border);background:var(--bg-white)}.quiz-option.selected{border-color:var(--accent);background:rgba(8,145,178,.05)}
+.quiz-option.correct{border-color:var(--green);background:rgba(5,150,105,.08)}.quiz-option.incorrect{border-color:var(--red);background:rgba(220,38,38,.08)}.quiz-option.disabled{pointer-events:none;opacity:.7}
+.option-letter{width:24px;height:24px;border:2px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.quiz-option.selected .option-letter{border-color:var(--accent);color:var(--accent)}.quiz-option.correct .option-letter{background:var(--green);border-color:var(--green);color:#fff}.quiz-option.incorrect .option-letter{background:var(--red);border-color:var(--red);color:#fff}
+.option-text{font-size:13px;color:var(--text-secondary);line-height:1.4}
+.submit-btn{margin-top:14px;width:100%;padding:12px;background:linear-gradient(135deg,var(--accent),#0e7490);color:#fff;border:none;border-radius:var(--radius-sm);font-weight:600;cursor:pointer;font-size:14px}
+.submit-btn:disabled{background:var(--bg-subtle);color:var(--text-muted);cursor:not-allowed}
+.explanation{margin-top:16px;padding:16px;border-radius:var(--radius-sm);display:none;font-size:13px;line-height:1.6}.explanation.visible{display:block}
+.explanation.correct{background:#f0fdf4;border:1px solid #bbf7d0}.explanation.incorrect{background:#fef2f2;border:1px solid #fecaca}
+.exp-header{font-weight:600;margin-bottom:8px}.exp-header.correct{color:var(--green)}.exp-header.incorrect{color:var(--red)}
+.keypoint{margin-top:10px;padding:10px;background:rgba(8,145,178,.08);border-radius:6px;font-size:12px}.keypoint-label{font-weight:600;color:var(--accent);font-size:10px}
+.deep-dive{margin-top:14px;border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden}
+.dd-toggle{width:100%;padding:10px 14px;background:var(--bg-subtle);border:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:600}
+.dd-content{display:none;padding:14px;font-size:12px;line-height:1.6;max-height:500px;overflow-y:auto}.dd-content.visible{display:block}
+.dd-content h4{font-size:13px;font-weight:600;margin:12px 0 8px;color:var(--accent);border-bottom:1px solid var(--border);padding-bottom:4px}.dd-content h4:first-child{margin-top:0}
+.dd-content ul,.dd-content ol{margin:8px 0;padding-left:20px}.dd-content li{margin:4px 0}
+.dd-content table{width:100%;border-collapse:collapse;margin:10px 0;font-size:11px}.dd-content th,.dd-content td{border:1px solid var(--border);padding:6px 8px;text-align:left}.dd-content th{background:var(--bg-subtle);font-weight:600}
+.dd-content .mech-pathway{background:linear-gradient(135deg,#ecfeff,#cffafe);border:1px solid #a5f3fc;border-radius:8px;padding:12px;margin:10px 0}
+.dd-content .mech-step{display:inline-block;padding:4px 8px;background:#fff;border-radius:4px;margin:2px;border:1px solid #a5f3fc}.dd-content .mech-arrow{color:var(--accent);font-weight:bold;margin:0 4px}
+.dd-content .formula-box{background:#1e293b;color:#e2e8f0;padding:12px;border-radius:8px;font-family:monospace;margin:10px 0}
+.dd-content .clinical-connection{background:#fef3c7;border-left:3px solid #d97706;padding:10px;margin:10px 0;border-radius:0 8px 8px 0}
+.dd-content .dd-refs{margin-top:14px;padding-top:12px;border-top:1px dashed var(--border)}.dd-content .dd-refs h5{font-size:11px;font-weight:600;color:var(--text-muted);margin-bottom:8px}.dd-content .dd-refs ol{font-size:10px}.dd-content .dd-refs a{color:#2563eb;text-decoration:none}
+.buzzwords{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px}.buzzword{font-size:10px;padding:4px 8px;background:#fef3c7;border-radius:4px;color:#92400e;font-weight:500}
+.distractor-analysis{margin-top:12px;padding:12px;background:#fef2f2;border-radius:8px}.distractor-title{font-size:11px;font-weight:600;color:#991b1b;margin-bottom:6px}.distractor-item{font-size:11px;margin:4px 0;padding-left:12px;border-left:2px solid #fca5a5}
+</style>
+</head>
+<body>
+<header class="header"><div class="header-inner"><div class="logo">🫁 ReasonDx — Pulmonary Deep Mechanisms</div></div></header>
+<div class="module-header"><div class="module-header-inner"><div class="module-title"><div class="module-icon">🫁</div><div><h1>Pulmonary Medicine<span class="enhanced-badge">✨ MECHANISM-ENHANCED</span></h1><p>From gas exchange physiology to ventilator management</p></div></div></div></div>
+<div class="progress-bar"><div class="progress-inner"><span style="font-size:12px;color:var(--text-muted)">Module Progress</span><div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div><span class="progress-count" id="progressCount">0/20</span></div></div>
+<div class="patient-banner"><div class="patient-banner-inner"><div class="patient-info"><div class="patient-name">Sarah Chen, 58F</div><div class="patient-details">Obesity, HTN, recent hip surgery • Progressive dyspnea and pleuritic chest pain</div></div><div class="patient-vitals"><div class="vital critical"><div class="vital-value">88%</div><div class="vital-label">SpO2</div></div><div class="vital"><div class="vital-value">28</div><div class="vital-label">RR</div></div><div class="vital"><div class="vital-value">112</div><div class="vital-label">HR</div></div></div></div></div>
+<nav class="timeline-nav"><div class="timeline-inner">
+<div class="timeline-phase active" data-phase="1" onclick="goPhase(1)"><div class="phase-label">🩸 PE</div><div class="phase-time">V/Q Mismatch</div><div class="phase-status current" id="status1">In Progress</div></div>
+<div class="timeline-phase locked" data-phase="2" onclick="goPhase(2)"><div class="phase-label">😤 Asthma/COPD</div><div class="phase-time">Obstruction</div><div class="phase-status" id="status2">🔒</div></div>
+<div class="timeline-phase locked" data-phase="3" onclick="goPhase(3)"><div class="phase-label">🌊 ARDS</div><div class="phase-time">Alveolar Damage</div><div class="phase-status" id="status3">🔒</div></div>
+<div class="timeline-phase locked" data-phase="4" onclick="goPhase(4)"><div class="phase-label">💨 Pneumothorax</div><div class="phase-time">Pleural Space</div><div class="phase-status" id="status4">🔒</div></div>
+</div></nav>
+<div class="main-container">
+<aside>
+<div class="phase-objectives" id="phaseObjectives"><div class="obj-title">🎯 Phase 1 Learning Objectives</div><ul class="obj-list"><li>Understand V/Q mismatch in PE</li><li>Apply Wells criteria</li><li>Risk-stratify PE</li><li>Select anticoagulation</li></ul><div class="phase-refs"><div class="phase-refs-title">📚 Key References</div><a href="https://www.nejm.org/doi/full/10.1056/NEJMra1804582" target="_blank">PE Review (NEJM)</a></div></div>
+<div class="card"><div class="card-header"><div class="card-title">📋 Clinical Snapshot</div><div class="card-badge" id="phaseLabel">Phase 1</div></div>
+<div class="card-content"><div class="case-narrative" id="caseNarrative"><strong>Sarah Chen</strong>, 58, presents 10 days post hip surgery with <em>sudden dyspnea</em> and <em>pleuritic chest pain</em>. Right calf swelling × 3 days.</div>
+<div class="data-section"><div class="data-label">Vital Signs</div><div class="data-grid" id="vitalsGrid"><div class="data-item"><span>SpO2</span><span class="critical">88%</span></div><div class="data-item"><span>RR</span><span class="abnormal">28</span></div><div class="data-item"><span>HR</span><span class="abnormal">112</span></div></div></div>
+<div class="data-section"><div class="data-label">Key Labs</div><div class="data-grid" id="labsGrid"><div class="data-item"><span>D-dimer</span><span class="abnormal">2.4</span></div><div class="data-item"><span>pO2</span><span class="critical">58</span></div></div></div>
+<div class="clinical-pearl"><div class="pearl-title">💡 Mechanism Pearl</div><div class="pearl-text" id="pearlText">PE causes hypoxemia via V/Q MISMATCH: blood diverted from occluded vessels creates areas of dead space while redistribution causes shunt physiology.</div></div>
+</div></div>
+</aside>
+<main id="questionsPanel"></main>
+</div>
+
+20:{type:'Respiratory Failure Approach',isNBME:false,difficulty:'medium',domains:['mechanism'],tags:['Step2'],
+ctx:'Systematic approach.',
+stem:'Systematic approach to acute respiratory failure?',
+opts:[['a','(1) Type I vs II, (2) A-a gradient, (3) Mechanism (V/Q, shunt, hypoventilation), (4) Cause, (5) Treat'],['b','Always intubate'],['c','CXR sufficient'],['d','ABG not needed']],
+exp:'<strong>Approach:</strong> Type I (hypoxemic) vs Type II (hypercapnic). A-a gradient: elevated = pulmonary problem. Shunt doesnt respond to O2. Then identify cause and treat.',
+kp:'Shunt = hypoxemia that DOESNT respond to O2. V/Q mismatch responds partially.',
+dd:{mechanism:{title:'Respiratory Failure',content:'<h4>Types</h4><table><tr><th>Type</th><th>Definition</th><th>Examples</th></tr><tr><td>Type I</td><td>PaO2 <60</td><td>PE, ARDS, pneumonia</td></tr><tr><td>Type II</td><td>PaCO2 >50</td><td>COPD, overdose</td></tr></table><h4>A-a Gradient</h4><p>Elevated = pulmonary problem<br>Normal = hypoventilation</p>',bw:['Type I hypoxemic','Type II hypercapnic','Shunt doesnt respond to O2','A-a localizes problem']}},
+dist:{b:'Many dont need intubation',c:'Need ABG',d:'ABG essential'},related:[1,11]}
+};
+
+var answers={1:'a',2:'a',3:'a',4:'a',5:'a',6:'a',7:'a',8:'a',9:'a',10:'a',11:'a',12:'a',13:'a',14:'a',15:'a',16:'a',17:'a',18:'a',19:'a',20:'a'};
+
+function goPhase(p){if(!phases[p])return;phase=p;renderPhase();}
+
+function renderPhase(){
+var ph=phases[phase];
+document.querySelectorAll('.timeline-phase').forEach(function(el,i){el.classList.remove('active','locked','completed');if(i+1===phase)el.classList.add('active');else if(i+1<phase)el.classList.add('completed');else el.classList.add('locked');});
+document.getElementById('phaseLabel').textContent='Phase '+phase;
+document.getElementById('caseNarrative').innerHTML=ph.narrative;
+var vitalsHtml='';ph.vitals.forEach(function(v){vitalsHtml+='<div class="data-item"><span>'+v[0]+'</span><span class="'+(v[2]||'')+'">'+v[1]+'</span></div>';});
+document.getElementById('vitalsGrid').innerHTML=vitalsHtml;
+var labsHtml='';ph.labs.forEach(function(l){labsHtml+='<div class="data-item"><span>'+l[0]+'</span><span class="'+(l[2]||'')+'">'+l[1]+'</span></div>';});
+document.getElementById('labsGrid').innerHTML=labsHtml;
+document.getElementById('pearlText').textContent=ph.pearl;
+var objHtml='<div class="obj-title">🎯 Phase '+phase+' Objectives</div><ul class="obj-list">';
+ph.objectives.forEach(function(o){objHtml+='<li>'+o+'</li>';});
+objHtml+='</ul><div class="phase-refs"><div class="phase-refs-title">📚 References</div>';
+ph.refs.forEach(function(r){objHtml+='<a href="'+r.u+'" target="_blank">'+r.t+'</a>';});
+objHtml+='</div>';
+document.getElementById('phaseObjectives').innerHTML=objHtml;
+renderQuestions(ph.qs);
+}
+
+function renderQuestions(qIds){
+var html='';
+qIds.forEach(function(qid){
+var q=Qs[qid];if(!q)return;
+html+='<div class="quiz-card" id="q'+qid+'"><div class="quiz-header"><div class="quiz-num">'+qid+'</div><span class="quiz-type">'+q.type+'</span>';
+html+='<div class="quiz-meta">';if(q.isNBME)html+='<span class="quiz-tag nbme">NBME</span>';
+q.tags.forEach(function(t){html+='<span class="quiz-tag">'+t+'</span>';});
+html+='<span class="quiz-difficulty '+q.difficulty+'">'+q.difficulty+'</span></div></div>';
+if(q.vig){html+='<div class="quiz-vignette">';
+if(q.vig.demo)html+='<div class="vig-section"><span class="vig-label">Patient</span> '+q.vig.demo+'</div>';
+if(q.vig.hpi)html+='<div class="vig-section"><span class="vig-label">HPI</span> '+q.vig.hpi+'</div>';
+if(q.vig.vitals)html+='<div class="vig-section"><span class="vig-label">Vitals</span> '+q.vig.vitals+'</div>';
+if(q.vig.exam)html+='<div class="vig-section"><span class="vig-label">Exam</span> '+q.vig.exam+'</div>';
+if(q.vig.labs){html+='<div class="vig-section"><span class="vig-label">Labs</span> ';for(var k in q.vig.labs)html+=k.replace(/_/g,' ')+': '+q.vig.labs[k]+'; ';html+='</div>';}
+html+='</div>';}
+if(q.ctx)html+='<div class="quiz-context">'+q.ctx+'</div>';
+html+='<div class="quiz-body"><div class="quiz-stem">'+q.stem+'</div><div class="quiz-options">';
+q.opts.forEach(function(opt){html+='<div class="quiz-option" data-q="'+qid+'" data-opt="'+opt[0]+'" onclick="selectOpt(this)"><div class="option-letter">'+opt[0].toUpperCase()+'</div><div class="option-text">'+opt[1]+'</div></div>';});
+html+='</div><button class="submit-btn" id="sub'+qid+'" disabled onclick="submitQ('+qid+')">Submit Answer</button>';
+html+='<div class="explanation" id="exp'+qid+'"></div></div></div>';
+});
+document.getElementById('questionsPanel').innerHTML=html;
+}
+
+function selectOpt(el){var qid=el.dataset.q;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.remove('selected');});el.classList.add('selected');state[qid].pick=el.dataset.opt;document.getElementById('sub'+qid).disabled=false;}
+
+function submitQ(qid){
+if(state[qid].done)return;state[qid].done=true;
+var correct=answers[qid],picked=state[qid].pick,isCorrect=picked===correct;state[qid].ok=isCorrect;
+document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.add('disabled');if(o.dataset.opt===correct)o.classList.add('correct');else if(o.dataset.opt===picked&&!isCorrect)o.classList.add('incorrect');});
+document.getElementById('sub'+qid).style.display='none';
+var q=Qs[qid],expDiv=document.getElementById('exp'+qid);
+var expHtml='<div class="exp-header '+(isCorrect?'correct':'incorrect')+'">'+(isCorrect?'✓ Correct!':'✗ Incorrect')+'</div><div>'+q.exp+'</div><div class="keypoint"><span class="keypoint-label">⚡ Key Point:</span> '+q.kp+'</div>';
+if(q.dd){expHtml+='<div class="deep-dive"><button class="dd-toggle" onclick="toggleDD(this)">📚 Deep Dive <span>▼</span></button><div class="dd-content">';
+for(var domain in q.dd){expHtml+=q.dd[domain].content;if(q.dd[domain].bw){expHtml+='<div class="buzzwords">';q.dd[domain].bw.forEach(function(bw){expHtml+='<span class="buzzword">'+bw+'</span>';});expHtml+='</div>';}}
+expHtml+='</div></div>';}
+if(q.dist&&!isCorrect){expHtml+='<div class="distractor-analysis"><div class="distractor-title">Why others wrong:</div>';for(var d in q.dist)expHtml+='<div class="distractor-item"><strong>'+d.toUpperCase()+':</strong> '+q.dist[d]+'</div>';expHtml+='</div>';}
+expDiv.innerHTML=expHtml;expDiv.classList.add('visible',isCorrect?'correct':'incorrect');
+updateProgress();
+}
+
+function toggleDD(btn){var content=btn.nextElementSibling;content.classList.toggle('visible');btn.querySelector('span').textContent=content.classList.contains('visible')?'▲':'▼';}
+
+function updateProgress(){var done=0,correct=0;for(var i=1;i<=20;i++){if(state[i].done){done++;if(state[i].ok)correct++;}}document.getElementById('progressFill').style.width=(done/20*100)+'%';document.getElementById('progressCount').textContent=done+'/20';}
+
+renderPhase();
+</script>
+</body>
+</html>

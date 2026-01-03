@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sepsis: James's Journey - MechanismDx </title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg-page:#f8f9fa;--bg-white:#fff;--bg-subtle:#f1f3f5;--text-primary:#1a1a1a;--text-secondary:#5c5c5c;--text-muted:#8c8c8c;--border:#e9ecef;--accent-primary:#dc2626;--accent-green:#16a34a;--accent-amber:#d97706;--accent-purple:#7c3aed;--accent-blue:#2563eb;--radius-sm:8px;--radius-md:12px;--radius-lg:16px}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg-page);color:var(--text-primary);line-height:1.6}
+.header{background:var(--bg-white);border-bottom:1px solid var(--border);padding:0 24px}.header-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:16px 0;flex-wrap:wrap;gap:12px}.logo-link{display:flex;align-items:center;gap:16px;text-decoration:none;color:inherit}.tagline{font-family:'Newsreader',Georgia,serif;font-style:italic;color:var(--text-muted);font-size:14px}.header-nav{display:flex;gap:8px}.nav-link{padding:8px 14px;color:var(--text-secondary);text-decoration:none;font-size:14px;font-weight:500;border-radius:var(--radius-sm)}.nav-link:hover{background:var(--bg-subtle)}
+.module-header{background:var(--bg-white);border-bottom:1px solid var(--border);padding:32px 24px}.module-header-inner{max-width:1400px;margin:0 auto}.breadcrumb{font-size:13px;color:var(--text-muted);margin-bottom:16px}.breadcrumb a{color:var(--accent-primary);text-decoration:none}.module-title{display:flex;align-items:center;gap:16px;flex-wrap:wrap}.module-icon{width:56px;height:56px;background:linear-gradient(135deg,#fee2e2,#fecaca);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-size:28px}.module-title h1{font-size:28px;font-weight:600;margin-bottom:4px}.module-title p{color:var(--text-secondary);font-size:15px}.enhanced-badge{display:inline-flex;align-items:center;gap:4px;background:linear-gradient(135deg,var(--accent-purple),var(--accent-primary));color:#fff;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;margin-left:8px}
+.progress-bar{background:var(--bg-white);border-bottom:1px solid var(--border);padding:12px 24px}.progress-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;gap:16px;flex-wrap:wrap}.progress-label{font-size:13px;font-weight:500;color:var(--text-secondary)}.progress-track{flex:1;min-width:200px;height:8px;background:var(--bg-subtle);border-radius:4px;overflow:hidden}.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent-green),var(--accent-primary));border-radius:4px;transition:width .3s}.progress-count{font-size:13px;font-weight:600}.xp-display{display:flex;align-items:center;gap:6px;padding:6px 12px;background:linear-gradient(135deg,#fef3c7,#fde68a);border-radius:20px;font-size:12px;font-weight:600;color:#92400e}.streak-display{display:flex;align-items:center;gap:6px;padding:6px 12px;background:linear-gradient(135deg,#fee2e2,#fecaca);border-radius:20px;font-size:12px;font-weight:600;color:#991b1b}
+.patient-banner{background:linear-gradient(135deg,#991b1b,#dc2626);color:#fff;padding:20px 24px}.patient-banner-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;gap:20px;flex-wrap:wrap}.patient-avatar{width:48px;height:48px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px}.patient-info{flex:1;min-width:200px}.patient-name{font-size:16px;font-weight:600}.patient-details{font-size:13px;opacity:.9}.patient-vitals{display:flex;gap:12px;flex-wrap:wrap}.vital{text-align:center;padding:8px 14px;background:rgba(255,255,255,.1);border-radius:var(--radius-sm);min-width:70px}.vital-value{font-size:18px;font-weight:700}.vital-label{font-size:9px;opacity:.8;text-transform:uppercase;letter-spacing:.5px}.vital.critical{background:rgba(255,255,255,.25);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
+.timeline-nav{background:var(--bg-white);border-bottom:1px solid var(--border);padding:0 24px;overflow-x:auto}.timeline-inner{max-width:1400px;margin:0 auto;display:flex}.timeline-phase{flex:1;min-width:120px;padding:16px 8px;cursor:pointer;border-bottom:3px solid transparent;text-align:center;transition:all .2s;position:relative}.timeline-phase:hover{background:var(--bg-subtle)}.timeline-phase.active{border-bottom-color:var(--accent-primary);background:rgba(220,38,38,.04)}.timeline-phase.completed{border-bottom-color:var(--accent-green)}.timeline-phase.locked{opacity:.4;cursor:not-allowed}.phase-label{font-size:11px;font-weight:600}.phase-time{font-size:10px;color:var(--text-muted)}.phase-status{font-size:10px;margin-top:4px}.phase-status.current{color:var(--accent-primary)}.phase-status.done{color:var(--accent-green)}.phase-score{position:absolute;top:8px;right:8px;font-size:10px;font-weight:600;color:var(--accent-green)}
+.main-container{max-width:1400px;margin:0 auto;padding:24px;display:grid;grid-template-columns:300px 1fr 280px;gap:24px}@media(max-width:1200px){.main-container{grid-template-columns:280px 1fr}}@media(max-width:900px){.main-container{grid-template-columns:1fr}}.case-panel{position:sticky;top:24px;height:fit-content}.insights-panel{position:sticky;top:24px;height:fit-content}@media(max-width:1200px){.insights-panel{display:none}}
+.card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:16px}.card-header{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}.card-title{font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px}.card-badge{font-size:10px;padding:2px 8px;background:var(--bg-subtle);border-radius:10px;color:var(--text-muted)}.card-content{padding:16px 18px}
+.case-narrative{font-family:'Newsreader',Georgia,serif;font-size:13px;line-height:1.7;color:var(--text-secondary);margin-bottom:12px}.case-narrative strong{color:var(--text-primary)}.case-narrative em{color:var(--accent-primary);font-style:normal;font-weight:500}.case-narrative .keyword{background:linear-gradient(135deg,#fef3c7,#fde68a);padding:1px 4px;border-radius:3px;font-weight:500}
+.data-section{background:var(--bg-subtle);border-radius:var(--radius-sm);padding:10px;margin-top:10px}.data-label{font-size:9px;font-weight:600;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;letter-spacing:.5px}.data-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px}.data-item{font-size:10px;display:flex;justify-content:space-between}.data-item span:first-child{color:var(--text-muted)}.data-item span:last-child{font-weight:600}.data-item .critical{color:#dc2626;font-weight:700}.data-item .abnormal{color:#dc2626}.data-item .improved{color:var(--accent-green)}.data-item .normal{color:var(--text-primary)}
+.clinical-pearl{margin-top:12px;padding:12px;background:linear-gradient(135deg,#dbeafe,#bfdbfe);border-radius:var(--radius-sm);border-left:3px solid var(--accent-blue)}.pearl-title{font-size:10px;font-weight:600;color:var(--accent-blue);margin-bottom:4px;display:flex;align-items:center;gap:4px}.pearl-text{font-size:11px;color:#1e40af;line-height:1.5}
+.fp-mini{margin-top:12px;padding:14px;background:linear-gradient(135deg,#1e293b,#334155);border-radius:var(--radius-md);color:#fff}.fp-title{font-size:11px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:6px}.domain-bars{display:flex;flex-direction:column;gap:6px}.domain-bar{display:flex;align-items:center;gap:6px;font-size:10px}.domain-label{width:80px;color:rgba(255,255,255,.7)}.domain-track{flex:1;height:6px;background:rgba(255,255,255,.2);border-radius:3px;overflow:hidden}.domain-fill{height:100%;border-radius:3px;transition:width .5s ease-out}.domain-fill.mechanism{background:linear-gradient(90deg,#a855f7,#c084fc)}.domain-fill.pharm{background:linear-gradient(90deg,#3b82f6,#60a5fa)}.domain-fill.patho{background:linear-gradient(90deg,#22c55e,#4ade80)}.domain-score{width:35px;text-align:right;font-weight:600;font-size:11px}
+.weakness-alert{margin-top:12px;padding:10px;background:linear-gradient(135deg,#fef2f2,#fee2e2);border-radius:var(--radius-sm);border:1px solid #fecaca}.weakness-title{font-size:10px;font-weight:600;color:#991b1b;margin-bottom:4px}.weakness-text{font-size:11px;color:#7f1d1d}
+.strength-alert{margin-top:12px;padding:10px;background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-radius:var(--radius-sm);border:1px solid #bbf7d0}.strength-title{font-size:10px;font-weight:600;color:#166534;margin-bottom:4px}.strength-text{font-size:11px;color:#14532d}
+.phase-intro{margin-bottom:20px}.phase-intro h2{font-size:20px;font-weight:600;margin-bottom:6px;display:flex;align-items:center;gap:10px}.phase-intro p{font-size:13px;color:var(--text-secondary)}.phase-timer{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:var(--text-muted);background:var(--bg-subtle);padding:4px 10px;border-radius:12px}
+.learning-box{background:linear-gradient(135deg,#fef2f2,#fee2e2);border:1px solid #fecaca;border-radius:var(--radius-md);padding:14px;margin-top:12px}.learning-title{font-size:11px;font-weight:600;color:var(--accent-primary);margin-bottom:8px;display:flex;align-items:center;gap:6px}.learning-list{list-style:none;font-size:12px}.learning-list li{padding:4px 0 4px 20px;position:relative;color:var(--text-secondary)}.learning-list li::before{content:'○';position:absolute;left:0;color:var(--accent-primary);font-size:10px}.learning-list li.completed::before{content:'✓';color:var(--accent-green)}
+.guidelines-ref{margin-top:12px;padding:10px;background:var(--bg-subtle);border-radius:var(--radius-sm)}.guidelines-title{font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:6px}.guidelines-list{font-size:11px;color:var(--text-secondary)}.guidelines-list a{color:var(--accent-blue);text-decoration:none}.guidelines-list a:hover{text-decoration:underline}
+.quiz-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:20px;overflow:hidden;transition:box-shadow .2s}.quiz-card:hover{box-shadow:0 4px 12px rgba(0,0,0,.08)}.quiz-card.nbme{border-left:4px solid var(--accent-purple)}.quiz-card.answered{opacity:.9}
+.quiz-header{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}.quiz-number{display:flex;align-items:center;gap:10px}.quiz-num{width:28px;height:28px;background:var(--accent-primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}.quiz-num.nbme{background:var(--accent-purple)}.quiz-type{font-size:11px;color:var(--text-muted)}.quiz-meta{display:flex;align-items:center;gap:8px}.quiz-tags{display:flex;gap:4px;flex-wrap:wrap}.quiz-tag{font-size:9px;padding:3px 8px;border-radius:4px;font-weight:500}.quiz-tag.mechanism{background:#f3e8ff;color:#7c3aed}.quiz-tag.pharmacology{background:#dbeafe;color:#2563eb}.quiz-tag.pathophysiology{background:#dcfce7;color:#16a34a}.quiz-tag.step1{background:#fef3c7;color:#92400e}.quiz-tag.step2{background:#e0e7ff;color:#3730a3}.quiz-difficulty{font-size:9px;padding:3px 8px;border-radius:4px;font-weight:600}.quiz-difficulty.easy{background:#dcfce7;color:#166534}.quiz-difficulty.medium{background:#fef3c7;color:#92400e}.quiz-difficulty.hard{background:#fee2e2;color:#991b1b}.quiz-status{font-size:14px;font-weight:600}.quiz-status.correct{color:var(--accent-green)}.quiz-status.incorrect{color:#dc2626}
+.quiz-context{padding:12px 18px;background:linear-gradient(135deg,#fffbeb,#fef3c7);border-bottom:1px solid var(--border);font-size:12px}.context-label{font-size:10px;font-weight:600;color:var(--accent-amber);margin-bottom:4px;display:flex;align-items:center;gap:4px}
+.nbme-vignette{padding:16px 18px;background:linear-gradient(135deg,#f5f3ff,#ede9fe);border-bottom:1px solid var(--border);font-size:12px;line-height:1.7}.vig-demo{font-weight:600;color:var(--accent-purple);margin-bottom:8px;font-size:13px}.vig-section{margin-bottom:8px}.vig-label{font-size:10px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px}.vig-labs{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:6px;margin-top:6px;padding:8px;background:rgba(255,255,255,.5);border-radius:var(--radius-sm)}.vig-lab{font-size:11px;display:flex;justify-content:space-between}.vig-lab .abnormal{color:#dc2626;font-weight:600}
+.quiz-body{padding:18px}.quiz-stem{font-size:14px;font-weight:500;margin-bottom:16px;line-height:1.6}.quiz-stem .highlight{background:linear-gradient(135deg,#fef3c7,#fde68a);padding:1px 4px;border-radius:3px}
+.quiz-options{display:flex;flex-direction:column;gap:10px}.quiz-option{display:flex;align-items:flex-start;gap:12px;padding:14px;border:2px solid var(--border);border-radius:var(--radius-md);cursor:pointer;transition:all .15s}.quiz-option:hover:not(.disabled){background:var(--bg-subtle);border-color:#cbd5e1;transform:translateX(4px)}.quiz-option.selected{background:#eff6ff;border-color:var(--accent-blue)}.quiz-option.correct{background:#dcfce7;border-color:var(--accent-green)}.quiz-option.incorrect{background:#fee2e2;border-color:#dc2626}.quiz-option.disabled{cursor:default}.quiz-option.show-correct{border-color:var(--accent-green);border-style:dashed}.option-letter{width:28px;height:28px;background:var(--bg-subtle);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;transition:all .15s}.quiz-option.selected .option-letter{background:var(--accent-blue);color:#fff}.quiz-option.correct .option-letter{background:var(--accent-green);color:#fff}.quiz-option.incorrect .option-letter{background:#dc2626;color:#fff}.option-content{flex:1}.option-text{font-size:13px;line-height:1.5}.option-hint{font-size:11px;color:var(--text-muted);margin-top:4px;font-style:italic;display:none}.quiz-option.correct .option-hint,.quiz-option.incorrect .option-hint{display:block}
+.confidence-section{margin-top:16px;padding-top:16px;border-top:1px dashed var(--border)}.confidence-label{display:flex;justify-content:space-between;align-items:center;font-size:12px;margin-bottom:10px}.confidence-help{font-size:11px;color:var(--text-muted)}.confidence-btns{display:flex;gap:8px}.conf-btn{flex:1;padding:10px;border:2px solid var(--border);background:var(--bg-white);border-radius:var(--radius-sm);font-size:11px;font-weight:500;cursor:pointer;transition:all .15s}.conf-btn:hover{background:var(--bg-subtle);border-color:#cbd5e1}.conf-btn.selected{border-color:var(--accent-primary);background:linear-gradient(135deg,#fef2f2,#fee2e2);color:var(--accent-primary)}.conf-btn .conf-emoji{display:block;font-size:16px;margin-bottom:2px}
+.submit-btn{width:100%;margin-top:16px;padding:14px;background:linear-gradient(135deg,var(--accent-primary),#b91c1c);color:#fff;border:none;border-radius:var(--radius-md);font-weight:600;font-size:14px;cursor:pointer;transition:all .2s}.submit-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 4px 12px rgba(220,38,38,.3)}.submit-btn:disabled{background:#cbd5e1;cursor:not-allowed;transform:none;box-shadow:none}
+.explanation{display:none;margin-top:16px;padding:18px;border-radius:var(--radius-md);font-size:13px;line-height:1.7}.explanation.visible{display:block}.explanation.correct{background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1px solid #86efac}.explanation.incorrect{background:linear-gradient(135deg,#fef2f2,#fee2e2);border:1px solid #fca5a5}.explanation-header{display:flex;align-items:center;gap:8px;margin-bottom:12px}.explanation-icon{font-size:20px}.explanation-title{font-weight:600;font-size:14px}.explanation.correct .explanation-title{color:var(--accent-green)}.explanation.incorrect .explanation-title{color:#dc2626}.explanation-text{color:var(--text-secondary)}
+.key-point{margin-top:12px;padding:12px;background:rgba(255,255,255,.7);border-radius:var(--radius-sm);border-left:3px solid var(--accent-blue)}.key-point-title{font-size:10px;font-weight:600;color:var(--accent-blue);margin-bottom:4px}.key-point-text{font-size:12px;color:var(--text-primary)}
+.deep-dive{margin-top:16px;border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden}.dd-toggle{width:100%;padding:14px 16px;background:var(--bg-subtle);border:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:600;transition:background .15s}.dd-toggle:hover{background:#e2e8f0}.dd-content{display:none;padding:18px;background:var(--bg-white)}.dd-content.open{display:block}
+.dd-tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;border-bottom:1px solid var(--border);padding-bottom:10px}.dd-tab{padding:8px 14px;border:1px solid var(--border);background:var(--bg-white);border-radius:var(--radius-sm);font-size:11px;font-weight:500;cursor:pointer;transition:all .15s}.dd-tab:hover{background:var(--bg-subtle)}.dd-tab.active{background:var(--accent-primary);color:#fff;border-color:var(--accent-primary)}
+.dd-panel{display:none}.dd-panel.active{display:block}.dd-section{font-size:12px;line-height:1.7}.dd-section h4{font-size:13px;font-weight:600;margin:14px 0 8px;color:var(--text-primary)}.dd-section h4:first-child{margin-top:0}.dd-section p{margin-bottom:10px;color:var(--text-secondary)}.dd-section ul,.dd-section ol{margin:10px 0;padding-left:24px}.dd-section li{margin:6px 0}
+.mech-pathway{display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:14px;background:linear-gradient(135deg,#f5f3ff,#ede9fe);border-radius:var(--radius-md);margin:12px 0}.mech-step{background:#fff;padding:8px 12px;border-radius:6px;font-size:11px;font-weight:500;border:1px solid #c4b5fd;box-shadow:0 2px 4px rgba(0,0,0,.05)}.mech-arrow{color:var(--accent-purple);font-weight:700;font-size:14px}
+.drug-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:11px}.drug-table th,.drug-table td{padding:10px;border:1px solid var(--border);text-align:left}.drug-table th{background:var(--bg-subtle);font-weight:600}.drug-table tr:hover{background:var(--bg-subtle)}
+.buzzwords{margin-top:14px;padding:12px;background:linear-gradient(135deg,#fef3c7,#fde68a);border-radius:var(--radius-sm)}.bw-title{font-size:10px;font-weight:600;color:var(--accent-amber);margin-bottom:8px;display:flex;align-items:center;gap:4px}.bw-list{display:flex;flex-wrap:wrap;gap:6px}.bw-item{background:#fff;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:500;border:1px solid #fcd34d;transition:transform .15s}.bw-item:hover{transform:scale(1.05)}
+.distractor-section{margin-top:14px;padding:14px;background:linear-gradient(135deg,#fef2f2,#fee2e2);border-radius:var(--radius-sm)}.dist-title{font-size:11px;font-weight:600;color:#991b1b;margin-bottom:10px;display:flex;align-items:center;gap:4px}.dist-item{font-size:11px;margin:8px 0;padding:8px 12px;background:rgba(255,255,255,.7);border-radius:var(--radius-sm);border-left:3px solid #fca5a5}.dist-letter{font-weight:700;color:#dc2626}
+.related-questions{margin-top:14px;padding:12px;background:var(--bg-subtle);border-radius:var(--radius-sm)}.related-title{font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:8px}.related-list{display:flex;flex-wrap:wrap;gap:6px}.related-item{font-size:11px;padding:4px 10px;background:var(--bg-white);border-radius:4px;border:1px solid var(--border);cursor:pointer}.related-item:hover{background:var(--accent-primary);color:#fff;border-color:var(--accent-primary)}
+.phase-summary{display:none;margin-top:24px;background:linear-gradient(135deg,#1e293b,#334155);border-radius:var(--radius-lg);padding:28px;color:#fff;position:relative;overflow:hidden}.summary-confetti{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none}.summary-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;position:relative}.summary-title{font-size:20px;font-weight:600}.summary-score{font-size:32px;font-weight:700}
+.summary-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}@media(max-width:600px){.summary-stats{grid-template-columns:repeat(2,1fr)}}.stat-box{background:rgba(255,255,255,.1);padding:16px;border-radius:var(--radius-md);text-align:center}.stat-value{font-size:28px;font-weight:700}.stat-label{font-size:11px;opacity:.7;margin-top:4px}
+.fp-summary{background:rgba(255,255,255,.05);padding:18px;border-radius:var(--radius-md);margin-bottom:20px}.fp-summary-title{font-size:13px;font-weight:600;margin-bottom:14px}.fp-domains{display:grid;grid-template-columns:1fr 1fr;gap:10px}.fp-domain{display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:10px;background:rgba(255,255,255,.1);border-radius:var(--radius-sm)}.fp-domain-bar{flex:1;height:6px;background:rgba(255,255,255,.2);border-radius:3px;margin:0 10px;overflow:hidden}.fp-domain-fill{height:100%;border-radius:3px}
+.improvement-tips{background:rgba(255,255,255,.05);padding:18px;border-radius:var(--radius-md);margin-bottom:20px}.tips-title{font-size:13px;font-weight:600;margin-bottom:12px}.tip-item{display:flex;align-items:flex-start;gap:10px;font-size:12px;padding:10px;background:rgba(255,255,255,.1);border-radius:var(--radius-sm);margin-bottom:8px}.tip-icon{font-size:16px}.tip-text{opacity:.9}
+.next-btn{display:block;width:100%;padding:16px;background:linear-gradient(135deg,var(--accent-green),#15803d);color:#fff;border:none;border-radius:var(--radius-md);font-weight:600;font-size:15px;cursor:pointer;text-align:center;text-decoration:none;transition:all .2s}.next-btn:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(22,163,74,.3)}
+.insights-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:16px}.insights-header{padding:12px 16px;border-bottom:1px solid var(--border);font-size:12px;font-weight:600;display:flex;align-items:center;gap:6px}.insights-content{padding:14px 16px}
+.time-tracker{display:flex;align-items:center;justify-content:space-between;font-size:12px;margin-bottom:12px}.time-label{color:var(--text-muted)}.time-value{font-weight:600;font-family:monospace}
+.accuracy-ring{width:80px;height:80px;margin:0 auto 12px;position:relative}.accuracy-ring svg{transform:rotate(-90deg)}.accuracy-ring circle{fill:none;stroke-width:8}.accuracy-ring .bg{stroke:var(--bg-subtle)}.accuracy-ring .progress{stroke:var(--accent-green);stroke-linecap:round;transition:stroke-dashoffset .5s}.accuracy-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:18px;font-weight:700}
+.recent-activity{margin-top:12px}.activity-item{display:flex;align-items:center;gap:8px;font-size:11px;padding:8px 0;border-bottom:1px solid var(--border)}.activity-item:last-child{border-bottom:none}.activity-icon{font-size:14px}.activity-text{flex:1;color:var(--text-secondary)}.activity-time{color:var(--text-muted);font-size:10px}
+.study-tip{margin-top:12px;padding:12px;background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-radius:var(--radius-sm)}.study-tip-title{font-size:10px;font-weight:600;color:var(--accent-green);margin-bottom:4px}.study-tip-text{font-size:11px;color:#166534}
+</style>
+</head>
+<body>
+<header class="header"><div class="header-inner"><a href="index.html" class="logo-link"><svg width="32" height="32" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#dc2626"/><circle cx="50" cy="50" r="20" fill="none" stroke="#fff" stroke-width="4"/><line x1="50" y1="15" x2="50" y2="30" stroke="#fff" stroke-width="4" stroke-linecap="round"/><line x1="50" y1="70" x2="50" y2="85" stroke="#fff" stroke-width="4" stroke-linecap="round"/><line x1="15" y1="50" x2="30" y2="50" stroke="#fff" stroke-width="4" stroke-linecap="round"/><line x1="70" y1="50" x2="85" y2="50" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg><div><strong style="font-size:18px">ReasonDx</strong><div class="tagline">Master the mechanism</div></div></a><nav class="header-nav"><a href="index.html" class="nav-link">Dashboard</a><a href="modules.html" class="nav-link">Modules</a><a href="performance.html" class="nav-link">Performance</a></nav></div></header>
+<div class="module-header"><div class="module-header-inner"><div class="breadcrumb"><a href="index.html">Dashboard</a> → <a href="modules.html">Modules</a> → Sepsis</div><div class="module-title"><div class="module-icon">🦠</div><div><h1>Sepsis & Septic Shock<span class="enhanced-badge">✨ NBME </span></h1><p>From recognition through resuscitation to recovery</p></div></div></div></div>
+<div class="progress-bar"><div class="progress-inner"><span class="progress-label">Module Progress</span><div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div><span class="progress-count" id="progressCount">0/20</span><div class="xp-display">⭐ <span id="xpCount">0</span> XP</div><div class="streak-display">🔥 <span id="streakCount">0</span> streak</div></div></div>
+<div class="patient-banner"><div class="patient-banner-inner"><div class="patient-avatar">👴</div><div class="patient-info"><div class="patient-name">James Mitchell</div><div class="patient-details">67M • T2DM, HTN, BPH • Brought from nursing home with altered mental status and fever</div></div><div class="patient-vitals"><div class="vital critical"><div class="vital-value" id="vBP">78/42</div><div class="vital-label">MAP 54</div></div><div class="vital"><div class="vital-value" id="vHR">118</div><div class="vital-label">HR</div></div><div class="vital"><div class="vital-value" id="vTemp">39.2</div><div class="vital-label">Temp °C</div></div><div class="vital"><div class="vital-value" id="vLac">4.8</div><div class="vital-label">Lactate</div></div><div class="vital"><div class="vital-value" id="vWBC">18.4</div><div class="vital-label">WBC</div></div></div></div></div>
+<nav class="timeline-nav"><div class="timeline-inner"><div class="timeline-phase active" data-phase="1" onclick="goPhase(1)"><div class="phase-label">Phase 1</div><div class="phase-time">Recognition</div><div class="phase-status current" id="status1">In Progress</div><div class="phase-score" id="score1"></div></div><div class="timeline-phase locked" data-phase="2" onclick="goPhase(2)"><div class="phase-label">Phase 2</div><div class="phase-time">Hour-1 Bundle</div><div class="phase-status" id="status2">🔒</div><div class="phase-score" id="score2"></div></div><div class="timeline-phase locked" data-phase="3" onclick="goPhase(3)"><div class="phase-label">Phase 3</div><div class="phase-time">Vasopressors</div><div class="phase-status" id="status3">🔒</div><div class="phase-score" id="score3"></div></div><div class="timeline-phase locked" data-phase="4" onclick="goPhase(4)"><div class="phase-label">Phase 4</div><div class="phase-time">Reassessment</div><div class="phase-status" id="status4">🔒</div><div class="phase-score" id="score4"></div></div></div></nav>
+<div class="main-container">
+<aside class="case-panel">
+<div class="card"><div class="card-header"><div class="card-title">📋 Clinical Snapshot</div><div class="card-badge" id="phaseLabel">Phase 1</div></div><div class="card-content"><div class="case-narrative" id="caseNarrative"><strong>James Mitchell</strong>, 67, arrives from nursing home with <em>altered mental status, fever, and hypotension</em>. Staff reports <span class="keyword">decreased urine output</span> and <span class="keyword">new confusion</span> over 24 hours. History of <strong>T2DM</strong> with recent UTI symptoms.</div><div class="data-section"><div class="data-label">Vital Signs</div><div class="data-grid" id="vitalsGrid"><div class="data-item"><span>BP</span> <span class="critical">78/42 (MAP 54)</span></div><div class="data-item"><span>HR</span> <span class="abnormal">118</span></div><div class="data-item"><span>RR</span> <span class="abnormal">28</span></div><div class="data-item"><span>Temp</span> <span class="abnormal">39.2°C</span></div><div class="data-item"><span>SpO2</span> <span>94% RA</span></div><div class="data-item"><span>GCS</span> <span class="abnormal">13</span></div></div></div><div class="data-section"><div class="data-label">Key Labs</div><div class="data-grid" id="labsGrid"><div class="data-item"><span>Lactate</span> <span class="critical">4.8 mmol/L</span></div><div class="data-item"><span>WBC</span> <span class="abnormal">18.4</span></div><div class="data-item"><span>Cr</span> <span class="abnormal">2.1 (baseline 1.0)</span></div><div class="data-item"><span>Glucose</span> <span class="abnormal">245</span></div><div class="data-item"><span>Procalcitonin</span> <span class="abnormal">8.2</span></div><div class="data-item"><span>Bands</span> <span class="abnormal">15%</span></div></div></div><div class="clinical-pearl"><div class="pearl-title">💡 Clinical Pearl</div><div class="pearl-text">Lactate >4 mmol/L indicates tissue hypoperfusion and defines septic shock when hypotension persists after fluid resuscitation.</div></div></div></div>
+<div class="card"><div class="card-header"><div class="card-title">🧬 Domain Fingerprint</div></div><div class="card-content" style="padding:0"><div class="fp-mini" style="margin:0;border-radius:0"><div class="domain-bars"><div class="domain-bar"><span class="domain-label">Mechanism</span><div class="domain-track"><div class="domain-fill mechanism" id="fpMech" style="width:0%"></div></div><span class="domain-score" id="fpMechScore">0%</span></div><div class="domain-bar"><span class="domain-label">Pharmacology</span><div class="domain-track"><div class="domain-fill pharm" id="fpPharm" style="width:0%"></div></div><span class="domain-score" id="fpPharmScore">0%</span></div><div class="domain-bar"><span class="domain-label">Pathophysiology</span><div class="domain-track"><div class="domain-fill patho" id="fpPatho" style="width:0%"></div></div><span class="domain-score" id="fpPathoScore">0%</span></div></div></div></div></div>
+<div id="alertBox"></div>
+</aside>
+<main id="questionsPanel"></main>
+<aside class="insights-panel">
+<div class="insights-card"><div class="insights-header">⏱️ Session Stats</div><div class="insights-content"><div class="time-tracker"><span class="time-label">Time Elapsed</span><span class="time-value" id="timeElapsed">00:00</span></div><div class="time-tracker"><span class="time-label">Avg per Question</span><span class="time-value" id="avgTime">--:--</span></div><div class="accuracy-ring"><svg width="80" height="80"><circle class="bg" cx="40" cy="40" r="32"/><circle class="progress" cx="40" cy="40" r="32" stroke-dasharray="201" stroke-dashoffset="201" id="accuracyRing"/></svg><div class="accuracy-text" id="accuracyText">--%</div></div><div style="text-align:center;font-size:11px;color:var(--text-muted)">Current Accuracy</div></div></div>
+<div class="insights-card"><div class="insights-header">📊 Recent Activity</div><div class="insights-content"><div class="recent-activity" id="recentActivity"><div class="activity-item"><span class="activity-icon">🎯</span><span class="activity-text">Start a question to see activity</span></div></div></div></div>
+<div class="insights-card"><div class="insights-header">💡 Study Tip</div><div class="insights-content"><div class="study-tip"><div class="study-tip-title">Sepsis Recognition</div><div class="study-tip-text">qSOFA (≥2 of: RR≥22, SBP≤100, AMS) screens for sepsis outside ICU. Full SOFA confirms organ dysfunction.</div></div></div></div>
+</aside>
+</div>
+<script>
+var phase=1,open={1:true,2:false,3:false,4:false},done={1:false,2:false,3:false,4:false},state={};
+for(var i=1;i<=20;i++)state[i]={pick:null,conf:null,done:false,ok:false,time:0,startTime:null};
+var fp={mechanism:{c:0,t:0},pharmacology:{c:0,t:0},pathophysiology:{c:0,t:0}};
+var totalXP=0,streak=0,sessionStart=Date.now(),questionsAnswered=0,correctAnswers=0;
+var activities=[];
+
+var answers={1:'c',2:'b',3:'a',4:'c',5:'b',6:'a',7:'c',8:'b',9:'a',10:'c',11:'b',12:'a',13:'c',14:'b',15:'a',16:'c',17:'b',18:'a',19:'c',20:'b'};
+
+var vitals={
+1:{bp:'78/42',hr:118,temp:'39.2',lac:'4.8',wbc:'18.4',map:54},
+2:{bp:'82/48',hr:112,temp:'38.8',lac:'4.2',wbc:'17.8',map:59},
+3:{bp:'88/54',hr:102,temp:'38.2',lac:'3.1',wbc:'15.2',map:65},
+4:{bp:'98/62',hr:88,temp:'37.4',lac:'1.8',wbc:'12.4',map:74}
+};
+
+var cases={
+1:{narrative:'<strong>James Mitchell</strong>, 67, arrives from nursing home with <em>altered mental status, fever, and hypotension</em>. Staff reports <span class="keyword">decreased urine output</span> and <span class="keyword">new confusion</span> over 24 hours. History of <strong>T2DM</strong> with recent UTI symptoms.',vitals:[['BP','78/42 (MAP 54)','critical'],['HR','118','abnormal'],['RR','28','abnormal'],['Temp','39.2°C','abnormal'],['SpO2','94% RA',''],['GCS','13','abnormal']],labs:[['Lactate','4.8 mmol/L','critical'],['WBC','18.4','abnormal'],['Cr','2.1 (baseline 1.0)','abnormal'],['Glucose','245','abnormal'],['Procalcitonin','8.2','abnormal'],['Bands','15%','abnormal']],pearl:'Lactate >4 mmol/L indicates tissue hypoperfusion and defines septic shock when hypotension persists after fluid resuscitation.'},
+2:{narrative:'<strong>Hour-1 Bundle initiated.</strong> Blood cultures drawn, <em>30 mL/kg crystalloid bolus started</em>. UA shows pyuria. Choosing <span class="keyword">empiric antibiotics</span> for likely <strong>urosepsis</strong>.',vitals:[['BP','82/48 (MAP 59)','abnormal'],['HR','112','abnormal'],['Fluids','1.5L given',''],['UOP','20 mL/hr','abnormal'],['CVP','8',''],['ScvO2','62%','abnormal']],labs:[['Lactate','4.2 mmol/L','abnormal'],['UA','WBC 50+, nitrite+','abnormal'],['Cr','2.3','abnormal'],['pH','7.28','abnormal'],['Base deficit','-8','abnormal'],['Bands','18%','abnormal']],pearl:'The Hour-1 Bundle: Measure lactate, obtain cultures, give broad antibiotics, give 30mL/kg crystalloid if hypotensive or lactate ≥4.'},
+3:{narrative:'<strong>Fluid resuscitation complete.</strong> Still hypotensive despite 30 mL/kg fluids. <em>MAP 59 mmHg</em>. Time to initiate <span class="keyword">vasopressors</span>. Lactate trending down but still elevated.',vitals:[['BP','82/48 (MAP 59)','abnormal'],['HR','108','abnormal'],['Fluids','2.5L total',''],['UOP','25 mL/hr','abnormal'],['CVP','12',''],['ScvO2','68%','']],labs:[['Lactate','3.1 mmol/L','abnormal'],['Cr','2.1','abnormal'],['pH','7.32','improved'],['Norepinephrine','Started',''],['Cortisol','Pending',''],['Procalcitonin','6.8','abnormal']],pearl:'Norepinephrine is first-line vasopressor in septic shock. Target MAP ≥65 mmHg.'},
+4:{narrative:'<strong>Stabilizing on vasopressors.</strong> MAP now 74, lactate clearing. <em>Reassessing</em> fluid responsiveness, source control, and antibiotic de-escalation. Planning <span class="keyword">ICU management</span>.',vitals:[['BP','98/62 (MAP 74)','improved'],['HR','88','improved'],['NE dose','0.08 mcg/kg/min',''],['UOP','45 mL/hr','improved'],['CVP','10',''],['ScvO2','72%','improved']],labs:[['Lactate','1.8 mmol/L','improved'],['Cr','1.8','improved'],['WBC','12.4','improved'],['Cultures','GNR in urine/blood',''],['Procalcitonin','4.2','improved'],['pH','7.38','improved']],pearl:'Lactate clearance >10% in first 6 hours predicts better outcomes. Target clearance, not absolute value.'}
+};
+
+var phases={
+1:{title:'Phase 1: Sepsis Recognition',time:'ED Arrival (T+0)',objectives:['Apply Sepsis-3 definitions','Calculate qSOFA and SOFA','Recognize organ dysfunction','Differentiate sepsis from septic shock'],guidelines:'Surviving Sepsis Campaign 2021',
+refs:[{t:'Sepsis-3 Definitions (JAMA 2016)',u:'https://jamanetwork.com/journals/jama/fullarticle/2492881'},{t:'SSC Guidelines 2021',u:'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8486643/'},{t:'qSOFA Validation',u:'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5367538/'}]},
+2:{title:'Phase 2: Hour-1 Bundle',time:'First Hour (T+60min)',objectives:['Execute Hour-1 Bundle completely','Choose appropriate empiric antibiotics','Understand fluid resuscitation principles','Order appropriate initial workup'],guidelines:'SSC Hour-1 Bundle 2018',
+refs:[{t:'Hour-1 Bundle (Crit Care Med 2018)',u:'https://journals.lww.com/ccmjournal/fulltext/2018/06000/surviving_sepsis_campaign__hour_1_bundle.20.aspx'},{t:'Antibiotic Timing in Sepsis',u:'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5537470/'},{t:'Crystalloid vs Colloid (CRISTAL)',u:'https://jamanetwork.com/journals/jama/fullarticle/1752245'}]},
+3:{title:'Phase 3: Vasopressor Management',time:'Hours 1-6',objectives:['Know vasopressor selection','Understand receptor pharmacology','Recognize refractory shock','Consider adjunctive therapies'],guidelines:'SSC Guidelines 2021',
+refs:[{t:'Norepinephrine vs Dopamine (SOAP II)',u:'https://www.nejm.org/doi/full/10.1056/NEJMoa0907118'},{t:'Vasopressin in Sepsis (VASST)',u:'https://www.nejm.org/doi/full/10.1056/NEJMoa067373'},{t:'ADRENAL Trial (Steroids)',u:'https://www.nejm.org/doi/full/10.1056/NEJMoa1705835'}]},
+4:{title:'Phase 4: Ongoing Resuscitation',time:'Hours 6-24',objectives:['Assess fluid responsiveness','Interpret lactate clearance','Plan antibiotic de-escalation','Prevent complications'],guidelines:'SSC Guidelines 2021',
+refs:[{t:'Lactate Clearance as Target',u:'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2848154/'},{t:'ProCESS Trial',u:'https://www.nejm.org/doi/full/10.1056/NEJMoa1401602'},{t:'ANDROMEDA-SHOCK',u:'https://jamanetwork.com/journals/jama/fullarticle/2724361'}]}
+};
+
+var Qs={
+1:{type:'Sepsis-3 Definition',isNBME:true,difficulty:'medium',domains:['pathophysiology'],tags:['Step2','CK'],
+vig:{demo:'67-year-old man brought from nursing home',hpi:'Found with fever, confusion, and decreased responsiveness over past 24 hours. Nursing staff reports decreased oral intake and urine output. Recent complaints of dysuria.',pmh:'Type 2 diabetes, hypertension, BPH, prior UTI',meds:'Metformin, lisinopril, tamsulosin',exam:{vitals:'T 39.2°C, HR 118, BP 78/42, RR 28, SpO2 94% RA',gen:'Ill-appearing, oriented to person only',cardio:'Tachycardic, no murmurs',lungs:'Clear bilaterally',abd:'Suprapubic tenderness',skin:'Warm, delayed cap refill'},labs:{WBC:'18,400/μL with 15% bands',Lactate:'4.8 mmol/L',Cr:'2.1 mg/dL (baseline 1.0)',glucose:'245 mg/dL',UA:'WBC 50+/hpf, nitrite positive'}},
+stem:'Based on Sepsis-3 criteria, which of the following BEST describes this patient\'s condition?',
+opts:[['a','SIRS without infection','Old criteria - Sepsis-3 doesn\'t use SIRS'],['b','Sepsis without organ dysfunction','He has clear organ dysfunction'],['c','Septic shock - infection with hypotension and lactate >2 despite fluids','Meets all criteria for septic shock'],['d','Severe sepsis','Term eliminated in Sepsis-3']],
+exp:'<strong>Septic shock (Sepsis-3):</strong> Sepsis + vasopressor requirement to maintain MAP ≥65 AND lactate >2 mmol/L despite adequate fluid resuscitation. This patient has suspected infection (UTI), organ dysfunction (AKI, AMS), hypotension, and lactate 4.8.',
+keypoint:'Sepsis-3 eliminated "severe sepsis" and defined septic shock by vasopressor need + lactate >2 after fluids.',
+dd:{pathophysiology:{title:'Sepsis-3 Definitions',content:'<div class="dd-section"><h4>Evolution of Definitions</h4><table class="drug-table"><tr><th>Sepsis-1/2 (1991/2001)</th><th>Sepsis-3 (2016)</th></tr><tr><td>SIRS + infection = Sepsis</td><td>Infection + SOFA ≥2 = Sepsis</td></tr><tr><td>Sepsis + organ dysfunction = Severe sepsis</td><td>Term eliminated</td></tr><tr><td>Severe sepsis + refractory hypotension = Septic shock</td><td>Sepsis + vasopressor for MAP≥65 + lactate >2 = Septic shock</td></tr></table><h4>Why the Change?</h4><ul><li>SIRS criteria too sensitive (not specific)</li><li>Many SIRS patients don\'t have infection</li><li>SOFA better predicts mortality</li></ul><h4>SOFA Score Components</h4><p>Respiration (PaO2/FiO2), Coagulation (platelets), Liver (bilirubin), Cardiovascular (MAP/vasopressors), CNS (GCS), Renal (Cr/UOP)</p><div class="dd-refs" style="margin-top:14px;padding-top:12px;border-top:1px dashed #e9ecef"><h5 style="font-size:11px;font-weight:600;color:#5c5c5c;margin-bottom:8px">📚 References</h5><ol style="margin:0;padding-left:16px;font-size:10px"><li><a href="https://jamanetwork.com/journals/jama/fullarticle/2492881" target="_blank" style="color:#0369a1">Singer M, et al. Third International Consensus Definitions for Sepsis (Sepsis-3). JAMA 2016</a></li><li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8486643/" target="_blank" style="color:#0369a1">Evans L, et al. Surviving Sepsis Campaign Guidelines 2021</a></li><li><a href="https://www.ncbi.nlm.nih.gov/books/NBK537252/" target="_blank" style="color:#0369a1">StatPearls: Sepsis</a></li></ol></div></div>',bw:['Sepsis-3 (2016)','SOFA ≥2 = sepsis','Lactate >2 + vasopressor = shock','No more "severe sepsis"']}},
+dist:{a:'SIRS criteria were replaced by SOFA in Sepsis-3',b:'He has multiple organ dysfunction (AKI, AMS, hypotension)',d:'"Severe sepsis" was eliminated in Sepsis-3 definitions'},
+related:[2,3,6]},
+
+2:{type:'qSOFA Screening',isNBME:false,difficulty:'easy',domains:['pathophysiology'],tags:['Step2'],
+ctx:'Using bedside screening tools to identify patients at risk.',
+stem:'What are the three components of qSOFA (quick SOFA)?',
+opts:[['a','Temperature, WBC, heart rate'],['b','Respiratory rate ≥22, systolic BP ≤100, altered mental status'],['c','Lactate, procalcitonin, blood cultures'],['d','Fever, tachycardia, leukocytosis']],
+exp:'<strong>qSOFA components:</strong> RR ≥22, SBP ≤100, Altered mental status. Score ≥2 suggests higher risk. Used for screening OUTSIDE the ICU.',
+keypoint:'qSOFA is a screening tool, not diagnostic. Use SOFA for diagnosis.',
+dd:{pathophysiology:{title:'qSOFA vs SOFA',content:'<div class="dd-section"><h4>qSOFA (Bedside Screening)</h4><table class="drug-table"><tr><th>Criteria</th><th>Points</th></tr><tr><td>Respiratory rate ≥22</td><td>1</td></tr><tr><td>Systolic BP ≤100 mmHg</td><td>1</td></tr><tr><td>Altered mental status (GCS <15)</td><td>1</td></tr></table><p><strong>Score ≥2:</strong> Higher risk of poor outcome, prompts further evaluation</p><h4>When to Use</h4><ul><li>qSOFA: Outside ICU, bedside screening</li><li>SOFA: ICU, formal organ dysfunction assessment</li></ul><h4>Limitations</h4><p>qSOFA is specific but not sensitive - don\'t rely on it to rule out sepsis</p><div class="dd-refs" style="margin-top:14px;padding-top:12px;border-top:1px dashed #e9ecef"><h5 style="font-size:11px;font-weight:600;color:#5c5c5c;margin-bottom:8px">📚 References</h5><ol style="margin:0;padding-left:16px;font-size:10px"><li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5367538/" target="_blank" style="color:#0369a1">Seymour CW, et al. Assessment of qSOFA for Mortality. JAMA 2016</a></li><li><a href="https://www.mdcalc.com/calc/2654/qsofa-quick-sofa-score-sepsis" target="_blank" style="color:#0369a1">MDCalc: qSOFA Calculator</a></li></ol></div></div>',bw:['RR ≥22, SBP ≤100, AMS','Score ≥2 = high risk','Screening tool only']}},
+dist:{a:'These are SIRS criteria, not qSOFA',c:'These are lab tests, qSOFA is clinical',d:'These are also SIRS criteria'},
+related:[1,3]},
+
+3:{type:'SOFA Score',isNBME:false,difficulty:'medium',domains:['pathophysiology'],tags:['Step1','Step2'],
+ctx:'Calculating organ dysfunction score.',
+stem:'Which organ systems are assessed in the SOFA score?',
+opts:[['a','Respiratory, Coagulation, Liver, Cardiovascular, CNS, Renal (6 systems)'],['b','Heart, Lungs, Kidneys only'],['c','All 11 organ systems'],['d','Only cardiovascular and respiratory']],
+exp:'<strong>SOFA assesses 6 organ systems:</strong> Respiratory (P/F ratio), Coagulation (platelets), Liver (bilirubin), CV (MAP/pressors), CNS (GCS), Renal (Cr). Score 0-4 for each.',
+keypoint:'SOFA increase ≥2 from baseline indicates sepsis-related organ dysfunction.',
+dd:{pathophysiology:{title:'SOFA Score Details',content:'<div class="dd-section"><h4>Six Organ Systems</h4><table class="drug-table"><tr><th>System</th><th>Measurement</th><th>Score 0</th><th>Score 4</th></tr><tr><td>Respiratory</td><td>PaO2/FiO2</td><td>≥400</td><td><100</td></tr><tr><td>Coagulation</td><td>Platelets (×10³)</td><td>≥150</td><td><20</td></tr><tr><td>Liver</td><td>Bilirubin (mg/dL)</td><td><1.2</td><td>≥12</td></tr><tr><td>Cardiovascular</td><td>MAP or vasopressors</td><td>MAP≥70</td><td>High-dose pressors</td></tr><tr><td>CNS</td><td>GCS</td><td>15</td><td><6</td></tr><tr><td>Renal</td><td>Cr or UOP</td><td><1.2</td><td>≥5 or <200mL/d</td></tr></table><h4>Interpretation</h4><p>Baseline SOFA assumed 0 if no prior data. SOFA ≥2 above baseline = sepsis.</p><div class="dd-refs" style="margin-top:14px;padding-top:12px;border-top:1px dashed #e9ecef"><h5 style="font-size:11px;font-weight:600;color:#5c5c5c;margin-bottom:8px">📚 References</h5><ol style="margin:0;padding-left:16px;font-size:10px"><li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1065022/" target="_blank" style="color:#0369a1">Vincent JL, et al. The SOFA Score. Crit Care Med 1996</a></li><li><a href="https://www.mdcalc.com/calc/691/sequential-organ-failure-assessment-sofa-score" target="_blank" style="color:#0369a1">MDCalc: SOFA Calculator</a></li></ol></div></div>',bw:['6 organ systems','PaO2/FiO2 for respiratory','SOFA ≥2 increase = sepsis']}},
+dist:{b:'SOFA includes 6 systems, not 3',c:'SOFA specifically assesses 6 systems',d:'All 6 systems are included'},
+related:[1,2]},
+
+4:{type:'Hour-1 Bundle',isNBME:true,difficulty:'medium',domains:['pharmacology','pathophysiology'],tags:['Step2','CK'],
+vig:{demo:'67-year-old man with septic shock from UTI source',hpi:'Septic shock identified. Initiating resuscitation.',pmh:'T2DM, HTN',exam:{vitals:'BP 78/42, HR 118, T 39.2°C'},labs:{Lactate:'4.8 mmol/L',WBC:'18.4k',Cr:'2.1'}},
+stem:'Which interventions should be completed within the FIRST HOUR of sepsis recognition? (Hour-1 Bundle)',
+opts:[['a','Only antibiotics - other interventions can wait'],['b','Antibiotics and cultures only'],['c','Measure lactate, obtain blood cultures, administer broad-spectrum antibiotics, begin 30 mL/kg crystalloid for hypotension or lactate ≥4'],['d','CT scan to identify source first']],
+exp:'<strong>Hour-1 Bundle:</strong> 1) Measure lactate, 2) Obtain blood cultures BEFORE antibiotics, 3) Administer broad-spectrum antibiotics, 4) Begin 30 mL/kg crystalloid if hypotensive or lactate ≥4, 5) Vasopressors if hypotensive during/after fluids.',
+keypoint:'Time to antibiotics is critical - each hour of delay increases mortality by ~7%.',
+dd:{pharmacology:{title:'Hour-1 Bundle',content:'<div class="dd-section"><h4>2018 SSC Hour-1 Bundle</h4><ol><li><strong>Measure lactate</strong> - remeasure if >2</li><li><strong>Obtain blood cultures</strong> - before antibiotics if possible</li><li><strong>Administer broad-spectrum antibiotics</strong></li><li><strong>Begin 30 mL/kg crystalloid</strong> for hypotension or lactate ≥4</li><li><strong>Apply vasopressors</strong> if hypotensive during/after fluid resuscitation</li></ol><h4>Why Hour-1?</h4><div class="mech-pathway"><span class="mech-step">Each hour delay in antibiotics</span><span class="mech-arrow">→</span><span class="mech-step">~7% increase in mortality</span></div><h4>Key Points</h4><ul><li>Don\'t delay antibiotics for cultures if cultures will take time</li><li>Can give antibiotics before cultures in emergencies</li><li>30 mL/kg is minimum, not maximum</li></ul><div class="dd-refs" style="margin-top:14px;padding-top:12px;border-top:1px dashed #e9ecef"><h5 style="font-size:11px;font-weight:600;color:#5c5c5c;margin-bottom:8px">📚 References</h5><ol style="margin:0;padding-left:16px;font-size:10px"><li><a href="https://journals.lww.com/ccmjournal/fulltext/2018/06000/surviving_sepsis_campaign__hour_1_bundle.20.aspx" target="_blank" style="color:#0369a1">Levy MM, et al. SSC Hour-1 Bundle. Crit Care Med 2018</a></li><li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5537470/" target="_blank" style="color:#0369a1">Liu VX, et al. Antibiotic Timing in Sepsis. Am J Respir Crit Care Med 2017</a></li></ol></div></div>',bw:['Hour-1 Bundle','Lactate, cultures, antibiotics, fluids, pressors','7% mortality increase per hour delay']}},
+dist:{a:'All bundle elements should be initiated in first hour',b:'Fluids and lactate are also part of the bundle',d:'Imaging should not delay resuscitation'},
+related:[5,6,7]},
+
+5:{type:'Fluid Resuscitation',isNBME:false,difficulty:'easy',domains:['pharmacology'],tags:['Step2'],
+ctx:'Initiating fluid resuscitation in septic shock.',
+stem:'What is the recommended initial fluid bolus for septic shock?',
+opts:[['a','10 mL/kg crystalloid'],['b','30 mL/kg crystalloid within first 3 hours'],['c','60 mL/kg crystalloid'],['d','Colloid solution preferred']],
+exp:'<strong>30 mL/kg crystalloid</strong> is the initial resuscitation target. For a 70kg patient = ~2.1L. Start immediately, complete within 3 hours.',
+keypoint:'30 mL/kg is a minimum starting point. Many patients need more. Reassess frequently.',
+dd:{pharmacology:{title:'Fluid Resuscitation',content:'<div class="dd-section"><h4>Initial Resuscitation</h4><ul><li><strong>30 mL/kg crystalloid</strong> within first 3 hours</li><li>70kg patient = ~2.1 liters</li><li>Balanced crystalloid (LR, Plasmalyte) may be preferred over NS</li></ul><h4>Crystalloid vs Colloid</h4><table class="drug-table"><tr><th>Type</th><th>Evidence</th></tr><tr><td>Crystalloid</td><td>First-line, equivalent outcomes</td></tr><tr><td>Albumin</td><td>Consider if large volumes needed</td></tr><tr><td>Starches (HES)</td><td>AVOID - increased AKI/mortality</td></tr></table><h4>Reassessment</h4><p>After initial bolus, assess fluid responsiveness before giving more</p><div class="dd-refs" style="margin-top:14px;padding-top:12px;border-top:1px dashed #e9ecef"><h5 style="font-size:11px;font-weight:600;color:#5c5c5c;margin-bottom:8px">📚 References</h5><ol style="margin:0;padding-left:16px;font-size:10px"><li><a href="https://jamanetwork.com/journals/jama/fullarticle/1752245" target="_blank" style="color:#0369a1">Annane D, et al. CRISTAL Trial (Crystalloid vs Colloid). JAMA 2013</a></li><li><a href="https://www.nejm.org/doi/full/10.1056/NEJMoa1209759" target="_blank" style="color:#0369a1">CHEST Investigators. HES vs Saline (6S Trial). NEJM 2012</a></li><li><a href="https://www.nejm.org/doi/full/10.1056/NEJMoa1711584" target="_blank" style="color:#0369a1">SMART Trial (Balanced vs Saline). NEJM 2018</a></li></ol></div></div>',bw:['30 mL/kg crystalloid','Complete in 3 hours','Avoid HES starches']}},
+dist:{a:'10 mL/kg is insufficient for septic shock',c:'60 mL/kg may cause overload without reassessment',d:'Crystalloid is first-line, not colloid'},
+related:[4,8,9]},
+6:{type:'Empiric Antibiotics',isNBME:true,difficulty:'hard',domains:['pharmacology'],tags:['Step2','CK'],
+vig:{demo:'67-year-old man with septic shock, likely urosepsis',hpi:'UTI symptoms, pyuria on UA, now with septic shock',pmh:'T2DM, recent fluoroquinolone use 2 weeks ago for UTI',allergies:'None',exam:{abd:'Suprapubic tenderness, no CVA tenderness'}},
+stem:'Which empiric antibiotic regimen is MOST appropriate?',
+opts:[['a','Ceftriaxone + vancomycin (broad gram-negative coverage plus MRSA)'],['b','Ciprofloxacin alone'],['c','Ampicillin alone'],['d','Azithromycin']],
+exp:'<strong>Broad-spectrum coverage</strong> needed: Ceftriaxone covers most uropathogens. Add vancomycin if MRSA risk factors or healthcare-associated. Avoid fluoroquinolones given recent use (resistance risk).',
+keypoint:'Consider local resistance patterns and recent antibiotic exposure when choosing empiric therapy.',
+dd:{pharmacology:{title:'Empiric Antibiotics in Sepsis',content:'<div class="dd-section"><h4>Principles</h4><ul><li>Broad-spectrum initially</li><li>Cover likely pathogens based on source</li><li>Consider local resistance patterns</li><li>De-escalate once cultures return</li></ul><h4>Urosepsis Coverage</h4><table class="drug-table"><tr><th>Drug</th><th>Coverage</th><th>Notes</th></tr><tr><td>Ceftriaxone</td><td>Most GNRs</td><td>Good first-line</td></tr><tr><td>Piperacillin-tazobactam</td><td>Broader GNR + Pseudomonas</td><td>If Pseudomonas risk</td></tr><tr><td>Carbapenem</td><td>ESBL, resistant GNR</td><td>If MDR risk</td></tr></table><h4>When to Add Vancomycin</h4><ul><li>Healthcare-associated infection</li><li>Indwelling catheters</li><li>Prior MRSA</li><li>High local MRSA prevalence</li></ul></div>',bw:['Broad-spectrum initially','Cover likely source','Consider resistance','De-escalate with cultures']}},
+dist:{b:'Recent fluoroquinolone increases resistance risk',c:'Ampicillin too narrow for septic shock',d:'Azithromycin doesn\'t cover uropathogens'},
+related:[4,7]},
+
+7:{type:'Blood Cultures',isNBME:false,difficulty:'easy',domains:['pathophysiology'],tags:['Step2'],
+ctx:'Obtaining cultures before antibiotics.',
+stem:'When should blood cultures be obtained relative to antibiotics?',
+opts:[['a','Always after antibiotics'],['b','After CT imaging'],['c','Before antibiotics if it doesn\'t significantly delay treatment (<45 min)'],['d','Blood cultures aren\'t needed in sepsis']],
+exp:'<strong>Obtain cultures BEFORE antibiotics</strong> if it doesn\'t delay treatment. If obtaining cultures will delay antibiotics >45 minutes, give antibiotics first.',
+keypoint:'Don\'t delay antibiotics more than 45 minutes for cultures. Cultures still useful even after antibiotics.',
+dd:{pathophysiology:{title:'Blood Cultures in Sepsis',content:'<div class="dd-section"><h4>Timing</h4><ul><li>Ideally before antibiotics</li><li>Don\'t delay antibiotics >45 min for cultures</li><li>Still obtain cultures after antibiotics if needed</li></ul><h4>Technique</h4><ul><li>At least 2 sets from different sites</li><li>Peripheral stick preferred over line cultures</li><li>Adequate volume (20-30 mL per set)</li></ul><h4>Positivity After Antibiotics</h4><p>Cultures may still be positive even after antibiotics - always obtain</p></div>',bw:['Before antibiotics ideally','Don\'t delay >45 min','2 sets minimum']}},
+dist:{a:'Before antibiotics when possible',b:'Imaging doesn\'t precede cultures',d:'Cultures essential for de-escalation'},
+related:[4,6]},
+
+8:{type:'Fluid Responsiveness',isNBME:false,difficulty:'medium',domains:['mechanism'],tags:['Step2'],
+ctx:'After initial fluid bolus, assessing need for more fluids.',
+stem:'Which finding suggests the patient is FLUID RESPONSIVE and may benefit from more IV fluids?',
+opts:[['a','Elevated CVP of 18 mmHg'],['b','Pulse pressure variation >13% on mechanical ventilation'],['c','Fixed low cardiac output'],['d','Pulmonary edema on chest X-ray']],
+exp:'<strong>Pulse pressure variation >13%</strong> (or stroke volume variation) suggests fluid responsiveness. Static measures like CVP are poor predictors.',
+keypoint:'Dynamic measures (PPV, SVV, passive leg raise) are better than static measures (CVP) for fluid responsiveness.',
+dd:{mechanism:{title:'Fluid Responsiveness',content:'<div class="dd-section"><h4>Dynamic vs Static Measures</h4><table class="drug-table"><tr><th>Type</th><th>Measure</th><th>Utility</th></tr><tr><td rowspan="3">Dynamic (preferred)</td><td>PPV >13%</td><td>Good predictor</td></tr><tr><td>SVV >12%</td><td>Good predictor</td></tr><tr><td>Passive leg raise</td><td>Good, works in spontaneous breathing</td></tr><tr><td rowspan="2">Static (less useful)</td><td>CVP</td><td>Poor predictor</td></tr><tr><td>PAOP</td><td>Poor predictor</td></tr></table><h4>Passive Leg Raise</h4><div class="mech-pathway"><span class="mech-step">Raise legs 45°</span><span class="mech-arrow">→</span><span class="mech-step">~300mL autotransfusion</span><span class="mech-arrow">→</span><span class="mech-step">↑CO by >10%</span><span class="mech-arrow">=</span><span class="mech-step">Fluid responsive</span></div></div>',bw:['PPV >13% = responsive','CVP poor predictor','Passive leg raise works in spontaneous breathing']}},
+dist:{a:'High CVP suggests volume overload',c:'Fixed low CO suggests cardiac dysfunction',d:'Pulmonary edema contraindicates more fluids'},
+related:[5,9]},
+
+9:{type:'Lactate Clearance',isNBME:false,difficulty:'medium',domains:['mechanism'],tags:['Step2'],
+ctx:'James\'s initial lactate was 4.8. Repeat at 2 hours is 3.1.',
+stem:'What does lactate clearance indicate and what is the target?',
+opts:[['a','Lactate clearance >10-20% in 6 hours indicates improving tissue perfusion'],['b','Lactate must normalize completely in 1 hour'],['c','Lactate clearance doesn\'t correlate with outcomes'],['d','Rising lactate is expected with treatment']],
+exp:'<strong>Lactate clearance >10-20% in first 6 hours</strong> is associated with improved survival. Target clearance rather than absolute value. James: (4.8-3.1)/4.8 = 35% clearance - good sign!',
+keypoint:'Target lactate CLEARANCE (>10-20% in 6h), not just absolute normalization.',
+dd:{mechanism:{title:'Lactate in Sepsis',content:'<div class="dd-section"><h4>Sources of Lactate in Sepsis</h4><ul><li>Tissue hypoperfusion (type A)</li><li>Aerobic glycolysis from stress (type B)</li><li>Impaired clearance (liver dysfunction)</li></ul><h4>Clearance Targets</h4><table class="drug-table"><tr><th>Timeframe</th><th>Target</th><th>Significance</th></tr><tr><td>6 hours</td><td>>10-20% clearance</td><td>Improved survival</td></tr><tr><td>24 hours</td><td>Normalization</td><td>Better prognosis</td></tr></table><h4>Calculation</h4><p>Clearance = (Initial - Repeat) / Initial × 100%</p><p>James: (4.8-3.1)/4.8 = 35% ✓</p></div>',bw:['>10-20% clearance in 6h','Target clearance, not absolute','Clearance predicts survival']}},
+dist:{b:'Complete normalization in 1h is unrealistic',c:'Clearance strongly predicts outcomes',d:'Lactate should decrease with effective treatment'},
+related:[4,10]},
+
+10:{type:'Vasopressor Selection',isNBME:true,difficulty:'medium',domains:['pharmacology'],tags:['Step2','CK'],
+vig:{demo:'67-year-old man with septic shock',hpi:'Received 30 mL/kg crystalloid, still hypotensive',vitals:'BP 82/48, MAP 59',labs:{Lactate:'3.1 mmol/L (down from 4.8)'}},
+stem:'What is the FIRST-LINE vasopressor for septic shock?',
+opts:[['a','Dopamine'],['b','Phenylephrine'],['c','Norepinephrine - first-line with α1 and β1 activity'],['d','Epinephrine']],
+exp:'<strong>Norepinephrine is first-line</strong> for septic shock. Provides α1 (vasoconstriction) and β1 (inotropy). Dopamine associated with more arrhythmias.',
+keypoint:'Norepinephrine first, vasopressin second (added at 0.25-0.5 U/min when NE is 0.25-0.5 mcg/kg/min).',
+dd:{pharmacology:{title:'Vasopressors in Septic Shock',content:'<div class="dd-section"><h4>Receptor Activity</h4><table class="drug-table"><tr><th>Drug</th><th>α1</th><th>β1</th><th>β2</th><th>V1</th></tr><tr><td><strong>Norepinephrine</strong></td><td>++++</td><td>++</td><td>0</td><td>0</td></tr><tr><td>Epinephrine</td><td>+++</td><td>++++</td><td>++</td><td>0</td></tr><tr><td>Vasopressin</td><td>0</td><td>0</td><td>0</td><td>++++</td></tr><tr><td>Dopamine</td><td>++</td><td>+++</td><td>+</td><td>0</td></tr><tr><td>Phenylephrine</td><td>++++</td><td>0</td><td>0</td><td>0</td></tr></table><h4>Order of Use (SSC 2021)</h4><ol><li><strong>Norepinephrine</strong> - first-line</li><li><strong>Vasopressin</strong> - add when NE 0.25-0.5 mcg/kg/min</li><li><strong>Epinephrine</strong> - if refractory</li></ol><h4>Why Not Dopamine?</h4><p>More arrhythmias, higher mortality in RCTs</p><div class="dd-refs" style="margin-top:14px;padding-top:12px;border-top:1px dashed #e9ecef"><h5 style="font-size:11px;font-weight:600;color:#5c5c5c;margin-bottom:8px">📚 References</h5><ol style="margin:0;padding-left:16px;font-size:10px"><li><a href="https://www.nejm.org/doi/full/10.1056/NEJMoa0907118" target="_blank" style="color:#0369a1">De Backer D, et al. SOAP II Trial (NE vs Dopamine). NEJM 2010</a></li><li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8486643/" target="_blank" style="color:#0369a1">SSC Guidelines 2021 - Vasopressor Recommendations</a></li></ol></div></div>',bw:['Norepinephrine first-line','Vasopressin second','Avoid dopamine - arrhythmias']}},
+dist:{a:'Dopamine causes more arrhythmias',b:'Phenylephrine lacks inotropy, used in specific situations',d:'Epinephrine is third-line'},
+related:[11,12]},
+11:{type:'Vasopressin',isNBME:false,difficulty:'medium',domains:['pharmacology','mechanism'],tags:['Step2'],
+ctx:'James is on norepinephrine 0.3 mcg/kg/min, still MAP 62.',
+stem:'When should vasopressin be added in septic shock?',
+opts:[['a','As first-line agent'],['b','When norepinephrine dose reaches 0.25-0.5 mcg/kg/min'],['c','Only after epinephrine fails'],['d','Never - vasopressin has no role in sepsis']],
+exp:'<strong>Add vasopressin</strong> when norepinephrine is 0.25-0.5 mcg/kg/min. Fixed dose 0.03-0.04 U/min. Acts on V1 receptors (catecholamine-independent).',
+keypoint:'Vasopressin is catecholamine-independent - helpful when catecholamine resistance develops.',
+dd:{pharmacology:{title:'Vasopressin in Septic Shock',content:'<div class="dd-section"><h4>Mechanism</h4><div class="mech-pathway"><span class="mech-step">V1 receptor</span><span class="mech-arrow">→</span><span class="mech-step">Vascular smooth muscle</span><span class="mech-arrow">→</span><span class="mech-step">Vasoconstriction</span></div><h4>Why Vasopressin Works in Sepsis</h4><ul><li>Endogenous vasopressin depleted in septic shock</li><li>Acts via different receptor (V1) than catecholamines</li><li>May be effective when catecholamine resistance develops</li></ul><h4>Dosing</h4><ul><li>Fixed dose: 0.03-0.04 U/min (not titrated)</li><li>Add when NE 0.25-0.5 mcg/kg/min</li><li>Can reduce norepinephrine requirements</li></ul><div class="dd-refs" style="margin-top:14px;padding-top:12px;border-top:1px dashed #e9ecef"><h5 style="font-size:11px;font-weight:600;color:#5c5c5c;margin-bottom:8px">📚 References</h5><ol style="margin:0;padding-left:16px;font-size:10px"><li><a href="https://www.nejm.org/doi/full/10.1056/NEJMoa067373" target="_blank" style="color:#0369a1">Russell JA, et al. VASST Trial. NEJM 2008</a></li><li><a href="https://jamanetwork.com/journals/jama/fullarticle/2661450" target="_blank" style="color:#0369a1">VANISH Trial. JAMA 2016</a></li></ol></div></div>',bw:['Add at NE 0.25-0.5 mcg/kg/min','Fixed dose 0.03-0.04 U/min','V1 receptor (catecholamine-independent)']}},
+dist:{a:'Norepinephrine is first-line',c:'Vasopressin added before epinephrine',d:'Vasopressin is second-line agent'},
+related:[10,12]},
+
+12:{type:'MAP Target',isNBME:false,difficulty:'easy',domains:['pathophysiology'],tags:['Step2'],
+ctx:'Titrating vasopressors.',
+stem:'What is the target MAP in septic shock?',
+opts:[['a','MAP ≥65 mmHg - balances perfusion vs vasopressor toxicity'],['b','MAP ≥80 mmHg'],['c','MAP ≥50 mmHg'],['d','Systolic BP >90 only']],
+exp:'<strong>Target MAP ≥65 mmHg.</strong> Higher targets (80-85) may benefit chronic hypertensives but increase atrial fibrillation. SEPSISPAM trial showed no benefit to higher targets overall.',
+keypoint:'MAP 65 is the standard target. Consider higher (80-85) in chronic hypertension.',
+dd:{pathophysiology:{title:'MAP Targets',content:'<div class="dd-section"><h4>Standard Target: MAP ≥65 mmHg</h4><h4>Evidence</h4><table class="drug-table"><tr><th>Trial</th><th>Finding</th></tr><tr><td>SEPSISPAM</td><td>MAP 80-85 vs 65-70: No mortality difference</td></tr><tr><td>Subgroup: Chronic HTN</td><td>Higher MAP may reduce AKI</td></tr></table><h4>Special Populations</h4><ul><li>Chronic hypertension: Consider MAP 80-85</li><li>Young/healthy: MAP 65 usually sufficient</li><li>Cerebral pathology: May need higher targets</li></ul></div>',bw:['MAP ≥65 standard','Higher targets for chronic HTN','SEPSISPAM trial']}},
+dist:{b:'MAP 80 not standard target (maybe for chronic HTN)',c:'MAP 50 is too low - inadequate perfusion',d:'MAP is better target than SBP alone'},
+related:[10,11]},
+
+13:{type:'Corticosteroids',isNBME:false,difficulty:'medium',domains:['pharmacology'],tags:['Step2'],
+ctx:'James requires high-dose norepinephrine + vasopressin.',
+stem:'When are corticosteroids indicated in septic shock?',
+opts:[['a','All patients with sepsis'],['b','Only if adrenal insufficiency confirmed'],['c','Refractory shock despite adequate fluids and vasopressors'],['d','Never - steroids are harmful in sepsis']],
+exp:'<strong>Hydrocortisone 200mg/day</strong> for refractory septic shock (ongoing hypotension despite fluids + vasopressors). ADRENAL trial showed faster shock reversal.',
+keypoint:'Steroids speed shock reversal but don\'t clearly reduce mortality. Use in refractory shock.',
+dd:{pharmacology:{title:'Corticosteroids in Septic Shock',content:'<div class="dd-section"><h4>Indications</h4><ul><li>Refractory shock despite fluids + vasopressors</li><li>Suggested: NE >0.25 mcg/kg/min for >4 hours</li></ul><h4>Dosing</h4><ul><li>Hydrocortisone 200mg/day (50mg q6h or 200mg continuous)</li><li>Duration: Until shock resolves, then taper</li></ul><h4>Evidence</h4><table class="drug-table"><tr><th>Trial</th><th>Finding</th></tr><tr><td>ADRENAL</td><td>Faster shock reversal, no mortality benefit</td></tr><tr><td>APROCCHSS</td><td>Mortality benefit with hydrocortisone + fludrocortisone</td></tr></table><h4>Key Point</h4><p>Don\'t wait for cosyntropin stimulation test - treat empirically if indicated</p><div class="dd-refs" style="margin-top:14px;padding-top:12px;border-top:1px dashed #e9ecef"><h5 style="font-size:11px;font-weight:600;color:#5c5c5c;margin-bottom:8px">📚 References</h5><ol style="margin:0;padding-left:16px;font-size:10px"><li><a href="https://www.nejm.org/doi/full/10.1056/NEJMoa1705835" target="_blank" style="color:#0369a1">Venkatesh B, et al. ADRENAL Trial. NEJM 2018</a></li><li><a href="https://www.nejm.org/doi/full/10.1056/NEJMoa1705716" target="_blank" style="color:#0369a1">Annane D, et al. APROCCHSS Trial. NEJM 2018</a></li></ol></div></div>',bw:['Refractory shock','Hydrocortisone 200mg/day','Faster shock reversal']}},
+dist:{a:'Not all sepsis, only refractory shock',b:'Don\'t wait for stimulation test',d:'Steroids have role in refractory shock'},
+related:[10,11,14]},
+
+14:{type:'Source Control',isNBME:false,difficulty:'medium',domains:['pathophysiology'],tags:['Step2'],
+ctx:'James has UTI source with possible obstructing stone.',
+stem:'When should source control be performed in sepsis?',
+opts:[['a','Within 6-12 hours of diagnosis when anatomically feasible'],['b','After 48 hours of antibiotics'],['c','Source control is not important'],['d','Only if antibiotics fail after 7 days']],
+exp:'<strong>Source control within 6-12 hours</strong> when feasible. For urosepsis with obstruction, decompression (stent or nephrostomy) is critical.',
+keypoint:'Antibiotics without source control often fail. Identify and drain/debride sources promptly.',
+dd:{pathophysiology:{title:'Source Control',content:'<div class="dd-section"><h4>Timing</h4><p>Within 6-12 hours when anatomically feasible</p><h4>Examples by Source</h4><table class="drug-table"><tr><th>Source</th><th>Intervention</th></tr><tr><td>Urosepsis with obstruction</td><td>Stent or nephrostomy</td></tr><tr><td>Cholangitis</td><td>ERCP</td></tr><tr><td>Abscess</td><td>Drainage (percutaneous or surgical)</td></tr><tr><td>Necrotizing fasciitis</td><td>Emergent debridement</td></tr><tr><td>Infected device</td><td>Removal</td></tr></table><h4>Exceptions</h4><p>Pancreatic necrosis: delay intervention if possible</p></div>',bw:['6-12 hours','Drain/debride source','Antibiotics alone often fail']}},
+dist:{b:'Too late - source control should be early',c:'Source control is critical',d:'Much too late'},
+related:[4,6]},
+
+15:{type:'De-escalation',isNBME:false,difficulty:'easy',domains:['pharmacology'],tags:['Step2'],
+ctx:'James\'s cultures growing E. coli sensitive to ceftriaxone.',
+stem:'When should empiric antibiotics be de-escalated?',
+opts:[['a','When culture and sensitivity results are available, typically 48-72 hours'],['b','Never - continue broad-spectrum for 14 days'],['c','Immediately upon admission'],['d','De-escalation increases mortality']],
+exp:'<strong>De-escalate at 48-72 hours</strong> based on cultures and clinical response. Narrow spectrum, shorter course when possible.',
+keypoint:'Antibiotic stewardship: De-escalate based on cultures to reduce resistance and side effects.',
+dd:{pharmacology:{title:'Antibiotic De-escalation',content:'<div class="dd-section"><h4>Timing</h4><ul><li>Review cultures daily</li><li>De-escalate at 48-72 hours when possible</li></ul><h4>Duration</h4><table class="drug-table"><tr><th>Source</th><th>Duration</th></tr><tr><td>UTI/Pyelonephritis</td><td>7 days</td></tr><tr><td>Pneumonia</td><td>5-7 days</td></tr><tr><td>Bacteremia</td><td>7-14 days (source dependent)</td></tr><tr><td>Intra-abdominal</td><td>4-7 days (with source control)</td></tr></table><h4>Benefits of De-escalation</h4><ul><li>Reduces resistance</li><li>Decreases C. diff risk</li><li>Fewer side effects</li></ul></div>',bw:['48-72 hours','Based on cultures','Reduces resistance']}},
+dist:{b:'Prolonged broad-spectrum promotes resistance',c:'Need cultures first',d:'De-escalation is safe and recommended'},
+related:[6,7]},
+></div>',bw:['ScvO2 <70% = poor delivery','Dobutamine for inotropy','Sepsis causes myocardial depression']}},
+dist:{a:'Excess fluids would show high CVP with pulmonary edema',c:'PE would have other signs (hypoxia, RV strain)',d:'Anemia check Hgb - but low ScvO2 with normal Hgb = cardiac'},
+related:[8,16]},
+
+18:{type:'Procalcitonin',isNBME:false,difficulty:'medium',domains:['pathophysiology'],tags:['Step2'],
+ctx:'James\'s procalcitonin was 8.2 on admission.',
+stem:'How should procalcitonin (PCT) be used in sepsis management?',
+opts:[['a','Guide antibiotic de-escalation - declining PCT supports stopping antibiotics'],['b','Diagnose sepsis definitively'],['c','Replace blood cultures'],['d','Determine antibiotic choice']],
+exp:'<strong>PCT guides de-escalation:</strong> Declining PCT (<0.5 or >80% drop from peak) supports stopping antibiotics. NOT for diagnosis or replacing cultures.',
+keypoint:'PCT trend guides duration of therapy, not diagnosis or antibiotic selection.',
+dd:{pathophysiology:{title:'Procalcitonin',content:'<div class="dd-section"><h4>What PCT Tells Us</h4><ul><li>Elevated in bacterial infection</li><li>Lower in viral infection</li><li>Trend more useful than single value</li></ul><h4>Using PCT for De-escalation</h4><table class="drug-table"><tr><th>PCT Trend</th><th>Action</th></tr><tr><td><0.5 ng/mL or ↓>80%</td><td>Consider stopping antibiotics</td></tr><tr><td>Rising or persistently high</td><td>Continue antibiotics, seek source</td></tr></table><h4>Limitations</h4><ul><li>Can be elevated in: renal failure, surgery, trauma</li><li>May be low in localized infection</li><li>Does not replace clinical judgment</li></ul></div>',bw:['Guides de-escalation','↓>80% supports stopping Abx','Not diagnostic']}},
+dist:{b:'PCT doesn\'t diagnose sepsis - it\'s a biomarker',c:'Cultures still essential for pathogen ID',d:'Doesn\'t determine which antibiotic to use'},
+related:[7,15]},
+
+19:{type:'Complications',isNBME:false,difficulty:'medium',domains:['pathophysiology'],tags:['Step2'],
+ctx:'James is recovering. Planning ICU care.',
+stem:'Which complications should be prevented in critically ill sepsis patients?',
+opts:[['a','Hyperglycemia only'],['b','DVT and stress ulcers only'],['c','DVT prophylaxis, stress ulcer prophylaxis, glycemic control, and VAP prevention'],['d','No prophylaxis needed if antibiotics are given']],
+exp:'<strong>ICU bundle care:</strong> DVT prophylaxis (LMWH or UFH), stress ulcer prophylaxis (PPI if risk factors), glucose control (target <180), HOB elevation/VAP bundle.',
+keypoint:'Comprehensive ICU care includes multiple preventive measures beyond treating the infection.',
+dd:{pathophysiology:{title:'ICU Complications Prevention',content:'<div class="dd-section"><h4>Prevention Bundle</h4><table class="drug-table"><tr><th>Complication</th><th>Prevention</th></tr><tr><td>DVT/PE</td><td>LMWH or UFH (if not bleeding)</td></tr><tr><td>Stress ulcer</td><td>PPI or H2 blocker (if risk factors)</td></tr><tr><td>Hyperglycemia</td><td>Insulin, target <180 mg/dL</td></tr><tr><td>VAP</td><td>HOB 30-45°, oral care, daily sedation holiday</td></tr><tr><td>Delirium</td><td>ABCDEF bundle</td></tr></table><h4>Glucose Control</h4><p>Target <180 mg/dL. Tight control (<110) increases hypoglycemia without benefit.</p></div>',bw:['DVT prophylaxis','Glucose <180','VAP bundle']}},
+dist:{a:'Multiple complications need prevention',b:'Also need glucose control and VAP prevention',d:'Prophylaxis needed regardless of antibiotics'},
+related:[14,20]},
+
+20:{type:'Prognosis',isNBME:false,difficulty:'easy',domains:['pathophysiology'],tags:['Step2'],
+ctx:'James is improving. Family asks about prognosis.',
+stem:'What is the approximate mortality rate for septic shock?',
+opts:[['a','<5%'],['b','20-40% depending on severity and comorbidities'],['c','>80%'],['d','Mortality is not affected by sepsis severity']],
+exp:'<strong>Septic shock mortality is 20-40%</strong>, higher with delayed treatment, multiple organ failure, or underlying conditions. Early recognition and bundle compliance improve outcomes.',
+keypoint:'Early recognition, rapid treatment, and bundle compliance reduce mortality from ~40% to ~20-25%.',
+dd:{pathophysiology:{title:'Sepsis Outcomes',content:'<div class="dd-section"><h4>Mortality by Severity</h4><table class="drug-table"><tr><th>Condition</th><th>Mortality</th></tr><tr><td>Sepsis (no shock)</td><td>~10%</td></tr><tr><td>Septic shock</td><td>20-40%</td></tr><tr><td>Refractory shock</td><td>>50%</td></tr></table><h4>Factors Affecting Outcome</h4><ul><li>Time to antibiotics</li><li>Time to source control</li><li>Bundle compliance</li><li>Comorbidities</li><li>Age</li><li>Number of organ failures</li></ul><h4>Long-term Outcomes</h4><p>Survivors may have: cognitive impairment, functional decline, PTSD, higher mortality in following years</p></div>',bw:['20-40% mortality in shock','Early treatment improves survival','Long-term sequelae common']}},
+dist:{a:'Too optimistic for septic shock',c:'Modern care achieves better outcomes',d:'Severity strongly affects mortality'},
+related:[1,4]}
+};
+// Helper functions
+function getQs(p){var r=[];for(var i=(p-1)*5+1;i<=p*5;i++)r.push(i);return r}
+
+function updateFP(){
+    for(var d in fp){
+        var pct=fp[d].t>0?Math.round((fp[d].c/fp[d].t)*100):0;
+        var el=document.getElementById('fp'+d.charAt(0).toUpperCase()+d.slice(1,4));
+        var score=document.getElementById('fp'+d.charAt(0).toUpperCase()+d.slice(1,4)+'Score');
+        if(el)el.style.width=pct+'%';
+        if(score)score.textContent=pct+'%';
+    }
+    updateAlerts();
+}
+
+function updateAlerts(){
+    var alertBox=document.getElementById('alertBox');
+    var weakest=null,weakestPct=100,strongest=null,strongestPct=0;
+    for(var d in fp){
+        if(fp[d].t>=2){
+            var pct=Math.round((fp[d].c/fp[d].t)*100);
+            if(pct<weakestPct){weakestPct=pct;weakest=d;}
+            if(pct>strongestPct){strongestPct=pct;strongest=d;}
+        }
+    }
+    var html='';
+    if(weakest&&weakestPct<60){
+        html+='<div class="weakness-alert"><div class="weakness-title">⚠️ Focus Area</div><div class="weakness-text">'+weakest.charAt(0).toUpperCase()+weakest.slice(1)+' questions need review ('+weakestPct+'%)</div></div>';
+    }
+    if(strongest&&strongestPct>=80){
+        html+='<div class="strength-alert"><div class="strength-title">💪 Strength</div><div class="strength-text">Strong '+strongest+' understanding ('+strongestPct+'%)</div></div>';
+    }
+    alertBox.innerHTML=html;
+}
+
+function updateVitals(p){
+    var v=vitals[p];
+    document.getElementById('vBP').textContent=v.bp;
+    document.getElementById('vHR').textContent=v.hr;
+    document.getElementById('vTemp').textContent=v.temp;
+    document.getElementById('vLac').textContent=v.lac;
+    document.getElementById('vWBC').textContent=v.wbc;
+}
+
+function renderCase(p){
+    var c=cases[p];
+    document.getElementById('caseNarrative').innerHTML=c.narrative;
+    document.getElementById('phaseLabel').textContent='Phase '+p;
+    
+    var vh='';
+    c.vitals.forEach(function(v){
+        vh+='<div class="data-item"><span>'+v[0]+'</span> <span class="'+(v[2]||'normal')+'">'+v[1]+'</span></div>';
+    });
+    document.getElementById('vitalsGrid').innerHTML=vh;
+    
+    var lh='';
+    c.labs.forEach(function(l){
+        lh+='<div class="data-item"><span>'+l[0]+'</span> <span class="'+(l[2]||'normal')+'">'+l[1]+'</span></div>';
+    });
+    document.getElementById('labsGrid').innerHTML=lh;
+    
+    // Update clinical pearl
+    var pearlEl=document.querySelector('.pearl-text');
+    if(pearlEl)pearlEl.textContent=c.pearl;
+}
+
+function formatTime(ms){
+    var s=Math.floor(ms/1000);
+    var m=Math.floor(s/60);
+    s=s%60;
+    return (m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+}
+
+function updateSessionStats(){
+    var elapsed=Date.now()-sessionStart;
+    document.getElementById('timeElapsed').textContent=formatTime(elapsed);
+    
+    if(questionsAnswered>0){
+        var avg=elapsed/questionsAnswered;
+        document.getElementById('avgTime').textContent=formatTime(avg);
+        
+        var accuracy=Math.round((correctAnswers/questionsAnswered)*100);
+        document.getElementById('accuracyText').textContent=accuracy+'%';
+        var ring=document.getElementById('accuracyRing');
+        var offset=201-(201*accuracy/100);
+        ring.style.strokeDashoffset=offset;
+        ring.style.stroke=accuracy>=70?'#22c55e':accuracy>=50?'#eab308':'#dc2626';
+    }
+}
+
+function addActivity(text,icon){
+    activities.unshift({text:text,icon:icon,time:Date.now()});
+    if(activities.length>5)activities.pop();
+    renderActivities();
+}
+
+function renderActivities(){
+    var html='';
+    activities.forEach(function(a){
+        var ago=Math.round((Date.now()-a.time)/1000);
+        var timeStr=ago<60?ago+'s ago':Math.round(ago/60)+'m ago';
+        html+='<div class="activity-item"><span class="activity-icon">'+a.icon+'</span><span class="activity-text">'+a.text+'</span><span class="activity-time">'+timeStr+'</span></div>';
+    });
+    document.getElementById('recentActivity').innerHTML=html||'<div class="activity-item"><span class="activity-icon">🎯</span><span class="activity-text">Start a question to see activity</span></div>';
+}
+
+function renderQuestions(p){
+    var ph=phases[p];
+    var h='<div class="phase-intro"><h2>'+ph.title+'<span class="phase-timer">⏱️ '+ph.time+'</span></h2><p>Questions '+(getQs(p)[0])+'-'+(getQs(p)[4])+' of 20</p>';
+    h+='<div class="learning-box"><div class="learning-title">🎯 Learning Objectives</div><ul class="learning-list">';
+    ph.objectives.forEach(function(o,i){
+        var completed=done[p]?'completed':'';
+        h+='<li class="'+completed+'">'+o+'</li>';
+    });
+    h+='</ul></div>';
+    h+='<div class="guidelines-ref"><div class="guidelines-title">📚 Key Guidelines</div><div class="guidelines-list">'+ph.guidelines+'</div></div></div>';
+    
+    var qs=getQs(p);
+    qs.forEach(function(qn){
+        var q=Qs[qn];
+        var s=state[qn];
+        
+        h+='<div class="quiz-card '+(q.isNBME?'nbme':'')+' '+(s.done?'answered':'')+'">';
+        h+='<div class="quiz-header"><div class="quiz-number"><span class="quiz-num '+(q.isNBME?'nbme':'')+'">'+qn+'</span><span class="quiz-type">'+q.type+(q.isNBME?' • NBME Style':'')+'</span></div>';
+        h+='<div class="quiz-meta"><div class="quiz-tags">';
+        if(q.domains)q.domains.forEach(function(d){h+='<span class="quiz-tag '+d+'">'+d.charAt(0).toUpperCase()+d.slice(1)+'</span>';});
+        if(q.tags)q.tags.forEach(function(t){h+='<span class="quiz-tag '+t.toLowerCase()+'">'+t+'</span>';});
+        h+='</div>';
+        if(q.difficulty)h+='<span class="quiz-difficulty '+q.difficulty+'">'+q.difficulty.charAt(0).toUpperCase()+q.difficulty.slice(1)+'</span>';
+        h+='</div>';
+        h+='<span class="quiz-status '+(s.done?(s.ok?'correct':'incorrect'):'')+'" id="st'+qn+'">'+(s.done?(s.ok?'✓ Correct':'✗ Incorrect'):'')+'</span></div>';
+        
+        // Vignette or context
+        if(q.vig){
+            h+='<div class="nbme-vignette"><div class="vig-demo">'+q.vig.demo+'</div>';
+            h+='<div class="vig-section"><span class="vig-label">History:</span> '+q.vig.hpi+'</div>';
+            if(q.vig.pmh)h+='<div class="vig-section"><span class="vig-label">PMH:</span> '+q.vig.pmh+'</div>';
+            if(q.vig.meds)h+='<div class="vig-section"><span class="vig-label">Medications:</span> '+q.vig.meds+'</div>';
+            if(q.vig.allergies)h+='<div class="vig-section"><span class="vig-label">Allergies:</span> '+q.vig.allergies+'</div>';
+            if(q.vig.exam){
+                h+='<div class="vig-section"><span class="vig-label">Physical Exam:</span>';
+                for(var k in q.vig.exam)h+='<br>• '+k.charAt(0).toUpperCase()+k.slice(1)+': '+q.vig.exam[k];
+                h+='</div>';
+            }
+            if(q.vig.labs){
+                h+='<div class="vig-section"><span class="vig-label">Laboratory Data:</span><div class="vig-labs">';
+                for(var k in q.vig.labs){
+                    var val=q.vig.labs[k];
+                    var isAbn=val.includes('↑')||val.includes('↓')||parseFloat(val)>20||k.toLowerCase().includes('lactate');
+                    h+='<span class="vig-lab"><span>'+k+':</span><span class="'+(isAbn?'abnormal':'')+'">'+val+'</span></span>';
+                }
+                h+='</div></div>';
+            }
+            if(q.vig.vitals)h+='<div class="vig-section"><span class="vig-label">Vitals:</span> '+q.vig.vitals+'</div>';
+            h+='</div>';
+        }else if(q.ctx){
+            h+='<div class="quiz-context"><div class="context-label">📍 Clinical Context</div><div class="context-text">'+q.ctx+'</div></div>';
+        }
+        
+        h+='<div class="quiz-body"><div class="quiz-stem">'+q.stem+'</div>';
+        h+='<div class="quiz-options" id="opts'+qn+'">';
+        q.opts.forEach(function(opt){
+            var cls=s.done?'disabled':'';
+            if(s.done&&opt[0]===answers[qn])cls+=' correct';
+            if(s.done&&opt[0]===s.pick&&!s.ok)cls+=' incorrect';
+            if(s.done&&opt[0]!==s.pick&&opt[0]===answers[qn])cls+=' show-correct';
+            h+='<div class="quiz-option '+cls+'" data-a="'+opt[0]+'" onclick="pick('+qn+',this)">';
+            h+='<span class="option-letter">'+opt[0].toUpperCase()+'</span>';
+            h+='<div class="option-content"><span class="option-text">'+opt[1]+'</span>';
+            if(opt[2])h+='<span class="option-hint">'+opt[2]+'</span>';
+            h+='</div></div>';
+        });
+        h+='</div></div>';
+        
+        // Confidence section
+        h+='<div class="confidence-section" id="conf'+qn+'" '+(s.done?'style="display:none"':'')+'>';
+        h+='<div class="confidence-label"><span>How confident are you?</span><span class="confidence-help">Tracks calibration</span></div>';
+        h+='<div class="confidence-btns">';
+        h+='<button class="conf-btn" onclick="setConf('+qn+',\'low\',this)"><span class="conf-emoji">🤔</span>Guessing</button>';
+        h+='<button class="conf-btn" onclick="setConf('+qn+',\'med\',this)"><span class="conf-emoji">😐</span>Uncertain</button>';
+        h+='<button class="conf-btn" onclick="setConf('+qn+',\'high\',this)"><span class="conf-emoji">😊</span>Confident</button>';
+        h+='</div></div>';
+        
+        h+='<button class="submit-btn" id="sub'+qn+'" onclick="submit('+qn+')" disabled '+(s.done?'style="display:none"':'')+'>Submit Answer</button>';
+        
+        // Explanation
+        h+='<div class="explanation '+(s.done?(s.ok?'visible correct':'visible incorrect'):'')+'" id="exp'+qn+'">';
+        h+='<div class="explanation-header"><span class="explanation-icon">'+(s.ok?'✅':'❌')+'</span><span class="explanation-title">'+(s.done?(s.ok?'Correct!':'Incorrect'):'')+'</span></div>';
+        h+='<div class="explanation-text">'+q.exp+'</div>';
+        
+        if(q.keypoint){
+            h+='<div class="key-point"><div class="key-point-title">🔑 Key Point</div><div class="key-point-text">'+q.keypoint+'</div></div>';
+        }
+        
+        // Deep dive
+        if(q.dd){
+            h+='<div class="deep-dive"><button class="dd-toggle" onclick="toggleDD(this)">📚 Deep Dive & High-Yield Content <span>▼</span></button>';
+            h+='<div class="dd-content"><div class="dd-tabs">';
+            var tabs=Object.keys(q.dd);
+            tabs.forEach(function(t,i){
+                h+='<button class="dd-tab '+(i===0?'active':'')+'" onclick="switchTab(this,\''+qn+t+'\')">'+q.dd[t].title+'</button>';
+            });
+            h+='</div>';
+            tabs.forEach(function(t,i){
+                h+='<div class="dd-panel '+(i===0?'active':'')+'" id="'+qn+t+'">'+q.dd[t].content;
+                if(q.dd[t].bw){
+                    h+='<div class="buzzwords"><div class="bw-title">🎯 High-Yield Buzzwords</div><div class="bw-list">';
+                    q.dd[t].bw.forEach(function(b){h+='<span class="bw-item">'+b+'</span>';});
+                    h+='</div></div>';
+                }
+                h+='</div>';
+            });
+            h+='</div></div>';
+        }
+        
+        // Distractor analysis
+        if(q.dist&&s.done){
+            h+='<div class="distractor-section"><div class="dist-title">❌ Why Other Answers Are Wrong</div>';
+            for(var d in q.dist){
+                h+='<div class="dist-item"><span class="dist-letter">'+d.toUpperCase()+':</span> '+q.dist[d]+'</div>';
+            }
+            h+='</div>';
+        }
+        
+        // Related questions
+        if(q.related&&s.done){
+            h+='<div class="related-questions"><div class="related-title">🔗 Related Questions</div><div class="related-list">';
+            q.related.forEach(function(r){
+                h+='<span class="related-item" onclick="scrollToQ('+r+')">Q'+r+': '+Qs[r].type+'</span>';
+            });
+            h+='</div></div>';
+        }
+        
+        h+='</div></div>';
+    });
+    
+    // Phase summary
+    h+='<div class="phase-summary" id="summary">';
+    h+='<div class="summary-header"><div class="summary-title">🎉 Phase '+p+' Complete!</div><div class="summary-score" id="score">0/5</div></div>';
+    h+='<div class="summary-stats">';
+    h+='<div class="stat-box"><div class="stat-value" id="corrCt">0</div><div class="stat-label">Correct</div></div>';
+    h+='<div class="stat-box"><div class="stat-value" id="avgConf">—</div><div class="stat-label">Avg Confidence</div></div>';
+    h+='<div class="stat-box"><div class="stat-value" id="phaseTime">—</div><div class="stat-label">Time</div></div>';
+    h+='<div class="stat-box"><div class="stat-value">+<span id="phaseXP">0</span></div><div class="stat-label">XP Earned</div></div>';
+    h+='</div>';
+    h+='<div class="fp-summary"><div class="fp-summary-title">🧬 Domain Performance This Phase</div><div class="fp-domains" id="phaseFP"></div></div>';
+    h+='<div class="improvement-tips" id="improvementTips"></div>';
+    if(p<4)h+='<button class="next-btn" onclick="unlock('+(p+1)+')">Continue to Phase '+(p+1)+' →</button>';
+    else h+='<button class="next-btn" onclick="showFinalSummary()">🎓 View Final Results</button>';
+    h+='</div>';
+    
+    document.getElementById('questionsPanel').innerHTML=h;
+}
+
+function scrollToQ(qn){
+    var el=document.querySelector('.quiz-card:nth-child('+(qn%5||5)+')');
+    if(el)el.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+function toggleDD(btn){
+    var content=btn.nextElementSibling;
+    content.classList.toggle('open');
+    btn.querySelector('span').textContent=content.classList.contains('open')?'▲':'▼';
+}
+
+function switchTab(btn,panelId){
+    var parent=btn.closest('.dd-content');
+    parent.querySelectorAll('.dd-tab').forEach(function(t){t.classList.remove('active');});
+    parent.querySelectorAll('.dd-panel').forEach(function(p){p.classList.remove('active');});
+    btn.classList.add('active');
+    document.getElementById(panelId).classList.add('active');
+}
+
+function pick(qn,el){
+    if(state[qn].done)return;
+    if(!state[qn].startTime)state[qn].startTime=Date.now();
+    document.querySelectorAll('#opts'+qn+' .quiz-option').forEach(function(o){o.classList.remove('selected');});
+    el.classList.add('selected');
+    state[qn].pick=el.dataset.a;
+    checkSub(qn);
+}
+
+function setConf(qn,lv,el){
+    if(state[qn].done)return;
+    document.querySelectorAll('#conf'+qn+' .conf-btn').forEach(function(b){b.classList.remove('selected');});
+    el.classList.add('selected');
+    state[qn].conf=lv;
+    checkSub(qn);
+}
+
+function checkSub(qn){
+    var btn=document.getElementById('sub'+qn);
+    if(btn)btn.disabled=!(state[qn].pick&&state[qn].conf);
+}
+
+function submit(qn){
+    var s=state[qn];
+    if(s.done)return;
+    
+    s.done=true;
+    s.ok=s.pick===answers[qn];
+    s.time=Date.now()-s.startTime;
+    
+    questionsAnswered++;
+    if(s.ok){
+        correctAnswers++;
+        streak++;
+        var xp=10+(s.conf==='high'&&s.ok?5:0)+(streak>=3?5:0);
+        totalXP+=xp;
+        addActivity('Correct! +'+xp+' XP','✅');
+    }else{
+        streak=0;
+        addActivity('Incorrect - review explanation','❌');
+    }
+    
+    var q=Qs[qn];
+    if(q.domains)q.domains.forEach(function(d){fp[d].t++;if(s.ok)fp[d].c++;});
+    
+    updateFP();
+    updateSessionStats();
+    document.getElementById('xpCount').textContent=totalXP;
+    document.getElementById('streakCount').textContent=streak;
+    
+    renderQuestions(phase);
+    updateProgress();
+    checkDone();
+}
+
+function updateProgress(){
+    var total=0;
+    for(var k in state)if(state[k].done)total++;
+    document.getElementById('progressCount').textContent=total+'/20';
+    document.getElementById('progressFill').style.width=(total/20)*100+'%';
+}
+
+function checkDone(){
+    var qs=getQs(phase);
+    var allDone=true;
+    for(var i=0;i<qs.length;i++)if(!state[qs[i]].done)allDone=false;
+    
+    if(allDone&&!done[phase]){
+        done[phase]=true;
+        
+        var corr=0,totalTime=0;
+        for(var i=0;i<qs.length;i++){
+            if(state[qs[i]].ok)corr++;
+            totalTime+=state[qs[i]].time;
+        }
+        
+        document.getElementById('score').textContent=corr+'/5';
+        document.getElementById('corrCt').textContent=corr;
+        document.getElementById('phaseTime').textContent=formatTime(totalTime);
+        
+        var phaseXP=corr*10+(corr===5?25:0);
+        document.getElementById('phaseXP').textContent=phaseXP;
+        
+        var confVals={low:33,med:66,high:90};
+        var sum=0;
+        for(var i=0;i<qs.length;i++)sum+=confVals[state[qs[i]].conf];
+        document.getElementById('avgConf').textContent=Math.round(sum/5)+'%';
+        
+        var fpH='';
+        for(var d in fp){
+            var pct=fp[d].t>0?Math.round((fp[d].c/fp[d].t)*100):0;
+            var color=d==='mechanism'?'#a855f7':d==='pharmacology'?'#3b82f6':'#22c55e';
+            fpH+='<div class="fp-domain"><span>'+d.charAt(0).toUpperCase()+d.slice(1)+'</span>';
+            fpH+='<div class="fp-domain-bar"><div class="fp-domain-fill" style="width:'+pct+'%;background:'+color+'"></div></div>';
+            fpH+='<span>'+pct+'%</span></div>';
+        }
+        document.getElementById('phaseFP').innerHTML=fpH;
+        
+        // Generate improvement tips
+        var tips='<div class="tips-title">💡 Improvement Tips</div>';
+        if(corr<3)tips+='<div class="tip-item"><span class="tip-icon">📖</span><span class="tip-text">Review the deep dive sections for missed questions</span></div>';
+        if(corr>=4)tips+='<div class="tip-item"><span class="tip-icon">🌟</span><span class="tip-text">Excellent work! Try teaching these concepts to solidify understanding</span></div>';
+        document.getElementById('improvementTips').innerHTML=tips;
+        
+        document.getElementById('summary').style.display='block';
+        document.getElementById('summary').scrollIntoView({behavior:'smooth'});
+        
+        document.querySelector('.timeline-phase[data-phase="'+phase+'"]').classList.add('completed');
+        document.getElementById('status'+phase).textContent='✓ '+corr+'/5';
+        document.getElementById('status'+phase).className='phase-status done';
+        document.getElementById('score'+phase).textContent=corr+'/5';
+    }
+}
+
+function unlock(np){
+    open[np]=true;
+    goPhase(np);
+}
+
+function goPhase(p){
+    if(!open[p]){alert('Complete Phase '+(p-1)+' first!');return;}
+    phase=p;
+    
+    document.querySelectorAll('.timeline-phase').forEach(function(ph){
+        var pn=parseInt(ph.dataset.phase);
+        ph.classList.remove('active','locked');
+        if(pn===p)ph.classList.add('active');
+        if(!open[pn])ph.classList.add('locked');
+    });
+    
+    for(var i=1;i<=4;i++){
+        var st=document.getElementById('status'+i);
+        if(done[i]){
+            st.className='phase-status done';
+        }else if(i===p){
+            st.textContent='In Progress';
+            st.className='phase-status current';
+        }else if(open[i]){
+            st.textContent='Ready';
+            st.className='phase-status';
+        }else{
+            st.textContent='🔒';
+            st.className='phase-status';
+        }
+    }
+    
+    updateVitals(p);
+    renderCase(p);
+    renderQuestions(p);
+    window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function showFinalSummary(){
+    alert('🎓 Module Complete!\n\nTotal XP: '+totalXP+'\nAccuracy: '+Math.round((correctAnswers/20)*100)+'%\n\nGreat work on mastering sepsis management!');
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded',function(){
+    updateVitals(1);
+    renderCase(1);
+    renderQuestions(1);
+    setInterval(updateSessionStats,1000);
+    setInterval(renderActivities,10000);
+});
+</script>
+</body>
+</html>
