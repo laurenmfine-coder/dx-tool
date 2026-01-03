@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hematology - ReasonDx</title>
+<style>
+:root{--bg-page:#f8fafc;--bg-white:#fff;--bg-subtle:#f1f5f9;--text-primary:#0f172a;--text-secondary:#475569;--border:#e2e8f0;--accent:#dc2626;--accent-light:#fee2e2;--green:#059669;--red:#dc2626;--radius-sm:8px;--radius-lg:16px}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg-page);color:var(--text-primary);line-height:1.6}
+.header{background:linear-gradient(135deg,#dc2626,#b91c1c);color:#fff;padding:16px 24px}.logo{font-weight:700;font-size:18px}
+.module-header{background:var(--bg-white);border-bottom:1px solid var(--border);padding:24px}.module-title{display:flex;align-items:center;gap:16px;max-width:1400px;margin:0 auto}.module-icon{width:56px;height:56px;background:linear-gradient(135deg,#fee2e2,#fecaca);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:28px}.module-title h1{font-size:26px;font-weight:700}.enhanced-badge{background:linear-gradient(135deg,var(--accent),#b91c1c);color:#fff;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;margin-left:8px}
+.progress-bar{background:var(--bg-white);border-bottom:1px solid var(--border);padding:12px 24px}.progress-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;gap:16px}.progress-track{flex:1;height:8px;background:var(--bg-subtle);border-radius:4px}.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));transition:width .3s}.progress-count{font-size:13px;font-weight:600}
+.timeline-nav{background:var(--bg-white);border-bottom:1px solid var(--border);padding:0 24px}.timeline-inner{max-width:1400px;margin:0 auto;display:flex}.timeline-phase{flex:1;padding:16px 8px;cursor:pointer;border-bottom:3px solid transparent;text-align:center}.timeline-phase.active{border-bottom-color:var(--accent)}.timeline-phase.locked{opacity:.4}.phase-label{font-size:12px;font-weight:600}.phase-time{font-size:10px;color:var(--text-secondary)}
+.main-container{max-width:1400px;margin:0 auto;padding:24px;display:grid;grid-template-columns:300px 1fr;gap:24px}@media(max-width:900px){.main-container{grid-template-columns:1fr}}
+.card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:16px}.card-header{padding:14px 18px;border-bottom:1px solid var(--border)}.card-title{font-size:13px;font-weight:600}.card-content{padding:16px 18px}.case-narrative{font-size:14px;color:var(--text-secondary)}
+.clinical-pearl{margin-top:12px;padding:12px;background:var(--accent-light);border-radius:var(--radius-sm);border-left:3px solid var(--accent)}.pearl-title{font-size:10px;font-weight:600;color:#b91c1c}.pearl-text{font-size:11px;color:#991b1b}
+.phase-objectives{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px;margin-bottom:16px}.obj-title{font-size:12px;font-weight:600;color:var(--accent);margin-bottom:8px}.obj-list{list-style:none;font-size:11px}.obj-list li{padding:4px 0 4px 16px;position:relative}.obj-list li::before{content:'→';position:absolute;left:0;color:var(--accent)}
+.quiz-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:16px}.quiz-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}.quiz-num{width:28px;height:28px;background:linear-gradient(135deg,var(--accent),#b91c1c);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}.quiz-type{font-size:12px;font-weight:600}.quiz-meta{margin-left:auto;display:flex;gap:6px}.quiz-tag{font-size:9px;padding:2px 6px;background:var(--bg-subtle);border-radius:4px}.quiz-difficulty{font-size:9px;padding:2px 6px;border-radius:4px}.quiz-difficulty.medium{background:#fef3c7;color:#92400e}.quiz-difficulty.hard{background:#fee2e2;color:#991b1b}
+.quiz-body{padding:16px}.quiz-stem{font-size:14px;font-weight:500;margin-bottom:14px}.quiz-options{display:flex;flex-direction:column;gap:8px}.quiz-option{display:flex;gap:12px;padding:12px 14px;background:var(--bg-subtle);border:2px solid transparent;border-radius:var(--radius-sm);cursor:pointer}.quiz-option.selected{border-color:var(--accent)}.quiz-option.correct{border-color:var(--green);background:rgba(5,150,105,.08)}.quiz-option.incorrect{border-color:var(--red);background:rgba(220,38,38,.08)}.quiz-option.disabled{pointer-events:none;opacity:.7}
+.option-letter{width:24px;height:24px;border:2px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}.quiz-option.selected .option-letter{border-color:var(--accent);color:var(--accent)}.quiz-option.correct .option-letter{background:var(--green);color:#fff;border-color:var(--green)}.quiz-option.incorrect .option-letter{background:var(--red);color:#fff;border-color:var(--red)}
+.submit-btn{margin-top:14px;width:100%;padding:12px;background:linear-gradient(135deg,var(--accent),#b91c1c);color:#fff;border:none;border-radius:var(--radius-sm);font-weight:600;cursor:pointer}.submit-btn:disabled{background:var(--bg-subtle);color:var(--text-secondary)}
+.explanation{margin-top:16px;padding:16px;border-radius:var(--radius-sm);display:none;font-size:13px}.explanation.visible{display:block}.explanation.correct{background:#f0fdf4;border:1px solid #bbf7d0}.explanation.incorrect{background:#fef2f2;border:1px solid #fecaca}
+.keypoint{margin-top:10px;padding:10px;background:rgba(220,38,38,.1);border-radius:6px;font-size:12px}.keypoint-label{font-weight:600;color:var(--accent);font-size:10px}
+.deep-dive{margin-top:14px;border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden}.dd-toggle{width:100%;padding:10px 14px;background:var(--bg-subtle);border:none;cursor:pointer;display:flex;justify-content:space-between;font-size:12px;font-weight:600}.dd-content{display:none;padding:14px;font-size:12px;max-height:500px;overflow-y:auto}.dd-content.visible{display:block}.dd-content h4{font-size:13px;font-weight:600;margin:12px 0 8px;color:var(--accent)}.dd-content h4:first-child{margin-top:0}.dd-content ul{margin:8px 0;padding-left:20px}.dd-content li{margin:4px 0}.dd-content table{width:100%;border-collapse:collapse;margin:10px 0;font-size:11px}.dd-content th,.dd-content td{border:1px solid var(--border);padding:6px 8px}.dd-content th{background:var(--bg-subtle)}.buzzwords{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px}.buzzword{font-size:10px;padding:4px 8px;background:#fef3c7;border-radius:4px;color:#92400e;font-weight:500}
+</style>
+</head>
+<body>
+<header class="header"><div class="logo">🩸 ReasonDx — Hematology</div></header>
+<div class="module-header"><div class="module-title"><div class="module-icon">🩸</div><div><h1>Hematology<span class="enhanced-badge">✨ MECHANISM-ENHANCED</span></h1><p>Anemia, Coagulation, Hemolysis, and Blood Disorders</p></div></div></div>
+<div class="progress-bar"><div class="progress-inner"><span style="font-size:12px;color:var(--text-secondary)">Progress</span><div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div><span class="progress-count" id="progressCount">0/20</span></div></div>
+<nav class="timeline-nav"><div class="timeline-inner">
+<div class="timeline-phase active" onclick="goPhase(1)"><div class="phase-label">📉 Anemia</div><div class="phase-time">Classification</div></div>
+<div class="timeline-phase locked" onclick="goPhase(2)"><div class="phase-label">🩹 Coagulation</div><div class="phase-time">Bleeding & Clotting</div></div>
+<div class="timeline-phase locked" onclick="goPhase(3)"><div class="phase-label">💥 Hemolysis</div><div class="phase-time">RBC Destruction</div></div>
+<div class="timeline-phase locked" onclick="goPhase(4)"><div class="phase-label">🔬 Malignancy</div><div class="phase-time">Leukemia & Lymphoma</div></div>
+</div></nav>
+<div class="main-container">
+<aside>
+<div class="phase-objectives" id="phaseObjectives"></div>
+<div class="card"><div class="card-header"><div class="card-title">📋 Clinical Snapshot</div></div><div class="card-content"><div class="case-narrative" id="caseNarrative"></div><div class="clinical-pearl"><div class="pearl-title">💡 Heme Pearl</div><div class="pearl-text" id="pearlText"></div></div></div></div>
+</aside>
+<main id="questionsPanel"></main>
+</div>
+<script>
+var phase=1,state={};for(var i=1;i<=20;i++)state[i]={pick:null,done:false,ok:false};
+var phases={
+1:{qs:[1,2,3,4,5],narrative:'<strong>Maria</strong>, 62F, presents with fatigue and pallor. Labs: Hgb 8.2, MCV 72, ferritin 8. Iron studies pending.',pearl:'Microcytic anemia: Iron deficiency most common. Check ferritin first - low ferritin is diagnostic. TIBC elevated in iron deficiency.',objectives:['Classify anemia by MCV','Interpret iron studies','Recognize thalassemia trait','Manage iron deficiency'],refs:[{t:'ASH Anemia Guidelines',u:'https://www.hematology.org/'}]},
+2:{qs:[6,7,8,9,10],narrative:'<strong>John</strong>, 45M with cirrhosis, has INR 2.8, PTT 45, platelets 65K. Now needs paracentesis.',pearl:'Liver disease: decreased synthesis of factors II, VII, IX, X AND anticoagulants. INR elevated but may be pro- or anti-thrombotic.',objectives:['Understand coagulation cascade','Interpret PT/PTT abnormalities','Recognize DIC','Manage bleeding disorders'],refs:[{t:'Coagulation Guidelines',u:'https://www.isth.org/'}]},
+3:{qs:[11,12,13,14,15],narrative:'<strong>Sarah</strong>, 28F, presents with jaundice, dark urine, and Hgb 7.2. LDH elevated, haptoglobin undetectable.',pearl:'Hemolysis markers: elevated LDH, indirect bilirubin, reticulocyte count. Low haptoglobin (binds free Hgb). Check Coombs for autoimmune.',objectives:['Recognize hemolysis labs','Differentiate intravascular vs extravascular','Diagnose autoimmune hemolytic anemia','Manage sickle cell crisis'],refs:[{t:'Hemolysis Workup',u:'https://www.hematology.org/'}]},
+4:{qs:[16,17,18,19,20],narrative:'<strong>Robert</strong>, 68M, has fatigue, lymphadenopathy, and WBC 85K with lymphocyte predominance. Smear shows smudge cells.',pearl:'CLL: mature B-cell malignancy. Most common adult leukemia in West. Smudge cells classic. Watch and wait if asymptomatic.',objectives:['Recognize leukemia presentations','Differentiate acute vs chronic','Know lymphoma staging','Understand treatment principles'],refs:[{t:'NCCN Hematology',u:'https://www.nccn.org/'}]}
+};
+var Qs={
+1:{type:'Anemia Classification',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Heme'],stem:'A patient has Hgb 9.0, MCV 68, and low ferritin. What is the most likely diagnosis?',
+opts:[['a','Iron deficiency anemia'],['b','Thalassemia trait'],['c','Anemia of chronic disease'],['d','Sideroblastic anemia']],
+ans:'a',
+exp:'<strong>Iron deficiency:</strong> Microcytic anemia (MCV <80) + low ferritin is diagnostic. Ferritin is an acute phase reactant but low ferritin always means iron deficiency.',
+kp:'Low ferritin = iron deficiency. Always check ferritin first in microcytic anemia.',
+dd:{mechanism:{title:'Microcytic Anemia',content:'<table><tr><th>Cause</th><th>Iron</th><th>TIBC</th><th>Ferritin</th></tr><tr><td>Iron deficiency</td><td>Low</td><td>High</td><td>Low</td></tr><tr><td>ACD</td><td>Low</td><td>Low</td><td>High/Normal</td></tr><tr><td>Thalassemia</td><td>Normal</td><td>Normal</td><td>Normal</td></tr></table>',bw:['Low ferritin diagnostic','TIBC high in deficiency','Mentzer index for thal']}}},
+2:{type:'Iron Studies',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Heme'],stem:'Which iron study is most helpful to differentiate iron deficiency from anemia of chronic disease?',
+opts:[['a','Serum iron level alone'],['b','Ferritin level'],['c','TIBC alone'],['d','Reticulocyte count']],
+ans:'b',
+exp:'<strong>Ferritin:</strong> Low ferritin (<30) is specific for iron deficiency. In ACD, ferritin is normal-high due to inflammation trapping iron.',
+kp:'Ferritin is the best initial test. Low = iron deficiency. High/normal with low iron = ACD.',
+dd:{mechanism:{title:'Iron Studies',content:'<h4>Ferritin</h4><ul><li>Storage form of iron</li><li>Acute phase reactant (elevated in inflammation)</li><li>Low ferritin = iron deficiency always</li></ul>',bw:['Ferritin best test','Low = deficiency','Elevated in inflammation']}}},
+3:{type:'Thalassemia',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Heme'],stem:'A patient has microcytic anemia with normal iron studies and elevated RBC count. What suggests thalassemia trait?',
+opts:[['a','Low reticulocyte count'],['b','Mentzer index less than 13'],['c','Elevated ferritin level'],['d','Prolonged PT and PTT']],
+ans:'b',
+exp:'<strong>Thalassemia trait:</strong> Mentzer index (MCV/RBC) <13 suggests thalassemia. Microcytic but RBC count often elevated. Iron studies normal.',
+kp:'Mentzer index <13 = thalassemia. High RBC count despite anemia. Hgb electrophoresis confirms.',
+dd:{mechanism:{title:'Thalassemia vs Iron Deficiency',content:'<table><tr><th>Feature</th><th>Thalassemia</th><th>Iron Def</th></tr><tr><td>RBC count</td><td>High/Normal</td><td>Low</td></tr><tr><td>Mentzer</td><td><13</td><td>>13</td></tr><tr><td>RDW</td><td>Normal</td><td>High</td></tr></table>',bw:['Mentzer index <13','RBC count elevated','RDW normal in thal']}}},
+4:{type:'B12 Deficiency',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Heme'],stem:'A patient has macrocytic anemia with neurologic symptoms. What additional finding suggests B12 deficiency?',
+opts:[['a','Thrombocytosis'],['b','Hypersegmented neutrophils on smear'],['c','Target cells on smear'],['d','Elevated reticulocyte count']],
+ans:'b',
+exp:'<strong>B12 deficiency:</strong> Macrocytic anemia + hypersegmented neutrophils (>5 lobes). Neurologic symptoms (subacute combined degeneration) distinguish from folate.',
+kp:'Hypersegmented neutrophils = megaloblastic anemia. B12 has neuro symptoms, folate does not.',
+dd:{mechanism:{title:'B12 vs Folate',content:'<table><tr><th>Feature</th><th>B12</th><th>Folate</th></tr><tr><td>Neuro symptoms</td><td>Yes</td><td>No</td></tr><tr><td>MMA</td><td>Elevated</td><td>Normal</td></tr><tr><td>Homocysteine</td><td>Elevated</td><td>Elevated</td></tr></table>',bw:['Hypersegmented PMNs','Neuro = B12','MMA elevated in B12']}}},
+5:{type:'Anemia Treatment',difficulty:'medium',domains:['management'],tags:['Step2','Heme'],stem:'What is the expected reticulocyte response to iron supplementation in iron deficiency anemia?',
+opts:[['a','Immediate within 24 hours'],['b','Peak reticulocytosis at 7-10 days'],['c','Response at 4-6 weeks'],['d','No reticulocyte response expected']],
+ans:'b',
+exp:'<strong>Iron replacement response:</strong> Reticulocytosis peaks at 7-10 days. Hemoglobin rises 1-2 g/dL per month. Continue iron 3-6 months after Hgb normalizes.',
+kp:'Retics peak 7-10 days. Hgb rises 1-2g/month. Continue iron 3-6 months after normalization.',
+dd:{mechanism:{title:'Iron Response Timeline',content:'<ul><li>Day 3-5: Improved well-being</li><li>Day 7-10: Peak reticulocytosis</li><li>Week 2-4: Hgb starts rising</li><li>Month 1-2: Hgb normalizes</li><li>Month 3-6: Replete stores</li></ul>',bw:['Retics 7-10 days','Hgb 1-2g/month','Continue 3-6 months']}}},
+6:{type:'Coagulation',difficulty:'hard',domains:['diagnosis'],tags:['Step2','Heme'],stem:'A patient has prolonged PT and normal PTT. Which factor deficiency is most likely?',
+opts:[['a','Factor VIII deficiency'],['b','Factor VII deficiency'],['c','Factor XII deficiency'],['d','Von Willebrand disease']],
+ans:'b',
+exp:'<strong>Factor VII:</strong> Only factor in extrinsic pathway. Deficiency causes isolated PT prolongation. Factor VIII deficiency prolongs PTT only.',
+kp:'Isolated PT prolongation = Factor VII. Isolated PTT = VIII, IX, XI, XII. Both = common pathway.',
+dd:{mechanism:{title:'Coagulation Pathways',content:'<table><tr><th>Pathway</th><th>Test</th><th>Factors</th></tr><tr><td>Extrinsic</td><td>PT</td><td>VII</td></tr><tr><td>Intrinsic</td><td>PTT</td><td>VIII, IX, XI, XII</td></tr><tr><td>Common</td><td>Both</td><td>X, V, II, I</td></tr></table>',bw:['PT = extrinsic (VII)','PTT = intrinsic','Both = common pathway']}}},
+7:{type:'Hemophilia',difficulty:'hard',domains:['diagnosis'],tags:['Step2','Heme'],stem:'A male child has prolonged PTT with normal PT and bleeding time. What is the most likely diagnosis?',
+opts:[['a','Von Willebrand disease'],['b','Hemophilia A or B'],['c','Factor VII deficiency'],['d','Platelet dysfunction']],
+ans:'b',
+exp:'<strong>Hemophilia:</strong> X-linked, affects males. Factor VIII (A) or IX (B) deficiency. PTT prolonged, PT and bleeding time normal. Joint bleeds classic.',
+kp:'Hemophilia: PTT elevated, PT normal, bleeding time normal. X-linked. Joint bleeds.',
+dd:{mechanism:{title:'Hemophilia',content:'<h4>Hemophilia A vs B</h4><ul><li>A = Factor VIII (more common)</li><li>B = Factor IX (Christmas disease)</li><li>Both: PTT ↑, PT normal, BT normal</li><li>Joint bleeds (hemarthrosis)</li></ul>',bw:['X-linked recessive','PTT elevated','Joint bleeds classic']}}},
+8:{type:'DIC',difficulty:'hard',domains:['diagnosis'],tags:['Step2','Heme'],stem:'A septic patient has low platelets, prolonged PT/PTT, low fibrinogen, and elevated D-dimer. What is the diagnosis?',
+opts:[['a','Isolated thrombocytopenia'],['b','Liver disease only'],['c','Disseminated intravascular coagulation'],['d','Primary fibrinolysis']],
+ans:'c',
+exp:'<strong>DIC:</strong> Systemic activation of coagulation → consumptive coagulopathy. Low plt, prolonged PT/PTT, low fibrinogen, HIGH D-dimer. Treat underlying cause.',
+kp:'DIC: everything consumed. Low plt, low fibrinogen, elevated D-dimer. Treat underlying cause.',
+dd:{mechanism:{title:'DIC Labs',content:'<table><tr><th>Test</th><th>DIC</th><th>Liver Dz</th></tr><tr><td>Platelets</td><td>Low</td><td>Low</td></tr><tr><td>PT/PTT</td><td>Elevated</td><td>Elevated</td></tr><tr><td>Fibrinogen</td><td>Low</td><td>Low/Normal</td></tr><tr><td>D-dimer</td><td>Very High</td><td>Mild elevation</td></tr></table>',bw:['Low fibrinogen','Very high D-dimer','Schistocytes on smear']}}},
+9:{type:'Heparin Reversal',difficulty:'medium',domains:['management'],tags:['Step2','Heme'],stem:'What reverses unfractionated heparin?',
+opts:[['a','Vitamin K'],['b','Fresh frozen plasma'],['c','Protamine sulfate'],['d','Tranexamic acid']],
+ans:'c',
+exp:'<strong>Heparin reversal:</strong> Protamine sulfate reverses UFH (binds and inactivates). 1mg protamine per 100 units heparin. Vitamin K reverses warfarin.',
+kp:'Protamine reverses heparin. Vitamin K reverses warfarin. FFP for urgent warfarin reversal.',
+dd:{mechanism:{title:'Anticoagulant Reversal',content:'<table><tr><th>Drug</th><th>Reversal</th></tr><tr><td>UFH</td><td>Protamine</td></tr><tr><td>Warfarin</td><td>Vitamin K, FFP, PCC</td></tr><tr><td>DOACs</td><td>Idarucizumab (dabigatran), Andexanet (Xa inhibitors)</td></tr></table>',bw:['Protamine for heparin','Vitamin K for warfarin','Idarucizumab for dabigatran']}}},
+10:{type:'Warfarin',difficulty:'medium',domains:['management'],tags:['Step2','Heme'],stem:'A patient on warfarin has INR 8.5 with no bleeding. What is the appropriate management?',
+opts:[['a','Continue warfarin at same dose'],['b','Hold warfarin and give oral vitamin K'],['c','Give FFP immediately'],['d','Transfuse platelets']],
+ans:'b',
+exp:'<strong>Supratherapeutic INR:</strong> No bleeding + INR >4.5: hold warfarin + oral vitamin K. Active bleeding: IV vitamin K + FFP or PCC.',
+kp:'INR >4.5 no bleed: hold + oral vitamin K. Bleeding: IV vitamin K + FFP/PCC.',
+dd:{mechanism:{title:'Warfarin Management',content:'<table><tr><th>INR</th><th>Bleeding</th><th>Action</th></tr><tr><td>>10</td><td>No</td><td>Hold + Vit K PO</td></tr><tr><td>Any</td><td>Major</td><td>Hold + Vit K IV + PCC</td></tr><tr><td>4.5-10</td><td>No</td><td>Hold ± Vit K</td></tr></table>',bw:['Hold warfarin','Oral vitamin K if no bleed','PCC for major bleed']}}},
+11:{type:'Hemolysis',difficulty:'hard',domains:['diagnosis'],tags:['Step2','Heme'],stem:'Which lab pattern indicates intravascular hemolysis?',
+opts:[['a','Elevated indirect bilirubin only'],['b','Undetectable haptoglobin with hemoglobinuria'],['c','Elevated LDH only'],['d','Spherocytes on peripheral smear']],
+ans:'b',
+exp:'<strong>Intravascular hemolysis:</strong> Free hemoglobin released into blood. Haptoglobin depleted (binds Hgb), hemoglobinuria present. Extravascular: RBCs destroyed in spleen.',
+kp:'Intravascular: hemoglobinuria, very low haptoglobin. Extravascular: spleen destruction, spherocytes.',
+dd:{mechanism:{title:'Intra vs Extravascular',content:'<table><tr><th>Feature</th><th>Intravascular</th><th>Extravascular</th></tr><tr><td>Site</td><td>Circulation</td><td>Spleen/liver</td></tr><tr><td>Haptoglobin</td><td>Very low</td><td>Low</td></tr><tr><td>Hemoglobinuria</td><td>Present</td><td>Absent</td></tr></table>',bw:['Hemoglobinuria = intravascular','Spherocytes = extravascular','Haptoglobin low in both']}}},
+12:{type:'Coombs Test',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Heme'],stem:'A patient with hemolytic anemia has a positive direct Coombs test. What does this indicate?',
+opts:[['a','Hereditary spherocytosis'],['b','Autoimmune hemolytic anemia'],['c','G6PD deficiency'],['d','Paroxysmal nocturnal hemoglobinuria']],
+ans:'b',
+exp:'<strong>Direct Coombs (DAT):</strong> Detects antibodies or complement on RBC surface. Positive = autoimmune hemolytic anemia (warm or cold).',
+kp:'Direct Coombs positive = autoimmune hemolysis. Warm (IgG) or cold (IgM/complement).',
+dd:{mechanism:{title:'Coombs Testing',content:'<h4>Direct vs Indirect</h4><ul><li>Direct: antibodies ON RBCs (autoimmune)</li><li>Indirect: antibodies IN serum (type & screen)</li></ul><h4>AIHA Types</h4><ul><li>Warm (IgG): most common</li><li>Cold (IgM): mycoplasma, lymphoma</li></ul>',bw:['Direct = on cells','Indirect = in serum','Warm AIHA most common']}}},
+13:{type:'Sickle Cell',difficulty:'hard',domains:['management'],tags:['Step2','Heme'],stem:'A sickle cell patient presents with fever 102°F. What is the most important immediate action?',
+opts:[['a','Pain management with morphine'],['b','Blood cultures and empiric antibiotics'],['c','Exchange transfusion'],['d','Hydroxyurea initiation']],
+ans:'b',
+exp:'<strong>Sickle cell + fever:</strong> Functional asplenia → high risk for encapsulated organisms. Blood cultures + empiric broad-spectrum antibiotics immediately.',
+kp:'Fever in sickle cell = emergency. Functional asplenia. Cover encapsulated organisms.',
+dd:{mechanism:{title:'Sickle Cell Emergencies',content:'<h4>Fever = Emergency</h4><ul><li>Functional asplenia by age 5</li><li>Risk: S. pneumoniae, H. flu</li><li>Empiric antibiotics immediately</li></ul>',bw:['Functional asplenia','Encapsulated organisms','Empiric antibiotics']}}},
+14:{type:'TTP',difficulty:'hard',domains:['diagnosis'],tags:['Step2','Heme'],stem:'A patient presents with thrombocytopenia, microangiopathic hemolytic anemia, and AKI. What should be avoided?',
+opts:[['a','Plasmapheresis'],['b','Platelet transfusion'],['c','Fresh frozen plasma'],['d','Corticosteroids']],
+ans:'b',
+exp:'<strong>TTP/HUS:</strong> Do NOT transfuse platelets - "fuel to the fire." Platelets consumed in microthrombi. Plasmapheresis is treatment.',
+kp:'No platelet transfusion in TTP/HUS. Plasmapheresis for TTP. Pentad: FAT RN.',
+dd:{mechanism:{title:'TTP Pentad',content:'<h4>FAT RN</h4><ul><li>Fever</li><li>Anemia (microangiopathic hemolytic)</li><li>Thrombocytopenia</li><li>Renal dysfunction</li><li>Neurologic symptoms</li></ul>',bw:['Schistocytes on smear','No platelet transfusion','Plasmapheresis treatment']}}},
+15:{type:'G6PD',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Heme'],stem:'A patient develops hemolysis after starting trimethoprim-sulfamethoxazole. What is the likely diagnosis?',
+opts:[['a','Autoimmune hemolytic anemia'],['b','G6PD deficiency'],['c','Hereditary spherocytosis'],['d','Sickle cell trait']],
+ans:'b',
+exp:'<strong>G6PD deficiency:</strong> X-linked. Oxidative stress (sulfa drugs, fava beans, infections) triggers hemolysis. Bite cells, Heinz bodies on smear.',
+kp:'G6PD: oxidative stress triggers hemolysis. Sulfa drugs, fava beans. Bite cells, Heinz bodies.',
+dd:{mechanism:{title:'G6PD Triggers',content:'<h4>Common Triggers</h4><ul><li>Sulfa drugs (TMP-SMX)</li><li>Primaquine</li><li>Dapsone</li><li>Fava beans</li><li>Infections</li></ul>',bw:['X-linked','Oxidative stress','Bite cells, Heinz bodies']}}},
+16:{type:'Leukemia',difficulty:'hard',domains:['diagnosis'],tags:['Step2','Heme'],stem:'An elderly patient has lymphocytosis with smudge cells on peripheral smear. What is the most likely diagnosis?',
+opts:[['a','Acute lymphoblastic leukemia'],['b','Chronic lymphocytic leukemia'],['c','Acute myeloid leukemia'],['d','Chronic myeloid leukemia']],
+ans:'b',
+exp:'<strong>CLL:</strong> Most common adult leukemia in Western world. Mature B-cells, smudge cells classic. Often asymptomatic. Watch and wait if early stage.',
+kp:'CLL: elderly, lymphocytosis, smudge cells. Most common adult leukemia. Watch and wait.',
+dd:{mechanism:{title:'Leukemia Types',content:'<table><tr><th>Type</th><th>Age</th><th>Features</th></tr><tr><td>ALL</td><td>Children</td><td>Blasts, TdT+</td></tr><tr><td>AML</td><td>Adults</td><td>Auer rods</td></tr><tr><td>CLL</td><td>Elderly</td><td>Smudge cells</td></tr><tr><td>CML</td><td>Adults</td><td>BCR-ABL, low LAP</td></tr></table>',bw:['CLL = smudge cells','AML = Auer rods','CML = BCR-ABL']}}},
+17:{type:'Lymphoma',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Heme'],stem:'A young adult has mediastinal mass, fever, night sweats, and Reed-Sternberg cells on biopsy. What is the diagnosis?',
+opts:[['a','Non-Hodgkin lymphoma'],['b','Hodgkin lymphoma'],['c','Thymoma'],['d','Lung cancer']],
+ans:'b',
+exp:'<strong>Hodgkin lymphoma:</strong> Bimodal age (20s and >55). Reed-Sternberg cells pathognomonic. B symptoms (fever, sweats, weight loss). Contiguous spread.',
+kp:'Reed-Sternberg cells = Hodgkin. B symptoms common. Bimodal age. Contiguous spread.',
+dd:{mechanism:{title:'Hodgkin vs Non-Hodgkin',content:'<table><tr><th>Feature</th><th>Hodgkin</th><th>Non-Hodgkin</th></tr><tr><td>Pathology</td><td>Reed-Sternberg</td><td>Various</td></tr><tr><td>Spread</td><td>Contiguous</td><td>Non-contiguous</td></tr><tr><td>B symptoms</td><td>Common</td><td>Variable</td></tr></table>',bw:['Reed-Sternberg cells','Contiguous spread','B symptoms']}}},
+18:{type:'Multiple Myeloma',difficulty:'hard',domains:['diagnosis'],tags:['Step2','Heme'],stem:'An elderly patient has back pain, anemia, hypercalcemia, and elevated creatinine. What test confirms the diagnosis?',
+opts:[['a','Bone marrow biopsy with plasma cells'],['b','Peripheral blood smear'],['c','Chest X-ray'],['d','Liver biopsy']],
+ans:'a',
+exp:'<strong>Multiple myeloma:</strong> CRAB criteria (Calcium, Renal, Anemia, Bone). Confirm with bone marrow biopsy showing >10% plasma cells + M-protein.',
+kp:'CRAB criteria. Bone marrow >10% plasma cells. M-spike on SPEP. Rouleaux formation.',
+dd:{mechanism:{title:'Myeloma CRAB',content:'<h4>CRAB Criteria</h4><ul><li>Calcium elevated</li><li>Renal insufficiency</li><li>Anemia</li><li>Bone lesions (lytic)</li></ul>',bw:['CRAB criteria','>10% plasma cells','M-spike on SPEP']}}},
+19:{type:'Transfusion',difficulty:'medium',domains:['management'],tags:['Step2','Heme'],stem:'A patient develops fever and chills during blood transfusion. What is the first step?',
+opts:[['a','Give acetaminophen and continue transfusion'],['b','Stop the transfusion immediately'],['c','Increase transfusion rate'],['d','Give epinephrine']],
+ans:'b',
+exp:'<strong>Transfusion reaction:</strong> Stop transfusion immediately for any reaction. Then assess severity - febrile non-hemolytic vs acute hemolytic vs allergic.',
+kp:'Stop transfusion first. Then assess. Febrile reactions common but rule out hemolytic.',
+dd:{mechanism:{title:'Transfusion Reactions',content:'<table><tr><th>Type</th><th>Features</th><th>Treatment</th></tr><tr><td>Febrile</td><td>Fever, chills</td><td>Supportive</td></tr><tr><td>Hemolytic</td><td>Fever, back pain, hemoglobinuria</td><td>Stop, fluids, support</td></tr><tr><td>Allergic</td><td>Urticaria to anaphylaxis</td><td>Antihistamines, epi if severe</td></tr></table>',bw:['Stop transfusion first','Back pain = hemolytic','Urticaria = allergic']}}},
+20:{type:'HIT',difficulty:'hard',domains:['diagnosis'],tags:['Step2','Heme'],stem:'A patient on heparin for 7 days develops new thrombocytopenia and DVT. What is the diagnosis?',
+opts:[['a','Heparin-induced thrombocytopenia'],['b','DIC'],['c','ITP'],['d','Drug-induced thrombocytopenia']],
+ans:'a',
+exp:'<strong>HIT:</strong> Platelet drop >50% at 5-10 days on heparin + thrombosis. Paradoxically pro-thrombotic. Stop all heparin, start argatroban or bivalirudin.',
+kp:'HIT: 5-10 days, plt drop >50%, thrombosis. Stop heparin immediately. Use direct thrombin inhibitor.',
+dd:{mechanism:{title:'HIT',content:'<h4>4Ts Score</h4><ul><li>Thrombocytopenia (>50% drop)</li><li>Timing (5-10 days)</li><li>Thrombosis</li><li>Other causes excluded</li></ul>',bw:['5-10 days onset','Platelet drop >50%','Paradoxical thrombosis']}}}
+};
+var answers={1:'a',2:'d',3:'a',4:'a',5:'a',6:'d',7:'b',8:'b',9:'d',10:'b',11:'d',12:'c',13:'b',14:'c',15:'c',16:'d',17:'b',18:'a',19:'c',20:'c'};
+function goPhase(p){if(p<1||p>4)return;phase=p;renderPhase();}
+function renderPhase(){var ph=phases[phase];document.querySelectorAll('.timeline-phase').forEach(function(el,i){el.classList.remove('active','locked');if(i+1===phase)el.classList.add('active');else if(i+1>phase)el.classList.add('locked');});document.getElementById('caseNarrative').innerHTML=ph.narrative;document.getElementById('pearlText').textContent=ph.pearl;var objHtml='<div class="obj-title">🎯 Phase '+phase+' Objectives</div><ul class="obj-list">';ph.objectives.forEach(function(o){objHtml+='<li>'+o+'</li>';});objHtml+='</ul>';document.getElementById('phaseObjectives').innerHTML=objHtml;renderQuestions(ph.qs);}
+function renderQuestions(qIds){var html='';qIds.forEach(function(qid){var q=Qs[qid];if(!q)return;html+='<div class="quiz-card" id="q'+qid+'"><div class="quiz-header"><div class="quiz-num">'+qid+'</div><span class="quiz-type">'+q.type+'</span><div class="quiz-meta">';q.tags.forEach(function(t){html+='<span class="quiz-tag">'+t+'</span>';});html+='<span class="quiz-difficulty '+q.difficulty+'">'+q.difficulty+'</span></div></div>';html+='<div class="quiz-body"><div class="quiz-stem">'+q.stem+'</div><div class="quiz-options">';q.opts.forEach(function(opt){html+='<div class="quiz-option" data-q="'+qid+'" data-opt="'+opt[0]+'" onclick="selectOpt(this)"><div class="option-letter">'+opt[0].toUpperCase()+'</div><div class="option-text">'+opt[1]+'</div></div>';});html+='</div><button class="submit-btn" id="sub'+qid+'" disabled onclick="submitQ('+qid+')">Submit</button><div class="explanation" id="exp'+qid+'"></div></div></div>';});document.getElementById('questionsPanel').innerHTML=html;}
+function selectOpt(el){var qid=el.dataset.q;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.remove('selected');});el.classList.add('selected');state[qid].pick=el.dataset.opt;document.getElementById('sub'+qid).disabled=false;}
+function submitQ(qid){if(state[qid].done)return;state[qid].done=true;var correct=answers[qid],picked=state[qid].pick,isCorrect=picked===correct;state[qid].ok=isCorrect;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.add('disabled');if(o.dataset.opt===correct)o.classList.add('correct');else if(o.dataset.opt===picked&&!isCorrect)o.classList.add('incorrect');});document.getElementById('sub'+qid).style.display='none';var q=Qs[qid],expDiv=document.getElementById('exp'+qid);var expHtml='<div>'+(isCorrect?'✓ Correct!':'✗ Incorrect')+'</div><div>'+q.exp+'</div><div class="keypoint"><span class="keypoint-label">⚡ Key:</span> '+q.kp+'</div>';if(q.dd){expHtml+='<div class="deep-dive"><button class="dd-toggle" onclick="toggleDD(this)">📚 Deep Dive <span>▼</span></button><div class="dd-content">';for(var d in q.dd){expHtml+=q.dd[d].content;if(q.dd[d].bw){expHtml+='<div class="buzzwords">';q.dd[d].bw.forEach(function(b){expHtml+='<span class="buzzword">'+b+'</span>';});expHtml+='</div>';}}expHtml+='</div></div>';}expDiv.innerHTML=expHtml;expDiv.classList.add('visible',isCorrect?'correct':'incorrect');updateProgress();}
+function toggleDD(btn){btn.nextElementSibling.classList.toggle('visible');btn.querySelector('span').textContent=btn.nextElementSibling.classList.contains('visible')?'▲':'▼';}
+function updateProgress(){var done=0;for(var i=1;i<=20;i++)if(state[i].done)done++;document.getElementById('progressFill').style.width=(done/20*100)+'%';document.getElementById('progressCount').textContent=done+'/20';}
+renderPhase();
+</script>
+</body>
+</html>

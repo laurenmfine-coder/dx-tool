@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pediatrics - ReasonDx</title>
+<style>
+:root{--bg-page:#f8fafc;--bg-white:#fff;--bg-subtle:#f1f5f9;--text-primary:#0f172a;--text-secondary:#475569;--border:#e2e8f0;--accent:#ec4899;--accent-light:#fce7f3;--green:#059669;--red:#dc2626;--radius-sm:8px;--radius-lg:16px}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg-page);color:var(--text-primary);line-height:1.6}
+.header{background:linear-gradient(135deg,#ec4899,#db2777);color:#fff;padding:16px 24px}.logo{font-weight:700;font-size:18px}
+.module-header{background:var(--bg-white);border-bottom:1px solid var(--border);padding:24px}
+.module-title{display:flex;align-items:center;gap:16px;max-width:1400px;margin:0 auto}.module-icon{width:56px;height:56px;background:linear-gradient(135deg,#fce7f3,#fbcfe8);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:28px}
+.module-title h1{font-size:26px;font-weight:700}.enhanced-badge{background:linear-gradient(135deg,var(--accent),#db2777);color:#fff;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;margin-left:8px}
+.progress-bar{background:var(--bg-white);border-bottom:1px solid var(--border);padding:12px 24px}.progress-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;gap:16px}
+.progress-track{flex:1;height:8px;background:var(--bg-subtle);border-radius:4px}.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));transition:width .3s}.progress-count{font-size:13px;font-weight:600}
+.timeline-nav{background:var(--bg-white);border-bottom:1px solid var(--border);padding:0 24px}.timeline-inner{max-width:1400px;margin:0 auto;display:flex}
+.timeline-phase{flex:1;padding:16px 8px;cursor:pointer;border-bottom:3px solid transparent;text-align:center}.timeline-phase.active{border-bottom-color:var(--accent)}.timeline-phase.locked{opacity:.4}
+.phase-label{font-size:12px;font-weight:600}.phase-time{font-size:10px;color:var(--text-secondary)}
+.main-container{max-width:1400px;margin:0 auto;padding:24px;display:grid;grid-template-columns:300px 1fr;gap:24px}@media(max-width:900px){.main-container{grid-template-columns:1fr}}
+.card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:16px}.card-header{padding:14px 18px;border-bottom:1px solid var(--border)}.card-title{font-size:13px;font-weight:600}.card-content{padding:16px 18px}.case-narrative{font-size:14px;color:var(--text-secondary)}
+.clinical-pearl{margin-top:12px;padding:12px;background:var(--accent-light);border-radius:var(--radius-sm);border-left:3px solid var(--accent)}.pearl-title{font-size:10px;font-weight:600;color:#db2777}.pearl-text{font-size:11px;color:#9d174d}
+.phase-objectives{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px;margin-bottom:16px}.obj-title{font-size:12px;font-weight:600;color:var(--accent);margin-bottom:8px}.obj-list{list-style:none;font-size:11px}.obj-list li{padding:4px 0 4px 16px;position:relative}.obj-list li::before{content:'→';position:absolute;left:0;color:var(--accent)}
+.quiz-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:16px}.quiz-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}.quiz-num{width:28px;height:28px;background:linear-gradient(135deg,var(--accent),#db2777);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}.quiz-type{font-size:12px;font-weight:600}.quiz-meta{margin-left:auto;display:flex;gap:6px}.quiz-tag{font-size:9px;padding:2px 6px;background:var(--bg-subtle);border-radius:4px}.quiz-difficulty{font-size:9px;padding:2px 6px;border-radius:4px}.quiz-difficulty.medium{background:#fef3c7;color:#92400e}.quiz-difficulty.hard{background:#fee2e2;color:#991b1b}
+.quiz-body{padding:16px}.quiz-stem{font-size:14px;font-weight:500;margin-bottom:14px}.quiz-options{display:flex;flex-direction:column;gap:8px}.quiz-option{display:flex;gap:12px;padding:12px 14px;background:var(--bg-subtle);border:2px solid transparent;border-radius:var(--radius-sm);cursor:pointer}.quiz-option.selected{border-color:var(--accent)}.quiz-option.correct{border-color:var(--green);background:rgba(5,150,105,.08)}.quiz-option.incorrect{border-color:var(--red);background:rgba(220,38,38,.08)}.quiz-option.disabled{pointer-events:none;opacity:.7}
+.option-letter{width:24px;height:24px;border:2px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}.quiz-option.selected .option-letter{border-color:var(--accent);color:var(--accent)}.quiz-option.correct .option-letter{background:var(--green);color:#fff;border-color:var(--green)}.quiz-option.incorrect .option-letter{background:var(--red);color:#fff;border-color:var(--red)}
+.submit-btn{margin-top:14px;width:100%;padding:12px;background:linear-gradient(135deg,var(--accent),#db2777);color:#fff;border:none;border-radius:var(--radius-sm);font-weight:600;cursor:pointer}.submit-btn:disabled{background:var(--bg-subtle);color:var(--text-secondary)}
+.explanation{margin-top:16px;padding:16px;border-radius:var(--radius-sm);display:none;font-size:13px}.explanation.visible{display:block}.explanation.correct{background:#f0fdf4;border:1px solid #bbf7d0}.explanation.incorrect{background:#fef2f2;border:1px solid #fecaca}
+.keypoint{margin-top:10px;padding:10px;background:rgba(236,72,153,.1);border-radius:6px;font-size:12px}.keypoint-label{font-weight:600;color:var(--accent);font-size:10px}
+.deep-dive{margin-top:14px;border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden}.dd-toggle{width:100%;padding:10px 14px;background:var(--bg-subtle);border:none;cursor:pointer;display:flex;justify-content:space-between;font-size:12px;font-weight:600}.dd-content{display:none;padding:14px;font-size:12px;max-height:500px;overflow-y:auto}.dd-content.visible{display:block}.dd-content h4{font-size:13px;font-weight:600;margin:12px 0 8px;color:var(--accent)}.dd-content h4:first-child{margin-top:0}.dd-content ul{margin:8px 0;padding-left:20px}.dd-content li{margin:4px 0}.dd-content table{width:100%;border-collapse:collapse;margin:10px 0;font-size:11px}.dd-content th,.dd-content td{border:1px solid var(--border);padding:6px 8px}.dd-content th{background:var(--bg-subtle)}.buzzwords{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px}.buzzword{font-size:10px;padding:4px 8px;background:#fef3c7;border-radius:4px;color:#92400e;font-weight:500}
+</style>
+</head>
+<body>
+<header class="header"><div class="logo">👶 ReasonDx — Pediatrics</div></header>
+<div class="module-header"><div class="module-title"><div class="module-icon">👶</div><div><h1>Pediatrics<span class="enhanced-badge">✨ MECHANISM-ENHANCED</span></h1><p>Well-Child Care, Common Illnesses, and Pediatric Emergencies</p></div></div></div>
+<div class="progress-bar"><div class="progress-inner"><span style="font-size:12px;color:var(--text-secondary)">Progress</span><div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div><span class="progress-count" id="progressCount">0/20</span></div></div>
+<nav class="timeline-nav"><div class="timeline-inner">
+<div class="timeline-phase active" onclick="goPhase(1)"><div class="phase-label">👶 Well-Child</div><div class="phase-time">Development & Prevention</div></div>
+<div class="timeline-phase locked" onclick="goPhase(2)"><div class="phase-label">🤒 Common Illness</div><div class="phase-time">Fever & Infections</div></div>
+<div class="timeline-phase locked" onclick="goPhase(3)"><div class="phase-label">🫁 Respiratory</div><div class="phase-time">Croup, Bronchiolitis</div></div>
+<div class="timeline-phase locked" onclick="goPhase(4)"><div class="phase-label">🚨 Emergencies</div><div class="phase-time">Critical Care</div></div>
+</div></nav>
+<div class="main-container">
+<aside>
+<div class="phase-objectives" id="phaseObjectives"></div>
+<div class="card"><div class="card-header"><div class="card-title">📋 Clinical Snapshot</div></div><div class="card-content"><div class="case-narrative" id="caseNarrative"></div><div class="clinical-pearl"><div class="pearl-title">💡 Peds Pearl</div><div class="pearl-text" id="pearlText"></div></div></div></div>
+</aside>
+<main id="questionsPanel"></main>
+</div>
+<script>
+var phase=1,state={};for(var i=1;i<=20;i++)state[i]={pick:null,done:false,ok:false};
+var phases={
+1:{qs:[1,2,3,4,5],narrative:'<strong>Emma</strong>, 6-month-old female, presents for well-child visit. Parents ask about developmental milestones, feeding, and vaccinations.',pearl:'6 months: sits with support, babbles, transfers objects. Vaccines: DTaP, IPV, Hib, PCV, RV, HepB. Introduce solids around 6 months.',objectives:['Know developmental milestones','Understand vaccine schedule','Screen for developmental delays','Counsel on nutrition'],refs:[{t:'AAP Bright Futures',u:'https://brightfutures.aap.org/'}]},
+2:{qs:[6,7,8,9,10],narrative:'<strong>Liam</strong>, 2-year-old male, presents with fever, rhinorrhea, and fussiness for 2 days. Need to evaluate for serious bacterial infection.',pearl:'Fever without source: age matters. <28 days: full sepsis workup. 29-60 days: Rochester/Philadelphia criteria. >60 days: clinical judgment.',objectives:['Evaluate pediatric fever','Know when to do sepsis workup','Identify serious bacterial infection','Manage viral illness'],refs:[{t:'Pediatric Fever Guidelines',u:'https://www.aap.org/'}]},
+3:{qs:[11,12,13,14,15],narrative:'<strong>Sophia</strong>, 18-month-old, presents with barky cough, stridor, and mild respiratory distress. Classic croup presentation.',pearl:'Croup: 6mo-3yr, barky cough, inspiratory stridor, steeple sign. Dexamethasone for all. Nebulized epinephrine if moderate-severe.',objectives:['Diagnose croup vs epiglottitis','Manage upper airway obstruction','Know bronchiolitis treatment','Recognize respiratory emergencies'],refs:[{t:'Croup Management',u:'https://www.aap.org/'}]},
+4:{qs:[16,17,18,19,20],narrative:'<strong>Noah</strong>, 4-year-old, presents obtunded after ingesting grandparents medications. Pediatric emergency requiring rapid assessment.',pearl:'Pediatric emergencies: ABC approach. Weight-based dosing critical. Common toxidromes: anticholinergic, cholinergic, opioid, sympathomimetic.',objectives:['Apply pediatric ABCD assessment','Calculate weight-based dosing','Recognize pediatric toxidromes','Manage pediatric resuscitation'],refs:[{t:'PALS Guidelines',u:'https://www.heart.org/'}]}
+};
+var Qs={
+1:{type:'Milestones',difficulty:'medium',domains:['development'],tags:['Step2','Peds'],stem:'A 9-month-old cannot sit unsupported and does not babble. What is the appropriate next step?',
+opts:[['a','Reassure parents this is normal variation'],['b','Refer for developmental evaluation'],['c','Repeat assessment at 12 months'],['d','Start physical therapy immediately']],
+ans:'b',
+exp:'<strong>Developmental delay:</strong> By 9 months, should sit unsupported (6mo milestone) and babble. Missing multiple milestones warrants developmental evaluation.',
+kp:'Sitting unsupported by 6-7 months. Babbling by 6-9 months. Red flags warrant evaluation.',
+dd:{mechanism:{title:'9-Month Milestones',content:'<ul><li>Sits unsupported (by 6mo)</li><li>Babbles (mama, dada nonspecific)</li><li>Stranger anxiety</li><li>Pincer grasp developing</li></ul>',bw:['Sits by 6-7 months','Babbles by 9 months','Stranger anxiety normal']}}},
+2:{type:'Vaccines',difficulty:'medium',domains:['prevention'],tags:['Step2','Peds'],stem:'Which vaccines are given at the 2-month well-child visit?',
+opts:[['a','MMR, varicella, and hepatitis A'],['b','DTaP, IPV, Hib, PCV13, RV, and HepB'],['c','Tdap, meningococcal, and HPV'],['d','Influenza and pneumococcal only']],
+ans:'b',
+exp:'<strong>2-month vaccines:</strong> DTaP, IPV, Hib, PCV13, Rotavirus, HepB (if not given earlier). MMR/varicella at 12 months.',
+kp:'2, 4, 6 months: DTaP, IPV, Hib, PCV, RV. HepB at birth, 1-2mo, 6mo. MMR/Var at 12mo.',
+dd:{mechanism:{title:'Vaccine Schedule',content:'<table><tr><th>Age</th><th>Vaccines</th></tr><tr><td>Birth</td><td>HepB</td></tr><tr><td>2,4,6 mo</td><td>DTaP, IPV, Hib, PCV, RV</td></tr><tr><td>12-15 mo</td><td>MMR, Var, Hib, PCV</td></tr></table>',bw:['DTaP at 2,4,6,15-18mo, 4-6yr','MMR at 12-15mo','IPV at 2,4,6-18mo, 4-6yr']}}},
+3:{type:'Growth',difficulty:'medium',domains:['development'],tags:['Step2','Peds'],stem:'A breastfed infant has dropped from 50th to 10th percentile for weight over 3 months. What should be assessed?',
+opts:[['a','This is normal for breastfed infants'],['b','Feeding adequacy and technique'],['c','Immediately switch to formula'],['d','Order genetic testing first']],
+ans:'b',
+exp:'<strong>Failure to thrive:</strong> Crossing two major percentile lines is concerning. Assess feeding (frequency, duration, latch), wet diapers, maternal milk supply.',
+kp:'Crossing 2 percentile lines = evaluate. Assess feeding first. Most FTT is inadequate intake.',
+dd:{mechanism:{title:'FTT Evaluation',content:'<h4>Feeding Assessment</h4><ul><li>Frequency and duration</li><li>Latch quality</li><li>Wet diapers (6+/day)</li><li>Maternal supply</li></ul>',bw:['Crossing percentiles','Assess intake first','Most FTT = inadequate intake']}}},
+4:{type:'Screening',difficulty:'medium',domains:['prevention'],tags:['Step2','Peds'],stem:'At what age is autism spectrum disorder screening recommended?',
+opts:[['a','6 months of age'],['b','18 and 24 months of age'],['c','4 years old at school entry'],['d','Only if parents express concerns']],
+ans:'b',
+exp:'<strong>ASD screening:</strong> M-CHAT-R at 18 and 24 months per AAP. Also screen if parental concern or risk factors at any visit.',
+kp:'Screen at 18 and 24 months (M-CHAT-R). Developmental surveillance at every visit.',
+dd:{mechanism:{title:'ASD Red Flags',content:'<ul><li>No babbling by 12 months</li><li>No pointing/waving by 12 months</li><li>No single words by 16 months</li><li>No 2-word phrases by 24 months</li><li>Any language regression</li></ul>',bw:['M-CHAT at 18, 24 months','Early intervention key','Regression is red flag']}}},
+5:{type:'Lead Screening',difficulty:'medium',domains:['prevention'],tags:['Step2','Peds'],stem:'When should universal lead screening be performed?',
+opts:[['a','At birth only'],['b','At 12 and 24 months of age'],['c','At 5 years old before school'],['d','Only in high-risk populations']],
+ans:'b',
+exp:'<strong>Lead screening:</strong> Varies by state, but generally at 12 and 24 months in high-risk areas. Risk assessment at each visit. Treat if BLL ≥45 μg/dL.',
+kp:'Screen at 12 and 24 months in high-risk areas. BLL ≥5 requires monitoring. ≥45 needs chelation.',
+dd:{mechanism:{title:'Lead Levels',content:'<table><tr><th>BLL (μg/dL)</th><th>Action</th></tr><tr><td>≥5</td><td>Monitor, reduce exposure</td></tr><tr><td>≥45</td><td>Chelation therapy</td></tr><tr><td>≥70</td><td>Emergent chelation</td></tr></table>',bw:['Screen at 12, 24 months','≥5 elevated','≥45 chelation']}}},
+6:{type:'Fever Evaluation',difficulty:'hard',domains:['diagnosis'],tags:['Step2','Peds'],stem:'A 3-week-old with fever 38.5°C appears well. What is the appropriate management?',
+opts:[['a','Reassurance and outpatient follow-up'],['b','Oral antibiotics and discharge home'],['c','Full sepsis workup and admission'],['d','Acetaminophen and watch for 24 hours']],
+ans:'c',
+exp:'<strong>Neonate fever:</strong> <28 days with fever = full sepsis workup (CBC, blood cx, urine, LP) and admission for empiric antibiotics. Cannot exclude serious bacterial infection clinically.',
+kp:'<28 days + fever = full sepsis workup + admit. 3-5% have serious bacterial infection.',
+dd:{mechanism:{title:'Fever by Age',content:'<table><tr><th>Age</th><th>Management</th></tr><tr><td><28 days</td><td>Full sepsis workup, admit</td></tr><tr><td>29-60 days</td><td>Risk stratify (Rochester)</td></tr><tr><td>3-36 months</td><td>Clinical assessment</td></tr></table>',bw:['<28 days always admit','29-60 days stratify','LP for neonates']}}},
+7:{type:'Otitis Media',difficulty:'medium',domains:['management'],tags:['Step2','Peds'],stem:'A 2-year-old with acute otitis media and mild symptoms. What is appropriate initial management?',
+opts:[['a','Immediate high-dose amoxicillin'],['b','Observation for 48-72 hours without antibiotics'],['c','Tympanostomy tube placement'],['d','IV antibiotics and admission']],
+ans:'b',
+exp:'<strong>AOM management:</strong> Observation option for ≥6 months with mild symptoms, unilateral, non-severe. Treat if <6mo, severe, bilateral, or fails observation.',
+kp:'Observation option for mild, unilateral AOM in children ≥6 months. Amoxicillin if treating.',
+dd:{mechanism:{title:'AOM Treatment',content:'<h4>Treat Immediately If:</h4><ul><li>Age <6 months</li><li>Bilateral AOM in 6-23 mo</li><li>Severe symptoms</li><li>Otorrhea</li></ul><h4>May Observe If:</h4><ul><li>≥6 months, mild, unilateral</li></ul>',bw:['Amoxicillin 80-90mg/kg/day','<6 months always treat','Observation option exists']}}},
+8:{type:'Pharyngitis',difficulty:'medium',domains:['management'],tags:['Step2','Peds'],stem:'A 7-year-old has sore throat, fever, and tonsillar exudates. Rapid strep is positive. What is the treatment?',
+opts:[['a','Symptomatic treatment only'],['b','Penicillin or amoxicillin for 10 days'],['c','Azithromycin for 3 days'],['d','Oral steroids for inflammation']],
+ans:'b',
+exp:'<strong>GAS pharyngitis:</strong> Penicillin V or amoxicillin x10 days is first-line. Prevents rheumatic fever. Azithromycin only if penicillin allergic.',
+kp:'Amoxicillin or penicillin x10 days. Prevents rheumatic fever. Azithromycin for allergy only.',
+dd:{mechanism:{title:'Strep Pharyngitis',content:'<h4>Treatment</h4><ul><li>Amoxicillin 50mg/kg/day x 10 days</li><li>Or Pen V x 10 days</li><li>Azithromycin if allergic</li></ul><h4>Centor Criteria</h4><ul><li>Fever, exudates, tender nodes, no cough</li></ul>',bw:['10-day course','Prevents rheumatic fever','Test before treating']}}},
+9:{type:'UTI',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Peds'],stem:'A 6-month-old girl with fever has pyuria and positive urine culture. What additional workup is needed?',
+opts:[['a','No imaging needed for first UTI'],['b','Renal and bladder ultrasound'],['c','Immediate VCUG in all cases'],['d','CT scan of abdomen and pelvis']],
+ans:'b',
+exp:'<strong>Pediatric UTI:</strong> Renal/bladder US for all children 2-24 months with first febrile UTI. VCUG if US abnormal or recurrent UTI.',
+kp:'US for first febrile UTI (2-24 months). VCUG if abnormal US or recurrent UTI.',
+dd:{mechanism:{title:'UTI Workup',content:'<h4>First Febrile UTI (2-24mo)</h4><ul><li>Renal/bladder ultrasound</li><li>VCUG if US abnormal</li></ul><h4>Recurrent UTI</h4><ul><li>VCUG recommended</li><li>Evaluate for VUR</li></ul>',bw:['US for first UTI','VCUG if abnormal','VUR prophylaxis if grade III-V']}}},
+10:{type:'Gastroenteritis',difficulty:'medium',domains:['management'],tags:['Step2','Peds'],stem:'A toddler with viral gastroenteritis has mild dehydration. What is the preferred treatment?',
+opts:[['a','IV fluid bolus and admission'],['b','Oral rehydration solution (ORS)'],['c','Clear fluids like apple juice'],['d','Anti-diarrheal medications']],
+ans:'b',
+exp:'<strong>Dehydration management:</strong> Mild-moderate: ORS (50-100 mL/kg over 4h). Severe: IV fluids. Resume age-appropriate diet early. Avoid anti-diarrheals in children.',
+kp:'ORS for mild-moderate dehydration. Continue breastfeeding. Resume diet early. No anti-diarrheals.',
+dd:{mechanism:{title:'Dehydration',content:'<table><tr><th>Severity</th><th>Treatment</th></tr><tr><td>Mild (<5%)</td><td>ORS 50mL/kg/4h</td></tr><tr><td>Moderate (5-10%)</td><td>ORS 100mL/kg/4h</td></tr><tr><td>Severe (>10%)</td><td>IV fluids</td></tr></table>',bw:['ORS first-line','Continue breastfeeding','Early diet resumption']}}},
+11:{type:'Croup',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Peds'],stem:'A 2-year-old with barky cough, hoarseness, and inspiratory stridor. What is the most likely diagnosis?',
+opts:[['a','Epiglottitis with bacterial infection'],['b','Viral croup (laryngotracheobronchitis)'],['c','Bronchiolitis from RSV'],['d','Bacterial tracheitis']],
+ans:'b',
+exp:'<strong>Croup:</strong> Parainfluenza virus most common. Age 6mo-3yr. Barky cough, inspiratory stridor, hoarseness. "Steeple sign" on X-ray (subglottic narrowing).',
+kp:'Parainfluenza most common. Barky cough + stridor. Steeple sign on X-ray.',
+dd:{mechanism:{title:'Croup vs Epiglottitis',content:'<table><tr><th>Feature</th><th>Croup</th><th>Epiglottitis</th></tr><tr><td>Age</td><td>6mo-3yr</td><td>Any (rare now)</td></tr><tr><td>Cough</td><td>Barky</td><td>Minimal</td></tr><tr><td>Drooling</td><td>No</td><td>Yes</td></tr><tr><td>Toxic</td><td>No</td><td>Yes</td></tr></table>',bw:['Parainfluenza virus','Steeple sign','6mo-3yr peak']}}},
+12:{type:'Croup Management',difficulty:'medium',domains:['management'],tags:['Step2','Peds'],stem:'A child with croup has stridor at rest but no respiratory distress. What is the initial treatment?',
+opts:[['a','Observation only without medications'],['b','Dexamethasone (single dose)'],['c','Racemic epinephrine immediately'],['d','Intubation for airway protection']],
+ans:'b',
+exp:'<strong>Croup treatment:</strong> Dexamethasone (0.6 mg/kg, max 10mg) for all croup (even mild). Add nebulized epinephrine for moderate-severe (stridor at rest with distress).',
+kp:'Dexamethasone for ALL croup. Epinephrine for moderate-severe. Observe 3-4h after epi.',
+dd:{mechanism:{title:'Croup Treatment',content:'<h4>All Cases</h4><ul><li>Dexamethasone 0.6mg/kg PO/IM</li><li>Single dose effective</li></ul><h4>Moderate-Severe</h4><ul><li>Add nebulized epinephrine</li><li>Observe 3-4 hours after</li></ul>',bw:['Dex for all','Epi for moderate-severe','Observe after epi']}}},
+13:{type:'Bronchiolitis',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Peds'],stem:'A 4-month-old with wheezing, nasal congestion, and hypoxia after URI symptoms. What is the most likely diagnosis?',
+opts:[['a','Viral croup'],['b','Bronchiolitis (likely RSV)'],['c','Asthma exacerbation'],['d','Bacterial pneumonia']],
+ans:'b',
+exp:'<strong>Bronchiolitis:</strong> RSV most common. Age <2 years. Starts with URI, then wheezing, crackles, hypoxia. Peak incidence 2-6 months.',
+kp:'RSV most common cause. Age <2 years. Wheezing + hypoxia after URI prodrome.',
+dd:{mechanism:{title:'Bronchiolitis',content:'<h4>Features</h4><ul><li>Age <2 years (peak 2-6mo)</li><li>URI prodrome</li><li>Wheezing, crackles</li><li>Hypoxia</li></ul><h4>RSV Testing</h4><ul><li>Not required for management</li><li>May help cohorting</li></ul>',bw:['RSV most common','Age <2 years','URI prodrome']}}},
+14:{type:'Bronchiolitis Rx',difficulty:'medium',domains:['management'],tags:['Step2','Peds'],stem:'What is the recommended treatment for bronchiolitis?',
+opts:[['a','Bronchodilators and systemic steroids'],['b','Supportive care with oxygen and hydration'],['c','Antibiotics for bacterial superinfection'],['d','Inhaled hypertonic saline routinely']],
+ans:'b',
+exp:'<strong>Bronchiolitis treatment:</strong> Supportive care only. O2 if SpO2 <90%, hydration, suctioning. Bronchodilators, steroids, and antibiotics NOT recommended.',
+kp:'Supportive care only. No bronchodilators, no steroids. O2 if SpO2 <90%.',
+dd:{mechanism:{title:'Bronchiolitis Rx',content:'<h4>Recommended</h4><ul><li>Supplemental O2 if SpO2 <90%</li><li>Hydration (oral or IV)</li><li>Nasal suctioning</li></ul><h4>NOT Recommended</h4><ul><li>Bronchodilators</li><li>Steroids</li><li>Antibiotics</li></ul>',bw:['Supportive care only','No bronchodilators','No steroids']}}},
+15:{type:'Asthma',difficulty:'medium',domains:['management'],tags:['Step2','Peds'],stem:'A 6-year-old with asthma exacerbation has SpO2 88% and severe distress. What is immediate treatment?',
+opts:[['a','Oral steroids and discharge home'],['b','Albuterol nebulizers, oxygen, and systemic steroids'],['c','Inhaled corticosteroids only'],['d','Observation without bronchodilators']],
+ans:'b',
+exp:'<strong>Asthma exacerbation:</strong> Continuous/frequent albuterol, supplemental O2, systemic corticosteroids (oral as effective as IV). Add ipratropium for severe.',
+kp:'Albuterol + oxygen + steroids for acute exacerbation. Ipratropium for severe. Oral steroids = IV.',
+dd:{mechanism:{title:'Asthma Exacerbation',content:'<h4>Treatment</h4><ul><li>Albuterol nebulizer q20min or continuous</li><li>Oxygen to maintain SpO2 >92%</li><li>Systemic corticosteroids</li><li>Ipratropium for severe</li></ul>',bw:['Albuterol + O2 + steroids','Ipratropium if severe','Oral steroids effective']}}},
+16:{type:'PALS',difficulty:'hard',domains:['emergency'],tags:['Step2','Peds'],stem:'An unresponsive child has no pulse. What is the correct compression to ventilation ratio for single rescuer CPR?',
+opts:[['a','15:2 compressions to ventilations'],['b','30:2 compressions to ventilations'],['c','Continuous compressions without ventilation'],['d','5:1 compressions to ventilations']],
+ans:'b',
+exp:'<strong>Pediatric CPR:</strong> Single rescuer: 30:2. Two rescuers: 15:2. Compression depth: 1/3 chest depth. Rate: 100-120/min.',
+kp:'Single rescuer 30:2, two rescuers 15:2. Depth 1/3 chest. Rate 100-120/min.',
+dd:{mechanism:{title:'Pediatric BLS',content:'<table><tr><th>Rescuers</th><th>Ratio</th></tr><tr><td>Single</td><td>30:2</td></tr><tr><td>Two</td><td>15:2</td></tr></table><h4>Compressions</h4><ul><li>Depth: 1/3 chest depth</li><li>Rate: 100-120/min</li></ul>',bw:['30:2 single rescuer','15:2 two rescuers','Depth 1/3 chest']}}},
+17:{type:'Fluid Bolus',difficulty:'medium',domains:['emergency'],tags:['Step2','Peds'],stem:'A child in septic shock needs fluid resuscitation. What is the standard bolus?',
+opts:[['a','10 mL/kg over 1 hour'],['b','20 mL/kg over 5-10 minutes'],['c','40 mL/kg over 4 hours'],['d','5 mL/kg over 30 minutes']],
+ans:'b',
+exp:'<strong>Pediatric fluid bolus:</strong> 20 mL/kg crystalloid over 5-10 minutes. May repeat up to 60 mL/kg in first hour. Reassess after each bolus.',
+kp:'20 mL/kg bolus, may repeat x3 in first hour. Use isotonic crystalloid. Reassess frequently.',
+dd:{mechanism:{title:'Septic Shock',content:'<h4>Fluid Resuscitation</h4><ul><li>20 mL/kg bolus x 3 (60 mL/kg total)</li><li>Over 5-10 minutes each</li><li>Isotonic crystalloid</li></ul><h4>Vasopressors</h4><ul><li>If fluid-refractory</li><li>Epinephrine or norepinephrine</li></ul>',bw:['20 mL/kg bolus','Up to 60 mL/kg first hour','Reassess after each']}}},
+18:{type:'Intussusception',difficulty:'hard',domains:['diagnosis'],tags:['Step2','Peds'],stem:'A 9-month-old with intermittent crying, vomiting, and "currant jelly" stool. What is the diagnosis?',
+opts:[['a','Viral gastroenteritis'],['b','Intussusception'],['c','Meckel diverticulum'],['d','Pyloric stenosis']],
+ans:'b',
+exp:'<strong>Intussusception:</strong> Peak 6-36 months. Classic triad: colicky abdominal pain, vomiting, currant jelly stool (late). Sausage-shaped mass. US diagnostic, air enema therapeutic.',
+kp:'Colicky pain + currant jelly stool = intussusception. US target sign. Air enema to reduce.',
+dd:{mechanism:{title:'Intussusception',content:'<h4>Classic Features</h4><ul><li>Age 6-36 months</li><li>Colicky pain (drawing up legs)</li><li>Vomiting</li><li>Currant jelly stool (late)</li></ul><h4>Diagnosis/Treatment</h4><ul><li>US: target sign</li><li>Air enema reduction</li></ul>',bw:['Peak 6-36 months','Target sign on US','Air enema treatment']}}},
+19:{type:'Pyloric Stenosis',difficulty:'hard',domains:['diagnosis'],tags:['Step2','Peds'],stem:'A 4-week-old has projectile non-bilious vomiting after feeds and appears hungry. What is the likely diagnosis?',
+opts:[['a','GERD with reflux'],['b','Pyloric stenosis'],['c','Malrotation with volvulus'],['d','Intussusception']],
+ans:'b',
+exp:'<strong>Pyloric stenosis:</strong> 3-6 weeks of age. Projectile, non-bilious vomiting. Hungry after vomiting. Olive-shaped mass. Hypochloremic, hypokalemic metabolic alkalosis.',
+kp:'3-6 weeks, projectile non-bilious vomiting, hungry after. Olive mass. Metabolic alkalosis.',
+dd:{mechanism:{title:'Pyloric Stenosis',content:'<h4>Features</h4><ul><li>Age 3-6 weeks</li><li>Projectile, non-bilious vomiting</li><li>Hungry after vomiting</li><li>Olive-shaped mass (RUQ)</li></ul><h4>Labs</h4><ul><li>Hypochloremic</li><li>Hypokalemic</li><li>Metabolic alkalosis</li></ul>',bw:['3-6 weeks old','Non-bilious','Olive mass','Metabolic alkalosis']}}},
+20:{type:'Toxicology',difficulty:'hard',domains:['emergency'],tags:['Step2','Peds'],stem:'A toddler presents with altered mental status, pinpoint pupils, and respiratory depression. What is the antidote?',
+opts:[['a','Flumazenil'],['b','Naloxone'],['c','N-acetylcysteine'],['d','Atropine']],
+ans:'b',
+exp:'<strong>Opioid toxidrome:</strong> CNS depression, miosis, respiratory depression. Antidote: naloxone. Start 0.1 mg/kg IV, may repeat.',
+kp:'Opioid triad: CNS depression, miosis, respiratory depression. Naloxone is antidote.',
+dd:{mechanism:{title:'Toxidromes',content:'<table><tr><th>Toxidrome</th><th>Features</th><th>Antidote</th></tr><tr><td>Opioid</td><td>Miosis, resp depression</td><td>Naloxone</td></tr><tr><td>Anticholinergic</td><td>Mydriasis, dry, hot</td><td>Physostigmine</td></tr><tr><td>Cholinergic</td><td>SLUDGE</td><td>Atropine</td></tr></table>',bw:['Opioid = miosis','Anticholinergic = mydriasis','SLUDGE = cholinergic']}}}
+};
+var answers={1:'d',2:'c',3:'c',4:'a',5:'b',6:'d',7:'c',8:'a',9:'c',10:'a',11:'b',12:'b',13:'b',14:'a',15:'a',16:'d',17:'d',18:'b',19:'c',20:'d'};
+function goPhase(p){if(p<1||p>4)return;phase=p;renderPhase();}
+function renderPhase(){var ph=phases[phase];document.querySelectorAll('.timeline-phase').forEach(function(el,i){el.classList.remove('active','locked');if(i+1===phase)el.classList.add('active');else if(i+1>phase)el.classList.add('locked');});document.getElementById('caseNarrative').innerHTML=ph.narrative;document.getElementById('pearlText').textContent=ph.pearl;var objHtml='<div class="obj-title">🎯 Phase '+phase+' Objectives</div><ul class="obj-list">';ph.objectives.forEach(function(o){objHtml+='<li>'+o+'</li>';});objHtml+='</ul>';if(ph.refs){objHtml+='<div style="margin-top:12px;padding-top:10px;border-top:1px dashed #e2e8f0"><div style="font-size:10px;font-weight:600;color:#64748b;margin-bottom:6px">📚 References</div>';ph.refs.forEach(function(r){objHtml+='<a href="'+r.u+'" target="_blank" style="font-size:10px;color:#ec4899;text-decoration:none;display:block;margin:3px 0">'+r.t+'</a>';});objHtml+='</div>';}document.getElementById('phaseObjectives').innerHTML=objHtml;renderQuestions(ph.qs);}
+function renderQuestions(qIds){var html='';qIds.forEach(function(qid){var q=Qs[qid];if(!q)return;html+='<div class="quiz-card" id="q'+qid+'"><div class="quiz-header"><div class="quiz-num">'+qid+'</div><span class="quiz-type">'+q.type+'</span><div class="quiz-meta">';q.tags.forEach(function(t){html+='<span class="quiz-tag">'+t+'</span>';});html+='<span class="quiz-difficulty '+q.difficulty+'">'+q.difficulty+'</span></div></div>';html+='<div class="quiz-body"><div class="quiz-stem">'+q.stem+'</div><div class="quiz-options">';q.opts.forEach(function(opt){html+='<div class="quiz-option" data-q="'+qid+'" data-opt="'+opt[0]+'" onclick="selectOpt(this)"><div class="option-letter">'+opt[0].toUpperCase()+'</div><div class="option-text">'+opt[1]+'</div></div>';});html+='</div><button class="submit-btn" id="sub'+qid+'" disabled onclick="submitQ('+qid+')">Submit</button><div class="explanation" id="exp'+qid+'"></div></div></div>';});document.getElementById('questionsPanel').innerHTML=html;}
+function selectOpt(el){var qid=el.dataset.q;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.remove('selected');});el.classList.add('selected');state[qid].pick=el.dataset.opt;document.getElementById('sub'+qid).disabled=false;}
+function submitQ(qid){if(state[qid].done)return;state[qid].done=true;var correct=answers[qid],picked=state[qid].pick,isCorrect=picked===correct;state[qid].ok=isCorrect;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.add('disabled');if(o.dataset.opt===correct)o.classList.add('correct');else if(o.dataset.opt===picked&&!isCorrect)o.classList.add('incorrect');});document.getElementById('sub'+qid).style.display='none';var q=Qs[qid],expDiv=document.getElementById('exp'+qid);var expHtml='<div>'+(isCorrect?'✓ Correct!':'✗ Incorrect')+'</div><div>'+q.exp+'</div><div class="keypoint"><span class="keypoint-label">⚡ Key:</span> '+q.kp+'</div>';if(q.dd){expHtml+='<div class="deep-dive"><button class="dd-toggle" onclick="toggleDD(this)">📚 Deep Dive <span>▼</span></button><div class="dd-content">';for(var d in q.dd){expHtml+=q.dd[d].content;if(q.dd[d].bw){expHtml+='<div class="buzzwords">';q.dd[d].bw.forEach(function(b){expHtml+='<span class="buzzword">'+b+'</span>';});expHtml+='</div>';}}expHtml+='</div></div>';}expDiv.innerHTML=expHtml;expDiv.classList.add('visible',isCorrect?'correct':'incorrect');updateProgress();}
+function toggleDD(btn){btn.nextElementSibling.classList.toggle('visible');btn.querySelector('span').textContent=btn.nextElementSibling.classList.contains('visible')?'▲':'▼';}
+function updateProgress(){var done=0;for(var i=1;i<=20;i++)if(state[i].done)done++;document.getElementById('progressFill').style.width=(done/20*100)+'%';document.getElementById('progressCount').textContent=done+'/20';}
+renderPhase();
+</script>
+</body>
+</html>

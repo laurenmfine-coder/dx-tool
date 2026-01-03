@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OB/GYN - ReasonDx</title>
+<style>
+:root{--bg-page:#f8fafc;--bg-white:#fff;--bg-subtle:#f1f5f9;--text-primary:#0f172a;--text-secondary:#475569;--border:#e2e8f0;--accent:#be185d;--accent-light:#fce7f3;--green:#059669;--red:#dc2626;--radius-sm:8px;--radius-lg:16px}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg-page);color:var(--text-primary);line-height:1.6}
+.header{background:linear-gradient(135deg,#be185d,#9d174d);color:#fff;padding:16px 24px}.logo{font-weight:700;font-size:18px}
+.module-header{background:var(--bg-white);border-bottom:1px solid var(--border);padding:24px}.module-title{display:flex;align-items:center;gap:16px;max-width:1400px;margin:0 auto}.module-icon{width:56px;height:56px;background:linear-gradient(135deg,#fce7f3,#fbcfe8);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:28px}.module-title h1{font-size:26px;font-weight:700}.enhanced-badge{background:linear-gradient(135deg,var(--accent),#9d174d);color:#fff;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;margin-left:8px}
+.progress-bar{background:var(--bg-white);border-bottom:1px solid var(--border);padding:12px 24px}.progress-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;gap:16px}.progress-track{flex:1;height:8px;background:var(--bg-subtle);border-radius:4px}.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));transition:width .3s}.progress-count{font-size:13px;font-weight:600}
+.timeline-nav{background:var(--bg-white);border-bottom:1px solid var(--border);padding:0 24px}.timeline-inner{max-width:1400px;margin:0 auto;display:flex}.timeline-phase{flex:1;padding:16px 8px;cursor:pointer;border-bottom:3px solid transparent;text-align:center}.timeline-phase.active{border-bottom-color:var(--accent)}.timeline-phase.locked{opacity:.4}.phase-label{font-size:12px;font-weight:600}.phase-time{font-size:10px;color:var(--text-secondary)}
+.main-container{max-width:1400px;margin:0 auto;padding:24px;display:grid;grid-template-columns:300px 1fr;gap:24px}@media(max-width:900px){.main-container{grid-template-columns:1fr}}
+.card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:16px}.card-header{padding:14px 18px;border-bottom:1px solid var(--border)}.card-title{font-size:13px;font-weight:600}.card-content{padding:16px 18px}.case-narrative{font-size:14px;color:var(--text-secondary)}
+.clinical-pearl{margin-top:12px;padding:12px;background:var(--accent-light);border-radius:var(--radius-sm);border-left:3px solid var(--accent)}.pearl-title{font-size:10px;font-weight:600;color:#9d174d}.pearl-text{font-size:11px;color:#831843}
+.phase-objectives{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px;margin-bottom:16px}.obj-title{font-size:12px;font-weight:600;color:var(--accent);margin-bottom:8px}.obj-list{list-style:none;font-size:11px}.obj-list li{padding:4px 0 4px 16px;position:relative}.obj-list li::before{content:'→';position:absolute;left:0;color:var(--accent)}
+.quiz-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:16px}.quiz-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}.quiz-num{width:28px;height:28px;background:linear-gradient(135deg,var(--accent),#9d174d);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}.quiz-type{font-size:12px;font-weight:600}.quiz-meta{margin-left:auto;display:flex;gap:6px}.quiz-tag{font-size:9px;padding:2px 6px;background:var(--bg-subtle);border-radius:4px}.quiz-difficulty{font-size:9px;padding:2px 6px;border-radius:4px}.quiz-difficulty.medium{background:#fef3c7;color:#92400e}.quiz-difficulty.hard{background:#fee2e2;color:#991b1b}
+.quiz-body{padding:16px}.quiz-stem{font-size:14px;font-weight:500;margin-bottom:14px}.quiz-options{display:flex;flex-direction:column;gap:8px}.quiz-option{display:flex;gap:12px;padding:12px 14px;background:var(--bg-subtle);border:2px solid transparent;border-radius:var(--radius-sm);cursor:pointer}.quiz-option.selected{border-color:var(--accent)}.quiz-option.correct{border-color:var(--green);background:rgba(5,150,105,.08)}.quiz-option.incorrect{border-color:var(--red);background:rgba(220,38,38,.08)}.quiz-option.disabled{pointer-events:none;opacity:.7}
+.option-letter{width:24px;height:24px;border:2px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}.quiz-option.selected .option-letter{border-color:var(--accent);color:var(--accent)}.quiz-option.correct .option-letter{background:var(--green);color:#fff;border-color:var(--green)}.quiz-option.incorrect .option-letter{background:var(--red);color:#fff;border-color:var(--red)}
+.submit-btn{margin-top:14px;width:100%;padding:12px;background:linear-gradient(135deg,var(--accent),#9d174d);color:#fff;border:none;border-radius:var(--radius-sm);font-weight:600;cursor:pointer}.submit-btn:disabled{background:var(--bg-subtle);color:var(--text-secondary)}
+.explanation{margin-top:16px;padding:16px;border-radius:var(--radius-sm);display:none;font-size:13px}.explanation.visible{display:block}.explanation.correct{background:#f0fdf4;border:1px solid #bbf7d0}.explanation.incorrect{background:#fef2f2;border:1px solid #fecaca}
+.keypoint{margin-top:10px;padding:10px;background:rgba(190,24,93,.1);border-radius:6px;font-size:12px}.keypoint-label{font-weight:600;color:var(--accent);font-size:10px}
+.deep-dive{margin-top:14px;border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden}.dd-toggle{width:100%;padding:10px 14px;background:var(--bg-subtle);border:none;cursor:pointer;display:flex;justify-content:space-between;font-size:12px;font-weight:600}.dd-content{display:none;padding:14px;font-size:12px;max-height:500px;overflow-y:auto}.dd-content.visible{display:block}.dd-content h4{font-size:13px;font-weight:600;margin:12px 0 8px;color:var(--accent)}.dd-content h4:first-child{margin-top:0}.dd-content ul{margin:8px 0;padding-left:20px}.dd-content li{margin:4px 0}.dd-content table{width:100%;border-collapse:collapse;margin:10px 0;font-size:11px}.dd-content th,.dd-content td{border:1px solid var(--border);padding:6px 8px}.dd-content th{background:var(--bg-subtle)}.buzzwords{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px}.buzzword{font-size:10px;padding:4px 8px;background:#fef3c7;border-radius:4px;color:#92400e;font-weight:500}
+</style>
+</head>
+<body>
+<header class="header"><div class="logo">🤰 ReasonDx — OB/GYN</div></header>
+<div class="module-header"><div class="module-title"><div class="module-icon">🤰</div><div><h1>Obstetrics & Gynecology<span class="enhanced-badge">✨ MECHANISM-ENHANCED</span></h1><p>Prenatal Care, Labor, Gynecologic Disorders, and Emergencies</p></div></div></div>
+<div class="progress-bar"><div class="progress-inner"><span style="font-size:12px;color:var(--text-secondary)">Progress</span><div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div><span class="progress-count" id="progressCount">0/20</span></div></div>
+<nav class="timeline-nav"><div class="timeline-inner">
+<div class="timeline-phase active" onclick="goPhase(1)"><div class="phase-label">🤰 Prenatal</div><div class="phase-time">Care & Screening</div></div>
+<div class="timeline-phase locked" onclick="goPhase(2)"><div class="phase-label">👶 Labor</div><div class="phase-time">Delivery & Complications</div></div>
+<div class="timeline-phase locked" onclick="goPhase(3)"><div class="phase-label">🩺 Gynecology</div><div class="phase-time">Common Disorders</div></div>
+<div class="timeline-phase locked" onclick="goPhase(4)"><div class="phase-label">🚨 Emergencies</div><div class="phase-time">OB/GYN Emergencies</div></div>
+</div></nav>
+<div class="main-container">
+<aside>
+<div class="phase-objectives" id="phaseObjectives"></div>
+<div class="card"><div class="card-header"><div class="card-title">📋 Clinical Snapshot</div></div><div class="card-content"><div class="case-narrative" id="caseNarrative"></div><div class="clinical-pearl"><div class="pearl-title">💡 OB/GYN Pearl</div><div class="pearl-text" id="pearlText"></div></div></div></div>
+</aside>
+<main id="questionsPanel"></main>
+</div>
+<script>
+var phase=1,state={};for(var i=1;i<=20;i++)state[i]={pick:null,done:false,ok:false};
+var phases={
+1:{qs:[1,2,3,4,5],narrative:'<strong>Jessica</strong>, 28F G1P0, presents at 8 weeks for first prenatal visit. Needs comprehensive prenatal care planning and screening.',pearl:'First prenatal: confirm pregnancy, dating US, labs (CBC, type/screen, rubella, HIV, HBsAg, UA, Pap). Discuss genetic screening options.',objectives:['Perform initial prenatal workup','Know screening tests by trimester','Understand genetic screening options','Counsel on prenatal vitamins'],refs:[{t:'ACOG Prenatal Care',u:'https://www.acog.org/'}]},
+2:{qs:[6,7,8,9,10],narrative:'Jessica is now at 39 weeks in active labor. Understanding stages of labor and recognizing complications is essential.',pearl:'Stage 1: cervical dilation. Stage 2: delivery of baby. Stage 3: delivery of placenta. Prolonged labor, fetal distress require intervention.',objectives:['Know stages of labor','Interpret fetal heart tracings','Recognize labor abnormalities','Manage common complications'],refs:[{t:'Labor Management',u:'https://www.acog.org/'}]},
+3:{qs:[11,12,13,14,15],narrative:'<strong>Amanda</strong>, 35F, presents with heavy menstrual bleeding and pelvic pain. Need to evaluate common gynecologic disorders.',pearl:'AUB workup: pregnancy test first always. Structural: PALM (Polyp, Adenomyosis, Leiomyoma, Malignancy). Non-structural: COEIN.',objectives:['Evaluate abnormal uterine bleeding','Diagnose common GYN conditions','Know contraceptive options','Manage pelvic pain'],refs:[{t:'AUB Guidelines',u:'https://www.acog.org/'}]},
+4:{qs:[16,17,18,19,20],narrative:'<strong>Maria</strong>, 32F at 32 weeks, presents with severe headache, BP 165/105, and proteinuria. This is a hypertensive emergency.',pearl:'Preeclampsia with severe features: BP ≥160/110, symptoms, labs. Treat with magnesium, antihypertensives. Delivery is definitive treatment.',objectives:['Diagnose preeclampsia severity','Manage hypertensive emergencies','Recognize placental abruption','Handle OB emergencies'],refs:[{t:'Hypertension in Pregnancy',u:'https://www.acog.org/'}]}
+};
+var Qs={
+1:{type:'Prenatal Labs',difficulty:'medium',domains:['prevention'],tags:['Step2','OB'],stem:'Which test is included in routine first prenatal visit labs?',
+opts:[['a','Glucose tolerance test'],['b','Group B strep culture'],['c','Blood type and antibody screen'],['d','Third trimester ultrasound']],
+ans:'c',
+exp:'<strong>First prenatal labs:</strong> CBC, blood type/Rh/antibody screen, rubella, HIV, HBsAg, syphilis, UA/culture, Pap if due. GBS at 36 weeks.',
+kp:'Type and screen at first visit. GBS at 36 weeks. GTT at 24-28 weeks.',
+dd:{mechanism:{title:'Prenatal Testing Timeline',content:'<table><tr><th>Timing</th><th>Tests</th></tr><tr><td>First visit</td><td>CBC, type/screen, HIV, HBsAg, rubella, UA</td></tr><tr><td>15-20 wks</td><td>Quad screen or cfDNA</td></tr><tr><td>24-28 wks</td><td>Glucose tolerance test</td></tr><tr><td>36 wks</td><td>GBS culture</td></tr></table>',bw:['Type/screen first visit','GTT 24-28 weeks','GBS at 36 weeks']}}},
+2:{type:'Dating',difficulty:'medium',domains:['diagnosis'],tags:['Step2','OB'],stem:'What is the most accurate method for pregnancy dating?',
+opts:[['a','Last menstrual period alone'],['b','First trimester ultrasound measurement'],['c','Second trimester fundal height'],['d','Quickening reported by patient']],
+ans:'b',
+exp:'<strong>Pregnancy dating:</strong> First trimester US most accurate (±5-7 days). Crown-rump length before 14 weeks. LMP can be inaccurate.',
+kp:'First trimester US most accurate. CRL before 14 weeks. Dates rarely changed after 20 weeks.',
+dd:{mechanism:{title:'Dating Accuracy',content:'<table><tr><th>Method</th><th>Accuracy</th></tr><tr><td>1st tri US</td><td>±5-7 days</td></tr><tr><td>2nd tri US</td><td>±10-14 days</td></tr><tr><td>3rd tri US</td><td>±21 days</td></tr></table>',bw:['1st trimester most accurate','CRL before 14 weeks','Dont change dates late']}}},
+3:{type:'Genetic Screening',difficulty:'medium',domains:['prevention'],tags:['Step2','OB'],stem:'Cell-free DNA (cfDNA) screening tests for which conditions?',
+opts:[['a','Neural tube defects only'],['b','Trisomy 21, 18, 13 and sex chromosome abnormalities'],['c','All genetic conditions comprehensively'],['d','Structural heart defects']],
+ans:'b',
+exp:'<strong>cfDNA (NIPT):</strong> Screens for trisomy 21, 18, 13 and sex chromosome aneuploidies. High sensitivity for T21. Not diagnostic - confirm with amnio/CVS.',
+kp:'cfDNA screens for trisomies 21, 18, 13. Screening not diagnostic. Amnio confirms.',
+dd:{mechanism:{title:'Prenatal Screening',content:'<h4>cfDNA (NIPT)</h4><ul><li>T21, T18, T13</li><li>Sex chromosome abnormalities</li><li>99% sensitivity for T21</li><li>Screening only</li></ul>',bw:['Screens for trisomies','Not diagnostic','Amnio/CVS confirms']}}},
+4:{type:'Teratogens',difficulty:'medium',domains:['prevention'],tags:['Step2','OB'],stem:'Which medication is contraindicated in pregnancy due to teratogenic effects?',
+opts:[['a','Acetaminophen for pain'],['b','Isotretinoin (Accutane)'],['c','Penicillin for infection'],['d','Ondansetron for nausea']],
+ans:'b',
+exp:'<strong>Teratogens:</strong> Isotretinoin causes severe birth defects (CNS, cardiac, craniofacial). Also avoid: warfarin, valproate, ACE inhibitors, lithium (1st tri).',
+kp:'Isotretinoin highly teratogenic. Also warfarin, valproate, ACEi. iPLEDGE program required.',
+dd:{mechanism:{title:'Common Teratogens',content:'<table><tr><th>Drug</th><th>Effect</th></tr><tr><td>Isotretinoin</td><td>CNS, cardiac defects</td></tr><tr><td>Warfarin</td><td>Nasal hypoplasia, CNS</td></tr><tr><td>Valproate</td><td>Neural tube defects</td></tr><tr><td>ACE inhibitors</td><td>Renal dysgenesis</td></tr></table>',bw:['Isotretinoin severe','Warfarin in 1st trimester','Valproate NTDs']}}},
+5:{type:'Prenatal Vitamins',difficulty:'medium',domains:['prevention'],tags:['Step2','OB'],stem:'What folic acid dose prevents neural tube defects in most pregnancies?',
+opts:[['a','100 mcg daily'],['b','400-800 mcg daily'],['c','4 mg daily for all'],['d','No supplementation needed']],
+ans:'b',
+exp:'<strong>Folic acid:</strong> 400-800 mcg/day for all women. 4 mg/day if prior NTD, on antiepileptics, or diabetes. Start before conception.',
+kp:'400-800 mcg for all. 4 mg if high risk (prior NTD, AEDs). Start preconception.',
+dd:{mechanism:{title:'Folic Acid',content:'<h4>Dosing</h4><ul><li>Standard: 400-800 mcg/day</li><li>High risk: 4 mg/day</li></ul><h4>High Risk</h4><ul><li>Prior NTD</li><li>On valproate/carbamazepine</li><li>Diabetes</li><li>Obesity</li></ul>',bw:['400-800 mcg standard','4 mg if high risk','Start preconception']}}},
+6:{type:'Labor Stages',difficulty:'medium',domains:['diagnosis'],tags:['Step2','OB'],stem:'A woman is 6 cm dilated and 100% effaced. What stage of labor is this?',
+opts:[['a','Latent phase of first stage'],['b','Active phase of first stage'],['c','Second stage of labor'],['d','Third stage of labor']],
+ans:'b',
+exp:'<strong>Labor stages:</strong> Stage 1 latent: 0-6 cm. Stage 1 active: 6-10 cm. Stage 2: full dilation to delivery. Stage 3: delivery to placenta.',
+kp:'Latent: 0-6 cm. Active: 6-10 cm. Stage 2: pushing. Stage 3: placenta.',
+dd:{mechanism:{title:'Labor Stages',content:'<table><tr><th>Stage</th><th>Definition</th></tr><tr><td>1 Latent</td><td>0-6 cm dilation</td></tr><tr><td>1 Active</td><td>6-10 cm dilation</td></tr><tr><td>2</td><td>Full dilation → delivery</td></tr><tr><td>3</td><td>Delivery → placenta</td></tr></table>',bw:['Active at 6 cm','Stage 2 = pushing','Stage 3 = placenta']}}},
+7:{type:'Fetal Monitoring',difficulty:'hard',domains:['diagnosis'],tags:['Step2','OB'],stem:'Fetal heart tracing shows repetitive late decelerations with minimal variability. What does this indicate?',
+opts:[['a','Normal reassuring tracing'],['b','Head compression during contractions'],['c','Uteroplacental insufficiency with possible hypoxia'],['d','Umbilical cord compression']],
+ans:'c',
+exp:'<strong>Late decelerations:</strong> Start after contraction peak, gradual. Indicate uteroplacental insufficiency. With minimal variability = Category III, concerning.',
+kp:'Late decels = uteroplacental insufficiency. Variable decels = cord compression. Minimal variability concerning.',
+dd:{mechanism:{title:'FHR Patterns',content:'<table><tr><th>Pattern</th><th>Cause</th></tr><tr><td>Early decels</td><td>Head compression (benign)</td></tr><tr><td>Variable decels</td><td>Cord compression</td></tr><tr><td>Late decels</td><td>Uteroplacental insufficiency</td></tr></table>',bw:['Late = uteroplacental','Variable = cord','Early = head (benign)']}}},
+8:{type:'Labor Arrest',difficulty:'hard',domains:['management'],tags:['Step2','OB'],stem:'A patient at 8 cm has not progressed for 4 hours despite adequate contractions. What is the diagnosis?',
+opts:[['a','Normal labor progression'],['b','Arrest of dilation requiring intervention'],['c','Precipitous labor'],['d','Prodromal labor']],
+ans:'b',
+exp:'<strong>Arrest of dilation:</strong> No cervical change for ≥4 hours with adequate contractions. May need oxytocin augmentation or cesarean delivery.',
+kp:'Arrest: no change for ≥4 hours with adequate contractions. Consider cesarean if arrest.',
+dd:{mechanism:{title:'Labor Dystocia',content:'<h4>Arrest Criteria</h4><ul><li>Active phase: no change ≥4 hours</li><li>With adequate contractions</li><li>Or ≥6 hours if inadequate</li></ul>',bw:['4 hours no change','Adequate contractions','May need cesarean']}}},
+9:{type:'Shoulder Dystocia',difficulty:'hard',domains:['emergency'],tags:['Step2','OB'],stem:'After delivery of the head, the shoulders do not deliver with gentle traction. What is the first maneuver?',
+opts:[['a','Fundal pressure to push baby out'],['b','McRoberts maneuver with suprapubic pressure'],['c','Immediate cesarean delivery'],['d','Forceps application to shoulders']],
+ans:'b',
+exp:'<strong>Shoulder dystocia:</strong> First: McRoberts (hyperflexion of hips) + suprapubic pressure. Never fundal pressure. May need Woods screw, deliver posterior arm.',
+kp:'McRoberts + suprapubic pressure first. Never fundal pressure. Call for help.',
+dd:{mechanism:{title:'Shoulder Dystocia',content:'<h4>Management Steps</h4><ol><li>Call for help</li><li>McRoberts maneuver</li><li>Suprapubic pressure</li><li>Woods screw/Rubin</li><li>Deliver posterior arm</li></ol>',bw:['McRoberts first','Suprapubic (not fundal)','Call for help']}}},
+10:{type:'Postpartum Hemorrhage',difficulty:'hard',domains:['emergency'],tags:['Step2','OB'],stem:'A patient has heavy vaginal bleeding after vaginal delivery. The uterus is soft and boggy. What is the likely cause?',
+opts:[['a','Cervical laceration'],['b','Uterine atony'],['c','Retained placental fragments'],['d','Coagulation disorder']],
+ans:'b',
+exp:'<strong>PPH causes:</strong> 4 Ts - Tone (atony, most common), Trauma (lacerations), Tissue (retained placenta), Thrombin (coagulopathy). Boggy uterus = atony.',
+kp:'Uterine atony most common PPH cause. Boggy uterus. Treat with massage, uterotonics.',
+dd:{mechanism:{title:'PPH - 4 Ts',content:'<table><tr><th>Cause</th><th>Finding</th></tr><tr><td>Tone (atony)</td><td>Boggy uterus</td></tr><tr><td>Trauma</td><td>Lacerations</td></tr><tr><td>Tissue</td><td>Retained placenta</td></tr><tr><td>Thrombin</td><td>Coagulopathy</td></tr></table>',bw:['Atony most common','4 Ts mnemonic','Uterotonics for atony']}}},
+11:{type:'AUB Workup',difficulty:'medium',domains:['diagnosis'],tags:['Step2','GYN'],stem:'A 32-year-old presents with irregular heavy periods. What is the first test to order?',
+opts:[['a','Pelvic ultrasound'],['b','Urine pregnancy test'],['c','Endometrial biopsy'],['d','Coagulation studies']],
+ans:'b',
+exp:'<strong>AUB workup:</strong> Always pregnancy test first in reproductive age. Then assess for structural (PALM) vs non-structural (COEIN) causes.',
+kp:'Pregnancy test first always. Then US, labs. Biopsy if >45 or risk factors.',
+dd:{mechanism:{title:'AUB Workup',content:'<h4>Order of Evaluation</h4><ol><li>Pregnancy test</li><li>CBC, TSH</li><li>Pelvic ultrasound</li><li>Endometrial biopsy if indicated</li></ol>',bw:['Pregnancy test first','PALM-COEIN classification','Biopsy if >45']}}},
+12:{type:'Fibroids',difficulty:'medium',domains:['diagnosis'],tags:['Step2','GYN'],stem:'A patient has heavy periods and a pelvic mass. Ultrasound shows multiple uterine fibroids. What is the best initial treatment for bleeding?',
+opts:[['a','Immediate hysterectomy'],['b','Hormonal management with OCPs or IUD'],['c','Uterine artery embolization first'],['d','Observation without treatment']],
+ans:'b',
+exp:'<strong>Fibroid treatment:</strong> Medical first for bleeding: OCPs, progestin IUD, GnRH agonists. Surgery if failed medical or desire fertility. Hysterectomy definitive.',
+kp:'Hormonal therapy first-line for bleeding. Mirena IUD effective. Surgery if medical fails.',
+dd:{mechanism:{title:'Fibroid Management',content:'<h4>Medical</h4><ul><li>NSAIDs, tranexamic acid</li><li>OCPs, progestin IUD</li><li>GnRH agonists (short-term)</li></ul><h4>Surgical</h4><ul><li>Myomectomy (preserve fertility)</li><li>UAE</li><li>Hysterectomy (definitive)</li></ul>',bw:['Medical first','Mirena IUD helpful','Hysterectomy definitive']}}},
+13:{type:'Endometriosis',difficulty:'medium',domains:['diagnosis'],tags:['Step2','GYN'],stem:'A patient has cyclic pelvic pain, dysmenorrhea, and dyspareunia. What is the most likely diagnosis?',
+opts:[['a','Uterine fibroids'],['b','Endometriosis'],['c','Ovarian cyst'],['d','Pelvic inflammatory disease']],
+ans:'b',
+exp:'<strong>Endometriosis:</strong> Cyclic pain, dysmenorrhea, dyspareunia, infertility. Definitive diagnosis by laparoscopy. Treat with NSAIDs, OCPs, GnRH agonists.',
+kp:'Cyclic pain + dyspareunia + infertility = endometriosis. Laparoscopy diagnostic.',
+dd:{mechanism:{title:'Endometriosis',content:'<h4>Classic Triad</h4><ul><li>Dysmenorrhea</li><li>Dyspareunia</li><li>Infertility</li></ul><h4>Treatment</h4><ul><li>NSAIDs</li><li>Continuous OCPs</li><li>GnRH agonists</li><li>Laparoscopic excision</li></ul>',bw:['3 Ds: dysmenorrhea, dyspareunia, dyschezia','Laparoscopy gold standard','OCPs suppress']}}},
+14:{type:'PCOS',difficulty:'medium',domains:['diagnosis'],tags:['Step2','GYN'],stem:'A patient has irregular periods, hirsutism, and polycystic ovaries on ultrasound. What is the diagnosis?',
+opts:[['a','Premature ovarian insufficiency'],['b','Polycystic ovary syndrome'],['c','Hypothyroidism'],['d','Cushings syndrome']],
+ans:'b',
+exp:'<strong>PCOS:</strong> Rotterdam criteria - 2 of 3: oligo/anovulation, hyperandrogenism (clinical or lab), polycystic ovaries. Exclude other causes.',
+kp:'Rotterdam: 2 of 3 criteria. Exclude thyroid, prolactin, CAH. Metformin if insulin resistant.',
+dd:{mechanism:{title:'PCOS Criteria',content:'<h4>Rotterdam (2 of 3)</h4><ul><li>Oligo/anovulation</li><li>Hyperandrogenism</li><li>Polycystic ovaries on US</li></ul><h4>Treatment</h4><ul><li>OCPs for cycle regulation</li><li>Metformin if IR</li><li>Spironolactone for hirsutism</li></ul>',bw:['2 of 3 Rotterdam','Exclude other causes','OCPs first-line']}}},
+15:{type:'Contraception',difficulty:'medium',domains:['management'],tags:['Step2','GYN'],stem:'Which contraceptive method has the highest typical-use effectiveness?',
+opts:[['a','Combined oral contraceptive pills'],['b','Male condoms'],['c','Copper or hormonal IUD'],['d','Depot medroxyprogesterone injection']],
+ans:'c',
+exp:'<strong>Contraceptive effectiveness:</strong> LARCs (IUDs, implant) most effective - not user dependent. IUDs >99% effective. Pills ~91% typical use.',
+kp:'IUDs and implants most effective. Not user-dependent. Pills 91% typical use.',
+dd:{mechanism:{title:'Contraceptive Failure Rates',content:'<table><tr><th>Method</th><th>Typical Use</th></tr><tr><td>IUD/Implant</td><td><1%</td></tr><tr><td>DMPA</td><td>6%</td></tr><tr><td>Pills/patch/ring</td><td>9%</td></tr><tr><td>Condoms</td><td>18%</td></tr></table>',bw:['LARCs most effective','IUDs <1% failure','User-independence key']}}},
+16:{type:'Preeclampsia Dx',difficulty:'hard',domains:['diagnosis'],tags:['Step2','OB'],stem:'A patient at 34 weeks has BP 152/98 on two occasions and proteinuria. What is the diagnosis?',
+opts:[['a','Gestational hypertension'],['b','Preeclampsia without severe features'],['c','Chronic hypertension'],['d','HELLP syndrome']],
+ans:'b',
+exp:'<strong>Preeclampsia:</strong> HTN (≥140/90) after 20 weeks + proteinuria (or other end-organ dysfunction). Without severe features if BP <160/110, no symptoms.',
+kp:'Preeclampsia: HTN after 20 weeks + proteinuria. Severe if BP ≥160/110 or symptoms.',
+dd:{mechanism:{title:'Hypertensive Disorders',content:'<table><tr><th>Diagnosis</th><th>Criteria</th></tr><tr><td>Gestational HTN</td><td>HTN alone, no proteinuria</td></tr><tr><td>Preeclampsia</td><td>HTN + proteinuria</td></tr><tr><td>Severe preeclampsia</td><td>BP ≥160/110 or symptoms</td></tr></table>',bw:['HTN + proteinuria','After 20 weeks','Severe if BP ≥160/110']}}},
+17:{type:'Preeclampsia Rx',difficulty:'hard',domains:['management'],tags:['Step2','OB'],stem:'A patient has preeclampsia with severe features at 34 weeks. What medication prevents seizures?',
+opts:[['a','Hydralazine'],['b','Magnesium sulfate'],['c','Labetalol'],['d','Nifedipine']],
+ans:'b',
+exp:'<strong>Eclampsia prophylaxis:</strong> Magnesium sulfate prevents and treats seizures in preeclampsia/eclampsia. Continue 24-48h postpartum. Monitor for toxicity.',
+kp:'Magnesium prevents seizures. Monitor reflexes, RR, UOP. Calcium gluconate is antidote.',
+dd:{mechanism:{title:'Severe Preeclampsia Rx',content:'<h4>Medications</h4><ul><li>Magnesium: seizure prophylaxis</li><li>Labetalol/hydralazine: BP control</li><li>Betamethasone: fetal lungs if <34 wks</li></ul><h4>Definitive</h4><ul><li>Delivery</li></ul>',bw:['Magnesium for seizures','Labetalol for BP','Delivery is cure']}}},
+18:{type:'Ectopic',difficulty:'hard',domains:['diagnosis'],tags:['Step2','OB'],stem:'A patient with positive pregnancy test has pelvic pain and no intrauterine pregnancy on ultrasound. β-hCG is 2500 mIU/mL. What is the concern?',
+opts:[['a','Normal early intrauterine pregnancy'],['b','Ectopic pregnancy until proven otherwise'],['c','Complete miscarriage'],['d','Molar pregnancy']],
+ans:'b',
+exp:'<strong>Ectopic pregnancy:</strong> β-hCG >2000-3000 should see IUP on transvaginal US. No IUP = ectopic until proven otherwise. Risk of rupture.',
+kp:'No IUP with β-hCG >2000 = suspect ectopic. Discriminatory zone. Risk of rupture.',
+dd:{mechanism:{title:'Ectopic Diagnosis',content:'<h4>Discriminatory Zone</h4><ul><li>β-hCG 1500-2500 mIU/mL</li><li>Should see IUP on TVUS</li></ul><h4>Risk Factors</h4><ul><li>Prior ectopic</li><li>PID history</li><li>Tubal surgery</li></ul>',bw:['Discriminatory zone','No IUP = ectopic','Risk of rupture']}}},
+19:{type:'Placental Abruption',difficulty:'hard',domains:['diagnosis'],tags:['Step2','OB'],stem:'A patient at 35 weeks presents with painful vaginal bleeding, uterine tenderness, and fetal distress. What is the likely diagnosis?',
+opts:[['a','Placenta previa'],['b','Placental abruption'],['c','Vasa previa'],['d','Bloody show of labor']],
+ans:'b',
+exp:'<strong>Placental abruption:</strong> Painful bleeding, rigid/tender uterus, fetal distress. Risk factors: HTN, trauma, cocaine. May need emergent delivery.',
+kp:'Abruption: painful bleeding, tender uterus. Previa: painless bleeding. Abruption = emergency.',
+dd:{mechanism:{title:'Abruption vs Previa',content:'<table><tr><th>Feature</th><th>Abruption</th><th>Previa</th></tr><tr><td>Pain</td><td>Painful</td><td>Painless</td></tr><tr><td>Uterus</td><td>Tender, rigid</td><td>Soft</td></tr><tr><td>Fetal status</td><td>Often distressed</td><td>Usually stable</td></tr></table>',bw:['Painful = abruption','Painless = previa','Abruption = emergency']}}},
+20:{type:'GBS Prophylaxis',difficulty:'medium',domains:['prevention'],tags:['Step2','OB'],stem:'A GBS-positive patient presents in labor. What antibiotic is given for prophylaxis?',
+opts:[['a','Azithromycin'],['b','Penicillin G intravenously'],['c','Metronidazole'],['d','Ceftriaxone']],
+ans:'b',
+exp:'<strong>GBS prophylaxis:</strong> IV penicillin G (or ampicillin) in labor if GBS positive, unknown status with risk factors, or prior GBS baby. Give ≥4 hours before delivery.',
+kp:'IV penicillin for GBS prophylaxis. Give ≥4 hours before delivery. Cefazolin if mild allergy.',
+dd:{mechanism:{title:'GBS Prophylaxis',content:'<h4>Indications</h4><ul><li>GBS positive culture</li><li>GBS bacteriuria this pregnancy</li><li>Prior infant with GBS disease</li></ul><h4>Antibiotics</h4><ul><li>Penicillin G (first-line)</li><li>Cefazolin (penicillin allergy)</li><li>Vancomycin (severe allergy)</li></ul>',bw:['Penicillin G first-line','≥4 hours before delivery','Screen at 36 weeks']}}}
+};
+var answers={1:'c',2:'d',3:'d',4:'a',5:'c',6:'a',7:'d',8:'c',9:'a',10:'c',11:'b',12:'b',13:'a',14:'b',15:'d',16:'b',17:'b',18:'a',19:'d',20:'c'};
+function goPhase(p){if(p<1||p>4)return;phase=p;renderPhase();}
+function renderPhase(){var ph=phases[phase];document.querySelectorAll('.timeline-phase').forEach(function(el,i){el.classList.remove('active','locked');if(i+1===phase)el.classList.add('active');else if(i+1>phase)el.classList.add('locked');});document.getElementById('caseNarrative').innerHTML=ph.narrative;document.getElementById('pearlText').textContent=ph.pearl;var objHtml='<div class="obj-title">🎯 Phase '+phase+' Objectives</div><ul class="obj-list">';ph.objectives.forEach(function(o){objHtml+='<li>'+o+'</li>';});objHtml+='</ul>';if(ph.refs){objHtml+='<div style="margin-top:12px;padding-top:10px;border-top:1px dashed #e2e8f0"><div style="font-size:10px;font-weight:600;color:#64748b;margin-bottom:6px">📚 References</div>';ph.refs.forEach(function(r){objHtml+='<a href="'+r.u+'" target="_blank" style="font-size:10px;color:#be185d;text-decoration:none;display:block;margin:3px 0">'+r.t+'</a>';});objHtml+='</div>';}document.getElementById('phaseObjectives').innerHTML=objHtml;renderQuestions(ph.qs);}
+function renderQuestions(qIds){var html='';qIds.forEach(function(qid){var q=Qs[qid];if(!q)return;html+='<div class="quiz-card" id="q'+qid+'"><div class="quiz-header"><div class="quiz-num">'+qid+'</div><span class="quiz-type">'+q.type+'</span><div class="quiz-meta">';q.tags.forEach(function(t){html+='<span class="quiz-tag">'+t+'</span>';});html+='<span class="quiz-difficulty '+q.difficulty+'">'+q.difficulty+'</span></div></div>';html+='<div class="quiz-body"><div class="quiz-stem">'+q.stem+'</div><div class="quiz-options">';q.opts.forEach(function(opt){html+='<div class="quiz-option" data-q="'+qid+'" data-opt="'+opt[0]+'" onclick="selectOpt(this)"><div class="option-letter">'+opt[0].toUpperCase()+'</div><div class="option-text">'+opt[1]+'</div></div>';});html+='</div><button class="submit-btn" id="sub'+qid+'" disabled onclick="submitQ('+qid+')">Submit</button><div class="explanation" id="exp'+qid+'"></div></div></div>';});document.getElementById('questionsPanel').innerHTML=html;}
+function selectOpt(el){var qid=el.dataset.q;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.remove('selected');});el.classList.add('selected');state[qid].pick=el.dataset.opt;document.getElementById('sub'+qid).disabled=false;}
+function submitQ(qid){if(state[qid].done)return;state[qid].done=true;var correct=answers[qid],picked=state[qid].pick,isCorrect=picked===correct;state[qid].ok=isCorrect;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.add('disabled');if(o.dataset.opt===correct)o.classList.add('correct');else if(o.dataset.opt===picked&&!isCorrect)o.classList.add('incorrect');});document.getElementById('sub'+qid).style.display='none';var q=Qs[qid],expDiv=document.getElementById('exp'+qid);var expHtml='<div>'+(isCorrect?'✓ Correct!':'✗ Incorrect')+'</div><div>'+q.exp+'</div><div class="keypoint"><span class="keypoint-label">⚡ Key:</span> '+q.kp+'</div>';if(q.dd){expHtml+='<div class="deep-dive"><button class="dd-toggle" onclick="toggleDD(this)">📚 Deep Dive <span>▼</span></button><div class="dd-content">';for(var d in q.dd){expHtml+=q.dd[d].content;if(q.dd[d].bw){expHtml+='<div class="buzzwords">';q.dd[d].bw.forEach(function(b){expHtml+='<span class="buzzword">'+b+'</span>';});expHtml+='</div>';}}expHtml+='</div></div>';}expDiv.innerHTML=expHtml;expDiv.classList.add('visible',isCorrect?'correct':'incorrect');updateProgress();}
+function toggleDD(btn){btn.nextElementSibling.classList.toggle('visible');btn.querySelector('span').textContent=btn.nextElementSibling.classList.contains('visible')?'▲':'▼';}
+function updateProgress(){var done=0;for(var i=1;i<=20;i++)if(state[i].done)done++;document.getElementById('progressFill').style.width=(done/20*100)+'%';document.getElementById('progressCount').textContent=done+'/20';}
+renderPhase();
+</script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Psychiatry - ReasonDx</title>
+<style>
+:root{--bg-page:#f8fafc;--bg-white:#fff;--bg-subtle:#f1f5f9;--text-primary:#0f172a;--text-secondary:#475569;--border:#e2e8f0;--accent:#7c3aed;--accent-light:#ede9fe;--green:#059669;--red:#dc2626;--radius-sm:8px;--radius-lg:16px}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg-page);color:var(--text-primary);line-height:1.6}
+.header{background:linear-gradient(135deg,#7c3aed,#6d28d9);color:#fff;padding:16px 24px}.logo{font-weight:700;font-size:18px}
+.module-header{background:var(--bg-white);border-bottom:1px solid var(--border);padding:24px}
+.module-title{display:flex;align-items:center;gap:16px;max-width:1400px;margin:0 auto}.module-icon{width:56px;height:56px;background:linear-gradient(135deg,#ede9fe,#ddd6fe);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:28px}
+.module-title h1{font-size:26px;font-weight:700}.enhanced-badge{background:linear-gradient(135deg,var(--accent),#6d28d9);color:#fff;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;margin-left:8px}
+.progress-bar{background:var(--bg-white);border-bottom:1px solid var(--border);padding:12px 24px}.progress-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;gap:16px}.progress-track{flex:1;height:8px;background:var(--bg-subtle);border-radius:4px}.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));transition:width .3s}.progress-count{font-size:13px;font-weight:600}
+.timeline-nav{background:var(--bg-white);border-bottom:1px solid var(--border);padding:0 24px}.timeline-inner{max-width:1400px;margin:0 auto;display:flex}.timeline-phase{flex:1;padding:16px 8px;cursor:pointer;border-bottom:3px solid transparent;text-align:center}.timeline-phase.active{border-bottom-color:var(--accent)}.timeline-phase.locked{opacity:.4}.phase-label{font-size:12px;font-weight:600}.phase-time{font-size:10px;color:var(--text-secondary)}
+.main-container{max-width:1400px;margin:0 auto;padding:24px;display:grid;grid-template-columns:300px 1fr;gap:24px}@media(max-width:900px){.main-container{grid-template-columns:1fr}}
+.card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:16px}.card-header{padding:14px 18px;border-bottom:1px solid var(--border)}.card-title{font-size:13px;font-weight:600}.card-content{padding:16px 18px}.case-narrative{font-size:14px;color:var(--text-secondary)}
+.clinical-pearl{margin-top:12px;padding:12px;background:var(--accent-light);border-radius:var(--radius-sm);border-left:3px solid var(--accent)}.pearl-title{font-size:10px;font-weight:600;color:#6d28d9}.pearl-text{font-size:11px;color:#5b21b6}
+.phase-objectives{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px;margin-bottom:16px}.obj-title{font-size:12px;font-weight:600;color:var(--accent);margin-bottom:8px}.obj-list{list-style:none;font-size:11px}.obj-list li{padding:4px 0 4px 16px;position:relative}.obj-list li::before{content:'→';position:absolute;left:0;color:var(--accent)}
+.quiz-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:16px}.quiz-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}.quiz-num{width:28px;height:28px;background:linear-gradient(135deg,var(--accent),#6d28d9);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}.quiz-type{font-size:12px;font-weight:600}.quiz-meta{margin-left:auto;display:flex;gap:6px}.quiz-tag{font-size:9px;padding:2px 6px;background:var(--bg-subtle);border-radius:4px}.quiz-difficulty{font-size:9px;padding:2px 6px;border-radius:4px}.quiz-difficulty.medium{background:#fef3c7;color:#92400e}.quiz-difficulty.hard{background:#fee2e2;color:#991b1b}
+.quiz-body{padding:16px}.quiz-stem{font-size:14px;font-weight:500;margin-bottom:14px}.quiz-options{display:flex;flex-direction:column;gap:8px}.quiz-option{display:flex;gap:12px;padding:12px 14px;background:var(--bg-subtle);border:2px solid transparent;border-radius:var(--radius-sm);cursor:pointer}.quiz-option.selected{border-color:var(--accent)}.quiz-option.correct{border-color:var(--green);background:rgba(5,150,105,.08)}.quiz-option.incorrect{border-color:var(--red);background:rgba(220,38,38,.08)}.quiz-option.disabled{pointer-events:none;opacity:.7}
+.option-letter{width:24px;height:24px;border:2px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}.quiz-option.selected .option-letter{border-color:var(--accent);color:var(--accent)}.quiz-option.correct .option-letter{background:var(--green);color:#fff;border-color:var(--green)}.quiz-option.incorrect .option-letter{background:var(--red);color:#fff;border-color:var(--red)}
+.submit-btn{margin-top:14px;width:100%;padding:12px;background:linear-gradient(135deg,var(--accent),#6d28d9);color:#fff;border:none;border-radius:var(--radius-sm);font-weight:600;cursor:pointer}.submit-btn:disabled{background:var(--bg-subtle);color:var(--text-secondary)}
+.explanation{margin-top:16px;padding:16px;border-radius:var(--radius-sm);display:none;font-size:13px}.explanation.visible{display:block}.explanation.correct{background:#f0fdf4;border:1px solid #bbf7d0}.explanation.incorrect{background:#fef2f2;border:1px solid #fecaca}
+.keypoint{margin-top:10px;padding:10px;background:rgba(124,58,237,.1);border-radius:6px;font-size:12px}.keypoint-label{font-weight:600;color:var(--accent);font-size:10px}
+.deep-dive{margin-top:14px;border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden}.dd-toggle{width:100%;padding:10px 14px;background:var(--bg-subtle);border:none;cursor:pointer;display:flex;justify-content:space-between;font-size:12px;font-weight:600}.dd-content{display:none;padding:14px;font-size:12px;max-height:500px;overflow-y:auto}.dd-content.visible{display:block}.dd-content h4{font-size:13px;font-weight:600;margin:12px 0 8px;color:var(--accent)}.dd-content h4:first-child{margin-top:0}.dd-content ul{margin:8px 0;padding-left:20px}.dd-content li{margin:4px 0}.dd-content table{width:100%;border-collapse:collapse;margin:10px 0;font-size:11px}.dd-content th,.dd-content td{border:1px solid var(--border);padding:6px 8px}.dd-content th{background:var(--bg-subtle)}.buzzwords{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px}.buzzword{font-size:10px;padding:4px 8px;background:#fef3c7;border-radius:4px;color:#92400e;font-weight:500}
+</style>
+</head>
+<body>
+<header class="header"><div class="logo">🧠 ReasonDx — Psychiatry</div></header>
+<div class="module-header"><div class="module-title"><div class="module-icon">🧠</div><div><h1>Psychiatry<span class="enhanced-badge">✨ MECHANISM-ENHANCED</span></h1><p>Mood Disorders, Psychosis, Anxiety, and Psychiatric Emergencies</p></div></div></div>
+<div class="progress-bar"><div class="progress-inner"><span style="font-size:12px;color:var(--text-secondary)">Progress</span><div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div><span class="progress-count" id="progressCount">0/20</span></div></div>
+<nav class="timeline-nav"><div class="timeline-inner">
+<div class="timeline-phase active" onclick="goPhase(1)"><div class="phase-label">😔 Mood</div><div class="phase-time">Depression & Bipolar</div></div>
+<div class="timeline-phase locked" onclick="goPhase(2)"><div class="phase-label">👁️ Psychosis</div><div class="phase-time">Schizophrenia</div></div>
+<div class="timeline-phase locked" onclick="goPhase(3)"><div class="phase-label">😰 Anxiety</div><div class="phase-time">Anxiety & OCD</div></div>
+<div class="timeline-phase locked" onclick="goPhase(4)"><div class="phase-label">🚨 Emergency</div><div class="phase-time">Acute Psych</div></div>
+</div></nav>
+<div class="main-container">
+<aside>
+<div class="phase-objectives" id="phaseObjectives"></div>
+<div class="card"><div class="card-header"><div class="card-title">📋 Clinical Snapshot</div></div><div class="card-content"><div class="case-narrative" id="caseNarrative"></div><div class="clinical-pearl"><div class="pearl-title">💡 Psych Pearl</div><div class="pearl-text" id="pearlText"></div></div></div></div>
+</aside>
+<main id="questionsPanel"></main>
+</div>
+<script>
+var phase=1,state={};for(var i=1;i<=20;i++)state[i]={pick:null,done:false,ok:false};
+var phases={
+1:{qs:[1,2,3,4,5],narrative:'<strong>Sarah</strong>, 34F, presents with 3 weeks of depressed mood, anhedonia, insomnia, fatigue, and difficulty concentrating. PHQ-9 score 18.',pearl:'MDD: ≥5 symptoms for ≥2 weeks including depressed mood or anhedonia. Screen for bipolar before starting antidepressant.',objectives:['Diagnose major depression','Screen for bipolar disorder','Choose first-line antidepressant','Know suicide risk factors'],refs:[{t:'APA Depression Guidelines',u:'https://psychiatry.org/'}]},
+2:{qs:[6,7,8,9,10],narrative:'<strong>Michael</strong>, 22M, presents with auditory hallucinations, paranoid delusions, and social withdrawal for 8 months. First psychotic episode.',pearl:'Schizophrenia: ≥2 symptoms (delusions, hallucinations, disorganized speech, behavior, negative symptoms) for ≥6 months. Rule out substances.',objectives:['Diagnose schizophrenia','Differentiate psychotic disorders','Choose antipsychotic therapy','Manage side effects'],refs:[{t:'Schizophrenia Guidelines',u:'https://psychiatry.org/'}]},
+3:{qs:[11,12,13,14,15],narrative:'<strong>Jennifer</strong>, 28F, has recurrent panic attacks with chest pain, palpitations, and fear of dying. Avoids crowded places.',pearl:'Panic disorder: recurrent unexpected panic attacks with worry about future attacks. Agoraphobia often comorbid.',objectives:['Diagnose anxiety disorders','Differentiate panic vs GAD','Treat with SSRIs and CBT','Know benzodiazepine risks'],refs:[{t:'Anxiety Treatment Guidelines',u:'https://psychiatry.org/'}]},
+4:{qs:[16,17,18,19,20],narrative:'<strong>David</strong>, 45M, brought to ED agitated, aggressive, responding to internal stimuli. Requires acute management and safety assessment.',pearl:'Psychiatric emergency: ensure safety first. Medical clearance essential. De-escalation before medications when possible.',objectives:['Manage acute agitation','Assess suicide risk','Know involuntary commitment criteria','Treat NMS and serotonin syndrome'],refs:[{t:'Psychiatric Emergency Guidelines',u:'https://psychiatry.org/'}]}
+};
+var Qs={
+1:{type:'MDD Diagnosis',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Psych'],stem:'A patient has depressed mood, anhedonia, insomnia, fatigue, and poor concentration for 4 weeks. How many symptoms are needed for MDD?',
+opts:[['a','At least 3 symptoms for 1 week'],['b','At least 5 symptoms for 2 weeks'],['c','At least 7 symptoms for 4 weeks'],['d','At least 2 symptoms for 6 months']],
+ans:'b',
+exp:'<strong>MDD criteria:</strong> ≥5 of 9 symptoms for ≥2 weeks, must include depressed mood OR anhedonia. SIGECAPS mnemonic.',
+kp:'5 symptoms for 2 weeks. Must include depressed mood or anhedonia. SIGECAPS.',
+dd:{mechanism:{title:'MDD Criteria (SIGECAPS)',content:'<ul><li>Sleep changes</li><li>Interest decreased (anhedonia)</li><li>Guilt/worthlessness</li><li>Energy decreased</li><li>Concentration poor</li><li>Appetite changes</li><li>Psychomotor changes</li><li>Suicidal ideation</li></ul>',bw:['5 of 9 symptoms','2 weeks duration','SIGECAPS mnemonic']}}},
+2:{type:'Antidepressant Choice',difficulty:'medium',domains:['pharmacology'],tags:['Step2','Psych'],stem:'What is first-line pharmacotherapy for major depressive disorder?',
+opts:[['a','Benzodiazepines for rapid relief'],['b','SSRIs such as sertraline or escitalopram'],['c','Tricyclic antidepressants like amitriptyline'],['d','Monoamine oxidase inhibitors']],
+ans:'b',
+exp:'<strong>MDD treatment:</strong> SSRIs first-line (sertraline, escitalopram, fluoxetine). Effective, well-tolerated, safe in overdose. SNRIs are alternative.',
+kp:'SSRIs first-line. Takes 4-6 weeks for full effect. Continue 6-12 months after remission.',
+dd:{mechanism:{title:'Antidepressants',content:'<table><tr><th>Class</th><th>Examples</th><th>Use</th></tr><tr><td>SSRI</td><td>Sertraline, escitalopram</td><td>First-line</td></tr><tr><td>SNRI</td><td>Venlafaxine, duloxetine</td><td>Alternative</td></tr><tr><td>TCA</td><td>Amitriptyline</td><td>Refractory</td></tr></table>',bw:['SSRIs first-line','4-6 weeks to effect','6-12 months maintenance']}}},
+3:{type:'Bipolar Screening',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Psych'],stem:'Before starting an antidepressant, why is screening for bipolar disorder important?',
+opts:[['a','Antidepressants are ineffective in bipolar'],['b','Antidepressants can trigger mania in bipolar'],['c','Bipolar requires higher antidepressant doses'],['d','Antidepressants cause weight gain in bipolar']],
+ans:'b',
+exp:'<strong>Bipolar screening:</strong> Antidepressants alone can trigger mania or rapid cycling in bipolar disorder. Always ask about prior manic episodes.',
+kp:'Antidepressants can trigger mania. Screen for prior manic episodes before starting.',
+dd:{mechanism:{title:'Bipolar vs MDD',content:'<h4>Screen For Mania</h4><ul><li>Decreased need for sleep</li><li>Grandiosity</li><li>Racing thoughts</li><li>Increased activity</li><li>Risky behavior</li></ul>',bw:['Screen before antidepressants','Can trigger mania','Ask about past episodes']}}},
+4:{type:'Suicide Risk',difficulty:'hard',domains:['diagnosis'],tags:['Step2','Psych'],stem:'Which factor most increases acute suicide risk?',
+opts:[['a','Female gender'],['b','Access to lethal means with specific plan'],['c','History of depression alone'],['d','Age under 25 years']],
+ans:'b',
+exp:'<strong>Suicide risk:</strong> Highest risk: prior attempt, access to means, specific plan, hopelessness, recent loss, substance use. Male, older age, chronic illness.',
+kp:'Prior attempt is strongest predictor. Access to means + plan = high acute risk.',
+dd:{mechanism:{title:'Suicide Risk Factors',content:'<h4>High Risk</h4><ul><li>Prior suicide attempt</li><li>Access to lethal means</li><li>Specific plan</li><li>Hopelessness</li><li>Recent loss</li></ul>',bw:['Prior attempt strongest','Access to means','Specific plan']}}},
+5:{type:'Bipolar Treatment',difficulty:'medium',domains:['pharmacology'],tags:['Step2','Psych'],stem:'What is first-line treatment for bipolar I disorder?',
+opts:[['a','SSRI antidepressant monotherapy'],['b','Mood stabilizer such as lithium or valproate'],['c','Benzodiazepine for mood stabilization'],['d','Stimulant medication for energy']],
+ans:'b',
+exp:'<strong>Bipolar treatment:</strong> Mood stabilizers (lithium, valproate, lamotrigine) or atypical antipsychotics. Lithium has anti-suicide benefit.',
+kp:'Mood stabilizers first-line. Lithium reduces suicide risk. Monitor levels and thyroid/renal.',
+dd:{mechanism:{title:'Mood Stabilizers',content:'<table><tr><th>Drug</th><th>Monitoring</th></tr><tr><td>Lithium</td><td>Levels, TSH, Cr</td></tr><tr><td>Valproate</td><td>Levels, LFTs, CBC</td></tr><tr><td>Lamotrigine</td><td>Rash (SJS risk)</td></tr></table>',bw:['Lithium gold standard','Monitor levels','Reduces suicide risk']}}},
+6:{type:'Schizophrenia Dx',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Psych'],stem:'A patient has auditory hallucinations and paranoid delusions for 7 months with declining function. What is the diagnosis?',
+opts:[['a','Brief psychotic disorder'],['b','Schizophreniform disorder'],['c','Schizophrenia'],['d','Schizoaffective disorder']],
+ans:'c',
+exp:'<strong>Schizophrenia:</strong> ≥2 symptoms for ≥6 months with functional decline. Brief psychotic <1 month, schizophreniform 1-6 months.',
+kp:'Schizophrenia: ≥6 months. Schizophreniform: 1-6 months. Brief psychotic: <1 month.',
+dd:{mechanism:{title:'Psychotic Disorders',content:'<table><tr><th>Duration</th><th>Diagnosis</th></tr><tr><td><1 month</td><td>Brief psychotic disorder</td></tr><tr><td>1-6 months</td><td>Schizophreniform</td></tr><tr><td>>6 months</td><td>Schizophrenia</td></tr></table>',bw:['Duration determines diagnosis','6 months for schizophrenia','Rule out substances']}}},
+7:{type:'Antipsychotic Choice',difficulty:'medium',domains:['pharmacology'],tags:['Step2','Psych'],stem:'What is first-line treatment for a first episode of schizophrenia?',
+opts:[['a','First-generation antipsychotic like haloperidol'],['b','Second-generation antipsychotic like risperidone'],['c','Clozapine as initial therapy'],['d','Benzodiazepines for long-term control']],
+ans:'b',
+exp:'<strong>First-episode psychosis:</strong> Second-generation antipsychotics (SGAs) preferred - risperidone, olanzapine, aripiprazole. Lower EPS risk than FGAs.',
+kp:'SGAs first-line. Clozapine reserved for treatment-resistant. Monitor metabolic effects.',
+dd:{mechanism:{title:'Antipsychotics',content:'<table><tr><th>Generation</th><th>Examples</th><th>Side Effects</th></tr><tr><td>First (FGA)</td><td>Haloperidol</td><td>EPS, TD</td></tr><tr><td>Second (SGA)</td><td>Risperidone, olanzapine</td><td>Metabolic</td></tr></table>',bw:['SGAs first-line','FGAs more EPS','Metabolic monitoring']}}},
+8:{type:'Negative Symptoms',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Psych'],stem:'Which symptom is a negative symptom of schizophrenia?',
+opts:[['a','Auditory hallucinations'],['b','Paranoid delusions'],['c','Flat affect and social withdrawal'],['d','Disorganized speech']],
+ans:'c',
+exp:'<strong>Negative symptoms:</strong> Flat affect, alogia (poverty of speech), avolition, anhedonia, asociality. Harder to treat than positive symptoms.',
+kp:'Negative = deficit symptoms. Flat affect, avolition, alogia. Harder to treat.',
+dd:{mechanism:{title:'Positive vs Negative',content:'<h4>Positive Symptoms</h4><ul><li>Hallucinations</li><li>Delusions</li><li>Disorganized speech</li></ul><h4>Negative Symptoms</h4><ul><li>Flat affect</li><li>Alogia</li><li>Avolition</li></ul>',bw:['Positive = excess','Negative = deficit','5 As of negative']}}},
+9:{type:'EPS',difficulty:'hard',domains:['pharmacology'],tags:['Step2','Psych'],stem:'A patient on haloperidol develops muscle rigidity, tremor, and shuffling gait. What is this called?',
+opts:[['a','Neuroleptic malignant syndrome'],['b','Drug-induced parkinsonism'],['c','Tardive dyskinesia'],['d','Acute dystonic reaction']],
+ans:'b',
+exp:'<strong>Drug-induced parkinsonism:</strong> Rigidity, bradykinesia, tremor, shuffling gait. Treat by lowering dose or switching to SGA. Benztropine can help.',
+kp:'Parkinsonism: rigidity, tremor, bradykinesia. Treat with anticholinergics or switch agent.',
+dd:{mechanism:{title:'EPS Types',content:'<table><tr><th>Type</th><th>Timing</th><th>Features</th></tr><tr><td>Acute dystonia</td><td>Hours-days</td><td>Muscle spasms</td></tr><tr><td>Parkinsonism</td><td>Days-weeks</td><td>Rigidity, tremor</td></tr><tr><td>Akathisia</td><td>Days-weeks</td><td>Restlessness</td></tr><tr><td>Tardive</td><td>Months-years</td><td>Involuntary movements</td></tr></table>',bw:['Dystonia = hours','Parkinsonism = days-weeks','Tardive = months-years']}}},
+10:{type:'Clozapine',difficulty:'hard',domains:['pharmacology'],tags:['Step2','Psych'],stem:'When is clozapine indicated in schizophrenia?',
+opts:[['a','First-line for all new diagnoses'],['b','Treatment-resistant schizophrenia after two failed trials'],['c','Only for acute psychotic episodes'],['d','Preferred in elderly patients']],
+ans:'b',
+exp:'<strong>Clozapine:</strong> Reserved for treatment-resistant schizophrenia (failed ≥2 antipsychotics). Most effective but requires ANC monitoring for agranulocytosis.',
+kp:'Clozapine for treatment-resistant. Weekly ANC monitoring initially. Risk of agranulocytosis.',
+dd:{mechanism:{title:'Clozapine',content:'<h4>Indications</h4><ul><li>Treatment-resistant schizophrenia</li><li>Suicidality in schizophrenia</li></ul><h4>Monitoring</h4><ul><li>Weekly ANC initially</li><li>Metabolic parameters</li><li>Seizure risk at high doses</li></ul>',bw:['Treatment-resistant','Weekly ANC','Agranulocytosis risk']}}},
+11:{type:'Panic Disorder',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Psych'],stem:'A patient has recurrent episodes of palpitations, sweating, and fear of dying lasting 10-20 minutes. What is the likely diagnosis?',
+opts:[['a','Generalized anxiety disorder'],['b','Panic disorder'],['c','Social anxiety disorder'],['d','Specific phobia']],
+ans:'b',
+exp:'<strong>Panic disorder:</strong> Recurrent unexpected panic attacks (discrete episodes of intense fear with physical symptoms) plus worry about future attacks.',
+kp:'Panic attacks are discrete episodes. Panic disorder = recurrent + worry about attacks.',
+dd:{mechanism:{title:'Panic vs GAD',content:'<table><tr><th>Feature</th><th>Panic Disorder</th><th>GAD</th></tr><tr><td>Symptoms</td><td>Discrete attacks</td><td>Chronic worry</td></tr><tr><td>Duration</td><td>Minutes</td><td>6+ months</td></tr><tr><td>Physical</td><td>Intense, acute</td><td>Muscle tension</td></tr></table>',bw:['Panic = discrete attacks','GAD = chronic worry','Both treat with SSRIs']}}},
+12:{type:'GAD',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Psych'],stem:'A patient reports excessive worry about multiple things for 8 months with muscle tension and poor sleep. What is the diagnosis?',
+opts:[['a','Panic disorder'],['b','Adjustment disorder with anxiety'],['c','Generalized anxiety disorder'],['d','Obsessive-compulsive disorder']],
+ans:'c',
+exp:'<strong>GAD:</strong> Excessive worry about multiple domains for ≥6 months with ≥3 of: restlessness, fatigue, poor concentration, irritability, muscle tension, sleep disturbance.',
+kp:'GAD: worry about multiple things for ≥6 months. 3+ somatic symptoms.',
+dd:{mechanism:{title:'GAD Criteria',content:'<h4>Core Feature</h4><ul><li>Excessive worry ≥6 months</li><li>Multiple domains</li><li>Difficult to control</li></ul><h4>3+ Symptoms</h4><ul><li>Restlessness</li><li>Fatigue</li><li>Poor concentration</li><li>Irritability</li><li>Muscle tension</li><li>Sleep disturbance</li></ul>',bw:['6 months duration','Multiple worries','3+ somatic symptoms']}}},
+13:{type:'Anxiety Treatment',difficulty:'medium',domains:['pharmacology'],tags:['Step2','Psych'],stem:'What is first-line pharmacotherapy for generalized anxiety disorder?',
+opts:[['a','Benzodiazepines for long-term use'],['b','SSRIs or SNRIs'],['c','Buspirone only'],['d','Antipsychotics']],
+ans:'b',
+exp:'<strong>GAD treatment:</strong> SSRIs/SNRIs first-line. Buspirone adjunct. Benzodiazepines short-term only due to dependence risk. CBT effective.',
+kp:'SSRIs/SNRIs first-line. Benzos short-term only. CBT effective adjunct.',
+dd:{mechanism:{title:'Anxiety Medications',content:'<table><tr><th>Class</th><th>Role</th><th>Notes</th></tr><tr><td>SSRI/SNRI</td><td>First-line</td><td>4-6 weeks onset</td></tr><tr><td>Buspirone</td><td>Adjunct</td><td>No dependence</td></tr><tr><td>Benzos</td><td>Short-term</td><td>Dependence risk</td></tr></table>',bw:['SSRIs first-line','Benzos short-term','CBT important']}}},
+14:{type:'OCD',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Psych'],stem:'A patient spends 3 hours daily washing hands due to contamination fears. What is the diagnosis?',
+opts:[['a','Generalized anxiety disorder'],['b','Obsessive-compulsive disorder'],['c','Obsessive-compulsive personality disorder'],['d','Illness anxiety disorder']],
+ans:'b',
+exp:'<strong>OCD:</strong> Obsessions (intrusive thoughts) and/or compulsions (repetitive behaviors) that are time-consuming (>1 hr/day) or cause distress.',
+kp:'OCD: obsessions + compulsions. Time-consuming (>1 hr/day). Ego-dystonic.',
+dd:{mechanism:{title:'OCD vs OCPD',content:'<table><tr><th>Feature</th><th>OCD</th><th>OCPD</th></tr><tr><td>Ego</td><td>Dystonic (unwanted)</td><td>Syntonic (consistent)</td></tr><tr><td>Insight</td><td>Usually present</td><td>Often absent</td></tr><tr><td>Treatment</td><td>SSRIs, CBT</td><td>Psychotherapy</td></tr></table>',bw:['Ego-dystonic in OCD','SSRIs for OCD','ERP therapy effective']}}},
+15:{type:'PTSD',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Psych'],stem:'After a car accident, a patient has nightmares, avoids driving, and is hypervigilant for 2 months. What is the diagnosis?',
+opts:[['a','Acute stress disorder'],['b','Post-traumatic stress disorder'],['c','Adjustment disorder'],['d','Generalized anxiety disorder']],
+ans:'b',
+exp:'<strong>PTSD:</strong> After trauma: intrusion symptoms, avoidance, negative cognitions/mood, hyperarousal for >1 month. Acute stress disorder if <1 month.',
+kp:'PTSD: >1 month duration. Acute stress: <1 month. Re-experiencing, avoidance, hyperarousal.',
+dd:{mechanism:{title:'PTSD Criteria',content:'<h4>Required</h4><ul><li>Trauma exposure</li><li>Duration >1 month</li></ul><h4>Symptom Clusters</h4><ul><li>Intrusion (flashbacks, nightmares)</li><li>Avoidance</li><li>Negative mood/cognitions</li><li>Hyperarousal</li></ul>',bw:['>1 month duration','4 symptom clusters','Trauma exposure required']}}},
+16:{type:'Acute Agitation',difficulty:'hard',domains:['emergency'],tags:['Step2','Psych'],stem:'An agitated patient is threatening staff. Verbal de-escalation fails. What is the next pharmacologic step?',
+opts:[['a','Physical restraints only without medication'],['b','IM haloperidol with lorazepam and diphenhydramine'],['c','Oral clozapine for rapid effect'],['d','IV propofol for sedation']],
+ans:'b',
+exp:'<strong>Acute agitation:</strong> After de-escalation fails: IM antipsychotic (haloperidol) + benzodiazepine (lorazepam) ± anticholinergic. "B52" = Benadryl 50 + Haldol 5 + Ativan 2.',
+kp:'De-escalation first. Then IM haloperidol + lorazepam. B52 cocktail common.',
+dd:{mechanism:{title:'Agitation Management',content:'<h4>Stepwise Approach</h4><ol><li>Verbal de-escalation</li><li>Offer oral medications</li><li>IM medications if refused</li><li>Physical restraints last resort</li></ol>',bw:['De-escalation first','IM if oral refused','Haloperidol + lorazepam']}}},
+17:{type:'NMS',difficulty:'hard',domains:['emergency'],tags:['Step2','Psych'],stem:'A patient on haloperidol develops fever 104°F, rigidity, altered mental status, and elevated CK. What is the diagnosis?',
+opts:[['a','Serotonin syndrome'],['b','Neuroleptic malignant syndrome'],['c','Malignant hyperthermia'],['d','Drug-induced parkinsonism']],
+ans:'b',
+exp:'<strong>NMS:</strong> Life-threatening reaction to antipsychotics. Fever, rigidity ("lead pipe"), AMS, autonomic instability, elevated CK. Stop agent, supportive care, dantrolene/bromocriptine.',
+kp:'NMS: Fever + rigidity + AMS + autonomic instability. Stop antipsychotic. Dantrolene/bromocriptine.',
+dd:{mechanism:{title:'NMS vs Serotonin Syndrome',content:'<table><tr><th>Feature</th><th>NMS</th><th>Serotonin Syndrome</th></tr><tr><td>Onset</td><td>Days-weeks</td><td>Hours</td></tr><tr><td>Rigidity</td><td>Lead-pipe</td><td>Hyperreflexia, clonus</td></tr><tr><td>Cause</td><td>Antipsychotics</td><td>Serotonergics</td></tr></table>',bw:['NMS = slow onset','Lead-pipe rigidity','Elevated CK']}}},
+18:{type:'Serotonin Syndrome',difficulty:'hard',domains:['emergency'],tags:['Step2','Psych'],stem:'A patient on fluoxetine was started on tramadol and develops agitation, hyperthermia, clonus, and hyperreflexia. What is the diagnosis?',
+opts:[['a','Neuroleptic malignant syndrome'],['b','Serotonin syndrome'],['c','Anticholinergic toxicity'],['d','Opioid overdose']],
+ans:'b',
+exp:'<strong>Serotonin syndrome:</strong> From serotonergic drugs (SSRIs + tramadol, MAOIs). Rapid onset. Clonus, hyperreflexia, hyperthermia, agitation. Stop agents, cyproheptadine.',
+kp:'Serotonin syndrome: rapid onset, clonus, hyperreflexia. Cyproheptadine is antidote.',
+dd:{mechanism:{title:'Serotonin Syndrome',content:'<h4>Triad</h4><ul><li>Mental status changes</li><li>Autonomic instability</li><li>Neuromuscular abnormalities (clonus!)</li></ul><h4>Treatment</h4><ul><li>Stop serotonergic agents</li><li>Cyproheptadine</li><li>Supportive care</li></ul>',bw:['Clonus key finding','Rapid onset (hours)','Cyproheptadine']}}},
+19:{type:'Suicide Assessment',difficulty:'hard',domains:['emergency'],tags:['Step2','Psych'],stem:'A patient admits to suicidal ideation with a plan to overdose on pills they have at home. What is the priority intervention?',
+opts:[['a','Outpatient referral to psychiatry'],['b','Means restriction and psychiatric hospitalization'],['c','Start antidepressant and follow up in one week'],['d','Reassurance and safety planning only']],
+ans:'b',
+exp:'<strong>High suicide risk:</strong> Ideation + plan + access to means = high risk. Immediate safety: means restriction (remove pills), psychiatric admission.',
+kp:'Ideation + plan + means = high risk. Means restriction critical. Consider hospitalization.',
+dd:{mechanism:{title:'Suicide Risk Levels',content:'<table><tr><th>Risk</th><th>Features</th><th>Action</th></tr><tr><td>Low</td><td>Ideation, no plan</td><td>Safety plan, outpatient</td></tr><tr><td>Moderate</td><td>Plan, no intent</td><td>Close follow-up</td></tr><tr><td>High</td><td>Plan + intent + means</td><td>Hospitalization</td></tr></table>',bw:['Means restriction','Plan + intent = high risk','Hospitalization if needed']}}},
+20:{type:'Involuntary Commitment',difficulty:'medium',domains:['emergency'],tags:['Step2','Psych'],stem:'What is required for involuntary psychiatric hospitalization?',
+opts:[['a','Patient request for admission'],['b','Danger to self or others due to mental illness'],['c','Family member request alone'],['d','Failure to take prescribed medications']],
+ans:'b',
+exp:'<strong>Involuntary commitment:</strong> Patient must have mental illness AND be danger to self, danger to others, or gravely disabled (unable to care for basic needs).',
+kp:'Mental illness + danger to self/others OR gravely disabled. Varies by state.',
+dd:{mechanism:{title:'Commitment Criteria',content:'<h4>Requirements</h4><ul><li>Mental illness present</li><li>AND one of:</li><li>- Danger to self</li><li>- Danger to others</li><li>- Gravely disabled</li></ul>',bw:['Mental illness required','Danger to self/others','Gravely disabled']}}}
+};
+var answers={1:'c',2:'b',3:'d',4:'d',5:'d',6:'b',7:'b',8:'a',9:'b',10:'a',11:'c',12:'a',13:'c',14:'d',15:'a',16:'d',17:'a',18:'c',19:'b',20:'c'};
+function goPhase(p){if(p<1||p>4)return;phase=p;renderPhase();}
+function renderPhase(){var ph=phases[phase];document.querySelectorAll('.timeline-phase').forEach(function(el,i){el.classList.remove('active','locked');if(i+1===phase)el.classList.add('active');else if(i+1>phase)el.classList.add('locked');});document.getElementById('caseNarrative').innerHTML=ph.narrative;document.getElementById('pearlText').textContent=ph.pearl;var objHtml='<div class="obj-title">🎯 Phase '+phase+' Objectives</div><ul class="obj-list">';ph.objectives.forEach(function(o){objHtml+='<li>'+o+'</li>';});objHtml+='</ul>';if(ph.refs){objHtml+='<div style="margin-top:12px;padding-top:10px;border-top:1px dashed #e2e8f0"><div style="font-size:10px;font-weight:600;color:#64748b;margin-bottom:6px">📚 References</div>';ph.refs.forEach(function(r){objHtml+='<a href="'+r.u+'" target="_blank" style="font-size:10px;color:#7c3aed;text-decoration:none;display:block;margin:3px 0">'+r.t+'</a>';});objHtml+='</div>';}document.getElementById('phaseObjectives').innerHTML=objHtml;renderQuestions(ph.qs);}
+function renderQuestions(qIds){var html='';qIds.forEach(function(qid){var q=Qs[qid];if(!q)return;html+='<div class="quiz-card" id="q'+qid+'"><div class="quiz-header"><div class="quiz-num">'+qid+'</div><span class="quiz-type">'+q.type+'</span><div class="quiz-meta">';q.tags.forEach(function(t){html+='<span class="quiz-tag">'+t+'</span>';});html+='<span class="quiz-difficulty '+q.difficulty+'">'+q.difficulty+'</span></div></div>';html+='<div class="quiz-body"><div class="quiz-stem">'+q.stem+'</div><div class="quiz-options">';q.opts.forEach(function(opt){html+='<div class="quiz-option" data-q="'+qid+'" data-opt="'+opt[0]+'" onclick="selectOpt(this)"><div class="option-letter">'+opt[0].toUpperCase()+'</div><div class="option-text">'+opt[1]+'</div></div>';});html+='</div><button class="submit-btn" id="sub'+qid+'" disabled onclick="submitQ('+qid+')">Submit</button><div class="explanation" id="exp'+qid+'"></div></div></div>';});document.getElementById('questionsPanel').innerHTML=html;}
+function selectOpt(el){var qid=el.dataset.q;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.remove('selected');});el.classList.add('selected');state[qid].pick=el.dataset.opt;document.getElementById('sub'+qid).disabled=false;}
+function submitQ(qid){if(state[qid].done)return;state[qid].done=true;var correct=answers[qid],picked=state[qid].pick,isCorrect=picked===correct;state[qid].ok=isCorrect;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.add('disabled');if(o.dataset.opt===correct)o.classList.add('correct');else if(o.dataset.opt===picked&&!isCorrect)o.classList.add('incorrect');});document.getElementById('sub'+qid).style.display='none';var q=Qs[qid],expDiv=document.getElementById('exp'+qid);var expHtml='<div>'+(isCorrect?'✓ Correct!':'✗ Incorrect')+'</div><div>'+q.exp+'</div><div class="keypoint"><span class="keypoint-label">⚡ Key:</span> '+q.kp+'</div>';if(q.dd){expHtml+='<div class="deep-dive"><button class="dd-toggle" onclick="toggleDD(this)">📚 Deep Dive <span>▼</span></button><div class="dd-content">';for(var d in q.dd){expHtml+=q.dd[d].content;if(q.dd[d].bw){expHtml+='<div class="buzzwords">';q.dd[d].bw.forEach(function(b){expHtml+='<span class="buzzword">'+b+'</span>';});expHtml+='</div>';}}expHtml+='</div></div>';}expDiv.innerHTML=expHtml;expDiv.classList.add('visible',isCorrect?'correct':'incorrect');updateProgress();}
+function toggleDD(btn){btn.nextElementSibling.classList.toggle('visible');btn.querySelector('span').textContent=btn.nextElementSibling.classList.contains('visible')?'▲':'▼';}
+function updateProgress(){var done=0;for(var i=1;i<=20;i++)if(state[i].done)done++;document.getElementById('progressFill').style.width=(done/20*100)+'%';document.getElementById('progressCount').textContent=done+'/20';}
+renderPhase();
+</script>
+</body>
+</html>

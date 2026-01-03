@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diabetes Management - ReasonDx</title>
+<style>
+:root{--bg-page:#f8fafc;--bg-white:#fff;--bg-subtle:#f1f5f9;--text-primary:#0f172a;--text-secondary:#475569;--border:#e2e8f0;--accent:#0891b2;--accent-light:#cffafe;--green:#059669;--red:#dc2626;--radius-sm:8px;--radius-lg:16px}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg-page);color:var(--text-primary);line-height:1.6}
+.header{background:linear-gradient(135deg,#0891b2,#0e7490);color:#fff;padding:16px 24px}.logo{font-weight:700;font-size:18px}
+.module-header{background:var(--bg-white);border-bottom:1px solid var(--border);padding:24px}
+.module-title{display:flex;align-items:center;gap:16px;max-width:1400px;margin:0 auto}.module-icon{width:56px;height:56px;background:linear-gradient(135deg,#cffafe,#a5f3fc);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:28px}
+.module-title h1{font-size:26px;font-weight:700}.enhanced-badge{background:linear-gradient(135deg,var(--accent),#0e7490);color:#fff;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;margin-left:8px}
+.progress-bar{background:var(--bg-white);border-bottom:1px solid var(--border);padding:12px 24px}.progress-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;gap:16px}
+.progress-track{flex:1;height:8px;background:var(--bg-subtle);border-radius:4px}.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));transition:width .3s}.progress-count{font-size:13px;font-weight:600}
+.timeline-nav{background:var(--bg-white);border-bottom:1px solid var(--border);padding:0 24px}.timeline-inner{max-width:1400px;margin:0 auto;display:flex}
+.timeline-phase{flex:1;padding:16px 8px;cursor:pointer;border-bottom:3px solid transparent;text-align:center}.timeline-phase.active{border-bottom-color:var(--accent)}.timeline-phase.locked{opacity:.4}
+.phase-label{font-size:12px;font-weight:600}.phase-time{font-size:10px;color:var(--text-secondary)}
+.main-container{max-width:1400px;margin:0 auto;padding:24px;display:grid;grid-template-columns:300px 1fr;gap:24px}@media(max-width:900px){.main-container{grid-template-columns:1fr}}
+.card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:16px}.card-header{padding:14px 18px;border-bottom:1px solid var(--border)}.card-title{font-size:13px;font-weight:600}.card-content{padding:16px 18px}.case-narrative{font-size:14px;color:var(--text-secondary)}
+.clinical-pearl{margin-top:12px;padding:12px;background:var(--accent-light);border-radius:var(--radius-sm);border-left:3px solid var(--accent)}.pearl-title{font-size:10px;font-weight:600;color:#0e7490}.pearl-text{font-size:11px;color:#155e75}
+.phase-objectives{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px;margin-bottom:16px}.obj-title{font-size:12px;font-weight:600;color:var(--accent);margin-bottom:8px}.obj-list{list-style:none;font-size:11px}.obj-list li{padding:4px 0 4px 16px;position:relative}.obj-list li::before{content:'→';position:absolute;left:0;color:var(--accent)}
+.quiz-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:16px}.quiz-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}.quiz-num{width:28px;height:28px;background:linear-gradient(135deg,var(--accent),#0e7490);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}.quiz-type{font-size:12px;font-weight:600}.quiz-meta{margin-left:auto;display:flex;gap:6px}.quiz-tag{font-size:9px;padding:2px 6px;background:var(--bg-subtle);border-radius:4px}.quiz-difficulty{font-size:9px;padding:2px 6px;border-radius:4px}.quiz-difficulty.medium{background:#fef3c7;color:#92400e}.quiz-difficulty.hard{background:#fee2e2;color:#991b1b}
+.quiz-body{padding:16px}.quiz-stem{font-size:14px;font-weight:500;margin-bottom:14px}.quiz-options{display:flex;flex-direction:column;gap:8px}.quiz-option{display:flex;gap:12px;padding:12px 14px;background:var(--bg-subtle);border:2px solid transparent;border-radius:var(--radius-sm);cursor:pointer}.quiz-option.selected{border-color:var(--accent)}.quiz-option.correct{border-color:var(--green);background:rgba(5,150,105,.08)}.quiz-option.incorrect{border-color:var(--red);background:rgba(220,38,38,.08)}.quiz-option.disabled{pointer-events:none;opacity:.7}
+.option-letter{width:24px;height:24px;border:2px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}.quiz-option.selected .option-letter{border-color:var(--accent);color:var(--accent)}.quiz-option.correct .option-letter{background:var(--green);color:#fff;border-color:var(--green)}.quiz-option.incorrect .option-letter{background:var(--red);color:#fff;border-color:var(--red)}
+.submit-btn{margin-top:14px;width:100%;padding:12px;background:linear-gradient(135deg,var(--accent),#0e7490);color:#fff;border:none;border-radius:var(--radius-sm);font-weight:600;cursor:pointer}.submit-btn:disabled{background:var(--bg-subtle);color:var(--text-secondary)}
+.explanation{margin-top:16px;padding:16px;border-radius:var(--radius-sm);display:none;font-size:13px}.explanation.visible{display:block}.explanation.correct{background:#f0fdf4;border:1px solid #bbf7d0}.explanation.incorrect{background:#fef2f2;border:1px solid #fecaca}
+.keypoint{margin-top:10px;padding:10px;background:rgba(8,145,178,.1);border-radius:6px;font-size:12px}.keypoint-label{font-weight:600;color:var(--accent);font-size:10px}
+.deep-dive{margin-top:14px;border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden}.dd-toggle{width:100%;padding:10px 14px;background:var(--bg-subtle);border:none;cursor:pointer;display:flex;justify-content:space-between;font-size:12px;font-weight:600}.dd-content{display:none;padding:14px;font-size:12px;max-height:500px;overflow-y:auto}.dd-content.visible{display:block}.dd-content h4{font-size:13px;font-weight:600;margin:12px 0 8px;color:var(--accent)}.dd-content h4:first-child{margin-top:0}.dd-content ul{margin:8px 0;padding-left:20px}.dd-content li{margin:4px 0}.dd-content table{width:100%;border-collapse:collapse;margin:10px 0;font-size:11px}.dd-content th,.dd-content td{border:1px solid var(--border);padding:6px 8px}.dd-content th{background:var(--bg-subtle)}.buzzwords{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px}.buzzword{font-size:10px;padding:4px 8px;background:#fef3c7;border-radius:4px;color:#92400e;font-weight:500}
+</style>
+</head>
+<body>
+<header class="header"><div class="logo">🩸 ReasonDx — Diabetes Management</div></header>
+<div class="module-header"><div class="module-title"><div class="module-icon">🩸</div><div><h1>Diabetes Management<span class="enhanced-badge">✨ MECHANISM-ENHANCED</span></h1><p>Type 1 & 2 DM, Pharmacotherapy, DKA, and Complications</p></div></div></div>
+<div class="progress-bar"><div class="progress-inner"><span style="font-size:12px;color:var(--text-secondary)">Progress</span><div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div><span class="progress-count" id="progressCount">0/20</span></div></div>
+<nav class="timeline-nav"><div class="timeline-inner">
+<div class="timeline-phase active" onclick="goPhase(1)"><div class="phase-label">🔍 Diagnosis</div><div class="phase-time">Criteria & Classification</div></div>
+<div class="timeline-phase locked" onclick="goPhase(2)"><div class="phase-label">💊 T2DM Therapy</div><div class="phase-time">Oral Agents & Injectables</div></div>
+<div class="timeline-phase locked" onclick="goPhase(3)"><div class="phase-label">🚨 DKA/HHS</div><div class="phase-time">Emergencies</div></div>
+<div class="timeline-phase locked" onclick="goPhase(4)"><div class="phase-label">🛡️ Complications</div><div class="phase-time">Micro & Macrovascular</div></div>
+</div></nav>
+<div class="main-container">
+<aside>
+<div class="phase-objectives" id="phaseObjectives"></div>
+<div class="card"><div class="card-header"><div class="card-title">📋 Clinical Snapshot</div></div><div class="card-content"><div class="case-narrative" id="caseNarrative"></div><div class="clinical-pearl"><div class="pearl-title">💡 DM Pearl</div><div class="pearl-text" id="pearlText"></div></div></div></div>
+</aside>
+<main id="questionsPanel"></main>
+</div>
+<script>
+var phase=1,state={};for(var i=1;i<=20;i++)state[i]={pick:null,done:false,ok:false};
+var phases={
+1:{qs:[1,2,3,4,5],narrative:'<strong>Robert Chen</strong>, 52M with BMI 32, presents for routine checkup. Fasting glucose 142 mg/dL. HbA1c ordered.',pearl:'DM diagnosis: FPG ≥126, 2hr OGTT ≥200, HbA1c ≥6.5%, or random glucose ≥200 with symptoms. Two tests needed if asymptomatic.',objectives:['Apply diagnostic criteria','Differentiate T1DM vs T2DM','Understand prediabetes','Know screening guidelines'],refs:[{t:'ADA Standards of Care 2024',u:'https://diabetesjournals.org/care/issue/47/Supplement_1'}]},
+2:{qs:[6,7,8,9,10],narrative:'Robert has T2DM with A1c 8.2%. He has no CVD but CKD stage 3. Needs therapy selection with cardiorenal protection.',pearl:'First-line: metformin + lifestyle. Add SGLT2i or GLP-1RA if ASCVD, HF, or CKD. Individualize A1c target.',objectives:['Select first-line therapy','Know SGLT2i/GLP-1RA benefits','Understand mechanism of agents','Adjust for renal function'],refs:[{t:'ADA/EASD Consensus',u:'https://diabetesjournals.org/care/article/45/11/2753/147671'}]},
+3:{qs:[11,12,13,14,15],narrative:'Different patient: T1DM presents with glucose 580, ketones positive, pH 7.18, bicarb 10. This is DKA requiring urgent management.',pearl:'DKA triad: hyperglycemia, ketosis, acidosis. Treat with fluids, insulin, potassium. Close gap, not glucose. Watch for cerebral edema in peds.',objectives:['Diagnose DKA vs HHS','Manage fluid resuscitation','Know insulin and K+ protocols','Prevent complications'],refs:[{t:'DKA Guidelines',u:'https://diabetesjournals.org/care/article/47/Supplement_1/S231/153955'}]},
+4:{qs:[16,17,18,19,20],narrative:'Robert returns with microalbuminuria and early neuropathy. Screening and prevention of complications is essential.',pearl:'Screen annually: uACR, eGFR, dilated eye exam, foot exam. ACEi/ARB for albuminuria. Statin for most adults with DM.',objectives:['Screen for complications','Manage diabetic nephropathy','Recognize neuropathy types','Prevent foot ulcers'],refs:[{t:'Complications Management',u:'https://diabetesjournals.org/care/article/47/Supplement_1/S231/153955'}]}
+};
+var Qs={
+1:{type:'Diagnostic Criteria',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Endo'],stem:'A patient has fasting plasma glucose of 134 mg/dL on two separate occasions. What is the diagnosis?',
+opts:[['a','Normal glucose metabolism'],['b','Impaired fasting glucose (prediabetes)'],['c','Diabetes mellitus'],['d','Requires oral glucose tolerance testing first']],
+ans:'c',
+exp:'<strong>DM diagnosis:</strong> FPG ≥126 mg/dL on two occasions = diabetes. Prediabetes: FPG 100-125. Two tests needed if asymptomatic.',
+kp:'FPG ≥126 twice = DM. FPG 100-125 = prediabetes. One test sufficient if symptomatic.',
+dd:{mechanism:{title:'Diagnostic Criteria',content:'<table><tr><th>Test</th><th>DM</th><th>Prediabetes</th></tr><tr><td>FPG</td><td>≥126</td><td>100-125</td></tr><tr><td>2h OGTT</td><td>≥200</td><td>140-199</td></tr><tr><td>HbA1c</td><td>≥6.5%</td><td>5.7-6.4%</td></tr></table>',bw:['FPG ≥126','HbA1c ≥6.5%','Two tests if asymptomatic']}}},
+2:{type:'HbA1c Interpretation',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Endo'],stem:'A patient has HbA1c of 6.2%. How should this be interpreted?',
+opts:[['a','Normal result requiring no intervention'],['b','Prediabetes requiring lifestyle modification'],['c','Diabetes mellitus requiring medication'],['d','Laboratory error needing repeat testing']],
+ans:'b',
+exp:'<strong>HbA1c categories:</strong> Normal <5.7%, Prediabetes 5.7-6.4%, Diabetes ≥6.5%. HbA1c 6.2% = prediabetes, needs lifestyle changes.',
+kp:'HbA1c 5.7-6.4% = prediabetes. Lifestyle modification first. Metformin consider if high risk.',
+dd:{mechanism:{title:'HbA1c Ranges',content:'<table><tr><th>HbA1c</th><th>Interpretation</th></tr><tr><td><5.7%</td><td>Normal</td></tr><tr><td>5.7-6.4%</td><td>Prediabetes</td></tr><tr><td>≥6.5%</td><td>Diabetes</td></tr></table>',bw:['<5.7% normal','5.7-6.4% prediabetes','≥6.5% diabetes']}}},
+3:{type:'T1DM vs T2DM',difficulty:'medium',domains:['pathophysiology'],tags:['Step2','Endo'],stem:'A thin 25-year-old presents with DKA, glucose 450, and positive GAD antibodies. What type of diabetes?',
+opts:[['a','Type 2 diabetes with insulin resistance'],['b','Type 1 diabetes with autoimmune beta cell destruction'],['c','Maturity-onset diabetes of the young (MODY)'],['d','Secondary diabetes from pancreatic disease']],
+ans:'b',
+exp:'<strong>T1DM features:</strong> Young, thin, DKA presentation, positive autoantibodies (GAD, IA-2, insulin, ZnT8). Autoimmune beta cell destruction.',
+kp:'GAD antibodies = autoimmune T1DM. DKA common presentation. Requires lifelong insulin.',
+dd:{mechanism:{title:'T1DM vs T2DM',content:'<table><tr><th>Feature</th><th>T1DM</th><th>T2DM</th></tr><tr><td>Age</td><td>Young</td><td>Adult</td></tr><tr><td>Body type</td><td>Thin</td><td>Obese</td></tr><tr><td>DKA</td><td>Common</td><td>Rare</td></tr><tr><td>Antibodies</td><td>Positive</td><td>Negative</td></tr></table>',bw:['GAD antibodies','Autoimmune destruction','Lifelong insulin needed']}}},
+4:{type:'C-Peptide',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Endo'],stem:'A patient with unclear diabetes type has undetectable C-peptide. What does this indicate?',
+opts:[['a','Significant insulin resistance present'],['b','Minimal endogenous insulin production'],['c','Exogenous insulin administration only'],['d','Early type 2 diabetes with hyperinsulinemia']],
+ans:'b',
+exp:'<strong>C-peptide:</strong> Marker of endogenous insulin production. Low/undetectable = little beta cell function (T1DM). High = insulin resistance (T2DM).',
+kp:'Low C-peptide = T1DM or late T2DM. High C-peptide = insulin resistance (early T2DM).',
+dd:{mechanism:{title:'C-Peptide',content:'<h4>Interpretation</h4><ul><li>Low: T1DM, late T2DM</li><li>High: T2DM with resistance</li></ul><h4>Use</h4><ul><li>Differentiate DM type</li><li>Not affected by exogenous insulin</li></ul>',bw:['Low = T1DM','High = resistance','Endogenous production marker']}}},
+5:{type:'Screening',difficulty:'medium',domains:['prevention'],tags:['Step2','Endo'],stem:'Which adults should be screened for type 2 diabetes?',
+opts:[['a','Only those with symptoms of hyperglycemia'],['b','All adults starting at age 25'],['c','Adults ≥35 or overweight with risk factors'],['d','Only first-degree relatives of diabetics']],
+ans:'c',
+exp:'<strong>DM screening:</strong> All adults ≥35 years. Earlier if overweight (BMI ≥25) with risk factors. Screen every 3 years if normal.',
+kp:'Screen all adults ≥35. Earlier if overweight + risk factors. Repeat every 3 years.',
+dd:{mechanism:{title:'Screening Guidelines',content:'<h4>Who to Screen</h4><ul><li>All adults ≥35 years</li><li>Any age if overweight + risk factors</li></ul><h4>Risk Factors</h4><ul><li>Family history</li><li>High-risk ethnicity</li><li>History of GDM</li><li>HTN, dyslipidemia</li></ul>',bw:['All adults ≥35','Overweight + risk factors','Every 3 years if normal']}}},
+6:{type:'First-Line Therapy',difficulty:'medium',domains:['pharmacology'],tags:['Step2','Endo'],stem:'What is first-line pharmacotherapy for newly diagnosed T2DM without complications?',
+opts:[['a','Sulfonylurea for rapid glucose lowering'],['b','Metformin plus lifestyle modification'],['c','Basal insulin for better control'],['d','DPP-4 inhibitor as monotherapy']],
+ans:'b',
+exp:'<strong>First-line:</strong> Metformin + lifestyle for most T2DM. Low cost, effective, weight neutral, possible CV benefit. Add SGLT2i/GLP-1RA if ASCVD/CKD/HF.',
+kp:'Metformin first-line unless contraindicated. Add cardiorenal protection agents if indicated.',
+dd:{mechanism:{title:'Metformin',content:'<h4>Benefits</h4><ul><li>Effective A1c lowering (~1.5%)</li><li>Weight neutral or loss</li><li>Low cost</li><li>Possible CV benefit</li></ul><h4>Contraindications</h4><ul><li>eGFR <30 (avoid)</li><li>Lactic acidosis risk</li></ul>',bw:['First-line','Weight neutral','Avoid if eGFR <30']}}},
+7:{type:'SGLT2 Inhibitors',difficulty:'medium',domains:['pharmacology'],tags:['Step2','Endo'],stem:'Which patient with T2DM would benefit most from an SGLT2 inhibitor?',
+opts:[['a','Young patient with no complications'],['b','Patient with recurrent urinary tract infections'],['c','Patient with heart failure or CKD'],['d','Patient requiring rapid glucose lowering']],
+ans:'c',
+exp:'<strong>SGLT2i benefits:</strong> CV death reduction, HF hospitalization reduction, CKD progression reduction. Use if ASCVD, HF, or CKD regardless of A1c.',
+kp:'SGLT2i for HF and CKD benefit. Works independent of glucose. Watch for UTI, DKA.',
+dd:{mechanism:{title:'SGLT2 Inhibitors',content:'<h4>Benefits</h4><ul><li>CV death reduction</li><li>HF hospitalization ↓</li><li>CKD progression ↓</li><li>Weight loss</li></ul><h4>Risks</h4><ul><li>UTI/yeast infections</li><li>Euglycemic DKA</li><li>Volume depletion</li></ul>',bw:['HF benefit','Renal protection','Euglycemic DKA risk']}}},
+8:{type:'GLP-1 Receptor Agonists',difficulty:'medium',domains:['pharmacology'],tags:['Step2','Endo'],stem:'What is the primary advantage of GLP-1 receptor agonists in T2DM?',
+opts:[['a','Lowest cost among diabetes medications'],['b','Weight loss and cardiovascular benefit'],['c','Can be used in severe renal impairment'],['d','Fastest onset of glucose lowering action']],
+ans:'b',
+exp:'<strong>GLP-1RA:</strong> Significant weight loss (semaglutide up to 15%), CV benefit in ASCVD. Preferred if weight loss priority.',
+kp:'GLP-1RA for weight loss + CV benefit. Semaglutide most effective. GI side effects common.',
+dd:{mechanism:{title:'GLP-1 Agonists',content:'<h4>Benefits</h4><ul><li>Weight loss (5-15%)</li><li>CV benefit</li><li>Low hypoglycemia risk</li></ul><h4>Side Effects</h4><ul><li>Nausea, vomiting</li><li>Pancreatitis (rare)</li><li>Thyroid C-cell tumors (rodents)</li></ul>',bw:['Weight loss','CV protection','GI side effects']}}},
+9:{type:'Sulfonylureas',difficulty:'medium',domains:['pharmacology'],tags:['Step2','Endo'],stem:'What is the main risk associated with sulfonylurea therapy?',
+opts:[['a','Lactic acidosis in renal impairment'],['b','Hypoglycemia and weight gain'],['c','Euglycemic diabetic ketoacidosis'],['d','Urinary tract infections']],
+ans:'b',
+exp:'<strong>Sulfonylureas:</strong> Stimulate insulin secretion. Effective but cause hypoglycemia (especially in elderly/CKD) and weight gain.',
+kp:'SU cause hypoglycemia and weight gain. Avoid in elderly, CKD. Glyburide highest risk.',
+dd:{mechanism:{title:'Sulfonylureas',content:'<h4>Mechanism</h4><p>Stimulate insulin release from beta cells</p><h4>Risks</h4><ul><li>Hypoglycemia</li><li>Weight gain (2-4 kg)</li></ul><h4>Caution</h4><ul><li>Elderly</li><li>CKD</li><li>Avoid glyburide</li></ul>',bw:['Hypoglycemia risk','Weight gain','Avoid glyburide']}}},
+10:{type:'Insulin Initiation',difficulty:'medium',domains:['pharmacology'],tags:['Step2','Endo'],stem:'When should insulin be initiated in T2DM?',
+opts:[['a','As first-line therapy for all patients'],['b','Only after failing three oral agents'],['c','If A1c remains above goal on other agents'],['d','Only if C-peptide is undetectable']],
+ans:'c',
+exp:'<strong>Insulin in T2DM:</strong> Consider if A1c >10%, symptoms present, or failing oral agents. Start basal insulin, titrate to fasting goal.',
+kp:'Add insulin if above A1c goal on other agents. Start basal (glargine, detemir). Titrate by fasting glucose.',
+dd:{mechanism:{title:'Insulin in T2DM',content:'<h4>When to Start</h4><ul><li>A1c >10%</li><li>Symptomatic hyperglycemia</li><li>Failing oral agents</li></ul><h4>Starting Regimen</h4><ul><li>Basal insulin first</li><li>0.1-0.2 units/kg/day</li><li>Titrate by fasting glucose</li></ul>',bw:['Basal insulin first','Titrate to fasting','Add prandial if needed']}}},
+11:{type:'DKA Diagnosis',difficulty:'hard',domains:['diagnosis'],tags:['Step2','Endo'],stem:'A patient has glucose 320, pH 7.22, bicarb 14, and positive serum ketones. What is the diagnosis?',
+opts:[['a','Hyperosmolar hyperglycemic state (HHS)'],['b','Diabetic ketoacidosis (DKA)'],['c','Lactic acidosis from metformin'],['d','Alcoholic ketoacidosis']],
+ans:'b',
+exp:'<strong>DKA criteria:</strong> Glucose >250, pH <7.3, bicarb <18, positive ketones, elevated anion gap. Glucose 320 with ketosis + acidosis = DKA.',
+kp:'DKA: glucose >250, pH <7.3, bicarb <18, ketones+. HHS: glucose >600, minimal ketosis.',
+dd:{mechanism:{title:'DKA Criteria',content:'<table><tr><th>Finding</th><th>DKA</th><th>HHS</th></tr><tr><td>Glucose</td><td>>250</td><td>>600</td></tr><tr><td>pH</td><td><7.3</td><td>>7.3</td></tr><tr><td>Bicarb</td><td><18</td><td>>18</td></tr><tr><td>Ketones</td><td>Positive</td><td>Minimal</td></tr></table>',bw:['Ketones + acidosis','Anion gap elevated','AG = Na - Cl - HCO3']}}},
+12:{type:'DKA Fluid Management',difficulty:'hard',domains:['management'],tags:['Step2','Endo'],stem:'What is the initial fluid therapy for DKA?',
+opts:[['a','D5W to prevent hypoglycemia'],['b','Normal saline bolus then continuous infusion'],['c','Half-normal saline from the start'],['d','Colloid solutions for volume expansion']],
+ans:'b',
+exp:'<strong>DKA fluids:</strong> Start NS 1-1.5L in first hour (15-20 mL/kg), then continue 250-500 mL/hr. Switch to D5 when glucose <200.',
+kp:'NS first, 1-1.5L bolus. Switch to D5 when glucose <200. Average deficit 5-7L.',
+dd:{mechanism:{title:'DKA Fluids',content:'<h4>Protocol</h4><ul><li>NS 1-1.5L first hour</li><li>Then 250-500 mL/hr</li><li>Switch to D5 half-NS when glucose <200</li></ul><h4>Goals</h4><ul><li>Replace 5-7L deficit</li><li>Maintain glucose 150-200</li></ul>',bw:['NS bolus first','Switch to D5 at <200','5-7L deficit typical']}}},
+13:{type:'DKA Insulin',difficulty:'hard',domains:['management'],tags:['Step2','Endo'],stem:'When starting insulin in DKA, what potassium level is required first?',
+opts:[['a','No potassium requirement before insulin'],['b','Potassium must be above 3.3 mEq/L'],['c','Potassium must be above 5.0 mEq/L'],['d','Replace potassium only after insulin started']],
+ans:'b',
+exp:'<strong>DKA insulin:</strong> Do NOT start insulin if K <3.3 - replace K first. Insulin drives K intracellularly and can cause fatal hypokalemia.',
+kp:'Check K before insulin. If K <3.3, replace first. Insulin causes K shift into cells.',
+dd:{mechanism:{title:'Potassium in DKA',content:'<h4>K+ Management</h4><ul><li>K <3.3: hold insulin, replace K</li><li>K 3.3-5.3: add 20-40 mEq/L to fluids</li><li>K >5.3: no K, recheck in 2h</li></ul>',bw:['K <3.3 hold insulin','Insulin shifts K in','Monitor q2-4h']}}},
+14:{type:'DKA Resolution',difficulty:'hard',domains:['management'],tags:['Step2','Endo'],stem:'What criteria indicate DKA resolution?',
+opts:[['a','Glucose below 200 mg/dL'],['b','Anion gap closed and bicarb above 15'],['c','Ketones negative on urine dipstick'],['d','Patient reports feeling better clinically']],
+ans:'b',
+exp:'<strong>DKA resolution:</strong> AG closed (≤12), bicarb ≥15, pH >7.3, glucose <200. Can transition to SQ insulin. Urine ketones lag.',
+kp:'Resolution: AG closed, bicarb ≥15, pH >7.3. Urine ketones lag - dont use for resolution.',
+dd:{mechanism:{title:'DKA Resolution',content:'<h4>Criteria</h4><ul><li>Anion gap ≤12</li><li>Bicarb ≥15 mEq/L</li><li>pH >7.3</li><li>Glucose <200</li></ul><h4>Transition</h4><ul><li>Overlap IV and SQ by 1-2h</li><li>Give SQ before stopping drip</li></ul>',bw:['Anion gap closed','Overlap insulins','Urine ketones lag']}}},
+15:{type:'HHS',difficulty:'hard',domains:['diagnosis'],tags:['Step2','Endo'],stem:'What differentiates HHS from DKA?',
+opts:[['a','HHS has lower glucose levels than DKA'],['b','HHS has significant ketoacidosis present'],['c','HHS has higher glucose and minimal ketosis'],['d','HHS occurs only in type 1 diabetes']],
+ans:'c',
+exp:'<strong>HHS:</strong> Glucose often >600, osmolality >320, minimal ketones, pH usually >7.3. More common in T2DM elderly. Higher mortality than DKA.',
+kp:'HHS: extreme hyperglycemia, hyperosmolar, minimal ketosis. Higher mortality than DKA.',
+dd:{mechanism:{title:'HHS vs DKA',content:'<table><tr><th></th><th>DKA</th><th>HHS</th></tr><tr><td>Glucose</td><td>>250</td><td>>600</td></tr><tr><td>Osmolality</td><td>Variable</td><td>>320</td></tr><tr><td>Ketones</td><td>+++</td><td>+/-</td></tr><tr><td>Mortality</td><td>~1%</td><td>~10-20%</td></tr></table>',bw:['HHS glucose >600','Minimal ketosis','Higher mortality']}}},
+16:{type:'Nephropathy Screening',difficulty:'medium',domains:['prevention'],tags:['Step2','Endo'],stem:'How should diabetic nephropathy be screened?',
+opts:[['a','Serum creatinine only once yearly'],['b','Urine albumin-to-creatinine ratio annually'],['c','24-hour urine protein collection annually'],['d','Renal ultrasound every two years']],
+ans:'b',
+exp:'<strong>DM nephropathy screening:</strong> Annual uACR (spot urine) and eGFR. Start at diagnosis for T2DM, 5 years after diagnosis for T1DM.',
+kp:'Annual uACR + eGFR. T2DM: screen at diagnosis. T1DM: start at 5 years.',
+dd:{mechanism:{title:'Nephropathy Screening',content:'<h4>Tests</h4><ul><li>uACR (spot urine)</li><li>eGFR</li></ul><h4>Timing</h4><ul><li>T2DM: at diagnosis</li><li>T1DM: 5 years after dx</li><li>Then annually</li></ul>',bw:['uACR annually','eGFR annually','T2DM screen at diagnosis']}}},
+17:{type:'Nephropathy Treatment',difficulty:'medium',domains:['pharmacology'],tags:['Step2','Endo'],stem:'A diabetic patient has uACR 150 mg/g with normal blood pressure. What medication is indicated?',
+opts:[['a','No treatment needed until hypertension develops'],['b','Thiazide diuretic for renal protection'],['c','ACE inhibitor or ARB for albuminuria'],['d','Calcium channel blocker for BP control']],
+ans:'c',
+exp:'<strong>DKD treatment:</strong> ACEi or ARB indicated for albuminuria even if normotensive. Add SGLT2i for additional renal protection. Target BP <130/80.',
+kp:'ACEi/ARB for all with albuminuria. SGLT2i adds renal protection. Finerenone if still albuminuric.',
+dd:{mechanism:{title:'DKD Treatment',content:'<h4>Therapy</h4><ul><li>ACEi or ARB (first-line)</li><li>Add SGLT2i</li><li>Consider finerenone</li></ul><h4>Goals</h4><ul><li>BP <130/80</li><li>Reduce albuminuria</li></ul>',bw:['ACEi/ARB first','SGLT2i added benefit','Finerenone option']}}},
+18:{type:'Retinopathy Screening',difficulty:'medium',domains:['prevention'],tags:['Step2','Endo'],stem:'When should diabetic retinopathy screening begin?',
+opts:[['a','Only when visual symptoms develop'],['b','At diagnosis for T2DM, 5 years for T1DM'],['c','Age 40 regardless of diabetes duration'],['d','Every 5 years for all diabetic patients']],
+ans:'b',
+exp:'<strong>Retinopathy screening:</strong> Dilated eye exam at diagnosis for T2DM, within 5 years for T1DM. Then annually if no retinopathy.',
+kp:'T2DM: dilated exam at diagnosis. T1DM: start at 5 years. Annual if retinopathy present.',
+dd:{mechanism:{title:'Eye Screening',content:'<h4>Timing</h4><ul><li>T2DM: at diagnosis</li><li>T1DM: 5 years after dx</li><li>Annual thereafter</li></ul><h4>Method</h4><ul><li>Dilated fundoscopic exam</li><li>Or retinal photography</li></ul>',bw:['Dilated exam','T2DM at diagnosis','Annual if retinopathy']}}},
+19:{type:'Neuropathy',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Endo'],stem:'What is the most common type of diabetic neuropathy?',
+opts:[['a','Autonomic neuropathy affecting heart rate'],['b','Mononeuropathy of cranial nerve III'],['c','Distal symmetric polyneuropathy (DSPN)'],['d','Diabetic amyotrophy of the thigh']],
+ans:'c',
+exp:'<strong>Diabetic neuropathy:</strong> DSPN most common - "stocking-glove" sensory loss, burning, numbness. Screen with monofilament. Autonomic also common.',
+kp:'DSPN most common. Stocking-glove distribution. Screen with 10g monofilament.',
+dd:{mechanism:{title:'Neuropathy Types',content:'<table><tr><th>Type</th><th>Features</th></tr><tr><td>DSPN</td><td>Stocking-glove, most common</td></tr><tr><td>Autonomic</td><td>Gastroparesis, orthostatic</td></tr><tr><td>Mononeuropathy</td><td>CN III, carpal tunnel</td></tr></table>',bw:['DSPN most common','Stocking-glove','10g monofilament test']}}},
+20:{type:'Foot Care',difficulty:'medium',domains:['prevention'],tags:['Step2','Endo'],stem:'How often should comprehensive foot exams be performed in diabetic patients?',
+opts:[['a','Only when foot problems are reported'],['b','Every five years if no neuropathy'],['c','At least annually for all diabetics'],['d','Monthly by the patient only']],
+ans:'c',
+exp:'<strong>Foot care:</strong> Annual comprehensive exam (inspection, pulses, monofilament, vibration). More frequent if neuropathy or PAD. Patient daily self-exam.',
+kp:'Annual foot exam for all. Daily self-inspection. Refer high-risk to podiatry.',
+dd:{mechanism:{title:'Foot Exam',content:'<h4>Annual Exam</h4><ul><li>Visual inspection</li><li>Pedal pulses</li><li>10g monofilament</li><li>Vibration (128 Hz tuning fork)</li></ul><h4>Patient Education</h4><ul><li>Daily self-inspection</li><li>Proper footwear</li><li>Avoid walking barefoot</li></ul>',bw:['Annual comprehensive exam','10g monofilament','Daily self-inspection']}}}
+};
+var answers={1:'d',2:'d',3:'b',4:'c',5:'d',6:'b',7:'a',8:'b',9:'a',10:'b',11:'c',12:'b',13:'a',14:'c',15:'d',16:'c',17:'c',18:'a',19:'a',20:'d'};
+function goPhase(p){if(p<1||p>4)return;phase=p;renderPhase();}
+function renderPhase(){var ph=phases[phase];document.querySelectorAll('.timeline-phase').forEach(function(el,i){el.classList.remove('active','locked');if(i+1===phase)el.classList.add('active');else if(i+1>phase)el.classList.add('locked');});document.getElementById('caseNarrative').innerHTML=ph.narrative;document.getElementById('pearlText').textContent=ph.pearl;var objHtml='<div class="obj-title">🎯 Phase '+phase+' Objectives</div><ul class="obj-list">';ph.objectives.forEach(function(o){objHtml+='<li>'+o+'</li>';});objHtml+='</ul>';if(ph.refs){objHtml+='<div style="margin-top:12px;padding-top:10px;border-top:1px dashed #e2e8f0"><div style="font-size:10px;font-weight:600;color:#64748b;margin-bottom:6px">📚 References</div>';ph.refs.forEach(function(r){objHtml+='<a href="'+r.u+'" target="_blank" style="font-size:10px;color:#0891b2;text-decoration:none;display:block;margin:3px 0">'+r.t+'</a>';});objHtml+='</div>';}document.getElementById('phaseObjectives').innerHTML=objHtml;renderQuestions(ph.qs);}
+function renderQuestions(qIds){var html='';qIds.forEach(function(qid){var q=Qs[qid];if(!q)return;html+='<div class="quiz-card" id="q'+qid+'"><div class="quiz-header"><div class="quiz-num">'+qid+'</div><span class="quiz-type">'+q.type+'</span><div class="quiz-meta">';q.tags.forEach(function(t){html+='<span class="quiz-tag">'+t+'</span>';});html+='<span class="quiz-difficulty '+q.difficulty+'">'+q.difficulty+'</span></div></div>';html+='<div class="quiz-body"><div class="quiz-stem">'+q.stem+'</div><div class="quiz-options">';q.opts.forEach(function(opt){html+='<div class="quiz-option" data-q="'+qid+'" data-opt="'+opt[0]+'" onclick="selectOpt(this)"><div class="option-letter">'+opt[0].toUpperCase()+'</div><div class="option-text">'+opt[1]+'</div></div>';});html+='</div><button class="submit-btn" id="sub'+qid+'" disabled onclick="submitQ('+qid+')">Submit</button><div class="explanation" id="exp'+qid+'"></div></div></div>';});document.getElementById('questionsPanel').innerHTML=html;}
+function selectOpt(el){var qid=el.dataset.q;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.remove('selected');});el.classList.add('selected');state[qid].pick=el.dataset.opt;document.getElementById('sub'+qid).disabled=false;}
+function submitQ(qid){if(state[qid].done)return;state[qid].done=true;var correct=answers[qid],picked=state[qid].pick,isCorrect=picked===correct;state[qid].ok=isCorrect;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.add('disabled');if(o.dataset.opt===correct)o.classList.add('correct');else if(o.dataset.opt===picked&&!isCorrect)o.classList.add('incorrect');});document.getElementById('sub'+qid).style.display='none';var q=Qs[qid],expDiv=document.getElementById('exp'+qid);var expHtml='<div>'+(isCorrect?'✓ Correct!':'✗ Incorrect')+'</div><div>'+q.exp+'</div><div class="keypoint"><span class="keypoint-label">⚡ Key:</span> '+q.kp+'</div>';if(q.dd){expHtml+='<div class="deep-dive"><button class="dd-toggle" onclick="toggleDD(this)">📚 Deep Dive <span>▼</span></button><div class="dd-content">';for(var d in q.dd){expHtml+=q.dd[d].content;if(q.dd[d].bw){expHtml+='<div class="buzzwords">';q.dd[d].bw.forEach(function(b){expHtml+='<span class="buzzword">'+b+'</span>';});expHtml+='</div>';}}expHtml+='</div></div>';}expDiv.innerHTML=expHtml;expDiv.classList.add('visible',isCorrect?'correct':'incorrect');updateProgress();}
+function toggleDD(btn){btn.nextElementSibling.classList.toggle('visible');btn.querySelector('span').textContent=btn.nextElementSibling.classList.contains('visible')?'▲':'▼';}
+function updateProgress(){var done=0;for(var i=1;i<=20;i++)if(state[i].done)done++;document.getElementById('progressFill').style.width=(done/20*100)+'%';document.getElementById('progressCount').textContent=done+'/20';}
+renderPhase();
+</script>
+</body>
+</html>
