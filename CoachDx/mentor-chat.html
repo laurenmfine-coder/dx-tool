@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoachDx - Teaching Session</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Inter', system-ui, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            background: #fafafa;
+            color: #18181b;
+            line-height: 1.6;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header */
+        .header {
+            background: #fff;
+            border-bottom: 1px solid #e4e4e7;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: inherit;
+        }
+        .logo-text {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .logo-text .dx { color: #8b5cf6; }
+        .case-info {
+            padding-left: 16px;
+            border-left: 1px solid #e4e4e7;
+        }
+        .case-title {
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .case-meta {
+            font-size: 12px;
+            color: #71717a;
+        }
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .timer {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: #f4f4f5;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #52525b;
+        }
+        .btn-end {
+            padding: 8px 16px;
+            background: #fff;
+            color: #71717a;
+            border: 1px solid #e4e4e7;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .btn-end:hover { border-color: #ef4444; color: #ef4444; }
+        
+        /* Main Layout */
+        .main {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: #fff;
+            border-right: 1px solid #e4e4e7;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+        .sidebar-section {
+            padding: 16px;
+            border-bottom: 1px solid #e4e4e7;
+        }
+        .sidebar-title {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #a1a1aa;
+            margin-bottom: 12px;
+        }
+        .patient-card {
+            background: #fafafa;
+            border: 1px solid #e4e4e7;
+            border-radius: 8px;
+            padding: 12px;
+        }
+        .patient-name {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+        .patient-details {
+            font-size: 12px;
+            color: #71717a;
+            line-height: 1.5;
+        }
+        
+        /* Progress Steps */
+        .progress-steps {
+            padding: 0;
+        }
+        .progress-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 10px 0;
+            position: relative;
+        }
+        .progress-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 11px;
+            top: 32px;
+            bottom: -2px;
+            width: 2px;
+            background: #e4e4e7;
+        }
+        .progress-step.completed:not(:last-child)::after { background: #22c55e; }
+        .progress-step.active:not(:last-child)::after { background: linear-gradient(to bottom, #8b5cf6 50%, #e4e4e7 50%); }
+        .step-indicator {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #f4f4f5;
+            border: 2px solid #e4e4e7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            flex-shrink: 0;
+            z-index: 1;
+        }
+        .progress-step.completed .step-indicator {
+            background: #22c55e;
+            border-color: #22c55e;
+            color: #fff;
+        }
+        .progress-step.active .step-indicator {
+            background: #8b5cf6;
+            border-color: #8b5cf6;
+            color: #fff;
+        }
+        .step-content {
+            flex: 1;
+            padding-top: 2px;
+        }
+        .step-title {
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .step-status {
+            font-size: 11px;
+            color: #71717a;
+        }
+        .progress-step.completed .step-status { color: #22c55e; }
+        .progress-step.active .step-status { color: #8b5cf6; }
+        
+        /* Teaching Notes */
+        .teaching-notes {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+        }
+        .teaching-note {
+            background: #faf5ff;
+            border: 1px solid #e9d5ff;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+        .teaching-note-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #8b5cf6;
+            margin-bottom: 6px;
+        }
+        .teaching-note-text {
+            font-size: 13px;
+            color: #3f3f46;
+        }
+        
+        /* Chat Area */
+        .chat-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: #fafafa;
+        }
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        .message {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            max-width: 85%;
+        }
+        .message.attending {
+            align-self: flex-start;
+        }
+        .message.student {
+            align-self: flex-end;
+            margin-left: auto;
+            flex-direction: row-reverse;
+        }
+        .avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .avatar.attending {
+            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+        }
+        .avatar.student {
+            background: #e4e4e7;
+        }
+        .message-content {
+            flex: 1;
+        }
+        .message-header {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+        .message-sender {
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .message-time {
+            font-size: 11px;
+            color: #a1a1aa;
+        }
+        .message-bubble {
+            background: #fff;
+            border: 1px solid #e4e4e7;
+            border-radius: 12px;
+            padding: 12px 16px;
+            font-size: 14px;
+        }
+        .message.student .message-bubble {
+            background: #8b5cf6;
+            color: #fff;
+            border-color: #8b5cf6;
+        }
+        .message-bubble.probing-question {
+            background: #faf5ff;
+            border-color: #c4b5fd;
+        }
+        .probing-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #7c3aed;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        /* Typing indicator */
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 12px 16px;
+            background: #fff;
+            border: 1px solid #e4e4e7;
+            border-radius: 12px;
+            width: fit-content;
+        }
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: #a1a1aa;
+            border-radius: 50%;
+            animation: typingBounce 1.4s infinite;
+        }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typingBounce {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-4px); }
+        }
+        
+        /* Input Area */
+        .input-area {
+            padding: 16px 20px;
+            background: #fff;
+            border-top: 1px solid #e4e4e7;
+        }
+        .input-container {
+            display: flex;
+            gap: 12px;
+            align-items: flex-end;
+        }
+        .input-wrapper {
+            flex: 1;
+        }
+        .message-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e4e4e7;
+            border-radius: 12px;
+            font-size: 14px;
+            font-family: inherit;
+            resize: none;
+            line-height: 1.5;
+        }
+        .message-input:focus {
+            outline: none;
+            border-color: #8b5cf6;
+        }
+        .btn-send {
+            padding: 12px 20px;
+            background: #8b5cf6;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.15s;
+        }
+        .btn-send:hover { background: #7c3aed; }
+        .btn-send:disabled { opacity: 0.5; cursor: not-allowed; }
+        .quick-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+        .quick-action {
+            padding: 6px 12px;
+            background: #f4f4f5;
+            border: 1px solid #e4e4e7;
+            border-radius: 16px;
+            font-size: 12px;
+            color: #52525b;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .quick-action:hover {
+            background: #e4e4e7;
+        }
+        
+        /* Right Panel */
+        .right-panel {
+            width: 280px;
+            background: #fff;
+            border-left: 1px solid #e4e4e7;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+        .panel-tabs {
+            display: flex;
+            border-bottom: 1px solid #e4e4e7;
+        }
+        .panel-tab {
+            flex: 1;
+            padding: 12px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
+            color: #71717a;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+        }
+        .panel-tab.active {
+            color: #8b5cf6;
+            border-bottom-color: #8b5cf6;
+        }
+        .panel-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+        }
+        .differential-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            background: #fafafa;
+            border: 1px solid #e4e4e7;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        .differential-item.top {
+            background: #faf5ff;
+            border-color: #c4b5fd;
+        }
+        .differential-rank {
+            width: 24px;
+            height: 24px;
+            background: #e4e4e7;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .differential-item.top .differential-rank {
+            background: #8b5cf6;
+            color: #fff;
+        }
+        .differential-name {
+            flex: 1;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .differential-confidence {
+            font-size: 11px;
+            color: #71717a;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .right-panel { display: none; }
+        }
+        @media (max-width: 900px) {
+            .sidebar { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <a href="index.html" class="logo">
+                <span class="logo-text">Coach<span class="dx">Dx</span></span>
+            </a>
+            <div class="case-info">
+                <div class="case-title">Chest Pain - Emergency Department</div>
+                <div class="case-meta">52-year-old female • Started <span id="sessionTime">0</span> min ago</div>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="timer">
+                <span>⏱</span>
+                <span id="timer">0:00</span>
+            </div>
+            <button class="btn-end" id="endSessionBtn">End Session</button>
+        </div>
+    </header>
+    
+    <!-- Main Layout -->
+    <main class="main">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">Patient</div>
+                <div class="patient-card">
+                    <div class="patient-name">Maria Santos</div>
+                    <div class="patient-details">
+                        52F • Chief Complaint: Chest Pain<br>
+                        Setting: Emergency Department<br>
+                        Acuity: High
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-title">Progress</div>
+                <div class="progress-steps">
+                    <div class="progress-step active">
+                        <div class="step-indicator">1</div>
+                        <div class="step-content">
+                            <div class="step-title">History Taking</div>
+                            <div class="step-status">In progress</div>
+                        </div>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-indicator">2</div>
+                        <div class="step-content">
+                            <div class="step-title">Physical Exam</div>
+                            <div class="step-status">Pending</div>
+                        </div>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-indicator">3</div>
+                        <div class="step-content">
+                            <div class="step-title">Differential</div>
+                            <div class="step-status">Pending</div>
+                        </div>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-indicator">4</div>
+                        <div class="step-content">
+                            <div class="step-title">Workup</div>
+                            <div class="step-status">Pending</div>
+                        </div>
+                    </div>
+                    <div class="progress-step">
+                        <div class="step-indicator">5</div>
+                        <div class="step-content">
+                            <div class="step-title">Assessment</div>
+                            <div class="step-status">Pending</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="teaching-notes" id="teachingNotes">
+                <div class="sidebar-title">Teaching Notes</div>
+                <div class="teaching-note">
+                    <div class="teaching-note-label">💡 Tip</div>
+                    <div class="teaching-note-text">Start by gathering a thorough history. Think about what questions will help you narrow your differential.</div>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Chat Area -->
+        <section class="chat-area">
+            <div class="chat-messages" id="chatMessages">
+                <div class="message attending">
+                    <div class="avatar attending">👨‍⚕️</div>
+                    <div class="message-content">
+                        <div class="message-header">
+                            <span class="message-sender">Dr. Chen</span>
+                            <span class="message-time" id="startTime"></span>
+                        </div>
+                        <div class="message-bubble">
+                            Good morning. I have a patient I'd like you to help me think through. Mrs. Santos is a 52-year-old woman who presented to the ED with chest pain. She's been triaged as high acuity. What would you like to know first?
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Input Area -->
+            <div class="input-area">
+                <div class="input-container">
+                    <div class="input-wrapper">
+                        <textarea class="message-input" id="messageInput" placeholder="Type your response..." rows="2"></textarea>
+                    </div>
+                    <button class="btn-send" id="sendBtn">
+                        Send
+                        <span>→</span>
+                    </button>
+                </div>
+                <div class="quick-actions">
+                    <button class="quick-action">Tell me about the chest pain</button>
+                    <button class="quick-action">What are her vital signs?</button>
+                    <button class="quick-action">Any medical history?</button>
+                    <button class="quick-action">What medications is she on?</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Right Panel -->
+        <aside class="right-panel">
+            <div class="panel-tabs">
+                <div class="panel-tab active">Differential</div>
+                <div class="panel-tab">Findings</div>
+                <div class="panel-tab">Orders</div>
+            </div>
+            <div class="panel-content">
+                <div class="sidebar-title">Your Working Differential</div>
+                <div id="differentialList">
+                    <div class="differential-item">
+                        <div class="differential-rank">?</div>
+                        <div class="differential-name">Add diagnoses as you learn more...</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </main>
+    
+    <script>
+        // ============================================================
+        // CONFIGURATION
+        // ============================================================
+        
+        // Cloudflare Worker URL - UPDATE THIS after deploying the worker
+        const WORKER_URL = 'https://coachdx-attending.laurenmfine.workers.dev';
+        
+        // Google Script URL for data collection
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwBMlYBWeF5QJjOxOH8_c-M47seJxojWlrekyTk2XGAKRTp99ghl0F3kW9y1kfVIAhG/exec';
+        
+        // ============================================================
+        // SESSION DATA
+        // ============================================================
+        
+        let coachDxSession = {
+            sessionId: 'COACH_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6),
+            startTime: new Date().toISOString(),
+            caseTopic: 'Chest Pain - ACS',
+            questionsAskedByAI: 1,
+            questionsAnsweredByStudent: 0,
+            teachingMomentsDetected: 0,
+            teachingMomentsAddressed: 0,
+            reasoningQualityScores: [],
+            conversationTurns: 0,
+            questionTypes: { clarifying: 0, probing: 1, 'assumption-testing': 0, 'evidence-seeking': 0, 'implication-exploring': 0 }
+        };
+        
+        let conversationHistory = [];
+        let isLoading = false;
+        let seconds = 0;
+        
+        // ============================================================
+        // INITIALIZATION
+        // ============================================================
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set start time
+            document.getElementById('startTime').textContent = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            
+            // Start timer
+            setInterval(updateTimer, 1000);
+            
+            // Set up event listeners
+            document.getElementById('sendBtn').addEventListener('click', sendMessage);
+            document.getElementById('messageInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+            
+            // End session button - FIXED
+            document.getElementById('endSessionBtn').addEventListener('click', function() {
+                endSession();
+            });
+            
+            // Quick actions
+            var quickActions = document.querySelectorAll('.quick-action');
+            for (var i = 0; i < quickActions.length; i++) {
+                quickActions[i].addEventListener('click', function() {
+                    document.getElementById('messageInput').value = this.textContent;
+                    document.getElementById('messageInput').focus();
+                });
+            }
+            
+            console.log('[CoachDx] Session initialized:', coachDxSession.sessionId);
+        });
+        
+        // ============================================================
+        // TIMER
+        // ============================================================
+        
+        function updateTimer() {
+            seconds++;
+            var mins = Math.floor(seconds / 60);
+            var secs = seconds % 60;
+            document.getElementById('timer').textContent = mins + ':' + (secs < 10 ? '0' : '') + secs;
+            document.getElementById('sessionTime').textContent = mins;
+        }
+        
+        // ============================================================
+        // MESSAGE HANDLING
+        // ============================================================
+        
+        async function sendMessage() {
+            var input = document.getElementById('messageInput');
+            var text = input.value.trim();
+            if (!text || isLoading) return;
+            
+            // Track student response
+            coachDxSession.questionsAnsweredByStudent++;
+            coachDxSession.conversationTurns++;
+            
+            // Add student message to UI
+            addMessage('student', text);
+            input.value = '';
+            
+            // Add to conversation history
+            conversationHistory.push({ role: 'student', content: text });
+            
+            // Show typing indicator
+            isLoading = true;
+            document.getElementById('sendBtn').disabled = true;
+            showTyping();
+            
+            try {
+                // Call AI Worker
+                var response = await fetch(WORKER_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        message: text,
+                        conversationHistory: conversationHistory,
+                        caseData: {
+                            description: 'A 52-year-old woman presents with chest pain that started 2 hours ago while walking to work. She describes substernal pressure, 7/10, "like an elephant sitting on my chest." Associated symptoms include diaphoresis and nausea. She has a history of hypertension and type 2 diabetes.'
+                        }
+                    })
+                });
+                
+                hideTyping();
+                
+                if (response.ok) {
+                    var data = await response.json();
+                    
+                    // Add AI response to history
+                    conversationHistory.push({ role: 'attending', content: data.response });
+                    
+                    // Track question type
+                    var questionType = data.questionType || 'probing';
+                    coachDxSession.questionsAskedByAI++;
+                    if (coachDxSession.questionTypes[questionType] !== undefined) {
+                        coachDxSession.questionTypes[questionType]++;
+                    }
+                    
+                    // Track teaching moments
+                    if (questionType === 'probing' || questionType === 'assumption-testing') {
+                        coachDxSession.teachingMomentsDetected++;
+                        coachDxSession.teachingMomentsAddressed++;
+                    }
+                    
+                    // Add AI message to UI
+                    addMessage('attending', data.response, questionType);
+                } else {
+                    addMessage('attending', 'I apologize, I had trouble processing that. Could you rephrase your question?', null);
+                }
+            } catch (error) {
+                hideTyping();
+                console.error('[CoachDx] Error:', error);
+                addMessage('attending', 'I apologize, there was a connection issue. Please try again.', null);
+            }
+            
+            isLoading = false;
+            document.getElementById('sendBtn').disabled = false;
+        }
+        
+        function addMessage(type, text, questionType) {
+            var messages = document.getElementById('chatMessages');
+            var time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            
+            var messageDiv = document.createElement('div');
+            messageDiv.className = 'message ' + type;
+            
+            if (type === 'student') {
+                messageDiv.innerHTML = '<div class="avatar student">👩‍🎓</div>' +
+                    '<div class="message-content">' +
+                    '<div class="message-header">' +
+                    '<span class="message-sender">You</span>' +
+                    '<span class="message-time">' + time + '</span>' +
+                    '</div>' +
+                    '<div class="message-bubble">' + escapeHtml(text) + '</div>' +
+                    '</div>';
+            } else {
+                var questionLabel = questionType ? formatQuestionType(questionType) : '';
+                messageDiv.innerHTML = '<div class="avatar attending">👨‍⚕️</div>' +
+                    '<div class="message-content">' +
+                    '<div class="message-header">' +
+                    '<span class="message-sender">Dr. Chen</span>' +
+                    '<span class="message-time">' + time + '</span>' +
+                    '</div>' +
+                    '<div class="message-bubble probing-question">' +
+                    (questionLabel ? '<div class="probing-label">🎯 ' + questionLabel + '</div>' : '') +
+                    escapeHtml(text) +
+                    '</div>' +
+                    '</div>';
+            }
+            
+            messages.appendChild(messageDiv);
+            messages.scrollTop = messages.scrollHeight;
+        }
+        
+        function formatQuestionType(type) {
+            var labels = {
+                'clarifying': 'Clarifying Question',
+                'probing': 'Probing Question',
+                'assumption-testing': 'Testing Assumptions',
+                'evidence-seeking': 'Seeking Evidence',
+                'implication-exploring': 'Exploring Implications'
+            };
+            return labels[type] || 'Teaching Question';
+        }
+        
+        function showTyping() {
+            var messages = document.getElementById('chatMessages');
+            var typingDiv = document.createElement('div');
+            typingDiv.className = 'message attending';
+            typingDiv.id = 'typingIndicator';
+            typingDiv.innerHTML = '<div class="avatar attending">👨‍⚕️</div>' +
+                '<div class="message-content">' +
+                '<div class="typing-indicator">' +
+                '<div class="typing-dot"></div>' +
+                '<div class="typing-dot"></div>' +
+                '<div class="typing-dot"></div>' +
+                '</div>' +
+                '</div>';
+            messages.appendChild(typingDiv);
+            messages.scrollTop = messages.scrollHeight;
+        }
+        
+        function hideTyping() {
+            var typing = document.getElementById('typingIndicator');
+            if (typing) typing.remove();
+        }
+        
+        function escapeHtml(text) {
+            var div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        // ============================================================
+        // END SESSION
+        // ============================================================
+        
+        function endSession() {
+            if (!confirm('End this teaching session? Your progress will be saved.')) {
+                return;
+            }
+            
+            exportCoachDxSession().then(function() {
+                window.location.href = 'index.html';
+            });
+        }
+        
+        // ============================================================
+        // DATA EXPORT
+        // ============================================================
+        
+        function getExportData() {
+            var studyId = localStorage.getItem('reasondx_student_code') || 
+                          localStorage.getItem('visibleStudentCode') || 'UNKNOWN';
+            return {
+                type: 'COACHDX_SESSION',
+                timestamp: new Date().toISOString(),
+                study_id: studyId,
+                session_id: coachDxSession.sessionId,
+                case_topic: coachDxSession.caseTopic,
+                duration_minutes: Math.round(seconds / 60),
+                questions_asked_by_ai: coachDxSession.questionsAskedByAI,
+                questions_answered: coachDxSession.questionsAnsweredByStudent,
+                teaching_moments_detected: coachDxSession.teachingMomentsDetected,
+                teaching_moments_addressed: coachDxSession.teachingMomentsAddressed,
+                avg_reasoning_quality: 0,
+                conversation_turns: coachDxSession.conversationTurns,
+                clarifying_questions: coachDxSession.questionTypes.clarifying,
+                probing_questions: coachDxSession.questionTypes.probing,
+                assumption_testing: coachDxSession.questionTypes['assumption-testing'],
+                evidence_seeking: coachDxSession.questionTypes['evidence-seeking'],
+                implication_exploring: coachDxSession.questionTypes['implication-exploring']
+            };
+        }
+        
+        async function exportCoachDxSession() {
+            var exportData = getExportData();
+            
+            // Save to localStorage for Fingerprint Dashboard
+            try {
+                var sessions = JSON.parse(localStorage.getItem('coachDxSessions') || '[]');
+                sessions.push(exportData);
+                if (sessions.length > 100) sessions.shift();
+                localStorage.setItem('coachDxSessions', JSON.stringify(sessions));
+            } catch(e) {
+                console.error('[CoachDx] localStorage error:', e);
+            }
+            
+            // Export to Google Sheets
+            try {
+                await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(exportData)
+                });
+                console.log('[CoachDx] Session exported to Google Sheets');
+            } catch(e) {
+                console.error('[CoachDx] Export error:', e);
+            }
+            
+            console.log('[CoachDx] Session exported:', exportData);
+        }
+        
+        // Auto-export on page unload
+        window.addEventListener('beforeunload', function() {
+            if (coachDxSession.conversationTurns > 0) {
+                var exportData = getExportData();
+                
+                // Save to localStorage
+                try {
+                    var sessions = JSON.parse(localStorage.getItem('coachDxSessions') || '[]');
+                    sessions.push(exportData);
+                    if (sessions.length > 100) sessions.shift();
+                    localStorage.setItem('coachDxSessions', JSON.stringify(sessions));
+                } catch(e) {}
+                
+                // Send to Google Sheets
+                if (navigator.sendBeacon) {
+                    navigator.sendBeacon(GOOGLE_SCRIPT_URL, JSON.stringify(exportData));
+                }
+            }
+        });
+    </script>
+</body>
+</html>
