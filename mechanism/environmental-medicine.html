@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Environmental Medicine | MechanismDx</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.6; }
+        .header { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+        .header-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 20px; font-weight: 700; color: #1e293b; }
+        .logo span { color: #10b981; }
+        .nav-links { display: flex; gap: 16px; }
+        .nav-link { color: #64748b; text-decoration: none; font-size: 14px; }
+        .nav-link:hover { color: #10b981; }
+        .main { max-width: 800px; margin: 0 auto; padding: 32px 24px; }
+        .module-header { text-align: center; margin-bottom: 32px; }
+        .module-title { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+        .module-subtitle { color: #64748b; font-size: 15px; }
+        .progress-bar { background: #e2e8f0; height: 6px; border-radius: 3px; margin: 20px 0; }
+        .progress-fill { background: #10b981; height: 100%; border-radius: 3px; transition: width 0.3s; }
+        .question-card { background: #fff; border-radius: 12px; padding: 28px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; margin-bottom: 20px; }
+        .question-number { color: #10b981; font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+        .domain-tag { display: inline-block; padding: 3px 8px; background: #fef3c7; color: #92400e; border-radius: 4px; font-size: 11px; margin-right: 6px; margin-bottom: 10px; border: 1px solid #fde68a; }
+        .vignette { background: #f8fafc; padding: 16px; border-radius: 8px; margin-bottom: 16px; font-size: 14px; border: 1px solid #e2e8f0; color: #475569; line-height: 1.7; }
+        .question-text { font-size: 16px; font-weight: 500; margin-bottom: 20px; color: #1e293b; }
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option { padding: 14px 16px; border: 2px solid #e2e8f0; border-radius: 10px; cursor: pointer; transition: all 0.15s; font-size: 14px; color: #475569; background: #fff; }
+        .option:hover { border-color: #10b981; background: #f0fdf4; }
+        .option.selected { border-color: #10b981; background: #f0fdf4; color: #047857; }
+        .option.correct { border-color: #22c55e; background: #dcfce7; color: #166534; }
+        .option.incorrect { border-color: #ef4444; background: #fef2f2; color: #991b1b; }
+        .btn { padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; font-size: 14px; }
+        .btn-primary { background: #10b981; color: #fff; }
+        .btn-primary:hover { background: #059669; }
+        .btn-secondary { background: #fff; color: #475569; border: 1px solid #e2e8f0; }
+        .explanation { margin-top: 20px; padding: 16px; background: #f0fdf4; border-radius: 8px; border-left: 4px solid #10b981; display: none; }
+        .explanation.show { display: block; }
+        .explanation h4 { color: #047857; margin-bottom: 10px; font-size: 14px; }
+        .explanation p { font-size: 14px; color: #475569; line-height: 1.6; }
+        .stats { display: flex; gap: 24px; justify-content: center; margin-top: 32px; }
+        .stat { text-align: center; }
+        .stat-value { font-size: 28px; font-weight: 700; color: #10b981; }
+        .stat-label { font-size: 13px; color: #64748b; }
+        .hidden { display: none; }
+        .confidence-slider { margin: 16px 0; }
+        .confidence-slider label { display: block; margin-bottom: 8px; font-size: 13px; color: #64748b; }
+        .confidence-slider input { width: 100%; }
+        .confidence-value { text-align: center; font-size: 18px; font-weight: 600; color: #10b981; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <a href="mechanismdx-index.html" class="logo">Mechanism<span>Dx</span></a>
+            <nav class="nav-links">
+                <a href="mechanismdx-index.html" class="nav-link">All Modules</a>
+                <a href="index.html" class="nav-link">ReasonDx</a>
+                <a href="CoachDx/" class="nav-link">CoachDx</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="module-header">
+            <h1 class="module-title">🌡️ Environmental Medicine</h1>
+            <p class="module-subtitle">Toxicology, occupational exposures, temperature injuries, and environmental hazard recognition</p>
+            <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 0%"></div></div>
+            <p id="progressText" style="text-align: center; font-size: 13px; color: #64748b;">Question 1 of 20</p>
+        </div>
+
+        <div id="questionContainer"></div>
+
+        <div id="resultsContainer" class="hidden">
+            <div class="question-card" style="text-align: center;">
+                <h2 style="margin-bottom: 24px;">Module Complete!</h2>
+                <div class="stats">
+                    <div class="stat"><div class="stat-value" id="scoreValue">0%</div><div class="stat-label">Score</div></div>
+                    <div class="stat"><div class="stat-value" id="correctCount">0/20</div><div class="stat-label">Correct</div></div>
+                </div>
+                <div style="margin-top: 32px; display: flex; gap: 12px; justify-content: center;">
+                    <button class="btn btn-secondary" onclick="location.href='mechanismdx-index.html'">All Modules</button>
+                    <button class="btn btn-primary" onclick="restartModule()">Try Again</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+    const questions = [
+        {
+            domain: "Toxicology",
+            vignette: "A 45-year-old painter presents with abdominal pain, constipation, and fatigue over 2 months. He reports a metallic taste. Exam shows a blue-gray line at the gum margins. Labs reveal microcytic anemia with basophilic stippling.",
+            question: "What is the mechanism of anemia in this patient's condition?",
+            options: [
+                "A. Inhibition of delta-aminolevulinic acid dehydratase and ferrochelatase",
+                "B. Autoimmune destruction of red blood cells",
+                "C. Vitamin B12 malabsorption",
+                "D. Decreased erythropoietin production",
+                "E. Oxidative damage to red cell membranes"
+            ],
+            correct: 0,
+            explanation: "Lead poisoning inhibits enzymes in heme synthesis: delta-aminolevulinic acid dehydratase (ALA-D) and ferrochelatase. This causes accumulation of ALA and protoporphyrin IX, leading to microcytic anemia. Basophilic stippling results from aggregated ribosomes in RBCs due to inhibition of pyrimidine 5'-nucleotidase."
+        },
+        {
+            domain: "Occupational",
+            vignette: "A 52-year-old shipyard worker with 30 years of occupational exposure presents with progressive dyspnea. CT shows bilateral pleural plaques and lower lobe interstitial fibrosis. Pulmonary function tests reveal a restrictive pattern.",
+            question: "What is the pathophysiologic mechanism of lung injury in this condition?",
+            options: [
+                "A. Type I hypersensitivity reaction",
+                "B. Frustrated phagocytosis leading to chronic inflammation and fibrosis",
+                "C. Direct cytotoxic damage to type II pneumocytes",
+                "D. Immune complex deposition in alveolar walls",
+                "E. Airway smooth muscle hypertrophy"
+            ],
+            correct: 1,
+            explanation: "Asbestosis results from inhalation of asbestos fibers. Long, thin fibers cannot be fully engulfed by macrophages (frustrated phagocytosis), leading to persistent release of inflammatory mediators, ROS, and growth factors. This drives chronic inflammation and progressive fibrosis. Pleural plaques are pathognomonic markers of exposure."
+        },
+        {
+            domain: "Toxicology",
+            vignette: "A 3-year-old is brought to the ED after ingesting an unknown quantity of iron tablets. Initial symptoms include vomiting and bloody diarrhea. Six hours later, he appears to improve briefly before developing hypotension and metabolic acidosis.",
+            question: "What explains the biphasic clinical course and late metabolic acidosis in iron poisoning?",
+            options: [
+                "A. Initial GI mucosal injury followed by hepatotoxicity and mitochondrial poisoning",
+                "B. Hemolysis causing early symptoms and renal failure causing late symptoms",
+                "C. Allergic reaction followed by anaphylaxis",
+                "D. CNS depression followed by respiratory failure",
+                "E. Methemoglobinemia followed by carboxyhemoglobinemia"
+            ],
+            correct: 0,
+            explanation: "Iron poisoning has distinct phases: (1) GI phase with corrosive mucosal injury; (2) apparent recovery (quiescent phase); (3) systemic toxicity with mitochondrial poisoning, hepatic necrosis, and lactic acidosis. Free iron catalyzes free radical formation, disrupts oxidative phosphorylation, and causes direct cellular injury. Deferoxamine is the antidote."
+        },
+        {
+            domain: "Temperature",
+            vignette: "A hiker is found unresponsive after being lost overnight in freezing temperatures. Core temperature is 28°C (82°F). ECG shows Osborn (J) waves and bradycardia.",
+            question: "Why is cardioversion relatively ineffective in severe hypothermia?",
+            options: [
+                "A. Increased myocardial oxygen demand",
+                "B. Decreased defibrillation threshold",
+                "C. Myocardium is refractory to electrical stimulation at low temperatures",
+                "D. Hyperkalemia blocks depolarization",
+                "E. Coronary vasodilation prevents ischemia"
+            ],
+            correct: 2,
+            explanation: "In severe hypothermia (<30°C), the myocardium becomes refractory to defibrillation and medications. Cold temperatures stabilize arrhythmogenic substrates paradoxically, and electrical/pharmacologic interventions are ineffective until rewarming occurs. Focus should be on rewarming (passive, active external, or extracorporeal) while limiting defibrillation attempts."
+        },
+        {
+            domain: "Toxicology",
+            vignette: "A 28-year-old woman presents with confusion and visual disturbances 24 hours after drinking homemade alcohol at a party. Labs show: pH 7.18, anion gap 28, osmolar gap 45, and serum creatinine 3.2.",
+            question: "Which toxic alcohol and its metabolite is most consistent with this presentation?",
+            options: [
+                "A. Methanol → formic acid",
+                "B. Ethylene glycol → oxalic acid",
+                "C. Isopropanol → acetone",
+                "D. Ethanol → acetaldehyde",
+                "E. Propylene glycol → lactic acid"
+            ],
+            correct: 1,
+            explanation: "Ethylene glycol is metabolized to glycolic acid (causing acidosis) and oxalic acid (causing calcium oxalate crystal deposition in renal tubules → AKI). Visual symptoms are more characteristic of methanol (formic acid damages optic nerve). Both have elevated osmolar and anion gaps. Treatment: fomepizole (alcohol dehydrogenase inhibitor) and hemodialysis."
+        },
+        {
+            domain: "Occupational",
+            vignette: "A 48-year-old farmer presents with excessive salivation, lacrimation, urination, and defecation after spraying crops. He also has miosis, bradycardia, and muscle fasciculations.",
+            question: "What is the mechanism of toxicity in organophosphate poisoning?",
+            options: [
+                "A. Nicotinic receptor antagonism",
+                "B. Irreversible acetylcholinesterase inhibition",
+                "C. GABA receptor agonism",
+                "D. Sodium channel blockade",
+                "E. Dopamine receptor antagonism"
+            ],
+            correct: 1,
+            explanation: "Organophosphates irreversibly inhibit acetylcholinesterase, causing accumulation of acetylcholine at muscarinic (SLUDGE/DUMBELS: salivation, lacrimation, urination, defecation, GI upset, emesis, bradycardia, bronchospasm, miosis) and nicotinic receptors (fasciculations, weakness, paralysis). Treatment: atropine (muscarinic blockade) + pralidoxime (reactivates AChE if given early, before 'aging')."
+        },
+        {
+            domain: "Toxicology",
+            vignette: "A 22-year-old college student is found unconscious at a party. Cherry-red skin coloration is noted. ABG shows pH 7.35, PaO2 95 mmHg, but pulse oximetry reads 100%. Lactate is elevated.",
+            question: "What explains the discrepancy between ABG oxygen and pulse oximetry in this case?",
+            options: [
+                "A. Methemoglobin absorbs light at wavelengths similar to oxyhemoglobin",
+                "B. Carboxyhemoglobin is read as oxyhemoglobin by standard pulse oximetry",
+                "C. Cyanide prevents oxygen release from hemoglobin",
+                "D. The patient has polycythemia masking hypoxia",
+                "E. Peripheral vasoconstriction causes inaccurate pulse oximetry"
+            ],
+            correct: 1,
+            explanation: "Carbon monoxide (CO) binds hemoglobin with 200x greater affinity than oxygen. Carboxyhemoglobin (COHb) absorbs light similarly to oxyhemoglobin, so standard pulse oximetry reads falsely normal. ABG measures dissolved O2 (PaO2), which is normal. Tissue hypoxia occurs because CO shifts the oxygen-dissociation curve left and directly inhibits cytochrome oxidase. Treatment: 100% O2, consider hyperbaric oxygen."
+        },
+        {
+            domain: "Environmental",
+            vignette: "A construction worker presents with heat stroke after working in 105°F heat. Despite IV fluids and cooling, he develops DIC, rhabdomyolysis, and acute liver failure over the next 48 hours.",
+            question: "What is the primary mechanism of multi-organ dysfunction in heat stroke?",
+            options: [
+                "A. Direct thermal injury to organ cells",
+                "B. Systemic inflammatory response with endothelial dysfunction",
+                "C. Hypovolemic shock from dehydration",
+                "D. Electrolyte imbalances causing cardiac arrest",
+                "E. Cerebral edema with herniation"
+            ],
+            correct: 1,
+            explanation: "Heat stroke causes a systemic inflammatory response similar to sepsis. Heat stress damages gut epithelium, allowing endotoxin translocation. Combined with direct thermal injury and cytokine release, this causes widespread endothelial dysfunction, DIC, and multi-organ failure. Rapid cooling is critical; complications include rhabdomyolysis, AKI, hepatic failure, and ARDS."
+        },
+        {
+            domain: "Toxicology",
+            vignette: "A 35-year-old woman presents with perioral numbness progressing to generalized weakness after eating pufferfish at a sushi restaurant. She develops respiratory failure requiring intubation.",
+            question: "What is the mechanism of tetrodotoxin toxicity?",
+            options: [
+                "A. Acetylcholine receptor blockade at neuromuscular junction",
+                "B. Voltage-gated sodium channel blockade preventing action potentials",
+                "C. Potassium channel activation causing hyperpolarization",
+                "D. Glutamate receptor overstimulation causing excitotoxicity",
+                "E. Calcium channel blockade in cardiac myocytes"
+            ],
+            correct: 1,
+            explanation: "Tetrodotoxin (TTX) from pufferfish blocks voltage-gated sodium channels in nerve and muscle membranes, preventing action potential generation and propagation. This causes ascending paralysis, respiratory failure, and potentially cardiac arrhythmias. No antidote exists; treatment is supportive with mechanical ventilation until toxin clears."
+        },
+        {
+            domain: "Occupational",
+            vignette: "A 55-year-old sandblaster with 25 years of exposure presents with progressive dyspnea. Chest X-ray shows small rounded opacities predominantly in upper lobes with eggshell calcification of hilar lymph nodes.",
+            question: "What distinguishes the fibrotic mechanism of silicosis from other pneumoconioses?",
+            options: [
+                "A. Silica activates the NLRP3 inflammasome causing IL-1β release and fibrosis",
+                "B. Silica directly stimulates collagen synthesis by fibroblasts",
+                "C. Silica causes type IV hypersensitivity reaction",
+                "D. Silica induces apoptosis of all alveolar cells uniformly",
+                "E. Silica particles are rapidly cleared without inflammation"
+            ],
+            correct: 0,
+            explanation: "Crystalline silica is highly fibrogenic because it activates the NLRP3 inflammasome in macrophages, triggering IL-1β and IL-18 release. This drives persistent inflammation and fibrosis. Silica is also directly cytotoxic to macrophages, perpetuating the cycle. Silicosis increases risk of TB (silico-tuberculosis) and is associated with autoimmune diseases."
+        },
+        {
+            domain: "Toxicology",
+            vignette: "A 4-year-old presents with altered mental status after grandmother gave multiple doses of adult aspirin for fever. Labs show pH 7.52, pCO2 20, HCO3 18, K 3.0, and salicylate level of 65 mg/dL.",
+            question: "What explains the mixed acid-base disturbance in salicylate toxicity?",
+            options: [
+                "A. Respiratory alkalosis from direct CNS stimulation, metabolic acidosis from uncoupled oxidative phosphorylation",
+                "B. Metabolic alkalosis from vomiting, respiratory acidosis from CNS depression",
+                "C. Respiratory acidosis from hypoventilation, metabolic alkalosis from bicarbonate retention",
+                "D. Pure metabolic acidosis from lactic acid accumulation",
+                "E. Pure respiratory alkalosis from anxiety"
+            ],
+            correct: 0,
+            explanation: "Salicylates directly stimulate the medullary respiratory center causing hyperventilation (respiratory alkalosis). They also uncouple oxidative phosphorylation in mitochondria, increasing metabolic rate and causing lactic/ketoacidosis (metabolic acidosis). Adults often present with mixed picture; children may present with predominant metabolic acidosis. Alkalinization of urine enhances elimination."
+        },
+        {
+            domain: "Environmental",
+            vignette: "A scuba diver ascending rapidly from 30 meters experiences joint pain, skin mottling, and neurological symptoms including paraparesis. Symptoms began 20 minutes after surfacing.",
+            question: "What is the pathophysiology of decompression sickness?",
+            options: [
+                "A. Oxygen toxicity causing CNS excitation",
+                "B. Nitrogen bubble formation in blood and tissues during rapid ascent",
+                "C. Carbon dioxide retention causing narcosis",
+                "D. Barotrauma from expanding air in the GI tract",
+                "E. Hypoxia from breath-holding during ascent"
+            ],
+            correct: 1,
+            explanation: "At depth, nitrogen dissolves in blood and tissues under increased pressure. Rapid ascent causes nitrogen to come out of solution, forming bubbles (Henry's Law). Bubbles cause mechanical obstruction, endothelial damage, platelet activation, and complement activation. Treatment is recompression in a hyperbaric chamber to redissolve bubbles followed by slow decompression."
+        },
+        {
+            domain: "Toxicology",
+            vignette: "A patient on warfarin presents with uncontrolled bleeding after taking a new antibiotic. Her INR is 12. The antibiotic is known to inhibit CYP2C9.",
+            question: "Why does CYP2C9 inhibition potentiate warfarin toxicity?",
+            options: [
+                "A. CYP2C9 is the primary enzyme metabolizing S-warfarin, the more potent enantiomer",
+                "B. CYP2C9 synthesizes vitamin K-dependent clotting factors",
+                "C. CYP2C9 activates the warfarin prodrug",
+                "D. CYP2C9 inhibition increases warfarin absorption",
+                "E. CYP2C9 produces the antidote for warfarin"
+            ],
+            correct: 0,
+            explanation: "Warfarin is a racemic mixture. S-warfarin is 3-5x more potent than R-warfarin and is primarily metabolized by CYP2C9. Drugs inhibiting CYP2C9 (fluconazole, metronidazole, amiodarone, TMP-SMX) decrease S-warfarin clearance, dramatically increasing anticoagulant effect. CYP2C9 polymorphisms also affect warfarin dosing requirements."
+        },
+        {
+            domain: "Occupational",
+            vignette: "A 42-year-old healthcare worker develops latex allergy after years of glove use. She now experiences anaphylaxis when eating bananas, avocados, and kiwis.",
+            question: "What explains the cross-reactivity between latex and certain foods?",
+            options: [
+                "A. Identical IgE epitopes due to homologous proteins (chitinases, hevein)",
+                "B. Foods contain latex contaminants from processing",
+                "C. Latex sensitization causes generalized mast cell instability",
+                "D. These foods grow on rubber trees",
+                "E. The patient developed separate IgE antibodies to each allergen"
+            ],
+            correct: 0,
+            explanation: "Latex-fruit syndrome occurs due to IgE cross-reactivity between structurally similar proteins. Hevein (latex) shares epitopes with class I chitinases found in banana, avocado, kiwi, and chestnut. This is an example of panallergen cross-reactivity. Up to 50% of latex-allergic individuals have food cross-reactivity."
+        },
+        {
+            domain: "Toxicology",
+            vignette: "A patient presents with anticholinergic toxidrome (dry mouth, urinary retention, tachycardia, mydriasis, delirium) after intentional ingestion. ECG shows QRS widening to 140 ms.",
+            question: "What causes QRS widening in tricyclic antidepressant overdose, and what is the treatment?",
+            options: [
+                "A. Sodium channel blockade; treat with sodium bicarbonate",
+                "B. Potassium channel blockade; treat with magnesium",
+                "C. Calcium channel blockade; treat with calcium gluconate",
+                "D. Beta-receptor blockade; treat with glucagon",
+                "E. Muscarinic blockade; treat with physostigmine"
+            ],
+            correct: 0,
+            explanation: "TCAs block fast sodium channels in the myocardium, slowing phase 0 depolarization and causing QRS widening. This can progress to ventricular arrhythmias. Sodium bicarbonate (target pH 7.50-7.55) overcomes sodium channel blockade by increasing extracellular sodium concentration and alkalinizing serum. QRS >100ms indicates significant toxicity."
+        },
+        {
+            domain: "Environmental",
+            vignette: "A mountain climber at 4,500 meters develops headache, nausea, and ataxia. Over the next 12 hours, he becomes confused and develops a productive cough with pink frothy sputum.",
+            question: "What is the mechanism of high-altitude pulmonary edema (HAPE)?",
+            options: [
+                "A. Hypoxic pulmonary vasoconstriction causing uneven perfusion and capillary leak",
+                "B. Left heart failure from increased cardiac workload",
+                "C. Decreased oncotic pressure from altitude-induced hypoalbuminemia",
+                "D. Inflammatory response to cold air exposure",
+                "E. Pulmonary embolism from dehydration and polycythemia"
+            ],
+            correct: 0,
+            explanation: "HAPE results from exaggerated, uneven hypoxic pulmonary vasoconstriction. Some areas receive excessive blood flow, causing stress failure of pulmonary capillaries and non-cardiogenic edema. Predisposing factors include rapid ascent and individual susceptibility. Treatment: descent, supplemental oxygen, and nifedipine (reduces pulmonary artery pressure). Dexamethasone is used for HACE."
+        },
+        {
+            domain: "Toxicology",
+            vignette: "A 19-year-old is brought unconscious from a rave. Temperature is 41°C, HR 150, BP 180/110. He has mydriasis, diaphoresis, and muscle rigidity. Creatine kinase is 45,000 U/L.",
+            question: "What distinguishes MDMA (ecstasy) toxicity from other sympathomimetic overdoses?",
+            options: [
+                "A. MDMA causes significant serotonin release contributing to hyperthermia and hyponatremia",
+                "B. MDMA is a pure dopamine agonist",
+                "C. MDMA causes hypothermia rather than hyperthermia",
+                "D. MDMA does not cause rhabdomyolysis",
+                "E. MDMA toxicity is treated with beta-blockers"
+            ],
+            correct: 0,
+            explanation: "MDMA causes massive serotonin (and some dopamine/norepinephrine) release. Serotonin syndrome contributes to hyperthermia, which combined with physical exertion causes rhabdomyolysis. MDMA also causes inappropriate ADH secretion leading to hyponatremia, especially if users drink excessive water. Treatment: cooling, benzodiazepines, supportive care. Avoid beta-blockers (unopposed alpha)."
+        },
+        {
+            domain: "Occupational",
+            vignette: "A 58-year-old battery factory worker presents with wrist drop and foot drop. He has worked with lead for 30 years but denies acute symptoms. Blood lead level is 65 mcg/dL.",
+            question: "What pattern of neuropathy is characteristic of chronic lead poisoning?",
+            options: [
+                "A. Motor predominant neuropathy affecting extensors before flexors",
+                "B. Sensory predominant small fiber neuropathy",
+                "C. Symmetric ascending sensorimotor polyneuropathy",
+                "D. Autonomic neuropathy with orthostatic hypotension",
+                "E. Cranial neuropathy affecting the facial nerve"
+            ],
+            correct: 0,
+            explanation: "Lead causes a motor-predominant neuropathy classically affecting wrist and finger extensors (wrist drop) before other muscles. The mechanism involves both direct toxicity to motor neurons and effects on Schwann cells. This pattern helps distinguish lead neuropathy from other toxic and metabolic neuropathies. Chelation therapy (EDTA, succimer, dimercaprol) is used for treatment."
+        },
+        {
+            domain: "Toxicology",
+            vignette: "A 45-year-old man is brought from a house fire with facial burns and carbonaceous sputum. Despite 100% oxygen, his condition deteriorates with worsening lactic acidosis.",
+            question: "What additional toxicity should be suspected, and what is the specific antidote?",
+            options: [
+                "A. Cyanide toxicity from combustion of synthetic materials; hydroxocobalamin",
+                "B. Carbon monoxide; methylene blue",
+                "C. Hydrogen sulfide; sodium nitrite",
+                "D. Ammonia; N-acetylcysteine",
+                "E. Phosgene; dimercaprol"
+            ],
+            correct: 0,
+            explanation: "Smoke inhalation from fires involving synthetic materials (plastics, wool, silk) can cause cyanide poisoning in addition to CO toxicity. Cyanide inhibits cytochrome c oxidase, blocking cellular respiration and causing lactic acidosis despite adequate oxygen delivery. Hydroxocobalamin (Cyanokit) binds cyanide forming cyanocobalamin (vitamin B12), which is renally excreted."
+        },
+        {
+            domain: "Environmental",
+            vignette: "A patient with severe frostbite of the fingers presents 6 hours after cold exposure. The affected digits are pale, hard, and insensate. After rewarming, they become edematous with clear blisters.",
+            question: "What determines tissue viability in frostbite, and why is rapid rewarming preferred?",
+            options: [
+                "A. Ice crystal formation causes direct cellular injury; rapid rewarming minimizes crystal growth time",
+                "B. Vasoconstriction causes ischemia; slow rewarming allows gradual reperfusion",
+                "C. Protein denaturation is temperature-dependent; slow rewarming reduces protein damage",
+                "D. Nerve damage is the primary injury; rewarming rate does not affect outcome",
+                "E. Slow rewarming prevents reperfusion injury"
+            ],
+            correct: 0,
+            explanation: "Frostbite injury occurs through ice crystal formation (direct cell damage), microvascular thrombosis, and reperfusion injury. Rapid rewarming in 37-39°C water minimizes the time tissues remain at intermediate temperatures where ice crystals can grow. Clear blisters indicate superficial injury; hemorrhagic blisters suggest deeper injury. Thrombolytics may be considered for severe cases."
+        }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let answered = false;
+
+    function renderQuestion() {
+        const q = questions[currentQuestion];
+        document.getElementById('questionContainer').innerHTML = `
+            <div class="question-card">
+                <div class="question-number">Question ${currentQuestion + 1} of ${questions.length}</div>
+                <span class="domain-tag">${q.domain}</span>
+                <div class="vignette">${q.vignette}</div>
+                <div class="question-text">${q.question}</div>
+                <div class="options">
+                    ${q.options.map((opt, i) => `
+                        <div class="option" onclick="selectOption(${i})" id="opt${i}">${opt}</div>
+                    `).join('')}
+                </div>
+                <div class="confidence-slider">
+                    <label>Confidence: <span id="confValue">50%</span></label>
+                    <input type="range" min="0" max="100" value="50" oninput="document.getElementById('confValue').textContent=this.value+'%'">
+                </div>
+                <div style="margin-top: 20px; display: flex; gap: 12px;">
+                    <button class="btn btn-primary" id="submitBtn" onclick="submitAnswer()" disabled>Submit Answer</button>
+                    <button class="btn btn-primary hidden" id="nextBtn" onclick="nextQuestion()">Next Question</button>
+                </div>
+                <div class="explanation" id="explanation">
+                    <h4>Explanation</h4>
+                    <p>${q.explanation}</p>
+                </div>
+            </div>
+        `;
+        updateProgress();
+    }
+
+    let selectedOption = null;
+
+    function selectOption(idx) {
+        if (answered) return;
+        selectedOption = idx;
+        document.querySelectorAll('.option').forEach((opt, i) => {
+            opt.classList.remove('selected');
+            if (i === idx) opt.classList.add('selected');
+        });
+        document.getElementById('submitBtn').disabled = false;
+    }
+
+    function submitAnswer() {
+        if (answered || selectedOption === null) return;
+        answered = true;
+        const q = questions[currentQuestion];
+        
+        document.querySelectorAll('.option').forEach((opt, i) => {
+            opt.classList.remove('selected');
+            if (i === q.correct) opt.classList.add('correct');
+            else if (i === selectedOption) opt.classList.add('incorrect');
+        });
+
+        if (selectedOption === q.correct) score++;
+        
+        document.getElementById('explanation').classList.add('show');
+        document.getElementById('submitBtn').classList.add('hidden');
+        document.getElementById('nextBtn').classList.remove('hidden');
+    }
+
+    function nextQuestion() {
+        currentQuestion++;
+        answered = false;
+        selectedOption = null;
+        if (currentQuestion >= questions.length) {
+            showResults();
+        } else {
+            renderQuestion();
+        }
+    }
+
+    function updateProgress() {
+        const pct = (currentQuestion / questions.length) * 100;
+        document.getElementById('progressFill').style.width = pct + '%';
+        document.getElementById('progressText').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+    }
+
+    function showResults() {
+        document.getElementById('questionContainer').classList.add('hidden');
+        document.getElementById('resultsContainer').classList.remove('hidden');
+        const pct = Math.round((score / questions.length) * 100);
+        document.getElementById('scoreValue').textContent = pct + '%';
+        document.getElementById('correctCount').textContent = `${score}/${questions.length}`;
+    }
+
+    function restartModule() {
+        currentQuestion = 0;
+        score = 0;
+        answered = false;
+        selectedOption = null;
+        document.getElementById('questionContainer').classList.remove('hidden');
+        document.getElementById('resultsContainer').classList.add('hidden');
+        renderQuestion();
+    }
+
+    renderQuestion();
+    </script>
+</body>
+</html>
