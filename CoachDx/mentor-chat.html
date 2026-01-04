@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoachDx - AI Attending Session</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #fafafa; color: #18181b; line-height: 1.6; height: 100vh; display: flex; flex-direction: column; }
+        
+        .header { background: #fff; border-bottom: 1px solid #e4e4e7; padding: 12px 24px; flex-shrink: 0; }
+        .header-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 18px; font-weight: 700; color: #8b5cf6; text-decoration: none; }
+        .case-info { display: flex; align-items: center; gap: 16px; }
+        .case-badge { background: #f4f4f5; padding: 6px 12px; border-radius: 6px; font-size: 13px; }
+        .case-badge.parallel { background: #fef3c7; color: #92400e; }
+        .timer { font-family: monospace; font-size: 14px; color: #71717a; }
+        .nav-links { display: flex; gap: 12px; }
+        .nav-link { color: #71717a; text-decoration: none; font-size: 13px; padding: 6px 12px; border-radius: 6px; }
+        .nav-link:hover { background: #f4f4f5; color: #18181b; }
+        
+        .main { flex: 1; display: flex; overflow: hidden; max-width: 1400px; margin: 0 auto; width: 100%; }
+        
+        .chat-panel { flex: 1; display: flex; flex-direction: column; border-right: 1px solid #e4e4e7; }
+        .chat-messages { flex: 1; overflow-y: auto; padding: 24px; }
+        .message { max-width: 85%; margin-bottom: 16px; }
+        .message.attending { margin-right: auto; }
+        .message.student { margin-left: auto; }
+        .message-bubble { padding: 12px 16px; border-radius: 12px; font-size: 14px; line-height: 1.5; }
+        .attending .message-bubble { background: #fff; border: 1px solid #e4e4e7; border-radius: 12px 12px 12px 0; }
+        .student .message-bubble { background: #8b5cf6; color: #fff; border-radius: 12px 12px 0 12px; }
+        .message-meta { font-size: 11px; color: #a1a1aa; margin-top: 4px; }
+        .typing-indicator { display: flex; gap: 4px; padding: 12px 16px; }
+        .typing-dot { width: 8px; height: 8px; background: #a1a1aa; border-radius: 50%; animation: typing 1.4s infinite; }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typing { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-4px); } }
+        
+        .input-area { padding: 16px 24px; border-top: 1px solid #e4e4e7; background: #fff; }
+        .quick-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+        .quick-btn { padding: 6px 12px; background: #f4f4f5; border: none; border-radius: 16px; font-size: 13px; cursor: pointer; transition: all 0.15s; }
+        .quick-btn:hover { background: #e4e4e7; }
+        .input-row { display: flex; gap: 12px; }
+        .input-row input { flex: 1; padding: 12px 16px; border: 1px solid #e4e4e7; border-radius: 8px; font-size: 14px; }
+        .input-row input:focus { outline: none; border-color: #8b5cf6; }
+        .send-btn { padding: 12px 24px; background: #8b5cf6; color: #fff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
+        .send-btn:hover { background: #7c3aed; }
+        .send-btn:disabled { background: #d4d4d8; cursor: not-allowed; }
+        
+        .concept-panel { width: 320px; background: #fff; overflow-y: auto; flex-shrink: 0; }
+        .panel-header { padding: 16px; border-bottom: 1px solid #e4e4e7; font-weight: 600; font-size: 14px; }
+        .concept-section { padding: 16px; border-bottom: 1px solid #f4f4f5; }
+        .concept-section h4 { font-size: 12px; text-transform: uppercase; color: #71717a; margin-bottom: 8px; letter-spacing: 0.5px; }
+        .concept-list { display: flex; flex-wrap: wrap; gap: 6px; }
+        .concept-tag { padding: 4px 8px; background: #f4f4f5; border-radius: 4px; font-size: 12px; color: #52525b; }
+        .concept-tag.explored { background: #dcfce7; color: #166534; }
+        .concept-tag.gap { background: #fef2f2; color: #991b1b; }
+        
+        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 16px; }
+        .stat-item { text-align: center; padding: 12px; background: #f4f4f5; border-radius: 8px; }
+        .stat-value { font-size: 24px; font-weight: 700; color: #8b5cf6; }
+        .stat-label { font-size: 11px; color: #71717a; }
+        
+        .parallel-indicator { background: #fef3c7; border: 1px solid #fcd34d; border-radius: 8px; padding: 12px; margin: 16px; }
+        .parallel-indicator h4 { color: #92400e; font-size: 12px; margin-bottom: 4px; }
+        .parallel-indicator p { font-size: 12px; color: #a16207; }
+        .parallel-link { color: #8b5cf6; text-decoration: none; font-weight: 500; }
+        .parallel-link:hover { text-decoration: underline; }
+        
+        .related-item { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 6px; text-decoration: none; color: inherit; transition: background 0.15s; }
+        .related-item:hover { background: #f4f4f5; }
+        .related-icon { width: 32px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+        .related-icon.mechanism { background: #dcfce7; }
+        .related-icon.reasondx { background: #dbeafe; }
+        .related-icon.parallel { background: #fef3c7; }
+        .related-info { flex: 1; }
+        .related-title { font-size: 13px; font-weight: 500; }
+        .related-reason { font-size: 11px; color: #71717a; }
+        
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; z-index: 1000; }
+        .modal-overlay.show { display: flex; }
+        .modal { background: #fff; border-radius: 12px; padding: 32px; max-width: 500px; width: 90%; }
+        .modal h2 { margin-bottom: 24px; }
+        .modal-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+        .modal-stat { text-align: center; }
+        .modal-stat-value { font-size: 28px; font-weight: 700; color: #8b5cf6; }
+        .modal-stat-label { font-size: 12px; color: #71717a; }
+        .modal-btns { display: flex; gap: 12px; }
+        .modal-btn { flex: 1; padding: 12px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; }
+        .modal-btn.primary { background: #8b5cf6; color: #fff; }
+        .modal-btn.secondary { background: #f4f4f5; color: #18181b; }
+        
+        @media (max-width: 900px) { .concept-panel { display: none; } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">Coach<span style="color:#a78bfa">Dx</span></a>
+            <div class="case-info">
+                <span class="case-badge" id="caseBadge">Loading...</span>
+                <span class="timer" id="timer">00:00</span>
+            </div>
+            <nav class="nav-links">
+                <a href="case-library.html" class="nav-link">All Cases</a>
+                <a href="/index.html" class="nav-link">ReasonDx</a>
+                <a href="/integration-hub.html" class="nav-link">Hub</a>
+                <button class="nav-link" onclick="endSession()" style="background:none;border:none;cursor:pointer;">End Session</button>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="main">
+        <div class="chat-panel">
+            <div class="chat-messages" id="chatMessages"></div>
+            <div class="input-area">
+                <div class="quick-actions" id="quickActions"></div>
+                <div class="input-row">
+                    <input type="text" id="userInput" placeholder="Ask a question or share your thinking..." onkeypress="if(event.key==='Enter')sendMessage()">
+                    <button class="send-btn" id="sendBtn" onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="concept-panel">
+            <div class="panel-header">📊 Concept Map</div>
+            <div id="conceptMap"></div>
+            
+            <div id="parallelCaseIndicator"></div>
+            
+            <div class="panel-header" style="margin-top:16px;">📈 Session Stats</div>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value" id="statQuestions">0</div>
+                    <div class="stat-label">Questions</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="statConcepts">0</div>
+                    <div class="stat-label">Concepts</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="statTeaching">0</div>
+                    <div class="stat-label">Teaching</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="statTime">0m</div>
+                    <div class="stat-label">Time</div>
+                </div>
+            </div>
+            
+            <div class="panel-header" style="margin-top:16px;">🔗 Related Content</div>
+            <div id="relatedContent" style="padding:16px;"></div>
+        </div>
+    </div>
+    
+    <div class="modal-overlay" id="endModal">
+        <div class="modal">
+            <h2>Session Complete</h2>
+            <div class="modal-stats">
+                <div class="modal-stat">
+                    <div class="modal-stat-value" id="modalTime">0:00</div>
+                    <div class="modal-stat-label">Duration</div>
+                </div>
+                <div class="modal-stat">
+                    <div class="modal-stat-value" id="modalConcepts">0</div>
+                    <div class="modal-stat-label">Concepts</div>
+                </div>
+                <div class="modal-stat">
+                    <div class="modal-stat-value" id="modalTeaching">0</div>
+                    <div class="modal-stat-label">Teaching Moments</div>
+                </div>
+            </div>
+            <div id="parallelCaseSuggestion" style="margin-bottom:20px;"></div>
+            <div class="modal-btns">
+                <button class="modal-btn secondary" onclick="location.href='case-library.html'">More Cases</button>
+                <button class="modal-btn primary" id="nextCaseBtn" onclick="goToParallelCase()">Try Parallel Case</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+    // ============================================================
+    // COACHDX CASES WITH PARALLEL PAIRS (A/B) FOR REASONING TRANSFER
+    // ============================================================
+    const CASES = {
+        // ==================== CHEST PAIN PAIR ====================
+        'chest-pain-acs': {
+            id: 'chest-pain-acs',
+            title: 'Chest Pain - ACS Evaluation',
+            isParallel: false,
+            parallelCase: 'chest-pain-acs-b',
+            parallelDescription: 'Similar presentation but atypical features in diabetic patient',
+            patient: { name: 'Maria Santos', age: 52, sex: 'Female', setting: 'Emergency Department', acuity: 'High', chiefComplaint: 'Chest Pain' },
+            description: 'A 52-year-old woman presents with chest pain that started 2 hours ago while walking to work. She describes substernal pressure, 7/10, "like an elephant sitting on my chest." Associated symptoms include diaphoresis and nausea. She has a history of hypertension and type 2 diabetes.',
+            openingStatement: 'Good morning. I have a patient I\'d like you to help me think through. Mrs. Santos is a 52-year-old woman who presented to the ED with chest pain. She\'s been triaged as high acuity. What would you like to know first?',
+            conceptDomains: {
+                'History': ['onset', 'character', 'radiation', 'associated_symptoms', 'risk_factors'],
+                'Physical Exam': ['vitals', 'cardiac_exam', 'lung_exam', 'peripheral_pulses'],
+                'Pathophysiology': ['coronary_anatomy', 'acs_spectrum', 'biomarkers'],
+                'Workup': ['ecg', 'troponin', 'cxr'],
+                'Management': ['antiplatelet', 'anticoagulation', 'reperfusion']
+            },
+            quickActions: ['Tell me about the chest pain', 'What are her vital signs?', 'Any cardiac history?', 'What does the ECG show?'],
+            relatedContent: [
+                { type: 'mechanism', title: 'ACS Pathophysiology', link: '../mechanism/cardiac.html', reason: 'Understand the ischemic cascade' },
+                { type: 'reasondx', title: 'Chest Pain Cases', link: '../index.html', reason: 'Practice more chest pain workups' }
+            ]
+        },
+        'chest-pain-acs-b': {
+            id: 'chest-pain-acs-b',
+            title: 'Chest Pain - Atypical ACS',
+            isParallel: true,
+            parallelCase: 'chest-pain-acs',
+            parallelDescription: 'Original typical presentation for comparison',
+            patient: { name: 'James Liu', age: 68, sex: 'Male', setting: 'Emergency Department', acuity: 'Medium', chiefComplaint: 'Fatigue and Nausea' },
+            description: 'A 68-year-old man with long-standing diabetes and CKD presents with 6 hours of fatigue, nausea, and mild shortness of breath. He denies chest pain. He appears diaphoretic. His wife says he "just doesn\'t look right." He had a cardiac cath 3 years ago showing non-obstructive CAD.',
+            openingStatement: 'Mr. Liu is a 68-year-old diabetic who came in because his wife thought something was wrong. He\'s not complaining of chest pain, but he looks uncomfortable and sweaty. His triage vitals are BP 100/70, HR 95. What\'s your approach?',
+            conceptDomains: {
+                'History': ['atypical_symptoms', 'diabetic_equivalents', 'autonomic_neuropathy', 'prior_cardiac'],
+                'Physical Exam': ['vitals', 'diaphoresis', 'heart_sounds', 'peripheral_perfusion'],
+                'Pathophysiology': ['silent_ischemia', 'diabetic_heart', 'biomarkers'],
+                'Workup': ['ecg', 'troponin', 'bnp'],
+                'Management': ['acs_protocol', 'glucose_management', 'renal_considerations']
+            },
+            quickActions: ['Why does his wife think something is wrong?', 'Check his glucose', 'Get an ECG', 'What are his cardiac risk factors?'],
+            relatedContent: [
+                { type: 'parallel', title: 'Typical ACS Case', link: 'mentor-chat.html?case=chest-pain-acs', reason: 'Compare with classic presentation' },
+                { type: 'mechanism', title: 'Diabetic Neuropathy & Silent MI', link: '../mechanism/cardiac.html', reason: 'Why diabetics have atypical presentations' }
+            ]
+        },
+
+        // ==================== DYSPNEA PAIR ====================
+        'acute-dyspnea': {
+            id: 'acute-dyspnea',
+            title: 'Acute Dyspnea - Heart Failure',
+            isParallel: false,
+            parallelCase: 'acute-dyspnea-b',
+            parallelDescription: 'Young patient with dyspnea - different etiology',
+            patient: { name: 'Robert Chen', age: 68, sex: 'Male', setting: 'Emergency Department', acuity: 'High', chiefComplaint: 'Shortness of Breath' },
+            description: 'A 68-year-old man presents with sudden onset shortness of breath that woke him from sleep 3 hours ago. He reports orthopnea and has been sleeping on 3 pillows recently. He has a history of hypertension and had an MI 5 years ago. He ran out of his medications 2 weeks ago.',
+            openingStatement: 'Good morning. Mr. Chen is a 68-year-old man who came in by ambulance with acute shortness of breath. He looks uncomfortable and is using accessory muscles. What\'s your approach?',
+            conceptDomains: {
+                'History': ['onset', 'orthopnea', 'pnd', 'edema', 'medications'],
+                'Physical Exam': ['vitals', 'respiratory_exam', 'cardiac_exam', 'jvd'],
+                'Pathophysiology': ['heart_failure', 'pulmonary_edema', 'volume_overload'],
+                'Workup': ['cxr', 'bnp', 'ecg', 'echo'],
+                'Management': ['diuretics', 'oxygen', 'vasodilators']
+            },
+            quickActions: ['When did this start?', 'Check oxygen saturation', 'Any leg swelling?', 'Is he taking his medications?'],
+            relatedContent: [
+                { type: 'mechanism', title: 'Heart Failure Mechanisms', link: '../mechanism/cardiac.html', reason: 'Review CHF pathophysiology' },
+                { type: 'reasondx', title: 'Dyspnea Workup', link: '../index.html', reason: 'Practice dyspnea differential' }
+            ]
+        },
+        'acute-dyspnea-b': {
+            id: 'acute-dyspnea-b',
+            title: 'Acute Dyspnea - PE',
+            isParallel: true,
+            parallelCase: 'acute-dyspnea',
+            parallelDescription: 'Older patient with dyspnea from heart failure',
+            patient: { name: 'Amanda Torres', age: 34, sex: 'Female', setting: 'Emergency Department', acuity: 'High', chiefComplaint: 'Sudden Shortness of Breath' },
+            description: 'A 34-year-old woman presents with sudden onset dyspnea and pleuritic chest pain that started 3 hours ago. She returned from a 14-hour flight from Australia 2 days ago. She takes oral contraceptives. HR 115, SpO2 91% on RA.',
+            openingStatement: 'Ms. Torres is a young woman with sudden shortness of breath and chest pain. She just got back from a long flight. Her heart rate is elevated and her oxygen is low. What are you thinking?',
+            conceptDomains: {
+                'History': ['risk_factors', 'travel', 'medications', 'pleuritic_pain', 'leg_symptoms'],
+                'Physical Exam': ['vitals', 'respiratory_exam', 'leg_exam', 'heart_sounds'],
+                'Pathophysiology': ['virchow_triad', 'vq_mismatch', 'right_heart_strain'],
+                'Workup': ['wells_score', 'd_dimer', 'ctpa', 'echo'],
+                'Management': ['anticoagulation', 'thrombolysis_criteria', 'hemodynamic_support']
+            },
+            quickActions: ['Calculate her Wells score', 'Any leg swelling or pain?', 'Is she hemodynamically stable?', 'Get a D-dimer'],
+            relatedContent: [
+                { type: 'parallel', title: 'CHF Dyspnea Case', link: 'mentor-chat.html?case=acute-dyspnea', reason: 'Compare different dyspnea etiologies' },
+                { type: 'mechanism', title: 'PE Pathophysiology', link: '../mechanism/pulmonary.html', reason: 'Understand VTE mechanisms' }
+            ]
+        },
+
+        // ==================== ANAPHYLAXIS PAIR ====================
+        'anaphylaxis': {
+            id: 'anaphylaxis',
+            title: 'Anaphylaxis - Food Allergen',
+            isParallel: false,
+            parallelCase: 'anaphylaxis-b',
+            parallelDescription: 'Anaphylaxis with complicating factors',
+            patient: { name: 'Kevin Park', age: 28, sex: 'Male', setting: 'Emergency Department', acuity: 'Critical', chiefComplaint: 'Allergic Reaction' },
+            description: 'A 28-year-old man presents 20 minutes after eating shrimp at a restaurant. He has diffuse urticaria, tongue swelling, and audible wheezing. His voice is hoarse and he reports throat tightness. He has no known allergies and takes no medications.',
+            openingStatement: 'Mr. Park came in by ambulance after eating at a seafood restaurant. He\'s got hives everywhere, his lips are swelling, and he\'s wheezing. His oxygen sat is 91%. What\'s your immediate approach?',
+            conceptDomains: {
+                'History': ['allergen_exposure', 'onset_timeline', 'prior_reactions'],
+                'Physical Exam': ['airway', 'skin_exam', 'lung_sounds', 'cardiovascular'],
+                'Pathophysiology': ['ige_mediated', 'mast_cell_degranulation', 'histamine_effects'],
+                'Management': ['epinephrine', 'airway_management', 'fluids', 'observation']
+            },
+            quickActions: ['Give epinephrine now', 'Assess his airway', 'What did he eat exactly?', 'Any previous reactions?'],
+            relatedContent: [
+                { type: 'mechanism', title: 'Type I Hypersensitivity', link: '../mechanism/allergy-immunology.html', reason: 'Review IgE-mediated reactions' },
+                { type: 'reasondx', title: 'Allergic Reactions', link: '../index.html', reason: 'Practice anaphylaxis workup' }
+            ]
+        },
+        'anaphylaxis-b': {
+            id: 'anaphylaxis-b',
+            title: 'Anaphylaxis - Refractory on Beta-Blocker',
+            isParallel: true,
+            parallelCase: 'anaphylaxis',
+            parallelDescription: 'Straightforward food-induced anaphylaxis',
+            patient: { name: 'Margaret Wilson', age: 62, sex: 'Female', setting: 'Emergency Department', acuity: 'Critical', chiefComplaint: 'Bee Sting Reaction' },
+            description: 'A 62-year-old woman was stung by a bee 30 minutes ago. She has diffuse urticaria, facial swelling, wheezing, and hypotension (BP 70/40). She takes metoprolol for atrial fibrillation. She has received IM epinephrine from EMS with minimal response.',
+            openingStatement: 'Mrs. Wilson was stung by a bee and is having a severe reaction. EMS gave epinephrine but she\'s still hypotensive at 70/40. She\'s on a beta-blocker. What do we do now?',
+            conceptDomains: {
+                'History': ['beta_blocker_use', 'prior_stings', 'ems_treatment'],
+                'Physical Exam': ['airway', 'hemodynamics', 'skin', 'mental_status'],
+                'Pathophysiology': ['beta_blocker_effect', 'glucagon_mechanism', 'refractory_anaphylaxis'],
+                'Management': ['glucagon', 'epinephrine_infusion', 'vasopressors', 'airway_preparation']
+            },
+            quickActions: ['Give glucagon', 'Start epinephrine drip', 'Prepare for intubation', 'Large bore IV access'],
+            relatedContent: [
+                { type: 'parallel', title: 'Standard Anaphylaxis', link: 'mentor-chat.html?case=anaphylaxis', reason: 'Compare uncomplicated case' },
+                { type: 'mechanism', title: 'Beta-Blocker Pharmacology', link: '../mechanism/pharmacology.html', reason: 'Why beta-blockers complicate anaphylaxis' }
+            ]
+        },
+
+        // ==================== SEPSIS PAIR ====================
+        'sepsis': {
+            id: 'sepsis',
+            title: 'Sepsis - Urinary Source',
+            isParallel: false,
+            parallelCase: 'sepsis-b',
+            parallelDescription: 'Sepsis with different source and patient population',
+            patient: { name: 'Eleanor Martinez', age: 78, sex: 'Female', setting: 'Emergency Department', acuity: 'Critical', chiefComplaint: 'Altered Mental Status' },
+            description: 'A 78-year-old woman from a nursing home presents with confusion and lethargy. She is febrile to 39.1°C, HR 112, BP 88/54, RR 24. She has a urinary catheter. Her baseline is independent for ADLs.',
+            openingStatement: 'Mrs. Martinez came from a nursing facility. She\'s septic - febrile, tachycardic, and hypotensive. We need to find the source and resuscitate her. What\'s your approach?',
+            conceptDomains: {
+                'History': ['recent_infections', 'indwelling_devices', 'baseline_status'],
+                'Physical Exam': ['vitals', 'skin', 'lung_exam', 'catheter_exam'],
+                'Pathophysiology': ['sirs_vs_sepsis', 'organ_dysfunction', 'lactate'],
+                'Workup': ['blood_cultures', 'urinalysis', 'cxr', 'lactate'],
+                'Management': ['fluids', 'antibiotics', 'vasopressors', 'source_control']
+            },
+            quickActions: ['Start fluid resuscitation', 'Get blood cultures', 'Examine the catheter', 'Check lactate'],
+            relatedContent: [
+                { type: 'mechanism', title: 'Sepsis Cascade', link: '../mechanism/infectious.html', reason: 'Understand sepsis pathophysiology' },
+                { type: 'reasondx', title: 'Sepsis Workup', link: '../index.html', reason: 'Practice sepsis management' }
+            ]
+        },
+        'sepsis-b': {
+            id: 'sepsis-b',
+            title: 'Sepsis - Post-Operative',
+            isParallel: true,
+            parallelCase: 'sepsis',
+            parallelDescription: 'UTI source in elderly nursing home patient',
+            patient: { name: 'Thomas Bradley', age: 55, sex: 'Male', setting: 'Surgical ICU', acuity: 'Critical', chiefComplaint: 'Post-Op Fever' },
+            description: 'A 55-year-old man is post-operative day 3 from sigmoid colectomy for diverticulitis. He develops fever to 39.5°C, HR 125, BP 85/50, confusion, and abdominal distension. His surgical drain output has decreased and become cloudy.',
+            openingStatement: 'Mr. Bradley had a colon resection 3 days ago and is now crashing. He\'s febrile, hypotensive, and his belly is distended. The surgical team is worried about an anastomotic leak. How do you approach this?',
+            conceptDomains: {
+                'History': ['surgical_course', 'drain_output', 'bowel_function'],
+                'Physical Exam': ['abdominal_exam', 'wound_exam', 'drain_assessment'],
+                'Pathophysiology': ['anastomotic_leak', 'peritonitis', 'gram_negative_sepsis'],
+                'Workup': ['ct_abdomen', 'blood_cultures', 'lactate', 'drain_cultures'],
+                'Management': ['broad_spectrum_abx', 'source_control', 'surgical_consultation', 'resuscitation']
+            },
+            quickActions: ['Examine his abdomen', 'Check the drain', 'Call surgery', 'Start broad-spectrum antibiotics'],
+            relatedContent: [
+                { type: 'parallel', title: 'UTI Sepsis Case', link: 'mentor-chat.html?case=sepsis', reason: 'Compare different sepsis sources' },
+                { type: 'mechanism', title: 'Surgical Complications', link: '../mechanism/gi.html', reason: 'Post-op infection pathophysiology' }
+            ]
+        },
+
+        // ==================== DKA PAIR ====================
+        'dka': {
+            id: 'dka',
+            title: 'DKA - Non-Compliance',
+            isParallel: false,
+            parallelCase: 'dka-b',
+            parallelDescription: 'DKA with different precipitant',
+            patient: { name: 'Marcus Johnson', age: 22, sex: 'Male', setting: 'Emergency Department', acuity: 'High', chiefComplaint: 'Nausea and Vomiting' },
+            description: 'A 22-year-old man with type 1 diabetes presents with 2 days of nausea, vomiting, and abdominal pain. He ran out of insulin 3 days ago. He is breathing rapidly and deeply. His blood glucose is 485 mg/dL.',
+            openingStatement: 'Mr. Johnson is a young type 1 diabetic who ran out of insulin. His glucose is through the roof and he\'s Kussmaul breathing. Labs are pending. Walk me through DKA management.',
+            conceptDomains: {
+                'History': ['insulin_compliance', 'symptoms', 'hydration_status'],
+                'Physical Exam': ['respiratory_pattern', 'mental_status', 'hydration'],
+                'Pathophysiology': ['insulin_deficiency', 'counter_regulatory', 'ketogenesis', 'anion_gap'],
+                'Workup': ['abg', 'bmp', 'anion_gap', 'beta_hydroxybutyrate'],
+                'Management': ['fluids', 'insulin', 'potassium', 'monitoring']
+            },
+            quickActions: ['Check his anion gap', 'Start IV fluids', 'Why did he stop insulin?', 'What\'s his potassium?'],
+            relatedContent: [
+                { type: 'mechanism', title: 'DKA Pathophysiology', link: '../mechanism/endocrine.html', reason: 'Understand ketoacidosis cascade' },
+                { type: 'reasondx', title: 'Metabolic Emergencies', link: '../index.html', reason: 'Practice DKA management' }
+            ]
+        },
+        'dka-b': {
+            id: 'dka-b',
+            title: 'DKA - New Diagnosis',
+            isParallel: true,
+            parallelCase: 'dka',
+            parallelDescription: 'Known diabetic with non-compliance',
+            patient: { name: 'Sophia Chen', age: 14, sex: 'Female', setting: 'Emergency Department', acuity: 'High', chiefComplaint: 'Weakness and Weight Loss' },
+            description: 'A 14-year-old girl presents with 3 weeks of polyuria, polydipsia, and 15-pound weight loss. She has been increasingly fatigued. Today she is confused and vomiting. She has no past medical history. Glucose is 520 mg/dL.',
+            openingStatement: 'Sophia is a previously healthy teenager who\'s been losing weight and drinking lots of water. Now she\'s confused and vomiting. Her glucose is over 500. This is likely new-onset type 1 diabetes presenting as DKA. What\'s your approach?',
+            conceptDomains: {
+                'History': ['polyuria_polydipsia', 'weight_loss', 'family_history'],
+                'Physical Exam': ['mental_status', 'dehydration', 'kussmaul'],
+                'Pathophysiology': ['autoimmune_destruction', 'honeymoon_period', 'cerebral_edema_risk'],
+                'Workup': ['labs', 'autoantibodies', 'c_peptide'],
+                'Management': ['fluids_pediatric', 'insulin_rate', 'cerebral_edema_monitoring', 'education']
+            },
+            quickActions: ['Assess her mental status', 'Calculate fluid deficit', 'Check for cerebral edema signs', 'Start insulin carefully'],
+            relatedContent: [
+                { type: 'parallel', title: 'Adult DKA Non-Compliance', link: 'mentor-chat.html?case=dka', reason: 'Compare management approaches' },
+                { type: 'mechanism', title: 'Type 1 DM Pathogenesis', link: '../mechanism/endocrine.html', reason: 'Autoimmune beta cell destruction' }
+            ]
+        },
+
+        // ==================== ALTERED MENTAL STATUS PAIR ====================
+        'altered-mental-status': {
+            id: 'altered-mental-status',
+            title: 'AMS - Elderly Delirium',
+            isParallel: false,
+            parallelCase: 'altered-mental-status-b',
+            parallelDescription: 'AMS in young patient with different etiology',
+            patient: { name: 'Dorothy Williams', age: 74, sex: 'Female', setting: 'Emergency Department', acuity: 'High', chiefComplaint: 'Confusion' },
+            description: 'A 74-year-old woman was found confused at home by her daughter. She was fine yesterday but today doesn\'t recognize family members and is speaking incoherently. She has a history of type 2 diabetes, hypertension, and mild dementia at baseline.',
+            openingStatement: 'Mrs. Williams is a 74-year-old woman brought in by her daughter who says "Mom isn\'t acting right." She has baseline mild dementia but this is different. Where do you want to start?',
+            conceptDomains: {
+                'History': ['baseline_status', 'timeline', 'recent_illness', 'medications'],
+                'Physical Exam': ['vitals', 'neuro_exam', 'mental_status', 'focal_deficits'],
+                'Pathophysiology': ['delirium_vs_dementia', 'metabolic_causes', 'infection'],
+                'Workup': ['cbc', 'cmp', 'ua', 'ct_head'],
+                'Management': ['treat_underlying', 'supportive_care', 'reorientation']
+            },
+            quickActions: ['What is her baseline mental status?', 'Check her glucose', 'Any recent falls?', 'Does she have a fever?'],
+            relatedContent: [
+                { type: 'mechanism', title: 'Delirium Pathophysiology', link: '../mechanism/neuro.html', reason: 'Understand delirium mechanisms' },
+                { type: 'reasondx', title: 'AMS Workup', link: '../index.html', reason: 'Practice AMS differential' }
+            ]
+        },
+        'altered-mental-status-b': {
+            id: 'altered-mental-status-b',
+            title: 'AMS - Overdose',
+            isParallel: true,
+            parallelCase: 'altered-mental-status',
+            parallelDescription: 'Delirium in elderly patient',
+            patient: { name: 'Tyler Morrison', age: 24, sex: 'Male', setting: 'Emergency Department', acuity: 'High', chiefComplaint: 'Found Unresponsive' },
+            description: 'A 24-year-old man was found unresponsive in his apartment. He has pinpoint pupils, RR 6, and track marks on his arms. His roommate says he has been using heroin. Empty pill bottles are found nearby.',
+            openingStatement: 'Tyler was found down. He\'s barely breathing with pinpoint pupils. There are track marks and pill bottles at the scene. What do you do first?',
+            conceptDomains: {
+                'History': ['substance_use', 'medications_found', 'timeline'],
+                'Physical Exam': ['pupils', 'respiratory', 'mental_status', 'toxidromes'],
+                'Pathophysiology': ['opioid_receptors', 'respiratory_depression', 'coingestants'],
+                'Workup': ['uds', 'apap_salicylate', 'abg', 'ecg'],
+                'Management': ['naloxone', 'airway', 'supportive_care', 'observation_time']
+            },
+            quickActions: ['Give naloxone', 'Bag-mask ventilate', 'Check pupils', 'What pills were found?'],
+            relatedContent: [
+                { type: 'parallel', title: 'Elderly Delirium', link: 'mentor-chat.html?case=altered-mental-status', reason: 'Compare AMS approaches' },
+                { type: 'mechanism', title: 'Opioid Pharmacology', link: '../mechanism/pharmacology.html', reason: 'Opioid receptor effects' }
+            ]
+        },
+
+        // ==================== HEADACHE PAIR ====================
+        'severe-headache': {
+            id: 'severe-headache',
+            title: 'Headache - SAH',
+            isParallel: false,
+            parallelCase: 'severe-headache-b',
+            parallelDescription: 'Severe headache with different etiology',
+            patient: { name: 'James Morrison', age: 42, sex: 'Male', setting: 'Emergency Department', acuity: 'High', chiefComplaint: 'Worst Headache of Life' },
+            description: 'A 42-year-old man presents with sudden onset of the "worst headache of my life" that started 2 hours ago while lifting weights. He rates it 10/10 and describes it as "thunderclap." He has had some neck stiffness and one episode of vomiting.',
+            openingStatement: 'Mr. Morrison is a 42-year-old who says this is the worst headache he\'s ever had. It came on suddenly while he was at the gym. He looks like he\'s in significant pain. What are you thinking?',
+            conceptDomains: {
+                'History': ['onset_character', 'thunderclap', 'neck_stiffness', 'photophobia'],
+                'Physical Exam': ['vitals', 'neuro_exam', 'fundoscopy', 'meningismus'],
+                'Pathophysiology': ['aneurysm', 'meningeal_irritation', 'increased_icp'],
+                'Workup': ['ct_head', 'lumbar_puncture', 'cta_head'],
+                'Management': ['bp_control', 'pain_management', 'neurosurgery_consult']
+            },
+            quickActions: ['Describe the headache onset', 'Any neck stiffness?', 'Check his pupils', 'Any history of aneurysms?'],
+            relatedContent: [
+                { type: 'mechanism', title: 'SAH Pathophysiology', link: '../mechanism/neuro.html', reason: 'Understand aneurysmal bleeding' },
+                { type: 'reasondx', title: 'Headache Red Flags', link: '../index.html', reason: 'Practice headache workups' }
+            ]
+        },
+        'severe-headache-b': {
+            id: 'severe-headache-b',
+            title: 'Headache - Meningitis',
+            isParallel: true,
+            parallelCase: 'severe-headache',
+            parallelDescription: 'Thunderclap headache concerning for SAH',
+            patient: { name: 'Ashley Thompson', age: 19, sex: 'Female', setting: 'Emergency Department', acuity: 'Critical', chiefComplaint: 'Headache and Fever' },
+            description: 'A 19-year-old college freshman presents with severe headache, fever to 39.8°C, and neck stiffness for 12 hours. She has photophobia and has vomited twice. She lives in a dormitory. Her roommate had a URI last week.',
+            openingStatement: 'Ashley is a college student with classic meningitis symptoms - headache, fever, stiff neck, and photophobia. This could be bacterial meningitis. What\'s your immediate approach?',
+            conceptDomains: {
+                'History': ['symptom_progression', 'exposures', 'vaccination_status'],
+                'Physical Exam': ['kernig_brudzinski', 'mental_status', 'rash'],
+                'Pathophysiology': ['csf_infection', 'meningeal_inflammation', 'organisms_by_age'],
+                'Workup': ['lumbar_puncture', 'blood_cultures', 'ct_before_lp'],
+                'Management': ['empiric_antibiotics', 'dexamethasone', 'contact_prophylaxis']
+            },
+            quickActions: ['Give antibiotics immediately', 'Does she need CT before LP?', 'Check for rash', 'Any sick contacts?'],
+            relatedContent: [
+                { type: 'parallel', title: 'SAH Headache', link: 'mentor-chat.html?case=severe-headache', reason: 'Compare severe headache workups' },
+                { type: 'mechanism', title: 'CNS Infection', link: '../mechanism/infectious.html', reason: 'Meningitis pathophysiology' }
+            ]
+        },
+
+        // ==================== ADDITIONAL STANDALONE CASES ====================
+        'gi-bleed': {
+            id: 'gi-bleed',
+            title: 'Upper GI Bleed',
+            isParallel: false,
+            parallelCase: null,
+            patient: { name: 'Frank Rodriguez', age: 58, sex: 'Male', setting: 'Emergency Department', acuity: 'High', chiefComplaint: 'Vomiting Blood' },
+            description: 'A 58-year-old man presents after vomiting approximately 500mL of bright red blood at home. He has a history of alcohol use disorder and drinks 6-8 beers daily. He appears pale and diaphoretic. BP 92/60, HR 118.',
+            openingStatement: 'Mr. Rodriguez just had a massive hematemesis. He\'s hypotensive and tachycardic. He has a drinking history. What are you thinking and what do we do first?',
+            conceptDomains: {
+                'History': ['volume_of_blood', 'melena', 'alcohol_use', 'nsaid_use'],
+                'Physical Exam': ['hemodynamics', 'stigmata_of_liver_disease', 'abdominal_exam'],
+                'Pathophysiology': ['variceal_bleeding', 'peptic_ulcer', 'portal_hypertension'],
+                'Workup': ['cbc', 'coags', 'type_and_screen'],
+                'Management': ['resuscitation', 'ppi', 'octreotide', 'egd_timing']
+            },
+            quickActions: ['Start 2 large bore IVs', 'Type and crossmatch', 'Any signs of liver disease?', 'When can GI scope him?'],
+            relatedContent: [
+                { type: 'mechanism', title: 'Portal Hypertension', link: '../mechanism/gi.html', reason: 'Understand variceal bleeding' }
+            ]
+        },
+        'copd-exacerbation': {
+            id: 'copd-exacerbation',
+            title: 'COPD Exacerbation',
+            isParallel: false,
+            parallelCase: null,
+            patient: { name: 'Harold Stevens', age: 72, sex: 'Male', setting: 'Emergency Department', acuity: 'High', chiefComplaint: 'Worsening Shortness of Breath' },
+            description: 'A 72-year-old man with severe COPD (FEV1 35% predicted) presents with 3 days of worsening dyspnea, increased sputum production, and purulent sputum. He uses home oxygen at 2L. He smoked 50 pack-years and quit 5 years ago.',
+            openingStatement: 'Mr. Stevens is a severe COPD patient who\'s much worse than his baseline. He\'s tripoding, pursed-lip breathing, and his oxygen sat on 2L is only 86%. How do you approach a COPD exacerbation?',
+            conceptDomains: {
+                'History': ['baseline_function', 'sputum_changes', 'medication_compliance'],
+                'Physical Exam': ['respiratory_effort', 'breath_sounds', 'accessory_muscles'],
+                'Pathophysiology': ['airflow_obstruction', 'hyperinflation', 'respiratory_failure'],
+                'Workup': ['abg', 'cxr', 'sputum_culture'],
+                'Management': ['bronchodilators', 'steroids', 'antibiotics', 'niv_indications']
+            },
+            quickActions: ['Get an ABG', 'Start nebulizers', 'Does he need BiPAP?', 'What color is his sputum?'],
+            relatedContent: [
+                { type: 'mechanism', title: 'COPD Pathophysiology', link: '../mechanism/pulmonary.html', reason: 'Review obstructive lung disease' }
+            ]
+        },
+        'atrial-fibrillation': {
+            id: 'atrial-fibrillation',
+            title: 'New Onset Atrial Fibrillation',
+            isParallel: false,
+            parallelCase: null,
+            patient: { name: 'Barbara Chen', age: 67, sex: 'Female', setting: 'Emergency Department', acuity: 'Medium', chiefComplaint: 'Palpitations' },
+            description: 'A 67-year-old woman presents with 2 days of palpitations and mild dyspnea on exertion. ECG shows atrial fibrillation with RVR at 134 bpm. She has hypertension and diabetes. No prior history of AFib.',
+            openingStatement: 'Mrs. Chen is in new-onset AFib with RVR. Her heart rate is 134 and she feels it. We need to think about rate control, rhythm control, and anticoagulation. How do you approach this?',
+            conceptDomains: {
+                'History': ['symptom_onset', 'triggers', 'stroke_risk_factors'],
+                'Physical Exam': ['heart_rate_rhythm', 'signs_of_hf'],
+                'Pathophysiology': ['atrial_remodeling', 'stroke_risk'],
+                'Workup': ['ecg', 'tsh', 'echo'],
+                'Management': ['rate_control', 'rhythm_control', 'chadsvasc', 'anticoagulation']
+            },
+            quickActions: ['Calculate her CHA2DS2-VASc', 'What rate control agent?', 'Check her thyroid', 'Does she need anticoagulation?'],
+            relatedContent: [
+                { type: 'mechanism', title: 'AFib Mechanisms', link: '../mechanism/cardiac.html', reason: 'Understand AFib pathophysiology' }
+            ]
+        },
+        'acute-pancreatitis': {
+            id: 'acute-pancreatitis',
+            title: 'Acute Pancreatitis',
+            isParallel: false,
+            parallelCase: null,
+            patient: { name: 'David Kim', age: 45, sex: 'Male', setting: 'Emergency Department', acuity: 'High', chiefComplaint: 'Severe Abdominal Pain' },
+            description: 'A 45-year-old man presents with severe epigastric pain radiating to his back for 8 hours. He has nausea and has vomited 4 times. He admits to heavy drinking last night (12 beers). He is lying still, afraid to move.',
+            openingStatement: 'Mr. Kim has classic pancreatitis symptoms after a night of heavy drinking - epigastric pain boring to the back. He\'s in significant distress. How do you confirm and manage acute pancreatitis?',
+            conceptDomains: {
+                'History': ['alcohol_intake', 'gallstone_symptoms', 'prior_episodes'],
+                'Physical Exam': ['abdominal_exam', 'cullen_grey_turner'],
+                'Pathophysiology': ['autodigestion', 'third_spacing'],
+                'Workup': ['lipase', 'imaging', 'severity_scores'],
+                'Management': ['fluids', 'pain_control', 'nutrition']
+            },
+            quickActions: ['Check lipase level', 'How much fluid does he need?', 'Is this mild or severe?', 'Does he need imaging?'],
+            relatedContent: [
+                { type: 'mechanism', title: 'Pancreatitis Cascade', link: '../mechanism/gi.html', reason: 'Understand pancreatitis pathophysiology' }
+            ]
+        },
+        'fever-unknown-origin': {
+            id: 'fever-unknown-origin',
+            title: 'Fever of Unknown Origin',
+            isParallel: false,
+            parallelCase: null,
+            patient: { name: 'Patricia Evans', age: 58, sex: 'Female', setting: 'Inpatient', acuity: 'Medium', chiefComplaint: 'Fever' },
+            description: 'A 58-year-old woman has had daily fevers up to 39.2°C for 3 weeks. Outpatient workup including CBC, CMP, UA, CXR, and blood cultures have been unrevealing. She reports night sweats, 10-pound weight loss, and fatigue.',
+            openingStatement: 'Mrs. Evans has been admitted for workup of fever of unknown origin. She\'s been febrile for 3 weeks and outpatient workup has been negative. How do you want to approach this systematically?',
+            conceptDomains: {
+                'History': ['fever_pattern', 'constitutional_symptoms', 'travel', 'exposures'],
+                'Physical Exam': ['lymph_nodes', 'skin', 'cardiac_exam'],
+                'Pathophysiology': ['infection', 'malignancy', 'autoimmune'],
+                'Workup': ['blood_cultures', 'ct_imaging', 'echo'],
+                'Management': ['empiric_treatment', 'biopsy', 'specialist_referral']
+            },
+            quickActions: ['Tell me about the fever pattern', 'Any recent travel?', 'Check for lymphadenopathy', 'Any new rashes?'],
+            relatedContent: [
+                { type: 'mechanism', title: 'Fever Pathophysiology', link: '../mechanism/infectious.html', reason: 'Understand fever mechanisms' }
+            ]
+        },
+        'acute-kidney-injury': {
+            id: 'acute-kidney-injury',
+            title: 'Acute Kidney Injury',
+            isParallel: false,
+            parallelCase: null,
+            patient: { name: 'William Thompson', age: 65, sex: 'Male', setting: 'Inpatient', acuity: 'Medium', chiefComplaint: 'Rising Creatinine' },
+            description: 'A 65-year-old man is post-operative day 2 from hip replacement. His creatinine rose from 1.0 pre-op to 2.4 today. He received IV contrast for a pre-op CT. He has been oliguric with 200mL urine output in 12 hours.',
+            openingStatement: 'Mr. Thompson\'s creatinine has more than doubled since his hip surgery. The nurse is concerned about his low urine output. How do you approach acute kidney injury?',
+            conceptDomains: {
+                'History': ['baseline_cr', 'urine_output', 'contrast_exposure'],
+                'Physical Exam': ['volume_status', 'bladder_scan'],
+                'Pathophysiology': ['prerenal', 'intrinsic', 'postrenal', 'atn'],
+                'Workup': ['ua_microscopy', 'fena', 'renal_ultrasound'],
+                'Management': ['fluids', 'hold_nephrotoxins', 'dialysis_indications']
+            },
+            quickActions: ['What was his baseline creatinine?', 'Check his volume status', 'Any nephrotoxic medications?', 'Get a bladder scan'],
+            relatedContent: [
+                { type: 'mechanism', title: 'Renal Physiology', link: '../mechanism/renal.html', reason: 'Review GFR and tubular function' }
+            ]
+        },
+        'anemia-workup': {
+            id: 'anemia-workup',
+            title: 'Anemia Workup',
+            isParallel: false,
+            parallelCase: null,
+            patient: { name: 'Sarah Mitchell', age: 45, sex: 'Female', setting: 'Outpatient', acuity: 'Low', chiefComplaint: 'Fatigue' },
+            description: 'A 45-year-old woman presents with 3 months of progressive fatigue. Labs show Hgb 8.2, MCV 68, and ferritin 8. She reports heavy menstrual periods and has been vegetarian for 2 years.',
+            openingStatement: 'Ms. Mitchell came in for fatigue and her labs show she\'s significantly anemic with a low MCV. Walk me through your approach to anemia.',
+            conceptDomains: {
+                'History': ['bleeding_history', 'diet', 'menstrual_history'],
+                'Physical Exam': ['pallor', 'koilonychia'],
+                'Pathophysiology': ['iron_metabolism', 'mcv_classification'],
+                'Workup': ['iron_studies', 'reticulocyte'],
+                'Management': ['iron_replacement', 'gi_referral']
+            },
+            quickActions: ['Tell me about her periods', 'Any blood in stool?', 'What does she eat?', 'Check her iron studies'],
+            relatedContent: [
+                { type: 'mechanism', title: 'Iron Metabolism', link: '../mechanism/heme.html', reason: 'Understand iron absorption and storage' }
+            ]
+        }
+    };
+
+    // ============================================================
+    // STATE
+    // ============================================================
+    let currentCase = null;
+    let conversationHistory = [];
+    let isLoading = false;
+    let seconds = 0;
+    let timerInterval = null;
+    let conceptsExplored = {};
+    
+    let session = {
+        id: 'COACH_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6),
+        startTime: new Date().toISOString(),
+        caseTopic: '',
+        questionsAskedByAI: 1,
+        teachingMomentsDetected: 0,
+        conceptsExplored: [],
+        isParallelCase: false,
+        parallelPairId: null
+    };
+
+    // ============================================================
+    // INITIALIZATION
+    // ============================================================
+    function init() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const caseId = urlParams.get('case') || 'chest-pain-acs';
+        
+        currentCase = CASES[caseId] || CASES['chest-pain-acs'];
+        session.caseTopic = currentCase.title;
+        session.isParallelCase = currentCase.isParallel || false;
+        session.parallelPairId = currentCase.parallelCase;
+        
+        // Update badge
+        const badge = document.getElementById('caseBadge');
+        badge.textContent = currentCase.title;
+        if (currentCase.isParallel) {
+            badge.classList.add('parallel');
+            badge.textContent = '🔄 ' + currentCase.title;
+        }
+        
+        addMessage(currentCase.openingStatement, 'attending');
+        renderQuickActions();
+        renderConceptMap();
+        renderParallelIndicator();
+        renderRelatedContent();
+        
+        timerInterval = setInterval(updateTimer, 1000);
+    }
+
+    function updateTimer() {
+        seconds++;
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        document.getElementById('timer').textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        document.getElementById('statTime').textContent = mins + 'm';
+    }
+
+    function addMessage(text, sender) {
+        const container = document.getElementById('chatMessages');
+        const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        
+        container.innerHTML += `
+            <div class="message ${sender}">
+                <div class="message-bubble">${text}</div>
+                <div class="message-meta">${sender === 'attending' ? 'Dr. Chen' : 'You'} • ${time}</div>
+            </div>
+        `;
+        container.scrollTop = container.scrollHeight;
+    }
+
+    function renderQuickActions() {
+        const container = document.getElementById('quickActions');
+        container.innerHTML = currentCase.quickActions.map(action => 
+            `<button class="quick-btn" onclick="sendQuickAction('${action.replace(/'/g, "\\'")}')">${action}</button>`
+        ).join('');
+    }
+
+    function sendQuickAction(action) {
+        document.getElementById('userInput').value = action;
+        sendMessage();
+    }
+
+    function renderConceptMap() {
+        const container = document.getElementById('conceptMap');
+        let html = '';
+        
+        for (const [domain, concepts] of Object.entries(currentCase.conceptDomains)) {
+            html += `
+                <div class="concept-section">
+                    <h4>${domain}</h4>
+                    <div class="concept-list">
+                        ${concepts.map(c => {
+                            const explored = conceptsExplored[c];
+                            return `<span class="concept-tag ${explored ? 'explored' : ''}">${c.replace(/_/g, ' ')}</span>`;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+        }
+        container.innerHTML = html;
+    }
+
+    function renderParallelIndicator() {
+        const container = document.getElementById('parallelCaseIndicator');
+        
+        if (currentCase.parallelCase) {
+            const parallelCaseData = CASES[currentCase.parallelCase];
+            if (parallelCaseData) {
+                container.innerHTML = `
+                    <div class="parallel-indicator">
+                        <h4>🔄 ${currentCase.isParallel ? 'Original Case' : 'Parallel Case'} Available</h4>
+                        <p>${currentCase.parallelDescription}</p>
+                        <a href="mentor-chat.html?case=${currentCase.parallelCase}" class="parallel-link">
+                            ${currentCase.isParallel ? '← Try Original' : 'Try Parallel →'}
+                        </a>
+                    </div>
+                `;
+            }
+        } else {
+            container.innerHTML = '';
+        }
+    }
+
+    function renderRelatedContent() {
+        const container = document.getElementById('relatedContent');
+        let html = currentCase.relatedContent.map(item => `
+            <a href="${item.link}" class="related-item">
+                <div class="related-icon ${item.type}">
+                    ${item.type === 'mechanism' ? '🧬' : item.type === 'parallel' ? '🔄' : '🩺'}
+                </div>
+                <div class="related-info">
+                    <div class="related-title">${item.title}</div>
+                    <div class="related-reason">${item.reason}</div>
+                </div>
+            </a>
+        `).join('');
+        
+        container.innerHTML = html;
+    }
+
+    async function sendMessage() {
+        const input = document.getElementById('userInput');
+        const message = input.value.trim();
+        if (!message || isLoading) return;
+        
+        input.value = '';
+        addMessage(message, 'student');
+        conversationHistory.push({ role: 'user', content: message });
+        
+        isLoading = true;
+        document.getElementById('sendBtn').disabled = true;
+        
+        const container = document.getElementById('chatMessages');
+        container.innerHTML += `<div class="message attending" id="typing"><div class="message-bubble"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div></div>`;
+        container.scrollTop = container.scrollHeight;
+        
+        try {
+            const response = await callCloudflareWorker(message);
+            document.getElementById('typing')?.remove();
+            
+            addMessage(response, 'attending');
+            conversationHistory.push({ role: 'assistant', content: response });
+            
+            session.questionsAskedByAI++;
+            if (response.toLowerCase().includes('teaching moment') || response.toLowerCase().includes('let me explain') || response.includes('?')) {
+                session.teachingMomentsDetected++;
+            }
+            
+            checkConceptsExplored(message + ' ' + response);
+            updateStats();
+            
+        } catch (error) {
+            document.getElementById('typing')?.remove();
+            addMessage('I apologize, I\'m having trouble connecting. Please try again.', 'attending');
+            console.error('Error:', error);
+        }
+        
+        isLoading = false;
+        document.getElementById('sendBtn').disabled = false;
+    }
+
+    async function callCloudflareWorker(userMessage) {
+        const WORKER_URL = 'https://coachdx-attending.laurenmfine.workers.dev';
+        
+        const response = await fetch(WORKER_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                message: userMessage,
+                conversationHistory: conversationHistory.slice(-10),
+                caseData: { description: currentCase.description }
+            })
+        });
+        
+        if (!response.ok) throw new Error('Worker request failed');
+        
+        const data = await response.json();
+        return data.response || data.content || 'I understand. Tell me more about your thinking.';
+    }
+
+    function checkConceptsExplored(text) {
+        const textLower = text.toLowerCase();
+        for (const concepts of Object.values(currentCase.conceptDomains)) {
+            for (const concept of concepts) {
+                const searchTerms = concept.split('_');
+                if (searchTerms.some(term => textLower.includes(term))) {
+                    if (!conceptsExplored[concept]) {
+                        conceptsExplored[concept] = true;
+                        session.conceptsExplored.push(concept);
+                    }
+                }
+            }
+        }
+        renderConceptMap();
+    }
+
+    function updateStats() {
+        document.getElementById('statQuestions').textContent = session.questionsAskedByAI;
+        document.getElementById('statConcepts').textContent = Object.keys(conceptsExplored).length;
+        document.getElementById('statTeaching').textContent = session.teachingMomentsDetected;
+    }
+
+    function goToParallelCase() {
+        if (currentCase.parallelCase) {
+            window.location.href = `mentor-chat.html?case=${currentCase.parallelCase}`;
+        } else {
+            window.location.href = 'case-library.html';
+        }
+    }
+
+    function endSession() {
+        clearInterval(timerInterval);
+        
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        
+        document.getElementById('modalTime').textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+        document.getElementById('modalConcepts').textContent = Object.keys(conceptsExplored).length;
+        document.getElementById('modalTeaching').textContent = session.teachingMomentsDetected;
+        
+        // Show parallel case suggestion
+        const suggestionDiv = document.getElementById('parallelCaseSuggestion');
+        const nextBtn = document.getElementById('nextCaseBtn');
+        
+        if (currentCase.parallelCase) {
+            const parallelData = CASES[currentCase.parallelCase];
+            suggestionDiv.innerHTML = `
+                <div style="background:#fef3c7; padding:12px; border-radius:8px; text-align:center;">
+                    <p style="font-size:13px; color:#92400e; margin-bottom:4px;">
+                        <strong>🔄 Test Your Reasoning Transfer</strong>
+                    </p>
+                    <p style="font-size:12px; color:#a16207;">
+                        Try "${parallelData.title}" - ${currentCase.parallelDescription}
+                    </p>
+                </div>
+            `;
+            nextBtn.textContent = 'Try Parallel Case →';
+            nextBtn.style.background = '#f59e0b';
+        } else {
+            suggestionDiv.innerHTML = '';
+            nextBtn.textContent = 'Back to ReasonDx';
+            nextBtn.onclick = () => location.href = '/index.html';
+        }
+        
+        document.getElementById('endModal').classList.add('show');
+        sendSessionData();
+    }
+
+    function sendSessionData() {
+        const data = {
+            type: 'COACHDX_SESSION',
+            sessionId: session.id,
+            caseId: currentCase.id,
+            caseTopic: currentCase.title,
+            isParallelCase: session.isParallelCase,
+            parallelPairId: session.parallelPairId,
+            duration: seconds,
+            questionsAsked: session.questionsAskedByAI,
+            teachingMoments: session.teachingMomentsDetected,
+            conceptsExplored: session.conceptsExplored,
+            timestamp: new Date().toISOString()
+        };
+        
+        console.log('Session data:', data);
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
