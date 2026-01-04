@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patent Innovation Showcase | Dx Learning Ecosystem</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.6; }
+        .header { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+        .header-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 20px; font-weight: 700; color: #1e293b; }
+        .logo span { color: #3b82f6; }
+        .nav { display: flex; gap: 20px; }
+        .nav a { color: #64748b; text-decoration: none; font-size: 14px; }
+        .nav a:hover { color: #3b82f6; }
+        
+        .hero { text-align: center; padding: 48px 24px; background: linear-gradient(135deg, #1e293b 0%, #334155 100%); color: #fff; }
+        .hero h1 { font-size: 36px; font-weight: 700; margin-bottom: 12px; }
+        .hero p { font-size: 18px; color: #94a3b8; max-width: 700px; margin: 0 auto; }
+        
+        .main { max-width: 1200px; margin: 0 auto; padding: 48px 24px; }
+        
+        .innovation-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-bottom: 48px; }
+        
+        .innovation-card { background: #fff; border-radius: 16px; overflow: hidden; border: 1px solid #e2e8f0; transition: all 0.2s; }
+        .innovation-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.08); transform: translateY(-4px); }
+        .innovation-header { padding: 24px; background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); color: #fff; }
+        .innovation-header.green { background: linear-gradient(135deg, #10b981 0%, #047857 100%); }
+        .innovation-header.purple { background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%); }
+        .innovation-header.amber { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        .innovation-badge { display: inline-block; padding: 4px 10px; background: rgba(255,255,255,0.2); border-radius: 20px; font-size: 11px; font-weight: 600; margin-bottom: 12px; }
+        .innovation-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+        .innovation-subtitle { font-size: 14px; opacity: 0.9; }
+        .innovation-body { padding: 24px; }
+        .innovation-desc { font-size: 14px; color: #64748b; margin-bottom: 20px; line-height: 1.7; }
+        
+        .feature-list { list-style: none; margin-bottom: 20px; }
+        .feature-list li { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; font-size: 14px; color: #475569; }
+        .feature-list li::before { content: '✓'; color: #22c55e; font-weight: 700; }
+        
+        .demo-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: #3b82f6; color: #fff; border-radius: 8px; font-weight: 600; font-size: 14px; text-decoration: none; cursor: pointer; border: none; }
+        .demo-btn:hover { background: #2563eb; }
+        .demo-btn.secondary { background: #f1f5f9; color: #475569; }
+        .demo-btn.secondary:hover { background: #e2e8f0; }
+        
+        /* Interactive Demos */
+        .demo-section { background: #fff; border-radius: 16px; padding: 32px; margin-bottom: 32px; border: 1px solid #e2e8f0; }
+        .demo-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+        .demo-subtitle { color: #64748b; margin-bottom: 24px; }
+        
+        /* MDCLS Demo */
+        .cognitive-stages { display: flex; gap: 12px; margin-bottom: 24px; }
+        .stage { flex: 1; padding: 16px; background: #f8fafc; border-radius: 12px; border: 2px solid #e2e8f0; text-align: center; transition: all 0.3s; cursor: pointer; }
+        .stage:hover { border-color: #3b82f6; }
+        .stage.active { border-color: #3b82f6; background: #dbeafe; }
+        .stage.completed { border-color: #22c55e; background: #d1fae5; }
+        .stage-num { font-size: 24px; font-weight: 700; color: #3b82f6; }
+        .stage-name { font-size: 12px; color: #64748b; margin-top: 4px; }
+        .stage-load { font-size: 11px; color: #94a3b8; margin-top: 8px; }
+        
+        .load-meter { height: 12px; background: #e2e8f0; border-radius: 6px; overflow: hidden; margin: 20px 0; }
+        .load-fill { height: 100%; border-radius: 6px; transition: all 0.5s; }
+        .load-fill.low { background: linear-gradient(90deg, #22c55e, #4ade80); width: 30%; }
+        .load-fill.medium { background: linear-gradient(90deg, #f59e0b, #fbbf24); width: 55%; }
+        .load-fill.high { background: linear-gradient(90deg, #ef4444, #f87171); width: 85%; }
+        
+        /* MMD Demo */
+        .mastery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+        .mastery-cell { padding: 12px; border-radius: 8px; text-align: center; font-size: 13px; color: #fff; }
+        .mastery-cell.novice { background: #ef4444; }
+        .mastery-cell.beginner { background: #f59e0b; }
+        .mastery-cell.intermediate { background: #3b82f6; }
+        .mastery-cell.advanced { background: #22c55e; }
+        .mastery-cell.expert { background: #8b5cf6; }
+        .dimension-label { font-size: 11px; color: #64748b; margin-top: 4px; }
+        
+        /* DKFCE Demo */
+        .prediction-demo { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .prediction-box { background: #f8fafc; border-radius: 12px; padding: 20px; border: 1px solid #e2e8f0; }
+        .prediction-label { font-size: 12px; color: #64748b; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .prediction-value { font-size: 24px; font-weight: 700; color: #1e293b; }
+        .prediction-options { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+        .pred-opt { padding: 8px 14px; background: #fff; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 13px; cursor: pointer; }
+        .pred-opt:hover { border-color: #3b82f6; }
+        .pred-opt.selected { border-color: #3b82f6; background: #dbeafe; }
+        .pred-opt.correct { border-color: #22c55e; background: #d1fae5; }
+        
+        /* Fingerprint Demo */
+        .fingerprint-container { display: flex; gap: 32px; align-items: center; }
+        .fingerprint-radar { width: 250px; height: 250px; }
+        .fingerprint-metrics { flex: 1; }
+        .metric-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #e2e8f0; }
+        .metric-row:last-child { border-bottom: none; }
+        .metric-name { font-size: 14px; color: #475569; }
+        .metric-value { font-size: 14px; font-weight: 600; }
+        .metric-bar { width: 100px; height: 6px; background: #e2e8f0; border-radius: 3px; margin-left: 12px; overflow: hidden; }
+        .metric-fill { height: 100%; background: #3b82f6; border-radius: 3px; }
+        
+        .section-title { font-size: 24px; font-weight: 700; margin-bottom: 24px; text-align: center; }
+        
+        .stats-highlight { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 48px; }
+        .stat-box { text-align: center; padding: 24px; background: #fff; border-radius: 12px; border: 1px solid #e2e8f0; }
+        .stat-num { font-size: 36px; font-weight: 700; color: #3b82f6; }
+        .stat-label { font-size: 14px; color: #64748b; margin-top: 4px; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">Dx <span>Innovations</span></div>
+            <nav class="nav">
+                <a href="index.html">ReasonDx</a>
+                <a href="mechanismdx-index.html">MechanismDx</a>
+                <a href="CoachDx/">CoachDx</a>
+                <a href="integration-hub.html">Integration Hub</a>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <h1>Patent Innovation Showcase</h1>
+        <p>19 novel innovations powering the Dx Learning Ecosystem. Interactive demonstrations of our breakthrough technologies in medical education.</p>
+    </section>
+    
+    <main class="main">
+        <div class="stats-highlight">
+            <div class="stat-box">
+                <div class="stat-num">19</div>
+                <div class="stat-label">Patent Innovations</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num">4</div>
+                <div class="stat-label">Core Technologies</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num">3</div>
+                <div class="stat-label">Integrated Platforms</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num">240+</div>
+                <div class="stat-label">Clinical Cases</div>
+            </div>
+        </div>
+        
+        <div class="innovation-grid">
+            <div class="innovation-card">
+                <div class="innovation-header">
+                    <div class="innovation-badge">CORE INNOVATION</div>
+                    <div class="innovation-title">MDCLS</div>
+                    <div class="innovation-subtitle">Multi-Dimensional Cognitive Load Sequencing</div>
+                </div>
+                <div class="innovation-body">
+                    <p class="innovation-desc">Dynamically sequences learning content based on real-time cognitive load assessment across multiple dimensions. Optimizes the learning path to prevent overload while maximizing retention.</p>
+                    <ul class="feature-list">
+                        <li>Real-time cognitive load monitoring</li>
+                        <li>Adaptive content sequencing</li>
+                        <li>Multi-dimensional assessment (working memory, attention, schema)</li>
+                        <li>Personalized pacing algorithms</li>
+                    </ul>
+                    <a href="#mdcls-demo" class="demo-btn">See Demo</a>
+                </div>
+            </div>
+            
+            <div class="innovation-card">
+                <div class="innovation-header green">
+                    <div class="innovation-badge">CORE INNOVATION</div>
+                    <div class="innovation-title">MMD</div>
+                    <div class="innovation-subtitle">Multi-Modal Mastery Detection</div>
+                </div>
+                <div class="innovation-body">
+                    <p class="innovation-desc">Triangulates mastery signals across multiple assessment modalities - MCQs, case performance, coaching sessions, and reasoning patterns - to build a comprehensive competency profile.</p>
+                    <ul class="feature-list">
+                        <li>Cross-platform mastery tracking</li>
+                        <li>Multi-modal signal integration</li>
+                        <li>Competency heat maps</li>
+                        <li>Predictive readiness scoring</li>
+                    </ul>
+                    <a href="#mmd-demo" class="demo-btn" style="background: #10b981;">See Demo</a>
+                </div>
+            </div>
+            
+            <div class="innovation-card">
+                <div class="innovation-header purple">
+                    <div class="innovation-badge">CORE INNOVATION</div>
+                    <div class="innovation-title">DKFCE</div>
+                    <div class="innovation-subtitle">Desirable Knowledge Failure for Conceptual Encoding</div>
+                </div>
+                <div class="innovation-body">
+                    <p class="innovation-desc">Strategically introduces productive failure points where students must predict outcomes before seeing results. This "generation effect" creates deeper encoding than passive learning.</p>
+                    <ul class="feature-list">
+                        <li>Predict-before-reveal methodology</li>
+                        <li>Calibration feedback loops</li>
+                        <li>Enhanced long-term retention</li>
+                        <li>Metacognitive awareness building</li>
+                    </ul>
+                    <a href="case-frame-predict-labs.html" class="demo-btn" style="background: #8b5cf6;">See Demo</a>
+                </div>
+            </div>
+            
+            <div class="innovation-card">
+                <div class="innovation-header amber">
+                    <div class="innovation-badge">CORE INNOVATION</div>
+                    <div class="innovation-title">RPFS</div>
+                    <div class="innovation-subtitle">Reasoning Pathway Fingerprinting System</div>
+                </div>
+                <div class="innovation-body">
+                    <p class="innovation-desc">Creates a unique "fingerprint" of each learner's clinical reasoning patterns by tracking decision sequences, timing, and cognitive biases across cases.</p>
+                    <ul class="feature-list">
+                        <li>Unique reasoning signatures</li>
+                        <li>Cognitive bias detection</li>
+                        <li>Expert pathway comparison</li>
+                        <li>Personalized improvement targeting</li>
+                    </ul>
+                    <a href="fingerprint-dashboard.html" class="demo-btn" style="background: #f59e0b;">See Demo</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- MDCLS Interactive Demo -->
+        <div class="demo-section" id="mdcls-demo">
+            <div class="demo-title">MDCLS: Cognitive Load Sequencing</div>
+            <div class="demo-subtitle">Watch how content difficulty adapts in real-time based on cognitive load signals</div>
+            
+            <div class="cognitive-stages">
+                <div class="stage completed" onclick="setStage(1)">
+                    <div class="stage-num">1</div>
+                    <div class="stage-name">Recall</div>
+                    <div class="stage-load">Load: 25%</div>
+                </div>
+                <div class="stage completed" onclick="setStage(2)">
+                    <div class="stage-num">2</div>
+                    <div class="stage-name">Understand</div>
+                    <div class="stage-load">Load: 40%</div>
+                </div>
+                <div class="stage active" onclick="setStage(3)">
+                    <div class="stage-num">3</div>
+                    <div class="stage-name">Apply</div>
+                    <div class="stage-load">Load: 55%</div>
+                </div>
+                <div class="stage" onclick="setStage(4)">
+                    <div class="stage-num">4</div>
+                    <div class="stage-name">Analyze</div>
+                    <div class="stage-load">Load: 70%</div>
+                </div>
+                <div class="stage" onclick="setStage(5)">
+                    <div class="stage-num">5</div>
+                    <div class="stage-name">Synthesize</div>
+                    <div class="stage-load">Load: 85%</div>
+                </div>
+            </div>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span style="font-size: 14px; font-weight: 500;">Current Cognitive Load</span>
+                <span style="font-size: 14px; color: #f59e0b; font-weight: 600;" id="loadPercent">55%</span>
+            </div>
+            <div class="load-meter">
+                <div class="load-fill medium" id="loadBar"></div>
+            </div>
+            <p style="font-size: 13px; color: #64748b; margin-top: 12px;" id="loadAdvice">
+                💡 Cognitive load is optimal. Student can handle moderate complexity tasks.
+            </p>
+        </div>
+        
+        <!-- MMD Interactive Demo -->
+        <div class="demo-section" id="mmd-demo">
+            <div class="demo-title">MMD: Multi-Modal Mastery Detection</div>
+            <div class="demo-subtitle">Competency signals from multiple assessment types converge to determine true mastery</div>
+            
+            <div class="mastery-grid">
+                <div>
+                    <div class="mastery-cell advanced">85%</div>
+                    <div class="dimension-label">MCQ Score</div>
+                </div>
+                <div>
+                    <div class="mastery-cell intermediate">72%</div>
+                    <div class="dimension-label">Case Performance</div>
+                </div>
+                <div>
+                    <div class="mastery-cell advanced">88%</div>
+                    <div class="dimension-label">Coaching Sessions</div>
+                </div>
+                <div>
+                    <div class="mastery-cell intermediate">68%</div>
+                    <div class="dimension-label">Reasoning Quality</div>
+                </div>
+            </div>
+            
+            <div style="background: #f8fafc; padding: 20px; border-radius: 12px; text-align: center;">
+                <div style="font-size: 12px; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Integrated Mastery Score</div>
+                <div style="font-size: 48px; font-weight: 700; color: #3b82f6;">78%</div>
+                <div style="font-size: 14px; color: #64748b; margin-top: 8px;">
+                    Status: <span style="color: #f59e0b; font-weight: 600;">Approaching Mastery</span>
+                </div>
+                <p style="font-size: 13px; color: #64748b; margin-top: 12px;">
+                    Recommendation: Focus on case-based application to solidify conceptual understanding.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Fingerprint Demo -->
+        <div class="demo-section">
+            <div class="demo-title">RPFS: Reasoning Pathway Fingerprint</div>
+            <div class="demo-subtitle">Your unique clinical reasoning signature across 6 dimensions</div>
+            
+            <div class="fingerprint-container">
+                <canvas id="radarChart" class="fingerprint-radar"></canvas>
+                <div class="fingerprint-metrics">
+                    <div class="metric-row">
+                        <span class="metric-name">Data Gathering</span>
+                        <div style="display: flex; align-items: center;">
+                            <span class="metric-value" style="color: #22c55e;">85%</span>
+                            <div class="metric-bar"><div class="metric-fill" style="width: 85%; background: #22c55e;"></div></div>
+                        </div>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-name">Hypothesis Generation</span>
+                        <div style="display: flex; align-items: center;">
+                            <span class="metric-value" style="color: #22c55e;">82%</span>
+                            <div class="metric-bar"><div class="metric-fill" style="width: 82%; background: #22c55e;"></div></div>
+                        </div>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-name">Differential Refinement</span>
+                        <div style="display: flex; align-items: center;">
+                            <span class="metric-value" style="color: #f59e0b;">68%</span>
+                            <div class="metric-bar"><div class="metric-fill" style="width: 68%; background: #f59e0b;"></div></div>
+                        </div>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-name">Test Interpretation</span>
+                        <div style="display: flex; align-items: center;">
+                            <span class="metric-value" style="color: #ef4444;">52%</span>
+                            <div class="metric-bar"><div class="metric-fill" style="width: 52%; background: #ef4444;"></div></div>
+                        </div>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-name">Clinical Synthesis</span>
+                        <div style="display: flex; align-items: center;">
+                            <span class="metric-value" style="color: #f59e0b;">71%</span>
+                            <div class="metric-bar"><div class="metric-fill" style="width: 71%; background: #f59e0b;"></div></div>
+                        </div>
+                    </div>
+                    <div class="metric-row">
+                        <span class="metric-name">Management Planning</span>
+                        <div style="display: flex; align-items: center;">
+                            <span class="metric-value" style="color: #22c55e;">78%</span>
+                            <div class="metric-bar"><div class="metric-fill" style="width: 78%; background: #22c55e;"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <h2 class="section-title">Additional Innovations</h2>
+        
+        <div class="innovation-grid" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="innovation-card">
+                <div class="innovation-body">
+                    <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">Expert Pathway Comparison</h3>
+                    <p class="innovation-desc">Compare student reasoning paths against expert clinician decision trees to identify divergence points and learning opportunities.</p>
+                </div>
+            </div>
+            <div class="innovation-card">
+                <div class="innovation-body">
+                    <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">Cognitive Bias Detection</h3>
+                    <p class="innovation-desc">Automatically identifies anchoring, premature closure, and other cognitive biases from reasoning patterns.</p>
+                </div>
+            </div>
+            <div class="innovation-card">
+                <div class="innovation-body">
+                    <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">Adaptive Spaced Repetition</h3>
+                    <p class="innovation-desc">Cross-platform spaced repetition that pulls concepts from cases, MCQs, and coaching sessions into unified review queue.</p>
+                </div>
+            </div>
+            <div class="innovation-card">
+                <div class="innovation-body">
+                    <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">Parallel Case Transfer</h3>
+                    <p class="innovation-desc">Tests reasoning transfer by presenting structurally similar cases in different clinical contexts.</p>
+                </div>
+            </div>
+            <div class="innovation-card">
+                <div class="innovation-body">
+                    <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">Calibration Analytics</h3>
+                    <p class="innovation-desc">Tracks confidence vs accuracy to identify overconfidence patterns and improve metacognitive awareness.</p>
+                </div>
+            </div>
+            <div class="innovation-card">
+                <div class="innovation-body">
+                    <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">Unified Knowledge Graph</h3>
+                    <p class="innovation-desc">Connects concepts across all platforms in a shared graph structure enabling intelligent cross-referencing.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+    function setStage(stage) {
+        const stages = document.querySelectorAll('.stage');
+        const loads = [25, 40, 55, 70, 85];
+        const load = loads[stage - 1];
+        
+        stages.forEach((s, i) => {
+            s.classList.remove('active', 'completed');
+            if (i < stage - 1) s.classList.add('completed');
+            if (i === stage - 1) s.classList.add('active');
+        });
+        
+        document.getElementById('loadPercent').textContent = load + '%';
+        const bar = document.getElementById('loadBar');
+        bar.style.width = load + '%';
+        bar.className = 'load-fill ' + (load <= 35 ? 'low' : load <= 60 ? 'medium' : 'high');
+        
+        const advices = [
+            '💡 Low cognitive load. Student can handle more complex content.',
+            '💡 Moderate load. Good pace for building understanding.',
+            '💡 Cognitive load is optimal. Student can handle moderate complexity tasks.',
+            '⚠️ High cognitive load. Consider breaking content into smaller chunks.',
+            '🛑 Near overload. Recommend consolidation before new content.'
+        ];
+        document.getElementById('loadAdvice').textContent = advices[stage - 1];
+    }
+    
+    // Draw radar chart
+    function drawRadar() {
+        const canvas = document.getElementById('radarChart');
+        const ctx = canvas.getContext('2d');
+        canvas.width = 250;
+        canvas.height = 250;
+        const centerX = 125, centerY = 125, radius = 90;
+        const data = [85, 82, 68, 52, 71, 78];
+        
+        // Draw grid
+        for (let i = 1; i <= 5; i++) {
+            ctx.beginPath();
+            ctx.strokeStyle = '#e2e8f0';
+            for (let j = 0; j <= 6; j++) {
+                const angle = (Math.PI * 2 * j / 6) - Math.PI / 2;
+                const x = centerX + (radius * i / 5) * Math.cos(angle);
+                const y = centerY + (radius * i / 5) * Math.sin(angle);
+                if (j === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.closePath();
+            ctx.stroke();
+        }
+        
+        // Draw data
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(59, 130, 246, 0.2)';
+        ctx.strokeStyle = '#3b82f6';
+        ctx.lineWidth = 2;
+        data.forEach((val, i) => {
+            const angle = (Math.PI * 2 * i / 6) - Math.PI / 2;
+            const x = centerX + (radius * val / 100) * Math.cos(angle);
+            const y = centerY + (radius * val / 100) * Math.sin(angle);
+            if (i === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+        });
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+    }
+    
+    drawRadar();
+    </script>
+</body>
+</html>
