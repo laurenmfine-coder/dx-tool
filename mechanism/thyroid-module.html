@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thyroid Disorders | MechanismDx</title>
+    <script src="../dx-scoring.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.6; }
+        .header { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+        .header-inner { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: Georgia, serif; font-size: 24px; color: #1e293b; text-decoration: none; }
+        .logo span { color: #10b981; }
+        .nav { display: flex; gap: 20px; }
+        .nav a { color: #64748b; text-decoration: none; font-size: 14px; font-weight: 500; }
+        .hero { background: linear-gradient(135deg, #fefce8 0%, #fff 100%); border-bottom: 1px solid #e2e8f0; padding: 48px 24px; }
+        .hero-inner { max-width: 800px; margin: 0 auto; }
+        .hero-icon { font-size: 48px; margin-bottom: 16px; }
+        .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; color: #a16207; }
+        .hero p { font-size: 16px; color: #64748b; margin-bottom: 24px; }
+        .hero-meta { display: flex; gap: 24px; flex-wrap: wrap; font-size: 14px; color: #64748b; }
+        .main { max-width: 800px; margin: 0 auto; padding: 48px 24px; }
+        .progress-bar { background: #e2e8f0; height: 8px; border-radius: 4px; margin-bottom: 32px; overflow: hidden; }
+        .progress-fill { background: #10b981; height: 100%; width: 0%; transition: width 0.3s; }
+        .section { margin-bottom: 48px; }
+        .section-title { font-size: 20px; font-weight: 600; margin-bottom: 16px; color: #1e293b; }
+        .concept-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+        .concept-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #1e293b; }
+        .concept-card p { color: #475569; font-size: 14px; margin-bottom: 12px; }
+        .concept-card ul { margin-left: 20px; color: #475569; font-size: 14px; }
+        .concept-card li { margin-bottom: 6px; }
+        .pathway-box { background: #fefce8; border: 1px solid #fde047; border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+        .pathway-box h3 { color: #a16207; font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+        .pathway-steps { display: flex; flex-direction: column; gap: 8px; }
+        .pathway-step { display: flex; align-items: center; gap: 12px; padding: 12px; background: #fff; border-radius: 8px; }
+        .step-num { width: 28px; height: 28px; background: #eab308; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; }
+        .step-text { font-size: 14px; color: #1e293b; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; background: #fff; }
+        .comparison-table th { background: #f1f5f9; padding: 12px; text-align: left; font-weight: 600; border-bottom: 2px solid #e2e8f0; }
+        .comparison-table td { padding: 12px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+        .clinical-pearl { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 16px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+        .clinical-pearl h4 { font-size: 14px; font-weight: 600; color: #92400e; margin-bottom: 8px; }
+        .clinical-pearl p { font-size: 14px; color: #78350f; margin: 0; }
+        .danger-box { background: #fef2f2; border-left: 4px solid #dc2626; padding: 16px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+        .danger-box h4 { font-size: 14px; font-weight: 600; color: #dc2626; margin-bottom: 8px; }
+        .danger-box p { font-size: 14px; color: #7f1d1d; margin: 0; }
+        .quiz-section { background: #ede9fe; border: 1px solid #c4b5fd; border-radius: 12px; padding: 24px; margin: 24px 0; }
+        .quiz-section h3 { color: #5b21b6; font-size: 16px; font-weight: 600; margin-bottom: 16px; }
+        .quiz-question { background: #fff; border-radius: 8px; padding: 20px; margin-bottom: 16px; }
+        .quiz-question > p { font-weight: 500; margin-bottom: 16px; color: #1e293b; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-option { padding: 14px 16px; border: 2px solid #e2e8f0; border-radius: 8px; cursor: pointer; font-size: 14px; transition: all 0.15s; }
+        .quiz-option:hover:not(.disabled) { border-color: #8b5cf6; background: #faf5ff; }
+        .quiz-option.correct { border-color: #10b981; background: #f0fdf4; }
+        .quiz-option.incorrect { border-color: #ef4444; background: #fef2f2; }
+        .quiz-option.disabled { cursor: default; opacity: 0.7; }
+        .quiz-feedback { margin-top: 16px; padding: 16px; border-radius: 8px; font-size: 14px; display: none; }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct { background: #f0fdf4; border: 1px solid #86efac; color: #166534; }
+        .quiz-feedback.incorrect { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; }
+        .cross-link { background: #dbeafe; border: 1px solid #93c5fd; border-radius: 12px; padding: 20px; margin: 24px 0; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+        .cross-link-icon { font-size: 32px; }
+        .cross-link-content { flex: 1; min-width: 200px; }
+        .cross-link-content h4 { font-size: 14px; font-weight: 600; color: #1e40af; margin-bottom: 4px; }
+        .cross-link-content p { font-size: 13px; color: #3b82f6; margin: 0; }
+        .cross-link-btn { padding: 10px 16px; background: #3b82f6; color: #fff; border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: 500; }
+        .footer { border-top: 1px solid #e2e8f0; padding: 32px 24px; text-align: center; color: #64748b; font-size: 13px; }
+        .footer a { color: #10b981; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">Mechanism<span>Dx</span></a>
+            <nav class="nav">
+                <a href="index.html">← All Modules</a>
+                <a href="../unified-scoreboard.html">Scoreboard</a>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-icon">🦋</div>
+            <h1>Thyroid Disorders</h1>
+            <p>Understanding the HPT axis, interpreting thyroid labs, and the pathophysiology of hypo- and hyperthyroidism.</p>
+            <div class="hero-meta">
+                <span>📚 8 Concepts</span>
+                <span>❓ 8 MCQs</span>
+                <span>⏱ ~35 min</span>
+            </div>
+        </div>
+    </section>
+    
+    <main class="main">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        
+        <!-- Section 1: HPT Axis -->
+        <section class="section">
+            <h2 class="section-title">🔄 The HPT Axis</h2>
+            <div class="pathway-box">
+                <h3>The Feedback Loop</h3>
+                <div class="pathway-steps">
+                    <div class="pathway-step"><div class="step-num">1</div><div class="step-text"><strong>Hypothalamus</strong> releases TRH</div></div>
+                    <div class="pathway-step"><div class="step-num">2</div><div class="step-text"><strong>Pituitary</strong> releases TSH</div></div>
+                    <div class="pathway-step"><div class="step-num">3</div><div class="step-text"><strong>Thyroid</strong> releases T4 (mostly) and T3</div></div>
+                    <div class="pathway-step"><div class="step-num">4</div><div class="step-text"><strong>Periphery</strong> converts T4 → T3 (active)</div></div>
+                    <div class="pathway-step"><div class="step-num">5</div><div class="step-text"><strong>Negative feedback</strong> — T3/T4 suppress TRH and TSH</div></div>
+                </div>
+            </div>
+            <div class="concept-card">
+                <h3>Key Points</h3>
+                <ul>
+                    <li><strong>T4</strong> — Main secreted hormone; reservoir for T3 conversion</li>
+                    <li><strong>T3</strong> — Active hormone (3-4x more potent)</li>
+                    <li><strong>TSH</strong> — Most sensitive marker; changes before T4/T3</li>
+                </ul>
+            </div>
+            <div class="clinical-pearl">
+                <h4>💡 Clinical Pearl</h4>
+                <p>TSH has a log-linear relationship with T4. Small T4 changes cause large TSH changes — that's why TSH is the best screening test.</p>
+            </div>
+        </section>
+        
+        <!-- Section 2: Lab Interpretation -->
+        <section class="section">
+            <h2 class="section-title">🔬 Interpreting Thyroid Labs</h2>
+            <div class="concept-card">
+                <h3>TSH-First Approach</h3>
+                <table class="comparison-table">
+                    <thead><tr><th>TSH</th><th>Free T4</th><th>Diagnosis</th></tr></thead>
+                    <tbody>
+                        <tr><td>↑ High</td><td>↓ Low</td><td><strong>Primary hypothyroidism</strong></td></tr>
+                        <tr><td>↑ High</td><td>Normal</td><td><strong>Subclinical hypothyroidism</strong></td></tr>
+                        <tr><td>↓ Low</td><td>↑ High</td><td><strong>Primary hyperthyroidism</strong></td></tr>
+                        <tr><td>↓ Low</td><td>Normal</td><td><strong>Subclinical hyperthyroidism</strong></td></tr>
+                        <tr><td>↓ Low</td><td>↓ Low</td><td><strong>Central hypothyroidism</strong></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="clinical-pearl">
+                <h4>💡 Clinical Pearl</h4>
+                <p>In primary disease, TSH and T4 move in <em>opposite</em> directions. If they move together, think central/pituitary disease.</p>
+            </div>
+        </section>
+        
+        <!-- Quiz 1 -->
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="q1">
+                <p>TSH 12 (high), free T4 0.6 (low). Diagnosis?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, true)">Primary hypothyroidism — thyroid failing, TSH rises in response</div>
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, false)">Secondary hypothyroidism — pituitary can't produce TSH</div>
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, false)">Subclinical hypothyroidism — T4 would be normal</div>
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, false)">TSH-secreting adenoma — would cause elevated T4</div>
+                </div>
+                <div class="quiz-feedback" id="q1-feedback"></div>
+            </div>
+            <div class="quiz-question" id="q2">
+                <p>TSH 0.1 (low), free T4 0.5 (low). What to consider?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, false)">Primary hyperthyroidism — would have elevated T4</div>
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, true)">Central hypothyroidism — pituitary/hypothalamic dysfunction</div>
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, false)">Subclinical hyperthyroidism — T4 would be normal</div>
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, false)">Primary hypothyroidism — TSH would be elevated</div>
+                </div>
+                <div class="quiz-feedback" id="q2-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Section 3: Hypothyroidism -->
+        <section class="section">
+            <h2 class="section-title">❄️ Hypothyroidism</h2>
+            <div class="concept-card">
+                <h3>Causes</h3>
+                <ul>
+                    <li><strong>Hashimoto's</strong> — Most common; anti-TPO antibodies</li>
+                    <li><strong>Iodine deficiency</strong> — Most common worldwide</li>
+                    <li><strong>Post-ablative</strong> — After RAI or surgery</li>
+                    <li><strong>Medications</strong> — Amiodarone, lithium</li>
+                </ul>
+            </div>
+            <div class="concept-card">
+                <h3>Clinical Features: "Everything Slows Down"</h3>
+                <ul>
+                    <li>Fatigue, cold intolerance, weight gain</li>
+                    <li>Dry skin, hair loss, constipation</li>
+                    <li>Bradycardia, delayed reflexes</li>
+                    <li>Menorrhagia, hyperlipidemia</li>
+                </ul>
+            </div>
+            <div class="danger-box">
+                <h4>⚠️ Myxedema Coma</h4>
+                <p>Severe hypothyroidism + AMS + hypothermia = emergency. Treat with IV levothyroxine, stress-dose steroids, supportive care.</p>
+            </div>
+        </section>
+        
+        <!-- Section 4: Hyperthyroidism -->
+        <section class="section">
+            <h2 class="section-title">🔥 Hyperthyroidism</h2>
+            <div class="concept-card">
+                <h3>Causes</h3>
+                <table class="comparison-table">
+                    <thead><tr><th>Cause</th><th>Mechanism</th><th>RAIU</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Graves'</strong></td><td>TSH receptor antibodies</td><td>↑ High</td></tr>
+                        <tr><td><strong>Toxic MNG</strong></td><td>Autonomous nodules</td><td>↑ Patchy</td></tr>
+                        <tr><td><strong>Thyroiditis</strong></td><td>Release of preformed hormone</td><td>↓ Low</td></tr>
+                        <tr><td><strong>Exogenous</strong></td><td>Excess levothyroxine</td><td>↓ Low</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="concept-card">
+                <h3>Clinical Features: "Everything Speeds Up"</h3>
+                <ul>
+                    <li>Weight loss, heat intolerance, sweating</li>
+                    <li>Tachycardia, palpitations, AFib</li>
+                    <li>Tremor, anxiety, hyperreflexia</li>
+                    <li>Graves': proptosis, pretibial myxedema</li>
+                </ul>
+            </div>
+            <div class="clinical-pearl">
+                <h4>💡 Clinical Pearl</h4>
+                <p>RAIU scan distinguishes causes: HIGH uptake = overproduction (Graves', toxic nodules). LOW uptake = release or external source (thyroiditis, exogenous).</p>
+            </div>
+        </section>
+        
+        <!-- Quiz 2 -->
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="q3">
+                <p>A 35-year-old has hyperthyroidism with diffuse goiter and proptosis. Which antibody causes this?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, false)">Anti-TPO — indicates Hashimoto's</div>
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, true)">TSH receptor antibodies (TRAb) — stimulate thyroid in Graves'</div>
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, false)">Anti-thyroglobulin — marker of autoimmune thyroid disease</div>
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, false)">Anti-nuclear antibodies — systemic autoimmune diseases</div>
+                </div>
+                <div class="quiz-feedback" id="q3-feedback"></div>
+            </div>
+            <div class="quiz-question" id="q4">
+                <p>Hyperthyroidism with tender thyroid and LOW radioiodine uptake. Diagnosis?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q4', this, false)">Graves' — would have high uptake</div>
+                    <div class="quiz-option" onclick="checkAnswer('q4', this, false)">Toxic MNG — would have patchy uptake</div>
+                    <div class="quiz-option" onclick="checkAnswer('q4', this, true)">Subacute thyroiditis — inflammation releases preformed hormone</div>
+                    <div class="quiz-option" onclick="checkAnswer('q4', this, false)">Toxic adenoma — focal hot spot on scan</div>
+                </div>
+                <div class="quiz-feedback" id="q4-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Section 5: Treatment -->
+        <section class="section">
+            <h2 class="section-title">💊 Treatment</h2>
+            <div class="concept-card">
+                <h3>Hyperthyroidism Options</h3>
+                <ul>
+                    <li><strong>Thionamides</strong> (methimazole, PTU) — Block hormone synthesis</li>
+                    <li><strong>Radioactive iodine</strong> — Destroys thyroid; causes hypothyroidism</li>
+                    <li><strong>Surgery</strong> — For large goiter, cancer suspicion</li>
+                    <li><strong>Beta-blockers</strong> — Symptom control</li>
+                </ul>
+            </div>
+            <div class="danger-box">
+                <h4>⚠️ Thyroid Storm</h4>
+                <p>Life-threatening: fever, tachycardia, AMS. Treat with PTU, beta-blockers, iodine (after thionamide), steroids.</p>
+            </div>
+        </section>
+        
+        <!-- Section 6: Nodules -->
+        <section class="section">
+            <h2 class="section-title">📍 Thyroid Nodules</h2>
+            <div class="concept-card">
+                <h3>Approach</h3>
+                <ul>
+                    <li>Very common (50% of adults on US)</li>
+                    <li>Only 5-15% are malignant</li>
+                    <li>First: Check TSH → Low TSH? Get RAIU scan</li>
+                    <li><strong>Hot nodule = almost never cancer</strong></li>
+                </ul>
+            </div>
+            <div class="clinical-pearl">
+                <h4>💡 Clinical Pearl</h4>
+                <p>Hot nodules don't need FNA — they're autonomously functioning and essentially never malignant. Cold nodules need FNA based on size and US features.</p>
+            </div>
+        </section>
+        
+        <!-- Quiz 3 -->
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="q5">
+                <p>Patient on methimazole develops fever and sore throat. Most important action?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q5', this, true)">Stop methimazole and check CBC for agranulocytosis</div>
+                    <div class="quiz-option" onclick="checkAnswer('q5', this, false)">Continue methimazole and treat with antibiotics</div>
+                    <div class="quiz-option" onclick="checkAnswer('q5', this, false)">Switch to PTU for lower side effect risk</div>
+                    <div class="quiz-option" onclick="checkAnswer('q5', this, false)">Increase beta-blocker dose</div>
+                </div>
+                <div class="quiz-feedback" id="q5-feedback"></div>
+            </div>
+            <div class="quiz-question" id="q6">
+                <p>Thyroid nodule with suppressed TSH. RAIU shows "hot" nodule. Next step?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q6', this, false)">FNA to rule out malignancy</div>
+                    <div class="quiz-option" onclick="checkAnswer('q6', this, true)">No FNA — hot nodules are almost never malignant</div>
+                    <div class="quiz-option" onclick="checkAnswer('q6', this, false)">Surgical excision for cancer risk</div>
+                    <div class="quiz-option" onclick="checkAnswer('q6', this, false)">Repeat ultrasound in 6 months</div>
+                </div>
+                <div class="quiz-feedback" id="q6-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Section 7: Special Situations -->
+        <section class="section">
+            <h2 class="section-title">🔍 Special Situations</h2>
+            <div class="concept-card">
+                <h3>Pregnancy</h3>
+                <ul>
+                    <li>Hypothyroidism: ↑ levothyroxine by ~25-30%</li>
+                    <li>Hyperthyroidism: PTU in 1st trimester, methimazole after</li>
+                    <li>RAI is contraindicated in pregnancy</li>
+                </ul>
+            </div>
+            <div class="concept-card">
+                <h3>Sick Euthyroid Syndrome</h3>
+                <ul>
+                    <li>Pattern: Low T3, normal/low T4, normal/low TSH</li>
+                    <li>Seen in critical illness</li>
+                    <li>Treatment: Address underlying illness, NOT thyroid</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Quiz 4 -->
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="q7">
+                <p>Pregnant woman on levothyroxine. Pregnancy confirmed. What adjustment?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q7', this, false)">Decrease dose due to increased metabolism</div>
+                    <div class="quiz-option" onclick="checkAnswer('q7', this, true)">Increase dose by ~25-30% for increased requirements</div>
+                    <div class="quiz-option" onclick="checkAnswer('q7', this, false)">Switch to T3 which crosses placenta better</div>
+                    <div class="quiz-option" onclick="checkAnswer('q7', this, false)">No change; continue current dose</div>
+                </div>
+                <div class="quiz-feedback" id="q7-feedback"></div>
+            </div>
+            <div class="quiz-question" id="q8">
+                <p>ICU patient: Low T3, low-normal T4, normal TSH. Management?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q8', this, false)">Start levothyroxine for central hypothyroidism</div>
+                    <div class="quiz-option" onclick="checkAnswer('q8', this, false)">Start liothyronine to replace low T3</div>
+                    <div class="quiz-option" onclick="checkAnswer('q8', this, true)">Recognize sick euthyroid; treat underlying illness</div>
+                    <div class="quiz-option" onclick="checkAnswer('q8', this, false)">MRI brain for pituitary pathology</div>
+                </div>
+                <div class="quiz-feedback" id="q8-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Cross-link -->
+        <div class="cross-link">
+            <div class="cross-link-icon">💬</div>
+            <div class="cross-link-content">
+                <h4>Practice Clinical Reasoning</h4>
+                <p>Apply thyroid knowledge to a fatigue case</p>
+            </div>
+            <a href="../CoachDx/mentor-chat.html?case=fatigue" class="cross-link-btn">Try Fatigue Case →</a>
+        </div>
+        
+        <!-- Complete -->
+        <div class="concept-card" style="background: linear-gradient(135deg, #fefce8, #fef08a); border-color: #facc15; text-align: center; padding: 32px;">
+            <h3 style="color: #a16207; font-size: 20px;">🎉 Module Complete!</h3>
+            <p style="color: #ca8a04;" id="scoreDisplay">Score: 0/0 correct (8 remaining)</p>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <p>© 2025 MechanismDx · Part of the <a href="../index.html">Dx Suite</a></p>
+    </footer>
+    
+    <script>
+        const feedbackText = {
+            q1: { correct: "Correct! High TSH + low T4 = primary hypothyroidism. Thyroid fails → low T4 → pituitary ↑ TSH.", incorrect: "In primary hypothyroidism, the thyroid fails → low T4 → pituitary responds by ↑ TSH." },
+            q2: { correct: "Correct! Both TSH and T4 low (same direction) = central/secondary hypothyroidism. Pituitary can't make enough TSH.", incorrect: "When TSH and T4 move together (both low), think central disease." },
+            q3: { correct: "Correct! TSH receptor antibodies (TRAb) stimulate the thyroid receptor, causing Graves' hyperthyroidism and ophthalmopathy.", incorrect: "Graves' is caused by TSH receptor stimulating antibodies, not anti-TPO." },
+            q4: { correct: "Correct! Low uptake + tender thyroid = thyroiditis. Inflammation releases preformed hormone (not making new).", incorrect: "Low RAIU = not actively making hormone. With tender thyroid = subacute thyroiditis." },
+            q5: { correct: "Correct! Fever + sore throat on thionamides = agranulocytosis until proven otherwise. Stop drug, check CBC immediately.", incorrect: "Agranulocytosis is life-threatening. Fever/sore throat on thionamides = stop and check WBC." },
+            q6: { correct: "Correct! Hot nodules are autonomous and almost never malignant. FNA not needed.", incorrect: "Hot nodules function autonomously — they're essentially never cancer. No FNA needed." },
+            q7: { correct: "Correct! Pregnancy ↑ thyroid requirements by 25-50%. Increase dose early.", incorrect: "Pregnancy increases thyroid hormone needs. Most need ~25-30% higher doses." },
+            q8: { correct: "Correct! This is sick euthyroid — critical illness reduces T4→T3 conversion. Treat underlying illness, not thyroid.", incorrect: "Sick euthyroid = low T3 in critical illness. Treat the underlying illness." }
+        };
+        
+        let correctAnswers = 0;
+        let answeredQuestions = new Set();
+        
+        function checkAnswer(questionId, element, isCorrect) {
+            if (answeredQuestions.has(questionId)) return;
+            answeredQuestions.add(questionId);
+            
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.classList.add('disabled');
+                if (opt === element) opt.classList.add(isCorrect ? 'correct' : 'incorrect');
+            });
+            
+            if (!isCorrect) {
+                options.forEach(opt => {
+                    if (opt.onclick.toString().includes('true')) opt.classList.add('correct');
+                });
+            }
+            
+            const feedback = document.getElementById(questionId + '-feedback');
+            feedback.textContent = isCorrect ? feedbackText[questionId].correct : feedbackText[questionId].incorrect;
+            feedback.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+            
+            if (isCorrect) {
+                correctAnswers++;
+                if (typeof DxScoring !== 'undefined') DxScoring.addXP(25, 'MECH');
+            }
+            
+            document.getElementById('progressFill').style.width = (answeredQuestions.size / 8) * 100 + '%';
+            document.getElementById('scoreDisplay').textContent = `Score: ${correctAnswers}/${answeredQuestions.size} correct (${8 - answeredQuestions.size} remaining)`;
+        }
+    </script>
+</body>
+</html>

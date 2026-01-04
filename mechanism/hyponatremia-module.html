@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyponatremia | MechanismDx</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.6; }
+        .header { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+        .header-inner { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: Georgia, serif; font-size: 24px; color: #1e293b; text-decoration: none; }
+        .logo span { color: #10b981; }
+        .nav a { color: #64748b; text-decoration: none; font-size: 14px; font-weight: 500; margin-left: 20px; }
+        .hero { background: linear-gradient(135deg, #e0f2fe 0%, #fff 100%); border-bottom: 1px solid #e2e8f0; padding: 48px 24px; }
+        .hero-inner { max-width: 800px; margin: 0 auto; }
+        .hero-icon { font-size: 48px; margin-bottom: 16px; }
+        .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; color: #0369a1; }
+        .hero p { font-size: 16px; color: #64748b; margin-bottom: 24px; }
+        .hero-meta { display: flex; gap: 24px; flex-wrap: wrap; font-size: 14px; color: #64748b; }
+        .main { max-width: 800px; margin: 0 auto; padding: 48px 24px; }
+        .progress-bar { background: #e2e8f0; height: 8px; border-radius: 4px; margin-bottom: 32px; overflow: hidden; }
+        .progress-fill { background: #10b981; height: 100%; width: 0%; transition: width 0.3s; }
+        .section { margin-bottom: 48px; }
+        .section-title { font-size: 20px; font-weight: 600; margin-bottom: 16px; color: #1e293b; }
+        .concept-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+        .concept-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #1e293b; }
+        .concept-card p { color: #475569; font-size: 14px; margin-bottom: 12px; }
+        .concept-card ul { margin-left: 20px; color: #475569; font-size: 14px; }
+        .concept-card li { margin-bottom: 6px; }
+        .pathway-box { background: #e0f2fe; border: 1px solid #7dd3fc; border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+        .pathway-box h3 { color: #0369a1; font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+        .pathway-steps { display: flex; flex-direction: column; gap: 8px; }
+        .pathway-step { display: flex; align-items: center; gap: 12px; padding: 12px; background: #fff; border-radius: 8px; }
+        .step-num { width: 28px; height: 28px; background: #0ea5e9; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; }
+        .step-text { font-size: 14px; color: #1e293b; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; background: #fff; }
+        .comparison-table th { background: #f1f5f9; padding: 12px; text-align: left; font-weight: 600; border-bottom: 2px solid #e2e8f0; }
+        .comparison-table td { padding: 12px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+        .clinical-pearl { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 16px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+        .clinical-pearl h4 { font-size: 14px; font-weight: 600; color: #92400e; margin-bottom: 8px; }
+        .clinical-pearl p { font-size: 14px; color: #78350f; margin: 0; }
+        .danger-box { background: #fef2f2; border-left: 4px solid #dc2626; padding: 16px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+        .danger-box h4 { font-size: 14px; font-weight: 600; color: #dc2626; margin-bottom: 8px; }
+        .danger-box p, .danger-box ul { font-size: 14px; color: #7f1d1d; margin: 0; }
+        .danger-box ul { margin-left: 20px; margin-top: 8px; }
+        .quiz-section { background: #ede9fe; border: 1px solid #c4b5fd; border-radius: 12px; padding: 24px; margin: 24px 0; }
+        .quiz-section h3 { color: #5b21b6; font-size: 16px; font-weight: 600; margin-bottom: 16px; }
+        .quiz-question { background: #fff; border-radius: 8px; padding: 20px; margin-bottom: 16px; }
+        .quiz-question > p { font-weight: 500; margin-bottom: 16px; color: #1e293b; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-option { padding: 14px 16px; border: 2px solid #e2e8f0; border-radius: 8px; cursor: pointer; font-size: 14px; transition: all 0.15s; background: #fff; }
+        .quiz-option:hover:not(.disabled) { border-color: #8b5cf6; background: #faf5ff; }
+        .quiz-option.correct { border-color: #10b981; background: #f0fdf4; }
+        .quiz-option.incorrect { border-color: #ef4444; background: #fef2f2; }
+        .quiz-option.disabled { cursor: default; opacity: 0.7; }
+        .quiz-feedback { margin-top: 16px; padding: 16px; border-radius: 8px; font-size: 14px; display: none; }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct { background: #f0fdf4; border: 1px solid #86efac; color: #166534; }
+        .quiz-feedback.incorrect { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; }
+        .algorithm-box { background: #f0fdf4; border: 2px solid #86efac; border-radius: 12px; padding: 24px; margin: 16px 0; }
+        .algorithm-box h3 { color: #166534; font-size: 16px; font-weight: 600; margin-bottom: 16px; }
+        .algorithm-step { background: #fff; border: 1px solid #bbf7d0; border-radius: 8px; padding: 16px; margin-bottom: 12px; }
+        .algorithm-step h4 { color: #15803d; font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+        .algorithm-step p { color: #166534; font-size: 13px; margin: 0; }
+        .cross-link { background: #dbeafe; border: 1px solid #93c5fd; border-radius: 12px; padding: 20px; margin: 24px 0; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+        .cross-link-icon { font-size: 32px; }
+        .cross-link-content { flex: 1; min-width: 200px; }
+        .cross-link-content h4 { font-size: 14px; font-weight: 600; color: #1e40af; margin-bottom: 4px; }
+        .cross-link-content p { font-size: 13px; color: #3b82f6; margin: 0; }
+        .cross-link-btn { padding: 10px 16px; background: #3b82f6; color: #fff; border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: 500; }
+        .footer { border-top: 1px solid #e2e8f0; padding: 32px 24px; text-align: center; color: #64748b; font-size: 13px; }
+        .footer a { color: #10b981; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">Mechanism<span>Dx</span></a>
+            <nav class="nav">
+                <a href="index.html">← All Modules</a>
+                <a href="../unified-scoreboard.html">Scoreboard</a>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-icon">💧</div>
+            <h1>Hyponatremia</h1>
+            <p>Master the systematic approach to low sodium — from osmolality to volume status to urine studies. The most common electrolyte abnormality, and one of the most misunderstood.</p>
+            <div class="hero-meta">
+                <span>📚 10 Concepts</span>
+                <span>❓ 8 MCQs</span>
+                <span>⏱ ~45 min</span>
+            </div>
+        </div>
+    </section>
+    
+    <main class="main">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        
+        <!-- Section 1: Sodium Physiology -->
+        <section class="section">
+            <h2 class="section-title">🧪 Sodium Physiology</h2>
+            
+            <div class="concept-card">
+                <h3>What Does Sodium Really Measure?</h3>
+                <p>Serum sodium is a measure of <strong>water balance</strong>, not sodium balance:</p>
+                <ul>
+                    <li><strong>Hyponatremia = too much water relative to sodium</strong></li>
+                    <li><strong>Hypernatremia = too little water relative to sodium</strong></li>
+                    <li>You can have hyponatremia with high, normal, or low total body sodium</li>
+                    <li>The key regulator is ADH (vasopressin), which controls water retention</li>
+                </ul>
+            </div>
+            
+            <div class="concept-card">
+                <h3>The Edelman Equation (Simplified)</h3>
+                <p>Serum Na⁺ ≈ (Total body Na⁺ + Total body K⁺) / Total body water</p>
+                <p>This means sodium can be low because:</p>
+                <ul>
+                    <li>Total body water is increased (dilution)</li>
+                    <li>Total body sodium is decreased (depletion)</li>
+                    <li>Both (most common scenario)</li>
+                </ul>
+            </div>
+            
+            <div class="clinical-pearl">
+                <h4>💡 Clinical Pearl</h4>
+                <p>Hyponatremia is almost always a problem of too much ADH (or ADH-like effect). Ask: "Why can't this patient excrete free water?" The answer usually points to the cause.</p>
+            </div>
+        </section>
+        
+        <!-- Section 2: Diagnostic Algorithm -->
+        <section class="section">
+            <h2 class="section-title">🔍 The Diagnostic Algorithm</h2>
+            
+            <div class="algorithm-box">
+                <h3>Step-by-Step Approach</h3>
+                
+                <div class="algorithm-step">
+                    <h4>Step 1: Check Serum Osmolality</h4>
+                    <p><strong>Low (&lt;280)</strong> → True hypotonic hyponatremia (proceed to step 2)<br>
+                    <strong>Normal (280-295)</strong> → Pseudohyponatremia (hyperlipidemia, hyperproteinemia)<br>
+                    <strong>High (&gt;295)</strong> → Hypertonic hyponatremia (hyperglycemia, mannitol)</p>
+                </div>
+                
+                <div class="algorithm-step">
+                    <h4>Step 2: Assess Volume Status</h4>
+                    <p><strong>Hypovolemic</strong> → Skin turgor ↓, HR ↑, orthostasis (renal vs extrarenal losses)<br>
+                    <strong>Euvolemic</strong> → No edema, no volume depletion (SIADH, hypothyroid, adrenal insufficiency)<br>
+                    <strong>Hypervolemic</strong> → Edema, JVD, ascites (CHF, cirrhosis, nephrotic syndrome)</p>
+                </div>
+                
+                <div class="algorithm-step">
+                    <h4>Step 3: Check Urine Studies</h4>
+                    <p><strong>Urine Na &lt;20 + Urine Osm &lt;100</strong> → Primary polydipsia, reset osmostat<br>
+                    <strong>Urine Na &lt;20 + Urine Osm &gt;100</strong> → Extrarenal losses, low effective arterial volume<br>
+                    <strong>Urine Na &gt;20 + Urine Osm &gt;100</strong> → Renal losses (diuretics) or SIADH</p>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h3>Key Urine Studies</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>Test</th><th>What It Tells You</th><th>Interpretation</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Urine Osm</strong></td>
+                            <td>Is ADH active?</td>
+                            <td>&lt;100 = maximally dilute (ADH suppressed); &gt;100 = concentrated (ADH present)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Urine Na</strong></td>
+                            <td>Kidney sodium handling</td>
+                            <td>&lt;20 = avid retention (hypovolemia); &gt;20 = wasting (diuretics, SIADH)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>FENa</strong></td>
+                            <td>Fractional excretion</td>
+                            <td>Useful in AKI; less helpful in hyponatremia workup</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <!-- Quiz 1 -->
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="q1">
+                <p>A patient has Na 128, serum osmolality 310, and glucose 650 mg/dL. What type of hyponatremia is this?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, false)">Hypotonic hyponatremia from SIADH</div>
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, true)">Hypertonic (translocational) hyponatremia from hyperglycemia</div>
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, false)">Pseudohyponatremia from hyperlipidemia</div>
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, false)">True hyponatremia requiring urgent correction</div>
+                </div>
+                <div class="quiz-feedback" id="q1-feedback"></div>
+            </div>
+            
+            <div class="quiz-question" id="q2">
+                <p>A patient has hypotonic hyponatremia with urine osmolality of 50 mOsm/kg. What does this indicate?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, true)">ADH is appropriately suppressed — think primary polydipsia</div>
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, false)">SIADH with inappropriate ADH secretion</div>
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, false)">Volume depletion with sodium conservation</div>
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, false)">Diuretic-induced hyponatremia</div>
+                </div>
+                <div class="quiz-feedback" id="q2-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Section 3: Causes by Volume Status -->
+        <section class="section">
+            <h2 class="section-title">📊 Causes by Volume Status</h2>
+            
+            <div class="concept-card">
+                <h3>Hypovolemic Hyponatremia</h3>
+                <p>Lost sodium AND water, but relatively more sodium. ADH stimulated by hypovolemia.</p>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>Renal Losses (UNa &gt;20)</th><th>Extrarenal Losses (UNa &lt;20)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Diuretics (especially thiazides)</td>
+                            <td>Vomiting, diarrhea</td>
+                        </tr>
+                        <tr>
+                            <td>Salt-wasting nephropathy</td>
+                            <td>Burns, pancreatitis</td>
+                        </tr>
+                        <tr>
+                            <td>Cerebral salt wasting</td>
+                            <td>Third-spacing</td>
+                        </tr>
+                        <tr>
+                            <td>Mineralocorticoid deficiency</td>
+                            <td>Excessive sweating</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="concept-card">
+                <h3>Euvolemic Hyponatremia</h3>
+                <p>Excess water retention without obvious volume overload or depletion. This is where SIADH lives.</p>
+                <ul>
+                    <li><strong>SIADH</strong> — The classic cause (see next section)</li>
+                    <li><strong>Hypothyroidism</strong> — Decreased cardiac output triggers ADH</li>
+                    <li><strong>Adrenal insufficiency</strong> — Cortisol normally suppresses ADH</li>
+                    <li><strong>Primary polydipsia</strong> — Overwhelms diluting capacity (urine osm &lt;100)</li>
+                    <li><strong>Beer potomania / Tea and toast</strong> — Low solute intake limits free water excretion</li>
+                </ul>
+            </div>
+            
+            <div class="concept-card">
+                <h3>Hypervolemic Hyponatremia</h3>
+                <p>Total body sodium AND water are increased, but relatively more water. Low effective arterial volume triggers ADH.</p>
+                <ul>
+                    <li><strong>Heart failure</strong> — Poor forward flow → ADH activation</li>
+                    <li><strong>Cirrhosis</strong> — Splanchnic vasodilation → underfilling</li>
+                    <li><strong>Nephrotic syndrome</strong> — Oncotic pressure loss → underfilling</li>
+                    <li><strong>Advanced CKD</strong> — Impaired diluting capacity</li>
+                </ul>
+            </div>
+            
+            <div class="clinical-pearl">
+                <h4>💡 Clinical Pearl</h4>
+                <p>Thiazides cause hyponatremia much more than loop diuretics. Thiazides impair the diluting segment (DCT) while preserving concentrating ability. Loops impair both, so urine stays relatively isotonic.</p>
+            </div>
+        </section>
+        
+        <!-- Section 4: SIADH -->
+        <section class="section">
+            <h2 class="section-title">🎯 SIADH Deep Dive</h2>
+            
+            <div class="concept-card">
+                <h3>SIADH Diagnostic Criteria</h3>
+                <ul>
+                    <li>Serum osmolality &lt;275 mOsm/kg</li>
+                    <li>Urine osmolality &gt;100 mOsm/kg (inappropriately concentrated)</li>
+                    <li>Urine sodium &gt;20-40 mEq/L (euvolemic → no sodium retention)</li>
+                    <li>Clinical euvolemia</li>
+                    <li>Normal thyroid and adrenal function</li>
+                    <li>No diuretic use</li>
+                </ul>
+            </div>
+            
+            <div class="concept-card">
+                <h3>Causes of SIADH</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>Category</th><th>Examples</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>CNS disorders</strong></td><td>Stroke, hemorrhage, infection, trauma</td></tr>
+                        <tr><td><strong>Pulmonary</strong></td><td>Pneumonia, TB, lung cancer, positive pressure ventilation</td></tr>
+                        <tr><td><strong>Malignancy</strong></td><td>Small cell lung cancer (classic), head/neck cancers</td></tr>
+                        <tr><td><strong>Medications</strong></td><td>SSRIs, carbamazepine, cyclophosphamide, NSAIDs, opioids</td></tr>
+                        <tr><td><strong>Other</strong></td><td>Pain, nausea, post-operative state</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="clinical-pearl">
+                <h4>💡 Clinical Pearl</h4>
+                <p>SIADH is a diagnosis of exclusion. Always rule out hypothyroidism and adrenal insufficiency first — both can mimic SIADH exactly but have specific treatments. Check TSH and AM cortisol.</p>
+            </div>
+        </section>
+        
+        <!-- Quiz 2 -->
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="q3">
+                <p>A patient with small cell lung cancer has Na 122, serum osm 260, urine osm 450, urine Na 45. Volume status appears euvolemic. Most likely diagnosis?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, true)">SIADH from paraneoplastic ADH secretion</div>
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, false)">Hypovolemic hyponatremia from chemotherapy</div>
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, false)">Primary polydipsia from psychiatric comorbidity</div>
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, false)">Adrenal insufficiency from metastatic disease</div>
+                </div>
+                <div class="quiz-feedback" id="q3-feedback"></div>
+            </div>
+            
+            <div class="quiz-question" id="q4">
+                <p>A 72-year-old on HCTZ presents with Na 118. She has orthostatic hypotension and dry mucous membranes. Urine Na is 35. What is the mechanism?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q4', this, false)">SIADH induced by the thiazide</div>
+                    <div class="quiz-option" onclick="checkAnswer('q4', this, true)">Hypovolemic hyponatremia with renal sodium wasting from thiazide</div>
+                    <div class="quiz-option" onclick="checkAnswer('q4', this, false)">Hypervolemic hyponatremia from heart failure</div>
+                    <div class="quiz-option" onclick="checkAnswer('q4', this, false)">Pseudohyponatremia from laboratory error</div>
+                </div>
+                <div class="quiz-feedback" id="q4-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Section 5: Symptoms and Severity -->
+        <section class="section">
+            <h2 class="section-title">⚠️ Symptoms and Severity</h2>
+            
+            <div class="concept-card">
+                <h3>Clinical Manifestations</h3>
+                <p>Symptoms correlate with <strong>rate of development</strong> more than absolute sodium level:</p>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>Severity</th><th>Na Level</th><th>Symptoms</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Mild</strong></td><td>130-135</td><td>Often asymptomatic; subtle gait/attention issues</td></tr>
+                        <tr><td><strong>Moderate</strong></td><td>125-129</td><td>Nausea, headache, confusion, fatigue</td></tr>
+                        <tr><td><strong>Severe</strong></td><td>&lt;125</td><td>Vomiting, seizures, obtundation, coma</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="concept-card">
+                <h3>Acute vs Chronic Hyponatremia</h3>
+                <ul>
+                    <li><strong>Acute (&lt;48 hours)</strong> — Brain hasn't adapted; high risk of cerebral edema; can correct more rapidly</li>
+                    <li><strong>Chronic (&gt;48 hours)</strong> — Brain has extruded osmolytes; adapted to low Na; rapid correction causes ODS</li>
+                    <li><strong>Unknown duration</strong> — Treat as chronic unless clearly acute</li>
+                </ul>
+            </div>
+            
+            <div class="danger-box">
+                <h4>⚠️ Osmotic Demyelination Syndrome (ODS)</h4>
+                <p>Formerly "central pontine myelinolysis." Caused by overly rapid correction of chronic hyponatremia.</p>
+                <ul>
+                    <li>Symptoms emerge 2-6 days after correction: dysarthria, dysphagia, quadriparesis, "locked-in" syndrome</li>
+                    <li>Risk factors: alcoholism, malnutrition, hypokalemia, liver disease</li>
+                    <li>Prevention: correct Na no more than 8-10 mEq/L per 24 hours</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Section 6: Treatment -->
+        <section class="section">
+            <h2 class="section-title">💊 Treatment</h2>
+            
+            <div class="concept-card">
+                <h3>Treatment Principles</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>Scenario</th><th>Treatment</th><th>Goal</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Severe symptoms (seizures, coma)</strong></td>
+                            <td>Hypertonic saline (3%) 100-150 mL bolus</td>
+                            <td>Raise Na 4-6 mEq/L in first 1-2 hours</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Symptomatic but stable</strong></td>
+                            <td>Hypertonic saline infusion</td>
+                            <td>8-10 mEq/L in first 24 hours</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Chronic, asymptomatic</strong></td>
+                            <td>Treat underlying cause; fluid restriction</td>
+                            <td>Gradual correction over days</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hypovolemic</strong></td>
+                            <td>Normal saline</td>
+                            <td>Restore volume (may autocorrect)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="concept-card">
+                <h3>SIADH-Specific Treatments</h3>
+                <ul>
+                    <li><strong>Fluid restriction</strong> — First-line; limit to 800-1000 mL/day</li>
+                    <li><strong>Salt tablets + loop diuretic</strong> — Increase solute excretion</li>
+                    <li><strong>Urea</strong> — Osmotic diuresis; unpleasant taste</li>
+                    <li><strong>Vaptans (tolvaptan)</strong> — ADH receptor antagonist; avoid in hypovolemia; liver toxicity risk</li>
+                    <li><strong>Demeclocycline</strong> — Induces nephrogenic DI; rarely used now</li>
+                </ul>
+            </div>
+            
+            <div class="danger-box">
+                <h4>⚠️ Overcorrection Management</h4>
+                <p>If Na corrects too fast (&gt;10-12 mEq/24h), you can "re-lower" sodium:</p>
+                <ul>
+                    <li>Give D5W (free water)</li>
+                    <li>Administer desmopressin (DDAVP) to prevent further water excretion</li>
+                    <li>Goal: bring Na back down to target correction rate</li>
+                </ul>
+            </div>
+            
+            <div class="clinical-pearl">
+                <h4>💡 Clinical Pearl</h4>
+                <p>Watch for "autocorrection" in hypovolemic hyponatremia. Once volume is restored, ADH shuts off and the kidneys dump free water rapidly. This can cause overcorrection and ODS. Monitor Na frequently (q2-4h) during treatment.</p>
+            </div>
+        </section>
+        
+        <!-- Quiz 3 -->
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="q5">
+                <p>A patient with chronic hyponatremia (Na 112) is having seizures. What is the immediate treatment?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q5', this, true)">3% hypertonic saline 100-150 mL bolus to raise Na 4-6 mEq/L</div>
+                    <div class="quiz-option" onclick="checkAnswer('q5', this, false)">Normal saline at 200 mL/hour until symptoms resolve</div>
+                    <div class="quiz-option" onclick="checkAnswer('q5', this, false)">Fluid restriction and wait for gradual correction</div>
+                    <div class="quiz-option" onclick="checkAnswer('q5', this, false)">Tolvaptan to block ADH and promote free water excretion</div>
+                </div>
+                <div class="quiz-feedback" id="q5-feedback"></div>
+            </div>
+            
+            <div class="quiz-question" id="q6">
+                <p>A patient's sodium was 108 yesterday and is now 122 (14 mEq/L increase in 18 hours). What should you do?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q6', this, false)">Continue current management — goal achieved</div>
+                    <div class="quiz-option" onclick="checkAnswer('q6', this, true)">Give D5W ± DDAVP to re-lower sodium and prevent ODS</div>
+                    <div class="quiz-option" onclick="checkAnswer('q6', this, false)">Start empiric steroids for presumed ODS</div>
+                    <div class="quiz-option" onclick="checkAnswer('q6', this, false)">Order stat MRI brain to evaluate for demyelination</div>
+                </div>
+                <div class="quiz-feedback" id="q6-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Section 7: Special Populations -->
+        <section class="section">
+            <h2 class="section-title">🔍 Special Populations</h2>
+            
+            <div class="concept-card">
+                <h3>Exercise-Associated Hyponatremia</h3>
+                <ul>
+                    <li>Common in marathon runners, triathletes</li>
+                    <li>Mechanism: excessive hypotonic fluid intake + non-osmotic ADH release</li>
+                    <li>Prevention: drink to thirst, not on a schedule</li>
+                    <li>Treatment: fluid restriction if mild; hypertonic saline if symptomatic</li>
+                </ul>
+            </div>
+            
+            <div class="concept-card">
+                <h3>Beer Potomania / Tea and Toast Syndrome</h3>
+                <ul>
+                    <li>Very low solute intake → limited free water excretion capacity</li>
+                    <li>Normal kidneys can only dilute urine to ~50 mOsm/kg</li>
+                    <li>With low solute, can only excrete limited free water (solute ÷ 50 = max L/day)</li>
+                    <li>Treatment: increase solute intake (protein, salt); urine osm will be low</li>
+                </ul>
+            </div>
+            
+            <div class="concept-card">
+                <h3>Post-Operative Hyponatremia</h3>
+                <ul>
+                    <li>Pain, nausea, opioids all stimulate ADH</li>
+                    <li>Hypotonic fluid administration (D5W, ½NS) compounds problem</li>
+                    <li>Young women at highest risk for complications</li>
+                    <li>Prevention: use isotonic fluids; monitor Na postoperatively</li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Quiz 4 -->
+        <div class="quiz-section">
+            <h3>🧠 Final Questions</h3>
+            <div class="quiz-question" id="q7">
+                <p>A marathon runner collapses at the finish line with confusion and Na 118. Urine osm is 650. What is the underlying mechanism?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q7', this, false)">Hypovolemic hyponatremia from sweating</div>
+                    <div class="quiz-option" onclick="checkAnswer('q7', this, true)">Excessive hypotonic fluid intake with non-osmotic ADH release</div>
+                    <div class="quiz-option" onclick="checkAnswer('q7', this, false)">Beer potomania from pre-race carbohydrate loading</div>
+                    <div class="quiz-option" onclick="checkAnswer('q7', this, false)">Adrenal insufficiency from physical stress</div>
+                </div>
+                <div class="quiz-feedback" id="q7-feedback"></div>
+            </div>
+            
+            <div class="quiz-question" id="q8">
+                <p>Why are thiazide diuretics more likely to cause hyponatremia than loop diuretics?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q8', this, false)">Thiazides cause more sodium loss in the urine</div>
+                    <div class="quiz-option" onclick="checkAnswer('q8', this, true)">Thiazides impair diluting segment but preserve concentrating ability</div>
+                    <div class="quiz-option" onclick="checkAnswer('q8', this, false)">Thiazides directly stimulate ADH release</div>
+                    <div class="quiz-option" onclick="checkAnswer('q8', this, false)">Thiazides cause more potassium wasting</div>
+                </div>
+                <div class="quiz-feedback" id="q8-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Cross-Platform Links -->
+        <div class="cross-link">
+            <div class="cross-link-icon">💬</div>
+            <div class="cross-link-content">
+                <h4>Practice Clinical Reasoning</h4>
+                <p>Apply what you've learned with a hyponatremia case</p>
+            </div>
+            <a href="../CoachDx/mentor-chat.html?case=hyponatremia" class="cross-link-btn">Try Hyponatremia Case →</a>
+        </div>
+        
+        <!-- Module Complete -->
+        <div class="concept-card" style="background: linear-gradient(135deg, #e0f2fe, #bae6fd); border-color: #38bdf8; text-align: center; padding: 32px;">
+            <h3 style="color: #0369a1; font-size: 20px;">🎉 Module Complete!</h3>
+            <p style="color: #0284c7; margin-bottom: 16px;">You've completed the Hyponatremia module.</p>
+            <p style="color: #0369a1;" id="scoreDisplay">Score: 0/0 correct (8 remaining)</p>
+        </div>
+    </main>
+    
+    <footer class="footer"><p>© 2025 MechanismDx · Part of the <a href="../index.html">Dx Suite</a></p></footer>
+    
+    <script>
+        const feedbackText = {
+            q1: { correct: "Correct! High serum osmolality (310) indicates hypertonic hyponatremia. Glucose draws water from cells, diluting serum sodium. For every 100 mg/dL glucose above normal, Na decreases ~1.6-2.4 mEq/L. Treat the hyperglycemia, Na will normalize.", incorrect: "With serum osm 310 (high), this is hypertonic/translocational hyponatremia. Glucose draws water from cells, diluting sodium. Correct the hyperglycemia and Na will improve." },
+            q2: { correct: "Correct! Urine osm <100 means ADH is maximally suppressed — the kidney is trying to excrete free water. This is appropriate in hyponatremia, and points to primary polydipsia (drinking overwhelmed even normal diluting capacity).", incorrect: "Urine osm <100 indicates maximally dilute urine — ADH is suppressed. This is the appropriate response to hyponatremia. If Na is still low, intake must exceed the kidney's excretion capacity → primary polydipsia." },
+            q3: { correct: "Correct! Small cell lung cancer is the classic cause of paraneoplastic SIADH. Euvolemic state, low serum osm, inappropriately concentrated urine (osm 450), and high urine Na all fit perfectly.", incorrect: "This is classic SIADH: hypotonic, euvolemic, concentrated urine (osm >100), high urine Na. Small cell lung cancer is THE classic malignancy-associated cause of SIADH." },
+            q4: { correct: "Correct! She's hypovolemic (orthostasis, dry membranes) but has high urine Na because thiazides cause renal sodium wasting. This is hypovolemic hyponatremia with renal losses — treat with volume (NS).", incorrect: "The clinical signs (orthostasis, dry membranes) indicate hypovolemia, not euvolemia. The high urine Na is because thiazides force renal sodium wasting despite volume depletion. This is hypovolemic hyponatremia." },
+            q5: { correct: "Correct! Severe symptoms (seizures) require emergent treatment regardless of chronicity. Give 3% saline 100-150 mL bolus to raise Na 4-6 mEq/L quickly to stop seizures. Then slow down to avoid overcorrection.", incorrect: "Seizures are a medical emergency requiring immediate hypertonic saline (3%). A 100-150 mL bolus raises Na 4-6 mEq/L quickly. NS is too slow; fluid restriction is for asymptomatic chronic hyponatremia." },
+            q6: { correct: "Correct! The patient has overcorrected (14 mEq/L in <24h) putting them at high risk for ODS. You can 're-lower' sodium using D5W (free water) ± DDAVP to prevent further free water excretion.", incorrect: "This is overcorrection (>10-12 mEq/24h) — high risk for ODS. The strategy is to 're-lower' the sodium back toward goal using D5W and/or DDAVP. Don't wait for symptoms; prevent them." },
+            q7: { correct: "Correct! Exercise-associated hyponatremia occurs from drinking too much hypotonic fluid (water, sports drinks) combined with non-osmotic ADH release from exertion. The concentrated urine (osm 650) confirms ADH is active despite hyponatremia.", incorrect: "Marathon runners develop hyponatremia from excessive hypotonic fluid intake plus ADH release from physical stress. The high urine osm (650) shows ADH is active — this isn't simple dehydration." },
+            q8: { correct: "Correct! Thiazides block the distal convoluted tubule (diluting segment) but leave the medullary concentrating gradient intact. This allows ADH to concentrate urine while impairing the ability to excrete free water. Loops impair both.", incorrect: "Thiazides block the diluting segment (DCT) while preserving concentrating ability. This means the kidney can't dilute urine to excrete free water, but CAN still concentrate it when ADH is present → hyponatremia." }
+        };
+        
+        let correctAnswers = 0, answeredQuestions = new Set();
+        
+        function checkAnswer(qId, el, isCorrect) {
+            if (answeredQuestions.has(qId)) return;
+            answeredQuestions.add(qId);
+            el.parentElement.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.add('disabled');
+                if (opt === el) opt.classList.add(isCorrect ? 'correct' : 'incorrect');
+                else if (opt.onclick.toString().includes('true')) opt.classList.add('correct');
+            });
+            const fb = document.getElementById(qId + '-feedback');
+            fb.textContent = feedbackText[qId][isCorrect ? 'correct' : 'incorrect'];
+            fb.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+            if (isCorrect) correctAnswers++;
+            document.getElementById('progressFill').style.width = (answeredQuestions.size / 8) * 100 + '%';
+            document.getElementById('scoreDisplay').textContent = `Score: ${correctAnswers}/${answeredQuestions.size} correct (${8 - answeredQuestions.size} remaining)`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes & DKA | MechanismDx</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.6; }
+        .header { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+        .header-inner { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: Georgia, serif; font-size: 24px; color: #1e293b; text-decoration: none; }
+        .logo span { color: #10b981; }
+        .nav a { color: #64748b; text-decoration: none; font-size: 14px; font-weight: 500; margin-left: 20px; }
+        .hero { background: linear-gradient(135deg, #fce7f3 0%, #fff 100%); border-bottom: 1px solid #e2e8f0; padding: 48px 24px; }
+        .hero-inner { max-width: 800px; margin: 0 auto; }
+        .hero-icon { font-size: 48px; margin-bottom: 16px; }
+        .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; color: #be185d; }
+        .hero p { font-size: 16px; color: #64748b; margin-bottom: 24px; }
+        .hero-meta { display: flex; gap: 24px; flex-wrap: wrap; font-size: 14px; color: #64748b; }
+        .main { max-width: 800px; margin: 0 auto; padding: 48px 24px; }
+        .progress-bar { background: #e2e8f0; height: 8px; border-radius: 4px; margin-bottom: 32px; overflow: hidden; }
+        .progress-fill { background: #10b981; height: 100%; width: 0%; transition: width 0.3s; }
+        .section { margin-bottom: 48px; }
+        .section-title { font-size: 20px; font-weight: 600; margin-bottom: 16px; color: #1e293b; }
+        .concept-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+        .concept-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #1e293b; }
+        .concept-card p { color: #475569; font-size: 14px; margin-bottom: 12px; }
+        .concept-card ul { margin-left: 20px; color: #475569; font-size: 14px; }
+        .concept-card li { margin-bottom: 6px; }
+        .pathway-box { background: #fce7f3; border: 1px solid #f9a8d4; border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+        .pathway-box h3 { color: #be185d; font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+        .pathway-steps { display: flex; flex-direction: column; gap: 8px; }
+        .pathway-step { display: flex; align-items: center; gap: 12px; padding: 12px; background: #fff; border-radius: 8px; }
+        .step-num { width: 28px; height: 28px; background: #ec4899; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; }
+        .step-text { font-size: 14px; color: #1e293b; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; background: #fff; }
+        .comparison-table th { background: #f1f5f9; padding: 12px; text-align: left; font-weight: 600; border-bottom: 2px solid #e2e8f0; }
+        .comparison-table td { padding: 12px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+        .clinical-pearl { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 16px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+        .clinical-pearl h4 { font-size: 14px; font-weight: 600; color: #92400e; margin-bottom: 8px; }
+        .clinical-pearl p { font-size: 14px; color: #78350f; margin: 0; }
+        .danger-box { background: #fef2f2; border-left: 4px solid #dc2626; padding: 16px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+        .danger-box h4 { font-size: 14px; font-weight: 600; color: #dc2626; margin-bottom: 8px; }
+        .danger-box p, .danger-box ul { font-size: 14px; color: #7f1d1d; margin: 0; }
+        .danger-box ul { margin-left: 20px; margin-top: 8px; }
+        .quiz-section { background: #ede9fe; border: 1px solid #c4b5fd; border-radius: 12px; padding: 24px; margin: 24px 0; }
+        .quiz-section h3 { color: #5b21b6; font-size: 16px; font-weight: 600; margin-bottom: 16px; }
+        .quiz-question { background: #fff; border-radius: 8px; padding: 20px; margin-bottom: 16px; }
+        .quiz-question > p { font-weight: 500; margin-bottom: 16px; color: #1e293b; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-option { padding: 14px 16px; border: 2px solid #e2e8f0; border-radius: 8px; cursor: pointer; font-size: 14px; transition: all 0.15s; background: #fff; }
+        .quiz-option:hover:not(.disabled) { border-color: #8b5cf6; background: #faf5ff; }
+        .quiz-option.correct { border-color: #10b981; background: #f0fdf4; }
+        .quiz-option.incorrect { border-color: #ef4444; background: #fef2f2; }
+        .quiz-option.disabled { cursor: default; opacity: 0.7; }
+        .quiz-feedback { margin-top: 16px; padding: 16px; border-radius: 8px; font-size: 14px; display: none; }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct { background: #f0fdf4; border: 1px solid #86efac; color: #166534; }
+        .quiz-feedback.incorrect { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; }
+        .cross-link { background: #dbeafe; border: 1px solid #93c5fd; border-radius: 12px; padding: 20px; margin: 24px 0; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+        .cross-link-icon { font-size: 32px; }
+        .cross-link-content { flex: 1; min-width: 200px; }
+        .cross-link-content h4 { font-size: 14px; font-weight: 600; color: #1e40af; margin-bottom: 4px; }
+        .cross-link-content p { font-size: 13px; color: #3b82f6; margin: 0; }
+        .cross-link-btn { padding: 10px 16px; background: #3b82f6; color: #fff; border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: 500; }
+        .footer { border-top: 1px solid #e2e8f0; padding: 32px 24px; text-align: center; color: #64748b; font-size: 13px; }
+        .footer a { color: #10b981; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">Mechanism<span>Dx</span></a>
+            <nav class="nav">
+                <a href="index.html">← All Modules</a>
+                <a href="../unified-scoreboard.html">Scoreboard</a>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-icon">🩺</div>
+            <h1>Diabetes & DKA</h1>
+            <p>Understanding glucose metabolism, the pathophysiology of diabetic emergencies, and evidence-based management of hyperglycemic crises.</p>
+            <div class="hero-meta">
+                <span>📚 10 Concepts</span>
+                <span>❓ 8 MCQs</span>
+                <span>⏱ ~45 min</span>
+            </div>
+        </div>
+    </section>
+    
+    <main class="main">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        
+        <!-- Section 1: Insulin Physiology -->
+        <section class="section">
+            <h2 class="section-title">🔬 Insulin Physiology</h2>
+            
+            <div class="concept-card">
+                <h3>Normal Glucose Homeostasis</h3>
+                <ul>
+                    <li><strong>Fed state</strong> — Insulin promotes glucose uptake into muscle/fat, glycogen synthesis, lipogenesis</li>
+                    <li><strong>Fasting state</strong> — Glucagon promotes glycogenolysis, gluconeogenesis, lipolysis, ketogenesis</li>
+                    <li><strong>Insulin:glucagon ratio</strong> — The key determinant of metabolic state</li>
+                </ul>
+            </div>
+            
+            <div class="pathway-box">
+                <h3>🔄 Insulin Actions</h3>
+                <div class="pathway-steps">
+                    <div class="pathway-step"><div class="step-num">1</div><div class="step-text"><strong>Glucose uptake</strong> — GLUT4 translocation to cell membrane (muscle, fat)</div></div>
+                    <div class="pathway-step"><div class="step-num">2</div><div class="step-text"><strong>Glycogen synthesis</strong> — Activates glycogen synthase in liver and muscle</div></div>
+                    <div class="pathway-step"><div class="step-num">3</div><div class="step-text"><strong>Lipogenesis</strong> — Promotes fat storage, inhibits lipolysis</div></div>
+                    <div class="pathway-step"><div class="step-num">4</div><div class="step-text"><strong>Protein synthesis</strong> — Anabolic effects on muscle</div></div>
+                    <div class="pathway-step"><div class="step-num">5</div><div class="step-text"><strong>K+ uptake</strong> — Drives potassium into cells (important in DKA!)</div></div>
+                </div>
+            </div>
+            
+            <div class="clinical-pearl">
+                <h4>💡 Clinical Pearl</h4>
+                <p>Insulin's effect on potassium is critical in DKA management. Even with normal serum K+, total body potassium is severely depleted. Giving insulin without K+ replacement causes dangerous hypokalemia.</p>
+            </div>
+        </section>
+        
+        <!-- Section 2: Type 1 vs Type 2 -->
+        <section class="section">
+            <h2 class="section-title">⚖️ Type 1 vs Type 2 Diabetes</h2>
+            
+            <div class="concept-card">
+                <h3>Pathophysiology Comparison</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>Feature</th><th>Type 1</th><th>Type 2</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Mechanism</strong></td><td>Autoimmune β-cell destruction</td><td>Insulin resistance + relative deficiency</td></tr>
+                        <tr><td><strong>Onset</strong></td><td>Usually childhood/young adult</td><td>Usually adult (but increasing in youth)</td></tr>
+                        <tr><td><strong>Insulin levels</strong></td><td>Absent or very low</td><td>Normal, high, or eventually low</td></tr>
+                        <tr><td><strong>Ketosis prone</strong></td><td>Yes (insulin-dependent)</td><td>Usually no (except stress/illness)</td></tr>
+                        <tr><td><strong>C-peptide</strong></td><td>Low or undetectable</td><td>Normal or elevated</td></tr>
+                        <tr><td><strong>Autoantibodies</strong></td><td>Present (GAD65, IA-2, etc.)</td><td>Absent</td></tr>
+                        <tr><td><strong>Association</strong></td><td>Other autoimmune diseases</td><td>Metabolic syndrome</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="clinical-pearl">
+                <h4>💡 Clinical Pearl</h4>
+                <p>LADA (Latent Autoimmune Diabetes in Adults) presents like T2DM but is actually slow-onset T1DM. Suspect it in lean adults with poor response to oral agents. Check GAD65 antibodies and C-peptide.</p>
+            </div>
+        </section>
+        
+        <!-- Quiz 1 -->
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="q1">
+                <p>A patient with DKA has serum potassium of 5.2 mEq/L. What is the status of their total body potassium?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, false)">Normal — the serum level reflects total body stores</div>
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, true)">Depleted — acidosis shifts K+ out of cells, masking deficiency</div>
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, false)">Elevated — hyperglycemia causes potassium retention</div>
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, false)">Cannot determine without 24-hour urine collection</div>
+                </div>
+                <div class="quiz-feedback" id="q1-feedback"></div>
+            </div>
+            
+            <div class="quiz-question" id="q2">
+                <p>Which finding would most strongly suggest Type 1 rather than Type 2 diabetes in a 35-year-old?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, false)">HbA1c of 11.5% at diagnosis</div>
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, false)">Presenting with polyuria and polydipsia</div>
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, true)">Positive GAD65 antibodies and low C-peptide</div>
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, false)">Family history of diabetes</div>
+                </div>
+                <div class="quiz-feedback" id="q2-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Section 3: DKA Pathophysiology -->
+        <section class="section">
+            <h2 class="section-title">⚡ DKA Pathophysiology</h2>
+            
+            <div class="concept-card">
+                <h3>The Metabolic Cascade</h3>
+                <p>DKA results from absolute or relative insulin deficiency combined with counter-regulatory hormone excess:</p>
+            </div>
+            
+            <div class="pathway-box">
+                <h3>🔄 DKA Development</h3>
+                <div class="pathway-steps">
+                    <div class="pathway-step"><div class="step-num">1</div><div class="step-text"><strong>Insulin deficiency</strong> → Glucose cannot enter cells</div></div>
+                    <div class="pathway-step"><div class="step-num">2</div><div class="step-text"><strong>Counter-regulatory surge</strong> → Glucagon, cortisol, catecholamines, GH increase</div></div>
+                    <div class="pathway-step"><div class="step-num">3</div><div class="step-text"><strong>Uncontrolled lipolysis</strong> → Free fatty acids flood liver</div></div>
+                    <div class="pathway-step"><div class="step-num">4</div><div class="step-text"><strong>Ketogenesis</strong> → FFAs converted to ketones (β-hydroxybutyrate, acetoacetate)</div></div>
+                    <div class="pathway-step"><div class="step-num">5</div><div class="step-text"><strong>Metabolic acidosis</strong> → Ketoacids overwhelm buffering capacity</div></div>
+                    <div class="pathway-step"><div class="step-num">6</div><div class="step-text"><strong>Osmotic diuresis</strong> → Hyperglycemia causes massive fluid/electrolyte losses</div></div>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h3>DKA Diagnostic Criteria</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>Parameter</th><th>Mild</th><th>Moderate</th><th>Severe</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Glucose</td><td colspan="3">>250 mg/dL (may be lower in "euglycemic DKA")</td></tr>
+                        <tr><td>pH</td><td>7.25-7.30</td><td>7.00-7.24</td><td><7.00</td></tr>
+                        <tr><td>Bicarbonate</td><td>15-18</td><td>10-14</td><td><10</td></tr>
+                        <tr><td>Anion gap</td><td colspan="3">>12 (elevated)</td></tr>
+                        <tr><td>Ketones</td><td colspan="3">Positive (serum or urine)</td></tr>
+                        <tr><td>Mental status</td><td>Alert</td><td>Alert/drowsy</td><td>Stupor/coma</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="danger-box">
+                <h4>⚠️ Euglycemic DKA</h4>
+                <p>DKA can occur with glucose <250 mg/dL, especially with:</p>
+                <ul>
+                    <li>SGLT2 inhibitors (glucosuria prevents hyperglycemia)</li>
+                    <li>Pregnancy</li>
+                    <li>Recent insulin use</li>
+                    <li>Decreased oral intake</li>
+                </ul>
+                <p>Don't rely on glucose alone — check ketones and pH!</p>
+            </div>
+        </section>
+        
+        <!-- Section 4: DKA Management -->
+        <section class="section">
+            <h2 class="section-title">💊 DKA Management</h2>
+            
+            <div class="concept-card">
+                <h3>The Four Pillars of DKA Treatment</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>Pillar</th><th>Approach</th><th>Key Points</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1. Fluids</strong></td>
+                            <td>NS bolus → maintenance</td>
+                            <td>1-2L in first hour; total deficit 5-10L; switch to D5½NS when glucose <200</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2. Insulin</strong></td>
+                            <td>Regular insulin drip</td>
+                            <td>0.1 U/kg/hr; goal glucose drop 50-70 mg/dL/hr; continue until gap closes</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3. Potassium</strong></td>
+                            <td>Replace early and often</td>
+                            <td>Add K+ to fluids if K <5.3; hold insulin if K <3.3 until repleted</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4. Monitor</strong></td>
+                            <td>Frequent labs</td>
+                            <td>BMP q2-4h; follow anion gap (not just glucose) for resolution</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="concept-card">
+                <h3>Potassium Management Algorithm</h3>
+                <ul>
+                    <li><strong>K+ &lt;3.3 mEq/L</strong> — Hold insulin! Give 20-40 mEq/hr K+ until >3.3</li>
+                    <li><strong>K+ 3.3-5.3 mEq/L</strong> — Add 20-40 mEq K+ to each liter of fluids</li>
+                    <li><strong>K+ &gt;5.3 mEq/L</strong> — No K+ initially; recheck in 2 hours</li>
+                </ul>
+            </div>
+            
+            <div class="clinical-pearl">
+                <h4>💡 Clinical Pearl</h4>
+                <p>The anion gap, not glucose, determines DKA resolution. Continue insulin drip until gap closes (<12) and patient can eat. Overlap with subcutaneous insulin for 1-2 hours before stopping drip.</p>
+            </div>
+            
+            <div class="danger-box">
+                <h4>⚠️ Cerebral Edema Risk</h4>
+                <p>More common in pediatric DKA. Risk factors include rapid fluid administration, rapid glucose correction, and bicarbonate use. Correct glucose and osmolality gradually.</p>
+            </div>
+        </section>
+        
+        <!-- Quiz 2 -->
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="q3">
+                <p>A patient with DKA has glucose 450, pH 7.15, K+ 3.1. What is the immediate priority?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, false)">Start insulin drip to lower glucose rapidly</div>
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, true)">Hold insulin; give IV potassium until K+ >3.3</div>
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, false)">Give IV bicarbonate for the severe acidosis</div>
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, false)">Order stat CT head for altered mental status</div>
+                </div>
+                <div class="quiz-feedback" id="q3-feedback"></div>
+            </div>
+            
+            <div class="quiz-question" id="q4">
+                <p>After 6 hours of treatment, glucose is 180 mg/dL but anion gap remains 18. What should you do?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q4', this, false)">Stop insulin drip since glucose is controlled</div>
+                    <div class="quiz-option" onclick="checkAnswer('q4', this, false)">Increase insulin rate to close the gap faster</div>
+                    <div class="quiz-option" onclick="checkAnswer('q4', this, true)">Continue insulin drip; add dextrose to IV fluids</div>
+                    <div class="quiz-option" onclick="checkAnswer('q4', this, false)">Transition to subcutaneous insulin now</div>
+                </div>
+                <div class="quiz-feedback" id="q4-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Section 5: HHS -->
+        <section class="section">
+            <h2 class="section-title">💧 Hyperosmolar Hyperglycemic State (HHS)</h2>
+            
+            <div class="concept-card">
+                <h3>DKA vs HHS</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>Feature</th><th>DKA</th><th>HHS</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Typical patient</strong></td><td>Type 1 (or T2 under stress)</td><td>Type 2, elderly</td></tr>
+                        <tr><td><strong>Glucose</strong></td><td>>250 mg/dL</td><td>>600 mg/dL (often >1000)</td></tr>
+                        <tr><td><strong>pH</strong></td><td><7.30</td><td>>7.30</td></tr>
+                        <tr><td><strong>Ketones</strong></td><td>Strongly positive</td><td>Minimal or absent</td></tr>
+                        <tr><td><strong>Osmolality</strong></td><td>Variable</td><td>>320 mOsm/kg</td></tr>
+                        <tr><td><strong>Fluid deficit</strong></td><td>~6L</td><td>~9L (more severe)</td></tr>
+                        <tr><td><strong>Mortality</strong></td><td>~1-5%</td><td>~10-20%</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="concept-card">
+                <h3>Why No Ketosis in HHS?</h3>
+                <p>Patients with HHS have enough residual insulin to prevent lipolysis and ketogenesis, but not enough to facilitate glucose uptake. The result is:</p>
+                <ul>
+                    <li>Profound hyperglycemia (often >1000 mg/dL)</li>
+                    <li>Severe dehydration from osmotic diuresis</li>
+                    <li>Hyperosmolality causing altered mental status</li>
+                    <li>No significant ketoacid production</li>
+                </ul>
+            </div>
+            
+            <div class="clinical-pearl">
+                <h4>💡 Clinical Pearl</h4>
+                <p>HHS has higher mortality than DKA despite less acidosis. The key difference is fluid deficit — HHS patients are profoundly dehydrated. Fluids are even more critical than in DKA.</p>
+            </div>
+        </section>
+        
+        <!-- Section 6: Chronic Complications -->
+        <section class="section">
+            <h2 class="section-title">🔍 Chronic Complications</h2>
+            
+            <div class="concept-card">
+                <h3>Microvascular Complications</h3>
+                <ul>
+                    <li><strong>Retinopathy</strong> — Nonproliferative → proliferative; leading cause of blindness in working-age adults</li>
+                    <li><strong>Nephropathy</strong> — Microalbuminuria → macroalbuminuria → ESRD; screen with urine albumin:creatinine ratio</li>
+                    <li><strong>Neuropathy</strong> — "Stocking-glove" sensory loss; autonomic dysfunction; risk for foot ulcers</li>
+                </ul>
+            </div>
+            
+            <div class="concept-card">
+                <h3>Macrovascular Complications</h3>
+                <ul>
+                    <li><strong>Coronary artery disease</strong> — 2-4x increased risk; often silent ischemia</li>
+                    <li><strong>Cerebrovascular disease</strong> — Increased stroke risk</li>
+                    <li><strong>Peripheral arterial disease</strong> — Combined with neuropathy → high amputation risk</li>
+                </ul>
+            </div>
+            
+            <div class="concept-card">
+                <h3>Screening Recommendations</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>Complication</th><th>Screening</th><th>Frequency</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Retinopathy</td><td>Dilated eye exam</td><td>Annual (at diagnosis for T2; 5 years after T1)</td></tr>
+                        <tr><td>Nephropathy</td><td>Urine albumin:creatinine + eGFR</td><td>Annual</td></tr>
+                        <tr><td>Neuropathy</td><td>10g monofilament exam</td><td>Annual</td></tr>
+                        <tr><td>CV risk</td><td>Lipids, BP, smoking cessation</td><td>At diagnosis and ongoing</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <!-- Quiz 3 -->
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="q5">
+                <p>An elderly patient with T2DM presents with glucose 1100 mg/dL, pH 7.35, minimal ketones, and obtundation. What is the diagnosis?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q5', this, false)">Severe DKA with exhausted ketone production</div>
+                    <div class="quiz-option" onclick="checkAnswer('q5', this, true)">Hyperosmolar Hyperglycemic State (HHS)</div>
+                    <div class="quiz-option" onclick="checkAnswer('q5', this, false)">Mixed DKA and HHS requiring bicarbonate</div>
+                    <div class="quiz-option" onclick="checkAnswer('q5', this, false)">Hyperglycemia with concurrent stroke</div>
+                </div>
+                <div class="quiz-feedback" id="q5-feedback"></div>
+            </div>
+            
+            <div class="quiz-question" id="q6">
+                <p>Why is HHS mortality higher than DKA despite less acidosis?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q6', this, false)">HHS patients are more insulin resistant</div>
+                    <div class="quiz-option" onclick="checkAnswer('q6', this, true)">HHS has more severe dehydration and often occurs in elderly with comorbidities</div>
+                    <div class="quiz-option" onclick="checkAnswer('q6', this, false)">The absence of ketones leads to more cellular damage</div>
+                    <div class="quiz-option" onclick="checkAnswer('q6', this, false)">HHS is more difficult to diagnose, delaying treatment</div>
+                </div>
+                <div class="quiz-feedback" id="q6-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Section 7: Diabetes Medications -->
+        <section class="section">
+            <h2 class="section-title">💉 Diabetes Medications</h2>
+            
+            <div class="concept-card">
+                <h3>Key Drug Classes</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>Class</th><th>Mechanism</th><th>Key Points</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Metformin</strong></td>
+                            <td>Decreases hepatic glucose production</td>
+                            <td>First-line for T2DM; hold if eGFR <30; lactic acidosis rare</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SGLT2 inhibitors</strong></td>
+                            <td>Block renal glucose reabsorption</td>
+                            <td>CV and renal protection; risk of euglycemic DKA, UTIs, Fournier's gangrene</td>
+                        </tr>
+                        <tr>
+                            <td><strong>GLP-1 agonists</strong></td>
+                            <td>Incretin mimetic; glucose-dependent insulin secretion</td>
+                            <td>Weight loss, CV benefit; GI side effects; pancreatitis risk</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sulfonylureas</strong></td>
+                            <td>Stimulate insulin secretion</td>
+                            <td>Hypoglycemia risk; weight gain; avoid in elderly/renal impairment</td>
+                        </tr>
+                        <tr>
+                            <td><strong>DPP-4 inhibitors</strong></td>
+                            <td>Prolong endogenous incretins</td>
+                            <td>Weight neutral; well-tolerated; modest efficacy</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Insulin</strong></td>
+                            <td>Exogenous replacement</td>
+                            <td>Required for T1DM; often needed in advanced T2DM</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="clinical-pearl">
+                <h4>💡 Clinical Pearl</h4>
+                <p>For T2DM patients with established CV disease or high risk, add SGLT2 inhibitor or GLP-1 agonist with proven CV benefit regardless of HbA1c. For those with CKD or HF, SGLT2 inhibitors have additional benefits.</p>
+            </div>
+        </section>
+        
+        <!-- Quiz 4 -->
+        <div class="quiz-section">
+            <h3>🧠 Final Questions</h3>
+            <div class="quiz-question" id="q7">
+                <p>A patient on empagliflozin presents with nausea, vomiting, and glucose of 180 mg/dL. pH is 7.18 with elevated ketones. What is occurring?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q7', this, false)">Viral gastroenteritis with incidental ketosis from poor intake</div>
+                    <div class="quiz-option" onclick="checkAnswer('q7', this, true)">Euglycemic DKA — a known complication of SGLT2 inhibitors</div>
+                    <div class="quiz-option" onclick="checkAnswer('q7', this, false)">Lactic acidosis from empagliflozin interaction</div>
+                    <div class="quiz-option" onclick="checkAnswer('q7', this, false)">Laboratory error since DKA requires glucose >250</div>
+                </div>
+                <div class="quiz-feedback" id="q7-feedback"></div>
+            </div>
+            
+            <div class="quiz-question" id="q8">
+                <p>A T2DM patient with HbA1c 8.2% has established heart failure with reduced EF. Which medication addition provides the most benefit?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q8', this, false)">Glipizide for better glycemic control</div>
+                    <div class="quiz-option" onclick="checkAnswer('q8', this, true)">SGLT2 inhibitor for HF and glycemic benefits</div>
+                    <div class="quiz-option" onclick="checkAnswer('q8', this, false)">DPP-4 inhibitor for weight neutrality</div>
+                    <div class="quiz-option" onclick="checkAnswer('q8', this, false)">Pioglitazone for insulin sensitization</div>
+                </div>
+                <div class="quiz-feedback" id="q8-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Cross-Platform Links -->
+        <div class="cross-link">
+            <div class="cross-link-icon">💬</div>
+            <div class="cross-link-content">
+                <h4>Practice Clinical Reasoning</h4>
+                <p>Apply what you've learned with a DKA case</p>
+            </div>
+            <a href="../CoachDx/mentor-chat.html?case=dka" class="cross-link-btn">Try DKA Case →</a>
+        </div>
+        
+        <div class="cross-link" style="background: #fef3c7; border-color: #fcd34d;">
+            <div class="cross-link-icon">🧪</div>
+            <div class="cross-link-content">
+                <h4>Related: Acid-Base Module</h4>
+                <p>Master anion gap calculations and metabolic acidosis</p>
+            </div>
+            <a href="acid-base.html" class="cross-link-btn" style="background: #f59e0b;">Acid-Base Module →</a>
+        </div>
+        
+        <!-- Module Complete -->
+        <div class="concept-card" style="background: linear-gradient(135deg, #fce7f3, #fbcfe8); border-color: #f472b6; text-align: center; padding: 32px;">
+            <h3 style="color: #be185d; font-size: 20px;">🎉 Module Complete!</h3>
+            <p style="color: #db2777; margin-bottom: 16px;">You've completed the Diabetes & DKA module.</p>
+            <p style="color: #be185d;" id="scoreDisplay">Score: 0/0 correct (8 remaining)</p>
+        </div>
+    </main>
+    
+    <footer class="footer"><p>© 2025 MechanismDx · Part of the <a href="../index.html">Dx Suite</a></p></footer>
+    
+    <script>
+        const feedbackText = {
+            q1: { correct: "Correct! In DKA, acidosis and insulin deficiency shift K+ out of cells, making serum K+ appear normal or even high despite severe total body depletion. Giving insulin will drive K+ back into cells, unmasking the deficit.", incorrect: "Acidosis causes K+ to shift out of cells in exchange for H+. Serum K+ may appear normal but total body K+ is depleted. This is critical — giving insulin without K+ replacement causes dangerous hypokalemia." },
+            q2: { correct: "Correct! GAD65 antibodies indicate autoimmune β-cell destruction, and low C-peptide confirms little endogenous insulin production. These distinguish Type 1 from Type 2 diabetes.", incorrect: "Autoantibodies (GAD65, IA-2) and low C-peptide are the defining features of Type 1 diabetes. Other features like high HbA1c or polyuria/polydipsia occur in both types." },
+            q3: { correct: "Correct! With K+ <3.3 mEq/L, insulin must be held until potassium is repleted. Giving insulin will drive K+ into cells and can cause fatal arrhythmias from hypokalemia.", incorrect: "K+ <3.3 is a medical emergency — hold insulin until K+ >3.3! Insulin drives K+ into cells; giving it now could cause fatal arrhythmias." },
+            q4: { correct: "Correct! DKA resolution is determined by anion gap closure, not glucose. Continue insulin to suppress ketogenesis; add dextrose to prevent hypoglycemia while treating the acidosis.", incorrect: "The anion gap determines DKA resolution, not glucose. Continue the insulin drip until gap closes (<12). Add dextrose to fluids to prevent hypoglycemia while continuing to treat ketoacidosis." },
+            q5: { correct: "Correct! Extremely high glucose (>600), minimal ketones, normal pH, and altered mental status from hyperosmolality define HHS. It typically occurs in elderly T2DM patients.", incorrect: "This is classic HHS: extreme hyperglycemia (>600), minimal ketosis, normal pH, and altered mental status from hyperosmolality. Typically occurs in elderly T2DM patients." },
+            q6: { correct: "Correct! HHS has more severe volume depletion (~9L vs ~6L in DKA), and typically occurs in elderly patients with comorbidities who present later in their illness course.", incorrect: "HHS mortality is higher due to more severe dehydration and because it typically affects elderly patients with comorbidities who often present later in their course." },
+            q7: { correct: "Correct! SGLT2 inhibitors cause glucosuria, which can mask hyperglycemia. DKA can occur with normal or near-normal glucose levels. Always check ketones and pH in patients on SGLT2i with unexplained illness.", incorrect: "This is euglycemic DKA, a known complication of SGLT2 inhibitors. The glucosuria prevents hyperglycemia, but ketoacidosis can still develop. Don't rely on glucose alone!" },
+            q8: { correct: "Correct! SGLT2 inhibitors have proven benefits in HFrEF regardless of diabetes status. They reduce HF hospitalizations and CV death. Avoid pioglitazone in HF (causes fluid retention).", incorrect: "SGLT2 inhibitors are now standard of care in HFrEF due to proven CV and HF benefits (DAPA-HF, EMPEROR trials). Avoid pioglitazone in HF due to fluid retention." }
+        };
+        
+        let correctAnswers = 0, answeredQuestions = new Set();
+        
+        function checkAnswer(qId, el, isCorrect) {
+            if (answeredQuestions.has(qId)) return;
+            answeredQuestions.add(qId);
+            el.parentElement.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.add('disabled');
+                if (opt === el) opt.classList.add(isCorrect ? 'correct' : 'incorrect');
+                else if (opt.onclick.toString().includes('true')) opt.classList.add('correct');
+            });
+            const fb = document.getElementById(qId + '-feedback');
+            fb.textContent = feedbackText[qId][isCorrect ? 'correct' : 'incorrect'];
+            fb.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+            if (isCorrect) correctAnswers++;
+            document.getElementById('progressFill').style.width = (answeredQuestions.size / 8) * 100 + '%';
+            document.getElementById('scoreDisplay').textContent = `Score: ${correctAnswers}/${answeredQuestions.size} correct (${8 - answeredQuestions.size} remaining)`;
+        }
+    </script>
+</body>
+</html>

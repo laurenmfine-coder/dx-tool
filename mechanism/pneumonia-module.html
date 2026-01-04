@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pneumonia & Respiratory Infections | MechanismDx</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.6; }
+        .header { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+        .header-inner { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: Georgia, serif; font-size: 24px; color: #1e293b; text-decoration: none; }
+        .logo span { color: #10b981; }
+        .nav a { color: #64748b; text-decoration: none; font-size: 14px; font-weight: 500; margin-left: 20px; }
+        .nav a:hover { color: #10b981; }
+        .hero { background: linear-gradient(135deg, #eff6ff 0%, #f0f9ff 50%, #fff 100%); border-bottom: 1px solid #e2e8f0; padding: 48px 24px; }
+        .hero-inner { max-width: 800px; margin: 0 auto; }
+        .hero-icon { font-size: 48px; margin-bottom: 16px; }
+        .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; color: #1d4ed8; }
+        .hero p { font-size: 16px; color: #64748b; margin-bottom: 24px; }
+        .hero-meta { display: flex; gap: 24px; flex-wrap: wrap; font-size: 14px; color: #64748b; }
+        .main { max-width: 800px; margin: 0 auto; padding: 48px 24px; }
+        .progress-bar { background: #e2e8f0; height: 8px; border-radius: 4px; margin-bottom: 32px; overflow: hidden; }
+        .progress-fill { background: #1d4ed8; height: 100%; width: 0%; transition: width 0.3s; }
+        .section { margin-bottom: 48px; }
+        .section-title { font-size: 20px; font-weight: 600; margin-bottom: 16px; color: #1e293b; }
+        .concept-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+        .concept-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #1e293b; }
+        .concept-card p { color: #475569; font-size: 14px; margin-bottom: 12px; }
+        .concept-card ul { margin-left: 20px; color: #475569; font-size: 14px; }
+        .concept-card li { margin-bottom: 6px; }
+        .pathway-box { background: #eff6ff; border: 1px solid #93c5fd; border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+        .pathway-box h3 { color: #1d4ed8; font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; background: #fff; }
+        .comparison-table th { background: #f1f5f9; padding: 12px; text-align: left; font-weight: 600; border-bottom: 2px solid #e2e8f0; }
+        .comparison-table td { padding: 12px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+        .clinical-pearl { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 16px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+        .clinical-pearl h4 { font-size: 14px; font-weight: 600; color: #92400e; margin-bottom: 8px; }
+        .clinical-pearl p { font-size: 14px; color: #78350f; margin: 0; }
+        .danger-box { background: #fef2f2; border-left: 4px solid #dc2626; padding: 16px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+        .danger-box h4 { font-size: 14px; font-weight: 600; color: #991b1b; margin-bottom: 8px; }
+        .danger-box p { font-size: 14px; color: #7f1d1d; margin: 0; }
+        .mnemonic-box { background: #fef3c7; border: 2px solid #fcd34d; border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .mnemonic-box h4 { color: #92400e; font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+        .mnemonic { font-size: 16px; color: #78350f; font-weight: 600; }
+        .mnemonic span { color: #dc2626; }
+        .quiz-section { background: #eff6ff; border: 1px solid #93c5fd; border-radius: 12px; padding: 24px; margin: 24px 0; }
+        .quiz-section h3 { color: #1e40af; font-size: 16px; font-weight: 600; margin-bottom: 16px; }
+        .quiz-question { background: #fff; border-radius: 8px; padding: 20px; margin-bottom: 16px; }
+        .quiz-question > p { font-weight: 500; margin-bottom: 16px; color: #1e293b; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-option { padding: 14px 16px; border: 2px solid #e2e8f0; border-radius: 8px; cursor: pointer; font-size: 14px; transition: all 0.15s; background: #fff; display: flex; align-items: flex-start; gap: 10px; }
+        .quiz-option:hover:not(.disabled) { border-color: #1d4ed8; background: #eff6ff; }
+        .quiz-option.correct { border-color: #10b981; background: #f0fdf4; }
+        .quiz-option.incorrect { border-color: #ef4444; background: #fef2f2; }
+        .quiz-option.disabled { cursor: default; opacity: 0.7; }
+        .option-letter { font-weight: 600; color: #64748b; min-width: 24px; }
+        .quiz-feedback { margin-top: 16px; padding: 16px; border-radius: 8px; font-size: 14px; display: none; }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct { background: #f0fdf4; border: 1px solid #86efac; color: #166534; }
+        .quiz-feedback.incorrect { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; }
+        .cross-link { background: #dbeafe; border: 1px solid #93c5fd; border-radius: 12px; padding: 20px; margin: 24px 0; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+        .cross-link-icon { font-size: 32px; }
+        .cross-link-content { flex: 1; min-width: 200px; }
+        .cross-link-content h4 { font-size: 14px; font-weight: 600; color: #1e40af; margin-bottom: 4px; }
+        .cross-link-content p { font-size: 13px; color: #3b82f6; margin: 0; }
+        .cross-link-btn { padding: 10px 16px; background: #3b82f6; color: #fff; border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: 500; }
+        .footer { border-top: 1px solid #e2e8f0; padding: 32px 24px; text-align: center; color: #64748b; font-size: 13px; }
+        .footer a { color: #10b981; text-decoration: none; }
+        .score-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 13px; }
+        .score-table th { background: #1d4ed8; color: #fff; padding: 10px; text-align: left; }
+        .score-table td { padding: 10px; border-bottom: 1px solid #e2e8f0; }
+        .score-table tr:nth-child(even) { background: #f8fafc; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <a href="mechanismdx-index-final.html" class="logo">Mechanism<span>Dx</span></a>
+            <nav class="nav">
+                <a href="mechanismdx-index-final.html">← All Modules</a>
+                <a href="unified-scoreboard.html">Scoreboard</a>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-icon">🫁</div>
+            <h1>Pneumonia & Respiratory Infections</h1>
+            <p>Master pneumonia classification, pathogen patterns, severity assessment, and evidence-based antibiotic selection. From outpatient CAP to ventilator-associated pneumonia.</p>
+            <div class="hero-meta">
+                <span>📚 14 Concepts</span>
+                <span>❓ 10 MCQs</span>
+                <span>⏱ ~50 min</span>
+            </div>
+        </div>
+    </section>
+    
+    <main class="main">
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        
+        <!-- Section 1: Classification -->
+        <section class="section">
+            <h2 class="section-title">📋 Pneumonia Classification</h2>
+            
+            <div class="concept-card">
+                <h3>Classification by Setting</h3>
+                <ul>
+                    <li><strong>CAP (Community-Acquired)</strong> — Acquired outside hospital; symptom onset before or within 48h of admission</li>
+                    <li><strong>HAP (Hospital-Acquired)</strong> — Onset ≥48 hours after hospital admission</li>
+                    <li><strong>VAP (Ventilator-Associated)</strong> — Onset ≥48 hours after endotracheal intubation</li>
+                    <li><strong>Aspiration Pneumonia</strong> — Following witnessed/suspected aspiration; often polymicrobial</li>
+                </ul>
+            </div>
+            
+            <div class="concept-card">
+                <h3>Common CAP Pathogens</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>Pathogen</th><th>Clinical Clues</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>S. pneumoniae</strong></td><td>#1 bacterial cause; lobar consolidation; rusty sputum; rapid onset</td></tr>
+                        <tr><td><strong>H. influenzae</strong></td><td>COPD patients; often follows viral URI</td></tr>
+                        <tr><td><strong>Mycoplasma</strong></td><td>Young adults; walking pneumonia; bullous myringitis; dry cough</td></tr>
+                        <tr><td><strong>Legionella</strong></td><td>GI symptoms; hyponatremia; CNS changes; contaminated water exposure</td></tr>
+                        <tr><td><strong>Chlamydophila</strong></td><td>Hoarseness; prolonged symptoms; pharyngitis preceding</td></tr>
+                        <tr><td><strong>Influenza</strong></td><td>Seasonal; myalgias; can have bacterial superinfection</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="clinical-pearl">
+                <h4>💡 Clinical Pearl</h4>
+                <p>"Atypical" pathogens (Mycoplasma, Legionella, Chlamydophila) account for ~15-25% of CAP. The term refers to organisms NOT covered by β-lactams alone. These require macrolide, fluoroquinolone, or doxycycline coverage.</p>
+            </div>
+        </section>
+        
+        <!-- Quiz 1 -->
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="q1">
+                <p>A 32-year-old presents with 5 days of dry cough, low-grade fever, headache, and diarrhea. CXR shows patchy bilateral infiltrates disproportionate to his mild clinical appearance. Which pathogen is MOST likely?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, 'A')"><span class="option-letter">A.</span> Streptococcus pneumoniae</div>
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, 'B')"><span class="option-letter">B.</span> Haemophilus influenzae</div>
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, 'C')"><span class="option-letter">C.</span> Legionella pneumophila</div>
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, 'D')"><span class="option-letter">D.</span> Staphylococcus aureus</div>
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, 'E')"><span class="option-letter">E.</span> Klebsiella pneumoniae</div>
+                </div>
+                <div class="quiz-feedback" id="q1-feedback"></div>
+            </div>
+            
+            <div class="quiz-question" id="q2">
+                <p>A patient develops fever and new infiltrate 5 days into mechanical ventilation. Tracheal aspirate grows gram-negative rods. How should this pneumonia be classified?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, 'A')"><span class="option-letter">A.</span> Community-acquired pneumonia (CAP)</div>
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, 'B')"><span class="option-letter">B.</span> Hospital-acquired pneumonia (HAP)</div>
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, 'C')"><span class="option-letter">C.</span> Ventilator-associated pneumonia (VAP)</div>
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, 'D')"><span class="option-letter">D.</span> Healthcare-associated pneumonia (HCAP)</div>
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, 'E')"><span class="option-letter">E.</span> Aspiration pneumonia</div>
+                </div>
+                <div class="quiz-feedback" id="q2-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Section 2: Severity Assessment -->
+        <section class="section">
+            <h2 class="section-title">📊 Severity Assessment</h2>
+            
+            <div class="concept-card">
+                <h3>CURB-65 Score</h3>
+                <table class="score-table">
+                    <thead>
+                        <tr><th>Criterion</th><th>Points</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>C</strong>onfusion (new onset)</td><td>1</td></tr>
+                        <tr><td><strong>U</strong>rea >7 mmol/L (BUN >19 mg/dL)</td><td>1</td></tr>
+                        <tr><td><strong>R</strong>espiratory rate ≥30</td><td>1</td></tr>
+                        <tr><td><strong>B</strong>lood pressure: SBP <90 or DBP ≤60</td><td>1</td></tr>
+                        <tr><td>Age ≥<strong>65</strong></td><td>1</td></tr>
+                    </tbody>
+                </table>
+                <p style="margin-top: 12px; font-size: 13px;"><strong>Score:</strong> 0-1 = Outpatient; 2 = Consider admission; ≥3 = Inpatient (≥4 consider ICU)</p>
+            </div>
+            
+            <div class="pathway-box">
+                <h3>🏥 ATS/IDSA Severe CAP Criteria (ICU)</h3>
+                <p style="margin-bottom: 12px; font-size: 14px;">Requires 1 major OR ≥3 minor criteria:</p>
+                <ul style="margin-left: 20px; font-size: 14px;">
+                    <li><strong>Major:</strong> Mechanical ventilation, Vasopressor-requiring septic shock</li>
+                    <li><strong>Minor:</strong> RR ≥30, PaO2/FiO2 ≤250, Multilobar infiltrates, Confusion, BUN ≥20, WBC <4K, Platelets <100K, Temp <36°C, Hypotension requiring aggressive fluids</li>
+                </ul>
+            </div>
+            
+            <div class="clinical-pearl">
+                <h4>💡 Clinical Pearl</h4>
+                <p>The PSI (Pneumonia Severity Index) uses 20 variables for mortality prediction. CURB-65 is simpler and performs similarly. PSI may underestimate severity in young patients; CURB-65 may miss hypoxemia. Use clinical judgment alongside scores.</p>
+            </div>
+        </section>
+        
+        <!-- Section 3: CAP Treatment -->
+        <section class="section">
+            <h2 class="section-title">💊 CAP Antibiotic Selection</h2>
+            
+            <div class="concept-card">
+                <h3>Outpatient CAP</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>Patient Type</th><th>First-Line</th><th>Alternative</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Healthy, no comorbidities</strong></td><td>Amoxicillin 1g TID × 5 days</td><td>Doxycycline 100mg BID or macrolide*</td></tr>
+                        <tr><td><strong>With comorbidities†</strong></td><td>Amox-clav or cephalosporin + macrolide/doxy</td><td>Respiratory FQ monotherapy</td></tr>
+                    </tbody>
+                </table>
+                <p style="font-size: 12px; color: #64748b; margin-top: 8px;">*Macrolide only if local pneumococcal resistance <25%<br>†Comorbidities: chronic heart/lung/liver/renal disease, diabetes, alcoholism, malignancy</p>
+            </div>
+            
+            <div class="concept-card">
+                <h3>Inpatient CAP (Non-ICU)</h3>
+                <ul>
+                    <li><strong>Standard:</strong> β-lactam (ceftriaxone, cefotaxime, ampicillin-sulbactam) + macrolide (azithromycin)</li>
+                    <li><strong>Alternative:</strong> β-lactam + doxycycline, OR respiratory FQ monotherapy</li>
+                    <li><strong>Duration:</strong> Minimum 5 days; extend if slow to respond</li>
+                </ul>
+            </div>
+            
+            <div class="concept-card">
+                <h3>Inpatient CAP (ICU)</h3>
+                <ul>
+                    <li><strong>Standard:</strong> β-lactam (ceftriaxone) + azithromycin OR β-lactam + respiratory FQ</li>
+                    <li><strong>Pseudomonas risk:</strong> Antipseudomonal β-lactam (piperacillin-tazobactam, cefepime, meropenem) + FQ or aminoglycoside</li>
+                    <li><strong>MRSA risk:</strong> Add vancomycin or linezolid</li>
+                </ul>
+            </div>
+            
+            <div class="danger-box">
+                <h4>⚠️ MRSA/Pseudomonas Risk Factors</h4>
+                <p><strong>MRSA:</strong> Prior MRSA infection, recent hospitalization, hemodialysis, injection drug use, post-influenza.<br><strong>Pseudomonas:</strong> Structural lung disease, bronchiectasis, severe COPD, prior Pseudomonas, frequent antibiotics.</p>
+            </div>
+        </section>
+        
+        <!-- Quiz 2 -->
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="q3">
+                <p>A 55-year-old with COPD and diabetes presents with CAP. He is stable with O2 sat 94% on room air, CURB-65 = 2, and is admitted to a general medical floor. What is the most appropriate antibiotic regimen?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, 'A')"><span class="option-letter">A.</span> Azithromycin monotherapy</div>
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, 'B')"><span class="option-letter">B.</span> Ceftriaxone + azithromycin</div>
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, 'C')"><span class="option-letter">C.</span> Piperacillin-tazobactam + vancomycin</div>
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, 'D')"><span class="option-letter">D.</span> Amoxicillin monotherapy</div>
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, 'E')"><span class="option-letter">E.</span> Cefepime + levofloxacin + vancomycin</div>
+                </div>
+                <div class="quiz-feedback" id="q3-feedback"></div>
+            </div>
+            
+            <div class="quiz-question" id="q4">
+                <p>Why is combination therapy (β-lactam + macrolide/FQ) recommended for hospitalized CAP patients rather than β-lactam monotherapy?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q4', this, 'A')"><span class="option-letter">A.</span> Prevents development of antibiotic resistance</div>
+                    <div class="quiz-option" onclick="checkAnswer('q4', this, 'B')"><span class="option-letter">B.</span> Provides coverage for atypical pathogens and may have immunomodulatory benefits</div>
+                    <div class="quiz-option" onclick="checkAnswer('q4', this, 'C')"><span class="option-letter">C.</span> Required to achieve adequate lung tissue penetration</div>
+                    <div class="quiz-option" onclick="checkAnswer('q4', this, 'D')"><span class="option-letter">D.</span> Macrolides enhance β-lactam bactericidal activity synergistically</div>
+                    <div class="quiz-option" onclick="checkAnswer('q4', this, 'E')"><span class="option-letter">E.</span> Covers anaerobic bacteria from aspiration</div>
+                </div>
+                <div class="quiz-feedback" id="q4-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Section 4: HAP/VAP -->
+        <section class="section">
+            <h2 class="section-title">🏥 Hospital-Acquired & Ventilator-Associated Pneumonia</h2>
+            
+            <div class="concept-card">
+                <h3>HAP/VAP Pathogen Profile</h3>
+                <p>Healthcare-associated pathogens require broader coverage:</p>
+                <ul>
+                    <li><strong>Gram-negatives:</strong> Pseudomonas, Klebsiella, Acinetobacter, Enterobacter, E. coli</li>
+                    <li><strong>MRSA:</strong> Especially after prolonged hospitalization, prior antibiotics</li>
+                    <li><strong>Local antibiogram critical:</strong> Resistance patterns vary by institution</li>
+                </ul>
+            </div>
+            
+            <div class="concept-card">
+                <h3>HAP/VAP Treatment Principles</h3>
+                <ul>
+                    <li><strong>Empiric:</strong> Antipseudomonal β-lactam (pip-tazo, cefepime, meropenem) ± aminoglycoside/FQ</li>
+                    <li><strong>Add MRSA coverage</strong> if: prior MRSA, high unit prevalence (>20%), recent antibiotics, high severity</li>
+                    <li><strong>De-escalate:</strong> Once cultures return, narrow to targeted therapy</li>
+                    <li><strong>Duration:</strong> 7 days typically sufficient (shorter than historical 14-21 days)</li>
+                </ul>
+            </div>
+            
+            <div class="mnemonic-box">
+                <h4>🧠 MDR Risk Factors (HAP/VAP)</h4>
+                <p class="mnemonic"><span>IV antibiotics</span> within 90 days • <span>5+ days</span> hospitalization before HAP • <span>Septic shock</span> at VAP onset • <span>ARDS</span> before VAP • <span>RRT</span> before VAP</p>
+            </div>
+            
+            <div class="clinical-pearl">
+                <h4>💡 Clinical Pearl</h4>
+                <p>Double antipseudomonal coverage (β-lactam + FQ or aminoglycoside) is recommended for ICU patients with HAP/VAP if: MDR risk factors present, structural lung disease, or locally high Pseudomonas resistance. De-escalate to monotherapy once sensitivities return.</p>
+            </div>
+        </section>
+        
+        <!-- Section 5: Special Situations -->
+        <section class="section">
+            <h2 class="section-title">🔬 Special Situations</h2>
+            
+            <div class="concept-card">
+                <h3>Aspiration Pneumonia vs. Aspiration Pneumonitis</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>Feature</th><th>Pneumonitis (Chemical)</th><th>Pneumonia (Bacterial)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Onset</strong></td><td>Hours after aspiration</td><td>Days after aspiration</td></tr>
+                        <tr><td><strong>Cause</strong></td><td>Sterile gastric contents</td><td>Colonized oropharyngeal material</td></tr>
+                        <tr><td><strong>Treatment</strong></td><td>Supportive; antibiotics NOT indicated</td><td>Antibiotics targeting oral flora</td></tr>
+                        <tr><td><strong>Pathogens</strong></td><td>N/A</td><td>Anaerobes, S. pneumo, GNRs</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="concept-card">
+                <h3>Aspiration Pneumonia Treatment</h3>
+                <ul>
+                    <li><strong>Community-acquired aspiration:</strong> Amoxicillin-clavulanate or ampicillin-sulbactam</li>
+                    <li><strong>Hospital-acquired aspiration:</strong> Piperacillin-tazobactam or carbapenem</li>
+                    <li><strong>Lung abscess/empyema:</strong> Prolonged course (4-6 weeks); consider drainage</li>
+                </ul>
+            </div>
+            
+            <div class="concept-card">
+                <h3>Immunocompromised Hosts</h3>
+                <ul>
+                    <li><strong>HIV (CD4 <200):</strong> PJP (Pneumocystis jirovecii) — diffuse bilateral infiltrates, elevated LDH, hypoxemia out of proportion to CXR</li>
+                    <li><strong>Neutropenia:</strong> Gram-negatives, fungi (Aspergillus with halo sign); antipseudomonal + antifungal if prolonged</li>
+                    <li><strong>Transplant:</strong> CMV, PJP, opportunistic molds; timing post-transplant matters</li>
+                </ul>
+            </div>
+            
+            <div class="danger-box">
+                <h4>⚠️ When to Suspect PJP</h4>
+                <p>HIV with CD4 <200 or immunosuppressed patients presenting with: subacute dyspnea, dry cough, hypoxemia disproportionate to CXR findings, bilateral interstitial infiltrates, elevated LDH. Diagnosis: induced sputum or BAL with DFA staining or PCR.</p>
+            </div>
+        </section>
+        
+        <!-- Quiz 3 -->
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="q5">
+                <p>A 70-year-old develops fever and new infiltrate 4 days into ICU admission for COPD exacerbation. He has been on mechanical ventilation since day 2 and received ceftriaxone on admission. Local antibiogram shows 25% Pseudomonas resistance to piperacillin-tazobactam. Best empiric regimen?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q5', this, 'A')"><span class="option-letter">A.</span> Ceftriaxone + azithromycin</div>
+                    <div class="quiz-option" onclick="checkAnswer('q5', this, 'B')"><span class="option-letter">B.</span> Piperacillin-tazobactam monotherapy</div>
+                    <div class="quiz-option" onclick="checkAnswer('q5', this, 'C')"><span class="option-letter">C.</span> Meropenem + vancomycin</div>
+                    <div class="quiz-option" onclick="checkAnswer('q5', this, 'D')"><span class="option-letter">D.</span> Levofloxacin monotherapy</div>
+                    <div class="quiz-option" onclick="checkAnswer('q5', this, 'E')"><span class="option-letter">E.</span> Cefepime + ciprofloxacin</div>
+                </div>
+                <div class="quiz-feedback" id="q5-feedback"></div>
+            </div>
+            
+            <div class="quiz-question" id="q6">
+                <p>An elderly nursing home resident is witnessed aspirating during dinner. 2 hours later she has fever, tachypnea, and diffuse crackles. CXR shows bilateral lower lobe infiltrates. What is the most appropriate management?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q6', this, 'A')"><span class="option-letter">A.</span> Start piperacillin-tazobactam for aspiration pneumonia</div>
+                    <div class="quiz-option" onclick="checkAnswer('q6', this, 'B')"><span class="option-letter">B.</span> Supportive care; this is aspiration pneumonitis, not pneumonia</div>
+                    <div class="quiz-option" onclick="checkAnswer('q6', this, 'C')"><span class="option-letter">C.</span> Start clindamycin for anaerobic coverage</div>
+                    <div class="quiz-option" onclick="checkAnswer('q6', this, 'D')"><span class="option-letter">D.</span> Bronchoscopy to remove aspirated material</div>
+                    <div class="quiz-option" onclick="checkAnswer('q6', this, 'E')"><span class="option-letter">E.</span> Start corticosteroids to reduce inflammation</div>
+                </div>
+                <div class="quiz-feedback" id="q6-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Section 6: Diagnostics & Response -->
+        <section class="section">
+            <h2 class="section-title">🔍 Diagnostics & Clinical Response</h2>
+            
+            <div class="concept-card">
+                <h3>Diagnostic Studies</h3>
+                <ul>
+                    <li><strong>CXR:</strong> Confirms diagnosis; lobar vs. interstitial pattern may suggest etiology</li>
+                    <li><strong>Blood cultures:</strong> Obtain before antibiotics; positive in ~10% of CAP</li>
+                    <li><strong>Sputum culture:</strong> Quality specimen if possible; guides de-escalation</li>
+                    <li><strong>Procalcitonin:</strong> Helps distinguish bacterial (elevated) vs. viral; guides duration</li>
+                    <li><strong>Legionella/pneumococcal urinary antigens:</strong> Consider in severe CAP</li>
+                    <li><strong>Respiratory viral panel:</strong> During flu season; may avoid antibiotics if viral</li>
+                </ul>
+            </div>
+            
+            <div class="concept-card">
+                <h3>Expected Clinical Response</h3>
+                <ul>
+                    <li><strong>Clinical improvement:</strong> 48-72 hours; fever may persist 3-4 days</li>
+                    <li><strong>CXR improvement:</strong> Lags behind clinical improvement by weeks</li>
+                    <li><strong>Switch to oral:</strong> When afebrile, tolerating PO, hemodynamically stable</li>
+                    <li><strong>Duration:</strong> Minimum 5 days for CAP; 7 days for HAP/VAP</li>
+                </ul>
+            </div>
+            
+            <div class="concept-card">
+                <h3>Treatment Failure Considerations</h3>
+                <p>If not improving after 72 hours:</p>
+                <ul>
+                    <li><strong>Wrong pathogen:</strong> Resistant organism, atypical, fungal, viral, TB</li>
+                    <li><strong>Wrong diagnosis:</strong> PE, malignancy, ARDS, heart failure</li>
+                    <li><strong>Complication:</strong> Empyema, abscess, superinfection</li>
+                    <li><strong>Pharmacokinetic issues:</strong> Inadequate dosing, drug interactions</li>
+                </ul>
+            </div>
+            
+            <div class="clinical-pearl">
+                <h4>💡 Clinical Pearl</h4>
+                <p>Procalcitonin-guided therapy can safely reduce antibiotic duration. In clinically stable patients, consider stopping antibiotics when procalcitonin <0.25 ng/mL or drops ≥80% from peak. This reduces antibiotic exposure without compromising outcomes.</p>
+            </div>
+        </section>
+        
+        <!-- Quiz 4 -->
+        <div class="quiz-section">
+            <h3>🧠 Final Questions</h3>
+            <div class="quiz-question" id="q7">
+                <p>A 48-year-old HIV+ patient (CD4 78, not on ART) presents with 2 weeks of progressive dyspnea and dry cough. O2 sat 88% on room air. CXR shows subtle bilateral interstitial infiltrates. LDH is 580. What is the most likely diagnosis?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q7', this, 'A')"><span class="option-letter">A.</span> Bacterial community-acquired pneumonia</div>
+                    <div class="quiz-option" onclick="checkAnswer('q7', this, 'B')"><span class="option-letter">B.</span> Pneumocystis jirovecii pneumonia (PJP)</div>
+                    <div class="quiz-option" onclick="checkAnswer('q7', this, 'C')"><span class="option-letter">C.</span> Pulmonary tuberculosis</div>
+                    <div class="quiz-option" onclick="checkAnswer('q7', this, 'D')"><span class="option-letter">D.</span> COVID-19 pneumonia</div>
+                    <div class="quiz-option" onclick="checkAnswer('q7', this, 'E')"><span class="option-letter">E.</span> Mycobacterium avium complex (MAC)</div>
+                </div>
+                <div class="quiz-feedback" id="q7-feedback"></div>
+            </div>
+            
+            <div class="quiz-question" id="q8">
+                <p>A patient with CAP has been on ceftriaxone + azithromycin for 48 hours. She is now afebrile, O2 sat 96% on room air, tolerating oral intake, HR 78, BP 122/74. What is the most appropriate next step?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q8', this, 'A')"><span class="option-letter">A.</span> Continue IV antibiotics to complete 7 days</div>
+                    <div class="quiz-option" onclick="checkAnswer('q8', this, 'B')"><span class="option-letter">B.</span> Switch to oral antibiotics and plan discharge</div>
+                    <div class="quiz-option" onclick="checkAnswer('q8', this, 'C')"><span class="option-letter">C.</span> Repeat CXR before making any changes</div>
+                    <div class="quiz-option" onclick="checkAnswer('q8', this, 'D')"><span class="option-letter">D.</span> Add vancomycin for persistent infection</div>
+                    <div class="quiz-option" onclick="checkAnswer('q8', this, 'E')"><span class="option-letter">E.</span> Obtain CT chest to rule out empyema</div>
+                </div>
+                <div class="quiz-feedback" id="q8-feedback"></div>
+            </div>
+            
+            <div class="quiz-question" id="q9">
+                <p>A patient with CAP treated for 5 days remains febrile with worsening hypoxemia. Repeat CXR shows loculated pleural effusion. Thoracentesis reveals pH 7.0, glucose 25, WBC 45,000. What is the diagnosis and management?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q9', this, 'A')"><span class="option-letter">A.</span> Parapneumonic effusion; continue antibiotics alone</div>
+                    <div class="quiz-option" onclick="checkAnswer('q9', this, 'B')"><span class="option-letter">B.</span> Empyema; requires chest tube drainage</div>
+                    <div class="quiz-option" onclick="checkAnswer('q9', this, 'C')"><span class="option-letter">C.</span> Malignant effusion; obtain cytology</div>
+                    <div class="quiz-option" onclick="checkAnswer('q9', this, 'D')"><span class="option-letter">D.</span> Transudative effusion; optimize heart failure treatment</div>
+                    <div class="quiz-option" onclick="checkAnswer('q9', this, 'E')"><span class="option-letter">E.</span> Drug-induced pleuritis; stop antibiotics</div>
+                </div>
+                <div class="quiz-feedback" id="q9-feedback"></div>
+            </div>
+            
+            <div class="quiz-question" id="q10">
+                <p>Which statement about procalcitonin in pneumonia management is MOST accurate?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q10', this, 'A')"><span class="option-letter">A.</span> Procalcitonin >0.5 confirms bacterial pneumonia and rules out viral etiology</div>
+                    <div class="quiz-option" onclick="checkAnswer('q10', this, 'B')"><span class="option-letter">B.</span> Serial procalcitonin levels can safely guide antibiotic duration</div>
+                    <div class="quiz-option" onclick="checkAnswer('q10', this, 'C')"><span class="option-letter">C.</span> Procalcitonin should replace clinical judgment in antibiotic decisions</div>
+                    <div class="quiz-option" onclick="checkAnswer('q10', this, 'D')"><span class="option-letter">D.</span> Procalcitonin is only useful in ICU patients with severe sepsis</div>
+                    <div class="quiz-option" onclick="checkAnswer('q10', this, 'E')"><span class="option-letter">E.</span> Elevated procalcitonin mandates at least 14 days of antibiotics</div>
+                </div>
+                <div class="quiz-feedback" id="q10-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Cross-Platform Links -->
+        <div class="cross-link">
+            <div class="cross-link-icon">💬</div>
+            <div class="cross-link-content">
+                <h4>Practice Clinical Reasoning</h4>
+                <p>Work through a pneumonia case with AI-guided Socratic teaching</p>
+            </div>
+            <a href="coachdx-mentor-chat.html?case=pneumonia" class="cross-link-btn">Try Pneumonia Case →</a>
+        </div>
+        
+        <div class="cross-link" style="background: #fce7f3; border-color: #f9a8d4;">
+            <div class="cross-link-icon">🔥</div>
+            <div class="cross-link-content">
+                <h4>Related: Sepsis & Shock Module</h4>
+                <p>Understand sepsis management when pneumonia progresses</p>
+            </div>
+            <a href="mechanismdx-sepsis-shock-module.html" class="cross-link-btn" style="background: #ec4899;">Sepsis Module →</a>
+        </div>
+        
+        <!-- Module Complete -->
+        <div class="concept-card" style="background: linear-gradient(135deg, #eff6ff, #dbeafe); border-color: #93c5fd; text-align: center; padding: 32px;">
+            <h3 style="color: #1d4ed8; font-size: 20px;">🎉 Module Complete!</h3>
+            <p style="color: #1e40af; margin-bottom: 16px;">You've completed the Pneumonia & Respiratory Infections module.</p>
+            <p style="color: #1d4ed8;" id="scoreDisplay">Score: 0/0 correct (10 remaining)</p>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <p>© 2025-2026 MechanismDx · Part of the <a href="index.html">Dx Learning Ecosystem</a></p>
+        <p style="margin-top: 8px; font-size: 12px; color: #94a3b8;">Created by Lauren Fine, MD, FAAAAI · Nova Southeastern University</p>
+    </footer>
+    
+    <script>
+        const feedbackText = {
+            q1: { 
+                correct: "Correct! This is classic Legionella: subacute onset, dry cough, GI symptoms (diarrhea), headache, and CXR findings disproportionate to clinical appearance. Legionella also causes hyponatremia. Mycoplasma would be another atypical to consider but less commonly causes GI symptoms.", 
+                incorrect: "The combination of dry cough, GI symptoms (diarrhea), headache, and CXR out of proportion to clinical appearance is classic for Legionella. S. pneumoniae typically causes rapid onset with productive cough. Legionella is an 'atypical' requiring macrolide, FQ, or doxycycline." 
+            },
+            q2: { 
+                correct: "Correct! This is VAP — pneumonia developing ≥48 hours after intubation. The 2016 guidelines eliminated HCAP as a category. VAP requires coverage for MDR pathogens (Pseudomonas, MRSA, Acinetobacter) based on local antibiogram.", 
+                incorrect: "Pneumonia developing ≥48 hours after endotracheal intubation is VAP (ventilator-associated pneumonia). HAP is ≥48h after hospital admission but not on ventilator. HCAP is no longer used in current guidelines." 
+            },
+            q3: { 
+                correct: "Correct! For inpatient non-ICU CAP, standard treatment is β-lactam (ceftriaxone) + macrolide (azithromycin). This covers typical pathogens (S. pneumoniae, H. flu) and atypicals (Mycoplasma, Legionella). His COPD increases atypical risk.", 
+                incorrect: "Inpatient non-ICU CAP is treated with β-lactam + macrolide (ceftriaxone + azithromycin). Monotherapy options (azithromycin alone, amox alone) are insufficient for inpatients. Broad HAP coverage (pip-tazo, vanc) is excessive for CAP without MDR risk factors." 
+            },
+            q4: { 
+                correct: "Correct! Combination therapy ensures coverage of atypical pathogens (Mycoplasma, Legionella, Chlamydophila) that β-lactams don't cover. Additionally, macrolides may have immunomodulatory benefits that improve outcomes in severe CAP, independent of antimicrobial activity.", 
+                incorrect: "The main reason for combination therapy is atypical coverage — β-lactams don't cover Mycoplasma, Legionella, or Chlamydophila. Macrolides may also have immunomodulatory effects that improve outcomes. It's not about resistance prevention or pharmacokinetics." 
+            },
+            q5: { 
+                correct: "Correct! This is VAP with MDR risk factors (ICU, prior antibiotics, mechanical ventilation). Given high local Pseudomonas resistance to pip-tazo, use meropenem for Pseudomonas coverage + vancomycin for MRSA. Always consider local antibiogram.", 
+                incorrect: "This is VAP with MDR risk factors requiring broad coverage. Given 25% local pip-tazo resistance, meropenem is a better antipseudomonal choice. Add vancomycin for MRSA (ICU VAP, prior antibiotics). CAP coverage (ceftriaxone + azithro) is inadequate for VAP." 
+            },
+            q6: { 
+                correct: "Correct! Symptoms occurring within hours of aspiration represent aspiration PNEUMONITIS — a chemical injury from gastric contents, not bacterial infection. It's initially sterile. Supportive care is appropriate. Antibiotics are only indicated if bacterial pneumonia develops (typically 24-72h later).", 
+                incorrect: "Within 2 hours of witnessed aspiration, this is aspiration PNEUMONITIS (chemical injury), not pneumonia. It's caused by sterile gastric contents and doesn't require antibiotics initially. Bacterial aspiration pneumonia takes 24-72 hours to develop." 
+            },
+            q7: { 
+                correct: "Correct! Classic PJP presentation: HIV with CD4 <200, subacute progressive dyspnea, dry cough, hypoxemia disproportionate to CXR findings, bilateral interstitial infiltrates, and elevated LDH. Diagnosis via induced sputum or BAL for DFA/PCR.", 
+                incorrect: "This is classic PJP: HIV with CD4 <200, subacute onset (weeks), dry cough, hypoxemia out of proportion to CXR, subtle bilateral interstitial infiltrates, elevated LDH. Bacterial CAP typically has rapid onset with productive cough." 
+            },
+            q8: { 
+                correct: "Correct! She meets criteria for IV-to-PO switch: afebrile, tolerating PO, hemodynamically stable, improving clinically. Switch to oral antibiotics (e.g., amoxicillin-clavulanate or respiratory FQ) and plan discharge. CXR improvement lags behind clinical improvement.", 
+                incorrect: "This patient meets all criteria for IV-to-PO switch: afebrile, tolerating oral intake, hemodynamically stable. Switch to oral antibiotics and discharge. Don't wait for CXR improvement (lags by weeks). No indication for escalation or additional workup." 
+            },
+            q9: { 
+                correct: "Correct! Pleural fluid with pH <7.2, glucose <40, and high WBC indicates complicated parapneumonic effusion/empyema. This requires drainage (chest tube or thoracoscopy). Antibiotics alone will not resolve loculated, complicated effusions.", 
+                incorrect: "Pleural fluid pH <7.2, glucose <40 mg/dL, and high WBC = complicated parapneumonic effusion/empyema. This requires drainage. Antibiotics alone are insufficient — the pleural space is poorly penetrated and loculated fluid won't clear without drainage." 
+            },
+            q10: { 
+                correct: "Correct! Procalcitonin-guided therapy safely reduces antibiotic duration without compromising outcomes. Serial levels (stop when <0.25 or ≥80% decrease from peak) help identify when to discontinue antibiotics. It's an adjunct to, not replacement for, clinical judgment.", 
+                incorrect: "Procalcitonin's main evidence-based use is guiding antibiotic DURATION — serial levels can safely reduce antibiotic exposure. It's not a diagnostic test (can be elevated in non-bacterial conditions) and doesn't replace clinical judgment. It's useful across settings, not just ICU." 
+            }
+        };
+        
+        const correctAnswers = { q1: 'C', q2: 'C', q3: 'B', q4: 'B', q5: 'C', q6: 'B', q7: 'B', q8: 'B', q9: 'B', q10: 'B' };
+        let score = 0, answered = new Set();
+        
+        function checkAnswer(qId, el, selected) {
+            if (answered.has(qId)) return;
+            answered.add(qId);
+            const isCorrect = selected === correctAnswers[qId];
+            el.parentElement.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.classList.add('disabled');
+                const letter = opt.querySelector('.option-letter').textContent.charAt(0);
+                if (opt === el) opt.classList.add(isCorrect ? 'correct' : 'incorrect');
+                else if (letter === correctAnswers[qId]) opt.classList.add('correct');
+            });
+            const fb = document.getElementById(qId + '-feedback');
+            fb.textContent = feedbackText[qId][isCorrect ? 'correct' : 'incorrect'];
+            fb.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+            if (isCorrect) score++;
+            document.getElementById('progressFill').style.width = (answered.size / 10) * 100 + '%';
+            document.getElementById('scoreDisplay').textContent = `Score: ${score}/${answered.size} correct (${10 - answered.size} remaining)`;
+        }
+    </script>
+</body>
+</html>

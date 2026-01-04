@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Failure | MechanismDx</title>
+    <script src="../dx-scoring.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.6; }
+        
+        .header { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+        .header-inner { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: Georgia, serif; font-size: 24px; color: #1e293b; text-decoration: none; }
+        .logo span { color: #10b981; }
+        .nav { display: flex; gap: 20px; align-items: center; }
+        .nav a { color: #64748b; text-decoration: none; font-size: 14px; font-weight: 500; }
+        .nav a:hover { color: #10b981; }
+        
+        .hero { background: linear-gradient(135deg, #fdf4ff 0%, #fff 100%); border-bottom: 1px solid #e2e8f0; padding: 48px 24px; }
+        .hero-inner { max-width: 800px; margin: 0 auto; }
+        .hero-icon { font-size: 48px; margin-bottom: 16px; }
+        .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; color: #86198f; }
+        .hero p { font-size: 16px; color: #64748b; margin-bottom: 24px; }
+        .hero-meta { display: flex; gap: 24px; flex-wrap: wrap; font-size: 14px; color: #64748b; }
+        
+        .main { max-width: 800px; margin: 0 auto; padding: 48px 24px; }
+        
+        .progress-bar { background: #e2e8f0; height: 8px; border-radius: 4px; margin-bottom: 32px; overflow: hidden; }
+        .progress-fill { background: #10b981; height: 100%; width: 0%; transition: width 0.3s; }
+        
+        .section { margin-bottom: 48px; }
+        .section-title { font-size: 20px; font-weight: 600; margin-bottom: 16px; color: #1e293b; }
+        
+        .concept-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+        .concept-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #1e293b; }
+        .concept-card p { color: #475569; font-size: 14px; margin-bottom: 12px; }
+        .concept-card ul { margin-left: 20px; color: #475569; font-size: 14px; }
+        .concept-card li { margin-bottom: 6px; }
+        
+        .pathway-box { background: #fdf4ff; border: 1px solid #f0abfc; border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+        .pathway-box h3 { color: #86198f; font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+        .pathway-box p { color: #701a75; font-size: 14px; margin-bottom: 12px; }
+        .pathway-steps { display: flex; flex-direction: column; gap: 8px; }
+        .pathway-step { display: flex; align-items: center; gap: 12px; padding: 12px; background: #fff; border-radius: 8px; }
+        .step-num { width: 28px; height: 28px; background: #a855f7; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex-shrink: 0; }
+        .step-text { font-size: 14px; color: #1e293b; }
+        
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; background: #fff; border-radius: 8px; overflow: hidden; }
+        .comparison-table th { background: #f1f5f9; padding: 12px; text-align: left; font-weight: 600; border-bottom: 2px solid #e2e8f0; }
+        .comparison-table td { padding: 12px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+        
+        .clinical-pearl { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 16px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+        .clinical-pearl h4 { font-size: 14px; font-weight: 600; color: #92400e; margin-bottom: 8px; }
+        .clinical-pearl p { font-size: 14px; color: #78350f; margin: 0; }
+        
+        .danger-box { background: #fef2f2; border-left: 4px solid #dc2626; padding: 16px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+        .danger-box h4 { font-size: 14px; font-weight: 600; color: #dc2626; margin-bottom: 8px; }
+        .danger-box p { font-size: 14px; color: #7f1d1d; margin: 0; }
+        
+        .quiz-section { background: #ede9fe; border: 1px solid #c4b5fd; border-radius: 12px; padding: 24px; margin: 24px 0; }
+        .quiz-section h3 { color: #5b21b6; font-size: 16px; font-weight: 600; margin-bottom: 16px; }
+        .quiz-question { background: #fff; border-radius: 8px; padding: 20px; margin-bottom: 16px; }
+        .quiz-question > p { font-weight: 500; margin-bottom: 16px; color: #1e293b; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-option { padding: 14px 16px; border: 2px solid #e2e8f0; border-radius: 8px; cursor: pointer; font-size: 14px; transition: all 0.15s; background: #fff; }
+        .quiz-option:hover:not(.disabled) { border-color: #8b5cf6; background: #faf5ff; }
+        .quiz-option.correct { border-color: #10b981; background: #f0fdf4; }
+        .quiz-option.incorrect { border-color: #ef4444; background: #fef2f2; }
+        .quiz-option.disabled { cursor: default; opacity: 0.7; }
+        .quiz-feedback { margin-top: 16px; padding: 16px; border-radius: 8px; font-size: 14px; display: none; }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct { background: #f0fdf4; border: 1px solid #86efac; color: #166534; }
+        .quiz-feedback.incorrect { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; }
+        
+        .reference-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; margin-top: 16px; font-size: 13px; }
+        .reference-box h4 { font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #64748b; }
+        .reference-box a { color: #3b82f6; text-decoration: none; }
+        .reference-box ul { margin-left: 16px; color: #64748b; }
+        .reference-box li { margin-bottom: 4px; }
+        
+        .cross-link { background: #dbeafe; border: 1px solid #93c5fd; border-radius: 12px; padding: 20px; margin: 24px 0; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+        .cross-link-icon { font-size: 32px; }
+        .cross-link-content { flex: 1; min-width: 200px; }
+        .cross-link-content h4 { font-size: 14px; font-weight: 600; color: #1e40af; margin-bottom: 4px; }
+        .cross-link-content p { font-size: 13px; color: #3b82f6; margin: 0; }
+        .cross-link-btn { padding: 10px 16px; background: #3b82f6; color: #fff; border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: 500; }
+        
+        .footer { border-top: 1px solid #e2e8f0; padding: 32px 24px; text-align: center; color: #64748b; font-size: 13px; }
+        .footer a { color: #10b981; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">Mechanism<span>Dx</span></a>
+            <nav class="nav">
+                <a href="index.html">← All Modules</a>
+                <a href="../unified-scoreboard.html">Scoreboard</a>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-inner">
+            <div class="hero-icon">❤️</div>
+            <h1>Heart Failure</h1>
+            <p>Understanding HFrEF vs HFpEF — from neurohormonal activation to guideline-directed medical therapy and the mechanisms behind each drug class.</p>
+            <div class="hero-meta">
+                <span>📚 8 Concepts</span>
+                <span>❓ 8 MCQs</span>
+                <span>⏱ ~45 min</span>
+            </div>
+        </div>
+    </section>
+    
+    <main class="main">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        
+        <!-- Section 1: Definition and Classification -->
+        <section class="section">
+            <h2 class="section-title">🫀 Defining Heart Failure</h2>
+            
+            <div class="concept-card">
+                <h3>What Is Heart Failure?</h3>
+                <p>Heart failure is a clinical syndrome where the heart cannot pump enough blood to meet metabolic demands, or can only do so at elevated filling pressures:</p>
+                <ul>
+                    <li><strong>Forward failure</strong> — Inadequate cardiac output → fatigue, weakness, hypoperfusion</li>
+                    <li><strong>Backward failure</strong> — Elevated filling pressures → congestion (pulmonary edema, peripheral edema)</li>
+                    <li><strong>Low output vs high output</strong> — Most HF is low output; high output occurs in severe anemia, thyrotoxicosis, AV fistula</li>
+                </ul>
+            </div>
+            
+            <div class="concept-card">
+                <h3>Classification by Ejection Fraction</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>Type</th><th>EF</th><th>Mechanism</th><th>Key Features</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>HFrEF</strong></td>
+                            <td>≤40%</td>
+                            <td>Systolic dysfunction</td>
+                            <td>Dilated LV, weak contraction, responds well to GDMT</td>
+                        </tr>
+                        <tr>
+                            <td><strong>HFmrEF</strong></td>
+                            <td>41-49%</td>
+                            <td>Intermediate</td>
+                            <td>May behave like HFrEF; emerging evidence for GDMT benefit</td>
+                        </tr>
+                        <tr>
+                            <td><strong>HFpEF</strong></td>
+                            <td>≥50%</td>
+                            <td>Diastolic dysfunction</td>
+                            <td>Stiff LV, impaired relaxation, fewer proven therapies</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="clinical-pearl">
+                <h4>💡 Clinical Pearl</h4>
+                <p>EF alone doesn't determine symptoms. A patient with EF 25% may be well-compensated, while someone with EF 55% and severe diastolic dysfunction can be highly symptomatic. Always correlate EF with clinical status.</p>
+            </div>
+            
+            <div class="reference-box">
+                <h4>📖 References</h4>
+                <ul>
+                    <li>Heidenreich PA, et al. 2022 AHA/ACC/HFSA Heart Failure Guideline. <a href="https://www.ahajournals.org/doi/10.1161/CIR.0000000000001063" target="_blank">Circulation. 2022</a></li>
+                    <li>McDonagh TA, et al. 2021 ESC Heart Failure Guidelines. <a href="https://academic.oup.com/eurheartj/article/42/36/3599/6358045" target="_blank">Eur Heart J. 2021</a></li>
+                </ul>
+            </div>
+        </section>
+        
+        <!-- Section 2: Neurohormonal Activation -->
+        <section class="section">
+            <h2 class="section-title">🔄 Neurohormonal Activation</h2>
+            
+            <div class="concept-card">
+                <h3>The Compensatory Response Gone Wrong</h3>
+                <p>When cardiac output falls, the body activates compensatory mechanisms that are initially helpful but become maladaptive over time:</p>
+            </div>
+            
+            <div class="pathway-box">
+                <h3>🔄 The Vicious Cycle</h3>
+                <div class="pathway-steps">
+                    <div class="pathway-step">
+                        <div class="step-num">1</div>
+                        <div class="step-text"><strong>↓ Cardiac output</strong> → Baroreceptors sense reduced pressure</div>
+                    </div>
+                    <div class="pathway-step">
+                        <div class="step-num">2</div>
+                        <div class="step-text"><strong>↑ Sympathetic activation</strong> → Tachycardia, vasoconstriction, increased contractility</div>
+                    </div>
+                    <div class="pathway-step">
+                        <div class="step-num">3</div>
+                        <div class="step-text"><strong>↑ RAAS activation</strong> → Na/H2O retention, vasoconstriction, aldosterone</div>
+                    </div>
+                    <div class="pathway-step">
+                        <div class="step-num">4</div>
+                        <div class="step-text"><strong>Cardiac remodeling</strong> → Hypertrophy, fibrosis, dilation, worsening function</div>
+                    </div>
+                    <div class="pathway-step">
+                        <div class="step-num">5</div>
+                        <div class="step-text"><strong>Further ↓ cardiac output</strong> → Cycle repeats and worsens</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h3>Key Neurohormonal Systems</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>System</th><th>Short-term Effect</th><th>Long-term Harm</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Sympathetic</strong></td>
+                            <td>↑ HR, contractility, BP</td>
+                            <td>Myocyte toxicity, arrhythmias, remodeling</td>
+                        </tr>
+                        <tr>
+                            <td><strong>RAAS</strong></td>
+                            <td>Maintains BP and perfusion</td>
+                            <td>Fibrosis, hypertrophy, sodium retention</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ADH</strong></td>
+                            <td>Water retention</td>
+                            <td>Hyponatremia, congestion</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Natriuretic peptides</strong></td>
+                            <td>Vasodilation, natriuresis (counterregulatory)</td>
+                            <td>Overwhelmed by RAAS; used as biomarker</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="clinical-pearl">
+                <h4>💡 Clinical Pearl</h4>
+                <p>GDMT works by interrupting this neurohormonal cycle. Beta-blockers block sympathetic activation. ACEi/ARBs/ARNIs block RAAS. MRAs block aldosterone. Each targets a different piece of the maladaptive response.</p>
+            </div>
+        </section>
+        
+        <!-- Quiz 1 -->
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="q1">
+                <p>A patient with chronic HFrEF has elevated norepinephrine and angiotensin II levels. Why are these elevated hormones harmful long-term?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, false)">They cause immediate hemodynamic instability and hypotension</div>
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, true)">They promote cardiac remodeling, fibrosis, and progressive dysfunction</div>
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, false)">They deplete myocardial ATP stores causing energy failure</div>
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, false)">They directly damage coronary arteries leading to ischemia</div>
+                </div>
+                <div class="quiz-feedback" id="q1-feedback"></div>
+            </div>
+            
+            <div class="quiz-question" id="q2">
+                <p>BNP is elevated in heart failure. What is the physiologic role of natriuretic peptides?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, false)">They are inflammatory markers released during myocardial injury</div>
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, true)">They are counterregulatory hormones promoting vasodilation and natriuresis</div>
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, false)">They directly stimulate cardiac contractility to improve output</div>
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, false)">They activate the sympathetic nervous system to maintain perfusion</div>
+                </div>
+                <div class="quiz-feedback" id="q2-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Section 3: GDMT for HFrEF -->
+        <section class="section">
+            <h2 class="section-title">💊 Guideline-Directed Medical Therapy</h2>
+            
+            <div class="concept-card">
+                <h3>The Four Pillars of HFrEF Treatment</h3>
+                <p>All patients with HFrEF (EF ≤40%) should be on all four drug classes unless contraindicated:</p>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>Drug Class</th><th>Mechanism</th><th>Mortality Benefit</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>ACEi/ARB/ARNI</strong></td>
+                            <td>Block RAAS; ARNI also inhibits neprilysin</td>
+                            <td>~20-25% reduction</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Beta-blocker</strong></td>
+                            <td>Block sympathetic activation</td>
+                            <td>~30-35% reduction</td>
+                        </tr>
+                        <tr>
+                            <td><strong>MRA</strong></td>
+                            <td>Block aldosterone (anti-fibrotic)</td>
+                            <td>~30% reduction</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SGLT2i</strong></td>
+                            <td>Multiple mechanisms (natriuresis, metabolic)</td>
+                            <td>~20% reduction</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="concept-card">
+                <h3>Key Medication Notes</h3>
+                <ul>
+                    <li><strong>ARNI (sacubitril/valsartan)</strong> — Preferred over ACEi/ARB; 36-hour washout from ACEi required</li>
+                    <li><strong>Beta-blockers</strong> — Carvedilol, metoprolol succinate, or bisoprolol only; titrate slowly</li>
+                    <li><strong>MRA</strong> — Spironolactone or eplerenone; watch K+ and creatinine</li>
+                    <li><strong>SGLT2i</strong> — Dapagliflozin or empagliflozin; benefit regardless of diabetes status</li>
+                </ul>
+            </div>
+            
+            <div class="danger-box">
+                <h4>⚠️ Beta-Blocker Timing</h4>
+                <p>Never start or uptitrate beta-blockers during acute decompensation. Wait until the patient is euvolemic and stable. Starting during congestion can worsen symptoms.</p>
+            </div>
+            
+            <div class="clinical-pearl">
+                <h4>💡 Clinical Pearl</h4>
+                <p>Modern HF management emphasizes rapid initiation of all four pillars at low doses, then uptitrating, rather than sequential introduction. Getting all four on board quickly provides additive benefit.</p>
+            </div>
+        </section>
+        
+        <!-- Section 4: Diuretics and Volume Management -->
+        <section class="section">
+            <h2 class="section-title">💧 Diuretics and Volume Management</h2>
+            
+            <div class="concept-card">
+                <h3>Loop Diuretics: The Workhorses</h3>
+                <p>Loop diuretics relieve congestion but don't improve mortality:</p>
+                <ul>
+                    <li><strong>Mechanism</strong> — Block Na-K-2Cl cotransporter in thick ascending limb</li>
+                    <li><strong>Effect</strong> — Massive natriuresis and diuresis; also lose K+, Mg2+, Ca2+</li>
+                    <li><strong>Dosing</strong> — IV furosemide 2.5x more potent than oral; need adequate dose to reach threshold</li>
+                    <li><strong>Ceiling effect</strong> — Increasing dose beyond ceiling doesn't increase diuresis</li>
+                </ul>
+            </div>
+            
+            <div class="concept-card">
+                <h3>Diuretic Resistance</h3>
+                <p>When loop diuretics stop working, consider:</p>
+                <ul>
+                    <li><strong>Inadequate dosing</strong> — May need higher doses with renal impairment</li>
+                    <li><strong>Poor absorption</strong> — Gut edema reduces oral bioavailability; switch to IV</li>
+                    <li><strong>Braking phenomenon</strong> — Post-diuretic sodium reabsorption; try continuous infusion</li>
+                    <li><strong>Nephron remodeling</strong> — Distal tubule hypertrophy; add thiazide for sequential nephron blockade</li>
+                </ul>
+            </div>
+            
+            <div class="clinical-pearl">
+                <h4>💡 Clinical Pearl</h4>
+                <p>"Sequential nephron blockade" means adding a thiazide (like metolazone) to a loop diuretic. The thiazide blocks compensatory sodium reabsorption in the distal tubule, dramatically enhancing diuresis. Watch closely for electrolyte derangements.</p>
+            </div>
+        </section>
+        
+        <!-- Quiz 2 -->
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="q3">
+                <p>A patient with HFrEF and EF 30% is on lisinopril, carvedilol, and furosemide. Which medication should be added next?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, false)">Digoxin to improve cardiac contractility and symptoms</div>
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, false)">Hydralazine/nitrate combination for additional vasodilation</div>
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, true)">MRA (spironolactone) and SGLT2 inhibitor to complete GDMT</div>
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, false)">Ivabradine to further reduce heart rate below 70 bpm</div>
+                </div>
+                <div class="quiz-feedback" id="q3-feedback"></div>
+            </div>
+            
+            <div class="quiz-question" id="q4">
+                <p>A patient on high-dose IV furosemide has minimal urine output. Adding metolazone produces dramatic diuresis. What mechanism explains this?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q4', this, false)">Metolazone directly enhances loop diuretic binding affinity</div>
+                    <div class="quiz-option" onclick="checkAnswer('q4', this, true)">Metolazone blocks compensatory distal tubule sodium reabsorption</div>
+                    <div class="quiz-option" onclick="checkAnswer('q4', this, false)">Metolazone increases renal blood flow improving drug delivery</div>
+                    <div class="quiz-option" onclick="checkAnswer('q4', this, false)">Metolazone inhibits ADH action in the collecting duct</div>
+                </div>
+                <div class="quiz-feedback" id="q4-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Section 5: HFpEF -->
+        <section class="section">
+            <h2 class="section-title">📊 HFpEF: A Different Disease</h2>
+            
+            <div class="concept-card">
+                <h3>Understanding Diastolic Dysfunction</h3>
+                <p>In HFpEF, the LV contracts normally but cannot relax and fill properly:</p>
+                <ul>
+                    <li><strong>Stiff ventricle</strong> — Often from hypertension, aging, diabetes, obesity</li>
+                    <li><strong>Impaired relaxation</strong> — Active process requiring ATP; fails early in disease</li>
+                    <li><strong>Elevated filling pressures</strong> — Needed to fill the stiff ventricle → pulmonary congestion</li>
+                    <li><strong>Exercise intolerance</strong> — Filling pressures rise dramatically with exercise</li>
+                </ul>
+            </div>
+            
+            <div class="concept-card">
+                <h3>HFpEF Treatment: What Works?</h3>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th>Intervention</th><th>Evidence</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>SGLT2 inhibitors</strong></td><td>✓ Proven benefit (EMPEROR-Preserved, DELIVER)</td></tr>
+                        <tr><td><strong>Diuretics</strong></td><td>✓ Symptom relief for congestion</td></tr>
+                        <tr><td><strong>Treat comorbidities</strong></td><td>✓ HTN, AFib, CAD, obesity, diabetes</td></tr>
+                        <tr><td><strong>ACEi/ARB</strong></td><td>? Modest or no benefit in trials</td></tr>
+                        <tr><td><strong>Beta-blockers</strong></td><td>? No proven mortality benefit in HFpEF</td></tr>
+                        <tr><td><strong>MRA</strong></td><td>? May reduce hospitalizations</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="clinical-pearl">
+                <h4>💡 Clinical Pearl</h4>
+                <p>SGLT2 inhibitors are now the only drug class with clear mortality/hospitalization benefit in HFpEF. Emphasize treating underlying conditions (hypertension, diabetes, obesity, atrial fibrillation) which drive the syndrome.</p>
+            </div>
+        </section>
+        
+        <!-- Section 6: Acute Decompensation -->
+        <section class="section">
+            <h2 class="section-title">🚨 Acute Decompensated Heart Failure</h2>
+            
+            <div class="concept-card">
+                <h3>The Four Hemodynamic Profiles</h3>
+                <p>Classify patients by congestion (wet/dry) and perfusion (warm/cold):</p>
+                <table class="comparison-table">
+                    <thead>
+                        <tr><th></th><th>Warm (adequate perfusion)</th><th>Cold (low perfusion)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Dry (no congestion)</strong></td>
+                            <td>Warm & Dry — Compensated; optimize GDMT</td>
+                            <td>Cold & Dry — Needs volume, then reassess</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Wet (congested)</strong></td>
+                            <td>Warm & Wet — Most common; diuretics</td>
+                            <td>Cold & Wet — Worst prognosis; inotropes + diuretics</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="concept-card">
+                <h3>Signs of Congestion vs Low Perfusion</h3>
+                <ul>
+                    <li><strong>Congestion (wet)</strong> — JVD, edema, rales, orthopnea, weight gain, hepatomegaly</li>
+                    <li><strong>Low perfusion (cold)</strong> — Cool extremities, narrow pulse pressure, altered mental status, declining renal function, low urine output</li>
+                </ul>
+            </div>
+            
+            <div class="danger-box">
+                <h4>⚠️ Cardiogenic Shock</h4>
+                <p>Cold & wet patients with persistent hypotension despite filling pressures may need inotropes (dobutamine, milrinone) or mechanical support (IABP, Impella). Early cardiology/critical care consultation is essential.</p>
+            </div>
+        </section>
+        
+        <!-- Quiz 3 -->
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="q5">
+                <p>A patient with HF presents with JVD, peripheral edema, and rales but has warm extremities and normal mentation. What is their hemodynamic profile and treatment priority?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q5', this, true)">Warm and wet; prioritize diuresis to relieve congestion</div>
+                    <div class="quiz-option" onclick="checkAnswer('q5', this, false)">Cold and wet; needs inotropes before diuretics can work</div>
+                    <div class="quiz-option" onclick="checkAnswer('q5', this, false)">Warm and dry; optimize GDMT and discharge planning</div>
+                    <div class="quiz-option" onclick="checkAnswer('q5', this, false)">Cold and dry; needs volume resuscitation first</div>
+                </div>
+                <div class="quiz-feedback" id="q5-feedback"></div>
+            </div>
+            
+            <div class="quiz-question" id="q6">
+                <p>A patient with HFpEF (EF 60%) is admitted with dyspnea and pulmonary edema. Which medication has the strongest evidence for long-term benefit?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q6', this, false)">Metoprolol succinate for heart rate and remodeling benefit</div>
+                    <div class="quiz-option" onclick="checkAnswer('q6', this, false)">Lisinopril for RAAS blockade and afterload reduction</div>
+                    <div class="quiz-option" onclick="checkAnswer('q6', this, true)">Empagliflozin (SGLT2i) based on EMPEROR-Preserved trial</div>
+                    <div class="quiz-option" onclick="checkAnswer('q6', this, false)">Sacubitril/valsartan (ARNI) as in HFrEF treatment</div>
+                </div>
+                <div class="quiz-feedback" id="q6-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Section 7: Device Therapy -->
+        <section class="section">
+            <h2 class="section-title">⚡ Device Therapy</h2>
+            
+            <div class="concept-card">
+                <h3>ICD for Primary Prevention</h3>
+                <p>Implantable cardioverter-defibrillator prevents sudden cardiac death:</p>
+                <ul>
+                    <li><strong>Indication</strong> — EF ≤35% despite ≥3 months of optimal GDMT</li>
+                    <li><strong>Mechanism</strong> — Detects and terminates ventricular arrhythmias</li>
+                    <li><strong>Life expectancy</strong> — Expected survival &gt;1 year required for benefit</li>
+                </ul>
+            </div>
+            
+            <div class="concept-card">
+                <h3>CRT for Dyssynchrony</h3>
+                <p>Cardiac resynchronization therapy improves coordination of contraction:</p>
+                <ul>
+                    <li><strong>Indication</strong> — EF ≤35% + LBBB with QRS ≥150ms + NYHA II-IV symptoms</li>
+                    <li><strong>Mechanism</strong> — Biventricular pacing resynchronizes LV contraction</li>
+                    <li><strong>Benefit</strong> — Improves EF, symptoms, and survival in appropriate patients</li>
+                    <li><strong>CRT-D</strong> — Combines CRT with ICD function</li>
+                </ul>
+            </div>
+            
+            <div class="clinical-pearl">
+                <h4>💡 Clinical Pearl</h4>
+                <p>CRT works best with true LBBB and QRS ≥150ms. The benefit is less clear with non-LBBB patterns or narrower QRS. Always optimize GDMT first — some patients improve EF enough to no longer qualify for devices.</p>
+            </div>
+        </section>
+        
+        <!-- Quiz 4 -->
+        <div class="quiz-section">
+            <h3>🧠 Check Your Understanding</h3>
+            <div class="quiz-question" id="q7">
+                <p>A patient has HFrEF with EF 30% on optimal GDMT for 4 months. ECG shows LBBB with QRS 160ms. Which device is most appropriate?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q7', this, false)">ICD only — provides mortality benefit from preventing arrhythmias</div>
+                    <div class="quiz-option" onclick="checkAnswer('q7', this, true)">CRT-D — addresses both dyssynchrony (LBBB) and arrhythmia risk</div>
+                    <div class="quiz-option" onclick="checkAnswer('q7', this, false)">Pacemaker only — treats the conduction abnormality shown on ECG</div>
+                    <div class="quiz-option" onclick="checkAnswer('q7', this, false)">No device — continue GDMT and reassess EF in 6 more months</div>
+                </div>
+                <div class="quiz-feedback" id="q7-feedback"></div>
+            </div>
+            
+            <div class="quiz-question" id="q8">
+                <p>Why is a 3-month waiting period on GDMT required before ICD implantation for primary prevention?</p>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q8', this, false)">Insurance companies require documentation of medical therapy first</div>
+                    <div class="quiz-option" onclick="checkAnswer('q8', this, true)">EF may improve with GDMT, potentially eliminating the need for ICD</div>
+                    <div class="quiz-option" onclick="checkAnswer('q8', this, false)">ICD therapy is less effective in patients not on GDMT</div>
+                    <div class="quiz-option" onclick="checkAnswer('q8', this, false)">The waiting period allows arrhythmia risk to stabilize</div>
+                </div>
+                <div class="quiz-feedback" id="q8-feedback"></div>
+            </div>
+        </div>
+        
+        <!-- Cross-Platform Links -->
+        <div class="cross-link">
+            <div class="cross-link-icon">💬</div>
+            <div class="cross-link-content">
+                <h4>Practice Your Clinical Reasoning</h4>
+                <p>Apply what you've learned with a dyspnea case</p>
+            </div>
+            <a href="../CoachDx/mentor-chat.html?case=dyspnea" class="cross-link-btn">Try Dyspnea Case →</a>
+        </div>
+        
+        <!-- Module Complete -->
+        <div class="concept-card" style="background: linear-gradient(135deg, #fdf4ff, #f5d0fe); border-color: #e879f9; text-align: center; padding: 32px;">
+            <h3 style="color: #86198f; font-size: 20px;">🎉 Module Complete!</h3>
+            <p style="color: #a21caf; margin-bottom: 16px;">You've completed the Heart Failure module.</p>
+            <p style="color: #86198f;" id="scoreDisplay">Score: 0/0 correct (8 remaining)</p>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <p>© 2025 MechanismDx · Part of the <a href="../index.html">Dx Suite</a></p>
+    </footer>
+    
+    <script>
+        const feedbackText = {
+            q1: { correct: "Correct! Chronic neurohormonal activation causes myocyte hypertrophy, apoptosis, fibrosis, and progressive ventricular remodeling — the hallmark of HF progression. GDMT interrupts these pathways.", incorrect: "These hormones initially maintain perfusion but long-term cause structural remodeling: hypertrophy, fibrosis, dilation. This is why GDMT targeting these systems improves outcomes." },
+            q2: { correct: "Correct! BNP and ANP are counterregulatory hormones released in response to wall stress. They cause vasodilation and natriuresis, attempting to unload the heart. They're overwhelmed by RAAS in HF.", incorrect: "Natriuretic peptides are the body's counterregulatory response to volume overload — they promote vasodilation and sodium excretion. They're used as biomarkers because they rise with wall stress." },
+            q3: { correct: "Correct! This patient is missing two of the four pillars of GDMT. Modern guidelines emphasize rapid initiation of all four classes (ACEi/ARB/ARNI, BB, MRA, SGLT2i) for additive mortality benefit.", incorrect: "Current guidelines recommend all four pillars of GDMT: ACEi/ARB/ARNI, beta-blocker, MRA, and SGLT2i. This patient needs MRA and SGLT2i added to complete GDMT." },
+            q4: { correct: "Correct! With chronic loop diuretic use, the distal tubule hypertrophies and increases sodium reabsorption. Thiazides block this compensatory mechanism, producing synergistic diuresis.", incorrect: "Sequential nephron blockade works because chronic loop diuretic use causes distal tubule hypertrophy with increased Na reabsorption. Thiazides block this compensation." },
+            q5: { correct: "Correct! Warm extremities and normal mentation indicate adequate perfusion (warm). JVD, edema, and rales indicate congestion (wet). Warm & wet is the most common profile — treat with diuretics.", incorrect: "Assess perfusion (warm/cold) and congestion (wet/dry) separately. This patient has good perfusion but is congested — warm & wet — and needs diuresis." },
+            q6: { correct: "Correct! SGLT2 inhibitors are the only drug class with proven mortality/hospitalization benefit in HFpEF (EMPEROR-Preserved, DELIVER trials). Traditional HFrEF drugs have not shown clear benefit.", incorrect: "Unlike HFrEF, traditional GDMT has not shown clear benefit in HFpEF. SGLT2 inhibitors (empagliflozin, dapagliflozin) are now the only class with proven outcomes benefit." },
+            q7: { correct: "Correct! With EF ≤35%, LBBB, and QRS ≥150ms on optimal GDMT, this patient meets criteria for CRT. Adding ICD function (CRT-D) addresses both dyssynchrony and sudden death risk.", incorrect: "This patient meets criteria for CRT (EF ≤35%, LBBB, QRS ≥150ms). CRT-D combines resynchronization with defibrillator protection — addressing both issues." },
+            q8: { correct: "Correct! GDMT can significantly improve EF in some patients. Waiting 3 months allows time for improvement — some patients will no longer meet ICD criteria, avoiding unnecessary device implantation.", incorrect: "Many patients experience EF improvement with GDMT. The waiting period identifies responders whose EF improves above the 35% threshold, avoiding unnecessary device implantation." }
+        };
+        
+        let correctAnswers = 0;
+        let answeredQuestions = new Set();
+        
+        function checkAnswer(questionId, element, isCorrect) {
+            if (answeredQuestions.has(questionId)) return;
+            answeredQuestions.add(questionId);
+            
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.classList.add('disabled');
+                if (opt === element) opt.classList.add(isCorrect ? 'correct' : 'incorrect');
+            });
+            
+            if (!isCorrect) {
+                options.forEach(opt => {
+                    if (opt.onclick.toString().includes('true')) opt.classList.add('correct');
+                });
+            }
+            
+            const feedback = document.getElementById(questionId + '-feedback');
+            feedback.textContent = isCorrect ? feedbackText[questionId].correct : feedbackText[questionId].incorrect;
+            feedback.classList.add('show', isCorrect ? 'correct' : 'incorrect');
+            
+            if (isCorrect) {
+                correctAnswers++;
+                if (typeof DxScoring !== 'undefined') DxScoring.addXP(25, 'MECH');
+            }
+            
+            document.getElementById('progressFill').style.width = (answeredQuestions.size / 8) * 100 + '%';
+            document.getElementById('scoreDisplay').textContent = `Score: ${correctAnswers}/${answeredQuestions.size} correct (${8 - answeredQuestions.size} remaining)`;
+        }
+    </script>
+</body>
+</html>
