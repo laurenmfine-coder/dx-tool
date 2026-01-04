@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MechanismDx - GI Bleeding</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a; --bg-card: #1e293b; --bg-subtle: #334155;
+            --text-primary: #f1f5f9; --text-secondary: #94a3b8; --text-muted: #64748b;
+            --accent: #f97316; --accent-light: #fb923c;
+            --success: #22c55e; --warning: #f59e0b; --danger: #ef4444;
+            --border: #475569; --radius: 12px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text-primary); line-height: 1.6; }
+        .header { background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+        .header-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 20px; font-weight: 700; color: var(--accent); }
+        .module-header { background: linear-gradient(135deg, #c2410c 0%, #f97316 100%); padding: 48px 24px; }
+        .module-header-inner { max-width: 1200px; margin: 0 auto; }
+        .module-title { display: flex; align-items: center; gap: 20px; margin-bottom: 16px; }
+        .module-icon { font-size: 48px; }
+        .module-title h1 { font-size: 32px; font-weight: 700; }
+        .module-subtitle { font-size: 18px; color: rgba(255,255,255,0.8); }
+        .module-meta { display: flex; gap: 24px; margin-top: 24px; }
+        .meta-item { font-size: 14px; color: rgba(255,255,255,0.7); }
+        .main { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+        .phase-nav { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; }
+        .phase-btn { padding: 12px 20px; background: var(--bg-card); border: 2px solid var(--border); border-radius: 8px; color: var(--text-secondary); font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+        .phase-btn:hover { border-color: var(--accent); color: var(--text-primary); }
+        .phase-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+        .content-grid { display: grid; grid-template-columns: 1fr 320px; gap: 24px; }
+        @media (max-width: 900px) { .content-grid { grid-template-columns: 1fr; } }
+        .questions-panel { display: flex; flex-direction: column; gap: 20px; }
+        .question-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+        .question-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .q-number { display: flex; align-items: center; gap: 10px; }
+        .q-badge { width: 28px; height: 28px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+        .q-type { font-size: 12px; color: var(--text-muted); }
+        .q-status { font-size: 11px; padding: 4px 10px; border-radius: 12px; font-weight: 600; }
+        .q-status.unanswered { background: var(--bg-subtle); color: var(--text-muted); }
+        .q-status.correct { background: rgba(34,197,94,0.2); color: var(--success); }
+        .q-status.incorrect { background: rgba(239,68,68,0.2); color: var(--danger); }
+        .question-body { padding: 20px; }
+        .question-stem { font-size: 15px; line-height: 1.7; margin-bottom: 20px; }
+        .vignette { background: var(--bg-subtle); padding: 16px; border-radius: 8px; margin-bottom: 16px; border-left: 3px solid var(--accent); }
+        .vignette-label { font-size: 10px; font-weight: 600; text-transform: uppercase; color: var(--accent-light); margin-bottom: 8px; }
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; background: var(--bg-subtle); border: 2px solid transparent; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+        .option:hover { background: var(--bg-dark); border-color: var(--border); }
+        .option.selected { border-color: var(--accent); background: rgba(249,115,22,0.1); }
+        .option.correct { border-color: var(--success); background: rgba(34,197,94,0.1); }
+        .option.incorrect { border-color: var(--danger); background: rgba(239,68,68,0.1); }
+        .option-letter { width: 24px; height: 24px; border: 2px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex-shrink: 0; }
+        .option.selected .option-letter { background: var(--accent); border-color: var(--accent); color: white; }
+        .option.correct .option-letter { background: var(--success); border-color: var(--success); color: white; }
+        .option.incorrect .option-letter { background: var(--danger); border-color: var(--danger); color: white; }
+        .option-text { font-size: 14px; }
+        .submit-btn { width: 100%; padding: 14px; background: var(--accent); color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 16px; }
+        .submit-btn:disabled { background: var(--bg-subtle); color: var(--text-muted); cursor: not-allowed; }
+        .explanation { margin-top: 20px; padding: 20px; background: var(--bg-dark); border-radius: 8px; display: none; }
+        .explanation.show { display: block; }
+        .explanation h4 { font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+        .explanation p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(249,115,22,0.1), rgba(194,65,12,0.1)); border: 1px solid var(--accent); border-radius: 8px; padding: 16px; margin-top: 16px; }
+        .mechanism-title { font-size: 12px; font-weight: 600; color: var(--accent-light); margin-bottom: 8px; }
+        .mechanism-pathway { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; }
+        .pathway-step { background: var(--bg-card); padding: 8px 12px; border-radius: 6px; font-size: 12px; border: 1px solid var(--border); }
+        .pathway-arrow { color: var(--accent); font-weight: bold; }
+        .sidebar { display: flex; flex-direction: column; gap: 20px; }
+        .sidebar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+        .sidebar-title { font-size: 14px; font-weight: 600; margin-bottom: 16px; }
+        .location-list { display: flex; flex-direction: column; gap: 8px; }
+        .location-item { display: flex; justify-content: space-between; padding: 8px 12px; background: var(--bg-subtle); border-radius: 6px; font-size: 12px; }
+        .location-name { font-weight: 500; }
+        .location-pct { color: var(--accent); }
+    </style>
+</head>
+<body>
+    <header class="header"><div class="header-inner"><div class="logo">🩸 MechanismDx</div></div></header>
+    <div class="module-header">
+        <div class="module-header-inner">
+            <div class="module-title">
+                <span class="module-icon">🩸</span>
+                <div><h1>GI Bleeding</h1>
+                <p class="module-subtitle">Upper vs lower, variceal vs non-variceal, risk stratification and management</p></div>
+            </div>
+            <div class="module-meta">
+                <div class="meta-item">📚 20 Questions</div>
+                <div class="meta-item">⏱️ ~45 minutes</div>
+            </div>
+        </div>
+    </div>
+    <main class="main">
+        <div class="phase-nav">
+            <button class="phase-btn active" onclick="switchPhase(1)">Phase 1: Upper GI Bleeding</button>
+            <button class="phase-btn" onclick="switchPhase(2)">Phase 2: Variceal Bleeding</button>
+            <button class="phase-btn" onclick="switchPhase(3)">Phase 3: Lower GI Bleeding</button>
+            <button class="phase-btn" onclick="switchPhase(4)">Phase 4: Risk Stratification</button>
+        </div>
+        <div class="content-grid">
+            <div class="questions-panel" id="questionsPanel"></div>
+            <aside class="sidebar">
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">📍 Upper GIB Causes</h3>
+                    <div class="location-list">
+                        <div class="location-item"><span class="location-name">Peptic Ulcer Disease</span><span class="location-pct">35-50%</span></div>
+                        <div class="location-item"><span class="location-name">Erosive Disease</span><span class="location-pct">20-30%</span></div>
+                        <div class="location-item"><span class="location-name">Varices</span><span class="location-pct">10-20%</span></div>
+                        <div class="location-item"><span class="location-name">Mallory-Weiss</span><span class="location-pct">5-10%</span></div>
+                        <div class="location-item"><span class="location-name">Malignancy</span><span class="location-pct">2-5%</span></div>
+                    </div>
+                </div>
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">📍 Lower GIB Causes</h3>
+                    <div class="location-list">
+                        <div class="location-item"><span class="location-name">Diverticulosis</span><span class="location-pct">30-40%</span></div>
+                        <div class="location-item"><span class="location-name">Hemorrhoids</span><span class="location-pct">10-20%</span></div>
+                        <div class="location-item"><span class="location-name">Ischemic Colitis</span><span class="location-pct">10-15%</span></div>
+                        <div class="location-item"><span class="location-name">Angiodysplasia</span><span class="location-pct">5-10%</span></div>
+                        <div class="location-item"><span class="location-name">Neoplasm</span><span class="location-pct">5-10%</span></div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+    <script>
+const questionData = {
+    1: [
+        { id:'q1_1', type:'Clinical', stem:'Which clinical feature most reliably distinguishes upper from lower GI bleeding?', options:[
+            {letter:'A',text:'Bright red blood per rectum',correct:false},
+            {letter:'B',text:'Melena (black tarry stool)',correct:true},
+            {letter:'C',text:'Hemodynamic instability',correct:false},
+            {letter:'D',text:'Abdominal pain',correct:false}
+        ], explanation:'Melena requires ~150mL blood exposed to gastric acid and bacteria for 8+ hours - strongly suggests upper GI source. BRBPR can occur with brisk upper GIB. Hematochezia is usually lower but can be upper with massive bleeding.', mechanism:{title:'Melena Formation',steps:['Blood in upper GI tract','→ HCl + bacterial degradation','→ Heme → Hematin (black)','→ Requires 8+ hours transit','= Melena (upper GIB marker)']}},
+        { id:'q1_2', type:'Mechanism', stem:'Peptic ulcer bleeding occurs when ulceration erodes into:', options:[
+            {letter:'A',text:'Mucosa only',correct:false},
+            {letter:'B',text:'Submucosa with vessel erosion',correct:true},
+            {letter:'C',text:'Serosa',correct:false},
+            {letter:'D',text:'Adjacent organs',correct:false}
+        ], explanation:'Ulcers bleed when they erode through mucosa into submucosa where blood vessels reside. Posterior duodenal ulcers erode into gastroduodenal artery; lesser curve gastric ulcers into left gastric artery.', mechanism:{title:'Ulcer Bleeding',steps:['Acid/pepsin damage mucosa','→ Ulcer deepens to submucosa','→ Erodes into vessel','→ Posterior duodenal → GDA','→ Lesser curve gastric → Left gastric a.']}},
+        { id:'q1_3', type:'Pharmacology', stem:'IV PPI in upper GIB works by:', options:[
+            {letter:'A',text:'Directly promoting clot formation',correct:false},
+            {letter:'B',text:'Raising gastric pH to stabilize clots',correct:true},
+            {letter:'C',text:'Causing vasoconstriction',correct:false},
+            {letter:'D',text:'Inhibiting pepsin secretion directly',correct:false}
+        ], explanation:'Acid dissolves clots (pepsin active at low pH). PPI raises pH >6, which stabilizes fibrin clots and allows platelet aggregation. High-dose IV PPI (80mg bolus + 8mg/hr) reduces rebleeding after endoscopic therapy for high-risk stigmata.', mechanism:{title:'PPI Mechanism in GIB',steps:['PPI inhibits H+/K+-ATPase','→ ↓Gastric acid secretion','→ pH rises >6','→ Pepsin inactive, clots stable','→ ↓Rebleeding risk']}},
+        { id:'q1_4', type:'Clinical', vignette:'A 65-year-old on aspirin and naproxen presents with melena. EGD shows clean-based ulcer.', stem:'What is the rebleeding risk for a clean-based ulcer?', options:[
+            {letter:'A',text:'<5%',correct:true},
+            {letter:'B',text:'20-30%',correct:false},
+            {letter:'C',text:'40-50%',correct:false},
+            {letter:'D',text:'>50%',correct:false}
+        ], explanation:'Forrest classification guides management: Clean base (Forrest III) has <5% rebleeding - no endoscopic therapy needed. Visible vessel (IIa) = 50% rebleeding, needs therapy. Active bleeding (Ia/Ib) = highest risk.', mechanism:{title:'Forrest Classification',steps:['Ia (spurting): 90% rebleed','Ib (oozing): 30% rebleed','IIa (visible vessel): 50%','IIb (adherent clot): 25%','IIc (flat spot): 10%','III (clean base): <5%']}},
+        { id:'q1_5', type:'Clinical', stem:'A Mallory-Weiss tear typically occurs at which location?', options:[
+            {letter:'A',text:'Pylorus',correct:false},
+            {letter:'B',text:'Gastroesophageal junction',correct:true},
+            {letter:'C',text:'Duodenal bulb',correct:false},
+            {letter:'D',text:'Gastric antrum',correct:false}
+        ], explanation:'Mallory-Weiss tears occur at the GE junction from forceful vomiting/retching. The sudden increase in intragastric pressure causes mucosal laceration. Classic history: retching followed by hematemesis. Usually self-limited.', mechanism:{title:'Mallory-Weiss Mechanism',steps:['Forceful vomiting/retching','→ ↑Intragastric pressure','→ GE junction = weak point','→ Longitudinal mucosal tear','→ Usually self-limited bleeding']}}
+    ],
+    2: [
+        { id:'q2_1', type:'Mechanism', stem:'Portal hypertension causes esophageal varices by:', options:[
+            {letter:'A',text:'Increased hepatic artery flow',correct:false},
+            {letter:'B',text:'Portosystemic shunting through collaterals',correct:true},
+            {letter:'C',text:'Decreased splenic vein pressure',correct:false},
+            {letter:'D',text:'Direct esophageal artery dilation',correct:false}
+        ], explanation:'Portal HTN (>10-12 mmHg gradient) forces blood through portosystemic collaterals. Left gastric vein → esophageal submucosal veins = varices. These thin-walled veins dilate under high pressure and are prone to rupture.', mechanism:{title:'Variceal Formation',steps:['Cirrhosis → Portal HTN','→ HVPG >10-12 mmHg','→ Portosystemic shunting','→ Left gastric → Esophageal veins','→ Varices form and dilate']}},
+        { id:'q2_2', type:'Pharmacology', stem:'Octreotide reduces variceal bleeding by:', options:[
+            {letter:'A',text:'Direct vasoconstriction of varices',correct:false},
+            {letter:'B',text:'↓Splanchnic blood flow → ↓Portal pressure',correct:true},
+            {letter:'C',text:'Enhancing clot formation',correct:false},
+            {letter:'D',text:'Inhibiting gastric acid',correct:false}
+        ], explanation:'Octreotide (somatostatin analog) inhibits vasodilatory hormones (glucagon), causing splanchnic vasoconstriction. This reduces portal inflow and pressure. Start immediately in suspected variceal bleed; continue 3-5 days.', mechanism:{title:'Octreotide Mechanism',steps:['Inhibits glucagon, VIP','→ Splanchnic vasoconstriction','→ ↓Portal venous inflow','→ ↓Portal pressure','→ ↓Variceal bleeding']}},
+        { id:'q2_3', type:'Clinical', stem:'First-line endoscopic therapy for acute esophageal variceal bleeding is:', options:[
+            {letter:'A',text:'Epinephrine injection',correct:false},
+            {letter:'B',text:'Endoscopic band ligation (EVL)',correct:true},
+            {letter:'C',text:'Thermal coagulation',correct:false},
+            {letter:'D',text:'Hemoclip placement',correct:false}
+        ], explanation:'EVL is preferred over sclerotherapy for acute variceal bleeding - lower rebleeding rate, fewer complications. Bands are placed starting at GE junction, working upward. Combine with vasoactive drugs (octreotide) and antibiotics.', mechanism:{title:'Variceal Bleed Management',steps:['Resuscitate (avoid over-transfusion)','+ Vasoactive drug (octreotide)','+ Antibiotics (ceftriaxone)','+ EGD within 12 hours','+ EVL (band ligation)']}},
+        { id:'q2_4', type:'Clinical', vignette:'A cirrhotic patient has uncontrolled variceal bleeding despite EVL twice. BP 80/50 despite transfusion.', stem:'What is the next step?', options:[
+            {letter:'A',text:'Repeat EVL',correct:false},
+            {letter:'B',text:'Balloon tamponade (Blakemore tube) as bridge to TIPS',correct:true},
+            {letter:'C',text:'Start beta-blocker',correct:false},
+            {letter:'D',text:'Discharge with PPI',correct:false}
+        ], explanation:'Rescue therapy for refractory variceal bleeding: balloon tamponade (temporizing measure, max 24h) as bridge to TIPS (transjugular intrahepatic portosystemic shunt). TIPS creates portosystemic shunt, reducing portal pressure.', mechanism:{title:'Refractory Variceal Bleed',steps:['Failed EVL × 2','→ Balloon tamponade (bridge)','→ TIPS within 24-72 hours','→ Shunt ↓portal pressure','→ Consider early TIPS in high-risk']}},
+        { id:'q2_5', type:'Pharmacology', stem:'Non-selective beta-blockers (propranolol, nadolol) prevent variceal bleeding by:', options:[
+            {letter:'A',text:'↓Heart rate only',correct:false},
+            {letter:'B',text:'β1 blockade ↓CO + β2 blockade → splanchnic vasoconstriction',correct:true},
+            {letter:'C',text:'Direct variceal sclerosis',correct:false},
+            {letter:'D',text:'Increasing hepatic blood flow',correct:false}
+        ], explanation:'NSBBs work via two mechanisms: β1 blockade decreases cardiac output; β2 blockade causes unopposed α-mediated splanchnic vasoconstriction. Both reduce portal pressure. Goal: ↓HR 25% or to 55-60 bpm.', mechanism:{title:'NSBB in Portal HTN',steps:['β1 blockade → ↓Cardiac output','β2 blockade → Splanchnic vasoconstriction','→ ↓Portal inflow','→ ↓Portal pressure','→ ↓Variceal bleeding risk']}}
+    ],
+    3: [
+        { id:'q3_1', type:'Mechanism', stem:'Diverticular bleeding typically arises from:', options:[
+            {letter:'A',text:'Mucosal inflammation',correct:false},
+            {letter:'B',text:'Erosion of vasa recta at diverticular dome',correct:true},
+            {letter:'C',text:'Malignant transformation',correct:false},
+            {letter:'D',text:'Venous congestion',correct:false}
+        ], explanation:'Vasa recta (arterial branches) drape over diverticular domes and are exposed to injury. Unlike diverticulitis (inflammation), diverticular bleeding is typically painless and arterial in nature. Usually self-limited but can be massive.', mechanism:{title:'Diverticular Bleeding',steps:['Vasa recta course over diverticulum','→ Arterial wall exposed','→ Mechanical injury/erosion','→ Arterial bleeding (painless)','→ Usually self-limited (80%)']}},
+        { id:'q3_2', type:'Clinical', stem:'The most common cause of significant lower GI bleeding in adults over 60 is:', options:[
+            {letter:'A',text:'Hemorrhoids',correct:false},
+            {letter:'B',text:'Diverticulosis',correct:true},
+            {letter:'C',text:'Colon cancer',correct:false},
+            {letter:'D',text:'IBD',correct:false}
+        ], explanation:'Diverticulosis causes 30-40% of significant LGIB in elderly. Though hemorrhoids are common, they rarely cause significant bleeding. Angiodysplasia is second most common in elderly. Cancer causes occult bleeding more than acute hemorrhage.', mechanism:{title:'LGIB by Age',steps:['<40: Hemorrhoids, IBD, infectious','40-60: Diverticulosis, neoplasm','> 60: Diverticulosis (#1), angiodysplasia','Painless hematochezia = Diverticula','RLQ = usually right-sided diverticula']}},
+        { id:'q3_3', type:'Clinical', vignette:'A 75-year-old presents with painless maroon stools. Colonoscopy shows arteriovenous malformations in the cecum.', stem:'What is the diagnosis?', options:[
+            {letter:'A',text:'Diverticulosis',correct:false},
+            {letter:'B',text:'Angiodysplasia',correct:true},
+            {letter:'C',text:'Ischemic colitis',correct:false},
+            {letter:'D',text:'Colon cancer',correct:false}
+        ], explanation:'Angiodysplasia (AVM) are degenerative vascular ectasias, most common in cecum/right colon. Associated with aortic stenosis (Heyde syndrome) and renal failure. Appear as cherry-red, fern-like lesions. Treat with APC or cautery.', mechanism:{title:'Angiodysplasia',steps:['Degenerative mucosal AVMs','→ Most common: Cecum, R colon','→ Associations: AS (Heyde), CKD','→ Cherry-red lesions on colonoscopy','→ Treat: APC, cautery']}},
+        { id:'q3_4', type:'Mechanism', stem:'Ischemic colitis typically affects which area of the colon?', options:[
+            {letter:'A',text:'Rectum',correct:false},
+            {letter:'B',text:'Watershed areas (splenic flexure, rectosigmoid)',correct:true},
+            {letter:'C',text:'Cecum only',correct:false},
+            {letter:'D',text:'Transverse colon only',correct:false}
+        ], explanation:'Watershed areas (splenic flexure = Griffiths point; rectosigmoid = Sudeck point) have dual blood supply and are vulnerable to hypoperfusion. Ischemic colitis presents with crampy pain → bloody diarrhea. Rectum is spared (dual supply).', mechanism:{title:'Ischemic Colitis',steps:['Watershed areas vulnerable','Splenic flexure (Griffiths point)','Rectosigmoid (Sudeck point)','→ Hypoperfusion → Ischemia','→ Crampy pain → Bloody diarrhea']}},
+        { id:'q3_5', type:'Clinical', stem:'In acute lower GI bleeding, when is colonoscopy typically performed?', options:[
+            {letter:'A',text:'Immediately without preparation',correct:false},
+            {letter:'B',text:'After adequate bowel preparation, within 24 hours',correct:true},
+            {letter:'C',text:'Only if bleeding stops spontaneously',correct:false},
+            {letter:'D',text:'After 1 week of observation',correct:false}
+        ], explanation:'Colonoscopy within 24 hours after rapid bowel prep is standard for acute LGIB. Prep improves visualization and allows therapeutic intervention. Unprepared colonoscopy has poor diagnostic yield. CTA can localize active bleeding for angiography.', mechanism:{title:'LGIB Approach',steps:['Resuscitate and stabilize','→ Rapid bowel prep (4-6L PEG)','→ Colonoscopy within 24 hours','→ If unstable: CTA to localize','→ Angiography ± embolization if active']}}
+    ],
+    4: [
+        { id:'q4_1', type:'Clinical', stem:'The Glasgow-Blatchford Score (GBS) is used to:', options:[
+            {letter:'A',text:'Predict mortality from GI bleeding',correct:false},
+            {letter:'B',text:'Identify low-risk patients who may not need admission/endoscopy',correct:true},
+            {letter:'C',text:'Guide endoscopic therapy choice',correct:false},
+            {letter:'D',text:'Determine anticoagulation reversal',correct:false}
+        ], explanation:'GBS uses BUN, hemoglobin, BP, HR, melena, syncope, liver disease, and heart failure. Score of 0-1 identifies very low-risk patients who may be managed as outpatients. Higher scores predict need for intervention.', mechanism:{title:'Glasgow-Blatchford Score',steps:['Components: BUN, Hgb, SBP, HR','+ Melena, syncope, liver/heart disease','Score 0-1: Very low risk','→ May not need admission','→ Outpatient EGD possible']}},
+        { id:'q4_2', type:'Clinical', stem:'The Rockall Score differs from Glasgow-Blatchford by including:', options:[
+            {letter:'A',text:'Pre-endoscopy variables only',correct:false},
+            {letter:'B',text:'Endoscopic findings (stigmata of bleeding, diagnosis)',correct:true},
+            {letter:'C',text:'Only hemoglobin and BUN',correct:false},
+            {letter:'D',text:'Coagulation parameters',correct:false}
+        ], explanation:'Rockall has pre-endoscopy (age, shock, comorbidity) and post-endoscopy (diagnosis, stigmata) components. It predicts rebleeding and mortality. GBS is pre-endoscopy only and identifies low-risk for discharge.', mechanism:{title:'Rockall vs GBS',steps:['GBS: Pre-endoscopy only','→ Identifies low-risk for outpatient','Rockall: Pre + Post-endoscopy','→ Includes stigmata, diagnosis','→ Predicts rebleeding, mortality']}},
+        { id:'q4_3', type:'Clinical', vignette:'A patient with upper GIB has hemoglobin of 7.2 g/dL, BP 95/60, HR 110.', stem:'What is the transfusion threshold for this patient?', options:[
+            {letter:'A',text:'Transfuse to Hgb >10 g/dL',correct:false},
+            {letter:'B',text:'Restrictive: Target Hgb 7-9 g/dL',correct:true},
+            {letter:'C',text:'No transfusion needed',correct:false},
+            {letter:'D',text:'Transfuse only if actively bleeding',correct:false}
+        ], explanation:'Restrictive transfusion (target Hgb 7-9) improves outcomes in upper GIB vs liberal (target >9). Exception: active coronary ischemia or severe cardiovascular disease may warrant higher threshold (8-10). Over-transfusion may increase portal pressure and rebleeding in varices.', mechanism:{title:'Transfusion Strategy',steps:['Restrictive: Target Hgb 7-9 g/dL','→ Improves survival vs liberal','Exception: Active ACS → target 8-10','Varices: Avoid over-transfusion','→ ↑Volume → ↑Portal pressure']}},
+        { id:'q4_4', type:'Clinical', stem:'When should anticoagulation be resumed after GI bleeding?', options:[
+            {letter:'A',text:'Never - permanent discontinuation',correct:false},
+            {letter:'B',text:'Individualized: Often 7-15 days if high thrombotic risk',correct:true},
+            {letter:'C',text:'Immediately after hemostasis',correct:false},
+            {letter:'D',text:'Only after repeat endoscopy',correct:false}
+        ], explanation:'Decision is individualized balancing thrombotic risk (AFib with high CHADS₂-VASc, mechanical valve, recent VTE) vs rebleeding risk. Often resume in 7-15 days. High thrombotic risk may resume earlier (3-7 days) with bridge if needed.', mechanism:{title:'Resuming Anticoagulation',steps:['Balance thrombotic vs bleed risk','High thrombotic: Resume 7-15 days','Very high (mech valve): 3-7 days','Low thrombotic: May delay longer','Consider PPI, H. pylori treatment']}},
+        { id:'q4_5', type:'Clinical', stem:'In a patient with upper GI bleeding and positive H. pylori, treatment should:', options:[
+            {letter:'A',text:'Wait 6 months before treating H. pylori',correct:false},
+            {letter:'B',text:'Include H. pylori eradication as it reduces ulcer recurrence',correct:true},
+            {letter:'C',text:'Focus only on PPI therapy',correct:false},
+            {letter:'D',text:'Avoid antibiotics due to bleeding risk',correct:false}
+        ], explanation:'H. pylori eradication dramatically reduces PUD recurrence (from 60-80% to <5% at 1 year). Test all patients with PUD; treat if positive. Confirm eradication 4+ weeks after completing antibiotics (stool antigen or breath test).', mechanism:{title:'H. pylori in PUD',steps:['H. pylori causes 90% duodenal, 70% gastric ulcers','Eradication: ↓Recurrence 60-80% → <5%','Test all PUD patients','Treat: Triple/quadruple therapy','Confirm eradication at 4+ weeks']}}
+    ]
+};
+
+let currentPhase = 1, answers = {};
+
+function switchPhase(phase) {
+    currentPhase = phase;
+    document.querySelectorAll('.phase-btn').forEach((btn, i) => btn.classList.toggle('active', i + 1 === phase));
+    renderQuestions();
+}
+
+function renderQuestions() {
+    const panel = document.getElementById('questionsPanel');
+    const questions = questionData[currentPhase];
+    panel.innerHTML = questions.map((q, idx) => `
+        <div class="question-card" id="card-${q.id}">
+            <div class="question-header">
+                <div class="q-number"><span class="q-badge">${(currentPhase-1)*5+idx+1}</span><span class="q-type">${q.type}</span></div>
+                <span class="q-status ${answers[q.id] ? (answers[q.id].correct ? 'correct' : 'incorrect') : 'unanswered'}">${answers[q.id] ? (answers[q.id].correct ? '✓' : '✗') : '○'}</span>
+            </div>
+            <div class="question-body">
+                ${q.vignette ? `<div class="vignette"><div class="vignette-label">Vignette</div>${q.vignette}</div>` : ''}
+                <div class="question-stem">${q.stem}</div>
+                <div class="options">${q.options.map(opt => `
+                    <div class="option ${answers[q.id]?.selected === opt.letter ? 'selected' : ''} ${answers[q.id] ? (opt.correct ? 'correct' : (answers[q.id].selected === opt.letter ? 'incorrect' : '')) : ''}"
+                         onclick="selectOption('${q.id}', '${opt.letter}')" ${answers[q.id] ? 'style="pointer-events:none"' : ''}>
+                        <span class="option-letter">${opt.letter}</span><span class="option-text">${opt.text}</span>
+                    </div>`).join('')}
+                </div>
+                ${!answers[q.id] ? `<button class="submit-btn" onclick="submitAnswer('${q.id}')" id="submit-${q.id}" disabled>Submit</button>` : `
+                <div class="explanation show"><h4>${answers[q.id].correct ? '✓ Correct!' : '✗ Incorrect'}</h4><p>${q.explanation}</p>
+                <div class="mechanism-box"><div class="mechanism-title">🔬 ${q.mechanism.title}</div>
+                <div class="mechanism-pathway">${q.mechanism.steps.map((s,i) => `<span class="pathway-step">${s}</span>${i<q.mechanism.steps.length-1?'<span class="pathway-arrow">→</span>':''}`).join('')}</div></div></div>`}
+            </div>
+        </div>`).join('');
+}
+
+function selectOption(qId, letter) {
+    if (answers[qId]) return;
+    document.querySelectorAll(`#card-${qId} .option`).forEach(o => o.classList.remove('selected'));
+    event.currentTarget.classList.add('selected');
+    document.getElementById(`submit-${qId}`).disabled = false;
+    document.getElementById(`submit-${qId}`).dataset.selected = letter;
+}
+
+function submitAnswer(qId) {
+    const btn = document.getElementById(`submit-${qId}`);
+    const selected = btn.dataset.selected;
+    const q = questionData[currentPhase].find(q => q.id === qId);
+    answers[qId] = { selected, correct: q.options.find(o => o.letter === selected).correct };
+    renderQuestions();
+}
+
+renderQuestions();
+    </script>
+</body>
+</html>
