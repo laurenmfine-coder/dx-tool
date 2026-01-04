@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoachDx - Case Library</title>
+    <script src="dx-scoring.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #fafafa; color: #18181b; line-height: 1.6; }
+        
+        .header { background: #fff; border-bottom: 1px solid #e4e4e7; padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+        .header-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; }
+        .logo-text { font-size: 20px; font-weight: 700; }
+        .logo-text .dx { color: #8b5cf6; }
+        .nav-links { display: flex; gap: 8px; }
+        .nav-link { padding: 8px 16px; color: #71717a; text-decoration: none; font-size: 14px; font-weight: 500; border-radius: 6px; transition: all 0.15s; }
+        .nav-link:hover { background: #f4f4f5; color: #18181b; }
+        .nav-link.active { background: #18181b; color: #fff; }
+        
+        .main { max-width: 1200px; margin: 0 auto; padding: 40px 24px 80px; }
+        .page-header { margin-bottom: 40px; }
+        .page-title { font-size: 32px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 8px; }
+        .page-subtitle { font-size: 16px; color: #71717a; }
+        
+        .filters { display: flex; gap: 12px; margin-bottom: 32px; flex-wrap: wrap; }
+        .filter-group { display: flex; gap: 4px; padding: 4px; background: #f4f4f5; border-radius: 8px; }
+        .filter-btn { padding: 8px 14px; background: transparent; border: none; font-size: 13px; font-weight: 500; color: #71717a; border-radius: 6px; cursor: pointer; transition: all 0.15s; }
+        .filter-btn:hover { color: #18181b; }
+        .filter-btn.active { background: #fff; color: #18181b; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+        .search-box { flex: 1; min-width: 200px; max-width: 300px; padding: 10px 14px; border: 1px solid #e4e4e7; border-radius: 8px; font-size: 13px; outline: none; }
+        .search-box:focus { border-color: #8b5cf6; }
+        
+        .stats { display: flex; gap: 24px; margin-bottom: 32px; padding: 20px; background: #fff; border: 1px solid #e4e4e7; border-radius: 12px; flex-wrap: wrap; }
+        .stat { text-align: center; padding: 0 24px; border-right: 1px solid #e4e4e7; }
+        .stat:last-child { border-right: none; }
+        .stat-value { font-size: 28px; font-weight: 700; color: #18181b; }
+        .stat-label { font-size: 12px; color: #71717a; margin-top: 4px; }
+        
+        .case-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .case-card { background: #fff; border: 1px solid #e4e4e7; border-radius: 12px; padding: 20px; text-decoration: none; color: inherit; transition: all 0.15s; display: block; }
+        .case-card:hover { border-color: #a1a1aa; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .case-card.parallel { border-left: 3px solid #f59e0b; }
+        .case-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px; }
+        .case-icon { width: 44px; height: 44px; background: #f4f4f5; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+        .case-badge { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; padding: 4px 8px; border-radius: 4px; }
+        .badge-new { background: #ecfdf5; color: #047857; }
+        .badge-popular { background: #fef3c7; color: #92400e; }
+        .badge-advanced { background: #ede9fe; color: #6d28d9; }
+        .badge-parallel { background: #fef3c7; color: #92400e; }
+        .badge-critical { background: #fee2e2; color: #dc2626; }
+        .case-title { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+        .case-description { font-size: 13px; color: #71717a; line-height: 1.5; margin-bottom: 16px; }
+        .case-meta { display: flex; gap: 16px; padding-top: 12px; border-top: 1px solid #f4f4f5; }
+        .case-meta-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #71717a; }
+        .difficulty-dots { display: flex; gap: 3px; }
+        .difficulty-dot { width: 6px; height: 6px; border-radius: 50%; background: #e4e4e7; }
+        .difficulty-dot.filled { background: #8b5cf6; }
+        
+        .section { margin-top: 48px; }
+        .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+        .section-title { font-size: 18px; font-weight: 600; }
+        .section-link { font-size: 13px; color: #8b5cf6; text-decoration: none; font-weight: 500; }
+        .section-link:hover { text-decoration: underline; }
+        
+        @media (max-width: 600px) {
+            .stats { gap: 16px; }
+            .stat { padding: 0 16px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo"><span class="logo-text">Coach<span class="dx">Dx</span></span></a>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="case-library.html" class="nav-link active">Cases</a>
+                <a href="mentor-chat.html" class="nav-link">Start Session</a>
+                <a href="unified-scoreboard.html" class="nav-link">🎯 Scoreboard</a>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="main">
+        <div class="page-header">
+            <h1 class="page-title">Case Library</h1>
+            <p class="page-subtitle">85 cases with parallel pairs for reasoning transfer practice</p>
+        </div>
+        
+        <div class="stats">
+            <div class="stat"><div class="stat-value">60+/div><div class="stat-label">Total Cases</div></div>
+            <div class="stat"><div class="stat-value">22/div><div class="stat-label">Parallel Pairs</div></div>
+            <div class="stat"><div class="stat-value">12/div><div class="stat-label">Categories</div></div>
+            <div class="stat"><div class="stat-value">∞</div><div class="stat-label">Learning</div></div>
+        </div>
+        
+        <div class="filters">
+            <div class="filter-group">
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn">Emergency</button>
+                <button class="filter-btn">Inpatient</button>
+                <button class="filter-btn">Outpatient</button>
+            </div>
+            <div class="filter-group">
+                <button class="filter-btn active">All Levels</button>
+                <button class="filter-btn">Beginner</button>
+                <button class="filter-btn">Intermediate</button>
+                <button class="filter-btn">Advanced</button>
+            </div>
+            <input type="text" class="search-box" placeholder="Search cases...">
+        </div>
+        <!-- CARDIOVASCULAR -->
+        <section class="section" data-category="Cardiovascular">
+            <div class="section-header">
+                <h2 class="section-title">❤️ Cardiovascular</h2>
+                <a href="#" class="section-link" onclick="filterByCategory('Cardiovascular'); return false;">View all →</a>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=chest-pain-acs" class="case-card" data-setting="Emergency" data-difficulty="2" data-category="Cardiovascular">
+                    <div class="case-header"><div class="case-icon">💔</div><span class="case-badge badge-popular">Core</span></div>
+                    <h3 class="case-title">Chest Pain - ACS Evaluation</h3>
+                    <p class="case-description">52-year-old female with substernal pressure. Classic ACS presentation.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~30 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=chest-pain-acs-b" class="case-card parallel" data-setting="Emergency" data-difficulty="3" data-category="Cardiovascular">
+                    <div class="case-header"><div class="case-icon">💔</div><span class="case-badge badge-parallel">🔄 Parallel</span></div>
+                    <h3 class="case-title">Chest Pain - Atypical ACS</h3>
+                    <p class="case-description">68-year-old diabetic male with fatigue and nausea. No chest pain but diaphoretic.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~35 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=atrial-fibrillation" class="case-card" data-setting="Emergency" data-difficulty="2" data-category="Cardiovascular">
+                    <div class="case-header"><div class="case-icon">💓</div></div>
+                    <h3 class="case-title">New Onset AFib</h3>
+                    <p class="case-description">67-year-old with palpitations and RVR at 134. Rate control and anticoagulation.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~25 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=atrial-fibrillation-b" class="case-card parallel" data-setting="Emergency" data-difficulty="3" data-category="Cardiovascular">
+                    <div class="case-header"><div class="case-icon">💓</div><span class="case-badge badge-parallel">🔄 Parallel</span></div>
+                    <h3 class="case-title">Unstable AFib with RVR</h3>
+                    <p class="case-description">72-year-old with HR 178, BP 82/54, chest pain. Hemodynamically unstable.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~20 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=hypertensive-emergency" class="case-card" data-setting="Emergency" data-difficulty="2" data-category="Cardiovascular">
+                    <div class="case-header"><div class="case-icon">📈</div><span class="case-badge badge-critical">Critical</span></div>
+                    <h3 class="case-title">Hypertensive Emergency</h3>
+                    <p class="case-description">54-year-old with BP 238/142, headache, blurred vision, AKI. End-organ damage.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~25 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=aortic-dissection" class="case-card parallel" data-setting="Emergency" data-difficulty="3" data-category="Cardiovascular">
+                    <div class="case-header"><div class="case-icon">💥</div><span class="case-badge badge-parallel">🔄 Parallel</span></div>
+                    <h3 class="case-title">Aortic Dissection</h3>
+                    <p class="case-description">61-year-old with tearing chest pain to back. BP differential between arms.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~30 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=syncope" class="case-card" data-setting="Emergency" data-difficulty="1" data-category="Cardiovascular">
+                    <div class="case-header"><div class="case-icon">😵</div></div>
+                    <h3 class="case-title">Syncope - Vasovagal</h3>
+                    <p class="case-description">45-year-old who passed out standing. Prodrome present. Risk stratification.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~20 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=syncope-cardiac" class="case-card parallel" data-setting="Emergency" data-difficulty="2" data-category="Cardiovascular">
+                    <div class="case-header"><div class="case-icon">😵</div><span class="case-badge badge-parallel">🔄 Parallel</span></div>
+                    <h3 class="case-title">Syncope - Cardiac</h3>
+                    <p class="case-description">68-year-old with sudden collapse. No prodrome. Heart block on ECG.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~25 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- PULMONARY -->
+        <section class="section" data-category="Pulmonary">
+            <div class="section-header">
+                <h2 class="section-title">🫁 Pulmonary</h2>
+                <a href="#" class="section-link" onclick="filterByCategory('Pulmonary'); return false;">View all →</a>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=acute-dyspnea" class="case-card" data-setting="Emergency" data-difficulty="2" data-category="Pulmonary">
+                    <div class="case-header"><div class="case-icon">🫁</div><span class="case-badge badge-popular">Core</span></div>
+                    <h3 class="case-title">Acute Dyspnea - CHF</h3>
+                    <p class="case-description">68-year-old with sudden dyspnea, orthopnea. Ran out of medications.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~25 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=acute-dyspnea-b" class="case-card parallel" data-setting="Emergency" data-difficulty="3" data-category="Pulmonary">
+                    <div class="case-header"><div class="case-icon">🫁</div><span class="case-badge badge-parallel">🔄 Parallel</span></div>
+                    <h3 class="case-title">Acute Dyspnea - PE</h3>
+                    <p class="case-description">34-year-old post long flight with pleuritic pain. On OCPs. Wells criteria.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~30 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=copd-exacerbation" class="case-card" data-setting="Emergency" data-difficulty="2" data-category="Pulmonary">
+                    <div class="case-header"><div class="case-icon">💨</div></div>
+                    <h3 class="case-title">COPD Exacerbation</h3>
+                    <p class="case-description">72-year-old with severe COPD. Worsening dyspnea, purulent sputum. BiPAP?</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~25 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=asthma-exacerbation" class="case-card parallel" data-setting="Emergency" data-difficulty="3" data-category="Pulmonary">
+                    <div class="case-header"><div class="case-icon">💨</div><span class="case-badge badge-parallel">🔄 Parallel</span></div>
+                    <h3 class="case-title">Severe Asthma</h3>
+                    <p class="case-description">24-year-old with prior ICU admissions. 2-word sentences. Intubation criteria.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~20 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=pneumonia" class="case-card" data-setting="Emergency" data-difficulty="1" data-category="Pulmonary">
+                    <div class="case-header"><div class="case-icon">🦠</div></div>
+                    <h3 class="case-title">Community-Acquired Pneumonia</h3>
+                    <p class="case-description">58-year-old with cough, fever, RLL consolidation. CURB-65 scoring.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~20 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=pneumonia-hap" class="case-card parallel" data-setting="Inpatient" data-difficulty="2" data-category="Pulmonary">
+                    <div class="case-header"><div class="case-icon">🦠</div><span class="case-badge badge-parallel">🔄 Parallel</span></div>
+                    <h3 class="case-title">Hospital-Acquired Pneumonia</h3>
+                    <p class="case-description">71-year-old post-CABG with new infiltrate. Resistant organisms.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Inpatient</div><div class="case-meta-item">⏱ ~25 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=pneumothorax" class="case-card" data-setting="Emergency" data-difficulty="1" data-category="Pulmonary">
+                    <div class="case-header"><div class="case-icon">🎈</div></div>
+                    <h3 class="case-title">Spontaneous Pneumothorax</h3>
+                    <p class="case-description">22-year-old tall thin male. 20% pneumothorax. Observation vs intervention.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~15 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=tension-pneumothorax" class="case-card parallel" data-setting="Emergency" data-difficulty="3" data-category="Pulmonary">
+                    <div class="case-header"><div class="case-icon">🎈</div><span class="case-badge badge-critical">Critical</span></div>
+                    <h3 class="case-title">Tension Pneumothorax</h3>
+                    <p class="case-description">45-year-old hypotensive with tracheal deviation. Needle decompression NOW.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~10 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span></div></div></div>
+                </a>
+            </div>
+        </section>
+        <!-- NEUROLOGY -->
+        <section class="section" data-category="Neurology">
+            <div class="section-header">
+                <h2 class="section-title">🧠 Neurology</h2>
+                <a href="#" class="section-link" onclick="filterByCategory('Neurology'); return false;">View all →</a>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=severe-headache" class="case-card" data-setting="Emergency" data-difficulty="3" data-category="Neurology">
+                    <div class="case-header"><div class="case-icon">🤕</div><span class="case-badge badge-critical">Critical</span></div>
+                    <h3 class="case-title">Severe Headache - SAH</h3>
+                    <p class="case-description">42-year-old with thunderclap "worst headache of life" while lifting weights.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~20 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=severe-headache-b" class="case-card parallel" data-setting="Emergency" data-difficulty="3" data-category="Neurology">
+                    <div class="case-header"><div class="case-icon">🤕</div><span class="case-badge badge-parallel">🔄 Parallel</span></div>
+                    <h3 class="case-title">Severe Headache - Meningitis</h3>
+                    <p class="case-description">19-year-old college student with headache, fever, neck stiffness, photophobia.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~25 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=altered-mental-status" class="case-card" data-setting="Emergency" data-difficulty="2" data-category="Neurology">
+                    <div class="case-header"><div class="case-icon">🧠</div></div>
+                    <h3 class="case-title">AMS - Elderly Delirium</h3>
+                    <p class="case-description">74-year-old with acute confusion. Baseline mild dementia but this is different.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~35 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=altered-mental-status-b" class="case-card parallel" data-setting="Emergency" data-difficulty="2" data-category="Neurology">
+                    <div class="case-header"><div class="case-icon">🧠</div><span class="case-badge badge-parallel">🔄 Parallel</span></div>
+                    <h3 class="case-title">AMS - Overdose</h3>
+                    <p class="case-description">24-year-old found unresponsive with pinpoint pupils. Track marks present.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~20 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=stroke" class="case-card" data-setting="Emergency" data-difficulty="3" data-category="Neurology">
+                    <div class="case-header"><div class="case-icon">⚡</div><span class="case-badge badge-critical">Critical</span></div>
+                    <h3 class="case-title">Acute Ischemic Stroke</h3>
+                    <p class="case-description">67-year-old with sudden weakness and aphasia. NIHSS 14. tPA candidate?</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~25 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=stroke-hemorrhagic" class="case-card parallel" data-setting="Emergency" data-difficulty="3" data-category="Neurology">
+                    <div class="case-header"><div class="case-icon">⚡</div><span class="case-badge badge-parallel">🔄 Parallel</span></div>
+                    <h3 class="case-title">Hemorrhagic Stroke</h3>
+                    <p class="case-description">72-year-old on warfarin with large ICH. INR 4.2. Reversal agents.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~30 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=seizure" class="case-card" data-setting="Emergency" data-difficulty="1" data-category="Neurology">
+                    <div class="case-header"><div class="case-icon">⚡</div></div>
+                    <h3 class="case-title">First-Time Seizure</h3>
+                    <p class="case-description">28-year-old with witnessed GTC seizure. Provoked vs unprovoked workup.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~20 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=status-epilepticus" class="case-card parallel" data-setting="Emergency" data-difficulty="3" data-category="Neurology">
+                    <div class="case-header"><div class="case-icon">⚡</div><span class="case-badge badge-critical">Critical</span></div>
+                    <h3 class="case-title">Status Epilepticus</h3>
+                    <p class="case-description">45-year-old seizing 15 minutes despite benzos. Second-line agents.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~15 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span></div></div></div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- ALLERGY/IMMUNOLOGY -->
+        <section class="section" data-category="Allergy">
+            <div class="section-header">
+                <h2 class="section-title">🚨 Allergy & Immunology</h2>
+                <a href="#" class="section-link" onclick="filterByCategory('Allergy'); return false;">View all →</a>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=anaphylaxis" class="case-card" data-setting="Emergency" data-difficulty="2" data-category="Allergy">
+                    <div class="case-header"><div class="case-icon">⚠️</div><span class="case-badge badge-critical">Critical</span></div>
+                    <h3 class="case-title">Anaphylaxis - Food</h3>
+                    <p class="case-description">28-year-old with urticaria, angioedema, wheezing after eating shrimp.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~20 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=anaphylaxis-b" class="case-card parallel" data-setting="Emergency" data-difficulty="3" data-category="Allergy">
+                    <div class="case-header"><div class="case-icon">⚠️</div><span class="case-badge badge-parallel">🔄 Parallel</span></div>
+                    <h3 class="case-title">Anaphylaxis - Beta-Blocker</h3>
+                    <p class="case-description">62-year-old on metoprolol with bee sting. Refractory to epinephrine. Glucagon.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~25 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span></div></div></div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- INFECTIOUS DISEASE -->
+        <section class="section" data-category="Infectious Disease">
+            <div class="section-header">
+                <h2 class="section-title">🦠 Infectious Disease</h2>
+                <a href="#" class="section-link" onclick="filterByCategory('Infectious Disease'); return false;">View all →</a>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=sepsis" class="case-card" data-setting="Emergency" data-difficulty="2" data-category="Infectious Disease">
+                    <div class="case-header"><div class="case-icon">🦠</div><span class="case-badge badge-critical">Critical</span></div>
+                    <h3 class="case-title">Sepsis - UTI Source</h3>
+                    <p class="case-description">78-year-old from nursing home with AMS, fever, catheter. Sepsis resuscitation.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~30 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=sepsis-b" class="case-card parallel" data-setting="Inpatient" data-difficulty="3" data-category="Infectious Disease">
+                    <div class="case-header"><div class="case-icon">🦠</div><span class="case-badge badge-parallel">🔄 Parallel</span></div>
+                    <h3 class="case-title">Sepsis - Post-Op</h3>
+                    <p class="case-description">55-year-old POD3 colectomy with anastomotic leak concern. Source control.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Inpatient</div><div class="case-meta-item">⏱ ~35 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=fever-unknown-origin" class="case-card" data-setting="Inpatient" data-difficulty="3" data-category="Infectious Disease">
+                    <div class="case-header"><div class="case-icon">🔥</div><span class="case-badge badge-advanced">Advanced</span></div>
+                    <h3 class="case-title">Fever of Unknown Origin</h3>
+                    <p class="case-description">58-year-old with 3 weeks fever despite workup. Night sweats, weight loss.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Inpatient</div><div class="case-meta-item">⏱ ~40 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span></div></div></div>
+                </a>
+            </div>
+        </section>
+        <!-- ENDOCRINE -->
+        <section class="section" data-category="Endocrine">
+            <div class="section-header">
+                <h2 class="section-title">🧪 Endocrine</h2>
+                <a href="#" class="section-link" onclick="filterByCategory('Endocrine'); return false;">View all →</a>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=dka" class="case-card" data-setting="Emergency" data-difficulty="2" data-category="Endocrine">
+                    <div class="case-header"><div class="case-icon">💉</div><span class="case-badge badge-critical">Critical</span></div>
+                    <h3 class="case-title">DKA - Non-Compliance</h3>
+                    <p class="case-description">22-year-old T1DM who ran out of insulin. Glucose 485, Kussmaul breathing.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~30 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=dka-b" class="case-card parallel" data-setting="Emergency" data-difficulty="3" data-category="Endocrine">
+                    <div class="case-header"><div class="case-icon">💉</div><span class="case-badge badge-parallel">🔄 Parallel</span></div>
+                    <h3 class="case-title">DKA - New Diagnosis</h3>
+                    <p class="case-description">14-year-old with polyuria, polydipsia, weight loss. First presentation T1DM.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~35 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=thyroid-storm" class="case-card" data-setting="Emergency" data-difficulty="3" data-category="Endocrine">
+                    <div class="case-header"><div class="case-icon">🦋</div><span class="case-badge badge-critical">Critical</span></div>
+                    <h3 class="case-title">Thyroid Storm</h3>
+                    <p class="case-description">35-year-old with Graves who stopped meds. Fever 40.1, HR 162, confused.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~25 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=myxedema-coma" class="case-card parallel" data-setting="Emergency" data-difficulty="3" data-category="Endocrine">
+                    <div class="case-header"><div class="case-icon">🦋</div><span class="case-badge badge-parallel">🔄 Parallel</span></div>
+                    <h3 class="case-title">Myxedema Coma</h3>
+                    <p class="case-description">72-year-old found unresponsive, hypothermic 32.8°C. Severe hypothyroidism.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~25 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=hyperkalemia" class="case-card" data-setting="Emergency" data-difficulty="2" data-category="Endocrine">
+                    <div class="case-header"><div class="case-icon">⚡</div><span class="case-badge badge-critical">Critical</span></div>
+                    <h3 class="case-title">Hyperkalemia Emergency</h3>
+                    <p class="case-description">68-year-old CKD4 with K+ 7.8 and ECG changes. Peaked T, wide QRS.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~15 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- GI -->
+        <section class="section" data-category="GI">
+            <div class="section-header">
+                <h2 class="section-title">🩺 Gastroenterology</h2>
+                <a href="#" class="section-link" onclick="filterByCategory('GI'); return false;">View all →</a>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=gi-bleed" class="case-card" data-setting="Emergency" data-difficulty="2" data-category="GI">
+                    <div class="case-header"><div class="case-icon">🩸</div><span class="case-badge badge-critical">Critical</span></div>
+                    <h3 class="case-title">Upper GI Bleed</h3>
+                    <p class="case-description">58-year-old alcoholic with hematemesis. Hypotensive. Variceal vs ulcer.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~25 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=gi-bleed-lower" class="case-card parallel" data-setting="Emergency" data-difficulty="2" data-category="GI">
+                    <div class="case-header"><div class="case-icon">🩸</div><span class="case-badge badge-parallel">🔄 Parallel</span></div>
+                    <h3 class="case-title">Lower GI Bleed</h3>
+                    <p class="case-description">72-year-old on dual antiplatelet with maroon bloody stool. Diverticular?</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~25 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=acute-pancreatitis" class="case-card" data-setting="Emergency" data-difficulty="2" data-category="GI">
+                    <div class="case-header"><div class="case-icon">🔥</div></div>
+                    <h3 class="case-title">Acute Pancreatitis</h3>
+                    <p class="case-description">45-year-old with epigastric pain to back after heavy drinking. Severity assessment.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~25 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=bowel-obstruction" class="case-card" data-setting="Emergency" data-difficulty="2" data-category="GI">
+                    <div class="case-header"><div class="case-icon">🚫</div></div>
+                    <h3 class="case-title">Small Bowel Obstruction</h3>
+                    <p class="case-description">67-year-old with prior surgery. Distension, obstipation. Strangulation signs?</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~30 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- RENAL/HEME -->
+        <section class="section" data-category="Renal">
+            <div class="section-header">
+                <h2 class="section-title">💧 Renal & Hematology</h2>
+                <a href="#" class="section-link" onclick="filterByCategory('Renal'); return false;">View all →</a>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=acute-kidney-injury" class="case-card" data-setting="Inpatient" data-difficulty="2" data-category="Renal">
+                    <div class="case-header"><div class="case-icon">💧</div></div>
+                    <h3 class="case-title">Acute Kidney Injury</h3>
+                    <p class="case-description">65-year-old POD2 hip replacement with rising creatinine. Pre-renal vs ATN.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Inpatient</div><div class="case-meta-item">⏱ ~30 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=anemia-workup" class="case-card" data-setting="Outpatient" data-difficulty="1" data-category="Hematology">
+                    <div class="case-header"><div class="case-icon">🩸</div></div>
+                    <h3 class="case-title">Anemia Workup</h3>
+                    <p class="case-description">45-year-old vegetarian with fatigue. Hgb 8.2, MCV 68. Iron deficiency.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Outpatient</div><div class="case-meta-item">⏱ ~25 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- TOXICOLOGY -->
+        <section class="section" data-category="Toxicology">
+            <div class="section-header">
+                <h2 class="section-title">☠️ Toxicology</h2>
+                <a href="#" class="section-link" onclick="filterByCategory('Toxicology'); return false;">View all →</a>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=acetaminophen-overdose" class="case-card" data-setting="Emergency" data-difficulty="2" data-category="Toxicology">
+                    <div class="case-header"><div class="case-icon">💊</div><span class="case-badge badge-critical">Critical</span></div>
+                    <h3 class="case-title">Acetaminophen Overdose</h3>
+                    <p class="case-description">19-year-old with intentional Tylenol ingestion. Rumack-Matthew nomogram. NAC.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~30 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=alcohol-withdrawal" class="case-card" data-setting="Inpatient" data-difficulty="2" data-category="Toxicology">
+                    <div class="case-header"><div class="case-icon">🍺</div></div>
+                    <h3 class="case-title">Alcohol Withdrawal</h3>
+                    <p class="case-description">52-year-old HD2 with tremors, hallucinations. CIWA protocol. DTs risk.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Inpatient</div><div class="case-meta-item">⏱ ~25 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- ENVIRONMENTAL -->
+        <section class="section" data-category="Environmental">
+            <div class="section-header">
+                <h2 class="section-title">🌡️ Environmental Medicine</h2>
+                <a href="#" class="section-link" onclick="filterByCategory('Environmental'); return false;">View all →</a>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=heat-stroke" class="case-card" data-setting="Emergency" data-difficulty="2" data-category="Environmental">
+                    <div class="case-header"><div class="case-icon">🌡️</div><span class="case-badge badge-critical">Critical</span></div>
+                    <h3 class="case-title">Heat Stroke</h3>
+                    <p class="case-description">45-year-old construction worker with temp 41.2°C. Aggressive cooling.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~20 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=co-poisoning" class="case-card" data-setting="Emergency" data-difficulty="2" data-category="Environmental">
+                    <div class="case-header"><div class="case-icon">💨</div><span class="case-badge badge-new">Unique</span></div>
+                    <h3 class="case-title">CO Poisoning</h3>
+                    <p class="case-description">Family of 4 with headaches in winter. Gas heater. SpO2 looks normal but misleading.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~25 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+            </div>
+        </section>
+        <!-- UROLOGY -->
+        <section class="section" data-category="Urology">
+            <div class="section-header">
+                <h2 class="section-title">🔬 Urology</h2>
+                <a href="#" class="section-link" onclick="filterByCategory('Urology'); return false;">View all →</a>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=kidney-stone" class="case-card" data-setting="Emergency" data-difficulty="1" data-category="Urology">
+                    <div class="case-header"><div class="case-icon">💎</div></div>
+                    <h3 class="case-title">Kidney Stone / Renal Colic</h3>
+                    <p class="case-description">38-year-old with sudden severe flank pain radiating to groin. Classic renal colic.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~20 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=pyelonephritis" class="case-card parallel" data-setting="Emergency" data-difficulty="2" data-category="Urology">
+                    <div class="case-header"><div class="case-icon">🔥</div><span class="case-badge badge-parallel">🔄 Parallel</span></div>
+                    <h3 class="case-title">Pyelonephritis</h3>
+                    <p class="case-description">28-year-old with flank pain, fever, and ascending UTI. IV vs oral antibiotics.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~25 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=testicular-torsion" class="case-card" data-setting="Emergency" data-difficulty="3" data-category="Urology">
+                    <div class="case-header"><div class="case-icon">⚠️</div><span class="case-badge badge-critical">Critical</span></div>
+                    <h3 class="case-title">Testicular Torsion</h3>
+                    <p class="case-description">16-year-old with sudden testicular pain. 6-hour window to save the testicle!</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~15 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=epididymitis" class="case-card parallel" data-setting="Emergency" data-difficulty="2" data-category="Urology">
+                    <div class="case-header"><div class="case-icon">🔬</div><span class="case-badge badge-parallel">🔄 Parallel</span></div>
+                    <h3 class="case-title">Epididymitis</h3>
+                    <p class="case-description">24-year-old with gradual scrotal pain. STI risk factors. Rule out torsion first!</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~20 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- ORTHOPEDICS -->
+        <section class="section" data-category="Orthopedics">
+            <div class="section-header">
+                <h2 class="section-title">🦴 Orthopedics</h2>
+                <a href="#" class="section-link" onclick="filterByCategory('Orthopedics'); return false;">View all →</a>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=hip-fracture" class="case-card" data-setting="Emergency" data-difficulty="2" data-category="Orthopedics">
+                    <div class="case-header"><div class="case-icon">🦴</div></div>
+                    <h3 class="case-title">Hip Fracture</h3>
+                    <p class="case-description">82-year-old after fall. Shortened, externally rotated leg. On warfarin.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~25 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=compartment-syndrome" class="case-card" data-setting="Emergency" data-difficulty="3" data-category="Orthopedics">
+                    <div class="case-header"><div class="case-icon">🦵</div><span class="case-badge badge-critical">Critical</span></div>
+                    <h3 class="case-title">Compartment Syndrome</h3>
+                    <p class="case-description">28-year-old post tibia fracture. Pain out of proportion. Don't wait for absent pulses!</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~20 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=low-back-pain" class="case-card" data-setting="Emergency" data-difficulty="1" data-category="Orthopedics">
+                    <div class="case-header"><div class="case-icon">🔙</div></div>
+                    <h3 class="case-title">Low Back Pain - Red Flags</h3>
+                    <p class="case-description">45-year-old with mechanical back pain. Screen for dangerous causes.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~20 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=cauda-equina" class="case-card parallel" data-setting="Emergency" data-difficulty="3" data-category="Orthopedics">
+                    <div class="case-header"><div class="case-icon">🔙</div><span class="case-badge badge-critical">Critical</span></div>
+                    <h3 class="case-title">Cauda Equina Syndrome</h3>
+                    <p class="case-description">52-year-old with saddle anesthesia, urinary retention. Surgical emergency!</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~20 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span></div></div></div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- GENERAL SURGERY -->
+        <section class="section" data-category="Surgery">
+            <div class="section-header">
+                <h2 class="section-title">🔪 General Surgery</h2>
+                <a href="#" class="section-link" onclick="filterByCategory('Surgery'); return false;">View all →</a>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=appendicitis" class="case-card" data-setting="Emergency" data-difficulty="2" data-category="Surgery">
+                    <div class="case-header"><div class="case-icon">🩺</div><span class="case-badge badge-popular">Core</span></div>
+                    <h3 class="case-title">Acute Appendicitis</h3>
+                    <p class="case-description">24-year-old with classic migratory RLQ pain. McBurney's point tenderness.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~25 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=ovarian-torsion" class="case-card parallel" data-setting="Emergency" data-difficulty="2" data-category="Surgery">
+                    <div class="case-header"><div class="case-icon">⚠️</div><span class="case-badge badge-parallel">🔄 Parallel</span></div>
+                    <h3 class="case-title">Ovarian Torsion</h3>
+                    <p class="case-description">22-year-old with sudden pelvic pain and known cyst. Time-sensitive like testicular torsion.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~25 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=cholecystitis" class="case-card" data-setting="Emergency" data-difficulty="2" data-category="Surgery">
+                    <div class="case-header"><div class="case-icon">🟢</div></div>
+                    <h3 class="case-title">Acute Cholecystitis</h3>
+                    <p class="case-description">45-year-old with RUQ pain, fever, Murphy sign. More than just biliary colic.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~25 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=biliary-colic" class="case-card parallel" data-setting="Emergency" data-difficulty="1" data-category="Surgery">
+                    <div class="case-header"><div class="case-icon">🟢</div><span class="case-badge badge-parallel">🔄 Parallel</span></div>
+                    <h3 class="case-title">Biliary Colic</h3>
+                    <p class="case-description">38-year-old with episodic postprandial RUQ pain that resolves. Elective surgery.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~20 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- VASCULAR -->
+        <section class="section" data-category="Vascular">
+            <div class="section-header">
+                <h2 class="section-title">🩸 Vascular Surgery</h2>
+                <a href="#" class="section-link" onclick="filterByCategory('Vascular'); return false;">View all →</a>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=acute-limb-ischemia" class="case-card" data-setting="Emergency" data-difficulty="3" data-category="Vascular">
+                    <div class="case-header"><div class="case-icon">🦵</div><span class="case-badge badge-critical">Critical</span></div>
+                    <h3 class="case-title">Acute Limb Ischemia</h3>
+                    <p class="case-description">72-year-old with AFib. Sudden cold, pulseless leg. The 6 P's. Vascular emergency!</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~20 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span></div></div></div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- OPHTHALMOLOGY -->
+        <section class="section" data-category="Ophthalmology">
+            <div class="section-header">
+                <h2 class="section-title">👁️ Ophthalmology</h2>
+                <a href="#" class="section-link" onclick="filterByCategory('Ophthalmology'); return false;">View all →</a>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=acute-angle-closure" class="case-card" data-setting="Emergency" data-difficulty="2" data-category="Ophthalmology">
+                    <div class="case-header"><div class="case-icon">👁️</div><span class="case-badge badge-critical">Critical</span></div>
+                    <h3 class="case-title">Acute Angle Closure Glaucoma</h3>
+                    <p class="case-description">65-year-old with eye pain, mid-dilated pupil, rock-hard globe. Ophthalmic emergency!</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~20 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- ENT -->
+        <section class="section" data-category="ENT">
+            <div class="section-header">
+                <h2 class="section-title">👂 ENT</h2>
+                <a href="#" class="section-link" onclick="filterByCategory('ENT'); return false;">View all →</a>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=peritonsillar-abscess" class="case-card" data-setting="Emergency" data-difficulty="2" data-category="ENT">
+                    <div class="case-header"><div class="case-icon">🗣️</div></div>
+                    <h3 class="case-title">Peritonsillar Abscess</h3>
+                    <p class="case-description">22-year-old with severe sore throat, trismus, uvular deviation. Needs drainage.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~20 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=epistaxis" class="case-card" data-setting="Emergency" data-difficulty="2" data-category="ENT">
+                    <div class="case-header"><div class="case-icon">👃</div></div>
+                    <h3 class="case-title">Epistaxis - Posterior</h3>
+                    <p class="case-description">68-year-old on anticoagulation with uncontrolled nosebleed. Posterior packing needed.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~20 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=epistaxis-anterior" class="case-card parallel" data-setting="Emergency" data-difficulty="1" data-category="ENT">
+                    <div class="case-header"><div class="case-icon">👃</div><span class="case-badge badge-parallel">🔄 Parallel</span></div>
+                    <h3 class="case-title">Epistaxis - Anterior</h3>
+                    <p class="case-description">12-year-old with recurrent nosebleeds from nose picking. Kiesselbach plexus.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~15 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- DERMATOLOGY -->
+        <section class="section" data-category="Dermatology">
+            <div class="section-header">
+                <h2 class="section-title">🩹 Dermatology</h2>
+                <a href="#" class="section-link" onclick="filterByCategory('Dermatology'); return false;">View all →</a>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=necrotizing-fasciitis" class="case-card" data-setting="Emergency" data-difficulty="3" data-category="Dermatology">
+                    <div class="case-header"><div class="case-icon">⚠️</div><span class="case-badge badge-critical">Critical</span></div>
+                    <h3 class="case-title">Necrotizing Fasciitis</h3>
+                    <p class="case-description">55-year-old diabetic with rapidly progressive leg pain, crepitus. Surgical emergency!</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~20 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=cellulitis" class="case-card parallel" data-setting="Emergency" data-difficulty="1" data-category="Dermatology">
+                    <div class="case-header"><div class="case-icon">🩹</div><span class="case-badge badge-parallel">🔄 Parallel</span></div>
+                    <h3 class="case-title">Cellulitis</h3>
+                    <p class="case-description">48-year-old with leg redness and warmth. Pain proportionate. Must not miss nec fasc!</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~20 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- ADDITIONAL RENAL -->
+        <section class="section" data-category="Renal">
+            <div class="section-header">
+                <h2 class="section-title">💧 Renal (Expanded)</h2>
+                <a href="#" class="section-link" onclick="filterByCategory('Renal'); return false;">View all →</a>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=rhabdomyolysis" class="case-card" data-setting="Emergency" data-difficulty="2" data-category="Renal">
+                    <div class="case-header"><div class="case-icon">💪</div><span class="case-badge badge-critical">Critical</span></div>
+                    <h3 class="case-title">Rhabdomyolysis</h3>
+                    <p class="case-description">32-year-old found down with muscle pain, dark urine, CK 45,000. Protect the kidneys!</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~25 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=hyponatremia" class="case-card" data-setting="Emergency" data-difficulty="3" data-category="Renal">
+                    <div class="case-header"><div class="case-icon">💧</div><span class="case-badge badge-advanced">Advanced</span></div>
+                    <h3 class="case-title">Severe Hyponatremia</h3>
+                    <p class="case-description">72-year-old confused with Na+ 114. Correct carefully - osmotic demyelination risk!</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~30 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span></div></div></div>
+                </a>
+            </div>
+        </section>
+    </main>
+    <script>
+        let currentSettingFilter = 'All';
+        let currentLevelFilter = 'All Levels';
+        let currentCategoryFilter = null;
+        
+        function filterByCategory(category) {
+            currentCategoryFilter = category;
+            applyFilters();
+            document.querySelector('.filters').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function getDifficultyNumber(levelName) {
+            if (levelName === 'Beginner') return 1;
+            if (levelName === 'Intermediate') return 2;
+            if (levelName === 'Advanced') return 3;
+            return 0;
+        }
+        
+        function applyFilters() {
+            const cards = document.querySelectorAll('.case-card');
+            const sections = document.querySelectorAll('.section');
+            
+            cards.forEach(card => {
+                const cardSetting = card.dataset.setting;
+                const cardDifficulty = parseInt(card.dataset.difficulty) || 0;
+                const cardCategory = card.dataset.category;
+                
+                let showBySetting = currentSettingFilter === 'All' || cardSetting === currentSettingFilter;
+                let showByLevel = currentLevelFilter === 'All Levels' || cardDifficulty === getDifficultyNumber(currentLevelFilter);
+                let showByCategory = !currentCategoryFilter || cardCategory === currentCategoryFilter;
+                
+                card.style.display = (showBySetting && showByLevel && showByCategory) ? '' : 'none';
+            });
+            
+            sections.forEach(section => {
+                const visibleCards = section.querySelectorAll('.case-card:not([style*="display: none"])');
+                section.style.display = visibleCards.length > 0 ? '' : 'none';
+            });
+        }
+        
+        // Setting filter buttons
+        document.querySelectorAll('.filter-group')[0].querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.parentElement.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentSettingFilter = this.textContent;
+                currentCategoryFilter = null;
+                applyFilters();
+            });
+        });
+        
+        // Level filter buttons
+        document.querySelectorAll('.filter-group')[1].querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.parentElement.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentLevelFilter = this.textContent;
+                currentCategoryFilter = null;
+                applyFilters();
+            });
+        });
+        
+        // Search
+        document.querySelector('.search-box').addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            document.querySelectorAll('.case-card').forEach(card => {
+                const title = card.querySelector('.case-title').textContent.toLowerCase();
+                const desc = card.querySelector('.case-description').textContent.toLowerCase();
+                const matchesSearch = !query || title.includes(query) || desc.includes(query);
+                
+                const cardSetting = card.dataset.setting;
+                const cardDifficulty = parseInt(card.dataset.difficulty) || 0;
+                let showBySetting = currentSettingFilter === 'All' || cardSetting === currentSettingFilter;
+                let showByLevel = currentLevelFilter === 'All Levels' || cardDifficulty === getDifficultyNumber(currentLevelFilter);
+                
+                card.style.display = (matchesSearch && showBySetting && showByLevel) ? '' : 'none';
+            });
+            
+            document.querySelectorAll('.section').forEach(section => {
+                const visibleCards = section.querySelectorAll('.case-card:not([style*="display: none"])');
+                section.style.display = visibleCards.length > 0 ? '' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
+        <!-- HEMATOLOGY/ONCOLOGY -->
+        <section class="section" data-category="Hematology">
+            <div class="section-header">
+                <h2 class="section-title">🩸 Hematology & Oncology</h2>
+                <a href="#" class="section-link" onclick="filterByCategory('Hematology'); return false;">View all →</a>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=dvt" class="case-card" data-setting="Emergency" data-difficulty="1" data-category="Hematology">
+                    <div class="case-header"><div class="case-icon">🦵</div></div>
+                    <h3 class="case-title">Deep Vein Thrombosis</h3>
+                    <p class="case-description">48-year-old with leg swelling after travel. On OCPs. Wells score and workup.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~20 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=dvt-upper" class="case-card parallel" data-setting="Emergency" data-difficulty="2" data-category="Hematology">
+                    <div class="case-header"><div class="case-icon">💪</div><span class="case-badge badge-parallel">🔄 Parallel</span></div>
+                    <h3 class="case-title">Upper Extremity DVT</h3>
+                    <p class="case-description">32-year-old pitcher with arm swelling. Paget-Schroetter syndrome.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~25 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=neutropenic-fever" class="case-card" data-setting="Emergency" data-difficulty="2" data-category="Hematology">
+                    <div class="case-header"><div class="case-icon">🔥</div><span class="case-badge badge-critical">Critical</span></div>
+                    <h3 class="case-title">Neutropenic Fever</h3>
+                    <p class="case-description">62-year-old on chemo with fever and ANC 200. Oncologic emergency.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~20 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=sickle-cell-crisis" class="case-card" data-setting="Emergency" data-difficulty="2" data-category="Hematology">
+                    <div class="case-header"><div class="case-icon">🩸</div></div>
+                    <h3 class="case-title">Sickle Cell Crisis</h3>
+                    <p class="case-description">24-year-old with severe pain crisis. Pain management and complication monitoring.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~25 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=acs-sickle" class="case-card parallel" data-setting="Inpatient" data-difficulty="3" data-category="Hematology">
+                    <div class="case-header"><div class="case-icon">🫁</div><span class="case-badge badge-parallel">🔄 Parallel</span></div>
+                    <h3 class="case-title">Acute Chest Syndrome</h3>
+                    <p class="case-description">28-year-old sickle cell patient with new chest symptoms. Exchange transfusion.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Inpatient</div><div class="case-meta-item">⏱ ~30 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=ttp" class="case-card" data-setting="Emergency" data-difficulty="3" data-category="Hematology">
+                    <div class="case-header"><div class="case-icon">🩸</div><span class="case-badge badge-critical">Critical</span></div>
+                    <h3 class="case-title">TTP</h3>
+                    <p class="case-description">35-year-old with confusion, thrombocytopenia, hemolysis. Do NOT give platelets!</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~25 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span></div></div></div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- RHEUMATOLOGY -->
+        <section class="section" data-category="Rheumatology">
+            <div class="section-header">
+                <h2 class="section-title">🦴 Rheumatology</h2>
+                <a href="#" class="section-link" onclick="filterByCategory('Rheumatology'); return false;">View all →</a>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=gout" class="case-card" data-setting="Emergency" data-difficulty="1" data-category="Rheumatology">
+                    <div class="case-header"><div class="case-icon">🦶</div></div>
+                    <h3 class="case-title">Acute Gout</h3>
+                    <p class="case-description">55-year-old with painful swollen 1st MTP after steak and beer. Crystal arthropathy.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~20 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=septic-arthritis" class="case-card parallel" data-setting="Emergency" data-difficulty="2" data-category="Rheumatology">
+                    <div class="case-header"><div class="case-icon">🦴</div><span class="case-badge badge-parallel">🔄 Parallel</span></div>
+                    <h3 class="case-title">Septic Arthritis</h3>
+                    <p class="case-description">62-year-old diabetic with hot knee and fever. Must tap the joint!</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~25 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- PSYCHIATRY -->
+        <section class="section" data-category="Psychiatry">
+            <div class="section-header">
+                <h2 class="section-title">🧠 Psychiatry</h2>
+                <a href="#" class="section-link" onclick="filterByCategory('Psychiatry'); return false;">View all →</a>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=suicidal-ideation" class="case-card" data-setting="Emergency" data-difficulty="2" data-category="Psychiatry">
+                    <div class="case-header"><div class="case-icon">🆘</div><span class="case-badge badge-critical">Critical</span></div>
+                    <h3 class="case-title">Suicidal Ideation Assessment</h3>
+                    <p class="case-description">32-year-old with suicide note found. Risk assessment and safety planning.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~30 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=agitated-delirium" class="case-card" data-setting="Emergency" data-difficulty="3" data-category="Psychiatry">
+                    <div class="case-header"><div class="case-icon">⚡</div><span class="case-badge badge-critical">Critical</span></div>
+                    <h3 class="case-title">Agitated Delirium</h3>
+                    <p class="case-description">Unknown male, combative, hyperthermia, dilated pupils. Safety first, then workup.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~20 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span></div></div></div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- OB/GYN -->
+        <section class="section" data-category="OB/GYN">
+            <div class="section-header">
+                <h2 class="section-title">🤰 OB/GYN</h2>
+                <a href="#" class="section-link" onclick="filterByCategory('OB/GYN'); return false;">View all →</a>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=ectopic-pregnancy" class="case-card" data-setting="Emergency" data-difficulty="2" data-category="OB/GYN">
+                    <div class="case-header"><div class="case-icon">⚠️</div><span class="case-badge badge-critical">Critical</span></div>
+                    <h3 class="case-title">Ectopic Pregnancy</h3>
+                    <p class="case-description">28-year-old with amenorrhea, RLQ pain, positive pregnancy test. Ectopic until proven otherwise.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~25 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=preeclampsia" class="case-card" data-setting="Inpatient" data-difficulty="3" data-category="OB/GYN">
+                    <div class="case-header"><div class="case-icon">🤰</div><span class="case-badge badge-critical">Critical</span></div>
+                    <h3 class="case-title">Preeclampsia with Severe Features</h3>
+                    <p class="case-description">34-year-old at 34 weeks with BP 178/112, headache, HELLP syndrome.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Inpatient</div><div class="case-meta-item">⏱ ~30 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span></div></div></div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- PEDIATRICS -->
+        <section class="section" data-category="Pediatrics">
+            <div class="section-header">
+                <h2 class="section-title">👶 Pediatrics</h2>
+                <a href="#" class="section-link" onclick="filterByCategory('Pediatrics'); return false;">View all →</a>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=pediatric-fever" class="case-card" data-setting="Emergency" data-difficulty="2" data-category="Pediatrics">
+                    <div class="case-header"><div class="case-icon">👶</div><span class="case-badge badge-critical">Critical</span></div>
+                    <h3 class="case-title">Pediatric Fever - Infant</h3>
+                    <p class="case-description">3-week-old with fever 38.4°C. Full sepsis workup required for neonates.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~25 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=peds-fever-older" class="case-card parallel" data-setting="Emergency" data-difficulty="1" data-category="Pediatrics">
+                    <div class="case-header"><div class="case-icon">🧒</div><span class="case-badge badge-parallel">🔄 Parallel</span></div>
+                    <h3 class="case-title">Pediatric Fever - Toddler</h3>
+                    <p class="case-description">2-year-old with high fever and otitis media. Well-immunized. Different approach.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~20 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=bronchiolitis" class="case-card" data-setting="Emergency" data-difficulty="1" data-category="Pediatrics">
+                    <div class="case-header"><div class="case-icon">🫁</div></div>
+                    <h3 class="case-title">Bronchiolitis</h3>
+                    <p class="case-description">6-month-old with RSV season presentation. Supportive care is key.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~20 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=croup" class="case-card parallel" data-setting="Emergency" data-difficulty="1" data-category="Pediatrics">
+                    <div class="case-header"><div class="case-icon">🗣️</div><span class="case-badge badge-parallel">🔄 Parallel</span></div>
+                    <h3 class="case-title">Croup</h3>
+                    <p class="case-description">2-year-old with barking cough and stridor. Steroids and severity assessment.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~15 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- MORE ENVIRONMENTAL/OCCUPATIONAL -->
+        <section class="section" data-category="Environmental">
+            <div class="section-header">
+                <h2 class="section-title">🌡️ Environmental & Occupational Medicine (Expanded)</h2>
+                <a href="#" class="section-link" onclick="filterByCategory('Environmental'); return false;">View all →</a>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=hypothermia" class="case-card parallel" data-setting="Emergency" data-difficulty="3" data-category="Environmental">
+                    <div class="case-header"><div class="case-icon">🥶</div><span class="case-badge badge-parallel">🔄 Parallel</span></div>
+                    <h3 class="case-title">Severe Hypothermia</h3>
+                    <p class="case-description">Homeless man found in winter, core temp 28°C. Not dead until warm and dead.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~25 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=organophosphate" class="case-card" data-setting="Emergency" data-difficulty="3" data-category="Environmental">
+                    <div class="case-header"><div class="case-icon">☠️</div><span class="case-badge badge-critical">Critical</span></div>
+                    <h3 class="case-title">Organophosphate Poisoning</h3>
+                    <p class="case-description">Farm worker seizing with SLUDGE syndrome. Atropine and pralidoxime.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~20 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=lead-poisoning" class="case-card" data-setting="Outpatient" data-difficulty="2" data-category="Environmental">
+                    <div class="case-header"><div class="case-icon">🏠</div><span class="case-badge badge-new">Occ Med</span></div>
+                    <h3 class="case-title">Lead Poisoning</h3>
+                    <p class="case-description">3-year-old in old housing with elevated BLL. Source identification and chelation.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Outpatient</div><div class="case-meta-item">⏱ ~25 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+                <a href="mentor-chat.html?case=decompression-sickness" class="case-card" data-setting="Emergency" data-difficulty="2" data-category="Environmental">
+                    <div class="case-header"><div class="case-icon">🤿</div></div>
+                    <h3 class="case-title">Decompression Sickness</h3>
+                    <p class="case-description">Diver with "the bends" after rapid ascent. Hyperbaric oxygen critical.</p>
+                    <div class="case-meta"><div class="case-meta-item">🏥 Emergency</div><div class="case-meta-item">⏱ ~20 min</div><div class="case-meta-item"><div class="difficulty-dots"><span class="difficulty-dot filled"></span><span class="difficulty-dot filled"></span><span class="difficulty-dot"></span></div></div></div>
+                </a>
+            </div>
+        </section>
+    </main>
+    <script>
+        let currentSettingFilter = 'All';
+        let currentLevelFilter = 'All Levels';
+        let currentCategoryFilter = null;
+        
+        function filterByCategory(category) {
+            currentCategoryFilter = category;
+            applyFilters();
+            document.querySelector('.filters').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function getDifficultyNumber(levelName) {
+            if (levelName === 'Beginner') return 1;
+            if (levelName === 'Intermediate') return 2;
+            if (levelName === 'Advanced') return 3;
+            return 0;
+        }
+        
+        function applyFilters() {
+            const cards = document.querySelectorAll('.case-card');
+            const sections = document.querySelectorAll('.section');
+            
+            cards.forEach(card => {
+                const cardSetting = card.dataset.setting;
+                const cardDifficulty = parseInt(card.dataset.difficulty) || 0;
+                const cardCategory = card.dataset.category;
+                
+                let showBySetting = currentSettingFilter === 'All' || cardSetting === currentSettingFilter;
+                let showByLevel = currentLevelFilter === 'All Levels' || cardDifficulty === getDifficultyNumber(currentLevelFilter);
+                let showByCategory = !currentCategoryFilter || cardCategory === currentCategoryFilter;
+                
+                card.style.display = (showBySetting && showByLevel && showByCategory) ? '' : 'none';
+            });
+            
+            sections.forEach(section => {
+                const visibleCards = section.querySelectorAll('.case-card:not([style*="display: none"])');
+                section.style.display = visibleCards.length > 0 ? '' : 'none';
+            });
+        }
+        
+        document.querySelectorAll('.filter-group')[0].querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.parentElement.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentSettingFilter = this.textContent;
+                currentCategoryFilter = null;
+                applyFilters();
+            });
+        });
+        
+        document.querySelectorAll('.filter-group')[1].querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.parentElement.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentLevelFilter = this.textContent;
+                currentCategoryFilter = null;
+                applyFilters();
+            });
+        });
+        
+        document.querySelector('.search-box').addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            document.querySelectorAll('.case-card').forEach(card => {
+                const title = card.querySelector('.case-title').textContent.toLowerCase();
+                const desc = card.querySelector('.case-description').textContent.toLowerCase();
+                const matchesSearch = !query || title.includes(query) || desc.includes(query);
+                const cardSetting = card.dataset.setting;
+                const cardDifficulty = parseInt(card.dataset.difficulty) || 0;
+                let showBySetting = currentSettingFilter === 'All' || cardSetting === currentSettingFilter;
+                let showByLevel = currentLevelFilter === 'All Levels' || cardDifficulty === getDifficultyNumber(currentLevelFilter);
+                card.style.display = (matchesSearch && showBySetting && showByLevel) ? '' : 'none';
+            });
+            document.querySelectorAll('.section').forEach(section => {
+                const visibleCards = section.querySelectorAll('.case-card:not([style*="display: none"])');
+                section.style.display = visibleCards.length > 0 ? '' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
