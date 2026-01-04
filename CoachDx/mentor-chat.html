@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoachDx - AI Attending Session</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #fafafa; color: #18181b; line-height: 1.6; height: 100vh; display: flex; flex-direction: column; }
+        
+        .header { background: #fff; border-bottom: 1px solid #e4e4e7; padding: 12px 24px; flex-shrink: 0; }
+        .header-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 18px; font-weight: 700; color: #8b5cf6; text-decoration: none; }
+        .case-info { display: flex; align-items: center; gap: 16px; }
+        .case-badge { background: #f4f4f5; padding: 6px 12px; border-radius: 6px; font-size: 13px; }
+        .case-badge.parallel { background: #fef3c7; color: #92400e; }
+        .timer { font-family: monospace; font-size: 14px; color: #71717a; }
+        .nav-links { display: flex; gap: 12px; }
+        .nav-link { color: #71717a; text-decoration: none; font-size: 13px; padding: 6px 12px; border-radius: 6px; }
+        .nav-link:hover { background: #f4f4f5; color: #18181b; }
+        
+        .main { flex: 1; display: flex; overflow: hidden; max-width: 1400px; margin: 0 auto; width: 100%; }
+        
+        .chat-panel { flex: 1; display: flex; flex-direction: column; border-right: 1px solid #e4e4e7; }
+        .chat-messages { flex: 1; overflow-y: auto; padding: 24px; }
+        .message { max-width: 85%; margin-bottom: 16px; }
+        .message.attending { margin-right: auto; }
+        .message.student { margin-left: auto; }
+        .message-bubble { padding: 12px 16px; border-radius: 12px; font-size: 14px; line-height: 1.5; }
+        .attending .message-bubble { background: #fff; border: 1px solid #e4e4e7; border-radius: 12px 12px 12px 0; }
+        .student .message-bubble { background: #8b5cf6; color: #fff; border-radius: 12px 12px 0 12px; }
+        .message-meta { font-size: 11px; color: #a1a1aa; margin-top: 4px; }
+        .typing-indicator { display: flex; gap: 4px; padding: 12px 16px; }
+        .typing-dot { width: 8px; height: 8px; background: #a1a1aa; border-radius: 50%; animation: typing 1.4s infinite; }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typing { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-4px); } }
+        
+        .input-area { padding: 16px 24px; border-top: 1px solid #e4e4e7; background: #fff; }
+        .quick-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+        .quick-btn { padding: 6px 12px; background: #f4f4f5; border: none; border-radius: 16px; font-size: 13px; cursor: pointer; transition: all 0.15s; }
+        .quick-btn:hover { background: #e4e4e7; }
+        .input-row { display: flex; gap: 12px; }
+        .input-row input { flex: 1; padding: 12px 16px; border: 1px solid #e4e4e7; border-radius: 8px; font-size: 14px; }
+        .input-row input:focus { outline: none; border-color: #8b5cf6; }
+        .send-btn { padding: 12px 24px; background: #8b5cf6; color: #fff; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
+        .send-btn:hover { background: #7c3aed; }
+        .send-btn:disabled { background: #d4d4d8; cursor: not-allowed; }
+        
+        .concept-panel { width: 320px; background: #fff; overflow-y: auto; flex-shrink: 0; }
+        .panel-header { padding: 16px; border-bottom: 1px solid #e4e4e7; font-weight: 600; font-size: 14px; }
+        .concept-section { padding: 16px; border-bottom: 1px solid #f4f4f5; }
+        .concept-section h4 { font-size: 12px; text-transform: uppercase; color: #71717a; margin-bottom: 8px; letter-spacing: 0.5px; }
+        .concept-list { display: flex; flex-wrap: wrap; gap: 6px; }
+        .concept-tag { padding: 4px 8px; background: #f4f4f5; border-radius: 4px; font-size: 12px; color: #52525b; }
+        .concept-tag.explored { background: #dcfce7; color: #166534; }
+        .concept-tag.gap { background: #fef2f2; color: #991b1b; }
+        
+        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 16px; }
+        .stat-item { text-align: center; padding: 12px; background: #f4f4f5; border-radius: 8px; }
+        .stat-value { font-size: 24px; font-weight: 700; color: #8b5cf6; }
+        .stat-label { font-size: 11px; color: #71717a; }
+        
+        .parallel-indicator { background: #fef3c7; border: 1px solid #fcd34d; border-radius: 8px; padding: 12px; margin: 16px; }
+        .parallel-indicator h4 { color: #92400e; font-size: 12px; margin-bottom: 4px; }
+        .parallel-indicator p { font-size: 12px; color: #a16207; }
+        .parallel-link { color: #8b5cf6; text-decoration: none; font-weight: 500; }
+        .parallel-link:hover { text-decoration: underline; }
+        
+        .related-item { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 6px; text-decoration: none; color: inherit; transition: background 0.15s; }
+        .related-item:hover { background: #f4f4f5; }
+        .related-icon { width: 32px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+        .related-icon.mechanism { background: #dcfce7; }
+        .related-icon.reasondx { background: #dbeafe; }
+        .related-icon.parallel { background: #fef3c7; }
+        .related-info { flex: 1; }
+        .related-title { font-size: 13px; font-weight: 500; }
+        .related-reason { font-size: 11px; color: #71717a; }
+        
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; z-index: 1000; }
+        .modal-overlay.show { display: flex; }
+        .modal { background: #fff; border-radius: 12px; padding: 32px; max-width: 500px; width: 90%; }
+        .modal h2 { margin-bottom: 24px; }
+        .modal-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
+        .modal-stat { text-align: center; }
+        .modal-stat-value { font-size: 28px; font-weight: 700; color: #8b5cf6; }
+        .modal-stat-label { font-size: 12px; color: #71717a; }
+        .modal-btns { display: flex; gap: 12px; }
+        .modal-btn { flex: 1; padding: 12px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; }
+        .modal-btn.primary { background: #8b5cf6; color: #fff; }
+        .modal-btn.secondary { background: #f4f4f5; color: #18181b; }
+        
+        @media (max-width: 900px) { .concept-panel { display: none; } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <a href="case-library.html" class="logo" style="text-decoration:none">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 70" style="height:32px;width:auto">
+                    <text x="5" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor" letter-spacing="-1">Coach</text>
+                    <text x="130" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor">D</text>
+                    <g stroke="#8b5cf6" stroke-width="2.5" stroke-linecap="round" fill="none">
+                        <line x1="164" y1="24" x2="180" y2="45"/>
+                        <path d="M180 24L170 35Q166 40 166 47Q166 54 171 58Q176 62 176 68"/>
+                    </g>
+                    <ellipse cx="162" cy="22" rx="2" ry="3.5" transform="rotate(-28 162 22)" fill="#8b5cf6"/>
+                    <ellipse cx="182" cy="22" rx="2" ry="3.5" transform="rotate(28 182 22)" fill="#8b5cf6"/>
+                    <circle cx="176" cy="68" r="7" fill="none" stroke="#8b5cf6" stroke-width="2"/>
+                    <circle cx="176" cy="68" r="3.5" fill="#8b5cf6"/>
+                </svg>
+            </a>
+            <div class="case-info">
+                <span class="case-badge" id="caseBadge">Loading...</span>
+                <span class="timer" id="timer">00:00</span>
+            </div>
+            <nav class="nav-links">
+                <a href="case-library.html" class="nav-link">All Cases</a>
+                <a href="../unified-scoreboard.html" class="nav-link">🏆 Scoreboard</a>
+                <button class="nav-link" onclick="endSession()" style="background:none;border:none;cursor:pointer;">End Session</button>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="main">
+        <div class="chat-panel">
+            <div class="chat-messages" id="chatMessages"></div>
+            <div class="input-area">
+                <div class="quick-actions" id="quickActions"></div>
+                <div class="input-row">
+                    <input type="text" id="userInput" placeholder="Ask a question or share your thinking..." onkeypress="if(event.key==='Enter')sendMessage()">
+                    <button class="send-btn" id="sendBtn" onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="concept-panel">
+            <div class="panel-header">📊 Concept Map</div>
+            <div id="conceptMap"></div>
+            <div id="parallelCaseIndicator"></div>
+            <div class="panel-header" style="margin-top:16px;">📈 Session Stats</div>
+            <div class="stats-grid">
+                <div class="stat-item"><div class="stat-value" id="statQuestions">0</div><div class="stat-label">Questions</div></div>
+                <div class="stat-item"><div class="stat-value" id="statConcepts">0</div><div class="stat-label">Concepts</div></div>
+                <div class="stat-item"><div class="stat-value" id="statTeaching">0</div><div class="stat-label">Teaching</div></div>
+                <div class="stat-item"><div class="stat-value" id="statTime">0m</div><div class="stat-label">Time</div></div>
+            </div>
+            <div class="panel-header" style="margin-top:16px;">🔗 Related Content</div>
+            <div id="relatedContent" style="padding:16px;"></div>
+        </div>
+    </div>
+    
+    <div class="modal-overlay" id="endModal">
+        <div class="modal">
+            <h2>Session Complete</h2>
+            <div class="modal-stats">
+                <div class="modal-stat"><div class="modal-stat-value" id="modalTime">0:00</div><div class="modal-stat-label">Duration</div></div>
+                <div class="modal-stat"><div class="modal-stat-value" id="modalConcepts">0</div><div class="modal-stat-label">Concepts</div></div>
+                <div class="modal-stat"><div class="modal-stat-value" id="modalTeaching">0</div><div class="modal-stat-label">Teaching Moments</div></div>
+            </div>
+            <div id="parallelCaseSuggestion" style="margin-bottom:20px;"></div>
+            <div class="modal-btns">
+                <button class="modal-btn secondary" onclick="location.href='case-library.html'">More Cases</button>
+                <button class="modal-btn primary" id="nextCaseBtn" onclick="goToParallelCase()">Try Parallel Case</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Load external cases file -->
+    <script src="coachdx-cases-merged.js"></script>
+    
+    <script>
+    // ============================================================
+    // STATE & INITIALIZATION
+    // ============================================================
+    // Use cases from external file (COACHDX_CASES) or fall back to empty object
+    const CASES = typeof COACHDX_CASES !== 'undefined' ? COACHDX_CASES : {};
+    
+    let currentCase = null;
+    let conversationHistory = [];
+    let conceptsExplored = {};
+    let seconds = 0;
+    let timerInterval = null;
+    let isLoading = false;
+    let session = {
+        id: 'session-' + Date.now(),
+        questionsAskedByAI: 0,
+        teachingMomentsDetected: 0,
+        conceptsExplored: [],
+        isParallelCase: false,
+        parallelPairId: null
+    };
+
+    function init() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const caseId = urlParams.get('case') || 'chest-pain-acs';
+        
+        currentCase = CASES[caseId];
+        if (!currentCase) {
+            currentCase = CASES['chest-pain-acs'];
+        }
+        
+        if (!currentCase) {
+            document.getElementById('chatMessages').innerHTML = '<p style="padding:20px;color:#dc2626;">Error: Could not load case. Please check that coachdx-cases-merged.js is in the same directory.</p>';
+            return;
+        }
+        
+        // Track parallel case info
+        session.isParallelCase = currentCase.isParallel || false;
+        session.parallelPairId = currentCase.parallelCase || null;
+        
+        // Update UI
+        document.getElementById('caseBadge').textContent = currentCase.title;
+        document.getElementById('caseBadge').className = 'case-badge' + (currentCase.isParallel ? ' parallel' : '');
+        
+        renderQuickActions();
+        renderConceptMap();
+        renderParallelIndicator();
+        renderRelatedContent();
+        
+        // Start timer
+        timerInterval = setInterval(updateTimer, 1000);
+        
+        // Opening message
+        setTimeout(() => {
+            addMessage(currentCase.openingStatement, 'attending');
+            conversationHistory.push({ role: 'assistant', content: currentCase.openingStatement });
+        }, 500);
+    }
+
+    function updateTimer() {
+        seconds++;
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        document.getElementById('timer').textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        document.getElementById('statTime').textContent = mins + 'm';
+    }
+
+    function addMessage(text, sender) {
+        const container = document.getElementById('chatMessages');
+        const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        
+        container.innerHTML += `
+            <div class="message ${sender}">
+                <div class="message-bubble">${text}</div>
+                <div class="message-meta">${sender === 'attending' ? 'Dr. Chen' : 'You'} • ${time}</div>
+            </div>
+        `;
+        container.scrollTop = container.scrollHeight;
+    }
+
+    function renderQuickActions() {
+        const container = document.getElementById('quickActions');
+        const actions = currentCase.quickActions || [];
+        container.innerHTML = actions.map(action => 
+            `<button class="quick-btn" onclick="sendQuickAction('${action.replace(/'/g, "\\'")}')">${action}</button>`
+        ).join('');
+    }
+
+    function sendQuickAction(action) {
+        document.getElementById('userInput').value = action;
+        sendMessage();
+    }
+
+    function renderConceptMap() {
+        const container = document.getElementById('conceptMap');
+        const domains = currentCase.conceptDomains || {};
+        let html = '';
+        
+        for (const [domain, concepts] of Object.entries(domains)) {
+            html += `
+                <div class="concept-section">
+                    <h4>${domain}</h4>
+                    <div class="concept-list">
+                        ${concepts.map(c => {
+                            const explored = conceptsExplored[c];
+                            return `<span class="concept-tag ${explored ? 'explored' : ''}">${c.replace(/_/g, ' ')}</span>`;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+        }
+        container.innerHTML = html;
+    }
+
+    function renderParallelIndicator() {
+        const container = document.getElementById('parallelCaseIndicator');
+        
+        if (currentCase.parallelCase) {
+            const parallelCaseData = CASES[currentCase.parallelCase];
+            if (parallelCaseData) {
+                container.innerHTML = `
+                    <div class="parallel-indicator">
+                        <h4>🔄 ${currentCase.isParallel ? 'Original Case' : 'Parallel Case'} Available</h4>
+                        <p>${currentCase.parallelDescription || parallelCaseData.title}</p>
+                        <a href="mentor-chat.html?case=${currentCase.parallelCase}" class="parallel-link">
+                            ${currentCase.isParallel ? '← Try Original' : 'Try Parallel →'}
+                        </a>
+                    </div>
+                `;
+            }
+        } else {
+            container.innerHTML = '';
+        }
+    }
+
+    function renderRelatedContent() {
+        const container = document.getElementById('relatedContent');
+        const content = currentCase.relatedContent || [];
+        
+        let html = content.map(item => `
+            <a href="${item.link}" class="related-item">
+                <div class="related-icon ${item.type}">
+                    ${item.type === 'mechanism' ? '🧬' : item.type === 'parallel' ? '🔄' : '🩺'}
+                </div>
+                <div class="related-info">
+                    <div class="related-title">${item.title}</div>
+                    <div class="related-reason">${item.reason}</div>
+                </div>
+            </a>
+        `).join('');
+        
+        container.innerHTML = html;
+    }
+
+    async function sendMessage() {
+        const input = document.getElementById('userInput');
+        const message = input.value.trim();
+        if (!message || isLoading) return;
+        
+        input.value = '';
+        addMessage(message, 'student');
+        conversationHistory.push({ role: 'user', content: message });
+        
+        isLoading = true;
+        document.getElementById('sendBtn').disabled = true;
+        
+        const container = document.getElementById('chatMessages');
+        container.innerHTML += `<div class="message attending" id="typing"><div class="message-bubble"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div></div>`;
+        container.scrollTop = container.scrollHeight;
+        
+        try {
+            const response = await generateResponse(message);
+            document.getElementById('typing')?.remove();
+            
+            addMessage(response, 'attending');
+            conversationHistory.push({ role: 'assistant', content: response });
+            
+            session.questionsAskedByAI++;
+            if (response.toLowerCase().includes('teaching moment') || response.toLowerCase().includes('let me explain') || response.includes('?')) {
+                session.teachingMomentsDetected++;
+            }
+            
+            checkConceptsExplored(message + ' ' + response);
+            updateStats();
+            
+        } catch (error) {
+            document.getElementById('typing')?.remove();
+            addMessage('I apologize, I\'m having trouble connecting. Please try again.', 'attending');
+            console.error('Error:', error);
+        }
+        
+        isLoading = false;
+        document.getElementById('sendBtn').disabled = false;
+    }
+
+    async function generateResponse(userMessage) {
+        // First check for defined responses in the case
+        const definedResponses = currentCase.defined_responses || {};
+        const messageLower = userMessage.toLowerCase();
+        
+        for (const [trigger, response] of Object.entries(definedResponses)) {
+            const triggerWords = trigger.split(/[_\s]+/);
+            if (triggerWords.some(word => messageLower.includes(word))) {
+                return response;
+            }
+        }
+        
+        // Try Cloudflare worker for AI response
+        try {
+            const WORKER_URL = 'https://coachdx-attending.laurenmfine.workers.dev';
+            
+            const response = await fetch(WORKER_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    message: userMessage,
+                    conversationHistory: conversationHistory.slice(-10),
+                    caseData: { 
+                        description: currentCase.description,
+                        title: currentCase.title,
+                        keyTeachingPoints: currentCase.keyTeachingPoints || []
+                    }
+                })
+            });
+            
+            if (!response.ok) throw new Error('Worker request failed');
+            
+            const data = await response.json();
+            return data.response || data.content || generateFallbackResponse(userMessage);
+        } catch (error) {
+            console.log('Worker unavailable, using fallback response');
+            return generateFallbackResponse(userMessage);
+        }
+    }
+    
+    function generateFallbackResponse(userMessage) {
+        const teachingPoints = currentCase.keyTeachingPoints || [];
+        const unusedPoints = teachingPoints.filter(point => 
+            !conversationHistory.some(msg => msg.content.includes(point.substring(0, 30)))
+        );
+        
+        if (unusedPoints.length > 0) {
+            const point = unusedPoints[Math.floor(Math.random() * unusedPoints.length)];
+            return `Good thinking! Let me add a teaching point here: ${point}\n\nWhat else are you considering?`;
+        }
+        
+        const prompts = [
+            "That's a good start. Can you tell me more about your reasoning?",
+            "Interesting approach. What findings would change your differential?",
+            "I see where you're going. What would you prioritize in the workup?",
+            "Good observation. How does that fit with the patient's presentation?",
+            "What other diagnoses are you considering?",
+            "How would you explain the pathophysiology here?",
+            "What's the next step in your clinical reasoning?"
+        ];
+        
+        return prompts[Math.floor(Math.random() * prompts.length)];
+    }
+
+    function checkConceptsExplored(text) {
+        const textLower = text.toLowerCase();
+        const domains = currentCase.conceptDomains || {};
+        
+        for (const concepts of Object.values(domains)) {
+            for (const concept of concepts) {
+                const searchTerms = concept.split('_');
+                if (searchTerms.some(term => textLower.includes(term))) {
+                    if (!conceptsExplored[concept]) {
+                        conceptsExplored[concept] = true;
+                        session.conceptsExplored.push(concept);
+                    }
+                }
+            }
+        }
+        renderConceptMap();
+    }
+
+    function updateStats() {
+        document.getElementById('statQuestions').textContent = session.questionsAskedByAI;
+        document.getElementById('statConcepts').textContent = Object.keys(conceptsExplored).length;
+        document.getElementById('statTeaching').textContent = session.teachingMomentsDetected;
+    }
+
+    function goToParallelCase() {
+        if (currentCase.parallelCase) {
+            window.location.href = `mentor-chat.html?case=${currentCase.parallelCase}`;
+        } else {
+            window.location.href = 'case-library.html';
+        }
+    }
+
+    function endSession() {
+        clearInterval(timerInterval);
+        
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        
+        document.getElementById('modalTime').textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+        document.getElementById('modalConcepts').textContent = Object.keys(conceptsExplored).length;
+        document.getElementById('modalTeaching').textContent = session.teachingMomentsDetected;
+        
+        const suggestionDiv = document.getElementById('parallelCaseSuggestion');
+        const nextBtn = document.getElementById('nextCaseBtn');
+        
+        if (currentCase.parallelCase) {
+            const parallelData = CASES[currentCase.parallelCase];
+            if (parallelData) {
+                suggestionDiv.innerHTML = `
+                    <div style="background:#fef3c7; padding:12px; border-radius:8px; text-align:center;">
+                        <p style="font-size:13px; color:#92400e; margin-bottom:4px;">
+                            <strong>🔄 Test Your Reasoning Transfer</strong>
+                        </p>
+                        <p style="font-size:12px; color:#a16207;">
+                            Try "${parallelData.title}" - ${currentCase.parallelDescription || ''}
+                        </p>
+                    </div>
+                `;
+                nextBtn.textContent = 'Try Parallel Case →';
+                nextBtn.style.background = '#f59e0b';
+            }
+        } else {
+            suggestionDiv.innerHTML = '';
+            nextBtn.textContent = 'Back to Cases';
+            nextBtn.onclick = () => location.href = 'case-library.html';
+        }
+        
+        document.getElementById('endModal').classList.add('show');
+        sendSessionData();
+    }
+
+    function sendSessionData() {
+        const data = {
+            type: 'COACHDX_SESSION',
+            sessionId: session.id,
+            caseId: currentCase.id,
+            caseTopic: currentCase.title,
+            category: currentCase.category,
+            isParallelCase: session.isParallelCase,
+            parallelPairId: session.parallelPairId,
+            duration: seconds,
+            questionsAsked: session.questionsAskedByAI,
+            teachingMoments: session.teachingMomentsDetected,
+            conceptsExplored: session.conceptsExplored,
+            timestamp: new Date().toISOString()
+        };
+        
+        console.log('Session data:', data);
+        // Future: Send to fingerprint dashboard
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
