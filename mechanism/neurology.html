@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neurology | MechanismDx</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.6; }
+        .header { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+        .header-inner { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 20px; font-weight: 700; color: #10b981; text-decoration: none; }
+        .nav-links { display: flex; gap: 16px; }
+        .nav-link { color: #64748b; text-decoration: none; font-size: 14px; }
+        .nav-link:hover { color: #10b981; }
+        .main { max-width: 800px; margin: 0 auto; padding: 40px 24px; }
+        .module-header { text-align: center; margin-bottom: 40px; }
+        .module-title { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+        .module-subtitle { color: #64748b; font-size: 16px; }
+        .progress-bar { background: #e2e8f0; height: 8px; border-radius: 4px; margin: 24px 0; }
+        .progress-fill { background: #10b981; height: 100%; border-radius: 4px; transition: width 0.3s; }
+        .question-card { background: #fff; border-radius: 12px; padding: 32px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 24px; }
+        .question-number { color: #10b981; font-size: 14px; font-weight: 600; margin-bottom: 8px; }
+        .question-text { font-size: 18px; font-weight: 500; margin-bottom: 24px; line-height: 1.5; }
+        .vignette { background: #f1f5f9; padding: 16px; border-radius: 8px; margin-bottom: 20px; font-size: 15px; }
+        .options { display: flex; flex-direction: column; gap: 12px; }
+        .option { padding: 16px; border: 2px solid #e2e8f0; border-radius: 8px; cursor: pointer; transition: all 0.15s; }
+        .option:hover { border-color: #10b981; background: #f0fdf4; }
+        .option.selected { border-color: #10b981; background: #f0fdf4; }
+        .option.correct { border-color: #22c55e; background: #dcfce7; }
+        .option.incorrect { border-color: #ef4444; background: #fef2f2; }
+        .btn { padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.15s; border: none; }
+        .btn-primary { background: #10b981; color: #fff; }
+        .btn-primary:hover { background: #059669; }
+        .btn-secondary { background: #f1f5f9; color: #475569; }
+        .explanation { margin-top: 24px; padding: 20px; background: #f0fdf4; border-radius: 8px; border-left: 4px solid #10b981; display: none; }
+        .explanation.show { display: block; }
+        .explanation h4 { color: #059669; margin-bottom: 12px; }
+        .stats { display: flex; gap: 24px; justify-content: center; margin-top: 40px; }
+        .stat { text-align: center; }
+        .stat-value { font-size: 32px; font-weight: 700; color: #10b981; }
+        .stat-label { font-size: 14px; color: #64748b; }
+        .domain-tag { display: inline-block; padding: 4px 8px; background: #e0e7ff; color: #4338ca; border-radius: 4px; font-size: 12px; margin-right: 8px; margin-bottom: 8px; }
+        .confidence-slider { margin: 20px 0; }
+        .confidence-slider label { display: block; margin-bottom: 8px; font-weight: 500; }
+        .confidence-slider input { width: 100%; }
+        .confidence-value { text-align: center; font-size: 24px; font-weight: 700; color: #10b981; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">Mechanism<span style="color:#059669">Dx</span></a>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link">All Modules</a>
+                <a href="../index.html" class="nav-link">ReasonDx</a>
+                <a href="../CoachDx/" class="nav-link">CoachDx</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="module-header">
+            <h1 class="module-title">🧠 Neurology</h1>
+            <p class="module-subtitle">Stroke, seizures, headache, movement disorders, demyelinating diseases, and neuromuscular conditions</p>
+            <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 0%"></div></div>
+            <p id="progressText">Question 1 of 20</p>
+        </div>
+
+        <div id="questionContainer"></div>
+
+        <div id="resultsContainer" class="hidden">
+            <div class="question-card">
+                <h2 style="text-align:center; margin-bottom:24px;">Module Complete!</h2>
+                <div class="stats">
+                    <div class="stat"><div class="stat-value" id="scoreValue">0%</div><div class="stat-label">Score</div></div>
+                    <div class="stat"><div class="stat-value" id="timeValue">0:00</div><div class="stat-label">Time</div></div>
+                    <div class="stat"><div class="stat-value" id="calibrationValue">--</div><div class="stat-label">Calibration</div></div>
+                </div>
+                <div style="text-align:center; margin-top:32px;">
+                    <button class="btn btn-primary" onclick="restartModule()">Try Again</button>
+                    <button class="btn btn-secondary" onclick="window.location.href='index.html'">All Modules</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+    // Answer distribution: A=4, B=4, C=4, D=4, E=4 (balanced)
+    const questions = [
+        // Q1 - Answer: C
+        {
+            id: 'NEURO-001',
+            domains: ['Stroke', 'Emergency Medicine'],
+            vignette: 'A 68-year-old man with atrial fibrillation presents with sudden onset right-sided weakness and aphasia that began 2 hours ago. He is not on anticoagulation. CT head shows no hemorrhage. His NIHSS score is 14.',
+            question: 'What is the most appropriate next step in management?',
+            options: [
+                { id: 'A', text: 'Administer aspirin 325 mg orally and admit for observation', correct: false },
+                { id: 'B', text: 'Order MRI brain with diffusion-weighted imaging sequence', correct: false },
+                { id: 'C', text: 'Administer intravenous alteplase after reviewing contraindications', correct: true },
+                { id: 'D', text: 'Start therapeutic heparin infusion for cardioembolic stroke', correct: false },
+                { id: 'E', text: 'Obtain CT angiography before any treatment decisions', correct: false }
+            ],
+            explanation: 'This patient has acute ischemic stroke within the 4.5-hour window for IV thrombolysis. IV alteplase is indicated when: symptom onset <4.5 hours, CT excludes hemorrhage, and no contraindications exist. After tPA, antiplatelet/anticoagulant therapy should be held for 24 hours. Consider mechanical thrombectomy for large vessel occlusion. Long-term anticoagulation will be needed for AFib-related stroke prevention.',
+            reference: 'Powers WJ, et al. Guidelines for Early Management of Acute Ischemic Stroke. Stroke. 2019;50(12):e344-e418.'
+        },
+        // Q2 - Answer: D
+        {
+            id: 'NEURO-002',
+            domains: ['Stroke', 'Neuroanatomy'],
+            vignette: 'A 72-year-old woman presents with sudden left-sided weakness affecting her face and arm more than her leg, along with difficulty speaking. She understands commands but cannot express herself fluently. She is right-handed.',
+            question: 'Which vascular territory is most likely affected in this patient?',
+            options: [
+                { id: 'A', text: 'Right middle cerebral artery distribution territory', correct: false },
+                { id: 'B', text: 'Left anterior cerebral artery distribution territory', correct: false },
+                { id: 'C', text: 'Left posterior cerebral artery distribution territory', correct: false },
+                { id: 'D', text: 'Left middle cerebral artery distribution territory', correct: true },
+                { id: 'E', text: 'Basilar artery with brainstem involvement territory', correct: false }
+            ],
+            explanation: 'The MCA supplies the lateral hemisphere including motor/sensory cortex for face and arm (leg is ACA), and Broca area (expressive aphasia) in the dominant hemisphere. Face-arm predominant weakness localizes to MCA. Left hemisphere damage causes right body weakness and aphasia in right-handed patients. ACA strokes cause leg weakness. PCA strokes cause visual defects.',
+            reference: 'Bogousslavsky J, Caplan LR. Stroke Syndromes. Cambridge University Press. 2001.'
+        },
+        // Q3 - Answer: B
+        {
+            id: 'NEURO-003',
+            domains: ['Stroke', 'Diagnosis'],
+            vignette: 'A 55-year-old man presents with the worst headache of his life that started suddenly while lifting weights. He has neck stiffness and photophobia. CT head performed 3 hours after symptom onset is reported as normal.',
+            question: 'What is the most appropriate next step in evaluation?',
+            options: [
+                { id: 'A', text: 'Discharge home with migraine medications and follow-up', correct: false },
+                { id: 'B', text: 'Perform lumbar puncture to evaluate for xanthochromia', correct: true },
+                { id: 'C', text: 'Repeat CT head in 24 hours to reassess findings', correct: false },
+                { id: 'D', text: 'Order MRI brain with gadolinium contrast enhancement', correct: false },
+                { id: 'E', text: 'Start empiric antibiotics for possible meningitis', correct: false }
+            ],
+            explanation: 'This presentation is concerning for SAH - thunderclap headache with exertional onset and meningismus. CT sensitivity decreases over time (~98% at 6 hours). A normal CT does NOT rule out SAH. LP is required - looking for xanthochromia (yellow CSF from bilirubin) or RBCs. If positive, CTA identifies the aneurysm. Rebleeding risk is highest in first 24 hours.',
+            reference: 'Perry JJ, et al. Sensitivity of CT within six hours for SAH diagnosis. BMJ. 2011;343:d4277.'
+        },
+        // Q4 - Answer: A
+        {
+            id: 'NEURO-004',
+            domains: ['Epilepsy', 'Pharmacology'],
+            vignette: 'A 25-year-old woman with well-controlled epilepsy on valproic acid presents for preconception counseling. She has been seizure-free for 3 years. She asks about risks of her medication during pregnancy.',
+            question: 'What is the most accurate statement regarding valproic acid in pregnancy?',
+            options: [
+                { id: 'A', text: 'It carries the highest teratogenic risk among common antiepileptic drugs', correct: true },
+                { id: 'B', text: 'It is considered safe if folic acid supplementation is adequate', correct: false },
+                { id: 'C', text: 'It should be immediately discontinued upon pregnancy confirmation', correct: false },
+                { id: 'D', text: 'It primarily affects fetal development during the third trimester', correct: false },
+                { id: 'E', text: 'It has equivalent safety to levetiracetam and lamotrigine', correct: false }
+            ],
+            explanation: 'Valproic acid has the highest teratogenic risk among commonly used AEDs. Risks include neural tube defects (1-2%), craniofacial abnormalities, cardiac defects, and decreased IQ. Women of childbearing potential should ideally avoid valproate. Levetiracetam and lamotrigine have more favorable profiles. Never abruptly stop AEDs - uncontrolled seizures also harm pregnancy.',
+            reference: 'Tomson T, et al. Comparative risk of malformations with antiepileptic drugs. Lancet Neurol. 2018;17(6):530-538.'
+        },
+        // Q5 - Answer: E
+        {
+            id: 'NEURO-005',
+            domains: ['Epilepsy', 'Emergency Medicine'],
+            vignette: 'A 45-year-old man is brought to the ED with a generalized tonic-clonic seizure ongoing for 12 minutes. EMS administered lorazepam 4 mg IV en route without seizure termination. He continues to seize upon arrival.',
+            question: 'What is the most appropriate next step in management?',
+            options: [
+                { id: 'A', text: 'Administer an additional dose of lorazepam 4 mg IV', correct: false },
+                { id: 'B', text: 'Immediately intubate and start continuous propofol infusion', correct: false },
+                { id: 'C', text: 'Obtain emergent CT head before further medication administration', correct: false },
+                { id: 'D', text: 'Administer phenobarbital 20 mg/kg IV as second-line agent', correct: false },
+                { id: 'E', text: 'Administer fosphenytoin 20 mg PE/kg or levetiracetam IV', correct: true }
+            ],
+            explanation: 'This is status epilepticus (seizure >5 min). Treatment is stepwise: (1) First-line: benzodiazepines; (2) Second-line: fosphenytoin, levetiracetam, or valproate; (3) Third-line: anesthetic agents with EEG. Since lorazepam failed, proceed to second-line agents. Time is critical - prolonged SE causes neuronal death. Phenobarbital is an alternative but fosphenytoin/levetiracetam are preferred.',
+            reference: 'Glauser T, et al. Treatment of Convulsive Status Epilepticus Guidelines. Epilepsy Curr. 2016;16(1):48-61.'
+        },
+        // Q6 - Answer: B
+        {
+            id: 'NEURO-006',
+            domains: ['Headache', 'Therapeutics'],
+            vignette: 'A 35-year-old woman has recurring unilateral throbbing headaches lasting 4-72 hours with nausea, photophobia, and phonophobia. Symptoms worsen with physical activity. She averages 10 headache days per month affecting her work.',
+            question: 'What is the most appropriate prophylactic medication for this patient?',
+            options: [
+                { id: 'A', text: 'Sumatriptan 100 mg taken at headache onset as needed', correct: false },
+                { id: 'B', text: 'Propranolol 40-80 mg daily titrated to effect and tolerance', correct: true },
+                { id: 'C', text: 'Acetaminophen 1000 mg taken daily for prevention purposes', correct: false },
+                { id: 'D', text: 'Prednisone taper starting at 60 mg for acute management', correct: false },
+                { id: 'E', text: 'Indomethacin 25 mg three times daily with food intake', correct: false }
+            ],
+            explanation: 'This patient meets migraine criteria with frequent attacks warranting prophylaxis (≥4 days/month). First-line preventive options include beta-blockers (propranolol), antidepressants (amitriptyline), and anticonvulsants (topiramate). Sumatriptan is abortive only. CGRP monoclonal antibodies are newer alternatives. Avoid medication overuse by limiting acute treatments to <10 days/month.',
+            reference: 'Silberstein SD, et al. Pharmacologic treatment for episodic migraine prevention. Neurology. 2012;78(17):1337-1345.'
+        },
+        // Q7 - Answer: C
+        {
+            id: 'NEURO-007',
+            domains: ['Headache', 'Diagnosis'],
+            vignette: 'A 50-year-old man presents with severe unilateral periorbital pain occurring 2-3 times daily for 3 weeks. Each episode lasts 30-60 minutes with ipsilateral tearing, nasal congestion, and eyelid drooping. Alcohol triggers attacks.',
+            question: 'What is the most effective acute treatment for this condition?',
+            options: [
+                { id: 'A', text: 'Oral ibuprofen 800 mg at the onset of each attack', correct: false },
+                { id: 'B', text: 'Intravenous morphine for severe pain control measures', correct: false },
+                { id: 'C', text: 'High-flow oxygen at 12-15 L/min via non-rebreather mask', correct: true },
+                { id: 'D', text: 'Oral prednisone 60 mg daily tapered over two weeks', correct: false },
+                { id: 'E', text: 'Muscle relaxants such as cyclobenzaprine at bedtime', correct: false }
+            ],
+            explanation: 'This is cluster headache with characteristic severe unilateral orbital pain, autonomic features (lacrimation, rhinorrhea, ptosis), and episodic pattern. First-line acute treatments: high-flow 100% oxygen (12-15 L/min for 15 min) and subcutaneous sumatriptan. Oral medications are too slow for these brief intense attacks. Verapamil is used for prevention during cluster periods.',
+            reference: 'Robbins MS, et al. Treatment of Cluster Headache Guidelines. Headache. 2016;56(7):1093-1106.'
+        },
+        // Q8 - Answer: D
+        {
+            id: 'NEURO-008',
+            domains: ['Multiple Sclerosis', 'Diagnosis'],
+            vignette: 'A 28-year-old woman presents with 5 days of painful vision loss in her right eye. Six months ago she had numbness in her legs that resolved spontaneously. MRI shows multiple periventricular white matter lesions with some enhancing.',
+            question: 'What CSF finding would most strongly support the suspected diagnosis?',
+            options: [
+                { id: 'A', text: 'Elevated protein level greater than 100 mg/dL concentration', correct: false },
+                { id: 'B', text: 'Markedly elevated white blood cell count with neutrophils', correct: false },
+                { id: 'C', text: 'Decreased glucose level below 40 mg/dL concentration', correct: false },
+                { id: 'D', text: 'Oligoclonal bands present in CSF but absent in serum', correct: true },
+                { id: 'E', text: 'Positive bacterial culture identifying specific organisms', correct: false }
+            ],
+            explanation: 'This suggests MS with optic neuritis and prior demyelinating event. MS requires dissemination in space and time. CSF oligoclonal bands (present in CSF but not serum) indicate intrathecal IgG synthesis, supporting MS diagnosis (present in >90%). Other findings include mild pleocytosis and elevated IgG index. High protein/low glucose suggests infection.',
+            reference: 'Thompson AJ, et al. 2017 revisions of the McDonald criteria. Lancet Neurol. 2018;17(2):162-173.'
+        },
+        // Q9 - Answer: A
+        {
+            id: 'NEURO-009',
+            domains: ['Multiple Sclerosis', 'Therapeutics'],
+            vignette: 'A 32-year-old woman with relapsing-remitting MS develops new left leg weakness over 2 days. She is on maintenance therapy with a disease-modifying agent. Her last relapse was 8 months ago.',
+            question: 'What is the first-line treatment for this acute MS exacerbation?',
+            options: [
+                { id: 'A', text: 'High-dose intravenous methylprednisolone for 3-5 days', correct: true },
+                { id: 'B', text: 'Plasma exchange sessions performed every other day', correct: false },
+                { id: 'C', text: 'Increase the dose of her current disease-modifying therapy', correct: false },
+                { id: 'D', text: 'Add oral interferon beta to her current treatment regimen', correct: false },
+                { id: 'E', text: 'Physical therapy alone without pharmacological intervention', correct: false }
+            ],
+            explanation: 'Acute MS relapses are treated with high-dose IV corticosteroids (methylprednisolone 1g daily for 3-5 days). This shortens relapse duration but doesn\'t affect long-term disability. Plasma exchange is for severe relapses not responding to steroids. Disease-modifying therapies prevent relapses but don\'t treat acute attacks.',
+            reference: 'Rae-Grant A, et al. Disease-modifying therapies for adults with MS. Neurology. 2018;90(17):777-788.'
+        },
+        // Q10 - Answer: E
+        {
+            id: 'NEURO-010',
+            domains: ['Movement Disorders', 'Pathology'],
+            vignette: 'A 65-year-old man presents with 2 years of progressive resting tremor in his right hand, slowness of movement, and muscle stiffness. His symptoms significantly improve after starting carbidopa-levodopa therapy.',
+            question: 'What is the pathological hallmark finding in this condition?',
+            options: [
+                { id: 'A', text: 'Neurofibrillary tangles composed of hyperphosphorylated tau protein', correct: false },
+                { id: 'B', text: 'Prion protein deposits with spongiform encephalopathy changes', correct: false },
+                { id: 'C', text: 'Huntingtin protein aggregates within striatal medium spiny neurons', correct: false },
+                { id: 'D', text: 'TDP-43 cytoplasmic inclusions in motor neurons of spinal cord', correct: false },
+                { id: 'E', text: 'Lewy bodies containing alpha-synuclein in substantia nigra neurons', correct: true }
+            ],
+            explanation: 'This is Parkinson\'s disease with cardinal features: resting Tremor, Rigidity, Akinesia/bradykinesia, and Postural instability. Pathologically there is dopaminergic neuron loss in substantia nigra and Lewy bodies (α-synuclein aggregates). Levodopa response supports diagnosis. Neurofibrillary tangles = Alzheimer\'s, Prions = CJD, Huntingtin = Huntington\'s, TDP-43 = ALS.',
+            reference: 'Poewe W, et al. Parkinson disease. Nat Rev Dis Primers. 2017;3:17013.'
+        },
+        // Q11 - Answer: C
+        {
+            id: 'NEURO-011',
+            domains: ['Movement Disorders', 'Genetics'],
+            vignette: 'A 40-year-old man presents with personality changes, depression, and involuntary writhing movements of his limbs. His father died at age 48 in a psychiatric institution. Brain MRI shows bilateral caudate nucleus atrophy.',
+            question: 'What is the genetic mechanism underlying this disease?',
+            options: [
+                { id: 'A', text: 'Point mutation causing autosomal recessive inheritance pattern', correct: false },
+                { id: 'B', text: 'X-linked recessive inheritance with variable penetrance noted', correct: false },
+                { id: 'C', text: 'CAG trinucleotide repeat expansion with genetic anticipation', correct: true },
+                { id: 'D', text: 'Mitochondrial DNA mutation with maternal inheritance only', correct: false },
+                { id: 'E', text: 'Large chromosomal deletion detected on cytogenetic analysis', correct: false }
+            ],
+            explanation: 'This is Huntington\'s disease caused by CAG repeat expansion in HTT gene on chromosome 4. Normal: <36 repeats; HD: ≥40 repeats. Autosomal dominant with anticipation (earlier onset in successive generations, especially paternal transmission). Clinical triad: movement disorder (chorea), cognitive decline, psychiatric symptoms. No disease-modifying treatment exists.',
+            reference: 'Ross CA, Tabrizi SJ. Huntington\'s disease. Lancet Neurol. 2011;10(1):83-98.'
+        },
+        // Q12 - Answer: B
+        {
+            id: 'NEURO-012',
+            domains: ['Neuromuscular', 'Immunology'],
+            vignette: 'A 30-year-old woman presents with fluctuating double vision worse at the end of the day and difficulty chewing. She has bilateral ptosis that worsens with sustained upgaze. Ice pack test improves the ptosis.',
+            question: 'Where are the pathogenic autoantibodies primarily directed?',
+            options: [
+                { id: 'A', text: 'Presynaptic voltage-gated calcium channels at nerve terminals', correct: false },
+                { id: 'B', text: 'Postsynaptic nicotinic acetylcholine receptors at motor endplate', correct: true },
+                { id: 'C', text: 'Voltage-gated potassium channels on peripheral nerve membranes', correct: false },
+                { id: 'D', text: 'Myelin basic protein in central nervous system white matter', correct: false },
+                { id: 'E', text: 'Ganglioside GM1 on peripheral nerve axonal membranes surface', correct: false }
+            ],
+            explanation: 'This is myasthenia gravis with autoantibodies against postsynaptic nicotinic AChR at the neuromuscular junction (~85%). Fatigable weakness (worse with use, better with rest) affecting ocular, bulbar, and limb muscles is characteristic. Ice pack improves ptosis by reducing acetylcholinesterase activity. Lambert-Eaton has presynaptic VGCC antibodies with strength that improves with use.',
+            reference: 'Gilhus NE, et al. Myasthenia gravis. Nat Rev Dis Primers. 2019;5(1):30.'
+        },
+        // Q13 - Answer: D
+        {
+            id: 'NEURO-013',
+            domains: ['Neuromuscular', 'Emergency Medicine'],
+            vignette: 'A 55-year-old man presents with 4 days of progressive weakness starting in his legs, now affecting his arms. He had gastroenteritis 2 weeks ago. Deep tendon reflexes are absent throughout. He reports mild dyspnea.',
+            question: 'What is the most critical parameter to monitor in this patient?',
+            options: [
+                { id: 'A', text: 'Serum potassium level checked every 6 hours routinely', correct: false },
+                { id: 'B', text: 'Serial blood glucose measurements for glycemic control', correct: false },
+                { id: 'C', text: 'Creatine kinase levels to assess for muscle breakdown', correct: false },
+                { id: 'D', text: 'Forced vital capacity measured every 4-6 hours serially', correct: true },
+                { id: 'E', text: 'Thyroid function tests to evaluate metabolic status', correct: false }
+            ],
+            explanation: 'This is Guillain-Barré syndrome with ascending weakness and areflexia following infection (often Campylobacter). The critical concern is respiratory failure from diaphragmatic weakness. Serial FVC monitoring is essential - intubate if FVC <20 mL/kg, NIF <-30 cmH2O, or declining >30%. Treatment: IVIG or plasmapheresis. Steroids are NOT effective.',
+            reference: 'Willison HJ, et al. Guillain-Barré syndrome. Lancet. 2016;388(10045):717-727.'
+        },
+        // Q14 - Answer: A
+        {
+            id: 'NEURO-014',
+            domains: ['Dementia', 'Pathology'],
+            vignette: 'A 75-year-old man is brought for 2 years of progressive memory loss. He has difficulty with recent events but recalls his childhood well. He frequently gets lost in familiar places. Neurological examination is otherwise unremarkable.',
+            question: 'What pathological findings are most characteristic of this condition?',
+            options: [
+                { id: 'A', text: 'Extracellular amyloid plaques and intracellular neurofibrillary tangles', correct: true },
+                { id: 'B', text: 'Cortical Lewy bodies with alpha-synuclein protein aggregation', correct: false },
+                { id: 'C', text: 'Frontotemporal lobar degeneration with Pick body inclusions', correct: false },
+                { id: 'D', text: 'Spongiform changes with prion protein resistant to proteases', correct: false },
+                { id: 'E', text: 'Multiple lacunar infarcts in basal ganglia and white matter', correct: false }
+            ],
+            explanation: 'This is Alzheimer\'s disease, the most common dementia cause. Pathological hallmarks: extracellular amyloid-beta plaques and intracellular neurofibrillary tangles (hyperphosphorylated tau). Early hippocampal involvement causes memory impairment. MRI shows hippocampal atrophy. Treatment is symptomatic: cholinesterase inhibitors and memantine.',
+            reference: 'Scheltens P, et al. Alzheimer\'s disease. Lancet. 2021;397(10284):1577-1590.'
+        },
+        // Q15 - Answer: E
+        {
+            id: 'NEURO-015',
+            domains: ['Neuropathy', 'Pathophysiology'],
+            vignette: 'A 60-year-old man with poorly controlled type 2 diabetes presents with burning pain and numbness in his feet in a stocking distribution. Examination shows decreased pinprick and vibration sensation distally with absent ankle reflexes.',
+            question: 'What is the primary mechanism of nerve damage in this condition?',
+            options: [
+                { id: 'A', text: 'Autoimmune demyelination triggered by molecular mimicry mechanisms', correct: false },
+                { id: 'B', text: 'Mechanical compression of nerve roots at the spinal foramina', correct: false },
+                { id: 'C', text: 'Vitamin B12 deficiency causing subacute combined degeneration', correct: false },
+                { id: 'D', text: 'Heavy metal toxicity with axonal degeneration pattern noted', correct: false },
+                { id: 'E', text: 'Metabolic injury from hyperglycemia with polyol pathway activation', correct: true }
+            ],
+            explanation: 'Diabetic peripheral neuropathy is a length-dependent axonopathy affecting longest nerves first (stocking-glove pattern). Mechanisms include polyol pathway activation (sorbitol accumulation), AGEs, oxidative stress, and microvascular ischemia. Treatment: optimize glycemic control, symptomatic management (duloxetine, gabapentin), foot care.',
+            reference: 'Pop-Busui R, et al. Diabetic Neuropathy: ADA Position Statement. Diabetes Care. 2017;40(1):136-154.'
+        },
+        // Q16 - Answer: C
+        {
+            id: 'NEURO-016',
+            domains: ['Cranial Nerves', 'Diagnosis'],
+            vignette: 'A 35-year-old woman wakes with right facial weakness affecting both her forehead and lower face equally. She cannot close her right eye or raise her right eyebrow. Hearing and extremity strength are normal.',
+            question: 'What is the most likely diagnosis for this patient?',
+            options: [
+                { id: 'A', text: 'Acute ischemic stroke affecting the left motor cortex', correct: false },
+                { id: 'B', text: 'Acoustic neuroma compressing the facial nerve at the CPA', correct: false },
+                { id: 'C', text: 'Bell\'s palsy causing peripheral facial nerve dysfunction', correct: true },
+                { id: 'D', text: 'Brainstem glioma infiltrating the facial nerve nucleus', correct: false },
+                { id: 'E', text: 'Myasthenia gravis with predominantly facial muscle involvement', correct: false }
+            ],
+            explanation: 'Bell\'s palsy is acute idiopathic peripheral CN VII palsy. Key: involvement of BOTH upper and lower face indicates peripheral (LMN) lesion. Central lesions spare forehead (bilateral cortical innervation). Likely related to HSV reactivation. Treatment within 72 hours: oral prednisone. Eye protection is crucial. Most patients recover.',
+            reference: 'Baugh RF, et al. Clinical practice guideline: Bell\'s Palsy. Otolaryngol Head Neck Surg. 2013;149(3 Suppl):S1-27.'
+        },
+        // Q17 - Answer: B
+        {
+            id: 'NEURO-017',
+            domains: ['Consciousness', 'Assessment'],
+            vignette: 'A 70-year-old man is brought unresponsive after being found down at home. On examination: no eye opening to painful stimuli, extensor posturing (decerebrate) to pain, and no verbal response. Pupils are 3 mm and reactive.',
+            question: 'What is this patient\'s Glasgow Coma Scale score?',
+            options: [
+                { id: 'A', text: '3 points indicating minimal neurological responsiveness', correct: false },
+                { id: 'B', text: '4 points indicating severe neurological impairment present', correct: true },
+                { id: 'C', text: '5 points indicating moderate neurological impairment present', correct: false },
+                { id: 'D', text: '6 points indicating moderate neurological impairment present', correct: false },
+                { id: 'E', text: '8 points indicating need for airway protection measures', correct: false }
+            ],
+            explanation: 'GCS = Eye (E) + Verbal (V) + Motor (M). This patient: E1 (no eye opening) + V1 (no verbal) + M2 (extensor posturing) = 4. Scale ranges 3-15. GCS ≤8 indicates coma requiring airway protection. Motor scale: 6=obeys, 5=localizes, 4=withdraws, 3=flexor posturing, 2=extensor posturing, 1=none. Reactive pupils indicate intact midbrain.',
+            reference: 'Teasdale G, Jennett B. Assessment of coma. Lancet. 1974;2(7872):81-84.'
+        },
+        // Q18 - Answer: E
+        {
+            id: 'NEURO-018',
+            domains: ['Infectious Disease', 'Neurology'],
+            vignette: 'A 19-year-old college student presents with fever, headache, and neck stiffness. CSF shows: WBC 1500/μL (92% neutrophils), protein 200 mg/dL, glucose 30 mg/dL (serum glucose 110 mg/dL). Gram stain shows gram-negative diplococci.',
+            question: 'What is the most likely causative organism in this patient?',
+            options: [
+                { id: 'A', text: 'Streptococcus pneumoniae with polysaccharide capsule', correct: false },
+                { id: 'B', text: 'Listeria monocytogenes affecting immunocompromised hosts', correct: false },
+                { id: 'C', text: 'Herpes simplex virus type 1 causing temporal encephalitis', correct: false },
+                { id: 'D', text: 'Cryptococcus neoformans in setting of immune suppression', correct: false },
+                { id: 'E', text: 'Neisseria meningitidis spreading in close-contact settings', correct: true }
+            ],
+            explanation: 'The CSF profile shows bacterial meningitis: high WBC with neutrophils, elevated protein, LOW glucose. Gram-negative diplococci confirms N. meningitidis, common in college-age patients in close quarters. Treatment: ceftriaxone + vancomycin + dexamethasone. Close contacts need chemoprophylaxis. S. pneumoniae shows gram-positive diplococci.',
+            reference: 'van de Beek D, et al. Bacterial meningitis. Nat Rev Dis Primers. 2016;2:16074.'
+        },
+        // Q19 - Answer: D
+        {
+            id: 'NEURO-019',
+            domains: ['Neuro-Oncology', 'Imaging'],
+            vignette: 'A 58-year-old man presents with 3 weeks of progressive headaches worse in the morning and with coughing. He had a new-onset seizure yesterday. MRI shows a 5 cm ring-enhancing mass in the right frontal lobe crossing the corpus callosum.',
+            question: 'What is the most likely diagnosis based on these findings?',
+            options: [
+                { id: 'A', text: 'Meningioma arising from the dura with calcifications', correct: false },
+                { id: 'B', text: 'Brain abscess from hematogenous bacterial seeding source', correct: false },
+                { id: 'C', text: 'Low-grade astrocytoma with indolent growth characteristics', correct: false },
+                { id: 'D', text: 'Glioblastoma with characteristic aggressive imaging features', correct: true },
+                { id: 'E', text: 'Metastatic carcinoma from unknown primary tumor source', correct: false }
+            ],
+            explanation: 'Glioblastoma (GBM) is the most common aggressive primary brain tumor. Classic MRI: ring-enhancing mass with central necrosis, irregular borders, surrounding edema, crossing corpus callosum (\"butterfly glioma\"). Median survival ~15 months with treatment. Meningiomas are extra-axial with dural tail. Abscesses have smooth enhancement and restricted diffusion.',
+            reference: 'Wen PY, Kesari S. Malignant gliomas in adults. N Engl J Med. 2008;359(5):492-507.'
+        },
+        // Q20 - Answer: A
+        {
+            id: 'NEURO-020',
+            domains: ['Spinal Cord', 'Oncology'],
+            vignette: 'A 68-year-old man with metastatic prostate cancer presents with 10 days of progressive back pain and 3 days of bilateral leg weakness. He now has urinary retention and decreased perianal sensation. Rectal tone is diminished.',
+            question: 'What is the most appropriate immediate management step?',
+            options: [
+                { id: 'A', text: 'Administer high-dose dexamethasone and obtain urgent MRI spine', correct: true },
+                { id: 'B', text: 'Schedule outpatient MRI spine within the next 2 weeks', correct: false },
+                { id: 'C', text: 'Begin physical therapy and prescribe opioid pain medications', correct: false },
+                { id: 'D', text: 'Order nuclear medicine bone scan to assess metastatic extent', correct: false },
+                { id: 'E', text: 'Prescribe NSAIDs with muscle relaxants and close follow-up', correct: false }
+            ],
+            explanation: 'This is malignant spinal cord compression, an oncologic emergency. Red flags: known cancer, progressive neurological deficits, saddle anesthesia, bowel/bladder dysfunction. Immediate management: high-dose dexamethasone (reduces edema) and urgent MRI of entire spine. Definitive treatment: surgery and/or radiation. Delays lead to permanent paralysis. Ambulatory status at presentation predicts outcome.',
+            reference: 'Loblaw DA, et al. Malignant spinal cord compression management. J Clin Oncol. 2005;23(9):2028-2037.'
+        }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let startTime = Date.now();
+    let confidenceRatings = [];
+    let answers = [];
+    let selectedOption = null;
+
+    function renderQuestion() {
+        const q = questions[currentQuestion];
+        const container = document.getElementById('questionContainer');
+        const domainsHTML = q.domains.map(d => `<span class="domain-tag">${d}</span>`).join('');
+        
+        container.innerHTML = `
+            <div class="question-card">
+                <div class="question-number">Question ${currentQuestion + 1} of ${questions.length}</div>
+                ${domainsHTML}
+                <div class="vignette">${q.vignette}</div>
+                <div class="question-text">${q.question}</div>
+                <div class="confidence-slider">
+                    <label>How confident are you? <span id="confValue" class="confidence-value">50%</span></label>
+                    <input type="range" min="0" max="100" value="50" id="confidenceSlider" oninput="document.getElementById('confValue').textContent = this.value + '%'">
+                </div>
+                <div class="options">
+                    ${q.options.map((opt, i) => `
+                        <div class="option" onclick="selectOption(${i})" id="opt${i}">
+                            <strong>${opt.id}.</strong> ${opt.text}
+                        </div>
+                    `).join('')}
+                </div>
+                <div style="margin-top: 24px; text-align: center;">
+                    <button class="btn btn-primary" id="submitBtn" onclick="submitAnswer()" disabled>Submit Answer</button>
+                </div>
+                <div class="explanation" id="explanation">
+                    <h4>Explanation</h4>
+                    <p>${q.explanation}</p>
+                    <p style="margin-top: 12px; font-size: 13px; color: #64748b;"><strong>Reference:</strong> ${q.reference}</p>
+                    <div style="margin-top: 20px; text-align: center;">
+                        <button class="btn btn-primary" onclick="nextQuestion()">Next Question</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        document.getElementById('progressFill').style.width = `${(currentQuestion / questions.length) * 100}%`;
+        document.getElementById('progressText').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+    }
+
+    function selectOption(index) {
+        document.querySelectorAll('.option').forEach((opt, i) => {
+            opt.classList.remove('selected');
+            if (i === index) opt.classList.add('selected');
+        });
+        selectedOption = index;
+        document.getElementById('submitBtn').disabled = false;
+    }
+
+    function submitAnswer() {
+        const q = questions[currentQuestion];
+        const confidence = parseInt(document.getElementById('confidenceSlider').value);
+        confidenceRatings.push(confidence);
+        
+        const isCorrect = q.options[selectedOption].correct;
+        answers.push({ questionId: q.id, selected: selectedOption, correct: isCorrect, confidence });
+        if (isCorrect) score++;
+        
+        document.querySelectorAll('.option').forEach((opt, i) => {
+            opt.onclick = null;
+            if (q.options[i].correct) opt.classList.add('correct');
+            else if (i === selectedOption && !isCorrect) opt.classList.add('incorrect');
+        });
+        
+        document.getElementById('submitBtn').style.display = 'none';
+        document.getElementById('explanation').classList.add('show');
+    }
+
+    function nextQuestion() {
+        currentQuestion++;
+        selectedOption = null;
+        if (currentQuestion >= questions.length) showResults();
+        else renderQuestion();
+    }
+
+    function showResults() {
+        document.getElementById('questionContainer').classList.add('hidden');
+        document.getElementById('resultsContainer').classList.remove('hidden');
+        
+        const elapsed = Math.floor((Date.now() - startTime) / 1000);
+        const minutes = Math.floor(elapsed / 60);
+        const seconds = elapsed % 60;
+        
+        const avgConfidence = confidenceRatings.reduce((a, b) => a + b, 0) / confidenceRatings.length;
+        const actualScore = (score / questions.length) * 100;
+        const calibration = Math.abs(avgConfidence - actualScore);
+        
+        document.getElementById('scoreValue').textContent = Math.round(actualScore) + '%';
+        document.getElementById('timeValue').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        document.getElementById('calibrationValue').textContent = calibration < 10 ? 'Excellent' : calibration < 20 ? 'Good' : 'Needs Work';
+    }
+
+    function restartModule() {
+        currentQuestion = 0; score = 0; startTime = Date.now();
+        confidenceRatings = []; answers = []; selectedOption = null;
+        document.getElementById('questionContainer').classList.remove('hidden');
+        document.getElementById('resultsContainer').classList.add('hidden');
+        renderQuestion();
+    }
+
+    renderQuestion();
+    </script>
+</body>
+</html>
