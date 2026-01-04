@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dx Suite | Master Clinical Reasoning Through Integrated Learning</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #fafafa; color: #18181b; line-height: 1.6; }
+        
+        /* Navigation */
+        .nav { background: #fff; border-bottom: 1px solid #e4e4e7; padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { font-size: 22px; font-weight: 800; background: linear-gradient(135deg, #3b82f6, #10b981, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-decoration: none; }
+        .nav-links { display: flex; gap: 8px; align-items: center; }
+        .nav-link { padding: 8px 16px; color: #52525b; text-decoration: none; font-size: 14px; font-weight: 500; border-radius: 8px; transition: all 0.15s; }
+        .nav-link:hover { background: #f4f4f5; color: #18181b; }
+        .nav-link.cta { background: #18181b; color: #fff; }
+        .nav-link.cta:hover { background: #3f3f46; }
+        
+        /* Hero Section */
+        .hero { background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%); padding: 80px 24px 100px; text-align: center; position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 30% 70%, rgba(59, 130, 246, 0.05) 0%, transparent 50%), radial-gradient(circle at 70% 30%, rgba(16, 185, 129, 0.05) 0%, transparent 50%), radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.03) 0%, transparent 50%); pointer-events: none; }
+        .hero-content { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: #fff; padding: 8px 16px; border-radius: 50px; font-size: 13px; font-weight: 500; color: #52525b; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+        .hero-badge span { background: linear-gradient(135deg, #10b981, #3b82f6); color: #fff; padding: 2px 8px; border-radius: 12px; font-size: 11px; }
+        .hero h1 { font-size: 52px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 20px; }
+        .hero h1 .gradient { background: linear-gradient(135deg, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero p { font-size: 20px; color: #64748b; max-width: 700px; margin: 0 auto 40px; }
+        .hero-ctas { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .hero-btn { padding: 16px 32px; border-radius: 12px; font-size: 16px; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+        .hero-btn.primary { background: #18181b; color: #fff; }
+        .hero-btn.primary:hover { background: #3f3f46; transform: translateY(-2px); }
+        .hero-btn.secondary { background: #fff; color: #18181b; border: 1px solid #e4e4e7; }
+        .hero-btn.secondary:hover { border-color: #a1a1aa; transform: translateY(-2px); }
+        
+        /* Stats Bar */
+        .stats-bar { background: #fff; border-bottom: 1px solid #e4e4e7; padding: 24px; }
+        .stats-inner { max-width: 1000px; margin: 0 auto; display: flex; justify-content: center; gap: 64px; flex-wrap: wrap; }
+        .stat { text-align: center; }
+        .stat-value { font-size: 32px; font-weight: 700; color: #18181b; }
+        .stat-label { font-size: 13px; color: #71717a; margin-top: 4px; }
+        
+        /* Section Styles */
+        .section { padding: 80px 24px; max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 48px; }
+        .section-label { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #8b5cf6; margin-bottom: 12px; }
+        .section-title { font-size: 36px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 16px; }
+        .section-subtitle { font-size: 18px; color: #64748b; max-width: 600px; margin: 0 auto; }
+        
+        /* Platform Cards */
+        .platforms { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+        @media (max-width: 900px) { .platforms { grid-template-columns: 1fr; } }
+        
+        .platform-card { background: #fff; border-radius: 20px; padding: 32px; border: 2px solid #e4e4e7; transition: all 0.3s; position: relative; overflow: hidden; }
+        .platform-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+        .platform-card.reason { border-color: #dbeafe; }
+        .platform-card.reason:hover { border-color: #3b82f6; }
+        .platform-card.mechanism { border-color: #d1fae5; }
+        .platform-card.mechanism:hover { border-color: #10b981; }
+        .platform-card.coach { border-color: #ede9fe; }
+        .platform-card.coach:hover { border-color: #8b5cf6; }
+        
+        .platform-icon { width: 64px; height: 64px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 20px; }
+        .reason .platform-icon { background: linear-gradient(135deg, #dbeafe, #bfdbfe); }
+        .mechanism .platform-icon { background: linear-gradient(135deg, #d1fae5, #a7f3d0); }
+        .coach .platform-icon { background: linear-gradient(135deg, #ede9fe, #ddd6fe); }
+        
+        .platform-name { font-size: 24px; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .platform-tagline { font-size: 14px; color: #64748b; margin-bottom: 16px; font-weight: 500; }
+        .platform-desc { font-size: 15px; color: #52525b; margin-bottom: 20px; line-height: 1.6; }
+        
+        .platform-features { list-style: none; margin-bottom: 24px; }
+        .platform-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: #52525b; padding: 8px 0; }
+        .platform-features li::before { content: '✓'; color: #10b981; font-weight: 700; flex-shrink: 0; }
+        
+        .platform-stats { display: flex; gap: 16px; padding-top: 20px; border-top: 1px solid #f4f4f5; margin-bottom: 20px; }
+        .platform-stat { text-align: center; flex: 1; }
+        .platform-stat-value { font-size: 20px; font-weight: 700; color: #18181b; }
+        .platform-stat-label { font-size: 11px; color: #a1a1aa; }
+        
+        .platform-btn { display: block; text-align: center; padding: 14px; border-radius: 10px; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+        .reason .platform-btn { background: #3b82f6; color: #fff; }
+        .reason .platform-btn:hover { background: #2563eb; }
+        .mechanism .platform-btn { background: #10b981; color: #fff; }
+        .mechanism .platform-btn:hover { background: #059669; }
+        .coach .platform-btn { background: #8b5cf6; color: #fff; }
+        .coach .platform-btn:hover { background: #7c3aed; }
+        
+        /* How It Works */
+        .how-it-works { background: #18181b; color: #fff; padding: 80px 24px; }
+        .how-it-works .section-label { color: #a78bfa; }
+        .how-it-works .section-title { color: #fff; }
+        .how-it-works .section-subtitle { color: #a1a1aa; }
+        
+        .workflow-steps { display: flex; gap: 40px; max-width: 1000px; margin: 48px auto 0; flex-wrap: wrap; justify-content: center; }
+        .workflow-step { flex: 1; min-width: 200px; max-width: 280px; text-align: center; position: relative; }
+        .workflow-step:not(:last-child)::after { content: '→'; position: absolute; right: -30px; top: 40px; font-size: 24px; color: #52525b; }
+        @media (max-width: 800px) { .workflow-step:not(:last-child)::after { display: none; } }
+        
+        .workflow-icon { width: 80px; height: 80px; margin: 0 auto 16px; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 32px; }
+        .workflow-step:nth-child(1) .workflow-icon { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+        .workflow-step:nth-child(2) .workflow-icon { background: linear-gradient(135deg, #10b981, #059669); }
+        .workflow-step:nth-child(3) .workflow-icon { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+        .workflow-step:nth-child(4) .workflow-icon { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        
+        .workflow-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .workflow-desc { font-size: 14px; color: #a1a1aa; line-height: 1.5; }
+        
+        /* Fingerprinting Section */
+        .fingerprint-section { background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #d1fae5 100%); padding: 80px 24px; }
+        .fingerprint-content { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        @media (max-width: 800px) { .fingerprint-content { grid-template-columns: 1fr; } }
+        
+        .fingerprint-text h2 { font-size: 32px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.5px; }
+        .fingerprint-text p { font-size: 16px; color: #52525b; margin-bottom: 16px; line-height: 1.7; }
+        .fingerprint-text ul { list-style: none; margin-top: 24px; }
+        .fingerprint-text li { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; font-size: 15px; }
+        .fingerprint-text li .icon { width: 28px; height: 28px; background: #10b981; color: #fff; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+        
+        .fingerprint-visual { background: #fff; border-radius: 20px; padding: 32px; box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+        .fingerprint-chart { margin-bottom: 24px; }
+        .chart-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .chart-label { width: 120px; font-size: 13px; color: #52525b; }
+        .chart-bar-bg { flex: 1; height: 24px; background: #f4f4f5; border-radius: 6px; overflow: hidden; }
+        .chart-bar { height: 100%; border-radius: 6px; transition: width 1s ease; }
+        .chart-bar.history { background: linear-gradient(90deg, #3b82f6, #60a5fa); width: 85%; }
+        .chart-bar.physical { background: linear-gradient(90deg, #10b981, #34d399); width: 72%; }
+        .chart-bar.pathophys { background: linear-gradient(90deg, #8b5cf6, #a78bfa); width: 45%; }
+        .chart-bar.workup { background: linear-gradient(90deg, #f59e0b, #fbbf24); width: 68%; }
+        .chart-bar.management { background: linear-gradient(90deg, #ef4444, #f87171); width: 55%; }
+        .chart-value { width: 40px; text-align: right; font-size: 13px; font-weight: 600; color: #18181b; }
+        
+        .fingerprint-insight { background: #f0fdf4; border-radius: 12px; padding: 16px; border-left: 4px solid #10b981; }
+        .fingerprint-insight p { font-size: 14px; color: #166534; margin: 0; }
+        .fingerprint-insight strong { color: #15803d; }
+        
+        /* Learning Paths */
+        .paths-section { padding: 80px 24px; }
+        .paths-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1000px; margin: 48px auto 0; }
+        @media (max-width: 800px) { .paths-grid { grid-template-columns: 1fr; } }
+        
+        .path-card { background: #fff; border-radius: 16px; padding: 28px; border: 1px solid #e4e4e7; }
+        .path-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .path-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+        .path-card:nth-child(1) .path-icon { background: #dbeafe; }
+        .path-card:nth-child(2) .path-icon { background: #fef3c7; }
+        .path-card:nth-child(3) .path-icon { background: #ede9fe; }
+        .path-name { font-size: 18px; font-weight: 600; }
+        .path-desc { font-size: 14px; color: #64748b; margin-bottom: 16px; }
+        .path-steps { list-style: none; }
+        .path-steps li { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #f4f4f5; font-size: 14px; }
+        .path-steps li:last-child { border-bottom: none; }
+        .step-num { width: 24px; height: 24px; background: #f4f4f5; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: #52525b; }
+        
+        /* CTA Section */
+        .cta-section { background: linear-gradient(135deg, #18181b 0%, #27272a 100%); color: #fff; padding: 80px 24px; text-align: center; }
+        .cta-section h2 { font-size: 36px; font-weight: 700; margin-bottom: 16px; }
+        .cta-section p { font-size: 18px; color: #a1a1aa; margin-bottom: 32px; }
+        .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .cta-btn { padding: 16px 32px; border-radius: 12px; font-size: 16px; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+        .cta-btn.reason { background: #3b82f6; color: #fff; }
+        .cta-btn.mechanism { background: #10b981; color: #fff; }
+        .cta-btn.coach { background: #8b5cf6; color: #fff; }
+        .cta-btn:hover { transform: translateY(-2px); opacity: 0.9; }
+        
+        /* Footer */
+        .footer { background: #fff; border-top: 1px solid #e4e4e7; padding: 40px 24px; text-align: center; }
+        .footer p { font-size: 14px; color: #71717a; }
+        .footer a { color: #8b5cf6; text-decoration: none; }
+        
+        /* Mobile adjustments */
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 36px; }
+            .hero p { font-size: 16px; }
+            .section-title { font-size: 28px; }
+            .nav-links { gap: 4px; }
+            .nav-link { padding: 6px 10px; font-size: 13px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">Dx Suite</a>
+            <div class="nav-links">
+                <a href="#platforms" class="nav-link">Platforms</a>
+                <a href="#how-it-works" class="nav-link">How It Works</a>
+                <a href="#fingerprinting" class="nav-link">Fingerprinting</a>
+                <a href="fingerprint-dashboard.html" class="nav-link">📊 Dashboard</a>
+                <a href="#platforms" class="nav-link cta">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span>NEW</span> Integrated learning ecosystem for medical students
+            </div>
+            <h1>Master Clinical Reasoning,<br><span class="gradient">Not Just Memorization</span></h1>
+            <p>Three interconnected platforms that adapt to how you learn, identify your gaps, and build lasting diagnostic expertise through deliberate practice.</p>
+            <div class="hero-ctas">
+                <a href="#platforms" class="hero-btn primary">Explore the Platforms</a>
+                <a href="#how-it-works" class="hero-btn secondary">See How It Works</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stats-inner">
+            <div class="stat">
+                <div class="stat-value">200+</div>
+                <div class="stat-label">Interactive Cases</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">17</div>
+                <div class="stat-label">Mechanism Modules</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">33</div>
+                <div class="stat-label">Coaching Sessions</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">∞</div>
+                <div class="stat-label">Personalized Insights</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Platforms Section -->
+    <section class="section" id="platforms">
+        <div class="section-header">
+            <div class="section-label">The Dx Suite Ecosystem</div>
+            <h2 class="section-title">Three Platforms. One Learning Journey.</h2>
+            <p class="section-subtitle">Each platform serves a distinct purpose in building your clinical reasoning skills, and they work together to create a complete picture of your diagnostic abilities.</p>
+        </div>
+        
+        <div class="platforms">
+            <!-- ReasonDx -->
+            <div class="platform-card reason">
+                <div class="platform-icon">📋</div>
+                <h3 class="platform-name">ReasonDx</h3>
+                <p class="platform-tagline">Practice Diagnostic Reasoning</p>
+                <p class="platform-desc">Work through realistic patient cases from first encounter to final diagnosis. Make decisions, order tests, and see how your reasoning compares to expert approaches.</p>
+                <ul class="platform-features">
+                    <li>Interactive patient encounters with branching pathways</li>
+                    <li>Real-time feedback on diagnostic decisions</li>
+                    <li>Environmental & occupational medicine integration</li>
+                    <li>Gamified progression with XP and achievements</li>
+                </ul>
+                <div class="platform-stats">
+                    <div class="platform-stat">
+                        <div class="platform-stat-value">200+</div>
+                        <div class="platform-stat-label">Cases</div>
+                    </div>
+                    <div class="platform-stat">
+                        <div class="platform-stat-value">12</div>
+                        <div class="platform-stat-label">Specialties</div>
+                    </div>
+                    <div class="platform-stat">
+                        <div class="platform-stat-value">3</div>
+                        <div class="platform-stat-label">Difficulty Levels</div>
+                    </div>
+                </div>
+                <a href="ReasonDx/index.html" class="platform-btn">Start Practicing →</a>
+            </div>
+
+            <!-- MechanismDx -->
+            <div class="platform-card mechanism">
+                <div class="platform-icon">🧬</div>
+                <h3 class="platform-name">MechanismDx</h3>
+                <p class="platform-tagline">Understand the "Why"</p>
+                <p class="platform-desc">Deep dive into pathophysiology, pharmacology, and clinical science. When you struggle in a case, MechanismDx helps you understand the underlying concepts.</p>
+                <ul class="platform-features">
+                    <li>Visual concept maps and pathways</li>
+                    <li>10 MCQs per module with detailed explanations</li>
+                    <li>Cross-linked to relevant cases</li>
+                    <li>Spaced repetition for long-term retention</li>
+                </ul>
+                <div class="platform-stats">
+                    <div class="platform-stat">
+                        <div class="platform-stat-value">17</div>
+                        <div class="platform-stat-label">Modules</div>
+                    </div>
+                    <div class="platform-stat">
+                        <div class="platform-stat-value">170+</div>
+                        <div class="platform-stat-label">MCQs</div>
+                    </div>
+                    <div class="platform-stat">
+                        <div class="platform-stat-value">8</div>
+                        <div class="platform-stat-label">Body Systems</div>
+                    </div>
+                </div>
+                <a href="mechanism/index.html" class="platform-btn">Explore Mechanisms →</a>
+            </div>
+
+            <!-- CoachDx -->
+            <div class="platform-card coach">
+                <div class="platform-icon">👨‍⚕️</div>
+                <h3 class="platform-name">CoachDx</h3>
+                <p class="platform-tagline">Learn from an AI Attending</p>
+                <p class="platform-desc">Have Socratic conversations with Dr. Chen, an AI attending physician. Discuss cases, explore your reasoning, and receive personalized teaching.</p>
+                <ul class="platform-features">
+                    <li>Socratic dialogue that guides, doesn't lecture</li>
+                    <li>Parallel case pairs to test reasoning transfer</li>
+                    <li>Real-time concept tracking</li>
+                    <li>Teaching moments based on your gaps</li>
+                </ul>
+                <div class="platform-stats">
+                    <div class="platform-stat">
+                        <div class="platform-stat-value">33</div>
+                        <div class="platform-stat-label">Cases</div>
+                    </div>
+                    <div class="platform-stat">
+                        <div class="platform-stat-value">15</div>
+                        <div class="platform-stat-label">Parallel Pairs</div>
+                    </div>
+                    <div class="platform-stat">
+                        <div class="platform-stat-value">AI</div>
+                        <div class="platform-stat-label">Powered</div>
+                    </div>
+                </div>
+                <a href="CoachDx/case-library.html" class="platform-btn">Meet Dr. Chen →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="section-header">
+            <div class="section-label">The Learning Loop</div>
+            <h2 class="section-title">How the Platforms Work Together</h2>
+            <p class="section-subtitle">A continuous cycle of practice, understanding, and coaching that adapts to your needs.</p>
+        </div>
+        
+        <div class="workflow-steps">
+            <div class="workflow-step">
+                <div class="workflow-icon">📋</div>
+                <h4 class="workflow-title">Practice a Case</h4>
+                <p class="workflow-desc">Work through a patient scenario in ReasonDx, making diagnostic decisions</p>
+            </div>
+            <div class="workflow-step">
+                <div class="workflow-icon">🧬</div>
+                <h4 class="workflow-title">Fill Knowledge Gaps</h4>
+                <p class="workflow-desc">When you struggle, MechanismDx explains the underlying science</p>
+            </div>
+            <div class="workflow-step">
+                <div class="workflow-icon">👨‍⚕️</div>
+                <h4 class="workflow-title">Discuss with Dr. Chen</h4>
+                <p class="workflow-desc">Explore your reasoning in a Socratic dialogue with the AI attending</p>
+            </div>
+            <div class="workflow-step">
+                <div class="workflow-icon">📊</div>
+                <h4 class="workflow-title">Track Your Growth</h4>
+                <p class="workflow-desc">See your reasoning fingerprint evolve as you build expertise</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fingerprinting Section -->
+    <section class="fingerprint-section" id="fingerprinting">
+        <div class="fingerprint-content">
+            <div class="fingerprint-text">
+                <h2>Your Clinical Reasoning Fingerprint</h2>
+                <p>Every learner has a unique pattern of strengths and gaps. The Dx Suite tracks your performance across all three platforms to build a comprehensive picture of your diagnostic reasoning abilities.</p>
+                <p>Unlike simple percentage scores, your fingerprint shows <em>how</em> you think—which steps of the diagnostic process come naturally and which need more work.</p>
+                <ul>
+                    <li>
+                        <span class="icon">📊</span>
+                        <div><strong>Cross-Platform Tracking</strong><br>Data from cases, quizzes, and coaching sessions all contribute</div>
+                    </li>
+                    <li>
+                        <span class="icon">🎯</span>
+                        <div><strong>Personalized Recommendations</strong><br>Get suggested cases and modules based on your specific gaps</div>
+                    </li>
+                    <li>
+                        <span class="icon">📈</span>
+                        <div><strong>Progress Visualization</strong><br>Watch your fingerprint evolve as you build expertise</div>
+                    </li>
+                    <li>
+                        <span class="icon">🔄</span>
+                        <div><strong>Parallel Case Matching</strong><br>Test if your learning transfers to similar-but-different scenarios</div>
+                    </li>
+                </ul>
+            </div>
+            <div class="fingerprint-visual">
+                <h4 style="font-size: 16px; margin-bottom: 20px; color: #18181b;">Sample Reasoning Fingerprint</h4>
+                <div class="fingerprint-chart">
+                    <div class="chart-row">
+                        <span class="chart-label">History Taking</span>
+                        <div class="chart-bar-bg"><div class="chart-bar history"></div></div>
+                        <span class="chart-value">85%</span>
+                    </div>
+                    <div class="chart-row">
+                        <span class="chart-label">Physical Exam</span>
+                        <div class="chart-bar-bg"><div class="chart-bar physical"></div></div>
+                        <span class="chart-value">72%</span>
+                    </div>
+                    <div class="chart-row">
+                        <span class="chart-label">Pathophysiology</span>
+                        <div class="chart-bar-bg"><div class="chart-bar pathophys"></div></div>
+                        <span class="chart-value">45%</span>
+                    </div>
+                    <div class="chart-row">
+                        <span class="chart-label">Workup/Dx</span>
+                        <div class="chart-bar-bg"><div class="chart-bar workup"></div></div>
+                        <span class="chart-value">68%</span>
+                    </div>
+                    <div class="chart-row">
+                        <span class="chart-label">Management</span>
+                        <div class="chart-bar-bg"><div class="chart-bar management"></div></div>
+                        <span class="chart-value">55%</span>
+                    </div>
+                </div>
+                <div class="fingerprint-insight">
+                    <p><strong>💡 Insight:</strong> Strong history-taking skills, but pathophysiology understanding is limiting diagnostic accuracy. Recommended: Complete the ACS and Heart Failure MechanismDx modules.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Paths -->
+    <section class="paths-section">
+        <div class="section-header">
+            <div class="section-label">Maximize Your Learning</div>
+            <h2 class="section-title">Recommended Learning Paths</h2>
+            <p class="section-subtitle">Different approaches for different learning goals.</p>
+        </div>
+        
+        <div class="paths-grid">
+            <div class="path-card">
+                <div class="path-header">
+                    <div class="path-icon">🎯</div>
+                    <h4 class="path-name">Deep Dive</h4>
+                </div>
+                <p class="path-desc">Master one topic completely before moving on. Best for dedicated study sessions.</p>
+                <ol class="path-steps">
+                    <li><span class="step-num">1</span> Complete a ReasonDx case</li>
+                    <li><span class="step-num">2</span> Study the linked MechanismDx module</li>
+                    <li><span class="step-num">3</span> Discuss with Dr. Chen in CoachDx</li>
+                    <li><span class="step-num">4</span> Try the parallel case</li>
+                </ol>
+            </div>
+            
+            <div class="path-card">
+                <div class="path-header">
+                    <div class="path-icon">⚡</div>
+                    <h4 class="path-name">Quick Practice</h4>
+                </div>
+                <p class="path-desc">Short, focused sessions when time is limited. Great for daily practice.</p>
+                <ol class="path-steps">
+                    <li><span class="step-num">1</span> Do one CoachDx session (15 min)</li>
+                    <li><span class="step-num">2</span> Complete one MechanismDx quiz</li>
+                    <li><span class="step-num">3</span> Review your fingerprint</li>
+                    <li><span class="step-num">4</span> Note gaps for later deep dives</li>
+                </ol>
+            </div>
+            
+            <div class="path-card">
+                <div class="path-header">
+                    <div class="path-icon">🔍</div>
+                    <h4 class="path-name">Gap-Focused</h4>
+                </div>
+                <p class="path-desc">Target your weaknesses directly based on your fingerprint analysis.</p>
+                <ol class="path-steps">
+                    <li><span class="step-num">1</span> Check your reasoning fingerprint</li>
+                    <li><span class="step-num">2</span> Go to recommended MechanismDx module</li>
+                    <li><span class="step-num">3</span> Practice linked ReasonDx cases</li>
+                    <li><span class="step-num">4</span> Re-check fingerprint for improvement</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Ready to Transform Your Clinical Reasoning?</h2>
+        <p>Choose where you want to start. All platforms work together to build your skills.</p>
+        <div class="cta-buttons">
+            <a href="ReasonDx/index.html" class="cta-btn reason">📋 ReasonDx Cases</a>
+            <a href="mechanism/index.html" class="cta-btn mechanism">🧬 MechanismDx</a>
+            <a href="CoachDx/index.html" class="cta-btn coach">👨‍⚕️ CoachDx</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Dx Suite — Clinical Reasoning Education Platform<br>
+        Built with ❤️ for medical education | <a href="fingerprint-dashboard.html">View Your Fingerprint</a> | <a href="unified-scoreboard.html">Scoreboard</a></p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Animate fingerprint bars on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.chart-bar').forEach(bar => {
+                        bar.style.width = bar.dataset.width || bar.style.width;
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        const fingerprintChart = document.querySelector('.fingerprint-chart');
+        if (fingerprintChart) observer.observe(fingerprintChart);
+    </script>
+</body>
+</html>
