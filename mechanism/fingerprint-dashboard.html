@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MechanismDx - Your Learning Fingerprint</title>
+    <script src="dx-scoring.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); min-height: 100vh; }
+        .card { background: #1e293b; border: 1px solid #334155; }
+        .progress-ring { transform: rotate(-90deg); }
+        .mastery-cell { transition: all 0.2s; cursor: pointer; }
+        .mastery-cell:hover { transform: scale(1.1); z-index: 10; }
+        .tooltip { position: absolute; background: #0f172a; border: 1px solid #3b82f6; padding: 8px 12px; border-radius: 6px; font-size: 12px; z-index: 100; pointer-events: none; }
+        .header { background: #ffffff; border-bottom: 1px solid #e4e4e7; }
+        .header-inner { max-width: 1200px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+        .logo-link { text-decoration: none; color: #18181b; display: flex; align-items: center; gap: 20px; }
+        .tagline { font-style: italic; font-size: 13px; color: #71717a; padding-left: 20px; border-left: 1px solid #e4e4e7; }
+        .header-nav { display: flex; gap: 8px; }
+        .nav-link { padding: 8px 14px; color: #71717a; text-decoration: none; font-size: 14px; font-weight: 500; border-radius: 8px; transition: all 0.15s; }
+        .nav-link:hover { background: #f4f4f5; color: #18181b; }
+        .nav-link.active { color: #18181b; background: #f4f4f5; }
+        .empty-state { text-align: center; padding: 60px 20px; }
+        .empty-state-icon { font-size: 64px; margin-bottom: 16px; }
+        @media (max-width: 768px) { .tagline { display: none; } }
+    </style>
+</head>
+<body class="text-white">
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo-link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 70" style="height: 36px; width: auto;">
+                    <text x="5" y="45" font-family="Georgia, serif" font-size="42" fill="currentColor">Mechanism</text>
+                    <text x="213" y="45" font-family="Georgia, serif" font-size="42" fill="currentColor">D</text>
+                    <g stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none">
+                        <line x1="247" y1="24" x2="263" y2="45"/>
+                        <path d="M263 24L253 35Q249 40 249 47Q249 54 254 58Q259 62 259 68"/>
+                    </g>
+                    <ellipse cx="245" cy="22" rx="2" ry="3.5" transform="rotate(-28 245 22)" fill="currentColor"/>
+                    <ellipse cx="265" cy="22" rx="2" ry="3.5" transform="rotate(28 265 22)" fill="currentColor"/>
+                    <circle cx="259" cy="68" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="259" cy="68" r="3.5" fill="currentColor"/>
+                </svg>
+                <span class="tagline">Your Learning Fingerprint</span>
+            </a>
+            <nav class="header-nav">
+                <a href="index.html" class="nav-link">Modules</a>
+                <a href="challenges.html" class="nav-link">Challenges</a>
+                <a href="unified-scoreboard.html" class="nav-link">🎯 Scoreboard</a>
+                <a href="fingerprint-dashboard.html" class="nav-link active">Progress</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto p-6">
+        <!-- Empty State (shown when no data) -->
+        <div id="empty-state" class="empty-state card rounded-xl" style="display: none;">
+            <div class="empty-state-icon">🧬</div>
+            <h2 class="text-2xl font-bold mb-2">No Data Yet</h2>
+            <p class="text-gray-400 mb-6">Complete some challenges to build your learning fingerprint!</p>
+            <a href="challenges.html" class="inline-block px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg font-semibold transition">
+                Start Challenges →
+            </a>
+        </div>
+
+        <!-- Dashboard Content (shown when data exists) -->
+        <div id="dashboard-content" style="display: none;">
+            <!-- Overview Cards -->
+            <div class="grid md:grid-cols-4 gap-4 mb-8">
+                <div class="card rounded-xl p-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="text-2xl font-bold" id="total-connections">0</div>
+                            <div class="text-sm text-gray-400">Connections Seen</div>
+                        </div>
+                        <div class="text-3xl">🔗</div>
+                    </div>
+                </div>
+                
+                <div class="card rounded-xl p-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="text-2xl font-bold text-green-400" id="mastered-count">0</div>
+                            <div class="text-sm text-gray-400">Mastered</div>
+                        </div>
+                        <div class="text-3xl">✅</div>
+                    </div>
+                </div>
+                
+                <div class="card rounded-xl p-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="text-2xl font-bold text-amber-400" id="learning-count">0</div>
+                            <div class="text-sm text-gray-400">Learning</div>
+                        </div>
+                        <div class="text-3xl">📚</div>
+                    </div>
+                </div>
+                
+                <div class="card rounded-xl p-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="text-2xl font-bold text-orange-400" id="streak-count">0</div>
+                            <div class="text-sm text-gray-400">Day Streak</div>
+                        </div>
+                        <div class="text-3xl">🔥</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Left Column: Domain Mastery & Heatmap -->
+                <div class="md:col-span-2 space-y-6">
+                    <!-- Domain Mastery -->
+                    <div class="card rounded-xl p-6">
+                        <h2 class="text-lg font-semibold mb-4">Domain Mastery</h2>
+                        <div id="domain-mastery" class="space-y-4">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                    
+                    <!-- Connection Strength Map -->
+                    <div class="card rounded-xl p-6">
+                        <h2 class="text-lg font-semibold mb-2">Connection Strength Map</h2>
+                        <p class="text-sm text-gray-400 mb-4">Each cell = one mechanism connection. Hover for details.</p>
+                        <div id="heatmap" class="grid grid-cols-10 gap-1">
+                            <!-- Populated by JS -->
+                        </div>
+                        <div class="flex gap-4 mt-4 text-xs text-gray-400">
+                            <span class="flex items-center gap-1"><span class="w-3 h-3 bg-green-500 rounded"></span> Mastered</span>
+                            <span class="flex items-center gap-1"><span class="w-3 h-3 bg-amber-500 rounded"></span> Learning</span>
+                            <span class="flex items-center gap-1"><span class="w-3 h-3 bg-red-500 rounded"></span> Weak</span>
+                            <span class="flex items-center gap-1"><span class="w-3 h-3 bg-slate-600 rounded"></span> Not started</span>
+                        </div>
+                    </div>
+
+                    <!-- Challenge Type Breakdown -->
+                    <div class="card rounded-xl p-6">
+                        <h2 class="text-lg font-semibold mb-4">Challenge Type Performance</h2>
+                        <div id="challenge-types" class="grid grid-cols-2 gap-4">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Column: Calibration, Gaps, Export -->
+                <div class="space-y-6">
+                    <!-- Calibration Score -->
+                    <div class="card rounded-xl p-6">
+                        <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
+                            📊 Confidence Calibration
+                        </h2>
+                        <div class="flex items-center justify-center mb-4">
+                            <svg class="w-32 h-32" viewBox="0 0 120 120">
+                                <circle cx="60" cy="60" r="54" fill="none" stroke="#334155" stroke-width="12"/>
+                                <circle id="calibration-ring" class="progress-ring" cx="60" cy="60" r="54" fill="none" 
+                                        stroke="#22c55e" stroke-width="12" stroke-linecap="round"
+                                        stroke-dasharray="339.3" stroke-dashoffset="339.3"/>
+                            </svg>
+                            <div class="absolute text-center">
+                                <div class="text-3xl font-bold" id="calibration-score">--</div>
+                                <div class="text-xs text-gray-400">Error</div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <div id="calibration-status" class="text-sm font-medium mb-2">No data yet</div>
+                            <div class="text-xs text-gray-400">
+                                Avg Confidence: <span id="avg-confidence">--</span>% | 
+                                Avg Accuracy: <span id="avg-accuracy">--</span>%
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Priority Gaps -->
+                    <div class="card rounded-xl p-6">
+                        <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
+                            🎯 Priority Gaps
+                        </h2>
+                        <div id="gaps-list" class="space-y-3">
+                            <p class="text-gray-400 text-sm">Complete more challenges to identify gaps.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Export Section -->
+                    <div class="card rounded-xl p-6">
+                        <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
+                            📤 Export Data
+                        </h2>
+                        <div class="space-y-2">
+                            <button onclick="exportJSON()" class="w-full px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm font-medium transition">
+                                Export Full JSON
+                            </button>
+                            <button onclick="exportCSV()" class="w-full px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm font-medium transition">
+                                Export CSV Summary
+                            </button>
+                            <button onclick="exportSheets()" class="w-full px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-sm font-medium transition">
+                                📋 Copy for Google Sheets
+                            </button>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-700">
+                            <label class="block text-xs text-gray-400 mb-2">Study ID (optional)</label>
+                            <input type="text" id="study-id-input" placeholder="Enter your Study ID" 
+                                   class="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded text-sm"
+                                   onchange="saveStudyId()">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Include the research module -->
+    <script src="research-data-module.js"></script>
+    
+    <script>
+    // =============================================
+    // Dashboard Rendering
+    // =============================================
+    
+    let fingerprintData = null;
+    
+    function init() {
+        // Load data
+        const state = loadState();
+        
+        // Check if we have any data
+        const hasData = state && state.calibrationData && state.calibrationData.length > 0;
+        
+        if (!hasData) {
+            document.getElementById('empty-state').style.display = 'block';
+            document.getElementById('dashboard-content').style.display = 'none';
+            return;
+        }
+        
+        document.getElementById('empty-state').style.display = 'none';
+        document.getElementById('dashboard-content').style.display = 'block';
+        
+        // Generate fingerprint
+        fingerprintData = generateFingerprint(state);
+        
+        // Populate study ID if saved
+        if (state.user_id) {
+            document.getElementById('study-id-input').value = state.user_id;
+        }
+        
+        // Render all sections
+        renderOverview();
+        renderDomainMastery();
+        renderHeatmap();
+        renderChallengeTypes();
+        renderCalibration();
+        renderGaps();
+    }
+    
+    function loadState() {
+        // Try new format first
+        let saved = localStorage.getItem('mechanismdx_research_v1');
+        if (saved) return JSON.parse(saved);
+        
+        // Fall back to old format
+        saved = localStorage.getItem('mechanismdx_state');
+        if (saved) return JSON.parse(saved);
+        
+        return null;
+    }
+    
+    function generateFingerprint(state) {
+        // Calculate summary stats
+        const connections = state.connections ? Object.values(state.connections) : [];
+        const mastered = connections.filter(c => c.mastery_level === 'mastered').length;
+        const learning = connections.filter(c => c.mastery_level === 'learning').length;
+        const weak = connections.filter(c => c.mastery_level === 'weak').length;
+        
+        // Calibration
+        let avgConfidence = 0, avgAccuracy = 0;
+        if (state.calibrationData && state.calibrationData.length > 0) {
+            avgConfidence = state.calibrationData.reduce((a, b) => a + b.confidence, 0) / state.calibrationData.length;
+            avgAccuracy = state.calibrationData.reduce((a, b) => a + b.accuracy, 0) / state.calibrationData.length;
+        }
+        
+        // Domain mastery
+        const systemPerf = state.systemPerformance || {};
+        const domainMastery = Object.entries(systemPerf)
+            .filter(([_, data]) => data.attempted > 0)
+            .map(([system, data]) => ({
+                system,
+                name: getSystemName(system),
+                attempted: data.attempted,
+                correct: data.correct,
+                mastery: data.attempted > 0 ? data.correct / data.attempted : 0
+            }))
+            .sort((a, b) => b.mastery - a.mastery);
+        
+        // Gaps
+        const gaps = connections
+            .filter(c => c.mastery_level === 'weak' || (c.attempts > 0 && c.correct / c.attempts < 0.5))
+            .map(c => ({
+                topic: c.challenge_id,
+                domain: c.system,
+                priority: c.correct / c.attempts < 0.3 ? 'high' : 'medium',
+                reason: `${Math.round((c.correct / c.attempts) * 100)}% correct in ${c.attempts} attempts`
+            }))
+            .slice(0, 5);
+        
+        return {
+            stats: {
+                totalConnections: connections.length,
+                mastered,
+                learning,
+                weak,
+                dayStreak: state.dayStreak || 0,
+                totalXP: state.xp || 0,
+                maxStreak: state.maxStreak || 0
+            },
+            calibration: {
+                avgConfidence: Math.round(avgConfidence),
+                avgAccuracy: Math.round(avgAccuracy),
+                error: Math.round(Math.abs(avgConfidence - avgAccuracy)),
+                status: Math.abs(avgConfidence - avgAccuracy) < 10 ? 'well_calibrated' :
+                        avgConfidence > avgAccuracy ? 'overconfident' : 'underconfident'
+            },
+            domainMastery,
+            connections: connections.map(c => ({
+                ...c,
+                strength: c.attempts > 0 ? c.correct / c.attempts : 0
+            })),
+            gaps,
+            challengeTypes: state.challengeTypePerformance || {
+                predict: { attempted: 0, correct: 0 },
+                pathway: { attempted: 0, correct: 0 },
+                connector: { attempted: 0, substantive: 0 },
+                whatif: { attempted: 0, correct: 0 }
+            }
+        };
+    }
+    
+    function getSystemName(code) {
+        const names = {
+            cardio: 'Cardiovascular',
+            resp: 'Respiratory',
+            renal: 'Renal',
+            gi: 'GI/Hepatic',
+            neuro: 'Neurological',
+            endo: 'Endocrine',
+            heme: 'Hematology',
+            id: 'Infectious Disease'
+        };
+        return names[code] || code;
+    }
+    
+    function renderOverview() {
+        const stats = fingerprintData.stats;
+        document.getElementById('total-connections').textContent = stats.totalConnections;
+        document.getElementById('mastered-count').textContent = stats.mastered;
+        document.getElementById('learning-count').textContent = stats.learning;
+        document.getElementById('streak-count').textContent = stats.dayStreak;
+    }
+    
+    function renderDomainMastery() {
+        const container = document.getElementById('domain-mastery');
+        
+        if (fingerprintData.domainMastery.length === 0) {
+            container.innerHTML = '<p class="text-gray-400 text-sm">Complete challenges to see domain mastery.</p>';
+            return;
+        }
+        
+        container.innerHTML = fingerprintData.domainMastery.map(domain => {
+            const pct = Math.round(domain.mastery * 100);
+            const color = pct >= 70 ? 'bg-green-500' : pct >= 40 ? 'bg-amber-500' : 'bg-red-500';
+            
+            return `
+                <div>
+                    <div class="flex justify-between text-sm mb-1">
+                        <span>${domain.name}</span>
+                        <span class="text-gray-400">${domain.correct}/${domain.attempted} (${pct}%)</span>
+                    </div>
+                    <div class="h-3 bg-slate-700 rounded-full overflow-hidden">
+                        <div class="h-full rounded-full ${color}" style="width: ${pct}%"></div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    function renderHeatmap() {
+        const container = document.getElementById('heatmap');
+        
+        if (fingerprintData.connections.length === 0) {
+            container.innerHTML = '<p class="text-gray-400 text-sm col-span-10">Complete challenges to see your connection map.</p>';
+            return;
+        }
+        
+        // Sort by system for visual grouping
+        const sorted = [...fingerprintData.connections].sort((a, b) => 
+            (a.system || '').localeCompare(b.system || '')
+        );
+        
+        container.innerHTML = sorted.map(conn => {
+            const color = conn.mastery_level === 'mastered' ? 'bg-green-500' :
+                          conn.mastery_level === 'learning' ? 'bg-amber-500' :
+                          conn.mastery_level === 'weak' ? 'bg-red-500' : 'bg-slate-600';
+            
+            const pct = Math.round(conn.strength * 100);
+            
+            return `
+                <div class="mastery-cell w-full aspect-square rounded ${color}"
+                     title="${getSystemName(conn.system)}: ${conn.challenge_id}\n${pct}% correct (${conn.correct}/${conn.attempts})"
+                     data-conn-id="${conn.challenge_id}">
+                </div>
+            `;
+        }).join('');
+    }
+    
+    function renderChallengeTypes() {
+        const container = document.getElementById('challenge-types');
+        const types = fingerprintData.challengeTypes;
+        
+        const typeInfo = [
+            { key: 'predict', name: '🔬 Predict Labs', correct: types.predict?.correct || 0, attempted: types.predict?.attempted || 0 },
+            { key: 'pathway', name: '🧩 Build Pathway', correct: types.pathway?.correct || 0, attempted: types.pathway?.attempted || 0 },
+            { key: 'connector', name: '🔗 What\'s the Link', correct: types.connector?.substantive || 0, attempted: types.connector?.attempted || 0 },
+            { key: 'whatif', name: '🎯 What If', correct: types.whatif?.correct || 0, attempted: types.whatif?.attempted || 0 }
+        ];
+        
+        container.innerHTML = typeInfo.map(t => {
+            const pct = t.attempted > 0 ? Math.round((t.correct / t.attempted) * 100) : 0;
+            const color = pct >= 70 ? 'text-green-400' : pct >= 40 ? 'text-amber-400' : 'text-red-400';
+            
+            return `
+                <div class="bg-slate-800 rounded-lg p-4">
+                    <div class="text-sm mb-1">${t.name}</div>
+                    <div class="text-2xl font-bold ${color}">${pct}%</div>
+                    <div class="text-xs text-gray-400">${t.correct}/${t.attempted} correct</div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    function renderCalibration() {
+        const cal = fingerprintData.calibration;
+        
+        document.getElementById('avg-confidence').textContent = cal.avgConfidence;
+        document.getElementById('avg-accuracy').textContent = cal.avgAccuracy;
+        document.getElementById('calibration-score').textContent = cal.error + '%';
+        
+        // Update ring
+        const maxError = 50; // 50% error = full ring
+        const percent = Math.min(1 - (cal.error / maxError), 1);
+        const offset = 339.3 * (1 - percent);
+        const ring = document.getElementById('calibration-ring');
+        ring.style.strokeDashoffset = offset;
+        
+        // Color based on calibration
+        if (cal.error < 10) {
+            ring.style.stroke = '#22c55e'; // green
+        } else if (cal.error < 20) {
+            ring.style.stroke = '#f59e0b'; // amber
+        } else {
+            ring.style.stroke = '#ef4444'; // red
+        }
+        
+        // Status text
+        const statusEl = document.getElementById('calibration-status');
+        if (cal.status === 'well_calibrated') {
+            statusEl.textContent = '✅ Well Calibrated';
+            statusEl.className = 'text-sm font-medium text-green-400';
+        } else if (cal.status === 'overconfident') {
+            statusEl.textContent = '⚠️ Overconfident';
+            statusEl.className = 'text-sm font-medium text-amber-400';
+        } else {
+            statusEl.textContent = '💪 Underconfident';
+            statusEl.className = 'text-sm font-medium text-blue-400';
+        }
+    }
+    
+    function renderGaps() {
+        const container = document.getElementById('gaps-list');
+        
+        if (fingerprintData.gaps.length === 0) {
+            container.innerHTML = '<p class="text-gray-400 text-sm">No significant gaps identified yet. Keep practicing!</p>';
+            return;
+        }
+        
+        container.innerHTML = fingerprintData.gaps.map(gap => {
+            const priorityColor = gap.priority === 'high' ? 
+                'text-red-400 bg-red-500/20' : 'text-amber-400 bg-amber-500/20';
+            
+            return `
+                <div class="bg-slate-700/50 rounded-lg p-3">
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="${priorityColor} text-xs px-2 py-0.5 rounded">${gap.priority}</span>
+                        <span class="text-sm font-medium">${gap.topic}</span>
+                    </div>
+                    <div class="text-xs text-gray-400">${getSystemName(gap.domain)} • ${gap.reason}</div>
+                    <a href="challenges.html" class="inline-block mt-2 text-xs text-blue-400 hover:text-blue-300">
+                        Practice this →
+                    </a>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    // =============================================
+    // Export Functions
+    // =============================================
+    
+    function exportJSON() {
+        if (window.MechanismDxResearch) {
+            window.MechanismDxResearch.exportJSON();
+        } else {
+            // Fallback
+            const state = loadState();
+            const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'mechanismdx_data.json';
+            a.click();
+        }
+    }
+    
+    function exportCSV() {
+        if (window.MechanismDxResearch) {
+            window.MechanismDxResearch.exportCSV();
+        } else {
+            alert('Export module not loaded. Please refresh the page.');
+        }
+    }
+    
+    function exportSheets() {
+        if (window.MechanismDxResearch) {
+            window.MechanismDxResearch.exportSheets();
+        } else {
+            alert('Export module not loaded. Please refresh the page.');
+        }
+    }
+    
+    function saveStudyId() {
+        const id = document.getElementById('study-id-input').value.trim();
+        if (window.MechanismDxResearch) {
+            window.MechanismDxResearch.setStudyId(id);
+        } else {
+            const state = loadState();
+            if (state) {
+                state.user_id = id;
+                localStorage.setItem('mechanismdx_research_v1', JSON.stringify(state));
+            }
+        }
+    }
+    
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
