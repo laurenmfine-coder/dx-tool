@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MechanismDx - VTE & Pulmonary Embolism</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a; --bg-card: #1e293b; --bg-subtle: #334155;
+            --text-primary: #f1f5f9; --text-secondary: #94a3b8; --text-muted: #64748b;
+            --accent: #dc2626; --accent-light: #f87171;
+            --success: #22c55e; --warning: #f59e0b; --danger: #ef4444;
+            --border: #475569; --radius: 12px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text-primary); line-height: 1.6; }
+        .header { background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+        .header-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 20px; font-weight: 700; color: var(--accent); }
+        .module-header { background: linear-gradient(135deg, #991b1b 0%, #dc2626 100%); padding: 48px 24px; }
+        .module-header-inner { max-width: 1200px; margin: 0 auto; }
+        .module-title { display: flex; align-items: center; gap: 20px; margin-bottom: 16px; }
+        .module-icon { font-size: 48px; }
+        .module-title h1 { font-size: 32px; font-weight: 700; }
+        .module-subtitle { font-size: 18px; color: rgba(255,255,255,0.8); }
+        .module-meta { display: flex; gap: 24px; margin-top: 24px; }
+        .meta-item { font-size: 14px; color: rgba(255,255,255,0.7); }
+        .main { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+        .phase-nav { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; }
+        .phase-btn { padding: 12px 20px; background: var(--bg-card); border: 2px solid var(--border); border-radius: 8px; color: var(--text-secondary); font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+        .phase-btn:hover { border-color: var(--accent); color: var(--text-primary); }
+        .phase-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+        .content-grid { display: grid; grid-template-columns: 1fr 320px; gap: 24px; }
+        @media (max-width: 900px) { .content-grid { grid-template-columns: 1fr; } }
+        .questions-panel { display: flex; flex-direction: column; gap: 20px; }
+        .question-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+        .question-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .q-number { display: flex; align-items: center; gap: 10px; }
+        .q-badge { width: 28px; height: 28px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+        .q-type { font-size: 12px; color: var(--text-muted); }
+        .q-status { font-size: 11px; padding: 4px 10px; border-radius: 12px; font-weight: 600; }
+        .q-status.unanswered { background: var(--bg-subtle); color: var(--text-muted); }
+        .q-status.correct { background: rgba(34,197,94,0.2); color: var(--success); }
+        .q-status.incorrect { background: rgba(239,68,68,0.2); color: var(--danger); }
+        .question-body { padding: 20px; }
+        .question-stem { font-size: 15px; line-height: 1.7; margin-bottom: 20px; }
+        .vignette { background: var(--bg-subtle); padding: 16px; border-radius: 8px; margin-bottom: 16px; border-left: 3px solid var(--accent); }
+        .vignette-label { font-size: 10px; font-weight: 600; text-transform: uppercase; color: var(--accent-light); margin-bottom: 8px; }
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; background: var(--bg-subtle); border: 2px solid transparent; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+        .option:hover { background: var(--bg-dark); border-color: var(--border); }
+        .option.selected { border-color: var(--accent); background: rgba(220,38,38,0.1); }
+        .option.correct { border-color: var(--success); background: rgba(34,197,94,0.1); }
+        .option.incorrect { border-color: var(--danger); background: rgba(239,68,68,0.1); }
+        .option-letter { width: 24px; height: 24px; border: 2px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex-shrink: 0; }
+        .option.selected .option-letter { background: var(--accent); border-color: var(--accent); color: white; }
+        .option.correct .option-letter { background: var(--success); border-color: var(--success); color: white; }
+        .option.incorrect .option-letter { background: var(--danger); border-color: var(--danger); color: white; }
+        .option-text { font-size: 14px; }
+        .submit-btn { width: 100%; padding: 14px; background: var(--accent); color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 16px; }
+        .submit-btn:disabled { background: var(--bg-subtle); color: var(--text-muted); cursor: not-allowed; }
+        .explanation { margin-top: 20px; padding: 20px; background: var(--bg-dark); border-radius: 8px; display: none; }
+        .explanation.show { display: block; }
+        .explanation h4 { font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+        .explanation p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(220,38,38,0.1), rgba(153,27,27,0.1)); border: 1px solid var(--accent); border-radius: 8px; padding: 16px; margin-top: 16px; }
+        .mechanism-title { font-size: 12px; font-weight: 600; color: var(--accent-light); margin-bottom: 8px; }
+        .mechanism-pathway { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; }
+        .pathway-step { background: var(--bg-card); padding: 8px 12px; border-radius: 6px; font-size: 12px; border: 1px solid var(--border); }
+        .pathway-arrow { color: var(--accent); font-weight: bold; }
+        .sidebar { display: flex; flex-direction: column; gap: 20px; }
+        .sidebar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+        .sidebar-title { font-size: 14px; font-weight: 600; margin-bottom: 16px; }
+        .triad-visual { display: flex; flex-direction: column; gap: 8px; }
+        .triad-item { padding: 10px 12px; background: var(--bg-subtle); border-radius: 8px; font-size: 13px; border-left: 3px solid var(--accent); }
+    </style>
+</head>
+<body>
+    <header class="header"><div class="header-inner"><div class="logo">🫁 MechanismDx</div></div></header>
+    <div class="module-header">
+        <div class="module-header-inner">
+            <div class="module-title">
+                <span class="module-icon">🫁</span>
+                <div><h1>VTE & Pulmonary Embolism</h1>
+                <p class="module-subtitle">Virchow's triad, thrombogenesis, and anticoagulation mechanisms</p></div>
+            </div>
+            <div class="module-meta">
+                <div class="meta-item">📚 20 Questions</div>
+                <div class="meta-item">⏱️ ~45 minutes</div>
+            </div>
+        </div>
+    </div>
+    <main class="main">
+        <div class="phase-nav">
+            <button class="phase-btn active" onclick="switchPhase(1)">Phase 1: Virchow's Triad</button>
+            <button class="phase-btn" onclick="switchPhase(2)">Phase 2: DVT Formation</button>
+            <button class="phase-btn" onclick="switchPhase(3)">Phase 3: PE Pathophysiology</button>
+            <button class="phase-btn" onclick="switchPhase(4)">Phase 4: Anticoagulation</button>
+        </div>
+        <div class="content-grid">
+            <div class="questions-panel" id="questionsPanel"></div>
+            <aside class="sidebar">
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">🔺 Virchow's Triad</h3>
+                    <div class="triad-visual">
+                        <div class="triad-item"><strong>Stasis:</strong> Immobility, long travel, bed rest</div>
+                        <div class="triad-item"><strong>Injury:</strong> Surgery, trauma, catheters</div>
+                        <div class="triad-item"><strong>Hypercoagulability:</strong> Cancer, pregnancy, thrombophilia</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+    <script>
+    // Correct answers varied: Phase 1 (B,D,A,C,E), Phase 2 (C,A,D,B,E), Phase 3 (D,B,A,C,E), Phase 4 (A,C,B,D,E)
+    const questionData = {
+        1: [
+            {
+                id: 'q1_1', type: 'Mechanism',
+                stem: 'Virchow\'s triad describes the three factors predisposing to venous thrombosis. These are:',
+                options: [
+                    { letter: 'A', text: 'Hypertension, diabetes, and hyperlipidemia', correct: false },
+                    { letter: 'B', text: 'Stasis, endothelial injury, and hypercoagulability', correct: true },
+                    { letter: 'C', text: 'Anemia, thrombocytopenia, and coagulopathy', correct: false },
+                    { letter: 'D', text: 'Infection, inflammation, and autoimmunity', correct: false }
+                ],
+                explanation: 'Virchow\'s triad: (1) Stasis - slowed blood flow allows clot formation; (2) Endothelial injury - exposes subendothelial collagen/tissue factor; (3) Hypercoagulability - shifts balance toward clotting.',
+                mechanism: { title: 'Virchow\'s Triad', steps: ['Stasis (immobility)', 'Endothelial injury', 'Hypercoagulability', '→ Thrombosis'] }
+            },
+            {
+                id: 'q1_2', type: 'Clinical',
+                stem: 'Which scenario primarily represents the "stasis" component of Virchow\'s triad?',
+                options: [
+                    { letter: 'A', text: 'Central venous catheter placement', correct: false },
+                    { letter: 'B', text: 'Active malignancy with chemotherapy', correct: false },
+                    { letter: 'C', text: 'Recent orthopedic knee surgery', correct: false },
+                    { letter: 'D', text: 'Prolonged immobility on a long flight', correct: true }
+                ],
+                explanation: 'Prolonged immobility (flights, bed rest, paralysis) causes stasis. Surgery represents both injury AND stasis. Malignancy is hypercoagulability. Catheters cause endothelial injury.',
+                mechanism: { title: 'Stasis Examples', steps: ['Long flights >4 hours', 'Bed rest/hospitalization', 'Paralysis/paresis', 'Heart failure (venous congestion)'] }
+            },
+            {
+                id: 'q1_3', type: 'Mechanism',
+                stem: 'Endothelial injury promotes thrombosis primarily by exposing:',
+                options: [
+                    { letter: 'A', text: 'Subendothelial collagen and tissue factor', correct: true },
+                    { letter: 'B', text: 'Nitric oxide synthase enzymes', correct: false },
+                    { letter: 'C', text: 'Prostacyclin receptors on platelets', correct: false },
+                    { letter: 'D', text: 'Thrombomodulin binding sites', correct: false }
+                ],
+                explanation: 'Healthy endothelium is antithrombotic. When damaged, subendothelial collagen activates platelets, and tissue factor initiates the coagulation cascade. This triggers both primary and secondary hemostasis.',
+                mechanism: { title: 'Endothelial Injury', steps: ['Damage exposes collagen', '→ Platelet adhesion/activation', 'Tissue factor exposed', '→ Coagulation cascade'] }
+            },
+            {
+                id: 'q1_4', type: 'Clinical',
+                stem: 'Which condition represents an acquired hypercoagulable state?',
+                options: [
+                    { letter: 'A', text: 'Factor V Leiden mutation', correct: false },
+                    { letter: 'B', text: 'Prothrombin G20210A mutation', correct: false },
+                    { letter: 'C', text: 'Antiphospholipid antibody syndrome', correct: true },
+                    { letter: 'D', text: 'Protein C deficiency from birth', correct: false },
+                    { letter: 'E', text: 'Antithrombin III deficiency inherited', correct: false }
+                ],
+                explanation: 'Antiphospholipid syndrome is acquired (autoimmune). Factor V Leiden, prothrombin mutation, protein C/S deficiency, and AT-III deficiency are inherited thrombophilias.',
+                mechanism: { title: 'Acquired vs Inherited', steps: ['Acquired: APS, malignancy, pregnancy', 'Inherited: Factor V Leiden', 'Prothrombin mutation', 'Protein C/S deficiency'] }
+            },
+            {
+                id: 'q1_5', type: 'Clinical',
+                vignette: 'A 45-year-old has recurrent unprovoked DVTs and a history of multiple miscarriages.',
+                stem: 'Which condition should be suspected?',
+                options: [
+                    { letter: 'A', text: 'Factor V Leiden mutation', correct: false },
+                    { letter: 'B', text: 'Protein S deficiency from birth', correct: false },
+                    { letter: 'C', text: 'Prothrombin G20210A variant', correct: false },
+                    { letter: 'D', text: 'Homocystinuria disorder', correct: false },
+                    { letter: 'E', text: 'Antiphospholipid syndrome', correct: true }
+                ],
+                explanation: 'Recurrent VTE + pregnancy losses = classic antiphospholipid syndrome. Look for lupus anticoagulant, anticardiolipin antibodies, and anti-beta2-glycoprotein I. Requires lifelong anticoagulation.',
+                mechanism: { title: 'APS Criteria', steps: ['Thrombosis (arterial or venous)', 'Pregnancy morbidity', '+ Persistent antibodies', '(Lupus anticoag, aCL, anti-β2GPI)'] }
+            }
+        ],
+        2: [
+            {
+                id: 'q2_1', type: 'Mechanism',
+                stem: 'DVT most commonly originates in which venous location?',
+                options: [
+                    { letter: 'A', text: 'Femoral vein at the groin', correct: false },
+                    { letter: 'B', text: 'Popliteal vein behind the knee', correct: false },
+                    { letter: 'C', text: 'Deep calf veins (soleal sinuses)', correct: true },
+                    { letter: 'D', text: 'Common iliac vein in pelvis', correct: false }
+                ],
+                explanation: 'DVT typically begins in the deep calf veins (soleal and gastrocnemius sinuses) where stasis is greatest. Thrombus then propagates proximally. Proximal DVT (above knee) has higher PE risk.',
+                mechanism: { title: 'DVT Propagation', steps: ['Originates in calf veins', '→ Propagates proximally', '→ Popliteal, femoral, iliac', '→ Proximal = higher PE risk'] }
+            },
+            {
+                id: 'q2_2', type: 'Clinical',
+                stem: 'A Wells score for DVT of 0 indicates:',
+                options: [
+                    { letter: 'A', text: 'Low probability; D-dimer can rule out DVT', correct: true },
+                    { letter: 'B', text: 'Moderate probability; ultrasound required', correct: false },
+                    { letter: 'C', text: 'High probability; begin anticoagulation', correct: false },
+                    { letter: 'D', text: 'Indeterminate; repeat assessment in 24 hours', correct: false }
+                ],
+                explanation: 'Wells score 0 = low probability. In low probability, negative D-dimer effectively rules out DVT (high negative predictive value). If D-dimer positive, proceed to ultrasound.',
+                mechanism: { title: 'Wells Score Use', steps: ['Score ≤0: Low probability', '→ D-dimer if negative = ruled out', 'Score 1-2: Moderate', 'Score ≥3: High → Ultrasound'] }
+            },
+            {
+                id: 'q2_3', type: 'Clinical',
+                stem: 'D-dimer is most useful for ruling out DVT in which patient?',
+                options: [
+                    { letter: 'A', text: 'Post-operative patient day 3 after hip surgery', correct: false },
+                    { letter: 'B', text: 'Pregnant woman at 32 weeks gestation', correct: false },
+                    { letter: 'C', text: 'Patient with active metastatic cancer', correct: false },
+                    { letter: 'D', text: 'Low-probability outpatient with calf swelling', correct: true }
+                ],
+                explanation: 'D-dimer has high negative predictive value only in low pretest probability. It\'s elevated by surgery, pregnancy, cancer, inflammation, and age - limiting utility in these populations.',
+                mechanism: { title: 'D-dimer Limitations', steps: ['Elevated in: Surgery', 'Pregnancy, Cancer', 'Inflammation, Age >50', 'Only useful in LOW probability'] }
+            },
+            {
+                id: 'q2_4', type: 'Mechanism',
+                stem: 'D-dimer is a degradation product of:',
+                options: [
+                    { letter: 'A', text: 'Fibrinogen before polymerization', correct: false },
+                    { letter: 'B', text: 'Cross-linked fibrin after plasmin lysis', correct: true },
+                    { letter: 'C', text: 'Prothrombin during activation', correct: false },
+                    { letter: 'D', text: 'Platelet membrane phospholipids', correct: false }
+                ],
+                explanation: 'D-dimer is specifically from plasmin degradation of cross-linked fibrin (not fibrinogen). Factor XIIIa cross-links fibrin; plasmin then cleaves it, releasing D-dimers. Indicates both clot formation AND breakdown.',
+                mechanism: { title: 'D-dimer Formation', steps: ['Fibrin polymerizes', '→ Factor XIIIa cross-links', '→ Plasmin lyses clot', '→ D-dimer released'] }
+            },
+            {
+                id: 'q2_5', type: 'Clinical',
+                vignette: 'A patient has left leg DVT extending from calf to common femoral vein.',
+                stem: 'What determines the duration of anticoagulation?',
+                options: [
+                    { letter: 'A', text: 'Size and extent of the thrombus', correct: false },
+                    { letter: 'B', text: 'Severity of presenting symptoms', correct: false },
+                    { letter: 'C', text: 'Patient age at time of diagnosis', correct: false },
+                    { letter: 'D', text: 'D-dimer levels during treatment', correct: false },
+                    { letter: 'E', text: 'Provoked versus unprovoked status', correct: true }
+                ],
+                explanation: 'Duration depends on provoked vs unprovoked. Provoked by transient risk (surgery, travel): 3 months. Unprovoked or persistent risk factor: Extended/indefinite if bleeding risk acceptable.',
+                mechanism: { title: 'Duration Decision', steps: ['Provoked (transient): 3 months', 'Unprovoked: Extended/indefinite', 'Consider: Bleeding risk', 'Recurrence risk if stopped'] }
+            }
+        ],
+        3: [
+            {
+                id: 'q3_1', type: 'Mechanism',
+                stem: 'The primary mechanism of hypoxemia in acute PE is:',
+                options: [
+                    { letter: 'A', text: 'Diffusion impairment across alveoli', correct: false },
+                    { letter: 'B', text: 'Hypoventilation from chest wall weakness', correct: false },
+                    { letter: 'C', text: 'Shunt through atelectatic lung units', correct: false },
+                    { letter: 'D', text: 'V/Q mismatch from dead space ventilation', correct: true }
+                ],
+                explanation: 'PE creates dead space - ventilated but not perfused lung. Blood is shunted to remaining perfused areas, creating low V/Q units. Combined with reflex bronchoconstriction in non-perfused areas.',
+                mechanism: { title: 'PE Hypoxemia', steps: ['Blocked pulmonary artery', '→ Dead space (V but no Q)', '→ Blood shunted elsewhere', '→ Low V/Q in other areas', '→ Hypoxemia'] }
+            },
+            {
+                id: 'q3_2', type: 'Mechanism',
+                stem: 'Massive PE causes hemodynamic collapse primarily through:',
+                options: [
+                    { letter: 'A', text: 'Left ventricular systolic failure', correct: false },
+                    { letter: 'B', text: 'Acute right ventricular pressure overload', correct: true },
+                    { letter: 'C', text: 'Severe systemic hypoxemia effect', correct: false },
+                    { letter: 'D', text: 'Reflex bradycardia and hypotension', correct: false }
+                ],
+                explanation: 'Massive PE acutely increases pulmonary vascular resistance. The thin-walled RV cannot acutely handle high afterload → RV dilates and fails → Decreased LV preload → Cardiogenic shock.',
+                mechanism: { title: 'PE Hemodynamics', steps: ['↑Pulmonary vascular resistance', '→ RV afterload increases', '→ RV dilation/failure', '→ ↓LV filling', '→ Shock'] }
+            },
+            {
+                id: 'q3_3', type: 'Clinical',
+                stem: 'Which finding on echocardiography indicates right heart strain in PE?',
+                options: [
+                    { letter: 'A', text: 'RV dilation with septal flattening', correct: true },
+                    { letter: 'B', text: 'Mitral regurgitation from LV dilation', correct: false },
+                    { letter: 'C', text: 'Pericardial effusion with tamponade', correct: false },
+                    { letter: 'D', text: 'Severe aortic stenosis gradient', correct: false },
+                    { letter: 'E', text: 'Left atrial myxoma mass', correct: false }
+                ],
+                explanation: 'RV strain signs: RV dilation (RV:LV ratio >1), septal flattening/"D-sign," McConnell sign (RV free wall hypokinesis with apical sparing), tricuspid regurgitation, elevated RVSP.',
+                mechanism: { title: 'RV Strain Echo Signs', steps: ['RV dilation (RV>LV)', 'Septal flattening (D-sign)', 'McConnell sign', 'TR with elevated RVSP'] }
+            },
+            {
+                id: 'q3_4', type: 'Clinical',
+                vignette: 'A patient with PE has BP 85/50, HR 120, elevated troponin, and RV dilation on echo.',
+                stem: 'How should this PE be classified?',
+                options: [
+                    { letter: 'A', text: 'Low-risk pulmonary embolism', correct: false },
+                    { letter: 'B', text: 'Intermediate-low risk PE', correct: false },
+                    { letter: 'C', text: 'High-risk (massive) PE', correct: true },
+                    { letter: 'D', text: 'Intermediate-high risk PE', correct: false }
+                ],
+                explanation: 'Hemodynamic instability (SBP <90) = High-risk/massive PE regardless of other findings. Requires consideration of thrombolysis or catheter-directed therapy. Intermediate-risk has RV strain but stable BP.',
+                mechanism: { title: 'PE Risk Stratification', steps: ['High-risk: Hypotension/shock', 'Intermediate-high: Stable + RV strain + biomarkers', 'Intermediate-low: RV strain OR biomarkers', 'Low: No RV strain, normal biomarkers'] }
+            },
+            {
+                id: 'q3_5', type: 'Clinical',
+                stem: 'Which clinical prediction rule helps determine pretest probability for PE?',
+                options: [
+                    { letter: 'A', text: 'CURB-65 severity assessment', correct: false },
+                    { letter: 'B', text: 'CHADS-VASc stroke prediction', correct: false },
+                    { letter: 'C', text: 'PERC rule and Wells criteria', correct: false },
+                    { letter: 'D', text: 'HAS-BLED bleeding assessment', correct: false },
+                    { letter: 'E', text: 'Wells score for PE probability', correct: true }
+                ],
+                explanation: 'Wells criteria for PE estimates pretest probability. PERC rule identifies very low risk patients who need no testing. Geneva score is an alternative. CURB-65 is for pneumonia, CHADS-VASc for stroke risk in AFib.',
+                mechanism: { title: 'PE Probability Tools', steps: ['Wells score → Pretest probability', 'PERC → Excludes in low-risk', 'Geneva score → Alternative', 'Guides D-dimer vs CT decision'] }
+            }
+        ],
+        4: [
+            {
+                id: 'q4_1', type: 'Pharmacology',
+                stem: 'Direct oral anticoagulants (DOACs) work primarily by inhibiting:',
+                options: [
+                    { letter: 'A', text: 'Factor Xa or thrombin (IIa) directly', correct: true },
+                    { letter: 'B', text: 'Vitamin K epoxide reductase enzyme', correct: false },
+                    { letter: 'C', text: 'Antithrombin III cofactor activity', correct: false },
+                    { letter: 'D', text: 'Platelet cyclooxygenase pathway', correct: false }
+                ],
+                explanation: 'DOACs directly inhibit clotting factors: Rivaroxaban, apixaban, edoxaban inhibit factor Xa. Dabigatran inhibits thrombin (IIa). No monitoring needed. Warfarin inhibits vitamin K cycle.',
+                mechanism: { title: 'DOAC Mechanisms', steps: ['Xa inhibitors: rivaroxaban, apixaban, edoxaban', 'IIa inhibitor: dabigatran', 'Direct action, predictable', 'No routine monitoring'] }
+            },
+            {
+                id: 'q4_2', type: 'Pharmacology',
+                stem: 'Warfarin\'s anticoagulant effect requires 3-5 days because:',
+                options: [
+                    { letter: 'A', text: 'Drug must accumulate in hepatic tissue', correct: false },
+                    { letter: 'B', text: 'Renal clearance of drug is very slow', correct: false },
+                    { letter: 'C', text: 'Existing clotting factors must be cleared', correct: true },
+                    { letter: 'D', text: 'Protein binding gradually saturates', correct: false }
+                ],
+                explanation: 'Warfarin blocks synthesis of new factors II, VII, IX, X, but doesn\'t affect already circulating factors. Must wait for existing factors to naturally degrade (half-lives vary from 6h to 60h).',
+                mechanism: { title: 'Warfarin Delay', steps: ['Blocks new factor synthesis', 'Existing factors persist', 'Half-lives: VII (6h), IX (24h)', 'II (60h), X (36h)', 'Full effect 3-5 days'] }
+            },
+            {
+                id: 'q4_3', type: 'Clinical',
+                stem: 'Which reversal agent is specific for dabigatran?',
+                options: [
+                    { letter: 'A', text: 'Vitamin K (phytonadione)', correct: false },
+                    { letter: 'B', text: 'Idarucizumab (Praxbind)', correct: true },
+                    { letter: 'C', text: 'Protamine sulfate injection', correct: false },
+                    { letter: 'D', text: 'Fresh frozen plasma infusion', correct: false },
+                    { letter: 'E', text: 'Andexanet alfa (Andexxa)', correct: false }
+                ],
+                explanation: 'Idarucizumab is a monoclonal antibody fragment that specifically binds and reverses dabigatran. Andexanet alfa reverses factor Xa inhibitors. Vitamin K reverses warfarin. Protamine reverses heparin.',
+                mechanism: { title: 'DOAC Reversal', steps: ['Dabigatran → Idarucizumab', 'Xa inhibitors → Andexanet', 'Warfarin → Vitamin K + PCC', 'Heparin → Protamine'] }
+            },
+            {
+                id: 'q4_4', type: 'Clinical',
+                vignette: 'A patient with VTE history now has metastatic pancreatic cancer.',
+                stem: 'Which anticoagulant is preferred for cancer-associated VTE?',
+                options: [
+                    { letter: 'A', text: 'Warfarin with INR target 2-3', correct: false },
+                    { letter: 'B', text: 'Unfractionated heparin infusion', correct: false },
+                    { letter: 'C', text: 'Fondaparinux once daily injection', correct: false },
+                    { letter: 'D', text: 'LMWH or select DOACs (edoxaban, rivaroxaban)', correct: true }
+                ],
+                explanation: 'For cancer-associated VTE: LMWH has been standard. Recent trials show select DOACs (edoxaban, rivaroxaban) are effective alternatives, though with higher GI bleeding in GI cancers. Warfarin is less preferred due to variable INR.',
+                mechanism: { title: 'Cancer-VTE Treatment', steps: ['LMWH: Traditional standard', 'DOACs: Edoxaban, rivaroxaban options', 'Caution: GI bleeding with GI cancers', 'Warfarin: More difficult to manage'] }
+            },
+            {
+                id: 'q4_5', type: 'Clinical',
+                stem: 'Heparin-induced thrombocytopenia (HIT) causes thrombosis through:',
+                options: [
+                    { letter: 'A', text: 'Direct platelet destruction by heparin', correct: false },
+                    { letter: 'B', text: 'Bone marrow suppression of production', correct: false },
+                    { letter: 'C', text: 'Splenic sequestration of platelets', correct: false },
+                    { letter: 'D', text: 'Dilutional effect from IV fluids', correct: false },
+                    { letter: 'E', text: 'Antibodies to heparin-PF4 complexes', correct: true }
+                ],
+                explanation: 'HIT is immune-mediated. Antibodies form against heparin-platelet factor 4 (PF4) complexes. These antibodies activate platelets → thrombosis (not bleeding). Stop all heparin, start alternative anticoagulant (argatroban, bivalirudin).',
+                mechanism: { title: 'HIT Mechanism', steps: ['Heparin binds PF4', '→ IgG antibodies form', '→ Antibody-PF4-heparin complex', '→ Platelet activation', '→ Thrombosis (paradox)'] }
+            }
+        ]
+    };
+    
+    let currentPhase = 1, answers = {};
+    
+    function switchPhase(phase) {
+        currentPhase = phase;
+        document.querySelectorAll('.phase-btn').forEach((btn, i) => btn.classList.toggle('active', i + 1 === phase));
+        renderQuestions();
+    }
+    
+    function renderQuestions() {
+        const panel = document.getElementById('questionsPanel');
+        const questions = questionData[currentPhase];
+        panel.innerHTML = questions.map((q, idx) => `
+            <div class="question-card" id="card-${q.id}">
+                <div class="question-header">
+                    <div class="q-number"><span class="q-badge">${(currentPhase-1)*5+idx+1}</span><span class="q-type">${q.type}</span></div>
+                    <span class="q-status ${answers[q.id] ? (answers[q.id].correct ? 'correct' : 'incorrect') : 'unanswered'}">${answers[q.id] ? (answers[q.id].correct ? '✓' : '✗') : '○'}</span>
+                </div>
+                <div class="question-body">
+                    ${q.vignette ? `<div class="vignette"><div class="vignette-label">Vignette</div>${q.vignette}</div>` : ''}
+                    <div class="question-stem">${q.stem}</div>
+                    <div class="options">${q.options.map(opt => `
+                        <div class="option ${answers[q.id]?.selected === opt.letter ? 'selected' : ''} ${answers[q.id] ? (opt.correct ? 'correct' : (answers[q.id].selected === opt.letter ? 'incorrect' : '')) : ''}"
+                             onclick="selectOption('${q.id}', '${opt.letter}')" ${answers[q.id] ? 'style="pointer-events:none"' : ''}>
+                            <span class="option-letter">${opt.letter}</span><span class="option-text">${opt.text}</span>
+                        </div>`).join('')}
+                    </div>
+                    ${!answers[q.id] ? `<button class="submit-btn" onclick="submitAnswer('${q.id}')" id="submit-${q.id}" disabled>Submit</button>` : `
+                    <div class="explanation show"><h4>${answers[q.id].correct ? '✓ Correct!' : '✗ Incorrect'}</h4><p>${q.explanation}</p>
+                    <div class="mechanism-box"><div class="mechanism-title">🔬 ${q.mechanism.title}</div>
+                    <div class="mechanism-pathway">${q.mechanism.steps.map((s,i) => `<span class="pathway-step">${s}</span>${i<q.mechanism.steps.length-1?'<span class="pathway-arrow">→</span>':''}`).join('')}</div></div></div>`}
+                </div>
+            </div>`).join('');
+    }
+    
+    function selectOption(qId, letter) {
+        if (answers[qId]) return;
+        document.querySelectorAll(`#card-${qId} .option`).forEach(o => o.classList.remove('selected'));
+        event.currentTarget.classList.add('selected');
+        document.getElementById(`submit-${qId}`).disabled = false;
+        document.getElementById(`submit-${qId}`).dataset.selected = letter;
+    }
+    
+    function submitAnswer(qId) {
+        const btn = document.getElementById(`submit-${qId}`);
+        const selected = btn.dataset.selected;
+        const q = questionData[currentPhase].find(q => q.id === qId);
+        answers[qId] = { selected, correct: q.options.find(o => o.letter === selected).correct };
+        renderQuestions();
+    }
+    
+    renderQuestions();
+    </script>
+</body>
+</html>

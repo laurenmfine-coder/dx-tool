@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MechanismDx - Obstructive Lung Disease</title>
+    <style>
+        :root { --bg-dark: #0f172a; --bg-card: #1e293b; --bg-subtle: #334155; --text-primary: #f1f5f9; --text-secondary: #94a3b8; --text-muted: #64748b; --accent: #06b6d4; --accent-light: #22d3ee; --success: #22c55e; --danger: #ef4444; --border: #475569; --radius: 12px; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text-primary); line-height: 1.6; }
+        .header { background: var(--bg-card); padding: 16px 24px; }
+        .logo { font-size: 20px; font-weight: 700; color: var(--accent); max-width: 1200px; margin: 0 auto; }
+        .module-header { background: linear-gradient(135deg, #0891b2, #06b6d4); padding: 48px 24px; }
+        .module-header-inner { max-width: 1200px; margin: 0 auto; }
+        .module-title { display: flex; align-items: center; gap: 20px; margin-bottom: 16px; }
+        .module-icon { font-size: 48px; }
+        .module-title h1 { font-size: 32px; font-weight: 700; }
+        .module-subtitle { font-size: 18px; color: rgba(255,255,255,0.8); }
+        .main { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+        .phase-nav { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; }
+        .phase-btn { padding: 12px 20px; background: var(--bg-card); border: 2px solid var(--border); border-radius: 8px; color: var(--text-secondary); font-size: 14px; cursor: pointer; }
+        .phase-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+        .content-grid { display: grid; grid-template-columns: 1fr 300px; gap: 24px; }
+        @media (max-width: 900px) { .content-grid { grid-template-columns: 1fr; } }
+        .questions-panel { display: flex; flex-direction: column; gap: 20px; }
+        .question-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); }
+        .question-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; }
+        .q-badge { width: 28px; height: 28px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+        .q-type { font-size: 12px; color: var(--text-muted); margin-left: 10px; }
+        .q-status { font-size: 11px; padding: 4px 10px; border-radius: 12px; }
+        .q-status.correct { background: rgba(34,197,94,0.2); color: var(--success); }
+        .q-status.incorrect { background: rgba(239,68,68,0.2); color: var(--danger); }
+        .question-body { padding: 20px; }
+        .question-stem { font-size: 15px; margin-bottom: 20px; }
+        .vignette { background: var(--bg-subtle); padding: 16px; border-radius: 8px; margin-bottom: 16px; border-left: 3px solid var(--accent); }
+        .vignette-label { font-size: 10px; font-weight: 600; color: var(--accent-light); margin-bottom: 8px; }
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option { display: flex; gap: 12px; padding: 14px 16px; background: var(--bg-subtle); border: 2px solid transparent; border-radius: 8px; cursor: pointer; }
+        .option.selected { border-color: var(--accent); }
+        .option.correct { border-color: var(--success); background: rgba(34,197,94,0.1); }
+        .option.incorrect { border-color: var(--danger); }
+        .option-letter { width: 24px; height: 24px; border: 2px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; }
+        .option.selected .option-letter, .option.correct .option-letter { background: var(--accent); border-color: var(--accent); color: white; }
+        .submit-btn { width: 100%; padding: 14px; background: var(--accent); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; margin-top: 16px; }
+        .submit-btn:disabled { background: var(--bg-subtle); color: var(--text-muted); }
+        .explanation { margin-top: 20px; padding: 20px; background: var(--bg-dark); border-radius: 8px; display: none; }
+        .explanation.show { display: block; }
+        .mechanism-box { background: rgba(6,182,212,0.1); border: 1px solid var(--accent); border-radius: 8px; padding: 16px; margin-top: 16px; }
+        .mechanism-title { font-size: 12px; font-weight: 600; color: var(--accent-light); }
+        .mechanism-pathway { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+        .pathway-step { background: var(--bg-card); padding: 8px 12px; border-radius: 6px; font-size: 12px; border: 1px solid var(--border); }
+        .pathway-arrow { color: var(--accent); font-weight: bold; }
+        .sidebar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 20px; }
+        .sidebar-title { font-size: 14px; font-weight: 600; margin-bottom: 16px; }
+        .compare-table { width: 100%; font-size: 11px; }
+        .compare-table th, .compare-table td { padding: 8px; text-align: left; border-bottom: 1px solid var(--border); }
+        .compare-table th { background: var(--bg-subtle); }
+    </style>
+</head>
+<body>
+    <header class="header"><div class="logo">🌬️ MechanismDx</div></header>
+    <div class="module-header"><div class="module-header-inner">
+        <div class="module-title"><span class="module-icon">🌬️</span><div><h1>Obstructive Lung Disease</h1><p class="module-subtitle">Asthma vs COPD pathophysiology, PFTs, and management</p></div></div>
+    </div></div>
+    <main class="main">
+        <div class="phase-nav">
+            <button class="phase-btn active" onclick="switchPhase(1)">Phase 1: Asthma</button>
+            <button class="phase-btn" onclick="switchPhase(2)">Phase 2: COPD</button>
+            <button class="phase-btn" onclick="switchPhase(3)">Phase 3: PFTs</button>
+            <button class="phase-btn" onclick="switchPhase(4)">Phase 4: Treatment</button>
+        </div>
+        <div class="content-grid">
+            <div class="questions-panel" id="questionsPanel"></div>
+            <aside>
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">🔬 Asthma vs COPD</h3>
+                    <table class="compare-table">
+                        <tr><th></th><th>Asthma</th><th>COPD</th></tr>
+                        <tr><td>Age onset</td><td>Young</td><td>>40</td></tr>
+                        <tr><td>Reversibility</td><td>Yes</td><td>Partial</td></tr>
+                        <tr><td>Inflammation</td><td>Eosinophilic</td><td>Neutrophilic</td></tr>
+                        <tr><td>Smoking</td><td>Variable</td><td>Strong link</td></tr>
+                    </table>
+                </div>
+            </aside>
+        </div>
+    </main>
+    <script>
+    // Correct answers: Phase 1 (B,D,A,C,E), Phase 2 (D,A,C,B,E), Phase 3 (A,C,D,B,E), Phase 4 (C,A,D,B,E)
+    const data = {
+        1: [
+            { id:'q1_1', type:'Mechanism', stem:'The hallmark inflammatory cell in asthma is:', options:[
+                {letter:'A',text:'Neutrophils predominating in airways',correct:false},
+                {letter:'B',text:'Eosinophils with T2 inflammation',correct:true},
+                {letter:'C',text:'Macrophages from alveolar spaces',correct:false},
+                {letter:'D',text:'Mast cells without IgE involvement',correct:false}
+            ], explanation:'Asthma features T2 (Type 2) inflammation with eosinophils, driven by IL-4, IL-5, and IL-13 from Th2 cells. IgE-mediated mast cell degranulation triggers acute bronchospasm. COPD has neutrophilic inflammation.', mechanism:{title:'T2 Inflammation',steps:['Allergen exposure','→ Th2 activation','→ IL-4, IL-5, IL-13','→ Eosinophil recruitment','→ Airway inflammation']}},
+            { id:'q1_2', type:'Mechanism', stem:'Airway hyperresponsiveness in asthma causes bronchospasm in response to:', options:[
+                {letter:'A',text:'Only specific identified allergens',correct:false},
+                {letter:'B',text:'High-intensity exercise exclusively',correct:false},
+                {letter:'C',text:'Bacterial respiratory infections only',correct:false},
+                {letter:'D',text:'Non-specific triggers like cold air and irritants',correct:true}
+            ], explanation:'Airway hyperresponsiveness means exaggerated bronchoconstriction to various non-specific triggers: cold air, exercise, irritants, strong odors. This distinguishes asthma from simple allergic rhinitis.', mechanism:{title:'Hyperresponsiveness',steps:['Inflamed airways','→ Smooth muscle sensitized','→ Low threshold for constriction','→ Multiple triggers effective','→ Bronchospasm']}},
+            { id:'q1_3', type:'Clinical', stem:'The reversibility criterion for asthma on spirometry is FEV1 improvement of:', options:[
+                {letter:'A',text:'≥12% AND ≥200 mL after bronchodilator',correct:true},
+                {letter:'B',text:'≥5% OR ≥100 mL after bronchodilator',correct:false},
+                {letter:'C',text:'Any measurable increase in FEV1',correct:false},
+                {letter:'D',text:'≥20% AND ≥400 mL post-bronchodilator',correct:false}
+            ], explanation:'Significant reversibility = ≥12% AND ≥200 mL improvement in FEV1 after bronchodilator. Both criteria must be met. This helps distinguish asthma (reversible) from COPD (minimal reversibility).', mechanism:{title:'Reversibility Criteria',steps:['Pre-bronchodilator FEV1','→ Give albuterol','→ Repeat in 15-20 min','→ ≥12% AND ≥200 mL = reversible','→ Supports asthma diagnosis']}},
+            { id:'q1_4', type:'Clinical', vignette:'A 25-year-old with well-controlled asthma asks about exercise.', stem:'Exercise-induced bronchospasm typically peaks at which time?', options:[
+                {letter:'A',text:'During the first minute of exercise',correct:false},
+                {letter:'B',text:'At peak exercise intensity',correct:false},
+                {letter:'C',text:'5-15 minutes after exercise stops',correct:true},
+                {letter:'D',text:'Several hours after exercise ends',correct:false}
+            ], explanation:'Exercise-induced bronchospasm typically peaks 5-15 minutes after exercise cessation. Caused by airway cooling and drying during exercise with rewarming afterward. Prevented by pre-exercise SABA or daily ICS.', mechanism:{title:'Exercise-Induced Bronchospasm',steps:['Exercise → Airway cooling/drying','→ Exercise stops','→ Airway rewarming','→ Mediator release','→ Peak symptoms 5-15 min post']}},
+            { id:'q1_5', type:'Mechanism', stem:'Airway remodeling in chronic asthma includes all EXCEPT:', options:[
+                {letter:'A',text:'Basement membrane thickening',correct:false},
+                {letter:'B',text:'Smooth muscle hypertrophy',correct:false},
+                {letter:'C',text:'Subepithelial fibrosis',correct:false},
+                {letter:'D',text:'Mucous gland hyperplasia',correct:false},
+                {letter:'E',text:'Alveolar wall destruction',correct:true}
+            ], explanation:'Asthma remodeling includes basement membrane thickening, smooth muscle hypertrophy, subepithelial fibrosis, and mucous gland hyperplasia. Alveolar destruction is characteristic of emphysema/COPD, not asthma.', mechanism:{title:'Asthma Remodeling',steps:['Chronic inflammation','→ Basement membrane thickens','→ Smooth muscle hypertrophy','→ Subepithelial fibrosis','→ NOT alveolar destruction']}}
+        ],
+        2: [
+            { id:'q2_1', type:'Mechanism', stem:'The protease-antiprotease imbalance in emphysema involves:', options:[
+                {letter:'A',text:'Excess alpha-1 antitrypsin activity',correct:false},
+                {letter:'B',text:'Deficiency of neutrophil elastase',correct:false},
+                {letter:'C',text:'Increased antiprotease production',correct:false},
+                {letter:'D',text:'Neutrophil elastase exceeding antiprotease protection',correct:true}
+            ], explanation:'Smoking recruits neutrophils that release elastase. When elastase activity exceeds alpha-1 antitrypsin protection, alveolar walls are destroyed → emphysema. Alpha-1 antitrypsin deficiency accelerates this process.', mechanism:{title:'Protease-Antiprotease',steps:['Smoking → Neutrophil recruitment','→ Elastase release','→ Overwhelms α1-antitrypsin','→ Alveolar destruction','→ Emphysema']}},
+            { id:'q2_2', type:'Mechanism', stem:'In COPD, air trapping occurs primarily due to:', options:[
+                {letter:'A',text:'Loss of elastic recoil and airway collapse on expiration',correct:true},
+                {letter:'B',text:'Increased lung elastic recoil pressure',correct:false},
+                {letter:'C',text:'Inspiratory muscle weakness',correct:false},
+                {letter:'D',text:'Pulmonary vascular congestion',correct:false}
+            ], explanation:'Emphysema destroys alveolar walls, reducing elastic recoil. Airways collapse during expiration (especially forced expiration) because they lack the radial traction normally provided by surrounding alveoli. This causes air trapping.', mechanism:{title:'Air Trapping',steps:['Alveolar destruction','→ Loss of elastic recoil','→ Loss of radial traction','→ Airway collapse on expiration','→ Air trapping, hyperinflation']}},
+            { id:'q2_3', type:'Clinical', stem:'The FEV1/FVC ratio diagnostic of obstruction is:', options:[
+                {letter:'A',text:'Less than 0.90 in all patients',correct:false},
+                {letter:'B',text:'Less than 0.80 in most guidelines',correct:false},
+                {letter:'C',text:'Less than 0.70 (fixed ratio) or LLN',correct:true},
+                {letter:'D',text:'Less than 0.50 indicating severity',correct:false}
+            ], explanation:'FEV1/FVC <0.70 (or below lower limit of normal) defines obstruction. The fixed ratio may over-diagnose in elderly. Once obstruction confirmed, FEV1 % predicted determines GOLD stage severity.', mechanism:{title:'COPD Diagnosis',steps:['FEV1/FVC <0.70 = Obstruction','Then stage by FEV1:','GOLD 1: ≥80%','GOLD 2: 50-79%','GOLD 3: 30-49%, GOLD 4: <30%']}},
+            { id:'q2_4', type:'Clinical', vignette:'A 65-year-old smoker with COPD has dyspnea, pursed-lip breathing, and barrel chest.', stem:'Pursed-lip breathing provides benefit by:', options:[
+                {letter:'A',text:'Increasing inspiratory muscle strength',correct:false},
+                {letter:'B',text:'Creating back-pressure to prevent airway collapse',correct:true},
+                {letter:'C',text:'Reducing oxygen consumption significantly',correct:false},
+                {letter:'D',text:'Improving ventilation-perfusion matching',correct:false}
+            ], explanation:'Pursed-lip breathing creates positive pressure during expiration that splints airways open, preventing collapse. This allows more complete exhalation, reduces air trapping, and improves gas exchange.', mechanism:{title:'Pursed-Lip Breathing',steps:['Creates back-pressure','→ Splints airways open','→ Prevents collapse','→ Reduces air trapping','→ Improves exhalation']}},
+            { id:'q2_5', type:'Clinical', stem:'The most important intervention to slow COPD progression is:', options:[
+                {letter:'A',text:'Long-acting bronchodilator therapy',correct:false},
+                {letter:'B',text:'Inhaled corticosteroid treatment',correct:false},
+                {letter:'C',text:'Pulmonary rehabilitation program',correct:false},
+                {letter:'D',text:'Supplemental oxygen at rest',correct:false},
+                {letter:'E',text:'Smoking cessation',correct:true}
+            ], explanation:'Smoking cessation is the ONLY intervention proven to slow FEV1 decline in COPD. Medications improve symptoms and reduce exacerbations but don\'t alter disease progression. Oxygen improves survival in hypoxemic patients.', mechanism:{title:'COPD Interventions',steps:['Smoking cessation: Slows progression','Bronchodilators: Symptom relief','ICS: Reduce exacerbations','Oxygen: Survival if hypoxic','Rehab: Function improvement']}}
+        ],
+        3: [
+            { id:'q3_1', type:'Clinical', stem:'On spirometry, an obstructive pattern shows:', options:[
+                {letter:'A',text:'Reduced FEV1/FVC with reduced FEV1',correct:true},
+                {letter:'B',text:'Normal FEV1/FVC with reduced FVC',correct:false},
+                {letter:'C',text:'Increased FEV1/FVC with normal volumes',correct:false},
+                {letter:'D',text:'Proportional reduction in both values',correct:false}
+            ], explanation:'Obstruction: FEV1 reduced more than FVC → low FEV1/FVC ratio (<0.70). Restriction: Both reduced proportionally → normal or high ratio. Mixed: Features of both patterns.', mechanism:{title:'PFT Patterns',steps:['Obstruction: ↓FEV1/FVC, ↓FEV1','Restriction: Normal ratio, ↓FVC','Mixed: ↓Ratio AND ↓FVC','Air trapping: ↑RV/TLC']}},
+            { id:'q3_2', type:'Clinical', stem:'In COPD with hyperinflation, which lung volume is most increased?', options:[
+                {letter:'A',text:'Tidal volume (TV)',correct:false},
+                {letter:'B',text:'Inspiratory reserve volume (IRV)',correct:false},
+                {letter:'C',text:'Residual volume (RV)',correct:true},
+                {letter:'D',text:'Expiratory reserve volume (ERV)',correct:false}
+            ], explanation:'Air trapping increases residual volume (RV) - the air that can\'t be exhaled. RV/TLC ratio >0.40 indicates hyperinflation. Total lung capacity may also increase. Tidal volume typically preserved or reduced.', mechanism:{title:'Hyperinflation',steps:['Air trapping during expiration','→ RV increases','→ RV/TLC >0.40','→ TLC may increase','→ Diaphragm flattens']}},
+            { id:'q3_3', type:'Clinical', stem:'DLCO (diffusing capacity) is reduced in emphysema because:', options:[
+                {letter:'A',text:'Airway mucus blocks gas diffusion',correct:false},
+                {letter:'B',text:'Bronchospasm limits air entry',correct:false},
+                {letter:'C',text:'Pulmonary vascular congestion occurs',correct:false},
+                {letter:'D',text:'Alveolar surface area is destroyed',correct:true}
+            ], explanation:'DLCO measures gas transfer across the alveolar-capillary membrane. Emphysema destroys alveolar walls → reduced surface area for diffusion → low DLCO. Asthma typically has normal or high DLCO.', mechanism:{title:'DLCO in Emphysema',steps:['Alveolar wall destruction','→ Reduced surface area','→ Reduced capillary bed','→ Impaired gas transfer','→ Low DLCO']}},
+            { id:'q3_4', type:'Clinical', vignette:'A patient has FEV1/FVC 0.55, FEV1 45% predicted, and DLCO 35% predicted.', stem:'What pattern does this represent?', options:[
+                {letter:'A',text:'Pure restrictive lung disease',correct:false},
+                {letter:'B',text:'Moderate COPD with emphysema',correct:true},
+                {letter:'C',text:'Asthma with normal lung parenchyma',correct:false},
+                {letter:'D',text:'Interstitial lung disease',correct:false}
+            ], explanation:'Low FEV1/FVC confirms obstruction. FEV1 45% = GOLD stage 3 (severe). Low DLCO indicates parenchymal destruction (emphysema). Asthma would have normal/high DLCO; ILD would have restriction with low DLCO.', mechanism:{title:'This Case',steps:['FEV1/FVC 0.55 = Obstruction','FEV1 45% = GOLD 3 (severe)','DLCO 35% = Emphysema','Pattern: Severe COPD','With significant emphysema']}},
+            { id:'q3_5', type:'Clinical', stem:'A positive bronchodilator response in COPD means:', options:[
+                {letter:'A',text:'The patient definitely has asthma instead',correct:false},
+                {letter:'B',text:'ICS therapy will be ineffective',correct:false},
+                {letter:'C',text:'No bronchodilator treatment is needed',correct:false},
+                {letter:'D',text:'Alpha-1 antitrypsin testing is contraindicated',correct:false},
+                {letter:'E',text:'Some reversible component exists but COPD diagnosis stands',correct:true}
+            ], explanation:'Some COPD patients have partial reversibility, but this doesn\'t change the diagnosis. COPD and asthma can coexist (asthma-COPD overlap). Bronchodilator response doesn\'t predict treatment response well in COPD.', mechanism:{title:'COPD Reversibility',steps:['Some COPD has partial reversibility','Doesn\'t exclude COPD diagnosis','May indicate ACO (overlap)','Continue bronchodilator therapy','Consider ICS if eosinophilic']}}
+        ],
+        4: [
+            { id:'q4_1', type:'Pharmacology', stem:'The mechanism of inhaled corticosteroids in asthma is:', options:[
+                {letter:'A',text:'Direct bronchodilation of smooth muscle',correct:false},
+                {letter:'B',text:'Immediate mast cell stabilization only',correct:false},
+                {letter:'C',text:'Suppression of airway inflammation',correct:true},
+                {letter:'D',text:'Blocking leukotriene receptors',correct:false}
+            ], explanation:'ICS suppress airway inflammation by reducing eosinophils, cytokines, and inflammatory mediators. They are controller medications, not relievers - take days to weeks for full effect. Reduce exacerbations and improve control.', mechanism:{title:'ICS Mechanism',steps:['Bind glucocorticoid receptors','→ Suppress inflammatory genes','→ Reduce eosinophils, cytokines','→ Decrease airway inflammation','→ Improve control over time']}},
+            { id:'q4_2', type:'Pharmacology', stem:'Long-acting beta-agonists (LABAs) should not be used as monotherapy in asthma because:', options:[
+                {letter:'A',text:'Masking inflammation increases severe exacerbation risk',correct:true},
+                {letter:'B',text:'They cause immediate paradoxical bronchospasm',correct:false},
+                {letter:'C',text:'Tolerance develops within 24 hours',correct:false},
+                {letter:'D',text:'They are ineffective bronchodilators',correct:false}
+            ], explanation:'LABA monotherapy in asthma increases risk of severe exacerbations and death. They relieve symptoms without treating underlying inflammation. Always combine with ICS. In COPD, LABA monotherapy is acceptable.', mechanism:{title:'LABA Safety in Asthma',steps:['LABA relieves symptoms','→ But doesn\'t treat inflammation','→ Patient feels better','→ Inflammation continues','→ Severe exacerbation risk']}},
+            { id:'q4_3', type:'Clinical', vignette:'A COPD patient on LAMA/LABA has frequent exacerbations and blood eosinophils 350 cells/μL.', stem:'What should be added to therapy?', options:[
+                {letter:'A',text:'Oral theophylline daily',correct:false},
+                {letter:'B',text:'Prophylactic azithromycin only',correct:false},
+                {letter:'C',text:'Short-acting anticholinergic PRN',correct:false},
+                {letter:'D',text:'Inhaled corticosteroid (triple therapy)',correct:true}
+            ], explanation:'Add ICS to LAMA/LABA (triple therapy) for COPD patients with frequent exacerbations AND elevated eosinophils (≥300). Eosinophils predict ICS response in COPD. Without eosinophilia, ICS benefit is limited.', mechanism:{title:'Triple Therapy Indication',steps:['Frequent exacerbations','AND eosinophils ≥300','→ Add ICS to LAMA/LABA','→ Reduces exacerbations','→ Guided by eosinophils']}},
+            { id:'q4_4', type:'Clinical', stem:'Biologic therapy with anti-IL-5 agents is indicated for asthma that is:', options:[
+                {letter:'A',text:'Mild intermittent with rare symptoms',correct:false},
+                {letter:'B',text:'Severe eosinophilic despite high-dose ICS/LABA',correct:true},
+                {letter:'C',text:'Well-controlled on low-dose ICS alone',correct:false},
+                {letter:'D',text:'Newly diagnosed before controller trial',correct:false}
+            ], explanation:'Biologics (mepolizumab, benralizumab - anti-IL-5; dupilumab - anti-IL-4/13; omalizumab - anti-IgE) are for severe asthma uncontrolled despite step 4-5 therapy. Phenotype guides selection: eosinophilic → anti-IL-5 or anti-IL-4/13.', mechanism:{title:'Biologics in Asthma',steps:['Severe uncontrolled asthma','Despite high-dose ICS/LABA','→ Identify phenotype','→ Eosinophilic: Anti-IL-5','→ Allergic: Omalizumab']}},
+            { id:'q4_5', type:'Clinical', stem:'Long-term oxygen therapy in COPD improves survival when:', options:[
+                {letter:'A',text:'Patient reports subjective dyspnea',correct:false},
+                {letter:'B',text:'Exercise desaturation occurs below 90%',correct:false},
+                {letter:'C',text:'FEV1 falls below 30% predicted',correct:false},
+                {letter:'D',text:'Pulmonary hypertension is suspected',correct:false},
+                {letter:'E',text:'Resting PaO2 ≤55 mmHg or SpO2 ≤88%',correct:true}
+            ], explanation:'LTOT improves survival in COPD with severe resting hypoxemia (PaO2 ≤55 or SpO2 ≤88%). Also indicated if PaO2 56-59 with cor pulmonale or polycythemia. Must use ≥15 hours/day. Ambulatory desaturation alone doesn\'t meet criteria.', mechanism:{title:'LTOT Criteria',steps:['PaO2 ≤55 or SpO2 ≤88%','OR PaO2 56-59 with:','Cor pulmonale or polycythemia','Use ≥15 hours/day','Improves survival']}}
+        ]
+    };
+    let currentPhase = 1, answers = {};
+    function switchPhase(p) { currentPhase = p; document.querySelectorAll('.phase-btn').forEach((b,i) => b.classList.toggle('active', i+1===p)); render(); }
+    function render() {
+        document.getElementById('questionsPanel').innerHTML = data[currentPhase].map((q,i) => `
+            <div class="question-card" id="c-${q.id}">
+                <div class="question-header"><div style="display:flex;align-items:center"><span class="q-badge">${(currentPhase-1)*5+i+1}</span><span class="q-type">${q.type}</span></div>
+                <span class="q-status ${answers[q.id]?(answers[q.id].c?'correct':'incorrect'):''}">${answers[q.id]?(answers[q.id].c?'✓':'✗'):'○'}</span></div>
+                <div class="question-body">
+                    ${q.vignette?`<div class="vignette"><div class="vignette-label">Vignette</div>${q.vignette}</div>`:''}
+                    <div class="question-stem">${q.stem}</div>
+                    <div class="options">${q.options.map(o=>`<div class="option ${answers[q.id]?.s===o.letter?'selected':''} ${answers[q.id]?(o.correct?'correct':(answers[q.id].s===o.letter?'incorrect':'')):''}}" onclick="sel('${q.id}','${o.letter}')" ${answers[q.id]?'style="pointer-events:none"':''}><span class="option-letter">${o.letter}</span><span>${o.text}</span></div>`).join('')}</div>
+                    ${!answers[q.id]?`<button class="submit-btn" onclick="sub('${q.id}')" id="b-${q.id}" disabled>Submit</button>`:`<div class="explanation show"><h4>${answers[q.id].c?'✓ Correct!':'✗ Incorrect'}</h4><p>${q.explanation}</p><div class="mechanism-box"><div class="mechanism-title">🔬 ${q.mechanism.title}</div><div class="mechanism-pathway">${q.mechanism.steps.map((s,j)=>`<span class="pathway-step">${s}</span>${j<q.mechanism.steps.length-1?'<span class="pathway-arrow">→</span>':''}`).join('')}</div></div></div>`}
+                </div>
+            </div>`).join('');
+    }
+    function sel(id,l) { if(answers[id])return; document.querySelectorAll(`#c-${id} .option`).forEach(o=>o.classList.remove('selected')); event.currentTarget.classList.add('selected'); document.getElementById(`b-${id}`).disabled=false; document.getElementById(`b-${id}`).dataset.s=l; }
+    function sub(id) { const l=document.getElementById(`b-${id}`).dataset.s, q=data[currentPhase].find(x=>x.id===id); answers[id]={s:l,c:q.options.find(o=>o.letter===l).correct}; render(); }
+    render();
+    </script>
+</body>
+</html>
