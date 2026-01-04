@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MechanismDx - Obstructive Lung Disease</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a; --bg-card: #1e293b; --bg-subtle: #334155;
+            --text-primary: #f1f5f9; --text-secondary: #94a3b8; --text-muted: #64748b;
+            --accent: #06b6d4; --accent-light: #22d3ee;
+            --success: #22c55e; --warning: #f59e0b; --danger: #ef4444;
+            --border: #475569; --radius: 12px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text-primary); line-height: 1.6; }
+        .header { background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+        .header-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 20px; font-weight: 700; color: var(--accent); }
+        .module-header { background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%); padding: 48px 24px; }
+        .module-header-inner { max-width: 1200px; margin: 0 auto; }
+        .module-title { display: flex; align-items: center; gap: 20px; margin-bottom: 16px; }
+        .module-icon { font-size: 48px; }
+        .module-title h1 { font-size: 32px; font-weight: 700; }
+        .module-subtitle { font-size: 18px; color: rgba(255,255,255,0.8); }
+        .module-meta { display: flex; gap: 24px; margin-top: 24px; }
+        .meta-item { font-size: 14px; color: rgba(255,255,255,0.7); }
+        .main { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+        .phase-nav { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; }
+        .phase-btn { padding: 12px 20px; background: var(--bg-card); border: 2px solid var(--border); border-radius: 8px; color: var(--text-secondary); font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+        .phase-btn:hover { border-color: var(--accent); color: var(--text-primary); }
+        .phase-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+        .content-grid { display: grid; grid-template-columns: 1fr 320px; gap: 24px; }
+        @media (max-width: 900px) { .content-grid { grid-template-columns: 1fr; } }
+        .questions-panel { display: flex; flex-direction: column; gap: 20px; }
+        .question-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+        .question-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .q-number { display: flex; align-items: center; gap: 10px; }
+        .q-badge { width: 28px; height: 28px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+        .q-type { font-size: 12px; color: var(--text-muted); }
+        .q-status { font-size: 11px; padding: 4px 10px; border-radius: 12px; font-weight: 600; }
+        .q-status.unanswered { background: var(--bg-subtle); color: var(--text-muted); }
+        .q-status.correct { background: rgba(34,197,94,0.2); color: var(--success); }
+        .q-status.incorrect { background: rgba(239,68,68,0.2); color: var(--danger); }
+        .question-body { padding: 20px; }
+        .question-stem { font-size: 15px; line-height: 1.7; margin-bottom: 20px; }
+        .vignette { background: var(--bg-subtle); padding: 16px; border-radius: 8px; margin-bottom: 16px; border-left: 3px solid var(--accent); }
+        .vignette-label { font-size: 10px; font-weight: 600; text-transform: uppercase; color: var(--accent-light); margin-bottom: 8px; }
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; background: var(--bg-subtle); border: 2px solid transparent; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+        .option:hover { background: var(--bg-dark); border-color: var(--border); }
+        .option.selected { border-color: var(--accent); background: rgba(6,182,212,0.1); }
+        .option.correct { border-color: var(--success); background: rgba(34,197,94,0.1); }
+        .option.incorrect { border-color: var(--danger); background: rgba(239,68,68,0.1); }
+        .option-letter { width: 24px; height: 24px; border: 2px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex-shrink: 0; }
+        .option.selected .option-letter { background: var(--accent); border-color: var(--accent); color: white; }
+        .option.correct .option-letter { background: var(--success); border-color: var(--success); color: white; }
+        .option.incorrect .option-letter { background: var(--danger); border-color: var(--danger); color: white; }
+        .option-text { font-size: 14px; }
+        .submit-btn { width: 100%; padding: 14px; background: var(--accent); color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 16px; }
+        .submit-btn:disabled { background: var(--bg-subtle); color: var(--text-muted); cursor: not-allowed; }
+        .explanation { margin-top: 20px; padding: 20px; background: var(--bg-dark); border-radius: 8px; display: none; }
+        .explanation.show { display: block; }
+        .explanation h4 { font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+        .explanation p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(6,182,212,0.1), rgba(8,145,178,0.1)); border: 1px solid var(--accent); border-radius: 8px; padding: 16px; margin-top: 16px; }
+        .mechanism-title { font-size: 12px; font-weight: 600; color: var(--accent-light); margin-bottom: 8px; }
+        .mechanism-pathway { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; }
+        .pathway-step { background: var(--bg-card); padding: 8px 12px; border-radius: 6px; font-size: 12px; border: 1px solid var(--border); }
+        .pathway-arrow { color: var(--accent); font-weight: bold; }
+        .sidebar { display: flex; flex-direction: column; gap: 20px; }
+        .sidebar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+        .sidebar-title { font-size: 14px; font-weight: 600; margin-bottom: 16px; }
+        .compare-table { width: 100%; font-size: 11px; }
+        .compare-table th, .compare-table td { padding: 8px; text-align: left; border-bottom: 1px solid var(--border); }
+        .compare-table th { color: var(--text-muted); }
+        .compare-table .asthma { color: #f59e0b; }
+        .compare-table .copd { color: #06b6d4; }
+    </style>
+</head>
+<body>
+    <header class="header"><div class="header-inner"><div class="logo">🫁 MechanismDx</div></div></header>
+    <div class="module-header">
+        <div class="module-header-inner">
+            <div class="module-title">
+                <span class="module-icon">🫁</span>
+                <div><h1>Obstructive Lung Disease</h1>
+                <p class="module-subtitle">From airway remodeling to bronchospasm - understanding asthma and COPD</p></div>
+            </div>
+            <div class="module-meta">
+                <div class="meta-item">📚 20 Questions</div>
+                <div class="meta-item">⏱️ ~45 minutes</div>
+            </div>
+        </div>
+    </div>
+    <main class="main">
+        <div class="phase-nav">
+            <button class="phase-btn active" onclick="switchPhase(1)">Phase 1: Asthma</button>
+            <button class="phase-btn" onclick="switchPhase(2)">Phase 2: COPD</button>
+            <button class="phase-btn" onclick="switchPhase(3)">Phase 3: PFTs</button>
+            <button class="phase-btn" onclick="switchPhase(4)">Phase 4: Pharmacotherapy</button>
+        </div>
+        <div class="content-grid">
+            <div class="questions-panel" id="questionsPanel"></div>
+            <aside class="sidebar">
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">📊 Asthma vs COPD</h3>
+                    <table class="compare-table">
+                        <tr><th></th><th class="asthma">Asthma</th><th class="copd">COPD</th></tr>
+                        <tr><td>Age</td><td>Young</td><td>>40</td></tr>
+                        <tr><td>Smoking</td><td>Variable</td><td>Usually</td></tr>
+                        <tr><td>Reversibility</td><td>Full</td><td>Partial</td></tr>
+                        <tr><td>Cells</td><td>Eosinophils</td><td>Neutrophils</td></tr>
+                        <tr><td>ICS Response</td><td>Excellent</td><td>Variable</td></tr>
+                    </table>
+                </div>
+            </aside>
+        </div>
+    </main>
+    <script>
+const questionData = {
+    1: [
+        { id:'q1_1', type:'Mechanism', stem:'Asthma bronchoconstriction in the early phase is primarily mediated by:', options:[
+            {letter:'A',text:'Eosinophil degranulation',correct:false},
+            {letter:'B',text:'Mast cell mediators (histamine, leukotrienes)',correct:true},
+            {letter:'C',text:'Neutrophil infiltration',correct:false},
+            {letter:'D',text:'Smooth muscle hypertrophy',correct:false}
+        ], explanation:'Early phase (minutes) is driven by IgE-mediated mast cell degranulation releasing histamine and leukotrienes causing immediate bronchoconstriction.', mechanism:{title:'Early Phase',steps:['Allergen cross-links IgE','→ Mast cell degranulation','→ Histamine + Leukotrienes','→ Bronchoconstriction']}},
+        { id:'q1_2', type:'Mechanism', stem:'The late phase asthma response (4-8 hours) is primarily mediated by:', options:[
+            {letter:'A',text:'Mast cells',correct:false},
+            {letter:'B',text:'Neutrophils',correct:false},
+            {letter:'C',text:'Eosinophils',correct:true},
+            {letter:'D',text:'Basophils',correct:false}
+        ], explanation:'Late phase involves eosinophil recruitment. They release major basic protein causing epithelial damage and sustained inflammation.', mechanism:{title:'Late Phase',steps:['Chemokines recruit eosinophils','→ IL-5 activation','→ MBP release','→ Epithelial damage','→ Hyperresponsiveness']}},
+        { id:'q1_3', type:'Mechanism', stem:'T2-high asthma is characterized by which cytokines?', options:[
+            {letter:'A',text:'IL-1, IL-6, TNF-α',correct:false},
+            {letter:'B',text:'IL-4, IL-5, IL-13',correct:true},
+            {letter:'C',text:'IFN-γ, IL-12',correct:false},
+            {letter:'D',text:'IL-17, IL-22',correct:false}
+        ], explanation:'T2-high asthma: IL-4 (IgE switching), IL-5 (eosinophil survival), IL-13 (mucus, hyperreactivity). Responds well to ICS and biologics.', mechanism:{title:'T2 Cytokines',steps:['IL-4: IgE class switching','IL-5: Eosinophil survival','IL-13: Mucus + Hyperreactivity']}},
+        { id:'q1_4', type:'Clinical', vignette:'A 25-year-old uses albuterol 4-5x/week, wakes with cough 3 nights/week.', stem:'How is her asthma control classified?', options:[
+            {letter:'A',text:'Well-controlled',correct:false},
+            {letter:'B',text:'Partly controlled',correct:false},
+            {letter:'C',text:'Uncontrolled',correct:true},
+            {letter:'D',text:'Severe persistent',correct:false}
+        ], explanation:'GINA: ≥3 features (reliever >2/wk, night symptoms, activity limitation) = uncontrolled. Needs step-up therapy.', mechanism:{title:'GINA Control',steps:['Well: 0 features','Partly: 1-2 features','Uncontrolled: 3-4 features']}},
+        { id:'q1_5', type:'Mechanism', stem:'Airway remodeling in chronic asthma includes:', options:[
+            {letter:'A',text:'Alveolar destruction',correct:false},
+            {letter:'B',text:'Subepithelial fibrosis and smooth muscle hypertrophy',correct:true},
+            {letter:'C',text:'Pulmonary vascular changes',correct:false},
+            {letter:'D',text:'Bronchiectasis',correct:false}
+        ], explanation:'Chronic asthma causes subepithelial fibrosis, smooth muscle hypertrophy, goblet cell hyperplasia → fixed obstruction.', mechanism:{title:'Remodeling',steps:['Subepithelial fibrosis','Smooth muscle hypertrophy','Goblet cell hyperplasia','→ Fixed obstruction']}}
+    ],
+    2: [
+        { id:'q2_1', type:'Mechanism', stem:'Emphysema results primarily from:', options:[
+            {letter:'A',text:'Smooth muscle hypertrophy',correct:false},
+            {letter:'B',text:'Protease-antiprotease imbalance destroying elastin',correct:true},
+            {letter:'C',text:'Goblet cell metaplasia',correct:false},
+            {letter:'D',text:'Airway fibrosis',correct:false}
+        ], explanation:'Smoke recruits neutrophils/macrophages → elastase release → overwhelms α1-antitrypsin → elastin destruction → alveolar wall breakdown.', mechanism:{title:'Protease Imbalance',steps:['Smoke → Neutrophils','→ Elastase release','→ α1-AT overwhelmed','→ Elastin destroyed','→ Emphysema']}},
+        { id:'q2_2', type:'Mechanism', stem:'Chronic bronchitis pathology includes:', options:[
+            {letter:'A',text:'Alveolar destruction',correct:false},
+            {letter:'B',text:'Mucus gland hypertrophy (Reid index >50%)',correct:true},
+            {letter:'C',text:'Smooth muscle atrophy',correct:false},
+            {letter:'D',text:'Pulmonary fibrosis',correct:false}
+        ], explanation:'Chronic bronchitis: mucus gland hypertrophy, goblet cell hyperplasia → excessive mucus → chronic productive cough.', mechanism:{title:'Chronic Bronchitis',steps:['Chronic irritation','→ Mucus gland hypertrophy','→ Goblet cell hyperplasia','→ Excess mucus','→ Productive cough']}},
+        { id:'q2_3', type:'Clinical', vignette:'55-year-old non-smoker with lower lobe emphysema. Brother died of liver disease at 45.', stem:'What should be suspected?', options:[
+            {letter:'A',text:'Smoking-related COPD',correct:false},
+            {letter:'B',text:'Alpha-1 antitrypsin deficiency',correct:true},
+            {letter:'C',text:'Hypersensitivity pneumonitis',correct:false},
+            {letter:'D',text:'Bronchiectasis',correct:false}
+        ], explanation:'α1-AT deficiency: early emphysema, lower lobe predominance, non-smoker, family lung AND liver disease.', mechanism:{title:'α1-AT Clues',steps:['Young onset (<45)','Non-smoker','Lower lobe emphysema','Family lung + liver disease']}},
+        { id:'q2_4', type:'Mechanism', stem:'COPD airflow limitation results from:', options:[
+            {letter:'A',text:'Increased elastic recoil',correct:false},
+            {letter:'B',text:'Loss of elastic recoil + small airway narrowing',correct:true},
+            {letter:'C',text:'Pulmonary vascular disease',correct:false},
+            {letter:'D',text:'Chest wall restriction',correct:false}
+        ], explanation:'Emphysema reduces elastic recoil (less driving pressure, airway collapse). Small airway disease adds narrowing → air trapping.', mechanism:{title:'COPD Obstruction',steps:['↓Elastic recoil','→ Airways collapse','+ Small airway narrowing','→ Air trapping']}},
+        { id:'q2_5', type:'Clinical', stem:'COPD patient with FEV1 35% and 3 hospitalizations/year. GOLD group?', options:[
+            {letter:'A',text:'Group A',correct:false},
+            {letter:'B',text:'Group B',correct:false},
+            {letter:'C',text:'Group E',correct:true},
+            {letter:'D',text:'Stage IV',correct:false}
+        ], explanation:'GOLD ABE: E = ≥2 moderate OR ≥1 hospitalized exacerbation. With 3 hospitalizations = Group E.', mechanism:{title:'GOLD ABE',steps:['A: Low symptoms + low exacerbations','B: High symptoms + low exacerbations','E: ≥2 moderate OR ≥1 hospitalized']}}
+    ],
+    3: [
+        { id:'q3_1', type:'Clinical', stem:'FEV1/FVC 62% indicates:', options:[
+            {letter:'A',text:'Normal',correct:false},
+            {letter:'B',text:'Obstructive pattern',correct:true},
+            {letter:'C',text:'Restrictive pattern',correct:false},
+            {letter:'D',text:'Mixed pattern',correct:false}
+        ], explanation:'FEV1/FVC <70% defines obstruction. Ratio reduced because FEV1 drops more than FVC from air trapping.', mechanism:{title:'PFT Patterns',steps:['Obstruction: FEV1/FVC <70%','Restriction: FEV1/FVC normal, TLC low','TLC needed to confirm restriction']}},
+        { id:'q3_2', type:'Clinical', vignette:'FEV1 55% pre-bronchodilator → 70% post-bronchodilator.', stem:'This indicates:', options:[
+            {letter:'A',text:'No significant response',correct:false},
+            {letter:'B',text:'Significant bronchodilator reversibility',correct:true},
+            {letter:'C',text:'Fixed obstruction',correct:false},
+            {letter:'D',text:'Restrictive disease',correct:false}
+        ], explanation:'Significant = ≥12% AND ≥200mL increase in FEV1. 15% improvement indicates reversible component.', mechanism:{title:'BD Response',steps:['Significant: ≥12% AND ≥200mL','Classic in asthma','Some COPD shows partial reversibility']}},
+        { id:'q3_3', type:'Mechanism', stem:'In emphysema, DLCO is typically:', options:[
+            {letter:'A',text:'Increased',correct:false},
+            {letter:'B',text:'Normal',correct:false},
+            {letter:'C',text:'Decreased',correct:true},
+            {letter:'D',text:'Variable',correct:false}
+        ], explanation:'Emphysema destroys alveolar walls → reduced surface area → decreased DLCO. Asthma/chronic bronchitis have normal DLCO.', mechanism:{title:'DLCO',steps:['Emphysema: ↓Surface → ↓DLCO','Asthma: Normal DLCO','Chronic bronchitis: Normal DLCO']}},
+        { id:'q3_4', type:'Clinical', stem:'Flow-volume loop in obstruction shows:', options:[
+            {letter:'A',text:'Reduced flows equally',correct:false},
+            {letter:'B',text:'Scooped (concave) expiratory limb',correct:true},
+            {letter:'C',text:'Truncated inspiratory limb',correct:false},
+            {letter:'D',text:'Reduced volumes',correct:false}
+        ], explanation:'Obstruction causes scooped expiratory limb - flow drops rapidly then tails slowly due to air trapping.', mechanism:{title:'Flow-Volume',steps:['Normal: Triangular expiratory','Obstruction: Scooped/concave','Restriction: Tall narrow loop']}},
+        { id:'q3_5', type:'Clinical', stem:'FEV1/FVC 82%, FVC 60%, TLC 58%. Pattern?', options:[
+            {letter:'A',text:'Obstructive',correct:false},
+            {letter:'B',text:'Restrictive',correct:true},
+            {letter:'C',text:'Mixed',correct:false},
+            {letter:'D',text:'Normal',correct:false}
+        ], explanation:'Normal ratio rules out obstruction. Low FVC + low TLC confirms restriction.', mechanism:{title:'Restrictive',steps:['FEV1/FVC normal','FVC reduced','TLC reduced = Confirms restriction']}}
+    ],
+    4: [
+        { id:'q4_1', type:'Pharmacology', stem:'ICS reduce asthma symptoms by:', options:[
+            {letter:'A',text:'Direct bronchodilation',correct:false},
+            {letter:'B',text:'Suppressing airway inflammation',correct:true},
+            {letter:'C',text:'Acute mast cell inhibition',correct:false},
+            {letter:'D',text:'Muscarinic blockade',correct:false}
+        ], explanation:'ICS suppress inflammation - reduce eosinophils, cytokines, inflammatory gene transcription. Controllers, not relievers.', mechanism:{title:'ICS Mechanism',steps:['Bind glucocorticoid receptor','→ ↓Inflammatory genes','→ ↓Cytokines, eosinophils','= Controller therapy']}},
+        { id:'q4_2', type:'Pharmacology', stem:'Beta-2 agonists cause bronchodilation by:', options:[
+            {letter:'A',text:'Blocking acetylcholine',correct:false},
+            {letter:'B',text:'Inhibiting phosphodiesterase',correct:false},
+            {letter:'C',text:'Activating adenylyl cyclase → ↑cAMP → muscle relaxation',correct:true},
+            {letter:'D',text:'Blocking leukotrienes',correct:false}
+        ], explanation:'β2-agonists → Gs protein → adenylyl cyclase → ↑cAMP → PKA activation → smooth muscle relaxation.', mechanism:{title:'β2 Pathway',steps:['β2 receptor activation','→ ↑cAMP','→ PKA activation','→ Smooth muscle relaxation']}},
+        { id:'q4_3', type:'Clinical', vignette:'COPD on LAMA/LABA with frequent exacerbations. Blood eos 350.', stem:'What to add?', options:[
+            {letter:'A',text:'Long-term oral steroids',correct:false},
+            {letter:'B',text:'ICS (triple therapy)',correct:true},
+            {letter:'C',text:'Theophylline',correct:false},
+            {letter:'D',text:'Roflumilast',correct:false}
+        ], explanation:'Blood eos ≥300 predicts ICS response. Add ICS to LAMA/LABA (triple therapy) for frequent exacerbators with high eos.', mechanism:{title:'ICS in COPD',steps:['Eos ≥300: ICS responder','Eos <100: Unlikely benefit','Frequent exacerbations + high eos → Add ICS']}},
+        { id:'q4_4', type:'Pharmacology', stem:'Montelukast blocks:', options:[
+            {letter:'A',text:'Histamine',correct:false},
+            {letter:'B',text:'Cysteinyl leukotrienes (LTC4, LTD4, LTE4)',correct:true},
+            {letter:'C',text:'Prostaglandins',correct:false},
+            {letter:'D',text:'Bradykinin',correct:false}
+        ], explanation:'Montelukast blocks CysLT1 receptor, preventing leukotriene-mediated bronchoconstriction. Add-on therapy in asthma.', mechanism:{title:'Leukotrienes',steps:['Arachidonic acid → 5-LO → CysLTs','CysLTs cause bronchoconstriction','Montelukast blocks CysLT1 receptor']}},
+        { id:'q4_5', type:'Pharmacology', vignette:'Severe eosinophilic asthma (eos 800) uncontrolled on high-dose ICS/LABA.', stem:'Which biologic targets IL-5?', options:[
+            {letter:'A',text:'Omalizumab',correct:false},
+            {letter:'B',text:'Mepolizumab',correct:true},
+            {letter:'C',text:'Dupilumab',correct:false},
+            {letter:'D',text:'Tezepelumab',correct:false}
+        ], explanation:'Mepolizumab targets IL-5 → reduces eosinophils. Omalizumab=IgE, Dupilumab=IL-4/13, Tezepelumab=TSLP.', mechanism:{title:'Biologics',steps:['Omalizumab: Anti-IgE','Mepolizumab: Anti-IL-5','Dupilumab: Anti-IL-4Rα','Tezepelumab: Anti-TSLP']}}
+    ]
+};
+
+let currentPhase = 1, answers = {};
+
+function switchPhase(phase) {
+    currentPhase = phase;
+    document.querySelectorAll('.phase-btn').forEach((btn, i) => btn.classList.toggle('active', i + 1 === phase));
+    renderQuestions();
+}
+
+function renderQuestions() {
+    const panel = document.getElementById('questionsPanel');
+    const questions = questionData[currentPhase];
+    panel.innerHTML = questions.map((q, idx) => `
+        <div class="question-card" id="card-${q.id}">
+            <div class="question-header">
+                <div class="q-number"><span class="q-badge">${(currentPhase-1)*5+idx+1}</span><span class="q-type">${q.type}</span></div>
+                <span class="q-status ${answers[q.id] ? (answers[q.id].correct ? 'correct' : 'incorrect') : 'unanswered'}">${answers[q.id] ? (answers[q.id].correct ? '✓' : '✗') : '○'}</span>
+            </div>
+            <div class="question-body">
+                ${q.vignette ? `<div class="vignette"><div class="vignette-label">Vignette</div>${q.vignette}</div>` : ''}
+                <div class="question-stem">${q.stem}</div>
+                <div class="options">${q.options.map(opt => `
+                    <div class="option ${answers[q.id]?.selected === opt.letter ? 'selected' : ''} ${answers[q.id] ? (opt.correct ? 'correct' : (answers[q.id].selected === opt.letter ? 'incorrect' : '')) : ''}"
+                         onclick="selectOption('${q.id}', '${opt.letter}')" ${answers[q.id] ? 'style="pointer-events:none"' : ''}>
+                        <span class="option-letter">${opt.letter}</span><span class="option-text">${opt.text}</span>
+                    </div>`).join('')}
+                </div>
+                ${!answers[q.id] ? `<button class="submit-btn" onclick="submitAnswer('${q.id}')" id="submit-${q.id}" disabled>Submit</button>` : `
+                <div class="explanation show"><h4>${answers[q.id].correct ? '✓ Correct!' : '✗ Incorrect'}</h4><p>${q.explanation}</p>
+                <div class="mechanism-box"><div class="mechanism-title">🔬 ${q.mechanism.title}</div>
+                <div class="mechanism-pathway">${q.mechanism.steps.map((s,i) => `<span class="pathway-step">${s}</span>${i<q.mechanism.steps.length-1?'<span class="pathway-arrow">→</span>':''}`).join('')}</div></div></div>`}
+            </div>
+        </div>`).join('');
+}
+
+function selectOption(qId, letter) {
+    if (answers[qId]) return;
+    document.querySelectorAll(`#card-${qId} .option`).forEach(o => o.classList.remove('selected'));
+    event.currentTarget.classList.add('selected');
+    document.getElementById(`submit-${qId}`).disabled = false;
+    document.getElementById(`submit-${qId}`).dataset.selected = letter;
+}
+
+function submitAnswer(qId) {
+    const btn = document.getElementById(`submit-${qId}`);
+    const selected = btn.dataset.selected;
+    const q = questionData[currentPhase].find(q => q.id === qId);
+    answers[qId] = { selected, correct: q.options.find(o => o.letter === selected).correct };
+    renderQuestions();
+}
+
+renderQuestions();
+    </script>
+</body>
+</html>

@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MechanismDx - Stroke Pathophysiology</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --bg-subtle: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent: #3b82f6;
+            --accent-light: #60a5fa;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --border: #475569;
+            --radius: 12px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text-primary); line-height: 1.6; }
+        
+        .header { background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+        .header-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 20px; font-weight: 700; color: var(--accent); }
+        .nav-links { display: flex; gap: 16px; }
+        .nav-link { color: var(--text-secondary); text-decoration: none; font-size: 14px; padding: 8px 16px; border-radius: 8px; transition: all 0.2s; }
+        .nav-link:hover { background: var(--bg-subtle); color: var(--text-primary); }
+        
+        .module-header { background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); padding: 48px 24px; }
+        .module-header-inner { max-width: 1200px; margin: 0 auto; }
+        .module-title { display: flex; align-items: center; gap: 20px; margin-bottom: 16px; }
+        .module-icon { font-size: 48px; }
+        .module-title h1 { font-size: 32px; font-weight: 700; }
+        .module-subtitle { font-size: 18px; color: rgba(255,255,255,0.8); max-width: 600px; }
+        .module-meta { display: flex; gap: 24px; margin-top: 24px; }
+        .meta-item { display: flex; align-items: center; gap: 8px; font-size: 14px; color: rgba(255,255,255,0.7); }
+        
+        .main { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+        
+        .phase-nav { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; }
+        .phase-btn { padding: 12px 20px; background: var(--bg-card); border: 2px solid var(--border); border-radius: 8px; color: var(--text-secondary); font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+        .phase-btn:hover { border-color: var(--accent); color: var(--text-primary); }
+        .phase-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+        
+        .content-grid { display: grid; grid-template-columns: 1fr 320px; gap: 24px; }
+        @media (max-width: 900px) { .content-grid { grid-template-columns: 1fr; } }
+        
+        .questions-panel { display: flex; flex-direction: column; gap: 20px; }
+        
+        .question-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+        .question-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .q-number { display: flex; align-items: center; gap: 10px; }
+        .q-badge { width: 28px; height: 28px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+        .q-type { font-size: 12px; color: var(--text-muted); }
+        .q-status { font-size: 11px; padding: 4px 10px; border-radius: 12px; font-weight: 600; }
+        .q-status.unanswered { background: var(--bg-subtle); color: var(--text-muted); }
+        .q-status.correct { background: rgba(34,197,94,0.2); color: var(--success); }
+        .q-status.incorrect { background: rgba(239,68,68,0.2); color: var(--danger); }
+        
+        .question-body { padding: 20px; }
+        .question-stem { font-size: 15px; line-height: 1.7; margin-bottom: 20px; }
+        .vignette { background: var(--bg-subtle); padding: 16px; border-radius: 8px; margin-bottom: 16px; border-left: 3px solid var(--accent); }
+        .vignette-label { font-size: 10px; font-weight: 600; text-transform: uppercase; color: var(--accent-light); margin-bottom: 8px; }
+        
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; background: var(--bg-subtle); border: 2px solid transparent; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+        .option:hover { background: var(--bg-dark); border-color: var(--border); }
+        .option.selected { border-color: var(--accent); background: rgba(59,130,246,0.1); }
+        .option.correct { border-color: var(--success); background: rgba(34,197,94,0.1); }
+        .option.incorrect { border-color: var(--danger); background: rgba(239,68,68,0.1); }
+        .option-letter { width: 24px; height: 24px; border: 2px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex-shrink: 0; }
+        .option.selected .option-letter { background: var(--accent); border-color: var(--accent); color: white; }
+        .option.correct .option-letter { background: var(--success); border-color: var(--success); color: white; }
+        .option.incorrect .option-letter { background: var(--danger); border-color: var(--danger); color: white; }
+        .option-text { font-size: 14px; }
+        
+        .submit-btn { width: 100%; padding: 14px; background: var(--accent); color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 16px; transition: all 0.2s; }
+        .submit-btn:hover { background: var(--accent-light); }
+        .submit-btn:disabled { background: var(--bg-subtle); color: var(--text-muted); cursor: not-allowed; }
+        
+        .explanation { margin-top: 20px; padding: 20px; background: var(--bg-dark); border-radius: 8px; display: none; }
+        .explanation.show { display: block; }
+        .explanation h4 { font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+        .explanation p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+        
+        .mechanism-box { background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(37,99,235,0.1)); border: 1px solid var(--accent); border-radius: 8px; padding: 16px; margin-top: 16px; }
+        .mechanism-title { font-size: 12px; font-weight: 600; color: var(--accent-light); margin-bottom: 8px; }
+        .mechanism-pathway { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; }
+        .pathway-step { background: var(--bg-card); padding: 8px 12px; border-radius: 6px; font-size: 12px; border: 1px solid var(--border); }
+        .pathway-arrow { color: var(--accent); font-weight: bold; }
+        
+        .sidebar { display: flex; flex-direction: column; gap: 20px; }
+        .sidebar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+        .sidebar-title { font-size: 14px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        
+        .time-chart { background: var(--bg-subtle); border-radius: 8px; padding: 16px; }
+        .time-bar { display: flex; align-items: center; margin-bottom: 12px; }
+        .time-label { width: 80px; font-size: 11px; color: var(--text-muted); }
+        .time-track { flex: 1; height: 24px; background: var(--bg-dark); border-radius: 4px; overflow: hidden; position: relative; }
+        .time-fill { height: 100%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 600; }
+        .time-fill.gold { background: linear-gradient(90deg, #fbbf24, #f59e0b); color: #1e293b; }
+        .time-fill.warning { background: linear-gradient(90deg, #f59e0b, #ef4444); }
+        .time-fill.danger { background: var(--danger); }
+        
+        .territory-diagram { background: var(--bg-subtle); border-radius: 8px; padding: 16px; text-align: center; }
+        .territory-brain { width: 180px; height: 180px; margin: 0 auto; position: relative; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><ellipse cx="50" cy="50" rx="45" ry="40" fill="%23475569" stroke="%2364748b" stroke-width="1"/></svg>') center/contain no-repeat; }
+        .territory-label { position: absolute; font-size: 10px; font-weight: 600; padding: 4px 8px; background: var(--bg-card); border-radius: 4px; }
+        .territory-label.aca { top: 10%; left: 50%; transform: translateX(-50%); border: 2px solid #22c55e; }
+        .territory-label.mca { top: 45%; left: 50%; transform: translateX(-50%); border: 2px solid #3b82f6; }
+        .territory-label.pca { bottom: 15%; left: 50%; transform: translateX(-50%); border: 2px solid #f59e0b; }
+        
+        .related-list { display: flex; flex-direction: column; gap: 10px; }
+        .related-item { display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--bg-subtle); border-radius: 8px; text-decoration: none; color: inherit; transition: all 0.2s; }
+        .related-item:hover { background: var(--bg-dark); }
+        .related-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+        .related-icon.reasondx { background: rgba(59,130,246,0.2); }
+        .related-icon.coachdx { background: rgba(139,92,246,0.2); }
+        .related-info { flex: 1; }
+        .related-title { font-size: 13px; font-weight: 500; }
+        .related-type { font-size: 11px; color: var(--text-muted); }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">🧠 MechanismDx</div>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link">Dashboard</a>
+                <a href="reasondx/" class="nav-link">ReasonDx</a>
+                <a href="coachdx/" class="nav-link">CoachDx</a>
+                <a href="fingerprint-dashboard.html" class="nav-link">🎯 Fingerprint</a>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="module-header">
+        <div class="module-header-inner">
+            <div class="module-title">
+                <span class="module-icon">🧠</span>
+                <div>
+                    <h1>Stroke Pathophysiology</h1>
+                    <p class="module-subtitle">From ischemic penumbra to hemorrhagic transformation - understanding cerebrovascular disease mechanisms</p>
+                </div>
+            </div>
+            <div class="module-meta">
+                <div class="meta-item">📚 20 Questions</div>
+                <div class="meta-item">⏱️ ~45 minutes</div>
+                <div class="meta-item">🎯 Intermediate-Advanced</div>
+                <div class="meta-item">🔗 Links to Stroke Cases</div>
+            </div>
+        </div>
+    </div>
+    
+    <main class="main">
+        <div class="phase-nav">
+            <button class="phase-btn active" onclick="switchPhase(1)">Phase 1: Ischemic Cascade</button>
+            <button class="phase-btn" onclick="switchPhase(2)">Phase 2: Stroke Subtypes</button>
+            <button class="phase-btn" onclick="switchPhase(3)">Phase 3: tPA & Thrombectomy</button>
+            <button class="phase-btn" onclick="switchPhase(4)">Phase 4: Hemorrhagic Stroke</button>
+        </div>
+        
+        <div class="content-grid">
+            <div class="questions-panel" id="questionsPanel">
+                <!-- Questions rendered by JavaScript -->
+            </div>
+            
+            <aside class="sidebar">
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">⏱️ Time Windows</h3>
+                    <div class="time-chart">
+                        <div class="time-bar">
+                            <span class="time-label">tPA</span>
+                            <div class="time-track">
+                                <div class="time-fill gold" style="width: 60%">0-4.5 hours</div>
+                            </div>
+                        </div>
+                        <div class="time-bar">
+                            <span class="time-label">Thrombectomy</span>
+                            <div class="time-track">
+                                <div class="time-fill warning" style="width: 80%">0-24 hours*</div>
+                            </div>
+                        </div>
+                        <div class="time-bar">
+                            <span class="time-label">Penumbra</span>
+                            <div class="time-track">
+                                <div class="time-fill danger" style="width: 100%">Minutes to Hours</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="font-size: 10px; color: var(--text-muted); margin-top: 8px;">*With favorable perfusion imaging</p>
+                </div>
+                
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">🗺️ Vascular Territories</h3>
+                    <div class="territory-diagram">
+                        <div class="territory-brain">
+                            <span class="territory-label aca">ACA: Leg</span>
+                            <span class="territory-label mca">MCA: Face/Arm</span>
+                            <span class="territory-label pca">PCA: Vision</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">🔗 Related Cases</h3>
+                    <div class="related-list">
+                        <a href="reasondx/index.html?case=acute-stroke" class="related-item">
+                            <div class="related-icon reasondx">🔬</div>
+                            <div class="related-info">
+                                <div class="related-title">Acute Stroke Workup</div>
+                                <div class="related-type">ReasonDx Case</div>
+                            </div>
+                        </a>
+                        <a href="coachdx/mentor-chat.html?case=stroke" class="related-item">
+                            <div class="related-icon coachdx">🩺</div>
+                            <div class="related-info">
+                                <div class="related-title">Stroke Teaching</div>
+                                <div class="related-type">CoachDx Session</div>
+                            </div>
+                        </a>
+                        <a href="coachdx/mentor-chat.html?case=severe-headache-b" class="related-item">
+                            <div class="related-icon coachdx">🩺</div>
+                            <div class="related-info">
+                                <div class="related-title">ICH Presentation</div>
+                                <div class="related-type">CoachDx Parallel</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+    
+    <script>
+    const questionData = {
+        1: [
+            {
+                id: 'q1_1',
+                type: 'Mechanism',
+                domain: 'mechanism',
+                stem: 'Within minutes of arterial occlusion, the ischemic core experiences irreversible injury. What is the primary mechanism of neuronal death in the ischemic core?',
+                options: [
+                    { letter: 'A', text: 'Apoptosis (programmed cell death)', correct: false },
+                    { letter: 'B', text: 'Necrosis from ATP depletion and calcium influx', correct: true },
+                    { letter: 'C', text: 'Autophagy', correct: false },
+                    { letter: 'D', text: 'Ferroptosis', correct: false }
+                ],
+                explanation: 'The ischemic core dies by necrosis within minutes. Without blood flow, ATP production stops → Na+/K+-ATPase fails → Cell depolarizes → Voltage-gated Ca²⁺ channels open → Massive Ca²⁺ influx → Activates proteases, lipases, endonucleases → Cell lysis (necrosis).',
+                mechanism: {
+                    title: 'Core Ischemic Cascade',
+                    steps: ['Arterial occlusion', '→ No O₂/glucose', '→ ATP depletion', '→ Pump failure', '→ Ca²⁺ influx', '→ Enzyme activation', '→ Necrosis']
+                }
+            },
+            {
+                id: 'q1_2',
+                type: 'Mechanism',
+                domain: 'mechanism',
+                stem: 'The ischemic penumbra is the therapeutic target in acute stroke. What defines the penumbra?',
+                options: [
+                    { letter: 'A', text: 'Tissue that has already infarcted', correct: false },
+                    { letter: 'B', text: 'Hypoperfused but viable tissue at risk', correct: true },
+                    { letter: 'C', text: 'Normally perfused tissue surrounding the stroke', correct: false },
+                    { letter: 'D', text: 'Tissue with luxury perfusion', correct: false }
+                ],
+                explanation: 'The penumbra is "tissue at risk" - hypoperfused via collaterals, electrically silent but structurally intact. Neurons are alive but not functioning. Without reperfusion, the penumbra progressively infarcts (core expands). This is why "time is brain" - we race to save the penumbra.',
+                mechanism: {
+                    title: 'Core vs Penumbra',
+                    steps: ['Core: CBF <10 mL/100g/min = Dead', 'Penumbra: CBF 10-20 = Viable but at risk', 'Normal: CBF >50', 'Goal: Reperfuse before penumbra → Core']
+                }
+            },
+            {
+                id: 'q1_3',
+                type: 'Mechanism',
+                domain: 'mechanism',
+                stem: 'Glutamate excitotoxicity contributes to ischemic brain injury. What is the mechanism?',
+                options: [
+                    { letter: 'A', text: 'Glutamate blocks GABA receptors', correct: false },
+                    { letter: 'B', text: 'NMDA receptor activation causes calcium influx', correct: true },
+                    { letter: 'C', text: 'Glutamate inhibits glucose uptake', correct: false },
+                    { letter: 'D', text: 'Glutamate causes vasoconstriction', correct: false }
+                ],
+                explanation: 'Ischemia causes uncontrolled glutamate release and impaired reuptake. Excess glutamate overstimulates NMDA receptors → Massive Ca²⁺ influx → Activates destructive enzymes → Cell death spreads to penumbra. This "excitotoxicity" expands injury beyond the initial core.',
+                mechanism: {
+                    title: 'Excitotoxicity Cascade',
+                    steps: ['Ischemia → Glutamate release', '→ Reuptake fails (needs ATP)', '→ NMDA receptor overactivation', '→ Ca²⁺ floods neuron', '→ Calpains, endonucleases activate', '→ Cell death spreads']
+                }
+            },
+            {
+                id: 'q1_4',
+                type: 'Clinical',
+                domain: 'clinical',
+                vignette: 'A patient has a stroke at 2pm but was sleeping and found at 8am the next day. Last known well was 10pm.',
+                stem: 'What determines whether this patient can receive tPA?',
+                options: [
+                    { letter: 'A', text: 'Time from discovery (8am)', correct: false },
+                    { letter: 'B', text: 'Time from symptom onset (2pm)', correct: false },
+                    { letter: 'C', text: 'Last known well time (10pm)', correct: true },
+                    { letter: 'D', text: 'Current NIHSS score', correct: false }
+                ],
+                explanation: 'For tPA eligibility, we use "last known well" (LKW) time, not discovery time. Since she was well at 10pm and found at 8am, we assume stroke could have occurred anytime after 10pm. She\'s outside the 4.5-hour tPA window. However, advanced imaging (perfusion CT/MRI) may identify patients who can still benefit.',
+                mechanism: {
+                    title: 'Wake-Up Stroke Approach',
+                    steps: ['LKW = 10pm, Found = 8am', '→ Unknown onset = "wake-up stroke"', '→ Standard tPA window exceeded', '→ Perfusion imaging can identify penumbra', '→ May qualify for thrombectomy']
+                }
+            },
+            {
+                id: 'q1_5',
+                type: 'Mechanism',
+                domain: 'mechanism',
+                stem: 'Reperfusion injury can paradoxically worsen stroke outcomes. What is the primary mechanism?',
+                options: [
+                    { letter: 'A', text: 'Restoration of blood flow washes away protective factors', correct: false },
+                    { letter: 'B', text: 'Oxygen free radical generation and inflammation', correct: true },
+                    { letter: 'C', text: 'Reperfusion causes vasospasm', correct: false },
+                    { letter: 'D', text: 'Blood flow is too rapid for damaged vessels', correct: false }
+                ],
+                explanation: 'Reperfusion delivers oxygen to damaged mitochondria, which generate reactive oxygen species (ROS). ROS cause lipid peroxidation, protein oxidation, and DNA damage. Reperfusion also triggers inflammatory cascades with neutrophil infiltration. This "reperfusion injury" can worsen outcomes despite successful recanalization.',
+                mechanism: {
+                    title: 'Reperfusion Injury',
+                    steps: ['Recanalization → O₂ returns', '→ Damaged mitochondria produce ROS', '→ Oxidative stress', '→ Inflammation (neutrophils, cytokines)', '→ Secondary injury']
+                }
+            }
+        ],
+        2: [
+            {
+                id: 'q2_1',
+                type: 'Clinical',
+                domain: 'clinical',
+                stem: 'The TOAST classification identifies stroke subtypes for secondary prevention. Which is the most common cause of ischemic stroke?',
+                options: [
+                    { letter: 'A', text: 'Large artery atherosclerosis', correct: false },
+                    { letter: 'B', text: 'Cardioembolism', correct: false },
+                    { letter: 'C', text: 'Small vessel occlusion (lacunar)', correct: true },
+                    { letter: 'D', text: 'Stroke of other determined etiology', correct: false }
+                ],
+                explanation: 'Small vessel occlusion (lacunar infarcts) accounts for ~25% of ischemic strokes - the largest single category. These affect small penetrating arteries supplying deep brain structures. Large artery atherosclerosis and cardioembolism each account for ~20%. Cryptogenic (unknown) accounts for ~25%.',
+                mechanism: {
+                    title: 'TOAST Classification',
+                    steps: ['1. Large artery atherosclerosis (~20%)', '2. Cardioembolism (~20%)', '3. Small vessel/Lacunar (~25%)', '4. Other determined cause (~5%)', '5. Cryptogenic (~25%)']
+                }
+            },
+            {
+                id: 'q2_2',
+                type: 'Mechanism',
+                domain: 'mechanism',
+                stem: 'Lacunar infarcts result from occlusion of small penetrating arteries. What is the underlying vascular pathology?',
+                options: [
+                    { letter: 'A', text: 'Atherosclerotic plaque rupture', correct: false },
+                    { letter: 'B', text: 'Lipohyalinosis from chronic hypertension', correct: true },
+                    { letter: 'C', text: 'Cardiogenic embolism', correct: false },
+                    { letter: 'D', text: 'Arterial dissection', correct: false }
+                ],
+                explanation: 'Lacunar infarcts result from lipohyalinosis - hypertensive damage to small penetrating arteries (lenticulostriates, thalamoperforators). Chronic hypertension causes lipid and hyaline material to deposit in vessel walls, narrowing the lumen. Classic lacunar syndromes include pure motor, pure sensory, ataxic hemiparesis.',
+                mechanism: {
+                    title: 'Lipohyalinosis',
+                    steps: ['Chronic hypertension', '→ Endothelial damage in small arteries', '→ Lipid/hyaline deposition in wall', '→ Lumen narrows', '→ Occlusion → Lacunar infarct (≤1.5cm)']
+                }
+            },
+            {
+                id: 'q2_3',
+                type: 'Clinical',
+                domain: 'clinical',
+                vignette: 'A 72-year-old with atrial fibrillation not on anticoagulation presents with sudden onset right hemiplegia and aphasia. CT shows left MCA territory infarct.',
+                stem: 'What is the most likely stroke mechanism?',
+                options: [
+                    { letter: 'A', text: 'Large artery atherosclerosis', correct: false },
+                    { letter: 'B', text: 'Cardioembolism from atrial fibrillation', correct: true },
+                    { letter: 'C', text: 'Small vessel occlusion', correct: false },
+                    { letter: 'D', text: 'Arterial dissection', correct: false }
+                ],
+                explanation: 'AFib is a major source of cardioembolic stroke. Stasis in the fibrillating left atrial appendage forms thrombus, which embolizes to the brain. MCA territory is most commonly affected. This is why AFib anticoagulation (CHADS₂-VASc guided) is crucial for stroke prevention.',
+                mechanism: {
+                    title: 'Cardioembolic Stroke in AFib',
+                    steps: ['AFib → Atrial stasis', '→ Thrombus forms in LAA', '→ Embolizes to brain', '→ Lodges in MCA (most common)', '→ Large territory infarct']
+                }
+            },
+            {
+                id: 'q2_4',
+                type: 'Anatomy',
+                domain: 'anatomy',
+                stem: 'A patient presents with left leg weakness greater than arm weakness, with urinary incontinence and abulia. Which vascular territory is affected?',
+                options: [
+                    { letter: 'A', text: 'Middle cerebral artery (MCA)', correct: false },
+                    { letter: 'B', text: 'Anterior cerebral artery (ACA)', correct: true },
+                    { letter: 'C', text: 'Posterior cerebral artery (PCA)', correct: false },
+                    { letter: 'D', text: 'Basilar artery', correct: false }
+                ],
+                explanation: 'ACA supplies the medial frontal and parietal lobes, including the leg area of the motor/sensory homunculus. ACA stroke causes: leg > arm weakness (leg area is medial), urinary incontinence (medial frontal micturition center), abulia/apathy (damage to cingulate/SMA), grasp reflex.',
+                mechanism: {
+                    title: 'ACA Territory',
+                    steps: ['ACA supplies medial hemisphere', '→ Motor strip: Leg represented medially', '→ Sensory strip: Leg represented medially', '→ Medial frontal: Bladder control, motivation', '→ ACA stroke = Leg weakness + incontinence + abulia']
+                }
+            },
+            {
+                id: 'q2_5',
+                type: 'Anatomy',
+                domain: 'anatomy',
+                vignette: 'A patient presents with homonymous hemianopia, memory impairment, and alexia without agraphia.',
+                stem: 'Which vascular territory is most likely affected?',
+                options: [
+                    { letter: 'A', text: 'Middle cerebral artery (MCA)', correct: false },
+                    { letter: 'B', text: 'Anterior cerebral artery (ACA)', correct: false },
+                    { letter: 'C', text: 'Posterior cerebral artery (PCA)', correct: true },
+                    { letter: 'D', text: 'Anterior choroidal artery', correct: false }
+                ],
+                explanation: 'PCA supplies the occipital lobe (vision), medial temporal lobe (memory), and splenium of corpus callosum. Left PCA stroke causes: right homonymous hemianopia (occipital), memory problems (hippocampus), and alexia without agraphia (visual word form area disconnected from language areas).',
+                mechanism: {
+                    title: 'PCA Territory',
+                    steps: ['PCA supplies: Occipital lobe (vision)', '+ Medial temporal (hippocampus)', '+ Thalamus (PCA branches)', '→ PCA stroke = Hemianopia + Memory + Visual processing deficits']
+                }
+            }
+        ],
+        3: [
+            {
+                id: 'q3_1',
+                type: 'Pharmacology',
+                domain: 'pharm',
+                stem: 'Alteplase (tPA) works by which mechanism?',
+                options: [
+                    { letter: 'A', text: 'Direct thrombin inhibition', correct: false },
+                    { letter: 'B', text: 'Plasminogen activation to plasmin, which lyses fibrin', correct: true },
+                    { letter: 'C', text: 'Factor Xa inhibition', correct: false },
+                    { letter: 'D', text: 'Platelet aggregation inhibition', correct: false }
+                ],
+                explanation: 'tPA (tissue plasminogen activator) converts plasminogen to plasmin. Plasmin enzymatically degrades fibrin clots. tPA has relative fibrin specificity - it preferentially activates plasminogen bound to fibrin clots, but systemic effects still cause bleeding risk.',
+                mechanism: {
+                    title: 'tPA Mechanism',
+                    steps: ['tPA binds fibrin-bound plasminogen', '→ Converts plasminogen → plasmin', '→ Plasmin cleaves fibrin', '→ Clot dissolution', '→ Reperfusion']
+                }
+            },
+            {
+                id: 'q3_2',
+                type: 'Clinical',
+                domain: 'clinical',
+                stem: 'Which is an absolute contraindication to IV tPA for acute ischemic stroke?',
+                options: [
+                    { letter: 'A', text: 'Age over 80 years', correct: false },
+                    { letter: 'B', text: 'NIHSS score greater than 25', correct: false },
+                    { letter: 'C', text: 'Active internal bleeding', correct: true },
+                    { letter: 'D', text: 'Recent myocardial infarction', correct: false }
+                ],
+                explanation: 'Active internal bleeding is an absolute contraindication to tPA due to bleeding risk amplification. Age >80 and high NIHSS were previously relative contraindications but data supports benefit. Recent MI is a relative contraindication. Key absolute contraindications: active bleeding, recent intracranial surgery/trauma, prior ICH, known intracranial neoplasm.',
+                mechanism: {
+                    title: 'tPA Contraindications (Absolute)',
+                    steps: ['Active internal bleeding', 'Recent intracranial surgery/trauma', 'Prior intracranial hemorrhage', 'Known intracranial neoplasm/AVM', 'Suspected aortic dissection', 'Severe uncontrolled HTN']
+                }
+            },
+            {
+                id: 'q3_3',
+                type: 'Clinical',
+                domain: 'clinical',
+                vignette: 'A patient with acute stroke and NIHSS 18 receives IV tPA at 3 hours. CT angiography shows left MCA occlusion.',
+                stem: 'What additional treatment should be considered?',
+                options: [
+                    { letter: 'A', text: 'Repeat tPA bolus', correct: false },
+                    { letter: 'B', text: 'Mechanical thrombectomy', correct: true },
+                    { letter: 'C', text: 'Carotid endarterectomy', correct: false },
+                    { letter: 'D', text: 'Antiplatelet therapy only', correct: false }
+                ],
+                explanation: 'For large vessel occlusion (LVO) strokes, mechanical thrombectomy provides additional benefit beyond tPA alone. Multiple trials (DAWN, DEFUSE 3) show thrombectomy benefit up to 24 hours in selected patients with favorable perfusion imaging. tPA + thrombectomy is better than tPA alone for LVO.',
+                mechanism: {
+                    title: 'Thrombectomy Benefit',
+                    steps: ['Large vessel occlusion identified', '→ tPA may not fully recanalize', '→ Stent retriever/aspiration catheter', '→ Mechanical clot removal', '→ Higher recanalization rates', '→ Better outcomes for LVO']
+                }
+            },
+            {
+                id: 'q3_4',
+                type: 'Mechanism',
+                domain: 'mechanism',
+                stem: 'Perfusion imaging in stroke (CT or MR perfusion) identifies candidates for late-window thrombectomy by demonstrating:',
+                options: [
+                    { letter: 'A', text: 'The size of the ischemic core only', correct: false },
+                    { letter: 'B', text: 'Mismatch between core (infarct) and penumbra (at-risk tissue)', correct: true },
+                    { letter: 'C', text: 'Presence of hemorrhage', correct: false },
+                    { letter: 'D', text: 'Location of the occlusion', correct: false }
+                ],
+                explanation: 'Perfusion imaging identifies "target mismatch" - a small core (already infarcted) with a large penumbra (hypoperfused but viable). Patients with favorable mismatch (small core, large penumbra) benefit from thrombectomy even beyond standard time windows. DAWN and DEFUSE 3 trials used perfusion selection.',
+                mechanism: {
+                    title: 'Perfusion Mismatch',
+                    steps: ['Core = CBF severely reduced = Infarcted', 'Penumbra = Delayed perfusion = At risk', 'Mismatch = Penumbra >> Core', '→ Tissue to save with reperfusion', '→ Late-window thrombectomy candidate']
+                }
+            },
+            {
+                id: 'q3_5',
+                type: 'Clinical',
+                domain: 'clinical',
+                stem: 'After tPA administration, the patient\'s NIHSS worsens from 12 to 22, with new headache and vomiting. Blood pressure is 190/110. What is the most likely complication?',
+                options: [
+                    { letter: 'A', text: 'Stroke progression', correct: false },
+                    { letter: 'B', text: 'Symptomatic intracranial hemorrhage', correct: true },
+                    { letter: 'C', text: 'Seizure', correct: false },
+                    { letter: 'D', text: 'Angioedema', correct: false }
+                ],
+                explanation: 'Neurological deterioration with headache after tPA is symptomatic intracranial hemorrhage (sICH) until proven otherwise. Stop tPA immediately, stat non-contrast CT head, check coagulation studies, give cryoprecipitate (fibrinogen) and tranexamic acid. sICH occurs in ~6% of tPA patients.',
+                mechanism: {
+                    title: 'tPA-Related ICH Management',
+                    steps: ['Stop tPA infusion immediately', '→ Stat CT head', '→ Check fibrinogen, PT/INR, platelets', '→ Cryoprecipitate (goal fibrinogen >200)', '→ Tranexamic acid', '→ Reverse coagulopathy']
+                }
+            }
+        ],
+        4: [
+            {
+                id: 'q4_1',
+                type: 'Mechanism',
+                domain: 'mechanism',
+                stem: 'What is the most common location for hypertensive intracerebral hemorrhage?',
+                options: [
+                    { letter: 'A', text: 'Lobar (cortical) white matter', correct: false },
+                    { letter: 'B', text: 'Basal ganglia (putamen)', correct: true },
+                    { letter: 'C', text: 'Cerebellum', correct: false },
+                    { letter: 'D', text: 'Brainstem (pons)', correct: false }
+                ],
+                explanation: 'Hypertensive ICH most commonly occurs in the basal ganglia (putamen ~35%), followed by thalamus, pons, and cerebellum. These deep structures are supplied by small penetrating arteries (lenticulostriate) that undergo lipohyalinosis and form microaneurysms (Charcot-Bouchard) from chronic hypertension.',
+                mechanism: {
+                    title: 'Hypertensive ICH Sites',
+                    steps: ['Chronic HTN → Small vessel disease', '→ Lipohyalinosis + microaneurysms', '→ Vessel rupture', 'Sites: Putamen (35%) > Thalamus > Pons > Cerebellum > Lobar']
+                }
+            },
+            {
+                id: 'q4_2',
+                type: 'Clinical',
+                domain: 'clinical',
+                vignette: 'A 75-year-old on warfarin (INR 3.2) presents with sudden severe headache and left hemiplegia. CT shows right basal ganglia hemorrhage with intraventricular extension.',
+                stem: 'What is the priority management step?',
+                options: [
+                    { letter: 'A', text: 'Administer tPA', correct: false },
+                    { letter: 'B', text: 'Urgent reversal with 4-factor PCC and vitamin K', correct: true },
+                    { letter: 'C', text: 'Start aspirin for secondary prevention', correct: false },
+                    { letter: 'D', text: 'Observe and repeat CT in 6 hours', correct: false }
+                ],
+                explanation: 'Anticoagulant-associated ICH requires urgent reversal to prevent hematoma expansion. For warfarin: 4-factor PCC (immediate) + IV vitamin K (sustained). Target INR <1.5 within 4 hours. Hematoma expansion in the first hours is the major driver of mortality - stopping it is the priority.',
+                mechanism: {
+                    title: 'Warfarin-ICH Reversal',
+                    steps: ['4-factor PCC: Immediate effect (minutes)', '+ Vitamin K 10mg IV: Sustained effect (6-12h)', '→ Goal INR <1.5 within 4 hours', '→ Prevents hematoma expansion', '→ Improves mortality']
+                }
+            },
+            {
+                id: 'q4_3',
+                type: 'Mechanism',
+                domain: 'mechanism',
+                stem: 'Cerebral amyloid angiopathy (CAA) causes ICH by what mechanism?',
+                options: [
+                    { letter: 'A', text: 'Small vessel lipohyalinosis', correct: false },
+                    { letter: 'B', text: 'Beta-amyloid deposition in cortical vessel walls', correct: true },
+                    { letter: 'C', text: 'Atherosclerotic plaque rupture', correct: false },
+                    { letter: 'D', text: 'Venous thrombosis', correct: false }
+                ],
+                explanation: 'CAA involves beta-amyloid protein deposition in small and medium cortical/leptomeningeal vessel walls, causing vessel fragility. Unlike hypertensive ICH (deep structures), CAA causes LOBAR hemorrhages in elderly patients. Often recurrent. Associated with Alzheimer\'s disease. Boston criteria use MRI for diagnosis.',
+                mechanism: {
+                    title: 'CAA Pathophysiology',
+                    steps: ['β-amyloid deposits in vessel walls', '→ Replaces smooth muscle', '→ Vessel becomes fragile', '→ Lobar (cortical) hemorrhage', '→ Often recurrent, elderly patients']
+                }
+            },
+            {
+                id: 'q4_4',
+                type: 'Clinical',
+                domain: 'clinical',
+                stem: 'In acute intracerebral hemorrhage, what is the blood pressure management target per current guidelines?',
+                options: [
+                    { letter: 'A', text: 'SBP <120 mmHg immediately', correct: false },
+                    { letter: 'B', text: 'SBP <140 mmHg within 1 hour (if presenting SBP 150-220)', correct: true },
+                    { letter: 'C', text: 'SBP <180 mmHg', correct: false },
+                    { letter: 'D', text: 'No blood pressure lowering needed', correct: false }
+                ],
+                explanation: 'For ICH with SBP 150-220 mmHg, target SBP <140 mmHg is safe and may reduce hematoma expansion (INTERACT2, ATACH-2). Use IV labetalol or nicardipine. Aggressive lowering to <120 may cause harm. For SBP >220, more aggressive reduction is reasonable but avoid precipitous drops.',
+                mechanism: {
+                    title: 'ICH BP Management',
+                    steps: ['SBP 150-220: Target <140 mmHg', 'SBP >220: Aggressive reduction reasonable', 'Agents: IV labetalol, nicardipine', 'Avoid: Precipitous drops (ischemia)', 'Goal: Reduce hematoma expansion risk']
+                }
+            },
+            {
+                id: 'q4_5',
+                type: 'Mechanism',
+                domain: 'mechanism',
+                stem: 'Subarachnoid hemorrhage causes delayed cerebral ischemia (DCI) days after the initial bleed. What is the primary mechanism?',
+                options: [
+                    { letter: 'A', text: 'Rebleeding from the aneurysm', correct: false },
+                    { letter: 'B', text: 'Cerebral vasospasm from blood products', correct: true },
+                    { letter: 'C', text: 'Hydrocephalus', correct: false },
+                    { letter: 'D', text: 'Seizure-induced injury', correct: false }
+                ],
+                explanation: 'Blood in the subarachnoid space triggers cerebral vasospasm, peaking at days 4-14 post-SAH. Hemoglobin breakdown products (oxyhemoglobin) cause endothelial dysfunction and smooth muscle contraction. DCI causes new neurological deficits. Treatment: Nimodipine (reduces DCI), induced hypertension, angioplasty.',
+                mechanism: {
+                    title: 'SAH → Vasospasm → DCI',
+                    steps: ['SAH → Blood in subarachnoid space', '→ RBC lysis → Oxyhemoglobin release', '→ Endothelial NO depletion', '→ Smooth muscle constriction', '→ Vasospasm (days 4-14)', '→ Delayed cerebral ischemia']
+                }
+            }
+        ]
+    };
+    
+    let currentPhase = 1;
+    let answers = {};
+    
+    function switchPhase(phase) {
+        currentPhase = phase;
+        document.querySelectorAll('.phase-btn').forEach((btn, i) => {
+            btn.classList.toggle('active', i + 1 === phase);
+        });
+        renderQuestions();
+    }
+    
+    function renderQuestions() {
+        const panel = document.getElementById('questionsPanel');
+        const questions = questionData[currentPhase];
+        
+        panel.innerHTML = questions.map((q, idx) => `
+            <div class="question-card" id="card-${q.id}">
+                <div class="question-header">
+                    <div class="q-number">
+                        <span class="q-badge">${(currentPhase - 1) * 5 + idx + 1}</span>
+                        <span class="q-type">${q.type}</span>
+                    </div>
+                    <span class="q-status ${answers[q.id] ? (answers[q.id].correct ? 'correct' : 'incorrect') : 'unanswered'}">
+                        ${answers[q.id] ? (answers[q.id].correct ? '✓ Correct' : '✗ Incorrect') : 'Unanswered'}
+                    </span>
+                </div>
+                <div class="question-body">
+                    ${q.vignette ? `<div class="vignette"><div class="vignette-label">Clinical Vignette</div>${q.vignette}</div>` : ''}
+                    <div class="question-stem">${q.stem}</div>
+                    <div class="options">
+                        ${q.options.map(opt => `
+                            <div class="option ${answers[q.id]?.selected === opt.letter ? 'selected' : ''} ${answers[q.id] ? (opt.correct ? 'correct' : (answers[q.id].selected === opt.letter ? 'incorrect' : '')) : ''}"
+                                 onclick="selectOption('${q.id}', '${opt.letter}')"
+                                 ${answers[q.id] ? 'style="pointer-events:none"' : ''}>
+                                <span class="option-letter">${opt.letter}</span>
+                                <span class="option-text">${opt.text}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ${!answers[q.id] ? `
+                        <button class="submit-btn" onclick="submitAnswer('${q.id}')" id="submit-${q.id}" disabled>Submit Answer</button>
+                    ` : `
+                        <div class="explanation show">
+                            <h4>${answers[q.id].correct ? '✓ Correct!' : '✗ Incorrect'}</h4>
+                            <p>${q.explanation}</p>
+                            <div class="mechanism-box">
+                                <div class="mechanism-title">🔬 ${q.mechanism.title}</div>
+                                <div class="mechanism-pathway">
+                                    ${q.mechanism.steps.map((step, i) => `
+                                        <span class="pathway-step">${step}</span>
+                                        ${i < q.mechanism.steps.length - 1 ? '<span class="pathway-arrow">→</span>' : ''}
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    `}
+                </div>
+            </div>
+        `).join('');
+    }
+    
+    function selectOption(qId, letter) {
+        if (answers[qId]) return;
+        document.querySelectorAll(`#card-${qId} .option`).forEach(opt => opt.classList.remove('selected'));
+        event.currentTarget.classList.add('selected');
+        document.getElementById(`submit-${qId}`).disabled = false;
+        document.getElementById(`submit-${qId}`).dataset.selected = letter;
+    }
+    
+    function submitAnswer(qId) {
+        const btn = document.getElementById(`submit-${qId}`);
+        const selected = btn.dataset.selected;
+        const question = questionData[currentPhase].find(q => q.id === qId);
+        const correct = question.options.find(o => o.letter === selected).correct;
+        answers[qId] = { selected, correct };
+        renderQuestions();
+    }
+    
+    renderQuestions();
+    </script>
+</body>
+</html>
