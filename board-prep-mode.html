@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board Prep Mode | Dx Learning Ecosystem</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #1e293b; color: #e2e8f0; min-height: 100vh; }
+        
+        .exam-header { background: #0f172a; padding: 12px 24px; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
+        .exam-logo { font-size: 18px; font-weight: 700; }
+        .exam-logo span { color: #3b82f6; }
+        .exam-info { display: flex; gap: 24px; align-items: center; }
+        .exam-timer { font-size: 20px; font-weight: 600; color: #f59e0b; font-family: monospace; }
+        .exam-progress { font-size: 14px; color: #94a3b8; }
+        
+        .exam-toolbar { background: #0f172a; padding: 8px 24px; border-bottom: 1px solid #334155; display: flex; gap: 12px; }
+        .tool-btn { padding: 6px 12px; background: #334155; border: none; color: #94a3b8; border-radius: 4px; font-size: 12px; cursor: pointer; }
+        .tool-btn:hover { background: #475569; color: #e2e8f0; }
+        .tool-btn.active { background: #3b82f6; color: #fff; }
+        
+        .exam-body { display: flex; min-height: calc(100vh - 100px); }
+        
+        .question-nav { width: 80px; background: #0f172a; padding: 16px 8px; border-right: 1px solid #334155; overflow-y: auto; }
+        .q-nav-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+        .q-nav-item { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: #334155; border-radius: 4px; font-size: 12px; cursor: pointer; border: 2px solid transparent; }
+        .q-nav-item:hover { background: #475569; }
+        .q-nav-item.current { border-color: #3b82f6; background: #1e40af; }
+        .q-nav-item.answered { background: #22c55e; color: #fff; }
+        .q-nav-item.flagged { background: #f59e0b; color: #000; }
+        
+        .question-area { flex: 1; padding: 32px; max-width: 900px; }
+        
+        .question-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .question-num { font-size: 14px; color: #94a3b8; }
+        .flag-btn { padding: 6px 12px; background: transparent; border: 1px solid #475569; color: #94a3b8; border-radius: 4px; font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+        .flag-btn:hover { background: #334155; }
+        .flag-btn.flagged { background: #f59e0b; border-color: #f59e0b; color: #000; }
+        
+        .question-stem { font-size: 15px; line-height: 1.8; color: #e2e8f0; margin-bottom: 24px; }
+        .question-prompt { font-size: 15px; font-weight: 500; color: #fff; margin-bottom: 20px; }
+        
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; background: #334155; border: 2px solid #475569; border-radius: 8px; cursor: pointer; transition: all 0.15s; }
+        .option:hover { border-color: #3b82f6; background: #1e40af; }
+        .option.selected { border-color: #3b82f6; background: #1e40af; }
+        .option-letter { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; background: #475569; border-radius: 4px; font-weight: 600; font-size: 14px; flex-shrink: 0; }
+        .option.selected .option-letter { background: #3b82f6; }
+        .option-text { font-size: 14px; line-height: 1.5; padding-top: 3px; }
+        
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 32px; }
+        .nav-btn { padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; font-size: 14px; }
+        .nav-btn.prev { background: #334155; color: #e2e8f0; }
+        .nav-btn.next { background: #3b82f6; color: #fff; }
+        .nav-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .nav-btn.submit { background: #22c55e; }
+        
+        /* Review Mode */
+        .option.correct { border-color: #22c55e; background: rgba(34, 197, 94, 0.2); }
+        .option.correct .option-letter { background: #22c55e; }
+        .option.incorrect { border-color: #ef4444; background: rgba(239, 68, 68, 0.2); }
+        .option.incorrect .option-letter { background: #ef4444; }
+        
+        .explanation-box { margin-top: 24px; padding: 20px; background: #0f172a; border-radius: 8px; border-left: 4px solid #3b82f6; display: none; }
+        .explanation-box.show { display: block; }
+        .explanation-box h4 { color: #3b82f6; margin-bottom: 12px; font-size: 14px; }
+        .explanation-box p { font-size: 14px; color: #94a3b8; line-height: 1.7; }
+        
+        /* Results Modal */
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; z-index: 1000; }
+        .modal-overlay.show { display: flex; }
+        .modal { background: #1e293b; border-radius: 16px; padding: 40px; max-width: 500px; width: 90%; border: 1px solid #334155; }
+        .modal-title { font-size: 24px; font-weight: 700; text-align: center; margin-bottom: 24px; }
+        .score-display { text-align: center; margin-bottom: 32px; }
+        .score-big { font-size: 64px; font-weight: 700; color: #3b82f6; }
+        .score-label { color: #94a3b8; }
+        .stats-row { display: flex; justify-content: center; gap: 32px; margin-bottom: 32px; }
+        .stat-item { text-align: center; }
+        .stat-value { font-size: 24px; font-weight: 600; color: #e2e8f0; }
+        .stat-label { font-size: 12px; color: #64748b; }
+        .modal-actions { display: flex; gap: 12px; justify-content: center; }
+        .modal-btn { padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; font-size: 14px; }
+        .modal-btn.primary { background: #3b82f6; color: #fff; }
+        .modal-btn.secondary { background: #334155; color: #e2e8f0; }
+        
+        /* Setup Screen */
+        .setup-screen { max-width: 600px; margin: 60px auto; padding: 40px; background: #0f172a; border-radius: 16px; border: 1px solid #334155; }
+        .setup-title { font-size: 28px; font-weight: 700; margin-bottom: 8px; text-align: center; }
+        .setup-subtitle { color: #94a3b8; text-align: center; margin-bottom: 32px; }
+        .setup-section { margin-bottom: 24px; }
+        .setup-label { font-size: 14px; font-weight: 600; margin-bottom: 12px; color: #e2e8f0; }
+        .setup-options { display: flex; flex-wrap: wrap; gap: 10px; }
+        .setup-opt { padding: 10px 16px; background: #334155; border: 2px solid #475569; border-radius: 8px; cursor: pointer; font-size: 14px; }
+        .setup-opt:hover { border-color: #3b82f6; }
+        .setup-opt.selected { border-color: #3b82f6; background: #1e40af; }
+        .start-btn { width: 100%; padding: 16px; background: #3b82f6; color: #fff; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 24px; }
+        .start-btn:hover { background: #2563eb; }
+        
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+    <!-- Setup Screen -->
+    <div id="setupScreen" class="setup-screen">
+        <h1 class="setup-title">Board Prep Mode</h1>
+        <p class="setup-subtitle">Simulate USMLE/COMLEX exam conditions with timed questions</p>
+        
+        <div class="setup-section">
+            <div class="setup-label">Number of Questions</div>
+            <div class="setup-options" id="qCountOptions">
+                <div class="setup-opt" data-value="10">10</div>
+                <div class="setup-opt selected" data-value="20">20</div>
+                <div class="setup-opt" data-value="40">40</div>
+            </div>
+        </div>
+        
+        <div class="setup-section">
+            <div class="setup-label">Time per Question</div>
+            <div class="setup-options" id="timeOptions">
+                <div class="setup-opt" data-value="60">1 min</div>
+                <div class="setup-opt selected" data-value="90">1.5 min</div>
+                <div class="setup-opt" data-value="120">2 min</div>
+                <div class="setup-opt" data-value="0">Untimed</div>
+            </div>
+        </div>
+        
+        <div class="setup-section">
+            <div class="setup-label">Topics (select multiple)</div>
+            <div class="setup-options" id="topicOptions">
+                <div class="setup-opt selected" data-value="cardiology">Cardiology</div>
+                <div class="setup-opt selected" data-value="pulmonary">Pulmonary</div>
+                <div class="setup-opt selected" data-value="infectious">Infectious Disease</div>
+                <div class="setup-opt selected" data-value="neurology">Neurology</div>
+                <div class="setup-opt" data-value="renal">Renal</div>
+                <div class="setup-opt" data-value="gi">GI</div>
+                <div class="setup-opt" data-value="endocrine">Endocrine</div>
+                <div class="setup-opt" data-value="toxicology">Toxicology</div>
+            </div>
+        </div>
+        
+        <div class="setup-section">
+            <div class="setup-label">Mode</div>
+            <div class="setup-options" id="modeOptions">
+                <div class="setup-opt selected" data-value="tutor">Tutor (show answers)</div>
+                <div class="setup-opt" data-value="timed">Timed (end review)</div>
+            </div>
+        </div>
+        
+        <button class="start-btn" onclick="startExam()">Start Exam</button>
+    </div>
+    
+    <!-- Exam Interface -->
+    <div id="examInterface" class="hidden">
+        <header class="exam-header">
+            <div class="exam-logo">Board <span>Prep</span></div>
+            <div class="exam-info">
+                <div class="exam-timer" id="timerDisplay">45:00</div>
+                <div class="exam-progress" id="progressDisplay">Question 1 of 20</div>
+            </div>
+        </header>
+        
+        <div class="exam-toolbar">
+            <button class="tool-btn" onclick="toggleStrikethrough()">Strikethrough</button>
+            <button class="tool-btn" onclick="toggleHighlight()">Highlight</button>
+            <button class="tool-btn" onclick="showCalculator()">Calculator</button>
+            <button class="tool-btn" onclick="showLabValues()">Lab Values</button>
+            <div style="flex:1"></div>
+            <button class="tool-btn" onclick="endExam()" style="background: #7f1d1d; color: #fecaca;">End Exam</button>
+        </div>
+        
+        <div class="exam-body">
+            <div class="question-nav">
+                <div class="q-nav-grid" id="questionNav"></div>
+            </div>
+            
+            <div class="question-area">
+                <div class="question-header">
+                    <span class="question-num" id="questionNum">Question 1</span>
+                    <button class="flag-btn" id="flagBtn" onclick="toggleFlag()">
+                        <span>🚩</span> Flag
+                    </button>
+                </div>
+                
+                <div class="question-stem" id="questionStem"></div>
+                <div class="question-prompt" id="questionPrompt"></div>
+                
+                <div class="options" id="optionsContainer"></div>
+                
+                <div class="explanation-box" id="explanationBox">
+                    <h4>Explanation</h4>
+                    <p id="explanationText"></p>
+                </div>
+                
+                <div class="nav-buttons">
+                    <button class="nav-btn prev" id="prevBtn" onclick="prevQuestion()">← Previous</button>
+                    <button class="nav-btn next" id="nextBtn" onclick="nextQuestion()">Next →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Results Modal -->
+    <div class="modal-overlay" id="resultsModal">
+        <div class="modal">
+            <h2 class="modal-title">Exam Complete</h2>
+            <div class="score-display">
+                <div class="score-big" id="finalScore">75%</div>
+                <div class="score-label">Overall Score</div>
+            </div>
+            <div class="stats-row">
+                <div class="stat-item">
+                    <div class="stat-value" id="correctStat">15</div>
+                    <div class="stat-label">Correct</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="incorrectStat">5</div>
+                    <div class="stat-label">Incorrect</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="timeStat">32:15</div>
+                    <div class="stat-label">Time Used</div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn secondary" onclick="reviewExam()">Review Answers</button>
+                <button class="modal-btn primary" onclick="newExam()">New Exam</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+    // Question Bank
+    const questionBank = [
+        {
+            topic: "cardiology",
+            stem: "A 58-year-old man with a history of hypertension and hyperlipidemia presents to the emergency department with 2 hours of substernal chest pressure radiating to his left arm. ECG shows ST elevations in leads V1-V4. Troponin I is 4.2 ng/mL.",
+            prompt: "Which coronary artery is most likely occluded?",
+            options: ["Right coronary artery", "Left anterior descending artery", "Left circumflex artery", "Left main coronary artery", "Posterior descending artery"],
+            correct: 1,
+            explanation: "ST elevations in leads V1-V4 indicate an anterior STEMI, which is caused by occlusion of the left anterior descending (LAD) artery. The LAD supplies the anterior wall and septum of the left ventricle. Anterior STEMIs carry higher mortality due to larger infarct size."
+        },
+        {
+            topic: "pulmonary",
+            stem: "A 67-year-old woman with COPD presents with worsening dyspnea. ABG on room air shows: pH 7.35, PaCO2 55 mmHg, PaO2 58 mmHg, HCO3 30 mEq/L. She is started on supplemental oxygen at 4L/min by nasal cannula.",
+            prompt: "What is the greatest concern with high-flow oxygen therapy in this patient?",
+            options: ["Oxygen toxicity to alveoli", "Suppression of hypoxic respiratory drive", "Worsening bronchospasm", "Pulmonary fibrosis", "Carbon monoxide poisoning"],
+            correct: 1,
+            explanation: "Chronic CO2 retainers like this COPD patient rely on hypoxic drive for respiratory stimulation. High-flow oxygen can suppress this drive, leading to hypoventilation, worsening hypercapnia, and respiratory acidosis. Target SpO2 88-92% in these patients."
+        },
+        {
+            topic: "infectious",
+            stem: "A 45-year-old man presents with fever, productive cough, and pleuritic chest pain. He has a history of alcohol use disorder. Chest X-ray shows a right lower lobe infiltrate with air-fluid level. Sputum Gram stain shows mixed flora with many PMNs.",
+            prompt: "What is the most likely diagnosis?",
+            options: ["Community-acquired pneumonia", "Lung abscess", "Pulmonary tuberculosis", "Pulmonary embolism", "Bronchiectasis"],
+            correct: 1,
+            explanation: "The combination of alcohol use disorder (aspiration risk), productive cough, and air-fluid level on chest X-ray is classic for lung abscess. Aspiration of oropharyngeal flora leads to infection and cavitation. Treatment requires prolonged antibiotics covering anaerobes."
+        },
+        {
+            topic: "neurology",
+            stem: "A 72-year-old man is brought to the ED with sudden onset right-sided weakness and difficulty speaking that began 90 minutes ago. Examination shows right hemiparesis, right facial droop, and expressive aphasia. CT head is negative for hemorrhage.",
+            prompt: "What is the next best step in management?",
+            options: ["Aspirin 325 mg", "IV alteplase", "MRI brain with diffusion-weighted imaging", "Carotid ultrasound", "Heparin infusion"],
+            correct: 1,
+            explanation: "This patient presents within the 4.5-hour window for IV alteplase (tPA) with symptoms of acute ischemic stroke (left MCA territory). After CT excludes hemorrhage, tPA should be given to eligible patients as quickly as possible. 'Time is brain' - every minute of delay results in more neuronal death."
+        },
+        {
+            topic: "cardiology",
+            stem: "A 45-year-old woman presents with palpitations and lightheadedness. ECG shows a narrow complex tachycardia at 180 bpm with no visible P waves. Blood pressure is 110/70 mmHg.",
+            prompt: "What is the first-line treatment for this arrhythmia?",
+            options: ["Synchronized cardioversion", "Adenosine IV push", "Metoprolol IV", "Amiodarone IV", "Vagal maneuvers"],
+            correct: 4,
+            explanation: "This is likely AVNRT or AVRT. In a hemodynamically stable patient, vagal maneuvers (Valsalva, carotid massage) are first-line as they can terminate re-entrant tachycardias by slowing AV nodal conduction. If unsuccessful, adenosine is second-line."
+        },
+        {
+            topic: "toxicology",
+            stem: "A 3-year-old boy is brought to the ED after his mother found him with an open bottle of acetaminophen. The ingestion occurred approximately 4 hours ago. Serum acetaminophen level is 180 mcg/mL.",
+            prompt: "According to the Rumack-Matthew nomogram, what is the appropriate management?",
+            options: ["Observation only, level below treatment line", "Activated charcoal only", "N-acetylcysteine (NAC)", "Hemodialysis", "Liver transplant evaluation"],
+            correct: 2,
+            explanation: "At 4 hours post-ingestion, an acetaminophen level of 180 mcg/mL is above the treatment line on the Rumack-Matthew nomogram (150 mcg/mL at 4 hours). N-acetylcysteine should be started immediately. NAC replenishes glutathione stores, preventing accumulation of the toxic metabolite NAPQI."
+        },
+        {
+            topic: "infectious",
+            stem: "A 28-year-old woman presents with dysuria and urinary frequency for 2 days. She is sexually active with one partner and uses oral contraceptives. Urinalysis shows positive leukocyte esterase and nitrites. She has no drug allergies.",
+            prompt: "What is the most appropriate empiric treatment?",
+            options: ["Ciprofloxacin 500 mg BID for 7 days", "Nitrofurantoin 100 mg BID for 5 days", "Amoxicillin 500 mg TID for 7 days", "Doxycycline 100 mg BID for 7 days", "TMP-SMX DS BID for 14 days"],
+            correct: 1,
+            explanation: "For uncomplicated cystitis in women, first-line options include nitrofurantoin (5-7 days), TMP-SMX (3 days), or fosfomycin (single dose). Fluoroquinolones should be reserved for complicated UTIs due to resistance concerns and side effect profile."
+        },
+        {
+            topic: "neurology",
+            stem: "A 35-year-old woman presents with 3 weeks of progressive bilateral leg weakness and paresthesias ascending from her feet. She had a respiratory infection 4 weeks ago. Examination shows areflexia and mild respiratory distress.",
+            prompt: "What finding on lumbar puncture would support the most likely diagnosis?",
+            options: ["Elevated protein with normal cell count (albuminocytologic dissociation)", "Elevated WBC count with low glucose", "Positive oligoclonal bands", "Xanthochromia", "Elevated opening pressure"],
+            correct: 0,
+            explanation: "This presentation is classic for Guillain-Barré syndrome (GBS), an acute inflammatory demyelinating polyneuropathy often following infection. CSF shows albuminocytologic dissociation: elevated protein (due to inflammation) with normal WBC count. Monitor closely for respiratory failure."
+        },
+        {
+            topic: "endocrine",
+            stem: "A 52-year-old man with type 2 diabetes presents with confusion and lethargy. Labs show: glucose 850 mg/dL, sodium 128 mEq/L, pH 7.32, bicarbonate 22 mEq/L, serum osmolality 340 mOsm/kg. Ketones are trace positive.",
+            prompt: "What is the most likely diagnosis?",
+            options: ["Diabetic ketoacidosis", "Hyperosmolar hyperglycemic state", "Lactic acidosis", "Alcoholic ketoacidosis", "Syndrome of inappropriate ADH"],
+            correct: 1,
+            explanation: "Hyperosmolar hyperglycemic state (HHS) is characterized by extreme hyperglycemia (often >600), hyperosmolality (>320), and minimal ketosis/acidosis. It occurs more commonly in type 2 diabetics. The mild acidosis here may be due to lactic acidosis from dehydration. HHS has higher mortality than DKA."
+        },
+        {
+            topic: "pulmonary",
+            stem: "A 35-year-old woman presents with sudden onset dyspnea and pleuritic chest pain. She is 6 weeks postpartum. Vital signs: HR 115, RR 24, SpO2 92% on room air. D-dimer is elevated. CT angiography shows a filling defect in the right pulmonary artery.",
+            prompt: "What is the mechanism of hypoxemia in this condition?",
+            options: ["Alveolar hypoventilation", "Diffusion limitation", "V/Q mismatch", "Right-to-left shunt", "Decreased inspired oxygen"],
+            correct: 2,
+            explanation: "Pulmonary embolism causes hypoxemia primarily through V/Q mismatch. Occluded vessels create areas of dead space (ventilation without perfusion), while blood is redirected to remaining lung, causing relative overperfusion. Additionally, inflammatory mediators may cause bronchoconstriction in non-occluded areas."
+        },
+        {
+            topic: "renal",
+            stem: "A 68-year-old man with heart failure presents with worsening edema. He is started on furosemide, but after 3 days his creatinine rises from 1.2 to 2.4 mg/dL. Urinalysis shows bland sediment. FeNa is 0.5%.",
+            prompt: "What is the most likely cause of his acute kidney injury?",
+            options: ["Acute tubular necrosis", "Prerenal azotemia from overdiuresis", "Interstitial nephritis from furosemide", "Contrast-induced nephropathy", "Urinary obstruction"],
+            correct: 1,
+            explanation: "Low FeNa (<1%) with bland sediment suggests prerenal azotemia. Aggressive diuresis reduced effective circulating volume, decreasing renal perfusion. In prerenal AKI, the kidney is structurally normal and conserves sodium appropriately. Management involves careful fluid balance optimization."
+        },
+        {
+            topic: "gi",
+            stem: "A 55-year-old man presents with hematemesis and melena. He has a history of alcohol use disorder and hepatitis C. Examination shows ascites, splenomegaly, and caput medusae. Initial hemoglobin is 7.2 g/dL.",
+            prompt: "After initial resuscitation, what is the most important intervention?",
+            options: ["Proton pump inhibitor infusion", "Urgent upper endoscopy with band ligation", "Transjugular intrahepatic portosystemic shunt (TIPS)", "Octreotide and antibiotic prophylaxis", "Emergent liver transplant evaluation"],
+            correct: 3,
+            explanation: "In suspected variceal bleeding, pharmacologic therapy should begin immediately: octreotide (reduces portal pressure) and antibiotics (reduces mortality by preventing SBP and bacteremia). Endoscopy should follow within 12 hours for definitive treatment. PPI is added but not first-line for variceal bleeding."
+        },
+        {
+            topic: "cardiology",
+            stem: "A 70-year-old man with a history of heart failure (EF 25%) presents with syncope. ECG shows a wide complex tachycardia at 180 bpm. Blood pressure is 80/50 mmHg.",
+            prompt: "What is the most appropriate immediate management?",
+            options: ["Amiodarone IV bolus", "Lidocaine IV bolus", "Synchronized cardioversion", "Adenosine IV push", "Vagal maneuvers"],
+            correct: 2,
+            explanation: "This patient has unstable ventricular tachycardia (wide complex, hemodynamically unstable with hypotension). Synchronized cardioversion is indicated immediately for unstable tachyarrhythmias. Adenosine should not be given for wide complex tachycardia as it may cause degeneration to VF."
+        },
+        {
+            topic: "toxicology",
+            stem: "A 24-year-old man is brought to the ED with agitation, mydriasis, diaphoresis, and hyperthermia (39.5°C). He was at a music festival. He has muscle rigidity and hyperreflexia. Heart rate is 140 bpm.",
+            prompt: "What is the most appropriate treatment for this condition?",
+            options: ["Dantrolene", "Cyproheptadine and benzodiazepines", "Bromocriptine", "Flumazenil", "Naloxone"],
+            correct: 1,
+            explanation: "This presentation is consistent with serotonin syndrome (from MDMA or other serotonergic drugs). Treatment includes cooling, benzodiazepines for agitation/muscle rigidity, and cyproheptadine (serotonin antagonist). Avoid dantrolene (for malignant hyperthermia/NMS) and neuroleptics."
+        },
+        {
+            topic: "infectious",
+            stem: "A 65-year-old man in the ICU develops fever, hypotension, and altered mental status 5 days after abdominal surgery. Blood cultures grow gram-negative rods. Lactate is 4.5 mmol/L.",
+            prompt: "According to Surviving Sepsis guidelines, what is the recommended fluid resuscitation target within the first 3 hours?",
+            options: ["10 mL/kg crystalloid", "20 mL/kg crystalloid", "30 mL/kg crystalloid", "40 mL/kg crystalloid", "Fluid based on CVP monitoring only"],
+            correct: 2,
+            explanation: "The Surviving Sepsis Campaign recommends 30 mL/kg crystalloid for sepsis-induced hypoperfusion within the first 3 hours. This should be followed by reassessment and vasopressors (norepinephrine first-line) if hypotension persists. Early antibiotics within 1 hour are also critical."
+        },
+        {
+            topic: "neurology",
+            stem: "A 25-year-old woman presents with 2 episodes of unilateral vision loss lasting 15 minutes each over the past month. MRI shows multiple periventricular white matter lesions. CSF shows oligoclonal bands.",
+            prompt: "What is the most likely diagnosis?",
+            options: ["Migraine with aura", "Multiple sclerosis", "Neuromyelitis optica", "CNS vasculitis", "Acute disseminated encephalomyelitis"],
+            correct: 1,
+            explanation: "This presentation (young woman, episodic neurological symptoms, periventricular white matter lesions, oligoclonal bands) is classic for multiple sclerosis. The episodes of vision loss likely represent optic neuritis. Diagnosis requires dissemination in space and time (McDonald criteria)."
+        },
+        {
+            topic: "pulmonary",
+            stem: "A 60-year-old man with a 50 pack-year smoking history presents with worsening dyspnea. Spirometry shows FEV1/FVC ratio of 0.55 and FEV1 35% predicted with minimal bronchodilator response.",
+            prompt: "According to GOLD classification, what is the severity of this patient's COPD?",
+            options: ["GOLD 1 (Mild)", "GOLD 2 (Moderate)", "GOLD 3 (Severe)", "GOLD 4 (Very Severe)", "Not classifiable without symptom assessment"],
+            correct: 2,
+            explanation: "GOLD classification uses post-bronchodilator FEV1 (% predicted) to grade airflow limitation: GOLD 1 (≥80%), GOLD 2 (50-79%), GOLD 3 (30-49%), GOLD 4 (<30%). With FEV1 35% predicted, this is GOLD 3 (Severe). Treatment and prognosis assessment also consider symptoms and exacerbation history."
+        },
+        {
+            topic: "cardiology",
+            stem: "A 55-year-old woman presents with progressive dyspnea and lower extremity edema. Echocardiogram shows severe mitral regurgitation with a flail posterior leaflet. Left ventricular ejection fraction is 60%.",
+            prompt: "What is the indication for surgical intervention in this patient?",
+            options: ["Severe MR alone is sufficient indication", "Symptomatic severe MR with preserved EF", "Need to wait for EF to decrease below 40%", "Only if medical therapy fails for 6 months", "Surgical repair is contraindicated with normal EF"],
+            correct: 1,
+            explanation: "Symptomatic severe primary MR is a Class I indication for surgery. Additionally, asymptomatic patients with severe MR should be considered for surgery if EF ≤60% or LVESD ≥40mm, or if repair is likely and performed at an experienced center. Early repair prevents irreversible LV dysfunction."
+        },
+        {
+            topic: "endocrine",
+            stem: "A 35-year-old woman presents with weight gain, easy bruising, and proximal muscle weakness. Physical exam shows moon facies, dorsocervical fat pad, and purple striae. 24-hour urine free cortisol is elevated.",
+            prompt: "What is the next step to determine the etiology of her condition?",
+            options: ["MRI of pituitary", "CT of adrenal glands", "Low-dose dexamethasone suppression test", "ACTH level measurement", "Petrosal sinus sampling"],
+            correct: 3,
+            explanation: "After confirming hypercortisolism (elevated 24-hr urine cortisol), the next step is measuring ACTH to distinguish ACTH-dependent (pituitary or ectopic) from ACTH-independent (adrenal) causes. High/normal ACTH suggests ACTH-dependent; suppressed ACTH suggests adrenal source."
+        },
+        {
+            topic: "renal",
+            stem: "A 45-year-old man presents with hematuria and flank pain. CT shows a 2-cm kidney stone in the left ureter. Labs show calcium 11.5 mg/dL, PTH 85 pg/mL (normal 15-65), and phosphorus 2.2 mg/dL.",
+            prompt: "What is the most likely cause of his recurrent nephrolithiasis?",
+            options: ["Dietary calcium excess", "Primary hyperparathyroidism", "Milk-alkali syndrome", "Malignancy-associated hypercalcemia", "Sarcoidosis"],
+            correct: 1,
+            explanation: "Elevated calcium with elevated (inappropriately normal or high) PTH indicates primary hyperparathyroidism, usually due to parathyroid adenoma. This causes hypercalciuria leading to calcium-containing kidney stones. Treatment is parathyroidectomy in symptomatic patients or those meeting surgical criteria."
+        }
+    ];
+
+    // State
+    let currentQuestion = 0;
+    let answers = [];
+    let flags = [];
+    let examQuestions = [];
+    let timerInterval = null;
+    let totalSeconds = 0;
+    let elapsedSeconds = 0;
+    let examMode = 'tutor';
+    let reviewMode = false;
+
+    // Setup handlers
+    document.querySelectorAll('.setup-opt').forEach(opt => {
+        opt.addEventListener('click', function() {
+            const parent = this.parentElement;
+            const isMulti = parent.id === 'topicOptions';
+            
+            if (isMulti) {
+                this.classList.toggle('selected');
+            } else {
+                parent.querySelectorAll('.setup-opt').forEach(o => o.classList.remove('selected'));
+                this.classList.add('selected');
+            }
+        });
+    });
+
+    function startExam() {
+        const qCount = parseInt(document.querySelector('#qCountOptions .selected').dataset.value);
+        const timePerQ = parseInt(document.querySelector('#timeOptions .selected').dataset.value);
+        const topics = Array.from(document.querySelectorAll('#topicOptions .selected')).map(o => o.dataset.value);
+        examMode = document.querySelector('#modeOptions .selected').dataset.value;
+        
+        // Filter and shuffle questions
+        let filtered = questionBank.filter(q => topics.includes(q.topic));
+        filtered = filtered.sort(() => Math.random() - 0.5).slice(0, qCount);
+        examQuestions = filtered;
+        
+        // Initialize state
+        answers = new Array(examQuestions.length).fill(null);
+        flags = new Array(examQuestions.length).fill(false);
+        currentQuestion = 0;
+        reviewMode = false;
+        
+        // Timer
+        totalSeconds = timePerQ > 0 ? timePerQ * examQuestions.length : 0;
+        elapsedSeconds = 0;
+        
+        // Show exam
+        document.getElementById('setupScreen').classList.add('hidden');
+        document.getElementById('examInterface').classList.remove('hidden');
+        
+        renderNav();
+        renderQuestion();
+        startTimer();
+    }
+
+    function startTimer() {
+        if (totalSeconds === 0) {
+            document.getElementById('timerDisplay').textContent = '--:--';
+            return;
+        }
+        
+        timerInterval = setInterval(() => {
+            elapsedSeconds++;
+            const remaining = totalSeconds - elapsedSeconds;
+            
+            if (remaining <= 0) {
+                clearInterval(timerInterval);
+                endExam();
+                return;
+            }
+            
+            const mins = Math.floor(remaining / 60);
+            const secs = remaining % 60;
+            document.getElementById('timerDisplay').textContent = 
+                `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            
+            if (remaining < 60) {
+                document.getElementById('timerDisplay').style.color = '#ef4444';
+            }
+        }, 1000);
+    }
+
+    function renderNav() {
+        const nav = document.getElementById('questionNav');
+        nav.innerHTML = examQuestions.map((_, i) => `
+            <div class="q-nav-item ${i === currentQuestion ? 'current' : ''} ${answers[i] !== null ? 'answered' : ''} ${flags[i] ? 'flagged' : ''}" 
+                 onclick="goToQuestion(${i})">${i + 1}</div>
+        `).join('');
+    }
+
+    function renderQuestion() {
+        const q = examQuestions[currentQuestion];
+        
+        document.getElementById('questionNum').textContent = `Question ${currentQuestion + 1}`;
+        document.getElementById('progressDisplay').textContent = `Question ${currentQuestion + 1} of ${examQuestions.length}`;
+        document.getElementById('questionStem').textContent = q.stem;
+        document.getElementById('questionPrompt').textContent = q.prompt;
+        
+        const flagBtn = document.getElementById('flagBtn');
+        flagBtn.classList.toggle('flagged', flags[currentQuestion]);
+        
+        const optionsHtml = q.options.map((opt, i) => {
+            let classes = 'option';
+            if (answers[currentQuestion] === i) classes += ' selected';
+            
+            if (reviewMode || (examMode === 'tutor' && answers[currentQuestion] !== null)) {
+                if (i === q.correct) classes += ' correct';
+                else if (answers[currentQuestion] === i) classes += ' incorrect';
+            }
+            
+            return `<div class="${classes}" onclick="selectOption(${i})">
+                <span class="option-letter">${String.fromCharCode(65 + i)}</span>
+                <span class="option-text">${opt}</span>
+            </div>`;
+        }).join('');
+        
+        document.getElementById('optionsContainer').innerHTML = optionsHtml;
+        
+        // Explanation
+        const expBox = document.getElementById('explanationBox');
+        if ((reviewMode || examMode === 'tutor') && answers[currentQuestion] !== null) {
+            document.getElementById('explanationText').textContent = q.explanation;
+            expBox.classList.add('show');
+        } else {
+            expBox.classList.remove('show');
+        }
+        
+        // Nav buttons
+        document.getElementById('prevBtn').disabled = currentQuestion === 0;
+        
+        const nextBtn = document.getElementById('nextBtn');
+        if (currentQuestion === examQuestions.length - 1) {
+            nextBtn.textContent = reviewMode ? 'Finish Review' : 'Submit Exam';
+            nextBtn.classList.add('submit');
+        } else {
+            nextBtn.textContent = 'Next →';
+            nextBtn.classList.remove('submit');
+        }
+        
+        renderNav();
+    }
+
+    function selectOption(idx) {
+        if (reviewMode) return;
+        if (examMode === 'tutor' && answers[currentQuestion] !== null) return;
+        
+        answers[currentQuestion] = idx;
+        renderQuestion();
+    }
+
+    function goToQuestion(idx) {
+        currentQuestion = idx;
+        renderQuestion();
+    }
+
+    function prevQuestion() {
+        if (currentQuestion > 0) {
+            currentQuestion--;
+            renderQuestion();
+        }
+    }
+
+    function nextQuestion() {
+        if (currentQuestion < examQuestions.length - 1) {
+            currentQuestion++;
+            renderQuestion();
+        } else {
+            endExam();
+        }
+    }
+
+    function toggleFlag() {
+        flags[currentQuestion] = !flags[currentQuestion];
+        renderQuestion();
+    }
+
+    function endExam() {
+        clearInterval(timerInterval);
+        
+        const correct = examQuestions.filter((q, i) => answers[i] === q.correct).length;
+        const score = Math.round((correct / examQuestions.length) * 100);
+        
+        const mins = Math.floor(elapsedSeconds / 60);
+        const secs = elapsedSeconds % 60;
+        
+        document.getElementById('finalScore').textContent = score + '%';
+        document.getElementById('correctStat').textContent = correct;
+        document.getElementById('incorrectStat').textContent = examQuestions.length - correct;
+        document.getElementById('timeStat').textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+        
+        document.getElementById('resultsModal').classList.add('show');
+    }
+
+    function reviewExam() {
+        document.getElementById('resultsModal').classList.remove('show');
+        reviewMode = true;
+        currentQuestion = 0;
+        renderQuestion();
+    }
+
+    function newExam() {
+        document.getElementById('resultsModal').classList.remove('show');
+        document.getElementById('examInterface').classList.add('hidden');
+        document.getElementById('setupScreen').classList.remove('hidden');
+    }
+
+    function toggleStrikethrough() { alert('Strikethrough mode - click options to strike through'); }
+    function toggleHighlight() { alert('Highlight mode - drag to highlight text'); }
+    function showCalculator() { alert('Calculator would open here'); }
+    function showLabValues() { alert('Lab reference values would display here'); }
+    </script>
+</body>
+</html>

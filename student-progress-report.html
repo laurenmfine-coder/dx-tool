@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Progress Report | Dx Learning Ecosystem</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.6; }
+        @media print { body { background: #fff; } .no-print { display: none !important; } .report { box-shadow: none; } }
+        .header { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 16px 24px; }
+        .header-inner { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 20px; font-weight: 700; }
+        .logo span { color: #3b82f6; }
+        .btn { padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; font-size: 14px; }
+        .btn-primary { background: #3b82f6; color: #fff; }
+        .btn-secondary { background: #fff; color: #475569; border: 1px solid #e2e8f0; }
+        .main { max-width: 900px; margin: 0 auto; padding: 32px 24px; }
+        .report { background: #fff; border-radius: 12px; padding: 40px; border: 1px solid #e2e8f0; }
+        .report-header { text-align: center; margin-bottom: 40px; padding-bottom: 24px; border-bottom: 2px solid #e2e8f0; }
+        .report-title { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+        .report-subtitle { color: #64748b; font-size: 16px; margin-bottom: 16px; }
+        .student-info { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 40px; }
+        .info-card { background: #f8fafc; border-radius: 10px; padding: 20px; }
+        .info-label { font-size: 12px; color: #64748b; text-transform: uppercase; margin-bottom: 4px; }
+        .info-value { font-size: 18px; font-weight: 600; color: #1e293b; }
+        .section { margin-bottom: 40px; }
+        .section-title { font-size: 18px; font-weight: 700; margin-bottom: 20px; padding-bottom: 8px; border-bottom: 2px solid #3b82f6; display: inline-block; }
+        .score-summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+        .score-card { text-align: center; padding: 20px; background: #f8fafc; border-radius: 10px; }
+        .score-value { font-size: 32px; font-weight: 700; }
+        .score-value.excellent { color: #22c55e; }
+        .score-value.good { color: #3b82f6; }
+        .score-value.developing { color: #f59e0b; }
+        .score-label { font-size: 12px; color: #64748b; margin-top: 4px; }
+        .competency-table { width: 100%; border-collapse: collapse; }
+        .competency-table th { text-align: left; padding: 12px; background: #f8fafc; font-size: 12px; font-weight: 600; color: #64748b; }
+        .competency-table td { padding: 14px 12px; border-bottom: 1px solid #e2e8f0; font-size: 14px; }
+        .progress-bar { height: 8px; background: #e2e8f0; border-radius: 4px; width: 120px; overflow: hidden; }
+        .progress-fill { height: 100%; border-radius: 4px; }
+        .status-badge { padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; }
+        .status-badge.mastered { background: #d1fae5; color: #047857; }
+        .status-badge.developing { background: #fef3c7; color: #92400e; }
+        .status-badge.needs-work { background: #fee2e2; color: #b91c1c; }
+        .strengths-weaknesses { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .sw-card { padding: 20px; border-radius: 10px; }
+        .sw-card.strengths { background: #f0fdf4; border: 1px solid #bbf7d0; }
+        .sw-card.weaknesses { background: #fef2f2; border: 1px solid #fecaca; }
+        .sw-title { font-weight: 600; margin-bottom: 12px; font-size: 14px; }
+        .sw-card.strengths .sw-title { color: #047857; }
+        .sw-card.weaknesses .sw-title { color: #b91c1c; }
+        .sw-list { list-style: none; font-size: 14px; color: #475569; }
+        .sw-list li { padding: 6px 0; }
+        .recommendations { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 20px; margin-top: 24px; }
+        .rec-title { font-weight: 600; color: #1d4ed8; margin-bottom: 12px; font-size: 14px; }
+        .rec-list { list-style: none; }
+        .rec-list li { padding: 8px 0; font-size: 14px; color: #475569; }
+    </style>
+</head>
+<body>
+    <header class="header no-print">
+        <div class="header-inner">
+            <div class="logo">Progress <span>Report</span></div>
+            <div style="display: flex; gap: 12px;">
+                <button class="btn btn-secondary" onclick="window.print()">Print / Save PDF</button>
+                <button class="btn btn-primary" onclick="alert('Export functionality')">Export Data</button>
+            </div>
+        </div>
+    </header>
+    
+    <main class="main">
+        <div class="report">
+            <div class="report-header">
+                <h1 class="report-title">Student Progress Report</h1>
+                <p class="report-subtitle">Dx Learning Ecosystem Performance Summary</p>
+                <p style="color: #64748b; font-size: 14px;">Report Period: Dec 1, 2025 - Jan 3, 2026</p>
+            </div>
+            
+            <div class="student-info">
+                <div class="info-card">
+                    <div class="info-label">Student Name</div>
+                    <div class="info-value">Alex Chen</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Student ID</div>
+                    <div class="info-value">MS2-2024-0142</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Class Year</div>
+                    <div class="info-value">MS2 - Class of 2027</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-label">Study Duration</div>
+                    <div class="info-value">14 weeks active</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Overall Performance</h2>
+                <div class="score-summary">
+                    <div class="score-card">
+                        <div class="score-value excellent">72%</div>
+                        <div class="score-label">Overall Mastery</div>
+                    </div>
+                    <div class="score-card">
+                        <div class="score-value good">47</div>
+                        <div class="score-label">Cases Completed</div>
+                    </div>
+                    <div class="score-card">
+                        <div class="score-value good">156</div>
+                        <div class="score-label">Concepts Mastered</div>
+                    </div>
+                    <div class="score-card">
+                        <div class="score-value developing">68%</div>
+                        <div class="score-label">Calibration Score</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Competency by System</h2>
+                <table class="competency-table">
+                    <thead>
+                        <tr>
+                            <th>Organ System</th>
+                            <th>Mastery</th>
+                            <th>Progress</th>
+                            <th>Cases</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Cardiovascular</td>
+                            <td style="font-weight: 600;">78%</td>
+                            <td><div class="progress-bar"><div class="progress-fill" style="width: 78%; background: #22c55e;"></div></div></td>
+                            <td>12</td>
+                            <td><span class="status-badge mastered">Mastered</span></td>
+                        </tr>
+                        <tr>
+                            <td>Pulmonary</td>
+                            <td style="font-weight: 600;">82%</td>
+                            <td><div class="progress-bar"><div class="progress-fill" style="width: 82%; background: #22c55e;"></div></div></td>
+                            <td>8</td>
+                            <td><span class="status-badge mastered">Mastered</span></td>
+                        </tr>
+                        <tr>
+                            <td>Infectious Disease</td>
+                            <td style="font-weight: 600;">65%</td>
+                            <td><div class="progress-bar"><div class="progress-fill" style="width: 65%; background: #f59e0b;"></div></div></td>
+                            <td>10</td>
+                            <td><span class="status-badge developing">Developing</span></td>
+                        </tr>
+                        <tr>
+                            <td>Neurology</td>
+                            <td style="font-weight: 600;">71%</td>
+                            <td><div class="progress-bar"><div class="progress-fill" style="width: 71%; background: #3b82f6;"></div></div></td>
+                            <td>6</td>
+                            <td><span class="status-badge developing">Developing</span></td>
+                        </tr>
+                        <tr>
+                            <td>Renal/Electrolytes</td>
+                            <td style="font-weight: 600;">58%</td>
+                            <td><div class="progress-bar"><div class="progress-fill" style="width: 58%; background: #ef4444;"></div></div></td>
+                            <td>5</td>
+                            <td><span class="status-badge needs-work">Needs Work</span></td>
+                        </tr>
+                        <tr>
+                            <td>GI/Hepatology</td>
+                            <td style="font-weight: 600;">74%</td>
+                            <td><div class="progress-bar"><div class="progress-fill" style="width: 74%; background: #22c55e;"></div></div></td>
+                            <td>7</td>
+                            <td><span class="status-badge mastered">Mastered</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Clinical Reasoning Profile</h2>
+                <table class="competency-table">
+                    <thead>
+                        <tr><th>Reasoning Dimension</th><th>Score</th><th>Trend</th><th>Assessment</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Data Gathering</td><td style="font-weight: 600; color: #22c55e;">85%</td><td>+5%</td><td>Strong systematic approach</td></tr>
+                        <tr><td>Hypothesis Generation</td><td style="font-weight: 600; color: #22c55e;">82%</td><td>+3%</td><td>Good breadth of differentials</td></tr>
+                        <tr><td>Differential Refinement</td><td style="font-weight: 600; color: #f59e0b;">68%</td><td>+2%</td><td>Needs practice prioritizing</td></tr>
+                        <tr><td>Test Interpretation</td><td style="font-weight: 600; color: #ef4444;">52%</td><td>-1%</td><td>Focus area for improvement</td></tr>
+                        <tr><td>Clinical Synthesis</td><td style="font-weight: 600; color: #f59e0b;">71%</td><td>+4%</td><td>Improving integration skills</td></tr>
+                        <tr><td>Management Planning</td><td style="font-weight: 600; color: #22c55e;">78%</td><td>+6%</td><td>Strong treatment selection</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Strengths and Areas for Growth</h2>
+                <div class="strengths-weaknesses">
+                    <div class="sw-card strengths">
+                        <div class="sw-title">Strengths</div>
+                        <ul class="sw-list">
+                            <li>Thorough history and physical exam approach</li>
+                            <li>Strong cardiovascular and pulmonary knowledge</li>
+                            <li>Excellent engagement (12-day streak)</li>
+                            <li>Good response to feedback</li>
+                        </ul>
+                    </div>
+                    <div class="sw-card weaknesses">
+                        <div class="sw-title">Areas for Growth</div>
+                        <ul class="sw-list">
+                            <li>Acid-base interpretation (42% accuracy)</li>
+                            <li>Shock classification and management</li>
+                            <li>Test result interpretation</li>
+                            <li>Overconfidence calibration (+12%)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="recommendations">
+                    <div class="rec-title">Personalized Recommendations</div>
+                    <ul class="rec-list">
+                        <li>Complete MechanismDx Renal module to strengthen acid-base understanding</li>
+                        <li>Practice 5 additional shock cases in ReasonDx with focus on hemodynamics</li>
+                        <li>Use CoachDx for real-time feedback on test interpretation</li>
+                        <li>Review spaced repetition queue daily to maintain retention</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Platform Engagement</h2>
+                <table class="competency-table">
+                    <thead>
+                        <tr><th>Platform</th><th>Sessions</th><th>Time Spent</th><th>Avg Score</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>ReasonDx (Cases)</td><td>47</td><td>24h 15m</td><td>74%</td></tr>
+                        <tr><td>MechanismDx (Modules)</td><td>8</td><td>6h 30m</td><td>71%</td></tr>
+                        <tr><td>CoachDx (AI Coaching)</td><td>12</td><td>4h 45m</td><td>Good</td></tr>
+                        <tr><td>Spaced Repetition</td><td>28</td><td>3h 20m</td><td>89% retention</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div style="margin-top: 48px; padding-top: 24px; border-top: 1px solid #e2e8f0; display: grid; grid-template-columns: 1fr 1fr; gap: 48px;">
+                <div>
+                    <div style="border-top: 1px solid #1e293b; margin-top: 60px; padding-top: 8px; font-size: 12px; color: #64748b;">
+                        Student Signature / Date
+                    </div>
+                </div>
+                <div>
+                    <div style="border-top: 1px solid #1e293b; margin-top: 60px; padding-top: 8px; font-size: 12px; color: #64748b;">
+                        Faculty Advisor Signature / Date
+                    </div>
+                </div>
+            </div>
+            
+            <p style="text-align: center; margin-top: 32px; font-size: 11px; color: #94a3b8;">
+                Generated by Dx Learning Ecosystem | Report ID: RPT-2026-0103-0142 | Confidential Student Record
+            </p>
+        </div>
+    </main>
+</body>
+</html>
