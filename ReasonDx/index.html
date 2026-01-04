@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReasonDx | Interactive Clinical Reasoning Cases</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #fafafa; color: #18181b; line-height: 1.6; }
+        
+        .nav { background: #fff; border-bottom: 1px solid #e4e4e7; padding: 16px 24px; }
+        .nav-inner { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { font-size: 20px; font-weight: 700; color: #3b82f6; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .nav-links { display: flex; gap: 8px; }
+        .nav-link { padding: 8px 16px; color: #52525b; text-decoration: none; font-size: 14px; font-weight: 500; border-radius: 8px; transition: all 0.15s; }
+        .nav-link:hover { background: #f4f4f5; color: #18181b; }
+        .nav-link.back { color: #3b82f6; }
+        
+        .hero { background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 50%, #93c5fd 100%); padding: 80px 24px; text-align: center; }
+        .hero-content { max-width: 700px; margin: 0 auto; }
+        .hero-icon { width: 80px; height: 80px; background: #fff; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 40px; margin: 0 auto 24px; box-shadow: 0 8px 24px rgba(59, 130, 246, 0.2); }
+        .hero h1 { font-size: 42px; font-weight: 800; letter-spacing: -1px; margin-bottom: 16px; color: #18181b; }
+        .hero p { font-size: 18px; color: #52525b; margin-bottom: 32px; }
+        .hero-btn { display: inline-block; padding: 16px 32px; background: #3b82f6; color: #fff; text-decoration: none; border-radius: 12px; font-weight: 600; font-size: 16px; transition: all 0.2s; }
+        .hero-btn:hover { background: #2563eb; transform: translateY(-2px); }
+        
+        .features { padding: 64px 24px; max-width: 1000px; margin: 0 auto; }
+        .features h2 { text-align: center; font-size: 28px; font-weight: 700; margin-bottom: 40px; }
+        .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        @media (max-width: 768px) { .feature-grid { grid-template-columns: 1fr; } }
+        
+        .feature-card { background: #fff; border: 1px solid #e4e4e7; border-radius: 16px; padding: 28px; text-align: center; }
+        .feature-icon { width: 56px; height: 56px; background: #dbeafe; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin: 0 auto 16px; }
+        .feature-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .feature-card p { font-size: 14px; color: #64748b; }
+        
+        .tools-section { background: #f8fafc; padding: 64px 24px; }
+        .tools-section h2 { text-align: center; font-size: 28px; font-weight: 700; margin-bottom: 16px; }
+        .tools-section > p { text-align: center; color: #64748b; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        
+        .tools-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 800px; margin: 0 auto; }
+        @media (max-width: 600px) { .tools-grid { grid-template-columns: 1fr; } }
+        
+        .tool-card { background: #fff; border: 1px solid #e4e4e7; border-radius: 12px; padding: 24px; display: flex; align-items: flex-start; gap: 16px; text-decoration: none; color: inherit; transition: all 0.2s; }
+        .tool-card:hover { border-color: #3b82f6; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .tool-icon { width: 48px; height: 48px; background: #dbeafe; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+        .tool-info h3 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+        .tool-info p { font-size: 13px; color: #64748b; }
+        
+        .how-it-works { background: #18181b; color: #fff; padding: 64px 24px; }
+        .how-it-works h2 { text-align: center; font-size: 28px; font-weight: 700; margin-bottom: 40px; }
+        .steps { display: flex; gap: 32px; max-width: 900px; margin: 0 auto; flex-wrap: wrap; justify-content: center; }
+        .step { flex: 1; min-width: 200px; text-align: center; }
+        .step-num { width: 48px; height: 48px; background: #3b82f6; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; margin: 0 auto 16px; }
+        .step h4 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+        .step p { font-size: 14px; color: #a1a1aa; }
+        
+        .categories { padding: 64px 24px; max-width: 1000px; margin: 0 auto; }
+        .categories h2 { text-align: center; font-size: 28px; font-weight: 700; margin-bottom: 40px; }
+        .category-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+        @media (max-width: 768px) { .category-grid { grid-template-columns: repeat(2, 1fr); } }
+        
+        .category-card { background: #fff; border: 1px solid #e4e4e7; border-radius: 12px; padding: 20px; text-align: center; transition: all 0.2s; }
+        .category-card:hover { border-color: #3b82f6; }
+        .category-icon { font-size: 32px; margin-bottom: 8px; }
+        .category-name { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+        .category-count { font-size: 12px; color: #64748b; }
+        
+        .cta { background: linear-gradient(135deg, #3b82f6, #2563eb); color: #fff; padding: 64px 24px; text-align: center; }
+        .cta h2 { font-size: 32px; font-weight: 700; margin-bottom: 16px; }
+        .cta p { font-size: 18px; opacity: 0.9; margin-bottom: 32px; }
+        .cta-btn { display: inline-block; padding: 16px 32px; background: #fff; color: #3b82f6; text-decoration: none; border-radius: 12px; font-weight: 600; font-size: 16px; transition: all 0.2s; }
+        .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+        
+        .footer { padding: 32px 24px; text-align: center; border-top: 1px solid #e4e4e7; }
+        .footer p { font-size: 14px; color: #71717a; }
+        .footer a { color: #3b82f6; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">📋 ReasonDx</a>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link back">← Dx Suite</a>
+                <a href="reasondx-index.html" class="nav-link">Case Trainer</a>
+                <a href="../fingerprint-dashboard.html" class="nav-link">Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-icon">📋</div>
+            <h1>Practice Clinical Reasoning</h1>
+            <p>Work through realistic patient cases from first encounter to final diagnosis. Make decisions, order tests, and build your diagnostic expertise.</p>
+            <a href="reasondx-index.html" class="hero-btn">Start a Case →</a>
+        </div>
+    </section>
+
+    <section class="features">
+        <h2>Why ReasonDx?</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Learn by Doing</h3>
+                <p>Interactive cases that respond to your decisions. See the consequences of your diagnostic choices in real-time.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌍</div>
+                <h3>Environmental Medicine</h3>
+                <p>Unique focus on occupational and environmental factors often missed in traditional medical education.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏆</div>
+                <h3>Gamified Learning</h3>
+                <p>Earn XP, unlock achievements, and track your progress as you master clinical reasoning skills.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="tools-section">
+        <h2>Learning Tools</h2>
+        <p>Multiple ways to practice and reinforce your clinical reasoning skills</p>
+        <div class="tools-grid">
+            <a href="patient-trainer.html" class="tool-card">
+                <div class="tool-icon">🩺</div>
+                <div class="tool-info">
+                    <h3>Patient Trainer</h3>
+                    <p>Full interactive cases with history, exam, and workup</p>
+                </div>
+            </a>
+            <a href="board-prep-mode.html" class="tool-card">
+                <div class="tool-icon">📝</div>
+                <div class="tool-info">
+                    <h3>Board Prep Mode</h3>
+                    <p>Timed questions in USMLE/COMLEX format</p>
+                </div>
+            </a>
+            <a href="case-frame-predict-labs.html" class="tool-card">
+                <div class="tool-icon">🔬</div>
+                <div class="tool-info">
+                    <h3>Predict Labs</h3>
+                    <p>Practice predicting lab results before seeing them</p>
+                </div>
+            </a>
+            <a href="spaced-repetition-review.html" class="tool-card">
+                <div class="tool-icon">🔄</div>
+                <div class="tool-info">
+                    <h3>Spaced Review</h3>
+                    <p>Reinforce learning with optimally-timed review</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <h2>How It Works</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <h4>Meet Your Patient</h4>
+                <p>Read the chief complaint and initial presentation</p>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <h4>Take a History</h4>
+                <p>Ask questions to gather relevant information</p>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <h4>Examine & Test</h4>
+                <p>Perform exam and order appropriate workup</p>
+            </div>
+            <div class="step">
+                <div class="step-num">4</div>
+                <h4>Diagnose & Treat</h4>
+                <p>Make your diagnosis and management plan</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="categories">
+        <h2>Case Categories</h2>
+        <div class="category-grid">
+            <div class="category-card">
+                <div class="category-icon">❤️</div>
+                <div class="category-name">Cardiovascular</div>
+                <div class="category-count">25+ cases</div>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">🫁</div>
+                <div class="category-name">Pulmonary</div>
+                <div class="category-count">20+ cases</div>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">🧠</div>
+                <div class="category-name">Neurology</div>
+                <div class="category-count">18+ cases</div>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">🦠</div>
+                <div class="category-name">Infectious Disease</div>
+                <div class="category-count">22+ cases</div>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">🔥</div>
+                <div class="category-name">GI / Hepatology</div>
+                <div class="category-count">20+ cases</div>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">💧</div>
+                <div class="category-name">Renal</div>
+                <div class="category-count">15+ cases</div>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">🦋</div>
+                <div class="category-name">Endocrine</div>
+                <div class="category-count">18+ cases</div>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">🏭</div>
+                <div class="category-name">Env/Occupational</div>
+                <div class="category-count">30+ cases</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>Ready to Practice?</h2>
+        <p>Jump into a case and start building your diagnostic skills.</p>
+        <a href="reasondx-index.html" class="cta-btn">Launch Case Trainer</a>
+    </section>
+
+    <footer class="footer">
+        <p>Part of <a href="../index.html">Dx Suite</a> | <a href="../CoachDx/index.html">CoachDx</a> | <a href="../mechanism/index.html">MechanismDx</a></p>
+    </footer>
+</body>
+</html>
