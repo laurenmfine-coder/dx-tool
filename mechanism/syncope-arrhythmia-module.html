@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MechanismDx - Syncope & Arrhythmia Mechanisms</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --bg-subtle: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent: #8b5cf6;
+            --accent-light: #a78bfa;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --border: #475569;
+            --radius: 12px;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text-primary); line-height: 1.6; }
+        
+        .header { background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+        .header-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-size: 20px; font-weight: 700; color: var(--accent); }
+        .nav-links { display: flex; gap: 16px; }
+        .nav-link { color: var(--text-secondary); text-decoration: none; font-size: 14px; padding: 8px 16px; border-radius: 8px; transition: all 0.2s; }
+        .nav-link:hover { background: var(--bg-subtle); color: var(--text-primary); }
+        
+        .module-header { background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%); padding: 48px 24px; }
+        .module-header-inner { max-width: 1200px; margin: 0 auto; }
+        .module-title { display: flex; align-items: center; gap: 20px; margin-bottom: 16px; }
+        .module-icon { font-size: 48px; }
+        .module-title h1 { font-size: 32px; font-weight: 700; }
+        .module-subtitle { font-size: 18px; color: rgba(255,255,255,0.8); max-width: 600px; }
+        .module-meta { display: flex; gap: 24px; margin-top: 24px; }
+        .meta-item { display: flex; align-items: center; gap: 8px; font-size: 14px; color: rgba(255,255,255,0.7); }
+        
+        .main { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+        
+        .phase-nav { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; }
+        .phase-btn { padding: 12px 20px; background: var(--bg-card); border: 2px solid var(--border); border-radius: 8px; color: var(--text-secondary); font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+        .phase-btn:hover { border-color: var(--accent); color: var(--text-primary); }
+        .phase-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+        .phase-btn.completed { border-color: var(--success); }
+        .phase-btn.completed::after { content: ' ✓'; color: var(--success); }
+        
+        .content-grid { display: grid; grid-template-columns: 1fr 320px; gap: 24px; }
+        @media (max-width: 900px) { .content-grid { grid-template-columns: 1fr; } }
+        
+        .questions-panel { display: flex; flex-direction: column; gap: 20px; }
+        
+        .question-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+        .question-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .q-number { display: flex; align-items: center; gap: 10px; }
+        .q-badge { width: 28px; height: 28px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+        .q-type { font-size: 12px; color: var(--text-muted); }
+        .q-status { font-size: 11px; padding: 4px 10px; border-radius: 12px; font-weight: 600; }
+        .q-status.unanswered { background: var(--bg-subtle); color: var(--text-muted); }
+        .q-status.correct { background: rgba(34,197,94,0.2); color: var(--success); }
+        .q-status.incorrect { background: rgba(239,68,68,0.2); color: var(--danger); }
+        
+        .question-body { padding: 20px; }
+        .question-stem { font-size: 15px; line-height: 1.7; margin-bottom: 20px; }
+        .vignette { background: var(--bg-subtle); padding: 16px; border-radius: 8px; margin-bottom: 16px; border-left: 3px solid var(--accent); }
+        .vignette-label { font-size: 10px; font-weight: 600; text-transform: uppercase; color: var(--accent-light); margin-bottom: 8px; }
+        
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; background: var(--bg-subtle); border: 2px solid transparent; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+        .option:hover { background: var(--bg-dark); border-color: var(--border); }
+        .option.selected { border-color: var(--accent); background: rgba(139,92,246,0.1); }
+        .option.correct { border-color: var(--success); background: rgba(34,197,94,0.1); }
+        .option.incorrect { border-color: var(--danger); background: rgba(239,68,68,0.1); }
+        .option-letter { width: 24px; height: 24px; border: 2px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex-shrink: 0; }
+        .option.selected .option-letter { background: var(--accent); border-color: var(--accent); color: white; }
+        .option.correct .option-letter { background: var(--success); border-color: var(--success); color: white; }
+        .option.incorrect .option-letter { background: var(--danger); border-color: var(--danger); color: white; }
+        .option-text { font-size: 14px; }
+        
+        .confidence-section { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+        .confidence-label { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
+        .confidence-slider { width: 100%; }
+        
+        .submit-btn { width: 100%; padding: 14px; background: var(--accent); color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; margin-top: 16px; transition: all 0.2s; }
+        .submit-btn:hover { background: var(--accent-light); }
+        .submit-btn:disabled { background: var(--bg-subtle); color: var(--text-muted); cursor: not-allowed; }
+        
+        .explanation { margin-top: 20px; padding: 20px; background: var(--bg-dark); border-radius: 8px; display: none; }
+        .explanation.show { display: block; }
+        .explanation h4 { font-size: 14px; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .explanation p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+        
+        .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(124,58,237,0.1)); border: 1px solid var(--accent); border-radius: 8px; padding: 16px; margin-top: 16px; }
+        .mechanism-title { font-size: 12px; font-weight: 600; color: var(--accent-light); margin-bottom: 8px; }
+        .mechanism-pathway { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; }
+        .pathway-step { background: var(--bg-card); padding: 8px 12px; border-radius: 6px; font-size: 12px; border: 1px solid var(--border); }
+        .pathway-arrow { color: var(--accent); font-weight: bold; }
+        
+        .sidebar { display: flex; flex-direction: column; gap: 20px; }
+        .sidebar-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
+        .sidebar-title { font-size: 14px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        
+        .progress-ring { width: 120px; height: 120px; margin: 0 auto 16px; position: relative; }
+        .progress-ring svg { transform: rotate(-90deg); }
+        .progress-ring circle { fill: none; stroke-width: 8; }
+        .progress-ring .bg { stroke: var(--bg-subtle); }
+        .progress-ring .fill { stroke: var(--accent); stroke-linecap: round; transition: stroke-dashoffset 0.5s; }
+        .progress-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; }
+        .progress-percent { font-size: 28px; font-weight: 700; }
+        .progress-label { font-size: 11px; color: var(--text-muted); }
+        
+        .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .stat-item { text-align: center; padding: 12px; background: var(--bg-subtle); border-radius: 8px; }
+        .stat-value { font-size: 20px; font-weight: 700; color: var(--accent); }
+        .stat-label { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+        
+        .related-list { display: flex; flex-direction: column; gap: 10px; }
+        .related-item { display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--bg-subtle); border-radius: 8px; text-decoration: none; color: inherit; transition: all 0.2s; }
+        .related-item:hover { background: var(--bg-dark); }
+        .related-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+        .related-icon.reasondx { background: rgba(59,130,246,0.2); }
+        .related-icon.coachdx { background: rgba(139,92,246,0.2); }
+        .related-info { flex: 1; }
+        .related-title { font-size: 13px; font-weight: 500; }
+        .related-type { font-size: 11px; color: var(--text-muted); }
+        
+        .fingerprint-domains { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+        .domain-bar { display: flex; align-items: center; gap: 10px; }
+        .domain-label { font-size: 11px; width: 80px; color: var(--text-muted); }
+        .domain-track { flex: 1; height: 6px; background: var(--bg-subtle); border-radius: 3px; overflow: hidden; }
+        .domain-fill { height: 100%; border-radius: 3px; transition: width 0.5s; }
+        .domain-fill.mechanism { background: var(--accent); }
+        .domain-fill.anatomy { background: #06b6d4; }
+        .domain-fill.pharm { background: #f59e0b; }
+        .domain-fill.clinical { background: #22c55e; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">⚡ MechanismDx</div>
+            <nav class="nav-links">
+                <a href="index.html" class="nav-link">Dashboard</a>
+                <a href="reasondx/" class="nav-link">ReasonDx</a>
+                <a href="coachdx/" class="nav-link">CoachDx</a>
+                <a href="fingerprint-dashboard.html" class="nav-link">🎯 Fingerprint</a>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="module-header">
+        <div class="module-header-inner">
+            <div class="module-title">
+                <span class="module-icon">⚡</span>
+                <div>
+                    <h1>Syncope & Arrhythmia Mechanisms</h1>
+                    <p class="module-subtitle">Understanding the pathophysiology of cardiac conduction, syncope etiologies, and arrhythmia mechanisms</p>
+                </div>
+            </div>
+            <div class="module-meta">
+                <div class="meta-item">📚 20 Questions</div>
+                <div class="meta-item">⏱️ ~45 minutes</div>
+                <div class="meta-item">🎯 Intermediate-Advanced</div>
+                <div class="meta-item">🔗 Links to 8 ReasonDx + CoachDx cases</div>
+            </div>
+        </div>
+    </div>
+    
+    <main class="main">
+        <div class="phase-nav">
+            <button class="phase-btn active" onclick="switchPhase(1)">Phase 1: Cardiac Conduction</button>
+            <button class="phase-btn" onclick="switchPhase(2)">Phase 2: Syncope Mechanisms</button>
+            <button class="phase-btn" onclick="switchPhase(3)">Phase 3: AFib & SVT</button>
+            <button class="phase-btn" onclick="switchPhase(4)">Phase 4: Ventricular Arrhythmias</button>
+        </div>
+        
+        <div class="content-grid">
+            <div class="questions-panel" id="questionsPanel">
+                <!-- Questions rendered by JavaScript -->
+            </div>
+            
+            <aside class="sidebar">
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">📊 Module Progress</h3>
+                    <div class="progress-ring">
+                        <svg viewBox="0 0 120 120">
+                            <circle class="bg" cx="60" cy="60" r="52"/>
+                            <circle class="fill" cx="60" cy="60" r="52" stroke-dasharray="327" stroke-dashoffset="327" id="progressRing"/>
+                        </svg>
+                        <div class="progress-text">
+                            <div class="progress-percent" id="progressPercent">0%</div>
+                            <div class="progress-label">Complete</div>
+                        </div>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value" id="correctCount">0</div>
+                            <div class="stat-label">Correct</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="totalAnswered">0</div>
+                            <div class="stat-label">Answered</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">🧬 Domain Fingerprint</h3>
+                    <div class="fingerprint-domains">
+                        <div class="domain-bar">
+                            <span class="domain-label">Mechanism</span>
+                            <div class="domain-track"><div class="domain-fill mechanism" style="width: 0%" id="mechBar"></div></div>
+                        </div>
+                        <div class="domain-bar">
+                            <span class="domain-label">Anatomy</span>
+                            <div class="domain-track"><div class="domain-fill anatomy" style="width: 0%" id="anatBar"></div></div>
+                        </div>
+                        <div class="domain-bar">
+                            <span class="domain-label">Pharm</span>
+                            <div class="domain-track"><div class="domain-fill pharm" style="width: 0%" id="pharmBar"></div></div>
+                        </div>
+                        <div class="domain-bar">
+                            <span class="domain-label">Clinical</span>
+                            <div class="domain-track"><div class="domain-fill clinical" style="width: 0%" id="clinBar"></div></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-card">
+                    <h3 class="sidebar-title">🔗 Related Cases</h3>
+                    <div class="related-list">
+                        <a href="reasondx/index.html?case=syncope" class="related-item">
+                            <div class="related-icon reasondx">🔬</div>
+                            <div class="related-info">
+                                <div class="related-title">Syncope Workup</div>
+                                <div class="related-type">ReasonDx Case</div>
+                            </div>
+                        </a>
+                        <a href="coachdx/mentor-chat.html?case=syncope" class="related-item">
+                            <div class="related-icon coachdx">🩺</div>
+                            <div class="related-info">
+                                <div class="related-title">Vasovagal Syncope</div>
+                                <div class="related-type">CoachDx Session</div>
+                            </div>
+                        </a>
+                        <a href="coachdx/mentor-chat.html?case=syncope-cardiac" class="related-item">
+                            <div class="related-icon coachdx">🩺</div>
+                            <div class="related-info">
+                                <div class="related-title">Cardiac Syncope</div>
+                                <div class="related-type">CoachDx Parallel</div>
+                            </div>
+                        </a>
+                        <a href="coachdx/mentor-chat.html?case=atrial-fibrillation" class="related-item">
+                            <div class="related-icon coachdx">🩺</div>
+                            <div class="related-info">
+                                <div class="related-title">New Onset AFib</div>
+                                <div class="related-type">CoachDx Session</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+    
+    <script>
+    // Question Data - Phase 1: Cardiac Conduction
+    const questionData = {
+        1: [
+            {
+                id: 'q1_1',
+                type: 'Mechanism',
+                domain: 'mechanism',
+                vignette: null,
+                stem: 'The SA node is the primary pacemaker of the heart because it has the fastest intrinsic rate of automaticity. What is the primary mechanism responsible for the spontaneous depolarization (Phase 4) in SA nodal cells?',
+                options: [
+                    { letter: 'A', text: 'Fast sodium channel opening', correct: false },
+                    { letter: 'B', text: 'Funny current (If) - slow Na+ and K+ influx', correct: true },
+                    { letter: 'C', text: 'L-type calcium channel opening', correct: false },
+                    { letter: 'D', text: 'Delayed rectifier potassium current (IKr)', correct: false }
+                ],
+                explanation: 'The "funny current" (If) is the primary driver of Phase 4 spontaneous depolarization in pacemaker cells. It\'s called "funny" because it activates upon hyperpolarization (opposite of most channels). This mixed Na+/K+ inward current slowly depolarizes the cell until threshold is reached.',
+                mechanism: {
+                    title: 'SA Node Automaticity Pathway',
+                    steps: ['Phase 4: If current activates', 'Slow Na+/K+ influx', 'Membrane depolarizes', 'T-type Ca²⁺ channels open', 'L-type Ca²⁺ → Action Potential']
+                },
+                clinicalConnection: 'Ivabradine selectively blocks the If channel, slowing heart rate without affecting contractility - used in HFrEF and inappropriate sinus tachycardia.',
+                distractors: {
+                    'A': 'Fast Na+ channels drive Phase 0 in working myocardium, NOT pacemaker cells',
+                    'C': 'L-type Ca²⁺ drives Phase 0 in SA/AV nodes but comes AFTER If initiates depolarization',
+                    'D': 'IKr is involved in repolarization (Phase 3), not automaticity'
+                }
+            },
+            {
+                id: 'q1_2',
+                type: 'Anatomy',
+                domain: 'anatomy',
+                vignette: 'A 72-year-old man presents after syncopal episode. ECG shows complete heart block with narrow QRS escape rhythm at 45 bpm. The cardiologist notes this likely represents a block at a specific location in the conduction system.',
+                stem: 'Based on the narrow QRS escape rhythm, where is the most likely location of the conduction block?',
+                options: [
+                    { letter: 'A', text: 'Within the AV node (supra-Hisian)', correct: true },
+                    { letter: 'B', text: 'Bundle of His (intra-Hisian)', correct: false },
+                    { letter: 'C', text: 'Below the bundle of His (infra-Hisian)', correct: false },
+                    { letter: 'D', text: 'Within the bundle branches', correct: false }
+                ],
+                explanation: 'A narrow QRS escape rhythm indicates the escape pacemaker is above the bifurcation of the His bundle. AV nodal (supra-Hisian) blocks produce junctional escape rhythms with narrow QRS at 40-60 bpm. Infra-Hisian blocks produce wide QRS ventricular escape rhythms at 20-40 bpm.',
+                mechanism: {
+                    title: 'Escape Rhythm Localization',
+                    steps: ['Block location', '→ Escape site', '→ QRS morphology', '→ Rate']
+                },
+                clinicalConnection: 'Supra-Hisian block (narrow QRS) is often due to reversible causes (drugs, vagal tone, Lyme). Infra-Hisian block (wide QRS) usually requires permanent pacing.',
+                distractors: {
+                    'B': 'Intra-Hisian block can produce narrow OR wide QRS depending on exact location',
+                    'C': 'Infra-Hisian block produces WIDE QRS escape rhythm from ventricular focus',
+                    'D': 'Bundle branch block produces wide QRS, not complete heart block pattern'
+                }
+            },
+            {
+                id: 'q1_3',
+                type: 'Pharmacology',
+                domain: 'pharm',
+                vignette: 'A 58-year-old woman with AFib is started on a medication to control her ventricular rate. Three days later, she presents with fatigue and dizziness. ECG shows sinus bradycardia at 42 bpm.',
+                stem: 'Which class of medications most commonly causes symptomatic bradycardia through its effect on the SA and AV nodes?',
+                options: [
+                    { letter: 'A', text: 'Class IC antiarrhythmics (flecainide)', correct: false },
+                    { letter: 'B', text: 'Beta-blockers', correct: true },
+                    { letter: 'C', text: 'Class III antiarrhythmics (amiodarone)', correct: false },
+                    { letter: 'D', text: 'Digoxin', correct: false }
+                ],
+                explanation: 'Beta-blockers are the most common cause of symptomatic bradycardia. They block β1 receptors in the SA node, reducing cAMP and If current activation, thereby decreasing automaticity. They also slow AV nodal conduction by reducing Ca²⁺ current.',
+                mechanism: {
+                    title: 'Beta-Blocker Effect on Conduction',
+                    steps: ['β1 blockade', '→ ↓cAMP', '→ ↓If activation', '→ ↓SA node rate', '+ ↓AV conduction']
+                },
+                clinicalConnection: 'Always ask about beta-blocker use in bradycardic patients. Glucagon can be used as an antidote as it activates adenylyl cyclase independent of β-receptors.',
+                distractors: {
+                    'A': 'Class IC agents slow conduction but primarily affect His-Purkinje; less effect on SA/AV nodes',
+                    'C': 'Amiodarone can cause bradycardia but less commonly than beta-blockers; has multiple mechanisms',
+                    'D': 'Digoxin causes bradycardia via vagal enhancement but is used less commonly than beta-blockers'
+                }
+            },
+            {
+                id: 'q1_4',
+                type: 'Clinical Integration',
+                domain: 'clinical',
+                vignette: 'A 45-year-old otherwise healthy woman presents with palpitations. ECG shows narrow complex tachycardia at 180 bpm. Carotid sinus massage terminates the rhythm abruptly, and normal sinus rhythm is restored.',
+                stem: 'The abrupt termination with vagal maneuvers indicates the arrhythmia mechanism most likely involves which structure?',
+                options: [
+                    { letter: 'A', text: 'SA node re-entry', correct: false },
+                    { letter: 'B', text: 'AV node as part of the re-entry circuit', correct: true },
+                    { letter: 'C', text: 'Atrial myocardium (focal atrial tachycardia)', correct: false },
+                    { letter: 'D', text: 'Accessory pathway not involving the AV node', correct: false }
+                ],
+                explanation: 'Vagal maneuvers slow AV nodal conduction by increasing acetylcholine, which hyperpolarizes AV nodal cells. Arrhythmias that terminate abruptly with vagal maneuvers (AVNRT, orthodromic AVRT) require the AV node as part of the re-entry circuit. Arrhythmias that only slow (atrial flutter, AFib) have the AV node as a bystander.',
+                mechanism: {
+                    title: 'Vagal Maneuver Response',
+                    steps: ['↑Vagal tone', '→ ↑ACh release', '→ ↑K+ conductance in AV node', '→ Hyperpolarization', '→ Slows/blocks AV conduction']
+                },
+                clinicalConnection: 'Abrupt termination = AV node-dependent SVT (AVNRT or AVRT). Transient slowing = AV node as bystander (atrial flutter/fibrillation reveals flutter waves or fibrillatory baseline).',
+                distractors: {
+                    'A': 'SA nodal re-entry is rare and would show gradual slowing, not abrupt termination',
+                    'C': 'Focal atrial tachycardia may transiently slow but typically doesn\'t terminate with vagal maneuvers',
+                    'D': 'Antidromic AVRT uses accessory pathway for antegrade conduction - dangerous if AF develops'
+                }
+            },
+            {
+                id: 'q1_5',
+                type: 'Mechanism',
+                domain: 'mechanism',
+                vignette: 'A patient with long QT syndrome experiences torsades de pointes during hypokalemia. The rhythm spontaneously converts, but you want to prevent recurrence.',
+                stem: 'What is the mechanism by which hypokalemia prolongs the QT interval and predisposes to torsades de pointes?',
+                options: [
+                    { letter: 'A', text: 'Decreased sodium channel availability', correct: false },
+                    { letter: 'B', text: 'Enhanced L-type calcium current', correct: false },
+                    { letter: 'C', text: 'Reduced IKr (rapid delayed rectifier) current', correct: true },
+                    { letter: 'D', text: 'Increased If (funny) current', correct: false }
+                ],
+                explanation: 'Hypokalemia paradoxically reduces outward potassium current through IKr channels by causing channel inactivation at low extracellular K+. This prolongs Phase 3 repolarization (longer QT). Early afterdepolarizations can then trigger torsades. IV magnesium stabilizes the membrane even with normal Mg levels.',
+                mechanism: {
+                    title: 'Hypokalemia → Long QT → TdP',
+                    steps: ['↓[K+]out', '→ IKr channel inactivation', '→ ↓Phase 3 K+ efflux', '→ Prolonged repolarization', '→ EADs → TdP']
+                },
+                clinicalConnection: 'Treat hypokalemic TdP with: 1) IV Magnesium (membrane stabilizer), 2) K+ repletion (goal >4.0), 3) Temporary pacing or isoproterenol to shorten QT by increasing rate.',
+                distractors: {
+                    'A': 'Na+ channels are not significantly affected by hypokalemia',
+                    'B': 'Ca²⁺ current is not the primary mechanism; may contribute to EADs but not the initiating problem',
+                    'D': 'If current affects pacemaker cells, not ventricular repolarization'
+                }
+            }
+        ],
+        2: [
+            {
+                id: 'q2_1',
+                type: 'Mechanism',
+                domain: 'mechanism',
+                stem: 'A 22-year-old medical student faints during a blood draw. She felt lightheaded and warm before losing consciousness. This represents which pathophysiologic mechanism?',
+                options: [
+                    { letter: 'A', text: 'Cardioinhibitory response with increased vagal tone', correct: false },
+                    { letter: 'B', text: 'Vasodepressor response with peripheral vasodilation', correct: false },
+                    { letter: 'C', text: 'Mixed cardioinhibitory and vasodepressor response', correct: true },
+                    { letter: 'D', text: 'Orthostatic hypotension from volume depletion', correct: false }
+                ],
+                explanation: 'Vasovagal syncope typically involves BOTH mechanisms: cardioinhibitory (vagal-mediated bradycardia) AND vasodepressor (sympathetic withdrawal causing vasodilation). The prodrome of warmth, diaphoresis, and nausea reflects the autonomic activation before syncope.',
+                mechanism: {
+                    title: 'Vasovagal Syncope Mechanism',
+                    steps: ['Trigger (emotional/painful)', '→ Paradoxical Bezold-Jarisch reflex', '→ ↑Vagal tone (bradycardia)', '+ ↓Sympathetic (vasodilation)', '→ ↓Cerebral perfusion → Syncope']
+                },
+                clinicalConnection: 'Key historical features of vasovagal: prodrome (warmth, nausea, tunnel vision), clear trigger, rapid recovery, no post-ictal confusion. Absence of prodrome suggests cardiac syncope.',
+                distractors: {
+                    'A': 'Pure cardioinhibitory is less common - most vasovagal is mixed',
+                    'B': 'Pure vasodepressor is less common than mixed response',
+                    'D': 'Orthostatic hypotension lacks the characteristic prodrome and trigger'
+                }
+            },
+            {
+                id: 'q2_2',
+                type: 'Clinical Integration',
+                domain: 'clinical',
+                stem: 'A 68-year-old man with no prodrome collapses while walking, is briefly unresponsive, then wakes confused. ECG shows bifascicular block. Which feature is MOST concerning for cardiac syncope?',
+                options: [
+                    { letter: 'A', text: 'Age over 65', correct: false },
+                    { letter: 'B', text: 'Absence of prodrome', correct: true },
+                    { letter: 'C', text: 'Brief loss of consciousness', correct: false },
+                    { letter: 'D', text: 'ECG showing bifascicular block', correct: false }
+                ],
+                explanation: 'Absence of prodrome ("no warning") is the single most important historical feature suggesting cardiac syncope. Arrhythmic syncope occurs suddenly because cardiac output drops precipitously. Vasovagal syncope almost always has warning symptoms.',
+                mechanism: {
+                    title: 'Cardiac vs Vasovagal Syncope Features',
+                    steps: ['No prodrome → Cardiac', 'Prodrome present → Vasovagal', 'Exertional → Structural/Arrhythmic', 'Supine → Arrhythmic']
+                },
+                clinicalConnection: 'San Francisco Syncope Rule and Canadian Syncope Risk Score use absence of prodrome as high-risk feature. This patient with no prodrome + bifascicular block likely needs admission and possibly EP study.',
+                distractors: {
+                    'A': 'Age alone is a risk factor but not as specific as absence of prodrome',
+                    'C': 'Duration doesn\'t distinguish cardiac from non-cardiac',
+                    'D': 'Bifascicular block increases risk but absence of prodrome is more predictive of cardiac cause'
+                }
+            },
+            {
+                id: 'q2_3',
+                type: 'Mechanism',
+                domain: 'mechanism',
+                vignette: 'A 75-year-old man on multiple antihypertensives has syncope immediately upon standing from bed in the morning.',
+                stem: 'What is the primary mechanism of orthostatic syncope in this patient?',
+                options: [
+                    { letter: 'A', text: 'Failure of baroreceptor-mediated sympathetic activation', correct: true },
+                    { letter: 'B', text: 'Excessive parasympathetic tone', correct: false },
+                    { letter: 'C', text: 'Cardiac arrhythmia triggered by position change', correct: false },
+                    { letter: 'D', text: 'Cerebral autoregulation failure', correct: false }
+                ],
+                explanation: 'Orthostatic syncope results from inadequate sympathetic-mediated vasoconstriction when upright. Normally, standing triggers baroreceptor-mediated sympathetic activation causing vasoconstriction. Antihypertensives (especially alpha-blockers, diuretics) impair this compensation.',
+                mechanism: {
+                    title: 'Orthostatic Physiology',
+                    steps: ['Standing → 500-800mL blood pools in legs', '→ ↓Venous return → ↓BP', '→ Baroreceptors detect ↓BP', '→ ↑SNS → Vasoconstriction', '(Impaired by meds/age/neuropathy)']
+                },
+                clinicalConnection: 'Orthostatic hypotension diagnosis: ≥20 mmHg systolic OR ≥10 mmHg diastolic drop within 3 minutes of standing. Morning symptoms common due to relative volume depletion overnight.',
+                distractors: {
+                    'B': 'Parasympathetic tone plays a role in vasovagal, not orthostatic syncope',
+                    'C': 'Position-triggered arrhythmia is rare; this presentation is classic orthostatic',
+                    'D': 'Cerebral autoregulation is usually preserved; the problem is systemic BP maintenance'
+                }
+            },
+            {
+                id: 'q2_4',
+                type: 'Anatomy',
+                domain: 'anatomy',
+                vignette: 'A patient with severe aortic stenosis experiences exertional syncope while climbing stairs.',
+                stem: 'Which mechanism best explains exertional syncope in aortic stenosis?',
+                options: [
+                    { letter: 'A', text: 'Arrhythmia from LV hypertrophy', correct: false },
+                    { letter: 'B', text: 'Fixed cardiac output unable to meet exercise demand', correct: true },
+                    { letter: 'C', text: 'Coronary steal phenomenon', correct: false },
+                    { letter: 'D', text: 'Reflex vasodilation from baroreceptor activation', correct: false }
+                ],
+                explanation: 'In severe AS, the stenotic valve creates fixed obstruction. During exercise, peripheral vasodilation occurs but cardiac output cannot increase adequately to maintain BP. The resulting hypotension causes cerebral hypoperfusion and syncope.',
+                mechanism: {
+                    title: 'Exertional Syncope in AS',
+                    steps: ['Exercise → ↓SVR (normal response)', '→ Need ↑CO to maintain BP', '→ Stenotic valve limits ↑CO', '→ BP drops', '→ Syncope']
+                },
+                clinicalConnection: 'Classic AS triad: Angina, Syncope, Heart failure (AS Failure = death within 5, 3, 2 years if untreated). Exertional syncope in AS is indication for valve replacement.',
+                distractors: {
+                    'A': 'Arrhythmias occur but fixed output is the primary exertional mechanism',
+                    'C': 'Coronary steal is not the primary mechanism in AS',
+                    'D': 'Vasodilation is part of normal exercise response, not the pathologic mechanism'
+                }
+            },
+            {
+                id: 'q2_5',
+                type: 'Clinical Integration',
+                domain: 'clinical',
+                stem: 'A patient has recurrent syncope with seizure-like activity witnessed by family. EEG is normal. What diagnosis should be considered?',
+                options: [
+                    { letter: 'A', text: 'Epilepsy with normal interictal EEG', correct: false },
+                    { letter: 'B', text: 'Convulsive syncope', correct: true },
+                    { letter: 'C', text: 'Psychogenic non-epileptic seizure', correct: false },
+                    { letter: 'D', text: 'Transient ischemic attack', correct: false }
+                ],
+                explanation: 'Convulsive syncope occurs when cerebral hypoperfusion from any cause lasts >10-15 seconds. Brief myoclonic jerks or tonic posturing can occur, mimicking seizure. Unlike epilepsy, the "seizure" is a result of syncope, not the cause. Recovery is rapid without post-ictal confusion.',
+                mechanism: {
+                    title: 'Convulsive Syncope vs Epilepsy',
+                    steps: ['Syncope → Cerebral hypoperfusion >10-15s', '→ Brainstem release phenomenon', '→ Myoclonic jerks/posturing', '→ Rapid recovery (no post-ictal state)']
+                },
+                clinicalConnection: 'Distinguish from epilepsy: Syncope has rapid recovery, seizure has post-ictal confusion. Up to 12% of syncope patients have convulsive activity. Cardiac workup should precede neurology referral.',
+                distractors: {
+                    'A': 'Normal interictal EEG doesn\'t diagnose syncope-related convulsions',
+                    'C': 'PNES typically has longer duration, lack of injury, closed eyes',
+                    'D': 'TIA causes focal neurologic deficits, not loss of consciousness'
+                }
+            }
+        ],
+        3: [
+            {
+                id: 'q3_1',
+                type: 'Mechanism',
+                domain: 'mechanism',
+                stem: 'Atrial fibrillation is characterized by chaotic, disorganized atrial activity. What is the predominant mechanism responsible for initiation AND maintenance of AFib?',
+                options: [
+                    { letter: 'A', text: 'Single re-entry circuit around the tricuspid annulus', correct: false },
+                    { letter: 'B', text: 'Triggered activity from pulmonary vein foci + multiple wavelet re-entry', correct: true },
+                    { letter: 'C', text: 'Enhanced automaticity of the SA node', correct: false },
+                    { letter: 'D', text: 'Macro-re-entry involving the AV node', correct: false }
+                ],
+                explanation: 'AFib initiation: Most commonly triggered by ectopic foci in pulmonary vein ostia (90%). AFib maintenance: Multiple wavelet re-entry circuits coexist in remodeled atrial tissue. This dual mechanism explains why PV isolation can cure paroxysmal AFib but is less effective for persistent AFib with established substrate.',
+                mechanism: {
+                    title: 'AFib Mechanism',
+                    steps: ['PV triggers fire', '→ Multiple wavelets propagate', '→ Chaotic re-entry in atria', '→ Atrial remodeling', '→ "AFib begets AFib"']
+                },
+                clinicalConnection: 'Pulmonary vein isolation (PVI) targets the triggering foci - most effective in paroxysmal AFib. Persistent AFib requires additional substrate modification due to atrial remodeling.',
+                distractors: {
+                    'A': 'Tricuspid annulus re-entry describes typical atrial flutter, not AFib',
+                    'C': 'SA node automaticity causes sinus tachycardia, not AFib',
+                    'D': 'AV node is not involved in atrial arrhythmias - it\'s a bystander in AFib'
+                }
+            },
+            {
+                id: 'q3_2',
+                type: 'Pharmacology',
+                domain: 'pharm',
+                vignette: 'A 72-year-old with AFib and RVR (HR 142) is hypotensive (BP 86/52). Metoprolol 5mg IV is given without effect.',
+                stem: 'Why might beta-blockers be ineffective for rate control in this patient?',
+                options: [
+                    { letter: 'A', text: 'Beta-blockers don\'t work in AFib', correct: false },
+                    { letter: 'B', text: 'Hypotension limits drug delivery to AV node', correct: false },
+                    { letter: 'C', text: 'High catecholamine state overwhelms beta-blockade', correct: true },
+                    { letter: 'D', text: 'Patient is beta-blocker resistant genetically', correct: false }
+                ],
+                explanation: 'In acute hemodynamic compromise, high sympathetic tone releases massive catecholamines that compete with beta-blockers for receptor binding. Standard doses may be insufficient. Additionally, further negative inotropy from beta-blockers can worsen hypotension. This patient likely needs synchronized cardioversion.',
+                mechanism: {
+                    title: 'Catecholamine Competition',
+                    steps: ['Hypotension → ↑↑Sympathetic activation', '→ Massive catecholamine release', '→ Overwhelms β-blocker at receptor', '→ Ineffective rate control']
+                },
+                clinicalConnection: 'Unstable AFib with RVR (hypotension, ACS, acute HF) → Synchronized cardioversion, not pharmacologic rate control. ACLS guidelines: hemodynamically unstable = electricity.',
+                distractors: {
+                    'A': 'Beta-blockers are first-line for AFib rate control in stable patients',
+                    'B': 'Drug delivery is not the primary issue',
+                    'D': 'Genetic resistance exists but is rare and not the explanation here'
+                }
+            },
+            {
+                id: 'q3_3',
+                type: 'Clinical Integration',
+                domain: 'clinical',
+                vignette: 'A 28-year-old presents with palpitations. ECG shows regular narrow complex tachycardia at 188 bpm with pseudo-R\' in V1 and pseudo-S in inferior leads.',
+                stem: 'These ECG findings are most consistent with which diagnosis?',
+                options: [
+                    { letter: 'A', text: 'Typical AVNRT (slow-fast)', correct: true },
+                    { letter: 'B', text: 'Atypical AVNRT (fast-slow)', correct: false },
+                    { letter: 'C', text: 'Orthodromic AVRT (WPW)', correct: false },
+                    { letter: 'D', text: 'Atrial tachycardia', correct: false }
+                ],
+                explanation: 'Pseudo-R\' in V1 and pseudo-S in inferior leads are classic findings of typical (slow-fast) AVNRT. These represent retrograde P waves buried in the QRS, creating slight terminal distortions. The P wave is nearly simultaneous with QRS because the slow and fast AV nodal pathways are anatomically close.',
+                mechanism: {
+                    title: 'AVNRT Mechanism',
+                    steps: ['PAC enters slow pathway (antegrade)', '→ Fast pathway recovers', '→ Impulse returns via fast pathway (retrograde)', '→ Re-entry loop established', '→ RP interval very short']
+                },
+                clinicalConnection: 'AVNRT is the most common regular SVT in adults. Treatment: Vagal maneuvers → Adenosine → AV nodal blockers. Ablation is curative with >95% success rate.',
+                distractors: {
+                    'B': 'Atypical AVNRT has LONG RP interval (P before QRS)',
+                    'C': 'AVRT typically has P waves visible in ST segment (short RP but longer than AVNRT)',
+                    'D': 'Atrial tachycardia shows P waves before QRS with isoelectric baseline between P waves'
+                }
+            },
+            {
+                id: 'q3_4',
+                type: 'Mechanism',
+                domain: 'mechanism',
+                stem: 'A patient with WPW syndrome develops AFib with ventricular rate of 280 bpm. Why is AV nodal blocking agents (e.g., diltiazem) contraindicated?',
+                options: [
+                    { letter: 'A', text: 'They can cause accessory pathway conduction to increase', correct: true },
+                    { letter: 'B', text: 'They are ineffective in WPW', correct: false },
+                    { letter: 'C', text: 'They cause drug-drug interactions with antiarrhythmics', correct: false },
+                    { letter: 'D', text: 'They prolong the QT interval dangerously', correct: false }
+                ],
+                explanation: 'AV nodal blockers slow the AV node but DO NOT affect the accessory pathway. By blocking the AV node, more impulses are "funneled" down the accessory pathway, potentially accelerating ventricular rate to VF-inducing speeds. This is why pre-excited AFib is treated with procainamide or cardioversion, NOT AV nodal blockers.',
+                mechanism: {
+                    title: 'Pre-excited AF Danger',
+                    steps: ['AFib with WPW → Impulses conduct via AV node AND accessory pathway', '→ AV nodal blocker given', '→ AV node slows but AP unchanged', '→ More impulses forced down AP', '→ VR ↑↑ → VF risk']
+                },
+                clinicalConnection: 'Pre-excited AF: Wide complex irregular tachycardia with varying QRS morphology. Treat with procainamide, ibutilide, or DC cardioversion. NEVER adenosine, beta-blockers, calcium channel blockers, or digoxin.',
+                distractors: {
+                    'B': 'They "work" on the AV node, that\'s precisely the problem',
+                    'C': 'Drug interactions aren\'t the main concern',
+                    'D': 'CCBs and BBs don\'t prolong QT significantly'
+                }
+            },
+            {
+                id: 'q3_5',
+                type: 'Pharmacology',
+                domain: 'pharm',
+                vignette: 'A patient with persistent AFib is being considered for rhythm control with flecainide.',
+                stem: 'Why must patients be on an AV nodal blocking agent before starting flecainide for AFib?',
+                options: [
+                    { letter: 'A', text: 'To prevent QT prolongation', correct: false },
+                    { letter: 'B', text: 'To prevent 1:1 AV conduction of organized atrial flutter', correct: true },
+                    { letter: 'C', text: 'To enhance flecainide efficacy', correct: false },
+                    { letter: 'D', text: 'To reduce flecainide toxicity', correct: false }
+                ],
+                explanation: 'Flecainide (Class IC) can convert AFib to atrial flutter by organizing the chaotic atrial activity. The flutter rate is typically ~300 bpm. Class IC agents slow atrial rate but can also enhance AV nodal conduction, allowing 1:1 conduction (300 bpm ventricular rate). AV nodal blockers prevent this catastrophe.',
+                mechanism: {
+                    title: '1:1 Flutter Conduction Risk',
+                    steps: ['AFib → Flecainide given', '→ AFib organizes to flutter (~300 bpm)', '→ IC agent slows atrial rate + paradoxically enhances AV conduction', '→ 1:1 conduction → VR 250-300', '→ Hemodynamic collapse']
+                },
+                clinicalConnection: 'Before any Class IC antiarrhythmic for AFib, ensure patient is on beta-blocker or CCB. "Pill in pocket" flecainide strategy requires pre-treatment with AV nodal blocker.',
+                distractors: {
+                    'A': 'Flecainide doesn\'t significantly prolong QT',
+                    'C': 'AV nodal blockers don\'t enhance flecainide efficacy',
+                    'D': 'This is about preventing a specific complication, not general toxicity'
+                }
+            }
+        ],
+        4: [
+            {
+                id: 'q4_1',
+                type: 'Mechanism',
+                domain: 'mechanism',
+                stem: 'What is the mechanism of monomorphic ventricular tachycardia in the setting of a prior myocardial infarction?',
+                options: [
+                    { letter: 'A', text: 'Triggered activity from afterdepolarizations', correct: false },
+                    { letter: 'B', text: 'Enhanced automaticity in ischemic tissue', correct: false },
+                    { letter: 'C', text: 'Re-entry around scar tissue', correct: true },
+                    { letter: 'D', text: 'Multiple wavelet re-entry', correct: false }
+                ],
+                explanation: 'Post-MI VT is almost always due to scar-related re-entry. The scar creates areas of slow conduction and block, forming the substrate for re-entry. The consistent circuit produces monomorphic (same morphology) VT. This is why ablation targets the scar border zone.',
+                mechanism: {
+                    title: 'Scar-Related VT',
+                    steps: ['Prior MI → Scar formation', '→ Islands of surviving myocytes within scar', '→ Slow conduction zones', '→ Re-entry circuit forms', '→ Monomorphic VT']
+                },
+                clinicalConnection: 'Post-MI patients with VT: ICD for secondary prevention. Ablation targets the "isthmus" of slow conduction within the scar. Substrate-based ablation can reduce VT burden.',
+                distractors: {
+                    'A': 'Triggered activity causes polymorphic VT (e.g., TdP), not monomorphic',
+                    'B': 'Enhanced automaticity is less common and usually causes accelerated idioventricular rhythm',
+                    'D': 'Multiple wavelets cause AFib, not organized monomorphic VT'
+                }
+            },
+            {
+                id: 'q4_2',
+                type: 'Clinical Integration',
+                domain: 'clinical',
+                vignette: 'A 55-year-old with prior MI presents with palpitations. ECG shows wide complex tachycardia with AV dissociation and capture beats.',
+                stem: 'AV dissociation in a wide complex tachycardia confirms what diagnosis?',
+                options: [
+                    { letter: 'A', text: 'SVT with aberrancy', correct: false },
+                    { letter: 'B', text: 'Ventricular tachycardia', correct: true },
+                    { letter: 'C', text: 'Antidromic AVRT', correct: false },
+                    { letter: 'D', text: 'Hyperkalemia', correct: false }
+                ],
+                explanation: 'AV dissociation (P waves marching through at different rate than QRS) proves the atria and ventricles are beating independently - the arrhythmia must originate below the AV node (VT). Capture beats (narrow QRS from conducted sinus beat) and fusion beats are similarly diagnostic of VT.',
+                mechanism: {
+                    title: 'VT Diagnostic Criteria',
+                    steps: ['VT: Origin below AV node', '→ Atria still controlled by SA node', '→ P waves independent of QRS', '→ AV dissociation = VT proven']
+                },
+                clinicalConnection: 'Brugada criteria, Vereckei algorithm, and other WCT algorithms all use AV dissociation as a VT-specific finding. When in doubt, treat WCT as VT (safer assumption).',
+                distractors: {
+                    'A': 'SVT with aberrancy has 1:1 AV relationship, NOT dissociation',
+                    'C': 'Antidromic AVRT also has 1:1 relationship (conducted to ventricle via AP)',
+                    'D': 'Hyperkalemia causes wide QRS but not AV dissociation'
+                }
+            },
+            {
+                id: 'q4_3',
+                type: 'Mechanism',
+                domain: 'mechanism',
+                stem: 'Torsades de pointes (TdP) is a polymorphic VT associated with long QT. What is the initiating mechanism of TdP?',
+                options: [
+                    { letter: 'A', text: 'Early afterdepolarization (EAD) triggering re-entry', correct: true },
+                    { letter: 'B', text: 'Delayed afterdepolarization (DAD)', correct: false },
+                    { letter: 'C', text: 'Fixed anatomical re-entry circuit', correct: false },
+                    { letter: 'D', text: 'Enhanced automaticity', correct: false }
+                ],
+                explanation: 'TdP is initiated by early afterdepolarizations (EADs) occurring during prolonged Phase 2/3 of the action potential. The long QT provides the substrate by extending the vulnerable period. EADs can trigger runs of polymorphic VT with the characteristic "twisting" morphology due to shifting vectors.',
+                mechanism: {
+                    title: 'TdP Mechanism',
+                    steps: ['Long QT → Prolonged Phase 2/3', '→ L-type Ca²⁺ channels reactivate', '→ EAD forms', '→ Triggers VT', '→ Transmural dispersion → Twisting axis']
+                },
+                clinicalConnection: 'TdP treatment: IV magnesium (stabilizes membrane), increase heart rate (shortens QT) with pacing or isoproterenol, correct K+ to >4.0. Avoid QT-prolonging drugs.',
+                distractors: {
+                    'B': 'DADs occur after full repolarization, associated with digoxin toxicity and catecholaminergic polymorphic VT',
+                    'C': 'Fixed re-entry causes monomorphic VT, not polymorphic',
+                    'D': 'Automaticity doesn\'t explain the QT-dependent nature of TdP'
+                }
+            },
+            {
+                id: 'q4_4',
+                type: 'Pharmacology',
+                domain: 'pharm',
+                vignette: 'A patient with sustained monomorphic VT and preserved LV function is treated with amiodarone.',
+                stem: 'Amiodarone is effective for VT suppression due to which combination of electrophysiologic effects?',
+                options: [
+                    { letter: 'A', text: 'Pure sodium channel blockade', correct: false },
+                    { letter: 'B', text: 'Pure potassium channel blockade', correct: false },
+                    { letter: 'C', text: 'Multi-channel blockade (Na+, K+, Ca²⁺, β-receptors)', correct: true },
+                    { letter: 'D', text: 'Selective L-type calcium channel blockade', correct: false }
+                ],
+                explanation: 'Amiodarone is a "dirty drug" in the best sense - it blocks sodium channels (Class I), potassium channels (Class III), calcium channels (Class IV), AND beta-receptors (Class II). This multi-channel action makes it effective for many arrhythmias but also causes multiple side effects.',
+                mechanism: {
+                    title: 'Amiodarone Multi-Channel Effects',
+                    steps: ['Na+ block → Slows conduction', 'K+ block → Prolongs refractoriness', 'Ca²⁺ block → Slows AV node', 'β-block → ↓Catecholamine effects', '= Broad antiarrhythmic']
+                },
+                clinicalConnection: 'Amiodarone side effects reflect its pharmacology: Thyroid (iodine content), Pulmonary fibrosis, Hepatotoxicity, Corneal deposits, Photosensitivity, Bradycardia. Requires monitoring but remains important for life-threatening arrhythmias.',
+                distractors: {
+                    'A': 'Pure Class I effect would be flecainide or lidocaine',
+                    'B': 'Pure Class III would be dofetilide or sotalol',
+                    'D': 'Pure Class IV would be verapamil or diltiazem'
+                }
+            },
+            {
+                id: 'q4_5',
+                type: 'Clinical Integration',
+                domain: 'clinical',
+                vignette: 'A 35-year-old athlete collapses during a basketball game. Bystander AED delivers shock for VF. He is resuscitated and ECG shows no structural heart disease.',
+                stem: 'Which inherited condition should be highest on your differential?',
+                options: [
+                    { letter: 'A', text: 'Hypertrophic cardiomyopathy', correct: false },
+                    { letter: 'B', text: 'Long QT syndrome', correct: false },
+                    { letter: 'C', text: 'Brugada syndrome', correct: false },
+                    { letter: 'D', text: 'Catecholaminergic polymorphic VT (CPVT)', correct: true }
+                ],
+                explanation: 'Exercise-induced VF in a structurally normal heart with negative resting ECG strongly suggests CPVT. This condition is triggered by catecholamine release during exercise/emotion. Ryanodine receptor mutations cause abnormal Ca²⁺ release → DADs → polymorphic VT/VF.',
+                mechanism: {
+                    title: 'CPVT Mechanism',
+                    steps: ['RyR2 mutation → Abnormal SR Ca²⁺ release', '→ Catecholamine surge during exercise', '→ Increased Ca²⁺ load', '→ DADs → Triggered activity', '→ Polymorphic VT/VF']
+                },
+                clinicalConnection: 'CPVT diagnosis: Exercise stress test provokes bidirectional VT or polymorphic VT. Treatment: High-dose beta-blockers (first-line), flecainide (adjunct), ICD (for VF survivors), left cardiac sympathetic denervation.',
+                distractors: {
+                    'A': 'HCM would show LVH on echo and often abnormal ECG',
+                    'B': 'Long QT typically shows prolonged QT on resting ECG',
+                    'C': 'Brugada shows characteristic coved ST in V1-V3, often triggered by fever not exercise'
+                }
+            }
+        ]
+    };
+    
+    let currentPhase = 1;
+    let answers = {};
+    let correctAnswers = 0;
+    let totalAnswered = 0;
+    
+    function switchPhase(phase) {
+        currentPhase = phase;
+        document.querySelectorAll('.phase-btn').forEach((btn, i) => {
+            btn.classList.toggle('active', i + 1 === phase);
+        });
+        renderQuestions();
+    }
+    
+    function renderQuestions() {
+        const panel = document.getElementById('questionsPanel');
+        const questions = questionData[currentPhase];
+        
+        panel.innerHTML = questions.map((q, idx) => `
+            <div class="question-card" id="card-${q.id}">
+                <div class="question-header">
+                    <div class="q-number">
+                        <span class="q-badge">${(currentPhase - 1) * 5 + idx + 1}</span>
+                        <span class="q-type">${q.type}</span>
+                    </div>
+                    <span class="q-status ${answers[q.id] ? (answers[q.id].correct ? 'correct' : 'incorrect') : 'unanswered'}">
+                        ${answers[q.id] ? (answers[q.id].correct ? '✓ Correct' : '✗ Incorrect') : 'Unanswered'}
+                    </span>
+                </div>
+                <div class="question-body">
+                    ${q.vignette ? `
+                        <div class="vignette">
+                            <div class="vignette-label">Clinical Vignette</div>
+                            ${q.vignette}
+                        </div>
+                    ` : ''}
+                    <div class="question-stem">${q.stem}</div>
+                    <div class="options">
+                        ${q.options.map(opt => `
+                            <div class="option ${answers[q.id]?.selected === opt.letter ? 'selected' : ''} ${answers[q.id] ? (opt.correct ? 'correct' : (answers[q.id].selected === opt.letter ? 'incorrect' : '')) : ''}"
+                                 onclick="selectOption('${q.id}', '${opt.letter}')"
+                                 ${answers[q.id] ? 'style="pointer-events:none"' : ''}>
+                                <span class="option-letter">${opt.letter}</span>
+                                <span class="option-text">${opt.text}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ${!answers[q.id] ? `
+                        <div class="confidence-section">
+                            <div class="confidence-label">Confidence: <span id="conf-${q.id}">50%</span></div>
+                            <input type="range" class="confidence-slider" min="0" max="100" value="50" 
+                                   oninput="document.getElementById('conf-${q.id}').textContent = this.value + '%'">
+                        </div>
+                        <button class="submit-btn" onclick="submitAnswer('${q.id}')" id="submit-${q.id}" disabled>Submit Answer</button>
+                    ` : `
+                        <div class="explanation show">
+                            <h4>${answers[q.id].correct ? '✓ Correct!' : '✗ Incorrect'}</h4>
+                            <p>${q.explanation}</p>
+                            <div class="mechanism-box">
+                                <div class="mechanism-title">🔬 ${q.mechanism.title}</div>
+                                <div class="mechanism-pathway">
+                                    ${q.mechanism.steps.map((step, i) => `
+                                        <span class="pathway-step">${step}</span>
+                                        ${i < q.mechanism.steps.length - 1 ? '<span class="pathway-arrow">→</span>' : ''}
+                                    `).join('')}
+                                </div>
+                            </div>
+                            <p style="margin-top:12px;padding:12px;background:rgba(245,158,11,0.1);border-radius:8px;border-left:3px solid #f59e0b;">
+                                <strong>Clinical Connection:</strong> ${q.clinicalConnection}
+                            </p>
+                        </div>
+                    `}
+                </div>
+            </div>
+        `).join('');
+    }
+    
+    function selectOption(qId, letter) {
+        if (answers[qId]) return;
+        
+        const card = document.getElementById(`card-${qId}`);
+        card.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+        event.currentTarget.classList.add('selected');
+        
+        document.getElementById(`submit-${qId}`).disabled = false;
+        document.getElementById(`submit-${qId}`).dataset.selected = letter;
+    }
+    
+    function submitAnswer(qId) {
+        const btn = document.getElementById(`submit-${qId}`);
+        const selected = btn.dataset.selected;
+        const question = questionData[currentPhase].find(q => q.id === qId);
+        const correct = question.options.find(o => o.letter === selected).correct;
+        
+        answers[qId] = { selected, correct };
+        totalAnswered++;
+        if (correct) correctAnswers++;
+        
+        updateProgress();
+        renderQuestions();
+    }
+    
+    function updateProgress() {
+        const total = 20;
+        const percent = Math.round((totalAnswered / total) * 100);
+        
+        document.getElementById('progressPercent').textContent = percent + '%';
+        document.getElementById('progressRing').style.strokeDashoffset = 327 - (327 * percent / 100);
+        document.getElementById('correctCount').textContent = correctAnswers;
+        document.getElementById('totalAnswered').textContent = totalAnswered;
+        
+        // Update domain bars (simplified for demo)
+        const domains = { mechanism: 0, anatomy: 0, pharm: 0, clinical: 0 };
+        Object.keys(answers).forEach(qId => {
+            const phase = Math.ceil(parseInt(qId.split('_')[0].substring(1)) / 1);
+            const question = questionData[phase]?.find(q => q.id === qId);
+            if (question && answers[qId].correct) {
+                domains[question.domain] = (domains[question.domain] || 0) + 20;
+            }
+        });
+        
+        document.getElementById('mechBar').style.width = Math.min(domains.mechanism, 100) + '%';
+        document.getElementById('anatBar').style.width = Math.min(domains.anatomy, 100) + '%';
+        document.getElementById('pharmBar').style.width = Math.min(domains.pharm, 100) + '%';
+        document.getElementById('clinBar').style.width = Math.min(domains.clinical, 100) + '%';
+    }
+    
+    // Initialize
+    renderQuestions();
+    </script>
+</body>
+</html>
