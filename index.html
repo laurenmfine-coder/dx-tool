@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReasonDx | Clinical Reasoning Trainer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #fafafa; color: #18181b; line-height: 1.6; }
+        
+        /* Logo Header */
+        .reasondx-logo-header {
+            background: #fafafa;
+            padding: 32px 24px 48px 24px;
+            text-align: center;
+        }
+        .reasondx-logo-container {
+            display: inline-block;
+            min-height: 85px;
+        }
+        .reasondx-logo-container svg {
+            height: 70px;
+            width: auto;
+        }
+        .reasondx-tagline {
+            margin-top: 12px;
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 18px;
+            font-style: italic;
+            color: #6b7280;
+        }
+        
+        /* Navigation */
+        .nav { background: #fff; border-bottom: 1px solid #e4e4e7; padding: 12px 24px; position: sticky; top: 0; z-index: 100; }
+        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
+        .nav-link { padding: 8px 16px; color: #52525b; text-decoration: none; font-size: 14px; font-weight: 500; border-radius: 8px; transition: all 0.15s; border-left: 3px solid transparent; }
+        .nav-link:hover { background: #f4f4f5; color: #18181b; }
+        .nav-link.active { background: #eff6ff; color: #3b82f6; border-left-color: #3b82f6; }
+        .nav-link.mechanism { border-left-color: #10b981; }
+        .nav-link.mechanism:hover { background: #ecfdf5; color: #059669; }
+        .nav-link.coach { border-left-color: #8b5cf6; }
+        .nav-link.coach:hover { background: #f5f3ff; color: #7c3aed; }
+        .nav-link.suite { border-left-color: #f59e0b; }
+        .nav-link.suite:hover { background: #fffbeb; color: #d97706; }
+        
+        /* Hero Section */
+        .hero { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 50%, #f8fafc 100%); padding: 64px 24px; text-align: center; border-bottom: 1px solid #e2e8f0; }
+        .hero h1 { font-size: 42px; font-weight: 700; margin-bottom: 16px; color: #1e293b; letter-spacing: -1px; }
+        .hero h1 span { color: #3b82f6; }
+        .hero p { font-size: 18px; color: #64748b; max-width: 650px; margin: 0 auto 32px; }
+        .hero-ctas { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .hero-cta { display: inline-flex; align-items: center; gap: 8px; padding: 16px 32px; background: #3b82f6; color: #fff; text-decoration: none; border-radius: 12px; font-size: 16px; font-weight: 600; transition: all 0.2s; }
+        .hero-cta:hover { background: #2563eb; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3); }
+        .hero-cta.secondary { background: #fff; color: #3b82f6; border: 2px solid #3b82f6; }
+        .hero-cta.secondary:hover { background: #eff6ff; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(59, 130, 246, 0.15); }
+        
+        /* Stats Bar */
+        .stats-bar { background: #fff; border-bottom: 1px solid #e4e4e7; padding: 24px; }
+        .stats-inner { max-width: 900px; margin: 0 auto; display: flex; justify-content: center; gap: 64px; flex-wrap: wrap; }
+        .stat { text-align: center; }
+        .stat-value { font-size: 32px; font-weight: 700; color: #3b82f6; }
+        .stat-label { font-size: 13px; color: #71717a; margin-top: 4px; }
+        
+        /* Main Content */
+        .main { max-width: 1100px; margin: 0 auto; padding: 64px 24px; }
+        
+        .section-header { text-align: center; margin-bottom: 40px; }
+        .section-label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: #3b82f6; margin-bottom: 8px; }
+        .section-title { font-size: 28px; font-weight: 700; color: #1e293b; margin-bottom: 12px; }
+        .section-subtitle { font-size: 16px; color: #64748b; max-width: 600px; margin: 0 auto; }
+        
+        /* Training Modes */
+        .modes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 64px; }
+        
+        .mode-card { background: #fff; border: 2px solid #e4e4e7; border-radius: 16px; padding: 28px; transition: all 0.2s; text-decoration: none; color: inherit; display: block; }
+        .mode-card:hover { border-color: #3b82f6; box-shadow: 0 8px 24px rgba(59, 130, 246, 0.1); transform: translateY(-3px); }
+        .mode-card.featured { border-color: #bfdbfe; background: linear-gradient(135deg, #eff6ff 0%, #fff 100%); }
+        .mode-icon { font-size: 36px; margin-bottom: 16px; }
+        .mode-title { font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 8px; }
+        .mode-desc { font-size: 14px; color: #64748b; line-height: 1.6; margin-bottom: 16px; }
+        .mode-badge { display: inline-block; padding: 4px 12px; background: #dbeafe; color: #1d4ed8; border-radius: 20px; font-size: 11px; font-weight: 600; }
+        .mode-badge.new { background: #d1fae5; color: #047857; }
+        .mode-badge.popular { background: #fef3c7; color: #b45309; }
+        
+        /* Features Section */
+        .features-section { background: #f8fafc; border-radius: 20px; padding: 48px; margin-bottom: 64px; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 32px; margin-top: 32px; }
+        .feature { text-align: center; }
+        .feature-icon { width: 56px; height: 56px; background: #eff6ff; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin: 0 auto 16px; }
+        .feature-title { font-size: 16px; font-weight: 600; color: #1e293b; margin-bottom: 8px; }
+        .feature-desc { font-size: 14px; color: #64748b; }
+        
+        /* Integration Banner */
+        .integration-banner { background: linear-gradient(135deg, #1e293b 0%, #334155 100%); border-radius: 20px; padding: 48px; color: #fff; text-align: center; }
+        .integration-banner h3 { font-size: 24px; font-weight: 700; margin-bottom: 12px; }
+        .integration-banner p { font-size: 16px; color: #94a3b8; margin-bottom: 24px; max-width: 500px; margin-left: auto; margin-right: auto; }
+        .integration-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+        .integration-link { display: flex; align-items: center; gap: 8px; padding: 12px 20px; background: rgba(255,255,255,0.1); border-radius: 10px; color: #fff; text-decoration: none; font-size: 14px; font-weight: 500; transition: all 0.2s; }
+        .integration-link:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
+        .integration-link.mechanism { border-left: 3px solid #10b981; }
+        .integration-link.coach { border-left: 3px solid #8b5cf6; }
+        .integration-link.fingerprint { border-left: 3px solid #f59e0b; }
+        
+        /* Footer */
+        .footer { border-top: 1px solid #e4e4e7; padding: 32px 24px; text-align: center; color: #71717a; font-size: 13px; background: #fff; margin-top: 64px; }
+        .footer a { color: #3b82f6; text-decoration: none; }
+        .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; }
+    </style>
+</head>
+<body>
+    <!-- Logo Header -->
+    <header class="reasondx-logo-header">
+        <div class="reasondx-logo-container">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 120">
+                <text x="20" y="70" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="#1a1a1a" letter-spacing="-1">Reason</text>
+                <text x="200" y="70" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="#1a1a1a">D</text>
+                <line x1="248" y1="42" x2="272" y2="72" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round"/>
+                <ellipse cx="246" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 246 39)" fill="#1a1a1a"/>
+                <path d="M 272 42 L 256 58 Q 250 66 250 76 Q 250 86 258 92 Q 266 98 266 108" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+                <ellipse cx="274" cy="39" rx="2.5" ry="4.5" transform="rotate(28 274 39)" fill="#1a1a1a"/>
+                <circle cx="266" cy="108" r="10" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
+                <circle cx="266" cy="108" r="5" fill="#1a1a1a"/>
+            </svg>
+        </div>
+        <div class="reasondx-tagline">Asking the right questions can change everything.</div>
+    </header>
+    
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-link active">🔬 ReasonDx</a>
+            <a href="../mechanism/index.html" class="nav-link mechanism">⚙️ MechanismDx</a>
+            <a href="../CoachDx/index.html" class="nav-link coach">💬 CoachDx</a>
+            <a href="../fingerprint-dashboard.html" class="nav-link suite">🧬 My Fingerprint</a>
+            <a href="../unified-scoreboard.html" class="nav-link suite">🏆 Scoreboard</a>
+        </div>
+    </nav>
+    
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Master <span>Clinical Reasoning</span></h1>
+        <p>Work through realistic patient cases, build differential diagnoses, order the right tests, and develop the diagnostic thinking skills that define expert clinicians.</p>
+        <div class="hero-ctas">
+            <a href="training.html" class="hero-cta">Start Training →</a>
+            <a href="#modes" class="hero-cta secondary">Explore Modes</a>
+        </div>
+    </section>
+    
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stats-inner">
+            <div class="stat">
+                <div class="stat-value">200+</div>
+                <div class="stat-label">Clinical Cases</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">15</div>
+                <div class="stat-label">Specialties</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">6</div>
+                <div class="stat-label">Training Modes</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">∞</div>
+                <div class="stat-label">Practice Opportunities</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Training Modes -->
+        <section id="modes">
+            <div class="section-header">
+                <div class="section-label">Training Modes</div>
+                <h2 class="section-title">Choose Your Learning Path</h2>
+                <p class="section-subtitle">Multiple ways to practice clinical reasoning, from guided learning to realistic simulations.</p>
+            </div>
+            
+            <div class="modes-grid">
+                <a href="training.html?mode=learning" class="mode-card">
+                    <div class="mode-icon">📚</div>
+                    <h3 class="mode-title">Learning Mode</h3>
+                    <p class="mode-desc">Step-by-step guidance with detailed feedback at each decision point. Perfect for building foundational reasoning skills.</p>
+                </a>
+                
+                <a href="training.html?mode=clinical" class="mode-card">
+                    <div class="mode-icon">🏥</div>
+                    <h3 class="mode-title">Clinical Mode</h3>
+                    <p class="mode-desc">Realistic ward-style case presentations. Work through cases as you would on the wards with minimal hand-holding.</p>
+                </a>
+                
+                <a href="training.html?mode=osce" class="mode-card">
+                    <div class="mode-icon">⏱️</div>
+                    <h3 class="mode-title">OSCE Simulation</h3>
+                    <p class="mode-desc">Timed practice under exam conditions. Build confidence and speed for high-stakes assessments.</p>
+                </a>
+                
+                <a href="training.html?mode=sp" class="mode-card">
+                    <div class="mode-icon">🎭</div>
+                    <h3 class="mode-title">SP Integration Mode</h3>
+                    <p class="mode-desc">For use with standardized patients. Enter your own findings and get AI-powered feedback on your reasoning.</p>
+                </a>
+                
+                <a href="training.html?mode=skills" class="mode-card">
+                    <div class="mode-icon">📋</div>
+                    <h3 class="mode-title">Clinical Skills Cases</h3>
+                    <p class="mode-desc">SP assessments and small group learning scenarios. Practice communication alongside clinical reasoning.</p>
+                </a>
+                
+                <a href="training.html?mode=study" class="mode-card">
+                    <div class="mode-icon">📊</div>
+                    <h3 class="mode-title">Personal Study Hub</h3>
+                    <p class="mode-desc">Analytics, spaced repetition, quizzes, and personalized recommendations based on your performance.</p>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Features Section -->
+        <section class="features-section">
+            <div class="section-header">
+                <div class="section-label">Why ReasonDx</div>
+                <h2 class="section-title">Built for How Clinicians Actually Think</h2>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">🎯</div>
+                    <h4 class="feature-title">Hypothesis-Driven</h4>
+                    <p class="feature-desc">Build and refine differential diagnoses as you gather information, just like real clinical practice.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">📈</div>
+                    <h4 class="feature-title">Calibration Tracking</h4>
+                    <p class="feature-desc">Learn to match your confidence to your accuracy—a key skill for clinical decision-making.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">🧠</div>
+                    <h4 class="feature-title">Metacognitive Prompts</h4>
+                    <p class="feature-desc">Reflect on your reasoning process with prompts that build self-awareness and reduce cognitive errors.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">🔬</div>
+                    <h4 class="feature-title">Real Case Data</h4>
+                    <p class="feature-desc">Cases built from actual clinical presentations with realistic labs, imaging, and physical findings.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <h4 class="feature-title">Instant Feedback</h4>
+                    <p class="feature-desc">Learn from every decision with immediate, detailed explanations of clinical reasoning.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon">🏆</div>
+                    <h4 class="feature-title">Progress Tracking</h4>
+                    <p class="feature-desc">Track your growth across cases, specialties, and reasoning skills with detailed analytics.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Integration Banner -->
+        <section class="integration-banner">
+            <h3>Part of the Dx Learning Ecosystem</h3>
+            <p>ReasonDx integrates seamlessly with MechanismDx and CoachDx for comprehensive clinical education.</p>
+            <div class="integration-links">
+                <a href="../mechanism/index.html" class="integration-link mechanism">
+                    <span>⚙️</span>
+                    <span>MechanismDx</span>
+                    <span style="color:#94a3b8">— Pathophysiology</span>
+                </a>
+                <a href="../CoachDx/index.html" class="integration-link coach">
+                    <span>💬</span>
+                    <span>CoachDx</span>
+                    <span style="color:#94a3b8">— AI Coaching</span>
+                </a>
+                <a href="../fingerprint-dashboard.html" class="integration-link fingerprint">
+                    <span>🧬</span>
+                    <span>Learning Fingerprint</span>
+                    <span style="color:#94a3b8">— Your Progress</span>
+                </a>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="training.html">Start Training</a>
+            <a href="../unified-scoreboard.html">Scoreboard</a>
+            <a href="../fingerprint-dashboard.html">My Progress</a>
+        </div>
+        <p>ReasonDx — Part of the <a href="../index.html">Dx Learning Ecosystem</a></p>
+    </footer>
+</body>
+</html>
