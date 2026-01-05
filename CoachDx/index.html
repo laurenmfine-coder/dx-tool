@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoachDx | AI-Powered Clinical Reasoning Coaching</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #fafafa; color: #18181b; line-height: 1.6; }
+        
+        /* Logo Header */
+        .logo-header {
+            background: #fafafa;
+            padding: 24px 24px 48px 24px;
+            text-align: center;
+        }
+        .logo-container {
+            display: inline-block;
+            min-height: 85px;
+        }
+        .logo-container svg {
+            height: 70px;
+            width: auto;
+        }
+        .tagline {
+            margin-top: 8px;
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 17px;
+            font-style: italic;
+            color: #6b7280;
+        }
+        
+        /* Navigation - Consistent across Dx Suite */
+        .nav { background: #fff; border-bottom: 1px solid #e4e4e7; padding: 12px 24px; position: sticky; top: 0; z-index: 100; }
+        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .nav-brand { font-family: Georgia, serif; font-size: 20px; color: #1e293b; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .nav-brand span { color: #8b5cf6; }
+        .nav-links { display: flex; gap: 8px; align-items: center; }
+        .nav-link { padding: 8px 16px; color: #52525b; text-decoration: none; font-size: 14px; font-weight: 500; border-radius: 8px; transition: all 0.15s; }
+        .nav-link:hover { background: #f4f4f5; color: #18181b; }
+        .nav-link.active { background: #ede9fe; color: #7c3aed; }
+        .nav-divider { width: 1px; height: 24px; background: #e4e4e7; margin: 0 8px; }
+        .nav-link.ecosystem { color: #10b981; font-weight: 600; }
+        .nav-link.ecosystem:hover { background: #ecfdf5; }
+        
+        /* Hero Section */
+        .hero { background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 50%, #c4b5fd 100%); padding: 64px 24px; text-align: center; }
+        .hero-content { max-width: 700px; margin: 0 auto; }
+        .hero-icon { width: 80px; height: 80px; background: #fff; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 40px; margin: 0 auto 24px; box-shadow: 0 8px 24px rgba(139, 92, 246, 0.2); }
+        .hero h1 { font-size: 42px; font-weight: 800; letter-spacing: -1px; margin-bottom: 16px; color: #18181b; }
+        .hero p { font-size: 18px; color: #52525b; margin-bottom: 32px; }
+        .hero-stats { display: flex; justify-content: center; gap: 40px; margin-bottom: 32px; }
+        .hero-stat { text-align: center; }
+        .hero-stat-num { font-size: 32px; font-weight: 700; color: #7c3aed; }
+        .hero-stat-label { font-size: 13px; color: #64748b; }
+        .hero-btn { display: inline-block; padding: 16px 32px; background: #8b5cf6; color: #fff; text-decoration: none; border-radius: 12px; font-weight: 600; font-size: 16px; transition: all 0.2s; }
+        .hero-btn:hover { background: #7c3aed; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3); }
+        
+        /* Main Content */
+        .main { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        
+        /* Section Styling */
+        .section { padding: 64px 0; }
+        .section-header { text-align: center; margin-bottom: 40px; }
+        .section-header h2 { font-size: 28px; font-weight: 700; margin-bottom: 12px; color: #18181b; }
+        .section-header p { font-size: 16px; color: #64748b; max-width: 600px; margin: 0 auto; }
+        
+        /* Features Grid */
+        .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        @media (max-width: 768px) { .feature-grid { grid-template-columns: 1fr; } }
+        
+        .feature-card { background: #fff; border: 1px solid #e4e4e7; border-radius: 16px; padding: 28px; text-align: center; transition: all 0.2s; }
+        .feature-card:hover { border-color: #c4b5fd; transform: translateY(-2px); }
+        .feature-icon { width: 56px; height: 56px; background: #ede9fe; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin: 0 auto 16px; }
+        .feature-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .feature-card p { font-size: 14px; color: #64748b; }
+        
+        /* Personas Section */
+        .personas-section { background: #18181b; color: #fff; padding: 64px 24px; }
+        .personas-inner { max-width: 1200px; margin: 0 auto; }
+        .personas-header { text-align: center; margin-bottom: 48px; }
+        .personas-header h2 { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
+        .personas-header p { font-size: 16px; color: #a1a1aa; }
+        
+        .persona-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
+        @media (max-width: 1024px) { .persona-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 640px) { .persona-grid { grid-template-columns: repeat(2, 1fr); } }
+        
+        .persona-card { background: #27272a; border-radius: 16px; padding: 24px; text-align: center; transition: all 0.2s; cursor: pointer; border: 2px solid transparent; }
+        .persona-card:hover { border-color: #8b5cf6; transform: translateY(-4px); }
+        .persona-card.selected { border-color: #8b5cf6; background: #3f3f46; }
+        .persona-avatar { width: 72px; height: 72px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 36px; margin: 0 auto 16px; }
+        .persona-avatar.chen { background: linear-gradient(135deg, #ede9fe, #c4b5fd); }
+        .persona-avatar.martinez { background: linear-gradient(135deg, #fef3c7, #fcd34d); }
+        .persona-avatar.okafor { background: linear-gradient(135deg, #dcfce7, #86efac); }
+        .persona-avatar.yamamoto { background: linear-gradient(135deg, #dbeafe, #93c5fd); }
+        .persona-avatar.patel { background: linear-gradient(135deg, #fce7f3, #f9a8d4); }
+        .persona-name { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+        .persona-specialty { font-size: 12px; color: #a1a1aa; margin-bottom: 12px; }
+        .persona-style { font-size: 13px; color: #d4d4d8; line-height: 1.5; }
+        .persona-tag { display: inline-block; padding: 4px 10px; background: #3f3f46; border-radius: 12px; font-size: 11px; color: #a1a1aa; margin-top: 12px; }
+        
+        /* Persona Detail Panel */
+        .persona-detail { background: #27272a; border-radius: 16px; padding: 32px; margin-top: 32px; display: none; }
+        .persona-detail.show { display: block; }
+        .persona-detail-header { display: flex; align-items: center; gap: 20px; margin-bottom: 24px; }
+        .persona-detail-avatar { width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; }
+        .persona-detail-info h3 { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
+        .persona-detail-info p { color: #a1a1aa; }
+        .persona-traits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 24px; }
+        @media (max-width: 768px) { .persona-traits { grid-template-columns: 1fr; } }
+        .trait { background: #3f3f46; padding: 16px; border-radius: 12px; }
+        .trait-label { font-size: 12px; color: #8b5cf6; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .trait-content { font-size: 14px; color: #d4d4d8; }
+        .persona-quote { background: #3f3f46; padding: 20px; border-radius: 12px; border-left: 4px solid #8b5cf6; font-style: italic; color: #d4d4d8; }
+        
+        /* Parallel Cases Section */
+        .parallel-section { padding: 64px 0; background: #f8fafc; }
+        .parallel-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        
+        .parallel-pair { display: grid; grid-template-columns: 1fr auto 1fr; gap: 24px; align-items: center; margin-bottom: 32px; background: #fff; border-radius: 16px; padding: 24px; border: 1px solid #e4e4e7; }
+        @media (max-width: 768px) { 
+            .parallel-pair { grid-template-columns: 1fr; } 
+            .parallel-connector { transform: rotate(90deg); }
+        }
+        
+        .parallel-case { padding: 20px; border-radius: 12px; background: #fafafa; }
+        .parallel-case.primary { border-left: 4px solid #8b5cf6; }
+        .parallel-case.transfer { border-left: 4px solid #f59e0b; }
+        .parallel-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .parallel-case.primary .parallel-label { color: #7c3aed; }
+        .parallel-case.transfer .parallel-label { color: #d97706; }
+        .parallel-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #18181b; }
+        .parallel-category { font-size: 13px; color: #64748b; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+        .parallel-desc { font-size: 14px; color: #52525b; margin-bottom: 12px; }
+        .parallel-concepts { display: flex; flex-wrap: wrap; gap: 6px; }
+        .parallel-concept { background: #ede9fe; color: #7c3aed; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 500; }
+        
+        .parallel-connector { display: flex; flex-direction: column; align-items: center; gap: 8px; color: #94a3b8; }
+        .connector-icon { font-size: 24px; }
+        .connector-text { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        /* Cases Preview Grid */
+        .cases-section { padding: 64px 0; }
+        .case-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-bottom: 32px; }
+        
+        .case-card { background: #fff; border: 1px solid #e4e4e7; border-radius: 12px; padding: 20px; transition: all 0.2s; text-decoration: none; color: inherit; display: block; }
+        .case-card:hover { border-color: #8b5cf6; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(139, 92, 246, 0.1); }
+        .case-card.has-parallel { border-left: 3px solid #f59e0b; }
+        .case-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .case-icon { width: 40px; height: 40px; background: #ede9fe; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+        .case-title { font-size: 16px; font-weight: 600; }
+        .case-category { font-size: 12px; color: #8b5cf6; font-weight: 500; }
+        .case-desc { font-size: 13px; color: #64748b; margin-bottom: 12px; }
+        .case-meta { display: flex; gap: 12px; font-size: 11px; color: #94a3b8; }
+        .case-badge { background: #fef3c7; color: #92400e; padding: 2px 8px; border-radius: 8px; font-size: 10px; font-weight: 600; }
+        
+        /* How It Works */
+        .how-section { background: #18181b; color: #fff; padding: 64px 24px; }
+        .how-inner { max-width: 1000px; margin: 0 auto; }
+        .how-header { text-align: center; margin-bottom: 48px; }
+        .how-header h2 { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
+        .how-header p { color: #a1a1aa; }
+        
+        .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+        @media (max-width: 768px) { .steps { grid-template-columns: repeat(2, 1fr); } }
+        
+        .step { text-align: center; position: relative; }
+        .step-num { width: 48px; height: 48px; background: #8b5cf6; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; margin: 0 auto 16px; }
+        .step h4 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+        .step p { font-size: 14px; color: #a1a1aa; }
+        
+        /* CTA Section */
+        .cta { background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: #fff; padding: 64px 24px; text-align: center; }
+        .cta h2 { font-size: 32px; font-weight: 700; margin-bottom: 16px; }
+        .cta p { font-size: 18px; opacity: 0.9; margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto; }
+        .cta-btn { display: inline-block; padding: 16px 32px; background: #fff; color: #8b5cf6; text-decoration: none; border-radius: 12px; font-weight: 600; font-size: 16px; transition: all 0.2s; }
+        .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+        
+        /* Footer - Consistent across Dx Suite */
+        .footer { padding: 32px 24px; text-align: center; border-top: 1px solid #e4e4e7; background: #fff; }
+        .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; flex-wrap: wrap; }
+        .footer-links a { color: #64748b; text-decoration: none; font-size: 14px; transition: color 0.2s; }
+        .footer-links a:hover { color: #8b5cf6; }
+        .footer p { font-size: 13px; color: #94a3b8; }
+        .footer a.brand { color: #8b5cf6; }
+        
+        /* View All Button */
+        .view-all { text-align: center; margin-top: 32px; }
+        .view-all-btn { display: inline-block; padding: 14px 28px; background: #8b5cf6; color: #fff; text-decoration: none; border-radius: 10px; font-weight: 600; transition: all 0.2s; }
+        .view-all-btn:hover { background: #7c3aed; transform: translateY(-2px); }
+    </style>
+</head>
+<body>
+    <!-- Logo Header -->
+    <header class="logo-header">
+        <div class="logo-container">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 310 120">
+                <text x="20" y="70" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="#1a1a1a" letter-spacing="-1">CoachD</text>
+                <line x1="218" y1="42" x2="242" y2="72" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round"/>
+                <ellipse cx="216" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 216 39)" fill="#1a1a1a"/>
+                <path d="M 242 42 L 226 58 Q 220 66 220 76 Q 220 86 228 92 Q 236 98 236 108" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+                <ellipse cx="244" cy="39" rx="2.5" ry="4.5" transform="rotate(28 244 39)" fill="#1a1a1a"/>
+                <circle cx="236" cy="108" r="10" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
+                <circle cx="236" cy="108" r="5" fill="#1a1a1a"/>
+            </svg>
+        </div>
+        <div class="tagline">Learning to think, not just to know.</div>
+    </header>
+
+    <!-- Consistent Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="dxsuite-index.html" class="nav-brand">Coach<span>Dx</span></a>
+            <div class="nav-links">
+                <a href="coachdx-case-library.html" class="nav-link">Case Library</a>
+                <a href="coachdx-mentor-chat.html" class="nav-link">Start Session</a>
+                <a href="unified-scoreboard.html" class="nav-link">Progress</a>
+                <span class="nav-divider"></span>
+                <a href="reasondx-index.html" class="nav-link ecosystem">ReasonDx</a>
+                <a href="mechanismdx-index.html" class="nav-link ecosystem">MechanismDx</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-icon">🎓</div>
+            <h1>Master Clinical Reasoning</h1>
+            <p>Practice diagnostic thinking through Socratic dialogue with AI attending physicians. Get personalized coaching that adapts to your reasoning process.</p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-num">65+</div>
+                    <div class="hero-stat-label">Clinical Cases</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-num">28</div>
+                    <div class="hero-stat-label">Parallel Pairs</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-num">5</div>
+                    <div class="hero-stat-label">AI Mentors</div>
+                </div>
+            </div>
+            <a href="coachdx-case-library.html" class="hero-btn">Start a Coaching Session →</a>
+        </div>
+    </section>
+
+    <div class="main">
+        <!-- Features Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Why Socratic Coaching Works</h2>
+                <p>Research shows that active reasoning beats passive learning. CoachDx makes you think, not just memorize.</p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>Guided Discovery</h3>
+                    <p>Our AI mentors ask questions that lead you to insights, building neural pathways through active problem-solving.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Transfer Testing</h3>
+                    <p>Parallel cases challenge you to apply concepts in new contexts—the true test of understanding.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Concept Mapping</h3>
+                    <p>Track which clinical concepts you explore and identify blind spots in your diagnostic approach.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- AI Mentors Section -->
+    <section class="personas-section">
+        <div class="personas-inner">
+            <div class="personas-header">
+                <h2>Meet Your AI Mentors</h2>
+                <p>Five attending physicians with distinct teaching styles. Choose the approach that challenges you most.</p>
+            </div>
+            
+            <div class="persona-grid">
+                <div class="persona-card selected" onclick="selectPersona('chen')">
+                    <div class="persona-avatar chen">👨‍⚕️</div>
+                    <div class="persona-name">Dr. Chen</div>
+                    <div class="persona-specialty">Internal Medicine</div>
+                    <div class="persona-style">Classic Socratic method. Builds understanding through careful questioning.</div>
+                    <div class="persona-tag">Methodical</div>
+                </div>
+                
+                <div class="persona-card" onclick="selectPersona('martinez')">
+                    <div class="persona-avatar martinez">👩‍⚕️</div>
+                    <div class="persona-name">Dr. Martinez</div>
+                    <div class="persona-specialty">Emergency Medicine</div>
+                    <div class="persona-style">Fast-paced, practical. Focuses on don't-miss diagnoses and time-critical decisions.</div>
+                    <div class="persona-tag">High-Acuity</div>
+                </div>
+                
+                <div class="persona-card" onclick="selectPersona('okafor')">
+                    <div class="persona-avatar okafor">👨‍⚕️</div>
+                    <div class="persona-name">Dr. Okafor</div>
+                    <div class="persona-specialty">Hospitalist</div>
+                    <div class="persona-style">Systems-based thinker. Emphasizes clinical reasoning frameworks and illness scripts.</div>
+                    <div class="persona-tag">Systematic</div>
+                </div>
+                
+                <div class="persona-card" onclick="selectPersona('yamamoto')">
+                    <div class="persona-avatar yamamoto">👩‍⚕️</div>
+                    <div class="persona-name">Dr. Yamamoto</div>
+                    <div class="persona-specialty">Critical Care</div>
+                    <div class="persona-style">Physiology-focused. Connects pathophysiology to clinical findings and interventions.</div>
+                    <div class="persona-tag">Mechanistic</div>
+                </div>
+                
+                <div class="persona-card" onclick="selectPersona('patel')">
+                    <div class="persona-avatar patel">👩‍⚕️</div>
+                    <div class="persona-name">Dr. Patel</div>
+                    <div class="persona-specialty">Diagnostician</div>
+                    <div class="persona-style">Probability-minded. Teaches Bayesian reasoning and test characteristics.</div>
+                    <div class="persona-tag">Analytical</div>
+                </div>
+            </div>
+            
+            <!-- Dr. Chen Detail (default) -->
+            <div class="persona-detail show" id="detail-chen">
+                <div class="persona-detail-header">
+                    <div class="persona-detail-avatar chen">👨‍⚕️</div>
+                    <div class="persona-detail-info">
+                        <h3>Dr. Michael Chen</h3>
+                        <p>Internal Medicine • 18 years teaching experience</p>
+                    </div>
+                </div>
+                <div class="persona-traits">
+                    <div class="trait">
+                        <div class="trait-label">Teaching Style</div>
+                        <div class="trait-content">Asks probing "why" and "what else" questions. Never gives answers directly—guides you to discover them yourself through careful reasoning.</div>
+                    </div>
+                    <div class="trait">
+                        <div class="trait-label">Focus Areas</div>
+                        <div class="trait-content">Building complete differentials, prioritizing by probability and severity, recognizing cognitive biases in diagnostic reasoning.</div>
+                    </div>
+                    <div class="trait">
+                        <div class="trait-label">Best For</div>
+                        <div class="trait-content">Students who want to develop strong foundational reasoning skills and enjoy thoughtful, methodical case exploration.</div>
+                    </div>
+                </div>
+                <div class="persona-quote">"The goal isn't to reach the diagnosis—it's to understand why that diagnosis makes sense and what else it could be. Tell me, what features of this presentation most concern you?"</div>
+            </div>
+            
+            <!-- Dr. Martinez Detail -->
+            <div class="persona-detail" id="detail-martinez">
+                <div class="persona-detail-header">
+                    <div class="persona-detail-avatar martinez">👩‍⚕️</div>
+                    <div class="persona-detail-info">
+                        <h3>Dr. Sofia Martinez</h3>
+                        <p>Emergency Medicine • Trauma Center Director</p>
+                    </div>
+                </div>
+                <div class="persona-traits">
+                    <div class="trait">
+                        <div class="trait-label">Teaching Style</div>
+                        <div class="trait-content">Rapid-fire questions, emphasis on action. Constantly asks "What would you do RIGHT NOW?" Comfortable with uncertainty and teaches risk stratification.</div>
+                    </div>
+                    <div class="trait">
+                        <div class="trait-label">Focus Areas</div>
+                        <div class="trait-content">Don't-miss diagnoses, time-sensitive decisions, resuscitation priorities, disposition planning, and managing diagnostic uncertainty.</div>
+                    </div>
+                    <div class="trait">
+                        <div class="trait-label">Best For</div>
+                        <div class="trait-content">Students preparing for high-acuity rotations who need to practice making decisions with incomplete information.</div>
+                    </div>
+                </div>
+                <div class="persona-quote">"Your patient is crashing. You don't have time for a complete workup. What's the one test you need, and what are you treating empirically while you wait? Go."</div>
+            </div>
+            
+            <!-- Dr. Okafor Detail -->
+            <div class="persona-detail" id="detail-okafor">
+                <div class="persona-detail-header">
+                    <div class="persona-detail-avatar okafor">👨‍⚕️</div>
+                    <div class="persona-detail-info">
+                        <h3>Dr. Emmanuel Okafor</h3>
+                        <p>Hospital Medicine • Medical Education Director</p>
+                    </div>
+                </div>
+                <div class="persona-traits">
+                    <div class="trait">
+                        <div class="trait-label">Teaching Style</div>
+                        <div class="trait-content">Frameworks-first approach. Teaches you to organize thinking using illness scripts, semantic qualifiers, and problem representation.</div>
+                    </div>
+                    <div class="trait">
+                        <div class="trait-label">Focus Areas</div>
+                        <div class="trait-content">Problem representation, building illness scripts, system-based differentials, and structured approaches to common presentations.</div>
+                    </div>
+                    <div class="trait">
+                        <div class="trait-label">Best For</div>
+                        <div class="trait-content">Students who want explicit frameworks they can apply across many cases. Great for building transferable clinical reasoning skills.</div>
+                    </div>
+                </div>
+                <div class="persona-quote">"Before we discuss the differential, give me your problem representation in one sentence. Use semantic qualifiers—acute or chronic? What's the tempo? What syndrome does this fit?"</div>
+            </div>
+            
+            <!-- Dr. Yamamoto Detail -->
+            <div class="persona-detail" id="detail-yamamoto">
+                <div class="persona-detail-header">
+                    <div class="persona-detail-avatar yamamoto">👩‍⚕️</div>
+                    <div class="persona-detail-info">
+                        <h3>Dr. Keiko Yamamoto</h3>
+                        <p>Pulmonary/Critical Care • ICU Medical Director</p>
+                    </div>
+                </div>
+                <div class="persona-traits">
+                    <div class="trait">
+                        <div class="trait-label">Teaching Style</div>
+                        <div class="trait-content">Deep dives into pathophysiology. Every clinical finding gets connected to mechanism. Heavy emphasis on "why" at the cellular and organ level.</div>
+                    </div>
+                    <div class="trait">
+                        <div class="trait-label">Focus Areas</div>
+                        <div class="trait-content">Connecting symptoms to pathophysiology, understanding treatment mechanisms, acid-base/ventilator physiology, hemodynamic reasoning.</div>
+                    </div>
+                    <div class="trait">
+                        <div class="trait-label">Best For</div>
+                        <div class="trait-content">Students who want to understand the "why" behind clinical findings. Excellent preparation for critical care and complex pathophysiology.</div>
+                    </div>
+                </div>
+                <div class="persona-quote">"The patient is hypotensive with warm extremities. Walk me through the physiology—what's happening at the level of the vessels? The heart? How does this change your fluid strategy?"</div>
+            </div>
+            
+            <!-- Dr. Patel Detail -->
+            <div class="persona-detail" id="detail-patel">
+                <div class="persona-detail-header">
+                    <div class="persona-detail-avatar patel">👩‍⚕️</div>
+                    <div class="persona-detail-info">
+                        <h3>Dr. Priya Patel</h3>
+                        <p>General Internal Medicine • Diagnostic Excellence Program</p>
+                    </div>
+                </div>
+                <div class="persona-traits">
+                    <div class="trait">
+                        <div class="trait-label">Teaching Style</div>
+                        <div class="trait-content">Quantitative reasoning emphasis. Teaches you to think in probabilities, likelihood ratios, and pre/post-test odds. Data-driven diagnostic refinement.</div>
+                    </div>
+                    <div class="trait">
+                        <div class="trait-label">Focus Areas</div>
+                        <div class="trait-content">Bayesian reasoning, test characteristics (sensitivity/specificity/LRs), calibrating confidence, avoiding overdiagnosis and overtesting.</div>
+                    </div>
+                    <div class="trait">
+                        <div class="trait-label">Best For</div>
+                        <div class="trait-content">Students who want to make their diagnostic reasoning more rigorous and evidence-based. Challenges gut instinct with probability.</div>
+                    </div>
+                </div>
+                <div class="persona-quote">"You say PE is 'possible.' But what's your actual pre-test probability—10%? 50%? That determines whether a negative D-dimer rules it out or you need imaging. Be specific."</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parallel Cases Section -->
+    <section class="parallel-section">
+        <div class="parallel-inner">
+            <div class="section-header">
+                <h2>Test Your Transfer with Parallel Cases</h2>
+                <p>True learning means applying concepts in new contexts. Each primary case has a parallel that challenges your understanding.</p>
+            </div>
+            
+            <!-- Parallel Pair 1: Chest Pain -->
+            <div class="parallel-pair">
+                <div class="parallel-case primary">
+                    <div class="parallel-label">Primary Case</div>
+                    <div class="parallel-title">Chest Pain: Classic ACS</div>
+                    <div class="parallel-category">❤️ Cardiovascular</div>
+                    <div class="parallel-desc">55-year-old diabetic man with substernal pressure radiating to jaw, diaphoresis. Classic STEMI presentation.</div>
+                    <div class="parallel-concepts">
+                        <span class="parallel-concept">Risk stratification</span>
+                        <span class="parallel-concept">ECG interpretation</span>
+                        <span class="parallel-concept">Troponin dynamics</span>
+                    </div>
+                </div>
+                <div class="parallel-connector">
+                    <div class="connector-icon">⟷</div>
+                    <div class="connector-text">Transfer</div>
+                </div>
+                <div class="parallel-case transfer">
+                    <div class="parallel-label">Parallel Case</div>
+                    <div class="parallel-title">Chest Pain: Atypical ACS</div>
+                    <div class="parallel-category">❤️ Cardiovascular</div>
+                    <div class="parallel-desc">68-year-old woman with fatigue and nausea for 2 days. No chest pain. NSTEMI on labs.</div>
+                    <div class="parallel-concepts">
+                        <span class="parallel-concept">Atypical presentations</span>
+                        <span class="parallel-concept">Sex differences</span>
+                        <span class="parallel-concept">Anchoring bias</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Parallel Pair 2: Dyspnea -->
+            <div class="parallel-pair">
+                <div class="parallel-case primary">
+                    <div class="parallel-label">Primary Case</div>
+                    <div class="parallel-title">Dyspnea: Heart Failure</div>
+                    <div class="parallel-category">🫁 Cardiopulmonary</div>
+                    <div class="parallel-desc">72-year-old with progressive DOE, orthopnea, leg swelling. BNP elevated, EF 25%.</div>
+                    <div class="parallel-concepts">
+                        <span class="parallel-concept">Volume assessment</span>
+                        <span class="parallel-concept">BNP interpretation</span>
+                        <span class="parallel-concept">HFrEF vs HFpEF</span>
+                    </div>
+                </div>
+                <div class="parallel-connector">
+                    <div class="connector-icon">⟷</div>
+                    <div class="connector-text">Transfer</div>
+                </div>
+                <div class="parallel-case transfer">
+                    <div class="parallel-label">Parallel Case</div>
+                    <div class="parallel-title">Dyspnea: Pulmonary Embolism</div>
+                    <div class="parallel-category">🫁 Cardiopulmonary</div>
+                    <div class="parallel-desc">45-year-old post-op with sudden dyspnea, pleuritic pain. Wells score and D-dimer interpretation.</div>
+                    <div class="parallel-concepts">
+                        <span class="parallel-concept">Pre-test probability</span>
+                        <span class="parallel-concept">D-dimer pitfalls</span>
+                        <span class="parallel-concept">Risk stratification</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Parallel Pair 3: AMS -->
+            <div class="parallel-pair">
+                <div class="parallel-case primary">
+                    <div class="parallel-label">Primary Case</div>
+                    <div class="parallel-title">Altered Mental Status: Sepsis</div>
+                    <div class="parallel-category">🧠 Neurology/Critical Care</div>
+                    <div class="parallel-desc">78-year-old from nursing home with confusion, fever, tachycardia. UTI source, lactate 4.2.</div>
+                    <div class="parallel-concepts">
+                        <span class="parallel-concept">Sepsis-3 criteria</span>
+                        <span class="parallel-concept">Source identification</span>
+                        <span class="parallel-concept">Hour-1 bundle</span>
+                    </div>
+                </div>
+                <div class="parallel-connector">
+                    <div class="connector-icon">⟷</div>
+                    <div class="connector-text">Transfer</div>
+                </div>
+                <div class="parallel-case transfer">
+                    <div class="parallel-label">Parallel Case</div>
+                    <div class="parallel-title">Altered Mental Status: Metabolic</div>
+                    <div class="parallel-category">🧠 Neurology/Metabolic</div>
+                    <div class="parallel-desc">62-year-old diabetic found confused. Glucose 45, but doesn't improve with dextrose. Think deeper.</div>
+                    <div class="parallel-concepts">
+                        <span class="parallel-concept">Hypoglycemia causes</span>
+                        <span class="parallel-concept">Adrenal insufficiency</span>
+                        <span class="parallel-concept">Diagnostic momentum</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Parallel Pair 4: Abdominal Pain -->
+            <div class="parallel-pair">
+                <div class="parallel-case primary">
+                    <div class="parallel-label">Primary Case</div>
+                    <div class="parallel-title">Abdominal Pain: Appendicitis</div>
+                    <div class="parallel-category">🩺 GI/Surgical</div>
+                    <div class="parallel-desc">24-year-old with RLQ pain, migration from periumbilical area, fever, elevated WBC.</div>
+                    <div class="parallel-concepts">
+                        <span class="parallel-concept">Alvarado score</span>
+                        <span class="parallel-concept">Imaging selection</span>
+                        <span class="parallel-concept">Surgical consultation</span>
+                    </div>
+                </div>
+                <div class="parallel-connector">
+                    <div class="connector-icon">⟷</div>
+                    <div class="connector-text">Transfer</div>
+                </div>
+                <div class="parallel-case transfer">
+                    <div class="parallel-label">Parallel Case</div>
+                    <div class="parallel-title">Abdominal Pain: Mesenteric Ischemia</div>
+                    <div class="parallel-category">🩺 GI/Vascular</div>
+                    <div class="parallel-desc">76-year-old with AFib, severe abdominal pain "out of proportion" to exam. Lactate rising.</div>
+                    <div class="parallel-concepts">
+                        <span class="parallel-concept">Pain-exam mismatch</span>
+                        <span class="parallel-concept">Vascular emergency</span>
+                        <span class="parallel-concept">Time-sensitive diagnosis</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Parallel Pair 5: Electrolytes -->
+            <div class="parallel-pair">
+                <div class="parallel-case primary">
+                    <div class="parallel-label">Primary Case</div>
+                    <div class="parallel-title">Weakness: Hypokalemia</div>
+                    <div class="parallel-category">⚡ Electrolytes</div>
+                    <div class="parallel-desc">35-year-old with profound weakness, K+ 2.1, U waves on ECG. Taking hydrochlorothiazide.</div>
+                    <div class="parallel-concepts">
+                        <span class="parallel-concept">K+ physiology</span>
+                        <span class="parallel-concept">ECG changes</span>
+                        <span class="parallel-concept">Replacement strategy</span>
+                    </div>
+                </div>
+                <div class="parallel-connector">
+                    <div class="connector-icon">⟷</div>
+                    <div class="connector-text">Transfer</div>
+                </div>
+                <div class="parallel-case transfer">
+                    <div class="parallel-label">Parallel Case</div>
+                    <div class="parallel-title">Weakness: Hyperkalemia</div>
+                    <div class="parallel-category">⚡ Electrolytes</div>
+                    <div class="parallel-desc">68-year-old with CKD, missed dialysis, K+ 7.4, peaked T waves and widened QRS.</div>
+                    <div class="parallel-concepts">
+                        <span class="parallel-concept">Emergency management</span>
+                        <span class="parallel-concept">Membrane stabilization</span>
+                        <span class="parallel-concept">Shift vs removal</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="view-all">
+                <a href="coachdx-case-library.html" class="view-all-btn">View All 28 Parallel Pairs →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-section">
+        <div class="how-inner">
+            <div class="how-header">
+                <h2>How Coaching Sessions Work</h2>
+                <p>A structured approach to building clinical reasoning skills</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <h4>Choose Your Case & Mentor</h4>
+                    <p>Select from 65+ cases and pick the teaching style that challenges you</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <h4>Present Your Approach</h4>
+                    <p>Share your differential, workup plan, and reasoning with your AI mentor</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <h4>Get Coached</h4>
+                    <p>Receive Socratic questions that probe your reasoning and reveal blind spots</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <h4>Test Transfer</h4>
+                    <p>Apply what you learned on a parallel case to solidify understanding</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Cases Preview -->
+    <div class="main">
+        <section class="cases-section">
+            <div class="section-header">
+                <h2>Featured Cases</h2>
+                <p>A sample of clinical scenarios across specialties—each with Socratic coaching from your chosen mentor</p>
+            </div>
+            <div class="case-grid">
+                <a href="coachdx-mentor-chat.html?case=sepsis-urosepsis" class="case-card has-parallel">
+                    <div class="case-header">
+                        <div class="case-icon">🔥</div>
+                        <div>
+                            <div class="case-title">Septic Shock</div>
+                            <div class="case-category">Critical Care</div>
+                        </div>
+                    </div>
+                    <p class="case-desc">78-year-old with confusion, fever, hypotension. Practice the Hour-1 bundle and vasopressor selection.</p>
+                    <div class="case-meta">
+                        <span>⏱️ 25 min</span>
+                        <span class="case-badge">Has Parallel</span>
+                    </div>
+                </a>
+                
+                <a href="coachdx-mentor-chat.html?case=headache-sah" class="case-card has-parallel">
+                    <div class="case-header">
+                        <div class="case-icon">🧠</div>
+                        <div>
+                            <div class="case-title">Thunderclap Headache</div>
+                            <div class="case-category">Neurology</div>
+                        </div>
+                    </div>
+                    <p class="case-desc">Sudden severe headache, "worst of life." Don't miss subarachnoid hemorrhage.</p>
+                    <div class="case-meta">
+                        <span>⏱️ 20 min</span>
+                        <span class="case-badge">Has Parallel</span>
+                    </div>
+                </a>
+                
+                <a href="coachdx-mentor-chat.html?case=dka" class="case-card has-parallel">
+                    <div class="case-header">
+                        <div class="case-icon">🍬</div>
+                        <div>
+                            <div class="case-title">DKA</div>
+                            <div class="case-category">Endocrine</div>
+                        </div>
+                    </div>
+                    <p class="case-desc">22-year-old T1DM with Kussmaul breathing, anion gap 28. Fluid, insulin, and K+ management.</p>
+                    <div class="case-meta">
+                        <span>⏱️ 25 min</span>
+                        <span class="case-badge">Has Parallel</span>
+                    </div>
+                </a>
+                
+                <a href="coachdx-mentor-chat.html?case=gi-bleed-upper" class="case-card has-parallel">
+                    <div class="case-header">
+                        <div class="case-icon">🩸</div>
+                        <div>
+                            <div class="case-title">Upper GI Bleed</div>
+                            <div class="case-category">Gastroenterology</div>
+                        </div>
+                    </div>
+                    <p class="case-desc">Hematemesis with tachycardia. Glasgow-Blatchford score, PPI timing, and transfusion thresholds.</p>
+                    <div class="case-meta">
+                        <span>⏱️ 20 min</span>
+                        <span class="case-badge">Has Parallel</span>
+                    </div>
+                </a>
+                
+                <a href="coachdx-mentor-chat.html?case=syncope-cardiac" class="case-card">
+                    <div class="case-header">
+                        <div class="case-icon">💫</div>
+                        <div>
+                            <div class="case-title">Syncope Workup</div>
+                            <div class="case-category">Cardiovascular</div>
+                        </div>
+                    </div>
+                    <p class="case-desc">Exertional syncope in 45-year-old. High-risk features and structured evaluation.</p>
+                    <div class="case-meta">
+                        <span>⏱️ 20 min</span>
+                    </div>
+                </a>
+                
+                <a href="coachdx-mentor-chat.html?case=aki" class="case-card has-parallel">
+                    <div class="case-header">
+                        <div class="case-icon">💧</div>
+                        <div>
+                            <div class="case-title">Acute Kidney Injury</div>
+                            <div class="case-category">Nephrology</div>
+                        </div>
+                    </div>
+                    <p class="case-desc">Rising creatinine post-surgery. Pre-renal vs intrinsic vs post-renal workup with FENa.</p>
+                    <div class="case-meta">
+                        <span>⏱️ 20 min</span>
+                        <span class="case-badge">Has Parallel</span>
+                    </div>
+                </a>
+            </div>
+            <div class="view-all">
+                <a href="coachdx-case-library.html" class="view-all-btn">Browse All 65+ Cases →</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <h2>Ready to Think Like an Attending?</h2>
+        <p>Choose a case, pick your mentor, and start developing the clinical reasoning skills that separate great diagnosticians.</p>
+        <a href="coachdx-case-library.html" class="cta-btn">Start Your First Session</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="coachdx-case-library.html">Case Library</a>
+            <a href="reasondx-index.html">ReasonDx</a>
+            <a href="mechanismdx-index.html">MechanismDx</a>
+            <a href="unified-scoreboard.html">Progress Dashboard</a>
+        </div>
+        <p>© 2025-2026 CoachDx · Part of the <a href="dxsuite-index.html" class="brand">Dx Learning Ecosystem</a></p>
+        <p style="margin-top: 8px; font-size: 12px;">Created by Lauren Fine, MD, FAAAAI · Nova Southeastern University</p>
+    </footer>
+
+    <script>
+        function selectPersona(persona) {
+            // Remove selected from all cards
+            document.querySelectorAll('.persona-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Hide all detail panels
+            document.querySelectorAll('.persona-detail').forEach(detail => {
+                detail.classList.remove('show');
+            });
+            
+            // Add selected to clicked card
+            event.currentTarget.classList.add('selected');
+            
+            // Show corresponding detail panel
+            document.getElementById('detail-' + persona).classList.add('show');
+        }
+    </script>
+</body>
+</html>
