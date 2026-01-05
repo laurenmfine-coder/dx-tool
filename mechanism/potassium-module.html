@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Potassium Disorders | MechanismDx</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.6; }
+        
+        .header { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+        .header-inner { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: Georgia, serif; font-size: 22px; color: #1e293b; text-decoration: none; }
+        .logo span { color: #10b981; }
+        .nav { display: flex; gap: 20px; align-items: center; }
+        .nav a { color: #64748b; text-decoration: none; font-size: 14px; font-weight: 500; }
+        .nav a:hover { color: #10b981; }
+        
+        .hero { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fcd34d 100%); padding: 48px 24px; text-align: center; border-bottom: 1px solid #f59e0b; }
+        .hero-icon { font-size: 64px; margin-bottom: 16px; }
+        .hero h1 { font-size: 36px; font-weight: 700; margin-bottom: 12px; color: #1e293b; }
+        .hero h1 span { color: #d97706; }
+        .hero-subtitle { font-size: 18px; color: #78350f; max-width: 700px; margin: 0 auto 24px; }
+        .hero-meta { display: flex; justify-content: center; gap: 32px; flex-size: wrap; font-size: 14px; color: #92400e; }
+        
+        .progress-container { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 12px 24px; position: sticky; top: 60px; z-index: 99; }
+        .progress-inner { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; gap: 16px; }
+        .progress-bar { flex: 1; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #f59e0b, #d97706); border-radius: 4px; transition: width 0.3s; width: 0%; }
+        .progress-text { font-size: 13px; color: #64748b; min-width: 80px; text-align: right; }
+        
+        .main { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        
+        .section-header { display: flex; align-items: center; gap: 12px; margin: 48px 0 24px; padding-bottom: 12px; border-bottom: 2px solid #e2e8f0; }
+        .section-header:first-child { margin-top: 0; }
+        .section-icon { font-size: 28px; }
+        .section-title { font-size: 22px; font-weight: 700; color: #1e293b; }
+        .section-num { background: #f59e0b; color: white; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 12px; }
+        
+        .concept-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+        .concept-title { font-size: 17px; font-weight: 600; color: #1e293b; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .concept-content { font-size: 15px; color: #475569; }
+        .concept-content p { margin-bottom: 12px; }
+        .concept-content ul { margin: 12px 0; padding-left: 24px; }
+        .concept-content li { margin-bottom: 8px; }
+        
+        .pearl-box { background: #fef3c7; border-left: 4px solid #f59e0b; border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 20px 0; }
+        .pearl-title { font-weight: 600; color: #92400e; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .pearl-content { font-size: 14px; color: #78350f; }
+        
+        .danger-box { background: #fef2f2; border-left: 4px solid #dc2626; border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 20px 0; }
+        .danger-title { font-weight: 600; color: #991b1b; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .danger-content { font-size: 14px; color: #7f1d1d; }
+        
+        .algorithm-box { background: #f0fdf4; border: 2px solid #86efac; border-radius: 12px; padding: 24px; margin: 24px 0; }
+        .algorithm-title { font-weight: 700; color: #166534; margin-bottom: 16px; font-size: 16px; display: flex; align-items: center; gap: 10px; }
+        .algorithm-steps { display: flex; flex-direction: column; gap: 12px; }
+        .algorithm-step { display: flex; align-items: flex-start; gap: 12px; padding: 12px; background: white; border-radius: 8px; }
+        .step-num { background: #22c55e; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; flex-shrink: 0; }
+        .step-content { flex: 1; }
+        .step-title { font-weight: 600; color: #1e293b; margin-bottom: 4px; }
+        .step-desc { font-size: 13px; color: #64748b; }
+        
+        .mnemonic-box { background: #fef3c7; border: 2px solid #fcd34d; border-radius: 12px; padding: 24px; margin: 24px 0; text-align: center; }
+        .mnemonic-title { font-weight: 700; color: #92400e; margin-bottom: 12px; font-size: 16px; }
+        .mnemonic-word { font-family: Georgia, serif; font-size: 32px; color: #78350f; letter-spacing: 4px; margin-bottom: 16px; }
+        .mnemonic-breakdown { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
+        .mnemonic-item { background: white; padding: 10px 16px; border-radius: 8px; }
+        .mnemonic-letter { font-weight: 700; color: #d97706; font-size: 18px; }
+        .mnemonic-meaning { font-size: 13px; color: #64748b; }
+        
+        .formula-box { background: #f0fdf4; border: 2px solid #86efac; border-radius: 12px; padding: 24px; margin: 24px 0; text-align: center; }
+        .formula-title { font-weight: 600; color: #166534; margin-bottom: 12px; }
+        .formula-content { font-family: 'Courier New', monospace; font-size: 20px; color: #1e293b; background: white; padding: 16px; border-radius: 8px; display: inline-block; }
+        .formula-note { font-size: 13px; color: #64748b; margin-top: 12px; }
+        
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .comparison-table th { background: #f1f5f9; padding: 12px 16px; text-align: left; font-weight: 600; color: #1e293b; border: 1px solid #e2e8f0; }
+        .comparison-table td { padding: 12px 16px; border: 1px solid #e2e8f0; color: #475569; vertical-align: top; }
+        .comparison-table tr:nth-child(even) { background: #f8fafc; }
+        .table-label { font-weight: 600; color: #1e293b; }
+        
+        .ecg-box { background: #fef2f2; border: 2px solid #fca5a5; border-radius: 12px; padding: 24px; margin: 24px 0; }
+        .ecg-title { font-weight: 700; color: #991b1b; margin-bottom: 16px; font-size: 16px; display: flex; align-items: center; gap: 10px; }
+        .ecg-content { font-size: 14px; color: #7f1d1d; }
+        .ecg-stages { display: grid; gap: 12px; margin-top: 16px; }
+        .ecg-stage { background: white; padding: 16px; border-radius: 8px; border-left: 4px solid #dc2626; }
+        .ecg-stage-title { font-weight: 600; color: #1e293b; margin-bottom: 4px; }
+        .ecg-stage-k { font-size: 12px; color: #dc2626; font-weight: 600; margin-bottom: 8px; }
+        .ecg-stage-desc { font-size: 13px; color: #64748b; }
+        
+        .quiz-section { background: #ede9fe; border-radius: 16px; padding: 32px; margin: 32px 0; }
+        .quiz-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+        .quiz-icon { font-size: 32px; }
+        .quiz-title { font-size: 20px; font-weight: 700; color: #5b21b6; }
+        .quiz-subtitle { font-size: 14px; color: #7c3aed; }
+        
+        .quiz-question { background: white; border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+        .question-num { font-size: 12px; font-weight: 600; color: #8b5cf6; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .question-text { font-size: 16px; font-weight: 500; color: #1e293b; margin-bottom: 16px; line-height: 1.5; }
+        .question-stem { font-size: 14px; color: #475569; margin-bottom: 16px; line-height: 1.6; padding: 12px; background: #f8fafc; border-radius: 8px; }
+        
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 10px; cursor: pointer; transition: all 0.2s; }
+        .option:hover { border-color: #8b5cf6; background: #faf5ff; }
+        .option.selected { border-color: #8b5cf6; background: #faf5ff; }
+        .option.correct { border-color: #22c55e; background: #f0fdf4; }
+        .option.incorrect { border-color: #ef4444; background: #fef2f2; }
+        .option-letter { width: 28px; height: 28px; border-radius: 50%; background: #e2e8f0; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px; color: #64748b; flex-shrink: 0; }
+        .option.selected .option-letter { background: #8b5cf6; color: white; }
+        .option.correct .option-letter { background: #22c55e; color: white; }
+        .option.incorrect .option-letter { background: #ef4444; color: white; }
+        .option-text { font-size: 14px; color: #475569; }
+        
+        .explanation { display: none; margin-top: 16px; padding: 16px; background: #f0fdf4; border-radius: 8px; border-left: 4px solid #22c55e; }
+        .explanation.show { display: block; }
+        .explanation-title { font-weight: 600; color: #166534; margin-bottom: 8px; }
+        .explanation-text { font-size: 14px; color: #15803d; line-height: 1.6; }
+        
+        .check-btn { background: #8b5cf6; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; margin-top: 16px; }
+        .check-btn:hover { background: #7c3aed; }
+        .check-btn:disabled { background: #c4b5fd; cursor: not-allowed; }
+        
+        .crosslink-section { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin: 32px 0; }
+        .crosslink-title { font-size: 16px; font-weight: 600; color: #1e293b; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+        .crosslink-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+        .crosslink-item { display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; text-decoration: none; color: inherit; transition: all 0.2s; }
+        .crosslink-item:hover { border-color: #10b981; background: #f0fdf4; }
+        .crosslink-icon { font-size: 20px; }
+        .crosslink-text { font-size: 13px; color: #475569; }
+        .crosslink-platform { font-size: 11px; color: #94a3b8; }
+        
+        .module-complete { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 2px solid #86efac; border-radius: 16px; padding: 40px; margin: 48px 0; text-align: center; }
+        .complete-icon { font-size: 64px; margin-bottom: 16px; }
+        .complete-title { font-size: 24px; font-weight: 700; color: #166534; margin-bottom: 12px; }
+        .complete-subtitle { font-size: 15px; color: #15803d; margin-bottom: 24px; max-width: 500px; margin-left: auto; margin-right: auto; }
+        .complete-stats { display: flex; justify-content: center; gap: 32px; margin-bottom: 24px; }
+        .complete-stat-num { font-size: 28px; font-weight: 700; color: #22c55e; }
+        .complete-stat-label { font-size: 12px; color: #64748b; }
+        .complete-btn { display: inline-block; background: #22c55e; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; }
+        .complete-btn:hover { background: #16a34a; }
+        
+        .footer { border-top: 1px solid #e2e8f0; padding: 32px 24px; text-align: center; color: #64748b; font-size: 13px; background: #fff; margin-top: 48px; }
+        .footer a { color: #10b981; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <a href="mechanismdx-index.html" class="logo">Mechanism<span>Dx</span></a>
+            <nav class="nav">
+                <a href="mechanismdx-index.html">← All Modules</a>
+                <a href="reasondx-index.html">ReasonDx</a>
+                <a href="coachdx-index.html">CoachDx</a>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-icon">⚡</div>
+        <h1>Potassium <span>Disorders</span></h1>
+        <p class="hero-subtitle">Master the workup of hypo- and hyperkalemia, recognize life-threatening ECG changes, and understand the cellular mechanisms that make potassium so dangerous.</p>
+        <div class="hero-meta">
+            <span>📚 14 concepts</span>
+            <span>❓ 12 MCQs</span>
+            <span>⏱️ ~35 min</span>
+            <span>🎯 Renal/Electrolytes</span>
+        </div>
+    </section>
+    
+    <div class="progress-container">
+        <div class="progress-inner">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">0% complete</div>
+        </div>
+    </div>
+    
+    <main class="main">
+        <!-- Section 1: Potassium Physiology -->
+        <div class="section-header">
+            <span class="section-num">1</span>
+            <span class="section-icon">🔬</span>
+            <span class="section-title">Potassium Physiology & Homeostasis</span>
+        </div>
+        
+        <div class="concept-card">
+            <div class="concept-title">📊 Normal Potassium Distribution</div>
+            <div class="concept-content">
+                <p>Total body potassium is approximately <strong>50 mEq/kg</strong> (about 3500 mEq in a 70 kg adult):</p>
+                <ul>
+                    <li><strong>98% intracellular</strong> (primarily in muscle, concentration ~140 mEq/L)</li>
+                    <li><strong>2% extracellular</strong> (serum K+ = 3.5-5.0 mEq/L)</li>
+                </ul>
+                <p>This 30-40:1 gradient is maintained by the <strong>Na+/K+-ATPase pump</strong>, which moves 3 Na+ out and 2 K+ into cells. Even small shifts between compartments can dramatically change serum K+!</p>
+            </div>
+        </div>
+        
+        <div class="pearl-box">
+            <div class="pearl-title">💡 Clinical Pearl</div>
+            <div class="pearl-content">
+                A serum K+ of 3.0 mEq/L typically represents a <strong>200-400 mEq total body deficit</strong>. Don't be fooled by the small numerical change—the intracellular reservoir is massive.
+            </div>
+        </div>
+        
+        <div class="concept-card">
+            <div class="concept-title">⚖️ Potassium Balance: Input vs Output</div>
+            <div class="concept-content">
+                <p><strong>Daily intake:</strong> ~40-100 mEq/day from diet</p>
+                <p><strong>Excretion:</strong></p>
+                <ul>
+                    <li><strong>Kidney (90%):</strong> Primary regulator. K+ freely filtered at glomerulus, most reabsorbed in PCT/loop, secreted in collecting duct under aldosterone control.</li>
+                    <li><strong>GI tract (10%):</strong> Normally minor, but colonic secretion upregulates in CKD ("gut adaptation").</li>
+                    <li><strong>Sweat:</strong> Usually negligible except in extreme exercise/heat.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="concept-card">
+            <div class="concept-title">🔄 Transcellular Shifts: Acute K+ Changes</div>
+            <div class="concept-content">
+                <p>These cause rapid changes in serum K+ without affecting total body stores:</p>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>K+ INTO Cells (↓ Serum K+)</th>
+                            <th>K+ OUT OF Cells (↑ Serum K+)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Insulin</td>
+                            <td>Insulin deficiency (DKA)</td>
+                        </tr>
+                        <tr>
+                            <td>β2-agonists (albuterol)</td>
+                            <td>β-blockers</td>
+                        </tr>
+                        <tr>
+                            <td>Alkalosis</td>
+                            <td>Acidosis (mineral > organic)</td>
+                        </tr>
+                        <tr>
+                            <td>Catecholamine surge</td>
+                            <td>Hyperosmolality (glucose drags water & K+)</td>
+                        </tr>
+                        <tr>
+                            <td>Hypothermia (rewarming → K+ drops!)</td>
+                            <td>Cell lysis (rhabdo, tumor lysis, hemolysis)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="danger-box">
+            <div class="danger-title">⚠️ DKA Potassium Trap</div>
+            <div class="danger-content">
+                Patients in DKA often present with <strong>high or normal serum K+ despite severe total body depletion</strong>. Insulin deficiency + acidosis shift K+ out of cells. Once insulin is given and acidosis corrects, K+ plummets. Always check K+ before starting insulin and replace aggressively!
+            </div>
+        </div>
+        
+        <!-- Section 2: Hyperkalemia -->
+        <div class="section-header">
+            <span class="section-num">2</span>
+            <span class="section-icon">⬆️</span>
+            <span class="section-title">Hyperkalemia: When K+ Is Too High</span>
+        </div>
+        
+        <div class="concept-card">
+            <div class="concept-title">📋 Hyperkalemia Definition & Causes</div>
+            <div class="concept-content">
+                <p><strong>Hyperkalemia:</strong> K+ > 5.0 mEq/L. Life-threatening when K+ > 6.5 or ECG changes present.</p>
+                <p>Organized by mechanism:</p>
+                <ul>
+                    <li><strong>Increased intake:</strong> Rare as sole cause unless impaired excretion. Watch K+ supplements, salt substitutes, massive transfusion.</li>
+                    <li><strong>Decreased excretion:</strong> Most common!
+                        <ul>
+                            <li>Kidney failure (acute or chronic)</li>
+                            <li>Hypoaldosteronism (Addison's, Type 4 RTA)</li>
+                            <li>Medications: ACEi/ARBs, K+-sparing diuretics, TMP-SMX, NSAIDs, heparin</li>
+                        </ul>
+                    </li>
+                    <li><strong>Transcellular shift:</strong> Acidosis, insulin deficiency, β-blockers, cell lysis (rhabdo, TLS, hemolysis), succinylcholine, digoxin toxicity</li>
+                    <li><strong>Pseudohyperkalemia:</strong> Hemolyzed sample, prolonged tourniquet, severe leukocytosis/thrombocytosis</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="ecg-box">
+            <div class="ecg-title">💓 ECG Changes in Hyperkalemia (Progressive)</div>
+            <div class="ecg-content">
+                <p>Hyperkalemia causes progressive conduction abnormalities. Memorize this sequence!</p>
+            </div>
+            <div class="ecg-stages">
+                <div class="ecg-stage">
+                    <div class="ecg-stage-title">Stage 1: Peaked T Waves</div>
+                    <div class="ecg-stage-k">K+ 5.5-6.5 mEq/L</div>
+                    <div class="ecg-stage-desc">Tall, narrow, symmetric T waves ("tenting"). Best seen in precordial leads. Often the earliest sign.</div>
+                </div>
+                <div class="ecg-stage">
+                    <div class="ecg-stage-title">Stage 2: PR Prolongation & P Wave Flattening</div>
+                    <div class="ecg-stage-k">K+ 6.5-7.5 mEq/L</div>
+                    <div class="ecg-stage-desc">P waves flatten and may disappear. PR interval lengthens. Atrial standstill may occur.</div>
+                </div>
+                <div class="ecg-stage">
+                    <div class="ecg-stage-title">Stage 3: QRS Widening</div>
+                    <div class="ecg-stage-k">K+ 7.0-8.0 mEq/L</div>
+                    <div class="ecg-stage-desc">Intraventricular conduction delay. QRS widens progressively. May see bundle branch block patterns.</div>
+                </div>
+                <div class="ecg-stage">
+                    <div class="ecg-stage-title">Stage 4: Sine Wave → V-Fib/Asystole</div>
+                    <div class="ecg-stage-k">K+ > 8.0 mEq/L</div>
+                    <div class="ecg-stage-desc">QRS merges with T wave creating "sine wave" pattern. Imminent risk of V-fib or asystole. EMERGENCY!</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="pearl-box">
+            <div class="pearl-title">💡 Clinical Pearl</div>
+            <div class="pearl-content">
+                ECG changes don't always correlate with K+ level—chronic hyperkalemia may have minimal ECG changes while acute rises at lower levels can cause severe conduction abnormalities. <strong>Treat the ECG, not just the number!</strong>
+            </div>
+        </div>
+        
+        <div class="algorithm-box">
+            <div class="algorithm-title">🚀 Emergency Hyperkalemia Management</div>
+            <div class="algorithm-steps">
+                <div class="algorithm-step">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <div class="step-title">Stabilize the Membrane (Immediate)</div>
+                        <div class="step-desc"><strong>Calcium gluconate 1-2g IV</strong> over 2-3 min. Onset: 1-3 min, duration ~30-60 min. Does NOT lower K+ but prevents arrhythmias. Repeat if ECG doesn't improve. Use calcium chloride (3x more elemental Ca) if central line available.</div>
+                    </div>
+                </div>
+                <div class="algorithm-step">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <div class="step-title">Shift K+ Into Cells</div>
+                        <div class="step-desc"><strong>Regular insulin 10 units IV + D50 25g</strong> (unless glucose >250). Onset: 15-30 min, lasts 4-6 hrs, drops K+ 0.5-1.5 mEq/L. Also: <strong>albuterol 10-20 mg nebulized</strong> (drops K+ 0.5-1.0). <strong>Sodium bicarbonate</strong> only if significant acidosis.</div>
+                    </div>
+                </div>
+                <div class="algorithm-step">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Remove K+ From Body</div>
+                        <div class="step-desc"><strong>Loop diuretics</strong> (furosemide 40-80 mg IV) if adequate urine output. <strong>Kayexalate/patiromer/SZC</strong> for GI elimination (hours to work). <strong>Hemodialysis</strong> for severe/refractory cases or renal failure.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mnemonic-box">
+            <div class="mnemonic-title">Hyperkalemia Treatment Order</div>
+            <div class="mnemonic-word">C-BIG-K-D</div>
+            <div class="mnemonic-breakdown">
+                <div class="mnemonic-item">
+                    <span class="mnemonic-letter">C</span>
+                    <span class="mnemonic-meaning">Calcium</span>
+                </div>
+                <div class="mnemonic-item">
+                    <span class="mnemonic-letter">B</span>
+                    <span class="mnemonic-meaning">Bicarb (if acidotic)</span>
+                </div>
+                <div class="mnemonic-item">
+                    <span class="mnemonic-letter">I</span>
+                    <span class="mnemonic-meaning">Insulin + Glucose</span>
+                </div>
+                <div class="mnemonic-item">
+                    <span class="mnemonic-letter">G</span>
+                    <span class="mnemonic-meaning">β-aGonist</span>
+                </div>
+                <div class="mnemonic-item">
+                    <span class="mnemonic-letter">K</span>
+                    <span class="mnemonic-meaning">Kayexalate (binders)</span>
+                </div>
+                <div class="mnemonic-item">
+                    <span class="mnemonic-letter">D</span>
+                    <span class="mnemonic-meaning">Dialysis</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Section 3: Hypokalemia -->
+        <div class="section-header">
+            <span class="section-num">3</span>
+            <span class="section-icon">⬇️</span>
+            <span class="section-title">Hypokalemia: When K+ Is Too Low</span>
+        </div>
+        
+        <div class="concept-card">
+            <div class="concept-title">📋 Hypokalemia Definition & Causes</div>
+            <div class="concept-content">
+                <p><strong>Hypokalemia:</strong> K+ < 3.5 mEq/L. Severe when K+ < 2.5 mEq/L.</p>
+                <p>Organized by mechanism:</p>
+                <ul>
+                    <li><strong>Decreased intake:</strong> Anorexia, severe malnutrition (usually contributing, not sole cause)</li>
+                    <li><strong>GI losses:</strong> Vomiting (actually more metabolic alkalosis → renal wasting), diarrhea (direct K+ loss), laxative abuse, villous adenoma</li>
+                    <li><strong>Renal losses:</strong>
+                        <ul>
+                            <li>Diuretics (loop, thiazide)</li>
+                            <li>Hyperaldosteronism (primary or secondary)</li>
+                            <li>Hypomagnesemia (impairs K+ reabsorption)</li>
+                            <li>RTA Type 1 and 2</li>
+                            <li>Bartter and Gitelman syndromes</li>
+                        </ul>
+                    </li>
+                    <li><strong>Transcellular shift:</strong> Insulin, β-agonists, alkalosis, refeeding syndrome, hypokalemic periodic paralysis</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="formula-box">
+            <div class="formula-title">Urine K+ Helps Identify the Cause</div>
+            <div class="formula-content">
+                Urine K+ > 20 mEq/L = Renal Wasting<br>
+                Urine K+ < 20 mEq/L = Extrarenal Loss
+            </div>
+            <div class="formula-note">Check spot urine K+ or 24-hour collection. TTKG (transtubular K gradient) can also help but requires specific conditions.</div>
+        </div>
+        
+        <div class="concept-card">
+            <div class="concept-title">💓 ECG Changes in Hypokalemia</div>
+            <div class="concept-content">
+                <p>Hypokalemia prolongs repolarization:</p>
+                <ul>
+                    <li><strong>T wave flattening/inversion</strong></li>
+                    <li><strong>U waves</strong> (small positive deflection after T wave)</li>
+                    <li><strong>ST depression</strong></li>
+                    <li><strong>QT prolongation</strong> (actually QU prolongation)</li>
+                    <li><strong>Increased risk:</strong> Premature ventricular contractions, torsades de pointes, V-fib (especially with digoxin!)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="danger-box">
+            <div class="danger-title">⚠️ Digoxin + Hypokalemia = Disaster</div>
+            <div class="danger-content">
+                Hypokalemia potentiates digoxin toxicity! Both compete for the Na+/K+-ATPase. Low K+ enhances digoxin binding → increased risk of fatal arrhythmias. Always maintain K+ > 4.0 in patients on digoxin.
+            </div>
+        </div>
+        
+        <div class="concept-card">
+            <div class="concept-title">💊 Hypokalemia Treatment</div>
+            <div class="concept-content">
+                <p><strong>Replacement principles:</strong></p>
+                <ul>
+                    <li><strong>Oral preferred</strong> when possible (KCl 40-80 mEq/day in divided doses)</li>
+                    <li><strong>IV for severe</strong> (K+ < 2.5 or symptomatic/ECG changes):
+                        <ul>
+                            <li>Max rate: 10-20 mEq/hr through peripheral IV</li>
+                            <li>Up to 40 mEq/hr through central line with cardiac monitoring</li>
+                            <li>Concentration: Max 40 mEq/L peripheral, up to 80 mEq/L central</li>
+                        </ul>
+                    </li>
+                    <li><strong>Check and replace magnesium first!</strong> Hypomagnesemia causes refractory hypokalemia.</li>
+                    <li><strong>Estimate:</strong> For each 1 mEq/L decrease in serum K+, total body deficit is 200-400 mEq</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="pearl-box">
+            <div class="pearl-title">💡 The Magnesium Connection</div>
+            <div class="pearl-content">
+                Up to 50% of hypokalemic patients are also hypomagnesemic. Low Mg2+ keeps ROMK channels open in the collecting duct, causing persistent K+ wasting. <strong>If K+ won't correct despite replacement, check Mg2+ and replete to >2.0 mg/dL!</strong>
+            </div>
+        </div>
+        
+        <!-- Section 4: Special Scenarios -->
+        <div class="section-header">
+            <span class="section-num">4</span>
+            <span class="section-icon">🎯</span>
+            <span class="section-title">Special Clinical Scenarios</span>
+        </div>
+        
+        <div class="concept-card">
+            <div class="concept-title">🧂 Hypokalemia + Hypertension: Think Aldosterone</div>
+            <div class="concept-content">
+                <p>This combination suggests mineralocorticoid excess:</p>
+                <ul>
+                    <li><strong>Primary hyperaldosteronism</strong> (Conn's syndrome, bilateral adrenal hyperplasia) - most common cause of secondary HTN</li>
+                    <li><strong>Renovascular hypertension</strong> (activates RAAS)</li>
+                    <li><strong>Cushing syndrome</strong> (cortisol has mineralocorticoid activity)</li>
+                    <li><strong>Liddle syndrome</strong> (constitutively active ENaC)</li>
+                    <li><strong>Licorice ingestion</strong> (inhibits 11β-HSD2 → cortisol acts on MR)</li>
+                </ul>
+                <p>Workup: Check aldosterone and renin levels. High aldo + low renin = primary hyperaldosteronism.</p>
+            </div>
+        </div>
+        
+        <div class="concept-card">
+            <div class="concept-title">💧 Hypokalemia + Metabolic Alkalosis</div>
+            <div class="concept-content">
+                <p>These two often travel together:</p>
+                <ul>
+                    <li><strong>Vomiting:</strong> Loss of H+ → alkalosis. Volume depletion activates RAAS → Na+ retention at expense of K+. Also, alkalosis itself causes K+ shift into cells.</li>
+                    <li><strong>Diuretics:</strong> Volume contraction + direct K+ wasting.</li>
+                    <li><strong>The chloride story:</strong> Low Cl- from vomiting means the kidney can't excrete HCO3- properly (needs Cl- for electroneutrality). Urine Cl- helps: <20 = chloride-responsive (give saline), >20 = chloride-resistant (think hyperaldosteronism).</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="concept-card">
+            <div class="concept-title">🔥 Rhabdomyolysis & Potassium</div>
+            <div class="concept-content">
+                <p>Muscle breakdown releases massive intracellular K+ stores:</p>
+                <ul>
+                    <li>Can cause severe hyperkalemia within hours</li>
+                    <li>Risk factors: trauma, crush injury, prolonged immobilization, statins, extreme exercise</li>
+                    <li>Also releases myoglobin (causes AKI) and phosphorus (binds calcium)</li>
+                    <li>Treatment: Aggressive IV fluids (200-300 mL/hr), treat hyperkalemia, may need dialysis</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Quiz Section -->
+        <div class="quiz-section">
+            <div class="quiz-header">
+                <span class="quiz-icon">🧠</span>
+                <div>
+                    <div class="quiz-title">Knowledge Check: Potassium Disorders</div>
+                    <div class="quiz-subtitle">Test your understanding of K+ physiology and management</div>
+                </div>
+            </div>
+            
+            <!-- Question 1 -->
+            <div class="quiz-question" data-correct="B">
+                <div class="question-num">Question 1 of 12</div>
+                <div class="question-text">A 58-year-old man with CKD stage 4 presents with weakness. K+ is 7.2 mEq/L. ECG shows peaked T waves and QRS widening. What is the FIRST intervention?</div>
+                <div class="options">
+                    <div class="option" data-answer="A"><span class="option-letter">A</span><span class="option-text">Regular insulin 10 units IV + D50</span></div>
+                    <div class="option" data-answer="B"><span class="option-letter">B</span><span class="option-text">Calcium gluconate 1-2g IV</span></div>
+                    <div class="option" data-answer="C"><span class="option-letter">C</span><span class="option-text">Emergent hemodialysis</span></div>
+                    <div class="option" data-answer="D"><span class="option-letter">D</span><span class="option-text">Sodium polystyrene sulfonate 30g</span></div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text"><strong>Calcium gluconate</strong> is always first when ECG changes are present. It stabilizes the cardiac membrane within 1-3 minutes, reducing arrhythmia risk. It does NOT lower K+ but buys time for other interventions. Insulin/glucose shifts K+ into cells (takes 15-30 min). Dialysis removes K+ but takes time to arrange. Kayexalate works over hours.</div>
+                </div>
+            </div>
+            
+            <!-- Question 2 -->
+            <div class="quiz-question" data-correct="C">
+                <div class="question-num">Question 2 of 12</div>
+                <div class="question-stem">A patient in DKA presents with glucose 650 mg/dL, pH 7.15, and K+ 5.8 mEq/L.</div>
+                <div class="question-text">What is the BEST interpretation of this potassium level?</div>
+                <div class="options">
+                    <div class="option" data-answer="A"><span class="option-letter">A</span><span class="option-text">True hyperkalemia requiring immediate treatment before insulin</span></div>
+                    <div class="option" data-answer="B"><span class="option-letter">B</span><span class="option-text">Normal potassium, no concerns</span></div>
+                    <div class="option" data-answer="C"><span class="option-letter">C</span><span class="option-text">Apparent hyperkalemia masking total body potassium depletion</span></div>
+                    <div class="option" data-answer="D"><span class="option-letter">D</span><span class="option-text">Pseudohyperkalemia from hemolyzed sample</span></div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">In DKA, <strong>serum K+ is often elevated despite severe total body depletion</strong>. Insulin deficiency prevents K+ entry into cells, acidosis shifts K+ out, and hyperosmolality causes solvent drag. Once you give insulin and correct acidosis, K+ will plummet. This is why we check K+ before starting insulin and add K+ to IV fluids once K+ < 5.2 mEq/L—to prevent life-threatening hypokalemia!</div>
+                </div>
+            </div>
+            
+            <!-- Question 3 -->
+            <div class="quiz-question" data-correct="A">
+                <div class="question-num">Question 3 of 12</div>
+                <div class="question-text">Which ECG finding is the EARLIEST sign of hyperkalemia?</div>
+                <div class="options">
+                    <div class="option" data-answer="A"><span class="option-letter">A</span><span class="option-text">Peaked T waves</span></div>
+                    <div class="option" data-answer="B"><span class="option-letter">B</span><span class="option-text">QRS widening</span></div>
+                    <div class="option" data-answer="C"><span class="option-letter">C</span><span class="option-text">Sine wave pattern</span></div>
+                    <div class="option" data-answer="D"><span class="option-letter">D</span><span class="option-text">Absent P waves</span></div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text"><strong>Peaked T waves</strong> (tall, narrow, symmetric) appear first, typically at K+ 5.5-6.5 mEq/L. The progression is: Peaked T → PR prolongation/P wave flattening → QRS widening → Sine wave → V-fib/asystole. Recognizing peaked T waves early allows intervention before more dangerous conduction abnormalities develop.</div>
+                </div>
+            </div>
+            
+            <!-- Question 4 -->
+            <div class="quiz-question" data-correct="D">
+                <div class="question-num">Question 4 of 12</div>
+                <div class="question-text">A patient has persistent hypokalemia (K+ 2.8 mEq/L) despite aggressive oral and IV potassium replacement over 3 days. What should you check next?</div>
+                <div class="options">
+                    <div class="option" data-answer="A"><span class="option-letter">A</span><span class="option-text">Serum phosphorus</span></div>
+                    <div class="option" data-answer="B"><span class="option-letter">B</span><span class="option-text">Serum calcium</span></div>
+                    <div class="option" data-answer="C"><span class="option-letter">C</span><span class="option-text">Serum sodium</span></div>
+                    <div class="option" data-answer="D"><span class="option-letter">D</span><span class="option-text">Serum magnesium</span></div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text"><strong>Hypomagnesemia causes refractory hypokalemia!</strong> Low Mg2+ keeps ROMK channels in the collecting duct constitutively open, leading to ongoing K+ wasting. Up to 50% of hypokalemic patients are also Mg-depleted. Always check and replete Mg2+ to >2.0 mg/dL when K+ won't correct despite adequate replacement.</div>
+                </div>
+            </div>
+            
+            <!-- Question 5 -->
+            <div class="quiz-question" data-correct="B">
+                <div class="question-num">Question 5 of 12</div>
+                <div class="question-text">A 45-year-old woman has hypertension (BP 165/98) and K+ 2.9 mEq/L. She is not on diuretics. What is the most likely diagnosis?</div>
+                <div class="options">
+                    <div class="option" data-answer="A"><span class="option-letter">A</span><span class="option-text">Essential hypertension with poor diet</span></div>
+                    <div class="option" data-answer="B"><span class="option-letter">B</span><span class="option-text">Primary hyperaldosteronism</span></div>
+                    <div class="option" data-answer="C"><span class="option-letter">C</span><span class="option-text">Chronic kidney disease</span></div>
+                    <div class="option" data-answer="D"><span class="option-letter">D</span><span class="option-text">Pheochromocytoma</span></div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">The combination of <strong>hypertension + spontaneous hypokalemia</strong> (not on diuretics) is classic for primary hyperaldosteronism (Conn's syndrome or bilateral adrenal hyperplasia). Aldosterone causes Na+ retention (→ HTN) and K+ wasting. This is the most common cause of secondary hypertension! Workup: aldosterone/renin ratio. If aldo is high and renin is suppressed, consider adrenal CT and confirmatory testing.</div>
+                </div>
+            </div>
+            
+            <!-- Question 6 -->
+            <div class="quiz-question" data-correct="C">
+                <div class="question-num">Question 6 of 12</div>
+                <div class="question-text">Which medication does NOT typically cause hyperkalemia?</div>
+                <div class="options">
+                    <div class="option" data-answer="A"><span class="option-letter">A</span><span class="option-text">Lisinopril</span></div>
+                    <div class="option" data-answer="B"><span class="option-letter">B</span><span class="option-text">Spironolactone</span></div>
+                    <div class="option" data-answer="C"><span class="option-letter">C</span><span class="option-text">Furosemide</span></div>
+                    <div class="option" data-answer="D"><span class="option-letter">D</span><span class="option-text">Trimethoprim</span></div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text"><strong>Furosemide (a loop diuretic) causes hypoKalemia</strong>, not hyperkalemia—it increases K+ excretion in the thick ascending limb. The others all cause hyperkalemia: ACE inhibitors (lisinopril) reduce aldosterone; spironolactone blocks aldosterone receptor; trimethoprim blocks ENaC (similar to amiloride). These are important to remember when managing patients with CKD or on multiple medications.</div>
+                </div>
+            </div>
+            
+            <!-- Question 7 -->
+            <div class="quiz-question" data-correct="A">
+                <div class="question-num">Question 7 of 12</div>
+                <div class="question-stem">A patient receiving chemotherapy for lymphoma develops oliguria, K+ 7.0 mEq/L, phosphorus 8.5 mg/dL, calcium 6.2 mg/dL, and uric acid 14 mg/dL.</div>
+                <div class="question-text">What is the most likely cause of hyperkalemia?</div>
+                <div class="options">
+                    <div class="option" data-answer="A"><span class="option-letter">A</span><span class="option-text">Tumor lysis syndrome</span></div>
+                    <div class="option" data-answer="B"><span class="option-letter">B</span><span class="option-text">Chemotherapy-induced nephrotoxicity</span></div>
+                    <div class="option" data-answer="C"><span class="option-letter">C</span><span class="option-text">Adrenal insufficiency from metastases</span></div>
+                    <div class="option" data-answer="D"><span class="option-letter">D</span><span class="option-text">Type 4 RTA</span></div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">This is classic <strong>tumor lysis syndrome (TLS)</strong>: hyperkalemia, hyperphosphatemia, hypocalcemia, and hyperuricemia from rapid cell death. The phosphorus binds calcium (→ hypocalcemia). Uric acid and Ca-phos crystals cause AKI (→ oliguria worsens all electrolytes). TLS is most common with hematologic malignancies (leukemia, lymphoma) during initial chemotherapy. Prevention: aggressive hydration, rasburicase, allopurinol.</div>
+                </div>
+            </div>
+            
+            <!-- Question 8 -->
+            <div class="quiz-question" data-correct="D">
+                <div class="question-num">Question 8 of 12</div>
+                <div class="question-text">What percentage of total body potassium is located intracellularly?</div>
+                <div class="options">
+                    <div class="option" data-answer="A"><span class="option-letter">A</span><span class="option-text">50%</span></div>
+                    <div class="option" data-answer="B"><span class="option-letter">B</span><span class="option-text">75%</span></div>
+                    <div class="option" data-answer="C"><span class="option-letter">C</span><span class="option-text">90%</span></div>
+                    <div class="option" data-answer="D"><span class="option-letter">D</span><span class="option-text">98%</span></div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text"><strong>98% of total body K+</strong> is intracellular (primarily in muscle), with only 2% in the extracellular space. This is maintained by the Na+/K+-ATPase pump. This massive gradient explains why small transcellular shifts can dramatically change serum K+, and why a serum K+ of 3.0 represents a huge total body deficit (200-400 mEq).</div>
+                </div>
+            </div>
+            
+            <!-- Question 9 -->
+            <div class="quiz-question" data-correct="B">
+                <div class="question-num">Question 9 of 12</div>
+                <div class="question-text">A patient on digoxin develops K+ of 2.8 mEq/L. What is the PRIMARY concern?</div>
+                <div class="options">
+                    <div class="option" data-answer="A"><span class="option-letter">A</span><span class="option-text">Reduced digoxin efficacy</span></div>
+                    <div class="option" data-answer="B"><span class="option-letter">B</span><span class="option-text">Increased digoxin toxicity and arrhythmia risk</span></div>
+                    <div class="option" data-answer="C"><span class="option-letter">C</span><span class="option-text">Digoxin-induced hyperkalemia</span></div>
+                    <div class="option" data-answer="D"><span class="option-letter">D</span><span class="option-text">Need to increase digoxin dose</span></div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text"><strong>Hypokalemia potentiates digoxin toxicity!</strong> Both K+ and digoxin compete for binding sites on the Na+/K+-ATPase. Low K+ enhances digoxin's effect, increasing risk of fatal arrhythmias (especially ventricular). Always maintain K+ >4.0 mEq/L in patients on digoxin. Conversely, digoxin overdose can cause hyperkalemia by poisoning the pump.</div>
+                </div>
+            </div>
+            
+            <!-- Question 10 -->
+            <div class="quiz-question" data-correct="C">
+                <div class="question-num">Question 10 of 12</div>
+                <div class="question-text">A patient with severe hypokalemia (K+ 2.2 mEq/L) needs IV replacement. What is the maximum safe rate through a peripheral IV?</div>
+                <div class="options">
+                    <div class="option" data-answer="A"><span class="option-letter">A</span><span class="option-text">5 mEq/hour</span></div>
+                    <div class="option" data-answer="B"><span class="option-letter">B</span><span class="option-text">10 mEq/hour</span></div>
+                    <div class="option" data-answer="C"><span class="option-letter">C</span><span class="option-text">10-20 mEq/hour</span></div>
+                    <div class="option" data-answer="D"><span class="option-letter">D</span><span class="option-text">40 mEq/hour</span></div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">Through a <strong>peripheral IV, maximum rate is 10-20 mEq/hour</strong> with concentration ≤40 mEq/L. Higher concentrations cause pain and phlebitis. Through a central line with cardiac monitoring, you can give up to 40 mEq/hour at higher concentrations (up to 80 mEq/L). Always use cardiac monitoring when infusing K+ at rates >10 mEq/hour due to arrhythmia risk.</div>
+                </div>
+            </div>
+            
+            <!-- Question 11 -->
+            <div class="quiz-question" data-correct="A">
+                <div class="question-num">Question 11 of 12</div>
+                <div class="question-text">Which ECG finding is characteristic of hypokalemia?</div>
+                <div class="options">
+                    <div class="option" data-answer="A"><span class="option-letter">A</span><span class="option-text">U waves</span></div>
+                    <div class="option" data-answer="B"><span class="option-letter">B</span><span class="option-text">Peaked T waves</span></div>
+                    <div class="option" data-answer="C"><span class="option-letter">C</span><span class="option-text">Shortened QT interval</span></div>
+                    <div class="option" data-answer="D"><span class="option-letter">D</span><span class="option-text">Delta waves</span></div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">Hypokalemia causes: T wave flattening, <strong>U waves</strong> (small positive deflection after T wave), ST depression, and QT prolongation. These reflect delayed repolarization. Peaked T waves are seen in hyperkalemia. Delta waves indicate WPW syndrome. Hypokalemia prolongs (not shortens) the QT interval, increasing risk of torsades de pointes.</div>
+                </div>
+            </div>
+            
+            <!-- Question 12 -->
+            <div class="quiz-question" data-correct="D">
+                <div class="question-num">Question 12 of 12</div>
+                <div class="question-stem">A patient has vomiting for 3 days and presents with K+ 2.6 mEq/L and metabolic alkalosis (pH 7.52, HCO3 38).</div>
+                <div class="question-text">What is the mechanism of hypokalemia in this patient?</div>
+                <div class="options">
+                    <div class="option" data-answer="A"><span class="option-letter">A</span><span class="option-text">Direct K+ loss in vomit</span></div>
+                    <div class="option" data-answer="B"><span class="option-letter">B</span><span class="option-text">Decreased K+ intake</span></div>
+                    <div class="option" data-answer="C"><span class="option-letter">C</span><span class="option-text">Transcellular shift from acidosis</span></div>
+                    <div class="option" data-answer="D"><span class="option-letter">D</span><span class="option-text">Renal K+ wasting from volume depletion and alkalosis</span></div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">Gastric fluid actually contains little K+ (~10 mEq/L). The hypokalemia from vomiting is primarily due to <strong>renal K+ wasting</strong>: (1) Volume depletion activates RAAS → aldosterone causes Na+ retention at expense of K+; (2) Alkalosis shifts K+ into cells AND increases renal K+ secretion; (3) Bicarbonaturia (to compensate) obligates K+ loss. Treatment: Give normal saline (volume and chloride) along with K+ replacement.</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Cross-Links Section -->
+        <div class="crosslink-section">
+            <div class="crosslink-title">🔗 Related Modules & Cases</div>
+            <div class="crosslink-grid">
+                <a href="mechanismdx-aki-module.html" class="crosslink-item">
+                    <span class="crosslink-icon">💧</span>
+                    <div>
+                        <div class="crosslink-text">Acute Kidney Injury</div>
+                        <div class="crosslink-platform">MechanismDx</div>
+                    </div>
+                </a>
+                <a href="mechanismdx-acid-base-module.html" class="crosslink-item">
+                    <span class="crosslink-icon">⚗️</span>
+                    <div>
+                        <div class="crosslink-text">Acid-Base Disorders</div>
+                        <div class="crosslink-platform">MechanismDx</div>
+                    </div>
+                </a>
+                <a href="mechanismdx-diabetes-dka-module.html" class="crosslink-item">
+                    <span class="crosslink-icon">🍬</span>
+                    <div>
+                        <div class="crosslink-text">Diabetes & DKA</div>
+                        <div class="crosslink-platform">MechanismDx</div>
+                    </div>
+                </a>
+                <a href="mechanismdx-sepsis-shock-module.html" class="crosslink-item">
+                    <span class="crosslink-icon">🚨</span>
+                    <div>
+                        <div class="crosslink-text">Sepsis & Shock</div>
+                        <div class="crosslink-platform">MechanismDx</div>
+                    </div>
+                </a>
+                <a href="mechanismdx-syncope-arrhythmia-module.html" class="crosslink-item">
+                    <span class="crosslink-icon">💓</span>
+                    <div>
+                        <div class="crosslink-text">Syncope & Arrhythmias</div>
+                        <div class="crosslink-platform">MechanismDx</div>
+                    </div>
+                </a>
+                <a href="coachdx-index.html" class="crosslink-item">
+                    <span class="crosslink-icon">💬</span>
+                    <div>
+                        <div class="crosslink-text">Electrolyte Cases</div>
+                        <div class="crosslink-platform">CoachDx</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Module Complete -->
+        <div class="module-complete">
+            <div class="complete-icon">🏆</div>
+            <div class="complete-title">Module Complete!</div>
+            <div class="complete-subtitle">You've mastered potassium disorders—from cellular physiology to emergency management. The ECG changes and treatment algorithms are now in your toolkit.</div>
+            <div class="complete-stats">
+                <div class="complete-stat">
+                    <div class="complete-stat-num" id="scoreNum">0</div>
+                    <div class="complete-stat-label">Questions Correct</div>
+                </div>
+                <div class="complete-stat">
+                    <div class="complete-stat-num">14</div>
+                    <div class="complete-stat-label">Concepts Covered</div>
+                </div>
+                <div class="complete-stat">
+                    <div class="complete-stat-num">4</div>
+                    <div class="complete-stat-label">Clinical Pearls</div>
+                </div>
+            </div>
+            <a href="mechanismdx-index.html" class="complete-btn">Return to All Modules</a>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <p>© 2025-2026 MechanismDx · Part of the <a href="dxsuite-index.html">Dx Learning Ecosystem</a></p>
+        <p style="margin-top: 8px; font-size: 12px; color: #94a3b8;">Created by Lauren Fine, MD, FAAAAI · Nova Southeastern University</p>
+    </footer>
+    
+    <script>
+        let correctCount = 0;
+        let answeredCount = 0;
+        const totalQuestions = 12;
+        
+        function checkAnswer(btn) {
+            const questionDiv = btn.closest('.quiz-question');
+            const correctAnswer = questionDiv.dataset.correct;
+            const selectedOption = questionDiv.querySelector('.option.selected');
+            
+            if (!selectedOption) {
+                alert('Please select an answer first.');
+                return;
+            }
+            
+            const selectedAnswer = selectedOption.dataset.answer;
+            const explanation = questionDiv.querySelector('.explanation');
+            
+            questionDiv.querySelectorAll('.option').forEach(opt => {
+                opt.style.pointerEvents = 'none';
+            });
+            btn.disabled = true;
+            
+            if (selectedAnswer === correctAnswer) {
+                selectedOption.classList.add('correct');
+                correctCount++;
+            } else {
+                selectedOption.classList.add('incorrect');
+                questionDiv.querySelector(`[data-answer="${correctAnswer}"]`).classList.add('correct');
+            }
+            
+            answeredCount++;
+            explanation.classList.add('show');
+            updateProgress();
+            updateScore();
+        }
+        
+        function updateProgress() {
+            const progress = (answeredCount / totalQuestions) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = Math.round(progress) + '% complete';
+        }
+        
+        function updateScore() {
+            document.getElementById('scoreNum').textContent = correctCount + '/' + totalQuestions;
+        }
+        
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                const questionDiv = this.closest('.quiz-question');
+                questionDiv.querySelectorAll('.option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                this.classList.add('selected');
+            });
+        });
+    </script>
+</body>
+</html>

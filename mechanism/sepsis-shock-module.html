@@ -8,622 +8,1171 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Inter', system-ui, sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.6; }
+        
+        /* Header */
         .header { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
-        .header-inner { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-family: Georgia, serif; font-size: 24px; color: #1e293b; text-decoration: none; }
+        .header-inner { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: Georgia, serif; font-size: 22px; color: #1e293b; text-decoration: none; }
         .logo span { color: #10b981; }
-        .nav a { color: #64748b; text-decoration: none; font-size: 14px; font-weight: 500; margin-left: 20px; }
+        .nav { display: flex; gap: 20px; align-items: center; }
+        .nav a { color: #64748b; text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
         .nav a:hover { color: #10b981; }
-        .hero { background: linear-gradient(135deg, #fef2f2 0%, #fff5f5 50%, #fff 100%); border-bottom: 1px solid #e2e8f0; padding: 48px 24px; }
-        .hero-inner { max-width: 800px; margin: 0 auto; }
-        .hero-icon { font-size: 48px; margin-bottom: 16px; }
-        .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; color: #dc2626; }
-        .hero p { font-size: 16px; color: #64748b; margin-bottom: 24px; }
-        .hero-meta { display: flex; gap: 24px; flex-wrap: wrap; font-size: 14px; color: #64748b; }
-        .main { max-width: 800px; margin: 0 auto; padding: 48px 24px; }
-        .progress-bar { background: #e2e8f0; height: 8px; border-radius: 4px; margin-bottom: 32px; overflow: hidden; }
-        .progress-fill { background: #dc2626; height: 100%; width: 0%; transition: width 0.3s; }
-        .section { margin-bottom: 48px; }
-        .section-title { font-size: 20px; font-weight: 600; margin-bottom: 16px; color: #1e293b; }
-        .concept-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-bottom: 16px; }
-        .concept-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #1e293b; }
-        .concept-card p { color: #475569; font-size: 14px; margin-bottom: 12px; }
-        .concept-card ul { margin-left: 20px; color: #475569; font-size: 14px; }
-        .concept-card li { margin-bottom: 6px; }
-        .pathway-box { background: #fef2f2; border: 1px solid #fca5a5; border-radius: 12px; padding: 24px; margin-bottom: 16px; }
-        .pathway-box h3 { color: #dc2626; font-size: 16px; font-weight: 600; margin-bottom: 12px; }
-        .pathway-steps { display: flex; flex-direction: column; gap: 8px; }
-        .pathway-step { display: flex; align-items: center; gap: 12px; padding: 12px; background: #fff; border-radius: 8px; }
-        .step-num { width: 28px; height: 28px; background: #dc2626; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; flex-shrink: 0; }
-        .step-text { font-size: 14px; color: #1e293b; }
-        .comparison-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; background: #fff; }
-        .comparison-table th { background: #f1f5f9; padding: 12px; text-align: left; font-weight: 600; border-bottom: 2px solid #e2e8f0; }
-        .comparison-table td { padding: 12px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
-        .clinical-pearl { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 16px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-        .clinical-pearl h4 { font-size: 14px; font-weight: 600; color: #92400e; margin-bottom: 8px; }
-        .clinical-pearl p { font-size: 14px; color: #78350f; margin: 0; }
-        .danger-box { background: #fef2f2; border-left: 4px solid #dc2626; padding: 16px; border-radius: 0 8px 8px 0; margin: 16px 0; }
-        .danger-box h4 { font-size: 14px; font-weight: 600; color: #991b1b; margin-bottom: 8px; }
-        .danger-box p { font-size: 14px; color: #7f1d1d; margin: 0; }
-        .formula-box { background: #f0fdf4; border: 2px solid #86efac; border-radius: 12px; padding: 20px; margin: 16px 0; text-align: center; }
-        .formula-box h4 { color: #166534; font-size: 14px; font-weight: 600; margin-bottom: 12px; }
-        .formula { font-family: 'Courier New', monospace; font-size: 18px; color: #15803d; background: #fff; padding: 12px 20px; border-radius: 8px; display: inline-block; }
-        .mnemonic-box { background: #fef3c7; border: 2px solid #fcd34d; border-radius: 12px; padding: 20px; margin: 16px 0; }
-        .mnemonic-box h4 { color: #92400e; font-size: 14px; font-weight: 600; margin-bottom: 12px; }
-        .mnemonic { font-size: 16px; color: #78350f; font-weight: 600; }
-        .mnemonic span { color: #dc2626; }
-        .quiz-section { background: #fef2f2; border: 1px solid #fca5a5; border-radius: 12px; padding: 24px; margin: 24px 0; }
-        .quiz-section h3 { color: #991b1b; font-size: 16px; font-weight: 600; margin-bottom: 16px; }
-        .quiz-question { background: #fff; border-radius: 8px; padding: 20px; margin-bottom: 16px; }
-        .quiz-question > p { font-weight: 500; margin-bottom: 16px; color: #1e293b; }
-        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
-        .quiz-option { padding: 14px 16px; border: 2px solid #e2e8f0; border-radius: 8px; cursor: pointer; font-size: 14px; transition: all 0.15s; background: #fff; display: flex; align-items: flex-start; gap: 10px; }
-        .quiz-option:hover:not(.disabled) { border-color: #dc2626; background: #fef2f2; }
-        .quiz-option.correct { border-color: #10b981; background: #f0fdf4; }
-        .quiz-option.incorrect { border-color: #ef4444; background: #fef2f2; }
-        .quiz-option.disabled { cursor: default; opacity: 0.7; }
-        .option-letter { font-weight: 600; color: #64748b; min-width: 24px; }
-        .quiz-feedback { margin-top: 16px; padding: 16px; border-radius: 8px; font-size: 14px; display: none; }
-        .quiz-feedback.show { display: block; }
-        .quiz-feedback.correct { background: #f0fdf4; border: 1px solid #86efac; color: #166534; }
-        .quiz-feedback.incorrect { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; }
-        .cross-link { background: #dbeafe; border: 1px solid #93c5fd; border-radius: 12px; padding: 20px; margin: 24px 0; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-        .cross-link-icon { font-size: 32px; }
-        .cross-link-content { flex: 1; min-width: 200px; }
-        .cross-link-content h4 { font-size: 14px; font-weight: 600; color: #1e40af; margin-bottom: 4px; }
-        .cross-link-content p { font-size: 13px; color: #3b82f6; margin: 0; }
-        .cross-link-btn { padding: 10px 16px; background: #3b82f6; color: #fff; border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: 500; }
-        .footer { border-top: 1px solid #e2e8f0; padding: 32px 24px; text-align: center; color: #64748b; font-size: 13px; }
+        .back-link { display: flex; align-items: center; gap: 6px; color: #64748b; text-decoration: none; font-size: 14px; }
+        .back-link:hover { color: #10b981; }
+        
+        /* Hero Section */
+        .hero { background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 50%, #fecaca 100%); padding: 48px 24px; text-align: center; border-bottom: 1px solid #fca5a5; }
+        .hero-icon { font-size: 64px; margin-bottom: 16px; }
+        .hero h1 { font-size: 36px; font-weight: 700; margin-bottom: 12px; color: #1e293b; }
+        .hero h1 span { color: #dc2626; }
+        .hero-subtitle { font-size: 18px; color: #64748b; max-width: 700px; margin: 0 auto 24px; }
+        .hero-meta { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; font-size: 14px; color: #64748b; }
+        .hero-meta span { display: flex; align-items: center; gap: 6px; }
+        
+        /* Progress Bar */
+        .progress-container { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 12px 24px; position: sticky; top: 60px; z-index: 99; }
+        .progress-inner { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; gap: 16px; }
+        .progress-bar { flex: 1; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #dc2626, #ef4444); border-radius: 4px; transition: width 0.3s; width: 0%; }
+        .progress-text { font-size: 13px; color: #64748b; min-width: 80px; text-align: right; }
+        
+        /* Main Content */
+        .main { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        
+        /* Section Headers */
+        .section-header { display: flex; align-items: center; gap: 12px; margin: 48px 0 24px; padding-bottom: 12px; border-bottom: 2px solid #e2e8f0; }
+        .section-header:first-child { margin-top: 0; }
+        .section-icon { font-size: 28px; }
+        .section-title { font-size: 22px; font-weight: 700; color: #1e293b; }
+        .section-num { background: #dc2626; color: white; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 12px; }
+        
+        /* Concept Cards */
+        .concept-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+        .concept-title { font-size: 17px; font-weight: 600; color: #1e293b; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .concept-content { font-size: 15px; color: #475569; }
+        .concept-content p { margin-bottom: 12px; }
+        .concept-content p:last-child { margin-bottom: 0; }
+        .concept-content ul { margin: 12px 0; padding-left: 24px; }
+        .concept-content li { margin-bottom: 8px; }
+        
+        /* Clinical Pearls */
+        .pearl-box { background: #fef3c7; border-left: 4px solid #f59e0b; border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 20px 0; }
+        .pearl-title { font-weight: 600; color: #92400e; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .pearl-content { font-size: 14px; color: #78350f; }
+        
+        /* Danger Boxes */
+        .danger-box { background: #fef2f2; border-left: 4px solid #dc2626; border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 20px 0; }
+        .danger-title { font-weight: 600; color: #991b1b; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .danger-content { font-size: 14px; color: #7f1d1d; }
+        
+        /* Algorithm/Pathway Boxes */
+        .algorithm-box { background: #f0fdf4; border: 2px solid #86efac; border-radius: 12px; padding: 24px; margin: 24px 0; }
+        .algorithm-title { font-weight: 700; color: #166534; margin-bottom: 16px; font-size: 16px; display: flex; align-items: center; gap: 10px; }
+        .algorithm-content { font-size: 14px; color: #15803d; }
+        .algorithm-steps { display: flex; flex-direction: column; gap: 12px; }
+        .algorithm-step { display: flex; align-items: flex-start; gap: 12px; padding: 12px; background: white; border-radius: 8px; }
+        .step-num { background: #22c55e; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; flex-shrink: 0; }
+        .step-content { flex: 1; }
+        .step-title { font-weight: 600; color: #1e293b; margin-bottom: 4px; }
+        .step-desc { font-size: 13px; color: #64748b; }
+        
+        /* Mnemonic Boxes */
+        .mnemonic-box { background: #fef3c7; border: 2px solid #fcd34d; border-radius: 12px; padding: 24px; margin: 24px 0; text-align: center; }
+        .mnemonic-title { font-weight: 700; color: #92400e; margin-bottom: 12px; font-size: 16px; }
+        .mnemonic-word { font-family: Georgia, serif; font-size: 32px; color: #78350f; letter-spacing: 4px; margin-bottom: 16px; }
+        .mnemonic-breakdown { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; }
+        .mnemonic-item { background: white; padding: 10px 16px; border-radius: 8px; }
+        .mnemonic-letter { font-weight: 700; color: #dc2626; font-size: 18px; }
+        .mnemonic-meaning { font-size: 13px; color: #64748b; }
+        
+        /* Formula Boxes */
+        .formula-box { background: #f0fdf4; border: 2px solid #86efac; border-radius: 12px; padding: 24px; margin: 24px 0; text-align: center; }
+        .formula-title { font-weight: 600; color: #166534; margin-bottom: 12px; }
+        .formula-content { font-family: 'Courier New', monospace; font-size: 20px; color: #1e293b; background: white; padding: 16px; border-radius: 8px; display: inline-block; }
+        .formula-note { font-size: 13px; color: #64748b; margin-top: 12px; }
+        
+        /* Comparison Tables */
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .comparison-table th { background: #f1f5f9; padding: 12px 16px; text-align: left; font-weight: 600; color: #1e293b; border: 1px solid #e2e8f0; }
+        .comparison-table td { padding: 12px 16px; border: 1px solid #e2e8f0; color: #475569; vertical-align: top; }
+        .comparison-table tr:nth-child(even) { background: #f8fafc; }
+        .table-label { font-weight: 600; color: #1e293b; }
+        
+        /* Quiz Section */
+        .quiz-section { background: #ede9fe; border-radius: 16px; padding: 32px; margin: 32px 0; }
+        .quiz-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+        .quiz-icon { font-size: 32px; }
+        .quiz-title { font-size: 20px; font-weight: 700; color: #5b21b6; }
+        .quiz-subtitle { font-size: 14px; color: #7c3aed; }
+        
+        .quiz-question { background: white; border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+        .question-num { font-size: 12px; font-weight: 600; color: #8b5cf6; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .question-text { font-size: 16px; font-weight: 500; color: #1e293b; margin-bottom: 16px; line-height: 1.5; }
+        .question-stem { font-size: 14px; color: #475569; margin-bottom: 16px; line-height: 1.6; padding: 12px; background: #f8fafc; border-radius: 8px; }
+        
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 10px; cursor: pointer; transition: all 0.2s; }
+        .option:hover { border-color: #8b5cf6; background: #faf5ff; }
+        .option.selected { border-color: #8b5cf6; background: #faf5ff; }
+        .option.correct { border-color: #22c55e; background: #f0fdf4; }
+        .option.incorrect { border-color: #ef4444; background: #fef2f2; }
+        .option-letter { width: 28px; height: 28px; border-radius: 50%; background: #e2e8f0; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px; color: #64748b; flex-shrink: 0; }
+        .option.selected .option-letter { background: #8b5cf6; color: white; }
+        .option.correct .option-letter { background: #22c55e; color: white; }
+        .option.incorrect .option-letter { background: #ef4444; color: white; }
+        .option-text { font-size: 14px; color: #475569; }
+        
+        .explanation { display: none; margin-top: 16px; padding: 16px; background: #f0fdf4; border-radius: 8px; border-left: 4px solid #22c55e; }
+        .explanation.show { display: block; }
+        .explanation-title { font-weight: 600; color: #166534; margin-bottom: 8px; }
+        .explanation-text { font-size: 14px; color: #15803d; line-height: 1.6; }
+        
+        .check-btn { background: #8b5cf6; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; transition: background 0.2s; margin-top: 16px; }
+        .check-btn:hover { background: #7c3aed; }
+        .check-btn:disabled { background: #c4b5fd; cursor: not-allowed; }
+        
+        /* Cross-Links */
+        .crosslink-section { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin: 32px 0; }
+        .crosslink-title { font-size: 16px; font-weight: 600; color: #1e293b; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+        .crosslink-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+        .crosslink-item { display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; text-decoration: none; color: inherit; transition: all 0.2s; }
+        .crosslink-item:hover { border-color: #10b981; background: #f0fdf4; }
+        .crosslink-icon { font-size: 20px; }
+        .crosslink-text { font-size: 13px; color: #475569; }
+        .crosslink-platform { font-size: 11px; color: #94a3b8; }
+        
+        /* Module Complete */
+        .module-complete { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 2px solid #86efac; border-radius: 16px; padding: 40px; margin: 48px 0; text-align: center; }
+        .complete-icon { font-size: 64px; margin-bottom: 16px; }
+        .complete-title { font-size: 24px; font-weight: 700; color: #166534; margin-bottom: 12px; }
+        .complete-subtitle { font-size: 15px; color: #15803d; margin-bottom: 24px; max-width: 500px; margin-left: auto; margin-right: auto; }
+        .complete-stats { display: flex; justify-content: center; gap: 32px; margin-bottom: 24px; }
+        .complete-stat { text-align: center; }
+        .complete-stat-num { font-size: 28px; font-weight: 700; color: #22c55e; }
+        .complete-stat-label { font-size: 12px; color: #64748b; }
+        .complete-btn { display: inline-block; background: #22c55e; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: background 0.2s; }
+        .complete-btn:hover { background: #16a34a; }
+        
+        /* Footer */
+        .footer { border-top: 1px solid #e2e8f0; padding: 32px 24px; text-align: center; color: #64748b; font-size: 13px; background: #fff; margin-top: 48px; }
         .footer a { color: #10b981; text-decoration: none; }
-        .algorithm-box { background: #ecfdf5; border: 2px solid #6ee7b7; border-radius: 12px; padding: 24px; margin: 16px 0; }
-        .algorithm-box h4 { color: #047857; font-size: 14px; font-weight: 600; margin-bottom: 16px; }
-        .algorithm-flow { display: flex; flex-direction: column; gap: 12px; }
-        .algorithm-step { display: flex; align-items: center; gap: 12px; }
-        .alg-time { background: #047857; color: #fff; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: 600; min-width: 70px; text-align: center; }
-        .alg-action { font-size: 14px; color: #1e293b; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 28px; }
+            .hero-meta { gap: 16px; }
+            .mnemonic-breakdown { gap: 8px; }
+            .comparison-table { font-size: 12px; }
+            .complete-stats { gap: 20px; }
+        }
     </style>
 </head>
 <body>
     <header class="header">
         <div class="header-inner">
-            <a href="mechanismdx-index-final.html" class="logo">Mechanism<span>Dx</span></a>
+            <a href="mechanismdx-index.html" class="logo">Mechanism<span>Dx</span></a>
             <nav class="nav">
-                <a href="mechanismdx-index-final.html">← All Modules</a>
-                <a href="unified-scoreboard.html">Scoreboard</a>
+                <a href="mechanismdx-index.html" class="back-link">← All Modules</a>
+                <a href="reasondx-index.html">ReasonDx</a>
+                <a href="coachdx-index.html">CoachDx</a>
             </nav>
         </div>
     </header>
     
     <section class="hero">
-        <div class="hero-inner">
-            <div class="hero-icon">🚨</div>
-            <h1>Sepsis & Shock</h1>
-            <p>Master the pathophysiology of sepsis, recognize shock states, and understand time-critical interventions. From SIRS to septic shock — the mechanisms that save lives.</p>
-            <div class="hero-meta">
-                <span>📚 16 Concepts</span>
-                <span>❓ 10 MCQs</span>
-                <span>⏱ ~55 min</span>
-            </div>
+        <div class="hero-icon">🚨</div>
+        <h1>Sepsis & <span>Shock</span></h1>
+        <p class="hero-subtitle">From SIRS to septic shock: understanding the inflammatory cascade, hemodynamic profiles, and time-critical resuscitation strategies.</p>
+        <div class="hero-meta">
+            <span>📚 18 concepts</span>
+            <span>❓ 15 MCQs</span>
+            <span>⏱️ ~45 min</span>
+            <span>🎯 Critical Care</span>
         </div>
     </section>
     
+    <div class="progress-container">
+        <div class="progress-inner">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">0% complete</div>
+        </div>
+    </div>
+    
     <main class="main">
-        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-        
         <!-- Section 1: Definitions & Pathophysiology -->
-        <section class="section">
-            <h2 class="section-title">🔬 Sepsis Definitions & Pathophysiology</h2>
-            
-            <div class="concept-card">
-                <h3>Evolution of Sepsis Definitions (Sepsis-3)</h3>
-                <p>The 2016 Sepsis-3 definitions replaced SIRS criteria with organ dysfunction focus:</p>
-                <ul>
-                    <li><strong>Sepsis</strong> — Life-threatening organ dysfunction due to dysregulated host response to infection (SOFA ≥2 from baseline)</li>
-                    <li><strong>Septic Shock</strong> — Sepsis with vasopressors required to maintain MAP ≥65 AND lactate >2 despite adequate fluid resuscitation</li>
-                    <li><strong>qSOFA</strong> — Quick screening: RR ≥22, SBP ≤100, altered mental status (≥2 = high risk)</li>
-                </ul>
-            </div>
-            
-            <div class="concept-card">
-                <h3>The Inflammatory Cascade</h3>
-                <p>Sepsis represents a dysregulated host response:</p>
-                <ul>
-                    <li><strong>PAMPs</strong> — Pathogen-associated molecular patterns (LPS, lipoteichoic acid, flagellin)</li>
-                    <li><strong>PRRs</strong> — Pattern recognition receptors (TLRs, NOD-like receptors) recognize PAMPs</li>
-                    <li><strong>Cytokine storm</strong> — TNF-α, IL-1, IL-6 trigger systemic inflammation</li>
-                    <li><strong>Endothelial dysfunction</strong> — Increased permeability → capillary leak → edema</li>
-                    <li><strong>Coagulation activation</strong> — Microthrombi, DIC, impaired perfusion</li>
-                </ul>
-            </div>
-            
-            <div class="pathway-box">
-                <h3>🔄 From Infection to Organ Failure</h3>
-                <div class="pathway-steps">
-                    <div class="pathway-step"><div class="step-num">1</div><div class="step-text"><strong>Infection</strong> → PAMPs released into bloodstream</div></div>
-                    <div class="pathway-step"><div class="step-num">2</div><div class="step-text"><strong>Immune activation</strong> → Cytokine release, complement activation</div></div>
-                    <div class="pathway-step"><div class="step-num">3</div><div class="step-text"><strong>Vasodilation</strong> → ↓ SVR, distributive shock</div></div>
-                    <div class="pathway-step"><div class="step-num">4</div><div class="step-text"><strong>Capillary leak</strong> → Third-spacing, hypovolemia</div></div>
-                    <div class="pathway-step"><div class="step-num">5</div><div class="step-text"><strong>Microvascular dysfunction</strong> → Impaired O2 extraction</div></div>
-                    <div class="pathway-step"><div class="step-num">6</div><div class="step-text"><strong>Organ dysfunction</strong> → AKI, ARDS, encephalopathy, DIC</div></div>
-                </div>
-            </div>
-            
-            <div class="clinical-pearl">
-                <h4>💡 Clinical Pearl</h4>
-                <p>Lactate elevation in sepsis has TWO mechanisms: (1) Tissue hypoperfusion → anaerobic metabolism, AND (2) Accelerated aerobic glycolysis from β-adrenergic stimulation. This is why lactate can remain elevated even with adequate perfusion.</p>
-            </div>
-        </section>
+        <div class="section-header">
+            <span class="section-num">1</span>
+            <span class="section-icon">🔬</span>
+            <span class="section-title">Definitions & Pathophysiology</span>
+        </div>
         
-        <!-- Quiz 1 -->
-        <div class="quiz-section">
-            <h3>🧠 Check Your Understanding</h3>
-            <div class="quiz-question" id="q1">
-                <p>A 68-year-old with pneumonia has fever, HR 110, RR 24, WBC 18,000. She has confusion, BP 95/60, and lactate 3.2. Which term best describes her condition under Sepsis-3 criteria?</p>
-                <div class="quiz-options">
-                    <div class="quiz-option" onclick="checkAnswer('q1', this, 'A')"><span class="option-letter">A.</span> SIRS only — she meets 3 of 4 SIRS criteria</div>
-                    <div class="quiz-option" onclick="checkAnswer('q1', this, 'B')"><span class="option-letter">B.</span> Sepsis — infection with suspected organ dysfunction</div>
-                    <div class="quiz-option" onclick="checkAnswer('q1', this, 'C')"><span class="option-letter">C.</span> Severe sepsis — sepsis with hypoperfusion</div>
-                    <div class="quiz-option" onclick="checkAnswer('q1', this, 'D')"><span class="option-letter">D.</span> Septic shock — requires assessment after fluid resuscitation</div>
-                    <div class="quiz-option" onclick="checkAnswer('q1', this, 'E')"><span class="option-letter">E.</span> Bacteremia — positive blood cultures required</div>
-                </div>
-                <div class="quiz-feedback" id="q1-feedback"></div>
+        <div class="concept-card">
+            <div class="concept-title">🎯 Sepsis-3 Definitions (2016)</div>
+            <div class="concept-content">
+                <p>The Sepsis-3 task force redefined sepsis to emphasize organ dysfunction rather than inflammation:</p>
+                <ul>
+                    <li><strong>Sepsis:</strong> Life-threatening organ dysfunction caused by a dysregulated host response to infection. Operationally defined as a ≥2 point increase in SOFA score.</li>
+                    <li><strong>Septic Shock:</strong> Sepsis with persistent hypotension requiring vasopressors to maintain MAP ≥65 mmHg AND lactate >2 mmol/L despite adequate fluid resuscitation.</li>
+                </ul>
+                <p>The old "SIRS criteria" (temp, HR, RR, WBC) are no longer used to define sepsis but remain useful for identifying patients who may have infection.</p>
             </div>
-            
-            <div class="quiz-question" id="q2">
-                <p>Which mechanism BEST explains why septic patients often have warm extremities early in the course despite hypotension?</p>
-                <div class="quiz-options">
-                    <div class="quiz-option" onclick="checkAnswer('q2', this, 'A')"><span class="option-letter">A.</span> Increased cardiac output compensating for hypovolemia</div>
-                    <div class="quiz-option" onclick="checkAnswer('q2', this, 'B')"><span class="option-letter">B.</span> Cytokine-mediated peripheral vasodilation with decreased SVR</div>
-                    <div class="quiz-option" onclick="checkAnswer('q2', this, 'C')"><span class="option-letter">C.</span> Fever causing peripheral vasodilation for heat dissipation</div>
-                    <div class="quiz-option" onclick="checkAnswer('q2', this, 'D')"><span class="option-letter">D.</span> Impaired sympathetic response from endotoxin</div>
-                    <div class="quiz-option" onclick="checkAnswer('q2', this, 'E')"><span class="option-letter">E.</span> Arteriovenous shunting bypassing tissue beds</div>
-                </div>
-                <div class="quiz-feedback" id="q2-feedback"></div>
+        </div>
+        
+        <div class="pearl-box">
+            <div class="pearl-title">💡 Clinical Pearl</div>
+            <div class="pearl-content">
+                qSOFA (Quick SOFA) was designed for <em>bedside screening outside the ICU</em>: Respiratory rate ≥22, altered mental status, SBP ≤100. Score ≥2 suggests high risk but should NOT delay treatment—it's a risk stratification tool, not a diagnostic criterion.
             </div>
+        </div>
+        
+        <div class="concept-card">
+            <div class="concept-title">🧬 The Inflammatory Cascade</div>
+            <div class="concept-content">
+                <p>Sepsis represents a dysregulated host response with both pro-inflammatory and immunosuppressive phases:</p>
+                <ul>
+                    <li><strong>Recognition:</strong> PAMPs (pathogen-associated molecular patterns) bind to TLRs (toll-like receptors) on innate immune cells</li>
+                    <li><strong>Cytokine Storm:</strong> Release of TNF-α, IL-1, IL-6 → fever, tachycardia, vasodilation</li>
+                    <li><strong>Endothelial Dysfunction:</strong> Glycocalyx breakdown, capillary leak, edema, microvascular thrombosis</li>
+                    <li><strong>Coagulopathy:</strong> DIC with simultaneous bleeding and clotting</li>
+                    <li><strong>Immunoparalysis:</strong> Later phase with lymphocyte apoptosis, monocyte deactivation → secondary infections</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="formula-box">
+            <div class="formula-title">SOFA Score Components</div>
+            <div class="formula-content">
+                Resp (P/F) + Coag (Plt) + Liver (Bili) + CV (MAP/pressors) + CNS (GCS) + Renal (Cr/UOP)
+            </div>
+            <div class="formula-note">Each organ system scored 0-4 points. Total range 0-24. ≥2 point increase = sepsis.</div>
         </div>
         
         <!-- Section 2: Types of Shock -->
-        <section class="section">
-            <h2 class="section-title">💔 Four Types of Shock</h2>
-            
-            <div class="concept-card">
-                <h3>Hemodynamic Profiles</h3>
-                <table class="comparison-table">
-                    <thead>
-                        <tr><th>Type</th><th>CO</th><th>SVR</th><th>PCWP</th><th>Example</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td><strong>Distributive</strong></td><td>↑ or N</td><td>↓↓</td><td>↓</td><td>Sepsis, anaphylaxis, neurogenic</td></tr>
-                        <tr><td><strong>Cardiogenic</strong></td><td>↓↓</td><td>↑</td><td>↑↑</td><td>MI, myocarditis, valvular</td></tr>
-                        <tr><td><strong>Hypovolemic</strong></td><td>↓</td><td>↑</td><td>↓</td><td>Hemorrhage, dehydration</td></tr>
-                        <tr><td><strong>Obstructive</strong></td><td>↓</td><td>↑</td><td>Variable</td><td>PE, tamponade, tension PTX</td></tr>
-                    </tbody>
-                </table>
-                <p style="font-size: 13px; color: #64748b; margin-top: 12px;">CO = cardiac output; SVR = systemic vascular resistance; PCWP = pulmonary capillary wedge pressure</p>
-            </div>
-            
-            <div class="concept-card">
-                <h3>Distributive Shock Subtypes</h3>
-                <ul>
-                    <li><strong>Septic</strong> — Most common; cytokine-mediated vasodilation, capillary leak</li>
-                    <li><strong>Anaphylactic</strong> — IgE-mediated histamine release; bronchospasm + angioedema</li>
-                    <li><strong>Neurogenic</strong> — Loss of sympathetic tone (spinal injury); bradycardia + hypotension</li>
-                    <li><strong>Adrenal crisis</strong> — Cortisol deficiency; ↓ vascular tone + ↓ catecholamine sensitivity</li>
-                </ul>
-            </div>
-            
-            <div class="danger-box">
-                <h4>⚠️ Don't Miss</h4>
-                <p>Septic shock can COEXIST with other shock types! A septic patient with MI has mixed distributive + cardiogenic shock. Look for signs: elevated lactate despite aggressive fluids, pulmonary edema, new ECG changes.</p>
-            </div>
-            
-            <div class="mnemonic-box">
-                <h4>🧠 Memory Aid: SHOCK Types</h4>
-                <p class="mnemonic"><span>S</span>eptic (Distributive) • <span>H</span>ypovolemic • <span>O</span>bstructive • <span>C</span>ardiogenic • a<span>K</span>a "the 4 types"</p>
-            </div>
-        </section>
+        <div class="section-header">
+            <span class="section-num">2</span>
+            <span class="section-icon">💔</span>
+            <span class="section-title">Classification of Shock</span>
+        </div>
         
-        <!-- Section 3: Hour-1 Bundle -->
-        <section class="section">
-            <h2 class="section-title">⏱️ Sepsis Management: Hour-1 Bundle</h2>
-            
-            <div class="algorithm-box">
-                <h4>🎯 Surviving Sepsis Campaign Hour-1 Bundle</h4>
-                <div class="algorithm-flow">
-                    <div class="algorithm-step"><span class="alg-time">0-15 min</span><span class="alg-action">Measure lactate (repeat if initial >2)</span></div>
-                    <div class="algorithm-step"><span class="alg-time">0-15 min</span><span class="alg-action">Obtain blood cultures BEFORE antibiotics</span></div>
-                    <div class="algorithm-step"><span class="alg-time">0-60 min</span><span class="alg-action">Administer broad-spectrum antibiotics</span></div>
-                    <div class="algorithm-step"><span class="alg-time">0-60 min</span><span class="alg-action">Begin 30 mL/kg crystalloid for hypotension or lactate ≥4</span></div>
-                    <div class="algorithm-step"><span class="alg-time">Ongoing</span><span class="alg-action">Vasopressors if MAP <65 during/after fluids</span></div>
+        <div class="concept-card">
+            <div class="concept-title">📊 The Four Types of Shock</div>
+            <div class="concept-content">
+                <p>All shock results in inadequate tissue perfusion, but the underlying mechanism differs:</p>
+            </div>
+        </div>
+        
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Mechanism</th>
+                    <th>CVP/Preload</th>
+                    <th>CO</th>
+                    <th>SVR</th>
+                    <th>Examples</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="table-label">Distributive</td>
+                    <td>Vasodilation, maldistribution of flow</td>
+                    <td>Low/Normal</td>
+                    <td>High (early) → Low</td>
+                    <td>↓↓</td>
+                    <td>Sepsis, anaphylaxis, neurogenic</td>
+                </tr>
+                <tr>
+                    <td class="table-label">Hypovolemic</td>
+                    <td>Volume loss (hemorrhage, dehydration)</td>
+                    <td>↓↓</td>
+                    <td>↓↓</td>
+                    <td>↑↑</td>
+                    <td>Hemorrhage, GI losses, burns</td>
+                </tr>
+                <tr>
+                    <td class="table-label">Cardiogenic</td>
+                    <td>Pump failure</td>
+                    <td>↑↑</td>
+                    <td>↓↓</td>
+                    <td>↑↑</td>
+                    <td>MI, cardiomyopathy, arrhythmia</td>
+                </tr>
+                <tr>
+                    <td class="table-label">Obstructive</td>
+                    <td>Mechanical obstruction to flow</td>
+                    <td>↑ (right) / ↓ (left)</td>
+                    <td>↓↓</td>
+                    <td>↑↑</td>
+                    <td>PE, tamponade, tension PTX</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="danger-box">
+            <div class="danger-title">⚠️ Critical Concept</div>
+            <div class="danger-content">
+                <strong>Septic shock is distributive</strong>, but mixed shock is common! A septic patient may also be hypovolemic (third-spacing, poor intake) or develop cardiogenic shock (sepsis-induced cardiomyopathy). Always reassess hemodynamics after initial resuscitation.
+            </div>
+        </div>
+        
+        <div class="mnemonic-box">
+            <div class="mnemonic-title">Remember the Shock Types</div>
+            <div class="mnemonic-word">D-HOC</div>
+            <div class="mnemonic-breakdown">
+                <div class="mnemonic-item">
+                    <span class="mnemonic-letter">D</span>
+                    <span class="mnemonic-meaning">Distributive</span>
+                </div>
+                <div class="mnemonic-item">
+                    <span class="mnemonic-letter">H</span>
+                    <span class="mnemonic-meaning">Hypovolemic</span>
+                </div>
+                <div class="mnemonic-item">
+                    <span class="mnemonic-letter">O</span>
+                    <span class="mnemonic-meaning">Obstructive</span>
+                </div>
+                <div class="mnemonic-item">
+                    <span class="mnemonic-letter">C</span>
+                    <span class="mnemonic-meaning">Cardiogenic</span>
                 </div>
             </div>
-            
-            <div class="concept-card">
-                <h3>Fluid Resuscitation Principles</h3>
+        </div>
+        
+        <!-- Section 3: Initial Resuscitation -->
+        <div class="section-header">
+            <span class="section-num">3</span>
+            <span class="section-icon">💉</span>
+            <span class="section-title">Hour-1 Bundle & Initial Resuscitation</span>
+        </div>
+        
+        <div class="algorithm-box">
+            <div class="algorithm-title">🚀 Surviving Sepsis Campaign: Hour-1 Bundle</div>
+            <div class="algorithm-steps">
+                <div class="algorithm-step">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <div class="step-title">Measure Lactate</div>
+                        <div class="step-desc">Re-measure if initial lactate >2 mmol/L. Target: lactate normalization (clearance >10-20%/2hr suggests adequate resuscitation).</div>
+                    </div>
+                </div>
+                <div class="algorithm-step">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <div class="step-title">Obtain Blood Cultures</div>
+                        <div class="step-desc">Before antibiotics if possible, but do NOT delay antibiotics more than 45 minutes. At least 2 sets from separate sites.</div>
+                    </div>
+                </div>
+                <div class="algorithm-step">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Administer Broad-Spectrum Antibiotics</div>
+                        <div class="step-desc">Within 1 hour of recognition. Each hour of delay increases mortality 7-8%. Cover Gram-positive, Gram-negative, and consider MRSA/Pseudomonas risk factors.</div>
+                    </div>
+                </div>
+                <div class="algorithm-step">
+                    <div class="step-num">4</div>
+                    <div class="step-content">
+                        <div class="step-title">Administer 30 mL/kg Crystalloid</div>
+                        <div class="step-desc">For hypotension (MAP <65) or lactate ≥4. Use balanced crystalloids (LR, Plasmalyte) over NS when possible. Give rapidly (within 3 hours).</div>
+                    </div>
+                </div>
+                <div class="algorithm-step">
+                    <div class="step-num">5</div>
+                    <div class="step-content">
+                        <div class="step-title">Vasopressors if Hypotensive</div>
+                        <div class="step-desc">Start norepinephrine if MAP <65 persists during or after fluid resuscitation. Don't wait until fluids are complete—start early through peripheral IV if needed.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="pearl-box">
+            <div class="pearl-title">💡 Fluid Responsiveness</div>
+            <div class="pearl-content">
+                Not all septic patients need 30 mL/kg! After initial bolus, assess fluid responsiveness before giving more. Dynamic predictors (passive leg raise with CO monitoring, pulse pressure variation >13% if mechanically ventilated) are superior to static measures (CVP is notoriously unreliable).
+            </div>
+        </div>
+        
+        <div class="concept-card">
+            <div class="concept-title">💊 Vasopressor Selection</div>
+            <div class="concept-content">
                 <ul>
-                    <li><strong>Initial bolus</strong> — 30 mL/kg crystalloid (balanced preferred: LR, Plasmalyte)</li>
-                    <li><strong>Why balanced?</strong> — NS causes hyperchloremic acidosis; RCT data suggest harm with NS</li>
-                    <li><strong>Fluid responsiveness</strong> — Assess with passive leg raise, pulse pressure variation, IVC ultrasound</li>
-                    <li><strong>Avoid overload</strong> — After initial resuscitation, use dynamic parameters; excess fluid → pulmonary edema, worse outcomes</li>
+                    <li><strong>Norepinephrine (first-line):</strong> α1 >> β1. Increases SVR with modest inotropy. Start 0.05-0.1 mcg/kg/min.</li>
+                    <li><strong>Vasopressin (second-line):</strong> V1 receptor agonist. Add at 0.03-0.04 U/min when NE >0.25-0.5 mcg/kg/min. Catecholamine-sparing, less tachycardia.</li>
+                    <li><strong>Epinephrine (alternative):</strong> β1 > β2 > α1. More inotropy but more arrhythmias, increases lactate independently.</li>
+                    <li><strong>Dopamine (avoid):</strong> More arrhythmias than NE. Only consider if bradycardic and low risk of tachyarrhythmia.</li>
+                    <li><strong>Phenylephrine (specific situations):</strong> Pure α1. Use only when tachyarrhythmias limit other agents or as bridge.</li>
                 </ul>
             </div>
-            
-            <div class="concept-card">
-                <h3>Vasopressor Selection</h3>
-                <table class="comparison-table">
-                    <thead>
-                        <tr><th>Agent</th><th>Receptor</th><th>Effect</th><th>Role</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td><strong>Norepinephrine</strong></td><td>α1 >> β1</td><td>↑ SVR, modest ↑ CO</td><td>First-line in septic shock</td></tr>
-                        <tr><td><strong>Vasopressin</strong></td><td>V1</td><td>↑ SVR (non-catecholamine)</td><td>Second-line; add at NE 0.25-0.5</td></tr>
-                        <tr><td><strong>Epinephrine</strong></td><td>β1 > α1 > β2</td><td>↑ CO, ↑ SVR</td><td>Refractory; caution: ↑ lactate</td></tr>
-                        <tr><td><strong>Dopamine</strong></td><td>D, β1, α1 (dose-dep)</td><td>Variable</td><td>Largely abandoned (arrhythmias)</td></tr>
-                        <tr><td><strong>Phenylephrine</strong></td><td>Pure α1</td><td>↑ SVR only</td><td>Avoid in sepsis (↓ CO)</td></tr>
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="clinical-pearl">
-                <h4>💡 Clinical Pearl</h4>
-                <p>Add vasopressin early (NE dose 0.25-0.5 mcg/kg/min) rather than escalating NE indefinitely. Sepsis depletes endogenous vasopressin stores, and exogenous vasopressin works through a catecholamine-independent pathway.</p>
-            </div>
-        </section>
+        </div>
         
-        <!-- Quiz 2 -->
+        <!-- Section 4: Lactate Physiology -->
+        <div class="section-header">
+            <span class="section-num">4</span>
+            <span class="section-icon">🧪</span>
+            <span class="section-title">Lactate: Marker & Mechanism</span>
+        </div>
+        
+        <div class="concept-card">
+            <div class="concept-title">📈 Why Lactate Rises in Sepsis</div>
+            <div class="concept-content">
+                <p>Lactate elevation in sepsis is <strong>multifactorial</strong>—it's not simply "anaerobic metabolism from hypoperfusion":</p>
+                <ul>
+                    <li><strong>Type A (Hypoxic):</strong> Tissue hypoperfusion → anaerobic glycolysis → lactate production</li>
+                    <li><strong>Type B (Non-hypoxic):</strong>
+                        <ul>
+                            <li>Catecholamine surge → accelerated aerobic glycolysis (β2-stimulation)</li>
+                            <li>Mitochondrial dysfunction ("cytopathic hypoxia")</li>
+                            <li>Decreased hepatic clearance (liver metabolizes 50-70% of lactate)</li>
+                            <li>Increased protein catabolism</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>This is why lactate can remain elevated even with adequate MAP and ScvO2—clearance matters as much as production!</p>
+            </div>
+        </div>
+        
+        <div class="formula-box">
+            <div class="formula-title">Lactate Clearance</div>
+            <div class="formula-content">
+                Clearance (%) = [(Initial − Repeat) / Initial] × 100
+            </div>
+            <div class="formula-note">Target ≥10-20% clearance every 2 hours. Failure to clear suggests ongoing hypoperfusion or hepatic dysfunction.</div>
+        </div>
+        
+        <div class="danger-box">
+            <div class="danger-title">⚠️ Lactate Pitfalls</div>
+            <div class="danger-content">
+                Elevated lactate is NOT always sepsis: Consider thiamine deficiency (Wernicke's), metformin toxicity, seizures, severe asthma (β-agonist use), mesenteric ischemia, malignancy, and liver failure. A "normal" lactate doesn't exclude sepsis—early or localized infection may not elevate lactate.
+            </div>
+        </div>
+        
+        <!-- Section 5: Source Control -->
+        <div class="section-header">
+            <span class="section-num">5</span>
+            <span class="section-icon">🎯</span>
+            <span class="section-title">Source Control & Antibiotic Stewardship</span>
+        </div>
+        
+        <div class="concept-card">
+            <div class="concept-title">🔍 Finding & Controlling the Source</div>
+            <div class="concept-content">
+                <p>Antibiotics alone won't cure sepsis if there's an undrained abscess or necrotic tissue. Source control should happen within 6-12 hours when feasible:</p>
+                <ul>
+                    <li><strong>Drain:</strong> Abscesses, empyema, cholangitis (ERCP), infected fluid collections (IR drainage)</li>
+                    <li><strong>Debride:</strong> Necrotizing fasciitis, gangrenous tissue</li>
+                    <li><strong>Remove:</strong> Infected devices (lines, hardware)—tip culture the line!</li>
+                    <li><strong>Divert:</strong> Bowel perforation (colostomy), obstructed ureter (nephrostomy)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="concept-card">
+            <div class="concept-title">💊 Empiric Antibiotic Principles</div>
+            <div class="concept-content">
+                <p>Cover broadly, then narrow based on cultures and clinical response:</p>
+                <ul>
+                    <li><strong>Community-acquired without risk factors:</strong> Ceftriaxone + azithromycin (if pneumonia) or piperacillin-tazobactam</li>
+                    <li><strong>Healthcare-associated/risk factors:</strong> Anti-pseudomonal β-lactam (pip-tazo, cefepime, meropenem) + vancomycin</li>
+                    <li><strong>Intra-abdominal:</strong> Add anaerobic coverage (metronidazole or use pip-tazo/meropenem)</li>
+                    <li><strong>Neutropenic fever:</strong> Cefepime or meropenem monotherapy</li>
+                </ul>
+                <p>De-escalate within 48-72 hours based on cultures. Typical duration: 7-10 days for most infections.</p>
+            </div>
+        </div>
+        
+        <div class="pearl-box">
+            <div class="pearl-title">💡 Procalcitonin</div>
+            <div class="pearl-content">
+                PCT can help guide antibiotic discontinuation (not initiation). Consider stopping antibiotics when PCT decreases by ≥80% from peak OR falls to <0.5 ng/mL, combined with clinical improvement. Serial trending is more useful than a single value.
+            </div>
+        </div>
+        
+        <!-- Section 6: Advanced Management -->
+        <div class="section-header">
+            <span class="section-num">6</span>
+            <span class="section-icon">🏥</span>
+            <span class="section-title">Advanced Management & Adjunctive Therapies</span>
+        </div>
+        
+        <div class="concept-card">
+            <div class="concept-title">💪 Corticosteroids in Septic Shock</div>
+            <div class="concept-content">
+                <p><strong>When to consider:</strong> Refractory septic shock (NE >0.25 mcg/kg/min for >4 hours despite adequate fluids)</p>
+                <ul>
+                    <li><strong>Dose:</strong> Hydrocortisone 200 mg/day (50 mg q6h or 200 mg continuous infusion)</li>
+                    <li><strong>Duration:</strong> Until vasopressors discontinued, then taper over several days</li>
+                    <li><strong>Rationale:</strong> Critical illness-related corticosteroid insufficiency (CIRCI)—not absolute adrenal failure but inadequate response relative to stress</li>
+                    <li><strong>Evidence:</strong> ADRENAL and APROCCHSS trials showed faster shock reversal; mortality benefit modest/conflicting</li>
+                </ul>
+                <p>No need to check random cortisol or do ACTH stim test—treat empirically if meeting criteria.</p>
+            </div>
+        </div>
+        
+        <div class="concept-card">
+            <div class="concept-title">🩸 Transfusion & Glucose Management</div>
+            <div class="concept-content">
+                <ul>
+                    <li><strong>Hemoglobin target:</strong> Transfuse for Hgb <7 g/dL in most patients (TRICC, TRISS trials). Exception: active bleeding, ACS, severe hypoxemia—consider higher threshold.</li>
+                    <li><strong>Glucose:</strong> Target <180 mg/dL. Avoid tight control (<110)—increased hypoglycemia without benefit (NICE-SUGAR).</li>
+                    <li><strong>Nutrition:</strong> Start enteral nutrition within 48 hours when hemodynamically stable. Trophic feeds OK initially.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="concept-card">
+            <div class="concept-title">🫁 Mechanical Ventilation in Sepsis</div>
+            <div class="concept-content">
+                <p>Many septic patients develop ARDS. Use lung-protective ventilation:</p>
+                <ul>
+                    <li><strong>Tidal volume:</strong> 6 mL/kg IBW (not actual body weight!)</li>
+                    <li><strong>Plateau pressure:</strong> <30 cm H₂O</li>
+                    <li><strong>PEEP:</strong> Higher PEEP for moderate-severe ARDS (P/F <200)</li>
+                    <li><strong>Proning:</strong> Consider for P/F <150 despite optimization</li>
+                    <li><strong>Driving pressure:</strong> Target <15 cm H₂O (Pplat - PEEP)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="danger-box">
+            <div class="danger-title">⚠️ Renal Replacement Therapy</div>
+            <div class="danger-content">
+                Start RRT for conventional indications (severe acidosis, hyperkalemia, volume overload refractory to diuretics, uremia). Recent trials (STARRT-AKI, IDEAL-ICU) show no benefit to "early" RRT for AKI alone—wait for clear indication unless life-threatening.
+            </div>
+        </div>
+        
+        <!-- Quiz Section 1 -->
         <div class="quiz-section">
-            <h3>🧠 Check Your Understanding</h3>
-            <div class="quiz-question" id="q3">
-                <p>A 55-year-old with septic shock has received 3L crystalloid. BP is 82/50, MAP 61, HR 118, lactate 4.8. Bedside echo shows hyperdynamic LV with small chamber. What is the most appropriate next step?</p>
-                <div class="quiz-options">
-                    <div class="quiz-option" onclick="checkAnswer('q3', this, 'A')"><span class="option-letter">A.</span> Continue aggressive fluid resuscitation to complete 30 mL/kg</div>
-                    <div class="quiz-option" onclick="checkAnswer('q3', this, 'B')"><span class="option-letter">B.</span> Start norepinephrine to achieve MAP ≥65</div>
-                    <div class="quiz-option" onclick="checkAnswer('q3', this, 'C')"><span class="option-letter">C.</span> Start dobutamine for inotropic support</div>
-                    <div class="quiz-option" onclick="checkAnswer('q3', this, 'D')"><span class="option-letter">D.</span> Obtain PA catheter for precise hemodynamic monitoring</div>
-                    <div class="quiz-option" onclick="checkAnswer('q3', this, 'E')"><span class="option-letter">E.</span> Administer hydrocortisone for relative adrenal insufficiency</div>
+            <div class="quiz-header">
+                <span class="quiz-icon">🧠</span>
+                <div>
+                    <div class="quiz-title">Knowledge Check: Definitions & Initial Management</div>
+                    <div class="quiz-subtitle">Test your understanding of sepsis pathophysiology</div>
                 </div>
-                <div class="quiz-feedback" id="q3-feedback"></div>
             </div>
             
-            <div class="quiz-question" id="q4">
-                <p>Why is vasopressin an appropriate second-line agent in septic shock when norepinephrine requirements are escalating?</p>
-                <div class="quiz-options">
-                    <div class="quiz-option" onclick="checkAnswer('q4', this, 'A')"><span class="option-letter">A.</span> It increases cardiac output more effectively than norepinephrine</div>
-                    <div class="quiz-option" onclick="checkAnswer('q4', this, 'B')"><span class="option-letter">B.</span> Sepsis depletes endogenous vasopressin and it works via non-adrenergic V1 receptors</div>
-                    <div class="quiz-option" onclick="checkAnswer('q4', this, 'C')"><span class="option-letter">C.</span> It has fewer arrhythmogenic effects than escalating norepinephrine doses</div>
-                    <div class="quiz-option" onclick="checkAnswer('q4', this, 'D')"><span class="option-letter">D.</span> It improves splanchnic perfusion more than catecholamines</div>
-                    <div class="quiz-option" onclick="checkAnswer('q4', this, 'E')"><span class="option-letter">E.</span> It reduces the inflammatory response in septic shock</div>
+            <!-- Question 1 -->
+            <div class="quiz-question" data-correct="C">
+                <div class="question-num">Question 1 of 15</div>
+                <div class="question-text">According to Sepsis-3 criteria, which of the following best defines septic shock?</div>
+                <div class="options">
+                    <div class="option" data-answer="A">
+                        <span class="option-letter">A</span>
+                        <span class="option-text">SIRS criteria plus suspected infection with hypotension</span>
+                    </div>
+                    <div class="option" data-answer="B">
+                        <span class="option-letter">B</span>
+                        <span class="option-text">Sepsis with MAP <65 mmHg requiring vasopressors</span>
+                    </div>
+                    <div class="option" data-answer="C">
+                        <span class="option-letter">C</span>
+                        <span class="option-text">Sepsis requiring vasopressors for MAP ≥65 AND lactate >2 despite adequate fluids</span>
+                    </div>
+                    <div class="option" data-answer="D">
+                        <span class="option-letter">D</span>
+                        <span class="option-text">qSOFA score ≥2 with positive blood cultures</span>
+                    </div>
                 </div>
-                <div class="quiz-feedback" id="q4-feedback"></div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">
+                        Sepsis-3 defines septic shock as sepsis with <strong>both</strong> persistent hypotension requiring vasopressors to maintain MAP ≥65 mmHg <strong>AND</strong> lactate >2 mmol/L despite adequate fluid resuscitation. This dual requirement identifies patients with the highest mortality risk (~40%). The old SIRS criteria and qSOFA are screening tools, not diagnostic criteria for septic shock.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Question 2 -->
+            <div class="quiz-question" data-correct="B">
+                <div class="question-num">Question 2 of 15</div>
+                <div class="question-stem">A 62-year-old man presents with fever, confusion, and hypotension (BP 82/50). He is tachycardic to 115 bpm with warm extremities. Labs show WBC 18,000, lactate 4.5 mmol/L, and creatinine 2.1 (baseline 0.9). A central line is placed and initial hemodynamic assessment shows CVP 8 mmHg, ScvO2 75%, and cardiac index 3.8 L/min/m².</div>
+                <div class="question-text">Which type of shock is most consistent with these findings?</div>
+                <div class="options">
+                    <div class="option" data-answer="A">
+                        <span class="option-letter">A</span>
+                        <span class="option-text">Hypovolemic shock</span>
+                    </div>
+                    <div class="option" data-answer="B">
+                        <span class="option-letter">B</span>
+                        <span class="option-text">Distributive (septic) shock</span>
+                    </div>
+                    <div class="option" data-answer="C">
+                        <span class="option-letter">C</span>
+                        <span class="option-text">Cardiogenic shock</span>
+                    </div>
+                    <div class="option" data-answer="D">
+                        <span class="option-letter">D</span>
+                        <span class="option-text">Obstructive shock</span>
+                    </div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">
+                        This is classic <strong>distributive (septic) shock</strong>: warm extremities, normal-to-high cardiac output (CI 3.8), and adequate ScvO2 (75%) despite hypotension—indicating low SVR (vasodilation). Hypovolemic and cardiogenic shock would show low CO and cold extremities with high SVR as compensation. The fever, elevated WBC, and organ dysfunction (AKI) point to sepsis as the cause.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Question 3 -->
+            <div class="quiz-question" data-correct="A">
+                <div class="question-num">Question 3 of 15</div>
+                <div class="question-text">A patient with septic shock remains hypotensive (MAP 58) after 3L crystalloid. You start norepinephrine and titrate to 0.4 mcg/kg/min. MAP is now 62 mmHg. What is the most appropriate next vasopressor intervention?</div>
+                <div class="options">
+                    <div class="option" data-answer="A">
+                        <span class="option-letter">A</span>
+                        <span class="option-text">Add vasopressin 0.03 U/min</span>
+                    </div>
+                    <div class="option" data-answer="B">
+                        <span class="option-letter">B</span>
+                        <span class="option-text">Switch to dopamine</span>
+                    </div>
+                    <div class="option" data-answer="C">
+                        <span class="option-letter">C</span>
+                        <span class="option-text">Add phenylephrine 100 mcg/min</span>
+                    </div>
+                    <div class="option" data-answer="D">
+                        <span class="option-letter">D</span>
+                        <span class="option-text">Double the norepinephrine dose</span>
+                    </div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">
+                        <strong>Vasopressin</strong> is the recommended second-line agent when norepinephrine doses exceed 0.25-0.5 mcg/kg/min. It works via V1 receptors (catecholamine-independent), is "NE-sparing," and may be particularly beneficial as sepsis causes relative vasopressin deficiency. Dopamine causes more arrhythmias. Phenylephrine provides only vasoconstriction without inotropy and is reserved for specific situations. Simply increasing NE without adding a second agent may lead to diminishing returns and more adverse effects.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Question 4 -->
+            <div class="quiz-question" data-correct="D">
+                <div class="question-num">Question 4 of 15</div>
+                <div class="question-text">Which component is NOT part of the SOFA score used to define organ dysfunction in sepsis?</div>
+                <div class="options">
+                    <div class="option" data-answer="A">
+                        <span class="option-letter">A</span>
+                        <span class="option-text">PaO2/FiO2 ratio</span>
+                    </div>
+                    <div class="option" data-answer="B">
+                        <span class="option-letter">B</span>
+                        <span class="option-text">Platelet count</span>
+                    </div>
+                    <div class="option" data-answer="C">
+                        <span class="option-letter">C</span>
+                        <span class="option-text">Glasgow Coma Scale</span>
+                    </div>
+                    <div class="option" data-answer="D">
+                        <span class="option-letter">D</span>
+                        <span class="option-text">Lactate level</span>
+                    </div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">
+                        The SOFA score assesses 6 organ systems: <strong>Respiratory</strong> (P/F ratio), <strong>Coagulation</strong> (platelets), <strong>Liver</strong> (bilirubin), <strong>Cardiovascular</strong> (MAP/vasopressors), <strong>CNS</strong> (GCS), and <strong>Renal</strong> (creatinine/urine output). Lactate is NOT part of SOFA but is used separately in the definition of septic shock (lactate >2 mmol/L despite adequate resuscitation).
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Question 5 -->
+            <div class="quiz-question" data-correct="B">
+                <div class="question-num">Question 5 of 15</div>
+                <div class="question-stem">You are called to evaluate a 55-year-old woman with suspected cholangitis. She is febrile, tachycardic, and confused. BP is 85/50 mmHg, lactate is 5.2 mmol/L. You have already ordered blood cultures.</div>
+                <div class="question-text">According to the Surviving Sepsis Campaign Hour-1 bundle, what is the MOST time-sensitive intervention?</div>
+                <div class="options">
+                    <div class="option" data-answer="A">
+                        <span class="option-letter">A</span>
+                        <span class="option-text">Arrange emergent ERCP</span>
+                    </div>
+                    <div class="option" data-answer="B">
+                        <span class="option-letter">B</span>
+                        <span class="option-text">Administer broad-spectrum antibiotics</span>
+                    </div>
+                    <div class="option" data-answer="C">
+                        <span class="option-letter">C</span>
+                        <span class="option-text">Complete 30 mL/kg crystalloid bolus</span>
+                    </div>
+                    <div class="option" data-answer="D">
+                        <span class="option-letter">D</span>
+                        <span class="option-text">Place a central venous catheter</span>
+                    </div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">
+                        <strong>Antibiotics within 1 hour</strong> are the most time-sensitive intervention—each hour of delay increases mortality by 7-8%. While fluids are also critical, they can be given over 3 hours. ERCP for source control is important but typically happens within 6-12 hours (emergent if Tokyo Grade III severity). Central line placement should not delay antibiotics—start vasopressors through a peripheral IV if needed. The Hour-1 bundle emphasizes: lactate, cultures, antibiotics, fluids, and vasopressors if needed.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Question 6 -->
+            <div class="quiz-question" data-correct="C">
+                <div class="question-num">Question 6 of 15</div>
+                <div class="question-text">A septic patient's initial lactate is 6.8 mmol/L. After 2 hours of resuscitation with 2L crystalloid and norepinephrine, repeat lactate is 5.8 mmol/L. What is the lactate clearance and its clinical significance?</div>
+                <div class="options">
+                    <div class="option" data-answer="A">
+                        <span class="option-letter">A</span>
+                        <span class="option-text">15% clearance - adequate response, continue current management</span>
+                    </div>
+                    <div class="option" data-answer="B">
+                        <span class="option-letter">B</span>
+                        <span class="option-text">85% clearance - excellent response, consider de-escalation</span>
+                    </div>
+                    <div class="option" data-answer="C">
+                        <span class="option-letter">C</span>
+                        <span class="option-text">15% clearance - suboptimal, reassess resuscitation adequacy and source control</span>
+                    </div>
+                    <div class="option" data-answer="D">
+                        <span class="option-letter">D</span>
+                        <span class="option-text">1% clearance - critical failure, requires immediate ECMO evaluation</span>
+                    </div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">
+                        Lactate clearance = (6.8 - 5.8) / 6.8 × 100 = <strong>15%</strong>. Target clearance is ≥10-20% every 2 hours. While 15% meets the minimum threshold, it's at the lower end and the absolute lactate remains quite elevated. This warrants <strong>reassessing resuscitation adequacy</strong> (fluid responsiveness? need more vasopressors? adequate perfusion pressure?) and ensuring source control is addressed. If clearance continues to be sluggish, consider hepatic dysfunction limiting lactate metabolism.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Question 7 -->
+            <div class="quiz-question" data-correct="A">
+                <div class="question-num">Question 7 of 15</div>
+                <div class="question-text">In sepsis, lactate elevation can occur through mechanisms EXCEPT:</div>
+                <div class="options">
+                    <div class="option" data-answer="A">
+                        <span class="option-letter">A</span>
+                        <span class="option-text">Increased hepatic gluconeogenesis from lactate</span>
+                    </div>
+                    <div class="option" data-answer="B">
+                        <span class="option-letter">B</span>
+                        <span class="option-text">Catecholamine-driven aerobic glycolysis</span>
+                    </div>
+                    <div class="option" data-answer="C">
+                        <span class="option-letter">C</span>
+                        <span class="option-text">Tissue hypoperfusion with anaerobic metabolism</span>
+                    </div>
+                    <div class="option" data-answer="D">
+                        <span class="option-letter">D</span>
+                        <span class="option-text">Decreased hepatic clearance of lactate</span>
+                    </div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">
+                        <strong>Hepatic gluconeogenesis from lactate</strong> (the Cori cycle) is a clearance mechanism that REMOVES lactate, not a cause of elevation. In sepsis, this clearance pathway may be impaired, contributing to hyperlactatemia. The other options are all mechanisms that INCREASE lactate: anaerobic metabolism from hypoperfusion (Type A), β2-adrenergic-driven aerobic glycolysis (Type B), and reduced hepatic clearance. Understanding that lactate in sepsis is multifactorial prevents over-reliance on it as a pure perfusion marker.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Question 8 -->
+            <div class="quiz-question" data-correct="D">
+                <div class="question-num">Question 8 of 15</div>
+                <div class="question-stem">A 70-year-old diabetic man with pneumonia has been in the ICU for 2 days with septic shock requiring norepinephrine 0.3 mcg/kg/min. Despite MAP 68 mmHg and ScvO2 72%, he remains oliguric with creatinine rising from 1.8 to 3.2 mg/dL. He has received 5L of fluid over 48 hours.</div>
+                <div class="question-text">What is the best approach to assess whether additional IV fluids will improve his hemodynamics?</div>
+                <div class="options">
+                    <div class="option" data-answer="A">
+                        <span class="option-letter">A</span>
+                        <span class="option-text">Check CVP - give fluids if CVP <12 mmHg</span>
+                    </div>
+                    <div class="option" data-answer="B">
+                        <span class="option-letter">B</span>
+                        <span class="option-text">Empirically give another 30 mL/kg bolus</span>
+                    </div>
+                    <div class="option" data-answer="C">
+                        <span class="option-letter">C</span>
+                        <span class="option-text">Assess skin turgor and mucous membranes</span>
+                    </div>
+                    <div class="option" data-answer="D">
+                        <span class="option-letter">D</span>
+                        <span class="option-text">Perform passive leg raise with cardiac output monitoring</span>
+                    </div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">
+                        <strong>Passive leg raise (PLR) with CO monitoring</strong> is the best dynamic assessment of fluid responsiveness. PLR transiently increases venous return by ~300 mL; if CO increases ≥10%, the patient is likely fluid responsive. CVP is notoriously unreliable for predicting fluid responsiveness—patients can have low CVP and not respond to fluids, or high CVP and still respond. Empiric boluses in an already fluid-resuscitated patient risk pulmonary edema. After the initial resuscitation phase, fluids should be given judiciously based on dynamic predictors.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Question 9 -->
+            <div class="quiz-question" data-correct="B">
+                <div class="question-num">Question 9 of 15</div>
+                <div class="question-text">A patient with healthcare-associated pneumonia develops septic shock. She was recently hospitalized and received antibiotics 3 months ago. Which empiric antibiotic regimen is most appropriate?</div>
+                <div class="options">
+                    <div class="option" data-answer="A">
+                        <span class="option-letter">A</span>
+                        <span class="option-text">Ceftriaxone + azithromycin</span>
+                    </div>
+                    <div class="option" data-answer="B">
+                        <span class="option-letter">B</span>
+                        <span class="option-text">Piperacillin-tazobactam + vancomycin</span>
+                    </div>
+                    <div class="option" data-answer="C">
+                        <span class="option-letter">C</span>
+                        <span class="option-text">Ampicillin-sulbactam</span>
+                    </div>
+                    <div class="option" data-answer="D">
+                        <span class="option-letter">D</span>
+                        <span class="option-text">Levofloxacin monotherapy</span>
+                    </div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">
+                        This patient has risk factors for resistant organisms (recent hospitalization, recent antibiotics). She needs broad coverage including <strong>anti-pseudomonal</strong> activity (pip-tazo, cefepime, or meropenem) plus <strong>MRSA coverage</strong> (vancomycin). Ceftriaxone + azithromycin would be appropriate for community-acquired pneumonia without risk factors. Ampicillin-sulbactam lacks Pseudomonas coverage. Fluoroquinolone monotherapy is inadequate for septic shock with resistant pathogen risk. De-escalate within 48-72 hours once cultures return.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Question 10 -->
+            <div class="quiz-question" data-correct="C">
+                <div class="question-num">Question 10 of 15</div>
+                <div class="question-text">In which patient with septic shock is hydrocortisone therapy MOST appropriate?</div>
+                <div class="options">
+                    <div class="option" data-answer="A">
+                        <span class="option-letter">A</span>
+                        <span class="option-text">MAP 62 on norepinephrine 0.08 mcg/kg/min, improving lactate</span>
+                    </div>
+                    <div class="option" data-answer="B">
+                        <span class="option-letter">B</span>
+                        <span class="option-text">Hypotensive patient before any vasopressor trial</span>
+                    </div>
+                    <div class="option" data-answer="C">
+                        <span class="option-letter">C</span>
+                        <span class="option-text">Requiring norepinephrine 0.35 mcg/kg/min + vasopressin for 6 hours</span>
+                    </div>
+                    <div class="option" data-answer="D">
+                        <span class="option-letter">D</span>
+                        <span class="option-text">Only after random cortisol level returns <10 mcg/dL</span>
+                    </div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">
+                        Current guidelines recommend <strong>hydrocortisone for refractory septic shock</strong>—typically defined as requiring high-dose vasopressors (NE >0.25 mcg/kg/min) for several hours despite adequate fluids. This patient meets criteria with high-dose NE + vasopressin for 6 hours. Testing cortisol levels is NOT required—treat empirically. Patients responding to low-dose vasopressors (option A) don't need steroids. Give fluids and vasopressors first before considering steroids (option B is premature).
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Question 11 -->
+            <div class="quiz-question" data-correct="A">
+                <div class="question-num">Question 11 of 15</div>
+                <div class="question-text">A septic patient develops ARDS with P/F ratio of 90. She is on volume-controlled ventilation with tidal volume 450 mL (6 mL/kg IBW 75 kg), PEEP 14, and FiO2 100%. Plateau pressure is 32 cm H2O. What is the most appropriate ventilator adjustment?</div>
+                <div class="options">
+                    <div class="option" data-answer="A">
+                        <span class="option-letter">A</span>
+                        <span class="option-text">Decrease tidal volume to 375-400 mL</span>
+                    </div>
+                    <div class="option" data-answer="B">
+                        <span class="option-letter">B</span>
+                        <span class="option-text">Increase tidal volume to improve ventilation</span>
+                    </div>
+                    <div class="option" data-answer="C">
+                        <span class="option-letter">C</span>
+                        <span class="option-text">Decrease PEEP to reduce plateau pressure</span>
+                    </div>
+                    <div class="option" data-answer="D">
+                        <span class="option-letter">D</span>
+                        <span class="option-text">No changes needed, settings are optimal</span>
+                    </div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">
+                        The plateau pressure (32 cm H₂O) exceeds the target of <30 cm H₂O. <strong>Decrease tidal volume</strong> further to 5-6 mL/kg IBW to achieve lung-protective ventilation and reduce barotrauma risk. Allow permissive hypercapnia if needed. The driving pressure (Pplat - PEEP = 18) is also above the ideal target of <15. Decreasing PEEP would worsen oxygenation in severe ARDS. In this patient with P/F 90, also consider prone positioning.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Question 12 -->
+            <div class="quiz-question" data-correct="B">
+                <div class="question-num">Question 12 of 15</div>
+                <div class="question-text">Which hemodynamic profile is most consistent with cardiogenic shock?</div>
+                <div class="options">
+                    <div class="option" data-answer="A">
+                        <span class="option-letter">A</span>
+                        <span class="option-text">CVP high, CO high, SVR low</span>
+                    </div>
+                    <div class="option" data-answer="B">
+                        <span class="option-letter">B</span>
+                        <span class="option-text">CVP high, CO low, SVR high</span>
+                    </div>
+                    <div class="option" data-answer="C">
+                        <span class="option-letter">C</span>
+                        <span class="option-text">CVP low, CO low, SVR high</span>
+                    </div>
+                    <div class="option" data-answer="D">
+                        <span class="option-letter">D</span>
+                        <span class="option-text">CVP low, CO high, SVR low</span>
+                    </div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">
+                        <strong>Cardiogenic shock</strong> = pump failure. The heart can't eject blood effectively, so: preload backs up (high CVP/PCWP), cardiac output falls (low CO), and the body compensates by vasoconstricting (high SVR). Option A describes early septic shock (distributive). Option C describes hypovolemic shock. Option D doesn't represent any classic shock pattern. Distinguishing cardiogenic from septic shock is critical—the treatments are opposite (cardiogenic needs afterload reduction and inotropes; septic needs vasopressors).
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Question 13 -->
+            <div class="quiz-question" data-correct="C">
+                <div class="question-num">Question 13 of 15</div>
+                <div class="question-stem">A 58-year-old man with perforated appendicitis has been treated with antibiotics and is on day 5 of ICU stay. Blood cultures are negative. Procalcitonin has decreased from 15 to 2 ng/mL. He has defervesced and is off vasopressors.</div>
+                <div class="question-text">What is the most appropriate antibiotic duration strategy?</div>
+                <div class="options">
+                    <div class="option" data-answer="A">
+                        <span class="option-letter">A</span>
+                        <span class="option-text">Continue antibiotics until PCT <0.1 ng/mL</span>
+                    </div>
+                    <div class="option" data-answer="B">
+                        <span class="option-letter">B</span>
+                        <span class="option-text">Complete 14 days regardless of PCT</span>
+                    </div>
+                    <div class="option" data-answer="C">
+                        <span class="option-letter">C</span>
+                        <span class="option-text">Consider stopping antibiotics given clinical improvement and PCT trending down</span>
+                    </div>
+                    <div class="option" data-answer="D">
+                        <span class="option-letter">D</span>
+                        <span class="option-text">Switch to oral antibiotics for 21 total days</span>
+                    </div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">
+                        PCT-guided antibiotic discontinuation can safely shorten duration. This patient has: clinical improvement (afebrile, off pressors), PCT decreased by >80% from peak, and adequate source control (surgical management of perforation). Guidelines suggest considering stopping antibiotics when PCT drops ≥80% from peak OR reaches <0.5 ng/mL, combined with clinical improvement. A 7-10 day course is typical for complicated intra-abdominal infection with source control. Unnecessarily prolonging antibiotics increases resistance and adverse effects.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Question 14 -->
+            <div class="quiz-question" data-correct="D">
+                <div class="question-num">Question 14 of 15</div>
+                <div class="question-text">A patient with septic shock develops acute kidney injury with oliguria and creatinine 4.2 mg/dL (baseline 1.0). Potassium is 5.4 mEq/L, bicarbonate 18 mEq/L, and he is volume overloaded but responsive to diuretics. According to recent evidence, when should you initiate renal replacement therapy?</div>
+                <div class="options">
+                    <div class="option" data-answer="A">
+                        <span class="option-letter">A</span>
+                        <span class="option-text">Immediately - early RRT improves outcomes in septic AKI</span>
+                    </div>
+                    <div class="option" data-answer="B">
+                        <span class="option-letter">B</span>
+                        <span class="option-text">When creatinine doubles from current level</span>
+                    </div>
+                    <div class="option" data-answer="C">
+                        <span class="option-letter">C</span>
+                        <span class="option-text">When urine output falls below 200 mL/day</span>
+                    </div>
+                    <div class="option" data-answer="D">
+                        <span class="option-letter">D</span>
+                        <span class="option-text">For emergent indications (refractory acidosis, hyperkalemia, volume overload, or uremia)</span>
+                    </div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">
+                        Recent trials (STARRT-AKI, IDEAL-ICU) showed <strong>no benefit to early/prophylactic RRT</strong> in AKI without absolute indications—and potential harm from catheter complications and hemodynamic instability. Initiate RRT for conventional emergent indications: refractory hyperkalemia, severe metabolic acidosis (pH <7.1), uremic symptoms (encephalopathy, pericarditis), or volume overload refractory to diuretics. This patient's hyperkalemia and acidosis are mild and volume is diuretic-responsive—continue supportive care and monitor closely.
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Question 15 -->
+            <div class="quiz-question" data-correct="B">
+                <div class="question-num">Question 15 of 15</div>
+                <div class="question-stem">A 45-year-old woman presents with anaphylaxis after a bee sting. Despite epinephrine and fluids, she remains hypotensive with MAP 55 mmHg. She is flushed and warm.</div>
+                <div class="question-text">What type of shock is this, and what is the first-line vasopressor after epinephrine?</div>
+                <div class="options">
+                    <div class="option" data-answer="A">
+                        <span class="option-letter">A</span>
+                        <span class="option-text">Distributive shock; dopamine</span>
+                    </div>
+                    <div class="option" data-answer="B">
+                        <span class="option-letter">B</span>
+                        <span class="option-text">Distributive shock; norepinephrine</span>
+                    </div>
+                    <div class="option" data-answer="C">
+                        <span class="option-letter">C</span>
+                        <span class="option-text">Hypovolemic shock; phenylephrine</span>
+                    </div>
+                    <div class="option" data-answer="D">
+                        <span class="option-letter">D</span>
+                        <span class="option-text">Cardiogenic shock; dobutamine</span>
+                    </div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">
+                        Anaphylactic shock is <strong>distributive shock</strong>—massive vasodilation from histamine and other mediators causes low SVR (warm, flushed skin) and relative hypovolemia. Epinephrine is first-line for anaphylaxis (IM 0.3-0.5 mg, can repeat). If refractory to epinephrine, add <strong>norepinephrine infusion</strong> for its potent α1 vasoconstriction. Dopamine is avoided due to arrhythmia risk. This is not hypovolemic (primary problem is vasodilation) or cardiogenic (heart is working fine, just can't fill due to vasodilation).
+                    </div>
+                </div>
             </div>
         </div>
         
-        <!-- Section 4: Antibiotic Selection -->
-        <section class="section">
-            <h2 class="section-title">💊 Antibiotic Principles in Sepsis</h2>
-            
-            <div class="concept-card">
-                <h3>Time to Antibiotics</h3>
-                <p>Each hour of delay in appropriate antibiotics increases mortality in septic shock:</p>
-                <ul>
-                    <li><strong>Target</strong> — Within 1 hour of sepsis recognition</li>
-                    <li><strong>Blood cultures first</strong> — But don't delay antibiotics >45 min for cultures</li>
-                    <li><strong>Broad spectrum</strong> — Cover likely pathogens based on source; narrow when cultures return</li>
-                </ul>
+        <!-- Cross-Links Section -->
+        <div class="crosslink-section">
+            <div class="crosslink-title">🔗 Related Modules & Cases</div>
+            <div class="crosslink-grid">
+                <a href="mechanismdx-aki-module.html" class="crosslink-item">
+                    <span class="crosslink-icon">💧</span>
+                    <div>
+                        <div class="crosslink-text">Acute Kidney Injury</div>
+                        <div class="crosslink-platform">MechanismDx</div>
+                    </div>
+                </a>
+                <a href="mechanismdx-acid-base-module.html" class="crosslink-item">
+                    <span class="crosslink-icon">⚗️</span>
+                    <div>
+                        <div class="crosslink-text">Acid-Base Disorders</div>
+                        <div class="crosslink-platform">MechanismDx</div>
+                    </div>
+                </a>
+                <a href="mechanismdx-hf-module.html" class="crosslink-item">
+                    <span class="crosslink-icon">💔</span>
+                    <div>
+                        <div class="crosslink-text">Heart Failure</div>
+                        <div class="crosslink-platform">MechanismDx</div>
+                    </div>
+                </a>
+                <a href="mechanismdx-acs-module.html" class="crosslink-item">
+                    <span class="crosslink-icon">🫀</span>
+                    <div>
+                        <div class="crosslink-text">Acute Coronary Syndrome</div>
+                        <div class="crosslink-platform">MechanismDx</div>
+                    </div>
+                </a>
+                <a href="coachdx-index.html#pneumonia-sepsis" class="crosslink-item">
+                    <span class="crosslink-icon">💬</span>
+                    <div>
+                        <div class="crosslink-text">Sepsis Cases</div>
+                        <div class="crosslink-platform">CoachDx</div>
+                    </div>
+                </a>
+                <a href="reasondx-index.html#sepsis" class="crosslink-item">
+                    <span class="crosslink-icon">🏥</span>
+                    <div>
+                        <div class="crosslink-text">Undifferentiated Shock Cases</div>
+                        <div class="crosslink-platform">ReasonDx</div>
+                    </div>
+                </a>
             </div>
-            
-            <div class="concept-card">
-                <h3>Empiric Coverage by Source</h3>
-                <table class="comparison-table">
-                    <thead>
-                        <tr><th>Source</th><th>Likely Pathogens</th><th>Empiric Regimen</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td><strong>Pneumonia</strong></td><td>S. pneumo, H. flu, atypicals, Pseudomonas if risk</td><td>Ceftriaxone + azithro; or antipseudomonal β-lactam</td></tr>
-                        <tr><td><strong>UTI/Urosepsis</strong></td><td>E. coli, Klebsiella, Enterococcus</td><td>Ceftriaxone; Pip-tazo if complicated</td></tr>
-                        <tr><td><strong>Intra-abdominal</strong></td><td>Gram-neg, anaerobes, Enterococcus</td><td>Pip-tazo or cefepime + metronidazole</td></tr>
-                        <tr><td><strong>Skin/Soft tissue</strong></td><td>Strep, Staph (including MRSA)</td><td>Vancomycin + pip-tazo (if necrotizing)</td></tr>
-                        <tr><td><strong>Unknown</strong></td><td>Broad coverage</td><td>Vancomycin + pip-tazo or meropenem</td></tr>
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="danger-box">
-                <h4>⚠️ MRSA Risk Factors</h4>
-                <p>Add vancomycin for: prior MRSA, recent hospitalization, hemodialysis, indwelling lines, injection drug use, skin/soft tissue source, known colonization. Don't forget to check local antibiogram!</p>
-            </div>
-        </section>
-        
-        <!-- Section 5: Monitoring & Adjuncts -->
-        <section class="section">
-            <h2 class="section-title">📊 Monitoring & Adjunctive Therapies</h2>
-            
-            <div class="concept-card">
-                <h3>Resuscitation Targets</h3>
-                <ul>
-                    <li><strong>MAP ≥65 mmHg</strong> — Higher targets (80-85) not beneficial, may be harmful</li>
-                    <li><strong>Lactate clearance</strong> — Target ≥10% decrease per 2 hours; as good as ScvO2</li>
-                    <li><strong>Urine output</strong> — Goal >0.5 mL/kg/hr</li>
-                    <li><strong>Capillary refill</strong> — Peripheral perfusion marker; target <3 seconds</li>
-                </ul>
-            </div>
-            
-            <div class="concept-card">
-                <h3>Adjunctive Therapies</h3>
-                <ul>
-                    <li><strong>Corticosteroids</strong> — Hydrocortisone 200mg/day for refractory shock (NE >0.25 for ≥4h); no proven mortality benefit but faster shock reversal</li>
-                    <li><strong>Blood transfusion</strong> — Restrictive (Hgb <7) unless active bleeding, severe hypoxemia, or cardiac ischemia</li>
-                    <li><strong>Glucose control</strong> — Target 140-180 mg/dL; avoid tight control (<110) due to hypoglycemia risk</li>
-                    <li><strong>DVT prophylaxis</strong> — LMWH preferred unless contraindicated</li>
-                    <li><strong>Stress ulcer prophylaxis</strong> — PPI or H2 blocker if risk factors (coagulopathy, mechanical ventilation)</li>
-                </ul>
-            </div>
-            
-            <div class="formula-box">
-                <h4>MAP Calculation</h4>
-                <p class="formula">MAP = (SBP + 2 × DBP) / 3</p>
-            </div>
-            
-            <div class="clinical-pearl">
-                <h4>💡 Clinical Pearl</h4>
-                <p>Lactate-guided resuscitation is non-inferior to ScvO2-guided. Serial lactates every 2-4 hours help assess response. Persistent lactate elevation despite adequate MAP suggests ongoing tissue hypoperfusion, microcirculatory dysfunction, or non-hypoxic lactate production.</p>
-            </div>
-        </section>
-        
-        <!-- Quiz 3 -->
-        <div class="quiz-section">
-            <h3>🧠 Check Your Understanding</h3>
-            <div class="quiz-question" id="q5">
-                <p>A patient with septic shock has been on norepinephrine 0.4 mcg/kg/min and vasopressin 0.03 units/min for 6 hours. MAP is 62, lactate is stable at 3.8 (down from 6.2). What is the most appropriate next intervention?</p>
-                <div class="quiz-options">
-                    <div class="quiz-option" onclick="checkAnswer('q5', this, 'A')"><span class="option-letter">A.</span> Add dobutamine for inotropic support</div>
-                    <div class="quiz-option" onclick="checkAnswer('q5', this, 'B')"><span class="option-letter">B.</span> Add hydrocortisone 50mg IV q6h</div>
-                    <div class="quiz-option" onclick="checkAnswer('q5', this, 'C')"><span class="option-letter">C.</span> Increase norepinephrine to achieve MAP >70</div>
-                    <div class="quiz-option" onclick="checkAnswer('q5', this, 'D')"><span class="option-letter">D.</span> Switch to epinephrine monotherapy</div>
-                    <div class="quiz-option" onclick="checkAnswer('q5', this, 'E')"><span class="option-letter">E.</span> Continue current management; lactate improving</div>
-                </div>
-                <div class="quiz-feedback" id="q5-feedback"></div>
-            </div>
-            
-            <div class="quiz-question" id="q6">
-                <p>A 72-year-old with urosepsis has received 30 mL/kg fluids. Current vitals: BP 88/52, HR 105, RR 22. Lactate 5.1. Bedside IVC ultrasound shows >50% collapse with inspiration. What does this finding suggest?</p>
-                <div class="quiz-options">
-                    <div class="quiz-option" onclick="checkAnswer('q6', this, 'A')"><span class="option-letter">A.</span> Adequate volume status; start vasopressors</div>
-                    <div class="quiz-option" onclick="checkAnswer('q6', this, 'B')"><span class="option-letter">B.</span> Fluid responsive; additional crystalloid likely beneficial</div>
-                    <div class="quiz-option" onclick="checkAnswer('q6', this, 'C')"><span class="option-letter">C.</span> Volume overloaded; stop fluids and start diuresis</div>
-                    <div class="quiz-option" onclick="checkAnswer('q6', this, 'D')"><span class="option-letter">D.</span> Right heart failure; obtain echocardiogram</div>
-                    <div class="quiz-option" onclick="checkAnswer('q6', this, 'E')"><span class="option-letter">E.</span> Cardiac tamponade; emergent pericardiocentesis</div>
-                </div>
-                <div class="quiz-feedback" id="q6-feedback"></div>
-            </div>
-        </div>
-        
-        <!-- Section 6: Organ Dysfunction -->
-        <section class="section">
-            <h2 class="section-title">🏥 Sepsis-Related Organ Dysfunction</h2>
-            
-            <div class="concept-card">
-                <h3>SOFA Score Components</h3>
-                <table class="comparison-table">
-                    <thead>
-                        <tr><th>Organ System</th><th>Parameter</th><th>Points 1-4</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td><strong>Respiratory</strong></td><td>PaO2/FiO2</td><td>400→300→200→100</td></tr>
-                        <tr><td><strong>Coagulation</strong></td><td>Platelets (×10³)</td><td>150→100→50→20</td></tr>
-                        <tr><td><strong>Liver</strong></td><td>Bilirubin (mg/dL)</td><td>1.2→2→6→12</td></tr>
-                        <tr><td><strong>Cardiovascular</strong></td><td>MAP/Vasopressors</td><td>MAP<70 → dopamine → NE low → NE high</td></tr>
-                        <tr><td><strong>CNS</strong></td><td>GCS</td><td>13-14→10-12→6-9→<6</td></tr>
-                        <tr><td><strong>Renal</strong></td><td>Creatinine/UOP</td><td>1.2→2→3.5→5 (or UOP)</td></tr>
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="concept-card">
-                <h3>Sepsis-Induced AKI</h3>
-                <ul>
-                    <li><strong>Mechanism</strong> — Microvascular dysfunction, inflammation, tubular injury (not just hypoperfusion)</li>
-                    <li><strong>Urine output</strong> — Often decreased; but AKI can occur with preserved UOP</li>
-                    <li><strong>Avoid nephrotoxins</strong> — NSAIDs, aminoglycosides, contrast (if possible)</li>
-                    <li><strong>RRT indications</strong> — Refractory hyperkalemia, acidosis, volume overload, uremic symptoms</li>
-                </ul>
-            </div>
-            
-            <div class="concept-card">
-                <h3>Sepsis-Induced Coagulopathy & DIC</h3>
-                <ul>
-                    <li><strong>Mechanism</strong> — Tissue factor expression → coagulation activation + impaired anticoagulation + fibrinolysis shutdown</li>
-                    <li><strong>Labs</strong> — ↓ platelets, ↑ PT/INR, ↑ D-dimer, ↓ fibrinogen</li>
-                    <li><strong>Clinical</strong> — Microthrombi (organ dysfunction) AND bleeding (consumption)</li>
-                    <li><strong>Treatment</strong> — Treat underlying infection; FFP/platelets/cryo only if bleeding</li>
-                </ul>
-            </div>
-        </section>
-        
-        <!-- Quiz 4 -->
-        <div class="quiz-section">
-            <h3>🧠 Check Your Understanding</h3>
-            <div class="quiz-question" id="q7">
-                <p>A patient with septic shock develops acute kidney injury (Cr 3.2 from baseline 1.0). Which statement about sepsis-induced AKI is MOST accurate?</p>
-                <div class="quiz-options">
-                    <div class="quiz-option" onclick="checkAnswer('q7', this, 'A')"><span class="option-letter">A.</span> Pre-renal azotemia from hypoperfusion is the primary mechanism</div>
-                    <div class="quiz-option" onclick="checkAnswer('q7', this, 'B')"><span class="option-letter">B.</span> Microvascular dysfunction and inflammation contribute independent of hypoperfusion</div>
-                    <div class="quiz-option" onclick="checkAnswer('q7', this, 'C')"><span class="option-letter">C.</span> FENa will reliably distinguish pre-renal from intrinsic injury</div>
-                    <div class="quiz-option" onclick="checkAnswer('q7', this, 'D')"><span class="option-letter">D.</span> Loop diuretics improve renal outcomes in septic AKI</div>
-                    <div class="quiz-option" onclick="checkAnswer('q7', this, 'E')"><span class="option-letter">E.</span> Early RRT improves mortality in sepsis-induced AKI</div>
-                </div>
-                <div class="quiz-feedback" id="q7-feedback"></div>
-            </div>
-            
-            <div class="quiz-question" id="q8">
-                <p>A septic patient has platelets 45K, INR 2.1, fibrinogen 95, D-dimer >10,000. No active bleeding. What is the most appropriate management of this coagulopathy?</p>
-                <div class="quiz-options">
-                    <div class="quiz-option" onclick="checkAnswer('q8', this, 'A')"><span class="option-letter">A.</span> Transfuse platelets to maintain >50K</div>
-                    <div class="quiz-option" onclick="checkAnswer('q8', this, 'B')"><span class="option-letter">B.</span> Administer FFP to correct INR</div>
-                    <div class="quiz-option" onclick="checkAnswer('q8', this, 'C')"><span class="option-letter">C.</span> Give cryoprecipitate for low fibrinogen</div>
-                    <div class="quiz-option" onclick="checkAnswer('q8', this, 'D')"><span class="option-letter">D.</span> Focus on treating underlying infection; transfuse only if bleeding</div>
-                    <div class="quiz-option" onclick="checkAnswer('q8', this, 'E')"><span class="option-letter">E.</span> Start heparin to prevent microthrombi formation</div>
-                </div>
-                <div class="quiz-feedback" id="q8-feedback"></div>
-            </div>
-        </div>
-        
-        <!-- Section 7: Special Populations -->
-        <section class="section">
-            <h2 class="section-title">👥 Special Considerations</h2>
-            
-            <div class="concept-card">
-                <h3>Immunocompromised Patients</h3>
-                <ul>
-                    <li><strong>Neutropenic fever</strong> — Medical emergency; antipseudomonal coverage essential</li>
-                    <li><strong>Fungal coverage</strong> — Consider echinocandin if prolonged neutropenia, TPN, prior colonization</li>
-                    <li><strong>Atypical presentations</strong> — May lack fever, leukocytosis, or localizing signs</li>
-                    <li><strong>PJP prophylaxis failures</strong> — Consider PJP in HIV/immunosuppressed with hypoxia</li>
-                </ul>
-            </div>
-            
-            <div class="concept-card">
-                <h3>Source Control</h3>
-                <p>Antibiotics alone are insufficient if there's an undrained collection or infected device:</p>
-                <ul>
-                    <li><strong>Abscess</strong> — Drainage (percutaneous or surgical)</li>
-                    <li><strong>Cholangitis</strong> — ERCP for biliary decompression</li>
-                    <li><strong>Infected lines</strong> — Remove if possible; line salvage rarely successful</li>
-                    <li><strong>Necrotizing fasciitis</strong> — Emergent surgical debridement</li>
-                    <li><strong>Timing</strong> — Within 6-12 hours when feasible</li>
-                </ul>
-            </div>
-            
-            <div class="danger-box">
-                <h4>⚠️ Red Flag: Necrotizing Soft Tissue Infection</h4>
-                <p>Pain out of proportion, crepitus, rapid progression, hemodynamic instability, skin changes (dusky, bullae). Don't wait for imaging — surgical exploration is both diagnostic and therapeutic. Mortality increases with every hour of delay.</p>
-            </div>
-        </section>
-        
-        <!-- Quiz 5 -->
-        <div class="quiz-section">
-            <h3>🧠 Final Questions</h3>
-            <div class="quiz-question" id="q9">
-                <p>A 58-year-old post-chemotherapy patient presents with fever 39.2°C and ANC 200. BP 92/58, HR 118. Which antibiotic regimen is MOST appropriate?</p>
-                <div class="quiz-options">
-                    <div class="quiz-option" onclick="checkAnswer('q9', this, 'A')"><span class="option-letter">A.</span> Ceftriaxone 2g IV — adequate gram-negative coverage</div>
-                    <div class="quiz-option" onclick="checkAnswer('q9', this, 'B')"><span class="option-letter">B.</span> Cefepime 2g IV — antipseudomonal coverage for neutropenic fever</div>
-                    <div class="quiz-option" onclick="checkAnswer('q9', this, 'C')"><span class="option-letter">C.</span> Vancomycin monotherapy — covers skin flora entry points</div>
-                    <div class="quiz-option" onclick="checkAnswer('q9', this, 'D')"><span class="option-letter">D.</span> Azithromycin + levofloxacin — covers atypicals and gram-negatives</div>
-                    <div class="quiz-option" onclick="checkAnswer('q9', this, 'E')"><span class="option-letter">E.</span> Trimethoprim-sulfamethoxazole — covers PJP and common organisms</div>
-                </div>
-                <div class="quiz-feedback" id="q9-feedback"></div>
-            </div>
-            
-            <div class="quiz-question" id="q10">
-                <p>A patient with acute cholangitis (fever, jaundice, RUQ pain) has septic shock despite antibiotics and fluids. Norepinephrine requirement is increasing. What is the MOST critical next intervention?</p>
-                <div class="quiz-options">
-                    <div class="quiz-option" onclick="checkAnswer('q10', this, 'A')"><span class="option-letter">A.</span> Escalate to meropenem for broader coverage</div>
-                    <div class="quiz-option" onclick="checkAnswer('q10', this, 'B')"><span class="option-letter">B.</span> Add vasopressin as second-line vasopressor</div>
-                    <div class="quiz-option" onclick="checkAnswer('q10', this, 'C')"><span class="option-letter">C.</span> Urgent ERCP for biliary decompression</div>
-                    <div class="quiz-option" onclick="checkAnswer('q10', this, 'D')"><span class="option-letter">D.</span> Start hydrocortisone for refractory shock</div>
-                    <div class="quiz-option" onclick="checkAnswer('q10', this, 'E')"><span class="option-letter">E.</span> Obtain CT abdomen to evaluate for complications</div>
-                </div>
-                <div class="quiz-feedback" id="q10-feedback"></div>
-            </div>
-        </div>
-        
-        <!-- Cross-Platform Links -->
-        <div class="cross-link">
-            <div class="cross-link-icon">💬</div>
-            <div class="cross-link-content">
-                <h4>Practice Clinical Reasoning</h4>
-                <p>Work through a sepsis case with AI-guided Socratic teaching</p>
-            </div>
-            <a href="coachdx-mentor-chat.html?case=sepsis" class="cross-link-btn">Try Sepsis Case →</a>
-        </div>
-        
-        <div class="cross-link" style="background: #fce7f3; border-color: #f9a8d4;">
-            <div class="cross-link-icon">🩺</div>
-            <div class="cross-link-content">
-                <h4>Related: AKI Module</h4>
-                <p>Deep dive into sepsis-associated acute kidney injury</p>
-            </div>
-            <a href="mechanismdx-aki-module.html" class="cross-link-btn" style="background: #ec4899;">AKI Module →</a>
         </div>
         
         <!-- Module Complete -->
-        <div class="concept-card" style="background: linear-gradient(135deg, #fef2f2, #fee2e2); border-color: #fca5a5; text-align: center; padding: 32px;">
-            <h3 style="color: #dc2626; font-size: 20px;">🎉 Module Complete!</h3>
-            <p style="color: #b91c1c; margin-bottom: 16px;">You've completed the Sepsis & Shock module.</p>
-            <p style="color: #dc2626;" id="scoreDisplay">Score: 0/0 correct (10 remaining)</p>
+        <div class="module-complete">
+            <div class="complete-icon">🏆</div>
+            <div class="complete-title">Module Complete!</div>
+            <div class="complete-subtitle">You've mastered the pathophysiology of sepsis and shock. The inflammatory cascade, hemodynamic profiles, and Hour-1 bundle are now in your clinical toolkit.</div>
+            <div class="complete-stats">
+                <div class="complete-stat">
+                    <div class="complete-stat-num" id="scoreNum">0</div>
+                    <div class="complete-stat-label">Questions Correct</div>
+                </div>
+                <div class="complete-stat">
+                    <div class="complete-stat-num">18</div>
+                    <div class="complete-stat-label">Concepts Covered</div>
+                </div>
+                <div class="complete-stat">
+                    <div class="complete-stat-num">6</div>
+                    <div class="complete-stat-label">Clinical Pearls</div>
+                </div>
+            </div>
+            <a href="mechanismdx-index.html" class="complete-btn">Return to All Modules</a>
         </div>
     </main>
     
     <footer class="footer">
-        <p>© 2025-2026 MechanismDx · Part of the <a href="index.html">Dx Learning Ecosystem</a></p>
+        <p>© 2025-2026 MechanismDx · Part of the <a href="dxsuite-index.html">Dx Learning Ecosystem</a></p>
         <p style="margin-top: 8px; font-size: 12px; color: #94a3b8;">Created by Lauren Fine, MD, FAAAAI · Nova Southeastern University</p>
     </footer>
     
     <script>
-        const feedbackText = {
-            q1: { 
-                correct: "Correct! Under Sepsis-3, this patient has SEPSIS — infection (pneumonia) with suspected organ dysfunction (confusion = altered mental status, hypotension). She has qSOFA ≥2 (RR ≥22, SBP ≤100, altered mental status). Note: 'Severe sepsis' is no longer a Sepsis-3 term. She may have septic shock, but this requires demonstrating vasopressor need and lactate >2 AFTER adequate fluid resuscitation.", 
-                incorrect: "Under Sepsis-3 criteria, this patient has SEPSIS — infection with suspected organ dysfunction. She meets qSOFA criteria (≥2: RR 24, SBP 95, confusion). 'Severe sepsis' is no longer a Sepsis-3 category. SIRS alone is insufficient. Determining septic shock requires assessing response after fluids." 
-            },
-            q2: { 
-                correct: "Correct! In early septic shock, cytokine-mediated vasodilation (primarily NO from iNOS induction) causes profound decrease in SVR. This creates 'warm shock' — hypotension with warm, well-perfused extremities. The heart increases output to compensate, but the 'tank is leaky' with third-spacing.", 
-                incorrect: "The warm extremities in early sepsis reflect cytokine-mediated peripheral vasodilation. TNF-α and IL-1 induce nitric oxide synthase, causing profound vasodilation and decreased SVR. This is the hallmark of distributive shock — adequate cardiac output but 'vasodilatory' hypotension." 
-            },
-            q3: { 
-                correct: "Correct! This patient has received adequate initial fluids (3L ≈ 30mL/kg for ~100kg patient), and echo shows hyperdynamic function with small LV (suggesting volume-responsive but not overloaded). The problem is distributive — low SVR. Norepinephrine is first-line to increase SVR and achieve MAP ≥65.", 
-                incorrect: "After initial 30 mL/kg crystalloid, if MAP remains <65 with signs of hyperdynamic circulation (small, hyperdynamic LV), the next step is vasopressors — specifically norepinephrine as first-line. More fluid without vasopressors delays resuscitation; PA catheter is rarely needed." 
-            },
-            q4: { 
-                correct: "Correct! Sepsis depletes endogenous vasopressin stores (early release, then depletion). Exogenous vasopressin works through V1 receptors — completely independent of catecholamine pathways. This is especially valuable when catecholamine receptors are downregulated from prolonged exposure or when high-dose catecholamines cause tachyarrhythmias.", 
-                incorrect: "Vasopressin works through non-adrenergic V1 receptors, providing vasoconstriction independent of catecholamine pathways. Sepsis depletes endogenous vasopressin. Adding vasopressin early allows catecholamine-sparing and addresses receptor downregulation — this is the key mechanism." 
-            },
-            q5: { 
-                correct: "Correct! With MAP near target (62, goal ≥65) and lactate IMPROVING (6.2 → 3.8, >10% clearance), this patient is responding. Adding hydrocortisone is reasonable for refractory shock, but lactate clearance suggests adequate resuscitation. Current management is appropriate; reassess frequently.", 
-                incorrect: "The lactate is clearing well (6.2 → 3.8, ~39% reduction), which is the best marker of adequate resuscitation. MAP of 62 is close to goal. Hydrocortisone is appropriate for refractory shock (>4h high-dose vasopressors), but given improving lactate, current management may be adequate. Continue monitoring." 
-            },
-            q6: { 
-                correct: "Correct! IVC collapse >50% with inspiration (high collapsibility index) suggests low right atrial pressure and likely fluid responsiveness. Despite having received 30 mL/kg, this patient may benefit from additional crystalloid before committing to vasopressors. However, always integrate with clinical picture.", 
-                incorrect: "IVC collapsibility >50% with inspiration suggests the patient is likely fluid-responsive — there's room in the 'tank.' This doesn't guarantee benefit from fluids, but suggests preload is not optimized. Continue cautious fluid resuscitation while initiating vasopressors if MAP remains low." 
-            },
-            q7: { 
-                correct: "Correct! Sepsis-induced AKI is not simply 'pre-renal' from hypoperfusion. Microvascular dysfunction, inflammation, and direct tubular injury all contribute. AKI can occur even with 'adequate' MAP and urine output. FENa is unreliable in sepsis due to tubular dysfunction.", 
-                incorrect: "Sepsis-induced AKI involves more than hypoperfusion. Microvascular dysfunction, inflammatory tubular injury, and impaired autoregulation all contribute. FENa is unreliable in sepsis. Neither diuretics nor early RRT have shown mortality benefit — supportive care and treating the infection remain key." 
-            },
-            q8: { 
-                correct: "Correct! This is DIC — low platelets, elevated INR, low fibrinogen, very high D-dimer. WITHOUT active bleeding, the treatment is addressing the underlying cause (infection). Transfusing products in absence of bleeding may 'fuel the fire' and doesn't improve outcomes. Prophylactic heparin is controversial and not standard.", 
-                incorrect: "DIC in sepsis reflects the underlying dysregulated coagulation. Treatment is the underlying infection. Without bleeding, empiric transfusion of platelets/FFP/cryo is not indicated and may worsen outcomes. Reserve products for active bleeding or invasive procedures." 
-            },
-            q9: { 
-                correct: "Correct! Neutropenic fever (ANC <500 with fever) is a medical emergency requiring ANTIPSEUDOMONAL coverage. Cefepime is appropriate first-line. Ceftriaxone lacks Pseudomonas coverage. Add vancomycin if catheter infection, skin involvement, hemodynamic instability, or known MRSA.", 
-                incorrect: "Neutropenic fever requires antipseudomonal coverage due to high risk of Pseudomonas bacteremia. Cefepime is appropriate first-line. Ceftriaxone lacks Pseudomonas coverage. Add vancomycin for specific indications (line infection, skin source, hypotension, MRSA risk)." 
-            },
-            q10: { 
-                correct: "Correct! In ascending cholangitis with septic shock, source control is CRITICAL. The biliary system is obstructed, and antibiotics cannot adequately penetrate an obstructed, infected system. Urgent ERCP for biliary decompression is the priority. Antibiotics and vasopressors alone will fail without drainage.", 
-                incorrect: "Source control is the critical intervention here. Acute cholangitis with septic shock requires biliary decompression — antibiotics alone cannot sterilize an obstructed system. ERCP (or percutaneous drainage if ERCP unavailable) should happen urgently, ideally within 12-24 hours but sooner if deteriorating." 
+        // Quiz functionality
+        let correctCount = 0;
+        let answeredCount = 0;
+        const totalQuestions = 15;
+        
+        function checkAnswer(btn) {
+            const questionDiv = btn.closest('.quiz-question');
+            const correctAnswer = questionDiv.dataset.correct;
+            const selectedOption = questionDiv.querySelector('.option.selected');
+            
+            if (!selectedOption) {
+                alert('Please select an answer first.');
+                return;
             }
-        };
-        
-        const correctAnswers = { q1: 'B', q2: 'B', q3: 'B', q4: 'B', q5: 'E', q6: 'B', q7: 'B', q8: 'D', q9: 'B', q10: 'C' };
-        let score = 0, answered = new Set();
-        
-        function checkAnswer(qId, el, selected) {
-            if (answered.has(qId)) return;
-            answered.add(qId);
-            const isCorrect = selected === correctAnswers[qId];
-            el.parentElement.querySelectorAll('.quiz-option').forEach(opt => {
-                opt.classList.add('disabled');
-                const letter = opt.querySelector('.option-letter').textContent.charAt(0);
-                if (opt === el) opt.classList.add(isCorrect ? 'correct' : 'incorrect');
-                else if (letter === correctAnswers[qId]) opt.classList.add('correct');
+            
+            const selectedAnswer = selectedOption.dataset.answer;
+            const explanation = questionDiv.querySelector('.explanation');
+            
+            // Disable all options
+            questionDiv.querySelectorAll('.option').forEach(opt => {
+                opt.style.pointerEvents = 'none';
             });
-            const fb = document.getElementById(qId + '-feedback');
-            fb.textContent = feedbackText[qId][isCorrect ? 'correct' : 'incorrect'];
-            fb.classList.add('show', isCorrect ? 'correct' : 'incorrect');
-            if (isCorrect) score++;
-            document.getElementById('progressFill').style.width = (answered.size / 10) * 100 + '%';
-            document.getElementById('scoreDisplay').textContent = `Score: ${score}/${answered.size} correct (${10 - answered.size} remaining)`;
+            btn.disabled = true;
+            
+            if (selectedAnswer === correctAnswer) {
+                selectedOption.classList.add('correct');
+                correctCount++;
+            } else {
+                selectedOption.classList.add('incorrect');
+                // Highlight correct answer
+                questionDiv.querySelector(`[data-answer="${correctAnswer}"]`).classList.add('correct');
+            }
+            
+            answeredCount++;
+            explanation.classList.add('show');
+            
+            // Update progress
+            updateProgress();
+            updateScore();
         }
+        
+        function updateProgress() {
+            const progress = (answeredCount / totalQuestions) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = Math.round(progress) + '% complete';
+        }
+        
+        function updateScore() {
+            document.getElementById('scoreNum').textContent = correctCount + '/' + totalQuestions;
+        }
+        
+        // Option selection
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                const questionDiv = this.closest('.quiz-question');
+                // Remove selected from siblings
+                questionDiv.querySelectorAll('.option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                this.classList.add('selected');
+            });
+        });
+        
+        // Track scroll progress for concepts (optional enhancement)
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            
+            // Could update a secondary reading progress indicator here
+        });
     </script>
 </body>
 </html>
