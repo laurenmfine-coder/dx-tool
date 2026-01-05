@@ -12,8 +12,7 @@
         
         .header { background: #fff; border-bottom: 1px solid #e4e4e7; padding: 12px 24px; flex-shrink: 0; }
         .header-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
-        .logo { font-size: 18px; font-weight: 700; color: #8b5cf6; text-decoration: none; display: flex; align-items: center; gap: 8px; }
-        .logo svg { height: 28px; width: auto; }
+        .logo { font-size: 18px; font-weight: 700; color: #8b5cf6; text-decoration: none; }
         .case-info { display: flex; align-items: center; gap: 16px; }
         .case-badge { background: #f4f4f5; padding: 6px 12px; border-radius: 6px; font-size: 13px; }
         .case-badge.parallel { background: #fef3c7; color: #92400e; }
@@ -24,27 +23,6 @@
         
         .main { flex: 1; display: flex; overflow: hidden; max-width: 1400px; margin: 0 auto; width: 100%; }
         
-        /* Attending Selection Panel */
-        .attending-panel { width: 280px; background: #fff; border-right: 1px solid #e4e4e7; flex-shrink: 0; overflow-y: auto; }
-        .attending-header { padding: 16px; border-bottom: 1px solid #e4e4e7; }
-        .attending-header h3 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
-        .attending-header p { font-size: 12px; color: #71717a; }
-        
-        .attending-card { padding: 16px; border-bottom: 1px solid #f4f4f5; cursor: pointer; transition: all 0.15s; }
-        .attending-card:hover { background: #faf5ff; }
-        .attending-card.selected { background: #f3e8ff; border-left: 3px solid #8b5cf6; }
-        .attending-avatar { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 8px; }
-        .attending-card.chen .attending-avatar { background: #dbeafe; }
-        .attending-card.okonkwo .attending-avatar { background: #fef3c7; }
-        .attending-card.patel .attending-avatar { background: #fce7f3; }
-        .attending-card.martinez .attending-avatar { background: #d1fae5; }
-        .attending-card.kim .attending-avatar { background: #e0e7ff; }
-        .attending-name { font-weight: 600; font-size: 14px; margin-bottom: 2px; }
-        .attending-specialty { font-size: 12px; color: #8b5cf6; margin-bottom: 4px; }
-        .attending-style { font-size: 11px; color: #71717a; line-height: 1.4; }
-        .attending-stats { display: flex; gap: 8px; margin-top: 8px; }
-        .attending-stat { font-size: 10px; color: #a1a1aa; background: #f4f4f5; padding: 2px 6px; border-radius: 4px; }
-        
         .chat-panel { flex: 1; display: flex; flex-direction: column; border-right: 1px solid #e4e4e7; }
         .chat-messages { flex: 1; overflow-y: auto; padding: 24px; }
         .message { max-width: 85%; margin-bottom: 16px; }
@@ -53,8 +31,7 @@
         .message-bubble { padding: 12px 16px; border-radius: 12px; font-size: 14px; line-height: 1.5; }
         .attending .message-bubble { background: #fff; border: 1px solid #e4e4e7; border-radius: 12px 12px 12px 0; }
         .student .message-bubble { background: #8b5cf6; color: #fff; border-radius: 12px 12px 0 12px; }
-        .message-meta { font-size: 11px; color: #a1a1aa; margin-top: 4px; display: flex; align-items: center; gap: 6px; }
-        .message-meta .attending-indicator { width: 8px; height: 8px; border-radius: 50%; }
+        .message-meta { font-size: 11px; color: #a1a1aa; margin-top: 4px; }
         .typing-indicator { display: flex; gap: 4px; padding: 12px 16px; }
         .typing-dot { width: 8px; height: 8px; background: #a1a1aa; border-radius: 50%; animation: typing 1.4s infinite; }
         .typing-dot:nth-child(2) { animation-delay: 0.2s; }
@@ -72,7 +49,7 @@
         .send-btn:hover { background: #7c3aed; }
         .send-btn:disabled { background: #d4d4d8; cursor: not-allowed; }
         
-        .concept-panel { width: 300px; background: #fff; overflow-y: auto; flex-shrink: 0; }
+        .concept-panel { width: 320px; background: #fff; overflow-y: auto; flex-shrink: 0; }
         .panel-header { padding: 16px; border-bottom: 1px solid #e4e4e7; font-weight: 600; font-size: 14px; }
         .concept-section { padding: 16px; border-bottom: 1px solid #f4f4f5; }
         .concept-section h4 { font-size: 12px; text-transform: uppercase; color: #71717a; margin-bottom: 8px; letter-spacing: 0.5px; }
@@ -98,9 +75,31 @@
         .related-icon.mechanism { background: #dcfce7; }
         .related-icon.reasondx { background: #dbeafe; }
         .related-icon.parallel { background: #fef3c7; }
+        .related-icon.predictlabs { background: #ffedd5; }
         .related-info { flex: 1; }
         .related-title { font-size: 13px; font-weight: 500; }
         .related-reason { font-size: 11px; color: #71717a; }
+        
+        /* Cross-Platform Section */
+        .cross-platform-section { margin: 16px; padding: 16px; background: #f8fafc; border-radius: 10px; border: 1px solid #e2e8f0; }
+        .cps-header { font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; margin-bottom: 12px; }
+        .cps-card { display: flex; align-items: center; gap: 10px; padding: 10px; background: #fff; border-radius: 8px; border: 1px solid #e2e8f0; text-decoration: none; color: inherit; margin-bottom: 8px; transition: all 0.15s; }
+        .cps-card:hover { transform: translateX(4px); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .cps-stripe { width: 4px; height: 100%; min-height: 40px; border-radius: 2px; }
+        .cps-stripe.reasondx { background: #3b82f6; }
+        .cps-stripe.mechanismdx { background: #22c55e; }
+        .cps-stripe.predictlabs { background: #f97316; }
+        .cps-icon { width: 32px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+        .cps-icon.reasondx { background: #dbeafe; }
+        .cps-icon.mechanismdx { background: #dcfce7; }
+        .cps-icon.predictlabs { background: #ffedd5; }
+        .cps-info { flex: 1; }
+        .cps-title { font-size: 13px; font-weight: 600; }
+        .cps-meta { font-size: 11px; color: #64748b; }
+        .platform-tag { font-weight: 600; }
+        .platform-tag.reasondx { color: #3b82f6; }
+        .platform-tag.mechanismdx { color: #22c55e; }
+        .platform-tag.predictlabs { color: #f97316; }
         
         .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; z-index: 1000; }
         .modal-overlay.show { display: flex; }
@@ -115,32 +114,24 @@
         .modal-btn.primary { background: #8b5cf6; color: #fff; }
         .modal-btn.secondary { background: #f4f4f5; color: #18181b; }
         
-        /* Session Feedback Modal */
-        .feedback-section { margin: 20px 0; padding: 16px; background: #f9fafb; border-radius: 8px; }
-        .feedback-section h4 { font-size: 13px; margin-bottom: 12px; }
-        .rating-stars { display: flex; gap: 8px; }
-        .rating-star { width: 32px; height: 32px; background: #e4e4e7; border: none; border-radius: 6px; cursor: pointer; font-size: 18px; transition: all 0.15s; }
-        .rating-star:hover, .rating-star.active { background: #fef3c7; }
-        
-        @media (max-width: 1200px) { .attending-panel { width: 240px; } .concept-panel { width: 260px; } }
-        @media (max-width: 900px) { .concept-panel { display: none; } .attending-panel { width: 200px; } }
-        @media (max-width: 700px) { .attending-panel { display: none; } }
+        @media (max-width: 900px) { .concept-panel { display: none; } }
     </style>
 </head>
 <body>
     <header class="header">
         <div class="header-inner">
-            <a href="case-library.html" class="logo">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50">
-                    <circle cx="18" cy="20" r="8" fill="none" stroke="#8b5cf6" stroke-width="2.5"/>
-                    <path d="M26 20 Q32 20 32 14 L32 8" fill="none" stroke="#8b5cf6" stroke-width="2.5" stroke-linecap="round"/>
-                    <circle cx="32" cy="6" r="3" fill="#8b5cf6"/>
-                    <path d="M10 20 Q4 20 4 26 L4 35 Q4 42 12 42 L18 42" fill="none" stroke="#8b5cf6" stroke-width="2.5" stroke-linecap="round"/>
-                    <circle cx="22" cy="42" r="4" fill="#8b5cf6"/>
-                    <circle cx="18" cy="17" r="3" fill="#8b5cf6"/>
-                    <path d="M12 26 Q12 22 18 22 Q24 22 24 26" fill="#8b5cf6"/>
-                    <text x="45" y="35" font-family="Inter, system-ui, sans-serif" font-size="26" font-weight="700" fill="#8b5cf6">Coach</text>
-                    <text x="125" y="35" font-family="Inter, system-ui, sans-serif" font-size="26" font-weight="700" fill="#6d28d9">Dx</text>
+            <a href="case-library.html" class="logo" style="text-decoration:none">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 70" style="height:32px;width:auto">
+                    <text x="5" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor" letter-spacing="-1">Coach</text>
+                    <text x="130" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor">D</text>
+                    <g stroke="#8b5cf6" stroke-width="2.5" stroke-linecap="round" fill="none">
+                        <line x1="164" y1="24" x2="180" y2="45"/>
+                        <path d="M180 24L170 35Q166 40 166 47Q166 54 171 58Q176 62 176 68"/>
+                    </g>
+                    <ellipse cx="162" cy="22" rx="2" ry="3.5" transform="rotate(-28 162 22)" fill="#8b5cf6"/>
+                    <ellipse cx="182" cy="22" rx="2" ry="3.5" transform="rotate(28 182 22)" fill="#8b5cf6"/>
+                    <circle cx="176" cy="68" r="7" fill="none" stroke="#8b5cf6" stroke-width="2"/>
+                    <circle cx="176" cy="68" r="3.5" fill="#8b5cf6"/>
                 </svg>
             </a>
             <div class="case-info">
@@ -156,69 +147,6 @@
     </header>
     
     <div class="main">
-        <!-- Attending Selection Panel -->
-        <div class="attending-panel">
-            <div class="attending-header">
-                <h3>👨‍⚕️ Choose Your Attending</h3>
-                <p>Each has a unique teaching style</p>
-            </div>
-            
-            <div class="attending-card chen selected" onclick="selectAttending('chen')">
-                <div class="attending-avatar">👨‍⚕️</div>
-                <div class="attending-name">Dr. Chen</div>
-                <div class="attending-specialty">Internal Medicine</div>
-                <div class="attending-style">Socratic, methodical — guides through questions, rarely gives direct answers</div>
-                <div class="attending-stats">
-                    <span class="attending-stat">🎯 Deep thinking</span>
-                    <span class="attending-stat">⏱️ Patient pace</span>
-                </div>
-            </div>
-            
-            <div class="attending-card okonkwo" onclick="selectAttending('okonkwo')">
-                <div class="attending-avatar">👩‍⚕️</div>
-                <div class="attending-name">Dr. Okonkwo</div>
-                <div class="attending-specialty">Emergency Medicine</div>
-                <div class="attending-style">Fast-paced, practical — focuses on critical decisions and efficient workups</div>
-                <div class="attending-stats">
-                    <span class="attending-stat">⚡ Quick decisions</span>
-                    <span class="attending-stat">🎯 Practical</span>
-                </div>
-            </div>
-            
-            <div class="attending-card patel" onclick="selectAttending('patel')">
-                <div class="attending-avatar">👨‍⚕️</div>
-                <div class="attending-name">Dr. Patel</div>
-                <div class="attending-specialty">Cardiology</div>
-                <div class="attending-style">Detail-oriented, thorough — ensures understanding of mechanisms and nuances</div>
-                <div class="attending-stats">
-                    <span class="attending-stat">🔬 Mechanistic</span>
-                    <span class="attending-stat">📚 Thorough</span>
-                </div>
-            </div>
-            
-            <div class="attending-card martinez" onclick="selectAttending('martinez')">
-                <div class="attending-avatar">👩‍⚕️</div>
-                <div class="attending-name">Dr. Martinez</div>
-                <div class="attending-specialty">Family Medicine</div>
-                <div class="attending-style">Warm, patient-centered — supportive, encourages exploration without judgment</div>
-                <div class="attending-stats">
-                    <span class="attending-stat">💚 Supportive</span>
-                    <span class="attending-stat">🌱 Growth-focused</span>
-                </div>
-            </div>
-            
-            <div class="attending-card kim" onclick="selectAttending('kim')">
-                <div class="attending-avatar">👨‍⚕️</div>
-                <div class="attending-name">Dr. Kim</div>
-                <div class="attending-specialty">Critical Care</div>
-                <div class="attending-style">Direct, evidence-focused — cites guidelines, expects quick synthesis</div>
-                <div class="attending-stats">
-                    <span class="attending-stat">📋 Evidence-based</span>
-                    <span class="attending-stat">💪 Challenging</span>
-                </div>
-            </div>
-        </div>
-        
         <div class="chat-panel">
             <div class="chat-messages" id="chatMessages"></div>
             <div class="input-area">
@@ -243,6 +171,7 @@
             </div>
             <div class="panel-header" style="margin-top:16px;">🔗 Related Content</div>
             <div id="relatedContent" style="padding:16px;"></div>
+            <div id="crossPlatformRecs"></div>
         </div>
     </div>
     
@@ -253,16 +182,6 @@
                 <div class="modal-stat"><div class="modal-stat-value" id="modalTime">0:00</div><div class="modal-stat-label">Duration</div></div>
                 <div class="modal-stat"><div class="modal-stat-value" id="modalConcepts">0</div><div class="modal-stat-label">Concepts</div></div>
                 <div class="modal-stat"><div class="modal-stat-value" id="modalTeaching">0</div><div class="modal-stat-label">Teaching Moments</div></div>
-            </div>
-            <div class="feedback-section">
-                <h4>How helpful was <span id="feedbackAttendingName">Dr. Chen</span>?</h4>
-                <div class="rating-stars">
-                    <button class="rating-star" onclick="rateSession(1)">1</button>
-                    <button class="rating-star" onclick="rateSession(2)">2</button>
-                    <button class="rating-star" onclick="rateSession(3)">3</button>
-                    <button class="rating-star" onclick="rateSession(4)">4</button>
-                    <button class="rating-star" onclick="rateSession(5)">5</button>
-                </div>
             </div>
             <div id="parallelCaseSuggestion" style="margin-bottom:20px;"></div>
             <div class="modal-btns">
@@ -277,180 +196,29 @@
     
     <script>
     // ============================================================
-    // AI ATTENDING PERSONAS
-    // ============================================================
-    const ATTENDINGS = {
-        chen: {
-            name: "Dr. Chen",
-            specialty: "Internal Medicine",
-            style: "socratic",
-            avatar: "👨‍⚕️",
-            color: "#3b82f6",
-            traits: {
-                socraticIndex: 0.9,      // High - asks lots of questions
-                directness: 0.2,          // Low - rarely gives direct answers
-                warmth: 0.6,              // Moderate warmth
-                detailOrientation: 0.7,   // Fairly detail-oriented
-                pace: 0.4                 // Slower, methodical pace
-            },
-            systemPrompt: `You are Dr. Chen, an internal medicine attending known for Socratic teaching. You RARELY give direct answers. Instead, you:
-- Ask probing questions to guide students to discover answers themselves
-- When a student says something correct, ask "What makes you think that?" or "How does that fit with..."
-- When a student is off-track, ask "What else might explain..." or "Have you considered..."
-- Break complex topics into smaller questions
-- Celebrate moments of insight with brief encouragement, then probe deeper
-- Only provide direct teaching after the student has worked through the reasoning
-Your tone is calm, patient, and intellectually curious. You never rush.`,
-            openingVariants: [
-                "I'm Dr. Chen. Before we dive in, tell me — what's your initial impression of this patient?",
-                "Good to work with you today. Let's start with the basics — what information would you want first?",
-                "I'm Dr. Chen from internal medicine. Walk me through your thinking on this case."
-            ]
-        },
-        okonkwo: {
-            name: "Dr. Okonkwo",
-            specialty: "Emergency Medicine",
-            style: "practical",
-            avatar: "👩‍⚕️",
-            color: "#f59e0b",
-            traits: {
-                socraticIndex: 0.4,
-                directness: 0.8,
-                warmth: 0.5,
-                detailOrientation: 0.4,
-                pace: 0.9
-            },
-            systemPrompt: `You are Dr. Okonkwo, an emergency medicine attending known for efficient, practical teaching. You:
-- Focus on what matters RIGHT NOW for patient care
-- Cut through non-essential details: "That's interesting but what do we DO?"
-- Emphasize critical actions and time-sensitive decisions
-- Use the "worst first" approach: "What's the thing that will kill this patient?"
-- Give direct feedback: "Good call" or "No, here's why that won't work"
-- Teach in rapid-fire Q&A when appropriate
-- Push students to make decisions with incomplete information
-Your tone is energetic, direct, and focused. You keep things moving.`,
-            openingVariants: [
-                "I'm Dr. Okonkwo. You've got 30 seconds — what's your read on this patient?",
-                "Dr. Okonkwo here. This patient just came in. What are you worried about? Go.",
-                "Alright, let's move. What's the first thing you're doing for this patient and why?"
-            ]
-        },
-        patel: {
-            name: "Dr. Patel",
-            specialty: "Cardiology",
-            style: "mechanistic",
-            avatar: "👨‍⚕️",
-            color: "#ec4899",
-            traits: {
-                socraticIndex: 0.6,
-                directness: 0.5,
-                warmth: 0.5,
-                detailOrientation: 0.95,
-                pace: 0.3
-            },
-            systemPrompt: `You are Dr. Patel, a cardiology attending known for thorough, mechanism-based teaching. You:
-- Always connect clinical findings to underlying pathophysiology
-- Ask "WHY does that happen?" and "WHAT is the mechanism?"
-- Draw connections between different organ systems
-- Ensure students understand the complete pathway, not just the endpoint
-- Correct misconceptions with detailed explanations
-- Use analogies to explain complex mechanisms
-- Won't move forward until the mechanism is clear
-Your tone is precise, intellectual, and thorough. You love the elegance of pathophysiology.`,
-            openingVariants: [
-                "I'm Dr. Patel. Let's think through the pathophysiology here. What do you think is happening at the cellular level?",
-                "Dr. Patel from cardiology. Before we discuss management, let's make sure we understand WHY this patient is presenting this way.",
-                "Good to meet you. I want to understand your mechanistic thinking. Walk me through what's happening in this patient's body."
-            ]
-        },
-        martinez: {
-            name: "Dr. Martinez",
-            specialty: "Family Medicine",
-            style: "supportive",
-            avatar: "👩‍⚕️",
-            color: "#10b981",
-            traits: {
-                socraticIndex: 0.5,
-                directness: 0.4,
-                warmth: 0.95,
-                detailOrientation: 0.5,
-                pace: 0.5
-            },
-            systemPrompt: `You are Dr. Martinez, a family medicine attending known for warm, supportive teaching. You:
-- Create a psychologically safe space for learning
-- Normalize uncertainty: "It's okay not to know — let's figure it out together"
-- Validate student efforts before correcting: "I can see why you'd think that..."
-- Encourage exploration without fear of being wrong
-- Share your own learning experiences when relevant
-- Focus on the patient as a whole person, not just the diagnosis
-- Celebrate growth and progress
-Your tone is warm, encouraging, and patient-centered. You believe everyone can learn.`,
-            openingVariants: [
-                "Hi, I'm Dr. Martinez. I'm looking forward to working through this case together. What stands out to you?",
-                "Welcome! I'm Dr. Martinez. Don't worry about having all the answers — we'll figure this out together. What are your initial thoughts?",
-                "Good to meet you! I'm Dr. Martinez from family medicine. Tell me what you're thinking — there are no wrong answers here."
-            ]
-        },
-        kim: {
-            name: "Dr. Kim",
-            specialty: "Critical Care",
-            style: "evidence-based",
-            avatar: "👨‍⚕️",
-            color: "#6366f1",
-            traits: {
-                socraticIndex: 0.3,
-                directness: 0.85,
-                warmth: 0.3,
-                detailOrientation: 0.8,
-                pace: 0.7
-            },
-            systemPrompt: `You are Dr. Kim, a critical care attending known for direct, evidence-based teaching. You:
-- Reference specific guidelines, trials, and evidence when relevant
-- Expect students to know (or look up) the evidence
-- Give direct feedback: "The literature doesn't support that" or "That's consistent with the NEJM data"
-- Challenge students to justify their reasoning with data
-- Push for precision in language and thinking
-- Have high expectations but respect competence when shown
-- Don't sugarcoat but aren't cruel
-Your tone is direct, professional, and intellectually demanding. You respect evidence above opinion.`,
-            openingVariants: [
-                "I'm Dr. Kim. Let's approach this systematically. What does the evidence tell us about this presentation?",
-                "Dr. Kim from the ICU. I expect you've reviewed the relevant literature. What's your evidence-based approach here?",
-                "Good. I'm Dr. Kim. Walk me through your differential, and tell me what data supports each possibility."
-            ]
-        }
-    };
-
-    // ============================================================
     // STATE & INITIALIZATION
     // ============================================================
+    // Use cases from external file (COACHDX_CASES) or fall back to empty object
     const CASES = typeof COACHDX_CASES !== 'undefined' ? COACHDX_CASES : {};
     
     let currentCase = null;
-    let currentAttending = 'chen';
     let conversationHistory = [];
     let conceptsExplored = {};
     let seconds = 0;
     let timerInterval = null;
     let isLoading = false;
-    let sessionRating = null;
-    let attendingSwitches = [];
-    
     let session = {
         id: 'session-' + Date.now(),
         questionsAskedByAI: 0,
         teachingMomentsDetected: 0,
         conceptsExplored: [],
         isParallelCase: false,
-        parallelPairId: null,
-        attendingUsed: ['chen'],
-        attendingSwitchCount: 0
+        parallelPairId: null
     };
 
     function init() {
         const urlParams = new URLSearchParams(window.location.search);
         const caseId = urlParams.get('case') || 'chest-pain-acs';
-        const attendingId = urlParams.get('attending') || localStorage.getItem('preferredAttending') || 'chen';
         
         currentCase = CASES[caseId];
         if (!currentCase) {
@@ -461,12 +229,6 @@ Your tone is direct, professional, and intellectually demanding. You respect evi
             document.getElementById('chatMessages').innerHTML = '<p style="padding:20px;color:#dc2626;">Error: Could not load case. Please check that coachdx-cases-merged.js is in the same directory.</p>';
             return;
         }
-        
-        // Set attending
-        if (ATTENDINGS[attendingId]) {
-            currentAttending = attendingId;
-        }
-        updateAttendingSelection();
         
         // Track parallel case info
         session.isParallelCase = currentCase.isParallel || false;
@@ -484,63 +246,11 @@ Your tone is direct, professional, and intellectually demanding. You respect evi
         // Start timer
         timerInterval = setInterval(updateTimer, 1000);
         
-        // Opening message from selected attending
+        // Opening message
         setTimeout(() => {
-            const attending = ATTENDINGS[currentAttending];
-            const openingVariant = attending.openingVariants[Math.floor(Math.random() * attending.openingVariants.length)];
-            const fullOpening = openingVariant + "\n\n" + currentCase.openingStatement;
-            addMessage(fullOpening, 'attending');
-            conversationHistory.push({ role: 'assistant', content: fullOpening });
+            addMessage(currentCase.openingStatement, 'attending');
+            conversationHistory.push({ role: 'assistant', content: currentCase.openingStatement });
         }, 500);
-    }
-
-    function selectAttending(attendingId) {
-        if (attendingId === currentAttending) return;
-        
-        const previousAttending = currentAttending;
-        currentAttending = attendingId;
-        
-        // Track switch
-        attendingSwitches.push({
-            from: previousAttending,
-            to: attendingId,
-            timestamp: Date.now(),
-            messageCount: conversationHistory.length
-        });
-        session.attendingSwitchCount++;
-        if (!session.attendingUsed.includes(attendingId)) {
-            session.attendingUsed.push(attendingId);
-        }
-        
-        // Save preference
-        localStorage.setItem('preferredAttending', attendingId);
-        
-        // Update UI
-        updateAttendingSelection();
-        
-        // Add transition message
-        const newAttending = ATTENDINGS[attendingId];
-        const transitionMessage = `[You're now working with ${newAttending.name}]\n\n${newAttending.name}: I see you've been working through this case. Let me take a look... ${getAttendingTransition(attendingId)}`;
-        addMessage(transitionMessage, 'attending');
-        conversationHistory.push({ role: 'assistant', content: transitionMessage });
-    }
-    
-    function getAttendingTransition(attendingId) {
-        const transitions = {
-            chen: "What's your current thinking? Walk me through how you got here.",
-            okonkwo: "Quick update — what's the most critical issue right now?",
-            patel: "Interesting. Let's make sure we understand the mechanism before we proceed.",
-            martinez: "Good work so far. Tell me where you're at and how I can help.",
-            kim: "Show me the evidence supporting your current differential."
-        };
-        return transitions[attendingId] || "";
-    }
-    
-    function updateAttendingSelection() {
-        document.querySelectorAll('.attending-card').forEach(card => {
-            card.classList.remove('selected');
-        });
-        document.querySelector(`.attending-card.${currentAttending}`).classList.add('selected');
     }
 
     function updateTimer() {
@@ -554,19 +264,11 @@ Your tone is direct, professional, and intellectually demanding. You respect evi
     function addMessage(text, sender) {
         const container = document.getElementById('chatMessages');
         const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        const attending = ATTENDINGS[currentAttending];
-        
-        let metaHtml = '';
-        if (sender === 'attending') {
-            metaHtml = `<span class="attending-indicator" style="background:${attending.color}"></span>${attending.name} • ${time}`;
-        } else {
-            metaHtml = `You • ${time}`;
-        }
         
         container.innerHTML += `
             <div class="message ${sender}">
-                <div class="message-bubble">${text.replace(/\n/g, '<br>')}</div>
-                <div class="message-meta">${metaHtml}</div>
+                <div class="message-bubble">${text}</div>
+                <div class="message-meta">${sender === 'attending' ? 'Dr. Chen' : 'You'} • ${time}</div>
             </div>
         `;
         container.scrollTop = container.scrollHeight;
@@ -629,151 +331,233 @@ Your tone is direct, professional, and intellectually demanding. You respect evi
 
     function renderRelatedContent() {
         const container = document.getElementById('relatedContent');
-        const links = currentCase.relatedContent || [];
+        const content = currentCase.relatedContent || [];
         
-        container.innerHTML = links.map(link => `
-            <a href="${link.url}" class="related-item">
-                <div class="related-icon ${link.type}">${link.icon || '📄'}</div>
+        let html = content.map(item => `
+            <a href="${item.link}" class="related-item">
+                <div class="related-icon ${item.type}">
+                    ${item.type === 'mechanism' ? '🧬' : item.type === 'parallel' ? '🔄' : item.type === 'predictlabs' ? '🔮' : '🩺'}
+                </div>
                 <div class="related-info">
-                    <div class="related-title">${link.title}</div>
-                    <div class="related-reason">${link.reason}</div>
+                    <div class="related-title">${item.title}</div>
+                    <div class="related-reason">${item.reason}</div>
                 </div>
             </a>
         `).join('');
+        
+        container.innerHTML = html;
+        
+        // Also render cross-platform recommendations
+        renderCrossPlatformRecs();
+    }
+    
+    function renderCrossPlatformRecs() {
+        const container = document.getElementById('crossPlatformRecs');
+        if (!container) return;
+        
+        // Generate cross-platform links based on case category
+        const category = currentCase.category || '';
+        const caseId = currentCase.id || '';
+        
+        // Topic mapping for cross-platform links
+        const topicMap = {
+            'chest-pain': { mechanism: 'acs-module.html', reasondx: 'stemi', predictlabs: 'predict-labs-acs.html' },
+            'acs': { mechanism: 'acs-module.html', reasondx: 'stemi', predictlabs: 'predict-labs-acs.html' },
+            'heart-failure': { mechanism: 'hf-module.html', reasondx: 'chf', predictlabs: 'predict-labs-hf.html' },
+            'hf': { mechanism: 'hf-module.html', reasondx: 'chf', predictlabs: 'predict-labs-hf.html' },
+            'atrial-fibrillation': { mechanism: 'afib-module.html', reasondx: 'afib', predictlabs: 'predict-labs-hf.html' },
+            'sepsis': { mechanism: 'sepsis-shock-module.html', reasondx: 'sepsis', predictlabs: 'predict-labs-sepsis.html' },
+            'dka': { mechanism: 'diabetes-dka-module.html', reasondx: 'dka', predictlabs: 'predict-labs-dka.html' },
+            'aki': { mechanism: 'aki-module.html', reasondx: 'aki', predictlabs: 'predict-labs-aki.html' },
+            'hyponatremia': { mechanism: 'hyponatremia-module.html', reasondx: 'siadh', predictlabs: 'predict-labs-hyponatremia.html' },
+            'pe': { mechanism: 'pe-module.html', reasondx: 'pe', predictlabs: 'predict-labs-pe.html' },
+            'pulmonary-embolism': { mechanism: 'pe-module.html', reasondx: 'pe', predictlabs: 'predict-labs-pe.html' },
+            'gi-bleed': { mechanism: 'gi-bleeding-module.html', reasondx: 'ugib', predictlabs: 'predict-labs-gi-bleed.html' },
+            'anemia': { mechanism: 'anemia-module.html', reasondx: 'anemia', predictlabs: 'predict-labs-anemia.html' },
+            'cirrhosis': { mechanism: 'cirrhosis-module.html', reasondx: 'cirrhosis', predictlabs: 'predict-labs-cirrhosis.html' },
+            'hepatic': { mechanism: 'cirrhosis-module.html', reasondx: 'cirrhosis', predictlabs: 'predict-labs-cirrhosis.html' },
+        };
+        
+        // Find matching topic
+        let matched = null;
+        const searchText = (caseId + ' ' + (currentCase.title || '')).toLowerCase();
+        for (const [key, links] of Object.entries(topicMap)) {
+            if (searchText.includes(key)) {
+                matched = links;
+                break;
+            }
+        }
+        
+        if (!matched) {
+            container.innerHTML = '';
+            return;
+        }
+        
+        container.innerHTML = `
+            <div class="cross-platform-section">
+                <div class="cps-header">🎯 Continue Learning This Topic</div>
+                <a href="../MechanismDx/${matched.mechanism}" class="cps-card">
+                    <div class="cps-stripe mechanismdx"></div>
+                    <div class="cps-icon mechanismdx">⚙️</div>
+                    <div class="cps-info">
+                        <div class="cps-title">Master the Pathophysiology</div>
+                        <div class="cps-meta"><span class="platform-tag mechanismdx">MechanismDx</span> • Deep dive into mechanisms</div>
+                    </div>
+                </a>
+                <a href="../ReasonDx/training.html?case=${matched.reasondx}" class="cps-card">
+                    <div class="cps-stripe reasondx"></div>
+                    <div class="cps-icon reasondx">🩺</div>
+                    <div class="cps-info">
+                        <div class="cps-title">Full Clinical Case</div>
+                        <div class="cps-meta"><span class="platform-tag reasondx">ReasonDx</span> • Complete case walkthrough</div>
+                    </div>
+                </a>
+                <a href="../predict-labs/${matched.predictlabs}" class="cps-card">
+                    <div class="cps-stripe predictlabs"></div>
+                    <div class="cps-icon predictlabs">🔮</div>
+                    <div class="cps-info">
+                        <div class="cps-title">Predict the Labs</div>
+                        <div class="cps-meta"><span class="platform-tag predictlabs">Predict Labs</span> • Test your predictions</div>
+                    </div>
+                </a>
+            </div>
+        `;
     }
 
     async function sendMessage() {
         const input = document.getElementById('userInput');
         const message = input.value.trim();
         if (!message || isLoading) return;
-
+        
         input.value = '';
         addMessage(message, 'student');
         conversationHistory.push({ role: 'user', content: message });
-
+        
         isLoading = true;
         document.getElementById('sendBtn').disabled = true;
-
-        // Show typing indicator
-        const typingId = 'typing-' + Date.now();
-        document.getElementById('chatMessages').innerHTML += `
-            <div id="${typingId}" class="message attending">
-                <div class="message-bubble typing-indicator">
-                    <span class="typing-dot"></span>
-                    <span class="typing-dot"></span>
-                    <span class="typing-dot"></span>
-                </div>
-            </div>
-        `;
-
+        
+        const container = document.getElementById('chatMessages');
+        container.innerHTML += `<div class="message attending" id="typing"><div class="message-bubble"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div></div>`;
+        container.scrollTop = container.scrollHeight;
+        
         try {
             const response = await generateResponse(message);
-            document.getElementById(typingId)?.remove();
+            document.getElementById('typing')?.remove();
+            
             addMessage(response, 'attending');
             conversationHistory.push({ role: 'assistant', content: response });
-
-            // Update concepts
-            checkForConceptsExplored(message + ' ' + response);
-            renderConceptMap();
-
-            // Check for teaching moments
-            if (response.includes('?')) {
-                session.questionsAskedByAI++;
-                document.getElementById('statQuestions').textContent = session.questionsAskedByAI;
-            }
-            if (response.toLowerCase().includes('important') || response.toLowerCase().includes('key point') || 
-                response.toLowerCase().includes('remember') || response.toLowerCase().includes('note that')) {
+            
+            session.questionsAskedByAI++;
+            if (response.toLowerCase().includes('teaching moment') || response.toLowerCase().includes('let me explain') || response.includes('?')) {
                 session.teachingMomentsDetected++;
-                document.getElementById('statTeaching').textContent = session.teachingMomentsDetected;
             }
-
+            
+            checkConceptsExplored(message + ' ' + response);
+            updateStats();
+            
         } catch (error) {
-            document.getElementById(typingId)?.remove();
-            addMessage("I apologize, I'm having trouble responding. Let's continue our discussion.", 'attending');
+            document.getElementById('typing')?.remove();
+            addMessage('I apologize, I\'m having trouble connecting. Please try again.', 'attending');
+            console.error('Error:', error);
         }
-
+        
         isLoading = false;
         document.getElementById('sendBtn').disabled = false;
     }
 
     async function generateResponse(userMessage) {
-        const attending = ATTENDINGS[currentAttending];
+        // First check for defined responses in the case
+        const definedResponses = currentCase.defined_responses || {};
+        const messageLower = userMessage.toLowerCase();
         
-        // Build system prompt with persona
-        const systemPrompt = `${attending.systemPrompt}
-
-CASE CONTEXT:
-${currentCase.title}
-${currentCase.openingStatement}
-
-Key concepts to potentially explore: ${Object.values(currentCase.conceptDomains || {}).flat().join(', ')}
-
-Remember to maintain your teaching persona throughout. You are ${attending.name}.`;
-
-        // Try API call (placeholder - would connect to actual API)
-        // For now, return a persona-appropriate simulated response
-        return simulatePersonaResponse(userMessage, attending);
+        for (const [trigger, response] of Object.entries(definedResponses)) {
+            const triggerWords = trigger.split(/[_\s]+/);
+            if (triggerWords.some(word => messageLower.includes(word))) {
+                return response;
+            }
+        }
+        
+        // Try Cloudflare worker for AI response
+        try {
+            const WORKER_URL = 'https://coachdx-attending.laurenmfine.workers.dev';
+            
+            const response = await fetch(WORKER_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    message: userMessage,
+                    conversationHistory: conversationHistory.slice(-10),
+                    caseData: { 
+                        description: currentCase.description,
+                        title: currentCase.title,
+                        keyTeachingPoints: currentCase.keyTeachingPoints || []
+                    }
+                })
+            });
+            
+            if (!response.ok) throw new Error('Worker request failed');
+            
+            const data = await response.json();
+            return data.response || data.content || generateFallbackResponse(userMessage);
+        } catch (error) {
+            console.log('Worker unavailable, using fallback response');
+            return generateFallbackResponse(userMessage);
+        }
     }
     
-    function simulatePersonaResponse(userMessage, attending) {
-        // Simulated responses based on persona style
-        const lowerMessage = userMessage.toLowerCase();
+    function generateFallbackResponse(userMessage) {
+        const teachingPoints = currentCase.keyTeachingPoints || [];
+        const unusedPoints = teachingPoints.filter(point => 
+            !conversationHistory.some(msg => msg.content.includes(point.substring(0, 30)))
+        );
         
-        const responses = {
-            chen: [
-                "That's an interesting observation. What led you to that conclusion?",
-                "Hmm, let me ask you this — if your hypothesis is correct, what would you expect to find on exam?",
-                "Good thinking. Now, what alternatives should we consider? What else could explain these findings?",
-                "Before I share my thoughts, tell me: what's the pathophysiology behind your leading diagnosis?",
-                "You're on the right track. But can you go deeper? What's the mechanism here?"
-            ],
-            okonkwo: [
-                "Okay, good. Now what are you DOING about it? Time matters.",
-                "Right. But what's going to kill this patient in the next hour? Focus there.",
-                "Don't overthink it. ABCs. What's your first move?",
-                "That's a luxury diagnosis. What's the can't-miss? Act on that first.",
-                "Good call. Do it. What's next? Keep moving."
-            ],
-            patel: [
-                "Let's slow down and understand the mechanism. Why does that happen physiologically?",
-                "That's the clinical finding, but what's happening at the cellular level?",
-                "Explain to me the pathway. How do we get from the initial insult to what we're seeing?",
-                "Before we move on, I want to make sure you understand WHY. Walk me through the pathophysiology.",
-                "Interesting. Now, how does that mechanism connect to the other findings we're seeing?"
-            ],
-            martinez: [
-                "That's a thoughtful approach. I can see why you'd consider that — let's explore it together.",
-                "Good effort. You're getting closer. What if we also thought about...",
-                "I appreciate you sharing your thinking. It's okay to be uncertain — that's how we learn.",
-                "You're making progress! Let's build on that. What else might we consider?",
-                "That's a reasonable starting point. Don't worry if it's not perfect — let's work through it."
-            ],
-            kim: [
-                "What's the evidence base for that? Which studies support your approach?",
-                "The guidelines suggest a different approach. Are you familiar with the recent recommendations?",
-                "That's one opinion. Show me the data that supports that decision.",
-                "Correct. That's consistent with the literature. What's your next evidence-based step?",
-                "Be more precise. In critical care, vague thinking leads to poor outcomes."
-            ]
-        };
+        if (unusedPoints.length > 0) {
+            const point = unusedPoints[Math.floor(Math.random() * unusedPoints.length)];
+            return `Good thinking! Let me add a teaching point here: ${point}\n\nWhat else are you considering?`;
+        }
         
-        const personaResponses = responses[currentAttending] || responses.chen;
-        return personaResponses[Math.floor(Math.random() * personaResponses.length)];
+        const prompts = [
+            "That's a good start. Can you tell me more about your reasoning?",
+            "Interesting approach. What findings would change your differential?",
+            "I see where you're going. What would you prioritize in the workup?",
+            "Good observation. How does that fit with the patient's presentation?",
+            "What other diagnoses are you considering?",
+            "How would you explain the pathophysiology here?",
+            "What's the next step in your clinical reasoning?"
+        ];
+        
+        return prompts[Math.floor(Math.random() * prompts.length)];
     }
 
-    function checkForConceptsExplored(text) {
-        const lowerText = text.toLowerCase();
+    function checkConceptsExplored(text) {
+        const textLower = text.toLowerCase();
         const domains = currentCase.conceptDomains || {};
         
         for (const concepts of Object.values(domains)) {
             for (const concept of concepts) {
-                const searchTerm = concept.replace(/_/g, ' ').toLowerCase();
-                if (lowerText.includes(searchTerm) && !conceptsExplored[concept]) {
-                    conceptsExplored[concept] = true;
-                    session.conceptsExplored.push(concept);
-                    document.getElementById('statConcepts').textContent = Object.keys(conceptsExplored).length;
+                const searchTerms = concept.split('_');
+                if (searchTerms.some(term => textLower.includes(term))) {
+                    if (!conceptsExplored[concept]) {
+                        conceptsExplored[concept] = true;
+                        session.conceptsExplored.push(concept);
+                    }
                 }
             }
+        }
+        renderConceptMap();
+    }
+
+    function updateStats() {
+        document.getElementById('statQuestions').textContent = session.questionsAskedByAI;
+        document.getElementById('statConcepts').textContent = Object.keys(conceptsExplored).length;
+        document.getElementById('statTeaching').textContent = session.teachingMomentsDetected;
+    }
+
+    function goToParallelCase() {
+        if (currentCase.parallelCase) {
+            window.location.href = `mentor-chat.html?case=${currentCase.parallelCase}`;
+        } else {
+            window.location.href = 'case-library.html';
         }
     }
 
@@ -782,69 +566,60 @@ Remember to maintain your teaching persona throughout. You are ${attending.name}
         
         const mins = Math.floor(seconds / 60);
         const secs = seconds % 60;
+        
         document.getElementById('modalTime').textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
         document.getElementById('modalConcepts').textContent = Object.keys(conceptsExplored).length;
         document.getElementById('modalTeaching').textContent = session.teachingMomentsDetected;
-        document.getElementById('feedbackAttendingName').textContent = ATTENDINGS[currentAttending].name;
         
-        // Parallel case suggestion
-        if (currentCase.parallelCase && CASES[currentCase.parallelCase]) {
-            const parallelCase = CASES[currentCase.parallelCase];
-            document.getElementById('parallelCaseSuggestion').innerHTML = `
-                <div class="parallel-indicator">
-                    <h4>🔄 Ready for the Challenge?</h4>
-                    <p>Try the parallel case "${parallelCase.title}" to test if your learning transfers!</p>
-                </div>
-            `;
-            document.getElementById('nextCaseBtn').style.display = 'block';
+        const suggestionDiv = document.getElementById('parallelCaseSuggestion');
+        const nextBtn = document.getElementById('nextCaseBtn');
+        
+        if (currentCase.parallelCase) {
+            const parallelData = CASES[currentCase.parallelCase];
+            if (parallelData) {
+                suggestionDiv.innerHTML = `
+                    <div style="background:#fef3c7; padding:12px; border-radius:8px; text-align:center;">
+                        <p style="font-size:13px; color:#92400e; margin-bottom:4px;">
+                            <strong>🔄 Test Your Reasoning Transfer</strong>
+                        </p>
+                        <p style="font-size:12px; color:#a16207;">
+                            Try "${parallelData.title}" - ${currentCase.parallelDescription || ''}
+                        </p>
+                    </div>
+                `;
+                nextBtn.textContent = 'Try Parallel Case →';
+                nextBtn.style.background = '#f59e0b';
+            }
         } else {
-            document.getElementById('nextCaseBtn').style.display = 'none';
+            suggestionDiv.innerHTML = '';
+            nextBtn.textContent = 'Back to Cases';
+            nextBtn.onclick = () => location.href = 'case-library.html';
         }
         
         document.getElementById('endModal').classList.add('show');
-        
-        // Save session data
-        saveSessionData();
+        sendSessionData();
     }
-    
-    function rateSession(rating) {
-        sessionRating = rating;
-        document.querySelectorAll('.rating-star').forEach((star, index) => {
-            star.classList.toggle('active', index < rating);
-        });
-        
-        // Save rating with session
-        const sessionData = JSON.parse(localStorage.getItem('coachdx-sessions') || '[]');
-        const lastSession = sessionData[sessionData.length - 1];
-        if (lastSession && lastSession.id === session.id) {
-            lastSession.rating = rating;
-            lastSession.ratedAttending = currentAttending;
-            localStorage.setItem('coachdx-sessions', JSON.stringify(sessionData));
-        }
-    }
-    
-    function saveSessionData() {
-        const sessionData = JSON.parse(localStorage.getItem('coachdx-sessions') || '[]');
-        sessionData.push({
-            ...session,
-            caseId: currentCase.id || 'unknown',
-            caseTitle: currentCase.title,
+
+    function sendSessionData() {
+        const data = {
+            type: 'COACHDX_SESSION',
+            sessionId: session.id,
+            caseId: currentCase.id,
+            caseTopic: currentCase.title,
+            category: currentCase.category,
+            isParallelCase: session.isParallelCase,
+            parallelPairId: session.parallelPairId,
             duration: seconds,
-            primaryAttending: session.attendingUsed[0],
-            finalAttending: currentAttending,
-            conceptsExploredCount: Object.keys(conceptsExplored).length,
+            questionsAsked: session.questionsAskedByAI,
+            teachingMoments: session.teachingMomentsDetected,
+            conceptsExplored: session.conceptsExplored,
             timestamp: new Date().toISOString()
-        });
-        localStorage.setItem('coachdx-sessions', JSON.stringify(sessionData.slice(-100))); // Keep last 100
+        };
+        
+        console.log('Session data:', data);
+        // Future: Send to fingerprint dashboard
     }
 
-    function goToParallelCase() {
-        if (currentCase.parallelCase) {
-            window.location.href = `mentor-chat.html?case=${currentCase.parallelCase}&attending=${currentAttending}`;
-        }
-    }
-
-    // Initialize on load
     document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
