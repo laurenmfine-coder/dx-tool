@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AKI & CKD - ReasonDx</title>
+<style>
+:root{--bg-page:#f8fafc;--bg-white:#fff;--bg-subtle:#f1f5f9;--text-primary:#0f172a;--text-secondary:#475569;--border:#e2e8f0;--accent:#0d9488;--accent-light:#ccfbf1;--green:#059669;--red:#dc2626;--radius-sm:8px;--radius-lg:16px}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg-page);color:var(--text-primary);line-height:1.6}
+.header{background:linear-gradient(135deg,#0d9488,#0f766e);color:#fff;padding:16px 24px}.logo{font-weight:700;font-size:18px}
+.module-header{background:var(--bg-white);border-bottom:1px solid var(--border);padding:24px}
+.module-title{display:flex;align-items:center;gap:16px;max-width:1400px;margin:0 auto}.module-icon{width:56px;height:56px;background:linear-gradient(135deg,#ccfbf1,#99f6e4);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:28px}
+.module-title h1{font-size:26px;font-weight:700}.enhanced-badge{background:linear-gradient(135deg,var(--accent),#0f766e);color:#fff;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;margin-left:8px}
+.progress-bar{background:var(--bg-white);border-bottom:1px solid var(--border);padding:12px 24px}.progress-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;gap:16px}
+.progress-track{flex:1;height:8px;background:var(--bg-subtle);border-radius:4px}.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));transition:width .3s}.progress-count{font-size:13px;font-weight:600}
+.timeline-nav{background:var(--bg-white);border-bottom:1px solid var(--border);padding:0 24px}.timeline-inner{max-width:1400px;margin:0 auto;display:flex}
+.timeline-phase{flex:1;padding:16px 8px;cursor:pointer;border-bottom:3px solid transparent;text-align:center}.timeline-phase.active{border-bottom-color:var(--accent)}.timeline-phase.locked{opacity:.4}
+.phase-label{font-size:12px;font-weight:600}.phase-time{font-size:10px;color:var(--text-secondary)}
+.main-container{max-width:1400px;margin:0 auto;padding:24px;display:grid;grid-template-columns:300px 1fr;gap:24px}@media(max-width:900px){.main-container{grid-template-columns:1fr}}
+.card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:16px}.card-header{padding:14px 18px;border-bottom:1px solid var(--border)}.card-title{font-size:13px;font-weight:600}.card-content{padding:16px 18px}.case-narrative{font-size:14px;color:var(--text-secondary)}
+.clinical-pearl{margin-top:12px;padding:12px;background:var(--accent-light);border-radius:var(--radius-sm);border-left:3px solid var(--accent)}.pearl-title{font-size:10px;font-weight:600;color:#0f766e}.pearl-text{font-size:11px;color:#115e59}
+.phase-objectives{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px;margin-bottom:16px}.obj-title{font-size:12px;font-weight:600;color:var(--accent);margin-bottom:8px}.obj-list{list-style:none;font-size:11px}.obj-list li{padding:4px 0 4px 16px;position:relative}.obj-list li::before{content:'→';position:absolute;left:0;color:var(--accent)}
+.quiz-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:16px}.quiz-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}.quiz-num{width:28px;height:28px;background:linear-gradient(135deg,var(--accent),#0f766e);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}.quiz-type{font-size:12px;font-weight:600}.quiz-meta{margin-left:auto;display:flex;gap:6px}.quiz-tag{font-size:9px;padding:2px 6px;background:var(--bg-subtle);border-radius:4px}.quiz-difficulty{font-size:9px;padding:2px 6px;border-radius:4px}.quiz-difficulty.medium{background:#fef3c7;color:#92400e}.quiz-difficulty.hard{background:#fee2e2;color:#991b1b}
+.quiz-body{padding:16px}.quiz-stem{font-size:14px;font-weight:500;margin-bottom:14px}.quiz-options{display:flex;flex-direction:column;gap:8px}.quiz-option{display:flex;gap:12px;padding:12px 14px;background:var(--bg-subtle);border:2px solid transparent;border-radius:var(--radius-sm);cursor:pointer}.quiz-option.selected{border-color:var(--accent)}.quiz-option.correct{border-color:var(--green);background:rgba(5,150,105,.08)}.quiz-option.incorrect{border-color:var(--red);background:rgba(220,38,38,.08)}.quiz-option.disabled{pointer-events:none;opacity:.7}
+.option-letter{width:24px;height:24px;border:2px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}.quiz-option.selected .option-letter{border-color:var(--accent);color:var(--accent)}.quiz-option.correct .option-letter{background:var(--green);color:#fff;border-color:var(--green)}.quiz-option.incorrect .option-letter{background:var(--red);color:#fff;border-color:var(--red)}
+.submit-btn{margin-top:14px;width:100%;padding:12px;background:linear-gradient(135deg,var(--accent),#0f766e);color:#fff;border:none;border-radius:var(--radius-sm);font-weight:600;cursor:pointer}.submit-btn:disabled{background:var(--bg-subtle);color:var(--text-secondary)}
+.explanation{margin-top:16px;padding:16px;border-radius:var(--radius-sm);display:none;font-size:13px}.explanation.visible{display:block}.explanation.correct{background:#f0fdf4;border:1px solid #bbf7d0}.explanation.incorrect{background:#fef2f2;border:1px solid #fecaca}
+.keypoint{margin-top:10px;padding:10px;background:rgba(13,148,136,.1);border-radius:6px;font-size:12px}.keypoint-label{font-weight:600;color:var(--accent);font-size:10px}
+.deep-dive{margin-top:14px;border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden}.dd-toggle{width:100%;padding:10px 14px;background:var(--bg-subtle);border:none;cursor:pointer;display:flex;justify-content:space-between;font-size:12px;font-weight:600}.dd-content{display:none;padding:14px;font-size:12px;max-height:500px;overflow-y:auto}.dd-content.visible{display:block}.dd-content h4{font-size:13px;font-weight:600;margin:12px 0 8px;color:var(--accent)}.dd-content h4:first-child{margin-top:0}.dd-content ul{margin:8px 0;padding-left:20px}.dd-content li{margin:4px 0}.dd-content table{width:100%;border-collapse:collapse;margin:10px 0;font-size:11px}.dd-content th,.dd-content td{border:1px solid var(--border);padding:6px 8px}.dd-content th{background:var(--bg-subtle)}.buzzwords{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px}.buzzword{font-size:10px;padding:4px 8px;background:#fef3c7;border-radius:4px;color:#92400e;font-weight:500}
+</style>
+</head>
+<body>
+<header class="header"><div class="logo">🫘 ReasonDx — AKI & CKD</div></header>
+<div class="module-header"><div class="module-title"><div class="module-icon">🫘</div><div><h1>Acute Kidney Injury & Chronic Kidney Disease<span class="enhanced-badge">✨ MECHANISM-ENHANCED</span></h1><p>Prerenal, Intrinsic, Postrenal AKI; CKD Staging and Management</p></div></div></div>
+<div class="progress-bar"><div class="progress-inner"><span style="font-size:12px;color:var(--text-secondary)">Progress</span><div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div><span class="progress-count" id="progressCount">0/20</span></div></div>
+<nav class="timeline-nav"><div class="timeline-inner">
+<div class="timeline-phase active" onclick="goPhase(1)"><div class="phase-label">🔍 AKI Diagnosis</div><div class="phase-time">Classification & Workup</div></div>
+<div class="timeline-phase locked" onclick="goPhase(2)"><div class="phase-label">💧 AKI Management</div><div class="phase-time">Treatment & RRT</div></div>
+<div class="timeline-phase locked" onclick="goPhase(3)"><div class="phase-label">📊 CKD Staging</div><div class="phase-time">eGFR & Albuminuria</div></div>
+<div class="timeline-phase locked" onclick="goPhase(4)"><div class="phase-label">🛡️ CKD Management</div><div class="phase-time">Complications & ESKD</div></div>
+</div></nav>
+<div class="main-container">
+<aside>
+<div class="phase-objectives" id="phaseObjectives"></div>
+<div class="card"><div class="card-header"><div class="card-title">📋 Clinical Snapshot</div></div><div class="card-content"><div class="case-narrative" id="caseNarrative"></div><div class="clinical-pearl"><div class="pearl-title">💡 Renal Pearl</div><div class="pearl-text" id="pearlText"></div></div></div></div>
+</aside>
+<main id="questionsPanel"></main>
+</div>
+<script>
+var phase=1,state={};for(var i=1;i<=20;i++)state[i]={pick:null,done:false,ok:false};
+var phases={
+1:{qs:[1,2,3,4,5],narrative:'<strong>Harold Jenkins</strong>, 78M admitted for hip fracture, develops oliguria on day 2. Cr rises from 1.1 to 2.8 mg/dL. Need to determine AKI etiology.',pearl:'AKI: prerenal (most common), intrinsic, or postrenal. FeNa <1% suggests prerenal. Urinalysis with casts helps identify intrinsic causes.',objectives:['Define AKI by KDIGO criteria','Differentiate prerenal vs intrinsic vs postrenal','Calculate and interpret FeNa','Analyze urinalysis findings'],refs:[{t:'KDIGO AKI Guidelines',u:'https://kdigo.org/guidelines/acute-kidney-injury/'}]},
+2:{qs:[6,7,8,9,10],narrative:'Harold has prerenal AKI from hypovolemia. Needs fluid resuscitation and nephrotoxin avoidance. If severe, may need RRT.',pearl:'Treat underlying cause. Hold nephrotoxins (NSAIDs, ACEi, contrast). Fluid resuscitate if prerenal. RRT for refractory hyperkalemia, acidosis, uremia.',objectives:['Manage prerenal AKI','Identify nephrotoxins to avoid','Know indications for RRT','Prevent contrast nephropathy'],refs:[{t:'AKI Management',u:'https://kdigo.org/guidelines/acute-kidney-injury/'}]},
+3:{qs:[11,12,13,14,15],narrative:'Different patient with diabetes and HTN. eGFR 38, uACR 450. This is CKD stage 3b with A3 albuminuria - high progression risk.',pearl:'CKD staging: G1-5 by eGFR + A1-3 by albuminuria. ACEi/ARB for albuminuria. SGLT2i slows progression. Prepare for ESKD if progressing.',objectives:['Stage CKD correctly','Interpret albuminuria categories','Know progression risk factors','Start renoprotective therapy'],refs:[{t:'KDIGO CKD Guidelines',u:'https://kdigo.org/guidelines/ckd-evaluation-and-management/'}]},
+4:{qs:[16,17,18,19,20],narrative:'Patient progresses to CKD stage 4. Managing complications: anemia, mineral bone disease, acidosis. Planning for dialysis or transplant.',pearl:'CKD complications: anemia (EPO), CKD-Mite (phosphate binders, vitamin D), metabolic acidosis (bicarb). Refer to nephrology by stage 4.',objectives:['Manage CKD anemia','Treat CKD-MBD','Correct metabolic acidosis','Plan for RRT/transplant'],refs:[{t:'CKD Complications',u:'https://kdigo.org/guidelines/ckd-mbd/'}]}
+};
+var Qs={
+1:{type:'AKI Definition',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Nephro'],stem:'Which finding meets KDIGO criteria for acute kidney injury?',
+opts:[['a','Creatinine increase of 0.2 mg/dL over one week'],['b','Creatinine increase of 0.3 mg/dL within 48 hours'],['c','Urine output of 0.6 mL/kg/hour for 4 hours'],['d','eGFR decline of 10% from baseline']],
+ans:'b',
+exp:'<strong>KDIGO AKI criteria:</strong> Cr increase ≥0.3 mg/dL within 48h, OR Cr increase ≥1.5x baseline within 7 days, OR UOP <0.5 mL/kg/hr for 6h.',
+kp:'AKI: Cr up ≥0.3 in 48h, or ≥1.5x in 7 days, or UOP <0.5 mL/kg/hr for 6h.',
+dd:{mechanism:{title:'KDIGO AKI',content:'<table><tr><th>Stage</th><th>Creatinine</th><th>Urine Output</th></tr><tr><td>1</td><td>1.5-1.9x or +0.3</td><td><0.5 mL/kg/h x 6-12h</td></tr><tr><td>2</td><td>2-2.9x baseline</td><td><0.5 mL/kg/h x ≥12h</td></tr><tr><td>3</td><td>≥3x or ≥4.0 or RRT</td><td><0.3 mL/kg/h x 24h</td></tr></table>',bw:['KDIGO criteria','Cr or UOP','Stage 1-3']}}},
+2:{type:'Prerenal vs Intrinsic',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Nephro'],stem:'A patient with AKI has FeNa of 0.5% and bland urine sediment. What is the most likely etiology?',
+opts:[['a','Acute tubular necrosis from ischemia'],['b','Prerenal azotemia from volume depletion'],['c','Acute interstitial nephritis from medications'],['d','Glomerulonephritis with immune complex deposition']],
+ans:'b',
+exp:'<strong>Prerenal AKI:</strong> FeNa <1%, bland sediment, BUN/Cr ratio >20. Kidneys avidly retain sodium. Responds to volume repletion.',
+kp:'FeNa <1% = prerenal. FeNa >2% = intrinsic (ATN). BUN/Cr >20 supports prerenal.',
+dd:{mechanism:{title:'FeNa Interpretation',content:'<table><tr><th>FeNa</th><th>Etiology</th></tr><tr><td><1%</td><td>Prerenal</td></tr><tr><td>>2%</td><td>Intrinsic (ATN)</td></tr></table><h4>Exceptions</h4><ul><li>Contrast, myoglobin: may have low FeNa</li><li>Diuretics: falsely elevate FeNa</li></ul>',bw:['FeNa <1% prerenal','FeNa >2% ATN','Diuretics confound']}}},
+3:{type:'Urinalysis in AKI',difficulty:'hard',domains:['diagnosis'],tags:['Step2','Nephro'],stem:'A patient has AKI with muddy brown granular casts on urinalysis. What is the diagnosis?',
+opts:[['a','Prerenal azotemia from dehydration'],['b','Acute tubular necrosis (ATN)'],['c','Acute glomerulonephritis'],['d','Urinary tract obstruction']],
+ans:'b',
+exp:'<strong>Urine sediment:</strong> Muddy brown casts = ATN. RBC casts = glomerulonephritis. WBC casts = pyelonephritis/AIN. Bland = prerenal or postrenal.',
+kp:'Muddy brown casts = ATN. RBC casts = GN. WBC casts = pyelo/AIN.',
+dd:{mechanism:{title:'UA Findings',content:'<table><tr><th>Finding</th><th>Diagnosis</th></tr><tr><td>Muddy brown casts</td><td>ATN</td></tr><tr><td>RBC casts</td><td>Glomerulonephritis</td></tr><tr><td>WBC casts</td><td>Pyelonephritis, AIN</td></tr><tr><td>Bland</td><td>Prerenal, postrenal</td></tr></table>',bw:['Muddy brown = ATN','RBC casts = GN','Bland = prerenal']}}},
+4:{type:'Postrenal AKI',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Nephro'],stem:'An elderly man with AKI has bilateral hydronephrosis on ultrasound. What is the most likely cause?',
+opts:[['a','Acute tubular necrosis from nephrotoxins'],['b','Bilateral renal artery stenosis'],['c','Bladder outlet obstruction from BPH'],['d','Acute interstitial nephritis']],
+ans:'c',
+exp:'<strong>Postrenal AKI:</strong> Obstruction causing bilateral hydronephrosis. Common causes: BPH, cancer, stones, neurogenic bladder. Relieve obstruction urgently.',
+kp:'Bilateral hydronephrosis = obstruction. BPH common in elderly men. Foley catheter first step.',
+dd:{mechanism:{title:'Postrenal Causes',content:'<ul><li>BPH (most common in men)</li><li>Malignancy (cervical, prostate, bladder)</li><li>Bilateral stones (rare)</li><li>Neurogenic bladder</li><li>Retroperitoneal fibrosis</li></ul>',bw:['Bilateral hydronephrosis','BPH common','Foley first step']}}},
+5:{type:'Contrast Nephropathy',difficulty:'medium',domains:['prevention'],tags:['Step2','Nephro'],stem:'How can contrast-induced nephropathy be prevented in a patient with CKD?',
+opts:[['a','Give N-acetylcysteine routinely before contrast'],['b','Administer IV hydration before and after contrast'],['c','Use high-osmolar contrast media for protection'],['d','Withhold all fluids to concentrate the kidneys']],
+ans:'b',
+exp:'<strong>CIN prevention:</strong> IV hydration (NS or bicarb) before and after contrast. Use low/iso-osmolar contrast, minimize volume. NAC benefit uncertain.',
+kp:'Hydration is key. Use low-osmolar contrast, minimize volume. NAC benefit unclear.',
+dd:{mechanism:{title:'CIN Prevention',content:'<h4>Proven</h4><ul><li>IV hydration (NS or bicarb)</li><li>Low/iso-osmolar contrast</li><li>Minimize contrast volume</li></ul><h4>Uncertain</h4><ul><li>N-acetylcysteine</li></ul>',bw:['IV hydration key','Low-osmolar contrast','Minimize volume']}}},
+6:{type:'AKI Fluid Management',difficulty:'medium',domains:['management'],tags:['Step2','Nephro'],stem:'A patient with prerenal AKI receives IV fluids. What indicates adequate resuscitation?',
+opts:[['a','Urine output decreases further'],['b','Creatinine stabilizes or improves'],['c','Blood pressure drops significantly'],['d','Potassium rises above 6.0 mEq/L']],
+ans:'b',
+exp:'<strong>Prerenal AKI response:</strong> Should see Cr stabilize/improve and UOP increase within 24-48h of adequate resuscitation. No response suggests ATN.',
+kp:'Prerenal responds to fluids. Cr should improve in 24-48h. No response = likely ATN.',
+dd:{mechanism:{title:'Fluid Response',content:'<h4>Prerenal (responds)</h4><ul><li>UOP increases</li><li>Cr stabilizes/improves</li></ul><h4>ATN (doesnt respond)</h4><ul><li>Persistent oliguria</li><li>Cr continues to rise</li></ul>',bw:['Prerenal responds','24-48h improvement','No response = ATN']}}},
+7:{type:'Nephrotoxins',difficulty:'medium',domains:['management'],tags:['Step2','Nephro'],stem:'Which medication class should be held during acute kidney injury?',
+opts:[['a','Beta-blockers for heart rate control'],['b','Proton pump inhibitors for GI protection'],['c','NSAIDs and ACE inhibitors'],['d','Statins for cholesterol management']],
+ans:'c',
+exp:'<strong>Nephrotoxins to hold:</strong> NSAIDs (afferent constriction), ACEi/ARB (efferent dilation), aminoglycosides, contrast. Resume ACEi/ARB after recovery.',
+kp:'Hold NSAIDs, ACEi/ARB, aminoglycosides in AKI. Resume ACEi/ARB when stable.',
+dd:{mechanism:{title:'Nephrotoxins',content:'<h4>Hold in AKI</h4><ul><li>NSAIDs</li><li>ACEi/ARB</li><li>Aminoglycosides</li><li>Amphotericin B</li></ul><h4>Mechanism</h4><ul><li>NSAIDs: afferent constriction</li><li>ACEi: efferent dilation</li></ul>',bw:['Hold NSAIDs, ACEi','Aminoglycosides toxic','Resume when stable']}}},
+8:{type:'RRT Indications',difficulty:'hard',domains:['management'],tags:['Step2','Nephro'],stem:'Which finding is an indication for emergent dialysis in AKI?',
+opts:[['a','Creatinine of 4.0 mg/dL with stable vitals'],['b','Potassium of 5.8 mEq/L responding to medical therapy'],['c','Refractory hyperkalemia with ECG changes'],['d','Metabolic acidosis with pH of 7.28']],
+ans:'c',
+exp:'<strong>Emergent dialysis:</strong> AEIOU - Acidosis (refractory), Electrolytes (refractory hyperK), Intoxication, Overload (refractory), Uremia (encephalopathy, pericarditis).',
+kp:'AEIOU: Acidosis, Electrolytes, Intoxication, Overload, Uremia. Refractory to medical therapy.',
+dd:{mechanism:{title:'RRT Indications',content:'<h4>AEIOU</h4><ul><li>Acidosis (pH <7.1, refractory)</li><li>Electrolytes (K >6.5, refractory)</li><li>Intoxication (lithium, methanol)</li><li>Overload (pulmonary edema, refractory)</li><li>Uremia (encephalopathy, pericarditis)</li></ul>',bw:['AEIOU mnemonic','Refractory to meds','Uremic symptoms']}}},
+9:{type:'Hyperkalemia Management',difficulty:'hard',domains:['management'],tags:['Step2','Nephro'],stem:'A patient with AKI has K+ of 6.8 mEq/L and peaked T waves. What is the first treatment?',
+opts:[['a','Oral kayexalate for potassium binding'],['b','IV calcium gluconate for cardiac membrane stabilization'],['c','IV insulin and glucose for potassium shifting'],['d','Emergent hemodialysis for potassium removal']],
+ans:'b',
+exp:'<strong>Hyperkalemia with ECG changes:</strong> First give IV calcium (stabilizes membrane). Then shift K (insulin/glucose, bicarb, albuterol). Then remove K (dialysis, kayexalate).',
+kp:'Calcium first if ECG changes. Then shift (insulin). Then remove (dialysis).',
+dd:{mechanism:{title:'Hyperkalemia Rx',content:'<h4>Order of Treatment</h4><ol><li>Stabilize: IV calcium gluconate</li><li>Shift K+: insulin/glucose, bicarb, albuterol</li><li>Remove K+: dialysis, kayexalate, diuretics</li></ol>',bw:['Calcium first','Then shift K','Then remove K']}}},
+10:{type:'ATN Recovery',difficulty:'medium',domains:['pathophysiology'],tags:['Step2','Nephro'],stem:'After ATN, what phase is characterized by high urine output and risk of dehydration?',
+opts:[['a','Initiation phase with oliguria'],['b','Maintenance phase with stable low GFR'],['c','Recovery phase with diuresis'],['d','Chronic phase with permanent damage']],
+ans:'c',
+exp:'<strong>ATN phases:</strong> Initiation → Maintenance (oliguric) → Recovery (diuretic). Recovery phase may have massive diuresis - watch for dehydration and electrolyte loss.',
+kp:'Recovery phase = diuresis. Risk of volume depletion and electrolyte wasting.',
+dd:{mechanism:{title:'ATN Phases',content:'<table><tr><th>Phase</th><th>Features</th></tr><tr><td>Initiation</td><td>Insult occurs</td></tr><tr><td>Maintenance</td><td>Oliguria, rising Cr</td></tr><tr><td>Recovery</td><td>Diuresis, Cr improves</td></tr></table>',bw:['Three phases','Recovery = diuresis','Watch electrolytes']}}},
+11:{type:'CKD Staging',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Nephro'],stem:'A patient has eGFR of 38 mL/min/1.73m². What CKD stage is this?',
+opts:[['a','Stage 2 (mildly decreased GFR)'],['b','Stage 3a (mild-moderate decrease)'],['c','Stage 3b (moderate-severe decrease)'],['d','Stage 4 (severely decreased GFR)']],
+ans:'c',
+exp:'<strong>CKD stages:</strong> G1 ≥90, G2 60-89, G3a 45-59, G3b 30-44, G4 15-29, G5 <15. eGFR 38 = Stage 3b.',
+kp:'Stage 3b = eGFR 30-44. Know all stages. Also stage by albuminuria (A1-A3).',
+dd:{mechanism:{title:'CKD Stages',content:'<table><tr><th>Stage</th><th>eGFR</th></tr><tr><td>G1</td><td>≥90</td></tr><tr><td>G2</td><td>60-89</td></tr><tr><td>G3a</td><td>45-59</td></tr><tr><td>G3b</td><td>30-44</td></tr><tr><td>G4</td><td>15-29</td></tr><tr><td>G5</td><td><15</td></tr></table>',bw:['G3b = 30-44','G4 = 15-29','G5 = <15']}}},
+12:{type:'Albuminuria',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Nephro'],stem:'A patient has uACR of 180 mg/g. What albuminuria category is this?',
+opts:[['a','A1 (normal to mildly increased)'],['b','A2 (moderately increased)'],['c','A3 (severely increased)'],['d','Nephrotic range proteinuria']],
+ans:'b',
+exp:'<strong>Albuminuria categories:</strong> A1 <30 mg/g, A2 30-300 mg/g (microalbuminuria), A3 >300 mg/g (macroalbuminuria). uACR 180 = A2.',
+kp:'A1 <30, A2 30-300, A3 >300 mg/g. Higher albuminuria = faster progression.',
+dd:{mechanism:{title:'Albuminuria',content:'<table><tr><th>Category</th><th>uACR (mg/g)</th></tr><tr><td>A1</td><td><30</td></tr><tr><td>A2</td><td>30-300</td></tr><tr><td>A3</td><td>>300</td></tr></table>',bw:['A2 = microalbuminuria','A3 = macroalbuminuria','Higher = worse prognosis']}}},
+13:{type:'CKD Progression',difficulty:'medium',domains:['pathophysiology'],tags:['Step2','Nephro'],stem:'Which factor most strongly predicts CKD progression to ESKD?',
+opts:[['a','Age over 65 years'],['b','Male sex'],['c','Degree of proteinuria'],['d','Presence of hypertension']],
+ans:'c',
+exp:'<strong>CKD progression:</strong> Proteinuria is strongest predictor. Others: lower GFR, DM, HTN, Black race, AKI episodes. ACEi/ARB and SGLT2i slow progression.',
+kp:'Proteinuria predicts progression best. Treat with ACEi/ARB and SGLT2i.',
+dd:{mechanism:{title:'Progression Factors',content:'<h4>Strong Predictors</h4><ul><li>Proteinuria (strongest)</li><li>Lower baseline GFR</li><li>Diabetes</li><li>Hypertension</li></ul>',bw:['Proteinuria strongest','Lower GFR = faster','ACEi/SGLT2i protect']}}},
+14:{type:'Renoprotective Therapy',difficulty:'medium',domains:['pharmacology'],tags:['Step2','Nephro'],stem:'A diabetic patient with CKD has uACR of 350 mg/g. What medication slows progression?',
+opts:[['a','Calcium channel blocker (amlodipine)'],['b','ACE inhibitor or ARB'],['c','Thiazide diuretic'],['d','Beta-blocker']],
+ans:'b',
+exp:'<strong>Renoprotection:</strong> ACEi/ARB first-line for albuminuria. SGLT2i adds benefit regardless of diabetes. Finerenone for diabetic CKD with albuminuria.',
+kp:'ACEi/ARB for albuminuria. Add SGLT2i. Finerenone for diabetic CKD.',
+dd:{mechanism:{title:'Renoprotection',content:'<h4>Evidence-Based</h4><ul><li>ACEi/ARB (reduce albuminuria)</li><li>SGLT2i (CREDENCE, DAPA-CKD)</li><li>Finerenone (FIDELIO-DKD)</li></ul>',bw:['ACEi/ARB first','SGLT2i added benefit','Finerenone in DKD']}}},
+15:{type:'BP Goals in CKD',difficulty:'medium',domains:['management'],tags:['Step2','Nephro'],stem:'What is the blood pressure target for a patient with CKD and albuminuria?',
+opts:[['a','Less than 150/90 mmHg'],['b','Less than 140/90 mmHg'],['c','Less than 130/80 mmHg'],['d','Less than 120/70 mmHg']],
+ans:'c',
+exp:'<strong>BP in CKD:</strong> Target <130/80 if albuminuria present. ACEi/ARB preferred. Tighter control slows progression.',
+kp:'BP <130/80 with albuminuria. ACEi/ARB preferred agent.',
+dd:{mechanism:{title:'BP Goals',content:'<table><tr><th>Situation</th><th>Target</th></tr><tr><td>CKD + albuminuria</td><td><130/80</td></tr><tr><td>CKD no albuminuria</td><td><140/90 reasonable</td></tr></table>',bw:['<130/80 if albuminuria','ACEi/ARB first-line','Tighter = slower progression']}}},
+16:{type:'CKD Anemia',difficulty:'medium',domains:['management'],tags:['Step2','Nephro'],stem:'A CKD patient has hemoglobin 9.2 g/dL with adequate iron stores. What is the next treatment?',
+opts:[['a','Blood transfusion immediately'],['b','Oral iron supplementation'],['c','Erythropoiesis-stimulating agent (ESA)'],['d','Vitamin B12 and folate']],
+ans:'c',
+exp:'<strong>CKD anemia:</strong> Due to decreased EPO. First ensure iron replete (ferritin >100, TSAT >20%), then start ESA. Target Hgb 10-11.5, not higher.',
+kp:'Replete iron first, then ESA. Target Hgb 10-11.5. Higher targets increase CV risk.',
+dd:{mechanism:{title:'CKD Anemia',content:'<h4>Steps</h4><ol><li>Check iron stores</li><li>Replete iron if needed</li><li>Start ESA if iron replete</li></ol><h4>Targets</h4><ul><li>Hgb 10-11.5 g/dL</li><li>Ferritin >100 ng/mL</li><li>TSAT >20%</li></ul>',bw:['Iron first','ESA if iron replete','Hgb target 10-11.5']}}},
+17:{type:'CKD-MBD',difficulty:'hard',domains:['management'],tags:['Step2','Nephro'],stem:'A CKD patient has elevated phosphorus and PTH. What is first-line treatment for hyperphosphatemia?',
+opts:[['a','Calcitriol supplementation'],['b','Dietary phosphorus restriction and binders'],['c','Parathyroidectomy'],['d','Cinacalcet therapy']],
+ans:'b',
+exp:'<strong>CKD-MBD:</strong> Restrict dietary phosphorus, then add phosphate binders (sevelamer, calcium carbonate). Add vitamin D. Cinacalcet for secondary hyperPTH.',
+kp:'Diet restriction + phosphate binders first. Sevelamer preferred (no calcium load).',
+dd:{mechanism:{title:'CKD-MBD',content:'<h4>Treatment Order</h4><ol><li>Dietary phosphorus restriction</li><li>Phosphate binders</li><li>Vitamin D (active or analog)</li><li>Cinacalcet for high PTH</li></ol>',bw:['Diet + binders first','Sevelamer preferred','Cinacalcet for PTH']}}},
+18:{type:'Metabolic Acidosis',difficulty:'medium',domains:['management'],tags:['Step2','Nephro'],stem:'A CKD patient has serum bicarbonate of 18 mEq/L. What treatment is indicated?',
+opts:[['a','No treatment needed at this level'],['b','Oral sodium bicarbonate supplementation'],['c','Emergent dialysis'],['d','Calcium carbonate as buffer']],
+ans:'b',
+exp:'<strong>CKD acidosis:</strong> Treat if HCO3 <22 mEq/L. Oral bicarbonate (650-1300mg TID) or sodium citrate. Slows CKD progression.',
+kp:'Treat if bicarb <22. Oral bicarbonate or citrate. May slow progression.',
+dd:{mechanism:{title:'Acidosis in CKD',content:'<h4>Treatment</h4><ul><li>Target HCO3 ≥22 mEq/L</li><li>Oral NaHCO3 or citrate</li><li>May slow CKD progression</li></ul>',bw:['Treat if <22','Oral bicarbonate','May slow progression']}}},
+19:{type:'Dialysis Preparation',difficulty:'medium',domains:['management'],tags:['Step2','Nephro'],stem:'At what CKD stage should patients be referred for dialysis access planning?',
+opts:[['a','Stage 3a (eGFR 45-59)'],['b','Stage 3b (eGFR 30-44)'],['c','Stage 4 (eGFR 15-29)'],['d','Stage 5 (eGFR less than 15)']],
+ans:'c',
+exp:'<strong>Dialysis planning:</strong> Refer to nephrology by stage 4. AV fistula takes 3-6 months to mature. Plan access when eGFR <20-25.',
+kp:'Refer by stage 4. AVF needs 3-6 months to mature. Plan access early.',
+dd:{mechanism:{title:'ESKD Planning',content:'<h4>Timeline</h4><ul><li>Stage 4: nephrology referral</li><li>eGFR 20-25: access planning</li><li>AVF creation: 3-6 months before needed</li></ul>',bw:['Stage 4 referral','AVF takes 3-6 months','Plan early']}}},
+20:{type:'Transplant',difficulty:'medium',domains:['management'],tags:['Step2','Nephro'],stem:'What is the preferred renal replacement therapy for eligible ESKD patients?',
+opts:[['a','In-center hemodialysis three times weekly'],['b','Continuous ambulatory peritoneal dialysis'],['c','Kidney transplantation'],['d','Home hemodialysis daily']],
+ans:'c',
+exp:'<strong>RRT options:</strong> Transplant preferred if eligible - better survival, quality of life. HD and PD similar outcomes. Pre-emptive transplant ideal.',
+kp:'Transplant preferred. Best survival and QoL. Pre-emptive (before dialysis) is ideal.',
+dd:{mechanism:{title:'RRT Options',content:'<table><tr><th>Modality</th><th>Survival</th></tr><tr><td>Transplant</td><td>Best</td></tr><tr><td>HD</td><td>Similar to PD</td></tr><tr><td>PD</td><td>Similar to HD</td></tr></table>',bw:['Transplant preferred','Pre-emptive ideal','HD = PD outcomes']}}}
+};
+var answers={1:'d',2:'b',3:'b',4:'b',5:'c',6:'c',7:'d',8:'a',9:'c',10:'d',11:'a',12:'c',13:'a',14:'d',15:'c',16:'d',17:'a',18:'b',19:'b',20:'a'};
+function goPhase(p){if(p<1||p>4)return;phase=p;renderPhase();}
+function renderPhase(){var ph=phases[phase];document.querySelectorAll('.timeline-phase').forEach(function(el,i){el.classList.remove('active','locked');if(i+1===phase)el.classList.add('active');else if(i+1>phase)el.classList.add('locked');});document.getElementById('caseNarrative').innerHTML=ph.narrative;document.getElementById('pearlText').textContent=ph.pearl;var objHtml='<div class="obj-title">🎯 Phase '+phase+' Objectives</div><ul class="obj-list">';ph.objectives.forEach(function(o){objHtml+='<li>'+o+'</li>';});objHtml+='</ul>';if(ph.refs){objHtml+='<div style="margin-top:12px;padding-top:10px;border-top:1px dashed #e2e8f0"><div style="font-size:10px;font-weight:600;color:#64748b;margin-bottom:6px">📚 References</div>';ph.refs.forEach(function(r){objHtml+='<a href="'+r.u+'" target="_blank" style="font-size:10px;color:#0d9488;text-decoration:none;display:block;margin:3px 0">'+r.t+'</a>';});objHtml+='</div>';}document.getElementById('phaseObjectives').innerHTML=objHtml;renderQuestions(ph.qs);}
+function renderQuestions(qIds){var html='';qIds.forEach(function(qid){var q=Qs[qid];if(!q)return;html+='<div class="quiz-card" id="q'+qid+'"><div class="quiz-header"><div class="quiz-num">'+qid+'</div><span class="quiz-type">'+q.type+'</span><div class="quiz-meta">';q.tags.forEach(function(t){html+='<span class="quiz-tag">'+t+'</span>';});html+='<span class="quiz-difficulty '+q.difficulty+'">'+q.difficulty+'</span></div></div>';html+='<div class="quiz-body"><div class="quiz-stem">'+q.stem+'</div><div class="quiz-options">';q.opts.forEach(function(opt){html+='<div class="quiz-option" data-q="'+qid+'" data-opt="'+opt[0]+'" onclick="selectOpt(this)"><div class="option-letter">'+opt[0].toUpperCase()+'</div><div class="option-text">'+opt[1]+'</div></div>';});html+='</div><button class="submit-btn" id="sub'+qid+'" disabled onclick="submitQ('+qid+')">Submit</button><div class="explanation" id="exp'+qid+'"></div></div></div>';});document.getElementById('questionsPanel').innerHTML=html;}
+function selectOpt(el){var qid=el.dataset.q;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.remove('selected');});el.classList.add('selected');state[qid].pick=el.dataset.opt;document.getElementById('sub'+qid).disabled=false;}
+function submitQ(qid){if(state[qid].done)return;state[qid].done=true;var correct=answers[qid],picked=state[qid].pick,isCorrect=picked===correct;state[qid].ok=isCorrect;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.add('disabled');if(o.dataset.opt===correct)o.classList.add('correct');else if(o.dataset.opt===picked&&!isCorrect)o.classList.add('incorrect');});document.getElementById('sub'+qid).style.display='none';var q=Qs[qid],expDiv=document.getElementById('exp'+qid);var expHtml='<div>'+(isCorrect?'✓ Correct!':'✗ Incorrect')+'</div><div>'+q.exp+'</div><div class="keypoint"><span class="keypoint-label">⚡ Key:</span> '+q.kp+'</div>';if(q.dd){expHtml+='<div class="deep-dive"><button class="dd-toggle" onclick="toggleDD(this)">📚 Deep Dive <span>▼</span></button><div class="dd-content">';for(var d in q.dd){expHtml+=q.dd[d].content;if(q.dd[d].bw){expHtml+='<div class="buzzwords">';q.dd[d].bw.forEach(function(b){expHtml+='<span class="buzzword">'+b+'</span>';});expHtml+='</div>';}}expHtml+='</div></div>';}expDiv.innerHTML=expHtml;expDiv.classList.add('visible',isCorrect?'correct':'incorrect');updateProgress();}
+function toggleDD(btn){btn.nextElementSibling.classList.toggle('visible');btn.querySelector('span').textContent=btn.nextElementSibling.classList.contains('visible')?'▲':'▼';}
+function updateProgress(){var done=0;for(var i=1;i<=20;i++)if(state[i].done)done++;document.getElementById('progressFill').style.width=(done/20*100)+'%';document.getElementById('progressCount').textContent=done+'/20';}
+renderPhase();
+</script>
+</body>
+</html>

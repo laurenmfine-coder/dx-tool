@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acute Coronary Syndromes - ReasonDx</title>
+<style>
+:root{--bg-page:#f8fafc;--bg-white:#fff;--bg-subtle:#f1f5f9;--text-primary:#0f172a;--text-secondary:#475569;--border:#e2e8f0;--accent:#dc2626;--accent-light:#fee2e2;--green:#059669;--red:#dc2626;--radius-sm:8px;--radius-lg:16px}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg-page);color:var(--text-primary);line-height:1.6}
+.header{background:linear-gradient(135deg,#dc2626,#991b1b);color:#fff;padding:16px 24px}.logo{font-weight:700;font-size:18px}
+.module-header{background:var(--bg-white);border-bottom:1px solid var(--border);padding:24px}
+.module-title{display:flex;align-items:center;gap:16px;max-width:1400px;margin:0 auto}.module-icon{width:56px;height:56px;background:linear-gradient(135deg,#fee2e2,#fecaca);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:28px}
+.module-title h1{font-size:26px;font-weight:700}.enhanced-badge{background:linear-gradient(135deg,var(--accent),#991b1b);color:#fff;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;margin-left:8px}
+.progress-bar{background:var(--bg-white);border-bottom:1px solid var(--border);padding:12px 24px}.progress-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;gap:16px}
+.progress-track{flex:1;height:8px;background:var(--bg-subtle);border-radius:4px}.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--green));transition:width .3s}.progress-count{font-size:13px;font-weight:600}
+.timeline-nav{background:var(--bg-white);border-bottom:1px solid var(--border);padding:0 24px}.timeline-inner{max-width:1400px;margin:0 auto;display:flex}
+.timeline-phase{flex:1;padding:16px 8px;cursor:pointer;border-bottom:3px solid transparent;text-align:center}.timeline-phase.active{border-bottom-color:var(--accent)}.timeline-phase.locked{opacity:.4}
+.phase-label{font-size:12px;font-weight:600}.phase-time{font-size:10px;color:var(--text-secondary)}
+.main-container{max-width:1400px;margin:0 auto;padding:24px;display:grid;grid-template-columns:300px 1fr;gap:24px}@media(max-width:900px){.main-container{grid-template-columns:1fr}}
+.card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:16px}.card-header{padding:14px 18px;border-bottom:1px solid var(--border)}.card-title{font-size:13px;font-weight:600}.card-content{padding:16px 18px}.case-narrative{font-size:14px;color:var(--text-secondary)}
+.clinical-pearl{margin-top:12px;padding:12px;background:var(--accent-light);border-radius:var(--radius-sm);border-left:3px solid var(--accent)}.pearl-title{font-size:10px;font-weight:600;color:#991b1b}.pearl-text{font-size:11px;color:#7f1d1d}
+.phase-objectives{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px;margin-bottom:16px}.obj-title{font-size:12px;font-weight:600;color:var(--accent);margin-bottom:8px}.obj-list{list-style:none;font-size:11px}.obj-list li{padding:4px 0 4px 16px;position:relative}.obj-list li::before{content:'→';position:absolute;left:0;color:var(--accent)}
+.quiz-card{background:var(--bg-white);border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:16px}.quiz-header{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}.quiz-num{width:28px;height:28px;background:linear-gradient(135deg,var(--accent),#991b1b);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}.quiz-type{font-size:12px;font-weight:600}.quiz-meta{margin-left:auto;display:flex;gap:6px}.quiz-tag{font-size:9px;padding:2px 6px;background:var(--bg-subtle);border-radius:4px}.quiz-difficulty{font-size:9px;padding:2px 6px;border-radius:4px}.quiz-difficulty.medium{background:#fef3c7;color:#92400e}.quiz-difficulty.hard{background:#fee2e2;color:#991b1b}
+.quiz-body{padding:16px}.quiz-stem{font-size:14px;font-weight:500;margin-bottom:14px}.quiz-options{display:flex;flex-direction:column;gap:8px}.quiz-option{display:flex;gap:12px;padding:12px 14px;background:var(--bg-subtle);border:2px solid transparent;border-radius:var(--radius-sm);cursor:pointer}.quiz-option.selected{border-color:var(--accent)}.quiz-option.correct{border-color:var(--green);background:rgba(5,150,105,.08)}.quiz-option.incorrect{border-color:var(--red);background:rgba(220,38,38,.08)}.quiz-option.disabled{pointer-events:none;opacity:.7}
+.option-letter{width:24px;height:24px;border:2px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}.quiz-option.selected .option-letter{border-color:var(--accent);color:var(--accent)}.quiz-option.correct .option-letter{background:var(--green);color:#fff;border-color:var(--green)}.quiz-option.incorrect .option-letter{background:var(--red);color:#fff;border-color:var(--red)}
+.submit-btn{margin-top:14px;width:100%;padding:12px;background:linear-gradient(135deg,var(--accent),#991b1b);color:#fff;border:none;border-radius:var(--radius-sm);font-weight:600;cursor:pointer}.submit-btn:disabled{background:var(--bg-subtle);color:var(--text-secondary)}
+.explanation{margin-top:16px;padding:16px;border-radius:var(--radius-sm);display:none;font-size:13px}.explanation.visible{display:block}.explanation.correct{background:#f0fdf4;border:1px solid #bbf7d0}.explanation.incorrect{background:#fef2f2;border:1px solid #fecaca}
+.keypoint{margin-top:10px;padding:10px;background:rgba(220,38,38,.1);border-radius:6px;font-size:12px}.keypoint-label{font-weight:600;color:var(--accent);font-size:10px}
+.deep-dive{margin-top:14px;border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden}.dd-toggle{width:100%;padding:10px 14px;background:var(--bg-subtle);border:none;cursor:pointer;display:flex;justify-content:space-between;font-size:12px;font-weight:600}.dd-content{display:none;padding:14px;font-size:12px;max-height:500px;overflow-y:auto}.dd-content.visible{display:block}.dd-content h4{font-size:13px;font-weight:600;margin:12px 0 8px;color:var(--accent)}.dd-content h4:first-child{margin-top:0}.dd-content ul{margin:8px 0;padding-left:20px}.dd-content li{margin:4px 0}.dd-content table{width:100%;border-collapse:collapse;margin:10px 0;font-size:11px}.dd-content th,.dd-content td{border:1px solid var(--border);padding:6px 8px}.dd-content th{background:var(--bg-subtle)}.buzzwords{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px}.buzzword{font-size:10px;padding:4px 8px;background:#fef3c7;border-radius:4px;color:#92400e;font-weight:500}
+</style>
+</head>
+<body>
+<header class="header"><div class="logo">💔 ReasonDx — Acute Coronary Syndromes</div></header>
+<div class="module-header"><div class="module-title"><div class="module-icon">💔</div><div><h1>Acute Coronary Syndromes<span class="enhanced-badge">✨ MECHANISM-ENHANCED</span></h1><p>STEMI, NSTEMI, Unstable Angina: Recognition and Management</p></div></div></div>
+<div class="progress-bar"><div class="progress-inner"><span style="font-size:12px;color:var(--text-secondary)">Progress</span><div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div><span class="progress-count" id="progressCount">0/20</span></div></div>
+<nav class="timeline-nav"><div class="timeline-inner">
+<div class="timeline-phase active" onclick="goPhase(1)"><div class="phase-label">🔍 Recognition</div><div class="phase-time">ECG & Troponin</div></div>
+<div class="timeline-phase locked" onclick="goPhase(2)"><div class="phase-label">⚡ STEMI</div><div class="phase-time">Reperfusion</div></div>
+<div class="timeline-phase locked" onclick="goPhase(3)"><div class="phase-label">💊 NSTEMI/UA</div><div class="phase-time">Risk Stratification</div></div>
+<div class="timeline-phase locked" onclick="goPhase(4)"><div class="phase-label">🛡️ Post-MI Care</div><div class="phase-time">Secondary Prevention</div></div>
+</div></nav>
+<div class="main-container">
+<aside>
+<div class="phase-objectives" id="phaseObjectives"></div>
+<div class="card"><div class="card-header"><div class="card-title">📋 Clinical Snapshot</div></div><div class="card-content"><div class="case-narrative" id="caseNarrative"></div><div class="clinical-pearl"><div class="pearl-title">💡 ACS Pearl</div><div class="pearl-text" id="pearlText"></div></div></div></div>
+</aside>
+<main id="questionsPanel"></main>
+</div>
+<script>
+var phase=1,state={};for(var i=1;i<=20;i++)state[i]={pick:null,done:false,ok:false};
+var phases={
+1:{qs:[1,2,3,4,5],narrative:'<strong>Michael Torres</strong>, 58M with HTN, DM, smoking, presents with crushing chest pain radiating to left arm for 45 minutes. Diaphoretic, BP 145/90, HR 95.',pearl:'ACS spectrum: STEMI (ST elevation), NSTEMI (troponin+, no STE), UA (no troponin rise). ECG within 10 minutes. Troponin at 0 and 3-6 hours.',objectives:['Classify ACS types','Interpret ECG findings','Understand troponin kinetics','Identify STEMI equivalents'],refs:[{t:'ACC/AHA STEMI Guidelines',u:'https://www.ahajournals.org/doi/10.1161/CIR.0000000000000617'}]},
+2:{qs:[6,7,8,9,10],narrative:'ECG shows 3mm ST elevation in V1-V4. This is anterior STEMI. Time to reperfusion is critical - door-to-balloon <90 minutes or fibrinolytics if PCI unavailable.',pearl:'STEMI = emergent reperfusion. Primary PCI preferred (door-to-balloon <90 min). Fibrinolytics if PCI delay >120 min. Give antiplatelet therapy immediately.',objectives:['Recognize STEMI criteria','Choose reperfusion strategy','Know time targets','Manage complications'],refs:[{t:'Primary PCI Guidelines',u:'https://www.ahajournals.org/doi/10.1161/CIR.0000000000000617'}]},
+3:{qs:[11,12,13,14,15],narrative:'Different patient: chest pain with troponin 0.8 ng/mL but no ST elevation. This is NSTEMI. Risk stratify with TIMI or GRACE score to guide invasive strategy timing.',pearl:'NSTEMI/UA: Risk stratify first. High-risk features → early invasive (<24h). Intermediate → invasive within 72h. Low risk → ischemia-guided approach possible.',objectives:['Risk stratify NSTEMI','Apply TIMI score','Choose invasive timing','Select anticoagulation'],refs:[{t:'NSTEMI Guidelines',u:'https://www.ahajournals.org/doi/10.1161/CIR.0000000000000617'}]},
+4:{qs:[16,17,18,19,20],narrative:'Post-MI care: DAPT, high-intensity statin, beta-blocker, ACEi. Cardiac rehab referral. Risk factor modification is essential for secondary prevention.',pearl:'Post-MI: DAPT (aspirin + P2Y12 inhibitor) for 12 months. High-intensity statin. Beta-blocker. ACEi if EF reduced. Cardiac rehab improves outcomes.',objectives:['Prescribe DAPT correctly','Start GDMT post-MI','Know statin intensity','Refer to cardiac rehab'],refs:[{t:'Secondary Prevention',u:'https://www.ahajournals.org/doi/10.1161/CIR.0000000000000678'}]}
+};
+var Qs={
+1:{type:'ACS Classification',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Cards'],stem:'A patient has chest pain with elevated troponin but no ST elevation on ECG. What is the diagnosis?',
+opts:[['a','ST-elevation myocardial infarction requiring emergent cath'],['b','Unstable angina with negative cardiac biomarkers'],['c','Non-ST-elevation myocardial infarction (NSTEMI)'],['d','Stable angina pectoris with exertional symptoms']],
+ans:'c',
+exp:'<strong>NSTEMI:</strong> Elevated troponin + ischemic symptoms WITHOUT ST elevation. Distinguishes from UA (no troponin rise) and STEMI (has ST elevation).',
+kp:'NSTEMI = troponin positive, no ST elevation. UA = troponin negative. STEMI = ST elevation. All are ACS.',
+dd:{mechanism:{title:'ACS Classification',content:'<table><tr><th>Type</th><th>Troponin</th><th>ECG</th></tr><tr><td>STEMI</td><td>Elevated</td><td>ST elevation</td></tr><tr><td>NSTEMI</td><td>Elevated</td><td>No ST elevation</td></tr><tr><td>UA</td><td>Normal</td><td>No ST elevation</td></tr></table>',bw:['Troponin differentiates','ST elevation = STEMI','UA = troponin negative']}}},
+2:{type:'STEMI Criteria',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Cards'],stem:'What ECG finding in leads V2-V3 meets STEMI criteria for a 55-year-old man?',
+opts:[['a','ST elevation of 0.5mm in two contiguous leads'],['b','ST elevation of at least 2mm in men over 40'],['c','Any T wave inversion regardless of depth'],['d','Isolated Q waves without ST segment changes']],
+ans:'b',
+exp:'<strong>STEMI criteria V2-V3:</strong> ST elevation ≥2mm in men ≥40yo (≥2.5mm if <40yo), ≥1.5mm in women. Other leads: ≥1mm in 2 contiguous leads.',
+kp:'V2-V3 have higher thresholds. Men ≥40: need ≥2mm. Women: need ≥1.5mm. Other leads: ≥1mm in 2 contiguous.',
+dd:{mechanism:{title:'STEMI ECG Criteria',content:'<table><tr><th>Leads</th><th>Men <40</th><th>Men ≥40</th><th>Women</th></tr><tr><td>V2-V3</td><td>≥2.5mm</td><td>≥2mm</td><td>≥1.5mm</td></tr><tr><td>Other leads</td><td colspan="3">≥1mm in 2 contiguous leads</td></tr></table>',bw:['V2-V3 higher threshold','Age and sex matter','Contiguous leads required']}}},
+3:{type:'Troponin Kinetics',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Cards'],stem:'A patient presents 2 hours after chest pain. Initial troponin is negative. What is the next step?',
+opts:[['a','Discharge home as MI has been definitively ruled out'],['b','Repeat troponin in 3-6 hours to detect delayed rise'],['c','Proceed directly to cardiac catheterization now'],['d','Start thrombolytics based on clinical presentation']],
+ans:'b',
+exp:'<strong>Troponin kinetics:</strong> Rises 2-4 hours after injury, peaks 12-24 hours. Single negative troponin does not rule out MI. Need serial testing at 3-6 hours.',
+kp:'Troponin rises 2-4 hours post-injury. One negative test is not enough. Serial troponins at 0 and 3-6 hours required.',
+dd:{mechanism:{title:'Troponin Timing',content:'<h4>Time Course</h4><ul><li>Detectable: 2-4 hours</li><li>Peak: 12-24 hours</li><li>Duration: 7-14 days</li></ul><h4>Rule-Out Protocol</h4><ul><li>0 and 3-6 hour testing</li><li>High-sensitivity: 0 and 1-3 hours</li></ul>',bw:['Rises at 2-4 hours','Serial testing required','hs-Troponin faster rule-out']}}},
+4:{type:'Type 2 MI',difficulty:'hard',domains:['pathophysiology'],tags:['Step2','Cards'],stem:'A septic patient has troponin 0.25 ng/mL, no chest pain, and sinus tachycardia. What is the most likely diagnosis?',
+opts:[['a','Type 1 MI from acute coronary plaque rupture'],['b','Type 2 MI from myocardial oxygen supply-demand mismatch'],['c','Unstable angina requiring urgent catheterization'],['d','False positive troponin with no clinical significance']],
+ans:'b',
+exp:'<strong>Type 2 MI:</strong> Myocardial injury from supply/demand mismatch, NOT plaque rupture. Causes: sepsis, hypotension, anemia, tachyarrhythmia. Treatment = treat underlying cause.',
+kp:'Type 1 = plaque rupture, needs ACS treatment. Type 2 = supply/demand mismatch, treat underlying cause.',
+dd:{mechanism:{title:'MI Types',content:'<table><tr><th>Type</th><th>Mechanism</th><th>Treatment</th></tr><tr><td>Type 1</td><td>Plaque rupture + thrombus</td><td>ACS protocol</td></tr><tr><td>Type 2</td><td>Supply/demand mismatch</td><td>Treat underlying cause</td></tr></table>',bw:['Type 1 = plaque rupture','Type 2 = supply/demand','Different treatment approaches']}}},
+5:{type:'Initial Management',difficulty:'medium',domains:['management'],tags:['Step2','Cards'],stem:'A patient presents with chest pain concerning for ACS. What medication is most important to give first?',
+opts:[['a','Morphine for immediate pain relief and comfort'],['b','Nitroglycerin to dilate coronary arteries quickly'],['c','Aspirin 325mg chewed for antiplatelet effect'],['d','Metoprolol to reduce myocardial oxygen demand']],
+ans:'c',
+exp:'<strong>Initial ACS management:</strong> Aspirin 325mg chewed (most important - 23% mortality reduction). NTG for pain. O2 only if hypoxic. Morphine use declining due to concerns.',
+kp:'Aspirin first and most important. 23% mortality reduction (ISIS-2). Chew for faster absorption.',
+dd:{mechanism:{title:'Initial ACS Treatment',content:'<h4>Priority Order</h4><ol><li>Aspirin 325mg chewed</li><li>Nitroglycerin (if no contraindication)</li><li>Oxygen only if SpO2 <90%</li><li>Morphine (controversial, use sparingly)</li></ol>',bw:['Aspirin first','325mg chewed','ISIS-2 trial','23% mortality reduction']}}},
+6:{type:'Door-to-Balloon',difficulty:'medium',domains:['management'],tags:['Step2','Cards'],stem:'A STEMI patient arrives at a PCI-capable hospital. What is the target door-to-balloon time?',
+opts:[['a','Within 60 minutes of hospital arrival'],['b','Within 90 minutes of hospital arrival'],['c','Within 120 minutes of hospital arrival'],['d','Within 180 minutes of hospital arrival']],
+ans:'b',
+exp:'<strong>STEMI reperfusion:</strong> Primary PCI preferred if door-to-balloon ≤90 min. If transfer time would exceed 120 min total, consider fibrinolytics first.',
+kp:'Door-to-balloon ≤90 minutes at PCI-capable center. First medical contact to device ≤120 minutes.',
+dd:{mechanism:{title:'Time Targets',content:'<table><tr><th>Metric</th><th>Target</th></tr><tr><td>Door-to-balloon</td><td>≤90 min</td></tr><tr><td>FMC-to-device</td><td>≤120 min</td></tr><tr><td>Door-to-needle (lytics)</td><td>≤30 min</td></tr></table>',bw:['90 minutes door-to-balloon','120 minutes FMC-to-device','30 minutes for lytics']}}},
+7:{type:'P2Y12 Inhibitors',difficulty:'hard',domains:['pharmacology'],tags:['Step2','Cards'],stem:'For a STEMI patient undergoing primary PCI, which P2Y12 inhibitor is preferred over clopidogrel?',
+opts:[['a','Ticagrelor or prasugrel due to faster onset and potency'],['b','Dipyridamole for better coronary vasodilation effects'],['c','Cilostazol for dual antiplatelet and vasodilator action'],['d','Vorapaxar for stronger thrombin receptor antagonism']],
+ans:'a',
+exp:'<strong>P2Y12 inhibitors:</strong> Ticagrelor (180mg load) or prasugrel (60mg load) preferred over clopidogrel for STEMI PCI. Faster onset, more potent platelet inhibition.',
+kp:'Ticagrelor/prasugrel > clopidogrel for STEMI. Prasugrel contraindicated with prior stroke/TIA.',
+dd:{mechanism:{title:'P2Y12 Comparison',content:'<table><tr><th>Drug</th><th>Load</th><th>Onset</th></tr><tr><td>Clopidogrel</td><td>600mg</td><td>2-6h</td></tr><tr><td>Prasugrel</td><td>60mg</td><td>30min</td></tr><tr><td>Ticagrelor</td><td>180mg</td><td>30min</td></tr></table>',bw:['Faster onset matters','Prasugrel: no prior stroke','Ticagrelor is reversible']}}},
+8:{type:'Fibrinolytic Contraindications',difficulty:'hard',domains:['pharmacology'],tags:['Step2','Cards'],stem:'Which is an ABSOLUTE contraindication to fibrinolytic therapy in STEMI?',
+opts:[['a','Age greater than 75 years old'],['b','Blood pressure of 175/100 mmHg on presentation'],['c','Prior intracranial hemorrhage at any time'],['d','Current use of therapeutic anticoagulation']],
+ans:'c',
+exp:'<strong>Fibrinolytic contraindications:</strong> Prior ICH is ABSOLUTE. Age >75 and HTN are relative. Current anticoagulation is relative but increases bleeding risk.',
+kp:'Absolute: prior ICH, ischemic stroke <3mo, active bleeding, suspected dissection. Relative: BP, age, anticoagulation.',
+dd:{mechanism:{title:'Contraindications',content:'<h4>Absolute</h4><ul><li>Prior intracranial hemorrhage</li><li>Ischemic stroke <3 months</li><li>Active bleeding</li><li>Suspected aortic dissection</li></ul><h4>Relative</h4><ul><li>BP >180/110</li><li>Age >75</li><li>Anticoagulation use</li></ul>',bw:['Prior ICH = absolute','Can treat BP first','Relative = risk-benefit']}}},
+9:{type:'Cardiogenic Shock',difficulty:'hard',domains:['management'],tags:['Step2','Cards'],stem:'A STEMI patient develops cardiogenic shock with BP 75/50. What is the priority intervention?',
+opts:[['a','Aggressive IV fluid resuscitation with 2-3 liters'],['b','Stabilize with medications before considering catheterization'],['c','Emergent revascularization with PCI or CABG'],['d','Start fibrinolytic therapy to avoid cath lab delays']],
+ans:'c',
+exp:'<strong>Cardiogenic shock:</strong> Emergent revascularization is priority (SHOCK trial). Do NOT delay for stabilization. Support with vasopressors, consider mechanical support.',
+kp:'SHOCK trial: early revascularization saves lives. Do NOT delay cath for stabilization.',
+dd:{mechanism:{title:'Cardiogenic Shock',content:'<h4>Management Priority</h4><ol><li>Emergent revascularization</li><li>Vasopressors (norepinephrine)</li><li>Mechanical support if needed</li></ol><h4>SHOCK Trial</h4><p>Early revascularization improved 6-month survival</p>',bw:['Early revascularization','Dont delay for stabilization','SHOCK trial evidence']}}},
+10:{type:'RV Infarction',difficulty:'hard',domains:['pathophysiology'],tags:['Step2','Cards'],stem:'A patient with inferior STEMI has JVD, clear lungs, and hypotension. What should you AVOID?',
+opts:[['a','Intravenous normal saline fluid bolus'],['b','Aspirin and antiplatelet therapy'],['c','Nitroglycerin and diuretics'],['d','Emergent cardiac catheterization']],
+ans:'c',
+exp:'<strong>RV infarction:</strong> RV is preload-dependent. AVOID nitrates (reduce preload) and diuretics. GIVE fluids. Classic triad: JVD, clear lungs, hypotension.',
+kp:'RV infarct = JVD + clear lungs + hypotension. AVOID nitroglycerin and diuretics. GIVE fluids.',
+dd:{mechanism:{title:'RV Infarction',content:'<h4>Classic Triad</h4><ul><li>Elevated JVD</li><li>Clear lung fields</li><li>Hypotension</li></ul><h4>Management</h4><ul><li>GIVE: IV fluids</li><li>AVOID: Nitrates, diuretics</li><li>Get V4R ECG</li></ul>',bw:['Preload-dependent','Avoid nitrates','Give fluids','Check V4R']}}},
+11:{type:'TIMI Score',difficulty:'medium',domains:['diagnosis'],tags:['Step2','Cards'],stem:'A NSTEMI patient has TIMI score of 5. What does this indicate about management?',
+opts:[['a','Low risk, can be managed conservatively as outpatient'],['b','Intermediate risk, stress testing before discharge'],['c','High risk, early invasive strategy within 24 hours'],['d','Very high risk, immediate catheterization within 2 hours']],
+ans:'c',
+exp:'<strong>TIMI risk score:</strong> Score ≥5 = high risk, benefit from early invasive strategy within 24 hours. Score 0-2 = low risk, may consider conservative approach.',
+kp:'TIMI ≥5 = high risk, early invasive. TIMI 0-2 = low risk, ischemia-guided approach acceptable.',
+dd:{mechanism:{title:'TIMI Score',content:'<table><tr><th>Score</th><th>Risk</th><th>Strategy</th></tr><tr><td>0-2</td><td>Low</td><td>Conservative possible</td></tr><tr><td>3-4</td><td>Intermediate</td><td>Invasive within 72h</td></tr><tr><td>5-7</td><td>High</td><td>Invasive within 24h</td></tr></table>',bw:['7 factors, 1 point each','Higher = more risk','Guides invasive timing']}}},
+12:{type:'Invasive Strategy',difficulty:'medium',domains:['management'],tags:['Step2','Cards'],stem:'Which NSTEMI patient should undergo catheterization within 24 hours?',
+opts:[['a','Low TIMI score with stable vital signs'],['b','No recurrent symptoms and normal ECG'],['c','Hemodynamic instability or recurrent ischemia'],['d','Preference for conservative medical management']],
+ans:'c',
+exp:'<strong>Early invasive indications:</strong> Hemodynamic instability, recurrent angina, dynamic ECG changes, high-risk scores, sustained VT, prior PCI/CABG.',
+kp:'High-risk features → early invasive (24h). Instability and recurrent ischemia are key triggers.',
+dd:{mechanism:{title:'Invasive Timing',content:'<h4>Within 24 Hours If:</h4><ul><li>Hemodynamic instability</li><li>Recurrent/refractory angina</li><li>Dynamic ST changes</li><li>Heart failure</li><li>Sustained VT/VF</li></ul>',bw:['Instability = early invasive','Recurrent ischemia = early','High TIMI/GRACE = early']}}},
+13:{type:'Anticoagulation',difficulty:'medium',domains:['pharmacology'],tags:['Step2','Cards'],stem:'Which anticoagulant is commonly used for NSTEMI patients undergoing invasive strategy?',
+opts:[['a','Warfarin with INR goal of 2-3'],['b','Unfractionated heparin or enoxaparin'],['c','Dabigatran at treatment dose'],['d','Aspirin alone without anticoagulation']],
+ans:'b',
+exp:'<strong>NSTEMI anticoagulation:</strong> UFH (easily reversible) or enoxaparin (predictable dosing) are standard. Continue until PCI or 48h if conservative.',
+kp:'UFH or enoxaparin for NSTEMI. Bivalirudin if high bleeding risk. Dont switch between agents.',
+dd:{mechanism:{title:'Anticoagulation Options',content:'<table><tr><th>Agent</th><th>Advantage</th></tr><tr><td>UFH</td><td>Reversible, familiar</td></tr><tr><td>Enoxaparin</td><td>No monitoring needed</td></tr><tr><td>Bivalirudin</td><td>Lower bleeding risk</td></tr></table>',bw:['UFH or enoxaparin standard','Bivalirudin if bleeding risk','Dont switch agents']}}},
+14:{type:'aVR Elevation',difficulty:'hard',domains:['diagnosis'],tags:['Step2','Cards'],stem:'A patient has diffuse ST depressions with ST elevation in lead aVR. What does this suggest?',
+opts:[['a','Isolated inferior wall ischemia from RCA occlusion'],['b','Pericarditis with diffuse ST elevation pattern'],['c','Left main or severe three-vessel coronary disease'],['d','Benign early repolarization in young patient']],
+ans:'c',
+exp:'<strong>aVR elevation:</strong> Diffuse ST depression + aVR elevation suggests left main or severe 3-vessel disease. Very high risk, consider emergent/urgent angiography.',
+kp:'aVR elevation + diffuse ST depression = left main or 3-vessel. Very high mortality.',
+dd:{mechanism:{title:'aVR Pattern',content:'<h4>Significance</h4><ul><li>Left main stenosis</li><li>Severe 3-vessel disease</li><li>Very high mortality</li><li>Emergent angiography indicated</li></ul>',bw:['Left main or 3-vessel','Very high risk','Emergent cath indicated']}}},
+15:{type:'Wellens Syndrome',difficulty:'hard',domains:['diagnosis'],tags:['Step2','Cards'],stem:'A pain-free patient has deep symmetric T wave inversions in V2-V4 with normal troponin. What is indicated?',
+opts:[['a','Exercise stress testing to evaluate for ischemia'],['b','Discharge with outpatient cardiology follow-up'],['c','Cardiac catheterization without stress testing'],['d','Repeat troponin in 6 hours then reassess'],
+ans:'c',
+exp:'<strong>Wellens syndrome:</strong> Deep T inversions in V2-V4 when pain-free indicates critical proximal LAD stenosis. Do NOT stress test. Go directly to angiography.',
+kp:'Wellens = critical LAD. Stress test contraindicated. Go directly to cath.',
+dd:{mechanism:{title:'Wellens Syndrome',content:'<h4>Types</h4><ul><li>Type A: Biphasic T waves</li><li>Type B: Deep symmetric inversions</li></ul><h4>Key Points</h4><ul><li>Pain-free when ECG recorded</li><li>Critical proximal LAD</li><li>NO stress testing</li></ul>',bw:['Critical proximal LAD','No stress testing','Direct to angiography']}}},
+16:{type:'DAPT Duration',difficulty:'medium',domains:['pharmacology'],tags:['Step2','Cards'],stem:'How long should DAPT continue after drug-eluting stent placement for ACS?',
+opts:[['a','One month then aspirin monotherapy'],['b','Six months regardless of risk profile'],['c','Twelve months as standard duration'],['d','Lifelong dual antiplatelet therapy']],
+ans:'c',
+exp:'<strong>DAPT duration:</strong> 12 months standard after ACS with DES. May extend if high ischemic/low bleeding risk, or shorten if high bleeding risk.',
+kp:'12 months DAPT standard for ACS. DAPT score guides extension. Aspirin continues lifelong.',
+dd:{mechanism:{title:'DAPT Duration',content:'<table><tr><th>Situation</th><th>Duration</th></tr><tr><td>ACS + DES (standard)</td><td>12 months</td></tr><tr><td>High bleeding risk</td><td>May shorten to 6mo</td></tr><tr><td>High ischemic risk</td><td>May extend >12mo</td></tr></table>',bw:['12 months standard','DAPT score for extension','Aspirin forever']}}},
+17:{type:'Post-MI Medications',difficulty:'medium',domains:['pharmacology'],tags:['Step2','Cards'],stem:'Which combination represents essential post-MI secondary prevention medications?',
+opts:[['a','Aspirin, clopidogrel, low-dose statin, and calcium blocker'],['b','Aspirin, P2Y12 inhibitor, high-intensity statin, and beta-blocker'],['c','Aspirin alone with lifestyle modification counseling'],['d','Warfarin, low-intensity statin, and ACE inhibitor']],
+ans:'b',
+exp:'<strong>Post-MI medications:</strong> DAPT (ASA + P2Y12), high-intensity statin, beta-blocker, ACEi/ARB (especially if EF <40%). Remember: DAPT + Statin + BB + ACEi.',
+kp:'DAPT + high-intensity statin + beta-blocker + ACEi/ARB. All reduce mortality.',
+dd:{mechanism:{title:'Post-MI Meds',content:'<h4>Essential Medications</h4><ul><li>DAPT (ASA + P2Y12)</li><li>High-intensity statin</li><li>Beta-blocker</li><li>ACEi/ARB if EF reduced</li></ul>',bw:['DAPT for 12 months','High-intensity statin','BB especially if low EF']}}},
+18:{type:'Statin Intensity',difficulty:'medium',domains:['pharmacology'],tags:['Step2','Cards'],stem:'A post-MI patient has baseline LDL of 95 mg/dL. What statin regimen is recommended?',
+opts:[['a','No statin needed since LDL is below 100'],['b','Low-intensity statin to avoid side effects'],['c','Moderate-intensity statin with goal LDL below 100'],['d','High-intensity statin regardless of baseline LDL']],
+ans:'d',
+exp:'<strong>Post-ACS statin:</strong> High-intensity statin (atorvastatin 40-80mg or rosuvastatin 20-40mg) for ALL post-ACS patients regardless of baseline LDL.',
+kp:'High-intensity statin for all ACS. Target ≥50% LDL reduction or LDL <70.',
+dd:{mechanism:{title:'Statin Dosing',content:'<h4>High-Intensity Statins</h4><ul><li>Atorvastatin 40-80mg</li><li>Rosuvastatin 20-40mg</li></ul><h4>Goal</h4><ul><li>≥50% LDL reduction</li><li>Or LDL <70 mg/dL</li></ul>',bw:['High-intensity for all','Regardless of baseline','≥50% reduction goal']}}},
+19:{type:'Beta-Blocker Benefit',difficulty:'medium',domains:['pharmacology'],tags:['Step2','Cards'],stem:'Which post-MI patients benefit most from long-term beta-blocker therapy?',
+opts:[['a','All patients equally regardless of ejection fraction'],['b','Only patients with persistent hypertension'],['c','Patients with reduced ejection fraction or heart failure'],['d','Only patients under age 65 years']],
+ans:'c',
+exp:'<strong>Beta-blocker post-MI:</strong> Clear mortality benefit if EF reduced or HF. Benefit in preserved EF post-revascularization less clear (REDUCE-AMI trial).',
+kp:'BB with reduced EF: clear mortality benefit. REDUCE-AMI: less clear benefit if EF preserved.',
+dd:{mechanism:{title:'BB Post-MI',content:'<h4>Clear Benefit</h4><ul><li>EF ≤40%</li><li>Heart failure</li><li>Ongoing ischemia</li></ul><h4>Less Clear</h4><ul><li>Preserved EF post-PCI</li><li>REDUCE-AMI trial</li></ul>',bw:['EF reduced = clear benefit','Evidence-based agents','REDUCE-AMI for preserved EF']}}},
+20:{type:'Cardiac Rehab',difficulty:'medium',domains:['management'],tags:['Step2','Cards'],stem:'What is the mortality reduction associated with cardiac rehabilitation after MI?',
+opts:[['a','No significant mortality benefit demonstrated'],['b','Approximately 5-10% mortality reduction'],['c','Approximately 20-30% mortality reduction'],['d','Approximately 50-60% mortality reduction']],
+ans:'c',
+exp:'<strong>Cardiac rehabilitation:</strong> Reduces mortality 20-30%, improves functional capacity and quality of life. Class IA recommendation. Vastly underutilized.',
+kp:'Cardiac rehab reduces mortality 20-30%. Class IA recommendation. Refer ALL post-MI patients.',
+dd:{mechanism:{title:'Cardiac Rehab',content:'<h4>Benefits</h4><ul><li>↓ Mortality 20-30%</li><li>↑ Functional capacity</li><li>↑ Quality of life</li><li>↓ Readmissions</li></ul>',bw:['20-30% mortality reduction','Class IA recommendation','Vastly underutilized']}}}
+};
+var answers={1:'d',2:'b',3:'d',4:'b',5:'c',6:'d',7:'b',8:'c',9:'a',10:'a',11:'a',12:'c',13:'d',14:'a',15:'a',16:'d',17:'c',18:'b',19:'b',20:'c'};
+function goPhase(p){if(p<1||p>4)return;phase=p;renderPhase();}
+function renderPhase(){var ph=phases[phase];document.querySelectorAll('.timeline-phase').forEach(function(el,i){el.classList.remove('active','locked');if(i+1===phase)el.classList.add('active');else if(i+1>phase)el.classList.add('locked');});document.getElementById('caseNarrative').innerHTML=ph.narrative;document.getElementById('pearlText').textContent=ph.pearl;var objHtml='<div class="obj-title">🎯 Phase '+phase+' Objectives</div><ul class="obj-list">';ph.objectives.forEach(function(o){objHtml+='<li>'+o+'</li>';});objHtml+='</ul>';if(ph.refs){objHtml+='<div style="margin-top:12px;padding-top:10px;border-top:1px dashed #e2e8f0"><div style="font-size:10px;font-weight:600;color:#64748b;margin-bottom:6px">📚 References</div>';ph.refs.forEach(function(r){objHtml+='<a href="'+r.u+'" target="_blank" style="font-size:10px;color:#dc2626;text-decoration:none;display:block;margin:3px 0">'+r.t+'</a>';});objHtml+='</div>';}document.getElementById('phaseObjectives').innerHTML=objHtml;renderQuestions(ph.qs);}
+function renderQuestions(qIds){var html='';qIds.forEach(function(qid){var q=Qs[qid];if(!q)return;html+='<div class="quiz-card" id="q'+qid+'"><div class="quiz-header"><div class="quiz-num">'+qid+'</div><span class="quiz-type">'+q.type+'</span><div class="quiz-meta">';q.tags.forEach(function(t){html+='<span class="quiz-tag">'+t+'</span>';});html+='<span class="quiz-difficulty '+q.difficulty+'">'+q.difficulty+'</span></div></div>';html+='<div class="quiz-body"><div class="quiz-stem">'+q.stem+'</div><div class="quiz-options">';q.opts.forEach(function(opt){html+='<div class="quiz-option" data-q="'+qid+'" data-opt="'+opt[0]+'" onclick="selectOpt(this)"><div class="option-letter">'+opt[0].toUpperCase()+'</div><div class="option-text">'+opt[1]+'</div></div>';});html+='</div><button class="submit-btn" id="sub'+qid+'" disabled onclick="submitQ('+qid+')">Submit</button><div class="explanation" id="exp'+qid+'"></div></div></div>';});document.getElementById('questionsPanel').innerHTML=html;}
+function selectOpt(el){var qid=el.dataset.q;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.remove('selected');});el.classList.add('selected');state[qid].pick=el.dataset.opt;document.getElementById('sub'+qid).disabled=false;}
+function submitQ(qid){if(state[qid].done)return;state[qid].done=true;var correct=answers[qid],picked=state[qid].pick,isCorrect=picked===correct;state[qid].ok=isCorrect;document.querySelectorAll('.quiz-option[data-q="'+qid+'"]').forEach(function(o){o.classList.add('disabled');if(o.dataset.opt===correct)o.classList.add('correct');else if(o.dataset.opt===picked&&!isCorrect)o.classList.add('incorrect');});document.getElementById('sub'+qid).style.display='none';var q=Qs[qid],expDiv=document.getElementById('exp'+qid);var expHtml='<div>'+(isCorrect?'✓ Correct!':'✗ Incorrect')+'</div><div>'+q.exp+'</div><div class="keypoint"><span class="keypoint-label">⚡ Key:</span> '+q.kp+'</div>';if(q.dd){expHtml+='<div class="deep-dive"><button class="dd-toggle" onclick="toggleDD(this)">📚 Deep Dive <span>▼</span></button><div class="dd-content">';for(var d in q.dd){expHtml+=q.dd[d].content;if(q.dd[d].bw){expHtml+='<div class="buzzwords">';q.dd[d].bw.forEach(function(b){expHtml+='<span class="buzzword">'+b+'</span>';});expHtml+='</div>';}}expHtml+='</div></div>';}expDiv.innerHTML=expHtml;expDiv.classList.add('visible',isCorrect?'correct':'incorrect');updateProgress();}
+function toggleDD(btn){btn.nextElementSibling.classList.toggle('visible');btn.querySelector('span').textContent=btn.nextElementSibling.classList.contains('visible')?'▲':'▼';}
+function updateProgress(){var done=0;for(var i=1;i<=20;i++)if(state[i].done)done++;document.getElementById('progressFill').style.width=(done/20*100)+'%';document.getElementById('progressCount').textContent=done+'/20';}
+renderPhase();
+</script>
+</body>
+</html>
