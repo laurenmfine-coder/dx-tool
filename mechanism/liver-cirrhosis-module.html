@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liver Disease & Cirrhosis | MechanismDx</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.6; }
+        .header { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+        .header-inner { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: Georgia, serif; font-size: 22px; color: #1e293b; text-decoration: none; }
+        .logo span { color: #10b981; }
+        .nav { display: flex; gap: 20px; align-items: center; }
+        .nav a { color: #64748b; text-decoration: none; font-size: 14px; font-weight: 500; }
+        .nav a:hover { color: #10b981; }
+        .hero { background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 50%, #fdba74 100%); padding: 48px 24px; text-align: center; border-bottom: 1px solid #fb923c; }
+        .hero-icon { font-size: 64px; margin-bottom: 16px; }
+        .hero h1 { font-size: 36px; font-weight: 700; margin-bottom: 12px; color: #1e293b; }
+        .hero h1 span { color: #ea580c; }
+        .hero-subtitle { font-size: 18px; color: #78350f; max-width: 700px; margin: 0 auto 24px; }
+        .hero-meta { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; font-size: 14px; color: #9a3412; }
+        .progress-container { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 12px 24px; position: sticky; top: 60px; z-index: 99; }
+        .progress-inner { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; gap: 16px; }
+        .progress-bar { flex: 1; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #f97316, #ea580c); border-radius: 4px; transition: width 0.3s; width: 0%; }
+        .progress-text { font-size: 13px; color: #64748b; min-width: 80px; text-align: right; }
+        .main { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        .section-header { display: flex; align-items: center; gap: 12px; margin: 48px 0 24px; padding-bottom: 12px; border-bottom: 2px solid #e2e8f0; }
+        .section-header:first-child { margin-top: 0; }
+        .section-icon { font-size: 28px; }
+        .section-title { font-size: 22px; font-weight: 700; color: #1e293b; }
+        .section-num { background: #f97316; color: white; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 12px; }
+        .concept-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+        .concept-title { font-size: 17px; font-weight: 600; color: #1e293b; margin-bottom: 12px; }
+        .concept-content { font-size: 15px; color: #475569; }
+        .concept-content p { margin-bottom: 12px; }
+        .concept-content ul { margin: 12px 0; padding-left: 24px; }
+        .concept-content li { margin-bottom: 8px; }
+        .pearl-box { background: #fef3c7; border-left: 4px solid #f59e0b; border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 20px 0; }
+        .pearl-title { font-weight: 600; color: #92400e; margin-bottom: 8px; }
+        .pearl-content { font-size: 14px; color: #78350f; }
+        .danger-box { background: #fef2f2; border-left: 4px solid #dc2626; border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 20px 0; }
+        .danger-title { font-weight: 600; color: #991b1b; margin-bottom: 8px; }
+        .danger-content { font-size: 14px; color: #7f1d1d; }
+        .algorithm-box { background: #f0fdf4; border: 2px solid #86efac; border-radius: 12px; padding: 24px; margin: 24px 0; }
+        .algorithm-title { font-weight: 700; color: #166534; margin-bottom: 16px; font-size: 16px; }
+        .algorithm-steps { display: flex; flex-direction: column; gap: 12px; }
+        .algorithm-step { display: flex; align-items: flex-start; gap: 12px; padding: 12px; background: white; border-radius: 8px; }
+        .step-num { background: #22c55e; color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; flex-shrink: 0; }
+        .step-content { flex: 1; }
+        .step-title { font-weight: 600; color: #1e293b; margin-bottom: 4px; }
+        .step-desc { font-size: 13px; color: #64748b; }
+        .formula-box { background: #f0fdf4; border: 2px solid #86efac; border-radius: 12px; padding: 24px; margin: 24px 0; text-align: center; }
+        .formula-title { font-weight: 600; color: #166534; margin-bottom: 12px; }
+        .formula-content { font-family: 'Courier New', monospace; font-size: 20px; color: #1e293b; background: white; padding: 16px; border-radius: 8px; display: inline-block; }
+        .formula-note { font-size: 13px; color: #64748b; margin-top: 12px; }
+        .mnemonic-box { background: #fef3c7; border: 2px solid #fcd34d; border-radius: 12px; padding: 24px; margin: 24px 0; text-align: center; }
+        .mnemonic-title { font-weight: 700; color: #92400e; margin-bottom: 12px; font-size: 16px; }
+        .mnemonic-word { font-family: Georgia, serif; font-size: 32px; color: #78350f; letter-spacing: 4px; margin-bottom: 16px; }
+        .mnemonic-breakdown { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+        .mnemonic-item { background: white; padding: 10px 16px; border-radius: 8px; }
+        .mnemonic-letter { font-weight: 700; color: #ea580c; font-size: 18px; }
+        .mnemonic-meaning { font-size: 13px; color: #64748b; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        .comparison-table th { background: #f1f5f9; padding: 12px 16px; text-align: left; font-weight: 600; color: #1e293b; border: 1px solid #e2e8f0; }
+        .comparison-table td { padding: 12px 16px; border: 1px solid #e2e8f0; color: #475569; vertical-align: top; }
+        .comparison-table tr:nth-child(even) { background: #f8fafc; }
+        .table-label { font-weight: 600; color: #1e293b; }
+        .staging-box { background: #fff7ed; border: 2px solid #fdba74; border-radius: 12px; padding: 24px; margin: 24px 0; }
+        .staging-title { font-weight: 700; color: #9a3412; margin-bottom: 16px; font-size: 16px; }
+        .staging-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+        .staging-item { background: white; padding: 16px; border-radius: 8px; text-align: center; }
+        .staging-class { font-weight: 700; font-size: 20px; margin-bottom: 4px; }
+        .staging-class.a { color: #22c55e; }
+        .staging-class.b { color: #f59e0b; }
+        .staging-class.c { color: #dc2626; }
+        .staging-points { font-size: 13px; color: #64748b; margin-bottom: 8px; }
+        .staging-survival { font-size: 14px; color: #475569; }
+        .quiz-section { background: #ede9fe; border-radius: 16px; padding: 32px; margin: 32px 0; }
+        .quiz-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+        .quiz-icon { font-size: 32px; }
+        .quiz-title { font-size: 20px; font-weight: 700; color: #5b21b6; }
+        .quiz-subtitle { font-size: 14px; color: #7c3aed; }
+        .quiz-question { background: white; border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+        .question-num { font-size: 12px; font-weight: 600; color: #8b5cf6; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .question-text { font-size: 16px; font-weight: 500; color: #1e293b; margin-bottom: 16px; line-height: 1.5; }
+        .question-stem { font-size: 14px; color: #475569; margin-bottom: 16px; line-height: 1.6; padding: 12px; background: #f8fafc; border-radius: 8px; }
+        .options { display: flex; flex-direction: column; gap: 10px; }
+        .option { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 10px; cursor: pointer; transition: all 0.2s; }
+        .option:hover { border-color: #8b5cf6; background: #faf5ff; }
+        .option.selected { border-color: #8b5cf6; background: #faf5ff; }
+        .option.correct { border-color: #22c55e; background: #f0fdf4; }
+        .option.incorrect { border-color: #ef4444; background: #fef2f2; }
+        .option-letter { width: 28px; height: 28px; border-radius: 50%; background: #e2e8f0; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px; color: #64748b; flex-shrink: 0; }
+        .option.selected .option-letter { background: #8b5cf6; color: white; }
+        .option.correct .option-letter { background: #22c55e; color: white; }
+        .option.incorrect .option-letter { background: #ef4444; color: white; }
+        .option-text { font-size: 14px; color: #475569; }
+        .explanation { display: none; margin-top: 16px; padding: 16px; background: #f0fdf4; border-radius: 8px; border-left: 4px solid #22c55e; }
+        .explanation.show { display: block; }
+        .explanation-title { font-weight: 600; color: #166534; margin-bottom: 8px; }
+        .explanation-text { font-size: 14px; color: #15803d; line-height: 1.6; }
+        .check-btn { background: #8b5cf6; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; margin-top: 16px; }
+        .check-btn:hover { background: #7c3aed; }
+        .check-btn:disabled { background: #c4b5fd; cursor: not-allowed; }
+        .crosslink-section { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin: 32px 0; }
+        .crosslink-title { font-size: 16px; font-weight: 600; color: #1e293b; margin-bottom: 16px; }
+        .crosslink-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+        .crosslink-item { display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; text-decoration: none; color: inherit; transition: all 0.2s; }
+        .crosslink-item:hover { border-color: #10b981; background: #f0fdf4; }
+        .crosslink-icon { font-size: 20px; }
+        .crosslink-text { font-size: 13px; color: #475569; }
+        .crosslink-platform { font-size: 11px; color: #94a3b8; }
+        .module-complete { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 2px solid #86efac; border-radius: 16px; padding: 40px; margin: 48px 0; text-align: center; }
+        .complete-icon { font-size: 64px; margin-bottom: 16px; }
+        .complete-title { font-size: 24px; font-weight: 700; color: #166534; margin-bottom: 12px; }
+        .complete-subtitle { font-size: 15px; color: #15803d; margin-bottom: 24px; max-width: 500px; margin-left: auto; margin-right: auto; }
+        .complete-stats { display: flex; justify-content: center; gap: 32px; margin-bottom: 24px; }
+        .complete-stat-num { font-size: 28px; font-weight: 700; color: #22c55e; }
+        .complete-stat-label { font-size: 12px; color: #64748b; }
+        .complete-btn { display: inline-block; background: #22c55e; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; }
+        .complete-btn:hover { background: #16a34a; }
+        .footer { border-top: 1px solid #e2e8f0; padding: 32px 24px; text-align: center; color: #64748b; font-size: 13px; background: #fff; margin-top: 48px; }
+        .footer a { color: #10b981; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <a href="mechanismdx-index.html" class="logo">Mechanism<span>Dx</span></a>
+            <nav class="nav">
+                <a href="mechanismdx-index.html">← All Modules</a>
+                <a href="reasondx-index.html">ReasonDx</a>
+                <a href="coachdx-index.html">CoachDx</a>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-icon">🫁</div>
+        <h1>Liver Disease & <span>Cirrhosis</span></h1>
+        <p class="hero-subtitle">From portal hypertension to hepatorenal syndrome: understand the pathophysiology of decompensated cirrhosis and its life-threatening complications.</p>
+        <div class="hero-meta">
+            <span>📚 16 concepts</span>
+            <span>❓ 12 MCQs</span>
+            <span>⏱️ ~40 min</span>
+            <span>🎯 GI/Hepatology</span>
+        </div>
+    </section>
+    
+    <div class="progress-container">
+        <div class="progress-inner">
+            <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+            <div class="progress-text" id="progressText">0% complete</div>
+        </div>
+    </div>
+    
+    <main class="main">
+        <div class="section-header">
+            <span class="section-num">1</span>
+            <span class="section-icon">🔬</span>
+            <span class="section-title">Cirrhosis: Definition & Staging</span>
+        </div>
+        
+        <div class="concept-card">
+            <div class="concept-title">📋 What Is Cirrhosis?</div>
+            <div class="concept-content">
+                <p><strong>Cirrhosis</strong> is the end-stage of chronic liver injury characterized by:</p>
+                <ul>
+                    <li><strong>Fibrosis:</strong> Replacement of normal hepatocytes with scar tissue</li>
+                    <li><strong>Nodular regeneration:</strong> Abnormal liver architecture with regenerative nodules</li>
+                    <li><strong>Vascular distortion:</strong> Disrupted blood flow leading to portal hypertension</li>
+                </ul>
+                <p>Common causes: Alcohol (60-70%), NAFLD/NASH (growing), Hepatitis C, Hepatitis B, autoimmune hepatitis, hemochromatosis, Wilson's disease, primary biliary cholangitis.</p>
+            </div>
+        </div>
+        
+        <div class="concept-card">
+            <div class="concept-title">📊 Compensated vs Decompensated</div>
+            <div class="concept-content">
+                <ul>
+                    <li><strong>Compensated:</strong> Cirrhosis without complications. Liver function adequate despite fibrosis. May be asymptomatic.</li>
+                    <li><strong>Decompensated:</strong> Development of complications: ascites, variceal bleeding, hepatic encephalopathy, or jaundice. Once decompensated, median survival drops dramatically.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="staging-box">
+            <div class="staging-title">📈 Child-Pugh Classification</div>
+            <div class="staging-grid">
+                <div class="staging-item">
+                    <div class="staging-class a">Class A</div>
+                    <div class="staging-points">5-6 points</div>
+                    <div class="staging-survival">1-year survival: 100%</div>
+                </div>
+                <div class="staging-item">
+                    <div class="staging-class b">Class B</div>
+                    <div class="staging-points">7-9 points</div>
+                    <div class="staging-survival">1-year survival: 80%</div>
+                </div>
+                <div class="staging-item">
+                    <div class="staging-class c">Class C</div>
+                    <div class="staging-points">10-15 points</div>
+                    <div class="staging-survival">1-year survival: 45%</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="formula-box">
+            <div class="formula-title">Child-Pugh Components (BAAAE)</div>
+            <div class="formula-content">Bilirubin + Albumin + Ascites + PT/INR + Encephalopathy</div>
+            <div class="formula-note">Each scored 1-3 points. Total 5-15.</div>
+        </div>
+        
+        <div class="pearl-box">
+            <div class="pearl-title">💡 MELD Score</div>
+            <div class="pearl-content">MELD uses bilirubin, INR, and creatinine to predict 90-day mortality and prioritize transplant listing. MELD >15 = transplant evaluation; MELD >30-40 = severe disease.</div>
+        </div>
+        
+        <div class="section-header">
+            <span class="section-num">2</span>
+            <span class="section-icon">🩸</span>
+            <span class="section-title">Portal Hypertension</span>
+        </div>
+        
+        <div class="concept-card">
+            <div class="concept-title">🔄 Portal Hypertension Pathophysiology</div>
+            <div class="concept-content">
+                <p><strong>Portal hypertension</strong> (>10 mmHg, clinically significant >12 mmHg) drives most complications:</p>
+                <ul>
+                    <li><strong>Increased resistance:</strong> Fibrosis distorts sinusoidal architecture</li>
+                    <li><strong>Increased flow:</strong> Splanchnic vasodilation → increased portal inflow</li>
+                    <li><strong>Collateral formation:</strong> Blood finds alternate routes → varices</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="concept-card">
+            <div class="concept-title">💔 The Hyperdynamic Circulation</div>
+            <div class="concept-content">
+                <ul>
+                    <li><strong>Splanchnic vasodilation:</strong> NO → pooling in splanchnic bed</li>
+                    <li><strong>Decreased effective arterial volume:</strong> Arterial system "underfilled"</li>
+                    <li><strong>Compensatory activation:</strong> RAAS + SNS + ADH → sodium/water retention</li>
+                    <li><strong>High cardiac output:</strong> High CO, low SVR, but inadequate organ perfusion</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="danger-box">
+            <div class="danger-title">⚠️ Varices & Bleeding Risk</div>
+            <div class="danger-content">Esophageal varices develop when portal pressure >10 mmHg. All cirrhotics need EGD screening. Primary prophylaxis: non-selective beta-blockers or band ligation for high-risk varices.</div>
+        </div>
+        
+        <div class="section-header">
+            <span class="section-num">3</span>
+            <span class="section-icon">💧</span>
+            <span class="section-title">Ascites</span>
+        </div>
+        
+        <div class="formula-box">
+            <div class="formula-title">SAAG Calculation</div>
+            <div class="formula-content">SAAG = Serum Albumin − Ascites Albumin</div>
+            <div class="formula-note">≥1.1 = portal hypertension (97% accuracy). "High SAAG = high pressure"</div>
+        </div>
+        
+        <div class="algorithm-box">
+            <div class="algorithm-title">🚀 Ascites Management</div>
+            <div class="algorithm-steps">
+                <div class="algorithm-step">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <div class="step-title">Sodium Restriction</div>
+                        <div class="step-desc">2g/day sodium diet</div>
+                    </div>
+                </div>
+                <div class="algorithm-step">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <div class="step-title">Diuretics</div>
+                        <div class="step-desc">Spironolactone 100mg + Furosemide 40mg (100:40 ratio). Target 0.5 kg/day weight loss.</div>
+                    </div>
+                </div>
+                <div class="algorithm-step">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <div class="step-title">Large Volume Paracentesis</div>
+                        <div class="step-desc">Give albumin 6-8g per liter if >5L removed</div>
+                    </div>
+                </div>
+                <div class="algorithm-step">
+                    <div class="step-num">4</div>
+                    <div class="step-content">
+                        <div class="step-title">TIPS</div>
+                        <div class="step-desc">For refractory ascites</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="danger-box">
+            <div class="danger-title">⚠️ Spontaneous Bacterial Peritonitis (SBP)</div>
+            <div class="danger-content">Diagnose with ascitic fluid PMN >250/mm³. Treat with ceftriaxone + albumin. High mortality if delayed.</div>
+        </div>
+        
+        <div class="section-header">
+            <span class="section-num">4</span>
+            <span class="section-icon">🧠</span>
+            <span class="section-title">Hepatic Encephalopathy</span>
+        </div>
+        
+        <div class="mnemonic-box">
+            <div class="mnemonic-title">HE Precipitants</div>
+            <div class="mnemonic-word">HEPATICS</div>
+            <div class="mnemonic-breakdown">
+                <div class="mnemonic-item"><span class="mnemonic-letter">H</span><span class="mnemonic-meaning">Hemorrhage</span></div>
+                <div class="mnemonic-item"><span class="mnemonic-letter">E</span><span class="mnemonic-meaning">Electrolytes</span></div>
+                <div class="mnemonic-item"><span class="mnemonic-letter">P</span><span class="mnemonic-meaning">Protein excess</span></div>
+                <div class="mnemonic-item"><span class="mnemonic-letter">A</span><span class="mnemonic-meaning">Azotemia</span></div>
+                <div class="mnemonic-item"><span class="mnemonic-letter">T</span><span class="mnemonic-meaning">Tranquilizers</span></div>
+                <div class="mnemonic-item"><span class="mnemonic-letter">I</span><span class="mnemonic-meaning">Infection</span></div>
+                <div class="mnemonic-item"><span class="mnemonic-letter">C</span><span class="mnemonic-meaning">Constipation</span></div>
+                <div class="mnemonic-item"><span class="mnemonic-letter">S</span><span class="mnemonic-meaning">Shunt</span></div>
+            </div>
+        </div>
+        
+        <div class="concept-card">
+            <div class="concept-title">💊 HE Treatment</div>
+            <div class="concept-content">
+                <ul>
+                    <li><strong>Lactulose:</strong> First-line. Titrate to 2-3 soft stools/day.</li>
+                    <li><strong>Rifaximin:</strong> Add-on for recurrent HE.</li>
+                    <li><strong>Identify and treat precipitant!</strong></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section-header">
+            <span class="section-num">5</span>
+            <span class="section-icon">💔</span>
+            <span class="section-title">Hepatorenal Syndrome</span>
+        </div>
+        
+        <div class="concept-card">
+            <div class="concept-title">🎯 HRS Pathophysiology</div>
+            <div class="concept-content">
+                <p><strong>Hepatorenal syndrome</strong> is functional renal failure in advanced cirrhosis:</p>
+                <ul>
+                    <li>Severe splanchnic vasodilation → profound arterial underfilling</li>
+                    <li>Maximal RAAS/SNS activation → intense renal vasoconstriction</li>
+                    <li>Kidneys are structurally normal—they "think" they're protecting against shock</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="comparison-table">
+            <thead>
+                <tr><th>Type</th><th>Onset</th><th>Prognosis</th></tr>
+            </thead>
+            <tbody>
+                <tr><td class="table-label">HRS-AKI</td><td>Rapid (days)</td><td>Median survival 2 weeks untreated</td></tr>
+                <tr><td class="table-label">HRS-CKD</td><td>Gradual (weeks)</td><td>Median survival 6 months</td></tr>
+            </tbody>
+        </div>
+        
+        <div class="pearl-box">
+            <div class="pearl-title">💡 HRS vs ATN</div>
+            <div class="pearl-content">HRS: bland urine, very low urine sodium (<10), FENa <1%. ATN: muddy brown casts, FENa >2%.</div>
+        </div>
+        
+        <div class="quiz-section">
+            <div class="quiz-header">
+                <span class="quiz-icon">🧠</span>
+                <div>
+                    <div class="quiz-title">Knowledge Check: Liver Disease</div>
+                    <div class="quiz-subtitle">Test your understanding</div>
+                </div>
+            </div>
+            
+            <div class="quiz-question" data-correct="B">
+                <div class="question-num">Question 1 of 6</div>
+                <div class="question-text">Serum albumin 2.8, ascites albumin 0.9. What does this indicate?</div>
+                <div class="options">
+                    <div class="option" data-answer="A"><span class="option-letter">A</span><span class="option-text">Malignancy</span></div>
+                    <div class="option" data-answer="B"><span class="option-letter">B</span><span class="option-text">Portal hypertension</span></div>
+                    <div class="option" data-answer="C"><span class="option-letter">C</span><span class="option-text">TB peritonitis</span></div>
+                    <div class="option" data-answer="D"><span class="option-letter">D</span><span class="option-text">Nephrotic syndrome</span></div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">SAAG = 2.8 - 0.9 = 1.9. SAAG ≥1.1 indicates portal hypertension.</div>
+                </div>
+            </div>
+            
+            <div class="quiz-question" data-correct="C">
+                <div class="question-num">Question 2 of 6</div>
+                <div class="question-text">After removing 8L ascites, what prevents circulatory dysfunction?</div>
+                <div class="options">
+                    <div class="option" data-answer="A"><span class="option-letter">A</span><span class="option-text">Normal saline 2L</span></div>
+                    <div class="option" data-answer="B"><span class="option-letter">B</span><span class="option-text">Furosemide 80mg</span></div>
+                    <div class="option" data-answer="C"><span class="option-letter">C</span><span class="option-text">Albumin 6-8g per liter</span></div>
+                    <div class="option" data-answer="D"><span class="option-letter">D</span><span class="option-text">FFP 4 units</span></div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">Give albumin 6-8g per liter when removing >5L to prevent post-paracentesis circulatory dysfunction.</div>
+                </div>
+            </div>
+            
+            <div class="quiz-question" data-correct="D">
+                <div class="question-num">Question 3 of 6</div>
+                <div class="question-text">SBP is diagnosed by ascitic fluid PMN count of:</div>
+                <div class="options">
+                    <div class="option" data-answer="A"><span class="option-letter">A</span><span class="option-text">>100/mm³</span></div>
+                    <div class="option" data-answer="B"><span class="option-letter">B</span><span class="option-text">>150/mm³</span></div>
+                    <div class="option" data-answer="C"><span class="option-letter">C</span><span class="option-text">>200/mm³</span></div>
+                    <div class="option" data-answer="D"><span class="option-letter">D</span><span class="option-text">>250/mm³</span></div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">SBP = ascitic fluid PMN >250/mm³. Don't wait for culture—treat empirically.</div>
+                </div>
+            </div>
+            
+            <div class="quiz-question" data-correct="A">
+                <div class="question-num">Question 4 of 6</div>
+                <div class="question-text">First-line treatment for hepatic encephalopathy:</div>
+                <div class="options">
+                    <div class="option" data-answer="A"><span class="option-letter">A</span><span class="option-text">Lactulose</span></div>
+                    <div class="option" data-answer="B"><span class="option-letter">B</span><span class="option-text">Protein restriction</span></div>
+                    <div class="option" data-answer="C"><span class="option-letter">C</span><span class="option-text">Rifaximin alone</span></div>
+                    <div class="option" data-answer="D"><span class="option-letter">D</span><span class="option-text">Neomycin</span></div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">Lactulose is first-line. Titrate to 2-3 soft stools daily. Rifaximin is add-on for recurrent HE.</div>
+                </div>
+            </div>
+            
+            <div class="quiz-question" data-correct="C">
+                <div class="question-num">Question 5 of 6</div>
+                <div class="question-text">In variceal bleeding, what medications are started BEFORE endoscopy?</div>
+                <div class="options">
+                    <div class="option" data-answer="A"><span class="option-letter">A</span><span class="option-text">Propranolol</span></div>
+                    <div class="option" data-answer="B"><span class="option-letter">B</span><span class="option-text">Vitamin K</span></div>
+                    <div class="option" data-answer="C"><span class="option-letter">C</span><span class="option-text">Octreotide + ceftriaxone</span></div>
+                    <div class="option" data-answer="D"><span class="option-letter">D</span><span class="option-text">Lactulose</span></div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">Octreotide (reduces portal pressure) + ceftriaxone (prophylactic antibiotic) are started immediately in suspected variceal bleeding.</div>
+                </div>
+            </div>
+            
+            <div class="quiz-question" data-correct="D">
+                <div class="question-num">Question 6 of 6</div>
+                <div class="question-text">Definitive treatment for hepatorenal syndrome:</div>
+                <div class="options">
+                    <div class="option" data-answer="A"><span class="option-letter">A</span><span class="option-text">Dialysis</span></div>
+                    <div class="option" data-answer="B"><span class="option-letter">B</span><span class="option-text">Vasoconstrictors + albumin</span></div>
+                    <div class="option" data-answer="C"><span class="option-letter">C</span><span class="option-text">TIPS</span></div>
+                    <div class="option" data-answer="D"><span class="option-letter">D</span><span class="option-text">Liver transplantation</span></div>
+                </div>
+                <button class="check-btn" onclick="checkAnswer(this)">Check Answer</button>
+                <div class="explanation">
+                    <div class="explanation-title">✓ Correct!</div>
+                    <div class="explanation-text">Liver transplant is the only definitive cure. The kidneys are normal—HRS reverses post-transplant!</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="crosslink-section">
+            <div class="crosslink-title">🔗 Related Modules</div>
+            <div class="crosslink-grid">
+                <a href="mechanismdx-gi-bleeding-module.html" class="crosslink-item">
+                    <span class="crosslink-icon">🩸</span>
+                    <div><div class="crosslink-text">GI Bleeding</div><div class="crosslink-platform">MechanismDx</div></div>
+                </a>
+                <a href="mechanismdx-aki-module.html" class="crosslink-item">
+                    <span class="crosslink-icon">💧</span>
+                    <div><div class="crosslink-text">Acute Kidney Injury</div><div class="crosslink-platform">MechanismDx</div></div>
+                </a>
+                <a href="mechanismdx-hyponatremia-module.html" class="crosslink-item">
+                    <span class="crosslink-icon">🧂</span>
+                    <div><div class="crosslink-text">Hyponatremia</div><div class="crosslink-platform">MechanismDx</div></div>
+                </a>
+            </div>
+        </div>
+        
+        <div class="module-complete">
+            <div class="complete-icon">🏆</div>
+            <div class="complete-title">Module Complete!</div>
+            <div class="complete-subtitle">You've mastered cirrhosis complications—portal hypertension, ascites, HE, and HRS.</div>
+            <div class="complete-stats">
+                <div class="complete-stat"><div class="complete-stat-num" id="scoreNum">0</div><div class="complete-stat-label">Questions Correct</div></div>
+                <div class="complete-stat"><div class="complete-stat-num">16</div><div class="complete-stat-label">Concepts</div></div>
+            </div>
+            <a href="mechanismdx-index.html" class="complete-btn">Return to All Modules</a>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <p>© 2025-2026 MechanismDx · Part of the <a href="dxsuite-index.html">Dx Learning Ecosystem</a></p>
+    </footer>
+    
+    <script>
+        let correctCount = 0, answeredCount = 0;
+        const totalQuestions = 6;
+        function checkAnswer(btn) {
+            const q = btn.closest('.quiz-question');
+            const correct = q.dataset.correct;
+            const selected = q.querySelector('.option.selected');
+            if (!selected) { alert('Please select an answer.'); return; }
+            q.querySelectorAll('.option').forEach(o => o.style.pointerEvents = 'none');
+            btn.disabled = true;
+            if (selected.dataset.answer === correct) { selected.classList.add('correct'); correctCount++; }
+            else { selected.classList.add('incorrect'); q.querySelector(`[data-answer="${correct}"]`).classList.add('correct'); }
+            answeredCount++;
+            q.querySelector('.explanation').classList.add('show');
+            document.getElementById('progressFill').style.width = (answeredCount/totalQuestions*100)+'%';
+            document.getElementById('progressText').textContent = Math.round(answeredCount/totalQuestions*100)+'% complete';
+            document.getElementById('scoreNum').textContent = correctCount+'/'+totalQuestions;
+        }
+        document.querySelectorAll('.option').forEach(o => o.addEventListener('click', function() {
+            this.closest('.quiz-question').querySelectorAll('.option').forEach(x => x.classList.remove('selected'));
+            this.classList.add('selected');
+        }));
+    </script>
+</body>
+</html>
