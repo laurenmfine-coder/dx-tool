@@ -1124,7 +1124,27 @@ const ReasonDxResponseIntegration = (function() {
 
     // Track retry attempts
     let initRetryCount = 0;
-    const MAX_INIT_RETRIES = 10;
+    const MAX_INIT_RETRIES = 20;
+    const RETRY_DELAY_MS = 250;
+
+    /**
+     * Check if matchHistoryQuestion is available (handles various scoping scenarios)
+     */
+    function findMatchHistoryQuestion() {
+        // Check window object first
+        if (typeof window.matchHistoryQuestion === 'function') {
+            return window.matchHistoryQuestion;
+        }
+        // Check if it exists as a global (might not be on window yet)
+        try {
+            if (typeof matchHistoryQuestion === 'function') {
+                return matchHistoryQuestion;
+            }
+        } catch (e) {
+            // ReferenceError - not defined
+        }
+        return null;
+    }
 
     /**
      * Initialize the response system
@@ -1132,19 +1152,25 @@ const ReasonDxResponseIntegration = (function() {
     function initialize() {
         if (isInitialized) return;
         
-        // Store and wrap original function
-        if (typeof window.matchHistoryQuestion === 'function') {
-            originalMatchHistoryQuestion = window.matchHistoryQuestion;
+        // Look for the function
+        const foundFunction = findMatchHistoryQuestion();
+        
+        if (foundFunction) {
+            originalMatchHistoryQuestion = foundFunction;
             window.matchHistoryQuestion = enhancedMatch;
             console.log('✓ ReasonDx Patient Response System: Initialized');
             isInitialized = true;
         } else {
             initRetryCount++;
             if (initRetryCount < MAX_INIT_RETRIES) {
-                console.warn(`matchHistoryQuestion not found - will retry (${initRetryCount}/${MAX_INIT_RETRIES})`);
-                setTimeout(initialize, 500);
+                // Only log after several failed attempts to reduce console noise
+                if (initRetryCount > 8) {
+                    console.warn(`matchHistoryQuestion not found - will retry (${initRetryCount}/${MAX_INIT_RETRIES})`);
+                }
+                setTimeout(initialize, RETRY_DELAY_MS);
             } else {
                 console.warn('⚠ ReasonDx Patient Response System: matchHistoryQuestion not found after max retries. Running in standalone mode.');
+                console.log('  typeof window.matchHistoryQuestion:', typeof window.matchHistoryQuestion);
                 // Initialize in standalone mode - the system will work but without wrapping the original function
                 isInitialized = true;
             }
@@ -1349,18 +1375,24 @@ const ReasonDxResponseIntegration = (function() {
 // AUTO-INITIALIZATION
 // ============================================================================
 
-// Initialize when DOM is ready
+// Initialize when DOM is ready - with robust timing
 if (typeof document !== 'undefined') {
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(function() {
-                ReasonDxResponseIntegration.initialize();
-            }, 200);
-        });
-    } else {
+    // Always wait for DOMContentLoaded to ensure all inline scripts have executed
+    function initWhenReady() {
+        // Extra delay to ensure inline scripts have completed window assignments
         setTimeout(function() {
             ReasonDxResponseIntegration.initialize();
-        }, 200);
+        }, 500);
+    }
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initWhenReady);
+    } else if (document.readyState === 'interactive') {
+        // DOM parsed but resources loading - wait a bit more
+        setTimeout(initWhenReady, 100);
+    } else {
+        // complete - but still give inline scripts time to finish
+        initWhenReady();
     }
 }
 
