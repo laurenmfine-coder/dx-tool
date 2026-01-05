@@ -68,6 +68,8 @@
         .case-title { font-size: 17px; font-weight: 600; margin-bottom: 8px; color: #18181b; }
         .case-demo { font-size: 14px; color: #64748b; }
         .case-time { font-size: 12px; color: #94a3b8; margin-top: 12px; padding-top: 12px; border-top: 1px solid #f4f4f5; }
+        .case-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600; margin-left: 8px; }
+        .case-badge.parallel { background: #fef3c7; color: #b45309; }
         .footer { padding: 32px 24px; text-align: center; border-top: 1px solid #e4e4e7; background: #fff; margin-top: 48px; font-size: 13px; color: #94a3b8; }
         .footer a { color: #8b5cf6; text-decoration: none; }
     </style>
@@ -103,8 +105,8 @@
         <h1>Case Library</h1>
         <p>Choose a patient, pick your AI coach, and work through the case. You'll figure out what's going on.</p>
         <div class="hero-stats">
-            <div><div class="hero-stat-num">68</div><div class="hero-stat-label">Cases</div></div>
-            <div><div class="hero-stat-num">10</div><div class="hero-stat-label">Categories</div></div>
+            <div><div class="hero-stat-num">33</div><div class="hero-stat-label">Cases</div></div>
+            <div><div class="hero-stat-num">8</div><div class="hero-stat-label">Categories</div></div>
             <div><div class="hero-stat-num">5</div><div class="hero-stat-label">AI Coaches</div></div>
         </div>
     </section>
@@ -113,11 +115,13 @@
         <button class="filter-btn active" data-filter="all">All Cases</button>
         <button class="filter-btn" data-filter="cardiovascular">Cardiovascular</button>
         <button class="filter-btn" data-filter="pulmonary">Pulmonary</button>
-        <button class="filter-btn" data-filter="critical">Critical Care</button>
-        <button class="filter-btn" data-filter="renal">Renal</button>
         <button class="filter-btn" data-filter="gi">GI</button>
-        <button class="filter-btn" data-filter="neuro">Neuro</button>
-        <input type="text" class="search-input" placeholder="Search cases..." id="searchInput">
+        <button class="filter-btn" data-filter="renal">Renal</button>
+        <button class="filter-btn" data-filter="endocrine">Endocrine</button>
+        <button class="filter-btn" data-filter="neuro">Neurology</button>
+        <button class="filter-btn" data-filter="id">Infectious Disease</button>
+        <button class="filter-btn" data-filter="heme">Hematology</button>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search cases...">
     </div></div>
     
     <main class="main">
@@ -126,17 +130,54 @@
             <div class="category-header">
                 <span class="category-icon">❤️</span>
                 <span class="category-title">Cardiovascular</span>
-                <span class="category-count">8 cases</span>
+                <span class="category-count">9 cases</span>
             </div>
             <div class="case-grid">
-                <a href="mentor-chat.html?case=cv01" class="case-card"><div class="case-title">Chest Pain</div><div class="case-demo">55-year-old man</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=cv02" class="case-card"><div class="case-title">Chest Pain</div><div class="case-demo">68-year-old woman</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=cv03" class="case-card"><div class="case-title">Shortness of Breath</div><div class="case-demo">72-year-old man</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=cv04" class="case-card"><div class="case-title">Syncope</div><div class="case-demo">45-year-old woman</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=cv05" class="case-card"><div class="case-title">Palpitations</div><div class="case-demo">32-year-old man</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=cv06" class="case-card"><div class="case-title">Leg Swelling</div><div class="case-demo">65-year-old woman</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=cv07" class="case-card"><div class="case-title">Hypertensive Emergency</div><div class="case-demo">58-year-old man</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=cv08" class="case-card"><div class="case-title">Endocarditis</div><div class="case-demo">42-year-old man</div><div class="case-time">~25 min</div></a>
+                <a href="mentor-chat.html?case=chest-pain-acs" class="case-card">
+                    <div class="case-title">Chest Pain - ACS Evaluation</div>
+                    <div class="case-demo">Maria Santos, 52F</div>
+                    <div class="case-time">~25 min</div>
+                </a>
+                <a href="mentor-chat.html?case=chest-pain-acs-b" class="case-card">
+                    <div class="case-title">Chest Pain - Atypical ACS <span class="case-badge parallel">Parallel</span></div>
+                    <div class="case-demo">James Liu, 68M</div>
+                    <div class="case-time">~25 min</div>
+                </a>
+                <a href="mentor-chat.html?case=chest-pain-noncardiac" class="case-card">
+                    <div class="case-title">Chest Pain - Musculoskeletal</div>
+                    <div class="case-demo">Jennifer Lee, 34F</div>
+                    <div class="case-time">~20 min</div>
+                </a>
+                <a href="mentor-chat.html?case=atrial-fibrillation" class="case-card">
+                    <div class="case-title">New Onset AFib</div>
+                    <div class="case-demo">Barbara Chen, 67F</div>
+                    <div class="case-time">~25 min</div>
+                </a>
+                <a href="mentor-chat.html?case=atrial-fibrillation-b" class="case-card">
+                    <div class="case-title">Unstable AFib with RVR <span class="case-badge parallel">Parallel</span></div>
+                    <div class="case-demo">Richard Adams, 72M</div>
+                    <div class="case-time">~30 min</div>
+                </a>
+                <a href="mentor-chat.html?case=syncope" class="case-card">
+                    <div class="case-title">Syncope - Vasovagal</div>
+                    <div class="case-demo">Helen Park, 45F</div>
+                    <div class="case-time">~25 min</div>
+                </a>
+                <a href="mentor-chat.html?case=syncope-cardiac" class="case-card">
+                    <div class="case-title">Syncope - Cardiac <span class="case-badge parallel">Parallel</span></div>
+                    <div class="case-demo">George Miller, 68M</div>
+                    <div class="case-time">~25 min</div>
+                </a>
+                <a href="mentor-chat.html?case=acute-dyspnea-chf" class="case-card">
+                    <div class="case-title">Acute Dyspnea - CHF</div>
+                    <div class="case-demo">Robert Chen, 68M</div>
+                    <div class="case-time">~25 min</div>
+                </a>
+                <a href="mentor-chat.html?case=acute-dyspnea-pe" class="case-card">
+                    <div class="case-title">Acute Dyspnea - PE <span class="case-badge parallel">Parallel</span></div>
+                    <div class="case-demo">Amanda Torres, 34F</div>
+                    <div class="case-time">~25 min</div>
+                </a>
             </div>
         </section>
         
@@ -145,52 +186,19 @@
             <div class="category-header">
                 <span class="category-icon">🫁</span>
                 <span class="category-title">Pulmonary</span>
-                <span class="category-count">7 cases</span>
+                <span class="category-count">2 cases</span>
             </div>
             <div class="case-grid">
-                <a href="mentor-chat.html?case=pulm01" class="case-card"><div class="case-title">Dyspnea</div><div class="case-demo">67-year-old man</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=pulm02" class="case-card"><div class="case-title">Cough</div><div class="case-demo">45-year-old woman</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=pulm03" class="case-card"><div class="case-title">Hemoptysis</div><div class="case-demo">58-year-old man</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=pulm04" class="case-card"><div class="case-title">Asthma Exacerbation</div><div class="case-demo">28-year-old woman</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=pulm05" class="case-card"><div class="case-title">COPD Exacerbation</div><div class="case-demo">71-year-old man</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=pulm06" class="case-card"><div class="case-title">Pulmonary Embolism</div><div class="case-demo">52-year-old woman</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=pulm07" class="case-card"><div class="case-title">Pleural Effusion</div><div class="case-demo">63-year-old man</div><div class="case-time">~25 min</div></a>
-            </div>
-        </section>
-        
-        <!-- Critical Care -->
-        <section class="category-section" data-category="critical">
-            <div class="category-header">
-                <span class="category-icon">🚨</span>
-                <span class="category-title">Critical Care</span>
-                <span class="category-count">8 cases</span>
-            </div>
-            <div class="case-grid">
-                <a href="mentor-chat.html?case=cc01" class="case-card"><div class="case-title">Sepsis</div><div class="case-demo">74-year-old woman</div><div class="case-time">~30 min</div></a>
-                <a href="mentor-chat.html?case=cc02" class="case-card"><div class="case-title">Shock</div><div class="case-demo">56-year-old man</div><div class="case-time">~30 min</div></a>
-                <a href="mentor-chat.html?case=cc03" class="case-card"><div class="case-title">Respiratory Failure</div><div class="case-demo">68-year-old man</div><div class="case-time">~30 min</div></a>
-                <a href="mentor-chat.html?case=cc04" class="case-card"><div class="case-title">Altered Mental Status</div><div class="case-demo">78-year-old woman</div><div class="case-time">~30 min</div></a>
-                <a href="mentor-chat.html?case=cc05" class="case-card"><div class="case-title">DKA</div><div class="case-demo">24-year-old woman</div><div class="case-time">~30 min</div></a>
-                <a href="mentor-chat.html?case=cc06" class="case-card"><div class="case-title">Overdose</div><div class="case-demo">32-year-old man</div><div class="case-time">~30 min</div></a>
-                <a href="mentor-chat.html?case=cc07" class="case-card"><div class="case-title">Anaphylaxis</div><div class="case-demo">29-year-old woman</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=cc08" class="case-card"><div class="case-title">Post-Op Fever</div><div class="case-demo">61-year-old man</div><div class="case-time">~25 min</div></a>
-            </div>
-        </section>
-        
-        <!-- Renal -->
-        <section class="category-section" data-category="renal">
-            <div class="category-header">
-                <span class="category-icon">🫘</span>
-                <span class="category-title">Renal</span>
-                <span class="category-count">6 cases</span>
-            </div>
-            <div class="case-grid">
-                <a href="mentor-chat.html?case=renal01" class="case-card"><div class="case-title">Acute Kidney Injury</div><div class="case-demo">70-year-old man</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=renal02" class="case-card"><div class="case-title">Hyponatremia</div><div class="case-demo">82-year-old woman</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=renal03" class="case-card"><div class="case-title">Hyperkalemia</div><div class="case-demo">65-year-old man</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=renal04" class="case-card"><div class="case-title">Metabolic Acidosis</div><div class="case-demo">48-year-old woman</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=renal05" class="case-card"><div class="case-title">Hematuria</div><div class="case-demo">55-year-old man</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=renal06" class="case-card"><div class="case-title">Nephrotic Syndrome</div><div class="case-demo">38-year-old woman</div><div class="case-time">~25 min</div></a>
+                <a href="mentor-chat.html?case=copd-exacerbation" class="case-card">
+                    <div class="case-title">COPD Exacerbation</div>
+                    <div class="case-demo">Harold Stevens, 72M</div>
+                    <div class="case-time">~25 min</div>
+                </a>
+                <a href="mentor-chat.html?case=asthma-exacerbation" class="case-card">
+                    <div class="case-title">Severe Asthma <span class="case-badge parallel">Parallel</span></div>
+                    <div class="case-demo">Jessica Martinez, 24F</div>
+                    <div class="case-time">~25 min</div>
+                </a>
             </div>
         </section>
         
@@ -198,36 +206,71 @@
         <section class="category-section" data-category="gi">
             <div class="category-header">
                 <span class="category-icon">🔥</span>
-                <span class="category-title">GI / Hepatology</span>
-                <span class="category-count">8 cases</span>
+                <span class="category-title">GI / Surgery</span>
+                <span class="category-count">6 cases</span>
             </div>
             <div class="case-grid">
-                <a href="mentor-chat.html?case=gi01" class="case-card"><div class="case-title">Abdominal Pain</div><div class="case-demo">42-year-old woman</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=gi02" class="case-card"><div class="case-title">GI Bleeding</div><div class="case-demo">65-year-old man</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=gi03" class="case-card"><div class="case-title">Diarrhea</div><div class="case-demo">34-year-old man</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=gi04" class="case-card"><div class="case-title">Jaundice</div><div class="case-demo">58-year-old woman</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=gi05" class="case-card"><div class="case-title">Ascites</div><div class="case-demo">62-year-old man</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=gi06" class="case-card"><div class="case-title">Pancreatitis</div><div class="case-demo">48-year-old man</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=gi07" class="case-card"><div class="case-title">Hepatic Encephalopathy</div><div class="case-demo">55-year-old man</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=gi08" class="case-card"><div class="case-title">Bowel Obstruction</div><div class="case-demo">71-year-old woman</div><div class="case-time">~25 min</div></a>
+                <a href="mentor-chat.html?case=upper-gi-bleed" class="case-card">
+                    <div class="case-title">Upper GI Bleeding - PUD</div>
+                    <div class="case-demo">Frank Morrison, 68M</div>
+                    <div class="case-time">~30 min</div>
+                </a>
+                <a href="mentor-chat.html?case=lower-gi-bleed" class="case-card">
+                    <div class="case-title">Lower GI Bleeding <span class="case-badge parallel">Parallel</span></div>
+                    <div class="case-demo">Dorothy Chen, 75F</div>
+                    <div class="case-time">~25 min</div>
+                </a>
+                <a href="mentor-chat.html?case=appendicitis" class="case-card">
+                    <div class="case-title">Acute Appendicitis</div>
+                    <div class="case-demo">Tyler Johnson, 24M</div>
+                    <div class="case-time">~25 min</div>
+                </a>
+                <a href="mentor-chat.html?case=diverticulitis" class="case-card">
+                    <div class="case-title">Acute Diverticulitis <span class="case-badge parallel">Parallel</span></div>
+                    <div class="case-demo">Barbara Williams, 62F</div>
+                    <div class="case-time">~25 min</div>
+                </a>
+                <a href="mentor-chat.html?case=cholangitis" class="case-card">
+                    <div class="case-title">Acute Cholangitis</div>
+                    <div class="case-demo">James Park, 71M</div>
+                    <div class="case-time">~30 min</div>
+                </a>
+                <a href="mentor-chat.html?case=sbo" class="case-card">
+                    <div class="case-title">Small Bowel Obstruction</div>
+                    <div class="case-demo">Patricia Adams, 58F</div>
+                    <div class="case-time">~25 min</div>
+                </a>
             </div>
         </section>
         
-        <!-- Neuro -->
-        <section class="category-section" data-category="neuro">
+        <!-- Renal -->
+        <section class="category-section" data-category="renal">
             <div class="category-header">
-                <span class="category-icon">🧠</span>
-                <span class="category-title">Neurology</span>
-                <span class="category-count">7 cases</span>
+                <span class="category-icon">🫘</span>
+                <span class="category-title">Renal / Electrolytes</span>
+                <span class="category-count">4 cases</span>
             </div>
             <div class="case-grid">
-                <a href="mentor-chat.html?case=neuro01" class="case-card"><div class="case-title">Headache</div><div class="case-demo">38-year-old woman</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=neuro02" class="case-card"><div class="case-title">Stroke</div><div class="case-demo">72-year-old man</div><div class="case-time">~30 min</div></a>
-                <a href="mentor-chat.html?case=neuro03" class="case-card"><div class="case-title">Seizure</div><div class="case-demo">28-year-old man</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=neuro04" class="case-card"><div class="case-title">Weakness</div><div class="case-demo">55-year-old woman</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=neuro05" class="case-card"><div class="case-title">Dizziness</div><div class="case-demo">65-year-old man</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=neuro06" class="case-card"><div class="case-title">Meningitis</div><div class="case-demo">22-year-old woman</div><div class="case-time">~30 min</div></a>
-                <a href="mentor-chat.html?case=neuro07" class="case-card"><div class="case-title">Back Pain</div><div class="case-demo">58-year-old man</div><div class="case-time">~25 min</div></a>
+                <a href="mentor-chat.html?case=aki-prerenal" class="case-card">
+                    <div class="case-title">AKI - Pre-Renal</div>
+                    <div class="case-demo">Harold Mitchell, 72M</div>
+                    <div class="case-time">~25 min</div>
+                </a>
+                <a href="mentor-chat.html?case=aki-intrinsic" class="case-card">
+                    <div class="case-title">AKI - Intrinsic (ATN) <span class="case-badge parallel">Parallel</span></div>
+                    <div class="case-demo">Patricia Gomez, 58F</div>
+                    <div class="case-time">~25 min</div>
+                </a>
+                <a href="mentor-chat.html?case=hyponatremia-siadh" class="case-card">
+                    <div class="case-title">Hyponatremia - SIADH</div>
+                    <div class="case-demo">Robert Kim, 68M</div>
+                    <div class="case-time">~25 min</div>
+                </a>
+                <a href="mentor-chat.html?case=hyponatremia-hypovolemic" class="case-card">
+                    <div class="case-title">Hyponatremia - Hypovolemic <span class="case-badge parallel">Parallel</span></div>
+                    <div class="case-demo">Maria Santos, 78F</div>
+                    <div class="case-time">~25 min</div>
+                </a>
             </div>
         </section>
         
@@ -236,14 +279,50 @@
             <div class="category-header">
                 <span class="category-icon">⚡</span>
                 <span class="category-title">Endocrine</span>
-                <span class="category-count">5 cases</span>
+                <span class="category-count">2 cases</span>
             </div>
             <div class="case-grid">
-                <a href="mentor-chat.html?case=endo01" class="case-card"><div class="case-title">Hyperglycemia</div><div class="case-demo">52-year-old man</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=endo02" class="case-card"><div class="case-title">Hypoglycemia</div><div class="case-demo">68-year-old woman</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=endo03" class="case-card"><div class="case-title">Thyrotoxicosis</div><div class="case-demo">35-year-old woman</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=endo04" class="case-card"><div class="case-title">Hypothyroidism</div><div class="case-demo">62-year-old woman</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=endo05" class="case-card"><div class="case-title">Adrenal Insufficiency</div><div class="case-demo">45-year-old man</div><div class="case-time">~25 min</div></a>
+                <a href="mentor-chat.html?case=dka" class="case-card">
+                    <div class="case-title">DKA - Diabetic Ketoacidosis</div>
+                    <div class="case-demo">Marcus Thompson, 22M</div>
+                    <div class="case-time">~30 min</div>
+                </a>
+                <a href="mentor-chat.html?case=hhs" class="case-card">
+                    <div class="case-title">HHS - Hyperosmolar State <span class="case-badge parallel">Parallel</span></div>
+                    <div class="case-demo">Dorothy Williams, 72F</div>
+                    <div class="case-time">~30 min</div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Neurology -->
+        <section class="category-section" data-category="neuro">
+            <div class="category-header">
+                <span class="category-icon">🧠</span>
+                <span class="category-title">Neurology</span>
+                <span class="category-count">4 cases</span>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=altered-mental-status" class="case-card">
+                    <div class="case-title">Altered Mental Status</div>
+                    <div class="case-demo">Dorothy Williams, 74F</div>
+                    <div class="case-time">~25 min</div>
+                </a>
+                <a href="mentor-chat.html?case=headache-migraine" class="case-card">
+                    <div class="case-title">Headache - Migraine</div>
+                    <div class="case-demo">Amy Rodriguez, 32F</div>
+                    <div class="case-time">~20 min</div>
+                </a>
+                <a href="mentor-chat.html?case=headache-sah" class="case-card">
+                    <div class="case-title">Headache - SAH <span class="case-badge parallel">Parallel</span></div>
+                    <div class="case-demo">David Kim, 48M</div>
+                    <div class="case-time">~30 min</div>
+                </a>
+                <a href="mentor-chat.html?case=seizure-firsttime" class="case-card">
+                    <div class="case-title">First-Time Seizure</div>
+                    <div class="case-demo">Patient info varies</div>
+                    <div class="case-time">~25 min</div>
+                </a>
             </div>
         </section>
         
@@ -252,15 +331,24 @@
             <div class="category-header">
                 <span class="category-icon">🦠</span>
                 <span class="category-title">Infectious Disease</span>
-                <span class="category-count">6 cases</span>
+                <span class="category-count">3 cases</span>
             </div>
             <div class="case-grid">
-                <a href="mentor-chat.html?case=id01" class="case-card"><div class="case-title">Fever of Unknown Origin</div><div class="case-demo">55-year-old man</div><div class="case-time">~30 min</div></a>
-                <a href="mentor-chat.html?case=id02" class="case-card"><div class="case-title">Pneumonia</div><div class="case-demo">68-year-old woman</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=id03" class="case-card"><div class="case-title">UTI / Pyelonephritis</div><div class="case-demo">32-year-old woman</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=id04" class="case-card"><div class="case-title">Cellulitis</div><div class="case-demo">58-year-old man</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=id05" class="case-card"><div class="case-title">HIV Presentation</div><div class="case-demo">38-year-old man</div><div class="case-time">~30 min</div></a>
-                <a href="mentor-chat.html?case=id06" class="case-card"><div class="case-title">Osteomyelitis</div><div class="case-demo">62-year-old man</div><div class="case-time">~25 min</div></a>
+                <a href="mentor-chat.html?case=sepsis-uti" class="case-card">
+                    <div class="case-title">Sepsis - Urosepsis</div>
+                    <div class="case-demo">Helen Morrison, 78F</div>
+                    <div class="case-time">~30 min</div>
+                </a>
+                <a href="mentor-chat.html?case=sepsis-pneumonia" class="case-card">
+                    <div class="case-title">Sepsis - Pneumonia <span class="case-badge parallel">Parallel</span></div>
+                    <div class="case-demo">Robert Chen, 65M</div>
+                    <div class="case-time">~30 min</div>
+                </a>
+                <a href="mentor-chat.html?case=anaphylaxis" class="case-card">
+                    <div class="case-title">Anaphylaxis</div>
+                    <div class="case-demo">Marcus Johnson, 35M</div>
+                    <div class="case-time">~25 min</div>
+                </a>
             </div>
         </section>
         
@@ -269,29 +357,24 @@
             <div class="category-header">
                 <span class="category-icon">🩸</span>
                 <span class="category-title">Hematology</span>
-                <span class="category-count">5 cases</span>
+                <span class="category-count">3 cases</span>
             </div>
             <div class="case-grid">
-                <a href="mentor-chat.html?case=heme01" class="case-card"><div class="case-title">Anemia</div><div class="case-demo">45-year-old woman</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=heme02" class="case-card"><div class="case-title">Thrombocytopenia</div><div class="case-demo">35-year-old man</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=heme03" class="case-card"><div class="case-title">DVT</div><div class="case-demo">48-year-old woman</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=heme04" class="case-card"><div class="case-title">Bleeding Disorder</div><div class="case-demo">28-year-old man</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=heme05" class="case-card"><div class="case-title">Lymphadenopathy</div><div class="case-demo">55-year-old man</div><div class="case-time">~25 min</div></a>
-            </div>
-        </section>
-        
-        <!-- Rheumatology -->
-        <section class="category-section" data-category="rheum">
-            <div class="category-header">
-                <span class="category-icon">🦴</span>
-                <span class="category-title">Rheumatology</span>
-                <span class="category-count">4 cases</span>
-            </div>
-            <div class="case-grid">
-                <a href="mentor-chat.html?case=rheum01" class="case-card"><div class="case-title">Joint Pain</div><div class="case-demo">52-year-old woman</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=rheum02" class="case-card"><div class="case-title">Gout</div><div class="case-demo">58-year-old man</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=rheum03" class="case-card"><div class="case-title">Lupus Flare</div><div class="case-demo">32-year-old woman</div><div class="case-time">~25 min</div></a>
-                <a href="mentor-chat.html?case=rheum04" class="case-card"><div class="case-title">Vasculitis</div><div class="case-demo">65-year-old man</div><div class="case-time">~30 min</div></a>
+                <a href="mentor-chat.html?case=dvt" class="case-card">
+                    <div class="case-title">DVT</div>
+                    <div class="case-demo">Patient info varies</div>
+                    <div class="case-time">~25 min</div>
+                </a>
+                <a href="mentor-chat.html?case=svt" class="case-card">
+                    <div class="case-title">SVT</div>
+                    <div class="case-demo">Patient info varies</div>
+                    <div class="case-time">~25 min</div>
+                </a>
+                <a href="mentor-chat.html?case=anemia-workup" class="case-card">
+                    <div class="case-title">Anemia Workup</div>
+                    <div class="case-demo">Patient info varies</div>
+                    <div class="case-time">~25 min</div>
+                </a>
             </div>
         </section>
     </main>
@@ -324,6 +407,12 @@
             const text = card.textContent.toLowerCase();
             card.style.display = text.includes(query) ? 'block' : 'none';
         });
+        // Show all sections when searching
+        if (query) {
+            document.querySelectorAll('.category-section').forEach(section => {
+                section.style.display = 'block';
+            });
+        }
     });
     </script>
 </body>
