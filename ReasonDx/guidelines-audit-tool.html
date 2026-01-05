@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guidelines Audit Tool | ReasonDx Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.6; }
+        .header { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 16px 24px; }
+        .header-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 20px; font-weight: 700; color: #1e293b; }
+        .logo span { color: #3b82f6; }
+        .badge { background: #fef3c7; color: #92400e; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 500; margin-left: 12px; }
+        .main { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+        .page-title { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+        .page-desc { color: #64748b; margin-bottom: 24px; }
+        
+        .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+        .stat-card { background: #fff; border-radius: 12px; padding: 20px; border: 1px solid #e2e8f0; }
+        .stat-label { font-size: 13px; color: #64748b; margin-bottom: 6px; }
+        .stat-value { font-size: 28px; font-weight: 700; }
+        .stat-value.good { color: #22c55e; }
+        .stat-value.warning { color: #f59e0b; }
+        .stat-value.danger { color: #ef4444; }
+        
+        .section { background: #fff; border-radius: 12px; padding: 24px; border: 1px solid #e2e8f0; margin-bottom: 24px; }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .section-title { font-size: 16px; font-weight: 600; }
+        
+        .filters { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+        .filter-btn { padding: 8px 16px; border-radius: 8px; border: 1px solid #e2e8f0; background: #fff; font-size: 13px; cursor: pointer; color: #475569; }
+        .filter-btn:hover { background: #f8fafc; }
+        .filter-btn.active { background: #dbeafe; border-color: #3b82f6; color: #1d4ed8; }
+        
+        .case-table { width: 100%; border-collapse: collapse; }
+        .case-table th { text-align: left; padding: 12px 16px; background: #f8fafc; font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid #e2e8f0; }
+        .case-table td { padding: 14px 16px; border-bottom: 1px solid #e2e8f0; font-size: 14px; }
+        .case-table tr:hover { background: #f8fafc; }
+        
+        .status-badge { padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 500; }
+        .status-badge.complete { background: #d1fae5; color: #047857; }
+        .status-badge.missing { background: #fee2e2; color: #b91c1c; }
+        .status-badge.partial { background: #fef3c7; color: #92400e; }
+        
+        .category-tag { padding: 3px 8px; background: #f1f5f9; border-radius: 4px; font-size: 11px; color: #64748b; margin-right: 4px; }
+        
+        .btn { padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; font-size: 14px; }
+        .btn-primary { background: #3b82f6; color: #fff; }
+        .btn-secondary { background: #fff; color: #475569; border: 1px solid #e2e8f0; }
+        .btn-sm { padding: 6px 12px; font-size: 12px; }
+        
+        .guideline-input { display: flex; gap: 8px; margin-top: 8px; }
+        .guideline-input input { flex: 1; padding: 8px 12px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 13px; }
+        .guideline-input input:focus { outline: none; border-color: #3b82f6; }
+        
+        .action-link { color: #3b82f6; text-decoration: none; font-size: 13px; cursor: pointer; }
+        .action-link:hover { text-decoration: underline; }
+        
+        .progress-bar { height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; margin-top: 8px; }
+        .progress-fill { height: 100%; background: #22c55e; transition: width 0.3s; }
+        
+        .expand-row { display: none; background: #f8fafc; }
+        .expand-row.show { display: table-row; }
+        .expand-content { padding: 16px 16px 16px 48px; }
+        
+        .guideline-list { list-style: none; padding: 0; }
+        .guideline-list li { padding: 8px 0; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
+        .guideline-list li:last-child { border-bottom: none; }
+        
+        .bulk-actions { display: flex; gap: 12px; align-items: center; padding: 16px; background: #f8fafc; border-radius: 8px; margin-bottom: 20px; }
+        .bulk-actions select { padding: 8px 12px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 13px; }
+        
+        .search-box { display: flex; gap: 8px; }
+        .search-box input { padding: 10px 16px; border: 1px solid #e2e8f0; border-radius: 8px; width: 300px; font-size: 14px; }
+        .search-box input:focus { outline: none; border-color: #3b82f6; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <div style="display: flex; align-items: center;">
+                <div class="logo">Reason<span>Dx</span></div>
+                <span class="badge">Admin Tool</span>
+            </div>
+            <div class="search-box">
+                <input type="text" placeholder="Search cases..." id="searchInput" onkeyup="filterCases()">
+            </div>
+        </div>
+    </header>
+    
+    <main class="main">
+        <h1 class="page-title">Guidelines Audit Tool</h1>
+        <p class="page-desc">Review and update clinical guideline references across all ReasonDx cases. Ensures evidence-based recommendations align with current standards.</p>
+        
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-label">Total Cases</div>
+                <div class="stat-value" id="totalCases">156</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">With Guidelines</div>
+                <div class="stat-value good" id="withGuidelines">89</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Missing Guidelines</div>
+                <div class="stat-value danger" id="missingGuidelines">67</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Completion Rate</div>
+                <div class="stat-value warning" id="completionRate">57%</div>
+                <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 57%"></div></div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-header">
+                <div class="section-title">Cases Audit</div>
+                <div style="display: flex; gap: 12px;">
+                    <button class="btn btn-secondary" onclick="exportAudit()">Export Report</button>
+                    <button class="btn btn-primary" onclick="runAudit()">Re-run Audit</button>
+                </div>
+            </div>
+            
+            <div class="filters">
+                <button class="filter-btn active" onclick="setFilter('all', this)">All Cases (156)</button>
+                <button class="filter-btn" onclick="setFilter('missing', this)">Missing Guidelines (67)</button>
+                <button class="filter-btn" onclick="setFilter('partial', this)">Partial (23)</button>
+                <button class="filter-btn" onclick="setFilter('complete', this)">Complete (66)</button>
+            </div>
+            
+            <div class="bulk-actions">
+                <input type="checkbox" id="selectAll" onchange="toggleSelectAll()">
+                <label for="selectAll" style="font-size: 13px; color: #64748b;">Select All</label>
+                <select id="bulkAction">
+                    <option value="">Bulk Actions...</option>
+                    <option value="addGuideline">Add Standard Guideline</option>
+                    <option value="markReviewed">Mark as Reviewed</option>
+                    <option value="flagForReview">Flag for Expert Review</option>
+                </select>
+                <button class="btn btn-sm btn-secondary" onclick="applyBulkAction()">Apply</button>
+            </div>
+            
+            <table class="case-table" id="casesTable">
+                <thead>
+                    <tr>
+                        <th style="width: 40px;"></th>
+                        <th>Case</th>
+                        <th>Category</th>
+                        <th>Guidelines Status</th>
+                        <th>Last Updated</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="casesBody">
+                    <!-- Populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="section">
+            <div class="section-header">
+                <div class="section-title">Recommended Guidelines by Category</div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+                <div style="background: #f8fafc; padding: 16px; border-radius: 8px;">
+                    <h4 style="font-size: 14px; margin-bottom: 12px; color: #1e293b;">Cardiology</h4>
+                    <ul style="font-size: 13px; color: #64748b; padding-left: 16px;">
+                        <li>AHA/ACC Heart Failure Guidelines 2022</li>
+                        <li>AHA/ACC Chest Pain Guidelines 2021</li>
+                        <li>ESC Arrhythmia Guidelines 2020</li>
+                        <li>ACLS/BLS Protocols</li>
+                    </ul>
+                </div>
+                <div style="background: #f8fafc; padding: 16px; border-radius: 8px;">
+                    <h4 style="font-size: 14px; margin-bottom: 12px; color: #1e293b;">Pulmonary</h4>
+                    <ul style="font-size: 13px; color: #64748b; padding-left: 16px;">
+                        <li>GOLD COPD Guidelines 2023</li>
+                        <li>GINA Asthma Guidelines 2023</li>
+                        <li>ACCP PE Guidelines</li>
+                        <li>ATS ARDS Criteria</li>
+                    </ul>
+                </div>
+                <div style="background: #f8fafc; padding: 16px; border-radius: 8px;">
+                    <h4 style="font-size: 14px; margin-bottom: 12px; color: #1e293b;">Infectious Disease</h4>
+                    <ul style="font-size: 13px; color: #64748b; padding-left: 16px;">
+                        <li>Surviving Sepsis Campaign 2021</li>
+                        <li>IDSA Pneumonia Guidelines</li>
+                        <li>IDSA UTI Guidelines</li>
+                        <li>CDC STI Treatment Guidelines</li>
+                    </ul>
+                </div>
+                <div style="background: #f8fafc; padding: 16px; border-radius: 8px;">
+                    <h4 style="font-size: 14px; margin-bottom: 12px; color: #1e293b;">Neurology</h4>
+                    <ul style="font-size: 13px; color: #64748b; padding-left: 16px;">
+                        <li>AHA/ASA Stroke Guidelines 2019</li>
+                        <li>AAN Epilepsy Guidelines</li>
+                        <li>AAN Headache Guidelines</li>
+                        <li>NINDS tPA Criteria</li>
+                    </ul>
+                </div>
+                <div style="background: #f8fafc; padding: 16px; border-radius: 8px;">
+                    <h4 style="font-size: 14px; margin-bottom: 12px; color: #1e293b;">Endocrine</h4>
+                    <ul style="font-size: 13px; color: #64748b; padding-left: 16px;">
+                        <li>ADA Diabetes Standards 2024</li>
+                        <li>ATA Thyroid Guidelines</li>
+                        <li>Endocrine Society Adrenal Guidelines</li>
+                    </ul>
+                </div>
+                <div style="background: #f8fafc; padding: 16px; border-radius: 8px;">
+                    <h4 style="font-size: 14px; margin-bottom: 12px; color: #1e293b;">GI/Hepatology</h4>
+                    <ul style="font-size: 13px; color: #64748b; padding-left: 16px;">
+                        <li>ACG GI Bleeding Guidelines</li>
+                        <li>AASLD Cirrhosis Guidelines</li>
+                        <li>ACG Pancreatitis Guidelines</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+    // Sample case data - in production would come from ReasonDx database
+    const cases = [
+        { id: 'CP-001', name: 'Chest Pain - STEMI', category: 'Cardiology', status: 'complete', guidelines: ['AHA/ACC STEMI 2021', 'ACLS Protocol'], updated: '2024-01-15' },
+        { id: 'CP-002', name: 'Chest Pain - Unstable Angina', category: 'Cardiology', status: 'complete', guidelines: ['AHA/ACC NSTEMI/UA 2021'], updated: '2024-01-15' },
+        { id: 'CP-003', name: 'Chest Pain - PE', category: 'Pulmonary', status: 'partial', guidelines: ['ACCP PE Guidelines'], updated: '2024-01-10' },
+        { id: 'CP-004', name: 'Chest Pain - Aortic Dissection', category: 'Cardiology', status: 'missing', guidelines: [], updated: '2023-12-01' },
+        { id: 'SOB-001', name: 'Dyspnea - CHF Exacerbation', category: 'Cardiology', status: 'complete', guidelines: ['AHA/ACC HF 2022'], updated: '2024-01-12' },
+        { id: 'SOB-002', name: 'Dyspnea - COPD Exacerbation', category: 'Pulmonary', status: 'complete', guidelines: ['GOLD 2023'], updated: '2024-01-14' },
+        { id: 'SOB-003', name: 'Dyspnea - Asthma', category: 'Pulmonary', status: 'partial', guidelines: ['GINA 2023'], updated: '2024-01-08' },
+        { id: 'SOB-004', name: 'Dyspnea - Pneumonia', category: 'Infectious Disease', status: 'missing', guidelines: [], updated: '2023-11-20' },
+        { id: 'AMS-001', name: 'Altered Mental Status - Stroke', category: 'Neurology', status: 'complete', guidelines: ['AHA/ASA Stroke 2019', 'NINDS tPA'], updated: '2024-01-16' },
+        { id: 'AMS-002', name: 'Altered Mental Status - Sepsis', category: 'Infectious Disease', status: 'missing', guidelines: [], updated: '2023-10-15' },
+        { id: 'AMS-003', name: 'Altered Mental Status - DKA', category: 'Endocrine', status: 'complete', guidelines: ['ADA DKA Protocol 2024'], updated: '2024-01-18' },
+        { id: 'AMS-004', name: 'Altered Mental Status - Meningitis', category: 'Infectious Disease', status: 'missing', guidelines: [], updated: '2023-09-01' },
+        { id: 'ABD-001', name: 'Abdominal Pain - Appendicitis', category: 'GI', status: 'missing', guidelines: [], updated: '2023-08-15' },
+        { id: 'ABD-002', name: 'Abdominal Pain - Pancreatitis', category: 'GI', status: 'partial', guidelines: ['ACG Pancreatitis'], updated: '2024-01-05' },
+        { id: 'ABD-003', name: 'Abdominal Pain - GI Bleed', category: 'GI', status: 'complete', guidelines: ['ACG GI Bleed 2021'], updated: '2024-01-11' },
+        { id: 'FEV-001', name: 'Fever - UTI', category: 'Infectious Disease', status: 'missing', guidelines: [], updated: '2023-07-20' },
+        { id: 'FEV-002', name: 'Fever - Pneumonia', category: 'Infectious Disease', status: 'missing', guidelines: [], updated: '2023-06-10' },
+        { id: 'SYN-001', name: 'Syncope - Cardiac', category: 'Cardiology', status: 'partial', guidelines: ['ESC Syncope'], updated: '2024-01-02' },
+        { id: 'SYN-002', name: 'Syncope - Vasovagal', category: 'Cardiology', status: 'missing', guidelines: [], updated: '2023-05-15' },
+        { id: 'HA-001', name: 'Headache - Migraine', category: 'Neurology', status: 'complete', guidelines: ['AAN Migraine 2021'], updated: '2024-01-17' },
+    ];
+    
+    let currentFilter = 'all';
+    
+    function renderCases() {
+        const tbody = document.getElementById('casesBody');
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        
+        const filtered = cases.filter(c => {
+            const matchesFilter = currentFilter === 'all' || c.status === currentFilter;
+            const matchesSearch = c.name.toLowerCase().includes(searchTerm) || 
+                                  c.category.toLowerCase().includes(searchTerm) ||
+                                  c.id.toLowerCase().includes(searchTerm);
+            return matchesFilter && matchesSearch;
+        });
+        
+        tbody.innerHTML = filtered.map(c => `
+            <tr>
+                <td><input type="checkbox" class="case-checkbox" data-id="${c.id}"></td>
+                <td>
+                    <div style="font-weight: 500;">${c.name}</div>
+                    <div style="font-size: 12px; color: #64748b;">${c.id}</div>
+                </td>
+                <td><span class="category-tag">${c.category}</span></td>
+                <td>
+                    <span class="status-badge ${c.status}">${c.status === 'complete' ? 'Complete' : c.status === 'partial' ? 'Partial' : 'Missing'}</span>
+                    ${c.guidelines.length > 0 ? `<div style="font-size: 11px; color: #64748b; margin-top: 4px;">${c.guidelines.length} guideline(s)</div>` : ''}
+                </td>
+                <td style="font-size: 13px; color: #64748b;">${c.updated}</td>
+                <td>
+                    <span class="action-link" onclick="toggleExpand('${c.id}')">Edit</span>
+                </td>
+            </tr>
+            <tr class="expand-row" id="expand-${c.id}">
+                <td colspan="6">
+                    <div class="expand-content">
+                        <h4 style="font-size: 14px; margin-bottom: 12px;">Current Guidelines</h4>
+                        ${c.guidelines.length > 0 ? `
+                            <ul class="guideline-list">
+                                ${c.guidelines.map(g => `<li>${g} <span class="action-link" style="color: #ef4444;">Remove</span></li>`).join('')}
+                            </ul>
+                        ` : '<p style="color: #64748b; font-size: 13px;">No guidelines assigned</p>'}
+                        <div class="guideline-input" style="margin-top: 16px;">
+                            <input type="text" placeholder="Add guideline reference (e.g., AHA/ACC HF 2022)">
+                            <button class="btn btn-sm btn-primary">Add</button>
+                        </div>
+                        <div style="margin-top: 16px;">
+                            <h4 style="font-size: 14px; margin-bottom: 8px;">Suggested Guidelines for ${c.category}</h4>
+                            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                ${getSuggestedGuidelines(c.category).map(g => `<button class="btn btn-sm btn-secondary" onclick="addGuideline('${c.id}', '${g}')">${g}</button>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        `).join('');
+        
+        updateStats();
+    }
+    
+    function getSuggestedGuidelines(category) {
+        const suggestions = {
+            'Cardiology': ['AHA/ACC HF 2022', 'AHA/ACC Chest Pain 2021', 'ACLS Protocol', 'ESC Arrhythmia 2020'],
+            'Pulmonary': ['GOLD COPD 2023', 'GINA Asthma 2023', 'ACCP PE Guidelines', 'ATS ARDS'],
+            'Infectious Disease': ['Surviving Sepsis 2021', 'IDSA Pneumonia', 'IDSA UTI', 'CDC STI 2021'],
+            'Neurology': ['AHA/ASA Stroke 2019', 'AAN Epilepsy', 'AAN Headache', 'NINDS tPA'],
+            'Endocrine': ['ADA Diabetes 2024', 'ATA Thyroid', 'Endocrine Society Adrenal'],
+            'GI': ['ACG GI Bleed 2021', 'AASLD Cirrhosis', 'ACG Pancreatitis']
+        };
+        return suggestions[category] || [];
+    }
+    
+    function toggleExpand(id) {
+        const row = document.getElementById('expand-' + id);
+        row.classList.toggle('show');
+    }
+    
+    function setFilter(filter, btn) {
+        currentFilter = filter;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderCases();
+    }
+    
+    function filterCases() {
+        renderCases();
+    }
+    
+    function updateStats() {
+        const total = cases.length;
+        const complete = cases.filter(c => c.status === 'complete').length;
+        const missing = cases.filter(c => c.status === 'missing').length;
+        const partial = cases.filter(c => c.status === 'partial').length;
+        const rate = Math.round((complete + partial * 0.5) / total * 100);
+        
+        document.getElementById('totalCases').textContent = total;
+        document.getElementById('withGuidelines').textContent = complete;
+        document.getElementById('missingGuidelines').textContent = missing;
+        document.getElementById('completionRate').textContent = rate + '%';
+        document.getElementById('progressFill').style.width = rate + '%';
+    }
+    
+    function toggleSelectAll() {
+        const checked = document.getElementById('selectAll').checked;
+        document.querySelectorAll('.case-checkbox').forEach(cb => cb.checked = checked);
+    }
+    
+    function applyBulkAction() {
+        const action = document.getElementById('bulkAction').value;
+        const selected = Array.from(document.querySelectorAll('.case-checkbox:checked')).map(cb => cb.dataset.id);
+        if (selected.length === 0) {
+            alert('Please select at least one case');
+            return;
+        }
+        alert(`Would apply "${action}" to ${selected.length} cases: ${selected.join(', ')}`);
+    }
+    
+    function exportAudit() {
+        const missing = cases.filter(c => c.status === 'missing');
+        const report = `Guidelines Audit Report\n${'='.repeat(50)}\n\nTotal Cases: ${cases.length}\nMissing Guidelines: ${missing.length}\n\nCases Needing Guidelines:\n${missing.map(c => `- ${c.id}: ${c.name} (${c.category})`).join('\n')}`;
+        
+        const blob = new Blob([report], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'guidelines-audit-report.txt';
+        a.click();
+    }
+    
+    function runAudit() {
+        alert('Re-running audit against ReasonDx case database...\n\nThis would scan all 156 cases and check for:\n- Missing guideline references\n- Outdated guidelines (>2 years old)\n- Incomplete guideline citations');
+    }
+    
+    function addGuideline(caseId, guideline) {
+        const caseObj = cases.find(c => c.id === caseId);
+        if (caseObj && !caseObj.guidelines.includes(guideline)) {
+            caseObj.guidelines.push(guideline);
+            if (caseObj.guidelines.length > 0) {
+                caseObj.status = caseObj.guidelines.length >= 2 ? 'complete' : 'partial';
+            }
+            renderCases();
+        }
+    }
+    
+    // Initialize
+    renderCases();
+    </script>
+</body>
+</html>

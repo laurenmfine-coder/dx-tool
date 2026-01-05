@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dx Learning Ecosystem - Integration Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #fafafa;
+            --bg-tertiary: #f4f4f5;
+            --bg-elevated: #fff;
+            --text-primary: #18181b;
+            --text-secondary: #52525b;
+            --text-muted: #71717a;
+            --border: #e4e4e7;
+            --border-subtle: #f4f4f5;
+            --accent-reason: #3b82f6;
+            --accent-mechanism: #10b981;
+            --accent-coach: #8b5cf6;
+            --accent-gold: #f59e0b;
+            --accent-rose: #ef4444;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        
+        /* ========================================
+           HEADER
+           ======================================== */
+        .header {
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .logo-mark {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent-reason) 0%, var(--accent-coach) 50%, var(--accent-mechanism) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            color: white;
+        }
+        
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        .logo-text .hub { 
+            color: var(--text-muted); 
+            font-weight: 400;
+        }
+        
+        /* Platform Switcher */
+        .platform-switcher {
+            display: flex;
+            gap: 4px;
+            padding: 4px;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+        }
+        
+        .platform-btn {
+            padding: 8px 14px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.15s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .platform-btn:hover { color: var(--text-primary); background: rgba(255,255,255,0.5); }
+        .platform-btn.active { background: var(--bg-primary); color: var(--text-primary); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+        .platform-btn .dot { width: 8px; height: 8px; border-radius: 50%; }
+        .platform-btn.reason .dot { background: var(--accent-reason); }
+        .platform-btn.mechanism .dot { background: var(--accent-mechanism); }
+        .platform-btn.coach .dot { background: var(--accent-coach); }
+        
+        /* ========================================
+           MAIN LAYOUT
+           ======================================== */
+        .main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+        
+        /* Page Header */
+        .page-header {
+            margin-bottom: 32px;
+        }
+        
+        .page-title {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
+        
+        .page-subtitle {
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+        
+        /* ========================================
+           HERO SECTION
+           ======================================== */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        
+        @media (max-width: 1100px) {
+            .hero { grid-template-columns: 1fr; }
+        }
+        
+        /* Concept Graph */
+        .concept-graph-container {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            min-height: 450px;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .badge {
+            background: var(--accent-mechanism);
+            color: white;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .badge.gold { background: var(--accent-gold); }
+        .badge.purple { background: var(--accent-coach); }
+        
+        .graph-controls {
+            display: flex;
+            gap: 6px;
+        }
+        
+        .graph-control {
+            padding: 6px 12px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        
+        .graph-control:hover { background: var(--bg-secondary); color: var(--text-primary); }
+        .graph-control.active { background: var(--text-primary); color: white; border-color: var(--text-primary); }
+        
+        .concept-graph-canvas {
+            width: 100%;
+            height: 340px;
+        }
+        
+        .concept-graph-canvas svg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .graph-legend {
+            display: flex;
+            gap: 20px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        
+        .legend-dot.mastered { background: var(--accent-mechanism); }
+        .legend-dot.learning { background: var(--accent-gold); }
+        .legend-dot.gap { background: var(--accent-rose); }
+        .legend-dot.unexplored { background: var(--border); }
+        
+        /* Quick Stats */
+        .quick-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .stat-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+        }
+        
+        .stat-card.reason::before { background: var(--accent-reason); }
+        .stat-card.mechanism::before { background: var(--accent-mechanism); }
+        .stat-card.coach::before { background: var(--accent-coach); }
+        
+        .stat-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .stat-card-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+        
+        .stat-card-icon { font-size: 18px; }
+        
+        .stat-card-value {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+        
+        .stat-card.reason .stat-card-value { color: var(--accent-reason); }
+        .stat-card.mechanism .stat-card-value { color: var(--accent-mechanism); }
+        .stat-card.coach .stat-card-value { color: var(--accent-coach); }
+        
+        .stat-card-label {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        
+        .stat-card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 12px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .stat-card-link:hover { color: var(--text-primary); }
+        
+        /* ========================================
+           SECTIONS
+           ======================================== */
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .section-title-large {
+            font-size: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* ========================================
+           LEARNING PATHS
+           ======================================== */
+        .learning-paths-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 20px;
+        }
+        
+        .learning-path-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+        
+        .learning-path-card:hover {
+            border-color: #a1a1aa;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .path-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .path-topic {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+        
+        .path-title {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        
+        .path-description {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        .path-progress {
+            padding: 14px 20px;
+            background: var(--bg-secondary);
+        }
+        
+        .path-progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .path-progress-label {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        
+        .path-progress-value {
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .path-progress-bar {
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .path-progress-fill {
+            height: 100%;
+            border-radius: 3px;
+            background: linear-gradient(90deg, var(--accent-mechanism), var(--accent-reason));
+        }
+        
+        .path-steps {
+            padding: 12px 20px 16px;
+        }
+        
+        .path-step {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        
+        .path-step:last-child { border-bottom: none; }
+        
+        .step-indicator {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        
+        .step-indicator.completed { background: var(--accent-mechanism); color: white; }
+        .step-indicator.current { background: var(--accent-gold); color: var(--text-primary); }
+        .step-indicator.locked { background: var(--bg-tertiary); color: var(--text-muted); border: 1px dashed var(--border); }
+        
+        .step-content { flex: 1; }
+        
+        .step-platform {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1px;
+        }
+        
+        .step-platform.reason { color: var(--accent-reason); }
+        .step-platform.mechanism { color: var(--accent-mechanism); }
+        .step-platform.coach { color: var(--accent-coach); }
+        
+        .step-title {
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        .step-action {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+        
+        /* ========================================
+           RECOMMENDATIONS
+           ======================================== */
+        .recommendations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+        }
+        
+        .recommendation-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px;
+            position: relative;
+            transition: all 0.2s;
+        }
+        
+        .recommendation-card:hover { border-color: #a1a1aa; }
+        
+        .recommendation-card::before {
+            content: '';
+            position: absolute;
+            top: 14px;
+            left: 0;
+            width: 4px;
+            height: 36px;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .recommendation-card.reason::before { background: var(--accent-reason); }
+        .recommendation-card.mechanism::before { background: var(--accent-mechanism); }
+        .recommendation-card.coach::before { background: var(--accent-coach); }
+        
+        .rec-priority {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 8px;
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+        
+        .rec-priority.high { color: var(--accent-rose); }
+        .rec-priority.medium { color: var(--accent-gold); }
+        .rec-priority.low { color: var(--accent-mechanism); }
+        
+        .rec-gap-source {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+        
+        .rec-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        
+        .rec-reason {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 14px;
+            line-height: 1.5;
+        }
+        
+        .rec-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: var(--text-primary);
+            border-radius: 6px;
+            color: white;
+            font-size: 12px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.15s;
+        }
+        
+        .rec-action:hover { background: #27272a; }
+        
+        /* ========================================
+           INNOVATIONS PANEL
+           ======================================== */
+        .innovations-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+        
+        @media (max-width: 1100px) {
+            .innovations-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (max-width: 600px) {
+            .innovations-grid { grid-template-columns: 1fr; }
+        }
+        
+        .innovation-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .innovation-card:hover {
+            border-color: var(--accent-gold);
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.1);
+        }
+        
+        .innovation-card.active {
+            border-color: var(--accent-gold);
+            background: linear-gradient(135deg, #fffbeb 0%, #fff 100%);
+        }
+        
+        .innovation-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+        
+        .innovation-acronym {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--accent-gold);
+            margin-bottom: 2px;
+        }
+        
+        .innovation-name {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        
+        .innovation-status {
+            font-size: 11px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+        
+        .status-dot.active { background: var(--accent-mechanism); }
+        .status-dot.pending { background: var(--accent-gold); }
+        
+        /* Innovation Detail Panel */
+        .innovation-detail {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            margin-top: 16px;
+            overflow: hidden;
+            display: none;
+        }
+        
+        .innovation-detail.show {
+            display: block;
+            animation: slideDown 0.25s ease;
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .detail-header {
+            padding: 18px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .detail-title {
+            font-size: 16px;
+            font-weight: 700;
+        }
+        
+        .detail-close {
+            width: 30px;
+            height: 30px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s;
+        }
+        
+        .detail-close:hover { background: var(--bg-secondary); color: var(--text-primary); }
+        
+        .detail-content {
+            padding: 20px;
+        }
+        
+        .detail-description {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        /* MDCLS Chart */
+        .mdcls-chart {
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            padding: 18px;
+        }
+        
+        .mdcls-dimension {
+            margin-bottom: 14px;
+        }
+        
+        .mdcls-dimension:last-child { margin-bottom: 0; }
+        
+        .mdcls-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+        
+        .mdcls-label span:first-child { color: var(--text-secondary); }
+        .mdcls-label span:last-child { color: var(--text-primary); font-weight: 600; }
+        
+        .mdcls-bar {
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .mdcls-fill {
+            height: 100%;
+            border-radius: 4px;
+        }
+        
+        .mdcls-fill.knowledge { background: var(--accent-reason); }
+        .mdcls-fill.application { background: var(--accent-mechanism); }
+        .mdcls-fill.integration { background: var(--accent-coach); }
+        .mdcls-fill.synthesis { background: var(--accent-gold); }
+        
+        .detail-tip {
+            margin-top: 16px;
+            padding: 12px;
+            background: #fef3c7;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #92400e;
+        }
+        
+        /* MMD Metrics */
+        .mmd-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .mmd-metric {
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+        }
+        
+        .mmd-value {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+        
+        .mmd-metric:nth-child(1) .mmd-value { color: var(--accent-mechanism); }
+        .mmd-metric:nth-child(2) .mmd-value { color: var(--accent-reason); }
+        .mmd-metric:nth-child(3) .mmd-value { color: var(--accent-coach); }
+        .mmd-metric:nth-child(4) .mmd-value { color: var(--accent-gold); }
+        
+        .mmd-label {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+        
+        /* DKFCE Zone */
+        .dkfce-zone {
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .dkfce-indicator {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 16px;
+            position: relative;
+        }
+        
+        .dkfce-ring {
+            fill: none;
+            stroke-width: 8;
+        }
+        
+        .dkfce-ring.bg { stroke: var(--border); }
+        .dkfce-ring.value { 
+            stroke: var(--accent-gold);
+            stroke-linecap: round;
+            transform: rotate(-90deg);
+            transform-origin: center;
+        }
+        
+        .dkfce-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        
+        .dkfce-zone-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent-gold);
+        }
+        
+        .dkfce-zone-desc {
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+        
+        .dkfce-recommendation {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+        
+        /* ========================================
+           FOOTER
+           ======================================== */
+        .footer {
+            text-align: center;
+            padding: 32px 24px;
+            border-top: 1px solid var(--border);
+            margin-top: 24px;
+            background: var(--bg-primary);
+        }
+        
+        .footer-text {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 12px;
+        }
+        
+        .footer-link {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+        
+        .footer-link:hover { color: var(--text-primary); }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">
+                <div class="logo-mark">Dx</div>
+                <span class="logo-text">Integration <span class="hub">Hub</span></span>
+            </a>
+            <nav class="platform-switcher">
+                <a href="index.html" class="platform-btn reason"><span class="dot"></span> ReasonDx</a>
+                <a href="mechanism/" class="platform-btn mechanism"><span class="dot"></span> MechanismDx</a>
+                <a href="CoachDx/" class="platform-btn coach"><span class="dot"></span> CoachDx</a>
+                <a href="fingerprint-dashboard.html" class="platform-btn">🎯 Fingerprint</a>
+                <a href="integration-hub.html" class="platform-btn active">🔗 Hub</a>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">🔗 Cross-Platform Integration Hub</h1>
+            <p class="page-subtitle">Your unified view across ReasonDx, MechanismDx, and CoachDx with intelligent learning recommendations</p>
+        </div>
+        
+        <!-- Hero: Concept Graph + Quick Stats -->
+        <section class="hero">
+            <!-- Shared Concept Graph -->
+            <div class="concept-graph-container">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        📊 Shared Concept Graph
+                        <span class="badge">Live</span>
+                    </h2>
+                    <div class="graph-controls">
+                        <button class="graph-control active" data-view="all">All Concepts</button>
+                        <button class="graph-control" data-view="gaps">Show Gaps</button>
+                        <button class="graph-control" data-view="connections">Connections</button>
+                    </div>
+                </div>
+                <div class="concept-graph-canvas" id="conceptGraphCanvas">
+                    <svg viewBox="0 0 800 340" id="conceptGraphSvg">
+                        <!-- Dynamic graph rendered here -->
+                    </svg>
+                </div>
+                <div class="graph-legend">
+                    <div class="legend-item"><span class="legend-dot mastered"></span> Mastered</div>
+                    <div class="legend-item"><span class="legend-dot learning"></span> Learning</div>
+                    <div class="legend-item"><span class="legend-dot gap"></span> Gap Identified</div>
+                    <div class="legend-item"><span class="legend-dot unexplored"></span> Unexplored</div>
+                </div>
+            </div>
+            
+            <!-- Quick Stats -->
+            <div class="quick-stats">
+                <div class="stat-card reason">
+                    <div class="stat-card-header">
+                        <span class="stat-card-title">ReasonDx</span>
+                        <span class="stat-card-icon">🔬</span>
+                    </div>
+                    <div class="stat-card-value" id="reasonCases">--</div>
+                    <div class="stat-card-label">Cases Completed</div>
+                    <a href="index.html" class="stat-card-link">Practice Cases →</a>
+                </div>
+                <div class="stat-card mechanism">
+                    <div class="stat-card-header">
+                        <span class="stat-card-title">MechanismDx</span>
+                        <span class="stat-card-icon">⚙️</span>
+                    </div>
+                    <div class="stat-card-value" id="mechanismMastery">--%</div>
+                    <div class="stat-card-label">Average Mastery</div>
+                    <a href="mechanism/" class="stat-card-link">Build Pathways →</a>
+                </div>
+                <div class="stat-card coach">
+                    <div class="stat-card-header">
+                        <span class="stat-card-title">CoachDx</span>
+                        <span class="stat-card-icon">🩺</span>
+                    </div>
+                    <div class="stat-card-value" id="coachSessions">--</div>
+                    <div class="stat-card-label">Teaching Sessions</div>
+                    <a href="CoachDx/" class="stat-card-link">Learn with AI →</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Unified Learning Paths -->
+        <section class="section">
+            <div class="section-title-bar">
+                <h2 class="section-title-large">
+                    🛤️ Unified Learning Paths
+                    <span class="badge purple">Cross-Platform</span>
+                </h2>
+            </div>
+            <div class="learning-paths-grid" id="learningPathsGrid">
+                <!-- ACS Path -->
+                <div class="learning-path-card" data-path="acs">
+                    <div class="path-header">
+                        <div class="path-topic">Cardiovascular</div>
+                        <div class="path-title">Master Acute Coronary Syndrome</div>
+                        <div class="path-description">Complete journey from pathophysiology through diagnosis to expert-level reasoning.</div>
+                    </div>
+                    <div class="path-progress">
+                        <div class="path-progress-header">
+                            <span class="path-progress-label">Progress</span>
+                            <span class="path-progress-value" id="acs-progress">0/5 steps</span>
+                        </div>
+                        <div class="path-progress-bar">
+                            <div class="path-progress-fill" id="acs-bar" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    <div class="path-steps">
+                        <div class="path-step">
+                            <div class="step-indicator current">1</div>
+                            <div class="step-content">
+                                <div class="step-platform mechanism">MechanismDx</div>
+                                <div class="step-title">ACS Pathophysiology</div>
+                            </div>
+                            <div class="step-action">Start →</div>
+                        </div>
+                        <div class="path-step">
+                            <div class="step-indicator locked">2</div>
+                            <div class="step-content">
+                                <div class="step-platform reason">ReasonDx</div>
+                                <div class="step-title">Chest Pain Case - Beginner</div>
+                            </div>
+                            <div class="step-action">Locked</div>
+                        </div>
+                        <div class="path-step">
+                            <div class="step-indicator locked">3</div>
+                            <div class="step-content">
+                                <div class="step-platform coach">CoachDx</div>
+                                <div class="step-title">ACS Teaching Session</div>
+                            </div>
+                            <div class="step-action">Locked</div>
+                        </div>
+                        <div class="path-step">
+                            <div class="step-indicator locked">4</div>
+                            <div class="step-content">
+                                <div class="step-platform reason">ReasonDx</div>
+                                <div class="step-title">STEMI vs NSTEMI Advanced</div>
+                            </div>
+                            <div class="step-action">Locked</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Heart Failure Path -->
+                <div class="learning-path-card" data-path="chf">
+                    <div class="path-header">
+                        <div class="path-topic">Cardiovascular</div>
+                        <div class="path-title">Heart Failure Deep Dive</div>
+                        <div class="path-description">From compensatory mechanisms to complex management decisions.</div>
+                    </div>
+                    <div class="path-progress">
+                        <div class="path-progress-header">
+                            <span class="path-progress-label">Progress</span>
+                            <span class="path-progress-value">0/4 steps</span>
+                        </div>
+                        <div class="path-progress-bar">
+                            <div class="path-progress-fill" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    <div class="path-steps">
+                        <div class="path-step">
+                            <div class="step-indicator current">1</div>
+                            <div class="step-content">
+                                <div class="step-platform mechanism">MechanismDx</div>
+                                <div class="step-title">CHF Compensatory Mechanisms</div>
+                            </div>
+                            <div class="step-action">Start →</div>
+                        </div>
+                        <div class="path-step">
+                            <div class="step-indicator locked">2</div>
+                            <div class="step-content">
+                                <div class="step-platform reason">ReasonDx</div>
+                                <div class="step-title">Acute Dyspnea Case</div>
+                            </div>
+                            <div class="step-action">Locked</div>
+                        </div>
+                        <div class="path-step">
+                            <div class="step-indicator locked">3</div>
+                            <div class="step-content">
+                                <div class="step-platform coach">CoachDx</div>
+                                <div class="step-title">CHF Management Session</div>
+                            </div>
+                            <div class="step-action">Locked</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Anaphylaxis Path -->
+                <div class="learning-path-card" data-path="anaphylaxis">
+                    <div class="path-header">
+                        <div class="path-topic">Allergy / Immunology</div>
+                        <div class="path-title">Anaphylaxis Mastery</div>
+                        <div class="path-description">Type I hypersensitivity from molecular mechanisms to emergency management.</div>
+                    </div>
+                    <div class="path-progress">
+                        <div class="path-progress-header">
+                            <span class="path-progress-label">Progress</span>
+                            <span class="path-progress-value">0/4 steps</span>
+                        </div>
+                        <div class="path-progress-bar">
+                            <div class="path-progress-fill" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    <div class="path-steps">
+                        <div class="path-step">
+                            <div class="step-indicator current">1</div>
+                            <div class="step-content">
+                                <div class="step-platform mechanism">MechanismDx</div>
+                                <div class="step-title">Type I Hypersensitivity</div>
+                            </div>
+                            <div class="step-action">Start →</div>
+                        </div>
+                        <div class="path-step">
+                            <div class="step-indicator locked">2</div>
+                            <div class="step-content">
+                                <div class="step-platform mechanism">MechanismDx</div>
+                                <div class="step-title">Mast Cell Mediators</div>
+                            </div>
+                            <div class="step-action">Locked</div>
+                        </div>
+                        <div class="path-step">
+                            <div class="step-indicator locked">3</div>
+                            <div class="step-content">
+                                <div class="step-platform coach">CoachDx</div>
+                                <div class="step-title">Anaphylaxis Teaching Case</div>
+                            </div>
+                            <div class="step-action">Locked</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sepsis Path -->
+                <div class="learning-path-card" data-path="sepsis">
+                    <div class="path-header">
+                        <div class="path-topic">Critical Care</div>
+                        <div class="path-title">Sepsis Recognition & Response</div>
+                        <div class="path-description">From SIRS criteria through septic shock management.</div>
+                    </div>
+                    <div class="path-progress">
+                        <div class="path-progress-header">
+                            <span class="path-progress-label">Progress</span>
+                            <span class="path-progress-value">0/5 steps</span>
+                        </div>
+                        <div class="path-progress-bar">
+                            <div class="path-progress-fill" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    <div class="path-steps">
+                        <div class="path-step">
+                            <div class="step-indicator current">1</div>
+                            <div class="step-content">
+                                <div class="step-platform mechanism">MechanismDx</div>
+                                <div class="step-title">Inflammatory Cascade</div>
+                            </div>
+                            <div class="step-action">Start →</div>
+                        </div>
+                        <div class="path-step">
+                            <div class="step-indicator locked">2</div>
+                            <div class="step-content">
+                                <div class="step-platform mechanism">MechanismDx</div>
+                                <div class="step-title">Distributive Shock</div>
+                            </div>
+                            <div class="step-action">Locked</div>
+                        </div>
+                        <div class="path-step">
+                            <div class="step-indicator locked">3</div>
+                            <div class="step-content">
+                                <div class="step-platform coach">CoachDx</div>
+                                <div class="step-title">Sepsis Workup Session</div>
+                            </div>
+                            <div class="step-action">Locked</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Intelligent Recommendations -->
+        <section class="section">
+            <div class="section-title-bar">
+                <h2 class="section-title-large">
+                    🎯 Intelligent Recommendations
+                    <span class="badge gold">Gap-Based</span>
+                </h2>
+            </div>
+            <div class="recommendations-grid" id="recommendationsGrid">
+                <!-- Populated by JavaScript -->
+            </div>
+        </section>
+        
+        <!-- Patent Innovations -->
+        <section class="section">
+            <div class="section-title-bar">
+                <h2 class="section-title-large">
+                    ⚡ Learning Innovations
+                    <span class="badge">Patent Pending</span>
+                </h2>
+            </div>
+            <div class="innovations-grid" id="innovationsGrid">
+                <div class="innovation-card" data-innovation="mdcls">
+                    <div class="innovation-icon">📊</div>
+                    <div class="innovation-acronym">MDCLS</div>
+                    <div class="innovation-name">Multi-Dimensional Cognitive Load Sequencing</div>
+                    <div class="innovation-status">
+                        <span class="status-dot active"></span>
+                        Active - Calibrating
+                    </div>
+                </div>
+                <div class="innovation-card" data-innovation="mmd">
+                    <div class="innovation-icon">🧠</div>
+                    <div class="innovation-acronym">MMD</div>
+                    <div class="innovation-name">Metacognitive Monitoring Dashboard</div>
+                    <div class="innovation-status">
+                        <span class="status-dot active"></span>
+                        Active - Tracking
+                    </div>
+                </div>
+                <div class="innovation-card" data-innovation="dkfce">
+                    <div class="innovation-icon">🎚️</div>
+                    <div class="innovation-acronym">DKFCE</div>
+                    <div class="innovation-name">Dynamic Knowledge Frontier Calibration</div>
+                    <div class="innovation-status">
+                        <span class="status-dot active"></span>
+                        Active - ZPD Tracking
+                    </div>
+                </div>
+                <div class="innovation-card" data-innovation="epc">
+                    <div class="innovation-icon">👨‍⚕️</div>
+                    <div class="innovation-acronym">EPC</div>
+                    <div class="innovation-name">Expert Pathway Capture</div>
+                    <div class="innovation-status">
+                        <span class="status-dot pending"></span>
+                        Ready - Needs Input
+                    </div>
+                </div>
+            </div>
+            
+            <!-- MDCLS Detail -->
+            <div class="innovation-detail" id="mdclsDetail">
+                <div class="detail-header">
+                    <h3 class="detail-title">📊 MDCLS - Cognitive Load Analysis</h3>
+                    <button class="detail-close" onclick="closeInnovationDetail()">✕</button>
+                </div>
+                <div class="detail-content">
+                    <p class="detail-description">Cases are sequenced across four cognitive dimensions to optimize learning without overwhelming. Your current profile:</p>
+                    <div class="mdcls-chart">
+                        <div class="mdcls-dimension">
+                            <div class="mdcls-label"><span>Knowledge Retrieval</span><span id="mdcls-knowledge">72%</span></div>
+                            <div class="mdcls-bar"><div class="mdcls-fill knowledge" id="mdcls-knowledge-bar" style="width: 72%"></div></div>
+                        </div>
+                        <div class="mdcls-dimension">
+                            <div class="mdcls-label"><span>Clinical Application</span><span id="mdcls-application">65%</span></div>
+                            <div class="mdcls-bar"><div class="mdcls-fill application" id="mdcls-application-bar" style="width: 65%"></div></div>
+                        </div>
+                        <div class="mdcls-dimension">
+                            <div class="mdcls-label"><span>Data Integration</span><span id="mdcls-integration">58%</span></div>
+                            <div class="mdcls-bar"><div class="mdcls-fill integration" id="mdcls-integration-bar" style="width: 58%"></div></div>
+                        </div>
+                        <div class="mdcls-dimension">
+                            <div class="mdcls-label"><span>Diagnostic Synthesis</span><span id="mdcls-synthesis">45%</span></div>
+                            <div class="mdcls-bar"><div class="mdcls-fill synthesis" id="mdcls-synthesis-bar" style="width: 45%"></div></div>
+                        </div>
+                    </div>
+                    <div class="detail-tip">📌 <strong>Recommendation:</strong> Focus on integration tasks. Next case will emphasize combining multiple data sources.</div>
+                </div>
+            </div>
+            
+            <!-- MMD Detail -->
+            <div class="innovation-detail" id="mmdDetail">
+                <div class="detail-header">
+                    <h3 class="detail-title">🧠 MMD - Metacognitive Monitoring</h3>
+                    <button class="detail-close" onclick="closeInnovationDetail()">✕</button>
+                </div>
+                <div class="detail-content">
+                    <p class="detail-description">Real-time tracking of your confidence calibration and reasoning awareness:</p>
+                    <div class="mmd-metrics">
+                        <div class="mmd-metric"><div class="mmd-value" id="mmd-calibration">0.78</div><div class="mmd-label">Calibration Index</div></div>
+                        <div class="mmd-metric"><div class="mmd-value" id="mmd-accuracy">82%</div><div class="mmd-label">Confidence Accuracy</div></div>
+                        <div class="mmd-metric"><div class="mmd-value" id="mmd-corrections">3.2</div><div class="mmd-label">Avg Self-Corrections</div></div>
+                        <div class="mmd-metric"><div class="mmd-value" id="mmd-trend">↑12%</div><div class="mmd-label">Weekly Trend</div></div>
+                    </div>
+                    <div class="detail-tip">📌 <strong>Insight:</strong> You tend to be overconfident in cardiology but well-calibrated in pulmonology.</div>
+                </div>
+            </div>
+            
+            <!-- DKFCE Detail -->
+            <div class="innovation-detail" id="dkfceDetail">
+                <div class="detail-header">
+                    <h3 class="detail-title">🎚️ DKFCE - Adaptive Difficulty</h3>
+                    <button class="detail-close" onclick="closeInnovationDetail()">✕</button>
+                </div>
+                <div class="detail-content">
+                    <p class="detail-description">Keeping you in the optimal learning zone - challenging but not overwhelming:</p>
+                    <div class="dkfce-zone">
+                        <div class="dkfce-indicator">
+                            <svg viewBox="0 0 120 120" width="120" height="120">
+                                <circle class="dkfce-ring bg" cx="60" cy="60" r="52"/>
+                                <circle class="dkfce-ring value" cx="60" cy="60" r="52" stroke-dasharray="327" stroke-dashoffset="98"/>
+                            </svg>
+                            <div class="dkfce-label">
+                                <div class="dkfce-zone-name">ZPD</div>
+                                <div class="dkfce-zone-desc">Optimal Zone</div>
+                            </div>
+                        </div>
+                        <div class="dkfce-recommendation">You're at <strong>70% success rate</strong> - right in the zone of proximal development. Next difficulty: <strong>Intermediate+</strong></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- EPC Detail -->
+            <div class="innovation-detail" id="epcDetail">
+                <div class="detail-header">
+                    <h3 class="detail-title">👨‍⚕️ EPC - Expert Pathway Comparison</h3>
+                    <button class="detail-close" onclick="closeInnovationDetail()">✕</button>
+                </div>
+                <div class="detail-content">
+                    <p class="detail-description">Compare your diagnostic approach to captured expert pathways. Complete more cases to see your comparison.</p>
+                    <div class="mmd-metrics" style="grid-template-columns: 1fr;">
+                        <div class="mmd-metric">
+                            <div class="mmd-value">--</div>
+                            <div class="mmd-label">Expert Pathway Match</div>
+                        </div>
+                    </div>
+                    <div class="detail-tip">📌 <strong>Note:</strong> Expert pathways are being captured. More data coming soon!</div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-text">Dx Learning Ecosystem • Cross-Platform Integration Hub</p>
+        <div class="footer-links">
+            <a href="index.html" class="footer-link">ReasonDx</a>
+            <a href="mechanism/" class="footer-link">MechanismDx</a>
+            <a href="CoachDx/" class="footer-link">CoachDx</a>
+            <a href="fingerprint-dashboard.html" class="footer-link">Fingerprint</a>
+        </div>
+        <p class="footer-text" style="margin-top: 16px;">© 2026 Lauren Fine, MD. Clinical reasoning education reimagined.</p>
+    </footer>
+    
+    <script src="dx-integration-module.js"></script>
+    <script>
+    // ============================================================
+    // INTEGRATION HUB CONTROLLER
+    // ============================================================
+    
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwBMlYBWeF5QJjOxOH8_c-M47seJxojWlrekyTk2XGAKRTp99ghl0F3kW9y1kfVIAhG/exec';
+    
+    // Concept Graph Data
+    const CONCEPT_GRAPH = {
+        nodes: [
+            { id: 'acs', label: 'ACS', domain: 'cv', x: 120, y: 80, mastery: 0.85 },
+            { id: 'chf', label: 'CHF', domain: 'cv', x: 200, y: 60, mastery: 0.72 },
+            { id: 'arrhythmia', label: 'Arrhythmia', domain: 'cv', x: 160, y: 140, mastery: 0.45 },
+            { id: 'shock', label: 'Shock', domain: 'cv', x: 280, y: 110, mastery: 0.38 },
+            { id: 'pneumonia', label: 'PNA', domain: 'pulm', x: 400, y: 70, mastery: 0.68 },
+            { id: 'copd', label: 'COPD', domain: 'pulm', x: 460, y: 130, mastery: 0.55 },
+            { id: 'pe', label: 'PE', domain: 'pulm', x: 350, y: 150, mastery: 0.62 },
+            { id: 'aki', label: 'AKI', domain: 'renal', x: 560, y: 180, mastery: 0.78 },
+            { id: 'electrolytes', label: 'Lytes', domain: 'renal', x: 620, y: 120, mastery: 0.58 },
+            { id: 'ams', label: 'AMS', domain: 'neuro', x: 140, y: 220, mastery: 0.65 },
+            { id: 'stroke', label: 'Stroke', domain: 'neuro', x: 80, y: 280, mastery: 0.48 },
+            { id: 'headache', label: 'HA', domain: 'neuro', x: 200, y: 290, mastery: 0.72 },
+            { id: 'sepsis', label: 'Sepsis', domain: 'id', x: 360, y: 240, mastery: 0.52 },
+            { id: 'fuo', label: 'FUO', domain: 'id', x: 440, y: 290, mastery: 0.35 },
+            { id: 'anaphylaxis', label: 'Anaphy', domain: 'allergy', x: 540, y: 280, mastery: 0.25 },
+            { id: 'anemia', label: 'Anemia', domain: 'heme', x: 300, y: 300, mastery: 0.88 },
+        ],
+        edges: [
+            { from: 'acs', to: 'chf' }, { from: 'acs', to: 'arrhythmia' },
+            { from: 'chf', to: 'shock' }, { from: 'shock', to: 'sepsis' },
+            { from: 'pneumonia', to: 'sepsis' }, { from: 'copd', to: 'pneumonia' },
+            { from: 'pe', to: 'shock' }, { from: 'aki', to: 'electrolytes' },
+            { from: 'shock', to: 'aki' }, { from: 'ams', to: 'stroke' },
+            { from: 'ams', to: 'sepsis' }, { from: 'sepsis', to: 'fuo' },
+            { from: 'anaphylaxis', to: 'shock' }, { from: 'anemia', to: 'chf' },
+        ]
+    };
+    
+    // Render Concept Graph
+    function renderConceptGraph() {
+        const svg = document.getElementById('conceptGraphSvg');
+        let html = '';
+        
+        // Edges
+        CONCEPT_GRAPH.edges.forEach(edge => {
+            const from = CONCEPT_GRAPH.nodes.find(n => n.id === edge.from);
+            const to = CONCEPT_GRAPH.nodes.find(n => n.id === edge.to);
+            if (from && to) {
+                html += `<line x1="${from.x}" y1="${from.y}" x2="${to.x}" y2="${to.y}" stroke="#e4e4e7" stroke-width="1.5"/>`;
+            }
+        });
+        
+        // Nodes
+        CONCEPT_GRAPH.nodes.forEach(node => {
+            let fill, stroke;
+            if (node.mastery >= 0.8) { fill = '#dcfce7'; stroke = '#10b981'; }
+            else if (node.mastery >= 0.5) { fill = '#fef3c7'; stroke = '#f59e0b'; }
+            else if (node.mastery >= 0.3) { fill = '#fee2e2'; stroke = '#ef4444'; }
+            else { fill = '#f4f4f5'; stroke = '#a1a1aa'; }
+            
+            html += `
+                <g class="concept-node" data-id="${node.id}" style="cursor: pointer;">
+                    <circle cx="${node.x}" cy="${node.y}" r="22" fill="${fill}" stroke="${stroke}" stroke-width="2"/>
+                    <text x="${node.x}" y="${node.y + 4}" text-anchor="middle" fill="#18181b" font-size="10" font-weight="500">${node.label}</text>
+                </g>
+            `;
+        });
+        
+        svg.innerHTML = html;
+    }
+    
+    // Render Recommendations
+    function renderRecommendations() {
+        const grid = document.getElementById('recommendationsGrid');
+        
+        // Get data from DxIntegration module if available
+        let recommendations = [];
+        if (typeof DxIntegration !== 'undefined') {
+            recommendations = DxIntegration.generateRecommendations('hub', {});
+        }
+        
+        // Default recommendations if none generated
+        if (recommendations.length === 0) {
+            recommendations = [
+                { priority: 'high', platform: 'mechanism', title: 'Start with Pathophysiology', reason: 'Building mechanism knowledge first creates a strong foundation for clinical reasoning.', link: 'mechanism/', source: 'Getting Started' },
+                { priority: 'medium', platform: 'coach', title: 'Try a Teaching Session', reason: 'Practice with the AI attending to identify your knowledge gaps through Socratic questioning.', link: 'CoachDx/', source: 'Recommended' },
+                { priority: 'low', platform: 'reason', title: 'Practice Clinical Cases', reason: 'Apply your knowledge to realistic patient scenarios with immediate feedback.', link: 'index.html', source: 'Core Practice' }
+            ];
+        }
+        
+        const priorityIcons = { high: '🔴', medium: '🟡', low: '🟢' };
+        
+        grid.innerHTML = recommendations.map(rec => `
+            <div class="recommendation-card ${rec.platform}">
+                <div class="rec-priority ${rec.priority}">${priorityIcons[rec.priority]} ${rec.priority} priority</div>
+                <div class="rec-gap-source">From: ${rec.source}</div>
+                <div class="rec-title">${rec.title}</div>
+                <div class="rec-reason">${rec.reason}</div>
+                <a href="${rec.link}" class="rec-action">Start →</a>
+            </div>
+        `).join('');
+    }
+    
+    // Update Stats
+    function updateStats() {
+        if (typeof DxIntegration !== 'undefined') {
+            const reasonData = DxIntegration.loadReasonDxData();
+            const mechanismData = DxIntegration.loadMechanismDxData();
+            const coachData = DxIntegration.loadCoachDxData();
+            
+            document.getElementById('reasonCases').textContent = reasonData.casesCompleted || '--';
+            document.getElementById('mechanismMastery').textContent = mechanismData.avgMastery ? mechanismData.avgMastery + '%' : '--%';
+            document.getElementById('coachSessions').textContent = coachData.sessions || '--';
+        }
+    }
+    
+    // Innovation Panels
+    document.querySelectorAll('.innovation-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const innovation = card.dataset.innovation;
+            document.querySelectorAll('.innovation-card').forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+            document.querySelectorAll('.innovation-detail').forEach(d => d.classList.remove('show'));
+            const panel = document.getElementById(innovation + 'Detail');
+            if (panel) panel.classList.add('show');
+        });
+    });
+    
+    function closeInnovationDetail() {
+        document.querySelectorAll('.innovation-detail').forEach(d => d.classList.remove('show'));
+        document.querySelectorAll('.innovation-card').forEach(c => c.classList.remove('active'));
+    }
+    
+    // Graph controls
+    document.querySelectorAll('.graph-control').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.graph-control').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        });
+    });
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+        renderConceptGraph();
+        renderRecommendations();
+        updateStats();
+        
+        // Track view
+        fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                type: 'HUB_VIEW',
+                timestamp: new Date().toISOString(),
+                study_id: localStorage.getItem('reasondx_student_code') || 'UNKNOWN'
+            })
+        }).catch(() => {});
+    });
+    </script>
+</body>
+</html>
