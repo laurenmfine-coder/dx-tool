@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dx Suite | Master Clinical Reasoning Through Integrated Learning</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #fafafa; color: #18181b; line-height: 1.6; }
+        
+        .nav { background: #fff; border-bottom: 1px solid #e4e4e7; padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+        .nav-logo { display: flex; align-items: center; text-decoration: none; }
+        .nav-logo svg { height: 45px; width: auto; }
+        .nav-links { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+        .nav-link { padding: 8px 16px; color: #52525b; text-decoration: none; font-size: 14px; font-weight: 500; border-radius: 8px; transition: all 0.15s; }
+        .nav-link:hover { background: #f4f4f5; color: #18181b; }
+        .nav-link.cta { background: #18181b; color: #fff; }
+        .nav-link.cta:hover { background: #3f3f46; }
+        
+        .hero { background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%); padding: 80px 24px 100px; text-align: center; }
+        .hero-content { max-width: 900px; margin: 0 auto; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: #fff; padding: 8px 16px; border-radius: 50px; font-size: 13px; font-weight: 500; color: #52525b; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+        .hero-badge span { background: linear-gradient(135deg, #10b981, #3b82f6); color: #fff; padding: 2px 8px; border-radius: 12px; font-size: 11px; }
+        .hero h1 { font-size: 48px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 20px; }
+        .hero h1 .gradient { background: linear-gradient(135deg, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero p { font-size: 20px; color: #64748b; max-width: 700px; margin: 0 auto 40px; }
+        .hero-ctas { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        .hero-btn { padding: 16px 32px; border-radius: 12px; font-size: 16px; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+        .hero-btn.primary { background: #18181b; color: #fff; }
+        .hero-btn.primary:hover { background: #3f3f46; transform: translateY(-2px); }
+        .hero-btn.secondary { background: #fff; color: #18181b; border: 1px solid #e4e4e7; }
+        .hero-btn.secondary:hover { border-color: #a1a1aa; transform: translateY(-2px); }
+        
+        .stats-bar { background: #fff; border-bottom: 1px solid #e4e4e7; padding: 24px; }
+        .stats-inner { max-width: 1000px; margin: 0 auto; display: flex; justify-content: center; gap: 64px; flex-wrap: wrap; }
+        .stat { text-align: center; }
+        .stat-value { font-size: 32px; font-weight: 700; color: #18181b; }
+        .stat-label { font-size: 13px; color: #71717a; margin-top: 4px; }
+        
+        .section { padding: 80px 24px; max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 48px; }
+        .section-label { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #8b5cf6; margin-bottom: 12px; }
+        .section-title { font-size: 36px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 16px; }
+        .section-subtitle { font-size: 18px; color: #64748b; max-width: 600px; margin: 0 auto; }
+        
+        .platforms { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+        @media (max-width: 900px) { .platforms { grid-template-columns: 1fr; } }
+        
+        .platform-card { background: #fff; border-radius: 20px; padding: 32px; border: 2px solid #e4e4e7; transition: all 0.3s; }
+        .platform-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+        .platform-card.reason { border-color: #dbeafe; }
+        .platform-card.reason:hover { border-color: #3b82f6; }
+        .platform-card.mechanism { border-color: #d1fae5; }
+        .platform-card.mechanism:hover { border-color: #10b981; }
+        .platform-card.coach { border-color: #ede9fe; }
+        .platform-card.coach:hover { border-color: #8b5cf6; }
+        
+        .platform-logo { height: 55px; margin-bottom: 16px; }
+        .platform-logo svg { height: 100%; width: auto; }
+        
+        .platform-desc { font-size: 15px; color: #52525b; margin-bottom: 20px; line-height: 1.6; }
+        
+        .platform-features { list-style: none; margin-bottom: 24px; }
+        .platform-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: #52525b; padding: 8px 0; }
+        .platform-features li::before { content: '✓'; color: #10b981; font-weight: 700; }
+        
+        .platform-stats { display: flex; gap: 16px; padding-top: 20px; border-top: 1px solid #f4f4f5; margin-bottom: 20px; }
+        .platform-stat { text-align: center; flex: 1; }
+        .platform-stat-value { font-size: 20px; font-weight: 700; color: #18181b; }
+        .platform-stat-label { font-size: 11px; color: #a1a1aa; }
+        
+        .platform-btn { display: block; text-align: center; padding: 14px; border-radius: 10px; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+        .reason .platform-btn { background: #3b82f6; color: #fff; }
+        .reason .platform-btn:hover { background: #2563eb; }
+        .mechanism .platform-btn { background: #10b981; color: #fff; }
+        .mechanism .platform-btn:hover { background: #059669; }
+        .coach .platform-btn { background: #8b5cf6; color: #fff; }
+        .coach .platform-btn:hover { background: #7c3aed; }
+        
+        .how-it-works { background: #18181b; color: #fff; padding: 80px 24px; }
+        .how-it-works .section-label { color: #a78bfa; }
+        .how-it-works .section-title { color: #fff; }
+        .how-it-works .section-subtitle { color: #a1a1aa; }
+        
+        .workflow-steps { display: flex; gap: 40px; max-width: 1000px; margin: 48px auto 0; flex-wrap: wrap; justify-content: center; }
+        .workflow-step { flex: 1; min-width: 200px; max-width: 280px; text-align: center; position: relative; }
+        .workflow-step:not(:last-child)::after { content: '→'; position: absolute; right: -30px; top: 40px; font-size: 24px; color: #52525b; }
+        @media (max-width: 900px) { .workflow-step:not(:last-child)::after { display: none; } }
+        .workflow-icon { width: 80px; height: 80px; background: #27272a; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 32px; margin: 0 auto 16px; }
+        .workflow-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .workflow-desc { font-size: 14px; color: #a1a1aa; }
+        
+        .cta-section { text-align: center; padding: 80px 24px; background: linear-gradient(135deg, #f8fafc, #f1f5f9); }
+        .cta-section h2 { font-size: 36px; font-weight: 700; margin-bottom: 16px; }
+        .cta-section p { font-size: 18px; color: #64748b; margin-bottom: 32px; }
+        
+        .footer { background: #18181b; color: #a1a1aa; padding: 48px 24px; text-align: center; }
+        .footer-links { display: flex; gap: 24px; justify-content: center; margin-bottom: 24px; flex-wrap: wrap; }
+        .footer-link { color: #a1a1aa; text-decoration: none; font-size: 14px; }
+        .footer-link:hover { color: #fff; }
+        .footer-copy { font-size: 13px; }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">
+                <!-- Dx Suite Logo -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 120">
+                    <text x="20" y="70" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="#1a1a1a">D</text>
+                    <line x1="68" y1="42" x2="92" y2="72" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round"/>
+                    <ellipse cx="66" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 66 39)" fill="#1a1a1a"/>
+                    <path d="M 92 42 L 76 58 Q 70 66 70 76 Q 70 86 78 92 Q 86 98 86 108" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+                    <ellipse cx="94" cy="39" rx="2.5" ry="4.5" transform="rotate(28 94 39)" fill="#1a1a1a"/>
+                    <circle cx="86" cy="108" r="10" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
+                    <circle cx="86" cy="108" r="5" fill="#1a1a1a"/>
+                    <text x="115" y="70" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="#1a1a1a" letter-spacing="-1">Suite</text>
+                </svg>
+            </a>
+            <div class="nav-links">
+                <a href="ReasonDx/index.html" class="nav-link">ReasonDx</a>
+                <a href="mechanism/index.html" class="nav-link">MechanismDx</a>
+                <a href="CoachDx/index.html" class="nav-link">CoachDx</a>
+                <a href="feature-guide.html" class="nav-link">📚 Guide</a>
+                <a href="fingerprint-dashboard.html" class="nav-link cta">My Progress</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span>NEW</span> Multi-persona AI Teaching Now Available
+            </div>
+            <h1>Master <span class="gradient">Clinical Reasoning</span> Through Integrated Learning</h1>
+            <p>Three interconnected platforms that teach you to think like a diagnostician — not just memorize facts. Build lasting expertise through cases, mechanisms, and AI coaching.</p>
+            <div class="hero-ctas">
+                <a href="CoachDx/case-library.html" class="hero-btn primary">Start Learning →</a>
+                <a href="feature-guide.html" class="hero-btn secondary">Take the Tour</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="stats-bar">
+        <div class="stats-inner">
+            <div class="stat">
+                <div class="stat-value">200+</div>
+                <div class="stat-label">Clinical Cases</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">37</div>
+                <div class="stat-label">Mechanism Modules</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">33+</div>
+                <div class="stat-label">Coaching Cases</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">5</div>
+                <div class="stat-label">AI Attendings</div>
+            </div>
+        </div>
+    </div>
+
+    <section class="section">
+        <div class="section-header">
+            <div class="section-label">The Ecosystem</div>
+            <h2 class="section-title">Three Platforms, One Goal</h2>
+            <p class="section-subtitle">Each platform strengthens a different aspect of clinical reasoning. Together, they create complete diagnostic expertise.</p>
+        </div>
+
+        <div class="platforms">
+            <!-- ReasonDx Card -->
+            <div class="platform-card reason">
+                <div class="platform-logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 120">
+                        <text x="20" y="70" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="#1a1a1a" letter-spacing="-1">Reason</text>
+                        <text x="200" y="70" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="#1a1a1a">D</text>
+                        <line x1="248" y1="42" x2="272" y2="72" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round"/>
+                        <ellipse cx="246" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 246 39)" fill="#1a1a1a"/>
+                        <path d="M 272 42 L 256 58 Q 250 66 250 76 Q 250 86 258 92 Q 266 98 266 108" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+                        <ellipse cx="274" cy="39" rx="2.5" ry="4.5" transform="rotate(28 274 39)" fill="#1a1a1a"/>
+                        <circle cx="266" cy="108" r="10" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
+                        <circle cx="266" cy="108" r="5" fill="#1a1a1a"/>
+                    </svg>
+                </div>
+                <p class="platform-desc">Work through interactive clinical cases from doorway to diagnosis. Practice history-taking with AI patients, track your confidence, and get feedback on cognitive biases.</p>
+                <ul class="platform-features">
+                    <li>200+ cases across all domains</li>
+                    <li>AI patient chatbot for history</li>
+                    <li>Confidence calibration tracking</li>
+                    <li>Cognitive bias detection</li>
+                </ul>
+                <div class="platform-stats">
+                    <div class="platform-stat">
+                        <div class="platform-stat-value">200+</div>
+                        <div class="platform-stat-label">Cases</div>
+                    </div>
+                    <div class="platform-stat">
+                        <div class="platform-stat-value">1,600+</div>
+                        <div class="platform-stat-label">Diagnoses</div>
+                    </div>
+                </div>
+                <a href="ReasonDx/index.html" class="platform-btn">Launch ReasonDx →</a>
+            </div>
+
+            <!-- MechanismDx Card -->
+            <div class="platform-card mechanism">
+                <div class="platform-logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 120">
+                        <text x="20" y="70" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="#1a1a1a" letter-spacing="-1">MechanismD</text>
+                        <line x1="355" y1="42" x2="379" y2="72" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round"/>
+                        <ellipse cx="353" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 353 39)" fill="#1a1a1a"/>
+                        <path d="M 379 42 L 363 58 Q 357 66 357 76 Q 357 86 365 92 Q 373 98 373 108" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+                        <ellipse cx="381" cy="39" rx="2.5" ry="4.5" transform="rotate(28 381 39)" fill="#1a1a1a"/>
+                        <circle cx="373" cy="108" r="10" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
+                        <circle cx="373" cy="108" r="5" fill="#1a1a1a"/>
+                    </svg>
+                </div>
+                <p class="platform-desc">Understand WHY diseases present the way they do. Interactive challenges test your understanding of mechanisms, not just memorization.</p>
+                <ul class="platform-features">
+                    <li>37 educational modules</li>
+                    <li>Predict Labs challenges</li>
+                    <li>Build the Pathway exercises</li>
+                    <li>XP & streak tracking</li>
+                </ul>
+                <div class="platform-stats">
+                    <div class="platform-stat">
+                        <div class="platform-stat-value">37</div>
+                        <div class="platform-stat-label">Modules</div>
+                    </div>
+                    <div class="platform-stat">
+                        <div class="platform-stat-value">47</div>
+                        <div class="platform-stat-label">Challenges</div>
+                    </div>
+                </div>
+                <a href="mechanism/index.html" class="platform-btn">Launch MechanismDx →</a>
+            </div>
+
+            <!-- CoachDx Card -->
+            <div class="platform-card coach">
+                <div class="platform-logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 310 120">
+                        <text x="20" y="70" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="#1a1a1a" letter-spacing="-1">CoachD</text>
+                        <line x1="218" y1="42" x2="242" y2="72" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round"/>
+                        <ellipse cx="216" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 216 39)" fill="#1a1a1a"/>
+                        <path d="M 242 42 L 226 58 Q 220 66 220 76 Q 220 86 228 92 Q 236 98 236 108" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+                        <ellipse cx="244" cy="39" rx="2.5" ry="4.5" transform="rotate(28 244 39)" fill="#1a1a1a"/>
+                        <circle cx="236" cy="108" r="10" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
+                        <circle cx="236" cy="108" r="5" fill="#1a1a1a"/>
+                    </svg>
+                </div>
+                <p class="platform-desc">Talk through cases with AI attending physicians. Choose from 5 personas with different teaching styles. Learn through Socratic dialogue, not lectures.</p>
+                <ul class="platform-features">
+                    <li>5 AI attending personas</li>
+                    <li>Socratic questioning method</li>
+                    <li>Parallel case pairs</li>
+                    <li>Live concept tracking</li>
+                </ul>
+                <div class="platform-stats">
+                    <div class="platform-stat">
+                        <div class="platform-stat-value">33+</div>
+                        <div class="platform-stat-label">Cases</div>
+                    </div>
+                    <div class="platform-stat">
+                        <div class="platform-stat-value">5</div>
+                        <div class="platform-stat-label">Personas</div>
+                    </div>
+                </div>
+                <a href="CoachDx/case-library.html" class="platform-btn">Launch CoachDx →</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="section-header">
+            <div class="section-label">How It Works</div>
+            <h2 class="section-title">Build Complete Diagnostic Expertise</h2>
+            <p class="section-subtitle">The platforms connect to create a learning journey that builds lasting clinical reasoning skills.</p>
+        </div>
+        <div class="workflow-steps">
+            <div class="workflow-step">
+                <div class="workflow-icon">💬</div>
+                <h3 class="workflow-title">Talk It Through</h3>
+                <p class="workflow-desc">Start with CoachDx. Discuss a case with an AI attending who guides your thinking.</p>
+            </div>
+            <div class="workflow-step">
+                <div class="workflow-icon">🧬</div>
+                <h3 class="workflow-title">Understand Why</h3>
+                <p class="workflow-desc">Fill gaps with MechanismDx. Learn the pathophysiology behind what you're seeing.</p>
+            </div>
+            <div class="workflow-step">
+                <div class="workflow-icon">📋</div>
+                <h3 class="workflow-title">Apply & Practice</h3>
+                <p class="workflow-desc">Test yourself with ReasonDx cases. See if your learning transfers to new scenarios.</p>
+            </div>
+            <div class="workflow-step">
+                <div class="workflow-icon">📊</div>
+                <h3 class="workflow-title">Track Progress</h3>
+                <p class="workflow-desc">Your reasoning fingerprint shows growth across all diagnostic skills over time.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Ready to Think Like a Diagnostician?</h2>
+        <p>Start building clinical reasoning skills that last.</p>
+        <div class="hero-ctas">
+            <a href="CoachDx/case-library.html" class="hero-btn primary">Start Learning →</a>
+            <a href="feature-guide.html" class="hero-btn secondary">📚 Take the Tour</a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="ReasonDx/index.html" class="footer-link">ReasonDx</a>
+            <a href="mechanism/index.html" class="footer-link">MechanismDx</a>
+            <a href="CoachDx/index.html" class="footer-link">CoachDx</a>
+            <a href="feature-guide.html" class="footer-link">Feature Guide</a>
+            <a href="fingerprint-dashboard.html" class="footer-link">Progress Dashboard</a>
+        </div>
+        <p class="footer-copy">© 2026 Dx Suite. Built for medical education.</p>
+    </footer>
+</body>
+</html>
