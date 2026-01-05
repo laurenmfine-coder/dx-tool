@@ -3,82 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Predict Labs | ReasonDx</title>
+    <title>Predict Labs Library | ReasonDx</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Inter', system-ui, sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.6; }
-        
-        /* Header */
-        .header { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 16px 24px; }
-        .header-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-family: Georgia, serif; font-size: 24px; color: #1e293b; text-decoration: none; }
+        .header { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 16px 24px; position: sticky; top: 0; z-index: 100; }
+        .header-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .logo { font-family: Georgia, serif; font-size: 22px; color: #1e293b; text-decoration: none; }
         .logo span { color: #3b82f6; }
-        .nav-links { display: flex; gap: 8px; }
+        .nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
         .nav-link { padding: 8px 16px; color: #64748b; text-decoration: none; font-size: 14px; font-weight: 500; border-radius: 8px; transition: all 0.15s; }
-        .nav-link:hover { background: #f1f5f9; color: #1e293b; }
-        .nav-link.active { background: #dbeafe; color: #1d4ed8; }
+        .nav-link:hover, .nav-link.active { background: #eff6ff; color: #3b82f6; }
         
-        /* Hero */
-        .hero { background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 50%, #93c5fd 100%); padding: 48px 24px; text-align: center; }
-        .hero-icon { font-size: 48px; margin-bottom: 16px; }
-        .hero h1 { font-size: 36px; font-weight: 800; margin-bottom: 12px; color: #1e293b; }
-        .hero p { font-size: 18px; color: #475569; max-width: 700px; margin: 0 auto 24px; }
-        .hero-stats { display: flex; justify-content: center; gap: 48px; }
-        .hero-stat-num { font-size: 32px; font-weight: 700; color: #1d4ed8; }
-        .hero-stat-label { font-size: 14px; color: #64748b; }
+        .main { max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
         
-        /* Main */
-        .main { max-width: 1200px; margin: 0 auto; padding: 48px 24px; }
+        .hero { text-align: center; margin-bottom: 48px; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; background: linear-gradient(135deg, #dbeafe 0%, #c7d2fe 100%); border-radius: 20px; font-size: 13px; font-weight: 600; color: #4338ca; margin-bottom: 16px; }
+        .hero h1 { font-size: 40px; font-weight: 800; margin-bottom: 12px; background: linear-gradient(135deg, #1e293b 0%, #3b82f6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero p { font-size: 18px; color: #64748b; max-width: 700px; margin: 0 auto; }
         
-        /* Category Sections */
-        .category-section { margin-bottom: 48px; }
-        .category-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid #e2e8f0; }
-        .category-icon { font-size: 28px; }
-        .category-title { font-size: 22px; font-weight: 700; }
-        .category-count { background: #dbeafe; color: #1d4ed8; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+        .filters { display: flex; justify-content: center; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; }
+        .filter-btn { padding: 10px 20px; border-radius: 25px; border: 1px solid #e2e8f0; background: #fff; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.15s; color: #64748b; }
+        .filter-btn:hover { border-color: #3b82f6; color: #3b82f6; }
+        .filter-btn.active { background: #3b82f6; color: #fff; border-color: #3b82f6; }
         
-        /* Case Grid */
-        .case-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
-        .case-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; text-decoration: none; color: inherit; transition: all 0.2s; display: block; }
-        .case-card:hover { border-color: #3b82f6; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15); }
-        .case-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
-        .case-title { font-size: 18px; font-weight: 600; color: #1e293b; }
-        .case-badge { padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; }
-        .case-badge.cardio { background: #fce7f3; color: #be185d; }
-        .case-badge.pulm { background: #dbeafe; color: #1d4ed8; }
-        .case-badge.renal { background: #d1fae5; color: #047857; }
-        .case-badge.gi { background: #fef3c7; color: #b45309; }
-        .case-badge.heme { background: #fee2e2; color: #b91c1c; }
-        .case-badge.neuro { background: #e0e7ff; color: #4338ca; }
-        .case-badge.endo { background: #f3e8ff; color: #7c3aed; }
-        .case-badge.id { background: #ccfbf1; color: #0d9488; }
-        .case-demo { font-size: 14px; color: #64748b; margin-bottom: 12px; }
-        .case-labs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
-        .lab-tag { padding: 4px 8px; background: #f1f5f9; border-radius: 4px; font-size: 11px; color: #475569; font-weight: 500; }
-        .case-meta { display: flex; justify-content: space-between; align-items: center; padding-top: 12px; border-top: 1px solid #f1f5f9; }
-        .case-difficulty { font-size: 12px; color: #64748b; }
-        .case-difficulty span { font-weight: 600; }
-        .case-time { font-size: 12px; color: #94a3b8; }
+        .cases-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
         
-        /* Deep Links Section */
-        .deep-links { background: #f8fafc; border-radius: 12px; padding: 32px; margin-top: 48px; border: 1px solid #e2e8f0; }
-        .deep-links h2 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
-        .deep-links p { font-size: 14px; color: #64748b; margin-bottom: 24px; }
-        .platform-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
-        .platform-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 20px; text-decoration: none; display: flex; align-items: center; gap: 16px; transition: all 0.15s; }
-        .platform-card:hover { border-color: #3b82f6; transform: translateY(-1px); }
-        .platform-card.mechanism { border-left: 4px solid #10b981; }
-        .platform-card.coach { border-left: 4px solid #8b5cf6; }
-        .platform-card.reason { border-left: 4px solid #3b82f6; }
-        .platform-icon { font-size: 32px; }
-        .platform-info h3 { font-size: 15px; font-weight: 600; color: #1e293b; margin-bottom: 4px; }
-        .platform-info p { font-size: 13px; color: #64748b; }
+        .case-card { background: #fff; border-radius: 16px; border: 1px solid #e2e8f0; overflow: hidden; transition: all 0.2s; }
+        .case-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+        .case-card.coming-soon { opacity: 0.6; }
+        .case-card.coming-soon:hover { transform: none; box-shadow: none; }
         
-        /* Footer */
-        .footer { padding: 32px 24px; text-align: center; border-top: 1px solid #e2e8f0; background: #fff; margin-top: 48px; }
-        .footer p { font-size: 14px; color: #64748b; }
-        .footer a { color: #3b82f6; text-decoration: none; }
+        .card-header { padding: 20px 20px 0; }
+        .card-badges { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+        .badge { padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; }
+        .badge-cardio { background: #fce7f3; color: #be185d; }
+        .badge-pulm { background: #dbeafe; color: #1d4ed8; }
+        .badge-renal { background: #d1fae5; color: #047857; }
+        .badge-endo { background: #fef3c7; color: #b45309; }
+        .badge-gi { background: #fef3c7; color: #b45309; }
+        .badge-id { background: #fee2e2; color: #b91c1c; }
+        .badge-heme { background: #fae8ff; color: #a21caf; }
+        .badge-cc { background: #fee2e2; color: #b91c1c; }
+        .badge-new { background: #22c55e; color: #fff; }
+        .badge-soon { background: #94a3b8; color: #fff; }
+        
+        .card-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: #1e293b; }
+        .card-desc { font-size: 14px; color: #64748b; line-height: 1.6; }
+        
+        .card-body { padding: 16px 20px; }
+        .lab-preview { display: flex; flex-wrap: wrap; gap: 6px; }
+        .lab-tag { padding: 4px 10px; background: #f1f5f9; border-radius: 6px; font-size: 12px; color: #475569; }
+        
+        .card-footer { padding: 16px 20px; border-top: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center; }
+        .difficulty { display: flex; align-items: center; gap: 4px; font-size: 12px; color: #64748b; }
+        .difficulty-dots { display: flex; gap: 3px; }
+        .dot { width: 8px; height: 8px; border-radius: 50%; background: #e2e8f0; }
+        .dot.filled { background: #3b82f6; }
+        .dot.filled.hard { background: #ef4444; }
+        
+        .start-btn { padding: 10px 20px; background: #3b82f6; color: #fff; border: none; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; text-decoration: none; transition: all 0.15s; }
+        .start-btn:hover { background: #2563eb; transform: translateY(-1px); }
+        .start-btn.disabled { background: #94a3b8; cursor: not-allowed; }
+        .start-btn.disabled:hover { transform: none; }
+        
+        .stats-bar { background: #fff; border-radius: 12px; padding: 24px; margin-bottom: 32px; border: 1px solid #e2e8f0; display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; }
+        .stat { text-align: center; }
+        .stat-value { font-size: 28px; font-weight: 700; color: #3b82f6; }
+        .stat-label { font-size: 13px; color: #64748b; }
+        
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 28px; }
+            .cases-grid { grid-template-columns: 1fr; }
+            .stats-bar { gap: 24px; }
+        }
     </style>
 </head>
 <body>
@@ -86,331 +85,381 @@
         <div class="header-inner">
             <a href="index.html" class="logo">Reason<span>Dx</span></a>
             <nav class="nav-links">
-                <a href="training.html" class="nav-link">Training</a>
-                <a href="predict-labs-library.html" class="nav-link active">🔮 Predict Labs</a>
-                <a href="../CoachDx/index.html" class="nav-link">CoachDx</a>
-                <a href="../mechanism/index.html" class="nav-link">MechanismDx</a>
+                <a href="training.html" class="nav-link">Cases</a>
+                <a href="predict-labs-library.html" class="nav-link active">Predict Labs</a>
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
             </nav>
         </div>
     </header>
     
-    <section class="hero">
-        <div class="hero-icon">🔮</div>
-        <h1>Predict Labs</h1>
-        <p>Anticipate lab results before you see them. Build the predictive reasoning that separates experts from novices.</p>
-        <div class="hero-stats">
-            <div>
-                <div class="hero-stat-num">12</div>
-                <div class="hero-stat-label">Clinical Cases</div>
+    <main class="main">
+        <section class="hero">
+            <div class="hero-badge">🔮 Predict Labs</div>
+            <h1>Master Lab Interpretation</h1>
+            <p>Predict lab results before seeing them. Build the mental models that expert clinicians use to anticipate findings and catch surprises.</p>
+        </section>
+        
+        <div class="stats-bar">
+            <div class="stat">
+                <div class="stat-value">10</div>
+                <div class="stat-label">Cases Available</div>
             </div>
-            <div>
-                <div class="hero-stat-num">8</div>
-                <div class="hero-stat-label">Categories</div>
+            <div class="stat">
+                <div class="stat-value">50</div>
+                <div class="stat-label">Lab Predictions</div>
             </div>
-            <div>
-                <div class="hero-stat-num">48+</div>
-                <div class="hero-stat-label">Lab Predictions</div>
+            <div class="stat">
+                <div class="stat-value">8</div>
+                <div class="stat-label">Specialties</div>
             </div>
         </div>
-    </section>
-    
-    <main class="main">
-        <!-- Cardiovascular -->
-        <section class="category-section">
-            <div class="category-header">
-                <span class="category-icon">❤️</span>
-                <span class="category-title">Cardiovascular</span>
-                <span class="category-count">3 cases</span>
-            </div>
-            <div class="case-grid">
-                <a href="predict-labs-acs.html" class="case-card">
-                    <div class="case-card-header">
-                        <div class="case-title">Acute Coronary Syndrome</div>
-                        <span class="case-badge cardio">Cardio</span>
+        
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterCases('all')">All Cases</button>
+            <button class="filter-btn" onclick="filterCases('cardio')">Cardiology</button>
+            <button class="filter-btn" onclick="filterCases('renal')">Nephrology</button>
+            <button class="filter-btn" onclick="filterCases('gi')">GI</button>
+            <button class="filter-btn" onclick="filterCases('endo')">Endocrine</button>
+            <button class="filter-btn" onclick="filterCases('heme')">Hematology</button>
+            <button class="filter-btn" onclick="filterCases('id')">ID / Critical Care</button>
+        </div>
+        
+        <div class="cases-grid">
+            <!-- DKA -->
+            <div class="case-card" data-category="endo">
+                <div class="card-header">
+                    <div class="card-badges">
+                        <span class="badge badge-endo">Endocrine</span>
+                        <span class="badge badge-new">New</span>
                     </div>
-                    <div class="case-demo">62-year-old man with crushing chest pain</div>
-                    <div class="case-labs">
+                    <div class="card-title">Diabetic Ketoacidosis</div>
+                    <div class="card-desc">Young diabetic with abdominal pain, vomiting, and altered mental status. Classic DKA presentation.</div>
+                </div>
+                <div class="card-body">
+                    <div class="lab-preview">
+                        <span class="lab-tag">Glucose</span>
+                        <span class="lab-tag">pH/Bicarb</span>
+                        <span class="lab-tag">Anion Gap</span>
+                        <span class="lab-tag">Potassium</span>
+                        <span class="lab-tag">β-HB</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="difficulty">
+                        <span>Difficulty:</span>
+                        <div class="difficulty-dots">
+                            <div class="dot filled"></div>
+                            <div class="dot filled"></div>
+                            <div class="dot"></div>
+                        </div>
+                    </div>
+                    <a href="predict-labs-dka.html" class="start-btn">Start →</a>
+                </div>
+            </div>
+            
+            <!-- Sepsis -->
+            <div class="case-card" data-category="id">
+                <div class="card-header">
+                    <div class="card-badges">
+                        <span class="badge badge-cc">Critical Care</span>
+                        <span class="badge badge-new">New</span>
+                    </div>
+                    <div class="card-title">Sepsis</div>
+                    <div class="card-desc">Elderly patient from nursing home with fever, confusion, and hypotension. Suspected urosepsis.</div>
+                </div>
+                <div class="card-body">
+                    <div class="lab-preview">
+                        <span class="lab-tag">WBC</span>
+                        <span class="lab-tag">Lactate</span>
+                        <span class="lab-tag">Procalcitonin</span>
+                        <span class="lab-tag">Creatinine</span>
+                        <span class="lab-tag">Platelets</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="difficulty">
+                        <span>Difficulty:</span>
+                        <div class="difficulty-dots">
+                            <div class="dot filled"></div>
+                            <div class="dot filled"></div>
+                            <div class="dot filled hard"></div>
+                        </div>
+                    </div>
+                    <a href="predict-labs-sepsis.html" class="start-btn">Start →</a>
+                </div>
+            </div>
+            
+            <!-- ACS -->
+            <div class="case-card" data-category="cardio">
+                <div class="card-header">
+                    <div class="card-badges">
+                        <span class="badge badge-cardio">Cardiology</span>
+                        <span class="badge badge-new">New</span>
+                    </div>
+                    <div class="card-title">Acute Coronary Syndrome</div>
+                    <div class="card-desc">Middle-aged man with crushing chest pain, diaphoresis. ECG shows ST elevation. STEMI presentation.</div>
+                </div>
+                <div class="card-body">
+                    <div class="lab-preview">
                         <span class="lab-tag">Troponin</span>
                         <span class="lab-tag">CK-MB</span>
                         <span class="lab-tag">BNP</span>
-                        <span class="lab-tag">ECG</span>
+                        <span class="lab-tag">Glucose</span>
+                        <span class="lab-tag">Potassium</span>
                     </div>
-                    <div class="case-meta">
-                        <div class="case-difficulty">Difficulty: <span>Intermediate</span></div>
-                        <div class="case-time">~10 min</div>
+                </div>
+                <div class="card-footer">
+                    <div class="difficulty">
+                        <span>Difficulty:</span>
+                        <div class="difficulty-dots">
+                            <div class="dot filled"></div>
+                            <div class="dot filled"></div>
+                            <div class="dot"></div>
+                        </div>
                     </div>
-                </a>
-                <a href="predict-labs-hf.html" class="case-card">
-                    <div class="case-card-header">
-                        <div class="case-title">Acute Heart Failure</div>
-                        <span class="case-badge cardio">Cardio</span>
+                    <a href="predict-labs-acs.html" class="start-btn">Start →</a>
+                </div>
+            </div>
+            
+            <!-- Heart Failure -->
+            <div class="case-card" data-category="cardio">
+                <div class="card-header">
+                    <div class="card-badges">
+                        <span class="badge badge-cardio">Cardiology</span>
+                        <span class="badge badge-new">New</span>
                     </div>
-                    <div class="case-demo">74-year-old woman with worsening dyspnea</div>
-                    <div class="case-labs">
+                    <div class="card-title">Heart Failure</div>
+                    <div class="card-desc">Patient with known cardiomyopathy presenting with dyspnea, orthopnea, and 12 lb weight gain.</div>
+                </div>
+                <div class="card-body">
+                    <div class="lab-preview">
                         <span class="lab-tag">BNP</span>
-                        <span class="lab-tag">Troponin</span>
-                        <span class="lab-tag">Creatinine</span>
                         <span class="lab-tag">Sodium</span>
-                    </div>
-                    <div class="case-meta">
-                        <div class="case-difficulty">Difficulty: <span>Intermediate</span></div>
-                        <div class="case-time">~10 min</div>
-                    </div>
-                </a>
-                <a href="predict-labs-pe.html" class="case-card">
-                    <div class="case-card-header">
-                        <div class="case-title">Pulmonary Embolism</div>
-                        <span class="case-badge cardio">Cardio</span>
-                    </div>
-                    <div class="case-demo">68-year-old man with sudden dyspnea post-surgery</div>
-                    <div class="case-labs">
-                        <span class="lab-tag">D-Dimer</span>
+                        <span class="lab-tag">Creatinine</span>
                         <span class="lab-tag">Troponin</span>
-                        <span class="lab-tag">BNP</span>
-                        <span class="lab-tag">ABG</span>
+                        <span class="lab-tag">Hemoglobin</span>
                     </div>
-                    <div class="case-meta">
-                        <div class="case-difficulty">Difficulty: <span>Intermediate</span></div>
-                        <div class="case-time">~10 min</div>
+                </div>
+                <div class="card-footer">
+                    <div class="difficulty">
+                        <span>Difficulty:</span>
+                        <div class="difficulty-dots">
+                            <div class="dot filled"></div>
+                            <div class="dot filled"></div>
+                            <div class="dot filled hard"></div>
+                        </div>
                     </div>
-                </a>
+                    <a href="predict-labs-hf.html" class="start-btn">Start →</a>
+                </div>
             </div>
-        </section>
-        
-        <!-- Renal/Metabolic -->
-        <section class="category-section">
-            <div class="category-header">
-                <span class="category-icon">🫘</span>
-                <span class="category-title">Renal & Metabolic</span>
-                <span class="category-count">3 cases</span>
-            </div>
-            <div class="case-grid">
-                <a href="predict-labs-aki.html" class="case-card">
-                    <div class="case-card-header">
-                        <div class="case-title">Acute Kidney Injury</div>
-                        <span class="case-badge renal">Renal</span>
+            
+            <!-- AKI -->
+            <div class="case-card" data-category="renal">
+                <div class="card-header">
+                    <div class="card-badges">
+                        <span class="badge badge-renal">Nephrology</span>
+                        <span class="badge badge-new">New</span>
                     </div>
-                    <div class="case-demo">78-year-old man with decreased urine output</div>
-                    <div class="case-labs">
+                    <div class="card-title">Acute Kidney Injury</div>
+                    <div class="card-desc">CHF patient post-diuresis with oliguria. Classic prerenal AKI with a diuretic twist.</div>
+                </div>
+                <div class="card-body">
+                    <div class="lab-preview">
                         <span class="lab-tag">Creatinine</span>
                         <span class="lab-tag">BUN</span>
-                        <span class="lab-tag">K+</span>
+                        <span class="lab-tag">BUN:Cr Ratio</span>
                         <span class="lab-tag">FENa</span>
-                    </div>
-                    <div class="case-meta">
-                        <div class="case-difficulty">Difficulty: <span>Advanced</span></div>
-                        <div class="case-time">~12 min</div>
-                    </div>
-                </a>
-                <a href="predict-labs-dka.html" class="case-card">
-                    <div class="case-card-header">
-                        <div class="case-title">Diabetic Ketoacidosis</div>
-                        <span class="case-badge endo">Endo</span>
-                    </div>
-                    <div class="case-demo">24-year-old woman with nausea and confusion</div>
-                    <div class="case-labs">
-                        <span class="lab-tag">Glucose</span>
-                        <span class="lab-tag">pH</span>
-                        <span class="lab-tag">Anion Gap</span>
-                        <span class="lab-tag">K+</span>
-                        <span class="lab-tag">HCO3</span>
-                    </div>
-                    <div class="case-meta">
-                        <div class="case-difficulty">Difficulty: <span>Intermediate</span></div>
-                        <div class="case-time">~10 min</div>
-                    </div>
-                </a>
-                <a href="predict-labs-hyponatremia.html" class="case-card">
-                    <div class="case-card-header">
-                        <div class="case-title">Hyponatremia</div>
-                        <span class="case-badge renal">Renal</span>
-                    </div>
-                    <div class="case-demo">68-year-old woman with confusion on thiazide</div>
-                    <div class="case-labs">
-                        <span class="lab-tag">Na+</span>
-                        <span class="lab-tag">Serum Osm</span>
-                        <span class="lab-tag">Urine Osm</span>
                         <span class="lab-tag">Urine Na</span>
                     </div>
-                    <div class="case-meta">
-                        <div class="case-difficulty">Difficulty: <span>Advanced</span></div>
-                        <div class="case-time">~12 min</div>
+                </div>
+                <div class="card-footer">
+                    <div class="difficulty">
+                        <span>Difficulty:</span>
+                        <div class="difficulty-dots">
+                            <div class="dot filled"></div>
+                            <div class="dot filled"></div>
+                            <div class="dot filled hard"></div>
+                        </div>
                     </div>
-                </a>
+                    <a href="predict-labs-aki.html" class="start-btn">Start →</a>
+                </div>
             </div>
-        </section>
-        
-        <!-- GI/Hepatology -->
-        <section class="category-section">
-            <div class="category-header">
-                <span class="category-icon">🔥</span>
-                <span class="category-title">GI & Hepatology</span>
-                <span class="category-count">2 cases</span>
-            </div>
-            <div class="case-grid">
-                <a href="predict-labs-gi-bleed.html" class="case-card">
-                    <div class="case-card-header">
-                        <div class="case-title">Upper GI Bleed</div>
-                        <span class="case-badge gi">GI</span>
+            
+            <!-- GI Bleed -->
+            <div class="case-card" data-category="gi">
+                <div class="card-header">
+                    <div class="card-badges">
+                        <span class="badge badge-gi">GI</span>
+                        <span class="badge badge-new">New</span>
                     </div>
-                    <div class="case-demo">58-year-old man with melena and lightheadedness</div>
-                    <div class="case-labs">
+                    <div class="card-title">Upper GI Bleed</div>
+                    <div class="card-desc">Patient on NSAIDs with melena and orthostatic hypotension. Suspected peptic ulcer bleed.</div>
+                </div>
+                <div class="card-body">
+                    <div class="lab-preview">
                         <span class="lab-tag">Hemoglobin</span>
-                        <span class="lab-tag">BUN/Cr</span>
+                        <span class="lab-tag">BUN</span>
+                        <span class="lab-tag">BUN:Cr</span>
+                        <span class="lab-tag">INR</span>
                         <span class="lab-tag">Lactate</span>
-                        <span class="lab-tag">INR</span>
                     </div>
-                    <div class="case-meta">
-                        <div class="case-difficulty">Difficulty: <span>Intermediate</span></div>
-                        <div class="case-time">~10 min</div>
+                </div>
+                <div class="card-footer">
+                    <div class="difficulty">
+                        <span>Difficulty:</span>
+                        <div class="difficulty-dots">
+                            <div class="dot filled"></div>
+                            <div class="dot filled"></div>
+                            <div class="dot"></div>
+                        </div>
                     </div>
-                </a>
-                <a href="predict-labs-cirrhosis.html" class="case-card">
-                    <div class="case-card-header">
-                        <div class="case-title">Decompensated Cirrhosis</div>
-                        <span class="case-badge gi">GI</span>
-                    </div>
-                    <div class="case-demo">55-year-old man with confusion and ascites</div>
-                    <div class="case-labs">
-                        <span class="lab-tag">Ammonia</span>
-                        <span class="lab-tag">INR</span>
-                        <span class="lab-tag">Albumin</span>
-                        <span class="lab-tag">Na+</span>
-                        <span class="lab-tag">Cr</span>
-                    </div>
-                    <div class="case-meta">
-                        <div class="case-difficulty">Difficulty: <span>Advanced</span></div>
-                        <div class="case-time">~12 min</div>
-                    </div>
-                </a>
+                    <a href="predict-labs-gi-bleed.html" class="start-btn">Start →</a>
+                </div>
             </div>
-        </section>
-        
-        <!-- Hematology -->
-        <section class="category-section">
-            <div class="category-header">
-                <span class="category-icon">🩸</span>
-                <span class="category-title">Hematology</span>
-                <span class="category-count">2 cases</span>
-            </div>
-            <div class="case-grid">
-                <a href="predict-labs-anemia.html" class="case-card">
-                    <div class="case-card-header">
-                        <div class="case-title">Anemia Workup</div>
-                        <span class="case-badge heme">Heme</span>
+            
+            <!-- Anemia -->
+            <div class="case-card" data-category="heme">
+                <div class="card-header">
+                    <div class="card-badges">
+                        <span class="badge badge-heme">Hematology</span>
+                        <span class="badge badge-new">New</span>
                     </div>
-                    <div class="case-demo">45-year-old woman with fatigue and heavy periods</div>
-                    <div class="case-labs">
-                        <span class="lab-tag">Hgb</span>
+                    <div class="card-title">Iron Deficiency Anemia</div>
+                    <div class="card-desc">Young woman with fatigue, pica, and menorrhagia. Classic iron deficiency presentation.</div>
+                </div>
+                <div class="card-body">
+                    <div class="lab-preview">
                         <span class="lab-tag">MCV</span>
                         <span class="lab-tag">Ferritin</span>
                         <span class="lab-tag">TIBC</span>
-                        <span class="lab-tag">Retic</span>
+                        <span class="lab-tag">Serum Iron</span>
+                        <span class="lab-tag">RDW</span>
                     </div>
-                    <div class="case-meta">
-                        <div class="case-difficulty">Difficulty: <span>Intermediate</span></div>
-                        <div class="case-time">~10 min</div>
+                </div>
+                <div class="card-footer">
+                    <div class="difficulty">
+                        <span>Difficulty:</span>
+                        <div class="difficulty-dots">
+                            <div class="dot filled"></div>
+                            <div class="dot filled"></div>
+                            <div class="dot"></div>
+                        </div>
                     </div>
-                </a>
-                <a href="predict-labs-hemolysis.html" class="case-card">
-                    <div class="case-card-header">
-                        <div class="case-title">Hemolytic Anemia</div>
-                        <span class="case-badge heme">Heme</span>
+                    <a href="predict-labs-anemia.html" class="start-btn">Start →</a>
+                </div>
+            </div>
+            
+            <!-- PE -->
+            <div class="case-card" data-category="pulm">
+                <div class="card-header">
+                    <div class="card-badges">
+                        <span class="badge badge-pulm">Pulmonary</span>
+                        <span class="badge badge-new">New</span>
                     </div>
-                    <div class="case-demo">32-year-old man with jaundice and dark urine</div>
-                    <div class="case-labs">
-                        <span class="lab-tag">Hgb</span>
-                        <span class="lab-tag">LDH</span>
-                        <span class="lab-tag">Haptoglobin</span>
+                    <div class="card-title">Pulmonary Embolism</div>
+                    <div class="card-desc">Post-surgical patient with sudden dyspnea and pleuritic chest pain. High Wells score.</div>
+                </div>
+                <div class="card-body">
+                    <div class="lab-preview">
+                        <span class="lab-tag">D-dimer</span>
+                        <span class="lab-tag">Troponin</span>
+                        <span class="lab-tag">BNP</span>
+                        <span class="lab-tag">PaO2</span>
+                        <span class="lab-tag">PaCO2</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="difficulty">
+                        <span>Difficulty:</span>
+                        <div class="difficulty-dots">
+                            <div class="dot filled"></div>
+                            <div class="dot filled"></div>
+                            <div class="dot"></div>
+                        </div>
+                    </div>
+                    <a href="predict-labs-pe.html" class="start-btn">Start →</a>
+                </div>
+            </div>
+            
+            <!-- Hyponatremia -->
+            <div class="case-card" data-category="renal">
+                <div class="card-header">
+                    <div class="card-badges">
+                        <span class="badge badge-renal">Nephrology</span>
+                        <span class="badge badge-new">New</span>
+                    </div>
+                    <div class="card-title">SIADH / Hyponatremia</div>
+                    <div class="card-desc">Elderly patient with SCLC presenting with confusion. Classic SIADH workup.</div>
+                </div>
+                <div class="card-body">
+                    <div class="lab-preview">
+                        <span class="lab-tag">Serum Osm</span>
+                        <span class="lab-tag">Urine Osm</span>
+                        <span class="lab-tag">Urine Na</span>
+                        <span class="lab-tag">Uric Acid</span>
+                        <span class="lab-tag">TSH</span>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="difficulty">
+                        <span>Difficulty:</span>
+                        <div class="difficulty-dots">
+                            <div class="dot filled"></div>
+                            <div class="dot filled"></div>
+                            <div class="dot filled hard"></div>
+                        </div>
+                    </div>
+                    <a href="predict-labs-hyponatremia.html" class="start-btn">Start →</a>
+                </div>
+            </div>
+            
+            <!-- Cirrhosis -->
+            <div class="case-card" data-category="gi">
+                <div class="card-header">
+                    <div class="card-badges">
+                        <span class="badge badge-gi">GI / Hepatology</span>
+                        <span class="badge badge-new">New</span>
+                    </div>
+                    <div class="card-title">Cirrhosis</div>
+                    <div class="card-desc">Alcoholic cirrhosis with ascites and confusion. Hepatic encephalopathy workup.</div>
+                </div>
+                <div class="card-body">
+                    <div class="lab-preview">
+                        <span class="lab-tag">Ammonia</span>
+                        <span class="lab-tag">INR</span>
+                        <span class="lab-tag">Albumin</span>
                         <span class="lab-tag">Bilirubin</span>
-                        <span class="lab-tag">Retic</span>
+                        <span class="lab-tag">Platelets</span>
                     </div>
-                    <div class="case-meta">
-                        <div class="case-difficulty">Difficulty: <span>Advanced</span></div>
-                        <div class="case-time">~12 min</div>
+                </div>
+                <div class="card-footer">
+                    <div class="difficulty">
+                        <span>Difficulty:</span>
+                        <div class="difficulty-dots">
+                            <div class="dot filled"></div>
+                            <div class="dot filled"></div>
+                            <div class="dot filled hard"></div>
+                        </div>
                     </div>
-                </a>
+                    <a href="predict-labs-cirrhosis.html" class="start-btn">Start →</a>
+                </div>
             </div>
-        </section>
-        
-        <!-- Infectious Disease -->
-        <section class="category-section">
-            <div class="category-header">
-                <span class="category-icon">🦠</span>
-                <span class="category-title">Infectious Disease</span>
-                <span class="category-count">2 cases</span>
-            </div>
-            <div class="case-grid">
-                <a href="predict-labs-sepsis.html" class="case-card">
-                    <div class="case-card-header">
-                        <div class="case-title">Sepsis</div>
-                        <span class="case-badge id">ID</span>
-                    </div>
-                    <div class="case-demo">72-year-old woman with fever and hypotension</div>
-                    <div class="case-labs">
-                        <span class="lab-tag">WBC</span>
-                        <span class="lab-tag">Lactate</span>
-                        <span class="lab-tag">Procalcitonin</span>
-                        <span class="lab-tag">Cr</span>
-                        <span class="lab-tag">Plt</span>
-                    </div>
-                    <div class="case-meta">
-                        <div class="case-difficulty">Difficulty: <span>Intermediate</span></div>
-                        <div class="case-time">~10 min</div>
-                    </div>
-                </a>
-                <a href="predict-labs-pneumonia.html" class="case-card">
-                    <div class="case-card-header">
-                        <div class="case-title">Community Pneumonia</div>
-                        <span class="case-badge id">ID</span>
-                    </div>
-                    <div class="case-demo">65-year-old man with cough, fever, dyspnea</div>
-                    <div class="case-labs">
-                        <span class="lab-tag">WBC</span>
-                        <span class="lab-tag">Procalcitonin</span>
-                        <span class="lab-tag">ABG</span>
-                        <span class="lab-tag">BMP</span>
-                    </div>
-                    <div class="case-meta">
-                        <div class="case-difficulty">Difficulty: <span>Beginner</span></div>
-                        <div class="case-time">~8 min</div>
-                    </div>
-                </a>
-            </div>
-        </section>
-        
-        <!-- Cross-Platform Integration -->
-        <section class="deep-links">
-            <h2>🔗 Integrated Learning</h2>
-            <p>Predict Labs connects with MechanismDx and CoachDx for comprehensive understanding.</p>
-            <div class="platform-links">
-                <a href="../mechanism/index.html" class="platform-card mechanism">
-                    <div class="platform-icon">⚙️</div>
-                    <div class="platform-info">
-                        <h3>MechanismDx</h3>
-                        <p>Understand WHY labs change with pathophysiology modules</p>
-                    </div>
-                </a>
-                <a href="../CoachDx/case-library.html" class="platform-card coach">
-                    <div class="platform-icon">💬</div>
-                    <div class="platform-info">
-                        <h3>CoachDx</h3>
-                        <p>Get AI coaching on lab interpretation in real cases</p>
-                    </div>
-                </a>
-                <a href="training.html" class="platform-card reason">
-                    <div class="platform-icon">🔬</div>
-                    <div class="platform-info">
-                        <h3>Full Cases</h3>
-                        <p>Apply your prediction skills in complete clinical scenarios</p>
-                    </div>
-                </a>
-            </div>
-        </section>
+        </div>
     </main>
     
-    <footer class="footer">
-        <p>Predict Labs — Part of <a href="../index.html">ReasonDx</a> in the Dx Learning Ecosystem</p>
-    </footer>
+    <script>
+    function filterCases(category) {
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        
+        document.querySelectorAll('.case-card').forEach(card => {
+            if (category === 'all') {
+                card.style.display = 'block';
+            } else {
+                card.style.display = card.dataset.category === category ? 'block' : 'none';
+            }
+        });
+    }
+    </script>
 </body>
 </html>

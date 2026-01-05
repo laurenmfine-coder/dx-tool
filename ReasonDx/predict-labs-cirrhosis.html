@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict Labs: Cirrhosis | ReasonDx</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.6; }
+        .header { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 16px 24px; }
+        .header-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: Georgia, serif; font-size: 20px; color: #1e293b; text-decoration: none; }
+        .logo span { color: #3b82f6; }
+        .breadcrumb { font-size: 14px; color: #64748b; }
+        .breadcrumb a { color: #3b82f6; text-decoration: none; }
+        .main { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+        .progress-steps { display: flex; justify-content: center; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; }
+        .step { padding: 8px 16px; border-radius: 20px; background: #fff; border: 1px solid #e2e8f0; font-size: 14px; color: #64748b; }
+        .step.active { background: #dbeafe; border-color: #3b82f6; color: #1d4ed8; font-weight: 500; }
+        .step.completed { background: #d1fae5; border-color: #22c55e; color: #047857; }
+        .case-card { background: #fff; border-radius: 12px; padding: 24px; margin-bottom: 24px; border: 1px solid #e2e8f0; }
+        .case-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 12px; }
+        .case-title { font-size: 20px; font-weight: 600; }
+        .case-badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; background: #fef3c7; color: #b45309; font-weight: 500; }
+        .case-vignette { font-size: 15px; line-height: 1.8; color: #475569; }
+        .case-vignette strong { color: #1e293b; }
+        .case-vignette p { margin-bottom: 12px; }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .panel { background: #fff; border-radius: 12px; padding: 24px; border: 1px solid #e2e8f0; }
+        .panel-title { font-size: 16px; font-weight: 600; margin-bottom: 16px; }
+        .panel-desc { font-size: 14px; color: #64748b; margin-bottom: 20px; }
+        .lab-prediction { background: #f8fafc; border-radius: 10px; padding: 16px; margin-bottom: 12px; border: 1px solid #e2e8f0; }
+        .lab-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+        .lab-name { font-weight: 600; font-size: 14px; }
+        .lab-normal { font-size: 12px; color: #64748b; }
+        .prediction-options { display: flex; flex-wrap: wrap; gap: 8px; }
+        .pred-option { padding: 8px 14px; border-radius: 8px; background: #fff; border: 2px solid #e2e8f0; cursor: pointer; font-size: 13px; transition: all 0.15s; color: #475569; }
+        .pred-option:hover { border-color: #3b82f6; background: #eff6ff; }
+        .pred-option.selected { border-color: #3b82f6; background: #dbeafe; color: #1d4ed8; font-weight: 500; }
+        .confidence-section { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e2e8f0; }
+        .confidence-label { font-size: 13px; color: #64748b; margin-bottom: 8px; }
+        input[type="range"] { width: 100%; height: 8px; border-radius: 4px; background: #e2e8f0; -webkit-appearance: none; }
+        input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: #3b82f6; cursor: pointer; }
+        .confidence-value { text-align: center; font-size: 16px; font-weight: 600; color: #3b82f6; margin-top: 4px; }
+        .reasoning-input { margin-top: 16px; }
+        .reasoning-input label { display: block; font-size: 13px; color: #64748b; margin-bottom: 8px; font-weight: 500; }
+        .reasoning-input textarea { width: 100%; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; font-family: inherit; resize: vertical; min-height: 80px; font-size: 14px; }
+        .reasoning-input textarea:focus { outline: none; border-color: #3b82f6; background: #fff; }
+        .btn { padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; font-size: 14px; }
+        .btn-primary { background: #3b82f6; color: #fff; }
+        .btn-primary:hover { background: #2563eb; }
+        .btn-secondary { background: #fff; color: #475569; border: 1px solid #e2e8f0; }
+        .actions { display: flex; justify-content: center; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+        .score-summary { background: #fff; border-radius: 12px; padding: 32px; text-align: center; margin-bottom: 24px; border: 1px solid #e2e8f0; }
+        .score-big { font-size: 48px; font-weight: 700; color: #3b82f6; margin-bottom: 8px; }
+        .score-label { color: #64748b; margin-bottom: 20px; }
+        .score-breakdown { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+        .score-item-value { font-size: 24px; font-weight: 600; }
+        .score-item-label { font-size: 12px; color: #64748b; }
+        .result-card { background: #f8fafc; border-radius: 10px; padding: 16px; margin-bottom: 12px; border: 1px solid #e2e8f0; }
+        .result-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px; }
+        .result-lab { font-weight: 600; }
+        .result-accuracy { padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; }
+        .result-accuracy.correct { background: #d1fae5; color: #047857; }
+        .result-accuracy.incorrect { background: #fee2e2; color: #b91c1c; }
+        .result-values { display: flex; gap: 24px; margin-bottom: 12px; flex-wrap: wrap; }
+        .result-value-label { font-size: 12px; color: #64748b; }
+        .result-value-num { font-size: 16px; font-weight: 600; }
+        .result-explanation { font-size: 14px; color: #475569; padding: 12px; background: #fff; border-radius: 8px; border-left: 3px solid #3b82f6; line-height: 1.6; }
+        .deep-links { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 1px solid #fbbf24; border-radius: 12px; padding: 20px; margin-top: 20px; }
+        .deep-links-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; color: #b45309; font-weight: 600; font-size: 15px; }
+        .deep-links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+        .deep-link { padding: 12px 16px; background: #fff; color: #b45309; border-radius: 8px; font-size: 13px; text-decoration: none; border: 1px solid #fbbf24; display: flex; align-items: center; gap: 8px; transition: all 0.15s; }
+        .deep-link:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(180, 83, 9, 0.15); }
+        .calibration-feedback { background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 16px; margin-top: 16px; }
+        .cf-header { margin-bottom: 8px; color: #b45309; font-weight: 600; font-size: 14px; }
+        .cf-text { font-size: 13px; color: #92400e; line-height: 1.5; }
+        .hidden { display: none !important; }
+        @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">Reason<span>Dx</span></a>
+            <div class="breadcrumb"><a href="predict-labs-library.html">Predict Labs</a> / Cirrhosis</div>
+        </div>
+    </header>
+    <main class="main">
+        <div class="progress-steps">
+            <div class="step completed">1. Read Case</div>
+            <div class="step active" id="step2">2. Predict Labs</div>
+            <div class="step" id="step3">3. Review Results</div>
+        </div>
+        <div class="case-card">
+            <div class="case-header">
+                <div class="case-title">Case: Decompensated Cirrhosis with Hepatic Encephalopathy</div>
+                <span class="case-badge">GI / Hepatology</span>
+            </div>
+            <div class="case-vignette">
+                <p><strong>Chief Complaint:</strong> 58-year-old man brought in by family for confusion and sleepiness for 2 days</p>
+                <p><strong>History:</strong> <strong>Alcoholic cirrhosis</strong> diagnosed 3 years ago, complicated by ascites requiring periodic paracentesis. Stopped drinking 6 months ago. Family notes he has been <strong>increasingly confused, sleeping more</strong>, and talking to himself. <strong>Missed lactulose doses</strong> for 3 days due to diarrhea. Recent URI treated with antibiotics.</p>
+                <p><strong>Vitals:</strong> BP 102/58, HR 88, RR 16, SpO2 98% on RA, Temp 37.3C</p>
+                <p><strong>Physical Exam:</strong> <strong>Jaundiced sclera</strong>, temporal wasting. <strong>Asterixis present</strong>. Distended abdomen with <strong>shifting dullness</strong>, <strong>caput medusae</strong>. <strong>Spider angiomata</strong> on chest. <strong>2+ pitting edema</strong> bilateral legs. Disoriented to time and place.</p>
+            </div>
+        </div>
+        <div id="predictionPhase">
+            <div class="two-col">
+                <div class="panel">
+                    <div class="panel-title">Predict Lab Results</div>
+                    <p class="panel-desc">Given decompensated cirrhosis with hepatic encephalopathy, predict the labs.</p>
+                    <div class="lab-prediction">
+                        <div class="lab-header"><span class="lab-name">Ammonia</span><span class="lab-normal">Normal: 15-45 ug/dL</span></div>
+                        <div class="prediction-options">
+                            <div class="pred-option" onclick="selectPred(this,'nh3','normal')">Normal</div>
+                            <div class="pred-option" onclick="selectPred(this,'nh3','mild')">Mildly elevated (45-80)</div>
+                            <div class="pred-option" onclick="selectPred(this,'nh3','high')">Elevated (80-150)</div>
+                            <div class="pred-option" onclick="selectPred(this,'nh3','veryhigh')">Very high (>150)</div>
+                        </div>
+                        <div class="confidence-section"><div class="confidence-label">Confidence:</div><input type="range" min="0" max="100" value="50" id="conf-nh3" oninput="document.getElementById('conf-nh3-val').textContent=this.value+'%'"><div class="confidence-value" id="conf-nh3-val">50%</div></div>
+                    </div>
+                    <div class="lab-prediction">
+                        <div class="lab-header"><span class="lab-name">INR</span><span class="lab-normal">Normal: 0.9-1.1</span></div>
+                        <div class="prediction-options">
+                            <div class="pred-option" onclick="selectPred(this,'inr','normal')">Normal (<1.2)</div>
+                            <div class="pred-option" onclick="selectPred(this,'inr','mild')">Mildly elevated (1.2-1.7)</div>
+                            <div class="pred-option" onclick="selectPred(this,'inr','high')">Elevated (1.7-2.5)</div>
+                            <div class="pred-option" onclick="selectPred(this,'inr','veryhigh')">Very high (>2.5)</div>
+                        </div>
+                        <div class="confidence-section"><div class="confidence-label">Confidence:</div><input type="range" min="0" max="100" value="50" id="conf-inr" oninput="document.getElementById('conf-inr-val').textContent=this.value+'%'"><div class="confidence-value" id="conf-inr-val">50%</div></div>
+                    </div>
+                    <div class="lab-prediction">
+                        <div class="lab-header"><span class="lab-name">Albumin</span><span class="lab-normal">Normal: 3.5-5.0 g/dL</span></div>
+                        <div class="prediction-options">
+                            <div class="pred-option" onclick="selectPred(this,'alb','verylow')">Very low (<2.5)</div>
+                            <div class="pred-option" onclick="selectPred(this,'alb','low')">Low (2.5-3.5)</div>
+                            <div class="pred-option" onclick="selectPred(this,'alb','normal')">Normal</div>
+                        </div>
+                        <div class="confidence-section"><div class="confidence-label">Confidence:</div><input type="range" min="0" max="100" value="50" id="conf-alb" oninput="document.getElementById('conf-alb-val').textContent=this.value+'%'"><div class="confidence-value" id="conf-alb-val">50%</div></div>
+                    </div>
+                    <div class="lab-prediction">
+                        <div class="lab-header"><span class="lab-name">Total Bilirubin</span><span class="lab-normal">Normal: 0.1-1.2 mg/dL</span></div>
+                        <div class="prediction-options">
+                            <div class="pred-option" onclick="selectPred(this,'bili','normal')">Normal</div>
+                            <div class="pred-option" onclick="selectPred(this,'bili','mild')">Mildly elevated (1.2-3)</div>
+                            <div class="pred-option" onclick="selectPred(this,'bili','high')">Elevated (3-6)</div>
+                            <div class="pred-option" onclick="selectPred(this,'bili','veryhigh')">Very high (>6)</div>
+                        </div>
+                        <div class="confidence-section"><div class="confidence-label">Confidence:</div><input type="range" min="0" max="100" value="50" id="conf-bili" oninput="document.getElementById('conf-bili-val').textContent=this.value+'%'"><div class="confidence-value" id="conf-bili-val">50%</div></div>
+                    </div>
+                    <div class="lab-prediction">
+                        <div class="lab-header"><span class="lab-name">Platelets</span><span class="lab-normal">Normal: 150-400 K/uL</span></div>
+                        <div class="prediction-options">
+                            <div class="pred-option" onclick="selectPred(this,'plt','verylow')">Very low (<50)</div>
+                            <div class="pred-option" onclick="selectPred(this,'plt','low')">Low (50-100)</div>
+                            <div class="pred-option" onclick="selectPred(this,'plt','mildlow')">Mildly low (100-150)</div>
+                            <div class="pred-option" onclick="selectPred(this,'plt','normal')">Normal</div>
+                        </div>
+                        <div class="confidence-section"><div class="confidence-label">Confidence:</div><input type="range" min="0" max="100" value="50" id="conf-plt" oninput="document.getElementById('conf-plt-val').textContent=this.value+'%'"><div class="confidence-value" id="conf-plt-val">50%</div></div>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="panel-title">Explain Your Reasoning</div>
+                    <p class="panel-desc">Articulating your reasoning builds stronger mental models.</p>
+                    <div class="reasoning-input"><label>Why does ammonia rise in hepatic encephalopathy?</label><textarea placeholder="Ammonia rises because the liver cannot..."></textarea></div>
+                    <div class="reasoning-input"><label>Why is INR elevated in cirrhosis?</label><textarea placeholder="The liver produces clotting factors..."></textarea></div>
+                    <div class="reasoning-input"><label>What causes thrombocytopenia in cirrhosis?</label><textarea placeholder="Platelets are low due to..."></textarea></div>
+                    <div class="actions">
+                        <button class="btn btn-secondary" onclick="location.href='predict-labs-library.html'">Back</button>
+                        <button class="btn btn-primary" onclick="submitPredictions()">Submit Predictions</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="resultsPhase" class="hidden">
+            <div class="score-summary">
+                <div class="score-big" id="totalScore">0%</div>
+                <div class="score-label">Prediction Accuracy</div>
+                <div class="score-breakdown">
+                    <div><div class="score-item-value" id="correctCount">0/5</div><div class="score-item-label">Correct</div></div>
+                    <div><div class="score-item-value" id="calibrationScore">--</div><div class="score-item-label">Calibration</div></div>
+                </div>
+            </div>
+            <div class="two-col">
+                <div class="panel">
+                    <div class="panel-title">Actual Results</div>
+                    <div class="result-card"><div class="result-header"><span class="result-lab">Ammonia</span><span class="result-accuracy" id="acc-nh3">--</span></div><div class="result-values"><div><div class="result-value-label">Your Prediction</div><div class="result-value-num" id="pred-nh3">--</div></div><div><div class="result-value-label">Actual</div><div class="result-value-num">128 ug/dL</div></div></div><div class="result-explanation"><strong>Why elevated:</strong> The liver converts ammonia (from gut bacteria/protein metabolism) to urea. In cirrhosis, both impaired hepatocyte function AND portosystemic shunting allow ammonia to bypass the liver and cross BBB causing encephalopathy. <strong>Caveat:</strong> Ammonia levels do not correlate well with HE severity. Diagnosis is clinical!</div></div>
+                    <div class="result-card"><div class="result-header"><span class="result-lab">INR</span><span class="result-accuracy" id="acc-inr">--</span></div><div class="result-values"><div><div class="result-value-label">Your Prediction</div><div class="result-value-num" id="pred-inr">--</div></div><div><div class="result-value-label">Actual</div><div class="result-value-num">2.1</div></div></div><div class="result-explanation"><strong>Why elevated:</strong> The liver synthesizes most clotting factors (I, II, V, VII, IX, X). Factor VII has the shortest half-life (6 hours), so INR rises early in liver failure. <strong>Pearl:</strong> INR does not fully capture bleeding risk in cirrhosis because they also have reduced anticoagulant factors (protein C, S), creating rebalanced hemostasis.</div></div>
+                    <div class="result-card"><div class="result-header"><span class="result-lab">Albumin</span><span class="result-accuracy" id="acc-alb">--</span></div><div class="result-values"><div><div class="result-value-label">Your Prediction</div><div class="result-value-num" id="pred-alb">--</div></div><div><div class="result-value-label">Actual</div><div class="result-value-num">2.2 g/dL</div></div></div><div class="result-explanation"><strong>Why very low:</strong> Albumin is synthesized exclusively by the liver. Low albumin indicates chronic synthetic dysfunction. <strong>Clinical impact:</strong> Low albumin = low oncotic pressure = ascites/edema. Also means reduced protein binding of drugs. Used in Child-Pugh and MELD-Na scoring.</div></div>
+                    <div class="result-card"><div class="result-header"><span class="result-lab">Total Bilirubin</span><span class="result-accuracy" id="acc-bili">--</span></div><div class="result-values"><div><div class="result-value-label">Your Prediction</div><div class="result-value-num" id="pred-bili">--</div></div><div><div class="result-value-label">Actual</div><div class="result-value-num">4.8 mg/dL</div></div></div><div class="result-explanation"><strong>Why elevated:</strong> Impaired bilirubin conjugation and excretion. Clinical jaundice visible when bili >2.5 (scleral icterus first). In cirrhosis, both direct and indirect fractions rise. Higher bilirubin = worse prognosis (part of MELD score).</div></div>
+                    <div class="result-card"><div class="result-header"><span class="result-lab">Platelets</span><span class="result-accuracy" id="acc-plt">--</span></div><div class="result-values"><div><div class="result-value-label">Your Prediction</div><div class="result-value-num" id="pred-plt">--</div></div><div><div class="result-value-label">Actual</div><div class="result-value-num">68 K/uL</div></div></div><div class="result-explanation"><strong>Why low:</strong> Two main mechanisms: (1) <strong>Splenic sequestration</strong> from portal hypertension causing splenomegaly, (2) <strong>Decreased thrombopoietin</strong> production (TPO made by liver). Platelet count below 150K is often the FIRST lab clue to cirrhosis!</div></div>
+                </div>
+                <div class="panel">
+                    <div class="panel-title">Learning Integration</div>
+                    <div class="calibration-feedback"><div class="cf-header">Calibration Insight</div><div class="cf-text" id="calibrationText">Your calibration analysis will appear here.</div></div>
+                    <div class="deep-links">
+                        <div class="deep-links-header">Deepen Your Understanding</div>
+                        <div class="deep-links-grid">
+                            <a href="../mechanism/cirrhosis-module.html" class="deep-link"><span>MechanismDx:</span> Cirrhosis</a>
+                            <a href="../mechanism/hepatic-encephalopathy.html" class="deep-link"><span>MechanismDx:</span> Hepatic Enceph</a>
+                            <a href="../CoachDx/mentor-chat.html?case=gi03" class="deep-link"><span>CoachDx:</span> Cirrhosis</a>
+                        </div>
+                    </div>
+                    <div style="margin-top: 24px;"><div class="panel-title">Key Takeaways</div><ul style="font-size: 14px; color: #475569; padding-left: 20px; line-height: 2;"><li><strong>Synthetic function:</strong> Low albumin, elevated INR, low platelets</li><li><strong>Excretory function:</strong> Elevated bilirubin</li><li><strong>Detox function:</strong> Elevated ammonia</li><li><strong>Thrombocytopenia:</strong> Splenic sequestration + decreased TPO</li><li><strong>HE triggers:</strong> Infection, GI bleed, constipation, meds, dehydration</li><li><strong>Ammonia caveat:</strong> Level does not correlate with severity</li></ul></div>
+                    <div class="actions"><button class="btn btn-secondary" onclick="location.href='predict-labs-library.html'">More Cases</button><button class="btn btn-primary" onclick="location.href='training.html'">Full Cirrhosis Case</button></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+    const predictions = { nh3: null, inr: null, alb: null, bili: null, plt: null };
+    const correct = { nh3: 'high', inr: 'high', alb: 'verylow', bili: 'high', plt: 'low' };
+    const labels = { nh3: { normal: 'Normal', mild: 'Mildly elevated', high: 'Elevated', veryhigh: 'Very high' }, inr: { normal: 'Normal', mild: 'Mildly elevated', high: 'Elevated', veryhigh: 'Very high' }, alb: { verylow: 'Very low', low: 'Low', normal: 'Normal' }, bili: { normal: 'Normal', mild: 'Mildly elevated', high: 'Elevated', veryhigh: 'Very high' }, plt: { verylow: 'Very low', low: 'Low', mildlow: 'Mildly low', normal: 'Normal' } };
+    function selectPred(el, lab, val) { predictions[lab] = val; el.parentElement.querySelectorAll('.pred-option').forEach(o => o.classList.remove('selected')); el.classList.add('selected'); }
+    function submitPredictions() {
+        if (Object.values(predictions).includes(null)) { alert('Please make all predictions'); return; }
+        let score = 0; const labs = ['nh3', 'inr', 'alb', 'bili', 'plt'];
+        labs.forEach(lab => { const isCorrect = predictions[lab] === correct[lab]; if (isCorrect) score++; document.getElementById('pred-'+lab).textContent = labels[lab][predictions[lab]]; const accEl = document.getElementById('acc-'+lab); accEl.textContent = isCorrect ? 'Correct' : 'Incorrect'; accEl.className = 'result-accuracy ' + (isCorrect ? 'correct' : 'incorrect'); });
+        document.getElementById('totalScore').textContent = Math.round(score / 5 * 100) + '%'; document.getElementById('correctCount').textContent = score + '/5';
+        document.getElementById('calibrationScore').textContent = score >= 4 ? 'Excellent' : score >= 2 ? 'Learning' : 'Review';
+        document.getElementById('calibrationText').textContent = score >= 4 ? 'Excellent! You understand the lab constellation in decompensated cirrhosis.' : 'Remember the liver has 3 functions: synthetic (albumin, clotting factors), excretory (bilirubin), and detox (ammonia). Thrombocytopenia from splenic sequestration is often the first clue to cirrhosis.';
+        document.getElementById('predictionPhase').classList.add('hidden'); document.getElementById('resultsPhase').classList.remove('hidden'); document.getElementById('step2').classList.remove('active'); document.getElementById('step2').classList.add('completed'); document.getElementById('step3').classList.add('active'); window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    </script>
+</body>
+</html>

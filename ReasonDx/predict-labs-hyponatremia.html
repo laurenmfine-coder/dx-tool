@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict Labs: Hyponatremia | ReasonDx</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.6; }
+        .header { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 16px 24px; }
+        .header-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: Georgia, serif; font-size: 20px; color: #1e293b; text-decoration: none; }
+        .logo span { color: #3b82f6; }
+        .breadcrumb { font-size: 14px; color: #64748b; }
+        .breadcrumb a { color: #3b82f6; text-decoration: none; }
+        .main { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+        .progress-steps { display: flex; justify-content: center; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; }
+        .step { padding: 8px 16px; border-radius: 20px; background: #fff; border: 1px solid #e2e8f0; font-size: 14px; color: #64748b; }
+        .step.active { background: #dbeafe; border-color: #3b82f6; color: #1d4ed8; font-weight: 500; }
+        .step.completed { background: #d1fae5; border-color: #22c55e; color: #047857; }
+        .case-card { background: #fff; border-radius: 12px; padding: 24px; margin-bottom: 24px; border: 1px solid #e2e8f0; }
+        .case-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 12px; }
+        .case-title { font-size: 20px; font-weight: 600; }
+        .case-badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; background: #d1fae5; color: #047857; font-weight: 500; }
+        .case-vignette { font-size: 15px; line-height: 1.8; color: #475569; }
+        .case-vignette strong { color: #1e293b; }
+        .case-vignette p { margin-bottom: 12px; }
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .panel { background: #fff; border-radius: 12px; padding: 24px; border: 1px solid #e2e8f0; }
+        .panel-title { font-size: 16px; font-weight: 600; margin-bottom: 16px; }
+        .panel-desc { font-size: 14px; color: #64748b; margin-bottom: 20px; }
+        .lab-prediction { background: #f8fafc; border-radius: 10px; padding: 16px; margin-bottom: 12px; border: 1px solid #e2e8f0; }
+        .lab-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+        .lab-name { font-weight: 600; font-size: 14px; }
+        .lab-normal { font-size: 12px; color: #64748b; }
+        .prediction-options { display: flex; flex-wrap: wrap; gap: 8px; }
+        .pred-option { padding: 8px 14px; border-radius: 8px; background: #fff; border: 2px solid #e2e8f0; cursor: pointer; font-size: 13px; transition: all 0.15s; color: #475569; }
+        .pred-option:hover { border-color: #3b82f6; background: #eff6ff; }
+        .pred-option.selected { border-color: #3b82f6; background: #dbeafe; color: #1d4ed8; font-weight: 500; }
+        .confidence-section { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e2e8f0; }
+        .confidence-label { font-size: 13px; color: #64748b; margin-bottom: 8px; }
+        input[type="range"] { width: 100%; height: 8px; border-radius: 4px; background: #e2e8f0; -webkit-appearance: none; }
+        input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: #3b82f6; cursor: pointer; }
+        .confidence-value { text-align: center; font-size: 16px; font-weight: 600; color: #3b82f6; margin-top: 4px; }
+        .reasoning-input { margin-top: 16px; }
+        .reasoning-input label { display: block; font-size: 13px; color: #64748b; margin-bottom: 8px; font-weight: 500; }
+        .reasoning-input textarea { width: 100%; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; font-family: inherit; resize: vertical; min-height: 80px; font-size: 14px; }
+        .reasoning-input textarea:focus { outline: none; border-color: #3b82f6; background: #fff; }
+        .btn { padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; font-size: 14px; }
+        .btn-primary { background: #3b82f6; color: #fff; }
+        .btn-primary:hover { background: #2563eb; }
+        .btn-secondary { background: #fff; color: #475569; border: 1px solid #e2e8f0; }
+        .actions { display: flex; justify-content: center; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+        .score-summary { background: #fff; border-radius: 12px; padding: 32px; text-align: center; margin-bottom: 24px; border: 1px solid #e2e8f0; }
+        .score-big { font-size: 48px; font-weight: 700; color: #3b82f6; margin-bottom: 8px; }
+        .score-label { color: #64748b; margin-bottom: 20px; }
+        .score-breakdown { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; }
+        .score-item-value { font-size: 24px; font-weight: 600; }
+        .score-item-label { font-size: 12px; color: #64748b; }
+        .result-card { background: #f8fafc; border-radius: 10px; padding: 16px; margin-bottom: 12px; border: 1px solid #e2e8f0; }
+        .result-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px; }
+        .result-lab { font-weight: 600; }
+        .result-accuracy { padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; }
+        .result-accuracy.correct { background: #d1fae5; color: #047857; }
+        .result-accuracy.incorrect { background: #fee2e2; color: #b91c1c; }
+        .result-values { display: flex; gap: 24px; margin-bottom: 12px; flex-wrap: wrap; }
+        .result-value-label { font-size: 12px; color: #64748b; }
+        .result-value-num { font-size: 16px; font-weight: 600; }
+        .result-explanation { font-size: 14px; color: #475569; padding: 12px; background: #fff; border-radius: 8px; border-left: 3px solid #3b82f6; line-height: 1.6; }
+        .deep-links { background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%); border: 1px solid #34d399; border-radius: 12px; padding: 20px; margin-top: 20px; }
+        .deep-links-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; color: #047857; font-weight: 600; font-size: 15px; }
+        .deep-links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+        .deep-link { padding: 12px 16px; background: #fff; color: #047857; border-radius: 8px; font-size: 13px; text-decoration: none; border: 1px solid #34d399; display: flex; align-items: center; gap: 8px; transition: all 0.15s; }
+        .deep-link:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(4, 120, 87, 0.15); }
+        .calibration-feedback { background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 16px; margin-top: 16px; }
+        .cf-header { margin-bottom: 8px; color: #b45309; font-weight: 600; font-size: 14px; }
+        .cf-text { font-size: 13px; color: #92400e; line-height: 1.5; }
+        .hidden { display: none !important; }
+        @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">Reason<span>Dx</span></a>
+            <div class="breadcrumb"><a href="predict-labs-library.html">Predict Labs</a> / Hyponatremia</div>
+        </div>
+    </header>
+    <main class="main">
+        <div class="progress-steps">
+            <div class="step completed">1. Read Case</div>
+            <div class="step active" id="step2">2. Predict Labs</div>
+            <div class="step" id="step3">3. Review Results</div>
+        </div>
+        <div class="case-card">
+            <div class="case-header">
+                <div class="case-title">Case: SIADH</div>
+                <span class="case-badge">Nephrology</span>
+            </div>
+            <div class="case-vignette">
+                <p><strong>Chief Complaint:</strong> 71-year-old man with confusion and unsteady gait for 3 days</p>
+                <p><strong>History:</strong> <strong>Recently diagnosed small cell lung cancer</strong> (limited stage, started chemotherapy 2 weeks ago). Wife notes progressive confusion, poor concentration, and a fall yesterday. He's been drinking water "to stay hydrated during chemo." No vomiting, diarrhea, or edema. Medications: <strong>no diuretics</strong>.</p>
+                <p><strong>Vitals:</strong> BP 132/78, HR 76, RR 14, SpO2 97% on RA, Temp 37.1°C</p>
+                <p><strong>Physical Exam:</strong> Alert but disoriented to date. <strong>Euvolemic</strong> — no JVD, moist mucous membranes, normal skin turgor, <strong>no peripheral edema</strong>. Lungs clear. No asterixis.</p>
+                <p><strong>Initial Labs:</strong> Sodium 118 mEq/L (critical), Glucose 95 mg/dL</p>
+            </div>
+        </div>
+        <div id="predictionPhase">
+            <div class="two-col">
+                <div class="panel">
+                    <div class="panel-title">🔮 Predict Lab Results</div>
+                    <p class="panel-desc">Given euvolemic hyponatremia in a patient with SCLC, predict the diagnostic workup.</p>
+                    <div class="lab-prediction">
+                        <div class="lab-header"><span class="lab-name">Serum Osmolality</span><span class="lab-normal">Normal: 280-295 mOsm/kg</span></div>
+                        <div class="prediction-options">
+                            <div class="pred-option" onclick="selectPred(this,'sosm','low')">Low (&lt;280)</div>
+                            <div class="pred-option" onclick="selectPred(this,'sosm','normal')">Normal (280-295)</div>
+                            <div class="pred-option" onclick="selectPred(this,'sosm','high')">High (&gt;295)</div>
+                        </div>
+                        <div class="confidence-section"><div class="confidence-label">Confidence:</div><input type="range" min="0" max="100" value="50" id="conf-sosm" oninput="document.getElementById('conf-sosm-val').textContent=this.value+'%'"><div class="confidence-value" id="conf-sosm-val">50%</div></div>
+                    </div>
+                    <div class="lab-prediction">
+                        <div class="lab-header"><span class="lab-name">Urine Osmolality</span><span class="lab-normal">Maximally dilute: &lt;100 mOsm/kg</span></div>
+                        <div class="prediction-options">
+                            <div class="pred-option" onclick="selectPred(this,'uosm','dilute')">Dilute (&lt;100)</div>
+                            <div class="pred-option" onclick="selectPred(this,'uosm','intermediate')">Intermediate (100-300)</div>
+                            <div class="pred-option" onclick="selectPred(this,'uosm','concentrated')">Concentrated (&gt;300)</div>
+                        </div>
+                        <div class="confidence-section"><div class="confidence-label">Confidence:</div><input type="range" min="0" max="100" value="50" id="conf-uosm" oninput="document.getElementById('conf-uosm-val').textContent=this.value+'%'"><div class="confidence-value" id="conf-uosm-val">50%</div></div>
+                    </div>
+                    <div class="lab-prediction">
+                        <div class="lab-header"><span class="lab-name">Urine Sodium</span><span class="lab-normal">Low volume state: &lt;20 mEq/L</span></div>
+                        <div class="prediction-options">
+                            <div class="pred-option" onclick="selectPred(this,'una','low')">Low (&lt;20)</div>
+                            <div class="pred-option" onclick="selectPred(this,'una','intermediate')">Intermediate (20-40)</div>
+                            <div class="pred-option" onclick="selectPred(this,'una','high')">High (&gt;40)</div>
+                        </div>
+                        <div class="confidence-section"><div class="confidence-label">Confidence:</div><input type="range" min="0" max="100" value="50" id="conf-una" oninput="document.getElementById('conf-una-val').textContent=this.value+'%'"><div class="confidence-value" id="conf-una-val">50%</div></div>
+                    </div>
+                    <div class="lab-prediction">
+                        <div class="lab-header"><span class="lab-name">Serum Uric Acid</span><span class="lab-normal">Normal: 3.5-7.2 mg/dL</span></div>
+                        <div class="prediction-options">
+                            <div class="pred-option" onclick="selectPred(this,'uric','low')">Low (&lt;4)</div>
+                            <div class="pred-option" onclick="selectPred(this,'uric','normal')">Normal</div>
+                            <div class="pred-option" onclick="selectPred(this,'uric','high')">High</div>
+                        </div>
+                        <div class="confidence-section"><div class="confidence-label">Confidence:</div><input type="range" min="0" max="100" value="50" id="conf-uric" oninput="document.getElementById('conf-uric-val').textContent=this.value+'%'"><div class="confidence-value" id="conf-uric-val">50%</div></div>
+                    </div>
+                    <div class="lab-prediction">
+                        <div class="lab-header"><span class="lab-name">TSH</span><span class="lab-normal">Normal: 0.4-4.0 mIU/L</span></div>
+                        <div class="prediction-options">
+                            <div class="pred-option" onclick="selectPred(this,'tsh','low')">Low</div>
+                            <div class="pred-option" onclick="selectPred(this,'tsh','normal')">Normal</div>
+                            <div class="pred-option" onclick="selectPred(this,'tsh','high')">High</div>
+                        </div>
+                        <div class="confidence-section"><div class="confidence-label">Confidence:</div><input type="range" min="0" max="100" value="50" id="conf-tsh" oninput="document.getElementById('conf-tsh-val').textContent=this.value+'%'"><div class="confidence-value" id="conf-tsh-val">50%</div></div>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="panel-title">💭 Explain Your Reasoning</div>
+                    <p class="panel-desc">Articulating your reasoning builds stronger mental models.</p>
+                    <div class="reasoning-input"><label>Why is urine osmolality CONCENTRATED in SIADH (inappropriately)?</label><textarea placeholder="In SIADH, ADH is released despite..."></textarea></div>
+                    <div class="reasoning-input"><label>Why is urine sodium HIGH in SIADH (unlike hypovolemic hyponatremia)?</label><textarea placeholder="Urine sodium is high because..."></textarea></div>
+                    <div class="reasoning-input"><label>What causes SIADH in small cell lung cancer?</label><textarea placeholder="SCLC causes SIADH through..."></textarea></div>
+                    <div class="actions">
+                        <button class="btn btn-secondary" onclick="location.href='predict-labs-library.html'">← Back</button>
+                        <button class="btn btn-primary" onclick="submitPredictions()">Submit Predictions →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="resultsPhase" class="hidden">
+            <div class="score-summary">
+                <div class="score-big" id="totalScore">0%</div>
+                <div class="score-label">Prediction Accuracy</div>
+                <div class="score-breakdown">
+                    <div><div class="score-item-value" id="correctCount">0/5</div><div class="score-item-label">Correct</div></div>
+                    <div><div class="score-item-value" id="calibrationScore">--</div><div class="score-item-label">Calibration</div></div>
+                </div>
+            </div>
+            <div class="two-col">
+                <div class="panel">
+                    <div class="panel-title">📊 Actual Results</div>
+                    <div class="result-card"><div class="result-header"><span class="result-lab">Serum Osmolality</span><span class="result-accuracy" id="acc-sosm">--</span></div><div class="result-values"><div><div class="result-value-label">Your Prediction</div><div class="result-value-num" id="pred-sosm">--</div></div><div><div class="result-value-label">Actual</div><div class="result-value-num">248 mOsm/kg</div></div></div><div class="result-explanation"><strong>Why low:</strong> Serum osmolality = 2×Na + Glucose/18 + BUN/2.8. With Na of 118, serum is hypotonic. This confirms TRUE hypotonic hyponatremia (not pseudohyponatremia from lipids/proteins, not hypertonic from glucose). <strong>First step:</strong> Always check serum osm to confirm hypotonic!</div></div>
+                    <div class="result-card"><div class="result-header"><span class="result-lab">Urine Osmolality</span><span class="result-accuracy" id="acc-uosm">--</span></div><div class="result-values"><div><div class="result-value-label">Your Prediction</div><div class="result-value-num" id="pred-uosm">--</div></div><div><div class="result-value-label">Actual</div><div class="result-value-num">520 mOsm/kg</div></div></div><div class="result-explanation"><strong>Why concentrated (the "inappropriate" part):</strong> Normally, with low serum Na, ADH should be suppressed and urine should be maximally DILUTE (&lt;100). In SIADH, ADH is released despite low osmolality → concentrated urine when it should be dilute. Urine osm &gt;100 = ADH is active = "inappropriate."</div></div>
+                    <div class="result-card"><div class="result-header"><span class="result-lab">Urine Sodium</span><span class="result-accuracy" id="acc-una">--</span></div><div class="result-values"><div><div class="result-value-label">Your Prediction</div><div class="result-value-num" id="pred-una">--</div></div><div><div class="result-value-label">Actual</div><div class="result-value-num">68 mEq/L</div></div></div><div class="result-explanation"><strong>Why high:</strong> In SIADH, volume expansion triggers natriuresis (sodium wasting). The body tries to shed volume by excreting Na. <strong>Key DDx point:</strong> In hypovolemic hyponatremia, kidneys RETAIN sodium (UNa &lt;20). High UNa (>40) with euvolemia = SIADH pattern.</div></div>
+                    <div class="result-card"><div class="result-header"><span class="result-lab">Serum Uric Acid</span><span class="result-accuracy" id="acc-uric">--</span></div><div class="result-values"><div><div class="result-value-label">Your Prediction</div><div class="result-value-num" id="pred-uric">--</div></div><div><div class="result-value-label">Actual</div><div class="result-value-num">2.8 mg/dL</div></div></div><div class="result-explanation"><strong>Why low:</strong> Volume expansion in SIADH increases uric acid clearance (same reason UNa is high). Low uric acid (&lt;4) supports SIADH over hypovolemia. <strong>Pearl:</strong> This is a helpful confirmatory test when volume status is ambiguous!</div></div>
+                    <div class="result-card"><div class="result-header"><span class="result-lab">TSH</span><span class="result-accuracy" id="acc-tsh">--</span></div><div class="result-values"><div><div class="result-value-label">Your Prediction</div><div class="result-value-num" id="pred-tsh">--</div></div><div><div class="result-value-label">Actual</div><div class="result-value-num">1.8 mIU/L</div></div></div><div class="result-explanation"><strong>Why normal:</strong> TSH is checked to rule out hypothyroidism as a cause of hyponatremia (hypothyroid patients have impaired free water excretion). Similarly, cortisol should be checked to rule out adrenal insufficiency. In this case, the cause is paraneoplastic SIADH from SCLC.</div></div>
+                </div>
+                <div class="panel">
+                    <div class="panel-title">📚 Learning Integration</div>
+                    <div class="calibration-feedback"><div class="cf-header">📊 Calibration Insight</div><div class="cf-text" id="calibrationText">Your calibration analysis will appear here.</div></div>
+                    <div class="deep-links">
+                        <div class="deep-links-header">🔗 Deepen Your Understanding</div>
+                        <div class="deep-links-grid">
+                            <a href="../mechanism/hyponatremia-module.html" class="deep-link"><span>⚙️</span> MechanismDx: Hyponatremia</a>
+                            <a href="../mechanism/adh-module.html" class="deep-link"><span>💧</span> MechanismDx: ADH Physiology</a>
+                            <a href="../CoachDx/mentor-chat.html?case=renal02" class="deep-link"><span>💬</span> CoachDx: SIADH</a>
+                        </div>
+                    </div>
+                    <div style="margin-top: 24px;"><div class="panel-title">🎯 Key Takeaways</div><ul style="font-size: 14px; color: #475569; padding-left: 20px; line-height: 2;"><li><strong>SIADH criteria:</strong> Hypotonic, euvolemic, UOsm >100, UNa >40</li><li><strong>The "inappropriate":</strong> ADH active when it should be off</li><li><strong>UNa is KEY:</strong> &gt;40 in SIADH, &lt;20 in hypovolemia</li><li><strong>Low uric acid:</strong> Supports SIADH (volume expansion)</li><li><strong>Rule out:</strong> Hypothyroid and adrenal insufficiency</li><li><strong>SCLC = classic SIADH:</strong> Ectopic ADH production</li></ul></div>
+                    <div class="actions"><button class="btn btn-secondary" onclick="location.href='predict-labs-library.html'">← More Cases</button><button class="btn btn-primary" onclick="location.href='training.html'">Full SIADH Case →</button></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+    const predictions = { sosm: null, uosm: null, una: null, uric: null, tsh: null };
+    const correct = { sosm: 'low', uosm: 'concentrated', una: 'high', uric: 'low', tsh: 'normal' };
+    const labels = { sosm: { low: 'Low', normal: 'Normal', high: 'High' }, uosm: { dilute: 'Dilute', intermediate: 'Intermediate', concentrated: 'Concentrated' }, una: { low: 'Low', intermediate: 'Intermediate', high: 'High' }, uric: { low: 'Low', normal: 'Normal', high: 'High' }, tsh: { low: 'Low', normal: 'Normal', high: 'High' } };
+    function selectPred(el, lab, val) { predictions[lab] = val; el.parentElement.querySelectorAll('.pred-option').forEach(o => o.classList.remove('selected')); el.classList.add('selected'); }
+    function submitPredictions() {
+        if (Object.values(predictions).includes(null)) { alert('Please make all predictions'); return; }
+        let score = 0; const labs = ['sosm', 'uosm', 'una', 'uric', 'tsh'];
+        labs.forEach(lab => { const isCorrect = predictions[lab] === correct[lab]; if (isCorrect) score++; document.getElementById(`pred-${lab}`).textContent = labels[lab][predictions[lab]]; const accEl = document.getElementById(`acc-${lab}`); accEl.textContent = isCorrect ? '✓ Correct' : '✗ Incorrect'; accEl.className = 'result-accuracy ' + (isCorrect ? 'correct' : 'incorrect'); });
+        document.getElementById('totalScore').textContent = Math.round(score / 5 * 100) + '%'; document.getElementById('correctCount').textContent = score + '/5';
+        document.getElementById('calibrationScore').textContent = score >= 4 ? 'Excellent' : score >= 2 ? 'Learning' : 'Review';
+        document.getElementById('calibrationText').textContent = score >= 4 ? 'Excellent! You understand the SIADH lab pattern.' : 'Key concept: In SIADH, urine is CONCENTRATED when it should be dilute (that\'s the "inappropriate" part). UNa is HIGH because the body is trying to shed volume.';
+        document.getElementById('predictionPhase').classList.add('hidden'); document.getElementById('resultsPhase').classList.remove('hidden'); document.getElementById('step2').classList.remove('active'); document.getElementById('step2').classList.add('completed'); document.getElementById('step3').classList.add('active'); window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    </script>
+</body>
+</html>
