@@ -1152,6 +1152,70 @@
                     'Hematocrit dropped from 32 to 24, patient tachycardic.'
                 ],
                 abnormalVitals: { temp: [97.8, 98.6], hr: [110, 135], sbp: [88, 102], rr: [20, 26], spo2: [94, 98] }
+            },
+            'fall': {
+                admissionReasons: ['Pneumonia', 'CHF', 'UTI', 'Syncope workup', 'Elective surgery'],
+                currentConcerns: [
+                    'Found on floor, hit head, small laceration. Confused about what happened.',
+                    'Witnessed fall, landed on hip. Complaining of severe pain, can\'t bear weight.',
+                    'Unwitnessed fall, patient on anticoagulation. Head strike, no LOC.',
+                    'Fall while ambulating to bathroom. Now complaining of arm pain, visible deformity.'
+                ],
+                abnormalVitals: { temp: [98.2, 98.8], hr: [88, 110], sbp: [130, 160], rr: [18, 24], spo2: [94, 98] }
+            },
+            'ems-stemi': {
+                admissionReasons: ['Field - chest pain'],
+                currentConcerns: [
+                    'Crushing chest pain, ST elevation in leads II, III, aVF.',
+                    'Diaphoretic, nauseous, ST elevation anterolateral.',
+                    'Chest pain radiating to jaw, reciprocal changes on 12-lead.'
+                ],
+                abnormalVitals: { temp: [98.0, 98.6], hr: [60, 110], sbp: [90, 160], rr: [18, 26], spo2: [92, 98] }
+            },
+            'ems-stroke': {
+                admissionReasons: ['Field - neuro symptoms'],
+                currentConcerns: [
+                    'Acute onset right-sided weakness and slurred speech. LKWN 45 minutes ago.',
+                    'Found down, left facial droop, not following commands.',
+                    'Wife noticed slurred speech and right arm drift at breakfast.'
+                ],
+                abnormalVitals: { temp: [98.4, 99.0], hr: [75, 100], sbp: [170, 200], rr: [16, 22], spo2: [95, 99] }
+            },
+            'ems-trauma': {
+                admissionReasons: ['Field - trauma'],
+                currentConcerns: [
+                    'MVC, unrestrained driver. Complaining of chest and abdominal pain.',
+                    'Fall from ladder, approximately 15 feet. Back pain, can move extremities.',
+                    'Assault victim, multiple blows to head and abdomen.'
+                ],
+                abnormalVitals: { temp: [97.5, 98.5], hr: [100, 130], sbp: [85, 110], rr: [22, 30], spo2: [92, 97] }
+            },
+            'rt-bipap': {
+                admissionReasons: ['COPD exacerbation', 'CHF exacerbation', 'Obesity hypoventilation'],
+                currentConcerns: [
+                    'ABG shows pH 7.28, pCO2 68. Patient increasingly somnolent.',
+                    'Work of breathing increasing despite 6L NC. ABG needed.',
+                    'Unable to speak full sentences, accessory muscle use, CO2 likely rising.'
+                ],
+                abnormalVitals: { temp: [98.4, 99.2], hr: [100, 120], sbp: [150, 175], rr: [28, 36], spo2: [86, 92] }
+            },
+            'shift-handoff': {
+                admissionReasons: ['CHF exacerbation', 'Pneumonia', 'COPD', 'Post-op day 1'],
+                currentConcerns: [
+                    'Stable overnight, but still requiring 4L O2. Pending echo.',
+                    'Had fever spike overnight, cultures pending. On day 2 of antibiotics.',
+                    'Pain controlled with current regimen. Awaiting PT evaluation.'
+                ],
+                abnormalVitals: { temp: [98.6, 99.4], hr: [75, 95], sbp: [115, 135], rr: [16, 20], spo2: [93, 96] }
+            },
+            'medication-error': {
+                admissionReasons: ['Pneumonia', 'CHF', 'Post-op', 'DKA'],
+                currentConcerns: [
+                    'Patient received wrong dose of insulin - 50 units instead of 5. Glucose now 45.',
+                    'Medication given that patient is allergic to. Watching for reaction.',
+                    'Double dose of blood pressure medication given. BP now 85/50.'
+                ],
+                abnormalVitals: { temp: [98.4, 98.8], hr: [95, 120], sbp: [80, 95], rr: [18, 24], spo2: [95, 98] }
             }
         };
         
@@ -1603,11 +1667,22 @@
             
             currentScenario = scenarios[clinicalScenario];
             
-            // Generate random patient for this scenario
-            generatedPatient = generateRandomPatient(clinicalScenario);
+            if (!currentScenario) {
+                alert('Please select a valid scenario.');
+                return;
+            }
             
-            // Update scenario's patient with generated patient
-            currentScenario.patient = generatedPatient;
+            // Generate random patient for this scenario (if template exists)
+            if (scenarioTemplates[clinicalScenario]) {
+                generatedPatient = generateRandomPatient(clinicalScenario);
+                currentScenario.patient = generatedPatient;
+                displayPatientChart(generatedPatient);
+            } else {
+                // Use default patient from scenario, hide chart
+                document.getElementById('patientChart').style.display = 'none';
+                const patient = currentScenario.patient;
+                document.getElementById('patientInfo').textContent = `${patient.name}, ${patient.age}${patient.sex}, ${patient.room || 'Room'}`;
+            }
             
             // Update practice header
             document.getElementById('callerAvatar').textContent = roleAvatars[yourRole] || '👤';
@@ -1616,9 +1691,6 @@
             document.getElementById('receiverAvatar').textContent = receiverAvatars[callingTo] || '👤';
             document.getElementById('receiverName').textContent = receiverNames[callingTo] || 'Receiver';
             document.getElementById('receiverTitle').textContent = document.getElementById('callingTo').options[document.getElementById('callingTo').selectedIndex].text;
-            
-            // Display patient chart with generated patient
-            displayPatientChart(generatedPatient);
             
             // Show practice area, hide selection
             document.getElementById('scenarioSelection').style.display = 'none';
