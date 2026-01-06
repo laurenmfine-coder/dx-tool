@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dx Learning Ecosystem - Dashboard</title>
+    <style>
+        :root {
+            --primary: #1E3A5F;
+            --primary-light: #2563EB;
+            --secondary: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --purple: #8B5CF6;
+            --bg: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text: #1F2937;
+            --text-light: #6B7280;
+            --border: #E5E7EB;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            min-height: 100vh;
+            color: var(--text);
+        }
+        
+        /* Top Navigation */
+        .top-nav {
+            background: var(--primary);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .nav-brand span {
+            opacity: 0.8;
+            font-weight: 400;
+        }
+        
+        .nav-user {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .user-role {
+            background: rgba(255,255,255,0.15);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .change-role-btn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+        
+        .change-role-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        /* Main Container */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+        
+        /* Welcome Section */
+        .welcome-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 16px;
+            padding: 30px;
+            color: white;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .welcome-text h1 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
+        
+        .welcome-text p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+        
+        .coach-badge {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .coach-avatar {
+            font-size: 3rem;
+        }
+        
+        .coach-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 3px;
+        }
+        
+        .coach-info p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        /* Platform Cards */
+        .platforms-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 1000px) {
+            .platforms-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (max-width: 700px) {
+            .platforms-grid { grid-template-columns: 1fr; }
+        }
+        
+        .platform-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .platform-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+        
+        .platform-card.coachdx { border-top: 4px solid var(--primary-light); }
+        .platform-card.reasondx { border-top: 4px solid var(--secondary); }
+        .platform-card.mechanismdx { border-top: 4px solid var(--purple); }
+        
+        .platform-header {
+            padding: 25px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .platform-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .platform-header h2 {
+            font-size: 1.4rem;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+        
+        .platform-header p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .platform-stats {
+            padding: 20px 25px;
+            background: #F9FAFB;
+            display: flex;
+            gap: 20px;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+        }
+        
+        .platform-actions {
+            padding: 20px 25px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+        }
+        
+        .btn-primary:hover {
+            background: var(--primary-light);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--border);
+            color: var(--text);
+        }
+        
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        /* Quick Access Section */
+        .section-title {
+            font-size: 1.3rem;
+            color: var(--text);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .recommended-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .case-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            border-left: 4px solid var(--primary-light);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .case-card:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transform: translateX(5px);
+        }
+        
+        .case-card h4 {
+            color: var(--text);
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+        
+        .case-card p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .case-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .tag {
+            background: #EFF6FF;
+            color: var(--primary-light);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .tag.sbar {
+            background: #FEF3C7;
+            color: #D97706;
+        }
+        
+        /* SBAR Training Section */
+        .sbar-section {
+            background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid #F59E0B;
+        }
+        
+        .sbar-section h3 {
+            color: #92400E;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .sbar-section p {
+            color: #78350F;
+            margin-bottom: 15px;
+        }
+        
+        .sbar-scenarios {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .sbar-scenario-btn {
+            background: white;
+            border: 2px solid #F59E0B;
+            color: #92400E;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .sbar-scenario-btn:hover {
+            background: #92400E;
+            color: white;
+        }
+        
+        /* Progress Section */
+        .progress-section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .progress-section h3 {
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+        
+        .progress-bars {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .progress-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .progress-label {
+            width: 150px;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+        
+        .progress-bar {
+            flex: 1;
+            height: 12px;
+            background: var(--border);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 0.5s ease;
+        }
+        
+        .progress-fill.coachdx { background: var(--primary-light); }
+        .progress-fill.reasondx { background: var(--secondary); }
+        .progress-fill.mechanismdx { background: var(--purple); }
+        
+        .progress-value {
+            width: 50px;
+            text-align: right;
+            font-weight: 600;
+            color: var(--text);
+        }
+        
+        /* Specialty Selection (for Residents) */
+        .specialty-section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            display: none;
+        }
+        
+        .specialty-section.visible {
+            display: block;
+        }
+        
+        .specialty-section h3 {
+            margin-bottom: 15px;
+        }
+        
+        .specialty-grid {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .specialty-btn {
+            padding: 10px 20px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .specialty-btn:hover {
+            border-color: var(--primary-light);
+        }
+        
+        .specialty-btn.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="nav-brand">
+            🏥 Dx Learning Ecosystem <span>| Dashboard</span>
+        </div>
+        <div class="nav-user">
+            <div class="user-role" id="userRole">
+                <span id="roleIcon">🩺</span>
+                <span id="roleName">Medical Student</span>
+            </div>
+            <button class="change-role-btn" onclick="changeRole()">Change Role</button>
+        </div>
+    </nav>
+    
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Welcome Section -->
+        <div class="welcome-section">
+            <div class="welcome-text">
+                <h1 id="welcomeMessage">Welcome back!</h1>
+                <p id="welcomeSubtext">Your personalized clinical reasoning training awaits.</p>
+            </div>
+            <div class="coach-badge">
+                <div class="coach-avatar" id="coachAvatar">👩‍⚕️</div>
+                <div class="coach-info">
+                    <h3 id="coachName">Dr. Sarah Chen</h3>
+                    <p id="coachTitle">Your Attending Physician</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Specialty Selection (Residents Only) -->
+        <div class="specialty-section" id="specialtySection">
+            <h3>🎯 Select Your Specialty Focus</h3>
+            <div class="specialty-grid">
+                <button class="specialty-btn selected" data-specialty="im">Internal Medicine</button>
+                <button class="specialty-btn" data-specialty="em">Emergency Medicine</button>
+                <button class="specialty-btn" data-specialty="surgery">Surgery</button>
+                <button class="specialty-btn" data-specialty="peds">Pediatrics</button>
+                <button class="specialty-btn" data-specialty="obgyn">OB/GYN</button>
+                <button class="specialty-btn" data-specialty="psych">Psychiatry</button>
+                <button class="specialty-btn" data-specialty="fm">Family Medicine</button>
+                <button class="specialty-btn" data-specialty="icu">Critical Care</button>
+            </div>
+        </div>
+        
+        <!-- SBAR Training Section -->
+        <div class="sbar-section">
+            <h3>📞 SBAR Communication Training</h3>
+            <p id="sbarDescription">Practice structured communication with your healthcare team. Select a scenario:</p>
+            <div class="sbar-scenarios" id="sbarScenarios">
+                <!-- Populated by JavaScript based on role -->
+            </div>
+        </div>
+        
+        <!-- Platform Cards -->
+        <div class="platforms-grid">
+            <!-- CoachDx -->
+            <div class="platform-card coachdx">
+                <div class="platform-header">
+                    <div class="platform-icon">🧠</div>
+                    <h2>CoachDx</h2>
+                    <p>AI-powered Socratic coaching with your personalized mentor. Practice cases with real-time feedback.</p>
+                </div>
+                <div class="platform-stats">
+                    <div class="stat">
+                        <div class="stat-value" id="coachdxCases">15</div>
+                        <div class="stat-label">Cases</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="coachdxCompleted">0</div>
+                        <div class="stat-label">Completed</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="coachdxSbar">5</div>
+                        <div class="stat-label">SBAR Scenarios</div>
+                    </div>
+                </div>
+                <div class="platform-actions">
+                    <a href="mentor-chat.html" class="btn btn-primary">Start Coaching</a>
+                    <a href="#" class="btn btn-outline">Browse Cases</a>
+                </div>
+            </div>
+            
+            <!-- ReasonDx -->
+            <div class="platform-card reasondx">
+                <div class="platform-header">
+                    <div class="platform-icon">🔬</div>
+                    <h2>ReasonDx</h2>
+                    <p>Systematic clinical reasoning training. Build illness scripts and practice diagnostic thinking.</p>
+                </div>
+                <div class="platform-stats">
+                    <div class="stat">
+                        <div class="stat-value" id="reasondxCases">200+</div>
+                        <div class="stat-label">Cases</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="reasondxCompleted">0</div>
+                        <div class="stat-label">Completed</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="reasondxAccuracy">-</div>
+                        <div class="stat-label">Accuracy</div>
+                    </div>
+                </div>
+                <div class="platform-actions">
+                    <a href="ReasonDx/training.html" class="btn btn-primary">Start Training</a>
+                    <a href="#" class="btn btn-outline">Case Library</a>
+                </div>
+            </div>
+            
+            <!-- MechanismDx -->
+            <div class="platform-card mechanismdx">
+                <div class="platform-header">
+                    <div class="platform-icon">⚙️</div>
+                    <h2>MechanismDx</h2>
+                    <p>Master pathophysiology through interactive modules. Understand the WHY behind clinical findings.</p>
+                </div>
+                <div class="platform-stats">
+                    <div class="stat">
+                        <div class="stat-value">18</div>
+                        <div class="stat-label">Modules</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="mechanismCompleted">0</div>
+                        <div class="stat-label">Completed</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="mechanismMastery">-</div>
+                        <div class="stat-label">Mastery</div>
+                    </div>
+                </div>
+                <div class="platform-actions">
+                    <a href="MechanismDx/mechanismdx-index.html" class="btn btn-primary">Explore Modules</a>
+                    <a href="#" class="btn btn-outline">Review Progress</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Recommended Cases -->
+        <h2 class="section-title">⭐ Recommended For You</h2>
+        <div class="recommended-grid" id="recommendedCases">
+            <!-- Populated by JavaScript -->
+        </div>
+        
+        <!-- Progress Section -->
+        <div class="progress-section">
+            <h3>📊 Your Progress</h3>
+            <div class="progress-bars">
+                <div class="progress-item">
+                    <span class="progress-label">CoachDx Cases</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill coachdx" style="width: 0%"></div>
+                    </div>
+                    <span class="progress-value">0%</span>
+                </div>
+                <div class="progress-item">
+                    <span class="progress-label">ReasonDx Cases</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill reasondx" style="width: 0%"></div>
+                    </div>
+                    <span class="progress-value">0%</span>
+                </div>
+                <div class="progress-item">
+                    <span class="progress-label">MechanismDx</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill mechanismdx" style="width: 0%"></div>
+                    </div>
+                    <span class="progress-value">0%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="footer">
+        <p>Dx Learning Ecosystem © 2026 | Lauren Fine, MD, FAAAAI | Nova Southeastern University</p>
+    </div>
+    
+    <script>
+        // =====================================================
+        // CONFIGURATION BY ROLE
+        // =====================================================
+        
+        const roleConfig = {
+            'md-do': {
+                name: 'Medical Student',
+                icon: '🩺',
+                coach: { name: 'Dr. Sarah Chen', title: 'Attending Physician', avatar: '👩‍⚕️' },
+                coachdxCases: '200+',
+                reasondxCases: '200+',
+                sbarScenarios: [
+                    { label: 'Presenting to Attending', scenario: 'admit-presentation' },
+                    { label: 'Calling Consult', scenario: 'consult-call' },
+                    { label: 'Sign-out/Handoff', scenario: 'handoff' }
+                ],
+                recommendedCases: [
+                    { title: 'Chest Pain - ACS Evaluation', desc: 'Classic STEMI presentation with risk stratification', tags: ['Cardiology', 'High-Yield'] },
+                    { title: 'Acute Dyspnea Workup', desc: 'Differentiate CHF vs PE vs pneumonia', tags: ['Pulmonary', 'SBAR'], sbar: true },
+                    { title: 'Altered Mental Status', desc: 'Systematic approach to AMS in elderly', tags: ['Neurology', 'Geriatrics'] }
+                ]
+            },
+            'pa': {
+                name: 'PA Student',
+                icon: '👨‍⚕️',
+                coach: { name: 'Dr. Marcus Webb', title: 'Supervising Physician', avatar: '👨‍⚕️' },
+                coachdxCases: '180+',
+                reasondxCases: '200+',
+                sbarScenarios: [
+                    { label: 'Discussing with Supervisor', scenario: 'supervisor-discussion' },
+                    { label: 'Referral Call', scenario: 'referral' },
+                    { label: 'Patient Update', scenario: 'update' }
+                ],
+                recommendedCases: [
+                    { title: 'Primary Care Chest Pain', desc: 'Risk stratification in outpatient setting', tags: ['Primary Care', 'Cardiology'] },
+                    { title: 'Diabetes Management', desc: 'Medication adjustment and monitoring', tags: ['Endocrine', 'Chronic Care'] },
+                    { title: 'Hypertension Follow-up', desc: 'Resistant hypertension workup', tags: ['Cardiology', 'Primary Care'] }
+                ]
+            },
+            'nursing': {
+                name: 'Nursing Student',
+                icon: '💉',
+                coach: { name: 'Rachel Torres, RN', title: 'Charge Nurse / Preceptor', avatar: '👩‍⚕️' },
+                coachdxCases: '15',
+                reasondxCases: '50+',
+                sbarScenarios: [
+                    { label: 'Calling the Physician', scenario: 'nurse-to-md' },
+                    { label: 'Rapid Response Activation', scenario: 'rapid-response' },
+                    { label: 'Shift Handoff (I-PASS)', scenario: 'shift-handoff' },
+                    { label: 'Escalating to Charge', scenario: 'escalate-charge' }
+                ],
+                recommendedCases: [
+                    { title: 'Deteriorating Patient', desc: 'Recognizing early warning signs', tags: ['Critical', 'SBAR'], sbar: true },
+                    { title: 'High-Alert Medication Safety', desc: 'Double-checks and hold parameters', tags: ['Safety', 'Medications'] },
+                    { title: 'Post-op Hypotension', desc: 'Assessment before calling surgeon', tags: ['Surgery', 'SBAR'], sbar: true }
+                ]
+            },
+            'ems': {
+                name: 'Paramedic/EMT',
+                icon: '🚑',
+                coach: { name: 'Captain Mike Rodriguez', title: 'Field Supervisor / FTO', avatar: '🚑' },
+                coachdxCases: '15',
+                reasondxCases: '30+',
+                sbarScenarios: [
+                    { label: 'Radio Report to ED', scenario: 'ems-to-ed' },
+                    { label: 'STEMI Alert Call', scenario: 'stemi-alert' },
+                    { label: 'Stroke Alert Call', scenario: 'stroke-alert' },
+                    { label: 'Trauma Alert', scenario: 'trauma-alert' }
+                ],
+                recommendedCases: [
+                    { title: 'Field STEMI', desc: '12-lead recognition and cath lab activation', tags: ['Cardiology', 'Time-Critical'] },
+                    { title: 'Stroke Assessment', desc: 'LKW, FAST, and routing decisions', tags: ['Neurology', 'SBAR'], sbar: true },
+                    { title: 'Respiratory Distress', desc: 'CHF vs COPD in the field', tags: ['Pulmonary', 'Critical'] }
+                ]
+            },
+            'rt': {
+                name: 'Respiratory Therapy',
+                icon: '🫁',
+                coach: { name: 'Jennifer Park, RRT', title: 'Lead Respiratory Therapist', avatar: '🫁' },
+                coachdxCases: '10',
+                reasondxCases: '25+',
+                sbarScenarios: [
+                    { label: 'Recommending BiPAP', scenario: 'rt-bipap' },
+                    { label: 'Vent Change Request', scenario: 'vent-change' },
+                    { label: 'ABG Interpretation', scenario: 'abg-report' },
+                    { label: 'Weaning Assessment', scenario: 'wean-assessment' }
+                ],
+                recommendedCases: [
+                    { title: 'COPD Exacerbation - BiPAP', desc: 'Settings, titration, and failure criteria', tags: ['Pulmonary', 'SBAR'], sbar: true },
+                    { title: 'ARDS Ventilator Management', desc: 'Lung-protective strategies and proning', tags: ['ICU', 'Advanced'] },
+                    { title: 'Complex ABG Interpretation', desc: 'Triple disorders and delta-delta', tags: ['Acid-Base', 'High-Yield'] }
+                ]
+            },
+            'resident': {
+                name: 'Medical Resident',
+                icon: '👨‍🔬',
+                coach: { name: 'Dr. David Kim', title: 'Senior Resident', avatar: '👨‍🔬' },
+                coachdxCases: '15',
+                reasondxCases: '200+',
+                showSpecialty: true,
+                sbarScenarios: [
+                    { label: 'Presenting to Attending', scenario: 'resident-attending' },
+                    { label: 'Receiving Nurse Page', scenario: 'receiving-page' },
+                    { label: 'Calling Consult', scenario: 'consult-call' },
+                    { label: 'Family Meeting Prep', scenario: 'family-meeting' }
+                ],
+                recommendedCases: [
+                    { title: 'Diagnostic Dilemma', desc: 'When common things aren\'t - anchoring bias', tags: ['Advanced', 'Metacognition'] },
+                    { title: 'Multi-Organ Failure', desc: 'Prioritization and systems thinking', tags: ['ICU', 'Critical'] },
+                    { title: 'Code Status Discussion', desc: 'Leading a family meeting', tags: ['Communication', 'SBAR'], sbar: true }
+                ]
+            },
+            'professional': {
+                name: 'Practicing Professional',
+                icon: '🎓',
+                coach: { name: 'Clinical Advisor', title: 'CE Instructor', avatar: '🎓' },
+                coachdxCases: '55+',
+                reasondxCases: '200+',
+                sbarScenarios: [
+                    { label: 'Interprofessional Handoff', scenario: 'interpro-handoff' },
+                    { label: 'Quality Review', scenario: 'quality-review' }
+                ],
+                recommendedCases: [
+                    { title: 'Cross-Discipline Communication', desc: 'Interprofessional SBAR practice', tags: ['Communication', 'Team'] },
+                    { title: 'Systems-Based Practice', desc: 'Quality improvement cases', tags: ['QI', 'Systems'] }
+                ]
+            }
+        };
+        
+        // =====================================================
+        // INITIALIZATION
+        // =====================================================
+        
+        function init() {
+            // Get role from URL or localStorage
+            const urlParams = new URLSearchParams(window.location.search);
+            let role = urlParams.get('role') || localStorage.getItem('dxRole') || 'md-do';
+            let level = urlParams.get('level') || localStorage.getItem('dxLevel') || 'intermediate';
+            
+            // Validate role
+            if (!roleConfig[role]) role = 'md-do';
+            
+            // Store for session
+            localStorage.setItem('dxRole', role);
+            localStorage.setItem('dxLevel', level);
+            
+            // Update UI
+            updateDashboard(role, level);
+        }
+        
+        function updateDashboard(role, level) {
+            const config = roleConfig[role];
+            
+            // Update nav
+            document.getElementById('roleIcon').textContent = config.icon;
+            document.getElementById('roleName').textContent = config.name;
+            
+            // Update welcome
+            document.getElementById('welcomeMessage').textContent = `Welcome, ${config.name}!`;
+            
+            // Update coach
+            document.getElementById('coachAvatar').textContent = config.coach.avatar;
+            document.getElementById('coachName').textContent = config.coach.name;
+            document.getElementById('coachTitle').textContent = config.coach.title;
+            
+            // Update stats
+            document.getElementById('coachdxCases').textContent = config.coachdxCases;
+            document.getElementById('reasondxCases').textContent = config.reasondxCases;
+            
+            // Update SBAR scenarios
+            const sbarContainer = document.getElementById('sbarScenarios');
+            sbarContainer.innerHTML = config.sbarScenarios.map(s => 
+                `<button class="sbar-scenario-btn" onclick="launchSBAR('${s.scenario}')">${s.label}</button>`
+            ).join('');
+            
+            // Update recommended cases
+            const casesContainer = document.getElementById('recommendedCases');
+            casesContainer.innerHTML = config.recommendedCases.map(c => `
+                <div class="case-card" onclick="launchCase('${c.title}')">
+                    <h4>${c.title}</h4>
+                    <p>${c.desc}</p>
+                    <div class="case-tags">
+                        ${c.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+                        ${c.sbar ? '<span class="tag sbar">SBAR Practice</span>' : ''}
+                    </div>
+                </div>
+            `).join('');
+            
+            // Show specialty section for residents
+            if (config.showSpecialty) {
+                document.getElementById('specialtySection').classList.add('visible');
+            }
+        }
+        
+        function changeRole() {
+            localStorage.removeItem('dxEcosystemPreferences');
+            window.location.href = 'dx-ecosystem-entry.html';
+        }
+        
+        function launchSBAR(scenario) {
+            // Navigate to SBAR training module with scenario
+            window.location.href = `sbar-trainer.html?scenario=${scenario}&role=${localStorage.getItem('dxRole')}`;
+        }
+        
+        function launchCase(caseTitle) {
+            // Navigate to CoachDx with case
+            const caseId = caseTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+            window.location.href = `mentor-chat.html?case=${caseId}`;
+        }
+        
+        // Specialty selection
+        document.querySelectorAll('.specialty-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.specialty-btn').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                localStorage.setItem('dxSpecialty', btn.dataset.specialty);
+            });
+        });
+        
+        // Initialize on load
+        init();
+    </script>
+</body>
+</html>
