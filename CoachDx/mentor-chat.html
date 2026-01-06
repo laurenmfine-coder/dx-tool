@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CoachDx - AI Attending Session</title>
+    <title>CoachDx - Clinical Coaching Session</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -136,11 +136,15 @@
             </a>
             <div class="case-info">
                 <span class="case-badge" id="caseBadge">Loading...</span>
+                <span class="coach-badge" id="coachBadge" style="background:#dcfce7;padding:6px 12px;border-radius:6px;font-size:13px;margin-left:8px;">
+                    <span id="coachAvatarSmall">👩‍⚕️</span> <span id="coachNameSmall">Dr. Chen</span>
+                </span>
                 <span class="timer" id="timer">00:00</span>
             </div>
             <nav class="nav-links">
+                <a href="coachdx-dashboard.html" class="nav-link">Dashboard</a>
                 <a href="case-library.html" class="nav-link">All Cases</a>
-                <a href="../unified-scoreboard.html" class="nav-link">🏆 Scoreboard</a>
+                <a href="sbar-trainer.html" class="nav-link">📞 SBAR</a>
                 <button class="nav-link" onclick="endSession()" style="background:none;border:none;cursor:pointer;">End Session</button>
             </nav>
         </div>
@@ -191,10 +195,72 @@
         </div>
     </div>
     
-    <!-- Load external cases file -->
+    <!-- Load integration code first -->
+    <script src="coachdx-integration.js"></script>
+    
+    <!-- Load core cases file -->
     <script src="coachdx-cases-merged.js"></script>
     
+    <!-- Discipline-specific cases loaded dynamically based on role -->
+    
     <script>
+    // ============================================================
+    // INTERPROFESSIONAL INTEGRATION
+    // ============================================================
+    
+    // Coach personas (from integration file or fallback)
+    const COACH_PERSONAS = window.COACH_PERSONAS || {
+        'md-do': { name: 'Dr. Sarah Chen', title: 'Attending Physician', avatar: '👩‍⚕️' },
+        'nursing': { name: 'Rachel Torres, RN', title: 'Charge Nurse', avatar: '👩‍⚕️' },
+        'ems': { name: 'Captain Mike Rodriguez', title: 'Field Supervisor', avatar: '🚑' },
+        'rt': { name: 'Jennifer Park, RRT', title: 'Lead RT', avatar: '🫁' },
+        'resident': { name: 'Dr. David Kim', title: 'Senior Resident', avatar: '👨‍🔬' }
+    };
+    
+    // Get current role and coach
+    function getCurrentRole() {
+        return localStorage.getItem('dxRole') || 'md-do';
+    }
+    
+    function getCurrentCoach() {
+        const role = getCurrentRole();
+        return COACH_PERSONAS[role] || COACH_PERSONAS['md-do'];
+    }
+    
+    // Load discipline-specific cases
+    async function loadDisciplineCases() {
+        const role = getCurrentRole();
+        
+        const caseFiles = {
+            'md-do': [],
+            'pa': [],
+            'nursing': ['coachdx-nursing-cases.js'],
+            'ems': ['coachdx-ems-cases.js'],
+            'rt': ['coachdx-rt-cases.js'],
+            'resident': ['coachdx-resident-cases.js', 'coachdx-specialty-cases.js'],
+            'professional': ['coachdx-nursing-cases.js', 'coachdx-ems-cases.js', 'coachdx-rt-cases.js', 'coachdx-resident-cases.js']
+        };
+        
+        const filesToLoad = caseFiles[role] || [];
+        
+        for (const file of filesToLoad) {
+            try {
+                await new Promise((resolve, reject) => {
+                    const script = document.createElement('script');
+                    script.src = file;
+                    script.onload = resolve;
+                    script.onerror = reject;
+                    document.head.appendChild(script);
+                });
+                console.log(`✓ Loaded ${file}`);
+            } catch (error) {
+                console.warn(`Could not load ${file}:`, error);
+            }
+        }
+        
+        console.log(`Cases loaded for role: ${role}`);
+    }
+    
     // ============================================================
     // STATE & INITIALIZATION
     // ============================================================
@@ -216,7 +282,21 @@
         parallelPairId: null
     };
 
-    function init() {
+    async function init() {
+        // Load discipline-specific cases first
+        await loadDisciplineCases();
+        
+        // Merge any loaded discipline cases
+        const allCases = { ...CASES };
+        if (typeof COACHDX_NURSING_CASES !== 'undefined') Object.assign(allCases, COACHDX_NURSING_CASES);
+        if (typeof COACHDX_EMS_CASES !== 'undefined') Object.assign(allCases, COACHDX_EMS_CASES);
+        if (typeof COACHDX_RT_CASES !== 'undefined') Object.assign(allCases, COACHDX_RT_CASES);
+        if (typeof COACHDX_RESIDENT_CASES !== 'undefined') Object.assign(allCases, COACHDX_RESIDENT_CASES);
+        if (typeof COACHDX_SPECIALTY_CASES !== 'undefined') Object.assign(allCases, COACHDX_SPECIALTY_CASES);
+        
+        // Update global CASES reference
+        Object.assign(CASES, allCases);
+        
         const urlParams = new URLSearchParams(window.location.search);
         const caseId = urlParams.get('case') || 'chest-pain-acs';
         
@@ -229,6 +309,11 @@
             document.getElementById('chatMessages').innerHTML = '<p style="padding:20px;color:#dc2626;">Error: Could not load case. Please check that coachdx-cases-merged.js is in the same directory.</p>';
             return;
         }
+        
+        // Update coach display based on role
+        const coach = getCurrentCoach();
+        document.getElementById('coachAvatarSmall').textContent = coach.avatar;
+        document.getElementById('coachNameSmall').textContent = coach.name;
         
         // Track parallel case info
         session.isParallelCase = currentCase.isParallel || false;
@@ -243,14 +328,32 @@
         renderParallelIndicator();
         renderRelatedContent();
         
+        // Add SBAR button if case has SBAR scenario
+        if (currentCase.sbarScenario) {
+            renderSBARButton();
+        }
+        
         // Start timer
         timerInterval = setInterval(updateTimer, 1000);
         
-        // Opening message
+        // Opening message from coach
         setTimeout(() => {
             addMessage(currentCase.openingStatement, 'attending');
             conversationHistory.push({ role: 'assistant', content: currentCase.openingStatement });
         }, 500);
+    }
+    
+    function renderSBARButton() {
+        const quickActionsContainer = document.getElementById('quickActions');
+        const sbarBtn = document.createElement('button');
+        sbarBtn.className = 'quick-btn';
+        sbarBtn.style.background = '#fef3c7';
+        sbarBtn.style.color = '#92400e';
+        sbarBtn.innerHTML = '📞 Practice SBAR';
+        sbarBtn.onclick = () => {
+            window.location.href = `sbar-trainer.html?case=${currentCase.id}`;
+        };
+        quickActionsContainer.appendChild(sbarBtn);
     }
 
     function updateTimer() {
@@ -264,11 +367,13 @@
     function addMessage(text, sender) {
         const container = document.getElementById('chatMessages');
         const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        const coach = getCurrentCoach();
+        const senderName = sender === 'attending' ? coach.name : 'You';
         
         container.innerHTML += `
             <div class="message ${sender}">
                 <div class="message-bubble">${text}</div>
-                <div class="message-meta">${sender === 'attending' ? 'Dr. Chen' : 'You'} • ${time}</div>
+                <div class="message-meta">${senderName} • ${time}</div>
             </div>
         `;
         container.scrollTop = container.scrollHeight;
