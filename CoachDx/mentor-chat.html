@@ -198,11 +198,17 @@
     <!-- Load rate limiter first -->
     <script src="dx-rate-limiter.js"></script>
     
+    <!-- Load progress tracker -->
+    <script src="dx-progress-tracker.js"></script>
+    
     <!-- Load integration code -->
     <script src="coachdx-integration.js"></script>
     
     <!-- Load core cases file -->
     <script src="coachdx-cases-merged.js"></script>
+    
+    <!-- Load interprofessional cases with SBAR integration -->
+    <script src="coachdx-interprofessional-cases.js"></script>
     
     <!-- Discipline-specific cases loaded dynamically based on role -->
     
@@ -443,6 +449,13 @@
     }
 
     async function init() {
+        // Ensure student is registered for progress tracking
+        if (typeof DxProgressTracker !== 'undefined') {
+            DxProgressTracker.ensureStudentRegistered((student) => {
+                console.log('Student registered:', student?.name || 'Anonymous');
+            });
+        }
+        
         // Load discipline-specific cases first
         await loadDisciplineCases();
         
@@ -453,6 +466,7 @@
         if (typeof COACHDX_RT_CASES !== 'undefined') Object.assign(allCases, COACHDX_RT_CASES);
         if (typeof COACHDX_RESIDENT_CASES !== 'undefined') Object.assign(allCases, COACHDX_RESIDENT_CASES);
         if (typeof COACHDX_SPECIALTY_CASES !== 'undefined') Object.assign(allCases, COACHDX_SPECIALTY_CASES);
+        if (typeof COACHDX_INTERPROFESSIONAL_CASES !== 'undefined') Object.assign(allCases, COACHDX_INTERPROFESSIONAL_CASES);
         
         // Update global CASES reference
         Object.assign(CASES, allCases);
@@ -468,6 +482,15 @@
         if (!currentCase) {
             document.getElementById('chatMessages').innerHTML = '<p style="padding:20px;color:#dc2626;">Error: Could not load case. Please check that coachdx-cases-merged.js is in the same directory.</p>';
             return;
+        }
+        
+        // Track case start for progress
+        if (typeof DxProgressTracker !== 'undefined') {
+            DxProgressTracker.recordCaseStart(
+                currentCase.id || caseId,
+                currentCase.title,
+                currentCase.category
+            );
         }
         
         // Update coach display based on role
