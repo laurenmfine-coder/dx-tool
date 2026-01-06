@@ -195,7 +195,10 @@
         </div>
     </div>
     
-    <!-- Load integration code first -->
+    <!-- Load rate limiter first -->
+    <script src="dx-rate-limiter.js"></script>
+    
+    <!-- Load integration code -->
     <script src="coachdx-integration.js"></script>
     
     <!-- Load core cases file -->
@@ -733,6 +736,15 @@
     }
 
     async function generateResponse(userMessage) {
+        // Check rate limit before making API call
+        if (typeof DxRateLimiter !== 'undefined') {
+            const limitCheck = DxRateLimiter.canMakeRequest('coachChat');
+            if (!limitCheck.allowed) {
+                DxRateLimiter.showLimitModal(limitCheck.message);
+                return "I'd love to continue our discussion, but you've reached your daily practice limit. Come back tomorrow to continue learning!";
+            }
+        }
+        
         // First check for defined responses in the case
         const definedResponses = currentCase.defined_responses || {};
         const messageLower = userMessage.toLowerCase();
@@ -747,6 +759,11 @@
         // Try Cloudflare worker for AI response
         try {
             const WORKER_URL = 'https://coachdx-attending.laurenmfine.workers.dev';
+            
+            // Record usage before API call
+            if (typeof DxRateLimiter !== 'undefined') {
+                DxRateLimiter.recordUsage('coachChat');
+            }
             
             const response = await fetch(WORKER_URL, {
                 method: 'POST',
