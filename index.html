@@ -408,9 +408,7 @@
                 <div class="level-section" id="levelSection">
                     <div class="level-title">What's your level?</div>
                     <div class="level-options" id="levelOptions">
-                        <button class="level-btn" data-level="beginner">Pre-clinical / Beginner</button>
-                        <button class="level-btn" data-level="intermediate">Clinical / Intermediate</button>
-                        <button class="level-btn" data-level="advanced">Advanced / Practicing</button>
+                        <!-- Options updated dynamically based on role -->
                     </div>
                 </div>
                 
@@ -499,15 +497,15 @@
             'professional': { name: 'Clinical Advisor', title: 'CE Instructor', avatar: '🎓', role: 'Your continuing education guide' }
         };
         
-        // Platform URLs by role - these link to dashboard in same folder
+        // Platform URLs by role - dashboard is in CoachDx folder
         const platformUrls = {
-            'md-do': 'coachdx-dashboard.html?role=md-do',
-            'pa': 'coachdx-dashboard.html?role=pa',
-            'nursing': 'coachdx-dashboard.html?role=nursing',
-            'ems': 'coachdx-dashboard.html?role=ems',
-            'rt': 'coachdx-dashboard.html?role=rt',
-            'resident': 'coachdx-dashboard.html?role=resident',
-            'professional': 'coachdx-dashboard.html?role=professional'
+            'md-do': 'CoachDx/coachdx-dashboard.html?role=md-do',
+            'pa': 'CoachDx/coachdx-dashboard.html?role=pa',
+            'nursing': 'CoachDx/coachdx-dashboard.html?role=nursing',
+            'ems': 'CoachDx/coachdx-dashboard.html?role=ems',
+            'rt': 'CoachDx/coachdx-dashboard.html?role=rt',
+            'resident': 'CoachDx/coachdx-dashboard.html?role=resident',
+            'professional': 'CoachDx/coachdx-dashboard.html?role=professional'
         };
         
         // DOM Elements
@@ -531,6 +529,60 @@
             }
         }
         
+        // Level options by role type
+        const levelOptionsByRole = {
+            'student': [
+                { level: 'preclinical', label: 'Pre-clinical / Year 1-2' },
+                { level: 'clinical', label: 'Clinical / Year 3-4' },
+                { level: 'advanced', label: 'Advanced / Sub-I' }
+            ],
+            'resident': [
+                { level: 'pgy1', label: 'PGY-1 (Intern)' },
+                { level: 'pgy2-3', label: 'PGY-2/3' },
+                { level: 'senior', label: 'Senior / Chief' }
+            ],
+            'professional': [
+                { level: 'refresh', label: 'Refresher / Review' },
+                { level: 'advanced', label: 'Advanced Practice' },
+                { level: 'specialty', label: 'Specialty Focus' }
+            ]
+        };
+        
+        // Map roles to level types
+        const roleLevelType = {
+            'md-do': 'student',
+            'pa': 'student',
+            'nursing': 'student',
+            'ems': 'student',
+            'rt': 'student',
+            'resident': 'resident',
+            'professional': 'professional'
+        };
+        
+        // Render level options based on role
+        function renderLevelOptions(role) {
+            const levelType = roleLevelType[role] || 'student';
+            const options = levelOptionsByRole[levelType];
+            const container = document.getElementById('levelOptions');
+            
+            container.innerHTML = options.map(opt => 
+                `<button class="level-btn" data-level="${opt.level}">${opt.label}</button>`
+            ).join('');
+            
+            // Re-attach event listeners
+            document.querySelectorAll('.level-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                    selectedLevel = btn.dataset.level;
+                    
+                    // Show enter section
+                    enterSection.classList.add('visible');
+                    updateEnterButton();
+                });
+            });
+        }
+        
         // Role selection
         roleCards.forEach(card => {
             card.addEventListener('click', () => {
@@ -539,9 +591,16 @@
                 // Select this one
                 card.classList.add('selected');
                 selectedRole = card.dataset.role;
+                selectedLevel = null; // Reset level when role changes
+                
+                // Update level options based on role
+                renderLevelOptions(selectedRole);
                 
                 // Show level section
                 levelSection.classList.add('visible');
+                
+                // Hide enter section until level selected
+                enterSection.classList.remove('visible');
                 
                 // Update coach preview
                 const coach = coachPersonas[selectedRole];
@@ -556,19 +615,6 @@
             });
         });
         
-        // Level selection
-        levelBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                levelBtns.forEach(b => b.classList.remove('selected'));
-                btn.classList.add('selected');
-                selectedLevel = btn.dataset.level;
-                
-                // Show enter section
-                enterSection.classList.add('visible');
-                updateEnterButton();
-            });
-        });
-        
         // Update enter button
         function updateEnterButton() {
             enterBtn.disabled = !(selectedRole && selectedLevel);
@@ -577,6 +623,10 @@
         // Enter platform
         enterBtn.addEventListener('click', () => {
             if (selectedRole && selectedLevel) {
+                // Save to localStorage for other pages to read
+                localStorage.setItem('dxRole', selectedRole);
+                localStorage.setItem('dxLevel', selectedLevel);
+                
                 // Save preferences if checked
                 if (rememberMe.checked) {
                     localStorage.setItem('dxEcosystemPreferences', JSON.stringify({
