@@ -1199,6 +1199,26 @@
                 ],
                 abnormalVitals: { temp: [98.4, 99.2], hr: [100, 120], sbp: [150, 175], rr: [28, 36], spo2: [86, 92] }
             },
+            'rt-vent': {
+                admissionReasons: ['ARDS', 'Pneumonia', 'Post-cardiac arrest', 'Respiratory failure', 'Septic shock'],
+                currentConcerns: [
+                    'ABG worsening despite current settings. pH 7.25, CO2 rising.',
+                    'Peak pressures increasing, suspect mucus plug or worsening compliance.',
+                    'Patient fighting the vent, may need sedation adjustment.',
+                    'Plateau pressures high, concerned about lung protection.'
+                ],
+                abnormalVitals: { temp: [98.6, 100.5], hr: [90, 120], sbp: [110, 145], rr: [14, 22], spo2: [88, 94] }
+            },
+            'rt-wean': {
+                admissionReasons: ['Post-op respiratory failure', 'Pneumonia - improving', 'COPD - improving', 'CHF - diuresed'],
+                currentConcerns: [
+                    'Passed SBT, RSBI 45, good cough and gag. Recommend extubation.',
+                    'NIF -35, following commands, minimal secretions. Ready for trial.',
+                    'Failed yesterday but looking better today. Recommend another SBT.',
+                    'Borderline RSBI but clinically looks good. Want to discuss trial.'
+                ],
+                abnormalVitals: { temp: [98.2, 99.0], hr: [75, 95], sbp: [115, 140], rr: [14, 20], spo2: [94, 98] }
+            },
             'shift-handoff': {
                 admissionReasons: ['CHF exacerbation', 'Pneumonia', 'COPD', 'Post-op day 1'],
                 currentConcerns: [
@@ -1208,14 +1228,47 @@
                 ],
                 abnormalVitals: { temp: [98.6, 99.4], hr: [75, 95], sbp: [115, 135], rr: [16, 20], spo2: [93, 96] }
             },
-            'medication-error': {
-                admissionReasons: ['Pneumonia', 'CHF', 'Post-op', 'DKA'],
+            'transfer': {
+                admissionReasons: ['Sepsis - improving', 'Post-ICU step down', 'NSTEMI - stable', 'DKA - resolved', 'Resp failure - improving'],
+                currentConcerns: [
+                    'Stable for transfer to floor. Off pressors x 24 hours.',
+                    'Improved, can step down from ICU. Still on 3L O2.',
+                    'Ready for discharge planning. PT cleared for home.',
+                    'Transferring for higher level of care - worsening respiratory status.'
+                ],
+                abnormalVitals: { temp: [98.4, 99.2], hr: [75, 95], sbp: [110, 135], rr: [16, 22], spo2: [92, 97] }
+            },
+            'deteriorating-cardiac': {
+                admissionReasons: ['Pneumonia', 'CHF', 'COPD', 'Post-op', 'Sepsis', 'Syncope workup'],
+                currentConcerns: [
+                    'New atrial fibrillation with rapid ventricular response, rate 150s.',
+                    'Went into SVT, patient feels palpitations and lightheaded.',
+                    'New bradycardia, rate in 40s, patient feeling weak.',
+                    'Frequent PVCs, patient complaining of chest discomfort.',
+                    'Telemetry showing runs of NSVT.'
+                ],
+                abnormalVitals: { temp: [98.4, 99.0], hr: [45, 160], sbp: [90, 170], rr: [18, 26], spo2: [92, 97] }
+            },
+            'medication': {
+                admissionReasons: ['DKA', 'CHF', 'Pneumonia', 'Post-op', 'Sepsis', 'Renal failure'],
                 currentConcerns: [
                     'Patient received wrong dose of insulin - 50 units instead of 5. Glucose now 45.',
                     'Medication given that patient is allergic to. Watching for reaction.',
-                    'Double dose of blood pressure medication given. BP now 85/50.'
+                    'Double dose of blood pressure medication given. BP now 85/50.',
+                    'Potassium given but K+ was already 5.8. Need to recheck.',
+                    'Question about antibiotic dose - seems high for renal function.'
                 ],
-                abnormalVitals: { temp: [98.4, 98.8], hr: [95, 120], sbp: [80, 95], rr: [18, 24], spo2: [95, 98] }
+                abnormalVitals: { temp: [98.4, 98.8], hr: [70, 120], sbp: [75, 140], rr: [16, 24], spo2: [95, 99] }
+            },
+            'ems-general': {
+                admissionReasons: ['Field - medical'],
+                currentConcerns: [
+                    'Abdominal pain x 2 days, now with vomiting. Unable to keep anything down.',
+                    'Weakness and dizziness, found on floor by family.',
+                    'Shortness of breath, worse over past 3 days. Ankle swelling.',
+                    'Fever and cough x 5 days, now more confused per family.'
+                ],
+                abnormalVitals: { temp: [98.0, 102.0], hr: [80, 115], sbp: [100, 160], rr: [18, 26], spo2: [90, 98] }
             }
         };
         
@@ -1559,6 +1612,28 @@
                     recommendation: ['BiPAP', 'RT', 'evaluate', 'ABG']
                 }
             },
+            'deteriorating-neuro': {
+                title: 'New Neurological Changes',
+                details: 'Your patient has developed new neurological symptoms. You need to communicate this urgent change.',
+                patient: { name: 'Mr. Robert Hayes', age: 71, sex: 'M', room: '3205', dx: 'Atrial fibrillation' },
+                expectedElements: {
+                    situation: ['neuro change', 'new symptoms', 'concern'],
+                    background: ['admitted', 'baseline neuro', 'anticoagulation'],
+                    assessment: ['exam findings', 'pupils', 'weakness', 'speech', 'stroke'],
+                    recommendation: ['evaluate', 'CT', 'stroke alert', 'NIH stroke scale']
+                }
+            },
+            'deteriorating-cardiac': {
+                title: 'Cardiac Rhythm Changes',
+                details: 'Your patient has developed a new arrhythmia or significant rhythm change. You need to communicate this urgently.',
+                patient: { name: 'Mrs. Helen Garcia', age: 66, sex: 'F', room: '4102', dx: 'Pneumonia' },
+                expectedElements: {
+                    situation: ['rhythm change', 'new arrhythmia', 'concern'],
+                    background: ['admitted', 'cardiac history', 'baseline rhythm'],
+                    assessment: ['current rhythm', 'rate', 'vitals', 'symptoms'],
+                    recommendation: ['evaluate', 'ECG', 'labs', 'telemetry']
+                }
+            },
             'chest-pain': {
                 title: 'New Chest Pain',
                 details: 'Your patient who was admitted for pneumonia just developed chest pain. You need to communicate this urgently.',
@@ -1568,6 +1643,39 @@
                     background: ['pneumonia', 'admitted', 'cardiac history'],
                     assessment: ['vitals', 'ECG', 'diaphoretic', 'concerned'],
                     recommendation: ['ECG', 'troponin', 'evaluate', 'aspirin']
+                }
+            },
+            'bleeding': {
+                title: 'Active Bleeding',
+                details: 'Your patient has developed signs of active bleeding. You need to communicate this urgent situation.',
+                patient: { name: 'Mr. Samuel Brooks', age: 74, sex: 'M', room: '2315', dx: 'DVT on anticoagulation' },
+                expectedElements: {
+                    situation: ['bleeding', 'blood loss', 'concern'],
+                    background: ['anticoagulation', 'admitted', 'baseline'],
+                    assessment: ['vitals', 'hemoglobin', 'source', 'amount'],
+                    recommendation: ['evaluate', 'type and screen', 'hold anticoag', 'IV access']
+                }
+            },
+            'fall': {
+                title: 'Patient Fall with Injury',
+                details: 'Your patient has fallen and sustained an injury. You need to report this and get appropriate evaluation.',
+                patient: { name: 'Mrs. Dorothy Phillips', age: 79, sex: 'F', room: '3108', dx: 'UTI' },
+                expectedElements: {
+                    situation: ['fall', 'found', 'injury'],
+                    background: ['admitted', 'fall risk', 'anticoagulation', 'baseline'],
+                    assessment: ['injuries', 'neuro status', 'pain', 'witnessed'],
+                    recommendation: ['evaluate', 'CT head', 'x-ray', 'neuro checks']
+                }
+            },
+            'medication': {
+                title: 'Medication Concern',
+                details: 'There is a medication concern that needs to be addressed - either an error, adverse reaction, or question about orders.',
+                patient: { name: 'Mr. George Watson', age: 62, sex: 'M', room: '4018', dx: 'DKA' },
+                expectedElements: {
+                    situation: ['medication', 'concern', 'error', 'reaction'],
+                    background: ['current meds', 'allergies', 'what happened'],
+                    assessment: ['patient status', 'vitals', 'symptoms'],
+                    recommendation: ['evaluate', 'orders', 'antidote', 'monitoring']
                 }
             },
             'ems-stemi': {
@@ -1581,6 +1689,39 @@
                     recommendation: ['activate cath lab', 'ETA', 'aspirin given']
                 }
             },
+            'ems-stroke': {
+                title: 'Stroke Alert Radio Report',
+                details: 'You\'re transporting a patient with acute stroke symptoms. Alert the ED for stroke team activation.',
+                patient: { name: 'Mrs. Linda Martinez', age: 67, sex: 'F', room: 'Field', dx: 'Acute stroke symptoms' },
+                expectedElements: {
+                    situation: ['stroke alert', 'acute symptoms', 'ETA'],
+                    background: ['last known well', 'symptom onset', 'history'],
+                    assessment: ['neuro deficits', 'LAMS/CPSS', 'blood glucose', 'vitals'],
+                    recommendation: ['stroke team', 'CT ready', 'ETA', 'weight']
+                }
+            },
+            'ems-trauma': {
+                title: 'Trauma Alert Radio Report',
+                details: 'You\'re transporting a trauma patient. Alert the ED with your trauma report.',
+                patient: { name: 'Mr. Kevin Sullivan', age: 34, sex: 'M', room: 'Field', dx: 'MVC trauma' },
+                expectedElements: {
+                    situation: ['trauma alert', 'mechanism', 'ETA'],
+                    background: ['incident', 'mechanism of injury', 'scene'],
+                    assessment: ['injuries', 'vitals', 'GCS', 'interventions'],
+                    recommendation: ['trauma team', 'blood available', 'ETA']
+                }
+            },
+            'ems-general': {
+                title: 'General ED Radio Report',
+                details: 'You\'re transporting a patient to the ED. Provide a clear handoff report.',
+                patient: { name: 'Mrs. Barbara Nelson', age: 72, sex: 'F', room: 'Field', dx: 'Abdominal pain' },
+                expectedElements: {
+                    situation: ['chief complaint', 'en route', 'ETA'],
+                    background: ['history', 'onset', 'medications'],
+                    assessment: ['vitals', 'exam findings', 'interventions'],
+                    recommendation: ['bed assignment', 'ETA', 'any needs']
+                }
+            },
             'rt-bipap': {
                 title: 'BiPAP Recommendation',
                 details: 'Your patient has acute hypercapnic respiratory failure. You\'ve assessed them and want to recommend BiPAP to the physician.',
@@ -1592,6 +1733,28 @@
                     recommendation: ['BiPAP', 'settings', 'reassess', 'intubation if']
                 }
             },
+            'rt-vent': {
+                title: 'Ventilator Change Needed',
+                details: 'Your ventilated patient needs a change in settings. Communicate your assessment and recommendation.',
+                patient: { name: 'Mr. Harold Jensen', age: 59, sex: 'M', room: 'ICU 4', dx: 'ARDS' },
+                expectedElements: {
+                    situation: ['vent patient', 'needs change', 'concern'],
+                    background: ['reason intubated', 'current settings', 'course'],
+                    assessment: ['ABG', 'compliance', 'secretions', 'work of breathing'],
+                    recommendation: ['setting changes', 'PEEP', 'FiO2', 'mode']
+                }
+            },
+            'rt-wean': {
+                title: 'Weaning Assessment',
+                details: 'You\'ve completed a weaning assessment and want to discuss readiness for extubation.',
+                patient: { name: 'Mrs. Carol Thompson', age: 63, sex: 'F', room: 'ICU 7', dx: 'Post-op respiratory failure' },
+                expectedElements: {
+                    situation: ['weaning trial', 'assessment complete', 'extubation'],
+                    background: ['reason intubated', 'course', 'prior attempts'],
+                    assessment: ['RSBI', 'NIF', 'cuff leak', 'mental status', 'secretions'],
+                    recommendation: ['extubate', 'SBT results', 'readiness', 'plan if fails']
+                }
+            },
             'shift-handoff': {
                 title: 'Shift-to-Shift Handoff',
                 details: 'You\'re handing off your patient to the oncoming nurse. Provide a complete SBAR handoff.',
@@ -1601,6 +1764,17 @@
                     background: ['admitted', 'history', 'baseline'],
                     assessment: ['current status', 'overnight events', 'concerns'],
                     recommendation: ['to do', 'watch for', 'pending']
+                }
+            },
+            'transfer': {
+                title: 'Transfer to Another Unit',
+                details: 'Your patient is being transferred to another unit (ICU, step-down, or floor). Provide a complete handoff.',
+                patient: { name: 'Mrs. Nancy Wright', age: 55, sex: 'F', room: '3B-15', dx: 'Sepsis - improving' },
+                expectedElements: {
+                    situation: ['transfer', 'patient', 'reason for transfer'],
+                    background: ['admission', 'hospital course', 'treatments'],
+                    assessment: ['current status', 'stability', 'lines/drains'],
+                    recommendation: ['monitoring needs', 'pending', 'family updated']
                 }
             }
         };
@@ -1672,17 +1846,10 @@
                 return;
             }
             
-            // Generate random patient for this scenario (if template exists)
-            if (scenarioTemplates[clinicalScenario]) {
-                generatedPatient = generateRandomPatient(clinicalScenario);
-                currentScenario.patient = generatedPatient;
-                displayPatientChart(generatedPatient);
-            } else {
-                // Use default patient from scenario, hide chart
-                document.getElementById('patientChart').style.display = 'none';
-                const patient = currentScenario.patient;
-                document.getElementById('patientInfo').textContent = `${patient.name}, ${patient.age}${patient.sex}, ${patient.room || 'Room'}`;
-            }
+            // Generate random patient for this scenario
+            generatedPatient = generateRandomPatient(clinicalScenario);
+            currentScenario.patient = generatedPatient;
+            displayPatientChart(generatedPatient);
             
             // Update practice header
             document.getElementById('callerAvatar').textContent = roleAvatars[yourRole] || '👤';

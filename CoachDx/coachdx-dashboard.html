@@ -366,6 +366,52 @@
             color: white;
         }
         
+        .sbar-launch-btn {
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            border: none;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .sbar-launch-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+        }
+        
+        .sbar-btn-icon {
+            font-size: 1.5rem;
+        }
+        
+        .sbar-btn-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            flex: 1;
+        }
+        
+        .sbar-btn-text strong {
+            font-size: 1.1rem;
+        }
+        
+        .sbar-btn-text small {
+            opacity: 0.9;
+            font-size: 0.85rem;
+        }
+        
+        .sbar-btn-arrow {
+            font-size: 1.3rem;
+        }
+        
         /* Progress Section */
         .progress-section {
             background: var(--card-bg);
@@ -524,9 +570,16 @@
         <!-- SBAR Training Section -->
         <div class="sbar-section">
             <h3>📞 SBAR Communication Training</h3>
-            <p id="sbarDescription">Practice structured communication with your healthcare team. Select a scenario:</p>
+            <p id="sbarDescription">Practice structured communication with your healthcare team using realistic scenarios with AI-generated patients.</p>
             <div class="sbar-scenarios" id="sbarScenarios">
-                <!-- Populated by JavaScript based on role -->
+                <button class="sbar-launch-btn" onclick="launchSBAR()">
+                    <span class="sbar-btn-icon">🎯</span>
+                    <span class="sbar-btn-text">
+                        <strong>Start SBAR Practice</strong>
+                        <small>Choose from 17 clinical scenarios</small>
+                    </span>
+                    <span class="sbar-btn-arrow">→</span>
+                </button>
             </div>
         </div>
         
@@ -824,12 +877,6 @@
             document.getElementById('coachdxCases').textContent = config.coachdxCases;
             document.getElementById('reasondxCases').textContent = config.reasondxCases;
             
-            // Update SBAR scenarios
-            const sbarContainer = document.getElementById('sbarScenarios');
-            sbarContainer.innerHTML = config.sbarScenarios.map(s => 
-                `<button class="sbar-scenario-btn" onclick="launchSBAR('${s.scenario}')">${s.label}</button>`
-            ).join('');
-            
             // Update recommended cases
             const casesContainer = document.getElementById('recommendedCases');
             casesContainer.innerHTML = config.recommendedCases.map(c => `
@@ -854,9 +901,10 @@
             window.location.href = '../index.html';
         }
         
-        function launchSBAR(scenario) {
-            // Navigate to SBAR training module with scenario
-            window.location.href = `sbar-trainer.html?scenario=${scenario}&role=${localStorage.getItem('dxRole')}`;
+        function launchSBAR() {
+            // Navigate to SBAR training module with role pre-selected
+            const role = localStorage.getItem('dxRole') || 'nursing';
+            window.location.href = `sbar-trainer.html?role=${role}`;
         }
         
         function launchCase(caseTitle) {
