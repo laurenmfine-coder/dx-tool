@@ -3,311 +3,596 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dx Learning Ecosystem | Clinical Education Platform</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Dx Learning Ecosystem - Interprofessional Clinical Reasoning</title>
     <style>
+        :root {
+            --primary: #1E3A5F;
+            --primary-light: #2563EB;
+            --secondary: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --bg: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text: #1F2937;
+            --text-light: #6B7280;
+            --border: #E5E7EB;
+        }
+        
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', system-ui, sans-serif; background: #fafafa; color: #18181b; line-height: 1.6; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1E3A5F 0%, #2563EB 100%);
+            min-height: 100vh;
+            color: var(--text);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
         
         /* Header */
         .header {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            padding: 48px 24px 64px;
             text-align: center;
+            padding: 40px 20px;
             color: white;
         }
+        
         .header h1 {
-            font-size: 36px;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
             font-weight: 700;
-            margin-bottom: 12px;
-            letter-spacing: -1px;
-        }
-        .header p {
-            font-size: 18px;
-            color: #94a3b8;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .tagline {
-            font-family: Georgia, 'Times New Roman', serif;
-            font-style: italic;
-            color: #cbd5e1;
-            margin-top: 16px;
-            font-size: 16px;
         }
         
-        /* Platform Cards */
-        .platforms {
-            max-width: 1100px;
-            margin: -40px auto 64px;
-            padding: 0 24px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 24px;
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
         }
         
-        .platform-card {
-            background: #fff;
+        /* Main Card */
+        .main-card {
+            background: var(--card-bg);
             border-radius: 20px;
-            padding: 32px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.3s;
-            border: 2px solid transparent;
-            display: flex;
-            flex-direction: column;
-        }
-        .platform-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin-bottom: 30px;
         }
         
-        .platform-card.reason { border-color: #3b82f6; }
-        .platform-card.reason:hover { background: linear-gradient(135deg, #eff6ff 0%, #fff 100%); }
-        
-        .platform-card.mechanism { border-color: #10b981; }
-        .platform-card.mechanism:hover { background: linear-gradient(135deg, #ecfdf5 0%, #fff 100%); }
-        
-        .platform-card.coach { border-color: #8b5cf6; }
-        .platform-card.coach:hover { background: linear-gradient(135deg, #f5f3ff 0%, #fff 100%); }
-        
-        .platform-icon {
-            font-size: 48px;
-            margin-bottom: 16px;
+        .card-header {
+            background: linear-gradient(135deg, #F8FAFC 0%, #E5E7EB 100%);
+            padding: 30px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
         }
-        .platform-name {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 8px;
+        
+        .card-header h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .card-header p {
+            color: var(--text-light);
+        }
+        
+        .card-body {
+            padding: 30px;
+        }
+        
+        /* Role Selection */
+        .role-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .role-card {
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .role-card:hover {
+            border-color: var(--primary-light);
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .role-card.selected {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+            box-shadow: 0 4px 20px rgba(30, 58, 95, 0.2);
+        }
+        
+        .role-card.selected::after {
+            content: '✓';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--primary);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            gap: 12px;
-        }
-        .platform-name .badge {
-            font-size: 11px;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-weight: 600;
-        }
-        .platform-card.reason .badge { background: #dbeafe; color: #1d4ed8; }
-        .platform-card.mechanism .badge { background: #d1fae5; color: #047857; }
-        .platform-card.coach .badge { background: #ede9fe; color: #6d28d9; }
-        
-        .platform-subtitle {
+            justify-content: center;
             font-size: 14px;
-            color: #64748b;
-            margin-bottom: 16px;
         }
-        .platform-desc {
-            font-size: 15px;
-            color: #475569;
-            line-height: 1.7;
-            flex-grow: 1;
+        
+        .role-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
         }
-        .platform-stats {
-            display: flex;
-            gap: 24px;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #e5e7eb;
+        
+        .role-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 5px;
         }
-        .platform-stat {
+        
+        .role-description {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        /* Level Selection */
+        .level-section {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            display: none;
+        }
+        
+        .level-section.visible {
+            display: block;
+        }
+        
+        .level-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 15px;
             text-align: center;
         }
-        .platform-stat-value {
-            font-size: 20px;
-            font-weight: 700;
-            color: #1e293b;
+        
+        .level-options {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
-        .platform-stat-label {
-            font-size: 11px;
-            color: #94a3b8;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        
+        .level-btn {
+            padding: 12px 24px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .level-btn:hover {
+            border-color: var(--primary-light);
+        }
+        
+        .level-btn.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        /* Enter Button */
+        .enter-section {
+            margin-top: 30px;
+            text-align: center;
+            display: none;
+        }
+        
+        .enter-section.visible {
+            display: block;
         }
         
         .enter-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 20px;
-            padding: 12px 24px;
-            border-radius: 10px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            border: none;
+            padding: 16px 48px;
+            font-size: 1.2rem;
             font-weight: 600;
-            font-size: 14px;
-            transition: all 0.2s;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(30, 58, 95, 0.3);
         }
-        .platform-card.reason .enter-btn { background: #3b82f6; color: white; }
-        .platform-card.reason .enter-btn:hover { background: #2563eb; }
-        .platform-card.mechanism .enter-btn { background: #10b981; color: white; }
-        .platform-card.mechanism .enter-btn:hover { background: #059669; }
-        .platform-card.coach .enter-btn { background: #8b5cf6; color: white; }
-        .platform-card.coach .enter-btn:hover { background: #7c3aed; }
         
-        /* Quick Links */
-        .quick-links {
-            max-width: 1100px;
-            margin: 0 auto 64px;
-            padding: 0 24px;
+        .enter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 58, 95, 0.4);
         }
-        .quick-links h2 {
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #64748b;
-            margin-bottom: 16px;
-            text-align: center;
+        
+        .enter-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
         }
-        .quick-links-grid {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-        .quick-link {
-            padding: 10px 20px;
-            background: #fff;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            text-decoration: none;
-            color: #475569;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.2s;
+        
+        .remember-me {
+            margin-top: 15px;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
+            color: var(--text-light);
         }
-        .quick-link:hover {
-            background: #f8fafc;
-            border-color: #cbd5e1;
-            color: #1e293b;
+        
+        .remember-me input {
+            width: 18px;
+            height: 18px;
+        }
+        
+        /* Coach Preview */
+        .coach-preview {
+            margin-top: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%);
+            border-radius: 12px;
+            border: 1px solid #86EFAC;
+            display: none;
+        }
+        
+        .coach-preview.visible {
+            display: block;
+        }
+        
+        .coach-preview h4 {
+            color: #166534;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        
+        .coach-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .coach-avatar {
+            font-size: 3rem;
+        }
+        
+        .coach-details h5 {
+            font-size: 1.1rem;
+            color: var(--text);
+            margin-bottom: 3px;
+        }
+        
+        .coach-details p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        /* Features Grid */
+        .features-section {
+            margin-top: 40px;
+        }
+        
+        .features-title {
+            text-align: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .feature-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 25px;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .feature-card p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
         
         /* Footer */
         .footer {
-            background: #fff;
-            border-top: 1px solid #e5e7eb;
-            padding: 32px 24px;
             text-align: center;
-            color: #94a3b8;
-            font-size: 13px;
+            color: rgba(255,255,255,0.7);
+            padding: 30px;
+            font-size: 0.9rem;
+        }
+        
+        .footer a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.8rem; }
+            .role-grid { grid-template-columns: 1fr; }
+            .level-options { flex-direction: column; }
+            .level-btn { width: 100%; }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <h1>Dx Learning Ecosystem</h1>
-        <p>A comprehensive clinical education platform integrating reasoning, pathophysiology, and AI-powered coaching.</p>
-        <div class="tagline">Asking the right questions can change everything.</div>
-    </header>
-    
-    <!-- Platform Cards -->
-    <section class="platforms">
-        <!-- ReasonDx -->
-        <a href="ReasonDx/index.html" class="platform-card reason">
-            <div class="platform-icon">🔬</div>
-            <h2 class="platform-name">
-                ReasonDx
-                <span class="badge">Core Platform</span>
-            </h2>
-            <div class="platform-subtitle">Clinical Reasoning Trainer</div>
-            <p class="platform-desc">
-                Work through realistic patient cases, build differential diagnoses, order tests strategically, and develop the diagnostic thinking that defines expert clinicians.
-            </p>
-            <div class="platform-stats">
-                <div class="platform-stat">
-                    <div class="platform-stat-value">200+</div>
-                    <div class="platform-stat-label">Cases</div>
-                </div>
-                <div class="platform-stat">
-                    <div class="platform-stat-value">15</div>
-                    <div class="platform-stat-label">Specialties</div>
-                </div>
-                <div class="platform-stat">
-                    <div class="platform-stat-value">6</div>
-                    <div class="platform-stat-label">Modes</div>
-                </div>
-            </div>
-            <div class="enter-btn">Enter ReasonDx →</div>
-        </a>
-        
-        <!-- MechanismDx -->
-        <a href="mechanism/index.html" class="platform-card mechanism">
-            <div class="platform-icon">⚙️</div>
-            <h2 class="platform-name">
-                MechanismDx
-                <span class="badge">Pathophysiology</span>
-            </h2>
-            <div class="platform-subtitle">Disease Mechanism Mastery</div>
-            <p class="platform-desc">
-                Master the "why" behind diseases. Interactive modules connect pathophysiology to clinical presentation, helping you understand mechanisms that drive symptoms and guide treatment.
-            </p>
-            <div class="platform-stats">
-                <div class="platform-stat">
-                    <div class="platform-stat-value">18</div>
-                    <div class="platform-stat-label">Modules</div>
-                </div>
-                <div class="platform-stat">
-                    <div class="platform-stat-value">230+</div>
-                    <div class="platform-stat-label">MCQs</div>
-                </div>
-                <div class="platform-stat">
-                    <div class="platform-stat-value">7</div>
-                    <div class="platform-stat-label">Systems</div>
-                </div>
-            </div>
-            <div class="enter-btn">Enter MechanismDx →</div>
-        </a>
-        
-        <!-- CoachDx -->
-        <a href="CoachDx/index.html" class="platform-card coach">
-            <div class="platform-icon">💬</div>
-            <h2 class="platform-name">
-                CoachDx
-                <span class="badge">AI Coaching</span>
-            </h2>
-            <div class="platform-subtitle">Socratic Learning Partner</div>
-            <p class="platform-desc">
-                Learn through dialogue with an AI mentor that asks probing questions, challenges assumptions, and guides you to deeper understanding—just like a great attending.
-            </p>
-            <div class="platform-stats">
-                <div class="platform-stat">
-                    <div class="platform-stat-value">58+</div>
-                    <div class="platform-stat-label">Cases</div>
-                </div>
-                <div class="platform-stat">
-                    <div class="platform-stat-value">5</div>
-                    <div class="platform-stat-label">AI Coaches</div>
-                </div>
-                <div class="platform-stat">
-                    <div class="platform-stat-value">24/7</div>
-                    <div class="platform-stat-label">Available</div>
-                </div>
-            </div>
-            <div class="enter-btn">Enter CoachDx →</div>
-        </a>
-    </section>
-    
-    <!-- Quick Links -->
-    <section class="quick-links">
-        <h2>Quick Access</h2>
-        <div class="quick-links-grid">
-            <a href="ReasonDx/training.html" class="quick-link">🎯 Start Training</a>
-            <a href="CoachDx/case-library.html" class="quick-link">📚 Case Library</a>
-            <a href="fingerprint-dashboard.html" class="quick-link">🧬 Learning Fingerprint</a>
-            <a href="unified-scoreboard.html" class="quick-link">🏆 Scoreboard</a>
-            <a href="ReasonDx/predict-labs-library.html" class="quick-link">🧪 PredictLabs</a>
-            <a href="ReasonDx/guidelines-audit-tool.html" class="quick-link">📋 Guidelines</a>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🏥 Dx Learning Ecosystem</h1>
+            <p class="subtitle">Interprofessional Clinical Reasoning Training</p>
         </div>
-    </section>
+        
+        <!-- Main Selection Card -->
+        <div class="main-card">
+            <div class="card-header">
+                <h2>Welcome! Let's personalize your experience.</h2>
+                <p>Select your role to access tailored cases, coaching, and resources.</p>
+            </div>
+            
+            <div class="card-body">
+                <!-- Role Selection -->
+                <div class="role-grid" id="roleGrid">
+                    <div class="role-card" data-role="md-do" data-coach="Dr. Sarah Chen" data-coach-title="Attending Physician" data-coach-avatar="👩‍⚕️">
+                        <div class="role-icon">🩺</div>
+                        <div class="role-title">Medical Student (MD/DO)</div>
+                        <div class="role-description">200+ cases covering all core clerkships and Step prep</div>
+                    </div>
+                    
+                    <div class="role-card" data-role="pa" data-coach="Dr. Marcus Webb" data-coach-title="Supervising Physician" data-coach-avatar="👨‍⚕️">
+                        <div class="role-icon">👨‍⚕️</div>
+                        <div class="role-title">PA Student</div>
+                        <div class="role-description">Primary care focused cases with physician collaboration scenarios</div>
+                    </div>
+                    
+                    <div class="role-card" data-role="nursing" data-coach="Rachel Torres, RN" data-coach-title="Charge Nurse / Preceptor" data-coach-avatar="👩‍⚕️">
+                        <div class="role-icon">💉</div>
+                        <div class="role-title">Nursing Student (RN/BSN)</div>
+                        <div class="role-description">15+ nursing-specific cases: deteriorating patients, medication safety, SBAR</div>
+                    </div>
+                    
+                    <div class="role-card" data-role="ems" data-coach="Captain Mike Rodriguez" data-coach-title="EMS Field Supervisor" data-coach-avatar="🚑">
+                        <div class="role-icon">🚑</div>
+                        <div class="role-title">Paramedic/EMT Student</div>
+                        <div class="role-description">15 prehospital cases: field STEMI, stroke routing, trauma triage</div>
+                    </div>
+                    
+                    <div class="role-card" data-role="rt" data-coach="Jennifer Park, RRT" data-coach-title="Lead Respiratory Therapist" data-coach-avatar="🫁">
+                        <div class="role-icon">🫁</div>
+                        <div class="role-title">Respiratory Therapy Student</div>
+                        <div class="role-description">10 RT cases: ventilator management, ABG interpretation, BiPAP</div>
+                    </div>
+                    
+                    <div class="role-card" data-role="resident" data-coach="Dr. David Kim" data-coach-title="Senior Resident" data-coach-avatar="👨‍🔬">
+                        <div class="role-icon">👨‍🔬</div>
+                        <div class="role-title">Medical Resident</div>
+                        <div class="role-description">15 advanced cases: diagnostic dilemmas, systems issues, communication</div>
+                    </div>
+                    
+                    <div class="role-card" data-role="professional" data-coach="Clinical Advisor" data-coach-title="CE Instructor" data-coach-avatar="🎓">
+                        <div class="role-icon">🎓</div>
+                        <div class="role-title">Practicing Professional</div>
+                        <div class="role-description">Continuing education cases across all disciplines</div>
+                    </div>
+                </div>
+                
+                <!-- Level Selection -->
+                <div class="level-section" id="levelSection">
+                    <div class="level-title">What's your level?</div>
+                    <div class="level-options" id="levelOptions">
+                        <button class="level-btn" data-level="beginner">Pre-clinical / Beginner</button>
+                        <button class="level-btn" data-level="intermediate">Clinical / Intermediate</button>
+                        <button class="level-btn" data-level="advanced">Advanced / Practicing</button>
+                    </div>
+                </div>
+                
+                <!-- Coach Preview -->
+                <div class="coach-preview" id="coachPreview">
+                    <h4>Your Clinical Coach</h4>
+                    <div class="coach-info">
+                        <div class="coach-avatar" id="coachAvatar">👩‍⚕️</div>
+                        <div class="coach-details">
+                            <h5 id="coachName">Dr. Sarah Chen</h5>
+                            <p id="coachTitle">Attending Physician</p>
+                            <p id="coachRole">Your mentor throughout your learning journey</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Enter Button -->
+                <div class="enter-section" id="enterSection">
+                    <button class="enter-btn" id="enterBtn" disabled>Enter Platform →</button>
+                    <div class="remember-me">
+                        <input type="checkbox" id="rememberMe" checked>
+                        <label for="rememberMe">Remember my preferences</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Features -->
+        <div class="features-section">
+            <h2 class="features-title">Three Integrated Platforms</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>🧠 CoachDx</h3>
+                    <p>AI-powered Socratic coaching with discipline-specific mentors. Practice clinical reasoning with real-time feedback and SBAR communication training.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔬 ReasonDx</h3>
+                    <p>Interactive case-based learning. Build illness scripts, practice differentials, and develop systematic clinical reasoning patterns.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>⚙️ MechanismDx</h3>
+                    <p>Master the pathophysiology behind clinical presentations. 18 modules covering cardiology, pulmonology, nephrology, and more.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SBAR Feature Highlight -->
+        <div class="features-section" style="margin-top: 30px;">
+            <h2 class="features-title">📞 Interprofessional SBAR Training</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>🔄 Bidirectional Practice</h3>
+                    <p>Practice giving AND receiving SBAR communications. Nurses call physicians, EMS calls ED, RTs recommend interventions.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🎭 Role-Based Scenarios</h3>
+                    <p>Select your role and who you're calling. Experience realistic responses from AI-powered team members.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🤝 Cross-Discipline Understanding</h3>
+                    <p>See the same patient from different perspectives. Build empathy and communication skills across professions.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2026 Lauren Fine, MD, FAAAAI | Nova Southeastern University</p>
+            <p style="margin-top: 5px;">Dr. Kiran C. Patel College of Allopathic Medicine</p>
+        </div>
+    </div>
     
-    <!-- Footer -->
-    <footer class="footer">
-        <p>Dx Learning Ecosystem — Built for medical education</p>
-        <p style="margin-top: 8px; font-size: 12px; color: #64748b;">© 2025-2026 · Created by Lauren Fine, MD, FAAAAI · Nova Southeastern University</p>
-    </footer>
+    <script>
+        // State
+        let selectedRole = null;
+        let selectedLevel = null;
+        
+        // Coach personas by role
+        const coachPersonas = {
+            'md-do': { name: 'Dr. Sarah Chen', title: 'Attending Physician', avatar: '👩‍⚕️', role: 'Your attending on this rotation' },
+            'pa': { name: 'Dr. Marcus Webb', title: 'Supervising Physician', avatar: '👨‍⚕️', role: 'Your supervising physician' },
+            'nursing': { name: 'Rachel Torres, RN', title: 'Charge Nurse', avatar: '👩‍⚕️', role: 'Your preceptor today' },
+            'ems': { name: 'Captain Mike Rodriguez', title: 'Field Supervisor', avatar: '🚑', role: 'Your FTO (Field Training Officer)' },
+            'rt': { name: 'Jennifer Park, RRT', title: 'Lead Respiratory Therapist', avatar: '🫁', role: 'Your clinical preceptor' },
+            'resident': { name: 'Dr. David Kim', title: 'Senior Resident', avatar: '👨‍🔬', role: 'Your senior on service' },
+            'professional': { name: 'Clinical Advisor', title: 'CE Instructor', avatar: '🎓', role: 'Your continuing education guide' }
+        };
+        
+        // Platform URLs by role
+        const platformUrls = {
+            'md-do': 'coachdx-dashboard.html?role=md-do',
+            'pa': 'coachdx-dashboard.html?role=pa',
+            'nursing': 'coachdx-dashboard.html?role=nursing',
+            'ems': 'coachdx-dashboard.html?role=ems',
+            'rt': 'coachdx-dashboard.html?role=rt',
+            'resident': 'coachdx-dashboard.html?role=resident',
+            'professional': 'coachdx-dashboard.html?role=professional'
+        };
+        
+        // DOM Elements
+        const roleCards = document.querySelectorAll('.role-card');
+        const levelSection = document.getElementById('levelSection');
+        const levelBtns = document.querySelectorAll('.level-btn');
+        const enterSection = document.getElementById('enterSection');
+        const enterBtn = document.getElementById('enterBtn');
+        const coachPreview = document.getElementById('coachPreview');
+        const rememberMe = document.getElementById('rememberMe');
+        
+        // Check for saved preferences
+        function loadSavedPreferences() {
+            const saved = localStorage.getItem('dxEcosystemPreferences');
+            if (saved) {
+                const prefs = JSON.parse(saved);
+                if (prefs.role && prefs.level) {
+                    // Auto-redirect if preferences saved
+                    window.location.href = platformUrls[prefs.role] + '&level=' + prefs.level;
+                }
+            }
+        }
+        
+        // Role selection
+        roleCards.forEach(card => {
+            card.addEventListener('click', () => {
+                // Deselect all
+                roleCards.forEach(c => c.classList.remove('selected'));
+                // Select this one
+                card.classList.add('selected');
+                selectedRole = card.dataset.role;
+                
+                // Show level section
+                levelSection.classList.add('visible');
+                
+                // Update coach preview
+                const coach = coachPersonas[selectedRole];
+                document.getElementById('coachAvatar').textContent = coach.avatar;
+                document.getElementById('coachName').textContent = coach.name;
+                document.getElementById('coachTitle').textContent = coach.title;
+                document.getElementById('coachRole').textContent = coach.role;
+                coachPreview.classList.add('visible');
+                
+                // Update enter button state
+                updateEnterButton();
+            });
+        });
+        
+        // Level selection
+        levelBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                levelBtns.forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                selectedLevel = btn.dataset.level;
+                
+                // Show enter section
+                enterSection.classList.add('visible');
+                updateEnterButton();
+            });
+        });
+        
+        // Update enter button
+        function updateEnterButton() {
+            enterBtn.disabled = !(selectedRole && selectedLevel);
+        }
+        
+        // Enter platform
+        enterBtn.addEventListener('click', () => {
+            if (selectedRole && selectedLevel) {
+                // Save preferences if checked
+                if (rememberMe.checked) {
+                    localStorage.setItem('dxEcosystemPreferences', JSON.stringify({
+                        role: selectedRole,
+                        level: selectedLevel
+                    }));
+                }
+                
+                // Navigate to dashboard
+                window.location.href = platformUrls[selectedRole] + '&level=' + selectedLevel;
+            }
+        });
+        
+        // Load preferences on page load
+        // Commented out for demo - uncomment for production
+        // loadSavedPreferences();
+    </script>
 </body>
 </html>
