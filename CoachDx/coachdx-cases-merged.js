@@ -34,8 +34,8 @@ const COACHDX_CASES = {
     },
     quickActions: ['Tell me about the chest pain', 'What are her vital signs?', 'Any cardiac history?', 'What does the ECG show?'],
     relatedContent: [
-        { type: 'mechanism', title: 'ACS Pathophysiology', link: 'mechanismdx-acs-module.html', reason: 'Understand ischemic cascade' },
-        { type: 'reasondx', title: 'Chest Pain Cases', link: 'reasondx-index.html', reason: 'Practice more workups' }
+        { type: 'mechanism', title: 'ACS Pathophysiology', link: '../mechanism/acs-module.html', reason: 'Understand ischemic cascade' },
+        { type: 'reasondx', title: 'Chest Pain Cases', link: '../ReasonDx/index.html', reason: 'Practice more workups' }
     ]
 },
 
@@ -56,7 +56,7 @@ const COACHDX_CASES = {
     quickActions: ['Why does his wife think something is wrong?', 'Check glucose', 'Get an ECG', 'Cardiac risk factors?'],
     relatedContent: [
         { type: 'parallel', title: 'Typical ACS', link: 'mentor-chat.html?case=chest-pain-acs', reason: 'Compare presentations' },
-        { type: 'mechanism', title: 'Silent MI in Diabetics', link: 'mechanismdx-acs-module.html', reason: 'Why atypical presentations' }
+        { type: 'mechanism', title: 'Silent MI in Diabetics', link: '../mechanism/acs-module.html', reason: 'Why atypical presentations' }
     ]
 },
 
@@ -103,7 +103,7 @@ const COACHDX_CASES = {
     },
     quickActions: ['Calculate CHA2DS2-VASc', 'What rate control agent?', 'Check thyroid', 'Anticoagulation?'],
     relatedContent: [
-        { type: 'mechanism', title: 'Syncope & Arrhythmias', link: 'mechanismdx-syncope-arrhythmia-module.html', reason: 'AFib pathophysiology' }
+        { type: 'mechanism', title: 'Syncope & Arrhythmias', link: '../mechanism/syncope-arrhythmia-module.html', reason: 'AFib pathophysiology' }
     ]
 },
 
@@ -142,7 +142,7 @@ const COACHDX_CASES = {
     },
     quickActions: ['What was she doing?', 'Warning signs?', 'Orthostatic vitals', 'Get ECG'],
     relatedContent: [
-        { type: 'mechanism', title: 'Syncope Mechanisms', link: 'mechanismdx-syncope-arrhythmia-module.html', reason: 'Understanding causes' }
+        { type: 'mechanism', title: 'Syncope Mechanisms', link: '../mechanism/syncope-arrhythmia-module.html', reason: 'Understanding causes' }
     ]
 },
 
@@ -182,7 +182,7 @@ const COACHDX_CASES = {
     },
     quickActions: ['When did this start?', 'Check O2 sat', 'Leg swelling?', 'Taking medications?'],
     relatedContent: [
-        { type: 'mechanism', title: 'Heart Failure', link: 'mechanismdx-hf-module.html', reason: 'CHF pathophysiology' }
+        { type: 'mechanism', title: 'Heart Failure', link: '../mechanism/hf-module.html', reason: 'CHF pathophysiology' }
     ]
 },
 
@@ -203,7 +203,7 @@ const COACHDX_CASES = {
     quickActions: ['Calculate Wells score', 'Leg swelling?', 'Hemodynamically stable?', 'Get D-dimer'],
     relatedContent: [
         { type: 'parallel', title: 'CHF Dyspnea', link: 'mentor-chat.html?case=acute-dyspnea-chf', reason: 'Compare etiologies' },
-        { type: 'mechanism', title: 'VTE & PE Module', link: 'mechanismdx-vte-pe-module.html', reason: 'PE pathophysiology' }
+        { type: 'mechanism', title: 'VTE & PE Module', link: '../mechanism/vte-pe-module.html', reason: 'PE pathophysiology' }
     ]
 },
 
@@ -227,7 +227,7 @@ const COACHDX_CASES = {
     },
     quickActions: ['Get ABG', 'Start nebulizers', 'Does he need BiPAP?', 'Sputum color?'],
     relatedContent: [
-        { type: 'mechanism', title: 'Obstructive Lung Disease', link: 'mechanismdx-obstructive-lung-module.html', reason: 'COPD pathophysiology' }
+        { type: 'mechanism', title: 'Obstructive Lung Disease', link: '../mechanism/obstructive-lung-module.html', reason: 'COPD pathophysiology' }
     ]
 },
 
@@ -248,7 +248,7 @@ const COACHDX_CASES = {
     quickActions: ['Continuous nebs', 'IV steroids', 'Magnesium dose?', 'When to intubate?'],
     relatedContent: [
         { type: 'parallel', title: 'COPD', link: 'mentor-chat.html?case=copd-exacerbation', reason: 'Compare obstructive diseases' },
-        { type: 'mechanism', title: 'Obstructive Lung Disease', link: 'mechanismdx-obstructive-lung-module.html', reason: 'Asthma pathophysiology' }
+        { type: 'mechanism', title: 'Obstructive Lung Disease', link: '../mechanism/obstructive-lung-module.html', reason: 'Asthma pathophysiology' }
     ]
 },
 
@@ -282,7 +282,7 @@ const COACHDX_CASES = {
         'Ceftriaxone covers most urosepsis'
     ],
     relatedContent: [
-        { type: 'mechanism', title: 'Sepsis & Shock Module', link: 'mechanismdx-sepsis-shock-module.html', reason: 'Understand sepsis pathophysiology' },
+        { type: 'mechanism', title: 'Sepsis & Shock Module', link: '../mechanism/sepsis-shock-module.html', reason: 'Understand sepsis pathophysiology' },
         { type: 'parallel', title: 'Pneumonia Sepsis', link: 'mentor-chat.html?case=sepsis-pneumonia', reason: 'Compare sepsis presentations by source' }
     ],
     defined_responses: {
@@ -320,8 +320,8 @@ const COACHDX_CASES = {
         'Procalcitonin 8.5 strongly suggests bacterial infection'
     ],
     relatedContent: [
-        { type: 'mechanism', title: 'Pneumonia Module', link: 'mechanismdx-pneumonia-module.html', reason: 'CAP pathogen patterns and treatment' },
-        { type: 'mechanism', title: 'Sepsis Module', link: 'mechanismdx-sepsis-shock-module.html', reason: 'Sepsis resuscitation principles' },
+        { type: 'mechanism', title: 'Pneumonia Module', link: '../mechanism/pneumonia-module.html', reason: 'CAP pathogen patterns and treatment' },
+        { type: 'mechanism', title: 'Sepsis Module', link: '../mechanism/sepsis-shock-module.html', reason: 'Sepsis resuscitation principles' },
         { type: 'parallel', title: 'Urosepsis Case', link: 'mentor-chat.html?case=sepsis-uti', reason: 'Compare sepsis by source' }
     ],
     defined_responses: {
@@ -378,7 +378,7 @@ const COACHDX_CASES = {
         'EGD within 24 hours; urgent if high-risk features'
     ],
     relatedContent: [
-        { type: 'mechanism', title: 'GI Bleeding Module', link: 'mechanismdx-gi-bleeding-module.html', reason: 'GI bleed pathophysiology' },
+        { type: 'mechanism', title: 'GI Bleeding Module', link: '../mechanism/gi-bleeding-module.html', reason: 'GI bleed pathophysiology' },
         { type: 'parallel', title: 'Lower GI Bleed', link: 'mentor-chat.html?case=lower-gi-bleed', reason: 'Compare upper vs lower' }
     ],
     defined_responses: {
@@ -438,7 +438,7 @@ const COACHDX_CASES = {
         'Perforation signs: high fever, peritonitis, worsening despite treatment'
     ],
     relatedContent: [
-        { type: 'mechanism', title: 'Acute Abdomen Module', link: 'mechanismdx-acute-abdomen-module.html', reason: 'Surgical emergency pathophysiology' },
+        { type: 'mechanism', title: 'Acute Abdomen Module', link: '../mechanism/acute-abdomen-module.html', reason: 'Surgical emergency pathophysiology' },
         { type: 'parallel', title: 'Diverticulitis Case', link: 'mentor-chat.html?case=diverticulitis', reason: 'Compare RLQ vs LLQ presentations' }
     ],
     defined_responses: {
@@ -468,7 +468,7 @@ const COACHDX_CASES = {
         'Colonoscopy 6-8 weeks after resolution to rule out malignancy'
     ],
     relatedContent: [
-        { type: 'mechanism', title: 'Acute Abdomen Module', link: 'mechanismdx-acute-abdomen-module.html', reason: 'GI emergencies comparison' },
+        { type: 'mechanism', title: 'Acute Abdomen Module', link: '../mechanism/acute-abdomen-module.html', reason: 'GI emergencies comparison' },
         { type: 'parallel', title: 'Appendicitis Case', link: 'mentor-chat.html?case=appendicitis', reason: 'Compare appendicitis vs diverticulitis' }
     ],
     defined_responses: {
@@ -496,7 +496,7 @@ const COACHDX_CASES = {
         'Tokyo Guidelines grade severity and guide timing of intervention'
     ],
     relatedContent: [
-        { type: 'mechanism', title: 'Acute Abdomen Module', link: 'mechanismdx-acute-abdomen-module.html', reason: 'Biliary disease spectrum' }
+        { type: 'mechanism', title: 'Acute Abdomen Module', link: '../mechanism/acute-abdomen-module.html', reason: 'Biliary disease spectrum' }
     ],
     defined_responses: {
         'charcot reynolds': 'He has Charcot\'s triad: Fever ✓, Jaundice ✓, RUQ pain ✓. His BP is 94/62 — that\'s hypotension, the fourth element of Reynolds\' pentad.',
@@ -523,7 +523,7 @@ const COACHDX_CASES = {
         'CT findings concerning for ischemia: wall thickening, mesenteric haziness, pneumatosis'
     ],
     relatedContent: [
-        { type: 'mechanism', title: 'Acute Abdomen Module', link: 'mechanismdx-acute-abdomen-module.html', reason: 'Bowel obstruction pathophysiology' }
+        { type: 'mechanism', title: 'Acute Abdomen Module', link: '../mechanism/acute-abdomen-module.html', reason: 'Bowel obstruction pathophysiology' }
     ],
     defined_responses: {
         'strangulation': 'Strangulation means compromised blood supply — time-critical! Signs: continuous (not colicky) pain, fever, tachycardia, peritonitis, elevated lactate, metabolic acidosis. Her lactate is 1.4 (normal) — reassuring for now.',
@@ -557,7 +557,7 @@ const COACHDX_CASES = {
     ],
     relatedContent: [
         { type: 'parallel', title: 'HHS Comparison', link: 'mentor-chat.html?case=hhs', reason: 'Compare DKA vs HHS' },
-        { type: 'mechanism', title: 'Diabetes & DKA Module', link: 'mechanismdx-diabetes-dka-module.html', reason: 'Understand metabolic derangement' }
+        { type: 'mechanism', title: 'Diabetes & DKA Module', link: '../mechanism/diabetes-dka-module.html', reason: 'Understand metabolic derangement' }
     ],
     defined_responses: {
         'anion gap': 'AG = Na - (Cl + HCO3) = 140 - (104 + 8) = 28. Significantly elevated (normal 8-12). In DKA, the gap is from ketoacids.',
@@ -588,7 +588,7 @@ const COACHDX_CASES = {
     ],
     relatedContent: [
         { type: 'parallel', title: 'DKA Comparison', link: 'mentor-chat.html?case=dka', reason: 'Compare DKA vs HHS' },
-        { type: 'mechanism', title: 'Diabetes Module', link: 'mechanismdx-diabetes-dka-module.html', reason: 'Understand metabolic derangement' }
+        { type: 'mechanism', title: 'Diabetes Module', link: '../mechanism/diabetes-dka-module.html', reason: 'Understand metabolic derangement' }
     ],
     defined_responses: {
         'osmolarity': 'Serum osm = 2(Na) + Glucose/18 + BUN/2.8 = 2(152) + 892/18 + 45/2.8 = 370 mOsm/kg. Anything >320 is concerning for HHS.',
@@ -621,7 +621,7 @@ const COACHDX_CASES = {
     ],
     relatedContent: [
         { type: 'parallel', title: 'Intrinsic AKI', link: 'mentor-chat.html?case=aki-intrinsic', reason: 'Compare pre-renal vs ATN' },
-        { type: 'mechanism', title: 'AKI Module', link: 'mechanismdx-aki-module.html', reason: 'AKI pathophysiology' }
+        { type: 'mechanism', title: 'AKI Module', link: '../mechanism/aki-module.html', reason: 'AKI pathophysiology' }
     ],
     defined_responses: {
         'fena': 'FENa of 0.4% is very low - the kidney is avidly holding onto sodium. Tubular function is intact. In ATN, FENa >2% because damaged tubules can\'t reabsorb sodium.',
@@ -649,7 +649,7 @@ const COACHDX_CASES = {
     ],
     relatedContent: [
         { type: 'parallel', title: 'Pre-renal AKI', link: 'mentor-chat.html?case=aki-prerenal', reason: 'Compare ATN vs pre-renal' },
-        { type: 'mechanism', title: 'AKI Module', link: 'mechanismdx-aki-module.html', reason: 'ATN pathophysiology' }
+        { type: 'mechanism', title: 'AKI Module', link: '../mechanism/aki-module.html', reason: 'ATN pathophysiology' }
     ],
     defined_responses: {
         'muddy brown casts': 'Pathognomonic for ATN! Sloughed tubular epithelial cells forming casts. RBC casts would suggest glomerulonephritis instead.',
@@ -679,7 +679,7 @@ const COACHDX_CASES = {
     ],
     relatedContent: [
         { type: 'parallel', title: 'Hypovolemic Hyponatremia', link: 'mentor-chat.html?case=hyponatremia-hypovolemic', reason: 'Compare euvolemic vs hypovolemic' },
-        { type: 'mechanism', title: 'Hyponatremia Module', link: 'mechanismdx-hyponatremia-module.html', reason: 'Hyponatremia pathophysiology' }
+        { type: 'mechanism', title: 'Hyponatremia Module', link: '../mechanism/hyponatremia-module.html', reason: 'Hyponatremia pathophysiology' }
     ],
     defined_responses: {
         'volume status': 'He appears euvolemic - no edema, no dehydration signs. Euvolemic hyponatremia: SIADH, hypothyroidism, adrenal insufficiency. With his SCLC... SIADH is leading diagnosis.',
@@ -710,7 +710,7 @@ const COACHDX_CASES = {
     ],
     relatedContent: [
         { type: 'parallel', title: 'SIADH', link: 'mentor-chat.html?case=hyponatremia-siadh', reason: 'Compare hypovolemic vs euvolemic' },
-        { type: 'mechanism', title: 'Hyponatremia Module', link: 'mechanismdx-hyponatremia-module.html', reason: 'Hyponatremia pathophysiology' }
+        { type: 'mechanism', title: 'Hyponatremia Module', link: '../mechanism/hyponatremia-module.html', reason: 'Hyponatremia pathophysiology' }
     ],
     defined_responses: {
         'urine na': 'Her urine Na is 8 - very low. In hypovolemic hyponatremia, the kidney is appropriately conserving sodium. Compare to SIADH where urine Na is >40.',
@@ -740,7 +740,7 @@ const COACHDX_CASES = {
     },
     quickActions: ['Baseline mental status?', 'Check glucose', 'UA', 'CT head needed?'],
     relatedContent: [
-        { type: 'mechanism', title: 'Delirium', link: 'mechanismdx-stroke-module.html', reason: 'AMS pathophysiology' }
+        { type: 'mechanism', title: 'Delirium', link: '../mechanism/stroke-module.html', reason: 'AMS pathophysiology' }
     ]
 },
 
@@ -790,7 +790,7 @@ const COACHDX_CASES = {
     ],
     relatedContent: [
         { type: 'parallel', title: 'Migraine', link: 'mentor-chat.html?case=headache-migraine', reason: 'Compare benign vs dangerous headache' },
-        { type: 'mechanism', title: 'Stroke Module', link: 'mechanismdx-stroke-module.html', reason: 'Hemorrhagic stroke pathophysiology' }
+        { type: 'mechanism', title: 'Stroke Module', link: '../mechanism/stroke-module.html', reason: 'Hemorrhagic stroke pathophysiology' }
     ],
     defined_responses: {
         'workup': 'Stat non-contrast CT head. If within 6 hours, sensitivity >95-98%. If negative AND high clinical suspicion, LP is MANDATORY.',
@@ -845,7 +845,7 @@ const COACHDX_CASES = {
         'Cancer-associated DVT: LMWH preferred historically; DOACs increasingly used'
     ],
     relatedContent: [
-        { type: 'mechanism', title: 'VTE & PE Module', link: 'mechanismdx-vte-pe-module.html', reason: 'DVT pathophysiology' },
+        { type: 'mechanism', title: 'VTE & PE Module', link: '../mechanism/vte-pe-module.html', reason: 'DVT pathophysiology' },
         { type: 'parallel', title: 'SVT Case', link: 'mentor-chat.html?case=svt', reason: 'Compare DVT vs SVT' }
     ],
     defined_responses: {
@@ -876,7 +876,7 @@ const COACHDX_CASES = {
     ],
     relatedContent: [
         { type: 'parallel', title: 'DVT Case', link: 'mentor-chat.html?case=dvt', reason: 'Compare DVT vs SVT' },
-        { type: 'mechanism', title: 'VTE Module', link: 'mechanismdx-vte-pe-module.html', reason: 'Venous thrombosis pathophysiology' }
+        { type: 'mechanism', title: 'VTE Module', link: '../mechanism/vte-pe-module.html', reason: 'Venous thrombosis pathophysiology' }
     ],
     defined_responses: {
         'imaging': 'Yes, get duplex ultrasound! Important to: 1) Confirm SVT diagnosis, 2) Rule out concomitant DVT (6-40% have concurrent DVT!), 3) Assess distance from saphenofemoral junction.',
@@ -900,8 +900,240 @@ const COACHDX_CASES = {
     },
     quickActions: ['Interpret iron studies', 'MCV classification', 'Need GI workup?', 'Iron replacement options'],
     relatedContent: [
-        { type: 'mechanism', title: 'Anemia Module', link: 'mechanismdx-anemia-module.html', reason: 'Anemia pathophysiology' }
+        { type: 'mechanism', title: 'Anemia Module', link: '../mechanism/anemia-module.html', reason: 'Anemia pathophysiology' }
     ]
+},
+
+// ============================================================================
+// NEW CASES - JANUARY 2026 EXPANSION
+// ============================================================================
+
+// STEMI Case
+'stemi': {
+    id: 'stemi',
+    title: 'STEMI - Anterior Wall',
+    category: 'Cardiovascular',
+    isParallel: false,
+    parallelCase: 'chest-pain-acs',
+    parallelDescription: 'NSTEMI presentation',
+    patient: { name: 'Michael Johnson', age: 58, sex: 'Male', setting: 'Emergency', acuity: 'Critical', chiefComplaint: 'Crushing Chest Pain' },
+    description: 'A 58-year-old man presents via EMS with crushing substernal chest pain radiating to left arm × 30 minutes. Diaphoretic, nauseated. ECG shows ST elevation in V1-V4 with reciprocal changes. BP 95/62, HR 105. 2-pack/day smoker, HTN, family history of early MI.',
+    openingStatement: 'Mr. Johnson has an anterior STEMI. The clock is ticking - door-to-balloon time matters. Walk me through your immediate actions and activation pathway.',
+    quickActions: ['Door-to-balloon goal?', 'Dual antiplatelet therapy', 'Cardiogenic shock workup', 'Cath lab activation', 'Aspirin and P2Y12?'],
+    keyTeachingPoints: [
+        'Door-to-balloon time <90 minutes for PCI-capable hospitals',
+        'STEMI = ST elevation ≥1mm in 2 contiguous leads (or ≥2mm in V2-V3)',
+        'Anterior STEMI (LAD) carries highest mortality risk',
+        'MONA (Morphine, Oxygen, Nitro, Aspirin) - but oxygen only if SpO2 <94%',
+        'Dual antiplatelet: ASA 325mg + P2Y12 inhibitor before cath lab'
+    ],
+    relatedContent: [
+        { type: 'mechanism', title: 'ACS Module', link: '../mechanism/acs-module.html', reason: 'STEMI pathophysiology' },
+        { type: 'parallel', title: 'NSTEMI Case', link: 'mentor-chat.html?case=chest-pain-acs', reason: 'Compare management' }
+    ],
+    defined_responses: {
+        'd2b': 'Door-to-balloon time goal is <90 minutes. Every 30 minutes of delay increases mortality by ~7.5%. Activate cath lab immediately.',
+        'antiplatelet': 'Give ASA 325mg chewed STAT. Add P2Y12 inhibitor (ticagrelor 180mg or clopidogrel 600mg) - choice may depend on local protocol and bleeding risk.',
+        'shock': 'BP 95/62 is concerning for cardiogenic shock. Get lactate, consider early inotropes. Anterior MI with shock may benefit from mechanical support (IABP, Impella).',
+        'morphine': 'Use morphine cautiously. It can cause hypotension and may interfere with antiplatelet absorption. Fentanyl is preferred in many centers.'
+    }
+},
+
+// Aortic Dissection
+'aortic-dissection': {
+    id: 'aortic-dissection',
+    title: 'Aortic Dissection - Type A',
+    category: 'Cardiovascular',
+    isParallel: false,
+    patient: { name: 'Raymond Chen', age: 62, sex: 'Male', setting: 'Emergency', acuity: 'Critical', chiefComplaint: 'Tearing Chest Pain' },
+    description: 'A 62-year-old man with long-standing hypertension presents with sudden, severe, tearing chest pain radiating to back. BP 185/110 right arm, 145/90 left arm. New diastolic murmur. CXR shows widened mediastinum.',
+    openingStatement: 'Mr. Chen has red flags for aortic dissection: tearing pain, BP differential between arms, new murmur. This is a surgical emergency if Type A. What\'s your approach?',
+    quickActions: ['Type A vs Type B', 'CTA vs TEE', 'Blood pressure target', 'Surgical emergency?', 'What does murmur indicate?'],
+    keyTeachingPoints: [
+        'Type A involves ascending aorta - surgical emergency',
+        'Type B involves descending aorta only - often medical management',
+        'BP differential >20mmHg between arms is classic finding',
+        'New aortic regurgitation murmur suggests extension to aortic root',
+        'Target SBP 100-120 and HR <60 with beta-blocker first, then vasodilator'
+    ],
+    defined_responses: {
+        'type a vs b': 'Stanford Type A = involves ascending aorta (requires emergency surgery). Type B = descending aorta only (usually medical management). DeBakey: Type I (ascending + descending), Type II (ascending only), Type III (descending only).',
+        'imaging': 'CTA is gold standard - quick, widely available, shows extent and branch involvement. TEE is alternative if CTA contraindicated. D-dimer can help rule out if low clinical suspicion.',
+        'bp control': 'CRITICAL: Start beta-blocker FIRST to reduce shear stress (HR <60, SBP 100-120). Then add vasodilator if needed. Beta-blocker before vasodilator prevents reflex tachycardia.',
+        'murmur': 'New diastolic murmur = aortic regurgitation from dissection extending into aortic root. This is ominous and indicates Type A with possible tamponade risk.'
+    }
+},
+
+// Hyperkalemia Emergency
+'hyperkalemia': {
+    id: 'hyperkalemia',
+    title: 'Hyperkalemia Emergency',
+    category: 'Renal/Electrolytes',
+    isParallel: false,
+    patient: { name: 'William Peters', age: 68, sex: 'Male', setting: 'Emergency', acuity: 'Critical', chiefComplaint: 'Weakness and Palpitations' },
+    description: 'A 68-year-old with CKD stage 4 and diabetes presents with generalized weakness and palpitations. Takes lisinopril, spironolactone. K+ 7.8, Cr 4.2 (baseline 3.5). ECG shows peaked T waves, prolonged PR, widened QRS.',
+    openingStatement: 'Mr. Peters has severe hyperkalemia with ECG changes - this is immediately life-threatening. Walk me through your stabilization approach in order of priority.',
+    quickActions: ['Stabilize the membrane', 'Shift K+ intracellularly', 'Remove K+ from body', 'ECG changes sequence', 'Stop offending meds'],
+    keyTeachingPoints: [
+        'ECG progression: peaked T → prolonged PR → widened QRS → sine wave → VF/asystole',
+        'Calcium stabilizes membrane but does NOT lower K+ - give first!',
+        'Insulin + D50 shifts K+ into cells within 15-30 minutes',
+        'Kayexalate takes hours; dialysis is definitive for severe cases',
+        'Stop ACEi, ARBs, K-sparing diuretics, NSAIDs'
+    ],
+    relatedContent: [
+        { type: 'mechanism', title: 'Potassium Module', link: '../mechanism/potassium-module.html', reason: 'Hyperkalemia pathophysiology' }
+    ],
+    defined_responses: {
+        'calcium': 'FIRST: Calcium gluconate 1g IV over 2-3 min. Stabilizes cardiac membrane within minutes. Does NOT lower K+ but prevents arrhythmia while other treatments work.',
+        'insulin': 'SECOND: Regular insulin 10 units IV + D50 (25g dextrose). Shifts K+ into cells, lowers serum K+ by 0.5-1.5 mEq/L in 15-30 min. Check glucose!',
+        'albuterol': 'Nebulized albuterol 10-20mg can lower K+ by 0.5-1 mEq/L. Additive with insulin. Use high-dose nebulizer.',
+        'dialysis': 'For severe hyperkalemia with ECG changes and renal failure, start dialysis early. It\'s the only way to actually remove K+ from the body.'
+    }
+},
+
+// Meningitis
+'meningitis': {
+    id: 'meningitis',
+    title: 'Bacterial Meningitis',
+    category: 'Infectious Disease',
+    isParallel: false,
+    parallelCase: 'meningitis-viral',
+    parallelDescription: 'Viral meningitis',
+    patient: { name: 'Jessica Martinez', age: 22, sex: 'Female', setting: 'Emergency', acuity: 'Critical', chiefComplaint: 'Severe Headache and Neck Stiffness' },
+    description: 'A 22-year-old college student presents with 12 hours of severe headache, fever, photophobia, and neck stiffness. T 39.4°C, HR 110, BP 105/68. Altered, but following commands. Kernig and Brudzinski positive. Petechial rash on lower extremities.',
+    openingStatement: 'This young woman has classic meningitis signs plus a petechial rash - highly concerning for bacterial meningitis, possibly meningococcal. Time is critical. What\'s your approach?',
+    quickActions: ['Antibiotics first or LP first?', 'Empiric coverage', 'Dexamethasone timing', 'LP contraindications', 'What does rash suggest?'],
+    keyTeachingPoints: [
+        'DO NOT delay antibiotics for LP - antibiotics first if any delay anticipated',
+        'Classic triad: Fever + headache + neck stiffness (present in <50%)',
+        'Petechial/purpuric rash suggests meningococcemia - N. meningitidis',
+        'Empiric: Ceftriaxone + Vancomycin + Ampicillin (if >50 or immunocompromised)',
+        'Dexamethasone before or with first dose of antibiotics (reduces hearing loss in pneumococcal)'
+    ],
+    relatedContent: [
+        { type: 'mechanism', title: 'Infectious Disease Module', link: '../mechanism/infectious-disease.html', reason: 'CNS infection pathophysiology' }
+    ],
+    defined_responses: {
+        'antibiotics vs lp': 'ANTIBIOTICS FIRST if any delay expected! Every hour of delay increases mortality. Get blood cultures, then antibiotics immediately. LP can wait.',
+        'coverage': 'Empiric: Ceftriaxone 2g IV q12h + Vancomycin (MRSA/resistant pneumococcus). Add Ampicillin if >50 or immunocompromised (Listeria). Dexamethasone 0.15mg/kg before or with antibiotics.',
+        'rash': 'Petechial/purpuric rash = meningococcemia until proven otherwise. N. meningitidis causes DIC and purpura fulminans. Isolate patient, close contacts need prophylaxis.',
+        'lp contraindications': 'CT before LP if: Altered mental status, focal neuro deficits, papilledema, immunocompromised, history of CNS disease. But don\'t delay antibiotics!'
+    }
+},
+
+// Acetaminophen Overdose
+'acetaminophen-overdose': {
+    id: 'acetaminophen-overdose',
+    title: 'Acetaminophen Overdose',
+    category: 'Toxicology',
+    isParallel: false,
+    patient: { name: 'Ashley Williams', age: 19, sex: 'Female', setting: 'Emergency', acuity: 'High', chiefComplaint: 'Ingestion' },
+    description: 'A 19-year-old presents 6 hours after ingesting "a whole bottle" of extra-strength Tylenol (~50 tablets, 500mg each = 25g) after a breakup. Currently asymptomatic. ALT 45, AST 38, INR 1.1, Cr 0.9. Acetaminophen level 180 mcg/mL at 6 hours.',
+    openingStatement: 'Ms. Williams ingested a massive acetaminophen dose but is asymptomatic now. This is the treacherous "latent phase." Her level at 6 hours needs to be plotted on the Rumack-Matthew nomogram. What\'s your approach?',
+    quickActions: ['Use Rumack-Matthew nomogram', 'When to start NAC', 'Why asymptomatic now?', 'Monitor what labs?', 'Kings College Criteria'],
+    keyTeachingPoints: [
+        'Acetaminophen toxicity has 4 phases - patients feel fine during latent phase (24-72h)',
+        'Plot level on Rumack-Matthew nomogram for SINGLE acute ingestions at 4-24h',
+        'NAC is nearly 100% effective if started within 8 hours',
+        'Toxic dose: >150mg/kg or >7.5g in adults',
+        'Hepatotoxicity peaks at 72-96 hours - monitor AST/ALT, INR, creatinine'
+    ],
+    defined_responses: {
+        'nomogram': 'At 6 hours, level of 180 mcg/mL is ABOVE the treatment line (which is ~150 at 4h, ~75 at 8h). She needs NAC immediately. The nomogram only applies to single acute ingestions.',
+        'nac': 'N-acetylcysteine (NAC) is the antidote. Start immediately - most effective within 8 hours but beneficial even late. IV: 150mg/kg over 1h, then 50mg/kg over 4h, then 100mg/kg over 16h.',
+        'asymptomatic': 'Acetaminophen toxicity has 4 phases: 1) GI symptoms (0-24h), 2) Latent phase - feels better (24-72h), 3) Hepatotoxicity (72-96h), 4) Recovery or death. She\'s in the early window.',
+        'prognosis': 'Kings College Criteria for transplant: pH <7.3 after resuscitation OR Grade III-IV encephalopathy + PT >100s + Cr >3.4. Her prognosis is excellent with early NAC.'
+    }
+},
+
+// Status Epilepticus
+'status-epilepticus': {
+    id: 'status-epilepticus',
+    title: 'Status Epilepticus',
+    category: 'Neurology',
+    isParallel: false,
+    patient: { name: 'Daniel Brown', age: 35, sex: 'Male', setting: 'Emergency', acuity: 'Critical', chiefComplaint: 'Ongoing Seizure' },
+    description: 'A 35-year-old with epilepsy arrives via EMS with ongoing generalized tonic-clonic seizure × 12 minutes. He received 10mg IM midazolam en route. Still seizing. History of medication non-compliance. T 38.9°C, HR 135, BP 178/102, SpO2 91%.',
+    openingStatement: 'Mr. Brown has been seizing for over 10 minutes and didn\'t respond to prehospital benzodiazepines. This is established status epilepticus. Walk me through your management in the next 5 minutes.',
+    quickActions: ['Second-line agent?', 'ABCs first', 'Why check glucose?', 'Refractory status definition', 'Intubation timing?'],
+    keyTeachingPoints: [
+        'Status epilepticus: Seizure >5 minutes or 2+ seizures without recovery',
+        'First line: Benzodiazepines (lorazepam IV preferred, or midazolam IM)',
+        'Second line: Fosphenytoin, levetiracetam, or valproate',
+        'Refractory = persists after benzos + one second-line agent',
+        'Always check glucose - hypoglycemia is reversible cause'
+    ],
+    relatedContent: [
+        { type: 'mechanism', title: 'Stroke/Neuro Module', link: '../mechanism/stroke-module.html', reason: 'Neurological emergencies' }
+    ],
+    defined_responses: {
+        'second line': 'After benzos fail, choose: Fosphenytoin 20mg PE/kg (watch for hypotension), Levetiracetam 60mg/kg (fewer drug interactions), or Valproate 40mg/kg. Give while calling neurology.',
+        'abcs': 'Absolutely: Position safely, suction, O2, IV access x2. Check fingerstick glucose NOW. Get labs, consider intubation if prolonged or airway compromise.',
+        'glucose': 'Hypoglycemia causes seizures and is immediately reversible. If glucose <60, give D50 25g IV with thiamine. Always check!',
+        'refractory': 'If still seizing after benzos + second-line agent = refractory status. Requires anesthetic doses: propofol, midazolam infusion, or pentobarbital. ICU admission with continuous EEG.'
+    }
+},
+
+// Thyroid Storm
+'thyroid-storm': {
+    id: 'thyroid-storm',
+    title: 'Thyroid Storm',
+    category: 'Endocrine',
+    isParallel: false,
+    parallelCase: 'myxedema-coma',
+    parallelDescription: 'Myxedema coma',
+    patient: { name: 'Sandra Kim', age: 42, sex: 'Female', setting: 'Emergency', acuity: 'Critical', chiefComplaint: 'Agitation, Fever, and Palpitations' },
+    description: 'A 42-year-old with known Graves disease (non-compliant with methimazole) presents with agitation, confusion, T 40.1°C, HR 168 (AFib), BP 160/75. Diaphoretic, tremulous, lid lag, and diffuse goiter. Recent URI. TSH <0.01, FT4 7.8.',
+    openingStatement: 'Ms. Kim has thyroid storm - this is a medical emergency with high mortality. The triad of infection, surgery, or medication non-compliance often precipitates it. Walk me through your management.',
+    quickActions: ['Burch-Wartofsky Score', 'Block synthesis first?', 'Beta-blocker choice', 'Why iodine after thionamide?', 'Steroids?'],
+    keyTeachingPoints: [
+        'Thyroid storm is clinical diagnosis - don\'t wait for labs',
+        'Treatment order matters: Thionamide → Iodine (1 hour later) → Beta-blocker → Steroids → Cooling',
+        'Propranolol preferred (also blocks T4→T3 conversion)',
+        'Give iodine AFTER thionamide to prevent iodine being used for more hormone synthesis',
+        'Mortality 10-30% even with treatment'
+    ],
+    relatedContent: [
+        { type: 'mechanism', title: 'Thyroid Module', link: '../mechanism/thyroid-module.html', reason: 'Hyperthyroid pathophysiology' }
+    ],
+    defined_responses: {
+        'burch wartofsky': 'Burch-Wartofsky Point Scale >45 = thyroid storm. Her score: Temp 40°C (+25), HR 168 (+25), AFib (+10), CNS agitation (+10), precipitant (+10) = 80 points. Definitely storm.',
+        'treatment order': 'ORDER MATTERS: 1) PTU or methimazole to block synthesis, 2) Iodine (SSKI/Lugol) 1 hour later to block release, 3) Propranolol for rate/symptoms, 4) Hydrocortisone 100mg q8h, 5) Cooling blankets.',
+        'why ptu': 'PTU preferred in thyroid storm because it also blocks peripheral T4→T3 conversion. Give 500-1000mg load, then 250mg q4h.',
+        'beta blocker': 'Propranolol preferred - also inhibits T4→T3 conversion. Use IV if needed. Esmolol if concern for decompensation. Watch for HF in tachycardia-induced cardiomyopathy.'
+    }
+},
+
+// Myxedema Coma (Parallel to Thyroid Storm)
+'myxedema-coma': {
+    id: 'myxedema-coma',
+    title: 'Myxedema Coma',
+    category: 'Endocrine',
+    isParallel: true,
+    parallelCase: 'thyroid-storm',
+    parallelDescription: 'Thyroid storm',
+    patient: { name: 'Eleanor Hughes', age: 78, sex: 'Female', setting: 'Emergency', acuity: 'Critical', chiefComplaint: 'Found Unresponsive' },
+    description: 'A 78-year-old found unresponsive at home. History of hypothyroidism, ran out of levothyroxine months ago. T 34.5°C, HR 48, BP 85/50, RR 8, GCS 7. Puffy face, dry skin, delayed relaxation reflexes. Na+ 118, glucose 52. TSH 85, FT4 <0.1.',
+    openingStatement: 'Mrs. Hughes has myxedema coma - the opposite extreme of thyroid storm but equally deadly. She\'s hypothermic, bradycardic, and hyponatremic. What\'s your approach?',
+    quickActions: ['Why check cortisol?', 'IV T4 vs T3', 'Passive vs active rewarming', 'Hyponatremia treatment', 'Ventilatory support?'],
+    keyTeachingPoints: [
+        'Myxedema coma: Severe hypothyroidism + altered mental status + precipitant',
+        'Check cortisol - concomitant adrenal insufficiency common; give stress-dose steroids',
+        'IV levothyroxine 200-400mcg load, then 50-100mcg daily',
+        'Passive rewarming - active warming can cause cardiovascular collapse',
+        'Treat hyponatremia with fluid restriction; the thyroid hormone will help'
+    ],
+    relatedContent: [
+        { type: 'mechanism', title: 'Thyroid Module', link: '../mechanism/thyroid-module.html', reason: 'Hypothyroid pathophysiology' },
+        { type: 'parallel', title: 'Thyroid Storm', link: 'mentor-chat.html?case=thyroid-storm', reason: 'Compare extremes' }
+    ],
+    defined_responses: {
+        'cortisol': 'Check cortisol and give hydrocortisone 100mg IV before thyroid hormone! Coexisting adrenal insufficiency is common, and giving T4 without steroids can precipitate adrenal crisis.',
+        'thyroid replacement': 'IV levothyroxine 200-400mcg loading dose (oral absorption unreliable). Some add T3 5-20mcg q8h for faster onset. Continue 50-100mcg T4 daily.',
+        'warming': 'PASSIVE warming only (blankets). Active warming causes peripheral vasodilation → cardiovascular collapse in patients with limited cardiac reserve.',
+        'hyponatremia': 'Hyponatremia in myxedema is usually dilutional (SIADH-like). Fluid restrict and give thyroid hormone - Na+ will correct as metabolism normalizes. Avoid aggressive correction.'
+    }
 }
 
 };
