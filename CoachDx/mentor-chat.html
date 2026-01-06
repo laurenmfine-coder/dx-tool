@@ -266,14 +266,178 @@
     let seconds = 0;
     let timerInterval = null;
     let isLoading = false;
+    let sbarTriggered = false; // Track if SBAR has been triggered
     let session = {
         id: 'session-' + Date.now(),
         questionsAskedByAI: 0,
         teachingMomentsDetected: 0,
         conceptsExplored: [],
         isParallelCase: false,
-        parallelPairId: null
+        parallelPairId: null,
+        sbarCompleted: false
     };
+    
+    // SBAR trigger keywords - expanded list
+    // When learner identifies these in their assessment, coach may prompt SBAR
+    const SBAR_TRIGGER_KEYWORDS = [
+        // Communication intent
+        'notify', 'call', 'report', 'page', 'contact', 'escalate', 'alert',
+        'tell the doctor', 'let them know', 'inform', 'reach out',
+        
+        // Clinical concern
+        'concerned', 'worried', 'think we need', 'something is wrong',
+        'not right', 'doesn\'t look good', 'getting worse',
+        
+        // Deterioration
+        'deteriorating', 'declining', 'decompensating', 'unstable', 'worsening',
+        'going downhill', 'crashing', 'coding', 'arresting',
+        
+        // Urgency
+        'emergency', 'emergent', 'urgent', 'critical', 'stat', 'now',
+        'immediately', 'right away', 'asap',
+        
+        // Vital sign concerns
+        'hypotensive', 'hypertensive', 'tachycardic', 'bradycardic',
+        'desaturating', 'hypoxic', 'hypoxemic', 'febrile', 'hypothermic',
+        'tachypneic', 'low blood pressure', 'high heart rate', 'oxygen dropping',
+        'sats dropping', 'bp dropping', 'pressure is low',
+        
+        // Mental status
+        'unresponsive', 'altered', 'confused', 'lethargic', 'obtunded',
+        'not waking up', 'won\'t respond', 'mental status change', 'ams',
+        
+        // Specific conditions
+        'sepsis', 'septic', 'mi', 'stemi', 'stroke', 'pe', 'pulmonary embolism',
+        'bleeding', 'hemorrhage', 'anaphylaxis', 'overdose', 'arrest',
+        
+        // Symptoms
+        'chest pain', 'shortness of breath', 'dyspnea', 'sob', 'difficulty breathing',
+        'respiratory distress', 'can\'t breathe', 'syncope', 'passed out', 'seizure',
+        
+        // Nursing/clinical judgment
+        'need help', 'need orders', 'need to see', 'come evaluate',
+        'rapid response', 'code blue', 'mrt', 'rrt',
+        
+        // Assessment conclusions
+        'my assessment', 'i think', 'i believe', 'appears to be', 'likely',
+        'differential', 'working diagnosis'
+    ];
+    
+    // High-priority keywords that can trigger SBAR earlier
+    const HIGH_PRIORITY_KEYWORDS = [
+        'code', 'arrest', 'unresponsive', 'not breathing', 'no pulse',
+        'rapid response', 'crashing', 'stat', 'emergency', 'stemi',
+        'stroke', 'anaphylaxis', 'hemorrhage'
+    ];
+    
+    // Check if SBAR should be triggered based on conversation
+    function checkSBARTrigger(userMessage, coachResponse) {
+        // Only trigger once per session and only if case has SBAR scenario
+        if (sbarTriggered || !currentCase.sbarScenario) return false;
+        
+        const combinedText = (userMessage + ' ' + coachResponse).toLowerCase();
+        const userText = userMessage.toLowerCase();
+        const conceptCount = Object.keys(conceptsExplored).length;
+        const messageCount = conversationHistory.length;
+        
+        // Check for high-priority keywords (trigger earlier)
+        const hasHighPriority = HIGH_PRIORITY_KEYWORDS.some(kw => userText.includes(kw));
+        if (hasHighPriority && messageCount >= 4) {
+            return true; // Trigger early for emergencies
+        }
+        
+        // Check for regular trigger keywords
+        const hasKeywords = SBAR_TRIGGER_KEYWORDS.some(kw => combinedText.includes(kw));
+        
+        // Multiple trigger conditions (any can trigger)
+        const enoughConcepts = conceptCount >= 2; // Lowered from 3
+        const enoughTime = seconds > 120; // 2+ minutes (lowered from 3)
+        const enoughMessages = messageCount >= 6; // 6+ messages in conversation
+        
+        // Trigger if keywords present AND (enough concepts OR enough time OR enough messages)
+        return hasKeywords && (enoughConcepts || enoughTime || enoughMessages);
+    }
+    
+    // Show SBAR prompt from coach
+    function triggerSBARPrompt() {
+        sbarTriggered = true;
+        const coach = getCurrentCoach();
+        const scenario = currentCase.sbarScenario;
+        
+        // Build coach's SBAR prompt based on role
+        let sbarPrompt = '';
+        const role = getCurrentRole();
+        
+        if (role === 'nursing') {
+            sbarPrompt = `Good assessment. This patient needs physician evaluation now. Before you call ${scenario.callingTo || 'the physician'}, let's make sure you're prepared. Practice your SBAR - click the button below when you're ready.`;
+        } else if (role === 'ems') {
+            sbarPrompt = `Alright, you've got your assessment. Time to give your radio report. This needs to be clear and concise. Hit the SBAR button to practice your call to the ED.`;
+        } else if (role === 'rt') {
+            sbarPrompt = `Good respiratory assessment. You need to communicate this to the physician and make your recommendation. Let's practice that SBAR call.`;
+        } else {
+            sbarPrompt = `Based on your assessment, it's time to communicate this to the team. Let's practice your SBAR before you make the call.`;
+        }
+        
+        // Add the SBAR prompt message
+        setTimeout(() => {
+            addMessage(sbarPrompt, 'attending');
+            conversationHistory.push({ role: 'assistant', content: sbarPrompt });
+            
+            // Show prominent SBAR button
+            showSBARCallToAction();
+        }, 1000);
+    }
+    
+    // Show prominent SBAR call-to-action in chat
+    function showSBARCallToAction() {
+        const container = document.getElementById('chatMessages');
+        const scenario = currentCase.sbarScenario;
+        
+        container.innerHTML += `
+            <div class="message attending" id="sbarCTA">
+                <div class="message-bubble" style="background: #fef3c7; border-color: #f59e0b;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <div style="font-size: 2rem;">📞</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: #92400e; margin-bottom: 4px;">
+                                Ready to call ${scenario.callingTo || 'the physician'}?
+                            </div>
+                            <div style="font-size: 0.9em; color: #a16207;">
+                                Practice your SBAR with the patient info you've gathered.
+                            </div>
+                        </div>
+                        <button onclick="launchSBARWithContext()" style="background: #f59e0b; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap;">
+                            Practice SBAR →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        container.scrollTop = container.scrollHeight;
+    }
+    
+    // Launch SBAR trainer with case context
+    function launchSBARWithContext() {
+        const scenario = currentCase.sbarScenario;
+        const patient = currentCase.patient;
+        
+        // Store context for SBAR trainer
+        const sbarContext = {
+            caseId: currentCase.id,
+            caseTitle: currentCase.title,
+            patient: patient,
+            scenario: scenario,
+            exploredConcepts: Object.keys(conceptsExplored),
+            conversationSummary: conversationHistory.slice(-6).map(m => m.content).join(' '),
+            role: getCurrentRole(),
+            coach: getCurrentCoach()
+        };
+        
+        sessionStorage.setItem('sbarCaseContext', JSON.stringify(sbarContext));
+        
+        // Navigate to SBAR trainer
+        window.location.href = `sbar-trainer.html?fromCase=${currentCase.id}`;
+    }
 
     async function init() {
         // Load discipline-specific cases first
@@ -552,6 +716,11 @@
             
             checkConceptsExplored(message + ' ' + response);
             updateStats();
+            
+            // Check if SBAR should be triggered
+            if (checkSBARTrigger(message, response)) {
+                triggerSBARPrompt();
+            }
             
         } catch (error) {
             document.getElementById('typing')?.remove();

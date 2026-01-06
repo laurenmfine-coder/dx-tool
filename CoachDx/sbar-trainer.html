@@ -31,6 +31,228 @@
             color: var(--text);
         }
         
+        /* Patient Chart Styles */
+        .patient-chart {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+            overflow: hidden;
+            border: 2px solid var(--primary-light);
+        }
+        
+        .chart-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chart-header h3 {
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .chart-toggle {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+        
+        .chart-body {
+            padding: 20px;
+        }
+        
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .chart-section {
+            background: #f9fafb;
+            border-radius: 10px;
+            padding: 15px;
+        }
+        
+        .chart-section h4 {
+            color: var(--primary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .chart-section p, .chart-section li {
+            font-size: 0.95rem;
+            color: var(--text);
+            line-height: 1.5;
+        }
+        
+        .chart-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .chart-section li {
+            padding: 3px 0;
+        }
+        
+        .vitals-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        
+        .vital-item {
+            text-align: center;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+        }
+        
+        .vital-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .vital-value.abnormal {
+            color: var(--danger);
+        }
+        
+        .vital-label {
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+        
+        .current-concern {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 10px;
+        }
+        
+        .current-concern h5 {
+            color: #991b1b;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+        }
+        
+        .current-concern p {
+            color: #7f1d1d;
+        }
+        
+        /* Conversation Mode Styles */
+        .conversation-mode {
+            display: none;
+        }
+        
+        .conversation-mode.active {
+            display: block;
+        }
+        
+        .conversation-container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            overflow: hidden;
+            margin-top: 25px;
+        }
+        
+        .conversation-header {
+            background: linear-gradient(135deg, var(--secondary) 0%, #059669 100%);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .conversation-messages {
+            height: 400px;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .conv-message {
+            max-width: 80%;
+            margin-bottom: 15px;
+        }
+        
+        .conv-message.them {
+            margin-right: auto;
+        }
+        
+        .conv-message.you {
+            margin-left: auto;
+        }
+        
+        .conv-bubble {
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .conv-message.them .conv-bubble {
+            background: #f3f4f6;
+            border-radius: 12px 12px 12px 0;
+        }
+        
+        .conv-message.you .conv-bubble {
+            background: var(--secondary);
+            color: white;
+            border-radius: 12px 12px 0 12px;
+        }
+        
+        .conv-meta {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+        
+        .conversation-input {
+            padding: 15px 20px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 10px;
+        }
+        
+        .conversation-input input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.95rem;
+        }
+        
+        .conversation-input button {
+            padding: 12px 24px;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .end-conversation-btn {
+            background: var(--text-light) !important;
+            margin-left: 10px;
+        }
+        
         /* Header */
         .header {
             background: linear-gradient(135deg, var(--warning) 0%, #D97706 100%);
@@ -638,6 +860,46 @@
                 </div>
             </div>
             
+            <!-- Patient Chart (for random/standalone scenarios) -->
+            <div class="patient-chart" id="patientChart" style="display: none;">
+                <div class="chart-header">
+                    <h3>📋 Patient Chart</h3>
+                    <button class="chart-toggle" onclick="toggleChart()">Hide Chart</button>
+                </div>
+                <div class="chart-body" id="chartBody">
+                    <div class="chart-grid">
+                        <div class="chart-section">
+                            <h4>👤 Demographics</h4>
+                            <p id="chartDemographics">Loading...</p>
+                        </div>
+                        <div class="chart-section">
+                            <h4>🏥 Admission Info</h4>
+                            <p id="chartAdmission">Loading...</p>
+                        </div>
+                        <div class="chart-section">
+                            <h4>📜 Medical History</h4>
+                            <ul id="chartHistory"></ul>
+                        </div>
+                        <div class="chart-section">
+                            <h4>💊 Current Medications</h4>
+                            <ul id="chartMeds"></ul>
+                        </div>
+                        <div class="chart-section">
+                            <h4>❤️ Current Vitals</h4>
+                            <div class="vitals-grid" id="chartVitals"></div>
+                        </div>
+                        <div class="chart-section">
+                            <h4>🔬 Recent Labs</h4>
+                            <ul id="chartLabs"></ul>
+                        </div>
+                    </div>
+                    <div class="current-concern" id="chartConcern">
+                        <h5>⚠️ Current Concern</h5>
+                        <p id="chartConcernText">Loading...</p>
+                    </div>
+                </div>
+            </div>
+            
             <!-- SBAR Input Cards -->
             <div class="sbar-cards">
                 <!-- Situation -->
@@ -763,10 +1025,32 @@
                     </div>
                     
                     <div class="action-buttons">
-                        <button class="action-btn primary" onclick="tryAgain()">🔄 Try Again</button>
+                        <button class="action-btn primary" onclick="startConversation()" id="continueConvBtn">💬 Continue Conversation</button>
+                        <button class="action-btn outline" onclick="tryAgain()">🔄 Try Again</button>
                         <button class="action-btn outline" onclick="newScenario()">📋 New Scenario</button>
-                        <button class="action-btn outline" onclick="goBack()">← Back to Dashboard</button>
+                        <button class="action-btn outline" onclick="goBack()">← Back</button>
                     </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Conversation Continuation Section -->
+        <div class="conversation-mode" id="conversationMode">
+            <div class="conversation-container">
+                <div class="conversation-header">
+                    <div style="font-size: 2rem;" id="convPartnerAvatar">👨‍⚕️</div>
+                    <div>
+                        <h3 id="convPartnerName">Conversation with Dr. Patel</h3>
+                        <p style="opacity: 0.9; font-size: 0.9rem;">Continue discussing the patient's care</p>
+                    </div>
+                </div>
+                <div class="conversation-messages" id="convMessages">
+                    <!-- Messages will appear here -->
+                </div>
+                <div class="conversation-input">
+                    <input type="text" id="convInput" placeholder="Type your response..." onkeypress="if(event.key==='Enter')sendConvMessage()">
+                    <button onclick="sendConvMessage()">Send</button>
+                    <button class="end-conversation-btn" onclick="endConversation()">End</button>
                 </div>
             </div>
         </div>
@@ -793,6 +1077,397 @@
     </div>
     
     <script>
+        // =====================================================
+        // RANDOM PATIENT GENERATOR
+        // =====================================================
+        
+        const patientNames = {
+            male: ['James', 'Robert', 'William', 'Michael', 'David', 'Richard', 'Joseph', 'Thomas', 'Charles', 'Daniel', 'Matthew', 'Anthony', 'Donald', 'Steven', 'Paul', 'Andrew', 'Joshua', 'Kenneth', 'Kevin', 'Brian'],
+            female: ['Mary', 'Patricia', 'Jennifer', 'Linda', 'Barbara', 'Elizabeth', 'Susan', 'Jessica', 'Sarah', 'Karen', 'Nancy', 'Lisa', 'Betty', 'Margaret', 'Sandra', 'Ashley', 'Dorothy', 'Kimberly', 'Emily', 'Donna']
+        };
+        
+        const lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez', 'Hernandez', 'Lopez', 'Gonzalez', 'Wilson', 'Anderson', 'Thomas', 'Taylor', 'Moore', 'Jackson', 'Martin', 'Lee', 'Perez', 'Thompson', 'White', 'Harris', 'Sanchez', 'Clark', 'Ramirez', 'Lewis', 'Robinson'];
+        
+        const medicalHistories = {
+            cardiac: ['Hypertension', 'Coronary artery disease', 'Atrial fibrillation', 'Heart failure (EF 35%)', 'Prior MI (2019)', 'CABG x3 (2018)'],
+            respiratory: ['COPD', 'Asthma', 'Sleep apnea on CPAP', 'Prior PE', 'Pulmonary fibrosis'],
+            metabolic: ['Type 2 Diabetes', 'Hyperlipidemia', 'Obesity', 'Hypothyroidism', 'CKD Stage 3'],
+            other: ['Osteoarthritis', 'GERD', 'Anxiety', 'Depression', 'BPH', 'Prior stroke']
+        };
+        
+        const medications = {
+            cardiac: ['Metoprolol 50mg BID', 'Lisinopril 20mg daily', 'Aspirin 81mg daily', 'Atorvastatin 40mg daily', 'Furosemide 40mg daily', 'Amlodipine 5mg daily'],
+            respiratory: ['Albuterol inhaler PRN', 'Fluticasone/Salmeterol BID', 'Tiotropium daily', 'Montelukast 10mg daily', 'Prednisone taper'],
+            metabolic: ['Metformin 1000mg BID', 'Glipizide 5mg BID', 'Insulin glargine 20 units QHS', 'Levothyroxine 75mcg daily'],
+            other: ['Omeprazole 20mg daily', 'Acetaminophen PRN', 'Gabapentin 300mg TID', 'Sertraline 50mg daily']
+        };
+        
+        const scenarioTemplates = {
+            'deteriorating-sepsis': {
+                admissionReasons: ['UTI', 'Pneumonia', 'Cellulitis', 'Post-op hip replacement', 'Post-op knee replacement', 'Cholecystitis'],
+                currentConcerns: [
+                    'New confusion and fever. Was oriented earlier, now not following commands.',
+                    'Fever spike to 102.5°F with rigors. BP dropping.',
+                    'Increasing lethargy, new tachycardia, warm to touch.',
+                    'Not responding normally, skin mottled, urine output decreased.'
+                ],
+                abnormalVitals: { temp: [101.5, 103.2], hr: [105, 125], sbp: [85, 95], rr: [22, 28], spo2: [91, 94] }
+            },
+            'deteriorating-resp': {
+                admissionReasons: ['COPD exacerbation', 'CHF exacerbation', 'Pneumonia', 'Asthma exacerbation'],
+                currentConcerns: [
+                    'Increasing oxygen requirements. Was on 2L, now on 6L and still sat 89%.',
+                    'Work of breathing increasing, using accessory muscles.',
+                    'More confused, CO2 may be rising. Getting sleepier.',
+                    'Can\'t speak in full sentences anymore, tripoding.'
+                ],
+                abnormalVitals: { temp: [98.6, 99.8], hr: [100, 120], sbp: [140, 165], rr: [26, 36], spo2: [85, 91] }
+            },
+            'chest-pain': {
+                admissionReasons: ['Pneumonia', 'COPD exacerbation', 'Elective surgery', 'GI bleed'],
+                currentConcerns: [
+                    'New substernal chest pressure, radiating to left arm.',
+                    'Crushing chest pain, diaphoretic, nauseous.',
+                    'Sharp chest pain worse with inspiration, but also has cardiac history.',
+                    'Complaining of "heaviness" in chest, looks pale and anxious.'
+                ],
+                abnormalVitals: { temp: [98.4, 99.0], hr: [90, 115], sbp: [155, 180], rr: [20, 26], spo2: [93, 97] }
+            },
+            'deteriorating-neuro': {
+                admissionReasons: ['Stroke', 'Fall', 'Syncope', 'Seizure'],
+                currentConcerns: [
+                    'New facial droop on the right, slurred speech.',
+                    'Was following commands, now only localizing to pain.',
+                    'Pupils unequal - left larger than right.',
+                    'New weakness on left side, wasn\'t there this morning.'
+                ],
+                abnormalVitals: { temp: [98.6, 99.2], hr: [60, 85], sbp: [175, 210], rr: [16, 22], spo2: [95, 98] }
+            },
+            'bleeding': {
+                admissionReasons: ['GI bleed', 'Post-op', 'Anticoagulation', 'Trauma'],
+                currentConcerns: [
+                    'Large bloody bowel movement, feeling lightheaded.',
+                    'Vomited blood, about 200mL, looks like coffee grounds.',
+                    'Drain output suddenly increased and looks bloody.',
+                    'Hematocrit dropped from 32 to 24, patient tachycardic.'
+                ],
+                abnormalVitals: { temp: [97.8, 98.6], hr: [110, 135], sbp: [88, 102], rr: [20, 26], spo2: [94, 98] }
+            }
+        };
+        
+        // Generate random patient for standalone SBAR practice
+        function generateRandomPatient(scenarioType) {
+            const template = scenarioTemplates[scenarioType] || scenarioTemplates['deteriorating-sepsis'];
+            const isMale = Math.random() > 0.5;
+            const sex = isMale ? 'M' : 'F';
+            const firstName = isMale ? 
+                patientNames.male[Math.floor(Math.random() * patientNames.male.length)] :
+                patientNames.female[Math.floor(Math.random() * patientNames.female.length)];
+            const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+            const age = Math.floor(Math.random() * 40) + 45; // 45-85
+            const room = Math.floor(Math.random() * 50) + 200; // 200-250
+            
+            // Generate vitals
+            const vitals = {};
+            for (const [key, range] of Object.entries(template.abnormalVitals)) {
+                vitals[key] = (Math.random() * (range[1] - range[0]) + range[0]).toFixed(key === 'temp' ? 1 : 0);
+            }
+            
+            // Pick random histories and meds
+            const historyCategories = Object.keys(medicalHistories);
+            const selectedHistory = [];
+            for (let i = 0; i < 3; i++) {
+                const cat = historyCategories[Math.floor(Math.random() * historyCategories.length)];
+                const item = medicalHistories[cat][Math.floor(Math.random() * medicalHistories[cat].length)];
+                if (!selectedHistory.includes(item)) selectedHistory.push(item);
+            }
+            
+            const medCategories = Object.keys(medications);
+            const selectedMeds = [];
+            for (let i = 0; i < 4; i++) {
+                const cat = medCategories[Math.floor(Math.random() * medCategories.length)];
+                const item = medications[cat][Math.floor(Math.random() * medications[cat].length)];
+                if (!selectedMeds.includes(item)) selectedMeds.push(item);
+            }
+            
+            // Pick admission reason and current concern
+            const admissionReason = template.admissionReasons[Math.floor(Math.random() * template.admissionReasons.length)];
+            const currentConcern = template.currentConcerns[Math.floor(Math.random() * template.currentConcerns.length)];
+            
+            // Generate some labs
+            const labs = generateLabs(scenarioType);
+            
+            return {
+                name: `${isMale ? 'Mr.' : 'Mrs.'} ${firstName} ${lastName}`,
+                age: age,
+                sex: sex,
+                room: room.toString(),
+                admissionReason: admissionReason,
+                admissionDate: getAdmissionDate(),
+                history: selectedHistory,
+                medications: selectedMeds,
+                vitals: vitals,
+                labs: labs,
+                currentConcern: currentConcern,
+                allergies: Math.random() > 0.7 ? ['Penicillin', 'Sulfa'][Math.floor(Math.random() * 2)] : 'NKDA',
+                codeStatus: Math.random() > 0.8 ? 'DNR/DNI' : 'Full Code'
+            };
+        }
+        
+        function getAdmissionDate() {
+            const days = Math.floor(Math.random() * 5) + 1;
+            const date = new Date();
+            date.setDate(date.getDate() - days);
+            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        }
+        
+        function generateLabs(scenarioType) {
+            const baseLabs = {
+                'WBC': (Math.random() * 8 + 6).toFixed(1),
+                'Hgb': (Math.random() * 4 + 10).toFixed(1),
+                'Plt': Math.floor(Math.random() * 150 + 150),
+                'Na': Math.floor(Math.random() * 8 + 136),
+                'K': (Math.random() * 1.5 + 3.5).toFixed(1),
+                'Cr': (Math.random() * 0.8 + 0.8).toFixed(2),
+                'BUN': Math.floor(Math.random() * 20 + 12)
+            };
+            
+            // Adjust labs based on scenario
+            if (scenarioType === 'deteriorating-sepsis') {
+                baseLabs['WBC'] = (Math.random() * 10 + 14).toFixed(1); // Elevated
+                baseLabs['Lactate'] = (Math.random() * 3 + 2).toFixed(1); // Elevated
+            } else if (scenarioType === 'bleeding') {
+                baseLabs['Hgb'] = (Math.random() * 2 + 7).toFixed(1); // Low
+                baseLabs['Plt'] = Math.floor(Math.random() * 50 + 80); // Lower
+            }
+            
+            return baseLabs;
+        }
+        
+        // Display patient chart
+        function displayPatientChart(patient) {
+            document.getElementById('patientChart').style.display = 'block';
+            
+            // Demographics
+            document.getElementById('chartDemographics').innerHTML = `
+                <strong>${patient.name}</strong><br>
+                ${patient.age} y/o ${patient.sex === 'M' ? 'Male' : 'Female'}<br>
+                Room ${patient.room}<br>
+                Allergies: ${patient.allergies}<br>
+                Code Status: ${patient.codeStatus}
+            `;
+            
+            // Admission info
+            document.getElementById('chartAdmission').innerHTML = `
+                Admitted: ${patient.admissionDate}<br>
+                Diagnosis: ${patient.admissionReason}
+            `;
+            
+            // Medical history
+            const historyList = document.getElementById('chartHistory');
+            historyList.innerHTML = patient.history.map(h => `<li>• ${h}</li>`).join('');
+            
+            // Medications
+            const medsList = document.getElementById('chartMeds');
+            medsList.innerHTML = patient.medications.map(m => `<li>• ${m}</li>`).join('');
+            
+            // Vitals
+            const vitalsDiv = document.getElementById('chartVitals');
+            const vitalLabels = { temp: 'Temp °F', hr: 'HR', sbp: 'BP sys', rr: 'RR', spo2: 'SpO2 %' };
+            const abnormalRanges = { temp: [98.6, 100.4], hr: [60, 100], sbp: [90, 140], rr: [12, 20], spo2: [94, 100] };
+            
+            vitalsDiv.innerHTML = Object.entries(patient.vitals).map(([key, val]) => {
+                const isAbnormal = val < abnormalRanges[key][0] || val > abnormalRanges[key][1];
+                return `
+                    <div class="vital-item">
+                        <div class="vital-value ${isAbnormal ? 'abnormal' : ''}">${val}</div>
+                        <div class="vital-label">${vitalLabels[key]}</div>
+                    </div>
+                `;
+            }).join('');
+            
+            // Labs
+            const labsList = document.getElementById('chartLabs');
+            labsList.innerHTML = Object.entries(patient.labs).map(([key, val]) => `<li>• ${key}: ${val}</li>`).join('');
+            
+            // Current concern
+            document.getElementById('chartConcernText').textContent = patient.currentConcern;
+            
+            // Update patient info badge
+            document.getElementById('patientInfo').textContent = `${patient.name}, ${patient.age}${patient.sex}, Room ${patient.room}`;
+        }
+        
+        function toggleChart() {
+            const body = document.getElementById('chartBody');
+            const btn = document.querySelector('.chart-toggle');
+            if (body.style.display === 'none') {
+                body.style.display = 'block';
+                btn.textContent = 'Hide Chart';
+            } else {
+                body.style.display = 'none';
+                btn.textContent = 'Show Chart';
+            }
+        }
+        
+        // =====================================================
+        // CONVERSATION CONTINUATION
+        // =====================================================
+        
+        let conversationHistory = [];
+        let currentResponder = null;
+        let sbarData = null;
+        
+        function startConversation() {
+            // Hide response section, show conversation mode
+            document.getElementById('responseSection').classList.remove('active');
+            document.getElementById('conversationMode').classList.add('active');
+            
+            // Set up the responder
+            const callingTo = document.getElementById('callingTo').value;
+            currentResponder = {
+                name: receiverNames[callingTo] || 'The Physician',
+                avatar: receiverAvatars[callingTo] || '👨‍⚕️',
+                role: callingTo
+            };
+            
+            document.getElementById('convPartnerAvatar').textContent = currentResponder.avatar;
+            document.getElementById('convPartnerName').textContent = `Conversation with ${currentResponder.name}`;
+            
+            // Initialize conversation with the SBAR response
+            const responseText = document.getElementById('responseMessage').textContent;
+            const followupText = document.getElementById('followupQuestion').textContent;
+            
+            conversationHistory = [
+                { role: 'them', text: responseText },
+                { role: 'them', text: followupText }
+            ];
+            
+            renderConversation();
+            
+            // Scroll to conversation
+            document.getElementById('conversationMode').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function renderConversation() {
+            const container = document.getElementById('convMessages');
+            container.innerHTML = conversationHistory.map(msg => `
+                <div class="conv-message ${msg.role}">
+                    <div class="conv-bubble">${msg.text}</div>
+                    <div class="conv-meta">${msg.role === 'them' ? currentResponder.name : 'You'}</div>
+                </div>
+            `).join('');
+            container.scrollTop = container.scrollHeight;
+        }
+        
+        function sendConvMessage() {
+            const input = document.getElementById('convInput');
+            const message = input.value.trim();
+            if (!message) return;
+            
+            input.value = '';
+            conversationHistory.push({ role: 'you', text: message });
+            renderConversation();
+            
+            // Generate response after short delay
+            setTimeout(() => {
+                const response = generateConversationResponse(message);
+                conversationHistory.push({ role: 'them', text: response });
+                renderConversation();
+            }, 1000);
+        }
+        
+        function generateConversationResponse(userMessage) {
+            const msgLower = userMessage.toLowerCase();
+            const responderRole = currentResponder.role;
+            
+            // Context-aware responses based on what they're discussing
+            if (msgLower.includes('vital') || msgLower.includes('blood pressure') || msgLower.includes('heart rate')) {
+                return "Can you repeat those vitals for me? And when were they last taken?";
+            }
+            
+            if (msgLower.includes('lab') || msgLower.includes('lactate') || msgLower.includes('wbc')) {
+                return "Got it. Let's get a repeat set of labs including a lactate if we haven't recently. I want to see the trend.";
+            }
+            
+            if (msgLower.includes('order') || msgLower.includes('want me to')) {
+                return "Yes, go ahead and do that. I'll put in the orders from my end as well. Call me back if anything changes.";
+            }
+            
+            if (msgLower.includes('fluid') || msgLower.includes('bolus')) {
+                return "Start with a 500mL bolus of LR and let me know how they respond. If BP doesn't improve, we may need to think about pressors.";
+            }
+            
+            if (msgLower.includes('antibiotic') || msgLower.includes('culture')) {
+                return "Good thinking. Get blood cultures x2 before antibiotics if possible, but don't delay antibiotics more than an hour. I'll order broad spectrum coverage.";
+            }
+            
+            if (msgLower.includes('ecg') || msgLower.includes('ekg') || msgLower.includes('troponin')) {
+                return "Absolutely, get that ECG stat and let me see it as soon as it's done. Hold on any new meds until I can see it.";
+            }
+            
+            if (msgLower.includes('come') || msgLower.includes('evaluate') || msgLower.includes('see the patient')) {
+                return "I'm on my way now. Should be there in about 5 minutes. Keep me updated if anything changes before I get there.";
+            }
+            
+            if (msgLower.includes('thank') || msgLower.includes('okay') || msgLower.includes('got it')) {
+                return "Sounds good. Thanks for the heads up on this patient. Don't hesitate to call back if you need anything else.";
+            }
+            
+            if (msgLower.includes('question') || msgLower.includes('?')) {
+                return "That's a good question. Let's reassess after I see the patient and we'll make a plan together.";
+            }
+            
+            // Default responses based on responder role
+            const defaultResponses = {
+                'resident': [
+                    "Okay, I'm adding this to my list. Keep the patient monitored and I'll be by within the hour.",
+                    "Thanks for calling. Let me know if the situation changes.",
+                    "Got it. Anything else I should know about this patient?"
+                ],
+                'attending': [
+                    "Good pickup. Let's discuss the plan when I round.",
+                    "I agree with your assessment. Keep me posted.",
+                    "Thank you for the thorough update."
+                ],
+                'rapid-response': [
+                    "Team is aware. We're gathering now.",
+                    "Stay with the patient. We're coming.",
+                    "What's the current airway status?"
+                ],
+                'default': [
+                    "Understood. Anything else?",
+                    "Thanks for the update. I'll document this.",
+                    "Let me know if you need anything else."
+                ]
+            };
+            
+            const responses = defaultResponses[responderRole] || defaultResponses['default'];
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
+        
+        function endConversation() {
+            document.getElementById('conversationMode').classList.remove('active');
+            
+            // Show summary
+            const summaryHtml = `
+                <div style="background: #f0fdf4; border: 1px solid #22c55e; border-radius: 12px; padding: 20px; margin-top: 20px;">
+                    <h3 style="color: #166534; margin-bottom: 10px;">✅ Conversation Complete</h3>
+                    <p style="color: #15803d;">Great job! You practiced both your SBAR communication and the follow-up conversation with ${currentResponder.name}.</p>
+                    <div style="margin-top: 15px; display: flex; gap: 10px;">
+                        <button onclick="newScenario()" class="action-btn primary">Try Another Scenario</button>
+                        <button onclick="goBack()" class="action-btn outline">Back to Dashboard</button>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('responseSection').classList.add('active');
+            document.querySelector('.feedback-section').innerHTML = summaryHtml;
+            document.getElementById('responseSection').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Store generated patient globally
+        let generatedPatient = null;
+
         // =====================================================
         // SCENARIO CONFIGURATIONS
         // =====================================================
@@ -928,6 +1603,12 @@
             
             currentScenario = scenarios[clinicalScenario];
             
+            // Generate random patient for this scenario
+            generatedPatient = generateRandomPatient(clinicalScenario);
+            
+            // Update scenario's patient with generated patient
+            currentScenario.patient = generatedPatient;
+            
             // Update practice header
             document.getElementById('callerAvatar').textContent = roleAvatars[yourRole] || '👤';
             document.getElementById('callerName').textContent = 'You (' + document.getElementById('yourRole').options[document.getElementById('yourRole').selectedIndex].text + ')';
@@ -936,9 +1617,8 @@
             document.getElementById('receiverName').textContent = receiverNames[callingTo] || 'Receiver';
             document.getElementById('receiverTitle').textContent = document.getElementById('callingTo').options[document.getElementById('callingTo').selectedIndex].text;
             
-            // Update patient info
-            const patient = currentScenario.patient;
-            document.getElementById('patientInfo').textContent = `${patient.name}, ${patient.age}${patient.sex}, ${patient.room}`;
+            // Display patient chart with generated patient
+            displayPatientChart(generatedPatient);
             
             // Show practice area, hide selection
             document.getElementById('scenarioSelection').style.display = 'none';
@@ -950,8 +1630,9 @@
             document.getElementById('inputAssessment').value = '';
             document.getElementById('inputRecommendation').value = '';
             
-            // Hide response section
+            // Hide response section and conversation mode
             document.getElementById('responseSection').classList.remove('active');
+            document.getElementById('conversationMode').classList.remove('active');
         }
         
         function toggleHint(section) {
@@ -1100,30 +1781,164 @@
         }
         
         function newScenario() {
+            // Clear case context if returning to selection
+            sessionStorage.removeItem('sbarCaseContext');
             document.getElementById('scenarioSelection').style.display = 'block';
             document.getElementById('sbarPractice').classList.remove('active');
             document.getElementById('responseSection').classList.remove('active');
+            document.getElementById('conversationMode').classList.remove('active');
+            document.getElementById('patientChart').style.display = 'none';
+            document.getElementById('caseContextBanner')?.remove();
+            
+            // Reset generated patient
+            generatedPatient = null;
+            conversationHistory = [];
         }
         
         function goBack() {
-            window.location.href = 'coachdx-dashboard.html';
+            // If came from a case, go back to that case
+            const context = sessionStorage.getItem('sbarCaseContext');
+            if (context) {
+                const ctx = JSON.parse(context);
+                window.location.href = `mentor-chat.html?case=${ctx.caseId}`;
+            } else {
+                window.location.href = 'coachdx-dashboard.html';
+            }
         }
         
-        // Initialize from URL params
+        // Load case context and auto-start if coming from a case
+        function loadCaseContext() {
+            const contextStr = sessionStorage.getItem('sbarCaseContext');
+            if (!contextStr) return null;
+            
+            try {
+                return JSON.parse(contextStr);
+            } catch (e) {
+                return null;
+            }
+        }
+        
+        // Pre-fill SBAR hints based on case context
+        function prefillFromCaseContext(context) {
+            if (!context || !context.patient) return;
+            
+            const patient = context.patient;
+            const scenario = context.scenario;
+            
+            // Update patient info display
+            document.getElementById('patientInfo').textContent = 
+                `${patient.name || 'Patient'}, ${patient.age || ''}${patient.sex ? patient.sex.charAt(0) : ''}, ${patient.setting || 'Room'} ${patient.room || ''}`;
+            
+            // Update caller/receiver based on context
+            if (context.coach) {
+                document.getElementById('receiverName').textContent = scenario?.callingTo || 'Physician';
+            }
+            
+            // Update hints with case-specific info
+            const situationHint = document.getElementById('hintSituation');
+            if (situationHint && patient) {
+                situationHint.innerHTML = `
+                    <strong>For this patient:</strong><br>
+                    • Patient: ${patient.name}, ${patient.age}${patient.sex ? patient.sex.charAt(0) : ''}<br>
+                    • Location: ${patient.setting || 'Unit'} ${patient.room || ''}<br>
+                    • Chief Complaint: ${patient.chiefComplaint || context.caseTitle}<br>
+                    <br>
+                    <strong>Start with:</strong> "This is [your name], I'm calling about ${patient.name}..."
+                `;
+            }
+            
+            // Pre-fill situation field with template
+            const role = context.role || 'nursing';
+            const roleTitle = {
+                'nursing': 'the nurse caring for',
+                'ems': 'the paramedic with',
+                'rt': 'the respiratory therapist assessing',
+                'resident': 'the resident covering'
+            }[role] || 'caring for';
+            
+            document.getElementById('inputSituation').placeholder = 
+                `I'm [your name], ${roleTitle} ${patient.name} in ${patient.setting || 'room'} ${patient.room || ''}. I'm calling because...`;
+        }
+        
+        // Show case context banner
+        function showCaseContextBanner(context) {
+            const banner = document.createElement('div');
+            banner.id = 'caseContextBanner';
+            banner.style.cssText = 'background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); border: 1px solid #3b82f6; border-radius: 12px; padding: 20px; margin-bottom: 25px;';
+            banner.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="font-size: 2.5rem;">📋</div>
+                    <div style="flex: 1;">
+                        <h3 style="color: #1e40af; margin: 0 0 5px 0; font-size: 1.1rem;">Continuing from: ${context.caseTitle}</h3>
+                        <p style="color: #1e3a8a; margin: 0; font-size: 0.95rem;">
+                            Use what you learned about <strong>${context.patient?.name || 'the patient'}</strong> to make your SBAR call.
+                        </p>
+                    </div>
+                    <button onclick="newScenario()" style="background: white; border: 1px solid #3b82f6; color: #1e40af; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 0.9rem;">
+                        Choose Different Scenario
+                    </button>
+                </div>
+            `;
+            
+            const practiceArea = document.getElementById('sbarPractice');
+            practiceArea.insertBefore(banner, practiceArea.firstChild);
+        }
+        
+        // Initialize from URL params or case context
         function init() {
             const urlParams = new URLSearchParams(window.location.search);
+            const fromCase = urlParams.get('fromCase');
             const role = urlParams.get('role');
             const scenario = urlParams.get('scenario');
             
-            if (role && document.getElementById('yourRole').querySelector(`option[value="${role}"]`)) {
-                document.getElementById('yourRole').value = role;
-            }
+            // Check for case context (coming from mentor-chat)
+            const caseContext = loadCaseContext();
             
-            if (scenario && document.getElementById('clinicalScenario').querySelector(`option[value="${scenario}"]`)) {
-                document.getElementById('clinicalScenario').value = scenario;
+            if (caseContext && fromCase) {
+                // Auto-start with case context
+                currentScenario = {
+                    title: caseContext.caseTitle,
+                    details: `Continue your assessment of ${caseContext.patient?.name || 'the patient'}. Use SBAR to communicate your findings.`,
+                    patient: caseContext.patient,
+                    expectedElements: caseContext.scenario?.expectedSBAR || {}
+                };
+                
+                // Set role from context
+                const contextRole = caseContext.role || 'nursing';
+                if (document.getElementById('yourRole').querySelector(`option[value="${contextRole}"]`)) {
+                    document.getElementById('yourRole').value = contextRole;
+                }
+                
+                // Skip scenario selection, go straight to practice
+                document.getElementById('scenarioSelection').style.display = 'none';
+                document.getElementById('sbarPractice').classList.add('active');
+                
+                // Show context banner and pre-fill
+                showCaseContextBanner(caseContext);
+                prefillFromCaseContext(caseContext);
+                
+                // Update caller info
+                const coach = caseContext.coach;
+                document.getElementById('callerAvatar').textContent = roleAvatars[contextRole] || '👤';
+                document.getElementById('callerName').textContent = 'You (' + (document.getElementById('yourRole').options[document.getElementById('yourRole').selectedIndex]?.text || contextRole) + ')';
+                
+                // Set who they're calling
+                if (caseContext.scenario?.callingTo) {
+                    document.getElementById('receiverName').textContent = caseContext.scenario.callingTo;
+                }
+                
+            } else {
+                // Normal initialization
+                if (role && document.getElementById('yourRole').querySelector(`option[value="${role}"]`)) {
+                    document.getElementById('yourRole').value = role;
+                }
+                
+                if (scenario && document.getElementById('clinicalScenario').querySelector(`option[value="${scenario}"]`)) {
+                    document.getElementById('clinicalScenario').value = scenario;
+                }
+                
+                updateScenario();
             }
-            
-            updateScenario();
         }
         
         init();
