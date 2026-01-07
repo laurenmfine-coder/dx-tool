@@ -736,16 +736,17 @@
         // =========================================================================
         function renderCases(cases) {
             const container = document.getElementById('casesContainer');
-            const emptyState = document.getElementById('emptyState');
             
             if (Object.keys(cases).length === 0) {
-                container.innerHTML = '';
-                container.appendChild(emptyState);
-                emptyState.style.display = 'block';
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📭</div>
+                        <h3>No cases found</h3>
+                        <p>Try adjusting your search or filters, or select a different specialty.</p>
+                    </div>
+                `;
                 return;
             }
-            
-            emptyState.style.display = 'none';
             
             // Group by category
             const byCategory = {};
