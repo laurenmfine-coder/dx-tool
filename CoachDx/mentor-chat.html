@@ -340,7 +340,22 @@
         </div>
     </div>
     
-    <!-- Load external cases file -->
+    <!-- Load scoring system -->
+    <script src="../dx-scoring.js"></script>
+    
+    <!-- Load all case files (order matters - merged.js must be last) -->
+    <script src="coachdx-cases-with-guidelines.js"></script>
+    <script src="coachdx-nursing-cases.js"></script>
+    <script src="coachdx-ems-cases.js"></script>
+    <script src="coachdx-rt-cases.js"></script>
+    <script src="coachdx-pt-cases.js"></script>
+    <script src="coachdx-pharmd-cases.js"></script>
+    <script src="coachdx-dental-cases.js"></script>
+    <script src="coachdx-omfs-cases.js"></script>
+    <script src="coachdx-podiatry-cases.js"></script>
+    <script src="coachdx-resident-cases.js"></script>
+    <script src="coachdx-interprofessional-cases.js"></script>
+    <script src="coachdx-specialty-cases.js"></script>
     <script src="coachdx-cases-merged.js"></script>
     
     <script>
@@ -930,7 +945,26 @@
         };
         
         console.log('Session data:', data);
-        // Future: Send to fingerprint dashboard
+        
+        // Record session in unified scoring system
+        if (typeof DxScoring !== 'undefined') {
+            DxScoring.recordCoachSession();
+            
+            // Check for mastery (5+ concepts explored in session)
+            if (Object.keys(conceptsExplored).length >= 5) {
+                DxScoring.recordCoachMastery(currentCase.title);
+            }
+            
+            console.log('[DxScoring] Session recorded. Total XP:', DxScoring.getTotalXP());
+        }
+        
+        // Store in localStorage for fingerprint dashboard
+        const sessions = JSON.parse(localStorage.getItem('coachdx_sessions') || '[]');
+        sessions.push(data);
+        localStorage.setItem('coachdx_sessions', JSON.stringify(sessions.slice(-100))); // Keep last 100
+        
+        // PostMessage for cross-window communication
+        window.parent.postMessage(data, '*');
     }
 
     document.addEventListener('DOMContentLoaded', init);
