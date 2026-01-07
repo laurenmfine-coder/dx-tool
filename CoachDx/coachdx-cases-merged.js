@@ -17,51 +17,11 @@
 //   <script src="coachdx-resident-cases.js"></script>
 //   <script src="coachdx-interprofessional-cases.js"></script>
 //   <script src="coachdx-specialty-cases.js"></script>
+//   <script src="coachdx-allergy-cases.js"></script>
 //   <script src="coachdx-cases-merged.js"></script>  <!-- This file last -->
 //
 // OR: Use this file standalone (it includes all cases inline)
 // ============================================================================
-
-// Merge all loaded case files into COACHDX_CASES
-// This file should be loaded LAST after all individual case files
-
-(function() {
-    // Start with inline fallback cases
-    let merged = typeof INLINE_CASES !== 'undefined' ? {...INLINE_CASES} : {};
-    
-    // Merge all profession-specific case files if they exist
-    const caseSources = [
-        'COACHDX_CASES_WITH_GUIDELINES',  // Main cases with guidelines
-        'COACHDX_NURSING_CASES',
-        'COACHDX_EMS_CASES', 
-        'COACHDX_RT_CASES',
-        'COACHDX_PT_CASES',
-        'COACHDX_PHARMD_CASES',
-        'COACHDX_DENTAL_CASES',
-        'COACHDX_OMFS_CASES',
-        'COACHDX_PODIATRY_CASES',
-        'COACHDX_RESIDENT_CASES',
-        'COACHDX_INTERPROFESSIONAL_CASES',
-        'COACHDX_SPECIALTY_CASES'
-    ];
-    
-    caseSources.forEach(sourceName => {
-        if (typeof window[sourceName] !== 'undefined') {
-            Object.assign(merged, window[sourceName]);
-            console.log(`[CoachDx] Merged ${Object.keys(window[sourceName]).length} cases from ${sourceName}`);
-        }
-    });
-    
-    // Also check for cases already in COACHDX_CASES (from coachdx-cases-with-guidelines.js)
-    if (typeof window.COACHDX_CASES !== 'undefined' && window.COACHDX_CASES !== merged) {
-        Object.assign(merged, window.COACHDX_CASES);
-    }
-    
-    // Set the merged result
-    window.COACHDX_CASES = merged;
-    
-    console.log('[CoachDx Cases] Total cases loaded: ' + Object.keys(merged).length);
-})();
 
 // ============================================================================
 // INLINE CASES (fallback if individual files not loaded)
@@ -455,10 +415,40 @@ const INLINE_CASES = {
 
 };
 
-// Log case count on load
-console.log('[CoachDx Cases] Loaded ' + Object.keys(COACHDX_CASES).length + ' cases');
+// ============================================================================
+// MERGE ALL CASE SOURCES
+// ============================================================================
 
-// Export for use
-if (typeof window !== 'undefined') {
-    window.COACHDX_CASES = COACHDX_CASES;
-}
+(function() {
+    // Start with inline cases as base
+    let merged = {...INLINE_CASES};
+    
+    // Merge all profession-specific case files if they exist
+    const caseSources = [
+        'COACHDX_CASES_WITH_GUIDELINES',
+        'COACHDX_NURSING_CASES',
+        'COACHDX_EMS_CASES', 
+        'COACHDX_RT_CASES',
+        'COACHDX_PT_CASES',
+        'COACHDX_PHARMD_CASES',
+        'COACHDX_DENTAL_CASES',
+        'COACHDX_OMFS_CASES',
+        'COACHDX_PODIATRY_CASES',
+        'COACHDX_RESIDENT_CASES',
+        'COACHDX_INTERPROFESSIONAL_CASES',
+        'COACHDX_SPECIALTY_CASES',
+        'COACHDX_ALLERGY_CASES'
+    ];
+    
+    caseSources.forEach(sourceName => {
+        if (typeof window[sourceName] !== 'undefined') {
+            Object.assign(merged, window[sourceName]);
+            console.log(`[CoachDx] Merged ${Object.keys(window[sourceName]).length} cases from ${sourceName}`);
+        }
+    });
+    
+    // Set the merged result globally
+    window.COACHDX_CASES = merged;
+    
+    console.log('[CoachDx Cases] Total cases loaded: ' + Object.keys(merged).length);
+})();
