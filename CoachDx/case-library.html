@@ -293,8 +293,56 @@
     <div class="filters">
         <button class="filter-btn active" data-filter="all">All Cases</button>
         <div id="categoryFilters"></div>
+        
+        <!-- Specialty Filter -->
+        <div class="specialty-filter">
+            <select id="specialtySelector" onchange="filterBySpecialty(this.value)">
+                <option value="all">All Specialties</option>
+                <option value="allergy-immunology">🧬 Allergy/Immunology</option>
+                <option value="cardiology">❤️ Cardiology</option>
+                <option value="pulmonology">🫁 Pulmonology</option>
+                <option value="neurology">🧠 Neurology</option>
+                <option value="gi">🩺 Gastroenterology</option>
+                <option value="endocrine">🦋 Endocrine</option>
+                <option value="infectious">🦠 Infectious Disease</option>
+                <option value="hematology">🩸 Hematology</option>
+            </select>
+        </div>
+        
         <input type="text" id="searchInput" class="search-box" placeholder="🔍 Search cases...">
     </div>
+    
+    <style>
+        .specialty-filter select {
+            padding: 8px 14px;
+            border: 2px solid #8b5cf6;
+            border-radius: 8px;
+            background: white;
+            font-size: 13px;
+            color: #6b21a8;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .specialty-filter select:focus {
+            outline: 2px solid #a78bfa;
+            outline-offset: 2px;
+        }
+        .specialty-active {
+            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%) !important;
+        }
+        .specialty-active .hero {
+            background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%) !important;
+        }
+        .specialty-badge {
+            display: inline-block;
+            background: #8b5cf6;
+            color: white;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 8px;
+        }
+    </style>
     
     <!-- Cases Container -->
     <main class="cases-container" id="casesContainer">
@@ -323,6 +371,7 @@
     <script src="coachdx-resident-cases.js"></script>
     <script src="coachdx-interprofessional-cases.js"></script>
     <script src="coachdx-specialty-cases.js"></script>
+    <script src="coachdx-allergy-cases.js"></script>
     <script src="coachdx-cases-merged.js"></script>
     
     <script>
@@ -473,6 +522,8 @@
         // =========================================================================
         // MERGE ALL CASES
         // =========================================================================
+        let currentSpecialty = 'all'; // Track selected specialty
+        
         function mergeAllCases() {
             let merged = {};
             
@@ -489,7 +540,8 @@
                 'COACHDX_PODIATRY_CASES',
                 'COACHDX_RESIDENT_CASES',
                 'COACHDX_INTERPROFESSIONAL_CASES',
-                'COACHDX_SPECIALTY_CASES'
+                'COACHDX_SPECIALTY_CASES',
+                'COACHDX_ALLERGY_CASES'
             ];
             
             sources.forEach(src => {
@@ -503,6 +555,35 @@
         }
         
         // =========================================================================
+        // SPECIALTY FILTERING
+        // =========================================================================
+        function filterBySpecialty(specialty) {
+            currentSpecialty = specialty;
+            
+            // Update UI state
+            if (specialty !== 'all') {
+                document.body.classList.add('specialty-active');
+            } else {
+                document.body.classList.remove('specialty-active');
+            }
+            
+            // Re-render cases with specialty filter applied
+            updateForProfession(currentProfession);
+        }
+        
+        function getCasesForSpecialty(cases, specialty) {
+            if (specialty === 'all') return cases;
+            
+            const filtered = {};
+            for (const [id, caseData] of Object.entries(cases)) {
+                if (caseData.specialty === specialty) {
+                    filtered[id] = caseData;
+                }
+            }
+            return filtered;
+        }
+        
+        // =========================================================================
         // UPDATE FOR PROFESSION
         // =========================================================================
         function updateForProfession(profession) {
@@ -510,11 +591,33 @@
             
             // Update header
             document.getElementById('currentRoleLabel').textContent = config.label;
-            document.getElementById('heroTitle').textContent = config.heroTitle;
-            document.getElementById('heroSubtitle').textContent = config.heroSubtitle;
+            
+            // Adjust title if specialty is selected
+            if (currentSpecialty !== 'all') {
+                const specialtyNames = {
+                    'allergy-immunology': 'Allergy/Immunology',
+                    'cardiology': 'Cardiology',
+                    'pulmonology': 'Pulmonology',
+                    'neurology': 'Neurology',
+                    'gi': 'Gastroenterology',
+                    'endocrine': 'Endocrine',
+                    'infectious': 'Infectious Disease',
+                    'hematology': 'Hematology'
+                };
+                document.getElementById('heroTitle').textContent = '🧬 ' + (specialtyNames[currentSpecialty] || currentSpecialty) + ' Cases';
+                document.getElementById('heroSubtitle').textContent = 'Specialty-focused cases for ' + config.label + 's';
+            } else {
+                document.getElementById('heroTitle').textContent = config.heroTitle;
+                document.getElementById('heroSubtitle').textContent = config.heroSubtitle;
+            }
             
             // Filter cases for this profession
-            const professionCases = getCasesForProfession(profession);
+            let professionCases = getCasesForProfession(profession);
+            
+            // Then filter by specialty if selected
+            if (currentSpecialty !== 'all') {
+                professionCases = getCasesForSpecialty(professionCases, currentSpecialty);
+            }
             
             // Render cases
             renderCases(professionCases);
@@ -539,12 +642,21 @@
             const allowedDisciplines = config.disciplines;
             const filtered = {};
             
+            // Medical professions that can see specialty cases
+            const medicalProfessions = ['medical-student', 'resident', 'pa', 'np', 'pharmd'];
+            const isMedicalProfession = medicalProfessions.includes(profession);
+            
             for (const [id, caseData] of Object.entries(allCases)) {
                 const caseDiscipline = caseData.discipline || caseData.profession;
                 
                 // Include if discipline matches OR if it's a general case for medical professions
                 if (allowedDisciplines.includes(caseDiscipline) || 
                     (allowedDisciplines.includes(undefined) && !caseDiscipline)) {
+                    filtered[id] = caseData;
+                }
+                
+                // Also include specialty cases (like A/I) for medical professions
+                if (isMedicalProfession && caseData.specialty && caseDiscipline === 'medical') {
                     filtered[id] = caseData;
                 }
             }
