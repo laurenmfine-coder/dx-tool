@@ -155,10 +155,52 @@
             padding: 2px 6px;
             border-radius: 4px;
             font-weight: 600;
+            position: relative;
+            cursor: help;
         }
         .case-badge.critical { background: #fee2e2; color: #dc2626; }
         .case-badge.parallel { background: #fef3c7; color: #d97706; }
         .case-badge.new { background: #dcfce7; color: #16a34a; }
+        
+        /* Tooltip for badges */
+        .case-badge .tooltip {
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1f2937;
+            color: white;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 400;
+            width: 240px;
+            text-align: left;
+            line-height: 1.5;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: opacity 0.2s, visibility 0.2s;
+        }
+        .case-badge .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: #1f2937;
+        }
+        .case-badge:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+        .tooltip-title {
+            font-weight: 600;
+            margin-bottom: 4px;
+            display: block;
+        }
         
         /* Empty State */
         .empty-state {
@@ -243,7 +285,7 @@
         <div class="hero-stats">
             <div><div class="hero-stat-num" id="statCases">0</div><div class="hero-stat-label">Cases</div></div>
             <div><div class="hero-stat-num" id="statCategories">0</div><div class="hero-stat-label">Categories</div></div>
-            <div><div class="hero-stat-num" id="statCritical">0</div><div class="hero-stat-label">Critical</div></div>
+            <div><div class="hero-stat-num" id="statParallel">0</div><div class="hero-stat-label">Parallel Pairs</div></div>
         </div>
     </section>
     
@@ -479,11 +521,11 @@
             
             // Update stats
             const categories = [...new Set(Object.values(professionCases).map(c => c.category))];
-            const criticalCount = Object.values(professionCases).filter(c => c.isCritical).length;
+            const parallelCount = Object.values(professionCases).filter(c => c.parallelCase).length;
             
             document.getElementById('statCases').textContent = Object.keys(professionCases).length;
             document.getElementById('statCategories').textContent = categories.length;
-            document.getElementById('statCritical').textContent = criticalCount;
+            document.getElementById('statParallel').textContent = Math.floor(parallelCount / 2); // Pairs, not individual
             
             // Render category filters
             renderCategoryFilters(categories);
@@ -551,9 +593,15 @@
                 
                 for (const caseData of categoryCases) {
                     const badges = [];
-                    if (caseData.isCritical) badges.push('<span class="case-badge critical">🚨 Critical</span>');
-                    if (caseData.parallelCase) badges.push('<span class="case-badge parallel">↔ Parallel</span>');
-                    if (caseData.isNew) badges.push('<span class="case-badge new">NEW</span>');
+                    if (caseData.parallelCase) {
+                        const parallelTitle = allCases[caseData.parallelCase]?.title || 'companion case';
+                        badges.push(`<span class="case-badge parallel">↔ Parallel
+                            <span class="tooltip">
+                                <span class="tooltip-title">🔄 Parallel Case</span>
+                                This case has a companion case ("${parallelTitle}") with a similar presentation but different diagnosis. Practice both to strengthen your clinical reasoning and avoid anchoring bias.
+                            </span>
+                        </span>`);
+                    }
                     
                     const patient = caseData.patient || {};
                     const demo = patient.age ? `${patient.age}${patient.sex ? patient.sex[0] : ''} ${patient.chiefComplaint || ''}` : (caseData.description || '').substring(0, 60) + '...';

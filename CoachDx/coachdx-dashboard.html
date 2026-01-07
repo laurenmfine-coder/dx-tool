@@ -589,7 +589,11 @@
             <div class="platform-card coachdx">
                 <div class="platform-header">
                     <div class="platform-icon">🧠</div>
-                    <h2>CoachDx</h2>
+                    <h2>CoachDx <span class="platform-info" title="info">ⓘ</span></h2>
+                    <div class="platform-tooltip" id="tooltip-coachdx">
+                        <strong>Socratic Coaching Method</strong><br>
+                        Your AI mentor asks guiding questions rather than giving answers directly. This builds deeper understanding and independent clinical reasoning skills.
+                    </div>
                     <p>AI-powered Socratic coaching with your personalized mentor. Practice cases with real-time feedback.</p>
                 </div>
                 <div class="platform-stats">
@@ -608,7 +612,7 @@
                 </div>
                 <div class="platform-actions">
                     <a href="mentor-chat.html" class="btn btn-primary">Start Coaching</a>
-                    <a href="#" class="btn btn-outline">Browse Cases</a>
+                    <a href="case-library.html" class="btn btn-outline">Browse Cases</a>
                 </div>
             </div>
             
@@ -616,7 +620,11 @@
             <div class="platform-card reasondx">
                 <div class="platform-header">
                     <div class="platform-icon">🔬</div>
-                    <h2>ReasonDx</h2>
+                    <h2>ReasonDx <span class="platform-info" title="info">ⓘ</span></h2>
+                    <div class="platform-tooltip" id="tooltip-reasondx">
+                        <strong>Hypothesis-Driven Reasoning</strong><br>
+                        Practice generating differential diagnoses, ordering tests strategically, and updating your thinking as new data arrives—the core skill of expert clinicians.
+                    </div>
                     <p>Systematic clinical reasoning training. Build illness scripts and practice diagnostic thinking.</p>
                 </div>
                 <div class="platform-stats">
@@ -643,7 +651,11 @@
             <div class="platform-card mechanismdx">
                 <div class="platform-header">
                     <div class="platform-icon">⚙️</div>
-                    <h2>MechanismDx</h2>
+                    <h2>MechanismDx <span class="platform-info" title="info">ⓘ</span></h2>
+                    <div class="platform-tooltip" id="tooltip-mechanismdx">
+                        <strong>Pathophysiology-First Learning</strong><br>
+                        Understanding mechanisms helps you predict clinical findings, anticipate complications, and reason through unfamiliar presentations—not just memorize patterns.
+                    </div>
                     <p>Master pathophysiology through interactive modules. Understand the WHY behind clinical findings.</p>
                 </div>
                 <div class="platform-stats">
@@ -666,6 +678,62 @@
                 </div>
             </div>
         </div>
+        
+        <style>
+            .platform-info {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 18px;
+                height: 18px;
+                background: rgba(255,255,255,0.2);
+                border-radius: 50%;
+                font-size: 11px;
+                cursor: help;
+                margin-left: 6px;
+                font-style: normal;
+                vertical-align: middle;
+            }
+            .platform-tooltip {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #1f2937;
+                color: white;
+                padding: 14px 18px;
+                border-radius: 10px;
+                font-size: 13px;
+                font-weight: 400;
+                width: 280px;
+                text-align: left;
+                line-height: 1.5;
+                z-index: 100;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+                margin-top: 8px;
+            }
+            .platform-tooltip::before {
+                content: '';
+                position: absolute;
+                bottom: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                border: 8px solid transparent;
+                border-bottom-color: #1f2937;
+            }
+            .platform-header {
+                position: relative;
+            }
+            .platform-header h2 {
+                position: relative;
+                display: inline-block;
+            }
+            .platform-info:hover + .platform-tooltip,
+            .platform-tooltip:hover {
+                display: block;
+            }
+        </style>
         
         <!-- Recommended Cases -->
         <h2 class="section-title">⭐ Recommended For You</h2>
