@@ -945,11 +945,46 @@
     </style>
 </head>
 <body>
+    <!-- Profession Banner -->
+    <div class="profession-banner" id="professionBanner" style="background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%); border-bottom: 1px solid #86efac; padding: 10px 24px; display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;">
+        <span style="font-size: 14px; color: #166534;">📋 Training as: <strong id="professionLabel">Medical Student</strong></span>
+        <select id="professionSelector" onchange="updateProfession(this.value)" style="padding: 6px 12px; border: 1px solid #86efac; border-radius: 6px; background: white; font-size: 13px; color: #166534; cursor: pointer;">
+            <option value="medical-student">Medical Student</option>
+            <option value="resident">Resident</option>
+            <option value="nursing">Nursing Student</option>
+            <option value="ems">EMS Provider</option>
+            <option value="rt">RT Student</option>
+            <option value="pt">PT Student</option>
+            <option value="pharmd">PharmD Student</option>
+            <option value="omfs">OMFS Resident</option>
+            <option value="dental">Dental Student</option>
+            <option value="dpm">Podiatry Student</option>
+            <option value="pa">PA Student</option>
+            <option value="np">NP Student</option>
+        </select>
+    </div>
+    
     <!-- Header -->
     <header class="header">
-        <h1>📞 SBAR Communication Trainer</h1>
+        <h1>📞 SBAR Communication Trainer 
+            <span class="info-badge" style="display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; background: rgba(255,255,255,0.2); border-radius: 50%; font-size: 12px; cursor: help; position: relative; margin-left: 8px;">?
+                <span class="header-tooltip" style="visibility: hidden; opacity: 0; position: absolute; top: 130%; left: 50%; transform: translateX(-50%); background: #1f2937; color: white; padding: 14px 18px; border-radius: 10px; font-size: 13px; font-weight: 400; width: 300px; text-align: left; line-height: 1.5; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.3); transition: opacity 0.2s, visibility 0.2s;">
+                    <strong style="display: block; margin-bottom: 8px; font-size: 14px;">What is SBAR?</strong>
+                    <strong>S</strong>ituation – What's happening right now?<br>
+                    <strong>B</strong>ackground – What's the clinical context?<br>
+                    <strong>A</strong>ssessment – What do you think is going on?<br>
+                    <strong>R</strong>ecommendation – What do you need?<br><br>
+                    <em style="color: #94a3b8; font-size: 12px;">SBAR is the gold standard for clinical handoffs and urgent communication.</em>
+                </span>
+            </span>
+        </h1>
         <button class="back-btn" onclick="goBack()">← Back to Dashboard</button>
     </header>
+    
+    <style>
+        .info-badge:hover .header-tooltip { visibility: visible !important; opacity: 1 !important; }
+        .header-tooltip::after { content: ''; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); border: 8px solid transparent; border-bottom-color: #1f2937; }
+    </style>
     
     <!-- Main Container -->
     <div class="main-container">
@@ -962,13 +997,29 @@
                     <label for="yourRole">You are a:</label>
                     <select id="yourRole" onchange="updateScenario()">
                         <option value="">-- Select Your Role --</option>
-                        <option value="nursing">Floor Nurse</option>
-                        <option value="nursing-student">Nursing Student with Preceptor</option>
-                        <option value="charge">Charge Nurse</option>
-                        <option value="ems">Paramedic</option>
-                        <option value="rt">Respiratory Therapist</option>
-                        <option value="resident">Medical Resident</option>
-                        <option value="med-student">Medical Student</option>
+                        <optgroup label="Nursing">
+                            <option value="nursing">Floor Nurse (RN)</option>
+                            <option value="nursing-student">Nursing Student</option>
+                            <option value="charge">Charge Nurse</option>
+                            <option value="icu-nurse">ICU Nurse</option>
+                        </optgroup>
+                        <optgroup label="Medicine">
+                            <option value="med-student">Medical Student</option>
+                            <option value="resident">Medical Resident</option>
+                            <option value="pa">PA / PA Student</option>
+                            <option value="np">NP / NP Student</option>
+                        </optgroup>
+                        <optgroup label="Allied Health">
+                            <option value="ems">Paramedic / EMT</option>
+                            <option value="rt">Respiratory Therapist</option>
+                            <option value="pt">Physical Therapist</option>
+                            <option value="pharmd">Pharmacist</option>
+                        </optgroup>
+                        <optgroup label="Dental/Surgery">
+                            <option value="omfs">OMFS Resident</option>
+                            <option value="dental">Dental Student/Resident</option>
+                            <option value="dpm">Podiatry Resident</option>
+                        </optgroup>
                     </select>
                 </div>
                 
@@ -983,6 +1034,8 @@
                         <option value="ed">Emergency Department</option>
                         <option value="specialist">Specialist/Consultant</option>
                         <option value="surgeon">Surgeon</option>
+                        <option value="omfs-attending">OMFS Attending</option>
+                        <option value="pharmacy">Pharmacy</option>
                     </select>
                 </div>
             </div>
@@ -1013,10 +1066,28 @@
                         <option value="rt-bipap">BiPAP recommendation</option>
                         <option value="rt-vent">Ventilator change needed</option>
                         <option value="rt-wean">Weaning assessment</option>
+                        <option value="rt-abg">Critical ABG report</option>
+                    </optgroup>
+                    <optgroup label="OMFS/Dental Scenarios">
+                        <option value="omfs-airway">Airway compromise concern</option>
+                        <option value="omfs-bleeding">Post-op hemorrhage</option>
+                        <option value="omfs-infection">Spreading odontogenic infection</option>
+                        <option value="dental-medical-clearance">Medical clearance request</option>
+                    </optgroup>
+                    <optgroup label="PT Scenarios">
+                        <option value="pt-mobility">New mobility concern</option>
+                        <option value="pt-fall-risk">High fall risk patient</option>
+                        <option value="pt-vitals">Abnormal vital response to therapy</option>
+                    </optgroup>
+                    <optgroup label="PharmD Scenarios">
+                        <option value="pharmd-interaction">Critical drug interaction</option>
+                        <option value="pharmd-dosing">Renal dosing recommendation</option>
+                        <option value="pharmd-anticoag">Anticoagulation concern</option>
                     </optgroup>
                     <optgroup label="Handoffs">
                         <option value="shift-handoff">Shift-to-shift handoff</option>
                         <option value="transfer">Transfer to another unit</option>
+                        <option value="or-handoff">OR to floor handoff</option>
                     </optgroup>
                 </select>
             </div>
@@ -2057,10 +2128,18 @@
             'nursing': '👩‍⚕️',
             'nursing-student': '👩‍🎓',
             'charge': '👩‍⚕️',
+            'icu-nurse': '👩‍⚕️',
             'ems': '🚑',
             'rt': '🫁',
             'resident': '👨‍⚕️',
-            'med-student': '👨‍🎓'
+            'med-student': '👨‍🎓',
+            'pa': '👨‍⚕️',
+            'np': '👩‍⚕️',
+            'omfs': '🦷',
+            'dental': '🦷',
+            'dpm': '🦶',
+            'pt': '🦿',
+            'pharmd': '💊'
         };
         
         const receiverAvatars = {
@@ -2070,7 +2149,9 @@
             'charge': '👩‍⚕️',
             'ed': '🏥',
             'specialist': '👨‍⚕️',
-            'surgeon': '👨‍⚕️'
+            'surgeon': '👨‍⚕️',
+            'omfs-attending': '🦷',
+            'pharmacy': '💊'
         };
         
         const receiverNames = {
@@ -2080,8 +2161,64 @@
             'charge': 'Sarah (Charge RN)',
             'ed': 'ED Charge Nurse',
             'specialist': 'Dr. Chen (Consultant)',
-            'surgeon': 'Dr. Martinez (Surgery)'
+            'surgeon': 'Dr. Martinez (Surgery)',
+            'omfs-attending': 'Dr. Torres (OMFS)',
+            'pharmacy': 'Dr. Walsh (Pharmacy)'
         };
+        
+        // Profession labels for display
+        const professionLabels = {
+            'medical-student': 'Medical Student',
+            'resident': 'Resident',
+            'nursing': 'Nursing Student',
+            'ems': 'EMS Provider',
+            'rt': 'RT Student',
+            'pt': 'PT Student',
+            'pharmd': 'PharmD Student',
+            'omfs': 'OMFS Resident',
+            'dental': 'Dental Student',
+            'dpm': 'Podiatry Student',
+            'pa': 'PA Student',
+            'np': 'NP Student'
+        };
+        
+        // Map profession to default SBAR role
+        function mapProfessionToRole(profession) {
+            const mapping = {
+                'medical-student': 'med-student',
+                'resident': 'resident',
+                'nursing': 'nursing-student',
+                'ems': 'ems',
+                'rt': 'rt',
+                'pt': 'pt',
+                'pharmd': 'pharmd',
+                'omfs': 'omfs',
+                'dental': 'dental',
+                'dpm': 'dpm',
+                'pa': 'pa',
+                'np': 'np'
+            };
+            return mapping[profession] || 'nursing';
+        }
+        
+        // Update profession from banner selector
+        function updateProfession(profession, save = true) {
+            // Update label
+            document.getElementById('professionLabel').textContent = professionLabels[profession] || profession;
+            
+            // Auto-select matching role
+            const role = mapProfessionToRole(profession);
+            const roleSelect = document.getElementById('yourRole');
+            if (roleSelect.querySelector(`option[value="${role}"]`)) {
+                roleSelect.value = role;
+                updateScenario();
+            }
+            
+            // Save to localStorage for ecosystem sync
+            if (save) {
+                localStorage.setItem('selectedProfession', profession);
+            }
+        }
         
         let currentScenario = null;
         
@@ -2425,6 +2562,11 @@
             const role = urlParams.get('role');
             const scenario = urlParams.get('scenario');
             
+            // Sync profession with ecosystem
+            const savedProfession = urlParams.get('profession') || localStorage.getItem('selectedProfession') || 'medical-student';
+            document.getElementById('professionSelector').value = savedProfession;
+            updateProfession(savedProfession, false); // false = don't save back to localStorage yet
+            
             // Check for case context (coming from mentor-chat)
             const caseContext = loadCaseContext();
             
@@ -2438,7 +2580,7 @@
                 };
                 
                 // Set role from context
-                const contextRole = caseContext.role || 'nursing';
+                const contextRole = caseContext.role || mapProfessionToRole(savedProfession);
                 if (document.getElementById('yourRole').querySelector(`option[value="${contextRole}"]`)) {
                     document.getElementById('yourRole').value = contextRole;
                 }
