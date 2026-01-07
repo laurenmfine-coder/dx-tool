@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allergen Immunotherapy | MechanismDx</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            color: white;
+            padding: 24px;
+        }
+        .header-content { max-width: 1000px; margin: 0 auto; }
+        .breadcrumb { font-size: 13px; opacity: 0.8; margin-bottom: 8px; }
+        .breadcrumb a { color: white; text-decoration: none; }
+        .header h1 { font-size: 32px; margin-bottom: 8px; }
+        .header p { opacity: 0.9; font-size: 16px; }
+        
+        .content-meta {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .meta-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            background: #ecfdf5;
+            color: #047857;
+        }
+        
+        .content { max-width: 1000px; margin: 0 auto; padding: 40px 24px; }
+        
+        .objectives {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border: 1px solid #6ee7b7;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+        .objectives h2 { color: #047857; font-size: 18px; margin-bottom: 16px; }
+        .objectives ul { margin-left: 24px; color: #065f46; }
+        .objectives li { margin-bottom: 8px; }
+        
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #047857;
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #a7f3d0;
+        }
+        .section h3 { color: #059669; font-size: 18px; margin: 24px 0 12px; }
+        .section p { margin-bottom: 16px; color: #374151; }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        .comparison-table th {
+            background: #059669;
+            color: white;
+            padding: 14px 12px;
+            text-align: left;
+        }
+        .comparison-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+        .comparison-table tr:hover { background: #ecfdf5; }
+        .comparison-table .feature-col {
+            font-weight: 600;
+            color: #047857;
+            background: #f0fdf4;
+            width: 160px;
+        }
+        
+        .key-point {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 16px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .key-point strong { color: #92400e; }
+        
+        .clinical-pearl {
+            background: #f0fdf4;
+            border-left: 4px solid #22c55e;
+            padding: 16px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .clinical-pearl strong { color: #166534; }
+        
+        .warning-box {
+            background: #fef2f2;
+            border-left: 4px solid #ef4444;
+            padding: 16px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .warning-box strong { color: #dc2626; }
+        
+        .protocol-box {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border: 1px solid #93c5fd;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .protocol-box h4 {
+            color: #1d4ed8;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .protocol-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .timeline-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+        .timeline-marker {
+            width: 40px;
+            height: 40px;
+            background: #3b82f6;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        .timeline-content {
+            flex: 1;
+            background: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid #bfdbfe;
+        }
+        .timeline-content strong { color: #1d4ed8; }
+        
+        .indication-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .indication-card {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .indication-card.contraindicated {
+            background: #fef2f2;
+            border-color: #fecaca;
+        }
+        .indication-card h5 {
+            color: #047857;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .indication-card.contraindicated h5 { color: #dc2626; }
+        .indication-card ul {
+            margin-left: 16px;
+            font-size: 13px;
+            color: #374151;
+        }
+        
+        .reaction-protocol {
+            background: white;
+            border: 2px solid #f59e0b;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .reaction-protocol h4 {
+            color: #b45309;
+            margin-bottom: 16px;
+        }
+        .reaction-step {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            align-items: flex-start;
+        }
+        .step-number {
+            background: #f59e0b;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        
+        .references {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 40px;
+        }
+        .references h3 { font-size: 16px; color: #374151; margin-bottom: 16px; }
+        .reference-item {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 8px;
+            padding-left: 24px;
+            position: relative;
+        }
+        .reference-item::before { content: "📚"; position: absolute; left: 0; }
+        .reference-item a { color: #059669; }
+        .open-access {
+            background: #dcfce7;
+            color: #166534;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            margin-left: 4px;
+        }
+        
+        .footer {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 32px 24px;
+            text-align: center;
+            color: #64748b;
+            font-size: 13px;
+        }
+        .footer a { color: #059669; text-decoration: none; }
+        
+        @media (max-width: 768px) {
+            .header h1 { font-size: 24px; }
+            .comparison-table { font-size: 12px; }
+            .timeline-item { flex-direction: column; }
+            .timeline-marker { margin-bottom: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="breadcrumb">
+                <a href="index.html">MechanismDx</a> → <a href="allergy-immunology.html">Allergy/Immunology</a> → Allergen Immunotherapy
+            </div>
+            <h1>🌿 Allergen Immunotherapy</h1>
+            <p>SCIT, SLIT, and desensitization protocols for allergic disease</p>
+        </div>
+    </header>
+    
+    <div class="content-meta">
+        <span class="meta-badge">📅 Last updated: January 7, 2026</span>
+        <span class="meta-badge">⏱️ ~45 minutes</span>
+        <span class="meta-badge">📋 Practice Parameter-Based</span>
+    </div>
+    
+    <main class="content">
+        <div class="objectives">
+            <h2>🎯 Learning Objectives</h2>
+            <ul>
+                <li>Explain the immunologic mechanisms of allergen immunotherapy</li>
+                <li>Identify appropriate candidates for SCIT and SLIT</li>
+                <li>Compare standard, cluster, and rush immunotherapy protocols</li>
+                <li>Recognize and manage local and systemic reactions</li>
+                <li>Understand the role of immunotherapy in specific conditions (allergic rhinitis, asthma, venom allergy)</li>
+                <li>Describe the aspirin desensitization protocol for AERD</li>
+            </ul>
+        </div>
+        
+        <!-- Section 1: Mechanism -->
+        <section class="section">
+            <h2>1. Mechanism of Action</h2>
+            
+            <p>Allergen immunotherapy (AIT) modifies the immune response to specific allergens, inducing tolerance through multiple mechanisms:</p>
+            
+            <h3>Early Changes (Weeks to Months)</h3>
+            <ul>
+                <li><strong>Mast cell/basophil desensitization:</strong> Reduced mediator release with allergen exposure</li>
+                <li><strong>Decreased immediate-phase response:</strong> Less histamine, fewer symptoms</li>
+            </ul>
+            
+            <h3>Intermediate Changes (Months)</h3>
+            <ul>
+                <li><strong>T regulatory (Treg) cell induction:</strong> IL-10 and TGF-β production</li>
+                <li><strong>Th2 → Th1 shift:</strong> Decreased IL-4, IL-5, IL-13; increased IFN-γ</li>
+                <li><strong>Decreased allergen-specific IgE</strong> (long-term)</li>
+            </ul>
+            
+            <h3>Late Changes (Years)</h3>
+            <ul>
+                <li><strong>Blocking antibodies:</strong> IgG4 competes with IgE for allergen binding</li>
+                <li><strong>Decreased tissue eosinophilia</strong></li>
+                <li><strong>Sustained tolerance:</strong> May persist years after stopping therapy</li>
+            </ul>
+            
+            <div class="key-point">
+                <strong>Key Concept:</strong> Unlike medications that suppress symptoms, immunotherapy modifies the underlying disease. Benefits can persist for years after a completed 3-5 year course—the only treatment that alters the natural history of allergic disease.
+            </div>
+        </section>
+        
+        <!-- Section 2: SCIT vs SLIT -->
+        <section class="section">
+            <h2>2. SCIT vs SLIT: Comparison</h2>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>SCIT (Subcutaneous)</th>
+                        <th>SLIT (Sublingual)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="feature-col">Administration</td>
+                        <td>Injection in medical office</td>
+                        <td>Tablet or drops under tongue at home</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Frequency</td>
+                        <td>Weekly (buildup) → monthly (maintenance)</td>
+                        <td>Daily</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Duration</td>
+                        <td>3-5 years</td>
+                        <td>3-5 years (pre-seasonal or perennial)</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Allergens Available</td>
+                        <td>Any inhalant, venom (custom mixes)</td>
+                        <td>Limited: grass, ragweed, dust mite (FDA-approved tablets)</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Efficacy</td>
+                        <td>Well-established; 30-40% symptom reduction</td>
+                        <td>Comparable for approved allergens</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Systemic Reaction Risk</td>
+                        <td>Higher (0.1-0.2% per injection)</td>
+                        <td>Lower (rare anaphylaxis)</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Local Reactions</td>
+                        <td>Injection site swelling</td>
+                        <td>Oral itching, throat irritation (common initially)</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Office Visits</td>
+                        <td>Required for each injection + 30min observation</td>
+                        <td>First dose in office; then home</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Ideal Candidate</td>
+                        <td>Multiple allergens, venom allergy, prefers less daily adherence</td>
+                        <td>Single/few allergens, needle-phobic, wants home administration</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>FDA-Approved SLIT Tablets</h3>
+            <ul>
+                <li><strong>Grastek® (Timothy grass):</strong> Allergic rhinitis ± conjunctivitis, ages 5-65</li>
+                <li><strong>Ragwitek® (Ragweed):</strong> Allergic rhinitis ± conjunctivitis, ages 18-65</li>
+                <li><strong>Odactra® (House dust mite):</strong> Allergic rhinitis ± conjunctivitis, ages 18-65; also for dust mite-allergic asthma</li>
+            </ul>
+            
+            <div class="clinical-pearl">
+                <strong>Clinical Pearl:</strong> SLIT tablets should be started 12 weeks before pollen season (grass, ragweed) for optimal efficacy. Dust mite SLIT is year-round. First dose MUST be given in office with 30-minute observation.
+            </div>
+        </section>
+        
+        <!-- Section 3: Protocols -->
+        <section class="section">
+            <h2>3. SCIT Protocols</h2>
+            
+            <div class="protocol-box">
+                <h4>📋 Standard (Conventional) Protocol</h4>
+                <div class="protocol-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker">1</div>
+                        <div class="timeline-content">
+                            <strong>Build-up Phase:</strong> Weekly injections with gradually increasing doses over 6-8 months until maintenance dose reached
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">2</div>
+                        <div class="timeline-content">
+                            <strong>Maintenance Phase:</strong> Same dose every 2-4 weeks for 3-5 years
+                        </div>
+                    </div>
+                </div>
+                <p style="margin-top: 16px; font-size: 14px; color: #64748b;">
+                    <strong>Typical schedule:</strong> Start at 1:10,000 or 1:1,000 dilution → increase weekly → reach maintenance (typically 0.5mL of maintenance concentration)
+                </p>
+            </div>
+            
+            <div class="protocol-box">
+                <h4>⚡ Cluster Protocol</h4>
+                <div class="protocol-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker">1</div>
+                        <div class="timeline-content">
+                            <strong>Build-up Phase:</strong> Multiple injections per visit (2-4), given 30 min apart, 1-2x/week. Reaches maintenance in 4-8 weeks.
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">2</div>
+                        <div class="timeline-content">
+                            <strong>Maintenance Phase:</strong> Standard maintenance (every 2-4 weeks for 3-5 years)
+                        </div>
+                    </div>
+                </div>
+                <p style="margin-top: 16px; font-size: 14px; color: #64748b;">
+                    <strong>Advantage:</strong> Faster buildup, fewer total visits. Slightly higher reaction rate during buildup.
+                </p>
+            </div>
+            
+            <div class="protocol-box">
+                <h4>🚀 Rush Protocol</h4>
+                <div class="protocol-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker">1</div>
+                        <div class="timeline-content">
+                            <strong>Build-up Phase:</strong> Multiple injections over 1-3 days to reach maintenance. Often used for venom immunotherapy.
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker">2</div>
+                        <div class="timeline-content">
+                            <strong>Maintenance Phase:</strong> Standard maintenance schedule thereafter
+                        </div>
+                    </div>
+                </div>
+                <p style="margin-top: 16px; font-size: 14px; color: #64748b;">
+                    <strong>Higher risk:</strong> Requires experienced staff, premedication often used. Reserved for venom allergy or urgent cases.
+                </p>
+            </div>
+            
+            <div class="warning-box">
+                <strong>⚠️ Premedication for Cluster/Rush:</strong> Consider antihistamines ± omalizumab pretreatment for high-risk patients. H1 blocker (cetirizine 10mg) given 1-2 hours before injections can reduce systemic reactions.
+            </div>
+        </section>
+        
+        <!-- Section 4: Indications -->
+        <section class="section">
+            <h2>4. Indications & Contraindications</h2>
+            
+            <div class="indication-grid">
+                <div class="indication-card">
+                    <h5>✅ Strong Indications</h5>
+                    <ul>
+                        <li>Allergic rhinitis/conjunctivitis (moderate-severe, inadequate medication control)</li>
+                        <li>Allergic asthma (controlled, FEV₁ >70%)</li>
+                        <li>Venom hypersensitivity (systemic reactions)</li>
+                        <li>Atopic dermatitis with aeroallergen sensitization</li>
+                    </ul>
+                </div>
+                
+                <div class="indication-card">
+                    <h5>✅ Requirements for Candidacy</h5>
+                    <ul>
+                        <li>IgE-mediated sensitivity confirmed (SPT or sIgE)</li>
+                        <li>Clinical correlation (symptoms with exposure)</li>
+                        <li>Symptoms inadequately controlled with avoidance + medications</li>
+                        <li>Willingness to commit to 3-5 years of treatment</li>
+                    </ul>
+                </div>
+                
+                <div class="indication-card contraindicated">
+                    <h5>❌ Absolute Contraindications</h5>
+                    <ul>
+                        <li>Uncontrolled/severe asthma (FEV₁ <70%)</li>
+                        <li>Inability to communicate symptoms</li>
+                        <li>Significant cardiovascular disease (high anaphylaxis risk)</li>
+                        <li>Treatment with beta-blockers (relative—can continue with caution)</li>
+                    </ul>
+                </div>
+                
+                <div class="indication-card contraindicated">
+                    <h5>⚠️ Relative Contraindications</h5>
+                    <ul>
+                        <li>Pregnancy (don't initiate; can continue if tolerated)</li>
+                        <li>Immunodeficiency</li>
+                        <li>Autoimmune disease</li>
+                        <li>Age <5 years (limited data)</li>
+                        <li>Poor adherence likelihood</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 5: Reactions -->
+        <section class="section">
+            <h2>5. Reactions & Management</h2>
+            
+            <h3>Local Reactions</h3>
+            <p>Swelling, redness, and itching at the injection site are common and usually not dangerous:</p>
+            <ul>
+                <li><strong>Small local (< 25mm):</strong> No action needed; may apply ice</li>
+                <li><strong>Large local (≥ 25mm):</strong> May premedicate with antihistamine; consider dose adjustment if persistent</li>
+                <li><strong>Delayed local (>24 hrs):</strong> Usually not dose-limiting</li>
+            </ul>
+            
+            <h3>Systemic Reactions</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Grade</th>
+                        <th>Symptoms</th>
+                        <th>Management</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Grade 1</strong></td>
+                        <td>Pruritus, urticaria, rhinitis, mild asthma (PEF >70%)</td>
+                        <td>Antihistamine ± inhaled bronchodilator; observe</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Grade 2</strong></td>
+                        <td>Urticaria, angioedema (not laryngeal), moderate asthma (PEF 40-70%)</td>
+                        <td>Antihistamine, bronchodilator, consider epinephrine</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Grade 3</strong></td>
+                        <td>Severe asthma (PEF <40%), laryngeal edema</td>
+                        <td><strong>Epinephrine IM</strong>, oxygen, prepare for airway management</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Grade 4</strong></td>
+                        <td>Respiratory failure, hypotension, loss of consciousness</td>
+                        <td><strong>Epinephrine IM</strong>, IV fluids, call emergency services</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="reaction-protocol">
+                <h4>🚨 Systemic Reaction Protocol</h4>
+                <div class="reaction-step">
+                    <div class="step-number">1</div>
+                    <div><strong>Stop injection</strong> if in progress; do NOT remove needle until assessment</div>
+                </div>
+                <div class="reaction-step">
+                    <div class="step-number">2</div>
+                    <div><strong>Assess severity</strong> - airway, breathing, circulation, skin</div>
+                </div>
+                <div class="reaction-step">
+                    <div class="step-number">3</div>
+                    <div><strong>For Grade 2+: Epinephrine 0.3-0.5mg IM</strong> (anterolateral thigh)</div>
+                </div>
+                <div class="reaction-step">
+                    <div class="step-number">4</div>
+                    <div><strong>Position:</strong> Supine with legs elevated (unless respiratory distress)</div>
+                </div>
+                <div class="reaction-step">
+                    <div class="step-number">5</div>
+                    <div><strong>Adjuncts:</strong> O₂, albuterol for bronchospasm, diphenhydramine, IV access</div>
+                </div>
+                <div class="reaction-step">
+                    <div class="step-number">6</div>
+                    <div><strong>Monitor:</strong> Vital signs q5min; observe minimum 30-60 min after resolution</div>
+                </div>
+                <div class="reaction-step">
+                    <div class="step-number">7</div>
+                    <div><strong>Document:</strong> Time of onset, symptoms, treatment, outcome, dose adjustment plan</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 6: Venom Immunotherapy -->
+        <section class="section">
+            <h2>6. Venom Immunotherapy (VIT)</h2>
+            
+            <p>VIT is the most effective form of immunotherapy, with >95% protection rate against future systemic reactions.</p>
+            
+            <h3>Indications for VIT</h3>
+            <ul>
+                <li>History of systemic reaction (not just large local) to Hymenoptera sting</li>
+                <li>Positive venom skin test or serum specific IgE</li>
+                <li>Adults with systemic reactions should be offered VIT</li>
+                <li>Children: VIT for moderate-severe systemic reactions (not cutaneous-only)</li>
+            </ul>
+            
+            <h3>Venoms Used</h3>
+            <ul>
+                <li><strong>Honeybee</strong> (Apis mellifera)</li>
+                <li><strong>Yellow jacket</strong> (Vespula species)</li>
+                <li><strong>Wasp</strong> (Polistes species)</li>
+                <li><strong>Hornet</strong> (Dolichovespula/Vespa)</li>
+                <li><strong>Fire ant</strong> (whole body extract—Solenopsis)</li>
+            </ul>
+            
+            <div class="key-point">
+                <strong>Duration of VIT:</strong> Typically 5 years. Consider indefinite VIT for: very severe initial reaction (hypotension/LOC), honeybee allergy (higher relapse), systemic mastocytosis, or elevated baseline tryptase.
+            </div>
+            
+            <div class="clinical-pearl">
+                <strong>Clinical Pearl - Mastocytosis Screening:</strong> Check baseline serum tryptase in all venom allergy patients. Elevated tryptase (>11.4 ng/mL) suggests mastocytosis and predicts higher risk of severe reactions and VIT treatment failure. These patients may need lifelong VIT.
+            </div>
+        </section>
+        
+        <!-- Section 7: AERD Desensitization -->
+        <section class="section">
+            <h2>7. Aspirin Desensitization for AERD</h2>
+            
+            <p>Aspirin-exacerbated respiratory disease (AERD, Samter's triad) consists of asthma, nasal polyposis, and NSAID sensitivity. Aspirin desensitization can improve disease control.</p>
+            
+            <h3>Components of AERD</h3>
+            <ul>
+                <li>Chronic rhinosinusitis with nasal polyps (often recurrent despite surgery)</li>
+                <li>Asthma (often severe, eosinophilic)</li>
+                <li>Reactions to COX-1 inhibitors (aspirin, NSAIDs)</li>
+            </ul>
+            
+            <h3>Aspirin Desensitization Protocol (Example)</h3>
+            <div class="protocol-box" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-color: #f59e0b;">
+                <h4 style="color: #b45309;">⚠️ Aspirin Challenge/Desensitization (Day 1-2)</h4>
+                <p style="font-size: 13px; color: #92400e; margin-bottom: 16px;"><strong>Must be performed in monitored setting with emergency equipment available. Asthma must be stable (FEV₁ ≥70%).</strong></p>
+                <div class="protocol-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker" style="background: #f59e0b;">1</div>
+                        <div class="timeline-content">
+                            <strong>Day 1 AM:</strong> Aspirin 20-40mg → observe 3 hours
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker" style="background: #f59e0b;">2</div>
+                        <div class="timeline-content">
+                            <strong>Day 1 PM:</strong> Aspirin 40-60mg → observe 3 hours (if no reaction to AM dose)
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker" style="background: #f59e0b;">3</div>
+                        <div class="timeline-content">
+                            <strong>Day 2:</strong> Continue escalating: 60mg → 100mg → 150mg → 325mg (q3h intervals)
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker" style="background: #f59e0b;">4</div>
+                        <div class="timeline-content">
+                            <strong>Maintenance:</strong> 325-650mg BID ongoing (must not miss doses—re-sensitization occurs within 48-72 hours)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>Benefits of Aspirin Desensitization</h3>
+            <ul>
+                <li>Improved nasal and sinus symptoms</li>
+                <li>Decreased polyp recurrence (extends time between surgeries)</li>
+                <li>Reduced need for systemic corticosteroids</li>
+                <li>Improved asthma control in some patients</li>
+                <li>Enables NSAID use for cardiovascular or pain indications</li>
+            </ul>
+            
+            <div class="warning-box">
+                <strong>⚠️ Critical:</strong> Once desensitized, patients must take aspirin DAILY. Missing 48-72 hours results in re-sensitization, and the full desensitization protocol must be repeated before aspirin can be safely resumed.
+            </div>
+        </section>
+        
+        <!-- References -->
+        <div class="references">
+            <h3>📚 References & Practice Parameters</h3>
+            
+            <div class="reference-item">
+                Cox L, Nelson H, Lockey R, et al. <strong>Allergen immunotherapy: A practice parameter third update.</strong> J Allergy Clin Immunol. 2011;127(1):S1-S55.
+                <a href="https://www.aaaai.org/Aaaai/media/Media-Library-PDFs/Allergist%20Resources/Statements%20and%20Practice%20Parameters/Allergen-immunotherapy-Jan-2011.pdf" target="_blank">AAAAI</a>
+                <span class="open-access">Open Access</span>
+            </div>
+            
+            <div class="reference-item">
+                Golden DBK, Demain J, Freeman T, et al. <strong>Stinging insect hypersensitivity: A practice parameter update 2016.</strong> Ann Allergy Asthma Immunol. 2017;118(1):28-54.
+                <a href="https://www.aaaai.org/Aaaai/media/Media-Library-PDFs/Allergist%20Resources/Statements%20and%20Practice%20Parameters/Stinging-insect-hypersensitivity-2016.pdf" target="_blank">AAAAI</a>
+                <span class="open-access">Open Access</span>
+            </div>
+            
+            <div class="reference-item">
+                White AA, Stevenson DD. <strong>Aspirin-Exacerbated Respiratory Disease.</strong> N Engl J Med. 2018;379:1060-1070.
+            </div>
+            
+            <div class="reference-item">
+                Burks AW, Calderon MA, Casale T, et al. <strong>Update on allergy immunotherapy: American Academy of Allergy, Asthma & Immunology/European Academy of Allergy and Clinical Immunology/PRACTALL consensus report.</strong> J Allergy Clin Immunol. 2013;131(5):1288-1296.
+            </div>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <p>© 2025-2026 MechanismDx · Part of the <a href="../index.html">Dx Learning Ecosystem</a></p>
+        <p style="margin-top: 8px;">Created by Lauren Fine, MD, FAAAAI · Nova Southeastern University</p>
+    </footer>
+</body>
+</html>

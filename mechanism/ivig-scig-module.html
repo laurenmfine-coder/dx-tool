@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IVIG & SCIG: Immunoglobulin Replacement Therapy | MechanismDx</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            color: white;
+            padding: 24px;
+        }
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .breadcrumb {
+            font-size: 13px;
+            opacity: 0.8;
+            margin-bottom: 8px;
+        }
+        .breadcrumb a { color: white; text-decoration: none; }
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+        .header p {
+            opacity: 0.9;
+            font-size: 16px;
+        }
+        
+        .content-meta {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+            background: white;
+        }
+        .meta-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        .meta-badge.updated { background: #f5f3ff; color: #6d28d9; }
+        .meta-badge.time { background: #f0fdf4; color: #166534; }
+        .meta-badge.audience { background: #fef3c7; color: #92400e; }
+        
+        .content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+        
+        .objectives {
+            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+            border: 1px solid #c4b5fd;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+        .objectives h2 {
+            color: #6d28d9;
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+        .objectives ul {
+            margin-left: 24px;
+            color: #5b21b6;
+        }
+        .objectives li { margin-bottom: 8px; }
+        
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #6d28d9;
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e9d5ff;
+        }
+        .section h3 {
+            color: #7c3aed;
+            font-size: 18px;
+            margin: 24px 0 12px;
+        }
+        .section p {
+            margin-bottom: 16px;
+            color: #374151;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        .comparison-table th {
+            background: #7c3aed;
+            color: white;
+            padding: 14px 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .comparison-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+        .comparison-table tr:hover {
+            background: #faf5ff;
+        }
+        .comparison-table .feature-col {
+            font-weight: 600;
+            color: #6d28d9;
+            background: #faf5ff;
+            width: 180px;
+        }
+        
+        .key-point {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 16px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .key-point strong { color: #92400e; }
+        
+        .clinical-pearl {
+            background: #f0fdf4;
+            border-left: 4px solid #22c55e;
+            padding: 16px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .clinical-pearl strong { color: #166534; }
+        
+        .nursing-note {
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 16px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .nursing-note strong { color: #1d4ed8; }
+        
+        .warning-box {
+            background: #fef2f2;
+            border-left: 4px solid #ef4444;
+            padding: 16px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .warning-box strong { color: #dc2626; }
+        
+        .dosing-calculator {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 1px solid #86efac;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .dosing-calculator h4 {
+            color: #166534;
+            margin-bottom: 16px;
+        }
+        .calc-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .calc-row label {
+            font-weight: 500;
+            min-width: 120px;
+        }
+        .calc-row input, .calc-row select {
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        .calc-result {
+            background: white;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 16px;
+            font-weight: 500;
+        }
+        
+        .reaction-protocol {
+            background: white;
+            border: 2px solid #f59e0b;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .reaction-protocol h4 {
+            color: #b45309;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .reaction-step {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            align-items: flex-start;
+        }
+        .step-number {
+            background: #f59e0b;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .product-card {
+            background: #faf5ff;
+            border: 1px solid #e9d5ff;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .product-card h5 {
+            color: #6d28d9;
+            margin-bottom: 12px;
+        }
+        .product-card ul {
+            margin-left: 16px;
+            font-size: 13px;
+            color: #4b5563;
+        }
+        .product-card li {
+            margin-bottom: 4px;
+        }
+        
+        .references {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 40px;
+        }
+        .references h3 {
+            color: #374151;
+            font-size: 16px;
+            margin-bottom: 16px;
+        }
+        .reference-item {
+            margin-bottom: 12px;
+            padding-left: 24px;
+            position: relative;
+            font-size: 13px;
+            color: #64748b;
+        }
+        .reference-item::before {
+            content: "📚";
+            position: absolute;
+            left: 0;
+        }
+        .reference-item a { color: #7c3aed; text-decoration: none; }
+        .reference-item a:hover { text-decoration: underline; }
+        .open-access-badge {
+            display: inline-block;
+            background: #dcfce7;
+            color: #166534;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+        
+        .footer {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 32px 24px;
+            text-align: center;
+            color: #64748b;
+            font-size: 13px;
+        }
+        .footer a { color: #7c3aed; text-decoration: none; }
+        
+        @media (max-width: 768px) {
+            .header h1 { font-size: 24px; }
+            .comparison-table { font-size: 12px; }
+            .comparison-table th, .comparison-table td { padding: 8px; }
+            .calc-row { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="breadcrumb">
+                <a href="index.html">MechanismDx</a> → <a href="pharmacology.html">Pharmacology</a> → IVIG & SCIG
+            </div>
+            <h1>💉 IVIG & SCIG: Immunoglobulin Replacement Therapy</h1>
+            <p>Mechanisms, dosing, administration, and monitoring for immunoglobulin replacement</p>
+        </div>
+    </header>
+    
+    <div class="content-meta">
+        <span class="meta-badge updated">📅 Content last updated: January 7, 2026</span>
+        <span class="meta-badge time">⏱️ ~40 minutes</span>
+        <span class="meta-badge audience">👥 Medicine, Nursing, Pharmacy</span>
+    </div>
+    
+    <main class="content">
+        <div class="objectives">
+            <h2>🎯 Learning Objectives</h2>
+            <ul>
+                <li>Compare IVIG and SCIG pharmacokinetics, advantages, and disadvantages</li>
+                <li>Calculate appropriate dosing for immunodeficiency patients</li>
+                <li>Describe proper administration techniques and infusion protocols</li>
+                <li>Recognize and manage infusion reactions</li>
+                <li>Understand monitoring parameters including trough IgG levels</li>
+                <li>Teach patients self-administration of SCIG</li>
+            </ul>
+        </div>
+        
+        <!-- Section 1: Overview -->
+        <section class="section">
+            <h2>1. Overview: Why Immunoglobulin Replacement?</h2>
+            
+            <p>Immunoglobulin replacement therapy provides passive immunity to patients who cannot produce adequate antibodies. The goal is to maintain IgG levels sufficient to prevent infections.</p>
+            
+            <h3>Indications for IgG Replacement</h3>
+            <ul>
+                <li><strong>Primary immunodeficiency:</strong> CVID, XLA, hyper-IgM syndrome, specific antibody deficiency (selected cases)</li>
+                <li><strong>Secondary immunodeficiency:</strong> CLL with hypogammaglobulinemia, post-HSCT, certain B-cell depleting therapies</li>
+                <li><strong>Other FDA-approved uses:</strong> ITP, Kawasaki disease, CIDP, MMN (these use higher "immunomodulatory" doses)</li>
+            </ul>
+            
+            <div class="key-point">
+                <strong>Key Concept:</strong> For immunodeficiency, we use <strong>replacement doses</strong> (400-600 mg/kg/month) to maintain trough IgG levels. For autoimmune/inflammatory conditions, we use <strong>immunomodulatory doses</strong> (1-2 g/kg) which work through different mechanisms.
+            </div>
+        </section>
+        
+        <!-- Section 2: IVIG vs SCIG -->
+        <section class="section">
+            <h2>2. IVIG vs SCIG: Head-to-Head Comparison</h2>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>IVIG (Intravenous)</th>
+                        <th>SCIG (Subcutaneous)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="feature-col">Route</td>
+                        <td>IV infusion</td>
+                        <td>Subcutaneous injection/infusion</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Frequency</td>
+                        <td>Every 3-4 weeks</td>
+                        <td>Weekly (conventional) or biweekly (facilitated SCIG)</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Setting</td>
+                        <td>Infusion center, hospital, or home with nurse</td>
+                        <td>Home self-administration</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Infusion Duration</td>
+                        <td>2-6 hours depending on product/rate</td>
+                        <td>1-2 hours for weekly infusions</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">IgG Levels</td>
+                        <td>Peak-trough fluctuation (high after infusion, drops before next)</td>
+                        <td>Steady-state levels (less fluctuation)</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Half-life</td>
+                        <td>~21-35 days</td>
+                        <td>Same IgG half-life, but more stable levels due to frequency</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Systemic Reactions</td>
+                        <td>More common (headache, fever, chills, nausea)</td>
+                        <td>Less common systemic reactions</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Local Reactions</td>
+                        <td>IV site reactions</td>
+                        <td>Injection site swelling, redness (usually mild)</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Venous Access</td>
+                        <td>Required (can be challenging in some patients)</td>
+                        <td>Not required</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Patient Autonomy</td>
+                        <td>Dependent on infusion appointments</td>
+                        <td>Self-administered, flexible scheduling</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Initial Training</td>
+                        <td>Minimal patient training</td>
+                        <td>Requires patient education on self-injection</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="clinical-pearl">
+                <strong>Clinical Pearl:</strong> Many patients who experience systemic side effects with IVIG (headaches, fatigue, malaise) feel significantly better with SCIG due to steadier IgG levels and smaller, more frequent doses.
+            </div>
+        </section>
+        
+        <!-- Section 3: Pharmacokinetics -->
+        <section class="section">
+            <h2>3. Pharmacokinetics</h2>
+            
+            <h3>IgG Distribution and Elimination</h3>
+            <p>Infused IgG distributes between intravascular and extravascular compartments:</p>
+            <ul>
+                <li>~45% remains intravascular</li>
+                <li>~55% distributes to extravascular tissues</li>
+                <li>Half-life: 21-35 days (varies by product and patient)</li>
+                <li>Elimination: Catabolism by endothelial cells; FcRn receptor recycles IgG back to circulation (prolongs half-life)</li>
+            </ul>
+            
+            <h3>IVIG Kinetics</h3>
+            <p>With monthly IVIG:</p>
+            <ul>
+                <li><strong>Peak:</strong> Immediately post-infusion (significant rise)</li>
+                <li><strong>Trough:</strong> Just before next infusion (lowest level)</li>
+                <li><strong>Fluctuation:</strong> Can vary by 300-400 mg/dL between peak and trough</li>
+            </ul>
+            
+            <h3>SCIG Kinetics</h3>
+            <p>With weekly SCIG:</p>
+            <ul>
+                <li><strong>Bioavailability:</strong> ~65-70% compared to IV (dose may need to be increased)</li>
+                <li><strong>Steady-state:</strong> Achieved after 4-6 weeks of weekly dosing</li>
+                <li><strong>Fluctuation:</strong> Minimal; steady-state levels with small variations</li>
+            </ul>
+            
+            <div class="key-point">
+                <strong>Dose Conversion IVIG → SCIG:</strong><br>
+                When converting from IVIG to conventional SCIG, the total monthly dose is typically <strong>increased by 37-53%</strong> (multiply by 1.37-1.53) to achieve equivalent trough levels, then divided into weekly doses.<br><br>
+                <em>Example: IVIG 40g monthly → SCIG: 40g × 1.37 = ~55g monthly ÷ 4 = ~13.75g weekly</em>
+            </div>
+        </section>
+        
+        <!-- Section 4: Dosing -->
+        <section class="section">
+            <h2>4. Dosing for Immunodeficiency</h2>
+            
+            <h3>Initial Dosing</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Route</th>
+                        <th>Starting Dose</th>
+                        <th>Frequency</th>
+                        <th>Goal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="feature-col">IVIG</td>
+                        <td>400-600 mg/kg</td>
+                        <td>Every 3-4 weeks</td>
+                        <td>Trough IgG ≥500 mg/dL (some target ≥800 if lung disease)</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">SCIG (conventional)</td>
+                        <td>100-200 mg/kg/week</td>
+                        <td>Weekly</td>
+                        <td>Steady-state IgG ≥500-800 mg/dL</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">fSCIG (facilitated)</td>
+                        <td>300-600 mg/kg</td>
+                        <td>Every 3-4 weeks</td>
+                        <td>Same as IVIG</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="dosing-calculator">
+                <h4>📊 Dose Calculator</h4>
+                <div class="calc-row">
+                    <label>Patient Weight:</label>
+                    <input type="number" id="weight" placeholder="kg" style="width: 100px;">
+                    <span>kg</span>
+                </div>
+                <div class="calc-row">
+                    <label>Dose (mg/kg):</label>
+                    <input type="number" id="dosePerKg" placeholder="400-600" value="500" style="width: 100px;">
+                    <span>mg/kg</span>
+                </div>
+                <div class="calc-row">
+                    <label>Route:</label>
+                    <select id="route">
+                        <option value="ivig">IVIG (monthly)</option>
+                        <option value="scig">SCIG (convert to weekly)</option>
+                    </select>
+                </div>
+                <button onclick="calculateDose()" style="background: #166534; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; margin-top: 12px;">Calculate</button>
+                <div class="calc-result" id="doseResult">
+                    Enter values above and click Calculate
+                </div>
+            </div>
+            
+            <h3>Dose Adjustments</h3>
+            <ul>
+                <li><strong>Check trough IgG</strong> before 4th infusion (steady state)</li>
+                <li><strong>Target trough:</strong> ≥500 mg/dL minimum; many experts target ≥800 mg/dL for patients with bronchiectasis or frequent infections</li>
+                <li><strong>Adjust dose</strong> in increments of 100-200 mg/kg to achieve target</li>
+                <li><strong>More frequent dosing</strong> (every 3 weeks instead of 4) can raise trough without increasing total dose</li>
+            </ul>
+        </section>
+        
+        <!-- Section 5: Administration -->
+        <section class="section">
+            <h2>5. Administration Protocols</h2>
+            
+            <h3>IVIG Administration</h3>
+            
+            <div class="nursing-note">
+                <strong>🏥 Nursing Protocol - IVIG Infusion:</strong>
+                <ol style="margin-left: 20px; margin-top: 12px;">
+                    <li><strong>Pre-medications</strong> (if history of reactions): Acetaminophen 650mg, Diphenhydramine 25-50mg, ± Hydrocortisone 100mg IV</li>
+                    <li><strong>Hydration:</strong> Encourage oral fluids; consider IV NS for high-risk patients (renal insufficiency, elderly)</li>
+                    <li><strong>Starting rate:</strong> 0.5-1 mg/kg/min (product-specific)</li>
+                    <li><strong>Rate escalation:</strong> Increase every 15-30 minutes as tolerated to maximum rate</li>
+                    <li><strong>Monitoring:</strong> Vital signs q15min × 1 hour, then q30min, then hourly</li>
+                    <li><strong>Maximum rate:</strong> Typically 4-8 mg/kg/min (varies by product)</li>
+                </ol>
+            </div>
+            
+            <h3>SCIG Self-Administration</h3>
+            
+            <div class="nursing-note">
+                <strong>🏠 Patient Teaching - SCIG Self-Injection:</strong>
+                <ol style="margin-left: 20px; margin-top: 12px;">
+                    <li><strong>Site selection:</strong> Abdomen (avoiding 2 inches around navel), thighs, upper arms, upper back/hip</li>
+                    <li><strong>Rotate sites:</strong> Keep sites 2 inches apart; rotate systematically</li>
+                    <li><strong>Clean technique:</strong> Wash hands, clean site with alcohol, allow to dry</li>
+                    <li><strong>Needle insertion:</strong> 90-degree angle for most; 45-degree if thin subcutaneous tissue</li>
+                    <li><strong>Infusion rate:</strong> 15-25 mL/hour per site (pump-assisted) or push over several minutes (manual)</li>
+                    <li><strong>Volume per site:</strong> Maximum 20-25 mL conventional SCIG; up to 300 mL for facilitated SCIG</li>
+                    <li><strong>Number of sites:</strong> May need 2-4 sites for weekly dose; fewer with facilitated SCIG</li>
+                    <li><strong>Documentation:</strong> Log date, dose, sites used, any reactions</li>
+                </ol>
+            </div>
+            
+            <div class="clinical-pearl">
+                <strong>Clinical Pearl:</strong> Local site reactions (swelling, redness) are common initially but typically improve over 4-8 weeks. Applying warm compress after infusion and using a different site can help.
+            </div>
+        </section>
+        
+        <!-- Section 6: Reactions -->
+        <section class="section">
+            <h2>6. Infusion Reactions & Management</h2>
+            
+            <h3>Types of Reactions</h3>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Symptoms</th>
+                        <th>Timing</th>
+                        <th>Mechanism</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="feature-col">Rate-Related</td>
+                        <td>Headache, flushing, chills, myalgias, nausea, fever</td>
+                        <td>During or shortly after infusion</td>
+                        <td>Complement activation, cytokine release</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Anaphylactic</td>
+                        <td>Urticaria, angioedema, bronchospasm, hypotension</td>
+                        <td>Minutes to 1 hour</td>
+                        <td>IgE-mediated (rare); anti-IgA antibodies in IgA-deficient patients</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Delayed</td>
+                        <td>Headache (including aseptic meningitis), fatigue, arthralgia</td>
+                        <td>24-72 hours post-infusion</td>
+                        <td>Immune complex formation, cytokines</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Renal</td>
+                        <td>Acute kidney injury</td>
+                        <td>Days after infusion</td>
+                        <td>Osmotic nephropathy (sucrose-containing products)</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Thrombotic</td>
+                        <td>DVT, PE, stroke, MI</td>
+                        <td>During or days after</td>
+                        <td>Hyperviscosity, Factor XI contamination</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="reaction-protocol">
+                <h4>⚠️ Reaction Management Protocol</h4>
+                <div class="reaction-step">
+                    <div class="step-number">1</div>
+                    <div><strong>STOP the infusion</strong> immediately for any significant reaction</div>
+                </div>
+                <div class="reaction-step">
+                    <div class="step-number">2</div>
+                    <div><strong>Assess ABCs:</strong> Airway, Breathing, Circulation - call for help if anaphylaxis</div>
+                </div>
+                <div class="reaction-step">
+                    <div class="step-number">3</div>
+                    <div><strong>For mild reactions:</strong> Give diphenhydramine 25-50mg IV/PO, acetaminophen, wait 30 min</div>
+                </div>
+                <div class="reaction-step">
+                    <div class="step-number">4</div>
+                    <div><strong>Resume at 50% rate</strong> if symptoms resolve; advance slowly</div>
+                </div>
+                <div class="reaction-step">
+                    <div class="step-number">5</div>
+                    <div><strong>For anaphylaxis:</strong> Epinephrine 0.3-0.5mg IM, IV fluids, notify physician</div>
+                </div>
+                <div class="reaction-step">
+                    <div class="step-number">6</div>
+                    <div><strong>Document:</strong> Reaction type, timing, interventions, outcome</div>
+                </div>
+            </div>
+            
+            <div class="warning-box">
+                <strong>⚠️ IgA Deficiency Warning:</strong> Patients with complete IgA deficiency (<7 mg/dL) who have anti-IgA antibodies are at risk for anaphylaxis. Use IgA-depleted products (e.g., Gammagard S/D) or SCIG if possible. Test for anti-IgA antibodies before first infusion in IgA-deficient patients.
+            </div>
+        </section>
+        
+        <!-- Section 7: Monitoring -->
+        <section class="section">
+            <h2>7. Monitoring Parameters</h2>
+            
+            <h3>Trough IgG Monitoring</h3>
+            <ul>
+                <li><strong>When to check:</strong> Just before the next scheduled infusion (true trough)</li>
+                <li><strong>Initial monitoring:</strong> Check before 4th infusion, then every 3-6 months until stable</li>
+                <li><strong>Maintenance:</strong> Every 6-12 months once stable</li>
+                <li><strong>Target:</strong> ≥500 mg/dL minimum; many experts now recommend ≥800 mg/dL for patients with bronchiectasis</li>
+            </ul>
+            
+            <h3>Additional Monitoring</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Frequency</th>
+                        <th>Rationale</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="feature-col">Serum creatinine/BUN</td>
+                        <td>Before each infusion initially; every 6-12 months when stable</td>
+                        <td>Monitor for renal toxicity</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">CBC</td>
+                        <td>Every 6-12 months</td>
+                        <td>Hemolysis (rare), baseline</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">LFTs</td>
+                        <td>Annually</td>
+                        <td>Hepatitis monitoring (rare with current products)</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Viral serologies</td>
+                        <td>Baseline</td>
+                        <td>Document pre-treatment status (Hep B, C, HIV)</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-col">Infection frequency</td>
+                        <td>Ongoing</td>
+                        <td>Clinical efficacy assessment</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <!-- Section 8: Products -->
+        <section class="section">
+            <h2>8. Available Products</h2>
+            
+            <h3>IVIG Products (Selected)</h3>
+            <div class="product-grid">
+                <div class="product-card">
+                    <h5>Gammagard Liquid 10%</h5>
+                    <ul>
+                        <li>10% concentration</li>
+                        <li>Can be given IV or SC</li>
+                        <li>Glycine-stabilized</li>
+                        <li>IgA content: 37 μg/mL</li>
+                    </ul>
+                </div>
+                <div class="product-card">
+                    <h5>Privigen 10%</h5>
+                    <ul>
+                        <li>10% concentration</li>
+                        <li>L-proline stabilized</li>
+                        <li>Ready to use</li>
+                        <li>IgA content: ≤25 μg/mL</li>
+                    </ul>
+                </div>
+                <div class="product-card">
+                    <h5>Gammaked 10%</h5>
+                    <ul>
+                        <li>10% concentration</li>
+                        <li>Glycine-stabilized</li>
+                        <li>Can be given IV or SC</li>
+                        <li>IgA content: 46 μg/mL</li>
+                    </ul>
+                </div>
+                <div class="product-card">
+                    <h5>Gammagard S/D</h5>
+                    <ul>
+                        <li>5% concentration (reconstituted)</li>
+                        <li>IgA-depleted option</li>
+                        <li>IgA content: <1 μg/mL</li>
+                        <li>Use if anti-IgA antibodies present</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3>SCIG Products</h3>
+            <div class="product-grid">
+                <div class="product-card">
+                    <h5>Hizentra 20%</h5>
+                    <ul>
+                        <li>20% concentration (higher volume efficiency)</li>
+                        <li>L-proline stabilized</li>
+                        <li>Weekly dosing</li>
+                        <li>Up to 25 mL per site</li>
+                    </ul>
+                </div>
+                <div class="product-card">
+                    <h5>Cuvitru 20%</h5>
+                    <ul>
+                        <li>20% concentration</li>
+                        <li>Glycine-stabilized</li>
+                        <li>Weekly dosing</li>
+                        <li>Room temperature storage</li>
+                    </ul>
+                </div>
+                <div class="product-card">
+                    <h5>HyQvia (Facilitated SCIG)</h5>
+                    <ul>
+                        <li>10% IgG + hyaluronidase</li>
+                        <li>Monthly dosing (like IVIG schedule)</li>
+                        <li>Up to 300 mL per site</li>
+                        <li>Single infusion site possible</li>
+                    </ul>
+                </div>
+                <div class="product-card">
+                    <h5>Xembify 20%</h5>
+                    <ul>
+                        <li>20% concentration</li>
+                        <li>Glycine-stabilized</li>
+                        <li>Weekly dosing</li>
+                        <li>Room temperature storage</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="clinical-pearl">
+                <strong>Clinical Pearl:</strong> Facilitated SCIG (HyQvia) uses recombinant hyaluronidase to temporarily increase subcutaneous tissue permeability, allowing larger volumes at single sites. This enables monthly dosing similar to IVIG but with home self-administration.
+            </div>
+        </section>
+        
+        <!-- References -->
+        <div class="references">
+            <h3>📚 References & Open-Access Resources</h3>
+            
+            <div class="reference-item">
+                Bonilla FA, Khan DA, Ballas ZK, et al. <strong>Practice parameter for the diagnosis and management of primary immunodeficiency.</strong> J Allergy Clin Immunol. 2015;136(5):1186-1205.
+                <a href="https://www.aaaai.org/Aaaai/media/Media-Library-PDFs/Allergist%20Resources/Statements%20and%20Practice%20Parameters/Primary-Immunodeficiency-Disease-2015.pdf" target="_blank">AAAAI</a>
+                <span class="open-access-badge">Open Access</span>
+            </div>
+            
+            <div class="reference-item">
+                Perez EE, Orange JS, Bonilla F, et al. <strong>Update on the use of immunoglobulin in human disease: A review of evidence.</strong> J Allergy Clin Immunol. 2017;139(3S):S1-S46.
+                <a href="https://www.jacionline.org/article/S0091-6749(16)31141-1/fulltext" target="_blank">JACI</a>
+                <span class="open-access-badge">Open Access</span>
+            </div>
+            
+            <div class="reference-item">
+                Immune Deficiency Foundation. <strong>IDF Guide for Nurses: Immunoglobulin Therapy for Primary Immunodeficiency Diseases.</strong>
+                <a href="https://primaryimmune.org/publication/idf-guide-nurses" target="_blank">IDF</a>
+                <span class="open-access-badge">Free Download</span>
+            </div>
+            
+            <div class="reference-item">
+                Orange JS, Grossman WJ, Navickis RJ, Wilkes MM. <strong>Impact of trough IgG on pneumonia incidence in primary immunodeficiency: A meta-analysis of clinical studies.</strong> Clin Immunol. 2010;137(1):21-30.
+            </div>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <p>© 2025-2026 MechanismDx · Part of the <a href="../index.html">Dx Learning Ecosystem</a></p>
+        <p style="margin-top: 8px;">Created by Lauren Fine, MD, FAAAAI · Nova Southeastern University</p>
+    </footer>
+    
+    <script>
+        function calculateDose() {
+            const weight = parseFloat(document.getElementById('weight').value);
+            const dosePerKg = parseFloat(document.getElementById('dosePerKg').value);
+            const route = document.getElementById('route').value;
+            
+            if (!weight || !dosePerKg) {
+                document.getElementById('doseResult').innerHTML = 'Please enter weight and dose';
+                return;
+            }
+            
+            const monthlyDose = (weight * dosePerKg) / 1000; // Convert to grams
+            
+            let result = '';
+            if (route === 'ivig') {
+                result = `<strong>IVIG Dose:</strong> ${monthlyDose.toFixed(1)}g every 3-4 weeks<br>
+                         <em>Check trough IgG before 4th infusion</em>`;
+            } else {
+                const scigMonthly = monthlyDose * 1.37; // 37% increase for bioavailability
+                const scigWeekly = scigMonthly / 4;
+                result = `<strong>Converted SCIG Dose:</strong><br>
+                         Monthly equivalent: ${scigMonthly.toFixed(1)}g (adjusted +37% for bioavailability)<br>
+                         <strong>Weekly dose: ${scigWeekly.toFixed(1)}g</strong><br>
+                         <em>At 20% concentration = ${(scigWeekly * 5).toFixed(0)} mL weekly</em>`;
+            }
+            
+            document.getElementById('doseResult').innerHTML = result;
+        }
+    </script>
+</body>
+</html>
