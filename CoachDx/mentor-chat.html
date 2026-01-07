@@ -610,7 +610,29 @@
     // ============================================================
     // STATE & INITIALIZATION
     // ============================================================
-    const CASES = typeof COACHDX_CASES !== 'undefined' ? COACHDX_CASES : {};
+    // Merge all available case sources
+    const CASES = (function() {
+        let merged = {};
+        
+        // Add main cases
+        if (typeof COACHDX_CASES !== 'undefined') {
+            Object.assign(merged, COACHDX_CASES);
+        }
+        
+        // Explicitly add allergy cases if available (fallback)
+        if (typeof COACHDX_ALLERGY_CASES !== 'undefined') {
+            Object.assign(merged, COACHDX_ALLERGY_CASES);
+            console.log('[MentorChat] Added', Object.keys(COACHDX_ALLERGY_CASES).length, 'allergy cases');
+        }
+        
+        // Also check window versions
+        if (typeof window.COACHDX_ALLERGY_CASES !== 'undefined' && window.COACHDX_ALLERGY_CASES !== COACHDX_ALLERGY_CASES) {
+            Object.assign(merged, window.COACHDX_ALLERGY_CASES);
+        }
+        
+        console.log('[MentorChat] Total cases available:', Object.keys(merged).length);
+        return merged;
+    })();
     
     let currentCase = null;
     let currentProfession = 'medical-student';
