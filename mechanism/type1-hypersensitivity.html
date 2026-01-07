@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Type I Hypersensitivity | MechanismDx</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+            color: white;
+            padding: 24px;
+        }
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .breadcrumb {
+            font-size: 13px;
+            opacity: 0.8;
+            margin-bottom: 8px;
+        }
+        .breadcrumb a { color: white; }
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+        .header p {
+            opacity: 0.9;
+            font-size: 16px;
+        }
+        
+        .content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+        
+        /* Learning Objectives */
+        .objectives {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+        .objectives h2 {
+            color: #166534;
+            font-size: 18px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .objectives ul {
+            margin-left: 24px;
+            color: #166534;
+        }
+        .objectives li {
+            margin-bottom: 8px;
+        }
+        
+        /* Section */
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #4c1d95;
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e9d5ff;
+        }
+        .section h3 {
+            color: #6b21a8;
+            font-size: 18px;
+            margin: 24px 0 12px;
+        }
+        .section p {
+            margin-bottom: 16px;
+            color: #374151;
+        }
+        
+        /* Pathway Diagram */
+        .pathway {
+            background: linear-gradient(135deg, #faf5ff 0%, #f5f3ff 100%);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .pathway-title {
+            font-weight: 600;
+            color: #6b21a8;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        .pathway-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .pathway-step {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .step-num {
+            width: 36px;
+            height: 36px;
+            background: #8b5cf6;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        .step-content {
+            flex: 1;
+            background: white;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid #e9d5ff;
+        }
+        .step-content strong {
+            color: #6b21a8;
+        }
+        .pathway-arrow {
+            text-align: center;
+            color: #8b5cf6;
+            font-size: 20px;
+        }
+        
+        /* Key Point Box */
+        .key-point {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 16px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .key-point strong {
+            color: #92400e;
+        }
+        
+        /* Clinical Pearl */
+        .clinical-pearl {
+            background: #dbeafe;
+            border-left: 4px solid #3b82f6;
+            padding: 16px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .clinical-pearl strong {
+            color: #1e40af;
+        }
+        
+        /* Table */
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .info-table th {
+            background: #f5f3ff;
+            color: #6b21a8;
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .info-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .info-table tr:hover {
+            background: #faf5ff;
+        }
+        
+        /* Quiz */
+        .quiz-section {
+            background: #eff6ff;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .quiz-section h3 {
+            color: #1e40af;
+            margin-bottom: 16px;
+        }
+        .quiz-question {
+            margin-bottom: 16px;
+        }
+        .quiz-options label {
+            display: block;
+            padding: 10px 16px;
+            background: white;
+            border: 1px solid #dbeafe;
+            border-radius: 8px;
+            margin: 8px 0;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .quiz-options label:hover {
+            border-color: #3b82f6;
+            background: #f0f9ff;
+        }
+        .quiz-options input {
+            margin-right: 10px;
+        }
+        .quiz-feedback {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 12px;
+            display: none;
+        }
+        .quiz-feedback.correct {
+            background: #dcfce7;
+            color: #166534;
+            display: block;
+        }
+        .quiz-feedback.incorrect {
+            background: #fee2e2;
+            color: #991b1b;
+            display: block;
+        }
+        
+        /* Mediator Table */
+        .mediator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .mediator-card {
+            background: white;
+            border: 1px solid #e9d5ff;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .mediator-card h4 {
+            color: #6b21a8;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        .mediator-card .source {
+            font-size: 12px;
+            color: #8b5cf6;
+            margin-bottom: 8px;
+        }
+        .mediator-card p {
+            font-size: 14px;
+            color: #4b5563;
+            margin: 0;
+        }
+        
+        /* Navigation */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid #e5e7eb;
+        }
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: #8b5cf6;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .nav-btn:hover {
+            background: #7c3aed;
+            transform: translateY(-2px);
+        }
+        .nav-btn.secondary {
+            background: white;
+            color: #6b21a8;
+            border: 1px solid #e9d5ff;
+        }
+        .nav-btn.secondary:hover {
+            background: #faf5ff;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 32px;
+            color: #6b7280;
+            font-size: 13px;
+        }
+        .footer a { color: #8b5cf6; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="breadcrumb">
+                <a href="../allergy-immunology-hub.html">A/I Hub</a> → 
+                <a href="../coachdx-dashboard.html">MechanismDx</a> → 
+                Type I Hypersensitivity
+            </div>
+            <h1>🔬 Type I Hypersensitivity</h1>
+            <p>IgE-Mediated Allergic Reactions: From Sensitization to Anaphylaxis</p>
+        </div>
+    </header>
+    
+    <main class="content">
+        <!-- Learning Objectives -->
+        <div class="objectives">
+            <h2>🎯 Learning Objectives</h2>
+            <ul>
+                <li>Describe the two-phase process of IgE-mediated allergic reactions (sensitization → elicitation)</li>
+                <li>Identify the key cellular players: mast cells, basophils, Th2 cells, B cells</li>
+                <li>Explain the role of IgE and the high-affinity IgE receptor (FcεRI)</li>
+                <li>List preformed and newly synthesized mediators and their clinical effects</li>
+                <li>Connect mechanism to clinical findings in anaphylaxis and allergic disease</li>
+            </ul>
+        </div>
+        
+        <!-- Overview Section -->
+        <section class="section">
+            <h2>Overview: What is Type I Hypersensitivity?</h2>
+            <p>Type I hypersensitivity (also called <strong>immediate hypersensitivity</strong> or <strong>IgE-mediated allergy</strong>) is an immune response that occurs within minutes of allergen exposure in sensitized individuals. It underlies common allergic conditions including anaphylaxis, allergic rhinitis, allergic asthma, food allergy, and drug allergy.</p>
+            
+            <div class="key-point">
+                <strong>Key Concept:</strong> Type I reactions require PRIOR sensitization. The first exposure to an allergen produces IgE antibodies but no symptoms. Subsequent exposures trigger rapid mast cell degranulation and clinical symptoms.
+            </div>
+            
+            <p>This is fundamentally different from other hypersensitivity types:</p>
+            <table class="info-table">
+                <tr>
+                    <th>Type</th>
+                    <th>Mechanism</th>
+                    <th>Timing</th>
+                    <th>Examples</th>
+                </tr>
+                <tr>
+                    <td><strong>Type I</strong></td>
+                    <td>IgE + mast cells/basophils</td>
+                    <td>Minutes</td>
+                    <td>Anaphylaxis, allergic rhinitis, food allergy</td>
+                </tr>
+                <tr>
+                    <td>Type II</td>
+                    <td>IgG/IgM + cell surface antigens</td>
+                    <td>Hours</td>
+                    <td>Hemolytic anemia, Goodpasture's</td>
+                </tr>
+                <tr>
+                    <td>Type III</td>
+                    <td>Immune complex deposition</td>
+                    <td>Hours-days</td>
+                    <td>Serum sickness, Arthus reaction</td>
+                </tr>
+                <tr>
+                    <td>Type IV</td>
+                    <td>T cell-mediated</td>
+                    <td>24-72 hours</td>
+                    <td>Contact dermatitis, TB skin test</td>
+                </tr>
+            </table>
+        </section>
+        
+        <!-- Phase 1: Sensitization -->
+        <section class="section">
+            <h2>Phase 1: Sensitization</h2>
+            <p>The first exposure to an allergen "primes" the immune system but produces no symptoms. This phase establishes the IgE-mediated response that will be triggered on subsequent exposures.</p>
+            
+            <div class="pathway">
+                <div class="pathway-title">🔄 The Sensitization Pathway</div>
+                <div class="pathway-steps">
+                    <div class="pathway-step">
+                        <div class="step-num">1</div>
+                        <div class="step-content">
+                            <strong>Allergen Exposure:</strong> Allergen (pollen, food protein, drug, venom) enters via mucosal surface, skin, or injection
+                        </div>
+                    </div>
+                    <div class="pathway-arrow">↓</div>
+                    <div class="pathway-step">
+                        <div class="step-num">2</div>
+                        <div class="step-content">
+                            <strong>Antigen Processing:</strong> Dendritic cells capture, process, and present allergen peptides via MHC II to naive T cells
+                        </div>
+                    </div>
+                    <div class="pathway-arrow">↓</div>
+                    <div class="pathway-step">
+                        <div class="step-num">3</div>
+                        <div class="step-content">
+                            <strong>Th2 Polarization:</strong> In allergic-prone individuals, T cells differentiate to Th2 phenotype, secreting IL-4, IL-5, IL-13
+                        </div>
+                    </div>
+                    <div class="pathway-arrow">↓</div>
+                    <div class="pathway-step">
+                        <div class="step-num">4</div>
+                        <div class="step-content">
+                            <strong>B Cell Class Switching:</strong> IL-4 signals B cells to undergo class switch recombination → produce allergen-specific IgE
+                        </div>
+                    </div>
+                    <div class="pathway-arrow">↓</div>
+                    <div class="pathway-step">
+                        <div class="step-num">5</div>
+                        <div class="step-content">
+                            <strong>IgE Binding:</strong> Secreted IgE binds to high-affinity FcεRI on mast cells and basophils → patient is now "sensitized"
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="clinical-pearl">
+                <strong>Clinical Pearl:</strong> Sensitization can occur without symptoms. A positive skin test or specific IgE indicates sensitization but NOT necessarily clinical allergy. Clinical allergy requires both sensitization AND symptoms on exposure.
+            </div>
+            
+            <h3>Key Players in Sensitization</h3>
+            <div class="mediator-grid">
+                <div class="mediator-card">
+                    <h4>Th2 Cells</h4>
+                    <div class="source">CD4+ helper T cells</div>
+                    <p>Drive allergic inflammation via IL-4 (IgE switching), IL-5 (eosinophils), IL-13 (mucus, airway hyperreactivity)</p>
+                </div>
+                <div class="mediator-card">
+                    <h4>IL-4</h4>
+                    <div class="source">Th2 cytokine</div>
+                    <p>Essential for IgE class switching in B cells. Also promotes Th2 differentiation (positive feedback loop)</p>
+                </div>
+                <div class="mediator-card">
+                    <h4>IgE</h4>
+                    <div class="source">B cell/plasma cell product</div>
+                    <p>Lowest concentration serum Ig but highest affinity receptor binding. Half-life weeks when bound to mast cells</p>
+                </div>
+                <div class="mediator-card">
+                    <h4>FcεRI</h4>
+                    <div class="source">Mast cell/basophil receptor</div>
+                    <p>High-affinity IgE receptor. Binding IgE "arms" the cell for rapid activation on allergen re-exposure</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Phase 2: Elicitation -->
+        <section class="section">
+            <h2>Phase 2: Elicitation (The Allergic Reaction)</h2>
+            <p>When a sensitized individual encounters the allergen again, the IgE bound to mast cells recognizes and cross-links the allergen, triggering immediate degranulation.</p>
+            
+            <div class="pathway">
+                <div class="pathway-title">⚡ The Immediate Reaction</div>
+                <div class="pathway-steps">
+                    <div class="pathway-step">
+                        <div class="step-num">1</div>
+                        <div class="step-content">
+                            <strong>Re-exposure:</strong> Allergen enters body (food ingestion, sting, drug administration)
+                        </div>
+                    </div>
+                    <div class="pathway-arrow">↓</div>
+                    <div class="pathway-step">
+                        <div class="step-num">2</div>
+                        <div class="step-content">
+                            <strong>IgE Cross-linking:</strong> Multivalent allergen binds to and cross-links adjacent IgE molecules on mast cell surface
+                        </div>
+                    </div>
+                    <div class="pathway-arrow">↓</div>
+                    <div class="pathway-step">
+                        <div class="step-num">3</div>
+                        <div class="step-content">
+                            <strong>Signal Transduction:</strong> FcεRI aggregation → tyrosine kinase activation → calcium influx
+                        </div>
+                    </div>
+                    <div class="pathway-arrow">↓</div>
+                    <div class="pathway-step">
+                        <div class="step-num">4</div>
+                        <div class="step-content">
+                            <strong>Degranulation:</strong> Preformed mediators (histamine, tryptase, heparin) released within SECONDS
+                        </div>
+                    </div>
+                    <div class="pathway-arrow">↓</div>
+                    <div class="pathway-step">
+                        <div class="step-num">5</div>
+                        <div class="step-content">
+                            <strong>De Novo Synthesis:</strong> Arachidonic acid metabolites (prostaglandins, leukotrienes) and cytokines produced over minutes-hours
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="key-point">
+                <strong>Why So Fast?</strong> Preformed mediators are stored in granules ready for immediate release. This is why anaphylaxis can progress from first symptoms to cardiovascular collapse in minutes.
+            </div>
+        </section>
+        
+        <!-- Mediators Section -->
+        <section class="section">
+            <h2>Mast Cell Mediators and Their Effects</h2>
+            
+            <h3>Preformed Mediators (Immediate Release)</h3>
+            <table class="info-table">
+                <tr>
+                    <th>Mediator</th>
+                    <th>Action</th>
+                    <th>Clinical Effect</th>
+                </tr>
+                <tr>
+                    <td><strong>Histamine</strong></td>
+                    <td>H1: vasodilation, increased permeability, smooth muscle contraction, itch<br>H2: gastric acid, some vasodilation</td>
+                    <td>Flushing, urticaria, angioedema, bronchospasm, GI symptoms, hypotension</td>
+                </tr>
+                <tr>
+                    <td><strong>Tryptase</strong></td>
+                    <td>Serine protease, activates complement, cleaves fibrinogen</td>
+                    <td>Marker of mast cell activation (measured to confirm anaphylaxis)</td>
+                </tr>
+                <tr>
+                    <td><strong>Heparin</strong></td>
+                    <td>Anticoagulant, binds histamine</td>
+                    <td>Contributes to hemorrhagic manifestations in severe reactions</td>
+                </tr>
+                <tr>
+                    <td><strong>TNF-α</strong></td>
+                    <td>Pro-inflammatory cytokine</td>
+                    <td>Sustains inflammation, recruits other immune cells</td>
+                </tr>
+            </table>
+            
+            <h3>Newly Synthesized Mediators (Minutes to Hours)</h3>
+            <table class="info-table">
+                <tr>
+                    <th>Mediator</th>
+                    <th>Pathway</th>
+                    <th>Clinical Effect</th>
+                </tr>
+                <tr>
+                    <td><strong>Prostaglandin D2</strong></td>
+                    <td>Cyclooxygenase (COX)</td>
+                    <td>Vasodilation, bronchospasm, mucus secretion</td>
+                </tr>
+                <tr>
+                    <td><strong>Leukotrienes (LTC4, D4, E4)</strong></td>
+                    <td>5-Lipoxygenase</td>
+                    <td>Potent bronchoconstrictors (100x histamine), increased vascular permeability, mucus</td>
+                </tr>
+                <tr>
+                    <td><strong>PAF</strong></td>
+                    <td>Membrane phospholipids</td>
+                    <td>Platelet aggregation, severe bronchospasm, hypotension</td>
+                </tr>
+                <tr>
+                    <td><strong>IL-4, IL-5, IL-13</strong></td>
+                    <td>Gene transcription</td>
+                    <td>Perpetuate allergic inflammation, late-phase response</td>
+                </tr>
+            </table>
+            
+            <div class="clinical-pearl">
+                <strong>Clinical Pearl - Why Epinephrine Works:</strong> Epinephrine counteracts multiple mediator effects simultaneously: α1-agonism causes vasoconstriction (↑BP, ↓angioedema); β1-agonism increases cardiac output; β2-agonism relaxes bronchial smooth muscle and inhibits further mast cell degranulation.
+            </div>
+        </section>
+        
+        <!-- Late Phase Section -->
+        <section class="section">
+            <h2>The Late-Phase Response</h2>
+            <p>4-8 hours after the immediate reaction, a "second wave" of symptoms may occur - the late-phase response. This is driven by inflammatory cell recruitment (eosinophils, basophils, Th2 cells) and is responsible for biphasic anaphylaxis.</p>
+            
+            <div class="key-point">
+                <strong>Biphasic Anaphylaxis:</strong> Occurs in 1-20% of anaphylaxis cases. Initial reaction resolves, then symptoms recur hours later WITHOUT re-exposure to allergen. This is why observation periods (4-6+ hours) are recommended after anaphylaxis.
+            </div>
+            
+            <h3>What Drives the Late Phase?</h3>
+            <ul style="margin-left: 24px; margin-bottom: 16px;">
+                <li><strong>Chemokines</strong> released during immediate phase recruit eosinophils and basophils</li>
+                <li><strong>Eosinophil granule proteins</strong> (MBP, ECP) cause tissue damage</li>
+                <li><strong>Continued leukotriene production</strong> sustains bronchoconstriction</li>
+                <li><strong>Th2 cytokines</strong> perpetuate inflammation</li>
+            </ul>
+        </section>
+        
+        <!-- Clinical Applications -->
+        <section class="section">
+            <h2>Clinical Applications</h2>
+            
+            <h3>Understanding Treatment Targets</h3>
+            <table class="info-table">
+                <tr>
+                    <th>Treatment</th>
+                    <th>Mechanism</th>
+                    <th>Indication</th>
+                </tr>
+                <tr>
+                    <td><strong>Epinephrine</strong></td>
+                    <td>α + β agonist: reverses vasodilation, bronchospasm; inhibits further degranulation</td>
+                    <td>FIRST-LINE for anaphylaxis</td>
+                </tr>
+                <tr>
+                    <td><strong>H1 Antihistamines</strong></td>
+                    <td>Block histamine at H1 receptor</td>
+                    <td>Urticaria, rhinitis, adjunct in anaphylaxis</td>
+                </tr>
+                <tr>
+                    <td><strong>Leukotriene inhibitors</strong></td>
+                    <td>Block LT synthesis (zileuton) or receptor (montelukast)</td>
+                    <td>Asthma, AERD</td>
+                </tr>
+                <tr>
+                    <td><strong>Omalizumab</strong></td>
+                    <td>Anti-IgE antibody; reduces free IgE, downregulates FcεRI</td>
+                    <td>Severe allergic asthma, chronic urticaria</td>
+                </tr>
+                <tr>
+                    <td><strong>Corticosteroids</strong></td>
+                    <td>Inhibit cytokine production, reduce late-phase inflammation</td>
+                    <td>Not first-line for immediate reaction; helps late-phase</td>
+                </tr>
+            </table>
+            
+            <h3>Diagnostic Testing</h3>
+            <ul style="margin-left: 24px;">
+                <li><strong>Skin prick testing:</strong> Introduces allergen to mast cells in skin; wheal = IgE-mediated sensitization</li>
+                <li><strong>Serum specific IgE:</strong> Measures allergen-specific IgE in blood (ImmunoCAP)</li>
+                <li><strong>Serum tryptase:</strong> Confirms mast cell activation; peaks 1-2 hours after anaphylaxis</li>
+                <li><strong>Component-resolved diagnostics:</strong> Tests for IgE to specific allergen proteins (e.g., Ara h 2 for peanut)</li>
+            </ul>
+        </section>
+        
+        <!-- Quiz Section -->
+        <section class="section">
+            <h2>🧠 Test Your Understanding</h2>
+            
+            <div class="quiz-section">
+                <h3>Question 1</h3>
+                <div class="quiz-question">
+                    <p>A patient has a positive skin prick test to peanut but has eaten peanuts without symptoms. What does this indicate?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q1" value="a" onclick="checkAnswer(1, 'b')"> A. The test is a false positive</label>
+                        <label><input type="radio" name="q1" value="b" onclick="checkAnswer(1, 'b')"> B. The patient is sensitized but not clinically allergic</label>
+                        <label><input type="radio" name="q1" value="c" onclick="checkAnswer(1, 'b')"> C. The patient will definitely react on next exposure</label>
+                        <label><input type="radio" name="q1" value="d" onclick="checkAnswer(1, 'b')"> D. The patient has outgrown their allergy</label>
+                    </div>
+                    <div id="feedback1" class="quiz-feedback"></div>
+                </div>
+                
+                <h3>Question 2</h3>
+                <div class="quiz-question">
+                    <p>Which cytokine is essential for B cell class switching to IgE production?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q2" value="a" onclick="checkAnswer(2, 'b')"> A. IL-2</label>
+                        <label><input type="radio" name="q2" value="b" onclick="checkAnswer(2, 'b')"> B. IL-4</label>
+                        <label><input type="radio" name="q2" value="c" onclick="checkAnswer(2, 'b')"> C. IL-6</label>
+                        <label><input type="radio" name="q2" value="d" onclick="checkAnswer(2, 'b')"> D. IFN-γ</label>
+                    </div>
+                    <div id="feedback2" class="quiz-feedback"></div>
+                </div>
+                
+                <h3>Question 3</h3>
+                <div class="quiz-question">
+                    <p>Why is serum tryptase measured in the workup of suspected anaphylaxis?</p>
+                    <div class="quiz-options">
+                        <label><input type="radio" name="q3" value="a" onclick="checkAnswer(3, 'c')"> A. It identifies the specific allergen trigger</label>
+                        <label><input type="radio" name="q3" value="b" onclick="checkAnswer(3, 'c')"> B. It predicts risk of future reactions</label>
+                        <label><input type="radio" name="q3" value="c" onclick="checkAnswer(3, 'c')"> C. It confirms mast cell activation occurred</label>
+                        <label><input type="radio" name="q3" value="d" onclick="checkAnswer(3, 'c')"> D. It determines if epinephrine is needed</label>
+                    </div>
+                    <div id="feedback3" class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Navigation -->
+        <div class="nav-buttons">
+            <a href="../allergy-immunology-hub.html" class="nav-btn secondary">← Back to A/I Hub</a>
+            <a href="immunodeficiency-basics.html" class="nav-btn">Next: Immunodeficiency →</a>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <p>MechanismDx — Part of the <a href="../coachdx-dashboard.html">Dx Learning Ecosystem</a></p>
+        <p style="margin-top: 8px;">Created by Lauren Fine, MD, FAAAAI • Nova Southeastern University</p>
+    </footer>
+    
+    <script>
+        function checkAnswer(questionNum, correctAnswer) {
+            const feedback = document.getElementById(`feedback${questionNum}`);
+            const selected = document.querySelector(`input[name="q${questionNum}"]:checked`);
+            
+            if (!selected) return;
+            
+            if (selected.value === correctAnswer) {
+                feedback.className = 'quiz-feedback correct';
+                if (questionNum === 1) {
+                    feedback.innerHTML = '✓ Correct! Sensitization (positive test) indicates IgE production but does not guarantee clinical reactivity. This is why history is essential alongside testing.';
+                } else if (questionNum === 2) {
+                    feedback.innerHTML = '✓ Correct! IL-4 from Th2 cells is the key signal for B cell class switch recombination to IgE. This is why anti-IL-4 therapies (dupilumab) reduce IgE levels.';
+                } else if (questionNum === 3) {
+                    feedback.innerHTML = '✓ Correct! Tryptase is a preformed mast cell mediator released during degranulation. Elevated tryptase (>baseline or >11.4 ng/mL) supports anaphylaxis diagnosis.';
+                }
+            } else {
+                feedback.className = 'quiz-feedback incorrect';
+                feedback.innerHTML = '✗ Not quite. Try again!';
+            }
+        }
+    </script>
+</body>
+</html>
