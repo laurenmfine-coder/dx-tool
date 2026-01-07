@@ -31,6 +31,36 @@
             color: #6b7280;
         }
         
+        /* Role Selector Banner */
+        .role-banner {
+            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+            border-bottom: 1px solid #86efac;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+        .role-banner-text {
+            font-size: 14px;
+            color: #166534;
+        }
+        .role-banner-text strong {
+            font-weight: 600;
+        }
+        .role-selector {
+            padding: 6px 12px;
+            border: 1px solid #86efac;
+            border-radius: 6px;
+            background: white;
+            font-size: 13px;
+            cursor: pointer;
+            color: #166534;
+        }
+        .role-selector:hover {
+            border-color: #22c55e;
+        }
+        
         .nav { background: #fff; border-bottom: 1px solid #e4e4e7; padding: 12px 24px; position: sticky; top: 0; z-index: 100; }
         .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .nav-link { padding: 8px 16px; color: #52525b; text-decoration: none; font-size: 14px; font-weight: 500; border-radius: 8px; border-left: 3px solid transparent; transition: all 0.15s; }
@@ -49,6 +79,91 @@
         .hero-stats { display: flex; justify-content: center; gap: 40px; }
         .hero-stat-num { font-size: 28px; font-weight: 700; color: #7c3aed; }
         .hero-stat-label { font-size: 13px; color: #64748b; }
+        
+        /* Cross-Platform Recommendations Widget */
+        .cross-platform-widget {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px auto;
+            max-width: 1200px;
+        }
+        .cpw-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+        .cpw-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .cpw-subtitle {
+            font-size: 12px;
+            color: #64748b;
+        }
+        .cpw-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+        }
+        .cpw-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px;
+            background: white;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+        }
+        .cpw-card:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-color: var(--platform-color, #8b5cf6);
+        }
+        .cpw-card.reasondx { --platform-color: #3b82f6; }
+        .cpw-card.mechanismdx { --platform-color: #10b981; }
+        .cpw-card.predictlabs { --platform-color: #f97316; }
+        .cpw-card.fingerprint { --platform-color: #8b5cf6; }
+        
+        .cpw-stripe {
+            width: 4px;
+            height: 40px;
+            border-radius: 2px;
+            background: var(--platform-color, #8b5cf6);
+        }
+        .cpw-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            background: #f8fafc;
+        }
+        .cpw-card.reasondx .cpw-icon { background: #dbeafe; }
+        .cpw-card.mechanismdx .cpw-icon { background: #dcfce7; }
+        .cpw-card.predictlabs .cpw-icon { background: #ffedd5; }
+        .cpw-card.fingerprint .cpw-icon { background: #ede9fe; }
+        
+        .cpw-info { flex: 1; }
+        .cpw-card-title { font-size: 13px; font-weight: 600; color: #1e293b; }
+        .cpw-card-meta { font-size: 11px; color: #64748b; }
+        .cpw-platform-tag { font-weight: 600; }
+        .cpw-card.reasondx .cpw-platform-tag { color: #3b82f6; }
+        .cpw-card.mechanismdx .cpw-platform-tag { color: #10b981; }
+        .cpw-card.predictlabs .cpw-platform-tag { color: #f97316; }
+        .cpw-card.fingerprint .cpw-platform-tag { color: #8b5cf6; }
+        
         .filter-bar { background: #fff; border-bottom: 1px solid #e4e4e7; padding: 16px 24px; position: sticky; top: 52px; z-index: 99; }
         .filter-inner { max-width: 1200px; margin: 0 auto; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
         .filter-btn { padding: 8px 16px; border: 1px solid #e4e4e7; background: #fff; border-radius: 20px; font-size: 13px; cursor: pointer; transition: all 0.15s; }
@@ -70,6 +185,9 @@
         .case-time { font-size: 12px; color: #94a3b8; margin-top: 12px; padding-top: 12px; border-top: 1px solid #f4f4f5; }
         .case-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600; margin-left: 8px; }
         .case-badge.parallel { background: #fef3c7; color: #b45309; }
+        .case-badge.critical { background: #fee2e2; color: #b91c1c; }
+        .case-badge.new { background: #dcfce7; color: #166534; }
+        
         .footer { padding: 32px 24px; text-align: center; border-top: 1px solid #e4e4e7; background: #fff; margin-top: 48px; font-size: 13px; color: #94a3b8; }
         .footer a { color: #8b5cf6; text-decoration: none; }
     </style>
@@ -91,6 +209,25 @@
         <div class="coachdx-tagline">Guided discovery through Socratic coaching.</div>
     </header>
     
+    <!-- Role Selector Banner (NEW) -->
+    <div class="role-banner">
+        <span class="role-banner-text">Currently viewing as: <strong data-element="current-role">Medical Student</strong></span>
+        <select class="role-selector" id="roleSelector" data-element="role-dropdown">
+            <option value="medical-student">Medical Student</option>
+            <option value="resident">Resident</option>
+            <option value="omfs">OMFS Resident</option>
+            <option value="nursing">Nursing Student</option>
+            <option value="pt">PT Student</option>
+            <option value="dpm">Podiatry Student</option>
+            <option value="pharmd">PharmD Student</option>
+            <option value="dental">Dental Student</option>
+            <option value="ems">EMS Provider</option>
+            <option value="rt">RT Student</option>
+            <option value="pa">PA Student</option>
+            <option value="np">NP Student</option>
+        </select>
+    </div>
+    
     <nav class="nav">
         <div class="nav-inner">
             <a href="index.html" class="nav-link active">💬 CoachDx</a>
@@ -102,221 +239,277 @@
     </nav>
     
     <section class="hero">
-        <h1>Case Library</h1>
-        <p>Choose a patient, pick your AI coach, and work through the case. You'll figure out what's going on.</p>
+        <h1 data-element="welcome-title">Welcome to CoachDx</h1>
+        <p>Practice clinical reasoning with AI-powered Socratic coaching. Work through cases with an attending mentor who guides your thinking.</p>
         <div class="hero-stats">
-            <div><div class="hero-stat-num">50+</div><div class="hero-stat-label">Cases</div></div>
-            <div><div class="hero-stat-num">10</div><div class="hero-stat-label">Categories</div></div>
-            <div><div class="hero-stat-num">5</div><div class="hero-stat-label">AI Coaches</div></div>
+            <div><span class="hero-stat-num">70+</span><div class="hero-stat-label">Cases</div></div>
+            <div><span class="hero-stat-num">12</span><div class="hero-stat-label">Professions</div></div>
+            <div><span class="hero-stat-num">10</span><div class="hero-stat-label">Categories</div></div>
         </div>
     </section>
     
-    <div class="filter-bar"><div class="filter-inner">
-        <button class="filter-btn active" data-filter="all">All Cases</button>
-        <button class="filter-btn" data-filter="cardiovascular">Cardiovascular</button>
-        <button class="filter-btn" data-filter="pulmonary">Pulmonary</button>
-        <button class="filter-btn" data-filter="gi">GI</button>
-        <button class="filter-btn" data-filter="renal">Renal</button>
-        <button class="filter-btn" data-filter="endocrine">Endocrine</button>
-        <button class="filter-btn" data-filter="neuro">Neurology</button>
-        <button class="filter-btn" data-filter="id">Infectious Disease</button>
-        <button class="filter-btn" data-filter="heme">Hematology</button>
-        <button class="filter-btn" data-filter="tox">Toxicology</button>
-        <input type="text" class="search-input" id="searchInput" placeholder="Search cases...">
-    </div></div>
+    <!-- Cross-Platform Recommendations Widget (NEW) -->
+    <div class="cross-platform-widget" id="crossPlatformWidget">
+        <div class="cpw-header">
+            <div>
+                <div class="cpw-title">🎯 Continue Your Learning</div>
+                <div class="cpw-subtitle">Recommendations based on your recent activity</div>
+            </div>
+        </div>
+        <div class="cpw-grid" id="cpwGrid">
+            <a href="../mechanism/acs-module.html" class="cpw-card mechanismdx">
+                <div class="cpw-stripe"></div>
+                <div class="cpw-icon">⚙️</div>
+                <div class="cpw-info">
+                    <div class="cpw-card-title">Master ACS Pathophysiology</div>
+                    <div class="cpw-card-meta"><span class="cpw-platform-tag">MechanismDx</span> • Deep dive</div>
+                </div>
+            </a>
+            <a href="../ReasonDx/training.html?case=chest-pain" class="cpw-card reasondx">
+                <div class="cpw-stripe"></div>
+                <div class="cpw-icon">🩺</div>
+                <div class="cpw-info">
+                    <div class="cpw-card-title">Full Chest Pain Case</div>
+                    <div class="cpw-card-meta"><span class="cpw-platform-tag">ReasonDx</span> • Complete walkthrough</div>
+                </div>
+            </a>
+            <a href="../ReasonDx/predict-labs-acs.html" class="cpw-card predictlabs">
+                <div class="cpw-stripe"></div>
+                <div class="cpw-icon">🔮</div>
+                <div class="cpw-info">
+                    <div class="cpw-card-title">Predict ACS Labs</div>
+                    <div class="cpw-card-meta"><span class="cpw-platform-tag">PredictLabs</span> • Test predictions</div>
+                </div>
+            </a>
+            <a href="../fingerprint-dashboard.html" class="cpw-card fingerprint">
+                <div class="cpw-stripe"></div>
+                <div class="cpw-icon">🧬</div>
+                <div class="cpw-info">
+                    <div class="cpw-card-title">View Your Progress</div>
+                    <div class="cpw-card-meta"><span class="cpw-platform-tag">Fingerprint</span> • Learning analytics</div>
+                </div>
+            </a>
+        </div>
+    </div>
+    
+    <div class="filter-bar">
+        <div class="filter-inner">
+            <button class="filter-btn active" data-filter="all">All Cases</button>
+            <button class="filter-btn" data-filter="cardio">❤️ Cardio</button>
+            <button class="filter-btn" data-filter="pulm">🫁 Pulm</button>
+            <button class="filter-btn" data-filter="gi">🩺 GI</button>
+            <button class="filter-btn" data-filter="endo">🦋 Endo</button>
+            <button class="filter-btn" data-filter="renal">💧 Renal</button>
+            <button class="filter-btn" data-filter="neuro">🧠 Neuro</button>
+            <button class="filter-btn" data-filter="id">🦠 ID</button>
+            <button class="filter-btn" data-filter="heme">🩸 Heme</button>
+            <button class="filter-btn" data-filter="tox">⚠️ Tox</button>
+            <input type="text" class="search-input" id="searchInput" placeholder="Search cases...">
+        </div>
+    </div>
     
     <main class="main">
         <!-- Cardiovascular -->
-        <section class="category-section" data-category="cardiovascular">
+        <section class="category-section" data-category="cardio">
             <div class="category-header">
                 <span class="category-icon">❤️</span>
                 <span class="category-title">Cardiovascular</span>
                 <span class="category-count">11 cases</span>
             </div>
             <div class="case-grid">
-                <a href="mentor-chat.html?case=stemi" class="case-card">
-                    <div class="case-title">STEMI - Anterior Wall <span class="case-badge" style="background:#fee2e2;color:#b91c1c;">Critical</span></div>
-                    <div class="case-demo">Michael Johnson, 58M</div>
-                    <div class="case-time">~25 min</div>
-                </a>
                 <a href="mentor-chat.html?case=chest-pain-acs" class="case-card">
-                    <div class="case-title">Chest Pain - ACS Evaluation</div>
-                    <div class="case-demo">Maria Santos, 52F</div>
-                    <div class="case-time">~25 min</div>
+                    <div class="case-title">Chest Pain - ACS<span class="case-badge parallel">↔ Parallel</span></div>
+                    <div class="case-demo">62M crushing chest pain, diaphoresis</div>
+                    <div class="case-time">~20 min</div>
                 </a>
-                <a href="mentor-chat.html?case=chest-pain-acs-b" class="case-card">
-                    <div class="case-title">Chest Pain - Atypical ACS <span class="case-badge parallel">Parallel</span></div>
-                    <div class="case-demo">James Liu, 68M</div>
+                <a href="mentor-chat.html?case=chest-pain-atypical" class="case-card">
+                    <div class="case-title">Atypical ACS<span class="case-badge parallel">↔ Parallel</span></div>
+                    <div class="case-demo">54F diabetic with fatigue, jaw pain</div>
+                    <div class="case-time">~20 min</div>
+                </a>
+                <a href="mentor-chat.html?case=stemi-anterior" class="case-card">
+                    <div class="case-title">STEMI - Anterior Wall<span class="case-badge critical">🚨 Critical</span></div>
+                    <div class="case-demo">58M, crushing chest pain, ST elevations V1-V4</div>
                     <div class="case-time">~25 min</div>
                 </a>
                 <a href="mentor-chat.html?case=aortic-dissection" class="case-card">
-                    <div class="case-title">Aortic Dissection - Type A <span class="case-badge" style="background:#fee2e2;color:#b91c1c;">Critical</span></div>
-                    <div class="case-demo">Raymond Chen, 62M</div>
-                    <div class="case-time">~30 min</div>
+                    <div class="case-title">Aortic Dissection<span class="case-badge critical">🚨 Critical</span></div>
+                    <div class="case-demo">67M, tearing chest pain radiating to back</div>
+                    <div class="case-time">~25 min</div>
                 </a>
                 <a href="mentor-chat.html?case=chest-pain-noncardiac" class="case-card">
-                    <div class="case-title">Chest Pain - Musculoskeletal</div>
-                    <div class="case-demo">Jennifer Lee, 34F</div>
+                    <div class="case-title">Non-Cardiac Chest Pain</div>
+                    <div class="case-demo">28F sharp pain worse with breathing</div>
+                    <div class="case-time">~15 min</div>
+                </a>
+                <a href="mentor-chat.html?case=afib-rvr" class="case-card">
+                    <div class="case-title">AFib with RVR<span class="case-badge parallel">↔ Parallel</span></div>
+                    <div class="case-demo">72M palpitations, irregular pulse</div>
                     <div class="case-time">~20 min</div>
                 </a>
-                <a href="mentor-chat.html?case=atrial-fibrillation" class="case-card">
-                    <div class="case-title">New Onset AFib</div>
-                    <div class="case-demo">Barbara Chen, 67F</div>
-                    <div class="case-time">~25 min</div>
+                <a href="mentor-chat.html?case=afib-unstable" class="case-card">
+                    <div class="case-title">Unstable AFib<span class="case-badge parallel">↔ Parallel</span></div>
+                    <div class="case-demo">Same patient, now hypotensive</div>
+                    <div class="case-time">~20 min</div>
                 </a>
-                <a href="mentor-chat.html?case=atrial-fibrillation-b" class="case-card">
-                    <div class="case-title">Unstable AFib with RVR <span class="case-badge parallel">Parallel</span></div>
-                    <div class="case-demo">Richard Adams, 72M</div>
-                    <div class="case-time">~30 min</div>
-                </a>
-                <a href="mentor-chat.html?case=syncope" class="case-card">
+                <a href="mentor-chat.html?case=syncope-vasovagal" class="case-card">
                     <div class="case-title">Syncope - Vasovagal</div>
-                    <div class="case-demo">Helen Park, 45F</div>
-                    <div class="case-time">~25 min</div>
+                    <div class="case-demo">22F fainted after blood draw</div>
+                    <div class="case-time">~15 min</div>
                 </a>
                 <a href="mentor-chat.html?case=syncope-cardiac" class="case-card">
-                    <div class="case-title">Syncope - Cardiac <span class="case-badge parallel">Parallel</span></div>
-                    <div class="case-demo">George Miller, 68M</div>
+                    <div class="case-title">Syncope - Cardiac</div>
+                    <div class="case-demo">68M sudden LOC during exertion</div>
+                    <div class="case-time">~20 min</div>
+                </a>
+                <a href="mentor-chat.html?case=chf-exacerbation" class="case-card">
+                    <div class="case-title">CHF Exacerbation</div>
+                    <div class="case-demo">75F progressive dyspnea, leg swelling</div>
                     <div class="case-time">~25 min</div>
                 </a>
-                <a href="mentor-chat.html?case=acute-dyspnea-chf" class="case-card">
-                    <div class="case-title">Acute Dyspnea - CHF</div>
-                    <div class="case-demo">Robert Chen, 68M</div>
-                    <div class="case-time">~25 min</div>
-                </a>
-                <a href="mentor-chat.html?case=acute-dyspnea-pe" class="case-card">
-                    <div class="case-title">Acute Dyspnea - PE <span class="case-badge parallel">Parallel</span></div>
-                    <div class="case-demo">Amanda Torres, 34F</div>
+                <a href="mentor-chat.html?case=pe" class="case-card">
+                    <div class="case-title">Pulmonary Embolism</div>
+                    <div class="case-demo">45F post-op dyspnea, tachycardia</div>
                     <div class="case-time">~25 min</div>
                 </a>
             </div>
         </section>
         
         <!-- Pulmonary -->
-        <section class="category-section" data-category="pulmonary">
+        <section class="category-section" data-category="pulm">
             <div class="category-header">
                 <span class="category-icon">🫁</span>
                 <span class="category-title">Pulmonary</span>
-                <span class="category-count">2 cases</span>
+                <span class="category-count">4 cases</span>
             </div>
             <div class="case-grid">
                 <a href="mentor-chat.html?case=copd-exacerbation" class="case-card">
                     <div class="case-title">COPD Exacerbation</div>
-                    <div class="case-demo">Harold Stevens, 72M</div>
-                    <div class="case-time">~25 min</div>
+                    <div class="case-demo">68M worse dyspnea, productive cough</div>
+                    <div class="case-time">~20 min</div>
                 </a>
                 <a href="mentor-chat.html?case=asthma-exacerbation" class="case-card">
-                    <div class="case-title">Severe Asthma <span class="case-badge parallel">Parallel</span></div>
-                    <div class="case-demo">Jessica Martinez, 24F</div>
-                    <div class="case-time">~25 min</div>
+                    <div class="case-title">Asthma Exacerbation</div>
+                    <div class="case-demo">24F wheezing, can't complete sentences</div>
+                    <div class="case-time">~20 min</div>
+                </a>
+                <a href="mentor-chat.html?case=pneumonia-cap" class="case-card">
+                    <div class="case-title">Community-Acquired Pneumonia</div>
+                    <div class="case-demo">55M fever, cough, consolidation</div>
+                    <div class="case-time">~20 min</div>
+                </a>
+                <a href="mentor-chat.html?case=pneumonia-aspiration" class="case-card">
+                    <div class="case-title">Aspiration Pneumonia</div>
+                    <div class="case-demo">82M post-stroke, new infiltrate</div>
+                    <div class="case-time">~20 min</div>
                 </a>
             </div>
         </section>
         
-        <!-- GI -->
+        <!-- GI/Surgery -->
         <section class="category-section" data-category="gi">
             <div class="category-header">
-                <span class="category-icon">🔥</span>
-                <span class="category-title">GI / Surgery</span>
+                <span class="category-icon">🩺</span>
+                <span class="category-title">GI/Surgery</span>
                 <span class="category-count">6 cases</span>
             </div>
             <div class="case-grid">
-                <a href="mentor-chat.html?case=upper-gi-bleed" class="case-card">
-                    <div class="case-title">Upper GI Bleeding - PUD</div>
-                    <div class="case-demo">Frank Morrison, 68M</div>
-                    <div class="case-time">~30 min</div>
+                <a href="mentor-chat.html?case=gi-bleed-upper" class="case-card">
+                    <div class="case-title">Upper GI Bleed<span class="case-badge parallel">↔ Parallel</span></div>
+                    <div class="case-demo">58M hematemesis, melena, on NSAIDs</div>
+                    <div class="case-time">~25 min</div>
                 </a>
-                <a href="mentor-chat.html?case=lower-gi-bleed" class="case-card">
-                    <div class="case-title">Lower GI Bleeding <span class="case-badge parallel">Parallel</span></div>
-                    <div class="case-demo">Dorothy Chen, 75F</div>
+                <a href="mentor-chat.html?case=gi-bleed-lower" class="case-card">
+                    <div class="case-title">Lower GI Bleed<span class="case-badge parallel">↔ Parallel</span></div>
+                    <div class="case-demo">72F bright red blood per rectum</div>
                     <div class="case-time">~25 min</div>
                 </a>
                 <a href="mentor-chat.html?case=appendicitis" class="case-card">
-                    <div class="case-title">Acute Appendicitis</div>
-                    <div class="case-demo">Tyler Johnson, 24M</div>
-                    <div class="case-time">~25 min</div>
+                    <div class="case-title">Appendicitis</div>
+                    <div class="case-demo">19M RLQ pain, fever, anorexia</div>
+                    <div class="case-time">~20 min</div>
                 </a>
                 <a href="mentor-chat.html?case=diverticulitis" class="case-card">
-                    <div class="case-title">Acute Diverticulitis <span class="case-badge parallel">Parallel</span></div>
-                    <div class="case-demo">Barbara Williams, 62F</div>
-                    <div class="case-time">~25 min</div>
+                    <div class="case-title">Diverticulitis</div>
+                    <div class="case-demo">65F LLQ pain, fever</div>
+                    <div class="case-time">~20 min</div>
                 </a>
                 <a href="mentor-chat.html?case=cholangitis" class="case-card">
-                    <div class="case-title">Acute Cholangitis</div>
-                    <div class="case-demo">James Park, 71M</div>
-                    <div class="case-time">~30 min</div>
+                    <div class="case-title">Cholangitis</div>
+                    <div class="case-demo">70M Charcot's triad</div>
+                    <div class="case-time">~25 min</div>
                 </a>
                 <a href="mentor-chat.html?case=sbo" class="case-card">
                     <div class="case-title">Small Bowel Obstruction</div>
-                    <div class="case-demo">Patricia Adams, 58F</div>
-                    <div class="case-time">~25 min</div>
-                </a>
-            </div>
-        </section>
-        
-        <!-- Renal -->
-        <section class="category-section" data-category="renal">
-            <div class="category-header">
-                <span class="category-icon">🫘</span>
-                <span class="category-title">Renal / Electrolytes</span>
-                <span class="category-count">5 cases</span>
-            </div>
-            <div class="case-grid">
-                <a href="mentor-chat.html?case=hyperkalemia" class="case-card">
-                    <div class="case-title">Hyperkalemia Emergency <span class="case-badge" style="background:#fee2e2;color:#b91c1c;">Critical</span></div>
-                    <div class="case-demo">William Peters, 68M</div>
-                    <div class="case-time">~25 min</div>
-                </a>
-                <a href="mentor-chat.html?case=aki-prerenal" class="case-card">
-                    <div class="case-title">AKI - Pre-Renal</div>
-                    <div class="case-demo">Harold Mitchell, 72M</div>
-                    <div class="case-time">~25 min</div>
-                </a>
-                <a href="mentor-chat.html?case=aki-intrinsic" class="case-card">
-                    <div class="case-title">AKI - Intrinsic (ATN) <span class="case-badge parallel">Parallel</span></div>
-                    <div class="case-demo">Patricia Gomez, 58F</div>
-                    <div class="case-time">~25 min</div>
-                </a>
-                <a href="mentor-chat.html?case=hyponatremia-siadh" class="case-card">
-                    <div class="case-title">Hyponatremia - SIADH</div>
-                    <div class="case-demo">Robert Kim, 68M</div>
-                    <div class="case-time">~25 min</div>
-                </a>
-                <a href="mentor-chat.html?case=hyponatremia-hypovolemic" class="case-card">
-                    <div class="case-title">Hyponatremia - Hypovolemic <span class="case-badge parallel">Parallel</span></div>
-                    <div class="case-demo">Maria Santos, 78F</div>
-                    <div class="case-time">~25 min</div>
+                    <div class="case-demo">62F prior surgery, vomiting</div>
+                    <div class="case-time">~20 min</div>
                 </a>
             </div>
         </section>
         
         <!-- Endocrine -->
-        <section class="category-section" data-category="endocrine">
+        <section class="category-section" data-category="endo">
             <div class="category-header">
-                <span class="category-icon">⚡</span>
+                <span class="category-icon">🦋</span>
                 <span class="category-title">Endocrine</span>
                 <span class="category-count">4 cases</span>
             </div>
             <div class="case-grid">
-                <a href="mentor-chat.html?case=thyroid-storm" class="case-card">
-                    <div class="case-title">Thyroid Storm <span class="case-badge" style="background:#fee2e2;color:#b91c1c;">Critical</span></div>
-                    <div class="case-demo">Sandra Kim, 42F</div>
-                    <div class="case-time">~30 min</div>
-                </a>
-                <a href="mentor-chat.html?case=myxedema-coma" class="case-card">
-                    <div class="case-title">Myxedema Coma <span class="case-badge parallel">Parallel</span></div>
-                    <div class="case-demo">Eleanor Hughes, 78F</div>
-                    <div class="case-time">~30 min</div>
-                </a>
                 <a href="mentor-chat.html?case=dka" class="case-card">
-                    <div class="case-title">DKA - Diabetic Ketoacidosis</div>
-                    <div class="case-demo">Marcus Thompson, 22M</div>
-                    <div class="case-time">~30 min</div>
+                    <div class="case-title">DKA<span class="case-badge parallel">↔ Parallel</span></div>
+                    <div class="case-demo">28M T1DM, N/V, Kussmaul breathing</div>
+                    <div class="case-time">~25 min</div>
                 </a>
                 <a href="mentor-chat.html?case=hhs" class="case-card">
-                    <div class="case-title">HHS - Hyperosmolar State <span class="case-badge parallel">Parallel</span></div>
-                    <div class="case-demo">Dorothy Williams, 72F</div>
-                    <div class="case-time">~30 min</div>
+                    <div class="case-title">HHS<span class="case-badge parallel">↔ Parallel</span></div>
+                    <div class="case-demo">72F T2DM, AMS, severe hyperglycemia</div>
+                    <div class="case-time">~25 min</div>
+                </a>
+                <a href="mentor-chat.html?case=thyroid-storm" class="case-card">
+                    <div class="case-title">Thyroid Storm<span class="case-badge critical">🚨 Critical</span></div>
+                    <div class="case-demo">35F Graves, fever, tachycardia, confusion</div>
+                    <div class="case-time">~25 min</div>
+                </a>
+                <a href="mentor-chat.html?case=myxedema-coma" class="case-card">
+                    <div class="case-title">Myxedema Coma<span class="case-badge critical">🚨 Critical</span></div>
+                    <div class="case-demo">68F hypothyroid, AMS, hypothermia</div>
+                    <div class="case-time">~25 min</div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Renal/Electrolytes -->
+        <section class="category-section" data-category="renal">
+            <div class="category-header">
+                <span class="category-icon">💧</span>
+                <span class="category-title">Renal/Electrolytes</span>
+                <span class="category-count">5 cases</span>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=aki-prerenal" class="case-card">
+                    <div class="case-title">AKI - Pre-renal<span class="case-badge parallel">↔ Parallel</span></div>
+                    <div class="case-demo">75M dehydration, rising Cr</div>
+                    <div class="case-time">~20 min</div>
+                </a>
+                <a href="mentor-chat.html?case=aki-intrinsic" class="case-card">
+                    <div class="case-title">AKI - Intrinsic<span class="case-badge parallel">↔ Parallel</span></div>
+                    <div class="case-demo">Same patient, muddy brown casts</div>
+                    <div class="case-time">~20 min</div>
+                </a>
+                <a href="mentor-chat.html?case=hyponatremia-siadh" class="case-card">
+                    <div class="case-title">Hyponatremia - SIADH</div>
+                    <div class="case-demo">62F lung cancer, Na 118</div>
+                    <div class="case-time">~25 min</div>
+                </a>
+                <a href="mentor-chat.html?case=hyponatremia-hypovolemic" class="case-card">
+                    <div class="case-title">Hyponatremia - Hypovolemic</div>
+                    <div class="case-demo">45M marathon runner, Na 125</div>
+                    <div class="case-time">~20 min</div>
+                </a>
+                <a href="mentor-chat.html?case=hyperkalemia-emergency" class="case-card">
+                    <div class="case-title">Hyperkalemia Emergency<span class="case-badge critical">🚨 Critical</span></div>
+                    <div class="case-demo">70M ESRD, K 7.2, ECG changes</div>
+                    <div class="case-time">~20 min</div>
                 </a>
             </div>
         </section>
@@ -329,34 +522,34 @@
                 <span class="category-count">6 cases</span>
             </div>
             <div class="case-grid">
-                <a href="mentor-chat.html?case=status-epilepticus" class="case-card">
-                    <div class="case-title">Status Epilepticus <span class="case-badge" style="background:#fee2e2;color:#b91c1c;">Critical</span></div>
-                    <div class="case-demo">Daniel Brown, 35M</div>
-                    <div class="case-time">~25 min</div>
-                </a>
-                <a href="mentor-chat.html?case=meningitis" class="case-card">
-                    <div class="case-title">Bacterial Meningitis <span class="case-badge" style="background:#fee2e2;color:#b91c1c;">Critical</span></div>
-                    <div class="case-demo">Jessica Martinez, 22F</div>
-                    <div class="case-time">~30 min</div>
-                </a>
-                <a href="mentor-chat.html?case=altered-mental-status" class="case-card">
+                <a href="mentor-chat.html?case=ams" class="case-card">
                     <div class="case-title">Altered Mental Status</div>
-                    <div class="case-demo">Dorothy Williams, 74F</div>
+                    <div class="case-demo">78F found confused at home</div>
                     <div class="case-time">~25 min</div>
                 </a>
-                <a href="mentor-chat.html?case=headache-migraine" class="case-card">
-                    <div class="case-title">Headache - Migraine</div>
-                    <div class="case-demo">Amy Rodriguez, 32F</div>
+                <a href="mentor-chat.html?case=migraine" class="case-card">
+                    <div class="case-title">Migraine</div>
+                    <div class="case-demo">32F unilateral throbbing, nausea</div>
+                    <div class="case-time">~15 min</div>
+                </a>
+                <a href="mentor-chat.html?case=sah" class="case-card">
+                    <div class="case-title">Subarachnoid Hemorrhage<span class="case-badge critical">🚨 Critical</span></div>
+                    <div class="case-demo">45F thunderclap headache</div>
+                    <div class="case-time">~25 min</div>
+                </a>
+                <a href="mentor-chat.html?case=seizure" class="case-card">
+                    <div class="case-title">First-Time Seizure</div>
+                    <div class="case-demo">25M witnessed tonic-clonic</div>
                     <div class="case-time">~20 min</div>
                 </a>
-                <a href="mentor-chat.html?case=headache-sah" class="case-card">
-                    <div class="case-title">Headache - SAH <span class="case-badge parallel">Parallel</span></div>
-                    <div class="case-demo">David Kim, 48M</div>
-                    <div class="case-time">~30 min</div>
+                <a href="mentor-chat.html?case=meningitis-bacterial" class="case-card">
+                    <div class="case-title">Bacterial Meningitis<span class="case-badge critical">🚨 Critical</span></div>
+                    <div class="case-demo">22M fever, neck stiffness, petechiae</div>
+                    <div class="case-time">~25 min</div>
                 </a>
-                <a href="mentor-chat.html?case=seizure-firsttime" class="case-card">
-                    <div class="case-title">First-Time Seizure</div>
-                    <div class="case-demo">Nicole Adams, 28F</div>
+                <a href="mentor-chat.html?case=status-epilepticus" class="case-card">
+                    <div class="case-title">Status Epilepticus<span class="case-badge critical">🚨 Critical</span></div>
+                    <div class="case-demo">45F continuous seizure > 5 min</div>
                     <div class="case-time">~25 min</div>
                 </a>
             </div>
@@ -371,19 +564,19 @@
             </div>
             <div class="case-grid">
                 <a href="mentor-chat.html?case=sepsis-uti" class="case-card">
-                    <div class="case-title">Sepsis - Urosepsis</div>
-                    <div class="case-demo">Helen Morrison, 78F</div>
-                    <div class="case-time">~30 min</div>
+                    <div class="case-title">Sepsis - UTI Source<span class="case-badge parallel">↔ Parallel</span></div>
+                    <div class="case-demo">80F nursing home, fever, confusion</div>
+                    <div class="case-time">~25 min</div>
                 </a>
                 <a href="mentor-chat.html?case=sepsis-pneumonia" class="case-card">
-                    <div class="case-title">Sepsis - Pneumonia <span class="case-badge parallel">Parallel</span></div>
-                    <div class="case-demo">Robert Chen, 65M</div>
-                    <div class="case-time">~30 min</div>
+                    <div class="case-title">Sepsis - Pneumonia Source<span class="case-badge parallel">↔ Parallel</span></div>
+                    <div class="case-demo">55M COPD, productive cough, hypotensive</div>
+                    <div class="case-time">~25 min</div>
                 </a>
                 <a href="mentor-chat.html?case=anaphylaxis" class="case-card">
-                    <div class="case-title">Anaphylaxis</div>
-                    <div class="case-demo">Marcus Johnson, 35M</div>
-                    <div class="case-time">~25 min</div>
+                    <div class="case-title">Anaphylaxis<span class="case-badge critical">🚨 Critical</span></div>
+                    <div class="case-demo">28F bee sting, hives, stridor</div>
+                    <div class="case-time">~15 min</div>
                 </a>
             </div>
         </section>
@@ -398,17 +591,17 @@
             <div class="case-grid">
                 <a href="mentor-chat.html?case=dvt" class="case-card">
                     <div class="case-title">DVT</div>
-                    <div class="case-demo">James Morrison, 55M</div>
+                    <div class="case-demo">Patient info varies</div>
                     <div class="case-time">~25 min</div>
                 </a>
                 <a href="mentor-chat.html?case=svt" class="case-card">
-                    <div class="case-title">SVT <span class="case-badge parallel">Parallel</span></div>
-                    <div class="case-demo">Linda Chen, 45F</div>
+                    <div class="case-title">SVT</div>
+                    <div class="case-demo">Patient info varies</div>
                     <div class="case-time">~25 min</div>
                 </a>
                 <a href="mentor-chat.html?case=anemia-workup" class="case-card">
                     <div class="case-title">Anemia Workup</div>
-                    <div class="case-demo">Sarah Mitchell, 45F</div>
+                    <div class="case-demo">Patient info varies</div>
                     <div class="case-time">~25 min</div>
                 </a>
             </div>
@@ -417,14 +610,14 @@
         <!-- Toxicology (NEW) -->
         <section class="category-section" data-category="tox">
             <div class="category-header">
-                <span class="category-icon">☠️</span>
+                <span class="category-icon">⚠️</span>
                 <span class="category-title">Toxicology</span>
                 <span class="category-count">1 case</span>
             </div>
             <div class="case-grid">
                 <a href="mentor-chat.html?case=acetaminophen-overdose" class="case-card">
-                    <div class="case-title">Acetaminophen Overdose</div>
-                    <div class="case-demo">Ashley Williams, 19F</div>
+                    <div class="case-title">Acetaminophen Overdose<span class="case-badge new">NEW</span></div>
+                    <div class="case-demo">19F intentional OD, presenting 12 hrs post-ingestion</div>
                     <div class="case-time">~25 min</div>
                 </a>
             </div>
@@ -433,9 +626,91 @@
     
     <footer class="footer">
         <p>CoachDx — Part of the <a href="../index.html">Dx Learning Ecosystem</a></p>
+        <p style="margin-top: 8px;">Created by Lauren Fine, MD, FAAAAI • Nova Southeastern University</p>
     </footer>
     
+    <!-- PROFESSION FIX SCRIPT (MERGED) -->
     <script>
+    (function() {
+        'use strict';
+        
+        // =========================================================================
+        // PROFESSION CONFIGURATIONS
+        // =========================================================================
+        const PROFESSION_CONFIG = {
+            'medical-student': { label: 'Medical Student', welcomeTitle: 'Welcome, Medical Student!', mentor: 'Dr. Sarah Chen' },
+            'resident': { label: 'Resident', welcomeTitle: 'Welcome, Resident!', mentor: 'Dr. James Harrison' },
+            'omfs': { label: 'OMFS Resident', welcomeTitle: 'Welcome, OMFS Resident!', mentor: 'Dr. Michael Torres' },
+            'nursing': { label: 'Nursing Student', welcomeTitle: 'Welcome, Nursing Student!', mentor: 'Sarah Mitchell, MSN' },
+            'pt': { label: 'PT Student', welcomeTitle: 'Welcome, DPT Student!', mentor: 'Dr. Amanda Foster, DPT' },
+            'dpm': { label: 'Podiatry Student', welcomeTitle: 'Welcome, Podiatry Student!', mentor: 'Dr. Robert Kim, DPM' },
+            'pharmd': { label: 'PharmD Student', welcomeTitle: 'Welcome, PharmD Student!', mentor: 'Dr. Jennifer Walsh, PharmD' },
+            'dental': { label: 'Dental Student', welcomeTitle: 'Welcome, Dental Student!', mentor: 'Dr. David Park, DDS' },
+            'ems': { label: 'EMS Provider', welcomeTitle: 'Welcome, EMS Provider!', mentor: 'Captain Mike Rodriguez' },
+            'rt': { label: 'RT Student', welcomeTitle: 'Welcome, RT Student!', mentor: 'Chris Thompson, RRT-ACCS' },
+            'pa': { label: 'PA Student', welcomeTitle: 'Welcome, PA Student!', mentor: 'Jessica Martinez, PA-C' },
+            'np': { label: 'NP Student', welcomeTitle: 'Welcome, NP Student!', mentor: 'Dr. Linda Chen, DNP' }
+        };
+        
+        // Update UI for selected profession
+        function updateForProfession(professionCode) {
+            const config = PROFESSION_CONFIG[professionCode] || PROFESSION_CONFIG['medical-student'];
+            
+            // Update current role display
+            const roleDisplay = document.querySelector('[data-element="current-role"]');
+            if (roleDisplay) roleDisplay.textContent = config.label;
+            
+            // Update welcome title
+            const welcomeTitle = document.querySelector('[data-element="welcome-title"]');
+            if (welcomeTitle) welcomeTitle.textContent = config.welcomeTitle;
+            
+            // Update selector
+            const selector = document.getElementById('roleSelector');
+            if (selector) selector.value = professionCode;
+            
+            // Store preference
+            localStorage.setItem('selectedProfession', professionCode);
+            sessionStorage.setItem('currentProfession', professionCode);
+            
+            // Dispatch event
+            window.dispatchEvent(new CustomEvent('professionChanged', { 
+                detail: { profession: professionCode, config: config }
+            }));
+            
+            console.log('[Dashboard] Updated for profession:', professionCode);
+        }
+        
+        // Initialize
+        function init() {
+            // Get stored or URL profession
+            const urlParams = new URLSearchParams(window.location.search);
+            const profession = urlParams.get('profession') || 
+                              localStorage.getItem('selectedProfession') || 
+                              'medical-student';
+            
+            // Initial update
+            updateForProfession(profession);
+            
+            // Selector handler
+            const selector = document.getElementById('roleSelector');
+            if (selector) {
+                selector.addEventListener('change', function(e) {
+                    updateForProfession(e.target.value);
+                });
+            }
+        }
+        
+        // Run on DOM ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+        
+        // Expose API
+        window.DxDashboard = { updateProfession: updateForProfession };
+    })();
+    
     // Filter functionality
     document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -459,7 +734,6 @@
             const text = card.textContent.toLowerCase();
             card.style.display = text.includes(query) ? 'block' : 'none';
         });
-        // Show all sections when searching
         if (query) {
             document.querySelectorAll('.category-section').forEach(section => {
                 section.style.display = 'block';
