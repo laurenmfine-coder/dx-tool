@@ -375,6 +375,9 @@
     <script src="coachdx-cases-merged.js"></script>
     
     <script>
+    // Global filterBySpecialty function (must be outside IIFE for onclick access)
+    let filterBySpecialty;
+    
     (function() {
         'use strict';
         
@@ -479,6 +482,9 @@
             'Podiatry': '🦶',
             'Pharmacy': '💊',
             'Dental': '🦷',
+            'Allergy': '🧬',
+            'Immunology': '🧬',
+            'Allergy/Immunology': '🧬',
             'default': '📋'
         };
         
@@ -546,9 +552,15 @@
             
             sources.forEach(src => {
                 if (typeof window[src] !== 'undefined') {
+                    const count = Object.keys(window[src]).length;
+                    console.log('[CaseLibrary]', src, 'loaded', count, 'cases');
                     Object.assign(merged, window[src]);
                 }
             });
+            
+            // Verify allergy cases specifically
+            const allergyCases = Object.values(merged).filter(c => c.specialty === 'allergy-immunology');
+            console.log('[CaseLibrary] Allergy/Immunology cases:', allergyCases.length);
             
             console.log('[CaseLibrary] Loaded', Object.keys(merged).length, 'total cases');
             return merged;
@@ -557,7 +569,7 @@
         // =========================================================================
         // SPECIALTY FILTERING
         // =========================================================================
-        function filterBySpecialty(specialty) {
+        filterBySpecialty = function(specialty) {
             currentSpecialty = specialty;
             
             // Update UI state
@@ -569,7 +581,7 @@
             
             // Re-render cases with specialty filter applied
             updateForProfession(currentProfession);
-        }
+        };
         
         function getCasesForSpecialty(cases, specialty) {
             if (specialty === 'all') return cases;
