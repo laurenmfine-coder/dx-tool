@@ -1,165 +1,513 @@
- member.specialty;
-            
-            const responseBank = {
-                'allergy-immunology': [
-                    "From an allergy standpoint, we need to ensure proper testing and documentation. The key is confirming the trigger and establishing a clear management plan.",
-                    "I'd recommend we focus on the allergic component here. Let's make sure we have appropriate testing and that the action plan is comprehensive.",
-                    "Important to distinguish IgE-mediated from other mechanisms. This will guide our testing approach and long-term management."
-                ],
-                'pulmonology': [
-                    "Looking at the pulmonary perspective, we should verify the diagnosis with objective measures. Spirometry and potentially bronchoprovocation would help.",
-                    "I'm concerned about the respiratory component. Let's ensure we've ruled out other causes and optimized inhaler therapy.",
-                    "The key from my standpoint is determining the phenotype. This will guide our biologic selection if needed."
-                ],
-                'gastroenterology': [
-                    "From a GI standpoint, we need to track symptoms and histologic response. Regular endoscopy with biopsies is essential for monitoring.",
-                    "The dietary approach requires careful coordination. We should discuss the elimination sequence and timing of reintroduction.",
-                    "I'd like to ensure we're addressing any swallowing concerns. Food impaction history is important to document."
-                ],
-                'speech-therapy': [
-                    "I can work on breathing techniques and laryngeal control. The key is identifying triggers and practicing rescue breathing.",
-                    "From a feeding perspective, we should assess oral motor skills and comfort with different textures.",
-                    "I'd recommend a feeding evaluation to address any texture aversions or swallowing anxiety."
-                ],
-                'respiratory-therapy': [
-                    "I've assessed inhaler technique and there are some opportunities for improvement. The spacer technique especially needs work.",
-                    "Let me share what I observed with the inhaler assessment. Proper technique is crucial before we change medications.",
-                    "I can provide additional education on device use and help develop an action plan they can follow."
-                ],
-                'psychology': [
-                    "There does seem to be significant anxiety that's impacting quality of life. I'd recommend we address this alongside the medical management.",
-                    "The psychological component is important here. Food anxiety and avoidance behaviors can really impact outcomes.",
-                    "I can work with the family on coping strategies and address any anxiety that might be contributing to symptoms."
-                ],
-                'nutrition': [
-                    "Nutritionally, we need to ensure adequate intake despite the restrictions. Let me review the diet and identify any gaps.",
-                    "I can help with meal planning and ensure the family understands safe substitutions.",
-                    "Label reading education is essential. Many hidden sources can be missed without proper training."
-                ],
-                'pharmacy': [
-                    "From a pharmacy perspective, let's review the medication list for any interactions and ensure proper dosing.",
-                    "I can help coordinate the prescription and insurance coverage. Cost can be a barrier to adherence.",
-                    "Let me check on any drug interactions and make sure the regimen is optimized."
-                ],
-                'school-nursing': [
-                    "For the school setting, we need a clear action plan and trained staff. I'll coordinate with teachers and administrators.",
-                    "The 504 plan should cover all necessary accommodations. Let me outline what we typically include.",
-                    "Emergency preparedness is key. We need EpiPens accessible and staff trained on administration."
-                ],
-                'ent': [
-                    "From an ENT standpoint, we should evaluate the upper airway. Nasal endoscopy would help assess the extent of disease.",
-                    "The sinus disease needs to be addressed as part of the unified airway approach.",
-                    "I'd recommend we consider the surgical options alongside medical management."
-                ],
-                'infectious-disease': [
-                    "The antibiotic selection is critical here. If we can safely rule out the allergy, our treatment options improve significantly.",
-                    "I'd prefer to use first-line therapy if possible. The outcomes are better with appropriate antibiotic selection.",
-                    "Let's coordinate closely on the testing timeline. We need to make a decision soon given the clinical situation."
-                ]
-            };
-            
-            return responseBank[specialty] || [
-                "That's an important consideration. Let's make sure we address that in our plan.",
-                "I agree we need to coordinate on this. Clear communication will be key.",
-                "Thanks for raising that. From my perspective, we should prioritize patient safety and clear documentation."
-            ];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Huddle Trainer | Interprofessional Collaboration</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            min-height: 100vh;
+            color: #1e293b;
         }
-        
+        .header {
+            background: white;
+            border-bottom: 1px solid #a7f3d0;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo { display: flex; align-items: center; gap: 12px; }
+        .logo-icon { font-size: 28px; }
+        .logo-text { font-size: 20px; font-weight: 600; color: #166534; }
+        .main-content { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+        .hero { text-align: center; margin-bottom: 32px; }
+        .hero h1 { font-size: 32px; color: #166534; margin-bottom: 8px; }
+        .hero p { color: #64748b; font-size: 16px; }
+        .selector-section {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .selector-section h2 { color: #166534; font-size: 18px; margin-bottom: 16px; }
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 6px;
+        }
+        .form-group select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            background: white;
+        }
+        .start-btn {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: white;
+            border: none;
+            padding: 12px 32px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .start-btn:disabled { background: #9ca3af; cursor: not-allowed; }
+        .huddle-interface { display: none; }
+        .huddle-interface.active {
+            display: grid;
+            grid-template-columns: 300px 1fr 280px;
+            gap: 20px;
+        }
+        .patient-card, .team-roster, .checklist-panel {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .patient-card h3, .team-roster h4, .checklist-panel h3 {
+            color: #166534;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        .patient-name { font-size: 18px; font-weight: 600; }
+        .patient-meta { font-size: 13px; color: #64748b; margin-bottom: 8px; }
+        .patient-complaint {
+            background: #fef3c7;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 13px;
+            color: #92400e;
+            margin-bottom: 12px;
+        }
+        .patient-history { font-size: 13px; color: #475569; line-height: 1.5; }
+        .team-roster { margin-top: 16px; }
+        .team-member {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            cursor: pointer;
+        }
+        .team-member:hover { background: #f0fdf4; }
+        .member-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #e0f2fe;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .member-name { font-size: 13px; font-weight: 500; }
+        .member-role { font-size: 11px; color: #64748b; }
+        .chat-area {
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            height: 600px;
+        }
+        .chat-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chat-header h3 { color: #166534; }
+        .progress-bar {
+            width: 150px;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #22c55e;
+            transition: width 0.3s;
+        }
+        .chat-messages { flex: 1; overflow-y: auto; padding: 16px 20px; }
+        .message { margin-bottom: 16px; display: flex; gap: 10px; }
+        .message-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #dbeafe;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .message-sender { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+        .message-text {
+            background: #f1f5f9;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .message.user .message-text { background: #dcfce7; }
+        .chat-input-area {
+            padding: 16px 20px;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            gap: 12px;
+        }
+        .chat-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            font-size: 14px;
+            resize: none;
+        }
+        .send-btn {
+            background: #22c55e;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            font-size: 13px;
+            background: #f9fafb;
+        }
+        .checklist-item.checked { background: #dcfce7; color: #166534; }
+        .check-icon {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #d1d5db;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+        .checklist-item.checked .check-icon {
+            background: #22c55e;
+            border-color: #22c55e;
+            color: white;
+        }
+        .quick-actions { margin-top: 16px; padding-top: 16px; border-top: 1px solid #e5e7eb; }
+        .quick-actions h4 { font-size: 12px; color: #64748b; margin-bottom: 8px; }
+        .quick-btn {
+            display: block;
+            width: 100%;
+            padding: 8px 12px;
+            margin-bottom: 6px;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #166534;
+            cursor: pointer;
+            text-align: left;
+        }
+        .end-btn {
+            margin-top: 16px;
+            width: 100%;
+            padding: 12px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .modal-content h2 { color: #166534; margin-bottom: 20px; }
+        .close-modal-btn {
+            background: #22c55e;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        @media (max-width: 900px) {
+            .huddle-interface.active { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <span class="logo-icon">🤝</span>
+            <span class="logo-text">Team Huddle Trainer</span>
+        </div>
+        <a href="allergy-immunology-hub.html" style="color: #166534; text-decoration: none;">← Back to A/I Hub</a>
+    </header>
+    <main class="main-content">
+        <section class="hero">
+            <h1>🏥 Interprofessional Case Conference</h1>
+            <p>Practice collaborative care discussions with AI-simulated team members</p>
+        </section>
+        <section class="selector-section" id="selectorSection">
+            <h2>Select Your Huddle</h2>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Your Role</label>
+                    <select id="yourRole" onchange="checkReady()">
+                        <option value="">Select your role...</option>
+                        <option value="ai-fellow">A/I Fellow</option>
+                        <option value="ai-attending">A/I Attending</option>
+                        <option value="peds-resident">Pediatrics Resident</option>
+                        <option value="rn">RN Care Coordinator</option>
+                        <option value="dietitian">Dietitian</option>
+                        <option value="rt">Respiratory Therapist</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Case Type</label>
+                    <select id="caseType" onchange="checkReady()">
+                        <option value="">Select case...</option>
+                        <option value="anaphylaxis">Anaphylaxis - School Safety Planning</option>
+                        <option value="severe-asthma">Severe Asthma - Biologic Selection</option>
+                        <option value="eoe">EoE - Diet Compliance Issues</option>
+                        <option value="drug-allergy">Drug Allergy - Penicillin Delabeling</option>
+                        <option value="vcd">VCD - Refractory "Asthma"</option>
+                    </select>
+                </div>
+            </div>
+            <button class="start-btn" id="startBtn" disabled onclick="startHuddle()">Start Team Huddle</button>
+        </section>
+        <div class="huddle-interface" id="huddleInterface">
+            <div>
+                <div class="patient-card">
+                    <h3>📋 Patient</h3>
+                    <div class="patient-name" id="patientName">Loading...</div>
+                    <div class="patient-meta" id="patientMeta"></div>
+                    <div class="patient-complaint" id="patientComplaint"></div>
+                    <div class="patient-history" id="patientHistory"></div>
+                </div>
+                <div class="team-roster">
+                    <h4>👥 Team Members</h4>
+                    <div id="teamRoster"></div>
+                </div>
+            </div>
+            <div class="chat-area">
+                <div class="chat-header">
+                    <h3>💬 Discussion</h3>
+                    <div>
+                        <span style="font-size: 12px; color: #64748b; margin-right: 8px;" id="progressLabel">0%</span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-messages" id="chatMessages"></div>
+                <div class="chat-input-area">
+                    <textarea class="chat-input" id="chatInput" placeholder="Share your perspective..." rows="2"></textarea>
+                    <button class="send-btn" onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+            <div>
+                <div class="checklist-panel">
+                    <h3>✅ Discussion Checklist</h3>
+                    <div id="checklist"></div>
+                    <div class="quick-actions">
+                        <h4>Quick Prompts</h4>
+                        <button class="quick-btn" onclick="askQuestion('diagnosis')">Ask about diagnosis</button>
+                        <button class="quick-btn" onclick="askQuestion('treatment')">Discuss treatment plan</button>
+                        <button class="quick-btn" onclick="askQuestion('followup')">Plan follow-up</button>
+                    </div>
+                    <button class="end-btn" onclick="endHuddle()">End Huddle</button>
+                </div>
+            </div>
+        </div>
+        <div class="modal-overlay" id="summaryModal">
+            <div class="modal-content">
+                <h2>📊 Huddle Summary</h2>
+                <div id="summaryContent"></div>
+                <button class="close-modal-btn" onclick="closeSummary()">Close</button>
+            </div>
+        </div>
+    </main>
+    <script>
+        const huddleCases = {
+            'anaphylaxis': {
+                patient: { name: 'Tyler Morrison', age: '8 yo M', mrn: 'MRN: 847291' },
+                complaint: 'Post-anaphylaxis evaluation. Peanut reaction at school - required EpiPen.',
+                history: 'First anaphylaxis. Hives, facial swelling, vomiting within 10 min. School nurse gave EpiPen.',
+                team: [
+                    { name: 'Dr. Chen', role: 'A/I Attending', specialty: 'ai', avatar: '👩‍⚕️' },
+                    { name: 'Dr. Rodriguez', role: 'Pediatrician', specialty: 'peds', avatar: '👨‍⚕️' },
+                    { name: 'Sarah', role: 'School Nurse', specialty: 'school', avatar: '🏫' },
+                    { name: 'Mike', role: 'Dietitian', specialty: 'diet', avatar: '🥗' },
+                    { name: 'Lisa', role: 'PharmD', specialty: 'pharm', avatar: '💊' }
+                ],
+                checklist: ['Confirm trigger (testing)', 'EpiPen prescription/training', '504 plan accommodations', 'Address food anxiety', 'Dietary counseling', 'Schedule follow-up']
+            },
+            'severe-asthma': {
+                patient: { name: 'Maria Santos', age: '34 yo F', mrn: 'MRN: 583920' },
+                complaint: 'Uncontrolled severe asthma. Being considered for biologic therapy.',
+                history: 'Asthma since 25. CRS with polyps. NSAID sensitivity. Three ED visits in 6 months.',
+                team: [
+                    { name: 'Dr. Chen', role: 'A/I Attending', specialty: 'ai', avatar: '👩‍⚕️' },
+                    { name: 'Dr. Park', role: 'Pulmonologist', specialty: 'pulm', avatar: '🫁' },
+                    { name: 'Dr. Kim', role: 'ENT', specialty: 'ent', avatar: '👂' },
+                    { name: 'Tom', role: 'RT', specialty: 'rt', avatar: '💨' }
+                ],
+                checklist: ['Review T2 biomarkers', 'Confirm AERD', 'Discuss biologics', 'Assess inhaler technique', 'ENT evaluation', 'Adherence check']
+            },
+            'eoe': {
+                patient: { name: 'Jake Thompson', age: '12 yo M', mrn: 'MRN: 294857' },
+                complaint: 'EoE with food anxiety and diet compliance issues.',
+                history: 'Dysphagia x 2 years. EoE confirmed. On 6-food elimination, struggling with compliance.',
+                team: [
+                    { name: 'Dr. Lee', role: 'GI Attending', specialty: 'gi', avatar: '🔬' },
+                    { name: 'Dr. Chen', role: 'A/I Attending', specialty: 'ai', avatar: '👩‍⚕️' },
+                    { name: 'Sarah', role: 'Dietitian', specialty: 'diet', avatar: '🥗' },
+                    { name: 'Dr. Williams', role: 'Psychologist', specialty: 'psych', avatar: '🧠' }
+                ],
+                checklist: ['Review diet compliance', 'Discuss histologic response', 'Address food anxiety', 'Feeding therapy', 'Consider dupilumab', 'Reintroduction plan']
+            },
+            'drug-allergy': {
+                patient: { name: 'Robert Chen', age: '58 yo M', mrn: 'MRN: 293847' },
+                complaint: 'MSSA endocarditis with penicillin allergy. ID wants nafcillin.',
+                history: 'PCN allergy since childhood - "rash." Vancomycin day 5, not clearing.',
+                team: [
+                    { name: 'Dr. Chen', role: 'A/I Attending', specialty: 'ai', avatar: '👩‍⚕️' },
+                    { name: 'Dr. Johnson', role: 'ID Attending', specialty: 'id', avatar: '🦠' },
+                    { name: 'Lisa', role: 'PharmD', specialty: 'pharm', avatar: '💊' },
+                    { name: 'Mary', role: 'RN', specialty: 'rn', avatar: '👩‍⚕️' }
+                ],
+                checklist: ['Review allergy history', 'PEN-FAST score', 'Plan testing', 'Coordinate timeline', 'Prepare challenge', 'Document outcome']
+            },
+            'vcd': {
+                patient: { name: 'Emma Davis', age: '16 yo F', mrn: 'MRN: 847293' },
+                complaint: 'Refractory "exercise-induced asthma" - VCD suspected.',
+                history: 'Competitive swimmer. Throat tightness with exercise. Albuterol ineffective. Laryngoscopy confirmed VCD.',
+                team: [
+                    { name: 'Dr. Chen', role: 'A/I Attending', specialty: 'ai', avatar: '👩‍⚕️' },
+                    { name: 'Dr. Park', role: 'Pulmonologist', specialty: 'pulm', avatar: '🫁' },
+                    { name: 'Jessica', role: 'Speech Therapist', specialty: 'speech', avatar: '🗣️' },
+                    { name: 'Dr. Williams', role: 'Psychologist', specialty: 'psych', avatar: '🧠' }
+                ],
+                checklist: ['Review laryngoscopy', 'Asthma vs VCD', 'Speech therapy referral', 'Address anxiety', 'Stop unnecessary inhalers', 'Return-to-sport plan']
+            }
+        };
+        let currentCase = null, checkedItems = [], messageHistory = [];
+        function checkReady() {
+            document.getElementById('startBtn').disabled = !(document.getElementById('yourRole').value && document.getElementById('caseType').value);
+        }
+        function startHuddle() {
+            currentCase = huddleCases[document.getElementById('caseType').value];
+            checkedItems = []; messageHistory = [];
+            document.getElementById('patientName').textContent = currentCase.patient.name;
+            document.getElementById('patientMeta').textContent = currentCase.patient.age + ' | ' + currentCase.patient.mrn;
+            document.getElementById('patientComplaint').textContent = currentCase.complaint;
+            document.getElementById('patientHistory').textContent = currentCase.history;
+            document.getElementById('teamRoster').innerHTML = currentCase.team.map(m => '<div class="team-member"><div class="member-avatar">' + m.avatar + '</div><div><div class="member-name">' + m.name + '</div><div class="member-role">' + m.role + '</div></div></div>').join('');
+            document.getElementById('checklist').innerHTML = currentCase.checklist.map((item, i) => '<div class="checklist-item" id="check-' + i + '"><div class="check-icon">✓</div><span>' + item + '</span></div>').join('');
+            document.getElementById('selectorSection').style.display = 'none';
+            document.getElementById('huddleInterface').classList.add('active');
+            addMessage(currentCase.team[0], 'Good morning, team. Let\'s discuss ' + currentCase.patient.name + '. ' + currentCase.complaint);
+        }
+        function addMessage(sender, text) {
+            document.getElementById('chatMessages').innerHTML += '<div class="message ' + (sender.specialty === 'user' ? 'user' : '') + '"><div class="message-avatar">' + (sender.avatar || '👤') + '</div><div><div class="message-sender">' + (sender.name || 'You') + '</div><div class="message-text">' + text + '</div></div></div>';
+            document.getElementById('chatMessages').scrollTop = 99999;
+            messageHistory.push({ sender: sender.name || 'You', text: text });
+            checkTopicCoverage(text);
+        }
+        function sendMessage() {
+            var text = document.getElementById('chatInput').value.trim();
+            if (!text) return;
+            addMessage({ specialty: 'user', avatar: '👤' }, text);
+            document.getElementById('chatInput').value = '';
+            setTimeout(function() {
+                var r = currentCase.team[Math.floor(Math.random() * currentCase.team.length)];
+                var responses = ['That\'s an important point to consider.', 'I agree, let\'s address that.', 'From my perspective, we should prioritize patient safety.', 'Good observation. Let me add my thoughts.', 'I can help coordinate that aspect of care.'];
+                addMessage(r, responses[Math.floor(Math.random() * responses.length)]);
+            }, 1000);
+        }
+        function checkTopicCoverage(text) {
+            var lower = text.toLowerCase();
+            currentCase.checklist.forEach(function(item, i) {
+                if (checkedItems.indexOf(i) === -1) {
+                    var words = item.toLowerCase().split(' ').filter(function(w) { return w.length > 3; });
+                    var matches = words.filter(function(w) { return lower.indexOf(w) >= 0; });
+                    if (matches.length >= 1) {
+                        checkedItems.push(i);
+                        document.getElementById('check-' + i).classList.add('checked');
+                        var pct = Math.round((checkedItems.length / currentCase.checklist.length) * 100);
+                        document.getElementById('progressFill').style.width = pct + '%';
+                        document.getElementById('progressLabel').textContent = pct + '%';
+                    }
+                }
+            });
+        }
+        function askQuestion(type) {
+            var prompts = { diagnosis: 'Can we clarify the diagnosis?', treatment: 'What\'s our treatment plan?', followup: 'How should we plan follow-up?' };
+            document.getElementById('chatInput').value = prompts[type];
+            sendMessage();
+        }
         function endHuddle() {
-            // Calculate metrics
-            const topicsCovered = checkedItems.length;
-            const totalTopics = currentCase.checklist.length;
-            const messagesFromUser = messageHistory.filter(m => m.sender.includes('You') || m.sender.includes('Fellow') || m.sender.includes('Resident')).length;
-            
-            // Generate summary
-            const summaryContent = `
-                <div style="margin-bottom: 24px;">
-                    <h3 style="color: #166534; margin-bottom: 12px;">📊 Huddle Metrics</h3>
-                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: center;">
-                        <div style="background: #f0fdf4; padding: 16px; border-radius: 12px;">
-                            <div style="font-size: 28px; font-weight: bold; color: #22c55e;">${topicsCovered}/${totalTopics}</div>
-                            <div style="font-size: 13px; color: #6b7280;">Topics Covered</div>
-                        </div>
-                        <div style="background: #f0fdf4; padding: 16px; border-radius: 12px;">
-                            <div style="font-size: 28px; font-weight: bold; color: #22c55e;">${messageHistory.length}</div>
-                            <div style="font-size: 13px; color: #6b7280;">Total Exchanges</div>
-                        </div>
-                        <div style="background: #f0fdf4; padding: 16px; border-radius: 12px;">
-                            <div style="font-size: 28px; font-weight: bold; color: #22c55e;">${messagesFromUser}</div>
-                            <div style="font-size: 13px; color: #6b7280;">Your Contributions</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="margin-bottom: 24px;">
-                    <h3 style="color: #166534; margin-bottom: 12px;">✅ Topics Addressed</h3>
-                    <div style="background: #f9fafb; padding: 16px; border-radius: 12px;">
-                        ${currentCase.checklist.map((item, i) => `
-                            <div style="display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid #e5e7eb;">
-                                <span style="color: ${checkedItems.includes(i) ? '#22c55e' : '#ef4444'}; font-size: 18px;">
-                                    ${checkedItems.includes(i) ? '✓' : '○'}
-                                </span>
-                                <span style="color: ${checkedItems.includes(i) ? '#374151' : '#9ca3af'};">${item}</span>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-                
-                <div style="margin-bottom: 24px;">
-                    <h3 style="color: #166534; margin-bottom: 12px;">💡 Collaboration Feedback</h3>
-                    <div style="background: #fef3c7; padding: 16px; border-radius: 12px; border-left: 4px solid #f59e0b;">
-                        <p style="margin-bottom: 12px;"><strong>Strengths:</strong></p>
-                        <ul style="margin-left: 20px; margin-bottom: 12px;">
-                            ${messagesFromUser > 2 ? '<li>Active participation in discussion</li>' : ''}
-                            ${topicsCovered >= totalTopics * 0.7 ? '<li>Good coverage of key topics</li>' : ''}
-                            <li>Engaged multiple team members</li>
-                        </ul>
-                        <p style="margin-bottom: 12px;"><strong>Opportunities:</strong></p>
-                        <ul style="margin-left: 20px;">
-                            ${topicsCovered < totalTopics ? `<li>Consider addressing remaining topics: ${currentCase.checklist.filter((_, i) => !checkedItems.includes(i)).slice(0, 2).join(', ')}</li>` : ''}
-                            ${messagesFromUser < 3 ? '<li>Try to contribute more actively to the discussion</li>' : ''}
-                            <li>Remember to clarify action items and owners at the end</li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div>
-                    <h3 style="color: #166534; margin-bottom: 12px;">🎯 Key Takeaways</h3>
-                    <div style="background: #dbeafe; padding: 16px; border-radius: 12px;">
-                        <ul style="margin-left: 20px;">
-                            <li>Effective huddles require input from all relevant team members</li>
-                            <li>Use a checklist to ensure key topics are covered</li>
-                            <li>Document action items with clear ownership</li>
-                            <li>Schedule follow-up to track progress</li>
-                        </ul>
-                    </div>
-                </div>
-            `;
-            
-            document.getElementById('summaryContent').innerHTML = summaryContent;
+            var pct = Math.round((checkedItems.length / currentCase.checklist.length) * 100);
+            document.getElementById('summaryContent').innerHTML = '<div style="text-align:center;padding:20px;"><div style="font-size:48px;margin-bottom:16px;">' + (pct >= 80 ? '🎉' : '📊') + '</div><div style="font-size:24px;font-weight:bold;color:#166534;">' + pct + '% Complete</div><p style="color:#64748b;margin-top:8px;">' + checkedItems.length + ' of ' + currentCase.checklist.length + ' topics covered</p></div>';
             document.getElementById('summaryModal').classList.add('active');
         }
-        
         function closeSummary() {
             document.getElementById('summaryModal').classList.remove('active');
             document.getElementById('huddleInterface').classList.remove('active');
             document.getElementById('selectorSection').style.display = 'block';
-            
-            // Reset
-            checkedItems = [];
-            messageHistory = [];
             document.getElementById('chatMessages').innerHTML = '';
             document.getElementById('yourRole').value = '';
             document.getElementById('caseType').value = '';
             document.getElementById('startBtn').disabled = true;
         }
-        
-        // Enter key to send
         document.getElementById('chatInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                sendMessage();
-            }
+            if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
         });
     </script>
 </body>
