@@ -1145,3 +1145,8 @@ const COACHDX_ALLERGY_CASES = {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = COACHDX_ALLERGY_CASES;
 }
+
+// Make available globally for case-library.html
+if (typeof window !== 'undefined') {
+    window.COACHDX_ALLERGY_CASES = COACHDX_ALLERGY_CASES;
+}
