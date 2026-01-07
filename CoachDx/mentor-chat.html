@@ -299,6 +299,7 @@
                         <div class="mentor-name" id="mentorName">Dr. Sarah Chen</div>
                         <div class="mentor-title" id="mentorTitle">Attending Physician</div>
                     </div>
+                    <button id="rotateMentorBtn" onclick="rotateMentor()" style="display:none; background:#e5e7eb; border:none; border-radius:50%; width:28px; height:28px; cursor:pointer; font-size:14px;" title="Switch mentor">🔄</button>
                 </div>
                 <div class="mentor-tip" id="mentorTip">"Walk me through your thinking step by step."</div>
             </div>
@@ -360,22 +361,183 @@
     
     <script>
     // ============================================================
-    // PROFESSION CONFIGURATION
+    // PROFESSION CONFIGURATION - Multiple Mentors Per Profession
     // ============================================================
     const PROFESSION_CONFIG = {
-        'medical-student': { label: 'Medical Student', mentor: 'Dr. Sarah Chen', title: 'Attending Physician', avatar: '👩‍⚕️', tip: '"Walk me through your thinking step by step."' },
-        'resident': { label: 'Resident', mentor: 'Dr. James Harrison', title: 'Attending Physician', avatar: '👨‍⚕️', tip: '"What\'s your differential and why?"' },
-        'omfs': { label: 'OMFS Resident', mentor: 'Dr. Michael Torres', title: 'OMFS Attending', avatar: '👨‍⚕️', tip: '"Consider the surgical implications."' },
-        'nursing': { label: 'Nursing Student', mentor: 'Sarah Mitchell', title: 'Charge RN, MSN', avatar: '👩‍⚕️', tip: '"How would you prioritize your nursing interventions?"' },
-        'pt': { label: 'PT Student', mentor: 'Dr. Amanda Foster', title: 'PT, DPT, OCS', avatar: '👩‍⚕️', tip: '"Think about functional limitations and goals."' },
-        'dpm': { label: 'Podiatry Student', mentor: 'Dr. Robert Kim', title: 'DPM, FACFAS', avatar: '👨‍⚕️', tip: '"Consider the biomechanical factors."' },
-        'pharmd': { label: 'PharmD Student', mentor: 'Dr. Jennifer Walsh', title: 'PharmD, BCPS', avatar: '👩‍⚕️', tip: '"What drug interactions should we consider?"' },
-        'dental': { label: 'Dental Student', mentor: 'Dr. David Park', title: 'DDS, Attending', avatar: '👨‍⚕️', tip: '"Think about oral manifestations of systemic disease."' },
-        'ems': { label: 'EMS Provider', mentor: 'Captain Mike Rodriguez', title: 'Flight Paramedic', avatar: '👨‍⚕️', tip: '"What are your critical interventions in the field?"' },
-        'rt': { label: 'RT Student', mentor: 'Chris Thompson', title: 'RRT-ACCS', avatar: '👨‍⚕️', tip: '"Consider the respiratory pathophysiology."' },
-        'pa': { label: 'PA Student', mentor: 'Jessica Martinez', title: 'PA-C', avatar: '👩‍⚕️', tip: '"How would you present this to your attending?"' },
-        'np': { label: 'NP Student', mentor: 'Dr. Linda Chen', title: 'DNP, FNP-C', avatar: '👩‍⚕️', tip: '"Think holistically about patient care."' }
+        'medical-student': { 
+            label: 'Medical Student', 
+            defaultCase: 'chest-pain-acs',
+            mentors: [
+                { name: 'Dr. Sarah Chen', title: 'Internal Medicine Attending', avatar: '👩‍⚕️', specialty: 'general', tip: '"Walk me through your thinking step by step."' },
+                { name: 'Dr. James Harrison', title: 'Cardiologist', avatar: '👨‍⚕️', specialty: 'cardiology', tip: '"What does the ECG tell you?"' },
+                { name: 'Dr. Maria Santos', title: 'Pulmonologist', avatar: '👩‍⚕️', specialty: 'pulmonary', tip: '"Start with the ABG interpretation."' },
+                { name: 'Dr. Robert Kim', title: 'Emergency Medicine', avatar: '👨‍⚕️', specialty: 'emergency', tip: '"What\'s the most dangerous diagnosis to rule out?"' },
+                { name: 'Dr. Angela Wright', title: 'Hospitalist', avatar: '👩‍⚕️', specialty: 'hospital', tip: '"How would you prioritize your workup?"' }
+            ]
+        },
+        'resident': { 
+            label: 'Resident', 
+            defaultCase: 'chest-pain-acs',
+            mentors: [
+                { name: 'Dr. James Harrison', title: 'Attending Physician', avatar: '👨‍⚕️', specialty: 'general', tip: '"What\'s your differential and why?"' },
+                { name: 'Dr. Patricia Moore', title: 'ICU Attending', avatar: '👩‍⚕️', specialty: 'critical', tip: '"What could kill this patient in the next hour?"' },
+                { name: 'Dr. Kenneth Lee', title: 'Chief of Medicine', avatar: '👨‍⚕️', specialty: 'teaching', tip: '"Teach me about the pathophysiology."' }
+            ]
+        },
+        'omfs': { 
+            label: 'OMFS Resident', 
+            defaultCase: 'omfs-trauma-systematic',
+            mentors: [
+                { name: 'Dr. Michael Torres', title: 'OMFS Attending', avatar: '👨‍⚕️', specialty: 'trauma', tip: '"Consider the surgical implications."' },
+                { name: 'Dr. Karen Patel', title: 'OMFS - Oncology', avatar: '👩‍⚕️', specialty: 'oncology', tip: '"What are the margins telling you?"' },
+                { name: 'Dr. Steven Chang', title: 'OMFS - Reconstruction', avatar: '👨‍⚕️', specialty: 'reconstruction', tip: '"Think about form and function."' },
+                { name: 'Dr. Lisa Hernandez', title: 'OMFS - TMJ/Orthognathic', avatar: '👩‍⚕️', specialty: 'orthognathic', tip: '"How does occlusion guide your plan?"' }
+            ]
+        },
+        'nursing': { 
+            label: 'Nursing Student', 
+            defaultCase: 'nursing-deteriorating-patient',
+            mentors: [
+                { name: 'Sarah Mitchell', title: 'Charge RN, MSN', avatar: '👩‍⚕️', specialty: 'medsurg', tip: '"How would you prioritize your nursing interventions?"' },
+                { name: 'Rachel Torres', title: 'ICU RN, CCRN', avatar: '👩‍⚕️', specialty: 'critical', tip: '"What subtle changes concern you?"' },
+                { name: 'Marcus Johnson', title: 'ED RN, CEN', avatar: '👨‍⚕️', specialty: 'emergency', tip: '"Triage this patient - what\'s your gut telling you?"' },
+                { name: 'Emily Watson', title: 'Nurse Educator, DNP', avatar: '👩‍⚕️', specialty: 'education', tip: '"Walk me through your assessment."' }
+            ]
+        },
+        'pt': { 
+            label: 'PT Student', 
+            defaultCase: 'pt-low-back-pain',
+            mentors: [
+                { name: 'Dr. Amanda Foster', title: 'PT, DPT, OCS', avatar: '👩‍⚕️', specialty: 'ortho', tip: '"Think about functional limitations and goals."' },
+                { name: 'Dr. Michael Chen', title: 'PT, DPT, NCS', avatar: '👨‍⚕️', specialty: 'neuro', tip: '"What does the neuro exam tell you?"' },
+                { name: 'Dr. Jessica Brown', title: 'PT, DPT, CCS', avatar: '👩‍⚕️', specialty: 'cardiopulm', tip: '"How does endurance factor in?"' },
+                { name: 'Dr. David Park', title: 'PT, DPT, GCS', avatar: '👨‍⚕️', specialty: 'geriatrics', tip: '"What\'s the fall risk here?"' }
+            ]
+        },
+        'dpm': { 
+            label: 'Podiatry Student', 
+            defaultCase: 'dpm-diabetic-foot',
+            mentors: [
+                { name: 'Dr. Robert Kim', title: 'DPM, FACFAS', avatar: '👨‍⚕️', specialty: 'surgery', tip: '"Consider the biomechanical factors."' },
+                { name: 'Dr. Nancy Lopez', title: 'DPM - Wound Care', avatar: '👩‍⚕️', specialty: 'wound', tip: '"What\'s your offloading strategy?"' },
+                { name: 'Dr. James Wright', title: 'DPM - Sports Medicine', avatar: '👨‍⚕️', specialty: 'sports', tip: '"Think about return to activity."' }
+            ]
+        },
+        'pharmd': { 
+            label: 'PharmD Student', 
+            defaultCase: 'pharmd-anticoagulation',
+            mentors: [
+                { name: 'Dr. Jennifer Walsh', title: 'PharmD, BCPS', avatar: '👩‍⚕️', specialty: 'general', tip: '"What drug interactions should we consider?"' },
+                { name: 'Dr. Kevin Tran', title: 'PharmD, BCCP', avatar: '👨‍⚕️', specialty: 'cardiology', tip: '"Think about the cardiac pharmacology."' },
+                { name: 'Dr. Michelle Adams', title: 'PharmD, BCOP', avatar: '👩‍⚕️', specialty: 'oncology', tip: '"What about chemo-drug interactions?"' },
+                { name: 'Dr. Brian Miller', title: 'PharmD, BCCCP', avatar: '👨‍⚕️', specialty: 'critical', tip: '"How does organ dysfunction affect dosing?"' }
+            ]
+        },
+        'dental': { 
+            label: 'Dental Student', 
+            defaultCase: 'dental-pain-differential',
+            mentors: [
+                { name: 'Dr. David Park', title: 'DDS, Attending', avatar: '👨‍⚕️', specialty: 'general', tip: '"Think about oral manifestations of systemic disease."' },
+                { name: 'Dr. Susan Lee', title: 'DDS, Endodontist', avatar: '👩‍⚕️', specialty: 'endo', tip: '"What\'s the pulp status telling you?"' },
+                { name: 'Dr. Mark Thompson', title: 'DDS, Periodontist', avatar: '👨‍⚕️', specialty: 'perio', tip: '"Assess the periodontal involvement."' },
+                { name: 'Dr. Amy Chen', title: 'DDS, Oral Medicine', avatar: '👩‍⚕️', specialty: 'medicine', tip: '"What systemic conditions are at play?"' }
+            ]
+        },
+        'ems': { 
+            label: 'EMS Provider', 
+            defaultCase: 'ems-stemi',
+            mentors: [
+                { name: 'Captain Mike Rodriguez', title: 'Flight Paramedic', avatar: '👨‍⚕️', specialty: 'flight', tip: '"What are your critical interventions in the field?"' },
+                { name: 'Lt. Sarah Chen', title: 'EMS Supervisor', avatar: '👩‍⚕️', specialty: 'ground', tip: '"How do you stabilize for transport?"' },
+                { name: 'Dr. James Wilson', title: 'EMS Medical Director', avatar: '👨‍⚕️', specialty: 'medical', tip: '"What protocols apply here?"' },
+                { name: 'Captain Lisa Brown', title: 'Tactical Paramedic', avatar: '👩‍⚕️', specialty: 'tactical', tip: '"Think scene safety first."' }
+            ]
+        },
+        'rt': { 
+            label: 'RT Student', 
+            defaultCase: 'rt-copd-bipap',
+            mentors: [
+                { name: 'Chris Thompson', title: 'RRT-ACCS', avatar: '👨‍⚕️', specialty: 'critical', tip: '"Consider the respiratory pathophysiology."' },
+                { name: 'Jennifer Park', title: 'RRT-NPS', avatar: '👩‍⚕️', specialty: 'neonatal', tip: '"Neonates are not small adults."' },
+                { name: 'Michael Davis', title: 'RRT, CPFT', avatar: '👨‍⚕️', specialty: 'pulm-function', tip: '"What do the PFTs show?"' },
+                { name: 'Amanda Garcia', title: 'RRT-SDS', avatar: '👩‍⚕️', specialty: 'sleep', tip: '"Consider sleep-disordered breathing."' }
+            ]
+        },
+        'pa': { 
+            label: 'PA Student', 
+            defaultCase: 'chest-pain-acs',
+            mentors: [
+                { name: 'Jessica Martinez', title: 'PA-C, Emergency Medicine', avatar: '👩‍⚕️', specialty: 'emergency', tip: '"How would you present this to your attending?"' },
+                { name: 'David Johnson', title: 'PA-C, Surgery', avatar: '👨‍⚕️', specialty: 'surgery', tip: '"Think about surgical indications."' },
+                { name: 'Emily Roberts', title: 'PA-C, Primary Care', avatar: '👩‍⚕️', specialty: 'primary', tip: '"What follow-up does this patient need?"' }
+            ]
+        },
+        'np': { 
+            label: 'NP Student', 
+            defaultCase: 'chest-pain-acs',
+            mentors: [
+                { name: 'Dr. Linda Chen', title: 'DNP, FNP-C', avatar: '👩‍⚕️', specialty: 'family', tip: '"Think holistically about patient care."' },
+                { name: 'Dr. Robert Williams', title: 'DNP, ACNP-BC', avatar: '👨‍⚕️', specialty: 'acute', tip: '"What\'s your immediate management?"' },
+                { name: 'Dr. Maria Santos', title: 'DNP, PMHNP-BC', avatar: '👩‍⚕️', specialty: 'psych', tip: '"Consider the mental health component."' }
+            ]
+        }
     };
+    
+    // Current mentor index (for rotation)
+    let currentMentorIndex = 0;
+    
+    // Get current mentor for profession
+    function getCurrentMentor(profession) {
+        const config = PROFESSION_CONFIG[profession] || PROFESSION_CONFIG['medical-student'];
+        const mentors = config.mentors || [{ name: config.mentor, title: config.title, avatar: config.avatar, tip: config.tip }];
+        return mentors[currentMentorIndex % mentors.length];
+    }
+    
+    // Rotate to next mentor
+    function rotateMentor() {
+        currentMentorIndex++;
+        updateMentorCard();
+    }
+    
+    // Get default case for profession
+    function getDefaultCaseForProfession(profession) {
+        const config = PROFESSION_CONFIG[profession] || PROFESSION_CONFIG['medical-student'];
+        return config.defaultCase || 'chest-pain-acs';
+    }
+    
+    // Filter cases by profession
+    function getCasesForProfession(profession) {
+        const allCases = typeof COACHDX_CASES !== 'undefined' ? COACHDX_CASES : CASES;
+        const professionCases = {};
+        
+        // Map profession codes to case discipline values
+        const disciplineMap = {
+            'medical-student': ['medical', 'general', undefined],
+            'resident': ['medical', 'general', 'resident', undefined],
+            'omfs': ['omfs'],
+            'nursing': ['nursing'],
+            'pt': ['pt', 'physical-therapy'],
+            'dpm': ['dpm', 'podiatry'],
+            'pharmd': ['pharmd', 'pharmacy'],
+            'dental': ['dental'],
+            'ems': ['ems', 'paramedic'],
+            'rt': ['rt', 'respiratory'],
+            'pa': ['medical', 'pa', 'general', undefined],
+            'np': ['medical', 'np', 'general', undefined]
+        };
+        
+        const allowedDisciplines = disciplineMap[profession] || ['medical', 'general', undefined];
+        
+        for (const [id, caseData] of Object.entries(allCases)) {
+            const caseDiscipline = caseData.discipline || caseData.profession;
+            if (allowedDisciplines.includes(caseDiscipline) || 
+                (profession === 'medical-student' && !caseDiscipline)) {
+                professionCases[id] = caseData;
+            }
+        }
+        
+        return professionCases;
+    }
 
     // ============================================================
     // COMPREHENSIVE TOPIC MAPPING FOR CROSS-PLATFORM
@@ -467,20 +629,34 @@
 
     function init() {
         const urlParams = new URLSearchParams(window.location.search);
-        const caseId = urlParams.get('case') || 'chest-pain-acs';
         
-        // Load profession preference
+        // Load profession preference first
         currentProfession = urlParams.get('profession') || 
                           localStorage.getItem('selectedProfession') || 
                           'medical-student';
         
         document.getElementById('professionSelect').value = currentProfession;
-        updateMentorCard();
         
-        currentCase = CASES[caseId];
+        // Get case - use URL param, or default case for profession
+        const caseId = urlParams.get('case') || getDefaultCaseForProfession(currentProfession);
+        
+        // Get cases filtered for this profession
+        const professionCases = getCasesForProfession(currentProfession);
+        
+        currentCase = professionCases[caseId] || CASES[caseId];
+        
+        // If still no case, try the profession's default
         if (!currentCase) {
-            currentCase = CASES['chest-pain-acs'];
+            const defaultCaseId = getDefaultCaseForProfession(currentProfession);
+            currentCase = professionCases[defaultCaseId] || CASES[defaultCaseId] || CASES['chest-pain-acs'];
         }
+        
+        // Final fallback - pick first case from profession's cases
+        if (!currentCase && Object.keys(professionCases).length > 0) {
+            currentCase = Object.values(professionCases)[0];
+        }
+        
+        updateMentorCard();
         
         if (!currentCase) {
             document.getElementById('chatMessages').innerHTML = '<p style="padding:20px;color:#dc2626;">Error: Could not load case. Please check that coachdx-cases-merged.js is in the same directory.</p>';
@@ -522,11 +698,18 @@
     }
 
     function updateMentorCard() {
-        const config = PROFESSION_CONFIG[currentProfession] || PROFESSION_CONFIG['medical-student'];
-        document.getElementById('mentorName').textContent = config.mentor;
-        document.getElementById('mentorTitle').textContent = config.title;
-        document.getElementById('mentorAvatar').textContent = config.avatar;
-        document.getElementById('mentorTip').textContent = config.tip;
+        const mentor = getCurrentMentor(currentProfession);
+        document.getElementById('mentorName').textContent = mentor.name;
+        document.getElementById('mentorTitle').textContent = mentor.title;
+        document.getElementById('mentorAvatar').textContent = mentor.avatar;
+        document.getElementById('mentorTip').textContent = mentor.tip;
+        
+        // Show rotate button if multiple mentors available
+        const config = PROFESSION_CONFIG[currentProfession];
+        if (config && config.mentors && config.mentors.length > 1) {
+            const rotateBtn = document.getElementById('rotateMentorBtn');
+            if (rotateBtn) rotateBtn.style.display = 'inline-block';
+        }
     }
 
     function updateTimer() {
@@ -540,8 +723,8 @@
     function addMessage(text, sender) {
         const container = document.getElementById('chatMessages');
         const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        const config = PROFESSION_CONFIG[currentProfession] || PROFESSION_CONFIG['medical-student'];
-        const mentorName = sender === 'attending' ? config.mentor : 'You';
+        const mentor = getCurrentMentor(currentProfession);
+        const mentorName = sender === 'attending' ? mentor.name : 'You';
         
         container.innerHTML += `
             <div class="message ${sender}">
