@@ -2,7 +2,9 @@
  * PROFESSION LANGUAGE CONFIGURATION
  * Dx Learning Ecosystem - Multi-Profession Support
  * 
- * This module ensures all UI text adapts to the learner's profession.
+ * 14 PROFESSIONS SUPPORTED:
+ * MD/DO, PA, Nursing, ARNP, EMS, RT, PharmD, OD, Dental, OMFS, PT, DPM, Resident, Professional
+ * 
  * Place in ROOT folder of your GitHub repo.
  * 
  * Lauren Fine, MD, FAAAAI | January 2026
@@ -413,6 +415,86 @@ const PROFESSION_CONFIG = {
         }
     },
     
+    // ==================== PHYSICAL THERAPY (NEW) ====================
+    "pt": {
+        professionCode: "pt",
+        professionFull: "Doctor of Physical Therapy",
+        degreeAbbreviation: "DPT",
+        
+        learnerTitle: "PT Student",
+        learnerTitlePlural: "PT Students",
+        learnerLevels: {
+            ume: { name: "PT Student", shortName: "DPT1-3", subtitle: "Pre-grad", icon: "🎓" },
+            gme: { name: "Resident", shortName: "Res", subtitle: "Residency", icon: "🏥" },
+            cme: { name: "Physical Therapist", shortName: "DPT", subtitle: "CE Credits", icon: "⚕️" }
+        },
+        levelOptions: ["DPT-1", "DPT-2", "DPT-3", "Clinical Internship", "Residency", "Practicing"],
+        
+        mentorTitle: "Clinical Instructor",
+        mentorTitleShort: "CI",
+        supervisorTitle: "Supervising PT",
+        
+        welcomeMessage: "Welcome, PT Student!",
+        welcomeSubtext: "Your personalized clinical reasoning training awaits.",
+        dashboardGreeting: "Ready to develop your movement system diagnosis skills?",
+        
+        patientTerm: "patient",
+        encounterTerm: "patient examination",
+        workupTerm: "examination",
+        assessmentTerm: "physical therapy diagnosis",
+        planTerm: "plan of care",
+        
+        primaryQuestion: "What is the movement system diagnosis and prognosis?",
+        decisionFramework: "Systems Review → Tests & Measures → PT Diagnosis → Prognosis → POC",
+        
+        defaultCoach: {
+            name: "Dr. Michael Torres",
+            title: "DPT, OCS, Clinical Instructor",
+            avatar: "🦿",
+            role: "Your clinical instructor"
+        }
+    },
+    
+    // ==================== PODIATRY (NEW) ====================
+    "dpm": {
+        professionCode: "dpm",
+        professionFull: "Doctor of Podiatric Medicine",
+        degreeAbbreviation: "DPM",
+        
+        learnerTitle: "Podiatry Student",
+        learnerTitlePlural: "Podiatry Students",
+        learnerLevels: {
+            ume: { name: "Podiatry Student", shortName: "DPM1-4", subtitle: "Pre-grad", icon: "🎓" },
+            gme: { name: "Resident", shortName: "PGY1-3", subtitle: "Residency", icon: "🏥" },
+            cme: { name: "Podiatrist", shortName: "DPM", subtitle: "CE Credits", icon: "⚕️" }
+        },
+        levelOptions: ["DPM-1", "DPM-2", "DPM-3", "DPM-4", "PGY-1", "PGY-2", "PGY-3", "Practicing"],
+        
+        mentorTitle: "Attending Podiatrist",
+        mentorTitleShort: "Attending",
+        supervisorTitle: "Attending Podiatrist",
+        
+        welcomeMessage: "Welcome, Podiatry Student!",
+        welcomeSubtext: "Your personalized clinical reasoning training awaits.",
+        dashboardGreeting: "Ready to develop your diagnostic skills?",
+        
+        patientTerm: "patient",
+        encounterTerm: "podiatric examination",
+        workupTerm: "podiatric workup",
+        assessmentTerm: "podiatric assessment",
+        planTerm: "treatment plan",
+        
+        primaryQuestion: "What is the foot/ankle diagnosis and treatment approach?",
+        decisionFramework: "Localize → Vascular/Neuro Assessment → Diagnose → Conservative vs Surgical",
+        
+        defaultCoach: {
+            name: "Dr. Rebecca Stone",
+            title: "DPM, FACFAS, Attending",
+            avatar: "🦶",
+            role: "Your attending podiatrist"
+        }
+    },
+    
     // ==================== RESIDENT ====================
     "resident": {
         professionCode: "resident",
@@ -498,28 +580,19 @@ const PROFESSION_CONFIG = {
 // HELPER FUNCTIONS
 // ============================================================
 
-/**
- * Get the full configuration for a profession
- */
 function getProfessionConfig(professionCode) {
-    const code = (professionCode || "md-do").toLowerCase();
+    var code = (professionCode || "md-do").toLowerCase();
     return PROFESSION_CONFIG[code] || PROFESSION_CONFIG["md-do"];
 }
 
-/**
- * Get specific text for a profession
- */
 function getProfessionText(professionCode, textKey) {
-    const config = getProfessionConfig(professionCode);
+    var config = getProfessionConfig(professionCode);
     return config[textKey] || "";
 }
 
-/**
- * Get welcome content for dashboard
- */
 function getWelcomeContent(professionCode, userName) {
-    const config = getProfessionConfig(professionCode);
-    let title = config.welcomeMessage;
+    var config = getProfessionConfig(professionCode);
+    var title = config.welcomeMessage;
     if (userName) {
         title = "Welcome, " + userName + "!";
     }
@@ -531,12 +604,9 @@ function getWelcomeContent(professionCode, userName) {
     };
 }
 
-/**
- * Get coach/mentor display info
- */
 function getCoachDisplay(professionCode, customCoach) {
-    const config = getProfessionConfig(professionCode);
-    const coach = customCoach || config.defaultCoach;
+    var config = getProfessionConfig(professionCode);
+    var coach = customCoach || config.defaultCoach;
     return {
         name: coach.name,
         title: coach.title,
@@ -546,11 +616,8 @@ function getCoachDisplay(professionCode, customCoach) {
     };
 }
 
-/**
- * Get all UI strings for profession
- */
 function getUIStrings(professionCode) {
-    const config = getProfessionConfig(professionCode);
+    var config = getProfessionConfig(professionCode);
     return {
         learnerTitle: config.learnerTitle,
         mentorTitle: config.mentorTitle,
@@ -569,12 +636,9 @@ function getUIStrings(professionCode) {
     };
 }
 
-/**
- * Get learner levels for ReasonDx integration
- */
 function getLearnerLevelsForProfession(professionCode) {
-    const config = getProfessionConfig(professionCode);
-    const levels = config.learnerLevels;
+    var config = getProfessionConfig(professionCode);
+    var levels = config.learnerLevels;
     
     return {
         ume: {
@@ -613,31 +677,21 @@ function getLearnerLevelsForProfession(professionCode) {
     };
 }
 
-/**
- * Get current user's profession from localStorage
- */
 function getCurrentProfession() {
     return localStorage.getItem('dxRole') || 'md-do';
 }
 
-/**
- * Get current coach name for the session
- */
 function getCurrentCoachName() {
-    const profession = getCurrentProfession();
-    const coach = getCoachDisplay(profession);
+    var profession = getCurrentProfession();
+    var coach = getCoachDisplay(profession);
     return coach.name;
 }
 
-/**
- * Update all profession-aware elements on the page
- */
 function updateProfessionUI() {
-    const profession = getCurrentProfession();
-    const config = getProfessionConfig(profession);
-    const coach = getCoachDisplay(profession);
+    var profession = getCurrentProfession();
+    var config = getProfessionConfig(profession);
+    var coach = getCoachDisplay(profession);
     
-    // Update elements with data-profession-text attributes
     document.querySelectorAll('[data-profession-text]').forEach(function(el) {
         var key = el.getAttribute('data-profession-text');
         if (key === 'welcomeMessage') el.textContent = config.welcomeMessage;
@@ -652,7 +706,7 @@ function updateProfessionUI() {
 }
 
 // ============================================================
-// EXPORTS - Make available globally
+// EXPORTS
 // ============================================================
 
 window.PROFESSION_CONFIG = PROFESSION_CONFIG;
@@ -666,7 +720,6 @@ window.getCurrentProfession = getCurrentProfession;
 window.getCurrentCoachName = getCurrentCoachName;
 window.updateProfessionUI = updateProfessionUI;
 
-// Also create ProfessionLanguage namespace
 window.ProfessionLanguage = {
     PROFESSION_CONFIG: PROFESSION_CONFIG,
     getProfessionConfig: getProfessionConfig,
@@ -680,4 +733,4 @@ window.ProfessionLanguage = {
     updateProfessionUI: updateProfessionUI
 };
 
-console.log('[ProfessionConfig] Loaded - 12 professions available');
+console.log('[ProfessionConfig] Loaded - 14 professions available (including PT and Podiatry)');

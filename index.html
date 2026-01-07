@@ -27,28 +27,11 @@
             color: var(--text);
         }
         
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
         
-        .header {
-            text-align: center;
-            padding: 40px 20px;
-            color: white;
-        }
-        
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-        
-        .header .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
+        .header { text-align: center; padding: 40px 20px; color: white; }
+        .header h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 700; }
+        .header .subtitle { font-size: 1.2rem; opacity: 0.9; }
         
         .main-card {
             background: var(--card-bg);
@@ -64,32 +47,22 @@
             text-align: center;
             border-bottom: 1px solid var(--border);
         }
+        .card-header h2 { color: var(--primary); font-size: 1.5rem; margin-bottom: 10px; }
+        .card-header p { color: var(--text-light); }
         
-        .card-header h2 {
-            color: var(--primary);
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-        
-        .card-header p {
-            color: var(--text-light);
-        }
-        
-        .card-body {
-            padding: 30px;
-        }
+        .card-body { padding: 30px; }
         
         .role-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
             margin-bottom: 30px;
         }
         
         .role-card {
             border: 2px solid var(--border);
             border-radius: 12px;
-            padding: 20px;
+            padding: 18px;
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
@@ -110,45 +83,32 @@
         .role-card.selected::after {
             content: '✓';
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 12px;
+            right: 12px;
             background: var(--primary);
             color: white;
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: 12px;
         }
         
-        .role-icon {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-        
-        .role-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 5px;
-        }
-        
-        .role-description {
-            font-size: 0.9rem;
-            color: var(--text-light);
-        }
+        .role-icon { font-size: 2rem; margin-bottom: 8px; }
+        .role-title { font-size: 1rem; font-weight: 600; color: var(--primary); margin-bottom: 4px; }
+        .role-description { font-size: 0.85rem; color: var(--text-light); line-height: 1.4; }
         
         .role-card .new-badge {
             position: absolute;
-            top: 10px;
-            left: 10px;
+            top: 8px;
+            left: 8px;
             background: var(--secondary);
             color: white;
-            font-size: 0.7rem;
-            padding: 2px 8px;
-            border-radius: 10px;
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            border-radius: 8px;
             font-weight: 600;
         }
         
@@ -158,55 +118,24 @@
             border-top: 1px solid var(--border);
             display: none;
         }
-        
-        .level-section.visible {
-            display: block;
-        }
-        
-        .level-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        
-        .level-options {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+        .level-section.visible { display: block; }
+        .level-title { font-size: 1.2rem; font-weight: 600; color: var(--primary); margin-bottom: 15px; text-align: center; }
+        .level-options { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
         
         .level-btn {
-            padding: 12px 24px;
+            padding: 10px 20px;
             border: 2px solid var(--border);
             border-radius: 8px;
             background: white;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 1rem;
+            font-size: 0.95rem;
         }
+        .level-btn:hover { border-color: var(--primary-light); }
+        .level-btn.selected { background: var(--primary); color: white; border-color: var(--primary); }
         
-        .level-btn:hover {
-            border-color: var(--primary-light);
-        }
-        
-        .level-btn.selected {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-        
-        .enter-section {
-            margin-top: 30px;
-            text-align: center;
-            display: none;
-        }
-        
-        .enter-section.visible {
-            display: block;
-        }
+        .enter-section { margin-top: 30px; text-align: center; display: none; }
+        .enter-section.visible { display: block; }
         
         .enter-btn {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
@@ -220,31 +149,11 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(30, 58, 95, 0.3);
         }
+        .enter-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(30, 58, 95, 0.4); }
+        .enter-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
         
-        .enter-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(30, 58, 95, 0.4);
-        }
-        
-        .enter-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .remember-me {
-            margin-top: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            color: var(--text-light);
-        }
-        
-        .remember-me input {
-            width: 18px;
-            height: 18px;
-        }
+        .remember-me { margin-top: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--text-light); }
+        .remember-me input { width: 18px; height: 18px; }
         
         .coach-preview {
             margin-top: 30px;
@@ -254,55 +163,16 @@
             border: 1px solid #86EFAC;
             display: none;
         }
+        .coach-preview.visible { display: block; }
+        .coach-preview h4 { color: #166534; margin-bottom: 10px; font-size: 1rem; }
+        .coach-info { display: flex; align-items: center; gap: 15px; }
+        .coach-avatar { font-size: 3rem; }
+        .coach-details h5 { font-size: 1.1rem; color: var(--text); margin-bottom: 3px; }
+        .coach-details p { color: var(--text-light); font-size: 0.9rem; }
         
-        .coach-preview.visible {
-            display: block;
-        }
-        
-        .coach-preview h4 {
-            color: #166534;
-            margin-bottom: 10px;
-            font-size: 1rem;
-        }
-        
-        .coach-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .coach-avatar {
-            font-size: 3rem;
-        }
-        
-        .coach-details h5 {
-            font-size: 1.1rem;
-            color: var(--text);
-            margin-bottom: 3px;
-        }
-        
-        .coach-details p {
-            color: var(--text-light);
-            font-size: 0.9rem;
-        }
-        
-        .features-section {
-            margin-top: 40px;
-        }
-        
-        .features-title {
-            text-align: center;
-            color: white;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        
+        .features-section { margin-top: 40px; }
+        .features-title { text-align: center; color: white; font-size: 1.5rem; margin-bottom: 20px; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
         .feature-card {
             background: rgba(255,255,255,0.1);
             backdrop-filter: blur(10px);
@@ -311,27 +181,10 @@
             color: white;
             border: 1px solid rgba(255,255,255,0.2);
         }
+        .feature-card h3 { font-size: 1.2rem; margin-bottom: 10px; }
+        .feature-card p { opacity: 0.9; font-size: 0.95rem; line-height: 1.5; }
         
-        .feature-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .feature-card p {
-            opacity: 0.9;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-        
-        .footer {
-            text-align: center;
-            color: rgba(255,255,255,0.7);
-            padding: 30px;
-            font-size: 0.9rem;
-        }
+        .footer { text-align: center; color: rgba(255,255,255,0.7); padding: 30px; font-size: 0.9rem; }
         
         @media (max-width: 768px) {
             .header h1 { font-size: 1.8rem; }
@@ -342,13 +195,12 @@
     </style>
 </head>
 <body>
-    <!-- IMPORTANT: Load profession config FIRST -->
     <script src="profession-language-config.js"></script>
     
     <div class="container">
         <div class="header">
             <h1>🏥 Dx Learning Ecosystem</h1>
-            <p class="subtitle">Interprofessional Clinical Reasoning Training</p>
+            <p class="subtitle">Interprofessional Clinical Reasoning Training • 14 Professions</p>
         </div>
         
         <div class="main-card">
@@ -358,83 +210,106 @@
             </div>
             
             <div class="card-body">
-                <!-- ALL 12 PROFESSIONS -->
+                <!-- ALL 14 PROFESSIONS -->
                 <div class="role-grid" id="roleGrid">
+                    <!-- MD/DO -->
                     <div class="role-card" data-role="md-do">
                         <div class="role-icon">🩺</div>
                         <div class="role-title">Medical Student (MD/DO)</div>
                         <div class="role-description">200+ cases covering all core clerkships and Step prep</div>
                     </div>
                     
+                    <!-- PA -->
                     <div class="role-card" data-role="pa">
                         <div class="role-icon">👨‍⚕️</div>
                         <div class="role-title">PA Student</div>
-                        <div class="role-description">Primary care focused cases with physician collaboration scenarios</div>
+                        <div class="role-description">Primary care cases with collaboration scenarios</div>
                     </div>
                     
+                    <!-- Nursing -->
                     <div class="role-card" data-role="nursing">
                         <div class="role-icon">💉</div>
                         <div class="role-title">Nursing Student (RN/BSN)</div>
-                        <div class="role-description">100+ nursing cases: deteriorating patients, medication safety, SBAR</div>
+                        <div class="role-description">Patient assessment, deterioration, SBAR</div>
                     </div>
                     
+                    <!-- ARNP -->
                     <div class="role-card" data-role="arnp">
-                        <span class="new-badge">NEW</span>
                         <div class="role-icon">⚕️</div>
                         <div class="role-title">NP Student (ARNP)</div>
-                        <div class="role-description">150 cases with scope-of-practice decision making and collaboration</div>
+                        <div class="role-description">Scope-of-practice decision making</div>
                     </div>
                     
+                    <!-- EMS -->
                     <div class="role-card" data-role="ems">
                         <div class="role-icon">🚑</div>
-                        <div class="role-title">Paramedic/EMT Student</div>
-                        <div class="role-description">15 prehospital cases: field STEMI, stroke routing, trauma triage</div>
+                        <div class="role-title">Paramedic/EMT</div>
+                        <div class="role-description">Field assessment, STEMI, stroke, trauma</div>
                     </div>
                     
+                    <!-- RT -->
                     <div class="role-card" data-role="rt">
                         <div class="role-icon">🫁</div>
-                        <div class="role-title">Respiratory Therapy Student</div>
-                        <div class="role-description">10 RT cases: ventilator management, ABG interpretation, BiPAP</div>
+                        <div class="role-title">Respiratory Therapy</div>
+                        <div class="role-description">Ventilator management, ABG, BiPAP</div>
                     </div>
                     
+                    <!-- PharmD -->
                     <div class="role-card" data-role="pharmd">
-                        <span class="new-badge">NEW</span>
                         <div class="role-icon">💊</div>
-                        <div class="role-title">Pharmacy Student (PharmD)</div>
-                        <div class="role-description">150 MTM cases: drug interactions, dosing, therapeutic monitoring</div>
+                        <div class="role-title">Pharmacy (PharmD)</div>
+                        <div class="role-description">Drug therapy, interactions, MTM</div>
                     </div>
                     
+                    <!-- Optometry -->
                     <div class="role-card" data-role="od">
-                        <span class="new-badge">NEW</span>
                         <div class="role-icon">👁️</div>
-                        <div class="role-title">Optometry Student (OD)</div>
-                        <div class="role-description">100 ocular cases: red eye, vision loss, fundus findings</div>
+                        <div class="role-title">Optometry (OD)</div>
+                        <div class="role-description">Ocular diagnosis, red eye, fundus</div>
                     </div>
                     
+                    <!-- Dental -->
                     <div class="role-card" data-role="dental">
-                        <span class="new-badge">NEW</span>
                         <div class="role-icon">🦷</div>
-                        <div class="role-title">Dental Student (DDS/DMD)</div>
-                        <div class="role-description">100 dental cases: pain diagnosis, oral pathology, treatment planning</div>
+                        <div class="role-title">Dental (DDS/DMD)</div>
+                        <div class="role-description">Dental pain, oral pathology, treatment</div>
                     </div>
                     
+                    <!-- OMFS -->
                     <div class="role-card" data-role="omfs">
-                        <span class="new-badge">NEW</span>
                         <div class="role-icon">🔬</div>
                         <div class="role-title">OMFS Resident</div>
-                        <div class="role-description">50 surgical cases: trauma, pathology, dentoalveolar surgery</div>
+                        <div class="role-description">Surgical cases, trauma, pathology</div>
                     </div>
                     
+                    <!-- PT - NEW -->
+                    <div class="role-card" data-role="pt">
+                        <span class="new-badge">NEW</span>
+                        <div class="role-icon">🦿</div>
+                        <div class="role-title">Physical Therapy (DPT)</div>
+                        <div class="role-description">Movement system diagnosis, rehabilitation</div>
+                    </div>
+                    
+                    <!-- Podiatry - NEW -->
+                    <div class="role-card" data-role="dpm">
+                        <span class="new-badge">NEW</span>
+                        <div class="role-icon">🦶</div>
+                        <div class="role-title">Podiatry (DPM)</div>
+                        <div class="role-description">Foot/ankle diagnosis, diabetic foot</div>
+                    </div>
+                    
+                    <!-- Resident -->
                     <div class="role-card" data-role="resident">
                         <div class="role-icon">👨‍🔬</div>
                         <div class="role-title">Medical Resident</div>
-                        <div class="role-description">15 advanced cases: diagnostic dilemmas, systems issues, communication</div>
+                        <div class="role-description">Advanced diagnostic dilemmas</div>
                     </div>
                     
+                    <!-- Professional -->
                     <div class="role-card" data-role="professional">
                         <div class="role-icon">🎓</div>
                         <div class="role-title">Practicing Professional</div>
-                        <div class="role-description">Continuing education cases across all disciplines</div>
+                        <div class="role-description">Continuing education across disciplines</div>
                     </div>
                 </div>
                 
@@ -470,33 +345,15 @@
             <div class="features-grid">
                 <div class="feature-card">
                     <h3>🧠 CoachDx</h3>
-                    <p>AI-powered Socratic coaching with discipline-specific mentors. Practice clinical reasoning with real-time feedback and SBAR communication training.</p>
+                    <p>AI-powered Socratic coaching with discipline-specific mentors and SBAR training.</p>
                 </div>
                 <div class="feature-card">
                     <h3>🔬 ReasonDx</h3>
-                    <p>Interactive case-based learning. Build illness scripts, practice differentials, and develop systematic clinical reasoning patterns.</p>
+                    <p>Interactive case-based learning with hypothesis-driven diagnostic thinking.</p>
                 </div>
                 <div class="feature-card">
                     <h3>⚙️ MechanismDx</h3>
-                    <p>Master the pathophysiology behind clinical presentations. 18+ modules covering cardiology, pulmonology, nephrology, and more.</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="features-section" style="margin-top: 30px;">
-            <h2 class="features-title">📞 Interprofessional SBAR Training</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <h3>🔄 Bidirectional Practice</h3>
-                    <p>Practice giving AND receiving SBAR communications. Nurses call physicians, EMS calls ED, RTs recommend interventions.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>🎭 Role-Based Scenarios</h3>
-                    <p>Select your role and who you're calling. Experience realistic responses from AI-powered team members.</p>
-                </div>
-                <div class="feature-card">
-                    <h3>🤝 Cross-Discipline Understanding</h3>
-                    <p>See the same patient from different perspectives. Build empathy and communication skills across professions.</p>
+                    <p>Master pathophysiology with 18+ modules across specialties.</p>
                 </div>
             </div>
         </div>
@@ -508,12 +365,10 @@
     </div>
     
     <script>
-        // State
-        let selectedRole = null;
-        let selectedLevel = null;
+        var selectedRole = null;
+        var selectedLevel = null;
         
-        // Platform URLs - dashboard is in CoachDx folder
-        const platformUrls = {
+        var platformUrls = {
             'md-do': 'CoachDx/coachdx-dashboard.html?role=md-do',
             'pa': 'CoachDx/coachdx-dashboard.html?role=pa',
             'nursing': 'CoachDx/coachdx-dashboard.html?role=nursing',
@@ -524,40 +379,38 @@
             'od': 'CoachDx/coachdx-dashboard.html?role=od',
             'dental': 'CoachDx/coachdx-dashboard.html?role=dental',
             'omfs': 'CoachDx/coachdx-dashboard.html?role=omfs',
+            'pt': 'CoachDx/coachdx-dashboard.html?role=pt',
+            'dpm': 'CoachDx/coachdx-dashboard.html?role=dpm',
             'resident': 'CoachDx/coachdx-dashboard.html?role=resident',
             'professional': 'CoachDx/coachdx-dashboard.html?role=professional'
         };
         
-        // DOM Elements
-        const roleCards = document.querySelectorAll('.role-card');
-        const levelSection = document.getElementById('levelSection');
-        const enterSection = document.getElementById('enterSection');
-        const enterBtn = document.getElementById('enterBtn');
-        const coachPreview = document.getElementById('coachPreview');
-        const rememberMe = document.getElementById('rememberMe');
+        var roleCards = document.querySelectorAll('.role-card');
+        var levelSection = document.getElementById('levelSection');
+        var enterSection = document.getElementById('enterSection');
+        var enterBtn = document.getElementById('enterBtn');
+        var coachPreview = document.getElementById('coachPreview');
+        var rememberMe = document.getElementById('rememberMe');
         
-        // Check for saved preferences
         function loadSavedPreferences() {
-            const saved = localStorage.getItem('dxEcosystemPreferences');
+            var saved = localStorage.getItem('dxEcosystemPreferences');
             if (saved) {
-                const prefs = JSON.parse(saved);
+                var prefs = JSON.parse(saved);
                 if (prefs.role && prefs.level) {
                     window.location.href = platformUrls[prefs.role] + '&level=' + prefs.level;
                 }
             }
         }
         
-        // Render level options using profession config
         function renderLevelOptions(role) {
-            const config = getProfessionConfig(role);
-            const options = config.levelOptions || ['Beginner', 'Intermediate', 'Advanced'];
-            const container = document.getElementById('levelOptions');
+            var config = getProfessionConfig(role);
+            var options = config.levelOptions || ['Beginner', 'Intermediate', 'Advanced'];
+            var container = document.getElementById('levelOptions');
             
             container.innerHTML = options.map(function(opt) {
                 return '<button class="level-btn" data-level="' + opt.toLowerCase().replace(/[^a-z0-9]/g, '-') + '">' + opt + '</button>';
             }).join('');
             
-            // Re-attach event listeners
             document.querySelectorAll('.level-btn').forEach(function(btn) {
                 btn.addEventListener('click', function() {
                     document.querySelectorAll('.level-btn').forEach(function(b) { b.classList.remove('selected'); });
@@ -569,7 +422,6 @@
             });
         }
         
-        // Role selection
         roleCards.forEach(function(card) {
             card.addEventListener('click', function() {
                 roleCards.forEach(function(c) { c.classList.remove('selected'); });
@@ -577,12 +429,10 @@
                 selectedRole = card.dataset.role;
                 selectedLevel = null;
                 
-                // Update level options using profession config
                 renderLevelOptions(selectedRole);
                 levelSection.classList.add('visible');
                 enterSection.classList.remove('visible');
                 
-                // Update coach preview using profession config
                 var coach = getCoachDisplay(selectedRole);
                 document.getElementById('coachAvatar').textContent = coach.avatar;
                 document.getElementById('coachName').textContent = coach.name;
@@ -598,7 +448,6 @@
             enterBtn.disabled = !(selectedRole && selectedLevel);
         }
         
-        // Enter platform
         enterBtn.addEventListener('click', function() {
             if (selectedRole && selectedLevel) {
                 localStorage.setItem('dxRole', selectedRole);
@@ -615,8 +464,7 @@
             }
         });
         
-        // Uncomment for production auto-redirect:
-        // loadSavedPreferences();
+        // Uncomment for auto-redirect: loadSavedPreferences();
     </script>
 </body>
 </html>
