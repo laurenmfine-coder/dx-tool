@@ -837,7 +837,123 @@
                     { title: 'Cross-Discipline Communication', desc: 'Interprofessional SBAR practice', tags: ['Communication', 'Team'] },
                     { title: 'Systems-Based Practice', desc: 'Quality improvement cases', tags: ['QI', 'Systems'] }
                 ]
+            },
+            'omfs': {
+                name: 'OMFS Resident',
+                icon: '🦷',
+                coach: { name: 'Dr. Michael Torres', title: 'OMFS Attending', avatar: '👨‍⚕️' },
+                coachdxCases: '25+',
+                reasondxCases: '40+',
+                sbarScenarios: [
+                    { label: 'Presenting to Attending', scenario: 'omfs-presentation' },
+                    { label: 'Floor Emergency Call', scenario: 'floor-emergency' },
+                    { label: 'OR Handoff', scenario: 'or-handoff' }
+                ],
+                recommendedCases: [
+                    { title: 'Facial Trauma Assessment', desc: 'Systematic maxillofacial exam', tags: ['Trauma', 'Emergency'] },
+                    { title: 'Odontogenic Infection', desc: 'Ludwig angina and airway management', tags: ['Infection', 'Critical'] },
+                    { title: 'Post-op Bleeding', desc: 'Managing hemorrhage after extraction', tags: ['Surgery', 'SBAR'], sbar: true }
+                ]
+            },
+            'dental': {
+                name: 'Dental Student',
+                icon: '🦷',
+                coach: { name: 'Dr. David Park', title: 'DDS, Attending', avatar: '👨‍⚕️' },
+                coachdxCases: '25+',
+                reasondxCases: '30+',
+                sbarScenarios: [
+                    { label: 'Consulting Medicine', scenario: 'dental-medicine-consult' },
+                    { label: 'Emergency Referral', scenario: 'dental-emergency' }
+                ],
+                recommendedCases: [
+                    { title: 'Dental Pain Differential', desc: 'Pulpal vs periodontal vs referred pain', tags: ['Pain', 'Diagnosis'] },
+                    { title: 'Medical Clearance', desc: 'Managing patients with systemic disease', tags: ['Medical', 'Safety'] },
+                    { title: 'Oral Cancer Screening', desc: 'Early detection and referral', tags: ['Oncology', 'Prevention'] }
+                ]
+            },
+            'dpm': {
+                name: 'Podiatry Student',
+                icon: '🦶',
+                coach: { name: 'Dr. Robert Kim', title: 'DPM, FACFAS', avatar: '👨‍⚕️' },
+                coachdxCases: '20+',
+                reasondxCases: '35+',
+                sbarScenarios: [
+                    { label: 'Vascular Consult', scenario: 'vascular-consult' },
+                    { label: 'Diabetic Foot Emergency', scenario: 'diabetic-foot' }
+                ],
+                recommendedCases: [
+                    { title: 'Diabetic Foot Ulcer', desc: 'Assessment and wound classification', tags: ['Diabetes', 'Wound Care'] },
+                    { title: 'Peripheral Arterial Disease', desc: 'Vascular assessment and intervention timing', tags: ['Vascular', 'Critical'] },
+                    { title: 'Charcot Foot', desc: 'Recognition and offloading strategies', tags: ['Neuropathy', 'Biomechanics'] }
+                ]
+            },
+            'pharmd': {
+                name: 'PharmD Student',
+                icon: '💊',
+                coach: { name: 'Dr. Jennifer Walsh', title: 'PharmD, BCPS', avatar: '👩‍⚕️' },
+                coachdxCases: '15+',
+                reasondxCases: '50+',
+                sbarScenarios: [
+                    { label: 'Drug Interaction Alert', scenario: 'drug-interaction' },
+                    { label: 'Dosing Recommendation', scenario: 'dosing-rec' },
+                    { label: 'Code Blue Pharmacy', scenario: 'code-pharmacy' }
+                ],
+                recommendedCases: [
+                    { title: 'Anticoagulation Management', desc: 'Warfarin, DOACs, and bridging', tags: ['Anticoag', 'High-Risk'] },
+                    { title: 'Renal Dosing Adjustments', desc: 'CrCl-based modifications', tags: ['Renal', 'Calculations'] },
+                    { title: 'Drug-Induced QT Prolongation', desc: 'Recognition and intervention', tags: ['Cardiology', 'Safety'] }
+                ]
+            },
+            'pt': {
+                name: 'PT Student',
+                icon: '🏃',
+                coach: { name: 'Dr. Amanda Foster', title: 'PT, DPT, OCS', avatar: '👩‍⚕️' },
+                coachdxCases: '15+',
+                reasondxCases: '30+',
+                sbarScenarios: [
+                    { label: 'Communicating with Physician', scenario: 'pt-to-md' },
+                    { label: 'Discharge Planning', scenario: 'pt-discharge' }
+                ],
+                recommendedCases: [
+                    { title: 'Post-Surgical Mobilization', desc: 'Early mobility protocols', tags: ['Surgery', 'Acute Care'] },
+                    { title: 'Fall Risk Assessment', desc: 'Gait evaluation and intervention', tags: ['Geriatrics', 'Safety'] },
+                    { title: 'Cardiac Rehab Progression', desc: 'Exercise prescription post-MI', tags: ['Cardiology', 'Rehab'] }
+                ]
+            },
+            'np': {
+                name: 'NP Student',
+                icon: '👩‍⚕️',
+                coach: { name: 'Dr. Linda Chen', title: 'DNP, FNP-C', avatar: '👩‍⚕️' },
+                coachdxCases: '180+',
+                reasondxCases: '200+',
+                sbarScenarios: [
+                    { label: 'Collaborating Physician Call', scenario: 'np-collab' },
+                    { label: 'Specialist Referral', scenario: 'np-referral' },
+                    { label: 'Patient Education', scenario: 'np-education' }
+                ],
+                recommendedCases: [
+                    { title: 'Primary Care Chest Pain', desc: 'Risk stratification and triage', tags: ['Primary Care', 'Cardiology'] },
+                    { title: 'Chronic Disease Management', desc: 'Diabetes and hypertension follow-up', tags: ['Chronic Care', 'Prevention'] },
+                    { title: 'Mental Health Screening', desc: 'Depression and anxiety in primary care', tags: ['Psychiatry', 'Screening'] }
+                ]
             }
+        };
+        
+        // Role key mapping for localStorage sync with other Dx files
+        const roleKeyMap = {
+            'md-do': 'medical-student',
+            'pa': 'pa',
+            'nursing': 'nursing',
+            'ems': 'ems',
+            'rt': 'rt',
+            'resident': 'resident',
+            'professional': 'professional',
+            'omfs': 'omfs',
+            'dental': 'dental',
+            'dpm': 'dpm',
+            'pharmd': 'pharmd',
+            'pt': 'pt',
+            'np': 'np'
         };
         
         // =====================================================
@@ -845,20 +961,36 @@
         // =====================================================
         
         function init() {
-            // Get role from URL or localStorage
+            // Get role from URL or localStorage (check both keys for compatibility)
             const urlParams = new URLSearchParams(window.location.search);
-            let role = urlParams.get('role') || localStorage.getItem('dxRole') || 'md-do';
+            let role = urlParams.get('role') || 
+                       localStorage.getItem('dxRole') || 
+                       reverseRoleKeyMap(localStorage.getItem('selectedProfession')) ||
+                       'md-do';
             let level = urlParams.get('level') || localStorage.getItem('dxLevel') || 'intermediate';
             
             // Validate role
             if (!roleConfig[role]) role = 'md-do';
             
-            // Store for session
+            // Store for session (sync both localStorage keys)
             localStorage.setItem('dxRole', role);
             localStorage.setItem('dxLevel', level);
+            localStorage.setItem('selectedProfession', roleKeyMap[role] || role);
+            sessionStorage.setItem('currentProfession', roleKeyMap[role] || role);
             
             // Update UI
             updateDashboard(role, level);
+        }
+        
+        // Reverse lookup for selectedProfession -> dxRole
+        function reverseRoleKeyMap(profession) {
+            if (!profession) return null;
+            for (const [dxRole, mappedProfession] of Object.entries(roleKeyMap)) {
+                if (mappedProfession === profession) return dxRole;
+            }
+            // Direct match if profession is a valid dxRole
+            if (roleConfig[profession]) return profession;
+            return null;
         }
         
         function updateDashboard(role, level) {
@@ -901,6 +1033,9 @@
         
         function changeRole() {
             localStorage.removeItem('dxEcosystemPreferences');
+            localStorage.removeItem('dxRole');
+            localStorage.removeItem('selectedProfession');
+            sessionStorage.removeItem('currentProfession');
             window.location.href = '../index.html';
         }
         

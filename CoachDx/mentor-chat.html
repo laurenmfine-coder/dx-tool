@@ -16,10 +16,33 @@
         .case-info { display: flex; align-items: center; gap: 16px; }
         .case-badge { background: #f4f4f5; padding: 6px 12px; border-radius: 6px; font-size: 13px; }
         .case-badge.parallel { background: #fef3c7; color: #92400e; }
+        .case-badge.critical { background: #fee2e2; color: #991b1b; }
         .timer { font-family: monospace; font-size: 14px; color: #71717a; }
         .nav-links { display: flex; gap: 12px; }
         .nav-link { color: #71717a; text-decoration: none; font-size: 13px; padding: 6px 12px; border-radius: 6px; }
         .nav-link:hover { background: #f4f4f5; color: #18181b; }
+        
+        /* Profession Selector in Header */
+        .profession-selector {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 8px;
+            background: #f0fdf4;
+            border: 1px solid #86efac;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #166534;
+        }
+        .profession-selector select {
+            border: none;
+            background: transparent;
+            font-size: 12px;
+            color: #166534;
+            cursor: pointer;
+            padding: 2px;
+        }
+        .profession-selector select:focus { outline: none; }
         
         .main { flex: 1; display: flex; overflow: hidden; max-width: 1400px; margin: 0 auto; width: 100%; }
         
@@ -49,13 +72,14 @@
         .send-btn:hover { background: #7c3aed; }
         .send-btn:disabled { background: #d4d4d8; cursor: not-allowed; }
         
-        .concept-panel { width: 320px; background: #fff; overflow-y: auto; flex-shrink: 0; }
-        .panel-header { padding: 16px; border-bottom: 1px solid #e4e4e7; font-weight: 600; font-size: 14px; }
+        .concept-panel { width: 340px; background: #fff; overflow-y: auto; flex-shrink: 0; }
+        .panel-header { padding: 16px; border-bottom: 1px solid #e4e4e7; font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 8px; }
         .concept-section { padding: 16px; border-bottom: 1px solid #f4f4f5; }
         .concept-section h4 { font-size: 12px; text-transform: uppercase; color: #71717a; margin-bottom: 8px; letter-spacing: 0.5px; }
         .concept-list { display: flex; flex-wrap: wrap; gap: 6px; }
         .concept-tag { padding: 4px 8px; background: #f4f4f5; border-radius: 4px; font-size: 12px; color: #52525b; }
         .concept-tag.explored { background: #dcfce7; color: #166534; }
+        .concept-tag.gap { background: #fef2f2; color: #991b1b; }
         
         .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 16px; }
         .stat-item { text-align: center; padding: 12px; background: #f4f4f5; border-radius: 8px; }
@@ -66,31 +90,131 @@
         .parallel-indicator h4 { color: #92400e; font-size: 12px; margin-bottom: 4px; }
         .parallel-indicator p { font-size: 12px; color: #a16207; }
         .parallel-link { color: #8b5cf6; text-decoration: none; font-weight: 500; }
+        .parallel-link:hover { text-decoration: underline; }
         
-        .related-item { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 6px; text-decoration: none; color: inherit; }
+        .related-item { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 6px; text-decoration: none; color: inherit; transition: background 0.15s; }
         .related-item:hover { background: #f4f4f5; }
         .related-icon { width: 32px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
         .related-icon.mechanism { background: #dcfce7; }
         .related-icon.reasondx { background: #dbeafe; }
+        .related-icon.parallel { background: #fef3c7; }
+        .related-icon.predictlabs { background: #ffedd5; }
         .related-info { flex: 1; }
         .related-title { font-size: 13px; font-weight: 500; }
         .related-reason { font-size: 11px; color: #71717a; }
         
-        .cross-platform-section { margin: 16px; padding: 16px; background: #f8fafc; border-radius: 10px; border: 1px solid #e2e8f0; }
-        .cps-header { font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; margin-bottom: 12px; }
-        .cps-card { display: flex; align-items: center; gap: 10px; padding: 10px; background: #fff; border-radius: 8px; border: 1px solid #e2e8f0; text-decoration: none; color: inherit; margin-bottom: 8px; }
-        .cps-stripe { width: 4px; height: 40px; border-radius: 2px; }
-        .cps-stripe.reasondx { background: #3b82f6; }
-        .cps-stripe.mechanismdx { background: #22c55e; }
-        .cps-icon { width: 32px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+        /* Enhanced Cross-Platform Section */
+        .cross-platform-section { 
+            margin: 16px; 
+            padding: 16px; 
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 12px; 
+            border: 1px solid #e2e8f0; 
+        }
+        .cps-header { 
+            font-size: 13px; 
+            font-weight: 600; 
+            color: #334155; 
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .cps-header-icon { font-size: 16px; }
+        .cps-subtitle { font-size: 11px; color: #64748b; font-weight: 400; margin-left: auto; }
+        
+        .cps-card { 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            padding: 12px; 
+            background: #fff; 
+            border-radius: 10px; 
+            border: 1px solid #e2e8f0; 
+            text-decoration: none; 
+            color: inherit; 
+            margin-bottom: 8px; 
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+        .cps-card:last-child { margin-bottom: 0; }
+        .cps-card:hover { 
+            transform: translateX(4px); 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .cps-card.reasondx:hover { border-color: #3b82f6; }
+        .cps-card.mechanismdx:hover { border-color: #22c55e; }
+        .cps-card.predictlabs:hover { border-color: #f97316; }
+        .cps-card.fingerprint:hover { border-color: #8b5cf6; }
+        
+        .cps-stripe { 
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px; 
+        }
+        .cps-stripe.reasondx { background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%); }
+        .cps-stripe.mechanismdx { background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%); }
+        .cps-stripe.predictlabs { background: linear-gradient(180deg, #f97316 0%, #ea580c 100%); }
+        .cps-stripe.fingerprint { background: linear-gradient(180deg, #8b5cf6 0%, #7c3aed 100%); }
+        
+        .cps-icon { 
+            width: 36px; 
+            height: 36px; 
+            border-radius: 8px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 18px;
+            margin-left: 8px;
+        }
         .cps-icon.reasondx { background: #dbeafe; }
         .cps-icon.mechanismdx { background: #dcfce7; }
+        .cps-icon.predictlabs { background: #ffedd5; }
+        .cps-icon.fingerprint { background: #ede9fe; }
+        
         .cps-info { flex: 1; }
-        .cps-title { font-size: 13px; font-weight: 600; }
-        .cps-meta { font-size: 11px; color: #64748b; }
+        .cps-title { font-size: 13px; font-weight: 600; color: #1e293b; }
+        .cps-meta { font-size: 11px; color: #64748b; margin-top: 2px; }
         .platform-tag { font-weight: 600; }
         .platform-tag.reasondx { color: #3b82f6; }
         .platform-tag.mechanismdx { color: #22c55e; }
+        .platform-tag.predictlabs { color: #f97316; }
+        .platform-tag.fingerprint { color: #8b5cf6; }
+        
+        .cps-arrow { 
+            color: #94a3b8; 
+            font-size: 14px; 
+            transition: transform 0.2s;
+        }
+        .cps-card:hover .cps-arrow { transform: translateX(4px); color: #64748b; }
+        
+        /* Mentor Card */
+        .mentor-card {
+            margin: 16px;
+            padding: 16px;
+            background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
+            border-radius: 12px;
+            border: 1px solid #c4b5fd;
+        }
+        .mentor-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+        .mentor-avatar { 
+            width: 48px; 
+            height: 48px; 
+            border-radius: 50%; 
+            background: #fff; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 24px;
+            border: 2px solid #8b5cf6;
+        }
+        .mentor-info { flex: 1; }
+        .mentor-name { font-size: 14px; font-weight: 600; color: #5b21b6; }
+        .mentor-title { font-size: 12px; color: #7c3aed; }
+        .mentor-tip { font-size: 12px; color: #6b21a8; font-style: italic; }
         
         .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; z-index: 1000; }
         .modal-overlay.show { display: flex; }
@@ -109,15 +233,42 @@
     </style>
 </head>
 <body>
-    <!-- IMPORTANT: Load profession config FIRST -->
-    <script src="../profession-language-config.js"></script>
-    
     <header class="header">
         <div class="header-inner">
-            <a href="case-library.html" class="logo">CoachDx</a>
+            <a href="case-library.html" class="logo" style="text-decoration:none">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 70" style="height:32px;width:auto">
+                    <text x="5" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor" letter-spacing="-1">Coach</text>
+                    <text x="130" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor">D</text>
+                    <g stroke="#8b5cf6" stroke-width="2.5" stroke-linecap="round" fill="none">
+                        <line x1="164" y1="24" x2="180" y2="45"/>
+                        <path d="M180 24L170 35Q166 40 166 47Q166 54 171 58Q176 62 176 68"/>
+                    </g>
+                    <ellipse cx="162" cy="22" rx="2" ry="3.5" transform="rotate(-28 162 22)" fill="#8b5cf6"/>
+                    <ellipse cx="182" cy="22" rx="2" ry="3.5" transform="rotate(28 182 22)" fill="#8b5cf6"/>
+                    <circle cx="176" cy="68" r="7" fill="none" stroke="#8b5cf6" stroke-width="2"/>
+                    <circle cx="176" cy="68" r="3.5" fill="#8b5cf6"/>
+                </svg>
+            </a>
             <div class="case-info">
                 <span class="case-badge" id="caseBadge">Loading...</span>
                 <span class="timer" id="timer">00:00</span>
+            </div>
+            <div class="profession-selector">
+                <span>👤</span>
+                <select id="professionSelect">
+                    <option value="medical-student">Medical Student</option>
+                    <option value="resident">Resident</option>
+                    <option value="omfs">OMFS Resident</option>
+                    <option value="nursing">Nursing Student</option>
+                    <option value="pt">PT Student</option>
+                    <option value="dpm">Podiatry Student</option>
+                    <option value="pharmd">PharmD Student</option>
+                    <option value="dental">Dental Student</option>
+                    <option value="ems">EMS Provider</option>
+                    <option value="rt">RT Student</option>
+                    <option value="pa">PA Student</option>
+                    <option value="np">NP Student</option>
+                </select>
             </div>
             <nav class="nav-links">
                 <a href="case-library.html" class="nav-link">All Cases</a>
@@ -140,18 +291,34 @@
         </div>
         
         <div class="concept-panel">
+            <!-- Mentor Card -->
+            <div class="mentor-card" id="mentorCard">
+                <div class="mentor-header">
+                    <div class="mentor-avatar" id="mentorAvatar">👩‍⚕️</div>
+                    <div class="mentor-info">
+                        <div class="mentor-name" id="mentorName">Dr. Sarah Chen</div>
+                        <div class="mentor-title" id="mentorTitle">Attending Physician</div>
+                    </div>
+                </div>
+                <div class="mentor-tip" id="mentorTip">"Walk me through your thinking step by step."</div>
+            </div>
+            
             <div class="panel-header">📊 Concept Map</div>
             <div id="conceptMap"></div>
             <div id="parallelCaseIndicator"></div>
-            <div class="panel-header" style="margin-top:16px;">📈 Session Stats</div>
+            
+            <div class="panel-header">📈 Session Stats</div>
             <div class="stats-grid">
                 <div class="stat-item"><div class="stat-value" id="statQuestions">0</div><div class="stat-label">Questions</div></div>
                 <div class="stat-item"><div class="stat-value" id="statConcepts">0</div><div class="stat-label">Concepts</div></div>
                 <div class="stat-item"><div class="stat-value" id="statTeaching">0</div><div class="stat-label">Teaching</div></div>
                 <div class="stat-item"><div class="stat-value" id="statTime">0m</div><div class="stat-label">Time</div></div>
             </div>
-            <div class="panel-header" style="margin-top:16px;">🔗 Related Content</div>
+            
+            <div class="panel-header">🔗 Related Content</div>
             <div id="relatedContent" style="padding:16px;"></div>
+            
+            <!-- Enhanced Cross-Platform Widget -->
             <div id="crossPlatformRecs"></div>
         </div>
     </div>
@@ -165,6 +332,7 @@
                 <div class="modal-stat"><div class="modal-stat-value" id="modalTeaching">0</div><div class="modal-stat-label">Teaching Moments</div></div>
             </div>
             <div id="parallelCaseSuggestion" style="margin-bottom:20px;"></div>
+            <div id="crossPlatformSuggestions" style="margin-bottom:20px;"></div>
             <div class="modal-btns">
                 <button class="modal-btn secondary" onclick="location.href='case-library.html'">More Cases</button>
                 <button class="modal-btn primary" id="nextCaseBtn" onclick="goToParallelCase()">Try Parallel Case</button>
@@ -172,17 +340,108 @@
         </div>
     </div>
     
+    <!-- Load external cases file -->
     <script src="coachdx-cases-merged.js"></script>
     
     <script>
-    var CASES = typeof COACHDX_CASES !== 'undefined' ? COACHDX_CASES : {};
-    var currentCase = null;
-    var conversationHistory = [];
-    var conceptsExplored = {};
-    var seconds = 0;
-    var timerInterval = null;
-    var isLoading = false;
-    var session = {
+    // ============================================================
+    // PROFESSION CONFIGURATION
+    // ============================================================
+    const PROFESSION_CONFIG = {
+        'medical-student': { label: 'Medical Student', mentor: 'Dr. Sarah Chen', title: 'Attending Physician', avatar: '👩‍⚕️', tip: '"Walk me through your thinking step by step."' },
+        'resident': { label: 'Resident', mentor: 'Dr. James Harrison', title: 'Attending Physician', avatar: '👨‍⚕️', tip: '"What\'s your differential and why?"' },
+        'omfs': { label: 'OMFS Resident', mentor: 'Dr. Michael Torres', title: 'OMFS Attending', avatar: '👨‍⚕️', tip: '"Consider the surgical implications."' },
+        'nursing': { label: 'Nursing Student', mentor: 'Sarah Mitchell', title: 'Charge RN, MSN', avatar: '👩‍⚕️', tip: '"How would you prioritize your nursing interventions?"' },
+        'pt': { label: 'PT Student', mentor: 'Dr. Amanda Foster', title: 'PT, DPT, OCS', avatar: '👩‍⚕️', tip: '"Think about functional limitations and goals."' },
+        'dpm': { label: 'Podiatry Student', mentor: 'Dr. Robert Kim', title: 'DPM, FACFAS', avatar: '👨‍⚕️', tip: '"Consider the biomechanical factors."' },
+        'pharmd': { label: 'PharmD Student', mentor: 'Dr. Jennifer Walsh', title: 'PharmD, BCPS', avatar: '👩‍⚕️', tip: '"What drug interactions should we consider?"' },
+        'dental': { label: 'Dental Student', mentor: 'Dr. David Park', title: 'DDS, Attending', avatar: '👨‍⚕️', tip: '"Think about oral manifestations of systemic disease."' },
+        'ems': { label: 'EMS Provider', mentor: 'Captain Mike Rodriguez', title: 'Flight Paramedic', avatar: '👨‍⚕️', tip: '"What are your critical interventions in the field?"' },
+        'rt': { label: 'RT Student', mentor: 'Chris Thompson', title: 'RRT-ACCS', avatar: '👨‍⚕️', tip: '"Consider the respiratory pathophysiology."' },
+        'pa': { label: 'PA Student', mentor: 'Jessica Martinez', title: 'PA-C', avatar: '👩‍⚕️', tip: '"How would you present this to your attending?"' },
+        'np': { label: 'NP Student', mentor: 'Dr. Linda Chen', title: 'DNP, FNP-C', avatar: '👩‍⚕️', tip: '"Think holistically about patient care."' }
+    };
+
+    // ============================================================
+    // COMPREHENSIVE TOPIC MAPPING FOR CROSS-PLATFORM
+    // ============================================================
+    const CROSS_PLATFORM_MAP = {
+        // Cardiovascular
+        'chest-pain': { mechanism: 'acs-module.html', reasondx: 'stemi', predictlabs: 'predict-labs-acs.html', topic: 'Acute Coronary Syndrome' },
+        'acs': { mechanism: 'acs-module.html', reasondx: 'stemi', predictlabs: 'predict-labs-acs.html', topic: 'Acute Coronary Syndrome' },
+        'stemi': { mechanism: 'acs-module.html', reasondx: 'stemi', predictlabs: 'predict-labs-acs.html', topic: 'STEMI' },
+        'nstemi': { mechanism: 'acs-module.html', reasondx: 'nstemi', predictlabs: 'predict-labs-acs.html', topic: 'NSTEMI' },
+        'heart-failure': { mechanism: 'hf-module.html', reasondx: 'chf', predictlabs: 'predict-labs-hf.html', topic: 'Heart Failure' },
+        'hf': { mechanism: 'hf-module.html', reasondx: 'chf', predictlabs: 'predict-labs-hf.html', topic: 'Heart Failure' },
+        'chf': { mechanism: 'hf-module.html', reasondx: 'chf', predictlabs: 'predict-labs-hf.html', topic: 'Heart Failure' },
+        'afib': { mechanism: 'afib-module.html', reasondx: 'afib', predictlabs: 'predict-labs-hf.html', topic: 'Atrial Fibrillation' },
+        'atrial-fibrillation': { mechanism: 'afib-module.html', reasondx: 'afib', predictlabs: 'predict-labs-hf.html', topic: 'Atrial Fibrillation' },
+        'aortic': { mechanism: 'aortic-dissection-module.html', reasondx: 'aortic-dissection', predictlabs: 'predict-labs-acs.html', topic: 'Aortic Dissection' },
+        'dissection': { mechanism: 'aortic-dissection-module.html', reasondx: 'aortic-dissection', predictlabs: 'predict-labs-acs.html', topic: 'Aortic Dissection' },
+        'syncope': { mechanism: 'syncope-module.html', reasondx: 'syncope', predictlabs: 'predict-labs-cardiac.html', topic: 'Syncope' },
+        
+        // Pulmonary
+        'pe': { mechanism: 'pe-module.html', reasondx: 'pe', predictlabs: 'predict-labs-pe.html', topic: 'Pulmonary Embolism' },
+        'pulmonary-embolism': { mechanism: 'pe-module.html', reasondx: 'pe', predictlabs: 'predict-labs-pe.html', topic: 'Pulmonary Embolism' },
+        'copd': { mechanism: 'copd-module.html', reasondx: 'copd', predictlabs: 'predict-labs-abg.html', topic: 'COPD' },
+        'asthma': { mechanism: 'asthma-module.html', reasondx: 'asthma', predictlabs: 'predict-labs-abg.html', topic: 'Asthma' },
+        'pneumonia': { mechanism: 'pneumonia-module.html', reasondx: 'pneumonia', predictlabs: 'predict-labs-sepsis.html', topic: 'Pneumonia' },
+        
+        // GI
+        'gi-bleed': { mechanism: 'gi-bleeding-module.html', reasondx: 'ugib', predictlabs: 'predict-labs-gi-bleed.html', topic: 'GI Bleeding' },
+        'ugib': { mechanism: 'gi-bleeding-module.html', reasondx: 'ugib', predictlabs: 'predict-labs-gi-bleed.html', topic: 'Upper GI Bleed' },
+        'lgib': { mechanism: 'gi-bleeding-module.html', reasondx: 'lgib', predictlabs: 'predict-labs-gi-bleed.html', topic: 'Lower GI Bleed' },
+        'cirrhosis': { mechanism: 'cirrhosis-module.html', reasondx: 'cirrhosis', predictlabs: 'predict-labs-cirrhosis.html', topic: 'Cirrhosis' },
+        'hepatic': { mechanism: 'cirrhosis-module.html', reasondx: 'cirrhosis', predictlabs: 'predict-labs-cirrhosis.html', topic: 'Hepatic Disease' },
+        'appendicitis': { mechanism: 'acute-abdomen-module.html', reasondx: 'appendicitis', predictlabs: 'predict-labs-acute-abdomen.html', topic: 'Appendicitis' },
+        'diverticulitis': { mechanism: 'acute-abdomen-module.html', reasondx: 'diverticulitis', predictlabs: 'predict-labs-acute-abdomen.html', topic: 'Diverticulitis' },
+        'cholangitis': { mechanism: 'biliary-module.html', reasondx: 'cholangitis', predictlabs: 'predict-labs-hepatobiliary.html', topic: 'Cholangitis' },
+        'sbo': { mechanism: 'bowel-obstruction-module.html', reasondx: 'sbo', predictlabs: 'predict-labs-acute-abdomen.html', topic: 'Small Bowel Obstruction' },
+        
+        // Endocrine
+        'dka': { mechanism: 'diabetes-dka-module.html', reasondx: 'dka', predictlabs: 'predict-labs-dka.html', topic: 'DKA' },
+        'hhs': { mechanism: 'diabetes-dka-module.html', reasondx: 'hhs', predictlabs: 'predict-labs-dka.html', topic: 'HHS' },
+        'thyroid': { mechanism: 'thyroid-module.html', reasondx: 'thyroid-storm', predictlabs: 'predict-labs-thyroid.html', topic: 'Thyroid Disorders' },
+        'myxedema': { mechanism: 'thyroid-module.html', reasondx: 'myxedema', predictlabs: 'predict-labs-thyroid.html', topic: 'Myxedema' },
+        
+        // Renal/Electrolytes
+        'aki': { mechanism: 'aki-module.html', reasondx: 'aki', predictlabs: 'predict-labs-aki.html', topic: 'Acute Kidney Injury' },
+        'hyponatremia': { mechanism: 'hyponatremia-module.html', reasondx: 'siadh', predictlabs: 'predict-labs-hyponatremia.html', topic: 'Hyponatremia' },
+        'hyperkalemia': { mechanism: 'hyperkalemia-module.html', reasondx: 'hyperkalemia', predictlabs: 'predict-labs-electrolytes.html', topic: 'Hyperkalemia' },
+        
+        // Neurology
+        'ams': { mechanism: 'ams-module.html', reasondx: 'ams', predictlabs: 'predict-labs-metabolic.html', topic: 'Altered Mental Status' },
+        'stroke': { mechanism: 'stroke-module.html', reasondx: 'stroke', predictlabs: 'predict-labs-stroke.html', topic: 'Stroke' },
+        'seizure': { mechanism: 'seizure-module.html', reasondx: 'seizure', predictlabs: 'predict-labs-neuro.html', topic: 'Seizure' },
+        'meningitis': { mechanism: 'meningitis-module.html', reasondx: 'meningitis', predictlabs: 'predict-labs-csf.html', topic: 'Meningitis' },
+        'sah': { mechanism: 'sah-module.html', reasondx: 'sah', predictlabs: 'predict-labs-csf.html', topic: 'Subarachnoid Hemorrhage' },
+        
+        // Infectious Disease
+        'sepsis': { mechanism: 'sepsis-shock-module.html', reasondx: 'sepsis', predictlabs: 'predict-labs-sepsis.html', topic: 'Sepsis' },
+        'anaphylaxis': { mechanism: 'anaphylaxis-module.html', reasondx: 'anaphylaxis', predictlabs: 'predict-labs-allergy.html', topic: 'Anaphylaxis' },
+        
+        // Hematology
+        'dvt': { mechanism: 'vte-module.html', reasondx: 'dvt', predictlabs: 'predict-labs-coag.html', topic: 'DVT' },
+        'anemia': { mechanism: 'anemia-module.html', reasondx: 'anemia', predictlabs: 'predict-labs-anemia.html', topic: 'Anemia' },
+        
+        // Toxicology
+        'overdose': { mechanism: 'toxicology-module.html', reasondx: 'overdose', predictlabs: 'predict-labs-tox.html', topic: 'Overdose' },
+        'acetaminophen': { mechanism: 'acetaminophen-module.html', reasondx: 'acetaminophen-od', predictlabs: 'predict-labs-hepatic.html', topic: 'Acetaminophen Toxicity' }
+    };
+
+    // ============================================================
+    // STATE & INITIALIZATION
+    // ============================================================
+    const CASES = typeof COACHDX_CASES !== 'undefined' ? COACHDX_CASES : {};
+    
+    let currentCase = null;
+    let currentProfession = 'medical-student';
+    let conversationHistory = [];
+    let conceptsExplored = {};
+    let seconds = 0;
+    let timerInterval = null;
+    let isLoading = false;
+    let session = {
         id: 'session-' + Date.now(),
         questionsAskedByAI: 0,
         teachingMomentsDetected: 0,
@@ -190,77 +449,100 @@
         isParallelCase: false,
         parallelPairId: null
     };
-    
-    // ============================================================
-    // PROFESSION-AWARE COACH NAME - Uses profession config
-    // ============================================================
-    function getCoachName() {
-        if (typeof getCurrentCoachName === 'function') {
-            return getCurrentCoachName();
-        }
-        return 'Dr. Chen';
-    }
 
     function init() {
-        var urlParams = new URLSearchParams(window.location.search);
-        var caseId = urlParams.get('case') || 'chest-pain-acs';
+        const urlParams = new URLSearchParams(window.location.search);
+        const caseId = urlParams.get('case') || 'chest-pain-acs';
         
-        currentCase = CASES[caseId] || CASES['chest-pain-acs'];
+        // Load profession preference
+        currentProfession = urlParams.get('profession') || 
+                          localStorage.getItem('selectedProfession') || 
+                          'medical-student';
+        
+        document.getElementById('professionSelect').value = currentProfession;
+        updateMentorCard();
+        
+        currentCase = CASES[caseId];
+        if (!currentCase) {
+            currentCase = CASES['chest-pain-acs'];
+        }
         
         if (!currentCase) {
-            document.getElementById('chatMessages').innerHTML = '<p style="padding:20px;color:#dc2626;">Error: Could not load case.</p>';
+            document.getElementById('chatMessages').innerHTML = '<p style="padding:20px;color:#dc2626;">Error: Could not load case. Please check that coachdx-cases-merged.js is in the same directory.</p>';
             return;
         }
         
+        // Track parallel case info
         session.isParallelCase = currentCase.isParallel || false;
         session.parallelPairId = currentCase.parallelCase || null;
         
+        // Update UI
         document.getElementById('caseBadge').textContent = currentCase.title;
-        document.getElementById('caseBadge').className = 'case-badge' + (currentCase.isParallel ? ' parallel' : '');
+        let badgeClass = 'case-badge';
+        if (currentCase.isParallel) badgeClass += ' parallel';
+        if (currentCase.isCritical) badgeClass += ' critical';
+        document.getElementById('caseBadge').className = badgeClass;
         
         renderQuickActions();
         renderConceptMap();
         renderParallelIndicator();
         renderRelatedContent();
+        renderCrossPlatformRecs();
         
+        // Start timer
         timerInterval = setInterval(updateTimer, 1000);
         
-        setTimeout(function() {
+        // Opening message with profession-specific mentor
+        setTimeout(() => {
             addMessage(currentCase.openingStatement, 'attending');
             conversationHistory.push({ role: 'assistant', content: currentCase.openingStatement });
         }, 500);
+        
+        // Profession change handler
+        document.getElementById('professionSelect').addEventListener('change', function(e) {
+            currentProfession = e.target.value;
+            localStorage.setItem('selectedProfession', currentProfession);
+            updateMentorCard();
+        });
+    }
+
+    function updateMentorCard() {
+        const config = PROFESSION_CONFIG[currentProfession] || PROFESSION_CONFIG['medical-student'];
+        document.getElementById('mentorName').textContent = config.mentor;
+        document.getElementById('mentorTitle').textContent = config.title;
+        document.getElementById('mentorAvatar').textContent = config.avatar;
+        document.getElementById('mentorTip').textContent = config.tip;
     }
 
     function updateTimer() {
         seconds++;
-        var mins = Math.floor(seconds / 60);
-        var secs = seconds % 60;
-        document.getElementById('timer').textContent = String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        document.getElementById('timer').textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
         document.getElementById('statTime').textContent = mins + 'm';
     }
 
-    // ============================================================
-    // UPDATED: Uses dynamic coach name from profession config
-    // ============================================================
     function addMessage(text, sender) {
-        var container = document.getElementById('chatMessages');
-        var time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        var coachName = getCoachName();
+        const container = document.getElementById('chatMessages');
+        const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        const config = PROFESSION_CONFIG[currentProfession] || PROFESSION_CONFIG['medical-student'];
+        const mentorName = sender === 'attending' ? config.mentor : 'You';
         
-        var div = document.createElement('div');
-        div.className = 'message ' + sender;
-        div.innerHTML = '<div class="message-bubble">' + text + '</div>' +
-            '<div class="message-meta">' + (sender === 'attending' ? coachName : 'You') + ' • ' + time + '</div>';
-        container.appendChild(div);
+        container.innerHTML += `
+            <div class="message ${sender}">
+                <div class="message-bubble">${text}</div>
+                <div class="message-meta">${mentorName} • ${time}</div>
+            </div>
+        `;
         container.scrollTop = container.scrollHeight;
     }
 
     function renderQuickActions() {
-        var container = document.getElementById('quickActions');
-        var actions = currentCase.quickActions || [];
-        container.innerHTML = actions.map(function(action) {
-            return '<button class="quick-btn" onclick="sendQuickAction(\'' + action.replace(/'/g, "\\'") + '\')">' + action + '</button>';
-        }).join('');
+        const container = document.getElementById('quickActions');
+        const actions = currentCase.quickActions || [];
+        container.innerHTML = actions.map(action => 
+            `<button class="quick-btn" onclick="sendQuickAction('${action.replace(/'/g, "\\'")}')">${action}</button>`
+        ).join('');
     }
 
     function sendQuickAction(action) {
@@ -269,43 +551,158 @@
     }
 
     function renderConceptMap() {
-        var container = document.getElementById('conceptMap');
-        var domains = currentCase.conceptDomains || {};
-        var html = '';
-        for (var domain in domains) {
-            html += '<div class="concept-section"><h4>' + domain + '</h4><div class="concept-list">' +
-                domains[domain].map(function(c) {
-                    return '<span class="concept-tag ' + (conceptsExplored[c] ? 'explored' : '') + '">' + c.replace(/_/g, ' ') + '</span>';
-                }).join('') + '</div></div>';
+        const container = document.getElementById('conceptMap');
+        const domains = currentCase.conceptDomains || {};
+        let html = '';
+        
+        for (const [domain, concepts] of Object.entries(domains)) {
+            html += `
+                <div class="concept-section">
+                    <h4>${domain}</h4>
+                    <div class="concept-list">
+                        ${concepts.map(c => {
+                            const explored = conceptsExplored[c];
+                            return `<span class="concept-tag ${explored ? 'explored' : ''}">${c.replace(/_/g, ' ')}</span>`;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
         }
         container.innerHTML = html;
     }
 
     function renderParallelIndicator() {
-        var container = document.getElementById('parallelCaseIndicator');
-        if (currentCase.parallelCase && CASES[currentCase.parallelCase]) {
-            var pc = CASES[currentCase.parallelCase];
-            container.innerHTML = '<div class="parallel-indicator"><h4>🔄 ' + (currentCase.isParallel ? 'Original' : 'Parallel') + ' Case Available</h4>' +
-                '<p>' + (currentCase.parallelDescription || pc.title) + '</p>' +
-                '<a href="mentor-chat.html?case=' + currentCase.parallelCase + '" class="parallel-link">' + (currentCase.isParallel ? '← Try Original' : 'Try Parallel →') + '</a></div>';
+        const container = document.getElementById('parallelCaseIndicator');
+        
+        if (currentCase.parallelCase) {
+            const parallelCaseData = CASES[currentCase.parallelCase];
+            if (parallelCaseData) {
+                container.innerHTML = `
+                    <div class="parallel-indicator">
+                        <h4>🔄 ${currentCase.isParallel ? 'Original Case' : 'Parallel Case'} Available</h4>
+                        <p>${currentCase.parallelDescription || parallelCaseData.title}</p>
+                        <a href="mentor-chat.html?case=${currentCase.parallelCase}" class="parallel-link">
+                            ${currentCase.isParallel ? '← Try Original' : 'Try Parallel →'}
+                        </a>
+                    </div>
+                `;
+            }
         } else {
             container.innerHTML = '';
         }
     }
 
     function renderRelatedContent() {
-        var container = document.getElementById('relatedContent');
-        var content = currentCase.relatedContent || [];
-        container.innerHTML = content.map(function(item) {
-            var icon = item.type === 'mechanism' ? '🧬' : item.type === 'parallel' ? '🔄' : '🩺';
-            return '<a href="' + item.link + '" class="related-item"><div class="related-icon ' + item.type + '">' + icon + '</div>' +
-                '<div class="related-info"><div class="related-title">' + item.title + '</div><div class="related-reason">' + item.reason + '</div></div></a>';
-        }).join('');
+        const container = document.getElementById('relatedContent');
+        const content = currentCase.relatedContent || [];
+        
+        let html = content.map(item => `
+            <a href="${item.link}" class="related-item">
+                <div class="related-icon ${item.type}">
+                    ${item.type === 'mechanism' ? '🧬' : item.type === 'parallel' ? '🔄' : item.type === 'predictlabs' ? '🔮' : '🩺'}
+                </div>
+                <div class="related-info">
+                    <div class="related-title">${item.title}</div>
+                    <div class="related-reason">${item.reason}</div>
+                </div>
+            </a>
+        `).join('');
+        
+        container.innerHTML = html;
+    }
+    
+    function renderCrossPlatformRecs() {
+        const container = document.getElementById('crossPlatformRecs');
+        if (!container) return;
+        
+        // Find matching topic from case info
+        const caseId = currentCase.id || '';
+        const caseTitle = (currentCase.title || '').toLowerCase();
+        const searchText = (caseId + ' ' + caseTitle).toLowerCase();
+        
+        let matched = null;
+        let matchedKey = null;
+        
+        for (const [key, links] of Object.entries(CROSS_PLATFORM_MAP)) {
+            if (searchText.includes(key)) {
+                matched = links;
+                matchedKey = key;
+                break;
+            }
+        }
+        
+        if (!matched) {
+            // Show generic cross-platform links
+            container.innerHTML = `
+                <div class="cross-platform-section">
+                    <div class="cps-header">
+                        <span class="cps-header-icon">🎯</span>
+                        Explore the Dx Ecosystem
+                    </div>
+                    <a href="../fingerprint-dashboard.html" class="cps-card fingerprint">
+                        <div class="cps-stripe fingerprint"></div>
+                        <div class="cps-icon fingerprint">🧬</div>
+                        <div class="cps-info">
+                            <div class="cps-title">View Your Learning Fingerprint</div>
+                            <div class="cps-meta"><span class="platform-tag fingerprint">Fingerprint</span> • Track your progress</div>
+                        </div>
+                        <span class="cps-arrow">→</span>
+                    </a>
+                </div>
+            `;
+            return;
+        }
+        
+        container.innerHTML = `
+            <div class="cross-platform-section">
+                <div class="cps-header">
+                    <span class="cps-header-icon">🎯</span>
+                    Continue Learning: ${matched.topic}
+                    <span class="cps-subtitle">Cross-platform</span>
+                </div>
+                <a href="../MechanismDx/${matched.mechanism}" class="cps-card mechanismdx">
+                    <div class="cps-stripe mechanismdx"></div>
+                    <div class="cps-icon mechanismdx">⚙️</div>
+                    <div class="cps-info">
+                        <div class="cps-title">Master the Pathophysiology</div>
+                        <div class="cps-meta"><span class="platform-tag mechanismdx">MechanismDx</span> • Deep dive</div>
+                    </div>
+                    <span class="cps-arrow">→</span>
+                </a>
+                <a href="../ReasonDx/training.html?case=${matched.reasondx}" class="cps-card reasondx">
+                    <div class="cps-stripe reasondx"></div>
+                    <div class="cps-icon reasondx">🩺</div>
+                    <div class="cps-info">
+                        <div class="cps-title">Full Clinical Case</div>
+                        <div class="cps-meta"><span class="platform-tag reasondx">ReasonDx</span> • Complete walkthrough</div>
+                    </div>
+                    <span class="cps-arrow">→</span>
+                </a>
+                <a href="../predict-labs/${matched.predictlabs}" class="cps-card predictlabs">
+                    <div class="cps-stripe predictlabs"></div>
+                    <div class="cps-icon predictlabs">🔮</div>
+                    <div class="cps-info">
+                        <div class="cps-title">Predict the Labs</div>
+                        <div class="cps-meta"><span class="platform-tag predictlabs">PredictLabs</span> • Test predictions</div>
+                    </div>
+                    <span class="cps-arrow">→</span>
+                </a>
+                <a href="../fingerprint-dashboard.html" class="cps-card fingerprint">
+                    <div class="cps-stripe fingerprint"></div>
+                    <div class="cps-icon fingerprint">🧬</div>
+                    <div class="cps-info">
+                        <div class="cps-title">Track Your Progress</div>
+                        <div class="cps-meta"><span class="platform-tag fingerprint">Fingerprint</span> • Learning analytics</div>
+                    </div>
+                    <span class="cps-arrow">→</span>
+                </a>
+            </div>
+        `;
     }
 
-    function sendMessage() {
-        var input = document.getElementById('userInput');
-        var message = input.value.trim();
+    async function sendMessage() {
+        const input = document.getElementById('userInput');
+        const message = input.value.trim();
         if (!message || isLoading) return;
         
         input.value = '';
@@ -315,79 +712,112 @@
         isLoading = true;
         document.getElementById('sendBtn').disabled = true;
         
-        var container = document.getElementById('chatMessages');
-        var typing = document.createElement('div');
-        typing.id = 'typing';
-        typing.className = 'message attending';
-        typing.innerHTML = '<div class="message-bubble"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>';
-        container.appendChild(typing);
+        const container = document.getElementById('chatMessages');
+        container.innerHTML += `<div class="message attending" id="typing"><div class="message-bubble"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div></div>`;
         container.scrollTop = container.scrollHeight;
         
-        generateResponse(message).then(function(response) {
-            var t = document.getElementById('typing');
-            if (t) t.remove();
+        try {
+            const response = await generateResponse(message);
+            document.getElementById('typing')?.remove();
             
             addMessage(response, 'attending');
             conversationHistory.push({ role: 'assistant', content: response });
             
             session.questionsAskedByAI++;
-            if (response.indexOf('?') !== -1) session.teachingMomentsDetected++;
+            if (response.toLowerCase().includes('teaching moment') || response.toLowerCase().includes('let me explain') || response.includes('?')) {
+                session.teachingMomentsDetected++;
+            }
             
             checkConceptsExplored(message + ' ' + response);
             updateStats();
             
-            isLoading = false;
-            document.getElementById('sendBtn').disabled = false;
-        });
+        } catch (error) {
+            document.getElementById('typing')?.remove();
+            addMessage('I apologize, I\'m having trouble connecting. Please try again.', 'attending');
+            console.error('Error:', error);
+        }
+        
+        isLoading = false;
+        document.getElementById('sendBtn').disabled = false;
     }
 
-    function generateResponse(userMessage) {
-        return new Promise(function(resolve) {
-            var definedResponses = currentCase.defined_responses || {};
-            var messageLower = userMessage.toLowerCase();
-            
-            for (var trigger in definedResponses) {
-                if (messageLower.indexOf(trigger.split('_')[0]) !== -1) {
-                    resolve(definedResponses[trigger]);
-                    return;
-                }
+    async function generateResponse(userMessage) {
+        const definedResponses = currentCase.defined_responses || {};
+        const messageLower = userMessage.toLowerCase();
+        
+        for (const [trigger, response] of Object.entries(definedResponses)) {
+            const triggerWords = trigger.split(/[_\s]+/);
+            if (triggerWords.some(word => messageLower.includes(word))) {
+                return response;
             }
+        }
+        
+        try {
+            const WORKER_URL = 'https://coachdx-attending.laurenmfine.workers.dev';
             
-            fetch('https://coachdx-attending.laurenmfine.workers.dev', {
+            const response = await fetch(WORKER_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     message: userMessage,
                     conversationHistory: conversationHistory.slice(-10),
-                    caseData: { description: currentCase.description, title: currentCase.title }
+                    caseData: { 
+                        description: currentCase.description,
+                        title: currentCase.title,
+                        keyTeachingPoints: currentCase.keyTeachingPoints || []
+                    },
+                    profession: currentProfession
                 })
-            })
-            .then(function(r) { return r.json(); })
-            .then(function(data) { resolve(data.response || generateFallback()); })
-            .catch(function() { resolve(generateFallback()); });
-        });
+            });
+            
+            if (!response.ok) throw new Error('Worker request failed');
+            
+            const data = await response.json();
+            return data.response || data.content || generateFallbackResponse(userMessage);
+        } catch (error) {
+            console.log('Worker unavailable, using fallback response');
+            return generateFallbackResponse(userMessage);
+        }
     }
     
-    function generateFallback() {
-        var prompts = [
+    function generateFallbackResponse(userMessage) {
+        const teachingPoints = currentCase.keyTeachingPoints || [];
+        const unusedPoints = teachingPoints.filter(point => 
+            !conversationHistory.some(msg => msg.content.includes(point.substring(0, 30)))
+        );
+        
+        if (unusedPoints.length > 0) {
+            const point = unusedPoints[Math.floor(Math.random() * unusedPoints.length)];
+            return `Good thinking! Let me add a teaching point here: ${point}\n\nWhat else are you considering?`;
+        }
+        
+        const prompts = [
             "That's a good start. Can you tell me more about your reasoning?",
             "Interesting approach. What findings would change your differential?",
+            "I see where you're going. What would you prioritize in the workup?",
+            "Good observation. How does that fit with the patient's presentation?",
             "What other diagnoses are you considering?",
-            "How would you explain the pathophysiology here?"
+            "How would you explain the pathophysiology here?",
+            "What's the next step in your clinical reasoning?"
         ];
+        
         return prompts[Math.floor(Math.random() * prompts.length)];
     }
 
     function checkConceptsExplored(text) {
-        var textLower = text.toLowerCase();
-        var domains = currentCase.conceptDomains || {};
-        for (var domain in domains) {
-            domains[domain].forEach(function(c) {
-                if (textLower.indexOf(c.split('_')[0]) !== -1 && !conceptsExplored[c]) {
-                    conceptsExplored[c] = true;
-                    session.conceptsExplored.push(c);
+        const textLower = text.toLowerCase();
+        const domains = currentCase.conceptDomains || {};
+        
+        for (const concepts of Object.values(domains)) {
+            for (const concept of concepts) {
+                const searchTerms = concept.split('_');
+                if (searchTerms.some(term => textLower.includes(term))) {
+                    if (!conceptsExplored[concept]) {
+                        conceptsExplored[concept] = true;
+                        session.conceptsExplored.push(concept);
+                    }
                 }
-            });
+            }
         }
         renderConceptMap();
     }
@@ -399,15 +829,108 @@
     }
 
     function goToParallelCase() {
-        window.location.href = currentCase.parallelCase ? 'mentor-chat.html?case=' + currentCase.parallelCase : 'case-library.html';
+        if (currentCase.parallelCase) {
+            window.location.href = `mentor-chat.html?case=${currentCase.parallelCase}`;
+        } else {
+            window.location.href = 'case-library.html';
+        }
     }
 
     function endSession() {
         clearInterval(timerInterval);
-        document.getElementById('modalTime').textContent = Math.floor(seconds/60) + ':' + String(seconds%60).padStart(2,'0');
+        
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        
+        document.getElementById('modalTime').textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
         document.getElementById('modalConcepts').textContent = Object.keys(conceptsExplored).length;
         document.getElementById('modalTeaching').textContent = session.teachingMomentsDetected;
+        
+        // Parallel case suggestion
+        const suggestionDiv = document.getElementById('parallelCaseSuggestion');
+        const nextBtn = document.getElementById('nextCaseBtn');
+        
+        if (currentCase.parallelCase) {
+            const parallelData = CASES[currentCase.parallelCase];
+            if (parallelData) {
+                suggestionDiv.innerHTML = `
+                    <div style="background:#fef3c7; padding:12px; border-radius:8px; text-align:center;">
+                        <p style="font-size:13px; color:#92400e; margin-bottom:4px;">
+                            <strong>🔄 Test Your Reasoning Transfer</strong>
+                        </p>
+                        <p style="font-size:12px; color:#a16207;">
+                            Try "${parallelData.title}" - ${currentCase.parallelDescription || ''}
+                        </p>
+                    </div>
+                `;
+                nextBtn.textContent = 'Try Parallel Case →';
+                nextBtn.style.background = '#f59e0b';
+            }
+        } else {
+            suggestionDiv.innerHTML = '';
+            nextBtn.textContent = 'Back to Cases';
+            nextBtn.onclick = () => location.href = 'case-library.html';
+        }
+        
+        // Cross-platform suggestions in modal
+        renderModalCrossPlatform();
+        
         document.getElementById('endModal').classList.add('show');
+        sendSessionData();
+    }
+    
+    function renderModalCrossPlatform() {
+        const container = document.getElementById('crossPlatformSuggestions');
+        const caseId = currentCase.id || '';
+        const caseTitle = (currentCase.title || '').toLowerCase();
+        const searchText = (caseId + ' ' + caseTitle).toLowerCase();
+        
+        let matched = null;
+        for (const [key, links] of Object.entries(CROSS_PLATFORM_MAP)) {
+            if (searchText.includes(key)) {
+                matched = links;
+                break;
+            }
+        }
+        
+        if (!matched) {
+            container.innerHTML = '';
+            return;
+        }
+        
+        container.innerHTML = `
+            <div style="background:#f0fdf4; padding:12px; border-radius:8px; text-align:center;">
+                <p style="font-size:13px; color:#166534; margin-bottom:8px;">
+                    <strong>🎯 Continue Learning: ${matched.topic}</strong>
+                </p>
+                <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
+                    <a href="../MechanismDx/${matched.mechanism}" style="padding:6px 12px; background:#dcfce7; color:#166534; border-radius:6px; font-size:12px; text-decoration:none;">⚙️ MechanismDx</a>
+                    <a href="../ReasonDx/training.html?case=${matched.reasondx}" style="padding:6px 12px; background:#dbeafe; color:#1d4ed8; border-radius:6px; font-size:12px; text-decoration:none;">🩺 ReasonDx</a>
+                    <a href="../predict-labs/${matched.predictlabs}" style="padding:6px 12px; background:#ffedd5; color:#c2410c; border-radius:6px; font-size:12px; text-decoration:none;">🔮 PredictLabs</a>
+                </div>
+            </div>
+        `;
+    }
+
+    function sendSessionData() {
+        const data = {
+            type: 'COACHDX_SESSION',
+            sessionId: session.id,
+            caseId: currentCase.id,
+            caseTopic: currentCase.title,
+            category: currentCase.category,
+            profession: currentProfession,
+            isParallelCase: session.isParallelCase,
+            parallelPairId: session.parallelPairId,
+            duration: seconds,
+            questionsAsked: session.questionsAskedByAI,
+            teachingMoments: session.teachingMomentsDetected,
+            conceptsExplored: session.conceptsExplored,
+            timestamp: new Date().toISOString()
+        };
+        
+        console.log('Session data:', data);
+        // Future: Send to fingerprint dashboard
     }
 
     document.addEventListener('DOMContentLoaded', init);
