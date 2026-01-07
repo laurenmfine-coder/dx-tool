@@ -12,17 +12,11 @@
         /* Logo Header */
         .coachdx-logo-header {
             background: #fafafa;
-            padding: 24px 24px 40px 24px;
+            padding: 24px 24px 20px 24px;
             text-align: center;
         }
-        .coachdx-logo-container {
-            display: inline-block;
-            min-height: 75px;
-        }
-        .coachdx-logo-container svg {
-            height: 60px;
-            width: auto;
-        }
+        .coachdx-logo-container { display: inline-block; min-height: 75px; }
+        .coachdx-logo-container svg { height: 60px; width: auto; }
         .coachdx-tagline {
             margin-top: 8px;
             font-family: Georgia, 'Times New Roman', serif;
@@ -40,588 +34,233 @@
             align-items: center;
             justify-content: center;
             gap: 16px;
+            flex-wrap: wrap;
         }
-        .role-banner-text {
-            font-size: 14px;
-            color: #166534;
-        }
-        .role-banner-text strong {
-            font-weight: 600;
-        }
+        .role-banner-text { font-size: 14px; color: #166534; }
+        .role-banner-text strong { font-weight: 600; }
         .role-selector {
-            padding: 6px 12px;
+            padding: 8px 14px;
             border: 1px solid #86efac;
-            border-radius: 6px;
+            border-radius: 8px;
+            background: white;
+            font-size: 14px;
+            cursor: pointer;
+            color: #166534;
+            font-weight: 500;
+        }
+        .role-selector:hover { border-color: #22c55e; }
+        .role-selector:focus { outline: 2px solid #22c55e; outline-offset: 2px; }
+        
+        .nav { background: #fff; border-bottom: 1px solid #e4e4e7; padding: 12px 24px; position: sticky; top: 0; z-index: 100; }
+        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
+        .nav-link { padding: 8px 16px; color: #52525b; text-decoration: none; font-size: 14px; font-weight: 500; border-radius: 8px; transition: all 0.15s; }
+        .nav-link:hover { background: #f4f4f5; }
+        .nav-link.active { background: #ede9fe; color: #7c3aed; }
+        
+        .hero { 
+            background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 50%, #c4b5fd 100%); 
+            padding: 40px 24px; 
+            text-align: center; 
+        }
+        .hero h1 { font-size: 32px; font-weight: 800; margin-bottom: 8px; }
+        .hero p { font-size: 16px; color: #52525b; max-width: 600px; margin: 0 auto 20px; }
+        .hero-stats { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
+        .hero-stat-num { font-size: 24px; font-weight: 700; color: #7c3aed; }
+        .hero-stat-label { font-size: 12px; color: #64748b; }
+        
+        /* Filters */
+        .filters { 
+            max-width: 1200px; 
+            margin: 20px auto; 
+            padding: 0 24px; 
+            display: flex; 
+            gap: 12px; 
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .filter-btn {
+            padding: 8px 16px;
+            border: 1px solid #e4e4e7;
+            border-radius: 20px;
             background: white;
             font-size: 13px;
             cursor: pointer;
-            color: #166534;
+            transition: all 0.15s;
         }
-        .role-selector:hover {
-            border-color: #22c55e;
+        .filter-btn:hover { border-color: #a78bfa; }
+        .filter-btn.active { background: #7c3aed; color: white; border-color: #7c3aed; }
+        
+        .search-box {
+            flex: 1;
+            min-width: 200px;
+            max-width: 300px;
+            padding: 8px 14px;
+            border: 1px solid #e4e4e7;
+            border-radius: 8px;
+            font-size: 14px;
         }
+        .search-box:focus { outline: 2px solid #7c3aed; outline-offset: -1px; }
         
-        .nav { background: #fff; border-bottom: 1px solid #e4e4e7; padding: 12px 24px; position: sticky; top: 0; z-index: 100; }
-        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .nav-link { padding: 8px 16px; color: #52525b; text-decoration: none; font-size: 14px; font-weight: 500; border-radius: 8px; border-left: 3px solid transparent; transition: all 0.15s; }
-        .nav-link:hover { background: #f4f4f5; }
-        .nav-link.active { background: #ede9fe; color: #7c3aed; border-left-color: #8b5cf6; }
-        .nav-link.reason { border-left-color: #3b82f6; }
-        .nav-link.reason:hover { background: #eff6ff; color: #2563eb; }
-        .nav-link.mechanism { border-left-color: #10b981; }
-        .nav-link.mechanism:hover { background: #ecfdf5; color: #059669; }
-        .nav-link.suite { border-left-color: #f59e0b; }
-        .nav-link.suite:hover { background: #fffbeb; color: #d97706; }
+        /* Case Grid */
+        .cases-container { max-width: 1200px; margin: 0 auto; padding: 20px 24px; }
         
-        .hero { background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 50%, #c4b5fd 100%); padding: 48px 24px; text-align: center; }
-        .hero h1 { font-size: 36px; font-weight: 800; margin-bottom: 12px; }
-        .hero p { font-size: 18px; color: #52525b; max-width: 600px; margin: 0 auto 24px; }
-        .hero-stats { display: flex; justify-content: center; gap: 40px; }
-        .hero-stat-num { font-size: 28px; font-weight: 700; color: #7c3aed; }
-        .hero-stat-label { font-size: 13px; color: #64748b; }
-        
-        /* Cross-Platform Recommendations Widget */
-        .cross-platform-widget {
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 24px;
-            margin: 24px auto;
-            max-width: 1200px;
-        }
-        .cpw-header {
+        .category-section { margin-bottom: 32px; }
+        .category-header {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            gap: 12px;
             margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e4e4e7;
         }
-        .cpw-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: #1e293b;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .category-icon { font-size: 24px; }
+        .category-title { font-size: 18px; font-weight: 700; }
+        .category-count { 
+            font-size: 12px; 
+            color: #64748b; 
+            background: #f4f4f5; 
+            padding: 2px 8px; 
+            border-radius: 10px; 
         }
-        .cpw-subtitle {
-            font-size: 12px;
-            color: #64748b;
-        }
-        .cpw-grid {
+        
+        .case-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 12px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
         }
-        .cpw-card {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 14px;
+        
+        .case-card {
             background: white;
-            border-radius: 10px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #e4e4e7;
+            border-radius: 12px;
+            padding: 16px;
             text-decoration: none;
             color: inherit;
             transition: all 0.2s;
+            display: block;
         }
-        .cpw-card:hover {
-            transform: translateX(4px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            border-color: var(--platform-color, #8b5cf6);
+        .case-card:hover {
+            border-color: #a78bfa;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.15);
+            transform: translateY(-2px);
         }
-        .cpw-card.reasondx { --platform-color: #3b82f6; }
-        .cpw-card.mechanismdx { --platform-color: #10b981; }
-        .cpw-card.predictlabs { --platform-color: #f97316; }
-        .cpw-card.fingerprint { --platform-color: #8b5cf6; }
         
-        .cpw-stripe {
-            width: 4px;
-            height: 40px;
-            border-radius: 2px;
-            background: var(--platform-color, #8b5cf6);
+        .case-title { font-weight: 600; font-size: 15px; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .case-demo { font-size: 13px; color: #64748b; margin-bottom: 8px; }
+        .case-meta { display: flex; gap: 8px; flex-wrap: wrap; }
+        .case-time { font-size: 11px; color: #94a3b8; }
+        
+        .case-badge {
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
         }
-        .cpw-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            background: #f8fafc;
+        .case-badge.critical { background: #fee2e2; color: #dc2626; }
+        .case-badge.parallel { background: #fef3c7; color: #d97706; }
+        .case-badge.new { background: #dcfce7; color: #16a34a; }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 16px;
+            border: 1px solid #e4e4e7;
         }
-        .cpw-card.reasondx .cpw-icon { background: #dbeafe; }
-        .cpw-card.mechanismdx .cpw-icon { background: #dcfce7; }
-        .cpw-card.predictlabs .cpw-icon { background: #ffedd5; }
-        .cpw-card.fingerprint .cpw-icon { background: #ede9fe; }
+        .empty-state-icon { font-size: 48px; margin-bottom: 16px; }
+        .empty-state h3 { font-size: 18px; margin-bottom: 8px; }
+        .empty-state p { color: #64748b; }
         
-        .cpw-info { flex: 1; }
-        .cpw-card-title { font-size: 13px; font-weight: 600; color: #1e293b; }
-        .cpw-card-meta { font-size: 11px; color: #64748b; }
-        .cpw-platform-tag { font-weight: 600; }
-        .cpw-card.reasondx .cpw-platform-tag { color: #3b82f6; }
-        .cpw-card.mechanismdx .cpw-platform-tag { color: #10b981; }
-        .cpw-card.predictlabs .cpw-platform-tag { color: #f97316; }
-        .cpw-card.fingerprint .cpw-platform-tag { color: #8b5cf6; }
+        .footer { text-align: center; padding: 32px; color: #64748b; font-size: 13px; }
+        .footer a { color: #7c3aed; }
         
-        .filter-bar { background: #fff; border-bottom: 1px solid #e4e4e7; padding: 16px 24px; position: sticky; top: 52px; z-index: 99; }
-        .filter-inner { max-width: 1200px; margin: 0 auto; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
-        .filter-btn { padding: 8px 16px; border: 1px solid #e4e4e7; background: #fff; border-radius: 20px; font-size: 13px; cursor: pointer; transition: all 0.15s; }
-        .filter-btn:hover { border-color: #8b5cf6; }
-        .filter-btn.active { background: #8b5cf6; border-color: #8b5cf6; color: white; }
-        .search-input { padding: 8px 16px; border: 1px solid #e4e4e7; border-radius: 20px; font-size: 14px; margin-left: auto; min-width: 200px; outline: none; }
-        .search-input:focus { border-color: #8b5cf6; }
-        .main { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
-        .category-section { margin-bottom: 48px; }
-        .category-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid #e4e4e7; }
-        .category-icon { font-size: 28px; }
-        .category-title { font-size: 20px; font-weight: 700; }
-        .category-count { background: #ede9fe; color: #7c3aed; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; }
-        .case-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
-        .case-card { background: #fff; border: 1px solid #e4e4e7; border-radius: 12px; padding: 20px; text-decoration: none; color: inherit; display: block; transition: all 0.2s; }
-        .case-card:hover { border-color: #8b5cf6; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(139, 92, 246, 0.1); }
-        .case-title { font-size: 17px; font-weight: 600; margin-bottom: 8px; color: #18181b; }
-        .case-demo { font-size: 14px; color: #64748b; }
-        .case-time { font-size: 12px; color: #94a3b8; margin-top: 12px; padding-top: 12px; border-top: 1px solid #f4f4f5; }
-        .case-badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600; margin-left: 8px; }
-        .case-badge.parallel { background: #fef3c7; color: #b45309; }
-        .case-badge.critical { background: #fee2e2; color: #b91c1c; }
-        .case-badge.new { background: #dcfce7; color: #166534; }
-        
-        .footer { padding: 32px 24px; text-align: center; border-top: 1px solid #e4e4e7; background: #fff; margin-top: 48px; font-size: 13px; color: #94a3b8; }
-        .footer a { color: #8b5cf6; text-decoration: none; }
+        /* Profession-specific themes */
+        .role-omfs .hero { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); }
+        .role-omfs .hero-stat-num { color: #d97706; }
+        .role-nursing .hero { background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); }
+        .role-nursing .hero-stat-num { color: #16a34a; }
+        .role-ems .hero { background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); }
+        .role-ems .hero-stat-num { color: #dc2626; }
+        .role-rt .hero { background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); }
+        .role-rt .hero-stat-num { color: #2563eb; }
     </style>
 </head>
 <body>
     <!-- Logo Header -->
     <header class="coachdx-logo-header">
-        <div class="coachdx-logo-container">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 310 120">
-                <text x="20" y="70" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="normal" fill="#1a1a1a" letter-spacing="-1">CoachD</text>
-                <line x1="218" y1="42" x2="242" y2="72" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round"/>
-                <ellipse cx="216" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 216 39)" fill="#1a1a1a"/>
-                <path d="M 242 42 L 226 58 Q 220 66 220 76 Q 220 86 228 92 Q 236 98 236 108" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                <ellipse cx="244" cy="39" rx="2.5" ry="4.5" transform="rotate(28 244 39)" fill="#1a1a1a"/>
-                <circle cx="236" cy="108" r="10" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
-                <circle cx="236" cy="108" r="5" fill="#1a1a1a"/>
+        <a href="coachdx-dashboard.html" class="coachdx-logo-container">
+            <svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg">
+                <text x="5" y="42" font-family="Georgia, serif" font-size="38" fill="#18181b">Coach</text>
+                <text x="115" y="42" font-family="Georgia, serif" font-size="38" fill="#18181b">D</text>
+                <g stroke="#18181b" stroke-width="2.5" stroke-linecap="round" fill="none">
+                    <line x1="147" y1="22" x2="163" y2="42"/>
+                    <path d="M163 22L153 32Q149 37 149 44Q149 51 154 55Q159 59 159 65"/>
+                </g>
+                <ellipse cx="145" cy="20" rx="2" ry="3.5" transform="rotate(-28 145 20)" fill="#18181b"/>
+                <ellipse cx="165" cy="20" rx="2" ry="3.5" transform="rotate(28 165 20)" fill="#18181b"/>
+                <circle cx="159" cy="65" r="6" fill="none" stroke="#18181b" stroke-width="2"/>
+                <circle cx="159" cy="65" r="3" fill="#18181b"/>
             </svg>
-        </div>
-        <div class="coachdx-tagline">Guided discovery through Socratic coaching.</div>
+        </a>
+        <p class="coachdx-tagline">Case Library</p>
     </header>
     
-    <!-- Role Selector Banner (NEW) -->
+    <!-- Role Selector Banner -->
     <div class="role-banner">
-        <span class="role-banner-text">Currently viewing as: <strong data-element="current-role">Medical Student</strong></span>
-        <select class="role-selector" id="roleSelector" data-element="role-dropdown">
+        <span class="role-banner-text">📚 Viewing cases for: <strong id="currentRoleLabel">Medical Student</strong></span>
+        <select id="roleSelector" class="role-selector">
             <option value="medical-student">Medical Student</option>
             <option value="resident">Resident</option>
             <option value="omfs">OMFS Resident</option>
             <option value="nursing">Nursing Student</option>
+            <option value="ems">EMS Provider</option>
+            <option value="rt">RT Student</option>
             <option value="pt">PT Student</option>
             <option value="dpm">Podiatry Student</option>
             <option value="pharmd">PharmD Student</option>
             <option value="dental">Dental Student</option>
-            <option value="ems">EMS Provider</option>
-            <option value="rt">RT Student</option>
             <option value="pa">PA Student</option>
             <option value="np">NP Student</option>
         </select>
     </div>
     
+    <!-- Navigation -->
     <nav class="nav">
         <div class="nav-inner">
-            <a href="index.html" class="nav-link active">💬 CoachDx</a>
-            <a href="../ReasonDx/index.html" class="nav-link reason">🔬 ReasonDx</a>
-            <a href="../mechanism/index.html" class="nav-link mechanism">⚙️ MechanismDx</a>
-            <a href="../fingerprint-dashboard.html" class="nav-link suite">🧬 Fingerprint</a>
-            <a href="../unified-scoreboard.html" class="nav-link suite">🏆 Scoreboard</a>
+            <a href="coachdx-dashboard.html" class="nav-link">🏠 Dashboard</a>
+            <a href="case-library.html" class="nav-link active">📚 Cases</a>
+            <a href="sbar-trainer.html" class="nav-link">📋 SBAR</a>
+            <a href="mentor-chat.html" class="nav-link">💬 Coaching</a>
+            <a href="../unified-scoreboard.html" class="nav-link">🏆 Scoreboard</a>
         </div>
     </nav>
     
+    <!-- Hero -->
     <section class="hero">
-        <h1 data-element="welcome-title">Welcome to CoachDx</h1>
-        <p>Practice clinical reasoning with AI-powered Socratic coaching. Work through cases with an attending mentor who guides your thinking.</p>
+        <h1 id="heroTitle">📚 Case Library</h1>
+        <p id="heroSubtitle">Select a case to begin your coaching session with a discipline-specific mentor.</p>
         <div class="hero-stats">
-            <div><span class="hero-stat-num">70+</span><div class="hero-stat-label">Cases</div></div>
-            <div><span class="hero-stat-num">12</span><div class="hero-stat-label">Professions</div></div>
-            <div><span class="hero-stat-num">10</span><div class="hero-stat-label">Categories</div></div>
+            <div><div class="hero-stat-num" id="statCases">0</div><div class="hero-stat-label">Cases</div></div>
+            <div><div class="hero-stat-num" id="statCategories">0</div><div class="hero-stat-label">Categories</div></div>
+            <div><div class="hero-stat-num" id="statCritical">0</div><div class="hero-stat-label">Critical</div></div>
         </div>
     </section>
     
-    <!-- Cross-Platform Recommendations Widget (NEW) -->
-    <div class="cross-platform-widget" id="crossPlatformWidget">
-        <div class="cpw-header">
-            <div>
-                <div class="cpw-title">🎯 Continue Your Learning</div>
-                <div class="cpw-subtitle">Recommendations based on your recent activity</div>
-            </div>
-        </div>
-        <div class="cpw-grid" id="cpwGrid">
-            <a href="../mechanism/acs-module.html" class="cpw-card mechanismdx">
-                <div class="cpw-stripe"></div>
-                <div class="cpw-icon">⚙️</div>
-                <div class="cpw-info">
-                    <div class="cpw-card-title">Master ACS Pathophysiology</div>
-                    <div class="cpw-card-meta"><span class="cpw-platform-tag">MechanismDx</span> • Deep dive</div>
-                </div>
-            </a>
-            <a href="../ReasonDx/training.html?case=chest-pain" class="cpw-card reasondx">
-                <div class="cpw-stripe"></div>
-                <div class="cpw-icon">🩺</div>
-                <div class="cpw-info">
-                    <div class="cpw-card-title">Full Chest Pain Case</div>
-                    <div class="cpw-card-meta"><span class="cpw-platform-tag">ReasonDx</span> • Complete walkthrough</div>
-                </div>
-            </a>
-            <a href="../ReasonDx/predict-labs-acs.html" class="cpw-card predictlabs">
-                <div class="cpw-stripe"></div>
-                <div class="cpw-icon">🔮</div>
-                <div class="cpw-info">
-                    <div class="cpw-card-title">Predict ACS Labs</div>
-                    <div class="cpw-card-meta"><span class="cpw-platform-tag">PredictLabs</span> • Test predictions</div>
-                </div>
-            </a>
-            <a href="../fingerprint-dashboard.html" class="cpw-card fingerprint">
-                <div class="cpw-stripe"></div>
-                <div class="cpw-icon">🧬</div>
-                <div class="cpw-info">
-                    <div class="cpw-card-title">View Your Progress</div>
-                    <div class="cpw-card-meta"><span class="cpw-platform-tag">Fingerprint</span> • Learning analytics</div>
-                </div>
-            </a>
-        </div>
+    <!-- Filters -->
+    <div class="filters">
+        <button class="filter-btn active" data-filter="all">All Cases</button>
+        <div id="categoryFilters"></div>
+        <input type="text" id="searchInput" class="search-box" placeholder="🔍 Search cases...">
     </div>
     
-    <div class="filter-bar">
-        <div class="filter-inner">
-            <button class="filter-btn active" data-filter="all">All Cases</button>
-            <button class="filter-btn" data-filter="cardio">❤️ Cardio</button>
-            <button class="filter-btn" data-filter="pulm">🫁 Pulm</button>
-            <button class="filter-btn" data-filter="gi">🩺 GI</button>
-            <button class="filter-btn" data-filter="endo">🦋 Endo</button>
-            <button class="filter-btn" data-filter="renal">💧 Renal</button>
-            <button class="filter-btn" data-filter="neuro">🧠 Neuro</button>
-            <button class="filter-btn" data-filter="id">🦠 ID</button>
-            <button class="filter-btn" data-filter="heme">🩸 Heme</button>
-            <button class="filter-btn" data-filter="tox">⚠️ Tox</button>
-            <input type="text" class="search-input" id="searchInput" placeholder="Search cases...">
+    <!-- Cases Container -->
+    <main class="cases-container" id="casesContainer">
+        <div class="empty-state" id="emptyState" style="display:none;">
+            <div class="empty-state-icon">📭</div>
+            <h3>No cases found</h3>
+            <p>Try adjusting your search or filters.</p>
         </div>
-    </div>
-    
-    <main class="main">
-        <!-- Cardiovascular -->
-        <section class="category-section" data-category="cardio">
-            <div class="category-header">
-                <span class="category-icon">❤️</span>
-                <span class="category-title">Cardiovascular</span>
-                <span class="category-count">11 cases</span>
-            </div>
-            <div class="case-grid">
-                <a href="mentor-chat.html?case=chest-pain-acs" class="case-card">
-                    <div class="case-title">Chest Pain - ACS<span class="case-badge parallel">↔ Parallel</span></div>
-                    <div class="case-demo">62M crushing chest pain, diaphoresis</div>
-                    <div class="case-time">~20 min</div>
-                </a>
-                <a href="mentor-chat.html?case=chest-pain-atypical" class="case-card">
-                    <div class="case-title">Atypical ACS<span class="case-badge parallel">↔ Parallel</span></div>
-                    <div class="case-demo">54F diabetic with fatigue, jaw pain</div>
-                    <div class="case-time">~20 min</div>
-                </a>
-                <a href="mentor-chat.html?case=stemi-anterior" class="case-card">
-                    <div class="case-title">STEMI - Anterior Wall<span class="case-badge critical">🚨 Critical</span></div>
-                    <div class="case-demo">58M, crushing chest pain, ST elevations V1-V4</div>
-                    <div class="case-time">~25 min</div>
-                </a>
-                <a href="mentor-chat.html?case=aortic-dissection" class="case-card">
-                    <div class="case-title">Aortic Dissection<span class="case-badge critical">🚨 Critical</span></div>
-                    <div class="case-demo">67M, tearing chest pain radiating to back</div>
-                    <div class="case-time">~25 min</div>
-                </a>
-                <a href="mentor-chat.html?case=chest-pain-noncardiac" class="case-card">
-                    <div class="case-title">Non-Cardiac Chest Pain</div>
-                    <div class="case-demo">28F sharp pain worse with breathing</div>
-                    <div class="case-time">~15 min</div>
-                </a>
-                <a href="mentor-chat.html?case=afib-rvr" class="case-card">
-                    <div class="case-title">AFib with RVR<span class="case-badge parallel">↔ Parallel</span></div>
-                    <div class="case-demo">72M palpitations, irregular pulse</div>
-                    <div class="case-time">~20 min</div>
-                </a>
-                <a href="mentor-chat.html?case=afib-unstable" class="case-card">
-                    <div class="case-title">Unstable AFib<span class="case-badge parallel">↔ Parallel</span></div>
-                    <div class="case-demo">Same patient, now hypotensive</div>
-                    <div class="case-time">~20 min</div>
-                </a>
-                <a href="mentor-chat.html?case=syncope-vasovagal" class="case-card">
-                    <div class="case-title">Syncope - Vasovagal</div>
-                    <div class="case-demo">22F fainted after blood draw</div>
-                    <div class="case-time">~15 min</div>
-                </a>
-                <a href="mentor-chat.html?case=syncope-cardiac" class="case-card">
-                    <div class="case-title">Syncope - Cardiac</div>
-                    <div class="case-demo">68M sudden LOC during exertion</div>
-                    <div class="case-time">~20 min</div>
-                </a>
-                <a href="mentor-chat.html?case=chf-exacerbation" class="case-card">
-                    <div class="case-title">CHF Exacerbation</div>
-                    <div class="case-demo">75F progressive dyspnea, leg swelling</div>
-                    <div class="case-time">~25 min</div>
-                </a>
-                <a href="mentor-chat.html?case=pe" class="case-card">
-                    <div class="case-title">Pulmonary Embolism</div>
-                    <div class="case-demo">45F post-op dyspnea, tachycardia</div>
-                    <div class="case-time">~25 min</div>
-                </a>
-            </div>
-        </section>
-        
-        <!-- Pulmonary -->
-        <section class="category-section" data-category="pulm">
-            <div class="category-header">
-                <span class="category-icon">🫁</span>
-                <span class="category-title">Pulmonary</span>
-                <span class="category-count">4 cases</span>
-            </div>
-            <div class="case-grid">
-                <a href="mentor-chat.html?case=copd-exacerbation" class="case-card">
-                    <div class="case-title">COPD Exacerbation</div>
-                    <div class="case-demo">68M worse dyspnea, productive cough</div>
-                    <div class="case-time">~20 min</div>
-                </a>
-                <a href="mentor-chat.html?case=asthma-exacerbation" class="case-card">
-                    <div class="case-title">Asthma Exacerbation</div>
-                    <div class="case-demo">24F wheezing, can't complete sentences</div>
-                    <div class="case-time">~20 min</div>
-                </a>
-                <a href="mentor-chat.html?case=pneumonia-cap" class="case-card">
-                    <div class="case-title">Community-Acquired Pneumonia</div>
-                    <div class="case-demo">55M fever, cough, consolidation</div>
-                    <div class="case-time">~20 min</div>
-                </a>
-                <a href="mentor-chat.html?case=pneumonia-aspiration" class="case-card">
-                    <div class="case-title">Aspiration Pneumonia</div>
-                    <div class="case-demo">82M post-stroke, new infiltrate</div>
-                    <div class="case-time">~20 min</div>
-                </a>
-            </div>
-        </section>
-        
-        <!-- GI/Surgery -->
-        <section class="category-section" data-category="gi">
-            <div class="category-header">
-                <span class="category-icon">🩺</span>
-                <span class="category-title">GI/Surgery</span>
-                <span class="category-count">6 cases</span>
-            </div>
-            <div class="case-grid">
-                <a href="mentor-chat.html?case=gi-bleed-upper" class="case-card">
-                    <div class="case-title">Upper GI Bleed<span class="case-badge parallel">↔ Parallel</span></div>
-                    <div class="case-demo">58M hematemesis, melena, on NSAIDs</div>
-                    <div class="case-time">~25 min</div>
-                </a>
-                <a href="mentor-chat.html?case=gi-bleed-lower" class="case-card">
-                    <div class="case-title">Lower GI Bleed<span class="case-badge parallel">↔ Parallel</span></div>
-                    <div class="case-demo">72F bright red blood per rectum</div>
-                    <div class="case-time">~25 min</div>
-                </a>
-                <a href="mentor-chat.html?case=appendicitis" class="case-card">
-                    <div class="case-title">Appendicitis</div>
-                    <div class="case-demo">19M RLQ pain, fever, anorexia</div>
-                    <div class="case-time">~20 min</div>
-                </a>
-                <a href="mentor-chat.html?case=diverticulitis" class="case-card">
-                    <div class="case-title">Diverticulitis</div>
-                    <div class="case-demo">65F LLQ pain, fever</div>
-                    <div class="case-time">~20 min</div>
-                </a>
-                <a href="mentor-chat.html?case=cholangitis" class="case-card">
-                    <div class="case-title">Cholangitis</div>
-                    <div class="case-demo">70M Charcot's triad</div>
-                    <div class="case-time">~25 min</div>
-                </a>
-                <a href="mentor-chat.html?case=sbo" class="case-card">
-                    <div class="case-title">Small Bowel Obstruction</div>
-                    <div class="case-demo">62F prior surgery, vomiting</div>
-                    <div class="case-time">~20 min</div>
-                </a>
-            </div>
-        </section>
-        
-        <!-- Endocrine -->
-        <section class="category-section" data-category="endo">
-            <div class="category-header">
-                <span class="category-icon">🦋</span>
-                <span class="category-title">Endocrine</span>
-                <span class="category-count">4 cases</span>
-            </div>
-            <div class="case-grid">
-                <a href="mentor-chat.html?case=dka" class="case-card">
-                    <div class="case-title">DKA<span class="case-badge parallel">↔ Parallel</span></div>
-                    <div class="case-demo">28M T1DM, N/V, Kussmaul breathing</div>
-                    <div class="case-time">~25 min</div>
-                </a>
-                <a href="mentor-chat.html?case=hhs" class="case-card">
-                    <div class="case-title">HHS<span class="case-badge parallel">↔ Parallel</span></div>
-                    <div class="case-demo">72F T2DM, AMS, severe hyperglycemia</div>
-                    <div class="case-time">~25 min</div>
-                </a>
-                <a href="mentor-chat.html?case=thyroid-storm" class="case-card">
-                    <div class="case-title">Thyroid Storm<span class="case-badge critical">🚨 Critical</span></div>
-                    <div class="case-demo">35F Graves, fever, tachycardia, confusion</div>
-                    <div class="case-time">~25 min</div>
-                </a>
-                <a href="mentor-chat.html?case=myxedema-coma" class="case-card">
-                    <div class="case-title">Myxedema Coma<span class="case-badge critical">🚨 Critical</span></div>
-                    <div class="case-demo">68F hypothyroid, AMS, hypothermia</div>
-                    <div class="case-time">~25 min</div>
-                </a>
-            </div>
-        </section>
-        
-        <!-- Renal/Electrolytes -->
-        <section class="category-section" data-category="renal">
-            <div class="category-header">
-                <span class="category-icon">💧</span>
-                <span class="category-title">Renal/Electrolytes</span>
-                <span class="category-count">5 cases</span>
-            </div>
-            <div class="case-grid">
-                <a href="mentor-chat.html?case=aki-prerenal" class="case-card">
-                    <div class="case-title">AKI - Pre-renal<span class="case-badge parallel">↔ Parallel</span></div>
-                    <div class="case-demo">75M dehydration, rising Cr</div>
-                    <div class="case-time">~20 min</div>
-                </a>
-                <a href="mentor-chat.html?case=aki-intrinsic" class="case-card">
-                    <div class="case-title">AKI - Intrinsic<span class="case-badge parallel">↔ Parallel</span></div>
-                    <div class="case-demo">Same patient, muddy brown casts</div>
-                    <div class="case-time">~20 min</div>
-                </a>
-                <a href="mentor-chat.html?case=hyponatremia-siadh" class="case-card">
-                    <div class="case-title">Hyponatremia - SIADH</div>
-                    <div class="case-demo">62F lung cancer, Na 118</div>
-                    <div class="case-time">~25 min</div>
-                </a>
-                <a href="mentor-chat.html?case=hyponatremia-hypovolemic" class="case-card">
-                    <div class="case-title">Hyponatremia - Hypovolemic</div>
-                    <div class="case-demo">45M marathon runner, Na 125</div>
-                    <div class="case-time">~20 min</div>
-                </a>
-                <a href="mentor-chat.html?case=hyperkalemia-emergency" class="case-card">
-                    <div class="case-title">Hyperkalemia Emergency<span class="case-badge critical">🚨 Critical</span></div>
-                    <div class="case-demo">70M ESRD, K 7.2, ECG changes</div>
-                    <div class="case-time">~20 min</div>
-                </a>
-            </div>
-        </section>
-        
-        <!-- Neurology -->
-        <section class="category-section" data-category="neuro">
-            <div class="category-header">
-                <span class="category-icon">🧠</span>
-                <span class="category-title">Neurology</span>
-                <span class="category-count">6 cases</span>
-            </div>
-            <div class="case-grid">
-                <a href="mentor-chat.html?case=ams" class="case-card">
-                    <div class="case-title">Altered Mental Status</div>
-                    <div class="case-demo">78F found confused at home</div>
-                    <div class="case-time">~25 min</div>
-                </a>
-                <a href="mentor-chat.html?case=migraine" class="case-card">
-                    <div class="case-title">Migraine</div>
-                    <div class="case-demo">32F unilateral throbbing, nausea</div>
-                    <div class="case-time">~15 min</div>
-                </a>
-                <a href="mentor-chat.html?case=sah" class="case-card">
-                    <div class="case-title">Subarachnoid Hemorrhage<span class="case-badge critical">🚨 Critical</span></div>
-                    <div class="case-demo">45F thunderclap headache</div>
-                    <div class="case-time">~25 min</div>
-                </a>
-                <a href="mentor-chat.html?case=seizure" class="case-card">
-                    <div class="case-title">First-Time Seizure</div>
-                    <div class="case-demo">25M witnessed tonic-clonic</div>
-                    <div class="case-time">~20 min</div>
-                </a>
-                <a href="mentor-chat.html?case=meningitis-bacterial" class="case-card">
-                    <div class="case-title">Bacterial Meningitis<span class="case-badge critical">🚨 Critical</span></div>
-                    <div class="case-demo">22M fever, neck stiffness, petechiae</div>
-                    <div class="case-time">~25 min</div>
-                </a>
-                <a href="mentor-chat.html?case=status-epilepticus" class="case-card">
-                    <div class="case-title">Status Epilepticus<span class="case-badge critical">🚨 Critical</span></div>
-                    <div class="case-demo">45F continuous seizure > 5 min</div>
-                    <div class="case-time">~25 min</div>
-                </a>
-            </div>
-        </section>
-        
-        <!-- Infectious Disease -->
-        <section class="category-section" data-category="id">
-            <div class="category-header">
-                <span class="category-icon">🦠</span>
-                <span class="category-title">Infectious Disease</span>
-                <span class="category-count">3 cases</span>
-            </div>
-            <div class="case-grid">
-                <a href="mentor-chat.html?case=sepsis-uti" class="case-card">
-                    <div class="case-title">Sepsis - UTI Source<span class="case-badge parallel">↔ Parallel</span></div>
-                    <div class="case-demo">80F nursing home, fever, confusion</div>
-                    <div class="case-time">~25 min</div>
-                </a>
-                <a href="mentor-chat.html?case=sepsis-pneumonia" class="case-card">
-                    <div class="case-title">Sepsis - Pneumonia Source<span class="case-badge parallel">↔ Parallel</span></div>
-                    <div class="case-demo">55M COPD, productive cough, hypotensive</div>
-                    <div class="case-time">~25 min</div>
-                </a>
-                <a href="mentor-chat.html?case=anaphylaxis" class="case-card">
-                    <div class="case-title">Anaphylaxis<span class="case-badge critical">🚨 Critical</span></div>
-                    <div class="case-demo">28F bee sting, hives, stridor</div>
-                    <div class="case-time">~15 min</div>
-                </a>
-            </div>
-        </section>
-        
-        <!-- Hematology -->
-        <section class="category-section" data-category="heme">
-            <div class="category-header">
-                <span class="category-icon">🩸</span>
-                <span class="category-title">Hematology</span>
-                <span class="category-count">3 cases</span>
-            </div>
-            <div class="case-grid">
-                <a href="mentor-chat.html?case=dvt" class="case-card">
-                    <div class="case-title">DVT</div>
-                    <div class="case-demo">Patient info varies</div>
-                    <div class="case-time">~25 min</div>
-                </a>
-                <a href="mentor-chat.html?case=svt" class="case-card">
-                    <div class="case-title">SVT</div>
-                    <div class="case-demo">Patient info varies</div>
-                    <div class="case-time">~25 min</div>
-                </a>
-                <a href="mentor-chat.html?case=anemia-workup" class="case-card">
-                    <div class="case-title">Anemia Workup</div>
-                    <div class="case-demo">Patient info varies</div>
-                    <div class="case-time">~25 min</div>
-                </a>
-            </div>
-        </section>
-        
-        <!-- Toxicology (NEW) -->
-        <section class="category-section" data-category="tox">
-            <div class="category-header">
-                <span class="category-icon">⚠️</span>
-                <span class="category-title">Toxicology</span>
-                <span class="category-count">1 case</span>
-            </div>
-            <div class="case-grid">
-                <a href="mentor-chat.html?case=acetaminophen-overdose" class="case-card">
-                    <div class="case-title">Acetaminophen Overdose<span class="case-badge new">NEW</span></div>
-                    <div class="case-demo">19F intentional OD, presenting 12 hrs post-ingestion</div>
-                    <div class="case-time">~25 min</div>
-                </a>
-            </div>
-        </section>
     </main>
     
     <footer class="footer">
@@ -629,117 +268,376 @@
         <p style="margin-top: 8px;">Created by Lauren Fine, MD, FAAAAI • Nova Southeastern University</p>
     </footer>
     
-    <!-- PROFESSION FIX SCRIPT (MERGED) -->
+    <!-- Load all case files -->
+    <script src="coachdx-cases-with-guidelines.js"></script>
+    <script src="coachdx-nursing-cases.js"></script>
+    <script src="coachdx-ems-cases.js"></script>
+    <script src="coachdx-rt-cases.js"></script>
+    <script src="coachdx-pt-cases.js"></script>
+    <script src="coachdx-pharmd-cases.js"></script>
+    <script src="coachdx-dental-cases.js"></script>
+    <script src="coachdx-omfs-cases.js"></script>
+    <script src="coachdx-podiatry-cases.js"></script>
+    <script src="coachdx-resident-cases.js"></script>
+    <script src="coachdx-interprofessional-cases.js"></script>
+    <script src="coachdx-specialty-cases.js"></script>
+    <script src="coachdx-cases-merged.js"></script>
+    
     <script>
     (function() {
         'use strict';
         
         // =========================================================================
-        // PROFESSION CONFIGURATIONS
+        // PROFESSION CONFIGURATION
         // =========================================================================
         const PROFESSION_CONFIG = {
-            'medical-student': { label: 'Medical Student', welcomeTitle: 'Welcome, Medical Student!', mentor: 'Dr. Sarah Chen' },
-            'resident': { label: 'Resident', welcomeTitle: 'Welcome, Resident!', mentor: 'Dr. James Harrison' },
-            'omfs': { label: 'OMFS Resident', welcomeTitle: 'Welcome, OMFS Resident!', mentor: 'Dr. Michael Torres' },
-            'nursing': { label: 'Nursing Student', welcomeTitle: 'Welcome, Nursing Student!', mentor: 'Sarah Mitchell, MSN' },
-            'pt': { label: 'PT Student', welcomeTitle: 'Welcome, DPT Student!', mentor: 'Dr. Amanda Foster, DPT' },
-            'dpm': { label: 'Podiatry Student', welcomeTitle: 'Welcome, Podiatry Student!', mentor: 'Dr. Robert Kim, DPM' },
-            'pharmd': { label: 'PharmD Student', welcomeTitle: 'Welcome, PharmD Student!', mentor: 'Dr. Jennifer Walsh, PharmD' },
-            'dental': { label: 'Dental Student', welcomeTitle: 'Welcome, Dental Student!', mentor: 'Dr. David Park, DDS' },
-            'ems': { label: 'EMS Provider', welcomeTitle: 'Welcome, EMS Provider!', mentor: 'Captain Mike Rodriguez' },
-            'rt': { label: 'RT Student', welcomeTitle: 'Welcome, RT Student!', mentor: 'Chris Thompson, RRT-ACCS' },
-            'pa': { label: 'PA Student', welcomeTitle: 'Welcome, PA Student!', mentor: 'Jessica Martinez, PA-C' },
-            'np': { label: 'NP Student', welcomeTitle: 'Welcome, NP Student!', mentor: 'Dr. Linda Chen, DNP' }
+            'medical-student': { 
+                label: 'Medical Student', 
+                disciplines: ['medical', 'general', undefined],
+                heroTitle: '📚 Medical Case Library',
+                heroSubtitle: 'Core clinical cases for medical student training'
+            },
+            'resident': { 
+                label: 'Resident', 
+                disciplines: ['medical', 'general', 'resident', undefined],
+                heroTitle: '📚 Resident Case Library',
+                heroSubtitle: 'Advanced diagnostic challenges for residents'
+            },
+            'omfs': { 
+                label: 'OMFS Resident', 
+                disciplines: ['omfs'],
+                heroTitle: '🦷 OMFS Case Library',
+                heroSubtitle: 'Oral and maxillofacial surgery cases'
+            },
+            'nursing': { 
+                label: 'Nursing Student', 
+                disciplines: ['nursing'],
+                heroTitle: '💉 Nursing Case Library',
+                heroSubtitle: 'Patient assessment, deterioration recognition, SBAR'
+            },
+            'ems': { 
+                label: 'EMS Provider', 
+                disciplines: ['ems', 'paramedic'],
+                heroTitle: '🚑 EMS Case Library',
+                heroSubtitle: 'Field assessment and prehospital care'
+            },
+            'rt': { 
+                label: 'RT Student', 
+                disciplines: ['rt', 'respiratory'],
+                heroTitle: '🫁 Respiratory Therapy Cases',
+                heroSubtitle: 'Ventilator management, ABG interpretation, airway'
+            },
+            'pt': { 
+                label: 'PT Student', 
+                disciplines: ['pt', 'physical-therapy'],
+                heroTitle: '🦿 Physical Therapy Cases',
+                heroSubtitle: 'Movement system diagnosis and rehabilitation'
+            },
+            'dpm': { 
+                label: 'Podiatry Student', 
+                disciplines: ['dpm', 'podiatry'],
+                heroTitle: '🦶 Podiatry Case Library',
+                heroSubtitle: 'Foot and ankle diagnosis, diabetic limb care'
+            },
+            'pharmd': { 
+                label: 'PharmD Student', 
+                disciplines: ['pharmd', 'pharmacy'],
+                heroTitle: '💊 Pharmacy Case Library',
+                heroSubtitle: 'Drug therapy, interactions, medication management'
+            },
+            'dental': { 
+                label: 'Dental Student', 
+                disciplines: ['dental'],
+                heroTitle: '🦷 Dental Case Library',
+                heroSubtitle: 'Oral diagnosis, treatment planning, emergencies'
+            },
+            'pa': { 
+                label: 'PA Student', 
+                disciplines: ['medical', 'pa', 'general', undefined],
+                heroTitle: '📚 PA Case Library',
+                heroSubtitle: 'Primary care and collaborative practice scenarios'
+            },
+            'np': { 
+                label: 'NP Student', 
+                disciplines: ['medical', 'np', 'general', undefined],
+                heroTitle: '📚 NP Case Library',
+                heroSubtitle: 'Advanced practice nursing scenarios'
+            }
         };
         
-        // Update UI for selected profession
-        function updateForProfession(professionCode) {
-            const config = PROFESSION_CONFIG[professionCode] || PROFESSION_CONFIG['medical-student'];
+        // Category icons
+        const CATEGORY_ICONS = {
+            'Cardiovascular': '❤️',
+            'Pulmonary': '🫁',
+            'Respiratory': '🫁',
+            'GI': '🩺',
+            'Endocrine': '🦋',
+            'Renal': '💧',
+            'Neurology': '🧠',
+            'Infectious Disease': '🦠',
+            'Hematology': '🩸',
+            'Toxicology': '⚠️',
+            'Facial Trauma': '🦴',
+            'Oral Pathology': '🦷',
+            'Orthognathic': '📐',
+            'Implants': '🔩',
+            'Nursing': '💉',
+            'EMS': '🚑',
+            'RT': '🫁',
+            'PT': '🦿',
+            'Podiatry': '🦶',
+            'Pharmacy': '💊',
+            'Dental': '🦷',
+            'default': '📋'
+        };
+        
+        let currentProfession = 'medical-student';
+        let allCases = {};
+        let currentFilter = 'all';
+        
+        // =========================================================================
+        // INITIALIZE
+        // =========================================================================
+        function init() {
+            // Merge all case sources
+            allCases = mergeAllCases();
             
-            // Update current role display
-            const roleDisplay = document.querySelector('[data-element="current-role"]');
-            if (roleDisplay) roleDisplay.textContent = config.label;
+            // Get profession from URL or localStorage
+            const urlParams = new URLSearchParams(window.location.search);
+            currentProfession = urlParams.get('profession') || 
+                               localStorage.getItem('selectedProfession') || 
+                               'medical-student';
             
-            // Update welcome title
-            const welcomeTitle = document.querySelector('[data-element="welcome-title"]');
-            if (welcomeTitle) welcomeTitle.textContent = config.welcomeTitle;
+            // Update UI
+            document.getElementById('roleSelector').value = currentProfession;
+            document.body.className = 'role-' + currentProfession;
             
-            // Update selector
-            const selector = document.getElementById('roleSelector');
-            if (selector) selector.value = professionCode;
+            // Render
+            updateForProfession(currentProfession);
             
-            // Store preference
-            localStorage.setItem('selectedProfession', professionCode);
-            sessionStorage.setItem('currentProfession', professionCode);
+            // Event listeners
+            document.getElementById('roleSelector').addEventListener('change', (e) => {
+                currentProfession = e.target.value;
+                localStorage.setItem('selectedProfession', currentProfession);
+                document.body.className = 'role-' + currentProfession;
+                updateForProfession(currentProfession);
+            });
             
-            // Dispatch event
-            window.dispatchEvent(new CustomEvent('professionChanged', { 
-                detail: { profession: professionCode, config: config }
-            }));
-            
-            console.log('[Dashboard] Updated for profession:', professionCode);
+            document.getElementById('searchInput').addEventListener('input', (e) => {
+                filterCases(e.target.value);
+            });
         }
         
-        // Initialize
-        function init() {
-            // Get stored or URL profession
-            const urlParams = new URLSearchParams(window.location.search);
-            const profession = urlParams.get('profession') || 
-                              localStorage.getItem('selectedProfession') || 
-                              'medical-student';
+        // =========================================================================
+        // MERGE ALL CASES
+        // =========================================================================
+        function mergeAllCases() {
+            let merged = {};
             
-            // Initial update
-            updateForProfession(profession);
+            // Check for each case source
+            const sources = [
+                'COACHDX_CASES',
+                'COACHDX_NURSING_CASES',
+                'COACHDX_EMS_CASES',
+                'COACHDX_RT_CASES',
+                'COACHDX_PT_CASES',
+                'COACHDX_PHARMD_CASES',
+                'COACHDX_DENTAL_CASES',
+                'COACHDX_OMFS_CASES',
+                'COACHDX_PODIATRY_CASES',
+                'COACHDX_RESIDENT_CASES',
+                'COACHDX_INTERPROFESSIONAL_CASES',
+                'COACHDX_SPECIALTY_CASES'
+            ];
             
-            // Selector handler
-            const selector = document.getElementById('roleSelector');
-            if (selector) {
-                selector.addEventListener('change', function(e) {
-                    updateForProfession(e.target.value);
+            sources.forEach(src => {
+                if (typeof window[src] !== 'undefined') {
+                    Object.assign(merged, window[src]);
+                }
+            });
+            
+            console.log('[CaseLibrary] Loaded', Object.keys(merged).length, 'total cases');
+            return merged;
+        }
+        
+        // =========================================================================
+        // UPDATE FOR PROFESSION
+        // =========================================================================
+        function updateForProfession(profession) {
+            const config = PROFESSION_CONFIG[profession] || PROFESSION_CONFIG['medical-student'];
+            
+            // Update header
+            document.getElementById('currentRoleLabel').textContent = config.label;
+            document.getElementById('heroTitle').textContent = config.heroTitle;
+            document.getElementById('heroSubtitle').textContent = config.heroSubtitle;
+            
+            // Filter cases for this profession
+            const professionCases = getCasesForProfession(profession);
+            
+            // Render cases
+            renderCases(professionCases);
+            
+            // Update stats
+            const categories = [...new Set(Object.values(professionCases).map(c => c.category))];
+            const criticalCount = Object.values(professionCases).filter(c => c.isCritical).length;
+            
+            document.getElementById('statCases').textContent = Object.keys(professionCases).length;
+            document.getElementById('statCategories').textContent = categories.length;
+            document.getElementById('statCritical').textContent = criticalCount;
+            
+            // Render category filters
+            renderCategoryFilters(categories);
+        }
+        
+        // =========================================================================
+        // GET CASES FOR PROFESSION
+        // =========================================================================
+        function getCasesForProfession(profession) {
+            const config = PROFESSION_CONFIG[profession] || PROFESSION_CONFIG['medical-student'];
+            const allowedDisciplines = config.disciplines;
+            const filtered = {};
+            
+            for (const [id, caseData] of Object.entries(allCases)) {
+                const caseDiscipline = caseData.discipline || caseData.profession;
+                
+                // Include if discipline matches OR if it's a general case for medical professions
+                if (allowedDisciplines.includes(caseDiscipline) || 
+                    (allowedDisciplines.includes(undefined) && !caseDiscipline)) {
+                    filtered[id] = caseData;
+                }
+            }
+            
+            return filtered;
+        }
+        
+        // =========================================================================
+        // RENDER CASES
+        // =========================================================================
+        function renderCases(cases) {
+            const container = document.getElementById('casesContainer');
+            const emptyState = document.getElementById('emptyState');
+            
+            if (Object.keys(cases).length === 0) {
+                container.innerHTML = '';
+                container.appendChild(emptyState);
+                emptyState.style.display = 'block';
+                return;
+            }
+            
+            emptyState.style.display = 'none';
+            
+            // Group by category
+            const byCategory = {};
+            for (const [id, caseData] of Object.entries(cases)) {
+                const cat = caseData.category || 'Other';
+                if (!byCategory[cat]) byCategory[cat] = [];
+                byCategory[cat].push({ id, ...caseData });
+            }
+            
+            // Render
+            let html = '';
+            for (const [category, categoryCases] of Object.entries(byCategory)) {
+                const icon = CATEGORY_ICONS[category] || CATEGORY_ICONS['default'];
+                
+                html += `
+                    <section class="category-section" data-category="${category.toLowerCase().replace(/\s+/g, '-')}">
+                        <div class="category-header">
+                            <span class="category-icon">${icon}</span>
+                            <span class="category-title">${category}</span>
+                            <span class="category-count">${categoryCases.length} cases</span>
+                        </div>
+                        <div class="case-grid">
+                `;
+                
+                for (const caseData of categoryCases) {
+                    const badges = [];
+                    if (caseData.isCritical) badges.push('<span class="case-badge critical">🚨 Critical</span>');
+                    if (caseData.parallelCase) badges.push('<span class="case-badge parallel">↔ Parallel</span>');
+                    if (caseData.isNew) badges.push('<span class="case-badge new">NEW</span>');
+                    
+                    const patient = caseData.patient || {};
+                    const demo = patient.age ? `${patient.age}${patient.sex ? patient.sex[0] : ''} ${patient.chiefComplaint || ''}` : (caseData.description || '').substring(0, 60) + '...';
+                    
+                    html += `
+                        <a href="mentor-chat.html?case=${caseData.id}&profession=${currentProfession}" class="case-card">
+                            <div class="case-title">${caseData.title} ${badges.join(' ')}</div>
+                            <div class="case-demo">${demo}</div>
+                            <div class="case-meta">
+                                <span class="case-time">~20 min</span>
+                            </div>
+                        </a>
+                    `;
+                }
+                
+                html += `
+                        </div>
+                    </section>
+                `;
+            }
+            
+            container.innerHTML = html;
+        }
+        
+        // =========================================================================
+        // RENDER CATEGORY FILTERS
+        // =========================================================================
+        function renderCategoryFilters(categories) {
+            const container = document.getElementById('categoryFilters');
+            
+            let html = '';
+            categories.forEach(cat => {
+                const slug = cat.toLowerCase().replace(/\s+/g, '-');
+                html += `<button class="filter-btn" data-filter="${slug}">${cat}</button>`;
+            });
+            
+            container.innerHTML = html;
+            
+            // Add event listeners
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentFilter = btn.dataset.filter;
+                    applyFilter();
                 });
+            });
+        }
+        
+        // =========================================================================
+        // FILTER CASES
+        // =========================================================================
+        function filterCases(query) {
+            const q = query.toLowerCase();
+            document.querySelectorAll('.case-card').forEach(card => {
+                const text = card.textContent.toLowerCase();
+                card.style.display = text.includes(q) ? 'block' : 'none';
+            });
+            
+            // Show all sections when searching
+            if (q) {
+                document.querySelectorAll('.category-section').forEach(s => s.style.display = 'block');
+            } else {
+                applyFilter();
             }
         }
         
-        // Run on DOM ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', init);
-        } else {
-            init();
-        }
-        
-        // Expose API
-        window.DxDashboard = { updateProfession: updateForProfession };
-    })();
-    
-    // Filter functionality
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const filter = btn.dataset.filter;
+        function applyFilter() {
             document.querySelectorAll('.category-section').forEach(section => {
-                if (filter === 'all' || section.dataset.category === filter) {
+                if (currentFilter === 'all' || section.dataset.category === currentFilter) {
                     section.style.display = 'block';
                 } else {
                     section.style.display = 'none';
                 }
             });
-        });
-    });
-    
-    // Search functionality
-    document.getElementById('searchInput').addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase();
-        document.querySelectorAll('.case-card').forEach(card => {
-            const text = card.textContent.toLowerCase();
-            card.style.display = text.includes(query) ? 'block' : 'none';
-        });
-        if (query) {
-            document.querySelectorAll('.category-section').forEach(section => {
-                section.style.display = 'block';
-            });
         }
-    });
+        
+        // Initialize on DOM ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    })();
     </script>
 </body>
 </html>
