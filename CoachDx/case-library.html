@@ -813,18 +813,36 @@
             const container = document.getElementById('categoryFilters');
             const allCasesBtn = document.querySelector('.filter-btn[data-filter="all"]');
             
-            // If a specialty is selected, show specialty-relevant categories
-            // Otherwise show the clerkship-style categories
+            // Define which categories are specialty-specific (should be hidden in "All Specialties" view)
+            const specialtyCategoriesFlat = [
+                'Anaphylaxis', 'Drug Allergy', 'Urticaria/Angioedema', 'Food Allergy', 
+                'Venom Allergy', 'Rhinitis', 'Immunodeficiency', 'Immunology',
+                // Add other specialty categories here as you add more modules
+            ];
+            
+            // Define which categories are general clerkship categories
+            const generalCategories = [
+                'Cardiovascular', 'Pulmonary', 'Respiratory', 'GI', 'Endocrine', 
+                'Renal', 'Neurology', 'Infectious Disease', 'Hematology', 'Toxicology',
+                'Emergency Medicine', 'Surgery', 'Pediatrics', 'OB/GYN', 'Psychiatry', 
+                'Critical Care', 'Asthma' // Asthma can appear in both
+            ];
+            
             let displayCategories = categories;
             
             if (currentSpecialty !== 'all' && SPECIALTY_CATEGORIES[currentSpecialty]) {
-                // Filter to only show categories that exist in the current cases
+                // Specialty selected: show only specialty-relevant categories
                 const specialtyConfig = SPECIALTY_CATEGORIES[currentSpecialty];
                 displayCategories = categories.filter(cat => 
                     specialtyConfig.categories.some(sc => 
                         cat.toLowerCase().includes(sc.toLowerCase()) || 
                         sc.toLowerCase().includes(cat.toLowerCase())
                     )
+                );
+            } else {
+                // "All Specialties" selected: hide specialty-specific categories, show general ones
+                displayCategories = categories.filter(cat => 
+                    !specialtyCategoriesFlat.includes(cat) || generalCategories.includes(cat)
                 );
             }
             
