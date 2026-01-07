@@ -3,554 +3,1146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MechanismDx - Your Learning Fingerprint</title>
-    <script src="dx-scoring.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Dx Learning Ecosystem - Your Learning Fingerprint</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); min-height: 100vh; }
-        .card { background: #1e293b; border: 1px solid #334155; }
-        .progress-ring { transform: rotate(-90deg); }
-        .mastery-cell { transition: all 0.2s; cursor: pointer; }
-        .mastery-cell:hover { transform: scale(1.1); z-index: 10; }
-        .tooltip { position: absolute; background: #0f172a; border: 1px solid #3b82f6; padding: 8px 12px; border-radius: 6px; font-size: 12px; z-index: 100; pointer-events: none; }
-        .header { background: #ffffff; border-bottom: 1px solid #e4e4e7; }
-        .header-inner { max-width: 1200px; margin: 0 auto; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
-        .logo-link { text-decoration: none; color: #18181b; display: flex; align-items: center; gap: 20px; }
-        .tagline { font-style: italic; font-size: 13px; color: #71717a; padding-left: 20px; border-left: 1px solid #e4e4e7; }
-        .header-nav { display: flex; gap: 8px; }
-        .nav-link { padding: 8px 14px; color: #71717a; text-decoration: none; font-size: 14px; font-weight: 500; border-radius: 8px; transition: all 0.15s; }
-        .nav-link:hover { background: #f4f4f5; color: #18181b; }
-        .nav-link.active { color: #18181b; background: #f4f4f5; }
-        .empty-state { text-align: center; padding: 60px 20px; }
-        .empty-state-icon { font-size: 64px; margin-bottom: 16px; }
-        @media (max-width: 768px) { .tagline { display: none; } }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Inter', system-ui, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            background: #fafafa;
+            color: #18181b;
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        .header {
+            background: #fff;
+            border-bottom: 1px solid #e4e4e7;
+            padding: 16px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: inherit;
+        }
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        .logo-text .ecosystem { color: #71717a; font-weight: 400; }
+        
+        /* Platform Switcher */
+        .platform-switcher {
+            display: flex;
+            gap: 4px;
+            padding: 4px;
+            background: #f4f4f5;
+            border-radius: 8px;
+        }
+        .platform-btn {
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #71717a;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.15s;
+            border-left: 3px solid transparent;
+        }
+        .platform-btn:hover { color: #18181b; background: rgba(255,255,255,0.5); }
+        .platform-btn.active { background: #fff; color: #18181b; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+        .platform-btn.reason { border-left-color: #3b82f6; }
+        .platform-btn.mechanism { border-left-color: #10b981; }
+        .platform-btn.coach { border-left-color: #8b5cf6; }
+        .platform-btn.fingerprint { border-left-color: #f59e0b; }
+        
+        /* Main Layout */
+        .main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+        
+        /* Page Header */
+        .page-header {
+            margin-bottom: 32px;
+        }
+        .page-title {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
+        .page-subtitle {
+            color: #71717a;
+            font-size: 16px;
+        }
+        
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+        @media (max-width: 1000px) { .dashboard-grid { grid-template-columns: 1fr; } }
+        
+        /* Platform Cards */
+        .platform-card {
+            background: #fff;
+            border: 1px solid #e4e4e7;
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.2s;
+        }
+        .platform-card:hover { border-color: #a1a1aa; }
+        .platform-card.reason { border-top: 4px solid #3b82f6; }
+        .platform-card.mechanism { border-top: 4px solid #10b981; }
+        .platform-card.coach { border-top: 4px solid #8b5cf6; }
+        
+        .platform-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .platform-card-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .platform-card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        .platform-card.reason .platform-card-icon { background: #eff6ff; }
+        .platform-card.mechanism .platform-card-icon { background: #ecfdf5; }
+        .platform-card.coach .platform-card-icon { background: #faf5ff; }
+        
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        .stat-item {
+            text-align: center;
+            padding: 12px;
+            background: #fafafa;
+            border-radius: 8px;
+        }
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #18181b;
+        }
+        .stat-label {
+            font-size: 12px;
+            color: #71717a;
+            margin-top: 4px;
+        }
+        
+        .platform-card-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background: #f4f4f5;
+            border-radius: 8px;
+            color: #18181b;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.15s;
+        }
+        .platform-card-link:hover { background: #e4e4e7; }
+        
+        /* Full Width Sections */
+        .section-full {
+            background: #fff;
+            border: 1px solid #e4e4e7;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-badge {
+            font-size: 10px;
+            padding: 3px 8px;
+            background: #fef3c7;
+            color: #92400e;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+        
+        /* Fingerprint Visualization */
+        .fingerprint-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+        @media (max-width: 800px) { .fingerprint-container { grid-template-columns: 1fr; } }
+        
+        .fingerprint-visual {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 12px;
+            padding: 24px;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .fingerprint-pattern {
+            width: 200px;
+            height: 200px;
+            position: relative;
+        }
+        .fingerprint-ring {
+            position: absolute;
+            border: 3px solid;
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+        .fingerprint-ring.outer { width: 200px; height: 200px; top: 0; left: 0; border-color: #3b82f6; }
+        .fingerprint-ring.middle { width: 150px; height: 150px; top: 25px; left: 25px; border-color: #10b981; }
+        .fingerprint-ring.inner { width: 100px; height: 100px; top: 50px; left: 50px; border-color: #8b5cf6; }
+        .fingerprint-ring.core { width: 50px; height: 50px; top: 75px; left: 75px; border-color: #f59e0b; background: #fef3c7; }
+        .fingerprint-label {
+            margin-top: 16px;
+            font-size: 14px;
+            color: #71717a;
+            text-align: center;
+        }
+        
+        .fingerprint-analysis {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .analysis-item {
+            padding: 16px;
+            background: #fafafa;
+            border-radius: 10px;
+            border-left: 4px solid #e4e4e7;
+        }
+        .analysis-item.strength { border-left-color: #22c55e; }
+        .analysis-item.growth { border-left-color: #f59e0b; }
+        .analysis-item.insight { border-left-color: #3b82f6; }
+        .analysis-title {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .analysis-text {
+            font-size: 13px;
+            color: #52525b;
+            line-height: 1.5;
+        }
+        
+        /* Correlation Matrix */
+        .correlation-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            background: #e4e4e7;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .correlation-cell {
+            background: #fff;
+            padding: 16px 12px;
+            text-align: center;
+            font-size: 13px;
+        }
+        .correlation-cell.header {
+            background: #f4f4f5;
+            font-weight: 600;
+            font-size: 12px;
+        }
+        .correlation-cell.strong { background: #dcfce7; }
+        .correlation-cell.moderate { background: #fef9c3; }
+        .correlation-cell.weak { background: #fee2e2; }
+        .correlation-value {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .correlation-label {
+            font-size: 10px;
+            color: #71717a;
+            margin-top: 4px;
+        }
+        
+        /* Cognitive Bias Alerts */
+        .bias-alerts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+        }
+        .bias-alert {
+            padding: 16px;
+            background: #fff;
+            border: 1px solid #e4e4e7;
+            border-radius: 10px;
+            display: flex;
+            gap: 12px;
+        }
+        .bias-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .bias-alert.warning .bias-icon { background: #fef3c7; }
+        .bias-alert.info .bias-icon { background: #dbeafe; }
+        .bias-alert.success .bias-icon { background: #dcfce7; }
+        .bias-content { flex: 1; }
+        .bias-title {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+        .bias-description {
+            font-size: 13px;
+            color: #52525b;
+        }
+        .bias-action {
+            margin-top: 8px;
+        }
+        .bias-action a {
+            font-size: 12px;
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .bias-action a:hover { text-decoration: underline; }
+        
+        /* Learning Journey Timeline */
+        .journey-timeline {
+            display: flex;
+            gap: 24px;
+            overflow-x: auto;
+            padding: 16px 0;
+        }
+        .journey-item {
+            flex-shrink: 0;
+            width: 200px;
+            padding: 16px;
+            background: #fafafa;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        .journey-item:hover { border-color: #e4e4e7; }
+        .journey-item.reason { border-left: 4px solid #3b82f6; }
+        .journey-item.mechanism { border-left: 4px solid #10b981; }
+        .journey-item.coach { border-left: 4px solid #8b5cf6; }
+        .journey-date {
+            font-size: 11px;
+            color: #71717a;
+            margin-bottom: 8px;
+        }
+        .journey-title {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+        .journey-detail {
+            font-size: 12px;
+            color: #52525b;
+        }
+        .journey-score {
+            margin-top: 8px;
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .journey-score.good { color: #22c55e; }
+        .journey-score.moderate { color: #f59e0b; }
+        .journey-score.needs-work { color: #ef4444; }
+        
+        /* Expert Comparison */
+        .expert-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        @media (max-width: 800px) { .expert-comparison { grid-template-columns: 1fr; } }
+        
+        .comparison-bar-container {
+            margin-bottom: 16px;
+        }
+        .comparison-bar-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+        .comparison-bar-label { font-weight: 500; }
+        .comparison-bar-value { color: #71717a; }
+        .comparison-bar {
+            height: 8px;
+            background: #e4e4e7;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+        .comparison-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        .comparison-bar-fill.student { background: #3b82f6; }
+        .comparison-bar-fill.expert { 
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: transparent;
+            border-right: 3px solid #22c55e;
+        }
+        
+        /* Recommendations */
+        .recommendations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+        }
+        .recommendation-card {
+            padding: 20px;
+            background: linear-gradient(135deg, #f8fafc 0%, #fff 100%);
+            border: 1px solid #e4e4e7;
+            border-radius: 12px;
+            transition: all 0.2s;
+        }
+        .recommendation-card:hover { border-color: #a1a1aa; transform: translateY(-2px); }
+        .recommendation-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .recommendation-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        .recommendation-card.reason .recommendation-icon { background: #eff6ff; }
+        .recommendation-card.mechanism .recommendation-icon { background: #ecfdf5; }
+        .recommendation-card.coach .recommendation-icon { background: #faf5ff; }
+        .recommendation-title {
+            font-weight: 600;
+            font-size: 15px;
+        }
+        .recommendation-reason {
+            font-size: 12px;
+            color: #71717a;
+        }
+        .recommendation-description {
+            font-size: 13px;
+            color: #52525b;
+            margin-bottom: 12px;
+        }
+        .recommendation-cta {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #18181b;
+            color: #fff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            border-radius: 6px;
+            transition: background 0.15s;
+        }
+        .recommendation-cta:hover { background: #27272a; }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 32px 24px;
+            color: #71717a;
+            font-size: 13px;
+            border-top: 1px solid #e4e4e7;
+            margin-top: 32px;
+        }
+        .footer a {
+            color: #71717a;
+            text-decoration: none;
+        }
+        .footer a:hover { color: #18181b; }
+        
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        .fingerprint-ring { animation: pulse 3s ease-in-out infinite; }
+        .fingerprint-ring.middle { animation-delay: 0.5s; }
+        .fingerprint-ring.inner { animation-delay: 1s; }
+        .fingerprint-ring.core { animation-delay: 1.5s; }
+        
+        /* No Data State */
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: #71717a;
+        }
+        .no-data-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        .no-data-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #18181b;
+            margin-bottom: 8px;
+        }
+        .no-data-text {
+            font-size: 14px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
     </style>
 </head>
-<body class="text-white">
+<body>
+    <!-- Header -->
     <header class="header">
         <div class="header-inner">
-            <a href="index.html" class="logo-link">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 70" style="height: 36px; width: auto;">
-                    <text x="5" y="45" font-family="Georgia, serif" font-size="42" fill="currentColor">Mechanism</text>
-                    <text x="213" y="45" font-family="Georgia, serif" font-size="42" fill="currentColor">D</text>
-                    <g stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none">
-                        <line x1="247" y1="24" x2="263" y2="45"/>
-                        <path d="M263 24L253 35Q249 40 249 47Q249 54 254 58Q259 62 259 68"/>
-                    </g>
-                    <ellipse cx="245" cy="22" rx="2" ry="3.5" transform="rotate(-28 245 22)" fill="currentColor"/>
-                    <ellipse cx="265" cy="22" rx="2" ry="3.5" transform="rotate(28 265 22)" fill="currentColor"/>
-                    <circle cx="259" cy="68" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
-                    <circle cx="259" cy="68" r="3.5" fill="currentColor"/>
-                </svg>
-                <span class="tagline">Your Learning Fingerprint</span>
+            <a href="ReasonDx/training.html" class="logo">
+                <span class="logo-text">Dx Learning <span class="ecosystem">Ecosystem</span></span>
             </a>
-            <nav class="header-nav">
-                <a href="index.html" class="nav-link">Modules</a>
-                <a href="challenges.html" class="nav-link">Challenges</a>
-                <a href="../unified-scoreboard.html" class="nav-link">🎯 Scoreboard</a>
-                <a href="../fingerprint-dashboard.html" class="nav-link active">Progress</a>
-            </nav>
+            <div class="platform-switcher">
+                <a href="ReasonDx/training.html" class="platform-btn reason">ReasonDx</a>
+                <a href="mechanism/index.html" class="platform-btn mechanism">MechanismDx</a>
+                <a href="CoachDx/index.html" class="platform-btn coach">CoachDx</a>
+                <a href="fingerprint-dashboard.html" class="platform-btn fingerprint active">🎯 Fingerprint</a>
+                <a href="integration-hub.html" class="platform-btn">🔗 Hub</a>
+            </div>
         </div>
     </header>
-
-    <main class="max-w-6xl mx-auto p-6">
-        <!-- Empty State (shown when no data) -->
-        <div id="empty-state" class="empty-state card rounded-xl" style="display: none;">
-            <div class="empty-state-icon">🧬</div>
-            <h2 class="text-2xl font-bold mb-2">No Data Yet</h2>
-            <p class="text-gray-400 mb-6">Complete some challenges to build your learning fingerprint!</p>
-            <a href="challenges.html" class="inline-block px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg font-semibold transition">
-                Start Challenges →
-            </a>
+    
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">🎯 Your Learning Fingerprint</h1>
+            <p class="page-subtitle">Cross-platform insights showing how your clinical reasoning develops across the Dx Learning Ecosystem</p>
         </div>
-
-        <!-- Dashboard Content (shown when data exists) -->
-        <div id="dashboard-content" style="display: none;">
-            <!-- Overview Cards -->
-            <div class="grid md:grid-cols-4 gap-4 mb-8">
-                <div class="card rounded-xl p-4">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <div class="text-2xl font-bold" id="total-connections">0</div>
-                            <div class="text-sm text-gray-400">Connections Seen</div>
-                        </div>
-                        <div class="text-3xl">🔗</div>
+        
+        <!-- Platform Summary Cards -->
+        <div class="dashboard-grid">
+            <!-- ReasonDx Card -->
+            <div class="platform-card reason">
+                <div class="platform-card-header">
+                    <h3 class="platform-card-title">ReasonDx</h3>
+                    <div class="platform-card-icon">🔬</div>
+                </div>
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <div class="stat-value" id="reason-cases">--</div>
+                        <div class="stat-label">Cases Completed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="reason-accuracy">--%</div>
+                        <div class="stat-label">Diagnostic Accuracy</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="reason-calibration">--</div>
+                        <div class="stat-label">Calibration Score</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="reason-streak">--</div>
+                        <div class="stat-label">Current Streak</div>
                     </div>
                 </div>
-                
-                <div class="card rounded-xl p-4">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <div class="text-2xl font-bold text-green-400" id="mastered-count">0</div>
-                            <div class="text-sm text-gray-400">Mastered</div>
-                        </div>
-                        <div class="text-3xl">✅</div>
+                <a href="ReasonDx/training.html" class="platform-card-link">Practice Cases →</a>
+            </div>
+            
+            <!-- MechanismDx Card -->
+            <div class="platform-card mechanism">
+                <div class="platform-card-header">
+                    <h3 class="platform-card-title">MechanismDx</h3>
+                    <div class="platform-card-icon">⚙️</div>
+                </div>
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <div class="stat-value" id="mechanism-modules">--</div>
+                        <div class="stat-label">Modules Studied</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="mechanism-mastery">--%</div>
+                        <div class="stat-label">Avg Mastery</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="mechanism-questions">--</div>
+                        <div class="stat-label">Questions Done</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="mechanism-pathways">--</div>
+                        <div class="stat-label">Pathways Built</div>
                     </div>
                 </div>
-                
-                <div class="card rounded-xl p-4">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <div class="text-2xl font-bold text-amber-400" id="learning-count">0</div>
-                            <div class="text-sm text-gray-400">Learning</div>
-                        </div>
-                        <div class="text-3xl">📚</div>
+                <a href="mechanism/index.html" class="platform-card-link">Study Mechanisms →</a>
+            </div>
+            
+            <!-- CoachDx Card -->
+            <div class="platform-card coach">
+                <div class="platform-card-header">
+                    <h3 class="platform-card-title">CoachDx</h3>
+                    <div class="platform-card-icon">🩺</div>
+                </div>
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <div class="stat-value" id="coach-sessions">--</div>
+                        <div class="stat-label">Teaching Sessions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="coach-questions">--</div>
+                        <div class="stat-label">Questions Answered</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="coach-insights">--</div>
+                        <div class="stat-label">Insights Gained</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="coach-trend">--</div>
+                        <div class="stat-label">Reasoning Trend</div>
                     </div>
                 </div>
-                
-                <div class="card rounded-xl p-4">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <div class="text-2xl font-bold text-orange-400" id="streak-count">0</div>
-                            <div class="text-sm text-gray-400">Day Streak</div>
-                        </div>
-                        <div class="text-3xl">🔥</div>
+                <a href="CoachDx/index.html" class="platform-card-link">Start Coaching →</a>
+            </div>
+        </div>
+        
+        <!-- Reasoning Pathway Fingerprint -->
+        <div class="section-full">
+            <div class="section-header">
+                <h2 class="section-title">
+                    🧬 Reasoning Pathway Fingerprint
+                    <span class="section-badge">RPFS</span>
+                </h2>
+            </div>
+            <div class="fingerprint-container">
+                <div class="fingerprint-visual">
+                    <div class="fingerprint-pattern">
+                        <div class="fingerprint-ring outer"></div>
+                        <div class="fingerprint-ring middle"></div>
+                        <div class="fingerprint-ring inner"></div>
+                        <div class="fingerprint-ring core"></div>
+                    </div>
+                    <div class="fingerprint-label">
+                        Your unique reasoning pattern<br>
+                        <strong>78% alignment with expert pathways</strong>
+                    </div>
+                </div>
+                <div class="fingerprint-analysis">
+                    <div class="analysis-item strength">
+                        <div class="analysis-title">💪 Reasoning Strength</div>
+                        <div class="analysis-text">You consistently gather comprehensive history before forming hypotheses. Your information-seeking pattern shows systematic coverage of key diagnostic features.</div>
+                    </div>
+                    <div class="analysis-item growth">
+                        <div class="analysis-title">🌱 Growth Opportunity</div>
+                        <div class="analysis-text">Consider revising your initial differential earlier in the workup. Expert pathways show hypothesis refinement after each new data point, while your pattern tends to wait until all data is collected.</div>
+                    </div>
+                    <div class="analysis-item insight">
+                        <div class="analysis-title">💡 Cross-Platform Insight</div>
+                        <div class="analysis-text">Your cardiology mechanism mastery (92%) correlates strongly with your ACS case accuracy (88%). Consider building similar foundational knowledge in pulmonology to improve pneumonia case performance.</div>
                     </div>
                 </div>
             </div>
-
-            <div class="grid md:grid-cols-3 gap-6">
-                <!-- Left Column: Domain Mastery & Heatmap -->
-                <div class="md:col-span-2 space-y-6">
-                    <!-- Domain Mastery -->
-                    <div class="card rounded-xl p-6">
-                        <h2 class="text-lg font-semibold mb-4">Domain Mastery</h2>
-                        <div id="domain-mastery" class="space-y-4">
-                            <!-- Populated by JS -->
-                        </div>
-                    </div>
-                    
-                    <!-- Connection Strength Map -->
-                    <div class="card rounded-xl p-6">
-                        <h2 class="text-lg font-semibold mb-2">Connection Strength Map</h2>
-                        <p class="text-sm text-gray-400 mb-4">Each cell = one mechanism connection. Hover for details.</p>
-                        <div id="heatmap" class="grid grid-cols-10 gap-1">
-                            <!-- Populated by JS -->
-                        </div>
-                        <div class="flex gap-4 mt-4 text-xs text-gray-400">
-                            <span class="flex items-center gap-1"><span class="w-3 h-3 bg-green-500 rounded"></span> Mastered</span>
-                            <span class="flex items-center gap-1"><span class="w-3 h-3 bg-amber-500 rounded"></span> Learning</span>
-                            <span class="flex items-center gap-1"><span class="w-3 h-3 bg-red-500 rounded"></span> Weak</span>
-                            <span class="flex items-center gap-1"><span class="w-3 h-3 bg-slate-600 rounded"></span> Not started</span>
-                        </div>
-                    </div>
-
-                    <!-- Challenge Type Breakdown -->
-                    <div class="card rounded-xl p-6">
-                        <h2 class="text-lg font-semibold mb-4">Challenge Type Performance</h2>
-                        <div id="challenge-types" class="grid grid-cols-2 gap-4">
-                            <!-- Populated by JS -->
+        </div>
+        
+        <!-- Cross-Platform Correlation Matrix -->
+        <div class="section-full">
+            <div class="section-header">
+                <h2 class="section-title">
+                    🔗 Cross-Platform Learning Correlation
+                    <span class="section-badge">CPLC</span>
+                </h2>
+            </div>
+            <div class="correlation-grid">
+                <div class="correlation-cell header"></div>
+                <div class="correlation-cell header">Cardio</div>
+                <div class="correlation-cell header">Pulm</div>
+                <div class="correlation-cell header">Neuro</div>
+                
+                <div class="correlation-cell header">MechanismDx Mastery</div>
+                <div class="correlation-cell strong">
+                    <div class="correlation-value">92%</div>
+                    <div class="correlation-label">Strong</div>
+                </div>
+                <div class="correlation-cell moderate">
+                    <div class="correlation-value">68%</div>
+                    <div class="correlation-label">Building</div>
+                </div>
+                <div class="correlation-cell weak">
+                    <div class="correlation-value">45%</div>
+                    <div class="correlation-label">Needs Work</div>
+                </div>
+                
+                <div class="correlation-cell header">ReasonDx Accuracy</div>
+                <div class="correlation-cell strong">
+                    <div class="correlation-value">88%</div>
+                    <div class="correlation-label">Excellent</div>
+                </div>
+                <div class="correlation-cell moderate">
+                    <div class="correlation-value">72%</div>
+                    <div class="correlation-label">Good</div>
+                </div>
+                <div class="correlation-cell weak">
+                    <div class="correlation-value">58%</div>
+                    <div class="correlation-label">Developing</div>
+                </div>
+                
+                <div class="correlation-cell header">CoachDx Performance</div>
+                <div class="correlation-cell strong">
+                    <div class="correlation-value">85%</div>
+                    <div class="correlation-label">Strong</div>
+                </div>
+                <div class="correlation-cell moderate">
+                    <div class="correlation-value">70%</div>
+                    <div class="correlation-label">Good</div>
+                </div>
+                <div class="correlation-cell weak">
+                    <div class="correlation-value">52%</div>
+                    <div class="correlation-label">Growing</div>
+                </div>
+            </div>
+            <p style="text-align: center; color: #71717a; font-size: 13px; margin-top: 16px;">
+                💡 <strong>Insight:</strong> Your performance correlates across platforms — mechanism mastery predicts case accuracy!
+            </p>
+        </div>
+        
+        <!-- Cognitive Bias Detection -->
+        <div class="section-full">
+            <div class="section-header">
+                <h2 class="section-title">
+                    🧠 Cognitive Bias Detection
+                    <span class="section-badge">CBDA</span>
+                </h2>
+            </div>
+            <div class="bias-alerts">
+                <div class="bias-alert warning">
+                    <div class="bias-icon">⚠️</div>
+                    <div class="bias-content">
+                        <div class="bias-title">Anchoring Detected</div>
+                        <div class="bias-description">In 3 recent cases, your initial diagnosis remained unchanged despite contradictory evidence. Consider actively seeking disconfirming data.</div>
+                        <div class="bias-action">
+                            <a href="mechanism/index.html">Practice with MechanismDx Differential Builder →</a>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Right Column: Calibration, Gaps, Export -->
-                <div class="space-y-6">
-                    <!-- Calibration Score -->
-                    <div class="card rounded-xl p-6">
-                        <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
-                            📊 Confidence Calibration
-                        </h2>
-                        <div class="flex items-center justify-center mb-4">
-                            <svg class="w-32 h-32" viewBox="0 0 120 120">
-                                <circle cx="60" cy="60" r="54" fill="none" stroke="#334155" stroke-width="12"/>
-                                <circle id="calibration-ring" class="progress-ring" cx="60" cy="60" r="54" fill="none" 
-                                        stroke="#22c55e" stroke-width="12" stroke-linecap="round"
-                                        stroke-dasharray="339.3" stroke-dashoffset="339.3"/>
-                            </svg>
-                            <div class="absolute text-center">
-                                <div class="text-3xl font-bold" id="calibration-score">--</div>
-                                <div class="text-xs text-gray-400">Error</div>
-                            </div>
-                        </div>
-                        <div class="text-center">
-                            <div id="calibration-status" class="text-sm font-medium mb-2">No data yet</div>
-                            <div class="text-xs text-gray-400">
-                                Avg Confidence: <span id="avg-confidence">--</span>% | 
-                                Avg Accuracy: <span id="avg-accuracy">--</span>%
-                            </div>
+                <div class="bias-alert info">
+                    <div class="bias-icon">💡</div>
+                    <div class="bias-content">
+                        <div class="bias-title">Availability Heuristic</div>
+                        <div class="bias-description">Your recent cases show preference for diagnoses you've seen recently. Try broadening your differential before narrowing.</div>
+                        <div class="bias-action">
+                            <a href="ReasonDx/training.html">Explore diverse case categories →</a>
                         </div>
                     </div>
-                    
-                    <!-- Priority Gaps -->
-                    <div class="card rounded-xl p-6">
-                        <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
-                            🎯 Priority Gaps
-                        </h2>
-                        <div id="gaps-list" class="space-y-3">
-                            <p class="text-gray-400 text-sm">Complete more challenges to identify gaps.</p>
+                </div>
+                <div class="bias-alert success">
+                    <div class="bias-icon">✅</div>
+                    <div class="bias-content">
+                        <div class="bias-title">Strong Calibration</div>
+                        <div class="bias-description">Your confidence levels match your accuracy well in cardiology cases. Keep building this metacognitive awareness!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Recent Learning Journey -->
+        <div class="section-full">
+            <div class="section-header">
+                <h2 class="section-title">📅 Recent Learning Journey</h2>
+            </div>
+            <div class="journey-timeline">
+                <div class="journey-item reason">
+                    <div class="journey-date">Today, 2:30 PM</div>
+                    <div class="journey-title">Chest Pain Case</div>
+                    <div class="journey-detail">STEMI vs NSTEMI differentiation</div>
+                    <div class="journey-score good">92%</div>
+                </div>
+                <div class="journey-item mechanism">
+                    <div class="journey-date">Today, 11:00 AM</div>
+                    <div class="journey-title">ACS Mechanisms</div>
+                    <div class="journey-detail">Plaque rupture pathophysiology</div>
+                    <div class="journey-score good">88%</div>
+                </div>
+                <div class="journey-item coach">
+                    <div class="journey-date">Yesterday, 4:15 PM</div>
+                    <div class="journey-title">Coaching Session</div>
+                    <div class="journey-detail">Heart failure workup guided</div>
+                    <div class="journey-score moderate">76%</div>
+                </div>
+                <div class="journey-item reason">
+                    <div class="journey-date">Yesterday, 10:30 AM</div>
+                    <div class="journey-title">Dyspnea Case</div>
+                    <div class="journey-detail">CHF exacerbation diagnosis</div>
+                    <div class="journey-score good">85%</div>
+                </div>
+                <div class="journey-item mechanism">
+                    <div class="journey-date">2 days ago</div>
+                    <div class="journey-title">CHF Pathways</div>
+                    <div class="journey-detail">Compensatory mechanisms</div>
+                    <div class="journey-score good">90%</div>
+                </div>
+                <div class="journey-item reason">
+                    <div class="journey-date">3 days ago</div>
+                    <div class="journey-title">Syncope Case</div>
+                    <div class="journey-detail">Cardiac vs non-cardiac</div>
+                    <div class="journey-score needs-work">62%</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Expert Pathway Comparison -->
+        <div class="section-full">
+            <div class="section-header">
+                <h2 class="section-title">
+                    👨‍⚕️ Expert Pathway Comparison
+                    <span class="section-badge">EPE</span>
+                </h2>
+            </div>
+            <div class="expert-comparison">
+                <div>
+                    <h4 style="font-size: 14px; margin-bottom: 16px; color: #52525b;">Information Gathering Pattern</h4>
+                    <div class="comparison-bar-container">
+                        <div class="comparison-bar-header">
+                            <span class="comparison-bar-label">History Taking</span>
+                            <span class="comparison-bar-value">You: 85% | Expert: 90%</span>
+                        </div>
+                        <div class="comparison-bar">
+                            <div class="comparison-bar-fill student" style="width: 85%"></div>
+                            <div class="comparison-bar-fill expert" style="width: 90%"></div>
                         </div>
                     </div>
-                    
-                    <!-- Export Section -->
-                    <div class="card rounded-xl p-6">
-                        <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
-                            📤 Export Data
-                        </h2>
-                        <div class="space-y-2">
-                            <button onclick="exportJSON()" class="w-full px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm font-medium transition">
-                                Export Full JSON
-                            </button>
-                            <button onclick="exportCSV()" class="w-full px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm font-medium transition">
-                                Export CSV Summary
-                            </button>
-                            <button onclick="exportSheets()" class="w-full px-4 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-sm font-medium transition">
-                                📋 Copy for Google Sheets
-                            </button>
+                    <div class="comparison-bar-container">
+                        <div class="comparison-bar-header">
+                            <span class="comparison-bar-label">Physical Exam Focus</span>
+                            <span class="comparison-bar-value">You: 78% | Expert: 92%</span>
                         </div>
-                        <div class="mt-4 pt-4 border-t border-slate-700">
-                            <label class="block text-xs text-gray-400 mb-2">Study ID (optional)</label>
-                            <input type="text" id="study-id-input" placeholder="Enter your Study ID" 
-                                   class="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded text-sm"
-                                   onchange="saveStudyId()">
+                        <div class="comparison-bar">
+                            <div class="comparison-bar-fill student" style="width: 78%"></div>
+                            <div class="comparison-bar-fill expert" style="width: 92%"></div>
                         </div>
                     </div>
+                    <div class="comparison-bar-container">
+                        <div class="comparison-bar-header">
+                            <span class="comparison-bar-label">Test Ordering Efficiency</span>
+                            <span class="comparison-bar-value">You: 72% | Expert: 88%</span>
+                        </div>
+                        <div class="comparison-bar">
+                            <div class="comparison-bar-fill student" style="width: 72%"></div>
+                            <div class="comparison-bar-fill expert" style="width: 88%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="font-size: 14px; margin-bottom: 16px; color: #52525b;">Reasoning Process Pattern</h4>
+                    <div class="comparison-bar-container">
+                        <div class="comparison-bar-header">
+                            <span class="comparison-bar-label">Hypothesis Generation</span>
+                            <span class="comparison-bar-value">You: 82% | Expert: 85%</span>
+                        </div>
+                        <div class="comparison-bar">
+                            <div class="comparison-bar-fill student" style="width: 82%"></div>
+                            <div class="comparison-bar-fill expert" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="comparison-bar-container">
+                        <div class="comparison-bar-header">
+                            <span class="comparison-bar-label">Evidence Integration</span>
+                            <span class="comparison-bar-value">You: 75% | Expert: 95%</span>
+                        </div>
+                        <div class="comparison-bar">
+                            <div class="comparison-bar-fill student" style="width: 75%"></div>
+                            <div class="comparison-bar-fill expert" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="comparison-bar-container">
+                        <div class="comparison-bar-header">
+                            <span class="comparison-bar-label">Diagnostic Closure</span>
+                            <span class="comparison-bar-value">You: 80% | Expert: 88%</span>
+                        </div>
+                        <div class="comparison-bar">
+                            <div class="comparison-bar-fill student" style="width: 80%"></div>
+                            <div class="comparison-bar-fill expert" style="width: 88%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Personalized Recommendations -->
+        <div class="section-full">
+            <div class="section-header">
+                <h2 class="section-title">🎯 Personalized Recommendations</h2>
+            </div>
+            <div class="recommendations-grid">
+                <div class="recommendation-card mechanism">
+                    <div class="recommendation-header">
+                        <div class="recommendation-icon">⚙️</div>
+                        <div>
+                            <div class="recommendation-title">Pulmonary Mechanisms</div>
+                            <div class="recommendation-reason">Based on your correlation data</div>
+                        </div>
+                    </div>
+                    <div class="recommendation-description">Your pulmonology mechanism mastery (68%) is limiting your pneumonia case performance. Building foundational pathophysiology will improve your diagnostic accuracy.</div>
+                    <a href="mechanism/index.html" class="recommendation-cta">Start Module →</a>
+                </div>
+                <div class="recommendation-card coach">
+                    <div class="recommendation-header">
+                        <div class="recommendation-icon">🩺</div>
+                        <div>
+                            <div class="recommendation-title">Evidence Integration Coaching</div>
+                            <div class="recommendation-reason">Based on expert comparison</div>
+                        </div>
+                    </div>
+                    <div class="recommendation-description">Practice with the AI attending to improve how you integrate new evidence into your differential. This is your biggest gap vs expert pathways.</div>
+                    <a href="CoachDx/index.html" class="recommendation-cta">Start Session →</a>
+                </div>
+                <div class="recommendation-card reason">
+                    <div class="recommendation-header">
+                        <div class="recommendation-icon">🔬</div>
+                        <div>
+                            <div class="recommendation-title">Syncope Case Series</div>
+                            <div class="recommendation-reason">Based on recent performance</div>
+                        </div>
+                    </div>
+                    <div class="recommendation-description">Your syncope case (62%) shows room for improvement. Try 3 more syncope cases to build pattern recognition in this common presentation.</div>
+                    <a href="ReasonDx/training.html" class="recommendation-cta">Find Cases →</a>
                 </div>
             </div>
         </div>
     </main>
-
-    <!-- Include the research module -->
-    <script src="research-data-module.js"></script>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Dx Learning Ecosystem • <a href="ReasonDx/training.html">ReasonDx</a> • <a href="mechanism/index.html">MechanismDx</a> • <a href="CoachDx/index.html">CoachDx</a></p>
+        <p style="margin-top: 8px;">© 2026 Lauren Fine, MD. Clinical reasoning education reimagined.</p>
+    </footer>
     
     <script>
-    // =============================================
-    // Dashboard Rendering
-    // =============================================
+    // ============================================================
+    // FINGERPRINT DASHBOARD VIEW TRACKING
+    // ============================================================
     
-    let fingerprintData = null;
+    // Google Apps Script URL
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwBMlYBWeF5QJjOxOH8_c-M47seJxojWlrekyTk2XGAKRTp99ghl0F3kW9y1kfVIAhG/exec';
     
-    function init() {
-        // Load data
-        const state = loadState();
+    // Track dashboard view
+    const fingerprintViewData = {
+        type: 'FINGERPRINT_VIEW',
+        timestamp: new Date().toISOString(),
+        study_id: localStorage.getItem('reasondx_student_code') || 
+                  localStorage.getItem('visibleStudentCode') || 
+                  localStorage.getItem('visibleStudyId') || 'UNKNOWN',
+        referrer: document.referrer || 'direct',
+        time_on_page: 0,
+        sections_viewed: []
+    };
+    
+    // Track which sections user views
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const sectionClass = entry.target.className.split(' ')[0];
+                    if (sectionClass && !fingerprintViewData.sections_viewed.includes(sectionClass)) {
+                        fingerprintViewData.sections_viewed.push(sectionClass);
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
         
-        // Check if we have any data
-        const hasData = state && state.calibrationData && state.calibrationData.length > 0;
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.section-full, .platform-card').forEach(el => observer.observe(el));
+        });
+    }
+    
+    // Export on page unload
+    window.addEventListener('beforeunload', () => {
+        fingerprintViewData.time_on_page = Math.round((Date.now() - new Date(fingerprintViewData.timestamp).getTime()) / 1000);
         
-        if (!hasData) {
-            document.getElementById('empty-state').style.display = 'block';
-            document.getElementById('dashboard-content').style.display = 'none';
-            return;
+        if (GOOGLE_SCRIPT_URL && navigator.sendBeacon) {
+            navigator.sendBeacon(GOOGLE_SCRIPT_URL, JSON.stringify(fingerprintViewData));
         }
         
-        document.getElementById('empty-state').style.display = 'none';
-        document.getElementById('dashboard-content').style.display = 'block';
-        
-        // Generate fingerprint
-        fingerprintData = generateFingerprint(state);
-        
-        // Populate study ID if saved
-        if (state.user_id) {
-            document.getElementById('study-id-input').value = state.user_id;
+        // Also save locally
+        try {
+            const views = JSON.parse(localStorage.getItem('fingerprintViews') || '[]');
+            views.push(fingerprintViewData);
+            if (views.length > 50) views.shift();
+            localStorage.setItem('fingerprintViews', JSON.stringify(views));
+        } catch(e) {}
+    });
+    
+    // Also export after 30 seconds
+    setTimeout(() => {
+        if (GOOGLE_SCRIPT_URL) {
+            fingerprintViewData.time_on_page = 30;
+            fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(fingerprintViewData)
+            }).catch(() => {});
         }
-        
-        // Render all sections
-        renderOverview();
-        renderDomainMastery();
-        renderHeatmap();
-        renderChallengeTypes();
-        renderCalibration();
-        renderGaps();
-    }
+    }, 30000);
+
+    // ============================================================
+    // Cross-Platform Data Integration
+    // ============================================================
+    // This script loads data from all three platforms and displays unified analytics
     
-    function loadState() {
-        // Try new format first
-        let saved = localStorage.getItem('mechanismdx_research_v1');
-        if (saved) return JSON.parse(saved);
+    (function() {
+        'use strict';
         
-        // Fall back to old format
-        saved = localStorage.getItem('mechanismdx_state');
-        if (saved) return JSON.parse(saved);
-        
-        return null;
-    }
-    
-    function generateFingerprint(state) {
-        // Calculate summary stats
-        const connections = state.connections ? Object.values(state.connections) : [];
-        const mastered = connections.filter(c => c.mastery_level === 'mastered').length;
-        const learning = connections.filter(c => c.mastery_level === 'learning').length;
-        const weak = connections.filter(c => c.mastery_level === 'weak').length;
-        
-        // Calibration
-        let avgConfidence = 0, avgAccuracy = 0;
-        if (state.calibrationData && state.calibrationData.length > 0) {
-            avgConfidence = state.calibrationData.reduce((a, b) => a + b.confidence, 0) / state.calibrationData.length;
-            avgAccuracy = state.calibrationData.reduce((a, b) => a + b.accuracy, 0) / state.calibrationData.length;
-        }
-        
-        // Domain mastery
-        const systemPerf = state.systemPerformance || {};
-        const domainMastery = Object.entries(systemPerf)
-            .filter(([_, data]) => data.attempted > 0)
-            .map(([system, data]) => ({
-                system,
-                name: getSystemName(system),
-                attempted: data.attempted,
-                correct: data.correct,
-                mastery: data.attempted > 0 ? data.correct / data.attempted : 0
-            }))
-            .sort((a, b) => b.mastery - a.mastery);
-        
-        // Gaps
-        const gaps = connections
-            .filter(c => c.mastery_level === 'weak' || (c.attempts > 0 && c.correct / c.attempts < 0.5))
-            .map(c => ({
-                topic: c.challenge_id,
-                domain: c.system,
-                priority: c.correct / c.attempts < 0.3 ? 'high' : 'medium',
-                reason: `${Math.round((c.correct / c.attempts) * 100)}% correct in ${c.attempts} attempts`
-            }))
-            .slice(0, 5);
-        
-        return {
-            stats: {
-                totalConnections: connections.length,
-                mastered,
-                learning,
-                weak,
-                dayStreak: state.dayStreak || 0,
-                totalXP: state.xp || 0,
-                maxStreak: state.maxStreak || 0
-            },
-            calibration: {
-                avgConfidence: Math.round(avgConfidence),
-                avgAccuracy: Math.round(avgAccuracy),
-                error: Math.round(Math.abs(avgConfidence - avgAccuracy)),
-                status: Math.abs(avgConfidence - avgAccuracy) < 10 ? 'well_calibrated' :
-                        avgConfidence > avgAccuracy ? 'overconfident' : 'underconfident'
-            },
-            domainMastery,
-            connections: connections.map(c => ({
-                ...c,
-                strength: c.attempts > 0 ? c.correct / c.attempts : 0
-            })),
-            gaps,
-            challengeTypes: state.challengeTypePerformance || {
-                predict: { attempted: 0, correct: 0 },
-                pathway: { attempted: 0, correct: 0 },
-                connector: { attempted: 0, substantive: 0 },
-                whatif: { attempted: 0, correct: 0 }
-            }
-        };
-    }
-    
-    function getSystemName(code) {
-        const names = {
-            cardio: 'Cardiovascular',
-            resp: 'Respiratory',
-            renal: 'Renal',
-            gi: 'GI/Hepatic',
-            neuro: 'Neurological',
-            endo: 'Endocrine',
-            heme: 'Hematology',
-            id: 'Infectious Disease'
-        };
-        return names[code] || code;
-    }
-    
-    function renderOverview() {
-        const stats = fingerprintData.stats;
-        document.getElementById('total-connections').textContent = stats.totalConnections;
-        document.getElementById('mastered-count').textContent = stats.mastered;
-        document.getElementById('learning-count').textContent = stats.learning;
-        document.getElementById('streak-count').textContent = stats.dayStreak;
-    }
-    
-    function renderDomainMastery() {
-        const container = document.getElementById('domain-mastery');
-        
-        if (fingerprintData.domainMastery.length === 0) {
-            container.innerHTML = '<p class="text-gray-400 text-sm">Complete challenges to see domain mastery.</p>';
-            return;
-        }
-        
-        container.innerHTML = fingerprintData.domainMastery.map(domain => {
-            const pct = Math.round(domain.mastery * 100);
-            const color = pct >= 70 ? 'bg-green-500' : pct >= 40 ? 'bg-amber-500' : 'bg-red-500';
-            
-            return `
-                <div>
-                    <div class="flex justify-between text-sm mb-1">
-                        <span>${domain.name}</span>
-                        <span class="text-gray-400">${domain.correct}/${domain.attempted} (${pct}%)</span>
-                    </div>
-                    <div class="h-3 bg-slate-700 rounded-full overflow-hidden">
-                        <div class="h-full rounded-full ${color}" style="width: ${pct}%"></div>
-                    </div>
-                </div>
-            `;
-        }).join('');
-    }
-    
-    function renderHeatmap() {
-        const container = document.getElementById('heatmap');
-        
-        if (fingerprintData.connections.length === 0) {
-            container.innerHTML = '<p class="text-gray-400 text-sm col-span-10">Complete challenges to see your connection map.</p>';
-            return;
-        }
-        
-        // Sort by system for visual grouping
-        const sorted = [...fingerprintData.connections].sort((a, b) => 
-            (a.system || '').localeCompare(b.system || '')
-        );
-        
-        container.innerHTML = sorted.map(conn => {
-            const color = conn.mastery_level === 'mastered' ? 'bg-green-500' :
-                          conn.mastery_level === 'learning' ? 'bg-amber-500' :
-                          conn.mastery_level === 'weak' ? 'bg-red-500' : 'bg-slate-600';
-            
-            const pct = Math.round(conn.strength * 100);
-            
-            return `
-                <div class="mastery-cell w-full aspect-square rounded ${color}"
-                     title="${getSystemName(conn.system)}: ${conn.challenge_id}\n${pct}% correct (${conn.correct}/${conn.attempts})"
-                     data-conn-id="${conn.challenge_id}">
-                </div>
-            `;
-        }).join('');
-    }
-    
-    function renderChallengeTypes() {
-        const container = document.getElementById('challenge-types');
-        const types = fingerprintData.challengeTypes;
-        
-        const typeInfo = [
-            { key: 'predict', name: '🔬 Predict Labs', correct: types.predict?.correct || 0, attempted: types.predict?.attempted || 0 },
-            { key: 'pathway', name: '🧩 Build Pathway', correct: types.pathway?.correct || 0, attempted: types.pathway?.attempted || 0 },
-            { key: 'connector', name: '🔗 What\'s the Link', correct: types.connector?.substantive || 0, attempted: types.connector?.attempted || 0 },
-            { key: 'whatif', name: '🎯 What If', correct: types.whatif?.correct || 0, attempted: types.whatif?.attempted || 0 }
-        ];
-        
-        container.innerHTML = typeInfo.map(t => {
-            const pct = t.attempted > 0 ? Math.round((t.correct / t.attempted) * 100) : 0;
-            const color = pct >= 70 ? 'text-green-400' : pct >= 40 ? 'text-amber-400' : 'text-red-400';
-            
-            return `
-                <div class="bg-slate-800 rounded-lg p-4">
-                    <div class="text-sm mb-1">${t.name}</div>
-                    <div class="text-2xl font-bold ${color}">${pct}%</div>
-                    <div class="text-xs text-gray-400">${t.correct}/${t.attempted} correct</div>
-                </div>
-            `;
-        }).join('');
-    }
-    
-    function renderCalibration() {
-        const cal = fingerprintData.calibration;
-        
-        document.getElementById('avg-confidence').textContent = cal.avgConfidence;
-        document.getElementById('avg-accuracy').textContent = cal.avgAccuracy;
-        document.getElementById('calibration-score').textContent = cal.error + '%';
-        
-        // Update ring
-        const maxError = 50; // 50% error = full ring
-        const percent = Math.min(1 - (cal.error / maxError), 1);
-        const offset = 339.3 * (1 - percent);
-        const ring = document.getElementById('calibration-ring');
-        ring.style.strokeDashoffset = offset;
-        
-        // Color based on calibration
-        if (cal.error < 10) {
-            ring.style.stroke = '#22c55e'; // green
-        } else if (cal.error < 20) {
-            ring.style.stroke = '#f59e0b'; // amber
-        } else {
-            ring.style.stroke = '#ef4444'; // red
-        }
-        
-        // Status text
-        const statusEl = document.getElementById('calibration-status');
-        if (cal.status === 'well_calibrated') {
-            statusEl.textContent = '✅ Well Calibrated';
-            statusEl.className = 'text-sm font-medium text-green-400';
-        } else if (cal.status === 'overconfident') {
-            statusEl.textContent = '⚠️ Overconfident';
-            statusEl.className = 'text-sm font-medium text-amber-400';
-        } else {
-            statusEl.textContent = '💪 Underconfident';
-            statusEl.className = 'text-sm font-medium text-blue-400';
-        }
-    }
-    
-    function renderGaps() {
-        const container = document.getElementById('gaps-list');
-        
-        if (fingerprintData.gaps.length === 0) {
-            container.innerHTML = '<p class="text-gray-400 text-sm">No significant gaps identified yet. Keep practicing!</p>';
-            return;
-        }
-        
-        container.innerHTML = fingerprintData.gaps.map(gap => {
-            const priorityColor = gap.priority === 'high' ? 
-                'text-red-400 bg-red-500/20' : 'text-amber-400 bg-amber-500/20';
-            
-            return `
-                <div class="bg-slate-700/50 rounded-lg p-3">
-                    <div class="flex items-center gap-2 mb-1">
-                        <span class="${priorityColor} text-xs px-2 py-0.5 rounded">${gap.priority}</span>
-                        <span class="text-sm font-medium">${gap.topic}</span>
-                    </div>
-                    <div class="text-xs text-gray-400">${getSystemName(gap.domain)} • ${gap.reason}</div>
-                    <a href="challenges.html" class="inline-block mt-2 text-xs text-blue-400 hover:text-blue-300">
-                        Practice this →
-                    </a>
-                </div>
-            `;
-        }).join('');
-    }
-    
-    // =============================================
-    // Export Functions
-    // =============================================
-    
-    function exportJSON() {
-        if (window.MechanismDxResearch) {
-            window.MechanismDxResearch.exportJSON();
-        } else {
-            // Fallback
-            const state = loadState();
-            const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'mechanismdx_data.json';
-            a.click();
-        }
-    }
-    
-    function exportCSV() {
-        if (window.MechanismDxResearch) {
-            window.MechanismDxResearch.exportCSV();
-        } else {
-            alert('Export module not loaded. Please refresh the page.');
-        }
-    }
-    
-    function exportSheets() {
-        if (window.MechanismDxResearch) {
-            window.MechanismDxResearch.exportSheets();
-        } else {
-            alert('Export module not loaded. Please refresh the page.');
-        }
-    }
-    
-    function saveStudyId() {
-        const id = document.getElementById('study-id-input').value.trim();
-        if (window.MechanismDxResearch) {
-            window.MechanismDxResearch.setStudyId(id);
-        } else {
-            const state = loadState();
-            if (state) {
-                state.user_id = id;
-                localStorage.setItem('mechanismdx_research_v1', JSON.stringify(state));
+        // Load ReasonDx data from localStorage
+        function loadReasonDxData() {
+            try {
+                const playerData = JSON.parse(localStorage.getItem('reasonDxPlayerData') || '{}');
+                const caseHistory = JSON.parse(localStorage.getItem('reasonDxCaseHistory') || '[]');
+                
+                return {
+                    casesCompleted: playerData.casesCompleted || caseHistory.length || 0,
+                    accuracy: playerData.diagnosticAccuracy || calculateAccuracy(caseHistory),
+                    calibration: playerData.calibrationScore || '--',
+                    streak: playerData.currentStreak || 0,
+                    history: caseHistory
+                };
+            } catch (e) {
+                return { casesCompleted: 0, accuracy: '--', calibration: '--', streak: 0, history: [] };
             }
         }
-    }
-    
-    // Initialize on load
-    document.addEventListener('DOMContentLoaded', init);
+        
+        // Load MechanismDx data from localStorage
+        function loadMechanismDxData() {
+            try {
+                const progress = JSON.parse(localStorage.getItem('mechanismDxProgress') || '{}');
+                const modules = Object.keys(progress).length;
+                const masterySum = Object.values(progress).reduce((sum, m) => sum + (m.mastery || 0), 0);
+                const avgMastery = modules > 0 ? Math.round(masterySum / modules) : 0;
+                const questionsTotal = Object.values(progress).reduce((sum, m) => sum + (m.questionsAnswered || 0), 0);
+                const pathwaysBuilt = Object.values(progress).reduce((sum, m) => sum + (m.pathwaysCompleted || 0), 0);
+                
+                return {
+                    modules: modules,
+                    mastery: avgMastery,
+                    questions: questionsTotal,
+                    pathways: pathwaysBuilt
+                };
+            } catch (e) {
+                return { modules: 0, mastery: 0, questions: 0, pathways: 0 };
+            }
+        }
+        
+        // Load CoachDx data from localStorage
+        function loadCoachDxData() {
+            try {
+                const sessions = JSON.parse(localStorage.getItem('coachdx_sessions') || '[]');
+                const insights = JSON.parse(localStorage.getItem('coachDxInsights') || '[]');
+                
+                return {
+                    sessions: sessions.length,
+                    questionsAnswered: sessions.reduce((sum, s) => sum + (s.questions || 0), 0),
+                    insights: insights.length,
+                    trend: calculateTrend(sessions)
+                };
+            } catch (e) {
+                return { sessions: 0, questionsAnswered: 0, insights: 0, trend: '→' };
+            }
+        }
+        
+        function calculateAccuracy(history) {
+            if (!history.length) return '--';
+            const correct = history.filter(c => c.correct).length;
+            return Math.round((correct / history.length) * 100) + '%';
+        }
+        
+        function calculateTrend(sessions) {
+            if (sessions.length < 2) return '→';
+            const recent = sessions.slice(-3);
+            const earlier = sessions.slice(-6, -3);
+            if (recent.length === 0 || earlier.length === 0) return '→';
+            
+            const recentAvg = recent.reduce((s, x) => s + (x.score || 0), 0) / recent.length;
+            const earlierAvg = earlier.reduce((s, x) => s + (x.score || 0), 0) / earlier.length;
+            
+            if (recentAvg > earlierAvg + 5) return '↑';
+            if (recentAvg < earlierAvg - 5) return '↓';
+            return '→';
+        }
+        
+        // Update dashboard with loaded data
+        function updateDashboard() {
+            const reasonData = loadReasonDxData();
+            const mechanismData = loadMechanismDxData();
+            const coachData = loadCoachDxData();
+            
+            // ReasonDx stats
+            document.getElementById('reason-cases').textContent = reasonData.casesCompleted || '--';
+            document.getElementById('reason-accuracy').textContent = reasonData.accuracy || '--%';
+            document.getElementById('reason-calibration').textContent = reasonData.calibration || '--';
+            document.getElementById('reason-streak').textContent = reasonData.streak || '--';
+            
+            // MechanismDx stats
+            document.getElementById('mechanism-modules').textContent = mechanismData.modules || '--';
+            document.getElementById('mechanism-mastery').textContent = mechanismData.mastery ? mechanismData.mastery + '%' : '--%';
+            document.getElementById('mechanism-questions').textContent = mechanismData.questions || '--';
+            document.getElementById('mechanism-pathways').textContent = mechanismData.pathways || '--';
+            
+            // CoachDx stats
+            document.getElementById('coach-sessions').textContent = coachData.sessions || '--';
+            document.getElementById('coach-questions').textContent = coachData.questionsAnswered || '--';
+            document.getElementById('coach-insights').textContent = coachData.insights || '--';
+            document.getElementById('coach-trend').textContent = coachData.trend || '→';
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', updateDashboard);
+    })();
     </script>
 </body>
 </html>
