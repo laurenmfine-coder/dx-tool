@@ -33,7 +33,6 @@
             padding: 20px;
         }
         
-        /* Header */
         .header {
             text-align: center;
             padding: 40px 20px;
@@ -51,7 +50,6 @@
             opacity: 0.9;
         }
         
-        /* Main Card */
         .main-card {
             background: var(--card-bg);
             border-radius: 20px;
@@ -81,7 +79,6 @@
             padding: 30px;
         }
         
-        /* Role Selection */
         .role-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -143,7 +140,18 @@
             color: var(--text-light);
         }
         
-        /* Level Selection */
+        .role-card .new-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--secondary);
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+        
         .level-section {
             margin-top: 30px;
             padding-top: 30px;
@@ -190,7 +198,6 @@
             border-color: var(--primary);
         }
         
-        /* Enter Button */
         .enter-section {
             margin-top: 30px;
             text-align: center;
@@ -239,7 +246,6 @@
             height: 18px;
         }
         
-        /* Coach Preview */
         .coach-preview {
             margin-top: 30px;
             padding: 20px;
@@ -280,7 +286,6 @@
             font-size: 0.9rem;
         }
         
-        /* Features Grid */
         .features-section {
             margin-top: 40px;
         }
@@ -321,7 +326,6 @@
             line-height: 1.5;
         }
         
-        /* Footer */
         .footer {
             text-align: center;
             color: rgba(255,255,255,0.7);
@@ -329,12 +333,6 @@
             font-size: 0.9rem;
         }
         
-        .footer a {
-            color: white;
-            text-decoration: none;
-        }
-        
-        /* Responsive */
         @media (max-width: 768px) {
             .header h1 { font-size: 1.8rem; }
             .role-grid { grid-template-columns: 1fr; }
@@ -344,14 +342,15 @@
     </style>
 </head>
 <body>
+    <!-- IMPORTANT: Load profession config FIRST -->
+    <script src="profession-language-config.js"></script>
+    
     <div class="container">
-        <!-- Header -->
         <div class="header">
             <h1>🏥 Dx Learning Ecosystem</h1>
             <p class="subtitle">Interprofessional Clinical Reasoning Training</p>
         </div>
         
-        <!-- Main Selection Card -->
         <div class="main-card">
             <div class="card-header">
                 <h2>Welcome! Let's personalize your experience.</h2>
@@ -359,85 +358,91 @@
             </div>
             
             <div class="card-body">
-                <!-- Role Selection -->
+                <!-- ALL 12 PROFESSIONS -->
                 <div class="role-grid" id="roleGrid">
-                    <div class="role-card" data-role="md-do" data-coach="Dr. Sarah Chen" data-coach-title="Attending Physician" data-coach-avatar="👩‍⚕️">
+                    <div class="role-card" data-role="md-do">
                         <div class="role-icon">🩺</div>
                         <div class="role-title">Medical Student (MD/DO)</div>
                         <div class="role-description">200+ cases covering all core clerkships and Step prep</div>
                     </div>
                     
-                    <div class="role-card" data-role="pa" data-coach="Dr. Marcus Webb" data-coach-title="Supervising Physician" data-coach-avatar="👨‍⚕️">
+                    <div class="role-card" data-role="pa">
                         <div class="role-icon">👨‍⚕️</div>
                         <div class="role-title">PA Student</div>
                         <div class="role-description">Primary care focused cases with physician collaboration scenarios</div>
                     </div>
                     
-                    <div class="role-card" data-role="nursing" data-coach="Rachel Torres, RN" data-coach-title="Charge Nurse / Preceptor" data-coach-avatar="👩‍⚕️">
+                    <div class="role-card" data-role="nursing">
                         <div class="role-icon">💉</div>
                         <div class="role-title">Nursing Student (RN/BSN)</div>
-                        <div class="role-description">15+ nursing-specific cases: deteriorating patients, medication safety, SBAR</div>
+                        <div class="role-description">100+ nursing cases: deteriorating patients, medication safety, SBAR</div>
                     </div>
                     
-                    <div class="role-card" data-role="ems" data-coach="Captain Mike Rodriguez" data-coach-title="EMS Field Supervisor" data-coach-avatar="🚑">
+                    <div class="role-card" data-role="arnp">
+                        <span class="new-badge">NEW</span>
+                        <div class="role-icon">⚕️</div>
+                        <div class="role-title">NP Student (ARNP)</div>
+                        <div class="role-description">150 cases with scope-of-practice decision making and collaboration</div>
+                    </div>
+                    
+                    <div class="role-card" data-role="ems">
                         <div class="role-icon">🚑</div>
                         <div class="role-title">Paramedic/EMT Student</div>
                         <div class="role-description">15 prehospital cases: field STEMI, stroke routing, trauma triage</div>
                     </div>
                     
-                    <div class="role-card" data-role="rt" data-coach="Jennifer Park, RRT" data-coach-title="Lead Respiratory Therapist" data-coach-avatar="🫁">
+                    <div class="role-card" data-role="rt">
                         <div class="role-icon">🫁</div>
                         <div class="role-title">Respiratory Therapy Student</div>
                         <div class="role-description">10 RT cases: ventilator management, ABG interpretation, BiPAP</div>
                     </div>
                     
-                    <div class="role-card" data-role="resident" data-coach="Dr. David Kim" data-coach-title="Senior Resident" data-coach-avatar="👨‍🔬">
+                    <div class="role-card" data-role="pharmd">
+                        <span class="new-badge">NEW</span>
+                        <div class="role-icon">💊</div>
+                        <div class="role-title">Pharmacy Student (PharmD)</div>
+                        <div class="role-description">150 MTM cases: drug interactions, dosing, therapeutic monitoring</div>
+                    </div>
+                    
+                    <div class="role-card" data-role="od">
+                        <span class="new-badge">NEW</span>
+                        <div class="role-icon">👁️</div>
+                        <div class="role-title">Optometry Student (OD)</div>
+                        <div class="role-description">100 ocular cases: red eye, vision loss, fundus findings</div>
+                    </div>
+                    
+                    <div class="role-card" data-role="dental">
+                        <span class="new-badge">NEW</span>
+                        <div class="role-icon">🦷</div>
+                        <div class="role-title">Dental Student (DDS/DMD)</div>
+                        <div class="role-description">100 dental cases: pain diagnosis, oral pathology, treatment planning</div>
+                    </div>
+                    
+                    <div class="role-card" data-role="omfs">
+                        <span class="new-badge">NEW</span>
+                        <div class="role-icon">🔬</div>
+                        <div class="role-title">OMFS Resident</div>
+                        <div class="role-description">50 surgical cases: trauma, pathology, dentoalveolar surgery</div>
+                    </div>
+                    
+                    <div class="role-card" data-role="resident">
                         <div class="role-icon">👨‍🔬</div>
                         <div class="role-title">Medical Resident</div>
                         <div class="role-description">15 advanced cases: diagnostic dilemmas, systems issues, communication</div>
                     </div>
                     
-                    <div class="role-card" data-role="professional" data-coach="Clinical Advisor" data-coach-title="CE Instructor" data-coach-avatar="🎓">
+                    <div class="role-card" data-role="professional">
                         <div class="role-icon">🎓</div>
                         <div class="role-title">Practicing Professional</div>
                         <div class="role-description">Continuing education cases across all disciplines</div>
                     </div>
-                    <div class="role-card" data-role="arnp" data-coach="Dr. Angela Foster, DNP" data-coach-title="NP Preceptor" data-coach-avatar="👩‍⚕️">
-                        <div class="role-icon">🩺</div>
-                        <div class="role-title">ARNP Student</div>
-                        <div class="role-description">150 cases: FNP, PMHNP, AGACNP - diagnosis within scope</div>
-                    </div>
-                    <div class="role-card" data-role="pharmd" data-coach="Dr. Kevin Patel, PharmD" data-coach-title="Clinical Pharmacist" data-coach-avatar="💊">
-                        <div class="role-icon">💊</div>
-                        <div class="role-title">PharmD Student</div>
-                        <div class="role-description">150 cases: MTM, drug interactions, anticoagulation</div>
-                    </div>
-                    <div class="role-card" data-role="optometry" data-coach="Dr. Lisa Chang, OD" data-coach-title="Optometry Preceptor" data-coach-avatar="👁️">
-                        <div class="role-icon">👁️</div>
-                        <div class="role-title">Optometry Student (OD)</div>
-                        <div class="role-description">100 cases: Red eye, vision loss, systemic-ocular</div>
-                    </div>
-                    <div class="role-card" data-role="dental" data-coach="Dr. Elena Martinez, DDS" data-coach-title="Dental Faculty" data-coach-avatar="🦷">
-                        <div class="role-icon">🦷</div>
-                        <div class="role-title">Dental Student (DDS/DMD)</div>
-                        <div class="role-description">100 cases: Pain localization, oral pathology, treatment planning</div>
-                    </div>
-                    <div class="role-card" data-role="omfs" data-coach="Dr. James Williams, MD DDS" data-coach-title="OMFS Attending" data-coach-avatar="🦴">
-                        <div class="role-icon">🦴</div>
-                        <div class="role-title">OMFS Resident</div>
-                        <div class="role-description">50 cases: Dual dental-medical reasoning, trauma, pathology</div>
-                    </div>
                 </div>
                 
-                <!-- Level Selection -->
                 <div class="level-section" id="levelSection">
                     <div class="level-title">What's your level?</div>
-                    <div class="level-options" id="levelOptions">
-                        <!-- Options updated dynamically based on role -->
-                    </div>
+                    <div class="level-options" id="levelOptions"></div>
                 </div>
                 
-                <!-- Coach Preview -->
                 <div class="coach-preview" id="coachPreview">
                     <h4>Your Clinical Coach</h4>
                     <div class="coach-info">
@@ -450,7 +455,6 @@
                     </div>
                 </div>
                 
-                <!-- Enter Button -->
                 <div class="enter-section" id="enterSection">
                     <button class="enter-btn" id="enterBtn" disabled>Enter Platform →</button>
                     <div class="remember-me">
@@ -461,7 +465,6 @@
             </div>
         </div>
         
-        <!-- Features -->
         <div class="features-section">
             <h2 class="features-title">Three Integrated Platforms</h2>
             <div class="features-grid">
@@ -475,12 +478,11 @@
                 </div>
                 <div class="feature-card">
                     <h3>⚙️ MechanismDx</h3>
-                    <p>Master the pathophysiology behind clinical presentations. 18 modules covering cardiology, pulmonology, nephrology, and more.</p>
+                    <p>Master the pathophysiology behind clinical presentations. 18+ modules covering cardiology, pulmonology, nephrology, and more.</p>
                 </div>
             </div>
         </div>
         
-        <!-- SBAR Feature Highlight -->
         <div class="features-section" style="margin-top: 30px;">
             <h2 class="features-title">📞 Interprofessional SBAR Training</h2>
             <div class="features-grid">
@@ -499,7 +501,6 @@
             </div>
         </div>
         
-        <!-- Footer -->
         <div class="footer">
             <p>© 2026 Lauren Fine, MD, FAAAAI | Nova Southeastern University</p>
             <p style="margin-top: 5px;">Dr. Kiran C. Patel College of Allopathic Medicine</p>
@@ -511,42 +512,25 @@
         let selectedRole = null;
         let selectedLevel = null;
         
-        // Coach personas by role
-        const coachPersonas = {
-            'md-do': { name: 'Dr. Sarah Chen', title: 'Attending Physician', avatar: '👩‍⚕️', role: 'Your attending on this rotation' },
-            'pa': { name: 'Dr. Marcus Webb', title: 'Supervising Physician', avatar: '👨‍⚕️', role: 'Your supervising physician' },
-            'nursing': { name: 'Rachel Torres, RN', title: 'Charge Nurse', avatar: '👩‍⚕️', role: 'Your preceptor today' },
-            'ems': { name: 'Captain Mike Rodriguez', title: 'Field Supervisor', avatar: '🚑', role: 'Your FTO (Field Training Officer)' },
-            'rt': { name: 'Jennifer Park, RRT', title: 'Lead Respiratory Therapist', avatar: '🫁', role: 'Your clinical preceptor' },
-            'resident': { name: 'Dr. David Kim', title: 'Senior Resident', avatar: '👨‍🔬', role: 'Your senior on service' },
-            'professional': { name: 'Clinical Advisor', title: 'CE Instructor', avatar: '🎓', role: 'Your continuing education guide' },
-            'arnp': { name: 'Dr. Angela Foster, DNP', title: 'NP Preceptor', avatar: '👩‍⚕️', role: 'Your NP preceptor' },
-            'pharmd': { name: 'Dr. Kevin Patel, PharmD', title: 'Clinical Pharmacist', avatar: '💊', role: 'Your pharmacy preceptor' },
-            'optometry': { name: 'Dr. Lisa Chang, OD', title: 'Optometry Preceptor', avatar: '👁️', role: 'Your optometry preceptor' },
-            'dental': { name: 'Dr. Elena Martinez, DDS', title: 'Dental Faculty', avatar: '🦷', role: 'Your dental preceptor' },
-            'omfs': { name: 'Dr. James Williams, MD DDS', title: 'OMFS Attending', avatar: '🦴', role: 'Your OMFS attending' }
-        };
-        
-        // Platform URLs by role - dashboard is in CoachDx folder
+        // Platform URLs - dashboard is in CoachDx folder
         const platformUrls = {
             'md-do': 'CoachDx/coachdx-dashboard.html?role=md-do',
             'pa': 'CoachDx/coachdx-dashboard.html?role=pa',
             'nursing': 'CoachDx/coachdx-dashboard.html?role=nursing',
+            'arnp': 'CoachDx/coachdx-dashboard.html?role=arnp',
             'ems': 'CoachDx/coachdx-dashboard.html?role=ems',
             'rt': 'CoachDx/coachdx-dashboard.html?role=rt',
-            'resident': 'CoachDx/coachdx-dashboard.html?role=resident',
-            'professional': 'CoachDx/coachdx-dashboard.html?role=professional',
-            'arnp': 'CoachDx/coachdx-dashboard.html?role=arnp',
             'pharmd': 'CoachDx/coachdx-dashboard.html?role=pharmd',
-            'optometry': 'CoachDx/coachdx-dashboard.html?role=optometry',
+            'od': 'CoachDx/coachdx-dashboard.html?role=od',
             'dental': 'CoachDx/coachdx-dashboard.html?role=dental',
-            'omfs': 'CoachDx/coachdx-dashboard.html?role=omfs'
+            'omfs': 'CoachDx/coachdx-dashboard.html?role=omfs',
+            'resident': 'CoachDx/coachdx-dashboard.html?role=resident',
+            'professional': 'CoachDx/coachdx-dashboard.html?role=professional'
         };
         
         // DOM Elements
         const roleCards = document.querySelectorAll('.role-card');
         const levelSection = document.getElementById('levelSection');
-        const levelBtns = document.querySelectorAll('.level-btn');
         const enterSection = document.getElementById('enterSection');
         const enterBtn = document.getElementById('enterBtn');
         const coachPreview = document.getElementById('coachPreview');
@@ -558,65 +542,27 @@
             if (saved) {
                 const prefs = JSON.parse(saved);
                 if (prefs.role && prefs.level) {
-                    // Auto-redirect if preferences saved
                     window.location.href = platformUrls[prefs.role] + '&level=' + prefs.level;
                 }
             }
         }
         
-        // Level options by role type
-        const levelOptionsByRole = {
-            'student': [
-                { level: 'beginner', label: 'Beginner' },
-                { level: 'intermediate', label: 'Intermediate' },
-                { level: 'advanced', label: 'Advanced' }
-            ],
-            'resident': [
-                { level: 'pgy1', label: 'PGY-1 (Intern)' },
-                { level: 'pgy2-3', label: 'PGY-2/3' },
-                { level: 'senior', label: 'Senior / Chief' }
-            ],
-            'professional': [
-                { level: 'refresher', label: 'Refresher' },
-                { level: 'standard', label: 'Standard' },
-                { level: 'advanced', label: 'Advanced' }
-            ]
-        };
-        
-        // Map roles to level types
-        const roleLevelType = {
-            'md-do': 'student',
-            'pa': 'student',
-            'nursing': 'student',
-            'ems': 'student',
-            'rt': 'student',
-            'resident': 'resident',
-            'professional': 'professional',
-            'arnp': 'student',
-            'pharmd': 'student',
-            'optometry': 'student',
-            'dental': 'student',
-            'omfs': 'resident'
-        };
-        
-        // Render level options based on role
+        // Render level options using profession config
         function renderLevelOptions(role) {
-            const levelType = roleLevelType[role] || 'student';
-            const options = levelOptionsByRole[levelType];
+            const config = getProfessionConfig(role);
+            const options = config.levelOptions || ['Beginner', 'Intermediate', 'Advanced'];
             const container = document.getElementById('levelOptions');
             
-            container.innerHTML = options.map(opt => 
-                `<button class="level-btn" data-level="${opt.level}">${opt.label}</button>`
-            ).join('');
+            container.innerHTML = options.map(function(opt) {
+                return '<button class="level-btn" data-level="' + opt.toLowerCase().replace(/[^a-z0-9]/g, '-') + '">' + opt + '</button>';
+            }).join('');
             
             // Re-attach event listeners
-            document.querySelectorAll('.level-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('selected'));
+            document.querySelectorAll('.level-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.level-btn').forEach(function(b) { b.classList.remove('selected'); });
                     btn.classList.add('selected');
                     selectedLevel = btn.dataset.level;
-                    
-                    // Show enter section
                     enterSection.classList.add('visible');
                     updateEnterButton();
                 });
@@ -624,50 +570,40 @@
         }
         
         // Role selection
-        roleCards.forEach(card => {
-            card.addEventListener('click', () => {
-                // Deselect all
-                roleCards.forEach(c => c.classList.remove('selected'));
-                // Select this one
+        roleCards.forEach(function(card) {
+            card.addEventListener('click', function() {
+                roleCards.forEach(function(c) { c.classList.remove('selected'); });
                 card.classList.add('selected');
                 selectedRole = card.dataset.role;
-                selectedLevel = null; // Reset level when role changes
+                selectedLevel = null;
                 
-                // Update level options based on role
+                // Update level options using profession config
                 renderLevelOptions(selectedRole);
-                
-                // Show level section
                 levelSection.classList.add('visible');
-                
-                // Hide enter section until level selected
                 enterSection.classList.remove('visible');
                 
-                // Update coach preview
-                const coach = coachPersonas[selectedRole];
+                // Update coach preview using profession config
+                var coach = getCoachDisplay(selectedRole);
                 document.getElementById('coachAvatar').textContent = coach.avatar;
                 document.getElementById('coachName').textContent = coach.name;
                 document.getElementById('coachTitle').textContent = coach.title;
                 document.getElementById('coachRole').textContent = coach.role;
                 coachPreview.classList.add('visible');
                 
-                // Update enter button state
                 updateEnterButton();
             });
         });
         
-        // Update enter button
         function updateEnterButton() {
             enterBtn.disabled = !(selectedRole && selectedLevel);
         }
         
         // Enter platform
-        enterBtn.addEventListener('click', () => {
+        enterBtn.addEventListener('click', function() {
             if (selectedRole && selectedLevel) {
-                // Save to localStorage for other pages to read
                 localStorage.setItem('dxRole', selectedRole);
                 localStorage.setItem('dxLevel', selectedLevel);
                 
-                // Save preferences if checked
                 if (rememberMe.checked) {
                     localStorage.setItem('dxEcosystemPreferences', JSON.stringify({
                         role: selectedRole,
@@ -675,13 +611,11 @@
                     }));
                 }
                 
-                // Navigate to dashboard
                 window.location.href = platformUrls[selectedRole] + '&level=' + selectedLevel;
             }
         });
         
-        // Load preferences on page load
-        // Commented out for demo - uncomment for production
+        // Uncomment for production auto-redirect:
         // loadSavedPreferences();
     </script>
 </body>
