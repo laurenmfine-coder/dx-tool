@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CoachDx - Clinical Coaching Session</title>
+    <title>CoachDx - AI Attending Session</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -56,7 +56,6 @@
         .concept-list { display: flex; flex-wrap: wrap; gap: 6px; }
         .concept-tag { padding: 4px 8px; background: #f4f4f5; border-radius: 4px; font-size: 12px; color: #52525b; }
         .concept-tag.explored { background: #dcfce7; color: #166534; }
-        .concept-tag.gap { background: #fef2f2; color: #991b1b; }
         
         .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 16px; }
         .stat-item { text-align: center; padding: 12px; background: #f4f4f5; border-radius: 8px; }
@@ -67,39 +66,31 @@
         .parallel-indicator h4 { color: #92400e; font-size: 12px; margin-bottom: 4px; }
         .parallel-indicator p { font-size: 12px; color: #a16207; }
         .parallel-link { color: #8b5cf6; text-decoration: none; font-weight: 500; }
-        .parallel-link:hover { text-decoration: underline; }
         
-        .related-item { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 6px; text-decoration: none; color: inherit; transition: background 0.15s; }
+        .related-item { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 6px; text-decoration: none; color: inherit; }
         .related-item:hover { background: #f4f4f5; }
         .related-icon { width: 32px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
         .related-icon.mechanism { background: #dcfce7; }
         .related-icon.reasondx { background: #dbeafe; }
-        .related-icon.parallel { background: #fef3c7; }
-        .related-icon.predictlabs { background: #ffedd5; }
         .related-info { flex: 1; }
         .related-title { font-size: 13px; font-weight: 500; }
         .related-reason { font-size: 11px; color: #71717a; }
         
-        /* Cross-Platform Section */
         .cross-platform-section { margin: 16px; padding: 16px; background: #f8fafc; border-radius: 10px; border: 1px solid #e2e8f0; }
         .cps-header { font-size: 12px; font-weight: 600; color: #64748b; text-transform: uppercase; margin-bottom: 12px; }
-        .cps-card { display: flex; align-items: center; gap: 10px; padding: 10px; background: #fff; border-radius: 8px; border: 1px solid #e2e8f0; text-decoration: none; color: inherit; margin-bottom: 8px; transition: all 0.15s; }
-        .cps-card:hover { transform: translateX(4px); box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-        .cps-stripe { width: 4px; height: 100%; min-height: 40px; border-radius: 2px; }
+        .cps-card { display: flex; align-items: center; gap: 10px; padding: 10px; background: #fff; border-radius: 8px; border: 1px solid #e2e8f0; text-decoration: none; color: inherit; margin-bottom: 8px; }
+        .cps-stripe { width: 4px; height: 40px; border-radius: 2px; }
         .cps-stripe.reasondx { background: #3b82f6; }
         .cps-stripe.mechanismdx { background: #22c55e; }
-        .cps-stripe.predictlabs { background: #f97316; }
         .cps-icon { width: 32px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
         .cps-icon.reasondx { background: #dbeafe; }
         .cps-icon.mechanismdx { background: #dcfce7; }
-        .cps-icon.predictlabs { background: #ffedd5; }
         .cps-info { flex: 1; }
         .cps-title { font-size: 13px; font-weight: 600; }
         .cps-meta { font-size: 11px; color: #64748b; }
         .platform-tag { font-weight: 600; }
         .platform-tag.reasondx { color: #3b82f6; }
         .platform-tag.mechanismdx { color: #22c55e; }
-        .platform-tag.predictlabs { color: #f97316; }
         
         .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; z-index: 1000; }
         .modal-overlay.show { display: flex; }
@@ -118,33 +109,19 @@
     </style>
 </head>
 <body>
+    <!-- IMPORTANT: Load profession config FIRST -->
+    <script src="../profession-language-config.js"></script>
+    
     <header class="header">
         <div class="header-inner">
-            <a href="case-library.html" class="logo" style="text-decoration:none">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 70" style="height:32px;width:auto">
-                    <text x="5" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor" letter-spacing="-1">Coach</text>
-                    <text x="130" y="45" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="normal" fill="currentColor">D</text>
-                    <g stroke="#8b5cf6" stroke-width="2.5" stroke-linecap="round" fill="none">
-                        <line x1="164" y1="24" x2="180" y2="45"/>
-                        <path d="M180 24L170 35Q166 40 166 47Q166 54 171 58Q176 62 176 68"/>
-                    </g>
-                    <ellipse cx="162" cy="22" rx="2" ry="3.5" transform="rotate(-28 162 22)" fill="#8b5cf6"/>
-                    <ellipse cx="182" cy="22" rx="2" ry="3.5" transform="rotate(28 182 22)" fill="#8b5cf6"/>
-                    <circle cx="176" cy="68" r="7" fill="none" stroke="#8b5cf6" stroke-width="2"/>
-                    <circle cx="176" cy="68" r="3.5" fill="#8b5cf6"/>
-                </svg>
-            </a>
+            <a href="case-library.html" class="logo">CoachDx</a>
             <div class="case-info">
                 <span class="case-badge" id="caseBadge">Loading...</span>
-                <span class="coach-badge" id="coachBadge" style="background:#dcfce7;padding:6px 12px;border-radius:6px;font-size:13px;margin-left:8px;">
-                    <span id="coachAvatarSmall">👩‍⚕️</span> <span id="coachNameSmall">Dr. Chen</span>
-                </span>
                 <span class="timer" id="timer">00:00</span>
             </div>
             <nav class="nav-links">
-                <a href="coachdx-dashboard.html" class="nav-link">Dashboard</a>
                 <a href="case-library.html" class="nav-link">All Cases</a>
-                <a href="sbar-trainer.html" class="nav-link">📞 SBAR</a>
+                <a href="../unified-scoreboard.html" class="nav-link">🏆 Scoreboard</a>
                 <button class="nav-link" onclick="endSession()" style="background:none;border:none;cursor:pointer;">End Session</button>
             </nav>
         </div>
@@ -195,314 +172,49 @@
         </div>
     </div>
     
-    <!-- Load rate limiter first -->
-    <script src="dx-rate-limiter.js"></script>
-    
-    <!-- Load progress tracker -->
-    <script src="dx-progress-tracker.js"></script>
-    
-    <!-- Load integration code -->
-    <script src="coachdx-integration.js"></script>
-    
-    <!-- Load core cases file -->
     <script src="coachdx-cases-merged.js"></script>
     
-    <!-- Load interprofessional cases with SBAR integration -->
-    <script src="coachdx-interprofessional-cases.js"></script>
-    
-    <!-- Discipline-specific cases loaded dynamically based on role -->
-    
     <script>
-    // ============================================================
-    // INTERPROFESSIONAL INTEGRATION
-    // ============================================================
-    
-    // COACH_PERSONAS is loaded from coachdx-integration.js
-    
-    // Get current role and coach
-    function getCurrentRole() {
-        return localStorage.getItem('dxRole') || 'md-do';
-    }
-    
-    function getCurrentCoach() {
-        const role = getCurrentRole();
-        return COACH_PERSONAS[role] || COACH_PERSONAS['md-do'];
-    }
-    
-    // Load discipline-specific cases
-    async function loadDisciplineCases() {
-        const role = getCurrentRole();
-        
-        const caseFiles = {
-            'md-do': [],
-            'pa': [],
-            'nursing': ['coachdx-nursing-cases.js'],
-            'ems': ['coachdx-ems-cases.js'],
-            'rt': ['coachdx-rt-cases.js'],
-            'resident': ['coachdx-resident-cases.js', 'coachdx-specialty-cases.js'],
-            'professional': ['coachdx-nursing-cases.js', 'coachdx-ems-cases.js', 'coachdx-rt-cases.js', 'coachdx-resident-cases.js']
-        };
-        
-        const filesToLoad = caseFiles[role] || [];
-        
-        for (const file of filesToLoad) {
-            try {
-                await new Promise((resolve, reject) => {
-                    const script = document.createElement('script');
-                    script.src = file;
-                    script.onload = resolve;
-                    script.onerror = reject;
-                    document.head.appendChild(script);
-                });
-                console.log(`✓ Loaded ${file}`);
-            } catch (error) {
-                console.warn(`Could not load ${file}:`, error);
-            }
-        }
-        
-        console.log(`Cases loaded for role: ${role}`);
-    }
-    
-    // ============================================================
-    // STATE & INITIALIZATION
-    // ============================================================
-    // Use cases from external file (COACHDX_CASES) or fall back to empty object
-    const CASES = typeof COACHDX_CASES !== 'undefined' ? COACHDX_CASES : {};
-    
-    let currentCase = null;
-    let conversationHistory = [];
-    let conceptsExplored = {};
-    let seconds = 0;
-    let timerInterval = null;
-    let isLoading = false;
-    let sbarTriggered = false; // Track if SBAR has been triggered
-    let session = {
+    var CASES = typeof COACHDX_CASES !== 'undefined' ? COACHDX_CASES : {};
+    var currentCase = null;
+    var conversationHistory = [];
+    var conceptsExplored = {};
+    var seconds = 0;
+    var timerInterval = null;
+    var isLoading = false;
+    var session = {
         id: 'session-' + Date.now(),
         questionsAskedByAI: 0,
         teachingMomentsDetected: 0,
         conceptsExplored: [],
         isParallelCase: false,
-        parallelPairId: null,
-        sbarCompleted: false
+        parallelPairId: null
     };
     
-    // SBAR trigger keywords - expanded list
-    // When learner identifies these in their assessment, coach may prompt SBAR
-    const SBAR_TRIGGER_KEYWORDS = [
-        // Communication intent
-        'notify', 'call', 'report', 'page', 'contact', 'escalate', 'alert',
-        'tell the doctor', 'let them know', 'inform', 'reach out',
-        
-        // Clinical concern
-        'concerned', 'worried', 'think we need', 'something is wrong',
-        'not right', 'doesn\'t look good', 'getting worse',
-        
-        // Deterioration
-        'deteriorating', 'declining', 'decompensating', 'unstable', 'worsening',
-        'going downhill', 'crashing', 'coding', 'arresting',
-        
-        // Urgency
-        'emergency', 'emergent', 'urgent', 'critical', 'stat', 'now',
-        'immediately', 'right away', 'asap',
-        
-        // Vital sign concerns
-        'hypotensive', 'hypertensive', 'tachycardic', 'bradycardic',
-        'desaturating', 'hypoxic', 'hypoxemic', 'febrile', 'hypothermic',
-        'tachypneic', 'low blood pressure', 'high heart rate', 'oxygen dropping',
-        'sats dropping', 'bp dropping', 'pressure is low',
-        
-        // Mental status
-        'unresponsive', 'altered', 'confused', 'lethargic', 'obtunded',
-        'not waking up', 'won\'t respond', 'mental status change', 'ams',
-        
-        // Specific conditions
-        'sepsis', 'septic', 'mi', 'stemi', 'stroke', 'pe', 'pulmonary embolism',
-        'bleeding', 'hemorrhage', 'anaphylaxis', 'overdose', 'arrest',
-        
-        // Symptoms
-        'chest pain', 'shortness of breath', 'dyspnea', 'sob', 'difficulty breathing',
-        'respiratory distress', 'can\'t breathe', 'syncope', 'passed out', 'seizure',
-        
-        // Nursing/clinical judgment
-        'need help', 'need orders', 'need to see', 'come evaluate',
-        'rapid response', 'code blue', 'mrt', 'rrt',
-        
-        // Assessment conclusions
-        'my assessment', 'i think', 'i believe', 'appears to be', 'likely',
-        'differential', 'working diagnosis'
-    ];
-    
-    // High-priority keywords that can trigger SBAR earlier
-    const HIGH_PRIORITY_KEYWORDS = [
-        'code', 'arrest', 'unresponsive', 'not breathing', 'no pulse',
-        'rapid response', 'crashing', 'stat', 'emergency', 'stemi',
-        'stroke', 'anaphylaxis', 'hemorrhage'
-    ];
-    
-    // Check if SBAR should be triggered based on conversation
-    function checkSBARTrigger(userMessage, coachResponse) {
-        // Only trigger once per session and only if case has SBAR scenario
-        if (sbarTriggered || !currentCase.sbarScenario) return false;
-        
-        const combinedText = (userMessage + ' ' + coachResponse).toLowerCase();
-        const userText = userMessage.toLowerCase();
-        const conceptCount = Object.keys(conceptsExplored).length;
-        const messageCount = conversationHistory.length;
-        
-        // Check for high-priority keywords (trigger earlier)
-        const hasHighPriority = HIGH_PRIORITY_KEYWORDS.some(kw => userText.includes(kw));
-        if (hasHighPriority && messageCount >= 4) {
-            return true; // Trigger early for emergencies
+    // ============================================================
+    // PROFESSION-AWARE COACH NAME - Uses profession config
+    // ============================================================
+    function getCoachName() {
+        if (typeof getCurrentCoachName === 'function') {
+            return getCurrentCoachName();
         }
-        
-        // Check for regular trigger keywords
-        const hasKeywords = SBAR_TRIGGER_KEYWORDS.some(kw => combinedText.includes(kw));
-        
-        // Multiple trigger conditions (any can trigger)
-        const enoughConcepts = conceptCount >= 2; // Lowered from 3
-        const enoughTime = seconds > 120; // 2+ minutes (lowered from 3)
-        const enoughMessages = messageCount >= 6; // 6+ messages in conversation
-        
-        // Trigger if keywords present AND (enough concepts OR enough time OR enough messages)
-        return hasKeywords && (enoughConcepts || enoughTime || enoughMessages);
-    }
-    
-    // Show SBAR prompt from coach
-    function triggerSBARPrompt() {
-        sbarTriggered = true;
-        const coach = getCurrentCoach();
-        const scenario = currentCase.sbarScenario;
-        
-        // Build coach's SBAR prompt based on role
-        let sbarPrompt = '';
-        const role = getCurrentRole();
-        
-        if (role === 'nursing') {
-            sbarPrompt = `Good assessment. This patient needs physician evaluation now. Before you call ${scenario.callingTo || 'the physician'}, let's make sure you're prepared. Practice your SBAR - click the button below when you're ready.`;
-        } else if (role === 'ems') {
-            sbarPrompt = `Alright, you've got your assessment. Time to give your radio report. This needs to be clear and concise. Hit the SBAR button to practice your call to the ED.`;
-        } else if (role === 'rt') {
-            sbarPrompt = `Good respiratory assessment. You need to communicate this to the physician and make your recommendation. Let's practice that SBAR call.`;
-        } else {
-            sbarPrompt = `Based on your assessment, it's time to communicate this to the team. Let's practice your SBAR before you make the call.`;
-        }
-        
-        // Add the SBAR prompt message
-        setTimeout(() => {
-            addMessage(sbarPrompt, 'attending');
-            conversationHistory.push({ role: 'assistant', content: sbarPrompt });
-            
-            // Show prominent SBAR button
-            showSBARCallToAction();
-        }, 1000);
-    }
-    
-    // Show prominent SBAR call-to-action in chat
-    function showSBARCallToAction() {
-        const container = document.getElementById('chatMessages');
-        const scenario = currentCase.sbarScenario;
-        
-        container.innerHTML += `
-            <div class="message attending" id="sbarCTA">
-                <div class="message-bubble" style="background: #fef3c7; border-color: #f59e0b;">
-                    <div style="display: flex; align-items: center; gap: 15px;">
-                        <div style="font-size: 2rem;">📞</div>
-                        <div style="flex: 1;">
-                            <div style="font-weight: 600; color: #92400e; margin-bottom: 4px;">
-                                Ready to call ${scenario.callingTo || 'the physician'}?
-                            </div>
-                            <div style="font-size: 0.9em; color: #a16207;">
-                                Practice your SBAR with the patient info you've gathered.
-                            </div>
-                        </div>
-                        <button onclick="launchSBARWithContext()" style="background: #f59e0b; color: white; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; white-space: nowrap;">
-                            Practice SBAR →
-                        </button>
-                    </div>
-                </div>
-            </div>
-        `;
-        container.scrollTop = container.scrollHeight;
-    }
-    
-    // Launch SBAR trainer with case context
-    function launchSBARWithContext() {
-        const scenario = currentCase.sbarScenario;
-        const patient = currentCase.patient;
-        
-        // Store context for SBAR trainer
-        const sbarContext = {
-            caseId: currentCase.id,
-            caseTitle: currentCase.title,
-            patient: patient,
-            scenario: scenario,
-            exploredConcepts: Object.keys(conceptsExplored),
-            conversationSummary: conversationHistory.slice(-6).map(m => m.content).join(' '),
-            role: getCurrentRole(),
-            coach: getCurrentCoach()
-        };
-        
-        sessionStorage.setItem('sbarCaseContext', JSON.stringify(sbarContext));
-        
-        // Navigate to SBAR trainer
-        window.location.href = `sbar-trainer.html?fromCase=${currentCase.id}`;
+        return 'Dr. Chen';
     }
 
-    async function init() {
-        // Ensure student is registered for progress tracking
-        if (typeof DxProgressTracker !== 'undefined') {
-            DxProgressTracker.ensureStudentRegistered((student) => {
-                console.log('Student registered:', student?.name || 'Anonymous');
-            });
-        }
+    function init() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var caseId = urlParams.get('case') || 'chest-pain-acs';
         
-        // Load discipline-specific cases first
-        await loadDisciplineCases();
-        
-        // Merge any loaded discipline cases
-        const allCases = { ...CASES };
-        if (typeof COACHDX_NURSING_CASES !== 'undefined') Object.assign(allCases, COACHDX_NURSING_CASES);
-        if (typeof COACHDX_EMS_CASES !== 'undefined') Object.assign(allCases, COACHDX_EMS_CASES);
-        if (typeof COACHDX_RT_CASES !== 'undefined') Object.assign(allCases, COACHDX_RT_CASES);
-        if (typeof COACHDX_RESIDENT_CASES !== 'undefined') Object.assign(allCases, COACHDX_RESIDENT_CASES);
-        if (typeof COACHDX_SPECIALTY_CASES !== 'undefined') Object.assign(allCases, COACHDX_SPECIALTY_CASES);
-        if (typeof COACHDX_INTERPROFESSIONAL_CASES !== 'undefined') Object.assign(allCases, COACHDX_INTERPROFESSIONAL_CASES);
-        
-        // Update global CASES reference
-        Object.assign(CASES, allCases);
-        
-        const urlParams = new URLSearchParams(window.location.search);
-        const caseId = urlParams.get('case') || 'chest-pain-acs';
-        
-        currentCase = CASES[caseId];
-        if (!currentCase) {
-            currentCase = CASES['chest-pain-acs'];
-        }
+        currentCase = CASES[caseId] || CASES['chest-pain-acs'];
         
         if (!currentCase) {
-            document.getElementById('chatMessages').innerHTML = '<p style="padding:20px;color:#dc2626;">Error: Could not load case. Please check that coachdx-cases-merged.js is in the same directory.</p>';
+            document.getElementById('chatMessages').innerHTML = '<p style="padding:20px;color:#dc2626;">Error: Could not load case.</p>';
             return;
         }
         
-        // Track case start for progress
-        if (typeof DxProgressTracker !== 'undefined') {
-            DxProgressTracker.recordCaseStart(
-                currentCase.id || caseId,
-                currentCase.title,
-                currentCase.category
-            );
-        }
-        
-        // Update coach display based on role
-        const coach = getCurrentCoach();
-        document.getElementById('coachAvatarSmall').textContent = coach.avatar;
-        document.getElementById('coachNameSmall').textContent = coach.name;
-        
-        // Track parallel case info
         session.isParallelCase = currentCase.isParallel || false;
         session.parallelPairId = currentCase.parallelCase || null;
         
-        // Update UI
         document.getElementById('caseBadge').textContent = currentCase.title;
         document.getElementById('caseBadge').className = 'case-badge' + (currentCase.isParallel ? ' parallel' : '');
         
@@ -511,63 +223,44 @@
         renderParallelIndicator();
         renderRelatedContent();
         
-        // Add SBAR button if case has SBAR scenario
-        if (currentCase.sbarScenario) {
-            renderSBARButton();
-        }
-        
-        // Start timer
         timerInterval = setInterval(updateTimer, 1000);
         
-        // Opening message from coach
-        setTimeout(() => {
+        setTimeout(function() {
             addMessage(currentCase.openingStatement, 'attending');
             conversationHistory.push({ role: 'assistant', content: currentCase.openingStatement });
         }, 500);
     }
-    
-    function renderSBARButton() {
-        const quickActionsContainer = document.getElementById('quickActions');
-        const sbarBtn = document.createElement('button');
-        sbarBtn.className = 'quick-btn';
-        sbarBtn.style.background = '#fef3c7';
-        sbarBtn.style.color = '#92400e';
-        sbarBtn.innerHTML = '📞 Practice SBAR';
-        sbarBtn.onclick = () => {
-            window.location.href = `sbar-trainer.html?case=${currentCase.id}`;
-        };
-        quickActionsContainer.appendChild(sbarBtn);
-    }
 
     function updateTimer() {
         seconds++;
-        const mins = Math.floor(seconds / 60);
-        const secs = seconds % 60;
-        document.getElementById('timer').textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        var mins = Math.floor(seconds / 60);
+        var secs = seconds % 60;
+        document.getElementById('timer').textContent = String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
         document.getElementById('statTime').textContent = mins + 'm';
     }
 
+    // ============================================================
+    // UPDATED: Uses dynamic coach name from profession config
+    // ============================================================
     function addMessage(text, sender) {
-        const container = document.getElementById('chatMessages');
-        const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        const coach = getCurrentCoach();
-        const senderName = sender === 'attending' ? coach.name : 'You';
+        var container = document.getElementById('chatMessages');
+        var time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        var coachName = getCoachName();
         
-        container.innerHTML += `
-            <div class="message ${sender}">
-                <div class="message-bubble">${text}</div>
-                <div class="message-meta">${senderName} • ${time}</div>
-            </div>
-        `;
+        var div = document.createElement('div');
+        div.className = 'message ' + sender;
+        div.innerHTML = '<div class="message-bubble">' + text + '</div>' +
+            '<div class="message-meta">' + (sender === 'attending' ? coachName : 'You') + ' • ' + time + '</div>';
+        container.appendChild(div);
         container.scrollTop = container.scrollHeight;
     }
 
     function renderQuickActions() {
-        const container = document.getElementById('quickActions');
-        const actions = currentCase.quickActions || [];
-        container.innerHTML = actions.map(action => 
-            `<button class="quick-btn" onclick="sendQuickAction('${action.replace(/'/g, "\\'")}')">${action}</button>`
-        ).join('');
+        var container = document.getElementById('quickActions');
+        var actions = currentCase.quickActions || [];
+        container.innerHTML = actions.map(function(action) {
+            return '<button class="quick-btn" onclick="sendQuickAction(\'' + action.replace(/'/g, "\\'") + '\')">' + action + '</button>';
+        }).join('');
     }
 
     function sendQuickAction(action) {
@@ -576,145 +269,43 @@
     }
 
     function renderConceptMap() {
-        const container = document.getElementById('conceptMap');
-        const domains = currentCase.conceptDomains || {};
-        let html = '';
-        
-        for (const [domain, concepts] of Object.entries(domains)) {
-            html += `
-                <div class="concept-section">
-                    <h4>${domain}</h4>
-                    <div class="concept-list">
-                        ${concepts.map(c => {
-                            const explored = conceptsExplored[c];
-                            return `<span class="concept-tag ${explored ? 'explored' : ''}">${c.replace(/_/g, ' ')}</span>`;
-                        }).join('')}
-                    </div>
-                </div>
-            `;
+        var container = document.getElementById('conceptMap');
+        var domains = currentCase.conceptDomains || {};
+        var html = '';
+        for (var domain in domains) {
+            html += '<div class="concept-section"><h4>' + domain + '</h4><div class="concept-list">' +
+                domains[domain].map(function(c) {
+                    return '<span class="concept-tag ' + (conceptsExplored[c] ? 'explored' : '') + '">' + c.replace(/_/g, ' ') + '</span>';
+                }).join('') + '</div></div>';
         }
         container.innerHTML = html;
     }
 
     function renderParallelIndicator() {
-        const container = document.getElementById('parallelCaseIndicator');
-        
-        if (currentCase.parallelCase) {
-            const parallelCaseData = CASES[currentCase.parallelCase];
-            if (parallelCaseData) {
-                container.innerHTML = `
-                    <div class="parallel-indicator">
-                        <h4>🔄 ${currentCase.isParallel ? 'Original Case' : 'Parallel Case'} Available</h4>
-                        <p>${currentCase.parallelDescription || parallelCaseData.title}</p>
-                        <a href="mentor-chat.html?case=${currentCase.parallelCase}" class="parallel-link">
-                            ${currentCase.isParallel ? '← Try Original' : 'Try Parallel →'}
-                        </a>
-                    </div>
-                `;
-            }
+        var container = document.getElementById('parallelCaseIndicator');
+        if (currentCase.parallelCase && CASES[currentCase.parallelCase]) {
+            var pc = CASES[currentCase.parallelCase];
+            container.innerHTML = '<div class="parallel-indicator"><h4>🔄 ' + (currentCase.isParallel ? 'Original' : 'Parallel') + ' Case Available</h4>' +
+                '<p>' + (currentCase.parallelDescription || pc.title) + '</p>' +
+                '<a href="mentor-chat.html?case=' + currentCase.parallelCase + '" class="parallel-link">' + (currentCase.isParallel ? '← Try Original' : 'Try Parallel →') + '</a></div>';
         } else {
             container.innerHTML = '';
         }
     }
 
     function renderRelatedContent() {
-        const container = document.getElementById('relatedContent');
-        const content = currentCase.relatedContent || [];
-        
-        let html = content.map(item => `
-            <a href="${item.link}" class="related-item">
-                <div class="related-icon ${item.type}">
-                    ${item.type === 'mechanism' ? '🧬' : item.type === 'parallel' ? '🔄' : item.type === 'predictlabs' ? '🔮' : '🩺'}
-                </div>
-                <div class="related-info">
-                    <div class="related-title">${item.title}</div>
-                    <div class="related-reason">${item.reason}</div>
-                </div>
-            </a>
-        `).join('');
-        
-        container.innerHTML = html;
-        
-        // Also render cross-platform recommendations
-        renderCrossPlatformRecs();
-    }
-    
-    function renderCrossPlatformRecs() {
-        const container = document.getElementById('crossPlatformRecs');
-        if (!container) return;
-        
-        // Generate cross-platform links based on case category
-        const category = currentCase.category || '';
-        const caseId = currentCase.id || '';
-        
-        // Topic mapping for cross-platform links
-        const topicMap = {
-            'chest-pain': { mechanism: 'acs-module.html', reasondx: 'stemi', predictlabs: 'predict-labs-acs.html' },
-            'acs': { mechanism: 'acs-module.html', reasondx: 'stemi', predictlabs: 'predict-labs-acs.html' },
-            'heart-failure': { mechanism: 'hf-module.html', reasondx: 'chf', predictlabs: 'predict-labs-hf.html' },
-            'hf': { mechanism: 'hf-module.html', reasondx: 'chf', predictlabs: 'predict-labs-hf.html' },
-            'atrial-fibrillation': { mechanism: 'afib-module.html', reasondx: 'afib', predictlabs: 'predict-labs-hf.html' },
-            'sepsis': { mechanism: 'sepsis-shock-module.html', reasondx: 'sepsis', predictlabs: 'predict-labs-sepsis.html' },
-            'dka': { mechanism: 'diabetes-dka-module.html', reasondx: 'dka', predictlabs: 'predict-labs-dka.html' },
-            'aki': { mechanism: 'aki-module.html', reasondx: 'aki', predictlabs: 'predict-labs-aki.html' },
-            'hyponatremia': { mechanism: 'hyponatremia-module.html', reasondx: 'siadh', predictlabs: 'predict-labs-hyponatremia.html' },
-            'pe': { mechanism: 'pe-module.html', reasondx: 'pe', predictlabs: 'predict-labs-pe.html' },
-            'pulmonary-embolism': { mechanism: 'pe-module.html', reasondx: 'pe', predictlabs: 'predict-labs-pe.html' },
-            'gi-bleed': { mechanism: 'gi-bleeding-module.html', reasondx: 'ugib', predictlabs: 'predict-labs-gi-bleed.html' },
-            'anemia': { mechanism: 'anemia-module.html', reasondx: 'anemia', predictlabs: 'predict-labs-anemia.html' },
-            'cirrhosis': { mechanism: 'cirrhosis-module.html', reasondx: 'cirrhosis', predictlabs: 'predict-labs-cirrhosis.html' },
-            'hepatic': { mechanism: 'cirrhosis-module.html', reasondx: 'cirrhosis', predictlabs: 'predict-labs-cirrhosis.html' },
-        };
-        
-        // Find matching topic
-        let matched = null;
-        const searchText = (caseId + ' ' + (currentCase.title || '')).toLowerCase();
-        for (const [key, links] of Object.entries(topicMap)) {
-            if (searchText.includes(key)) {
-                matched = links;
-                break;
-            }
-        }
-        
-        if (!matched) {
-            container.innerHTML = '';
-            return;
-        }
-        
-        container.innerHTML = `
-            <div class="cross-platform-section">
-                <div class="cps-header">🎯 Continue Learning This Topic</div>
-                <a href="../MechanismDx/${matched.mechanism}" class="cps-card">
-                    <div class="cps-stripe mechanismdx"></div>
-                    <div class="cps-icon mechanismdx">⚙️</div>
-                    <div class="cps-info">
-                        <div class="cps-title">Master the Pathophysiology</div>
-                        <div class="cps-meta"><span class="platform-tag mechanismdx">MechanismDx</span> • Deep dive into mechanisms</div>
-                    </div>
-                </a>
-                <a href="../ReasonDx/training.html?case=${matched.reasondx}" class="cps-card">
-                    <div class="cps-stripe reasondx"></div>
-                    <div class="cps-icon reasondx">🩺</div>
-                    <div class="cps-info">
-                        <div class="cps-title">Full Clinical Case</div>
-                        <div class="cps-meta"><span class="platform-tag reasondx">ReasonDx</span> • Complete case walkthrough</div>
-                    </div>
-                </a>
-                <a href="../predict-labs/${matched.predictlabs}" class="cps-card">
-                    <div class="cps-stripe predictlabs"></div>
-                    <div class="cps-icon predictlabs">🔮</div>
-                    <div class="cps-info">
-                        <div class="cps-title">Predict the Labs</div>
-                        <div class="cps-meta"><span class="platform-tag predictlabs">Predict Labs</span> • Test your predictions</div>
-                    </div>
-                </a>
-            </div>
-        `;
+        var container = document.getElementById('relatedContent');
+        var content = currentCase.relatedContent || [];
+        container.innerHTML = content.map(function(item) {
+            var icon = item.type === 'mechanism' ? '🧬' : item.type === 'parallel' ? '🔄' : '🩺';
+            return '<a href="' + item.link + '" class="related-item"><div class="related-icon ' + item.type + '">' + icon + '</div>' +
+                '<div class="related-info"><div class="related-title">' + item.title + '</div><div class="related-reason">' + item.reason + '</div></div></a>';
+        }).join('');
     }
 
-    async function sendMessage() {
-        const input = document.getElementById('userInput');
-        const message = input.value.trim();
+    function sendMessage() {
+        var input = document.getElementById('userInput');
+        var message = input.value.trim();
         if (!message || isLoading) return;
         
         input.value = '';
@@ -724,132 +315,79 @@
         isLoading = true;
         document.getElementById('sendBtn').disabled = true;
         
-        const container = document.getElementById('chatMessages');
-        container.innerHTML += `<div class="message attending" id="typing"><div class="message-bubble"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div></div>`;
+        var container = document.getElementById('chatMessages');
+        var typing = document.createElement('div');
+        typing.id = 'typing';
+        typing.className = 'message attending';
+        typing.innerHTML = '<div class="message-bubble"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>';
+        container.appendChild(typing);
         container.scrollTop = container.scrollHeight;
         
-        try {
-            const response = await generateResponse(message);
-            document.getElementById('typing')?.remove();
+        generateResponse(message).then(function(response) {
+            var t = document.getElementById('typing');
+            if (t) t.remove();
             
             addMessage(response, 'attending');
             conversationHistory.push({ role: 'assistant', content: response });
             
             session.questionsAskedByAI++;
-            if (response.toLowerCase().includes('teaching moment') || response.toLowerCase().includes('let me explain') || response.includes('?')) {
-                session.teachingMomentsDetected++;
-            }
+            if (response.indexOf('?') !== -1) session.teachingMomentsDetected++;
             
             checkConceptsExplored(message + ' ' + response);
             updateStats();
             
-            // Check if SBAR should be triggered
-            if (checkSBARTrigger(message, response)) {
-                triggerSBARPrompt();
-            }
-            
-        } catch (error) {
-            document.getElementById('typing')?.remove();
-            addMessage('I apologize, I\'m having trouble connecting. Please try again.', 'attending');
-            console.error('Error:', error);
-        }
-        
-        isLoading = false;
-        document.getElementById('sendBtn').disabled = false;
+            isLoading = false;
+            document.getElementById('sendBtn').disabled = false;
+        });
     }
 
-    async function generateResponse(userMessage) {
-        // Check rate limit before making API call
-        if (typeof DxRateLimiter !== 'undefined') {
-            const limitCheck = DxRateLimiter.canMakeRequest('coachChat');
-            if (!limitCheck.allowed) {
-                DxRateLimiter.showLimitModal(limitCheck.message);
-                return "I'd love to continue our discussion, but you've reached your daily practice limit. Come back tomorrow to continue learning!";
-            }
-        }
-        
-        // First check for defined responses in the case
-        const definedResponses = currentCase.defined_responses || {};
-        const messageLower = userMessage.toLowerCase();
-        
-        for (const [trigger, response] of Object.entries(definedResponses)) {
-            const triggerWords = trigger.split(/[_\s]+/);
-            if (triggerWords.some(word => messageLower.includes(word))) {
-                return response;
-            }
-        }
-        
-        // Try Cloudflare worker for AI response
-        try {
-            const WORKER_URL = 'https://coachdx-attending.laurenmfine.workers.dev';
+    function generateResponse(userMessage) {
+        return new Promise(function(resolve) {
+            var definedResponses = currentCase.defined_responses || {};
+            var messageLower = userMessage.toLowerCase();
             
-            // Record usage before API call
-            if (typeof DxRateLimiter !== 'undefined') {
-                DxRateLimiter.recordUsage('coachChat');
+            for (var trigger in definedResponses) {
+                if (messageLower.indexOf(trigger.split('_')[0]) !== -1) {
+                    resolve(definedResponses[trigger]);
+                    return;
+                }
             }
             
-            const response = await fetch(WORKER_URL, {
+            fetch('https://coachdx-attending.laurenmfine.workers.dev', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     message: userMessage,
                     conversationHistory: conversationHistory.slice(-10),
-                    caseData: { 
-                        description: currentCase.description,
-                        title: currentCase.title,
-                        keyTeachingPoints: currentCase.keyTeachingPoints || []
-                    }
+                    caseData: { description: currentCase.description, title: currentCase.title }
                 })
-            });
-            
-            if (!response.ok) throw new Error('Worker request failed');
-            
-            const data = await response.json();
-            return data.response || data.content || generateFallbackResponse(userMessage);
-        } catch (error) {
-            console.log('Worker unavailable, using fallback response');
-            return generateFallbackResponse(userMessage);
-        }
+            })
+            .then(function(r) { return r.json(); })
+            .then(function(data) { resolve(data.response || generateFallback()); })
+            .catch(function() { resolve(generateFallback()); });
+        });
     }
     
-    function generateFallbackResponse(userMessage) {
-        const teachingPoints = currentCase.keyTeachingPoints || [];
-        const unusedPoints = teachingPoints.filter(point => 
-            !conversationHistory.some(msg => msg.content.includes(point.substring(0, 30)))
-        );
-        
-        if (unusedPoints.length > 0) {
-            const point = unusedPoints[Math.floor(Math.random() * unusedPoints.length)];
-            return `Good thinking! Let me add a teaching point here: ${point}\n\nWhat else are you considering?`;
-        }
-        
-        const prompts = [
+    function generateFallback() {
+        var prompts = [
             "That's a good start. Can you tell me more about your reasoning?",
             "Interesting approach. What findings would change your differential?",
-            "I see where you're going. What would you prioritize in the workup?",
-            "Good observation. How does that fit with the patient's presentation?",
             "What other diagnoses are you considering?",
-            "How would you explain the pathophysiology here?",
-            "What's the next step in your clinical reasoning?"
+            "How would you explain the pathophysiology here?"
         ];
-        
         return prompts[Math.floor(Math.random() * prompts.length)];
     }
 
     function checkConceptsExplored(text) {
-        const textLower = text.toLowerCase();
-        const domains = currentCase.conceptDomains || {};
-        
-        for (const concepts of Object.values(domains)) {
-            for (const concept of concepts) {
-                const searchTerms = concept.split('_');
-                if (searchTerms.some(term => textLower.includes(term))) {
-                    if (!conceptsExplored[concept]) {
-                        conceptsExplored[concept] = true;
-                        session.conceptsExplored.push(concept);
-                    }
+        var textLower = text.toLowerCase();
+        var domains = currentCase.conceptDomains || {};
+        for (var domain in domains) {
+            domains[domain].forEach(function(c) {
+                if (textLower.indexOf(c.split('_')[0]) !== -1 && !conceptsExplored[c]) {
+                    conceptsExplored[c] = true;
+                    session.conceptsExplored.push(c);
                 }
-            }
+            });
         }
         renderConceptMap();
     }
@@ -861,70 +399,15 @@
     }
 
     function goToParallelCase() {
-        if (currentCase.parallelCase) {
-            window.location.href = `mentor-chat.html?case=${currentCase.parallelCase}`;
-        } else {
-            window.location.href = 'case-library.html';
-        }
+        window.location.href = currentCase.parallelCase ? 'mentor-chat.html?case=' + currentCase.parallelCase : 'case-library.html';
     }
 
     function endSession() {
         clearInterval(timerInterval);
-        
-        const mins = Math.floor(seconds / 60);
-        const secs = seconds % 60;
-        
-        document.getElementById('modalTime').textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+        document.getElementById('modalTime').textContent = Math.floor(seconds/60) + ':' + String(seconds%60).padStart(2,'0');
         document.getElementById('modalConcepts').textContent = Object.keys(conceptsExplored).length;
         document.getElementById('modalTeaching').textContent = session.teachingMomentsDetected;
-        
-        const suggestionDiv = document.getElementById('parallelCaseSuggestion');
-        const nextBtn = document.getElementById('nextCaseBtn');
-        
-        if (currentCase.parallelCase) {
-            const parallelData = CASES[currentCase.parallelCase];
-            if (parallelData) {
-                suggestionDiv.innerHTML = `
-                    <div style="background:#fef3c7; padding:12px; border-radius:8px; text-align:center;">
-                        <p style="font-size:13px; color:#92400e; margin-bottom:4px;">
-                            <strong>🔄 Test Your Reasoning Transfer</strong>
-                        </p>
-                        <p style="font-size:12px; color:#a16207;">
-                            Try "${parallelData.title}" - ${currentCase.parallelDescription || ''}
-                        </p>
-                    </div>
-                `;
-                nextBtn.textContent = 'Try Parallel Case →';
-                nextBtn.style.background = '#f59e0b';
-            }
-        } else {
-            suggestionDiv.innerHTML = '';
-            nextBtn.textContent = 'Back to Cases';
-            nextBtn.onclick = () => location.href = 'case-library.html';
-        }
-        
         document.getElementById('endModal').classList.add('show');
-        sendSessionData();
-    }
-
-    function sendSessionData() {
-        const data = {
-            type: 'COACHDX_SESSION',
-            sessionId: session.id,
-            caseId: currentCase.id,
-            caseTopic: currentCase.title,
-            category: currentCase.category,
-            isParallelCase: session.isParallelCase,
-            parallelPairId: session.parallelPairId,
-            duration: seconds,
-            questionsAsked: session.questionsAskedByAI,
-            teachingMoments: session.teachingMomentsDetected,
-            conceptsExplored: session.conceptsExplored,
-            timestamp: new Date().toISOString()
-        };
-        
-        console.log('Session data:', data);
-        // Future: Send to fingerprint dashboard
     }
 
     document.addEventListener('DOMContentLoaded', init);
