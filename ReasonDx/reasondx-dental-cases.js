@@ -1,671 +1,707 @@
-// ReasonDx Dental Cases - DDS-001 to DDS-025 (Pain Cases)
-// EVIDENCE-BASED VERSION with Full Citations
-// Part of Dx Learning Ecosystem Multi-Profession Expansion
-// Lauren Fine, MD, FAAAAI | January 2026
-
-/*
- * EVIDENCE BASE SUMMARY
- * ---------------------
- * Primary Guidelines:
- * - AAE Consensus Conference Diagnostic Terminology (2009)
- * - ADA Clinical Practice Guideline on Antibiotic Use (2019)
+/**
+ * REASONDX DENTAL (DDS/DMD) CASES
+ * Clinical Dental Reasoning & Diagnosis
  * 
- * Supporting Evidence:
- * - Mainkar & Kim (2018) - Pulp Testing Diagnostic Accuracy Meta-analysis
- * - Chen & Abbott (2009) - Dental Pulp Testing Review
- * - Ricucci et al. (2014) - Histological-Clinical Correlation
+ * Case Structure: Chief complaint → History → Examination → 
+ * Differential diagnosis → Treatment planning
+ * 
+ * Lauren Fine, MD, FAAAAI | January 2026
+ * For PRG Grant - Multi-Institutional Validation Study
  */
 
-const DENTAL_EVIDENCE_BASE = {
-    // PRIMARY GUIDELINES
-    guidelines: {
-        AAE_DIAGNOSTIC_TERMINOLOGY: {
-            shortName: "AAE Diagnostic Terminology 2009",
-            fullCitation: "Glickman GN. AAE Consensus Conference on Diagnostic Terminology: background and perspectives. J Endod. 2009;35(12):1619-20.",
-            doi: "10.1016/j.joen.2009.09.029",
-            pmid: "19932336",
-            url: "https://pubmed.ncbi.nlm.nih.gov/19932336/",
-            openAccess: false,
-            pdfUrl: "https://www.aae.org/specialty/wp-content/uploads/sites/2/2017/07/aaeconsensusconferencerecommendeddiagnosticterminology.pdf"
-        },
-        AAE_DIAGNOSTIC_TERMS_FULL: {
-            shortName: "AAE Recommended Diagnostic Terminology",
-            fullCitation: "AAE Consensus Conference Recommended Diagnostic Terminology. J Endod. 2009;35(12):1634.",
-            doi: "10.1016/j.joen.2009.09.035",
-            pmid: "19932385",
-            url: "https://pubmed.ncbi.nlm.nih.gov/19932385/",
-            openAccess: false
-        },
-        ADA_ANTIBIOTIC_GUIDELINE: {
-            shortName: "ADA Antibiotic Guideline 2019",
-            fullCitation: "Lockhart PB, Tampi MP, Abt E, et al. Evidence-based clinical practice guideline on antibiotic use for the urgent management of pulpal- and periapical-related dental pain and intraoral swelling. J Am Dent Assoc. 2019;150(11):906-921.e12.",
-            doi: "10.1016/j.adaj.2019.08.020",
-            pmid: "31668170",
-            pmcid: "PMC8270006",
-            url: "https://pubmed.ncbi.nlm.nih.gov/31668170/",
-            openAccessUrl: "https://pmc.ncbi.nlm.nih.gov/articles/PMC8270006/",
-            openAccess: true,
-            adaResourceUrl: "https://www.ada.org/resources/research/science/evidence-based-dental-research/antibiotics-for-dental-pain-and-swelling"
-        }
-    },
-    
-    // SUPPORTING EVIDENCE - Diagnostic Testing
-    diagnosticEvidence: {
-        MAINKAR_PULP_TEST_META: {
-            shortName: "Mainkar & Kim 2018 (Pulp Test Meta-analysis)",
-            fullCitation: "Mainkar A, Kim SG. Diagnostic Accuracy of 5 Dental Pulp Tests: A Systematic Review and Meta-analysis. J Endod. 2018;44(5):694-702.",
-            doi: "10.1016/j.joen.2018.01.021",
-            pmid: "29571914",
-            url: "https://pubmed.ncbi.nlm.nih.gov/29571914/",
-            openAccess: false,
-            keyFindings: {
-                coldTestSensitivity: 0.87,
-                coldTestSpecificity: 0.84,
-                eptSensitivity: 0.72,
-                eptSpecificity: 0.93,
-                conclusion: "Cold pulp testing has generally high diagnostic accuracy among pulp sensibility tests"
-            }
-        },
-        CHEN_ABBOTT_PULP_TESTING: {
-            shortName: "Chen & Abbott 2009 (Pulp Testing Review)",
-            fullCitation: "Chen E, Abbott PV. Dental Pulp Testing: A Review. Int J Dent. 2009;2009:365785.",
-            doi: "10.1155/2009/365785",
-            pmid: "20379362",
-            pmcid: "PMC2837315",
-            url: "https://pubmed.ncbi.nlm.nih.gov/20379362/",
-            openAccessUrl: "https://pmc.ncbi.nlm.nih.gov/articles/PMC2837315/",
-            openAccess: true
-        },
-        JAFARZADEH_THERMAL_TESTS: {
-            shortName: "Jafarzadeh & Abbott 2010 (Thermal Tests)",
-            fullCitation: "Jafarzadeh H, Abbott PV. Review of pulp sensibility tests. Part I: general information and thermal tests. Int Endod J. 2010;43(9):738-62.",
-            doi: "10.1111/j.1365-2591.2010.01754.x",
-            pmid: "20609022",
-            url: "https://pubmed.ncbi.nlm.nih.gov/20609022/",
-            openAccess: false
-        }
-    },
-    
-    // PATHOPHYSIOLOGY EVIDENCE
-    pathophysiology: {
-        RICUCCI_HISTOLOGY: {
-            shortName: "Ricucci et al. 2014 (Histologic Correlation)",
-            fullCitation: "Ricucci D, Loghin S, Siqueira JF Jr. Correlation between clinical and histologic pulp diagnoses. J Endod. 2014;40(12):1932-9.",
-            doi: "10.1016/j.joen.2014.08.010",
-            pmid: "25305236",
-            url: "https://pubmed.ncbi.nlm.nih.gov/25305236/",
-            openAccess: false,
-            keyFinding: "96.6% correlation between clinical diagnosis of normal pulp/reversible pulpitis and histologic findings"
-        },
-        WOLTERS_CLASSIFICATION: {
-            shortName: "Wolters et al. 2017 (New Classification)",
-            fullCitation: "Wolters WJ, Duncan HF, Tomson PL, et al. Minimally invasive endodontics: a new diagnostic system for assessing pulpitis and subsequent treatment needs. Int Endod J. 2017;50(9):825-829.",
-            doi: "10.1111/iej.12793",
-            pmid: "28833313",
-            url: "https://pubmed.ncbi.nlm.nih.gov/28833313/",
-            openAccess: false
-        }
-    }
-};
+const REASONDX_DENTAL_CASES = {
 
-const dentalCases = [
-    // ==================== DDS-001: REVERSIBLE PULPITIS ====================
-    {
-        id: "dds-001-reversible-pulpitis",
-        title: "Cold-Sensitive Tooth",
-        category: "Dental-Pain",
-        profession: "DDS",
-        icon: "🦷",
-        difficulty: "foundational",
-        urgency: "routine",
-        mechanismLinks: ["DENT-2: Dental Pain Mechanisms", "DENT-4: Caries Progression"],
-        
-        evidenceBase: {
-            primaryGuidelines: [
-                DENTAL_EVIDENCE_BASE.guidelines.AAE_DIAGNOSTIC_TERMINOLOGY,
-                DENTAL_EVIDENCE_BASE.guidelines.AAE_DIAGNOSTIC_TERMS_FULL
-            ],
-            supportingEvidence: [
-                DENTAL_EVIDENCE_BASE.diagnosticEvidence.MAINKAR_PULP_TEST_META,
-                DENTAL_EVIDENCE_BASE.diagnosticEvidence.CHEN_ABBOTT_PULP_TESTING,
-                DENTAL_EVIDENCE_BASE.pathophysiology.RICUCCI_HISTOLOGY
-            ],
-            evidenceSummary: "AAE defines reversible pulpitis as inflammation that should resolve when the irritant is removed. Cold testing has 87% sensitivity and 84% specificity for pulp status (Mainkar 2018). Clinical-histologic correlation is 96.6% for reversible pulpitis (Ricucci 2014)."
-        },
-        
-        guidelineReferences: [
-            {
-                name: "AAE Consensus Conference Diagnostic Terminology",
-                citation: "Glickman GN. J Endod. 2009;35(12):1619-20",
-                doi: "10.1016/j.joen.2009.09.029",
-                pmid: "19932336",
-                openAccess: false,
-                keyPoints: [
-                    "Reversible pulpitis: Clinical diagnosis indicating inflammation should resolve and pulp return to normal",
-                    "Based on subjective and objective findings",
-                    "Pain is sharp, transient, and resolves quickly after stimulus removal"
-                ]
-            },
-            {
-                name: "Pulp Testing Diagnostic Accuracy Meta-analysis",
-                citation: "Mainkar A, Kim SG. J Endod. 2018;44(5):694-702",
-                doi: "10.1016/j.joen.2018.01.021",
-                pmid: "29571914",
-                openAccess: false,
-                keyPoints: [
-                    "Cold test sensitivity: 87%, specificity: 84%",
-                    "Cold testing has highest diagnostic accuracy among sensibility tests",
-                    "Electric pulp test: sensitivity 72%, specificity 93%"
-                ]
-            }
-        ],
-        
-        variants: {
-            "female-28-typical": {
-                name: "Sarah Chen",
-                firstName: "Sarah",
-                lastName: "Chen",
-                age: 28,
-                gender: "female",
-                setting: "dental_clinic",
-                chiefComplaint: "My tooth hurts when I drink cold water, but it goes away quickly",
-                patientProfile: {
-                    smokingStatus: 'never',
-                    alcoholUse: 'social',
-                    occupation: 'teacher',
-                    dentalHistory: 'regularCheckups',
-                    lastDentalVisit: '6 months ago'
-                },
-                
-                history: {
-                    hpiFindings: [
-                        { finding: "Sharp pain with cold drinks for 2 weeks", category: "character", significance: "key", evidenceNote: "A-delta fiber activation (Chen & Abbott 2009)" },
-                        { finding: "Pain resolves within 5 seconds of removing cold", category: "duration", significance: "key", evidenceNote: "Defines reversible vs irreversible (AAE 2009): <30 sec = reversible" },
-                        { finding: "No spontaneous pain", category: "timing", significance: "key", evidenceNote: "Absence of C-fiber dominant pain" },
-                        { finding: "No pain with chewing", category: "aggravating", significance: "relevant" },
-                        { finding: "Patient can localize to upper right area", category: "location", significance: "relevant" },
-                        { finding: "No swelling noted", category: "associated", significance: "relevant" }
-                    ],
-                    symptomDuration: "2 weeks",
-                    painScale: "5/10 with cold, 0/10 at rest"
-                },
-                
-                clinicalExam: {
-                    extraoral: {
-                        findings: [
-                            { finding: "No facial swelling", significance: "reassuring" },
-                            { finding: "No lymphadenopathy", significance: "reassuring" },
-                            { finding: "Normal mouth opening", significance: "reassuring" }
-                        ]
-                    },
-                    intraoral: {
-                        findings: [
-                            { finding: "Tooth #3 (upper right first molar) has visible occlusal caries", significance: "key", tooth: 3 },
-                            { finding: "No gingival swelling or sinus tract", significance: "reassuring" },
-                            { finding: "Adjacent teeth appear normal", significance: "relevant" }
-                        ]
-                    },
-                    pulpTesting: {
-                        methodology: "Cold test with Endo-Ice (1,1,1,2-tetrafluoroethane) per Jafarzadeh & Abbott 2010 protocol",
-                        coldTest: { 
-                            tooth: 3, 
-                            response: "Sharp pain, resolves in 3 seconds", 
-                            significance: "diagnostic",
-                            interpretation: "Normal A-delta fiber response with quick resolution indicates reversible pulpitis (AAE 2009)"
-                        },
-                        percussion: { tooth: 3, response: "No pain", significance: "reassuring", interpretation: "No apical periodontitis" },
-                        palpation: { tooth: 3, response: "No tenderness over apex", significance: "reassuring" },
-                        biteTest: { tooth: 3, response: "No pain", significance: "reassuring" }
-                    }
-                },
-                
-                imaging: {
-                    periapical: {
-                        findings: [
-                            { finding: "Radiolucency in occlusal enamel/dentin of tooth #3", significance: "key" },
-                            { finding: "Caries does not appear to reach pulp", significance: "key" },
-                            { finding: "Normal periapical tissues", significance: "reassuring" },
-                            { finding: "Intact lamina dura", significance: "reassuring" }
-                        ]
-                    }
-                },
-                
-                diagnosis: {
-                    primary: "Reversible Pulpitis - Tooth #3",
-                    aaeClassification: "Reversible pulpitis with normal apical tissues",
-                    differential: [
-                        { diagnosis: "Irreversible Pulpitis", likelihood: "low", reasoning: "Pain does not linger (>30 sec), no spontaneous pain per AAE criteria" },
-                        { diagnosis: "Dentinal Hypersensitivity", likelihood: "low", reasoning: "Visible caries present explains etiology" },
-                        { diagnosis: "Cracked Tooth", likelihood: "low", reasoning: "No pain on biting, no visible crack" }
-                    ],
-                    keyFindings: [
-                        "Cold sensitivity with rapid resolution (<30 sec) - AAE criterion for reversible",
-                        "No spontaneous pain - indicates A-delta not C-fiber dominance",
-                        "Negative percussion and palpation - no periapical involvement",
-                        "Caries not reaching pulp on radiograph"
-                    ],
-                    evidenceCorrelation: "96.6% of teeth clinically diagnosed with reversible pulpitis have matching histologic findings (Ricucci 2014)"
-                },
-                
-                treatment: {
-                    plan: "Caries removal and composite restoration",
-                    guidelineSupport: "AAE: Remove irritant and restore; pulp can heal if insult removed before irreversible damage",
-                    rationale: "Reversible pulpitis is treated by removing the irritant (caries) and restoring the tooth. The pulp can heal if the insult is removed before irreversible damage occurs.",
-                    procedure: [
-                        "Local anesthesia",
-                        "Rubber dam isolation",
-                        "Caries excavation with round bur",
-                        "Assess for pulp exposure (if exposed, may need direct pulp cap or RCT)",
-                        "Bonding agent application",
-                        "Composite restoration placement",
-                        "Occlusal adjustment as needed"
-                    ],
-                    antibioticIndication: "NOT INDICATED - Per ADA 2019 guideline, antibiotics provide no benefit for reversible pulpitis",
-                    followUp: "Monitor symptoms at next hygiene visit. If symptoms persist or worsen, reassess for irreversible pulpitis."
-                }
-            }
-        }
+// ============================================================================
+// DENTAL-001: ACUTE DENTAL PAIN - Pulpitis vs Abscess
+// ============================================================================
+"DENTAL-001": {
+    id: "DENTAL-001",
+    title: "Acute Dental Pain Diagnosis",
+    category: "Endodontics",
+    difficulty: "Intermediate",
+    profession: "dental",
+    
+    patient: {
+        name: "Michael Torres",
+        age: 34,
+        sex: "Male",
+        allergies: ["None"],
+        medicalHistory: ["Healthy"],
+        setting: "General Dental Practice - Emergency Visit"
     },
     
-    // ==================== DDS-002: IRREVERSIBLE PULPITIS ====================
-    {
-        id: "dds-002-irreversible-pulpitis",
-        title: "Throbbing Toothache Keeping Patient Awake",
-        category: "Dental-Pain",
-        profession: "DDS",
-        icon: "🦷",
-        difficulty: "foundational",
-        urgency: "urgent",
-        mechanismLinks: ["DENT-2: Dental Pain Mechanisms"],
-        
-        evidenceBase: {
-            primaryGuidelines: [
-                DENTAL_EVIDENCE_BASE.guidelines.AAE_DIAGNOSTIC_TERMINOLOGY,
-                DENTAL_EVIDENCE_BASE.guidelines.ADA_ANTIBIOTIC_GUIDELINE
-            ],
-            supportingEvidence: [
-                DENTAL_EVIDENCE_BASE.diagnosticEvidence.MAINKAR_PULP_TEST_META,
-                DENTAL_EVIDENCE_BASE.pathophysiology.WOLTERS_CLASSIFICATION
-            ],
-            evidenceSummary: "AAE defines symptomatic irreversible pulpitis by spontaneous pain, lingering thermal response (>30 sec), and sleep disturbance. ADA 2019 strongly recommends against antibiotics when definitive treatment is available."
+    chiefComplaint: "Severe right lower tooth pain keeping me up at night",
+    
+    clinicalScenario: `Mr. Torres presents as an emergency patient with 3 days of worsening 
+right lower tooth pain. Initially the pain was triggered by cold drinks, but now it's 
+constant and throbbing. He describes it as 8/10 and says it kept him awake last night. 
+Ibuprofen 400mg provides only 2 hours of relief. He points to the lower right quadrant 
+but can't identify a specific tooth.`,
+
+    historyOfPresentIllness: {
+        onset: "3 days ago",
+        character: "Started sharp with cold, now constant throbbing",
+        severity: "8/10",
+        timing: "Constant, worse at night when lying down",
+        aggravating: "Hot foods (more than cold now), biting, lying down",
+        relieving: "Ibuprofen (partial, temporary), sitting upright",
+        associated: "Mild swelling noticed this morning"
+    },
+
+    dentalHistory: {
+        lastExam: "2 years ago",
+        lastCleaning: "2 years ago",
+        knownIssues: "Patient recalls being told he had a cavity in lower right",
+        relevantHistory: "No history of root canals, extractions, or trauma"
+    },
+
+    clinicalExamination: {
+        extraoral: {
+            swelling: "Mild fullness right submandibular area",
+            lymphNodes: "Right submandibular node slightly enlarged, tender",
+            TMJ: "Normal ROM, no clicking or pain"
         },
-        
-        guidelineReferences: [
-            {
-                name: "AAE Consensus Conference Diagnostic Terminology",
-                citation: "Glickman GN. J Endod. 2009;35(12):1619-20",
-                doi: "10.1016/j.joen.2009.09.029",
-                pmid: "19932336",
-                keyPoints: [
-                    "Symptomatic irreversible pulpitis: Vital inflamed pulp incapable of healing",
-                    "Additional descriptors: lingering thermal pain, spontaneous pain, referred pain",
-                    "Root canal treatment or extraction is indicated"
-                ]
-            },
-            {
-                name: "ADA Antibiotic Clinical Practice Guideline",
-                citation: "Lockhart PB, et al. J Am Dent Assoc. 2019;150(11):906-921.e12",
-                doi: "10.1016/j.adaj.2019.08.020",
-                pmid: "31668170",
-                pmcid: "PMC8270006",
-                openAccess: true,
-                openAccessUrl: "https://pmc.ncbi.nlm.nih.gov/articles/PMC8270006/",
-                keyPoints: [
-                    "STRONG RECOMMENDATION: Do not prescribe antibiotics for symptomatic irreversible pulpitis when definitive treatment available",
-                    "Definitive treatment (pulpotomy, pulpectomy, RCT) is primary management",
-                    "Antibiotics provide negligible benefit with potential for significant harm"
-                ]
-            }
-        ],
-        
-        variants: {
-            "male-45-typical": {
-                name: "James Wilson",
-                firstName: "James",
-                lastName: "Wilson",
-                age: 45,
-                gender: "male",
-                setting: "dental_clinic",
-                chiefComplaint: "I have a terrible toothache that kept me up all night. The pain just started on its own.",
-                patientProfile: {
-                    smokingStatus: 'former',
-                    alcoholUse: 'moderate',
-                    occupation: 'construction',
-                    dentalHistory: 'irregularVisits',
-                    lastDentalVisit: '3 years ago'
-                },
-                
-                history: {
-                    hpiFindings: [
-                        { finding: "Spontaneous throbbing pain started 2 days ago", category: "onset", significance: "key", evidenceNote: "Spontaneous pain = AAE criterion for irreversible pulpitis" },
-                        { finding: "Pain wakes patient from sleep", category: "severity", significance: "key", evidenceNote: "Sleep disturbance indicates C-fiber activation" },
-                        { finding: "Hot liquids make it worse", category: "aggravating", significance: "key" },
-                        { finding: "Cold water initially relieves pain briefly", category: "relieving", significance: "diagnostic", evidenceNote: "Cold relief = late-stage irreversible pulpitis (vasoconstriction reduces intrapulpal pressure)" },
-                        { finding: "Pain lingers for minutes after thermal stimulus", category: "duration", significance: "key", evidenceNote: ">30 seconds = irreversible per AAE criteria" },
-                        { finding: "Patient has difficulty localizing - 'somewhere on the lower right'", category: "location", significance: "relevant", evidenceNote: "C-fiber pain is poorly localized" }
-                    ],
-                    symptomDuration: "2 days",
-                    painScale: "9/10, constant throbbing"
-                },
-                
-                clinicalExam: {
-                    extraoral: {
-                        findings: [
-                            { finding: "Mild right submandibular tenderness", significance: "relevant" },
-                            { finding: "No facial swelling", significance: "reassuring" }
-                        ]
-                    },
-                    intraoral: {
-                        findings: [
-                            { finding: "Large amalgam restoration tooth #30 with recurrent decay at margins", significance: "key", tooth: 30 },
-                            { finding: "No obvious swelling or sinus tract", significance: "relevant" }
-                        ]
-                    },
-                    pulpTesting: {
-                        coldTest: { 
-                            tooth: 30, 
-                            response: "Intense pain lasting >60 seconds after cold removal", 
-                            significance: "diagnostic",
-                            interpretation: "Lingering >30 sec = irreversible pulpitis (AAE 2009)"
-                        },
-                        heatTest: { 
-                            tooth: 30, 
-                            response: "Severe pain reproduction - matches chief complaint", 
-                            significance: "diagnostic",
-                            interpretation: "Heat reproduction of chief complaint strongly suggests irreversible pulpitis"
-                        },
-                        percussion: { tooth: 30, response: "Mild sensitivity", significance: "relevant", interpretation: "Early apical involvement" },
-                        palpation: { tooth: 30, response: "No apical tenderness", significance: "relevant" }
-                    }
-                },
-                
-                imaging: {
-                    periapical: {
-                        findings: [
-                            { finding: "Deep caries under existing restoration approaching pulp", significance: "key" },
-                            { finding: "Widened PDL space at mesial root apex", significance: "relevant", interpretation: "Early periapical changes" },
-                            { finding: "No frank periapical radiolucency yet", significance: "relevant" }
-                        ]
-                    }
-                },
-                
-                diagnosis: {
-                    primary: "Symptomatic Irreversible Pulpitis - Tooth #30",
-                    aaeClassification: "Symptomatic irreversible pulpitis with symptomatic apical periodontitis",
-                    differential: [
-                        { diagnosis: "Symptomatic Apical Periodontitis (progressing)", likelihood: "developing", reasoning: "Widened PDL suggests early periapical involvement" },
-                        { diagnosis: "Cracked Tooth Syndrome", likelihood: "possible", reasoning: "Large restoration, should evaluate for crack during treatment" },
-                        { diagnosis: "Reversible Pulpitis", likelihood: "ruled out", reasoning: "Lingering pain >30 sec, spontaneous symptoms - AAE criteria exclude reversible" }
-                    ],
-                    keyFindings: [
-                        "Spontaneous pain (AAE criterion)",
-                        "Pain wakes patient from sleep (C-fiber activation)",
-                        "Lingering response to thermal >30 seconds (AAE criterion)",
-                        "Heat exacerbates, cold may briefly relieve (classic late-stage sign)"
-                    ]
-                },
-                
-                treatment: {
-                    plan: "Root canal therapy or extraction",
-                    guidelineSupport: "AAE: Irreversible pulpitis requires RCT or extraction. ADA 2019: Antibiotics NOT indicated when definitive treatment available.",
-                    rationale: "Irreversible pulpitis indicates pulp necrosis is imminent or occurring. The pulp cannot recover. Options are endodontic therapy to retain the tooth or extraction.",
-                    immediateManagement: [
-                        "Pulpotomy/pulpectomy for pain relief if RCT cannot be completed today",
-                        "Prescribe NSAIDs: ibuprofen 400-600mg q6h (ADA recommends as first-line analgesic)",
-                        "Can add acetaminophen 500-1000mg q6h for additional analgesia",
-                        "ANTIBIOTICS NOT INDICATED - per ADA 2019 guideline, no benefit when definitive treatment available"
-                    ],
-                    antibioticStatement: {
-                        indication: "NOT INDICATED",
-                        guideline: "ADA 2019 Clinical Practice Guideline",
-                        citation: "Lockhart PB, et al. JADA 2019;150(11):906-921",
-                        rationale: "Expert panel recommends NOT prescribing antibiotics for symptomatic irreversible pulpitis when definitive treatment is available due to negligible benefits and likely harms"
-                    },
-                    definitiveOptions: [
-                        "Root canal therapy + crown (preferred if tooth is restorable)",
-                        "Extraction (if non-restorable or patient preference)"
-                    ],
-                    followUp: "Complete RCT within 1-2 weeks. Place final restoration (crown) within 1 month of RCT completion."
-                }
-            }
+        intraoral: {
+            softTissue: "Localized erythema and swelling buccal to #30",
+            tooth30: "Large mesio-occlusal carious lesion, percussion positive ++, palpation positive over apex",
+            tooth29: "Mild recession, percussion negative, vital",
+            tooth31: "Old amalgam restoration, percussion negative, vital"
+        },
+        pulpTesting: {
+            tooth30Cold: "No response (necrotic)",
+            tooth30EPT: "No response",
+            tooth29Cold: "Normal response, lingering 3 seconds",
+            tooth31Cold: "Normal response, brief"
+        },
+        radiographic: {
+            finding: "Periapical radiolucency at apex of #30 (~4mm diameter), deep carious lesion approaching pulp",
+            boneLevel: "Normal crestal bone levels"
         }
     },
 
-    // ==================== DDS-003: ACUTE APICAL ABSCESS ====================
-    {
-        id: "dds-003-acute-apical-abscess",
-        title: "Swollen Face with Dental Pain",
-        category: "Dental-Pain",
-        profession: "DDS",
-        icon: "🦷",
-        difficulty: "intermediate",
-        urgency: "emergent",
-        mechanismLinks: ["DENT-1: Oral Pathophysiology", "DENT-2: Dental Pain Mechanisms"],
-        
-        evidenceBase: {
-            primaryGuidelines: [
-                DENTAL_EVIDENCE_BASE.guidelines.AAE_DIAGNOSTIC_TERMINOLOGY,
-                DENTAL_EVIDENCE_BASE.guidelines.ADA_ANTIBIOTIC_GUIDELINE
-            ],
-            evidenceSummary: "AAE defines acute apical abscess by purulent collection, swelling, and systemic signs. ADA 2019 provides specific antibiotic recommendations when systemic involvement present."
-        },
-        
-        guidelineReferences: [
-            {
-                name: "AAE Consensus Conference Diagnostic Terminology",
-                citation: "Glickman GN. J Endod. 2009;35(12):1619-20",
-                doi: "10.1016/j.joen.2009.09.029",
-                pmid: "19932336",
-                keyPoints: [
-                    "Acute apical abscess: Inflammatory reaction to pulpal infection with purulent exudate",
-                    "Characterized by rapid onset, spontaneous pain, swelling, tenderness to percussion",
-                    "May have systemic manifestations (fever, lymphadenopathy, malaise)"
-                ]
-            },
-            {
-                name: "ADA Antibiotic Clinical Practice Guideline",
-                citation: "Lockhart PB, et al. J Am Dent Assoc. 2019;150(11):906-921.e12",
-                doi: "10.1016/j.adaj.2019.08.020",
-                pmid: "31668170",
-                pmcid: "PMC8270006",
-                openAccess: true,
-                keyPoints: [
-                    "Localized abscess WITHOUT systemic involvement: Antibiotics NOT recommended as adjunct to I&D",
-                    "Abscess WITH systemic involvement (fever, malaise, lymphadenopathy): Antibiotics indicated",
-                    "First-line: Amoxicillin 500mg TID for 3-7 days",
-                    "PCN allergy (non-anaphylactic): Cephalexin 500mg QID",
-                    "PCN allergy (anaphylactic history): Azithromycin 500mg day 1, then 250mg x 4 days OR Clindamycin 300mg QID"
-                ]
-            }
-        ],
-        
-        variants: {
-            "female-35-typical": {
-                name: "Maria Rodriguez",
-                firstName: "Maria",
-                lastName: "Rodriguez",
-                age: 35,
-                gender: "female",
-                setting: "dental_clinic",
-                chiefComplaint: "My face is swollen and I can barely open my mouth. The pain is unbearable.",
-                patientProfile: {
-                    smokingStatus: 'never',
-                    alcoholUse: 'none',
-                    occupation: 'accountant',
-                    medicalHistory: 'healthy',
-                    allergies: 'none'
-                },
-                
-                history: {
-                    hpiFindings: [
-                        { finding: "Toothache started 1 week ago, became severe 3 days ago", category: "onset", significance: "key" },
-                        { finding: "Left facial swelling appeared yesterday, rapidly worsening", category: "progression", significance: "key" },
-                        { finding: "Difficulty opening mouth (trismus)", category: "associated", significance: "key", evidenceNote: "Indicates involvement of masticatory space" },
-                        { finding: "Low-grade fever (100.4°F)", category: "systemic", significance: "key", evidenceNote: "Systemic involvement triggers antibiotic indication per ADA 2019" },
-                        { finding: "Pain with swallowing", category: "associated", significance: "concerning", evidenceNote: "Red flag for deep space involvement" },
-                        { finding: "Constant, severe, throbbing pain", category: "character", significance: "key" }
-                    ],
-                    symptomDuration: "Swelling 1 day, tooth pain 1 week",
-                    painScale: "10/10"
-                },
-                
-                clinicalExam: {
-                    extraoral: {
-                        findings: [
-                            { finding: "Left buccal space swelling, firm and tender", significance: "key" },
-                            { finding: "Overlying skin warm and erythematous", significance: "key" },
-                            { finding: "Trismus - max opening 20mm", significance: "concerning" },
-                            { finding: "Left submandibular lymphadenopathy", significance: "key", evidenceNote: "Indicates systemic involvement" },
-                            { finding: "No floor of mouth elevation", significance: "reassuring", evidenceNote: "Ludwig's angina ruled out" },
-                            { finding: "No airway compromise", significance: "critical reassuring" }
-                        ]
-                    },
-                    intraoral: {
-                        findings: [
-                            { finding: "Tooth #19 grossly carious with destroyed crown", significance: "key", tooth: 19 },
-                            { finding: "Buccal vestibular swelling and fluctuance", significance: "key", evidenceNote: "Indicates drainable collection" },
-                            { finding: "Purulent drainage from gingival sulcus", significance: "diagnostic" },
-                            { finding: "No palatal swelling", significance: "relevant" }
-                        ]
-                    },
-                    pulpTesting: {
-                        coldTest: { tooth: 19, response: "No response (necrotic)", significance: "diagnostic" },
-                        percussion: { tooth: 19, response: "Severe pain, tooth feels 'high'", significance: "key" },
-                        palpation: { tooth: 19, response: "Exquisitely tender over apex", significance: "key" }
-                    },
-                    vitals: {
-                        temp: "100.4°F (38°C)",
-                        HR: "92",
-                        BP: "130/85",
-                        RR: "16"
-                    }
-                },
-                
-                imaging: {
-                    periapical: {
-                        findings: [
-                            { finding: "Large periapical radiolucency at both roots of tooth #19", significance: "key" },
-                            { finding: "Complete coronal destruction from caries", significance: "key" },
-                            { finding: "Possible furcation involvement", significance: "relevant" }
-                        ]
-                    }
-                },
-                
-                diagnosis: {
-                    primary: "Acute Apical Abscess with Buccal Space Involvement and Systemic Signs - Tooth #19",
-                    aaeClassification: "Pulp necrosis with acute apical abscess",
-                    differential: [
-                        { diagnosis: "Ludwig's Angina", likelihood: "ruled out", reasoning: "No floor of mouth elevation, no airway compromise" },
-                        { diagnosis: "Cellulitis without abscess", likelihood: "lower", reasoning: "Fluctuance present suggests drainable collection" },
-                        { diagnosis: "Periodontal abscess", likelihood: "ruled out", reasoning: "Periapical radiolucency, non-vital pulp, carious etiology" }
-                    ],
-                    keyFindings: [
-                        "Non-vital tooth with periapical radiolucency",
-                        "Facial swelling with fluctuance",
-                        "Purulent drainage",
-                        "Systemic signs: fever, lymphadenopathy (triggers antibiotic indication)"
-                    ]
-                },
-                
-                treatment: {
-                    plan: "Incision and drainage + source control + antibiotics (systemic involvement present)",
-                    guidelineSupport: "ADA 2019: Antibiotics indicated when systemic involvement (fever, lymphadenopathy) present",
-                    rationale: "Dental abscess requires removal of the source (extraction or RCT) and drainage of purulent collection. Because systemic signs are present (fever, lymphadenopathy), antibiotics ARE indicated per ADA 2019.",
-                    immediateManagement: [
-                        "Incision and drainage of buccal space abscess",
-                        "Establish drainage (place drain if significant space involvement)",
-                        "Extract tooth #19 (non-restorable) or pulpectomy if attempting to save",
-                        "ANTIBIOTICS INDICATED (systemic involvement present):",
-                        "  First-line: Amoxicillin 500mg TID x 7 days",
-                        "  If no improvement in 48-72h: Add metronidazole 500mg TID",
-                        "Pain control: Ibuprofen 600mg + Acetaminophen 500mg q6h"
-                    ],
-                    antibioticStatement: {
-                        indication: "INDICATED - systemic involvement present",
-                        guideline: "ADA 2019 Clinical Practice Guideline",
-                        citation: "Lockhart PB, et al. JADA 2019;150(11):906-921",
-                        regimen: {
-                            firstLine: "Amoxicillin 500mg PO TID x 3-7 days",
-                            pcnAllergyNonAnaphylactic: "Cephalexin 500mg PO QID x 3-7 days",
-                            pcnAllergyAnaphylactic: "Azithromycin 500mg day 1, then 250mg days 2-5 OR Clindamycin 300mg QID x 3-7 days",
-                            note: "Clindamycin has FDA Black Box warning for C. difficile infection"
-                        }
-                    },
-                    hospitalReferralCriteria: [
-                        "Airway compromise or stridor",
-                        "Floor of mouth elevation (Ludwig's angina)",
-                        "Unable to swallow/drooling",
-                        "Rapidly spreading infection despite treatment",
-                        "Immunocompromised patient",
-                        "Failed outpatient management at 48-72 hours"
-                    ],
-                    followUp: "24-48 hour recheck MANDATORY. Ensure swelling decreasing, drain patent. If worsening, refer to OMFS/ED."
-                }
-            }
-        }
-    }
-    
-    // Additional cases DDS-004 through DDS-025 would follow same evidence-based structure
-    // Each case includes:
-    // - evidenceBase object with primary guidelines and supporting evidence
-    // - guidelineReferences array with full citations, DOIs, PMIDs
-    // - evidenceNote annotations on key findings
-    // - antibioticStatement per ADA 2019 guideline
-];
+    differentialDiagnosis: [
+        { diagnosis: "Acute Apical Abscess #30", likelihood: "Most Likely", reasoning: "Necrotic pulp, periapical radiolucency, swelling, percussion/palpation positive" },
+        { diagnosis: "Symptomatic Apical Periodontitis #30", likelihood: "Possible", reasoning: "Could be earlier stage without purulent collection" },
+        { diagnosis: "Irreversible Pulpitis #30", likelihood: "Less Likely", reasoning: "Lack of cold response indicates necrosis already occurred" },
+        { diagnosis: "Cracked Tooth #30", likelihood: "Unlikely", reasoning: "No history of trauma, radiograph shows clear carious etiology" }
+    ],
 
-// Reference template for creating new cases
-const CASE_REFERENCE_TEMPLATE = {
-    // REQUIRED: Link to MechanismDx modules
-    mechanismLinks: ["DENT-X: Module Name"],
-    
-    // REQUIRED: Evidence base with citations
-    evidenceBase: {
-        primaryGuidelines: [
-            // Reference DENTAL_EVIDENCE_BASE objects
-        ],
-        supportingEvidence: [
-            // Additional references
-        ],
-        evidenceSummary: "Brief statement of key evidence supporting this case"
+    diagnosis: {
+        primary: "Acute Apical Abscess - Tooth #30",
+        aapClassification: "Pulp Necrosis with Symptomatic Apical Periodontitis",
+        etiology: "Untreated carious lesion → pulpal necrosis → periapical infection"
     },
-    
-    // REQUIRED: Guideline references with full citations
-    guidelineReferences: [
+
+    treatmentOptions: [
         {
-            name: "Guideline Name",
-            citation: "Author. Journal. Year;Vol(Issue):Pages",
-            doi: "10.xxxx/xxxxx",
-            pmid: "XXXXXXXX",
-            pmcid: "PMCXXXXXXX", // If open access
-            openAccess: true, // or false
-            openAccessUrl: "https://pmc.ncbi.nlm.nih.gov/articles/PMCXXXXXXX/",
-            keyPoints: [
-                "Key recommendation 1",
-                "Key recommendation 2"
-            ]
+            option: "Root Canal Therapy #30",
+            description: "Pulpectomy, cleaning/shaping, obturation",
+            prognosis: "Good - 90%+ success rate",
+            timeline: "May require 1-2 visits",
+            followup: "Crown recommended after RCT"
+        },
+        {
+            option: "Extraction #30",
+            description: "Surgical removal of tooth",
+            prognosis: "Eliminates infection, creates edentulous space",
+            considerations: "Patient desires to keep tooth if possible",
+            followup: "Consider implant or bridge for replacement"
         }
     ],
+
+    emergencyManagement: [
+        "Incision and drainage if fluctuant swelling present",
+        "Pulpotomy/pulpectomy for immediate pain relief",
+        "Antibiotics: Amoxicillin 500mg TID x 7 days (or Clindamycin 300mg TID if penicillin allergy)",
+        "Analgesics: Ibuprofen 600mg + Acetaminophen 1000mg alternating",
+        "Definitive treatment within 1-2 weeks"
+    ],
+
+    keyTeachingPoints: [
+        "Spontaneous, constant pain indicates irreversible pulpal damage",
+        "No response to cold + periapical radiolucency = pulpal necrosis",
+        "Pain worse when lying down suggests increased periapical pressure",
+        "Localized swelling indicates abscess formation vs cellulitis",
+        "Antibiotics are ADJUNCTIVE - source control (drainage/RCT) is essential",
+        "Hot sensitivity replacing cold sensitivity indicates progression to necrosis"
+    ],
+
+    evidenceBase: {
+        guidelines: ["AAE Diagnosis Guidelines 2021", "ADA Antibiotic Prescribing Guidelines"],
+        keyEvidence: [
+            "Antibiotics alone do not resolve dental abscess - source control required",
+            "Incision and drainage accelerates resolution when fluctuant",
+            "RCT success rate >90% for uncomplicated cases"
+        ]
+    },
     
-    // REQUIRED for treatment: Antibiotic statement
-    antibioticStatement: {
-        indication: "INDICATED or NOT INDICATED",
-        guideline: "ADA 2019 Clinical Practice Guideline",
-        citation: "Lockhart PB, et al. JADA 2019;150(11):906-921",
-        rationale: "Explanation based on guideline criteria"
+    crossPlatformLinks: {
+        mechanismdx: { id: "pulp-pathology-module", title: "Pulp Pathophysiology" },
+        coachdx: { id: "dental-pain-diagnosis", title: "Dental Pain Workup" }
     }
+},
+
+// ============================================================================
+// DENTAL-002: ORAL MUCOSAL LESION - White Lesion Differential
+// ============================================================================
+"DENTAL-002": {
+    id: "DENTAL-002",
+    title: "White Oral Mucosal Lesion",
+    category: "Oral Pathology",
+    difficulty: "Advanced",
+    profession: "dental",
+    
+    patient: {
+        name: "Patricia Henderson",
+        age: 62,
+        sex: "Female",
+        allergies: ["Penicillin"],
+        medicalHistory: ["Hypertension", "Former smoker (quit 5 years ago, 30 pack-years)"],
+        setting: "General Dental Practice - Routine Exam"
+    },
+    
+    chiefComplaint: "Here for cleaning, but noticed a white spot in my mouth",
+    
+    clinicalScenario: `Mrs. Henderson presents for routine dental prophylaxis. During the oral 
+cancer screening portion of the exam, you identify a white lesion on the left lateral tongue 
+that the patient says she noticed about 6 weeks ago. She thought it was from biting her 
+tongue but it hasn't gone away. She reports no pain. She has a significant smoking history 
+(30 pack-years) but quit 5 years ago.`,
+
+    lesionCharacteristics: {
+        location: "Left lateral tongue, middle third",
+        size: "1.5 cm x 0.8 cm",
+        color: "White, cannot be wiped off",
+        surface: "Slightly raised, leathery texture",
+        borders: "Well-demarcated but irregular",
+        induration: "Mild firmness on palpation",
+        pain: "None",
+        duration: "6 weeks, no change in size"
+    },
+
+    riskFactorAssessment: {
+        tobacco: "30 pack-years (quit 5 years ago) - HIGH RISK persists 10+ years",
+        alcohol: "Occasional social drinking",
+        HPV: "Unknown status",
+        age: "62 - increased risk",
+        location: "Lateral tongue - HIGH RISK site",
+        chronicity: "6 weeks without resolution"
+    },
+
+    differentialDiagnosis: [
+        { 
+            diagnosis: "Leukoplakia (potentially dysplastic)", 
+            likelihood: "High concern",
+            reasoning: "Non-wipeable white lesion, high-risk location, smoking history, persistent",
+            malignantPotential: "3-17% transformation rate, higher for lateral tongue"
+        },
+        { 
+            diagnosis: "Oral Squamous Cell Carcinoma", 
+            likelihood: "Must exclude",
+            reasoning: "High-risk patient, high-risk site, induration concerning",
+            urgency: "Biopsy required"
+        },
+        { 
+            diagnosis: "Frictional Keratosis", 
+            likelihood: "Possible but less likely",
+            reasoning: "No obvious source of trauma, irregular borders less typical"
+        },
+        { 
+            diagnosis: "Oral Lichen Planus", 
+            likelihood: "Less likely",
+            reasoning: "Usually bilateral, reticular pattern, this is solitary plaque"
+        },
+        { 
+            diagnosis: "Candidiasis (Chronic hyperplastic)", 
+            likelihood: "Less likely",
+            reasoning: "Cannot be wiped off, but would expect on palate/commissures"
+        }
+    ],
+
+    diagnosticWorkup: [
+        {
+            test: "Incisional Biopsy",
+            indication: "REQUIRED - cannot diagnose leukoplakia or exclude malignancy clinically",
+            technique: "Include lesion margin and normal tissue, adequate depth",
+            timing: "Within 2 weeks"
+        },
+        {
+            test: "Oral brush biopsy (OralCDx)",
+            role: "Adjunctive screening only - does NOT replace incisional biopsy for this lesion",
+            limitation: "High false-negative rate for dysplasia"
+        }
+    ],
+
+    managementByHistology: {
+        "No dysplasia": "Remove irritants, monitor q3 months, patient education, consider removal",
+        "Mild dysplasia": "Excision recommended, close follow-up",
+        "Moderate/Severe dysplasia": "Excision with margins, referral to oral surgery/ENT",
+        "Carcinoma": "Urgent referral to head and neck oncology"
+    },
+
+    keyTeachingPoints: [
+        "Lateral tongue is the HIGHEST risk site for oral SCC",
+        "White lesions that don't wipe off and persist >2 weeks require biopsy",
+        "Smoking risk persists for 10+ years after cessation",
+        "Leukoplakia is a CLINICAL term - histology determines dysplasia/cancer",
+        "Non-homogeneous leukoplakia (irregular surface, mixed red-white) has higher malignant potential",
+        "Oral cancer screening should be part of EVERY dental exam"
+    ],
+
+    evidenceBase: {
+        guidelines: ["AAOMP White Lesion Guidelines", "ADA Oral Cancer Screening Recommendations"],
+        keyEvidence: [
+            "Lateral tongue SCC accounts for 40-50% of oral cavity cancers",
+            "Leukoplakia malignant transformation: 3-17% overall, higher for tongue",
+            "Early detection improves 5-year survival from 30% to 80%+"
+        ]
+    },
+    
+    crossPlatformLinks: {
+        mechanismdx: { id: "oral-pathology-module", title: "Oral Mucosal Pathology" },
+        coachdx: { id: "dental-oral-cancer", title: "Oral Cancer Screening" }
+    }
+},
+
+// ============================================================================
+// DENTAL-003: PERIODONTAL ASSESSMENT - Treatment Planning
+// ============================================================================
+"DENTAL-003": {
+    id: "DENTAL-003",
+    title: "Periodontal Disease Classification and Treatment",
+    category: "Periodontics",
+    difficulty: "Intermediate",
+    profession: "dental",
+    
+    patient: {
+        name: "James Washington",
+        age: 48,
+        sex: "Male",
+        allergies: ["None"],
+        medicalHistory: ["Type 2 Diabetes (A1c 7.8%)", "Hypertension"],
+        medications: ["Metformin 1000mg BID", "Lisinopril 20mg daily"],
+        setting: "General Dental Practice - New Patient Comprehensive Exam"
+    },
+    
+    chiefComplaint: "My gums bleed when I brush and my teeth feel loose",
+    
+    clinicalScenario: `Mr. Washington is a new patient who hasn't seen a dentist in 5 years. 
+He reports bleeding gums for the past year and recently noticed his lower front teeth 
+feel "loose." He has type 2 diabetes that is "somewhat controlled." He brushes once daily 
+and does not floss. He is concerned about losing his teeth.`,
+
+    periodontalExamination: {
+        probingDepths: {
+            generalizedFindings: "4-6mm generalized, 7-8mm #24, #25",
+            maxProbingDepth: "8mm on #24 mesial-lingual",
+            percentSites4mmPlus: "65%"
+        },
+        clinicalAttachmentLoss: {
+            generalizedCAL: "4-5mm generalized",
+            localizedCAL: "6-7mm #24, #25 (mandibular incisors)",
+            percentBoneLoss: "30-50% generalized, >50% #24-25"
+        },
+        bleeding: {
+            bleedingOnProbing: "75% of sites",
+            suppuration: "Present at #24, #25"
+        },
+        mobility: {
+            tooth24: "Grade II (>1mm horizontal)",
+            tooth25: "Grade II",
+            others: "Grade I scattered"
+        },
+        furcations: {
+            tooth3: "Class I buccal",
+            tooth14: "Class I buccal",
+            tooth19: "Class II buccal",
+            tooth30: "Class I buccal"
+        },
+        plaque: "Heavy supragingival and subgingival calculus generalized"
+    },
+
+    radiographicFindings: {
+        boneLoss: "Generalized horizontal bone loss 30-50%",
+        localizedDefects: "Vertical defect mesial #24 and #25",
+        furcationInvolvement: "Early furcation radiolucency #19",
+        calculus: "Subgingular calculus visible on radiographs"
+    },
+
+    riskAssessment: {
+        diabetesControl: "Moderate - A1c 7.8% increases perio risk 2-3x",
+        smoking: "Non-smoker - favorable",
+        compliance: "Poor (5 years since dental visit, no flossing)",
+        geneticRisk: "Unknown - reports father lost teeth early"
+    },
+
+    diagnosis: {
+        classification: "Periodontitis Stage III Grade C",
+        staging: {
+            stage: "III - Severe periodontitis",
+            criteria: "CAL ≥5mm, bone loss extending to middle third, tooth loss due to periodontitis (pending)",
+            complexity: "Probing depths ≥6mm, vertical bone loss, Class II furcation, moderate ridge defects"
+        },
+        grading: {
+            grade: "C - Rapid progression",
+            criteria: "Bone loss/age ratio suggests rapid progression, diabetes as risk factor",
+            riskModification: "Diabetes (A1c >7%) modifies to Grade C"
+        }
+    },
+
+    treatmentPlan: {
+        phase1: {
+            name: "Non-Surgical Periodontal Therapy",
+            steps: [
+                "Patient education and oral hygiene instruction",
+                "Full mouth scaling and root planing (4 quadrants)",
+                "Chlorhexidine rinse 0.12% BID x 2 weeks post-SRP",
+                "Re-evaluation at 4-6 weeks"
+            ]
+        },
+        diabetesCoordination: "Letter to PCP recommending optimization of glycemic control",
+        phase2: {
+            name: "Surgical Phase (if indicated after re-eval)",
+            considerations: [
+                "Osseous surgery if pockets persist >5mm",
+                "Consider regenerative procedures for #24, #25 vertical defects",
+                "Possible extraction #24 if prognosis poor"
+            ]
+        },
+        maintenance: {
+            frequency: "3-month periodontal maintenance intervals",
+            rationale: "Stage III periodontitis requires frequent professional maintenance"
+        }
+    },
+
+    prognosisByTooth: {
+        generalPrognosis: "Fair to Guarded with compliance",
+        tooth24: "Poor - Grade II mobility, vertical defect, suppuration",
+        tooth25: "Guarded - may improve with treatment",
+        furcationTeeth: "Guarded - Class II furcation #19 may require extraction long-term"
+    },
+
+    keyTeachingPoints: [
+        "2017 AAP/EFP Classification uses Staging (severity) and Grading (progression rate)",
+        "Diabetes significantly increases periodontitis risk AND periodontitis worsens glycemic control",
+        "Grade C includes rapid progressors AND those with risk factors like diabetes",
+        "SRP is first-line treatment - surgery reserved for non-responsive sites",
+        "3-month maintenance intervals essential for Stage III/IV periodontitis",
+        "Coordinate with PCP for diabetes optimization - bidirectional relationship"
+    ],
+
+    evidenceBase: {
+        guidelines: ["AAP/EFP Periodontitis Classification 2017", "ADA Periodontal Treatment Guidelines"],
+        keyEvidence: [
+            "SRP reduces probing depths average 1-2mm",
+            "A1c improvement of 0.4% seen after periodontal treatment",
+            "3-month maintenance superior to 6-month for Stage III periodontitis"
+        ]
+    },
+    
+    crossPlatformLinks: {
+        mechanismdx: { id: "periodontal-module", title: "Periodontal Disease Mechanisms" },
+        coachdx: { id: "dental-perio-planning", title: "Periodontal Treatment Planning" }
+    }
+},
+
+// ============================================================================
+// DENTAL-004: DENTAL TRAUMA - Avulsed Permanent Tooth
+// ============================================================================
+"DENTAL-004": {
+    id: "DENTAL-004",
+    title: "Dental Trauma - Avulsed Tooth Management",
+    category: "Emergency Dentistry",
+    difficulty: "Advanced",
+    profession: "dental",
+    
+    patient: {
+        name: "Emma Rodriguez",
+        age: 12,
+        sex: "Female",
+        allergies: ["None"],
+        medicalHistory: ["Healthy, immunizations up to date"],
+        setting: "Dental Office - Emergency Call"
+    },
+    
+    chiefComplaint: "My daughter got hit in the mouth at soccer and her tooth came out",
+    
+    clinicalScenario: `You receive an emergency call from a frantic parent. Her 12-year-old 
+daughter Emma was hit in the mouth by another player's elbow during soccer practice 20 
+minutes ago. The parent found the tooth on the ground and put it in a cup of milk. They 
+are 15 minutes away from your office. The tooth appears to be a front tooth.`,
+
+    phoneTriageQuestions: [
+        { question: "Is this a baby tooth or permanent tooth?", answer: "Permanent - she's 12, lost baby teeth years ago" },
+        { question: "How long has the tooth been out?", answer: "About 20 minutes now" },
+        { question: "How is the tooth being stored?", answer: "In cold milk" },
+        { question: "Was the tooth cleaned?", answer: "Mom rinsed it briefly with water" },
+        { question: "Any other injuries - head, neck, loss of consciousness?", answer: "No, she's alert, just bleeding from mouth" }
+    ],
+
+    phoneInstructions: [
+        "You did the RIGHT thing putting it in milk - keep it there",
+        "Do NOT scrub the tooth or let it dry out",
+        "Come in immediately - time is critical",
+        "If she can tolerate it, the best storage is in her own saliva or back in the socket",
+        "Apply pressure to the socket with clean gauze to control bleeding"
+    ],
+
+    clinicalExamination: {
+        extraoral: "Mild swelling upper lip, no lacerations",
+        intraoral: {
+            avulsedTooth: "#8 (maxillary right central incisor)",
+            socket: "Blood clot present, labial plate intact on palpation",
+            adjacentTeeth: "#7 and #9 - slight mobility, no displacement, percussion sensitive",
+            softTissue: "Minor gingival laceration labial to #8"
+        },
+        avulsedToothCondition: {
+            extraoralTime: "35 minutes (20 min initial + 15 min transport)",
+            storage: "Cold milk - appropriate",
+            root: "Closed apex (mature tooth)",
+            crown: "Intact, no fractures",
+            rootSurface: "PDL appears intact, no contamination visible"
+        }
+    },
+
+    diagnosis: {
+        primary: "Avulsion - Permanent tooth #8 with closed apex",
+        secondary: "Concussion injuries #7 and #9",
+        classification: "Dental trauma requiring immediate replantation"
+    },
+
+    treatment: {
+        immediate: [
+            "Gently rinse tooth with saline (do not scrub)",
+            "Gently irrigate socket with saline",
+            "Replant tooth with gentle digital pressure",
+            "Verify position clinically and radiographically"
+        ],
+        splinting: {
+            type: "Flexible splint (wire + composite or titanium trauma splint)",
+            duration: "2 weeks for avulsion",
+            technique: "Bond to adjacent teeth, allow physiologic movement"
+        },
+        medications: [
+            "Tetanus prophylaxis if not current (refer to PCP)",
+            "Doxycycline 100mg BID x 7 days (if >12 years old) OR Amoxicillin 500mg TID",
+            "Chlorhexidine 0.12% rinse BID x 1 week",
+            "Ibuprofen for pain as needed"
+        ],
+        rootCanalTiming: {
+            closedApex: "Initiate RCT within 7-10 days (pulp necrosis expected)",
+            openApex: "Different protocol - revascularization possible"
+        }
+    },
+
+    followUp: {
+        week1: "Check splint, soft tissue healing",
+        week2: "Remove splint, check mobility, periapical radiograph",
+        week4: "Begin RCT (pulp extirpation), calcium hydroxide dressing",
+        month3: "Complete RCT obturation, baseline radiograph",
+        ongoing: "Annual radiographs for 5 years monitoring for resorption"
+    },
+
+    prognosticFactors: {
+        favorable: [
+            "Short extraoral dry time (<60 minutes)",
+            "Appropriate storage medium (milk)",
+            "Intact PDL",
+            "Closed apex (predictable RCT)"
+        ],
+        unfavorable: [
+            "Any extraoral dry time reduces long-term survival",
+            "Inflammatory or replacement resorption possible",
+            "Long-term survival ~50-70% at 5 years even with optimal management"
+        ]
+    },
+
+    keyTeachingPoints: [
+        "Time is CRITICAL - every minute extraoral reduces prognosis",
+        "Best storage: Hank's solution > milk > saliva > saline >> water >> dry",
+        "NEVER scrub the root - PDL cells are essential for healing",
+        "Closed apex teeth require RCT; open apex may revascularize",
+        "Flexible splint for 2 weeks (not rigid, not prolonged)",
+        "Systemic antibiotics reduce infection risk",
+        "Long-term monitoring essential - resorption can occur years later"
+    ],
+
+    evidenceBase: {
+        guidelines: ["IADT Dental Trauma Guidelines 2020", "AAE Traumatic Injuries Guidelines"],
+        keyEvidence: [
+            "PDL cell viability: 30 min dry = 50% survival; 60 min = near 0%",
+            "Milk preserves PDL cells for 1-2 hours",
+            "Flexible splinting superior to rigid for PDL healing"
+        ]
+    },
+    
+    crossPlatformLinks: {
+        mechanismdx: { id: "dental-trauma-module", title: "Dental Trauma Healing" },
+        coachdx: { id: "dental-emergency", title: "Dental Emergency Management" }
+    }
+},
+
+// ============================================================================
+// DENTAL-005: RESTORATIVE DECISION - Crown vs Large Restoration
+// ============================================================================
+"DENTAL-005": {
+    id: "DENTAL-005",
+    title: "Restorative Treatment Planning",
+    category: "Restorative Dentistry",
+    difficulty: "Intermediate",
+    profession: "dental",
+    
+    patient: {
+        name: "David Kim",
+        age: 45,
+        sex: "Male",
+        allergies: ["Latex"],
+        medicalHistory: ["Healthy"],
+        setting: "General Dental Practice - Treatment Planning Visit"
+    },
+    
+    chiefComplaint: "Part of my filling fell out and now it's sensitive",
+    
+    clinicalScenario: `Mr. Kim presents after noticing a piece of his "silver filling" came 
+out while eating. The tooth #19 (mandibular left first molar) now has sensitivity to cold 
+and sweets. He had the original amalgam placed 15 years ago. He wants to know his options 
+and is concerned about cost.`,
+
+    clinicalExamination: {
+        tooth19: {
+            existingRestoration: "Large MOD amalgam with fractured distal marginal ridge",
+            remainingStructure: "Buccal and lingual cusps intact but undermined",
+            caries: "Secondary caries at distal margin extending subgingivally",
+            pulpTesting: "Cold positive (normal response, no lingering)",
+            percussion: "Negative",
+            probingDepths: "3mm all surfaces"
+        },
+        radiographic: {
+            caries: "Radiolucency distal margin extending toward pulp (1.5mm clearance)",
+            existingRestoration: "Large amalgam, isthmus >1/2 intercuspal width",
+            periapical: "Normal periapical structures",
+            rootCanals: "No previous RCT"
+        },
+        structuralAssessment: {
+            remainingToothStructure: "<50% of coronal structure",
+            cuspalCoverage: "Both lingual cusps undermined",
+            ferrule: "Adequate if crown placed",
+            cariesExtent: "Extends to CEJ distally"
+        }
+    },
+
+    treatmentOptions: [
+        {
+            option: "Full Coverage Crown (PFM or Zirconia)",
+            indication: "Preferred - extensive loss of tooth structure",
+            advantages: [
+                "Protects remaining cusps from fracture",
+                "Best long-term prognosis for heavily restored molars",
+                "Addresses undermined cusps"
+            ],
+            disadvantages: [
+                "Higher cost",
+                "More tooth reduction",
+                "2 appointments typically"
+            ],
+            prognosis: "Excellent - 90%+ 10-year survival",
+            estimatedCost: "$$$"
+        },
+        {
+            option: "Onlay (Gold, Ceramic, or Composite)",
+            indication: "Reasonable alternative - more conservative",
+            advantages: [
+                "Preserves more tooth structure than crown",
+                "Cuspal coverage without full reduction",
+                "Good esthetics with ceramic"
+            ],
+            disadvantages: [
+                "Technique sensitive",
+                "May not address subgingival caries as easily"
+            ],
+            prognosis: "Very good - 85%+ 10-year survival",
+            estimatedCost: "$$-$$$"
+        },
+        {
+            option: "Large Direct Composite Restoration",
+            indication: "Budget option but compromised prognosis",
+            advantages: [
+                "Single appointment",
+                "Lower initial cost",
+                "Most conservative preparation"
+            ],
+            disadvantages: [
+                "Does not protect cusps - fracture risk",
+                "Bulk fill technique challenging",
+                "Higher failure rate for large restorations"
+            ],
+            prognosis: "Guarded - 60-70% 5-year survival for large MOD",
+            estimatedCost: "$"
+        },
+        {
+            option: "New Amalgam Restoration",
+            indication: "Not recommended for this case",
+            reasoning: "Undermined cusps and extent of caries favor cuspal coverage",
+            prognosis: "Poor - high fracture risk"
+        }
+    ],
+
+    recommendedTreatment: {
+        choice: "Full Coverage Crown",
+        material: "Zirconia (patient prefers metal-free)",
+        rationale: [
+            "Remaining tooth structure <50%",
+            "Both lingual cusps undermined - fracture risk without coverage",
+            "History of restoration fracture suggests parafunctional forces",
+            "Long-term cost-effectiveness superior despite higher initial cost"
+        ],
+        procedure: [
+            "Caries excavation and pulp protection (if needed)",
+            "Core buildup if insufficient retention",
+            "Crown preparation with adequate ferrule",
+            "Impressions and provisional",
+            "Crown delivery and occlusal adjustment"
+        ]
+    },
+
+    informedConsentDiscussion: [
+        "Risk of pulpal injury during preparation (5-15% for vital teeth)",
+        "Possible need for root canal if symptoms develop",
+        "Crown longevity expectations (10-15+ years typical)",
+        "Alternative treatment options and their prognoses",
+        "Cost comparison and insurance coverage"
+    ],
+
+    keyTeachingPoints: [
+        "Isthmus width >1/2 intercuspal distance indicates crown/onlay needed",
+        "Cuspal coverage is protective - prevents cusp fracture",
+        "Initial cost vs long-term value: crowns often more cost-effective",
+        "Direct composite MOD restorations have higher failure rates",
+        "Consider patient factors: bruxism, caries risk, finances, expectations",
+        "Shared decision-making with clear prognosis discussion"
+    ],
+
+    evidenceBase: {
+        guidelines: ["ADA Restorative Guidelines", "Academy of Operative Dentistry Recommendations"],
+        keyEvidence: [
+            "Crowns on endodontically treated molars: 10-year survival 90%+",
+            "Large direct composites: 5-year failure rate 30-40%",
+            "Cusp coverage reduces fracture risk significantly"
+        ]
+    },
+    
+    crossPlatformLinks: {
+        mechanismdx: { id: "restorative-materials-module", title: "Dental Materials Science" },
+        coachdx: { id: "dental-treatment-planning", title: "Restorative Decision Making" }
+    }
+}
+
 };
 
 // Export
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { 
-        dentalCases, 
-        DENTAL_EVIDENCE_BASE,
-        CASE_REFERENCE_TEMPLATE 
-    };
+    module.exports = REASONDX_DENTAL_CASES;
+}
+if (typeof window !== 'undefined') {
+    window.REASONDX_DENTAL_CASES = REASONDX_DENTAL_CASES;
 }
 
-if (typeof window !== 'undefined') {
-    window.dentalCases = dentalCases;
-    window.DENTAL_EVIDENCE_BASE = DENTAL_EVIDENCE_BASE;
-    window.CASE_REFERENCE_TEMPLATE = CASE_REFERENCE_TEMPLATE;
-}
+console.log('[ReasonDx-Dental] Loaded ' + Object.keys(REASONDX_DENTAL_CASES).length + ' dental cases');
