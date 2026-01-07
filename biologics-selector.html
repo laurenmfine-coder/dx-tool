@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biologics Selector Tool | Dx Learning Ecosystem</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+            min-height: 100vh;
+            color: #1e293b;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+            color: white;
+            padding: 24px;
+        }
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .breadcrumb {
+            font-size: 13px;
+            opacity: 0.8;
+            margin-bottom: 8px;
+        }
+        .breadcrumb a { color: white; text-decoration: none; }
+        .header h1 { font-size: 32px; margin-bottom: 8px; }
+        .header p { opacity: 0.9; font-size: 16px; }
+        
+        .content-meta {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .meta-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            background: #f5f3ff;
+            color: #6d28d9;
+        }
+        
+        .main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+        
+        /* Filter Section */
+        .filter-section {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 32px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .filter-section h2 {
+            color: #6d28d9;
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+        .filter-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #64748b;
+            margin-bottom: 6px;
+        }
+        .filter-group select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            background: white;
+        }
+        .filter-group select:focus {
+            outline: none;
+            border-color: #7c3aed;
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+        }
+        
+        /* Comparison Table */
+        .table-container {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        .comparison-table th {
+            background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+            color: white;
+            padding: 16px 12px;
+            text-align: left;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .comparison-table th:first-child {
+            min-width: 140px;
+        }
+        .comparison-table td {
+            padding: 14px 12px;
+            border-bottom: 1px solid #f1f5f9;
+            vertical-align: top;
+        }
+        .comparison-table tr:hover {
+            background: #faf5ff;
+        }
+        .comparison-table tr.hidden {
+            display: none;
+        }
+        
+        .drug-name {
+            font-weight: 700;
+            color: #6d28d9;
+            font-size: 14px;
+        }
+        .brand-name {
+            font-size: 11px;
+            color: #64748b;
+            display: block;
+        }
+        
+        .indication-tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+            margin: 2px;
+        }
+        .indication-tag.asthma { background: #dbeafe; color: #1d4ed8; }
+        .indication-tag.ciu { background: #fce7f3; color: #be185d; }
+        .indication-tag.ad { background: #fef3c7; color: #b45309; }
+        .indication-tag.crswnp { background: #d1fae5; color: #047857; }
+        .indication-tag.eoe { background: #e0e7ff; color: #4338ca; }
+        .indication-tag.food { background: #fee2e2; color: #dc2626; }
+        .indication-tag.prurigo { background: #f3e8ff; color: #7c3aed; }
+        
+        .mechanism-cell {
+            font-size: 12px;
+            line-height: 1.5;
+        }
+        .mechanism-target {
+            font-weight: 600;
+            color: #7c3aed;
+        }
+        
+        .dosing-cell {
+            font-size: 12px;
+        }
+        .dosing-cell strong {
+            color: #1e293b;
+        }
+        
+        .biomarker-cell {
+            font-size: 12px;
+        }
+        .biomarker-positive {
+            color: #16a34a;
+            font-weight: 500;
+        }
+        .biomarker-note {
+            color: #64748b;
+            font-style: italic;
+        }
+        
+        .side-effect-list {
+            font-size: 12px;
+            margin: 0;
+            padding-left: 16px;
+        }
+        .side-effect-list li {
+            margin-bottom: 2px;
+        }
+        .boxed-warning {
+            color: #dc2626;
+            font-weight: 600;
+        }
+        
+        .cost-cell {
+            font-size: 12px;
+        }
+        .cost-high { color: #dc2626; }
+        .cost-med { color: #f59e0b; }
+        
+        /* Legend */
+        .legend {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 24px;
+        }
+        .legend h3 {
+            font-size: 14px;
+            color: #374151;
+            margin-bottom: 12px;
+        }
+        .legend-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        /* Clinical Pearls */
+        .pearls-section {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 32px;
+        }
+        .pearls-section h2 {
+            color: #6d28d9;
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+        .pearl-card {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border-left: 4px solid #22c55e;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-radius: 0 8px 8px 0;
+        }
+        .pearl-card strong {
+            color: #166534;
+        }
+        
+        /* References */
+        .references {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 32px;
+        }
+        .references h3 {
+            font-size: 16px;
+            color: #374151;
+            margin-bottom: 16px;
+        }
+        .reference-item {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .reference-item::before {
+            content: "📚";
+            position: absolute;
+            left: 0;
+        }
+        .reference-item a { color: #7c3aed; }
+        .open-access { 
+            background: #dcfce7; 
+            color: #166534; 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            font-size: 10px; 
+            font-weight: 600;
+            margin-left: 4px;
+        }
+        
+        .footer {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 32px 24px;
+            text-align: center;
+            color: #64748b;
+            font-size: 13px;
+        }
+        .footer a { color: #7c3aed; text-decoration: none; }
+        
+        @media (max-width: 1024px) {
+            .table-container {
+                overflow-x: auto;
+            }
+            .comparison-table {
+                min-width: 1200px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 { font-size: 24px; }
+            .filter-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="breadcrumb">
+                <a href="index.html">Dx Ecosystem</a> → <a href="allergy-immunology-hub.html">A/I Hub</a> → Biologics Selector
+            </div>
+            <h1>💉 Biologics Selector Tool</h1>
+            <p>Compare biologics for asthma, atopic dermatitis, urticaria, and other allergic diseases</p>
+        </div>
+    </header>
+    
+    <div class="content-meta">
+        <span class="meta-badge">📅 Last updated: January 7, 2026</span>
+        <span class="meta-badge">💊 8 Biologics</span>
+        <span class="meta-badge">📋 Evidence-based</span>
+    </div>
+    
+    <main class="main">
+        <!-- Filters -->
+        <section class="filter-section">
+            <h2>🔍 Filter by Indication</h2>
+            <div class="filter-grid">
+                <div class="filter-group">
+                    <label>Primary Indication</label>
+                    <select id="indicationFilter" onchange="filterTable()">
+                        <option value="all">All Indications</option>
+                        <option value="asthma">Severe Asthma</option>
+                        <option value="ciu">Chronic Urticaria (CIU/CSU)</option>
+                        <option value="ad">Atopic Dermatitis</option>
+                        <option value="crswnp">CRS with Nasal Polyps</option>
+                        <option value="eoe">Eosinophilic Esophagitis</option>
+                        <option value="food">Food Allergy</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Mechanism Target</label>
+                    <select id="mechanismFilter" onchange="filterTable()">
+                        <option value="all">All Mechanisms</option>
+                        <option value="ige">Anti-IgE</option>
+                        <option value="il5">Anti-IL-5/IL-5R</option>
+                        <option value="il4">Anti-IL-4/IL-13</option>
+                        <option value="tslp">Anti-TSLP</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Phenotype/Biomarker</label>
+                    <select id="phenotypeFilter" onchange="filterTable()">
+                        <option value="all">All Phenotypes</option>
+                        <option value="eos">Eosinophilic (High Eos)</option>
+                        <option value="allergic">Allergic (High IgE)</option>
+                        <option value="any">Phenotype-Agnostic</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Administration</label>
+                    <select id="adminFilter" onchange="filterTable()">
+                        <option value="all">Any Route</option>
+                        <option value="self">Self-Injectable</option>
+                        <option value="office">Office Administration</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Comparison Table -->
+        <div class="table-container">
+            <table class="comparison-table" id="biologicsTable">
+                <thead>
+                    <tr>
+                        <th>Drug</th>
+                        <th>Indications</th>
+                        <th>Mechanism</th>
+                        <th>Dosing</th>
+                        <th>Biomarker Predictors</th>
+                        <th>Key Side Effects</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Omalizumab -->
+                    <tr data-indications="asthma,ciu,food" data-mechanism="ige" data-phenotype="allergic" data-admin="office,self">
+                        <td>
+                            <span class="drug-name">Omalizumab</span>
+                            <span class="brand-name">Xolair®</span>
+                        </td>
+                        <td>
+                            <span class="indication-tag asthma">Asthma 6+</span>
+                            <span class="indication-tag ciu">CIU 12+</span>
+                            <span class="indication-tag food">Food Allergy 1+</span>
+                        </td>
+                        <td class="mechanism-cell">
+                            <span class="mechanism-target">Anti-IgE</span><br>
+                            Binds free IgE, prevents binding to FcεRI on mast cells/basophils
+                        </td>
+                        <td class="dosing-cell">
+                            <strong>Asthma:</strong> 150-375mg q2-4wks (based on IgE + weight)<br>
+                            <strong>CIU:</strong> 150-300mg q4wks<br>
+                            <strong>Food allergy:</strong> 75-600mg q2-4wks (weight-based)
+                        </td>
+                        <td class="biomarker-cell">
+                            <span class="biomarker-positive">✓ Total IgE 30-1500 IU/mL</span><br>
+                            <span class="biomarker-positive">✓ Positive aeroallergen SPT/sIgE</span><br>
+                            <span class="biomarker-note">IgE not predictive for CIU</span>
+                        </td>
+                        <td>
+                            <ul class="side-effect-list">
+                                <li>Injection site reactions</li>
+                                <li class="boxed-warning">⚠️ Anaphylaxis (0.1-0.2%)</li>
+                                <li>Headache</li>
+                                <li>Arthralgia</li>
+                            </ul>
+                        </td>
+                        <td class="dosing-cell">
+                            First 3 doses in office; home admin possible after. Observe 30min post-injection (2hrs for food allergy indication). Longest safety track record.
+                        </td>
+                    </tr>
+                    
+                    <!-- Dupilumab -->
+                    <tr data-indications="asthma,ad,crswnp,eoe,prurigo" data-mechanism="il4" data-phenotype="eos,allergic" data-admin="self">
+                        <td>
+                            <span class="drug-name">Dupilumab</span>
+                            <span class="brand-name">Dupixent®</span>
+                        </td>
+                        <td>
+                            <span class="indication-tag asthma">Asthma 6+</span>
+                            <span class="indication-tag ad">Atopic Derm 6mo+</span>
+                            <span class="indication-tag crswnp">CRSwNP 18+</span>
+                            <span class="indication-tag eoe">EoE 12+</span>
+                            <span class="indication-tag prurigo">Prurigo Nod</span>
+                        </td>
+                        <td class="mechanism-cell">
+                            <span class="mechanism-target">Anti-IL-4Rα</span><br>
+                            Blocks IL-4 AND IL-13 signaling (shared receptor); reduces Th2 inflammation
+                        </td>
+                        <td class="dosing-cell">
+                            <strong>Adults:</strong> 600mg load → 300mg q2wks<br>
+                            <strong>Asthma:</strong> 400mg load → 200mg q2wks (or 600/300 if OCS-dependent or high eos)<br>
+                            <strong>Peds:</strong> Weight-based
+                        </td>
+                        <td class="biomarker-cell">
+                            <span class="biomarker-positive">✓ Blood eos ≥150 or FeNO ≥25</span><br>
+                            <span class="biomarker-positive">✓ Higher eos = better response</span><br>
+                            <span class="biomarker-note">Also works in some non-eos asthma</span>
+                        </td>
+                        <td>
+                            <ul class="side-effect-list">
+                                <li>Injection site reactions (15%)</li>
+                                <li>Conjunctivitis (AD indication)</li>
+                                <li>Eosinophilia (transient)</li>
+                                <li>Arthralgia</li>
+                            </ul>
+                        </td>
+                        <td class="dosing-cell">
+                            Broadest indications. Self-injectable at home. No boxed warnings. Watch for conjunctivitis in AD patients. May cause transient eos rise.
+                        </td>
+                    </tr>
+                    
+                    <!-- Mepolizumab -->
+                    <tr data-indications="asthma,crswnp,egpa,hes" data-mechanism="il5" data-phenotype="eos" data-admin="self">
+                        <td>
+                            <span class="drug-name">Mepolizumab</span>
+                            <span class="brand-name">Nucala®</span>
+                        </td>
+                        <td>
+                            <span class="indication-tag asthma">Asthma 6+</span>
+                            <span class="indication-tag crswnp">CRSwNP 18+</span>
+                            <span class="indication-tag egpa">EGPA 18+</span>
+                            <span class="indication-tag hes">HES 12+</span>
+                        </td>
+                        <td class="mechanism-cell">
+                            <span class="mechanism-target">Anti-IL-5</span><br>
+                            Binds IL-5, prevents eosinophil maturation and survival
+                        </td>
+                        <td class="dosing-cell">
+                            <strong>Asthma/CRSwNP:</strong> 100mg SC q4wks<br>
+                            <strong>EGPA:</strong> 300mg SC q4wks<br>
+                            <strong>HES:</strong> 300mg SC q4wks
+                        </td>
+                        <td class="biomarker-cell">
+                            <span class="biomarker-positive">✓ Blood eos ≥150 (or ≥300 in past year)</span><br>
+                            <span class="biomarker-positive">✓ Higher baseline eos = better response</span><br>
+                            <span class="biomarker-note">OCS-dependent asthma responds well</span>
+                        </td>
+                        <td>
+                            <ul class="side-effect-list">
+                                <li>Injection site reactions</li>
+                                <li>Headache</li>
+                                <li>Back pain</li>
+                                <li>Fatigue</li>
+                                <li>Herpes zoster (rare)</li>
+                            </ul>
+                        </td>
+                        <td class="dosing-cell">
+                            Only biologic for EGPA. Fixed dosing (simple). Can be self-administered. Consider for OCS-dependent eosinophilic asthma.
+                        </td>
+                    </tr>
+                    
+                    <!-- Benralizumab -->
+                    <tr data-indications="asthma" data-mechanism="il5" data-phenotype="eos" data-admin="self">
+                        <td>
+                            <span class="drug-name">Benralizumab</span>
+                            <span class="brand-name">Fasenra®</span>
+                        </td>
+                        <td>
+                            <span class="indication-tag asthma">Asthma 12+</span>
+                        </td>
+                        <td class="mechanism-cell">
+                            <span class="mechanism-target">Anti-IL-5Rα</span><br>
+                            Binds IL-5 receptor; ADCC causes near-complete eosinophil depletion
+                        </td>
+                        <td class="dosing-cell">
+                            <strong>Loading:</strong> 30mg SC q4wks × 3 doses<br>
+                            <strong>Maintenance:</strong> 30mg SC q8wks
+                        </td>
+                        <td class="biomarker-cell">
+                            <span class="biomarker-positive">✓ Blood eos ≥300</span><br>
+                            <span class="biomarker-positive">✓ Near-complete eos depletion</span><br>
+                            <span class="biomarker-note">Best for very high eos (≥500)</span>
+                        </td>
+                        <td>
+                            <ul class="side-effect-list">
+                                <li>Headache</li>
+                                <li>Pharyngitis</li>
+                                <li>Injection site reactions</li>
+                                <li>Hypersensitivity reactions</li>
+                            </ul>
+                        </td>
+                        <td class="dosing-cell">
+                            Q8wk maintenance (fewer injections). Causes near-complete eos depletion via ADCC. May work faster than mepolizumab.
+                        </td>
+                    </tr>
+                    
+                    <!-- Reslizumab -->
+                    <tr data-indications="asthma" data-mechanism="il5" data-phenotype="eos" data-admin="office">
+                        <td>
+                            <span class="drug-name">Reslizumab</span>
+                            <span class="brand-name">Cinqair®</span>
+                        </td>
+                        <td>
+                            <span class="indication-tag asthma">Asthma 18+</span>
+                        </td>
+                        <td class="mechanism-cell">
+                            <span class="mechanism-target">Anti-IL-5</span><br>
+                            Binds IL-5, prevents eosinophil maturation
+                        </td>
+                        <td class="dosing-cell">
+                            <strong>3 mg/kg IV q4wks</strong><br>
+                            (Weight-based dosing)
+                        </td>
+                        <td class="biomarker-cell">
+                            <span class="biomarker-positive">✓ Blood eos ≥400</span><br>
+                            <span class="biomarker-note">Only IV biologic for asthma</span>
+                        </td>
+                        <td>
+                            <ul class="side-effect-list">
+                                <li class="boxed-warning">⚠️ Anaphylaxis (0.3%)</li>
+                                <li>Oropharyngeal pain</li>
+                                <li>Myalgia</li>
+                            </ul>
+                        </td>
+                        <td class="dosing-cell">
+                            Only IV option. Weight-based (advantage for larger patients). Must be given in healthcare setting. Anaphylaxis risk requires monitoring.
+                        </td>
+                    </tr>
+                    
+                    <!-- Tezepelumab -->
+                    <tr data-indications="asthma" data-mechanism="tslp" data-phenotype="any,eos,allergic" data-admin="self">
+                        <td>
+                            <span class="drug-name">Tezepelumab</span>
+                            <span class="brand-name">Tezspire®</span>
+                        </td>
+                        <td>
+                            <span class="indication-tag asthma">Asthma 12+</span>
+                        </td>
+                        <td class="mechanism-cell">
+                            <span class="mechanism-target">Anti-TSLP</span><br>
+                            Blocks TSLP (epithelial alarmin); upstream inhibition of multiple inflammatory pathways
+                        </td>
+                        <td class="dosing-cell">
+                            <strong>210mg SC q4wks</strong><br>
+                            (Fixed dosing)
+                        </td>
+                        <td class="biomarker-cell">
+                            <span class="biomarker-positive">✓ Works across phenotypes</span><br>
+                            <span class="biomarker-positive">✓ Effective in low-eos asthma</span><br>
+                            <span class="biomarker-note">Best option for non-T2 asthma</span>
+                        </td>
+                        <td>
+                            <ul class="side-effect-list">
+                                <li>Pharyngitis</li>
+                                <li>Arthralgia</li>
+                                <li>Back pain</li>
+                                <li>Injection site reactions</li>
+                            </ul>
+                        </td>
+                        <td class="dosing-cell">
+                            Phenotype-agnostic (works in low-eos asthma). Upstream mechanism. Good option when unclear phenotype or non-responders to other biologics.
+                        </td>
+                    </tr>
+                    
+                    <!-- Lebrikizumab -->
+                    <tr data-indications="ad" data-mechanism="il4" data-phenotype="eos,allergic" data-admin="self">
+                        <td>
+                            <span class="drug-name">Lebrikizumab</span>
+                            <span class="brand-name">Ebglyss®</span>
+                        </td>
+                        <td>
+                            <span class="indication-tag ad">Atopic Derm 12+</span>
+                        </td>
+                        <td class="mechanism-cell">
+                            <span class="mechanism-target">Anti-IL-13</span><br>
+                            Selectively blocks IL-13 (not IL-4); targets skin inflammation
+                        </td>
+                        <td class="dosing-cell">
+                            <strong>Loading:</strong> 500mg SC (2×250mg) at weeks 0 and 2<br>
+                            <strong>Maintenance:</strong> 250mg SC q2wks (may extend to q4wks if clear)
+                        </td>
+                        <td class="biomarker-cell">
+                            <span class="biomarker-note">No specific biomarker required</span><br>
+                            <span class="biomarker-note">Moderate-severe AD failing topicals</span>
+                        </td>
+                        <td>
+                            <ul class="side-effect-list">
+                                <li>Conjunctivitis (8%)</li>
+                                <li>Injection site reactions</li>
+                                <li>Herpes infections</li>
+                            </ul>
+                        </td>
+                        <td class="dosing-cell">
+                            Newer anti-IL-13 for AD. May extend to monthly dosing in responders. Similar conjunctivitis risk as dupilumab. Not yet approved for asthma.
+                        </td>
+                    </tr>
+                    
+                    <!-- Tralokinumab -->
+                    <tr data-indications="ad" data-mechanism="il4" data-phenotype="eos,allergic" data-admin="self">
+                        <td>
+                            <span class="drug-name">Tralokinumab</span>
+                            <span class="brand-name">Adbry®</span>
+                        </td>
+                        <td>
+                            <span class="indication-tag ad">Atopic Derm 18+</span>
+                        </td>
+                        <td class="mechanism-cell">
+                            <span class="mechanism-target">Anti-IL-13</span><br>
+                            Blocks IL-13 binding to IL-13Rα1 and IL-13Rα2
+                        </td>
+                        <td class="dosing-cell">
+                            <strong>Loading:</strong> 600mg SC at week 0<br>
+                            <strong>Maintenance:</strong> 300mg SC q2wks (may extend to q4wks)
+                        </td>
+                        <td class="biomarker-cell">
+                            <span class="biomarker-note">No specific biomarker required</span><br>
+                            <span class="biomarker-note">Moderate-severe AD failing topicals</span>
+                        </td>
+                        <td>
+                            <ul class="side-effect-list">
+                                <li>Upper respiratory infections</li>
+                                <li>Conjunctivitis (7%)</li>
+                                <li>Injection site reactions</li>
+                            </ul>
+                        </td>
+                        <td class="dosing-cell">
+                            Anti-IL-13 for AD (adults only currently). Can be used with topical corticosteroids. Less data than dupilumab but similar efficacy.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Legend -->
+        <div class="legend">
+            <h3>📋 Indication Key</h3>
+            <div class="legend-grid">
+                <span class="indication-tag asthma">Severe Asthma</span>
+                <span class="indication-tag ciu">Chronic Urticaria</span>
+                <span class="indication-tag ad">Atopic Dermatitis</span>
+                <span class="indication-tag crswnp">CRS w/ Nasal Polyps</span>
+                <span class="indication-tag eoe">Eosinophilic Esophagitis</span>
+                <span class="indication-tag food">Food Allergy</span>
+            </div>
+        </div>
+        
+        <!-- Clinical Pearls -->
+        <section class="pearls-section">
+            <h2>💡 Clinical Decision Pearls</h2>
+            
+            <div class="pearl-card">
+                <strong>High Eosinophils (≥300):</strong> Anti-IL-5 agents (mepolizumab, benralizumab) or dupilumab are excellent choices. Benralizumab causes near-complete eosinophil depletion and has q8wk maintenance dosing.
+            </div>
+            
+            <div class="pearl-card">
+                <strong>Allergic Asthma with High IgE:</strong> Omalizumab is first-line if IgE 30-1500 IU/mL and positive aeroallergen sensitization. Longest safety track record (20+ years).
+            </div>
+            
+            <div class="pearl-card">
+                <strong>Low/Unknown Eosinophils:</strong> Tezepelumab works across phenotypes including low-eos asthma. Consider when T2 biomarkers are low or phenotype unclear.
+            </div>
+            
+            <div class="pearl-card">
+                <strong>Multiple Atopic Comorbidities:</strong> Dupilumab covers asthma + atopic dermatitis + CRSwNP + EoE. One drug for multiple conditions = simplified regimen.
+            </div>
+            
+            <div class="pearl-card">
+                <strong>OCS-Dependent Asthma:</strong> All asthma biologics can reduce OCS use. Anti-IL-5 agents and dupilumab have strong OCS-sparing data. Goal is complete OCS elimination.
+            </div>
+            
+            <div class="pearl-card">
+                <strong>EGPA (Churg-Strauss):</strong> Mepolizumab is the only biologic FDA-approved for EGPA. Reduces relapse and allows OCS tapering.
+            </div>
+            
+            <div class="pearl-card">
+                <strong>Food Allergy:</strong> Omalizumab is FDA-approved to reduce allergic reactions to accidental food exposure in patients 1+ years old. Does NOT replace food avoidance or epinephrine for anaphylaxis.
+            </div>
+        </section>
+        
+        <!-- References -->
+        <div class="references">
+            <h3>📚 References & Guidelines</h3>
+            
+            <div class="reference-item">
+                Global Initiative for Asthma. <strong>GINA Report 2024: Difficult-to-Treat and Severe Asthma.</strong>
+                <a href="https://ginasthma.org/severe-asthma/" target="_blank">ginasthma.org</a>
+                <span class="open-access">Open Access</span>
+            </div>
+            
+            <div class="reference-item">
+                Busse WW, et al. <strong>Biologics for Severe Asthma: Current Evidence and Future Directions.</strong> J Allergy Clin Immunol. 2023.
+            </div>
+            
+            <div class="reference-item">
+                FDA Prescribing Information for each biologic agent (Xolair, Dupixent, Nucala, Fasenra, Cinqair, Tezspire, Ebglyss, Adbry).
+                <a href="https://www.accessdata.fda.gov/scripts/cder/daf/" target="_blank">FDA Drug Database</a>
+                <span class="open-access">Open Access</span>
+            </div>
+            
+            <div class="reference-item">
+                AAAAI/ACAAI Joint Task Force. <strong>Practice Parameters for Biologic Therapies.</strong>
+                <a href="https://www.aaaai.org/practice-resources/statements-and-practice-parameters" target="_blank">AAAAI</a>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="footer">
+        <p>© 2025-2026 Dx Learning Ecosystem · <a href="allergy-immunology-hub.html">Allergy/Immunology Hub</a></p>
+        <p style="margin-top: 8px;">Created by Lauren Fine, MD, FAAAAI · Nova Southeastern University</p>
+    </footer>
+    
+    <script>
+        function filterTable() {
+            const indication = document.getElementById('indicationFilter').value;
+            const mechanism = document.getElementById('mechanismFilter').value;
+            const phenotype = document.getElementById('phenotypeFilter').value;
+            const admin = document.getElementById('adminFilter').value;
+            
+            const rows = document.querySelectorAll('#biologicsTable tbody tr');
+            
+            rows.forEach(row => {
+                const rowIndications = row.dataset.indications || '';
+                const rowMechanism = row.dataset.mechanism || '';
+                const rowPhenotype = row.dataset.phenotype || '';
+                const rowAdmin = row.dataset.admin || '';
+                
+                let show = true;
+                
+                if (indication !== 'all' && !rowIndications.includes(indication)) {
+                    show = false;
+                }
+                if (mechanism !== 'all' && rowMechanism !== mechanism) {
+                    show = false;
+                }
+                if (phenotype !== 'all' && !rowPhenotype.includes(phenotype)) {
+                    show = false;
+                }
+                if (admin !== 'all' && !rowAdmin.includes(admin)) {
+                    show = false;
+                }
+                
+                row.classList.toggle('hidden', !show);
+            });
+        }
+    </script>
+</body>
+</html>

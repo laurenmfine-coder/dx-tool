@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCIG/IVIG Nursing Administration Guide | Dx Learning Ecosystem</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+            color: white;
+            padding: 24px;
+        }
+        .header-content { max-width: 1000px; margin: 0 auto; }
+        .breadcrumb { font-size: 13px; opacity: 0.8; margin-bottom: 8px; }
+        .breadcrumb a { color: white; text-decoration: none; }
+        .header h1 { font-size: 28px; margin-bottom: 8px; }
+        .header p { opacity: 0.9; font-size: 16px; }
+        .header-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+        
+        .content-meta {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .meta-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            background: #fce7f3;
+            color: #be185d;
+        }
+        
+        .content { max-width: 1000px; margin: 0 auto; padding: 40px 24px; }
+        
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            color: #be185d;
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #fbcfe8;
+        }
+        .section h3 { color: #db2777; font-size: 18px; margin: 24px 0 12px; }
+        
+        .checklist {
+            background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
+            border: 1px solid #f9a8d4;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+        }
+        .checklist h4 {
+            color: #be185d;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .checklist-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 10px;
+            align-items: flex-start;
+        }
+        .checkbox {
+            width: 22px;
+            height: 22px;
+            border: 2px solid #ec4899;
+            border-radius: 4px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ec4899;
+            font-size: 14px;
+        }
+        .checklist-item span {
+            font-size: 14px;
+            color: #831843;
+        }
+        
+        .protocol-box {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border: 1px solid #93c5fd;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+        }
+        .protocol-box h4 {
+            color: #1d4ed8;
+            margin-bottom: 16px;
+        }
+        
+        .warning-box {
+            background: #fef2f2;
+            border-left: 4px solid #ef4444;
+            padding: 16px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .warning-box strong { color: #dc2626; }
+        
+        .clinical-tip {
+            background: #f0fdf4;
+            border-left: 4px solid #22c55e;
+            padding: 16px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .clinical-tip strong { color: #166534; }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        .comparison-table th {
+            background: #db2777;
+            color: white;
+            padding: 14px 12px;
+            text-align: left;
+        }
+        .comparison-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+        .comparison-table tr:hover { background: #fdf2f8; }
+        
+        .site-diagram {
+            background: white;
+            border: 2px solid #f9a8d4;
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+            text-align: center;
+        }
+        .site-diagram h4 {
+            color: #be185d;
+            margin-bottom: 16px;
+        }
+        .body-map {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        .body-region {
+            text-align: center;
+            padding: 16px;
+            background: #fdf2f8;
+            border-radius: 12px;
+            min-width: 150px;
+        }
+        .body-region .icon {
+            font-size: 48px;
+            margin-bottom: 8px;
+        }
+        .body-region h5 {
+            color: #be185d;
+            margin-bottom: 4px;
+        }
+        .body-region p {
+            font-size: 12px;
+            color: #9d174d;
+        }
+        
+        .reaction-protocol {
+            background: white;
+            border: 2px solid #f59e0b;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .reaction-protocol h4 {
+            color: #b45309;
+            margin-bottom: 16px;
+        }
+        .reaction-step {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            align-items: flex-start;
+        }
+        .step-number {
+            background: #f59e0b;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        
+        .patient-teaching {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 1px solid #86efac;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+        .patient-teaching h4 {
+            color: #166534;
+            margin-bottom: 16px;
+        }
+        
+        .footer {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 32px 24px;
+            text-align: center;
+            color: #64748b;
+            font-size: 13px;
+        }
+        .footer a { color: #db2777; text-decoration: none; }
+        
+        @media (max-width: 768px) {
+            .header h1 { font-size: 22px; }
+            .body-map { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="breadcrumb">
+                <a href="index.html">Dx Ecosystem</a> → <a href="allergy-immunology-hub.html">A/I Hub</a> → Nursing Guide
+            </div>
+            <h1>🏥 SCIG/IVIG Nursing Administration Guide</h1>
+            <p>Complete clinical reference for immunoglobulin administration</p>
+            <span class="header-badge">👩‍⚕️ For RN, LPN, Infusion Nurses</span>
+        </div>
+    </header>
+    
+    <div class="content-meta">
+        <span class="meta-badge">📅 Last updated: January 7, 2026</span>
+        <span class="meta-badge">⏱️ ~35 minutes</span>
+        <span class="meta-badge">✓ Skills Checklist Included</span>
+    </div>
+    
+    <main class="content">
+        
+        <!-- IVIG Section -->
+        <section class="section">
+            <h2>1. IVIG Administration Protocol</h2>
+            
+            <div class="checklist">
+                <h4>📋 Pre-Infusion Checklist</h4>
+                <div class="checklist-item">
+                    <div class="checkbox">☐</div>
+                    <span>Verify physician order: product, dose (mg/kg), rate, premedications</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox">☐</div>
+                    <span>Confirm patient identity using two identifiers</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox">☐</div>
+                    <span>Review allergy history (especially IgA deficiency with anti-IgA antibodies)</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox">☐</div>
+                    <span>Check baseline vital signs: BP, HR, RR, Temp, SpO₂</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox">☐</div>
+                    <span>Verify IV access patency and appropriate gauge (20-22G preferred)</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox">☐</div>
+                    <span>Ensure emergency equipment available: epinephrine, diphenhydramine, oxygen</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox">☐</div>
+                    <span>Administer premedications as ordered (typically 30-60 min prior)</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox">☐</div>
+                    <span>Encourage oral hydration (unless contraindicated)</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox">☐</div>
+                    <span>Inspect IVIG product: check expiration, clarity, no particulates</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox">☐</div>
+                    <span>Allow product to reach room temperature if refrigerated</span>
+                </div>
+            </div>
+            
+            <h3>Standard Premedication Protocol</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Medication</th>
+                        <th>Dose</th>
+                        <th>Timing</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Acetaminophen</td>
+                        <td>650-1000mg PO</td>
+                        <td>30-60 min before</td>
+                        <td>Fever, headache prevention</td>
+                    </tr>
+                    <tr>
+                        <td>Diphenhydramine</td>
+                        <td>25-50mg PO/IV</td>
+                        <td>30-60 min before</td>
+                        <td>Allergic reaction prevention</td>
+                    </tr>
+                    <tr>
+                        <td>Hydrocortisone (if ordered)</td>
+                        <td>100mg IV</td>
+                        <td>30 min before</td>
+                        <td>For patients with prior reactions</td>
+                    </tr>
+                    <tr>
+                        <td>IV Fluids (if ordered)</td>
+                        <td>NS 250-500mL</td>
+                        <td>Before and during</td>
+                        <td>Renal protection (elderly, renal impairment)</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="protocol-box">
+                <h4>💉 IVIG Rate Escalation Protocol (Typical)</h4>
+                <p><em>Note: Always follow product-specific guidelines and physician orders</em></p>
+                <table class="comparison-table" style="margin-top: 16px;">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Rate (10% product)</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0-15 min</td>
+                            <td>0.5-1 mg/kg/min</td>
+                            <td>Start low; VS q15min</td>
+                        </tr>
+                        <tr>
+                            <td>15-30 min</td>
+                            <td>Increase to 2 mg/kg/min</td>
+                            <td>If tolerated; VS q15min</td>
+                        </tr>
+                        <tr>
+                            <td>30-60 min</td>
+                            <td>Increase to 4 mg/kg/min</td>
+                            <td>If tolerated; VS q30min</td>
+                        </tr>
+                        <tr>
+                            <td>After 60 min</td>
+                            <td>Maximum rate per product (often 8 mg/kg/min)</td>
+                            <td>If tolerated; VS q60min</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="checklist">
+                <h4>📋 Monitoring During Infusion</h4>
+                <div class="checklist-item">
+                    <div class="checkbox">☐</div>
+                    <span>Vital signs: q15min × 1 hour, then q30min × 1 hour, then hourly</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox">☐</div>
+                    <span>Assess for: headache, chills, flushing, nausea, chest tightness, back pain</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox">☐</div>
+                    <span>Monitor IV site for infiltration, phlebitis</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox">☐</div>
+                    <span>Document any symptoms and interventions</span>
+                </div>
+            </div>
+            
+            <div class="warning-box">
+                <strong>⚠️ IgA Deficiency Alert:</strong> Patients with complete IgA deficiency (<7 mg/dL) who have developed anti-IgA antibodies are at risk for anaphylaxis. These patients should receive IgA-depleted products (e.g., Gammagard S/D) or SCIG. Check patient's IgA status before first infusion.
+            </div>
+        </section>
+        
+        <!-- Reaction Management -->
+        <section class="section">
+            <h2>2. Infusion Reaction Management</h2>
+            
+            <div class="reaction-protocol">
+                <h4>🚨 Mild Reaction Protocol (Headache, chills, mild flushing)</h4>
+                <div class="reaction-step">
+                    <div class="step-number">1</div>
+                    <div><strong>SLOW or PAUSE</strong> infusion temporarily</div>
+                </div>
+                <div class="reaction-step">
+                    <div class="step-number">2</div>
+                    <div>Assess vital signs and symptoms</div>
+                </div>
+                <div class="reaction-step">
+                    <div class="step-number">3</div>
+                    <div>Give acetaminophen 650mg and/or diphenhydramine 25-50mg if not already given</div>
+                </div>
+                <div class="reaction-step">
+                    <div class="step-number">4</div>
+                    <div>Wait 30 minutes for symptoms to resolve</div>
+                </div>
+                <div class="reaction-step">
+                    <div class="step-number">5</div>
+                    <div>Resume at 50% of previous rate; advance slowly</div>
+                </div>
+            </div>
+            
+            <div class="reaction-protocol" style="border-color: #dc2626;">
+                <h4 style="color: #dc2626;">🚨 Severe Reaction Protocol (Hypotension, bronchospasm, angioedema)</h4>
+                <div class="reaction-step">
+                    <div class="step-number" style="background: #dc2626;">1</div>
+                    <div><strong>STOP infusion IMMEDIATELY</strong></div>
+                </div>
+                <div class="reaction-step">
+                    <div class="step-number" style="background: #dc2626;">2</div>
+                    <div>Call for help; stay with patient</div>
+                </div>
+                <div class="reaction-step">
+                    <div class="step-number" style="background: #dc2626;">3</div>
+                    <div><strong>Epinephrine 0.3-0.5mg IM</strong> (anterolateral thigh)</div>
+                </div>
+                <div class="reaction-step">
+                    <div class="step-number" style="background: #dc2626;">4</div>
+                    <div>Position supine with legs elevated (unless respiratory distress)</div>
+                </div>
+                <div class="reaction-step">
+                    <div class="step-number" style="background: #dc2626;">5</div>
+                    <div>Apply oxygen, establish IV access if needed</div>
+                </div>
+                <div class="reaction-step">
+                    <div class="step-number" style="background: #dc2626;">6</div>
+                    <div>Give albuterol nebulizer for bronchospasm</div>
+                </div>
+                <div class="reaction-step">
+                    <div class="step-number" style="background: #dc2626;">7</div>
+                    <div>Monitor VS continuously; prepare for repeat epinephrine q5-15min</div>
+                </div>
+                <div class="reaction-step">
+                    <div class="step-number" style="background: #dc2626;">8</div>
+                    <div>Notify physician; consider transfer to higher level of care</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SCIG Section -->
+        <section class="section">
+            <h2>3. SCIG Administration & Patient Teaching</h2>
+            
+            <div class="site-diagram">
+                <h4>💉 Approved SCIG Injection Sites</h4>
+                <div class="body-map">
+                    <div class="body-region">
+                        <div class="icon">🟡</div>
+                        <h5>Abdomen</h5>
+                        <p>Avoid 2 inches around navel<br>Most commonly used</p>
+                    </div>
+                    <div class="body-region">
+                        <div class="icon">🦵</div>
+                        <h5>Thighs</h5>
+                        <p>Anterior/lateral aspect<br>Good fat pad for absorption</p>
+                    </div>
+                    <div class="body-region">
+                        <div class="icon">💪</div>
+                        <h5>Upper Arms</h5>
+                        <p>Posterior aspect<br>May need assistance</p>
+                    </div>
+                    <div class="body-region">
+                        <div class="icon">🔙</div>
+                        <h5>Upper Back/Hips</h5>
+                        <p>Lateral to spine<br>May need caregiver help</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="checklist">
+                <h4>📋 SCIG Self-Administration Teaching Checklist</h4>
+                <div class="checklist-item">
+                    <div class="checkbox">☐</div>
+                    <span>Explain disease process and purpose of Ig replacement</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox">☐</div>
+                    <span>Review medication storage (refrigerate; allow to warm before use)</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox">☐</div>
+                    <span>Demonstrate hand hygiene and clean technique</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox">☐</div>
+                    <span>Teach site selection and rotation (2 inches apart; rotate systematically)</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox">☐</div>
+                    <span>Demonstrate site preparation (clean with alcohol; allow to dry)</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox">☐</div>
+                    <span>Show needle insertion technique (90° or 45° based on SC tissue)</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox">☐</div>
+                    <span>Explain infusion rate and volume per site (max 20-25mL conventional SCIG)</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox">☐</div>
+                    <span>Teach pump operation if using infusion pump</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox">☐</div>
+                    <span>Review local reaction management (ice, warm compress, site rotation)</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox">☐</div>
+                    <span>Explain when to call provider (fever, severe swelling, signs of infection)</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox">☐</div>
+                    <span>Verify return demonstration by patient/caregiver</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox">☐</div>
+                    <span>Provide written instructions and emergency contact information</span>
+                </div>
+            </div>
+            
+            <div class="clinical-tip">
+                <strong>💡 Tip for New SCIG Patients:</strong> Local site reactions (swelling, redness, itching) are common during the first few weeks but typically improve with continued use. Encourage patients to persist—reactions usually diminish significantly by week 4-8. Applying warm compress AFTER infusion can help.
+            </div>
+            
+            <div class="patient-teaching">
+                <h4>📝 SCIG Infusion Log Template</h4>
+                <p style="font-size: 14px; margin-bottom: 12px;">Instruct patients to document each infusion:</p>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Product/Lot</th>
+                            <th>Dose (g)</th>
+                            <th>Site(s) Used</th>
+                            <th>Reactions</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><em>Example:</em><br>1/7/26</td>
+                            <td>Hizentra<br>#12345</td>
+                            <td>10g</td>
+                            <td>R abd, L abd</td>
+                            <td>Mild swelling R</td>
+                            <td>Resolved 2 hrs</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <!-- Post-Infusion -->
+        <section class="section">
+            <h2>4. Post-Infusion Care & Documentation</h2>
+            
+            <div class="checklist">
+                <h4>📋 Post-Infusion Checklist (IVIG)</h4>
+                <div class="checklist-item">
+                    <div class="checkbox">☐</div>
+                    <span>Monitor for 30-60 minutes after infusion completion</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox">☐</div>
+                    <span>Final vital signs before discharge</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox">☐</div>
+                    <span>Educate on delayed reactions (headache 24-72 hrs; call if severe)</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox">☐</div>
+                    <span>Schedule next appointment</span>
+                </div>
+                <div class="checklist-item">
+                    <div class="checkbox">☐</div>
+                    <span>Remind about trough IgG lab (if due before next infusion)</span>
+                </div>
+            </div>
+            
+            <h3>Documentation Requirements</h3>
+            <ul style="margin-left: 24px;">
+                <li>Product name, lot number, expiration date</li>
+                <li>Dose administered (total grams and mg/kg)</li>
+                <li>Infusion start and end times</li>
+                <li>Rate changes and times</li>
+                <li>All vital sign checks with times</li>
+                <li>Premedications given</li>
+                <li>Any adverse reactions and interventions</li>
+                <li>Patient's response and condition at discharge</li>
+                <li>Patient/family education provided</li>
+            </ul>
+        </section>
+        
+    </main>
+    
+    <footer class="footer">
+        <p>© 2025-2026 Dx Learning Ecosystem · <a href="allergy-immunology-hub.html">Allergy/Immunology Hub</a></p>
+        <p style="margin-top: 8px;">Created by Lauren Fine, MD, FAAAAI · Nova Southeastern University</p>
+    </footer>
+</body>
+</html>
