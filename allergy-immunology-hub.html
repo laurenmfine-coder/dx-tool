@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allergy & Immunology Learning Hub | Dx Learning Ecosystem</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #ede9fe 100%);
+            min-height: 100vh;
+            color: #1e1b4b;
+        }
+        
+        /* Header */
+        .header {
+            background: white;
+            border-bottom: 1px solid #e9d5ff;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: inherit;
+        }
+        .logo-icon {
+            font-size: 32px;
+        }
+        .logo-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #6b21a8;
+        }
+        .logo-subtitle {
+            font-size: 12px;
+            color: #9333ea;
+        }
+        .nav-links {
+            display: flex;
+            gap: 16px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #6b21a8;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .nav-links a:hover {
+            background: #f3e8ff;
+        }
+        
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 60px 24px 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 700;
+            color: #4c1d95;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+        .hero h1 span {
+            color: #8b5cf6;
+        }
+        .hero p {
+            font-size: 18px;
+            color: #6b7280;
+            max-width: 700px;
+            margin: 0 auto 32px;
+            line-height: 1.6;
+        }
+        
+        /* Stats */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat-num {
+            font-size: 32px;
+            font-weight: 700;
+            color: #8b5cf6;
+        }
+        .stat-label {
+            font-size: 13px;
+            color: #6b7280;
+        }
+        
+        /* Platform Grid */
+        .platforms {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px 60px;
+        }
+        .platform-card {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.1);
+            border: 1px solid #e9d5ff;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .platform-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.2);
+            border-color: #c4b5fd;
+        }
+        .platform-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        .platform-name {
+            font-size: 22px;
+            font-weight: 600;
+            color: #4c1d95;
+            margin-bottom: 8px;
+        }
+        .platform-desc {
+            color: #6b7280;
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        .platform-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .feature-tag {
+            background: #f5f3ff;
+            color: #7c3aed;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        /* Case Categories */
+        .categories {
+            background: white;
+            padding: 60px 24px;
+            margin-top: 20px;
+        }
+        .categories h2 {
+            text-align: center;
+            font-size: 28px;
+            color: #4c1d95;
+            margin-bottom: 40px;
+        }
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .category-item {
+            background: linear-gradient(135deg, #faf5ff 0%, #f5f3ff 100%);
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid #e9d5ff;
+        }
+        .category-item h3 {
+            font-size: 16px;
+            color: #6b21a8;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .category-item p {
+            font-size: 13px;
+            color: #6b7280;
+        }
+        .category-count {
+            background: #8b5cf6;
+            color: white;
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+        
+        /* Guidelines Section */
+        .guidelines-section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+        .guidelines-section h2 {
+            text-align: center;
+            font-size: 28px;
+            color: #4c1d95;
+            margin-bottom: 16px;
+        }
+        .guidelines-section > p {
+            text-align: center;
+            color: #6b7280;
+            margin-bottom: 40px;
+        }
+        .guideline-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+        }
+        .guideline-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #e9d5ff;
+        }
+        .guideline-card h4 {
+            font-size: 14px;
+            color: #4c1d95;
+            margin-bottom: 8px;
+        }
+        .guideline-card p {
+            font-size: 13px;
+            color: #6b7280;
+            margin-bottom: 12px;
+        }
+        .guideline-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #8b5cf6;
+            font-size: 13px;
+            text-decoration: none;
+        }
+        .guideline-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Mentor Profiles */
+        .mentors {
+            background: linear-gradient(135deg, #4c1d95 0%, #6b21a8 100%);
+            padding: 60px 24px;
+            color: white;
+        }
+        .mentors h2 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 16px;
+        }
+        .mentors > p {
+            text-align: center;
+            opacity: 0.8;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .mentor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .mentor-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 24px;
+            backdrop-filter: blur(10px);
+        }
+        .mentor-avatar {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 16px;
+        }
+        .mentor-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .mentor-title {
+            font-size: 13px;
+            opacity: 0.8;
+            margin-bottom: 12px;
+        }
+        .mentor-focus {
+            font-size: 13px;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+        
+        /* CTA */
+        .cta {
+            text-align: center;
+            padding: 60px 24px;
+        }
+        .cta h2 {
+            font-size: 28px;
+            color: #4c1d95;
+            margin-bottom: 16px;
+        }
+        .cta p {
+            color: #6b7280;
+            margin-bottom: 24px;
+        }
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+        }
+        .btn-secondary {
+            background: white;
+            color: #6b21a8;
+            border: 2px solid #e9d5ff;
+        }
+        .btn-secondary:hover {
+            border-color: #c4b5fd;
+            background: #faf5ff;
+        }
+        
+        /* Footer */
+        .footer {
+            background: white;
+            border-top: 1px solid #e9d5ff;
+            padding: 32px 24px;
+            text-align: center;
+        }
+        .footer p {
+            color: #6b7280;
+            font-size: 13px;
+        }
+        .footer a {
+            color: #8b5cf6;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 32px; }
+            .stats { flex-direction: column; gap: 20px; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="coachdx-dashboard.html" class="logo">
+            <span class="logo-icon">🧬</span>
+            <div>
+                <div class="logo-text">Allergy & Immunology Hub</div>
+                <div class="logo-subtitle">Dx Learning Ecosystem</div>
+            </div>
+        </a>
+        <nav class="nav-links">
+            <a href="coachdx-dashboard.html">Dashboard</a>
+            <a href="case-library.html?specialty=allergy-immunology">Cases</a>
+            <a href="sbar-trainer.html">SBAR</a>
+        </nav>
+    </header>
+    
+    <!-- Hero -->
+    <section class="hero">
+        <span class="hero-badge">🧬 Specialty Learning Module</span>
+        <h1>Master <span>Allergy & Immunology</span></h1>
+        <p>Comprehensive clinical reasoning training for allergists, immunologists, and healthcare professionals. From anaphylaxis management to immunodeficiency workup, develop expertise through AI-guided case discussions.</p>
+        
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-num">15+</div>
+                <div class="stat-label">A/I Cases</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num">8</div>
+                <div class="stat-label">Topic Areas</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num">5</div>
+                <div class="stat-label">Learner Levels</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num">10+</div>
+                <div class="stat-label">Guidelines Integrated</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Platform Cards -->
+    <section class="platforms">
+        <a href="case-library.html?specialty=allergy-immunology" class="platform-card">
+            <div class="platform-icon">💬</div>
+            <div class="platform-name">CoachDx A/I Cases</div>
+            <div class="platform-desc">Socratic coaching through A/I clinical scenarios. AI mentor guides your diagnostic reasoning with questions tailored to your level.</div>
+            <div class="platform-features">
+                <span class="feature-tag">Anaphylaxis</span>
+                <span class="feature-tag">Drug Allergy</span>
+                <span class="feature-tag">Urticaria</span>
+                <span class="feature-tag">Immunodeficiency</span>
+            </div>
+        </a>
+        
+        <a href="mechanism/type1-hypersensitivity.html" class="platform-card">
+            <div class="platform-icon">🔬</div>
+            <div class="platform-name">MechanismDx Modules</div>
+            <div class="platform-desc">Interactive pathophysiology learning. Understand the mechanisms behind allergic and immunologic diseases.</div>
+            <div class="platform-features">
+                <span class="feature-tag">Type I Hypersensitivity</span>
+                <span class="feature-tag">Mast Cell Biology</span>
+                <span class="feature-tag">Immunodeficiency</span>
+            </div>
+        </a>
+        
+        <a href="sbar-trainer.html" class="platform-card">
+            <div class="platform-icon">📞</div>
+            <div class="platform-name">SBAR Trainer</div>
+            <div class="platform-desc">Practice urgent A/I communications. Anaphylaxis calls, drug allergy consults, and biologic reaction reporting.</div>
+            <div class="platform-features">
+                <span class="feature-tag">Anaphylaxis Call</span>
+                <span class="feature-tag">Consult Requests</span>
+                <span class="feature-tag">Reaction Reporting</span>
+            </div>
+        </a>
+        
+        <a href="team-huddle-trainer.html" class="platform-card">
+            <div class="platform-icon">🤝</div>
+            <div class="platform-name">Team Huddle Trainer</div>
+            <div class="platform-desc">Simulate interprofessional case conferences. Practice collaborative discussions with AI team members from multiple specialties.</div>
+            <div class="platform-features">
+                <span class="feature-tag">Case Conferences</span>
+                <span class="feature-tag">Multi-specialty</span>
+                <span class="feature-tag">Care Coordination</span>
+            </div>
+        </a>
+        
+        <a href="referral-letter-generator.html" class="platform-card">
+            <div class="platform-icon">✉️</div>
+            <div class="platform-name">Referral Letter Generator</div>
+            <div class="platform-desc">Practice writing professional consultation requests and referral letters to and from A/I specialists.</div>
+            <div class="platform-features">
+                <span class="feature-tag">Consult Letters</span>
+                <span class="feature-tag">504 Plans</span>
+                <span class="feature-tag">Co-management</span>
+            </div>
+        </a>
+        
+        <a href="predict-labs.html?specialty=ai" class="platform-card">
+            <div class="platform-icon">🧪</div>
+            <div class="platform-name">PredictLabs A/I</div>
+            <div class="platform-desc">Interactive lab interpretation for allergy and immunology. IgE panels, tryptase, complement, and immunoglobulin levels.</div>
+            <div class="platform-features">
+                <span class="feature-tag">IgE Panels</span>
+                <span class="feature-tag">Tryptase</span>
+                <span class="feature-tag">Complement</span>
+                <span class="feature-tag">Immunoglobulins</span>
+            </div>
+        </a>
+    </section>
+    
+    <!-- Interprofessional Collaboration -->
+    <section class="categories" style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);">
+        <h2 style="color: #166534;">🤝 Interprofessional Collaboration</h2>
+        <p style="text-align: center; color: #6b7280; margin-bottom: 32px; max-width: 700px; margin-left: auto; margin-right: auto;">
+            A/I is a hub specialty connecting to nearly every field. Master the art of collaborative care.
+        </p>
+        <div class="category-grid">
+            <div class="category-item" style="border-color: #bbf7d0;">
+                <h3 style="color: #166534;">🫁 Pulmonology & RT</h3>
+                <p>Asthma phenotyping, severe asthma biologics, VCD evaluation, inhaler technique</p>
+            </div>
+            <div class="category-item" style="border-color: #bbf7d0;">
+                <h3 style="color: #166534;">🔬 GI</h3>
+                <p>EoE coordination, food allergy/FPIES, CVID enteropathy, eosinophilic GI disorders</p>
+            </div>
+            <div class="category-item" style="border-color: #bbf7d0;">
+                <h3 style="color: #166534;">🩺 Dermatology</h3>
+                <p>Atopic dermatitis, urticaria/angioedema, cutaneous mastocytosis, drug reactions</p>
+            </div>
+            <div class="category-item" style="border-color: #bbf7d0;">
+                <h3 style="color: #166534;">👃 ENT</h3>
+                <p>CRS with polyps, AERD, VCD laryngoscopy, nasal surgery coordination</p>
+            </div>
+            <div class="category-item" style="border-color: #bbf7d0;">
+                <h3 style="color: #166534;">🦠 Infectious Disease</h3>
+                <p>Drug allergy delabeling, desensitization, antibiotic alternatives</p>
+            </div>
+            <div class="category-item" style="border-color: #bbf7d0;">
+                <h3 style="color: #166534;">🗣️ Speech/OT</h3>
+                <p>VCD respiratory retraining, feeding therapy, food reintroduction</p>
+            </div>
+            <div class="category-item" style="border-color: #bbf7d0;">
+                <h3 style="color: #166534;">🩸 Hematology</h3>
+                <p>Mastocytosis, immunodeficiency complications, eosinophilia workup</p>
+            </div>
+            <div class="category-item" style="border-color: #bbf7d0;">
+                <h3 style="color: #166534;">🏫 School & Psychology</h3>
+                <p>504 plans, food allergy anxiety, action plans, staff training</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Case Categories -->
+    <section class="categories">
+        <h2>Clinical Topic Coverage</h2>
+        <div class="category-grid">
+            <div class="category-item">
+                <h3>🚨 Anaphylaxis <span class="category-count">3 cases</span></h3>
+                <p>Acute management, post-reaction workup, cofactors, and component testing</p>
+            </div>
+            <div class="category-item">
+                <h3>💊 Drug Allergy <span class="category-count">2 cases</span></h3>
+                <p>Penicillin delabeling, NSAID hypersensitivity, PEN-FAST scoring</p>
+            </div>
+            <div class="category-item">
+                <h3>🔴 Urticaria <span class="category-count">2 cases</span></h3>
+                <p>CSU workup, avoiding unnecessary testing, treatment ladder, biologics</p>
+            </div>
+            <div class="category-item">
+                <h3>😮 Angioedema <span class="category-count">1 case</span></h3>
+                <p>ACE-I angioedema, HAE workup, bradykinin vs histamine-mediated</p>
+            </div>
+            <div class="category-item">
+                <h3>🛡️ Immunodeficiency <span class="category-count">2 cases</span></h3>
+                <p>CVID diagnosis, recurrent infections, IgG replacement</p>
+            </div>
+            <div class="category-item">
+                <h3>🫁 Asthma/AERD <span class="category-count">2 cases</span></h3>
+                <p>Severe asthma phenotyping, biologic selection, aspirin desensitization</p>
+            </div>
+            <div class="category-item">
+                <h3>🍽️ Food Allergy <span class="category-count">2 cases</span></h3>
+                <p>IgE vs non-IgE reactions, component testing, OIT candidacy</p>
+            </div>
+            <div class="category-item">
+                <h3>🐝 Venom Allergy <span class="category-count">1 case</span></h3>
+                <p>Testing, VIT indications, special populations, mastocytosis screening</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Guidelines Section -->
+    <section class="guidelines-section">
+        <h2>Evidence-Based Learning</h2>
+        <p>All cases integrate current AAAAI/ACAAI practice parameters and open-access guidelines</p>
+        
+        <div class="guideline-grid">
+            <div class="guideline-card">
+                <h4>Anaphylaxis Practice Parameter 2020/2023</h4>
+                <p>GRADE-based recommendations for diagnosis, acute management, and prevention</p>
+                <a href="https://www.aaaai.org/Aaaai/media/Media-Library-PDFs/Professional%20Education/Podcasts/Anaphylaxis-2020-grade-document.pdf" target="_blank" class="guideline-link">
+                    📄 Open Access PDF →
+                </a>
+            </div>
+            <div class="guideline-card">
+                <h4>Drug Allergy Practice Parameter 2022</h4>
+                <p>Penicillin delabeling protocols, PEN-FAST score, cross-reactivity guidance</p>
+                <a href="https://www.aaaai.org/Aaaai/media/Media-Library-PDFs/Allergist%20Resources/Statements%20and%20Practice%20Parameters/Drug-Allergy-2022.pdf" target="_blank" class="guideline-link">
+                    📄 Open Access PDF →
+                </a>
+            </div>
+            <div class="guideline-card">
+                <h4>International Urticaria Guideline 2022</h4>
+                <p>EAACI/GA²LEN/EuroGuiDerm consensus on CSU diagnosis and treatment</p>
+                <a href="https://onlinelibrary.wiley.com/doi/10.1111/all.15090" target="_blank" class="guideline-link">
+                    📄 Open Access →
+                </a>
+            </div>
+            <div class="guideline-card">
+                <h4>WAO/EAACI HAE Guideline 2021</h4>
+                <p>28 recommendations for hereditary angioedema diagnosis and management</p>
+                <a href="https://www.worldallergyorganizationjournal.org/article/S1939-4551(22)00003-5/fulltext" target="_blank" class="guideline-link">
+                    📄 Open Access →
+                </a>
+            </div>
+            <div class="guideline-card">
+                <h4>GINA Severe Asthma Guide 2024</h4>
+                <p>Biologic selection, phenotyping, and difficult-to-treat asthma management</p>
+                <a href="https://ginasthma.org/severe-asthma/" target="_blank" class="guideline-link">
+                    📄 Free Download →
+                </a>
+            </div>
+            <div class="guideline-card">
+                <h4>WAO Anaphylaxis Guidance 2020</h4>
+                <p>Global consensus on anaphylaxis recognition and management</p>
+                <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7607509/" target="_blank" class="guideline-link">
+                    📄 Open Access PMC →
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- AI Mentors -->
+    <section class="mentors">
+        <h2>Meet Your A/I Mentors</h2>
+        <p>Expert AI mentors adapt to your training level, from medical student to practicing allergist</p>
+        
+        <div class="mentor-grid">
+            <div class="mentor-card">
+                <div class="mentor-avatar">👩‍⚕️</div>
+                <div class="mentor-name">Dr. Sarah Chen</div>
+                <div class="mentor-title">Allergist/Immunologist</div>
+                <div class="mentor-focus">For medical students & residents. Focuses on fundamentals, pattern recognition, and evidence-based workup strategies.</div>
+            </div>
+            <div class="mentor-card">
+                <div class="mentor-avatar">👨‍⚕️</div>
+                <div class="mentor-name">Dr. James Park</div>
+                <div class="mentor-title">A/I Fellow</div>
+                <div class="mentor-focus">For advanced learners. Discusses nuanced cases, biologic selection, and complex diagnostic dilemmas.</div>
+            </div>
+            <div class="mentor-card">
+                <div class="mentor-avatar">👩‍🔬</div>
+                <div class="mentor-name">Dr. Maria Santos</div>
+                <div class="mentor-title">Clinical Immunologist</div>
+                <div class="mentor-focus">Specializes in immunodeficiency workup and autoimmune mechanisms. For fellows and immunology-focused learners.</div>
+            </div>
+            <div class="mentor-card">
+                <div class="mentor-avatar">💊</div>
+                <div class="mentor-name">Dr. Rachel Kim</div>
+                <div class="mentor-title">Clinical Pharmacist - A/I</div>
+                <div class="mentor-focus">For PharmD learners. Focuses on biologics, desensitization protocols, and drug interaction management.</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA -->
+    <section class="cta">
+        <h2>Start Your A/I Learning Journey</h2>
+        <p>Select your role and dive into specialty-focused cases</p>
+        <div class="cta-buttons">
+            <a href="case-library.html?specialty=allergy-immunology" class="btn btn-primary">
+                📚 Browse A/I Cases
+            </a>
+            <a href="mentor-chat.html?case=ai-anaphylaxis-workup" class="btn btn-secondary">
+                💬 Start First Case
+            </a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Allergy & Immunology Hub — Part of the <a href="coachdx-dashboard.html">Dx Learning Ecosystem</a></p>
+        <p style="margin-top: 8px;">Created by Lauren Fine, MD, FAAAAI • Nova Southeastern University</p>
+    </footer>
+    
+    <script>
+        // Set specialty filter when navigating to case library
+        document.querySelectorAll('a[href*="case-library"]').forEach(link => {
+            link.addEventListener('click', () => {
+                localStorage.setItem('selectedSpecialty', 'allergy-immunology');
+            });
+        });
+    </script>
+</body>
+</html>

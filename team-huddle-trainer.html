@@ -1,0 +1,166 @@
+ member.specialty;
+            
+            const responseBank = {
+                'allergy-immunology': [
+                    "From an allergy standpoint, we need to ensure proper testing and documentation. The key is confirming the trigger and establishing a clear management plan.",
+                    "I'd recommend we focus on the allergic component here. Let's make sure we have appropriate testing and that the action plan is comprehensive.",
+                    "Important to distinguish IgE-mediated from other mechanisms. This will guide our testing approach and long-term management."
+                ],
+                'pulmonology': [
+                    "Looking at the pulmonary perspective, we should verify the diagnosis with objective measures. Spirometry and potentially bronchoprovocation would help.",
+                    "I'm concerned about the respiratory component. Let's ensure we've ruled out other causes and optimized inhaler therapy.",
+                    "The key from my standpoint is determining the phenotype. This will guide our biologic selection if needed."
+                ],
+                'gastroenterology': [
+                    "From a GI standpoint, we need to track symptoms and histologic response. Regular endoscopy with biopsies is essential for monitoring.",
+                    "The dietary approach requires careful coordination. We should discuss the elimination sequence and timing of reintroduction.",
+                    "I'd like to ensure we're addressing any swallowing concerns. Food impaction history is important to document."
+                ],
+                'speech-therapy': [
+                    "I can work on breathing techniques and laryngeal control. The key is identifying triggers and practicing rescue breathing.",
+                    "From a feeding perspective, we should assess oral motor skills and comfort with different textures.",
+                    "I'd recommend a feeding evaluation to address any texture aversions or swallowing anxiety."
+                ],
+                'respiratory-therapy': [
+                    "I've assessed inhaler technique and there are some opportunities for improvement. The spacer technique especially needs work.",
+                    "Let me share what I observed with the inhaler assessment. Proper technique is crucial before we change medications.",
+                    "I can provide additional education on device use and help develop an action plan they can follow."
+                ],
+                'psychology': [
+                    "There does seem to be significant anxiety that's impacting quality of life. I'd recommend we address this alongside the medical management.",
+                    "The psychological component is important here. Food anxiety and avoidance behaviors can really impact outcomes.",
+                    "I can work with the family on coping strategies and address any anxiety that might be contributing to symptoms."
+                ],
+                'nutrition': [
+                    "Nutritionally, we need to ensure adequate intake despite the restrictions. Let me review the diet and identify any gaps.",
+                    "I can help with meal planning and ensure the family understands safe substitutions.",
+                    "Label reading education is essential. Many hidden sources can be missed without proper training."
+                ],
+                'pharmacy': [
+                    "From a pharmacy perspective, let's review the medication list for any interactions and ensure proper dosing.",
+                    "I can help coordinate the prescription and insurance coverage. Cost can be a barrier to adherence.",
+                    "Let me check on any drug interactions and make sure the regimen is optimized."
+                ],
+                'school-nursing': [
+                    "For the school setting, we need a clear action plan and trained staff. I'll coordinate with teachers and administrators.",
+                    "The 504 plan should cover all necessary accommodations. Let me outline what we typically include.",
+                    "Emergency preparedness is key. We need EpiPens accessible and staff trained on administration."
+                ],
+                'ent': [
+                    "From an ENT standpoint, we should evaluate the upper airway. Nasal endoscopy would help assess the extent of disease.",
+                    "The sinus disease needs to be addressed as part of the unified airway approach.",
+                    "I'd recommend we consider the surgical options alongside medical management."
+                ],
+                'infectious-disease': [
+                    "The antibiotic selection is critical here. If we can safely rule out the allergy, our treatment options improve significantly.",
+                    "I'd prefer to use first-line therapy if possible. The outcomes are better with appropriate antibiotic selection.",
+                    "Let's coordinate closely on the testing timeline. We need to make a decision soon given the clinical situation."
+                ]
+            };
+            
+            return responseBank[specialty] || [
+                "That's an important consideration. Let's make sure we address that in our plan.",
+                "I agree we need to coordinate on this. Clear communication will be key.",
+                "Thanks for raising that. From my perspective, we should prioritize patient safety and clear documentation."
+            ];
+        }
+        
+        function endHuddle() {
+            // Calculate metrics
+            const topicsCovered = checkedItems.length;
+            const totalTopics = currentCase.checklist.length;
+            const messagesFromUser = messageHistory.filter(m => m.sender.includes('You') || m.sender.includes('Fellow') || m.sender.includes('Resident')).length;
+            
+            // Generate summary
+            const summaryContent = `
+                <div style="margin-bottom: 24px;">
+                    <h3 style="color: #166534; margin-bottom: 12px;">📊 Huddle Metrics</h3>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: center;">
+                        <div style="background: #f0fdf4; padding: 16px; border-radius: 12px;">
+                            <div style="font-size: 28px; font-weight: bold; color: #22c55e;">${topicsCovered}/${totalTopics}</div>
+                            <div style="font-size: 13px; color: #6b7280;">Topics Covered</div>
+                        </div>
+                        <div style="background: #f0fdf4; padding: 16px; border-radius: 12px;">
+                            <div style="font-size: 28px; font-weight: bold; color: #22c55e;">${messageHistory.length}</div>
+                            <div style="font-size: 13px; color: #6b7280;">Total Exchanges</div>
+                        </div>
+                        <div style="background: #f0fdf4; padding: 16px; border-radius: 12px;">
+                            <div style="font-size: 28px; font-weight: bold; color: #22c55e;">${messagesFromUser}</div>
+                            <div style="font-size: 13px; color: #6b7280;">Your Contributions</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 24px;">
+                    <h3 style="color: #166534; margin-bottom: 12px;">✅ Topics Addressed</h3>
+                    <div style="background: #f9fafb; padding: 16px; border-radius: 12px;">
+                        ${currentCase.checklist.map((item, i) => `
+                            <div style="display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid #e5e7eb;">
+                                <span style="color: ${checkedItems.includes(i) ? '#22c55e' : '#ef4444'}; font-size: 18px;">
+                                    ${checkedItems.includes(i) ? '✓' : '○'}
+                                </span>
+                                <span style="color: ${checkedItems.includes(i) ? '#374151' : '#9ca3af'};">${item}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 24px;">
+                    <h3 style="color: #166534; margin-bottom: 12px;">💡 Collaboration Feedback</h3>
+                    <div style="background: #fef3c7; padding: 16px; border-radius: 12px; border-left: 4px solid #f59e0b;">
+                        <p style="margin-bottom: 12px;"><strong>Strengths:</strong></p>
+                        <ul style="margin-left: 20px; margin-bottom: 12px;">
+                            ${messagesFromUser > 2 ? '<li>Active participation in discussion</li>' : ''}
+                            ${topicsCovered >= totalTopics * 0.7 ? '<li>Good coverage of key topics</li>' : ''}
+                            <li>Engaged multiple team members</li>
+                        </ul>
+                        <p style="margin-bottom: 12px;"><strong>Opportunities:</strong></p>
+                        <ul style="margin-left: 20px;">
+                            ${topicsCovered < totalTopics ? `<li>Consider addressing remaining topics: ${currentCase.checklist.filter((_, i) => !checkedItems.includes(i)).slice(0, 2).join(', ')}</li>` : ''}
+                            ${messagesFromUser < 3 ? '<li>Try to contribute more actively to the discussion</li>' : ''}
+                            <li>Remember to clarify action items and owners at the end</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="color: #166534; margin-bottom: 12px;">🎯 Key Takeaways</h3>
+                    <div style="background: #dbeafe; padding: 16px; border-radius: 12px;">
+                        <ul style="margin-left: 20px;">
+                            <li>Effective huddles require input from all relevant team members</li>
+                            <li>Use a checklist to ensure key topics are covered</li>
+                            <li>Document action items with clear ownership</li>
+                            <li>Schedule follow-up to track progress</li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('summaryContent').innerHTML = summaryContent;
+            document.getElementById('summaryModal').classList.add('active');
+        }
+        
+        function closeSummary() {
+            document.getElementById('summaryModal').classList.remove('active');
+            document.getElementById('huddleInterface').classList.remove('active');
+            document.getElementById('selectorSection').style.display = 'block';
+            
+            // Reset
+            checkedItems = [];
+            messageHistory = [];
+            document.getElementById('chatMessages').innerHTML = '';
+            document.getElementById('yourRole').value = '';
+            document.getElementById('caseType').value = '';
+            document.getElementById('startBtn').disabled = true;
+        }
+        
+        // Enter key to send
+        document.getElementById('chatInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>

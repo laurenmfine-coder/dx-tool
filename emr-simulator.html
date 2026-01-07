@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMR Simulator | Allergy/Immunology Lab Predictor</title>
+    <!--
+    EVIDENCE-BASED REFERENCES:
+    
+    Lab values, reference ranges, and interpretations based on:
+    
+    ANAPHYLAXIS/TRYPTASE:
+    - Shaker MS, et al. J Allergy Clin Immunol. 2020;145(4):1082-1128. PMID: 32001253
+    - Golden DBK, et al. J Allergy Clin Immunol. 2024;153(4):1000-1033. PMID: 38242747
+    - Tryptase formula: Acute > 1.2x baseline + 2 ng/mL (Shaker 2020)
+    
+    COMPONENT TESTING:
+    - Ara h 2 as risk predictor: Nicolaou N, et al. J Allergy Clin Immunol. 2010;125(1):191-197
+    - Component resolved diagnostics: Sampson HA, et al. J Allergy Clin Immunol. 2014;134(5):1016-1025
+    
+    ANGIOEDEMA/COMPLEMENT:
+    - C4 screening sensitivity: Zuraw BL, et al. N Engl J Med. 2008;359(10):1027-1036
+    - HAE diagnosis: Maurer M, et al. Allergy. 2022;77(7):1961-1990. PMID: 35006617
+    
+    IMMUNODEFICIENCY:
+    - CVID criteria: Bonilla FA, et al. J Allergy Clin Immunol. 2015;136(5):1186-1205
+    - Vaccine response thresholds: Orange JS, et al. J Allergy Clin Immunol. 2012;130(3 Suppl):S1-24
+    
+    ASTHMA BIOMARKERS:
+    - T2 biomarker thresholds: GINA 2024 (ginasthma.org)
+    - FeNO interpretation: Dweik RA, et al. Am J Respir Crit Care Med. 2011;184(5):602-615
+    
+    MAST CELL DISORDERS:
+    - Tryptase >20 criterion: Valent P, et al. J Allergy Clin Immunol. 2021;148(5):1107-1116
+    - WHO mastocytosis criteria: Horny HP, et al. WHO Classification 2016
+    -->
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1e293b;
+            min-height: 100vh;
+            color: #e2e8f0;
+        }
+        
+        /* EMR Header */
+        .emr-header {
+            background: #0f172a;
+            border-bottom: 1px solid #334155;
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .emr-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: #60a5fa;
+        }
+        .emr-logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        .emr-nav {
+            display: flex;
+            gap: 4px;
+        }
+        .emr-nav-btn {
+            padding: 8px 16px;
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        .emr-nav-btn:hover { background: #334155; color: #fff; }
+        .emr-nav-btn.active { background: #3b82f6; color: #fff; }
+        
+        /* Patient Banner */
+        .patient-banner {
+            background: linear-gradient(90deg, #1e3a5f 0%, #1e293b 100%);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #334155;
+        }
+        .patient-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .patient-avatar {
+            width: 48px;
+            height: 48px;
+            background: #3b82f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .patient-details h2 {
+            font-size: 18px;
+            color: #fff;
+        }
+        .patient-meta {
+            font-size: 13px;
+            color: #94a3b8;
+        }
+        .patient-alerts {
+            display: flex;
+            gap: 8px;
+        }
+        .alert-badge {
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .alert-allergy {
+            background: #ef4444;
+            color: white;
+        }
+        .alert-flag {
+            background: #f59e0b;
+            color: #1e293b;
+        }
+        
+        /* Main Layout */
+        .emr-main {
+            display: grid;
+            grid-template-columns: 240px 1fr 320px;
+            height: calc(100vh - 120px);
+        }
+        
+        /* Sidebar */
+        .emr-sidebar {
+            background: #0f172a;
+            border-right: 1px solid #334155;
+            padding: 16px;
+            overflow-y: auto;
+        }
+        .sidebar-section {
+            margin-bottom: 20px;
+        }
+        .sidebar-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #64748b;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            padding-left: 8px;
+        }
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            color: #94a3b8;
+            transition: all 0.15s;
+        }
+        .sidebar-item:hover { background: #1e293b; color: #fff; }
+        .sidebar-item.active { background: #3b82f6; color: #fff; }
+        .sidebar-item-icon { font-size: 16px; }
+        .sidebar-badge {
+            margin-left: auto;
+            background: #ef4444;
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 10px;
+        }
+        
+        /* Content Area */
+        .emr-content {
+            background: #1e293b;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        /* Lab Results Panel */
+        .lab-panel {
+            background: #0f172a;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            margin-bottom: 20px;
+        }
+        .lab-panel-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid #334155;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .lab-panel-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+        }
+        .lab-panel-date {
+            font-size: 12px;
+            color: #64748b;
+        }
+        .lab-results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1px;
+            background: #334155;
+        }
+        .lab-result-item {
+            background: #0f172a;
+            padding: 14px 16px;
+        }
+        .lab-name {
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 4px;
+        }
+        .lab-value-row {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+        .lab-value {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .lab-value.normal { color: #22c55e; }
+        .lab-value.high { color: #ef4444; }
+        .lab-value.low { color: #3b82f6; }
+        .lab-value.critical { color: #ef4444; animation: pulse 1s infinite; }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        .lab-unit {
+            font-size: 12px;
+            color: #64748b;
+        }
+        .lab-range {
+            font-size: 11px;
+            color: #475569;
+            margin-top: 4px;
+        }
+        .lab-trend {
+            font-size: 11px;
+            margin-top: 4px;
+        }
+        .trend-up { color: #ef4444; }
+        .trend-down { color: #22c55e; }
+        .trend-stable { color: #64748b; }
+        
+        /* Prediction Panel */
+        .prediction-panel {
+            background: linear-gradient(135deg, #1e3a5f 0%, #312e81 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #4338ca;
+        }
+        .prediction-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .prediction-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(99, 102, 241, 0.3);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        .prediction-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+        }
+        .prediction-subtitle {
+            font-size: 13px;
+            color: #a5b4fc;
+        }
+        .prediction-form {
+            margin-bottom: 16px;
+        }
+        .prediction-question {
+            font-size: 14px;
+            color: #e0e7ff;
+            margin-bottom: 12px;
+        }
+        .prediction-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+        .prediction-option {
+            padding: 12px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .prediction-option:hover {
+            background: rgba(255,255,255,0.15);
+            border-color: #818cf8;
+        }
+        .prediction-option.selected {
+            background: #4f46e5;
+            border-color: #818cf8;
+        }
+        .prediction-option.correct {
+            background: #166534;
+            border-color: #22c55e;
+        }
+        .prediction-option.incorrect {
+            background: #991b1b;
+            border-color: #ef4444;
+        }
+        .option-label {
+            font-size: 12px;
+            color: #c7d2fe;
+            margin-bottom: 4px;
+        }
+        .option-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+        }
+        .submit-prediction {
+            width: 100%;
+            padding: 12px;
+            background: #6366f1;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+        .submit-prediction:hover { background: #4f46e5; }
+        .submit-prediction:disabled { background: #475569; cursor: not-allowed; }
+        
+        /* Teaching Point */
+        .teaching-point {
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid #22c55e;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 16px;
+            display: none;
+        }
+        .teaching-point.visible { display: block; }
+        .teaching-point h4 {
+            color: #22c55e;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .teaching-point p {
+            font-size: 13px;
+            color: #a7f3d0;
+            line-height: 1.6;
+        }
+        
+        /* Right Panel - Clinical Context */
+        .clinical-panel {
+            background: #0f172a;
+            border-left: 1px solid #334155;
+            padding: 16px;
+            overflow-y: auto;
+        }
+        .clinical-section {
+            margin-bottom: 20px;
+        }
+        .clinical-section-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #64748b;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .clinical-card {
+            background: #1e293b;
+            border-radius: 8px;
+            padding: 14px;
+            margin-bottom: 8px;
+        }
+        .clinical-card h4 {
+            font-size: 13px;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+        .clinical-card p {
+            font-size: 12px;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+        
+        /* Allergy List */
+        .allergy-list {
+            background: #450a0a;
+            border: 1px solid #dc2626;
+            border-radius: 8px;
+            padding: 12px;
+        }
+        .allergy-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 0;
+            border-bottom: 1px solid #7f1d1d;
+            font-size: 13px;
+        }
+        .allergy-item:last-child { border-bottom: none; }
+        .allergy-severity {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+        .severity-high { background: #ef4444; }
+        .severity-moderate { background: #f59e0b; }
+        
+        /* Vitals */
+        .vitals-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+        .vital-item {
+            background: #1e293b;
+            border-radius: 6px;
+            padding: 10px;
+            text-align: center;
+        }
+        .vital-label {
+            font-size: 10px;
+            color: #64748b;
+            text-transform: uppercase;
+        }
+        .vital-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+        }
+        .vital-value.abnormal { color: #ef4444; }
+        
+        /* Case Selector */
+        .case-selector {
+            background: #0f172a;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #334155;
+        }
+        .case-selector h3 {
+            color: #fff;
+            margin-bottom: 16px;
+        }
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+        }
+        .case-option {
+            background: #1e293b;
+            border: 2px solid #334155;
+            border-radius: 10px;
+            padding: 14px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .case-option:hover {
+            border-color: #3b82f6;
+        }
+        .case-option.selected {
+            border-color: #3b82f6;
+            background: #1e3a5f;
+        }
+        .case-option h4 {
+            font-size: 14px;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+        .case-option p {
+            font-size: 12px;
+            color: #64748b;
+        }
+        
+        /* Hidden initially */
+        .emr-view { display: none; }
+        .emr-view.active { display: block; }
+    </style>
+</head>
+<body>
+    <!-- EMR Header -->
+    <header class="emr-header">
+        <div class="emr-logo">
+            <div class="emr-logo-icon">🏥</div>
+            <span>DxLearn EMR</span>
+        </div>
+        <nav class="emr-nav">
+            <button class="emr-nav-btn active" onclick="showView('labs')">Labs</button>
+            <button class="emr-nav-btn" onclick="showView('predictor')">Lab Predictor</button>
+            <button class="emr-nav-btn" onclick="showView('imaging')">Imaging</button>
+            <button class="emr-nav-btn" onclick="window.location.href='allergy-immunology-hub.html'">A/I Hub</button>
+        </nav>
+    </header>
+    
+    <!-- Patient Banner -->
+    <div class="patient-banner" id="patientBanner">
+        <div class="patient-info">
+            <div class="patient-avatar" id="patientAvatar">TM</div>
+            <div class="patient-details">
+                <h2 id="patientName">Select a Case</h2>
+                <div class="patient-meta" id="patientMeta">Choose a clinical scenario to view EMR data</div>
+            </div>
+        </div>
+        <div class="patient-alerts" id="patientAlerts">
+            <!-- Populated dynamically -->
+        </div>
+    </div>
+    
+    <!-- Main EMR Layout -->
+    <div class="emr-main">
+        <!-- Sidebar -->
+        <aside class="emr-sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">Chart Navigation</div>
+                <div class="sidebar-item active" onclick="showSection('labs')">
+                    <span class="sidebar-item-icon">🧪</span>
+                    Labs
+                    <span class="sidebar-badge" id="newLabsBadge" style="display:none;">New</span>
+                </div>
+                <div class="sidebar-item" onclick="showSection('allergies')">
+                    <span class="sidebar-item-icon">⚠️</span>
+                    Allergies
+                </div>
+                <div class="sidebar-item" onclick="showSection('meds')">
+                    <span class="sidebar-item-icon">💊</span>
+                    Medications
+                </div>
+                <div class="sidebar-item" onclick="showSection('vitals')">
+                    <span class="sidebar-item-icon">❤️</span>
+                    Vitals
+                </div>
+                <div class="sidebar-item" onclick="showSection('notes')">
+                    <span class="sidebar-item-icon">📝</span>
+                    Notes
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-title">A/I Lab Panels</div>
+                <div class="sidebar-item" onclick="loadLabPanel('anaphylaxis')">
+                    <span class="sidebar-item-icon">🚨</span>
+                    Anaphylaxis
+                </div>
+                <div class="sidebar-item" onclick="loadLabPanel('allergy')">
+                    <span class="sidebar-item-icon">🧬</span>
+                    Allergy Testing
+                </div>
+                <div class="sidebar-item" onclick="loadLabPanel('asthma')">
+                    <span class="sidebar-item-icon">🫁</span>
+                    Asthma/Atopy
+                </div>
+                <div class="sidebar-item" onclick="loadLabPanel('immunodeficiency')">
+                    <span class="sidebar-item-icon">🛡️</span>
+                    Immunodeficiency
+                </div>
+                <div class="sidebar-item" onclick="loadLabPanel('angioedema')">
+                    <span class="sidebar-item-icon">😮</span>
+                    Angioedema
+                </div>
+                <div class="sidebar-item" onclick="loadLabPanel('eosinophilia')">
+                    <span class="sidebar-item-icon">🔬</span>
+                    Eosinophilia
+                </div>
+                <div class="sidebar-item" onclick="loadLabPanel('mastcell')">
+                    <span class="sidebar-item-icon">⚡</span>
+                    Mast Cell
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="emr-content" id="emrContent">
+            <!-- Case Selector (shown initially) -->
+            <div class="case-selector" id="caseSelector">
+                <h3>🔬 Select A/I Case for EMR Review</h3>
+                <div class="case-grid" id="caseGrid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+            
+            <!-- Lab Results View -->
+            <div class="emr-view" id="labsView">
+                <!-- Lab panels populated here -->
+            </div>
+            
+            <!-- Lab Predictor View -->
+            <div class="emr-view" id="predictorView">
+                <div class="prediction-panel">
+                    <div class="prediction-header">
+                        <div class="prediction-icon">🔮</div>
+                        <div>
+                            <div class="prediction-title">Lab Predictor Challenge</div>
+                            <div class="prediction-subtitle">Predict results before revealing them</div>
+                        </div>
+                    </div>
+                    <div id="predictionContent">
+                        <!-- Predictions loaded here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- Clinical Context Panel -->
+        <aside class="clinical-panel">
+            <div class="clinical-section">
+                <div class="clinical-section-title">📋 Chief Complaint</div>
+                <div class="clinical-card">
+                    <p id="chiefComplaint">Select a case to view clinical context</p>
+                </div>
+            </div>
+            
+            <div class="clinical-section">
+                <div class="clinical-section-title">⚠️ Allergies</div>
+                <div class="allergy-list" id="allergyList">
+                    <div class="allergy-item">
+                        <div class="allergy-severity severity-high"></div>
+                        <span>NKDA</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="clinical-section">
+                <div class="clinical-section-title">❤️ Vitals</div>
+                <div class="vitals-grid" id="vitalsGrid">
+                    <div class="vital-item">
+                        <div class="vital-label">BP</div>
+                        <div class="vital-value">--/--</div>
+                    </div>
+                    <div class="vital-item">
+                        <div class="vital-label">HR</div>
+                        <div class="vital-value">--</div>
+                    </div>
+                    <div class="vital-item">
+                        <div class="vital-label">RR</div>
+                        <div class="vital-value">--</div>
+                    </div>
+                    <div class="vital-item">
+                        <div class="vital-label">SpO2</div>
+                        <div class="vital-value">--%</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="clinical-section">
+                <div class="clinical-section-title">📝 Key History</div>
+                <div class="clinical-card">
+                    <p id="keyHistory">Loading...</p>
+                </div>
+            </div>
+            
+            <div class="clinical-section">
+                <div class="clinical-section-title">🎯 Clinical Question</div>
+                <div class="clinical-card" style="background: #1e3a5f; border: 1px solid #3b82f6;">
+                    <p id="clinicalQuestion" style="color: #93c5fd;">What labs would help with diagnosis and management?</p>
+                </div>
+            </div>
+        </aside>
+    </div>
+    
+    <script>
+        // A/I Case Data
+        const aiCases = {
+            'anaphylaxis-workup': {
+                name: 'Tyler Morrison',
+                age: '8 yo M',
+                mrn: 'MRN: 847291',
+                avatar: 'TM',
+                chiefComplaint: 'Post-anaphylaxis evaluation. Had reaction to cookie at school last week - hives, facial swelling, vomiting. EpiPen administered by school nurse.',
+                allergies: [
+                    { name: 'Peanut (confirmed)', severity: 'high' },
+                    { name: 'Tree nuts (avoids)', severity: 'moderate' }
+                ],
+                vitals: { bp: '98/62', hr: '88', rr: '18', spo2: '99' },
+                history: 'Previously healthy. First known anaphylactic reaction. Family history of atopy (mother has asthma). No prior allergy testing.',
+                question: 'What labs confirm the diagnosis and identify the trigger?',
+                alerts: ['Anaphylaxis Risk', 'EpiPen Required'],
+                
+                labs: {
+                    tryptase: { value: 2.1, unit: 'ng/mL', range: '< 11.4', status: 'normal', timing: 'Baseline (2 weeks post-reaction)' },
+                    totalIgE: { value: 245, unit: 'kU/L', range: '< 100', status: 'high' },
+                    peanutIgE: { value: 45.2, unit: 'kU/A', range: '< 0.35', status: 'high', interpretation: 'Class 4 - High' },
+                    araH2: { value: 28.5, unit: 'kU/A', range: '< 0.35', status: 'high', interpretation: 'High risk component' },
+                    araH8: { value: 0.8, unit: 'kU/A', range: '< 0.35', status: 'high', interpretation: 'PR-10 (oral allergy syndrome)' },
+                    treeNutIgE: { value: 12.3, unit: 'kU/A', range: '< 0.35', status: 'high' },
+                    cbc: {
+                        wbc: { value: 7.2, unit: 'K/uL', range: '4.5-11.0', status: 'normal' },
+                        eos: { value: 0.45, unit: 'K/uL', range: '0.0-0.5', status: 'normal', percent: '6.3%' }
+                    }
+                },
+                
+                predictions: [
+                    {
+                        question: 'Given anaphylaxis to a cookie 2 weeks ago, what would you expect for baseline tryptase?',
+                        labName: 'Baseline Tryptase',
+                        options: [
+                            { label: 'Elevated', value: '> 15 ng/mL' },
+                            { label: 'Normal', value: '< 11.4 ng/mL' },
+                            { label: 'Low', value: '< 1 ng/mL' }
+                        ],
+                        correct: 1,
+                        teaching: 'Baseline tryptase should be NORMAL in typical anaphylaxis. Elevated baseline (>11.4 or >20) suggests clonal mast cell disorder. Tryptase is only elevated DURING acute anaphylaxis (peaks 1-2 hours, normalizes by 24 hours). [Shaker 2020, PMID: 32001253; Golden 2023, PMID: 38242747]'
+                    },
+                    {
+                        question: 'For a child with peanut anaphylaxis, what pattern of component testing suggests highest risk for severe reactions?',
+                        labName: 'Peanut Components',
+                        options: [
+                            { label: 'Ara h 8 High', value: 'PR-10 protein' },
+                            { label: 'Ara h 2 High', value: 'Storage protein' },
+                            { label: 'All Negative', value: 'No sensitization' }
+                        ],
+                        correct: 1,
+                        teaching: 'Ara h 2 (a storage protein) is the best predictor of clinical peanut allergy and severe reactions (>90% PPV). Ara h 8 is a PR-10 protein associated with oral allergy syndrome (mild, localized reactions). Component testing helps risk-stratify beyond just total peanut IgE. [Nicolaou 2010, PMID: 20109746; Sampson 2014, PMID: 25174862]'
+                    }
+                ]
+            },
+            
+            'angioedema-ace': {
+                name: 'James Wilson',
+                age: '62 yo M',
+                mrn: 'MRN: 293847',
+                avatar: 'JW',
+                chiefComplaint: 'Tongue and lip swelling x 4 hours. On lisinopril x 3 years. No urticaria. Partial response to antihistamines/steroids.',
+                allergies: [
+                    { name: 'NKDA', severity: 'none' }
+                ],
+                vitals: { bp: '142/88', hr: '92', rr: '20', spo2: '96' },
+                history: 'HTN on lisinopril 10mg x 3 years. No prior angioedema. No urticaria with this episode. Family history negative for angioedema.',
+                question: 'Is this ACE-I angioedema or HAE? What labs differentiate?',
+                alerts: ['Airway Risk', 'ACE-I Angioedema'],
+                
+                labs: {
+                    c4: { value: 18, unit: 'mg/dL', range: '16-47', status: 'normal' },
+                    c1Inh: { value: 24, unit: 'mg/dL', range: '21-39', status: 'normal' },
+                    c1InhFunction: { value: 85, unit: '%', range: '> 67%', status: 'normal' },
+                    c3: { value: 125, unit: 'mg/dL', range: '90-180', status: 'normal' },
+                    tryptase: { value: 4.2, unit: 'ng/mL', range: '< 11.4', status: 'normal' },
+                    cbc: {
+                        wbc: { value: 8.5, unit: 'K/uL', range: '4.5-11.0', status: 'normal' },
+                        eos: { value: 0.2, unit: 'K/uL', range: '0.0-0.5', status: 'normal', percent: '2.4%' }
+                    }
+                },
+                
+                predictions: [
+                    {
+                        question: 'This patient has angioedema WITHOUT urticaria on an ACE inhibitor. What would you expect for C4 level?',
+                        labName: 'C4 Level',
+                        options: [
+                            { label: 'Low', value: '< 16 mg/dL' },
+                            { label: 'Normal', value: '16-47 mg/dL' },
+                            { label: 'High', value: '> 47 mg/dL' }
+                        ],
+                        correct: 1,
+                        teaching: 'In ACE-I angioedema, complement levels are NORMAL. C4 is a screening test for HAE - it\'s low in >95% of HAE patients even between attacks. ACE-I angioedema is caused by bradykinin accumulation (ACE normally degrades bradykinin), not complement activation. [Zuraw 2008, PMID: 18768946; Maurer 2022, PMID: 35006617]'
+                    },
+                    {
+                        question: 'Angioedema WITHOUT urticaria suggests which mechanism?',
+                        labName: 'Mechanism',
+                        options: [
+                            { label: 'Histamine-mediated', value: 'IgE/mast cell' },
+                            { label: 'Bradykinin-mediated', value: 'ACE-I, HAE' },
+                            { label: 'Unknown', value: 'Idiopathic' }
+                        ],
+                        correct: 1,
+                        teaching: 'Angioedema WITHOUT urticaria = think bradykinin (ACE-I, HAE). Angioedema WITH urticaria = think histamine (allergic, mast cell). This is why antihistamines don\'t work well for ACE-I angioedema - it\'s not histamine-mediated! [Bernstein 2022, PMID: 36464645; Maurer 2022, PMID: 35006617]'
+                    }
+                ]
+            },
+            
+            'immunodeficiency-cvid': {
+                name: 'Sarah Mitchell',
+                age: '34 yo F',
+                mrn: 'MRN: 582941',
+                avatar: 'SM',
+                chiefComplaint: 'Recurrent sinopulmonary infections. 4 episodes of pneumonia in 2 years, multiple courses of antibiotics for sinusitis.',
+                allergies: [
+                    { name: 'Penicillin (rash as child)', severity: 'moderate' }
+                ],
+                vitals: { bp: '118/72', hr: '78', rr: '16', spo2: '97' },
+                history: 'Progressive respiratory infections since age 28. Recent CT showing early bronchiectasis. No unusual organisms. Vaccines response being questioned.',
+                question: 'Does this pattern suggest immunodeficiency? What labs confirm CVID?',
+                alerts: ['Recurrent Infections'],
+                
+                labs: {
+                    igg: { value: 285, unit: 'mg/dL', range: '700-1600', status: 'low' },
+                    iga: { value: 12, unit: 'mg/dL', range: '70-400', status: 'low' },
+                    igm: { value: 45, unit: 'mg/dL', range: '40-230', status: 'normal' },
+                    ige: { value: 8, unit: 'kU/L', range: '< 100', status: 'normal' },
+                    tetanusAb: { value: 0.08, unit: 'IU/mL', range: '> 0.1', status: 'low', interpretation: 'Non-protective' },
+                    pneumoAb: { value: '2/23 protective', unit: '', range: '> 70% serotypes', status: 'low' },
+                    lymphocytes: {
+                        cd4: { value: 650, unit: 'cells/uL', range: '500-1500', status: 'normal' },
+                        cd8: { value: 380, unit: 'cells/uL', range: '150-1000', status: 'normal' },
+                        cd19: { value: 180, unit: 'cells/uL', range: '100-500', status: 'normal' },
+                        cd4cd8: { value: 1.7, unit: 'ratio', range: '0.9-3.6', status: 'normal' }
+                    },
+                    cbc: {
+                        wbc: { value: 6.8, unit: 'K/uL', range: '4.5-11.0', status: 'normal' },
+                        lymph: { value: 1.8, unit: 'K/uL', range: '1.0-4.0', status: 'normal' }
+                    }
+                },
+                
+                predictions: [
+                    {
+                        question: 'For a patient with recurrent sinopulmonary infections suspicious for CVID, what would you expect for IgG?',
+                        labName: 'IgG Level',
+                        options: [
+                            { label: 'Normal', value: '> 700 mg/dL' },
+                            { label: 'Low', value: '< 500 mg/dL' },
+                            { label: 'High', value: '> 1600 mg/dL' }
+                        ],
+                        correct: 1,
+                        teaching: 'CVID requires low IgG (usually <500 mg/dL) PLUS low IgA and/or IgM. A single low immunoglobulin is not sufficient for diagnosis. CVID is a diagnosis of exclusion - must rule out secondary causes (medications, protein loss, etc.). [Bonilla 2015, PMID: 26371839; Ameratunga 2021, PMID: 34168644]'
+                    },
+                    {
+                        question: 'What finding is essential to diagnose CVID beyond low immunoglobulins?',
+                        labName: 'Vaccine Response',
+                        options: [
+                            { label: 'Normal', value: 'Protective titers' },
+                            { label: 'Impaired', value: 'Poor response' },
+                            { label: 'Not needed', value: 'Ig levels enough' }
+                        ],
+                        correct: 1,
+                        teaching: 'CVID diagnosis requires: (1) Low IgG + low IgA and/or IgM, (2) Poor response to vaccines (tetanus, pneumococcal), and (3) Exclusion of secondary causes. Functional antibody deficiency (poor vaccine response) distinguishes CVID from other causes of low immunoglobulins. [Bonilla 2015, PMID: 26371839; Orange 2012, PMID: 22935057]'
+                    }
+                ]
+            },
+            
+            'eosinophilia-workup': {
+                name: 'David Park',
+                age: '45 yo M',
+                mrn: 'MRN: 847592',
+                avatar: 'DP',
+                chiefComplaint: 'Persistent cough, rhinitis, and rash. Incidentally found to have eosinophilia (eos 2800) on routine labs.',
+                allergies: [
+                    { name: 'Sulfa (hives)', severity: 'moderate' }
+                ],
+                vitals: { bp: '128/78', hr: '82', rr: '16', spo2: '98' },
+                history: 'New onset symptoms over 3 months. Works in landscaping. Recent travel to Central America. No weight loss, fevers, or night sweats. No asthma history.',
+                question: 'What is the differential for eosinophilia and what labs help narrow it?',
+                alerts: ['Eosinophilia'],
+                
+                labs: {
+                    cbc: {
+                        wbc: { value: 11.2, unit: 'K/uL', range: '4.5-11.0', status: 'high' },
+                        eos: { value: 2.8, unit: 'K/uL', range: '0.0-0.5', status: 'high', percent: '25%' }
+                    },
+                    totalIgE: { value: 890, unit: 'kU/L', range: '< 100', status: 'high' },
+                    strongyloidesAb: { value: 'Positive', unit: '', range: 'Negative', status: 'high' },
+                    stoolOP: { value: 'Pending', unit: '', range: 'No ova/parasites', status: 'pending' },
+                    tryptase: { value: 6.2, unit: 'ng/mL', range: '< 11.4', status: 'normal' },
+                    b12: { value: 450, unit: 'pg/mL', range: '200-900', status: 'normal' },
+                    anca: { value: 'Negative', unit: '', range: 'Negative', status: 'normal' },
+                    cmp: {
+                        cr: { value: 0.9, unit: 'mg/dL', range: '0.7-1.3', status: 'normal' }
+                    }
+                },
+                
+                predictions: [
+                    {
+                        question: 'For a patient with eosinophilia and recent travel to Central America, what lab would you prioritize?',
+                        labName: 'Parasitic Workup',
+                        options: [
+                            { label: 'Strongyloides Ab', value: 'Serology' },
+                            { label: 'ANCA', value: 'Vasculitis screen' },
+                            { label: 'Bone marrow', value: 'Clonal disease' }
+                        ],
+                        correct: 0,
+                        teaching: 'The NAACP mnemonic for eosinophilia: Neoplastic, Allergic, Addison\'s, Collagen vascular, Parasitic. With travel history, parasitic infection (especially Strongyloides) is high on the differential. Strongyloides can persist for decades and must be ruled out before any immunosuppression. [Klion 2015, PMID: 26637705; Nutman 2017, PMID: 28411318]'
+                    },
+                    {
+                        question: 'What IgE level pattern supports an allergic/parasitic etiology over clonal disease?',
+                        labName: 'Total IgE',
+                        options: [
+                            { label: 'Normal', value: '< 100 kU/L' },
+                            { label: 'Elevated', value: '> 500 kU/L' },
+                            { label: 'Not helpful', value: 'Nonspecific' }
+                        ],
+                        correct: 1,
+                        teaching: 'Markedly elevated IgE (>500-1000) suggests allergic or parasitic etiology. In clonal eosinophilia (HES, myeloid neoplasms), IgE is often normal. However, very high eosinophils (>5000) or presence of organ damage warrants hematology evaluation regardless of IgE. [Gotlib 2017, PMID: 28028032; Klion 2015, PMID: 26637705]'
+                    }
+                ]
+            },
+            
+            'mastocytosis-workup': {
+                name: 'Richard Palmer',
+                age: '58 yo M',
+                mrn: 'MRN: 294751',
+                avatar: 'RP',
+                chiefComplaint: 'Recurrent severe anaphylaxis to yellow jacket stings. Two episodes in past year, both requiring ED visits and epinephrine.',
+                allergies: [
+                    { name: 'Yellow jacket venom', severity: 'high' }
+                ],
+                vitals: { bp: '132/82', hr: '76', rr: '14', spo2: '99' },
+                history: 'Two episodes of anaphylaxis from yellow jacket stings (hypotension, syncope). No skin lesions. No flushing, GI symptoms, or bone pain at baseline. Planning venom immunotherapy.',
+                question: 'Does elevated baseline tryptase suggest mastocytosis? What workup is needed?',
+                alerts: ['Anaphylaxis Risk', 'Elevated Tryptase'],
+                
+                labs: {
+                    tryptase: { value: 18.5, unit: 'ng/mL', range: '< 11.4', status: 'high' },
+                    venomIgE: {
+                        yellowJacket: { value: 8.5, unit: 'kU/A', range: '< 0.35', status: 'high' },
+                        honeybee: { value: 0.15, unit: 'kU/A', range: '< 0.35', status: 'normal' },
+                        wasp: { value: 2.3, unit: 'kU/A', range: '< 0.35', status: 'high' }
+                    },
+                    cbc: {
+                        wbc: { value: 7.4, unit: 'K/uL', range: '4.5-11.0', status: 'normal' },
+                        eos: { value: 0.2, unit: 'K/uL', range: '0.0-0.5', status: 'normal' }
+                    },
+                    cmp: {
+                        alp: { value: 85, unit: 'U/L', range: '44-147', status: 'normal' }
+                    },
+                    kitMutation: { value: 'Pending bone marrow', unit: '', range: '', status: 'pending' }
+                },
+                
+                predictions: [
+                    {
+                        question: 'For a patient with recurrent venom anaphylaxis, what baseline tryptase level would prompt mastocytosis workup?',
+                        labName: 'Tryptase Threshold',
+                        options: [
+                            { label: '> 11.4', value: 'Upper normal' },
+                            { label: '> 20', value: 'WHO criterion' },
+                            { label: 'Any elevation', value: 'Be cautious' }
+                        ],
+                        correct: 1,
+                        teaching: 'Baseline tryptase >20 ng/mL is a WHO minor criterion for systemic mastocytosis. However, tryptase 11.4-20 in a patient with severe venom anaphylaxis should still raise suspicion. Consider bone marrow if: tryptase >20, or severe anaphylaxis + tryptase >11.4, or unexplained anaphylaxis. [Valent 2021, PMID: 34756878; Gülen 2019, PMID: 30723918]'
+                    },
+                    {
+                        question: 'Why is diagnosing mastocytosis important before starting venom immunotherapy?',
+                        labName: 'Clinical Significance',
+                        options: [
+                            { label: 'Changes VIT duration', value: 'Lifelong vs 5 years' },
+                            { label: 'VIT contraindicated', value: 'Cannot give VIT' },
+                            { label: 'No impact', value: 'Same treatment' }
+                        ],
+                        correct: 0,
+                        teaching: 'Mastocytosis patients have higher risk of severe anaphylaxis and should receive lifelong VIT (not the typical 3-5 years). VIT is NOT contraindicated - in fact, it\'s especially important in mastocytosis. Knowing mastocytosis status also affects: anesthesia precautions, medication avoidance, and monitoring for progression. [Golden 2017, PMID: 28007086; Bonadonna 2021, PMID: 33929376]'
+                    }
+                ]
+            },
+            
+            'asthma-phenotyping': {
+                name: 'Maria Santos',
+                age: '34 yo F',
+                mrn: 'MRN: 583920',
+                avatar: 'MS',
+                chiefComplaint: 'Uncontrolled asthma despite high-dose ICS/LABA. Three ED visits in past 6 months, 2 prednisone courses. Being considered for biologic therapy.',
+                allergies: [
+                    { name: 'Aspirin (respiratory)', severity: 'high' },
+                    { name: 'NSAIDs (avoids)', severity: 'moderate' }
+                ],
+                vitals: { bp: '122/78', hr: '84', rr: '18', spo2: '95' },
+                history: 'Asthma since age 25. Also has CRS with nasal polyps, anosmia. Worsens with aspirin/NSAIDs. Current: Advair 500/50 BID, montelukast, PRN albuterol (using daily).',
+                question: 'What phenotype is this? What labs guide biologic selection?',
+                alerts: ['Severe Asthma', 'AERD Suspected'],
+                
+                labs: {
+                    cbc: {
+                        wbc: { value: 9.2, unit: 'K/uL', range: '4.5-11.0', status: 'normal' },
+                        eos: { value: 0.65, unit: 'K/uL', range: '0.0-0.5', status: 'high', percent: '7.1%' }
+                    },
+                    totalIgE: { value: 320, unit: 'kU/L', range: '< 100', status: 'high' },
+                    feno: { value: 55, unit: 'ppb', range: '< 25', status: 'high' },
+                    environmentalIgE: {
+                        dustMite: { value: 12.5, unit: 'kU/A', range: '< 0.35', status: 'high' },
+                        cat: { value: 8.2, unit: 'kU/A', range: '< 0.35', status: 'high' },
+                        mold: { value: 3.4, unit: 'kU/A', range: '< 0.35', status: 'high' }
+                    },
+                    spirometry: {
+                        fev1: { value: 68, unit: '% predicted', range: '> 80%', status: 'low' },
+                        fvcRatio: { value: 0.65, unit: '', range: '> 0.70', status: 'low' }
+                    }
+                },
+                
+                predictions: [
+                    {
+                        question: 'For severe asthma phenotyping, which biomarker pattern suggests T2-high inflammation?',
+                        labName: 'T2 Biomarkers',
+                        options: [
+                            { label: 'Low eos, low FeNO', value: 'T2-low' },
+                            { label: 'High eos, high FeNO', value: 'T2-high' },
+                            { label: 'Normal IgE only', value: 'Non-atopic' }
+                        ],
+                        correct: 1,
+                        teaching: 'T2-high asthma is characterized by: eosinophilia (blood eos ≥150-300), elevated FeNO (≥25 ppb), elevated IgE, and often allergic sensitization. This phenotype responds well to biologics (anti-IL5, anti-IL4/13, anti-IgE). T2-low asthma has normal biomarkers and fewer biologic options. [GINA 2024; Holguin 2020, PMID: 31558662]'
+                    },
+                    {
+                        question: 'This patient has asthma + nasal polyps + NSAID sensitivity. What is this triad called?',
+                        labName: 'Clinical Syndrome',
+                        options: [
+                            { label: 'Allergic asthma', value: 'IgE-mediated' },
+                            { label: 'AERD', value: 'Samter\'s triad' },
+                            { label: 'EGPA', value: 'Vasculitis' }
+                        ],
+                        correct: 1,
+                        teaching: 'AERD (Aspirin-Exacerbated Respiratory Disease) = asthma + chronic rhinosinusitis with nasal polyps + respiratory reactions to NSAIDs. It\'s caused by dysregulated arachidonic acid metabolism, not IgE-mediated allergy. Treatment includes aspirin desensitization and biologics targeting the eosinophilic pathway (dupilumab works for both polyps and asthma). [Laidlaw 2019, PMID: 30772972; White 2018, PMID: 29545075]'
+                    }
+                ]
+            }
+        };
+        
+        let currentCase = null;
+        let currentPredictionIndex = 0;
+        let predictionsCompleted = [];
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            populateCaseGrid();
+        });
+        
+        function populateCaseGrid() {
+            const grid = document.getElementById('caseGrid');
+            grid.innerHTML = Object.entries(aiCases).map(([id, c]) => `
+                <div class="case-option" onclick="selectCase('${id}')">
+                    <h4>${c.name}</h4>
+                    <p>${c.age} - ${c.chiefComplaint.substring(0, 60)}...</p>
+                </div>
+            `).join('');
+        }
+        
+        function selectCase(caseId) {
+            currentCase = aiCases[caseId];
+            currentPredictionIndex = 0;
+            predictionsCompleted = [];
+            
+            // Update patient banner
+            document.getElementById('patientName').textContent = currentCase.name;
+            document.getElementById('patientMeta').textContent = `${currentCase.age} | ${currentCase.mrn}`;
+            document.getElementById('patientAvatar').textContent = currentCase.avatar;
+            
+            // Update alerts
+            const alertsDiv = document.getElementById('patientAlerts');
+            alertsDiv.innerHTML = currentCase.alerts.map(alert => 
+                `<span class="alert-badge ${alert.includes('Risk') || alert.includes('Anaphylaxis') ? 'alert-allergy' : 'alert-flag'}">${alert}</span>`
+            ).join('');
+            
+            // Update clinical panel
+            document.getElementById('chiefComplaint').textContent = currentCase.chiefComplaint;
+            document.getElementById('keyHistory').textContent = currentCase.history;
+            document.getElementById('clinicalQuestion').textContent = currentCase.question;
+            
+            // Update allergies
+            const allergyList = document.getElementById('allergyList');
+            allergyList.innerHTML = currentCase.allergies.map(a => `
+                <div class="allergy-item">
+                    <div class="allergy-severity severity-${a.severity}"></div>
+                    <span>${a.name}</span>
+                </div>
+            `).join('');
+            
+            // Update vitals
+            const vitalsGrid = document.getElementById('vitalsGrid');
+            vitalsGrid.innerHTML = `
+                <div class="vital-item">
+                    <div class="vital-label">BP</div>
+                    <div class="vital-value">${currentCase.vitals.bp}</div>
+                </div>
+                <div class="vital-item">
+                    <div class="vital-label">HR</div>
+                    <div class="vital-value">${currentCase.vitals.hr}</div>
+                </div>
+                <div class="vital-item">
+                    <div class="vital-label">RR</div>
+                    <div class="vital-value">${currentCase.vitals.rr}</div>
+                </div>
+                <div class="vital-item">
+                    <div class="vital-label">SpO2</div>
+                    <div class="vital-value">${currentCase.vitals.spo2}%</div>
+                </div>
+            `;
+            
+            // Highlight selected case
+            document.querySelectorAll('.case-option').forEach(el => el.classList.remove('selected'));
+            event.target.closest('.case-option').classList.add('selected');
+            
+            // Show labs view
+            showView('labs');
+            loadLabResults();
+        }
+        
+        function showView(view) {
+            // Update nav
+            document.querySelectorAll('.emr-nav-btn').forEach(btn => btn.classList.remove('active'));
+            event?.target?.classList.add('active');
+            
+            // Hide all views
+            document.querySelectorAll('.emr-view').forEach(v => v.classList.remove('active'));
+            
+            if (view === 'labs') {
+                document.getElementById('labsView').classList.add('active');
+                document.getElementById('caseSelector').style.display = currentCase ? 'none' : 'block';
+            } else if (view === 'predictor') {
+                document.getElementById('predictorView').classList.add('active');
+                document.getElementById('caseSelector').style.display = 'none';
+                loadPredictions();
+            }
+        }
+        
+        function loadLabResults() {
+            if (!currentCase) return;
+            
+            const labsView = document.getElementById('labsView');
+            let html = '';
+            
+            // Build lab panels based on case data
+            const labs = currentCase.labs;
+            
+            // CBC Panel
+            if (labs.cbc) {
+                html += buildLabPanel('Complete Blood Count', [
+                    labs.cbc.wbc ? { name: 'WBC', ...labs.cbc.wbc } : null,
+                    labs.cbc.eos ? { name: 'Eosinophils', ...labs.cbc.eos, extra: labs.cbc.eos.percent } : null,
+                    labs.cbc.lymph ? { name: 'Lymphocytes', ...labs.cbc.lymph } : null
+                ].filter(Boolean));
+            }
+            
+            // Immunoglobulins
+            const igLabs = ['totalIgE', 'igg', 'iga', 'igm', 'ige'].filter(k => labs[k]);
+            if (igLabs.length > 0) {
+                html += buildLabPanel('Immunoglobulins', igLabs.map(k => ({
+                    name: k === 'totalIgE' ? 'Total IgE' : k.toUpperCase(),
+                    ...labs[k]
+                })));
+            }
+            
+            // Tryptase
+            if (labs.tryptase) {
+                html += buildLabPanel('Mast Cell Markers', [
+                    { name: 'Tryptase', ...labs.tryptase }
+                ]);
+            }
+            
+            // Specific IgE panels
+            if (labs.peanutIgE || labs.venomIgE || labs.environmentalIgE) {
+                const allergenLabs = [];
+                if (labs.peanutIgE) allergenLabs.push({ name: 'Peanut sIgE', ...labs.peanutIgE });
+                if (labs.araH2) allergenLabs.push({ name: 'Ara h 2', ...labs.araH2 });
+                if (labs.araH8) allergenLabs.push({ name: 'Ara h 8', ...labs.araH8 });
+                if (labs.treeNutIgE) allergenLabs.push({ name: 'Tree Nut sIgE', ...labs.treeNutIgE });
+                if (labs.venomIgE) {
+                    Object.entries(labs.venomIgE).forEach(([k, v]) => {
+                        allergenLabs.push({ name: k.replace(/([A-Z])/g, ' $1').trim() + ' sIgE', ...v });
+                    });
+                }
+                if (labs.environmentalIgE) {
+                    Object.entries(labs.environmentalIgE).forEach(([k, v]) => {
+                        allergenLabs.push({ name: k.charAt(0).toUpperCase() + k.slice(1) + ' sIgE', ...v });
+                    });
+                }
+                html += buildLabPanel('Allergen-Specific IgE', allergenLabs);
+            }
+            
+            // Complement
+            if (labs.c4 || labs.c1Inh) {
+                const compLabs = [];
+                if (labs.c4) compLabs.push({ name: 'C4', ...labs.c4 });
+                if (labs.c3) compLabs.push({ name: 'C3', ...labs.c3 });
+                if (labs.c1Inh) compLabs.push({ name: 'C1-INH Level', ...labs.c1Inh });
+                if (labs.c1InhFunction) compLabs.push({ name: 'C1-INH Function', ...labs.c1InhFunction });
+                html += buildLabPanel('Complement Studies', compLabs);
+            }
+            
+            // Vaccine antibodies
+            if (labs.tetanusAb || labs.pneumoAb) {
+                const vaccLabs = [];
+                if (labs.tetanusAb) vaccLabs.push({ name: 'Tetanus Antibody', ...labs.tetanusAb });
+                if (labs.pneumoAb) vaccLabs.push({ name: 'Pneumococcal Ab', ...labs.pneumoAb });
+                html += buildLabPanel('Vaccine Antibody Responses', vaccLabs);
+            }
+            
+            // Lymphocyte subsets
+            if (labs.lymphocytes) {
+                const lymphLabs = Object.entries(labs.lymphocytes).map(([k, v]) => ({
+                    name: k.toUpperCase().replace('CD4CD8', 'CD4/CD8'),
+                    ...v
+                }));
+                html += buildLabPanel('Lymphocyte Subsets', lymphLabs);
+            }
+            
+            // Special tests
+            if (labs.feno || labs.spirometry || labs.strongyloidesAb || labs.anca) {
+                const specialLabs = [];
+                if (labs.feno) specialLabs.push({ name: 'FeNO', ...labs.feno });
+                if (labs.strongyloidesAb) specialLabs.push({ name: 'Strongyloides Ab', ...labs.strongyloidesAb });
+                if (labs.stoolOP) specialLabs.push({ name: 'Stool O&P', ...labs.stoolOP });
+                if (labs.anca) specialLabs.push({ name: 'ANCA', ...labs.anca });
+                if (labs.b12) specialLabs.push({ name: 'Vitamin B12', ...labs.b12 });
+                if (labs.kitMutation) specialLabs.push({ name: 'KIT D816V', ...labs.kitMutation });
+                if (specialLabs.length > 0) {
+                    html += buildLabPanel('Special Studies', specialLabs);
+                }
+            }
+            
+            // Spirometry
+            if (labs.spirometry) {
+                const spirLabs = [
+                    { name: 'FEV1', ...labs.spirometry.fev1 },
+                    { name: 'FEV1/FVC Ratio', ...labs.spirometry.fvcRatio }
+                ];
+                html += buildLabPanel('Pulmonary Function', spirLabs);
+            }
+            
+            labsView.innerHTML = html;
+        }
+        
+        function buildLabPanel(title, labs) {
+            return `
+                <div class="lab-panel">
+                    <div class="lab-panel-header">
+                        <div class="lab-panel-title">${title}</div>
+                        <div class="lab-panel-date">Today 08:30</div>
+                    </div>
+                    <div class="lab-results-grid">
+                        ${labs.map(lab => `
+                            <div class="lab-result-item">
+                                <div class="lab-name">${lab.name}</div>
+                                <div class="lab-value-row">
+                                    <span class="lab-value ${lab.status}">${lab.value}</span>
+                                    <span class="lab-unit">${lab.unit}</span>
+                                </div>
+                                <div class="lab-range">Ref: ${lab.range}</div>
+                                ${lab.interpretation ? `<div class="lab-trend" style="color: #f59e0b;">${lab.interpretation}</div>` : ''}
+                                ${lab.extra ? `<div class="lab-trend" style="color: #64748b;">(${lab.extra})</div>` : ''}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+        
+        function loadPredictions() {
+            if (!currentCase || !currentCase.predictions) {
+                document.getElementById('predictionContent').innerHTML = '<p style="color: #a5b4fc;">Select a case first to access lab predictions.</p>';
+                return;
+            }
+            
+            const pred = currentCase.predictions[currentPredictionIndex];
+            if (!pred) {
+                // All predictions complete
+                document.getElementById('predictionContent').innerHTML = `
+                    <div style="text-align: center; padding: 20px;">
+                        <div style="font-size: 48px; margin-bottom: 16px;">🎉</div>
+                        <h3 style="color: #fff; margin-bottom: 8px;">All Predictions Complete!</h3>
+                        <p style="color: #a5b4fc;">You've completed all lab predictions for this case.</p>
+                        <button class="submit-prediction" onclick="currentPredictionIndex=0; loadPredictions();" style="margin-top: 16px;">Restart Predictions</button>
+                    </div>
+                `;
+                return;
+            }
+            
+            const html = `
+                <div class="prediction-form">
+                    <div class="prediction-question">${pred.question}</div>
+                    <div class="prediction-options" id="predictionOptions">
+                        ${pred.options.map((opt, i) => `
+                            <div class="prediction-option" data-index="${i}" onclick="selectPrediction(${i})">
+                                <div class="option-label">${opt.label}</div>
+                                <div class="option-value">${opt.value}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <button class="submit-prediction" id="submitPrediction" onclick="checkPrediction()" disabled>Check Answer</button>
+                </div>
+                <div class="teaching-point" id="teachingPoint">
+                    <h4>💡 Teaching Point</h4>
+                    <p>${pred.teaching}</p>
+                </div>
+                <div style="margin-top: 16px; text-align: center;">
+                    <span style="color: #64748b; font-size: 12px;">Question ${currentPredictionIndex + 1} of ${currentCase.predictions.length}</span>
+                </div>
+            `;
+            
+            document.getElementById('predictionContent').innerHTML = html;
+        }
+        
+        let selectedPrediction = null;
+        
+        function selectPrediction(index) {
+            selectedPrediction = index;
+            document.querySelectorAll('.prediction-option').forEach((opt, i) => {
+                opt.classList.toggle('selected', i === index);
+            });
+            document.getElementById('submitPrediction').disabled = false;
+        }
+        
+        function checkPrediction() {
+            if (selectedPrediction === null) return;
+            
+            const pred = currentCase.predictions[currentPredictionIndex];
+            const options = document.querySelectorAll('.prediction-option');
+            
+            options.forEach((opt, i) => {
+                opt.classList.remove('selected');
+                if (i === pred.correct) {
+                    opt.classList.add('correct');
+                } else if (i === selectedPrediction && selectedPrediction !== pred.correct) {
+                    opt.classList.add('incorrect');
+                }
+            });
+            
+            // Show teaching point
+            document.getElementById('teachingPoint').classList.add('visible');
+            
+            // Change button to next
+            const btn = document.getElementById('submitPrediction');
+            btn.textContent = currentPredictionIndex < currentCase.predictions.length - 1 ? 'Next Question →' : 'Complete';
+            btn.onclick = function() {
+                currentPredictionIndex++;
+                selectedPrediction = null;
+                loadPredictions();
+            };
+        }
+        
+        function showSection(section) {
+            // Update sidebar
+            document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
+            event.target.closest('.sidebar-item').classList.add('active');
+            
+            // For now, just show labs
+            if (section === 'labs') {
+                loadLabResults();
+            }
+        }
+        
+        function loadLabPanel(panelType) {
+            // Quick access to specific lab panels
+            document.querySelectorAll('.sidebar-item').forEach(item => item.classList.remove('active'));
+            event.target.closest('.sidebar-item').classList.add('active');
+            
+            // If no case selected, prompt user
+            if (!currentCase) {
+                alert('Please select a case first');
+                return;
+            }
+            
+            // Filter and show relevant labs
+            showView('labs');
+            loadLabResults();
+        }
+    </script>
+</body>
+</html>
