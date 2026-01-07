@@ -20,7 +20,7 @@ const COACHDX_ALLERGY_CASES = {
 'ai-anaphylaxis-workup': {
     id: 'ai-anaphylaxis-workup',
     title: 'Post-Anaphylaxis Evaluation',
-    category: 'Allergy',
+    category: 'Anaphylaxis',
     specialty: 'allergy-immunology',
     discipline: 'medical',
     difficulty: 'intermediate',
@@ -136,7 +136,7 @@ const COACHDX_ALLERGY_CASES = {
 'ai-anaphylaxis-acute': {
     id: 'ai-anaphylaxis-acute',
     title: 'Acute Anaphylaxis Management',
-    category: 'Allergy',
+    category: 'Anaphylaxis',
     specialty: 'allergy-immunology',
     discipline: 'medical',
     difficulty: 'advanced',
@@ -218,7 +218,7 @@ const COACHDX_ALLERGY_CASES = {
 'ai-drug-allergy-delabeling': {
     id: 'ai-drug-allergy-delabeling',
     title: 'Penicillin Allergy Evaluation',
-    category: 'Allergy',
+    category: 'Drug Allergy',
     specialty: 'allergy-immunology',
     discipline: 'medical',
     difficulty: 'intermediate',
@@ -316,7 +316,7 @@ const COACHDX_ALLERGY_CASES = {
 'ai-nsaid-reaction': {
     id: 'ai-nsaid-reaction',
     title: 'NSAID Hypersensitivity Workup',
-    category: 'Allergy',
+    category: 'Drug Allergy',
     specialty: 'allergy-immunology',
     discipline: 'medical',
     difficulty: 'intermediate',
@@ -400,7 +400,7 @@ const COACHDX_ALLERGY_CASES = {
 'ai-chronic-urticaria': {
     id: 'ai-chronic-urticaria',
     title: 'Chronic Spontaneous Urticaria',
-    category: 'Allergy',
+    category: 'Urticaria/Angioedema',
     specialty: 'allergy-immunology',
     discipline: 'medical',
     difficulty: 'intermediate',
@@ -523,7 +523,7 @@ const COACHDX_ALLERGY_CASES = {
 'ai-angioedema-workup': {
     id: 'ai-angioedema-workup',
     title: 'Recurrent Angioedema Without Urticaria',
-    category: 'Allergy',
+    category: 'Urticaria/Angioedema',
     specialty: 'allergy-immunology',
     discipline: 'medical',
     difficulty: 'advanced',
@@ -760,7 +760,7 @@ const COACHDX_ALLERGY_CASES = {
 'ai-allergic-rhinitis': {
     id: 'ai-allergic-rhinitis',
     title: 'Allergic Rhinitis Management',
-    category: 'Allergy',
+    category: 'Rhinitis',
     specialty: 'allergy-immunology',
     discipline: 'medical',
     difficulty: 'beginner',
@@ -839,7 +839,7 @@ const COACHDX_ALLERGY_CASES = {
 'ai-food-allergy-ige': {
     id: 'ai-food-allergy-ige',
     title: 'IgE-Mediated Food Allergy',
-    category: 'Allergy',
+    category: 'Food Allergy',
     specialty: 'allergy-immunology',
     discipline: 'medical',
     difficulty: 'intermediate',
@@ -916,7 +916,7 @@ const COACHDX_ALLERGY_CASES = {
 'ai-food-intolerance': {
     id: 'ai-food-intolerance',
     title: 'Food Intolerance vs Food Allergy',
-    category: 'Allergy',
+    category: 'Food Allergy',
     specialty: 'allergy-immunology',
     discipline: 'medical',
     difficulty: 'intermediate',
@@ -997,7 +997,7 @@ const COACHDX_ALLERGY_CASES = {
 'ai-venom-allergy': {
     id: 'ai-venom-allergy',
     title: 'Insect Sting Allergy and VIT',
-    category: 'Allergy',
+    category: 'Venom Allergy',
     specialty: 'allergy-immunology',
     discipline: 'medical',
     difficulty: 'intermediate',

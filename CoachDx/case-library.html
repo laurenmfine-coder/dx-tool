@@ -483,8 +483,16 @@
             'Pharmacy': '💊',
             'Dental': '🦷',
             'Allergy': '🧬',
-            'Immunology': '🧬',
+            'Immunology': '🛡️',
             'Allergy/Immunology': '🧬',
+            'Anaphylaxis': '⚡',
+            'Drug Allergy': '💊',
+            'Urticaria/Angioedema': '🔴',
+            'Food Allergy': '🥜',
+            'Venom Allergy': '🐝',
+            'Rhinitis': '👃',
+            'Asthma': '🫁',
+            'Immunodeficiency': '🛡️',
             'default': '📋'
         };
         
@@ -567,10 +575,57 @@
         }
         
         // =========================================================================
+        // SPECIALTY CONFIGURATION - Categories for each specialty
+        // =========================================================================
+        const SPECIALTY_CATEGORIES = {
+            'allergy-immunology': {
+                icon: '🧬',
+                name: 'Allergy/Immunology',
+                categories: ['Anaphylaxis', 'Drug Allergy', 'Urticaria/Angioedema', 'Food Allergy', 'Venom Allergy', 'Rhinitis', 'Asthma', 'Immunodeficiency', 'Immunology']
+            },
+            'cardiology': {
+                icon: '❤️',
+                name: 'Cardiology',
+                categories: ['Heart Failure', 'Arrhythmia', 'ACS', 'Valvular', 'Hypertension']
+            },
+            'pulmonology': {
+                icon: '🫁',
+                name: 'Pulmonology', 
+                categories: ['COPD', 'Asthma', 'ILD', 'Pulmonary Embolism', 'Pneumonia']
+            },
+            'neurology': {
+                icon: '🧠',
+                name: 'Neurology',
+                categories: ['Stroke', 'Seizure', 'Headache', 'Movement Disorders', 'Dementia']
+            },
+            'gi': {
+                icon: '🩺',
+                name: 'Gastroenterology',
+                categories: ['IBD', 'Liver', 'GI Bleeding', 'Motility', 'Pancreatitis']
+            },
+            'endocrine': {
+                icon: '🦋',
+                name: 'Endocrine',
+                categories: ['Diabetes', 'Thyroid', 'Adrenal', 'Pituitary', 'Metabolic']
+            },
+            'infectious': {
+                icon: '🦠',
+                name: 'Infectious Disease',
+                categories: ['Sepsis', 'Pneumonia', 'UTI', 'Skin/Soft Tissue', 'HIV/AIDS']
+            },
+            'hematology': {
+                icon: '🩸',
+                name: 'Hematology',
+                categories: ['Anemia', 'Bleeding', 'Thrombosis', 'Malignancy', 'Transfusion']
+            }
+        };
+        
+        // =========================================================================
         // SPECIALTY FILTERING
         // =========================================================================
         filterBySpecialty = function(specialty) {
             currentSpecialty = specialty;
+            currentFilter = 'all'; // Reset category filter
             
             // Update UI state
             if (specialty !== 'all') {
@@ -755,14 +810,36 @@
         // =========================================================================
         function renderCategoryFilters(categories) {
             const container = document.getElementById('categoryFilters');
+            const allCasesBtn = document.querySelector('.filter-btn[data-filter="all"]');
+            
+            // If a specialty is selected, show specialty-relevant categories
+            // Otherwise show the clerkship-style categories
+            let displayCategories = categories;
+            
+            if (currentSpecialty !== 'all' && SPECIALTY_CATEGORIES[currentSpecialty]) {
+                // Filter to only show categories that exist in the current cases
+                const specialtyConfig = SPECIALTY_CATEGORIES[currentSpecialty];
+                displayCategories = categories.filter(cat => 
+                    specialtyConfig.categories.some(sc => 
+                        cat.toLowerCase().includes(sc.toLowerCase()) || 
+                        sc.toLowerCase().includes(cat.toLowerCase())
+                    )
+                );
+            }
             
             let html = '';
-            categories.forEach(cat => {
+            displayCategories.forEach(cat => {
                 const slug = cat.toLowerCase().replace(/\s+/g, '-');
-                html += `<button class="filter-btn" data-filter="${slug}">${cat}</button>`;
+                const icon = CATEGORY_ICONS[cat] || '';
+                html += `<button class="filter-btn" data-filter="${slug}">${icon ? icon + ' ' : ''}${cat}</button>`;
             });
             
             container.innerHTML = html;
+            
+            // Reset "All Cases" button to active
+            if (allCasesBtn) {
+                allCasesBtn.classList.add('active');
+            }
             
             // Add event listeners
             document.querySelectorAll('.filter-btn').forEach(btn => {
