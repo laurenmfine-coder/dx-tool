@@ -1068,6 +1068,13 @@
                         <option value="rt-wean">Weaning assessment</option>
                         <option value="rt-abg">Critical ABG report</option>
                     </optgroup>
+                    <optgroup label="Allergy/Immunology Scenarios">
+                        <option value="ai-anaphylaxis-call">🚨 Anaphylaxis - urgent call</option>
+                        <option value="ai-drug-allergy-consult">Drug allergy consult</option>
+                        <option value="ai-biologic-reaction">Biologic infusion reaction</option>
+                        <option value="ai-angioedema-call">Angioedema - airway concern</option>
+                        <option value="ai-sting-reaction">Insect sting reaction</option>
+                    </optgroup>
                     <optgroup label="OMFS/Dental Scenarios">
                         <option value="omfs-airway">Airway compromise concern</option>
                         <option value="omfs-bleeding">Post-op hemorrhage</option>
@@ -2100,6 +2107,61 @@
                     recommendation: ['extubate', 'SBT results', 'readiness', 'plan if fails']
                 }
             },
+            'ai-anaphylaxis-call': {
+                title: '🚨 Anaphylaxis - Urgent Call',
+                details: 'Your patient just developed rapid-onset urticaria, facial swelling, and respiratory symptoms after medication administration. This is anaphylaxis requiring immediate intervention.',
+                patient: { name: 'Mr. David Park', age: 34, sex: 'M', room: '3204', dx: 'Pneumonia - received antibiotic' },
+                expectedElements: {
+                    situation: ['anaphylaxis', 'allergic reaction', 'immediate', 'urgent'],
+                    background: ['medication given', 'timing', 'allergies', 'what happened'],
+                    assessment: ['vitals', 'airway', 'breathing', 'hives', 'swelling', 'unstable'],
+                    recommendation: ['epinephrine', 'come immediately', 'code cart', 'anaphylaxis kit']
+                }
+            },
+            'ai-drug-allergy-consult': {
+                title: 'Drug Allergy Consult Request',
+                details: 'You need to call Allergy/Immunology to request evaluation for a patient with reported penicillin allergy who needs beta-lactam therapy.',
+                patient: { name: 'Mr. Robert Thompson', age: 62, sex: 'M', room: '4105', dx: 'Endocarditis - needs ceftriaxone' },
+                expectedElements: {
+                    situation: ['consult request', 'drug allergy', 'penicillin', 'evaluation'],
+                    background: ['infection', 'needs antibiotic', 'allergy history', 'prior reaction'],
+                    assessment: ['current status', 'infection severity', 'timeline'],
+                    recommendation: ['penicillin testing', 'can patient tolerate', 'delabeling', 'urgency']
+                }
+            },
+            'ai-biologic-reaction': {
+                title: 'Biologic Infusion Reaction',
+                details: 'Your patient receiving omalizumab or rituximab has developed symptoms during infusion. You need to report and get guidance.',
+                patient: { name: 'Mrs. Sarah Kim', age: 45, sex: 'F', room: 'Infusion Center', dx: 'Chronic urticaria - omalizumab infusion' },
+                expectedElements: {
+                    situation: ['infusion reaction', 'symptoms during', 'biologic', 'stopped infusion'],
+                    background: ['medication', 'prior infusions', 'premedications', 'allergies'],
+                    assessment: ['vitals', 'symptoms', 'timing', 'severity', 'responded to'],
+                    recommendation: ['continue or stop', 'treatment given', 'observation', 'future dosing']
+                }
+            },
+            'ai-angioedema-call': {
+                title: 'Angioedema - Airway Concern',
+                details: 'Your patient has developed facial and tongue swelling. The airway may be threatened. You need urgent evaluation.',
+                patient: { name: 'Mr. James Wilson', age: 55, sex: 'M', room: 'ED Bay 4', dx: 'Hypertension on lisinopril' },
+                expectedElements: {
+                    situation: ['angioedema', 'swelling', 'airway concern', 'urgent'],
+                    background: ['ACE inhibitor', 'medications', 'onset', 'history'],
+                    assessment: ['airway', 'tongue', 'lips', 'voice', 'stridor', 'vitals'],
+                    recommendation: ['airway evaluation', 'ENT standby', 'stop ACE-I', 'treatment options']
+                }
+            },
+            'ai-sting-reaction': {
+                title: 'Insect Sting Reaction',
+                details: 'Patient in clinic just got stung by an insect and is developing systemic symptoms. You need to communicate urgently.',
+                patient: { name: 'Mr. Richard Palmer', age: 58, sex: 'M', room: 'Clinic', dx: 'Routine visit - stung outside' },
+                expectedElements: {
+                    situation: ['bee sting', 'insect sting', 'allergic reaction', 'spreading'],
+                    background: ['when stung', 'prior reactions', 'carries EpiPen', 'allergies'],
+                    assessment: ['hives', 'swelling', 'breathing', 'vitals', 'progression'],
+                    recommendation: ['epinephrine', 'observation', 'EMS if severe', 'allergy referral']
+                }
+            },
             'shift-handoff': {
                 title: 'Shift-to-Shift Handoff',
                 details: 'You\'re handing off your patient to the oncoming nurse. Provide a complete SBAR handoff.',
@@ -2139,7 +2201,8 @@
             'dental': '🦷',
             'dpm': '🦶',
             'pt': '🦿',
-            'pharmd': '💊'
+            'pharmd': '💊',
+            'ai-fellow': '🧬'
         };
         
         const receiverAvatars = {
@@ -2150,6 +2213,7 @@
             'ed': '🏥',
             'specialist': '👨‍⚕️',
             'surgeon': '👨‍⚕️',
+            'allergist': '🧬',
             'omfs-attending': '🦷',
             'pharmacy': '💊'
         };
