@@ -1,0 +1,860 @@
+ 8px; }
+        .emergency-text { font-size: 20px; font-weight: 600; color: #fff; line-height: 1.4; }
+        .emergency-context { margin-top: 12px; font-size: 14px; color: rgba(255,255,255,0.9); }
+        
+        .question-card { background: #0f172a; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid #334155; }
+        .question-number { font-size: 11px; color: #ec4899; font-weight: 600; margin-bottom: 8px; }
+        .question-prompt { font-size: 15px; color: #e2e8f0; margin-bottom: 16px; line-height: 1.6; }
+        .question-options { display: flex; flex-direction: column; gap: 10px; }
+        .option-btn { background: #1e293b; border: 2px solid #334155; border-radius: 10px; padding: 14px 18px; text-align: left; color: #e2e8f0; cursor: pointer; transition: all 0.15s; font-size: 14px; }
+        .option-btn:hover { border-color: #ec4899; background: #2d1a2e; }
+        .option-btn.selected { border-color: #ec4899; background: #500724; }
+        .option-btn.correct { border-color: #22c55e; background: #065f46; }
+        .option-btn.incorrect { border-color: #ef4444; background: #7f1d1d; }
+        
+        .feedback-box { background: #0f172a; border-radius: 12px; padding: 20px; margin-top: 16px; border-left: 4px solid #3b82f6; display: none; }
+        .feedback-box.visible { display: block; }
+        .feedback-box.correct { border-color: #22c55e; background: linear-gradient(135deg, #052e16 0%, #0f172a 100%); }
+        .feedback-box.incorrect { border-color: #ef4444; background: linear-gradient(135deg, #450a0a 0%, #0f172a 100%); }
+        .feedback-header { display: flex; align-items: center; gap: 10px; font-weight: 600; margin-bottom: 12px; }
+        .feedback-header.correct { color: #34d399; }
+        .feedback-header.incorrect { color: #f87171; }
+        .feedback-text { font-size: 14px; color: #94a3b8; line-height: 1.7; }
+        
+        .hpi-section { background: #0f172a; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+        .hpi-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .hpi-title { font-weight: 600; color: #fff; display: flex; align-items: center; gap: 8px; }
+        .hpi-content { font-size: 14px; color: #cbd5e1; line-height: 1.8; }
+        .hpi-content p { margin-bottom: 12px; }
+        .hpi-highlight { background: rgba(251, 191, 36, 0.15); padding: 2px 6px; border-radius: 4px; color: #fbbf24; }
+        .hpi-critical { background: rgba(239, 68, 68, 0.15); padding: 2px 6px; border-radius: 4px; color: #f87171; }
+        .hpi-negative { background: rgba(34, 197, 94, 0.15); padding: 2px 6px; border-radius: 4px; color: #4ade80; }
+        
+        .interview-questions { display: grid; gap: 10px; margin-top: 16px; }
+        .interview-q { background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.15s; display: flex; justify-content: space-between; align-items: center; }
+        .interview-q:hover { border-color: #ec4899; }
+        .interview-q.asked { background: #0f172a; border-color: #22c55e; }
+        .interview-q-text { font-size: 14px; color: #e2e8f0; }
+        .interview-q-icon { color: #64748b; }
+        .interview-q.asked .interview-q-icon { color: #22c55e; }
+        .interview-response { background: linear-gradient(135deg, #1e3a5f 0%, #1e293b 100%); border-radius: 10px; padding: 16px; margin-top: 12px; display: none; border: 1px solid #3b82f6; }
+        .interview-response.visible { display: block; }
+        .response-label { font-size: 11px; color: #60a5fa; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .response-text { font-size: 14px; color: #e2e8f0; line-height: 1.6; font-style: italic; }
+        
+        .exam-systems { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+        .exam-system { background: #0f172a; border: 1px solid #334155; border-radius: 10px; padding: 16px; cursor: pointer; transition: all 0.15s; }
+        .exam-system:hover { border-color: #ec4899; }
+        .exam-system.examined { border-color: #22c55e; background: linear-gradient(135deg, #052e16 0%, #0f172a 100%); }
+        .exam-system-name { font-weight: 600; color: #fff; margin-bottom: 4px; font-size: 14px; }
+        .exam-system-hint { font-size: 11px; color: #64748b; }
+        .exam-findings { margin-top: 12px; padding-top: 12px; border-top: 1px solid #334155; font-size: 13px; color: #94a3b8; display: none; line-height: 1.5; }
+        .exam-system.examined .exam-findings { display: block; }
+        .finding-normal { color: #34d399; }
+        .finding-abnormal { color: #f87171; font-weight: 500; }
+        
+        /* Differential Diagnosis Cards */
+        .ddx-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px; }
+        .ddx-card { background: #0f172a; border: 2px solid #334155; border-radius: 12px; padding: 16px; cursor: pointer; transition: all 0.15s; }
+        .ddx-card:hover { border-color: #ec4899; }
+        .ddx-card.selected { border-color: #ec4899; background: #2d1a2e; }
+        .ddx-card-title { font-weight: 600; color: #fff; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .ddx-card-features { font-size: 12px; color: #94a3b8; line-height: 1.5; }
+        .ddx-checkbox { width: 20px; height: 20px; border: 2px solid #475569; border-radius: 4px; display: flex; align-items: center; justify-content: center; margin-left: auto; }
+        .ddx-card.selected .ddx-checkbox { background: #ec4899; border-color: #ec4899; color: #fff; }
+        
+        .lab-prediction-card { background: #0f172a; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid #334155; }
+        .lab-pred-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; flex-wrap: wrap; gap: 8px; }
+        .lab-name { font-weight: 600; color: #fff; font-size: 15px; }
+        .lab-context { font-size: 12px; color: #94a3b8; margin-top: 4px; }
+        .lab-normal-range { font-size: 12px; color: #64748b; background: #1e293b; padding: 4px 10px; border-radius: 6px; }
+        .prediction-choices { display: flex; flex-wrap: wrap; gap: 10px; }
+        .pred-choice { padding: 10px 18px; background: #1e293b; border: 2px solid #334155; border-radius: 8px; color: #e2e8f0; cursor: pointer; transition: all 0.15s; font-size: 13px; }
+        .pred-choice:hover { border-color: #ec4899; }
+        .pred-choice.selected { border-color: #ec4899; background: #500724; color: #f9a8d4; }
+        .confidence-row { margin-top: 16px; padding-top: 16px; border-top: 1px solid #334155; }
+        .confidence-label { font-size: 13px; color: #94a3b8; margin-bottom: 8px; }
+        .confidence-slider { width: 100%; height: 8px; border-radius: 4px; background: #334155; -webkit-appearance: none; }
+        .confidence-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: #ec4899; cursor: pointer; }
+        .confidence-value { text-align: center; font-weight: 600; color: #ec4899; margin-top: 8px; }
+        
+        .results-summary { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); border-radius: 16px; padding: 32px; text-align: center; margin-bottom: 24px; }
+        .score-circle { width: 120px; height: 120px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto 16px; border: 4px solid rgba(255,255,255,0.3); }
+        .score-number { font-size: 36px; font-weight: 700; color: #fff; }
+        .score-label { font-size: 12px; color: rgba(255,255,255,0.7); }
+        .results-title { font-size: 20px; font-weight: 600; color: #fff; margin-bottom: 8px; }
+        .results-subtitle { font-size: 14px; color: rgba(255,255,255,0.8); }
+        
+        .result-card { background: #0f172a; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid #334155; }
+        .result-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .result-lab-name { font-weight: 600; color: #fff; }
+        .result-badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+        .result-badge.correct { background: #065f46; color: #34d399; }
+        .result-badge.incorrect { background: #7f1d1d; color: #f87171; }
+        .result-comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+        .result-col { background: #1e293b; padding: 12px; border-radius: 8px; }
+        .result-col-label { font-size: 11px; color: #64748b; margin-bottom: 4px; }
+        .result-col-value { font-size: 16px; font-weight: 600; color: #fff; }
+        .result-explanation { font-size: 14px; color: #94a3b8; line-height: 1.7; padding: 16px; background: #1e293b; border-radius: 8px; border-left: 3px solid #ec4899; }
+        
+        .learn-more-section { background: linear-gradient(135deg, #4c1d95 0%, #2e1065 100%); border-radius: 12px; padding: 24px; margin-top: 24px; border: 1px solid #7c3aed; }
+        .learn-more-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; color: #c4b5fd; font-weight: 600; }
+        .learn-more-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+        .learn-link { background: #1e1033; border: 1px solid #5b21b6; border-radius: 10px; padding: 16px; text-decoration: none; color: inherit; display: flex; gap: 14px; align-items: flex-start; transition: all 0.15s; }
+        .learn-link:hover { border-color: #a78bfa; transform: translateY(-2px); }
+        .learn-link-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+        .learn-link-icon.mechanism { background: #065f46; }
+        .learn-link-icon.external { background: #1e40af; }
+        .learn-link-info { flex: 1; }
+        .learn-link-title { font-weight: 600; color: #fff; margin-bottom: 4px; font-size: 14px; }
+        .learn-link-desc { font-size: 12px; color: #a78bfa; }
+        .learn-link-badge { font-size: 10px; padding: 2px 8px; border-radius: 10px; background: #2e1065; color: #c4b5fd; margin-top: 6px; display: inline-block; }
+        
+        /* Algorithm Box */
+        .algorithm-box { background: linear-gradient(135deg, #1e3a5f 0%, #1e293b 100%); border-radius: 12px; padding: 20px; margin-bottom: 24px; border: 1px solid #3b82f6; }
+        .algorithm-title { font-size: 15px; font-weight: 600; color: #60a5fa; margin-bottom: 16px; }
+        .algorithm-flow { display: flex; flex-direction: column; gap: 12px; }
+        .algorithm-step { display: flex; gap: 12px; align-items: flex-start; }
+        .algorithm-arrow { color: #3b82f6; font-size: 18px; margin-top: 2px; }
+        .algorithm-content { flex: 1; background: #0f172a; padding: 12px; border-radius: 8px; }
+        .algorithm-q { font-size: 13px; color: #94a3b8; margin-bottom: 4px; }
+        .algorithm-a { font-size: 14px; color: #e2e8f0; }
+        .algorithm-branch { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 8px; }
+        .branch-yes { background: #065f46; padding: 8px 12px; border-radius: 6px; font-size: 12px; color: #34d399; }
+        .branch-no { background: #7f1d1d; padding: 8px 12px; border-radius: 6px; font-size: 12px; color: #fca5a5; }
+        
+        .action-row { display: flex; justify-content: center; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 14px; transition: all 0.15s; display: flex; align-items: center; gap: 8px; }
+        .btn-primary { background: #ec4899; color: #fff; }
+        .btn-primary:hover { background: #db2777; }
+        .btn-secondary { background: #334155; color: #e2e8f0; }
+        .btn-success { background: #22c55e; color: #fff; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        @media (max-width: 1024px) { .main-content { grid-template-columns: 1fr; } .sidebar { position: static; } }
+        @media (max-width: 768px) { .emr-patient-banner { display: none; } .result-comparison, .algorithm-branch { grid-template-columns: 1fr; } }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+    <header class="emr-header">
+        <div class="emr-header-inner">
+            <div class="emr-logo">
+                <div class="emr-logo-icon">😮</div>
+                <div class="emr-logo-text">A/I <span>Trainer</span></div>
+            </div>
+            <div class="emr-patient-banner">
+                <div class="patient-avatar">WC</div>
+                <div class="patient-info">
+                    <div class="patient-name">Chen, William</div>
+                    <div class="patient-demo">55 yo M • MRN: 294857</div>
+                </div>
+            </div>
+            <div class="alert-badges">
+                <span class="alert-badge critical">Recurrent Angioedema</span>
+                <span class="alert-badge med">On Lisinopril</span>
+            </div>
+            <div class="emr-time">
+                <div>Allergy Clinic</div>
+                <div>Urgent Referral</div>
+            </div>
+        </div>
+    </header>
+    
+    <nav class="progress-timeline">
+        <div class="progress-inner">
+            <div class="timeline-step active" id="step-cc" onclick="goToPhase('cc')">
+                <div class="step-icon">1</div>
+                <span>Presentation</span>
+            </div>
+            <div class="timeline-connector" id="conn-1"></div>
+            <div class="timeline-step locked" id="step-hpi" onclick="goToPhase('hpi')">
+                <div class="step-icon">2</div>
+                <span>Episode History</span>
+            </div>
+            <div class="timeline-connector" id="conn-2"></div>
+            <div class="timeline-step locked" id="step-exam" onclick="goToPhase('exam')">
+                <div class="step-icon">3</div>
+                <span>Exam</span>
+            </div>
+            <div class="timeline-connector" id="conn-3"></div>
+            <div class="timeline-step locked" id="step-ddx" onclick="goToPhase('ddx')">
+                <div class="step-icon">4</div>
+                <span>Differential</span>
+            </div>
+            <div class="timeline-connector" id="conn-4"></div>
+            <div class="timeline-step locked" id="step-predict" onclick="goToPhase('predict')">
+                <div class="step-icon">5</div>
+                <span>Predict Labs</span>
+            </div>
+            <div class="timeline-connector" id="conn-5"></div>
+            <div class="timeline-step locked" id="step-results" onclick="goToPhase('results')">
+                <div class="step-icon">6</div>
+                <span>Diagnosis & Plan</span>
+            </div>
+        </div>
+    </nav>
+    
+    <main class="main-content">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">💊 Current Medications</div>
+                <div class="med-list">
+                    <div class="med-item">
+                        <div>
+                            <div class="med-name">Lisinopril<span class="med-highlight">ACE-I</span></div>
+                            <div class="med-dose">20mg daily × 3 years</div>
+                        </div>
+                    </div>
+                    <div class="med-item">
+                        <div>
+                            <div class="med-name">Metformin</div>
+                            <div class="med-dose">1000mg BID</div>
+                        </div>
+                    </div>
+                    <div class="med-item">
+                        <div>
+                            <div class="med-name">Atorvastatin</div>
+                            <div class="med-dose">40mg daily</div>
+                        </div>
+                    </div>
+                    <div class="med-item">
+                        <div>
+                            <div class="med-name">Aspirin</div>
+                            <div class="med-dose">81mg daily</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-title">❤️ Vitals (Today)</div>
+                <div class="vitals-grid">
+                    <div class="vital-item">
+                        <div class="vital-label">BP</div>
+                        <div class="vital-value warning">148/92</div>
+                    </div>
+                    <div class="vital-item">
+                        <div class="vital-label">HR</div>
+                        <div class="vital-value normal">76</div>
+                    </div>
+                    <div class="vital-item">
+                        <div class="vital-label">SpO₂</div>
+                        <div class="vital-value normal">98%</div>
+                    </div>
+                    <div class="vital-item">
+                        <div class="vital-label">Temp</div>
+                        <div class="vital-value normal">36.8°C</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-title">📋 PMH</div>
+                <div class="pmh-box">
+                    HTN (3 years), T2DM, hyperlipidemia, obesity (BMI 32). No known drug allergies. No history of hives or allergic reactions.
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-title">📝 Notes</div>
+                <div class="notes-area">
+                    <textarea placeholder="Key points: ACE-inhibitor, no urticaria, timing..."></textarea>
+                </div>
+            </div>
+        </aside>
+        
+        <div class="content-panel">
+            
+            <!-- PHASE 1: Presentation -->
+            <div class="phase-content active" id="phase-cc">
+                <div class="panel-header phase-cc">
+                    <div class="panel-title"><span>🚨</span> Emergency Referral</div>
+                    <div class="panel-badge">Step 1 of 6</div>
+                </div>
+                <div class="panel-body">
+                    <div class="emergency-box">
+                        <div class="emergency-label">PRESENTING COMPLAINT</div>
+                        <div class="emergency-text">Recurrent episodes of lip and tongue swelling without hives - 3 ED visits in past 6 months</div>
+                        <div class="emergency-context">Most recent episode 2 weeks ago required intubation for airway compromise. Patient is very concerned and was told to see allergy for "angioedema workup."</div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-number">QUESTION 1 OF 10</div>
+                        <div class="question-prompt">The key clinical feature distinguishing this case is angioedema WITHOUT urticaria. Which statement about this presentation is CORRECT?</div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q1', 'same')">Angioedema with or without urticaria has the same differential diagnosis</div>
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q1', 'different')">Angioedema WITHOUT urticaria suggests bradykinin-mediated rather than histamine/IgE-mediated cause</div>
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q1', 'allergic')">Angioedema without urticaria is always allergic</div>
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q1', 'mild')">Angioedema without urticaria is less dangerous than with urticaria</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-cc-q1"></div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-number">QUESTION 2 OF 10</div>
+                        <div class="question-prompt">Reviewing the medication list, which drug is MOST likely contributing to this patient's angioedema?</div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q2', 'lisinopril')">Lisinopril (ACE inhibitor)</div>
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q2', 'metformin')">Metformin</div>
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q2', 'atorvastatin')">Atorvastatin</div>
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q2', 'aspirin')">Aspirin</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-cc-q2"></div>
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-primary" onclick="completePhase('cc')" id="btn-complete-cc" disabled>Continue to Episode History →</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PHASE 2: Episode History -->
+            <div class="phase-content" id="phase-hpi">
+                <div class="panel-header phase-hpi">
+                    <div class="panel-title"><span>📜</span> Detailed Episode History</div>
+                    <div class="panel-badge">Step 2 of 6</div>
+                </div>
+                <div class="panel-body">
+                    <div class="hpi-section">
+                        <div class="hpi-header">
+                            <div class="hpi-title">📄 Patient's Description</div>
+                        </div>
+                        <div class="hpi-content">
+                            <p>"These swelling episodes started about <span class="hpi-highlight">8 months ago</span>. My lip just swells up huge - usually the <span class="hpi-critical">lower lip or tongue</span>. It comes on over a few hours and lasts 1-3 days. <span class="hpi-negative">I never get hives or itching anywhere.</span>"</p>
+                            <p>"The last one was really scary - my tongue got so big I couldn't talk right and was having trouble breathing. They had to <span class="hpi-critical">put a tube down my throat</span> in the ER. They gave me steroids and epinephrine but the swelling didn't go down fast."</p>
+                            <p>"I've had maybe <span class="hpi-highlight">5-6 episodes total</span>. I can't figure out what triggers them - no new foods, no pattern I can see."</p>
+                        </div>
+                    </div>
+                    
+                    <div class="interview-questions">
+                        <div class="interview-q" onclick="askQuestion(this, 'family')">
+                            <span class="interview-q-text">"Does anyone in your family have similar swelling episodes?"</span>
+                            <span class="interview-q-icon">💬</span>
+                        </div>
+                        <div class="interview-response" id="resp-family">
+                            <div class="response-label">Patient Response</div>
+                            <div class="response-text">"No, nobody in my family has this. My parents are healthy, my sister and brother have no problems like this. No one has needed to go to the hospital for swelling."</div>
+                        </div>
+                        
+                        <div class="interview-q" onclick="askQuestion(this, 'timing')">
+                            <span class="interview-q-text">"When did you start taking lisinopril relative to when the swelling started?"</span>
+                            <span class="interview-q-icon">💬</span>
+                        </div>
+                        <div class="interview-response" id="resp-timing">
+                            <div class="response-label">Patient Response</div>
+                            <div class="response-text">"I've been on lisinopril for about 3 years for my blood pressure. The swelling only started 8 months ago. The ER doctors mentioned it could be the lisinopril but I've been on it so long - can it really cause problems after all this time?"</div>
+                        </div>
+                        
+                        <div class="interview-q" onclick="askQuestion(this, 'response')">
+                            <span class="interview-q-text">"When they gave you epinephrine and antihistamines in the ER, how quickly did you improve?"</span>
+                            <span class="interview-q-icon">💬</span>
+                        </div>
+                        <div class="interview-response" id="resp-response">
+                            <div class="response-label">Patient Response</div>
+                            <div class="response-text">"Honestly, not that fast. They gave me the epi shot and Benadryl and steroids, but the swelling took hours to go down. With the bad episode, even after all those medications, it kept getting worse for a while before it got better."</div>
+                        </div>
+                        
+                        <div class="interview-q" onclick="askQuestion(this, 'abdominal')">
+                            <span class="interview-q-text">"Do you ever get abdominal pain, nausea, or vomiting with these episodes?"</span>
+                            <span class="interview-q-icon">💬</span>
+                        </div>
+                        <div class="interview-response" id="resp-abdominal">
+                            <div class="response-label">Patient Response</div>
+                            <div class="response-text">"No stomach problems that I've noticed. Just the swelling in my face."</div>
+                        </div>
+                    </div>
+                    
+                    <div class="question-card" style="margin-top: 24px;">
+                        <div class="question-number">QUESTION 3 OF 10</div>
+                        <div class="question-prompt">The patient has been on lisinopril for 3 years but angioedema only started 8 months ago. Does this timing pattern EXCLUDE ACE-inhibitor angioedema?</div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'hpi-q1', 'excludes')">Yes - ACE-inhibitor angioedema only occurs in first weeks of therapy</div>
+                            <div class="option-btn" onclick="selectOption(this, 'hpi-q1', 'noexclude')">No - ACE-inhibitor angioedema can occur months to years after starting the drug</div>
+                            <div class="option-btn" onclick="selectOption(this, 'hpi-q1', 'dose')">Only if the dose was increased recently</div>
+                            <div class="option-btn" onclick="selectOption(this, 'hpi-q1', 'brand')">Only if brand was changed to generic</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-hpi-q1"></div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-number">QUESTION 4 OF 10</div>
+                        <div class="question-prompt">The patient reports poor response to epinephrine and antihistamines. What does this suggest about the mechanism?</div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'hpi-q2', 'dose')">The medications were underdosed</div>
+                            <div class="option-btn" onclick="selectOption(this, 'hpi-q2', 'bradykinin')">The angioedema is likely bradykinin-mediated, not histamine-mediated</div>
+                            <div class="option-btn" onclick="selectOption(this, 'hpi-q2', 'allergic')">This is severe allergic angioedema requiring more aggressive treatment</div>
+                            <div class="option-btn" onclick="selectOption(this, 'hpi-q2', 'nothing')">Treatment response doesn't help with diagnosis</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-hpi-q2"></div>
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-secondary" onclick="goToPhase('cc')">← Back</button>
+                        <button class="btn btn-primary" onclick="completePhase('hpi')" id="btn-complete-hpi" disabled>Continue to Exam →</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PHASE 3: Physical Exam -->
+            <div class="phase-content" id="phase-exam">
+                <div class="panel-header phase-exam">
+                    <div class="panel-title"><span>🩺</span> Physical Examination</div>
+                    <div class="panel-badge">Step 3 of 6</div>
+                </div>
+                <div class="panel-body">
+                    <p style="color: #94a3b8; margin-bottom: 20px;">Patient presents between episodes. Click to examine:</p>
+                    
+                    <div class="exam-systems">
+                        <div class="exam-system" onclick="examSystem(this)">
+                            <div class="exam-system-name">👤 General</div>
+                            <div class="exam-system-hint">Overall appearance</div>
+                            <div class="exam-findings"><span class="finding-normal">Well-appearing, obese male in no acute distress.</span> No current swelling. Alert and oriented.</div>
+                        </div>
+                        <div class="exam-system" onclick="examSystem(this)">
+                            <div class="exam-system-name">👄 Oropharynx</div>
+                            <div class="exam-system-hint">Lips, tongue, uvula</div>
+                            <div class="exam-findings"><span class="finding-normal">No current lip or tongue swelling.</span> Oropharynx clear, uvula midline, no erythema. Note: patient shows photos from previous episodes showing dramatic lower lip swelling.</div>
+                        </div>
+                        <div class="exam-system" onclick="examSystem(this)">
+                            <div class="exam-system-name">🖐️ Skin</div>
+                            <div class="exam-system-hint">Urticaria, angioedema</div>
+                            <div class="exam-findings"><span class="finding-normal">No urticaria. No current angioedema.</span> Skin warm and dry. No rashes.</div>
+                        </div>
+                        <div class="exam-system" onclick="examSystem(this)">
+                            <div class="exam-system-name">🫁 Respiratory</div>
+                            <div class="exam-system-hint">Airway, breath sounds</div>
+                            <div class="exam-findings"><span class="finding-normal">Breathing comfortably on room air.</span> Clear to auscultation bilaterally. No stridor or wheezing.</div>
+                        </div>
+                        <div class="exam-system" onclick="examSystem(this)">
+                            <div class="exam-system-name">❤️ Cardiovascular</div>
+                            <div class="exam-system-hint">Heart, perfusion</div>
+                            <div class="exam-findings"><span class="finding-normal">Regular rate and rhythm.</span> No murmurs. Good peripheral perfusion.</div>
+                        </div>
+                        <div class="exam-system" onclick="examSystem(this)">
+                            <div class="exam-system-name">🩻 Abdominal</div>
+                            <div class="exam-system-hint">GI involvement?</div>
+                            <div class="exam-findings"><span class="finding-normal">Soft, non-tender, non-distended.</span> Obese habitus. No organomegaly.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="question-card" style="margin-top: 24px;">
+                        <div class="question-number">QUESTION 5 OF 10</div>
+                        <div class="question-prompt">The exam is normal between episodes. In hereditary angioedema (HAE), abdominal attacks are common. What percent of HAE patients experience abdominal angioedema?</div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'exam-q1', 'rare')">< 10% - rare manifestation</div>
+                            <div class="option-btn" onclick="selectOption(this, 'exam-q1', 'common')">~70-90% - very common, often misdiagnosed</div>
+                            <div class="option-btn" onclick="selectOption(this, 'exam-q1', 'always')">100% - required for diagnosis</div>
+                            <div class="option-btn" onclick="selectOption(this, 'exam-q1', 'never')">0% - HAE doesn't affect GI tract</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-exam-q1"></div>
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-secondary" onclick="goToPhase('hpi')">← Back</button>
+                        <button class="btn btn-primary" onclick="completePhase('exam')" id="btn-complete-exam" disabled>Continue to Differential →</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PHASE 4: Differential Diagnosis -->
+            <div class="phase-content" id="phase-ddx">
+                <div class="panel-header phase-ddx">
+                    <div class="panel-title"><span>🎯</span> Differential Diagnosis</div>
+                    <div class="panel-badge">Step 4 of 6</div>
+                </div>
+                <div class="panel-body">
+                    <div class="algorithm-box">
+                        <div class="algorithm-title">📋 Angioedema Without Urticaria Algorithm</div>
+                        <div class="algorithm-flow">
+                            <div class="algorithm-step">
+                                <div class="algorithm-arrow">→</div>
+                                <div class="algorithm-content">
+                                    <div class="algorithm-q">Is patient on ACE inhibitor?</div>
+                                    <div class="algorithm-branch">
+                                        <div class="branch-yes">YES → Stop ACE-I, observe</div>
+                                        <div class="branch-no">NO → Check complement</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="algorithm-step">
+                                <div class="algorithm-arrow">→</div>
+                                <div class="algorithm-content">
+                                    <div class="algorithm-q">C4 level?</div>
+                                    <div class="algorithm-branch">
+                                        <div class="branch-yes">LOW → HAE or AAE workup</div>
+                                        <div class="branch-no">NORMAL → Less likely HAE</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-number">QUESTION 6 OF 10</div>
+                        <div class="question-prompt">What is the MOST likely diagnosis for this patient?</div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'ddx-q1', 'ace')">ACE-inhibitor induced angioedema</div>
+                            <div class="option-btn" onclick="selectOption(this, 'ddx-q1', 'hae')">Hereditary angioedema (HAE)</div>
+                            <div class="option-btn" onclick="selectOption(this, 'ddx-q1', 'aae')">Acquired angioedema (AAE)</div>
+                            <div class="option-btn" onclick="selectOption(this, 'ddx-q1', 'allergic')">IgE-mediated allergic angioedema</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-ddx-q1"></div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-number">QUESTION 7 OF 10</div>
+                        <div class="question-prompt">Regardless of complement results, what is the IMMEDIATE management priority?</div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'ddx-q2', 'stop')">Stop lisinopril and switch to an ARB or alternative antihypertensive</div>
+                            <div class="option-btn" onclick="selectOption(this, 'ddx-q2', 'continue')">Continue lisinopril but add antihistamines</div>
+                            <div class="option-btn" onclick="selectOption(this, 'ddx-q2', 'wait')">Wait for lab results before making any changes</div>
+                            <div class="option-btn" onclick="selectOption(this, 'ddx-q2', 'desens')">Start ACE-inhibitor desensitization</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-ddx-q2"></div>
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-secondary" onclick="goToPhase('exam')">← Back</button>
+                        <button class="btn btn-primary" onclick="completePhase('ddx')" id="btn-complete-ddx" disabled>Continue to Predict Labs →</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PHASE 5: Predict Labs -->
+            <div class="phase-content" id="phase-predict">
+                <div class="panel-header phase-predict">
+                    <div class="panel-title"><span>🔮</span> Predict Lab Results</div>
+                    <div class="panel-badge">Step 5 of 6</div>
+                </div>
+                <div class="panel-body">
+                    <p style="color: #94a3b8; margin-bottom: 20px;">You order angioedema workup labs. Predict the results based on your suspected diagnosis:</p>
+                    
+                    <div class="lab-prediction-card">
+                        <div class="lab-pred-header">
+                            <div>
+                                <div class="lab-name">C4 (Complement Component 4)</div>
+                                <div class="lab-context">Screening test for complement-mediated angioedema</div>
+                            </div>
+                            <div class="lab-normal-range">Normal: 16-48 mg/dL</div>
+                        </div>
+                        <div class="prediction-choices">
+                            <div class="pred-choice" onclick="selectPrediction(this, 'c4', 'low')">Low (< 16)</div>
+                            <div class="pred-choice" onclick="selectPrediction(this, 'c4', 'normal')">Normal (16-48)</div>
+                            <div class="pred-choice" onclick="selectPrediction(this, 'c4', 'high')">High (> 48)</div>
+                        </div>
+                        <div class="confidence-row">
+                            <div class="confidence-label">Confidence:</div>
+                            <input type="range" class="confidence-slider" id="conf-c4" min="0" max="100" value="50" oninput="updateConf('c4')">
+                            <div class="confidence-value"><span id="conf-c4-val">50</span>%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="lab-prediction-card">
+                        <div class="lab-pred-header">
+                            <div>
+                                <div class="lab-name">C1-Inhibitor Level (C1-INH)</div>
+                                <div class="lab-context">Quantitative measurement</div>
+                            </div>
+                            <div class="lab-normal-range">Normal: 21-39 mg/dL</div>
+                        </div>
+                        <div class="prediction-choices">
+                            <div class="pred-choice" onclick="selectPrediction(this, 'c1inh', 'low')">Low (< 21)</div>
+                            <div class="pred-choice" onclick="selectPrediction(this, 'c1inh', 'normal')">Normal (21-39)</div>
+                            <div class="pred-choice" onclick="selectPrediction(this, 'c1inh', 'high')">High (> 39)</div>
+                        </div>
+                        <div class="confidence-row">
+                            <div class="confidence-label">Confidence:</div>
+                            <input type="range" class="confidence-slider" id="conf-c1inh" min="0" max="100" value="50" oninput="updateConf('c1inh')">
+                            <div class="confidence-value"><span id="conf-c1inh-val">50</span>%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="lab-prediction-card">
+                        <div class="lab-pred-header">
+                            <div>
+                                <div class="lab-name">C1-Inhibitor Function</div>
+                                <div class="lab-context">Functional activity assay</div>
+                            </div>
+                            <div class="lab-normal-range">Normal: > 67% functional</div>
+                        </div>
+                        <div class="prediction-choices">
+                            <div class="pred-choice" onclick="selectPrediction(this, 'c1func', 'low')">Low (< 67%)</div>
+                            <div class="pred-choice" onclick="selectPrediction(this, 'c1func', 'normal')">Normal (≥ 67%)</div>
+                        </div>
+                        <div class="confidence-row">
+                            <div class="confidence-label">Confidence:</div>
+                            <input type="range" class="confidence-slider" id="conf-c1func" min="0" max="100" value="50" oninput="updateConf('c1func')">
+                            <div class="confidence-value"><span id="conf-c1func-val">50</span>%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="lab-prediction-card">
+                        <div class="lab-pred-header">
+                            <div>
+                                <div class="lab-name">Tryptase (if drawn during episode)</div>
+                                <div class="lab-context">Mast cell activation marker</div>
+                            </div>
+                            <div class="lab-normal-range">Normal: < 11.4 ng/mL</div>
+                        </div>
+                        <div class="prediction-choices">
+                            <div class="pred-choice" onclick="selectPrediction(this, 'tryptase', 'elevated')">Elevated (> 11.4)</div>
+                            <div class="pred-choice" onclick="selectPrediction(this, 'tryptase', 'normal')">Normal (< 11.4)</div>
+                        </div>
+                        <div class="confidence-row">
+                            <div class="confidence-label">Confidence:</div>
+                            <input type="range" class="confidence-slider" id="conf-tryptase" min="0" max="100" value="50" oninput="updateConf('tryptase')">
+                            <div class="confidence-value"><span id="conf-tryptase-val">50</span>%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-secondary" onclick="goToPhase('ddx')">← Back</button>
+                        <button class="btn btn-success" onclick="submitPredictions()" id="btn-submit-pred" disabled>🔍 Reveal Results</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PHASE 6: Results -->
+            <div class="phase-content" id="phase-results">
+                <div class="panel-header phase-results">
+                    <div class="panel-title"><span>✅</span> Results & Plan</div>
+                    <div class="panel-badge">Step 6 of 6</div>
+                </div>
+                <div class="panel-body">
+                    <div class="results-summary">
+                        <div class="score-circle">
+                            <div class="score-number" id="final-score">--</div>
+                            <div class="score-label">Lab Prediction</div>
+                        </div>
+                        <div class="results-title" id="results-title">Diagnosis Confirmed</div>
+                        <div class="results-subtitle" id="results-subtitle">ACE-Inhibitor Induced Angioedema</div>
+                    </div>
+                    
+                    <div id="results-container"></div>
+                    
+                    <div class="question-card" style="margin-top: 24px;">
+                        <div class="question-number">QUESTION 8 OF 10</div>
+                        <div class="question-prompt">Labs confirm normal complement. After stopping lisinopril, can this patient be switched to an ARB (like losartan)?</div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'results-q1', 'safe')">Yes, ARBs are safe - they don't affect bradykinin</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q1', 'caution')">Yes, but with caution - ~2-10% cross-reactivity risk</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q1', 'never')">No, ARBs are absolutely contraindicated</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q1', 'same')">No, ARBs have the same mechanism as ACE-Is</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-results-q1"></div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-number">QUESTION 9 OF 10</div>
+                        <div class="question-prompt">If this patient has another angioedema episode after stopping ACE-I, what treatment would be appropriate for acute management?</div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'results-q2', 'epi')">Epinephrine and antihistamines</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q2', 'icatibant')">Icatibant (bradykinin B2 receptor antagonist)</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q2', 'steroids')">IV steroids alone</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q2', 'c1')">C1-inhibitor concentrate</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-results-q2"></div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-number">QUESTION 10 OF 10</div>
+                        <div class="question-prompt">How long after stopping the ACE-inhibitor might the patient remain at risk for angioedema?</div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'results-q3', 'days')">Only a few days</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q3', 'weeks')">Up to 6 weeks or longer</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q3', 'immediate')">Risk resolves immediately when drug stops</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q3', 'forever')">Risk is permanent once sensitized</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-results-q3"></div>
+                    </div>
+                    
+                    <div class="learn-more-section">
+                        <div class="learn-more-header"><span>📚</span> Continue Learning</div>
+                        <div class="learn-more-grid">
+                            <a href="../../mechanism/bradykinin-pathway.html" class="learn-link">
+                                <div class="learn-link-icon mechanism">🧬</div>
+                                <div class="learn-link-info">
+                                    <div class="learn-link-title">Bradykinin Pathway</div>
+                                    <div class="learn-link-desc">ACE, bradykinin, and vascular permeability</div>
+                                    <div class="learn-link-badge">MechanismDx</div>
+                                </div>
+                            </a>
+                            <a href="https://www.aaaai.org/conditions-and-treatments/related-conditions/hereditary-angioedema" target="_blank" class="learn-link">
+                                <div class="learn-link-icon external">🌐</div>
+                                <div class="learn-link-info">
+                                    <div class="learn-link-title">HAE Resources (AAAAI)</div>
+                                    <div class="learn-link-desc">Guidelines and patient education</div>
+                                    <div class="learn-link-badge">External • Open Access</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-secondary" onclick="location.href='ai-clinical-reasoning-hub.html'">← Case Library</button>
+                        <button class="btn btn-primary" onclick="location.href='ai-trainer-chronic-urticaria.html'">Next: Chronic Urticaria →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+    const state = { currentPhase: 'cc', completedPhases: [], answers: {}, predictions: {}, confidences: {} };
+    
+    const correctAnswers = {
+        'cc-q1': 'different', 'cc-q2': 'lisinopril', 'hpi-q1': 'noexclude', 'hpi-q2': 'bradykinin',
+        'exam-q1': 'common', 'ddx-q1': 'ace', 'ddx-q2': 'stop',
+        'results-q1': 'caution', 'results-q2': 'icatibant', 'results-q3': 'weeks'
+    };
+    
+    const correctPredictions = { c4: 'normal', c1inh: 'normal', c1func: 'normal', tryptase: 'normal' };
+    
+    const feedback = {
+        'cc-q1': {
+            different: { correct: true, text: 'Correct! Angioedema WITHOUT urticaria has a different differential: bradykinin-mediated causes (ACE-I, HAE, AAE) rather than histamine/mast cell mediated. This distinction is clinically critical because treatment differs dramatically.' },
+            same: { correct: false, text: 'The presence or absence of urticaria is a key distinguishing feature. Without urticaria, think bradykinin; with urticaria, think histamine/IgE.' },
+            allergic: { correct: false, text: 'Allergic (IgE-mediated) angioedema almost always presents WITH urticaria. Angioedema alone suggests bradykinin-mediated causes.' },
+            mild: { correct: false, text: 'Actually, bradykinin-mediated angioedema (without urticaria) can be very dangerous - it often affects the airway and responds poorly to standard anaphylaxis treatment.' }
+        },
+        'cc-q2': {
+            lisinopril: { correct: true, text: 'Correct! ACE inhibitors are the most common cause of drug-induced angioedema, affecting 0.1-0.7% of patients. ACE breaks down bradykinin; inhibiting ACE causes bradykinin accumulation and angioedema. Risk is higher in African Americans.' },
+            metformin: { correct: false, text: 'Metformin is not associated with angioedema. The ACE inhibitor (lisinopril) is the culprit.' },
+            atorvastatin: { correct: false, text: 'Statins rarely cause angioedema. ACE inhibitors are the most common drug cause.' },
+            aspirin: { correct: false, text: 'Aspirin can cause angioedema in NSAID-sensitive patients, but that presentation typically includes urticaria. The isolated angioedema pattern points to ACE-I.' }
+        },
+        'hpi-q1': {
+            noexclude: { correct: true, text: 'Correct! ACE-I angioedema can occur at any time - even years after starting the medication. About 25% of cases occur after 1+ years of therapy. This makes it a diagnostic trap - patients and providers often don\'t connect long-standing medications to new symptoms.' },
+            excludes: { correct: false, text: 'This is a common misconception. ACE-I angioedema frequently presents months to years after drug initiation. Timing does NOT exclude it.' },
+            dose: { correct: false, text: 'Dose changes are not required. ACE-I angioedema can occur at any time on stable doses.' },
+            brand: { correct: false, text: 'Brand changes don\'t explain this. The mechanism is class-wide ACE inhibition, not formulation-specific.' }
+        },
+        'hpi-q2': {
+            bradykinin: { correct: true, text: 'Correct! Poor response to epinephrine and antihistamines is a hallmark of bradykinin-mediated angioedema. These treatments target histamine/mast cell pathways, not bradykinin. This is why ACE-I angioedema can be life-threatening - standard anaphylaxis treatments don\'t work well.' },
+            dose: { correct: false, text: 'Standard ED dosing was likely appropriate. The issue is mechanism - bradykinin angioedema doesn\'t respond to antihistamines/epinephrine.' },
+            allergic: { correct: false, text: 'If it were IgE-mediated allergic angioedema, epinephrine and antihistamines would typically provide rapid relief.' },
+            nothing: { correct: false, text: 'Treatment response is actually very informative! Lack of response to standard allergy medications suggests a non-histamine mechanism.' }
+        },
+        'exam-q1': {
+            common: { correct: true, text: 'Correct! Abdominal attacks occur in 70-90% of HAE patients and are often misdiagnosed as acute abdomen, leading to unnecessary surgeries. Abdominal pain, nausea, vomiting, and diarrhea from bowel wall edema. Our patient denies GI symptoms, making HAE less likely.' },
+            rare: { correct: false, text: 'Abdominal attacks are actually very common in HAE (70-90%), often leading to misdiagnosis and unnecessary surgeries.' },
+            always: { correct: false, text: 'Abdominal attacks are common but not required for diagnosis. Some patients have only peripheral/facial attacks.' },
+            never: { correct: false, text: 'GI tract involvement is actually a hallmark of HAE - bowel wall edema causes abdominal attacks in most patients.' }
+        },
+        'ddx-q1': {
+            ace: { correct: true, text: 'Correct! The clinical picture strongly supports ACE-I angioedema: on lisinopril for years, no family history, no urticaria, poor response to antihistamines/epinephrine, no abdominal attacks. Lab workup will likely show normal complement, confirming the diagnosis.' },
+            hae: { correct: false, text: 'HAE typically presents earlier in life, has family history (autosomal dominant), often includes abdominal attacks, and shows low C4. This presentation doesn\'t fit.' },
+            aae: { correct: false, text: 'Acquired angioedema is rare, typically associated with lymphoproliferative disorders, and presents in older patients. ACE-I is more likely here.' },
+            allergic: { correct: false, text: 'IgE-mediated allergic angioedema presents WITH urticaria and responds to antihistamines/epinephrine. This patient has neither feature.' }
+        },
+        'ddx-q2': {
+            stop: { correct: true, text: 'Correct! The ACE-I MUST be stopped immediately regardless of lab results. This is life-threatening - he\'s already been intubated once. Switch to an alternative antihypertensive (calcium channel blocker preferred, ARB with caution). Don\'t wait for labs to make this decision.' },
+            continue: { correct: false, text: 'Continuing the ACE-I while adding antihistamines would be dangerous. Antihistamines don\'t prevent bradykinin-mediated angioedema. The drug must stop.' },
+            wait: { correct: false, text: 'Waiting is dangerous. The clinical picture is clear enough to stop the ACE-I immediately. Labs will help confirm but shouldn\'t delay treatment.' },
+            desens: { correct: false, text: 'There is no desensitization for ACE-I angioedema. The drug must be permanently discontinued.' }
+        },
+        'results-q1': {
+            caution: { correct: true, text: 'Correct! ARBs can be used but with caution. While ARBs don\'t directly inhibit ACE, there\'s about 2-10% cross-reactivity risk. Many experts prefer calcium channel blockers as the first alternative. If ARB is chosen, start with close monitoring.' },
+            safe: { correct: false, text: 'Not entirely safe - while ARBs have a different mechanism, there\'s still a ~2-10% cross-reactivity risk reported in the literature.' },
+            never: { correct: false, text: 'ARBs aren\'t absolutely contraindicated, but should be used cautiously with monitoring. Many patients tolerate them well.' },
+            same: { correct: false, text: 'ARBs block the angiotensin receptor, not ACE itself, so the mechanism differs. However, some cross-reactivity still occurs through unclear pathways.' }
+        },
+        'results-q2': {
+            icatibant: { correct: true, text: 'Correct! Icatibant is a bradykinin B2 receptor antagonist approved for ACE-I angioedema. It directly blocks the bradykinin pathway. Standard anaphylaxis treatments (epi, antihistamines, steroids) are ineffective because they target histamine, not bradykinin.' },
+            epi: { correct: false, text: 'As we learned, epinephrine and antihistamines don\'t work well for bradykinin-mediated angioedema. That\'s why this patient had a prolonged course despite standard treatment.' },
+            steroids: { correct: false, text: 'Steroids have minimal effect on bradykinin angioedema. They may help with airway inflammation but don\'t address the underlying mechanism.' },
+            c1: { correct: false, text: 'C1-inhibitor concentrate is for HAE (where C1-INH is deficient). In ACE-I angioedema, C1-INH is normal - the problem is excess bradykinin from ACE inhibition.' }
+        },
+        'results-q3': {
+            weeks: { correct: true, text: 'Correct! Risk can persist for 4-6 weeks or even longer after stopping the ACE-I. The patient should be warned about this, carry emergency treatment, and have close follow-up. Most experts recommend monitoring for several weeks to months.' },
+            days: { correct: false, text: 'The risk persists much longer than a few days. Bradykinin pathways can take weeks to normalize.' },
+            immediate: { correct: false, text: 'Unfortunately, risk doesn\'t resolve immediately. Patients remain at risk for weeks after discontinuation.' },
+            forever: { correct: false, text: 'The risk does eventually resolve after the drug is stopped, typically within weeks to months. It\'s not permanent.' }
+        }
+    };
+    
+    const labExplanations = {
+        c4: { actual: '32 mg/dL (Normal)', correct: 'normal', labels: { low: 'Low', normal: 'Normal', high: 'High' },
+            explanation: 'C4 is NORMAL in ACE-I angioedema because the complement pathway is not involved. In HAE and AAE, C4 is characteristically low (consumed during attacks and often low between attacks). Normal C4 effectively rules out HAE/AAE and supports ACE-I induced angioedema.' },
+        c1inh: { actual: '28 mg/dL (Normal)', correct: 'normal', labels: { low: 'Low', normal: 'Normal', high: 'High' },
+            explanation: 'C1-INH level is NORMAL in ACE-I angioedema. Low C1-INH would suggest HAE Type I (most common) or acquired C1-INH deficiency. Normal level confirms the angioedema is not due to C1-INH deficiency.' },
+        c1func: { actual: '89% (Normal)', correct: 'normal', labels: { low: 'Low', normal: 'Normal' },
+            explanation: 'C1-INH function is NORMAL. In HAE Type II, the level may be normal but function is impaired. Normal function here, along with normal level and C4, completely rules out HAE and supports ACE-I etiology.' },
+        tryptase: { actual: '4.2 ng/mL (Normal)', correct: 'normal', labels: { elevated: 'Elevated', normal: 'Normal' },
+            explanation: 'Tryptase is NORMAL because ACE-I angioedema is NOT mast cell mediated. Elevated tryptase would suggest mast cell activation (allergic reaction, mastocytosis). Normal tryptase supports bradykinin mechanism over histamine/mast cell mechanism.' }
+    };
+    
+    function updateConf(lab) { document.getElementById(`conf-${lab}-val`).textContent = document.getElementById(`conf-${lab}`).value; state.confidences[lab] = parseInt(document.getElementById(`conf-${lab}`).value); }
+    
+    function selectOption(el, qId, value) {
+        el.parentElement.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('selected', 'correct', 'incorrect'));
+        el.classList.add('selected');
+        state.answers[qId] = value;
+        const isCorrect = value === correctAnswers[qId];
+        const fb = feedback[qId][value];
+        const feedbackBox = document.getElementById(`feedback-${qId}`);
+        feedbackBox.className = `feedback-box visible ${isCorrect ? 'correct' : 'incorrect'}`;
+        feedbackBox.innerHTML = `<div class="feedback-header ${isCorrect ? 'correct' : 'incorrect'}">${isCorrect ? '✓ Correct!' : '✗ Not quite'}</div><div class="feedback-text">${fb.text}</div>`;
+        el.classList.add(isCorrect ? 'correct' : 'incorrect');
+        checkPhaseComplete();
+    }
+    
+    function askQuestion(el, qId) { if (!el.classList.contains('asked')) { el.classList.add('asked'); document.getElementById(`resp-${qId}`).classList.add('visible'); } }
+    function examSystem(el) { el.classList.add('examined'); }
+    function selectPrediction(el, lab, value) { el.parentElement.querySelectorAll('.pred-choice').forEach(b => b.classList.remove('selected')); el.classList.add('selected'); state.predictions[lab] = value; checkPredictionsComplete(); }
+    
+    function checkPhaseComplete() {
+        const phase = state.currentPhase;
+        let complete = false;
+        if (phase === 'cc') complete = state.answers['cc-q1'] && state.answers['cc-q2'];
+        else if (phase === 'hpi') complete = state.answers['hpi-q1'] && state.answers['hpi-q2'];
+        else if (phase === 'exam') complete = state.answers['exam-q1'];
+        else if (phase === 'ddx') complete = state.answers['ddx-q1'] && state.answers['ddx-q2'];
+        const btn = document.getElementById(`btn-complete-${phase}`);
+        if (btn) btn.disabled = !complete;
+    }
+    
+    function checkPredictionsComplete() { document.getElementById('btn-submit-pred').disabled = !['c4', 'c1inh', 'c1func', 'tryptase'].every(l => state.predictions[l]); }
+    
+    function completePhase(phase) {
+        state.completedPhases.push(phase);
+        document.getElementById(`step-${phase}`).classList.remove('active');
+        document.getElementById(`step-${phase}`).classList.add('completed');
+        const phases = ['cc', 'hpi', 'exam', 'ddx', 'predict', 'results'];
+        const idx = phases.indexOf(phase);
+        const next = phases[idx + 1];
+        if (next) { document.getElementById(`step-${next}`).classList.remove('locked'); document.getElementById(`step-${next}`).classList.add('available'); document.getElementById(`conn-${idx + 1}`).classList.add('completed'); goToPhase(next); }
+    }
+    
+    function goToPhase(phase) {
+        if (document.getElementById(`step-${phase}`).classList.contains('locked')) return;
+        document.querySelectorAll('.timeline-step').forEach(s => { s.classList.remove('active'); if (s.classList.contains('available')) s.classList.remove('available'); });
+        document.getElementById(`step-${phase}`).classList.add('active');
+        document.querySelectorAll('.phase-content').forEach(c => c.classList.remove('active'));
+        document.getElementById(`phase-${phase}`).classList.add('active');
+        state.currentPhase = phase;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    function submitPredictions() {
+        let correct = 0;
+        ['c4', 'c1inh', 'c1func', 'tryptase'].forEach(lab => { if (state.predictions[lab] === correctPredictions[lab]) correct++; });
+        const pct = Math.round((correct / 4) * 100);
+        document.getElementById('final-score').textContent = `${pct}%`;
+        document.getElementById('results-title').textContent = pct >= 75 ? 'Excellent Lab Interpretation!' : 'Good Learning Opportunity';
+        const container = document.getElementById('results-container');
+        container.innerHTML = '';
+        ['c4', 'c1inh', 'c1func', 'tryptase'].forEach(lab => {
+            const info = labExplanations[lab];
+            const predicted = state.predictions[lab];
+            const isCorrect = predicted === info.correct;
+            container.innerHTML += `<div class="result-card"><div class="result-header"><div class="result-lab-name">${lab === 'c4' ? 'C4' : lab === 'c1inh' ? 'C1-INH Level' : lab === 'c1func' ? 'C1-INH Function' : 'Tryptase'}</div><div class="result-badge ${isCorrect ? 'correct' : 'incorrect'}">${isCorrect ? '✓' : '✗'}</div></div><div class="result-comparison"><div class="result-col"><div class="result-col-label">Your Prediction</div><div class="result-col-value">${info.labels[predicted]}</div></div><div class="result-col"><div class="result-col-label">Actual</div><div class="result-col-value" style="color:#34d399;">${info.actual}</div></div></div><div class="result-explanation">${info.explanation}</div></div>`;
+        });
+        completePhase('predict');
+    }
+    
+    ['c4', 'c1inh', 'c1func', 'tryptase'].forEach(lab => { state.confidences[lab] = 50; });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penicillin Allergy Delabeling | A/I Clinical Reasoning Trainer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+        
+        .emr-header { background: linear-gradient(135deg, #78350f 0%, #451a03 100%); border-bottom: 2px solid #f59e0b; padding: 12px 24px; position: sticky; top: 0; z-index: 100; }
+        .emr-header-inner { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+        .emr-logo { display: flex; align-items: center; gap: 12px; }
+        .emr-logo-icon { width: 40px; height: 40px; background: #f59e0b; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+        .emr-logo-text { font-size: 18px; font-weight: 700; color: #fff; }
+        .emr-logo-text span { color: #fcd34d; }
+        .emr-patient-banner { display: flex; align-items: center; gap: 16px; background: rgba(245, 158, 11, 0.15); padding: 8px 16px; border-radius: 8px; border: 1px solid rgba(245, 158, 11, 0.3); }
+        .patient-avatar { width: 36px; height: 36px; background: #f59e0b; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; color: #fff; font-size: 14px; }
+        .patient-info { font-size: 13px; }
+        .patient-name { font-weight: 600; color: #fff; }
+        .patient-demo { color: #fcd34d; }
+        .alert-badges { display: flex; gap: 8px; }
+        .alert-badge { padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; }
+        .alert-badge.allergy { background: #dc2626; color: #fff; }
+        .alert-badge.question { background: #3b82f6; color: #fff; }
+        .emr-time { font-size: 12px; color: #fcd34d; text-align: right; }
+        
+        .progress-timeline { background: #1e293b; padding: 16px 24px; border-bottom: 1px solid #334155; }
+        .progress-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; gap: 0; overflow-x: auto; padding-bottom: 8px; }
+        .timeline-step { display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 8px; font-size: 12px; color: #64748b; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+        .timeline-step.locked { cursor: not-allowed; opacity: 0.5; }
+        .timeline-step.active { background: #f59e0b; color: #fff; }
+        .timeline-step.completed { background: #065f46; color: #34d399; }
+        .timeline-step.available { background: #1e3a5f; color: #60a5fa; cursor: pointer; }
+        .step-icon { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; background: rgba(255,255,255,0.1); }
+        .timeline-step.completed .step-icon { background: #34d399; color: #065f46; }
+        .timeline-step.active .step-icon { background: #fff; color: #f59e0b; }
+        .timeline-connector { width: 30px; height: 2px; background: #334155; flex-shrink: 0; }
+        .timeline-connector.completed { background: #34d399; }
+        
+        .main-content { max-width: 1400px; margin: 0 auto; padding: 24px; display: grid; grid-template-columns: 280px 1fr; gap: 24px; }
+        
+        .sidebar { background: #1e293b; border-radius: 12px; padding: 20px; height: fit-content; position: sticky; top: 140px; }
+        .sidebar-section { margin-bottom: 24px; }
+        .sidebar-title { font-size: 11px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+        .allergy-list { background: #0f172a; border-radius: 8px; padding: 12px; }
+        .allergy-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid #334155; font-size: 13px; }
+        .allergy-item:last-child { border-bottom: none; }
+        .allergy-dot { width: 8px; height: 8px; border-radius: 50%; }
+        .allergy-dot.reported { background: #f59e0b; }
+        .allergy-dot.unverified { background: #64748b; }
+        .allergy-detail { font-size: 11px; color: #64748b; margin-top: 2px; }
+        .clinical-context { background: #0f172a; border-radius: 8px; padding: 12px; font-size: 12px; color: #94a3b8; line-height: 1.6; }
+        .context-highlight { background: rgba(220, 38, 38, 0.15); padding: 2px 6px; border-radius: 4px; color: #f87171; }
+        .notes-area { background: #0f172a; border-radius: 8px; padding: 12px; }
+        .notes-area textarea { width: 100%; background: transparent; border: none; color: #e2e8f0; font-family: inherit; font-size: 12px; resize: none; min-height: 80px; }
+        .notes-area textarea:focus { outline: none; }
+        
+        .content-panel { background: #1e293b; border-radius: 12px; overflow: hidden; }
+        .panel-header { padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; }
+        .panel-header.phase-cc { background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%); }
+        .panel-header.phase-hpi { background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); }
+        .panel-header.phase-risk { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        .panel-header.phase-test { background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%); }
+        .panel-header.phase-predict { background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); }
+        .panel-header.phase-results { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); }
+        .panel-title { font-size: 18px; font-weight: 600; color: #fff; display: flex; align-items: center; gap: 10px; }
+        .panel-badge { background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px; font-size: 12px; color: #fff; }
+        .panel-body { padding: 24px; }
+        
+        .phase-content { display: none; }
+        .phase-content.active { display: block; }
+        
+        .referral-box { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+        .referral-label { font-size: 12px; color: rgba(255,255,255,0.7); margin-bottom: 8px; }
+        .referral-text { font-size: 18px; font-weight: 600; color: #fff; line-height: 1.4; }
+        .referral-context { margin-top: 12px; font-size: 14px; color: rgba(255,255,255,0.9); }
+        
+        .question-card { background: #0f172a; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid #334155; }
+        .question-number { font-size: 11px; color: #f59e0b; font-weight: 600; margin-bottom: 8px; }
+        .question-prompt { font-size: 15px; color: #e2e8f0; margin-bottom: 16px; line-height: 1.6; }
+        .question-options { display: flex; flex-direction: column; gap: 10px; }
+        .option-btn { background: #1e293b; border: 2px solid #334155; border-radius: 10px; padding: 14px 18px; text-align: left; color: #e2e8f0; cursor: pointer; transition: all 0.15s; font-size: 14px; }
+        .option-btn:hover { border-color: #f59e0b; background: #2d2517; }
+        .option-btn.selected { border-color: #f59e0b; background: #451a03; }
+        .option-btn.correct { border-color: #22c55e; background: #065f46; }
+        .option-btn.incorrect { border-color: #ef4444; background: #7f1d1d; }
+        
+        .feedback-box { background: #0f172a; border-radius: 12px; padding: 20px; margin-top: 16px; border-left: 4px solid #3b82f6; display: none; }
+        .feedback-box.visible { display: block; }
+        .feedback-box.correct { border-color: #22c55e; background: linear-gradient(135deg, #052e16 0%, #0f172a 100%); }
+        .feedback-box.incorrect { border-color: #ef4444; background: linear-gradient(135deg, #450a0a 0%, #0f172a 100%); }
+        .feedback-header { display: flex; align-items: center; gap: 10px; font-weight: 600; margin-bottom: 12px; }
+        .feedback-header.correct { color: #34d399; }
+        .feedback-header.incorrect { color: #f87171; }
+        .feedback-text { font-size: 14px; color: #94a3b8; line-height: 1.7; }
+        
+        .hpi-section { background: #0f172a; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+        .hpi-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .hpi-title { font-weight: 600; color: #fff; display: flex; align-items: center; gap: 8px; }
+        .hpi-content { font-size: 14px; color: #cbd5e1; line-height: 1.8; }
+        .hpi-content p { margin-bottom: 12px; }
+        .hpi-highlight { background: rgba(251, 191, 36, 0.15); padding: 2px 6px; border-radius: 4px; color: #fbbf24; }
+        .hpi-negative { background: rgba(34, 197, 94, 0.15); padding: 2px 6px; border-radius: 4px; color: #4ade80; }
+        
+        .interview-section { margin-top: 24px; }
+        .interview-questions { display: grid; gap: 10px; }
+        .interview-q { background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.15s; display: flex; justify-content: space-between; align-items: center; }
+        .interview-q:hover { border-color: #f59e0b; background: #2d2517; }
+        .interview-q.asked { background: #0f172a; border-color: #22c55e; }
+        .interview-q-text { font-size: 14px; color: #e2e8f0; }
+        .interview-q-icon { color: #64748b; }
+        .interview-q.asked .interview-q-icon { color: #22c55e; }
+        .interview-response { background: linear-gradient(135deg, #1e3a5f 0%, #1e293b 100%); border-radius: 10px; padding: 16px; margin-top: 12px; display: none; border: 1px solid #3b82f6; }
+        .interview-response.visible { display: block; }
+        .response-label { font-size: 11px; color: #60a5fa; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .response-text { font-size: 14px; color: #e2e8f0; line-height: 1.6; font-style: italic; }
+        
+        /* PEN-FAST Calculator */
+        .calculator-card { background: linear-gradient(135deg, #1e3a5f 0%, #1e293b 100%); border-radius: 12px; padding: 24px; margin-bottom: 24px; border: 1px solid #3b82f6; }
+        .calc-title { font-size: 16px; font-weight: 600; color: #60a5fa; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .calc-items { display: flex; flex-direction: column; gap: 12px; }
+        .calc-item { display: flex; align-items: center; gap: 12px; padding: 12px; background: #0f172a; border-radius: 8px; cursor: pointer; transition: all 0.15s; }
+        .calc-item:hover { background: #1e293b; }
+        .calc-item.selected { background: #1e40af; border: 1px solid #3b82f6; }
+        .calc-checkbox { width: 24px; height: 24px; border: 2px solid #475569; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: transparent; transition: all 0.15s; }
+        .calc-item.selected .calc-checkbox { background: #3b82f6; border-color: #3b82f6; color: #fff; }
+        .calc-label { flex: 1; }
+        .calc-label-title { font-size: 14px; color: #e2e8f0; font-weight: 500; }
+        .calc-label-desc { font-size: 12px; color: #94a3b8; margin-top: 2px; }
+        .calc-points { font-size: 14px; font-weight: 600; color: #60a5fa; }
+        .calc-total { display: flex; justify-content: space-between; align-items: center; padding: 16px; background: #0f172a; border-radius: 8px; margin-top: 16px; }
+        .calc-total-label { font-size: 14px; color: #94a3b8; }
+        .calc-total-value { font-size: 24px; font-weight: 700; color: #60a5fa; }
+        .calc-interpretation { margin-top: 12px; padding: 12px; border-radius: 8px; font-size: 13px; }
+        .calc-interpretation.low { background: #065f46; color: #34d399; }
+        .calc-interpretation.high { background: #7f1d1d; color: #fca5a5; }
+        
+        /* Testing Protocol */
+        .protocol-card { background: #0f172a; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid #334155; }
+        .protocol-title { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .protocol-steps { display: flex; flex-direction: column; gap: 12px; }
+        .protocol-step { display: flex; gap: 12px; padding: 12px; background: #1e293b; border-radius: 8px; }
+        .step-num { width: 28px; height: 28px; background: #3b82f6; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: #fff; flex-shrink: 0; }
+        .step-content { flex: 1; }
+        .step-title { font-size: 14px; font-weight: 500; color: #e2e8f0; margin-bottom: 4px; }
+        .step-desc { font-size: 12px; color: #94a3b8; }
+        
+        .lab-prediction-card { background: #0f172a; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid #334155; }
+        .lab-pred-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; flex-wrap: wrap; gap: 8px; }
+        .lab-name { font-weight: 600; color: #fff; font-size: 15px; }
+        .lab-context { font-size: 12px; color: #94a3b8; margin-top: 4px; }
+        .lab-normal-range { font-size: 12px; color: #64748b; background: #1e293b; padding: 4px 10px; border-radius: 6px; }
+        .prediction-choices { display: flex; flex-wrap: wrap; gap: 10px; }
+        .pred-choice { padding: 10px 18px; background: #1e293b; border: 2px solid #334155; border-radius: 8px; color: #e2e8f0; cursor: pointer; transition: all 0.15s; font-size: 13px; }
+        .pred-choice:hover { border-color: #f59e0b; }
+        .pred-choice.selected { border-color: #f59e0b; background: #451a03; color: #fcd34d; }
+        .confidence-row { margin-top: 16px; padding-top: 16px; border-top: 1px solid #334155; }
+        .confidence-label { font-size: 13px; color: #94a3b8; margin-bottom: 8px; }
+        .confidence-slider { width: 100%; height: 8px; border-radius: 4px; background: #334155; -webkit-appearance: none; }
+        .confidence-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: #f59e0b; cursor: pointer; }
+        .confidence-value { text-align: center; font-weight: 600; color: #f59e0b; margin-top: 8px; }
+        
+        .results-summary { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); border-radius: 16px; padding: 32px; text-align: center; margin-bottom: 24px; }
+        .score-circle { width: 120px; height: 120px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto 16px; border: 4px solid rgba(255,255,255,0.3); }
+        .score-number { font-size: 36px; font-weight: 700; color: #fff; }
+        .score-label { font-size: 12px; color: rgba(255,255,255,0.7); }
+        .results-title { font-size: 20px; font-weight: 600; color: #fff; margin-bottom: 8px; }
+        .results-subtitle { font-size: 14px; color: rgba(255,255,255,0.8); }
+        
+        .result-card { background: #0f172a; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid #334155; }
+        .result-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .result-lab-name { font-weight: 600; color: #fff; }
+        .result-badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+        .result-badge.correct { background: #065f46; color: #34d399; }
+        .result-badge.incorrect { background: #7f1d1d; color: #f87171; }
+        .result-comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+        .result-col { background: #1e293b; padding: 12px; border-radius: 8px; }
+        .result-col-label { font-size: 11px; color: #64748b; margin-bottom: 4px; }
+        .result-col-value { font-size: 16px; font-weight: 600; color: #fff; }
+        .result-explanation { font-size: 14px; color: #94a3b8; line-height: 1.7; padding: 16px; background: #1e293b; border-radius: 8px; border-left: 3px solid #f59e0b; }
+        
+        .learn-more-section { background: linear-gradient(135deg, #4c1d95 0%, #2e1065 100%); border-radius: 12px; padding: 24px; margin-top: 24px; border: 1px solid #7c3aed; }
+        .learn-more-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; color: #c4b5fd; font-weight: 600; }
+        .learn-more-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+        .learn-link { background: #1e1033; border: 1px solid #5b21b6; border-radius: 10px; padding: 16px; text-decoration: none; color: inherit; display: flex; gap: 14px; align-items: flex-start; transition: all 0.15s; }
+        .learn-link:hover { border-color: #a78bfa; transform: translateY(-2px); }
+        .learn-link-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+        .learn-link-icon.mechanism { background: #065f46; }
+        .learn-link-icon.coach { background: #7c3aed; }
+        .learn-link-icon.external { background: #1e40af; }
+        .learn-link-info { flex: 1; }
+        .learn-link-title { font-weight: 600; color: #fff; margin-bottom: 4px; font-size: 14px; }
+        .learn-link-desc { font-size: 12px; color: #a78bfa; }
+        .learn-link-badge { font-size: 10px; padding: 2px 8px; border-radius: 10px; background: #2e1065; color: #c4b5fd; margin-top: 6px; display: inline-block; }
+        
+        /* Key Stats Box */
+        .key-stats { background: linear-gradient(135deg, #065f46 0%, #064e3b 100%); border-radius: 12px; padding: 20px; margin-bottom: 24px; border: 1px solid #34d399; }
+        .key-stats-title { font-size: 14px; font-weight: 600; color: #34d399; margin-bottom: 12px; }
+        .key-stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+        .key-stat { text-align: center; padding: 12px; background: rgba(0,0,0,0.2); border-radius: 8px; }
+        .key-stat-value { font-size: 24px; font-weight: 700; color: #fff; }
+        .key-stat-label { font-size: 11px; color: #a7f3d0; margin-top: 4px; }
+        
+        .action-row { display: flex; justify-content: center; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 14px; transition: all 0.15s; display: flex; align-items: center; gap: 8px; }
+        .btn-primary { background: #f59e0b; color: #fff; }
+        .btn-primary:hover { background: #d97706; }
+        .btn-secondary { background: #334155; color: #e2e8f0; }
+        .btn-secondary:hover { background: #475569; }
+        .btn-success { background: #22c55e; color: #fff; }
+        .btn-success:hover { background: #16a34a; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        @media (max-width: 1024px) { .main-content { grid-template-columns: 1fr; } .sidebar { position: static; } }
+        @media (max-width: 768px) { .emr-patient-banner { display: none; } .result-comparison { grid-template-columns: 1fr; } }
+        
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+    <header class="emr-header">
+        <div class="emr-header-inner">
+            <div class="emr-logo">
+                <div class="emr-logo-icon">💊</div>
+                <div class="emr-logo-text">A/I <span>Trainer</span></div>
+            </div>
+            <div class="emr-patient-banner">
+                <div class="patient-avatar">RJ</div>
+                <div class="patient-info">
+                    <div class="patient-name">Johnson, Robert</div>
+                    <div class="patient-demo">62 yo M • MRN: 583726</div>
+                </div>
+            </div>
+            <div class="alert-badges">
+                <span class="alert-badge allergy">PCN Allergy (reported)</span>
+                <span class="alert-badge question">Delabeling Candidate?</span>
+            </div>
+            <div class="emr-time">
+                <div>Pre-Op Clinic</div>
+                <div>Allergy Consult</div>
+            </div>
+        </div>
+    </header>
+    
+    <nav class="progress-timeline">
+        <div class="progress-inner">
+            <div class="timeline-step active" id="step-cc" onclick="goToPhase('cc')">
+                <div class="step-icon">1</div>
+                <span>Consult Request</span>
+            </div>
+            <div class="timeline-connector" id="conn-1"></div>
+            <div class="timeline-step locked" id="step-hpi" onclick="goToPhase('hpi')">
+                <div class="step-icon">2</div>
+                <span>Reaction History</span>
+            </div>
+            <div class="timeline-connector" id="conn-2"></div>
+            <div class="timeline-step locked" id="step-risk" onclick="goToPhase('risk')">
+                <div class="step-icon">3</div>
+                <span>Risk Assessment</span>
+            </div>
+            <div class="timeline-connector" id="conn-3"></div>
+            <div class="timeline-step locked" id="step-test" onclick="goToPhase('test')">
+                <div class="step-icon">4</div>
+                <span>Testing Strategy</span>
+            </div>
+            <div class="timeline-connector" id="conn-4"></div>
+            <div class="timeline-step locked" id="step-predict" onclick="goToPhase('predict')">
+                <div class="step-icon">5</div>
+                <span>Predict Results</span>
+            </div>
+            <div class="timeline-connector" id="conn-5"></div>
+            <div class="timeline-step locked" id="step-results" onclick="goToPhase('results')">
+                <div class="step-icon">6</div>
+                <span>Results & Delabel</span>
+            </div>
+        </div>
+    </nav>
+    
+    <main class="main-content">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">⚠️ Reported Allergies</div>
+                <div class="allergy-list">
+                    <div class="allergy-item">
+                        <span class="allergy-dot reported"></span>
+                        <div>
+                            <div>Penicillin</div>
+                            <div class="allergy-detail">"Rash" ~40 years ago</div>
+                        </div>
+                    </div>
+                    <div class="allergy-item">
+                        <span class="allergy-dot unverified"></span>
+                        <div>
+                            <div>Sulfa</div>
+                            <div class="allergy-detail">"Stomach upset" - likely intolerance</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-title">🏥 Clinical Context</div>
+                <div class="clinical-context">
+                    Scheduled for <span class="context-highlight">knee replacement surgery</span> in 2 weeks. Orthopedics requesting allergy clearance for <span class="context-highlight">cefazolin prophylaxis</span>. Current alternatives being considered: vancomycin or clindamycin.
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-title">📝 Your Notes</div>
+                <div class="notes-area">
+                    <textarea placeholder="Consider: PEN-FAST score, cross-reactivity risk, testing approach..."></textarea>
+                </div>
+            </div>
+        </aside>
+        
+        <div class="content-panel">
+            
+            <!-- PHASE 1: Consult Request -->
+            <div class="phase-content active" id="phase-cc">
+                <div class="panel-header phase-cc">
+                    <div class="panel-title"><span>📋</span> Allergy Consult Request</div>
+                    <div class="panel-badge">Step 1 of 6</div>
+                </div>
+                <div class="panel-body">
+                    <div class="referral-box">
+                        <div class="referral-label">CONSULT REASON</div>
+                        <div class="referral-text">Pre-operative penicillin allergy evaluation for surgical prophylaxis</div>
+                        <div class="referral-context">Patient has "penicillin allergy" documented since 1985. Orthopedics would like to use cefazolin for knee replacement but is concerned about cross-reactivity.</div>
+                    </div>
+                    
+                    <div class="key-stats">
+                        <div class="key-stats-title">📊 Why This Matters: Penicillin Allergy Facts</div>
+                        <div class="key-stats-grid">
+                            <div class="key-stat">
+                                <div class="key-stat-value">~10%</div>
+                                <div class="key-stat-label">Report PCN allergy</div>
+                            </div>
+                            <div class="key-stat">
+                                <div class="key-stat-value">&lt;1%</div>
+                                <div class="key-stat-label">Have true IgE allergy</div>
+                            </div>
+                            <div class="key-stat">
+                                <div class="key-stat-value">95%+</div>
+                                <div class="key-stat-label">Can be delabeled</div>
+                            </div>
+                            <div class="key-stat">
+                                <div class="key-stat-value">~1%</div>
+                                <div class="key-stat-label">Cephalosporin cross-react</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-number">QUESTION 1 OF 8</div>
+                        <div class="question-prompt">
+                            Why is penicillin allergy delabeling important for this patient's surgical care?
+                        </div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q1', 'cost')">Primarily to reduce medication costs</div>
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q1', 'outcomes')">Cefazolin has better surgical site infection prevention than alternatives</div>
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q1', 'convenience')">To simplify the pharmacy's workflow</div>
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q1', 'resistance')">Penicillins are never associated with resistance</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-cc-q1"></div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-number">QUESTION 2 OF 8</div>
+                        <div class="question-prompt">
+                            The patient's reaction occurred 40 years ago. How does time since reaction affect your assessment?
+                        </div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q2', 'same')">Time doesn't matter - once allergic, always allergic</div>
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q2', 'wanes')">IgE-mediated penicillin allergy wanes over time; ~80% lose sensitivity by 10 years</div>
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q2', 'worse')">Reactions get worse with time</div>
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q2', 'memory')">Long-ago reactions are more reliable because memory is better closer to events</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-cc-q2"></div>
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-primary" onclick="completePhase('cc')" id="btn-complete-cc" disabled>
+                            Continue to Reaction History →
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PHASE 2: Reaction History -->
+            <div class="phase-content" id="phase-hpi">
+                <div class="panel-header phase-hpi">
+                    <div class="panel-title"><span>📜</span> Detailed Reaction History</div>
+                    <div class="panel-badge">Step 2 of 6</div>
+                </div>
+                <div class="panel-body">
+                    <div class="hpi-section">
+                        <div class="hpi-header">
+                            <div class="hpi-title">📄 Patient's Recollection</div>
+                        </div>
+                        <div class="hpi-content">
+                            <p>"I was in my early 20s, maybe 1983 or '84. I had strep throat and the doctor gave me penicillin pills. <span class="hpi-highlight">A few days into taking it</span>, I noticed a <span class="hpi-highlight">rash on my trunk</span> - like red spots. I called the doctor and they told me to stop taking it and said I was allergic."</p>
+                            <p><span class="hpi-negative">No swelling, no breathing problems, no hospitalization.</span> He finished treatment with erythromycin. Has avoided all penicillins and cephalosporins since then.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="interview-section">
+                        <div class="interview-questions">
+                            <div class="interview-q" onclick="askQuestion(this, 'timing')">
+                                <span class="interview-q-text">"How many doses had you taken before the rash appeared?"</span>
+                                <span class="interview-q-icon">💬</span>
+                            </div>
+                            <div class="interview-response" id="resp-timing">
+                                <div class="response-label">Patient Response</div>
+                                <div class="response-text">"I think I was on day 4 or 5 of a 10-day course. So maybe 8-10 doses?"</div>
+                            </div>
+                            
+                            <div class="interview-q" onclick="askQuestion(this, 'description')">
+                                <span class="interview-q-text">"Can you describe the rash more? Was it itchy? Raised? Blistering?"</span>
+                                <span class="interview-q-icon">💬</span>
+                            </div>
+                            <div class="interview-response" id="resp-description">
+                                <div class="response-label">Patient Response</div>
+                                <div class="response-text">"It was flat red spots, not really raised bumps. A little itchy but not terrible. No blisters or peeling. It went away after a few days once I stopped the medicine."</div>
+                            </div>
+                            
+                            <div class="interview-q" onclick="askQuestion(this, 'systemic')">
+                                <span class="interview-q-text">"Any fever, mouth sores, or feeling very ill with the rash?"</span>
+                                <span class="interview-q-icon">💬</span>
+                            </div>
+                            <div class="interview-response" id="resp-systemic">
+                                <div class="response-label">Patient Response</div>
+                                <div class="response-text">"No mouth sores. I mean, I was sick with strep so I had a fever before, but nothing new with the rash. I didn't feel any worse than I already did from the strep."</div>
+                            </div>
+                            
+                            <div class="interview-q" onclick="askQuestion(this, 'since')">
+                                <span class="interview-q-text">"Have you taken any penicillins or cephalosporins since then?"</span>
+                                <span class="interview-q-icon">💬</span>
+                            </div>
+                            <div class="interview-response" id="resp-since">
+                                <div class="response-label">Patient Response</div>
+                                <div class="response-text">"No, I've always told doctors I'm allergic and they give me something else. I've had azithromycin and ciprofloxacin for various things over the years without problems."</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="question-card" style="margin-top: 24px;">
+                        <div class="question-number">QUESTION 3 OF 8</div>
+                        <div class="question-prompt">
+                            Based on this history, what type of reaction did this patient MOST likely experience?
+                        </div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'hpi-q1', 'ige')">IgE-mediated immediate hypersensitivity (Type I)</div>
+                            <div class="option-btn" onclick="selectOption(this, 'hpi-q1', 'benign')">Benign maculopapular/morbilliform drug eruption (non-IgE)</div>
+                            <div class="option-btn" onclick="selectOption(this, 'hpi-q1', 'sjs')">Stevens-Johnson Syndrome</div>
+                            <div class="option-btn" onclick="selectOption(this, 'hpi-q1', 'viral')">Viral exanthem from the underlying infection</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-hpi-q1"></div>
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-secondary" onclick="goToPhase('cc')">← Back</button>
+                        <button class="btn btn-primary" onclick="completePhase('hpi')" id="btn-complete-hpi" disabled>
+                            Continue to Risk Assessment →
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PHASE 3: Risk Assessment (PEN-FAST) -->
+            <div class="phase-content" id="phase-risk">
+                <div class="panel-header phase-risk">
+                    <div class="panel-title"><span>📊</span> PEN-FAST Risk Assessment</div>
+                    <div class="panel-badge">Step 3 of 6</div>
+                </div>
+                <div class="panel-body">
+                    <div class="calculator-card">
+                        <div class="calc-title">🧮 PEN-FAST Score Calculator</div>
+                        <p style="font-size: 13px; color: #94a3b8; margin-bottom: 16px;">Click items that apply to this patient based on the history you gathered:</p>
+                        
+                        <div class="calc-items">
+                            <div class="calc-item" onclick="toggleCalcItem(this, 'pen')">
+                                <div class="calc-checkbox">✓</div>
+                                <div class="calc-label">
+                                    <div class="calc-label-title">Penicillin allergy as stated</div>
+                                    <div class="calc-label-desc">Allergy is specifically to penicillin/amoxicillin (not cephalosporin only)</div>
+                                </div>
+                                <div class="calc-points">0 pts</div>
+                            </div>
+                            
+                            <div class="calc-item" onclick="toggleCalcItem(this, 'five')">
+                                <div class="calc-checkbox">✓</div>
+                                <div class="calc-label">
+                                    <div class="calc-label-title">Five years or less since reaction</div>
+                                    <div class="calc-label-desc">Reaction occurred within the past 5 years</div>
+                                </div>
+                                <div class="calc-points">2 pts</div>
+                            </div>
+                            
+                            <div class="calc-item" onclick="toggleCalcItem(this, 'anaphylaxis')">
+                                <div class="calc-checkbox">✓</div>
+                                <div class="calc-label">
+                                    <div class="calc-label-title">Anaphylaxis or angioedema</div>
+                                    <div class="calc-label-desc">History includes anaphylaxis, angioedema, or severe immediate reaction</div>
+                                </div>
+                                <div class="calc-points">2 pts</div>
+                            </div>
+                            
+                            <div class="calc-item" onclick="toggleCalcItem(this, 'severe')">
+                                <div class="calc-checkbox">✓</div>
+                                <div class="calc-label">
+                                    <div class="calc-label-title">Severe cutaneous reaction</div>
+                                    <div class="calc-label-desc">SJS, TEN, DRESS, AGEP, or blistering rash</div>
+                                </div>
+                                <div class="calc-points">2 pts</div>
+                            </div>
+                            
+                            <div class="calc-item" onclick="toggleCalcItem(this, 'treatment')">
+                                <div class="calc-checkbox">✓</div>
+                                <div class="calc-label">
+                                    <div class="calc-label-title">Treatment required for reaction</div>
+                                    <div class="calc-label-desc">Reaction required medical treatment (ED visit, epinephrine, hospitalization)</div>
+                                </div>
+                                <div class="calc-points">1 pt</div>
+                            </div>
+                        </div>
+                        
+                        <div class="calc-total">
+                            <div class="calc-total-label">Total PEN-FAST Score</div>
+                            <div class="calc-total-value" id="penfast-score">0</div>
+                        </div>
+                        
+                        <div class="calc-interpretation low" id="penfast-interp">
+                            Score 0-2: Low risk (~5% positive skin test rate) → Direct oral challenge may be appropriate
+                        </div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-number">QUESTION 4 OF 8</div>
+                        <div class="question-prompt">
+                            Based on your PEN-FAST calculation for this patient, what is the MOST appropriate next step?
+                        </div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'risk-q1', 'avoid')">Avoid all beta-lactams forever - too risky</div>
+                            <div class="option-btn" onclick="selectOption(this, 'risk-q1', 'direct')">Direct oral amoxicillin challenge (skip skin testing)</div>
+                            <div class="option-btn" onclick="selectOption(this, 'risk-q1', 'skin')">Full skin testing before any challenge</div>
+                            <div class="option-btn" onclick="selectOption(this, 'risk-q1', 'desens')">Penicillin desensitization protocol</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-risk-q1"></div>
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-secondary" onclick="goToPhase('hpi')">← Back</button>
+                        <button class="btn btn-primary" onclick="completePhase('risk')" id="btn-complete-risk" disabled>
+                            Continue to Testing Strategy →
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PHASE 4: Testing Strategy -->
+            <div class="phase-content" id="phase-test">
+                <div class="panel-header phase-test">
+                    <div class="panel-title"><span>🧪</span> Testing Strategy</div>
+                    <div class="panel-badge">Step 4 of 6</div>
+                </div>
+                <div class="panel-body">
+                    <div class="protocol-card">
+                        <div class="protocol-title">📋 Your Chosen Approach: Direct Oral Challenge</div>
+                        <div class="protocol-steps">
+                            <div class="protocol-step">
+                                <div class="step-num">1</div>
+                                <div class="step-content">
+                                    <div class="step-title">Informed Consent</div>
+                                    <div class="step-desc">Explain procedure, risks (~2% mild reaction rate), and benefits of delabeling</div>
+                                </div>
+                            </div>
+                            <div class="protocol-step">
+                                <div class="step-num">2</div>
+                                <div class="step-content">
+                                    <div class="step-title">Pre-Challenge Assessment</div>
+                                    <div class="step-desc">Vital signs, confirm no active illness, ensure resuscitation equipment available</div>
+                                </div>
+                            </div>
+                            <div class="protocol-step">
+                                <div class="step-num">3</div>
+                                <div class="step-content">
+                                    <div class="step-title">Graded Oral Challenge</div>
+                                    <div class="step-desc">Amoxicillin 250mg → observe 30-60 min → 500mg → observe 60 min</div>
+                                </div>
+                            </div>
+                            <div class="protocol-step">
+                                <div class="step-num">4</div>
+                                <div class="step-content">
+                                    <div class="step-title">Post-Challenge Monitoring</div>
+                                    <div class="step-desc">Observe for delayed reactions; patient instructed to report symptoms within 7 days</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-number">QUESTION 5 OF 8</div>
+                        <div class="question-prompt">
+                            If this patient's PEN-FAST score had been 3 or higher, what would be the recommended approach?
+                        </div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'test-q1', 'direct')">Still proceed with direct oral challenge</div>
+                            <div class="option-btn" onclick="selectOption(this, 'test-q1', 'skin')">Penicillin skin testing first, then challenge if negative</div>
+                            <div class="option-btn" onclick="selectOption(this, 'test-q1', 'avoid')">Permanent avoidance - no testing safe</div>
+                            <div class="option-btn" onclick="selectOption(this, 'test-q1', 'serum')">Serum penicillin-specific IgE only</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-test-q1"></div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-number">QUESTION 6 OF 8</div>
+                        <div class="question-prompt">
+                            Regarding cephalosporin cross-reactivity with penicillin allergy, which statement is CORRECT?
+                        </div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'test-q2', 'ten')">Cross-reactivity is ~10% for all cephalosporins</div>
+                            <div class="option-btn" onclick="selectOption(this, 'test-q2', 'low')">Cross-reactivity is ~1-2%, mainly with 1st gen and similar R1 side chains</div>
+                            <div class="option-btn" onclick="selectOption(this, 'test-q2', 'none')">There is no cross-reactivity - they're completely different drugs</div>
+                            <div class="option-btn" onclick="selectOption(this, 'test-q2', 'all')">All patients with penicillin allergy must avoid all cephalosporins</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-test-q2"></div>
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-secondary" onclick="goToPhase('risk')">← Back</button>
+                        <button class="btn btn-primary" onclick="completePhase('test')" id="btn-complete-test" disabled>
+                            Continue to Predict Results →
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PHASE 5: Predict Results -->
+            <div class="phase-content" id="phase-predict">
+                <div class="panel-header phase-predict">
+                    <div class="panel-title"><span>🔮</span> Predict Challenge Results</div>
+                    <div class="panel-badge">Step 5 of 6</div>
+                </div>
+                <div class="panel-body">
+                    <div class="prediction-intro" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">
+                        <h3>🧪 Oral Amoxicillin Challenge</h3>
+                        <p>Based on the history, PEN-FAST score, and what you know about penicillin allergy, predict the outcomes of this patient's direct oral challenge.</p>
+                    </div>
+                    
+                    <div class="lab-prediction-card">
+                        <div class="lab-pred-header">
+                            <div>
+                                <div class="lab-name">Immediate Reaction (within 1 hour)</div>
+                                <div class="lab-context">Urticaria, angioedema, anaphylaxis</div>
+                            </div>
+                        </div>
+                        <div class="prediction-choices">
+                            <div class="pred-choice" onclick="selectPrediction(this, 'immediate', 'none')">No reaction</div>
+                            <div class="pred-choice" onclick="selectPrediction(this, 'immediate', 'mild')">Mild (localized hives, itching)</div>
+                            <div class="pred-choice" onclick="selectPrediction(this, 'immediate', 'moderate')">Moderate (widespread hives, angioedema)</div>
+                            <div class="pred-choice" onclick="selectPrediction(this, 'immediate', 'severe')">Severe (anaphylaxis)</div>
+                        </div>
+                        <div class="confidence-row">
+                            <div class="confidence-label">Confidence:</div>
+                            <input type="range" class="confidence-slider" id="conf-immediate" min="0" max="100" value="50" oninput="updateConfidence('immediate')">
+                            <div class="confidence-value"><span id="conf-immediate-val">50</span>%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="lab-prediction-card">
+                        <div class="lab-pred-header">
+                            <div>
+                                <div class="lab-name">Delayed Reaction (1-7 days)</div>
+                                <div class="lab-context">Maculopapular rash, delayed urticaria</div>
+                            </div>
+                        </div>
+                        <div class="prediction-choices">
+                            <div class="pred-choice" onclick="selectPrediction(this, 'delayed', 'none')">No reaction</div>
+                            <div class="pred-choice" onclick="selectPrediction(this, 'delayed', 'mild')">Mild rash (benign)</div>
+                            <div class="pred-choice" onclick="selectPrediction(this, 'delayed', 'significant')">Significant reaction requiring treatment</div>
+                        </div>
+                        <div class="confidence-row">
+                            <div class="confidence-label">Confidence:</div>
+                            <input type="range" class="confidence-slider" id="conf-delayed" min="0" max="100" value="50" oninput="updateConfidence('delayed')">
+                            <div class="confidence-value"><span id="conf-delayed-val">50</span>%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="lab-prediction-card">
+                        <div class="lab-pred-header">
+                            <div>
+                                <div class="lab-name">Final Outcome</div>
+                                <div class="lab-context">Can penicillin allergy label be removed?</div>
+                            </div>
+                        </div>
+                        <div class="prediction-choices">
+                            <div class="pred-choice" onclick="selectPrediction(this, 'outcome', 'delabel')">Successfully delabeled - can use penicillins</div>
+                            <div class="pred-choice" onclick="selectPrediction(this, 'outcome', 'confirm')">Allergy confirmed - must avoid penicillins</div>
+                            <div class="pred-choice" onclick="selectPrediction(this, 'outcome', 'inconclusive')">Inconclusive - needs further testing</div>
+                        </div>
+                        <div class="confidence-row">
+                            <div class="confidence-label">Confidence:</div>
+                            <input type="range" class="confidence-slider" id="conf-outcome" min="0" max="100" value="50" oninput="updateConfidence('outcome')">
+                            <div class="confidence-value"><span id="conf-outcome-val">50</span>%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-secondary" onclick="goToPhase('test')">← Back</button>
+                        <button class="btn btn-success" onclick="submitPredictions()" id="btn-submit-pred" disabled>
+                            🔍 Reveal Results
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PHASE 6: Results -->
+            <div class="phase-content" id="phase-results">
+                <div class="panel-header phase-results">
+                    <div class="panel-title"><span>✅</span> Results & Delabeling</div>
+                    <div class="panel-badge">Step 6 of 6</div>
+                </div>
+                <div class="panel-body">
+                    <div class="results-summary">
+                        <div class="score-circle">
+                            <div class="score-number" id="final-score">--</div>
+                            <div class="score-label">Prediction Accuracy</div>
+                        </div>
+                        <div class="results-title" id="results-title">Challenge Complete</div>
+                        <div class="results-subtitle" id="results-subtitle"></div>
+                    </div>
+                    
+                    <div id="results-container"></div>
+                    
+                    <div class="question-card" style="margin-top: 24px;">
+                        <div class="question-number">QUESTION 7 OF 8</div>
+                        <div class="question-prompt">
+                            The challenge was negative. What documentation changes should be made to the patient's medical record?
+                        </div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'results-q1', 'delete')">Delete the penicillin allergy entirely</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q1', 'update')">Update to "Penicillin - tolerated oral challenge [date]" and remove allergy alert</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q1', 'keep')">Keep the allergy but add "low risk"</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q1', 'nothing')">No changes needed - verbal clearance is sufficient</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-results-q1"></div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-number">QUESTION 8 OF 8</div>
+                        <div class="question-prompt">
+                            Now that the patient is delabeled, what can you tell him about cefazolin for his surgery?
+                        </div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'results-q2', 'safe')">Cefazolin is safe - negative penicillin challenge indicates no cephalosporin risk</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q2', 'test')">Still need to do separate cephalosporin skin testing first</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q2', 'avoid')">Still avoid cefazolin - cross-reactivity is unpredictable</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q2', 'desens')">Cefazolin desensitization required</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-results-q2"></div>
+                    </div>
+                    
+                    <div class="learn-more-section">
+                        <div class="learn-more-header"><span>📚</span> Continue Learning</div>
+                        <div class="learn-more-grid">
+                            <a href="../../mechanism/drug-hypersensitivity.html" class="learn-link">
+                                <div class="learn-link-icon mechanism">🧬</div>
+                                <div class="learn-link-info">
+                                    <div class="learn-link-title">Drug Hypersensitivity Mechanisms</div>
+                                    <div class="learn-link-desc">IgE vs T-cell mediated reactions</div>
+                                    <div class="learn-link-badge">MechanismDx</div>
+                                </div>
+                            </a>
+                            <a href="https://www.aaaai.org/tools-for-the-public/conditions-library/allergies/penicillin-allergy-faq" target="_blank" class="learn-link">
+                                <div class="learn-link-icon external">🌐</div>
+                                <div class="learn-link-info">
+                                    <div class="learn-link-title">AAAAI Penicillin Allergy FAQ</div>
+                                    <div class="learn-link-desc">Patient and provider resources</div>
+                                    <div class="learn-link-badge">External • Open Access</div>
+                                </div>
+                            </a>
+                            <a href="ai-trainer-nsaid-reaction.html" class="learn-link">
+                                <div class="learn-link-icon coach">💊</div>
+                                <div class="learn-link-info">
+                                    <div class="learn-link-title">Next Case: NSAID Hypersensitivity</div>
+                                    <div class="learn-link-desc">AERD vs urticaria vs single-drug reaction</div>
+                                    <div class="learn-link-badge">A/I Trainer</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-secondary" onclick="location.href='ai-clinical-reasoning-hub.html'">← Case Library</button>
+                        <button class="btn btn-primary" onclick="location.href='ai-trainer-nsaid-reaction.html'">Next: NSAID Reaction →</button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+    
+    <script>
+    const state = { currentPhase: 'cc', completedPhases: [], answers: {}, predictions: {}, confidences: {}, penfastScore: 0, penfastItems: {} };
+    
+    const correctAnswers = {
+        'cc-q1': 'outcomes', 'cc-q2': 'wanes', 'hpi-q1': 'benign', 'risk-q1': 'direct',
+        'test-q1': 'skin', 'test-q2': 'low', 'results-q1': 'update', 'results-q2': 'safe'
+    };
+    
+    const correctPredictions = { immediate: 'none', delayed: 'none', outcome: 'delabel' };
+    
+    const feedback = {
+        'cc-q1': {
+            outcomes: { correct: true, text: 'Correct! Cefazolin is the gold standard for surgical prophylaxis in orthopedic surgery. Alternatives like vancomycin have worse outcomes: higher surgical site infection rates, C. diff risk, and promote resistance. Delabeling enables optimal care.' },
+            cost: { correct: false, text: 'While cost is a consideration, the primary benefit is clinical outcomes. Cefazolin provides superior surgical site infection prevention compared to vancomycin or clindamycin alternatives.' },
+            convenience: { correct: false, text: 'Pharmacy workflow isn\'t the driver. The goal is enabling use of first-line, evidence-based prophylaxis for better patient outcomes.' },
+            resistance: { correct: false, text: 'All antibiotics can contribute to resistance. The key issue is that alternatives to cefazolin (vancomycin, clindamycin) have worse efficacy and different resistance concerns.' }
+        },
+        'cc-q2': {
+            wanes: { correct: true, text: 'Correct! IgE-mediated penicillin allergy wanes significantly over time. About 50% lose detectable sensitivity by 5 years, and ~80% by 10 years. A 40-year-old reaction has very low probability of persisting IgE-mediated allergy.' },
+            same: { correct: false, text: 'Unlike some allergies (e.g., peanut), penicillin IgE sensitization typically wanes over time without re-exposure. "Once allergic, always allergic" doesn\'t apply here.' },
+            worse: { correct: false, text: 'Reactions don\'t typically worsen with time away from the drug. IgE levels decrease without boosting from re-exposure.' },
+            memory: { correct: false, text: 'Actually, distant memories are LESS reliable. Patients often misremember details of reactions from decades ago, confusing side effects with allergies.' }
+        },
+        'hpi-q1': {
+            benign: { correct: true, text: 'Correct! This describes a classic benign maculopapular/morbilliform drug eruption: delayed onset (day 4-5), flat non-urticarial rash, no systemic symptoms, self-resolved. This is a T-cell mediated reaction (Type IV), NOT IgE-mediated. These patients typically tolerate penicillins on re-exposure.' },
+            ige: { correct: false, text: 'IgE-mediated reactions are IMMEDIATE (within 1 hour of dosing): urticaria, angioedema, anaphylaxis. This patient had a delayed rash days into therapy - not IgE-mediated.' },
+            sjs: { correct: false, text: 'SJS presents with mucosal involvement, skin detachment, systemic symptoms, and significant morbidity. This was a benign maculopapular rash that self-resolved.' },
+            viral: { correct: false, text: 'While viral exanthems can coincide with antibiotic use (especially with amoxicillin + EBV), the history specifically describes rash appearing during antibiotic therapy. Could be viral or drug-related, but drug eruption is the working diagnosis that needs evaluation.' }
+        },
+        'risk-q1': {
+            direct: { correct: true, text: 'Correct! With PEN-FAST score 0 (>5 years ago, no anaphylaxis/angioedema, no severe cutaneous reaction, no treatment required), direct oral amoxicillin challenge is safe and efficient. Skip skin testing - the positive predictive value is very low in this population.' },
+            avoid: { correct: false, text: 'Permanent avoidance is not appropriate for a low-risk history. Over 95% of patients with "penicillin allergy" can safely take penicillins.' },
+            skin: { correct: false, text: 'Skin testing is reserved for PEN-FAST ≥3 or when history suggests true IgE-mediated reaction. For low-risk histories, direct challenge is recommended.' },
+            desens: { correct: false, text: 'Desensitization is for patients with CONFIRMED penicillin allergy who absolutely need the drug. This patient hasn\'t been confirmed allergic.' }
+        },
+        'test-q1': {
+            skin: { correct: true, text: 'Correct! PEN-FAST ≥3 indicates higher risk, warranting skin testing before oral challenge. If skin test is negative, proceed to oral challenge. If positive, confirm allergy and consider desensitization if penicillin is truly needed.' },
+            direct: { correct: false, text: 'Direct challenge without skin testing is appropriate for LOW-risk patients (PEN-FAST 0-2). Higher-risk patients should have skin testing first.' },
+            avoid: { correct: false, text: 'Even high-risk patients can be safely evaluated with skin testing. Permanent avoidance denies them optimal antibiotic options.' },
+            serum: { correct: false, text: 'Serum penicillin IgE has poor sensitivity (about 50%). Skin testing and/or challenge are more reliable for clinical decision-making.' }
+        },
+        'test-q2': {
+            low: { correct: true, text: 'Correct! The actual cross-reactivity rate is ~1-2%, much lower than historical 10% estimates. Cross-reactivity is determined by R1 side chain similarity, not the beta-lactam ring. 1st generation cephalosporins (cefazolin) have more structural similarity to penicillins, but risk is still low.' },
+            ten: { correct: false, text: 'The 10% figure is outdated and based on flawed studies. Modern data shows ~1-2% cross-reactivity, primarily related to R1 side chain similarity.' },
+            none: { correct: false, text: 'There is some cross-reactivity (~1-2%), primarily based on R1 side chain similarity. But it\'s much lower than historically believed.' },
+            all: { correct: false, text: 'Blanket avoidance is not supported by evidence. Most penicillin-allergic patients tolerate cephalosporins, especially 3rd/4th generation with different side chains.' }
+        },
+        'results-q1': {
+            update: { correct: true, text: 'Correct! The allergy should be updated (not deleted) to document the negative challenge with date. This creates a permanent record that: 1) The patient was evaluated, 2) They tolerated the challenge, 3) Penicillins/cephalosporins can be used. The allergy alert is removed.' },
+            delete: { correct: false, text: 'Deleting entirely loses the historical information. Better to update the record to document the evaluation and negative challenge.' },
+            keep: { correct: false, text: 'Keeping the allergy flag defeats the purpose of delabeling. The allergy alert must be removed to enable appropriate antibiotic prescribing.' },
+            nothing: { correct: false, text: 'Documentation is essential! Verbal clearance alone won\'t help future providers, and the allergy will continue to block appropriate prescriptions.' }
+        },
+        'results-q2': {
+            safe: { correct: true, text: 'Correct! A negative penicillin challenge indicates no clinically relevant IgE-mediated allergy. Given the very low (~1%) cross-reactivity rate with cephalosporins (especially in delabeled patients), cefazolin can be used safely for surgical prophylaxis.' },
+            test: { correct: false, text: 'Separate cephalosporin testing is not needed after negative penicillin challenge. The cross-reactivity risk is already very low, and negative penicillin testing further reduces concern.' },
+            avoid: { correct: false, text: 'Continued avoidance is not supported. The patient has been delabeled, and cross-reactivity to cefazolin is very low (~1%).' },
+            desens: { correct: false, text: 'Desensitization is not needed - the patient has demonstrated penicillin tolerance and can receive cefazolin directly.' }
+        }
+    };
+    
+    const labExplanations = {
+        immediate: {
+            actual: 'No reaction - tolerated both doses',
+            correct: 'none',
+            labels: { none: 'No reaction', mild: 'Mild reaction', moderate: 'Moderate reaction', severe: 'Severe reaction' },
+            explanation: 'As expected with a low-risk PEN-FAST score, the patient had no immediate reaction. His original reaction was not IgE-mediated (it was delayed/Type IV), so immediate hypersensitivity was very unlikely. Direct challenge success rate in low-risk patients exceeds 95%.'
+        },
+        delayed: {
+            actual: 'No delayed reaction reported',
+            correct: 'none',
+            labels: { none: 'No reaction', mild: 'Mild rash', significant: 'Significant reaction' },
+            explanation: 'No delayed reaction occurred. Even if a mild benign rash had appeared (as with his original reaction), this would not necessarily contraindicate future penicillin use for most indications, as Type IV reactions are generally not life-threatening.'
+        },
+        outcome: {
+            actual: 'Successfully delabeled',
+            correct: 'delabel',
+            labels: { delabel: 'Delabeled', confirm: 'Allergy confirmed', inconclusive: 'Inconclusive' },
+            explanation: 'The patient is now delabeled! His medical record is updated, allergy alerts removed, and he can receive optimal antibiotic therapy including cefazolin for his knee surgery. This is the expected outcome in >95% of patients with low-risk penicillin allergy histories.'
+        }
+    };
+    
+    function updateConfidence(lab) {
+        document.getElementById(`conf-${lab}-val`).textContent = document.getElementById(`conf-${lab}`).value;
+        state.confidences[lab] = parseInt(document.getElementById(`conf-${lab}`).value);
+    }
+    
+    function toggleCalcItem(el, item) {
+        el.classList.toggle('selected');
+        state.penfastItems[item] = el.classList.contains('selected');
+        
+        let score = 0;
+        if (state.penfastItems.five) score += 2;
+        if (state.penfastItems.anaphylaxis) score += 2;
+        if (state.penfastItems.severe) score += 2;
+        if (state.penfastItems.treatment) score += 1;
+        
+        state.penfastScore = score;
+        document.getElementById('penfast-score').textContent = score;
+        
+        const interp = document.getElementById('penfast-interp');
+        if (score >= 3) {
+            interp.className = 'calc-interpretation high';
+            interp.textContent = 'Score ≥3: Higher risk (~50% positive test rate) → Skin testing recommended before challenge';
+        } else {
+            interp.className = 'calc-interpretation low';
+            interp.textContent = 'Score 0-2: Low risk (~5% positive test rate) → Direct oral challenge appropriate';
+        }
+    }
+    
+    function selectOption(el, qId, value) {
+        el.parentElement.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('selected', 'correct', 'incorrect'));
+        el.classList.add('selected');
+        state.answers[qId] = value;
+        
+        const isCorrect = value === correctAnswers[qId];
+        const fb = feedback[qId][value];
+        const feedbackBox = document.getElementById(`feedback-${qId}`);
+        
+        feedbackBox.className = `feedback-box visible ${isCorrect ? 'correct' : 'incorrect'}`;
+        feedbackBox.innerHTML = `<div class="feedback-header ${isCorrect ? 'correct' : 'incorrect'}">${isCorrect ? '✓ Correct!' : '✗ Not quite'}</div><div class="feedback-text">${fb.text}</div>`;
+        el.classList.add(isCorrect ? 'correct' : 'incorrect');
+        checkPhaseComplete();
+    }
+    
+    function askQuestion(el, qId) {
+        if (el.classList.contains('asked')) return;
+        el.classList.add('asked');
+        document.getElementById(`resp-${qId}`).classList.add('visible');
+    }
+    
+    function selectPrediction(el, lab, value) {
+        el.parentElement.querySelectorAll('.pred-choice').forEach(btn => btn.classList.remove('selected'));
+        el.classList.add('selected');
+        state.predictions[lab] = value;
+        checkPredictionsComplete();
+    }
+    
+    function checkPhaseComplete() {
+        const phase = state.currentPhase;
+        let complete = false;
+        if (phase === 'cc') complete = state.answers['cc-q1'] && state.answers['cc-q2'];
+        else if (phase === 'hpi') complete = state.answers['hpi-q1'];
+        else if (phase === 'risk') complete = state.answers['risk-q1'];
+        else if (phase === 'test') complete = state.answers['test-q1'] && state.answers['test-q2'];
+        
+        const btn = document.getElementById(`btn-complete-${phase}`);
+        if (btn) btn.disabled = !complete;
+    }
+    
+    function checkPredictionsComplete() {
+        document.getElementById('btn-submit-pred').disabled = !['immediate', 'delayed', 'outcome'].every(l => state.predictions[l]);
+    }
+    
+    function completePhase(phase) {
+        state.completedPhases.push(phase);
+        document.getElementById(`step-${phase}`).classList.remove('active');
+        document.getElementById(`step-${phase}`).classList.add('completed');
+        
+        const phases = ['cc', 'hpi', 'risk', 'test', 'predict', 'results'];
+        const idx = phases.indexOf(phase);
+        const next = phases[idx + 1];
+        
+        if (next) {
+            document.getElementById(`step-${next}`).classList.remove('locked');
+            document.getElementById(`step-${next}`).classList.add('available');
+            document.getElementById(`conn-${idx + 1}`).classList.add('completed');
+            goToPhase(next);
+        }
+    }
+    
+    function goToPhase(phase) {
+        if (document.getElementById(`step-${phase}`).classList.contains('locked')) return;
+        
+        document.querySelectorAll('.timeline-step').forEach(s => { s.classList.remove('active'); if (s.classList.contains('available')) s.classList.remove('available'); });
+        document.getElementById(`step-${phase}`).classList.add('active');
+        document.querySelectorAll('.phase-content').forEach(c => c.classList.remove('active'));
+        document.getElementById(`phase-${phase}`).classList.add('active');
+        
+        state.currentPhase = phase;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    function submitPredictions() {
+        let correct = 0;
+        ['immediate', 'delayed', 'outcome'].forEach(lab => { if (state.predictions[lab] === correctPredictions[lab]) correct++; });
+        
+        const pct = Math.round((correct / 3) * 100);
+        document.getElementById('final-score').textContent = `${pct}%`;
+        document.getElementById('results-title').textContent = pct >= 67 ? 'Excellent Prediction!' : 'Good Learning Opportunity';
+        document.getElementById('results-subtitle').textContent = 'Patient successfully delabeled - can use penicillins and cephalosporins';
+        
+        const container = document.getElementById('results-container');
+        container.innerHTML = '';
+        ['immediate', 'delayed', 'outcome'].forEach(lab => {
+            const info = labExplanations[lab];
+            const predicted = state.predictions[lab];
+            const isCorrect = predicted === info.correct;
+            container.innerHTML += `
+                <div class="result-card">
+                    <div class="result-header">
+                        <div class="result-lab-name">${lab === 'immediate' ? 'Immediate Reaction' : lab === 'delayed' ? 'Delayed Reaction' : 'Final Outcome'}</div>
+                        <div class="result-badge ${isCorrect ? 'correct' : 'incorrect'}">${isCorrect ? '✓ Correct' : '✗ Incorrect'}</div>
+                    </div>
+                    <div class="result-comparison">
+                        <div class="result-col"><div class="result-col-label">Your Prediction</div><div class="result-col-value">${info.labels[predicted]}</div></div>
+                        <div class="result-col"><div class="result-col-label">Actual Result</div><div class="result-col-value" style="color: #34d399;">${info.actual}</div></div>
+                    </div>
+                    <div class="result-explanation">${info.explanation}</div>
+                </div>`;
+        });
+        completePhase('predict');
+    }
+    
+    ['immediate', 'delayed', 'outcome'].forEach(lab => { state.confidences[lab] = 50; });
+    </script>
+</body>
+</html>

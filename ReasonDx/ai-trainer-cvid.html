@@ -1,0 +1,84 @@
+ normal: 'Normal (700-1600)', low: 'Low (300-700)', verylow: 'Very Low (<300)' },
+            explanation: 'IgG of 185 mg/dL is markedly reduced (normal 700-1600). This level is diagnostic for significant hypogammaglobulinemia and explains her susceptibility to encapsulated bacterial infections requiring opsonizing antibodies.' },
+        iga: { actual: '<7 mg/dL (Absent)', correct: 'absent', labels: { normal: 'Normal (70-400)', low: 'Low (10-70)', absent: 'Absent/Very Low (<10)' },
+            explanation: 'IgA is essentially absent at <7 mg/dL. Combined with low IgG, this meets CVID criteria requiring IgG deficiency plus low IgA and/or IgM. Absent IgA also explains her mucosal vulnerability (sinuses, GI tract).' },
+        pneumo: { actual: '2/23 serotypes protective', correct: 'poor', labels: { good: 'Good response (>70%)', partial: 'Partial response (30-70%)', poor: 'Poor response (<30%)' },
+            explanation: 'Only 2 of 23 pneumococcal serotypes have protective titers despite vaccination - this is a POOR response (<30%). This functional antibody deficiency confirms inability to mount protective responses and is required for CVID diagnosis.' },
+        bcell: { actual: '12% CD19+ (Normal)', correct: 'normal', labels: { absent: 'Absent (<1%)', low: 'Low (1-5%)', normal: 'Normal/Near-normal' },
+            explanation: 'B-cell count is NORMAL at 12%. This is KEY - in CVID, B cells are present but dysfunctional (can\'t mature into antibody-producing plasma cells). This distinguishes CVID from X-linked agammaglobulinemia (XLA) where B cells are absent.' }
+    };
+    
+    function updateConf(lab) { document.getElementById(`conf-${lab}-val`).textContent = document.getElementById(`conf-${lab}`).value; state.confidences[lab] = parseInt(document.getElementById(`conf-${lab}`).value); }
+    
+    function selectOption(el, qId, value) {
+        el.parentElement.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('selected', 'correct', 'incorrect'));
+        el.classList.add('selected');
+        state.answers[qId] = value;
+        const isCorrect = value === correctAnswers[qId];
+        const fb = feedback[qId][value];
+        const feedbackBox = document.getElementById(`feedback-${qId}`);
+        feedbackBox.className = `feedback-box visible ${isCorrect ? 'correct' : 'incorrect'}`;
+        feedbackBox.innerHTML = `<div class="feedback-header ${isCorrect ? 'correct' : 'incorrect'}">${isCorrect ? '✓ Correct!' : '✗ Not quite'}</div><div class="feedback-text">${fb.text}</div>`;
+        el.classList.add(isCorrect ? 'correct' : 'incorrect');
+        checkPhaseComplete();
+    }
+    
+    function askQuestion(el, qId) { if (!el.classList.contains('asked')) { el.classList.add('asked'); document.getElementById(`resp-${qId}`).classList.add('visible'); } }
+    function examSystem(el) { el.classList.add('examined'); }
+    function selectPrediction(el, lab, value) { el.parentElement.querySelectorAll('.pred-choice').forEach(b => b.classList.remove('selected')); el.classList.add('selected'); state.predictions[lab] = value; checkPredictionsComplete(); }
+    
+    function checkPhaseComplete() {
+        const phase = state.currentPhase;
+        let complete = false;
+        if (phase === 'cc') complete = state.answers['cc-q1'] && state.answers['cc-q2'];
+        else if (phase === 'hpi') complete = state.answers['hpi-q1'] && state.answers['hpi-q2'];
+        else if (phase === 'exam') complete = state.answers['exam-q1'];
+        else if (phase === 'ddx') complete = state.answers['ddx-q1'] && state.answers['ddx-q2'];
+        const btn = document.getElementById(`btn-complete-${phase}`);
+        if (btn) btn.disabled = !complete;
+    }
+    
+    function checkPredictionsComplete() { document.getElementById('btn-submit-pred').disabled = !['igg', 'iga', 'pneumo', 'bcell'].every(l => state.predictions[l]); }
+    
+    function completePhase(phase) {
+        state.completedPhases.push(phase);
+        document.getElementById(`step-${phase}`).classList.remove('active');
+        document.getElementById(`step-${phase}`).classList.add('completed');
+        const phases = ['cc', 'hpi', 'exam', 'ddx', 'predict', 'results'];
+        const idx = phases.indexOf(phase);
+        const next = phases[idx + 1];
+        if (next) { document.getElementById(`step-${next}`).classList.remove('locked'); document.getElementById(`step-${next}`).classList.add('available'); document.getElementById(`conn-${idx + 1}`).classList.add('completed'); goToPhase(next); }
+    }
+    
+    function goToPhase(phase) {
+        if (document.getElementById(`step-${phase}`).classList.contains('locked')) return;
+        document.querySelectorAll('.timeline-step').forEach(s => { s.classList.remove('active'); if (s.classList.contains('available')) s.classList.remove('available'); });
+        document.getElementById(`step-${phase}`).classList.add('active');
+        document.querySelectorAll('.phase-content').forEach(c => c.classList.remove('active'));
+        document.getElementById(`phase-${phase}`).classList.add('active');
+        state.currentPhase = phase;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    function submitPredictions() {
+        let correct = 0;
+        ['igg', 'iga', 'pneumo', 'bcell'].forEach(lab => { if (state.predictions[lab] === correctPredictions[lab]) correct++; });
+        const pct = Math.round((correct / 4) * 100);
+        document.getElementById('final-score').textContent = `${pct}%`;
+        document.getElementById('results-title').textContent = pct >= 75 ? 'Excellent Lab Prediction!' : 'Good Learning Opportunity';
+        const container = document.getElementById('results-container');
+        container.innerHTML = '';
+        const labNames = { igg: 'Serum IgG', iga: 'Serum IgA', pneumo: 'Pneumococcal Titers', bcell: 'B-Cell Count' };
+        ['igg', 'iga', 'pneumo', 'bcell'].forEach(lab => {
+            const info = labExplanations[lab];
+            const predicted = state.predictions[lab];
+            const isCorrect = predicted === info.correct;
+            container.innerHTML += `<div class="result-card"><div class="result-header"><div class="result-lab-name">${labNames[lab]}</div><div class="result-badge ${isCorrect ? 'correct' : 'incorrect'}">${isCorrect ? '✓' : '✗'}</div></div><div class="result-comparison"><div class="result-col"><div class="result-col-label">Your Prediction</div><div class="result-col-value">${info.labels[predicted]}</div></div><div class="result-col"><div class="result-col-label">Actual</div><div class="result-col-value" style="color:#34d399;">${info.actual}</div></div></div><div class="result-explanation">${info.explanation}</div></div>`;
+        });
+        completePhase('predict');
+    }
+    
+    ['igg', 'iga', 'pneumo', 'bcell'].forEach(lab => { state.confidences[lab] = 50; });
+    </script>
+</body>
+</html>
