@@ -9,72 +9,85 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Inter', system-ui, sans-serif; background: #fafafa; color: #18181b; line-height: 1.6; }
         
-        /* Logo Header */
-        .coachdx-logo-header {
-            background: #fafafa;
-            padding: 24px 24px 20px 24px;
-            text-align: center;
-        }
-        .coachdx-logo-container { display: inline-block; min-height: 75px; }
-        .coachdx-logo-container svg { height: 60px; width: auto; }
-        .coachdx-tagline {
-            margin-top: 8px;
-            font-family: Georgia, 'Times New Roman', serif;
-            font-size: 16px;
-            font-style: italic;
-            color: #6b7280;
-        }
-        
-        /* Role Selector Banner */
-        .role-banner {
-            background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
-            border-bottom: 1px solid #86efac;
+        /* Navigation */
+        .dx-nav {
+            background: linear-gradient(135deg, #1E3A5F 0%, #0f172a 100%);
             padding: 12px 24px;
+            border-bottom: 2px solid #334155;
+        }
+        .dx-nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .dx-nav-brand {
             display: flex;
             align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #fff;
+        }
+        .dx-nav-brand span:first-child { font-size: 24px; }
+        .dx-nav-brand span:last-child { font-size: 16px; font-weight: 600; }
+        .dx-nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        .dx-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: rgba(255,255,255,0.8);
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+        .dx-nav-link:hover { background: rgba(255,255,255,0.1); color: #fff; }
+        .dx-nav-link.active { background: rgba(124,58,237,0.3); color: #c4b5fd; }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            padding: 40px 24px;
+            text-align: center;
+            color: white;
+        }
+        .header h1 { font-size: 32px; font-weight: 800; margin-bottom: 8px; }
+        .header p { font-size: 16px; opacity: 0.9; max-width: 600px; margin: 0 auto 20px; }
+        
+        /* Level Selector */
+        .level-bar {
+            background: white;
+            padding: 16px 24px;
+            border-bottom: 1px solid #e4e4e7;
+            display: flex;
             justify-content: center;
-            gap: 16px;
+            gap: 12px;
             flex-wrap: wrap;
         }
-        .role-banner-text { font-size: 14px; color: #166534; }
-        .role-banner-text strong { font-weight: 600; }
-        .role-selector {
-            padding: 8px 14px;
-            border: 1px solid #86efac;
+        .level-btn {
+            padding: 10px 20px;
+            border: 2px solid #e4e4e7;
             border-radius: 8px;
             background: white;
             font-size: 14px;
-            cursor: pointer;
-            color: #166534;
             font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
         }
-        .role-selector:hover { border-color: #22c55e; }
-        .role-selector:focus { outline: 2px solid #22c55e; outline-offset: 2px; }
-        
-        .nav { background: #fff; border-bottom: 1px solid #e4e4e7; padding: 12px 24px; position: sticky; top: 0; z-index: 100; }
-        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
-        .nav-link { padding: 8px 16px; color: #52525b; text-decoration: none; font-size: 14px; font-weight: 500; border-radius: 8px; transition: all 0.15s; }
-        .nav-link:hover { background: #f4f4f5; }
-        .nav-link.active { background: #ede9fe; color: #7c3aed; }
-        
-        .hero { 
-            background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 50%, #c4b5fd 100%); 
-            padding: 40px 24px; 
-            text-align: center; 
-        }
-        .hero h1 { font-size: 32px; font-weight: 800; margin-bottom: 8px; }
-        .hero p { font-size: 16px; color: #52525b; max-width: 600px; margin: 0 auto 20px; }
-        .hero-stats { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
-        .hero-stat-num { font-size: 24px; font-weight: 700; color: #7c3aed; }
-        .hero-stat-label { font-size: 12px; color: #64748b; }
+        .level-btn:hover { border-color: #8b5cf6; }
+        .level-btn.active { border-color: #8b5cf6; background: #8b5cf6; color: white; }
         
         /* Filters */
-        .filters { 
-            max-width: 1200px; 
-            margin: 20px auto; 
-            padding: 0 24px; 
-            display: flex; 
-            gap: 12px; 
+        .filters {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 24px;
+            display: flex;
+            gap: 12px;
             flex-wrap: wrap;
             align-items: center;
         }
@@ -89,12 +102,11 @@
         }
         .filter-btn:hover { border-color: #a78bfa; }
         .filter-btn.active { background: #7c3aed; color: white; border-color: #7c3aed; }
-        
         .search-box {
             flex: 1;
             min-width: 200px;
             max-width: 300px;
-            padding: 8px 14px;
+            padding: 10px 14px;
             border: 1px solid #e4e4e7;
             border-radius: 8px;
             font-size: 14px;
@@ -104,7 +116,7 @@
         /* Case Grid */
         .cases-container { max-width: 1200px; margin: 0 auto; padding: 20px 24px; }
         
-        .category-section { margin-bottom: 32px; }
+        .category-section { margin-bottom: 40px; }
         .category-header {
             display: flex;
             align-items: center;
@@ -113,19 +125,19 @@
             padding-bottom: 8px;
             border-bottom: 2px solid #e4e4e7;
         }
-        .category-icon { font-size: 24px; }
-        .category-title { font-size: 18px; font-weight: 700; }
-        .category-count { 
-            font-size: 12px; 
-            color: #64748b; 
-            background: #f4f4f5; 
-            padding: 2px 8px; 
-            border-radius: 10px; 
+        .category-icon { font-size: 28px; }
+        .category-title { font-size: 20px; font-weight: 700; }
+        .category-count {
+            font-size: 12px;
+            color: #64748b;
+            background: #f4f4f5;
+            padding: 4px 10px;
+            border-radius: 12px;
         }
         
         .case-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 16px;
         }
         
@@ -133,7 +145,7 @@
             background: white;
             border: 1px solid #e4e4e7;
             border-radius: 12px;
-            padding: 16px;
+            padding: 20px;
             text-decoration: none;
             color: inherit;
             transition: all 0.2s;
@@ -144,768 +156,488 @@
             box-shadow: 0 4px 12px rgba(124, 58, 237, 0.15);
             transform: translateY(-2px);
         }
+        .case-card.new { border-left: 4px solid #10b981; }
+        .case-card.ai { border-left: 4px solid #8b5cf6; }
         
-        .case-title { font-weight: 600; font-size: 15px; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-        .case-demo { font-size: 13px; color: #64748b; margin-bottom: 8px; }
+        .case-title {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .case-demo { font-size: 13px; color: #64748b; margin-bottom: 10px; }
         .case-meta { display: flex; gap: 8px; flex-wrap: wrap; }
-        .case-time { font-size: 11px; color: #94a3b8; }
-        
-        .case-badge {
-            font-size: 10px;
-            padding: 2px 6px;
+        .case-tag {
+            font-size: 11px;
+            padding: 3px 8px;
             border-radius: 4px;
-            font-weight: 600;
-            position: relative;
-            cursor: help;
+            background: #f4f4f5;
+            color: #52525b;
         }
-        .case-badge.critical { background: #fee2e2; color: #dc2626; }
-        .case-badge.parallel { background: #fef3c7; color: #d97706; }
-        .case-badge.new { background: #dcfce7; color: #16a34a; }
+        .case-tag.difficulty-beginner { background: #d1fae5; color: #065f46; }
+        .case-tag.difficulty-intermediate { background: #fef3c7; color: #92400e; }
+        .case-tag.difficulty-advanced { background: #fee2e2; color: #991b1b; }
+        .case-tag.new { background: #10b981; color: white; }
+        .case-tag.ai { background: #8b5cf6; color: white; }
+        .case-tag.sbar { background: #fef3c7; color: #92400e; }
         
-        /* Tooltip for badges */
-        .case-badge .tooltip {
-            visibility: hidden;
-            opacity: 0;
-            position: absolute;
-            bottom: 125%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #1f2937;
-            color: white;
-            padding: 10px 14px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 400;
-            width: 240px;
-            text-align: left;
-            line-height: 1.5;
-            z-index: 100;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            transition: opacity 0.2s, visibility 0.2s;
-        }
-        .case-badge .tooltip::after {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            border: 6px solid transparent;
-            border-top-color: #1f2937;
-        }
-        .case-badge:hover .tooltip {
-            visibility: visible;
-            opacity: 1;
-        }
-        .tooltip-title {
-            font-weight: 600;
-            margin-bottom: 4px;
-            display: block;
-        }
-        
-        /* Empty State */
-        .empty-state {
+        /* Footer */
+        .footer {
+            background: #1e293b;
+            color: #94a3b8;
+            padding: 32px 24px;
             text-align: center;
-            padding: 60px 20px;
-            background: white;
-            border-radius: 16px;
-            border: 1px solid #e4e4e7;
+            margin-top: 40px;
         }
-        .empty-state-icon { font-size: 48px; margin-bottom: 16px; }
-        .empty-state h3 { font-size: 18px; margin-bottom: 8px; }
-        .empty-state p { color: #64748b; }
+        .footer a { color: #10b981; text-decoration: none; }
         
-        .footer { text-align: center; padding: 32px; color: #64748b; font-size: 13px; }
-        .footer a { color: #7c3aed; }
-        
-        /* Profession-specific themes */
-        .role-omfs .hero { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); }
-        .role-omfs .hero-stat-num { color: #d97706; }
-        .role-nursing .hero { background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); }
-        .role-nursing .hero-stat-num { color: #16a34a; }
-        .role-ems .hero { background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); }
-        .role-ems .hero-stat-num { color: #dc2626; }
-        .role-rt .hero { background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); }
-        .role-rt .hero-stat-num { color: #2563eb; }
+        @media (max-width: 768px) {
+            .dx-nav-links { display: none; }
+            .header h1 { font-size: 24px; }
+        }
     </style>
 </head>
 <body>
-    <!-- Logo Header -->
-    <header class="coachdx-logo-header">
-        <a href="coachdx-dashboard.html" class="coachdx-logo-container">
-            <svg viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg">
-                <text x="5" y="42" font-family="Georgia, serif" font-size="38" fill="#18181b">Coach</text>
-                <text x="115" y="42" font-family="Georgia, serif" font-size="38" fill="#18181b">D</text>
-                <g stroke="#18181b" stroke-width="2.5" stroke-linecap="round" fill="none">
-                    <line x1="147" y1="22" x2="163" y2="42"/>
-                    <path d="M163 22L153 32Q149 37 149 44Q149 51 154 55Q159 59 159 65"/>
-                </g>
-                <ellipse cx="145" cy="20" rx="2" ry="3.5" transform="rotate(-28 145 20)" fill="#18181b"/>
-                <ellipse cx="165" cy="20" rx="2" ry="3.5" transform="rotate(28 165 20)" fill="#18181b"/>
-                <circle cx="159" cy="65" r="6" fill="none" stroke="#18181b" stroke-width="2"/>
-                <circle cx="159" cy="65" r="3" fill="#18181b"/>
-            </svg>
-        </a>
-        <p class="coachdx-tagline">Case Library</p>
-    </header>
-    
-    <!-- Role Selector Banner -->
-    <div class="role-banner">
-        <span class="role-banner-text">📚 Viewing cases for: <strong id="currentRoleLabel">Medical Student</strong></span>
-        <select id="roleSelector" class="role-selector">
-            <option value="medical-student">Medical Student</option>
-            <option value="resident">Resident</option>
-            <option value="omfs">OMFS Resident</option>
-            <option value="nursing">Nursing Student</option>
-            <option value="ems">EMS Provider</option>
-            <option value="rt">RT Student</option>
-            <option value="pt">PT Student</option>
-            <option value="dpm">Podiatry Student</option>
-            <option value="pharmd">PharmD Student</option>
-            <option value="dental">Dental Student</option>
-            <option value="pa">PA Student</option>
-            <option value="np">NP Student</option>
-        </select>
-    </div>
-    
     <!-- Navigation -->
-    <nav class="nav">
-        <div class="nav-inner">
-            <a href="coachdx-dashboard.html" class="nav-link">🏠 Dashboard</a>
-            <a href="case-library.html" class="nav-link active">📚 Cases</a>
-            <a href="sbar-trainer.html" class="nav-link">📋 SBAR</a>
-            <a href="mentor-chat.html" class="nav-link">💬 Coaching</a>
-            <a href="../unified-scoreboard.html" class="nav-link">🏆 Scoreboard</a>
+    <nav class="dx-nav">
+        <div class="dx-nav-inner">
+            <a href="../index.html" class="dx-nav-brand">
+                <span>🏥</span>
+                <span>Dx Learning Ecosystem</span>
+            </a>
+            <div class="dx-nav-links">
+                <a href="../index.html" class="dx-nav-link">🏠 Home</a>
+                <a href="../mechanism/index.html" class="dx-nav-link">📚 MechanismDx</a>
+                <a href="../ReasonDx/training.html" class="dx-nav-link">🔬 ReasonDx</a>
+                <a href="coachdx-dashboard.html" class="dx-nav-link active">🧠 CoachDx</a>
+            </div>
         </div>
     </nav>
     
-    <!-- Hero -->
-    <section class="hero">
-        <h1 id="heroTitle">📚 Case Library</h1>
-        <p id="heroSubtitle">Select a case to begin your coaching session with a discipline-specific mentor.</p>
-        <div class="hero-stats">
-            <div><div class="hero-stat-num" id="statCases">0</div><div class="hero-stat-label">Cases</div></div>
-            <div><div class="hero-stat-num" id="statCategories">0</div><div class="hero-stat-label">Categories</div></div>
-            <div><div class="hero-stat-num" id="statParallel">0</div><div class="hero-stat-label">Parallel Pairs</div></div>
-        </div>
-    </section>
+    <!-- Header -->
+    <div class="header">
+        <h1>🧠 CoachDx Case Library</h1>
+        <p>Practice clinical reasoning with AI-powered Socratic coaching. Cases organized by organ system for medical students.</p>
+    </div>
+    
+    <!-- Training Level Selector -->
+    <div class="level-bar">
+        <button class="level-btn" data-level="m1-m2" onclick="filterByLevel('m1-m2')">M1-M2 (Foundations)</button>
+        <button class="level-btn active" data-level="m3" onclick="filterByLevel('m3')">M3 (Clerkships)</button>
+        <button class="level-btn" data-level="m4" onclick="filterByLevel('m4')">M4 / Sub-I</button>
+        <button class="level-btn" data-level="all" onclick="filterByLevel('all')">All Levels</button>
+    </div>
     
     <!-- Filters -->
     <div class="filters">
-        <button class="filter-btn active" data-filter="all">All Cases</button>
-        <div id="categoryFilters"></div>
-        
-        <!-- Specialty Filter -->
-        <div class="specialty-filter">
-            <select id="specialtySelector" onchange="filterBySpecialty(this.value)">
-                <option value="all">All Specialties</option>
-                <option value="allergy-immunology">🧬 Allergy/Immunology</option>
-                <option value="cardiology">❤️ Cardiology</option>
-                <option value="pulmonology">🫁 Pulmonology</option>
-                <option value="neurology">🧠 Neurology</option>
-                <option value="gi">🩺 Gastroenterology</option>
-                <option value="endocrine">🦋 Endocrine</option>
-                <option value="infectious">🦠 Infectious Disease</option>
-                <option value="hematology">🩸 Hematology</option>
-            </select>
-        </div>
-        
-        <input type="text" id="searchInput" class="search-box" placeholder="🔍 Search cases...">
+        <button class="filter-btn active" data-system="all" onclick="filterBySystem('all')">All Systems</button>
+        <button class="filter-btn" data-system="cardiology" onclick="filterBySystem('cardiology')">❤️ Cardiology</button>
+        <button class="filter-btn" data-system="pulmonary" onclick="filterBySystem('pulmonary')">🫁 Pulmonary</button>
+        <button class="filter-btn" data-system="gi" onclick="filterBySystem('gi')">🔶 GI/Hepatology</button>
+        <button class="filter-btn" data-system="renal" onclick="filterBySystem('renal')">🫘 Renal</button>
+        <button class="filter-btn" data-system="neuro" onclick="filterBySystem('neuro')">🧠 Neurology</button>
+        <button class="filter-btn" data-system="id" onclick="filterBySystem('id')">🦠 ID</button>
+        <button class="filter-btn" data-system="allergy" onclick="filterBySystem('allergy')">🔴 Allergy/Immunology</button>
+        <input type="text" class="search-box" placeholder="Search cases..." oninput="searchCases(this.value)">
     </div>
     
-    <style>
-        .specialty-filter select {
-            padding: 8px 14px;
-            border: 2px solid #8b5cf6;
-            border-radius: 8px;
-            background: white;
-            font-size: 13px;
-            color: #6b21a8;
-            font-weight: 500;
-            cursor: pointer;
-        }
-        .specialty-filter select:focus {
-            outline: 2px solid #a78bfa;
-            outline-offset: 2px;
-        }
-        .specialty-active {
-            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%) !important;
-        }
-        .specialty-active .hero {
-            background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%) !important;
-        }
-        .specialty-badge {
-            display: inline-block;
-            background: #8b5cf6;
-            color: white;
-            font-size: 11px;
-            padding: 2px 8px;
-            border-radius: 4px;
-            margin-left: 8px;
-        }
-    </style>
-    
-    <!-- Cases Container -->
-    <main class="cases-container" id="casesContainer">
-        <div class="empty-state" id="emptyState" style="display:none;">
-            <div class="empty-state-icon">📭</div>
-            <h3>No cases found</h3>
-            <p>Try adjusting your search or filters.</p>
+    <!-- Cases -->
+    <div class="cases-container" id="casesContainer">
+        
+        <!-- Cardiology -->
+        <div class="category-section" data-system="cardiology">
+            <div class="category-header">
+                <span class="category-icon">❤️</span>
+                <span class="category-title">Cardiology</span>
+                <span class="category-count">8 cases</span>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=chest-pain-acs" class="case-card ai">
+                    <div class="case-title">Chest Pain - ACS Evaluation <span class="case-tag ai">AI Coach</span></div>
+                    <div class="case-demo">58 yo M with crushing substernal chest pain</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-intermediate">Intermediate</span>
+                        <span class="case-tag">High-Yield</span>
+                    </div>
+                </a>
+                <a href="mentor-chat.html?case=chf-exacerbation" class="case-card">
+                    <div class="case-title">Heart Failure Exacerbation</div>
+                    <div class="case-demo">72 yo F with dyspnea and leg swelling</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-intermediate">Intermediate</span>
+                        <span class="case-tag">Shelf Prep</span>
+                    </div>
+                </a>
+                <a href="mentor-chat.html?case=afib-rvr" class="case-card">
+                    <div class="case-title">Atrial Fibrillation with RVR</div>
+                    <div class="case-demo">65 yo M with palpitations and HR 142</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-intermediate">Intermediate</span>
+                    </div>
+                </a>
+                <a href="mentor-chat.html?case=syncope" class="case-card">
+                    <div class="case-title">Syncope Workup</div>
+                    <div class="case-demo">45 yo F, witnessed collapse during exercise</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-advanced">Advanced</span>
+                    </div>
+                </a>
+            </div>
         </div>
-    </main>
+        
+        <!-- Pulmonary -->
+        <div class="category-section" data-system="pulmonary">
+            <div class="category-header">
+                <span class="category-icon">🫁</span>
+                <span class="category-title">Pulmonary</span>
+                <span class="category-count">6 cases</span>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=acute-dyspnea" class="case-card ai">
+                    <div class="case-title">Acute Dyspnea Workup <span class="case-tag ai">AI Coach</span></div>
+                    <div class="case-demo">55 yo M with sudden onset shortness of breath</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-intermediate">Intermediate</span>
+                        <span class="case-tag sbar">SBAR</span>
+                    </div>
+                </a>
+                <a href="mentor-chat.html?case=copd-exacerbation" class="case-card">
+                    <div class="case-title">COPD Exacerbation</div>
+                    <div class="case-demo">68 yo M smoker with worsening cough</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-beginner">Beginner</span>
+                    </div>
+                </a>
+                <a href="mentor-chat.html?case=pneumonia" class="case-card">
+                    <div class="case-title">Community-Acquired Pneumonia</div>
+                    <div class="case-demo">42 yo F with fever, cough, pleuritic pain</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-beginner">Beginner</span>
+                        <span class="case-tag">High-Yield</span>
+                    </div>
+                </a>
+                <a href="mentor-chat.html?case=pe" class="case-card ai">
+                    <div class="case-title">Pulmonary Embolism</div>
+                    <div class="case-demo">35 yo F post-op with dyspnea and tachycardia</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-intermediate">Intermediate</span>
+                        <span class="case-tag">High-Yield</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Allergy/Immunology -->
+        <div class="category-section" data-system="allergy">
+            <div class="category-header">
+                <span class="category-icon">🔴</span>
+                <span class="category-title">Allergy & Immunology</span>
+                <span class="category-count">8 cases</span>
+            </div>
+            <div class="case-grid">
+                <a href="../ReasonDx/ai-trainer-anaphylaxis-food.html" class="case-card new ai">
+                    <div class="case-title">Post-Anaphylaxis Workup: Food <span class="case-tag new">NEW</span></div>
+                    <div class="case-demo">8 yo M, peanut reaction at school</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-intermediate">Intermediate</span>
+                        <span class="case-tag">Knowledge Web</span>
+                    </div>
+                </a>
+                <a href="../ReasonDx/ai-trainer-penicillin-allergy.html" class="case-card ai">
+                    <div class="case-title">Penicillin Allergy Delabeling <span class="case-tag ai">AI Coach</span></div>
+                    <div class="case-demo">45 yo F with "penicillin allergy" needing antibiotics</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-intermediate">Intermediate</span>
+                        <span class="case-tag">High-Yield</span>
+                    </div>
+                </a>
+                <a href="../ReasonDx/ai-trainer-chronic-urticaria.html" class="case-card">
+                    <div class="case-title">Chronic Spontaneous Urticaria</div>
+                    <div class="case-demo">32 yo F with daily hives for 3 months</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-intermediate">Intermediate</span>
+                    </div>
+                </a>
+                <a href="../ReasonDx/ai-trainer-angioedema.html" class="case-card">
+                    <div class="case-title">Angioedema Workup</div>
+                    <div class="case-demo">55 yo M on lisinopril with lip swelling</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-intermediate">Intermediate</span>
+                    </div>
+                </a>
+                <a href="../ReasonDx/ai-trainer-cvid.html" class="case-card">
+                    <div class="case-title">CVID Diagnosis</div>
+                    <div class="case-demo">28 yo F with recurrent sinopulmonary infections</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-advanced">Advanced</span>
+                    </div>
+                </a>
+                <a href="../ReasonDx/ai-trainer-eosinophilia.html" class="case-card">
+                    <div class="case-title">Peripheral Eosinophilia Workup</div>
+                    <div class="case-demo">40 yo M with incidental eosinophil count 1500</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-advanced">Advanced</span>
+                    </div>
+                </a>
+                <a href="../ReasonDx/ai-trainer-severe-asthma.html" class="case-card">
+                    <div class="case-title">Severe Asthma Phenotyping</div>
+                    <div class="case-demo">35 yo F with uncontrolled asthma on high-dose ICS</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-advanced">Advanced</span>
+                        <span class="case-tag">Biologics</span>
+                    </div>
+                </a>
+                <a href="mentor-chat.html?case=anaphylaxis-venom" class="case-card">
+                    <div class="case-title">Venom Anaphylaxis Evaluation</div>
+                    <div class="case-demo">45 yo F, wasp sting with LOC</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-advanced">Advanced</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <!-- GI/Hepatology -->
+        <div class="category-section" data-system="gi">
+            <div class="category-header">
+                <span class="category-icon">🔶</span>
+                <span class="category-title">GI / Hepatology</span>
+                <span class="category-count">6 cases</span>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=gi-bleed" class="case-card ai">
+                    <div class="case-title">Upper GI Bleed <span class="case-tag ai">AI Coach</span></div>
+                    <div class="case-demo">62 yo M with hematemesis and melena</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-intermediate">Intermediate</span>
+                        <span class="case-tag sbar">SBAR</span>
+                    </div>
+                </a>
+                <a href="mentor-chat.html?case=acute-abdomen" class="case-card">
+                    <div class="case-title">Acute Abdomen</div>
+                    <div class="case-demo">55 yo F with severe RLQ pain</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-intermediate">Intermediate</span>
+                        <span class="case-tag">High-Yield</span>
+                    </div>
+                </a>
+                <a href="mentor-chat.html?case=cirrhosis" class="case-card">
+                    <div class="case-title">Cirrhosis Complications</div>
+                    <div class="case-demo">58 yo M with ascites and confusion</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-advanced">Advanced</span>
+                    </div>
+                </a>
+                <a href="mentor-chat.html?case=pancreatitis" class="case-card">
+                    <div class="case-title">Acute Pancreatitis</div>
+                    <div class="case-demo">45 yo M with epigastric pain after heavy drinking</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-beginner">Beginner</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Renal -->
+        <div class="category-section" data-system="renal">
+            <div class="category-header">
+                <span class="category-icon">🫘</span>
+                <span class="category-title">Nephrology</span>
+                <span class="category-count">4 cases</span>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=aki" class="case-card ai">
+                    <div class="case-title">Acute Kidney Injury <span class="case-tag ai">AI Coach</span></div>
+                    <div class="case-demo">70 yo M with Cr rise from 1.2 to 3.5</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-intermediate">Intermediate</span>
+                        <span class="case-tag">High-Yield</span>
+                    </div>
+                </a>
+                <a href="mentor-chat.html?case=hyponatremia" class="case-card">
+                    <div class="case-title">Hyponatremia Workup</div>
+                    <div class="case-demo">65 yo F with Na 122, confusion</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-intermediate">Intermediate</span>
+                    </div>
+                </a>
+                <a href="mentor-chat.html?case=hyperkalemia" class="case-card">
+                    <div class="case-title">Hyperkalemia Management</div>
+                    <div class="case-demo">72 yo M with K 6.8 and ECG changes</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-intermediate">Intermediate</span>
+                        <span class="case-tag sbar">SBAR</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Infectious Disease -->
+        <div class="category-section" data-system="id">
+            <div class="category-header">
+                <span class="category-icon">🦠</span>
+                <span class="category-title">Infectious Disease</span>
+                <span class="category-count">5 cases</span>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=sepsis" class="case-card ai">
+                    <div class="case-title">Sepsis Recognition <span class="case-tag ai">AI Coach</span></div>
+                    <div class="case-demo">68 yo F from nursing home with fever, hypotension</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-intermediate">Intermediate</span>
+                        <span class="case-tag sbar">SBAR</span>
+                        <span class="case-tag">High-Yield</span>
+                    </div>
+                </a>
+                <a href="mentor-chat.html?case=uti-pyelonephritis" class="case-card">
+                    <div class="case-title">Complicated UTI / Pyelonephritis</div>
+                    <div class="case-demo">28 yo F with dysuria, fever, flank pain</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-beginner">Beginner</span>
+                    </div>
+                </a>
+                <a href="mentor-chat.html?case=meningitis" class="case-card">
+                    <div class="case-title">Bacterial Meningitis</div>
+                    <div class="case-demo">22 yo M college student with headache, fever, stiff neck</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-intermediate">Intermediate</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Endocrine -->
+        <div class="category-section" data-system="endocrine">
+            <div class="category-header">
+                <span class="category-icon">🔵</span>
+                <span class="category-title">Endocrinology</span>
+                <span class="category-count">4 cases</span>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=dka" class="case-card ai">
+                    <div class="case-title">Diabetic Ketoacidosis <span class="case-tag ai">AI Coach</span></div>
+                    <div class="case-demo">24 yo F with nausea, vomiting, glucose 450</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-intermediate">Intermediate</span>
+                        <span class="case-tag">High-Yield</span>
+                    </div>
+                </a>
+                <a href="mentor-chat.html?case=hyperthyroid" class="case-card">
+                    <div class="case-title">Hyperthyroidism Workup</div>
+                    <div class="case-demo">35 yo F with weight loss, tremor, palpitations</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-intermediate">Intermediate</span>
+                    </div>
+                </a>
+                <a href="mentor-chat.html?case=adrenal-insufficiency" class="case-card">
+                    <div class="case-title">Adrenal Insufficiency</div>
+                    <div class="case-demo">50 yo M on chronic steroids with hypotension</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-advanced">Advanced</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Neurology -->
+        <div class="category-section" data-system="neuro">
+            <div class="category-header">
+                <span class="category-icon">🧠</span>
+                <span class="category-title">Neurology</span>
+                <span class="category-count">5 cases</span>
+            </div>
+            <div class="case-grid">
+                <a href="mentor-chat.html?case=stroke" class="case-card ai">
+                    <div class="case-title">Acute Stroke <span class="case-tag ai">AI Coach</span></div>
+                    <div class="case-demo">72 yo M with sudden left-sided weakness</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-intermediate">Intermediate</span>
+                        <span class="case-tag sbar">SBAR</span>
+                        <span class="case-tag">High-Yield</span>
+                    </div>
+                </a>
+                <a href="mentor-chat.html?case=altered-mental-status" class="case-card">
+                    <div class="case-title">Altered Mental Status</div>
+                    <div class="case-demo">80 yo F with acute confusion</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-intermediate">Intermediate</span>
+                    </div>
+                </a>
+                <a href="mentor-chat.html?case=seizure" class="case-card">
+                    <div class="case-title">New-Onset Seizure</div>
+                    <div class="case-demo">28 yo M witnessed tonic-clonic seizure</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-intermediate">Intermediate</span>
+                    </div>
+                </a>
+                <a href="mentor-chat.html?case=headache" class="case-card">
+                    <div class="case-title">Thunderclap Headache</div>
+                    <div class="case-demo">45 yo F with "worst headache of my life"</div>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-intermediate">Intermediate</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+    </div>
     
+    <!-- Footer -->
     <footer class="footer">
-        <p>CoachDx — Part of the <a href="../index.html">Dx Learning Ecosystem</a></p>
-        <p style="margin-top: 8px;">Created by Lauren Fine, MD, FAAAAI • Nova Southeastern University</p>
+        <p>CoachDx Case Library | Part of the <a href="../index.html">Dx Learning Ecosystem</a></p>
+        <p style="margin-top: 8px;">Created by Lauren Fine, MD, FAAAAI | Nova Southeastern University</p>
     </footer>
     
-    <!-- Load all case files -->
-    <script src="coachdx-cases-with-guidelines.js"></script>
-    <script src="coachdx-nursing-cases.js"></script>
-    <script src="coachdx-ems-cases.js"></script>
-    <script src="coachdx-rt-cases.js"></script>
-    <script src="coachdx-pt-cases.js"></script>
-    <script src="coachdx-pharmd-cases.js"></script>
-    <script src="coachdx-dental-cases.js"></script>
-    <script src="coachdx-omfs-cases.js"></script>
-    <script src="coachdx-podiatry-cases.js"></script>
-    <script src="coachdx-resident-cases.js"></script>
-    <script src="coachdx-interprofessional-cases.js"></script>
-    <script src="coachdx-specialty-cases.js"></script>
-    <script src="coachdx-allergy-cases.js"></script>
-    <script src="coachdx-cases-merged.js"></script>
-    
     <script>
-    // Global filterBySpecialty function (must be outside IIFE for onclick access)
-    let filterBySpecialty;
-    
-    (function() {
-        'use strict';
+        let currentLevel = 'm3';
+        let currentSystem = 'all';
+        let searchQuery = '';
         
-        // =========================================================================
-        // PROFESSION CONFIGURATION
-        // =========================================================================
-        const PROFESSION_CONFIG = {
-            'medical-student': { 
-                label: 'Medical Student', 
-                disciplines: ['medical', 'general', undefined],
-                heroTitle: '📚 Medical Case Library',
-                heroSubtitle: 'Core clinical cases for medical student training'
-            },
-            'resident': { 
-                label: 'Resident', 
-                disciplines: ['medical', 'general', 'resident', undefined],
-                heroTitle: '📚 Resident Case Library',
-                heroSubtitle: 'Advanced diagnostic challenges for residents'
-            },
-            'omfs': { 
-                label: 'OMFS Resident', 
-                disciplines: ['omfs'],
-                heroTitle: '🦷 OMFS Case Library',
-                heroSubtitle: 'Oral and maxillofacial surgery cases'
-            },
-            'nursing': { 
-                label: 'Nursing Student', 
-                disciplines: ['nursing'],
-                heroTitle: '💉 Nursing Case Library',
-                heroSubtitle: 'Patient assessment, deterioration recognition, SBAR'
-            },
-            'ems': { 
-                label: 'EMS Provider', 
-                disciplines: ['ems', 'paramedic'],
-                heroTitle: '🚑 EMS Case Library',
-                heroSubtitle: 'Field assessment and prehospital care'
-            },
-            'rt': { 
-                label: 'RT Student', 
-                disciplines: ['rt', 'respiratory'],
-                heroTitle: '🫁 Respiratory Therapy Cases',
-                heroSubtitle: 'Ventilator management, ABG interpretation, airway'
-            },
-            'pt': { 
-                label: 'PT Student', 
-                disciplines: ['pt', 'physical-therapy'],
-                heroTitle: '🦿 Physical Therapy Cases',
-                heroSubtitle: 'Movement system diagnosis and rehabilitation'
-            },
-            'dpm': { 
-                label: 'Podiatry Student', 
-                disciplines: ['dpm', 'podiatry'],
-                heroTitle: '🦶 Podiatry Case Library',
-                heroSubtitle: 'Foot and ankle diagnosis, diabetic limb care'
-            },
-            'pharmd': { 
-                label: 'PharmD Student', 
-                disciplines: ['pharmd', 'pharmacy'],
-                heroTitle: '💊 Pharmacy Case Library',
-                heroSubtitle: 'Drug therapy, interactions, medication management'
-            },
-            'dental': { 
-                label: 'Dental Student', 
-                disciplines: ['dental'],
-                heroTitle: '🦷 Dental Case Library',
-                heroSubtitle: 'Oral diagnosis, treatment planning, emergencies'
-            },
-            'pa': { 
-                label: 'PA Student', 
-                disciplines: ['medical', 'pa', 'general', undefined],
-                heroTitle: '📚 PA Case Library',
-                heroSubtitle: 'Primary care and collaborative practice scenarios'
-            },
-            'np': { 
-                label: 'NP Student', 
-                disciplines: ['medical', 'np', 'general', undefined],
-                heroTitle: '📚 NP Case Library',
-                heroSubtitle: 'Advanced practice nursing scenarios'
-            }
-        };
-        
-        // Category icons
-        const CATEGORY_ICONS = {
-            'Cardiovascular': '❤️',
-            'Pulmonary': '🫁',
-            'Respiratory': '🫁',
-            'GI': '🩺',
-            'Endocrine': '🦋',
-            'Renal': '💧',
-            'Neurology': '🧠',
-            'Infectious Disease': '🦠',
-            'Hematology': '🩸',
-            'Toxicology': '⚠️',
-            'Facial Trauma': '🦴',
-            'Oral Pathology': '🦷',
-            'Orthognathic': '📐',
-            'Implants': '🔩',
-            'Nursing': '💉',
-            'EMS': '🚑',
-            'RT': '🫁',
-            'PT': '🦿',
-            'Podiatry': '🦶',
-            'Pharmacy': '💊',
-            'Dental': '🦷',
-            'Allergy': '🧬',
-            'Immunology': '🛡️',
-            'Allergy/Immunology': '🧬',
-            'Anaphylaxis': '⚡',
-            'Drug Allergy': '💊',
-            'Urticaria/Angioedema': '🔴',
-            'Food Allergy': '🥜',
-            'Venom Allergy': '🐝',
-            'Rhinitis': '👃',
-            'Asthma': '🫁',
-            'Immunodeficiency': '🛡️',
-            'default': '📋'
-        };
-        
-        let currentProfession = 'medical-student';
-        let allCases = {};
-        let currentFilter = 'all';
-        
-        // =========================================================================
-        // INITIALIZE
-        // =========================================================================
-        function init() {
-            // Merge all case sources
-            allCases = mergeAllCases();
-            
-            // Get profession from URL or localStorage
-            const urlParams = new URLSearchParams(window.location.search);
-            currentProfession = urlParams.get('profession') || 
-                               localStorage.getItem('selectedProfession') || 
-                               'medical-student';
-            
-            // Update UI
-            document.getElementById('roleSelector').value = currentProfession;
-            document.body.className = 'role-' + currentProfession;
-            
-            // Render
-            updateForProfession(currentProfession);
-            
-            // Event listeners
-            document.getElementById('roleSelector').addEventListener('change', (e) => {
-                currentProfession = e.target.value;
-                localStorage.setItem('selectedProfession', currentProfession);
-                document.body.className = 'role-' + currentProfession;
-                updateForProfession(currentProfession);
+        function filterByLevel(level) {
+            currentLevel = level;
+            document.querySelectorAll('.level-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.level === level);
             });
-            
-            document.getElementById('searchInput').addEventListener('input', (e) => {
-                filterCases(e.target.value);
-            });
+            applyFilters();
         }
         
-        // =========================================================================
-        // MERGE ALL CASES
-        // =========================================================================
-        let currentSpecialty = 'all'; // Track selected specialty
-        
-        function mergeAllCases() {
-            let merged = {};
-            
-            // Check for each case source
-            const sources = [
-                'COACHDX_CASES',
-                'COACHDX_NURSING_CASES',
-                'COACHDX_EMS_CASES',
-                'COACHDX_RT_CASES',
-                'COACHDX_PT_CASES',
-                'COACHDX_PHARMD_CASES',
-                'COACHDX_DENTAL_CASES',
-                'COACHDX_OMFS_CASES',
-                'COACHDX_PODIATRY_CASES',
-                'COACHDX_RESIDENT_CASES',
-                'COACHDX_INTERPROFESSIONAL_CASES',
-                'COACHDX_SPECIALTY_CASES',
-                'COACHDX_ALLERGY_CASES'
-            ];
-            
-            sources.forEach(src => {
-                if (typeof window[src] !== 'undefined') {
-                    const count = Object.keys(window[src]).length;
-                    console.log('[CaseLibrary]', src, 'loaded', count, 'cases');
-                    Object.assign(merged, window[src]);
-                }
-            });
-            
-            // Verify allergy cases specifically
-            const allergyCases = Object.values(merged).filter(c => c.specialty === 'allergy-immunology');
-            console.log('[CaseLibrary] Allergy/Immunology cases:', allergyCases.length);
-            
-            console.log('[CaseLibrary] Loaded', Object.keys(merged).length, 'total cases');
-            return merged;
-        }
-        
-        // =========================================================================
-        // SPECIALTY CONFIGURATION - Categories for each specialty
-        // =========================================================================
-        const SPECIALTY_CATEGORIES = {
-            'allergy-immunology': {
-                icon: '🧬',
-                name: 'Allergy/Immunology',
-                categories: ['Anaphylaxis', 'Drug Allergy', 'Urticaria/Angioedema', 'Food Allergy', 'Venom Allergy', 'Rhinitis', 'Asthma', 'Immunodeficiency', 'Immunology']
-            },
-            'cardiology': {
-                icon: '❤️',
-                name: 'Cardiology',
-                categories: ['Heart Failure', 'Arrhythmia', 'ACS', 'Valvular', 'Hypertension']
-            },
-            'pulmonology': {
-                icon: '🫁',
-                name: 'Pulmonology', 
-                categories: ['COPD', 'Asthma', 'ILD', 'Pulmonary Embolism', 'Pneumonia']
-            },
-            'neurology': {
-                icon: '🧠',
-                name: 'Neurology',
-                categories: ['Stroke', 'Seizure', 'Headache', 'Movement Disorders', 'Dementia']
-            },
-            'gi': {
-                icon: '🩺',
-                name: 'Gastroenterology',
-                categories: ['IBD', 'Liver', 'GI Bleeding', 'Motility', 'Pancreatitis']
-            },
-            'endocrine': {
-                icon: '🦋',
-                name: 'Endocrine',
-                categories: ['Diabetes', 'Thyroid', 'Adrenal', 'Pituitary', 'Metabolic']
-            },
-            'infectious': {
-                icon: '🦠',
-                name: 'Infectious Disease',
-                categories: ['Sepsis', 'Pneumonia', 'UTI', 'Skin/Soft Tissue', 'HIV/AIDS']
-            },
-            'hematology': {
-                icon: '🩸',
-                name: 'Hematology',
-                categories: ['Anemia', 'Bleeding', 'Thrombosis', 'Malignancy', 'Transfusion']
-            }
-        };
-        
-        // =========================================================================
-        // SPECIALTY FILTERING
-        // =========================================================================
-        filterBySpecialty = function(specialty) {
-            currentSpecialty = specialty;
-            currentFilter = 'all'; // Reset category filter
-            
-            // Update UI state
-            if (specialty !== 'all') {
-                document.body.classList.add('specialty-active');
-            } else {
-                document.body.classList.remove('specialty-active');
-            }
-            
-            // Re-render cases with specialty filter applied
-            updateForProfession(currentProfession);
-        };
-        
-        function getCasesForSpecialty(cases, specialty) {
-            if (specialty === 'all') return cases;
-            
-            const filtered = {};
-            for (const [id, caseData] of Object.entries(cases)) {
-                if (caseData.specialty === specialty) {
-                    filtered[id] = caseData;
-                }
-            }
-            return filtered;
-        }
-        
-        // =========================================================================
-        // UPDATE FOR PROFESSION
-        // =========================================================================
-        function updateForProfession(profession) {
-            const config = PROFESSION_CONFIG[profession] || PROFESSION_CONFIG['medical-student'];
-            
-            // Update header
-            document.getElementById('currentRoleLabel').textContent = config.label;
-            
-            // Adjust title if specialty is selected
-            if (currentSpecialty !== 'all') {
-                const specialtyNames = {
-                    'allergy-immunology': 'Allergy/Immunology',
-                    'cardiology': 'Cardiology',
-                    'pulmonology': 'Pulmonology',
-                    'neurology': 'Neurology',
-                    'gi': 'Gastroenterology',
-                    'endocrine': 'Endocrine',
-                    'infectious': 'Infectious Disease',
-                    'hematology': 'Hematology'
-                };
-                document.getElementById('heroTitle').textContent = '🧬 ' + (specialtyNames[currentSpecialty] || currentSpecialty) + ' Cases';
-                document.getElementById('heroSubtitle').textContent = 'Specialty-focused cases for ' + config.label + 's';
-            } else {
-                document.getElementById('heroTitle').textContent = config.heroTitle;
-                document.getElementById('heroSubtitle').textContent = config.heroSubtitle;
-            }
-            
-            // Filter cases for this profession
-            let professionCases = getCasesForProfession(profession);
-            
-            // Then filter by specialty if selected
-            if (currentSpecialty !== 'all') {
-                professionCases = getCasesForSpecialty(professionCases, currentSpecialty);
-            }
-            
-            // Render cases
-            renderCases(professionCases);
-            
-            // Update stats
-            const categories = [...new Set(Object.values(professionCases).map(c => c.category))];
-            const parallelCount = Object.values(professionCases).filter(c => c.parallelCase).length;
-            
-            document.getElementById('statCases').textContent = Object.keys(professionCases).length;
-            document.getElementById('statCategories').textContent = categories.length;
-            document.getElementById('statParallel').textContent = Math.floor(parallelCount / 2); // Pairs, not individual
-            
-            // Render category filters
-            renderCategoryFilters(categories);
-        }
-        
-        // =========================================================================
-        // GET CASES FOR PROFESSION
-        // =========================================================================
-        function getCasesForProfession(profession) {
-            const config = PROFESSION_CONFIG[profession] || PROFESSION_CONFIG['medical-student'];
-            const allowedDisciplines = config.disciplines;
-            const filtered = {};
-            
-            // Medical professions that can see specialty cases
-            const medicalProfessions = ['medical-student', 'resident', 'pa', 'np', 'pharmd'];
-            const isMedicalProfession = medicalProfessions.includes(profession);
-            
-            for (const [id, caseData] of Object.entries(allCases)) {
-                const caseDiscipline = caseData.discipline || caseData.profession;
-                
-                // Include if discipline matches OR if it's a general case for medical professions
-                if (allowedDisciplines.includes(caseDiscipline) || 
-                    (allowedDisciplines.includes(undefined) && !caseDiscipline)) {
-                    filtered[id] = caseData;
-                }
-                
-                // Also include specialty cases (like A/I) for medical professions
-                if (isMedicalProfession && caseData.specialty && caseDiscipline === 'medical') {
-                    filtered[id] = caseData;
-                }
-            }
-            
-            return filtered;
-        }
-        
-        // =========================================================================
-        // RENDER CASES
-        // =========================================================================
-        function renderCases(cases) {
-            const container = document.getElementById('casesContainer');
-            
-            if (Object.keys(cases).length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-state-icon">📭</div>
-                        <h3>No cases found</h3>
-                        <p>Try adjusting your search or filters, or select a different specialty.</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            // Group by category
-            const byCategory = {};
-            for (const [id, caseData] of Object.entries(cases)) {
-                const cat = caseData.category || 'Other';
-                if (!byCategory[cat]) byCategory[cat] = [];
-                byCategory[cat].push({ id, ...caseData });
-            }
-            
-            // Render
-            let html = '';
-            for (const [category, categoryCases] of Object.entries(byCategory)) {
-                const icon = CATEGORY_ICONS[category] || CATEGORY_ICONS['default'];
-                
-                html += `
-                    <section class="category-section" data-category="${category.toLowerCase().replace(/\s+/g, '-')}">
-                        <div class="category-header">
-                            <span class="category-icon">${icon}</span>
-                            <span class="category-title">${category}</span>
-                            <span class="category-count">${categoryCases.length} cases</span>
-                        </div>
-                        <div class="case-grid">
-                `;
-                
-                for (const caseData of categoryCases) {
-                    const badges = [];
-                    if (caseData.parallelCase) {
-                        const parallelTitle = allCases[caseData.parallelCase]?.title || 'companion case';
-                        badges.push(`<span class="case-badge parallel">↔ Parallel
-                            <span class="tooltip">
-                                <span class="tooltip-title">🔄 Parallel Case</span>
-                                This case has a companion case ("${parallelTitle}") with a similar presentation but different diagnosis. Practice both to strengthen your clinical reasoning and avoid anchoring bias.
-                            </span>
-                        </span>`);
-                    }
-                    
-                    const patient = caseData.patient || {};
-                    const demo = patient.age ? `${patient.age}${patient.sex ? patient.sex[0] : ''} ${patient.chiefComplaint || ''}` : (caseData.description || '').substring(0, 60) + '...';
-                    
-                    html += `
-                        <a href="mentor-chat.html?case=${caseData.id}&profession=${currentProfession}" class="case-card">
-                            <div class="case-title">${caseData.title} ${badges.join(' ')}</div>
-                            <div class="case-demo">${demo}</div>
-                            <div class="case-meta">
-                                <span class="case-time">~20 min</span>
-                            </div>
-                        </a>
-                    `;
-                }
-                
-                html += `
-                        </div>
-                    </section>
-                `;
-            }
-            
-            container.innerHTML = html;
-        }
-        
-        // =========================================================================
-        // RENDER CATEGORY FILTERS
-        // =========================================================================
-        function renderCategoryFilters(categories) {
-            const container = document.getElementById('categoryFilters');
-            const allCasesBtn = document.querySelector('.filter-btn[data-filter="all"]');
-            
-            // Define which categories are specialty-specific (should be hidden in "All Specialties" view)
-            const specialtyCategoriesFlat = [
-                'Anaphylaxis', 'Drug Allergy', 'Urticaria/Angioedema', 'Food Allergy', 
-                'Venom Allergy', 'Rhinitis', 'Immunodeficiency', 'Immunology',
-                // Add other specialty categories here as you add more modules
-            ];
-            
-            // Define which categories are general clerkship categories
-            const generalCategories = [
-                'Cardiovascular', 'Pulmonary', 'Respiratory', 'GI', 'Endocrine', 
-                'Renal', 'Neurology', 'Infectious Disease', 'Hematology', 'Toxicology',
-                'Emergency Medicine', 'Surgery', 'Pediatrics', 'OB/GYN', 'Psychiatry', 
-                'Critical Care', 'Asthma' // Asthma can appear in both
-            ];
-            
-            let displayCategories = categories;
-            
-            if (currentSpecialty !== 'all' && SPECIALTY_CATEGORIES[currentSpecialty]) {
-                // Specialty selected: show only specialty-relevant categories
-                const specialtyConfig = SPECIALTY_CATEGORIES[currentSpecialty];
-                displayCategories = categories.filter(cat => 
-                    specialtyConfig.categories.some(sc => 
-                        cat.toLowerCase().includes(sc.toLowerCase()) || 
-                        sc.toLowerCase().includes(cat.toLowerCase())
-                    )
-                );
-            } else {
-                // "All Specialties" selected: hide specialty-specific categories, show general ones
-                displayCategories = categories.filter(cat => 
-                    !specialtyCategoriesFlat.includes(cat) || generalCategories.includes(cat)
-                );
-            }
-            
-            let html = '';
-            displayCategories.forEach(cat => {
-                const slug = cat.toLowerCase().replace(/\s+/g, '-');
-                const icon = CATEGORY_ICONS[cat] || '';
-                html += `<button class="filter-btn" data-filter="${slug}">${icon ? icon + ' ' : ''}${cat}</button>`;
-            });
-            
-            container.innerHTML = html;
-            
-            // Reset "All Cases" button to active
-            if (allCasesBtn) {
-                allCasesBtn.classList.add('active');
-            }
-            
-            // Add event listeners
+        function filterBySystem(system) {
+            currentSystem = system;
             document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    currentFilter = btn.dataset.filter;
-                    applyFilter();
-                });
+                btn.classList.toggle('active', btn.dataset.system === system);
             });
+            applyFilters();
         }
         
-        // =========================================================================
-        // FILTER CASES
-        // =========================================================================
-        function filterCases(query) {
-            const q = query.toLowerCase();
-            document.querySelectorAll('.case-card').forEach(card => {
-                const text = card.textContent.toLowerCase();
-                card.style.display = text.includes(q) ? 'block' : 'none';
-            });
-            
-            // Show all sections when searching
-            if (q) {
-                document.querySelectorAll('.category-section').forEach(s => s.style.display = 'block');
-            } else {
-                applyFilter();
-            }
+        function searchCases(query) {
+            searchQuery = query.toLowerCase();
+            applyFilters();
         }
         
-        function applyFilter() {
+        function applyFilters() {
             document.querySelectorAll('.category-section').forEach(section => {
-                if (currentFilter === 'all' || section.dataset.category === currentFilter) {
-                    section.style.display = 'block';
-                } else {
-                    section.style.display = 'none';
+                const system = section.dataset.system;
+                const showSection = currentSystem === 'all' || system === currentSystem;
+                section.style.display = showSection ? 'block' : 'none';
+                
+                if (showSection) {
+                    section.querySelectorAll('.case-card').forEach(card => {
+                        const text = card.textContent.toLowerCase();
+                        const matchesSearch = searchQuery === '' || text.includes(searchQuery);
+                        card.style.display = matchesSearch ? 'block' : 'none';
+                    });
                 }
             });
         }
         
-        // Initialize on DOM ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', init);
-        } else {
-            init();
-        }
-    })();
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load saved preferences
+            const savedLevel = localStorage.getItem('dxTrainingLevel') || 'm3';
+            filterByLevel(savedLevel);
+        });
     </script>
 </body>
 </html>
