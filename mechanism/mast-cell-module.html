@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mast Cell Biology & Mastocytosis | MechanismDx</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #e2e8f0; line-height: 1.7; min-height: 100vh; }
+        .header { background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); padding: 32px 24px; border-bottom: 3px solid #fb923c; }
+        .header-inner { max-width: 900px; margin: 0 auto; }
+        .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+        .breadcrumb a { color: rgba(255,255,255,0.9); text-decoration: none; }
+        .header h1 { font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+        .header-subtitle { font-size: 16px; color: rgba(255,255,255,0.85); }
+        .content { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        .objectives { background: linear-gradient(135deg, #065f46 0%, #064e3b 100%); border: 1px solid #10b981; border-radius: 16px; padding: 24px; margin-bottom: 40px; }
+        .objectives h2 { color: #34d399; font-size: 18px; margin-bottom: 16px; }
+        .objectives ul { margin-left: 24px; color: #a7f3d0; }
+        .objectives li { margin-bottom: 8px; }
+        .section { background: #1e293b; border-radius: 16px; padding: 32px; margin-bottom: 32px; border: 1px solid #334155; }
+        .section h2 { color: #fb923c; font-size: 22px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid #7c2d12; }
+        .section h3 { color: #fdba74; font-size: 18px; margin: 28px 0 16px; }
+        .section p { margin-bottom: 16px; color: #cbd5e1; }
+        .key-point { background: linear-gradient(135deg, #7c2d12 0%, #431407 100%); border-left: 4px solid #f97316; padding: 20px; border-radius: 0 12px 12px 0; margin: 24px 0; }
+        .key-point-title { color: #fdba74; font-weight: 600; margin-bottom: 8px; }
+        .key-point p { color: #fed7aa; margin-bottom: 0; }
+        .pearl { background: linear-gradient(135deg, #1e3a5f 0%, #1e293b 100%); border: 1px solid #3b82f6; border-radius: 12px; padding: 20px; margin: 24px 0; }
+        .pearl-title { color: #60a5fa; font-weight: 600; margin-bottom: 10px; }
+        .pearl p { color: #bfdbfe; margin-bottom: 0; }
+        .table-container { overflow-x: auto; margin: 24px 0; }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { background: #334155; color: #fb923c; padding: 14px 16px; text-align: left; font-weight: 600; }
+        td { padding: 14px 16px; border-bottom: 1px solid #334155; color: #cbd5e1; }
+        .tryptase-box { background: linear-gradient(135deg, #4c1d95 0%, #2e1065 100%); border-radius: 12px; padding: 24px; margin: 24px 0; border: 1px solid #7c3aed; }
+        .tryptase-title { color: #c4b5fd; font-size: 18px; margin-bottom: 16px; }
+        .tryptase-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; }
+        .tryptase-item { background: #1e1033; border-radius: 10px; padding: 16px; text-align: center; }
+        .tryptase-value { font-size: 24px; font-weight: 700; color: #a78bfa; }
+        .tryptase-label { font-size: 12px; color: #c4b5fd; margin-top: 4px; }
+        .tryptase-meaning { font-size: 11px; color: #94a3b8; margin-top: 8px; }
+        .criteria-box { background: #0f172a; border: 2px solid #f97316; border-radius: 12px; padding: 24px; margin: 24px 0; }
+        .criteria-title { color: #fb923c; font-size: 18px; font-weight: 600; margin-bottom: 16px; text-align: center; }
+        .criteria-list { display: flex; flex-direction: column; gap: 12px; }
+        .criterion-item { background: #1e293b; border-radius: 8px; padding: 14px 16px; display: flex; align-items: flex-start; gap: 12px; }
+        .criterion-letter { background: #f97316; color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; flex-shrink: 0; }
+        .criterion-text { color: #e2e8f0; font-size: 14px; }
+        .criterion-text strong { color: #fb923c; }
+        .links-section { background: #1e293b; border-radius: 16px; padding: 32px; margin-top: 40px; }
+        .links-title { color: #fb923c; font-size: 20px; margin-bottom: 20px; }
+        .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+        .link-card { background: #0f172a; border: 1px solid #334155; border-radius: 12px; padding: 20px; text-decoration: none; transition: all 0.2s; }
+        .link-card:hover { border-color: #f97316; transform: translateY(-2px); }
+        .link-card-icon { font-size: 24px; margin-bottom: 12px; }
+        .link-card-title { color: #fff; font-weight: 600; margin-bottom: 6px; }
+        .link-card-desc { color: #94a3b8; font-size: 13px; }
+        .link-card-badge { display: inline-block; margin-top: 10px; font-size: 11px; padding: 3px 10px; border-radius: 10px; background: #7c2d12; color: #fdba74; }
+        .footer { text-align: center; padding: 40px 24px; color: #64748b; font-size: 13px; }
+        .footer a { color: #fb923c; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <div class="breadcrumb"><a href="index.html">MechanismDx</a> → <a href="allergy-immunology.html">Allergy/Immunology</a> → Mast Cells</div>
+            <h1>💥 Mast Cell Biology & Mastocytosis</h1>
+            <div class="header-subtitle">Understanding the sentinel cells of allergic inflammation</div>
+        </div>
+    </header>
+    
+    <main class="content">
+        <div class="objectives">
+            <h2>🎯 Learning Objectives</h2>
+            <ul>
+                <li>Describe mast cell development, distribution, and key surface receptors</li>
+                <li>Explain IgE-dependent and IgE-independent activation pathways</li>
+                <li>Differentiate preformed vs newly synthesized mediators</li>
+                <li>Apply WHO criteria for systemic mastocytosis</li>
+                <li>Interpret baseline tryptase levels</li>
+            </ul>
+        </div>
+        
+        <section class="section">
+            <h2>🔬 Mast Cell Biology</h2>
+            <p>Mast cells originate from <strong>CD34+ hematopoietic stem cells</strong>. Unlike basophils, mast cell precursors migrate to tissues where they mature under the influence of <strong>stem cell factor (SCF)</strong> binding to <strong>KIT (CD117)</strong>.</p>
+            
+            <h3>Key Surface Receptors</h3>
+            <div class="table-container">
+                <table>
+                    <thead><tr><th>Receptor</th><th>Ligand</th><th>Function</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>FcεRI</strong></td><td>IgE</td><td>Primary allergic activation receptor</td></tr>
+                        <tr><td><strong>KIT (CD117)</strong></td><td>SCF</td><td>Survival, proliferation. Mutated (D816V) in mastocytosis</td></tr>
+                        <tr><td><strong>MRGPRX2</strong></td><td>Drugs, peptides</td><td>IgE-independent activation (vancomycin, opioids)</td></tr>
+                        <tr><td><strong>C3a/C5a receptors</strong></td><td>Anaphylatoxins</td><td>Complement-mediated activation</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="key-point">
+                <div class="key-point-title">⚠️ MRGPRX2: The "Pseudo-Allergy" Receptor</div>
+                <p>MRGPRX2 explains why some drugs cause reactions on FIRST exposure without prior sensitization. Key triggers: <strong>vancomycin, fluoroquinolones, opioids, neuromuscular blockers</strong>.</p>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>🧪 Mast Cell Mediators</h2>
+            
+            <h3>Preformed (Immediate Release - Seconds)</h3>
+            <div class="table-container">
+                <table>
+                    <thead><tr><th>Mediator</th><th>Effects</th><th>Clinical Correlation</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Histamine</strong></td><td>Vasodilation, vascular permeability, bronchoconstriction</td><td>Urticaria, flushing, hypotension</td></tr>
+                        <tr><td><strong>Tryptase</strong></td><td>Activates complement, cleaves fibrinogen</td><td>Best biomarker for mast cell activation</td></tr>
+                        <tr><td><strong>Heparin</strong></td><td>Anticoagulation</td><td>Prolonged bleeding at injection sites</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h3>Newly Synthesized (Minutes to Hours)</h3>
+            <div class="table-container">
+                <table>
+                    <thead><tr><th>Mediator</th><th>Effects</th><th>Clinical Correlation</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Leukotrienes</strong></td><td>Potent bronchoconstriction (1000x histamine)</td><td>Prolonged bronchospasm; target of montelukast</td></tr>
+                        <tr><td><strong>PGD2</strong></td><td>Vasodilation, bronchoconstriction</td><td>Flushing; urinary metabolite used diagnostically</td></tr>
+                        <tr><td><strong>PAF</strong></td><td>Profound hypotension, cardiac depression</td><td>Correlates with anaphylaxis severity</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>📊 Tryptase Interpretation</h2>
+            
+            <div class="tryptase-box">
+                <div class="tryptase-title">Baseline Tryptase Levels</div>
+                <div class="tryptase-grid">
+                    <div class="tryptase-item">
+                        <div class="tryptase-value">&lt;11.4</div>
+                        <div class="tryptase-label">ng/mL</div>
+                        <div class="tryptase-meaning">Normal</div>
+                    </div>
+                    <div class="tryptase-item">
+                        <div class="tryptase-value">11.4-20</div>
+                        <div class="tryptase-label">ng/mL</div>
+                        <div class="tryptase-meaning">Gray zone - consider HαT, early mastocytosis</div>
+                    </div>
+                    <div class="tryptase-item">
+                        <div class="tryptase-value">&gt;20</div>
+                        <div class="tryptase-label">ng/mL</div>
+                        <div class="tryptase-meaning">Strongly suggests mastocytosis</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pearl">
+                <div class="pearl-title">💎 Hereditary Alpha-Tryptasemia (HαT)</div>
+                <p>TPSAB1 gene duplications cause chronically elevated tryptase (10-25 ng/mL) without mastocytosis. Present in ~5% of population. Associated with increased anaphylaxis severity and dysautonomia.</p>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>🔴 Systemic Mastocytosis</h2>
+            
+            <div class="criteria-box">
+                <div class="criteria-title">WHO Diagnostic Criteria</div>
+                <p style="text-align: center; color: #94a3b8; margin-bottom: 16px;">1 major + 1 minor, OR 3 minor criteria</p>
+                
+                <h4 style="color: #fb923c; margin-bottom: 12px;">Major:</h4>
+                <div class="criterion-item" style="margin-bottom: 16px;">
+                    <div class="criterion-letter">M</div>
+                    <div class="criterion-text"><strong>Multifocal dense mast cell infiltrates</strong> (≥15 cells in aggregates) in bone marrow</div>
+                </div>
+                
+                <h4 style="color: #fb923c; margin-bottom: 12px;">Minor:</h4>
+                <div class="criteria-list">
+                    <div class="criterion-item">
+                        <div class="criterion-letter">1</div>
+                        <div class="criterion-text"><strong>&gt;25% spindle-shaped</strong> or atypical mast cells</div>
+                    </div>
+                    <div class="criterion-item">
+                        <div class="criterion-letter">2</div>
+                        <div class="criterion-text"><strong>KIT D816V mutation</strong> detected</div>
+                    </div>
+                    <div class="criterion-item">
+                        <div class="criterion-letter">3</div>
+                        <div class="criterion-text">Mast cells express <strong>CD25 and/or CD2</strong></div>
+                    </div>
+                    <div class="criterion-item">
+                        <div class="criterion-letter">4</div>
+                        <div class="criterion-text"><strong>Serum tryptase &gt;20 ng/mL</strong></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="key-point">
+                <div class="key-point-title">⚠️ Anaphylaxis Risk</div>
+                <p>Mastocytosis patients have markedly increased risk of severe anaphylaxis, especially to Hymenoptera venom. Up to 30% of patients with venom anaphylaxis and elevated baseline tryptase have mastocytosis.</p>
+            </div>
+        </section>
+        
+        <section class="links-section">
+            <h2 class="links-title">🔗 Related Learning</h2>
+            <div class="links-grid">
+                <a href="anaphylaxis-module.html" class="link-card">
+                    <div class="link-card-icon">🚨</div>
+                    <div class="link-card-title">Anaphylaxis</div>
+                    <div class="link-card-desc">Pathophysiology and management</div>
+                    <div class="link-card-badge">MechanismDx</div>
+                </a>
+                <a href="allergy-testing-module.html" class="link-card">
+                    <div class="link-card-icon">🔬</div>
+                    <div class="link-card-title">Allergy Testing</div>
+                    <div class="link-card-desc">Including tryptase interpretation</div>
+                    <div class="link-card-badge">MechanismDx</div>
+                </a>
+                <a href="../ReasonDx/html/ai-trainer-eosinophilia.html" class="link-card">
+                    <div class="link-card-icon">📋</div>
+                    <div class="link-card-title">Eosinophilia Workup</div>
+                    <div class="link-card-desc">Mastocytosis in differential</div>
+                    <div class="link-card-badge">ReasonDx Case</div>
+                </a>
+            </div>
+        </section>
+    
+        <section class="section">
+            <h2>📚 Open Access Resources</h2>
+            <div class="links-grid">
+                <a href="https://tmsforacure.org/" target="_blank" class="link-card">
+                    <div class="link-card-icon">🔬</div>
+                    <div class="link-card-title">The Mastocytosis Society</div>
+                    <div class="link-card-desc">Patient resources and disease information</div>
+                    <div class="link-card-badge" style="background: #1e3a5f; color: #60a5fa;">Open Access</div>
+                </a>
+                <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7460481/" target="_blank" class="link-card">
+                    <div class="link-card-icon">📄</div>
+                    <div class="link-card-title">Mastocytosis Review (PMC)</div>
+                    <div class="link-card-desc">Free full text - WHO criteria and management</div>
+                    <div class="link-card-badge" style="background: #065f46; color: #34d399;">PubMed Open</div>
+                </a>
+                <a href="https://www.aaaai.org/conditions/tryptase" target="_blank" class="link-card">
+                    <div class="link-card-icon">🏥</div>
+                    <div class="link-card-title">AAAAI Tryptase Information</div>
+                    <div class="link-card-desc">Clinical interpretation guide</div>
+                    <div class="link-card-badge" style="background: #1e3a5f; color: #60a5fa;">Open Access</div>
+                </a>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="footer">
+        <p>MechanismDx | Part of the <a href="../index.html">Dx Learning Ecosystem</a></p>
+    </footer>
+</body>
+</html>

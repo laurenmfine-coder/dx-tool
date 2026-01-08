@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Allergy Management | MechanismDx</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #e2e8f0; line-height: 1.7; min-height: 100vh; }
+        
+        .header { background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); padding: 32px 24px; border-bottom: 3px solid #a78bfa; }
+        .header-inner { max-width: 900px; margin: 0 auto; }
+        .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+        .breadcrumb a { color: rgba(255,255,255,0.9); text-decoration: none; }
+        .header h1 { font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+        .header-subtitle { font-size: 16px; color: rgba(255,255,255,0.85); }
+        
+        .content { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
+        
+        .objectives { background: linear-gradient(135deg, #065f46 0%, #064e3b 100%); border: 1px solid #10b981; border-radius: 16px; padding: 24px; margin-bottom: 40px; }
+        .objectives h2 { color: #34d399; font-size: 18px; margin-bottom: 16px; }
+        .objectives ul { margin-left: 24px; color: #a7f3d0; }
+        .objectives li { margin-bottom: 8px; }
+        
+        .section { background: #1e293b; border-radius: 16px; padding: 32px; margin-bottom: 32px; border: 1px solid #334155; }
+        .section h2 { color: #a78bfa; font-size: 22px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid #4c1d95; }
+        .section h3 { color: #c4b5fd; font-size: 18px; margin: 28px 0 16px; }
+        .section p { margin-bottom: 16px; color: #cbd5e1; }
+        
+        .pillar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin: 24px 0; }
+        .pillar-card { background: #0f172a; border-radius: 12px; padding: 20px; text-align: center; border: 2px solid #334155; }
+        .pillar-icon { font-size: 36px; margin-bottom: 12px; }
+        .pillar-title { font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 8px; }
+        .pillar-desc { font-size: 12px; color: #94a3b8; }
+        
+        .key-point { background: linear-gradient(135deg, #4c1d95 0%, #2e1065 100%); border-left: 4px solid #7c3aed; padding: 20px; border-radius: 0 12px 12px 0; margin: 24px 0; }
+        .key-point-title { color: #c4b5fd; font-weight: 600; margin-bottom: 8px; }
+        .key-point p { color: #ddd6fe; margin-bottom: 0; }
+        
+        .pearl { background: linear-gradient(135deg, #1e3a5f 0%, #1e293b 100%); border: 1px solid #3b82f6; border-radius: 12px; padding: 20px; margin: 24px 0; }
+        .pearl-title { color: #60a5fa; font-weight: 600; margin-bottom: 10px; }
+        .pearl p { color: #bfdbfe; margin-bottom: 0; }
+        
+        .table-container { overflow-x: auto; margin: 24px 0; }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th { background: #334155; color: #a78bfa; padding: 14px 16px; text-align: left; font-weight: 600; }
+        td { padding: 14px 16px; border-bottom: 1px solid #334155; color: #cbd5e1; }
+        
+        .label-box { background: #0f172a; border-radius: 12px; padding: 24px; margin: 24px 0; border: 1px solid #334155; }
+        .label-title { font-size: 16px; font-weight: 600; color: #a78bfa; margin-bottom: 16px; }
+        .label-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+        .label-item { background: #1e293b; padding: 12px; border-radius: 8px; font-size: 13px; }
+        .label-item strong { color: #c4b5fd; }
+        .label-item span { color: #94a3b8; display: block; margin-top: 4px; font-size: 12px; }
+        
+        .action-plan { background: linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%); border: 2px solid #dc2626; border-radius: 16px; padding: 24px; margin: 24px 0; }
+        .action-plan-title { color: #fca5a5; font-size: 18px; font-weight: 600; margin-bottom: 16px; text-align: center; }
+        .action-section { background: rgba(0,0,0,0.2); border-radius: 10px; padding: 16px; margin-bottom: 12px; }
+        .action-section:last-child { margin-bottom: 0; }
+        .action-section-title { color: #fecaca; font-weight: 600; margin-bottom: 10px; font-size: 14px; }
+        .action-list { margin-left: 20px; color: #fecaca; font-size: 13px; }
+        .action-list li { margin-bottom: 6px; }
+        
+        .oit-box { background: linear-gradient(135deg, #065f46 0%, #064e3b 100%); border: 1px solid #10b981; border-radius: 12px; padding: 24px; margin: 24px 0; }
+        .oit-title { color: #34d399; font-size: 18px; font-weight: 600; margin-bottom: 16px; }
+        .oit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .oit-col h4 { color: #a7f3d0; font-size: 14px; margin-bottom: 10px; }
+        .oit-col ul { margin-left: 20px; color: #a7f3d0; font-size: 13px; }
+        .oit-col li { margin-bottom: 6px; }
+        
+        .quiz-section { background: linear-gradient(135deg, #4c1d95 0%, #2e1065 100%); border-radius: 16px; padding: 32px; margin: 40px 0; border: 1px solid #7c3aed; }
+        .quiz-title { color: #c4b5fd; font-size: 20px; margin-bottom: 24px; }
+        .quiz-question { background: #1e1033; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+        .quiz-q-text { color: #e2e8f0; font-size: 15px; margin-bottom: 16px; }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+        .quiz-option { background: #0f172a; border: 2px solid #334155; border-radius: 10px; padding: 14px 18px; cursor: pointer; color: #e2e8f0; font-size: 14px; }
+        .quiz-option:hover { border-color: #7c3aed; }
+        .quiz-option.correct { border-color: #22c55e; background: #065f46; }
+        .quiz-option.incorrect { border-color: #ef4444; background: #7f1d1d; }
+        .quiz-feedback { margin-top: 16px; padding: 16px; border-radius: 10px; font-size: 14px; display: none; }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct { background: #065f46; color: #a7f3d0; }
+        .quiz-feedback.incorrect { background: #7f1d1d; color: #fecaca; }
+        
+        .links-section { background: #1e293b; border-radius: 16px; padding: 32px; margin-top: 40px; }
+        .links-title { color: #a78bfa; font-size: 20px; margin-bottom: 20px; }
+        .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+        .link-card { background: #0f172a; border: 1px solid #334155; border-radius: 12px; padding: 20px; text-decoration: none; transition: all 0.2s; }
+        .link-card:hover { border-color: #7c3aed; transform: translateY(-2px); }
+        .link-card-icon { font-size: 24px; margin-bottom: 12px; }
+        .link-card-title { color: #fff; font-weight: 600; margin-bottom: 6px; }
+        .link-card-desc { color: #94a3b8; font-size: 13px; }
+        .link-card-badge { display: inline-block; margin-top: 10px; font-size: 11px; padding: 3px 10px; border-radius: 10px; background: #4c1d95; color: #c4b5fd; }
+        
+        .footer { text-align: center; padding: 40px 24px; color: #64748b; font-size: 13px; }
+        .footer a { color: #a78bfa; text-decoration: none; }
+        
+        @media (max-width: 768px) { .oit-grid { grid-template-columns: 1fr; } .header h1 { font-size: 24px; } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <div class="breadcrumb">
+                <a href="index.html">MechanismDx</a> → <a href="allergy-immunology.html">Allergy/Immunology</a> → Food Allergy Management
+            </div>
+            <h1>🍽️ Food Allergy Management</h1>
+            <div class="header-subtitle">Avoidance strategies, action plans, and emerging therapies for food-allergic patients</div>
+        </div>
+    </header>
+    
+    <main class="content">
+        <div class="objectives">
+            <h2>🎯 Learning Objectives</h2>
+            <ul>
+                <li>Describe the three pillars of food allergy management</li>
+                <li>Counsel patients on effective allergen avoidance including label reading</li>
+                <li>Create and explain components of an anaphylaxis action plan</li>
+                <li>Identify candidates for oral immunotherapy (OIT)</li>
+                <li>Discuss natural history and potential for outgrowing food allergies</li>
+            </ul>
+        </div>
+        
+        <section class="section">
+            <h2>🏛️ Three Pillars of Food Allergy Management</h2>
+            
+            <div class="pillar-grid">
+                <div class="pillar-card">
+                    <div class="pillar-icon">🚫</div>
+                    <div class="pillar-title">Strict Avoidance</div>
+                    <div class="pillar-desc">Eliminate exposure to confirmed allergens through careful label reading and cross-contact prevention</div>
+                </div>
+                <div class="pillar-card">
+                    <div class="pillar-icon">💉</div>
+                    <div class="pillar-title">Emergency Preparedness</div>
+                    <div class="pillar-desc">Carry epinephrine, have written action plan, train caregivers</div>
+                </div>
+                <div class="pillar-card">
+                    <div class="pillar-icon">📚</div>
+                    <div class="pillar-title">Education</div>
+                    <div class="pillar-desc">Symptom recognition, when to use epinephrine, restaurant communication</div>
+                </div>
+            </div>
+            
+            <div class="key-point">
+                <div class="key-point-title">💡 The Goal</div>
+                <p>Help patients live safely with food allergy while maintaining quality of life. Overly restrictive diets cause nutritional deficiencies and psychosocial burden. Confirm allergies with proper testing before recommending avoidance.</p>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>🚫 Allergen Avoidance</h2>
+            
+            <h3>Label Reading: FALCPA Requirements</h3>
+            <p>The Food Allergen Labeling and Consumer Protection Act (FALCPA) requires clear labeling of the <strong>Top 9 allergens</strong> in plain language:</p>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr><th>Allergen</th><th>Must Be Labeled As</th><th>Hidden Sources</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Milk</td><td>"Contains: Milk" or "milk" in ingredients</td><td>Casein, whey, lactalbumin, ghee, some "non-dairy" products</td></tr>
+                        <tr><td>Egg</td><td>"Contains: Egg"</td><td>Albumin, lysozyme, mayonnaise, some pasta</td></tr>
+                        <tr><td>Peanut</td><td>"Contains: Peanut"</td><td>Arachis oil, some Asian cuisines, candy</td></tr>
+                        <tr><td>Tree Nuts</td><td>Specific nut named</td><td>Marzipan, pesto, nut oils (variable)</td></tr>
+                        <tr><td>Wheat</td><td>"Contains: Wheat"</td><td>Semolina, couscous, some soy sauce</td></tr>
+                        <tr><td>Soy</td><td>"Contains: Soy"</td><td>Edamame, miso, soy lecithin</td></tr>
+                        <tr><td>Fish</td><td>Specific species named</td><td>Caesar dressing, Worcestershire sauce</td></tr>
+                        <tr><td>Shellfish</td><td>Specific species named</td><td>Glucosamine (shellfish-derived), some Asian sauces</td></tr>
+                        <tr><td>Sesame</td><td>"Contains: Sesame" (added 2023)</td><td>Tahini, halvah, some breads, hummus</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="label-box">
+                <div class="label-title">⚠️ Precautionary Advisory Labels (PAL)</div>
+                <div class="label-grid">
+                    <div class="label-item">
+                        <strong>"May contain..."</strong>
+                        <span>Voluntary - NOT regulated by FDA. Risk varies by manufacturer.</span>
+                    </div>
+                    <div class="label-item">
+                        <strong>"Made in facility that processes..."</strong>
+                        <span>Cross-contact possible. Generally advise avoidance for high-risk patients.</span>
+                    </div>
+                    <div class="label-item">
+                        <strong>"Made on shared equipment..."</strong>
+                        <span>Higher risk than "facility" warnings. Avoid if severely allergic.</span>
+                    </div>
+                    <div class="label-item">
+                        <strong>No warning label</strong>
+                        <span>Not guaranteed safe - cross-contact may still occur. Read full ingredients.</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pearl">
+                <div class="pearl-title">💎 The "Read Every Time" Rule</div>
+                <p>Manufacturers change recipes without warning. Patients should read labels EVERY time they purchase a product, even if they've bought it safely before. Ingredients can change between production runs.</p>
+            </div>
+            
+            <h3>Cross-Contact Prevention</h3>
+            <p>Cross-contact occurs when a safe food touches an allergen or surface contaminated with allergen. This is different from cross-contamination (bacteria).</p>
+            
+            <ul style="margin-left: 24px; color: #cbd5e1;">
+                <li><strong>At home:</strong> Separate cutting boards, utensils, cooking surfaces; wash hands thoroughly; consider allergen-free zones</li>
+                <li><strong>At restaurants:</strong> Communicate clearly with staff; ask about shared fryers, grills, prep surfaces; request fresh pan/utensils</li>
+                <li><strong>At school:</strong> Allergen-free table option; no food sharing; trained staff with access to epinephrine</li>
+                <li><strong>Travel:</strong> Carry safe snacks; chef cards in local language; know how to access medical care</li>
+            </ul>
+        </section>
+        
+        <section class="section">
+            <h2>📋 Anaphylaxis Action Plan</h2>
+            <p>Every patient with food allergy should have a written emergency action plan that specifies when and how to treat reactions.</p>
+            
+            <div class="action-plan">
+                <div class="action-plan-title">🚨 Sample Anaphylaxis Action Plan Components</div>
+                
+                <div class="action-section">
+                    <div class="action-section-title">MILD SYMPTOMS (Skin only - no breathing/BP issues)</div>
+                    <ul class="action-list">
+                        <li>Localized hives, itching, flushing</li>
+                        <li>Give antihistamine (diphenhydramine or cetirizine)</li>
+                        <li>WATCH CLOSELY - may progress to anaphylaxis</li>
+                        <li>If symptoms worsen → GIVE EPINEPHRINE</li>
+                    </ul>
+                </div>
+                
+                <div class="action-section">
+                    <div class="action-section-title">SEVERE SYMPTOMS → GIVE EPINEPHRINE IMMEDIATELY</div>
+                    <ul class="action-list">
+                        <li>Widespread hives, severe itching/flushing</li>
+                        <li>Throat tightness, trouble swallowing, voice changes</li>
+                        <li>Shortness of breath, wheezing, repetitive cough</li>
+                        <li>Dizziness, fainting, pale/blue color</li>
+                        <li>Vomiting, severe abdominal pain, diarrhea</li>
+                        <li>Sense of doom, confusion</li>
+                    </ul>
+                </div>
+                
+                <div class="action-section">
+                    <div class="action-section-title">AFTER GIVING EPINEPHRINE</div>
+                    <ul class="action-list">
+                        <li>CALL 911 immediately - even if symptoms improve</li>
+                        <li>Lay person flat (or sitting if breathing difficulty)</li>
+                        <li>Give second epinephrine in 5-15 min if no improvement</li>
+                        <li>Go to ER for observation (biphasic reaction risk)</li>
+                        <li>Bring used autoinjector to show medical team</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="key-point">
+                <div class="key-point-title">⚠️ "When in Doubt, Give Epinephrine"</div>
+                <p>Antihistamines cannot treat or prevent anaphylaxis. If a patient has ingested their allergen and develops ANY symptoms beyond isolated skin findings, epinephrine is indicated. Early administration improves outcomes. There are no absolute contraindications.</p>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>🎯 Oral Immunotherapy (OIT)</h2>
+            <p>OIT involves giving gradually increasing doses of allergen to raise the reaction threshold. FDA-approved for peanut (Palforzia®) in ages 4-17.</p>
+            
+            <div class="oit-box">
+                <div class="oit-title">OIT Candidacy Assessment</div>
+                <div class="oit-grid">
+                    <div class="oit-col">
+                        <h4>✓ Good Candidates</h4>
+                        <ul>
+                            <li>Age 4-17 (FDA indication)</li>
+                            <li>Confirmed IgE-mediated peanut allergy</li>
+                            <li>Motivated family with good adherence</li>
+                            <li>Able to attend frequent clinic visits</li>
+                            <li>Controlled asthma</li>
+                            <li>Understand: desensitization, NOT cure</li>
+                        </ul>
+                    </div>
+                    <div class="oit-col">
+                        <h4>✗ Poor Candidates / Cautions</h4>
+                        <ul>
+                            <li>Uncontrolled asthma</li>
+                            <li>Eosinophilic esophagitis (relative)</li>
+                            <li>Unable to avoid cofactors during dosing</li>
+                            <li>Poor adherence likelihood</li>
+                            <li>Severe baseline reactions (relative)</li>
+                            <li>Expecting "cure" - must continue maintenance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>What Patients Need to Know About OIT</h3>
+            <ul style="margin-left: 24px; color: #cbd5e1;">
+                <li><strong>Goal:</strong> Raise threshold to protect against accidental exposures - NOT enable free eating</li>
+                <li><strong>Timeline:</strong> ~6 months of updosing, then maintenance indefinitely</li>
+                <li><strong>Reactions:</strong> Common during OIT - GI symptoms, oral itching; anaphylaxis possible</li>
+                <li><strong>Cofactors:</strong> Must avoid exercise, hot showers, NSAIDs, alcohol around dosing</li>
+                <li><strong>Maintenance:</strong> Must take dose daily FOREVER to maintain protection</li>
+                <li><strong>Still carry epinephrine:</strong> OIT does not eliminate need for emergency preparedness</li>
+            </ul>
+            
+            <div class="pearl">
+                <div class="pearl-title">💎 Sustained Unresponsiveness vs Desensitization</div>
+                <p><strong>Desensitization:</strong> Protection while actively taking maintenance doses. Lost within weeks if dosing stops.<br>
+                <strong>Sustained unresponsiveness:</strong> Protection persists even after stopping OIT. Rare - only ~20-30% achieve this. Most patients need lifelong maintenance.</p>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>📈 Natural History: Will They Outgrow It?</h2>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr><th>Allergen</th><th>Likelihood of Resolution</th><th>Timing</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Milk</strong></td><td>~80% outgrow</td><td>Most by age 6; some by teens</td></tr>
+                        <tr><td><strong>Egg</strong></td><td>~70% outgrow</td><td>Most by age 6; some by teens</td></tr>
+                        <tr><td><strong>Wheat</strong></td><td>~65% outgrow</td><td>Usually by school age</td></tr>
+                        <tr><td><strong>Soy</strong></td><td>~70% outgrow</td><td>Usually by school age</td></tr>
+                        <tr><td><strong>Peanut</strong></td><td>~20% outgrow</td><td>If it happens, usually by age 6-8</td></tr>
+                        <tr><td><strong>Tree nuts</strong></td><td>~10% outgrow</td><td>Usually persistent</td></tr>
+                        <tr><td><strong>Fish</strong></td><td>Rare to outgrow</td><td>Usually lifelong</td></tr>
+                        <tr><td><strong>Shellfish</strong></td><td>Rare to outgrow</td><td>Usually lifelong; often adult-onset</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="key-point">
+                <div class="key-point-title">📊 Predictors of Persistence</div>
+                <p>Higher specific IgE levels, larger skin test wheals, multiple food allergies, comorbid atopic disease (asthma, eczema), and history of severe reactions all predict LESS likelihood of outgrowing the allergy. Serial monitoring with declining IgE may indicate developing tolerance.</p>
+            </div>
+        </section>
+        
+        <section class="quiz-section">
+            <h2 class="quiz-title">🧠 Test Your Understanding</h2>
+            
+            <div class="quiz-question" id="q1">
+                <div class="quiz-q-text">1. A parent asks about a product labeled "May contain peanuts." What should you advise for their peanut-allergic child?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, false)">It's safe - the warning is just for legal protection</div>
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, true)">Generally avoid - precautionary labels indicate real cross-contact risk</div>
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, false)">Only avoid if the child has had anaphylaxis before</div>
+                    <div class="quiz-option" onclick="checkAnswer('q1', this, false)">These labels are FDA-regulated and indicate minimal risk</div>
+                </div>
+                <div class="quiz-feedback" id="feedback-q1"></div>
+            </div>
+            
+            <div class="quiz-question" id="q2">
+                <div class="quiz-q-text">2. Which food allergy is MOST likely to be outgrown?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, false)">Peanut</div>
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, true)">Milk</div>
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, false)">Tree nut</div>
+                    <div class="quiz-option" onclick="checkAnswer('q2', this, false)">Shellfish</div>
+                </div>
+                <div class="quiz-feedback" id="feedback-q2"></div>
+            </div>
+            
+            <div class="quiz-question" id="q3">
+                <div class="quiz-q-text">3. A patient on peanut OIT asks if they can now eat peanut butter sandwiches. What is the correct response?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, false)">Yes - OIT cures peanut allergy</div>
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, true)">No - OIT raises threshold for accidental exposure but is not a cure; they should still avoid peanut</div>
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, false)">Yes, but only on weekends when they're not dosing</div>
+                    <div class="quiz-option" onclick="checkAnswer('q3', this, false)">They should wait 2 years after completing updosing</div>
+                </div>
+                <div class="quiz-feedback" id="feedback-q3"></div>
+            </div>
+        </section>
+        
+        <section class="links-section">
+            <h2 class="links-title">🔗 Related Learning</h2>
+            <div class="links-grid">
+                <a href="epinephrine-module.html" class="link-card">
+                    <div class="link-card-icon">💉</div>
+                    <div class="link-card-title">Epinephrine Deep Dive</div>
+                    <div class="link-card-desc">Mechanism, dosing, and autoinjector training</div>
+                    <div class="link-card-badge">MechanismDx</div>
+                </a>
+                <a href="allergy-testing-module.html" class="link-card">
+                    <div class="link-card-icon">🔬</div>
+                    <div class="link-card-title">Allergy Testing</div>
+                    <div class="link-card-desc">Confirm allergies before recommending avoidance</div>
+                    <div class="link-card-badge">MechanismDx</div>
+                </a>
+                <a href="anaphylaxis-module.html" class="link-card">
+                    <div class="link-card-icon">🚨</div>
+                    <div class="link-card-title">Anaphylaxis</div>
+                    <div class="link-card-desc">Recognition and emergency management</div>
+                    <div class="link-card-badge">MechanismDx</div>
+                </a>
+                <a href="../ReasonDx/html/ai-trainer-anaphylaxis-food.html" class="link-card">
+                    <div class="link-card-icon">📋</div>
+                    <div class="link-card-title">Food Anaphylaxis Case</div>
+                    <div class="link-card-desc">Apply management concepts clinically</div>
+                    <div class="link-card-badge">ReasonDx Case</div>
+                </a>
+            </div>
+        </section>
+    
+        <section class="section">
+            <h2>📚 Open Access Resources</h2>
+            <div class="links-grid">
+                <a href="https://www.foodallergy.org/" target="_blank" class="link-card">
+                    <div class="link-card-icon">🍽️</div>
+                    <div class="link-card-title">FARE - Food Allergy Research</div>
+                    <div class="link-card-desc">Comprehensive patient resources, action plans, label reading</div>
+                    <div class="link-card-badge" style="background: #1e3a5f; color: #60a5fa;">Open Access</div>
+                </a>
+                <a href="https://www.fda.gov/food/food-labeling-nutrition/food-allergies" target="_blank" class="link-card">
+                    <div class="link-card-icon">🏛️</div>
+                    <div class="link-card-title">FDA Food Allergen Labeling</div>
+                    <div class="link-card-desc">Official FALCPA requirements and guidance</div>
+                    <div class="link-card-badge" style="background: #1e3a5f; color: #60a5fa;">Open Access</div>
+                </a>
+                <a href="https://www.aaaai.org/tools-for-the-public/conditions-library/allergies/food-allergy" target="_blank" class="link-card">
+                    <div class="link-card-icon">🏥</div>
+                    <div class="link-card-title">AAAAI Food Allergy Resources</div>
+                    <div class="link-card-desc">Patient education materials and action plan templates</div>
+                    <div class="link-card-badge" style="background: #1e3a5f; color: #60a5fa;">Open Access</div>
+                </a>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="footer">
+        <p>MechanismDx | Part of the <a href="../index.html">Dx Learning Ecosystem</a></p>
+    </footer>
+    
+    <script>
+    const feedbackText = {
+        q1: {
+            correct: "Correct! Precautionary labels ('may contain,' 'made in facility with') are VOLUNTARY and not FDA-regulated, but they indicate real cross-contact risk. For patients with confirmed peanut allergy (especially severe), general guidance is to avoid these products. The risk varies by manufacturer and product.",
+            incorrect: "Precautionary labels indicate real cross-contact risk. While voluntary and unregulated, they should generally be heeded for patients with confirmed food allergies, especially those with history of severe reactions."
+        },
+        q2: {
+            correct: "Correct! Milk allergy has the highest resolution rate - approximately 80% of children outgrow it, most by age 6. Egg (~70%) and wheat (~65%) are also commonly outgrown. Peanut (~20%), tree nuts (~10%), and shellfish (rare) are much more likely to persist lifelong.",
+            incorrect: "Milk has the highest resolution rate at ~80%. Peanut (~20%), tree nuts (~10%), and shellfish are much more likely to persist."
+        },
+        q3: {
+            correct: "Correct! OIT provides DESENSITIZATION (raised threshold while taking maintenance doses) but is NOT a cure. The goal is protection from accidental exposures, not enabling free consumption. Patients should continue to avoid their allergen and always carry epinephrine. If maintenance dosing stops, protection is lost.",
+            incorrect: "OIT is NOT a cure - it provides desensitization (raised threshold) only while actively taking maintenance doses. Patients should still avoid the allergen and carry epinephrine."
+        }
+    };
+    
+    function checkAnswer(qId, element, isCorrect) {
+        const options = element.parentElement.querySelectorAll('.quiz-option');
+        options.forEach(opt => opt.style.pointerEvents = 'none');
+        element.classList.add(isCorrect ? 'correct' : 'incorrect');
+        if (!isCorrect) {
+            options.forEach(opt => {
+                if (opt.onclick.toString().includes('true')) opt.classList.add('correct');
+            });
+        }
+        const feedback = document.getElementById(`feedback-${qId}`);
+        feedback.className = `quiz-feedback show ${isCorrect ? 'correct' : 'incorrect'}`;
+        feedback.innerHTML = `<strong>${isCorrect ? '✓ Correct!' : '✗ Not quite.'}</strong> ${feedbackText[qId][isCorrect ? 'correct' : 'incorrect']}`;
+    }
+    </script>
+</body>
+</html>
