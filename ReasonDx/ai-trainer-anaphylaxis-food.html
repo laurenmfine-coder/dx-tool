@@ -1,559 +1,1337 @@
-                        <button class="btn btn-secondary" onclick="goToPhase('exam')">← Back</button>
-                        <button class="btn btn-primary" onclick="completePhase('ddx')" id="btn-complete-ddx" disabled>
-                            Continue to Predict Labs →
-                        </button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post-Anaphylaxis Food Allergy Workup | Clinical Reasoning Trainer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Inter', system-ui, sans-serif; 
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0; 
+            min-height: 100vh;
+        }
+        
+        /* Layout */
+        .app-container {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            min-height: 100vh;
+        }
+        .main-content { padding: 0; }
+        .knowledge-sidebar {
+            background: #0f172a;
+            border-left: 1px solid #334155;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        
+        @media (max-width: 1200px) {
+            .app-container { grid-template-columns: 1fr; }
+            .knowledge-sidebar { display: none; }
+            .kb-toggle { display: flex !important; }
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            padding: 24px;
+            border-bottom: 3px solid #f87171;
+        }
+        .header-inner { max-width: 900px; margin: 0 auto; }
+        .header-breadcrumb { font-size: 12px; color: rgba(255,255,255,0.7); margin-bottom: 8px; }
+        .header-breadcrumb a { color: rgba(255,255,255,0.9); text-decoration: none; }
+        .header h1 { font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 4px; display: flex; align-items: center; gap: 10px; }
+        .header-subtitle { font-size: 14px; color: rgba(255,255,255,0.85); }
+        .header-meta { display: flex; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
+        .header-badge { background: rgba(255,255,255,0.15); padding: 4px 12px; border-radius: 12px; font-size: 11px; color: #fff; }
+        
+        /* Progress Bar */
+        .progress-container {
+            background: #1e293b;
+            padding: 16px 24px;
+            border-bottom: 1px solid #334155;
+        }
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            position: relative;
+        }
+        .progress-step::after {
+            content: '';
+            position: absolute;
+            top: 14px;
+            left: 50%;
+            width: 100%;
+            height: 2px;
+            background: #334155;
+            z-index: 0;
+        }
+        .progress-step:last-child::after { display: none; }
+        .progress-step.completed::after { background: #22c55e; }
+        .progress-step.active::after { background: linear-gradient(90deg, #22c55e 0%, #334155 100%); }
+        .step-circle {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #334155;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: #94a3b8;
+            z-index: 1;
+            position: relative;
+        }
+        .progress-step.completed .step-circle { background: #22c55e; color: #fff; }
+        .progress-step.active .step-circle { background: #dc2626; color: #fff; box-shadow: 0 0 0 4px rgba(220,38,38,0.3); }
+        .step-label { font-size: 10px; color: #64748b; margin-top: 6px; text-align: center; }
+        .progress-step.completed .step-label { color: #22c55e; }
+        .progress-step.active .step-label { color: #f87171; }
+        
+        /* Main Panel */
+        .case-content { max-width: 900px; margin: 0 auto; padding: 24px; }
+        
+        .phase-panel {
+            background: #1e293b;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #334155;
+            margin-bottom: 24px;
+        }
+        .phase-header {
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #334155;
+        }
+        .phase-header.chief { background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); }
+        .phase-header.history { background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%); }
+        .phase-header.exam { background: linear-gradient(135deg, #059669 0%, #047857 100%); }
+        .phase-header.ddx { background: linear-gradient(135deg, #d97706 0%, #b45309 100%); }
+        .phase-header.predict { background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); }
+        .phase-header.results { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); }
+        .phase-title { font-size: 16px; font-weight: 600; color: #fff; display: flex; align-items: center; gap: 8px; }
+        .phase-badge { background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 10px; font-size: 11px; color: #fff; }
+        
+        .phase-body { padding: 24px; }
+        .phase-content { display: none; }
+        .phase-content.active { display: block; }
+        
+        /* Patient Card */
+        .patient-card {
+            background: linear-gradient(135deg, #1e3a5f 0%, #1e293b 100%);
+            border: 1px solid #3b82f6;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+        .patient-header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+        .patient-avatar {
+            width: 60px;
+            height: 60px;
+            background: #3b82f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+        .patient-info h3 { color: #fff; font-size: 18px; margin-bottom: 4px; }
+        .patient-info p { color: #94a3b8; font-size: 13px; }
+        .patient-vitals {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 12px;
+        }
+        .vital-item {
+            background: #0f172a;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .vital-label { font-size: 10px; color: #64748b; margin-bottom: 2px; }
+        .vital-value { font-size: 14px; color: #fff; font-weight: 600; }
+        .vital-value.abnormal { color: #f87171; }
+        
+        /* Question Cards */
+        .question-card {
+            background: #0f172a;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border: 1px solid #334155;
+        }
+        .question-text {
+            font-size: 15px;
+            color: #e2e8f0;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+        .question-text strong { color: #f87171; }
+        .options-list { display: flex; flex-direction: column; gap: 10px; }
+        .option-btn {
+            background: #1e293b;
+            border: 2px solid #334155;
+            border-radius: 10px;
+            padding: 14px 16px;
+            text-align: left;
+            color: #e2e8f0;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .option-btn:hover { border-color: #dc2626; background: #2d3748; }
+        .option-btn.selected { border-color: #dc2626; background: rgba(220,38,38,0.1); }
+        .option-btn.correct { border-color: #22c55e; background: rgba(34,197,94,0.1); }
+        .option-btn.incorrect { border-color: #ef4444; background: rgba(239,68,68,0.1); }
+        .option-btn:disabled { cursor: default; }
+        
+        .feedback-box {
+            margin-top: 16px;
+            padding: 16px;
+            border-radius: 10px;
+            font-size: 14px;
+            display: none;
+        }
+        .feedback-box.show { display: block; }
+        .feedback-box.correct { background: #065f46; color: #a7f3d0; border: 1px solid #22c55e; }
+        .feedback-box.incorrect { background: #7f1d1d; color: #fecaca; border: 1px solid #ef4444; }
+        .feedback-box h4 { margin-bottom: 8px; }
+        
+        /* Lab Prediction */
+        .lab-card {
+            background: #0f172a;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border: 1px solid #334155;
+        }
+        .lab-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+        .lab-name { font-size: 16px; font-weight: 600; color: #fff; }
+        .lab-context { font-size: 12px; color: #94a3b8; margin-top: 2px; }
+        .lab-normal { font-size: 11px; color: #64748b; background: #1e293b; padding: 4px 10px; border-radius: 6px; }
+        .prediction-options { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+        .pred-btn {
+            background: #1e293b;
+            border: 2px solid #334155;
+            border-radius: 8px;
+            padding: 10px 14px;
+            color: #e2e8f0;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .pred-btn:hover { border-color: #7c3aed; }
+        .pred-btn.selected { border-color: #7c3aed; background: rgba(124,58,237,0.2); }
+        .confidence-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .confidence-label { font-size: 12px; color: #94a3b8; }
+        .confidence-slider {
+            flex: 1;
+            -webkit-appearance: none;
+            height: 6px;
+            background: #334155;
+            border-radius: 3px;
+        }
+        .confidence-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: #7c3aed;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .confidence-value { font-size: 12px; color: #a78bfa; font-weight: 600; min-width: 40px; }
+        
+        /* Results */
+        .result-card {
+            background: #0f172a;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            border: 1px solid #334155;
+        }
+        .result-header {
+            padding: 14px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .result-header.match { background: rgba(34,197,94,0.1); border-bottom: 1px solid #22c55e; }
+        .result-header.partial { background: rgba(234,179,8,0.1); border-bottom: 1px solid #eab308; }
+        .result-header.miss { background: rgba(239,68,68,0.1); border-bottom: 1px solid #ef4444; }
+        .result-lab-name { font-weight: 600; color: #fff; }
+        .result-status { font-size: 12px; padding: 4px 10px; border-radius: 10px; }
+        .result-status.match { background: #065f46; color: #34d399; }
+        .result-status.partial { background: #78350f; color: #fbbf24; }
+        .result-status.miss { background: #7f1d1d; color: #f87171; }
+        .result-body { padding: 16px; }
+        .result-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+        .result-col { text-align: center; }
+        .result-col-label { font-size: 11px; color: #64748b; margin-bottom: 4px; }
+        .result-col-value { font-size: 16px; font-weight: 600; }
+        .result-col-value.predicted { color: #a78bfa; }
+        .result-col-value.actual { color: #34d399; }
+        .result-explanation { font-size: 13px; color: #94a3b8; line-height: 1.6; }
+        .result-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 12px;
+            color: #60a5fa;
+            font-size: 13px;
+            text-decoration: none;
+        }
+        .result-link:hover { text-decoration: underline; }
+        
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid #334155;
+        }
+        .btn {
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+            border: none;
+        }
+        .btn-secondary { background: #334155; color: #e2e8f0; }
+        .btn-secondary:hover { background: #475569; }
+        .btn-primary { background: #dc2626; color: #fff; }
+        .btn-primary:hover { background: #b91c1c; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        /* Knowledge Web Sidebar */
+        .kb-header {
+            padding: 16px;
+            background: linear-gradient(135deg, #4c1d95 0%, #2e1065 100%);
+            border-bottom: 1px solid #7c3aed;
+        }
+        .kb-title { font-size: 14px; font-weight: 600; color: #fff; display: flex; align-items: center; gap: 8px; }
+        .kb-subtitle { font-size: 11px; color: #c4b5fd; margin-top: 4px; }
+        
+        .kb-progress {
+            padding: 12px 16px;
+            background: #1e1033;
+            border-bottom: 1px solid #334155;
+        }
+        .kb-progress-bar {
+            height: 6px;
+            background: #334155;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .kb-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #22c55e, #10b981);
+            transition: width 0.3s;
+        }
+        .kb-progress-text { font-size: 11px; color: #94a3b8; margin-top: 6px; display: flex; justify-content: space-between; }
+        
+        .kb-concepts { padding: 12px; }
+        .kb-category {
+            margin-bottom: 16px;
+        }
+        .kb-category-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            padding: 0 4px;
+        }
+        .kb-node {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            background: #1e293b;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            cursor: pointer;
+            transition: all 0.15s;
+            border: 1px solid transparent;
+        }
+        .kb-node:hover { background: #2d3748; border-color: #475569; }
+        .kb-node.covered { border-color: #22c55e; }
+        .kb-node.active { border-color: #7c3aed; background: rgba(124,58,237,0.1); }
+        .kb-node-status {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            flex-shrink: 0;
+        }
+        .kb-node-status.covered { background: #065f46; color: #34d399; }
+        .kb-node-status.partial { background: #78350f; color: #fbbf24; }
+        .kb-node-status.uncovered { background: #334155; color: #64748b; }
+        .kb-node-status.hub { background: #4c1d95; color: #a78bfa; }
+        .kb-node-name { font-size: 13px; color: #e2e8f0; flex: 1; }
+        .kb-node-arrow { color: #64748b; font-size: 12px; }
+        
+        .kb-detail {
+            display: none;
+            padding: 16px;
+            background: #1e1033;
+            border-top: 1px solid #334155;
+        }
+        .kb-detail.show { display: block; }
+        .kb-detail-title { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 8px; }
+        .kb-detail-desc { font-size: 12px; color: #94a3b8; line-height: 1.6; margin-bottom: 12px; }
+        .kb-detail-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            background: #7c3aed;
+            color: #fff;
+            border-radius: 6px;
+            font-size: 12px;
+            text-decoration: none;
+        }
+        .kb-detail-link:hover { background: #6d28d9; }
+        
+        /* Mobile toggle */
+        .kb-toggle {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            background: #7c3aed;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 24px;
+            box-shadow: 0 4px 20px rgba(124,58,237,0.4);
+            cursor: pointer;
+            z-index: 100;
+        }
+        
+        /* Footer */
+        .case-footer {
+            text-align: center;
+            padding: 24px;
+            color: #64748b;
+            font-size: 12px;
+        }
+        .case-footer a { color: #f87171; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="main-content">
+            <header class="header">
+                <div class="header-inner">
+                    <div class="header-breadcrumb">
+                        <a href="../../index.html">Dx Ecosystem</a> → <a href="ai-clinical-reasoning-hub.html">A/I Trainer</a> → Food Anaphylaxis
+                    </div>
+                    <h1>🥜 Post-Anaphylaxis Food Allergy Workup</h1>
+                    <div class="header-subtitle">8-year-old male with peanut reaction at school</div>
+                    <div class="header-meta">
+                        <span class="header-badge">⏱️ ~25 min</span>
+                        <span class="header-badge">📊 5 Lab Predictions</span>
+                        <span class="header-badge">🔬 Component Testing</span>
+                        <span class="header-badge">🧠 10 Questions</span>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="progress-container">
+                <div class="progress-steps">
+                    <div class="progress-step active" data-phase="chief">
+                        <div class="step-circle">1</div>
+                        <div class="step-label">Chief Complaint</div>
+                    </div>
+                    <div class="progress-step" data-phase="history">
+                        <div class="step-circle">2</div>
+                        <div class="step-label">History</div>
+                    </div>
+                    <div class="progress-step" data-phase="exam">
+                        <div class="step-circle">3</div>
+                        <div class="step-label">Exam</div>
+                    </div>
+                    <div class="progress-step" data-phase="ddx">
+                        <div class="step-circle">4</div>
+                        <div class="step-label">Differential</div>
+                    </div>
+                    <div class="progress-step" data-phase="predict">
+                        <div class="step-circle">5</div>
+                        <div class="step-label">Predict Labs</div>
+                    </div>
+                    <div class="progress-step" data-phase="results">
+                        <div class="step-circle">6</div>
+                        <div class="step-label">Results</div>
                     </div>
                 </div>
             </div>
             
-            <!-- PHASE 5: Predict Labs -->
-            <div class="phase-content" id="phase-predict">
-                <div class="panel-header phase-predict">
-                    <div class="panel-title"><span>🔮</span> Predict the Lab Results</div>
-                    <div class="panel-badge">Step 5 of 6</div>
-                </div>
-                <div class="panel-body">
-                    <div class="prediction-intro">
-                        <h3>🧪 Food Allergy Testing</h3>
-                        <p>Based on Tyler's history of anaphylaxis to peanut-containing cookie, predict what you expect to see on his allergy workup. Understanding these patterns is critical for interpretation.</p>
-                    </div>
-                    
-                    <!-- Total IgE -->
-                    <div class="lab-prediction-card">
-                        <div class="lab-pred-header">
-                            <div>
-                                <div class="lab-name">Total IgE</div>
-                                <div class="lab-context">General marker of atopic tendency</div>
+            <main class="case-content">
+                <!-- PHASE 1: Chief Complaint -->
+                <div class="phase-content active" id="phase-chief">
+                    <div class="phase-panel">
+                        <div class="phase-header chief">
+                            <div class="phase-title"><span>📋</span> Chief Complaint</div>
+                            <div class="phase-badge">Step 1 of 6</div>
+                        </div>
+                        <div class="phase-body">
+                            <div class="patient-card">
+                                <div class="patient-header">
+                                    <div class="patient-avatar">👦</div>
+                                    <div class="patient-info">
+                                        <h3>Tyler M.</h3>
+                                        <p>8-year-old male • Referred from ED for allergy evaluation</p>
+                                    </div>
+                                </div>
+                                <div class="patient-vitals">
+                                    <div class="vital-item">
+                                        <div class="vital-label">Weight</div>
+                                        <div class="vital-value">28 kg</div>
+                                    </div>
+                                    <div class="vital-item">
+                                        <div class="vital-label">Height</div>
+                                        <div class="vital-value">130 cm</div>
+                                    </div>
+                                    <div class="vital-item">
+                                        <div class="vital-label">BP</div>
+                                        <div class="vital-value">100/65</div>
+                                    </div>
+                                    <div class="vital-item">
+                                        <div class="vital-label">HR</div>
+                                        <div class="vital-value">88</div>
+                                    </div>
+                                    <div class="vital-item">
+                                        <div class="vital-label">SpO2</div>
+                                        <div class="vital-value">99%</div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="lab-normal-range">Age-adjusted normal: <100 kU/L</div>
-                        </div>
-                        <div class="prediction-choices">
-                            <div class="pred-choice" onclick="selectPrediction(this, 'totalige', 'normal')">Normal (<100)</div>
-                            <div class="pred-choice" onclick="selectPrediction(this, 'totalige', 'elevated')">Elevated (100-500)</div>
-                            <div class="pred-choice" onclick="selectPrediction(this, 'totalige', 'high')">High (500-1000)</div>
-                            <div class="pred-choice" onclick="selectPrediction(this, 'totalige', 'veryhigh')">Very high (>1000)</div>
-                        </div>
-                        <div class="confidence-row">
-                            <div class="confidence-label">Confidence:</div>
-                            <input type="range" class="confidence-slider" id="conf-totalige" min="0" max="100" value="50" oninput="updateConfidence('totalige')">
-                            <div class="confidence-value"><span id="conf-totalige-val">50</span>%</div>
-                        </div>
-                    </div>
-                    
-                    <!-- Peanut sIgE -->
-                    <div class="lab-prediction-card">
-                        <div class="lab-pred-header">
-                            <div>
-                                <div class="lab-name">Peanut-Specific IgE (sIgE)</div>
-                                <div class="lab-context">Sensitization to whole peanut extract</div>
+                            
+                            <div class="question-card">
+                                <div class="question-text">
+                                    <strong>Referral note:</strong> "8 yo M s/p anaphylaxis at school 3 days ago. Ate cookie at lunch, developed diffuse hives, throat tightness, and vomiting within 10 minutes. School nurse administered EpiPen. Transported to ED, received additional epinephrine and steroids. Discharged with EpiPen prescription. Please evaluate for food allergy."
+                                </div>
+                                <div class="question-text">
+                                    What is your <strong>first priority</strong> in evaluating this patient?
+                                </div>
+                                <div class="options-list" id="q1-options">
+                                    <button class="option-btn" onclick="answerQuestion('q1', 0)">Order comprehensive food allergy panel (20+ foods)</button>
+                                    <button class="option-btn" onclick="answerQuestion('q1', 1)">Obtain detailed history of the reaction and food consumed</button>
+                                    <button class="option-btn" onclick="answerQuestion('q1', 2)">Schedule oral food challenge to confirm diagnosis</button>
+                                    <button class="option-btn" onclick="answerQuestion('q1', 3)">Start empiric elimination diet avoiding all nuts</button>
+                                </div>
+                                <div class="feedback-box" id="q1-feedback"></div>
                             </div>
-                            <div class="lab-normal-range">Negative: <0.35 kU/L</div>
-                        </div>
-                        <div class="prediction-choices">
-                            <div class="pred-choice" onclick="selectPrediction(this, 'peanut', 'negative')">Negative (<0.35)</div>
-                            <div class="pred-choice" onclick="selectPrediction(this, 'peanut', 'low')">Low positive (0.35-3.5)</div>
-                            <div class="pred-choice" onclick="selectPrediction(this, 'peanut', 'moderate')">Moderate (3.5-17.5)</div>
-                            <div class="pred-choice" onclick="selectPrediction(this, 'peanut', 'high')">High (17.5-100)</div>
-                            <div class="pred-choice" onclick="selectPrediction(this, 'peanut', 'veryhigh')">Very high (>100)</div>
-                        </div>
-                        <div class="confidence-row">
-                            <div class="confidence-label">Confidence:</div>
-                            <input type="range" class="confidence-slider" id="conf-peanut" min="0" max="100" value="50" oninput="updateConfidence('peanut')">
-                            <div class="confidence-value"><span id="conf-peanut-val">50</span>%</div>
-                        </div>
-                    </div>
-                    
-                    <!-- Ara h 2 -->
-                    <div class="lab-prediction-card">
-                        <div class="lab-pred-header">
-                            <div>
-                                <div class="lab-name">Ara h 2 (Peanut Component)</div>
-                                <div class="lab-context">2S albumin storage protein - marker of TRUE peanut allergy</div>
+                            
+                            <div class="nav-buttons">
+                                <div></div>
+                                <button class="btn btn-primary" onclick="goToPhase('history')" id="btn-to-history" disabled>Continue to History →</button>
                             </div>
-                            <div class="lab-normal-range">Negative: <0.35 kU/L</div>
                         </div>
-                        <div class="prediction-choices">
-                            <div class="pred-choice" onclick="selectPrediction(this, 'arah2', 'negative')">Negative (<0.35)</div>
-                            <div class="pred-choice" onclick="selectPrediction(this, 'arah2', 'low')">Low positive (0.35-1.0)</div>
-                            <div class="pred-choice" onclick="selectPrediction(this, 'arah2', 'moderate')">Moderate (1.0-10)</div>
-                            <div class="pred-choice" onclick="selectPrediction(this, 'arah2', 'high')">High (>10)</div>
-                        </div>
-                        <div class="confidence-row">
-                            <div class="confidence-label">Confidence:</div>
-                            <input type="range" class="confidence-slider" id="conf-arah2" min="0" max="100" value="50" oninput="updateConfidence('arah2')">
-                            <div class="confidence-value"><span id="conf-arah2-val">50</span>%</div>
-                        </div>
-                    </div>
-                    
-                    <!-- Ara h 8 -->
-                    <div class="lab-prediction-card">
-                        <div class="lab-pred-header">
-                            <div>
-                                <div class="lab-name">Ara h 8 (Peanut Component)</div>
-                                <div class="lab-context">PR-10 protein - cross-reacts with birch pollen</div>
-                            </div>
-                            <div class="lab-normal-range">Negative: <0.35 kU/L</div>
-                        </div>
-                        <div class="prediction-choices">
-                            <div class="pred-choice" onclick="selectPrediction(this, 'arah8', 'negative')">Negative (<0.35)</div>
-                            <div class="pred-choice" onclick="selectPrediction(this, 'arah8', 'positive')">Positive (≥0.35)</div>
-                        </div>
-                        <div class="confidence-row">
-                            <div class="confidence-label">Confidence:</div>
-                            <input type="range" class="confidence-slider" id="conf-arah8" min="0" max="100" value="50" oninput="updateConfidence('arah8')">
-                            <div class="confidence-value"><span id="conf-arah8-val">50</span>%</div>
-                        </div>
-                    </div>
-                    
-                    <!-- Tree Nut -->
-                    <div class="lab-prediction-card">
-                        <div class="lab-pred-header">
-                            <div>
-                                <div class="lab-name">Tree Nut Panel (Cashew, Almond, Walnut)</div>
-                                <div class="lab-context">Co-sensitization screening</div>
-                            </div>
-                            <div class="lab-normal-range">Negative: <0.35 kU/L each</div>
-                        </div>
-                        <div class="prediction-choices">
-                            <div class="pred-choice" onclick="selectPrediction(this, 'treenut', 'allneg')">All negative</div>
-                            <div class="pred-choice" onclick="selectPrediction(this, 'treenut', 'onepos')">1-2 positive (low levels)</div>
-                            <div class="pred-choice" onclick="selectPrediction(this, 'treenut', 'multipos')">Multiple positive</div>
-                        </div>
-                        <div class="confidence-row">
-                            <div class="confidence-label">Confidence:</div>
-                            <input type="range" class="confidence-slider" id="conf-treenut" min="0" max="100" value="50" oninput="updateConfidence('treenut')">
-                            <div class="confidence-value"><span id="conf-treenut-val">50</span>%</div>
-                        </div>
-                    </div>
-                    
-                    <div class="action-row">
-                        <button class="btn btn-secondary" onclick="goToPhase('ddx')">← Back</button>
-                        <button class="btn btn-success" onclick="submitPredictions()" id="btn-submit-pred" disabled>
-                            🔍 Reveal Results & Analysis
-                        </button>
                     </div>
                 </div>
-            </div>
+                
+                <!-- PHASE 2: History -->
+                <div class="phase-content" id="phase-history">
+                    <div class="phase-panel">
+                        <div class="phase-header history">
+                            <div class="phase-title"><span>📝</span> Detailed History</div>
+                            <div class="phase-badge">Step 2 of 6</div>
+                        </div>
+                        <div class="phase-body">
+                            <div class="question-card">
+                                <div class="question-text">
+                                    You gather more history from Tyler's mother:<br><br>
+                                    <em>"He ate a homemade cookie at his friend's birthday party during lunch. About 10 minutes later, he started itching all over and broke out in hives. Then he said his throat felt 'tight and scratchy' and he vomited twice. The school nurse gave him his EpiPen. He's never had a reaction like this before."</em><br><br>
+                                    <strong>What specific question is MOST important to ask next?</strong>
+                                </div>
+                                <div class="options-list" id="q2-options">
+                                    <button class="option-btn" onclick="answerQuestion('q2', 0)">Has he ever had eczema or asthma?</button>
+                                    <button class="option-btn" onclick="answerQuestion('q2', 1)">What were the exact ingredients in the cookie?</button>
+                                    <button class="option-btn" onclick="answerQuestion('q2', 2)">Does anyone in the family have food allergies?</button>
+                                    <button class="option-btn" onclick="answerQuestion('q2', 3)">Has he eaten peanuts or tree nuts before without problems?</button>
+                                </div>
+                                <div class="feedback-box" id="q2-feedback"></div>
+                            </div>
+                            
+                            <div class="question-card" id="q3-card" style="display:none;">
+                                <div class="question-text">
+                                    Mom confirms: <em>"The cookie had peanut butter in it. He's eaten peanut butter sandwiches many times before with no problems - that's why I was so surprised!"</em><br><br>
+                                    <strong>This history of prior tolerance is:</strong>
+                                </div>
+                                <div class="options-list" id="q3-options">
+                                    <button class="option-btn" onclick="answerQuestion('q3', 0)">Inconsistent with IgE-mediated food allergy - consider other diagnoses</button>
+                                    <button class="option-btn" onclick="answerQuestion('q3', 1)">Common in food allergy - sensitization can develop after prior tolerance</button>
+                                    <button class="option-btn" onclick="answerQuestion('q3', 2)">Evidence that this was not a true allergic reaction</button>
+                                    <button class="option-btn" onclick="answerQuestion('q3', 3)">Suggests he only reacts to homemade, not commercial peanut products</button>
+                                </div>
+                                <div class="feedback-box" id="q3-feedback"></div>
+                            </div>
+                            
+                            <div class="question-card" id="q4-card" style="display:none;">
+                                <div class="question-text">
+                                    Further history reveals Tyler has mild eczema and seasonal allergies (birch pollen). No asthma. No prior food reactions. Father has shellfish allergy.<br><br>
+                                    <strong>Which aspect of this history is MOST relevant for predicting his lab results?</strong>
+                                </div>
+                                <div class="options-list" id="q4-options">
+                                    <button class="option-btn" onclick="answerQuestion('q4', 0)">Father's shellfish allergy suggests genetic predisposition</button>
+                                    <button class="option-btn" onclick="answerQuestion('q4', 1)">Birch pollen allergy - may have cross-reactive IgE to Ara h 8</button>
+                                    <button class="option-btn" onclick="answerQuestion('q4', 2)">Mild eczema indicates high risk for multiple food allergies</button>
+                                    <button class="option-btn" onclick="answerQuestion('q4', 3)">Absence of asthma means lower risk of severe reactions</button>
+                                </div>
+                                <div class="feedback-box" id="q4-feedback"></div>
+                            </div>
+                            
+                            <div class="nav-buttons">
+                                <button class="btn btn-secondary" onclick="goToPhase('chief')">← Back</button>
+                                <button class="btn btn-primary" onclick="goToPhase('exam')" id="btn-to-exam" disabled>Continue to Exam →</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- PHASE 3: Physical Exam -->
+                <div class="phase-content" id="phase-exam">
+                    <div class="phase-panel">
+                        <div class="phase-header exam">
+                            <div class="phase-title"><span>🩺</span> Physical Examination</div>
+                            <div class="phase-badge">Step 3 of 6</div>
+                        </div>
+                        <div class="phase-body">
+                            <div class="question-card">
+                                <div class="question-text">
+                                    <strong>Physical Exam (3 days post-reaction):</strong><br><br>
+                                    • General: Well-appearing, playful<br>
+                                    • Skin: Dry patches in antecubital fossae (eczema), no urticaria<br>
+                                    • HEENT: Clear rhinorrhea, pale nasal turbinates, no angioedema<br>
+                                    • Lungs: Clear bilaterally, no wheezing<br>
+                                    • CV: Regular rhythm, no murmur<br>
+                                    • Abdomen: Soft, non-tender<br><br>
+                                    <strong>Which exam finding is MOST important for risk stratification?</strong>
+                                </div>
+                                <div class="options-list" id="q5-options">
+                                    <button class="option-btn" onclick="answerQuestion('q5', 0)">Clear lungs - indicates no current respiratory compromise</button>
+                                    <button class="option-btn" onclick="answerQuestion('q5', 1)">Antecubital eczema - atopic diathesis increases food allergy risk</button>
+                                    <button class="option-btn" onclick="answerQuestion('q5', 2)">Pale nasal turbinates - confirms allergic rhinitis</button>
+                                    <button class="option-btn" onclick="answerQuestion('q5', 3)">No current urticaria - reaction has fully resolved</button>
+                                </div>
+                                <div class="feedback-box" id="q5-feedback"></div>
+                            </div>
+                            
+                            <div class="nav-buttons">
+                                <button class="btn btn-secondary" onclick="goToPhase('history')">← Back</button>
+                                <button class="btn btn-primary" onclick="goToPhase('ddx')" id="btn-to-ddx" disabled>Continue to Differential →</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- PHASE 4: Differential -->
+                <div class="phase-content" id="phase-ddx">
+                    <div class="phase-panel">
+                        <div class="phase-header ddx">
+                            <div class="phase-title"><span>🔍</span> Differential Diagnosis</div>
+                            <div class="phase-badge">Step 4 of 6</div>
+                        </div>
+                        <div class="phase-body">
+                            <div class="question-card">
+                                <div class="question-text">
+                                    Based on the clinical presentation (rapid onset multisystem reaction after food ingestion, response to epinephrine), this meets criteria for <strong>anaphylaxis</strong>.<br><br>
+                                    <strong>Which diagnostic criterion for anaphylaxis does Tyler meet?</strong>
+                                </div>
+                                <div class="options-list" id="q6-options">
+                                    <button class="option-btn" onclick="answerQuestion('q6', 0)">Criterion 1: Skin involvement + respiratory OR hypotension</button>
+                                    <button class="option-btn" onclick="answerQuestion('q6', 1)">Criterion 2: Two or more systems after likely allergen (skin + GI + respiratory)</button>
+                                    <button class="option-btn" onclick="answerQuestion('q6', 2)">Criterion 3: Hypotension after known allergen exposure</button>
+                                    <button class="option-btn" onclick="answerQuestion('q6', 3)">Does not meet formal anaphylaxis criteria</button>
+                                </div>
+                                <div class="feedback-box" id="q6-feedback"></div>
+                            </div>
+                            
+                            <div class="question-card" id="q7-card" style="display:none;">
+                                <div class="question-text">
+                                    You suspect <strong>IgE-mediated peanut allergy</strong> as the most likely cause.<br><br>
+                                    <strong>What testing approach is MOST appropriate?</strong>
+                                </div>
+                                <div class="options-list" id="q7-options">
+                                    <button class="option-btn" onclick="answerQuestion('q7', 0)">Skin prick test to peanut only - most sensitive test</button>
+                                    <button class="option-btn" onclick="answerQuestion('q7', 1)">Serum specific IgE to peanut + peanut components (Ara h 2, Ara h 8)</button>
+                                    <button class="option-btn" onclick="answerQuestion('q7', 2)">Oral food challenge to confirm diagnosis</button>
+                                    <button class="option-btn" onclick="answerQuestion('q7', 3)">Total IgE level to assess atopic status</button>
+                                </div>
+                                <div class="feedback-box" id="q7-feedback"></div>
+                            </div>
+                            
+                            <div class="nav-buttons">
+                                <button class="btn btn-secondary" onclick="goToPhase('exam')">← Back</button>
+                                <button class="btn btn-primary" onclick="goToPhase('predict')" id="btn-to-predict" disabled>Continue to Predict Labs →</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- PHASE 5: Predict Labs -->
+                <div class="phase-content" id="phase-predict">
+                    <div class="phase-panel">
+                        <div class="phase-header predict">
+                            <div class="phase-title"><span>🔮</span> Predict Lab Results</div>
+                            <div class="phase-badge">Step 5 of 6</div>
+                        </div>
+                        <div class="phase-body">
+                            <p style="color: #94a3b8; margin-bottom: 24px;">Before seeing results, predict what you expect. This builds clinical intuition for interpreting allergy testing.</p>
+                            
+                            <!-- Lab 1: Peanut sIgE -->
+                            <div class="lab-card">
+                                <div class="lab-header">
+                                    <div>
+                                        <div class="lab-name">Peanut Specific IgE</div>
+                                        <div class="lab-context">Sensitization to whole peanut extract</div>
+                                    </div>
+                                    <div class="lab-normal">Negative: &lt;0.35 kU/L</div>
+                                </div>
+                                <div class="prediction-options" id="pred-peanut">
+                                    <button class="pred-btn" onclick="selectPrediction('peanut', 'neg')">Negative (&lt;0.35)</button>
+                                    <button class="pred-btn" onclick="selectPrediction('peanut', 'low')">Low (0.35-3.5)</button>
+                                    <button class="pred-btn" onclick="selectPrediction('peanut', 'mod')">Moderate (3.5-17.5)</button>
+                                    <button class="pred-btn" onclick="selectPrediction('peanut', 'high')">High (17.5-100)</button>
+                                    <button class="pred-btn" onclick="selectPrediction('peanut', 'vhigh')">Very High (&gt;100)</button>
+                                </div>
+                                <div class="confidence-row">
+                                    <span class="confidence-label">Confidence:</span>
+                                    <input type="range" class="confidence-slider" id="conf-peanut" min="0" max="100" value="50">
+                                    <span class="confidence-value" id="conf-peanut-val">50%</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Lab 2: Ara h 2 -->
+                            <div class="lab-card">
+                                <div class="lab-header">
+                                    <div>
+                                        <div class="lab-name">Ara h 2 (Component)</div>
+                                        <div class="lab-context">2S albumin storage protein - HIGH RISK marker</div>
+                                    </div>
+                                    <div class="lab-normal">Negative: &lt;0.35 kU/L</div>
+                                </div>
+                                <div class="prediction-options" id="pred-arah2">
+                                    <button class="pred-btn" onclick="selectPrediction('arah2', 'neg')">Negative (&lt;0.35)</button>
+                                    <button class="pred-btn" onclick="selectPrediction('arah2', 'low')">Low (0.35-1.0)</button>
+                                    <button class="pred-btn" onclick="selectPrediction('arah2', 'mod')">Moderate (1.0-10)</button>
+                                    <button class="pred-btn" onclick="selectPrediction('arah2', 'high')">High (&gt;10)</button>
+                                </div>
+                                <div class="confidence-row">
+                                    <span class="confidence-label">Confidence:</span>
+                                    <input type="range" class="confidence-slider" id="conf-arah2" min="0" max="100" value="50">
+                                    <span class="confidence-value" id="conf-arah2-val">50%</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Lab 3: Ara h 8 -->
+                            <div class="lab-card">
+                                <div class="lab-header">
+                                    <div>
+                                        <div class="lab-name">Ara h 8 (Component)</div>
+                                        <div class="lab-context">PR-10 protein - cross-reacts with birch pollen</div>
+                                    </div>
+                                    <div class="lab-normal">Negative: &lt;0.35 kU/L</div>
+                                </div>
+                                <div class="prediction-options" id="pred-arah8">
+                                    <button class="pred-btn" onclick="selectPrediction('arah8', 'neg')">Negative</button>
+                                    <button class="pred-btn" onclick="selectPrediction('arah8', 'pos')">Positive (≥0.35)</button>
+                                </div>
+                                <div class="confidence-row">
+                                    <span class="confidence-label">Confidence:</span>
+                                    <input type="range" class="confidence-slider" id="conf-arah8" min="0" max="100" value="50">
+                                    <span class="confidence-value" id="conf-arah8-val">50%</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Lab 4: Tree Nut Panel -->
+                            <div class="lab-card">
+                                <div class="lab-header">
+                                    <div>
+                                        <div class="lab-name">Tree Nut Panel (cashew, walnut, almond)</div>
+                                        <div class="lab-context">Co-sensitization assessment</div>
+                                    </div>
+                                    <div class="lab-normal">Negative: &lt;0.35 kU/L each</div>
+                                </div>
+                                <div class="prediction-options" id="pred-treenut">
+                                    <button class="pred-btn" onclick="selectPrediction('treenut', 'allneg')">All negative</button>
+                                    <button class="pred-btn" onclick="selectPrediction('treenut', 'somepos')">Some positive</button>
+                                    <button class="pred-btn" onclick="selectPrediction('treenut', 'allpos')">All positive</button>
+                                </div>
+                                <div class="confidence-row">
+                                    <span class="confidence-label">Confidence:</span>
+                                    <input type="range" class="confidence-slider" id="conf-treenut" min="0" max="100" value="50">
+                                    <span class="confidence-value" id="conf-treenut-val">50%</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Lab 5: Total IgE -->
+                            <div class="lab-card">
+                                <div class="lab-header">
+                                    <div>
+                                        <div class="lab-name">Total IgE</div>
+                                        <div class="lab-context">General atopic marker</div>
+                                    </div>
+                                    <div class="lab-normal">Age-adjusted: &lt;100 kU/L</div>
+                                </div>
+                                <div class="prediction-options" id="pred-totalige">
+                                    <button class="pred-btn" onclick="selectPrediction('totalige', 'normal')">Normal (&lt;100)</button>
+                                    <button class="pred-btn" onclick="selectPrediction('totalige', 'elevated')">Elevated (100-500)</button>
+                                    <button class="pred-btn" onclick="selectPrediction('totalige', 'high')">High (500-1000)</button>
+                                    <button class="pred-btn" onclick="selectPrediction('totalige', 'vhigh')">Very High (&gt;1000)</button>
+                                </div>
+                                <div class="confidence-row">
+                                    <span class="confidence-label">Confidence:</span>
+                                    <input type="range" class="confidence-slider" id="conf-totalige" min="0" max="100" value="50">
+                                    <span class="confidence-value" id="conf-totalige-val">50%</span>
+                                </div>
+                            </div>
+                            
+                            <div class="nav-buttons">
+                                <button class="btn btn-secondary" onclick="goToPhase('ddx')">← Back</button>
+                                <button class="btn btn-primary" onclick="revealResults()" id="btn-reveal">Reveal Results →</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- PHASE 6: Results -->
+                <div class="phase-content" id="phase-results">
+                    <div class="phase-panel">
+                        <div class="phase-header results">
+                            <div class="phase-title"><span>📊</span> Lab Results & Learning</div>
+                            <div class="phase-badge">Step 6 of 6</div>
+                        </div>
+                        <div class="phase-body" id="results-container">
+                            <!-- Results populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </main>
             
-            <!-- PHASE 6: Results -->
-            <div class="phase-content" id="phase-results">
-                <div class="panel-header phase-results">
-                    <div class="panel-title"><span>📊</span> Results & Learning</div>
-                    <div class="panel-badge">Step 6 of 6</div>
-                </div>
-                <div class="panel-body">
-                    <div class="results-summary">
-                        <div class="score-circle">
-                            <div class="score-number" id="final-score">--</div>
-                            <div class="score-label">Lab Accuracy</div>
-                        </div>
-                        <div class="results-title" id="results-title">Calculating...</div>
-                        <div class="results-subtitle" id="results-subtitle"></div>
-                    </div>
-                    
-                    <h3 style="color: #fff; margin-bottom: 16px;">📋 Lab Results with Explanations</h3>
-                    <div id="results-container"></div>
-                    
-                    <!-- Additional Questions -->
-                    <div class="question-card" style="margin-top: 24px;">
-                        <div class="question-number">QUESTION 7 OF 10</div>
-                        <div class="question-prompt">
-                            Tyler's Ara h 2 is strongly positive (15.8 kU/L) but Ara h 8 is negative. What does this pattern indicate?
-                        </div>
-                        <div class="question-options">
-                            <div class="option-btn" onclick="selectOption(this, 'results-q1', 'true')">True peanut allergy with high risk of systemic reactions</div>
-                            <div class="option-btn" onclick="selectOption(this, 'results-q1', 'oas')">Likely oral allergy syndrome only, low systemic risk</div>
-                            <div class="option-btn" onclick="selectOption(this, 'results-q1', 'unclear')">Cannot determine risk without oral challenge</div>
-                            <div class="option-btn" onclick="selectOption(this, 'results-q1', 'birch')">Cross-reactivity with birch pollen</div>
-                        </div>
-                        <div class="feedback-box" id="feedback-results-q1"></div>
-                    </div>
-                    
-                    <div class="question-card">
-                        <div class="question-number">QUESTION 8 OF 10</div>
-                        <div class="question-prompt">
-                            Tyler's cashew sIgE came back at 8.5 kU/L (positive) though he's never eaten cashews. What should you recommend?
-                        </div>
-                        <div class="question-options">
-                            <div class="option-btn" onclick="selectOption(this, 'results-q2', 'avoid')">Strict cashew avoidance - sensitization = allergy</div>
-                            <div class="option-btn" onclick="selectOption(this, 'results-q2', 'challenge')">Supervised oral food challenge to determine clinical reactivity</div>
-                            <div class="option-btn" onclick="selectOption(this, 'results-q2', 'eat')">Safe to eat cashews since no prior reaction</div>
-                            <div class="option-btn" onclick="selectOption(this, 'results-q2', 'retest')">Repeat testing in 6 months before making any decisions</div>
-                        </div>
-                        <div class="feedback-box" id="feedback-results-q2"></div>
-                    </div>
-                    
-                    <div class="question-card">
-                        <div class="question-number">QUESTION 9 OF 10</div>
-                        <div class="question-prompt">
-                            What is the most important management step for Tyler TODAY before he leaves the clinic?
-                        </div>
-                        <div class="question-options">
-                            <div class="option-btn" onclick="selectOption(this, 'results-q3', 'ofc')">Schedule oral food challenge</div>
-                            <div class="option-btn" onclick="selectOption(this, 'results-q3', 'epi')">Ensure EpiPen prescription and provide anaphylaxis action plan</div>
-                            <div class="option-btn" onclick="selectOption(this, 'results-q3', 'oit')">Start peanut oral immunotherapy</div>
-                            <div class="option-btn" onclick="selectOption(this, 'results-q3', 'skin')">Schedule skin prick testing</div>
-                        </div>
-                        <div class="feedback-box" id="feedback-results-q3"></div>
-                    </div>
-                    
-                    <div class="question-card">
-                        <div class="question-number">QUESTION 10 OF 10</div>
-                        <div class="question-prompt">
-                            Mom asks about peanut oral immunotherapy (OIT). Tyler would potentially be a candidate because:
-                        </div>
-                        <div class="question-options">
-                            <div class="option-btn" onclick="selectOption(this, 'results-q4', 'age')">Age ≥4 years with confirmed IgE-mediated peanut allergy</div>
-                            <div class="option-btn" onclick="selectOption(this, 'results-q4', 'anaphylaxis')">History of anaphylaxis makes him higher priority</div>
-                            <div class="option-btn" onclick="selectOption(this, 'results-q4', 'low')">Low Ara h 2 levels indicate better OIT response</div>
-                            <div class="option-btn" onclick="selectOption(this, 'results-q4', 'no')">OIT is not recommended after anaphylaxis</div>
-                        </div>
-                        <div class="feedback-box" id="feedback-results-q4"></div>
-                    </div>
-                    
-                    <!-- Learn More -->
-                    <div class="learn-more-section">
-                        <div class="learn-more-header">
-                            <span>📚</span> Continue Learning
-                        </div>
-                        <div class="learn-more-grid">
-                            <a href="../../mechanism/type1-hypersensitivity.html" class="learn-link">
-                                <div class="learn-link-icon mechanism">🧬</div>
-                                <div class="learn-link-info">
-                                    <div class="learn-link-title">Type I Hypersensitivity Mechanism</div>
-                                    <div class="learn-link-desc">IgE, mast cells, and the allergic cascade</div>
-                                    <div class="learn-link-badge">MechanismDx</div>
-                                </div>
-                            </a>
-                            
-                            <a href="../../CoachDx/case-library.html?specialty=allergy" class="learn-link">
-                                <div class="learn-link-icon coach">🎓</div>
-                                <div class="learn-link-info">
-                                    <div class="learn-link-title">Anaphylaxis Management Cases</div>
-                                    <div class="learn-link-desc">Practice epinephrine dosing and action plans</div>
-                                    <div class="learn-link-badge">CoachDx</div>
-                                </div>
-                            </a>
-                            
-                            <a href="https://www.aaaai.org/tools-for-the-public/conditions-library/allergies/food-allergy" target="_blank" class="learn-link">
-                                <div class="learn-link-icon external">🌐</div>
-                                <div class="learn-link-info">
-                                    <div class="learn-link-title">AAAAI Food Allergy Resources</div>
-                                    <div class="learn-link-desc">Patient education and practice parameters</div>
-                                    <div class="learn-link-badge">External • Open Access</div>
-                                </div>
-                            </a>
-                            
-                            <a href="ai-trainer-penicillin-allergy.html" class="learn-link">
-                                <div class="learn-link-icon mechanism">💊</div>
-                                <div class="learn-link-info">
-                                    <div class="learn-link-title">Next Case: Drug Allergy Evaluation</div>
-                                    <div class="learn-link-desc">Penicillin allergy delabeling</div>
-                                    <div class="learn-link-badge">A/I Trainer</div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="action-row">
-                        <button class="btn btn-secondary" onclick="location.href='ai-clinical-reasoning-hub.html'">← Case Library</button>
-                        <button class="btn btn-primary" onclick="location.href='ai-trainer-anaphylaxis-venom.html'">Next: Venom Anaphylaxis →</button>
-                    </div>
-                </div>
-            </div>
-            
+            <footer class="case-footer">
+                <p>Dx Learning Ecosystem • <a href="../../mechanism/allergy-immunology.html">MechanismDx</a> • <a href="ai-clinical-reasoning-hub.html">More Cases</a></p>
+                <p style="margin-top: 8px;">Content based on AAAAI/ACAAI Practice Parameters. For educational use only.</p>
+            </footer>
         </div>
-    </main>
+        
+        <!-- Knowledge Web Sidebar -->
+        <aside class="knowledge-sidebar">
+            <div class="kb-header">
+                <div class="kb-title">🕸️ Knowledge Web</div>
+                <div class="kb-subtitle">Track concepts as you learn</div>
+            </div>
+            
+            <div class="kb-progress">
+                <div class="kb-progress-bar">
+                    <div class="kb-progress-fill" id="kb-fill" style="width: 0%"></div>
+                </div>
+                <div class="kb-progress-text">
+                    <span id="kb-count">0/12 concepts</span>
+                    <span id="kb-percent">0%</span>
+                </div>
+            </div>
+            
+            <div class="kb-concepts">
+                <div class="kb-category">
+                    <div class="kb-category-title">History</div>
+                    <div class="kb-node" data-concept="timing" onclick="showConceptDetail('timing')">
+                        <div class="kb-node-status uncovered">○</div>
+                        <div class="kb-node-name">Reaction Timing</div>
+                        <div class="kb-node-arrow">→</div>
+                    </div>
+                    <div class="kb-node" data-concept="foods" onclick="showConceptDetail('foods')">
+                        <div class="kb-node-status uncovered">○</div>
+                        <div class="kb-node-name">Foods Consumed</div>
+                        <div class="kb-node-arrow">→</div>
+                    </div>
+                    <div class="kb-node" data-concept="tolerance" onclick="showConceptDetail('tolerance')">
+                        <div class="kb-node-status uncovered">○</div>
+                        <div class="kb-node-name">Prior Tolerance</div>
+                        <div class="kb-node-arrow">→</div>
+                    </div>
+                </div>
+                
+                <div class="kb-category">
+                    <div class="kb-category-title">Mechanism</div>
+                    <div class="kb-node" data-concept="ige" onclick="showConceptDetail('ige')">
+                        <div class="kb-node-status hub">★</div>
+                        <div class="kb-node-name">IgE-Mediated</div>
+                        <div class="kb-node-arrow">→</div>
+                    </div>
+                    <div class="kb-node" data-concept="mastcell" onclick="showConceptDetail('mastcell')">
+                        <div class="kb-node-status uncovered">○</div>
+                        <div class="kb-node-name">Mast Cell Activation</div>
+                        <div class="kb-node-arrow">→</div>
+                    </div>
+                </div>
+                
+                <div class="kb-category">
+                    <div class="kb-category-title">Testing</div>
+                    <div class="kb-node" data-concept="sige" onclick="showConceptDetail('sige')">
+                        <div class="kb-node-status uncovered">○</div>
+                        <div class="kb-node-name">Specific IgE</div>
+                        <div class="kb-node-arrow">→</div>
+                    </div>
+                    <div class="kb-node" data-concept="component" onclick="showConceptDetail('component')">
+                        <div class="kb-node-status uncovered">○</div>
+                        <div class="kb-node-name">Component Testing</div>
+                        <div class="kb-node-arrow">→</div>
+                    </div>
+                    <div class="kb-node" data-concept="arah2" onclick="showConceptDetail('arah2')">
+                        <div class="kb-node-status uncovered">○</div>
+                        <div class="kb-node-name">Ara h 2 (High Risk)</div>
+                        <div class="kb-node-arrow">→</div>
+                    </div>
+                    <div class="kb-node" data-concept="arah8" onclick="showConceptDetail('arah8')">
+                        <div class="kb-node-status uncovered">○</div>
+                        <div class="kb-node-name">Ara h 8 (Cross-Reactive)</div>
+                        <div class="kb-node-arrow">→</div>
+                    </div>
+                </div>
+                
+                <div class="kb-category">
+                    <div class="kb-category-title">Management</div>
+                    <div class="kb-node" data-concept="avoidance" onclick="showConceptDetail('avoidance')">
+                        <div class="kb-node-status uncovered">○</div>
+                        <div class="kb-node-name">Allergen Avoidance</div>
+                        <div class="kb-node-arrow">→</div>
+                    </div>
+                    <div class="kb-node" data-concept="epi" onclick="showConceptDetail('epi')">
+                        <div class="kb-node-status uncovered">○</div>
+                        <div class="kb-node-name">Epinephrine</div>
+                        <div class="kb-node-arrow">→</div>
+                    </div>
+                    <div class="kb-node" data-concept="oit" onclick="showConceptDetail('oit')">
+                        <div class="kb-node-status uncovered">○</div>
+                        <div class="kb-node-name">OIT Candidacy</div>
+                        <div class="kb-node-arrow">→</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="kb-detail" id="kb-detail">
+                <div class="kb-detail-title" id="kb-detail-title"></div>
+                <div class="kb-detail-desc" id="kb-detail-desc"></div>
+                <a href="#" class="kb-detail-link" id="kb-detail-link" target="_blank">
+                    <span>📚</span> Learn More in MechanismDx
+                </a>
+            </div>
+        </aside>
+    </div>
+    
+    <div class="kb-toggle" onclick="toggleKnowledgeSidebar()">🕸️</div>
     
     <script>
     // State
     const state = {
-        currentPhase: 'cc',
-        completedPhases: [],
-        answers: {},
+        currentPhase: 'chief',
+        questionsAnswered: {},
         predictions: {},
-        confidences: {},
-        questionsAnswered: 0,
-        score: 0
+        confidences: { peanut: 50, arah2: 50, arah8: 50, treenut: 50, totalige: 50 },
+        conceptsCovered: new Set()
     };
     
-    // Correct answers
-    const correctAnswers = {
-        'cc-q1': 'multi',
-        'cc-q2': 'tryptase',
-        'hpi-q1': 'timing',
-        'exam-q1': 'skin',
-        'ddx-q1': 'component',
-        'ddx-q2': 'yes',
-        'results-q1': 'true',
-        'results-q2': 'challenge',
-        'results-q3': 'epi',
-        'results-q4': 'age'
-    };
-    
-    const correctPredictions = {
-        totalige: 'elevated',
-        peanut: 'high',
-        arah2: 'high',
-        arah8: 'negative',
-        treenut: 'onepos'
-    };
-    
-    // Feedback
-    const feedback = {
-        'cc-q1': {
-            multi: { correct: true, text: 'Correct! Anaphylaxis criteria require involvement of 2+ organ systems after likely allergen exposure. Skin (hives) + GI (vomiting) meets criteria. Single-system involvement (hives alone) would not typically warrant epinephrine unless severe or rapidly progressive.' },
-            hives: { correct: false, text: 'Hives alone, while concerning, typically does not meet anaphylaxis criteria unless rapidly progressive or associated with other symptoms. Anaphylaxis requires multi-system involvement.' },
-            swelling: { correct: false, text: 'Facial/lip swelling is concerning but represents one organ system (skin/mucosa). Combined with other systems (GI symptoms), it strengthens the anaphylaxis diagnosis.' },
-            gi: { correct: false, text: 'Vomiting alone after eating has many causes. Combined with skin symptoms after allergen exposure, it meets anaphylaxis criteria.' }
+    // Concept data with links to MechanismDx
+    const conceptData = {
+        timing: {
+            title: "Reaction Timing",
+            desc: "IgE-mediated reactions typically occur within minutes to 2 hours of exposure. Rapid onset (< 30 min) with multisystem involvement strongly suggests anaphylaxis.",
+            link: "../../mechanism/anaphylaxis-module.html",
+            linkText: "Anaphylaxis Timeline"
         },
-        'cc-q2': {
-            tryptase: { correct: true, text: 'Correct! Acute tryptase peaks 1-2 hours after anaphylaxis onset and normalizes within 24 hours. One week later, it would have returned to baseline. You would need to draw baseline tryptase now for comparison with any future acute measurements.' },
-            ige: { correct: false, text: 'Specific IgE levels reflect sensitization and remain elevated for extended periods. Testing 1 week later is appropriate for trigger identification.' },
-            cbc: { correct: false, text: 'CBC was never specifically useful for confirming anaphylaxis. Tryptase is the biomarker that would have been useful acutely but is now too late.' },
-            total: { correct: false, text: 'Total IgE reflects overall atopic tendency and is relatively stable. It would still be measurable and informative now.' }
+        foods: {
+            title: "Foods Consumed",
+            desc: "Detailed food history is critical. Ask about ALL ingredients, preparation method, and any hidden allergens. Peanut is a common cause of fatal food anaphylaxis.",
+            link: "../../mechanism/food-allergy-management.html",
+            linkText: "Food Allergy Management"
         },
-        'hpi-q1': {
-            timing: { correct: true, text: 'Correct! Rapid onset (minutes to 2 hours, typically within 30 min for food) is a hallmark of IgE-mediated reactions. This distinguishes it from non-IgE mediated food reactions (like FPIES) which have delayed onset.' },
-            hives: { correct: false, text: 'Hives can occur in non-IgE reactions and viral illnesses. While suggestive, timing is more specific for IgE-mediated mechanism.' },
-            vomit: { correct: false, text: 'Vomiting can occur with many types of adverse food reactions. The rapid timing after ingestion is more specific for IgE-mediated reactions.' },
-            epi: { correct: false, text: 'Response to epinephrine confirms it was a mast cell-mediated reaction but doesn\'t specifically confirm IgE mechanism vs other causes of mast cell activation.' }
+        tolerance: {
+            title: "Prior Tolerance",
+            desc: "Prior tolerance does NOT rule out food allergy. Sensitization can develop over time, and patients may react on subsequent exposures after tolerating the food previously.",
+            link: "../../mechanism/type1-hypersensitivity.html",
+            linkText: "Type I Hypersensitivity"
         },
-        'exam-q1': {
-            skin: { correct: true, text: 'Correct! The "dual allergen exposure hypothesis" suggests that allergen exposure through inflamed/broken skin (eczema) promotes sensitization, while early oral exposure promotes tolerance. This explains why early peanut introduction reduces allergy risk in high-risk infants.' },
-            immune: { correct: false, text: 'Atopic individuals don\'t have "weaker" immune systems - they have dysregulated Th2-skewed responses. The skin barrier dysfunction is the key mechanism for food sensitization.' },
-            rhinitis: { correct: false, text: 'Allergic rhinitis doesn\'t directly affect gut permeability. The skin barrier dysfunction from eczema is the primary pathway for cutaneous sensitization.' },
-            none: { correct: false, text: 'There is strong evidence connecting eczema and food allergy risk through skin barrier dysfunction and transcutaneous sensitization.' }
+        ige: {
+            title: "IgE-Mediated Mechanism",
+            desc: "Allergen cross-links IgE on mast cells → degranulation → release of histamine, leukotrienes, and other mediators causing multisystem symptoms.",
+            link: "../../mechanism/anaphylaxis-module.html",
+            linkText: "Anaphylaxis Pathophysiology"
         },
-        'ddx-q1': {
-            component: { correct: true, text: 'Correct! Component-resolved diagnostics (especially Ara h 2) significantly improves specificity. Ara h 2 positivity has >95% PPV for clinical peanut allergy, while whole peanut extract can be positive from cross-reactive proteins (Ara h 8) without true clinical allergy.' },
-            skin: { correct: false, text: 'Skin prick testing is useful but has similar specificity limitations to whole extract sIgE. Component testing adds significant diagnostic value.' },
-            serum: { correct: false, text: 'Serum sIgE to whole peanut extract can be positive due to cross-reactive proteins. Adding component testing (Ara h 2) dramatically improves specificity.' },
-            challenge: { correct: false, text: 'After documented anaphylaxis with clear temporal relationship to peanut, an immediate oral challenge is unnecessary and potentially dangerous. Testing first is appropriate.' }
+        mastcell: {
+            title: "Mast Cell Activation",
+            desc: "Mast cells release preformed (histamine, tryptase) and newly synthesized (leukotrienes, PGD2) mediators. Tryptase peaks 1-2 hours after reaction.",
+            link: "../../mechanism/mast-cell-module.html",
+            linkText: "Mast Cell Biology"
         },
-        'ddx-q2': {
-            yes: { correct: true, text: 'Correct! About 30-40% of peanut-allergic patients have tree nut co-sensitization. Testing commonly cross-reactive tree nuts (cashew, pistachio, walnut) helps guide dietary counseling. However, sensitization does not equal allergy - positive tests may require supervised challenges to determine clinical relevance.' },
-            no: { correct: false, text: 'Given the high rate of co-sensitization (~30-40%), testing for tree nuts in peanut-allergic patients is recommended to guide avoidance counseling.' },
-            wait: { correct: false, text: 'Waiting for a reaction to occur puts the child at risk. Proactive testing allows informed decisions about supervised challenges vs avoidance.' },
-            panel: { correct: false, text: 'Large panels lead to false positives and unnecessary dietary restrictions. Targeted testing for commonly cross-reactive foods is more appropriate.' }
+        sige: {
+            title: "Specific IgE Testing",
+            desc: "Measures circulating IgE antibodies to specific allergens. Positive result = sensitization, but does NOT confirm clinical allergy. Must correlate with history.",
+            link: "../../mechanism/allergy-testing-module.html",
+            linkText: "Allergy Testing Guide"
         },
-        'results-q1': {
-            true: { correct: true, text: 'Correct! Ara h 2 is a storage protein that is highly specific for true peanut allergy with systemic reaction risk. Negative Ara h 8 (PR-10 protein that cross-reacts with birch) confirms this is NOT pollen-related cross-reactivity. This pattern indicates high risk for systemic reactions.' },
-            oas: { correct: false, text: 'OAS would show Ara h 8 positive (PR-10 cross-reactivity) with negative or low Ara h 2. Tyler\'s pattern is the opposite - indicating true peanut allergy.' },
-            unclear: { correct: false, text: 'Strongly positive Ara h 2 has >95% positive predictive value for clinical peanut allergy. Oral challenge is not needed to confirm diagnosis after anaphylaxis + high Ara h 2.' },
-            birch: { correct: false, text: 'Birch cross-reactivity would show positive Ara h 8 (PR-10 protein). Tyler\'s Ara h 8 is negative.' }
-        },
-        'results-q2': {
-            challenge: { correct: true, text: 'Correct! Sensitization (positive sIgE) does not equal clinical allergy. Since Tyler has never eaten cashews, we don\'t know if he would react. A supervised oral food challenge is the gold standard to determine clinical reactivity and avoid unnecessary dietary restriction.' },
-            avoid: { correct: false, text: 'Positive IgE indicates sensitization, not necessarily clinical allergy. Up to 50% of sensitized individuals may tolerate the food. Unnecessary avoidance impacts quality of life and nutrition.' },
-            eat: { correct: false, text: 'While sensitization doesn\'t guarantee clinical allergy, introducing a potentially allergenic food at home after positive testing would be unsafe. Supervised challenge is needed.' },
-            retest: { correct: false, text: 'Repeat testing is unlikely to change management. The decision point is whether he clinically reacts, which requires supervised oral challenge.' }
-        },
-        'results-q3': {
-            epi: { correct: true, text: 'Correct! Every patient with food allergy + anaphylaxis history must leave with: (1) EpiPen prescription (weight-appropriate: 0.15mg for <25kg, 0.3mg for ≥25kg), (2) Written anaphylaxis action plan, (3) Education on allergen avoidance, (4) Training on EpiPen use. This is non-negotiable.' },
-            ofc: { correct: false, text: 'After confirmed anaphylaxis with high Ara h 2, oral food challenge is not needed to confirm the diagnosis. EpiPen and action plan are the immediate priorities.' },
-            oit: { correct: false, text: 'OIT is a consideration for future management but requires additional counseling, shared decision-making, and isn\'t started at the initial evaluation visit.' },
-            skin: { correct: false, text: 'Additional skin testing is not the priority when you have clear history + confirmatory serum IgE with component testing. Safety planning comes first.' }
-        },
-        'results-q4': {
-            age: { correct: true, text: 'Correct! FDA-approved peanut OIT (Palforzia) is indicated for patients aged 4-17 with confirmed IgE-mediated peanut allergy. Tyler at age 8 with confirmed peanut allergy meets basic eligibility criteria. History of anaphylaxis is not a contraindication - in fact, these patients may benefit most from desensitization.' },
-            anaphylaxis: { correct: false, text: 'Anaphylaxis history is not a contraindication to OIT, but it doesn\'t specifically make someone "higher priority" either. Age and confirmed IgE-mediated allergy are the primary criteria.' },
-            low: { correct: false, text: 'Ara h 2 levels don\'t predict OIT response. In fact, very high levels don\'t preclude treatment.' },
-            no: { correct: false, text: 'OIT is specifically for patients with IgE-mediated peanut allergy, which includes those with anaphylaxis history. It\'s not contraindicated.' }
-        }
-    };
-    
-    // Lab explanations
-    const labExplanations = {
-        totalige: {
-            actual: '287 kU/L',
-            correct: 'elevated',
-            labels: { normal: 'Normal (<100)', elevated: 'Elevated (100-500)', high: 'High (500-1000)', veryhigh: 'Very high (>1000)' },
-            explanation: 'Elevated total IgE is expected in this atopic child with eczema, allergic rhinitis, and food allergy. It reflects his overall atopic tendency but does NOT specifically diagnose any particular allergy. Very high levels (>1000) would raise concern for conditions like ABPA or hyper-IgE syndrome.'
-        },
-        peanut: {
-            actual: '45.2 kU/L (Class 4)',
-            correct: 'high',
-            labels: { negative: 'Negative (<0.35)', low: 'Low (0.35-3.5)', moderate: 'Moderate (3.5-17.5)', high: 'High (17.5-100)', veryhigh: 'Very high (>100)' },
-            explanation: 'High peanut-specific IgE confirms sensitization. However, whole peanut extract includes multiple proteins - some clinically relevant (storage proteins) and some cross-reactive (PR-10). Component testing is needed to determine the clinical significance and reaction risk.'
+        component: {
+            title: "Component Testing",
+            desc: "Tests for IgE to specific allergenic proteins rather than whole extracts. Improves diagnostic accuracy by distinguishing true allergy from cross-reactivity.",
+            link: "../../mechanism/allergy-testing-module.html",
+            linkText: "Component Diagnostics"
         },
         arah2: {
-            actual: '15.8 kU/L',
-            correct: 'high',
-            labels: { negative: 'Negative (<0.35)', low: 'Low (0.35-1.0)', moderate: 'Moderate (1.0-10)', high: 'High (>10)' },
-            explanation: 'HIGH Ara h 2 is the most important finding! Ara h 2 is a storage protein (2S albumin) with >95% positive predictive value for clinical peanut allergy. Values >10 kU/L indicate very high probability of systemic reactions. This confirms Tyler has TRUE peanut allergy with significant reaction risk.'
+            title: "Ara h 2 (Storage Protein)",
+            desc: "Best predictor of clinical peanut allergy. Heat/digestion stable. Ara h 2 ≥0.35 kU/L has >90% specificity for clinical reactivity.",
+            link: "../../mechanism/allergy-testing-module.html#components",
+            linkText: "Peanut Components"
         },
         arah8: {
-            actual: '<0.10 kU/L (Negative)',
-            correct: 'negative',
-            labels: { negative: 'Negative (<0.35)', positive: 'Positive (≥0.35)' },
-            explanation: 'Negative Ara h 8 is reassuring context. Ara h 8 is a PR-10 protein that cross-reacts with birch pollen. If Ara h 8 were positive with negative Ara h 2, it would suggest pollen cross-reactivity (oral allergy syndrome) rather than true peanut allergy. Tyler\'s pattern confirms true peanut allergy.'
+            title: "Ara h 8 (PR-10 Protein)",
+            desc: "Homolog of Bet v 1 (birch pollen). Heat/digestion LABILE. Patients with ONLY Ara h 8 positivity often tolerate cooked peanut - low systemic risk.",
+            link: "../../mechanism/allergy-testing-module.html#components",
+            linkText: "Cross-Reactivity"
         },
-        treenut: {
-            actual: 'Cashew: 8.5 kU/L (+), Walnut: 0.42 kU/L (+), Almond: <0.10 (-)',
-            correct: 'onepos',
-            labels: { allneg: 'All negative', onepos: '1-2 positive', multipos: 'Multiple positive' },
-            explanation: 'Co-sensitization to tree nuts is common (~30-40% of peanut-allergic patients). Cashew shows significant sensitization - consider supervised oral challenge before assuming clinical allergy, since he has never eaten cashews. Low-level walnut sensitization may represent cross-reactivity. Negative almond is reassuring.'
+        avoidance: {
+            title: "Allergen Avoidance",
+            desc: "Strict avoidance is the cornerstone of food allergy management. Includes label reading, cross-contact prevention, and restaurant communication.",
+            link: "../../mechanism/food-allergy-management.html",
+            linkText: "Avoidance Strategies"
+        },
+        epi: {
+            title: "Epinephrine",
+            desc: "FIRST-LINE and ONLY life-saving treatment for anaphylaxis. Works via α and β receptors to reverse vasodilation, bronchospasm, and stabilize mast cells.",
+            link: "../../mechanism/epinephrine-module.html",
+            linkText: "Epinephrine Deep Dive"
+        },
+        oit: {
+            title: "OIT Candidacy",
+            desc: "Oral immunotherapy raises reaction threshold through gradual desensitization. FDA-approved for peanut (ages 4-17). NOT a cure - requires lifelong maintenance.",
+            link: "../../mechanism/food-allergy-management.html#oit",
+            linkText: "OIT Overview"
         }
     };
     
-    function updateConfidence(lab) {
-        const val = document.getElementById(`conf-${lab}`).value;
-        document.getElementById(`conf-${lab}-val`).textContent = val;
-        state.confidences[lab] = parseInt(val);
-    }
+    // Question answers
+    const correctAnswers = {
+        q1: 1, // Obtain detailed history
+        q2: 3, // Has he eaten peanuts before
+        q3: 1, // Common - sensitization develops
+        q4: 1, // Birch pollen - Ara h 8
+        q5: 1, // Eczema - atopic diathesis
+        q6: 1, // Criterion 2 - multiple systems
+        q7: 1  // sIgE + components
+    };
     
-    function selectOption(el, questionId, value) {
-        el.parentElement.querySelectorAll('.option-btn').forEach(btn => {
-            btn.classList.remove('selected', 'correct', 'incorrect');
-        });
-        el.classList.add('selected');
-        state.answers[questionId] = value;
-        
-        const isCorrect = value === correctAnswers[questionId];
-        const feedbackData = feedback[questionId][value];
-        const feedbackBox = document.getElementById(`feedback-${questionId}`);
-        
-        feedbackBox.classList.remove('correct', 'incorrect');
-        feedbackBox.classList.add('visible', isCorrect ? 'correct' : 'incorrect');
-        feedbackBox.innerHTML = `
-            <div class="feedback-header ${isCorrect ? 'correct' : 'incorrect'}">${isCorrect ? '✓ Correct!' : '✗ Not quite'}</div>
-            <div class="feedback-text">${feedbackData.text}</div>
-        `;
-        
-        el.classList.add(isCorrect ? 'correct' : 'incorrect');
-        if (isCorrect) state.score++;
-        state.questionsAnswered++;
-        checkPhaseComplete();
-    }
-    
-    function askQuestion(el, qId) {
-        if (el.classList.contains('asked')) return;
-        el.classList.add('asked');
-        document.getElementById(`resp-${qId}`).classList.add('visible');
-    }
-    
-    function examSystem(el) {
-        el.classList.add('examined');
-    }
-    
-    function selectPrediction(el, lab, value) {
-        el.parentElement.querySelectorAll('.pred-choice').forEach(btn => btn.classList.remove('selected'));
-        el.classList.add('selected');
-        state.predictions[lab] = value;
-        checkPredictionsComplete();
-    }
-    
-    function checkPhaseComplete() {
-        const phase = state.currentPhase;
-        let complete = false;
-        
-        if (phase === 'cc') complete = state.answers['cc-q1'] && state.answers['cc-q2'];
-        else if (phase === 'hpi') complete = state.answers['hpi-q1'];
-        else if (phase === 'exam') complete = state.answers['exam-q1'];
-        else if (phase === 'ddx') complete = state.answers['ddx-q1'] && state.answers['ddx-q2'];
-        
-        const btn = document.getElementById(`btn-complete-${phase}`);
-        if (btn) btn.disabled = !complete;
-    }
-    
-    function checkPredictionsComplete() {
-        const allPredicted = ['totalige', 'peanut', 'arah2', 'arah8', 'treenut'].every(lab => state.predictions[lab]);
-        document.getElementById('btn-submit-pred').disabled = !allPredicted;
-    }
-    
-    function completePhase(phase) {
-        state.completedPhases.push(phase);
-        document.getElementById(`step-${phase}`).classList.remove('active');
-        document.getElementById(`step-${phase}`).classList.add('completed');
-        
-        const phases = ['cc', 'hpi', 'exam', 'ddx', 'predict', 'results'];
-        const idx = phases.indexOf(phase);
-        const next = phases[idx + 1];
-        
-        if (next) {
-            document.getElementById(`step-${next}`).classList.remove('locked');
-            document.getElementById(`step-${next}`).classList.add('available');
-            document.getElementById(`conn-${idx + 1}`).classList.add('completed');
-            goToPhase(next);
+    const feedback = {
+        q1: {
+            correct: "Excellent! A detailed history is always the first step. It guides targeted testing and avoids unnecessary panels.",
+            incorrect: "History first! Comprehensive panels often detect clinically irrelevant sensitization. Targeted testing based on history is more appropriate.",
+            concepts: ['timing', 'foods']
+        },
+        q2: {
+            correct: "Key question! Knowing whether he tolerated peanuts before helps interpret results and counsel the family.",
+            incorrect: "While family history and atopy are relevant, the most critical question is whether he's tolerated the suspected allergen before.",
+            concepts: ['tolerance']
+        },
+        q3: {
+            correct: "Correct! Sensitization can develop after prior tolerance. This is actually common in food allergy - the immune system becomes sensitized over time.",
+            incorrect: "Prior tolerance is common in food allergy. Sensitization develops over time. This doesn't rule out true allergy.",
+            concepts: ['ige', 'tolerance']
+        },
+        q4: {
+            correct: "Excellent clinical thinking! Birch pollen allergy causes cross-reactive IgE to Ara h 8 (PR-10 protein), which may make his peanut sIgE look higher than the 'true' peanut allergy component (Ara h 2).",
+            incorrect: "While all are relevant, birch pollen allergy specifically predicts Ara h 8 cross-reactivity - crucial for interpreting component testing.",
+            concepts: ['arah8', 'component']
+        },
+        q5: {
+            correct: "Correct! Eczema indicates atopic diathesis, which increases risk of food allergies, allergic rhinitis, and asthma (the 'atopic march').",
+            incorrect: "While lung exam is important acutely, the eczema finding indicates atopic predisposition, which is most relevant for food allergy risk.",
+            concepts: ['ige']
+        },
+        q6: {
+            correct: "Correct! Tyler meets Criterion 2: After exposure to a likely allergen, he had involvement of TWO OR MORE systems - skin (hives), GI (vomiting), and respiratory (throat tightness).",
+            incorrect: "Tyler meets Criterion 2 (multiple systems after likely allergen): skin + GI + respiratory. Criterion 1 requires hypotension/end-organ dysfunction; Criterion 3 requires known prior allergy.",
+            concepts: ['ige', 'mastcell']
+        },
+        q7: {
+            correct: "Perfect! Component testing (Ara h 2, Ara h 8) alongside whole peanut sIgE provides risk stratification. Ara h 2 predicts clinical reactivity better than whole peanut extract alone.",
+            incorrect: "Serum sIgE with components is preferred here. It's safer than SPT post-reaction, provides risk stratification, and distinguishes true allergy from cross-reactivity.",
+            concepts: ['sige', 'component', 'arah2', 'arah8']
         }
-    }
+    };
     
+    // Actual lab results
+    const actualResults = {
+        peanut: { value: "42.5 kU/L", category: "high", explanation: "Strongly positive, consistent with peanut sensitization. However, whole peanut sIgE alone doesn't distinguish true allergy from cross-reactivity." },
+        arah2: { value: "28.3 kU/L", category: "high", explanation: "HIGHLY POSITIVE Ara h 2 confirms TRUE peanut allergy. This storage protein is the best predictor of clinical reactivity. Tyler has genuine peanut allergy, not just cross-reactivity." },
+        arah8: { value: "5.2 kU/L", category: "pos", explanation: "Positive Ara h 8 reflects his birch pollen cross-reactivity. Since Ara h 2 is also highly positive, this is ADDITIVE - he has both true allergy AND cross-reactive IgE." },
+        treenut: { value: "Cashew 0.8, Walnut <0.35, Almond <0.35", category: "somepos", explanation: "Low-level cashew sensitization detected. Cashew/pistachio share homologous storage proteins. Given his peanut anaphylaxis history, counsel to avoid cashew/pistachio; walnut/almond likely safe but discuss with family." },
+        totalige: { value: "380 kU/L", category: "elevated", explanation: "Elevated total IgE confirms atopic status (eczema, allergic rhinitis, food allergy). Does not guide specific allergen diagnosis but contextualizes his allergic phenotype." }
+    };
+    
+    // Functions
     function goToPhase(phase) {
-        const stepEl = document.getElementById(`step-${phase}`);
-        if (stepEl.classList.contains('locked')) return;
-        
-        document.querySelectorAll('.timeline-step').forEach(step => {
-            step.classList.remove('active');
-            if (step.classList.contains('available')) step.classList.remove('available');
-        });
-        stepEl.classList.add('active');
-        
-        document.querySelectorAll('.phase-content').forEach(content => content.classList.remove('active'));
+        document.querySelectorAll('.phase-content').forEach(el => el.classList.remove('active'));
         document.getElementById(`phase-${phase}`).classList.add('active');
         
-        state.currentPhase = phase;
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-    
-    function submitPredictions() {
-        let correct = 0;
-        const labs = ['totalige', 'peanut', 'arah2', 'arah8', 'treenut'];
-        
-        labs.forEach(lab => {
-            if (state.predictions[lab] === correctPredictions[lab]) correct++;
+        document.querySelectorAll('.progress-step').forEach(el => {
+            el.classList.remove('active');
+            const stepPhase = el.dataset.phase;
+            const phases = ['chief', 'history', 'exam', 'ddx', 'predict', 'results'];
+            if (phases.indexOf(stepPhase) < phases.indexOf(phase)) {
+                el.classList.add('completed');
+            } else if (stepPhase === phase) {
+                el.classList.add('active');
+            } else {
+                el.classList.remove('completed');
+            }
         });
         
-        const pct = Math.round((correct / 5) * 100);
-        document.getElementById('final-score').textContent = `${pct}%`;
+        state.currentPhase = phase;
+        window.scrollTo(0, 0);
+    }
+    
+    function answerQuestion(qId, answer) {
+        if (state.questionsAnswered[qId] !== undefined) return;
         
-        if (pct >= 80) {
-            document.getElementById('results-title').textContent = 'Excellent Lab Interpretation!';
-            document.getElementById('results-subtitle').textContent = 'You demonstrate strong understanding of food allergy testing.';
-        } else if (pct >= 60) {
-            document.getElementById('results-title').textContent = 'Good Foundation';
-            document.getElementById('results-subtitle').textContent = 'Review the component testing explanations below.';
-        } else {
-            document.getElementById('results-title').textContent = 'Learning Opportunity';
-            document.getElementById('results-subtitle').textContent = 'Component testing interpretation is nuanced - study the explanations carefully.';
-        }
+        state.questionsAnswered[qId] = answer;
+        const correct = answer === correctAnswers[qId];
+        const options = document.querySelectorAll(`#${qId}-options .option-btn`);
+        
+        options.forEach((btn, i) => {
+            btn.disabled = true;
+            if (i === correctAnswers[qId]) btn.classList.add('correct');
+            else if (i === answer && !correct) btn.classList.add('incorrect');
+        });
+        
+        const fb = feedback[qId];
+        const feedbackBox = document.getElementById(`${qId}-feedback`);
+        feedbackBox.className = `feedback-box show ${correct ? 'correct' : 'incorrect'}`;
+        feedbackBox.innerHTML = `<h4>${correct ? '✓ Correct!' : '✗ Not quite'}</h4><p>${correct ? fb.correct : fb.incorrect}</p>`;
+        
+        // Mark concepts as covered
+        fb.concepts.forEach(c => markConceptCovered(c));
+        
+        // Show next question or enable navigation
+        if (qId === 'q1') document.getElementById('btn-to-history').disabled = false;
+        if (qId === 'q2') document.getElementById('q3-card').style.display = 'block';
+        if (qId === 'q3') document.getElementById('q4-card').style.display = 'block';
+        if (qId === 'q4') document.getElementById('btn-to-exam').disabled = false;
+        if (qId === 'q5') document.getElementById('btn-to-ddx').disabled = false;
+        if (qId === 'q6') document.getElementById('q7-card').style.display = 'block';
+        if (qId === 'q7') document.getElementById('btn-to-predict').disabled = false;
+    }
+    
+    function selectPrediction(lab, value) {
+        state.predictions[lab] = value;
+        document.querySelectorAll(`#pred-${lab} .pred-btn`).forEach(btn => btn.classList.remove('selected'));
+        event.target.classList.add('selected');
+    }
+    
+    function revealResults() {
+        // Mark testing concepts as covered
+        ['sige', 'component', 'arah2', 'avoidance', 'epi'].forEach(c => markConceptCovered(c));
+        
+        goToPhase('results');
         
         const container = document.getElementById('results-container');
-        container.innerHTML = '';
+        container.innerHTML = '<h3 style="color:#fff; margin-bottom:20px;">📋 Your Predictions vs Actual Results</h3>';
+        
+        const labs = [
+            { id: 'peanut', name: 'Peanut sIgE' },
+            { id: 'arah2', name: 'Ara h 2' },
+            { id: 'arah8', name: 'Ara h 8' },
+            { id: 'treenut', name: 'Tree Nut Panel' },
+            { id: 'totalige', name: 'Total IgE' }
+        ];
         
         labs.forEach(lab => {
-            const info = labExplanations[lab];
-            const predicted = state.predictions[lab];
-            const isCorrect = predicted === info.correct;
+            const predicted = state.predictions[lab.id] || 'Not predicted';
+            const actual = actualResults[lab.id];
+            const match = checkMatch(lab.id, predicted, actual.category);
             
             container.innerHTML += `
                 <div class="result-card">
-                    <div class="result-header">
-                        <div class="result-lab-name">${lab === 'totalige' ? 'Total IgE' : lab === 'peanut' ? 'Peanut sIgE' : lab === 'arah2' ? 'Ara h 2' : lab === 'arah8' ? 'Ara h 8' : 'Tree Nut Panel'}</div>
-                        <div class="result-badge ${isCorrect ? 'correct' : 'incorrect'}">${isCorrect ? '✓ Correct' : '✗ Incorrect'}</div>
+                    <div class="result-header ${match}">
+                        <div class="result-lab-name">${lab.name}</div>
+                        <div class="result-status ${match}">${match === 'match' ? '✓ Match' : match === 'partial' ? '◐ Partial' : '✗ Review'}</div>
                     </div>
-                    <div class="result-comparison">
-                        <div class="result-col">
-                            <div class="result-col-label">Your Prediction</div>
-                            <div class="result-col-value">${info.labels[predicted]}</div>
+                    <div class="result-body">
+                        <div class="result-comparison">
+                            <div class="result-col">
+                                <div class="result-col-label">Your Prediction</div>
+                                <div class="result-col-value predicted">${formatPrediction(predicted)}</div>
+                            </div>
+                            <div class="result-col">
+                                <div class="result-col-label">Actual Result</div>
+                                <div class="result-col-value actual">${actual.value}</div>
+                            </div>
                         </div>
-                        <div class="result-col">
-                            <div class="result-col-label">Actual Result</div>
-                            <div class="result-col-value" style="color: #34d399;">${info.actual}</div>
-                        </div>
+                        <div class="result-explanation">${actual.explanation}</div>
+                        <a href="../../mechanism/allergy-testing-module.html" class="result-link" target="_blank">📚 Learn more about interpreting allergy tests →</a>
                     </div>
-                    <div class="result-explanation">${info.explanation}</div>
                 </div>
             `;
         });
         
-        completePhase('predict');
+        // Final summary
+        container.innerHTML += `
+            <div class="phase-panel" style="margin-top:24px;">
+                <div class="phase-header results">
+                    <div class="phase-title"><span>✅</span> Case Summary & Next Steps</div>
+                </div>
+                <div class="phase-body">
+                    <h4 style="color:#fff; margin-bottom:12px;">Diagnosis: IgE-mediated peanut allergy with anaphylaxis</h4>
+                    <p style="color:#94a3b8; margin-bottom:16px;">Confirmed by clinical history + highly positive Ara h 2 (storage protein marker of true peanut allergy)</p>
+                    
+                    <h4 style="color:#fff; margin-bottom:12px;">Management Plan:</h4>
+                    <ul style="color:#94a3b8; margin-left:20px; margin-bottom:16px;">
+                        <li>Strict peanut avoidance with label reading education</li>
+                        <li>Prescribe 2 epinephrine autoinjectors (EpiPen Jr 0.15mg for his weight)</li>
+                        <li>Written anaphylaxis action plan for home and school</li>
+                        <li>Avoid cashew/pistachio given sensitization; discuss walnut/almond</li>
+                        <li>Consider referral for peanut OIT when age-appropriate</li>
+                        <li>MedicAlert bracelet recommended</li>
+                    </ul>
+                    
+                    <div style="display:flex; gap:12px; flex-wrap:wrap;">
+                        <a href="../../mechanism/food-allergy-management.html" class="result-link" target="_blank">📚 Food Allergy Management →</a>
+                        <a href="../../mechanism/epinephrine-module.html" class="result-link" target="_blank">💉 Epinephrine Training →</a>
+                        <a href="ai-clinical-reasoning-hub.html" class="result-link">🔬 Try Another Case →</a>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    
+    function checkMatch(lab, predicted, actual) {
+        const matches = {
+            peanut: { high: ['high', 'vhigh'], mod: ['mod'], low: ['low'], neg: ['neg'] },
+            arah2: { high: ['high', 'mod'], mod: ['mod', 'low'], low: ['low'], neg: ['neg'] },
+            arah8: { pos: ['pos'], neg: ['neg'] },
+            treenut: { somepos: ['somepos'], allneg: ['allneg'], allpos: ['allpos'] },
+            totalige: { elevated: ['elevated', 'high'], normal: ['normal'], high: ['high', 'elevated'], vhigh: ['vhigh', 'high'] }
+        };
+        
+        if (!predicted || predicted === 'Not predicted') return 'miss';
+        if (matches[lab] && matches[lab][actual] && matches[lab][actual].includes(predicted)) return 'match';
+        
+        // Check for close matches
+        const closeMatches = {
+            peanut: { high: ['mod', 'vhigh'], mod: ['low', 'high'] },
+            totalige: { elevated: ['normal', 'high'] }
+        };
+        if (closeMatches[lab] && closeMatches[lab][actual] && closeMatches[lab][actual].includes(predicted)) return 'partial';
+        
+        return 'miss';
+    }
+    
+    function formatPrediction(pred) {
+        const labels = {
+            neg: 'Negative', low: 'Low', mod: 'Moderate', high: 'High', vhigh: 'Very High',
+            pos: 'Positive', allneg: 'All Negative', somepos: 'Some Positive', allpos: 'All Positive',
+            normal: 'Normal', elevated: 'Elevated'
+        };
+        return labels[pred] || pred;
+    }
+    
+    function markConceptCovered(conceptId) {
+        state.conceptsCovered.add(conceptId);
+        const node = document.querySelector(`.kb-node[data-concept="${conceptId}"]`);
+        if (node) {
+            node.classList.add('covered');
+            const status = node.querySelector('.kb-node-status');
+            if (!status.classList.contains('hub')) {
+                status.classList.remove('uncovered', 'partial');
+                status.classList.add('covered');
+                status.textContent = '✓';
+            }
+        }
+        updateKnowledgeProgress();
+    }
+    
+    function updateKnowledgeProgress() {
+        const total = Object.keys(conceptData).length;
+        const covered = state.conceptsCovered.size;
+        const percent = Math.round((covered / total) * 100);
+        
+        document.getElementById('kb-fill').style.width = `${percent}%`;
+        document.getElementById('kb-count').textContent = `${covered}/${total} concepts`;
+        document.getElementById('kb-percent').textContent = `${percent}%`;
+    }
+    
+    function showConceptDetail(conceptId) {
+        const data = conceptData[conceptId];
+        document.getElementById('kb-detail-title').textContent = data.title;
+        document.getElementById('kb-detail-desc').textContent = data.desc;
+        document.getElementById('kb-detail-link').href = data.link;
+        document.getElementById('kb-detail-link').innerHTML = `<span>📚</span> ${data.linkText}`;
+        document.getElementById('kb-detail').classList.add('show');
+        
+        // Highlight active node
+        document.querySelectorAll('.kb-node').forEach(n => n.classList.remove('active'));
+        document.querySelector(`.kb-node[data-concept="${conceptId}"]`).classList.add('active');
+    }
+    
+    function toggleKnowledgeSidebar() {
+        const sidebar = document.querySelector('.knowledge-sidebar');
+        sidebar.style.display = sidebar.style.display === 'block' ? 'none' : 'block';
+        sidebar.style.position = 'fixed';
+        sidebar.style.right = '0';
+        sidebar.style.top = '0';
+        sidebar.style.width = '320px';
+        sidebar.style.zIndex = '1000';
     }
     
     // Initialize confidence sliders
-    ['totalige', 'peanut', 'arah2', 'arah8', 'treenut'].forEach(lab => {
-        state.confidences[lab] = 50;
+    document.querySelectorAll('.confidence-slider').forEach(slider => {
+        slider.addEventListener('input', function() {
+            const lab = this.id.replace('conf-', '');
+            document.getElementById(`conf-${lab}-val`).textContent = `${this.value}%`;
+            state.confidences[lab] = parseInt(this.value);
+        });
     });
+    
+    // Initialize
+    updateKnowledgeProgress();
     </script>
 </body>
 </html>
