@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eosinophilia Workup | A/I Clinical Reasoning Trainer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+        
+        .emr-header { background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); border-bottom: 2px solid #fb923c; padding: 12px 24px; position: sticky; top: 0; z-index: 100; }
+        .emr-header-inner { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+        .emr-logo { display: flex; align-items: center; gap: 12px; }
+        .emr-logo-icon { width: 40px; height: 40px; background: #fb923c; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+        .emr-logo-text { font-size: 18px; font-weight: 700; color: #fff; }
+        .emr-logo-text span { color: #fed7aa; }
+        .emr-patient-banner { display: flex; align-items: center; gap: 16px; background: rgba(251, 146, 60, 0.15); padding: 8px 16px; border-radius: 8px; border: 1px solid rgba(251, 146, 60, 0.3); }
+        .patient-avatar { width: 36px; height: 36px; background: #fb923c; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; color: #fff; font-size: 14px; }
+        .patient-info { font-size: 13px; }
+        .patient-name { font-weight: 600; color: #fff; }
+        .patient-demo { color: #fed7aa; }
+        .alert-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+        .alert-badge { padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; }
+        .alert-badge.warning { background: #dc2626; color: #fff; }
+        .alert-badge.info { background: #f97316; color: #fff; }
+        .emr-time { font-size: 12px; color: #fed7aa; text-align: right; }
+        
+        .progress-timeline { background: #1e293b; padding: 16px 24px; border-bottom: 1px solid #334155; }
+        .progress-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; gap: 0; overflow-x: auto; padding-bottom: 8px; }
+        .timeline-step { display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 8px; font-size: 12px; color: #64748b; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+        .timeline-step.locked { cursor: not-allowed; opacity: 0.5; }
+        .timeline-step.active { background: #f97316; color: #fff; }
+        .timeline-step.completed { background: #065f46; color: #34d399; }
+        .timeline-step.available { background: #1e3a5f; color: #60a5fa; }
+        .step-icon { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; background: rgba(255,255,255,0.1); }
+        .timeline-step.completed .step-icon { background: #34d399; color: #065f46; }
+        .timeline-step.active .step-icon { background: #fff; color: #f97316; }
+        .timeline-connector { width: 30px; height: 2px; background: #334155; flex-shrink: 0; }
+        .timeline-connector.completed { background: #34d399; }
+        
+        .main-content { max-width: 1400px; margin: 0 auto; padding: 24px; display: grid; grid-template-columns: 280px 1fr; gap: 24px; }
+        
+        .sidebar { background: #1e293b; border-radius: 12px; padding: 20px; height: fit-content; position: sticky; top: 140px; }
+        .sidebar-section { margin-bottom: 24px; }
+        .sidebar-title { font-size: 11px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+        .lab-trend { background: #0f172a; border-radius: 8px; padding: 12px; font-size: 12px; }
+        .lab-trend-item { padding: 8px 0; border-bottom: 1px solid #334155; }
+        .lab-trend-item:last-child { border-bottom: none; }
+        .lab-trend-date { color: #64748b; font-size: 11px; }
+        .lab-trend-value { color: #f97316; font-weight: 600; font-size: 16px; }
+        .lab-trend-label { color: #94a3b8; font-size: 11px; }
+        .vitals-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .vital-item { background: #0f172a; padding: 10px; border-radius: 8px; text-align: center; }
+        .vital-label { font-size: 10px; color: #64748b; margin-bottom: 4px; }
+        .vital-value { font-size: 16px; font-weight: 600; }
+        .vital-value.normal { color: #34d399; }
+        .vital-value.abnormal { color: #f97316; }
+        .history-box { background: #0f172a; border-radius: 8px; padding: 12px; font-size: 12px; color: #94a3b8; line-height: 1.6; }
+        .notes-area { background: #0f172a; border-radius: 8px; padding: 12px; }
+        .notes-area textarea { width: 100%; background: transparent; border: none; color: #e2e8f0; font-family: inherit; font-size: 12px; resize: none; min-height: 80px; }
+        .notes-area textarea:focus { outline: none; }
+        
+        .content-panel { background: #1e293b; border-radius: 12px; overflow: hidden; }
+        .panel-header { padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; }
+        .panel-header.phase-cc { background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); }
+        .panel-header.phase-hpi { background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); }
+        .panel-header.phase-exam { background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%); }
+        .panel-header.phase-ddx { background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); }
+        .panel-header.phase-predict { background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%); }
+        .panel-header.phase-results { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); }
+        .panel-title { font-size: 18px; font-weight: 600; color: #fff; display: flex; align-items: center; gap: 10px; }
+        .panel-badge { background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px; font-size: 12px; color: #fff; }
+        .panel-body { padding: 24px; }
+        
+        .phase-content { display: none; }
+        .phase-content.active { display: block; }
+        
+        .referral-box { background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+        .referral-label { font-size: 12px; color: rgba(255,255,255,0.7); margin-bottom: 8px; }
+        .referral-text { font-size: 18px; font-weight: 600; color: #fff; line-height: 1.4; }
+        .referral-context { margin-top: 12px; font-size: 14px; color: rgba(255,255,255,0.9); }
+        
+        .severity-scale { background: #0f172a; border-radius: 12px; padding: 20px; margin-bottom: 24px; border: 1px solid #334155; }
+        .severity-title { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 16px; }
+        .severity-bar { display: flex; gap: 4px; margin-bottom: 12px; }
+        .severity-segment { flex: 1; padding: 12px 8px; border-radius: 6px; text-align: center; font-size: 11px; }
+        .severity-segment.mild { background: #365314; color: #a3e635; }
+        .severity-segment.moderate { background: #713f12; color: #fbbf24; }
+        .severity-segment.severe { background: #7f1d1d; color: #f87171; }
+        .severity-segment.active { border: 2px solid #fff; }
+        .severity-values { display: flex; justify-content: space-between; font-size: 10px; color: #64748b; }
+        
+        .question-card { background: #0f172a; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid #334155; }
+        .question-number { font-size: 11px; color: #f97316; font-weight: 600; margin-bottom: 8px; }
+        .question-prompt { font-size: 15px; color: #e2e8f0; margin-bottom: 16px; line-height: 1.6; }
+        .question-options { display: flex; flex-direction: column; gap: 10px; }
+        .option-btn { background: #1e293b; border: 2px solid #334155; border-radius: 10px; padding: 14px 18px; text-align: left; color: #e2e8f0; cursor: pointer; transition: all 0.15s; font-size: 14px; }
+        .option-btn:hover { border-color: #f97316; background: #431407; }
+        .option-btn.selected { border-color: #f97316; background: #7c2d12; }
+        .option-btn.correct { border-color: #22c55e; background: #065f46; }
+        .option-btn.incorrect { border-color: #ef4444; background: #7f1d1d; }
+        
+        .feedback-box { background: #0f172a; border-radius: 12px; padding: 20px; margin-top: 16px; border-left: 4px solid #f97316; display: none; }
+        .feedback-box.visible { display: block; }
+        .feedback-box.correct { border-color: #22c55e; background: linear-gradient(135deg, #052e16 0%, #0f172a 100%); }
+        .feedback-box.incorrect { border-color: #ef4444; background: linear-gradient(135deg, #450a0a 0%, #0f172a 100%); }
+        .feedback-header { display: flex; align-items: center; gap: 10px; font-weight: 600; margin-bottom: 12px; }
+        .feedback-header.correct { color: #34d399; }
+        .feedback-header.incorrect { color: #f87171; }
+        .feedback-text { font-size: 14px; color: #94a3b8; line-height: 1.7; }
+        
+        .hpi-section { background: #0f172a; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+        .hpi-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .hpi-title { font-weight: 600; color: #fff; display: flex; align-items: center; gap: 8px; }
+        .hpi-content { font-size: 14px; color: #cbd5e1; line-height: 1.8; }
+        .hpi-content p { margin-bottom: 12px; }
+        .hpi-highlight { background: rgba(251, 191, 36, 0.15); padding: 2px 6px; border-radius: 4px; color: #fbbf24; }
+        .hpi-critical { background: rgba(239, 68, 68, 0.15); padding: 2px 6px; border-radius: 4px; color: #f87171; }
+        
+        .interview-questions { display: grid; gap: 10px; margin-top: 16px; }
+        .interview-q { background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.15s; display: flex; justify-content: space-between; align-items: center; }
+        .interview-q:hover { border-color: #f97316; }
+        .interview-q.asked { background: #0f172a; border-color: #22c55e; }
+        .interview-q-text { font-size: 14px; color: #e2e8f0; }
+        .interview-q-icon { color: #64748b; }
+        .interview-q.asked .interview-q-icon { color: #22c55e; }
+        .interview-response { background: linear-gradient(135deg, #1e3a5f 0%, #1e293b 100%); border-radius: 10px; padding: 16px; margin-top: 12px; display: none; border: 1px solid #3b82f6; }
+        .interview-response.visible { display: block; }
+        .response-label { font-size: 11px; color: #60a5fa; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .response-text { font-size: 14px; color: #e2e8f0; line-height: 1.6; font-style: italic; }
+        
+        .exam-systems { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+        .exam-system { background: #0f172a; border: 1px solid #334155; border-radius: 10px; padding: 16px; cursor: pointer; transition: all 0.15s; }
+        .exam-system:hover { border-color: #f97316; }
+        .exam-system.examined { border-color: #22c55e; background: linear-gradient(135deg, #052e16 0%, #0f172a 100%); }
+        .exam-system-name { font-weight: 600; color: #fff; margin-bottom: 4px; font-size: 14px; }
+        .exam-system-hint { font-size: 11px; color: #64748b; }
+        .exam-findings { margin-top: 12px; padding-top: 12px; border-top: 1px solid #334155; font-size: 13px; color: #94a3b8; display: none; line-height: 1.5; }
+        .exam-system.examined .exam-findings { display: block; }
+        .finding-normal { color: #34d399; }
+        .finding-abnormal { color: #f87171; font-weight: 500; }
+        
+        .ddx-box { background: linear-gradient(135deg, #4c1d95 0%, #2e1065 100%); border-radius: 12px; padding: 20px; margin-bottom: 24px; border: 1px solid #7c3aed; }
+        .ddx-title { font-size: 15px; font-weight: 600; color: #c4b5fd; margin-bottom: 16px; }
+        .ddx-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .ddx-item { background: #0f172a; border-radius: 8px; padding: 12px; }
+        .ddx-item-header { font-weight: 600; color: #fff; font-size: 13px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .ddx-item-list { font-size: 12px; color: #a78bfa; line-height: 1.6; }
+        
+        .red-flags { background: linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%); border-radius: 12px; padding: 20px; margin-bottom: 24px; border: 1px solid #dc2626; }
+        .red-flags-title { font-size: 14px; font-weight: 600; color: #fca5a5; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .red-flags-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; }
+        .red-flag-item { font-size: 12px; color: #fecaca; padding: 8px; background: rgba(0,0,0,0.2); border-radius: 6px; }
+        
+        .lab-prediction-card { background: #0f172a; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid #334155; }
+        .lab-pred-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; flex-wrap: wrap; gap: 8px; }
+        .lab-name { font-weight: 600; color: #fff; font-size: 15px; }
+        .lab-context { font-size: 12px; color: #94a3b8; margin-top: 4px; }
+        .lab-normal-range { font-size: 12px; color: #64748b; background: #1e293b; padding: 4px 10px; border-radius: 6px; }
+        .prediction-choices { display: flex; flex-wrap: wrap; gap: 10px; }
+        .pred-choice { padding: 10px 18px; background: #1e293b; border: 2px solid #334155; border-radius: 8px; color: #e2e8f0; cursor: pointer; transition: all 0.15s; font-size: 13px; }
+        .pred-choice:hover { border-color: #f97316; }
+        .pred-choice.selected { border-color: #f97316; background: #7c2d12; }
+        .confidence-row { margin-top: 16px; padding-top: 16px; border-top: 1px solid #334155; }
+        .confidence-label { font-size: 13px; color: #94a3b8; margin-bottom: 8px; }
+        .confidence-slider { width: 100%; height: 8px; border-radius: 4px; background: #334155; -webkit-appearance: none; }
+        .confidence-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: #f97316; cursor: pointer; }
+        .confidence-value { text-align: center; font-weight: 600; color: #f97316; margin-top: 8px; }
+        
+        .results-summary { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); border-radius: 16px; padding: 32px; text-align: center; margin-bottom: 24px; }
+        .score-circle { width: 120px; height: 120px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto 16px; border: 4px solid rgba(255,255,255,0.3); }
+        .score-number { font-size: 36px; font-weight: 700; color: #fff; }
+        .score-label { font-size: 12px; color: rgba(255,255,255,0.7); }
+        .results-title { font-size: 20px; font-weight: 600; color: #fff; margin-bottom: 8px; }
+        .results-subtitle { font-size: 14px; color: rgba(255,255,255,0.8); }
+        
+        .result-card { background: #0f172a; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid #334155; }
+        .result-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .result-lab-name { font-weight: 600; color: #fff; }
+        .result-badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+        .result-badge.correct { background: #065f46; color: #34d399; }
+        .result-badge.incorrect { background: #7f1d1d; color: #f87171; }
+        .result-comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+        .result-col { background: #1e293b; padding: 12px; border-radius: 8px; }
+        .result-col-label { font-size: 11px; color: #64748b; margin-bottom: 4px; }
+        .result-col-value { font-size: 16px; font-weight: 600; color: #fff; }
+        .result-explanation { font-size: 14px; color: #94a3b8; line-height: 1.7; padding: 16px; background: #1e293b; border-radius: 8px; border-left: 3px solid #f97316; }
+        
+        .diagnosis-box { background: linear-gradient(135deg, #065f46 0%, #064e3b 100%); border-radius: 12px; padding: 20px; margin-bottom: 24px; border: 1px solid #10b981; }
+        .diagnosis-title { font-size: 15px; font-weight: 600; color: #34d399; margin-bottom: 12px; }
+        .diagnosis-content { font-size: 14px; color: #a7f3d0; line-height: 1.7; }
+        
+        .learn-more-section { background: linear-gradient(135deg, #7c2d12 0%, #431407 100%); border-radius: 12px; padding: 24px; margin-top: 24px; border: 1px solid #f97316; }
+        .learn-more-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; color: #fed7aa; font-weight: 600; }
+        .learn-more-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+        .learn-link { background: #1c1917; border: 1px solid #ea580c; border-radius: 10px; padding: 16px; text-decoration: none; color: inherit; display: flex; gap: 14px; align-items: flex-start; transition: all 0.15s; }
+        .learn-link:hover { border-color: #fb923c; transform: translateY(-2px); }
+        .learn-link-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+        .learn-link-icon.mechanism { background: #065f46; }
+        .learn-link-icon.external { background: #1e40af; }
+        .learn-link-info { flex: 1; }
+        .learn-link-title { font-weight: 600; color: #fff; margin-bottom: 4px; font-size: 14px; }
+        .learn-link-desc { font-size: 12px; color: #fdba74; }
+        .learn-link-badge { font-size: 10px; padding: 2px 8px; border-radius: 10px; background: #431407; color: #fed7aa; margin-top: 6px; display: inline-block; }
+        
+        .action-row { display: flex; justify-content: center; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 14px; transition: all 0.15s; display: flex; align-items: center; gap: 8px; }
+        .btn-primary { background: #f97316; color: #fff; }
+        .btn-primary:hover { background: #ea580c; }
+        .btn-secondary { background: #334155; color: #e2e8f0; }
+        .btn-success { background: #22c55e; color: #fff; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        @media (max-width: 1024px) { .main-content { grid-template-columns: 1fr; } .sidebar { position: static; } }
+        @media (max-width: 768px) { .emr-patient-banner { display: none; } .result-comparison, .ddx-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header class="emr-header">
+        <div class="emr-header-inner">
+            <div class="emr-logo">
+                <div class="emr-logo-icon">📈</div>
+                <div class="emr-logo-text">A/I <span>Trainer</span></div>
+            </div>
+            <div class="emr-patient-banner">
+                <div class="patient-avatar">RM</div>
+                <div class="patient-info">
+                    <div class="patient-name">Martinez, Robert</div>
+                    <div class="patient-demo">48 yo M • MRN: 293847</div>
+                </div>
+            </div>
+            <div class="alert-badges">
+                <span class="alert-badge warning">AEC 2,500</span>
+                <span class="alert-badge info">Eosinophilia Workup</span>
+            </div>
+            <div class="emr-time">
+                <div>Allergy/Immunology</div>
+                <div>Consult</div>
+            </div>
+        </div>
+    </header>
+    
+    <nav class="progress-timeline">
+        <div class="progress-inner">
+            <div class="timeline-step active" id="step-cc" onclick="goToPhase('cc')"><div class="step-icon">1</div><span>Referral</span></div>
+            <div class="timeline-connector" id="conn-1"></div>
+            <div class="timeline-step locked" id="step-hpi" onclick="goToPhase('hpi')"><div class="step-icon">2</div><span>History</span></div>
+            <div class="timeline-connector" id="conn-2"></div>
+            <div class="timeline-step locked" id="step-exam" onclick="goToPhase('exam')"><div class="step-icon">3</div><span>Exam</span></div>
+            <div class="timeline-connector" id="conn-3"></div>
+            <div class="timeline-step locked" id="step-ddx" onclick="goToPhase('ddx')"><div class="step-icon">4</div><span>Differential</span></div>
+            <div class="timeline-connector" id="conn-4"></div>
+            <div class="timeline-step locked" id="step-predict" onclick="goToPhase('predict')"><div class="step-icon">5</div><span>Predict Labs</span></div>
+            <div class="timeline-connector" id="conn-5"></div>
+            <div class="timeline-step locked" id="step-results" onclick="goToPhase('results')"><div class="step-icon">6</div><span>Diagnosis</span></div>
+        </div>
+    </nav>
+    
+    <main class="main-content">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">📊 AEC Trend</div>
+                <div class="lab-trend">
+                    <div class="lab-trend-item">
+                        <div class="lab-trend-date">Today</div>
+                        <div class="lab-trend-value">2,500/µL</div>
+                        <div class="lab-trend-label">Moderate eosinophilia</div>
+                    </div>
+                    <div class="lab-trend-item">
+                        <div class="lab-trend-date">3 months ago</div>
+                        <div class="lab-trend-value">1,800/µL</div>
+                        <div class="lab-trend-label">Persistent elevation</div>
+                    </div>
+                    <div class="lab-trend-item">
+                        <div class="lab-trend-date">6 months ago</div>
+                        <div class="lab-trend-value">2,100/µL</div>
+                        <div class="lab-trend-label">First noted</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-title">❤️ Today's Vitals</div>
+                <div class="vitals-grid">
+                    <div class="vital-item"><div class="vital-label">Temp</div><div class="vital-value normal">98.4°F</div></div>
+                    <div class="vital-item"><div class="vital-label">BP</div><div class="vital-value normal">128/78</div></div>
+                    <div class="vital-item"><div class="vital-label">HR</div><div class="vital-value normal">72</div></div>
+                    <div class="vital-item"><div class="vital-label">SpO₂</div><div class="vital-value normal">98%</div></div>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-title">📋 PMH</div>
+                <div class="history-box">
+                    Allergic rhinitis (seasonal). Mild intermittent asthma. No major surgeries. Lives in Texas, no recent travel.
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-title">📝 Notes</div>
+                <div class="notes-area">
+                    <textarea placeholder="Consider: Reactive vs clonal, EGPA red flags, Strongyloides..."></textarea>
+                </div>
+            </div>
+        </aside>
+        
+        <div class="content-panel">
+            <!-- PHASE 1: Referral -->
+            <div class="phase-content active" id="phase-cc">
+                <div class="panel-header phase-cc">
+                    <div class="panel-title"><span>📋</span> Hematology Referral</div>
+                    <div class="panel-badge">Step 1 of 6</div>
+                </div>
+                <div class="panel-body">
+                    <div class="referral-box">
+                        <div class="referral-label">REFERRAL REASON</div>
+                        <div class="referral-text">Persistent eosinophilia - AEC 2,500/µL × 6 months</div>
+                        <div class="referral-context">48-year-old man with incidentally discovered eosinophilia on routine labs. Persistent over 6 months. PCP unsure of etiology. No obvious cause identified.</div>
+                    </div>
+                    
+                    <div class="severity-scale">
+                        <div class="severity-title">📊 Eosinophilia Severity Classification</div>
+                        <div class="severity-bar">
+                            <div class="severity-segment mild">Mild<br>500-1,500</div>
+                            <div class="severity-segment moderate active">Moderate<br>1,500-5,000</div>
+                            <div class="severity-segment severe">Severe<br>>5,000</div>
+                        </div>
+                        <div class="severity-values">
+                            <span>Normal: <500/µL</span>
+                            <span>Patient: 2,500/µL</span>
+                            <span>HES threshold: >1,500 × 6mo</span>
+                        </div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-number">QUESTION 1 OF 10</div>
+                        <div class="question-prompt">What is the MOST common cause of eosinophilia worldwide?</div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q1', 'parasites')">Parasitic infections (especially helminths)</div>
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q1', 'allergy')">Allergic diseases (asthma, rhinitis, eczema)</div>
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q1', 'drugs')">Drug reactions</div>
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q1', 'malignancy')">Hematologic malignancy</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-cc-q1"></div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-number">QUESTION 2 OF 10</div>
+                        <div class="question-prompt">His AEC has been >1,500/µL for 6 months. This meets the duration criterion for which diagnosis?</div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q2', 'hes')">Hypereosinophilic Syndrome (HES) - if end-organ damage present</div>
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q2', 'acute')">Acute eosinophilia</div>
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q2', 'transient')">Transient eosinophilia</div>
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q2', 'reactive')">Reactive eosinophilia only</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-cc-q2"></div>
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-primary" onclick="completePhase('cc')" id="btn-complete-cc" disabled>Continue to History →</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PHASE 2: History -->
+            <div class="phase-content" id="phase-hpi">
+                <div class="panel-header phase-hpi">
+                    <div class="panel-title"><span>📝</span> Detailed History</div>
+                    <div class="panel-badge">Step 2 of 6</div>
+                </div>
+                <div class="panel-body">
+                    <div class="hpi-section">
+                        <div class="hpi-header"><div class="hpi-title">📄 Patient History</div></div>
+                        <div class="hpi-content">
+                            <p>"I feel pretty good honestly. My doctor just said my blood counts were off and wanted me to see a specialist. I've had <span class="hpi-highlight">seasonal allergies</span> for years - they're well controlled with Flonase and Zyrtec. My asthma is mild - I only use my inhaler a few times a month."</p>
+                            <p>"No fevers, no night sweats, no weight loss. I haven't noticed any rashes or itching. No new medications. I eat pretty healthy - lots of salads, sometimes sushi."</p>
+                        </div>
+                    </div>
+                    
+                    <div class="interview-questions">
+                        <div class="interview-q" onclick="askQuestion(this, 'travel')">
+                            <span class="interview-q-text">"Any travel outside the US, especially to tropical areas?"</span>
+                            <span class="interview-q-icon">💬</span>
+                        </div>
+                        <div class="interview-response" id="resp-travel">
+                            <div class="response-label">Patient Response</div>
+                            <div class="response-text">"I went to Mexico about 2 years ago for a resort vacation. Before that, I've never really traveled internationally. I've lived in Texas my whole life."</div>
+                        </div>
+                        
+                        <div class="interview-q" onclick="askQuestion(this, 'gi')">
+                            <span class="interview-q-text">"Any abdominal pain, diarrhea, or GI symptoms?"</span>
+                            <span class="interview-q-icon">💬</span>
+                        </div>
+                        <div class="interview-response" id="resp-gi">
+                            <div class="response-label">Patient Response</div>
+                            <div class="response-text">"Now that you mention it, I've had some mild bloating and loose stools on and off for the past several months. I figured it was just something I ate. Nothing severe though."</div>
+                        </div>
+                        
+                        <div class="interview-q" onclick="askQuestion(this, 'respiratory')">
+                            <span class="interview-q-text">"Any worsening asthma, sinus problems, or new breathing issues?"</span>
+                            <span class="interview-q-icon">💬</span>
+                        </div>
+                        <div class="interview-response" id="resp-respiratory">
+                            <div class="response-label">Patient Response</div>
+                            <div class="response-text">"My asthma's been about the same. No worse. My allergies act up in spring but that's normal for me. No sinus infections lately."</div>
+                        </div>
+                        
+                        <div class="interview-q" onclick="askQuestion(this, 'neuro')">
+                            <span class="interview-q-text">"Any numbness, tingling, or weakness in your hands or feet?"</span>
+                            <span class="interview-q-icon">💬</span>
+                        </div>
+                        <div class="interview-response" id="resp-neuro">
+                            <div class="response-label">Patient Response</div>
+                            <div class="response-text">"No, nothing like that. My hands and feet feel normal."</div>
+                        </div>
+                        
+                        <div class="interview-q" onclick="askQuestion(this, 'cardiac')">
+                            <span class="interview-q-text">"Any chest pain, shortness of breath at rest, or leg swelling?"</span>
+                            <span class="interview-q-icon">💬</span>
+                        </div>
+                        <div class="interview-response" id="resp-cardiac">
+                            <div class="response-label">Patient Response</div>
+                            <div class="response-text">"No chest pain. I can exercise fine. No swelling in my legs."</div>
+                        </div>
+                    </div>
+                    
+                    <div class="question-card" style="margin-top: 24px;">
+                        <div class="question-number">QUESTION 3 OF 10</div>
+                        <div class="question-prompt">He has mild GI symptoms and lives in Texas (Strongyloides endemic). Which parasitic infection can cause LIFELONG eosinophilia due to autoinfection?</div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'hpi-q1', 'strongy')">Strongyloides stercoralis</div>
+                            <div class="option-btn" onclick="selectOption(this, 'hpi-q1', 'ascaris')">Ascaris lumbricoides</div>
+                            <div class="option-btn" onclick="selectOption(this, 'hpi-q1', 'giardia')">Giardia lamblia</div>
+                            <div class="option-btn" onclick="selectOption(this, 'hpi-q1', 'pinworm')">Enterobius (pinworm)</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-hpi-q1"></div>
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-secondary" onclick="goToPhase('cc')">← Back</button>
+                        <button class="btn btn-primary" onclick="completePhase('hpi')" id="btn-complete-hpi" disabled>Continue to Exam →</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PHASE 3: Exam -->
+            <div class="phase-content" id="phase-exam">
+                <div class="panel-header phase-exam">
+                    <div class="panel-title"><span>🩺</span> Physical Examination</div>
+                    <div class="panel-badge">Step 3 of 6</div>
+                </div>
+                <div class="panel-body">
+                    <div class="exam-systems">
+                        <div class="exam-system" onclick="examSystem(this)">
+                            <div class="exam-system-name">👤 General</div>
+                            <div class="exam-system-hint">Overall appearance</div>
+                            <div class="exam-findings"><span class="finding-normal">Well-appearing, well-nourished</span>. No distress. No cachexia.</div>
+                        </div>
+                        <div class="exam-system" onclick="examSystem(this)">
+                            <div class="exam-system-name">🔘 Lymph Nodes</div>
+                            <div class="exam-system-hint">Lymphadenopathy</div>
+                            <div class="exam-findings"><span class="finding-normal">No cervical, axillary, or inguinal lymphadenopathy</span>.</div>
+                        </div>
+                        <div class="exam-system" onclick="examSystem(this)">
+                            <div class="exam-system-name">🫁 Lungs</div>
+                            <div class="exam-system-hint">Respiratory exam</div>
+                            <div class="exam-findings"><span class="finding-normal">Clear to auscultation bilaterally</span>. No wheezes, rales, or rhonchi. Good air movement.</div>
+                        </div>
+                        <div class="exam-system" onclick="examSystem(this)">
+                            <div class="exam-system-name">❤️ Cardiac</div>
+                            <div class="exam-system-hint">Heart exam</div>
+                            <div class="exam-findings"><span class="finding-normal">Regular rate and rhythm</span>. No murmurs. No S3/S4. No JVD.</div>
+                        </div>
+                        <div class="exam-system" onclick="examSystem(this)">
+                            <div class="exam-system-name">🩻 Abdomen</div>
+                            <div class="exam-system-hint">GI exam</div>
+                            <div class="exam-findings"><span class="finding-normal">Soft, non-tender, non-distended</span>. No hepatosplenomegaly. Normal bowel sounds.</div>
+                        </div>
+                        <div class="exam-system" onclick="examSystem(this)">
+                            <div class="exam-system-name">🖐️ Skin</div>
+                            <div class="exam-system-hint">Rashes, lesions</div>
+                            <div class="exam-findings"><span class="finding-normal">No rashes, no urticaria, no purpura</span>. No track marks or migratory lesions.</div>
+                        </div>
+                        <div class="exam-system" onclick="examSystem(this)">
+                            <div class="exam-system-name">🦶 Neuro</div>
+                            <div class="exam-system-hint">Peripheral nerves</div>
+                            <div class="exam-findings"><span class="finding-normal">Sensation intact to light touch distally</span>. Normal strength. DTRs 2+ symmetric.</div>
+                        </div>
+                        <div class="exam-system" onclick="examSystem(this)">
+                            <div class="exam-system-name">👂 ENT</div>
+                            <div class="exam-system-hint">Sinuses, nasal exam</div>
+                            <div class="exam-findings"><span class="finding-normal">No nasal polyps</span>. Mild inferior turbinate edema (consistent with allergic rhinitis). TMs clear.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="question-card" style="margin-top: 24px;">
+                        <div class="question-number">QUESTION 4 OF 10</div>
+                        <div class="question-prompt">The exam is largely unremarkable. Which physical finding, if present, would be a RED FLAG for EGPA (Eosinophilic Granulomatosis with Polyangiitis)?</div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'exam-q1', 'mononeuritis')">Mononeuritis multiplex (asymmetric peripheral neuropathy)</div>
+                            <div class="option-btn" onclick="selectOption(this, 'exam-q1', 'rhinitis')">Allergic rhinitis</div>
+                            <div class="option-btn" onclick="selectOption(this, 'exam-q1', 'wheezing')">Mild wheezing</div>
+                            <div class="option-btn" onclick="selectOption(this, 'exam-q1', 'eczema')">Eczematous rash</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-exam-q1"></div>
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-secondary" onclick="goToPhase('hpi')">← Back</button>
+                        <button class="btn btn-primary" onclick="completePhase('exam')" id="btn-complete-exam" disabled>Continue to Differential →</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PHASE 4: Differential -->
+            <div class="phase-content" id="phase-ddx">
+                <div class="panel-header phase-ddx">
+                    <div class="panel-title"><span>🔀</span> Eosinophilia Differential</div>
+                    <div class="panel-badge">Step 4 of 6</div>
+                </div>
+                <div class="panel-body">
+                    <div class="ddx-box">
+                        <div class="ddx-title">📋 Eosinophilia Differential Diagnosis Framework</div>
+                        <div class="ddx-grid">
+                            <div class="ddx-item">
+                                <div class="ddx-item-header">🦠 REACTIVE (Secondary)</div>
+                                <div class="ddx-item-list">
+                                    • Parasitic infections (helminths)<br>
+                                    • Allergic diseases (asthma, rhinitis, eczema)<br>
+                                    • Drug reactions (DRESS, simple drug eosinophilia)<br>
+                                    • Adrenal insufficiency<br>
+                                    • Solid tumors (paraneoplastic)
+                                </div>
+                            </div>
+                            <div class="ddx-item">
+                                <div class="ddx-item-header">🔬 CLONAL (Primary)</div>
+                                <div class="ddx-item-list">
+                                    • Myeloid neoplasms with eosinophilia<br>
+                                    • FIP1L1-PDGFRA fusion (responds to imatinib)<br>
+                                    • Chronic eosinophilic leukemia<br>
+                                    • Mastocytosis with eosinophilia<br>
+                                    • AML, CML with eosinophilia
+                                </div>
+                            </div>
+                            <div class="ddx-item">
+                                <div class="ddx-item-header">🔥 INFLAMMATORY</div>
+                                <div class="ddx-item-list">
+                                    • EGPA (Churg-Strauss)<br>
+                                    • Eosinophilic GI diseases (EoE, EG)<br>
+                                    • Inflammatory bowel disease<br>
+                                    • Sarcoidosis<br>
+                                    • IgG4-related disease
+                                </div>
+                            </div>
+                            <div class="ddx-item">
+                                <div class="ddx-item-header">❓ IDIOPATHIC HES</div>
+                                <div class="ddx-item-list">
+                                    • AEC >1,500 × 6 months<br>
+                                    • End-organ damage present<br>
+                                    • No identifiable cause<br>
+                                    • Diagnosis of exclusion<br>
+                                    • May require treatment
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="red-flags">
+                        <div class="red-flags-title">🚨 Red Flags for Serious Eosinophilia</div>
+                        <div class="red-flags-grid">
+                            <div class="red-flag-item">AEC >5,000 (severe)</div>
+                            <div class="red-flag-item">Cardiac symptoms (eosinophilic myocarditis)</div>
+                            <div class="red-flag-item">Neurologic deficits (mononeuritis)</div>
+                            <div class="red-flag-item">Constitutional symptoms (fevers, weight loss)</div>
+                            <div class="red-flag-item">Rapidly rising eosinophil count</div>
+                            <div class="red-flag-item">Skin findings (purpura, nodules)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-number">QUESTION 5 OF 10</div>
+                        <div class="question-prompt">Given his allergic rhinitis, asthma, and geographic location (Texas), what is the MOST important test to rule out in this workup?</div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'ddx-q1', 'strongy')">Strongyloides serology (lifelong infection possible, can be fatal if immunosuppressed)</div>
+                            <div class="option-btn" onclick="selectOption(this, 'ddx-q1', 'anca')">ANCA (for EGPA)</div>
+                            <div class="option-btn" onclick="selectOption(this, 'ddx-q1', 'tryptase')">Tryptase (for mastocytosis)</div>
+                            <div class="option-btn" onclick="selectOption(this, 'ddx-q1', 'biopsy')">Bone marrow biopsy</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-ddx-q1"></div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-number">QUESTION 6 OF 10</div>
+                        <div class="question-prompt">If you had to give this patient steroids (e.g., for severe eosinophilia or asthma exacerbation) before completing workup, what could happen with undiagnosed Strongyloides?</div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'ddx-q2', 'hyper')">Hyperinfection syndrome - potentially fatal disseminated strongyloidiasis</div>
+                            <div class="option-btn" onclick="selectOption(this, 'ddx-q2', 'cure')">Spontaneous cure due to immune boost</div>
+                            <div class="option-btn" onclick="selectOption(this, 'ddx-q2', 'nothing')">No effect - steroids don't affect parasites</div>
+                            <div class="option-btn" onclick="selectOption(this, 'ddx-q2', 'mild')">Mild increase in GI symptoms only</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-ddx-q2"></div>
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-secondary" onclick="goToPhase('exam')">← Back</button>
+                        <button class="btn btn-primary" onclick="completePhase('ddx')" id="btn-complete-ddx" disabled>Continue to Predict Labs →</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PHASE 5: Predict Labs -->
+            <div class="phase-content" id="phase-predict">
+                <div class="panel-header phase-predict">
+                    <div class="panel-title"><span>🔮</span> Predict Lab Results</div>
+                    <div class="panel-badge">Step 5 of 6</div>
+                </div>
+                <div class="panel-body">
+                    <p style="color: #94a3b8; margin-bottom: 20px;">Based on his history and your differential, predict Robert's workup results:</p>
+                    
+                    <div class="lab-prediction-card">
+                        <div class="lab-pred-header">
+                            <div><div class="lab-name">Strongyloides IgG Serology</div><div class="lab-context">Endemic in Texas, lifelong infection possible</div></div>
+                        </div>
+                        <div class="prediction-choices">
+                            <div class="pred-choice" onclick="selectPrediction(this, 'strongy', 'negative')">Negative</div>
+                            <div class="pred-choice" onclick="selectPrediction(this, 'strongy', 'positive')">Positive</div>
+                        </div>
+                        <div class="confidence-row">
+                            <div class="confidence-label">Confidence:</div>
+                            <input type="range" class="confidence-slider" id="conf-strongy" min="0" max="100" value="50" oninput="updateConf('strongy')">
+                            <div class="confidence-value"><span id="conf-strongy-val">50</span>%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="lab-prediction-card">
+                        <div class="lab-pred-header">
+                            <div><div class="lab-name">Total IgE</div><div class="lab-context">Elevated in allergic disease and parasites</div></div>
+                            <div class="lab-normal-range">Normal: <100 IU/mL</div>
+                        </div>
+                        <div class="prediction-choices">
+                            <div class="pred-choice" onclick="selectPrediction(this, 'ige', 'normal')">Normal (<100)</div>
+                            <div class="pred-choice" onclick="selectPrediction(this, 'ige', 'elevated')">Elevated (100-500)</div>
+                            <div class="pred-choice" onclick="selectPrediction(this, 'ige', 'high')">High (>500)</div>
+                        </div>
+                        <div class="confidence-row">
+                            <div class="confidence-label">Confidence:</div>
+                            <input type="range" class="confidence-slider" id="conf-ige" min="0" max="100" value="50" oninput="updateConf('ige')">
+                            <div class="confidence-value"><span id="conf-ige-val">50</span>%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="lab-prediction-card">
+                        <div class="lab-pred-header">
+                            <div><div class="lab-name">ANCA</div><div class="lab-context">Screen for EGPA/vasculitis</div></div>
+                        </div>
+                        <div class="prediction-choices">
+                            <div class="pred-choice" onclick="selectPrediction(this, 'anca', 'negative')">Negative</div>
+                            <div class="pred-choice" onclick="selectPrediction(this, 'anca', 'panca')">p-ANCA/MPO positive</div>
+                            <div class="pred-choice" onclick="selectPrediction(this, 'anca', 'canca')">c-ANCA/PR3 positive</div>
+                        </div>
+                        <div class="confidence-row">
+                            <div class="confidence-label">Confidence:</div>
+                            <input type="range" class="confidence-slider" id="conf-anca" min="0" max="100" value="50" oninput="updateConf('anca')">
+                            <div class="confidence-value"><span id="conf-anca-val">50</span>%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="lab-prediction-card">
+                        <div class="lab-pred-header">
+                            <div><div class="lab-name">Serum Tryptase</div><div class="lab-context">Screen for mastocytosis</div></div>
+                            <div class="lab-normal-range">Normal: <11.4 ng/mL</div>
+                        </div>
+                        <div class="prediction-choices">
+                            <div class="pred-choice" onclick="selectPrediction(this, 'tryptase', 'normal')">Normal</div>
+                            <div class="pred-choice" onclick="selectPrediction(this, 'tryptase', 'elevated')">Elevated (>11.4)</div>
+                        </div>
+                        <div class="confidence-row">
+                            <div class="confidence-label">Confidence:</div>
+                            <input type="range" class="confidence-slider" id="conf-tryptase" min="0" max="100" value="50" oninput="updateConf('tryptase')">
+                            <div class="confidence-value"><span id="conf-tryptase-val">50</span>%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-secondary" onclick="goToPhase('ddx')">← Back</button>
+                        <button class="btn btn-success" onclick="submitPredictions()" id="btn-submit-pred" disabled>🔍 Reveal Results</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PHASE 6: Results -->
+            <div class="phase-content" id="phase-results">
+                <div class="panel-header phase-results">
+                    <div class="panel-title"><span>✅</span> Diagnosis & Treatment</div>
+                    <div class="panel-badge">Step 6 of 6</div>
+                </div>
+                <div class="panel-body">
+                    <div class="results-summary">
+                        <div class="score-circle">
+                            <div class="score-number" id="final-score">--</div>
+                            <div class="score-label">Prediction Score</div>
+                        </div>
+                        <div class="results-title" id="results-title">Diagnosis Identified</div>
+                        <div class="results-subtitle">Reactive eosinophilia due to Strongyloides infection</div>
+                    </div>
+                    
+                    <div id="results-container"></div>
+                    
+                    <div class="diagnosis-box">
+                        <div class="diagnosis-title">🎯 Final Diagnosis: Strongyloides stercoralis Infection</div>
+                        <div class="diagnosis-content">
+                            The positive Strongyloides serology explains his persistent eosinophilia and mild GI symptoms. Strongyloides is endemic in the southeastern US (including Texas) and can cause lifelong infection through autoinfection. Treatment with ivermectin will cure the infection and normalize the eosinophil count.
+                        </div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-number">QUESTION 7 OF 10</div>
+                        <div class="question-prompt">What is the treatment of choice for uncomplicated Strongyloides infection?</div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'results-q1', 'ivermectin')">Ivermectin (200 mcg/kg × 2 days)</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q1', 'albendazole')">Albendazole (400mg BID × 7 days)</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q1', 'praziquantel')">Praziquantel</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q1', 'metronidazole')">Metronidazole</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-results-q1"></div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-number">QUESTION 8 OF 10</div>
+                        <div class="question-prompt">After treatment, how should you confirm cure?</div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'results-q2', 'both')">Repeat serology AND follow AEC - both should normalize over weeks to months</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q2', 'serology')">Serology only</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q2', 'stool')">Stool O&P only</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q2', 'none')">No follow-up needed after treatment</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-results-q2"></div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-number">QUESTION 9 OF 10</div>
+                        <div class="question-prompt">If his eosinophilia persists after treatment and confirmed cure, what would you do next?</div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'results-q3', 'expand')">Expand workup - consider bone marrow biopsy, FISH for PDGFRA, cardiac evaluation</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q3', 'retreat')">Retreat with higher-dose ivermectin</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q3', 'observe')">Observe only - allergies explain it</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q3', 'steroids')">Start steroids immediately</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-results-q3"></div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-number">QUESTION 10 OF 10</div>
+                        <div class="question-prompt">If this patient had EGPA instead, which ANCA pattern would you expect?</div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'results-q4', 'mpo')">p-ANCA / MPO (present in ~40-60% of EGPA)</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q4', 'pr3')">c-ANCA / PR3</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q4', 'both')">Both equally likely</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q4', 'never')">EGPA is always ANCA-negative</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-results-q4"></div>
+                    </div>
+                    
+                    <div class="learn-more-section">
+                        <div class="learn-more-header"><span>📚</span> Continue Learning</div>
+                        <div class="learn-more-grid">
+                            <a href="ai-trainer-mastocytosis.html" class="learn-link">
+                                <div class="learn-link-icon mechanism">⚡</div>
+                                <div class="learn-link-info">
+                                    <div class="learn-link-title">Mast Cell Activation Workup</div>
+                                    <div class="learn-link-desc">MCAS vs Mastocytosis differential</div>
+                                    <div class="learn-link-badge">A/I Trainer</div>
+                                </div>
+                            </a>
+                            <a href="https://www.cdc.gov/strongyloides/" target="_blank" class="learn-link">
+                                <div class="learn-link-icon external">🌐</div>
+                                <div class="learn-link-info">
+                                    <div class="learn-link-title">CDC Strongyloides Resources</div>
+                                    <div class="learn-link-desc">Epidemiology and treatment guidelines</div>
+                                    <div class="learn-link-badge">External • Open Access</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-secondary" onclick="location.href='ai-clinical-reasoning-hub.html'">← Case Library</button>
+                        <button class="btn btn-primary" onclick="location.href='ai-trainer-cvid.html'">Next: CVID Workup →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+    const state = { currentPhase: 'cc', completedPhases: [], answers: {}, predictions: {}, confidences: {} };
+    
+    const correctAnswers = {
+        'cc-q1': 'parasites', 'cc-q2': 'hes', 'hpi-q1': 'strongy',
+        'exam-q1': 'mononeuritis', 'ddx-q1': 'strongy', 'ddx-q2': 'hyper',
+        'results-q1': 'ivermectin', 'results-q2': 'both', 'results-q3': 'expand', 'results-q4': 'mpo'
+    };
+    
+    const correctPredictions = { strongy: 'positive', ige: 'elevated', anca: 'negative', tryptase: 'normal' };
+    
+    const feedback = {
+        'cc-q1': { parasites: { correct: true, text: 'Correct! Globally, parasitic infections (especially tissue-invasive helminths) are the #1 cause of eosinophilia. In developed countries, allergic diseases are more common, but parasites should always be considered, especially with travel history or endemic exposure. Strongyloides is particularly important in the southern US.' }, allergy: { correct: false, text: 'Allergic diseases are the most common cause in developed countries, but WORLDWIDE, parasites are #1. This patient lives in Texas where Strongyloides is endemic.' }, drugs: { correct: false, text: 'Drug reactions cause eosinophilia but are not the most common cause globally. Always consider parasites first.' }, malignancy: { correct: false, text: 'Hematologic malignancy is an important consideration but is much less common than reactive causes.' } },
+        'cc-q2': { hes: { correct: true, text: 'Correct! Hypereosinophilic Syndrome (HES) requires: 1) AEC >1,500/µL, 2) Duration ≥6 months (or imminent need for treatment), 3) Evidence of end-organ damage, 4) No identifiable secondary cause. His 6-month duration meets the time criterion, but we need to evaluate for causes and organ damage.' }, acute: { correct: false, text: 'Six months of eosinophilia is not acute.' }, transient: { correct: false, text: 'Persistent elevation for 6 months is not transient.' }, reactive: { correct: false, text: 'The duration criterion applies to HES. Reactive eosinophilia has no specific time requirement.' } },
+        'hpi-q1': { strongy: { correct: true, text: 'Correct! Strongyloides stercoralis is UNIQUE among helminths because it can complete its entire lifecycle within the human host (autoinfection). This allows infection to persist for DECADES without re-exposure. It\'s endemic in the southeastern US and can be acquired from walking barefoot on contaminated soil.' }, ascaris: { correct: false, text: 'Ascaris causes eosinophilia during larval migration but doesn\'t autoinfect. Infections resolve without re-exposure.' }, giardia: { correct: false, text: 'Giardia is a protozoan, not a helminth. It typically doesn\'t cause eosinophilia.' }, pinworm: { correct: false, text: 'Pinworm (Enterobius) can reinfect through the fecal-oral route but doesn\'t have true autoinfection like Strongyloides.' } },
+        'exam-q1': { mononeuritis: { correct: true, text: 'Correct! Mononeuritis multiplex (asymmetric peripheral neuropathy affecting multiple named nerves) is a RED FLAG for vasculitis, including EGPA. It indicates eosinophilic infiltration of the vasa nervorum. Other EGPA findings include purpura, pulmonary infiltrates, cardiac involvement, and nasal polyps with severe asthma.' }, rhinitis: { correct: false, text: 'Allergic rhinitis is common and not specific. EGPA patients often have rhinitis/sinusitis, but it\'s not a red flag by itself.' }, wheezing: { correct: false, text: 'Mild wheezing with known asthma is expected. Severe, new-onset, or refractory asthma would be more concerning for EGPA.' }, eczema: { correct: false, text: 'Eczema is a common atopic condition and not a vasculitis red flag.' } },
+        'ddx-q1': { strongy: { correct: true, text: 'Correct! Strongyloides serology is CRITICAL before any immunosuppression (steroids, chemotherapy, biologics). Undiagnosed Strongyloides + steroids = risk of hyperinfection syndrome with >50% mortality. Texas is endemic, he has GI symptoms, and eosinophilia is characteristic. Test before you treat!' }, anca: { correct: false, text: 'ANCA is important for EGPA, but he lacks vasculitis symptoms (no mononeuritis, purpura, severe asthma). Strongyloides is more urgent given potential for fatal hyperinfection.' }, tryptase: { correct: false, text: 'Tryptase screens for mastocytosis, but he has no symptoms suggesting this (no flushing, urticaria, anaphylaxis). Strongyloides is higher priority.' }, biopsy: { correct: false, text: 'Bone marrow biopsy would be premature before ruling out treatable reactive causes like parasites.' } },
+        'ddx-q2': { hyper: { correct: true, text: 'Correct! Steroids suppress the immune response that normally contains Strongyloides. This allows massive autoinfection → hyperinfection syndrome with larvae disseminating to lungs, brain, and other organs. Mortality is >50%. ALWAYS screen for Strongyloides before steroids in patients with eosinophilia from endemic areas.' }, cure: { correct: false, text: 'Steroids worsen parasitic infections - they don\'t cure them.' }, nothing: { correct: false, text: 'Steroids profoundly affect the course of Strongyloides by allowing unchecked autoinfection.' }, mild: { correct: false, text: 'The consequences are much more severe - disseminated infection, sepsis, and death.' } },
+        'results-q1': { ivermectin: { correct: true, text: 'Correct! Ivermectin 200 mcg/kg daily × 2 days is first-line for uncomplicated Strongyloides. It has excellent efficacy (>95%) and is well-tolerated. Albendazole is an alternative but less effective. For hyperinfection, longer treatment courses are needed.' }, albendazole: { correct: false, text: 'Albendazole is an alternative but less effective than ivermectin for Strongyloides.' }, praziquantel: { correct: false, text: 'Praziquantel is used for flukes and tapeworms, not Strongyloides.' }, metronidazole: { correct: false, text: 'Metronidazole treats protozoa (Giardia, amebiasis), not helminths.' } },
+        'results-q2': { both: { correct: true, text: 'Correct! Follow both serology and AEC. Serology may remain positive for months after cure (antibody persistence), but titers should decline. AEC should normalize within weeks to months. Clinical improvement (resolution of GI symptoms) is also important. Some experts repeat treatment if serology remains strongly positive at 6 months.' }, serology: { correct: false, text: 'Serology alone is insufficient - antibodies can persist after cure. Need to follow AEC and clinical response too.' }, stool: { correct: false, text: 'Stool O&P has very poor sensitivity for Strongyloides (larvae shed intermittently). Serology is preferred.' }, none: { correct: false, text: 'Follow-up is important to confirm cure and detect treatment failure.' } },
+        'results-q3': { expand: { correct: true, text: 'Correct! If eosinophilia persists after treating identified reactive causes, expanded workup is needed. This includes bone marrow biopsy (looking for clonal eosinophils, increased blasts, dysplasia), FISH for PDGFRA/PDGFRB/FGFR1 rearrangements, and assessment for organ damage (echo, troponin, PFTs). Don\'t assume it\'s "just allergies."' }, retreat: { correct: false, text: 'If Strongyloides is cured (confirmed by declining serology), retreatment won\'t help. Need to look for other causes.' }, observe: { correct: false, text: 'Moderate persistent eosinophilia needs explanation. Allergies alone rarely cause AEC >1,500.' }, steroids: { correct: false, text: 'Steroids mask the eosinophilia without addressing the underlying cause. Need diagnosis before empiric treatment.' } },
+        'results-q4': { mpo: { correct: true, text: 'Correct! EGPA is associated with p-ANCA/MPO in 40-60% of cases. However, ~40% of EGPA patients are ANCA-negative! ANCA positivity correlates with vasculitic features (glomerulonephritis, neuropathy), while ANCA-negative EGPA often has more cardiac and pulmonary involvement. c-ANCA/PR3 is characteristic of GPA (granulomatosis with polyangiitis), not EGPA.' }, pr3: { correct: false, text: 'c-ANCA/PR3 is associated with GPA (granulomatosis with polyangiitis), not EGPA.' }, both: { correct: false, text: 'MPO/p-ANCA is much more common in EGPA than PR3/c-ANCA.' }, never: { correct: false, text: 'EGPA can be ANCA-positive (~40-60% are p-ANCA/MPO positive).' } }
+    };
+    
+    const labExplanations = {
+        strongy: { actual: 'POSITIVE (OD 2.4)', correct: 'positive', labels: { negative: 'Negative', positive: 'Positive' },
+            explanation: 'Strongyloides serology is POSITIVE! This explains his persistent eosinophilia and GI symptoms. He likely acquired the infection in Texas (endemic area) and has had it for years due to autoinfection. This is a treatable cause - ivermectin will cure him.' },
+        ige: { actual: '285 IU/mL (Elevated)', correct: 'elevated', labels: { normal: 'Normal (<100)', elevated: 'Elevated (100-500)', high: 'High (>500)' },
+            explanation: 'Total IgE is moderately elevated, consistent with his allergic rhinitis/asthma AND parasitic infection. Both allergic disease and helminths drive IgE production. This level is typical for atopy with parasites.' },
+        anca: { actual: 'Negative', correct: 'negative', labels: { negative: 'Negative', panca: 'p-ANCA/MPO positive', canca: 'c-ANCA/PR3 positive' },
+            explanation: 'ANCA is negative, making EGPA less likely (though ~40% of EGPA is ANCA-negative). His stable asthma, lack of severe sinusitis/polyps, and absence of vasculitic features (neuropathy, purpura) argue against EGPA.' },
+        tryptase: { actual: '5.2 ng/mL (Normal)', correct: 'normal', labels: { normal: 'Normal', elevated: 'Elevated (>11.4)' },
+            explanation: 'Tryptase is normal, making systemic mastocytosis unlikely. Mastocytosis can cause eosinophilia but usually presents with flushing, urticaria, and anaphylaxis. Normal tryptase is reassuring.' }
+    };
+    
+    function updateConf(lab) { document.getElementById(`conf-${lab}-val`).textContent = document.getElementById(`conf-${lab}`).value; state.confidences[lab] = parseInt(document.getElementById(`conf-${lab}`).value); }
+    
+    function selectOption(el, qId, value) {
+        el.parentElement.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('selected', 'correct', 'incorrect'));
+        el.classList.add('selected');
+        state.answers[qId] = value;
+        const isCorrect = value === correctAnswers[qId];
+        const fb = feedback[qId][value];
+        const feedbackBox = document.getElementById(`feedback-${qId}`);
+        feedbackBox.className = `feedback-box visible ${isCorrect ? 'correct' : 'incorrect'}`;
+        feedbackBox.innerHTML = `<div class="feedback-header ${isCorrect ? 'correct' : 'incorrect'}">${isCorrect ? '✓ Correct!' : '✗ Not quite'}</div><div class="feedback-text">${fb.text}</div>`;
+        el.classList.add(isCorrect ? 'correct' : 'incorrect');
+        checkPhaseComplete();
+    }
+    
+    function askQuestion(el, qId) { if (!el.classList.contains('asked')) { el.classList.add('asked'); document.getElementById(`resp-${qId}`).classList.add('visible'); } }
+    function examSystem(el) { el.classList.add('examined'); }
+    function selectPrediction(el, lab, value) { el.parentElement.querySelectorAll('.pred-choice').forEach(b => b.classList.remove('selected')); el.classList.add('selected'); state.predictions[lab] = value; checkPredictionsComplete(); }
+    
+    function checkPhaseComplete() {
+        const phase = state.currentPhase;
+        let complete = false;
+        if (phase === 'cc') complete = state.answers['cc-q1'] && state.answers['cc-q2'];
+        else if (phase === 'hpi') complete = state.answers['hpi-q1'];
+        else if (phase === 'exam') complete = state.answers['exam-q1'];
+        else if (phase === 'ddx') complete = state.answers['ddx-q1'] && state.answers['ddx-q2'];
+        const btn = document.getElementById(`btn-complete-${phase}`);
+        if (btn) btn.disabled = !complete;
+    }
+    
+    function checkPredictionsComplete() { document.getElementById('btn-submit-pred').disabled = !['strongy', 'ige', 'anca', 'tryptase'].every(l => state.predictions[l]); }
+    
+    function completePhase(phase) {
+        state.completedPhases.push(phase);
+        document.getElementById(`step-${phase}`).classList.remove('active');
+        document.getElementById(`step-${phase}`).classList.add('completed');
+        const phases = ['cc', 'hpi', 'exam', 'ddx', 'predict', 'results'];
+        const idx = phases.indexOf(phase);
+        const next = phases[idx + 1];
+        if (next) { document.getElementById(`step-${next}`).classList.remove('locked'); document.getElementById(`step-${next}`).classList.add('available'); document.getElementById(`conn-${idx + 1}`).classList.add('completed'); goToPhase(next); }
+    }
+    
+    function goToPhase(phase) {
+        if (document.getElementById(`step-${phase}`).classList.contains('locked')) return;
+        document.querySelectorAll('.timeline-step').forEach(s => { s.classList.remove('active'); if (s.classList.contains('available')) s.classList.remove('available'); });
+        document.getElementById(`step-${phase}`).classList.add('active');
+        document.querySelectorAll('.phase-content').forEach(c => c.classList.remove('active'));
+        document.getElementById(`phase-${phase}`).classList.add('active');
+        state.currentPhase = phase;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    function submitPredictions() {
+        let correct = 0;
+        ['strongy', 'ige', 'anca', 'tryptase'].forEach(lab => { if (state.predictions[lab] === correctPredictions[lab]) correct++; });
+        const pct = Math.round((correct / 4) * 100);
+        document.getElementById('final-score').textContent = `${pct}%`;
+        document.getElementById('results-title').textContent = pct >= 75 ? 'Excellent Diagnostic Reasoning!' : 'Good Learning Opportunity';
+        const container = document.getElementById('results-container');
+        container.innerHTML = '';
+        const labNames = { strongy: 'Strongyloides Serology', ige: 'Total IgE', anca: 'ANCA', tryptase: 'Serum Tryptase' };
+        ['strongy', 'ige', 'anca', 'tryptase'].forEach(lab => {
+            const info = labExplanations[lab];
+            const predicted = state.predictions[lab];
+            const isCorrect = predicted === info.correct;
+            container.innerHTML += `<div class="result-card"><div class="result-header"><div class="result-lab-name">${labNames[lab]}</div><div class="result-badge ${isCorrect ? 'correct' : 'incorrect'}">${isCorrect ? '✓' : '✗'}</div></div><div class="result-comparison"><div class="result-col"><div class="result-col-label">Your Prediction</div><div class="result-col-value">${info.labels[predicted]}</div></div><div class="result-col"><div class="result-col-label">Actual</div><div class="result-col-value" style="color:#34d399;">${info.actual}</div></div></div><div class="result-explanation">${info.explanation}</div></div>`;
+        });
+        completePhase('predict');
+    }
+    
+    ['strongy', 'ige', 'anca', 'tryptase'].forEach(lab => { state.confidences[lab] = 50; });
+    </script>
+</body>
+</html>

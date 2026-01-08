@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chronic Spontaneous Urticaria | A/I Clinical Reasoning Trainer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+        
+        .emr-header { background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); border-bottom: 2px solid #f472b6; padding: 12px 24px; position: sticky; top: 0; z-index: 100; }
+        .emr-header-inner { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+        .emr-logo { display: flex; align-items: center; gap: 12px; }
+        .emr-logo-icon { width: 40px; height: 40px; background: #f472b6; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+        .emr-logo-text { font-size: 18px; font-weight: 700; color: #fff; }
+        .emr-logo-text span { color: #fce7f3; }
+        .emr-patient-banner { display: flex; align-items: center; gap: 16px; background: rgba(244, 114, 182, 0.15); padding: 8px 16px; border-radius: 8px; border: 1px solid rgba(244, 114, 182, 0.3); }
+        .patient-avatar { width: 36px; height: 36px; background: #f472b6; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; color: #fff; font-size: 14px; }
+        .patient-info { font-size: 13px; }
+        .patient-name { font-weight: 600; color: #fff; }
+        .patient-demo { color: #fce7f3; }
+        .alert-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+        .alert-badge { padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; }
+        .alert-badge.warning { background: #f59e0b; color: #fff; }
+        .alert-badge.info { background: #ec4899; color: #fff; }
+        .emr-time { font-size: 12px; color: #fce7f3; text-align: right; }
+        
+        .progress-timeline { background: #1e293b; padding: 16px 24px; border-bottom: 1px solid #334155; }
+        .progress-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; gap: 0; overflow-x: auto; padding-bottom: 8px; }
+        .timeline-step { display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 8px; font-size: 12px; color: #64748b; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+        .timeline-step.locked { cursor: not-allowed; opacity: 0.5; }
+        .timeline-step.active { background: #ec4899; color: #fff; }
+        .timeline-step.completed { background: #065f46; color: #34d399; }
+        .timeline-step.available { background: #1e3a5f; color: #60a5fa; }
+        .step-icon { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; background: rgba(255,255,255,0.1); }
+        .timeline-step.completed .step-icon { background: #34d399; color: #065f46; }
+        .timeline-step.active .step-icon { background: #fff; color: #ec4899; }
+        .timeline-connector { width: 30px; height: 2px; background: #334155; flex-shrink: 0; }
+        .timeline-connector.completed { background: #34d399; }
+        
+        .main-content { max-width: 1400px; margin: 0 auto; padding: 24px; display: grid; grid-template-columns: 280px 1fr; gap: 24px; }
+        
+        .sidebar { background: #1e293b; border-radius: 12px; padding: 20px; height: fit-content; position: sticky; top: 140px; }
+        .sidebar-section { margin-bottom: 24px; }
+        .sidebar-title { font-size: 11px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+        .med-list { background: #0f172a; border-radius: 8px; padding: 12px; font-size: 12px; }
+        .med-item { padding: 6px 0; border-bottom: 1px solid #334155; color: #94a3b8; }
+        .med-item:last-child { border-bottom: none; }
+        .med-name { color: #e2e8f0; font-weight: 500; }
+        .vitals-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .vital-item { background: #0f172a; padding: 10px; border-radius: 8px; text-align: center; }
+        .vital-label { font-size: 10px; color: #64748b; margin-bottom: 4px; }
+        .vital-value { font-size: 16px; font-weight: 600; }
+        .vital-value.normal { color: #34d399; }
+        .history-box { background: #0f172a; border-radius: 8px; padding: 12px; font-size: 12px; color: #94a3b8; line-height: 1.6; }
+        .notes-area { background: #0f172a; border-radius: 8px; padding: 12px; }
+        .notes-area textarea { width: 100%; background: transparent; border: none; color: #e2e8f0; font-family: inherit; font-size: 12px; resize: none; min-height: 80px; }
+        .notes-area textarea:focus { outline: none; }
+        
+        .content-panel { background: #1e293b; border-radius: 12px; overflow: hidden; }
+        .panel-header { padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; }
+        .panel-header.phase-cc { background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); }
+        .panel-header.phase-hpi { background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); }
+        .panel-header.phase-exam { background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%); }
+        .panel-header.phase-ddx { background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); }
+        .panel-header.phase-predict { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        .panel-header.phase-results { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); }
+        .panel-title { font-size: 18px; font-weight: 600; color: #fff; display: flex; align-items: center; gap: 10px; }
+        .panel-badge { background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px; font-size: 12px; color: #fff; }
+        .panel-body { padding: 24px; }
+        
+        .phase-content { display: none; }
+        .phase-content.active { display: block; }
+        
+        .referral-box { background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+        .referral-label { font-size: 12px; color: rgba(255,255,255,0.7); margin-bottom: 8px; }
+        .referral-text { font-size: 18px; font-weight: 600; color: #fff; line-height: 1.4; }
+        .referral-context { margin-top: 12px; font-size: 14px; color: rgba(255,255,255,0.9); }
+        
+        .key-concept { background: linear-gradient(135deg, #065f46 0%, #064e3b 100%); border-radius: 12px; padding: 20px; margin-bottom: 24px; border: 1px solid #10b981; }
+        .key-concept-title { font-size: 14px; font-weight: 600; color: #34d399; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .key-concept-text { font-size: 14px; color: #a7f3d0; line-height: 1.6; }
+        
+        .question-card { background: #0f172a; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid #334155; }
+        .question-number { font-size: 11px; color: #ec4899; font-weight: 600; margin-bottom: 8px; }
+        .question-prompt { font-size: 15px; color: #e2e8f0; margin-bottom: 16px; line-height: 1.6; }
+        .question-options { display: flex; flex-direction: column; gap: 10px; }
+        .option-btn { background: #1e293b; border: 2px solid #334155; border-radius: 10px; padding: 14px 18px; text-align: left; color: #e2e8f0; cursor: pointer; transition: all 0.15s; font-size: 14px; }
+        .option-btn:hover { border-color: #ec4899; background: #500724; }
+        .option-btn.selected { border-color: #ec4899; background: #831843; }
+        .option-btn.correct { border-color: #22c55e; background: #065f46; }
+        .option-btn.incorrect { border-color: #ef4444; background: #7f1d1d; }
+        
+        .feedback-box { background: #0f172a; border-radius: 12px; padding: 20px; margin-top: 16px; border-left: 4px solid #ec4899; display: none; }
+        .feedback-box.visible { display: block; }
+        .feedback-box.correct { border-color: #22c55e; background: linear-gradient(135deg, #052e16 0%, #0f172a 100%); }
+        .feedback-box.incorrect { border-color: #ef4444; background: linear-gradient(135deg, #450a0a 0%, #0f172a 100%); }
+        .feedback-header { display: flex; align-items: center; gap: 10px; font-weight: 600; margin-bottom: 12px; }
+        .feedback-header.correct { color: #34d399; }
+        .feedback-header.incorrect { color: #f87171; }
+        .feedback-text { font-size: 14px; color: #94a3b8; line-height: 1.7; }
+        
+        .hpi-section { background: #0f172a; border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+        .hpi-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .hpi-title { font-weight: 600; color: #fff; display: flex; align-items: center; gap: 8px; }
+        .hpi-content { font-size: 14px; color: #cbd5e1; line-height: 1.8; }
+        .hpi-content p { margin-bottom: 12px; }
+        .hpi-highlight { background: rgba(251, 191, 36, 0.15); padding: 2px 6px; border-radius: 4px; color: #fbbf24; }
+        .hpi-critical { background: rgba(236, 72, 153, 0.15); padding: 2px 6px; border-radius: 4px; color: #f472b6; }
+        
+        .interview-questions { display: grid; gap: 10px; margin-top: 16px; }
+        .interview-q { background: #1e293b; border: 1px solid #334155; border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.15s; display: flex; justify-content: space-between; align-items: center; }
+        .interview-q:hover { border-color: #ec4899; }
+        .interview-q.asked { background: #0f172a; border-color: #22c55e; }
+        .interview-q-text { font-size: 14px; color: #e2e8f0; }
+        .interview-q-icon { color: #64748b; }
+        .interview-q.asked .interview-q-icon { color: #22c55e; }
+        .interview-response { background: linear-gradient(135deg, #1e3a5f 0%, #1e293b 100%); border-radius: 10px; padding: 16px; margin-top: 12px; display: none; border: 1px solid #3b82f6; }
+        .interview-response.visible { display: block; }
+        .response-label { font-size: 11px; color: #60a5fa; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .response-text { font-size: 14px; color: #e2e8f0; line-height: 1.6; font-style: italic; }
+        
+        .exam-systems { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+        .exam-system { background: #0f172a; border: 1px solid #334155; border-radius: 10px; padding: 16px; cursor: pointer; transition: all 0.15s; }
+        .exam-system:hover { border-color: #ec4899; }
+        .exam-system.examined { border-color: #22c55e; background: linear-gradient(135deg, #052e16 0%, #0f172a 100%); }
+        .exam-system-name { font-weight: 600; color: #fff; margin-bottom: 4px; font-size: 14px; }
+        .exam-system-hint { font-size: 11px; color: #64748b; }
+        .exam-findings { margin-top: 12px; padding-top: 12px; border-top: 1px solid #334155; font-size: 13px; color: #94a3b8; display: none; line-height: 1.5; }
+        .exam-system.examined .exam-findings { display: block; }
+        .finding-normal { color: #34d399; }
+        .finding-abnormal { color: #f87171; font-weight: 500; }
+        
+        .workup-box { background: linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%); border-radius: 12px; padding: 20px; margin-bottom: 24px; border: 1px solid #dc2626; }
+        .workup-title { font-size: 14px; font-weight: 600; color: #fca5a5; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .workup-content { font-size: 13px; color: #fecaca; line-height: 1.6; }
+        
+        .lab-prediction-card { background: #0f172a; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid #334155; }
+        .lab-pred-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; flex-wrap: wrap; gap: 8px; }
+        .lab-name { font-weight: 600; color: #fff; font-size: 15px; }
+        .lab-context { font-size: 12px; color: #94a3b8; margin-top: 4px; }
+        .lab-normal-range { font-size: 12px; color: #64748b; background: #1e293b; padding: 4px 10px; border-radius: 6px; }
+        .prediction-choices { display: flex; flex-wrap: wrap; gap: 10px; }
+        .pred-choice { padding: 10px 18px; background: #1e293b; border: 2px solid #334155; border-radius: 8px; color: #e2e8f0; cursor: pointer; transition: all 0.15s; font-size: 13px; }
+        .pred-choice:hover { border-color: #ec4899; }
+        .pred-choice.selected { border-color: #ec4899; background: #831843; }
+        .confidence-row { margin-top: 16px; padding-top: 16px; border-top: 1px solid #334155; }
+        .confidence-label { font-size: 13px; color: #94a3b8; margin-bottom: 8px; }
+        .confidence-slider { width: 100%; height: 8px; border-radius: 4px; background: #334155; -webkit-appearance: none; }
+        .confidence-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: #ec4899; cursor: pointer; }
+        .confidence-value { text-align: center; font-weight: 600; color: #ec4899; margin-top: 8px; }
+        
+        .results-summary { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); border-radius: 16px; padding: 32px; text-align: center; margin-bottom: 24px; }
+        .score-circle { width: 120px; height: 120px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto 16px; border: 4px solid rgba(255,255,255,0.3); }
+        .score-number { font-size: 36px; font-weight: 700; color: #fff; }
+        .score-label { font-size: 12px; color: rgba(255,255,255,0.7); }
+        .results-title { font-size: 20px; font-weight: 600; color: #fff; margin-bottom: 8px; }
+        .results-subtitle { font-size: 14px; color: rgba(255,255,255,0.8); }
+        
+        .result-card { background: #0f172a; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid #334155; }
+        .result-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .result-lab-name { font-weight: 600; color: #fff; }
+        .result-badge { padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+        .result-badge.correct { background: #065f46; color: #34d399; }
+        .result-badge.incorrect { background: #7f1d1d; color: #f87171; }
+        .result-comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+        .result-col { background: #1e293b; padding: 12px; border-radius: 8px; }
+        .result-col-label { font-size: 11px; color: #64748b; margin-bottom: 4px; }
+        .result-col-value { font-size: 16px; font-weight: 600; color: #fff; }
+        .result-explanation { font-size: 14px; color: #94a3b8; line-height: 1.7; padding: 16px; background: #1e293b; border-radius: 8px; border-left: 3px solid #ec4899; }
+        
+        .treatment-box { background: linear-gradient(135deg, #1e3a5f 0%, #1e293b 100%); border-radius: 12px; padding: 20px; margin-bottom: 24px; border: 1px solid #3b82f6; }
+        .treatment-title { font-size: 15px; font-weight: 600; color: #60a5fa; margin-bottom: 16px; }
+        .treatment-step { display: flex; gap: 12px; margin-bottom: 12px; padding: 12px; background: #0f172a; border-radius: 8px; }
+        .treatment-step-num { width: 28px; height: 28px; background: #3b82f6; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; color: #fff; font-size: 13px; flex-shrink: 0; }
+        .treatment-step-content { flex: 1; }
+        .treatment-step-title { font-weight: 600; color: #fff; font-size: 14px; margin-bottom: 4px; }
+        .treatment-step-desc { font-size: 13px; color: #94a3b8; }
+        
+        .learn-more-section { background: linear-gradient(135deg, #831843 0%, #500724 100%); border-radius: 12px; padding: 24px; margin-top: 24px; border: 1px solid #ec4899; }
+        .learn-more-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; color: #f9a8d4; font-weight: 600; }
+        .learn-more-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+        .learn-link { background: #1e1033; border: 1px solid #be185d; border-radius: 10px; padding: 16px; text-decoration: none; color: inherit; display: flex; gap: 14px; align-items: flex-start; transition: all 0.15s; }
+        .learn-link:hover { border-color: #f472b6; transform: translateY(-2px); }
+        .learn-link-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+        .learn-link-icon.mechanism { background: #065f46; }
+        .learn-link-icon.external { background: #1e40af; }
+        .learn-link-info { flex: 1; }
+        .learn-link-title { font-weight: 600; color: #fff; margin-bottom: 4px; font-size: 14px; }
+        .learn-link-desc { font-size: 12px; color: #f9a8d4; }
+        .learn-link-badge { font-size: 10px; padding: 2px 8px; border-radius: 10px; background: #500724; color: #f9a8d4; margin-top: 6px; display: inline-block; }
+        
+        .action-row { display: flex; justify-content: center; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 14px; transition: all 0.15s; display: flex; align-items: center; gap: 8px; }
+        .btn-primary { background: #ec4899; color: #fff; }
+        .btn-primary:hover { background: #db2777; }
+        .btn-secondary { background: #334155; color: #e2e8f0; }
+        .btn-success { background: #22c55e; color: #fff; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        @media (max-width: 1024px) { .main-content { grid-template-columns: 1fr; } .sidebar { position: static; } }
+        @media (max-width: 768px) { .emr-patient-banner { display: none; } .result-comparison { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header class="emr-header">
+        <div class="emr-header-inner">
+            <div class="emr-logo">
+                <div class="emr-logo-icon">⭕</div>
+                <div class="emr-logo-text">A/I <span>Trainer</span></div>
+            </div>
+            <div class="emr-patient-banner">
+                <div class="patient-avatar">SK</div>
+                <div class="patient-info">
+                    <div class="patient-name">Kim, Sarah</div>
+                    <div class="patient-demo">34 yo F • MRN: 847291</div>
+                </div>
+            </div>
+            <div class="alert-badges">
+                <span class="alert-badge warning">Daily Hives × 3 Months</span>
+                <span class="alert-badge info">Urticaria Workup</span>
+            </div>
+            <div class="emr-time">
+                <div>Allergy Clinic</div>
+                <div>New Patient Consult</div>
+            </div>
+        </div>
+    </header>
+    
+    <nav class="progress-timeline">
+        <div class="progress-inner">
+            <div class="timeline-step active" id="step-cc" onclick="goToPhase('cc')"><div class="step-icon">1</div><span>Referral</span></div>
+            <div class="timeline-connector" id="conn-1"></div>
+            <div class="timeline-step locked" id="step-hpi" onclick="goToPhase('hpi')"><div class="step-icon">2</div><span>Urticaria History</span></div>
+            <div class="timeline-connector" id="conn-2"></div>
+            <div class="timeline-step locked" id="step-exam" onclick="goToPhase('exam')"><div class="step-icon">3</div><span>Exam & UAS7</span></div>
+            <div class="timeline-connector" id="conn-3"></div>
+            <div class="timeline-step locked" id="step-ddx" onclick="goToPhase('ddx')"><div class="step-icon">4</div><span>Limited Workup</span></div>
+            <div class="timeline-connector" id="conn-4"></div>
+            <div class="timeline-step locked" id="step-predict" onclick="goToPhase('predict')"><div class="step-icon">5</div><span>Predict Labs</span></div>
+            <div class="timeline-connector" id="conn-5"></div>
+            <div class="timeline-step locked" id="step-results" onclick="goToPhase('results')"><div class="step-icon">6</div><span>Treatment</span></div>
+        </div>
+    </nav>
+    
+    <main class="main-content">
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">💊 Current Medications</div>
+                <div class="med-list">
+                    <div class="med-item"><span class="med-name">Cetirizine 10mg</span> daily (not helping)</div>
+                    <div class="med-item"><span class="med-name">Levothyroxine 50mcg</span> daily</div>
+                    <div class="med-item"><span class="med-name">Vitamin D</span> 2000 IU daily</div>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-title">❤️ Today's Vitals</div>
+                <div class="vitals-grid">
+                    <div class="vital-item"><div class="vital-label">Temp</div><div class="vital-value normal">98.2°F</div></div>
+                    <div class="vital-item"><div class="vital-label">BP</div><div class="vital-value normal">118/72</div></div>
+                    <div class="vital-item"><div class="vital-label">HR</div><div class="vital-value normal">74</div></div>
+                    <div class="vital-item"><div class="vital-label">SpO₂</div><div class="vital-value normal">99%</div></div>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-title">📋 PMH</div>
+                <div class="history-box">
+                    Hashimoto's thyroiditis (well-controlled). No other significant medical history. No surgeries.
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-title">📝 Notes</div>
+                <div class="notes-area">
+                    <textarea placeholder="Key points: CSU workup is LIMITED, avoid overtesting..."></textarea>
+                </div>
+            </div>
+        </aside>
+        
+        <div class="content-panel">
+            <!-- PHASE 1: Referral -->
+            <div class="phase-content active" id="phase-cc">
+                <div class="panel-header phase-cc">
+                    <div class="panel-title"><span>📋</span> Allergy Referral</div>
+                    <div class="panel-badge">Step 1 of 6</div>
+                </div>
+                <div class="panel-body">
+                    <div class="referral-box">
+                        <div class="referral-label">REFERRAL REASON</div>
+                        <div class="referral-text">Daily hives × 3 months, not responding to OTC antihistamines</div>
+                        <div class="referral-context">34-year-old woman with itchy, raised welts appearing daily for the past 3 months. No clear trigger identified. Cetirizine provides minimal relief.</div>
+                    </div>
+                    
+                    <div class="key-concept">
+                        <div class="key-concept-title">💡 Key Teaching Point</div>
+                        <div class="key-concept-text">
+                            <strong>Chronic urticaria</strong> is defined as hives occurring most days for ≥6 weeks. When no external trigger is identified (food, drug, infection), it's called <strong>Chronic Spontaneous Urticaria (CSU)</strong>. Despite patient and physician instincts to "find the cause," extensive allergy testing is NOT recommended and rarely identifies a trigger.
+                        </div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-number">QUESTION 1 OF 8</div>
+                        <div class="question-prompt">This patient has had daily hives for 3 months. What is the MOST accurate classification?</div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q1', 'csu')">Chronic Spontaneous Urticaria (CSU)</div>
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q1', 'acute')">Acute urticaria</div>
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q1', 'allergic')">Allergic urticaria</div>
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q1', 'physical')">Physical urticaria</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-cc-q1"></div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-number">QUESTION 2 OF 8</div>
+                        <div class="question-prompt">What percentage of CSU cases have an identifiable external trigger (food, drug, environmental allergen)?</div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q2', 'rare')">Less than 10% (triggers are rarely found)</div>
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q2', 'quarter')">About 25%</div>
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q2', 'half')">About 50%</div>
+                            <div class="option-btn" onclick="selectOption(this, 'cc-q2', 'most')">More than 75%</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-cc-q2"></div>
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-primary" onclick="completePhase('cc')" id="btn-complete-cc" disabled>Continue to Urticaria History →</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PHASE 2: HPI -->
+            <div class="phase-content" id="phase-hpi">
+                <div class="panel-header phase-hpi">
+                    <div class="panel-title"><span>🔴</span> Urticaria History</div>
+                    <div class="panel-badge">Step 2 of 6</div>
+                </div>
+                <div class="panel-body">
+                    <div class="hpi-section">
+                        <div class="hpi-header"><div class="hpi-title">📄 Patient History</div></div>
+                        <div class="hpi-content">
+                            <p>"The hives started about <span class="hpi-highlight">3 months ago</span> out of nowhere. I wake up with them, they come and go throughout the day, and new ones appear every day. They're <span class="hpi-critical">incredibly itchy</span> - it's affecting my sleep and my work."</p>
+                            <p>"Each individual hive lasts maybe <span class="hpi-highlight">a few hours</span> and then fades, but new ones keep appearing. I haven't changed anything - no new foods, detergents, medications, nothing. I've tried eliminating foods but nothing helps."</p>
+                            <p>"The Zyrtec my PCP gave me helps a little, but I still get hives every day. She ran some allergy tests that were all negative."</p>
+                        </div>
+                    </div>
+                    
+                    <div class="interview-questions">
+                        <div class="interview-q" onclick="askQuestion(this, 'angioedema')">
+                            <span class="interview-q-text">"Do you ever get swelling of your lips, eyes, or tongue?"</span>
+                            <span class="interview-q-icon">💬</span>
+                        </div>
+                        <div class="interview-response" id="resp-angioedema">
+                            <div class="response-label">Patient Response</div>
+                            <div class="response-text">"Yes, sometimes my lips swell up, usually when the hives are really bad. It goes down after a few hours. My throat has never felt tight though."</div>
+                        </div>
+                        
+                        <div class="interview-q" onclick="askQuestion(this, 'triggers')">
+                            <span class="interview-q-text">"Does anything seem to make the hives worse - pressure, heat, cold, exercise?"</span>
+                            <span class="interview-q-icon">💬</span>
+                        </div>
+                        <div class="interview-response" id="resp-triggers">
+                            <div class="response-label">Patient Response</div>
+                            <div class="response-text">"Not really. Sometimes stress makes them worse, but they happen even on good days. Pressure from tight clothing doesn't seem to matter. Heat and cold don't trigger them."</div>
+                        </div>
+                        
+                        <div class="interview-q" onclick="askQuestion(this, 'duration')">
+                            <span class="interview-q-text">"How long does each individual hive last before it fades?"</span>
+                            <span class="interview-q-icon">💬</span>
+                        </div>
+                        <div class="interview-response" id="resp-duration">
+                            <div class="response-label">Patient Response</div>
+                            <div class="response-text">"A few hours, maybe up to half a day. They don't leave any marks or bruises when they go away."</div>
+                        </div>
+                        
+                        <div class="interview-q" onclick="askQuestion(this, 'systemic')">
+                            <span class="interview-q-text">"Any fevers, joint pain, or other symptoms with the hives?"</span>
+                            <span class="interview-q-icon">💬</span>
+                        </div>
+                        <div class="interview-response" id="resp-systemic">
+                            <div class="response-label">Patient Response</div>
+                            <div class="response-text">"No fevers or joint pain. Just the hives and the itching. I feel fine otherwise."</div>
+                        </div>
+                    </div>
+                    
+                    <div class="question-card" style="margin-top: 24px;">
+                        <div class="question-number">QUESTION 3 OF 8</div>
+                        <div class="question-prompt">The patient reports individual hives lasting "a few hours" with no residual marks. What does this timing indicate?</div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'hpi-q1', 'typical')">Typical CSU - individual wheals resolve within 24 hours without bruising</div>
+                            <div class="option-btn" onclick="selectOption(this, 'hpi-q1', 'vasculitis')">Concerning for urticarial vasculitis - need skin biopsy</div>
+                            <div class="option-btn" onclick="selectOption(this, 'hpi-q1', 'allergic')">Consistent with IgE-mediated allergic urticaria</div>
+                            <div class="option-btn" onclick="selectOption(this, 'hpi-q1', 'physical')">Indicates physical urticaria (dermographism)</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-hpi-q1"></div>
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-secondary" onclick="goToPhase('cc')">← Back</button>
+                        <button class="btn btn-primary" onclick="completePhase('hpi')" id="btn-complete-hpi" disabled>Continue to Exam →</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PHASE 3: Exam & UAS7 -->
+            <div class="phase-content" id="phase-exam">
+                <div class="panel-header phase-exam">
+                    <div class="panel-title"><span>🩺</span> Examination & UAS7</div>
+                    <div class="panel-badge">Step 3 of 6</div>
+                </div>
+                <div class="panel-body">
+                    <div class="exam-systems">
+                        <div class="exam-system" onclick="examSystem(this)">
+                            <div class="exam-system-name">👤 General</div>
+                            <div class="exam-system-hint">Overall appearance</div>
+                            <div class="exam-findings"><span class="finding-normal">Well-appearing, no distress</span>. Scratching arms during interview.</div>
+                        </div>
+                        <div class="exam-system" onclick="examSystem(this)">
+                            <div class="exam-system-name">🔴 Skin - Trunk</div>
+                            <div class="exam-system-hint">Chest, abdomen, back</div>
+                            <div class="exam-findings"><span class="finding-abnormal">Multiple erythematous, raised wheals</span> on trunk. Varying sizes (1-5cm). <span class="finding-normal">No bruising, no hyperpigmentation</span>. Blanch with pressure.</div>
+                        </div>
+                        <div class="exam-system" onclick="examSystem(this)">
+                            <div class="exam-system-name">🔴 Skin - Extremities</div>
+                            <div class="exam-system-hint">Arms, legs</div>
+                            <div class="exam-findings"><span class="finding-abnormal">Scattered wheals on upper arms and thighs</span>. Excoriations from scratching. <span class="finding-normal">No petechiae</span>.</div>
+                        </div>
+                        <div class="exam-system" onclick="examSystem(this)">
+                            <div class="exam-system-name">😮 Face/Lips</div>
+                            <div class="exam-system-hint">Angioedema assessment</div>
+                            <div class="exam-findings"><span class="finding-normal">No current angioedema</span>. Lips and periorbital areas normal today. Oropharynx clear.</div>
+                        </div>
+                        <div class="exam-system" onclick="examSystem(this)">
+                            <div class="exam-system-name">✋ Dermographism Test</div>
+                            <div class="exam-system-hint">Stroke skin with tongue depressor</div>
+                            <div class="exam-findings"><span class="finding-abnormal">Positive dermographism</span> - linear wheal forms 2-3 minutes after stroking forearm. Common in CSU (up to 50%).</div>
+                        </div>
+                        <div class="exam-system" onclick="examSystem(this)">
+                            <div class="exam-system-name">🦋 Thyroid</div>
+                            <div class="exam-system-hint">Given Hashimoto's history</div>
+                            <div class="exam-findings"><span class="finding-normal">Non-enlarged, non-tender</span>. No nodules palpable.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="hpi-section" style="margin-top: 24px;">
+                        <div class="hpi-header"><div class="hpi-title">📊 UAS7 Score (Urticaria Activity Score)</div></div>
+                        <div class="hpi-content">
+                            <p>Patient completed UAS7 diary for the past week:</p>
+                            <p><strong>Daily scores (Wheals 0-3 + Itch 0-3):</strong></p>
+                            <p>Day 1: 4 | Day 2: 5 | Day 3: 4 | Day 4: 6 | Day 5: 5 | Day 6: 4 | Day 7: 5</p>
+                            <p><strong>Total UAS7: <span class="hpi-critical">33/42</span></strong> (Severe CSU: 28-42)</p>
+                        </div>
+                    </div>
+                    
+                    <div class="question-card" style="margin-top: 24px;">
+                        <div class="question-number">QUESTION 4 OF 8</div>
+                        <div class="question-prompt">Her UAS7 is 33 (severe). What is the PRIMARY purpose of the UAS7 in CSU management?</div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'exam-q1', 'monitor')">To monitor disease activity and treatment response over time</div>
+                            <div class="option-btn" onclick="selectOption(this, 'exam-q1', 'diagnose')">To diagnose CSU vs other urticaria types</div>
+                            <div class="option-btn" onclick="selectOption(this, 'exam-q1', 'trigger')">To identify triggers</div>
+                            <div class="option-btn" onclick="selectOption(this, 'exam-q1', 'biologic')">To determine biologic eligibility</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-exam-q1"></div>
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-secondary" onclick="goToPhase('hpi')">← Back</button>
+                        <button class="btn btn-primary" onclick="completePhase('exam')" id="btn-complete-exam" disabled>Continue to Workup →</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PHASE 4: Limited Workup -->
+            <div class="phase-content" id="phase-ddx">
+                <div class="panel-header phase-ddx">
+                    <div class="panel-title"><span>🔬</span> The Limited Workup</div>
+                    <div class="panel-badge">Step 4 of 6</div>
+                </div>
+                <div class="panel-body">
+                    <div class="workup-box">
+                        <div class="workup-title">⚠️ Common Mistake: Overtesting in CSU</div>
+                        <div class="workup-content">
+                            Many patients with CSU receive extensive (and expensive) allergy panels, autoimmune workups, and imaging. Guidelines recommend a <strong>LIMITED workup</strong> because extensive testing rarely changes management and can cause patient anxiety from false positives.
+                        </div>
+                    </div>
+                    
+                    <div class="key-concept">
+                        <div class="key-concept-title">✅ Guideline-Recommended CSU Workup</div>
+                        <div class="key-concept-text">
+                            <strong>Routine (all patients):</strong> CBC with differential, CRP or ESR<br><br>
+                            <strong>If history suggests:</strong> TSH (thyroid symptoms), consider IgE (if planning omalizumab)<br><br>
+                            <strong>NOT recommended routinely:</strong> Allergy skin testing, food-specific IgE panels, ANA, complement levels, hepatitis serologies, stool O&P, H. pylori testing
+                        </div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-number">QUESTION 5 OF 8</div>
+                        <div class="question-prompt">This patient's PCP already ran "allergy tests that were all negative." What is your response?</div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'ddx-q1', 'expected')">Expected - allergy testing is not useful in CSU and not recommended</div>
+                            <div class="option-btn" onclick="selectOption(this, 'ddx-q1', 'more')">Should order more comprehensive allergy panel</div>
+                            <div class="option-btn" onclick="selectOption(this, 'ddx-q1', 'repeat')">Need to repeat testing - may have missed something</div>
+                            <div class="option-btn" onclick="selectOption(this, 'ddx-q1', 'challenge')">Should proceed with food challenges</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-ddx-q1"></div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-number">QUESTION 6 OF 8</div>
+                        <div class="question-prompt">Given her history of Hashimoto's thyroiditis, which additional test is reasonable?</div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'ddx-q2', 'tsh')">TSH - ensure thyroid is well-controlled (thyroid dysfunction can worsen CSU)</div>
+                            <div class="option-btn" onclick="selectOption(this, 'ddx-q2', 'antibodies')">Anti-thyroid antibodies - to reassess Hashimoto's</div>
+                            <div class="option-btn" onclick="selectOption(this, 'ddx-q2', 'ana')">ANA - screen for other autoimmune diseases</div>
+                            <div class="option-btn" onclick="selectOption(this, 'ddx-q2', 'ultrasound')">Thyroid ultrasound</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-ddx-q2"></div>
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-secondary" onclick="goToPhase('exam')">← Back</button>
+                        <button class="btn btn-primary" onclick="completePhase('ddx')" id="btn-complete-ddx" disabled>Continue to Predict Labs →</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PHASE 5: Predict Labs -->
+            <div class="phase-content" id="phase-predict">
+                <div class="panel-header phase-predict">
+                    <div class="panel-title"><span>🔮</span> Predict Lab Results</div>
+                    <div class="panel-badge">Step 5 of 6</div>
+                </div>
+                <div class="panel-body">
+                    <p style="color: #94a3b8; margin-bottom: 20px;">Based on the limited workup for CSU, predict Sarah's lab results:</p>
+                    
+                    <div class="lab-prediction-card">
+                        <div class="lab-pred-header">
+                            <div><div class="lab-name">CBC with Differential</div><div class="lab-context">Screen for eosinophilia, anemia, infection</div></div>
+                            <div class="lab-normal-range">WBC 4.5-11, Eos 1-4%</div>
+                        </div>
+                        <div class="prediction-choices">
+                            <div class="pred-choice" onclick="selectPrediction(this, 'cbc', 'normal')">Normal</div>
+                            <div class="pred-choice" onclick="selectPrediction(this, 'cbc', 'eosinophilia')">Eosinophilia</div>
+                            <div class="pred-choice" onclick="selectPrediction(this, 'cbc', 'leukocytosis')">Leukocytosis</div>
+                            <div class="pred-choice" onclick="selectPrediction(this, 'cbc', 'anemia')">Anemia</div>
+                        </div>
+                        <div class="confidence-row">
+                            <div class="confidence-label">Confidence:</div>
+                            <input type="range" class="confidence-slider" id="conf-cbc" min="0" max="100" value="50" oninput="updateConf('cbc')">
+                            <div class="confidence-value"><span id="conf-cbc-val">50</span>%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="lab-prediction-card">
+                        <div class="lab-pred-header">
+                            <div><div class="lab-name">CRP (C-Reactive Protein)</div><div class="lab-context">Inflammatory marker</div></div>
+                            <div class="lab-normal-range">Normal: <0.5 mg/dL</div>
+                        </div>
+                        <div class="prediction-choices">
+                            <div class="pred-choice" onclick="selectPrediction(this, 'crp', 'normal')">Normal</div>
+                            <div class="pred-choice" onclick="selectPrediction(this, 'crp', 'mild')">Mildly elevated</div>
+                            <div class="pred-choice" onclick="selectPrediction(this, 'crp', 'high')">Significantly elevated</div>
+                        </div>
+                        <div class="confidence-row">
+                            <div class="confidence-label">Confidence:</div>
+                            <input type="range" class="confidence-slider" id="conf-crp" min="0" max="100" value="50" oninput="updateConf('crp')">
+                            <div class="confidence-value"><span id="conf-crp-val">50</span>%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="lab-prediction-card">
+                        <div class="lab-pred-header">
+                            <div><div class="lab-name">TSH</div><div class="lab-context">Given Hashimoto's history</div></div>
+                            <div class="lab-normal-range">Normal: 0.4-4.0 mIU/L</div>
+                        </div>
+                        <div class="prediction-choices">
+                            <div class="pred-choice" onclick="selectPrediction(this, 'tsh', 'normal')">Normal (well-controlled)</div>
+                            <div class="pred-choice" onclick="selectPrediction(this, 'tsh', 'high')">Elevated (hypothyroid)</div>
+                            <div class="pred-choice" onclick="selectPrediction(this, 'tsh', 'low')">Low (hyperthyroid)</div>
+                        </div>
+                        <div class="confidence-row">
+                            <div class="confidence-label">Confidence:</div>
+                            <input type="range" class="confidence-slider" id="conf-tsh" min="0" max="100" value="50" oninput="updateConf('tsh')">
+                            <div class="confidence-value"><span id="conf-tsh-val">50</span>%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="lab-prediction-card">
+                        <div class="lab-pred-header">
+                            <div><div class="lab-name">Total IgE</div><div class="lab-context">Useful for omalizumab dosing</div></div>
+                            <div class="lab-normal-range">Normal: <100 IU/mL</div>
+                        </div>
+                        <div class="prediction-choices">
+                            <div class="pred-choice" onclick="selectPrediction(this, 'ige', 'low')">Low (<30)</div>
+                            <div class="pred-choice" onclick="selectPrediction(this, 'ige', 'normal')">Normal (30-100)</div>
+                            <div class="pred-choice" onclick="selectPrediction(this, 'ige', 'elevated')">Mildly elevated (100-300)</div>
+                            <div class="pred-choice" onclick="selectPrediction(this, 'ige', 'high')">High (>300)</div>
+                        </div>
+                        <div class="confidence-row">
+                            <div class="confidence-label">Confidence:</div>
+                            <input type="range" class="confidence-slider" id="conf-ige" min="0" max="100" value="50" oninput="updateConf('ige')">
+                            <div class="confidence-value"><span id="conf-ige-val">50</span>%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-secondary" onclick="goToPhase('ddx')">← Back</button>
+                        <button class="btn btn-success" onclick="submitPredictions()" id="btn-submit-pred" disabled>🔍 Reveal Results</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- PHASE 6: Results & Treatment -->
+            <div class="phase-content" id="phase-results">
+                <div class="panel-header phase-results">
+                    <div class="panel-title"><span>💊</span> Results & Treatment</div>
+                    <div class="panel-badge">Step 6 of 6</div>
+                </div>
+                <div class="panel-body">
+                    <div class="results-summary">
+                        <div class="score-circle">
+                            <div class="score-number" id="final-score">--</div>
+                            <div class="score-label">Lab Prediction</div>
+                        </div>
+                        <div class="results-title" id="results-title">CSU Confirmed</div>
+                        <div class="results-subtitle">Limited workup unremarkable - proceed with stepwise treatment</div>
+                    </div>
+                    
+                    <div id="results-container"></div>
+                    
+                    <div class="treatment-box">
+                        <div class="treatment-title">📋 CSU Treatment Algorithm (Guideline-Based)</div>
+                        <div class="treatment-step">
+                            <div class="treatment-step-num">1</div>
+                            <div class="treatment-step-content">
+                                <div class="treatment-step-title">Second-generation H1 antihistamine (standard dose)</div>
+                                <div class="treatment-step-desc">Cetirizine, loratadine, fexofenadine, etc. She's already on this and it's not working.</div>
+                            </div>
+                        </div>
+                        <div class="treatment-step">
+                            <div class="treatment-step-num">2</div>
+                            <div class="treatment-step-content">
+                                <div class="treatment-step-title">INCREASE antihistamine up to 4× standard dose</div>
+                                <div class="treatment-step-desc">Example: Cetirizine 10mg → 20mg → 40mg daily. This is the NEXT step for Sarah. Safe and effective in most patients.</div>
+                            </div>
+                        </div>
+                        <div class="treatment-step">
+                            <div class="treatment-step-num">3</div>
+                            <div class="treatment-step-content">
+                                <div class="treatment-step-title">Add omalizumab (Xolair) if antihistamines fail</div>
+                                <div class="treatment-step-desc">Anti-IgE biologic, FDA-approved for CSU. Works regardless of IgE level. Given as injection q4 weeks.</div>
+                            </div>
+                        </div>
+                        <div class="treatment-step">
+                            <div class="treatment-step-num">4</div>
+                            <div class="treatment-step-content">
+                                <div class="treatment-step-title">Consider cyclosporine if omalizumab fails</div>
+                                <div class="treatment-step-desc">Reserved for refractory cases. Requires monitoring. Avoid chronic systemic steroids!</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-number">QUESTION 7 OF 8</div>
+                        <div class="question-prompt">What is the NEXT best step for Sarah, given cetirizine 10mg daily is not controlling her symptoms?</div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'results-q1', 'updose')">Increase cetirizine to 20-40mg daily (up to 4× dose)</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q1', 'xolair')">Start omalizumab immediately</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q1', 'prednisone')">Start prednisone taper</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q1', 'switch')">Switch to a different antihistamine at standard dose</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-results-q1"></div>
+                    </div>
+                    
+                    <div class="question-card">
+                        <div class="question-number">QUESTION 8 OF 8</div>
+                        <div class="question-prompt">If high-dose antihistamines fail and you plan to start omalizumab, what is TRUE about its use in CSU?</div>
+                        <div class="question-options">
+                            <div class="option-btn" onclick="selectOption(this, 'results-q2', 'anylevel')">It works regardless of IgE level (dosing is fixed, not weight/IgE-based like in asthma)</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q2', 'highige')">Only works if IgE is elevated</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q2', 'lowige')">Only works if IgE is low</div>
+                            <div class="option-btn" onclick="selectOption(this, 'results-q2', 'skin')">Requires positive allergy skin testing</div>
+                        </div>
+                        <div class="feedback-box" id="feedback-results-q2"></div>
+                    </div>
+                    
+                    <div class="learn-more-section">
+                        <div class="learn-more-header"><span>📚</span> Continue Learning</div>
+                        <div class="learn-more-grid">
+                            <a href="ai-trainer-angioedema.html" class="learn-link">
+                                <div class="learn-link-icon mechanism">😮</div>
+                                <div class="learn-link-info">
+                                    <div class="learn-link-title">Angioedema Without Urticaria</div>
+                                    <div class="learn-link-desc">ACE-I vs HAE differential</div>
+                                    <div class="learn-link-badge">A/I Trainer</div>
+                                </div>
+                            </a>
+                            <a href="https://www.aaaai.org/tools-for-the-public/conditions-library/allergies/chronic-urticaria-(hives)" target="_blank" class="learn-link">
+                                <div class="learn-link-icon external">🌐</div>
+                                <div class="learn-link-info">
+                                    <div class="learn-link-title">AAAAI Urticaria Resources</div>
+                                    <div class="learn-link-desc">Patient education materials</div>
+                                    <div class="learn-link-badge">External • Open Access</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="action-row">
+                        <button class="btn btn-secondary" onclick="location.href='ai-clinical-reasoning-hub.html'">← Case Library</button>
+                        <button class="btn btn-primary" onclick="location.href='ai-trainer-mastocytosis.html'">Next: Mast Cell Activation →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+    const state = { currentPhase: 'cc', completedPhases: [], answers: {}, predictions: {}, confidences: {} };
+    
+    const correctAnswers = {
+        'cc-q1': 'csu', 'cc-q2': 'rare', 'hpi-q1': 'typical',
+        'exam-q1': 'monitor', 'ddx-q1': 'expected', 'ddx-q2': 'tsh',
+        'results-q1': 'updose', 'results-q2': 'anylevel'
+    };
+    
+    const correctPredictions = { cbc: 'normal', crp: 'normal', tsh: 'normal', ige: 'normal' };
+    
+    const feedback = {
+        'cc-q1': { csu: { correct: true, text: 'Correct! Chronic Spontaneous Urticaria (CSU) is defined as hives occurring most days for ≥6 weeks without an identifiable external trigger. "Spontaneous" means hives appear without a clear cause - distinguishing it from inducible urticarias (pressure, cold, etc.) and acute allergic urticaria.' }, acute: { correct: false, text: 'Acute urticaria lasts <6 weeks. This patient has had hives for 3 months, making it chronic.' }, allergic: { correct: false, text: 'Allergic (IgE-mediated) urticaria has an identifiable trigger (food, drug, insect). This patient has no identified trigger despite elimination attempts.' }, physical: { correct: false, text: 'Physical urticarias are triggered by specific physical stimuli (pressure, cold, heat, vibration). While she has dermographism, her hives occur spontaneously without physical triggers.' } },
+        'cc-q2': { rare: { correct: true, text: 'Correct! Less than 10% of CSU cases have an identifiable trigger. This is why extensive allergy testing is NOT recommended - it rarely changes management and can lead to unnecessary dietary restrictions from false positives. CSU is thought to be autoimmune/autoreactive in many cases.' }, quarter: { correct: false, text: 'The yield of trigger identification in CSU is actually much lower - less than 10%.' }, half: { correct: false, text: 'Triggers are rarely found in CSU. Extensive workups are not cost-effective.' }, most: { correct: false, text: 'This is a common misconception. CSU by definition lacks an identifiable trigger.' } },
+        'hpi-q1': { typical: { correct: true, text: 'Correct! In typical CSU, individual wheals resolve within 24 hours (usually faster) and leave no residual marks. If hives persist >24 hours in the same location or leave bruising/hyperpigmentation, consider urticarial vasculitis and obtain skin biopsy.' }, vasculitis: { correct: false, text: 'Urticarial vasculitis presents with hives lasting >24 hours that leave residual bruising or hyperpigmentation. Her hives resolve in hours without marks.' }, allergic: { correct: false, text: 'Duration doesn\'t specifically indicate IgE-mediated allergy. The lack of identifiable trigger makes allergic urticaria unlikely.' }, physical: { correct: false, text: 'Physical urticarias have specific triggers. Duration doesn\'t diagnose dermographism - direct testing does.' } },
+        'exam-q1': { monitor: { correct: true, text: 'Correct! The UAS7 is a validated tool to monitor CSU disease activity and treatment response. Patients rate wheals (0-3) and itch (0-3) daily for 7 days. Scores: 0 = well-controlled, 1-6 = mild, 7-15 = moderate, 16-27 = moderate-severe, 28-42 = severe. It helps track improvement with treatment.' }, diagnose: { correct: false, text: 'UAS7 doesn\'t diagnose CSU - clinical history does. UAS7 quantifies disease severity and tracks response.' }, trigger: { correct: false, text: 'UAS7 doesn\'t identify triggers. It\'s a symptom severity measure.' }, biologic: { correct: false, text: 'While severe UAS7 supports biologic consideration, the primary purpose is monitoring disease activity over time.' } },
+        'ddx-q1': { expected: { correct: true, text: 'Correct! Allergy testing (skin prick, specific IgE panels) is NOT recommended in CSU workup. External allergens are rarely the cause, and positive results often represent clinically irrelevant sensitization, leading to unnecessary avoidance. The negative tests are expected and should not prompt further allergy testing.' }, more: { correct: false, text: 'More allergy testing is not indicated. CSU rarely has an allergic trigger, and extensive panels lead to false positives and unnecessary restrictions.' }, repeat: { correct: false, text: 'Repeating negative allergy tests is not useful. The negative results are expected in CSU.' }, challenge: { correct: false, text: 'Food challenges are not indicated when there\'s no history suggesting food-triggered reactions.' } },
+        'ddx-q2': { tsh: { correct: true, text: 'Correct! TSH is reasonable given her Hashimoto\'s. Thyroid dysfunction (both hypo- and hyperthyroidism) can worsen urticaria. Ensuring her thyroid is well-controlled on current levothyroxine dose is appropriate. Some studies show autoimmune thyroiditis is more common in CSU patients.' }, antibodies: { correct: false, text: 'She already has diagnosed Hashimoto\'s. Rechecking antibody levels doesn\'t change management. TSH is more useful to confirm adequate treatment.' }, ana: { correct: false, text: 'ANA is not routinely recommended in CSU workup. The association with other autoimmune diseases doesn\'t justify screening.' }, ultrasound: { correct: false, text: 'Thyroid ultrasound isn\'t indicated unless there are nodules on exam or other concerning features.' } },
+        'results-q1': { updose: { correct: true, text: 'Correct! The next step per guidelines is to INCREASE second-generation antihistamines up to 4× the standard dose (e.g., cetirizine 40mg daily). This is safe, effective in many patients, and should be tried before adding biologics. Many patients respond to higher doses even when standard doses fail.' }, xolair: { correct: false, text: 'Omalizumab is reserved for patients who fail high-dose antihistamines. Always maximize antihistamine therapy first.' }, prednisone: { correct: false, text: 'Systemic steroids should be avoided in CSU management. They provide temporary relief but cause significant side effects with chronic use. Short bursts may be used for severe flares only.' }, switch: { correct: false, text: 'Switching antihistamines at standard dose is less effective than increasing the dose of the current antihistamine. Up-dosing is the guideline-recommended approach.' } },
+        'results-q2': { anylevel: { correct: true, text: 'Correct! Unlike in allergic asthma (where omalizumab dosing is based on weight and IgE level), omalizumab for CSU uses a FIXED dose (150-300mg q4 weeks) regardless of IgE level. It works through mechanisms beyond simple IgE binding, possibly by down-regulating FcεRI receptors on mast cells and basophils.' }, highige: { correct: false, text: 'Omalizumab works in CSU regardless of baseline IgE level. Some patients with low IgE respond excellently.' }, lowige: { correct: false, text: 'IgE level does not predict response in CSU. The mechanism in CSU differs from allergic disease.' }, skin: { correct: false, text: 'Allergy skin testing is not required or useful for omalizumab in CSU. It\'s not treating an allergic condition.' } }
+    };
+    
+    const labExplanations = {
+        cbc: { actual: 'WBC 7.2, Eos 3%', correct: 'normal', labels: { normal: 'Normal', eosinophilia: 'Eosinophilia', leukocytosis: 'Leukocytosis', anemia: 'Anemia' },
+            explanation: 'CBC is typically NORMAL in CSU. Eosinophilia, if present, might prompt consideration of other conditions (drug reaction, parasitic infection, eosinophilic disorders). A normal CBC is reassuring and expected.' },
+        crp: { actual: '0.3 mg/dL (Normal)', correct: 'normal', labels: { normal: 'Normal', mild: 'Mildly elevated', high: 'Significantly elevated' },
+            explanation: 'CRP is typically NORMAL in CSU. Elevated inflammatory markers would raise concern for urticarial vasculitis, infection, or systemic inflammatory conditions. Normal CRP is expected and reassuring.' },
+        tsh: { actual: '2.1 mIU/L (Normal)', correct: 'normal', labels: { normal: 'Normal (well-controlled)', high: 'Elevated (hypothyroid)', low: 'Low (hyperthyroid)' },
+            explanation: 'TSH is normal, confirming her Hashimoto\'s is well-controlled on levothyroxine. Thyroid dysfunction can exacerbate urticaria, so ensuring euthyroid status is helpful. No medication adjustment needed.' },
+        ige: { actual: '68 IU/mL (Normal)', correct: 'normal', labels: { low: 'Low (<30)', normal: 'Normal (30-100)', elevated: 'Mildly elevated (100-300)', high: 'High (>300)' },
+            explanation: 'Total IgE is typically normal in CSU - it\'s not an IgE-mediated allergic condition. IgE level doesn\'t predict CSU severity or omalizumab response. The level is useful for documentation but doesn\'t change management.' }
+    };
+    
+    function updateConf(lab) { document.getElementById(`conf-${lab}-val`).textContent = document.getElementById(`conf-${lab}`).value; state.confidences[lab] = parseInt(document.getElementById(`conf-${lab}`).value); }
+    
+    function selectOption(el, qId, value) {
+        el.parentElement.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('selected', 'correct', 'incorrect'));
+        el.classList.add('selected');
+        state.answers[qId] = value;
+        const isCorrect = value === correctAnswers[qId];
+        const fb = feedback[qId][value];
+        const feedbackBox = document.getElementById(`feedback-${qId}`);
+        feedbackBox.className = `feedback-box visible ${isCorrect ? 'correct' : 'incorrect'}`;
+        feedbackBox.innerHTML = `<div class="feedback-header ${isCorrect ? 'correct' : 'incorrect'}">${isCorrect ? '✓ Correct!' : '✗ Not quite'}</div><div class="feedback-text">${fb.text}</div>`;
+        el.classList.add(isCorrect ? 'correct' : 'incorrect');
+        checkPhaseComplete();
+    }
+    
+    function askQuestion(el, qId) { if (!el.classList.contains('asked')) { el.classList.add('asked'); document.getElementById(`resp-${qId}`).classList.add('visible'); } }
+    function examSystem(el) { el.classList.add('examined'); }
+    function selectPrediction(el, lab, value) { el.parentElement.querySelectorAll('.pred-choice').forEach(b => b.classList.remove('selected')); el.classList.add('selected'); state.predictions[lab] = value; checkPredictionsComplete(); }
+    
+    function checkPhaseComplete() {
+        const phase = state.currentPhase;
+        let complete = false;
+        if (phase === 'cc') complete = state.answers['cc-q1'] && state.answers['cc-q2'];
+        else if (phase === 'hpi') complete = state.answers['hpi-q1'];
+        else if (phase === 'exam') complete = state.answers['exam-q1'];
+        else if (phase === 'ddx') complete = state.answers['ddx-q1'] && state.answers['ddx-q2'];
+        const btn = document.getElementById(`btn-complete-${phase}`);
+        if (btn) btn.disabled = !complete;
+    }
+    
+    function checkPredictionsComplete() { document.getElementById('btn-submit-pred').disabled = !['cbc', 'crp', 'tsh', 'ige'].every(l => state.predictions[l]); }
+    
+    function completePhase(phase) {
+        state.completedPhases.push(phase);
+        document.getElementById(`step-${phase}`).classList.remove('active');
+        document.getElementById(`step-${phase}`).classList.add('completed');
+        const phases = ['cc', 'hpi', 'exam', 'ddx', 'predict', 'results'];
+        const idx = phases.indexOf(phase);
+        const next = phases[idx + 1];
+        if (next) { document.getElementById(`step-${next}`).classList.remove('locked'); document.getElementById(`step-${next}`).classList.add('available'); document.getElementById(`conn-${idx + 1}`).classList.add('completed'); goToPhase(next); }
+    }
+    
+    function goToPhase(phase) {
+        if (document.getElementById(`step-${phase}`).classList.contains('locked')) return;
+        document.querySelectorAll('.timeline-step').forEach(s => { s.classList.remove('active'); if (s.classList.contains('available')) s.classList.remove('available'); });
+        document.getElementById(`step-${phase}`).classList.add('active');
+        document.querySelectorAll('.phase-content').forEach(c => c.classList.remove('active'));
+        document.getElementById(`phase-${phase}`).classList.add('active');
+        state.currentPhase = phase;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    function submitPredictions() {
+        let correct = 0;
+        ['cbc', 'crp', 'tsh', 'ige'].forEach(lab => { if (state.predictions[lab] === correctPredictions[lab]) correct++; });
+        const pct = Math.round((correct / 4) * 100);
+        document.getElementById('final-score').textContent = `${pct}%`;
+        document.getElementById('results-title').textContent = pct >= 75 ? 'Excellent!' : 'Good Learning Opportunity';
+        const container = document.getElementById('results-container');
+        container.innerHTML = '';
+        const labNames = { cbc: 'CBC with Differential', crp: 'CRP', tsh: 'TSH', ige: 'Total IgE' };
+        ['cbc', 'crp', 'tsh', 'ige'].forEach(lab => {
+            const info = labExplanations[lab];
+            const predicted = state.predictions[lab];
+            const isCorrect = predicted === info.correct;
+            container.innerHTML += `<div class="result-card"><div class="result-header"><div class="result-lab-name">${labNames[lab]}</div><div class="result-badge ${isCorrect ? 'correct' : 'incorrect'}">${isCorrect ? '✓' : '✗'}</div></div><div class="result-comparison"><div class="result-col"><div class="result-col-label">Your Prediction</div><div class="result-col-value">${info.labels[predicted]}</div></div><div class="result-col"><div class="result-col-label">Actual</div><div class="result-col-value" style="color:#34d399;">${info.actual}</div></div></div><div class="result-explanation">${info.explanation}</div></div>`;
+        });
+        completePhase('predict');
+    }
+    
+    ['cbc', 'crp', 'tsh', 'ige'].forEach(lab => { state.confidences[lab] = 50; });
+    </script>
+</body>
+</html>
