@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dx Learning Ecosystem | Clinical Reasoning Platform</title>
+    <title>Dx Learning Ecosystem | Clinical Reasoning for Medical Students</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="dx-responsive.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -15,74 +14,136 @@
             color: #1e293b;
         }
         
-        .header {
-            background: white;
-            border-bottom: 1px solid #e2e8f0;
-            padding: 16px 24px;
+        /* Navigation */
+        .nav {
+            background: linear-gradient(135deg, #1E3A5F 0%, #0f172a 100%);
+            padding: 14px 24px;
             position: sticky;
             top: 0;
             z-index: 100;
         }
-        .header-inner {
+        .nav-inner {
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: #1e293b;
-            text-decoration: none;
+        .nav-brand {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            text-decoration: none;
+            color: #fff;
         }
-        .logo span { color: #10b981; }
+        .nav-brand-icon { font-size: 28px; }
+        .nav-brand-text { font-size: 18px; font-weight: 600; }
         .nav-links {
             display: flex;
-            gap: 20px;
+            gap: 8px;
         }
-        .nav-links a {
-            color: #64748b;
+        .nav-link {
+            color: rgba(255,255,255,0.8);
             text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            padding: 8px 16px;
+            font-size: 13px;
+            padding: 8px 14px;
             border-radius: 8px;
             transition: all 0.2s;
         }
-        .nav-links a:hover {
-            color: #10b981;
-            background: #f0fdf4;
+        .nav-link:hover {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+        }
+        .nav-link.active {
+            background: rgba(124,58,237,0.3);
+            color: #c4b5fd;
         }
         
+        /* Hero */
         .hero {
             text-align: center;
             padding: 80px 24px 60px;
             max-width: 900px;
             margin: 0 auto;
         }
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 24px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
         .hero h1 {
             font-size: 48px;
             font-weight: 700;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             color: #1e293b;
+            line-height: 1.2;
         }
         .hero h1 span { color: #10b981; }
-        .hero p {
-            font-size: 20px;
+        .hero-tagline {
+            font-size: 22px;
+            color: #1e293b;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+        .hero-desc {
+            font-size: 18px;
             color: #64748b;
             margin-bottom: 40px;
-            line-height: 1.6;
+            line-height: 1.7;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 48px;
+        }
+        .cta-primary {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.2s;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+        .cta-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+        }
+        .cta-secondary {
+            background: white;
+            color: #1e293b;
+            padding: 14px 32px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            border: 2px solid #e2e8f0;
+            transition: all 0.2s;
+        }
+        .cta-secondary:hover {
+            border-color: #10b981;
+            color: #10b981;
+        }
+        
+        /* Stats */
         .stats {
             display: flex;
             justify-content: center;
             gap: 60px;
-            margin-bottom: 60px;
+            flex-wrap: wrap;
         }
         .stat {
             text-align: center;
@@ -97,15 +158,75 @@
             color: #64748b;
         }
         
+        /* Value Prop */
+        .value-section {
+            background: white;
+            padding: 60px 24px;
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .value-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .value-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        .value-header h2 {
+            font-size: 28px;
+            color: #1e293b;
+            margin-bottom: 12px;
+        }
+        .value-header p {
+            font-size: 18px;
+            color: #64748b;
+            font-style: italic;
+        }
+        .pillars {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+        }
+        .pillar {
+            text-align: center;
+            padding: 32px 24px;
+            background: #f8fafc;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+        }
+        .pillar-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        .pillar h3 {
+            font-size: 20px;
+            color: #1e293b;
+            margin-bottom: 12px;
+        }
+        .pillar p {
+            color: #64748b;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        
+        /* Platforms */
+        .platforms-section {
+            padding: 60px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .platforms-section h2 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 40px;
+            color: #1e293b;
+        }
         .platforms {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 24px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px 60px;
         }
-        
         .platform-card {
             background: white;
             border-radius: 20px;
@@ -120,8 +241,8 @@
             transform: translateY(-4px);
             box-shadow: 0 8px 30px rgba(0,0,0,0.1);
         }
-        .platform-card.reason:hover { border-color: #3b82f6; }
         .platform-card.mechanism:hover { border-color: #10b981; }
+        .platform-card.reason:hover { border-color: #3b82f6; }
         .platform-card.coach:hover { border-color: #8b5cf6; }
         
         .platform-icon {
@@ -133,8 +254,8 @@
             font-weight: 700;
             margin-bottom: 8px;
         }
-        .platform-card.reason .platform-title { color: #3b82f6; }
         .platform-card.mechanism .platform-title { color: #10b981; }
+        .platform-card.reason .platform-title { color: #3b82f6; }
         .platform-card.coach .platform-title { color: #8b5cf6; }
         
         .platform-desc {
@@ -156,65 +277,105 @@
             font-weight: 500;
         }
         
-        .specialty-hub {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 24px 60px;
+        /* Who Section */
+        .who-section {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            padding: 60px 24px;
+            border-top: 1px solid #86efac;
+            border-bottom: 1px solid #86efac;
         }
-        .specialty-hub h2 {
+        .who-inner {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .who-header {
             text-align: center;
+            margin-bottom: 40px;
+        }
+        .who-header h2 {
             font-size: 28px;
-            margin-bottom: 32px;
-            color: #1e293b;
+            color: #166534;
+            margin-bottom: 12px;
         }
-        .hub-card {
-            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
-            border: 1px solid #e9d5ff;
-            border-radius: 16px;
-            padding: 24px;
-            text-decoration: none;
-            color: inherit;
-            display: block;
-            max-width: 600px;
-            margin: 0 auto;
-            transition: all 0.2s;
+        .who-header p {
+            color: #15803d;
+            font-size: 16px;
         }
-        .hub-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.15);
+        .personas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
         }
-        .hub-card h3 {
-            color: #6b21a8;
-            font-size: 20px;
-            margin-bottom: 8px;
-        }
-        .hub-card p {
-            color: #7c3aed;
-        }
-        
-        .footer {
+        .persona {
             background: white;
-            border-top: 1px solid #e2e8f0;
-            padding: 32px 24px;
-            text-align: center;
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid #86efac;
+        }
+        .persona h4 {
+            color: #166534;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        .persona p {
             color: #64748b;
             font-size: 14px;
+            font-style: italic;
         }
-        .footer a { color: #10b981; text-decoration: none; }
+        
+        /* Credibility */
+        .credibility-section {
+            padding: 60px 24px;
+            text-align: center;
+        }
+        .credibility-inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .credibility-section h2 {
+            font-size: 24px;
+            color: #1e293b;
+            margin-bottom: 24px;
+        }
+        .credential-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+        }
+        .credential {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #64748b;
+            font-size: 15px;
+        }
+        .credential span { font-size: 20px; }
+        
+        /* Footer */
+        .footer {
+            background: #1e293b;
+            color: #94a3b8;
+            padding: 40px 24px;
+            text-align: center;
+        }
+        .footer a {
+            color: #10b981;
+            text-decoration: none;
+        }
         .footer-links {
             display: flex;
             justify-content: center;
             gap: 24px;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
         }
-        
-        .last-updated {
-            text-align: center;
-            padding: 16px;
-            background: #f8fafc;
-            color: #64748b;
-            font-size: 13px;
+        .footer-link {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 14px;
         }
+        .footer-link:hover { color: #10b981; }
         
         @media (max-width: 768px) {
             .hero h1 { font-size: 32px; }
@@ -224,90 +385,162 @@
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="header-inner">
-            <a href="index.html" class="logo">🎯 Dx<span>Ecosystem</span></a>
-            <nav class="nav-links">
-                <a href="ReasonDx/index.html">ReasonDx</a>
-                <a href="mechanism/index.html">MechanismDx</a>
-                <a href="CoachDx/index.html">CoachDx</a>
-                <a href="unified-scoreboard.html">Scoreboard</a>
-                <a href="fingerprint-dashboard.html">Fingerprint</a>
-            </nav>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand">
+                <span class="nav-brand-icon">🏥</span>
+                <span class="nav-brand-text">Dx Learning Ecosystem</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">🏠 Home</a>
+                <a href="mechanism/index.html" class="nav-link">📚 MechanismDx</a>
+                <a href="ReasonDx/training.html" class="nav-link">🔬 ReasonDx</a>
+                <a href="CoachDx/coachdx-dashboard.html" class="nav-link">🧠 CoachDx</a>
+            </div>
         </div>
-    </header>
+    </nav>
     
+    <!-- Hero -->
     <section class="hero">
-        <h1>Dx Learning <span>Ecosystem</span></h1>
-        <p>Master clinical reasoning through integrated case-based learning. Practice with virtual patients, understand the pathophysiology, and receive AI-powered coaching feedback.</p>
+        <div class="hero-badge">For MD/DO Medical Students</div>
+        <h1>Practice thinking, speaking, and deciding like a <span>clinician</span></h1>
+        <p class="hero-tagline">Before anyone's watching.</p>
+        <p class="hero-desc">Adaptive clinical reasoning training that meets you where you are and pushes you just past it. From M1 foundations to clerkship confidence.</p>
+        
+        <div class="hero-cta">
+            <a href="ReasonDx/training.html" class="cta-primary">Start Free → Try 3 Cases</a>
+            <a href="knowledge-web-navigator.html" class="cta-secondary">Explore Knowledge Web</a>
+        </div>
+        
         <div class="stats">
             <div class="stat"><div class="stat-num">200+</div><div class="stat-label">Clinical Cases</div></div>
-            <div class="stat"><div class="stat-num">18</div><div class="stat-label">Mechanism Modules</div></div>
-            <div class="stat"><div class="stat-num">10</div><div class="stat-label">Specialties</div></div>
+            <div class="stat"><div class="stat-num">35+</div><div class="stat-label">Mechanism Modules</div></div>
+            <div class="stat"><div class="stat-num">AI</div><div class="stat-label">Coaching Feedback</div></div>
         </div>
     </section>
     
-    <section class="platforms">
-        <a href="ReasonDx/index.html" class="platform-card reason">
-            <div class="platform-icon">🩺</div>
-            <div class="platform-title">ReasonDx</div>
-            <div class="platform-desc">Interactive clinical reasoning trainer. Interview virtual patients, order tests, build differentials, and receive real-time feedback on your diagnostic process.</div>
-            <div class="platform-features">
-                <span class="feature-tag">200+ Cases</span>
-                <span class="feature-tag">PredictLabs</span>
-                <span class="feature-tag">Case Builder</span>
-                <span class="feature-tag">Spaced Repetition</span>
+    <!-- Value Proposition -->
+    <section class="value-section">
+        <div class="value-inner">
+            <div class="value-header">
+                <h2>Medical education teaches what to know.</h2>
+                <p>"We teach how to think when it matters."</p>
             </div>
-        </a>
-        
-        <a href="mechanism/index.html" class="platform-card mechanism">
-            <div class="platform-icon">🔬</div>
-            <div class="platform-title">MechanismDx</div>
-            <div class="platform-desc">Master the pathophysiology behind clinical decisions. Interactive modules with MCQs, clinical pearls, and diagnostic algorithms.</div>
-            <div class="platform-features">
-                <span class="feature-tag">18 Modules</span>
-                <span class="feature-tag">230+ MCQs</span>
-                <span class="feature-tag">Visual Pathways</span>
-                <span class="feature-tag">Guidelines-Based</span>
+            <div class="pillars">
+                <div class="pillar">
+                    <div class="pillar-icon">🧠</div>
+                    <h3>Clinical Reasoning</h3>
+                    <p>Stop memorizing isolated facts. Learn how attendings organize information, prioritize differentials, and make decisions under uncertainty.</p>
+                </div>
+                <div class="pillar">
+                    <div class="pillar-icon">🎤</div>
+                    <h3>Communication Under Pressure</h3>
+                    <p>Practice oral presentations, consult calls, and patient explanations. Sound confident on rounds—not just prepared.</p>
+                </div>
+                <div class="pillar">
+                    <div class="pillar-icon">📈</div>
+                    <h3>Adaptive Progression</h3>
+                    <p>The platform learns how you think. Cases adapt to your level. You're never doing work that's too easy or too advanced.</p>
+                </div>
             </div>
-        </a>
-        
-        <a href="CoachDx/index.html" class="platform-card coach">
-            <div class="platform-icon">💬</div>
-            <div class="platform-title">CoachDx</div>
-            <div class="platform-desc">AI-powered Socratic coaching for clinical reasoning. Discuss cases with expert mentors who adapt to your training level.</div>
-            <div class="platform-features">
-                <span class="feature-tag">AI Coaching</span>
-                <span class="feature-tag">Specialty Mentors</span>
-                <span class="feature-tag">SBAR Trainer</span>
-                <span class="feature-tag">Interprofessional</span>
-            </div>
-        </a>
+        </div>
     </section>
     
-    <section class="specialty-hub">
-        <h2>🛡️ Specialty Hubs</h2>
-        <a href="allergy-immunology-hub.html" class="hub-card">
-            <h3>Allergy & Immunology Hub</h3>
-            <p>Comprehensive A/I learning with specialty cases, biologics guidance, immunodeficiency workup, and interprofessional collaboration modules.</p>
-        </a>
+    <!-- Platforms -->
+    <section class="platforms-section">
+        <h2>Three Integrated Platforms</h2>
+        <div class="platforms">
+            <a href="mechanism/index.html" class="platform-card mechanism">
+                <div class="platform-icon">📚</div>
+                <div class="platform-title">MechanismDx</div>
+                <div class="platform-desc">Build foundational knowledge with mechanism-based learning. Understand the "why" behind clinical findings and connect pathophysiology to patient care.</div>
+                <div class="platform-features">
+                    <span class="feature-tag">35+ Modules</span>
+                    <span class="feature-tag">500+ Concepts</span>
+                    <span class="feature-tag">Evidence-Linked</span>
+                </div>
+            </a>
+            
+            <a href="ReasonDx/training.html" class="platform-card reason">
+                <div class="platform-icon">🔬</div>
+                <div class="platform-title">ReasonDx</div>
+                <div class="platform-desc">Practice the diagnostic process step-by-step. Interview patients, predict labs, build differentials, and learn to justify your decisions with evidence.</div>
+                <div class="platform-features">
+                    <span class="feature-tag">200+ Cases</span>
+                    <span class="feature-tag">Lab Predictions</span>
+                    <span class="feature-tag">Progress Tracking</span>
+                </div>
+            </a>
+            
+            <a href="CoachDx/coachdx-dashboard.html" class="platform-card coach">
+                <div class="platform-icon">🧠</div>
+                <div class="platform-title">CoachDx</div>
+                <div class="platform-desc">AI-powered Socratic coaching. Your mentor asks guiding questions to build deeper clinical reasoning—not just recall. Practice thinking out loud.</div>
+                <div class="platform-features">
+                    <span class="feature-tag">AI Feedback</span>
+                    <span class="feature-tag">SBAR Practice</span>
+                    <span class="feature-tag">Oral Presentations</span>
+                </div>
+            </a>
+        </div>
     </section>
     
-    <div class="last-updated">
-        📅 Platform last updated: January 7, 2026
-    </div>
+    <!-- Who Is This For -->
+    <section class="who-section">
+        <div class="who-inner">
+            <div class="who-header">
+                <h2>For medical students who want to think like doctors</h2>
+                <p>Not just pass exams.</p>
+            </div>
+            <div class="personas">
+                <div class="persona">
+                    <h4>M1-M2 Students</h4>
+                    <p>"I'm memorizing so much, but I don't know how it connects to real patients."</p>
+                </div>
+                <div class="persona">
+                    <h4>M3 Clerkship Students</h4>
+                    <p>"I know the answer—I just can't say it clearly when someone's watching."</p>
+                </div>
+                <div class="persona">
+                    <h4>M4 / Sub-I Students</h4>
+                    <p>"I want to sound like an intern, not a student, during my audition rotations."</p>
+                </div>
+            </div>
+        </div>
+    </section>
     
+    <!-- Credibility -->
+    <section class="credibility-section">
+        <div class="credibility-inner">
+            <h2>Built by a medical educator. Tested by students like you.</h2>
+            <div class="credential-items">
+                <div class="credential">
+                    <span>👩‍⚕️</span>
+                    Created by Lauren Fine, MD, FAAAAI — Assistant Dean of Clinical Skills Education
+                </div>
+                <div class="credential">
+                    <span>🏥</span>
+                    Developed at Nova Southeastern University Dr. Kiran C. Patel College of Allopathic Medicine
+                </div>
+                <div class="credential">
+                    <span>📚</span>
+                    Evidence-based content linked to primary sources
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
     <footer class="footer">
         <div class="footer-links">
-            <a href="ReasonDx/index.html">ReasonDx</a>
-            <a href="mechanism/index.html">MechanismDx</a>
-            <a href="CoachDx/index.html">CoachDx</a>
-            <a href="unified-scoreboard.html">Scoreboard</a>
+            <a href="mechanism/index.html" class="footer-link">MechanismDx</a>
+            <a href="ReasonDx/training.html" class="footer-link">ReasonDx</a>
+            <a href="CoachDx/coachdx-dashboard.html" class="footer-link">CoachDx</a>
+            <a href="knowledge-web-navigator.html" class="footer-link">Knowledge Web</a>
+            <a href="allergy-immunology-hub.html" class="footer-link">A/I Hub</a>
         </div>
-        <p>© 2025-2026 Dx Learning Ecosystem</p>
-        <p style="margin-top: 8px;">Created by Lauren Fine, MD, FAAAAI · Nova Southeastern University</p>
+        <p>Dx Learning Ecosystem | © 2026 | Created by <a href="#">Lauren Fine, MD, FAAAAI</a></p>
     </footer>
-    
-    <script src="dx-navigation.js"></script>
 </body>
 </html>
