@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sepsis & Shock | MechanismDx</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../dx-design-system.css">
+    <link rel="stylesheet" href="module-layout-v2.css">
+    <style>
+        .module-header {
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+            padding: 24px 32px;
+            color: white;
+        }
+        .module-header-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .module-header-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .module-header-brand a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+        }
+        .module-header-nav {
+            display: flex;
+            gap: 8px;
+        }
+        .module-header-link {
+            padding: 8px 16px;
+            border-radius: 8px;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.15s;
+        }
+        .module-header-link:hover {
+            background: rgba(255,255,255,0.15);
+            color: white;
+        }
+        .module-hero {
+            background: linear-gradient(135deg, #b91c1c 0%, #7f1d1d 100%);
+            padding: 40px 32px;
+            color: white;
+        }
+        .module-hero-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+        }
+        .module-hero-icon {
+            font-size: 48px;
+            background: rgba(255,255,255,0.15);
+            padding: 16px;
+            border-radius: 16px;
+        }
+        .module-hero-content h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+        }
+        .module-hero-content p {
+            font-size: 16px;
+            opacity: 0.9;
+            margin: 0 0 16px 0;
+            line-height: 1.6;
+        }
+        .module-hero-meta {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .module-hero-meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            opacity: 0.85;
+        }
+        @media (max-width: 768px) {
+            .module-hero-inner { flex-direction: column; text-align: center; align-items: center; }
+            .module-hero-meta { justify-content: center; }
+        }
+        
+        /* Shock type cards */
+        .shock-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+        @media (max-width: 800px) {
+            .shock-grid { grid-template-columns: 1fr; }
+        }
+        .shock-card {
+            background: #fff;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+        .shock-card-header {
+            padding: 14px 18px;
+            font-weight: 600;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .shock-card-header.distributive { background: #fef2f2; color: #b91c1c; border-bottom: 2px solid #fca5a5; }
+        .shock-card-header.hypovolemic { background: #fefce8; color: #a16207; border-bottom: 2px solid #fcd34d; }
+        .shock-card-header.cardiogenic { background: #eff6ff; color: #1d4ed8; border-bottom: 2px solid #93c5fd; }
+        .shock-card-header.obstructive { background: #f5f3ff; color: #6d28d9; border-bottom: 2px solid #c4b5fd; }
+        .shock-card-body {
+            padding: 16px 18px;
+        }
+        .shock-card-body p {
+            font-size: 13px;
+            color: #64748b;
+            margin: 0 0 12px 0;
+        }
+        .shock-params {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .shock-param {
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: #f8fafc;
+            color: #475569;
+        }
+        .shock-param .label { color: #94a3b8; }
+        .shock-param .value { font-weight: 600; color: #1e293b; }
+        
+        /* Formula box */
+        .formula-box {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 1px solid #86efac;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+        .formula-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #166534;
+            margin-bottom: 10px;
+        }
+        .formula-content {
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 14px;
+            color: #15803d;
+            background: rgba(255,255,255,0.7);
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        .formula-note {
+            font-size: 12px;
+            color: #166534;
+        }
+        
+        /* Hour-1 bundle timeline */
+        .timeline {
+            position: relative;
+            padding-left: 32px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 11px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #ef4444 0%, #f97316 50%, #22c55e 100%);
+            border-radius: 2px;
+        }
+        .timeline-item {
+            position: relative;
+            padding: 16px 20px;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            margin-bottom: 16px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -27px;
+            top: 20px;
+            width: 14px;
+            height: 14px;
+            background: #fff;
+            border: 3px solid #ef4444;
+            border-radius: 50%;
+        }
+        .timeline-item:nth-child(2)::before { border-color: #f97316; }
+        .timeline-item:nth-child(3)::before { border-color: #eab308; }
+        .timeline-item:nth-child(4)::before { border-color: #22c55e; }
+        .timeline-item h4 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1e293b;
+            margin: 0 0 6px 0;
+        }
+        .timeline-item p {
+            font-size: 14px;
+            color: #64748b;
+            margin: 0;
+            line-height: 1.5;
+        }
+        
+        .module-footer {
+            background: #fff;
+            border-top: 1px solid #e2e8f0;
+            padding: 32px;
+            text-align: center;
+            color: #64748b;
+            font-size: 14px;
+        }
+        .module-footer a { color: #3b82f6; text-decoration: none; }
+    </style>
+</head>
+<body class="module-wrapper">
+    <!-- Header -->
+    <header class="module-header">
+        <div class="module-header-inner">
+            <div class="module-header-brand">
+                <span style="font-size: 24px;">📚</span>
+                <a href="index.html">MechanismDx</a>
+            </div>
+            <nav class="module-header-nav">
+                <a href="index.html" class="module-header-link">← All Modules</a>
+                <a href="challenges.html" class="module-header-link">Challenges</a>
+                <a href="../dx-dashboard.html" class="module-header-link">Dashboard</a>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Hero -->
+    <section class="module-hero">
+        <div class="module-hero-inner">
+            <div class="module-hero-icon">🚨</div>
+            <div class="module-hero-content">
+                <h1>Sepsis & Shock</h1>
+                <p>From SIRS to septic shock: understanding the inflammatory cascade, hemodynamic profiles, and time-critical resuscitation strategies.</p>
+                <div class="module-hero-meta">
+                    <span>📚 18 Concepts</span>
+                    <span>❓ 15 MCQs</span>
+                    <span>⏱ ~45 min</span>
+                    <span>🎯 Critical Care</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Main Layout -->
+    <div class="module-layout">
+        <!-- Sidebar TOC -->
+        <aside class="module-sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-module-title">🚨 Sepsis & Shock</div>
+                <div class="sidebar-module-meta">18 concepts • 15 MCQs</div>
+                <div class="sidebar-progress-wrap">
+                    <div class="sidebar-progress-label">
+                        <span>Progress</span>
+                        <span id="progressPercent">0%</span>
+                    </div>
+                    <div class="sidebar-progress">
+                        <div class="sidebar-progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="toc-section-label">Sections</div>
+            <ul class="toc-list">
+                <li class="toc-item"><a href="#section-definitions" class="toc-link active"><span class="toc-icon">🔬</span><span class="toc-text">Definitions</span></a></li>
+                <li class="toc-item"><a href="#section-pathophys" class="toc-link"><span class="toc-icon">🧬</span><span class="toc-text">Pathophysiology</span></a></li>
+                <li class="toc-item"><a href="#section-shock-types" class="toc-link"><span class="toc-icon">💔</span><span class="toc-text">Shock Classification</span></a></li>
+                <li class="toc-item"><a href="#section-resuscitation" class="toc-link"><span class="toc-icon">💉</span><span class="toc-text">Resuscitation</span></a></li>
+                <li class="toc-item"><a href="#section-vasopressors" class="toc-link"><span class="toc-icon">💊</span><span class="toc-text">Vasopressors</span></a></li>
+                <li class="toc-item"><a href="#section-mcq" class="toc-link"><span class="toc-icon">❓</span><span class="toc-text">MCQ Practice</span></a></li>
+            </ul>
+            
+            <div class="sidebar-footer">
+                <a href="index.html" class="sidebar-footer-link"><span>←</span> Back to Modules</a>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="module-content">
+            
+            <!-- Learning Objectives -->
+            <div class="objectives-box">
+                <div class="objectives-title">🎯 Learning Objectives</div>
+                <ul class="objectives-list">
+                    <li>Apply Sepsis-3 criteria to identify sepsis and septic shock</li>
+                    <li>Explain the pathophysiology of the inflammatory cascade in sepsis</li>
+                    <li>Differentiate the four types of shock by hemodynamic profile</li>
+                    <li>Execute the Hour-1 sepsis bundle with appropriate targets</li>
+                    <li>Select appropriate vasopressor therapy based on shock physiology</li>
+                </ul>
+            </div>
+            
+            <!-- Section 1: Definitions -->
+            <section class="module-section" id="section-definitions">
+                <div class="section-header">
+                    <h2>🔬 Sepsis-3 Definitions (2016)</h2>
+                    <p>The modern definitions emphasize organ dysfunction rather than inflammation.</p>
+                </div>
+                
+                <div class="content-grid">
+                    <div class="content-card">
+                        <div class="card-header">
+                            <div class="card-icon red">⚠️</div>
+                            <h3 class="card-title">Sepsis</h3>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Definition:</strong> Life-threatening organ dysfunction caused by a dysregulated host response to infection.</p>
+                            <p><strong>Operationally:</strong> ≥2 point increase in SOFA score due to infection.</p>
+                            <p class="text-muted text-small">The old SIRS criteria (temp, HR, RR, WBC) are no longer used to define sepsis.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="content-card">
+                        <div class="card-header">
+                            <div class="card-icon red">🚨</div>
+                            <h3 class="card-title">Septic Shock</h3>
+                            <span class="card-badge high-yield">High Yield</span>
+                        </div>
+                        <div class="card-body">
+                            <p>Sepsis <strong>PLUS</strong> both:</p>
+                            <ul>
+                                <li>Vasopressors needed to maintain <strong>MAP ≥65 mmHg</strong></li>
+                                <li><strong>Lactate >2 mmol/L</strong> despite adequate fluid resuscitation</li>
+                            </ul>
+                            <p class="text-muted text-small">Mortality ~40% — true medical emergency.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pearl-box">
+                    <span class="pearl-box-icon">💡</span>
+                    <div class="pearl-box-content">
+                        <div class="pearl-box-title">qSOFA: Bedside Screening Tool</div>
+                        <p class="pearl-box-text"><strong>RR ≥22</strong> + <strong>Altered mental status</strong> + <strong>SBP ≤100</strong>. Score ≥2 suggests high risk but should NOT delay treatment — it's for risk stratification, not diagnosis.</p>
+                    </div>
+                </div>
+                
+                <div class="formula-box">
+                    <div class="formula-title">SOFA Score Components</div>
+                    <div class="formula-content">Resp (P/F) + Coag (Plt) + Liver (Bili) + CV (MAP/pressors) + CNS (GCS) + Renal (Cr/UOP)</div>
+                    <div class="formula-note">Each organ system scored 0-4 points. Total range 0-24. ≥2 point increase = sepsis.</div>
+                </div>
+            </section>
+            
+            <div class="section-divider"></div>
+            
+            <!-- Section 2: Pathophysiology -->
+            <section class="module-section" id="section-pathophys">
+                <div class="section-header">
+                    <h2>🧬 The Inflammatory Cascade</h2>
+                    <p>Sepsis represents a dysregulated host response with both pro-inflammatory and immunosuppressive phases.</p>
+                </div>
+                
+                <div class="content-card content-full">
+                    <div class="card-header">
+                        <div class="card-icon purple">🔄</div>
+                        <h3 class="card-title">Pathophysiology Pathway</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="stats-row" style="margin-bottom: 20px;">
+                            <div class="stat-card">
+                                <div class="stat-value" style="font-size: 24px;">1️⃣</div>
+                                <div class="stat-label">Recognition</div>
+                                <div class="stat-sublabel">PAMPs → TLRs</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" style="font-size: 24px;">2️⃣</div>
+                                <div class="stat-label">Cytokine Storm</div>
+                                <div class="stat-sublabel">TNF-α, IL-1, IL-6</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" style="font-size: 24px;">3️⃣</div>
+                                <div class="stat-label">Endothelial Dysfunction</div>
+                                <div class="stat-sublabel">Capillary leak</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" style="font-size: 24px;">4️⃣</div>
+                                <div class="stat-label">Coagulopathy</div>
+                                <div class="stat-sublabel">DIC</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" style="font-size: 24px;">5️⃣</div>
+                                <div class="stat-label">Immunoparalysis</div>
+                                <div class="stat-sublabel">Secondary infections</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="content-grid">
+                    <div class="keypoint-box">
+                        <span class="keypoint-box-icon">🎯</span>
+                        <div class="keypoint-box-content">
+                            <div class="keypoint-box-title">Glycocalyx Breakdown</div>
+                            <p class="keypoint-box-text">The endothelial glycocalyx normally prevents capillary leak. In sepsis, inflammatory mediators degrade this layer → third-spacing, edema, and poor tissue perfusion despite adequate volume.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="warning-box">
+                        <span class="warning-box-icon">⚠️</span>
+                        <div class="warning-box-content">
+                            <div class="warning-box-title">Lactate ≠ Just Hypoperfusion</div>
+                            <p class="warning-box-text">In sepsis, elevated lactate results from both tissue hypoxia AND accelerated aerobic glycolysis (epinephrine-driven). Lactate clearance is a better marker than absolute value.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <div class="section-divider"></div>
+            
+            <!-- Section 3: Shock Types -->
+            <section class="module-section" id="section-shock-types">
+                <div class="section-header">
+                    <h2>💔 Classification of Shock</h2>
+                    <p>All shock results in inadequate tissue perfusion, but the underlying mechanism differs.</p>
+                </div>
+                
+                <div class="shock-grid">
+                    <div class="shock-card">
+                        <div class="shock-card-header distributive">🔥 Distributive</div>
+                        <div class="shock-card-body">
+                            <p>Vasodilation & maldistribution of flow</p>
+                            <p><strong>Examples:</strong> Sepsis, anaphylaxis, neurogenic</p>
+                            <div class="shock-params">
+                                <span class="shock-param"><span class="label">CVP:</span> <span class="value">↓/N</span></span>
+                                <span class="shock-param"><span class="label">CO:</span> <span class="value">↑→↓</span></span>
+                                <span class="shock-param"><span class="label">SVR:</span> <span class="value">↓↓</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="shock-card">
+                        <div class="shock-card-header hypovolemic">💧 Hypovolemic</div>
+                        <div class="shock-card-body">
+                            <p>Volume loss (hemorrhage, dehydration)</p>
+                            <p><strong>Examples:</strong> Hemorrhage, GI losses, burns</p>
+                            <div class="shock-params">
+                                <span class="shock-param"><span class="label">CVP:</span> <span class="value">↓↓</span></span>
+                                <span class="shock-param"><span class="label">CO:</span> <span class="value">↓↓</span></span>
+                                <span class="shock-param"><span class="label">SVR:</span> <span class="value">↑↑</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="shock-card">
+                        <div class="shock-card-header cardiogenic">💔 Cardiogenic</div>
+                        <div class="shock-card-body">
+                            <p>Pump failure</p>
+                            <p><strong>Examples:</strong> MI, cardiomyopathy, arrhythmia</p>
+                            <div class="shock-params">
+                                <span class="shock-param"><span class="label">CVP:</span> <span class="value">↑↑</span></span>
+                                <span class="shock-param"><span class="label">CO:</span> <span class="value">↓↓</span></span>
+                                <span class="shock-param"><span class="label">SVR:</span> <span class="value">↑↑</span></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="shock-card">
+                        <div class="shock-card-header obstructive">🚧 Obstructive</div>
+                        <div class="shock-card-body">
+                            <p>Mechanical obstruction to flow</p>
+                            <p><strong>Examples:</strong> PE, tamponade, tension PTX</p>
+                            <div class="shock-params">
+                                <span class="shock-param"><span class="label">CVP:</span> <span class="value">↑</span></span>
+                                <span class="shock-param"><span class="label">CO:</span> <span class="value">↓↓</span></span>
+                                <span class="shock-param"><span class="label">SVR:</span> <span class="value">↑↑</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="warning-box" style="margin-top: 24px;">
+                    <span class="warning-box-icon">⚠️</span>
+                    <div class="warning-box-content">
+                        <div class="warning-box-title">Mixed Shock is Common!</div>
+                        <p class="warning-box-text">A septic patient may also be hypovolemic (third-spacing) or develop cardiogenic shock (sepsis-induced cardiomyopathy). <strong>Always reassess hemodynamics after initial resuscitation.</strong></p>
+                    </div>
+                </div>
+            </section>
+            
+            <div class="section-divider"></div>
+            
+            <!-- Section 4: Resuscitation -->
+            <section class="module-section" id="section-resuscitation">
+                <div class="section-header">
+                    <h2>💉 Hour-1 Sepsis Bundle</h2>
+                    <p>Time-critical interventions that must begin immediately upon recognition.</p>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>🩸 Measure Lactate</h4>
+                        <p>If lactate >2 mmol/L, remeasure within 2-4 hours to guide resuscitation. Target: lactate normalization or ≥10% decrease.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>🧫 Obtain Blood Cultures</h4>
+                        <p>Before antibiotics if possible, but do NOT delay antibiotics >45 min. Two sets from different sites.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>💊 Administer Broad-Spectrum Antibiotics</h4>
+                        <p>Within 1 hour of sepsis recognition. Each hour of delay increases mortality ~7%. Cover likely pathogens based on source.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>💧 Begin Fluid Resuscitation</h4>
+                        <p><strong>30 mL/kg crystalloid</strong> for hypotension or lactate ≥4. Reassess volume responsiveness after bolus — avoid fluid overload!</p>
+                    </div>
+                </div>
+                
+                <div class="content-grid" style="margin-top: 24px;">
+                    <div class="content-card">
+                        <div class="card-header">
+                            <div class="card-icon green">🎯</div>
+                            <h3 class="card-title">Resuscitation Targets</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul>
+                                <li><strong>MAP ≥65 mmHg</strong></li>
+                                <li>Lactate normalizing</li>
+                                <li>Urine output ≥0.5 mL/kg/hr</li>
+                                <li>Capillary refill <3 seconds</li>
+                                <li>Mental status improving</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="pearl-box" style="height: fit-content;">
+                        <span class="pearl-box-icon">💡</span>
+                        <div class="pearl-box-content">
+                            <div class="pearl-box-title">Fluid Responsiveness</div>
+                            <p class="pearl-box-text">Static measures (CVP) poorly predict response. Use <strong>dynamic measures</strong>: passive leg raise, pulse pressure variation, IVC collapsibility. Only ~50% of ICU patients are fluid responsive!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <div class="section-divider"></div>
+            
+            <!-- Section 5: Vasopressors -->
+            <section class="module-section" id="section-vasopressors">
+                <div class="section-header">
+                    <h2>💊 Vasopressor Selection</h2>
+                    <p>When fluids fail to restore adequate perfusion.</p>
+                </div>
+                
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Agent</th>
+                                <th>Receptors</th>
+                                <th>Primary Effect</th>
+                                <th>When to Use</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Norepinephrine</strong></td>
+                                <td>α1 >> β1</td>
+                                <td>↑ SVR, mild ↑ CO</td>
+                                <td><strong>First-line</strong> for septic shock</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Vasopressin</strong></td>
+                                <td>V1</td>
+                                <td>↑ SVR (vasoconstriction)</td>
+                                <td>Second-line adjunct to norepi</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Epinephrine</strong></td>
+                                <td>β1 > α1</td>
+                                <td>↑ CO and ↑ SVR</td>
+                                <td>Refractory shock, anaphylaxis</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Dobutamine</strong></td>
+                                <td>β1 > β2</td>
+                                <td>↑ CO (inotropy)</td>
+                                <td>Cardiogenic component</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Phenylephrine</strong></td>
+                                <td>α1 pure</td>
+                                <td>↑ SVR only</td>
+                                <td>Avoid in sepsis (↓ CO)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="keypoint-box" style="margin-top: 24px;">
+                    <span class="keypoint-box-icon">🎯</span>
+                    <div class="keypoint-box-content">
+                        <div class="keypoint-box-title">Surviving Sepsis Guidelines</div>
+                        <p class="keypoint-box-text"><strong>Norepinephrine first</strong> → Add vasopressin if norepi >0.25 mcg/kg/min → Add epinephrine for refractory shock. Consider stress-dose hydrocortisone (200mg/day) if vasopressor-dependent.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <div class="section-divider"></div>
+            
+            <!-- MCQ Section -->
+            <section class="module-section" id="section-mcq">
+                <div class="mcq-section">
+                    <h3 class="mcq-section-title">❓ Check Your Understanding</h3>
+                    
+                    <div class="mcq-grid">
+                        <div class="mcq-card">
+                            <div class="mcq-card-header">
+                                <span class="mcq-number">Q1</span>
+                                <span class="mcq-difficulty">High Yield</span>
+                            </div>
+                            <div class="mcq-card-body">
+                                <p class="mcq-question">A 68-year-old with pneumonia has BP 78/50 despite 3L crystalloid. Lactate is 4.2. Which defines this as septic shock rather than sepsis alone?</p>
+                                <div class="mcq-options">
+                                    <button class="mcq-option" onclick="checkMCQ(this, false)">A. Lactate >2 mmol/L</button>
+                                    <button class="mcq-option" onclick="checkMCQ(this, false)">B. Hypotension after fluids</button>
+                                    <button class="mcq-option" onclick="checkMCQ(this, true)">C. Both: vasopressor need + lactate >2</button>
+                                    <button class="mcq-option" onclick="checkMCQ(this, false)">D. SOFA score increase ≥2</button>
+                                </div>
+                                <div class="mcq-feedback"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="mcq-card">
+                            <div class="mcq-card-header">
+                                <span class="mcq-number">Q2</span>
+                                <span class="mcq-difficulty">Clinical</span>
+                            </div>
+                            <div class="mcq-card-body">
+                                <p class="mcq-question">A septic patient on norepinephrine 0.3 mcg/kg/min still has MAP 58. What is the recommended next step?</p>
+                                <div class="mcq-options">
+                                    <button class="mcq-option" onclick="checkMCQ(this, false)">A. Switch to epinephrine</button>
+                                    <button class="mcq-option" onclick="checkMCQ(this, true)">B. Add vasopressin</button>
+                                    <button class="mcq-option" onclick="checkMCQ(this, false)">C. Add dobutamine</button>
+                                    <button class="mcq-option" onclick="checkMCQ(this, false)">D. Add phenylephrine</button>
+                                </div>
+                                <div class="mcq-feedback"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- References -->
+            <div class="references-section">
+                <div class="references-title">📖 References</div>
+                <ul class="references-list">
+                    <li><a href="https://jamanetwork.com/journals/jama/fullarticle/2492881" target="_blank">Sepsis-3 Definitions. JAMA 2016 ↗</a></li>
+                    <li><a href="https://www.sccm.org/SurvivingSepsisCampaign/Guidelines" target="_blank">Surviving Sepsis Campaign Guidelines 2021 ↗</a></li>
+                </ul>
+            </div>
+            
+            <!-- Section Navigation -->
+            <div class="section-nav">
+                <a href="acs-module-v2.html" class="section-nav-btn">← ACS Module</a>
+                <a href="anaphylaxis-module.html" class="section-nav-btn next">Anaphylaxis Module →</a>
+            </div>
+            
+        </main>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="module-footer">
+        <p>MechanismDx • Part of the <a href="../dx-dashboard.html">Dx Learning Ecosystem</a></p>
+    </footer>
+    
+    <button class="mobile-toc-toggle" onclick="toggleMobileTOC()">📋</button>
+    
+    <script>
+        function checkMCQ(btn, isCorrect) {
+            const options = btn.parentElement.querySelectorAll('.mcq-option');
+            const feedback = btn.closest('.mcq-card-body').querySelector('.mcq-feedback');
+            options.forEach(opt => opt.disabled = true);
+            if (isCorrect) {
+                btn.classList.add('correct');
+                feedback.className = 'mcq-feedback show correct';
+                feedback.innerHTML = '✓ Correct! Septic shock requires BOTH vasopressor dependence AND lactate >2 despite adequate fluid resuscitation.';
+            } else {
+                btn.classList.add('incorrect');
+                options.forEach(opt => { if (opt.onclick.toString().includes('true')) opt.classList.add('correct'); });
+                feedback.className = 'mcq-feedback show incorrect';
+                feedback.innerHTML = '✗ Review the Sepsis-3 criteria. Septic shock has a specific two-part definition.';
+            }
+        }
+        
+        // Scroll spy
+        const sections = document.querySelectorAll('.module-section');
+        const tocLinks = document.querySelectorAll('.toc-link');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                if (scrollY >= section.offsetTop - 150) current = section.getAttribute('id');
+            });
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+            });
+        });
+        
+        tocLinks.forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                document.querySelector(link.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+        
+        function toggleMobileTOC() {
+            const sidebar = document.querySelector('.module-sidebar');
+            sidebar.style.display = sidebar.style.display === 'block' ? 'none' : 'block';
+            sidebar.style.position = 'fixed';
+            sidebar.style.left = '0';
+            sidebar.style.top = '0';
+            sidebar.style.zIndex = '1000';
+            sidebar.style.boxShadow = '4px 0 20px rgba(0,0,0,0.15)';
+        }
+    </script>
+</body>
+</html>
