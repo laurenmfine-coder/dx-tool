@@ -7,581 +7,104 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { 
-            font-family: 'Inter', system-ui, sans-serif; 
-            background: #f8fafc;
-            color: #1e293b; 
-            min-height: 100vh;
-        }
-        
-        /* Header - Light mode */
-        .header {
-            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-            padding: 24px;
-            border-bottom: 3px solid #2563eb;
-        }
-        .header-inner {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #f8fafc; color: #1e293b; min-height: 100vh; }
+        .top-nav { background: #fff; padding: 12px 24px; border-bottom: 1px solid #e2e8f0; }
+        .top-nav-inner { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .top-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #1e293b; font-weight: 600; font-size: 16px; }
+        .top-nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
+        .top-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #64748b; font-size: 13px; transition: all 0.15s; }
+        .top-nav-link:hover { background: #f1f5f9; color: #1e293b; }
+        .header { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); padding: 24px; border-bottom: 3px solid #2563eb; }
+        .header-inner { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .header-left { display: flex; align-items: center; gap: 16px; }
         .header-icon { font-size: 40px; }
         .header h1 { font-size: 24px; font-weight: 700; color: #fff; }
         .header-subtitle { font-size: 13px; color: #bfdbfe; }
-        
-        .header-nav {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .nav-link {
-            color: #bfdbfe;
-            text-decoration: none;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 13px;
-            transition: all 0.15s;
-        }
-        .nav-link:hover { background: rgba(255,255,255,0.15); color: #fff; }
-        
-        /* Specialty Selector - Light */
-        .specialty-bar {
-            background: #fff;
-            padding: 16px 24px;
-            border-bottom: 1px solid #e2e8f0;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
-        .specialty-inner {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-        .specialty-label {
-            font-size: 13px;
-            color: #64748b;
-            font-weight: 500;
-        }
-        .specialty-select {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            color: #1e293b;
-            padding: 10px 16px;
-            border-radius: 8px;
-            font-size: 14px;
-            min-width: 200px;
-            cursor: pointer;
-        }
-        .specialty-select:focus { outline: none; border-color: #3b82f6; }
-        
-        .quick-filters {
-            display: flex;
-            gap: 8px;
-            margin-left: auto;
-        }
-        .filter-btn {
-            background: #f1f5f9;
-            border: 1px solid #e2e8f0;
-            color: #64748b;
-            padding: 8px 14px;
-            border-radius: 6px;
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.15s;
-        }
+        .specialty-bar { background: #fff; padding: 16px 24px; border-bottom: 1px solid #e2e8f0; }
+        .specialty-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+        .specialty-label { font-size: 13px; color: #64748b; font-weight: 500; }
+        .specialty-select { background: #f8fafc; border: 1px solid #e2e8f0; color: #1e293b; padding: 10px 16px; border-radius: 8px; font-size: 14px; min-width: 200px; }
+        .quick-filters { display: flex; gap: 8px; margin-left: auto; flex-wrap: wrap; }
+        .filter-btn { background: #f1f5f9; border: 1px solid #e2e8f0; color: #64748b; padding: 8px 14px; border-radius: 6px; font-size: 12px; cursor: pointer; }
         .filter-btn:hover { background: #e2e8f0; color: #1e293b; }
         .filter-btn.active { background: #3b82f6; color: #fff; border-color: #3b82f6; }
-        
-        /* Main Content */
-        .main {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 32px 24px;
-        }
-        
-        /* Category Grid */
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 24px;
-            margin-bottom: 40px;
-        }
-        
-        .category-card {
-            background: #fff;
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid #e2e8f0;
-            transition: all 0.2s;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
-        .category-card:hover {
-            border-color: var(--accent, #3b82f6);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-        }
-        
-        .category-header {
-            padding: 20px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        /* Muted, professional color palette */
-        .category-header.anaphylaxis { --accent: #64748b; --accent-dark: #475569; }
-        .category-header.drug-allergy { --accent: #0891b2; --accent-dark: #0e7490; }
-        .category-header.asthma { --accent: #3b82f6; --accent-dark: #2563eb; }
-        .category-header.urticaria { --accent: #8b5cf6; --accent-dark: #7c3aed; }
-        .category-header.immunodeficiency { --accent: #6366f1; --accent-dark: #4f46e5; }
-        .category-header.eosinophilia { --accent: #14b8a6; --accent-dark: #0d9488; }
-        .category-header.rhinitis { --accent: #06b6d4; --accent-dark: #0891b2; }
-        .category-header.food-allergy { --accent: #10b981; --accent-dark: #059669; }
-        .category-header.mastcell { --accent: #f59e0b; --accent-dark: #d97706; }
-        .category-header.general { --accent: #64748b; --accent-dark: #475569; }
-        .category-header.allergy-testing { --accent: #0ea5e9; --accent-dark: #0284c7; }
-        
+        .main { max-width: 1400px; margin: 0 auto; padding: 32px 24px; }
+        .search-section { margin-bottom: 32px; }
+        .search-box { display: flex; gap: 12px; max-width: 600px; }
+        .search-input { flex: 1; background: #fff; border: 1px solid #e2e8f0; padding: 14px 20px; border-radius: 10px; font-size: 15px; }
+        .search-input:focus { outline: none; border-color: #3b82f6; }
+        .search-btn { background: #3b82f6; border: none; color: #fff; padding: 14px 24px; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; }
+        .stats-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; margin-bottom: 32px; }
+        .stat-card { background: #fff; border-radius: 12px; padding: 20px; text-align: center; border: 1px solid #e2e8f0; }
+        .stat-number { font-size: 28px; font-weight: 700; color: #3b82f6; }
+        .stat-label { font-size: 12px; color: #64748b; margin-top: 4px; }
+        .category-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; margin-bottom: 40px; }
+        .category-card { background: #fff; border-radius: 16px; overflow: hidden; border: 1px solid #e2e8f0; transition: all 0.2s; }
+        .category-card:hover { border-color: var(--accent, #3b82f6); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.1); }
+        .category-card.hidden { display: none; }
+        .category-header { padding: 20px; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%); display: flex; align-items: center; gap: 12px; }
+        .category-header.critical-care { --accent: #dc2626; --accent-dark: #b91c1c; }
+        .category-header.cardiology { --accent: #e11d48; --accent-dark: #be123c; }
+        .category-header.pulmonary { --accent: #0891b2; --accent-dark: #0e7490; }
+        .category-header.renal { --accent: #7c3aed; --accent-dark: #6d28d9; }
+        .category-header.neurology { --accent: #6366f1; --accent-dark: #4f46e5; }
+        .category-header.endocrine { --accent: #f59e0b; --accent-dark: #d97706; }
+        .category-header.gi { --accent: #10b981; --accent-dark: #059669; }
+        .category-header.hematology { --accent: #ef4444; --accent-dark: #dc2626; }
+        .category-header.infectious { --accent: #14b8a6; --accent-dark: #0d9488; }
+        .category-header.allergy { --accent: #8b5cf6; --accent-dark: #7c3aed; }
+        .category-header.psychiatry { --accent: #ec4899; --accent-dark: #db2777; }
+        .category-header.toxicology { --accent: #84cc16; --accent-dark: #65a30d; }
+        .category-header.special { --accent: #64748b; --accent-dark: #475569; }
         .category-icon { font-size: 28px; }
         .category-title { font-size: 18px; font-weight: 600; color: #fff; }
-        .category-count {
-            margin-left: auto;
-            background: rgba(255,255,255,0.25);
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 11px;
-            color: #fff;
-            font-weight: 500;
-        }
-        
+        .category-count { margin-left: auto; background: rgba(255,255,255,0.25); padding: 4px 10px; border-radius: 12px; font-size: 11px; color: #fff; }
         .category-body { padding: 16px 20px; }
-        
         .concept-list { list-style: none; }
-        .concept-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 12px;
-            margin: 4px 0;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.15s;
-            text-decoration: none;
-            color: inherit;
-        }
+        .concept-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; margin: 4px 0; border-radius: 8px; text-decoration: none; color: inherit; transition: all 0.15s; }
         .concept-item:hover { background: #f1f5f9; }
         .concept-item.hub { background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.2); }
-        
-        .concept-status {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
-            flex-shrink: 0;
-        }
+        .concept-status { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; }
         .concept-status.hub { background: #dbeafe; color: #1d4ed8; }
         .concept-status.mechanism { background: #e0f2fe; color: #0369a1; }
         .concept-status.case { background: #dcfce7; color: #15803d; }
         .concept-status.tool { background: #fef3c7; color: #b45309; }
-        
         .concept-info { flex: 1; }
         .concept-name { font-size: 14px; color: #1e293b; font-weight: 500; }
         .concept-type { font-size: 11px; color: #64748b; }
         .concept-arrow { color: #94a3b8; font-size: 14px; }
-        
-        /* Knowledge Web Visualization - Light */
-        .web-section {
-            background: #fff;
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 40px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
-        .web-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #1e293b;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .web-container {
-            position: relative;
-            height: 500px;
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid #e2e8f0;
-        }
-        
-        .web-node {
-            position: absolute;
-            padding: 12px 18px;
-            background: #fff;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-align: center;
-            z-index: 10;
-            text-decoration: none;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-        .web-node:hover {
-            transform: scale(1.05);
-            border-color: #3b82f6;
-            box-shadow: 0 4px 20px rgba(59,130,246,0.2);
-        }
-        .web-node.hub {
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            border-color: #2563eb;
-        }
-        .web-node.hub .node-name { color: #fff; font-weight: 600; }
-        .web-node.hub .node-icon { filter: brightness(0) invert(1); }
-        .node-icon { font-size: 20px; margin-bottom: 4px; }
-        .node-name { font-size: 12px; color: #1e293b; }
-        
-        .web-line {
-            position: absolute;
-            height: 2px;
-            background: linear-gradient(90deg, #e2e8f0, #3b82f6, #e2e8f0);
-            transform-origin: left center;
-            z-index: 1;
-            opacity: 0.6;
-        }
-        
-        /* Search - Light */
-        .search-section {
-            margin-bottom: 32px;
-        }
-        .search-box {
-            display: flex;
-            gap: 12px;
-            max-width: 600px;
-        }
-        .search-input {
-            flex: 1;
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            color: #1e293b;
-            padding: 14px 20px;
-            border-radius: 10px;
-            font-size: 15px;
-        }
-        .search-input:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
-        .search-input::placeholder { color: #94a3b8; }
-        .search-btn {
-            background: #3b82f6;
-            border: none;
-            color: #fff;
-            padding: 14px 24px;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.15s;
-        }
-        .search-btn:hover { background: #2563eb; }
-        
-        /* Stats Bar - Light */
-        .stats-bar {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 16px;
-            margin-bottom: 32px;
-        }
-        .stat-card {
-            background: #fff;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            border: 1px solid #e2e8f0;
-        }
-        .stat-number { font-size: 28px; font-weight: 700; color: #3b82f6; }
-        .stat-label { font-size: 12px; color: #64748b; margin-top: 4px; }
-        
-        /* Learning Path - Light */
-        .path-section {
-            background: linear-gradient(135deg, #eff6ff 0%, #fff 100%);
-            border-radius: 16px;
-            padding: 24px;
-            border: 1px solid #bfdbfe;
-        }
-        .path-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #1d4ed8;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .path-steps {
-            display: flex;
-            gap: 12px;
-            overflow-x: auto;
-            padding-bottom: 12px;
-        }
-        .path-step {
-            flex-shrink: 0;
-            background: #fff;
-            border-radius: 12px;
-            padding: 16px;
-            min-width: 180px;
-            text-align: center;
-            border: 1px solid #e2e8f0;
-            cursor: pointer;
-            transition: all 0.15s;
-            text-decoration: none;
-        }
-        .path-step:hover { border-color: #3b82f6; box-shadow: 0 4px 12px rgba(59,130,246,0.1); }
-        .path-step-num {
-            width: 32px;
-            height: 32px;
-            background: #3b82f6;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            color: #fff;
-            margin: 0 auto 10px;
-        }
-        .path-step-title { font-size: 13px; font-weight: 600; color: #1e293b; margin-bottom: 4px; }
-        .path-step-desc { font-size: 11px; color: #64748b; }
-        
-        /* Footer - Light */
-        .footer {
-            text-align: center;
-            padding: 32px 24px;
-            color: #64748b;
-            font-size: 13px;
-            border-top: 1px solid #e2e8f0;
-            background: #fff;
-        }
+        .ref-link { margin-top: 12px; padding-top: 12px; border-top: 1px solid #e2e8f0; font-size: 11px; color: #64748b; }
+        .ref-link a { color: #3b82f6; text-decoration: none; }
+        .guidelines-section { background: #fff; border-radius: 16px; padding: 24px; margin-bottom: 40px; border: 1px solid #e2e8f0; }
+        .guidelines-title { font-size: 18px; font-weight: 600; color: #1e293b; margin-bottom: 16px; }
+        .guidelines-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+        .guideline-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px 16px; text-decoration: none; color: inherit; transition: all 0.15s; }
+        .guideline-card:hover { border-color: #3b82f6; background: #eff6ff; }
+        .guideline-card-title { font-size: 13px; font-weight: 600; color: #1e293b; margin-bottom: 4px; }
+        .guideline-card-source { font-size: 11px; color: #64748b; }
+        .guideline-card-year { font-size: 10px; color: #3b82f6; font-weight: 500; }
+        .footer { text-align: center; padding: 32px 24px; color: #64748b; font-size: 13px; border-top: 1px solid #e2e8f0; background: #fff; }
         .footer a { color: #3b82f6; text-decoration: none; }
-        
-        /* ============================================ */
-        /* FLOATING INFO CARD - How This Works */
-        /* ============================================ */
-        .info-fab {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            width: 56px;
-            height: 56px;
-            background: #3b82f6;
-            border: none;
-            border-radius: 50%;
-            color: #fff;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(59,130,246,0.4);
-            z-index: 1000;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        .info-fab { position: fixed; bottom: 24px; right: 24px; width: 56px; height: 56px; background: #3b82f6; border: none; border-radius: 50%; color: #fff; font-size: 24px; cursor: pointer; box-shadow: 0 4px 20px rgba(59,130,246,0.4); z-index: 1000; }
         .info-fab:hover { transform: scale(1.1); background: #2563eb; }
-        
-        .info-panel {
-            position: fixed;
-            bottom: 96px;
-            right: 24px;
-            width: 380px;
-            max-height: 70vh;
-            background: #fff;
-            border-radius: 16px;
-            box-shadow: 0 10px 50px rgba(0,0,0,0.15);
-            z-index: 999;
-            overflow: hidden;
-            display: none;
-            border: 1px solid #e2e8f0;
-        }
-        .info-panel.visible { display: block; animation: slideUp 0.3s ease; }
-        
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .info-panel-header {
-            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-            padding: 20px;
-            color: #fff;
-        }
-        .info-panel-header h3 { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+        .info-panel { position: fixed; bottom: 96px; right: 24px; width: 380px; max-height: 70vh; background: #fff; border-radius: 16px; box-shadow: 0 10px 50px rgba(0,0,0,0.15); z-index: 999; overflow: hidden; display: none; border: 1px solid #e2e8f0; }
+        .info-panel.visible { display: block; }
+        .info-panel-header { background: linear-gradient(135deg, #3b82f6, #1d4ed8); padding: 20px; color: #fff; position: relative; }
+        .info-panel-header h3 { font-size: 18px; font-weight: 600; }
         .info-panel-header p { font-size: 13px; color: #bfdbfe; }
-        .info-panel-close {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            background: rgba(255,255,255,0.2);
-            border: none;
-            color: #fff;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        
-        .info-panel-body {
-            padding: 20px;
-            max-height: 50vh;
-            overflow-y: auto;
-        }
+        .info-panel-close { position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.2); border: none; color: #fff; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; }
+        .info-panel-body { padding: 20px; max-height: 50vh; overflow-y: auto; }
         .info-section { margin-bottom: 20px; }
-        .info-section:last-child { margin-bottom: 0; }
-        .info-section h4 { font-size: 14px; font-weight: 600; color: #1e293b; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-        .info-section p { font-size: 13px; color: #64748b; line-height: 1.6; }
-        .info-section ul { font-size: 13px; color: #64748b; padding-left: 20px; }
-        .info-section li { margin: 6px 0; }
-        
-        .info-integration {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-top: 12px;
-        }
-        .info-tool {
-            text-align: center;
-            padding: 12px 8px;
-            background: #f8fafc;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-        }
-        .info-tool-icon { font-size: 24px; margin-bottom: 4px; }
-        .info-tool-name { font-size: 11px; font-weight: 600; color: #1e293b; }
-        .info-tool-desc { font-size: 10px; color: #64748b; }
-        
-        .info-arrows {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 12px;
-            font-size: 12px;
-            color: #64748b;
-        }
-        
-        /* ============================================ */
-        /* TOOLTIPS */
-        /* ============================================ */
-        .tooltip-wrapper {
-            position: relative;
-        }
-        .tooltip {
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #1e293b;
-            color: white;
-            padding: 8px 12px;
-            border-radius: 8px;
-            font-size: 12px;
-            white-space: nowrap;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.2s;
-            z-index: 1000;
-            max-width: 250px;
-            white-space: normal;
-            text-align: center;
-        }
-        .tooltip::after {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            border: 6px solid transparent;
-            border-top-color: #1e293b;
-        }
-        .tooltip-wrapper:hover .tooltip {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(-5px);
-        }
-        
-        /* Top Nav - Light */
-        .top-nav {
-            background: #fff;
-            padding: 12px 24px;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        .top-nav-inner {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-        .top-nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: #1e293b;
-        }
-        .top-nav-brand span:first-child { font-size: 24px; }
-        .top-nav-brand span:last-child { font-size: 16px; font-weight: 600; }
-        .top-nav-links {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        .top-nav-link {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 14px;
-            border-radius: 8px;
-            text-decoration: none;
-            color: #64748b;
-            font-size: 13px;
-            transition: all 0.15s;
-        }
-        .top-nav-link:hover { background: #f1f5f9; color: #1e293b; }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header-inner { flex-direction: column; text-align: center; }
-            .specialty-inner { flex-direction: column; }
-            .quick-filters { margin-left: 0; justify-content: center; }
-            .web-container { height: 400px; }
-            .info-panel { width: calc(100% - 48px); right: 24px; left: 24px; }
-        }
+        .info-section h4 { font-size: 14px; font-weight: 600; color: #1e293b; margin-bottom: 8px; }
+        .info-section p, .info-section ul { font-size: 13px; color: #64748b; line-height: 1.6; }
+        .info-section ul { padding-left: 20px; }
+        @media (max-width: 768px) { .category-grid { grid-template-columns: 1fr; } .info-panel { width: calc(100% - 48px); } }
     </style>
 </head>
 <body>
-    <!-- Top Navigation -->
     <nav class="top-nav">
         <div class="top-nav-inner">
-            <a href="index.html" class="top-nav-brand">
-                <span>🏥</span>
-                <span>Dx Learning Ecosystem</span>
-            </a>
+            <a href="index.html" class="top-nav-brand"><span>🏥</span> Dx Learning Ecosystem</a>
             <div class="top-nav-links">
                 <a href="index.html" class="top-nav-link">🏠 Home</a>
                 <a href="mechanism/index.html" class="top-nav-link">📚 MechanismDx</a>
@@ -590,489 +113,231 @@
             </div>
         </div>
     </nav>
-
     <header class="header">
         <div class="header-inner">
             <div class="header-left">
                 <div class="header-icon">🕸️</div>
                 <div>
                     <h1>Knowledge Web Navigator</h1>
-                    <div class="header-subtitle">Explore interconnected clinical concepts across the Dx Ecosystem</div>
+                    <div class="header-subtitle">Explore interconnected clinical concepts across 12 specialties</div>
                 </div>
-            </div>
-            <div class="header-nav">
-                <a href="index.html" class="nav-link">🏠 Home</a>
-                <a href="mechanism/index.html" class="nav-link">📚 MechanismDx</a>
-                <a href="ReasonDx/training.html" class="nav-link">🔬 ReasonDx</a>
-                <a href="CoachDx/coachdx-dashboard.html" class="nav-link">🧠 CoachDx</a>
             </div>
         </div>
     </header>
-    
     <div class="specialty-bar">
         <div class="specialty-inner">
             <span class="specialty-label">Specialty:</span>
             <select class="specialty-select" onchange="filterBySpecialty(this.value)">
-                <option value="allergy-immunology">Allergy & Immunology</option>
-                <option value="cardiology" disabled>Cardiology (Coming Soon)</option>
-                <option value="pulmonology" disabled>Pulmonology (Coming Soon)</option>
-                <option value="gastroenterology" disabled>Gastroenterology (Coming Soon)</option>
-                <option value="nephrology" disabled>Nephrology (Coming Soon)</option>
-                <option value="neurology" disabled>Neurology (Coming Soon)</option>
-                <option value="infectious" disabled>Infectious Disease (Coming Soon)</option>
-                <option value="endocrine" disabled>Endocrinology (Coming Soon)</option>
+                <option value="all">All Specialties</option>
+                <option value="critical-care">Critical Care</option>
+                <option value="cardiology">Cardiovascular</option>
+                <option value="pulmonary">Pulmonary</option>
+                <option value="renal">Renal & Electrolytes</option>
+                <option value="neurology">Neurology</option>
+                <option value="endocrine">Endocrine</option>
+                <option value="gi">GI & Hepatology</option>
+                <option value="hematology">Hematology</option>
+                <option value="infectious">Infectious Disease</option>
+                <option value="allergy">Allergy & Immunology</option>
+                <option value="psychiatry">Psychiatry</option>
+                <option value="toxicology">Toxicology</option>
+                <option value="special">Other Specialties</option>
             </select>
-            
             <div class="quick-filters">
-                <div class="tooltip-wrapper">
-                    <button class="filter-btn active" onclick="filterByType('all')">All</button>
-                    <span class="tooltip">Show all content types</span>
-                </div>
-                <div class="tooltip-wrapper">
-                    <button class="filter-btn" onclick="filterByType('mechanism')">📚 MechanismDx</button>
-                    <span class="tooltip">Pathophysiology modules - understand WHY</span>
-                </div>
-                <div class="tooltip-wrapper">
-                    <button class="filter-btn" onclick="filterByType('case')">📋 Cases</button>
-                    <span class="tooltip">Clinical reasoning cases - apply knowledge</span>
-                </div>
-                <div class="tooltip-wrapper">
-                    <button class="filter-btn" onclick="filterByType('tool')">🛠️ Tools</button>
-                    <span class="tooltip">Interactive tools & calculators</span>
-                </div>
+                <button class="filter-btn active" onclick="filterByType('all')">All</button>
+                <button class="filter-btn" onclick="filterByType('mechanism')">📚 Mechanisms</button>
+                <button class="filter-btn" onclick="filterByType('case')">📋 Cases</button>
+                <button class="filter-btn" onclick="filterByType('tool')">🛠️ Tools</button>
             </div>
         </div>
     </div>
-    
     <main class="main">
-        <!-- Search -->
         <div class="search-section">
             <div class="search-box">
                 <input type="text" class="search-input" placeholder="Search concepts, cases, modules..." oninput="searchConcepts(this.value)">
                 <button class="search-btn">Search</button>
             </div>
         </div>
-        
-        <!-- Stats -->
         <div class="stats-bar">
-            <div class="stat-card tooltip-wrapper">
-                <div class="stat-number">12</div>
-                <div class="stat-label">A/I Modules</div>
-                <span class="tooltip">MechanismDx pathophysiology modules</span>
-            </div>
-            <div class="stat-card tooltip-wrapper">
-                <div class="stat-number">8</div>
-                <div class="stat-label">Clinical Cases</div>
-                <span class="tooltip">ReasonDx clinical reasoning cases</span>
-            </div>
-            <div class="stat-card tooltip-wrapper">
-                <div class="stat-number">45+</div>
-                <div class="stat-label">Linked Concepts</div>
-                <span class="tooltip">Interconnected clinical concepts</span>
-            </div>
-            <div class="stat-card tooltip-wrapper">
-                <div class="stat-number">3</div>
-                <div class="stat-label">Interactive Tools</div>
-                <span class="tooltip">Calculators, decision aids</span>
-            </div>
+            <div class="stat-card"><div class="stat-number">45+</div><div class="stat-label">Modules</div></div>
+            <div class="stat-card"><div class="stat-number">200+</div><div class="stat-label">Cases</div></div>
+            <div class="stat-card"><div class="stat-number">12</div><div class="stat-label">Specialties</div></div>
+            <div class="stat-card"><div class="stat-number">500+</div><div class="stat-label">MCQs</div></div>
         </div>
-        
-        <!-- Category Cards -->
         <div class="category-grid">
-            
-            <!-- Anaphylaxis & Acute -->
-            <div class="category-card" data-specialty="allergy-immunology">
-                <div class="category-header anaphylaxis">
-                    <span class="category-icon">🚨</span>
-                    <span class="category-title">Anaphylaxis & Acute</span>
-                    <span class="category-count">6 items</span>
-                </div>
+            <!-- CRITICAL CARE -->
+            <div class="category-card" data-specialty="critical-care">
+                <div class="category-header critical-care"><span class="category-icon">🚨</span><span class="category-title">Critical Care</span><span class="category-count">2</span></div>
                 <div class="category-body">
                     <ul class="concept-list">
-                        <li>
-                            <a href="mechanism/anaphylaxis-module.html" class="concept-item hub">
-                                <span class="concept-status hub">⭐</span>
-                                <div class="concept-info">
-                                    <div class="concept-name">Anaphylaxis Pathophysiology</div>
-                                    <div class="concept-type">MechanismDx Hub</div>
-                                </div>
-                                <span class="concept-arrow">→</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="mechanism/mast-cell-module.html" class="concept-item">
-                                <span class="concept-status mechanism">📖</span>
-                                <div class="concept-info">
-                                    <div class="concept-name">Mast Cell Biology</div>
-                                    <div class="concept-type">MechanismDx</div>
-                                </div>
-                                <span class="concept-arrow">→</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="mechanism/epinephrine-module.html" class="concept-item">
-                                <span class="concept-status mechanism">📖</span>
-                                <div class="concept-info">
-                                    <div class="concept-name">Epinephrine Mechanism</div>
-                                    <div class="concept-type">MechanismDx</div>
-                                </div>
-                                <span class="concept-arrow">→</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="ReasonDx/ai-trainer-anaphylaxis-food.html" class="concept-item">
-                                <span class="concept-status case">📋</span>
-                                <div class="concept-info">
-                                    <div class="concept-name">Food Anaphylaxis Case</div>
-                                    <div class="concept-type">Clinical Case</div>
-                                </div>
-                                <span class="concept-arrow">→</span>
-                            </a>
-                        </li>
+                        <li><a href="mechanism/sepsis-shock-module.html" class="concept-item hub"><span class="concept-status hub">⭐</span><div class="concept-info"><div class="concept-name">Sepsis & Shock</div><div class="concept-type">Sepsis-3, Hour-1 Bundle, Vasopressors</div></div><span class="concept-arrow">→</span></a></li>
+                        <li><a href="mechanism/sepsis.html" class="concept-item"><span class="concept-status case">📋</span><div class="concept-info"><div class="concept-name">Sepsis Clinical Case</div><div class="concept-type">Clinical Reasoning</div></div><span class="concept-arrow">→</span></a></li>
                     </ul>
+                    <div class="ref-link">📖 <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4968574/" target="_blank">Surviving Sepsis Campaign 2021</a></div>
                 </div>
             </div>
-            
-            <!-- Allergy Testing -->
-            <div class="category-card" data-specialty="allergy-immunology">
-                <div class="category-header allergy-testing">
-                    <span class="category-icon">🧪</span>
-                    <span class="category-title">Allergy Testing</span>
-                    <span class="category-count">4 items</span>
-                </div>
+            <!-- CARDIOVASCULAR -->
+            <div class="category-card" data-specialty="cardiology">
+                <div class="category-header cardiology"><span class="category-icon">❤️</span><span class="category-title">Cardiovascular</span><span class="category-count">7</span></div>
                 <div class="category-body">
                     <ul class="concept-list">
-                        <li>
-                            <a href="mechanism/allergy-testing-module.html" class="concept-item hub">
-                                <span class="concept-status hub">⭐</span>
-                                <div class="concept-info">
-                                    <div class="concept-name">Allergy Testing Guide</div>
-                                    <div class="concept-type">MechanismDx Hub</div>
-                                </div>
-                                <span class="concept-arrow">→</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="mechanism/allergy-testing-module.html#components" class="concept-item">
-                                <span class="concept-status mechanism">📖</span>
-                                <div class="concept-info">
-                                    <div class="concept-name">Component Testing (CRD)</div>
-                                    <div class="concept-type">MechanismDx</div>
-                                </div>
-                                <span class="concept-arrow">→</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="mechanism/type1-hypersensitivity.html" class="concept-item">
-                                <span class="concept-status mechanism">📖</span>
-                                <div class="concept-info">
-                                    <div class="concept-name">Type I Hypersensitivity</div>
-                                    <div class="concept-type">MechanismDx</div>
-                                </div>
-                                <span class="concept-arrow">→</span>
-                            </a>
-                        </li>
+                        <li><a href="mechanism/acs-module.html" class="concept-item hub"><span class="concept-status hub">⭐</span><div class="concept-info"><div class="concept-name">Acute Coronary Syndrome</div><div class="concept-type">STEMI/NSTEMI, Troponins, Reperfusion</div></div><span class="concept-arrow">→</span></a></li>
+                        <li><a href="mechanism/hf-module.html" class="concept-item"><span class="concept-status mechanism">📖</span><div class="concept-info"><div class="concept-name">Heart Failure</div><div class="concept-type">HFrEF vs HFpEF, GDMT</div></div><span class="concept-arrow">→</span></a></li>
+                        <li><a href="mechanism/vte-module.html" class="concept-item"><span class="concept-status mechanism">📖</span><div class="concept-info"><div class="concept-name">VTE & Pulmonary Embolism</div><div class="concept-type">Virchow's Triad, Wells Criteria</div></div><span class="concept-arrow">→</span></a></li>
+                        <li><a href="mechanism/syncope-arrhythmia-module.html" class="concept-item"><span class="concept-status mechanism">📖</span><div class="concept-info"><div class="concept-name">Syncope & Arrhythmias</div><div class="concept-type">Risk Stratification, ECG</div></div><span class="concept-arrow">→</span></a></li>
                     </ul>
+                    <div class="ref-link">📖 <a href="https://www.ahajournals.org/doi/10.1161/CIR.0000000000001123" target="_blank">ACC/AHA Guidelines</a></div>
                 </div>
             </div>
-            
-            <!-- Food Allergy -->
-            <div class="category-card" data-specialty="allergy-immunology">
-                <div class="category-header food-allergy">
-                    <span class="category-icon">🥜</span>
-                    <span class="category-title">Food Allergy</span>
-                    <span class="category-count">4 items</span>
-                </div>
+            <!-- PULMONARY -->
+            <div class="category-card" data-specialty="pulmonary">
+                <div class="category-header pulmonary"><span class="category-icon">🫁</span><span class="category-title">Pulmonary</span><span class="category-count">5</span></div>
                 <div class="category-body">
                     <ul class="concept-list">
-                        <li>
-                            <a href="mechanism/food-allergy-management.html" class="concept-item hub">
-                                <span class="concept-status hub">⭐</span>
-                                <div class="concept-info">
-                                    <div class="concept-name">Food Allergy Management</div>
-                                    <div class="concept-type">MechanismDx Hub</div>
-                                </div>
-                                <span class="concept-arrow">→</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="mechanism/food-allergy-management.html#oit" class="concept-item">
-                                <span class="concept-status mechanism">📖</span>
-                                <div class="concept-info">
-                                    <div class="concept-name">Oral Immunotherapy (OIT)</div>
-                                    <div class="concept-type">MechanismDx</div>
-                                </div>
-                                <span class="concept-arrow">→</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="ReasonDx/ai-trainer-anaphylaxis-food.html" class="concept-item">
-                                <span class="concept-status case">📋</span>
-                                <div class="concept-info">
-                                    <div class="concept-name">Peanut Allergy Workup</div>
-                                    <div class="concept-type">Clinical Case</div>
-                                </div>
-                                <span class="concept-arrow">→</span>
-                            </a>
-                        </li>
+                        <li><a href="mechanism/obstructive-lung-module.html" class="concept-item hub"><span class="concept-status hub">⭐</span><div class="concept-info"><div class="concept-name">Obstructive Lung Disease</div><div class="concept-type">COPD vs Asthma, Spirometry</div></div><span class="concept-arrow">→</span></a></li>
+                        <li><a href="mechanism/pneumonia-module.html" class="concept-item"><span class="concept-status mechanism">📖</span><div class="concept-info"><div class="concept-name">Pneumonia</div><div class="concept-type">CAP, HAP, CURB-65</div></div><span class="concept-arrow">→</span></a></li>
+                        <li><a href="mechanism/respiratory-pft-module.html" class="concept-item"><span class="concept-status tool">🛠️</span><div class="concept-info"><div class="concept-name">PFT Interpretation</div><div class="concept-type">Spirometry, Flow-Volume</div></div><span class="concept-arrow">→</span></a></li>
                     </ul>
+                    <div class="ref-link">📖 <a href="https://goldcopd.org/2024-gold-report/" target="_blank">GOLD COPD 2024</a></div>
                 </div>
             </div>
-            
-            <!-- Drug Allergy -->
-            <div class="category-card" data-specialty="allergy-immunology">
-                <div class="category-header drug-allergy">
-                    <span class="category-icon">💊</span>
-                    <span class="category-title">Drug Allergy</span>
-                    <span class="category-count">3 items</span>
-                </div>
+            <!-- RENAL -->
+            <div class="category-card" data-specialty="renal">
+                <div class="category-header renal"><span class="category-icon">🫘</span><span class="category-title">Renal & Electrolytes</span><span class="category-count">6</span></div>
                 <div class="category-body">
                     <ul class="concept-list">
-                        <li>
-                            <a href="mechanism/drug-allergy-module.html" class="concept-item hub">
-                                <span class="concept-status hub">⭐</span>
-                                <div class="concept-info">
-                                    <div class="concept-name">Penicillin Delabeling</div>
-                                    <div class="concept-type">Clinical Case</div>
-                                </div>
-                                <span class="concept-arrow">→</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="mechanism/drug-hypersensitivity.html" class="concept-item">
-                                <span class="concept-status mechanism">📖</span>
-                                <div class="concept-info">
-                                    <div class="concept-name">Drug Hypersensitivity Mechanisms</div>
-                                    <div class="concept-type">MechanismDx</div>
-                                </div>
-                                <span class="concept-arrow">→</span>
-                            </a>
-                        </li>
+                        <li><a href="mechanism/aki-module.html" class="concept-item hub"><span class="concept-status hub">⭐</span><div class="concept-info"><div class="concept-name">Acute Kidney Injury</div><div class="concept-type">Pre-renal vs ATN, FENa</div></div><span class="concept-arrow">→</span></a></li>
+                        <li><a href="mechanism/hyponatremia-module.html" class="concept-item"><span class="concept-status mechanism">📖</span><div class="concept-info"><div class="concept-name">Hyponatremia</div><div class="concept-type">Osmolality, SIADH</div></div><span class="concept-arrow">→</span></a></li>
+                        <li><a href="mechanism/potassium-module.html" class="concept-item"><span class="concept-status mechanism">📖</span><div class="concept-info"><div class="concept-name">Potassium Disorders</div><div class="concept-type">ECG Changes, Emergency Rx</div></div><span class="concept-arrow">→</span></a></li>
+                        <li><a href="mechanism/acid-base-module.html" class="concept-item"><span class="concept-status mechanism">📖</span><div class="concept-info"><div class="concept-name">Acid-Base</div><div class="concept-type">ABG, Anion Gap, Winter's</div></div><span class="concept-arrow">→</span></a></li>
                     </ul>
+                    <div class="ref-link">📖 <a href="https://kdigo.org/guidelines/" target="_blank">KDIGO Guidelines</a></div>
                 </div>
             </div>
-            
-            <!-- Urticaria & Angioedema -->
-            <div class="category-card" data-specialty="allergy-immunology">
-                <div class="category-header urticaria">
-                    <span class="category-icon">🔴</span>
-                    <span class="category-title">Urticaria & Angioedema</span>
-                    <span class="category-count">3 items</span>
-                </div>
+            <!-- NEUROLOGY -->
+            <div class="category-card" data-specialty="neurology">
+                <div class="category-header neurology"><span class="category-icon">🧠</span><span class="category-title">Neurology</span><span class="category-count">3</span></div>
                 <div class="category-body">
                     <ul class="concept-list">
-                        <li>
-                            <a href="mechanism/urticaria-module.html" class="concept-item hub">
-                                <span class="concept-status hub">⭐</span>
-                                <div class="concept-info">
-                                    <div class="concept-name">Chronic Urticaria</div>
-                                    <div class="concept-type">MechanismDx Hub</div>
-                                </div>
-                                <span class="concept-arrow">→</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="mechanism/angioedema-module.html" class="concept-item">
-                                <span class="concept-status mechanism">📖</span>
-                                <div class="concept-info">
-                                    <div class="concept-name">Angioedema Workup</div>
-                                    <div class="concept-type">MechanismDx</div>
-                                </div>
-                                <span class="concept-arrow">→</span>
-                            </a>
-                        </li>
+                        <li><a href="mechanism/stroke-module.html" class="concept-item hub"><span class="concept-status hub">⭐</span><div class="concept-info"><div class="concept-name">Stroke</div><div class="concept-type">Ischemic vs Hemorrhagic, tPA</div></div><span class="concept-arrow">→</span></a></li>
+                        <li><a href="mechanism/neurology.html" class="concept-item"><span class="concept-status mechanism">📖</span><div class="concept-info"><div class="concept-name">Neurology Comprehensive</div><div class="concept-type">AMS, Seizure, Weakness</div></div><span class="concept-arrow">→</span></a></li>
                     </ul>
+                    <div class="ref-link">📖 <a href="https://www.ahajournals.org/doi/10.1161/STR.0000000000000211" target="_blank">AHA/ASA Stroke 2019</a></div>
                 </div>
             </div>
-            
-            <!-- Asthma -->
-            <div class="category-card" data-specialty="allergy-immunology">
-                <div class="category-header asthma">
-                    <span class="category-icon">🫁</span>
-                    <span class="category-title">Asthma & Airways</span>
-                    <span class="category-count">4 items</span>
-                </div>
+            <!-- ENDOCRINE -->
+            <div class="category-card" data-specialty="endocrine">
+                <div class="category-header endocrine"><span class="category-icon">🦋</span><span class="category-title">Endocrine</span><span class="category-count">4</span></div>
                 <div class="category-body">
                     <ul class="concept-list">
-                        <li>
-                            <a href="mechanism/asthma-phenotypes.html" class="concept-item hub">
-                                <span class="concept-status hub">⭐</span>
-                                <div class="concept-info">
-                                    <div class="concept-name">Asthma Phenotyping</div>
-                                    <div class="concept-type">MechanismDx Hub</div>
-                                </div>
-                                <span class="concept-arrow">→</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="mechanism/biologics-module.html" class="concept-item">
-                                <span class="concept-status mechanism">📖</span>
-                                <div class="concept-info">
-                                    <div class="concept-name">Biologic Selection</div>
-                                    <div class="concept-type">MechanismDx</div>
-                                </div>
-                                <span class="concept-arrow">→</span>
-                            </a>
-                        </li>
+                        <li><a href="mechanism/diabetes-dka-module.html" class="concept-item hub"><span class="concept-status hub">⭐</span><div class="concept-info"><div class="concept-name">Diabetes & DKA</div><div class="concept-type">DKA vs HHS, Insulin</div></div><span class="concept-arrow">→</span></a></li>
+                        <li><a href="mechanism/thyroid-module.html" class="concept-item"><span class="concept-status mechanism">📖</span><div class="concept-info"><div class="concept-name">Thyroid Disorders</div><div class="concept-type">Graves, Hashimoto</div></div><span class="concept-arrow">→</span></a></li>
+                        <li><a href="mechanism/endocrine-emergencies.html" class="concept-item"><span class="concept-status mechanism">📖</span><div class="concept-info"><div class="concept-name">Endocrine Emergencies</div><div class="concept-type">Adrenal Crisis, Myxedema</div></div><span class="concept-arrow">→</span></a></li>
                     </ul>
+                    <div class="ref-link">📖 <a href="https://diabetesjournals.org/care" target="_blank">ADA Standards 2024</a></div>
                 </div>
             </div>
-            
-            <!-- Immunodeficiency -->
-            <div class="category-card" data-specialty="allergy-immunology">
-                <div class="category-header immunodeficiency">
-                    <span class="category-icon">🛡️</span>
-                    <span class="category-title">Immunodeficiency</span>
-                    <span class="category-count">3 items</span>
-                </div>
+            <!-- GI -->
+            <div class="category-card" data-specialty="gi">
+                <div class="category-header gi"><span class="category-icon">🩺</span><span class="category-title">GI & Hepatology</span><span class="category-count">5</span></div>
                 <div class="category-body">
                     <ul class="concept-list">
-                        <li>
-                            <a href="mechanism/immunodeficiency-module.html" class="concept-item hub">
-                                <span class="concept-status hub">⭐</span>
-                                <div class="concept-info">
-                                    <div class="concept-name">Primary Immunodeficiency</div>
-                                    <div class="concept-type">MechanismDx Hub</div>
-                                </div>
-                                <span class="concept-arrow">→</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="mechanism/cvid-module.html" class="concept-item">
-                                <span class="concept-status mechanism">📖</span>
-                                <div class="concept-info">
-                                    <div class="concept-name">CVID Workup</div>
-                                    <div class="concept-type">MechanismDx</div>
-                                </div>
-                                <span class="concept-arrow">→</span>
-                            </a>
-                        </li>
+                        <li><a href="mechanism/gi-bleeding-module.html" class="concept-item hub"><span class="concept-status hub">⭐</span><div class="concept-info"><div class="concept-name">GI Bleeding</div><div class="concept-type">Upper vs Lower, Risk Scores</div></div><span class="concept-arrow">→</span></a></li>
+                        <li><a href="mechanism/liver-cirrhosis-module.html" class="concept-item"><span class="concept-status mechanism">📖</span><div class="concept-info"><div class="concept-name">Liver & Cirrhosis</div><div class="concept-type">Portal HTN, Ascites, HE</div></div><span class="concept-arrow">→</span></a></li>
+                        <li><a href="mechanism/acute-abdomen-module.html" class="concept-item"><span class="concept-status mechanism">📖</span><div class="concept-info"><div class="concept-name">Acute Abdomen</div><div class="concept-type">Appendicitis, Cholecystitis</div></div><span class="concept-arrow">→</span></a></li>
                     </ul>
+                    <div class="ref-link">📖 <a href="https://www.aasld.org/practice-guidelines" target="_blank">AASLD Guidelines</a></div>
                 </div>
             </div>
-            
-            <!-- Eosinophilia -->
-            <div class="category-card" data-specialty="allergy-immunology">
-                <div class="category-header eosinophilia">
-                    <span class="category-icon">🔬</span>
-                    <span class="category-title">Eosinophilia</span>
-                    <span class="category-count">3 items</span>
-                </div>
+            <!-- HEMATOLOGY -->
+            <div class="category-card" data-specialty="hematology">
+                <div class="category-header hematology"><span class="category-icon">🔴</span><span class="category-title">Hematology</span><span class="category-count">2</span></div>
                 <div class="category-body">
                     <ul class="concept-list">
-                        <li>
-                            <a href="mechanism/eosinophilia-module.html" class="concept-item hub">
-                                <span class="concept-status hub">⭐</span>
-                                <div class="concept-info">
-                                    <div class="concept-name">Eosinophilia Workup</div>
-                                    <div class="concept-type">MechanismDx Hub</div>
-                                </div>
-                                <span class="concept-arrow">→</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="mechanism/egid-module.html" class="concept-item">
-                                <span class="concept-status mechanism">📖</span>
-                                <div class="concept-info">
-                                    <div class="concept-name">EoE & EGID</div>
-                                    <div class="concept-type">MechanismDx</div>
-                                </div>
-                                <span class="concept-arrow">→</span>
-                            </a>
-                        </li>
+                        <li><a href="mechanism/anemia-module.html" class="concept-item hub"><span class="concept-status hub">⭐</span><div class="concept-info"><div class="concept-name">Anemia</div><div class="concept-type">MCV Approach, Iron Studies</div></div><span class="concept-arrow">→</span></a></li>
+                        <li><a href="mechanism/hematology.html" class="concept-item"><span class="concept-status mechanism">📖</span><div class="concept-info"><div class="concept-name">Hematology Comprehensive</div><div class="concept-type">Coagulation, Transfusion</div></div><span class="concept-arrow">→</span></a></li>
                     </ul>
+                    <div class="ref-link">📖 <a href="https://www.hematology.org/education" target="_blank">ASH Guidelines</a></div>
                 </div>
             </div>
-            
-            <!-- Mast Cell Disorders -->
-            <div class="category-card" data-specialty="allergy-immunology">
-                <div class="category-header mastcell">
-                    <span class="category-icon">⚡</span>
-                    <span class="category-title">Mast Cell Disorders</span>
-                    <span class="category-count">2 items</span>
-                </div>
+            <!-- INFECTIOUS -->
+            <div class="category-card" data-specialty="infectious">
+                <div class="category-header infectious"><span class="category-icon">🦠</span><span class="category-title">Infectious Disease</span><span class="category-count">2</span></div>
                 <div class="category-body">
                     <ul class="concept-list">
-                        <li>
-                            <a href="mechanism/mastocytosis-module.html" class="concept-item hub">
-                                <span class="concept-status hub">⭐</span>
-                                <div class="concept-info">
-                                    <div class="concept-name">Mastocytosis Workup</div>
-                                    <div class="concept-type">MechanismDx Hub</div>
-                                </div>
-                                <span class="concept-arrow">→</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="mechanism/mast-cell-module.html" class="concept-item">
-                                <span class="concept-status mechanism">📖</span>
-                                <div class="concept-info">
-                                    <div class="concept-name">Mastocytosis Criteria</div>
-                                    <div class="concept-type">MechanismDx</div>
-                                </div>
-                                <span class="concept-arrow">→</span>
-                            </a>
-                        </li>
+                        <li><a href="mechanism/infectious-disease.html" class="concept-item hub"><span class="concept-status hub">⭐</span><div class="concept-info"><div class="concept-name">Infectious Disease</div><div class="concept-type">Antibiotic Selection</div></div><span class="concept-arrow">→</span></a></li>
+                        <li><a href="mechanism/microbiology.html" class="concept-item"><span class="concept-status mechanism">📖</span><div class="concept-info"><div class="concept-name">Clinical Microbiology</div><div class="concept-type">Gram Stain, Pathogens</div></div><span class="concept-arrow">→</span></a></li>
                     </ul>
+                    <div class="ref-link">📖 <a href="https://www.idsociety.org/practice-guideline/" target="_blank">IDSA Guidelines</a></div>
                 </div>
             </div>
-            
-        </div>
-        
-        <!-- Interactive Web Visualization -->
-        <div class="web-section">
-            <div class="web-title">🕸️ Anaphylaxis Knowledge Web</div>
-            <div class="web-container" id="web-container">
-                <!-- Nodes positioned via JavaScript -->
+            <!-- ALLERGY -->
+            <div class="category-card" data-specialty="allergy">
+                <div class="category-header allergy"><span class="category-icon">🧬</span><span class="category-title">Allergy & Immunology</span><span class="category-count">9</span></div>
+                <div class="category-body">
+                    <ul class="concept-list">
+                        <li><a href="mechanism/anaphylaxis-module.html" class="concept-item hub"><span class="concept-status hub">⭐</span><div class="concept-info"><div class="concept-name">Anaphylaxis</div><div class="concept-type">Diagnosis, Epinephrine</div></div><span class="concept-arrow">→</span></a></li>
+                        <li><a href="mechanism/allergy-testing-module.html" class="concept-item"><span class="concept-status mechanism">📖</span><div class="concept-info"><div class="concept-name">Allergy Testing</div><div class="concept-type">SPT vs sIgE, Components</div></div><span class="concept-arrow">→</span></a></li>
+                        <li><a href="mechanism/food-allergy-management.html" class="concept-item"><span class="concept-status mechanism">📖</span><div class="concept-info"><div class="concept-name">Food Allergy</div><div class="concept-type">Avoidance, OIT</div></div><span class="concept-arrow">→</span></a></li>
+                        <li><a href="mechanism/mast-cell-module.html" class="concept-item"><span class="concept-status mechanism">📖</span><div class="concept-info"><div class="concept-name">Mast Cell Biology</div><div class="concept-type">Mediators, Mastocytosis</div></div><span class="concept-arrow">→</span></a></li>
+                        <li><a href="mechanism/immunotherapy-module.html" class="concept-item"><span class="concept-status mechanism">📖</span><div class="concept-info"><div class="concept-name">Allergen Immunotherapy</div><div class="concept-type">SCIT, SLIT</div></div><span class="concept-arrow">→</span></a></li>
+                    </ul>
+                    <div class="ref-link">📖 <a href="https://www.aaaai.org/practice-resources" target="_blank">AAAAI Practice Parameters</a></div>
+                </div>
+            </div>
+            <!-- PSYCHIATRY -->
+            <div class="category-card" data-specialty="psychiatry">
+                <div class="category-header psychiatry"><span class="category-icon">🧩</span><span class="category-title">Psychiatry</span><span class="category-count">1</span></div>
+                <div class="category-body">
+                    <ul class="concept-list">
+                        <li><a href="mechanism/psychiatry.html" class="concept-item hub"><span class="concept-status hub">⭐</span><div class="concept-info"><div class="concept-name">Psychiatry</div><div class="concept-type">Depression, Anxiety, Psychosis</div></div><span class="concept-arrow">→</span></a></li>
+                    </ul>
+                    <div class="ref-link">📖 <a href="https://psychiatryonline.org/guidelines" target="_blank">APA Guidelines</a></div>
+                </div>
+            </div>
+            <!-- TOXICOLOGY -->
+            <div class="category-card" data-specialty="toxicology">
+                <div class="category-header toxicology"><span class="category-icon">☠️</span><span class="category-title">Toxicology</span><span class="category-count">3</span></div>
+                <div class="category-body">
+                    <ul class="concept-list">
+                        <li><a href="mechanism/toxicology.html" class="concept-item hub"><span class="concept-status hub">⭐</span><div class="concept-info"><div class="concept-name">Toxicology</div><div class="concept-type">Toxidromes, Antidotes</div></div><span class="concept-arrow">→</span></a></li>
+                        <li><a href="mechanism/lead-poisoning.html" class="concept-item"><span class="concept-status mechanism">📖</span><div class="concept-info"><div class="concept-name">Lead Poisoning</div><div class="concept-type">Screening, Chelation</div></div><span class="concept-arrow">→</span></a></li>
+                        <li><a href="mechanism/environmental-medicine.html" class="concept-item"><span class="concept-status mechanism">📖</span><div class="concept-info"><div class="concept-name">Environmental Medicine</div><div class="concept-type">Heat, Cold, Altitude</div></div><span class="concept-arrow">→</span></a></li>
+                    </ul>
+                    <div class="ref-link">📖 <a href="https://www.cdc.gov/niosh/" target="_blank">CDC/NIOSH</a></div>
+                </div>
+            </div>
+            <!-- OTHER -->
+            <div class="category-card" data-specialty="special">
+                <div class="category-header special"><span class="category-icon">📚</span><span class="category-title">Other Specialties</span><span class="category-count">10</span></div>
+                <div class="category-body">
+                    <ul class="concept-list">
+                        <li><a href="mechanism/pediatrics.html" class="concept-item"><span class="concept-status mechanism">📖</span><div class="concept-info"><div class="concept-name">Pediatrics</div><div class="concept-type">Development, Common Presentations</div></div><span class="concept-arrow">→</span></a></li>
+                        <li><a href="mechanism/obgyn.html" class="concept-item"><span class="concept-status mechanism">📖</span><div class="concept-info"><div class="concept-name">OB/GYN</div><div class="concept-type">Pregnancy, Emergencies</div></div><span class="concept-arrow">→</span></a></li>
+                        <li><a href="mechanism/geriatrics.html" class="concept-item"><span class="concept-status mechanism">📖</span><div class="concept-info"><div class="concept-name">Geriatrics</div><div class="concept-type">Polypharmacy, Falls</div></div><span class="concept-arrow">→</span></a></li>
+                        <li><a href="mechanism/dermatology.html" class="concept-item"><span class="concept-status mechanism">📖</span><div class="concept-info"><div class="concept-name">Dermatology</div><div class="concept-type">Rashes, Lesions</div></div><span class="concept-arrow">→</span></a></li>
+                        <li><a href="mechanism/trauma-emergency.html" class="concept-item"><span class="concept-status mechanism">📖</span><div class="concept-info"><div class="concept-name">Trauma & Emergency</div><div class="concept-type">Primary Survey</div></div><span class="concept-arrow">→</span></a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-        
-        <!-- Suggested Learning Path -->
-        <div class="path-section">
-            <div class="path-title">📍 Suggested Learning Path: Anaphylaxis</div>
-            <div class="path-steps">
-                <a href="mechanism/type1-hypersensitivity.html" class="path-step">
-                    <div class="path-step-num">1</div>
-                    <div class="path-step-title">Type I Hypersensitivity</div>
-                    <div class="path-step-desc">IgE mechanism basics</div>
-                </a>
-                <a href="mechanism/mast-cell-module.html" class="path-step">
-                    <div class="path-step-num">2</div>
-                    <div class="path-step-title">Mast Cell Biology</div>
-                    <div class="path-step-desc">Mediators & activation</div>
-                </a>
-                <a href="mechanism/anaphylaxis-module.html" class="path-step">
-                    <div class="path-step-num">3</div>
-                    <div class="path-step-title">Anaphylaxis</div>
-                    <div class="path-step-desc">Diagnosis & criteria</div>
-                </a>
-                <a href="mechanism/epinephrine-module.html" class="path-step">
-                    <div class="path-step-num">4</div>
-                    <div class="path-step-title">Epinephrine</div>
-                    <div class="path-step-desc">Mechanism & dosing</div>
-                </a>
-                <a href="mechanism/allergy-testing-module.html" class="path-step">
-                    <div class="path-step-num">5</div>
-                    <div class="path-step-title">Allergy Testing</div>
-                    <div class="path-step-desc">SPT, sIgE, components</div>
-                </a>
-                <a href="ReasonDx/ai-trainer-anaphylaxis-food.html" class="path-step">
-                    <div class="path-step-num">6</div>
-                    <div class="path-step-title">Clinical Case</div>
-                    <div class="path-step-desc">Apply knowledge</div>
-                </a>
+        <!-- Guidelines Section -->
+        <div class="guidelines-section">
+            <div class="guidelines-title">📖 Key Open Access Guidelines</div>
+            <div class="guidelines-grid">
+                <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4968574/" target="_blank" class="guideline-card"><div class="guideline-card-title">Surviving Sepsis Campaign</div><div class="guideline-card-source">Critical Care Medicine</div><div class="guideline-card-year">2021</div></a>
+                <a href="https://kdigo.org/guidelines/" target="_blank" class="guideline-card"><div class="guideline-card-title">KDIGO AKI Guidelines</div><div class="guideline-card-source">KDIGO</div><div class="guideline-card-year">2024</div></a>
+                <a href="https://diabetesjournals.org/care" target="_blank" class="guideline-card"><div class="guideline-card-title">ADA Standards of Care</div><div class="guideline-card-source">Diabetes Care</div><div class="guideline-card-year">2024</div></a>
+                <a href="https://goldcopd.org/2024-gold-report/" target="_blank" class="guideline-card"><div class="guideline-card-title">GOLD COPD Report</div><div class="guideline-card-source">GOLD</div><div class="guideline-card-year">2024</div></a>
+                <a href="https://www.aaaai.org/practice-resources" target="_blank" class="guideline-card"><div class="guideline-card-title">AAAAI Practice Parameters</div><div class="guideline-card-source">AAAAI</div><div class="guideline-card-year">2023</div></a>
+                <a href="https://www.idsociety.org/practice-guideline/" target="_blank" class="guideline-card"><div class="guideline-card-title">IDSA Practice Guidelines</div><div class="guideline-card-source">IDSA</div><div class="guideline-card-year">2024</div></a>
             </div>
         </div>
     </main>
-    
     <footer class="footer">
-        <p>Dx Learning Ecosystem • <a href="allergy-immunology-hub.html">A/I Hub</a> • <a href="index.html">Home</a></p>
+        <p>Dx Learning Ecosystem • <a href="mechanism/index.html">MechanismDx</a> • <a href="ReasonDx/training.html">ReasonDx</a> • <a href="CoachDx/coachdx-dashboard.html">CoachDx</a></p>
     </footer>
-    
-    <!-- Floating Info Button -->
-    <button class="info-fab" onclick="toggleInfoPanel()" title="How this works">?</button>
-    
-    <!-- Info Panel -->
+    <button class="info-fab" onclick="toggleInfoPanel()">?</button>
     <div class="info-panel" id="infoPanel">
         <div class="info-panel-header">
             <button class="info-panel-close" onclick="toggleInfoPanel()">×</button>
@@ -1080,185 +345,34 @@
             <p>Your guide to the Dx Learning Ecosystem</p>
         </div>
         <div class="info-panel-body">
-            <div class="info-section">
-                <h4>🕸️ What is this page?</h4>
-                <p>The Knowledge Web Navigator helps you explore interconnected clinical concepts. Instead of learning topics in isolation, see how concepts connect and build on each other.</p>
-            </div>
-            
-            <div class="info-section">
-                <h4>🔗 Three Integrated Tools</h4>
-                <div class="info-integration">
-                    <div class="info-tool">
-                        <div class="info-tool-icon">⚙️</div>
-                        <div class="info-tool-name">MechanismDx</div>
-                        <div class="info-tool-desc">Learn WHY</div>
-                    </div>
-                    <div class="info-tool">
-                        <div class="info-tool-icon">📋</div>
-                        <div class="info-tool-name">ReasonDx</div>
-                        <div class="info-tool-desc">Apply knowledge</div>
-                    </div>
-                    <div class="info-tool">
-                        <div class="info-tool-icon">💬</div>
-                        <div class="info-tool-name">CoachDx</div>
-                        <div class="info-tool-desc">Get feedback</div>
-                    </div>
-                </div>
-                <div class="info-arrows">
-                    Learn mechanism → Work a case → Explain reasoning
-                </div>
-            </div>
-            
-            <div class="info-section">
-                <h4>📍 How to Use</h4>
-                <ul>
-                    <li><strong>Category Cards:</strong> Click any topic to explore its modules and cases</li>
-                    <li><strong>Filter Buttons:</strong> Show only mechanisms, cases, or tools</li>
-                    <li><strong>Knowledge Web:</strong> Visual map of how concepts connect</li>
-                    <li><strong>Learning Path:</strong> Suggested order to master a topic</li>
-                </ul>
-            </div>
-            
-            <div class="info-section">
-                <h4>⭐ Icons Guide</h4>
-                <ul>
-                    <li><span style="background:#dbeafe;padding:2px 6px;border-radius:4px;">⭐ Hub</span> - Main topic page with overview</li>
-                    <li><span style="background:#e0f2fe;padding:2px 6px;border-radius:4px;">📖 Mechanism</span> - Pathophysiology module</li>
-                    <li><span style="background:#dcfce7;padding:2px 6px;border-radius:4px;">📋 Case</span> - Clinical reasoning case</li>
-                    <li><span style="background:#fef3c7;padding:2px 6px;border-radius:4px;">🛠️ Tool</span> - Interactive calculator/tool</li>
-                </ul>
-            </div>
+            <div class="info-section"><h4>🕸️ What is this?</h4><p>Explore interconnected clinical concepts across 12 specialties. Each card links to MechanismDx modules with evidence-based content.</p></div>
+            <div class="info-section"><h4>📍 How to Use</h4><ul><li><strong>Filter by Specialty</strong> - Use dropdown</li><li><strong>Filter by Type</strong> - Mechanisms, Cases, Tools</li><li><strong>Search</strong> - Find any concept</li><li><strong>References</strong> - Each links to guidelines</li></ul></div>
+            <div class="info-section"><h4>⭐ Icons</h4><ul><li>⭐ Hub - Main topic page</li><li>📖 Mechanism - Pathophysiology</li><li>📋 Case - Clinical reasoning</li><li>🛠️ Tool - Calculator/tool</li></ul></div>
         </div>
     </div>
-    
     <script>
-    // Toggle info panel
-    function toggleInfoPanel() {
-        const panel = document.getElementById('infoPanel');
-        panel.classList.toggle('visible');
-    }
-    
-    // Knowledge Web data
-    const webNodes = [
-        { id: 'anaphylaxis', name: 'Anaphylaxis', icon: '🚨', x: 50, y: 50, hub: true, link: 'mechanism/anaphylaxis-module.html' },
-        { id: 'ige', name: 'IgE-Mediated', icon: '🔗', x: 25, y: 25, link: 'mechanism/type1-hypersensitivity.html' },
-        { id: 'mastcell', name: 'Mast Cells', icon: '⚡', x: 75, y: 25, link: 'mechanism/mast-cell-module.html' },
-        { id: 'mediators', name: 'Mediators', icon: '💥', x: 85, y: 50, link: 'mechanism/mast-cell-module.html' },
-        { id: 'epinephrine', name: 'Epinephrine', icon: '💉', x: 75, y: 75, link: 'mechanism/epinephrine-module.html' },
-        { id: 'testing', name: 'Allergy Testing', icon: '🧪', x: 25, y: 75, link: 'mechanism/allergy-testing-module.html' },
-        { id: 'components', name: 'Component Testing', icon: '🔬', x: 15, y: 55, link: 'mechanism/allergy-testing-module.html#components' },
-        { id: 'arah2', name: 'Ara h 2', icon: '🥜', x: 10, y: 40, link: 'mechanism/allergy-testing-module.html#components' },
-        { id: 'food', name: 'Food Management', icon: '🍽️', x: 50, y: 85, link: 'mechanism/food-allergy-management.html' },
-        { id: 'avoidance', name: 'Avoidance', icon: '🚫', x: 35, y: 95, link: 'mechanism/food-allergy-management.html' },
-        { id: 'oit', name: 'OIT', icon: '💊', x: 65, y: 95, link: 'mechanism/food-allergy-management.html#oit' },
-        { id: 'case', name: 'Clinical Case', icon: '📋', x: 50, y: 15, link: 'ReasonDx/ai-trainer-anaphylaxis-food.html' }
-    ];
-    
-    const webConnections = [
-        ['anaphylaxis', 'ige'], ['anaphylaxis', 'mastcell'], ['anaphylaxis', 'epinephrine'],
-        ['anaphylaxis', 'testing'], ['anaphylaxis', 'food'], ['anaphylaxis', 'case'],
-        ['mastcell', 'mediators'], ['ige', 'mastcell'],
-        ['testing', 'components'], ['components', 'arah2'],
-        ['food', 'avoidance'], ['food', 'oit'], ['epinephrine', 'food']
-    ];
-    
-    function initWebVisualization() {
-        const container = document.getElementById('web-container');
-        const width = container.offsetWidth;
-        const height = container.offsetHeight;
-        
-        // Draw connections first
-        webConnections.forEach(([from, to]) => {
-            const fromNode = webNodes.find(n => n.id === from);
-            const toNode = webNodes.find(n => n.id === to);
-            
-            const x1 = (fromNode.x / 100) * width;
-            const y1 = (fromNode.y / 100) * height;
-            const x2 = (toNode.x / 100) * width;
-            const y2 = (toNode.y / 100) * height;
-            
-            const length = Math.sqrt((x2-x1)**2 + (y2-y1)**2);
-            const angle = Math.atan2(y2-y1, x2-x1) * 180 / Math.PI;
-            
-            const line = document.createElement('div');
-            line.className = 'web-line';
-            line.style.width = `${length}px`;
-            line.style.left = `${x1}px`;
-            line.style.top = `${y1}px`;
-            line.style.transform = `rotate(${angle}deg)`;
-            container.appendChild(line);
-        });
-        
-        // Draw nodes
-        webNodes.forEach(node => {
-            const el = document.createElement('a');
-            el.href = node.link;
-            el.className = `web-node ${node.hub ? 'hub' : ''}`;
-            el.style.left = `${(node.x / 100) * width - 40}px`;
-            el.style.top = `${(node.y / 100) * height - 25}px`;
-            el.innerHTML = `
-                <div class="node-icon">${node.icon}</div>
-                <div class="node-name">${node.name}</div>
-            `;
-            container.appendChild(el);
+    function toggleInfoPanel() { document.getElementById('infoPanel').classList.toggle('visible'); }
+    function filterBySpecialty(val) {
+        document.querySelectorAll('.category-card').forEach(c => {
+            c.classList.toggle('hidden', val !== 'all' && c.dataset.specialty !== val);
         });
     }
-    
-    function filterBySpecialty(specialty) {
-        const cards = document.querySelectorAll('.category-card');
-        cards.forEach(card => {
-            if (specialty === 'all' || card.dataset.specialty === specialty) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
-            }
-        });
-    }
-    
     function filterByType(type) {
-        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
         event.target.classList.add('active');
-        
-        const items = document.querySelectorAll('.concept-item');
-        items.forEach(item => {
-            const status = item.querySelector('.concept-status');
-            if (type === 'all') {
-                item.style.display = 'flex';
-            } else if (type === 'mechanism' && status.classList.contains('mechanism')) {
-                item.style.display = 'flex';
-            } else if (type === 'case' && status.classList.contains('case')) {
-                item.style.display = 'flex';
-            } else if (type === 'tool' && status.classList.contains('tool')) {
-                item.style.display = 'flex';
-            } else if (status.classList.contains('hub')) {
-                item.style.display = 'flex'; // Always show hubs
-            } else {
-                item.style.display = 'none';
-            }
+        document.querySelectorAll('.concept-item').forEach(item => {
+            const s = item.querySelector('.concept-status');
+            item.style.display = type === 'all' || s.classList.contains(type) || s.classList.contains('hub') ? 'flex' : 'none';
         });
     }
-    
-    function searchConcepts(query) {
-        const items = document.querySelectorAll('.concept-item');
-        const lowerQuery = query.toLowerCase();
-        
-        items.forEach(item => {
-            const name = item.querySelector('.concept-name').textContent.toLowerCase();
-            const type = item.querySelector('.concept-type').textContent.toLowerCase();
-            if (name.includes(lowerQuery) || type.includes(lowerQuery) || query === '') {
-                item.style.display = 'flex';
-            } else {
-                item.style.display = 'none';
-            }
+    function searchConcepts(q) {
+        const lq = q.toLowerCase();
+        document.querySelectorAll('.concept-item').forEach(item => {
+            const n = item.querySelector('.concept-name').textContent.toLowerCase();
+            const t = item.querySelector('.concept-type').textContent.toLowerCase();
+            item.style.display = n.includes(lq) || t.includes(lq) || !q ? 'flex' : 'none';
         });
     }
-    
-    // Initialize
-    window.addEventListener('load', initWebVisualization);
-    window.addEventListener('resize', () => {
-        document.getElementById('web-container').innerHTML = '';
-        initWebVisualization();
-    });
     </script>
 </body>
 </html>
