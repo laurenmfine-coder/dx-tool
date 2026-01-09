@@ -461,24 +461,431 @@ td strong {
 }
 
 /* ============================================
+   PHASE/TAB NAVIGATION STYLING
+   ============================================ */
+
+.phase-nav,
+.tab-nav,
+[class*="phase-nav"],
+[class*="tab-nav"] {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    padding: 20px 32px !important;
+    background: #fff !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    margin-bottom: 24px !important;
+}
+
+.phase-btn,
+.tab-btn,
+[class*="phase-btn"],
+[class*="tab-btn"] {
+    padding: 12px 20px !important;
+    background: #f8fafc !important;
+    border: 2px solid #e2e8f0 !important;
+    border-radius: 10px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    color: #64748b !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    font-family: inherit !important;
+}
+
+.phase-btn:hover,
+.tab-btn:hover,
+[class*="phase-btn"]:hover,
+[class*="tab-btn"]:hover {
+    background: #eff6ff !important;
+    border-color: #3b82f6 !important;
+    color: #3b82f6 !important;
+}
+
+.phase-btn.active,
+.tab-btn.active,
+[class*="phase-btn"].active,
+[class*="tab-btn"].active {
+    background: #3b82f6 !important;
+    border-color: #3b82f6 !important;
+    color: #fff !important;
+}
+
+/* ============================================
+   DYNAMIC MCQ/QUESTION PANEL STYLING
+   ============================================ */
+
+.questions-panel,
+.mcq-panel,
+[class*="questions-panel"],
+[class*="mcq-panel"] {
+    background: #fff !important;
+    border-radius: 16px !important;
+    padding: 24px !important;
+    border: 1px solid #e2e8f0 !important;
+}
+
+/* Question type badges */
+.question-type,
+[class*="question-type"] {
+    display: inline-block !important;
+    padding: 4px 12px !important;
+    background: #eff6ff !important;
+    color: #3b82f6 !important;
+    border-radius: 20px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    margin-bottom: 12px !important;
+}
+
+/* Individual question cards */
+.question-card,
+.mcq-item,
+[class*="question-card"],
+[class*="mcq-item"] {
+    background: #fff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    padding: 24px !important;
+    margin-bottom: 20px !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Question number/label */
+.question-num,
+[class*="question-num"] {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 28px !important;
+    height: 28px !important;
+    background: #3b82f6 !important;
+    color: #fff !important;
+    border-radius: 50% !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    margin-right: 12px !important;
+}
+
+/* Question stem/text */
+.question-stem,
+.q-text,
+[class*="question-stem"],
+[class*="q-text"] {
+    font-size: 15px !important;
+    color: #1e293b !important;
+    line-height: 1.6 !important;
+    margin-bottom: 16px !important;
+}
+
+/* Vignette/clinical scenario styling */
+.vignette,
+[class*="vignette"] {
+    background: #f8fafc !important;
+    border-left: 4px solid #3b82f6 !important;
+    padding: 16px 20px !important;
+    border-radius: 0 8px 8px 0 !important;
+    margin-bottom: 16px !important;
+    font-size: 14px !important;
+    color: #475569 !important;
+    font-style: italic !important;
+}
+
+/* MCQ Options - Radio buttons */
+.options,
+.mcq-options,
+[class*="options"]:not(.quiz-options) {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    margin: 16px 0 !important;
+}
+
+/* Radio button labels */
+.option,
+.mcq-option,
+label:has(input[type="radio"]),
+[class*="option"]:not(.quiz-option) {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+    padding: 14px 18px !important;
+    background: #f8fafc !important;
+    border: 2px solid #e2e8f0 !important;
+    border-radius: 10px !important;
+    cursor: pointer !important;
+    transition: all 0.15s ease !important;
+    font-size: 14px !important;
+    color: #475569 !important;
+    line-height: 1.5 !important;
+}
+
+.option:hover,
+.mcq-option:hover,
+label:has(input[type="radio"]):hover {
+    border-color: #3b82f6 !important;
+    background: #eff6ff !important;
+}
+
+/* Style radio inputs */
+input[type="radio"] {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    width: 20px !important;
+    height: 20px !important;
+    border: 2px solid #cbd5e1 !important;
+    border-radius: 50% !important;
+    background: #fff !important;
+    cursor: pointer !important;
+    flex-shrink: 0 !important;
+    margin-top: 2px !important;
+}
+
+input[type="radio"]:checked {
+    border-color: #3b82f6 !important;
+    background: #3b82f6 !important;
+    box-shadow: inset 0 0 0 4px #fff !important;
+}
+
+input[type="radio"]:hover {
+    border-color: #3b82f6 !important;
+}
+
+/* Submit buttons */
+button[type="submit"],
+.submit-btn,
+input[type="submit"],
+[class*="submit"] {
+    padding: 12px 24px !important;
+    background: #3b82f6 !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 10px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    font-family: inherit !important;
+    margin-top: 16px !important;
+}
+
+button[type="submit"]:hover,
+.submit-btn:hover,
+input[type="submit"]:hover {
+    background: #2563eb !important;
+    transform: translateY(-1px) !important;
+}
+
+/* ============================================
+   SIDEBAR STYLING
+   ============================================ */
+
+aside,
+.sidebar,
+[class*="sidebar"]:not(.module-sidebar) {
+    background: #fff !important;
+    border-radius: 16px !important;
+    padding: 0 !important;
+    border: 1px solid #e2e8f0 !important;
+    overflow: hidden !important;
+}
+
+.sidebar-card,
+[class*="sidebar-card"] {
+    padding: 20px 24px !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+}
+
+.sidebar-card:last-child,
+[class*="sidebar-card"]:last-child {
+    border-bottom: none !important;
+}
+
+.sidebar-title,
+[class*="sidebar-title"] {
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    color: #1e293b !important;
+    margin-bottom: 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+/* Risk list items */
+.risk-list,
+[class*="risk-list"] {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+}
+
+.risk-item,
+[class*="risk-item"] {
+    padding: 10px 14px !important;
+    border-radius: 8px !important;
+    font-size: 13px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+}
+
+.risk-item.risk-high,
+[class*="risk-high"] {
+    background: #fef2f2 !important;
+    color: #991b1b !important;
+    border: 1px solid #fecaca !important;
+}
+
+.risk-item.risk-high::before {
+    content: '⚠️' !important;
+}
+
+.risk-item.risk-low,
+[class*="risk-low"] {
+    background: #f0fdf4 !important;
+    color: #166534 !important;
+    border: 1px solid #bbf7d0 !important;
+}
+
+.risk-item.risk-low::before {
+    content: '✓' !important;
+}
+
+/* ============================================
+   CONTENT GRID LAYOUT
+   ============================================ */
+
+.content-grid,
+[class*="content-grid"] {
+    display: grid !important;
+    grid-template-columns: 1fr 320px !important;
+    gap: 24px !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 24px 32px !important;
+}
+
+@media (max-width: 1024px) {
+    .content-grid,
+    [class*="content-grid"] {
+        grid-template-columns: 1fr !important;
+    }
+    
+    aside,
+    .sidebar {
+        order: -1 !important;
+    }
+}
+
+/* ============================================
+   EXPLANATION/FEEDBACK BOXES
+   ============================================ */
+
+.explanation,
+.feedback,
+[class*="explanation"],
+[class*="feedback"]:not(.quiz-feedback) {
+    background: #f0fdf4 !important;
+    border: 1px solid #86efac !important;
+    border-radius: 12px !important;
+    padding: 18px 22px !important;
+    margin-top: 16px !important;
+    font-size: 14px !important;
+    color: #166534 !important;
+    line-height: 1.6 !important;
+}
+
+.explanation.incorrect,
+[class*="explanation"].incorrect {
+    background: #fef2f2 !important;
+    border-color: #fca5a5 !important;
+    color: #991b1b !important;
+}
+
+/* Mechanism steps in explanations */
+.mechanism,
+[class*="mechanism"] {
+    background: #eff6ff !important;
+    border: 1px solid #93c5fd !important;
+    border-radius: 10px !important;
+    padding: 16px 20px !important;
+    margin-top: 12px !important;
+}
+
+.mechanism-title,
+[class*="mechanism-title"] {
+    font-weight: 600 !important;
+    color: #1d4ed8 !important;
+    font-size: 13px !important;
+    margin-bottom: 10px !important;
+}
+
+.mechanism-steps,
+[class*="mechanism-steps"] {
+    font-size: 13px !important;
+    color: #1e40af !important;
+    line-height: 1.8 !important;
+}
+
+/* ============================================
+   LOGO/BRANDING FIXES
+   ============================================ */
+
+.logo,
+[class*="logo"] {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    font-weight: 600 !important;
+    font-size: 18px !important;
+}
+
+/* Logo in colored header */
+.header .logo,
+header .logo {
+    color: #fff !important;
+}
+
+/* Logo in white nav */
+.dx-nav .logo,
+nav.dx-nav .logo {
+    color: #1e293b !important;
+}
+
+/* ============================================
    ACCESSIBILITY IMPROVEMENTS
    ============================================ */
 
 /* Focus states */
 a:focus,
 button:focus,
-.quiz-option:focus {
+.quiz-option:focus,
+input[type="radio"]:focus {
     outline: 2px solid #3b82f6 !important;
     outline-offset: 2px !important;
 }
 
 /* Ensure minimum touch targets on mobile */
 @media (max-width: 768px) {
-    a,
-    button,
-    .quiz-option {
-        min-height: 44px !important;
-        display: flex !important;
-        align-items: center !important;
+    .phase-btn,
+    .tab-btn {
+        padding: 10px 16px !important;
+        font-size: 13px !important;
+    }
+    
+    .option,
+    .mcq-option,
+    label:has(input[type="radio"]) {
+        padding: 12px 16px !important;
+    }
+    
+    .content-grid {
+        padding: 16px !important;
+    }
+    
+    .questions-panel,
+    .sidebar-card {
+        padding: 16px !important;
     }
 }
