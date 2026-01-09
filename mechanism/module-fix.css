@@ -461,6 +461,299 @@ td strong {
 }
 
 /* ============================================
+   QUESTION CARD STYLING (for JS-generated content)
+   ============================================ */
+
+/* Question card container */
+.question-card {
+    background: #fff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 16px !important;
+    padding: 24px !important;
+    margin-bottom: 24px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Question header - number and type */
+.question-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-bottom: 16px !important;
+    padding-bottom: 12px !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+}
+
+/* Question number badge */
+.q-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 32px !important;
+    height: 32px !important;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+    color: #fff !important;
+    border-radius: 10px !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    margin-right: 12px !important;
+}
+
+/* Question type label */
+.q-type {
+    display: inline-block !important;
+    padding: 6px 14px !important;
+    background: #f0f9ff !important;
+    color: #0369a1 !important;
+    border-radius: 20px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+
+/* Question status indicator */
+.q-status {
+    font-size: 20px !important;
+    width: 32px !important;
+    height: 32px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 50% !important;
+    background: #f8fafc !important;
+    color: #94a3b8 !important;
+}
+
+.q-status.correct {
+    background: #dcfce7 !important;
+    color: #16a34a !important;
+}
+
+.q-status.incorrect {
+    background: #fee2e2 !important;
+    color: #dc2626 !important;
+}
+
+/* Hide the empty circle when unanswered - show dash instead */
+.q-status:not(.correct):not(.incorrect) {
+    color: #cbd5e1 !important;
+    font-size: 16px !important;
+}
+
+/* Question body */
+.question-body {
+    padding-top: 4px !important;
+}
+
+/* Vignette styling - fix the left border issue */
+.vignette {
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-left: 4px solid #3b82f6 !important;
+    border-radius: 0 12px 12px 0 !important;
+    padding: 16px 20px !important;
+    margin-bottom: 20px !important;
+}
+
+.vignette-label {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    color: #3b82f6 !important;
+    margin-bottom: 8px !important;
+}
+
+.vignette p,
+.vignette {
+    font-size: 14px !important;
+    color: #475569 !important;
+    font-style: italic !important;
+    line-height: 1.6 !important;
+    margin: 0 !important;
+}
+
+/* Question stem */
+.question-stem {
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    color: #1e293b !important;
+    line-height: 1.6 !important;
+    margin-bottom: 20px !important;
+}
+
+/* Options container - ensure consistent width */
+.options {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    margin-bottom: 20px !important;
+}
+
+/* Individual option - FIXED WIDTH */
+.option {
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 14px !important;
+    padding: 16px 20px !important;
+    background: #f8fafc !important;
+    border: 2px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.option:hover {
+    border-color: #3b82f6 !important;
+    background: #eff6ff !important;
+    transform: translateX(4px) !important;
+}
+
+.option.selected {
+    border-color: #3b82f6 !important;
+    background: #eff6ff !important;
+}
+
+.option.correct {
+    border-color: #22c55e !important;
+    background: #dcfce7 !important;
+}
+
+.option.correct .option-letter {
+    background: #22c55e !important;
+    color: #fff !important;
+}
+
+.option.incorrect {
+    border-color: #ef4444 !important;
+    background: #fee2e2 !important;
+}
+
+.option.incorrect .option-letter {
+    background: #ef4444 !important;
+    color: #fff !important;
+}
+
+/* Option letter badge */
+.option-letter {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    background: #e2e8f0 !important;
+    color: #475569 !important;
+    border-radius: 10px !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    flex-shrink: 0 !important;
+}
+
+.option.selected .option-letter {
+    background: #3b82f6 !important;
+    color: #fff !important;
+}
+
+/* Option text */
+.option span:last-child {
+    font-size: 14px !important;
+    color: #475569 !important;
+    line-height: 1.5 !important;
+    padding-top: 8px !important;
+}
+
+/* Submit button */
+.submit-btn {
+    padding: 14px 28px !important;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 12px !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    font-family: inherit !important;
+}
+
+.submit-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
+}
+
+.submit-btn:disabled {
+    background: #e2e8f0 !important;
+    color: #94a3b8 !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+}
+
+/* Explanation box */
+.explanation {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%) !important;
+    border: 1px solid #86efac !important;
+    border-radius: 12px !important;
+    padding: 20px 24px !important;
+    margin-top: 20px !important;
+}
+
+.explanation h4 {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: #166534 !important;
+    margin-bottom: 12px !important;
+}
+
+.explanation p {
+    font-size: 14px !important;
+    color: #166534 !important;
+    line-height: 1.7 !important;
+    margin-bottom: 16px !important;
+}
+
+/* Mechanism box inside explanation */
+.mechanism-box {
+    background: #fff !important;
+    border: 1px solid #bbf7d0 !important;
+    border-radius: 10px !important;
+    padding: 16px 20px !important;
+    margin-top: 12px !important;
+}
+
+.mechanism-title {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: #15803d !important;
+    margin-bottom: 12px !important;
+}
+
+.mechanism-pathway {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 6px !important;
+}
+
+.pathway-step {
+    background: #ecfdf5 !important;
+    color: #166534 !important;
+    padding: 6px 12px !important;
+    border-radius: 6px !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+}
+
+.pathway-arrow {
+    color: #22c55e !important;
+    font-size: 14px !important;
+}
+
+/* ============================================
    PHASE/TAB NAVIGATION STYLING
    ============================================ */
 
@@ -674,6 +967,247 @@ button[type="submit"]:hover,
 input[type="submit"]:hover {
     background: #2563eb !important;
     transform: translateY(-1px) !important;
+}
+
+/* ============================================
+   ENHANCED SIDEBAR CONTENT
+   ============================================ */
+
+/* Concept Map */
+.concept-map {
+    padding: 8px 0 !important;
+}
+
+.concept-node {
+    padding: 10px 16px !important;
+    border-radius: 10px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    text-align: center !important;
+    margin-bottom: 12px !important;
+}
+
+.concept-root {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+    color: #fff !important;
+    font-size: 15px !important;
+}
+
+.concept-branches {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    padding-left: 16px !important;
+    border-left: 2px solid #e2e8f0 !important;
+    margin-left: 20px !important;
+}
+
+.concept-branch {
+    position: relative !important;
+}
+
+.concept-branch::before {
+    content: '' !important;
+    position: absolute !important;
+    left: -16px !important;
+    top: 16px !important;
+    width: 14px !important;
+    height: 2px !important;
+    background: #e2e8f0 !important;
+}
+
+.concept-cat {
+    font-size: 12px !important;
+    padding: 8px 12px !important;
+}
+
+.concept-cat.reflex {
+    background: #fef3c7 !important;
+    color: #b45309 !important;
+}
+
+.concept-cat.orthostatic {
+    background: #dbeafe !important;
+    color: #1d4ed8 !important;
+}
+
+.concept-cat.cardiac {
+    background: #fee2e2 !important;
+    color: #dc2626 !important;
+}
+
+.concept-leaves {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    margin-top: 8px !important;
+    padding-left: 8px !important;
+}
+
+.concept-leaf {
+    font-size: 11px !important;
+    padding: 4px 10px !important;
+    background: #f8fafc !important;
+    color: #64748b !important;
+    border-radius: 6px !important;
+    border: 1px solid #e2e8f0 !important;
+}
+
+/* Quick Reference Grid */
+.quick-ref-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+}
+
+.quick-ref-item {
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 10px !important;
+    padding: 12px !important;
+    text-align: center !important;
+}
+
+.ref-value {
+    display: block !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    color: #3b82f6 !important;
+    margin-bottom: 4px !important;
+}
+
+.ref-label {
+    font-size: 11px !important;
+    color: #64748b !important;
+    line-height: 1.3 !important;
+}
+
+/* ECG Patterns */
+.ecg-patterns {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+}
+
+.ecg-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 10px 14px !important;
+    background: #f8fafc !important;
+    border-radius: 8px !important;
+    border: 1px solid #e2e8f0 !important;
+}
+
+.ecg-rhythm {
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+    background: #e2e8f0 !important;
+    padding: 4px 10px !important;
+    border-radius: 6px !important;
+    min-width: 70px !important;
+    text-align: center !important;
+}
+
+.ecg-desc {
+    font-size: 12px !important;
+    color: #64748b !important;
+    flex: 1 !important;
+}
+
+/* Resource Links */
+.resource-links {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+}
+
+.resource-link {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 12px 14px !important;
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 10px !important;
+    text-decoration: none !important;
+    transition: all 0.2s ease !important;
+}
+
+.resource-link:hover {
+    border-color: #3b82f6 !important;
+    background: #eff6ff !important;
+    transform: translateX(4px) !important;
+}
+
+.resource-icon {
+    font-size: 20px !important;
+    width: 36px !important;
+    height: 36px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #fff !important;
+    border-radius: 8px !important;
+    border: 1px solid #e2e8f0 !important;
+}
+
+.resource-info {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2px !important;
+}
+
+.resource-name {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #1e293b !important;
+}
+
+.resource-desc {
+    font-size: 11px !important;
+    color: #64748b !important;
+}
+
+/* Tool Links */
+.tool-links {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+}
+
+.tool-link {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 12px 16px !important;
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 10px !important;
+    text-decoration: none !important;
+    transition: all 0.2s ease !important;
+}
+
+.tool-link:hover {
+    border-color: #3b82f6 !important;
+    background: #eff6ff !important;
+}
+
+.tool-name {
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    color: #1e293b !important;
+}
+
+.tool-arrow {
+    font-size: 16px !important;
+    color: #3b82f6 !important;
+    transition: transform 0.2s ease !important;
+}
+
+.tool-link:hover .tool-arrow {
+    transform: translateX(4px) !important;
 }
 
 /* ============================================
