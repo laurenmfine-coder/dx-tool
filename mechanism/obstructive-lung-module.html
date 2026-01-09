@@ -3,463 +3,1160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MechanismDx - Obstructive Lung Disease</title>
+    <title>MechanismDx - Obstructive Lung Disease & EIB</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Inter', system-ui, sans-serif;
-            background: #f8fafc;
-            color: #1e293b;
-            line-height: 1.7;
-            min-height: 100vh;
-        }
-        
-        .dx-nav {
-            background: #fff;
-            padding: 12px 24px;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        .dx-nav-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-        .dx-nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: #1e293b;
-            font-weight: 600;
-        }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.7; }
+        .dx-nav { background: #fff; padding: 12px 24px; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 100; }
+        .dx-nav-inner { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: #1e293b; font-weight: 600; }
         .dx-nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
-        .dx-nav-link {
-            padding: 8px 14px;
-            border-radius: 8px;
-            text-decoration: none;
-            color: #64748b;
-            font-size: 13px;
-            transition: all 0.15s;
-        }
+        .dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #64748b; font-size: 13px; transition: all 0.15s; }
         .dx-nav-link:hover { background: #f1f5f9; color: #1e293b; }
         .dx-nav-link.active { background: #3b82f6; color: #fff; }
-        
-        .header {
-            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-            padding: 32px 24px;
-            border-bottom: 3px solid #2563eb;
-        }
-        .header-inner { max-width: 900px; margin: 0 auto; }
+        .header { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); padding: 40px 24px; }
+        .header-inner { max-width: 1200px; margin: 0 auto; }
         .breadcrumb { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
         .breadcrumb a { color: rgba(255,255,255,0.9); text-decoration: none; }
-        .header h1 { font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 8px; }
-        .header-subtitle { font-size: 16px; color: rgba(255,255,255,0.85); }
-        
-        .content { max-width: 900px; margin: 0 auto; padding: 40px 24px; }
-        
-        .objectives {
-            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
-            border: 1px solid #10b981;
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 40px;
-        }
-        .objectives h2 { color: #047857; font-size: 18px; margin-bottom: 16px; }
+        .header h1 { font-size: 36px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+        .header-subtitle { font-size: 18px; color: rgba(255,255,255,0.9); max-width: 700px; }
+        .main-layout { display: grid; grid-template-columns: 1fr 320px; gap: 32px; max-width: 1400px; margin: 0 auto; padding: 40px 24px; }
+        @media (max-width: 1024px) { .main-layout { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+        .content { max-width: 100%; }
+        .objectives { background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); border: 1px solid #10b981; border-radius: 16px; padding: 28px; margin-bottom: 40px; }
+        .objectives h2 { color: #047857; font-size: 20px; margin-bottom: 16px; }
         .objectives ul { margin-left: 24px; color: #065f46; }
-        .objectives li { margin-bottom: 8px; }
-        
-        .section {
-            background: #fff;
-            border-radius: 16px;
-            padding: 32px;
-            margin-bottom: 32px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
-        .section h2 {
-            color: #1e293b;
-            font-size: 22px;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid #e2e8f0;
-        }
-        .section h3 { color: #334155; font-size: 18px; margin: 28px 0 16px; }
+        .objectives li { margin-bottom: 10px; }
+        .section { background: #fff; border-radius: 16px; padding: 32px; margin-bottom: 32px; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .section h2 { color: #1e293b; font-size: 24px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid #e2e8f0; }
+        .section h3 { color: #334155; font-size: 18px; margin: 28px 0 16px; font-weight: 600; }
         .section p { margin-bottom: 16px; color: #475569; }
-        
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 20px;
-            margin: 24px 0;
-        }
-        .comparison-card {
-            background: #f8fafc;
-            border-radius: 12px;
-            padding: 24px;
-            border: 1px solid #e2e8f0;
-        }
-        .comparison-card h4 {
-            color: #1e293b;
-            margin-bottom: 16px;
-            font-size: 17px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .mechanism-box { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #3b82f6; border-radius: 16px; padding: 24px; margin: 24px 0; }
+        .mechanism-box h3 { color: #1d4ed8; margin-top: 0; margin-bottom: 16px; }
+        .mechanism-steps { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+        .mechanism-step { background: #fff; padding: 10px 16px; border-radius: 8px; font-size: 14px; color: #1e40af; border: 1px solid #bfdbfe; }
+        .mechanism-arrow { color: #3b82f6; font-weight: bold; font-size: 18px; }
+        .comparison-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 24px 0; }
+        .comparison-card { background: #f8fafc; border-radius: 12px; padding: 24px; border: 1px solid #e2e8f0; }
+        .comparison-card h4 { color: #1e293b; margin-bottom: 16px; font-size: 17px; }
         .comparison-card ul { margin-left: 20px; color: #64748b; font-size: 14px; }
         .comparison-card li { margin-bottom: 8px; }
-        .comparison-card.preferred { border-color: #3b82f6; border-width: 2px; background: #eff6ff; }
-        .pro { color: #059669; font-weight: 500; }
-        .con { color: #dc2626; font-weight: 500; }
-        
+        .comparison-card.eib { border-color: #3b82f6; border-width: 2px; background: #eff6ff; }
+        .comparison-card.eilo { border-color: #8b5cf6; border-width: 2px; background: #f5f3ff; }
         .table-container { overflow-x: auto; margin: 24px 0; border-radius: 12px; border: 1px solid #e2e8f0; }
         table { width: 100%; border-collapse: collapse; font-size: 14px; }
         th { background: #f1f5f9; color: #1e293b; padding: 14px 16px; text-align: left; font-weight: 600; border-bottom: 2px solid #e2e8f0; }
         td { padding: 14px 16px; border-bottom: 1px solid #e2e8f0; color: #475569; }
         tr:last-child td { border-bottom: none; }
-        tr:hover td { background: #f8fafc; }
-        
-        .key-point {
-            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-            border-left: 4px solid #3b82f6;
-            padding: 20px;
-            border-radius: 0 12px 12px 0;
-            margin: 24px 0;
-        }
+        .key-point { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-left: 4px solid #3b82f6; padding: 20px; border-radius: 0 12px 12px 0; margin: 24px 0; }
         .key-point-title { color: #1d4ed8; font-weight: 600; margin-bottom: 8px; }
         .key-point p { color: #1e40af; margin-bottom: 0; }
-        
-        .pearl {
-            background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%);
-            border: 1px solid #facc15;
-            border-radius: 12px;
-            padding: 20px;
-            margin: 24px 0;
-        }
+        .pearl { background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%); border: 1px solid #facc15; border-radius: 12px; padding: 20px; margin: 24px 0; }
         .pearl-title { color: #a16207; font-weight: 600; margin-bottom: 10px; }
         .pearl p { color: #854d0e; margin-bottom: 0; }
-        
-        .component-card {
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 16px;
-        }
-        .component-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 12px;
-        }
-        .component-name { font-weight: 600; color: #1e293b; font-size: 16px; }
-        .component-badge { padding: 4px 12px; border-radius: 12px; font-size: 11px; font-weight: 600; }
-        .badge-high-risk { background: #fee2e2; color: #b91c1c; }
-        .badge-low-risk { background: #dcfce7; color: #15803d; }
-        .badge-cross-reactive { background: #fef3c7; color: #b45309; }
-        .component-protein { font-size: 13px; color: #64748b; margin-bottom: 8px; }
-        .component-desc { font-size: 14px; color: #475569; }
-        
-        .algorithm-box {
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-            border: 2px solid #3b82f6;
-            border-radius: 16px;
-            padding: 24px;
-            margin: 24px 0;
-        }
-        .algorithm-title { color: #1d4ed8; font-size: 18px; font-weight: 600; margin-bottom: 20px; text-align: center; }
-        .algorithm-step { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
-        .step-num {
-            width: 36px; height: 36px;
-            background: #3b82f6;
-            color: #fff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            flex-shrink: 0;
-        }
-        .step-content { flex: 1; background: #fff; padding: 14px 18px; border-radius: 10px; border: 1px solid #e2e8f0; }
-        .step-content strong { color: #1d4ed8; }
-        .algorithm-arrow { text-align: center; color: #3b82f6; font-size: 20px; margin: 8px 0; }
-        .decision-branch { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
-        .branch-positive { background: #ecfdf5; border: 1px solid #10b981; border-radius: 10px; padding: 14px; }
-        .branch-negative { background: #eff6ff; border: 1px solid #3b82f6; border-radius: 10px; padding: 14px; }
-        .branch-title { font-weight: 600; margin-bottom: 8px; font-size: 14px; }
-        .branch-positive .branch-title { color: #059669; }
-        .branch-negative .branch-title { color: #2563eb; }
-        .branch-content { font-size: 13px; color: #64748b; }
-        
-        .interpretation-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin: 24px 0;
-        }
-        .interp-card {
-            background: #fff;
-            border-radius: 10px;
-            padding: 16px;
-            text-align: center;
-            border: 1px solid #e2e8f0;
-        }
-        .interp-value { font-size: 28px; font-weight: 700; color: #3b82f6; }
-        .interp-label { font-size: 12px; color: #64748b; margin-top: 4px; }
-        .interp-meaning { font-size: 11px; color: #1d4ed8; margin-top: 8px; padding: 4px 8px; background: #dbeafe; border-radius: 6px; display: inline-block; }
-        
-        .quiz-section {
-            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-            border-radius: 16px;
-            padding: 32px;
-            margin: 40px 0;
-            border: 1px solid #93c5fd;
-        }
-        .quiz-title { color: #1d4ed8; font-size: 20px; margin-bottom: 24px; }
-        .quiz-question { background: #fff; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid #e2e8f0; }
-        .quiz-q-text { color: #1e293b; font-size: 15px; margin-bottom: 16px; }
-        .quiz-options { display: flex; flex-direction: column; gap: 10px; }
-        .quiz-option {
-            background: #f8fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 14px 18px;
-            cursor: pointer;
-            transition: all 0.15s;
-            color: #475569;
-            font-size: 14px;
-        }
-        .quiz-option:hover { border-color: #3b82f6; background: #eff6ff; }
-        .quiz-option.correct { border-color: #22c55e; background: #dcfce7; color: #166534; }
-        .quiz-option.incorrect { border-color: #ef4444; background: #fee2e2; color: #991b1b; }
-        .quiz-feedback { margin-top: 16px; padding: 16px; border-radius: 10px; font-size: 14px; display: none; }
-        .quiz-feedback.show { display: block; }
-        .quiz-feedback.correct { background: #dcfce7; color: #166534; border: 1px solid #86efac; }
-        .quiz-feedback.incorrect { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
-        
-        .links-section {
-            background: #fff;
-            border-radius: 16px;
-            padding: 32px;
-            margin-top: 40px;
-            border: 1px solid #e2e8f0;
-        }
-        .links-title { color: #1e293b; font-size: 20px; margin-bottom: 20px; }
-        .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
-        .link-card {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 20px;
-            text-decoration: none;
-            transition: all 0.2s;
-        }
-        .link-card:hover { border-color: #3b82f6; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-        .link-card-icon { font-size: 24px; margin-bottom: 12px; }
-        .link-card-title { color: #1e293b; font-weight: 600; margin-bottom: 6px; }
-        .link-card-desc { color: #64748b; font-size: 13px; }
-        .link-card-badge { display: inline-block; margin-top: 10px; font-size: 11px; padding: 3px 10px; border-radius: 10px; background: #dbeafe; color: #1d4ed8; }
-        
-        .footer { text-align: center; padding: 40px 24px; color: #64748b; font-size: 13px; border-top: 1px solid #e2e8f0; background: #fff; margin-top: 40px; }
-        .footer a { color: #3b82f6; text-decoration: none; }
-        
-        @media (max-width: 768px) {
-            .decision-branch { grid-template-columns: 1fr; }
-            .header h1 { font-size: 24px; }
-            .content { padding: 24px 16px; }
-            .section { padding: 20px; }
-        }
-
+        .warning-box { background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); border: 1px solid #ef4444; border-radius: 12px; padding: 20px; margin: 24px 0; }
+        .warning-title { color: #dc2626; font-weight: 600; margin-bottom: 10px; }
+        .warning-box p { color: #991b1b; margin-bottom: 0; }
+        .vignette { background: #fff; border-left: 4px solid #3b82f6; padding: 24px; margin: 24px 0; border-radius: 0 12px 12px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .vignette-label { font-size: 12px; font-weight: 600; color: #3b82f6; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+        .vignette-text { color: #334155; font-style: italic; line-height: 1.8; }
+        .algorithm-box { background: #fff; border: 2px solid #e2e8f0; border-radius: 16px; padding: 24px; margin: 24px 0; }
+        .algorithm-box h3 { color: #1e293b; margin-bottom: 20px; }
+        .algorithm-step { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; padding: 16px; background: #f8fafc; border-radius: 8px; }
+        .step-number { width: 32px; height: 32px; background: #3b82f6; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; flex-shrink: 0; }
+        .step-content { flex: 1; }
+        .step-content strong { color: #1e293b; }
+        .threshold-badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; margin: 2px; }
+        .threshold-mild { background: #dcfce7; color: #166534; }
+        .threshold-moderate { background: #fef3c7; color: #92400e; }
+        .threshold-severe { background: #fee2e2; color: #991b1b; }
+        .sidebar { display: flex; flex-direction: column; gap: 20px; }
+        .sidebar-card { background: #fff; border-radius: 12px; padding: 20px; border: 1px solid #e2e8f0; }
+        .sidebar-title { font-size: 14px; font-weight: 600; color: #1e293b; margin-bottom: 16px; }
+        .sidebar-link { display: block; padding: 10px 12px; color: #3b82f6; text-decoration: none; font-size: 13px; border-radius: 6px; margin-bottom: 4px; transition: all 0.15s; }
+        .sidebar-link:hover { background: #eff6ff; }
+        .quick-facts { display: grid; gap: 12px; }
+        .quick-fact { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-size: 13px; }
+        .quick-fact:last-child { border-bottom: none; }
+        .quick-fact-label { color: #64748b; }
+        .quick-fact-value { color: #1e293b; font-weight: 500; }
+        /* EBRS MCQ Styles */
+        .ebrs-section { background: #fff; border-radius: 16px; padding: 32px; margin-bottom: 32px; border: 1px solid #e2e8f0; }
+        .ebrs-section h2 { color: #1e293b; font-size: 24px; margin-bottom: 24px; }
+        .ebrs-intro { background: linear-gradient(135deg, #fdf4ff 0%, #fae8ff 100%); border: 2px solid #d946ef; border-radius: 12px; padding: 20px; margin-bottom: 32px; }
+        .ebrs-intro h4 { color: #a21caf; margin-bottom: 10px; }
+        .ebrs-intro p { color: #86198f; margin: 0; font-size: 14px; }
+        .ebrs-container { background: #f8fafc; border-radius: 16px; padding: 24px; margin-bottom: 32px; border: 2px solid #e2e8f0; }
+        .mcq-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .mcq-number { width: 40px; height: 40px; background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); color: #fff; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; }
+        .mcq-category { font-size: 12px; font-weight: 600; color: #3b82f6; text-transform: uppercase; letter-spacing: 0.5px; background: #eff6ff; padding: 4px 12px; border-radius: 20px; }
+        .mcq-difficulty { margin-left: auto; font-size: 11px; padding: 4px 10px; border-radius: 20px; }
+        .difficulty-easy { background: #dcfce7; color: #166534; }
+        .difficulty-medium { background: #fef3c7; color: #92400e; }
+        .difficulty-hard { background: #fee2e2; color: #991b1b; }
+        .mcq-vignette { background: #fff; border-left: 4px solid #3b82f6; padding: 20px; margin-bottom: 20px; border-radius: 0 12px 12px 0; }
+        .mcq-vignette p { color: #334155; margin: 0; line-height: 1.8; }
+        .mcq-question { font-weight: 600; color: #1e293b; margin-bottom: 20px; font-size: 16px; line-height: 1.6; }
+        .mcq-options { display: flex; flex-direction: column; gap: 12px; }
+        .mcq-option { display: flex; align-items: center; gap: 14px; padding: 16px 20px; background: #fff; border: 2px solid #e2e8f0; border-radius: 12px; cursor: pointer; transition: all 0.2s; }
+        .mcq-option:hover { border-color: #3b82f6; background: #f8fafc; }
+        .mcq-option.selected { border-color: #3b82f6; background: #eff6ff; }
+        .mcq-option.correct { border-color: #22c55e; background: #dcfce7; }
+        .mcq-option.incorrect { border-color: #ef4444; background: #fee2e2; }
+        .mcq-option.disabled { pointer-events: none; opacity: 0.7; }
+        .option-letter { width: 36px; height: 36px; background: #e2e8f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #64748b; flex-shrink: 0; transition: all 0.2s; }
+        .mcq-option.selected .option-letter { background: #3b82f6; color: #fff; }
+        .mcq-option.correct .option-letter { background: #22c55e; color: #fff; }
+        .mcq-option.incorrect .option-letter { background: #ef4444; color: #fff; }
+        .option-text { color: #334155; flex: 1; line-height: 1.5; }
+        .explanation-phase { margin-top: 24px; padding: 24px; background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%); border: 2px solid #facc15; border-radius: 16px; display: none; }
+        .explanation-phase.show { display: block; }
+        .explanation-prompt h4 { color: #a16207; margin-bottom: 12px; }
+        .explanation-prompt p { color: #854d0e; margin-bottom: 12px; }
+        .explanation-prompt ul { margin-left: 20px; color: #854d0e; margin-bottom: 16px; }
+        .explanation-tip { font-size: 13px; color: #92400e; background: rgba(255,255,255,0.6); padding: 10px 14px; border-radius: 8px; margin-bottom: 16px; }
+        .explanation-input { width: 100%; min-height: 180px; padding: 16px; border: 2px solid #fcd34d; border-radius: 12px; font-family: inherit; font-size: 14px; line-height: 1.7; resize: vertical; margin-bottom: 16px; background: #fff; }
+        .explanation-input:focus { outline: none; border-color: #f59e0b; box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2); }
+        .char-count { font-size: 12px; color: #92400e; text-align: right; margin-bottom: 16px; }
+        .char-count.low { color: #dc2626; }
+        .submit-explanation-btn { display: block; width: 100%; padding: 16px 24px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #fff; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .submit-explanation-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4); }
+        .submit-explanation-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        /* Voice Recording Styles */
+        .input-mode-toggle { display: flex; gap: 8px; margin-bottom: 16px; }
+        .mode-btn { flex: 1; padding: 12px 16px; border: 2px solid #fcd34d; background: #fff; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; color: #92400e; }
+        .mode-btn:hover { background: #fef9c3; }
+        .mode-btn.active { background: #fcd34d; color: #92400e; }
+        .mode-btn svg { width: 20px; height: 20px; }
+        .voice-input { display: none; }
+        .voice-input.show { display: block; }
+        .text-input { display: block; }
+        .text-input.hide { display: none; }
+        .voice-controls { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 24px; background: #fff; border-radius: 12px; border: 2px solid #fcd34d; margin-bottom: 16px; }
+        .record-btn { width: 80px; height: 80px; border-radius: 50%; border: none; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: #fff; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
+        .record-btn:hover { transform: scale(1.05); box-shadow: 0 4px 20px rgba(239, 68, 68, 0.4); }
+        .record-btn.recording { animation: pulse 1.5s infinite; background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); }
+        .record-btn svg { width: 32px; height: 32px; }
+        @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); } 50% { box-shadow: 0 0 0 20px rgba(239, 68, 68, 0); } }
+        .recording-status { font-size: 14px; color: #64748b; display: flex; align-items: center; gap: 8px; }
+        .recording-status.active { color: #dc2626; font-weight: 600; }
+        .recording-dot { width: 10px; height: 10px; background: #dc2626; border-radius: 50%; animation: blink 1s infinite; display: inline-block; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .transcript-preview { width: 100%; min-height: 100px; padding: 16px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 14px; color: #334155; line-height: 1.7; text-align: left; }
+        .transcript-preview.empty { color: #94a3b8; font-style: italic; }
+        .browser-warning { display: none; padding: 12px 16px; background: #fef3c7; border: 1px solid #f59e0b; border-radius: 8px; margin-bottom: 16px; font-size: 13px; color: #92400e; }
+        .browser-warning.show { display: block; }
+        .clear-btn { padding: 8px 16px; background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 12px; color: #64748b; cursor: pointer; transition: all 0.15s; }
+        .clear-btn:hover { background: #e2e8f0; }
+        .feedback-phase { margin-top: 24px; display: none; }
+        .feedback-phase.show { display: block; }
+        .answer-banner { display: flex; align-items: center; gap: 16px; padding: 20px 24px; border-radius: 12px; margin-bottom: 24px; }
+        .answer-banner.correct { background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%); }
+        .answer-banner.incorrect { background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); }
+        .answer-icon { font-size: 32px; }
+        .answer-text { font-size: 20px; font-weight: 700; }
+        .answer-banner.correct .answer-text { color: #166534; }
+        .answer-banner.incorrect .answer-text { color: #991b1b; }
+        .correct-answer { margin-left: auto; font-size: 14px; font-weight: 500; }
+        .score-card { background: #fff; border: 2px solid #e2e8f0; border-radius: 16px; padding: 24px; margin-bottom: 24px; }
+        .score-card h4 { color: #1e293b; margin-bottom: 16px; }
+        .score-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+        .score-percentage { font-size: 36px; font-weight: 700; color: #1e293b; }
+        .score-label { font-size: 14px; color: #64748b; }
+        .score-bar { height: 12px; background: #e2e8f0; border-radius: 6px; overflow: hidden; margin-bottom: 20px; }
+        .score-fill { height: 100%; background: linear-gradient(90deg, #22c55e, #16a34a); border-radius: 6px; transition: width 0.8s ease; }
+        .score-fill.medium { background: linear-gradient(90deg, #f59e0b, #d97706); }
+        .score-fill.low { background: linear-gradient(90deg, #ef4444, #dc2626); }
+        .rubric-feedback { display: flex; flex-direction: column; gap: 10px; }
+        .rubric-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 16px; border-radius: 10px; font-size: 14px; }
+        .rubric-item.met { background: #dcfce7; }
+        .rubric-item.not-met { background: #fef2f2; }
+        .rubric-icon { font-size: 18px; flex-shrink: 0; }
+        .rubric-content { flex: 1; }
+        .rubric-name { font-weight: 600; display: block; margin-bottom: 4px; }
+        .rubric-item.met .rubric-name { color: #166534; }
+        .rubric-item.not-met .rubric-name { color: #991b1b; }
+        .rubric-hint { font-size: 13px; color: #64748b; font-style: italic; }
+        .expert-card { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 2px solid #3b82f6; border-radius: 16px; padding: 24px; margin-bottom: 24px; }
+        .expert-card h4 { color: #1d4ed8; margin-bottom: 16px; }
+        .expert-content { color: #1e40af; }
+        .expert-content p { margin-bottom: 16px; line-height: 1.7; }
+        .distractor-item { margin-bottom: 12px; padding-left: 16px; border-left: 3px solid #93c5fd; }
+        .distractor-letter { font-weight: 700; color: #2563eb; }
+        .resources-card { background: #fff; border: 2px solid #10b981; border-radius: 16px; padding: 24px; }
+        .resources-card h4 { color: #047857; margin-bottom: 8px; }
+        .resources-intro { color: #065f46; font-size: 14px; margin-bottom: 16px; }
+        .resource-links { display: flex; flex-direction: column; gap: 10px; }
+        .resource-link { display: flex; align-items: center; gap: 14px; padding: 14px 18px; background: #ecfdf5; border-radius: 10px; text-decoration: none; color: #065f46; transition: all 0.15s; }
+        .resource-link:hover { background: #d1fae5; transform: translateX(4px); }
+        .resource-type { font-size: 10px; font-weight: 700; text-transform: uppercase; padding: 4px 10px; background: #10b981; color: #fff; border-radius: 4px; }
+        .resource-title { flex: 1; font-weight: 500; }
+        .resources-section { background: #fff; border-radius: 16px; padding: 32px; margin-bottom: 32px; border: 1px solid #e2e8f0; }
+        .resources-section h2 { color: #1e293b; font-size: 24px; margin-bottom: 24px; }
+        .resource-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+        .resource-card-grid { padding: 20px; background: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0; transition: all 0.2s; }
+        .resource-card-grid:hover { border-color: #3b82f6; transform: translateY(-2px); }
+        .resource-card-grid h4 { color: #1e293b; font-size: 15px; margin-bottom: 8px; }
+        .resource-card-grid p { color: #64748b; font-size: 13px; margin-bottom: 12px; }
+        .resource-card-grid a { color: #3b82f6; text-decoration: none; font-size: 13px; font-weight: 500; }
+        .resource-badge { display: inline-block; padding: 3px 8px; background: #dbeafe; color: #1d4ed8; border-radius: 4px; font-size: 11px; font-weight: 600; margin-bottom: 10px; }
     </style>
-    <link rel="stylesheet" href="module-enhance.css">
-    <link rel="stylesheet" href="module-fix.css">
 </head>
 <body>
-    <header class="header"><div class="logo">🌬️ MechanismDx</div></header>
-    <div class="module-header"><div class="module-header-inner">
-        <div class="module-title"><span class="module-icon">🌬️</span><div><h1>Obstructive Lung Disease</h1><p class="module-subtitle">Asthma vs COPD pathophysiology, PFTs, and management</p></div></div>
-    </div></div>
-    <main class="main">
-        <div class="phase-nav">
-            <button class="phase-btn active" onclick="switchPhase(1)">Phase 1: Asthma</button>
-            <button class="phase-btn" onclick="switchPhase(2)">Phase 2: COPD</button>
-            <button class="phase-btn" onclick="switchPhase(3)">Phase 3: PFTs</button>
-            <button class="phase-btn" onclick="switchPhase(4)">Phase 4: Treatment</button>
+    <nav class="dx-nav">
+        <div class="dx-nav-inner">
+            <a href="index.html" class="dx-nav-brand"><span style="font-size: 24px;">🫁</span><span>MechanismDx</span></a>
+            <div class="dx-nav-links">
+                <a href="index.html" class="dx-nav-link">All Modules</a>
+                <a href="pulmonary-physiology-foundations.html" class="dx-nav-link">Pulmonary Foundations</a>
+                <a href="pulmonary.html" class="dx-nav-link active">Pulmonary</a>
+                <a href="allergy-immunology.html" class="dx-nav-link">Allergy/Immunology</a>
+            </div>
         </div>
-        <div class="content-grid">
-            <div class="questions-panel" id="questionsPanel"></div>
-            <aside>
-                <div class="sidebar-card">
-                    <h3 class="sidebar-title">🔬 Asthma vs COPD</h3>
-                    <table class="compare-table">
-                        <tr><th></th><th>Asthma</th><th>COPD</th></tr>
-                        <tr><td>Age onset</td><td>Young</td><td>>40</td></tr>
-                        <tr><td>Reversibility</td><td>Yes</td><td>Partial</td></tr>
-                        <tr><td>Inflammation</td><td>Eosinophilic</td><td>Neutrophilic</td></tr>
-                        <tr><td>Smoking</td><td>Variable</td><td>Strong link</td></tr>
+    </nav>
+    <header class="header">
+        <div class="header-inner">
+            <div class="breadcrumb"><a href="index.html">MechanismDx</a> → <a href="pulmonary.html">Pulmonary</a> → Obstructive Lung Disease</div>
+            <h1>🫁 Obstructive Lung Disease & Exercise-Induced Bronchoconstriction</h1>
+            <p class="header-subtitle">Master the pathophysiology, diagnosis, and management of EIB - plus the critical differential of Exercise-Induced Laryngeal Obstruction (EILO)</p>
+        </div>
+    </header>
+    <div class="main-layout">
+        <main class="content">
+            <div class="objectives">
+                <h2>🎯 Learning Objectives</h2>
+                <ul>
+                    <li>Explain the osmotic theory of exercise-induced bronchoconstriction (EIB) pathophysiology</li>
+                    <li>Distinguish between EIB with asthma (EIBA) and EIB without asthma (EIBwA)</li>
+                    <li>Interpret exercise challenge test results using ATS criteria (≥10% FEV₁ decline)</li>
+                    <li>Differentiate EIB from Exercise-Induced Laryngeal Obstruction (EILO) using clinical features</li>
+                    <li>Apply evidence-based pharmacologic and non-pharmacologic management strategies</li>
+                    <li>Recognize sport-specific risk factors for EIB in athletes</li>
+                </ul>
+            </div>
+            
+            <section class="section">
+                <h2>📊 Introduction & Epidemiology</h2>
+                <p>Exercise-induced bronchoconstriction (EIB) describes <strong>acute, transient airway narrowing</strong> occurring during or after exercise. The terminology has evolved from "exercise-induced asthma" to EIB to emphasize that this phenomenon can occur in individuals with or without underlying asthma.</p>
+                <div class="key-point">
+                    <div class="key-point-title">💡 Key Distinction</div>
+                    <p><strong>EIBA (EIB with Asthma):</strong> Up to 90% of asthmatics experience EIB, often reflecting poor asthma control.<br>
+                    <strong>EIBwA (EIB without Asthma):</strong> Affects up to 20% of the general population and 30-70% of elite athletes, particularly in winter sports and swimming.</p>
+                </div>
+                <h3>Prevalence by Population</h3>
+                <div class="table-container">
+                    <table>
+                        <thead><tr><th>Population</th><th>EIB Prevalence</th><th>Notes</th></tr></thead>
+                        <tbody>
+                            <tr><td>General population (children)</td><td>8-15%</td><td>Higher in atopic children</td></tr>
+                            <tr><td>General population (adults)</td><td>Up to 20%</td><td>Often undiagnosed</td></tr>
+                            <tr><td>Patients with asthma</td><td>40-90%</td><td>Reflects disease control</td></tr>
+                            <tr><td>Elite athletes (overall)</td><td>30-70%</td><td>Higher in females</td></tr>
+                            <tr><td>Cross-country skiers</td><td>50-70%</td><td>Cold, dry air exposure</td></tr>
+                            <tr><td>Swimmers</td><td>36-79%</td><td>Chloramine exposure</td></tr>
+                            <tr><td>Ice hockey/figure skating</td><td>35-50%</td><td>Cold air + ice resurfacing pollutants</td></tr>
+                        </tbody>
                     </table>
                 </div>
-            </aside>
-        </div>
-    </main>
-    <script>
-    // Correct answers: Phase 1 (B,D,A,C,E), Phase 2 (D,A,C,B,E), Phase 3 (A,C,D,B,E), Phase 4 (C,A,D,B,E)
-    const data = {
-        1: [
-            { id:'q1_1', type:'Mechanism', stem:'The hallmark inflammatory cell in asthma is:', options:[
-                {letter:'A',text:'Neutrophils predominating in airways',correct:false},
-                {letter:'B',text:'Eosinophils with T2 inflammation',correct:true},
-                {letter:'C',text:'Macrophages from alveolar spaces',correct:false},
-                {letter:'D',text:'Mast cells without IgE involvement',correct:false}
-            ], explanation:'Asthma features T2 (Type 2) inflammation with eosinophils, driven by IL-4, IL-5, and IL-13 from Th2 cells. IgE-mediated mast cell degranulation triggers acute bronchospasm. COPD has neutrophilic inflammation.', mechanism:{title:'T2 Inflammation',steps:['Allergen exposure','→ Th2 activation','→ IL-4, IL-5, IL-13','→ Eosinophil recruitment','→ Airway inflammation']}},
-            { id:'q1_2', type:'Mechanism', stem:'Airway hyperresponsiveness in asthma causes bronchospasm in response to:', options:[
-                {letter:'A',text:'Only specific identified allergens',correct:false},
-                {letter:'B',text:'High-intensity exercise exclusively',correct:false},
-                {letter:'C',text:'Bacterial respiratory infections only',correct:false},
-                {letter:'D',text:'Non-specific triggers like cold air and irritants',correct:true}
-            ], explanation:'Airway hyperresponsiveness means exaggerated bronchoconstriction to various non-specific triggers: cold air, exercise, irritants, strong odors. This distinguishes asthma from simple allergic rhinitis.', mechanism:{title:'Hyperresponsiveness',steps:['Inflamed airways','→ Smooth muscle sensitized','→ Low threshold for constriction','→ Multiple triggers effective','→ Bronchospasm']}},
-            { id:'q1_3', type:'Clinical', stem:'The reversibility criterion for asthma on spirometry is FEV1 improvement of:', options:[
-                {letter:'A',text:'≥12% AND ≥200 mL after bronchodilator',correct:true},
-                {letter:'B',text:'≥5% OR ≥100 mL after bronchodilator',correct:false},
-                {letter:'C',text:'Any measurable increase in FEV1',correct:false},
-                {letter:'D',text:'≥20% AND ≥400 mL post-bronchodilator',correct:false}
-            ], explanation:'Significant reversibility = ≥12% AND ≥200 mL improvement in FEV1 after bronchodilator. Both criteria must be met. This helps distinguish asthma (reversible) from COPD (minimal reversibility).', mechanism:{title:'Reversibility Criteria',steps:['Pre-bronchodilator FEV1','→ Give albuterol','→ Repeat in 15-20 min','→ ≥12% AND ≥200 mL = reversible','→ Supports asthma diagnosis']}},
-            { id:'q1_4', type:'Clinical', vignette:'A 25-year-old with well-controlled asthma asks about exercise.', stem:'Exercise-induced bronchospasm typically peaks at which time?', options:[
-                {letter:'A',text:'During the first minute of exercise',correct:false},
-                {letter:'B',text:'At peak exercise intensity',correct:false},
-                {letter:'C',text:'5-15 minutes after exercise stops',correct:true},
-                {letter:'D',text:'Several hours after exercise ends',correct:false}
-            ], explanation:'Exercise-induced bronchospasm typically peaks 5-15 minutes after exercise cessation. Caused by airway cooling and drying during exercise with rewarming afterward. Prevented by pre-exercise SABA or daily ICS.', mechanism:{title:'Exercise-Induced Bronchospasm',steps:['Exercise → Airway cooling/drying','→ Exercise stops','→ Airway rewarming','→ Mediator release','→ Peak symptoms 5-15 min post']}},
-            { id:'q1_5', type:'Mechanism', stem:'Airway remodeling in chronic asthma includes all EXCEPT:', options:[
-                {letter:'A',text:'Basement membrane thickening',correct:false},
-                {letter:'B',text:'Smooth muscle hypertrophy',correct:false},
-                {letter:'C',text:'Subepithelial fibrosis',correct:false},
-                {letter:'D',text:'Mucous gland hyperplasia',correct:false},
-                {letter:'E',text:'Alveolar wall destruction',correct:true}
-            ], explanation:'Asthma remodeling includes basement membrane thickening, smooth muscle hypertrophy, subepithelial fibrosis, and mucous gland hyperplasia. Alveolar destruction is characteristic of emphysema/COPD, not asthma.', mechanism:{title:'Asthma Remodeling',steps:['Chronic inflammation','→ Basement membrane thickens','→ Smooth muscle hypertrophy','→ Subepithelial fibrosis','→ NOT alveolar destruction']}}
-        ],
-        2: [
-            { id:'q2_1', type:'Mechanism', stem:'The protease-antiprotease imbalance in emphysema involves:', options:[
-                {letter:'A',text:'Excess alpha-1 antitrypsin activity',correct:false},
-                {letter:'B',text:'Deficiency of neutrophil elastase',correct:false},
-                {letter:'C',text:'Increased antiprotease production',correct:false},
-                {letter:'D',text:'Neutrophil elastase exceeding antiprotease protection',correct:true}
-            ], explanation:'Smoking recruits neutrophils that release elastase. When elastase activity exceeds alpha-1 antitrypsin protection, alveolar walls are destroyed → emphysema. Alpha-1 antitrypsin deficiency accelerates this process.', mechanism:{title:'Protease-Antiprotease',steps:['Smoking → Neutrophil recruitment','→ Elastase release','→ Overwhelms α1-antitrypsin','→ Alveolar destruction','→ Emphysema']}},
-            { id:'q2_2', type:'Mechanism', stem:'In COPD, air trapping occurs primarily due to:', options:[
-                {letter:'A',text:'Loss of elastic recoil and airway collapse on expiration',correct:true},
-                {letter:'B',text:'Increased lung elastic recoil pressure',correct:false},
-                {letter:'C',text:'Inspiratory muscle weakness',correct:false},
-                {letter:'D',text:'Pulmonary vascular congestion',correct:false}
-            ], explanation:'Emphysema destroys alveolar walls, reducing elastic recoil. Airways collapse during expiration (especially forced expiration) because they lack the radial traction normally provided by surrounding alveoli. This causes air trapping.', mechanism:{title:'Air Trapping',steps:['Alveolar destruction','→ Loss of elastic recoil','→ Loss of radial traction','→ Airway collapse on expiration','→ Air trapping, hyperinflation']}},
-            { id:'q2_3', type:'Clinical', stem:'The FEV1/FVC ratio diagnostic of obstruction is:', options:[
-                {letter:'A',text:'Less than 0.90 in all patients',correct:false},
-                {letter:'B',text:'Less than 0.80 in most guidelines',correct:false},
-                {letter:'C',text:'Less than 0.70 (fixed ratio) or LLN',correct:true},
-                {letter:'D',text:'Less than 0.50 indicating severity',correct:false}
-            ], explanation:'FEV1/FVC <0.70 (or below lower limit of normal) defines obstruction. The fixed ratio may over-diagnose in elderly. Once obstruction confirmed, FEV1 % predicted determines GOLD stage severity.', mechanism:{title:'COPD Diagnosis',steps:['FEV1/FVC <0.70 = Obstruction','Then stage by FEV1:','GOLD 1: ≥80%','GOLD 2: 50-79%','GOLD 3: 30-49%, GOLD 4: <30%']}},
-            { id:'q2_4', type:'Clinical', vignette:'A 65-year-old smoker with COPD has dyspnea, pursed-lip breathing, and barrel chest.', stem:'Pursed-lip breathing provides benefit by:', options:[
-                {letter:'A',text:'Increasing inspiratory muscle strength',correct:false},
-                {letter:'B',text:'Creating back-pressure to prevent airway collapse',correct:true},
-                {letter:'C',text:'Reducing oxygen consumption significantly',correct:false},
-                {letter:'D',text:'Improving ventilation-perfusion matching',correct:false}
-            ], explanation:'Pursed-lip breathing creates positive pressure during expiration that splints airways open, preventing collapse. This allows more complete exhalation, reduces air trapping, and improves gas exchange.', mechanism:{title:'Pursed-Lip Breathing',steps:['Creates back-pressure','→ Splints airways open','→ Prevents collapse','→ Reduces air trapping','→ Improves exhalation']}},
-            { id:'q2_5', type:'Clinical', stem:'The most important intervention to slow COPD progression is:', options:[
-                {letter:'A',text:'Long-acting bronchodilator therapy',correct:false},
-                {letter:'B',text:'Inhaled corticosteroid treatment',correct:false},
-                {letter:'C',text:'Pulmonary rehabilitation program',correct:false},
-                {letter:'D',text:'Supplemental oxygen at rest',correct:false},
-                {letter:'E',text:'Smoking cessation',correct:true}
-            ], explanation:'Smoking cessation is the ONLY intervention proven to slow FEV1 decline in COPD. Medications improve symptoms and reduce exacerbations but don\'t alter disease progression. Oxygen improves survival in hypoxemic patients.', mechanism:{title:'COPD Interventions',steps:['Smoking cessation: Slows progression','Bronchodilators: Symptom relief','ICS: Reduce exacerbations','Oxygen: Survival if hypoxic','Rehab: Function improvement']}}
-        ],
-        3: [
-            { id:'q3_1', type:'Clinical', stem:'On spirometry, an obstructive pattern shows:', options:[
-                {letter:'A',text:'Reduced FEV1/FVC with reduced FEV1',correct:true},
-                {letter:'B',text:'Normal FEV1/FVC with reduced FVC',correct:false},
-                {letter:'C',text:'Increased FEV1/FVC with normal volumes',correct:false},
-                {letter:'D',text:'Proportional reduction in both values',correct:false}
-            ], explanation:'Obstruction: FEV1 reduced more than FVC → low FEV1/FVC ratio (<0.70). Restriction: Both reduced proportionally → normal or high ratio. Mixed: Features of both patterns.', mechanism:{title:'PFT Patterns',steps:['Obstruction: ↓FEV1/FVC, ↓FEV1','Restriction: Normal ratio, ↓FVC','Mixed: ↓Ratio AND ↓FVC','Air trapping: ↑RV/TLC']}},
-            { id:'q3_2', type:'Clinical', stem:'In COPD with hyperinflation, which lung volume is most increased?', options:[
-                {letter:'A',text:'Tidal volume (TV)',correct:false},
-                {letter:'B',text:'Inspiratory reserve volume (IRV)',correct:false},
-                {letter:'C',text:'Residual volume (RV)',correct:true},
-                {letter:'D',text:'Expiratory reserve volume (ERV)',correct:false}
-            ], explanation:'Air trapping increases residual volume (RV) - the air that can\'t be exhaled. RV/TLC ratio >0.40 indicates hyperinflation. Total lung capacity may also increase. Tidal volume typically preserved or reduced.', mechanism:{title:'Hyperinflation',steps:['Air trapping during expiration','→ RV increases','→ RV/TLC >0.40','→ TLC may increase','→ Diaphragm flattens']}},
-            { id:'q3_3', type:'Clinical', stem:'DLCO (diffusing capacity) is reduced in emphysema because:', options:[
-                {letter:'A',text:'Airway mucus blocks gas diffusion',correct:false},
-                {letter:'B',text:'Bronchospasm limits air entry',correct:false},
-                {letter:'C',text:'Pulmonary vascular congestion occurs',correct:false},
-                {letter:'D',text:'Alveolar surface area is destroyed',correct:true}
-            ], explanation:'DLCO measures gas transfer across the alveolar-capillary membrane. Emphysema destroys alveolar walls → reduced surface area for diffusion → low DLCO. Asthma typically has normal or high DLCO.', mechanism:{title:'DLCO in Emphysema',steps:['Alveolar wall destruction','→ Reduced surface area','→ Reduced capillary bed','→ Impaired gas transfer','→ Low DLCO']}},
-            { id:'q3_4', type:'Clinical', vignette:'A patient has FEV1/FVC 0.55, FEV1 45% predicted, and DLCO 35% predicted.', stem:'What pattern does this represent?', options:[
-                {letter:'A',text:'Pure restrictive lung disease',correct:false},
-                {letter:'B',text:'Moderate COPD with emphysema',correct:true},
-                {letter:'C',text:'Asthma with normal lung parenchyma',correct:false},
-                {letter:'D',text:'Interstitial lung disease',correct:false}
-            ], explanation:'Low FEV1/FVC confirms obstruction. FEV1 45% = GOLD stage 3 (severe). Low DLCO indicates parenchymal destruction (emphysema). Asthma would have normal/high DLCO; ILD would have restriction with low DLCO.', mechanism:{title:'This Case',steps:['FEV1/FVC 0.55 = Obstruction','FEV1 45% = GOLD 3 (severe)','DLCO 35% = Emphysema','Pattern: Severe COPD','With significant emphysema']}},
-            { id:'q3_5', type:'Clinical', stem:'A positive bronchodilator response in COPD means:', options:[
-                {letter:'A',text:'The patient definitely has asthma instead',correct:false},
-                {letter:'B',text:'ICS therapy will be ineffective',correct:false},
-                {letter:'C',text:'No bronchodilator treatment is needed',correct:false},
-                {letter:'D',text:'Alpha-1 antitrypsin testing is contraindicated',correct:false},
-                {letter:'E',text:'Some reversible component exists but COPD diagnosis stands',correct:true}
-            ], explanation:'Some COPD patients have partial reversibility, but this doesn\'t change the diagnosis. COPD and asthma can coexist (asthma-COPD overlap). Bronchodilator response doesn\'t predict treatment response well in COPD.', mechanism:{title:'COPD Reversibility',steps:['Some COPD has partial reversibility','Doesn\'t exclude COPD diagnosis','May indicate ACO (overlap)','Continue bronchodilator therapy','Consider ICS if eosinophilic']}}
-        ],
-        4: [
-            { id:'q4_1', type:'Pharmacology', stem:'The mechanism of inhaled corticosteroids in asthma is:', options:[
-                {letter:'A',text:'Direct bronchodilation of smooth muscle',correct:false},
-                {letter:'B',text:'Immediate mast cell stabilization only',correct:false},
-                {letter:'C',text:'Suppression of airway inflammation',correct:true},
-                {letter:'D',text:'Blocking leukotriene receptors',correct:false}
-            ], explanation:'ICS suppress airway inflammation by reducing eosinophils, cytokines, and inflammatory mediators. They are controller medications, not relievers - take days to weeks for full effect. Reduce exacerbations and improve control.', mechanism:{title:'ICS Mechanism',steps:['Bind glucocorticoid receptors','→ Suppress inflammatory genes','→ Reduce eosinophils, cytokines','→ Decrease airway inflammation','→ Improve control over time']}},
-            { id:'q4_2', type:'Pharmacology', stem:'Long-acting beta-agonists (LABAs) should not be used as monotherapy in asthma because:', options:[
-                {letter:'A',text:'Masking inflammation increases severe exacerbation risk',correct:true},
-                {letter:'B',text:'They cause immediate paradoxical bronchospasm',correct:false},
-                {letter:'C',text:'Tolerance develops within 24 hours',correct:false},
-                {letter:'D',text:'They are ineffective bronchodilators',correct:false}
-            ], explanation:'LABA monotherapy in asthma increases risk of severe exacerbations and death. They relieve symptoms without treating underlying inflammation. Always combine with ICS. In COPD, LABA monotherapy is acceptable.', mechanism:{title:'LABA Safety in Asthma',steps:['LABA relieves symptoms','→ But doesn\'t treat inflammation','→ Patient feels better','→ Inflammation continues','→ Severe exacerbation risk']}},
-            { id:'q4_3', type:'Clinical', vignette:'A COPD patient on LAMA/LABA has frequent exacerbations and blood eosinophils 350 cells/μL.', stem:'What should be added to therapy?', options:[
-                {letter:'A',text:'Oral theophylline daily',correct:false},
-                {letter:'B',text:'Prophylactic azithromycin only',correct:false},
-                {letter:'C',text:'Short-acting anticholinergic PRN',correct:false},
-                {letter:'D',text:'Inhaled corticosteroid (triple therapy)',correct:true}
-            ], explanation:'Add ICS to LAMA/LABA (triple therapy) for COPD patients with frequent exacerbations AND elevated eosinophils (≥300). Eosinophils predict ICS response in COPD. Without eosinophilia, ICS benefit is limited.', mechanism:{title:'Triple Therapy Indication',steps:['Frequent exacerbations','AND eosinophils ≥300','→ Add ICS to LAMA/LABA','→ Reduces exacerbations','→ Guided by eosinophils']}},
-            { id:'q4_4', type:'Clinical', stem:'Biologic therapy with anti-IL-5 agents is indicated for asthma that is:', options:[
-                {letter:'A',text:'Mild intermittent with rare symptoms',correct:false},
-                {letter:'B',text:'Severe eosinophilic despite high-dose ICS/LABA',correct:true},
-                {letter:'C',text:'Well-controlled on low-dose ICS alone',correct:false},
-                {letter:'D',text:'Newly diagnosed before controller trial',correct:false}
-            ], explanation:'Biologics (mepolizumab, benralizumab - anti-IL-5; dupilumab - anti-IL-4/13; omalizumab - anti-IgE) are for severe asthma uncontrolled despite step 4-5 therapy. Phenotype guides selection: eosinophilic → anti-IL-5 or anti-IL-4/13.', mechanism:{title:'Biologics in Asthma',steps:['Severe uncontrolled asthma','Despite high-dose ICS/LABA','→ Identify phenotype','→ Eosinophilic: Anti-IL-5','→ Allergic: Omalizumab']}},
-            { id:'q4_5', type:'Clinical', stem:'Long-term oxygen therapy in COPD improves survival when:', options:[
-                {letter:'A',text:'Patient reports subjective dyspnea',correct:false},
-                {letter:'B',text:'Exercise desaturation occurs below 90%',correct:false},
-                {letter:'C',text:'FEV1 falls below 30% predicted',correct:false},
-                {letter:'D',text:'Pulmonary hypertension is suspected',correct:false},
-                {letter:'E',text:'Resting PaO2 ≤55 mmHg or SpO2 ≤88%',correct:true}
-            ], explanation:'LTOT improves survival in COPD with severe resting hypoxemia (PaO2 ≤55 or SpO2 ≤88%). Also indicated if PaO2 56-59 with cor pulmonale or polycythemia. Must use ≥15 hours/day. Ambulatory desaturation alone doesn\'t meet criteria.', mechanism:{title:'LTOT Criteria',steps:['PaO2 ≤55 or SpO2 ≤88%','OR PaO2 56-59 with:','Cor pulmonale or polycythemia','Use ≥15 hours/day','Improves survival']}}
-        ]
-    };
-    let currentPhase = 1, answers = {};
-    function switchPhase(p) { currentPhase = p; document.querySelectorAll('.phase-btn').forEach((b,i) => b.classList.toggle('active', i+1===p)); render(); }
-    function render() {
-        document.getElementById('questionsPanel').innerHTML = data[currentPhase].map((q,i) => `
-            <div class="question-card" id="c-${q.id}">
-                <div class="question-header"><div style="display:flex;align-items:center"><span class="q-badge">${(currentPhase-1)*5+i+1}</span><span class="q-type">${q.type}</span></div>
-                <span class="q-status ${answers[q.id]?(answers[q.id].c?'correct':'incorrect'):''}">${answers[q.id]?(answers[q.id].c?'✓':'✗'):'○'}</span></div>
-                <div class="question-body">
-                    ${q.vignette?`<div class="vignette"><div class="vignette-label">Vignette</div>${q.vignette}</div>`:''}
-                    <div class="question-stem">${q.stem}</div>
-                    <div class="options">${q.options.map(o=>`<div class="option ${answers[q.id]?.s===o.letter?'selected':''} ${answers[q.id]?(o.correct?'correct':(answers[q.id].s===o.letter?'incorrect':'')):''}}" onclick="sel('${q.id}','${o.letter}')" ${answers[q.id]?'style="pointer-events:none"':''}><span class="option-letter">${o.letter}</span><span>${o.text}</span></div>`).join('')}</div>
-                    ${!answers[q.id]?`<button class="submit-btn" onclick="sub('${q.id}')" id="b-${q.id}" disabled>Submit</button>`:`<div class="explanation show"><h4>${answers[q.id].c?'✓ Correct!':'✗ Incorrect'}</h4><p>${q.explanation}</p><div class="mechanism-box"><div class="mechanism-title">🔬 ${q.mechanism.title}</div><div class="mechanism-pathway">${q.mechanism.steps.map((s,j)=>`<span class="pathway-step">${s}</span>${j<q.mechanism.steps.length-1?'<span class="pathway-arrow">→</span>':''}`).join('')}</div></div></div>`}
+                <div class="pearl">
+                    <div class="pearl-title">🔑 Clinical Pearl</div>
+                    <p>Olympic athletes have won medals despite EIB - proper diagnosis and management enables full athletic participation. The IOC and WADA require objective documentation (challenge testing) before allowing bronchodilator use in competition.</p>
                 </div>
-            </div>`).join('');
-    }
-    function sel(id,l) { if(answers[id])return; document.querySelectorAll(`#c-${id} .option`).forEach(o=>o.classList.remove('selected')); event.currentTarget.classList.add('selected'); document.getElementById(`b-${id}`).disabled=false; document.getElementById(`b-${id}`).dataset.s=l; }
-    function sub(id) { const l=document.getElementById(`b-${id}`).dataset.s, q=data[currentPhase].find(x=>x.id===id); answers[id]={s:l,c:q.options.find(o=>o.letter===l).correct}; render(); }
-    render();
+            </section>
+            
+            <section class="section">
+                <h2>🔬 Pathophysiology: The Osmotic Theory</h2>
+                <p>The <strong>osmotic/hyperosmolar theory</strong> is the most widely accepted mechanism explaining EIB. During exercise, increased ventilation (up to 100-200 L/min in elite athletes) overwhelms the airways' ability to warm and humidify inspired air.</p>
+                <div class="mechanism-box">
+                    <h3>🔄 EIB Mechanism Cascade</h3>
+                    <div class="mechanism-steps">
+                        <span class="mechanism-step">Exercise hyperventilation</span>
+                        <span class="mechanism-arrow">→</span>
+                        <span class="mechanism-step">Airway water loss</span>
+                        <span class="mechanism-arrow">→</span>
+                        <span class="mechanism-step">Hyperosmolar airway surface</span>
+                        <span class="mechanism-arrow">→</span>
+                        <span class="mechanism-step">Mast cell degranulation</span>
+                        <span class="mechanism-arrow">→</span>
+                        <span class="mechanism-step">Mediator release (histamine, leukotrienes, PGD₂)</span>
+                        <span class="mechanism-arrow">→</span>
+                        <span class="mechanism-step">Bronchoconstriction</span>
+                    </div>
+                </div>
+                <h3>Key Mediators in EIB</h3>
+                <div class="comparison-grid">
+                    <div class="comparison-card">
+                        <h4>🧪 Histamine</h4>
+                        <ul>
+                            <li>Released from mast cells within minutes</li>
+                            <li>Causes rapid bronchospasm</li>
+                            <li>Increases vascular permeability</li>
+                            <li>Blocked by antihistamines (limited efficacy)</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-card">
+                        <h4>🧪 Cysteinyl Leukotrienes</h4>
+                        <ul>
+                            <li>Potent bronchoconstrictors (1000× histamine)</li>
+                            <li>Prolonged action (hours)</li>
+                            <li>Increase mucus production</li>
+                            <li>Target of LTRAs (montelukast)</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-card">
+                        <h4>🧪 Prostaglandin D₂</h4>
+                        <ul>
+                            <li>Mast cell-derived</li>
+                            <li>Causes bronchoconstriction</li>
+                            <li>Recruits eosinophils and Th2 cells</li>
+                            <li>Marker of mast cell activation</li>
+                        </ul>
+                    </div>
+                </div>
+                <h3>The Refractory Period</h3>
+                <p>A unique feature of EIB is the <strong>refractory period</strong> - approximately 50% of patients experience reduced bronchoconstriction if they exercise again within 1-3 hours of an initial episode. This is due to mast cell mediator depletion and release of protective prostaglandins (PGE₂).</p>
+                <div class="pearl">
+                    <div class="pearl-title">🔑 Clinical Pearl: Warm-Up Effect</div>
+                    <p>Athletes can exploit the refractory period through a "warm-up" strategy: performing interval sprints 20-30 minutes before competition induces a mild EIB response, followed by relative protection during the actual event.</p>
+                </div>
+            </section>
+            <section class="section">
+                <h2>🔍 Diagnosis</h2>
+                <div class="vignette">
+                    <div class="vignette-label">Clinical Vignette</div>
+                    <p class="vignette-text">A 17-year-old female cross-country runner presents with cough, chest tightness, and shortness of breath that begins about 5 minutes after starting intense training runs. She notes symptoms are worse during cold weather practices. She has no symptoms at rest, no nocturnal awakening, and no symptoms with routine activities. Her older sister has asthma. Physical examination is normal. Peak flow in clinic is 95% predicted.</p>
+                </div>
+                <h3>Exercise Challenge Test: The Gold Standard</h3>
+                <p>Per ATS guidelines, the exercise challenge test is the preferred method for diagnosing EIB. The test should be conducted in controlled conditions with specific protocols.</p>
+                <div class="algorithm-box">
+                    <h3>Exercise Challenge Protocol (ATS Guidelines)</h3>
+                    <div class="algorithm-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <strong>Pre-Test Preparation:</strong>
+                            <ul style="margin-left: 20px; margin-top: 8px; color: #64748b;">
+                                <li>Withhold SABA ≥8 hours, LABA ≥24 hours, LTRA ≥24 hours</li>
+                                <li>Avoid caffeine on test day</li>
+                                <li>No vigorous exercise for 4 hours (avoid refractory period)</li>
+                                <li>Baseline spirometry must be acceptable (FEV₁ ≥70% predicted)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="algorithm-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <strong>Exercise Protocol:</strong>
+                            <ul style="margin-left: 20px; margin-top: 8px; color: #64748b;">
+                                <li>Treadmill or cycle ergometer</li>
+                                <li>Achieve 80-90% predicted maximal heart rate (220-age)</li>
+                                <li>Duration: 6-10 minutes at target intensity</li>
+                                <li>Breathe dry air (≤10 mg H₂O/L) with nose clip</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="algorithm-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <strong>Post-Exercise Spirometry:</strong>
+                            <ul style="margin-left: 20px; margin-top: 8px; color: #64748b;">
+                                <li>Measure FEV₁ at 5, 10, 15, and 30 minutes post-exercise</li>
+                                <li>Record highest acceptable FEV₁ at each time point</li>
+                                <li>Calculate percent decline from baseline</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="key-point">
+                    <div class="key-point-title">📐 ATS Diagnostic Threshold</div>
+                    <p>A <strong>≥10% decline in FEV₁</strong> from baseline confirms EIB diagnosis.<br><br>
+                    <strong>Severity Classification:</strong><br>
+                    <span class="threshold-badge threshold-mild">Mild: 10% to &lt;25%</span>
+                    <span class="threshold-badge threshold-moderate">Moderate: 25% to &lt;50%</span>
+                    <span class="threshold-badge threshold-severe">Severe: ≥50%</span>
+                    </p>
+                </div>
+                <div class="warning-box">
+                    <div class="warning-title">⚠️ Important Limitation</div>
+                    <p>Symptoms alone have <strong>poor predictive value</strong> for EIB diagnosis. Studies show only 50% of patients reporting exercise-induced respiratory symptoms actually have EIB on objective testing. Conversely, many patients with documented EIB are asymptomatic. Always confirm with objective testing.</p>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2>⚖️ Critical Differential: EIB vs EILO</h2>
+                <p><strong>Exercise-Induced Laryngeal Obstruction (EILO)</strong> is a common mimicker of EIB and represents inappropriate narrowing of the larynx during high-intensity exercise. EILO is frequently misdiagnosed as asthma, leading to unnecessary treatment escalation.</p>
+                <div class="vignette">
+                    <div class="vignette-label">Clinical Vignette - Spot the Difference</div>
+                    <p class="vignette-text">A 16-year-old female soccer player presents with breathing difficulty during high-intensity drills. She describes a "choking" sensation with difficulty breathing IN. Symptoms occur at peak exertion and resolve within 2-3 minutes of stopping. She has tried multiple inhalers without benefit. Her coach notes a high-pitched noise during her breathing when sprinting. She is anxious about her performance and has missed several games.</p>
+                </div>
+                <div class="comparison-grid">
+                    <div class="comparison-card eib">
+                        <h4>🫁 Exercise-Induced Bronchoconstriction (EIB)</h4>
+                        <ul>
+                            <li><strong>Location:</strong> Lower airways (bronchi)</li>
+                            <li><strong>Timing:</strong> Peak 5-15 min AFTER exercise stops</li>
+                            <li><strong>Breathing phase:</strong> Expiratory difficulty</li>
+                            <li><strong>Sound:</strong> Wheeze (expiratory, from chest)</li>
+                            <li><strong>Resolution:</strong> 30-90 minutes spontaneously</li>
+                            <li><strong>Bronchodilator:</strong> Effective (SABA helps)</li>
+                            <li><strong>Demographics:</strong> Any age, associated with atopy</li>
+                            <li><strong>Testing:</strong> ≥10% FEV₁ decline post-exercise</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-card eilo">
+                        <h4>🗣️ Exercise-Induced Laryngeal Obstruction (EILO)</h4>
+                        <ul>
+                            <li><strong>Location:</strong> Upper airway (larynx/vocal cords)</li>
+                            <li><strong>Timing:</strong> DURING peak exercise intensity</li>
+                            <li><strong>Breathing phase:</strong> Inspiratory difficulty</li>
+                            <li><strong>Sound:</strong> Stridor (inspiratory, from throat)</li>
+                            <li><strong>Resolution:</strong> Rapid (2-5 minutes after stopping)</li>
+                            <li><strong>Bronchodilator:</strong> NOT effective</li>
+                            <li><strong>Demographics:</strong> Adolescent females, competitive athletes</li>
+                            <li><strong>Testing:</strong> CLE test (continuous laryngoscopy during exercise)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="warning-box">
+                    <div class="warning-title">⚠️ Key Fact: They Can Coexist!</div>
+                    <p>EIB and EILO coexist in approximately <strong>10-30% of athletes</strong> with exertional dyspnea. A poor response to asthma therapy should prompt evaluation for EILO, even if EIB has been documented. Average delay to EILO diagnosis is <strong>2 years</strong>.</p>
+                </div>
+            </section>
+            <section class="section">
+                <h2>💊 Management of EIB</h2>
+                <h3>ATS Treatment Algorithm</h3>
+                <div class="algorithm-box">
+                    <h3>Stepwise Approach (ATS Guidelines)</h3>
+                    <div class="algorithm-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <strong>First-Line: Pre-exercise SABA</strong>
+                            <p style="color: #64748b; margin-top: 8px;">Albuterol 2 puffs (180-200 mcg) 15-30 minutes before exercise. Provides protection for 2-4 hours. <em>(Strong recommendation)</em></p>
+                        </div>
+                    </div>
+                    <div class="algorithm-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <strong>If SABA inadequate, ADD one of:</strong>
+                            <ul style="margin-left: 20px; margin-top: 8px; color: #64748b;">
+                                <li><strong>Daily ICS:</strong> Reduces airway inflammation (takes 2-4 weeks for full effect)</li>
+                                <li><strong>Daily LTRA (montelukast):</strong> 10 mg daily; blocks leukotriene pathway</li>
+                                <li><strong>Mast cell stabilizer:</strong> Cromolyn 2 puffs 15-20 min before exercise</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="algorithm-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <strong>Combination therapy:</strong>
+                            <p style="color: #64748b; margin-top: 8px;">ICS-LABA combination if underlying asthma is present or symptoms remain uncontrolled</p>
+                        </div>
+                    </div>
+                </div>
+                <h3>Non-Pharmacologic Strategies</h3>
+                <div class="comparison-grid">
+                    <div class="comparison-card">
+                        <h4>🏃 Warm-Up Protocol</h4>
+                        <ul>
+                            <li>High-intensity intervals before competition</li>
+                            <li>Exploits refractory period (1-3 hours protection)</li>
+                            <li>Example: 30-second sprints × 6-8 reps</li>
+                            <li>Allow 20-30 min recovery before event</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-card">
+                        <h4>🌡️ Environmental Modifications</h4>
+                        <ul>
+                            <li>Breathe through nose when possible</li>
+                            <li>Wear mask/scarf in cold weather</li>
+                            <li>Avoid high-pollution training times</li>
+                            <li>Consider indoor training in extreme cold</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="pearl">
+                    <div class="pearl-title">🔑 WADA Considerations for Athletes</div>
+                    <p>Since 2010, SABAs (salbutamol ≤1600 mcg/24h, formoterol ≤54 mcg/24h, salmeterol ≤200 mcg/24h) and all ICS are permitted without a Therapeutic Use Exemption (TUE). However, objective documentation of asthma/EIB is still required by the IOC for international competition.</p>
+                </div>
+            </section>
+            
+            <!-- EBRS MCQ Section -->
+            <section class="ebrs-section" id="quiz">
+                <h2>📝 Knowledge Check: Explain Your Reasoning</h2>
+                <div class="ebrs-intro">
+                    <h4>🧠 Active Learning Mode: Explain Before You See</h4>
+                    <p>Research shows that explaining your reasoning - even before knowing if you're right - dramatically improves learning and retention. For each question: <strong>1) Select your answer</strong>, then <strong>2) Explain WHY</strong> before seeing the correct answer and expert explanation.</p>
+                </div>
+                
+                <!-- MCQ 1 -->
+                <div class="ebrs-container" id="mcq1">
+                    <div class="mcq-header">
+                        <div class="mcq-number">1</div>
+                        <span class="mcq-category">Pathophysiology</span>
+                        <span class="mcq-difficulty difficulty-medium">Medium</span>
+                    </div>
+                    <div class="mcq-vignette">
+                        <p>A 19-year-old college basketball player develops cough, wheezing, and chest tightness 10 minutes after finishing practice. Her symptoms resolve spontaneously over 45 minutes. She has a history of seasonal allergies but no prior asthma diagnosis.</p>
+                    </div>
+                    <p class="mcq-question">Which pathophysiologic mechanism best explains her symptoms?</p>
+                    <div class="mcq-options">
+                        <div class="mcq-option" data-index="0" onclick="selectAnswer(this, 'mcq1')">
+                            <span class="option-letter">A</span>
+                            <span class="option-text">Direct parasympathetic stimulation of bronchial smooth muscle during exercise</span>
+                        </div>
+                        <div class="mcq-option" data-index="1" onclick="selectAnswer(this, 'mcq1')">
+                            <span class="option-letter">B</span>
+                            <span class="option-text">Exercise-induced histamine release from circulating basophils</span>
+                        </div>
+                        <div class="mcq-option" data-index="2" onclick="selectAnswer(this, 'mcq1')">
+                            <span class="option-letter">C</span>
+                            <span class="option-text">Airway surface dehydration causing mast cell degranulation and mediator release</span>
+                        </div>
+                        <div class="mcq-option" data-index="3" onclick="selectAnswer(this, 'mcq1')">
+                            <span class="option-letter">D</span>
+                            <span class="option-text">Paradoxical adduction of the vocal cords during inspiration</span>
+                        </div>
+                    </div>
+                    <div class="explanation-phase" id="explain-mcq1">
+                        <div class="explanation-prompt">
+                            <h4>🎯 Now explain your reasoning</h4>
+                            <p>Before seeing the answer, explain:</p>
+                            <ul>
+                                <li>Why is your chosen answer correct? What mechanism does it describe?</li>
+                                <li>Why are each of the other options incorrect?</li>
+                                <li>How does the clinical timing (10 min post-exercise, 45 min resolution) support your answer?</li>
+                            </ul>
+                        </div>
+                        <div class="explanation-tip">💡 <strong>Tip:</strong> Explain as if teaching a classmate. This strengthens your understanding.</div>
+                        
+                        <div class="browser-warning" id="voice-warning">⚠️ Voice recording requires a modern browser (Chrome, Edge, Safari). If voice doesn't work, use the text option.</div>
+                        
+                        <div class="input-mode-toggle">
+                            <button class="mode-btn active" onclick="setInputMode('mcq1', 'text')" id="text-btn-mcq1">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                                Type
+                            </button>
+                            <button class="mode-btn" onclick="setInputMode('mcq1', 'voice')" id="voice-btn-mcq1">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8"/></svg>
+                                Voice
+                            </button>
+                        </div>
+                        
+                        <div class="text-input" id="text-input-mcq1">
+                            <textarea class="explanation-input" id="input-mcq1" placeholder="Type your explanation here..." oninput="updateCharCount('mcq1')"></textarea>
+                            <div class="char-count" id="count-mcq1">0 / 100 minimum characters</div>
+                        </div>
+                        
+                        <div class="voice-input" id="voice-input-mcq1">
+                            <div class="voice-controls">
+                                <button class="record-btn" id="record-btn-mcq1" onclick="toggleRecording('mcq1')">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/></svg>
+                                </button>
+                                <div class="recording-status" id="status-mcq1">Click to start recording</div>
+                                <div class="transcript-preview empty" id="transcript-mcq1">Your spoken explanation will appear here...</div>
+                                <button class="clear-btn" onclick="clearRecording('mcq1')">Clear & Start Over</button>
+                            </div>
+                        </div>
+                        
+                        <button class="submit-explanation-btn" id="btn-mcq1" onclick="submitExplanation('mcq1')" disabled>Submit Explanation & See Answer</button>
+                    </div>
+                    <div class="feedback-phase" id="feedback-mcq1"></div>
+                </div>
+                
+                <!-- MCQ 2 -->
+                <div class="ebrs-container" id="mcq2">
+                    <div class="mcq-header">
+                        <div class="mcq-number">2</div>
+                        <span class="mcq-category">Differential Diagnosis</span>
+                        <span class="mcq-difficulty difficulty-hard">Hard</span>
+                    </div>
+                    <div class="mcq-vignette">
+                        <p>A 16-year-old female track athlete presents with "breathing problems" during the 800m race. She describes a "choking" feeling and difficulty "getting air in." Her coach reports hearing a high-pitched sound from her throat at the finish line. Symptoms resolve within 3 minutes of stopping. She has tried albuterol before races without benefit. An exercise challenge test shows only 5% decline in FEV₁.</p>
+                    </div>
+                    <p class="mcq-question">Which is the most likely diagnosis and appropriate next step?</p>
+                    <div class="mcq-options">
+                        <div class="mcq-option" data-index="0" onclick="selectAnswer(this, 'mcq2')">
+                            <span class="option-letter">A</span>
+                            <span class="option-text">Exercise-induced laryngeal obstruction; refer for continuous laryngoscopy during exercise (CLE test)</span>
+                        </div>
+                        <div class="mcq-option" data-index="1" onclick="selectAnswer(this, 'mcq2')">
+                            <span class="option-letter">B</span>
+                            <span class="option-text">Exercise-induced bronchoconstriction; increase albuterol dose to 4 puffs</span>
+                        </div>
+                        <div class="mcq-option" data-index="2" onclick="selectAnswer(this, 'mcq2')">
+                            <span class="option-letter">C</span>
+                            <span class="option-text">Panic disorder with hyperventilation; refer for cognitive behavioral therapy</span>
+                        </div>
+                        <div class="mcq-option" data-index="3" onclick="selectAnswer(this, 'mcq2')">
+                            <span class="option-letter">D</span>
+                            <span class="option-text">Undiagnosed asthma; start daily inhaled corticosteroid</span>
+                        </div>
+                    </div>
+                    <div class="explanation-phase" id="explain-mcq2">
+                        <div class="explanation-prompt">
+                            <h4>🎯 Now explain your reasoning</h4>
+                            <p>Before seeing the answer, explain:</p>
+                            <ul>
+                                <li>What clinical features point toward your diagnosis?</li>
+                                <li>How do you interpret the "5% FEV₁ decline" finding?</li>
+                                <li>Why would albuterol be ineffective in this case?</li>
+                            </ul>
+                        </div>
+                        <div class="explanation-tip">💡 <strong>Tip:</strong> Consider the anatomic location (upper vs. lower airway) and timing of symptoms.</div>
+                        
+                        <div class="input-mode-toggle">
+                            <button class="mode-btn active" onclick="setInputMode('mcq2', 'text')" id="text-btn-mcq2">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                                Type
+                            </button>
+                            <button class="mode-btn" onclick="setInputMode('mcq2', 'voice')" id="voice-btn-mcq2">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8"/></svg>
+                                Voice
+                            </button>
+                        </div>
+                        
+                        <div class="text-input" id="text-input-mcq2">
+                            <textarea class="explanation-input" id="input-mcq2" placeholder="Type your explanation here..." oninput="updateCharCount('mcq2')"></textarea>
+                            <div class="char-count" id="count-mcq2">0 / 100 minimum characters</div>
+                        </div>
+                        
+                        <div class="voice-input" id="voice-input-mcq2">
+                            <div class="voice-controls">
+                                <button class="record-btn" id="record-btn-mcq2" onclick="toggleRecording('mcq2')">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/></svg>
+                                </button>
+                                <div class="recording-status" id="status-mcq2">Click to start recording</div>
+                                <div class="transcript-preview empty" id="transcript-mcq2">Your spoken explanation will appear here...</div>
+                                <button class="clear-btn" onclick="clearRecording('mcq2')">Clear & Start Over</button>
+                            </div>
+                        </div>
+                        
+                        <button class="submit-explanation-btn" id="btn-mcq2" onclick="submitExplanation('mcq2')" disabled>Submit Explanation & See Answer</button>
+                    </div>
+                    <div class="feedback-phase" id="feedback-mcq2"></div>
+                </div>
+                
+                <!-- MCQ 3 -->
+                <div class="ebrs-container" id="mcq3">
+                    <div class="mcq-header">
+                        <div class="mcq-number">3</div>
+                        <span class="mcq-category">Treatment</span>
+                        <span class="mcq-difficulty difficulty-medium">Medium</span>
+                    </div>
+                    <div class="mcq-vignette">
+                        <p>A 25-year-old recreational runner with confirmed EIB continues to have breakthrough symptoms despite using albuterol 2 puffs 20 minutes before runs. He exercises 5 days per week and has noticed the albuterol seems less effective than when he first started using it. He has no symptoms at rest and does not meet criteria for chronic asthma.</p>
+                    </div>
+                    <p class="mcq-question">Which is the most appropriate next step in management?</p>
+                    <div class="mcq-options">
+                        <div class="mcq-option" data-index="0" onclick="selectAnswer(this, 'mcq3')">
+                            <span class="option-letter">A</span>
+                            <span class="option-text">Increase albuterol to 4 puffs before exercise</span>
+                        </div>
+                        <div class="mcq-option" data-index="1" onclick="selectAnswer(this, 'mcq3')">
+                            <span class="option-letter">B</span>
+                            <span class="option-text">Switch from albuterol to formoterol (LABA) before exercise</span>
+                        </div>
+                        <div class="mcq-option" data-index="2" onclick="selectAnswer(this, 'mcq3')">
+                            <span class="option-letter">C</span>
+                            <span class="option-text">Add daily montelukast or daily inhaled corticosteroid</span>
+                        </div>
+                        <div class="mcq-option" data-index="3" onclick="selectAnswer(this, 'mcq3')">
+                            <span class="option-letter">D</span>
+                            <span class="option-text">Discontinue albuterol for 2 weeks to restore sensitivity</span>
+                        </div>
+                    </div>
+                    <div class="explanation-phase" id="explain-mcq3">
+                        <div class="explanation-prompt">
+                            <h4>🎯 Now explain your reasoning</h4>
+                            <p>Before seeing the answer, explain:</p>
+                            <ul>
+                                <li>What phenomenon explains the decreased effectiveness of albuterol?</li>
+                                <li>What is the mechanism of each proposed treatment option?</li>
+                                <li>Why might one option be preferred over the others?</li>
+                            </ul>
+                        </div>
+                        <div class="explanation-tip">💡 <strong>Tip:</strong> Think about tachyphylaxis and the ATS stepwise approach.</div>
+                        
+                        <div class="input-mode-toggle">
+                            <button class="mode-btn active" onclick="setInputMode('mcq3', 'text')" id="text-btn-mcq3">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                                Type
+                            </button>
+                            <button class="mode-btn" onclick="setInputMode('mcq3', 'voice')" id="voice-btn-mcq3">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8"/></svg>
+                                Voice
+                            </button>
+                        </div>
+                        
+                        <div class="text-input" id="text-input-mcq3">
+                            <textarea class="explanation-input" id="input-mcq3" placeholder="Type your explanation here..." oninput="updateCharCount('mcq3')"></textarea>
+                            <div class="char-count" id="count-mcq3">0 / 100 minimum characters</div>
+                        </div>
+                        
+                        <div class="voice-input" id="voice-input-mcq3">
+                            <div class="voice-controls">
+                                <button class="record-btn" id="record-btn-mcq3" onclick="toggleRecording('mcq3')">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/></svg>
+                                </button>
+                                <div class="recording-status" id="status-mcq3">Click to start recording</div>
+                                <div class="transcript-preview empty" id="transcript-mcq3">Your spoken explanation will appear here...</div>
+                                <button class="clear-btn" onclick="clearRecording('mcq3')">Clear & Start Over</button>
+                            </div>
+                        </div>
+                        
+                        <button class="submit-explanation-btn" id="btn-mcq3" onclick="submitExplanation('mcq3')" disabled>Submit Explanation & See Answer</button>
+                    </div>
+                    <div class="feedback-phase" id="feedback-mcq3"></div>
+                </div>
+            </section>
+            <!-- Resources Section -->
+            <section class="resources-section">
+                <h2>📚 Open Access Resources</h2>
+                <div class="resource-grid">
+                    <div class="resource-card-grid">
+                        <span class="resource-badge">Guidelines</span>
+                        <h4>ATS Clinical Practice Guideline: EIB</h4>
+                        <p>Official American Thoracic Society evidence-based guidelines for diagnosis and treatment.</p>
+                        <a href="https://www.atsjournals.org/doi/full/10.1164/rccm.201303-0437ST" target="_blank">Read Full Text →</a>
+                    </div>
+                    <div class="resource-card-grid">
+                        <span class="resource-badge">Review</span>
+                        <h4>EIB: Prevalence, Pathophysiology & Management</h4>
+                        <p>Comprehensive open-access review from npj Primary Care Respiratory Medicine.</p>
+                        <a href="https://www.nature.com/articles/s41533-018-0098-2" target="_blank">Read on Nature →</a>
+                    </div>
+                    <div class="resource-card-grid">
+                        <span class="resource-badge">StatPearls</span>
+                        <h4>Exercise-Induced Bronchoconstriction</h4>
+                        <p>Continuously updated StatPearls chapter with pathophysiology overview.</p>
+                        <a href="https://www.ncbi.nlm.nih.gov/books/NBK557554/" target="_blank">Read on NCBI →</a>
+                    </div>
+                    <div class="resource-card-grid">
+                        <span class="resource-badge">StatPearls</span>
+                        <h4>Exercise-Induced Laryngeal Obstruction</h4>
+                        <p>StatPearls chapter on EILO - the critical differential diagnosis.</p>
+                        <a href="https://www.ncbi.nlm.nih.gov/books/NBK556148/" target="_blank">Read on NCBI →</a>
+                    </div>
+                    <div class="resource-card-grid">
+                        <span class="resource-badge">ERS Statement</span>
+                        <h4>Inducible Laryngeal Obstruction</h4>
+                        <p>Official joint ERS and ELS statement on ILO terminology and diagnosis.</p>
+                        <a href="https://publications.ersnet.org/content/erj/50/3/1602221" target="_blank">Read on ERS →</a>
+                    </div>
+                    <div class="resource-card-grid">
+                        <span class="resource-badge">Foundation</span>
+                        <h4>Pulmonary Physiology Foundations</h4>
+                        <p>Platform module covering lung volumes, PFTs, and breathing mechanics.</p>
+                        <a href="pulmonary-physiology-foundations.html">View Module →</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">📋 Quick Reference: EIB Severity</h3>
+                <div class="quick-facts">
+                    <div class="quick-fact">
+                        <span class="quick-fact-label">Diagnostic threshold</span>
+                        <span class="quick-fact-value">≥10% FEV₁ drop</span>
+                    </div>
+                    <div class="quick-fact">
+                        <span class="quick-fact-label">Mild</span>
+                        <span class="threshold-badge threshold-mild">10 - &lt;25%</span>
+                    </div>
+                    <div class="quick-fact">
+                        <span class="quick-fact-label">Moderate</span>
+                        <span class="threshold-badge threshold-moderate">25 - &lt;50%</span>
+                    </div>
+                    <div class="quick-fact">
+                        <span class="quick-fact-label">Severe</span>
+                        <span class="threshold-badge threshold-severe">≥50%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">⏱️ EIB vs EILO Timing</h3>
+                <div class="quick-facts">
+                    <div class="quick-fact">
+                        <span class="quick-fact-label">EIB onset</span>
+                        <span class="quick-fact-value">5-15 min POST</span>
+                    </div>
+                    <div class="quick-fact">
+                        <span class="quick-fact-label">EILO onset</span>
+                        <span class="quick-fact-value">DURING peak</span>
+                    </div>
+                    <div class="quick-fact">
+                        <span class="quick-fact-label">EIB resolution</span>
+                        <span class="quick-fact-value">30-90 min</span>
+                    </div>
+                    <div class="quick-fact">
+                        <span class="quick-fact-label">EILO resolution</span>
+                        <span class="quick-fact-value">2-5 min</span>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">💊 SABA Pre-Treatment</h3>
+                <div class="quick-facts">
+                    <div class="quick-fact">
+                        <span class="quick-fact-label">Timing</span>
+                        <span class="quick-fact-value">15-30 min before</span>
+                    </div>
+                    <div class="quick-fact">
+                        <span class="quick-fact-label">Dose</span>
+                        <span class="quick-fact-value">2 puffs (180-200 mcg)</span>
+                    </div>
+                    <div class="quick-fact">
+                        <span class="quick-fact-label">Protection</span>
+                        <span class="quick-fact-value">2-4 hours</span>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-card">
+                <h3 class="sidebar-title">🔗 Related Modules</h3>
+                <a href="pulmonary-physiology-foundations.html" class="sidebar-link">Pulmonary Physiology Foundations</a>
+                <a href="anaphylaxis-module.html" class="sidebar-link">Anaphylaxis</a>
+                <a href="type1-hypersensitivity.html" class="sidebar-link">Type 1 Hypersensitivity</a>
+                <a href="mast-cell-module.html" class="sidebar-link">Mast Cell Disorders</a>
+            </div>
+        </aside>
+    </div>
+    
+    <!-- EBRS JavaScript -->
+    <script>
+        // Question Data with Rubrics
+        const questionData = {
+            mcq1: {
+                correctAnswer: 2,
+                rubric: [
+                    { name: "Identifies osmotic/hyperosmolar theory", keywords: ["osmotic", "hyperosmolar", "dehydration", "water loss", "evaporation"], points: 3, hint: "Consider what happens to airway surfaces during hyperventilation" },
+                    { name: "Explains mast cell involvement", keywords: ["mast cell", "degranulation", "mediator", "histamine", "leukotriene"], points: 3, hint: "What cells release inflammatory mediators in response to osmotic stress?" },
+                    { name: "Addresses timing (post-exercise peak)", keywords: ["10 min", "post-exercise", "after", "peak", "45 min", "timing"], points: 2, hint: "When do EIB symptoms typically peak relative to exercise?" },
+                    { name: "Differentiates from EILO (option D)", keywords: ["EILO", "vocal cord", "inspiratory", "during exercise", "laryngeal"], points: 2, hint: "How does EILO timing and mechanism differ?" }
+                ],
+                explanations: {
+                    correct: "The <strong>osmotic theory</strong> is the accepted mechanism of EIB. During exercise hyperventilation, the airways cannot adequately warm and humidify the large volume of inspired air, leading to water loss and hyperosmolarity of the airway surface. This triggers <strong>mast cell degranulation</strong> with release of histamine, leukotrienes (LTC₄, LTD₄), and prostaglandins, causing bronchospasm. The timing (symptoms 10 min post-exercise, resolving in 45 min) is classic for EIB.",
+                    incorrect: [
+                        "Direct parasympathetic stimulation would cause bronchoconstriction during exercise, not afterward. The vagal pathway is not the primary mechanism in EIB.",
+                        "Circulating basophils are not the primary source of mediators in EIB. The inflammatory cascade originates from tissue mast cells in the airway responding to osmotic stress.",
+                        "",
+                        "Paradoxical vocal cord adduction describes EILO, not EIB. EILO causes inspiratory stridor during exercise that resolves rapidly after stopping - different timing and mechanism than this case."
+                    ]
+                },
+                resources: [
+                    { type: "StatPearls", title: "Exercise-Induced Bronchoconstriction - Pathophysiology", url: "https://www.ncbi.nlm.nih.gov/books/NBK557554/" },
+                    { type: "Platform", title: "Pulmonary Physiology Foundations", url: "pulmonary-physiology-foundations.html" },
+                    { type: "Review", title: "EIB Pathophysiology - Nature", url: "https://www.nature.com/articles/s41533-018-0098-2" }
+                ]
+            },
+            mcq2: {
+                correctAnswer: 0,
+                rubric: [
+                    { name: "Identifies EILO features", keywords: ["EILO", "laryngeal", "inspiratory", "stridor", "vocal cord", "throat"], points: 3, hint: "What condition causes inspiratory difficulty with throat sounds?" },
+                    { name: "Interprets negative exercise challenge", keywords: ["5%", "negative", "less than 10", "not EIB", "challenge"], points: 2, hint: "What does a 5% FEV₁ decline mean diagnostically?" },
+                    { name: "Explains albuterol ineffectiveness", keywords: ["upper airway", "not bronch", "larynx", "vocal", "bronchodilator"], points: 2, hint: "Why wouldn't a bronchodilator help an upper airway problem?" },
+                    { name: "Identifies CLE test as diagnostic", keywords: ["CLE", "laryngoscopy", "during exercise", "visualize"], points: 2, hint: "What test directly visualizes laryngeal function during exercise?" },
+                    { name: "Notes rapid resolution as EILO feature", keywords: ["rapid", "3 minute", "quick", "resolves fast", "during"], points: 1, hint: "How does EILO resolution time differ from EIB?" }
+                ],
+                explanations: {
+                    correct: "This presentation is classic for <strong>Exercise-Induced Laryngeal Obstruction (EILO)</strong>: inspiratory difficulty ('can't get air in'), stridor (high-pitched sound from throat), symptoms during peak exercise (not after), rapid resolution (3 min), no response to albuterol, negative exercise challenge (5% FEV₁ drop < 10% threshold), and demographics (adolescent female athlete). The gold standard for EILO diagnosis is <strong>continuous laryngoscopy during exercise (CLE test)</strong>.",
+                    incorrect: [
+                        "",
+                        "The exercise challenge was negative (only 5% FEV₁ decline, below the 10% threshold). Increasing albuterol won't help because this isn't EIB - it's an upper airway problem.",
+                        "While anxiety can coexist with EILO, this presentation has objective findings (stridor, negative bronchodilator response, specific timing) that point to a structural/functional upper airway problem.",
+                        "The patient doesn't have asthma - her exercise challenge was negative. Starting ICS without objective evidence of lower airway disease would be inappropriate."
+                    ]
+                },
+                resources: [
+                    { type: "StatPearls", title: "Exercise-Induced Laryngeal Obstruction", url: "https://www.ncbi.nlm.nih.gov/books/NBK556148/" },
+                    { type: "ERS", title: "Inducible Laryngeal Obstruction Statement", url: "https://publications.ersnet.org/content/erj/50/3/1602221" },
+                    { type: "Platform", title: "EIB vs EILO Comparison", url: "#" }
+                ]
+            },
+            mcq3: {
+                correctAnswer: 2,
+                rubric: [
+                    { name: "Identifies tachyphylaxis to SABA", keywords: ["tachyphylaxis", "tolerance", "less effective", "receptor", "downregulation"], points: 3, hint: "What happens with frequent β₂-agonist use?" },
+                    { name: "Explains ICS mechanism", keywords: ["inflammation", "ICS", "corticosteroid", "anti-inflammatory"], points: 2, hint: "How do inhaled corticosteroids work?" },
+                    { name: "Explains LTRA mechanism", keywords: ["leukotriene", "montelukast", "LTRA", "no tachyphylaxis"], points: 2, hint: "What's the advantage of montelukast regarding tolerance?" },
+                    { name: "References ATS stepwise approach", keywords: ["ATS", "step", "add", "guideline", "second-line"], points: 2, hint: "What do guidelines recommend when SABA alone is inadequate?" },
+                    { name: "Explains why LABA monotherapy is wrong", keywords: ["LABA", "monotherapy", "never alone", "asthma death", "tolerance"], points: 1, hint: "Why can't LABAs be used alone?" }
+                ],
+                explanations: {
+                    correct: "This patient is experiencing <strong>tachyphylaxis</strong> (reduced effectiveness) to daily SABA use, due to β₂-receptor downregulation. Per ATS guidelines, when pre-exercise SABA is inadequate, the next step is to ADD: <strong>daily ICS</strong> (reduces airway inflammation) OR <strong>daily LTRA (montelukast)</strong> (blocks leukotriene pathway with no tachyphylaxis). Both are evidence-based options for step-up therapy.",
+                    incorrect: [
+                        "Increasing SABA dose won't overcome tachyphylaxis - the issue is receptor downregulation, not insufficient drug delivery. This also increases side effect risk.",
+                        "LABAs should NEVER be used as monotherapy - they're associated with increased asthma deaths when used without ICS. They also develop tolerance similar to SABAs.",
+                        "",
+                        "A 'SABA holiday' might restore some sensitivity but leaves the patient unprotected and doesn't address underlying airway inflammation. Not an evidence-based approach."
+                    ]
+                },
+                resources: [
+                    { type: "Guidelines", title: "ATS EIB Treatment Algorithm", url: "https://www.atsjournals.org/doi/full/10.1164/rccm.201303-0437ST" },
+                    { type: "Platform", title: "Asthma Medications - Mechanisms", url: "pulmonary-physiology-foundations.html" },
+                    { type: "GINA", title: "Stepwise Asthma Management", url: "https://ginasthma.org/gina-reports/" }
+                ]
+            }
+        };
+        
+        const selectedAnswers = {};
+        const inputModes = {};
+        const recordings = {};
+        
+        // Voice Recording Setup
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+            document.addEventListener('DOMContentLoaded', function() {
+                const warning = document.getElementById('voice-warning');
+                if (warning) warning.classList.add('show');
+            });
+        }
+        
+        function selectAnswer(element, mcqId) {
+            if (selectedAnswers[mcqId]?.submitted) return;
+            const container = document.getElementById(mcqId);
+            container.querySelectorAll('.mcq-option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedAnswers[mcqId] = { index: parseInt(element.dataset.index), submitted: false };
+            document.getElementById('explain-' + mcqId).classList.add('show');
+        }
+        
+        function setInputMode(mcqId, mode) {
+            inputModes[mcqId] = mode;
+            const textBtn = document.getElementById('text-btn-' + mcqId);
+            const voiceBtn = document.getElementById('voice-btn-' + mcqId);
+            const textInput = document.getElementById('text-input-' + mcqId);
+            const voiceInput = document.getElementById('voice-input-' + mcqId);
+            
+            if (mode === 'text') {
+                textBtn.classList.add('active');
+                voiceBtn.classList.remove('active');
+                textInput.classList.remove('hide');
+                voiceInput.classList.remove('show');
+            } else {
+                textBtn.classList.remove('active');
+                voiceBtn.classList.add('active');
+                textInput.classList.add('hide');
+                voiceInput.classList.add('show');
+            }
+            updateSubmitButton(mcqId);
+        }
+        
+        function toggleRecording(mcqId) {
+            if (!SpeechRecognition) {
+                alert('Speech recognition not supported. Please use Chrome, Edge, or Safari, or use the text option.');
+                return;
+            }
+            
+            const recordBtn = document.getElementById('record-btn-' + mcqId);
+            const status = document.getElementById('status-' + mcqId);
+            const transcript = document.getElementById('transcript-' + mcqId);
+            
+            if (recordings[mcqId]?.active) {
+                recordings[mcqId].recognition.stop();
+                recordings[mcqId].active = false;
+                recordBtn.classList.remove('recording');
+                status.classList.remove('active');
+                status.innerHTML = 'Click to continue recording';
+            } else {
+                const recognition = new SpeechRecognition();
+                recognition.continuous = true;
+                recognition.interimResults = true;
+                recognition.lang = 'en-US';
+                
+                if (!recordings[mcqId]) {
+                    recordings[mcqId] = { recognition, active: true, finalTranscript: '' };
+                } else {
+                    recordings[mcqId].recognition = recognition;
+                    recordings[mcqId].active = true;
+                }
+                
+                recognition.onstart = () => {
+                    recordBtn.classList.add('recording');
+                    status.classList.add('active');
+                    status.innerHTML = '<span class="recording-dot"></span> Recording... (click to pause)';
+                };
+                
+                recognition.onresult = (event) => {
+                    let interimTranscript = '';
+                    for (let i = event.resultIndex; i < event.results.length; i++) {
+                        if (event.results[i].isFinal) {
+                            recordings[mcqId].finalTranscript += event.results[i][0].transcript + ' ';
+                        } else {
+                            interimTranscript += event.results[i][0].transcript;
+                        }
+                    }
+                    transcript.classList.remove('empty');
+                    transcript.innerHTML = recordings[mcqId].finalTranscript + '<span style="color: #94a3b8;">' + interimTranscript + '</span>';
+                    updateSubmitButton(mcqId);
+                };
+                
+                recognition.onerror = (event) => {
+                    console.error('Speech recognition error:', event.error);
+                    if (event.error !== 'aborted') {
+                        status.innerHTML = 'Error: ' + event.error + '. Click to try again.';
+                    }
+                    recordBtn.classList.remove('recording');
+                    recordings[mcqId].active = false;
+                };
+                
+                recognition.onend = () => {
+                    recordBtn.classList.remove('recording');
+                    status.classList.remove('active');
+                    if (recordings[mcqId].finalTranscript) {
+                        const wordCount = recordings[mcqId].finalTranscript.split(' ').filter(w => w.length > 0).length;
+                        status.innerHTML = '✓ Recording saved (' + wordCount + ' words). Click to add more.';
+                    } else {
+                        status.innerHTML = 'Click to start recording';
+                    }
+                    recordings[mcqId].active = false;
+                    updateSubmitButton(mcqId);
+                };
+                
+                recognition.start();
+            }
+        }
+        
+        function clearRecording(mcqId) {
+            if (recordings[mcqId]) {
+                if (recordings[mcqId].active && recordings[mcqId].recognition) {
+                    recordings[mcqId].recognition.stop();
+                }
+                recordings[mcqId].finalTranscript = '';
+                recordings[mcqId].active = false;
+            }
+            const transcript = document.getElementById('transcript-' + mcqId);
+            const status = document.getElementById('status-' + mcqId);
+            if (transcript) {
+                transcript.innerHTML = 'Your spoken explanation will appear here...';
+                transcript.classList.add('empty');
+            }
+            if (status) {
+                status.innerHTML = 'Click to start recording';
+                status.classList.remove('active');
+            }
+            const recordBtn = document.getElementById('record-btn-' + mcqId);
+            if (recordBtn) recordBtn.classList.remove('recording');
+            updateSubmitButton(mcqId);
+        }
+        
+        function getExplanationText(mcqId) {
+            const mode = inputModes[mcqId] || 'text';
+            if (mode === 'text') {
+                return document.getElementById('input-' + mcqId).value;
+            } else {
+                return recordings[mcqId]?.finalTranscript || '';
+            }
+        }
+        
+        function updateSubmitButton(mcqId) {
+            const btn = document.getElementById('btn-' + mcqId);
+            const mode = inputModes[mcqId] || 'text';
+            
+            if (mode === 'text') {
+                const input = document.getElementById('input-' + mcqId);
+                btn.disabled = input.value.length < 100;
+            } else {
+                const transcript = recordings[mcqId]?.finalTranscript || '';
+                btn.disabled = transcript.split(' ').filter(w => w.length > 0).length < 20;
+            }
+        }
+        
+        function updateCharCount(mcqId) {
+            const input = document.getElementById('input-' + mcqId);
+            const count = document.getElementById('count-' + mcqId);
+            const len = input.value.length;
+            count.textContent = len + ' / 100 minimum characters';
+            if (len < 100) { count.classList.add('low'); }
+            else { count.classList.remove('low'); }
+            updateSubmitButton(mcqId);
+        }
+        
+        function scoreExplanation(text, rubric) {
+            let score = 0, maxScore = 0, feedback = [];
+            rubric.forEach(criterion => {
+                maxScore += criterion.points;
+                const found = criterion.keywords.some(kw => text.toLowerCase().includes(kw.toLowerCase()));
+                if (found) { score += criterion.points; feedback.push({ ...criterion, met: true }); }
+                else { feedback.push({ ...criterion, met: false }); }
+            });
+            return { score, maxScore, percentage: Math.round((score / maxScore) * 100), feedback };
+        }
+        
+        function submitExplanation(mcqId) {
+            const data = questionData[mcqId];
+            const userAnswer = selectedAnswers[mcqId].index;
+            const userExplanation = getExplanationText(mcqId);
+            const isCorrect = userAnswer === data.correctAnswer;
+            selectedAnswers[mcqId].submitted = true;
+            const score = scoreExplanation(userExplanation, data.rubric);
+            document.getElementById('explain-' + mcqId).classList.remove('show');
+            
+            const container = document.getElementById(mcqId);
+            const options = container.querySelectorAll('.mcq-option');
+            options.forEach((opt, i) => {
+                opt.classList.add('disabled');
+                if (i === data.correctAnswer) opt.classList.add('correct');
+                else if (i === userAnswer && !isCorrect) opt.classList.add('incorrect');
+            });
+            
+            let scoreClass = score.percentage >= 75 ? '' : score.percentage >= 50 ? 'medium' : 'low';
+            const feedbackDiv = document.getElementById('feedback-' + mcqId);
+            feedbackDiv.innerHTML = `
+                <div class="answer-banner ${isCorrect ? 'correct' : 'incorrect'}">
+                    <span class="answer-icon">${isCorrect ? '✓' : '✗'}</span>
+                    <span class="answer-text">${isCorrect ? 'Correct!' : 'Incorrect'}</span>
+                    <span class="correct-answer">Correct Answer: ${String.fromCharCode(65 + data.correctAnswer)}</span>
+                </div>
+                <div class="score-card">
+                    <h4>📊 Explanation Quality Score</h4>
+                    <div class="score-header">
+                        <div><div class="score-percentage">${score.percentage}%</div><div class="score-label">${score.score} / ${score.maxScore} points</div></div>
+                    </div>
+                    <div class="score-bar"><div class="score-fill ${scoreClass}" style="width: ${score.percentage}%"></div></div>
+                    <div class="rubric-feedback">
+                        ${score.feedback.map(f => `
+                            <div class="rubric-item ${f.met ? 'met' : 'not-met'}">
+                                <span class="rubric-icon">${f.met ? '✓' : '○'}</span>
+                                <div class="rubric-content">
+                                    <span class="rubric-name">${f.name} (${f.points} pts)</span>
+                                    ${!f.met ? '<span class="rubric-hint">' + f.hint + '</span>' : ''}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                <div class="expert-card">
+                    <h4>📚 Expert Explanation</h4>
+                    <div class="expert-content">
+                        <p><strong>Why ${String.fromCharCode(65 + data.correctAnswer)} is correct:</strong></p>
+                        <p>${data.explanations.correct}</p>
+                        <p style="margin-top: 20px;"><strong>Why other options are incorrect:</strong></p>
+                        ${data.explanations.incorrect.map((exp, i) => {
+                            if (i === data.correctAnswer || !exp) return '';
+                            return '<div class="distractor-item"><span class="distractor-letter">' + String.fromCharCode(65 + i) + ':</span> ' + exp + '</div>';
+                        }).join('')}
+                    </div>
+                </div>
+                ${(score.percentage < 80 || !isCorrect) ? `
+                <div class="resources-card">
+                    <h4>📖 Strengthen Your Understanding</h4>
+                    <p class="resources-intro">Based on your explanation, these resources may help:</p>
+                    <div class="resource-links">
+                        ${data.resources.map(r => `
+                            <a href="${r.url}" target="_blank" class="resource-link">
+                                <span class="resource-type">${r.type}</span>
+                                <span class="resource-title">${r.title}</span>
+                            </a>
+                        `).join('')}
+                    </div>
+                </div>
+                ` : ''}
+            `;
+            feedbackDiv.classList.add('show');
+            feedbackDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
     </script>
 </body>
 </html>
