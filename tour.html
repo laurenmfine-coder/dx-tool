@@ -5,892 +5,512 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tour | Dx Learning Ecosystem</title>
     <meta name="description" content="Explore the three platforms of the Dx Learning Ecosystem: ReasonDx for clinical cases, MechanismDx for pathophysiology, and CoachDx for AI-powered feedback.">
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="dx-design-system.css">
     <style>
-        /* Tour Page Styles */
-        .tour-nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--dx-border-light);
-            padding: var(--dx-space-3) var(--dx-space-6);
-            z-index: 100;
+        :root {
+            --primary: #1E3A5F;
+            --primary-light: #2563EB;
+            --reason-blue: #4F46E5;
+            --mechanism-green: #10B981;
+            --coach-purple: #8B5CF6;
+            --bg: #F8FAFC;
+            --bg-white: #FFFFFF;
+            --text: #1F2937;
+            --text-light: #6B7280;
+            --border: #E5E7EB;
         }
         
-        .tour-nav-inner {
-            max-width: 1200px;
-            margin: 0 auto;
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            min-height: 100vh;
+            color: var(--text);
+        }
+        
+        /* Navigation - Links go to actual platforms */
+        .nav {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 16px 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         
-        .tour-nav-brand {
+        .nav-brand {
             display: flex;
             align-items: center;
-            gap: var(--dx-space-2);
+            gap: 10px;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
             text-decoration: none;
-            color: var(--dx-text-primary);
-            font-weight: var(--dx-font-bold);
-            font-size: var(--dx-text-lg);
         }
         
-        .tour-nav-links {
+        .nav-brand-icon { font-size: 1.5rem; }
+        
+        .nav-links {
             display: flex;
             align-items: center;
-            gap: var(--dx-space-2);
+            gap: 8px;
         }
         
-        .tour-nav-link {
-            padding: var(--dx-space-2) var(--dx-space-4);
-            color: var(--dx-text-secondary);
+        .nav-link {
+            padding: 10px 16px;
+            color: var(--text-light);
             text-decoration: none;
-            font-size: var(--dx-text-sm);
-            font-weight: var(--dx-font-medium);
-            border-radius: var(--dx-radius-md);
-            transition: all var(--dx-transition-fast);
+            font-size: 0.95rem;
+            border-radius: 8px;
+            transition: all 0.2s;
         }
         
-        .tour-nav-link:hover {
-            color: var(--dx-text-primary);
-            background: var(--dx-bg-tertiary);
+        .nav-link:hover {
+            background: var(--bg);
+            color: var(--text);
         }
         
-        .tour-nav-cta {
-            background: var(--dx-blue-500);
+        .nav-link.reason:hover { color: var(--reason-blue); }
+        .nav-link.mechanism:hover { color: var(--mechanism-green); }
+        .nav-link.coach:hover { color: var(--coach-purple); }
+        
+        .nav-cta {
+            background: var(--primary-light);
             color: white !important;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 500;
         }
         
-        .tour-nav-cta:hover {
-            background: var(--dx-blue-600) !important;
+        .nav-cta:hover {
+            background: var(--primary);
         }
         
         /* Hero */
-        .tour-hero {
-            padding: 140px var(--dx-space-6) var(--dx-space-12);
-            text-align: center;
-            background: linear-gradient(180deg, #eff6ff 0%, #ffffff 100%);
-        }
-        
-        .tour-hero h1 {
-            font-size: var(--dx-text-4xl);
-            font-weight: 800;
-            color: var(--dx-text-primary);
-            margin-bottom: var(--dx-space-4);
-        }
-        
-        .tour-hero p {
-            font-size: var(--dx-text-xl);
-            color: var(--dx-text-secondary);
-            max-width: 600px;
-            margin: 0 auto var(--dx-space-8);
-        }
-        
-        .tour-tabs {
-            display: flex;
-            justify-content: center;
-            gap: var(--dx-space-2);
-            flex-wrap: wrap;
-        }
-        
-        .tour-tab {
-            padding: var(--dx-space-3) var(--dx-space-6);
-            background: white;
-            border: 2px solid var(--dx-border-light);
-            border-radius: var(--dx-radius-lg);
-            font-size: var(--dx-text-base);
-            font-weight: var(--dx-font-semibold);
-            cursor: pointer;
-            transition: all var(--dx-transition-fast);
-            display: flex;
-            align-items: center;
-            gap: var(--dx-space-2);
-        }
-        
-        .tour-tab:hover {
-            border-color: var(--dx-blue-300);
-            background: var(--dx-blue-50);
-        }
-        
-        .tour-tab.active {
-            border-color: var(--dx-blue-500);
-            background: var(--dx-blue-500);
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
             color: white;
+            padding: 80px 32px;
+            text-align: center;
         }
         
-        .tour-tab.active.reason { background: var(--dx-blue-500); border-color: var(--dx-blue-500); }
-        .tour-tab.active.mechanism { background: var(--dx-green-500); border-color: var(--dx-green-500); }
-        .tour-tab.active.coach { background: var(--dx-purple-500); border-color: var(--dx-purple-500); }
-        
-        /* Platform Sections */
-        .platform-section {
-            padding: var(--dx-space-16) var(--dx-space-6);
-            scroll-margin-top: 80px;
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 16px;
         }
         
-        .platform-section:nth-child(even) {
-            background: var(--dx-bg-primary);
-        }
-        
-        .platform-inner {
-            max-width: 1100px;
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
             margin: 0 auto;
         }
         
-        .platform-header {
-            text-align: center;
-            margin-bottom: var(--dx-space-10);
+        /* Section Tabs - These scroll within the tour page */
+        .section-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            padding: 24px;
+            background: white;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 65px;
+            z-index: 90;
+        }
+        
+        .section-tab {
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-decoration: none;
+            color: var(--text-light);
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .section-tab:hover {
+            border-color: var(--primary-light);
+            color: var(--primary-light);
+        }
+        
+        .section-tab.active {
+            background: var(--primary-light);
+            color: white;
+            border-color: var(--primary-light);
+        }
+        
+        /* Platform Sections */
+        .platform-section {
+            padding: 80px 32px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .platform-section:nth-child(even) {
+            background: white;
         }
         
         .platform-badge {
             display: inline-flex;
             align-items: center;
-            gap: var(--dx-space-2);
-            padding: var(--dx-space-2) var(--dx-space-4);
-            border-radius: var(--dx-radius-full);
-            font-size: var(--dx-text-sm);
-            font-weight: var(--dx-font-semibold);
-            margin-bottom: var(--dx-space-4);
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 20px;
         }
         
-        .platform-badge.reason { background: var(--dx-blue-100); color: var(--dx-blue-600); }
-        .platform-badge.mechanism { background: var(--dx-green-100); color: var(--dx-green-600); }
-        .platform-badge.coach { background: var(--dx-purple-100); color: var(--dx-purple-600); }
-        
-        .platform-title {
-            font-size: var(--dx-text-3xl);
-            font-weight: var(--dx-font-bold);
-            color: var(--dx-text-primary);
-            margin-bottom: var(--dx-space-4);
+        .platform-section.reason .platform-badge {
+            background: #EEF2FF;
+            color: var(--reason-blue);
         }
         
-        .platform-subtitle {
-            font-size: var(--dx-text-lg);
-            color: var(--dx-text-secondary);
-            max-width: 600px;
-            margin: 0 auto;
+        .platform-section.mechanism .platform-badge {
+            background: #ECFDF5;
+            color: var(--mechanism-green);
         }
         
-        /* Preview Cards */
-        .preview-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--dx-space-8);
-            align-items: center;
-            margin-bottom: var(--dx-space-8);
+        .platform-section.coach .platform-badge {
+            background: #FAF5FF;
+            color: var(--coach-purple);
         }
         
-        @media (max-width: 868px) {
-            .preview-grid {
-                grid-template-columns: 1fr;
-            }
+        .platform-section h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
         }
         
-        .preview-content h3 {
-            font-size: var(--dx-text-xl);
-            font-weight: var(--dx-font-semibold);
-            color: var(--dx-text-primary);
-            margin-bottom: var(--dx-space-4);
-        }
+        .platform-section.reason h2 { color: var(--reason-blue); }
+        .platform-section.mechanism h2 { color: var(--mechanism-green); }
+        .platform-section.coach h2 { color: var(--coach-purple); }
         
-        .preview-content p {
-            color: var(--dx-text-secondary);
-            margin-bottom: var(--dx-space-6);
-            line-height: 1.7;
-        }
-        
-        .preview-features {
-            display: flex;
-            flex-direction: column;
-            gap: var(--dx-space-3);
-            margin-bottom: var(--dx-space-6);
-        }
-        
-        .preview-feature {
-            display: flex;
-            align-items: flex-start;
-            gap: var(--dx-space-3);
-        }
-        
-        .preview-feature-icon {
-            width: 24px;
-            height: 24px;
-            border-radius: var(--dx-radius-full);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-        
-        .preview-feature-icon.reason { background: var(--dx-blue-100); }
-        .preview-feature-icon.mechanism { background: var(--dx-green-100); }
-        .preview-feature-icon.coach { background: var(--dx-purple-100); }
-        
-        .preview-feature-text {
-            font-size: var(--dx-text-sm);
-            color: var(--dx-text-secondary);
-        }
-        
-        .preview-feature-text strong {
-            color: var(--dx-text-primary);
-        }
-        
-        /* Mock Preview Windows */
-        .preview-window {
-            background: white;
-            border-radius: var(--dx-radius-xl);
-            box-shadow: var(--dx-shadow-xl);
-            overflow: hidden;
-            border: 1px solid var(--dx-border-light);
-        }
-        
-        .preview-window-header {
-            background: var(--dx-bg-tertiary);
-            padding: var(--dx-space-3) var(--dx-space-4);
-            display: flex;
-            align-items: center;
-            gap: var(--dx-space-2);
-            border-bottom: 1px solid var(--dx-border-light);
-        }
-        
-        .preview-window-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--dx-border-medium);
-        }
-        
-        .preview-window-dot:nth-child(1) { background: #ff5f57; }
-        .preview-window-dot:nth-child(2) { background: #ffbd2e; }
-        .preview-window-dot:nth-child(3) { background: #28ca41; }
-        
-        .preview-window-body {
-            padding: var(--dx-space-6);
-        }
-        
-        /* ReasonDx Preview */
-        .case-preview {
-            background: linear-gradient(135deg, #eff6ff, #dbeafe);
-            border-radius: var(--dx-radius-lg);
-            padding: var(--dx-space-5);
-            margin-bottom: var(--dx-space-4);
-        }
-        
-        .case-preview-label {
-            font-size: var(--dx-text-xs);
-            font-weight: var(--dx-font-semibold);
-            color: var(--dx-blue-600);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: var(--dx-space-2);
-        }
-        
-        .case-preview-title {
-            font-size: var(--dx-text-lg);
-            font-weight: var(--dx-font-semibold);
-            color: var(--dx-text-primary);
-            margin-bottom: var(--dx-space-2);
-        }
-        
-        .case-preview-text {
-            font-size: var(--dx-text-sm);
-            color: var(--dx-text-secondary);
+        .platform-section .description {
+            font-size: 1.15rem;
+            color: var(--text-light);
             line-height: 1.6;
+            margin-bottom: 40px;
+            max-width: 700px;
         }
         
-        .case-options {
-            display: flex;
-            flex-direction: column;
-            gap: var(--dx-space-2);
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
         }
         
-        .case-option {
-            padding: var(--dx-space-3) var(--dx-space-4);
-            background: var(--dx-bg-tertiary);
-            border-radius: var(--dx-radius-md);
-            font-size: var(--dx-text-sm);
-            color: var(--dx-text-secondary);
-            display: flex;
-            align-items: center;
-            gap: var(--dx-space-3);
+        .feature-card {
+            background: var(--bg);
+            border-radius: 16px;
+            padding: 28px;
+            border: 1px solid var(--border);
         }
         
-        .case-option-circle {
-            width: 18px;
-            height: 18px;
-            border: 2px solid var(--dx-border-medium);
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-        
-        .case-option.selected {
-            background: var(--dx-blue-100);
-            border: 2px solid var(--dx-blue-500);
-        }
-        
-        .case-option.selected .case-option-circle {
-            background: var(--dx-blue-500);
-            border-color: var(--dx-blue-500);
-        }
-        
-        /* MechanismDx Preview */
-        .module-preview-card {
-            background: white;
-            border: 1px solid var(--dx-border-light);
-            border-radius: var(--dx-radius-lg);
-            padding: var(--dx-space-4);
-            margin-bottom: var(--dx-space-3);
+        .feature-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
-            gap: var(--dx-space-4);
+            gap: 10px;
         }
         
-        .module-preview-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--dx-green-100);
-            border-radius: var(--dx-radius-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            flex-shrink: 0;
-        }
-        
-        .module-preview-info h4 {
-            font-size: var(--dx-text-base);
-            font-weight: var(--dx-font-semibold);
-            color: var(--dx-text-primary);
-            margin-bottom: 2px;
-        }
-        
-        .module-preview-info p {
-            font-size: var(--dx-text-xs);
-            color: var(--dx-text-tertiary);
-            margin: 0;
-        }
-        
-        .module-preview-stats {
-            margin-left: auto;
-            text-align: right;
-        }
-        
-        .module-preview-stats span {
-            display: block;
-            font-size: var(--dx-text-xs);
-            color: var(--dx-text-tertiary);
-        }
-        
-        .module-preview-stats strong {
-            color: var(--dx-green-500);
-        }
-        
-        /* CoachDx Preview */
-        .chat-preview {
-            display: flex;
-            flex-direction: column;
-            gap: var(--dx-space-3);
-        }
-        
-        .chat-bubble {
-            max-width: 85%;
-            padding: var(--dx-space-3) var(--dx-space-4);
-            border-radius: var(--dx-radius-lg);
-            font-size: var(--dx-text-sm);
+        .feature-card p {
+            font-size: 0.95rem;
+            color: var(--text-light);
             line-height: 1.5;
         }
         
-        .chat-bubble.user {
-            background: var(--dx-purple-500);
-            color: white;
-            margin-left: auto;
-            border-bottom-right-radius: 4px;
-        }
-        
-        .chat-bubble.ai {
-            background: var(--dx-bg-tertiary);
-            color: var(--dx-text-primary);
-            border-bottom-left-radius: 4px;
-        }
-        
-        .chat-bubble.ai strong {
-            color: var(--dx-purple-600);
-        }
-        
-        /* Sample Content Grid */
-        .sample-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--dx-space-4);
-            margin-top: var(--dx-space-8);
-        }
-        
-        @media (max-width: 768px) {
-            .sample-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .sample-card {
-            background: white;
-            border: 1px solid var(--dx-border-light);
-            border-radius: var(--dx-radius-lg);
-            padding: var(--dx-space-5);
-            text-align: center;
-            transition: all var(--dx-transition-fast);
-        }
-        
-        .sample-card:hover {
-            border-color: var(--dx-blue-300);
-            box-shadow: var(--dx-shadow-md);
-            transform: translateY(-2px);
-        }
-        
-        .sample-card-icon {
-            font-size: 32px;
-            margin-bottom: var(--dx-space-3);
-        }
-        
-        .sample-card-title {
-            font-weight: var(--dx-font-semibold);
-            color: var(--dx-text-primary);
-            margin-bottom: var(--dx-space-1);
-        }
-        
-        .sample-card-meta {
-            font-size: var(--dx-text-xs);
-            color: var(--dx-text-tertiary);
-        }
-        
-        /* Try It CTA */
-        .try-cta {
-            text-align: center;
-            margin-top: var(--dx-space-8);
-        }
-        
+        /* Try Button */
         .try-btn {
             display: inline-flex;
             align-items: center;
-            gap: var(--dx-space-2);
-            padding: var(--dx-space-4) var(--dx-space-8);
-            border-radius: var(--dx-radius-lg);
-            font-size: var(--dx-text-lg);
-            font-weight: var(--dx-font-semibold);
+            gap: 10px;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: 600;
             text-decoration: none;
-            transition: all var(--dx-transition-base);
-        }
-        
-        .try-btn.reason {
-            background: var(--dx-blue-500);
             color: white;
+            transition: all 0.2s;
         }
         
-        .try-btn.reason:hover {
-            background: var(--dx-blue-600);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+        .try-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
         
-        .try-btn.mechanism {
-            background: var(--dx-green-500);
-            color: white;
-        }
+        .platform-section.reason .try-btn { background: var(--reason-blue); }
+        .platform-section.mechanism .try-btn { background: var(--mechanism-green); }
+        .platform-section.coach .try-btn { background: var(--coach-purple); }
         
-        .try-btn.mechanism:hover {
-            background: var(--dx-green-600);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
-        }
-        
-        .try-btn.coach {
-            background: var(--dx-purple-500);
-            color: white;
-        }
-        
-        .try-btn.coach:hover {
-            background: var(--dx-purple-600);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 14px rgba(139, 92, 246, 0.4);
-        }
-        
-        /* Final CTA Section */
-        .final-cta {
-            padding: var(--dx-space-16) var(--dx-space-6);
-            background: linear-gradient(135deg, var(--dx-blue-600) 0%, var(--dx-purple-600) 100%);
+        /* Ecosystem Note */
+        .ecosystem-note {
+            background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%);
+            border: 1px solid #BAE6FD;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin: 60px auto;
+            max-width: 700px;
             text-align: center;
+        }
+        
+        .ecosystem-note-title {
+            font-weight: 600;
+            color: #0369A1;
+            margin-bottom: 8px;
+        }
+        
+        .ecosystem-note-text {
+            color: #0C4A6E;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        /* Final CTA */
+        .final-cta {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
             color: white;
+            padding: 80px 32px;
+            text-align: center;
         }
         
         .final-cta h2 {
-            font-size: var(--dx-text-3xl);
-            font-weight: var(--dx-font-bold);
-            margin-bottom: var(--dx-space-4);
+            font-size: 2rem;
+            margin-bottom: 16px;
         }
         
         .final-cta p {
-            font-size: var(--dx-text-lg);
+            font-size: 1.1rem;
             opacity: 0.9;
-            margin-bottom: var(--dx-space-8);
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
+            margin-bottom: 32px;
         }
         
         .final-cta-btn {
             display: inline-flex;
             align-items: center;
-            gap: var(--dx-space-2);
+            gap: 10px;
             background: white;
-            color: var(--dx-blue-600);
-            padding: var(--dx-space-4) var(--dx-space-8);
-            border-radius: var(--dx-radius-lg);
-            font-size: var(--dx-text-lg);
-            font-weight: var(--dx-font-semibold);
+            color: var(--primary-light);
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
             text-decoration: none;
-            transition: all var(--dx-transition-base);
+            transition: all 0.2s;
         }
         
         .final-cta-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
         
         /* Footer */
-        .tour-footer {
-            background: var(--dx-text-primary);
+        .footer {
+            background: var(--primary);
             color: white;
-            padding: var(--dx-space-8) var(--dx-space-6);
+            padding: 32px;
             text-align: center;
         }
         
-        .tour-footer p {
-            opacity: 0.6;
-            font-size: var(--dx-text-sm);
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
         }
         
-        .tour-footer a {
-            color: var(--dx-blue-300);
+        .footer-link {
+            color: rgba(255,255,255,0.7);
             text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .footer-link:hover { color: white; }
+        
+        .footer-copy {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.8rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .platform-section { padding: 60px 20px; }
+            .section-tabs { flex-wrap: wrap; }
+            .nav-links { display: none; }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="tour-nav">
-        <div class="tour-nav-inner">
-            <a href="index.html" class="tour-nav-brand">
-                <span style="font-size: 24px;">🏥</span>
-                <span>Dx Ecosystem</span>
-            </a>
-            <div class="tour-nav-links">
-                <a href="#reasondx" class="tour-nav-link">ReasonDx</a>
-                <a href="#mechanismdx" class="tour-nav-link">MechanismDx</a>
-                <a href="#coachdx" class="tour-nav-link">CoachDx</a>
-                <a href="dx-dashboard.html" class="tour-nav-link tour-nav-cta">Get Started →</a>
-            </div>
+    <!-- Navigation - Links go DIRECTLY to platforms -->
+    <nav class="nav">
+        <a href="index.html" class="nav-brand">
+            <span class="nav-brand-icon">🏥</span>
+            <span>Dx Ecosystem</span>
+        </a>
+        <div class="nav-links">
+            <a href="ReasonDx/training.html" class="nav-link reason">ReasonDx</a>
+            <a href="mechanism/index.html" class="nav-link mechanism">MechanismDx</a>
+            <a href="CoachDx/case-library.html" class="nav-link coach">CoachDx</a>
+            <a href="dx-dashboard.html" class="nav-link nav-cta">Get Started →</a>
         </div>
     </nav>
     
     <!-- Hero -->
-    <section class="tour-hero">
+    <section class="hero">
         <h1>Three Platforms. One Goal.</h1>
         <p>See how each part of the Dx Ecosystem helps you master clinical reasoning in a different way.</p>
-        <div class="tour-tabs">
-            <a href="#reasondx" class="tour-tab reason">🔬 ReasonDx</a>
-            <a href="#mechanismdx" class="tour-tab mechanism">📚 MechanismDx</a>
-            <a href="#coachdx" class="tour-tab coach">🧠 CoachDx</a>
-        </div>
     </section>
     
+    <!-- Section Tabs - These scroll within the tour page -->
+    <div class="section-tabs">
+        <a href="#reasondx" class="section-tab">🩺 ReasonDx</a>
+        <a href="#mechanismdx" class="section-tab">⚙️ MechanismDx</a>
+        <a href="#coachdx" class="section-tab">💬 CoachDx</a>
+    </div>
+    
+    <!-- Ecosystem Note -->
+    <div class="ecosystem-note">
+        <div class="ecosystem-note-title">💡 About the naming</div>
+        <p class="ecosystem-note-text">
+            The <strong>Dx Ecosystem</strong> (at reasondx.com) contains three integrated platforms:
+            <strong>ReasonDx</strong> for clinical cases,
+            <strong>MechanismDx</strong> for pathophysiology, and
+            <strong>CoachDx</strong> for AI coaching.
+        </p>
+    </div>
+    
     <!-- ReasonDx Section -->
-    <section class="platform-section" id="reasondx">
-        <div class="platform-inner">
-            <div class="platform-header">
-                <span class="platform-badge reason">🔬 Platform 1 of 3</span>
-                <h2 class="platform-title">ReasonDx</h2>
-                <p class="platform-subtitle">Practice clinical decision-making with interactive patient cases that challenge you to think like a physician.</p>
+    <section id="reasondx" class="platform-section reason">
+        <span class="platform-badge">🩺 Platform 1 of 3</span>
+        <h2>ReasonDx</h2>
+        <p class="description">Practice clinical decision-making with interactive patient cases that challenge you to think like a physician. Work through differential diagnosis, history taking, physical exam, and management step-by-step.</p>
+        
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>📋 200+ Clinical Cases</h3>
+                <p>From common presentations to complex diagnoses across all major medical specialties.</p>
             </div>
-            
-            <div class="preview-grid">
-                <div class="preview-content">
-                    <h3>Learn by Doing</h3>
-                    <p>Work through realistic patient scenarios step by step. Gather history, order tests, build differentials, and make diagnoses—just like you will in the clinic.</p>
-                    
-                    <div class="preview-features">
-                        <div class="preview-feature">
-                            <span class="preview-feature-icon reason">✓</span>
-                            <span class="preview-feature-text"><strong>200+ clinical cases</strong> across all major specialties</span>
-                        </div>
-                        <div class="preview-feature">
-                            <span class="preview-feature-icon reason">✓</span>
-                            <span class="preview-feature-text"><strong>Step-by-step reasoning</strong> with expert explanations</span>
-                        </div>
-                        <div class="preview-feature">
-                            <span class="preview-feature-icon reason">✓</span>
-                            <span class="preview-feature-text"><strong>Confidence calibration</strong> to track your certainty</span>
-                        </div>
-                        <div class="preview-feature">
-                            <span class="preview-feature-icon reason">✓</span>
-                            <span class="preview-feature-text"><strong>Instant feedback</strong> on your clinical decisions</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="preview-window">
-                    <div class="preview-window-header">
-                        <span class="preview-window-dot"></span>
-                        <span class="preview-window-dot"></span>
-                        <span class="preview-window-dot"></span>
-                    </div>
-                    <div class="preview-window-body">
-                        <div class="case-preview">
-                            <div class="case-preview-label">Case: Chest Pain</div>
-                            <div class="case-preview-title">58-year-old male with acute onset chest pain</div>
-                            <div class="case-preview-text">The patient describes substernal pressure radiating to his left arm, associated with diaphoresis. Symptoms began 2 hours ago while mowing the lawn.</div>
-                        </div>
-                        <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;">What is your leading diagnosis?</p>
-                        <div class="case-options">
-                            <div class="case-option">
-                                <span class="case-option-circle"></span>
-                                Pulmonary embolism
-                            </div>
-                            <div class="case-option selected">
-                                <span class="case-option-circle"></span>
-                                Acute coronary syndrome
-                            </div>
-                            <div class="case-option">
-                                <span class="case-option-circle"></span>
-                                Aortic dissection
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="feature-card">
+                <h3>🤖 AI Patient Interviews</h3>
+                <p>Practice taking history with realistic AI patients who respond naturally to your questions.</p>
             </div>
-            
-            <div class="sample-grid">
-                <div class="sample-card">
-                    <div class="sample-card-icon">🫀</div>
-                    <div class="sample-card-title">Cardiology Cases</div>
-                    <div class="sample-card-meta">ACS, Heart Failure, Arrhythmias</div>
-                </div>
-                <div class="sample-card">
-                    <div class="sample-card-icon">🫁</div>
-                    <div class="sample-card-title">Pulmonary Cases</div>
-                    <div class="sample-card-meta">PE, Pneumonia, COPD</div>
-                </div>
-                <div class="sample-card">
-                    <div class="sample-card-icon">🧠</div>
-                    <div class="sample-card-title">Neurology Cases</div>
-                    <div class="sample-card-meta">Stroke, AMS, Seizures</div>
-                </div>
+            <div class="feature-card">
+                <h3>📊 5-Stage Workflow</h3>
+                <p>Initial differential → History → Physical → Revised differential → Workup & Management.</p>
             </div>
-            
-            <div class="try-cta">
-                <a href="ReasonDx/training.html" class="try-btn reason">Try a Case →</a>
+            <div class="feature-card">
+                <h3>🎯 4 Training Modes</h3>
+                <p>Learning, Clinical, Quiz, and Small Group modes to match your study style.</p>
             </div>
         </div>
+        
+        <a href="ReasonDx/training.html" class="try-btn">Try ReasonDx →</a>
     </section>
     
     <!-- MechanismDx Section -->
-    <section class="platform-section" id="mechanismdx">
-        <div class="platform-inner">
-            <div class="platform-header">
-                <span class="platform-badge mechanism">📚 Platform 2 of 3</span>
-                <h2 class="platform-title">MechanismDx</h2>
-                <p class="platform-subtitle">Understand the "why" behind diseases with pathophysiology modules, visual algorithms, and high-yield MCQs.</p>
+    <section id="mechanismdx" class="platform-section mechanism">
+        <span class="platform-badge">⚙️ Platform 2 of 3</span>
+        <h2>MechanismDx</h2>
+        <p class="description">Build deep understanding of pathophysiology with interactive modules. Learn the "why" behind clinical findings and connect mechanisms to diagnostic reasoning.</p>
+        
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>📚 35+ Interactive Modules</h3>
+                <p>Covering heart failure, pneumonia, sepsis, electrolytes, acid-base, and more.</p>
             </div>
-            
-            <div class="preview-grid" style="direction: rtl;">
-                <div class="preview-content" style="direction: ltr;">
-                    <h3>Master the Mechanisms</h3>
-                    <p>Go beyond memorization. Our modules break down complex pathophysiology into understandable concepts with visual aids, clinical correlations, and self-assessment questions.</p>
-                    
-                    <div class="preview-features">
-                        <div class="preview-feature">
-                            <span class="preview-feature-icon mechanism">✓</span>
-                            <span class="preview-feature-text"><strong>45+ interactive modules</strong> covering core topics</span>
-                        </div>
-                        <div class="preview-feature">
-                            <span class="preview-feature-icon mechanism">✓</span>
-                            <span class="preview-feature-text"><strong>500+ board-style MCQs</strong> with explanations</span>
-                        </div>
-                        <div class="preview-feature">
-                            <span class="preview-feature-icon mechanism">✓</span>
-                            <span class="preview-feature-text"><strong>Visual knowledge webs</strong> showing concept connections</span>
-                        </div>
-                        <div class="preview-feature">
-                            <span class="preview-feature-icon mechanism">✓</span>
-                            <span class="preview-feature-text"><strong>12 specialties</strong> from cardiology to toxicology</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="preview-window" style="direction: ltr;">
-                    <div class="preview-window-header">
-                        <span class="preview-window-dot"></span>
-                        <span class="preview-window-dot"></span>
-                        <span class="preview-window-dot"></span>
-                    </div>
-                    <div class="preview-window-body">
-                        <div class="module-preview-card">
-                            <div class="module-preview-icon">⚡</div>
-                            <div class="module-preview-info">
-                                <h4>Anaphylaxis</h4>
-                                <p>Type I Hypersensitivity • Allergy/Immunology</p>
-                            </div>
-                            <div class="module-preview-stats">
-                                <span><strong>12</strong> concepts</span>
-                                <span><strong>8</strong> MCQs</span>
-                            </div>
-                        </div>
-                        <div class="module-preview-card">
-                            <div class="module-preview-icon">🫀</div>
-                            <div class="module-preview-info">
-                                <h4>Acute Coronary Syndrome</h4>
-                                <p>STEMI vs NSTEMI • Cardiology</p>
-                            </div>
-                            <div class="module-preview-stats">
-                                <span><strong>15</strong> concepts</span>
-                                <span><strong>10</strong> MCQs</span>
-                            </div>
-                        </div>
-                        <div class="module-preview-card">
-                            <div class="module-preview-icon">🧪</div>
-                            <div class="module-preview-info">
-                                <h4>Acid-Base Disorders</h4>
-                                <p>ABG Interpretation • Renal</p>
-                            </div>
-                            <div class="module-preview-stats">
-                                <span><strong>10</strong> concepts</span>
-                                <span><strong>12</strong> MCQs</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="feature-card">
+                <h3>🔬 Mechanism-Based Learning</h3>
+                <p>Understand pathophysiology so deeply you can derive the clinical presentation.</p>
             </div>
-            
-            <div class="sample-grid">
-                <div class="sample-card">
-                    <div class="sample-card-icon">🩺</div>
-                    <div class="sample-card-title">Critical Care</div>
-                    <div class="sample-card-meta">Sepsis, Shock, Ventilators</div>
-                </div>
-                <div class="sample-card">
-                    <div class="sample-card-icon">💊</div>
-                    <div class="sample-card-title">Pharmacology</div>
-                    <div class="sample-card-meta">Drug mechanisms & interactions</div>
-                </div>
-                <div class="sample-card">
-                    <div class="sample-card-icon">🧬</div>
-                    <div class="sample-card-title">Allergy & Immunology</div>
-                    <div class="sample-card-meta">8 specialized modules</div>
-                </div>
+            <div class="feature-card">
+                <h3>📝 500+ Practice Questions</h3>
+                <p>NBME-style MCQs with detailed explanations linked to mechanisms.</p>
             </div>
-            
-            <div class="try-cta">
-                <a href="mechanism/index.html" class="try-btn mechanism">Browse Modules →</a>
+            <div class="feature-card">
+                <h3>🔄 Spaced Repetition</h3>
+                <p>Intelligent review scheduling to maximize long-term retention.</p>
             </div>
         </div>
+        
+        <a href="mechanism/index.html" class="try-btn">Try MechanismDx →</a>
     </section>
     
     <!-- CoachDx Section -->
-    <section class="platform-section" id="coachdx">
-        <div class="platform-inner">
-            <div class="platform-header">
-                <span class="platform-badge coach">🧠 Platform 3 of 3</span>
-                <h2 class="platform-title">CoachDx</h2>
-                <p class="platform-subtitle">Get personalized AI-powered feedback on your clinical reasoning to identify blind spots and strengthen your thinking.</p>
+    <section id="coachdx" class="platform-section coach">
+        <span class="platform-badge">💬 Platform 3 of 3</span>
+        <h2>CoachDx</h2>
+        <p class="description">Learn from an AI attending physician who uses Socratic questioning to develop your clinical reasoning. Think out loud and get guided feedback—not just answers.</p>
+        
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>🎓 Socratic Method</h3>
+                <p>Your AI coach asks probing questions rather than giving direct answers.</p>
             </div>
-            
-            <div class="preview-grid">
-                <div class="preview-content">
-                    <h3>Your Personal Tutor</h3>
-                    <p>After completing cases, CoachDx analyzes your reasoning patterns, identifies areas for improvement, and provides targeted recommendations—like having an attending available 24/7.</p>
-                    
-                    <div class="preview-features">
-                        <div class="preview-feature">
-                            <span class="preview-feature-icon coach">✓</span>
-                            <span class="preview-feature-text"><strong>Personalized feedback</strong> on your reasoning approach</span>
-                        </div>
-                        <div class="preview-feature">
-                            <span class="preview-feature-icon coach">✓</span>
-                            <span class="preview-feature-text"><strong>Weakness identification</strong> across topic areas</span>
-                        </div>
-                        <div class="preview-feature">
-                            <span class="preview-feature-icon coach">✓</span>
-                            <span class="preview-feature-text"><strong>Study recommendations</strong> based on your performance</span>
-                        </div>
-                        <div class="preview-feature">
-                            <span class="preview-feature-icon coach">✓</span>
-                            <span class="preview-feature-text"><strong>Progress tracking</strong> to see improvement over time</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="preview-window">
-                    <div class="preview-window-header">
-                        <span class="preview-window-dot"></span>
-                        <span class="preview-window-dot"></span>
-                        <span class="preview-window-dot"></span>
-                    </div>
-                    <div class="preview-window-body">
-                        <div class="chat-preview">
-                            <div class="chat-bubble user">
-                                I thought it was PE because of the dyspnea and tachycardia. Why was ACS the better answer?
-                            </div>
-                            <div class="chat-bubble ai">
-                                Great question! Both can present with dyspnea and tachycardia. The key differentiators here were:<br><br>
-                                <strong>• Substernal pressure</strong> – classic for ACS, uncommon in PE<br>
-                                <strong>• Radiation to left arm</strong> – highly specific for cardiac ischemia<br>
-                                <strong>• Exertional onset</strong> – suggests increased myocardial demand<br><br>
-                                PE typically presents with pleuritic chest pain. Would you like to review the PE vs ACS differentiation module?
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="feature-card">
+                <h3>💬 Natural Conversations</h3>
+                <p>Discuss cases the way you would with an attending on rounds.</p>
             </div>
-            
-            <div class="try-cta">
-                <a href="CoachDx/coachdx-dashboard.html" class="try-btn coach">Start Coaching Session →</a>
+            <div class="feature-card">
+                <h3>🧠 Reasoning Development</h3>
+                <p>Build the thought processes that define great clinicians.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🔗 Cross-Platform Links</h3>
+                <p>Seamlessly jump to ReasonDx cases or MechanismDx modules when relevant.</p>
             </div>
         </div>
+        
+        <a href="CoachDx/case-library.html" class="try-btn">Try CoachDx →</a>
     </section>
     
     <!-- Final CTA -->
     <section class="final-cta">
         <h2>Ready to Transform Your Learning?</h2>
-        <p>Join the ecosystem and start building your clinical reasoning skills today. It's free to get started.</p>
+        <p>Start building clinical reasoning skills that last a lifetime.</p>
         <a href="dx-dashboard.html" class="final-cta-btn">Go to Dashboard →</a>
     </section>
     
     <!-- Footer -->
-    <footer class="tour-footer">
-        <p>Dx Learning Ecosystem • </p>
-        <p style="margin-top: 8px;"><a href="index.html">Home</a> • <a href="knowledge-web-navigator.html">Knowledge Web</a> • <a href="dx-dashboard.html">Dashboard</a></p>
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="index.html" class="footer-link">Home</a>
+            <a href="ReasonDx/training.html" class="footer-link">ReasonDx</a>
+            <a href="mechanism/index.html" class="footer-link">MechanismDx</a>
+            <a href="CoachDx/case-library.html" class="footer-link">CoachDx</a>
+            <a href="dx-dashboard.html" class="footer-link">Dashboard</a>
+        </div>
+        <p class="footer-copy">© 2026 Dx Learning Ecosystem. Created by Lauren Fine, MD, FAAAAI.</p>
     </footer>
     
     <script>
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+        // Smooth scroll for section tabs
+        document.querySelectorAll('.section-tab').forEach(tab => {
+            tab.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
         
         // Update active tab on scroll
         const sections = document.querySelectorAll('.platform-section');
-        const tabs = document.querySelectorAll('.tour-tab');
+        const tabs = document.querySelectorAll('.section-tab');
         
         window.addEventListener('scroll', () => {
             let current = '';
