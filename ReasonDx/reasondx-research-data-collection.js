@@ -23,7 +23,7 @@
         // Institution info
         institutionName: 'NSU Dr. Kiran C. Patel College of Allopathic Medicine',
         studyTitle: 'ReasonDx Clinical Reasoning Study',
-        piName: 'Lauren Fine, MD, FAAAAI',
+        piName: 'Lauren Mazzurco, DO',
         irbNumber: '', // Fill in when approved
         
         // Data collection endpoints (optional - for server-based collection)
@@ -32,7 +32,7 @@
         apiKey: '', // For authenticated submissions
         
         // Microsoft 365 Integration (Recommended)
-        powerAutomateUrl: '', // https://default2c2b2d312e3e4df1b571fb37c042ff.1b.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/90e355cf75594bafad88d77ec604797d/triggers/manual/paths/invoke?api-version=1
+        powerAutomateUrl: '', // Your Power Automate HTTP POST URL
         
         // Google Sheets integration (alternative to server)
         googleScriptUrl: '', // Google Apps Script web app URL
