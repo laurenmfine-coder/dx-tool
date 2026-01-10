@@ -37628,7 +37628,16 @@ This patient's presentation details include everything from the history question
             occupation: profile.occupation || 'unknown',
             livingStatus: profile.livingStatus || 'unknown',
             // Transgender care note if applicable
-            transgenderCareNote: variant.transgenderCareNote || null
+            transgenderCareNote: variant.transgenderCareNote || null,
+            // Include patientBackground for richer AI conversations
+            patientBackground: variant.patientBackground || {},
+            recentEvents: (variant.patientBackground || {}).recentEvents || '',
+            recentIllnesses: (variant.patientBackground || {}).recentIllnesses || '',
+            travelHistory: (variant.patientBackground || {}).travelHistory || '',
+            contextualFactors: (variant.patientBackground || {}).contextualFactors || '',
+            supportSystem: (variant.patientBackground || {}).supportSystem || '',
+            healthBeliefs: (variant.patientBackground || {}).healthBeliefs || '',
+            previousERVisits: (variant.patientBackground || {}).previousERVisits || ''
         };
     }
     
@@ -37697,6 +37706,37 @@ This patient's presentation details include everything from the history question
         
         if (q.indexOf('drink') !== -1 || q.indexOf('alcohol') !== -1 || q.indexOf('beer') !== -1) {
             if (narrative.indexOf('beer') !== -1 || narrative.indexOf('drink') !== -1) return "I have a couple beers most nights.";
+        }
+        
+        // Check patientBackground for additional context
+        var background = variant.patientBackground || {};
+        
+        if (q.indexOf('recent') !== -1 || q.indexOf('lately') !== -1 || q.indexOf('past few') !== -1 || q.indexOf('happen') !== -1) {
+            if (background.recentEvents) return background.recentEvents;
+        }
+        
+        if (q.indexOf('travel') !== -1 || q.indexOf('trip') !== -1 || q.indexOf('vacation') !== -1) {
+            if (background.travelHistory) return background.travelHistory;
+        }
+        
+        if (q.indexOf('family') !== -1 && (q.indexOf('support') !== -1 || q.indexOf('help') !== -1 || q.indexOf('home') !== -1 || q.indexOf('live') !== -1 || q.indexOf('who') !== -1)) {
+            if (background.supportSystem) return background.supportSystem;
+        }
+        
+        if (q.indexOf('worry') !== -1 || q.indexOf('concern') !== -1 || q.indexOf('afraid') !== -1 || q.indexOf('think') !== -1 || q.indexOf('expect') !== -1 || q.indexOf('hope') !== -1) {
+            if (background.healthBeliefs) return background.healthBeliefs;
+        }
+        
+        if (q.indexOf('er') !== -1 || q.indexOf('emergency') !== -1 || q.indexOf('hospital') !== -1 || q.indexOf('before') !== -1 || q.indexOf('previous') !== -1) {
+            if (background.previousERVisits) return background.previousERVisits;
+        }
+        
+        if (q.indexOf('stress') !== -1 || q.indexOf('life') !== -1 || q.indexOf('going on') !== -1) {
+            if (background.contextualFactors) return background.contextualFactors;
+        }
+        
+        if (q.indexOf('sick') !== -1 && q.indexOf('recent') !== -1) {
+            if (background.recentIllnesses) return background.recentIllnesses;
         }
         
         return "Hmm, I'm not sure about that. Could you ask a different way?";
