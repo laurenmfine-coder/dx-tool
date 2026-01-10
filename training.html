@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Mode | ReasonDx</title>
+    <link rel="stylesheet" href="dx-design-system.css">
+    <style>
+        :root {
+            --primary: #1E3A5F;
+            --primary-light: #2563EB;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --bg: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text: #1F2937;
+            --text-light: #6B7280;
+            --border: #E5E7EB;
+        }
+        
+        * { box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            margin: 0;
+            color: var(--text);
+        }
+        
+        /* Header */
+        .page-header {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 16px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .back-btn {
+            color: var(--text-light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .back-btn:hover { color: var(--primary); }
+        
+        .page-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .case-count-badge {
+            background: var(--primary-light);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        /* Search Bar */
+        .search-container {
+            flex: 1;
+            max-width: 400px;
+            min-width: 200px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 10px 16px 10px 40px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 0.95rem;
+            background: var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236B7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'/%3E%3C/svg%3E") 12px center no-repeat;
+            background-size: 18px;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        /* Main Layout */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 24px;
+        }
+        
+        @media (max-width: 900px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+            .sidebar { display: none; }
+            .sidebar.mobile-open { 
+                display: block;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: white;
+                z-index: 200;
+                overflow-y: auto;
+                padding: 20px;
+            }
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            height: fit-content;
+            position: sticky;
+            top: 90px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .sidebar-section {
+            margin-bottom: 24px;
+        }
+        
+        .sidebar-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .filter-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 12px;
+            background: transparent;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--text);
+            text-align: left;
+            transition: all 0.15s;
+        }
+        
+        .filter-btn:hover {
+            background: var(--bg);
+        }
+        
+        .filter-btn.active {
+            background: #EEF2FF;
+            color: var(--primary-light);
+            font-weight: 500;
+        }
+        
+        .filter-btn .count {
+            background: var(--bg);
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+        
+        .filter-btn.active .count {
+            background: var(--primary-light);
+            color: white;
+        }
+        
+        .filter-icon {
+            width: 18px;
+            margin-right: 8px;
+            opacity: 0.7;
+        }
+        
+        /* Difficulty Pills */
+        .difficulty-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .diff-pill {
+            padding: 6px 14px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: white;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        
+        .diff-pill:hover {
+            border-color: var(--primary-light);
+        }
+        
+        .diff-pill.active {
+            background: var(--primary-light);
+            color: white;
+            border-color: var(--primary-light);
+        }
+        
+        /* Urgency Pills */
+        .urgency-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .urgency-pill {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: all 0.15s;
+        }
+        
+        .urgency-pill.emergent { background: #FEE2E2; color: #991B1B; }
+        .urgency-pill.urgent { background: #FEF3C7; color: #92400E; }
+        .urgency-pill.routine { background: #D1FAE5; color: #065F46; }
+        
+        .urgency-pill:hover, .urgency-pill.active {
+            transform: scale(1.05);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* Case Grid */
+        .cases-section {
+            min-height: 400px;
+        }
+        
+        .cases-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        .results-info {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .view-toggle {
+            display: flex;
+            gap: 4px;
+            background: var(--bg);
+            padding: 4px;
+            border-radius: 8px;
+        }
+        
+        .view-btn {
+            padding: 6px 12px;
+            border: none;
+            background: transparent;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+        
+        .view-btn.active {
+            background: white;
+            color: var(--text);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        /* Organ System Sections */
+        .organ-section {
+            margin-bottom: 32px;
+        }
+        
+        .organ-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 16px;
+            cursor: pointer;
+        }
+        
+        .organ-header:hover {
+            border-color: var(--primary-light);
+        }
+        
+        .organ-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .organ-icon {
+            font-size: 1.3rem;
+        }
+        
+        .organ-count {
+            background: var(--bg);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        
+        .organ-toggle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            transition: transform 0.2s;
+        }
+        
+        .organ-section.collapsed .organ-toggle {
+            transform: rotate(-90deg);
+        }
+        
+        .organ-section.collapsed .case-grid {
+            display: none;
+        }
+        
+        /* Case Cards */
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+        }
+        
+        .case-grid.list-view {
+            grid-template-columns: 1fr;
+        }
+        
+        .case-card {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .case-card:hover {
+            border-color: var(--primary-light);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+        }
+        
+        .case-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+        
+        .case-title {
+            font-weight: 600;
+            font-size: 1rem;
+            line-height: 1.3;
+            flex: 1;
+            margin-right: 8px;
+        }
+        
+        .case-badges {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        
+        .badge {
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .badge.emergent { background: #FEE2E2; color: #991B1B; }
+        .badge.urgent { background: #FEF3C7; color: #92400E; }
+        .badge.routine { background: #D1FAE5; color: #065F46; }
+        .badge.basic { background: #DBEAFE; color: #1E40AF; }
+        .badge.intermediate { background: #E0E7FF; color: #3730A3; }
+        .badge.advanced { background: #FCE7F3; color: #9D174D; }
+        
+        .case-meta {
+            display: flex;
+            gap: 12px;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+        
+        .case-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        /* List View */
+        .case-grid.list-view .case-card {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+        }
+        
+        .case-grid.list-view .case-card-header {
+            flex: 1;
+            margin-bottom: 0;
+            align-items: center;
+        }
+        
+        .case-grid.list-view .case-meta {
+            display: none;
+        }
+        
+        .case-arrow {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            margin-left: 12px;
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-light);
+        }
+        
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+        
+        .empty-state-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+        
+        /* Mobile Filter Button */
+        .mobile-filter-btn {
+            display: none;
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--primary-light);
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+            cursor: pointer;
+            z-index: 100;
+        }
+        
+        @media (max-width: 900px) {
+            .mobile-filter-btn { display: flex; align-items: center; gap: 8px; }
+        }
+        
+        /* Special Case Types */
+        .case-type-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-bottom: 6px;
+        }
+        
+        .case-type-badge.longitudinal {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+        
+        .case-type-badge.trap {
+            background: #FCE7F3;
+            color: #9D174D;
+        }
+        
+        /* Quick Stats */
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .stat-box {
+            text-align: center;
+            padding: 12px;
+            background: var(--bg);
+            border-radius: 10px;
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="page-header">
+        <div class="header-content">
+            <div class="header-left">
+                <a href="index.html" class="back-btn">← Back</a>
+                <h1 class="page-title">Learning Mode</h1>
+                <span class="case-count-badge" id="totalCases">225 Cases</span>
+            </div>
+            <div class="search-container">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search cases by symptom, keyword...">
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Sidebar Filters -->
+        <aside class="sidebar" id="sidebar">
+            <div class="quick-stats">
+                <div class="stat-box">
+                    <div class="stat-value" id="statBasic">43</div>
+                    <div class="stat-label">Basic</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="statInter">117</div>
+                    <div class="stat-label">Intermediate</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-value" id="statAdv">61</div>
+                    <div class="stat-label">Advanced</div>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-title">Difficulty</div>
+                <div class="difficulty-pills">
+                    <button class="diff-pill active" data-diff="all">All</button>
+                    <button class="diff-pill" data-diff="foundational">Basic</button>
+                    <button class="diff-pill" data-diff="intermediate">Intermediate</button>
+                    <button class="diff-pill" data-diff="advanced">Advanced</button>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-title">Urgency</div>
+                <div class="urgency-pills">
+                    <button class="urgency-pill emergent" data-urgency="emergent">🚨 Emergent</button>
+                    <button class="urgency-pill urgent" data-urgency="urgent">⚠️ Urgent</button>
+                    <button class="urgency-pill routine" data-urgency="routine">📋 Routine</button>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-title">Organ System</div>
+                <div class="filter-group" id="organFilters">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Cases Section -->
+        <main class="cases-section">
+            <div class="cases-header">
+                <span class="results-info" id="resultsInfo">Showing 225 cases</span>
+                <div class="view-toggle">
+                    <button class="view-btn active" data-view="grid">Grid</button>
+                    <button class="view-btn" data-view="list">List</button>
+                </div>
+            </div>
+            
+            <div id="casesContainer">
+                <!-- Cases rendered by JS -->
+            </div>
+        </main>
+    </div>
+    
+    <!-- Mobile Filter Button -->
+    <button class="mobile-filter-btn" onclick="toggleMobileFilters()">
+        🎛️ Filters
+    </button>
+    
+    <script>
+        // ===========================================
+        // CASE DATA WITH CORRECTED TITLES
+        // ===========================================
+        // Titles have been audited to remove diagnosis reveals
+        // Format: { id: "corrected-title" } for cases that needed changes
+        
+        const titleCorrections = {
+            // Cardiovascular
+            "env-chagas": "Heart Failure with Travel History",
+            
+            // Infectious
+            "env-vibrio": "Rapidly Progressive Skin Infection",
+            
+            // Renal
+            "env-ckdu": "Progressive Kidney Disease",
+            "hyponatremia": "Confusion and Weakness",
+            
+            // Neurology
+            "env-eee": "Fever with Altered Mental Status",
+            "env-manganism": "Tremor and Movement Problems",
+            
+            // Emergency
+            "env-heat-island": "Altered Mental Status in Hot Weather",
+            "env-water-lead": "Developmental and Behavioral Concerns",
+            
+            // GI
+            "sbp": "Altered Mental Status in Cirrhotic Patient",
+            
+            // Psychiatry  
+            "suicide-assessment": "Mood Concerns with Safety Assessment",
+            
+            // Pulmonary - remove COPD from title
+            "env-biomass-copd": "Chronic Respiratory Symptoms",
+            "longitudinal-copd": "📅 Chronic Lung Disease: Exacerbation to Rehab",
+            
+            // Dermatology
+            "env-chromium": "Nasal and Skin Changes (Occupational)",
+            
+            // Allergy
+            "drug-allergy-penicillin": "Antibiotic Reaction History",
+            "food-allergy-peanut": "Food Reaction Evaluation",
+            "eosinophilic-esophagitis": "Difficulty Swallowing Solid Foods"
+        };
+        
+        const organSystems = {
+            pulmonary: { name: "Pulmonary", icon: "🫁", color: "#3B82F6" },
+            cardiovascular: { name: "Cardiovascular", icon: "❤️", color: "#EF4444" },
+            infectious: { name: "Infectious Disease", icon: "🦠", color: "#10B981" },
+            msk: { name: "Musculoskeletal", icon: "🦴", color: "#8B5CF6" },
+            geriatrics: { name: "Geriatrics", icon: "👴", color: "#6366F1" },
+            gi: { name: "Gastrointestinal", icon: "🫃", color: "#F59E0B" },
+            endocrine: { name: "Endocrine", icon: "🦋", color: "#EC4899" },
+            hematology: { name: "Hematology", icon: "🩸", color: "#DC2626" },
+            "renal-gu": { name: "Renal / GU", icon: "🫘", color: "#14B8A6" },
+            neurology: { name: "Neurology", icon: "🧠", color: "#6366F1" },
+            obgyn: { name: "OB/GYN", icon: "🤰", color: "#EC4899" },
+            "ent-eyes": { name: "ENT / Ophthalmology", icon: "👁️", color: "#0EA5E9" },
+            "multi-diagnosis": { name: "Multi-Diagnosis", icon: "🔀", color: "#8B5CF6" },
+            "trap-cases": { name: "Diagnostic Traps", icon: "⚠️", color: "#EF4444" },
+            dermatology: { name: "Dermatology", icon: "🩹", color: "#F97316" },
+            psychiatry: { name: "Psychiatry", icon: "🧘", color: "#8B5CF6" },
+            emergency: { name: "Emergency / Toxicology", icon: "🚑", color: "#DC2626" },
+            "allergy-immunology": { name: "Allergy & Immunology", icon: "🤧", color: "#F59E0B" },
+            oncology: { name: "Oncology", icon: "🎗️", color: "#7C3AED" },
+            pediatrics: { name: "Pediatrics", icon: "👶", color: "#06B6D4" },
+            surgery: { name: "Surgery", icon: "🔪", color: "#64748B" },
+            other: { name: "Other / Longitudinal", icon: "📚", color: "#6B7280" }
+        };
+        
+        // State
+        let allCases = [];
+        let filteredCases = [];
+        let currentFilters = {
+            difficulty: 'all',
+            urgency: null,
+            organ: null,
+            search: ''
+        };
+        let viewMode = 'grid';
+        
+        // ===========================================
+        // INITIALIZATION
+        // ===========================================
+        
+        async function init() {
+            try {
+                const response = await fetch('data/cases/manifest.json');
+                const manifest = await response.json();
+                
+                // Flatten cases from all categories
+                allCases = [];
+                manifest.categories.forEach(cat => {
+                    if (cat.cases) {
+                        cat.cases.forEach(c => {
+                            if (c && c.id) {
+                                allCases.push({
+                                    ...c,
+                                    category: cat.id,
+                                    // Apply title corrections
+                                    title: titleCorrections[c.id] || c.title || c.id
+                                });
+                            }
+                        });
+                    }
+                });
+                
+                document.getElementById('totalCases').textContent = `${allCases.length} Cases`;
+                
+                renderOrganFilters();
+                applyFilters();
+                setupEventListeners();
+                
+            } catch (error) {
+                console.error('Failed to load cases:', error);
+                document.getElementById('casesContainer').innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">⚠️</div>
+                        <div class="empty-state-title">Failed to load cases</div>
+                        <p>Please check your connection and try again.</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // ===========================================
+        // RENDERING
+        // ===========================================
+        
+        function renderOrganFilters() {
+            const container = document.getElementById('organFilters');
+            
+            // Count cases per organ
+            const counts = {};
+            allCases.forEach(c => {
+                counts[c.category] = (counts[c.category] || 0) + 1;
+            });
+            
+            // Sort by count descending
+            const sortedOrgans = Object.keys(organSystems)
+                .filter(key => counts[key])
+                .sort((a, b) => (counts[b] || 0) - (counts[a] || 0));
+            
+            let html = `
+                <button class="filter-btn active" data-organ="all">
+                    <span>📋 All Systems</span>
+                    <span class="count">${allCases.length}</span>
+                </button>
+            `;
+            
+            sortedOrgans.forEach(key => {
+                const organ = organSystems[key];
+                html += `
+                    <button class="filter-btn" data-organ="${key}">
+                        <span>${organ.icon} ${organ.name}</span>
+                        <span class="count">${counts[key] || 0}</span>
+                    </button>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        function renderCases() {
+            const container = document.getElementById('casesContainer');
+            
+            if (filteredCases.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🔍</div>
+                        <div class="empty-state-title">No cases found</div>
+                        <p>Try adjusting your filters or search terms.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Group by organ system
+            const grouped = {};
+            filteredCases.forEach(c => {
+                if (!grouped[c.category]) grouped[c.category] = [];
+                grouped[c.category].push(c);
+            });
+            
+            // Render sections
+            let html = '';
+            Object.keys(grouped).forEach(cat => {
+                const organ = organSystems[cat] || { name: cat, icon: '📁' };
+                const cases = grouped[cat];
+                
+                html += `
+                    <div class="organ-section" data-organ="${cat}">
+                        <div class="organ-header" onclick="toggleSection('${cat}')">
+                            <div class="organ-title">
+                                <span class="organ-icon">${organ.icon}</span>
+                                ${organ.name}
+                                <span class="organ-count">${cases.length} cases</span>
+                            </div>
+                            <span class="organ-toggle">▼</span>
+                        </div>
+                        <div class="case-grid ${viewMode === 'list' ? 'list-view' : ''}">
+                            ${cases.map(c => renderCaseCard(c)).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+            document.getElementById('resultsInfo').textContent = `Showing ${filteredCases.length} cases`;
+        }
+        
+        function renderCaseCard(caseData) {
+            const difficultyMap = {
+                'foundational': 'basic',
+                'beginner': 'basic',
+                'intermediate': 'intermediate',
+                'advanced': 'advanced'
+            };
+            const diffClass = difficultyMap[caseData.difficulty] || 'intermediate';
+            const diffLabel = diffClass.charAt(0).toUpperCase() + diffClass.slice(1);
+            
+            // Check for special case types
+            let typeLabel = '';
+            if (caseData.title && caseData.title.includes('📅')) {
+                typeLabel = '<span class="case-type-badge longitudinal">📅 Longitudinal</span>';
+            }
+            if (caseData.category === 'trap-cases') {
+                typeLabel = '<span class="case-type-badge trap">⚠️ Diagnostic Trap</span>';
+            }
+            
+            const urgencyBadge = caseData.urgency ? 
+                `<span class="badge ${caseData.urgency}">${caseData.urgency}</span>` : '';
+            
+            return `
+                <a href="reasondx-patient.html?case=${caseData.id}" class="case-card">
+                    ${typeLabel}
+                    <div class="case-card-header">
+                        <div class="case-title">${caseData.title.replace('📅 ', '')}</div>
+                        <div class="case-badges">
+                            ${urgencyBadge}
+                        </div>
+                    </div>
+                    <div class="case-meta">
+                        <span class="case-meta-item">
+                            <span class="badge ${diffClass}">${diffLabel}</span>
+                        </span>
+                    </div>
+                    <span class="case-arrow">→</span>
+                </a>
+            `;
+        }
+        
+        // ===========================================
+        // FILTERING
+        // ===========================================
+        
+        function applyFilters() {
+            filteredCases = allCases.filter(c => {
+                // Difficulty filter
+                if (currentFilters.difficulty !== 'all') {
+                    const diff = c.difficulty || 'intermediate';
+                    if (currentFilters.difficulty === 'foundational' && !['foundational', 'beginner', 'basic'].includes(diff)) return false;
+                    if (currentFilters.difficulty === 'intermediate' && diff !== 'intermediate') return false;
+                    if (currentFilters.difficulty === 'advanced' && diff !== 'advanced') return false;
+                }
+                
+                // Urgency filter
+                if (currentFilters.urgency && c.urgency !== currentFilters.urgency) return false;
+                
+                // Organ filter
+                if (currentFilters.organ && currentFilters.organ !== 'all' && c.category !== currentFilters.organ) return false;
+                
+                // Search filter
+                if (currentFilters.search) {
+                    const search = currentFilters.search.toLowerCase();
+                    const title = (c.title || '').toLowerCase();
+                    const id = (c.id || '').toLowerCase();
+                    if (!title.includes(search) && !id.includes(search)) return false;
+                }
+                
+                return true;
+            });
+            
+            renderCases();
+        }
+        
+        // ===========================================
+        // EVENT LISTENERS
+        // ===========================================
+        
+        function setupEventListeners() {
+            // Search
+            document.getElementById('searchInput').addEventListener('input', (e) => {
+                currentFilters.search = e.target.value;
+                applyFilters();
+            });
+            
+            // Difficulty pills
+            document.querySelectorAll('.diff-pill').forEach(pill => {
+                pill.addEventListener('click', () => {
+                    document.querySelectorAll('.diff-pill').forEach(p => p.classList.remove('active'));
+                    pill.classList.add('active');
+                    currentFilters.difficulty = pill.dataset.diff;
+                    applyFilters();
+                });
+            });
+            
+            // Urgency pills
+            document.querySelectorAll('.urgency-pill').forEach(pill => {
+                pill.addEventListener('click', () => {
+                    if (pill.classList.contains('active')) {
+                        pill.classList.remove('active');
+                        currentFilters.urgency = null;
+                    } else {
+                        document.querySelectorAll('.urgency-pill').forEach(p => p.classList.remove('active'));
+                        pill.classList.add('active');
+                        currentFilters.urgency = pill.dataset.urgency;
+                    }
+                    applyFilters();
+                });
+            });
+            
+            // Organ filters (delegated)
+            document.getElementById('organFilters').addEventListener('click', (e) => {
+                const btn = e.target.closest('.filter-btn');
+                if (btn) {
+                    document.querySelectorAll('#organFilters .filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentFilters.organ = btn.dataset.organ;
+                    applyFilters();
+                }
+            });
+            
+            // View toggle
+            document.querySelectorAll('.view-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    viewMode = btn.dataset.view;
+                    document.querySelectorAll('.case-grid').forEach(grid => {
+                        grid.classList.toggle('list-view', viewMode === 'list');
+                    });
+                });
+            });
+        }
+        
+        function toggleSection(organ) {
+            const section = document.querySelector(`.organ-section[data-organ="${organ}"]`);
+            if (section) {
+                section.classList.toggle('collapsed');
+            }
+        }
+        
+        function toggleMobileFilters() {
+            document.getElementById('sidebar').classList.toggle('mobile-open');
+        }
+        
+        // Initialize
+        init();
+    </script>
+</body>
+</html>
