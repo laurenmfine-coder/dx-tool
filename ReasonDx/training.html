@@ -61977,6 +61977,428 @@ This patient's presentation details include everything from the history question
                 { text: "Start calcitonin right away", icon: '💉', feedback: 'okay', response: 'Calcitonin works faster than bisphosphonates but effect is temporary. Often used as bridge while waiting for bisphosphonate effect. Fluids are still first priority.' },
                 { text: "Recheck level - might be spurious", icon: '🔄', feedback: 'bad', response: 'Don\'t delay treatment for repeat lab. 14.2 is significantly elevated and explains her fatigue. Start treatment while confirming.' }
             ]
+        },
+        
+        // ==================== NEW SCENARIOS - BATCH 2 ====================
+        
+        // EMERGENT - Anaphylaxis
+        {
+            type: 'nurse',
+            title: 'Allergic Emergency',
+            icon: '🚨',
+            message: "Doctor! The patient in room 3 who just got IV antibiotics is breaking out in hives, her lips are swelling, and she says her throat feels tight!",
+            urgency: 'emergent',
+            options: [
+                { text: "IM epinephrine NOW, stop the antibiotic, call code", icon: '💉', feedback: 'good', response: 'Correct! This is anaphylaxis - epi is the ONLY first-line treatment. 0.3-0.5mg IM in anterolateral thigh. Stop the trigger. Call for help.' },
+                { text: "Give IV Benadryl and Pepcid", icon: '💊', feedback: 'bad', response: 'NO - antihistamines do NOT treat anaphylaxis. They help with hives but will not prevent airway closure or cardiovascular collapse. EPI FIRST.' },
+                { text: "Start IV steroids", icon: '💧', feedback: 'bad', response: 'Steroids take hours to work. This patient needs epinephrine NOW or she may die in minutes.' },
+                { text: "Get a set of vitals first", icon: '📊', feedback: 'bad', response: 'No time for vitals. Throat tightness = impending airway loss. Give epi immediately. You can check vitals after.' }
+            ]
+        },
+        
+        // EMERGENT - Stroke
+        {
+            type: 'page',
+            title: 'Stroke Alert',
+            icon: '🧠',
+            message: "STROKE ALERT: 58yo male, sudden onset left-sided weakness and slurred speech 45 minutes ago. Last known well at 2:15 PM. Wife brought him in.",
+            urgency: 'emergent',
+            options: [
+                { text: "Activate stroke team, STAT CT head, I'm coming", icon: '🏃', feedback: 'good', response: 'Correct! Time is brain. He\'s within the tPA window (4.5 hours). Get CT to rule out hemorrhage, then consider thrombolytics. Every minute counts - 1.9 million neurons die per minute in stroke.' },
+                { text: "Start aspirin immediately", icon: '💊', feedback: 'bad', response: 'NO aspirin until CT rules out hemorrhagic stroke! Giving aspirin to a brain bleed is catastrophic.' },
+                { text: "Order MRI for better visualization", icon: '🔬', feedback: 'bad', response: 'MRI takes too long. CT is sufficient to rule out bleed and make tPA decision. Don\'t delay for better imaging.' },
+                { text: "Admit to neurology, they can evaluate", icon: '📋', feedback: 'bad', response: 'Unacceptable delay. Every minute without treatment = permanent brain damage. You need to act NOW.' }
+            ]
+        },
+        
+        // URGENT - GI Bleed
+        {
+            type: 'nurse',
+            title: 'GI Bleed',
+            icon: '🩸',
+            message: "Dr., Mr. Garcia just had a large bloody bowel movement - the toilet is full of dark red blood. His BP is 96/60, heart rate 112. He looks pale.",
+            urgency: 'urgent',
+            options: [
+                { text: "2 large bore IVs, type & cross 4 units, GI consult STAT", icon: '💧', feedback: 'good', response: 'Correct! Hemodynamically unstable GI bleed. Get access, resuscitate, prepare for transfusion, and get GI involved for emergent endoscopy.' },
+                { text: "Start a PPI drip and monitor", icon: '💊', feedback: 'okay', response: 'PPI is appropriate but this patient needs volume NOW. The tachycardia and hypotension indicate significant blood loss. Resuscitation first.' },
+                { text: "Order a CT abdomen to find the source", icon: '🔬', feedback: 'bad', response: 'Don\'t send an unstable patient to CT. Resuscitate first, then GI can scope to find and treat the source.' },
+                { text: "Transfuse 2 units PRBCs", icon: '🩸', feedback: 'okay', response: 'Blood is likely needed, but you need to type & screen first (unless using O-neg emergently). Also need IV access and GI involved.' }
+            ]
+        },
+        
+        // URGENT - Respiratory Distress
+        {
+            type: 'nurse',
+            title: 'Respiratory Distress',
+            icon: '😤',
+            message: "The COPD patient in 7 is getting worse - oxygen sat 82% on 4L, respiratory rate 32, using accessory muscles. He's getting agitated.",
+            urgency: 'urgent',
+            options: [
+                { text: "BiPAP, nebs, steroids - assess for intubation", icon: '💨', feedback: 'good', response: 'Correct! Severe COPD exacerbation. BiPAP can prevent intubation in many cases. Give bronchodilators and steroids. Be ready to intubate if he tires or worsens.' },
+                { text: "Increase O2 to 10L non-rebreather", icon: '💨', feedback: 'okay', response: 'More oxygen helps but be careful - some COPD patients retain CO2 on high-flow O2. BiPAP is better for work of breathing. Monitor closely.' },
+                { text: "Sedate him so he calms down", icon: '💊', feedback: 'bad', response: 'NEVER sedate a patient in respiratory distress unless you\'re intubating! Sedation will cause respiratory arrest.' },
+                { text: "Get an ABG before doing anything", icon: '🔬', feedback: 'bad', response: 'An ABG is useful but don\'t delay treatment. He\'s hypoxic and in distress - start treatment immediately.' }
+            ]
+        },
+        
+        // MODERATE - Pain Management
+        {
+            type: 'nurse',
+            title: 'Pain Request',
+            icon: '😣',
+            message: "Mr. Thompson is asking for more pain medication. He had his knee replaced yesterday and says the current regimen isn't touching his pain. He's rating it 8/10.",
+            urgency: 'moderate',
+            options: [
+                { text: "Assess him, review what he's received, adjust multimodal regimen", icon: '👁️', feedback: 'good', response: 'Good approach. Examine him, check the MAR, ensure multimodal therapy (acetaminophen, NSAIDs if ok, nerve block working?). Then adjust opioids if needed.' },
+                { text: "Give him whatever he's asking for", icon: '💊', feedback: 'bad', response: 'Never prescribe without assessment. Could be undertreated pain OR developing complication (infection, compartment syndrome). Examine first.' },
+                { text: "Tell him to wait - he just had surgery", icon: '⏰', feedback: 'bad', response: 'Post-op pain should be controlled. Undertreated pain impairs recovery and mobilization. Address it appropriately.' },
+                { text: "Switch to oral medications only", icon: '💊', feedback: 'okay', response: 'Transitioning to oral is a goal, but POD1 may be too early if pain is severe. Assess and use appropriate route/dose.' }
+            ]
+        },
+        
+        // MODERATE - Family Conflict
+        {
+            type: 'family',
+            title: 'Family Disagreement',
+            icon: '👨‍👩‍👧',
+            message: "Doctor, we need to talk to you. Our mother has dementia and my brother wants to do everything to keep her alive, but I have her healthcare proxy and I know she wouldn't want this.",
+            urgency: 'moderate',
+            options: [
+                { text: "Schedule a family meeting with palliative care to discuss goals", icon: '🤝', feedback: 'good', response: 'Excellent. Family conflict over goals of care needs facilitated discussion. Palliative care can help mediate and ensure the patient\'s wishes guide decisions.' },
+                { text: "The healthcare proxy makes decisions - tell the brother that", icon: '📋', feedback: 'okay', response: 'Legally correct, but this approach may fracture the family. Better to try for consensus through mediated discussion first.' },
+                { text: "Do what the brother wants since he wants more treatment", icon: '🏥', feedback: 'bad', response: 'The healthcare proxy exists for a reason - to honor the patient\'s wishes. Don\'t override it just to avoid conflict.' },
+                { text: "Tell them to work it out among themselves", icon: '👋', feedback: 'bad', response: 'This is your responsibility as the physician. Families need guidance navigating these difficult decisions.' }
+            ]
+        },
+        
+        // MODERATE - Medication Error
+        {
+            type: 'nurse',
+            title: 'Medication Question',
+            icon: '💊',
+            message: "Dr., pharmacy is questioning the metoprolol dose you ordered - 200mg IV push. They want to confirm that's correct before dispensing.",
+            urgency: 'moderate',
+            options: [
+                { text: "That's wrong - thank you for catching it. Should be 5mg IV", icon: '✅', feedback: 'good', response: 'Correct response! 200mg IV metoprolol would be lethal. Typical IV dose is 5mg. Always thank people who catch errors - this is how safety systems work.' },
+                { text: "Yes, 200mg is what I ordered", icon: '💊', feedback: 'bad', response: 'This dose would kill the patient. Maximum IV metoprolol is 15mg in divided doses. Never push back on safety checks without verifying.' },
+                { text: "I don't remember, go ahead with what I wrote", icon: '🤷', feedback: 'bad', response: 'Never approve an order you don\'t remember writing. This is a safety catch - review it carefully.' },
+                { text: "Change it to oral metoprolol 200mg", icon: '💊', feedback: 'okay', response: 'Oral 200mg is a real dose (extended release), but verify this is what you intended and the patient can take PO.' }
+            ]
+        },
+        
+        // LOW - Social Work Need
+        {
+            type: 'nurse',
+            title: 'Social Concern',
+            icon: '🏠',
+            message: "Mrs. Chen is medically ready for discharge but she's been crying. She says she can't afford her medications and doesn't have anyone to help her at home.",
+            urgency: 'low',
+            options: [
+                { text: "Hold discharge, consult social work and case management", icon: '🤝', feedback: 'good', response: 'Correct! Discharging someone who can\'t afford meds or has no support is a readmission waiting to happen. Social work can arrange resources, assistance programs, and home services.' },
+                { text: "Discharge her with prescriptions and a follow-up appointment", icon: '📋', feedback: 'bad', response: 'She just told you she can\'t afford medications. She\'ll be readmitted. Address barriers before discharge.' },
+                { text: "Keep her another day while we figure it out", icon: '🏥', feedback: 'okay', response: 'One more day may help, but you need a specific plan - get social work involved immediately.' },
+                { text: "Give her samples to get her started", icon: '💊', feedback: 'okay', response: 'Samples help short-term but don\'t solve the problem. She needs sustainable solutions - medication assistance programs, social support.' }
+            ]
+        },
+        
+        // LOW - Capacity Question
+        {
+            type: 'nurse',
+            title: 'Capacity Concern',
+            icon: '🧠',
+            message: "The patient in room 12 wants to leave AMA. He has mild dementia but seems to understand his pneumonia diagnosis. The family is upset and wants us to keep him.",
+            urgency: 'low',
+            options: [
+                { text: "Assess his capacity specifically for this decision", icon: '🧠', feedback: 'good', response: 'Correct! Capacity is decision-specific. Mild dementia doesn\'t mean he lacks capacity. Assess: Does he understand the situation, appreciate consequences, reason through it, and communicate a choice?' },
+                { text: "He has dementia, so the family decides", icon: '👨‍👩‍👧', feedback: 'bad', response: 'Wrong. Dementia diagnosis doesn\'t automatically remove decision-making rights. Capacity must be assessed for each decision.' },
+                { text: "Let him leave - patients have the right to leave AMA", icon: '🚪', feedback: 'okay', response: 'True in general, but you should assess capacity first. If he lacks capacity for this decision, you may need to involve family or ethics.' },
+                { text: "Call security to prevent him from leaving", icon: '🚔', feedback: 'bad', response: 'You cannot detain a patient without proper legal authority. Assess capacity first, then determine appropriate steps.' }
+            ]
+        },
+        
+        // URGENT - Sepsis Recognition
+        {
+            type: 'page',
+            title: 'Sepsis Alert',
+            icon: '🦠',
+            message: "Sepsis alert triggered: Room 9, temp 101.8, HR 118, RR 24, WBC 18.5. Patient admitted for cellulitis 2 days ago. Currently on oral antibiotics.",
+            urgency: 'urgent',
+            options: [
+                { text: "Assess now, blood cultures, switch to IV antibiotics, fluid bolus", icon: '🏃', feedback: 'good', response: 'Correct! Meeting sepsis criteria on oral antibiotics = treatment failure. Get cultures, escalate to IV broad-spectrum, give fluids, assess for abscess or other source.' },
+                { text: "Continue current antibiotics - give them time to work", icon: '💊', feedback: 'bad', response: 'She\'s meeting sepsis criteria on her current regimen - it\'s not working. Escalate therapy immediately.' },
+                { text: "Add another oral antibiotic for better coverage", icon: '💊', feedback: 'bad', response: 'Oral absorption may be compromised in sepsis. She needs IV antibiotics and aggressive management.' },
+                { text: "Order a CT to look for abscess", icon: '🔬', feedback: 'okay', response: 'Imaging for source control is reasonable, but don\'t delay antibiotics and fluids. Start sepsis bundle while arranging CT.' }
+            ]
+        },
+        
+        // MODERATE - Informed Consent
+        {
+            type: 'nurse',
+            title: 'Consent Question',
+            icon: '📝',
+            message: "Dr., the patient for the 2pm procedure says she has more questions about the risks. She seems hesitant to sign the consent.",
+            urgency: 'moderate',
+            options: [
+                { text: "I'll go talk with her - she shouldn't sign until her questions are answered", icon: '💬', feedback: 'good', response: 'Correct! Informed consent requires understanding. Take time to answer questions and address concerns. A hesitant patient deserves more discussion, not pressure.' },
+                { text: "Tell her these are standard risks and she needs to sign now", icon: '📋', feedback: 'bad', response: 'Pressuring consent is unethical and legally problematic. Consent must be voluntary and informed.' },
+                { text: "Have the nurse explain the risks to her", icon: '👩‍⚕️', feedback: 'bad', response: 'The physician performing the procedure must obtain informed consent. Nurses can witness but shouldn\'t be obtaining consent for your procedure.' },
+                { text: "Cancel the procedure if she won't sign", icon: '❌', feedback: 'okay', response: 'Respect for autonomy means she can decline, but first try to address her concerns. Cancellation should be her informed choice, not due to unresolved questions.' }
+            ]
+        },
+        
+        // LOW - Difficult Patient
+        {
+            type: 'nurse',
+            title: 'Difficult Interaction',
+            icon: '😤',
+            message: "The patient in room 5 is being verbally abusive to staff and refusing his medications. He's calling everyone incompetent and threatening to sue.",
+            urgency: 'low',
+            options: [
+                { text: "I'll talk to him calmly, validate frustration, set boundaries", icon: '💬', feedback: 'good', response: 'Good approach. Difficult behavior often stems from fear, pain, or loss of control. Acknowledge his frustration, explore the underlying issue, but also set clear boundaries about acceptable behavior.' },
+                { text: "Transfer his care to another physician", icon: '🔄', feedback: 'okay', response: 'Sometimes necessary, but try de-escalation first. Transferring care should be last resort, not first response to difficult patients.' },
+                { text: "Threaten to discharge him if he doesn't cooperate", icon: '🚪', feedback: 'bad', response: 'Threats escalate conflict. You may need to discuss discharge if behavior continues, but start with understanding and boundaries.' },
+                { text: "Document his behavior and ignore him", icon: '📝', feedback: 'bad', response: 'Ignoring won\'t solve anything and may worsen his behavior. He still needs medical care. Address the situation directly.' }
+            ]
+        },
+        
+        // EMERGENT - Chest Pain with ST Changes
+        {
+            type: 'lab',
+            title: 'Critical ECG',
+            icon: '❤️',
+            message: "The ECG you ordered on the patient with chest pain shows ST elevations in leads II, III, and aVF. Reciprocal depressions in I and aVL.",
+            urgency: 'emergent',
+            options: [
+                { text: "Activate cath lab NOW - this is a STEMI", icon: '🏃', feedback: 'good', response: 'Correct! Inferior STEMI (RCA or circumflex territory). Door-to-balloon time goal is <90 minutes. Activate cath lab, give aspirin, heparin, consider right-sided ECG for RV involvement.' },
+                { text: "Repeat the ECG to confirm", icon: '🔄', feedback: 'bad', response: 'Don\'t delay for repeat ECG. ST elevations + chest pain = STEMI until proven otherwise. Activate cath lab now.' },
+                { text: "Start heparin and admit to the cardiac unit", icon: '💉', feedback: 'bad', response: 'A STEMI needs emergent reperfusion, not just anticoagulation. Without cath, he\'s having ongoing heart muscle death.' },
+                { text: "Give thrombolytics", icon: '💊', feedback: 'okay', response: 'Only if PCI isn\'t available within 120 minutes. If your hospital has a cath lab, primary PCI is preferred over lytics.' }
+            ]
+        },
+        
+        // URGENT - Postop Fever
+        {
+            type: 'nurse',
+            title: 'Postop Fever',
+            icon: '🌡️',
+            message: "POD 3 patient after colectomy just spiked to 102.5°F. Incision looks okay. He's been on the floor, not ambulating much. Slightly tachycardic.",
+            urgency: 'urgent',
+            options: [
+                { text: "Examine wound, lungs, legs, and Foley - think of the 5 W's", icon: '🔍', feedback: 'good', response: 'Correct! POD3 fever: Wind (atelectasis), Water (UTI), Wound, Walking (DVT), Wonder drugs. Examine thoroughly, get UA, CXR, consider duplex if indicated.' },
+                { text: "Start broad spectrum antibiotics immediately", icon: '💊', feedback: 'okay', response: 'May be needed but examine first. Atelectasis (most common early postop fever) doesn\'t need antibiotics - it needs incentive spirometry and mobilization.' },
+                { text: "It's probably just postop inflammation, observe", icon: '👁️', feedback: 'bad', response: 'Don\'t assume. POD3 is classic timing for surgical site infection, pneumonia, or UTI. Needs evaluation.' },
+                { text: "Give Tylenol and recheck in 4 hours", icon: '💊', feedback: 'bad', response: 'Treating the symptom without finding the cause. Evaluate the patient to identify and treat the source.' }
+            ]
+        },
+        
+        // MODERATE - Blood Transfusion
+        {
+            type: 'nurse',
+            title: 'Transfusion Reaction',
+            icon: '🩸',
+            message: "Dr., the patient receiving blood just developed rigors and his temp went from 98.6 to 100.8. Vital signs otherwise stable. He feels cold.",
+            urgency: 'moderate',
+            options: [
+                { text: "Stop transfusion, send reaction workup, supportive care", icon: '⏹️', feedback: 'good', response: 'Correct! Any reaction during transfusion: STOP the blood. Could be febrile non-hemolytic (most common) or early sign of hemolytic reaction. Send samples, give Tylenol, monitor closely.' },
+                { text: "Slow the transfusion rate and monitor", icon: '🔄', feedback: 'bad', response: 'Don\'t continue blood during a reaction. Stop it, evaluate, then decide if/how to proceed.' },
+                { text: "Give Tylenol and continue - rigors are common", icon: '💊', feedback: 'bad', response: 'Never continue transfusion through a reaction. Even \"benign\" febrile reactions require stopping to rule out hemolytic reaction.' },
+                { text: "Give IV Benadryl and epinephrine", icon: '💉', feedback: 'bad', response: 'No signs of anaphylaxis (no hypotension, no respiratory distress, no hives). This looks like febrile reaction. Stop blood, workup, supportive care.' }
+            ]
+        },
+        
+        // LOW - End of Life Discussion
+        {
+            type: 'family',
+            title: 'Prognosis Question',
+            icon: '💭',
+            message: "Doctor, my father has been in the ICU for 3 weeks with no improvement. We need to know honestly - is he going to survive? We don't know what to do.",
+            urgency: 'low',
+            options: [
+                { text: "Let me sit down with your family and talk through what we're seeing", icon: '🤝', feedback: 'good', response: 'Excellent. This conversation needs time, privacy, and compassion. Explain prognosis honestly, explore goals, discuss what the patient would want, involve palliative care if not already.' },
+                { text: "There's always hope - we should keep trying everything", icon: '🙏', feedback: 'bad', response: 'False hope does harm. Families deserve honest information to make decisions aligned with patient\'s values.' },
+                { text: "You should talk to the attending about this", icon: '👨‍⚕️', feedback: 'okay', response: 'The attending should be involved, but don\'t dismiss the family. Acknowledge their distress and help facilitate the conversation.' },
+                { text: "We're doing everything we can - wait and see", icon: '⏰', feedback: 'bad', response: 'After 3 weeks with no improvement, \"wait and see\" isn\'t a plan. The family needs honest prognostic information and goals discussion.' }
+            ]
+        },
+        
+        // MODERATE - Drug Seeking Concern
+        {
+            type: 'nurse',
+            title: 'Opioid Request',
+            icon: '💊',
+            message: "Dr., the patient in room 8 is asking for IV Dilaudid by name, says only that works for his migraines. He's been in 6 times this month per the chart. No primary care.",
+            urgency: 'moderate',
+            options: [
+                { text: "Evaluate his headache properly, offer appropriate migraine treatment first", icon: '🔍', feedback: 'good', response: 'Correct approach. Take the complaint seriously, examine him, but offer evidence-based migraine treatment (fluids, NSAIDs, antiemetics, triptans). Opioids worsen chronic migraines.' },
+                { text: "Give him what he's asking for so he'll leave", icon: '💊', feedback: 'bad', response: 'This perpetuates the cycle and isn\'t good medicine. Opioids are actually contraindicated for chronic migraine - they cause medication overuse headache.' },
+                { text: "Refuse all pain medication - he's drug seeking", icon: '🚫', feedback: 'bad', response: 'Don\'t assume. He may have undertreated migraines and learned that only opioids get taken seriously in EDs. Evaluate and treat appropriately.' },
+                { text: "Discharge him without evaluation", icon: '🚪', feedback: 'bad', response: 'EMTALA violation. You must screen and provide a medical screening exam regardless of your suspicions about motives.' }
+            ]
+        },
+        
+        // URGENT - Acute Abdomen
+        {
+            type: 'nurse',
+            title: 'Surgical Belly',
+            icon: '🔴',
+            message: "Room 11 patient has worsening abdominal pain, now rigid. He came in with abdominal pain 4 hours ago, was waiting for CT. Now he looks much worse.",
+            urgency: 'urgent',
+            options: [
+                { text: "Examine STAT, call surgery, he may need OR without CT", icon: '🏃', feedback: 'good', response: 'Correct! Rigid abdomen = peritonitis = surgical emergency. Clinical exam trumps imaging if patient is deteriorating. Get surgery involved immediately.' },
+                { text: "Rush him to CT now", icon: '🔬', feedback: 'okay', response: 'CT helps but a rigid abdomen may need surgery regardless of CT findings. Call surgery while getting CT - don\'t let imaging delay surgical consultation.' },
+                { text: "Give morphine and reassess in 30 minutes", icon: '💊', feedback: 'bad', response: 'Don\'t mask signs of peritonitis with pain medication. This patient is getting worse and needs surgical evaluation NOW.' },
+                { text: "Repeat the abdominal X-ray", icon: '🔬', feedback: 'bad', response: 'X-ray won\'t change management at this point. He has peritonitis clinically. Call surgery.' }
+            ]
+        },
+        
+        // LOW - Insurance Issue
+        {
+            type: 'nurse',
+            title: 'Discharge Barrier',
+            icon: '📋',
+            message: "Case management says the patient's insurance won't cover the SNF placement. She can't go home alone but doesn't qualify for acute care anymore.",
+            urgency: 'low',
+            options: [
+                { text: "Keep her while CM/SW work on alternatives - safety first", icon: '🏥', feedback: 'good', response: 'Correct. Unsafe discharge is never acceptable. Work with team to explore options: different facilities, home health, family support, appeals process, financial assistance.' },
+                { text: "Discharge her home - it's an insurance problem, not medical", icon: '🏠', feedback: 'bad', response: 'Unsafe discharge leads to falls, readmissions, and harm. You have a duty to ensure safe disposition.' },
+                { text: "Transfer to a hospital with better social services", icon: '🚑', feedback: 'bad', response: 'You can\'t transfer for non-medical reasons. This is a social/system issue that needs to be solved, not transferred.' },
+                { text: "She should pay out of pocket", icon: '💰', feedback: 'bad', response: 'Not a realistic solution for most patients. Continue working on options that actually help her.' }
+            ]
+        },
+        
+        // EMERGENT - Status Epilepticus
+        {
+            type: 'nurse',
+            title: 'Ongoing Seizure',
+            icon: '⚡',
+            message: "The patient in room 6 has been seizing for 7 minutes! We gave Ativan 4mg IV, it stopped briefly, then started again. She's still seizing.",
+            urgency: 'emergent',
+            options: [
+                { text: "More benzos NOW, prep phenytoin/fosphenytoin, protect airway", icon: '💉', feedback: 'good', response: 'Correct! Status epilepticus. Repeat benzo (lorazepam 4mg), then load with fosphenytoin or levetiracetam. If seizures continue, need propofol/midazolam and ICU. Always assess airway.' },
+                { text: "Wait - the Ativan might still work", icon: '⏰', feedback: 'bad', response: 'She\'s been seizing 7+ minutes, which is status epilepticus. Every minute of ongoing seizure increases brain damage risk. Treat aggressively.' },
+                { text: "Get a STAT EEG to confirm seizure", icon: '🔬', feedback: 'bad', response: 'You can see she\'s seizing - you don\'t need EEG confirmation. Treat now.' },
+                { text: "Intubate immediately", icon: '💨', feedback: 'okay', response: 'May be needed, but try more antiepileptics first. RSI can be difficult during active seizure. Control seizures while preparing for potential intubation.' }
+            ]
+        },
+        
+        // MODERATE - Falls Risk
+        {
+            type: 'nurse',
+            title: 'Fall Prevention',
+            icon: '🚶',
+            message: "Dr., Mr. Johnson fell trying to get to the bathroom again. Third time this admission. No apparent injury, but I'm worried. He insists on walking alone.",
+            urgency: 'moderate',
+            options: [
+                { text: "Review meds, PT consult, 1:1 sitter, bed alarm - multifactorial approach", icon: '🔍', feedback: 'good', response: 'Correct! Falls are multifactorial. Review sedating meds, delirium, orthostatics, PT evaluation, safety equipment. May need sitter if high risk. Document fall prevention plan.' },
+                { text: "Order a bed alarm and document", icon: '🔔', feedback: 'okay', response: 'Bed alarm helps but doesn\'t prevent falls, just alerts. Need comprehensive approach: meds review, PT, maybe sitter.' },
+                { text: "Put in a Foley so he doesn't need to get up", icon: '🏥', feedback: 'bad', response: 'Foleys increase infection, delirium, and immobility. Falls are bad, but CAUTIs and delirium are also bad. Find better solutions.' },
+                { text: "Restrain him so he can't get up alone", icon: '🔗', feedback: 'bad', response: 'Restraints are last resort, increase delirium, and have their own risks. Try all other interventions first.' }
+            ]
+        },
+        
+        // URGENT - Allergic to Ordered Drug
+        {
+            type: 'nurse',
+            title: 'Allergy Alert',
+            icon: '⚠️',
+            message: "Doctor, you ordered ceftriaxone but the patient has a documented penicillin allergy - 'hives all over' per the chart. Pharmacy is asking if you still want to give it.",
+            urgency: 'urgent',
+            options: [
+                { text: "Good catch - what was the reaction? Hives isn't severe, discuss risk vs benefit", icon: '💬', feedback: 'good', response: 'Correct thinking! True penicillin allergy cross-reactivity with cephalosporins is <2%. Hives is low-risk reaction. Discuss with patient, likely safe to give ceftriaxone. If anaphylaxis history, use alternative.' },
+                { text: "Cancel it - use azithromycin instead", icon: '❌', feedback: 'okay', response: 'Safe but may be less effective depending on infection. Most penicillin \"allergies\" are not true IgE-mediated. Worth discussing with patient.' },
+                { text: "Give it anyway - I already ordered it", icon: '💊', feedback: 'bad', response: 'Never ignore allergy alerts. You need to assess the allergy and have an informed discussion before proceeding.' },
+                { text: "Skin test her first", icon: '🔬', feedback: 'okay', response: 'Skin testing is gold standard but takes time and resources. For hives-only history, cross-reactivity risk is low enough to often proceed with monitoring.' }
+            ]
+        },
+        
+        // LOW - Medical Student Teaching
+        {
+            type: 'page',
+            title: 'Teaching Request',
+            icon: '📚',
+            message: "Hi Dr., I'm the third-year student on your service. Do you have time to go over my patient's presentation? I'm confused about the management plan.",
+            urgency: 'low',
+            options: [
+                { text: "Let's find 15 minutes - teaching is important", icon: '👨‍🏫', feedback: 'good', response: 'Correct attitude! Teaching is part of academic medicine. Finding time for learners, even when busy, is important for their development and patient care.' },
+                { text: "Read about it and we'll discuss on rounds", icon: '📖', feedback: 'okay', response: 'Self-directed learning is valuable, but don\'t dismiss the request. Make sure to follow up during rounds.' },
+                { text: "Ask the resident to teach you", icon: '👨‍⚕️', feedback: 'okay', response: 'Residents are great teachers, but attending oversight of student education is important. Try to make some time.' },
+                { text: "I'm too busy - you'll figure it out", icon: '🚶', feedback: 'bad', response: 'This dismisses the learner and may leave gaps in patient care understanding. Find time for teaching.' }
+            ]
+        },
+        
+        // MODERATE - Discharge Against Advice
+        {
+            type: 'nurse',
+            title: 'AMA Discharge',
+            icon: '🚪',
+            message: "Dr., Mr. Williams wants to leave AMA. He's being treated for cellulitis with IV antibiotics but says he has to work tomorrow or he'll lose his job.",
+            urgency: 'moderate',
+            options: [
+                { text: "Talk with him - explore concerns, see if oral switch is possible", icon: '💬', feedback: 'good', response: 'Excellent! Understand his situation. Maybe oral antibiotics are appropriate at this point? Address barriers. If he must leave, ensure he understands risks and has follow-up.' },
+                { text: "He can't leave - I won't sign AMA papers", icon: '❌', feedback: 'bad', response: 'Patients have the right to leave. Refusing to complete AMA paperwork doesn\'t prevent departure - it just removes documentation of counseling.' },
+                { text: "Let him leave - it's his choice", icon: '🚶', feedback: 'okay', response: 'It IS his choice, but you should explore his concerns first. There may be solutions (oral antibiotics, social work for job issues).' },
+                { text: "Tell him if he leaves he can't come back", icon: '🚫', feedback: 'bad', response: 'Never threaten to withhold future care. That\'s unethical and drives patients away from seeking help when needed.' }
+            ]
+        },
+        
+        // URGENT - High INR
+        {
+            type: 'lab',
+            title: 'Critical INR',
+            icon: '🧪',
+            message: "Lab critical value: INR 8.4 on your patient who takes warfarin for atrial fibrillation. She denies any bleeding symptoms.",
+            urgency: 'urgent',
+            options: [
+                { text: "Hold warfarin, give vitamin K, check for occult bleeding", icon: '💊', feedback: 'good', response: 'Correct! INR >8 has high bleed risk even without symptoms. Hold warfarin, give oral vitamin K (2.5-5mg). Check hemoglobin, stool guaiac. If any bleeding, may need FFP or PCC.' },
+                { text: "Hold warfarin and recheck INR tomorrow", icon: '⏰', feedback: 'okay', response: 'Holding warfarin is correct, but INR 8.4 is dangerously high. Vitamin K actively reverses anticoagulation rather than just waiting for clearance.' },
+                { text: "She's not bleeding, so just monitor closely", icon: '👁️', feedback: 'bad', response: 'INR 8.4 = high bleeding risk. She could have life-threatening hemorrhage at any moment. Active intervention needed.' },
+                { text: "Give FFP immediately", icon: '🩸', feedback: 'okay', response: 'FFP reverses warfarin but is reserved for active bleeding. For asymptomatic over-anticoagulation, vitamin K is appropriate.' }
+            ]
+        },
+        
+        // LOW - Cross-Coverage Question
+        {
+            type: 'page',
+            title: 'Cross-Cover',
+            icon: '📱',
+            message: "Hi, covering night float. Your patient Mrs. Adams is asking for a sleeping pill. She's 78, post-hip surgery. I don't see PRN orders. What do you want me to give?",
+            urgency: 'low',
+            options: [
+                { text: "Try non-pharm first (ear plugs, dim lights). If needed, low dose melatonin", icon: '🌙', feedback: 'good', response: 'Excellent! Sleep hygiene first. Elderly post-op patients are high risk for delirium - avoid sedatives if possible. Melatonin is safer than benzos or Z-drugs.' },
+                { text: "Zolpidem 5mg - standard sleep med", icon: '💊', feedback: 'bad', response: 'Z-drugs significantly increase fall and delirium risk in elderly post-surgical patients. Avoid if possible.' },
+                { text: "Diphenhydramine 25mg - it's just Benadryl", icon: '💊', feedback: 'bad', response: 'Anticholinergics are on the Beers list - high risk for confusion and falls in elderly. Avoid.' },
+                { text: "Lorazepam 0.5mg for anxiety and sleep", icon: '💊', feedback: 'bad', response: 'Benzos are high risk for delirium and falls in elderly post-surgical patients. Try non-pharmacological approaches first.' }
+            ]
+        },
+        
+        // MODERATE - Interpreter Need
+        {
+            type: 'nurse',
+            title: 'Language Barrier',
+            icon: '🌍',
+            message: "Dr., the patient in room 7 doesn't speak English. Her daughter has been translating, but now we need to discuss the cancer diagnosis. The daughter is very upset.",
+            urgency: 'moderate',
+            options: [
+                { text: "Get a professional medical interpreter - this is too important for family", icon: '📞', feedback: 'good', response: 'Correct! For serious diagnoses, you MUST use professional interpreter. Family members shouldn\'t translate bad news - they may filter, editorialize, or be too distressed.' },
+                { text: "The daughter is fine - she knows the medical terms", icon: '👨‍👩‍👧', feedback: 'bad', response: 'Family interpretation is inadequate for serious discussions. Daughter is emotionally involved and may not accurately convey information.' },
+                { text: "Use Google Translate on your phone", icon: '📱', feedback: 'bad', response: 'Machine translation is not appropriate for medical conversations, especially life-changing diagnoses. Get a professional interpreter.' },
+                { text: "Wait until tomorrow when a bilingual doctor is here", icon: '⏰', feedback: 'okay', response: 'Delay may be harmful if decisions need to be made. Professional interpreter services are usually available 24/7 by phone.' }
+            ]
+        },
+        
+        // MODERATE - Nursing Concern Override
+        {
+            type: 'nurse',
+            title: 'Nurse Advocacy',
+            icon: '👩‍⚕️',
+            message: "Dr., I've been this patient's nurse for 3 days. Something is different today - she just doesn't look right. Her vitals are normal but I'm really worried.",
+            urgency: 'moderate',
+            options: [
+                { text: "I trust your instincts - let me come examine her", icon: '🏃', feedback: 'good', response: 'Excellent response! Experienced nurses have clinical intuition that shouldn\'t be dismissed. \"Doesn\'t look right\" often precedes objective deterioration.' },
+                { text: "Vitals are normal, she's probably fine", icon: '📊', feedback: 'bad', response: 'Normal vitals don\'t rule out developing problems. Nursing intuition from someone who knows the patient is valuable - don\'t dismiss it.' },
+                { text: "Order some labs and let me know the results", icon: '🔬', feedback: 'okay', response: 'Labs may help, but you should examine the patient. The nurse is telling you something is wrong - trust that.' },
+                { text: "Call rapid response if she gets worse", icon: '📞', feedback: 'bad', response: 'Why wait until she crashes? The nurse is telling you NOW that something is wrong. Be proactive.' }
+            ]
         }
     ];
     
@@ -64665,97 +65087,153 @@ This patient's presentation details include everything from the history question
         
         return `
             <div class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onclick="closeTutorial(event)">
-                <div class="bg-white dark:bg-zinc-900 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-xl border border-zinc-200 dark:border-zinc-800" onclick="event.stopPropagation()">
+                <div class="bg-white dark:bg-zinc-900 rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-xl border border-zinc-200 dark:border-zinc-800" onclick="event.stopPropagation()">
                     <div class="sticky top-0 bg-white dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-800 p-4 flex justify-between items-center">
-                        <h2 class="text-lg font-medium text-zinc-900 dark:text-zinc-100">How to Use ReasonDx</h2>
+                        <h2 class="text-lg font-medium text-zinc-900 dark:text-zinc-100">📚 How to Use ReasonDx</h2>
                         <button onclick="closeTutorial()" class="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 text-2xl leading-none">&times;</button>
                     </div>
                     
                     <div class="p-6 space-y-6">
-                        <!-- OSCE Success Tips -->
-                        <div class="border border-zinc-200 dark:border-zinc-700 rounded-lg p-4">
-                            <h3 class="font-medium text-zinc-900 dark:text-zinc-100 mb-2">The ReasonDx Approach</h3>
-                            <p class="text-sm text-zinc-600 dark:text-zinc-400 mb-3">Learn to ask the 5 right questions instead of the 25 wrong ones.</p>
-                            <ul class="text-sm text-zinc-600 dark:text-zinc-400 space-y-1">
-                                <li>• <strong>Hypothesis-driven</strong> — Every question should test a specific diagnosis</li>
+                        <!-- The ReasonDx Approach -->
+                        <div class="border border-blue-200 dark:border-blue-800 rounded-lg p-4 bg-blue-50 dark:bg-blue-900/20">
+                            <h3 class="font-medium text-blue-900 dark:text-blue-100 mb-2">🎯 The ReasonDx Approach</h3>
+                            <p class="text-sm text-blue-700 dark:text-blue-300 mb-3">Master hypothesis-driven clinical reasoning - ask the 5 right questions instead of 25 wrong ones.</p>
+                            <ul class="text-sm text-blue-700 dark:text-blue-300 space-y-1">
+                                <li>• <strong>Hypothesis-driven</strong> — Every question tests a specific diagnosis</li>
                                 <li>• <strong>Efficient</strong> — Focus on discriminating features</li>
-                                <li>• <strong>Time-aware</strong> — Physical exam has a 10-minute limit</li>
+                                <li>• <strong>Patient-centered</strong> — Talk to an AI patient who responds naturally</li>
+                                <li>• <strong>Feedback-rich</strong> — Learn from detailed explanations after each stage</li>
                             </ul>
                         </div>
                         
                         <!-- Getting Started -->
                         <div>
-                            <h3 class="font-medium text-zinc-900 dark:text-zinc-100 mb-3">Getting Started</h3>
+                            <h3 class="font-medium text-zinc-900 dark:text-zinc-100 mb-3">🚀 Getting Started</h3>
                             <ol class="list-decimal list-inside space-y-2 text-sm text-zinc-600 dark:text-zinc-400">
-                                <li>Set your name — Click "Edit Name" on the main screen</li>
-                                <li>Choose a mode — Learning, Clinical, or OSCE Simulation</li>
-                                <li>Enter unlock code — Get the code from your instructor</li>
-                                <li>Select a case variant — Each case has different presentations</li>
+                                <li><strong>Set your name</strong> — Click "Edit Name" on the main screen</li>
+                                <li><strong>Choose a mode</strong> — Learning (guided), Clinical (realistic), Quiz (timed), or Small Group</li>
+                                <li><strong>Select difficulty</strong> — Foundational, Intermediate, or Advanced cases</li>
+                                <li><strong>Pick a case</strong> — Browse by category or use the search/filter options</li>
                             </ol>
                         </div>
                         
                         <!-- Case Workflow -->
                         <div>
-                            <h3 class="font-medium text-zinc-900 dark:text-zinc-100 mb-3">Case Workflow</h3>
+                            <h3 class="font-medium text-zinc-900 dark:text-zinc-100 mb-3">📋 Case Workflow (5 Stages)</h3>
                             <div class="space-y-2">
                                 <div class="flex items-start gap-3 p-3 bg-zinc-50 dark:bg-zinc-800 rounded-lg text-sm">
-                                    <span class="font-medium text-zinc-500">1</span>
-                                    <div class="text-zinc-600 dark:text-zinc-400"><strong class="text-zinc-900 dark:text-zinc-100">Initial Differential</strong> — Form your hypothesis before gathering data</div>
+                                    <span class="w-6 h-6 rounded-full bg-blue-500 text-white flex items-center justify-center text-xs font-bold">1</span>
+                                    <div class="text-zinc-600 dark:text-zinc-400"><strong class="text-zinc-900 dark:text-zinc-100">Initial Differential</strong> — Form hypotheses based on chief complaint before gathering data. Rank diagnoses by likelihood.</div>
                                 </div>
                                 <div class="flex items-start gap-3 p-3 bg-zinc-50 dark:bg-zinc-800 rounded-lg text-sm">
-                                    <span class="font-medium text-zinc-500">2</span>
-                                    <div class="text-zinc-600 dark:text-zinc-400"><strong class="text-zinc-900 dark:text-zinc-100">History Taking</strong> — Review OLDCARTS, select relevant ROS systems</div>
+                                    <span class="w-6 h-6 rounded-full bg-blue-500 text-white flex items-center justify-center text-xs font-bold">2</span>
+                                    <div class="text-zinc-600 dark:text-zinc-400"><strong class="text-zinc-900 dark:text-zinc-100">History Taking</strong> — Interview the AI patient! Ask questions naturally and they'll respond realistically. Cover OLDCARTS, PMH, medications, social history, and ROS.</div>
                                 </div>
                                 <div class="flex items-start gap-3 p-3 bg-zinc-50 dark:bg-zinc-800 rounded-lg text-sm">
-                                    <span class="font-medium text-zinc-500">3</span>
-                                    <div class="text-zinc-600 dark:text-zinc-400"><strong class="text-zinc-900 dark:text-zinc-100">Physical Exam</strong> — Select appropriate examinations</div>
+                                    <span class="w-6 h-6 rounded-full bg-blue-500 text-white flex items-center justify-center text-xs font-bold">3</span>
+                                    <div class="text-zinc-600 dark:text-zinc-400"><strong class="text-zinc-900 dark:text-zinc-100">Physical Exam</strong> — Select appropriate exam components. Focus on hypothesis-driven selections, not "head-to-toe" checklists.</div>
                                 </div>
                                 <div class="flex items-start gap-3 p-3 bg-zinc-50 dark:bg-zinc-800 rounded-lg text-sm">
-                                    <span class="font-medium text-zinc-500">4</span>
-                                    <div class="text-zinc-600 dark:text-zinc-400"><strong class="text-zinc-900 dark:text-zinc-100">Revised Differential</strong> — Update based on findings</div>
+                                    <span class="w-6 h-6 rounded-full bg-blue-500 text-white flex items-center justify-center text-xs font-bold">4</span>
+                                    <div class="text-zinc-600 dark:text-zinc-400"><strong class="text-zinc-900 dark:text-zinc-100">Revised Differential</strong> — Update your rankings based on findings. Did the data support or refute your hypotheses?</div>
                                 </div>
                                 <div class="flex items-start gap-3 p-3 bg-zinc-50 dark:bg-zinc-800 rounded-lg text-sm">
-                                    <span class="font-medium text-zinc-500">5</span>
-                                    <div class="text-zinc-600 dark:text-zinc-400"><strong class="text-zinc-900 dark:text-zinc-100">Workup</strong> — Order labs and imaging</div>
+                                    <span class="w-6 h-6 rounded-full bg-blue-500 text-white flex items-center justify-center text-xs font-bold">5</span>
+                                    <div class="text-zinc-600 dark:text-zinc-400"><strong class="text-zinc-900 dark:text-zinc-100">Workup & Management</strong> — Order labs, imaging, and treatments. See results in real-time and iterate on your assessment.</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- AI Patient Chat -->
+                        <div class="border border-green-200 dark:border-green-800 rounded-lg p-4 bg-green-50 dark:bg-green-900/20">
+                            <h3 class="font-medium text-green-900 dark:text-green-100 mb-2">💬 AI Patient Chat</h3>
+                            <p class="text-sm text-green-700 dark:text-green-300 mb-2">During history taking, you can talk to an AI patient who responds naturally to your questions.</p>
+                            <ul class="text-sm text-green-700 dark:text-green-300 space-y-1">
+                                <li>• Ask questions in plain language - "How long have you had this pain?"</li>
+                                <li>• The patient responds based on their unique background and presentation</li>
+                                <li>• Practice building rapport and eliciting information efficiently</li>
+                                <li>• Works in Learning and Clinical modes</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Features -->
+                        <div>
+                            <h3 class="font-medium text-zinc-900 dark:text-zinc-100 mb-3">✨ Key Features</h3>
+                            <div class="grid md:grid-cols-2 gap-3 text-sm">
+                                <div class="p-3 bg-zinc-50 dark:bg-zinc-800 rounded-lg">
+                                    <strong class="text-zinc-900 dark:text-zinc-100">📊 Dashboard</strong>
+                                    <p class="text-zinc-600 dark:text-zinc-400">Track your progress, XP, streaks, and performance by category</p>
+                                </div>
+                                <div class="p-3 bg-zinc-50 dark:bg-zinc-800 rounded-lg">
+                                    <strong class="text-zinc-900 dark:text-zinc-100">🎯 Spaced Repetition</strong>
+                                    <p class="text-zinc-600 dark:text-zinc-400">Cases resurface at optimal intervals to reinforce learning</p>
+                                </div>
+                                <div class="p-3 bg-zinc-50 dark:bg-zinc-800 rounded-lg">
+                                    <strong class="text-zinc-900 dark:text-zinc-100">📋 Clinical Guidelines</strong>
+                                    <p class="text-zinc-600 dark:text-zinc-400">Evidence-based references integrated into case feedback</p>
+                                </div>
+                                <div class="p-3 bg-zinc-50 dark:bg-zinc-800 rounded-lg">
+                                    <strong class="text-zinc-900 dark:text-zinc-100">⚡ Interruption Simulator</strong>
+                                    <p class="text-zinc-600 dark:text-zinc-400">Realistic clinical interruptions test your prioritization skills</p>
+                                </div>
+                                <div class="p-3 bg-zinc-50 dark:bg-zinc-800 rounded-lg">
+                                    <strong class="text-zinc-900 dark:text-zinc-100">👥 Small Group Mode</strong>
+                                    <p class="text-zinc-600 dark:text-zinc-400">Work through cases collaboratively with classmates</p>
+                                </div>
+                                <div class="p-3 bg-zinc-50 dark:bg-zinc-800 rounded-lg">
+                                    <strong class="text-zinc-900 dark:text-zinc-100">🏆 Gamification</strong>
+                                    <p class="text-zinc-600 dark:text-zinc-400">Earn XP, badges, achievements, and compete on leaderboards</p>
                                 </div>
                             </div>
                         </div>
                         
                         <!-- Earning XP -->
                         <div>
-                            <h3 class="font-medium text-zinc-900 dark:text-zinc-100 mb-3">Earning XP & Badges</h3>
+                            <h3 class="font-medium text-zinc-900 dark:text-zinc-100 mb-3">🌟 Earning XP & Rewards</h3>
                             <ul class="space-y-1 text-sm text-zinc-600 dark:text-zinc-400">
-                                <li>• <strong>Base XP</strong> = Your score × 2</li>
+                                <li>• <strong>Base XP</strong> = Your score × 2 (e.g., 85% = 170 XP)</li>
                                 <li>• <strong>+50 bonus</strong> for scores 90% or higher</li>
                                 <li>• <strong>+25 bonus</strong> for completing under 10 minutes</li>
-                                <li>• <strong>+100 bonus</strong> for Weekly Challenge</li>
+                                <li>• <strong>+100 bonus</strong> for Weekly Challenge completion</li>
+                                <li>• <strong>Streaks</strong> — Daily practice earns streak bonuses</li>
+                                <li>• <strong>Badges</strong> — Unlock achievements for milestones and mastery</li>
                             </ul>
                         </div>
                         
-                        <!-- Challenges -->
+                        <!-- Case Categories -->
                         <div>
-                            <h3 class="font-medium text-zinc-900 dark:text-zinc-100 mb-3">Challenge a Classmate</h3>
-                            <div class="text-sm text-zinc-600 dark:text-zinc-400 space-y-2">
-                                <p><strong>To create:</strong> Complete any case, then click "Challenge Friend" on results.</p>
-                                <p><strong>To accept:</strong> Click "Accept Challenge" on menu and paste the code.</p>
+                            <h3 class="font-medium text-zinc-900 dark:text-zinc-100 mb-3">📁 225+ Cases Across Categories</h3>
+                            <div class="flex flex-wrap gap-2 text-xs">
+                                <span class="px-2 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded">❤️ Cardiology</span>
+                                <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded">🫁 Pulmonary</span>
+                                <span class="px-2 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 rounded">🦠 Infectious Disease</span>
+                                <span class="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded">🧠 Neurology</span>
+                                <span class="px-2 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded">🩺 GI</span>
+                                <span class="px-2 py-1 bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-300 rounded">🩹 Emergency</span>
+                                <span class="px-2 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded">🌡️ Endocrine</span>
+                                <span class="px-2 py-1 bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 rounded">💉 Allergy/Immunology</span>
+                                <span class="px-2 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded">🫘 Renal</span>
+                                <span class="px-2 py-1 bg-zinc-200 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-300 rounded">+ 15 more</span>
                             </div>
                         </div>
                         
                         <!-- Tips -->
                         <div>
-                            <h3 class="font-medium text-zinc-900 dark:text-zinc-100 mb-3">Tips for Success</h3>
+                            <h3 class="font-medium text-zinc-900 dark:text-zinc-100 mb-3">💡 Tips for Success</h3>
                             <ul class="space-y-1 text-sm text-zinc-600 dark:text-zinc-400">
                                 <li>• Always consider "Must-Not-Miss" diagnoses first</li>
-                                <li>• Use the Weekly Challenge for bonus XP</li>
-                                <li>• Check Recommendations to improve weak areas</li>
-                                <li>• Review teaching points after each case</li>
+                                <li>• Read the feedback carefully - teaching points explain the reasoning</li>
+                                <li>• Use the AI patient chat to practice real interview skills</li>
+                                <li>• Check your Dashboard → Recommendations for personalized study tips</li>
+                                <li>• Review guidelines for evidence-based decision making</li>
+                                <li>• Practice with interruptions enabled for realistic preparation</li>
                             </ul>
                         </div>
                     </div>
                     
                     <div class="sticky bottom-0 bg-white dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800 p-4">
                         <button onclick="closeTutorial()" class="w-full px-4 py-2.5 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 rounded-lg text-sm font-medium hover:bg-zinc-800 dark:hover:bg-zinc-200 transition">
-                            Got it
+                            Got it — Let's Practice!
                         </button>
                     </div>
                 </div>
