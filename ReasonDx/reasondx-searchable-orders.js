@@ -723,9 +723,23 @@
             this.refreshUI();
         },
         
+        // Debounce timer for search
+        searchDebounceTimer: null,
+        
         onSearch: function(query) {
+            // Clear any pending debounce
+            if (this.searchDebounceTimer) {
+                clearTimeout(this.searchDebounceTimer);
+            }
+            
+            // Store query immediately for UI feedback
             this.searchQuery = query;
-            this.refreshUI();
+            
+            // Debounce the UI refresh (300ms delay)
+            // This prevents the UI from refreshing on every keystroke on mobile
+            this.searchDebounceTimer = setTimeout(() => {
+                this.refreshUI();
+            }, 300);
         },
         
         clearSearch: function() {
@@ -919,6 +933,38 @@
             if (this._selectedReason && this._selectedDiagnoses.length > 0) {
                 this.addOrderWithJustification(orderId, this._selectedReason, this._selectedDiagnoses);
             }
+        },
+        
+        // Get system diagnoses (must-not-miss and likely) from case data instead of learner's differential
+        getSystemDiagnoses: function(fallbackDifferential) {
+            try {
+                // Try to get case diagnoses from the current case
+                const caseData = window.cases?.find(c => c.id === window.state?.caseType);
+                const variant = caseData?.variants?.[window.state?.variantKey];
+                const allDx = variant?.allDiagnoses || [];
+                
+                if (allDx.length > 0) {
+                    // Get must-not-miss and most-likely diagnoses
+                    const mustNotMiss = allDx.filter(d => d.correctCategory === 'must-not-miss').map(d => d.name);
+                    const mostLikely = allDx.filter(d => d.correctCategory === 'most-likely' || d.correctCategory === 'likely').map(d => d.name);
+                    const lessLikely = allDx.filter(d => d.correctCategory === 'less-likely').map(d => d.name);
+                    
+                    // Combine in priority order
+                    const systemDiagnoses = [...mustNotMiss, ...mostLikely, ...lessLikely];
+                    
+                    if (systemDiagnoses.length > 0) {
+                        return systemDiagnoses;
+                    }
+                }
+            } catch (e) {
+                console.warn('Could not get system diagnoses:', e);
+            }
+            
+            // Fallback to learner's differential or default
+            if (fallbackDifferential && fallbackDifferential.length > 0) {
+                return fallbackDifferential;
+            }
+            return ['General Workup'];
         },
         
         closeJustificationModal: function() {
