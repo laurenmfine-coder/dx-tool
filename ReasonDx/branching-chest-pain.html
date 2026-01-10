@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Branching Case: Chest Pain | ReasonDx</title>
+    <style>
+        :root {
+            --primary: #1E3A5F;
+            --primary-light: #2563EB;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --bg: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text: #1F2937;
+            --text-light: #6B7280;
+            --border: #E5E7EB;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            min-height: 100vh;
+            color: var(--text);
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 20px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        
+        .header-title { font-size: 1.3rem; font-weight: 600; }
+        .header-subtitle { font-size: 0.9rem; opacity: 0.8; }
+        
+        .header-stats { display: flex; gap: 24px; }
+        .stat { text-align: center; }
+        .stat-value { font-size: 1.5rem; font-weight: 700; }
+        .stat-label { font-size: 0.75rem; opacity: 0.8; }
+        
+        /* Main Container */
+        .main { max-width: 900px; margin: 0 auto; padding: 32px; }
+        
+        /* Progress Path */
+        .progress-path {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        
+        .path-node {
+            background: var(--primary-light);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .path-arrow { color: var(--text-light); }
+        
+        /* Stage Card */
+        .stage-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+        
+        .stage-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .stage-title { font-size: 1.2rem; font-weight: 600; }
+        
+        .stage-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .stage-badge.critical { background: #FEE2E2; color: var(--danger); }
+        .stage-badge.important { background: #FEF3C7; color: #B45309; }
+        .stage-badge.standard { background: #E0F2FE; color: #0369A1; }
+        
+        .stage-content { padding: 24px; }
+        
+        /* Patient Presentation */
+        .presentation {
+            background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+            border-left: 4px solid var(--primary-light);
+        }
+        
+        .presentation-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary-light);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .presentation-text {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text);
+        }
+        
+        /* Vitals */
+        .vitals {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        
+        .vital {
+            background: var(--bg);
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .vital-value { font-size: 1.2rem; font-weight: 700; color: var(--text); }
+        .vital-value.abnormal { color: var(--danger); }
+        .vital-label { font-size: 0.75rem; color: var(--text-light); }
+        
+        /* Decision Section */
+        .decision-section { margin-top: 24px; }
+        
+        .decision-prompt {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--primary);
+        }
+        
+        .decisions { display: flex; flex-direction: column; gap: 12px; }
+        
+        .decision-btn {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 16px 20px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .decision-btn:hover {
+            border-color: var(--primary-light);
+            background: #F8FAFF;
+            transform: translateX(4px);
+        }
+        
+        .decision-btn.selected {
+            border-color: var(--primary-light);
+            background: #EEF2FF;
+        }
+        
+        .decision-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--bg);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .decision-text { flex: 1; }
+        .decision-title { font-weight: 600; margin-bottom: 4px; }
+        .decision-desc { font-size: 0.9rem; color: var(--text-light); }
+        .decision-arrow { color: var(--text-light); font-size: 1.2rem; }
+        
+        /* Feedback Panel */
+        .feedback-panel {
+            margin-top: 24px;
+            border-radius: 12px;
+            padding: 20px;
+            display: none;
+        }
+        
+        .feedback-panel.show { display: block; }
+        
+        .feedback-panel.optimal {
+            background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%);
+            border-left: 4px solid var(--success);
+        }
+        
+        .feedback-panel.suboptimal {
+            background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+            border-left: 4px solid var(--warning);
+        }
+        
+        .feedback-panel.poor {
+            background: linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%);
+            border-left: 4px solid var(--danger);
+        }
+        
+        .feedback-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        
+        .feedback-icon { font-size: 1.5rem; }
+        .feedback-title { font-weight: 600; font-size: 1.1rem; }
+        .feedback-text { line-height: 1.6; margin-bottom: 16px; }
+        
+        .feedback-teaching {
+            background: rgba(255,255,255,0.6);
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+        }
+        
+        .feedback-teaching-label {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+        
+        /* Resources Section */
+        .resources-section {
+            margin-top: 12px;
+        }
+        
+        .resources-toggle {
+            background: rgba(255,255,255,0.8);
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 10px 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--primary);
+            transition: all 0.2s;
+        }
+        
+        .resources-toggle:hover {
+            background: rgba(255,255,255,1);
+        }
+        
+        .resources-toggle-icon {
+            transition: transform 0.2s;
+        }
+        
+        .resources-toggle.open .resources-toggle-icon {
+            transform: rotate(180deg);
+        }
+        
+        .resources-list {
+            display: none;
+            margin-top: 10px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 8px;
+            padding: 12px;
+        }
+        
+        .resources-list.show {
+            display: block;
+        }
+        
+        .resource-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .resource-item:last-child {
+            border-bottom: none;
+        }
+        
+        .resource-icon {
+            font-size: 1rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        
+        .resource-content {
+            flex: 1;
+        }
+        
+        .resource-link {
+            color: var(--primary-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .resource-link:hover {
+            text-decoration: underline;
+        }
+        
+        .resource-desc {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 2px;
+        }
+        
+        .resource-badge {
+            display: inline-block;
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 6px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .resource-badge.guideline {
+            background: #DBEAFE;
+            color: #1E40AF;
+        }
+        
+        .resource-badge.pubmed {
+            background: #FEE2E2;
+            color: #991B1B;
+        }
+        
+        /* Continue Button */
+        .continue-btn {
+            background: var(--primary-light);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 16px;
+        }
+        
+        .continue-btn:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        /* Outcome Card */
+        .outcome-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 32px;
+            text-align: center;
+        }
+        
+        .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
+        .outcome-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
+        
+        .outcome-card.good .outcome-title { color: var(--success); }
+        .outcome-card.fair .outcome-title { color: var(--warning); }
+        .outcome-card.poor .outcome-title { color: var(--danger); }
+        
+        .outcome-summary {
+            color: var(--text-light);
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+        
+        .outcome-stats {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        
+        .outcome-stat-value { font-size: 2rem; font-weight: 700; }
+        .outcome-stat-label { font-size: 0.85rem; color: var(--text-light); }
+        
+        .outcome-lessons {
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: left;
+            margin-bottom: 24px;
+        }
+        
+        .outcome-lessons h4 { margin-bottom: 12px; color: var(--primary); }
+        .outcome-lessons ul { margin-left: 20px; color: var(--text-light); line-height: 1.8; }
+        
+        .outcome-resources {
+            background: #EEF2FF;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: left;
+            margin-bottom: 24px;
+        }
+        
+        .outcome-resources h4 {
+            margin-bottom: 12px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .restart-btn {
+            background: var(--primary-light);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-right: 12px;
+        }
+        
+        .restart-btn:hover { background: var(--primary); }
+        
+        .try-different-btn {
+            background: white;
+            color: var(--primary-light);
+            border: 2px solid var(--primary-light);
+            padding: 12px 28px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        /* Timer Warning */
+        .timer-warning {
+            background: #FEF3C7;
+            border: 1px solid #F59E0B;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: #B45309;
+        }
+        
+        .timer-warning.critical {
+            background: #FEE2E2;
+            border-color: var(--danger);
+            color: #B91C1C;
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .hidden { display: none !important; }
+        
+        /* ECG Display Styles */
+        .ecg-display-container {
+            background: #FAFAFA;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 16px 0;
+            border: 1px solid #E5E7EB;
+        }
+        
+        .ecg-display-header {
+            background: #F3F4F6;
+            padding: 10px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #E5E7EB;
+        }
+        
+        .ecg-display-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #374151;
+        }
+        
+        .ecg-display-meta {
+            font-size: 0.8rem;
+            color: #6B7280;
+        }
+        
+        .ecg-strip {
+            padding: 12px;
+            overflow-x: auto;
+        }
+        
+        .ecg-strip svg {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .ecg-interpretation {
+            background: #FEF2F2;
+            border-top: 1px solid #FECACA;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .ecg-interpretation-badge {
+            background: #DC2626;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        .ecg-interpretation-text {
+            font-size: 0.9rem;
+            color: #991B1B;
+            font-weight: 500;
+        }
+        
+        .ecg-toggle-btn {
+            background: #EEF2FF;
+            border: 1px solid #C7D2FE;
+            color: #4338CA;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 16px;
+            transition: all 0.2s;
+        }
+        
+        .ecg-toggle-btn:hover {
+            background: #E0E7FF;
+        }
+        
+        @media (max-width: 600px) {
+            .header { padding: 16px; }
+            .main { padding: 16px; }
+            .outcome-stats { gap: 16px; }
+            .ecg-interpretation { flex-direction: column; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div>
+            <div class="header-title">🫀 Branching Case: Chest Pain</div>
+            <div class="header-subtitle">Your decisions shape the outcome</div>
+        </div>
+        <div class="header-stats">
+            <div class="stat">
+                <div class="stat-value" id="timeElapsed">0:00</div>
+                <div class="stat-label">Time Elapsed</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="decisionCount">0</div>
+                <div class="stat-label">Decisions</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="scoreDisplay">--</div>
+                <div class="stat-label">Performance</div>
+            </div>
+        </div>
+    </header>
+    
+    <main class="main">
+        <div class="progress-path" id="progressPath">
+            <span class="path-node">Start</span>
+        </div>
+        <div id="stageContainer"></div>
+    </main>
+    
+    <script>
+        // ===========================================
+        // ECG LIBRARY (Embedded for standalone use)
+        // ===========================================
+        
+        const ECGLibrary = {
+            config: {
+                width: 800,
+                height: 200,
+                gridMajorColor: '#FFCDD2',
+                gridMinorColor: '#FFEBEE',
+                traceColor: '#1A1A1A',
+                backgroundColor: '#FAFAFA'
+            },
+            
+            patterns: {
+                stemi_anterior: { id: "stemi_anterior", name: "Anterior STEMI", waveformMods: { stElevation: 3, tWave: 'hyperacute' } },
+                stemi_inferior: { id: "stemi_inferior", name: "Inferior STEMI", waveformMods: { stElevation: 3, tWave: 'hyperacute' } },
+                nstemi: { id: "nstemi", name: "NSTEMI", waveformMods: { stDepression: 1.5, tWave: 'inverted' } },
+                normal: { id: "normal", name: "Normal Sinus Rhythm", waveformMods: {} },
+                afib: { id: "afib", name: "Atrial Fibrillation", waveformMods: { rhythm: 'afib', heartRate: 110 } },
+                vfib: { id: "vfib", name: "Ventricular Fibrillation", waveformMods: { rhythm: 'vfib' } }
+            },
+            
+            generateSVG: function(patternId, options = {}) {
+                const pattern = this.patterns[patternId];
+                if (!pattern) return '<div>ECG not available</div>';
+                
+                const width = options.width || this.config.width;
+                const height = options.height || this.config.height;
+                const mods = pattern.waveformMods || {};
+                
+                let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="100%" height="${height}" style="max-width: 100%;">`;
+                svg += `<rect width="100%" height="100%" fill="${this.config.backgroundColor}"/>`;
+                svg += this._generateGrid(width, height);
+                svg += this._generateTrace(mods, width, height);
+                svg += '</svg>';
+                return svg;
+            },
+            
+            _generateGrid: function(width, height) {
+                let grid = '<g opacity="0.6">';
+                for (let x = 0; x <= width; x += 4) grid += `<line x1="${x}" y1="0" x2="${x}" y2="${height}" stroke="${this.config.gridMinorColor}" stroke-width="0.5"/>`;
+                for (let y = 0; y <= height; y += 4) grid += `<line x1="0" y1="${y}" x2="${width}" y2="${y}" stroke="${this.config.gridMinorColor}" stroke-width="0.5"/>`;
+                for (let x = 0; x <= width; x += 20) grid += `<line x1="${x}" y1="0" x2="${x}" y2="${height}" stroke="${this.config.gridMajorColor}" stroke-width="1"/>`;
+                for (let y = 0; y <= height; y += 20) grid += `<line x1="0" y1="${y}" x2="${width}" y2="${y}" stroke="${this.config.gridMajorColor}" stroke-width="1"/>`;
+                grid += '</g>';
+                return grid;
+            },
+            
+            _generateTrace: function(mods, width, height) {
+                const baseline = height / 2;
+                const maxAmp = height / 2 - 25;
+                
+                if (mods.rhythm === 'vfib') {
+                    let path = `M 0 ${baseline}`;
+                    for (let x = 0; x < width; x += 2) {
+                        const y = baseline + (Math.random() - 0.5) * maxAmp * 1.2 * Math.sin(x * 0.08);
+                        path += ` L ${x} ${y.toFixed(1)}`;
+                    }
+                    return `<path d="${path}" fill="none" stroke="${this.config.traceColor}" stroke-width="1.5"/>`;
+                }
+                
+                const heartRate = mods.heartRate || 96;
+                const beatDuration = 60000 / heartRate;
+                const pixelsPerMs = width / 2500;
+                const beatWidth = beatDuration * pixelsPerMs;
+                const numBeats = Math.ceil(width / beatWidth) + 1;
+                
+                let path = `M 0 ${baseline}`;
+                let currentX = 0;
+                
+                for (let beat = 0; beat < numBeats && currentX < width; beat++) {
+                    let thisBeatWidth = beatWidth;
+                    if (mods.rhythm === 'afib') thisBeatWidth = beatWidth * (0.6 + Math.random() * 0.8);
+                    
+                    for (let i = 0; i < 100; i++) {
+                        const t = i / 100;
+                        const x = currentX + t * thisBeatWidth;
+                        if (x > width) break;
+                        
+                        let y = (Math.random() - 0.5) * 0.02 * maxAmp;
+                        if (mods.rhythm === 'afib') y += (Math.random() - 0.5) * 0.08 * maxAmp;
+                        
+                        // P wave
+                        if (t < 0.08 && mods.rhythm !== 'afib') y += 0.1 * maxAmp * Math.sin(t / 0.08 * Math.PI);
+                        
+                        // QRS
+                        if (t >= 0.16 && t < 0.24) {
+                            const qrsPhase = (t - 0.16) / 0.08;
+                            if (qrsPhase < 0.15) y += -0.1 * maxAmp * Math.sin(qrsPhase / 0.15 * Math.PI);
+                            else if (qrsPhase < 0.6) y += 0.8 * maxAmp * Math.sin((qrsPhase - 0.15) / 0.45 * Math.PI);
+                            else y += -0.15 * maxAmp * Math.sin((qrsPhase - 0.6) / 0.4 * Math.PI);
+                        }
+                        
+                        // ST segment
+                        if (t >= 0.24 && t < 0.32) {
+                            if (mods.stElevation) y += (mods.stElevation / 10) * maxAmp;
+                            else if (mods.stDepression) y += -(mods.stDepression / 10) * maxAmp;
+                        }
+                        
+                        // T wave
+                        if (t >= 0.32 && t < 0.48) {
+                            const tPhase = (t - 0.32) / 0.16;
+                            let tAmp = 0.2;
+                            if (mods.tWave === 'hyperacute') tAmp = 0.6;
+                            else if (mods.tWave === 'inverted') tAmp = -0.35;
+                            y += tAmp * maxAmp * Math.sin(tPhase * Math.PI);
+                            if (mods.stElevation) y += (mods.stElevation / 10) * maxAmp * (1 - tPhase) * 0.5;
+                        }
+                        
+                        path += ` L ${x.toFixed(1)} ${(baseline - y).toFixed(1)}`;
+                    }
+                    currentX += thisBeatWidth;
+                }
+                
+                return `<path d="${path}" fill="none" stroke="${this.config.traceColor}" stroke-width="1.5" stroke-linecap="round"/>`;
+            }
+        };
+        
+        // ===========================================
+        // EVIDENCE-BASED RESOURCES DATABASE
+        // ===========================================
+        
+        const resources = {
+            ecg_timing: [
+                {
+                    type: "guideline",
+                    title: "2021 ACC/AHA/SCAI Guideline for Coronary Artery Revascularization",
+                    url: "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001038",
+                    desc: "Section 4.1: ECG within 10 minutes of first medical contact"
+                },
+                {
+                    type: "pubmed",
+                    title: "De Luca G, et al. Time delay to treatment and mortality in STEMI",
+                    url: "https://pubmed.ncbi.nlm.nih.gov/14662259/",
+                    desc: "Circulation 2004 - Every 30-min delay increases mortality 7.5%"
+                }
+            ],
+            stemi_management: [
+                {
+                    type: "guideline",
+                    title: "2013 ACCF/AHA STEMI Guidelines",
+                    url: "https://www.ahajournals.org/doi/10.1161/CIR.0b013e3182742cf6",
+                    desc: "Primary PCI is recommended for STEMI if door-to-balloon <90 min"
+                },
+                {
+                    type: "guideline",
+                    title: "2017 ESC STEMI Guidelines",
+                    url: "https://academic.oup.com/eurheartj/article/39/2/119/4095042",
+                    desc: "European Society of Cardiology recommendations"
+                },
+                {
+                    type: "pubmed",
+                    title: "Keeley EC, et al. Primary PCI vs Fibrinolysis Meta-analysis",
+                    url: "https://pubmed.ncbi.nlm.nih.gov/12517460/",
+                    desc: "Lancet 2003 - PCI superior to fibrinolysis for STEMI"
+                }
+            ],
+            door_to_balloon: [
+                {
+                    type: "guideline",
+                    title: "ACC Door-to-Balloon Initiative",
+                    url: "https://www.acc.org/tools-and-practice-support/quality-programs/d2b-alliance",
+                    desc: "Target <90 minutes from first medical contact to balloon"
+                },
+                {
+                    type: "pubmed",
+                    title: "Nallamothu BK, et al. Times to Treatment in STEMI",
+                    url: "https://pubmed.ncbi.nlm.nih.gov/17954541/",
+                    desc: "NEJM 2007 - Association of door-to-balloon time with mortality"
+                }
+            ],
+            acs_medications: [
+                {
+                    type: "guideline",
+                    title: "2016 ACC/AHA Guideline on Duration of DAPT",
+                    url: "https://www.ahajournals.org/doi/10.1161/CIR.0000000000000404",
+                    desc: "Dual antiplatelet therapy recommendations for ACS"
+                },
+                {
+                    type: "pubmed",
+                    title: "Wallentin L, et al. Ticagrelor vs Clopidogrel (PLATO)",
+                    url: "https://pubmed.ncbi.nlm.nih.gov/19717846/",
+                    desc: "NEJM 2009 - Ticagrelor reduces CV events vs clopidogrel"
+                },
+                {
+                    type: "pubmed",
+                    title: "Yusuf S, et al. Clopidogrel in ACS (CURE Trial)",
+                    url: "https://pubmed.ncbi.nlm.nih.gov/11519503/",
+                    desc: "NEJM 2001 - Benefits of clopidogrel + aspirin in ACS"
+                }
+            ],
+            troponin_timing: [
+                {
+                    type: "guideline",
+                    title: "2020 ESC NSTE-ACS Guidelines",
+                    url: "https://academic.oup.com/eurheartj/article/42/14/1289/5898842",
+                    desc: "High-sensitivity troponin algorithms for diagnosis"
+                },
+                {
+                    type: "pubmed",
+                    title: "Reichlin T, et al. Early Diagnosis of MI Using hs-Troponin",
+                    url: "https://pubmed.ncbi.nlm.nih.gov/19652124/",
+                    desc: "NEJM 2009 - High-sensitivity troponin for early detection"
+                }
+            ],
+            fibrinolysis: [
+                {
+                    type: "guideline",
+                    title: "2013 ACCF/AHA STEMI Guidelines - Fibrinolysis Section",
+                    url: "https://www.ahajournals.org/doi/10.1161/CIR.0b013e3182742cf6",
+                    desc: "Fibrinolysis when PCI cannot be performed within 120 min"
+                },
+                {
+                    type: "pubmed",
+                    title: "Armstrong PW, et al. STREAM Trial",
+                    url: "https://pubmed.ncbi.nlm.nih.gov/23477396/",
+                    desc: "NEJM 2013 - Pharmacoinvasive strategy vs primary PCI"
+                }
+            ],
+            vfib_stemi: [
+                {
+                    type: "pubmed",
+                    title: "Mehta RH, et al. Ventricular arrhythmias in STEMI",
+                    url: "https://pubmed.ncbi.nlm.nih.gov/19808470/",
+                    desc: "Circulation 2009 - V-fib incidence and timing in STEMI"
+                },
+                {
+                    type: "guideline",
+                    title: "2020 AHA ACLS Guidelines",
+                    url: "https://www.ahajournals.org/doi/10.1161/CIR.0000000000000916",
+                    desc: "Cardiac arrest management algorithms"
+                }
+            ],
+            cardiogenic_shock: [
+                {
+                    type: "pubmed",
+                    title: "Hochman JS, et al. SHOCK Trial",
+                    url: "https://pubmed.ncbi.nlm.nih.gov/10451459/",
+                    desc: "NEJM 1999 - Early revascularization in cardiogenic shock"
+                },
+                {
+                    type: "guideline",
+                    title: "2017 AHA Scientific Statement on Cardiogenic Shock",
+                    url: "https://www.ahajournals.org/doi/10.1161/CIR.0000000000000525",
+                    desc: "Contemporary management of cardiogenic shock"
+                }
+            ]
+        };
+        
+        function renderResources(resourceKeys) {
+            const allResources = [];
+            resourceKeys.forEach(key => {
+                if (resources[key]) {
+                    allResources.push(...resources[key]);
+                }
+            });
+            
+            if (allResources.length === 0) return '';
+            
+            const resourcesHtml = allResources.map(r => `
+                <div class="resource-item">
+                    <span class="resource-icon">${r.type === 'guideline' ? '📋' : '📄'}</span>
+                    <div class="resource-content">
+                        <a href="${r.url}" target="_blank" rel="noopener" class="resource-link">
+                            ${r.title}
+                            <span class="resource-badge ${r.type}">${r.type === 'guideline' ? 'Guideline' : 'PubMed'}</span>
+                        </a>
+                        <div class="resource-desc">${r.desc}</div>
+                    </div>
+                </div>
+            `).join('');
+            
+            return `
+                <div class="resources-section">
+                    <button class="resources-toggle" onclick="toggleResources(this)">
+                        <span>📚 Evidence-Based Resources (${allResources.length})</span>
+                        <span class="resources-toggle-icon">▼</span>
+                    </button>
+                    <div class="resources-list">
+                        ${resourcesHtml}
+                    </div>
+                </div>
+            `;
+        }
+        
+        function toggleResources(btn) {
+            btn.classList.toggle('open');
+            const list = btn.nextElementSibling;
+            list.classList.toggle('show');
+        }
+        
+        // ===========================================
+        // CASE DATA WITH RESOURCE REFERENCES
+        // ===========================================
+        
+        const caseData = {
+            id: "acs-branch-001",
+            title: "Chest Pain - Critical Decisions",
+            
+            initialState: {
+                patientStatus: "stable",
+                timeFromOnset: 120,
+                troponinOrdered: false,
+                ecgOrdered: false,
+                cathLabActivated: false,
+                aspirinGiven: false,
+                heparinGiven: false
+            },
+            
+            stages: {
+                initial: {
+                    id: "initial",
+                    title: "Initial Presentation",
+                    badge: { type: "critical", text: "⏱️ Time-Sensitive" },
+                    presentation: `A 58-year-old man is brought to the Emergency Department by EMS with a chief complaint of chest pain. 
+                    
+He describes substernal chest pressure that started 2 hours ago while watching TV. The pain radiates to his left arm and jaw. He appears diaphoretic and anxious. He has a history of hypertension and type 2 diabetes. He takes lisinopril and metformin.
+
+EMS gave him aspirin 325mg en route.`,
+                    vitals: {
+                        hr: { value: 98, label: "HR", unit: "bpm", abnormal: true },
+                        bp: { value: "158/94", label: "BP", unit: "mmHg", abnormal: true },
+                        rr: { value: 22, label: "RR", unit: "/min", abnormal: true },
+                        o2: { value: 94, label: "SpO2", unit: "%", abnormal: true },
+                        temp: { value: 98.6, label: "Temp", unit: "°F", abnormal: false }
+                    },
+                    prompt: "What is your first priority?",
+                    decisions: [
+                        {
+                            id: "ecg_first",
+                            icon: "📊",
+                            title: "Order stat ECG",
+                            description: "Get an ECG immediately to evaluate for STEMI",
+                            next: "ecg_result_stemi",
+                            quality: "optimal",
+                            feedback: {
+                                title: "Excellent Prioritization!",
+                                text: "In a patient with chest pain and cardiac risk factors, an ECG should be obtained within 10 minutes of arrival. This is the fastest way to identify a STEMI, which requires emergent intervention.",
+                                teaching: "ACC/AHA guidelines recommend ECG within 10 minutes for all patients with suspected ACS. Time is myocardium - every minute of delay results in more cardiac cell death.",
+                                resources: ["ecg_timing", "stemi_management"]
+                            },
+                            stateChanges: { ecgOrdered: true }
+                        },
+                        {
+                            id: "full_history",
+                            icon: "📋",
+                            title: "Complete detailed history",
+                            description: "Take a thorough history before ordering tests",
+                            next: "history_delay",
+                            quality: "suboptimal",
+                            feedback: {
+                                title: "Time-Sensitive Situation",
+                                text: "While history is important, in a patient with classic ACS symptoms, getting an ECG should not be delayed. You can gather history while the ECG is being performed.",
+                                teaching: "In suspected STEMI, parallel processing is key. Order the ECG immediately, then continue your assessment while waiting for results.",
+                                resources: ["ecg_timing"]
+                            },
+                            stateChanges: { timeFromOnset: 135 }
+                        },
+                        {
+                            id: "labs_first",
+                            icon: "🧪",
+                            title: "Order troponin and CBC/BMP",
+                            description: "Get comprehensive labs to evaluate",
+                            next: "labs_delay",
+                            quality: "suboptimal",
+                            feedback: {
+                                title: "Labs Can Wait",
+                                text: "While troponin is important for ACS diagnosis, it takes time to result. In a patient with ongoing symptoms, the ECG provides immediate, actionable information and should come first.",
+                                teaching: "Troponin is useful but takes 30-60 minutes to result. ECG takes 2 minutes and can immediately identify STEMI requiring emergent cath lab activation.",
+                                resources: ["troponin_timing", "ecg_timing"]
+                            },
+                            stateChanges: { troponinOrdered: true, timeFromOnset: 130 }
+                        }
+                    ]
+                },
+                
+                ecg_result_stemi: {
+                    id: "ecg_result_stemi",
+                    title: "ECG Results",
+                    badge: { type: "critical", text: "🚨 Critical Finding" },
+                    presentation: `The ECG is completed within 5 minutes of arrival.
+
+**ECG Findings:**
+- Sinus rhythm at 96 bpm
+- ST elevation in leads V1-V4 (2-3mm)
+- Reciprocal ST depression in leads II, III, aVF
+- No prior ECG available for comparison
+
+The pattern is consistent with an acute anterior STEMI.`,
+                    vitals: {
+                        hr: { value: 96, label: "HR", unit: "bpm", abnormal: true },
+                        bp: { value: "145/88", label: "BP", unit: "mmHg", abnormal: true },
+                        rr: { value: 20, label: "RR", unit: "/min", abnormal: false },
+                        o2: { value: 95, label: "SpO2", unit: "%", abnormal: false }
+                    },
+                    timer: { warning: "Door-to-balloon goal: <90 minutes", critical: false },
+                    prompt: "You have identified a STEMI. What is your next action?",
+                    decisions: [
+                        {
+                            id: "activate_cath",
+                            icon: "🏥",
+                            title: "Activate cath lab immediately",
+                            description: "Call for emergent cardiac catheterization",
+                            next: "cath_activated",
+                            quality: "optimal",
+                            feedback: {
+                                title: "Correct! Time is Myocardium",
+                                text: "Immediate cath lab activation is the standard of care for STEMI. Primary PCI is preferred over fibrinolysis when door-to-balloon time can be achieved in <90 minutes.",
+                                teaching: "For STEMI, the goal is door-to-balloon time <90 minutes. Every 30-minute delay in reperfusion increases mortality by approximately 7.5%.",
+                                resources: ["stemi_management", "door_to_balloon"]
+                            },
+                            stateChanges: { cathLabActivated: true }
+                        },
+                        {
+                            id: "wait_troponin",
+                            icon: "⏳",
+                            title: "Wait for troponin confirmation",
+                            description: "Confirm with biomarkers before activating cath lab",
+                            next: "troponin_delay",
+                            quality: "poor",
+                            feedback: {
+                                title: "Critical Delay!",
+                                text: "In the setting of clear STEMI on ECG, waiting for troponin is inappropriate. The ECG findings are diagnostic and warrant immediate reperfusion therapy.",
+                                teaching: "STEMI is a clinical and ECG diagnosis. Troponin may be negative early in the course. Never delay reperfusion for biomarker confirmation in clear STEMI.",
+                                resources: ["stemi_management", "troponin_timing"]
+                            },
+                            stateChanges: { timeFromOnset: 180, patientStatus: "deteriorating" }
+                        },
+                        {
+                            id: "give_fibrinolytics",
+                            icon: "💉",
+                            title: "Administer fibrinolytics",
+                            description: "Give thrombolytics since cath lab may take time",
+                            next: "fibrinolytics_given",
+                            quality: "suboptimal",
+                            feedback: {
+                                title: "Not First-Line at a PCI-Capable Center",
+                                text: "While fibrinolytics can be appropriate for STEMI, primary PCI is preferred when available and door-to-balloon time <90 minutes is achievable.",
+                                teaching: "Fibrinolytics are reserved for: non-PCI capable hospitals, anticipated door-to-balloon >120 minutes, or cath lab not available. Primary PCI has better outcomes when achievable.",
+                                resources: ["fibrinolysis", "stemi_management"]
+                            },
+                            stateChanges: {}
+                        }
+                    ]
+                },
+                
+                history_delay: {
+                    id: "history_delay",
+                    title: "During Your History...",
+                    badge: { type: "critical", text: "⚠️ Patient Changing" },
+                    presentation: `While you're taking a detailed history, the patient suddenly becomes more distressed.
+
+"Doc, the pain is getting worse... I feel like something is sitting on my chest..."
+
+The nurse alerts you that his rhythm has changed on the monitor. You realize you still haven't obtained an ECG.`,
+                    vitals: {
+                        hr: { value: 110, label: "HR", unit: "bpm", abnormal: true },
+                        bp: { value: "138/82", label: "BP", unit: "mmHg", abnormal: false },
+                        rr: { value: 26, label: "RR", unit: "/min", abnormal: true },
+                        o2: { value: 92, label: "SpO2", unit: "%", abnormal: true }
+                    },
+                    timer: { warning: "15 minutes have elapsed since arrival", critical: true },
+                    prompt: "The patient is deteriorating. What do you do now?",
+                    decisions: [
+                        {
+                            id: "stat_ecg_now",
+                            icon: "📊",
+                            title: "Stat ECG NOW",
+                            description: "Get the ECG immediately",
+                            next: "delayed_ecg_stemi",
+                            quality: "optimal",
+                            feedback: {
+                                title: "Better Late Than Never",
+                                text: "You've recognized the need to prioritize the ECG. However, valuable time has been lost. The patient has been in STEMI for over 2 hours now.",
+                                teaching: "Lesson learned: In chest pain with cardiac risk factors, ECG should never be delayed for history-taking. These can be done simultaneously.",
+                                resources: ["ecg_timing"]
+                            },
+                            stateChanges: { ecgOrdered: true, timeFromOnset: 150 }
+                        },
+                        {
+                            id: "call_code",
+                            icon: "🚨",
+                            title: "Call a code blue",
+                            description: "Patient appears to be crashing",
+                            next: "premature_code",
+                            quality: "poor",
+                            feedback: {
+                                title: "Not Yet Indicated",
+                                text: "The patient is deteriorating but is still conscious and has a pulse. A code blue is premature. You need diagnostic information (ECG) to guide management.",
+                                teaching: "Code blue is for cardiac/respiratory arrest. This patient needs urgent evaluation and intervention, but calling a code without appropriate assessment wastes resources.",
+                                resources: ["vfib_stemi"]
+                            },
+                            stateChanges: {}
+                        }
+                    ]
+                },
+                
+                labs_delay: {
+                    id: "labs_delay",
+                    title: "Waiting for Labs...",
+                    badge: { type: "important", text: "⏱️ 20 Minutes Later" },
+                    presentation: `The lab calls with preliminary results:
+
+**Initial Troponin: 0.08 ng/mL** (normal <0.04)
+**BMP:** Na 138, K 4.2, Cr 1.1, Glucose 186
+**CBC:** WBC 11.2, Hgb 14.1, Plt 245
+
+The troponin is elevated but you still don't have an ECG. The patient continues to have chest pain.`,
+                    vitals: {
+                        hr: { value: 102, label: "HR", unit: "bpm", abnormal: true },
+                        bp: { value: "148/90", label: "BP", unit: "mmHg", abnormal: true },
+                        rr: { value: 22, label: "RR", unit: "/min", abnormal: true },
+                        o2: { value: 94, label: "SpO2", unit: "%", abnormal: true }
+                    },
+                    timer: { warning: "25 minutes since arrival - still no ECG", critical: true },
+                    prompt: "Troponin is elevated. What's your next step?",
+                    decisions: [
+                        {
+                            id: "ecg_after_labs",
+                            icon: "📊",
+                            title: "Order ECG now",
+                            description: "Finally get the ECG",
+                            next: "delayed_ecg_stemi",
+                            quality: "optimal",
+                            feedback: {
+                                title: "Finally!",
+                                text: "The ECG should have been done first, but at least you're getting it now. The elevated troponin confirms myocardial injury, but you still need the ECG to determine if this is a STEMI.",
+                                teaching: "Troponin elevation confirms myocardial injury but doesn't distinguish STEMI from NSTEMI. Only the ECG can identify ST elevation requiring emergent reperfusion.",
+                                resources: ["troponin_timing", "ecg_timing"]
+                            },
+                            stateChanges: { ecgOrdered: true, timeFromOnset: 155 }
+                        },
+                        {
+                            id: "admit_tele",
+                            icon: "🏥",
+                            title: "Admit to telemetry for NSTEMI",
+                            description: "Troponin positive = NSTEMI, admit for medical management",
+                            next: "missed_stemi",
+                            quality: "poor",
+                            feedback: {
+                                title: "Critical Error!",
+                                text: "You cannot diagnose NSTEMI without first ruling out STEMI with an ECG. This patient may have ST elevation requiring emergent cath lab activation.",
+                                teaching: "NSTEMI is a diagnosis of exclusion - you must rule out STEMI first. Always get an ECG before making this determination.",
+                                resources: ["stemi_management", "troponin_timing"]
+                            },
+                            stateChanges: { patientStatus: "critical" }
+                        }
+                    ]
+                },
+                
+                cath_activated: {
+                    id: "cath_activated",
+                    title: "Cath Lab Activated",
+                    badge: { type: "standard", text: "⚡ Rapid Response" },
+                    presentation: `The cath lab team is activated and will be ready in 15 minutes. The interventional cardiologist has been notified and is on the way.
+
+Current door time: 18 minutes
+Estimated balloon time: 55 minutes (within goal!)
+
+While preparing for transport, you need to optimize the patient's medical management.`,
+                    vitals: {
+                        hr: { value: 94, label: "HR", unit: "bpm", abnormal: true },
+                        bp: { value: "142/86", label: "BP", unit: "mmHg", abnormal: false },
+                        rr: { value: 20, label: "RR", unit: "/min", abnormal: false },
+                        o2: { value: 96, label: "SpO2", unit: "%", abnormal: false }
+                    },
+                    prompt: "What medications should be given before cath lab?",
+                    decisions: [
+                        {
+                            id: "full_acs_meds",
+                            icon: "💊",
+                            title: "Heparin + P2Y12 inhibitor + high-intensity statin",
+                            description: "Complete ACS medication bundle per guidelines",
+                            next: "optimal_outcome",
+                            quality: "optimal",
+                            feedback: {
+                                title: "Excellent Medical Management!",
+                                text: "This is the correct medication bundle for STEMI going to cath lab. Aspirin was already given by EMS. Adding heparin, a P2Y12 inhibitor, and high-intensity statin optimizes outcomes.",
+                                teaching: "STEMI medications pre-cath: Aspirin (given), P2Y12 inhibitor (ticagrelor or clopidogrel), anticoagulation (heparin), and high-intensity statin. Beta-blockers after stabilization if no contraindications.",
+                                resources: ["acs_medications", "stemi_management"]
+                            },
+                            stateChanges: { heparinGiven: true }
+                        },
+                        {
+                            id: "just_heparin",
+                            icon: "💉",
+                            title: "Heparin only",
+                            description: "Anticoagulation for the cath lab",
+                            next: "good_outcome",
+                            quality: "suboptimal",
+                            feedback: {
+                                title: "Incomplete",
+                                text: "Heparin is appropriate, but you're missing the P2Y12 inhibitor which is recommended pre-cath for STEMI. Dual antiplatelet therapy improves outcomes after stenting.",
+                                teaching: "Don't forget dual antiplatelet therapy (DAPT) - aspirin + P2Y12 inhibitor. This is standard of care for STEMI patients undergoing PCI.",
+                                resources: ["acs_medications"]
+                            },
+                            stateChanges: { heparinGiven: true }
+                        },
+                        {
+                            id: "beta_blocker",
+                            icon: "❤️",
+                            title: "IV metoprolol",
+                            description: "Beta-blocker to reduce myocardial oxygen demand",
+                            next: "good_outcome",
+                            quality: "suboptimal",
+                            feedback: {
+                                title: "Not the Priority",
+                                text: "Beta-blockers are part of ACS management but are typically given after stabilization, not urgently pre-cath. They're contraindicated if there's concern for cardiogenic shock.",
+                                teaching: "Beta-blockers should be given within 24 hours if no contraindications (heart failure, hypotension, bradycardia, heart block). Not the immediate pre-cath priority.",
+                                resources: ["stemi_management"]
+                            },
+                            stateChanges: {}
+                        }
+                    ]
+                },
+                
+                delayed_ecg_stemi: {
+                    id: "delayed_ecg_stemi",
+                    title: "Delayed ECG Results",
+                    badge: { type: "critical", text: "🚨 STEMI Confirmed" },
+                    presentation: `The ECG finally shows:
+- ST elevation in V1-V4 (3-4mm, more pronounced than typical)
+- New Q waves forming in V2-V3
+- Reciprocal changes in inferior leads
+
+The delay has allowed the infarct to evolve. Door time is now 30+ minutes.`,
+                    vitals: {
+                        hr: { value: 108, label: "HR", unit: "bpm", abnormal: true },
+                        bp: { value: "118/72", label: "BP", unit: "mmHg", abnormal: false },
+                        rr: { value: 24, label: "RR", unit: "/min", abnormal: true },
+                        o2: { value: 93, label: "SpO2", unit: "%", abnormal: true }
+                    },
+                    timer: { warning: "Door-to-balloon goal at risk!", critical: true },
+                    prompt: "STEMI confirmed with significant delay. What now?",
+                    decisions: [
+                        {
+                            id: "emergent_cath",
+                            icon: "🏥",
+                            title: "Emergent cath lab activation",
+                            description: "Activate cath lab immediately despite delay",
+                            next: "delayed_outcome",
+                            quality: "optimal",
+                            feedback: {
+                                title: "Correct - But Time Lost",
+                                text: "Cath lab activation is still the right call. However, the delay has likely resulted in more myocardial damage. Q waves are already forming, indicating transmural infarction.",
+                                teaching: "Even with delays, primary PCI is still preferred if door-to-balloon can be <120 minutes. The patient may have worse outcomes than if ECG had been done immediately.",
+                                resources: ["stemi_management", "door_to_balloon"]
+                            },
+                            stateChanges: { cathLabActivated: true }
+                        }
+                    ]
+                },
+                
+                troponin_delay: {
+                    id: "troponin_delay",
+                    title: "While Waiting for Troponin...",
+                    badge: { type: "critical", text: "🚨 Emergency" },
+                    presentation: `While waiting for the troponin to result, the patient suddenly clutches his chest and becomes unresponsive.
+
+The monitor shows ventricular fibrillation!
+
+Time wasted waiting for troponin: 35 minutes
+Total ischemia time: now 3+ hours`,
+                    vitals: {
+                        hr: { value: "V-Fib", label: "Rhythm", unit: "", abnormal: true },
+                        bp: { value: "--/--", label: "BP", unit: "mmHg", abnormal: true },
+                        rr: { value: 0, label: "RR", unit: "/min", abnormal: true },
+                        o2: { value: "--", label: "SpO2", unit: "%", abnormal: true }
+                    },
+                    prompt: "The patient is in cardiac arrest!",
+                    decisions: [
+                        {
+                            id: "start_cpr",
+                            icon: "🫀",
+                            title: "Begin CPR and ACLS protocol",
+                            description: "Initiate resuscitation",
+                            next: "arrest_outcome",
+                            quality: "optimal",
+                            feedback: {
+                                title: "Resuscitation Initiated",
+                                text: "You begin high-quality CPR. The patient is defibrillated and achieves ROSC after 8 minutes. However, the prolonged ischemia time and arrest have significantly worsened the prognosis.",
+                                teaching: "This was preventable. If the cath lab had been activated immediately upon seeing STEMI, the patient would likely not have arrested. V-fib is common in acute MI, especially with prolonged ischemia.",
+                                resources: ["vfib_stemi", "stemi_management"]
+                            },
+                            stateChanges: { patientStatus: "critical" }
+                        }
+                    ]
+                },
+                
+                missed_stemi: {
+                    id: "missed_stemi",
+                    title: "Catastrophic Error",
+                    badge: { type: "critical", text: "❌ Missed Diagnosis" },
+                    presentation: `The patient is transferred to the telemetry floor with a diagnosis of "NSTEMI."
+
+Two hours later, the floor nurse calls a rapid response. The patient is in cardiogenic shock with a new ECG showing completed anterior MI with Q waves throughout the precordium.
+
+Emergency cath reveals 100% LAD occlusion with extensive myocardial damage. Despite intervention, the patient develops cardiogenic shock requiring mechanical support.`,
+                    vitals: {
+                        hr: { value: 120, label: "HR", unit: "bpm", abnormal: true },
+                        bp: { value: "78/50", label: "BP", unit: "mmHg", abnormal: true },
+                        rr: { value: 32, label: "RR", unit: "/min", abnormal: true },
+                        o2: { value: 85, label: "SpO2", unit: "%", abnormal: true }
+                    },
+                    prompt: "This patient has suffered a devastating outcome.",
+                    decisions: [
+                        {
+                            id: "review_case",
+                            icon: "📚",
+                            title: "Review what went wrong",
+                            description: "Understand the critical errors",
+                            next: "poor_outcome",
+                            quality: "neutral",
+                            feedback: {
+                                title: "Learning from Error",
+                                text: "The failure to obtain an ECG before making a diagnosis led to a missed STEMI. This patient needed emergent cath lab activation hours ago.",
+                                teaching: "KEY LESSON: Never diagnose NSTEMI without first ruling out STEMI with an ECG. In chest pain with cardiac risk factors, ECG is ALWAYS the first priority.",
+                                resources: ["stemi_management", "cardiogenic_shock"]
+                            },
+                            stateChanges: {}
+                        }
+                    ]
+                },
+                
+                // OUTCOMES
+                optimal_outcome: {
+                    id: "optimal_outcome",
+                    type: "outcome",
+                    quality: "good",
+                    icon: "🎉",
+                    title: "Excellent Outcome!",
+                    summary: "The patient underwent successful primary PCI with stent placement to the LAD. Door-to-balloon time was 52 minutes. Troponin peaked at 15 ng/mL. Echocardiogram showed mild anterior hypokinesis with EF 50%. Patient was discharged on day 3 with excellent prognosis.",
+                    stats: { doorToBalloon: "52 min", lvFunction: "Preserved", hospitalStay: "3 days" },
+                    lessons: [
+                        "Immediate ECG in chest pain allows rapid STEMI identification",
+                        "Early cath lab activation keeps door-to-balloon time <90 minutes",
+                        "Complete ACS medication bundle optimizes outcomes",
+                        "Time is myocardium - every minute counts"
+                    ],
+                    resourceKeys: ["stemi_management", "door_to_balloon", "acs_medications"]
+                },
+                
+                good_outcome: {
+                    id: "good_outcome",
+                    type: "outcome",
+                    quality: "good",
+                    icon: "✅",
+                    title: "Good Outcome",
+                    summary: "The patient underwent successful PCI. Door-to-balloon time was 68 minutes. Some suboptimal medication choices, but overall good care. Troponin peaked at 22 ng/mL. EF 45% with moderate anterior hypokinesis. Discharged day 4.",
+                    stats: { doorToBalloon: "68 min", lvFunction: "Mildly Reduced", hospitalStay: "4 days" },
+                    lessons: [
+                        "Good ECG prioritization led to timely diagnosis",
+                        "Consider complete ACS medication bundle pre-cath",
+                        "Outcome was good but could be optimized with guideline-directed therapy"
+                    ],
+                    resourceKeys: ["stemi_management", "acs_medications"]
+                },
+                
+                delayed_outcome: {
+                    id: "delayed_outcome",
+                    type: "outcome",
+                    quality: "fair",
+                    icon: "⚠️",
+                    title: "Suboptimal Outcome",
+                    summary: "The patient underwent PCI but door-to-balloon time was 95 minutes due to initial delays. Troponin peaked at 45 ng/mL indicating larger infarct. EF 35% with moderate-severe anterior wall motion abnormality. Required 6-day hospitalization and will need close heart failure follow-up.",
+                    stats: { doorToBalloon: "95 min", lvFunction: "Reduced", hospitalStay: "6 days" },
+                    lessons: [
+                        "Initial delay in obtaining ECG cost valuable time",
+                        "Larger infarct size due to prolonged ischemia",
+                        "Patient now at higher risk for heart failure",
+                        "LESSON: ECG should be first priority in chest pain"
+                    ],
+                    resourceKeys: ["door_to_balloon", "ecg_timing"]
+                },
+                
+                arrest_outcome: {
+                    id: "arrest_outcome",
+                    type: "outcome",
+                    quality: "poor",
+                    icon: "😔",
+                    title: "Poor Outcome",
+                    summary: "After ROSC was achieved, the patient underwent emergent PCI. However, the combination of prolonged ischemia and cardiac arrest resulted in significant myocardial damage. EF 25%, requiring inotropic support. Patient developed cardiogenic shock and required 14-day ICU stay with IABP support.",
+                    stats: { doorToBalloon: "130+ min", lvFunction: "Severely Reduced", hospitalStay: "14+ days ICU" },
+                    lessons: [
+                        "Waiting for troponin when STEMI is on ECG is never appropriate",
+                        "Prolonged ischemia leads to larger infarcts and arrhythmias",
+                        "This arrest was potentially preventable with immediate cath lab activation",
+                        "CRITICAL: STEMI = immediate reperfusion, no delays for lab confirmation"
+                    ],
+                    resourceKeys: ["stemi_management", "vfib_stemi", "cardiogenic_shock"]
+                },
+                
+                poor_outcome: {
+                    id: "poor_outcome",
+                    type: "outcome",
+                    quality: "poor",
+                    icon: "❌",
+                    title: "Devastating Outcome",
+                    summary: "The missed STEMI resulted in cardiogenic shock. Despite late PCI and mechanical circulatory support, the patient developed multiorgan failure. After a prolonged ICU course, the patient expired on hospital day 12. A root cause analysis identified failure to obtain timely ECG as the primary systems failure.",
+                    stats: { doorToBalloon: ">6 hours", lvFunction: "Cardiogenic Shock", hospitalStay: "Expired Day 12" },
+                    lessons: [
+                        "NEVER diagnose NSTEMI without ruling out STEMI first",
+                        "ECG must be obtained within 10 minutes of arrival for chest pain",
+                        "Elevated troponin does NOT tell you STEMI vs NSTEMI - only ECG does",
+                        "This death was preventable with basic chest pain protocols"
+                    ],
+                    resourceKeys: ["stemi_management", "ecg_timing", "cardiogenic_shock"]
+                }
+            }
+        };
+        
+        // ===========================================
+        // GAME STATE
+        // ===========================================
+        
+        let gameState = {
+            currentStage: "initial",
+            path: ["Start"],
+            decisions: [],
+            score: 100,
+            startTime: Date.now(),
+            patientState: { ...caseData.initialState }
+        };
+        
+        // ===========================================
+        // RENDER FUNCTIONS
+        // ===========================================
+        
+        function renderStage(stageId) {
+            const stage = caseData.stages[stageId];
+            const container = document.getElementById('stageContainer');
+            
+            if (stage.type === "outcome") {
+                renderOutcome(stage);
+                return;
+            }
+            
+            let vitalsHtml = '';
+            if (stage.vitals) {
+                vitalsHtml = `<div class="vitals">${Object.values(stage.vitals).map(v => `
+                    <div class="vital">
+                        <div class="vital-value ${v.abnormal ? 'abnormal' : ''}">${v.value}</div>
+                        <div class="vital-label">${v.label} ${v.unit}</div>
+                    </div>
+                `).join('')}</div>`;
+            }
+            
+            let timerHtml = '';
+            if (stage.timer) {
+                timerHtml = `<div class="timer-warning ${stage.timer.critical ? 'critical' : ''}">⏱️ ${stage.timer.warning}</div>`;
+            }
+            
+            // ECG Display
+            let ecgHtml = '';
+            if (stage.showECG) {
+                const ecgSvg = ECGLibrary.generateSVG(stage.showECG.pattern);
+                ecgHtml = `
+                    <div class="ecg-display-container">
+                        <div class="ecg-display-header">
+                            <span class="ecg-display-title">🫀 12-Lead ECG (Lead II shown)</span>
+                            <span class="ecg-display-meta">25mm/s | 10mm/mV | 96 BPM</span>
+                        </div>
+                        <div class="ecg-strip">${ecgSvg}</div>
+                        <div class="ecg-interpretation">
+                            <span class="ecg-interpretation-badge">⚠️ CRITICAL</span>
+                            <span class="ecg-interpretation-text">${stage.showECG.interpretation}</span>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            container.innerHTML = `
+                <div class="stage-card">
+                    <div class="stage-header">
+                        <h2 class="stage-title">${stage.title}</h2>
+                        <span class="stage-badge ${stage.badge.type}">${stage.badge.text}</span>
+                    </div>
+                    <div class="stage-content">
+                        ${timerHtml}
+                        <div class="presentation">
+                            <div class="presentation-label">📋 Clinical Situation</div>
+                            <div class="presentation-text">${stage.presentation.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</div>
+                        </div>
+                        ${ecgHtml}
+                        ${vitalsHtml}
+                        <div class="decision-section">
+                            <div class="decision-prompt">${stage.prompt}</div>
+                            <div class="decisions">
+                                ${stage.decisions.map((d, i) => `
+                                    <button class="decision-btn" data-index="${i}" onclick="selectDecision(${i})">
+                                        <div class="decision-icon">${d.icon}</div>
+                                        <div class="decision-text">
+                                            <div class="decision-title">${d.title}</div>
+                                            <div class="decision-desc">${d.description}</div>
+                                        </div>
+                                        <div class="decision-arrow">→</div>
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+                        <div class="feedback-panel" id="feedbackPanel"></div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function renderOutcome(outcome) {
+            const container = document.getElementById('stageContainer');
+            
+            const resourcesHtml = outcome.resourceKeys ? `
+                <div class="outcome-resources">
+                    <h4>📚 Further Reading</h4>
+                    ${outcome.resourceKeys.map(key => resources[key] ? resources[key].map(r => `
+                        <div class="resource-item">
+                            <span class="resource-icon">${r.type === 'guideline' ? '📋' : '📄'}</span>
+                            <div class="resource-content">
+                                <a href="${r.url}" target="_blank" rel="noopener" class="resource-link">
+                                    ${r.title}
+                                    <span class="resource-badge ${r.type}">${r.type === 'guideline' ? 'Guideline' : 'PubMed'}</span>
+                                </a>
+                                <div class="resource-desc">${r.desc}</div>
+                            </div>
+                        </div>
+                    `).join('') : '').join('')}
+                </div>
+            ` : '';
+            
+            container.innerHTML = `
+                <div class="outcome-card ${outcome.quality}">
+                    <div class="outcome-icon">${outcome.icon}</div>
+                    <h2 class="outcome-title">${outcome.title}</h2>
+                    <p class="outcome-summary">${outcome.summary}</p>
+                    
+                    <div class="outcome-stats">
+                        <div class="outcome-stat">
+                            <div class="outcome-stat-value">${outcome.stats.doorToBalloon}</div>
+                            <div class="outcome-stat-label">Door-to-Balloon</div>
+                        </div>
+                        <div class="outcome-stat">
+                            <div class="outcome-stat-value">${outcome.stats.lvFunction}</div>
+                            <div class="outcome-stat-label">LV Function</div>
+                        </div>
+                        <div class="outcome-stat">
+                            <div class="outcome-stat-value">${outcome.stats.hospitalStay}</div>
+                            <div class="outcome-stat-label">Hospital Stay</div>
+                        </div>
+                    </div>
+                    
+                    <div class="outcome-lessons">
+                        <h4>📚 Key Lessons</h4>
+                        <ul>${outcome.lessons.map(l => `<li>${l}</li>`).join('')}</ul>
+                    </div>
+                    
+                    ${resourcesHtml}
+                    
+                    <button class="restart-btn" onclick="restartCase()">🔄 Try Again</button>
+                    <button class="try-different-btn" onclick="window.location.href='case-generator.html'">🎲 Try Random Variation</button>
+                </div>
+            `;
+            
+            document.getElementById('scoreDisplay').textContent = calculateFinalScore();
+        }
+        
+        function selectDecision(index) {
+            const stage = caseData.stages[gameState.currentStage];
+            const decision = stage.decisions[index];
+            
+            document.querySelectorAll('.decision-btn').forEach(btn => btn.classList.remove('selected'));
+            document.querySelectorAll('.decision-btn')[index].classList.add('selected');
+            
+            if (decision.quality === 'optimal') gameState.score += 0;
+            else if (decision.quality === 'suboptimal') gameState.score -= 15;
+            else if (decision.quality === 'poor') gameState.score -= 30;
+            
+            const resourcesHtml = decision.feedback.resources ? renderResources(decision.feedback.resources) : '';
+            
+            const feedbackPanel = document.getElementById('feedbackPanel');
+            feedbackPanel.className = `feedback-panel show ${decision.quality}`;
+            feedbackPanel.innerHTML = `
+                <div class="feedback-header">
+                    <span class="feedback-icon">${decision.quality === 'optimal' ? '✅' : decision.quality === 'suboptimal' ? '⚠️' : '❌'}</span>
+                    <span class="feedback-title">${decision.feedback.title}</span>
+                </div>
+                <p class="feedback-text">${decision.feedback.text}</p>
+                <div class="feedback-teaching">
+                    <div class="feedback-teaching-label">💡 Teaching Point</div>
+                    ${decision.feedback.teaching}
+                </div>
+                ${resourcesHtml}
+                <button class="continue-btn" onclick="continueToNext('${decision.next}', '${decision.title.replace(/'/g, "\\'")}')">Continue →</button>
+            `;
+            
+            if (decision.stateChanges) {
+                Object.assign(gameState.patientState, decision.stateChanges);
+            }
+            
+            gameState.decisions.push({
+                stage: gameState.currentStage,
+                choice: decision.id,
+                quality: decision.quality
+            });
+            
+            document.getElementById('decisionCount').textContent = gameState.decisions.length;
+        }
+        
+        function continueToNext(nextStage, decisionTitle) {
+            gameState.path.push(decisionTitle);
+            gameState.currentStage = nextStage;
+            
+            document.getElementById('progressPath').innerHTML = gameState.path.map(p => 
+                `<span class="path-node">${p}</span>`
+            ).join('<span class="path-arrow">→</span>');
+            
+            renderStage(nextStage);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        function calculateFinalScore() {
+            const optimal = gameState.decisions.filter(d => d.quality === 'optimal').length;
+            const total = gameState.decisions.length;
+            return total > 0 ? `${Math.round((optimal / total) * 100)}%` : '--';
+        }
+        
+        function restartCase() {
+            gameState = {
+                currentStage: "initial",
+                path: ["Start"],
+                decisions: [],
+                score: 100,
+                startTime: Date.now(),
+                patientState: { ...caseData.initialState }
+            };
+            
+            document.getElementById('progressPath').innerHTML = '<span class="path-node">Start</span>';
+            document.getElementById('decisionCount').textContent = '0';
+            document.getElementById('scoreDisplay').textContent = '--';
+            
+            renderStage('initial');
+        }
+        
+        // Timer
+        setInterval(() => {
+            const elapsed = Math.floor((Date.now() - gameState.startTime) / 1000);
+            const mins = Math.floor(elapsed / 60);
+            const secs = elapsed % 60;
+            document.getElementById('timeElapsed').textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+        }, 1000);
+        
+        // Initialize
+        renderStage('initial');
+    </script>
+</body>
+</html>
