@@ -223,7 +223,7 @@
             <div class="start-header">
                 <div class="start-logo">Dx</div>
                 <h1 class="start-title">Board Prep</h1>
-                <p class="start-subtitle">Evidence-based USMLE-style questions with guideline citations and clinical reasoning.</p>
+                <p class="start-subtitle">Evidence-based Board-style questions with guideline citations and clinical reasoning.</p>
             </div>
             <div class="start-stats">
                 <div class="start-stat"><div class="start-stat-value" id="totalQuestions">--</div><div class="start-stat-label">Questions</div></div>
@@ -299,22 +299,29 @@
 
         // Load questions from JSON
         async function loadQuestions() {
-            try {
-                const response = await fetch('data/board-prep-questions.json');
-                questionBank = await response.json();
-                initializeUI();
-            } catch (err) {
-                console.error('Failed to load questions:', err);
-                // Fallback: try relative path variations
+            const paths = [
+                'data/board-prep-questions.json',
+                './data/board-prep-questions.json',
+                '/ReasonDx/data/board-prep-questions.json',
+                '../ReasonDx/data/board-prep-questions.json'
+            ];
+            
+            for (const path of paths) {
                 try {
-                    const response = await fetch('data/board-prep-questions.json');
-                    questionBank = await response.json();
-                    initializeUI();
-                } catch (err2) {
-                    document.getElementById('startBtn').textContent = 'Error Loading Questions';
-                    console.error('All load attempts failed');
+                    const response = await fetch(path);
+                    if (response.ok) {
+                        questionBank = await response.json();
+                        console.log('Loaded questions from:', path);
+                        initializeUI();
+                        return;
+                    }
+                } catch (err) {
+                    console.log('Failed to load from:', path);
                 }
             }
+            
+            document.getElementById('startBtn').textContent = 'Error Loading Questions';
+            console.error('All load attempts failed');
         }
 
         function initializeUI() {
