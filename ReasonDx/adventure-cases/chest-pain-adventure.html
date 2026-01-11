@@ -185,6 +185,20 @@
         .loading { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; animation: spin 0.8s linear infinite; margin-right: 8px; }
         @keyframes spin { to { transform: rotate(360deg); } }
         .hidden { display: none !important; }
+        /* Voice Input Styles */
+        .voice-input-container { display: flex; gap: 8px; align-items: flex-start; }
+        .voice-input-container textarea { flex: 1; }
+        .voice-btn { width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--border); background: var(--card); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; transition: all 0.2s; flex-shrink: 0; }
+        .voice-btn:hover { border-color: var(--accent); background: rgba(124,58,237,0.1); }
+        .voice-btn.recording { border-color: var(--danger); background: rgba(220,38,38,0.1); animation: pulse 1.5s infinite; }
+        .voice-btn.recording::after { content: ''; position: absolute; width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--danger); animation: ripple 1.5s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        @keyframes ripple { 0% { transform: scale(1); opacity: 0.5; } 100% { transform: scale(1.5); opacity: 0; } }
+        .voice-status { font-size: 0.8rem; color: var(--muted); margin-top: 6px; display: flex; align-items: center; gap: 6px; }
+        .voice-status.recording { color: var(--danger); }
+        .voice-status .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--danger); animation: blink 1s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .voice-not-supported { font-size: 0.8rem; color: var(--warning); padding: 8px; background: rgba(217,119,6,0.1); border-radius: 6px; margin-top: 8px; }
     </style>
 </head>
 <body>
@@ -366,6 +380,62 @@
                 document.getElementById('caseTime').textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
             }, 1000);
         },
+        // Voice Recognition
+        recognition: null,
+        isRecording: false,
+        initVoiceRecognition() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) return;
+            
+            this.recognition = new SpeechRecognition();
+            this.recognition.continuous = true;
+            this.recognition.interimResults = true;
+            this.recognition.lang = 'en-US';
+            
+            this.recognition.onstart = () => {
+                this.isRecording = true;
+                const btn = document.getElementById('voiceBtn');
+                const status = document.getElementById('voiceStatus');
+                if (btn) { btn.classList.add('recording'); document.getElementById('voiceIcon').textContent = '⏹️'; }
+                if (status) { status.innerHTML = '<span class="dot"></span> Listening... speak now'; status.classList.remove('hidden'); status.classList.add('recording'); }
+            };
+            
+            this.recognition.onend = () => {
+                this.isRecording = false;
+                const btn = document.getElementById('voiceBtn');
+                const status = document.getElementById('voiceStatus');
+                if (btn) { btn.classList.remove('recording'); document.getElementById('voiceIcon').textContent = '🎤'; }
+                if (status) { status.classList.add('hidden'); status.classList.remove('recording'); }
+            };
+            
+            this.recognition.onresult = (event) => {
+                const textarea = document.getElementById('commResponse');
+                if (!textarea) return;
+                let finalTranscript = '';
+                let interimTranscript = '';
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    if (event.results[i].isFinal) { finalTranscript += event.results[i][0].transcript + ' '; }
+                    else { interimTranscript += event.results[i][0].transcript; }
+                }
+                if (finalTranscript) { textarea.value += finalTranscript; textarea.dispatchEvent(new Event('input')); }
+                const status = document.getElementById('voiceStatus');
+                if (status && interimTranscript) { status.innerHTML = `<span class="dot"></span> ${interimTranscript}`; }
+            };
+            
+            this.recognition.onerror = (event) => {
+                console.error('Speech recognition error:', event.error);
+                const status = document.getElementById('voiceStatus');
+                if (status) { status.textContent = `Error: ${event.error}. Try again.`; status.classList.remove('hidden'); setTimeout(() => status.classList.add('hidden'), 3000); }
+                this.isRecording = false;
+                const btn = document.getElementById('voiceBtn');
+                if (btn) { btn.classList.remove('recording'); document.getElementById('voiceIcon').textContent = '🎤'; }
+            };
+        },
+        toggleVoice() {
+            if (!this.recognition) { this.initVoiceRecognition(); }
+            if (this.isRecording) { this.recognition.stop(); }
+            else { this.recognition.start(); }
+        },
         render(stageId) {
             const stage = this.stages[stageId];
             this.state.stage = stageId;
@@ -417,13 +487,22 @@
         ],
         renderCommunication(stage) {
             const turn = this.commTurns[this.state.commTurn - 1];
+            const speechSupported = 'webkitSpeechRecognition' in window || 'SpeechRecognition' in window;
             const html = `<div class="comm-container">
                 <div class="comm-header"><div class="comm-title">💬 Family Discussion</div><div class="comm-turn">Turn ${this.state.commTurn} of 6</div></div>
                 <div class="comm-notice"><strong>Communication Assessment:</strong> You're being evaluated on empathy, plain language, clarity, tone, and engagement.</div>
                 <div class="comm-character"><div class="character-avatar">👩</div><div class="character-info"><div class="character-name">Mrs. Chen</div><div class="character-relation">Wife</div></div><div class="character-emotion">${turn.emotion}</div></div>
                 <div class="comm-bubble"><div class="bubble-text">"${turn.prompt}"</div><div class="bubble-subtext">${turn.subtext}</div></div>
                 ${this.state.commHistory.length > 0 ? `<div style="margin:16px;padding:12px;background:var(--input-bg);border-radius:8px;max-height:150px;overflow-y:auto;font-size:0.85rem;"><strong>Previous:</strong>${this.state.commHistory.map(h => `<div style="margin-top:8px;padding:8px;background:var(--card);border-radius:6px;"><em>"${h.prompt.substring(0,50)}..."</em><br>You: "${h.response.substring(0,80)}..."</div>`).join('')}</div>` : ''}
-                <div class="comm-response"><label class="response-label">Your response to Mrs. Chen:</label><textarea id="commResponse" placeholder="Speak as you would to a real family member..."></textarea></div>
+                <div class="comm-response">
+                    <label class="response-label">Your response to Mrs. Chen:</label>
+                    <div class="voice-input-container">
+                        <textarea id="commResponse" placeholder="Type or click the microphone to speak..."></textarea>
+                        ${speechSupported ? `<button class="voice-btn" id="voiceBtn" onclick="Engine.toggleVoice()" title="Click to speak"><span id="voiceIcon">🎤</span></button>` : ''}
+                    </div>
+                    <div id="voiceStatus" class="voice-status hidden"></div>
+                    ${!speechSupported ? `<div class="voice-not-supported">⚠️ Voice input not supported in this browser. Please type your response.</div>` : `<div style="font-size:0.75rem;color:var(--muted);margin-top:6px;">💡 Tip: Click 🎤 to dictate your response</div>`}
+                </div>
                 <div class="comm-feedback hidden" id="commFeedback"></div>
                 <div class="comm-actions"><button class="btn btn-primary" id="commBtn" onclick="Engine.submitComm()">Submit Response</button></div>
             </div>`;
@@ -432,6 +511,7 @@
                 document.getElementById('commBtn').disabled = document.getElementById('commResponse').value.trim().length < 20;
             });
             document.getElementById('commBtn').disabled = true;
+            this.initVoiceRecognition();
         },
         async submitComm() {
             const response = document.getElementById('commResponse').value.trim();
