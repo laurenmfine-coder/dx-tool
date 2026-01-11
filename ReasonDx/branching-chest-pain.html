@@ -484,96 +484,10 @@
         
         .hidden { display: none !important; }
         
-        /* ECG Display Styles */
-        .ecg-display-container {
-            background: #FAFAFA;
-            border-radius: 12px;
-            overflow: hidden;
-            margin: 16px 0;
-            border: 1px solid #E5E7EB;
-        }
-        
-        .ecg-display-header {
-            background: #F3F4F6;
-            padding: 10px 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #E5E7EB;
-        }
-        
-        .ecg-display-title {
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: #374151;
-        }
-        
-        .ecg-display-meta {
-            font-size: 0.8rem;
-            color: #6B7280;
-        }
-        
-        .ecg-strip {
-            padding: 12px;
-            overflow-x: auto;
-        }
-        
-        .ecg-strip svg {
-            display: block;
-            max-width: 100%;
-            height: auto;
-        }
-        
-        .ecg-interpretation {
-            background: #FEF2F2;
-            border-top: 1px solid #FECACA;
-            padding: 12px 16px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .ecg-interpretation-badge {
-            background: #DC2626;
-            color: white;
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            white-space: nowrap;
-        }
-        
-        .ecg-interpretation-text {
-            font-size: 0.9rem;
-            color: #991B1B;
-            font-weight: 500;
-        }
-        
-        .ecg-toggle-btn {
-            background: #EEF2FF;
-            border: 1px solid #C7D2FE;
-            color: #4338CA;
-            padding: 8px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-bottom: 16px;
-            transition: all 0.2s;
-        }
-        
-        .ecg-toggle-btn:hover {
-            background: #E0E7FF;
-        }
-        
         @media (max-width: 600px) {
             .header { padding: 16px; }
             .main { padding: 16px; }
             .outcome-stats { gap: 16px; }
-            .ecg-interpretation { flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
@@ -607,125 +521,6 @@
     </main>
     
     <script>
-        // ===========================================
-        // ECG LIBRARY (Embedded for standalone use)
-        // ===========================================
-        
-        const ECGLibrary = {
-            config: {
-                width: 800,
-                height: 200,
-                gridMajorColor: '#FFCDD2',
-                gridMinorColor: '#FFEBEE',
-                traceColor: '#1A1A1A',
-                backgroundColor: '#FAFAFA'
-            },
-            
-            patterns: {
-                stemi_anterior: { id: "stemi_anterior", name: "Anterior STEMI", waveformMods: { stElevation: 3, tWave: 'hyperacute' } },
-                stemi_inferior: { id: "stemi_inferior", name: "Inferior STEMI", waveformMods: { stElevation: 3, tWave: 'hyperacute' } },
-                nstemi: { id: "nstemi", name: "NSTEMI", waveformMods: { stDepression: 1.5, tWave: 'inverted' } },
-                normal: { id: "normal", name: "Normal Sinus Rhythm", waveformMods: {} },
-                afib: { id: "afib", name: "Atrial Fibrillation", waveformMods: { rhythm: 'afib', heartRate: 110 } },
-                vfib: { id: "vfib", name: "Ventricular Fibrillation", waveformMods: { rhythm: 'vfib' } }
-            },
-            
-            generateSVG: function(patternId, options = {}) {
-                const pattern = this.patterns[patternId];
-                if (!pattern) return '<div>ECG not available</div>';
-                
-                const width = options.width || this.config.width;
-                const height = options.height || this.config.height;
-                const mods = pattern.waveformMods || {};
-                
-                let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="100%" height="${height}" style="max-width: 100%;">`;
-                svg += `<rect width="100%" height="100%" fill="${this.config.backgroundColor}"/>`;
-                svg += this._generateGrid(width, height);
-                svg += this._generateTrace(mods, width, height);
-                svg += '</svg>';
-                return svg;
-            },
-            
-            _generateGrid: function(width, height) {
-                let grid = '<g opacity="0.6">';
-                for (let x = 0; x <= width; x += 4) grid += `<line x1="${x}" y1="0" x2="${x}" y2="${height}" stroke="${this.config.gridMinorColor}" stroke-width="0.5"/>`;
-                for (let y = 0; y <= height; y += 4) grid += `<line x1="0" y1="${y}" x2="${width}" y2="${y}" stroke="${this.config.gridMinorColor}" stroke-width="0.5"/>`;
-                for (let x = 0; x <= width; x += 20) grid += `<line x1="${x}" y1="0" x2="${x}" y2="${height}" stroke="${this.config.gridMajorColor}" stroke-width="1"/>`;
-                for (let y = 0; y <= height; y += 20) grid += `<line x1="0" y1="${y}" x2="${width}" y2="${y}" stroke="${this.config.gridMajorColor}" stroke-width="1"/>`;
-                grid += '</g>';
-                return grid;
-            },
-            
-            _generateTrace: function(mods, width, height) {
-                const baseline = height / 2;
-                const maxAmp = height / 2 - 25;
-                
-                if (mods.rhythm === 'vfib') {
-                    let path = `M 0 ${baseline}`;
-                    for (let x = 0; x < width; x += 2) {
-                        const y = baseline + (Math.random() - 0.5) * maxAmp * 1.2 * Math.sin(x * 0.08);
-                        path += ` L ${x} ${y.toFixed(1)}`;
-                    }
-                    return `<path d="${path}" fill="none" stroke="${this.config.traceColor}" stroke-width="1.5"/>`;
-                }
-                
-                const heartRate = mods.heartRate || 96;
-                const beatDuration = 60000 / heartRate;
-                const pixelsPerMs = width / 2500;
-                const beatWidth = beatDuration * pixelsPerMs;
-                const numBeats = Math.ceil(width / beatWidth) + 1;
-                
-                let path = `M 0 ${baseline}`;
-                let currentX = 0;
-                
-                for (let beat = 0; beat < numBeats && currentX < width; beat++) {
-                    let thisBeatWidth = beatWidth;
-                    if (mods.rhythm === 'afib') thisBeatWidth = beatWidth * (0.6 + Math.random() * 0.8);
-                    
-                    for (let i = 0; i < 100; i++) {
-                        const t = i / 100;
-                        const x = currentX + t * thisBeatWidth;
-                        if (x > width) break;
-                        
-                        let y = (Math.random() - 0.5) * 0.02 * maxAmp;
-                        if (mods.rhythm === 'afib') y += (Math.random() - 0.5) * 0.08 * maxAmp;
-                        
-                        // P wave
-                        if (t < 0.08 && mods.rhythm !== 'afib') y += 0.1 * maxAmp * Math.sin(t / 0.08 * Math.PI);
-                        
-                        // QRS
-                        if (t >= 0.16 && t < 0.24) {
-                            const qrsPhase = (t - 0.16) / 0.08;
-                            if (qrsPhase < 0.15) y += -0.1 * maxAmp * Math.sin(qrsPhase / 0.15 * Math.PI);
-                            else if (qrsPhase < 0.6) y += 0.8 * maxAmp * Math.sin((qrsPhase - 0.15) / 0.45 * Math.PI);
-                            else y += -0.15 * maxAmp * Math.sin((qrsPhase - 0.6) / 0.4 * Math.PI);
-                        }
-                        
-                        // ST segment
-                        if (t >= 0.24 && t < 0.32) {
-                            if (mods.stElevation) y += (mods.stElevation / 10) * maxAmp;
-                            else if (mods.stDepression) y += -(mods.stDepression / 10) * maxAmp;
-                        }
-                        
-                        // T wave
-                        if (t >= 0.32 && t < 0.48) {
-                            const tPhase = (t - 0.32) / 0.16;
-                            let tAmp = 0.2;
-                            if (mods.tWave === 'hyperacute') tAmp = 0.6;
-                            else if (mods.tWave === 'inverted') tAmp = -0.35;
-                            y += tAmp * maxAmp * Math.sin(tPhase * Math.PI);
-                            if (mods.stElevation) y += (mods.stElevation / 10) * maxAmp * (1 - tPhase) * 0.5;
-                        }
-                        
-                        path += ` L ${x.toFixed(1)} ${(baseline - y).toFixed(1)}`;
-                    }
-                    currentX += thisBeatWidth;
-                }
-                
-                return `<path d="${path}" fill="none" stroke="${this.config.traceColor}" stroke-width="1.5" stroke-linecap="round"/>`;
-            }
-        };
-        
         // ===========================================
         // EVIDENCE-BASED RESOURCES DATABASE
         // ===========================================
@@ -1460,25 +1255,6 @@ Emergency cath reveals 100% LAD occlusion with extensive myocardial damage. Desp
                 timerHtml = `<div class="timer-warning ${stage.timer.critical ? 'critical' : ''}">⏱️ ${stage.timer.warning}</div>`;
             }
             
-            // ECG Display
-            let ecgHtml = '';
-            if (stage.showECG) {
-                const ecgSvg = ECGLibrary.generateSVG(stage.showECG.pattern);
-                ecgHtml = `
-                    <div class="ecg-display-container">
-                        <div class="ecg-display-header">
-                            <span class="ecg-display-title">🫀 12-Lead ECG (Lead II shown)</span>
-                            <span class="ecg-display-meta">25mm/s | 10mm/mV | 96 BPM</span>
-                        </div>
-                        <div class="ecg-strip">${ecgSvg}</div>
-                        <div class="ecg-interpretation">
-                            <span class="ecg-interpretation-badge">⚠️ CRITICAL</span>
-                            <span class="ecg-interpretation-text">${stage.showECG.interpretation}</span>
-                        </div>
-                    </div>
-                `;
-            }
-            
             container.innerHTML = `
                 <div class="stage-card">
                     <div class="stage-header">
@@ -1489,9 +1265,8 @@ Emergency cath reveals 100% LAD occlusion with extensive myocardial damage. Desp
                         ${timerHtml}
                         <div class="presentation">
                             <div class="presentation-label">📋 Clinical Situation</div>
-                            <div class="presentation-text">${stage.presentation.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</div>
+                            <div class="presentation-text">${stage.presentation.replace(/\n/g, '<br>')}</div>
                         </div>
-                        ${ecgHtml}
                         ${vitalsHtml}
                         <div class="decision-section">
                             <div class="decision-prompt">${stage.prompt}</div>

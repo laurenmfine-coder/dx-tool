@@ -213,6 +213,74 @@
         .feedback-title { font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
         .feedback-text { line-height: 1.6; font-size: 0.95rem; }
         
+        /* Resources Styles */
+        .resources-section { margin-top: 16px; }
+        
+        .resources-toggle {
+            background: rgba(255,255,255,0.8);
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 10px 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--primary);
+            transition: all 0.2s;
+        }
+        
+        .resources-toggle:hover { background: rgba(255,255,255,1); }
+        .resources-toggle-icon { transition: transform 0.2s; }
+        .resources-toggle.open .resources-toggle-icon { transform: rotate(180deg); }
+        
+        .resources-list {
+            display: none;
+            margin-top: 10px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 8px;
+            padding: 12px;
+        }
+        
+        .resources-list.show { display: block; }
+        
+        .resource-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .resource-item:last-child { border-bottom: none; }
+        .resource-icon { font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+        .resource-content { flex: 1; }
+        
+        .resource-link {
+            color: var(--primary-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .resource-link:hover { text-decoration: underline; }
+        .resource-desc { font-size: 0.8rem; color: var(--text-light); margin-top: 2px; }
+        
+        .resource-badge {
+            display: inline-block;
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 6px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .resource-badge.guideline { background: #DBEAFE; color: #1E40AF; }
+        .resource-badge.pubmed { background: #FEE2E2; color: #991B1B; }
+        
         .actions { display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
         
         .action-btn {
@@ -302,6 +370,126 @@
         // Stats
         let stats = { casesCompleted: 0, correctAnswers: 0, totalQuestions: 0 };
         let currentSeed = null;
+        
+        // ===========================================
+        // EVIDENCE-BASED RESOURCES DATABASE
+        // ===========================================
+        
+        const evidenceResources = {
+            stemi: [
+                {
+                    type: "guideline",
+                    title: "2021 ACC/AHA Coronary Revascularization Guideline",
+                    url: "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001038",
+                    desc: "Primary PCI recommended for STEMI within 90 min of first medical contact"
+                },
+                {
+                    type: "guideline",
+                    title: "2017 ESC STEMI Guidelines",
+                    url: "https://academic.oup.com/eurheartj/article/39/2/119/4095042",
+                    desc: "European Society of Cardiology STEMI management recommendations"
+                },
+                {
+                    type: "pubmed",
+                    title: "De Luca G, et al. Time delay and mortality in STEMI",
+                    url: "https://pubmed.ncbi.nlm.nih.gov/14662259/",
+                    desc: "Circulation 2004 - Every 30-min delay increases mortality 7.5%"
+                }
+            ],
+            nstemi: [
+                {
+                    type: "guideline",
+                    title: "2020 ESC NSTE-ACS Guidelines",
+                    url: "https://academic.oup.com/eurheartj/article/42/14/1289/5898842",
+                    desc: "Risk stratification and invasive strategy timing"
+                },
+                {
+                    type: "pubmed",
+                    title: "Bavry AA, et al. Early invasive vs conservative strategy",
+                    url: "https://pubmed.ncbi.nlm.nih.gov/16818817/",
+                    desc: "JAMA 2006 - Meta-analysis of invasive strategy in NSTEMI"
+                }
+            ],
+            medications: [
+                {
+                    type: "guideline",
+                    title: "2016 ACC/AHA DAPT Duration Guideline",
+                    url: "https://www.ahajournals.org/doi/10.1161/CIR.0000000000000404",
+                    desc: "Dual antiplatelet therapy recommendations for ACS"
+                },
+                {
+                    type: "pubmed",
+                    title: "Wallentin L, et al. PLATO Trial - Ticagrelor vs Clopidogrel",
+                    url: "https://pubmed.ncbi.nlm.nih.gov/19717846/",
+                    desc: "NEJM 2009 - Ticagrelor reduces CV death, MI, stroke vs clopidogrel"
+                },
+                {
+                    type: "pubmed",
+                    title: "Yusuf S, et al. CURE Trial - Clopidogrel in ACS",
+                    url: "https://pubmed.ncbi.nlm.nih.gov/11519503/",
+                    desc: "NEJM 2001 - Clopidogrel + aspirin reduces CV events in ACS"
+                }
+            ],
+            unstable_angina: [
+                {
+                    type: "guideline",
+                    title: "2014 AHA/ACC NSTE-ACS Guideline",
+                    url: "https://www.ahajournals.org/doi/10.1161/CIR.0000000000000134",
+                    desc: "Risk stratification and management of unstable angina"
+                },
+                {
+                    type: "pubmed",
+                    title: "Amsterdam EA, et al. ACS without ST elevation",
+                    url: "https://pubmed.ncbi.nlm.nih.gov/25260718/",
+                    desc: "Circulation 2014 - Comprehensive UA/NSTEMI guideline summary"
+                }
+            ]
+        };
+        
+        function getResourcesForDiagnosis(diagnosisId) {
+            if (diagnosisId.includes('stemi') && !diagnosisId.includes('nstemi')) {
+                return [...evidenceResources.stemi, ...evidenceResources.medications];
+            } else if (diagnosisId === 'nstemi') {
+                return [...evidenceResources.nstemi, ...evidenceResources.medications];
+            } else {
+                return [...evidenceResources.unstable_angina, ...evidenceResources.medications];
+            }
+        }
+        
+        function renderResourcesHtml(diagnosisId) {
+            const resources = getResourcesForDiagnosis(diagnosisId);
+            
+            const resourcesHtml = resources.map(r => `
+                <div class="resource-item">
+                    <span class="resource-icon">${r.type === 'guideline' ? '📋' : '📄'}</span>
+                    <div class="resource-content">
+                        <a href="${r.url}" target="_blank" rel="noopener" class="resource-link">
+                            ${r.title}
+                            <span class="resource-badge ${r.type}">${r.type === 'guideline' ? 'Guideline' : 'PubMed'}</span>
+                        </a>
+                        <div class="resource-desc">${r.desc}</div>
+                    </div>
+                </div>
+            `).join('');
+            
+            return `
+                <div class="resources-section">
+                    <button class="resources-toggle" onclick="toggleResources(this)">
+                        <span>📚 Evidence-Based Resources (${resources.length})</span>
+                        <span class="resources-toggle-icon">▼</span>
+                    </button>
+                    <div class="resources-list">
+                        ${resourcesHtml}
+                    </div>
+                </div>
+            `;
+        }
+        
+        function toggleResources(btn) {
+            btn.classList.toggle('open');
+            const list = btn.nextElementSibling;
+            list.classList.toggle('show');
+        }
         
         // Data pools for generation
         const dataPools = {
@@ -660,6 +848,7 @@
                     <strong>Correct Answer:</strong> ${caseData.question.correctAnswer}<br><br>
                     <strong>Key Teaching Point:</strong> ${caseData.diagnosis.management}
                 </div>
+                ${renderResourcesHtml(caseData.diagnosis.id)}
             `;
             
             document.getElementById('actions').style.display = 'flex';
