@@ -84,6 +84,16 @@
         .nav-cta:hover {
             background: var(--primary);
         }
+
+        .nav-new {
+            background: #dcfce7;
+            color: #166534 !important;
+            font-weight: 500;
+        }
+
+        .nav-new:hover {
+            background: #bbf7d0;
+        }
         
         /* Hero Section */
         .hero {
@@ -152,7 +162,7 @@
         .btn-secondary {
             background: white;
             color: var(--text);
-            border: 1px solid var(--border);
+            border: 2px solid var(--border);
         }
         
         .btn-secondary:hover {
@@ -160,66 +170,36 @@
             color: var(--primary-light);
         }
         
-        /* Floating Cards - SPREAD ON HOVER */
+        /* Hero Cards */
         .hero-cards {
             position: relative;
-            width: 550px;
-            height: 380px;
-            perspective: 1000px;
-            margin-left: auto;
+            height: 400px;
         }
         
         .hero-card {
             position: absolute;
-            width: 260px;
             background: white;
             border-radius: 16px;
             padding: 20px;
+            width: 260px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
-            border: 1px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        /* Default stacked positions */
-        .hero-card:nth-child(1) {
-            top: 40px;
-            left: 80px;
-            z-index: 3;
-            transform: rotate(-3deg);
-        }
+        .hero-card.reason { top: 0; left: 0; z-index: 4; border-left: 4px solid var(--reason-blue); }
+        .hero-card.mechanism { top: 60px; left: 80px; z-index: 3; border-left: 4px solid var(--mechanism-green); }
+        .hero-card.coach { top: 120px; left: 40px; z-index: 2; border-left: 4px solid var(--coach-purple); }
+        .hero-card.adventure { top: 180px; left: 100px; z-index: 1; border-left: 4px solid #F59E0B; }
         
-        .hero-card:nth-child(2) {
-            top: 60px;
-            left: 110px;
-            z-index: 2;
-            transform: rotate(0deg);
-        }
-        
-        .hero-card:nth-child(3) {
-            top: 80px;
-            left: 140px;
-            z-index: 1;
-            transform: rotate(3deg);
-        }
-        
-        /* ON HOVER: Cards spread apart - fully readable, no overlap */
-        .hero-cards:hover .hero-card:nth-child(1) {
-            transform: translateX(-180px) translateY(-80px) rotate(-5deg);
-            z-index: 3;
-        }
-        
-        .hero-cards:hover .hero-card:nth-child(2) {
-            transform: translateX(-20px) translateY(100px) rotate(0deg);
-            z-index: 2;
-        }
-        
-        .hero-cards:hover .hero-card:nth-child(3) {
-            transform: translateX(200px) translateY(-40px) rotate(5deg);
-            z-index: 1;
-        }
+        .hero-cards:hover .hero-card.reason { transform: translate(-20px, -10px) rotate(-2deg); }
+        .hero-cards:hover .hero-card.mechanism { transform: translate(140px, -30px) rotate(1deg); }
+        .hero-cards:hover .hero-card.coach { transform: translate(-30px, 100px) rotate(-1deg); }
+        .hero-cards:hover .hero-card.adventure { transform: translate(160px, 80px) rotate(2deg); }
         
         .hero-card:hover {
+            transform: scale(1.05) !important;
+            z-index: 10 !important;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
         }
         
@@ -231,19 +211,8 @@
         }
         
         .hero-card-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
+            font-size: 1.5rem;
         }
-        
-        .hero-card.reason .hero-card-icon { background: #EEF2FF; }
-        .hero-card.mechanism .hero-card-icon { background: #ECFDF5; }
-        .hero-card.coach .hero-card-icon { background: #FAF5FF; }
-        .hero-card.adventure .hero-card-icon { background: #FEF3C7; }
         
         .hero-card-title {
             font-weight: 600;
@@ -345,6 +314,7 @@
         .platform-card.mechanism { border-top: 4px solid var(--mechanism-green); }
         .platform-card.coach { border-top: 4px solid var(--coach-purple); }
         .platform-card.adventure { border-top: 4px solid #F59E0B; }
+        .platform-card.board-prep { border-top: 4px solid #1e40af; }
         
         .platform-icon {
             width: 60px;
@@ -361,6 +331,7 @@
         .platform-card.mechanism .platform-icon { background: #ECFDF5; }
         .platform-card.coach .platform-icon { background: #FAF5FF; }
         .platform-card.adventure .platform-icon { background: #FEF3C7; }
+        .platform-card.board-prep .platform-icon { background: #dbeafe; }
         
         .platform-name {
             font-size: 1.4rem;
@@ -372,6 +343,7 @@
         .platform-card.mechanism .platform-name { color: var(--mechanism-green); }
         .platform-card.coach .platform-name { color: var(--coach-purple); }
         .platform-card.adventure .platform-name { color: #F59E0B; }
+        .platform-card.board-prep .platform-name { color: #1e40af; }
         
         .platform-tagline {
             font-size: 0.95rem;
@@ -413,6 +385,19 @@
         .platform-card.mechanism .platform-cta { color: var(--mechanism-green); }
         .platform-card.coach .platform-cta { color: var(--coach-purple); }
         .platform-card.adventure .platform-cta { color: #F59E0B; }
+        .platform-card.board-prep .platform-cta { color: #1e40af; }
+
+        .new-badge {
+            display: inline-block;
+            background: #dcfce7;
+            color: #166534;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
         
         /* Ecosystem Explainer */
         .ecosystem-explainer {
@@ -450,38 +435,43 @@
             text-align: center;
         }
         
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .footer-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        
+        .footer-text {
+            opacity: 0.8;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+        
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 32px;
-            margin-bottom: 24px;
-            flex-wrap: wrap;
+            gap: 24px;
+            margin-top: 24px;
         }
         
         .footer-link {
-            color: rgba(255,255,255,0.8);
+            color: white;
+            opacity: 0.7;
             text-decoration: none;
-            font-size: 0.95rem;
-            transition: color 0.2s;
+            font-size: 0.9rem;
         }
         
         .footer-link:hover {
-            color: white;
-        }
-        
-        .footer-copy {
-            color: rgba(255,255,255,0.6);
-            font-size: 0.85rem;
-            margin-bottom: 8px;
-        }
-        
-        .footer-ecosystem-note {
-            color: rgba(255,255,255,0.5);
-            font-size: 0.8rem;
+            opacity: 1;
         }
         
         /* Responsive */
-        @media (max-width: 1024px) {
+        @media (max-width: 900px) {
             .hero {
                 grid-template-columns: 1fr;
                 text-align: center;
@@ -489,13 +479,7 @@
             }
             
             .hero-cards {
-                margin: 40px auto 0;
-                width: 100%;
-                max-width: 420px;
-            }
-            
-            .hero-content h1 {
-                font-size: 2.2rem;
+                display: none;
             }
             
             .hero-actions {
@@ -543,11 +527,10 @@
             <span>Dx Ecosystem</span>
         </a>
         <div class="nav-links">
-            <a href="tour.html" class="nav-link">Tour</a>
+            <a href="ReasonDx/board-prep.html" class="nav-link nav-new">📝 Board Prep</a>
             <a href="mechanism/index.html" class="nav-link">MechanismDx</a>
             <a href="ReasonDx/training.html" class="nav-link">ReasonDx</a>
             <a href="CoachDx/case-library.html" class="nav-link">CoachDx</a>
-            <a href="adventure-cases/chest-pain-adventure.html" class="nav-link">Adventure</a>
             <a href="dx-dashboard.html" class="nav-link nav-cta">Dashboard →</a>
         </div>
     </nav>
@@ -560,18 +543,17 @@
                 An integrated learning ecosystem combining interactive cases, pathophysiology mastery, and AI coaching to transform how you learn medicine.
             </p>
             <div class="hero-actions">
-                <a href="dx-dashboard.html" class="btn btn-primary">
-                    Get Started Free →
+                <a href="ReasonDx/board-prep.html" class="btn btn-primary">
+                    Start Board Prep →
                 </a>
-                <a href="tour.html" class="btn btn-secondary">
-                    Take a Tour
+                <a href="dx-dashboard.html" class="btn btn-secondary">
+                    View Dashboard
                 </a>
             </div>
         </div>
         
-        <!-- Floating Cards - Spread on Hover -->
+        <!-- Floating Cards -->
         <div class="hero-cards">
-            <!-- Card 1: ReasonDx -->
             <div class="hero-card reason" onclick="window.location.href='ReasonDx/training.html'">
                 <div class="hero-card-header">
                     <div class="hero-card-icon">🩺</div>
@@ -583,7 +565,6 @@
                 <p class="hero-card-desc">Work through 200+ interactive patient cases and practice real clinical decision-making.</p>
             </div>
             
-            <!-- Card 2: MechanismDx -->
             <div class="hero-card mechanism" onclick="window.location.href='mechanism/index.html'">
                 <div class="hero-card-header">
                     <div class="hero-card-icon">⚙️</div>
@@ -595,7 +576,6 @@
                 <p class="hero-card-desc">Master the "why" behind diseases with interactive modules and spaced repetition.</p>
             </div>
             
-            <!-- Card 3: CoachDx -->
             <div class="hero-card coach" onclick="window.location.href='CoachDx/case-library.html'">
                 <div class="hero-card-header">
                     <div class="hero-card-icon">💬</div>
@@ -607,8 +587,7 @@
                 <p class="hero-card-desc">Get Socratic guidance from an AI attending who helps you think, not just memorize.</p>
             </div>
             
-            <!-- Card 4: Adventure Cases -->
-            <div class="hero-card adventure" onclick="window.location.href='adventure-cases/chest-pain-adventure.html'">
+            <div class="hero-card adventure" onclick="window.location.href='ReasonDx/adventure-cases/chest-pain-adventure.html'">
                 <div class="hero-card-header">
                     <div class="hero-card-icon">🫀</div>
                     <div>
@@ -628,11 +607,33 @@
         <div class="section-container">
             <div class="section-header">
                 <span class="section-badge">WHAT'S INSIDE</span>
-                <h2 class="section-title">Four Platforms, One Ecosystem</h2>
-                <p class="section-subtitle">See how each part of the Dx Ecosystem helps you master clinical reasoning in a different way.</p>
+                <h2 class="section-title">Five Ways to Master Clinical Reasoning</h2>
+                <p class="section-subtitle">Each component helps you build expertise in a different way—together they create complete clinical competence.</p>
             </div>
             
             <div class="platform-grid">
+                <!-- Board Prep - NEW -->
+                <a href="ReasonDx/board-prep.html" class="platform-card board-prep">
+                    <div class="platform-icon">📝</div>
+                    <h3 class="platform-name">Board Prep <span class="new-badge">NEW</span></h3>
+                    <p class="platform-tagline">USMLE-style questions with evidence-based explanations and guideline citations. Track your progress.</p>
+                    <div class="platform-stats">
+                        <div class="platform-stat">
+                            <div class="platform-stat-value">158+</div>
+                            <div class="platform-stat-label">Questions</div>
+                        </div>
+                        <div class="platform-stat">
+                            <div class="platform-stat-value">6</div>
+                            <div class="platform-stat-label">Systems</div>
+                        </div>
+                        <div class="platform-stat">
+                            <div class="platform-stat-value">📊</div>
+                            <div class="platform-stat-label">Analytics</div>
+                        </div>
+                    </div>
+                    <span class="platform-cta">Start Practice →</span>
+                </a>
+
                 <!-- ReasonDx -->
                 <a href="ReasonDx/training.html" class="platform-card reason">
                     <div class="platform-icon">🩺</div>
@@ -700,7 +701,7 @@
                 </a>
                 
                 <!-- Adventure Cases -->
-                <a href="adventure-cases/chest-pain-adventure.html" class="platform-card adventure">
+                <a href="ReasonDx/adventure-cases/chest-pain-adventure.html" class="platform-card adventure">
                     <div class="platform-icon">🫀</div>
                     <h3 class="platform-name">Adventure Cases</h3>
                     <p class="platform-tagline">Immersive branching scenarios with AI-evaluated communication. Experience realistic clinical decision-making.</p>
@@ -722,16 +723,12 @@
                 </a>
             </div>
             
-            <!-- Ecosystem Explainer -->
             <div class="ecosystem-explainer">
-                <div class="ecosystem-explainer-title">💡 About the Dx Ecosystem</div>
+                <div class="ecosystem-explainer-title">🔄 How It All Connects</div>
                 <p class="ecosystem-explainer-text">
-                    This platform (at reasondx.com) is home to four integrated learning tools:
-                    <strong>ReasonDx</strong> for clinical cases,
-                    <strong>MechanismDx</strong> for pathophysiology,
-                    <strong>CoachDx</strong> for AI coaching, and
-                    <strong>Adventure Cases</strong> for immersive scenarios with communication assessment.
-                    They work together to build complete clinical reasoning skills.
+                    Start with <strong>Board Prep</strong> to test your knowledge, dive into <strong>MechanismDx</strong> to understand the "why," 
+                    practice with <strong>ReasonDx</strong> cases, get coached by <strong>CoachDx</strong>, and experience immersive 
+                    <strong>Adventure Cases</strong>. Track everything in your <strong>Dashboard</strong>.
                 </p>
             </div>
         </div>
@@ -739,17 +736,19 @@
     
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer-links">
-            <a href="index.html" class="footer-link">Home</a>
-            <a href="tour.html" class="footer-link">Tour</a>
-            <a href="ReasonDx/training.html" class="footer-link">ReasonDx</a>
-            <a href="mechanism/index.html" class="footer-link">MechanismDx</a>
-            <a href="CoachDx/case-library.html" class="footer-link">CoachDx</a>
-            <a href="adventure-cases/chest-pain-adventure.html" class="footer-link">Adventure</a>
-            <a href="dx-dashboard.html" class="footer-link">Dashboard</a>
+        <div class="footer-content">
+            <h3 class="footer-title">Ready to Think Like a Clinician?</h3>
+            <p class="footer-text">
+                Join thousands of medical students mastering clinical reasoning with the Dx Learning Ecosystem.
+            </p>
+            <a href="ReasonDx/board-prep.html" class="btn btn-primary">Get Started Free →</a>
+            <div class="footer-links">
+                <a href="dx-dashboard.html" class="footer-link">Dashboard</a>
+                <a href="ReasonDx/training.html" class="footer-link">Cases</a>
+                <a href="mechanism/index.html" class="footer-link">Mechanisms</a>
+                <a href="CoachDx/case-library.html" class="footer-link">Coaching</a>
+            </div>
         </div>
-        <p class="footer-copy">© 2026 Dx Learning Ecosystem. Created by Lauren Fine, MD, FAAAAI.</p>
-        <p class="footer-ecosystem-note">The Dx Ecosystem includes ReasonDx (cases) · MechanismDx (pathophysiology) · CoachDx (AI coaching)</p>
     </footer>
 </body>
 </html>

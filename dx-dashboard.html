@@ -3,1130 +3,376 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | Dx Learning Ecosystem</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="dx-design-system.css">
+    <title>ReasonDx Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        /* Dashboard-specific styles */
-        .dashboard-header {
-            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 50%, #7c3aed 100%);
-            padding: var(--dx-space-8) var(--dx-space-6);
-            color: white;
-        }
-        
-        .dashboard-header-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .welcome-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: var(--dx-space-6);
-        }
-        
-        .welcome-text h1 {
-            font-size: var(--dx-text-3xl);
-            font-weight: var(--dx-font-bold);
-            margin-bottom: var(--dx-space-2);
-        }
-        
-        .welcome-text p {
-            font-size: var(--dx-text-base);
-            opacity: 0.9;
-        }
-        
-        .header-stats {
-            display: flex;
-            gap: var(--dx-space-6);
-        }
-        
-        .header-stat {
-            text-align: center;
-        }
-        
-        .header-stat-value {
-            font-size: var(--dx-text-3xl);
-            font-weight: var(--dx-font-bold);
-        }
-        
-        .header-stat-label {
-            font-size: var(--dx-text-sm);
-            opacity: 0.8;
-        }
-        
-        .main-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: var(--dx-space-6);
-            margin-top: -40px;
-        }
-        
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: var(--dx-space-6);
-        }
-        
-        @media (max-width: 1024px) {
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        /* Quick Actions */
-        .quick-actions {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--dx-space-4);
-            margin-bottom: var(--dx-space-6);
-        }
-        
-        @media (max-width: 768px) {
-            .quick-actions {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .quick-action {
-            display: flex;
-            align-items: center;
-            gap: var(--dx-space-4);
-            padding: var(--dx-space-5);
-            background: var(--dx-bg-secondary);
-            border: 2px solid var(--dx-border-light);
-            border-radius: var(--dx-radius-xl);
-            text-decoration: none;
-            color: inherit;
-            transition: all var(--dx-transition-base);
-        }
-        
-        .quick-action:hover {
-            border-color: var(--dx-blue-500);
-            box-shadow: var(--dx-shadow-lg);
-            transform: translateY(-4px);
-        }
-        
-        .quick-action-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: var(--dx-radius-lg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            flex-shrink: 0;
-        }
-        
-        .quick-action-icon.blue { background: var(--dx-blue-100); }
-        .quick-action-icon.green { background: var(--dx-green-100); }
-        .quick-action-icon.purple { background: var(--dx-purple-100); }
-        
-        .quick-action-text h3 {
-            font-size: var(--dx-text-base);
-            font-weight: var(--dx-font-semibold);
-            color: var(--dx-text-primary);
-            margin-bottom: var(--dx-space-1);
-        }
-        
-        .quick-action-text p {
-            font-size: var(--dx-text-sm);
-            color: var(--dx-text-secondary);
-        }
-        
-        /* Continue Learning */
-        .continue-section {
-            margin-bottom: var(--dx-space-6);
-        }
-        
-        .continue-card {
-            display: flex;
-            align-items: center;
-            gap: var(--dx-space-4);
-            padding: var(--dx-space-4);
-            background: linear-gradient(135deg, var(--dx-blue-50), var(--dx-purple-50));
-            border: 1px solid var(--dx-blue-200);
-            border-radius: var(--dx-radius-xl);
-            text-decoration: none;
-            color: inherit;
-            transition: all var(--dx-transition-base);
-        }
-        
-        .continue-card:hover {
-            box-shadow: var(--dx-shadow-lg);
-            transform: translateX(4px);
-        }
-        
-        .continue-icon {
-            width: 64px;
-            height: 64px;
-            background: var(--dx-bg-secondary);
-            border-radius: var(--dx-radius-lg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-        }
-        
-        .continue-info {
-            flex: 1;
-        }
-        
-        .continue-label {
-            font-size: var(--dx-text-xs);
-            color: var(--dx-blue-600);
-            font-weight: var(--dx-font-semibold);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        
-        .continue-title {
-            font-size: var(--dx-text-lg);
-            font-weight: var(--dx-font-semibold);
-            color: var(--dx-text-primary);
-        }
-        
-        .continue-progress {
-            display: flex;
-            align-items: center;
-            gap: var(--dx-space-2);
-            margin-top: var(--dx-space-2);
-        }
-        
-        .continue-progress-bar {
-            flex: 1;
-            height: 6px;
-            background: rgba(59, 130, 246, 0.2);
-            border-radius: var(--dx-radius-full);
-            overflow: hidden;
-        }
-        
-        .continue-progress-fill {
-            height: 100%;
-            background: var(--dx-blue-500);
-            border-radius: var(--dx-radius-full);
-        }
-        
-        .continue-progress-text {
-            font-size: var(--dx-text-xs);
-            color: var(--dx-text-secondary);
-            white-space: nowrap;
-        }
-        
-        .continue-arrow {
-            font-size: 24px;
-            color: var(--dx-blue-500);
-        }
-        
-        /* Platform Cards */
-        .platform-cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--dx-space-4);
-            margin-bottom: var(--dx-space-6);
-        }
-        
-        @media (max-width: 768px) {
-            .platform-cards {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .platform-card {
-            background: var(--dx-bg-secondary);
-            border: 1px solid var(--dx-border-light);
-            border-radius: var(--dx-radius-xl);
-            padding: var(--dx-space-5);
-            text-decoration: none;
-            color: inherit;
-            transition: all var(--dx-transition-base);
-        }
-        
-        .platform-card:hover {
-            box-shadow: var(--dx-shadow-lg);
-            transform: translateY(-2px);
-        }
-        
-        .platform-card.reasondx:hover { border-color: var(--dx-blue-500); }
-        .platform-card.mechanismdx:hover { border-color: var(--dx-green-500); }
-        .platform-card.coachdx:hover { border-color: var(--dx-purple-500); }
-        
-        .platform-header {
-            display: flex;
-            align-items: center;
-            gap: var(--dx-space-3);
-            margin-bottom: var(--dx-space-4);
-        }
-        
-        .platform-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: var(--dx-radius-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-        
-        .platform-card.reasondx .platform-icon { background: var(--dx-blue-100); }
-        .platform-card.mechanismdx .platform-icon { background: var(--dx-green-100); }
-        .platform-card.coachdx .platform-icon { background: var(--dx-purple-100); }
-        
-        .platform-name {
-            font-weight: var(--dx-font-semibold);
-            color: var(--dx-text-primary);
-        }
-        
-        .platform-stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--dx-space-3);
-        }
-        
-        .platform-stat {
-            text-align: center;
-            padding: var(--dx-space-2);
-            background: var(--dx-bg-tertiary);
-            border-radius: var(--dx-radius-md);
-        }
-        
-        .platform-stat-value {
-            font-size: var(--dx-text-lg);
-            font-weight: var(--dx-font-bold);
-        }
-        
-        .platform-card.reasondx .platform-stat-value { color: var(--dx-blue-500); }
-        .platform-card.mechanismdx .platform-stat-value { color: var(--dx-green-500); }
-        .platform-card.coachdx .platform-stat-value { color: var(--dx-purple-500); }
-        
-        .platform-stat-label {
-            font-size: var(--dx-text-xs);
-            color: var(--dx-text-secondary);
-        }
-        
-        /* Sidebar */
-        .sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: var(--dx-space-6);
-        }
-        
-        /* Daily Goals */
-        .daily-goals {
-            background: var(--dx-bg-secondary);
-            border: 1px solid var(--dx-border-light);
-            border-radius: var(--dx-radius-xl);
-            padding: var(--dx-space-5);
-        }
-        
-        .daily-goals-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: var(--dx-space-4);
-        }
-        
-        .daily-goals-title {
-            font-weight: var(--dx-font-semibold);
-            color: var(--dx-text-primary);
-        }
-        
-        .daily-goals-date {
-            font-size: var(--dx-text-xs);
-            color: var(--dx-text-tertiary);
-        }
-        
-        .goal-item {
-            display: flex;
-            align-items: center;
-            gap: var(--dx-space-3);
-            padding: var(--dx-space-3);
-            background: var(--dx-bg-tertiary);
-            border-radius: var(--dx-radius-md);
-            margin-bottom: var(--dx-space-2);
-        }
-        
-        .goal-item:last-child {
-            margin-bottom: 0;
-        }
-        
-        .goal-checkbox {
-            width: 24px;
-            height: 24px;
-            border: 2px solid var(--dx-border-medium);
-            border-radius: var(--dx-radius-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            transition: all var(--dx-transition-fast);
-        }
-        
-        .goal-item.completed .goal-checkbox {
-            background: var(--dx-green-500);
-            border-color: var(--dx-green-500);
-            color: white;
-        }
-        
-        .goal-text {
-            flex: 1;
-            font-size: var(--dx-text-sm);
-            color: var(--dx-text-primary);
-        }
-        
-        .goal-item.completed .goal-text {
-            text-decoration: line-through;
-            color: var(--dx-text-tertiary);
-        }
-        
-        /* Achievements Preview */
-        .achievements-preview {
-            background: var(--dx-bg-secondary);
-            border: 1px solid var(--dx-border-light);
-            border-radius: var(--dx-radius-xl);
-            padding: var(--dx-space-5);
-        }
-        
-        .achievements-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: var(--dx-space-4);
-        }
-        
-        .achievements-title {
-            font-weight: var(--dx-font-semibold);
-            color: var(--dx-text-primary);
-        }
-        
-        .achievements-count {
-            font-size: var(--dx-text-xs);
-            color: var(--dx-text-secondary);
-            background: var(--dx-bg-tertiary);
-            padding: 2px 8px;
-            border-radius: var(--dx-radius-full);
-        }
-        
-        .achievement-mini {
-            display: flex;
-            align-items: center;
-            gap: var(--dx-space-3);
-            padding: var(--dx-space-3);
-            border-radius: var(--dx-radius-md);
-            margin-bottom: var(--dx-space-2);
-            transition: background var(--dx-transition-fast);
-        }
-        
-        .achievement-mini:hover {
-            background: var(--dx-bg-tertiary);
-        }
-        
-        .achievement-mini:last-child {
-            margin-bottom: 0;
-        }
-        
-        .achievement-mini-icon {
-            font-size: 28px;
-        }
-        
-        .achievement-mini-info {
-            flex: 1;
-        }
-        
-        .achievement-mini-name {
-            font-size: var(--dx-text-sm);
-            font-weight: var(--dx-font-medium);
-            color: var(--dx-text-primary);
-        }
-        
-        .achievement-mini-desc {
-            font-size: var(--dx-text-xs);
-            color: var(--dx-text-secondary);
-        }
-        
-        .view-all-link {
-            display: block;
-            text-align: center;
-            padding: var(--dx-space-3);
-            color: var(--dx-blue-500);
-            font-size: var(--dx-text-sm);
-            font-weight: var(--dx-font-medium);
-            text-decoration: none;
-            border-radius: var(--dx-radius-md);
-            margin-top: var(--dx-space-3);
-            transition: background var(--dx-transition-fast);
-        }
-        
-        .view-all-link:hover {
-            background: var(--dx-blue-50);
-        }
-        
-        /* Section Headers */
-        .section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: var(--dx-space-4);
-        }
-        
-        .section-title {
-            font-size: var(--dx-text-lg);
-            font-weight: var(--dx-font-semibold);
-            color: var(--dx-text-primary);
-            display: flex;
-            align-items: center;
-            gap: var(--dx-space-2);
-        }
-        
-        /* Leaderboard Preview */
-        .leaderboard-preview {
-            background: var(--dx-bg-secondary);
-            border: 1px solid var(--dx-border-light);
-            border-radius: var(--dx-radius-xl);
-            padding: var(--dx-space-5);
-        }
-        
-        .leaderboard-item {
-            display: flex;
-            align-items: center;
-            gap: var(--dx-space-3);
-            padding: var(--dx-space-3);
-            border-radius: var(--dx-radius-md);
-            margin-bottom: var(--dx-space-2);
-        }
-        
-        .leaderboard-item:first-child {
-            background: linear-gradient(135deg, #fef3c7, #fde68a);
-        }
-        
-        .leaderboard-item:nth-child(2) {
-            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
-        }
-        
-        .leaderboard-item:nth-child(3) {
-            background: linear-gradient(135deg, #fed7aa, #fdba74);
-        }
-        
-        .leaderboard-rank {
-            width: 28px;
-            height: 28px;
-            border-radius: var(--dx-radius-full);
-            background: var(--dx-bg-secondary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: var(--dx-font-bold);
-            font-size: var(--dx-text-sm);
-        }
-        
-        .leaderboard-name {
-            flex: 1;
-            font-size: var(--dx-text-sm);
-            font-weight: var(--dx-font-medium);
-        }
-        
-        .leaderboard-xp {
-            font-size: var(--dx-text-sm);
-            font-weight: var(--dx-font-semibold);
-            color: var(--dx-blue-500);
-        }
-        
-        /* Footer */
-        .dashboard-footer {
-            text-align: center;
-            padding: var(--dx-space-8) var(--dx-space-6);
-            color: var(--dx-text-tertiary);
-            font-size: var(--dx-text-sm);
-            border-top: 1px solid var(--dx-border-light);
-            margin-top: var(--dx-space-8);
-        }
-        
-        .dashboard-footer a {
-            color: var(--dx-blue-500);
-            text-decoration: none;
-        }
+        :root {
+            --bg: #fafafa; --bg-card: #ffffff; --bg-subtle: #f5f5f5;
+            --text: #1a1a1a; --text-secondary: #525252; --text-muted: #737373;
+            --border: #e5e5e5; --accent: #1e40af; --accent-light: #dbeafe;
+            --correct: #166534; --correct-bg: #dcfce7;
+            --incorrect: #991b1b; --incorrect-bg: #fee2e2;
+            --warning: #92400e; --radius: 6px; --radius-lg: 12px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+        .nav { background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 0 32px; height: 56px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+        .nav-brand { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--text); font-weight: 600; }
+        .nav-logo { width: 28px; height: 28px; background: var(--accent); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px; font-weight: 700; }
+        .nav-links { display: flex; gap: 4px; }
+        .nav-link { padding: 8px 14px; color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 500; border-radius: var(--radius); }
+        .nav-link:hover { background: var(--bg-subtle); color: var(--text); }
+        .nav-link.active { background: var(--accent-light); color: var(--accent); }
+
+        .main { max-width: 1100px; margin: 0 auto; padding: 32px; }
+        .header { margin-bottom: 32px; display: flex; justify-content: space-between; align-items: flex-start; }
+        .greeting { font-size: 26px; font-weight: 700; margin-bottom: 4px; }
+        .greeting-sub { color: var(--text-muted); font-size: 14px; }
+        
+        .btn { padding: 8px 16px; font-size: 13px; font-weight: 500; border-radius: var(--radius); cursor: pointer; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: all 0.15s; }
+        .btn:hover { background: var(--bg-subtle); }
+        .btn-primary { background: var(--accent); border-color: var(--accent); color: white; }
+        .btn-primary:hover { background: #1e3a8a; }
+
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+        .stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; }
+        .stat-label { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .stat-value { font-size: 32px; font-weight: 700; }
+        .stat-value.accent { color: var(--accent); }
+        .stat-value.correct { color: var(--correct); }
+        .stat-sub { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+        .content-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 24px; margin-bottom: 32px; }
+        .section-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+        .section-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .section-title { font-size: 14px; font-weight: 600; }
+        .section-link { font-size: 12px; color: var(--accent); text-decoration: none; }
+        .section-link:hover { text-decoration: underline; }
+        .section-body { padding: 20px; }
+
+        .system-list { display: flex; flex-direction: column; gap: 14px; }
+        .system-item { display: flex; align-items: center; gap: 12px; }
+        .system-name { width: 100px; font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .system-bar { flex: 1; height: 8px; background: var(--bg-subtle); border-radius: 4px; overflow: hidden; }
+        .system-fill { height: 100%; border-radius: 4px; }
+        .system-fill.high { background: var(--correct); }
+        .system-fill.mid { background: var(--accent); }
+        .system-fill.low { background: var(--warning); }
+        .system-score { width: 45px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; }
+
+        .activity-list { display: flex; flex-direction: column; gap: 10px; }
+        .activity-item { display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--bg-subtle); border-radius: var(--radius); }
+        .activity-icon { width: 32px; height: 32px; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; font-size: 14px; background: var(--accent-light); }
+        .activity-info { flex: 1; min-width: 0; }
+        .activity-title { font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .activity-meta { font-size: 11px; color: var(--text-muted); }
+        .activity-score { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; }
+        .activity-score.high { color: var(--correct); }
+        .activity-score.low { color: var(--incorrect); }
+
+        .quick-actions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 32px; }
+        .quick-action { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px; text-decoration: none; color: var(--text); transition: all 0.15s; display: flex; flex-direction: column; gap: 8px; }
+        .quick-action:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .quick-action-icon { font-size: 24px; }
+        .quick-action-title { font-size: 14px; font-weight: 600; }
+        .quick-action-desc { font-size: 12px; color: var(--text-muted); }
+
+        .share-section { margin-top: 32px; }
+        .share-card { background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); border-radius: var(--radius-lg); padding: 28px; color: white; position: relative; overflow: hidden; }
+        .share-card::before { content: ''; position: absolute; top: -50%; right: -30%; width: 60%; height: 150%; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%); pointer-events: none; }
+        .share-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; position: relative; }
+        .share-brand { display: flex; align-items: center; gap: 8px; }
+        .share-logo { width: 28px; height: 28px; background: rgba(255,255,255,0.2); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; }
+        .share-name { font-weight: 600; font-size: 14px; }
+        .share-date { font-size: 11px; opacity: 0.8; }
+        .share-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 20px; position: relative; text-align: center; }
+        .share-stat-value { font-size: 32px; font-weight: 700; }
+        .share-stat-label { font-size: 11px; opacity: 0.8; text-transform: uppercase; letter-spacing: 0.5px; }
+        .share-systems { display: flex; gap: 6px; flex-wrap: wrap; position: relative; }
+        .share-system { background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 500; }
+        .share-footer { margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.2); display: flex; justify-content: space-between; align-items: center; position: relative; }
+        .share-url { font-size: 11px; opacity: 0.7; }
+        .share-actions { display: flex; gap: 8px; }
+        .share-btn { background: rgba(255,255,255,0.2); border: none; color: white; padding: 6px 12px; border-radius: var(--radius); font-size: 12px; font-weight: 500; cursor: pointer; }
+        .share-btn:hover { background: rgba(255,255,255,0.3); }
+
+        .empty-state { text-align: center; padding: 40px; color: var(--text-muted); }
+        .empty-state-icon { font-size: 32px; margin-bottom: 12px; opacity: 0.5; }
+        .empty-state-text { font-size: 14px; margin-bottom: 16px; }
+
+        @media (max-width: 900px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } .content-grid { grid-template-columns: 1fr; } .quick-actions { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .main { padding: 20px; } .stats-grid { grid-template-columns: 1fr; } .quick-actions { grid-template-columns: 1fr; } .share-stats { grid-template-columns: 1fr; gap: 12px; } .nav { padding: 0 16px; } .nav-links { display: none; } }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="dx-nav">
-        <div class="dx-nav-inner">
-            <a href="index.html" class="dx-nav-brand">
-                <span style="font-size: 24px;">🏥</span>
-                <span>Dx Learning Ecosystem</span>
-            </a>
-            <div class="dx-nav-links">
-                <a href="dx-dashboard.html" class="dx-nav-link active">📊 Dashboard</a>
-                <a href="mechanism/index.html" class="dx-nav-link">📚 MechanismDx</a>
-                <a href="ReasonDx/training.html" class="dx-nav-link">🔬 ReasonDx</a>
-                <a href="CoachDx/coachdx-dashboard.html" class="dx-nav-link">🧠 CoachDx</a>
-                <a href="knowledge-web-navigator.html" class="dx-nav-link">🕸️ Knowledge Web</a>
-            </div>
+    <nav class="nav">
+        <a href="index.html" class="nav-brand"><div class="nav-logo">Dx</div><span>ReasonDx</span></a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="ReasonDx/training.html" class="nav-link">Cases</a>
+            <a href="ReasonDx/board-prep.html" class="nav-link">Board Prep</a>
+            <a href="mechanism/index.html" class="nav-link">Mechanisms</a>
+            <a href="CoachDx/mentor-chat.html" class="nav-link">Coach</a>
+            <a href="dx-dashboard.html" class="nav-link active">Dashboard</a>
         </div>
     </nav>
-    
-    <!-- Header -->
-    <header class="dashboard-header">
-        <div class="dashboard-header-inner">
-            <div class="welcome-section">
-                <div class="welcome-text">
-                    <h1 id="welcomeMessage">Welcome back!</h1>
-                    <p id="welcomeSubtext">Ready to continue your learning journey?</p>
-                </div>
-                <div class="header-stats">
-                    <div class="header-stat">
-                        <div class="header-stat-value" id="totalXP">0</div>
-                        <div class="header-stat-label">Total XP</div>
-                    </div>
-                    <div class="header-stat">
-                        <div class="header-stat-value" id="levelDisplay">1</div>
-                        <div class="header-stat-label" id="levelTitle">Medical Student</div>
-                    </div>
-                    <div class="header-stat">
-                        <div class="header-stat-value" id="streakDisplay">🔥 0</div>
-                        <div class="header-stat-label">Day Streak</div>
-                    </div>
-                </div>
+
+    <main class="main">
+        <div class="header">
+            <div>
+                <h1 class="greeting">Your Progress</h1>
+                <p class="greeting-sub">Track your clinical reasoning journey</p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+                <button class="btn" onclick="resetProgress()">Reset Data</button>
+                <a href="ReasonDx/board-prep.html" class="btn btn-primary">Practice Now →</a>
             </div>
         </div>
-    </header>
-    
-    <main class="main-content">
-        <!-- Quick Actions -->
-        <section class="quick-actions">
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Questions Completed</div>
+                <div class="stat-value accent" id="totalQuestions">0</div>
+                <div class="stat-sub" id="questionsToday">0 today</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Accuracy Rate</div>
+                <div class="stat-value correct" id="accuracy">—</div>
+                <div class="stat-sub" id="accuracyTrend"></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Study Sessions</div>
+                <div class="stat-value" id="sessions">0</div>
+                <div class="stat-sub" id="lastSession">No sessions yet</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Current Streak</div>
+                <div class="stat-value" id="streak">0</div>
+                <div class="stat-sub">days</div>
+            </div>
+        </div>
+
+        <div class="quick-actions">
+            <a href="ReasonDx/board-prep.html" class="quick-action">
+                <div class="quick-action-icon">📝</div>
+                <div class="quick-action-title">Board Prep</div>
+                <div class="quick-action-desc">USMLE-style questions</div>
+            </a>
             <a href="ReasonDx/training.html" class="quick-action">
-                <div class="quick-action-icon blue">🎯</div>
-                <div class="quick-action-text">
-                    <h3>Start a Case</h3>
-                    <p>Practice clinical reasoning</p>
-                </div>
+                <div class="quick-action-icon">🩺</div>
+                <div class="quick-action-title">Clinical Cases</div>
+                <div class="quick-action-desc">Interactive reasoning</div>
             </a>
             <a href="mechanism/index.html" class="quick-action">
-                <div class="quick-action-icon green">📖</div>
-                <div class="quick-action-text">
-                    <h3>Learn Mechanisms</h3>
-                    <p>Study pathophysiology</p>
-                </div>
+                <div class="quick-action-icon">🧬</div>
+                <div class="quick-action-title">MechanismDx</div>
+                <div class="quick-action-desc">Pathophysiology</div>
             </a>
-            <a href="CoachDx/coachdx-dashboard.html" class="quick-action">
-                <div class="quick-action-icon purple">💬</div>
-                <div class="quick-action-text">
-                    <h3>AI Coach Session</h3>
-                    <p>Get personalized feedback</p>
-                </div>
+            <a href="CoachDx/mentor-chat.html" class="quick-action">
+                <div class="quick-action-icon">💬</div>
+                <div class="quick-action-title">CoachDx</div>
+                <div class="quick-action-desc">AI-guided coaching</div>
             </a>
-        </section>
-        
-        <div class="dashboard-grid">
-            <!-- Main Content -->
-            <div class="main-column">
-                <!-- Continue Learning -->
-                <section class="continue-section">
-                    <div class="section-header">
-                        <h2 class="section-title">▶️ Continue Learning</h2>
-                    </div>
-                    <a href="#" class="continue-card" id="continueCard">
-                        <div class="continue-icon" id="continueIcon">📋</div>
-                        <div class="continue-info">
-                            <div class="continue-label">Resume where you left off</div>
-                            <div class="continue-title" id="continueTitle">Start your first activity</div>
-                            <div class="continue-progress">
-                                <div class="continue-progress-bar">
-                                    <div class="continue-progress-fill" id="continueProgressFill" style="width: 0%"></div>
-                                </div>
-                                <span class="continue-progress-text" id="continueProgressText">Get started!</span>
-                            </div>
-                        </div>
-                        <span class="continue-arrow">→</span>
-                    </a>
-                </section>
-                
-                <!-- Platform Cards -->
-                <section>
-                    <div class="section-header">
-                        <h2 class="section-title">📊 Your Progress</h2>
-                    </div>
-                    <div class="platform-cards">
-                        <a href="ReasonDx/training.html" class="platform-card reasondx">
-                            <div class="platform-header">
-                                <div class="platform-icon">🔬</div>
-                                <span class="platform-name">ReasonDx</span>
-                            </div>
-                            <div class="platform-stats">
-                                <div class="platform-stat">
-                                    <div class="platform-stat-value" id="reasonCases">0</div>
-                                    <div class="platform-stat-label">Cases</div>
-                                </div>
-                                <div class="platform-stat">
-                                    <div class="platform-stat-value" id="reasonAccuracy">0%</div>
-                                    <div class="platform-stat-label">Accuracy</div>
-                                </div>
-                                <div class="platform-stat">
-                                    <div class="platform-stat-value" id="reasonXP">0</div>
-                                    <div class="platform-stat-label">XP</div>
-                                </div>
-                            </div>
-                        </a>
-                        
-                        <a href="mechanism/index.html" class="platform-card mechanismdx">
-                            <div class="platform-header">
-                                <div class="platform-icon">📚</div>
-                                <span class="platform-name">MechanismDx</span>
-                            </div>
-                            <div class="platform-stats">
-                                <div class="platform-stat">
-                                    <div class="platform-stat-value" id="mechModules">0</div>
-                                    <div class="platform-stat-label">Modules</div>
-                                </div>
-                                <div class="platform-stat">
-                                    <div class="platform-stat-value" id="mechMCQs">0</div>
-                                    <div class="platform-stat-label">MCQs</div>
-                                </div>
-                                <div class="platform-stat">
-                                    <div class="platform-stat-value" id="mechXP">0</div>
-                                    <div class="platform-stat-label">XP</div>
-                                </div>
-                            </div>
-                        </a>
-                        
-                        <a href="CoachDx/coachdx-dashboard.html" class="platform-card coachdx">
-                            <div class="platform-header">
-                                <div class="platform-icon">🧠</div>
-                                <span class="platform-name">CoachDx</span>
-                            </div>
-                            <div class="platform-stats">
-                                <div class="platform-stat">
-                                    <div class="platform-stat-value" id="coachSessions">0</div>
-                                    <div class="platform-stat-label">Sessions</div>
-                                </div>
-                                <div class="platform-stat">
-                                    <div class="platform-stat-value" id="coachMastered">0</div>
-                                    <div class="platform-stat-label">Mastered</div>
-                                </div>
-                                <div class="platform-stat">
-                                    <div class="platform-stat-value" id="coachXP">0</div>
-                                    <div class="platform-stat-label">XP</div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </section>
-                
-                <!-- Recent Activity -->
-                <section>
-                    <div class="section-header">
-                        <h2 class="section-title">⏱️ Recent Activity</h2>
-                    </div>
-                    <div class="dx-card">
-                        <div class="dx-activity-feed" id="activityFeed">
-                            <div class="dx-activity-item">
-                                <div class="dx-activity-icon reason">📋</div>
-                                <div class="dx-activity-info">
-                                    <div class="dx-activity-title">No recent activity</div>
-                                    <div class="dx-activity-time">Start learning to see your progress!</div>
-                                </div>
-                            </div>
+        </div>
+
+        <div class="content-grid">
+            <div class="section-card">
+                <div class="section-header">
+                    <h3 class="section-title">Performance by System</h3>
+                    <a href="ReasonDx/board-prep.html" class="section-link">Practice weak areas →</a>
+                </div>
+                <div class="section-body">
+                    <div class="system-list" id="systemList">
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📊</div>
+                            <div class="empty-state-text">Complete some questions to see your performance breakdown</div>
                         </div>
                     </div>
-                </section>
+                </div>
             </div>
-            
-            <!-- Sidebar -->
-            <aside class="sidebar">
-                <!-- XP & Level -->
-                <div class="dx-xp-display">
-                    <div class="dx-level-badge" id="levelBadge">1</div>
-                    <div class="dx-xp-info">
-                        <div class="dx-xp-title" id="xpTitle">Medical Student</div>
-                        <div class="dx-xp-subtitle">Level <span id="xpLevel">1</span></div>
-                        <div class="dx-xp-bar">
-                            <div class="dx-xp-bar-fill" id="xpBarFill" style="width: 0%"></div>
-                        </div>
-                        <div class="dx-xp-text"><span id="xpCurrent">0</span> / <span id="xpNeeded">500</span> XP to next level</div>
-                    </div>
+
+            <div class="section-card">
+                <div class="section-header">
+                    <h3 class="section-title">Recent Activity</h3>
                 </div>
-                
-                <!-- Streak -->
-                <div class="dx-streak-display" id="streakBox">
-                    <span class="dx-streak-icon">🔥</span>
-                    <div>
-                        <div class="dx-streak-count" id="streakCount">0</div>
-                        <div class="dx-streak-label">day streak</div>
-                    </div>
-                </div>
-                
-                <!-- Daily Goals -->
-                <div class="daily-goals">
-                    <div class="daily-goals-header">
-                        <span class="daily-goals-title">🎯 Today's Goals</span>
-                        <span class="daily-goals-date" id="todayDate"></span>
-                    </div>
-                    <div id="goalsList">
-                        <div class="goal-item" data-goal="case">
-                            <div class="goal-checkbox">✓</div>
-                            <span class="goal-text">Complete 1 case</span>
-                        </div>
-                        <div class="goal-item" data-goal="mcq">
-                            <div class="goal-checkbox">✓</div>
-                            <span class="goal-text">Answer 5 MCQs</span>
-                        </div>
-                        <div class="goal-item" data-goal="review">
-                            <div class="goal-checkbox">✓</div>
-                            <span class="goal-text">Review 1 module</span>
+                <div class="section-body">
+                    <div class="activity-list" id="activityList">
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📚</div>
+                            <div class="empty-state-text">Your recent sessions will appear here</div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- Achievements -->
-                <div class="achievements-preview">
-                    <div class="achievements-header">
-                        <span class="achievements-title">🏆 Achievements</span>
-                        <span class="achievements-count" id="achievementCount">0 / 20</span>
-                    </div>
-                    <div id="achievementsList">
-                        <!-- Populated by JS -->
-                    </div>
-                    <a href="dx-achievements.html" class="view-all-link">View All Achievements →</a>
+            </div>
+        </div>
+
+        <div class="share-section">
+            <div class="section-card">
+                <div class="section-header">
+                    <h3 class="section-title">Shareable Progress Card</h3>
+                    <span class="section-link" style="cursor: pointer;" onclick="copyShareText()">Copy to Share</span>
                 </div>
-                
-                <!-- Leaderboard Preview -->
-                <div class="leaderboard-preview">
-                    <div class="section-header">
-                        <h3 class="section-title" style="font-size: 14px;">🏅 Weekly Leaderboard</h3>
+                <div class="section-body">
+                    <div class="share-card" id="shareCard">
+                        <div class="share-header">
+                            <div class="share-brand"><div class="share-logo">Dx</div><span class="share-name">ReasonDx</span></div>
+                            <div class="share-date" id="shareDate"></div>
+                        </div>
+                        <div class="share-stats">
+                            <div><div class="share-stat-value" id="shareAccuracy">—</div><div class="share-stat-label">Accuracy</div></div>
+                            <div><div class="share-stat-value" id="shareQuestions">0</div><div class="share-stat-label">Questions</div></div>
+                            <div><div class="share-stat-value" id="shareStreak">0</div><div class="share-stat-label">Day Streak</div></div>
+                        </div>
+                        <div class="share-systems" id="shareSystems"></div>
+                        <div class="share-footer">
+                            <span class="share-url">reasondx.com</span>
+                            <div class="share-actions">
+                                <button class="share-btn" onclick="copyShareText()">Copy Text</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="leaderboard-item">
-                        <span class="leaderboard-rank">1</span>
-                        <span class="leaderboard-name">You</span>
-                        <span class="leaderboard-xp" id="leaderboardXP">0 XP</span>
-                    </div>
-                    <p style="font-size: 12px; color: var(--dx-text-tertiary); text-align: center; margin-top: 12px;">
-                        Compete with classmates (coming soon!)
-                    </p>
                 </div>
-            </aside>
+            </div>
         </div>
     </main>
-    
-    <!-- Achievement Popup -->
-    <div class="dx-achievement-popup" id="achievementPopup">
-        <span class="dx-achievement-popup-icon" id="popupIcon">🏆</span>
-        <div class="dx-achievement-popup-content">
-            <div class="dx-achievement-popup-label">Achievement Unlocked!</div>
-            <div class="dx-achievement-popup-title" id="popupTitle">First Steps</div>
-        </div>
-    </div>
-    
-    <footer class="dashboard-footer">
-        <p>Dx Learning Ecosystem • <a href="mechanism/index.html">MechanismDx</a> • <a href="ReasonDx/training.html">ReasonDx</a> • <a href="CoachDx/coachdx-dashboard.html">CoachDx</a></p>
-        
-    </footer>
 
-<script src="js/dx-scoring.js"></script>
-<script>
-// Achievement definitions
-const ACHIEVEMENTS = {
-    first_case: { icon: '🎯', name: 'First Steps', desc: 'Completed your first case' },
-    perfect_case: { icon: '💯', name: 'Perfect Score', desc: 'Got 100% on a case' },
-    cases_10: { icon: '📋', name: 'Case Master', desc: 'Completed 10 cases' },
-    cases_50: { icon: '🏆', name: 'Case Champion', desc: 'Completed 50 cases' },
-    first_module: { icon: '📖', name: 'Knowledge Seeker', desc: 'Completed a module' },
-    perfect_module: { icon: '⭐', name: 'Module Master', desc: 'Perfect score on a module' },
-    mcqs_100: { icon: '✅', name: 'Question Crusher', desc: 'Answered 100 MCQs correctly' },
-    first_session: { icon: '💬', name: 'Coach Starter', desc: 'First CoachDx session' },
-    sessions_10: { icon: '🎓', name: 'Dedicated Learner', desc: '10 coaching sessions' },
-    streak_7: { icon: '🔥', name: 'Week Warrior', desc: '7 day streak' },
-    streak_30: { icon: '🌟', name: 'Month Master', desc: '30 day streak' },
-    cross_platform: { icon: '🌐', name: 'Explorer', desc: 'Used all 3 platforms' },
-    level_10: { icon: '🎖️', name: 'Rising Star', desc: 'Reached Level 10' },
-    level_20: { icon: '👑', name: 'Expert', desc: 'Reached Level 20' },
-    well_calibrated: { icon: '⚖️', name: 'Well Calibrated', desc: 'Accurate confidence ratings' }
-};
+    <script>
+        function loadDashboard() {
+            const stats = JSON.parse(localStorage.getItem('boardPrepStats') || '{"totalCorrect":0,"totalIncorrect":0,"sessions":0}');
+            const history = JSON.parse(localStorage.getItem('boardPrepHistory') || '[]');
+            const systemStats = JSON.parse(localStorage.getItem('boardPrepSystems') || '{}');
 
-// Initialize dashboard
-function initDashboard() {
-    // Check if DxScoring exists
-    if (typeof DxScoring === 'undefined') {
-        console.warn('DxScoring not loaded, using demo data');
-        loadDemoData();
-        return;
-    }
-    
-    const summary = DxScoring.getSummary();
-    
-    // Update header stats
-    document.getElementById('totalXP').textContent = summary.totalXP.toLocaleString();
-    document.getElementById('levelDisplay').textContent = summary.level;
-    document.getElementById('levelTitle').textContent = summary.levelTitle;
-    document.getElementById('streakDisplay').textContent = '🔥 ' + summary.streak;
-    
-    // Update welcome message based on time
-    const hour = new Date().getHours();
-    let greeting = 'Good evening';
-    if (hour < 12) greeting = 'Good morning';
-    else if (hour < 17) greeting = 'Good afternoon';
-    document.getElementById('welcomeMessage').textContent = greeting + '!';
-    
-    // Update subtext based on streak
-    if (summary.streak > 0) {
-        document.getElementById('welcomeSubtext').textContent = 
-            `You're on a ${summary.streak} day streak! Keep it up! 🔥`;
-    }
-    
-    // Update XP display
-    document.getElementById('levelBadge').textContent = summary.level;
-    document.getElementById('xpTitle').textContent = summary.levelTitle;
-    document.getElementById('xpLevel').textContent = summary.level;
-    document.getElementById('xpBarFill').style.width = summary.levelProgress.percent + '%';
-    document.getElementById('xpCurrent').textContent = summary.levelProgress.current;
-    document.getElementById('xpNeeded').textContent = summary.levelProgress.needed;
-    
-    // Update streak
-    document.getElementById('streakCount').textContent = summary.streak;
-    if (summary.streak === 0) {
-        document.getElementById('streakBox').classList.add('inactive');
-    }
-    
-    // Update platform stats
-    document.getElementById('reasonCases').textContent = summary.platforms.reason.cases;
-    document.getElementById('reasonAccuracy').textContent = summary.platforms.reason.accuracy + '%';
-    document.getElementById('reasonXP').textContent = summary.platforms.reason.xp;
-    
-    document.getElementById('mechModules').textContent = summary.platforms.mech.modules;
-    document.getElementById('mechMCQs').textContent = summary.platforms.mech.mcqs;
-    document.getElementById('mechXP').textContent = summary.platforms.mech.xp;
-    
-    document.getElementById('coachSessions').textContent = summary.platforms.coach.sessions;
-    document.getElementById('coachMastered').textContent = summary.platforms.coach.mastered;
-    document.getElementById('coachXP').textContent = summary.platforms.coach.xp;
-    
-    // Update leaderboard XP
-    document.getElementById('leaderboardXP').textContent = summary.totalXP + ' XP';
-    
-    // Update activity feed
-    updateActivityFeed(summary.recentActivity);
-    
-    // Update achievements
-    updateAchievements(summary.achievements);
-    
-    // Update continue learning
-    updateContinueLearning(summary);
-    
-    // Update daily goals
-    updateDailyGoals(summary);
-    
-    // Set today's date
-    document.getElementById('todayDate').textContent = new Date().toLocaleDateString('en-US', { 
-        weekday: 'short', month: 'short', day: 'numeric' 
-    });
-}
+            const total = stats.totalCorrect + stats.totalIncorrect;
+            document.getElementById('totalQuestions').textContent = total;
+            document.getElementById('sessions').textContent = stats.sessions || 0;
 
-function updateActivityFeed(activities) {
-    const feed = document.getElementById('activityFeed');
-    if (!activities || activities.length === 0) return;
-    
-    feed.innerHTML = activities.map(a => {
-        const iconClass = a.platform === 'achievement' ? 'achievement' : a.platform;
-        const icon = a.platform === 'reason' ? '📋' : 
-                     a.platform === 'mech' ? '📚' : 
-                     a.platform === 'coach' ? '💬' : '🏆';
-        const timeAgo = getTimeAgo(a.timestamp);
-        
-        return `
-            <div class="dx-activity-item">
-                <div class="dx-activity-icon ${iconClass}">${icon}</div>
-                <div class="dx-activity-info">
-                    <div class="dx-activity-title">${a.description}</div>
-                    <div class="dx-activity-time">${timeAgo}</div>
-                </div>
-                ${a.xp > 0 ? `<span class="dx-activity-xp">+${a.xp} XP</span>` : ''}
-            </div>
-        `;
-    }).join('');
-}
+            if (total > 0) {
+                const acc = Math.round(stats.totalCorrect / total * 100);
+                document.getElementById('accuracy').textContent = acc + '%';
+            }
 
-function updateAchievements(earned) {
-    const list = document.getElementById('achievementsList');
-    const count = document.getElementById('achievementCount');
-    
-    count.textContent = `${earned.length} / ${Object.keys(ACHIEVEMENTS).length}`;
-    
-    // Show recent/notable achievements
-    const toShow = earned.slice(-3).reverse();
-    
-    if (toShow.length === 0) {
-        list.innerHTML = `
-            <div class="achievement-mini">
-                <span class="achievement-mini-icon">🎯</span>
-                <div class="achievement-mini-info">
-                    <div class="achievement-mini-name">Start your journey!</div>
-                    <div class="achievement-mini-desc">Complete activities to earn achievements</div>
-                </div>
-            </div>
-        `;
-        return;
-    }
-    
-    list.innerHTML = toShow.map(id => {
-        const ach = ACHIEVEMENTS[id] || { icon: '🏆', name: id, desc: '' };
-        return `
-            <div class="achievement-mini">
-                <span class="achievement-mini-icon">${ach.icon}</span>
-                <div class="achievement-mini-info">
-                    <div class="achievement-mini-name">${ach.name}</div>
-                    <div class="achievement-mini-desc">${ach.desc}</div>
-                </div>
-            </div>
-        `;
-    }).join('');
-}
+            if (stats.lastSession) {
+                const last = new Date(stats.lastSession);
+                const now = new Date();
+                const diff = Math.floor((now - last) / (1000 * 60 * 60 * 24));
+                if (diff === 0) document.getElementById('lastSession').textContent = 'Today';
+                else if (diff === 1) document.getElementById('lastSession').textContent = 'Yesterday';
+                else document.getElementById('lastSession').textContent = diff + ' days ago';
+            }
 
-function updateContinueLearning(summary) {
-    // Find most recent activity to suggest continuation
-    const activity = summary.recentActivity[0];
-    const card = document.getElementById('continueCard');
-    
-    if (!activity) {
-        card.href = 'ReasonDx/training.html';
-        return;
-    }
-    
-    if (activity.platform === 'reason') {
-        card.href = 'ReasonDx/training.html';
-        document.getElementById('continueIcon').textContent = '📋';
-        document.getElementById('continueTitle').textContent = 'Continue ReasonDx Cases';
-    } else if (activity.platform === 'mech') {
-        card.href = 'mechanism/index.html';
-        document.getElementById('continueIcon').textContent = '📚';
-        document.getElementById('continueTitle').textContent = 'Continue MechanismDx';
-    } else {
-        card.href = 'CoachDx/coachdx-dashboard.html';
-        document.getElementById('continueIcon').textContent = '💬';
-        document.getElementById('continueTitle').textContent = 'Continue CoachDx';
-    }
-    
-    // Show progress
-    const totalCases = summary.platforms.reason.cases;
-    const progress = Math.min((totalCases / 20) * 100, 100);
-    document.getElementById('continueProgressFill').style.width = progress + '%';
-    document.getElementById('continueProgressText').textContent = `${totalCases}/20 cases`;
-}
+            const streak = calculateStreak(history);
+            document.getElementById('streak').textContent = streak;
 
-function updateDailyGoals(summary) {
-    const goals = document.querySelectorAll('.goal-item');
-    
-    // Check if any case completed today
-    const todayStart = new Date().setHours(0,0,0,0);
-    const todayActivity = summary.recentActivity.filter(a => a.timestamp > todayStart);
-    
-    const caseToday = todayActivity.some(a => a.platform === 'reason');
-    const mcqToday = todayActivity.filter(a => a.description.includes('MCQ')).length >= 5;
-    const moduleToday = todayActivity.some(a => a.description.includes('Module'));
-    
-    goals.forEach(goal => {
-        const type = goal.dataset.goal;
-        let completed = false;
-        
-        if (type === 'case') completed = caseToday;
-        if (type === 'mcq') completed = mcqToday;
-        if (type === 'review') completed = moduleToday;
-        
-        if (completed) goal.classList.add('completed');
-    });
-}
+            const today = new Date().toDateString();
+            const todayCount = history.filter(h => new Date(h.date).toDateString() === today).reduce((sum, h) => sum + Object.keys(h.submitted || {}).length, 0);
+            document.getElementById('questionsToday').textContent = todayCount + ' today';
 
-function getTimeAgo(timestamp) {
-    const seconds = Math.floor((Date.now() - timestamp) / 1000);
-    
-    if (seconds < 60) return 'Just now';
-    if (seconds < 3600) return Math.floor(seconds / 60) + 'm ago';
-    if (seconds < 86400) return Math.floor(seconds / 3600) + 'h ago';
-    if (seconds < 604800) return Math.floor(seconds / 86400) + 'd ago';
-    return new Date(timestamp).toLocaleDateString();
-}
+            renderSystemStats(systemStats);
+            renderActivity(history);
+            updateShareCard(stats, streak, systemStats);
+        }
 
-function showAchievementPopup(id) {
-    const ach = ACHIEVEMENTS[id];
-    if (!ach) return;
-    
-    document.getElementById('popupIcon').textContent = ach.icon;
-    document.getElementById('popupTitle').textContent = ach.name;
-    
-    const popup = document.getElementById('achievementPopup');
-    popup.classList.add('visible');
-    
-    setTimeout(() => popup.classList.remove('visible'), 4000);
-}
+        function calculateStreak(history) {
+            if (!history.length) return 0;
+            const dates = [...new Set(history.map(h => new Date(h.date).toDateString()))].sort((a, b) => new Date(b) - new Date(a));
+            let streak = 0;
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
 
-function loadDemoData() {
-    // Create mock data for demo
-    const demoSummary = {
-        totalXP: 4250,
-        level: 9,
-        levelTitle: 'Clinical Reasoner',
-        levelProgress: { current: 250, needed: 500, percent: 50 },
-        streak: 7,
-        platforms: {
-            reason: { xp: 1850, cases: 23, accuracy: 78 },
-            mech: { xp: 1400, mcqs: 87, accuracy: 72, challenges: 15, modules: 8 },
-            coach: { xp: 1000, sessions: 12, mastered: 8 }
-        },
-        achievements: ['first_case', 'first_module', 'first_session', 'streak_7', 'cross_platform', 'perfect_module'],
-        recentActivity: [
-            { platform: 'reason', description: 'Completed Chest Pain case', xp: 80, timestamp: Date.now() - 7200000 },
-            { platform: 'mech', description: 'Finished Stroke Module', xp: 120, timestamp: Date.now() - 86400000 },
-            { platform: 'coach', description: 'Mastered: DVT Case', xp: 100, timestamp: Date.now() - 90000000 }
-        ]
-    };
-    
-    // Apply demo data to UI
-    document.getElementById('totalXP').textContent = demoSummary.totalXP.toLocaleString();
-    document.getElementById('levelDisplay').textContent = demoSummary.level;
-    document.getElementById('levelTitle').textContent = demoSummary.levelTitle;
-    document.getElementById('streakDisplay').textContent = '🔥 ' + demoSummary.streak;
-    
-    document.getElementById('levelBadge').textContent = demoSummary.level;
-    document.getElementById('xpTitle').textContent = demoSummary.levelTitle;
-    document.getElementById('xpLevel').textContent = demoSummary.level;
-    document.getElementById('xpBarFill').style.width = demoSummary.levelProgress.percent + '%';
-    document.getElementById('xpCurrent').textContent = demoSummary.levelProgress.current;
-    
-    document.getElementById('streakCount').textContent = demoSummary.streak;
-    
-    document.getElementById('reasonCases').textContent = demoSummary.platforms.reason.cases;
-    document.getElementById('reasonAccuracy').textContent = demoSummary.platforms.reason.accuracy + '%';
-    document.getElementById('reasonXP').textContent = demoSummary.platforms.reason.xp;
-    
-    document.getElementById('mechModules').textContent = demoSummary.platforms.mech.modules;
-    document.getElementById('mechMCQs').textContent = demoSummary.platforms.mech.mcqs;
-    document.getElementById('mechXP').textContent = demoSummary.platforms.mech.xp;
-    
-    document.getElementById('coachSessions').textContent = demoSummary.platforms.coach.sessions;
-    document.getElementById('coachMastered').textContent = demoSummary.platforms.coach.mastered;
-    document.getElementById('coachXP').textContent = demoSummary.platforms.coach.xp;
-    
-    document.getElementById('leaderboardXP').textContent = demoSummary.totalXP + ' XP';
-    
-    updateActivityFeed(demoSummary.recentActivity);
-    updateAchievements(demoSummary.achievements);
-    
-    document.getElementById('todayDate').textContent = new Date().toLocaleDateString('en-US', { 
-        weekday: 'short', month: 'short', day: 'numeric' 
-    });
-}
+            for (let i = 0; i < dates.length; i++) {
+                const d = new Date(dates[i]);
+                d.setHours(0, 0, 0, 0);
+                const expected = new Date(today);
+                expected.setDate(expected.getDate() - i);
+                if (d.getTime() === expected.getTime()) streak++;
+                else break;
+            }
+            return streak;
+        }
 
-// Initialize on load
-document.addEventListener('DOMContentLoaded', initDashboard);
+        function renderSystemStats(systemStats) {
+            const container = document.getElementById('systemList');
+            const systems = Object.entries(systemStats);
+            if (systems.length === 0) return;
 
-// Demo: Show achievement popup on first visit
-setTimeout(() => {
-    if (!localStorage.getItem('dx_dashboard_visited')) {
-        showAchievementPopup('first_case');
-        localStorage.setItem('dx_dashboard_visited', 'true');
-    }
-}, 2000);
-</script>
+            systems.sort((a, b) => {
+                const accA = a[1].correct / (a[1].correct + a[1].incorrect) || 0;
+                const accB = b[1].correct / (b[1].correct + b[1].incorrect) || 0;
+                return accB - accA;
+            });
+
+            container.innerHTML = systems.map(([name, data]) => {
+                const total = data.correct + data.incorrect;
+                const acc = total > 0 ? Math.round(data.correct / total * 100) : 0;
+                const level = acc >= 80 ? 'high' : acc >= 60 ? 'mid' : 'low';
+                return '<div class="system-item"><div class="system-name">' + name + '</div><div class="system-bar"><div class="system-fill ' + level + '" style="width: ' + acc + '%"></div></div><div class="system-score">' + acc + '%</div></div>';
+            }).join('');
+        }
+
+        function renderActivity(history) {
+            const container = document.getElementById('activityList');
+            if (!history.length) return;
+
+            container.innerHTML = history.slice(0, 5).map(function(session) {
+                const date = new Date(session.date);
+                const total = Object.keys(session.submitted || {}).length;
+                const timeAgo = getTimeAgo(date);
+                const mode = session.mode === 'timed' ? 'Timed Block' : session.mode === 'tutor' ? 'Tutor Mode' : 'Quick Practice';
+
+                return '<div class="activity-item"><div class="activity-icon">📝</div><div class="activity-info"><div class="activity-title">' + mode + '</div><div class="activity-meta">' + total + ' questions · ' + timeAgo + '</div></div></div>';
+            }).join('');
+        }
+
+        function getTimeAgo(date) {
+            const now = new Date();
+            const diff = Math.floor((now - date) / 1000);
+            if (diff < 60) return 'Just now';
+            if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
+            if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
+            if (diff < 604800) return Math.floor(diff / 86400) + 'd ago';
+            return date.toLocaleDateString();
+        }
+
+        function updateShareCard(stats, streak, systemStats) {
+            const total = stats.totalCorrect + stats.totalIncorrect;
+            const acc = total > 0 ? Math.round(stats.totalCorrect / total * 100) + '%' : '—';
+            
+            document.getElementById('shareDate').textContent = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+            document.getElementById('shareAccuracy').textContent = acc;
+            document.getElementById('shareQuestions').textContent = total;
+            document.getElementById('shareStreak').textContent = streak;
+
+            const topSystems = Object.entries(systemStats)
+                .map(function(entry) { return { name: entry[0], acc: entry[1].correct / (entry[1].correct + entry[1].incorrect) || 0 }; })
+                .sort(function(a, b) { return b.acc - a.acc; })
+                .slice(0, 4);
+
+            document.getElementById('shareSystems').innerHTML = topSystems.map(function(s) {
+                return '<span class="share-system">' + s.name + ' ' + Math.round(s.acc * 100) + '%</span>';
+            }).join('');
+        }
+
+        function copyShareText() {
+            const stats = JSON.parse(localStorage.getItem('boardPrepStats') || '{}');
+            const total = (stats.totalCorrect || 0) + (stats.totalIncorrect || 0);
+            const acc = total > 0 ? Math.round(stats.totalCorrect / total * 100) : 0;
+            const text = "I've completed " + total + " clinical reasoning questions on ReasonDx with " + acc + "% accuracy! 🩺📚 #MedEd #ReasonDx";
+            navigator.clipboard.writeText(text).then(function() { alert('Progress copied to clipboard!'); });
+        }
+
+        function resetProgress() {
+            if (confirm('Reset all progress data? This cannot be undone.')) {
+                localStorage.removeItem('boardPrepStats');
+                localStorage.removeItem('boardPrepHistory');
+                localStorage.removeItem('boardPrepSystems');
+                location.reload();
+            }
+        }
+
+        loadDashboard();
+    </script>
 </body>
 </html>
-<script src="js/dx-onboarding.js"></script>
