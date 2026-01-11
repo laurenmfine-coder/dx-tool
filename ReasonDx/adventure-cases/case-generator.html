@@ -3,881 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Case Generator: Infinite Variations | ReasonDx</title>
+    <title>Adventure Case Generator | ReasonDx</title>
     <style>
         :root {
-            --primary: #1E3A5F;
-            --primary-light: #2563EB;
-            --success: #10B981;
-            --warning: #F59E0B;
-            --danger: #EF4444;
-            --bg: #F8FAFC;
-            --card-bg: #FFFFFF;
-            --text: #1F2937;
-            --text-light: #6B7280;
-            --border: #E5E7EB;
+            --bg: #0F172A;
+            --card: #1E293B;
+            --border: #334155;
+            --text: #F1F5F9;
+            --muted: #94A3B8;
+            --accent: #8B5CF6;
         }
-        
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: var(--bg);
-            min-height: 100vh;
             color: var(--text);
+            min-height: 100vh;
+            padding: 40px 20px;
         }
-        
-        .header {
-            background: linear-gradient(135deg, #7C3AED 0%, #A855F7 100%);
-            color: white;
-            padding: 24px 32px;
-        }
-        
-        .header-content {
-            max-width: 1000px;
+        .container {
+            max-width: 800px;
             margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
         }
-        
-        .header-title { font-size: 1.4rem; font-weight: 600; }
-        .header-subtitle { font-size: 0.9rem; opacity: 0.9; margin-top: 4px; }
-        
-        .generate-btn {
-            background: white;
-            color: #7C3AED;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.2s;
-        }
-        
-        .generate-btn:hover { transform: scale(1.05); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
-        
-        .main { max-width: 1000px; margin: 0 auto; padding: 32px; }
-        
-        .case-card {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            overflow: hidden;
-            margin-bottom: 24px;
-        }
-        
-        .case-header {
-            padding: 20px 24px;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .case-id { font-size: 0.85rem; color: var(--text-light); }
-        .case-seed { font-size: 0.75rem; color: var(--text-light); background: var(--bg); padding: 4px 10px; border-radius: 12px; }
-        
-        .case-content { padding: 24px; }
-        
-        .patient-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .patient-avatar {
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(135deg, #E0E7FF 0%, #C7D2FE 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        h1 {
             font-size: 1.8rem;
+            margin-bottom: 10px;
         }
-        
-        .patient-info h2 { font-size: 1.3rem; margin-bottom: 4px; }
-        .patient-demo { color: var(--text-light); font-size: 0.95rem; }
-        
-        .chief-complaint {
-            background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
-            border-radius: 12px;
-            padding: 16px 20px;
-            margin-bottom: 20px;
-            border-left: 4px solid var(--warning);
+        .subtitle {
+            color: var(--muted);
+            margin-bottom: 30px;
         }
-        
-        .cc-label { font-size: 0.8rem; font-weight: 600; color: #B45309; margin-bottom: 6px; text-transform: uppercase; }
-        .cc-text { font-size: 1.1rem; color: #92400E; font-style: italic; }
-        
-        .hpi {
-            background: var(--bg);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            line-height: 1.7;
-        }
-        
-        .hpi-label { font-size: 0.8rem; font-weight: 600; color: var(--primary-light); margin-bottom: 10px; text-transform: uppercase; }
-        
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-bottom: 20px;
-        }
-        
-        .info-box { background: var(--bg); border-radius: 10px; padding: 16px; }
-        .info-box-label { font-size: 0.75rem; font-weight: 600; color: var(--text-light); margin-bottom: 8px; text-transform: uppercase; }
-        .info-box-content { font-size: 0.95rem; }
-        
-        .vitals-grid {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-        
-        .vital-box {
-            background: white;
+        .card {
+            background: var(--card);
             border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 12px;
-            text-align: center;
-        }
-        
-        .vital-box.abnormal { background: #FEF2F2; border-color: #FECACA; }
-        .vital-value { font-size: 1.3rem; font-weight: 700; }
-        .vital-box.abnormal .vital-value { color: var(--danger); }
-        .vital-label { font-size: 0.75rem; color: var(--text-light); }
-        
-        .question-section {
-            background: linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 100%);
             border-radius: 12px;
-            padding: 20px;
-            margin-top: 24px;
+            padding: 24px;
+            margin-bottom: 20px;
         }
-        
-        .question-label { font-size: 0.8rem; font-weight: 600; color: var(--primary-light); margin-bottom: 12px; }
-        .question-text { font-size: 1.1rem; font-weight: 600; margin-bottom: 16px; }
-        
-        .options { display: flex; flex-direction: column; gap: 10px; }
-        
-        .option {
-            background: white;
-            border: 2px solid var(--border);
-            border-radius: 10px;
-            padding: 14px 16px;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+        .coming-soon {
+            text-align: center;
+            padding: 60px 20px;
         }
-        
-        .option:hover { border-color: var(--primary-light); transform: translateX(4px); }
-        .option.selected { border-color: var(--primary-light); background: #F0F4FF; }
-        .option.correct { border-color: var(--success); background: #ECFDF5; }
-        .option.incorrect { border-color: var(--danger); background: #FEF2F2; }
-        
-        .option-letter {
-            width: 28px;
-            height: 28px;
-            background: var(--bg);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 0.9rem;
-            flex-shrink: 0;
+        .coming-soon-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
         }
-        
-        .option.correct .option-letter { background: var(--success); color: white; }
-        .option.incorrect .option-letter { background: var(--danger); color: white; }
-        
-        .feedback { margin-top: 16px; padding: 16px; border-radius: 10px; display: none; }
-        .feedback.show { display: block; }
-        .feedback.correct { background: #ECFDF5; border-left: 4px solid var(--success); }
-        .feedback.incorrect { background: #FEF2F2; border-left: 4px solid var(--danger); }
-        .feedback-title { font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-        .feedback-text { line-height: 1.6; font-size: 0.95rem; }
-        
-        /* Resources Styles */
-        .resources-section { margin-top: 16px; }
-        
-        .resources-toggle {
-            background: rgba(255,255,255,0.8);
-            border: 1px solid rgba(0,0,0,0.1);
-            border-radius: 8px;
-            padding: 10px 14px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--primary);
-            transition: all 0.2s;
+        .coming-soon h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
         }
-        
-        .resources-toggle:hover { background: rgba(255,255,255,1); }
-        .resources-toggle-icon { transition: transform 0.2s; }
-        .resources-toggle.open .resources-toggle-icon { transform: rotate(180deg); }
-        
-        .resources-list {
-            display: none;
-            margin-top: 10px;
-            background: rgba(255,255,255,0.9);
-            border-radius: 8px;
-            padding: 12px;
+        .coming-soon p {
+            color: var(--muted);
+            max-width: 500px;
+            margin: 0 auto;
         }
-        
-        .resources-list.show { display: block; }
-        
-        .resource-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
+        .feature-list {
+            margin-top: 30px;
+            text-align: left;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .feature-list li {
             padding: 8px 0;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-        
-        .resource-item:last-child { border-bottom: none; }
-        .resource-icon { font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
-        .resource-content { flex: 1; }
-        
-        .resource-link {
-            color: var(--primary-light);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-        
-        .resource-link:hover { text-decoration: underline; }
-        .resource-desc { font-size: 0.8rem; color: var(--text-light); margin-top: 2px; }
-        
-        .resource-badge {
-            display: inline-block;
-            font-size: 0.65rem;
-            padding: 2px 6px;
-            border-radius: 4px;
-            margin-left: 6px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-        
-        .resource-badge.guideline { background: #DBEAFE; color: #1E40AF; }
-        .resource-badge.pubmed { background: #FEE2E2; color: #991B1B; }
-        
-        .actions { display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
-        
-        .action-btn {
-            padding: 12px 24px;
-            border-radius: 10px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: none;
-        }
-        
-        .action-btn.primary { background: var(--primary-light); color: white; }
-        .action-btn.primary:hover { background: var(--primary); }
-        .action-btn.secondary { background: white; color: var(--text); border: 1px solid var(--border); }
-        
-        .stats-panel {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 24px;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            text-align: center;
-        }
-        
-        .stat-value { font-size: 1.8rem; font-weight: 700; color: var(--primary-light); }
-        .stat-label { font-size: 0.8rem; color: var(--text-light); margin-top: 4px; }
-        
-        .variation-badge {
-            display: inline-flex;
+            border-bottom: 1px solid var(--border);
+            display: flex;
             align-items: center;
-            gap: 6px;
-            background: linear-gradient(135deg, #7C3AED 0%, #A855F7 100%);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            margin-bottom: 16px;
+            gap: 10px;
         }
-        
-        @media (max-width: 768px) {
-            .vitals-grid { grid-template-columns: repeat(3, 1fr); }
-            .stats-panel { grid-template-columns: repeat(2, 1fr); }
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-top: 30px;
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="header-content">
-            <div>
-                <div class="header-title">🎲 Infinite Case Generator</div>
-                <div class="header-subtitle">Every case is unique. Same learning objectives, endless variations.</div>
-            </div>
-            <button class="generate-btn" onclick="generateNewCase()">
-                <span>🔄</span> Generate New Case
-            </button>
-        </div>
-    </header>
-    
-    <main class="main">
-        <div class="stats-panel">
-            <div class="stat-item">
-                <div class="stat-value" id="casesCompleted">0</div>
-                <div class="stat-label">Cases Completed</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-value" id="correctAnswers">0</div>
-                <div class="stat-label">Correct Answers</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-value" id="accuracy">--%</div>
-                <div class="stat-label">Accuracy</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-value" id="uniqueVariations">∞</div>
-                <div class="stat-label">Possible Variations</div>
-            </div>
-        </div>
+    <div class="container">
+        <h1>🛠️ Adventure Case Generator</h1>
+        <p class="subtitle">Create custom branching clinical cases</p>
         
-        <div id="caseContainer"></div>
-    </main>
-    
-    <script>
-        // Stats
-        let stats = { casesCompleted: 0, correctAnswers: 0, totalQuestions: 0 };
-        let currentSeed = null;
-        
-        // ===========================================
-        // EVIDENCE-BASED RESOURCES DATABASE
-        // ===========================================
-        
-        const evidenceResources = {
-            stemi: [
-                {
-                    type: "guideline",
-                    title: "2021 ACC/AHA Coronary Revascularization Guideline",
-                    url: "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001038",
-                    desc: "Primary PCI recommended for STEMI within 90 min of first medical contact"
-                },
-                {
-                    type: "guideline",
-                    title: "2017 ESC STEMI Guidelines",
-                    url: "https://academic.oup.com/eurheartj/article/39/2/119/4095042",
-                    desc: "European Society of Cardiology STEMI management recommendations"
-                },
-                {
-                    type: "pubmed",
-                    title: "De Luca G, et al. Time delay and mortality in STEMI",
-                    url: "https://pubmed.ncbi.nlm.nih.gov/14662259/",
-                    desc: "Circulation 2004 - Every 30-min delay increases mortality 7.5%"
-                }
-            ],
-            nstemi: [
-                {
-                    type: "guideline",
-                    title: "2020 ESC NSTE-ACS Guidelines",
-                    url: "https://academic.oup.com/eurheartj/article/42/14/1289/5898842",
-                    desc: "Risk stratification and invasive strategy timing"
-                },
-                {
-                    type: "pubmed",
-                    title: "Bavry AA, et al. Early invasive vs conservative strategy",
-                    url: "https://pubmed.ncbi.nlm.nih.gov/16818817/",
-                    desc: "JAMA 2006 - Meta-analysis of invasive strategy in NSTEMI"
-                }
-            ],
-            medications: [
-                {
-                    type: "guideline",
-                    title: "2016 ACC/AHA DAPT Duration Guideline",
-                    url: "https://www.ahajournals.org/doi/10.1161/CIR.0000000000000404",
-                    desc: "Dual antiplatelet therapy recommendations for ACS"
-                },
-                {
-                    type: "pubmed",
-                    title: "Wallentin L, et al. PLATO Trial - Ticagrelor vs Clopidogrel",
-                    url: "https://pubmed.ncbi.nlm.nih.gov/19717846/",
-                    desc: "NEJM 2009 - Ticagrelor reduces CV death, MI, stroke vs clopidogrel"
-                },
-                {
-                    type: "pubmed",
-                    title: "Yusuf S, et al. CURE Trial - Clopidogrel in ACS",
-                    url: "https://pubmed.ncbi.nlm.nih.gov/11519503/",
-                    desc: "NEJM 2001 - Clopidogrel + aspirin reduces CV events in ACS"
-                }
-            ],
-            unstable_angina: [
-                {
-                    type: "guideline",
-                    title: "2014 AHA/ACC NSTE-ACS Guideline",
-                    url: "https://www.ahajournals.org/doi/10.1161/CIR.0000000000000134",
-                    desc: "Risk stratification and management of unstable angina"
-                },
-                {
-                    type: "pubmed",
-                    title: "Amsterdam EA, et al. ACS without ST elevation",
-                    url: "https://pubmed.ncbi.nlm.nih.gov/25260718/",
-                    desc: "Circulation 2014 - Comprehensive UA/NSTEMI guideline summary"
-                }
-            ]
-        };
-        
-        function getResourcesForDiagnosis(diagnosisId) {
-            if (diagnosisId.includes('stemi') && !diagnosisId.includes('nstemi')) {
-                return [...evidenceResources.stemi, ...evidenceResources.medications];
-            } else if (diagnosisId === 'nstemi') {
-                return [...evidenceResources.nstemi, ...evidenceResources.medications];
-            } else {
-                return [...evidenceResources.unstable_angina, ...evidenceResources.medications];
-            }
-        }
-        
-        function renderResourcesHtml(diagnosisId) {
-            const resources = getResourcesForDiagnosis(diagnosisId);
-            
-            const resourcesHtml = resources.map(r => `
-                <div class="resource-item">
-                    <span class="resource-icon">${r.type === 'guideline' ? '📋' : '📄'}</span>
-                    <div class="resource-content">
-                        <a href="${r.url}" target="_blank" rel="noopener" class="resource-link">
-                            ${r.title}
-                            <span class="resource-badge ${r.type}">${r.type === 'guideline' ? 'Guideline' : 'PubMed'}</span>
-                        </a>
-                        <div class="resource-desc">${r.desc}</div>
-                    </div>
-                </div>
-            `).join('');
-            
-            return `
-                <div class="resources-section">
-                    <button class="resources-toggle" onclick="toggleResources(this)">
-                        <span>📚 Evidence-Based Resources (${resources.length})</span>
-                        <span class="resources-toggle-icon">▼</span>
-                    </button>
-                    <div class="resources-list">
-                        ${resourcesHtml}
-                    </div>
-                </div>
-            `;
-        }
-        
-        function toggleResources(btn) {
-            btn.classList.toggle('open');
-            const list = btn.nextElementSibling;
-            list.classList.toggle('show');
-        }
-        
-        // Data pools for generation
-        const dataPools = {
-            firstNamesMale: ["James", "Michael", "Robert", "David", "William", "Richard", "Joseph", "Thomas", "Charles", "Daniel", "Marcus", "Antonio", "Hiroshi", "Mohammed", "Vladimir", "Carlos", "Dmitri", "Kofi", "Raj", "Wei"],
-            firstNamesFemale: ["Mary", "Patricia", "Jennifer", "Linda", "Elizabeth", "Barbara", "Susan", "Jessica", "Sarah", "Karen", "Maria", "Priya", "Yuki", "Fatima", "Olga", "Carmen", "Aisha", "Mei", "Ingrid", "Lakshmi"],
-            lastNames: ["Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Rodriguez", "Martinez", "Chen", "Patel", "Kim", "Nguyen", "Kowalski", "O'Brien", "Mueller", "Andersen", "Yamamoto", "Singh"],
-            
-            painQualities: ["crushing", "pressure", "squeezing", "tightness", "heaviness", "burning", "aching", "dull", "sharp"],
-            painLocations: ["substernal", "left-sided chest", "central chest", "epigastric", "left chest"],
-            radiations: ["left arm", "jaw", "back", "both arms", "left shoulder", "neck", "right arm", "none"],
-            
-            onsetContexts: [
-                "while watching TV", "while walking upstairs", "during yard work", "after eating dinner",
-                "while sleeping (woke from sleep)", "at rest", "during an argument", "while shoveling snow",
-                "during exercise", "at work", "while grocery shopping", "climbing a hill"
-            ],
-            
-            associatedSymptoms: [
-                "diaphoresis (sweating)", "nausea", "shortness of breath", "lightheadedness",
-                "palpitations", "anxiety/sense of doom", "vomiting", "fatigue"
-            ],
-            
-            riskFactors: [
-                { name: "hypertension", meds: ["lisinopril", "amlodipine", "metoprolol", "losartan"] },
-                { name: "type 2 diabetes", meds: ["metformin", "glipizide", "insulin glargine", "empagliflozin"] },
-                { name: "hyperlipidemia", meds: ["atorvastatin", "rosuvastatin", "simvastatin"] },
-                { name: "smoking history (30 pack-years)", meds: [] },
-                { name: "family history of premature CAD", meds: [] },
-                { name: "obesity (BMI 34)", meds: [] },
-                { name: "prior MI (5 years ago)", meds: ["aspirin", "clopidogrel", "metoprolol"] },
-                { name: "chronic kidney disease stage 3", meds: [] }
-            ],
-            
-            ecgFindings: {
-                stemi_anterior: [
-                    "ST elevation in V1-V4 (2-3mm) with reciprocal depression in II, III, aVF",
-                    "ST elevation in V1-V5 (3-4mm) with hyperacute T waves",
-                    "ST elevation V2-V4 with early Q wave formation"
-                ],
-                stemi_inferior: [
-                    "ST elevation in II, III, aVF (2-3mm) with reciprocal depression in I, aVL",
-                    "ST elevation in II, III, aVF with right ventricular involvement",
-                    "Inferior ST elevation with posterior extension (ST depression V1-V3)"
-                ],
-                nstemi: [
-                    "ST depression in V1-V4 (1-2mm) with T wave inversions",
-                    "Diffuse ST depression with T wave inversions in precordial leads",
-                    "Deep symmetric T wave inversions in V1-V4 (Wellens' pattern Type A)"
-                ],
-                unstable_angina: [
-                    "Nonspecific ST-T changes, T wave flattening",
-                    "Dynamic T wave inversions during pain, resolving with relief",
-                    "No acute changes, but new compared to prior ECG"
-                ]
-            },
-            
-            troponinRanges: {
-                normal: { min: 0.00, max: 0.03 },
-                borderline: { min: 0.04, max: 0.10 },
-                elevated: { min: 0.11, max: 2.0 },
-                high: { min: 2.0, max: 15.0 }
-            }
-        };
-        
-        const caseTemplates = {
-            acs: {
-                diagnoses: [
-                    { id: "stemi_anterior", name: "Anterior STEMI", artery: "LAD (Left Anterior Descending)", urgency: "emergent", management: "Immediate cath lab activation. Door-to-balloon goal <90 minutes. Aspirin, P2Y12 inhibitor, heparin." },
-                    { id: "stemi_inferior", name: "Inferior STEMI", artery: "RCA (Right Coronary Artery)", urgency: "emergent", management: "Immediate cath lab activation. Watch for bradycardia and right ventricular involvement. Avoid nitrates if RV infarct suspected." },
-                    { id: "nstemi", name: "NSTEMI", artery: "Variable - often LAD or LCx", urgency: "urgent", management: "Admit to CCU, anticoagulation, early invasive strategy within 24-48 hours based on risk stratification." },
-                    { id: "unstable_angina", name: "Unstable Angina", artery: "Variable", urgency: "urgent", management: "Admit, medical management with antiplatelet/anticoagulation, risk stratify for invasive vs conservative approach." }
-                ],
+        <div class="card">
+            <div class="coming-soon">
+                <div class="coming-soon-icon">🚧</div>
+                <h2>Coming Soon</h2>
+                <p>The Adventure Case Generator will allow faculty to create custom branching cases with deep clinical reasoning features.</p>
                 
-                questions: [
-                    {
-                        type: "initial_action",
-                        stem: "Based on the clinical presentation and ECG findings, what is the most appropriate IMMEDIATE next step?",
-                        correctByDiagnosis: {
-                            stemi_anterior: "Activate cath lab for emergent primary PCI",
-                            stemi_inferior: "Activate cath lab for emergent primary PCI",
-                            nstemi: "Initiate anticoagulation and admit to CCU for early invasive strategy",
-                            unstable_angina: "Admit to monitored bed, start antiplatelet therapy, and risk stratify"
-                        },
-                        distractors: [
-                            "Discharge with outpatient stress test in 48 hours",
-                            "Observe in ED for 6 hours, repeat troponin, then reassess",
-                            "Order CT coronary angiography",
-                            "Start oral beta-blocker and schedule outpatient cardiology follow-up",
-                            "Administer fibrinolytics immediately"
-                        ]
-                    },
-                    {
-                        type: "diagnosis",
-                        stem: "What is the most likely diagnosis?",
-                        correctByDiagnosis: {
-                            stemi_anterior: "Anterior STEMI (ST-Elevation Myocardial Infarction)",
-                            stemi_inferior: "Inferior STEMI (ST-Elevation Myocardial Infarction)",
-                            nstemi: "NSTEMI (Non-ST-Elevation Myocardial Infarction)",
-                            unstable_angina: "Unstable Angina"
-                        },
-                        distractors: [
-                            "Acute pericarditis",
-                            "Aortic dissection",
-                            "Pulmonary embolism",
-                            "Costochondritis",
-                            "Gastroesophageal reflux disease"
-                        ]
-                    },
-                    {
-                        type: "medication",
-                        stem: "Which medication regimen is most appropriate for initial management of this patient?",
-                        correctByDiagnosis: {
-                            stemi_anterior: "Aspirin 325mg, ticagrelor 180mg loading, heparin bolus, atorvastatin 80mg",
-                            stemi_inferior: "Aspirin 325mg, clopidogrel 600mg loading, heparin bolus, atorvastatin 80mg",
-                            nstemi: "Aspirin, P2Y12 inhibitor, enoxaparin, high-intensity statin",
-                            unstable_angina: "Aspirin, heparin, beta-blocker, nitroglycerin PRN, statin"
-                        },
-                        distractors: [
-                            "Aspirin 81mg daily only",
-                            "Morphine, oxygen, nitroglycerin only",
-                            "Warfarin loading dose with aspirin",
-                            "Ibuprofen for pain control"
-                        ]
-                    }
-                ]
-            }
-        };
-        
-        // Utility functions
-        function seededRandom(seed) {
-            const x = Math.sin(seed++) * 10000;
-            return x - Math.floor(x);
-        }
-        
-        function randomInt(min, max, seed = null) {
-            const rand = seed !== null ? seededRandom(seed) : Math.random();
-            return Math.floor(rand * (max - min + 1)) + min;
-        }
-        
-        function randomChoice(array, seed = null) {
-            const rand = seed !== null ? seededRandom(seed) : Math.random();
-            return array[Math.floor(rand * array.length)];
-        }
-        
-        function randomSubset(array, min, max, seed = null) {
-            const count = randomInt(min, max, seed);
-            const shuffled = [...array].sort(() => (seed !== null ? seededRandom(seed++) : Math.random()) - 0.5);
-            return shuffled.slice(0, count);
-        }
-        
-        function randomFloat(min, max, decimals = 2, seed = null) {
-            const rand = seed !== null ? seededRandom(seed) : Math.random();
-            return parseFloat((rand * (max - min) + min).toFixed(decimals));
-        }
-        
-        function generateSeed() {
-            return Math.floor(Math.random() * 1000000);
-        }
-        
-        // Case generation
-        function generateCase(seed = null) {
-            if (seed === null) seed = generateSeed();
-            currentSeed = seed;
-            let s = seed;
-            
-            const template = caseTemplates.acs;
-            const diagnosis = randomChoice(template.diagnoses, s++);
-            
-            const isMale = seededRandom(s++) > 0.35;
-            const age = randomInt(45, 82, s++);
-            const firstName = randomChoice(isMale ? dataPools.firstNamesMale : dataPools.firstNamesFemale, s++);
-            const lastName = randomChoice(dataPools.lastNames, s++);
-            
-            const painQuality = randomChoice(dataPools.painQualities, s++);
-            const painLocation = randomChoice(dataPools.painLocations, s++);
-            const radiation = randomChoice(dataPools.radiations, s++);
-            const onsetContext = randomChoice(dataPools.onsetContexts, s++);
-            const duration = randomChoice(["30 minutes", "45 minutes", "1 hour", "90 minutes", "2 hours", "3 hours", "4 hours"], s++);
-            
-            const symptomCount = diagnosis.urgency === "emergent" ? randomInt(2, 4, s++) : randomInt(1, 3, s++);
-            const associatedSymptoms = randomSubset(dataPools.associatedSymptoms, symptomCount, symptomCount, s++);
-            
-            const riskFactorCount = randomInt(2, 4, s++);
-            const riskFactors = randomSubset(dataPools.riskFactors, riskFactorCount, riskFactorCount, s++);
-            
-            const medications = [];
-            riskFactors.forEach(rf => {
-                if (rf.meds.length > 0) medications.push(randomChoice(rf.meds, s++));
-            });
-            
-            const vitals = {
-                hr: randomInt(65, 118, s++),
-                sbp: randomInt(95, 185, s++),
-                dbp: randomInt(55, 105, s++),
-                rr: randomInt(14, 28, s++),
-                o2: randomInt(90, 99, s++),
-                temp: randomFloat(97.6, 99.4, 1, s++)
-            };
-            
-            const ecgFinding = randomChoice(dataPools.ecgFindings[diagnosis.id], s++);
-            
-            let troponinRange;
-            if (diagnosis.id.includes('stemi')) {
-                troponinRange = seededRandom(s++) > 0.3 ? dataPools.troponinRanges.high : dataPools.troponinRanges.elevated;
-            } else if (diagnosis.id === 'nstemi') {
-                troponinRange = dataPools.troponinRanges.elevated;
-            } else {
-                troponinRange = seededRandom(s++) > 0.5 ? dataPools.troponinRanges.borderline : dataPools.troponinRanges.normal;
-            }
-            const troponin = randomFloat(troponinRange.min, troponinRange.max, 2, s++);
-            
-            const questionTemplate = randomChoice(template.questions, s++);
-            const correctAnswer = questionTemplate.correctByDiagnosis[diagnosis.id];
-            
-            let options = [correctAnswer];
-            const distractors = randomSubset(questionTemplate.distractors, 3, 3, s++);
-            options = options.concat(distractors);
-            options = options.sort(() => seededRandom(s++) - 0.5);
-            
-            const correctIndex = options.indexOf(correctAnswer);
-            
-            return {
-                seed, 
-                patient: { name: `${firstName} ${lastName}`, age, sex: isMale ? "Male" : "Female", avatar: isMale ? "👨" : "👩" },
-                presentation: { painQuality, painLocation, radiation, onsetContext, duration, associatedSymptoms },
-                history: { riskFactors: riskFactors.map(rf => rf.name), medications },
-                vitals, ecg: ecgFinding, troponin, diagnosis,
-                question: { stem: questionTemplate.stem, type: questionTemplate.type, options, correctIndex, correctAnswer }
-            };
-        }
-        
-        function renderCase(caseData) {
-            const container = document.getElementById('caseContainer');
-            
-            const hpi = `${caseData.patient.name} is a ${caseData.patient.age}-year-old ${caseData.patient.sex.toLowerCase()} who presents to the Emergency Department with ${caseData.presentation.painQuality} ${caseData.presentation.painLocation} pain that started ${caseData.presentation.duration} ago ${caseData.presentation.onsetContext}. ${caseData.presentation.radiation !== 'none' ? `The pain radiates to the ${caseData.presentation.radiation}.` : 'There is no radiation of pain.'} Associated symptoms include ${caseData.presentation.associatedSymptoms.join(', ')}.`;
-            
-            const pmh = caseData.history.riskFactors.length > 0 ? caseData.history.riskFactors.join(', ') : 'No significant past medical history';
-            const meds = caseData.history.medications.length > 0 ? caseData.history.medications.join(', ') : 'None';
-            
-            container.innerHTML = `
-                <div class="case-card">
-                    <div class="case-header">
-                        <span class="case-id">Generated Case #${stats.casesCompleted + 1}</span>
-                        <span class="case-seed">Seed: ${caseData.seed}</span>
-                    </div>
-                    <div class="case-content">
-                        <div class="variation-badge">🎲 Unique Variation - Same Learning, New Patient</div>
-                        
-                        <div class="patient-header">
-                            <div class="patient-avatar">${caseData.patient.avatar}</div>
-                            <div class="patient-info">
-                                <h2>${caseData.patient.name}</h2>
-                                <div class="patient-demo">${caseData.patient.age} y/o ${caseData.patient.sex}</div>
-                            </div>
-                        </div>
-                        
-                        <div class="chief-complaint">
-                            <div class="cc-label">Chief Complaint</div>
-                            <div class="cc-text">"I have ${caseData.presentation.painQuality} chest pain"</div>
-                        </div>
-                        
-                        <div class="hpi">
-                            <div class="hpi-label">History of Present Illness</div>
-                            ${hpi}
-                        </div>
-                        
-                        <div class="info-grid">
-                            <div class="info-box">
-                                <div class="info-box-label">Past Medical History</div>
-                                <div class="info-box-content">${pmh}</div>
-                            </div>
-                            <div class="info-box">
-                                <div class="info-box-label">Medications</div>
-                                <div class="info-box-content">${meds}</div>
-                            </div>
-                        </div>
-                        
-                        <div class="hpi-label" style="margin-bottom: 12px;">Vital Signs</div>
-                        <div class="vitals-grid">
-                            <div class="vital-box ${caseData.vitals.hr > 100 || caseData.vitals.hr < 60 ? 'abnormal' : ''}">
-                                <div class="vital-value">${caseData.vitals.hr}</div>
-                                <div class="vital-label">HR (bpm)</div>
-                            </div>
-                            <div class="vital-box ${caseData.vitals.sbp > 140 || caseData.vitals.sbp < 90 ? 'abnormal' : ''}">
-                                <div class="vital-value">${caseData.vitals.sbp}/${caseData.vitals.dbp}</div>
-                                <div class="vital-label">BP (mmHg)</div>
-                            </div>
-                            <div class="vital-box ${caseData.vitals.rr > 20 ? 'abnormal' : ''}">
-                                <div class="vital-value">${caseData.vitals.rr}</div>
-                                <div class="vital-label">RR (/min)</div>
-                            </div>
-                            <div class="vital-box ${caseData.vitals.o2 < 94 ? 'abnormal' : ''}">
-                                <div class="vital-value">${caseData.vitals.o2}%</div>
-                                <div class="vital-label">SpO2</div>
-                            </div>
-                            <div class="vital-box">
-                                <div class="vital-value">${caseData.vitals.temp}°F</div>
-                                <div class="vital-label">Temp</div>
-                            </div>
-                            <div class="vital-box ${caseData.troponin > 0.04 ? 'abnormal' : ''}">
-                                <div class="vital-value">${caseData.troponin}</div>
-                                <div class="vital-label">Troponin</div>
-                            </div>
-                        </div>
-                        
-                        <div class="info-box" style="margin-bottom: 0;">
-                            <div class="info-box-label">ECG Findings</div>
-                            <div class="info-box-content">${caseData.ecg}</div>
-                        </div>
-                        
-                        <div class="question-section">
-                            <div class="question-label">📝 Clinical Question</div>
-                            <div class="question-text">${caseData.question.stem}</div>
-                            <div class="options">
-                                ${caseData.question.options.map((opt, i) => `
-                                    <div class="option" data-index="${i}" onclick="selectOption(${i})">
-                                        <div class="option-letter">${String.fromCharCode(65 + i)}</div>
-                                        <div class="option-text">${opt}</div>
-                                    </div>
-                                `).join('')}
-                            </div>
-                            <div class="feedback" id="feedback"></div>
-                            <div class="actions" id="actions" style="display: none;">
-                                <button class="action-btn primary" onclick="generateNewCase()">🔄 Next Case</button>
-                                <button class="action-btn secondary" onclick="replayWithSeed(${caseData.seed})">🔁 Replay This Case</button>
-                                <button class="action-btn secondary" onclick="window.location.href='branching-chest-pain.html'">🌳 Try Branching Version</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            window.currentCase = caseData;
-        }
-        
-        function selectOption(index) {
-            const caseData = window.currentCase;
-            const isCorrect = index === caseData.question.correctIndex;
-            
-            stats.totalQuestions++;
-            if (isCorrect) stats.correctAnswers++;
-            
-            document.querySelectorAll('.option').forEach((opt, i) => {
-                opt.onclick = null;
-                if (i === caseData.question.correctIndex) opt.classList.add('correct');
-                else if (i === index && !isCorrect) opt.classList.add('incorrect');
-            });
-            
-            const feedback = document.getElementById('feedback');
-            feedback.className = `feedback show ${isCorrect ? 'correct' : 'incorrect'}`;
-            feedback.innerHTML = `
-                <div class="feedback-title">${isCorrect ? '✅ Correct!' : '❌ Incorrect'}</div>
-                <div class="feedback-text">
-                    <strong>Diagnosis:</strong> ${caseData.diagnosis.name}<br>
-                    <strong>Culprit Artery:</strong> ${caseData.diagnosis.artery}<br>
-                    <strong>Correct Answer:</strong> ${caseData.question.correctAnswer}<br><br>
-                    <strong>Key Teaching Point:</strong> ${caseData.diagnosis.management}
-                </div>
-                ${renderResourcesHtml(caseData.diagnosis.id)}
-            `;
-            
-            document.getElementById('actions').style.display = 'flex';
-            
-            stats.casesCompleted++;
-            updateStatsDisplay();
-        }
-        
-        function updateStatsDisplay() {
-            document.getElementById('casesCompleted').textContent = stats.casesCompleted;
-            document.getElementById('correctAnswers').textContent = stats.correctAnswers;
-            const accuracy = stats.totalQuestions > 0 ? Math.round((stats.correctAnswers / stats.totalQuestions) * 100) : 0;
-            document.getElementById('accuracy').textContent = `${accuracy}%`;
-        }
-        
-        function generateNewCase() {
-            const caseData = generateCase();
-            renderCase(caseData);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-        
-        function replayWithSeed(seed) {
-            const caseData = generateCase(seed);
-            renderCase(caseData);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-        
-        // Initialize
-        generateNewCase();
-    </script>
+                <ul class="feature-list">
+                    <li>📝 Free-text reasoning prompts</li>
+                    <li>📋 Differential diagnosis builders</li>
+                    <li>📊 ECG and imaging integration</li>
+                    <li>🧪 Lab result panels</li>
+                    <li>⏱️ Time-sensitive decision points</li>
+                    <li>👩‍⚕️ Nurse interrupt events</li>
+                    <li>📈 Comprehensive scoring rubrics</li>
+                </ul>
+                
+                <a href="chest-pain-v3.html" class="btn">Try Sample Case</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
