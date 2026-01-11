@@ -299,29 +299,53 @@
 
         // Load questions from JSON
         async function loadQuestions() {
+            // Try multiple paths to find the JSON file
             const paths = [
                 'data/board-prep-questions.json',
                 './data/board-prep-questions.json',
                 '/ReasonDx/data/board-prep-questions.json',
-                '../ReasonDx/data/board-prep-questions.json'
+                '/data/board-prep-questions.json',
+                '../data/board-prep-questions.json',
+                'board-prep-questions.json'
             ];
             
+            const errors = [];
             for (const path of paths) {
                 try {
+                    console.log('Trying to load from:', path);
                     const response = await fetch(path);
                     if (response.ok) {
-                        questionBank = await response.json();
-                        console.log('Loaded questions from:', path);
+                        const text = await response.text();
+                        questionBank = JSON.parse(text);
+                        console.log('✓ Loaded', questionBank.length, 'questions from:', path);
                         initializeUI();
                         return;
+                    } else {
+                        errors.push(`${path}: HTTP ${response.status}`);
                     }
                 } catch (err) {
-                    console.log('Failed to load from:', path);
+                    errors.push(`${path}: ${err.message}`);
                 }
             }
             
-            document.getElementById('startBtn').textContent = 'Error Loading Questions';
-            console.error('All load attempts failed');
+            // All paths failed - show detailed error
+            console.error('All load attempts failed:', errors);
+            const btn = document.getElementById('startBtn');
+            btn.textContent = 'Error Loading Questions';
+            btn.style.background = '#dc2626';
+            
+            // Show help message
+            const helpDiv = document.createElement('div');
+            helpDiv.style.cssText = 'margin-top:16px;padding:16px;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;font-size:13px;color:#991b1b;text-align:left;';
+            helpDiv.innerHTML = `
+                <strong>Could not load questions file.</strong><br><br>
+                Make sure <code>board-prep-questions.json</code> is in the <code>data/</code> folder.<br><br>
+                <strong>Expected structure:</strong><br>
+                <code>ReasonDx/board-prep.html</code><br>
+                <code>ReasonDx/data/board-prep-questions.json</code><br><br>
+                <details><summary>Technical details</summary><pre style="font-size:11px;margin-top:8px;">${errors.join('\n')}</pre></details>
+            `;
+            btn.parentNode.appendChild(helpDiv);
         }
 
         function initializeUI() {
