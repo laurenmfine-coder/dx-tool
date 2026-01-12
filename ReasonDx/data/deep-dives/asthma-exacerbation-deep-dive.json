@@ -1,0 +1,559 @@
+{
+  "id": "asthma-exacerbation-deep-dive",
+  "title": "Asthma Exacerbation",
+  "version": "1.0",
+  "totalQuestions": 26,
+  "estimatedTime": "35 minutes",
+  "difficulty": "Intermediate",
+  "targetAudience": "Medical Students, Residents",
+  "category": "Pulmonary",
+  "icon": "🌬️",
+  "objectives": [
+    "Classify asthma exacerbation severity using clinical and objective measures",
+    "Understand pathophysiology of acute bronchoconstriction and inflammation",
+    "Apply GINA guidelines for acute management",
+    "Recognize indications for ICU admission and intubation",
+    "Identify high-risk features for near-fatal asthma",
+    "Plan appropriate discharge and follow-up"
+  ],
+  "guidelineReferences": [
+    {
+      "name": "GINA 2024 Guidelines",
+      "citation": "Global Initiative for Asthma. Global Strategy for Asthma Management and Prevention, 2024",
+      "url": "https://ginasthma.org/gina-reports/",
+      "keyPoints": [
+        "SABA is first-line for acute relief but high use indicates poor control",
+        "Systemic corticosteroids within first hour of ED presentation",
+        "Reassess response to initial treatment at 1 hour",
+        "Low-dose ICS-formoterol as both maintenance and reliever (MART) reduces exacerbations",
+        "Identify and address triggers and adherence issues"
+      ]
+    },
+    {
+      "name": "NAEPP EPR-3 Guidelines",
+      "citation": "National Asthma Education and Prevention Program Expert Panel Report 3",
+      "url": "https://www.nhlbi.nih.gov/health-topics/guidelines-for-diagnosis-management-of-asthma"
+    }
+  ],
+  "vignette": {
+    "text": "A 24-year-old woman with asthma since childhood presents to the ED with 2 days of worsening shortness of breath, wheezing, and chest tightness. She reports a cold last week with runny nose and sore throat. She has been using her albuterol inhaler every 2-3 hours without relief. Her controller is fluticasone/salmeterol (Advair) which she admits to using inconsistently. She was hospitalized for asthma twice in the past year, and was intubated for status asthmaticus 3 years ago.",
+    "vitals": {
+      "BP": "128/78 mmHg",
+      "HR": "118 bpm",
+      "RR": "32/min",
+      "Temp": "99.0°F (37.2°C)",
+      "SpO2": "91% on room air",
+      "PeakFlow": "180 L/min (personal best 420 L/min = 43% predicted)"
+    },
+    "physicalExam": {
+      "general": "Young woman in moderate respiratory distress, speaking in phrases of 3-4 words, sitting upright, appears anxious",
+      "HEENT": "Nasal congestion, no pharyngeal erythema",
+      "neck": "Suprasternal retractions, no JVD, trachea midline",
+      "lungs": "Diffuse bilateral expiratory wheezes, diminished air movement bilaterally, prolonged expiratory phase",
+      "cardiac": "Tachycardic, regular rhythm, pulsus paradoxus 18 mmHg",
+      "extremities": "No cyanosis, no edema",
+      "neuro": "Alert, oriented, anxious"
+    },
+    "labs": {
+      "ABG": "pH 7.42, pCO2 38 mmHg, pO2 72 mmHg, HCO3 24 mEq/L on room air",
+      "CBC": "WBC 11.2 (68% neutrophils, 8% eosinophils), Hgb 13.1, Plt 256",
+      "BMP": "Na 140, K 3.8, Cl 102, CO2 24, BUN 12, Cr 0.8, Glucose 124"
+    },
+    "imaging": {
+      "CXR": "Hyperinflation, no focal consolidation, no pneumothorax, no pneumomediastinum"
+    }
+  },
+  "layers": [
+    {
+      "id": "anatomy-physiology",
+      "title": "Anatomy & Physiology",
+      "icon": "🫁",
+      "mechanismDxLink": "../mechanism/asthma-module.html",
+      "questions": [
+        {
+          "id": "anat-1",
+          "stem": "The patient has diffuse expiratory wheezing and prolonged expiration.",
+          "question": "The wheezing in asthma is primarily caused by:",
+          "options": [
+            "A. Turbulent airflow through narrowed airways during exhalation",
+            "B. Alveolar fluid accumulation",
+            "C. Pleural friction",
+            "D. Large airway collapse from tracheomalacia"
+          ],
+          "correctIndex": 0,
+          "explanation": "Wheezing results from turbulent airflow through narrowed airways. In asthma, airway narrowing occurs from three mechanisms: (1) bronchospasm (smooth muscle contraction), (2) airway edema from inflammation, and (3) mucus plugging. The narrowing is most prominent during exhalation when airways naturally narrow.",
+          "whyChain": [
+            {
+              "why": "Why is wheezing worse during expiration?",
+              "answer": "During expiration, positive intrathoracic pressure compresses airways from outside. Already narrowed asthmatic airways become critically narrowed, causing turbulent flow and wheeze.",
+              "source": "West's Respiratory Physiology"
+            },
+            {
+              "why": "What does 'silent chest' mean in asthma?",
+              "answer": "Absence of wheezing in severe asthma indicates air movement so reduced that there's not enough flow to generate wheeze - an ominous sign of impending respiratory failure.",
+              "source": "GINA 2024"
+            }
+          ],
+          "sources": ["GINA 2024", "West's Respiratory Physiology (Open Access Chapters)"]
+        },
+        {
+          "id": "anat-2",
+          "stem": "The patient has a pulsus paradoxus of 18 mmHg (normal <10 mmHg).",
+          "question": "Pulsus paradoxus in severe asthma is caused by:",
+          "options": [
+            "A. Left ventricular failure from cardiac strain",
+            "B. Large swings in intrathoracic pressure affecting venous return and LV filling",
+            "C. Cardiac tamponade from concurrent pericardial effusion",
+            "D. Arrhythmia from hypoxemia"
+          ],
+          "correctIndex": 1,
+          "explanation": "In severe asthma, the patient generates very negative intrathoracic pressures during inspiration (fighting against obstructed airways). This (1) increases venous return to the RV, (2) shifts the interventricular septum leftward, (3) reduces LV filling and output during inspiration. The result is exaggerated fall in systolic BP during inspiration.",
+          "whyChain": [
+            {
+              "why": "Why does negative pressure increase RV filling?",
+              "answer": "Negative intrathoracic pressure is transmitted to the right atrium, increasing the pressure gradient for venous return from the body to the heart.",
+              "source": "Guyton Physiology"
+            },
+            {
+              "why": "Why does RV distension affect LV filling?",
+              "answer": "The RV and LV share the pericardial space and septum. When RV distends from increased filling, it pushes the septum leftward (ventricular interdependence), reducing LV diastolic volume.",
+              "source": "West's Respiratory Physiology"
+            },
+            {
+              "why": "What pulsus paradoxus level is concerning?",
+              "answer": ">12 mmHg suggests severe obstruction; >25 mmHg indicates impending respiratory failure. Disappearance can mean improvement OR exhaustion (can't generate swings).",
+              "source": "GINA 2024"
+            }
+          ],
+          "sources": ["GINA 2024", "West's Respiratory Physiology"]
+        },
+        {
+          "id": "anat-3",
+          "stem": "The ABG shows pH 7.42, pCO2 38, pO2 72.",
+          "question": "In a patient with moderate-severe asthma exacerbation, a 'normal' pCO2 of 38 indicates:",
+          "options": [
+            "A. The patient is improving and can be safely discharged",
+            "B. Impending respiratory failure - she should be hyperventilating",
+            "C. Mixed respiratory and metabolic disorder",
+            "D. Lab error requiring repeat sampling"
+          ],
+          "correctIndex": 1,
+          "explanation": "A patient with significant asthma exacerbation should be hyperventilating, leading to LOW pCO2 (typically 30-35). A 'normal' pCO2 of 38 in this context suggests respiratory muscle fatigue and inability to maintain the increased minute ventilation needed. This is a warning sign of impending respiratory failure.",
+          "whyChain": [
+            {
+              "why": "What is the expected ABG pattern in asthma?",
+              "answer": "Early/moderate: Hypoxemia + respiratory alkalosis (low pCO2 from hyperventilation). As severity increases: Normalizing pCO2 (fatigue). Late/severe: Rising pCO2 = respiratory failure.",
+              "source": "GINA 2024"
+            },
+            {
+              "why": "Why can't she maintain hyperventilation?",
+              "answer": "Respiratory muscles are working against high airway resistance and auto-PEEP. Eventually they fatigue, minute ventilation falls, and CO2 rises.",
+              "source": "StatPearls: Status Asthmaticus"
+            }
+          ],
+          "sources": ["GINA 2024", "StatPearls: Status Asthmaticus (NCBI Open Access)"]
+        }
+      ]
+    },
+    {
+      "id": "pathophysiology",
+      "title": "Pathophysiology",
+      "icon": "🔬",
+      "mechanismDxLink": "../mechanism/asthma-module.html",
+      "questions": [
+        {
+          "id": "path-1",
+          "stem": "The patient's CBC shows 8% eosinophils.",
+          "question": "The eosinophilic inflammation in asthma is driven primarily by:",
+          "options": [
+            "A. Th1 cells producing IFN-γ",
+            "B. Th2 cells producing IL-4, IL-5, and IL-13",
+            "C. Neutrophils producing IL-8",
+            "D. Mast cells producing histamine alone"
+          ],
+          "correctIndex": 1,
+          "explanation": "Asthma is predominantly a Th2-mediated disease. IL-4 promotes IgE class switching, IL-5 recruits and activates eosinophils, and IL-13 induces mucus hypersecretion and airway hyperresponsiveness. This 'type 2' (T2) inflammation is the target of biologic therapies (anti-IL5, anti-IL4R, anti-IgE).",
+          "whyChain": [
+            {
+              "why": "Why are eosinophils important in asthma?",
+              "answer": "Eosinophils release toxic granule proteins (major basic protein, eosinophil cationic protein) that damage airway epithelium, contributing to airway remodeling and hyperresponsiveness.",
+              "source": "GINA 2024"
+            },
+            {
+              "why": "How does this affect treatment?",
+              "answer": "Corticosteroids are highly effective against eosinophilic inflammation (induce eosinophil apoptosis). For severe asthma, biologics target specific T2 pathways based on biomarkers (IgE, eosinophils, FeNO).",
+              "source": "GINA 2024"
+            }
+          ],
+          "sources": ["GINA 2024", "Lambrecht BN, Hammad H. Nat Immunol. 2015 (Open Access)"]
+        },
+        {
+          "id": "path-2",
+          "stem": "The patient reports her cold last week triggered this exacerbation.",
+          "question": "Viral upper respiratory infections trigger asthma exacerbations primarily by:",
+          "options": [
+            "A. Direct bronchospasm from viral toxins",
+            "B. Inducing airway inflammation and increasing bronchial hyperresponsiveness",
+            "C. Causing bacterial superinfection requiring antibiotics",
+            "D. Depleting surfactant and causing atelectasis"
+          ],
+          "correctIndex": 1,
+          "explanation": "Viral infections (especially rhinovirus) trigger asthma exacerbations by infecting airway epithelium, causing inflammation, impairing epithelial barrier function, and increasing bronchial hyperresponsiveness. The inflammation amplifies the underlying allergic inflammation. Antibiotics are NOT indicated unless bacterial infection is documented.",
+          "whyChain": [
+            {
+              "why": "Which viruses most commonly trigger asthma?",
+              "answer": "Rhinovirus causes 60-80% of viral-triggered exacerbations. Others include RSV, influenza, parainfluenza, and coronaviruses.",
+              "source": "Jackson DJ et al. AJRCCM"
+            },
+            {
+              "why": "Why are asthmatics more susceptible to viral effects?",
+              "answer": "Asthmatic airways have impaired interferon responses (innate immunity) and epithelial barrier dysfunction, allowing deeper viral penetration and more inflammation.",
+              "source": "Wark PA et al. Lancet"
+            }
+          ],
+          "sources": ["GINA 2024", "Jackson DJ et al. AJRCCM (Open Access)"]
+        },
+        {
+          "id": "path-3",
+          "stem": "You note the patient was hospitalized twice and intubated once previously.",
+          "question": "The most important risk factor for fatal or near-fatal asthma is:",
+          "options": [
+            "A. Allergic rhinitis severity",
+            "B. History of previous intubation for asthma",
+            "C. Duration of asthma diagnosis",
+            "D. Number of allergen sensitivities"
+          ],
+          "correctIndex": 1,
+          "explanation": "Previous intubation for asthma is the strongest predictor of future near-fatal or fatal asthma. Other risk factors include: recent hospitalization (<12 months), excessive SABA use (>1 canister/month), poor adherence to ICS, psychiatric disease, and food allergy (anaphylaxis risk). This patient has multiple high-risk features.",
+          "whyChain": [
+            {
+              "why": "Why is previous intubation such a strong predictor?",
+              "answer": "It indicates the patient has demonstrated capacity for rapid, severe deterioration. The underlying airway hyperresponsiveness and inflammation phenotype that led to near-fatal attack persists.",
+              "source": "GINA 2024"
+            },
+            {
+              "why": "How should high-risk patients be managed?",
+              "answer": "More aggressive acute treatment, lower threshold for ICU admission, close outpatient follow-up, written asthma action plan, and ensuring optimal maintenance therapy.",
+              "source": "GINA 2024"
+            }
+          ],
+          "sources": ["GINA 2024", "Suissa S et al. NEJM"]
+        }
+      ]
+    },
+    {
+      "id": "clinical-presentation",
+      "title": "Clinical Assessment",
+      "icon": "🩺",
+      "questions": [
+        {
+          "id": "clin-1",
+          "stem": "You are classifying the severity of this exacerbation.",
+          "question": "Based on the clinical presentation, this patient's exacerbation is:",
+          "options": [
+            "A. Mild - speaks in sentences, SpO2 >95%, PEF >50%",
+            "B. Moderate - speaks in phrases, SpO2 90-95%, PEF 50-75%",
+            "C. Severe - speaks in words, SpO2 <90%, PEF <50%",
+            "D. Life-threatening - silent chest, cyanosis, confusion"
+          ],
+          "correctIndex": 2,
+          "explanation": "This is a SEVERE exacerbation: speaking in phrases (borderline words), SpO2 91%, PEF 43% of personal best. Additionally: pulsus paradoxus >12 mmHg, 'normal' pCO2 suggesting fatigue, and high-risk history. She needs aggressive treatment and close monitoring for deterioration.",
+          "whyChain": [
+            {
+              "why": "What are the life-threatening features to watch for?",
+              "answer": "Silent chest, cyanosis, bradycardia, confusion, exhaustion, and rising pCO2. These indicate imminent respiratory arrest.",
+              "source": "GINA 2024"
+            }
+          ],
+          "sources": ["GINA 2024"]
+        },
+        {
+          "id": "clin-2",
+          "stem": "Her peak flow is 180 L/min (43% of her personal best of 420 L/min).",
+          "question": "After initial treatment, what peak flow improvement would indicate adequate response?",
+          "options": [
+            "A. Any improvement from baseline",
+            "B. >50% of personal best (>210 L/min)",
+            "C. >60-80% of personal best (>250-336 L/min)",
+            "D. Return to 100% of personal best"
+          ],
+          "correctIndex": 2,
+          "explanation": "GINA recommends achieving PEF >60-80% of personal best before considering discharge. A PEF that plateaus at <60% despite treatment suggests need for prolonged treatment, observation, or admission. Serial PEF measurements are more valuable than single readings.",
+          "whyChain": [
+            {
+              "why": "Why is personal best used rather than predicted?",
+              "answer": "Personal best (when well) better reflects the individual's achievable lung function. Some patients never reach 'predicted' values even when controlled.",
+              "source": "GINA 2024"
+            },
+            {
+              "why": "When should PEF NOT be used?",
+              "answer": "In very severe exacerbation, the effort to perform spirometry can worsen bronchospasm. Clinical assessment takes priority when patient is too distressed to blow.",
+              "source": "GINA 2024"
+            }
+          ],
+          "sources": ["GINA 2024"]
+        }
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment & Management",
+      "icon": "💊",
+      "questions": [
+        {
+          "id": "tx-1",
+          "stem": "You are initiating acute treatment.",
+          "question": "What is the most appropriate initial treatment?",
+          "options": [
+            "A. Albuterol nebulizer 2.5 mg × 1, then reassess",
+            "B. Continuous albuterol nebulization + ipratropium + systemic corticosteroids",
+            "C. IV magnesium sulfate as first-line",
+            "D. Subcutaneous epinephrine followed by observation"
+          ],
+          "correctIndex": 1,
+          "explanation": "For severe asthma exacerbation: (1) Repeated/continuous SABA (albuterol), (2) Add ipratropium for severe cases, (3) Systemic corticosteroids given early (within 1 hour of ED presentation). Continuous nebulization is more effective than intermittent dosing for severe attacks.",
+          "whyChain": [
+            {
+              "why": "Why add ipratropium?",
+              "answer": "In moderate-severe exacerbations, adding ipratropium to SABA provides additional bronchodilation and reduces hospitalization rates. Less benefit in mild cases.",
+              "source": "GINA 2024"
+            },
+            {
+              "why": "Why give steroids immediately?",
+              "answer": "Corticosteroids take 4-6 hours for clinical effect (reduce inflammation, restore β-receptor responsiveness). Early administration in ED reduces admission rates and relapse.",
+              "source": "GINA 2024"
+            },
+            {
+              "why": "What's the steroid dose?",
+              "answer": "Prednisone 40-60 mg (or equivalent) for adults, given for 5-7 days. No taper needed for courses <2 weeks.",
+              "source": "GINA 2024"
+            }
+          ],
+          "sources": ["GINA 2024"]
+        },
+        {
+          "id": "tx-2",
+          "stem": "After 1 hour of continuous nebulized albuterol, ipratropium, and IV methylprednisolone, she remains in distress with SpO2 90%, PEF improved to 200 L/min (48%).",
+          "question": "What is the next most appropriate intervention?",
+          "options": [
+            "A. Continue current therapy and reassess in 1 hour",
+            "B. Add IV magnesium sulfate 2g over 20 minutes",
+            "C. Proceed to intubation",
+            "D. Add IV aminophylline"
+          ],
+          "correctIndex": 1,
+          "explanation": "IV magnesium sulfate (2g over 20 minutes) is indicated for severe asthma not responding to initial therapy. It causes smooth muscle relaxation and has bronchodilator effects. It reduces admission rates and improves lung function in severe exacerbations. Aminophylline is NOT recommended (marginal benefit, significant toxicity).",
+          "whyChain": [
+            {
+              "why": "How does magnesium work?",
+              "answer": "Magnesium inhibits calcium channels in smooth muscle and may reduce acetylcholine release from nerve terminals. It promotes bronchodilation through multiple mechanisms.",
+              "source": "Rowe BH. Cochrane Review"
+            },
+            {
+              "why": "What about nebulized magnesium?",
+              "answer": "Nebulized magnesium can be considered but evidence is less robust than IV. It may be additive to SABA in some patients.",
+              "source": "GINA 2024"
+            }
+          ],
+          "sources": ["GINA 2024", "Rowe BH et al. Cochrane Database Syst Rev (Open Access)"]
+        },
+        {
+          "id": "tx-3",
+          "stem": "You are monitoring her oxygen therapy.",
+          "question": "What is the target oxygen saturation in acute asthma?",
+          "options": [
+            "A. SpO2 >88% to avoid oxygen-induced hypercapnia",
+            "B. SpO2 93-95% (or 88-92% if at risk for hypercapnia)",
+            "C. SpO2 >98% to maximize oxygen delivery",
+            "D. Oxygen is contraindicated in asthma"
+          ],
+          "correctIndex": 1,
+          "explanation": "Target SpO2 93-95% in adults (or 94-98% in children). Unlike COPD, oxygen-induced hypercapnia is less of a concern in asthma as V/Q mismatch is the main mechanism of hypoxemia. However, targeting >98% offers no benefit and very high FiO2 can theoretically worsen V/Q via absorption atelectasis.",
+          "whyChain": [
+            {
+              "why": "Why is hypercapnia less of a concern than COPD?",
+              "answer": "Asthma patients typically don't have chronic CO2 retention or dependence on hypoxic drive. Their hypoxemia is primarily from V/Q mismatch, which improves with bronchodilation.",
+              "source": "GINA 2024"
+            }
+          ],
+          "sources": ["GINA 2024", "BTS Oxygen Guidelines (Open Access)"]
+        },
+        {
+          "id": "tx-4",
+          "stem": "Despite all interventions, she becomes exhausted, speaks in single words, and repeat ABG shows pH 7.28, pCO2 52.",
+          "question": "What is the next step?",
+          "options": [
+            "A. Trial of non-invasive ventilation (BiPAP)",
+            "B. Immediate endotracheal intubation with RSI",
+            "C. Heliox (helium-oxygen mixture) therapy",
+            "D. Subcutaneous terbutaline"
+          ],
+          "correctIndex": 1,
+          "explanation": "Rising pCO2 with acidemia and exhaustion in severe asthma indicates impending respiratory arrest. Intubation is indicated. Unlike COPD, NIV has limited evidence in acute asthma and may delay needed intubation. Intubation in asthma requires careful technique due to bronchospasm and air trapping.",
+          "whyChain": [
+            {
+              "why": "Why not try NIV first?",
+              "answer": "Evidence for NIV in asthma is weaker than in COPD. Asthmatic airways are more likely to be severely obstructed by mucus plugging, which NIV doesn't address. Risk of delayed intubation in deteriorating patient.",
+              "source": "GINA 2024"
+            },
+            {
+              "why": "What are the intubation considerations?",
+              "answer": "Use ketamine for induction (bronchodilator properties), anticipate difficult ventilation (high airway pressures, auto-PEEP), use low respiratory rates (8-10) to allow complete exhalation, permissive hypercapnia acceptable.",
+              "source": "StatPearls: Status Asthmaticus"
+            },
+            {
+              "why": "What's the biggest danger post-intubation?",
+              "answer": "Auto-PEEP and dynamic hyperinflation can cause hypotension (reduced venous return) and barotrauma. Immediately post-intubation, disconnect and allow full passive exhalation if hypotensive.",
+              "source": "Weingart S. EMCrit (Open Access)"
+            }
+          ],
+          "sources": ["GINA 2024", "StatPearls: Status Asthmaticus", "Weingart S. EMCrit Podcast"]
+        }
+      ]
+    },
+    {
+      "id": "disposition",
+      "title": "Disposition & Prevention",
+      "icon": "🏥",
+      "questions": [
+        {
+          "id": "dispo-1",
+          "stem": "Fortunately, after IV magnesium she improves. After 4 hours of treatment, SpO2 96% on RA, PEF 330 L/min (79%), speaking in full sentences, no distress.",
+          "question": "She is now appropriate for discharge with which of the following?",
+          "options": [
+            "A. Albuterol PRN only, follow up in 1 week",
+            "B. Continue current ICS/LABA + prednisone 40 mg × 5 days + albuterol PRN + follow-up in 1-2 days",
+            "C. Oral antibiotics since viral infection triggered this",
+            "D. Increase ICS dose only, no oral steroids needed since responding well"
+          ],
+          "correctIndex": 1,
+          "explanation": "Discharge requirements: (1) Oral corticosteroids (5-7 days) to reduce relapse risk, (2) Continue/restart ICS-containing controller, (3) Rescue SABA with instructions, (4) Written asthma action plan, (5) Close follow-up in 1-2 days. Antibiotics are NOT indicated for viral-triggered exacerbations.",
+          "whyChain": [
+            {
+              "why": "Why is early follow-up so important?",
+              "answer": "Risk of relapse is highest in first 2-4 weeks after ED visit. Early follow-up allows assessment of response, adjustment of therapy, and review of asthma action plan.",
+              "source": "GINA 2024"
+            },
+            {
+              "why": "What controller therapy changes should be made?",
+              "answer": "If previously non-adherent to ICS (like this patient), restart and emphasize importance. If already adherent to low-dose ICS, step up. All patients should have ICS-containing therapy.",
+              "source": "GINA 2024"
+            }
+          ],
+          "sources": ["GINA 2024"]
+        },
+        {
+          "id": "dispo-2",
+          "stem": "You are counseling her before discharge.",
+          "question": "Which statement about SABA use is MOST important to communicate?",
+          "options": [
+            "A. Use albuterol regularly every 4 hours to prevent exacerbations",
+            "B. Needing SABA more than twice a week indicates poorly controlled asthma needing therapy adjustment",
+            "C. SABA is the most important asthma medication",
+            "D. Side effects like tremor mean SABA isn't working"
+          ],
+          "correctIndex": 1,
+          "explanation": "Overuse of SABA (>2 uses per week for symptoms) indicates poorly controlled asthma and is associated with increased exacerbation risk. It's a marker of need for controller therapy escalation, not a treatment strategy. GINA recommends against SABA-only treatment for anyone with asthma due to worse outcomes.",
+          "whyChain": [
+            {
+              "why": "Why is SABA-only treatment harmful?",
+              "answer": "SABA treats bronchospasm but not underlying inflammation. Regular SABA use without ICS allows inflammation to persist, increases airway hyperresponsiveness, and increases risk of severe exacerbations.",
+              "source": "GINA 2024"
+            },
+            {
+              "why": "What's the better approach?",
+              "answer": "GINA now recommends low-dose ICS-formoterol as both maintenance and reliever (MART). Using an anti-inflammatory reliever treats both symptoms and inflammation with each puff.",
+              "source": "GINA 2024"
+            }
+          ],
+          "sources": ["GINA 2024"]
+        },
+        {
+          "id": "dispo-3",
+          "stem": "Given her high-risk features (previous intubation, 2 hospitalizations in past year), what additional intervention is most important?",
+          "question": "What should you prioritize in her follow-up care?",
+          "options": [
+            "A. Spirometry only if she has symptoms",
+            "B. Referral to asthma specialist for comprehensive review and likely biologic therapy evaluation",
+            "C. Monthly prednisone bursts to prevent exacerbations",
+            "D. Allergen avoidance counseling only"
+          ],
+          "correctIndex": 1,
+          "explanation": "A patient with near-fatal asthma (previous intubation) and frequent severe exacerbations despite controller therapy needs specialist referral for: (1) confirmation of diagnosis and severity assessment, (2) evaluation for severe/uncontrolled asthma phenotyping, (3) consideration of biologic therapy (anti-IgE, anti-IL5, anti-IL4R), and (4) comprehensive adherence and action plan review.",
+          "whyChain": [
+            {
+              "why": "What biologics might she be eligible for?",
+              "answer": "Depends on phenotype: Allergic asthma with elevated IgE → omalizumab. Eosinophilic asthma → mepolizumab, benralizumab, or dupilumab. Dupilumab covers both allergic and eosinophilic phenotypes.",
+              "source": "GINA 2024"
+            },
+            {
+              "why": "What predicts biologic response?",
+              "answer": "Blood eosinophils ≥150-300 cells/μL, FeNO ≥25 ppb, and elevated IgE (for omalizumab) predict better response to specific biologics. Phenotyping guides selection.",
+              "source": "GINA 2024"
+            }
+          ],
+          "sources": ["GINA 2024"]
+        }
+      ]
+    },
+    {
+      "id": "synthesis",
+      "title": "Synthesis & Integration",
+      "icon": "🧩",
+      "questions": [
+        {
+          "id": "synth-1",
+          "stem": "Integrating all the information from this case...",
+          "question": "This patient's 'normal' pCO2 combined with pulsus paradoxus and speaking in phrases indicates:",
+          "options": [
+            "A. Mild exacerbation with good prognosis",
+            "B. She is on the brink of respiratory failure - her compensatory mechanisms are failing",
+            "C. These findings are unrelated to exacerbation severity",
+            "D. She has a mixed obstructive-restrictive disease"
+          ],
+          "correctIndex": 1,
+          "explanation": "These findings represent the transition from 'compensated severe asthma' to 'impending respiratory failure.' The pulsus paradoxus shows severe obstruction with massive intrathoracic pressure swings. The 'normal' pCO2 means she can no longer maintain the hyperventilation needed to blow off CO2 despite having severe obstruction. This is a patient who needs very close monitoring and aggressive treatment.",
+          "whyChain": [
+            {
+              "why": "What's the physiologic sequence leading to arrest?",
+              "answer": "Severe obstruction → increased work of breathing → respiratory muscle fatigue → falling minute ventilation → rising CO2 → acidosis → further muscle dysfunction → respiratory arrest.",
+              "source": "West's Respiratory Physiology"
+            },
+            {
+              "why": "What are the first signs of improvement?",
+              "answer": "Decreasing respiratory rate, ability to speak in longer phrases, decreasing pulsus paradoxus, and improving peak flow. pCO2 may initially worsen before improving (CO2 washout as ventilation improves).",
+              "source": "GINA 2024"
+            }
+          ],
+          "sources": ["GINA 2024", "West's Respiratory Physiology"]
+        },
+        {
+          "id": "synth-2",
+          "stem": "Reflecting on this case for future practice...",
+          "question": "What is the single most important long-term intervention to prevent future life-threatening exacerbations?",
+          "options": [
+            "A. Prescribe a larger supply of prednisone for home use",
+            "B. Ensure adherence to daily ICS-containing controller therapy",
+            "C. Recommend wearing a medical alert bracelet",
+            "D. Monthly ED visits for nebulizer treatments"
+          ],
+          "correctIndex": 1,
+          "explanation": "Regular ICS use is the cornerstone of asthma management that prevents exacerbations. Studies show that even low-dose ICS reduces severe exacerbations by 50% and reduces asthma mortality. This patient's inconsistent ICS use directly contributed to her vulnerability to exacerbation. Achieving adherence requires education, simplifying regimens, and addressing barriers.",
+          "whyChain": [
+            {
+              "why": "Why is ICS so protective?",
+              "answer": "ICS reduces airway inflammation, decreases bronchial hyperresponsiveness, and restores epithelial integrity. This makes airways less responsive to triggers and reduces severity of exacerbations when they occur.",
+              "source": "GINA 2024"
+            },
+            {
+              "why": "What about concerns regarding steroid side effects?",
+              "answer": "Low-to-medium dose ICS have minimal systemic effects. The risk of uncontrolled asthma (hospitalizations, death) far exceeds risks of inhaled steroids. This messaging is important for adherence.",
+              "source": "GINA 2024"
+            }
+          ],
+          "sources": ["GINA 2024", "Suissa S et al. NEJM"]
+        }
+      ]
+    }
+  ]
+}
