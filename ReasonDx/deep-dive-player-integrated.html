@@ -1231,7 +1231,7 @@
     <!-- Navigation -->
     <header class="nav-header">
         <div class="nav-left">
-            <a href="reasondx-magnetic-ui-v2.html" class="nav-brand">
+            <a href="reasondx-learn-hub.html" class="nav-brand">
                 <div class="nav-logo">Rx</div>
                 <span class="nav-title">Reason<span>Dx</span></span>
             </a>
@@ -1504,21 +1504,56 @@
             if (deepDiveData) {
                 document.getElementById('moduleTitle').textContent = `Deep Dive: ${deepDiveData.title}`;
                 document.getElementById('totalQuestions').textContent = deepDiveData.totalQuestions;
+                document.title = `${deepDiveData.title} - ReasonDx Deep Dive`;
                 
                 loadBookmarks();
                 renderLayerNav();
                 loadVignetteData();
                 loadQuestion();
                 startTimer();
+            } else {
+                // Show error state
+                document.querySelector('.main-content').innerHTML = `
+                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 60vh; text-align: center; padding: var(--space-xl);">
+                        <div style="font-size: 48px; margin-bottom: var(--space-lg);">📚</div>
+                        <h2 style="color: var(--text-primary); margin-bottom: var(--space-md);">Module Not Found</h2>
+                        <p style="color: var(--text-secondary); margin-bottom: var(--space-xl);">The requested Deep Dive module could not be loaded.</p>
+                        <a href="reasondx-learn-hub.html" class="btn btn-primary">← Back to Learn Hub</a>
+                    </div>
+                `;
             }
         }
 
         async function loadDeepDiveData() {
+            // Get module from URL parameter (e.g., ?module=acs or ?module=pe)
+            const urlParams = new URLSearchParams(window.location.search);
+            const moduleId = urlParams.get('module') || 'acs'; // default to ACS
+            
+            // Map module IDs to JSON file paths
+            const moduleFiles = {
+                'acs': 'data/deep-dives/acs-deep-dive-complete.json',
+                'pe': 'data/deep-dives/pe-deep-dive.json',
+                'sepsis': 'data/deep-dives/sepsis-deep-dive.json',
+                'aki': 'data/deep-dives/aki-deep-dive.json',
+                'gi-bleed': 'data/deep-dives/gi-bleed-deep-dive.json'
+            };
+            
+            const filePath = moduleFiles[moduleId] || moduleFiles['acs'];
+            
             try {
-                const response = await fetch('acs-deep-dive-complete.json');
+                const response = await fetch(filePath);
+                if (!response.ok) throw new Error('Module not found');
                 return await response.json();
             } catch (e) {
-                console.log('Loading embedded sample data');
+                console.log(`Could not load ${filePath}, trying fallback...`);
+                // Try alternate path (for local testing)
+                try {
+                    const altPath = filePath.replace('data/deep-dives/', '');
+                    const altResponse = await fetch(altPath);
+                    if (altResponse.ok) return await altResponse.json();
+                } catch (e2) {
+                    console.log('Loading embedded sample data');
+                }
                 return getSampleData();
             }
         }
