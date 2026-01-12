@@ -1,0 +1,497 @@
+{
+  "id": "anaphylaxis-deep-dive",
+  "title": "Anaphylaxis",
+  "version": "1.0",
+  "totalQuestions": 26,
+  "estimatedTime": "35 minutes",
+  "difficulty": "Intermediate",
+  "targetAudience": "Medical Students, Residents",
+  "objectives": [
+    "Recognize the clinical criteria for diagnosing anaphylaxis",
+    "Understand the immunologic mechanisms of IgE-mediated reactions",
+    "Apply appropriate first-line treatment with epinephrine",
+    "Identify common triggers and cross-reactivity patterns",
+    "Manage refractory anaphylaxis and biphasic reactions",
+    "Counsel patients on prevention and emergency preparedness"
+  ],
+  "vignette": {
+    "text": "A 34-year-old woman is brought to the emergency department by ambulance after collapsing at a restaurant. She had just started eating a Thai shrimp dish when she developed sudden throat tightness and difficulty breathing. She felt lightheaded and collapsed. EMS found her hypotensive and administered intramuscular epinephrine en route.\n\nPast Medical History: Allergic rhinitis, Asthma (mild intermittent), Known allergy to shellfish (previous reaction: hives after eating crab 2 years ago)\n\nMedications: Fluticasone nasal spray PRN, Albuterol inhaler PRN, Cetirizine 10mg daily during allergy season\n\nSocial History: Marketing manager, no smoking, social alcohol, exercises regularly\n\nAllergies: Shellfish (hives), Sulfa drugs (rash)",
+    "physicalExam": {
+      "general": "Anxious woman, voice is hoarse, audible stridor, sitting upright",
+      "vitals": {
+        "BP": "82/50 mmHg",
+        "HR": "128 bpm",
+        "RR": "26/min",
+        "Temp": "98.6°F",
+        "SpO2": "91% on room air"
+      },
+      "HEENT": "Angioedema of lips and tongue, uvula edematous, oropharynx erythematous",
+      "cardiovascular": "Tachycardic, regular, no murmurs",
+      "pulmonary": "Diffuse expiratory wheezes, decreased air movement, stridor on inspiration",
+      "skin": "Diffuse urticaria (raised, erythematous wheals) over trunk and extremities, warm and flushed",
+      "abdomen": "Soft, mild diffuse tenderness, hyperactive bowel sounds",
+      "extremities": "No edema, warm with weak pulses"
+    },
+    "diagnostics": {
+      "labs": {
+        "Tryptase": {"value": "Sent (draw within 1-2 hours of symptom onset)", "reference": "<11.4 ng/mL", "flag": "PENDING"}
+      },
+      "imaging": {
+        "CXR": "Hyperinflation, no infiltrates or pneumothorax"
+      },
+      "other": {
+        "ECG": "Sinus tachycardia at 128 bpm, no ST changes"
+      }
+    }
+  },
+  "layers": [
+    {
+      "id": "anatomy",
+      "title": "Anatomy",
+      "icon": "🫀",
+      "color": "#ef4444",
+      "questions": [
+        {
+          "id": "anaph-anat-1",
+          "stem": "She has angioedema of lips and tongue with stridor.",
+          "question": "Angioedema affecting which anatomical structure is most life-threatening?",
+          "hint": "Consider airway anatomy.",
+          "options": [
+            {"id": "A", "text": "Larynx and epiglottis - can cause complete airway obstruction", "correct": true},
+            {"id": "B", "text": "Lips only", "correct": false},
+            {"id": "C", "text": "Hands and feet", "correct": false},
+            {"id": "D", "text": "Tongue alone without airway involvement", "correct": false}
+          ],
+          "explanation": "Laryngeal angioedema is the most dangerous form - swelling of the epiglottis, arytenoids, and vocal cords can cause complete upper airway obstruction. Stridor indicates significant narrowing. Lip and tongue swelling can progress to involve the larynx. Early intubation may be needed.",
+          "sources": ["AAAAI Anaphylaxis Parameters", "StatPearls: Angioedema"]
+        },
+        {
+          "id": "anaph-anat-2",
+          "stem": "Mast cells are central to the allergic response.",
+          "question": "Where are mast cells predominantly located in the body?",
+          "hint": "They are positioned to encounter allergens at body surfaces.",
+          "options": [
+            {"id": "A", "text": "Skin, respiratory mucosa, GI mucosa, and around blood vessels", "correct": true},
+            {"id": "B", "text": "Only in the bone marrow", "correct": false},
+            {"id": "C", "text": "Only in the bloodstream", "correct": false},
+            {"id": "D", "text": "Only in lymph nodes", "correct": false}
+          ],
+          "explanation": "Mast cells are tissue-resident cells strategically located at host-environment interfaces: skin, respiratory tract, GI tract, and perivascular spaces. This positioning allows rapid response to allergens at entry points, explaining the pattern of anaphylaxis symptoms.",
+          "sources": ["StatPearls: Mast Cells", "AAAAI Immunology"]
+        },
+        {
+          "id": "anaph-anat-3",
+          "stem": "Epinephrine is given intramuscularly.",
+          "question": "What is the recommended injection site for IM epinephrine in anaphylaxis?",
+          "hint": "Optimal absorption requires good blood flow to muscle.",
+          "options": [
+            {"id": "A", "text": "Anterolateral thigh (vastus lateralis) - best absorption", "correct": true},
+            {"id": "B", "text": "Deltoid muscle", "correct": false},
+            {"id": "C", "text": "Gluteal muscle", "correct": false},
+            {"id": "D", "text": "Subcutaneous abdomen", "correct": false}
+          ],
+          "explanation": "The anterolateral thigh (vastus lateralis) provides fastest absorption due to excellent blood supply. Studies show peak plasma levels reached faster than deltoid or subcutaneous routes. Auto-injectors are designed for thigh injection through clothing if needed.",
+          "sources": ["AAAAI Anaphylaxis Guidelines", "JACI: Epinephrine Pharmacokinetics"]
+        }
+      ]
+    },
+    {
+      "id": "physiology",
+      "title": "Physiology",
+      "icon": "⚡",
+      "color": "#f59e0b",
+      "questions": [
+        {
+          "id": "anaph-phys-1",
+          "stem": "She has hypotension (82/50) and tachycardia.",
+          "question": "What causes the cardiovascular collapse in anaphylaxis?",
+          "hint": "Consider the effects of histamine and other mediators on vessels.",
+          "options": [
+            {"id": "A", "text": "Massive vasodilation and increased vascular permeability causing distributive shock and third-spacing", "correct": true},
+            {"id": "B", "text": "Cardiogenic shock from heart failure", "correct": false},
+            {"id": "C", "text": "Hemorrhagic shock", "correct": false},
+            {"id": "D", "text": "Obstructive shock from PE", "correct": false}
+          ],
+          "explanation": "Anaphylaxis causes distributive shock: histamine, prostaglandins, and leukotrienes cause profound vasodilation (decreased SVR) and increased capillary permeability (plasma extravasation). Up to 35% of intravascular volume can shift to extravascular space within minutes.",
+          "whyChain": [
+            {
+              "why": "Why is tachycardia present?",
+              "answer": "Tachycardia is a compensatory response to hypotension (baroreceptor reflex) and direct effect of epinephrine/catecholamines released during stress. Also, histamine directly increases heart rate via H2 receptors.",
+              "source": "StatPearls: Anaphylaxis Pathophysiology"
+            }
+          ],
+          "sources": ["AAAAI Practice Parameters", "StatPearls: Anaphylaxis"]
+        },
+        {
+          "id": "anaph-phys-2",
+          "stem": "She has diffuse wheezing and stridor.",
+          "question": "What causes the respiratory manifestations of anaphylaxis?",
+          "hint": "Multiple mechanisms affect the airways.",
+          "options": [
+            {"id": "A", "text": "Upper airway: angioedema causing obstruction; Lower airway: bronchospasm from mediators", "correct": true},
+            {"id": "B", "text": "Pneumonia from aspiration", "correct": false},
+            {"id": "C", "text": "Pulmonary embolism", "correct": false},
+            {"id": "D", "text": "Pneumothorax", "correct": false}
+          ],
+          "explanation": "Respiratory symptoms have two components: (1) Upper airway - angioedema of larynx/pharynx causes stridor/obstruction; (2) Lower airway - histamine and leukotrienes cause bronchospasm (wheezing), mucus hypersecretion. Her asthma history increases bronchospasm risk.",
+          "sources": ["AAAAI Anaphylaxis Guidelines", "JACI: Respiratory Manifestations"]
+        },
+        {
+          "id": "anaph-phys-3",
+          "stem": "She has urticaria (hives) covering her trunk and extremities.",
+          "question": "What causes urticaria in anaphylaxis?",
+          "hint": "Consider histamine's effects on skin vasculature.",
+          "options": [
+            {"id": "A", "text": "Histamine causes local vasodilation and increased permeability in dermal vessels", "correct": true},
+            {"id": "B", "text": "Bacterial skin infection", "correct": false},
+            {"id": "C", "text": "Autoimmune destruction of skin", "correct": false},
+            {"id": "D", "text": "Direct allergen contact with skin", "correct": false}
+          ],
+          "explanation": "Urticaria results from mast cell degranulation in skin releasing histamine. Histamine causes: (1) Vasodilation → erythema/flare; (2) Increased permeability → localized edema (wheal); (3) Sensory nerve stimulation → pruritus. The classic 'wheal and flare' response.",
+          "sources": ["StatPearls: Urticaria", "AAAAI Immunology"]
+        },
+        {
+          "id": "anaph-phys-4",
+          "stem": "Tryptase level was sent.",
+          "question": "What does serum tryptase measure and when should it be drawn?",
+          "hint": "Tryptase is released from mast cells.",
+          "options": [
+            {"id": "A", "text": "Mast cell degranulation marker; draw within 15 min-3 hours of symptom onset (peaks 1-2 hours)", "correct": true},
+            {"id": "B", "text": "Liver function marker; draw anytime", "correct": false},
+            {"id": "C", "text": "IgE level; draw 24 hours later", "correct": false},
+            {"id": "D", "text": "Inflammatory marker like CRP", "correct": false}
+          ],
+          "explanation": "Tryptase is a protease released from mast cells during degranulation. It peaks 1-2 hours after anaphylaxis onset and remains elevated for several hours. Elevated tryptase supports anaphylaxis diagnosis. Normal tryptase doesn't rule out anaphylaxis (especially food-triggered).",
+          "sources": ["AAAAI Anaphylaxis Parameters", "JACI: Tryptase in Anaphylaxis"]
+        }
+      ]
+    },
+    {
+      "id": "pathophysiology",
+      "title": "Pathophysiology",
+      "icon": "🔬",
+      "color": "#8b5cf6",
+      "questions": [
+        {
+          "id": "anaph-patho-1",
+          "stem": "She has a known shellfish allergy and reacted to shrimp.",
+          "question": "What is the immunologic mechanism of IgE-mediated anaphylaxis?",
+          "hint": "This is a Type I hypersensitivity reaction.",
+          "options": [
+            {"id": "A", "text": "Allergen crosslinks IgE on mast cells → degranulation → release of histamine and other mediators", "correct": true},
+            {"id": "B", "text": "T-cell mediated delayed response", "correct": false},
+            {"id": "C", "text": "Complement activation by immune complexes", "correct": false},
+            {"id": "D", "text": "Antibody-dependent cellular cytotoxicity", "correct": false}
+          ],
+          "explanation": "Type I (IgE-mediated): Prior sensitization produces allergen-specific IgE that binds mast cell FcεRI receptors. Re-exposure → allergen crosslinks IgE → mast cell degranulation → immediate release of preformed mediators (histamine, tryptase) and synthesis of new mediators (prostaglandins, leukotrienes).",
+          "whyChain": [
+            {
+              "why": "Why was her previous reaction milder (just hives)?",
+              "answer": "Allergic reactions can be unpredictable. Each exposure may be more or less severe depending on allergen dose, route, and individual factors. Prior mild reaction doesn't predict future severity - this is why epinephrine is prescribed for any IgE-mediated food allergy.",
+              "source": "AAAAI Food Allergy Guidelines"
+            }
+          ],
+          "sources": ["StatPearls: Type I Hypersensitivity", "AAAAI Immunology"]
+        },
+        {
+          "id": "anaph-patho-2",
+          "stem": "She is allergic to shellfish (crab) and reacted to shrimp.",
+          "question": "What explains cross-reactivity between different shellfish?",
+          "hint": "Shellfish share common allergenic proteins.",
+          "options": [
+            {"id": "A", "text": "Tropomyosin is the major allergen shared across crustaceans (shrimp, crab, lobster)", "correct": true},
+            {"id": "B", "text": "All seafood has identical proteins", "correct": false},
+            {"id": "C", "text": "Cross-reactivity doesn't occur in food allergy", "correct": false},
+            {"id": "D", "text": "Only occurs with same species", "correct": false}
+          ],
+          "explanation": "Tropomyosin is a highly conserved muscle protein that is the major allergen in crustaceans. Cross-reactivity within crustaceans (shrimp, crab, lobster, crawfish) is ~75%. Mollusks (clam, oyster, scallop) share some cross-reactivity but less than crustaceans. Fish allergy is separate (parvalbumin allergen).",
+          "sources": ["JACI: Shellfish Allergy", "AAAAI Food Allergy"]
+        },
+        {
+          "id": "anaph-patho-3",
+          "stem": "Her asthma may worsen anaphylaxis severity.",
+          "question": "Why is asthma a risk factor for severe/fatal anaphylaxis?",
+          "hint": "Consider the lower airway response.",
+          "options": [
+            {"id": "A", "text": "Pre-existing airway hyperreactivity amplifies bronchospasm during anaphylaxis", "correct": true},
+            {"id": "B", "text": "Asthma medications interfere with epinephrine", "correct": false},
+            {"id": "C", "text": "Asthmatics have fewer mast cells", "correct": false},
+            {"id": "D", "text": "Asthma has no effect on anaphylaxis", "correct": false}
+          ],
+          "explanation": "Asthma is a major risk factor for fatal anaphylaxis. The hyperreactive airways respond exaggeratedly to histamine and leukotrienes, causing severe bronchospasm. Poorly controlled asthma particularly increases risk. Food allergies + asthma is a high-risk combination.",
+          "sources": ["AAAAI Anaphylaxis Parameters", "JACI: Fatal Anaphylaxis"]
+        },
+        {
+          "id": "anaph-patho-4",
+          "stem": "Anaphylaxis can occur without IgE involvement.",
+          "question": "What are non-IgE-mediated mechanisms of anaphylaxis?",
+          "hint": "Some reactions bypass the IgE pathway.",
+          "options": [
+            {"id": "A", "text": "Direct mast cell activation (radiocontrast, opioids), complement activation, or IgG-mediated", "correct": true},
+            {"id": "B", "text": "All anaphylaxis requires IgE", "correct": false},
+            {"id": "C", "text": "Only bacterial toxins cause non-IgE anaphylaxis", "correct": false},
+            {"id": "D", "text": "Viral infections", "correct": false}
+          ],
+          "explanation": "Non-IgE anaphylaxis (formerly 'anaphylactoid'): (1) Direct mast cell activation - radiocontrast, opioids, vancomycin; (2) Complement activation; (3) IgG-mediated (rare). Clinical presentation identical to IgE-mediated; treatment is the same. Now all called 'anaphylaxis' regardless of mechanism.",
+          "sources": ["WAO Anaphylaxis Guidelines", "AAAAI Position Statement"]
+        }
+      ]
+    },
+    {
+      "id": "pharmacology",
+      "title": "Pharmacology",
+      "icon": "💊",
+      "color": "#10b981",
+      "questions": [
+        {
+          "id": "anaph-pharm-1",
+          "stem": "Epinephrine is the first-line treatment for anaphylaxis.",
+          "question": "What is the correct dose and route of epinephrine for anaphylaxis?",
+          "hint": "IM is preferred over IV for initial treatment.",
+          "options": [
+            {"id": "A", "text": "0.3-0.5 mg (0.01 mg/kg in children) IM in anterolateral thigh; can repeat every 5-15 minutes", "correct": true},
+            {"id": "B", "text": "1 mg IV push immediately", "correct": false},
+            {"id": "C", "text": "0.1 mg subcutaneous only", "correct": false},
+            {"id": "D", "text": "Epinephrine is contraindicated in anaphylaxis", "correct": false}
+          ],
+          "explanation": "Epinephrine 0.3-0.5 mg (1:1000 concentration = 1 mg/mL) IM in anterolateral thigh. Auto-injectors: 0.3 mg for adults, 0.15 mg for children <30 kg. Can repeat every 5-15 minutes if needed. IM preferred - faster onset than SC, safer than IV bolus.",
+          "whyChain": [
+            {
+              "why": "Why is epinephrine so effective?",
+              "answer": "Epinephrine counteracts every major feature of anaphylaxis: α1 (vasoconstriction, reduces angioedema), β1 (positive inotropy/chronotropy), β2 (bronchodilation, inhibits mast cell degranulation). No other single drug addresses all pathways.",
+              "source": "AAAAI Anaphylaxis Guidelines"
+            }
+          ],
+          "sources": ["AAAAI Anaphylaxis Practice Parameters", "WAO Guidelines"]
+        },
+        {
+          "id": "anaph-pharm-2",
+          "stem": "She received one dose of epinephrine from EMS but remains hypotensive.",
+          "question": "What is the next step for epinephrine-refractory anaphylaxis?",
+          "hint": "She may need repeated epinephrine or IV administration.",
+          "options": [
+            {"id": "A", "text": "Repeat IM epinephrine; if still refractory, start IV epinephrine infusion", "correct": true},
+            {"id": "B", "text": "Switch to antihistamines alone", "correct": false},
+            {"id": "C", "text": "Stop epinephrine due to tachycardia", "correct": false},
+            {"id": "D", "text": "Wait 1 hour before next dose", "correct": false}
+          ],
+          "explanation": "Repeat IM epinephrine every 5-15 minutes as needed (most patients respond to 1-2 doses). For refractory cases: IV epinephrine infusion (start 1-4 mcg/min, titrate to effect). Also give aggressive IV fluids (1-2L crystalloid bolus) for distributive shock.",
+          "sources": ["AAAAI Guidelines", "Emergency Medicine Practice"]
+        },
+        {
+          "id": "anaph-pharm-3",
+          "stem": "Adjunctive medications are being considered.",
+          "question": "What is the role of antihistamines in anaphylaxis?",
+          "hint": "They are second-line, not first-line.",
+          "options": [
+            {"id": "A", "text": "Adjunctive only - help with urticaria/pruritus but don't treat life-threatening features; give AFTER epinephrine", "correct": true},
+            {"id": "B", "text": "First-line treatment for anaphylaxis", "correct": false},
+            {"id": "C", "text": "Replace epinephrine in mild reactions", "correct": false},
+            {"id": "D", "text": "Contraindicated in anaphylaxis", "correct": false}
+          ],
+          "explanation": "Antihistamines (diphenhydramine 25-50 mg IV/IM, +/- ranitidine/famotidine) are adjunctive. They relieve itching and urticaria but do NOT reverse hypotension, airway obstruction, or shock. Never delay epinephrine to give antihistamines. H1 + H2 blockers may have additive benefit.",
+          "sources": ["AAAAI Practice Parameters", "Cochrane: Antihistamines in Anaphylaxis"]
+        },
+        {
+          "id": "anaph-pharm-4",
+          "stem": "She has significant bronchospasm.",
+          "question": "What bronchodilator can be added for anaphylaxis with severe bronchospasm?",
+          "hint": "Standard asthma treatment applies.",
+          "options": [
+            {"id": "A", "text": "Inhaled albuterol (beta-2 agonist) for bronchospasm not responsive to epinephrine alone", "correct": true},
+            {"id": "B", "text": "Inhaled ipratropium is first-line", "correct": false},
+            {"id": "C", "text": "No bronchodilators should be used", "correct": false},
+            {"id": "D", "text": "Oral theophylline", "correct": false}
+          ],
+          "explanation": "Albuterol nebulizer (2.5-5 mg) helps bronchospasm not fully relieved by epinephrine. Particularly useful in patients with asthma. Ipratropium can be added. Remember: albuterol doesn't treat hypotension or angioedema - epinephrine remains essential.",
+          "sources": ["AAAAI Guidelines", "StatPearls: Anaphylaxis Treatment"]
+        },
+        {
+          "id": "anaph-pharm-5",
+          "stem": "Corticosteroids are often given in anaphylaxis.",
+          "question": "What is the rationale for corticosteroids in anaphylaxis?",
+          "hint": "Consider delayed effects.",
+          "options": [
+            {"id": "A", "text": "May prevent biphasic reaction (delayed recurrence); not proven but commonly given", "correct": true},
+            {"id": "B", "text": "Immediate life-saving effect", "correct": false},
+            {"id": "C", "text": "Replace epinephrine", "correct": false},
+            {"id": "D", "text": "Proven to prevent all late reactions", "correct": false}
+          ],
+          "explanation": "Corticosteroids (methylprednisolone 125 mg IV or prednisone 50 mg PO) are often given to potentially prevent biphasic reactions (recurrence 1-72 hours later). Evidence is weak, but they're low-risk. They have NO immediate effect - onset is hours. Never delay epinephrine for steroids.",
+          "sources": ["AAAAI Guidelines", "Cochrane: Steroids in Anaphylaxis"]
+        }
+      ]
+    },
+    {
+      "id": "clinical-reasoning",
+      "title": "Clinical Reasoning",
+      "icon": "🧠",
+      "color": "#3b82f6",
+      "questions": [
+        {
+          "id": "anaph-clin-1",
+          "stem": "You need to confirm the diagnosis of anaphylaxis.",
+          "question": "What clinical criteria define anaphylaxis?",
+          "hint": "Multiple organ systems must be involved.",
+          "options": [
+            {"id": "A", "text": "Acute onset with skin/mucosal involvement PLUS respiratory compromise OR hypotension; OR known allergen exposure with ≥2 systems involved", "correct": true},
+            {"id": "B", "text": "Urticaria alone is sufficient", "correct": false},
+            {"id": "C", "text": "Hypotension alone without other symptoms", "correct": false},
+            {"id": "D", "text": "Only diagnosed by allergy testing", "correct": false}
+          ],
+          "explanation": "Anaphylaxis is likely when ANY of: (1) Acute skin/mucosal involvement + respiratory compromise OR hypotension; (2) ≥2 of: skin, respiratory, cardiovascular, GI symptoms after likely allergen exposure; (3) Hypotension after known allergen. She meets multiple criteria: skin (urticaria), respiratory (wheeze, stridor), cardiovascular (hypotension).",
+          "sources": ["WAO Anaphylaxis Guidelines", "NIAID Criteria"]
+        },
+        {
+          "id": "anaph-clin-2",
+          "stem": "She stabilizes but you're concerned about biphasic reaction.",
+          "question": "What is a biphasic anaphylactic reaction?",
+          "hint": "Symptoms can recur without re-exposure.",
+          "options": [
+            {"id": "A", "text": "Recurrence of symptoms 1-72 hours after initial resolution, without re-exposure to allergen", "correct": true},
+            {"id": "B", "text": "Reaction to a second allergen", "correct": false},
+            {"id": "C", "text": "Allergic reaction that never resolves", "correct": false},
+            {"id": "D", "text": "Reaction only in children", "correct": false}
+          ],
+          "explanation": "Biphasic reactions occur in 1-20% of anaphylaxis cases, typically 1-72 hours (most within 8-10 hours) after apparent resolution. The second phase can be as severe or worse than the initial reaction. Risk factors: severe initial reaction, delayed epinephrine, required multiple epinephrine doses.",
+          "whyChain": [
+            {
+              "why": "How long should she be observed?",
+              "answer": "Minimum 4-6 hours for mild-moderate reactions, longer (24 hours) for severe reactions, those requiring multiple epinephrine doses, or with respiratory compromise. She had severe features - consider prolonged observation.",
+              "source": "AAAAI Practice Parameters"
+            }
+          ],
+          "sources": ["AAAAI Guidelines", "JACI: Biphasic Anaphylaxis"]
+        },
+        {
+          "id": "anaph-clin-3",
+          "stem": "You're preparing for discharge.",
+          "question": "What must be prescribed at discharge for all anaphylaxis patients?",
+          "hint": "Patients must be prepared for future reactions.",
+          "options": [
+            {"id": "A", "text": "Epinephrine auto-injector (minimum 2), written anaphylaxis action plan, and allergist referral", "correct": true},
+            {"id": "B", "text": "Antihistamines only", "correct": false},
+            {"id": "C", "text": "No prescriptions needed if symptoms resolved", "correct": false},
+            {"id": "D", "text": "Oral steroids for 1 week", "correct": false}
+          ],
+          "explanation": "Every anaphylaxis patient needs: (1) Epinephrine auto-injectors (prescribe 2 - reactions may require multiple doses, may need to replace used device); (2) Written action plan; (3) Education on use; (4) Medical alert identification; (5) Allergist referral for testing and management.",
+          "sources": ["AAAAI Practice Parameters", "WAO Guidelines"]
+        },
+        {
+          "id": "anaph-clin-4",
+          "stem": "She asks about future shellfish avoidance.",
+          "question": "What dietary counseling should she receive?",
+          "hint": "Consider cross-reactivity patterns.",
+          "options": [
+            {"id": "A", "text": "Avoid all crustacean shellfish; may need to avoid mollusks too; fish is usually safe unless separate allergy", "correct": true},
+            {"id": "B", "text": "Only avoid shrimp specifically", "correct": false},
+            {"id": "C", "text": "Avoid all seafood including fish", "correct": false},
+            {"id": "D", "text": "No dietary restrictions needed", "correct": false}
+          ],
+          "explanation": "Crustaceans (shrimp, crab, lobster, crawfish) have high cross-reactivity (~75%) - avoid all. Mollusks (clam, oyster, scallop, squid) have some cross-reactivity - discuss with allergist. Fish (salmon, tuna) have different allergens (parvalbumin) - usually safe unless separate fish allergy confirmed.",
+          "sources": ["AAAAI Food Allergy Guidelines", "FARE Resources"]
+        },
+        {
+          "id": "anaph-clin-5",
+          "stem": "She asks if she could have an allergic reaction to the epinephrine.",
+          "question": "Are there any true contraindications to epinephrine in anaphylaxis?",
+          "hint": "Consider the risk-benefit ratio.",
+          "options": [
+            {"id": "A", "text": "No absolute contraindications - anaphylaxis is life-threatening; benefits always outweigh risks", "correct": true},
+            {"id": "B", "text": "Heart disease is a contraindication", "correct": false},
+            {"id": "C", "text": "Pregnancy is a contraindication", "correct": false},
+            {"id": "D", "text": "Elderly patients should not receive epinephrine", "correct": false}
+          ],
+          "explanation": "There are NO absolute contraindications to epinephrine for anaphylaxis. The risk of untreated anaphylaxis (death) far exceeds any epinephrine risk. Use with caution in elderly, cardiovascular disease, but still give it. Pregnancy: give epinephrine - hypoxia/hypotension harm fetus more than epinephrine.",
+          "sources": ["AAAAI Guidelines", "WAO Position Statement"]
+        }
+      ]
+    },
+    {
+      "id": "complications",
+      "title": "Complications",
+      "icon": "⚠️",
+      "color": "#dc2626",
+      "questions": [
+        {
+          "id": "anaph-comp-1",
+          "stem": "Despite treatment, her stridor worsens and SpO2 drops to 85%.",
+          "question": "What intervention is needed for progressive upper airway obstruction?",
+          "hint": "Airway management is the priority.",
+          "options": [
+            {"id": "A", "text": "Early intubation before complete obstruction; may need surgical airway if unable to intubate", "correct": true},
+            {"id": "B", "text": "Continue observation only", "correct": false},
+            {"id": "C", "text": "More antihistamines", "correct": false},
+            {"id": "D", "text": "Nebulized epinephrine alone is sufficient", "correct": false}
+          ],
+          "explanation": "Progressive stridor/angioedema requires early definitive airway management. Intubate before complete obstruction - angioedema makes intubation increasingly difficult. Have surgical airway (cricothyrotomy) ready if intubation fails. Nebulized epinephrine can temporize but doesn't replace definitive airway.",
+          "sources": ["AAAAI Guidelines", "Emergency Airway Management"]
+        },
+        {
+          "id": "anaph-comp-2",
+          "stem": "She is on metoprolol for another condition (hypothetically).",
+          "question": "Why are beta-blockers concerning in anaphylaxis?",
+          "hint": "Consider the mechanism of epinephrine.",
+          "options": [
+            {"id": "A", "text": "Beta-blockers can blunt the response to epinephrine and worsen bronchospasm", "correct": true},
+            {"id": "B", "text": "Beta-blockers have no effect on anaphylaxis", "correct": false},
+            {"id": "C", "text": "Beta-blockers prevent anaphylaxis", "correct": false},
+            {"id": "D", "text": "Beta-blockers are the treatment for anaphylaxis", "correct": false}
+          ],
+          "explanation": "Beta-blockers antagonize epinephrine's β-effects (bronchodilation, inotropy). Patients may be refractory to standard epinephrine doses. Treatment: higher/repeated epinephrine doses, glucagon 1-5 mg IV (bypasses β-receptor), aggressive fluids. ACE inhibitors may worsen angioedema.",
+          "sources": ["AAAAI Practice Parameters", "JACI: Beta-blockers and Anaphylaxis"]
+        },
+        {
+          "id": "anaph-comp-3",
+          "stem": "Eight hours later, she develops recurrent symptoms.",
+          "question": "How should biphasic reaction be managed?",
+          "hint": "Treat like the initial reaction.",
+          "options": [
+            {"id": "A", "text": "Same treatment as initial reaction - epinephrine, supportive care, monitoring", "correct": true},
+            {"id": "B", "text": "Antihistamines are sufficient for biphasic reaction", "correct": false},
+            {"id": "C", "text": "Biphasic reactions are always mild", "correct": false},
+            {"id": "D", "text": "No treatment needed", "correct": false}
+          ],
+          "explanation": "Biphasic reactions can be as severe as or worse than the initial reaction. Treat the same way: epinephrine IM, supportive care, monitoring. This is why observation period is important and why patients are discharged with epinephrine auto-injectors.",
+          "sources": ["AAAAI Guidelines", "Emergency Medicine Practice"]
+        }
+      ]
+    },
+    {
+      "id": "synthesis",
+      "title": "Synthesis",
+      "icon": "🔗",
+      "color": "#6366f1",
+      "questions": [
+        {
+          "id": "anaph-syn-1",
+          "stem": "Integrating all clinical information.",
+          "question": "Which statement BEST synthesizes this patient's presentation?",
+          "hint": "Connect trigger, mechanism, risk factors, and presentation.",
+          "options": [
+            {"id": "A", "text": "IgE-mediated anaphylaxis to shrimp (cross-reactive with known crab allergy) with multi-system involvement including life-threatening airway/cardiovascular features, complicated by asthma history", "correct": true},
+            {"id": "B", "text": "Simple allergic rhinitis exacerbation", "correct": false},
+            {"id": "C", "text": "Panic attack with hyperventilation", "correct": false},
+            {"id": "D", "text": "Vasovagal syncope from stress", "correct": false}
+          ],
+          "explanation": "This synthesis captures: mechanism (IgE-mediated, cross-reactivity between crab and shrimp), severity (hypotension, stridor, bronchospasm = severe multi-system anaphylaxis), risk factors (asthma increases severity), and treatment implications (epinephrine essential, watch for refractory/biphasic).",
+          "sources": ["AAAAI Practice Parameters", "Clinical Synthesis"]
+        },
+        {
+          "id": "anaph-syn-2",
+          "stem": "Planning comprehensive discharge care.",
+          "question": "What is the comprehensive discharge plan?",
+          "hint": "Address immediate safety and long-term management.",
+          "options": [
+            {"id": "A", "text": "Epinephrine auto-injectors ×2, action plan, strict shellfish avoidance, medical alert ID, allergist referral, consider observation for biphasic reaction", "correct": true},
+            {"id": "B", "text": "Antihistamines PRN and follow-up in 6 months", "correct": false},
+            {"id": "C", "text": "No follow-up needed", "correct": false},
+            {"id": "D", "text": "Avoid all foods", "correct": false}
+          ],
+          "explanation": "Comprehensive plan: (1) Prescribe 2 epinephrine auto-injectors + train on use; (2) Written anaphylaxis emergency action plan; (3) Avoid all crustacean shellfish, discuss mollusk avoidance; (4) Medical alert bracelet/necklace; (5) Allergist referral for confirmatory testing; (6) Education on reading food labels, restaurant precautions.",
+          "sources": ["AAAAI Guidelines", "FARE Patient Resources"]
+        }
+      ]
+    }
+  ]
+}

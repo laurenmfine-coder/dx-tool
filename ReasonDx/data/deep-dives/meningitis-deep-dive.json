@@ -1,0 +1,444 @@
+{
+  "id": "meningitis-deep-dive",
+  "title": "Bacterial Meningitis",
+  "version": "1.0",
+  "totalQuestions": 26,
+  "estimatedTime": "40 minutes",
+  "difficulty": "Intermediate",
+  "targetAudience": "Medical Students, Residents",
+  "objectives": [
+    "Recognize clinical features of bacterial meningitis",
+    "Apply the classic triad and meningeal signs",
+    "Understand CSF analysis interpretation",
+    "Select appropriate empiric antibiotics by age/risk",
+    "Recognize indications for dexamethasone",
+    "Manage complications"
+  ],
+  "vignette": {
+    "text": "A 22-year-old college student is brought to the ED confused and difficult to arouse. He complained of severe headache and neck stiffness last night, with multiple episodes of vomiting. He lives in a dormitory and recently had an upper respiratory infection.\n\nPast Medical History: None, immunizations up to date including meningococcal vaccine\n\nMedications: None\n\nSocial History: College junior, dormitory, no drugs/alcohol\n\nAllergies: None",
+    "physicalExam": {
+      "general": "Ill-appearing, confused, photophobic",
+      "vitals": {
+        "BP": "92/58 mmHg",
+        "HR": "118 bpm",
+        "RR": "22/min",
+        "Temp": "103.2°F (39.6°C)",
+        "SpO2": "96% RA"
+      },
+      "neck": "Marked nuchal rigidity, positive Kernig and Brudzinski signs",
+      "skin": "Petechial rash on trunk and extremities",
+      "neurologic": "GCS 12, oriented to person only, no focal deficits"
+    },
+    "diagnostics": {
+      "labs": {
+        "WBC": {"value": "18,600/μL", "flag": "HIGH"},
+        "Platelets": {"value": "145,000/μL", "flag": "LOW"},
+        "Lactate": {"value": "3.2 mmol/L", "flag": "HIGH"},
+        "Procalcitonin": {"value": "8.4 ng/mL", "flag": "HIGH"}
+      },
+      "CSF": {
+        "opening_pressure": "32 cm H2O (elevated)",
+        "appearance": "Cloudy",
+        "WBC": "2,400 cells/μL (95% neutrophils)",
+        "protein": "245 mg/dL (elevated)",
+        "glucose": "28 mg/dL (low, serum 95)",
+        "gram_stain": "Gram-positive diplococci"
+      },
+      "imaging": {
+        "CT_head": "No mass effect or hydrocephalus"
+      }
+    }
+  },
+  "layers": [
+    {
+      "id": "anatomy",
+      "title": "Anatomy",
+      "icon": "🫀",
+      "color": "#ef4444",
+      "questions": [
+        {
+          "id": "mening-anat-1",
+          "stem": "Meningitis is inflammation of the meninges.",
+          "question": "What are the three layers of the meninges?",
+          "hint": "CSF flows in the subarachnoid space.",
+          "options": [
+            {"id": "A", "text": "Dura mater, arachnoid mater, pia mater (outer to inner)", "correct": true},
+            {"id": "B", "text": "Pia mater, arachnoid mater, dura mater", "correct": false},
+            {"id": "C", "text": "Epidural, subdural, subarachnoid", "correct": false},
+            {"id": "D", "text": "Periosteum, dura, arachnoid", "correct": false}
+          ],
+          "explanation": "The meninges from outside to inside: Dura mater (tough outer layer), Arachnoid mater (web-like middle), Pia mater (delicate inner layer on brain surface). CSF circulates in the subarachnoid space between arachnoid and pia.",
+          "sources": ["OpenStax A&P 2e, Chapter 13", "StatPearls: Meninges"]
+        },
+        {
+          "id": "mening-anat-2",
+          "stem": "Lumbar puncture is performed to obtain CSF.",
+          "question": "At what vertebral level is LP performed and why?",
+          "hint": "The spinal cord ends at a specific level.",
+          "options": [
+            {"id": "A", "text": "L3-L4 or L4-L5; spinal cord ends at L1-L2, avoiding cord injury", "correct": true},
+            {"id": "B", "text": "C3-C4 for best access", "correct": false},
+            {"id": "C", "text": "T10-T11", "correct": false},
+            {"id": "D", "text": "S1-S2", "correct": false}
+          ],
+          "explanation": "LP is performed at L3-L4 or L4-L5, below the conus medullaris (spinal cord ends at L1-L2 in adults). The cauda equina floats in this area and moves away from the needle.",
+          "sources": ["StatPearls: Lumbar Puncture", "OpenStax A&P 2e"]
+        },
+        {
+          "id": "mening-anat-3",
+          "stem": "He has nuchal rigidity and positive meningeal signs.",
+          "question": "What is the anatomical basis for nuchal rigidity?",
+          "hint": "The meninges extend around the spinal cord.",
+          "options": [
+            {"id": "A", "text": "Inflamed spinal meninges cause pain and spasm when stretched by neck flexion", "correct": true},
+            {"id": "B", "text": "Direct infection of neck muscles", "correct": false},
+            {"id": "C", "text": "Cervical spine arthritis", "correct": false},
+            {"id": "D", "text": "Cervical nerve compression", "correct": false}
+          ],
+          "explanation": "The meninges surround brain and spinal cord. Inflammation makes them painful when stretched. Neck flexion stretches cervical meninges, triggering pain and reflex muscle spasm (rigidity).",
+          "sources": ["StatPearls: Meningitis", "Clinical Neuroanatomy"]
+        }
+      ]
+    },
+    {
+      "id": "physiology",
+      "title": "Physiology",
+      "icon": "⚡",
+      "color": "#f59e0b",
+      "questions": [
+        {
+          "id": "mening-phys-1",
+          "stem": "CSF opening pressure is 32 cm H2O (elevated).",
+          "question": "What causes elevated ICP in bacterial meningitis?",
+          "hint": "Consider the inflammatory response.",
+          "options": [
+            {"id": "A", "text": "Cerebral edema, impaired CSF absorption, inflammatory exudate", "correct": true},
+            {"id": "B", "text": "Hemorrhage", "correct": false},
+            {"id": "C", "text": "Tumor mass effect", "correct": false},
+            {"id": "D", "text": "Normal finding", "correct": false}
+          ],
+          "explanation": "Elevated ICP results from: vasogenic edema (BBB disruption), cytotoxic edema (cellular injury), impaired CSF absorption at arachnoid granulations, and inflammatory exudate. ICP elevation contributes to morbidity.",
+          "sources": ["StatPearls: Bacterial Meningitis", "NEJM Review"]
+        },
+        {
+          "id": "mening-phys-2",
+          "stem": "CSF glucose is 28 mg/dL with serum 95 (ratio 0.29).",
+          "question": "Why is CSF glucose low in bacterial meningitis?",
+          "hint": "Consider glucose consumption.",
+          "options": [
+            {"id": "A", "text": "Bacteria and neutrophils consume glucose; impaired transport across inflamed BBB", "correct": true},
+            {"id": "B", "text": "Patient is hypoglycemic", "correct": false},
+            {"id": "C", "text": "Normal CSF finding", "correct": false},
+            {"id": "D", "text": "Laboratory error", "correct": false}
+          ],
+          "explanation": "CSF glucose is low due to consumption by bacteria and neutrophils (anaerobic glycolysis) and impaired transport across inflamed blood-CSF barrier. Ratio <0.4 suggests bacterial meningitis. His is 0.29.",
+          "sources": ["StatPearls: CSF Analysis", "IDSA Guidelines"]
+        },
+        {
+          "id": "mening-phys-3",
+          "stem": "CSF protein is 245 mg/dL (elevated).",
+          "question": "Why is CSF protein elevated?",
+          "hint": "The blood-brain barrier is disrupted.",
+          "options": [
+            {"id": "A", "text": "BBB breakdown allows serum proteins to leak into CSF", "correct": true},
+            {"id": "B", "text": "CSF produces protein", "correct": false},
+            {"id": "C", "text": "Protein consumed by bacteria", "correct": false},
+            {"id": "D", "text": "Normal finding", "correct": false}
+          ],
+          "explanation": "CSF protein is elevated due to BBB disruption allowing serum proteins (albumin, Ig) to leak into CSF. Normal is 15-45 mg/dL; his 245 indicates significant inflammation.",
+          "sources": ["StatPearls: CSF Analysis", "NEJM"]
+        },
+        {
+          "id": "mening-phys-4",
+          "stem": "CSF shows 2,400 WBC with 95% neutrophils.",
+          "question": "What does neutrophilic pleocytosis indicate?",
+          "hint": "Different infections have different CSF profiles.",
+          "options": [
+            {"id": "A", "text": "Bacterial infection - neutrophils predominate; viral typically shows lymphocytes", "correct": true},
+            {"id": "B", "text": "Viral infection", "correct": false},
+            {"id": "C", "text": "Fungal infection", "correct": false},
+            {"id": "D", "text": "Normal CSF", "correct": false}
+          ],
+          "explanation": "Bacterial meningitis: high WBC (>1000), neutrophil predominance. Viral: lower WBC (50-500), lymphocyte predominance. TB/fungal: lymphocytes, very low glucose. His profile (2400 cells, 95% PMNs) is classic bacterial.",
+          "sources": ["IDSA Meningitis Guidelines", "StatPearls: CSF Analysis"]
+        }
+      ]
+    },
+    {
+      "id": "pathophysiology",
+      "title": "Pathophysiology",
+      "icon": "🔬",
+      "color": "#8b5cf6",
+      "questions": [
+        {
+          "id": "mening-patho-1",
+          "stem": "Gram stain shows gram-positive diplococci.",
+          "question": "What organism is most likely causing his meningitis?",
+          "hint": "Consider epidemiology and Gram stain appearance.",
+          "options": [
+            {"id": "A", "text": "Streptococcus pneumoniae - most common cause in adults", "correct": true},
+            {"id": "B", "text": "Neisseria meningitidis", "correct": false},
+            {"id": "C", "text": "Listeria monocytogenes", "correct": false},
+            {"id": "D", "text": "E. coli", "correct": false}
+          ],
+          "explanation": "Gram-positive diplococci in CSF = S. pneumoniae (pneumococcus). It's the most common cause of bacterial meningitis in adults. N. meningitidis is gram-negative diplococci. The petechial rash is concerning but can occur with any severe bacterial infection.",
+          "sources": ["IDSA Meningitis Guidelines", "StatPearls: Pneumococcal Meningitis"]
+        },
+        {
+          "id": "mening-patho-2",
+          "stem": "He has a petechial rash.",
+          "question": "A petechial/purpuric rash in meningitis raises concern for which organism?",
+          "hint": "One organism is classically associated with this finding.",
+          "options": [
+            {"id": "A", "text": "Neisseria meningitidis (meningococcemia)", "correct": true},
+            {"id": "B", "text": "S. pneumoniae only", "correct": false},
+            {"id": "C", "text": "Listeria", "correct": false},
+            {"id": "D", "text": "Viral meningitis", "correct": false}
+          ],
+          "explanation": "Petechial/purpuric rash is classic for meningococcemia (N. meningitidis), though can occur with any sepsis/DIC. Meningococcal disease can cause fulminant purpura fulminans. His Gram stain shows gram-positive diplococci (pneumococcus), but empiric coverage should include meningococcus given rash.",
+          "sources": ["IDSA Guidelines", "StatPearls: Meningococcemia"]
+        },
+        {
+          "id": "mening-patho-3",
+          "stem": "He recently had an upper respiratory infection.",
+          "question": "How does URI predispose to bacterial meningitis?",
+          "hint": "Consider nasopharyngeal colonization.",
+          "options": [
+            {"id": "A", "text": "Viral URI disrupts mucosal barrier, facilitating invasion by colonizing bacteria", "correct": true},
+            {"id": "B", "text": "Viruses directly invade meninges", "correct": false},
+            {"id": "C", "text": "Antibiotics for URI cause meningitis", "correct": false},
+            {"id": "D", "text": "URIs and meningitis are unrelated", "correct": false}
+          ],
+          "explanation": "S. pneumoniae and N. meningitidis colonize the nasopharynx. Viral URI damages the mucosal barrier, allowing bacteria to invade blood and cross the BBB. This is why meningitis often follows URI.",
+          "sources": ["StatPearls: Bacterial Meningitis", "NEJM Review"]
+        },
+        {
+          "id": "mening-patho-4",
+          "stem": "He was vaccinated against meningococcus.",
+          "question": "Why might a vaccinated individual still get meningococcal disease?",
+          "hint": "Consider vaccine coverage.",
+          "options": [
+            {"id": "A", "text": "Vaccines cover specific serogroups; serogroup B requires separate vaccine", "correct": true},
+            {"id": "B", "text": "Vaccines are completely ineffective", "correct": false},
+            {"id": "C", "text": "Only elderly need vaccines", "correct": false},
+            {"id": "D", "text": "Vaccines cause meningitis", "correct": false}
+          ],
+          "explanation": "Quadrivalent meningococcal vaccine covers serogroups A, C, W, Y. Serogroup B (common in college outbreaks) requires a separate MenB vaccine. Also, vaccine immunity may wane. His Gram stain suggests pneumococcus anyway.",
+          "sources": ["CDC Meningococcal Vaccine", "ACIP Recommendations"]
+        }
+      ]
+    },
+    {
+      "id": "pharmacology",
+      "title": "Pharmacology",
+      "icon": "💊",
+      "color": "#10b981",
+      "questions": [
+        {
+          "id": "mening-pharm-1",
+          "stem": "Empiric antibiotics must be started immediately.",
+          "question": "What is the empiric antibiotic regimen for a young adult with suspected bacterial meningitis?",
+          "hint": "Cover the most common pathogens for his age group.",
+          "options": [
+            {"id": "A", "text": "Ceftriaxone + Vancomycin (add ampicillin if Listeria risk)", "correct": true},
+            {"id": "B", "text": "Penicillin alone", "correct": false},
+            {"id": "C", "text": "Azithromycin", "correct": false},
+            {"id": "D", "text": "Metronidazole", "correct": false}
+          ],
+          "explanation": "Empiric regimen for 2-50 years: Ceftriaxone 2g IV q12h (covers pneumococcus, meningococcus, H. flu) + Vancomycin (for penicillin-resistant pneumococcus). Add Ampicillin for age >50, immunocompromised, or alcoholics (Listeria coverage).",
+          "sources": ["IDSA Meningitis Guidelines 2017", "StatPearls: Bacterial Meningitis"]
+        },
+        {
+          "id": "mening-pharm-2",
+          "stem": "Dexamethasone is being considered.",
+          "question": "What is the indication and timing for dexamethasone in bacterial meningitis?",
+          "hint": "Steroids reduce inflammation-related damage.",
+          "options": [
+            {"id": "A", "text": "Give BEFORE or WITH first antibiotic dose for suspected bacterial meningitis; reduces mortality in pneumococcal meningitis", "correct": true},
+            {"id": "B", "text": "Give 24 hours after antibiotics", "correct": false},
+            {"id": "C", "text": "Contraindicated in meningitis", "correct": false},
+            {"id": "D", "text": "Only for viral meningitis", "correct": false}
+          ],
+          "explanation": "Dexamethasone 0.15 mg/kg IV q6h × 4 days. Must give BEFORE or WITH first antibiotic dose to reduce inflammatory response to bacterial lysis. Proven benefit for pneumococcal meningitis (reduced mortality, hearing loss). Give empirically if bacterial meningitis suspected.",
+          "sources": ["IDSA Guidelines", "NEJM: Dexamethasone in Meningitis"]
+        },
+        {
+          "id": "mening-pharm-3",
+          "stem": "Cultures confirm S. pneumoniae.",
+          "question": "When can antibiotics be narrowed based on culture results?",
+          "hint": "Susceptibility testing guides de-escalation.",
+          "options": [
+            {"id": "A", "text": "When susceptibilities return - if penicillin-susceptible, can use ceftriaxone alone; drop vancomycin", "correct": true},
+            {"id": "B", "text": "Never narrow antibiotics", "correct": false},
+            {"id": "C", "text": "Narrow immediately based on Gram stain", "correct": false},
+            {"id": "D", "text": "Change to oral antibiotics after 24 hours", "correct": false}
+          ],
+          "explanation": "Once susceptibilities confirm penicillin-susceptible pneumococcus, can narrow to ceftriaxone monotherapy. Penicillin-resistant strains need continued vancomycin. De-escalation is important for antibiotic stewardship once culture data available.",
+          "sources": ["IDSA Guidelines", "StatPearls: Antibiotic Stewardship"]
+        },
+        {
+          "id": "mening-pharm-4",
+          "stem": "Treatment duration must be determined.",
+          "question": "What is the typical antibiotic duration for pneumococcal meningitis?",
+          "hint": "Duration varies by organism.",
+          "options": [
+            {"id": "A", "text": "10-14 days for S. pneumoniae", "correct": true},
+            {"id": "B", "text": "3 days is sufficient", "correct": false},
+            {"id": "C", "text": "21 days minimum", "correct": false},
+            {"id": "D", "text": "Until CSF is sterile", "correct": false}
+          ],
+          "explanation": "Duration by organism: S. pneumoniae 10-14 days, N. meningitidis 7 days, H. influenzae 7 days, Listeria 21 days, GBS 14-21 days. Gram-negative bacilli may need 21 days. Clinical response guides therapy.",
+          "sources": ["IDSA Meningitis Guidelines", "StatPearls: Bacterial Meningitis"]
+        }
+      ]
+    },
+    {
+      "id": "clinical-reasoning",
+      "title": "Clinical Reasoning",
+      "icon": "🧠",
+      "color": "#3b82f6",
+      "questions": [
+        {
+          "id": "mening-clin-1",
+          "stem": "Recognizing the classic presentation is critical.",
+          "question": "What is the classic triad of bacterial meningitis?",
+          "hint": "Three cardinal features, though not always present.",
+          "options": [
+            {"id": "A", "text": "Fever, nuchal rigidity, altered mental status", "correct": true},
+            {"id": "B", "text": "Headache, vomiting, rash", "correct": false},
+            {"id": "C", "text": "Seizure, coma, death", "correct": false},
+            {"id": "D", "text": "Photophobia, papilledema, nystagmus", "correct": false}
+          ],
+          "explanation": "Classic triad: fever + nuchal rigidity + altered mental status. However, only 44% have all three. >95% have at least 2 of: headache, fever, neck stiffness, altered mental status. Maintain high suspicion even with incomplete presentation.",
+          "sources": ["NEJM: Acute Bacterial Meningitis", "IDSA Guidelines"]
+        },
+        {
+          "id": "mening-clin-2",
+          "stem": "You're considering whether to perform LP before CT.",
+          "question": "When is CT head required BEFORE lumbar puncture?",
+          "hint": "LP can cause herniation if ICP is elevated from mass effect.",
+          "options": [
+            {"id": "A", "text": "Immunocompromised, CNS disease history, new seizure, papilledema, focal deficits, or GCS <10", "correct": true},
+            {"id": "B", "text": "All patients require CT first", "correct": false},
+            {"id": "C", "text": "CT is never needed before LP", "correct": false},
+            {"id": "D", "text": "Only if age >60", "correct": false}
+          ],
+          "explanation": "CT before LP if: immunocompromised, history of CNS disease, new-onset seizure, papilledema, focal neurologic deficits, altered consciousness (GCS <10). These suggest mass lesion/elevated ICP with herniation risk. Do NOT delay antibiotics for CT - give empirically then do LP after.",
+          "sources": ["IDSA Guidelines", "NEJM: Meningitis"]
+        },
+        {
+          "id": "mening-clin-3",
+          "stem": "Time to antibiotics is critical.",
+          "question": "What is the timing priority for antibiotics in suspected bacterial meningitis?",
+          "hint": "Every minute counts.",
+          "options": [
+            {"id": "A", "text": "Give antibiotics immediately - do NOT delay for CT or LP; mortality increases with delay", "correct": true},
+            {"id": "B", "text": "Wait for LP results", "correct": false},
+            {"id": "C", "text": "Wait for CT results", "correct": false},
+            {"id": "D", "text": "Timing doesn't affect outcome", "correct": false}
+          ],
+          "explanation": "Give antibiotics (and dexamethasone) IMMEDIATELY when bacterial meningitis is suspected. Each hour of delay increases mortality. If CT needed, give antibiotics BEFORE CT. LP can be done after, though CSF culture sensitivity decreases after 4-6 hours of antibiotics.",
+          "sources": ["IDSA Guidelines", "Lancet: Timing of Antibiotics"]
+        },
+        {
+          "id": "mening-clin-4",
+          "stem": "Close contacts are at risk.",
+          "question": "What prophylaxis is indicated for close contacts of meningococcal meningitis?",
+          "hint": "Secondary cases can be prevented.",
+          "options": [
+            {"id": "A", "text": "Rifampin, ciprofloxacin, or ceftriaxone for household/close contacts", "correct": true},
+            {"id": "B", "text": "No prophylaxis needed", "correct": false},
+            {"id": "C", "text": "Vaccination only", "correct": false},
+            {"id": "D", "text": "Prophylaxis for all hospital staff", "correct": false}
+          ],
+          "explanation": "Chemoprophylaxis for N. meningitidis close contacts: Rifampin 600mg PO BID × 2 days, OR Ciprofloxacin 500mg × 1 dose, OR Ceftriaxone 250mg IM × 1 dose. Give within 24 hours of diagnosis. Close contacts = household, daycare, anyone with direct secretion exposure. Report to public health.",
+          "sources": ["CDC Meningitis Prevention", "IDSA Guidelines"]
+        }
+      ]
+    },
+    {
+      "id": "complications",
+      "title": "Complications",
+      "icon": "⚠️",
+      "color": "#dc2626",
+      "questions": [
+        {
+          "id": "mening-comp-1",
+          "stem": "He develops a generalized tonic-clonic seizure.",
+          "question": "How should seizures in bacterial meningitis be managed?",
+          "hint": "Seizures are common complications.",
+          "options": [
+            {"id": "A", "text": "IV benzodiazepines (lorazepam) acutely; consider prophylactic antiepileptic if high risk", "correct": true},
+            {"id": "B", "text": "Observation only", "correct": false},
+            {"id": "C", "text": "Increase antibiotics", "correct": false},
+            {"id": "D", "text": "Immediate surgery", "correct": false}
+          ],
+          "explanation": "Seizures occur in 20-30% of bacterial meningitis. Treat acutely with lorazepam 4mg IV. If recurrent, load with fosphenytoin or levetiracetam. Prophylactic AEDs are debated but often given in first 48-72 hours if high risk (altered consciousness, focal deficits).",
+          "sources": ["IDSA Guidelines", "StatPearls: Meningitis Complications"]
+        },
+        {
+          "id": "mening-comp-2",
+          "stem": "Repeat LP on day 3 shows persistent CSF abnormalities.",
+          "question": "What complication should be suspected with persistent CSF abnormalities?",
+          "hint": "Consider treatment failure causes.",
+          "options": [
+            {"id": "A", "text": "Subdural empyema, brain abscess, or ventriculitis", "correct": true},
+            {"id": "B", "text": "Normal finding", "correct": false},
+            {"id": "C", "text": "Antibiotic side effect", "correct": false},
+            {"id": "D", "text": "Viral superinfection", "correct": false}
+          ],
+          "explanation": "Lack of improvement by 48-72 hours suggests: resistant organism, inadequate antibiotic penetration, or complication (subdural empyema, brain abscess, ventriculitis, infected thrombus). Repeat imaging (MRI preferred) and consider broadening antibiotics.",
+          "sources": ["IDSA Guidelines", "NEJM: Meningitis Complications"]
+        },
+        {
+          "id": "mening-comp-3",
+          "stem": "After recovery, he has hearing difficulties.",
+          "question": "What is the most common permanent sequela of bacterial meningitis?",
+          "hint": "Cranial nerve involvement is common.",
+          "options": [
+            {"id": "A", "text": "Sensorineural hearing loss (due to cochlear damage)", "correct": true},
+            {"id": "B", "text": "Blindness", "correct": false},
+            {"id": "C", "text": "Complete paralysis", "correct": false},
+            {"id": "D", "text": "Cardiac damage", "correct": false}
+          ],
+          "explanation": "Hearing loss is the most common sequela (10-30%), especially with pneumococcal meningitis. The cochlea is vulnerable to inflammation spreading from the meninges. All patients should have audiologic evaluation. Dexamethasone reduces hearing loss incidence.",
+          "sources": ["IDSA Guidelines", "NEJM: Meningitis Outcomes"]
+        }
+      ]
+    },
+    {
+      "id": "synthesis",
+      "title": "Synthesis",
+      "icon": "🔗",
+      "color": "#6366f1",
+      "questions": [
+        {
+          "id": "mening-syn-1",
+          "stem": "Integrating all clinical information.",
+          "question": "Which statement BEST synthesizes this patient's presentation?",
+          "options": [
+            {"id": "A", "text": "Pneumococcal meningitis in young adult presenting with classic triad, CSF showing bacterial pattern, requiring urgent ceftriaxone/vancomycin/dexamethasone", "correct": true},
+            {"id": "B", "text": "Viral meningitis requiring supportive care", "correct": false},
+            {"id": "C", "text": "Fungal meningitis in immunocompromised host", "correct": false},
+            {"id": "D", "text": "Migraine headache", "correct": false}
+          ],
+          "explanation": "This synthesis captures: organism (gram-positive diplococci = pneumococcus), presentation (classic triad, meningeal signs), CSF pattern (high WBC/neutrophils, low glucose, high protein, elevated pressure), and treatment (ceftriaxone + vancomycin + dexamethasone immediately).",
+          "sources": ["IDSA Guidelines", "Clinical Synthesis"]
+        },
+        {
+          "id": "mening-syn-2",
+          "stem": "Planning comprehensive care.",
+          "question": "What is the comprehensive management approach?",
+          "options": [
+            {"id": "A", "text": "Immediate antibiotics + dexamethasone, ICU monitoring, ICP management, seizure precautions, contact prophylaxis notification", "correct": true},
+            {"id": "B", "text": "Outpatient oral antibiotics", "correct": false},
+            {"id": "C", "text": "Observation without treatment", "correct": false},
+            {"id": "D", "text": "Surgery first", "correct": false}
+          ],
+          "explanation": "Comprehensive plan: (1) Immediate ceftriaxone + vancomycin + dexamethasone; (2) ICU admission for monitoring; (3) ICP management (head elevation, consider mannitol); (4) Seizure precautions/treatment; (5) Public health notification for contact prophylaxis; (6) Hearing evaluation before discharge.",
+          "sources": ["IDSA Meningitis Guidelines", "StatPearls: Meningitis Management"]
+        }
+      ]
+    }
+  ]
+}

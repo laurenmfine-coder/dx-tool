@@ -1,0 +1,520 @@
+{
+  "id": "hyponatremia-deep-dive",
+  "title": "Hyponatremia",
+  "version": "1.0",
+  "totalQuestions": 28,
+  "estimatedTime": "40 minutes",
+  "difficulty": "Intermediate",
+  "targetAudience": "Medical Students, Residents",
+  "objectives": [
+    "Classify hyponatremia by serum osmolality and volume status",
+    "Understand the pathophysiology of ADH dysregulation",
+    "Apply a systematic diagnostic approach",
+    "Calculate appropriate sodium correction rates",
+    "Recognize and prevent osmotic demyelination syndrome",
+    "Select appropriate treatment based on acuity and symptoms"
+  ],
+  "vignette": {
+    "text": "A 72-year-old woman is brought to the emergency department after her daughter found her confused and lethargic this morning. She has had progressive fatigue and poor appetite for 2 weeks. Her daughter reports she has been taking 'water pills' and was recently started on a new medication by her psychiatrist for depression.\n\nPast Medical History: Hypertension, Major depressive disorder, Osteoarthritis, Hypothyroidism\n\nMedications: Hydrochlorothiazide 25mg daily (for 3 years), Sertraline 50mg daily (started 3 weeks ago), Levothyroxine 75mcg daily, Acetaminophen PRN\n\nSocial History: Lives alone, widowed 6 months ago, non-smoker, no alcohol. Daughter visits weekly and noticed mother drinking more water than usual lately 'to stay healthy.'\n\nAllergies: None",
+    "physicalExam": {
+      "general": "Elderly woman, lethargic but arousable, oriented to person only",
+      "vitals": {
+        "BP": "128/78 mmHg (no orthostatic changes)",
+        "HR": "72 bpm",
+        "RR": "16/min",
+        "Temp": "97.8°F",
+        "SpO2": "98% on room air"
+      },
+      "HEENT": "Moist mucous membranes, no JVD",
+      "cardiovascular": "Regular rhythm, no murmurs, normal S1/S2",
+      "pulmonary": "Clear bilaterally",
+      "abdomen": "Soft, non-tender, no ascites",
+      "extremities": "No edema, normal skin turgor",
+      "neurologic": "Lethargic, oriented to person only, moves all extremities, no focal deficits, DTRs 2+ symmetric"
+    },
+    "diagnostics": {
+      "labs": {
+        "Sodium": {"value": "118 mEq/L", "reference": "136-145", "flag": "CRITICAL"},
+        "Potassium": {"value": "3.2 mEq/L", "reference": "3.5-5.0", "flag": "LOW"},
+        "Chloride": {"value": "84 mEq/L", "reference": "98-106", "flag": "LOW"},
+        "Bicarbonate": {"value": "26 mEq/L", "reference": "22-28", "flag": "NORMAL"},
+        "BUN": {"value": "8 mg/dL", "reference": "7-20", "flag": "NORMAL"},
+        "Creatinine": {"value": "0.7 mg/dL", "reference": "0.6-1.2", "flag": "NORMAL"},
+        "Glucose": {"value": "95 mg/dL", "reference": "70-100", "flag": "NORMAL"},
+        "Serum_Osmolality": {"value": "248 mOsm/kg", "reference": "275-295", "flag": "LOW"},
+        "Urine_Sodium": {"value": "45 mEq/L", "reference": "Variable", "flag": "HIGH"},
+        "Urine_Osmolality": {"value": "420 mOsm/kg", "reference": "300-900", "flag": "NORMAL"},
+        "TSH": {"value": "2.1 mIU/L", "reference": "0.4-4.0", "flag": "NORMAL"},
+        "Cortisol_AM": {"value": "18 mcg/dL", "reference": "6-23", "flag": "NORMAL"},
+        "Uric_Acid": {"value": "2.8 mg/dL", "reference": "2.5-7.0", "flag": "LOW-NORMAL"}
+      },
+      "imaging": {
+        "CXR": "No acute cardiopulmonary abnormality, normal heart size"
+      }
+    }
+  },
+  "layers": [
+    {
+      "id": "anatomy",
+      "title": "Anatomy",
+      "icon": "🫀",
+      "color": "#ef4444",
+      "questions": [
+        {
+          "id": "hypo-anat-1",
+          "stem": "ADH (vasopressin) plays a central role in water balance.",
+          "question": "Where is ADH synthesized and where is it released?",
+          "hint": "Consider the hypothalamic-pituitary axis.",
+          "options": [
+            {"id": "A", "text": "Synthesized in hypothalamus (supraoptic/paraventricular nuclei), released from posterior pituitary", "correct": true},
+            {"id": "B", "text": "Synthesized and released from anterior pituitary", "correct": false},
+            {"id": "C", "text": "Synthesized in the kidney", "correct": false},
+            {"id": "D", "text": "Synthesized in the adrenal gland", "correct": false}
+          ],
+          "explanation": "ADH is synthesized in the supraoptic and paraventricular nuclei of the hypothalamus, then transported via axons to the posterior pituitary where it's stored and released. Release is triggered by increased serum osmolality or decreased blood volume.",
+          "sources": ["OpenStax A&P 2e, Chapter 17", "StatPearls: ADH"]
+        },
+        {
+          "id": "hypo-anat-2",
+          "stem": "ADH acts on the kidney to retain water.",
+          "question": "Where in the nephron does ADH exert its primary effect?",
+          "hint": "Consider where water reabsorption is regulated.",
+          "options": [
+            {"id": "A", "text": "Collecting duct - ADH inserts aquaporin-2 channels to increase water reabsorption", "correct": true},
+            {"id": "B", "text": "Proximal tubule", "correct": false},
+            {"id": "C", "text": "Loop of Henle ascending limb", "correct": false},
+            {"id": "D", "text": "Glomerulus", "correct": false}
+          ],
+          "explanation": "ADH binds V2 receptors on collecting duct principal cells, triggering insertion of aquaporin-2 water channels into the apical membrane. This allows water to move from the tubular lumen into the hypertonic medullary interstitium, concentrating urine.",
+          "sources": ["OpenStax A&P 2e, Chapter 25", "StatPearls: Aquaporins"]
+        },
+        {
+          "id": "hypo-anat-3",
+          "stem": "Osmotic demyelination syndrome is a feared complication of rapid sodium correction.",
+          "question": "What brain structure is classically affected in osmotic demyelination syndrome (ODS)?",
+          "hint": "The name 'central pontine myelinolysis' gives a clue.",
+          "options": [
+            {"id": "A", "text": "Central pons (central pontine myelinolysis), though extrapontine areas can also be affected", "correct": true},
+            {"id": "B", "text": "Cerebral cortex only", "correct": false},
+            {"id": "C", "text": "Cerebellum only", "correct": false},
+            {"id": "D", "text": "Spinal cord", "correct": false}
+          ],
+          "explanation": "ODS classically affects the central pons (central pontine myelinolysis) but can affect extrapontine structures (basal ganglia, thalamus, cerebellum). Oligodendrocytes in these areas are vulnerable to osmotic stress from rapid fluid shifts during overcorrection.",
+          "sources": ["StatPearls: Osmotic Demyelination Syndrome", "NEJM Review"]
+        }
+      ]
+    },
+    {
+      "id": "physiology",
+      "title": "Physiology",
+      "icon": "⚡",
+      "color": "#f59e0b",
+      "questions": [
+        {
+          "id": "hypo-phys-1",
+          "stem": "Her serum osmolality is 248 mOsm/kg (low).",
+          "question": "How do you calculate serum osmolality, and what does hypoosmolality indicate?",
+          "hint": "Sodium is the main determinant of osmolality.",
+          "options": [
+            {"id": "A", "text": "2(Na) + Glucose/18 + BUN/2.8; hypoosmolality indicates true hyponatremia with excess water relative to solute", "correct": true},
+            {"id": "B", "text": "Sodium alone determines osmolality", "correct": false},
+            {"id": "C", "text": "Low osmolality indicates dehydration", "correct": false},
+            {"id": "D", "text": "Osmolality cannot be calculated", "correct": false}
+          ],
+          "explanation": "Calculated osmolality = 2(Na) + Glucose/18 + BUN/2.8 = 2(118) + 95/18 + 8/2.8 = 236 + 5 + 3 = 244. Her measured is 248. Hypoosmolality confirms true hyponatremia (excess water relative to sodium), ruling out pseudohyponatremia and hypertonic hyponatremia.",
+          "sources": ["StatPearls: Serum Osmolality", "UpToDate: Hyponatremia"]
+        },
+        {
+          "id": "hypo-phys-2",
+          "stem": "Her urine osmolality is 420 mOsm/kg despite low serum osmolality.",
+          "question": "What does a urine osmolality >100 mOsm/kg in hyponatremia indicate?",
+          "hint": "The kidney should excrete dilute urine when serum is hypoosmolar.",
+          "options": [
+            {"id": "A", "text": "Impaired water excretion - ADH is present when it shouldn't be (inappropriate ADH action)", "correct": true},
+            {"id": "B", "text": "Normal kidney response", "correct": false},
+            {"id": "C", "text": "Primary polydipsia", "correct": false},
+            {"id": "D", "text": "Dehydration", "correct": false}
+          ],
+          "explanation": "Normally, hypoosmolality suppresses ADH, and kidneys excrete maximally dilute urine (<100 mOsm/kg). Her concentrated urine (420) despite low serum osmolality indicates ADH is active when it shouldn't be - either appropriate (hypovolemia) or inappropriate (SIADH, drugs).",
+          "whyChain": [
+            {
+              "why": "What if urine osmolality were <100?",
+              "answer": "Urine osm <100 indicates appropriate ADH suppression and maximum dilution. This suggests primary polydipsia (water intake exceeds excretory capacity) or very low solute intake ('tea and toast' diet).",
+              "source": "StatPearls: Hyponatremia"
+            }
+          ],
+          "sources": ["StatPearls: Hyponatremia", "NEJM: Hyponatremia Review"]
+        },
+        {
+          "id": "hypo-phys-3",
+          "stem": "Her urine sodium is 45 mEq/L.",
+          "question": "What does urine sodium help distinguish in euvolemic hyponatremia?",
+          "hint": "Consider renal vs extra-renal sodium handling.",
+          "options": [
+            {"id": "A", "text": "UNa >30 suggests renal sodium wasting or SIADH; UNa <20 suggests extra-renal losses or low intake", "correct": true},
+            {"id": "B", "text": "Urine sodium is not useful in hyponatremia", "correct": false},
+            {"id": "C", "text": "High urine sodium always means kidney disease", "correct": false},
+            {"id": "D", "text": "Low urine sodium indicates SIADH", "correct": false}
+          ],
+          "explanation": "Her UNa of 45 is elevated (>30), consistent with SIADH, thiazide effect, or adrenal insufficiency. In SIADH, kidneys excrete sodium normally despite hyponatremia. In hypovolemic hyponatremia from non-renal losses (GI, skin), UNa is typically <20 (sodium conservation).",
+          "sources": ["StatPearls: Hyponatremia", "JASN: Diagnostic Approach"]
+        },
+        {
+          "id": "hypo-phys-4",
+          "stem": "She was started on sertraline 3 weeks ago.",
+          "question": "How do SSRIs cause hyponatremia?",
+          "hint": "SSRIs are a common cause of SIADH.",
+          "options": [
+            {"id": "A", "text": "SSRIs stimulate ADH release (SIADH), causing water retention and dilutional hyponatremia", "correct": true},
+            {"id": "B", "text": "SSRIs cause renal sodium wasting directly", "correct": false},
+            {"id": "C", "text": "SSRIs increase thirst dramatically", "correct": false},
+            {"id": "D", "text": "SSRIs don't affect sodium", "correct": false}
+          ],
+          "explanation": "SSRIs (and SNRIs) stimulate ADH release from the posterior pituitary, causing SIADH. This is common (up to 25% of elderly on SSRIs develop hyponatremia), typically occurs within first few weeks, and is more common in elderly, women, and those on diuretics.",
+          "sources": ["StatPearls: SIADH", "JAMA: SSRI-induced Hyponatremia"]
+        }
+      ]
+    },
+    {
+      "id": "pathophysiology",
+      "title": "Pathophysiology",
+      "icon": "🔬",
+      "color": "#8b5cf6",
+      "questions": [
+        {
+          "id": "hypo-patho-1",
+          "stem": "She has multiple potential causes of hyponatremia.",
+          "question": "Which factors are contributing to her hyponatremia?",
+          "hint": "She has multiple medications and behaviors that can cause hyponatremia.",
+          "options": [
+            {"id": "A", "text": "SSRI-induced SIADH + thiazide diuretic + increased water intake - a 'perfect storm'", "correct": true},
+            {"id": "B", "text": "Hypothyroidism alone", "correct": false},
+            {"id": "C", "text": "Adrenal insufficiency", "correct": false},
+            {"id": "D", "text": "Heart failure", "correct": false}
+          ],
+          "explanation": "She has a 'triple hit': (1) New SSRI causing SIADH; (2) Chronic thiazide (impairs diluting capacity); (3) Increased free water intake ('drinking more water'). Thiazides + SSRIs in elderly are a high-risk combination. Her normal TSH/cortisol rule out endocrine causes.",
+          "whyChain": [
+            {
+              "why": "How do thiazides cause hyponatremia?",
+              "answer": "Thiazides block NaCl reabsorption in the distal convoluted tubule, impairing the kidney's ability to excrete dilute urine. Unlike loop diuretics (which impair concentrating ability), thiazides preserve medullary gradient, allowing ADH to concentrate urine maximally.",
+              "source": "StatPearls: Thiazide-induced Hyponatremia"
+            }
+          ],
+          "sources": ["NEJM: Hyponatremia Review", "StatPearls: SIADH"]
+        },
+        {
+          "id": "hypo-patho-2",
+          "stem": "She is confused and lethargic.",
+          "question": "What causes neurologic symptoms in hyponatremia?",
+          "hint": "Consider the effect of osmolality on brain cells.",
+          "options": [
+            {"id": "A", "text": "Water shifts into brain cells (cerebral edema) due to the osmotic gradient", "correct": true},
+            {"id": "B", "text": "Direct toxic effect of sodium on neurons", "correct": false},
+            {"id": "C", "text": "Cerebral vasoconstriction", "correct": false},
+            {"id": "D", "text": "Sodium is required for action potentials", "correct": false}
+          ],
+          "explanation": "Hypoosmolar serum creates an osmotic gradient driving water into brain cells, causing cerebral edema. The rigid skull limits expansion, increasing intracranial pressure. Symptoms range from mild (fatigue, nausea) to severe (seizures, coma, herniation) depending on severity and acuity.",
+          "whyChain": [
+            {
+              "why": "Why does chronic hyponatremia cause fewer symptoms?",
+              "answer": "Over 48+ hours, brain cells adapt by extruding organic osmolytes (glutamate, taurine, myo-inositol), reducing intracellular osmolality and preventing edema. This adaptation also makes them vulnerable to ODS if sodium is corrected too quickly.",
+              "source": "NEJM: Brain Adaptation to Hyponatremia"
+            }
+          ],
+          "sources": ["NEJM: Hyponatremia Review", "StatPearls: Cerebral Edema"]
+        },
+        {
+          "id": "hypo-patho-3",
+          "stem": "Classification by volume status is essential.",
+          "question": "How do you classify her volume status, and what does it suggest?",
+          "hint": "Examine her physical exam findings carefully.",
+          "options": [
+            {"id": "A", "text": "Euvolemic - no edema, no orthostasis, normal skin turgor; suggests SIADH", "correct": true},
+            {"id": "B", "text": "Hypovolemic - she needs saline", "correct": false},
+            {"id": "C", "text": "Hypervolemic - she has heart failure", "correct": false},
+            {"id": "D", "text": "Volume status cannot be assessed", "correct": false}
+          ],
+          "explanation": "She has no signs of hypovolemia (orthostasis, dry mucous membranes, poor turgor) or hypervolemia (edema, JVD, ascites). Euvolemic hyponatremia + concentrated urine + elevated urine sodium = classic SIADH pattern. Her SSRI and thiazide are the likely culprits.",
+          "sources": ["StatPearls: Hyponatremia", "JASN: Diagnostic Approach"]
+        },
+        {
+          "id": "hypo-patho-4",
+          "stem": "Her potassium is also low at 3.2 mEq/L.",
+          "question": "Why is hypokalemia common with thiazide use?",
+          "hint": "Consider what happens to sodium delivery to the collecting duct.",
+          "options": [
+            {"id": "A", "text": "Increased sodium delivery to collecting duct enhances Na/K exchange, causing potassium loss", "correct": true},
+            {"id": "B", "text": "Thiazides directly secrete potassium", "correct": false},
+            {"id": "C", "text": "Thiazides decrease potassium absorption in gut", "correct": false},
+            {"id": "D", "text": "Hypokalemia is unrelated to thiazides", "correct": false}
+          ],
+          "explanation": "Thiazides block sodium reabsorption in DCT, increasing sodium delivery to the collecting duct. There, the epithelial sodium channel (ENaC) reabsorbs sodium in exchange for potassium secretion (driven by aldosterone). More sodium delivered = more potassium lost.",
+          "sources": ["StatPearls: Thiazide Diuretics", "OpenStax A&P"]
+        }
+      ]
+    },
+    {
+      "id": "pharmacology",
+      "title": "Pharmacology",
+      "icon": "💊",
+      "color": "#10b981",
+      "questions": [
+        {
+          "id": "hypo-pharm-1",
+          "stem": "She is symptomatic with confusion. You need to correct her sodium.",
+          "question": "What is the initial treatment for symptomatic hyponatremia?",
+          "hint": "Symptomatic hyponatremia requires urgent but careful correction.",
+          "options": [
+            {"id": "A", "text": "Hypertonic saline (3%) - 100-150 mL bolus to raise Na by 4-6 mEq/L initially", "correct": true},
+            {"id": "B", "text": "Normal saline rapid infusion", "correct": false},
+            {"id": "C", "text": "Fluid restriction alone", "correct": false},
+            {"id": "D", "text": "Desmopressin to raise sodium", "correct": false}
+          ],
+          "explanation": "Symptomatic hyponatremia requires 3% hypertonic saline. Give 100-150 mL bolus (or 2 mL/kg) to acutely raise sodium by 4-6 mEq/L. This small increase reduces cerebral edema and symptoms. Can repeat once if severe symptoms persist. Then slow down.",
+          "whyChain": [
+            {
+              "why": "Why not use normal saline?",
+              "answer": "In SIADH, normal saline may paradoxically worsen hyponatremia. The kidney excretes the sodium but retains the water (due to ADH). NS is appropriate for hypovolemic hyponatremia but not SIADH.",
+              "source": "NEJM: Hyponatremia Treatment"
+            }
+          ],
+          "sources": ["CJASN: Hyponatremia Treatment Guidelines", "Expert Panel Recommendations"]
+        },
+        {
+          "id": "hypo-pharm-2",
+          "stem": "You're planning the correction rate.",
+          "question": "What is the safe rate of sodium correction to avoid osmotic demyelination?",
+          "hint": "Slower is safer in chronic hyponatremia.",
+          "options": [
+            {"id": "A", "text": "Maximum 8-10 mEq/L in first 24 hours; high-risk patients (her): limit to 6-8 mEq/L", "correct": true},
+            {"id": "B", "text": "Correct fully to 140 mEq/L in 24 hours", "correct": false},
+            {"id": "C", "text": "No limit to correction rate", "correct": false},
+            {"id": "D", "text": "Maximum 2 mEq/L per 24 hours", "correct": false}
+          ],
+          "explanation": "Safe limits: ≤8-10 mEq/L in 24 hours, ≤18 mEq/L in 48 hours. High-risk patients (hypokalemia, alcoholism, malnutrition, liver disease, Na <105) should be limited to 6-8 mEq/L/24hr. She has hypokalemia, making her high-risk for ODS.",
+          "whyChain": [
+            {
+              "why": "What if you overcorrect?",
+              "answer": "If sodium rises too fast, give D5W to relower it. Can also give desmopressin (DDAVP) 1-2 mcg IV to 'clamp' ADH and prevent further free water excretion. Goal is to stay within safe limits.",
+              "source": "CJASN: Managing Overcorrection"
+            }
+          ],
+          "sources": ["CJASN: Hyponatremia Guidelines", "NEJM: ODS Prevention"]
+        },
+        {
+          "id": "hypo-pharm-3",
+          "stem": "You need to address her medications.",
+          "question": "What medication changes should be made?",
+          "hint": "Remove the offending agents.",
+          "options": [
+            {"id": "A", "text": "Stop hydrochlorothiazide and sertraline (or switch to less implicated antidepressant)", "correct": true},
+            {"id": "B", "text": "Continue all medications unchanged", "correct": false},
+            {"id": "C", "text": "Add another diuretic", "correct": false},
+            {"id": "D", "text": "Increase sertraline dose", "correct": false}
+          ],
+          "explanation": "Stop thiazide (major contributor) and address SSRI. Options: stop sertraline, switch to antidepressant less associated with hyponatremia (bupropion, mirtazapine), or continue with close sodium monitoring if depression is severe. Loop diuretics are safer alternatives for hypertension.",
+          "sources": ["StatPearls: Drug-induced Hyponatremia", "APA Depression Guidelines"]
+        },
+        {
+          "id": "hypo-pharm-4",
+          "stem": "For ongoing management of SIADH, you consider fluid restriction.",
+          "question": "What is the typical fluid restriction for SIADH?",
+          "hint": "Intake must be less than output.",
+          "options": [
+            {"id": "A", "text": "Restrict to 800-1000 mL/day (less than insensible losses + urine output)", "correct": true},
+            {"id": "B", "text": "Encourage increased fluid intake", "correct": false},
+            {"id": "C", "text": "2-3 liters per day", "correct": false},
+            {"id": "D", "text": "No fluid restriction needed", "correct": false}
+          ],
+          "explanation": "Fluid restriction is first-line for chronic SIADH. Restrict to 500-1000 mL/day depending on urine output. To be effective, fluid intake must be less than obligate water excretion. Difficult for patients to maintain long-term.",
+          "sources": ["CJASN: SIADH Management", "StatPearls: SIADH"]
+        },
+        {
+          "id": "hypo-pharm-5",
+          "stem": "Fluid restriction alone may not be sufficient.",
+          "question": "What medication can be used for SIADH refractory to fluid restriction?",
+          "hint": "Vasopressin receptor antagonists block ADH action.",
+          "options": [
+            {"id": "A", "text": "Tolvaptan (vasopressin V2 receptor antagonist) - causes aquaresis", "correct": true},
+            {"id": "B", "text": "Furosemide increases sodium", "correct": false},
+            {"id": "C", "text": "Fludrocortisone for all SIADH", "correct": false},
+            {"id": "D", "text": "Desmopressin raises sodium", "correct": false}
+          ],
+          "explanation": "Tolvaptan blocks V2 receptors in collecting duct, causing excretion of free water without sodium (aquaresis). Raises sodium effectively but expensive and must be initiated in hospital with close monitoring due to risk of overcorrection. Also: salt tablets + loop diuretic can help.",
+          "sources": ["NEJM: Tolvaptan for Hyponatremia", "StatPearls: Vaptans"]
+        }
+      ]
+    },
+    {
+      "id": "clinical-reasoning",
+      "title": "Clinical Reasoning",
+      "icon": "🧠",
+      "color": "#3b82f6",
+      "questions": [
+        {
+          "id": "hypo-clin-1",
+          "stem": "You need to systematically approach her hyponatremia.",
+          "question": "What is the first step in the diagnostic algorithm for hyponatremia?",
+          "hint": "Rule out pseudohyponatremia first.",
+          "options": [
+            {"id": "A", "text": "Check serum osmolality to confirm true hypoosmolar hyponatremia", "correct": true},
+            {"id": "B", "text": "Start treatment immediately", "correct": false},
+            {"id": "C", "text": "Check urine sodium first", "correct": false},
+            {"id": "D", "text": "Order head CT", "correct": false}
+          ],
+          "explanation": "Step 1: Check serum osmolality. Low (<275) = true hypotonic hyponatremia. Normal (275-295) = pseudohyponatremia (hyperlipidemia, hyperproteinemia). High (>295) = hypertonic (hyperglycemia, mannitol). Her osm of 248 confirms true hyponatremia.",
+          "sources": ["JASN: Diagnostic Approach to Hyponatremia", "StatPearls: Hyponatremia"]
+        },
+        {
+          "id": "hypo-clin-2",
+          "stem": "You've confirmed hypoosmolar hyponatremia.",
+          "question": "What is the next step after confirming hypoosmolar hyponatremia?",
+          "hint": "Assess the kidney's response to hypoosmolality.",
+          "options": [
+            {"id": "A", "text": "Check urine osmolality to assess if kidneys are appropriately diluting urine", "correct": true},
+            {"id": "B", "text": "Start hypertonic saline immediately", "correct": false},
+            {"id": "C", "text": "Check cortisol only", "correct": false},
+            {"id": "D", "text": "Perform lumbar puncture", "correct": false}
+          ],
+          "explanation": "Step 2: Check urine osmolality. UOsm <100 = appropriate dilution (primary polydipsia, low solute). UOsm >100 = impaired dilution (ADH is active - from hypovolemia, SIADH, or other). Her UOsm of 420 indicates inappropriate ADH activity.",
+          "sources": ["JASN: Diagnostic Approach", "StatPearls: Hyponatremia"]
+        },
+        {
+          "id": "hypo-clin-3",
+          "stem": "Her urine is concentrated despite hypoosmolar serum.",
+          "question": "How do you differentiate causes of impaired water excretion?",
+          "hint": "Volume status and urine sodium are key.",
+          "options": [
+            {"id": "A", "text": "Assess volume status: hypovolemic (appropriate ADH), euvolemic (SIADH), hypervolemic (CHF/cirrhosis)", "correct": true},
+            {"id": "B", "text": "All causes have identical presentation", "correct": false},
+            {"id": "C", "text": "Only urine color matters", "correct": false},
+            {"id": "D", "text": "Serum potassium differentiates causes", "correct": false}
+          ],
+          "explanation": "Step 3: Assess volume status clinically. Hypovolemic (low BP, tachycardia, dry mucous membranes) = appropriate ADH response. Euvolemic = SIADH, hypothyroidism, adrenal insufficiency. Hypervolemic (edema, ascites) = CHF, cirrhosis, nephrotic syndrome. She is euvolemic.",
+          "sources": ["JASN: Diagnostic Approach", "NEJM: Hyponatremia"]
+        },
+        {
+          "id": "hypo-clin-4",
+          "stem": "SIADH is your leading diagnosis.",
+          "question": "What are the diagnostic criteria for SIADH?",
+          "hint": "It's a diagnosis of exclusion with specific criteria.",
+          "options": [
+            {"id": "A", "text": "Hypoosmolar hyponatremia + UOsm >100 + UNa >30 + euvolemic + normal thyroid/adrenal function", "correct": true},
+            {"id": "B", "text": "Any hyponatremia with confusion", "correct": false},
+            {"id": "C", "text": "Low urine osmolality required", "correct": false},
+            {"id": "D", "text": "Must have pulmonary disease", "correct": false}
+          ],
+          "explanation": "SIADH criteria: (1) Serum osm <275; (2) Urine osm >100; (3) Urine Na >30; (4) Euvolemia; (5) Normal thyroid, adrenal, renal function; (6) No diuretic use (though diuretics can unmask/worsen). She meets all criteria. Low uric acid supports SIADH (increased clearance).",
+          "sources": ["CJASN: SIADH Diagnosis", "StatPearls: SIADH"]
+        },
+        {
+          "id": "hypo-clin-5",
+          "stem": "You're monitoring her correction.",
+          "question": "How should sodium be monitored during correction?",
+          "hint": "Frequent monitoring prevents overcorrection.",
+          "options": [
+            {"id": "A", "text": "Check sodium every 2-4 hours initially, then every 4-6 hours as stabilizing", "correct": true},
+            {"id": "B", "text": "Daily sodium checks are sufficient", "correct": false},
+            {"id": "C", "text": "No monitoring needed", "correct": false},
+            {"id": "D", "text": "Only check if symptoms worsen", "correct": false}
+          ],
+          "explanation": "Monitor sodium every 2-4 hours during active correction, especially in first 24 hours. Adjust therapy based on rate of rise. If correcting too fast, give D5W or desmopressin to slow rise. Document 24-hour and 48-hour total correction.",
+          "sources": ["CJASN: Hyponatremia Management", "Expert Panel Guidelines"]
+        }
+      ]
+    },
+    {
+      "id": "complications",
+      "title": "Complications",
+      "icon": "⚠️",
+      "color": "#dc2626",
+      "questions": [
+        {
+          "id": "hypo-comp-1",
+          "stem": "48 hours later, after sodium rose from 118 to 132 mEq/L, she develops dysarthria and dysphagia.",
+          "question": "What complication has occurred?",
+          "hint": "She was corrected too rapidly.",
+          "options": [
+            {"id": "A", "text": "Osmotic demyelination syndrome (ODS) from overcorrection", "correct": true},
+            {"id": "B", "text": "Stroke from hypertonic saline", "correct": false},
+            {"id": "C", "text": "Ongoing hyponatremia", "correct": false},
+            {"id": "D", "text": "Normal recovery", "correct": false}
+          ],
+          "explanation": "She was overcorrected: 14 mEq/L rise in 48 hours exceeds safe limits (should be ≤18 in 48h, but given her risk factors, should have been limited to ~12). ODS presents 2-6 days after correction with dysarthria, dysphagia, quadriparesis, 'locked-in syndrome.' MRI shows pontine lesions.",
+          "whyChain": [
+            {
+              "why": "Can ODS be reversed?",
+              "answer": "Once symptomatic ODS develops, it's often irreversible, though some patients improve over weeks-months. Prevention is key. Some case reports suggest re-lowering sodium may help if caught very early.",
+              "source": "NEJM: ODS Review"
+            }
+          ],
+          "sources": ["StatPearls: Osmotic Demyelination", "NEJM: ODS"]
+        },
+        {
+          "id": "hypo-comp-2",
+          "stem": "Severe acute hyponatremia can cause death.",
+          "question": "What is the mechanism of death in severe acute hyponatremia?",
+          "hint": "Consider what happens in the rigid skull.",
+          "options": [
+            {"id": "A", "text": "Cerebral edema causing brain herniation", "correct": true},
+            {"id": "B", "text": "Cardiac arrhythmias", "correct": false},
+            {"id": "C", "text": "Renal failure", "correct": false},
+            {"id": "D", "text": "Respiratory muscle paralysis", "correct": false}
+          ],
+          "explanation": "Severe acute hyponatremia causes rapid brain swelling. The rigid skull limits expansion, causing increased ICP and potentially transtentorial or tonsillar herniation. Young women and children are at highest risk (possibly hormonal effects on Na/K-ATPase). This is why acute symptomatic hyponatremia is a medical emergency.",
+          "sources": ["NEJM: Hyponatremic Encephalopathy", "StatPearls: Cerebral Edema"]
+        },
+        {
+          "id": "hypo-comp-3",
+          "stem": "She also has hypokalemia at 3.2 mEq/L.",
+          "question": "Why is correcting hypokalemia important in hyponatremia management?",
+          "hint": "Potassium affects sodium levels.",
+          "options": [
+            {"id": "A", "text": "Potassium replacement raises serum sodium (K is exchangeable with Na) and increases ODS risk if not accounted for", "correct": true},
+            {"id": "B", "text": "Hypokalemia is unrelated to sodium correction", "correct": false},
+            {"id": "C", "text": "Potassium lowers sodium further", "correct": false},
+            {"id": "D", "text": "Only correct potassium after sodium normalizes", "correct": false}
+          ],
+          "explanation": "Potassium is an 'exchangeable' cation - giving KCl raises serum sodium (K enters cells, Na exits). Must factor K replacement into sodium correction rate. Her hypokalemia also increases ODS risk. Correct K, but account for its effect on Na rise.",
+          "sources": ["CJASN: Hyponatremia and Potassium", "NEJM: ODS Risk Factors"]
+        }
+      ]
+    },
+    {
+      "id": "synthesis",
+      "title": "Synthesis",
+      "icon": "🔗",
+      "color": "#6366f1",
+      "questions": [
+        {
+          "id": "hypo-syn-1",
+          "stem": "Integrating all clinical information.",
+          "question": "Which statement BEST synthesizes this patient's presentation?",
+          "hint": "Connect the multiple contributing factors.",
+          "options": [
+            {"id": "A", "text": "Multifactorial hyponatremia from SSRI-induced SIADH + thiazide + increased water intake in high-risk elderly patient", "correct": true},
+            {"id": "B", "text": "Simple dehydration requiring IV fluids", "correct": false},
+            {"id": "C", "text": "Heart failure causing hypervolemic hyponatremia", "correct": false},
+            {"id": "D", "text": "Adrenal insufficiency", "correct": false}
+          ],
+          "explanation": "This synthesis captures: multiple contributors (SSRI started 3 weeks ago causing SIADH, chronic thiazide impairing dilution, behavioral polydipsia), vulnerable host (elderly, female, recent widowhood/depression), and appropriate diagnostic findings (euvolemic, concentrated urine, high urine Na, normal cortisol/TSH).",
+          "sources": ["NEJM: Hyponatremia Review", "Clinical Synthesis"]
+        },
+        {
+          "id": "hypo-syn-2",
+          "stem": "Planning comprehensive management.",
+          "question": "What is the comprehensive management plan?",
+          "hint": "Address acute treatment and prevention of recurrence.",
+          "options": [
+            {"id": "A", "text": "3% saline for symptoms → stop thiazide/SSRI → fluid restrict → monitor sodium q2-4h → prevent overcorrection", "correct": true},
+            {"id": "B", "text": "Normal saline bolus and discharge", "correct": false},
+            {"id": "C", "text": "Fluid restriction alone", "correct": false},
+            {"id": "D", "text": "Tolvaptan immediately without monitoring", "correct": false}
+          ],
+          "explanation": "Comprehensive plan: (1) 3% saline 100-150mL for symptomatic hyponatremia; (2) Stop thiazide, address SSRI (stop or switch); (3) Fluid restriction 800-1000mL/day; (4) Monitor Na q2-4h, limit correction to 6-8 mEq/L/24h given her risk; (5) Correct hypokalemia; (6) Have D5W and desmopressin available for overcorrection.",
+          "sources": ["CJASN: Hyponatremia Guidelines", "Expert Panel Recommendations"]
+        }
+      ]
+    }
+  ]
+}
