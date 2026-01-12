@@ -4,11 +4,10 @@
   "title": "Pulmonary Embolism",
   "subtitle": "From Virchow's Triad to Risk Stratification",
   "category": "Pulmonary/Cardiovascular",
-  "icon": "🫁",
+  "icon": "\ud83e\udec1",
   "difficulty": "intermediate",
   "estimatedTime": "40-55 min",
   "totalQuestions": 30,
-  
   "vignette": {
     "title": "The Case",
     "setting": "Emergency Department, 3:45 PM",
@@ -20,13 +19,39 @@
       "extremities": "Right calf 2.5 cm larger than left with mild tenderness"
     },
     "diagnostics": {
-      "vitals": { "BP": "118/78", "HR": "112", "RR": "24", "SpO2": "91% RA", "Temp": "99.1°F" },
-      "ecg": { "description": "Sinus tach 112. S1Q3T3. Right axis. Incomplete RBBB", "interpretation": "Right heart strain" },
+      "vitals": {
+        "BP": "118/78",
+        "HR": "112",
+        "RR": "24",
+        "SpO2": "91% RA",
+        "Temp": "99.1\u00b0F"
+      },
+      "ecg": {
+        "description": "Sinus tach 112. S1Q3T3. Right axis. Incomplete RBBB",
+        "interpretation": "Right heart strain"
+      },
       "labs": {
-        "dDimer": { "value": "4,850 ng/mL", "reference": "<500", "flag": "CRITICAL" },
-        "troponinI": { "value": "0.18 ng/mL", "reference": "<0.04", "flag": "HIGH" },
-        "bnp": { "value": "485 pg/mL", "reference": "<100", "flag": "HIGH" },
-        "abg": { "pH": "7.48", "pCO2": "28", "pO2": "62", "interpretation": "Resp alkalosis, hypoxemia" }
+        "dDimer": {
+          "value": "4,850 ng/mL",
+          "reference": "<500",
+          "flag": "CRITICAL"
+        },
+        "troponinI": {
+          "value": "0.18 ng/mL",
+          "reference": "<0.04",
+          "flag": "HIGH"
+        },
+        "bnp": {
+          "value": "485 pg/mL",
+          "reference": "<100",
+          "flag": "HIGH"
+        },
+        "abg": {
+          "pH": "7.48",
+          "pCO2": "28",
+          "pO2": "62",
+          "interpretation": "Resp alkalosis, hypoxemia"
+        }
       },
       "imaging": {
         "ctpa": "Filling defects in R main PA. RV:LV ratio 1.3",
@@ -34,48 +59,97 @@
       }
     }
   },
-
   "layers": [
     {
       "id": "anatomy",
       "title": "Anatomy",
-      "icon": "🫁",
+      "icon": "\ud83e\udec1",
       "color": "#ef4444",
       "questions": [
         {
           "id": "pe-anat-1",
           "stem": "CT-PA shows filling defects in the right main pulmonary artery.",
           "question": "The pulmonary arteries carry deoxygenated blood from which cardiac chamber?",
-          "hint": "Trace the path: systemic veins → right atrium → ? → pulmonary arteries → lungs",
+          "hint": "Trace the path: systemic veins \u2192 right atrium \u2192 ? \u2192 pulmonary arteries \u2192 lungs",
           "options": [
-            { "id": "A", "text": "Right ventricle", "correct": true },
-            { "id": "B", "text": "Left ventricle", "correct": false },
-            { "id": "C", "text": "Right atrium", "correct": false },
-            { "id": "D", "text": "Left atrium", "correct": false }
+            {
+              "id": "A",
+              "text": "Right ventricle",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Left ventricle",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Right atrium",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Left atrium",
+              "correct": false
+            }
           ],
           "explanation": "The pulmonary arteries arise from the pulmonary trunk, which exits the right ventricle. When PE obstructs these arteries, it creates backpressure on the RV.",
           "whyChain": [
-            { "why": "Why does PE cause RV strain?", "answer": "Clot obstruction increases pulmonary vascular resistance. The RV must pump against higher afterload, causing dilation (RV:LV >1.0).", "source": "ESC PE Guidelines 2019" },
-            { "why": "Why is the RV vulnerable to acute pressure overload?", "answer": "The RV is thin-walled (3-5mm vs LV 10-15mm), designed for low-pressure work. It cannot acutely adapt to high afterload.", "source": "OpenStax A&P 2e" }
+            {
+              "why": "Why does PE cause RV strain?",
+              "answer": "Clot obstruction increases pulmonary vascular resistance. The RV must pump against higher afterload, causing dilation (RV:LV >1.0).",
+              "source": "ESC PE Guidelines 2019"
+            },
+            {
+              "why": "Why is the RV vulnerable to acute pressure overload?",
+              "answer": "The RV is thin-walled (3-5mm vs LV 10-15mm), designed for low-pressure work. It cannot acutely adapt to high afterload.",
+              "source": "OpenStax A&P 2e"
+            }
           ],
-          "sources": ["OpenStax A&P 2e, Chapter 19.1", "ESC PE Guidelines 2019"]
+          "sources": [
+            "OpenStax A&P 2e, Chapter 19.1",
+            "ESC PE Guidelines 2019"
+          ]
         },
         {
           "id": "pe-anat-2",
           "stem": "Doppler reveals DVT in the right popliteal vein extending to the femoral vein.",
           "question": "Which venous pathway allows a DVT from the leg to reach the pulmonary arteries?",
-          "hint": "Trace: leg veins → femoral → iliac → ? → right heart → pulmonary arteries",
+          "hint": "Trace: leg veins \u2192 femoral \u2192 iliac \u2192 ? \u2192 right heart \u2192 pulmonary arteries",
           "options": [
-            { "id": "A", "text": "Inferior vena cava → right atrium → right ventricle → pulmonary trunk", "correct": true },
-            { "id": "B", "text": "Superior vena cava → right atrium → right ventricle", "correct": false },
-            { "id": "C", "text": "Portal vein → liver → hepatic vein → right atrium", "correct": false },
-            { "id": "D", "text": "Azygos vein → superior vena cava → left atrium", "correct": false }
+            {
+              "id": "A",
+              "text": "Inferior vena cava \u2192 right atrium \u2192 right ventricle \u2192 pulmonary trunk",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Superior vena cava \u2192 right atrium \u2192 right ventricle",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Portal vein \u2192 liver \u2192 hepatic vein \u2192 right atrium",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Azygos vein \u2192 superior vena cava \u2192 left atrium",
+              "correct": false
+            }
           ],
-          "explanation": "Lower extremity DVTs travel via: femoral → external iliac → common iliac → IVC → right atrium → RV → pulmonary trunk → pulmonary arteries.",
+          "explanation": "Lower extremity DVTs travel via: femoral \u2192 external iliac \u2192 common iliac \u2192 IVC \u2192 right atrium \u2192 RV \u2192 pulmonary trunk \u2192 pulmonary arteries.",
           "whyChain": [
-            { "why": "Why do most PEs originate from proximal leg DVTs?", "answer": "Proximal DVTs (popliteal and above) are larger and more likely to embolize. About 50% of untreated proximal DVTs lead to PE.", "source": "StatPearls: PE" }
+            {
+              "why": "Why do most PEs originate from proximal leg DVTs?",
+              "answer": "Proximal DVTs (popliteal and above) are larger and more likely to embolize. About 50% of untreated proximal DVTs lead to PE.",
+              "source": "StatPearls: PE"
+            }
           ],
-          "sources": ["OpenStax A&P 2e, Chapter 20.5", "StatPearls: Pulmonary Embolism"]
+          "sources": [
+            "OpenStax A&P 2e, Chapter 20.5",
+            "StatPearls: Pulmonary Embolism"
+          ]
         },
         {
           "id": "pe-anat-3",
@@ -83,16 +157,38 @@
           "question": "The pulmonic valve is located between which structures?",
           "hint": "The pulmonic valve guards the RV outflow tract.",
           "options": [
-            { "id": "A", "text": "Right ventricle and pulmonary trunk", "correct": true },
-            { "id": "B", "text": "Left ventricle and aorta", "correct": false },
-            { "id": "C", "text": "Right atrium and right ventricle", "correct": false },
-            { "id": "D", "text": "Pulmonary veins and left atrium", "correct": false }
+            {
+              "id": "A",
+              "text": "Right ventricle and pulmonary trunk",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Left ventricle and aorta",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Right atrium and right ventricle",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Pulmonary veins and left atrium",
+              "correct": false
+            }
           ],
           "explanation": "The pulmonic valve sits at the RV outflow tract-pulmonary trunk junction. When pulmonary pressures rise, the valve closes with greater force, creating a loud P2.",
           "whyChain": [
-            { "why": "Why does increased pulmonary pressure cause a louder P2?", "answer": "Higher pressure means the valve leaflets close against greater pressure, producing a more forceful closure sound.", "source": "OpenStax A&P 2e" }
+            {
+              "why": "Why does increased pulmonary pressure cause a louder P2?",
+              "answer": "Higher pressure means the valve leaflets close against greater pressure, producing a more forceful closure sound.",
+              "source": "OpenStax A&P 2e"
+            }
           ],
-          "sources": ["OpenStax A&P 2e, Chapter 19.1"]
+          "sources": [
+            "OpenStax A&P 2e, Chapter 19.1"
+          ]
         },
         {
           "id": "pe-anat-4",
@@ -100,23 +196,46 @@
           "question": "The deep veins of the calf include all EXCEPT:",
           "hint": "Deep veins run alongside arteries. The great saphenous is superficial.",
           "options": [
-            { "id": "A", "text": "Great saphenous vein", "correct": true },
-            { "id": "B", "text": "Posterior tibial veins", "correct": false },
-            { "id": "C", "text": "Peroneal veins", "correct": false },
-            { "id": "D", "text": "Anterior tibial veins", "correct": false }
+            {
+              "id": "A",
+              "text": "Great saphenous vein",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Posterior tibial veins",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Peroneal veins",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Anterior tibial veins",
+              "correct": false
+            }
           ],
           "explanation": "The great saphenous vein is SUPERFICIAL (medial leg). Deep calf veins include anterior tibial, posterior tibial, and peroneal veins. DVT typically occurs in deep veins.",
           "whyChain": [
-            { "why": "Why is the deep vs superficial distinction important?", "answer": "Superficial thrombophlebitis rarely causes PE because superficial veins drain into deep veins at specific junctions. DVT has direct access to central circulation.", "source": "StatPearls: DVT" }
+            {
+              "why": "Why is the deep vs superficial distinction important?",
+              "answer": "Superficial thrombophlebitis rarely causes PE because superficial veins drain into deep veins at specific junctions. DVT has direct access to central circulation.",
+              "source": "StatPearls: DVT"
+            }
           ],
-          "sources": ["OpenStax A&P 2e, Chapter 20.5", "StatPearls: DVT"]
+          "sources": [
+            "OpenStax A&P 2e, Chapter 20.5",
+            "StatPearls: DVT"
+          ]
         }
       ]
     },
     {
       "id": "physiology",
       "title": "Physiology",
-      "icon": "⚡",
+      "icon": "\u26a1",
       "color": "#f59e0b",
       "questions": [
         {
@@ -125,16 +244,39 @@
           "question": "What is the PRIMARY mechanism causing hypoxemia in acute PE?",
           "hint": "Think about blood flow to unventilated lung areas (or vice versa).",
           "options": [
-            { "id": "A", "text": "Ventilation-perfusion (V/Q) mismatch", "correct": true },
-            { "id": "B", "text": "Hypoventilation", "correct": false },
-            { "id": "C", "text": "Diffusion impairment", "correct": false },
-            { "id": "D", "text": "Decreased inspired O2", "correct": false }
+            {
+              "id": "A",
+              "text": "Ventilation-perfusion (V/Q) mismatch",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Hypoventilation",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Diffusion impairment",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Decreased inspired O2",
+              "correct": false
+            }
           ],
-          "explanation": "PE causes V/Q mismatch: (1) Dead space—occluded vessels have ventilation but no perfusion. (2) Shunt—blood diverts to non-occluded areas, overwhelming those regions.",
+          "explanation": "PE causes V/Q mismatch: (1) Dead space\u2014occluded vessels have ventilation but no perfusion. (2) Shunt\u2014blood diverts to non-occluded areas, overwhelming those regions.",
           "whyChain": [
-            { "why": "Why is pCO2 LOW (28) rather than high?", "answer": "Hypoxemia triggers hyperventilation. CO2 diffuses 20x more easily than O2, so tachypnea effectively blows off CO2 (respiratory alkalosis).", "source": "OpenStax A&P 2e" }
+            {
+              "why": "Why is pCO2 LOW (28) rather than high?",
+              "answer": "Hypoxemia triggers hyperventilation. CO2 diffuses 20x more easily than O2, so tachypnea effectively blows off CO2 (respiratory alkalosis).",
+              "source": "OpenStax A&P 2e"
+            }
           ],
-          "sources": ["OpenStax A&P 2e, Chapter 22.4-22.5", "StatPearls: PE"]
+          "sources": [
+            "OpenStax A&P 2e, Chapter 22.4-22.5",
+            "StatPearls: PE"
+          ]
         },
         {
           "id": "pe-phys-2",
@@ -142,16 +284,39 @@
           "question": "What is the PRIMARY stimulus driving her tachycardia?",
           "hint": "When O2 drops, what receptors detect this?",
           "options": [
-            { "id": "A", "text": "Peripheral chemoreceptor activation by hypoxemia", "correct": true },
-            { "id": "B", "text": "Central chemoreceptor response to elevated CO2", "correct": false },
-            { "id": "C", "text": "Direct cardiac irritation from the clot", "correct": false },
-            { "id": "D", "text": "Fever-induced metabolic demand", "correct": false }
+            {
+              "id": "A",
+              "text": "Peripheral chemoreceptor activation by hypoxemia",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Central chemoreceptor response to elevated CO2",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Direct cardiac irritation from the clot",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Fever-induced metabolic demand",
+              "correct": false
+            }
           ],
-          "explanation": "Hypoxemia (PaO2 62) stimulates peripheral chemoreceptors in carotid/aortic bodies, triggering sympathetic activation → tachycardia and tachypnea.",
+          "explanation": "Hypoxemia (PaO2 62) stimulates peripheral chemoreceptors in carotid/aortic bodies, triggering sympathetic activation \u2192 tachycardia and tachypnea.",
           "whyChain": [
-            { "why": "Is her tachycardia helpful or harmful?", "answer": "Initially helpful (increases CO to maintain O2 delivery), but sustained tachycardia increases myocardial O2 demand while the strained RV has compromised perfusion.", "source": "ESC PE Guidelines 2019" }
+            {
+              "why": "Is her tachycardia helpful or harmful?",
+              "answer": "Initially helpful (increases CO to maintain O2 delivery), but sustained tachycardia increases myocardial O2 demand while the strained RV has compromised perfusion.",
+              "source": "ESC PE Guidelines 2019"
+            }
           ],
-          "sources": ["OpenStax A&P 2e, Chapter 22.3", "ESC PE Guidelines 2019"]
+          "sources": [
+            "OpenStax A&P 2e, Chapter 22.3",
+            "ESC PE Guidelines 2019"
+          ]
         },
         {
           "id": "pe-phys-3",
@@ -159,16 +324,39 @@
           "question": "What physiologic principle explains why increased PVR causes RV failure?",
           "hint": "What happens to a thin-walled chamber if afterload suddenly increases?",
           "options": [
-            { "id": "A", "text": "The thin-walled RV cannot generate sufficient pressure against increased afterload", "correct": true },
-            { "id": "B", "text": "The tricuspid valve becomes incompetent", "correct": false },
-            { "id": "C", "text": "Pulmonary venous congestion backs up into the right heart", "correct": false },
-            { "id": "D", "text": "Coronary spasm reduces RV blood supply", "correct": false }
+            {
+              "id": "A",
+              "text": "The thin-walled RV cannot generate sufficient pressure against increased afterload",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "The tricuspid valve becomes incompetent",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Pulmonary venous congestion backs up into the right heart",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Coronary spasm reduces RV blood supply",
+              "correct": false
+            }
           ],
           "explanation": "The RV is designed for low-pressure work. When PE increases PVR, the thin-walled RV cannot generate enough pressure. It dilates, fails, and backs up into systemic venous circulation (elevated JVP).",
           "whyChain": [
-            { "why": "How does RV failure lead to systemic hypotension?", "answer": "RV dilation causes: (1) decreased RV output → decreased LV filling, (2) septal shift compresses LV, (3) decreased coronary perfusion. All reduce systemic CO.", "source": "AHA 2011" }
+            {
+              "why": "How does RV failure lead to systemic hypotension?",
+              "answer": "RV dilation causes: (1) decreased RV output \u2192 decreased LV filling, (2) septal shift compresses LV, (3) decreased coronary perfusion. All reduce systemic CO.",
+              "source": "AHA 2011"
+            }
           ],
-          "sources": ["OpenStax A&P 2e, Chapter 19.3", "ESC PE Guidelines 2019"]
+          "sources": [
+            "OpenStax A&P 2e, Chapter 19.3",
+            "ESC PE Guidelines 2019"
+          ]
         },
         {
           "id": "pe-phys-4",
@@ -176,23 +364,46 @@
           "question": "An elevated A-a gradient indicates:",
           "hint": "A-a gradient measures the alveolar-arterial O2 difference.",
           "options": [
-            { "id": "A", "text": "Hypoxemia due to V/Q mismatch, shunt, or diffusion impairment", "correct": true },
-            { "id": "B", "text": "Hypoxemia due to hypoventilation alone", "correct": false },
-            { "id": "C", "text": "Hypoxemia due to decreased inspired oxygen", "correct": false },
-            { "id": "D", "text": "Hypoxemia due to anemia", "correct": false }
+            {
+              "id": "A",
+              "text": "Hypoxemia due to V/Q mismatch, shunt, or diffusion impairment",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Hypoxemia due to hypoventilation alone",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Hypoxemia due to decreased inspired oxygen",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Hypoxemia due to anemia",
+              "correct": false
+            }
           ],
           "explanation": "An elevated A-a gradient means the lungs aren't efficiently transferring O2 from alveoli to blood. This occurs with V/Q mismatch, shunt, or diffusion problems. Pure hypoventilation has normal A-a gradient.",
           "whyChain": [
-            { "why": "Why does hypoventilation have normal A-a gradient?", "answer": "In hypoventilation, both alveolar AND arterial O2 drop proportionally. The gradient stays normal because lung gas exchange is intact.", "source": "OpenStax A&P 2e" }
+            {
+              "why": "Why does hypoventilation have normal A-a gradient?",
+              "answer": "In hypoventilation, both alveolar AND arterial O2 drop proportionally. The gradient stays normal because lung gas exchange is intact.",
+              "source": "OpenStax A&P 2e"
+            }
           ],
-          "sources": ["OpenStax A&P 2e, Chapter 22.4", "StatPearls: Hypoxia"]
+          "sources": [
+            "OpenStax A&P 2e, Chapter 22.4",
+            "StatPearls: Hypoxia"
+          ]
         }
       ]
     },
     {
       "id": "pathophysiology",
       "title": "Pathophysiology",
-      "icon": "🔬",
+      "icon": "\ud83d\udd2c",
       "color": "#8b5cf6",
       "questions": [
         {
@@ -201,16 +412,39 @@
           "question": "Which Virchow's triad component do OCPs primarily affect?",
           "hint": "Estrogen affects hepatic production of clotting factors.",
           "options": [
-            { "id": "A", "text": "Hypercoagulability", "correct": true },
-            { "id": "B", "text": "Venous stasis", "correct": false },
-            { "id": "C", "text": "Endothelial injury", "correct": false },
-            { "id": "D", "text": "All three equally", "correct": false }
+            {
+              "id": "A",
+              "text": "Hypercoagulability",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Venous stasis",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Endothelial injury",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "All three equally",
+              "correct": false
+            }
           ],
           "explanation": "Estrogen increases hepatic synthesis of procoagulant factors (fibrinogen, II, VII, VIII, X) while decreasing anticoagulants (antithrombin, protein S). OCP use increases VTE risk 3-4 fold.",
           "whyChain": [
-            { "why": "How do her other risk factors contribute?", "answer": "Flight = stasis; Obesity = stasis + inflammation + increased estrogen; PCOS = metabolic syndrome. Multiple factors are multiplicative, not additive.", "source": "ESC PE Guidelines 2019" }
+            {
+              "why": "How do her other risk factors contribute?",
+              "answer": "Flight = stasis; Obesity = stasis + inflammation + increased estrogen; PCOS = metabolic syndrome. Multiple factors are multiplicative, not additive.",
+              "source": "ESC PE Guidelines 2019"
+            }
           ],
-          "sources": ["StatPearls: PE", "ESC PE Guidelines 2019"]
+          "sources": [
+            "StatPearls: PE",
+            "ESC PE Guidelines 2019"
+          ]
         },
         {
           "id": "pe-patho-2",
@@ -218,16 +452,39 @@
           "question": "Prolonged immobility primarily contributes to VTE through:",
           "hint": "When sitting for long periods, what happens to leg blood flow?",
           "options": [
-            { "id": "A", "text": "Venous stasis in lower extremities", "correct": true },
-            { "id": "B", "text": "Direct endothelial damage from pressure", "correct": false },
-            { "id": "C", "text": "Tissue factor activation from muscle damage", "correct": false },
-            { "id": "D", "text": "Dehydration-induced hemoconcentration", "correct": false }
+            {
+              "id": "A",
+              "text": "Venous stasis in lower extremities",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Direct endothelial damage from pressure",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Tissue factor activation from muscle damage",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Dehydration-induced hemoconcentration",
+              "correct": false
+            }
           ],
           "explanation": "The calf muscles act as a 'venous pump.' Prolonged sitting eliminates this, causing blood to pool in leg veins. Stasis allows activated clotting factors to accumulate locally.",
           "whyChain": [
-            { "why": "Why do clots start in venous valve pockets?", "answer": "Valve pockets are natural stasis areas where blood eddies form. This creates a hypoxic microenvironment where endothelial cells become prothrombotic.", "source": "PMC4644109" }
+            {
+              "why": "Why do clots start in venous valve pockets?",
+              "answer": "Valve pockets are natural stasis areas where blood eddies form. This creates a hypoxic microenvironment where endothelial cells become prothrombotic.",
+              "source": "PMC4644109"
+            }
           ],
-          "sources": ["PMC4644109 - Venous Thrombosis", "StatPearls: DVT"]
+          "sources": [
+            "PMC4644109 - Venous Thrombosis",
+            "StatPearls: DVT"
+          ]
         },
         {
           "id": "pe-patho-3",
@@ -235,16 +492,39 @@
           "question": "D-dimer is a degradation product of:",
           "hint": "D-dimer comes from fibrin that has been cross-linked.",
           "options": [
-            { "id": "A", "text": "Cross-linked fibrin", "correct": true },
-            { "id": "B", "text": "Fibrinogen", "correct": false },
-            { "id": "C", "text": "Prothrombin", "correct": false },
-            { "id": "D", "text": "Platelets", "correct": false }
+            {
+              "id": "A",
+              "text": "Cross-linked fibrin",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Fibrinogen",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Prothrombin",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Platelets",
+              "correct": false
+            }
           ],
           "explanation": "D-dimer forms when plasmin cleaves cross-linked fibrin. It indicates both clot formation AND fibrinolysis. High sensitivity (~95%) but low specificity for VTE.",
           "whyChain": [
-            { "why": "Why is D-dimer used to RULE OUT rather than rule in?", "answer": "High sensitivity (95-97%) means a negative test reliably excludes PE in low-risk patients. Low specificity (40-50%) means positive results need imaging confirmation.", "source": "ESC PE Guidelines 2019" }
+            {
+              "why": "Why is D-dimer used to RULE OUT rather than rule in?",
+              "answer": "High sensitivity (95-97%) means a negative test reliably excludes PE in low-risk patients. Low specificity (40-50%) means positive results need imaging confirmation.",
+              "source": "ESC PE Guidelines 2019"
+            }
           ],
-          "sources": ["ESC PE Guidelines 2019", "StatPearls: D-Dimer"]
+          "sources": [
+            "ESC PE Guidelines 2019",
+            "StatPearls: D-Dimer"
+          ]
         },
         {
           "id": "pe-patho-4",
@@ -252,16 +532,39 @@
           "question": "Which inherited thrombophilia is MOST common in Caucasians?",
           "hint": "This mutation affects factor V, making it resistant to protein C.",
           "options": [
-            { "id": "A", "text": "Factor V Leiden mutation", "correct": true },
-            { "id": "B", "text": "Protein C deficiency", "correct": false },
-            { "id": "C", "text": "Antithrombin deficiency", "correct": false },
-            { "id": "D", "text": "Prothrombin G20210A", "correct": false }
+            {
+              "id": "A",
+              "text": "Factor V Leiden mutation",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Protein C deficiency",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Antithrombin deficiency",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Prothrombin G20210A",
+              "correct": false
+            }
           ],
           "explanation": "Factor V Leiden is present in 5% of Caucasians. It causes activated protein C resistance. Heterozygotes have 5-10x increased VTE risk.",
           "whyChain": [
-            { "why": "Should she be tested for thrombophilia?", "answer": "Acute testing is unreliable. Testing may be considered 3+ months after treatment. However, results rarely change management.", "source": "ESC PE Guidelines 2019" }
+            {
+              "why": "Should she be tested for thrombophilia?",
+              "answer": "Acute testing is unreliable. Testing may be considered 3+ months after treatment. However, results rarely change management.",
+              "source": "ESC PE Guidelines 2019"
+            }
           ],
-          "sources": ["StatPearls: Factor V Leiden", "ESC PE Guidelines 2019"]
+          "sources": [
+            "StatPearls: Factor V Leiden",
+            "ESC PE Guidelines 2019"
+          ]
         },
         {
           "id": "pe-patho-5",
@@ -269,23 +572,46 @@
           "question": "What is the mechanism of troponin elevation in acute PE?",
           "hint": "Troponin indicates myocardial injury. What stress is the RV under?",
           "options": [
-            { "id": "A", "text": "RV strain and microinfarction from increased wall stress", "correct": true },
-            { "id": "B", "text": "Left coronary artery thrombosis", "correct": false },
-            { "id": "C", "text": "Systemic hypoxemia causing global hypoxia", "correct": false },
-            { "id": "D", "text": "Direct toxic effect of thrombus", "correct": false }
+            {
+              "id": "A",
+              "text": "RV strain and microinfarction from increased wall stress",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Left coronary artery thrombosis",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Systemic hypoxemia causing global hypoxia",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Direct toxic effect of thrombus",
+              "correct": false
+            }
           ],
           "explanation": "PE increases RV afterload. The dilated RV has increased wall tension (Laplace) and O2 demand, while coronary perfusion may be compromised. This supply-demand mismatch causes RV microinfarction.",
           "whyChain": [
-            { "why": "What does troponin elevation mean for prognosis?", "answer": "Elevated troponin predicts worse outcomes. Combined with RV dilation, it identifies 'intermediate-high risk' patients who may need more aggressive therapy.", "source": "ESC PE Guidelines 2019" }
+            {
+              "why": "What does troponin elevation mean for prognosis?",
+              "answer": "Elevated troponin predicts worse outcomes. Combined with RV dilation, it identifies 'intermediate-high risk' patients who may need more aggressive therapy.",
+              "source": "ESC PE Guidelines 2019"
+            }
           ],
-          "sources": ["ESC PE Guidelines 2019", "Fourth Universal Definition of MI"]
+          "sources": [
+            "ESC PE Guidelines 2019",
+            "Fourth Universal Definition of MI"
+          ]
         }
       ]
     },
     {
       "id": "pharmacology",
       "title": "Pharmacology",
-      "icon": "💊",
+      "icon": "\ud83d\udc8a",
       "color": "#10b981",
       "questions": [
         {
@@ -294,16 +620,39 @@
           "question": "Which anticoagulant should be initiated FIRST?",
           "hint": "Think about onset of action. Which class works immediately?",
           "options": [
-            { "id": "A", "text": "Parenteral anticoagulant (heparin or LMWH)", "correct": true },
-            { "id": "B", "text": "Warfarin alone", "correct": false },
-            { "id": "C", "text": "Aspirin", "correct": false },
-            { "id": "D", "text": "DOAC without lead-in", "correct": false }
+            {
+              "id": "A",
+              "text": "Parenteral anticoagulant (heparin or LMWH)",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Warfarin alone",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Aspirin",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "DOAC without lead-in",
+              "correct": false
+            }
           ],
           "explanation": "Parenteral anticoagulation provides immediate effect. Warfarin takes 5-7 days and initially creates a prothrombotic state. DOACs require lead-in dosing.",
           "whyChain": [
-            { "why": "When would you choose UFH over LMWH?", "answer": "UFH is preferred when: (1) thrombolysis may be needed (short half-life, reversible), (2) renal failure, (3) extreme obesity, (4) hemodynamic instability.", "source": "ESC PE Guidelines 2019" }
+            {
+              "why": "When would you choose UFH over LMWH?",
+              "answer": "UFH is preferred when: (1) thrombolysis may be needed (short half-life, reversible), (2) renal failure, (3) extreme obesity, (4) hemodynamic instability.",
+              "source": "ESC PE Guidelines 2019"
+            }
           ],
-          "sources": ["ESC PE Guidelines 2019", "StatPearls: Anticoagulation"]
+          "sources": [
+            "ESC PE Guidelines 2019",
+            "StatPearls: Anticoagulation"
+          ]
         },
         {
           "id": "pe-pharm-2",
@@ -311,16 +660,39 @@
           "question": "UFH exerts its anticoagulant effect primarily by:",
           "hint": "Heparin works through an intermediary natural anticoagulant.",
           "options": [
-            { "id": "A", "text": "Potentiating antithrombin III activity", "correct": true },
-            { "id": "B", "text": "Directly inhibiting thrombin's active site", "correct": false },
-            { "id": "C", "text": "Blocking vitamin K-dependent factor synthesis", "correct": false },
-            { "id": "D", "text": "Activating protein C", "correct": false }
+            {
+              "id": "A",
+              "text": "Potentiating antithrombin III activity",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Directly inhibiting thrombin's active site",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Blocking vitamin K-dependent factor synthesis",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Activating protein C",
+              "correct": false
+            }
           ],
           "explanation": "Heparin binds to antithrombin III, increasing AT's ability to inhibit thrombin and factor Xa by 1000-fold.",
           "whyChain": [
-            { "why": "Why monitor UFH with aPTT but not LMWH?", "answer": "UFH has unpredictable pharmacokinetics due to variable protein binding. LMWH has more predictable absorption and response.", "source": "StatPearls: Heparin" }
+            {
+              "why": "Why monitor UFH with aPTT but not LMWH?",
+              "answer": "UFH has unpredictable pharmacokinetics due to variable protein binding. LMWH has more predictable absorption and response.",
+              "source": "StatPearls: Heparin"
+            }
           ],
-          "sources": ["StatPearls: Heparin", "OpenStax A&P 2e"]
+          "sources": [
+            "StatPearls: Heparin",
+            "OpenStax A&P 2e"
+          ]
         },
         {
           "id": "pe-pharm-3",
@@ -328,16 +700,39 @@
           "question": "Systemic thrombolysis (alteplase) works by:",
           "hint": "The body has a natural clot-dissolving system.",
           "options": [
-            { "id": "A", "text": "Converting plasminogen to plasmin, which degrades fibrin", "correct": true },
-            { "id": "B", "text": "Directly cleaving fibrin cross-links", "correct": false },
-            { "id": "C", "text": "Inhibiting further thrombin generation", "correct": false },
-            { "id": "D", "text": "Activating protein C", "correct": false }
+            {
+              "id": "A",
+              "text": "Converting plasminogen to plasmin, which degrades fibrin",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Directly cleaving fibrin cross-links",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Inhibiting further thrombin generation",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Activating protein C",
+              "correct": false
+            }
           ],
           "explanation": "Alteplase (tPA) converts plasminogen to plasmin, which degrades fibrin. Pharmacologic doses achieve faster lysis than endogenous fibrinolysis.",
           "whyChain": [
-            { "why": "What are the indications for thrombolysis in PE?", "answer": "Primary: Massive PE with hemodynamic instability. Controversial: Submassive PE with RV dysfunction—consider if deteriorating.", "source": "ESC PE Guidelines 2019" }
+            {
+              "why": "What are the indications for thrombolysis in PE?",
+              "answer": "Primary: Massive PE with hemodynamic instability. Controversial: Submassive PE with RV dysfunction\u2014consider if deteriorating.",
+              "source": "ESC PE Guidelines 2019"
+            }
           ],
-          "sources": ["ESC PE Guidelines 2019", "AHA 2011"]
+          "sources": [
+            "ESC PE Guidelines 2019",
+            "AHA 2011"
+          ]
         },
         {
           "id": "pe-pharm-4",
@@ -345,23 +740,45 @@
           "question": "For this provoked PE (flight + OCPs), recommended anticoagulation duration is:",
           "hint": "Provoked VTEs have different recurrence rates than unprovoked.",
           "options": [
-            { "id": "A", "text": "3 months", "correct": true },
-            { "id": "B", "text": "1 month", "correct": false },
-            { "id": "C", "text": "6 months", "correct": false },
-            { "id": "D", "text": "Lifelong", "correct": false }
+            {
+              "id": "A",
+              "text": "3 months",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "1 month",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "6 months",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Lifelong",
+              "correct": false
+            }
           ],
           "explanation": "For PE provoked by major transient risk factors, 3 months is standard. After removing provoking factors (discontinue OCPs), recurrence risk is ~3%/year.",
           "whyChain": [
-            { "why": "Should she continue OCPs after treatment?", "answer": "No! Estrogen-containing contraception is contraindicated after VTE. She should use progestin-only methods, copper IUD, or barrier methods.", "source": "ESC PE Guidelines 2019" }
+            {
+              "why": "Should she continue OCPs after treatment?",
+              "answer": "No! Estrogen-containing contraception is contraindicated after VTE. She should use progestin-only methods, copper IUD, or barrier methods.",
+              "source": "ESC PE Guidelines 2019"
+            }
           ],
-          "sources": ["ESC PE Guidelines 2019"]
+          "sources": [
+            "ESC PE Guidelines 2019"
+          ]
         }
       ]
     },
     {
       "id": "clinical-reasoning",
       "title": "Clinical Reasoning",
-      "icon": "🧠",
+      "icon": "\ud83e\udde0",
       "color": "#3b82f6",
       "questions": [
         {
@@ -370,16 +787,39 @@
           "question": "Based on Wells criteria, how should this patient be classified?",
           "hint": "Wells includes: DVT signs, HR, immobilization, previous VTE, hemoptysis, cancer, clinical gestalt.",
           "options": [
-            { "id": "A", "text": "PE Likely (Wells >4): DVT signs (3) + HR>100 (1.5) + immobilization (1.5) = 6 pts", "correct": true },
-            { "id": "B", "text": "PE Unlikely: Only tachycardia qualifies", "correct": false },
-            { "id": "C", "text": "Wells criteria cannot be applied", "correct": false },
-            { "id": "D", "text": "Intermediate probability requiring D-dimer first", "correct": false }
+            {
+              "id": "A",
+              "text": "PE Likely (Wells >4): DVT signs (3) + HR>100 (1.5) + immobilization (1.5) = 6 pts",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "PE Unlikely: Only tachycardia qualifies",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Wells criteria cannot be applied",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Intermediate probability requiring D-dimer first",
+              "correct": false
+            }
           ],
           "explanation": "Wells score = 6 points (>4 = 'PE likely'). This warrants CT-PA without D-dimer. A negative D-dimer in high-probability patients does NOT rule out PE.",
           "whyChain": [
-            { "why": "Why not get D-dimer on everyone?", "answer": "In high pre-test probability, negative D-dimer still leaves ~15-20% PE chance. D-dimer only rules out PE in LOW probability patients.", "source": "ESC PE Guidelines 2019" }
+            {
+              "why": "Why not get D-dimer on everyone?",
+              "answer": "In high pre-test probability, negative D-dimer still leaves ~15-20% PE chance. D-dimer only rules out PE in LOW probability patients.",
+              "source": "ESC PE Guidelines 2019"
+            }
           ],
-          "sources": ["ESC PE Guidelines 2019", "StatPearls: Wells Criteria"]
+          "sources": [
+            "ESC PE Guidelines 2019",
+            "StatPearls: Wells Criteria"
+          ]
         },
         {
           "id": "pe-clin-2",
@@ -387,16 +827,38 @@
           "question": "How should she be risk-stratified according to ESC guidelines?",
           "hint": "ESC stratification depends on hemodynamics, RV dysfunction, AND biomarkers.",
           "options": [
-            { "id": "A", "text": "Intermediate-high risk (stable + RV dysfunction + elevated biomarkers)", "correct": true },
-            { "id": "B", "text": "High risk (massive PE)", "correct": false },
-            { "id": "C", "text": "Intermediate-low risk", "correct": false },
-            { "id": "D", "text": "Low risk", "correct": false }
+            {
+              "id": "A",
+              "text": "Intermediate-high risk (stable + RV dysfunction + elevated biomarkers)",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "High risk (massive PE)",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Intermediate-low risk",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Low risk",
+              "correct": false
+            }
           ],
           "explanation": "ESC: High-risk = hemodynamic instability. Intermediate-high = stable + RV dysfunction + elevated biomarkers (BOTH). She has BOTH, making her intermediate-high risk.",
           "whyChain": [
-            { "why": "Why does intermediate-high risk matter?", "answer": "~5% will deteriorate. These patients need ICU monitoring with rescue thrombolysis ready.", "source": "ESC PE Guidelines 2019" }
+            {
+              "why": "Why does intermediate-high risk matter?",
+              "answer": "~5% will deteriorate. These patients need ICU monitoring with rescue thrombolysis ready.",
+              "source": "ESC PE Guidelines 2019"
+            }
           ],
-          "sources": ["ESC PE Guidelines 2019"]
+          "sources": [
+            "ESC PE Guidelines 2019"
+          ]
         },
         {
           "id": "pe-clin-3",
@@ -404,16 +866,39 @@
           "question": "Which finding BEST distinguishes PE from acute coronary syndrome?",
           "hint": "Both cause chest pain, tachycardia, and elevated troponin. What's different about the pain?",
           "options": [
-            { "id": "A", "text": "Pleuritic chest pain (worse with inspiration) favors PE", "correct": true },
-            { "id": "B", "text": "Elevated troponin rules out PE", "correct": false },
-            { "id": "C", "text": "Tachycardia confirms ACS", "correct": false },
-            { "id": "D", "text": "Normal CXR excludes PE", "correct": false }
+            {
+              "id": "A",
+              "text": "Pleuritic chest pain (worse with inspiration) favors PE",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Elevated troponin rules out PE",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Tachycardia confirms ACS",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Normal CXR excludes PE",
+              "correct": false
+            }
           ],
-          "explanation": "Pleuritic pain (sharp, worse with breathing) suggests pleural involvement—classic for PE. ACS causes pressure pain unrelated to respiration.",
+          "explanation": "Pleuritic pain (sharp, worse with breathing) suggests pleural involvement\u2014classic for PE. ACS causes pressure pain unrelated to respiration.",
           "whyChain": [
-            { "why": "Why is PE pain pleuritic?", "answer": "Peripheral emboli cause pulmonary infarction near the pleural surface. Inflamed visceral pleura irritates parietal pleura, causing sharp, respiratory-variant pain.", "source": "StatPearls: PE" }
+            {
+              "why": "Why is PE pain pleuritic?",
+              "answer": "Peripheral emboli cause pulmonary infarction near the pleural surface. Inflamed visceral pleura irritates parietal pleura, causing sharp, respiratory-variant pain.",
+              "source": "StatPearls: PE"
+            }
           ],
-          "sources": ["StatPearls: PE", "ESC PE Guidelines 2019"]
+          "sources": [
+            "StatPearls: PE",
+            "ESC PE Guidelines 2019"
+          ]
         },
         {
           "id": "pe-clin-4",
@@ -421,23 +906,46 @@
           "question": "What is the sensitivity of S1Q3T3 for PE?",
           "hint": "This classic finding is often taught but think about how often it appears.",
           "options": [
-            { "id": "A", "text": "Low (10-20%); most PEs have non-specific findings or sinus tach only", "correct": true },
-            { "id": "B", "text": "High (>80%); absence rules out PE", "correct": false },
-            { "id": "C", "text": "Moderate (50-60%)", "correct": false },
-            { "id": "D", "text": "100% sensitive but not specific", "correct": false }
+            {
+              "id": "A",
+              "text": "Low (10-20%); most PEs have non-specific findings or sinus tach only",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "High (>80%); absence rules out PE",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Moderate (50-60%)",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "100% sensitive but not specific",
+              "correct": false
+            }
           ],
           "explanation": "S1Q3T3 is present in only 10-20% of PE. The most common ECG finding is sinus tachycardia. A normal ECG does NOT rule out PE.",
           "whyChain": [
-            { "why": "What does S1Q3T3 represent anatomically?", "answer": "Acute RV dilation rotates the heart clockwise. S1 = increased rightward forces in lead I. Q3T3 = rightward axis shift in lead III.", "source": "StatPearls: ECG" }
+            {
+              "why": "What does S1Q3T3 represent anatomically?",
+              "answer": "Acute RV dilation rotates the heart clockwise. S1 = increased rightward forces in lead I. Q3T3 = rightward axis shift in lead III.",
+              "source": "StatPearls: ECG"
+            }
           ],
-          "sources": ["StatPearls: PE", "ESC PE Guidelines 2019"]
+          "sources": [
+            "StatPearls: PE",
+            "ESC PE Guidelines 2019"
+          ]
         }
       ]
     },
     {
       "id": "complications",
       "title": "Complications",
-      "icon": "⚠️",
+      "icon": "\u26a0\ufe0f",
       "color": "#dc2626",
       "questions": [
         {
@@ -446,16 +954,39 @@
           "question": "What is the MOST likely cause of deterioration?",
           "hint": "She was intermediate-high risk. What happens as RV function declines?",
           "options": [
-            { "id": "A", "text": "Progressive RV failure with cardiogenic shock", "correct": true },
-            { "id": "B", "text": "Heparin-induced thrombocytopenia", "correct": false },
-            { "id": "C", "text": "Internal bleeding from anticoagulation", "correct": false },
-            { "id": "D", "text": "Sepsis from pulmonary infarction", "correct": false }
+            {
+              "id": "A",
+              "text": "Progressive RV failure with cardiogenic shock",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Heparin-induced thrombocytopenia",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Internal bleeding from anticoagulation",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Sepsis from pulmonary infarction",
+              "correct": false
+            }
           ],
-          "explanation": "Intermediate-high risk patients can deteriorate. The RV fails progressively: decreased output → LV underfilling → hypotension → coronary hypoperfusion → worsening RV ischemia ('death spiral').",
+          "explanation": "Intermediate-high risk patients can deteriorate. The RV fails progressively: decreased output \u2192 LV underfilling \u2192 hypotension \u2192 coronary hypoperfusion \u2192 worsening RV ischemia ('death spiral').",
           "whyChain": [
-            { "why": "What should be done now?", "answer": "She now meets criteria for high-risk (massive) PE. Primary reperfusion therapy (thrombolysis, catheter-directed therapy, or surgical embolectomy) is indicated.", "source": "ESC PE Guidelines 2019" }
+            {
+              "why": "What should be done now?",
+              "answer": "She now meets criteria for high-risk (massive) PE. Primary reperfusion therapy (thrombolysis, catheter-directed therapy, or surgical embolectomy) is indicated.",
+              "source": "ESC PE Guidelines 2019"
+            }
           ],
-          "sources": ["ESC PE Guidelines 2019", "AHA 2011"]
+          "sources": [
+            "ESC PE Guidelines 2019",
+            "AHA 2011"
+          ]
         },
         {
           "id": "pe-comp-2",
@@ -463,16 +994,39 @@
           "question": "What is chronic thromboembolic pulmonary hypertension (CTEPH)?",
           "hint": "Some clots don't fully resolve. What if they become organized fibrous tissue?",
           "options": [
-            { "id": "A", "text": "Persistent pulmonary hypertension from organized thrombi that didn't resolve", "correct": true },
-            { "id": "B", "text": "Recurrent acute PE episodes", "correct": false },
-            { "id": "C", "text": "Heart failure from LV dysfunction post-PE", "correct": false },
-            { "id": "D", "text": "Chronic hypoxemia requiring oxygen", "correct": false }
+            {
+              "id": "A",
+              "text": "Persistent pulmonary hypertension from organized thrombi that didn't resolve",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Recurrent acute PE episodes",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Heart failure from LV dysfunction post-PE",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Chronic hypoxemia requiring oxygen",
+              "correct": false
+            }
           ],
           "explanation": "CTEPH occurs in 2-4% of PE survivors when thrombi organize into fibrous obstructions rather than dissolving. Treatment includes pulmonary endarterectomy.",
           "whyChain": [
-            { "why": "How do you screen for CTEPH?", "answer": "Follow up at 3-6 months. Persistent dyspnea should prompt echo and V/Q scan (more sensitive than CT for chronic disease).", "source": "ESC PE Guidelines 2019" }
+            {
+              "why": "How do you screen for CTEPH?",
+              "answer": "Follow up at 3-6 months. Persistent dyspnea should prompt echo and V/Q scan (more sensitive than CT for chronic disease).",
+              "source": "ESC PE Guidelines 2019"
+            }
           ],
-          "sources": ["ESC PE Guidelines 2019", "StatPearls: CTEPH"]
+          "sources": [
+            "ESC PE Guidelines 2019",
+            "StatPearls: CTEPH"
+          ]
         },
         {
           "id": "pe-comp-3",
@@ -480,23 +1034,45 @@
           "question": "What is the 4T score used to assess?",
           "hint": "Thrombocytopenia + Timing + Thrombosis + oTher causes.",
           "options": [
-            { "id": "A", "text": "Probability of heparin-induced thrombocytopenia (HIT)", "correct": true },
-            { "id": "B", "text": "Severity of bleeding risk", "correct": false },
-            { "id": "C", "text": "Need for platelet transfusion", "correct": false },
-            { "id": "D", "text": "Duration of anticoagulation needed", "correct": false }
+            {
+              "id": "A",
+              "text": "Probability of heparin-induced thrombocytopenia (HIT)",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Severity of bleeding risk",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Need for platelet transfusion",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Duration of anticoagulation needed",
+              "correct": false
+            }
           ],
           "explanation": "The 4T score assesses HIT probability. If intermediate/high score, stop heparin and switch to non-heparin anticoagulant.",
           "whyChain": [
-            { "why": "Why is HIT prothrombotic despite low platelets?", "answer": "HIT antibodies ACTIVATE platelets, causing aggregation and thrombin generation. Platelets are consumed in clots. It's a hypercoagulable state, not bleeding.", "source": "StatPearls: HIT" }
+            {
+              "why": "Why is HIT prothrombotic despite low platelets?",
+              "answer": "HIT antibodies ACTIVATE platelets, causing aggregation and thrombin generation. Platelets are consumed in clots. It's a hypercoagulable state, not bleeding.",
+              "source": "StatPearls: HIT"
+            }
           ],
-          "sources": ["StatPearls: HIT"]
+          "sources": [
+            "StatPearls: HIT"
+          ]
         }
       ]
     },
     {
       "id": "synthesis",
       "title": "Synthesis",
-      "icon": "🔗",
+      "icon": "\ud83d\udd17",
       "color": "#6366f1",
       "questions": [
         {
@@ -505,16 +1081,38 @@
           "question": "Which combination was MOST critical for intermediate-high risk classification?",
           "hint": "What separates intermediate-high from intermediate-low in ESC framework?",
           "options": [
-            { "id": "A", "text": "RV:LV ratio >1 + elevated troponin + elevated BNP", "correct": true },
-            { "id": "B", "text": "Pleuritic pain + tachycardia + hypoxemia", "correct": false },
-            { "id": "C", "text": "Positive D-dimer + DVT + family history", "correct": false },
-            { "id": "D", "text": "S1Q3T3 on ECG + Westermark sign on CXR", "correct": false }
+            {
+              "id": "A",
+              "text": "RV:LV ratio >1 + elevated troponin + elevated BNP",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Pleuritic pain + tachycardia + hypoxemia",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Positive D-dimer + DVT + family history",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "S1Q3T3 on ECG + Westermark sign on CXR",
+              "correct": false
+            }
           ],
           "explanation": "ESC intermediate-high requires: (1) Hemodynamically stable, (2) RV dysfunction on imaging (RV:LV >1), AND (3) Elevated biomarkers. This identifies patients at ~5% deterioration risk.",
           "whyChain": [
-            { "why": "What's the key lesson about risk stratification?", "answer": "Diagnosis is step 1. Risk stratification determines management: High = immediate reperfusion; Intermediate-high = ICU + rescue ready; Intermediate-low = ward; Low = consider outpatient.", "source": "ESC PE Guidelines 2019" }
+            {
+              "why": "What's the key lesson about risk stratification?",
+              "answer": "Diagnosis is step 1. Risk stratification determines management: High = immediate reperfusion; Intermediate-high = ICU + rescue ready; Intermediate-low = ward; Low = consider outpatient.",
+              "source": "ESC PE Guidelines 2019"
+            }
           ],
-          "sources": ["ESC PE Guidelines 2019"]
+          "sources": [
+            "ESC PE Guidelines 2019"
+          ]
         },
         {
           "id": "pe-syn-2",
@@ -522,16 +1120,39 @@
           "question": "Which cascade BEST explains the connection between her risk factors and current status?",
           "hint": "Map each risk factor to Virchow's triad, then trace to RV strain.",
           "options": [
-            { "id": "A", "text": "Stasis (flight) + hypercoagulability (OCPs) → DVT → embolization → increased PVR → RV strain", "correct": true },
-            { "id": "B", "text": "Endothelial injury (OCPs) → platelet activation → DVT → hypoxemia → tachycardia", "correct": false },
-            { "id": "C", "text": "Hypercoagulability (flight) + stasis (OCPs) → spontaneous pulmonary thrombosis", "correct": false },
-            { "id": "D", "text": "Stasis (obesity) → local hypoxia → tissue factor release → left heart failure", "correct": false }
+            {
+              "id": "A",
+              "text": "Stasis (flight) + hypercoagulability (OCPs) \u2192 DVT \u2192 embolization \u2192 increased PVR \u2192 RV strain",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Endothelial injury (OCPs) \u2192 platelet activation \u2192 DVT \u2192 hypoxemia \u2192 tachycardia",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Hypercoagulability (flight) + stasis (OCPs) \u2192 spontaneous pulmonary thrombosis",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Stasis (obesity) \u2192 local hypoxia \u2192 tissue factor release \u2192 left heart failure",
+              "correct": false
+            }
           ],
-          "explanation": "Correct cascade: Immobility = stasis, OCPs = hypercoagulability → DVT → embolization through IVC → mechanical obstruction increases PVR → thin-walled RV struggles → dilation and strain.",
+          "explanation": "Correct cascade: Immobility = stasis, OCPs = hypercoagulability \u2192 DVT \u2192 embolization through IVC \u2192 mechanical obstruction increases PVR \u2192 thin-walled RV struggles \u2192 dilation and strain.",
           "whyChain": [
-            { "why": "What's the most important intervention to prevent recurrence?", "answer": "Stop estrogen-containing contraception. With VTE history, estrogen is absolutely contraindicated. This removes a major hypercoagulable risk factor.", "source": "ESC PE Guidelines 2019" }
+            {
+              "why": "What's the most important intervention to prevent recurrence?",
+              "answer": "Stop estrogen-containing contraception. With VTE history, estrogen is absolutely contraindicated. This removes a major hypercoagulable risk factor.",
+              "source": "ESC PE Guidelines 2019"
+            }
           ],
-          "sources": ["ESC PE Guidelines 2019", "PMC4644109"]
+          "sources": [
+            "ESC PE Guidelines 2019",
+            "PMC4644109"
+          ]
         },
         {
           "id": "pe-syn-3",
@@ -539,16 +1160,38 @@
           "question": "Which statement about her prognosis is MOST accurate?",
           "hint": "Consider provoked vs unprovoked VTE recurrence rates.",
           "options": [
-            { "id": "A", "text": "After 3 months of anticoagulation with OCP discontinuation, annual recurrence risk is ~3%", "correct": true },
-            { "id": "B", "text": "She requires lifelong anticoagulation given PE severity", "correct": false },
-            { "id": "C", "text": "Recurrence risk is the same whether or not she stops OCPs", "correct": false },
-            { "id": "D", "text": "Once anticoagulation stops, she has no increased risk vs general population", "correct": false }
+            {
+              "id": "A",
+              "text": "After 3 months of anticoagulation with OCP discontinuation, annual recurrence risk is ~3%",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "She requires lifelong anticoagulation given PE severity",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Recurrence risk is the same whether or not she stops OCPs",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Once anticoagulation stops, she has no increased risk vs general population",
+              "correct": false
+            }
           ],
-          "explanation": "Her PE was provoked by transient factors. After 3 months of anticoagulation and removing provoking factors, annual recurrence is ~3%—lower than unprovoked (~8%) but still elevated.",
+          "explanation": "Her PE was provoked by transient factors. After 3 months of anticoagulation and removing provoking factors, annual recurrence is ~3%\u2014lower than unprovoked (~8%) but still elevated.",
           "whyChain": [
-            { "why": "What follow-up does she need?", "answer": "3-6 month follow-up for CTEPH screening if dyspnea persists, contraception counseling, consider thrombophilia testing, lifestyle modifications.", "source": "ESC PE Guidelines 2019" }
+            {
+              "why": "What follow-up does she need?",
+              "answer": "3-6 month follow-up for CTEPH screening if dyspnea persists, contraception counseling, consider thrombophilia testing, lifestyle modifications.",
+              "source": "ESC PE Guidelines 2019"
+            }
           ],
-          "sources": ["ESC PE Guidelines 2019"]
+          "sources": [
+            "ESC PE Guidelines 2019"
+          ]
         }
       ]
     }
