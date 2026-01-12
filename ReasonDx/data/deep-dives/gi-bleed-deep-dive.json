@@ -1,0 +1,673 @@
+{
+  "id": "gi-bleed-deep-dive",
+  "title": "Upper GI Bleeding",
+  "version": "1.0",
+  "totalQuestions": 30,
+  "estimatedTime": "45 minutes",
+  "difficulty": "Intermediate",
+  "targetAudience": "Medical Students, Residents",
+  "objectives": [
+    "Distinguish upper from lower GI bleeding clinically",
+    "Risk stratify patients using validated scoring systems",
+    "Understand the pathophysiology of common UGIB causes",
+    "Apply appropriate resuscitation and transfusion strategies",
+    "Select pharmacologic therapies for variceal and non-variceal bleeding",
+    "Recognize indications for urgent endoscopy and intervention"
+  ],
+  "vignette": {
+    "text": "A 58-year-old man presents to the emergency department with 'vomiting blood.' He reports three episodes of hematemesis over the past 6 hours, describing the vomit as 'bright red with clots.' He also notes black, tarry stools for the past 2 days. He feels lightheaded when standing and nearly fainted this morning.\n\nPast Medical History: Chronic back pain (takes ibuprofen 800mg 2-3 times daily for years), Osteoarthritis, Hypertension, History of H. pylori infection treated 5 years ago (compliance uncertain)\n\nMedications: Ibuprofen 800mg PRN (takes frequently), Lisinopril 10mg daily, Aspirin 81mg daily (started 6 months ago)\n\nSocial History: Drinks 2-3 beers most nights, 30 pack-year smoking history (quit 5 years ago).\n\nAllergies: None",
+    "physicalExam": {
+      "general": "Alert but anxious, pale, diaphoretic",
+      "vitals": {
+        "BP": "92/58 mmHg supine, 78/50 sitting",
+        "HR": "118 bpm supine, 132 sitting",
+        "RR": "22/min",
+        "Temp": "98.6°F",
+        "SpO2": "98% RA"
+      },
+      "cardiovascular": "Tachycardic, regular, weak pulses, flat JVP",
+      "abdomen": "Soft, mild epigastric tenderness, no hepatosplenomegaly, no ascites",
+      "rectal": "Black tarry stool, guaiac positive",
+      "skin": "Pale, cool extremities, no spider angiomata, no jaundice"
+    },
+    "diagnostics": {
+      "labs": {
+        "Hemoglobin": {"value": "7.2 g/dL", "reference": "13.5-17.5", "flag": "CRITICAL"},
+        "Hematocrit": {"value": "22%", "reference": "41-53%", "flag": "CRITICAL"},
+        "MCV": {"value": "78 fL", "reference": "80-100", "flag": "LOW"},
+        "Platelets": {"value": "285,000/μL", "reference": "150-400K", "flag": "NORMAL"},
+        "INR": {"value": "1.1", "reference": "0.9-1.1", "flag": "NORMAL"},
+        "BUN": {"value": "58 mg/dL", "reference": "7-20", "flag": "HIGH"},
+        "Creatinine": {"value": "1.2 mg/dL", "reference": "0.7-1.3", "flag": "NORMAL"},
+        "Lactate": {"value": "3.8 mmol/L", "reference": "<2.0", "flag": "HIGH"},
+        "Albumin": {"value": "3.8 g/dL", "reference": "3.5-5.0", "flag": "NORMAL"},
+        "AST": {"value": "32 U/L", "reference": "10-40", "flag": "NORMAL"},
+        "ALT": {"value": "28 U/L", "reference": "7-56", "flag": "NORMAL"}
+      }
+    }
+  },
+  "layers": [
+    {
+      "id": "anatomy",
+      "title": "Anatomy",
+      "icon": "🫀",
+      "color": "#ef4444",
+      "questions": [
+        {
+          "id": "ugib-anat-1",
+          "stem": "Upper GI bleeding is defined as bleeding proximal to a specific anatomical landmark.",
+          "question": "What anatomical structure defines the boundary between upper and lower GI bleeding?",
+          "hint": "This is where the duodenum ends and jejunum begins.",
+          "options": [
+            {"id": "A", "text": "Ligament of Treitz", "correct": true},
+            {"id": "B", "text": "Pyloric sphincter", "correct": false},
+            {"id": "C", "text": "Ileocecal valve", "correct": false},
+            {"id": "D", "text": "Gastroesophageal junction", "correct": false}
+          ],
+          "explanation": "The ligament of Treitz marks the duodenojejunal junction. Bleeding proximal to this point is upper GI bleeding; distal is lower GI bleeding. This patient's hematemesis confirms the source is proximal to the Treitz.",
+          "whyChain": [
+            {
+              "why": "Why does this distinction matter clinically?",
+              "answer": "Upper GI bleeds are evaluated by EGD, while lower GI bleeds require colonoscopy. The etiology, management, and prognosis differ significantly.",
+              "source": "StatPearls: Upper GI Bleeding"
+            }
+          ],
+          "sources": ["OpenStax A&P 2e, Chapter 23", "StatPearls: Upper GI Bleeding"]
+        },
+        {
+          "id": "ugib-anat-2",
+          "stem": "Peptic ulcers can erode into blood vessels depending on their location.",
+          "question": "A posterior duodenal ulcer is at highest risk of eroding into which artery?",
+          "hint": "Consider what major vessel runs behind the first part of the duodenum.",
+          "options": [
+            {"id": "A", "text": "Gastroduodenal artery", "correct": true},
+            {"id": "B", "text": "Left gastric artery", "correct": false},
+            {"id": "C", "text": "Splenic artery", "correct": false},
+            {"id": "D", "text": "Superior mesenteric artery", "correct": false}
+          ],
+          "explanation": "The gastroduodenal artery runs posterior to the first part of the duodenum. Posterior duodenal ulcers can erode into the GDA, causing massive hemorrhage requiring emergent intervention.",
+          "whyChain": [
+            {
+              "why": "What about posterior gastric ulcers?",
+              "answer": "Posterior gastric ulcers can erode into the splenic artery, which runs along the pancreas behind the stomach. This can also cause massive hemorrhage.",
+              "source": "StatPearls: Peptic Ulcer Disease"
+            }
+          ],
+          "sources": ["OpenStax A&P 2e, Chapter 23", "StatPearls: Peptic Ulcer Disease"]
+        },
+        {
+          "id": "ugib-anat-3",
+          "stem": "EGD will visualize the upper GI tract.",
+          "question": "What are the four anatomical regions of the stomach examined during EGD?",
+          "hint": "From proximal to distal: where food enters to where it exits.",
+          "options": [
+            {"id": "A", "text": "Cardia, fundus, body, antrum/pylorus", "correct": true},
+            {"id": "B", "text": "Esophagus, cardia, fundus, body", "correct": false},
+            {"id": "C", "text": "Upper, middle, lower, pyloric", "correct": false},
+            {"id": "D", "text": "Fundus, body, duodenum, jejunum", "correct": false}
+          ],
+          "explanation": "The stomach regions are: cardia (around GE junction), fundus (dome), body (central), and antrum leading to pylorus. NSAID-induced ulcers commonly occur in the antrum.",
+          "whyChain": [
+            {
+              "why": "Where are NSAID ulcers typically located?",
+              "answer": "NSAIDs cause ulcers throughout stomach and duodenum, but gastric antral ulcers are particularly common due to NSAID concentration in that area.",
+              "source": "StatPearls: NSAID Gastropathy"
+            }
+          ],
+          "sources": ["OpenStax A&P 2e, Chapter 23", "StatPearls: Peptic Ulcer Disease"]
+        }
+      ]
+    },
+    {
+      "id": "physiology",
+      "title": "Physiology",
+      "icon": "⚡",
+      "color": "#f59e0b",
+      "questions": [
+        {
+          "id": "ugib-phys-1",
+          "stem": "The patient's BUN is 58 with creatinine 1.2, giving a BUN:Cr ratio of ~48:1.",
+          "question": "Why is the BUN:Cr ratio elevated in upper GI bleeding?",
+          "hint": "Consider what happens when blood is digested in the GI tract.",
+          "options": [
+            {"id": "A", "text": "Digested blood protein is absorbed and converted to urea by the liver", "correct": true},
+            {"id": "B", "text": "GI bleeding causes acute kidney injury", "correct": false},
+            {"id": "C", "text": "Creatinine is lost through the GI tract", "correct": false},
+            {"id": "D", "text": "Blood transfusions increase BUN", "correct": false}
+          ],
+          "explanation": "Blood in the GI tract is a high-protein meal. Hemoglobin is digested, absorbed, and metabolized by the liver to urea. BUN:Cr >36 suggests upper GI source.",
+          "whyChain": [
+            {
+              "why": "Can this distinguish UGIB from LGIB?",
+              "answer": "Yes. Elevated BUN:Cr ratio (>30) has ~90% specificity for UGIB. In lower GI bleeding, blood isn't digested and absorbed proximally.",
+              "source": "AJG UGIB Guidelines"
+            }
+          ],
+          "sources": ["StatPearls: Upper GI Bleeding", "AJG Guidelines"]
+        },
+        {
+          "id": "ugib-phys-2",
+          "stem": "The patient has orthostatic hypotension with HR increase from 118 to 132.",
+          "question": "Orthostatic changes indicate approximately what percentage of blood volume loss?",
+          "hint": "Consider compensation mechanisms at different hemorrhage classes.",
+          "options": [
+            {"id": "A", "text": "15-30% (Class II hemorrhage)", "correct": true},
+            {"id": "B", "text": "<15% (Class I hemorrhage)", "correct": false},
+            {"id": "C", "text": "30-40% (Class III hemorrhage)", "correct": false},
+            {"id": "D", "text": ">40% (Class IV hemorrhage)", "correct": false}
+          ],
+          "explanation": "Orthostatic hypotension (SBP drop ≥20) and tachycardia suggest 15-30% volume loss. At <15%, compensation maintains BP. At >30%, patients are hypotensive even supine.",
+          "whyChain": [
+            {
+              "why": "Why doesn't hemoglobin reflect acute loss accurately?",
+              "answer": "Hemoglobin doesn't drop immediately because whole blood is lost proportionally. It takes 24-72 hours for fluid shifts to dilute remaining RBCs.",
+              "source": "StatPearls: Hemorrhagic Shock"
+            }
+          ],
+          "sources": ["ATLS Guidelines", "StatPearls: Hemorrhagic Shock"]
+        },
+        {
+          "id": "ugib-phys-3",
+          "stem": "NSAIDs disrupt gastric mucosal defense mechanisms.",
+          "question": "How do NSAIDs cause gastric ulceration?",
+          "hint": "Consider the role of prostaglandins in mucosal protection.",
+          "options": [
+            {"id": "A", "text": "Block COX-1, reducing prostaglandin-mediated mucus/bicarbonate secretion", "correct": true},
+            {"id": "B", "text": "Directly increase acid secretion by parietal cells", "correct": false},
+            {"id": "C", "text": "Kill protective bacteria in stomach", "correct": false},
+            {"id": "D", "text": "Increase pepsinogen activation", "correct": false}
+          ],
+          "explanation": "Prostaglandins maintain gastric defense by stimulating mucus/bicarbonate secretion and mucosal blood flow. NSAIDs inhibit COX-1, blocking these protective effects.",
+          "whyChain": [
+            {
+              "why": "Why is aspirin particularly harmful?",
+              "answer": "Aspirin irreversibly inhibits COX (vs reversible with other NSAIDs), and the combination of aspirin + another NSAID dramatically increases ulcer risk.",
+              "source": "StatPearls: NSAID Gastropathy"
+            }
+          ],
+          "sources": ["StatPearls: NSAID Gastropathy", "OpenStax A&P 2e"]
+        },
+        {
+          "id": "ugib-phys-4",
+          "stem": "His MCV is 78 fL (low), suggesting microcytic anemia.",
+          "question": "What does microcytic anemia in this context suggest about the chronicity of bleeding?",
+          "hint": "Iron stores take time to deplete.",
+          "options": [
+            {"id": "A", "text": "Chronic ongoing blood loss with iron deficiency", "correct": true},
+            {"id": "B", "text": "Purely acute hemorrhage from today", "correct": false},
+            {"id": "C", "text": "Hemolytic anemia", "correct": false},
+            {"id": "D", "text": "Vitamin B12 deficiency", "correct": false}
+          ],
+          "explanation": "Microcytic anemia (low MCV) indicates iron deficiency from chronic blood loss. Acute hemorrhage causes normocytic anemia. His low MCV suggests he's been bleeding slowly for weeks/months before this acute presentation.",
+          "whyChain": [
+            {
+              "why": "How much blood loss causes iron deficiency?",
+              "answer": "Each mL of blood contains ~0.5mg iron. Losing 10mL/day (occult GI bleeding) depletes iron stores over months. His chronic NSAID use likely caused slow ongoing losses.",
+              "source": "StatPearls: Iron Deficiency Anemia"
+            }
+          ],
+          "sources": ["StatPearls: Iron Deficiency Anemia", "AJG Guidelines"]
+        }
+      ]
+    },
+    {
+      "id": "pathophysiology",
+      "title": "Pathophysiology",
+      "icon": "🔬",
+      "color": "#8b5cf6",
+      "questions": [
+        {
+          "id": "ugib-patho-1",
+          "stem": "This patient has multiple risk factors for peptic ulcer disease.",
+          "question": "Which combination of factors MOST increases his ulcer and bleeding risk?",
+          "hint": "Consider synergistic effects of his medications.",
+          "options": [
+            {"id": "A", "text": "Chronic NSAID use + aspirin + possible persistent H. pylori", "correct": true},
+            {"id": "B", "text": "Hypertension + smoking history", "correct": false},
+            {"id": "C", "text": "Alcohol use + lisinopril", "correct": false},
+            {"id": "D", "text": "Age + male sex", "correct": false}
+          ],
+          "explanation": "He has the 'triple threat': chronic NSAIDs + aspirin (both impair mucosal defense and platelet function) + possible H. pylori (treated 5 years ago with uncertain compliance). These factors synergistically increase ulcer risk 10-fold or more.",
+          "whyChain": [
+            {
+              "why": "Why does H. pylori increase ulcer risk?",
+              "answer": "H. pylori causes chronic gastritis, disrupts the mucus layer, and increases gastrin secretion. It's present in 70-90% of duodenal ulcers and 60-70% of gastric ulcers.",
+              "source": "StatPearls: H. pylori Infection"
+            },
+            {
+              "why": "Should he have been on PPI prophylaxis?",
+              "answer": "Absolutely. Patients on chronic NSAIDs + aspirin should receive PPI prophylaxis. This is a common missed opportunity for ulcer prevention.",
+              "source": "ACG PUD Guidelines"
+            }
+          ],
+          "sources": ["ACG Peptic Ulcer Guidelines", "StatPearls: Peptic Ulcer Disease"]
+        },
+        {
+          "id": "ugib-patho-2",
+          "stem": "Melena (black tarry stool) indicates upper GI bleeding.",
+          "question": "What chemical process creates the black color of melena?",
+          "hint": "Consider what happens to hemoglobin in the acidic environment.",
+          "options": [
+            {"id": "A", "text": "Bacterial degradation of hemoglobin to hematin in the GI tract", "correct": true},
+            {"id": "B", "text": "Oxidation of bilirubin to biliverdin", "correct": false},
+            {"id": "C", "text": "Clotting of blood creating dark thrombus", "correct": false},
+            {"id": "D", "text": "Mixing of blood with bile acids", "correct": false}
+          ],
+          "explanation": "Hemoglobin is converted to hematin (acid hematin) by gastric acid and bacterial enzymes as blood transits the GI tract. This process takes several hours, which is why melena indicates proximal bleeding.",
+          "whyChain": [
+            {
+              "why": "How much blood is needed to produce melena?",
+              "answer": "Approximately 50-100mL of blood in the upper GI tract is sufficient to cause melena. Melena can persist for several days after bleeding stops.",
+              "source": "StatPearls: Melena"
+            }
+          ],
+          "sources": ["StatPearls: Melena", "StatPearls: Upper GI Bleeding"]
+        },
+        {
+          "id": "ugib-patho-3",
+          "stem": "At endoscopy, ulcers are classified by their appearance.",
+          "question": "The Forrest classification predicts rebleeding risk. Which finding has the HIGHEST rebleeding risk?",
+          "hint": "Active bleeding and visible vessels indicate high risk.",
+          "options": [
+            {"id": "A", "text": "Forrest Ia/Ib: Active spurting or oozing hemorrhage", "correct": true},
+            {"id": "B", "text": "Forrest III: Clean-based ulcer", "correct": false},
+            {"id": "C", "text": "Forrest IIc: Flat pigmented spot", "correct": false},
+            {"id": "D", "text": "Forrest IIb: Adherent clot", "correct": false}
+          ],
+          "explanation": "Forrest Ia (spurting) and Ib (oozing) have 55-90% rebleeding risk without intervention. Forrest IIa (visible vessel) has 43% risk. Forrest III (clean base) has <5% risk. Classification guides need for endoscopic therapy.",
+          "whyChain": [
+            {
+              "why": "Which lesions require endoscopic therapy?",
+              "answer": "Forrest I (active bleeding) and IIa (visible vessel) require endoscopic hemostasis. IIb (adherent clot) is controversial — many remove clot to treat underlying vessel. IIc and III can be managed medically.",
+              "source": "ACG UGIB Guidelines"
+            }
+          ],
+          "sources": ["ACG UGIB Guidelines", "StatPearls: Peptic Ulcer Bleeding"]
+        },
+        {
+          "id": "ugib-patho-4",
+          "stem": "He does not have stigmata of chronic liver disease.",
+          "question": "Which physical exam findings would suggest variceal bleeding (cirrhosis) rather than peptic ulcer?",
+          "hint": "Look for signs of portal hypertension and hepatic dysfunction.",
+          "options": [
+            {"id": "A", "text": "Spider angiomata, palmar erythema, ascites, splenomegaly", "correct": true},
+            {"id": "B", "text": "Epigastric tenderness, pallor, tachycardia", "correct": false},
+            {"id": "C", "text": "Orthostatic hypotension, melena, hematemesis", "correct": false},
+            {"id": "D", "text": "Cool extremities, flat JVP, weak pulses", "correct": false}
+          ],
+          "explanation": "Stigmata of chronic liver disease (spider angiomata, palmar erythema, gynecomastia, ascites, caput medusae, splenomegaly) suggest portal hypertension and possible variceal bleeding. His normal exam and liver tests make varices unlikely.",
+          "whyChain": [
+            {
+              "why": "Why does this distinction matter acutely?",
+              "answer": "Variceal bleeding requires specific treatment: octreotide/somatostatin (reduce portal pressure), antibiotics (prevent SBP), and consideration for TIPS or balloon tamponade. Non-variceal bleeding is managed differently.",
+              "source": "AASLD Variceal Bleeding Guidelines"
+            }
+          ],
+          "sources": ["AASLD Practice Guidelines", "StatPearls: Esophageal Varices"]
+        }
+      ]
+    },
+    {
+      "id": "pharmacology",
+      "title": "Pharmacology",
+      "icon": "💊",
+      "color": "#10b981",
+      "questions": [
+        {
+          "id": "ugib-pharm-1",
+          "stem": "IV proton pump inhibitor therapy is indicated for acute UGIB.",
+          "question": "What is the recommended PPI regimen for high-risk peptic ulcer bleeding?",
+          "hint": "Guidelines specify high-dose therapy initially.",
+          "options": [
+            {"id": "A", "text": "IV PPI bolus (80mg) followed by continuous infusion (8mg/hr) for 72 hours", "correct": true},
+            {"id": "B", "text": "Oral PPI 40mg once daily", "correct": false},
+            {"id": "C", "text": "IV H2 blocker every 6 hours", "correct": false},
+            {"id": "D", "text": "Antacids every 2 hours", "correct": false}
+          ],
+          "explanation": "High-dose IV PPI (80mg bolus then 8mg/hr infusion × 72 hours) is recommended for high-risk ulcers after endoscopic hemostasis. This maintains gastric pH >6, which stabilizes clots and prevents rebleeding.",
+          "whyChain": [
+            {
+              "why": "Why is pH >6 important?",
+              "answer": "Pepsin is inactivated at pH >6, and platelet aggregation/clot stability require non-acidic environment. Gastric acid lyses clots and impairs hemostasis.",
+              "source": "ACG UGIB Guidelines"
+            },
+            {
+              "why": "Can oral PPI be used?",
+              "answer": "After initial IV therapy and successful hemostasis, patients can transition to oral PPI (e.g., pantoprazole 40mg BID). Intermittent IV PPI dosing may be equivalent to infusion.",
+              "source": "ACG UGIB Guidelines"
+            }
+          ],
+          "sources": ["ACG UGIB Guidelines 2021", "StatPearls: Proton Pump Inhibitors"]
+        },
+        {
+          "id": "ugib-pharm-2",
+          "stem": "The patient is hemodynamically unstable with Hgb 7.2 g/dL.",
+          "question": "What is the appropriate transfusion threshold for this patient with active UGIB?",
+          "hint": "Consider he has ongoing bleeding and hemodynamic instability.",
+          "options": [
+            {"id": "A", "text": "Transfuse for Hgb <7-8 g/dL in active bleeding with hemodynamic instability", "correct": true},
+            {"id": "B", "text": "Wait until Hgb <5 g/dL to transfuse", "correct": false},
+            {"id": "C", "text": "Transfuse to target Hgb >12 g/dL", "correct": false},
+            {"id": "D", "text": "Only transfuse if patient has chest pain", "correct": false}
+          ],
+          "explanation": "A restrictive transfusion strategy (threshold Hgb 7-8) is recommended for most UGIB patients. However, with active bleeding and hemodynamic instability (as in this patient), transfusion is indicated. Overtransfusion (target >10) increases rebleeding in variceal patients.",
+          "whyChain": [
+            {
+              "why": "Why is restrictive transfusion better?",
+              "answer": "The TRIGGER trial and others showed restrictive transfusion (Hgb threshold 7-8) reduced mortality and rebleeding compared to liberal transfusion (threshold 9-10), possibly by avoiding portal pressure increases.",
+              "source": "NEJM: Transfusion in GI Bleeding"
+            },
+            {
+              "why": "Should he receive platelets or FFP?",
+              "answer": "His platelets (285K) and INR (1.1) are normal, so no need for platelet or FFP transfusion. Correct coagulopathy if INR >1.5-2.0 or platelets <50K with active bleeding.",
+              "source": "ACG UGIB Guidelines"
+            }
+          ],
+          "sources": ["ACG UGIB Guidelines", "NEJM: Restrictive Transfusion Strategy"]
+        },
+        {
+          "id": "ugib-pharm-3",
+          "stem": "The patient is taking aspirin 81mg daily for cardiovascular protection.",
+          "question": "What is the recommendation regarding aspirin after peptic ulcer bleeding?",
+          "hint": "Balance GI risk against cardiovascular benefit.",
+          "options": [
+            {"id": "A", "text": "Hold during acute bleed, restart within 3-7 days if CV indication is strong", "correct": true},
+            {"id": "B", "text": "Permanently discontinue aspirin", "correct": false},
+            {"id": "C", "text": "Continue aspirin throughout hospitalization", "correct": false},
+            {"id": "D", "text": "Switch to clopidogrel which is safer", "correct": false}
+          ],
+          "explanation": "Hold aspirin during acute bleeding for hemostasis. If cardiovascular indication is strong (secondary prevention), restart within 3-7 days with PPI. Stopping aspirin long-term increases cardiovascular events and mortality more than it reduces rebleeding.",
+          "whyChain": [
+            {
+              "why": "What about his NSAID use?",
+              "answer": "NSAIDs should be permanently discontinued if possible. If NSAIDs are absolutely necessary (rare), use lowest dose + PPI prophylaxis + consider COX-2 selective agent. Never combine NSAID + aspirin without PPI.",
+              "source": "ACG PUD Guidelines"
+            }
+          ],
+          "sources": ["ACG UGIB Guidelines", "AHA Consensus Statement"]
+        },
+        {
+          "id": "ugib-pharm-4",
+          "stem": "H. pylori testing should be performed in all patients with peptic ulcer bleeding.",
+          "question": "If H. pylori is positive, what is the recommended treatment?",
+          "hint": "Eradication requires combination therapy.",
+          "options": [
+            {"id": "A", "text": "Triple or quadruple therapy: PPI + clarithromycin + amoxicillin (± bismuth/metronidazole)", "correct": true},
+            {"id": "B", "text": "PPI alone for 8 weeks", "correct": false},
+            {"id": "C", "text": "Single antibiotic for 14 days", "correct": false},
+            {"id": "D", "text": "No treatment needed if asymptomatic", "correct": false}
+          ],
+          "explanation": "H. pylori eradication dramatically reduces ulcer recurrence (from 60-80% to <5%). Standard triple therapy: PPI + clarithromycin + amoxicillin × 14 days. Bismuth quadruple therapy is used if clarithromycin resistance is suspected or penicillin allergy.",
+          "whyChain": [
+            {
+              "why": "Should you confirm eradication?",
+              "answer": "Yes. Test for eradication 4+ weeks after completing therapy (urea breath test or stool antigen). Eradication failure requires salvage therapy with different antibiotic regimen.",
+              "source": "ACG H. pylori Guidelines"
+            }
+          ],
+          "sources": ["ACG H. pylori Guidelines", "StatPearls: H. pylori"]
+        },
+        {
+          "id": "ugib-pharm-5",
+          "stem": "Erythromycin is sometimes given before endoscopy.",
+          "question": "What is the role of IV erythromycin (prokinetic) in acute UGIB?",
+          "hint": "Consider what it does to stomach contents.",
+          "options": [
+            {"id": "A", "text": "Promotes gastric emptying to improve endoscopic visualization", "correct": true},
+            {"id": "B", "text": "Treats underlying H. pylori infection", "correct": false},
+            {"id": "C", "text": "Stops active bleeding through vasoconstriction", "correct": false},
+            {"id": "D", "text": "Prevents aspiration pneumonia", "correct": false}
+          ],
+          "explanation": "Erythromycin (250mg IV) given 30-120 minutes before EGD promotes gastric emptying of blood/clots, improving visualization and diagnostic yield. It may reduce need for repeat endoscopy.",
+          "whyChain": [
+            {
+              "why": "Is erythromycin routinely recommended?",
+              "answer": "Guidelines suggest considering it in patients with suspected large amounts of blood in stomach (ongoing hematemesis). It's not mandatory for all UGIB but can be helpful.",
+              "source": "ACG UGIB Guidelines"
+            }
+          ],
+          "sources": ["ACG UGIB Guidelines", "StatPearls: GI Bleeding Management"]
+        }
+      ]
+    },
+    {
+      "id": "clinical-reasoning",
+      "title": "Clinical Reasoning",
+      "icon": "🧠",
+      "color": "#3b82f6",
+      "questions": [
+        {
+          "id": "ugib-clin-1",
+          "stem": "You need to risk-stratify this patient to guide management.",
+          "question": "The Glasgow-Blatchford Score (GBS) helps determine which patients can be managed as outpatients. Which GBS score suggests safe outpatient management?",
+          "hint": "Low scores indicate low risk.",
+          "options": [
+            {"id": "A", "text": "GBS = 0 (can be considered for outpatient management)", "correct": true},
+            {"id": "B", "text": "GBS = 5 (moderate risk, outpatient okay)", "correct": false},
+            {"id": "C", "text": "GBS = 10 (high risk but can go home)", "correct": false},
+            {"id": "D", "text": "Any GBS score allows outpatient management", "correct": false}
+          ],
+          "explanation": "GBS = 0 identifies very low-risk patients who can potentially be discharged from the ED with outpatient EGD. This patient's GBS is very high (Hgb 7.2, BP <90, melena, syncope) — he clearly requires admission.",
+          "whyChain": [
+            {
+              "why": "What factors are in the Glasgow-Blatchford Score?",
+              "answer": "GBS includes: BUN, hemoglobin, systolic BP, pulse, melena, syncope, hepatic disease, and cardiac failure. It predicts need for intervention (transfusion, endoscopy, surgery) without requiring endoscopy.",
+              "source": "ACG UGIB Guidelines"
+            },
+            {
+              "why": "How does GBS compare to Rockall score?",
+              "answer": "GBS is calculated pre-endoscopy and predicts need for intervention. Rockall score requires endoscopic findings and better predicts mortality. Both are useful at different stages.",
+              "source": "ACG UGIB Guidelines"
+            }
+          ],
+          "sources": ["ACG UGIB Guidelines", "Lancet: Glasgow-Blatchford Validation"]
+        },
+        {
+          "id": "ugib-clin-2",
+          "stem": "The patient needs urgent endoscopy.",
+          "question": "What is the recommended timing of endoscopy for this patient with UGIB and hemodynamic instability?",
+          "hint": "Guidelines stratify timing based on patient stability.",
+          "options": [
+            {"id": "A", "text": "Within 12-24 hours after resuscitation", "correct": true},
+            {"id": "B", "text": "Immediately regardless of hemodynamic status", "correct": false},
+            {"id": "C", "text": "Within 72 hours is acceptable", "correct": false},
+            {"id": "D", "text": "After discharge as outpatient", "correct": false}
+          ],
+          "explanation": "For high-risk UGIB, perform EGD within 24 hours after hemodynamic resuscitation. Emergent (<12h) endoscopy may be considered for massive ongoing bleeding. EGD before resuscitation increases complications without improving outcomes.",
+          "whyChain": [
+            {
+              "why": "Why not do immediate endoscopy?",
+              "answer": "Studies show no benefit to very early (<6h) vs early (6-24h) endoscopy in most patients. Resuscitation improves safety of procedure and allows better visualization. Exception: massive refractory hemorrhage.",
+              "source": "NEJM: Timing of Endoscopy"
+            }
+          ],
+          "sources": ["ACG UGIB Guidelines", "NEJM: Timing of Endoscopy in UGIB"]
+        },
+        {
+          "id": "ugib-clin-3",
+          "stem": "At endoscopy, a gastric ulcer with visible vessel is found and treated.",
+          "question": "What endoscopic therapies are used for high-risk ulcer stigmata?",
+          "hint": "Combination therapy is standard.",
+          "options": [
+            {"id": "A", "text": "Combination therapy: epinephrine injection + thermal coagulation or clips", "correct": true},
+            {"id": "B", "text": "Epinephrine injection alone", "correct": false},
+            {"id": "C", "text": "Observation and repeat endoscopy in 24 hours", "correct": false},
+            {"id": "D", "text": "Biopsy only to rule out malignancy", "correct": false}
+          ],
+          "explanation": "Combination endoscopic therapy (epinephrine injection + thermal/mechanical hemostasis) is superior to monotherapy. Epinephrine alone has high rebleeding rate. Hemoclips or thermal coagulation achieve definitive hemostasis.",
+          "whyChain": [
+            {
+              "why": "What if endoscopic therapy fails?",
+              "answer": "If rebleeding occurs, repeat endoscopy is first-line. If second attempt fails, options include interventional radiology (angioembolization) or surgery (oversewing/resection).",
+              "source": "ACG UGIB Guidelines"
+            }
+          ],
+          "sources": ["ACG UGIB Guidelines", "StatPearls: Endoscopic Hemostasis"]
+        },
+        {
+          "id": "ugib-clin-4",
+          "stem": "The patient asks when he can eat after the procedure.",
+          "question": "When can oral intake typically resume after successful endoscopic hemostasis?",
+          "hint": "Balance rebleeding risk against nutrition.",
+          "options": [
+            {"id": "A", "text": "Clear liquids in 24 hours, advance diet as tolerated if stable", "correct": true},
+            {"id": "B", "text": "NPO for 7 days mandatory", "correct": false},
+            {"id": "C", "text": "Immediately after endoscopy", "correct": false},
+            {"id": "D", "text": "Only after repeat endoscopy confirms healing", "correct": false}
+          ],
+          "explanation": "After successful hemostasis with no rebleeding in 24 hours, patients can start clear liquids and advance diet. Prolonged NPO status has no proven benefit and delays recovery. Monitor for signs of rebleeding.",
+          "whyChain": [
+            {
+              "why": "What are signs of rebleeding?",
+              "answer": "Recurrent hematemesis, fresh blood in NG aspirate (if in place), new melena, hemodynamic instability, or significant hemoglobin drop (>2g/dL in 24h without other cause).",
+              "source": "ACG UGIB Guidelines"
+            }
+          ],
+          "sources": ["ACG UGIB Guidelines", "Clinical Practice"]
+        },
+        {
+          "id": "ugib-clin-5",
+          "stem": "You're planning discharge after successful treatment.",
+          "question": "Which intervention is MOST important to prevent ulcer recurrence?",
+          "hint": "Address the underlying cause.",
+          "options": [
+            {"id": "A", "text": "H. pylori eradication (if positive) + permanent NSAID cessation + long-term PPI", "correct": true},
+            {"id": "B", "text": "Short course of PPI only", "correct": false},
+            {"id": "C", "text": "Switch from ibuprofen to naproxen", "correct": false},
+            {"id": "D", "text": "Repeat endoscopy every 6 months", "correct": false}
+          ],
+          "explanation": "Preventing recurrence requires addressing ALL risk factors: eradicate H. pylori, stop NSAIDs permanently, and continue PPI if aspirin must continue. Without addressing cause, ulcer recurrence is >50-60% at 1 year.",
+          "whyChain": [
+            {
+              "why": "Does he need long-term PPI?",
+              "answer": "If aspirin continues for cardiovascular protection, yes — indefinite PPI co-therapy. If aspirin is stopped and H. pylori eradicated, PPI can potentially be stopped after ulcer healing (8 weeks).",
+              "source": "ACG PUD Guidelines"
+            }
+          ],
+          "sources": ["ACG Peptic Ulcer Guidelines", "ACG H. pylori Guidelines"]
+        }
+      ]
+    },
+    {
+      "id": "complications",
+      "title": "Complications",
+      "icon": "⚠️",
+      "color": "#dc2626",
+      "questions": [
+        {
+          "id": "ugib-comp-1",
+          "stem": "On day 2, the patient suddenly vomits bright red blood with hemodynamic instability.",
+          "question": "He is rebleeding. What is the FIRST step in management?",
+          "hint": "ABCs always come first.",
+          "options": [
+            {"id": "A", "text": "Resuscitate with IV fluids and blood products, then repeat endoscopy", "correct": true},
+            {"id": "B", "text": "Immediate surgery without further workup", "correct": false},
+            {"id": "C", "text": "Increase PPI dose and observe", "correct": false},
+            {"id": "D", "text": "Discharge home with oral PPI", "correct": false}
+          ],
+          "explanation": "Rebleeding occurs in 10-20% of patients even after successful initial hemostasis. Management: resuscitate first (airway protection, IV access, blood products), then repeat endoscopy. Second endoscopic therapy is successful in most cases.",
+          "whyChain": [
+            {
+              "why": "When is surgery indicated?",
+              "answer": "Surgery is indicated after: 2 failed endoscopic attempts, ongoing hemodynamic instability despite resuscitation, or transfusion requirement >6 units in 24 hours. Interventional radiology (embolization) is an alternative.",
+              "source": "ACG UGIB Guidelines"
+            }
+          ],
+          "sources": ["ACG UGIB Guidelines", "StatPearls: GI Bleeding Management"]
+        },
+        {
+          "id": "ugib-comp-2",
+          "stem": "During aggressive resuscitation, the patient develops respiratory distress.",
+          "question": "What complication should you suspect with dyspnea and crackles after multiple blood transfusions?",
+          "hint": "Consider transfusion-related complications.",
+          "options": [
+            {"id": "A", "text": "Transfusion-associated circulatory overload (TACO)", "correct": true},
+            {"id": "B", "text": "Transfusion-related acute lung injury (TRALI)", "correct": false},
+            {"id": "C", "text": "Aspiration pneumonia", "correct": false},
+            {"id": "D", "text": "Pulmonary embolism", "correct": false}
+          ],
+          "explanation": "TACO (cardiogenic pulmonary edema from volume overload) is common with rapid transfusion. It presents with hypertension, elevated JVP, and bilateral edema. TRALI is non-cardiogenic and presents with hypotension. TACO is treated with diuretics.",
+          "whyChain": [
+            {
+              "why": "How do you distinguish TACO from TRALI?",
+              "answer": "TACO: hypertensive, elevated JVP, responds to diuresis, elevated BNP. TRALI: hypotensive, normal JVP, does NOT respond to diuresis, occurs within 6h of transfusion, usually requires supportive care only.",
+              "source": "StatPearls: Transfusion Reactions"
+            }
+          ],
+          "sources": ["StatPearls: Transfusion Reactions", "AABB Guidelines"]
+        },
+        {
+          "id": "ugib-comp-3",
+          "stem": "Post-discharge, the patient presents 3 months later with similar symptoms.",
+          "question": "Repeat EGD shows a non-healing gastric ulcer. What must be ruled out?",
+          "hint": "Non-healing gastric ulcers require additional workup.",
+          "options": [
+            {"id": "A", "text": "Gastric adenocarcinoma (biopsy required)", "correct": true},
+            {"id": "B", "text": "Crohn's disease", "correct": false},
+            {"id": "C", "text": "Celiac disease", "correct": false},
+            {"id": "D", "text": "Gastroparesis", "correct": false}
+          ],
+          "explanation": "Non-healing gastric ulcers require biopsy to rule out malignancy. Gastric adenocarcinoma can present as an ulcer. Duodenal ulcers are rarely malignant. All gastric ulcers should be biopsied and have repeat EGD to confirm healing.",
+          "whyChain": [
+            {
+              "why": "What other causes of non-healing ulcers exist?",
+              "answer": "Persistent H. pylori (treatment failure), continued NSAID use, Zollinger-Ellison syndrome (gastrinoma), Crohn's disease, and malignancy. Check for these if ulcer doesn't heal with standard therapy.",
+              "source": "ACG PUD Guidelines"
+            }
+          ],
+          "sources": ["ACG Peptic Ulcer Guidelines", "StatPearls: Gastric Cancer"]
+        }
+      ]
+    },
+    {
+      "id": "synthesis",
+      "title": "Synthesis",
+      "icon": "🔗",
+      "color": "#6366f1",
+      "questions": [
+        {
+          "id": "ugib-syn-1",
+          "stem": "Integrating all the clinical information in this case.",
+          "question": "Which statement BEST synthesizes this patient's presentation?",
+          "hint": "Connect risk factors, presentation, and pathophysiology.",
+          "options": [
+            {"id": "A", "text": "Patient with chronic NSAID + aspirin use developed bleeding peptic ulcer, presenting with hemodynamic instability requiring resuscitation and urgent endoscopy", "correct": true},
+            {"id": "B", "text": "Patient with cirrhosis presenting with variceal hemorrhage requiring octreotide", "correct": false},
+            {"id": "C", "text": "Patient with Mallory-Weiss tear from retching after alcohol binge", "correct": false},
+            {"id": "D", "text": "Patient with slow lower GI bleeding from colon cancer", "correct": false}
+          ],
+          "explanation": "This synthesis captures: risk factors (chronic NSAIDs + aspirin without PPI, possible persistent H. pylori), clinical presentation (hematemesis, melena, hemodynamic instability), and management priorities (resuscitation before endoscopy).",
+          "whyChain": [
+            {
+              "why": "What were the missed prevention opportunities?",
+              "answer": "PPI prophylaxis for NSAID + aspirin users, confirming H. pylori eradication, patient education about NSAID risks, and avoiding dual antiplatelet/NSAID therapy without gastroprotection.",
+              "source": "ACG Prevention Guidelines"
+            }
+          ],
+          "sources": ["ACG UGIB Guidelines", "Clinical Reasoning"]
+        },
+        {
+          "id": "ugib-syn-2",
+          "stem": "You're preparing discharge instructions.",
+          "question": "Which discharge plan is MOST appropriate for long-term management?",
+          "hint": "Address all modifiable risk factors.",
+          "options": [
+            {"id": "A", "text": "Stop NSAIDs permanently, continue aspirin + PPI indefinitely, eradicate H. pylori, follow-up EGD to confirm healing", "correct": true},
+            {"id": "B", "text": "Continue current medications, no follow-up needed", "correct": false},
+            {"id": "C", "text": "Stop all medications including aspirin permanently", "correct": false},
+            {"id": "D", "text": "Switch to COX-2 inhibitor without PPI", "correct": false}
+          ],
+          "explanation": "Comprehensive secondary prevention: permanent NSAID cessation, continued aspirin if cardiovascularly indicated with PPI protection, H. pylori eradication with confirmation of cure, and follow-up EGD at 8-12 weeks to document healing.",
+          "whyChain": [
+            {
+              "why": "What's his prognosis?",
+              "answer": "With proper secondary prevention (H. pylori cure, NSAID cessation, PPI with aspirin), ulcer recurrence risk drops from >50% to <5%. Without intervention, recurrence is nearly inevitable.",
+              "source": "ACG Guidelines"
+            }
+          ],
+          "sources": ["ACG Peptic Ulcer Guidelines", "ACG H. pylori Guidelines"]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,494 @@
+{
+  "id": "dka-deep-dive",
+  "title": "Diabetic Ketoacidosis",
+  "version": "1.0",
+  "totalQuestions": 30,
+  "estimatedTime": "45 minutes",
+  "difficulty": "Intermediate",
+  "targetAudience": "Medical Students, Residents",
+  "objectives": [
+    "Recognize clinical presentation and diagnostic criteria for DKA",
+    "Understand pathophysiology of ketoacid production",
+    "Apply appropriate fluid, insulin, and electrolyte management",
+    "Identify and treat precipitating causes",
+    "Monitor for and prevent complications",
+    "Distinguish DKA from HHS"
+  ],
+  "vignette": {
+    "text": "A 24-year-old woman is brought to the ED by her roommate who found her confused and vomiting. She has had 3 days of polyuria, polydipsia, nausea, and abdominal pain. She was diagnosed with Type 1 diabetes at age 12 and uses an insulin pump, but admits she ran out of pump supplies 4 days ago and has been 'rationing' insulin. She also had a sore throat and fever for the past week.\n\nPast Medical History: Type 1 DM (12 years, insulin pump, last A1c 8.2%), Hashimoto's thyroiditis\n\nMedications: Insulin lispro via pump (currently not working), Levothyroxine 75mcg daily\n\nSocial History: College student, no alcohol or drugs\n\nAllergies: None",
+    "physicalExam": {
+      "general": "Ill-appearing, lethargic, deep rapid breathing, fruity breath odor",
+      "vitals": {
+        "BP": "95/60 mmHg",
+        "HR": "122 bpm",
+        "RR": "28/min (Kussmaul respirations)",
+        "Temp": "100.8°F",
+        "SpO2": "99% RA"
+      },
+      "HEENT": "Dry mucous membranes, pharyngeal erythema with exudates",
+      "cardiovascular": "Tachycardic, weak pulses",
+      "abdomen": "Soft, diffusely tender, no peritoneal signs",
+      "skin": "Poor turgor, dry axillae",
+      "neurologic": "GCS 13, lethargic but arousable"
+    },
+    "diagnostics": {
+      "labs": {
+        "Glucose": {"value": "486 mg/dL", "flag": "CRITICAL"},
+        "Sodium": {"value": "128 mEq/L", "flag": "LOW"},
+        "Potassium": {"value": "5.8 mEq/L", "flag": "HIGH"},
+        "Chloride": {"value": "95 mEq/L", "flag": "LOW"},
+        "Bicarbonate": {"value": "8 mEq/L", "flag": "CRITICAL"},
+        "BUN": {"value": "32 mg/dL", "flag": "HIGH"},
+        "Creatinine": {"value": "1.8 mg/dL", "flag": "HIGH"},
+        "Anion_Gap": {"value": "25 mEq/L", "flag": "HIGH"},
+        "pH": {"value": "7.12", "flag": "CRITICAL"},
+        "pCO2": {"value": "18 mmHg", "flag": "LOW"},
+        "Beta_hydroxybutyrate": {"value": "6.8 mmol/L", "flag": "CRITICAL"},
+        "WBC": {"value": "16,200/μL", "flag": "HIGH"}
+      },
+      "urinalysis": {
+        "glucose": "3+",
+        "ketones": "Large"
+      },
+      "other": {
+        "rapidStrepTest": "Positive"
+      }
+    }
+  },
+  "layers": [
+    {
+      "id": "anatomy",
+      "title": "Anatomy",
+      "icon": "🫀",
+      "color": "#ef4444",
+      "questions": [
+        {
+          "id": "dka-anat-1",
+          "stem": "Type 1 diabetes results from autoimmune destruction of insulin-producing cells.",
+          "question": "Which cells in the pancreas produce insulin?",
+          "hint": "These cells are found in clusters called islets.",
+          "options": [
+            {"id": "A", "text": "Beta cells of the islets of Langerhans", "correct": true},
+            {"id": "B", "text": "Alpha cells of the islets of Langerhans", "correct": false},
+            {"id": "C", "text": "Acinar cells", "correct": false},
+            {"id": "D", "text": "Delta cells", "correct": false}
+          ],
+          "explanation": "Beta cells produce insulin. In Type 1 DM, autoimmune destruction leads to absolute insulin deficiency. Alpha cells produce glucagon, delta cells produce somatostatin.",
+          "sources": ["OpenStax A&P 2e, Chapter 17", "StatPearls: Type 1 DM"]
+        },
+        {
+          "id": "dka-anat-2",
+          "stem": "The liver plays a central role in ketone metabolism.",
+          "question": "Where in the liver cell does ketogenesis occur?",
+          "hint": "This organelle is the site of fatty acid oxidation.",
+          "options": [
+            {"id": "A", "text": "Mitochondria of hepatocytes", "correct": true},
+            {"id": "B", "text": "Rough endoplasmic reticulum", "correct": false},
+            {"id": "C", "text": "Golgi apparatus", "correct": false},
+            {"id": "D", "text": "Cell nucleus", "correct": false}
+          ],
+          "explanation": "Ketogenesis occurs in liver mitochondria. Fatty acids undergo beta-oxidation to acetyl-CoA, which is converted to ketone bodies when acetyl-CoA exceeds TCA cycle capacity.",
+          "sources": ["OpenStax A&P 2e, Chapter 24", "StatPearls: Ketogenesis"]
+        },
+        {
+          "id": "dka-anat-3",
+          "stem": "The patient has Kussmaul respirations.",
+          "question": "Kussmaul respirations represent compensation by which organ system?",
+          "hint": "Consider the Henderson-Hasselbalch equation.",
+          "options": [
+            {"id": "A", "text": "Respiratory system - hyperventilation to lower pCO2", "correct": true},
+            {"id": "B", "text": "Renal system - increased bicarbonate excretion", "correct": false},
+            {"id": "C", "text": "Hepatic system - increased lactate clearance", "correct": false},
+            {"id": "D", "text": "Cardiac system - increased perfusion", "correct": false}
+          ],
+          "explanation": "Kussmaul respirations are deep, rapid breaths that blow off CO2 to compensate for metabolic acidosis. Expected pCO2 = 1.5(HCO3) + 8 = 1.5(8) + 8 = 20 ± 2. Her pCO2 of 18 shows appropriate compensation.",
+          "sources": ["OpenStax A&P 2e, Chapter 26", "StatPearls: Metabolic Acidosis"]
+        }
+      ]
+    },
+    {
+      "id": "physiology",
+      "title": "Physiology",
+      "icon": "⚡",
+      "color": "#f59e0b",
+      "questions": [
+        {
+          "id": "dka-phys-1",
+          "stem": "Her anion gap is 25 mEq/L.",
+          "question": "What causes the elevated anion gap in DKA?",
+          "hint": "Consider what unmeasured anions accumulate.",
+          "options": [
+            {"id": "A", "text": "Accumulation of ketoacids (beta-hydroxybutyrate and acetoacetate)", "correct": true},
+            {"id": "B", "text": "Accumulation of chloride", "correct": false},
+            {"id": "C", "text": "Loss of bicarbonate in urine", "correct": false},
+            {"id": "D", "text": "Increased serum albumin", "correct": false}
+          ],
+          "explanation": "Ketoacids are the unmeasured anions. AG = Na - (Cl + HCO3) = 128 - (95 + 8) = 25. Beta-hydroxybutyrate predominates in DKA (ratio to acetoacetate can be 10:1).",
+          "sources": ["StatPearls: Anion Gap", "StatPearls: DKA"]
+        },
+        {
+          "id": "dka-phys-2",
+          "stem": "Her sodium is 128 mEq/L in the setting of hyperglycemia.",
+          "question": "Calculate the corrected sodium.",
+          "hint": "Glucose draws water from cells, diluting sodium.",
+          "options": [
+            {"id": "A", "text": "Add 1.6-2.4 mEq/L per 100 mg/dL glucose above 100; corrected Na ≈ 134-138", "correct": true},
+            {"id": "B", "text": "Subtract 1.6 mEq/L per 100 mg/dL glucose above 100", "correct": false},
+            {"id": "C", "text": "No correction needed", "correct": false},
+            {"id": "D", "text": "Multiply sodium by glucose/100", "correct": false}
+          ],
+          "explanation": "Corrected Na = 128 + 1.6 × (386/100) ≈ 134. The apparent hyponatremia is dilutional. As glucose falls with treatment, measured sodium will rise.",
+          "sources": ["StatPearls: DKA", "StatPearls: Hyponatremia"]
+        },
+        {
+          "id": "dka-phys-3",
+          "stem": "Her potassium is 5.8 mEq/L despite total body depletion.",
+          "question": "Why is serum potassium elevated despite total body depletion?",
+          "hint": "Consider transcellular shifts.",
+          "options": [
+            {"id": "A", "text": "Acidosis and insulin deficiency shift K+ from intracellular to extracellular space", "correct": true},
+            {"id": "B", "text": "Kidneys retain all potassium in DKA", "correct": false},
+            {"id": "C", "text": "Dietary potassium excess", "correct": false},
+            {"id": "D", "text": "Cell lysis releases potassium", "correct": false}
+          ],
+          "explanation": "Acidosis causes H+/K+ exchange across cell membranes. Insulin deficiency prevents K+ uptake into cells. Meanwhile, osmotic diuresis causes massive urinary K+ losses. Total body K+ is depleted despite high serum K+.",
+          "sources": ["ADA DKA Guidelines", "StatPearls: DKA"]
+        },
+        {
+          "id": "dka-phys-4",
+          "stem": "The patient has polyuria despite dehydration.",
+          "question": "What causes the osmotic diuresis in DKA?",
+          "hint": "Consider the renal threshold for glucose.",
+          "options": [
+            {"id": "A", "text": "Glucosuria - glucose exceeds renal reabsorption capacity, pulling water into urine", "correct": true},
+            {"id": "B", "text": "Ketones directly inhibit ADH", "correct": false},
+            {"id": "C", "text": "Acidosis damages kidney tubules", "correct": false},
+            {"id": "D", "text": "High protein intake", "correct": false}
+          ],
+          "explanation": "When glucose exceeds ~180 mg/dL, it spills into urine. Glucose is osmotically active, obligating water excretion. Average deficit: 6-9L water, 500-700 mEq sodium, 300-500 mEq potassium.",
+          "sources": ["StatPearls: DKA", "ADA Guidelines"]
+        }
+      ]
+    },
+    {
+      "id": "pathophysiology",
+      "title": "Pathophysiology",
+      "icon": "🔬",
+      "color": "#8b5cf6",
+      "questions": [
+        {
+          "id": "dka-patho-1",
+          "stem": "DKA develops from insulin deficiency plus counter-regulatory hormone excess.",
+          "question": "What triggers the metabolic cascade leading to ketoacidosis?",
+          "hint": "Consider what happens when insulin is absent.",
+          "options": [
+            {"id": "A", "text": "Insulin deficiency → unopposed glucagon → lipolysis → hepatic ketogenesis", "correct": true},
+            {"id": "B", "text": "Excess insulin → hypoglycemia → stress response", "correct": false},
+            {"id": "C", "text": "Renal failure → acid retention", "correct": false},
+            {"id": "D", "text": "Infection directly produces ketones", "correct": false}
+          ],
+          "explanation": "Without insulin, glucagon is unopposed. This activates lipolysis (fat → FFAs) and hepatic ketogenesis (FFAs → ketones). Simultaneously, gluconeogenesis increases, worsening hyperglycemia.",
+          "sources": ["StatPearls: DKA", "ADA Guidelines"]
+        },
+        {
+          "id": "dka-patho-2",
+          "stem": "She ran out of insulin supplies and had pharyngitis.",
+          "question": "Which is the PRIMARY precipitant of her DKA?",
+          "hint": "Consider the most direct cause of insulin deficiency.",
+          "options": [
+            {"id": "A", "text": "Insulin omission/pump failure - most common DKA precipitant", "correct": true},
+            {"id": "B", "text": "Infection is always the primary cause", "correct": false},
+            {"id": "C", "text": "Dietary indiscretion", "correct": false},
+            {"id": "D", "text": "Exercise", "correct": false}
+          ],
+          "explanation": "Insulin omission accounts for 30-50% of DKA cases. Infection is second most common. She has BOTH - insulin rationing AND strep pharyngitis - a 'double hit.'",
+          "sources": ["ADA DKA Guidelines", "StatPearls: DKA"]
+        },
+        {
+          "id": "dka-patho-3",
+          "stem": "She has diffuse abdominal pain.",
+          "question": "What causes abdominal pain in DKA?",
+          "hint": "This can mimic surgical abdomen.",
+          "options": [
+            {"id": "A", "text": "Gastric distension, ileus, and ketone-induced inflammation", "correct": true},
+            {"id": "B", "text": "Appendicitis", "correct": false},
+            {"id": "C", "text": "Renal colic", "correct": false},
+            {"id": "D", "text": "Pancreatitis in all cases", "correct": false}
+          ],
+          "explanation": "'DKA belly' - diffuse abdominal pain, nausea, vomiting, and ileus - is common. It typically resolves with DKA treatment. Rule out surgical emergency if peritoneal signs or pain persists.",
+          "sources": ["StatPearls: DKA", "ADA Guidelines"]
+        },
+        {
+          "id": "dka-patho-4",
+          "stem": "Her WBC is 16,200.",
+          "question": "Why is leukocytosis common in DKA without bacterial infection?",
+          "hint": "Consider the stress response.",
+          "options": [
+            {"id": "A", "text": "Stress demargination of WBCs and hemoconcentration", "correct": true},
+            {"id": "B", "text": "DKA always indicates bacterial infection", "correct": false},
+            {"id": "C", "text": "Ketones stimulate WBC production", "correct": false},
+            {"id": "D", "text": "Laboratory error", "correct": false}
+          ],
+          "explanation": "Leukocytosis (10,000-15,000) is common due to stress and hemoconcentration. WBC >25,000 or bandemia suggests true infection. Her positive strep test confirms actual infection.",
+          "sources": ["StatPearls: DKA", "ADA Guidelines"]
+        }
+      ]
+    },
+    {
+      "id": "pharmacology",
+      "title": "Pharmacology",
+      "icon": "💊",
+      "color": "#10b981",
+      "questions": [
+        {
+          "id": "dka-pharm-1",
+          "stem": "Initial treatment includes fluid resuscitation.",
+          "question": "What is the recommended initial IV fluid for DKA?",
+          "hint": "Start with isotonic crystalloid.",
+          "options": [
+            {"id": "A", "text": "0.9% Normal Saline - 1-1.5 L in first hour", "correct": true},
+            {"id": "B", "text": "D5W to provide glucose", "correct": false},
+            {"id": "C", "text": "Lactated Ringer's primarily", "correct": false},
+            {"id": "D", "text": "Colloids (albumin)", "correct": false}
+          ],
+          "explanation": "Start NS 1-1.5 L in first hour. Then adjust: if corrected Na high/normal → 0.45% NS; if low → continue NS. Add dextrose when glucose reaches 200-250 mg/dL to allow continued insulin infusion.",
+          "sources": ["ADA DKA Guidelines", "StatPearls: DKA"]
+        },
+        {
+          "id": "dka-pharm-2",
+          "stem": "Insulin is the cornerstone of DKA treatment.",
+          "question": "What is the recommended insulin regimen?",
+          "hint": "Low-dose insulin infusion is standard.",
+          "options": [
+            {"id": "A", "text": "Regular insulin 0.1 units/kg/hr IV infusion", "correct": true},
+            {"id": "B", "text": "Glargine 100 units subcutaneous", "correct": false},
+            {"id": "C", "text": "Regular insulin 50 units IV push", "correct": false},
+            {"id": "D", "text": "No insulin until potassium normalizes", "correct": false}
+          ],
+          "explanation": "Regular insulin 0.1 u/kg/hr continuous IV. Can give 0.1 u/kg bolus initially. Reduce to 0.02-0.05 u/kg/hr when glucose reaches 200. Hold insulin only if K+ <3.3 mEq/L.",
+          "sources": ["ADA DKA Guidelines", "StatPearls: DKA"]
+        },
+        {
+          "id": "dka-pharm-3",
+          "stem": "Her potassium is 5.8 mEq/L.",
+          "question": "When should potassium replacement begin?",
+          "hint": "Potassium will fall rapidly with treatment.",
+          "options": [
+            {"id": "A", "text": "Start KCl when K+ falls below 5.3 mEq/L with adequate urine output", "correct": true},
+            {"id": "B", "text": "Never - she's hyperkalemic", "correct": false},
+            {"id": "C", "text": "Only if ECG shows hypokalemia", "correct": false},
+            {"id": "D", "text": "Only after DKA resolves", "correct": false}
+          ],
+          "explanation": "Add KCl 20-40 mEq/L when K+ <5.3 mEq/L. Goal: maintain K+ 4-5 mEq/L. Despite initial hyperkalemia, total body K+ is depleted. Average deficit: 3-5 mEq/kg.",
+          "sources": ["ADA DKA Guidelines", "StatPearls: DKA"]
+        },
+        {
+          "id": "dka-pharm-4",
+          "stem": "Her pH is 7.12.",
+          "question": "Should sodium bicarbonate be given?",
+          "hint": "Bicarbonate is controversial in DKA.",
+          "options": [
+            {"id": "A", "text": "Generally NO; consider only if pH <6.9 or severe hyperkalemia", "correct": true},
+            {"id": "B", "text": "Yes, give to all patients with pH <7.3", "correct": false},
+            {"id": "C", "text": "Aggressive bicarbonate is mainstay of treatment", "correct": false},
+            {"id": "D", "text": "Never give bicarbonate in DKA", "correct": false}
+          ],
+          "explanation": "Routine bicarbonate is NOT recommended. It may worsen intracellular acidosis. Consider only if pH <6.9, severe hyperkalemia, or refractory shock. Acidosis self-corrects with DKA treatment.",
+          "sources": ["ADA DKA Guidelines", "StatPearls: DKA"]
+        },
+        {
+          "id": "dka-pharm-5",
+          "stem": "She has strep pharyngitis.",
+          "question": "What antibiotic is first-line for Group A strep pharyngitis?",
+          "hint": "GAS remains universally susceptible to this antibiotic.",
+          "options": [
+            {"id": "A", "text": "Penicillin V or Amoxicillin", "correct": true},
+            {"id": "B", "text": "Ciprofloxacin", "correct": false},
+            {"id": "C", "text": "Vancomycin", "correct": false},
+            {"id": "D", "text": "No antibiotics needed", "correct": false}
+          ],
+          "explanation": "Penicillin or amoxicillin is first-line. GAS has never developed penicillin resistance. Treatment addresses both infection and a DKA precipitant.",
+          "sources": ["IDSA Pharyngitis Guidelines", "StatPearls: GAS Pharyngitis"]
+        }
+      ]
+    },
+    {
+      "id": "clinical-reasoning",
+      "title": "Clinical Reasoning",
+      "icon": "🧠",
+      "color": "#3b82f6",
+      "questions": [
+        {
+          "id": "dka-clin-1",
+          "stem": "Confirming DKA requires specific criteria.",
+          "question": "What are the diagnostic criteria for DKA?",
+          "hint": "Three biochemical criteria define DKA.",
+          "options": [
+            {"id": "A", "text": "Glucose >250, pH <7.3 or HCO3 <18, positive ketones, elevated AG", "correct": true},
+            {"id": "B", "text": "Glucose >600, pH <7.3, negative ketones", "correct": false},
+            {"id": "C", "text": "Any hyperglycemia with vomiting", "correct": false},
+            {"id": "D", "text": "Glucose >250 alone", "correct": false}
+          ],
+          "explanation": "DKA: Hyperglycemia (>250), Acidosis (pH <7.3 or HCO3 <18), Ketosis (positive ketones or BHB >3). Severity by pH: mild >7.25, moderate 7.0-7.24, severe <7.0. She has moderate DKA (pH 7.12).",
+          "sources": ["ADA DKA Guidelines", "StatPearls: DKA"]
+        },
+        {
+          "id": "dka-clin-2",
+          "stem": "DKA and HHS have different presentations.",
+          "question": "How does HHS differ from DKA?",
+          "hint": "Consider the degree of hyperglycemia and ketosis.",
+          "options": [
+            {"id": "A", "text": "HHS: glucose >600, minimal ketosis (pH >7.3), osmolality >320", "correct": true},
+            {"id": "B", "text": "HHS always occurs in Type 1 diabetes", "correct": false},
+            {"id": "C", "text": "HHS has more ketosis than DKA", "correct": false},
+            {"id": "D", "text": "HHS and DKA are identical conditions", "correct": false}
+          ],
+          "explanation": "HHS: glucose usually >600, pH >7.3 (minimal ketosis), osmolality >320, more profound dehydration. Typically Type 2 DM. Can have overlap. Treatment similar but HHS needs more fluids.",
+          "sources": ["ADA DKA/HHS Guidelines", "StatPearls: HHS"]
+        },
+        {
+          "id": "dka-clin-3",
+          "stem": "Resolution criteria guide when to transition to subcutaneous insulin.",
+          "question": "What defines DKA resolution?",
+          "hint": "Multiple parameters must normalize.",
+          "options": [
+            {"id": "A", "text": "Glucose <200, pH >7.3, HCO3 ≥15, anion gap <12, patient eating", "correct": true},
+            {"id": "B", "text": "Glucose <200 alone", "correct": false},
+            {"id": "C", "text": "Patient feels better", "correct": false},
+            {"id": "D", "text": "24 hours of IV insulin", "correct": false}
+          ],
+          "explanation": "Resolution requires: glucose <200 AND two of: pH >7.3, HCO3 ≥15, AG <12. Also patient should be eating. Overlap subcutaneous insulin 1-2 hours before stopping IV insulin to prevent rebound hyperglycemia.",
+          "sources": ["ADA DKA Guidelines", "StatPearls: DKA"]
+        },
+        {
+          "id": "dka-clin-4",
+          "stem": "Monitoring frequency is critical in DKA management.",
+          "question": "How often should labs be monitored during DKA treatment?",
+          "hint": "Electrolytes change rapidly.",
+          "options": [
+            {"id": "A", "text": "Basic metabolic panel every 2-4 hours initially", "correct": true},
+            {"id": "B", "text": "Once daily is sufficient", "correct": false},
+            {"id": "C", "text": "Only if patient appears worse", "correct": false},
+            {"id": "D", "text": "Continuous monitoring not needed", "correct": false}
+          ],
+          "explanation": "Check BMP every 2-4 hours initially (including glucose, K+, HCO3, AG). Glucose can be checked hourly via glucometer. Adjust fluids, insulin, and K+ based on results. Frequency can decrease as DKA resolves.",
+          "sources": ["ADA DKA Guidelines", "StatPearls: DKA"]
+        },
+        {
+          "id": "dka-clin-5",
+          "stem": "The anion gap helps track DKA resolution.",
+          "question": "Why is following the anion gap important?",
+          "hint": "It reflects ketoacid clearance.",
+          "options": [
+            {"id": "A", "text": "AG closure indicates ketoacid metabolism and true DKA resolution", "correct": true},
+            {"id": "B", "text": "AG is not useful in monitoring", "correct": false},
+            {"id": "C", "text": "AG only matters for diagnosis", "correct": false},
+            {"id": "D", "text": "AG changes don't correlate with clinical status", "correct": false}
+          ],
+          "explanation": "AG closure (return to <12) indicates ketoacids have been metabolized. Glucose may normalize before AG closes. Continue insulin until AG closes to fully clear ketosis, using dextrose to prevent hypoglycemia.",
+          "sources": ["ADA DKA Guidelines", "StatPearls: DKA"]
+        }
+      ]
+    },
+    {
+      "id": "complications",
+      "title": "Complications",
+      "icon": "⚠️",
+      "color": "#dc2626",
+      "questions": [
+        {
+          "id": "dka-comp-1",
+          "stem": "During treatment, her potassium drops to 2.8 mEq/L.",
+          "question": "What is the most dangerous complication of rapidly falling potassium?",
+          "hint": "Consider cardiac effects.",
+          "options": [
+            {"id": "A", "text": "Cardiac arrhythmias (can be fatal)", "correct": true},
+            {"id": "B", "text": "Mild muscle weakness only", "correct": false},
+            {"id": "C", "text": "Headache", "correct": false},
+            {"id": "D", "text": "Hyperglycemia worsening", "correct": false}
+          ],
+          "explanation": "Severe hypokalemia causes life-threatening arrhythmias (VT, VF). ECG shows U waves, flattened T waves, prolonged QT. This is why K+ monitoring and replacement are critical. Hold insulin if K+ <3.3.",
+          "sources": ["ADA DKA Guidelines", "StatPearls: Hypokalemia"]
+        },
+        {
+          "id": "dka-comp-2",
+          "stem": "A young patient with DKA develops headache, confusion, and vomiting during treatment.",
+          "question": "What life-threatening complication should you suspect?",
+          "hint": "This primarily affects children and young adults.",
+          "options": [
+            {"id": "A", "text": "Cerebral edema", "correct": true},
+            {"id": "B", "text": "Diabetic retinopathy", "correct": false},
+            {"id": "C", "text": "Hyperglycemia recurrence", "correct": false},
+            {"id": "D", "text": "Medication side effect", "correct": false}
+          ],
+          "explanation": "Cerebral edema is rare but devastating (mortality 20-25%), primarily in children/adolescents. Risk factors: rapid fluid administration, rapid glucose correction, bicarbonate use, severe acidosis. Treat with mannitol or hypertonic saline.",
+          "sources": ["ADA DKA Guidelines", "StatPearls: Cerebral Edema in DKA"]
+        },
+        {
+          "id": "dka-comp-3",
+          "stem": "After DKA resolves, you're transitioning to subcutaneous insulin.",
+          "question": "What is the most common error when transitioning from IV to subcutaneous insulin?",
+          "hint": "Timing is critical.",
+          "options": [
+            {"id": "A", "text": "Stopping IV insulin before subcutaneous insulin takes effect", "correct": true},
+            {"id": "B", "text": "Giving too much subcutaneous insulin", "correct": false},
+            {"id": "C", "text": "Continuing IV insulin too long", "correct": false},
+            {"id": "D", "text": "Using the wrong type of insulin", "correct": false}
+          ],
+          "explanation": "IV insulin has a 5-minute half-life. Subcutaneous long-acting insulin takes 2-4 hours for effect. Overlap is essential: give subcutaneous basal insulin 1-2 hours BEFORE stopping IV insulin to prevent rebound hyperglycemia/ketosis.",
+          "sources": ["ADA DKA Guidelines", "StatPearls: DKA"]
+        },
+        {
+          "id": "dka-comp-4",
+          "stem": "The patient develops a non-anion gap acidosis during treatment.",
+          "question": "What causes non-anion gap metabolic acidosis during DKA treatment?",
+          "hint": "Consider what happens to chloride with NS infusion.",
+          "options": [
+            {"id": "A", "text": "Hyperchloremic acidosis from large volume NS infusion", "correct": true},
+            {"id": "B", "text": "Worsening ketoacidosis", "correct": false},
+            {"id": "C", "text": "Lactic acidosis from sepsis", "correct": false},
+            {"id": "D", "text": "Renal tubular acidosis", "correct": false}
+          ],
+          "explanation": "Large NS volumes cause hyperchloremic (non-AG) metabolic acidosis. The AG closes as ketoacids clear, but pH may remain low due to chloride excess. This is usually self-limited and doesn't require specific treatment.",
+          "sources": ["StatPearls: Hyperchloremic Acidosis", "ADA Guidelines"]
+        }
+      ]
+    },
+    {
+      "id": "synthesis",
+      "title": "Synthesis",
+      "icon": "🔗",
+      "color": "#6366f1",
+      "questions": [
+        {
+          "id": "dka-syn-1",
+          "stem": "Integrating all clinical information.",
+          "question": "Which statement BEST synthesizes this patient's presentation?",
+          "hint": "Connect precipitants, presentation, and management priorities.",
+          "options": [
+            {"id": "A", "text": "Type 1 diabetic with moderate DKA precipitated by insulin omission + strep pharyngitis, requiring fluids, insulin, K+ monitoring, and antibiotics", "correct": true},
+            {"id": "B", "text": "Type 2 diabetic with HHS requiring only fluids", "correct": false},
+            {"id": "C", "text": "Alcoholic ketoacidosis requiring glucose only", "correct": false},
+            {"id": "D", "text": "Lactic acidosis from metformin toxicity", "correct": false}
+          ],
+          "explanation": "This synthesis captures: Type 1 DM substrate, dual precipitants (pump failure + infection), severity (moderate DKA by pH 7.12), and management priorities (IV fluids, insulin infusion, K+ replacement, strep treatment).",
+          "sources": ["ADA DKA Guidelines", "Clinical Synthesis"]
+        },
+        {
+          "id": "dka-syn-2",
+          "stem": "Planning discharge and prevention.",
+          "question": "What is the most important intervention to prevent recurrent DKA?",
+          "hint": "Address the precipitant.",
+          "options": [
+            {"id": "A", "text": "Education on sick-day management and ensuring insulin/supply access", "correct": true},
+            {"id": "B", "text": "Switching to oral diabetes medications", "correct": false},
+            {"id": "C", "text": "Monthly ER visits for monitoring", "correct": false},
+            {"id": "D", "text": "Dietary changes alone", "correct": false}
+          ],
+          "explanation": "Recurrent DKA is often preventable. Key interventions: (1) Sick-day rules (never stop insulin, increase monitoring); (2) Address insulin access/affordability; (3) Backup supplies for pump failure; (4) Close follow-up with diabetes educator.",
+          "sources": ["ADA Standards of Care", "StatPearls: DKA Prevention"]
+        }
+      ]
+    }
+  ]
+}

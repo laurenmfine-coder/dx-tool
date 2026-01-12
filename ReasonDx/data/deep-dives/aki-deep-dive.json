@@ -1,0 +1,914 @@
+{
+  "id": "aki-deep-dive",
+  "title": "Acute Kidney Injury",
+  "version": "1.0",
+  "totalQuestions": 32,
+  "estimatedTime": "45 minutes",
+  "difficulty": "Intermediate",
+  "targetAudience": "Medical Students, Residents",
+  "objectives": [
+    "Classify AKI using KDIGO staging criteria",
+    "Distinguish pre-renal, intrinsic, and post-renal etiologies",
+    "Interpret urinalysis and fractional excretion calculations",
+    "Understand nephrotoxic mechanisms of common medications",
+    "Recognize indications for urgent dialysis",
+    "Manage fluid and electrolyte disturbances in AKI"
+  ],
+  "vignette": {
+    "text": "A 68-year-old man is admitted to the hospital after being found lethargic by his wife. He has had decreased oral intake for 4 days due to a \"stomach bug\" with nausea, vomiting, and diarrhea. He has been taking extra ibuprofen (800mg three times daily) for back pain that started last week.\n\nPast Medical History: Hypertension (15 years), Type 2 diabetes mellitus (12 years), Chronic kidney disease stage 3b (baseline creatinine 1.8-2.0 mg/dL), Osteoarthritis, BPH with urinary hesitancy\n\nMedications: Lisinopril 40mg daily, Amlodipine 10mg daily, Metformin 1000mg BID, Tamsulosin 0.4mg nightly, Ibuprofen 800mg TID (recent)\n\nAllergies: None\n\nSocial History: Retired teacher, no tobacco, occasional alcohol. Lives with wife.",
+    "physicalExam": {
+      "general": "Elderly man, appears fatigued and mildly confused, dry mucous membranes",
+      "vitals": {
+        "BP": "98/62 mmHg (baseline 140s/80s)",
+        "HR": "96 bpm",
+        "RR": "18/min",
+        "Temp": "98.4°F",
+        "SpO2": "96% on room air",
+        "Weight": "82 kg (down 4 kg from last visit 2 weeks ago)"
+      },
+      "cardiovascular": "Regular rhythm, no murmurs, JVP flat, no peripheral edema",
+      "pulmonary": "Clear to auscultation bilaterally",
+      "abdomen": "Soft, mildly tender diffusely, no distension, bowel sounds present, bladder not palpable",
+      "skin": "Decreased skin turgor, dry axillae",
+      "neurologic": "Alert but slow to respond, oriented to person and place only"
+    },
+    "diagnostics": {
+      "labs": {
+        "BUN": {"value": "86 mg/dL", "reference": "7-20", "flag": "CRITICAL"},
+        "Creatinine": {"value": "6.4 mg/dL", "reference": "0.7-1.3", "flag": "CRITICAL"},
+        "baselineCreatinine": {"value": "1.9 mg/dL", "reference": "baseline", "flag": "NORMAL"},
+        "Potassium": {"value": "6.2 mEq/L", "reference": "3.5-5.0", "flag": "CRITICAL"},
+        "Sodium": {"value": "132 mEq/L", "reference": "136-145", "flag": "LOW"},
+        "Bicarbonate": {"value": "16 mEq/L", "reference": "22-28", "flag": "LOW"},
+        "Chloride": {"value": "102 mEq/L", "reference": "98-106", "flag": "NORMAL"},
+        "Glucose": {"value": "186 mg/dL", "reference": "70-100", "flag": "HIGH"},
+        "Calcium": {"value": "7.8 mg/dL", "reference": "8.5-10.5", "flag": "LOW"},
+        "Phosphorus": {"value": "6.8 mg/dL", "reference": "2.5-4.5", "flag": "HIGH"},
+        "Hemoglobin": {"value": "10.2 g/dL", "reference": "13.5-17.5", "flag": "LOW"},
+        "WBC": {"value": "9,800/μL", "reference": "4,500-11,000", "flag": "NORMAL"},
+        "Platelets": {"value": "198,000/μL", "reference": "150,000-400,000", "flag": "NORMAL"}
+      },
+      "urinalysis": {
+        "specificGravity": "1.025",
+        "pH": "5.5",
+        "protein": "1+",
+        "blood": "1+",
+        "glucose": "Negative",
+        "leukocyteEsterase": "Negative",
+        "nitrites": "Negative",
+        "WBC": "2-5/hpf",
+        "RBC": "5-10/hpf",
+        "casts": "Many muddy brown granular casts"
+      },
+      "urineElectrolytes": {
+        "urineSodium": "42 mEq/L",
+        "urineCreatinine": "48 mg/dL",
+        "FeNa": "2.8%",
+        "FeUrea": "48%"
+      },
+      "imaging": {
+        "renalUltrasound": "Kidneys 10.5 cm bilaterally (normal size), increased echogenicity consistent with chronic kidney disease, no hydronephrosis, no stones, bladder empty post-void"
+      },
+      "ecg": {
+        "findings": "Sinus rhythm, peaked T waves in V2-V4, slightly widened QRS (112ms)",
+        "interpretation": "Changes consistent with hyperkalemia"
+      }
+    }
+  },
+  "layers": [
+    {
+      "id": "anatomy",
+      "title": "Anatomy",
+      "icon": "🫀",
+      "color": "#ef4444",
+      "questions": [
+        {
+          "id": "aki-anat-1",
+          "stem": "The renal ultrasound shows normal-sized kidneys (10.5 cm) with increased echogenicity.",
+          "question": "What does normal kidney SIZE in a patient with elevated creatinine suggest about the chronicity of kidney disease?",
+          "hint": "Chronic kidney disease typically causes structural changes over time.",
+          "options": [
+            {"id": "A", "text": "Acute process superimposed on chronic disease (kidneys haven't had time to atrophy)", "correct": true},
+            {"id": "B", "text": "This is purely acute kidney injury with no chronic component", "correct": false},
+            {"id": "C", "text": "The patient has polycystic kidney disease", "correct": false},
+            {"id": "D", "text": "The ultrasound is inaccurate and should be repeated", "correct": false}
+          ],
+          "explanation": "Normal kidney size (9-12 cm) suggests the acute component is recent. In long-standing CKD, kidneys typically become small and atrophic (<9 cm). This patient has 'acute-on-chronic' kidney injury — his baseline CKD (echogenicity) with superimposed acute injury (preserved size).",
+          "whyChain": [
+            {
+              "why": "Why do kidneys become small in chronic kidney disease?",
+              "answer": "Progressive nephron loss leads to tubular atrophy and interstitial fibrosis. The remaining functional tissue cannot maintain normal kidney size. This process takes months to years.",
+              "source": "OpenStax Anatomy & Physiology 2e, Chapter 25"
+            },
+            {
+              "why": "What causes the increased echogenicity?",
+              "answer": "Echogenicity increases with fibrosis and scarring. In CKD, chronic inflammation leads to collagen deposition, which reflects ultrasound waves more than normal parenchyma.",
+              "source": "StatPearls: Renal Ultrasound"
+            }
+          ],
+          "sources": ["OpenStax A&P 2e, Chapter 25", "StatPearls: Chronic Kidney Disease"],
+          "remediation": {"link": "/Mechanism/aki-module.html", "title": "Kidney Anatomy"}
+        },
+        {
+          "id": "aki-anat-2",
+          "stem": "The ultrasound shows no hydronephrosis, helping rule out post-renal obstruction.",
+          "question": "Hydronephrosis results from obstruction. At what anatomical level would obstruction need to occur to cause BILATERAL hydronephrosis?",
+          "hint": "Consider where the urinary tract becomes a single structure.",
+          "options": [
+            {"id": "A", "text": "At or below the bladder (bladder outlet, urethra, or prostate)", "correct": true},
+            {"id": "B", "text": "At the ureteropelvic junction bilaterally", "correct": false},
+            {"id": "C", "text": "At the renal pelvis bilaterally", "correct": false},
+            {"id": "D", "text": "At the level of the renal arteries", "correct": false}
+          ],
+          "explanation": "Bilateral hydronephrosis requires obstruction of a common outflow pathway — the bladder outlet, urethra, or (in men) prostate. Unilateral obstruction (stone, tumor) causes unilateral hydronephrosis. This patient's BPH was a concern, but empty bladder and no hydronephrosis rule out significant obstruction.",
+          "whyChain": [
+            {
+              "why": "Why was BPH a concern in this patient?",
+              "answer": "BPH causes prostatic urethral obstruction, leading to incomplete bladder emptying, urinary retention, and potentially bilateral hydronephrosis with post-renal AKI. His tamsulosin is for this condition.",
+              "source": "StatPearls: Benign Prostatic Hyperplasia"
+            },
+            {
+              "why": "How quickly does hydronephrosis develop after obstruction?",
+              "answer": "Hydronephrosis can develop within hours of complete obstruction. However, in partial or intermittent obstruction, it may take days. Acute complete obstruction may show minimal dilation initially.",
+              "source": "StatPearls: Hydronephrosis"
+            }
+          ],
+          "sources": ["OpenStax A&P 2e, Chapter 25.3", "StatPearls: Hydronephrosis"],
+          "remediation": {"link": "/Mechanism/aki-module.html", "title": "Urinary Tract Anatomy"}
+        },
+        {
+          "id": "aki-anat-3",
+          "stem": "The urinalysis shows muddy brown granular casts.",
+          "question": "Casts form in which anatomical structure of the nephron?",
+          "hint": "Casts take the shape of the tubular structure where they form.",
+          "options": [
+            {"id": "A", "text": "Renal tubules (particularly distal tubule and collecting duct)", "correct": true},
+            {"id": "B", "text": "Glomerular capillaries", "correct": false},
+            {"id": "C", "text": "Bowman's capsule", "correct": false},
+            {"id": "D", "text": "Renal pelvis", "correct": false}
+          ],
+          "explanation": "Casts are cylindrical structures that form in the renal tubules, taking their shape. Tamm-Horsfall protein (uromodulin) secreted by the thick ascending limb forms the matrix. The contents of casts (cells, granules, etc.) indicate the type of kidney injury.",
+          "whyChain": [
+            {
+              "why": "What do muddy brown granular casts indicate?",
+              "answer": "Muddy brown granular casts are pathognomonic for acute tubular necrosis (ATN). They contain degenerating tubular epithelial cells and cellular debris from tubular injury.",
+              "source": "StatPearls: Urinalysis"
+            },
+            {
+              "why": "Why are casts important diagnostically?",
+              "answer": "Casts localize pathology to the kidney (vs. lower urinary tract). Different cast types indicate different pathology: RBC casts = glomerulonephritis, WBC casts = interstitial nephritis/pyelonephritis, muddy brown = ATN.",
+              "source": "StatPearls: Urinalysis"
+            }
+          ],
+          "sources": ["StatPearls: Urinalysis", "OpenStax A&P 2e, Chapter 25.5"],
+          "remediation": {"link": "/Mechanism/aki-module.html", "title": "Nephron Anatomy"}
+        },
+        {
+          "id": "aki-anat-4",
+          "stem": "NSAIDs like ibuprofen affect the afferent arteriole of the glomerulus.",
+          "question": "The afferent arteriole delivers blood to the glomerulus. What is the vessel that carries blood AWAY from the glomerulus?",
+          "hint": "This is unusual — most capillary beds drain into venules, not another arteriole.",
+          "options": [
+            {"id": "A", "text": "Efferent arteriole", "correct": true},
+            {"id": "B", "text": "Renal vein", "correct": false},
+            {"id": "C", "text": "Interlobular vein", "correct": false},
+            {"id": "D", "text": "Arcuate vein", "correct": false}
+          ],
+          "explanation": "The glomerulus is unique: it's a capillary bed between TWO arterioles (afferent → glomerulus → efferent). This arrangement allows precise control of glomerular pressure and filtration. The efferent arteriole then supplies the peritubular capillaries.",
+          "whyChain": [
+            {
+              "why": "Why is the efferent vessel an arteriole and not a venule?",
+              "answer": "The efferent arteriole maintains pressure for the peritubular capillary network that surrounds the tubules. It also allows regulation of glomerular filtration pressure by adjusting efferent resistance.",
+              "source": "OpenStax A&P 2e, Chapter 25.4"
+            },
+            {
+              "why": "How does this relate to NSAID and ACE inhibitor nephrotoxicity?",
+              "answer": "NSAIDs constrict the afferent arteriole (blocking prostaglandin-mediated vasodilation). ACE inhibitors dilate the efferent arteriole (blocking angiotensin II). Together, they dramatically reduce glomerular filtration pressure.",
+              "source": "StatPearls: NSAID Nephrotoxicity"
+            }
+          ],
+          "sources": ["OpenStax A&P 2e, Chapter 25.4", "StatPearls: Renal Physiology"],
+          "remediation": {"link": "/Mechanism/aki-module.html", "title": "Glomerular Anatomy"}
+        }
+      ]
+    },
+    {
+      "id": "physiology",
+      "title": "Physiology",
+      "icon": "⚡",
+      "color": "#f59e0b",
+      "questions": [
+        {
+          "id": "aki-phys-1",
+          "stem": "The patient's BUN is 86 and creatinine is 6.4, giving a BUN:Cr ratio of ~13:1.",
+          "question": "In pre-renal azotemia, the BUN:Cr ratio is typically elevated (>20:1). Why is this patient's ratio closer to normal?",
+          "hint": "Consider what happens when pre-renal injury progresses to intrinsic injury.",
+          "options": [
+            {"id": "A", "text": "Pre-renal injury has progressed to intrinsic tubular damage (ATN)", "correct": true},
+            {"id": "B", "text": "The patient has isolated glomerular disease", "correct": false},
+            {"id": "C", "text": "This indicates post-renal obstruction", "correct": false},
+            {"id": "D", "text": "Laboratory error in BUN measurement", "correct": false}
+          ],
+          "explanation": "Initially, pre-renal states show elevated BUN:Cr ratio (>20:1) because urea is passively reabsorbed in slow-flowing tubules while creatinine is not. Once tubular injury occurs (ATN), this selective reabsorption is lost, and the ratio normalizes (10-15:1). His muddy brown casts confirm ATN.",
+          "whyChain": [
+            {
+              "why": "Why is urea reabsorbed more than creatinine in pre-renal states?",
+              "answer": "When tubular flow is slow (from reduced GFR), urea has more time to passively diffuse back into the blood following its concentration gradient. Creatinine is not reabsorbed, so creatinine rises proportionally with GFR decline, while BUN rises disproportionately.",
+              "source": "StatPearls: BUN"
+            },
+            {
+              "why": "What other factors affect BUN independently of kidney function?",
+              "answer": "BUN increases with: high protein intake, GI bleeding (digested blood = protein load), catabolic states, steroids, and tetracyclines. BUN decreases with: malnutrition, liver disease (can't make urea), and pregnancy.",
+              "source": "StatPearls: BUN"
+            }
+          ],
+          "sources": ["StatPearls: Blood Urea Nitrogen", "OpenStax A&P 2e, Chapter 25.8"],
+          "remediation": {"link": "/Mechanism/aki-module.html", "title": "BUN Physiology"}
+        },
+        {
+          "id": "aki-phys-2",
+          "stem": "The fractional excretion of sodium (FeNa) is 2.8%.",
+          "question": "FeNa >2% suggests intrinsic renal disease. What is the physiologic basis for this test?",
+          "hint": "Consider what healthy tubules do with filtered sodium in low-perfusion states.",
+          "options": [
+            {"id": "A", "text": "Healthy tubules avidly reabsorb sodium when perfusion is low; damaged tubules cannot", "correct": true},
+            {"id": "B", "text": "Damaged glomeruli filter more sodium than normal", "correct": false},
+            {"id": "C", "text": "Pre-renal states cause increased aldosterone which wastes sodium", "correct": false},
+            {"id": "D", "text": "Intrinsic disease blocks sodium channels in the collecting duct", "correct": false}
+          ],
+          "explanation": "In pre-renal AKI, the tubules are healthy and respond appropriately to low perfusion by maximally reabsorbing sodium (FeNa <1%). In ATN, damaged tubular cells cannot reabsorb sodium effectively, so FeNa rises (>2%). This patient's FeNa of 2.8% indicates intrinsic tubular damage.",
+          "whyChain": [
+            {
+              "why": "Why can FeNa be misleading in some situations?",
+              "answer": "Diuretics increase FeNa even in pre-renal states (they block sodium reabsorption). In these cases, use FeUrea instead — urea handling is not affected by diuretics. His FeUrea of 48% also suggests ATN (>35% = intrinsic).",
+              "source": "StatPearls: Fractional Excretion of Sodium"
+            },
+            {
+              "why": "What is the formula for FeNa?",
+              "answer": "FeNa = (UNa × PCr) / (PNa × UCr) × 100. It represents the percentage of filtered sodium that is excreted. <1% = pre-renal (avid retention), >2% = intrinsic (tubular dysfunction).",
+              "source": "KDIGO AKI Guidelines"
+            }
+          ],
+          "sources": ["StatPearls: Fractional Excretion of Sodium", "KDIGO AKI Guidelines"],
+          "remediation": {"link": "/Mechanism/aki-module.html", "title": "FeNa Calculation"}
+        },
+        {
+          "id": "aki-phys-3",
+          "stem": "The patient's potassium is critically elevated at 6.2 mEq/L with ECG changes.",
+          "question": "Why does AKI cause hyperkalemia?",
+          "hint": "Consider the kidney's role in potassium homeostasis.",
+          "options": [
+            {"id": "A", "text": "Reduced GFR decreases potassium filtration and tubular secretion", "correct": true},
+            {"id": "B", "text": "AKI causes increased intestinal potassium absorption", "correct": false},
+            {"id": "C", "text": "Damaged kidneys actively reabsorb potassium", "correct": false},
+            {"id": "D", "text": "Metabolic acidosis decreases cellular potassium uptake only", "correct": false}
+          ],
+          "explanation": "The kidney is the primary route of potassium excretion (90%). In AKI, both reduced filtration and impaired tubular secretion (principal cells of collecting duct) lead to potassium retention. Acidosis exacerbates this by shifting K+ out of cells in exchange for H+.",
+          "whyChain": [
+            {
+              "why": "Why are the ECG changes concerning?",
+              "answer": "Hyperkalemia causes progressive cardiac toxicity: peaked T waves (early) → PR prolongation → QRS widening → sine wave → VFib/asystole. His peaked T waves and widened QRS indicate significant cardiac membrane effects requiring urgent treatment.",
+              "source": "StatPearls: Hyperkalemia"
+            },
+            {
+              "why": "What factors worsen his hyperkalemia?",
+              "answer": "Multiple contributors: AKI (reduced excretion), ACE inhibitor (blocks aldosterone, reduces secretion), NSAIDs (reduce renin/aldosterone), metabolic acidosis (transcellular shift), and cell breakdown from illness (release of intracellular K+).",
+              "source": "StatPearls: Hyperkalemia"
+            }
+          ],
+          "sources": ["StatPearls: Hyperkalemia", "OpenStax A&P 2e, Chapter 26"],
+          "remediation": {"link": "/Mechanism/electrolytes-acidbase.html", "title": "Potassium Homeostasis"}
+        },
+        {
+          "id": "aki-phys-4",
+          "stem": "The patient has metabolic acidosis (bicarbonate 16 mEq/L) with an elevated anion gap.",
+          "question": "Calculate his anion gap. What is the PRIMARY cause of anion gap metabolic acidosis in AKI?",
+          "hint": "Anion gap = Na - (Cl + HCO3). Normal is 8-12.",
+          "options": [
+            {"id": "A", "text": "AG = 14; retention of uremic acids (sulfates, phosphates, organic acids)", "correct": true},
+            {"id": "B", "text": "AG = 14; diabetic ketoacidosis", "correct": false},
+            {"id": "C", "text": "AG = 8; normal anion gap from bicarbonate loss", "correct": false},
+            {"id": "D", "text": "AG = 20; lactic acidosis from sepsis", "correct": false}
+          ],
+          "explanation": "AG = 132 - (102 + 16) = 14 (mildly elevated). In AKI, the kidneys cannot excrete the daily acid load (sulfuric acid from protein metabolism, phosphoric acid, and other organic acids). These unmeasured anions accumulate, causing an elevated anion gap metabolic acidosis.",
+          "whyChain": [
+            {
+              "why": "Why is his anion gap only mildly elevated?",
+              "answer": "Uremic acidosis typically causes modest AG elevation (14-20). Severe AG elevation (>25) would suggest additional causes like lactic acidosis, ketoacidosis, or toxic ingestion (methanol, ethylene glycol).",
+              "source": "StatPearls: Anion Gap Metabolic Acidosis"
+            },
+            {
+              "why": "Does AKI also cause non-anion gap acidosis?",
+              "answer": "Yes. Damaged tubules cannot regenerate bicarbonate (impaired ammoniagenesis) or secrete H+, leading to a component of normal AG (hyperchloremic) acidosis alongside the uremic AG acidosis.",
+              "source": "StatPearls: Renal Tubular Acidosis"
+            }
+          ],
+          "sources": ["StatPearls: Anion Gap Metabolic Acidosis", "KDIGO AKI Guidelines"],
+          "remediation": {"link": "/Mechanism/acid-base-module.html", "title": "Anion Gap"}
+        },
+        {
+          "id": "aki-phys-5",
+          "stem": "The patient's phosphorus is elevated (6.8 mg/dL) and calcium is low (7.8 mg/dL).",
+          "question": "Why does AKI cause hyperphosphatemia and hypocalcemia?",
+          "hint": "Consider the kidney's role in phosphate excretion and vitamin D metabolism.",
+          "options": [
+            {"id": "A", "text": "Reduced phosphate filtration causes retention; phosphate binds calcium causing hypocalcemia", "correct": true},
+            {"id": "B", "text": "AKI increases PTH which raises phosphate and lowers calcium", "correct": false},
+            {"id": "C", "text": "Tubular damage causes phosphate and calcium wasting equally", "correct": false},
+            {"id": "D", "text": "Metabolic acidosis directly lowers both phosphate and calcium", "correct": false}
+          ],
+          "explanation": "The kidneys excrete 90% of dietary phosphate. In AKI, reduced GFR causes phosphate retention. Elevated phosphate complexes with calcium in the blood, lowering ionized calcium. Additionally, the kidneys cannot convert 25-OH vitamin D to active 1,25-OH vitamin D, further reducing calcium absorption.",
+          "whyChain": [
+            {
+              "why": "Why does this matter clinically?",
+              "answer": "Severe hypocalcemia can cause tetany, seizures, and arrhythmias. However, calcium should be corrected cautiously in hyperphosphatemia because calcium-phosphate precipitation can cause metastatic calcification.",
+              "source": "StatPearls: Hypocalcemia"
+            },
+            {
+              "why": "Is his calcium truly low?",
+              "answer": "Must correct for albumin: Corrected Ca = measured Ca + 0.8 × (4 - albumin). If albumin is low, the 'true' (ionized) calcium may be normal. However, in AKI, ionized calcium is often truly low due to phosphate binding.",
+              "source": "StatPearls: Hypocalcemia"
+            }
+          ],
+          "sources": ["StatPearls: Hypocalcemia", "OpenStax A&P 2e, Chapter 26"],
+          "remediation": {"link": "/Mechanism/electrolytes-acidbase.html", "title": "Calcium-Phosphate Homeostasis"}
+        }
+      ]
+    },
+    {
+      "id": "pathophysiology",
+      "title": "Pathophysiology",
+      "icon": "🔬",
+      "color": "#8b5cf6",
+      "questions": [
+        {
+          "id": "aki-patho-1",
+          "stem": "This patient has multiple risk factors for AKI: volume depletion, NSAIDs, and ACE inhibitor.",
+          "question": "What is the sequence of pathophysiology that led from pre-renal to intrinsic AKI?",
+          "hint": "Consider how prolonged ischemia affects the tubules.",
+          "options": [
+            {"id": "A", "text": "Volume depletion reduced renal perfusion → NSAIDs + ACEI further reduced GFR → prolonged ischemia caused tubular epithelial necrosis (ATN)", "correct": true},
+            {"id": "B", "text": "NSAIDs caused direct tubular toxicity → volume depletion worsened damage → ACEI had no effect", "correct": false},
+            {"id": "C", "text": "ACEI caused hyperkalemia → hyperkalemia damaged tubules → volume depletion was coincidental", "correct": false},
+            {"id": "D", "text": "Obstruction from BPH → back-pressure damaged tubules → dehydration was secondary", "correct": false}
+          ],
+          "explanation": "This is the classic 'triple whammy': (1) Volume depletion reduced renal perfusion; (2) NSAIDs blocked prostaglandin-mediated afferent arteriolar vasodilation; (3) ACEI blocked angiotensin II-mediated efferent arteriolar constriction. Combined, these caused severe reduction in glomerular filtration pressure, leading to ischemic ATN.",
+          "whyChain": [
+            {
+              "why": "Why do healthy kidneys tolerate these medications?",
+              "answer": "In euvolemic patients with normal kidneys, compensatory mechanisms maintain GFR even on NSAIDs and ACEIs. The drugs become dangerous when volume depletion or underlying CKD eliminates the kidney's reserve capacity.",
+              "source": "StatPearls: NSAID Nephrotoxicity"
+            },
+            {
+              "why": "What is the timeline for pre-renal to ATN conversion?",
+              "answer": "Prolonged pre-renal ischemia (typically >24-48 hours of severe hypoperfusion) causes irreversible tubular cell injury. Once ATN develops, recovery requires tubular regeneration (1-3 weeks even after correcting the underlying cause).",
+              "source": "KDIGO AKI Guidelines"
+            }
+          ],
+          "sources": ["StatPearls: Acute Tubular Necrosis", "KDIGO AKI Guidelines"],
+          "remediation": {"link": "/Mechanism/aki-module.html", "title": "ATN Pathophysiology"}
+        },
+        {
+          "id": "aki-patho-2",
+          "stem": "Muddy brown granular casts are present on urinalysis.",
+          "question": "These casts are pathognomonic for ATN. What cellular process creates them?",
+          "hint": "Consider what happens to tubular cells deprived of oxygen.",
+          "options": [
+            {"id": "A", "text": "Ischemic necrosis of tubular epithelial cells → sloughing into lumen → aggregation with Tamm-Horsfall protein", "correct": true},
+            {"id": "B", "text": "Bacterial infection of tubules → WBC infiltration → cast formation", "correct": false},
+            {"id": "C", "text": "Glomerular injury → RBC leakage → hemoglobin precipitation in tubules", "correct": false},
+            {"id": "D", "text": "Crystal precipitation from uric acid or calcium", "correct": false}
+          ],
+          "explanation": "In ATN, ischemia causes tubular epithelial cell death. Necrotic cells detach from the basement membrane and slough into the tubular lumen. These degenerating cells mix with Tamm-Horsfall protein matrix to form the characteristic 'muddy brown' granular casts.",
+          "whyChain": [
+            {
+              "why": "Which tubular segment is most vulnerable to ischemia?",
+              "answer": "The S3 segment of the proximal tubule and the thick ascending limb are most vulnerable. These segments have high metabolic demands (active transport) but exist in the relatively hypoxic medulla, making them susceptible to ischemia.",
+              "source": "StatPearls: Acute Tubular Necrosis"
+            },
+            {
+              "why": "Can you distinguish ischemic from nephrotoxic ATN by urinalysis?",
+              "answer": "Both cause muddy brown casts, but nephrotoxic ATN (aminoglycosides, contrast) often affects the proximal tubule more selectively. Clinically, distinguishing them relies on history and exposure timeline.",
+              "source": "StatPearls: Acute Tubular Necrosis"
+            }
+          ],
+          "sources": ["StatPearls: Acute Tubular Necrosis", "KDIGO AKI Guidelines"],
+          "remediation": {"link": "/Mechanism/aki-module.html", "title": "ATN Mechanisms"}
+        },
+        {
+          "id": "aki-patho-3",
+          "stem": "NSAIDs inhibit prostaglandin synthesis by blocking cyclooxygenase (COX).",
+          "question": "Which prostaglandin effect on the kidney is blocked by NSAIDs, leading to reduced GFR?",
+          "hint": "Consider the role of prostaglandins in the afferent arteriole.",
+          "options": [
+            {"id": "A", "text": "Prostaglandin-mediated afferent arteriolar vasodilation", "correct": true},
+            {"id": "B", "text": "Prostaglandin-mediated sodium retention in collecting duct", "correct": false},
+            {"id": "C", "text": "Prostaglandin-mediated efferent arteriolar constriction", "correct": false},
+            {"id": "D", "text": "Prostaglandin-mediated ADH secretion", "correct": false}
+          ],
+          "explanation": "Prostaglandins (especially PGE2 and PGI2) cause vasodilation of the afferent arteriole, maintaining glomerular perfusion when systemic blood flow is reduced. NSAIDs block this protective mechanism, allowing unopposed vasoconstriction and reduced GFR.",
+          "whyChain": [
+            {
+              "why": "Why are prostaglandins particularly important in volume-depleted states?",
+              "answer": "In volume depletion, angiotensin II and catecholamines cause systemic vasoconstriction. Prostaglandins provide local counter-regulation to maintain renal perfusion. Blocking them removes this 'safety valve.'",
+              "source": "StatPearls: NSAID Nephrotoxicity"
+            },
+            {
+              "why": "What other renal effects do NSAIDs have?",
+              "answer": "NSAIDs also: reduce renin release (can help or harm), decrease medullary blood flow (papillary necrosis with chronic use), cause sodium retention (edema, hypertension), and can trigger interstitial nephritis (hypersensitivity).",
+              "source": "StatPearls: NSAID Nephrotoxicity"
+            }
+          ],
+          "sources": ["StatPearls: NSAID Nephrotoxicity", "OpenStax A&P 2e, Chapter 25"],
+          "remediation": {"link": "/Mechanism/pharmacology.html", "title": "NSAID Mechanism"}
+        },
+        {
+          "id": "aki-patho-4",
+          "stem": "ACE inhibitors like lisinopril block the conversion of angiotensin I to angiotensin II.",
+          "question": "How does blocking angiotensin II contribute to AKI in this patient?",
+          "hint": "Consider angiotensin II's effect on the efferent arteriole.",
+          "options": [
+            {"id": "A", "text": "Loss of efferent arteriolar constriction reduces glomerular filtration pressure", "correct": true},
+            {"id": "B", "text": "Increased aldosterone causes excessive sodium loss", "correct": false},
+            {"id": "C", "text": "Direct tubular toxicity from ACE inhibitor metabolites", "correct": false},
+            {"id": "D", "text": "Angiotensin II normally causes afferent vasodilation", "correct": false}
+          ],
+          "explanation": "Angiotensin II preferentially constricts the efferent arteriole, which maintains glomerular capillary pressure even when renal perfusion is reduced. ACE inhibitors block this effect, causing efferent vasodilation and reducing the pressure gradient that drives filtration.",
+          "whyChain": [
+            {
+              "why": "Why do we still use ACE inhibitors in CKD patients?",
+              "answer": "Long-term, ACE inhibitors are renoprotective in diabetic and proteinuric CKD by reducing intraglomerular hypertension and proteinuria. The short-term GFR drop (up to 30% is acceptable) is a trade-off for long-term nephroprotection.",
+              "source": "KDIGO CKD Guidelines"
+            },
+            {
+              "why": "When should ACE inhibitors be held?",
+              "answer": "Hold during acute illness with volume depletion, hypotension, or rising creatinine. The 'sick day rules' advise patients to temporarily stop ACEi/ARBs during vomiting, diarrhea, or febrile illness.",
+              "source": "KDIGO AKI Guidelines"
+            }
+          ],
+          "sources": ["KDIGO CKD Guidelines", "StatPearls: ACE Inhibitors"],
+          "remediation": {"link": "/Mechanism/pharmacology.html", "title": "ACE Inhibitors"}
+        },
+        {
+          "id": "aki-patho-5",
+          "stem": "The KDIGO classification stages AKI based on creatinine rise or urine output decline.",
+          "question": "This patient's creatinine rose from baseline 1.9 to 6.4 mg/dL. What KDIGO stage is this?",
+          "hint": "Stage 3 is the most severe. Consider the magnitude of creatinine increase.",
+          "options": [
+            {"id": "A", "text": "Stage 3 (creatinine ≥3x baseline or ≥4.0 mg/dL or requiring dialysis)", "correct": true},
+            {"id": "B", "text": "Stage 2 (creatinine 2-2.9x baseline)", "correct": false},
+            {"id": "C", "text": "Stage 1 (creatinine 1.5-1.9x baseline or ≥0.3 increase)", "correct": false},
+            {"id": "D", "text": "Cannot be staged without 48-hour trending", "correct": false}
+          ],
+          "explanation": "His creatinine is 6.4/1.9 = 3.4× baseline, meeting Stage 3 criteria (≥3× baseline OR absolute ≥4.0 mg/dL OR need for RRT). Stage 3 AKI has the highest mortality and highest risk of requiring dialysis.",
+          "whyChain": [
+            {
+              "why": "What are the KDIGO AKI stages?",
+              "answer": "Stage 1: Cr 1.5-1.9× baseline OR ≥0.3 mg/dL increase. Stage 2: Cr 2-2.9× baseline. Stage 3: Cr ≥3× baseline OR ≥4.0 mg/dL OR RRT initiation. Urine output criteria can also define stages.",
+              "source": "KDIGO AKI Guidelines"
+            },
+            {
+              "why": "Why does staging matter?",
+              "answer": "Higher stages predict worse outcomes: Stage 1 has ~10% mortality, Stage 3 has ~30-40% mortality. Staging guides intensity of monitoring, nephrology consultation timing, and prognostic discussions.",
+              "source": "KDIGO AKI Guidelines"
+            }
+          ],
+          "sources": ["KDIGO AKI Guidelines 2012", "StatPearls: Acute Kidney Injury"],
+          "remediation": {"link": "/Mechanism/aki-module.html", "title": "KDIGO Staging"}
+        }
+      ]
+    },
+    {
+      "id": "pharmacology",
+      "title": "Pharmacology",
+      "icon": "💊",
+      "color": "#10b981",
+      "questions": [
+        {
+          "id": "aki-pharm-1",
+          "stem": "The patient's potassium is 6.2 mEq/L with ECG changes (peaked T waves, widened QRS).",
+          "question": "What is the FIRST medication to administer for hyperkalemia with ECG changes?",
+          "hint": "The first priority is cardiac membrane stabilization, not potassium lowering.",
+          "options": [
+            {"id": "A", "text": "Calcium gluconate IV", "correct": true},
+            {"id": "B", "text": "Insulin and glucose IV", "correct": false},
+            {"id": "C", "text": "Sodium bicarbonate IV", "correct": false},
+            {"id": "D", "text": "Kayexalate (sodium polystyrene sulfonate)", "correct": false}
+          ],
+          "explanation": "Calcium gluconate is given FIRST because it stabilizes the cardiac membrane within minutes, reducing the risk of fatal arrhythmia. It does NOT lower potassium — it buys time while other therapies work. Give 1-2g IV over 2-3 minutes.",
+          "whyChain": [
+            {
+              "why": "How does calcium stabilize the cardiac membrane?",
+              "answer": "Hyperkalemia partially depolarizes the cardiac membrane, increasing excitability and conduction abnormalities. Calcium raises the threshold potential, restoring the normal voltage difference and stabilizing conduction.",
+              "source": "StatPearls: Hyperkalemia"
+            },
+            {
+              "why": "What's the sequence after calcium?",
+              "answer": "After calcium: (1) Insulin + glucose (shifts K+ into cells in 15-30 min); (2) Albuterol nebulizer (shifts K+); (3) Kayexalate or patiromer (removes K+ from body over hours); (4) Dialysis if refractory.",
+              "source": "StatPearls: Hyperkalemia"
+            }
+          ],
+          "sources": ["StatPearls: Hyperkalemia", "KDIGO AKI Guidelines"],
+          "remediation": {"link": "/Mechanism/electrolytes-acidbase.html", "title": "Hyperkalemia Treatment"}
+        },
+        {
+          "id": "aki-pharm-2",
+          "stem": "The patient is on metformin 1000mg BID for diabetes.",
+          "question": "Why is metformin contraindicated in AKI?",
+          "hint": "Consider metformin's route of elimination and a serious adverse effect.",
+          "options": [
+            {"id": "A", "text": "Metformin is renally cleared; accumulation causes lactic acidosis", "correct": true},
+            {"id": "B", "text": "Metformin is directly nephrotoxic and worsens AKI", "correct": false},
+            {"id": "C", "text": "Metformin causes severe hyperglycemia in AKI", "correct": false},
+            {"id": "D", "text": "Metformin interacts with dialysis membranes", "correct": false}
+          ],
+          "explanation": "Metformin is eliminated unchanged by the kidneys. In AKI, metformin accumulates and inhibits hepatic lactate metabolism, causing metformin-associated lactic acidosis (MALA) — a life-threatening condition with high mortality. His metformin must be held immediately.",
+          "whyChain": [
+            {
+              "why": "What is the mechanism of metformin-associated lactic acidosis?",
+              "answer": "Metformin inhibits mitochondrial complex I and hepatic gluconeogenesis from lactate. Accumulated metformin shifts cellular metabolism toward anaerobic glycolysis while blocking the liver's ability to clear lactate.",
+              "source": "StatPearls: Metformin"
+            },
+            {
+              "why": "Can metformin be removed by dialysis?",
+              "answer": "Yes. Metformin has a small molecular weight and minimal protein binding, making it dialyzable. Hemodialysis is indicated for severe MALA. It also corrects the acidosis and removes lactate.",
+              "source": "StatPearls: Metformin"
+            }
+          ],
+          "sources": ["StatPearls: Metformin", "KDIGO AKI Guidelines"],
+          "remediation": {"link": "/Mechanism/diabetes.html", "title": "Metformin Safety"}
+        },
+        {
+          "id": "aki-pharm-3",
+          "stem": "The team is considering IV fluids for volume resuscitation.",
+          "question": "Which IV fluid is MOST appropriate for initial resuscitation in this patient?",
+          "hint": "Consider his hyperkalemia and acid-base status when choosing fluids.",
+          "options": [
+            {"id": "A", "text": "Normal saline (0.9% NaCl)", "correct": true},
+            {"id": "B", "text": "Lactated Ringer's solution", "correct": false},
+            {"id": "C", "text": "D5W (5% dextrose in water)", "correct": false},
+            {"id": "D", "text": "Half-normal saline (0.45% NaCl)", "correct": false}
+          ],
+          "explanation": "Normal saline is preferred here because LR contains potassium (4 mEq/L) which could worsen his hyperkalemia, and the lactate in LR requires hepatic metabolism which may be impaired. While balanced crystalloids are generally preferred, NS is safer when hyperkalemia is present.",
+          "whyChain": [
+            {
+              "why": "Doesn't normal saline cause hyperchloremic acidosis?",
+              "answer": "Yes, large volumes of NS can worsen acidosis. However, restoring volume will improve renal perfusion and potassium excretion, which is more urgent. Once hyperkalemia is controlled, balanced crystalloids can be used.",
+              "source": "KDIGO AKI Guidelines"
+            },
+            {
+              "why": "How much fluid should be given?",
+              "answer": "In hypovolemic AKI, give isotonic crystalloid cautiously — typically 250-500 mL boluses with frequent reassessment. Avoid aggressive fluid resuscitation if oliguric ATN is established (won't help, may cause pulmonary edema).",
+              "source": "KDIGO AKI Guidelines"
+            }
+          ],
+          "sources": ["KDIGO AKI Guidelines", "StatPearls: IV Fluids"],
+          "remediation": {"link": "/Mechanism/electrolytes-acidbase.html", "title": "IV Fluid Selection"}
+        },
+        {
+          "id": "aki-pharm-4",
+          "stem": "The patient requires medication reconciliation. Several of his home medications are potentially harmful in AKI.",
+          "question": "Which of his home medications should be CONTINUED during this admission?",
+          "hint": "Consider which medications are safe in AKI and provide benefit.",
+          "options": [
+            {"id": "A", "text": "Amlodipine (calcium channel blocker)", "correct": true},
+            {"id": "B", "text": "Lisinopril (ACE inhibitor)", "correct": false},
+            {"id": "C", "text": "Metformin (biguanide)", "correct": false},
+            {"id": "D", "text": "Ibuprofen (NSAID)", "correct": false}
+          ],
+          "explanation": "Amlodipine is hepatically metabolized and safe in AKI. It may help control blood pressure as it recovers. Stop: Lisinopril (worsens GFR), Metformin (lactic acidosis risk), Ibuprofen (caused the problem). Tamsulosin can continue.",
+          "whyChain": [
+            {
+              "why": "When can ACE inhibitor be restarted?",
+              "answer": "Restart ACE inhibitor once AKI has resolved and the patient is euvolemic, typically when creatinine returns near baseline and the patient is eating/drinking normally. The long-term renoprotective benefit outweighs short-term risks.",
+              "source": "KDIGO CKD Guidelines"
+            },
+            {
+              "why": "What about his tamsulosin?",
+              "answer": "Continue tamsulosin — it helps with bladder emptying in BPH and doesn't harm kidney function. Urinary retention from stopping it could actually cause post-renal AKI.",
+              "source": "StatPearls: Tamsulosin"
+            }
+          ],
+          "sources": ["KDIGO AKI Guidelines", "StatPearls: Drug Dosing in Renal Impairment"],
+          "remediation": {"link": "/Mechanism/pharmacology.html", "title": "Renally-Cleared Drugs"}
+        },
+        {
+          "id": "aki-pharm-5",
+          "stem": "The patient asks if any medications can help his kidneys recover faster.",
+          "question": "Which statement about pharmacologic therapy for AKI is CORRECT?",
+          "hint": "Many therapies have been studied but few have proven benefit.",
+          "options": [
+            {"id": "A", "text": "No medication has been proven to accelerate AKI recovery; supportive care is mainstay", "correct": true},
+            {"id": "B", "text": "Low-dose dopamine improves renal blood flow and outcomes in ATN", "correct": false},
+            {"id": "C", "text": "Loop diuretics speed recovery by flushing out tubular debris", "correct": false},
+            {"id": "D", "text": "N-acetylcysteine prevents progression of established ATN", "correct": false}
+          ],
+          "explanation": "No pharmacologic therapy has been proven to hasten recovery from established ATN. Low-dose ('renal dose') dopamine does not improve outcomes. Loop diuretics may manage volume overload but don't accelerate recovery and may worsen outcomes if they cause volume depletion.",
+          "whyChain": [
+            {
+              "why": "Why doesn't 'renal dose' dopamine work?",
+              "answer": "While low-dose dopamine increases renal blood flow in healthy kidneys, multiple large trials showed no benefit in AKI (no reduction in dialysis need or mortality). It may cause arrhythmias and gut ischemia.",
+              "source": "KDIGO AKI Guidelines"
+            },
+            {
+              "why": "What is the mainstay of AKI treatment?",
+              "answer": "Supportive care: (1) Treat the underlying cause; (2) Optimize volume status; (3) Avoid further nephrotoxins; (4) Adjust drug doses; (5) Manage complications (hyperkalemia, acidosis, volume overload); (6) Dialysis when indicated.",
+              "source": "KDIGO AKI Guidelines"
+            }
+          ],
+          "sources": ["KDIGO AKI Guidelines", "NEJM: Dopamine in AKI"],
+          "remediation": {"link": "/Mechanism/aki-module.html", "title": "AKI Management"}
+        }
+      ]
+    },
+    {
+      "id": "clinical-reasoning",
+      "title": "Clinical Reasoning",
+      "icon": "🧠",
+      "color": "#3b82f6",
+      "questions": [
+        {
+          "id": "aki-clin-1",
+          "stem": "The initial differential for AKI includes pre-renal, intrinsic, and post-renal causes.",
+          "question": "Which combination of findings BEST supports intrinsic (ATN) rather than pre-renal AKI in this patient?",
+          "hint": "Integrate the urinalysis, FeNa, and clinical context.",
+          "options": [
+            {"id": "A", "text": "Muddy brown casts, FeNa 2.8%, BUN:Cr ratio ~13:1, prolonged hypoperfusion history", "correct": true},
+            {"id": "B", "text": "Bland urinalysis, FeNa <1%, BUN:Cr ratio >20:1", "correct": false},
+            {"id": "C", "text": "RBC casts, proteinuria >3g, normal FeNa", "correct": false},
+            {"id": "D", "text": "Hydronephrosis on ultrasound, distended bladder, high post-void residual", "correct": false}
+          ],
+          "explanation": "This patient has the classic constellation of ATN: muddy brown granular casts (tubular cell debris), FeNa >2% (impaired sodium reabsorption), normalized BUN:Cr ratio (loss of selective urea reabsorption), and a clear history of prolonged pre-renal insult that progressed to tubular damage.",
+          "whyChain": [
+            {
+              "why": "What would pre-renal findings look like?",
+              "answer": "Pre-renal: bland or hyaline casts only, FeNa <1% (avid sodium retention), BUN:Cr >20:1 (selective urea reabsorption), concentrated urine (specific gravity >1.020), and rapid improvement with volume repletion.",
+              "source": "StatPearls: Acute Kidney Injury"
+            },
+            {
+              "why": "Can pre-renal and ATN coexist?",
+              "answer": "Yes, that's exactly this case. Pre-renal injury that persists long enough converts to ATN. Early in his course, he likely had pre-renal findings that evolved to ATN over days of ongoing insults.",
+              "source": "KDIGO AKI Guidelines"
+            }
+          ],
+          "sources": ["StatPearls: Acute Tubular Necrosis", "KDIGO AKI Guidelines"],
+          "remediation": {"link": "/Mechanism/aki-module.html", "title": "AKI Differential"}
+        },
+        {
+          "id": "aki-clin-2",
+          "stem": "You need to determine if this patient requires emergent dialysis.",
+          "question": "Which finding in this patient would be an ABSOLUTE indication for urgent dialysis?",
+          "hint": "Think about life-threatening complications that only dialysis can address.",
+          "options": [
+            {"id": "A", "text": "Refractory hyperkalemia (K+ remains >6.5 despite medical management)", "correct": true},
+            {"id": "B", "text": "Creatinine of 6.4 mg/dL", "correct": false},
+            {"id": "C", "text": "BUN of 86 mg/dL", "correct": false},
+            {"id": "D", "text": "Metabolic acidosis with pH 7.30", "correct": false}
+          ],
+          "explanation": "The mnemonic AEIOU covers urgent dialysis indications: Acidosis (refractory, pH <7.1), Electrolytes (refractory hyperkalemia with ECG changes), Intoxication (dialyzable toxins), Overload (pulmonary edema refractory to diuretics), Uremia (encephalopathy, pericarditis, bleeding). Creatinine/BUN numbers alone are NOT indications.",
+          "whyChain": [
+            {
+              "why": "Does this patient need dialysis right now?",
+              "answer": "Not immediately if hyperkalemia responds to medical therapy (calcium, insulin/glucose, etc.). His acidosis is not severe (pH ~7.3), he's not in overt pulmonary edema, and his encephalopathy may be from uremia + dehydration. Treat medically first and reassess.",
+              "source": "KDIGO AKI Guidelines"
+            },
+            {
+              "why": "What if medical management fails?",
+              "answer": "If K+ remains >6.5 despite calcium + insulin + albuterol, or if ECG changes worsen, emergent hemodialysis is indicated. The nephrology team should be consulted early given his Stage 3 AKI.",
+              "source": "KDIGO AKI Guidelines"
+            }
+          ],
+          "sources": ["KDIGO AKI Guidelines", "StatPearls: Indications for Dialysis"],
+          "remediation": {"link": "/Mechanism/aki-module.html", "title": "Dialysis Indications"}
+        },
+        {
+          "id": "aki-clin-3",
+          "stem": "The patient's wife asks about his chances of kidney recovery.",
+          "question": "Which factor is MOST associated with failure to recover kidney function after ATN?",
+          "hint": "Consider pre-existing kidney health and the severity/duration of injury.",
+          "options": [
+            {"id": "A", "text": "Pre-existing CKD with low baseline GFR", "correct": true},
+            {"id": "B", "text": "Age over 65 years", "correct": false},
+            {"id": "C", "text": "Diabetes mellitus as a comorbidity", "correct": false},
+            {"id": "D", "text": "Male sex", "correct": false}
+          ],
+          "explanation": "Pre-existing CKD is the strongest predictor of non-recovery. Patients with baseline reduced nephron mass have less renal reserve and regenerative capacity. His CKD stage 3b (baseline Cr 1.9) puts him at significant risk for incomplete recovery and possible progression to ESRD.",
+          "whyChain": [
+            {
+              "why": "What percentage of ATN patients recover function?",
+              "answer": "In patients without prior CKD, 50-70% recover to near-baseline function. With underlying CKD, recovery rates are much lower, and many experience permanent GFR decline (AKI-to-CKD transition).",
+              "source": "KDIGO AKI Guidelines"
+            },
+            {
+              "why": "How long should we wait for recovery before concluding it won't happen?",
+              "answer": "ATN typically begins recovering in 1-3 weeks. If no improvement by 4-6 weeks, or if dialysis-dependent beyond 90 days, the injury may be permanent. Serial creatinine trending guides prognosis.",
+              "source": "StatPearls: Acute Tubular Necrosis"
+            }
+          ],
+          "sources": ["KDIGO AKI Guidelines", "JASN: AKI to CKD Transition"],
+          "remediation": {"link": "/Mechanism/aki-module.html", "title": "AKI Prognosis"}
+        },
+        {
+          "id": "aki-clin-4",
+          "stem": "On hospital day 3, the patient's creatinine is 5.8 (down from 6.4) and urine output has increased.",
+          "question": "This improvement suggests the AKI is entering which phase?",
+          "hint": "ATN has predictable phases of injury and recovery.",
+          "options": [
+            {"id": "A", "text": "Recovery (diuretic) phase — tubular function returning", "correct": true},
+            {"id": "B", "text": "Initiation phase — ongoing injury", "correct": false},
+            {"id": "C", "text": "Maintenance (oliguric) phase — stable severe injury", "correct": false},
+            {"id": "D", "text": "Extension phase — worsening tubular damage", "correct": false}
+          ],
+          "explanation": "ATN phases: (1) Initiation — ischemic insult; (2) Extension — ongoing injury, inflammation; (3) Maintenance — established injury, oliguria, stable high creatinine; (4) Recovery — tubular regeneration, increasing urine output (often polyuric), falling creatinine. He's entering recovery.",
+          "whyChain": [
+            {
+              "why": "Why might he become polyuric during recovery?",
+              "answer": "Regenerating tubular cells initially lack full concentrating ability and can't reabsorb sodium/water efficiently. This causes inappropriate natriuresis and diuresis. Monitor closely for volume depletion and electrolyte abnormalities during this phase.",
+              "source": "StatPearls: Acute Tubular Necrosis"
+            },
+            {
+              "why": "What should be monitored during recovery phase?",
+              "answer": "Daily weights, strict I/O, daily electrolytes (can develop hypokalemia, hyponatremia, hypomagnesemia from urinary losses). May need IV fluid replacement if polyuria causes volume depletion.",
+              "source": "KDIGO AKI Guidelines"
+            }
+          ],
+          "sources": ["StatPearls: Acute Tubular Necrosis", "KDIGO AKI Guidelines"],
+          "remediation": {"link": "/Mechanism/aki-module.html", "title": "ATN Phases"}
+        }
+      ]
+    },
+    {
+      "id": "complications",
+      "title": "Complications",
+      "icon": "⚠️",
+      "color": "#dc2626",
+      "questions": [
+        {
+          "id": "aki-comp-1",
+          "stem": "On day 2, the patient develops respiratory distress. Chest X-ray shows bilateral pulmonary infiltrates with cardiomegaly.",
+          "question": "What is the most likely cause of his respiratory decompensation?",
+          "hint": "Consider the consequences of giving IV fluids to an oliguric patient.",
+          "options": [
+            {"id": "A", "text": "Volume overload with pulmonary edema", "correct": true},
+            {"id": "B", "text": "Hospital-acquired pneumonia", "correct": false},
+            {"id": "C", "text": "Pulmonary embolism", "correct": false},
+            {"id": "D", "text": "ARDS from sepsis", "correct": false}
+          ],
+          "explanation": "Oliguric AKI patients cannot excrete administered fluids. Even 'appropriate' resuscitation volumes can cause pulmonary edema. His cardiomegaly and bilateral infiltrates suggest cardiogenic/fluid overload pattern. This is an indication for urgent dialysis (ultrafiltration) if diuretics fail.",
+          "whyChain": [
+            {
+              "why": "Why didn't he respond to diuretics?",
+              "answer": "In ATN, the tubules cannot respond normally to diuretics (damaged transport mechanisms). Loop diuretics may increase urine output marginally but often fail in established ATN. This 'diuretic resistance' is common.",
+              "source": "KDIGO AKI Guidelines"
+            },
+            {
+              "why": "What dialysis modality is best for volume removal?",
+              "answer": "Intermittent hemodialysis removes volume quickly (ultrafiltration). For hemodynamically unstable patients, continuous renal replacement therapy (CRRT) provides slower, better-tolerated fluid removal.",
+              "source": "KDIGO AKI Guidelines"
+            }
+          ],
+          "sources": ["KDIGO AKI Guidelines", "StatPearls: Volume Overload"],
+          "remediation": {"link": "/Mechanism/aki-module.html", "title": "Volume Management in AKI"}
+        },
+        {
+          "id": "aki-comp-2",
+          "stem": "The patient develops confusion and asterixis (flapping tremor).",
+          "question": "This constellation suggests which uremic complication?",
+          "hint": "Consider the neurologic manifestations of uremia.",
+          "options": [
+            {"id": "A", "text": "Uremic encephalopathy", "correct": true},
+            {"id": "B", "text": "Hepatic encephalopathy", "correct": false},
+            {"id": "C", "text": "Hypertensive encephalopathy", "correct": false},
+            {"id": "D", "text": "Wernicke encephalopathy", "correct": false}
+          ],
+          "explanation": "Uremic encephalopathy presents with confusion, asterixis, myoclonus, and eventually seizures or coma. It results from accumulation of uremic toxins affecting the CNS. Asterixis can occur in both uremic and hepatic encephalopathy, but his context (AKI, normal liver function) points to uremia.",
+          "whyChain": [
+            {
+              "why": "What are uremic toxins?",
+              "answer": "Uremic toxins include urea, creatinine (markers but not major toxins), indoxyl sulfate, p-cresyl sulfate, guanidino compounds, and others. The exact neurotoxic molecules are incompletely characterized.",
+              "source": "StatPearls: Uremia"
+            },
+            {
+              "why": "Is uremic encephalopathy an indication for dialysis?",
+              "answer": "Yes. Uremic encephalopathy is one of the 'U' indications in AEIOU. Dialysis clears uremic toxins and typically improves mental status within 24-48 hours of initiation.",
+              "source": "KDIGO AKI Guidelines"
+            }
+          ],
+          "sources": ["StatPearls: Uremia", "KDIGO AKI Guidelines"],
+          "remediation": {"link": "/Mechanism/aki-module.html", "title": "Uremic Complications"}
+        },
+        {
+          "id": "aki-comp-3",
+          "stem": "The patient develops bleeding from his IV sites and bloody stools.",
+          "question": "Uremic bleeding is caused by which mechanism?",
+          "hint": "Consider how uremia affects platelet function.",
+          "options": [
+            {"id": "A", "text": "Platelet dysfunction from uremic toxins (qualitative platelet defect)", "correct": true},
+            {"id": "B", "text": "Decreased platelet production in bone marrow", "correct": false},
+            {"id": "C", "text": "Disseminated intravascular coagulation (DIC)", "correct": false},
+            {"id": "D", "text": "Vitamin K deficiency from poor intake", "correct": false}
+          ],
+          "explanation": "Uremia causes qualitative platelet dysfunction — platelets are present in normal numbers but don't function properly. Uremic toxins impair platelet adhesion and aggregation, causing prolonged bleeding time despite normal platelet count and coagulation studies.",
+          "whyChain": [
+            {
+              "why": "How do you treat uremic bleeding?",
+              "answer": "Dialysis is definitive (removes uremic toxins). For acute bleeding: DDAVP (releases vWF, improves platelet adhesion), cryoprecipitate, conjugated estrogens (for prolonged effect). Avoid antiplatelet agents.",
+              "source": "StatPearls: Uremic Bleeding"
+            },
+            {
+              "why": "What about his anemia (Hgb 10.2)?",
+              "answer": "He has CKD-related anemia (decreased erythropoietin production) plus possible uremic bleeding. In acute AKI, transfuse for symptomatic anemia or Hgb <7. Don't start erythropoiesis-stimulating agents (ESAs) acutely.",
+              "source": "KDIGO Anemia Guidelines"
+            }
+          ],
+          "sources": ["StatPearls: Uremic Bleeding", "KDIGO AKI Guidelines"],
+          "remediation": {"link": "/Mechanism/hematology.html", "title": "Uremic Coagulopathy"}
+        },
+        {
+          "id": "aki-comp-4",
+          "stem": "Following recovery from AKI, the patient's creatinine stabilizes at 2.8 mg/dL (previously 1.9).",
+          "question": "This permanent decline in kidney function represents which phenomenon?",
+          "hint": "AKI and CKD are interconnected.",
+          "options": [
+            {"id": "A", "text": "AKI-to-CKD transition (incomplete recovery with permanent nephron loss)", "correct": true},
+            {"id": "B", "text": "Expected normal variation in creatinine", "correct": false},
+            {"id": "C", "text": "Ongoing pre-renal azotemia", "correct": false},
+            {"id": "D", "text": "Laboratory measurement error", "correct": false}
+          ],
+          "explanation": "AKI, even with 'recovery,' often causes permanent nephron loss. Each AKI episode accelerates underlying CKD progression. His new baseline of 2.8 (from 1.9) represents ~30% permanent GFR decline, advancing him from CKD stage 3b toward stage 4.",
+          "whyChain": [
+            {
+              "why": "Why doesn't the kidney fully regenerate?",
+              "answer": "Tubular cells can regenerate, but severe injury causes some nephrons to be permanently lost and replaced by fibrosis. Remaining nephrons undergo hyperfiltration, which paradoxically accelerates further damage over time.",
+              "source": "JASN: AKI to CKD Transition"
+            },
+            {
+              "why": "What follow-up does he need?",
+              "answer": "Close nephrology follow-up, repeat creatinine in 2-4 weeks to confirm new baseline, medication adjustment for new GFR, blood pressure control, proteinuria monitoring, and avoidance of future nephrotoxins.",
+              "source": "KDIGO CKD Guidelines"
+            }
+          ],
+          "sources": ["JASN: AKI to CKD Transition", "KDIGO CKD Guidelines"],
+          "remediation": {"link": "/Mechanism/aki-module.html", "title": "Long-term AKI Outcomes"}
+        }
+      ]
+    },
+    {
+      "id": "synthesis",
+      "title": "Synthesis",
+      "icon": "🔗",
+      "color": "#6366f1",
+      "questions": [
+        {
+          "id": "aki-syn-1",
+          "stem": "Integrating all the clinical information in this case.",
+          "question": "Which statement BEST synthesizes this patient's clinical course?",
+          "hint": "Connect predisposing factors, precipitants, and the resulting pathophysiology.",
+          "options": [
+            {"id": "A", "text": "Patient with CKD developed acute-on-chronic kidney injury from 'triple whammy' (volume depletion + NSAIDs + ACEi), progressing from pre-renal to ATN with hyperkalemia and uremic complications", "correct": true},
+            {"id": "B", "text": "Patient with normal kidneys developed post-renal obstruction from BPH requiring catheterization", "correct": false},
+            {"id": "C", "text": "Patient developed contrast-induced nephropathy after recent imaging study", "correct": false},
+            {"id": "D", "text": "Patient with glomerulonephritis presenting with nephritic syndrome", "correct": false}
+          ],
+          "explanation": "This synthesis captures: (1) Substrate — CKD with reduced renal reserve; (2) Triple whammy — volume depletion + NSAID (afferent vasoconstriction) + ACEi (efferent vasodilation); (3) Progression — pre-renal evolved to ATN (muddy brown casts, FeNa >2%); (4) Complications — hyperkalemia with ECG changes, metabolic acidosis, uremic symptoms.",
+          "whyChain": [
+            {
+              "why": "What could have prevented this?",
+              "answer": "Sick-day rules: During GI illness, he should have held ACEi, avoided NSAIDs, and sought care earlier for volume repletion. Patient education about nephrotoxins and sick-day medication management is crucial.",
+              "source": "KDIGO CKD Guidelines"
+            }
+          ],
+          "sources": ["KDIGO AKI Guidelines", "StatPearls: Drug-Induced Nephrotoxicity"],
+          "remediation": {"link": "/Mechanism/aki-module.html", "title": "AKI Prevention"}
+        },
+        {
+          "id": "aki-syn-2",
+          "stem": "You're preparing the patient for discharge after recovery.",
+          "question": "Which discharge instructions are MOST important to prevent future AKI episodes?",
+          "hint": "Focus on modifiable risk factors and patient education.",
+          "options": [
+            {"id": "A", "text": "Avoid NSAIDs permanently, hold ACEi during illness/dehydration, stay hydrated, recognize warning signs", "correct": true},
+            {"id": "B", "text": "Take prophylactic antibiotics to prevent UTIs", "correct": false},
+            {"id": "C", "text": "Restrict fluid intake to reduce kidney workload", "correct": false},
+            {"id": "D", "text": "Avoid all pain medications including acetaminophen", "correct": false}
+          ],
+          "explanation": "Key prevention: (1) Absolute NSAID avoidance (OTC and prescription); (2) Sick-day rules for ACEi (hold if vomiting, diarrhea, not eating); (3) Maintain hydration; (4) Recognize AKI warning signs (decreased urine, swelling, confusion); (5) Communicate CKD status to all providers.",
+          "whyChain": [
+            {
+              "why": "Can he ever take NSAIDs again?",
+              "answer": "Given his CKD and this AKI episode, NSAIDs should be permanently avoided. Even 'occasional' use carries significant risk. For pain, use acetaminophen (safe in kidney disease at appropriate doses) or discuss alternatives with his physician.",
+              "source": "KDIGO CKD Guidelines"
+            },
+            {
+              "why": "Should he wear a medical alert bracelet?",
+              "answer": "Reasonable consideration given advanced CKD. Should alert providers to: avoid nephrotoxic contrast, dose-adjust medications, avoid NSAIDs, and check renal function before procedures.",
+              "source": "Clinical Best Practices"
+            }
+          ],
+          "sources": ["KDIGO CKD Guidelines", "StatPearls: Chronic Kidney Disease"],
+          "remediation": {"link": "/Mechanism/aki-module.html", "title": "CKD Management"}
+        }
+      ]
+    }
+  ]
+}
