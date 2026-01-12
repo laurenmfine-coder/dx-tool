@@ -1430,10 +1430,17 @@
     <div class="modal-overlay" id="vignetteModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">📋 Full Patient Case</h3>
-                <button class="modal-close" onclick="closeVignetteModal()">×</button>
+                <h3 class="modal-title" id="vignetteModalTitle">📋 Full Patient Case</h3>
+                <button class="modal-close" id="vignetteCloseBtn" onclick="closeVignetteModal()">×</button>
             </div>
             <div class="modal-body">
+                <div class="intro-instructions" id="introInstructions" style="background: var(--accent-primary-dim); padding: var(--space-md); border-radius: var(--radius-md); margin-bottom: var(--space-lg); border-left: 4px solid var(--accent-primary);">
+                    <p style="color: var(--text-primary); margin-bottom: var(--space-sm);"><strong>📖 How Deep Dive Works:</strong></p>
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: var(--space-xs);">1. Read this patient case carefully - all the information you need is here</p>
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: var(--space-xs);">2. Answer questions across 7 layers (anatomy → synthesis)</p>
+                    <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: var(--space-xs);">3. Explore the "WHY chain" after each question to deepen understanding</p>
+                    <p style="color: var(--text-secondary); font-size: 14px;">4. Click "View Case" anytime to return to this patient information</p>
+                </div>
                 <div class="vignette-text" id="vignetteText"></div>
                 <div class="vignette-section">
                     <div class="vignette-section-title">Physical Examination</div>
@@ -1446,6 +1453,11 @@
                 <div class="vignette-section">
                     <div class="vignette-section-title">Laboratory Results</div>
                     <div id="labResults"></div>
+                </div>
+                <div style="text-align: center; margin-top: var(--space-xl);">
+                    <button id="vignetteStartBtn" class="btn btn-primary" onclick="startModule()" style="display: none; padding: var(--space-md) var(--space-xl); font-size: 16px;">
+                        ✓ I've Read the Case — Begin Questions →
+                    </button>
                 </div>
             </div>
         </div>
@@ -1508,9 +1520,10 @@
                 
                 loadBookmarks();
                 renderLayerNav();
-                loadVignetteData();
-                loadQuestion();
-                startTimer();
+                loadQuestion(); // Load first question in background
+                
+                // Show vignette intro first - timer starts after they click "Begin"
+                showVignetteIntro();
             } else {
                 // Show error state
                 document.querySelector('.main-content').innerHTML = `
@@ -1753,7 +1766,16 @@
                 const exam = vignette.physicalExam;
                 let examHtml = '';
                 for (const [key, val] of Object.entries(exam)) {
-                    examHtml += `<p><strong>${key.charAt(0).toUpperCase() + key.slice(1)}:</strong> ${val}</p>`;
+                    // Handle nested objects like vitals
+                    if (typeof val === 'object' && val !== null) {
+                        let nestedHtml = '';
+                        for (const [subKey, subVal] of Object.entries(val)) {
+                            nestedHtml += `${subKey}: ${subVal}, `;
+                        }
+                        examHtml += `<p><strong>${key.charAt(0).toUpperCase() + key.slice(1)}:</strong> ${nestedHtml.slice(0, -2)}</p>`;
+                    } else {
+                        examHtml += `<p><strong>${key.charAt(0).toUpperCase() + key.slice(1)}:</strong> ${val}</p>`;
+                    }
                 }
                 document.getElementById('examFindings').innerHTML = examHtml;
             }
@@ -1769,13 +1791,22 @@
                 const labs = vignette.diagnostics.labs;
                 let labHtml = '<table style="width:100%;font-size:14px;border-collapse:collapse;">';
                 for (const [key, val] of Object.entries(labs)) {
-                    const flagColor = val.flag === 'CRITICAL' ? 'var(--error)' : 
-                                     val.flag === 'HIGH' ? 'var(--warning)' : 'var(--text-primary)';
-                    labHtml += `<tr style="border-bottom:1px solid var(--border-subtle);">
-                        <td style="padding:8px 0;font-weight:500;">${key}</td>
-                        <td style="color:${flagColor};font-weight:600;">${val.value}</td>
-                        <td style="color:var(--text-muted);font-size:12px;">(ref: ${val.reference})</td>
-                    </tr>`;
+                    // Handle both object format and simple string format
+                    if (typeof val === 'object' && val !== null) {
+                        const flagColor = val.flag === 'CRITICAL' ? 'var(--error)' : 
+                                         val.flag === 'HIGH' ? 'var(--warning)' : 'var(--text-primary)';
+                        labHtml += `<tr style="border-bottom:1px solid var(--border-subtle);">
+                            <td style="padding:8px 0;font-weight:500;">${key}</td>
+                            <td style="color:${flagColor};font-weight:600;">${val.value}</td>
+                            <td style="color:var(--text-muted);font-size:12px;">(ref: ${val.reference})</td>
+                        </tr>`;
+                    } else {
+                        labHtml += `<tr style="border-bottom:1px solid var(--border-subtle);">
+                            <td style="padding:8px 0;font-weight:500;">${key}</td>
+                            <td style="font-weight:600;">${val}</td>
+                            <td></td>
+                        </tr>`;
+                    }
                 }
                 labHtml += '</table>';
                 document.getElementById('labResults').innerHTML = labHtml;
@@ -1783,11 +1814,30 @@
         }
 
         function openVignetteModal() {
+            document.getElementById('introInstructions').style.display = 'none';
+            document.getElementById('vignetteModalTitle').textContent = '📋 Full Patient Case';
+            document.getElementById('vignetteCloseBtn').style.display = 'block';
+            document.getElementById('vignetteStartBtn').style.display = 'none';
             document.getElementById('vignetteModal').classList.add('visible');
         }
 
         function closeVignetteModal() {
             document.getElementById('vignetteModal').classList.remove('visible');
+        }
+        
+        // Show vignette intro on first load
+        function showVignetteIntro() {
+            loadVignetteData();
+            document.getElementById('introInstructions').style.display = 'block';
+            document.getElementById('vignetteModalTitle').textContent = '📋 Read the Patient Case First';
+            document.getElementById('vignetteCloseBtn').style.display = 'none';
+            document.getElementById('vignetteStartBtn').style.display = 'block';
+            document.getElementById('vignetteModal').classList.add('visible');
+        }
+        
+        function startModule() {
+            document.getElementById('vignetteModal').classList.remove('visible');
+            startTimer();
         }
 
         // ============ BOOKMARKS ============
