@@ -910,6 +910,288 @@
                 font-size: 1.15rem;
             }
         }
+
+        /* ========== PAUSE & MENU BUTTONS ========== */
+        .pause-btn, .menu-btn {
+            background: var(--color-bg-card);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius-sm);
+            padding: 0.5rem;
+            cursor: pointer;
+            color: var(--color-text-secondary);
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pause-btn:hover, .menu-btn:hover {
+            background: var(--color-bg-hover);
+            color: var(--color-text);
+            border-color: var(--color-primary);
+        }
+
+        .pause-btn.paused {
+            background: var(--color-warning-bg);
+            color: var(--color-warning);
+            border-color: var(--color-warning);
+        }
+
+        /* ========== OVERVIEW SCREEN ========== */
+        .overview-screen {
+            position: fixed;
+            inset: 0;
+            background: var(--color-bg);
+            z-index: 200;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .overview-screen.hidden {
+            display: none;
+        }
+
+        .overview-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .overview-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .overview-header h1 {
+            font-family: var(--font-display);
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: var(--color-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .overview-subtitle {
+            color: var(--color-text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .overview-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--color-bg-card);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .overview-stat {
+            text-align: center;
+        }
+
+        .overview-stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        .overview-stat-label {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .overview-case-preview {
+            background: var(--color-bg-card);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .overview-case-preview h3 {
+            color: var(--color-text);
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+        }
+
+        .overview-case-preview p {
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            max-height: 120px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .overview-layers-title {
+            margin-bottom: 1.5rem;
+        }
+
+        .overview-layers-title h2 {
+            font-size: 1.25rem;
+            color: var(--color-text);
+            margin-bottom: 0.25rem;
+        }
+
+        .overview-layers-title p {
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+        }
+
+        .overview-layers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .overview-layer-card {
+            background: var(--color-bg-card);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            border: 1px solid rgba(255,255,255,0.06);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .overview-layer-card:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .overview-layer-card.completed {
+            border-color: var(--color-success);
+            background: var(--color-success-bg);
+        }
+
+        .overview-layer-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .overview-layer-icon {
+            font-size: 1.5rem;
+        }
+
+        .overview-layer-title {
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .overview-layer-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--color-text-muted);
+            font-size: 0.85rem;
+        }
+
+        .overview-layer-progress {
+            background: rgba(255,255,255,0.1);
+            height: 4px;
+            border-radius: 2px;
+            margin-top: 0.75rem;
+            overflow: hidden;
+        }
+
+        .overview-layer-progress-bar {
+            height: 100%;
+            background: var(--color-success);
+            transition: width 0.3s;
+        }
+
+        .overview-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .overview-start-btn, .overview-resume-btn {
+            padding: 1rem 2rem;
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        .overview-start-btn {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .overview-start-btn:hover {
+            background: var(--color-primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .overview-resume-btn {
+            background: var(--color-success);
+            color: white;
+        }
+
+        .overview-resume-btn:hover {
+            filter: brightness(1.1);
+            transform: translateY(-2px);
+        }
+
+        /* Paused overlay */
+        .paused-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 150;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .paused-overlay.hidden {
+            display: none;
+        }
+
+        .paused-message {
+            color: var(--color-text);
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .paused-sub {
+            color: var(--color-text-secondary);
+        }
+
+        .paused-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .paused-actions button {
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+
+        .resume-btn-overlay {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .quit-btn-overlay {
+            background: var(--color-bg-card);
+            color: var(--color-text);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
     </style>
 </head>
 <body>
@@ -935,9 +1217,70 @@
                     </svg>
                     <span><span class="stat-value" id="scoreDisplay">0</span>/<span id="totalQuestions">0</span></span>
                 </div>
+                <button class="pause-btn" id="pauseBtn" onclick="togglePause()" title="Pause & Save Progress">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                        <rect x="6" y="4" width="4" height="16" rx="1"/>
+                        <rect x="14" y="4" width="4" height="16" rx="1"/>
+                    </svg>
+                </button>
+                <button class="menu-btn" id="menuBtn" onclick="showOverview()" title="View All Layers">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <line x1="3" y1="12" x2="21" y2="12"/>
+                        <line x1="3" y1="18" x2="21" y2="18"/>
+                    </svg>
+                </button>
             </div>
         </div>
     </header>
+
+    <!-- Overview Screen -->
+    <div class="overview-screen" id="overviewScreen">
+        <div class="overview-container">
+            <div class="overview-header">
+                <h1 id="overviewTitle">Deep Dive: Acute Coronary Syndrome</h1>
+                <p class="overview-subtitle">Master clinical reasoning through integrated layers</p>
+            </div>
+            
+            <div class="overview-stats">
+                <div class="overview-stat">
+                    <div class="overview-stat-value" id="overviewTotalQ">33</div>
+                    <div class="overview-stat-label">Questions</div>
+                </div>
+                <div class="overview-stat">
+                    <div class="overview-stat-value" id="overviewLayers">7</div>
+                    <div class="overview-stat-label">Layers</div>
+                </div>
+                <div class="overview-stat">
+                    <div class="overview-stat-value">~45m</div>
+                    <div class="overview-stat-label">Duration</div>
+                </div>
+            </div>
+
+            <div class="overview-case-preview" id="overviewCasePreview">
+                <h3>📋 Case Preview</h3>
+                <p id="overviewCaseText"></p>
+            </div>
+
+            <div class="overview-layers-title">
+                <h2>🎯 Learning Layers</h2>
+                <p>Click any layer to begin, or start from the beginning</p>
+            </div>
+
+            <div class="overview-layers-grid" id="overviewLayersGrid">
+                <!-- Populated by JS -->
+            </div>
+
+            <div class="overview-actions">
+                <button class="overview-start-btn" onclick="startFromBeginning()">
+                    ▶️ Start from Beginning
+                </button>
+                <button class="overview-resume-btn" id="resumeBtn" onclick="resumeProgress()" style="display:none;">
+                    ↩️ Resume Progress
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Main Container -->
     <main class="main-container">
@@ -1090,6 +1433,7 @@
         let whyRevealIndex = 0;
         let timerSeconds = 0;
         let timerInterval = null;
+        let elapsedTime = 0;
 
         // Layer colors
         const layerColors = {
@@ -1102,19 +1446,213 @@
             'synthesis': '#6366f1'
         };
 
+        let isPaused = false;
+        let savedProgress = null;
+
         // ============ INITIALIZATION ============
         async function init() {
-            // For demo, embed the ACS data
+            // Load the module data
             deepDiveData = await loadDeepDiveData();
             
             if (deepDiveData) {
                 document.getElementById('moduleTitle').textContent = `Deep Dive: ${deepDiveData.title}`;
                 document.getElementById('totalQuestions').textContent = deepDiveData.totalQuestions;
                 
-                renderLayerNav();
-                loadVignetteData();
-                loadQuestion();
+                // Check for saved progress
+                checkSavedProgress();
+                
+                // Render overview screen
+                renderOverviewScreen();
+                
+                // Show overview first instead of jumping into questions
+                showOverview();
+            }
+        }
+
+        function checkSavedProgress() {
+            const moduleId = getModuleId();
+            const saved = localStorage.getItem(`reasondx-progress-${moduleId}`);
+            if (saved) {
+                savedProgress = JSON.parse(saved);
+                document.getElementById('resumeBtn').style.display = 'block';
+            }
+        }
+
+        function getModuleId() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('module') || 'acs-deep-dive-complete';
+        }
+
+        function renderOverviewScreen() {
+            // Update overview header
+            document.getElementById('overviewTitle').textContent = `Deep Dive: ${deepDiveData.title}`;
+            document.getElementById('overviewTotalQ').textContent = deepDiveData.totalQuestions || deepDiveData.layers.reduce((sum, l) => sum + l.questions.length, 0);
+            document.getElementById('overviewLayers').textContent = deepDiveData.layers.length;
+            
+            // Case preview
+            if (deepDiveData.vignette && deepDiveData.vignette.text) {
+                document.getElementById('overviewCaseText').textContent = deepDiveData.vignette.text.substring(0, 300) + '...';
+            }
+            
+            // Render layer cards
+            const grid = document.getElementById('overviewLayersGrid');
+            grid.innerHTML = '';
+            
+            deepDiveData.layers.forEach((layer, index) => {
+                const progress = savedProgress?.layerProgress?.[layer.id] || { completed: 0, total: layer.questions.length };
+                const isCompleted = progress.completed === progress.total && progress.total > 0;
+                
+                const card = document.createElement('div');
+                card.className = `overview-layer-card ${isCompleted ? 'completed' : ''}`;
+                card.onclick = () => startFromLayer(index);
+                card.innerHTML = `
+                    <div class="overview-layer-header">
+                        <span class="overview-layer-icon">${layer.icon}</span>
+                        <span class="overview-layer-title">${layer.title}</span>
+                    </div>
+                    <div class="overview-layer-meta">
+                        <span>${layer.questions.length} questions</span>
+                        <span>${isCompleted ? '✅ Complete' : `${progress.completed}/${progress.total}`}</span>
+                    </div>
+                    <div class="overview-layer-progress">
+                        <div class="overview-layer-progress-bar" style="width: ${(progress.completed / progress.total) * 100}%"></div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function showOverview() {
+            document.getElementById('overviewScreen').classList.remove('hidden');
+            pauseTimer();
+        }
+
+        function hideOverview() {
+            document.getElementById('overviewScreen').classList.add('hidden');
+        }
+
+        function startFromBeginning() {
+            // Clear saved progress
+            const moduleId = getModuleId();
+            localStorage.removeItem(`reasondx-progress-${moduleId}`);
+            savedProgress = null;
+            
+            // Reset state
+            currentLayerIndex = 0;
+            currentQuestionIndex = 0;
+            score = 0;
+            totalAnswered = 0;
+            elapsedTime = 0;
+            
+            // Initialize UI
+            renderLayerNav();
+            loadVignetteData();
+            loadQuestion();
+            
+            hideOverview();
+            startTimer();
+        }
+
+        function startFromLayer(layerIndex) {
+            currentLayerIndex = layerIndex;
+            currentQuestionIndex = 0;
+            
+            // Load progress for this layer if exists
+            if (savedProgress?.layerProgress) {
+                const layer = deepDiveData.layers[layerIndex];
+                const progress = savedProgress.layerProgress[layer.id];
+                if (progress) {
+                    score = savedProgress.score || 0;
+                    totalAnswered = savedProgress.totalAnswered || 0;
+                    elapsedTime = savedProgress.elapsedTime || 0;
+                }
+            }
+            
+            renderLayerNav();
+            loadVignetteData();
+            loadQuestion();
+            
+            hideOverview();
+            startTimer();
+        }
+
+        function resumeProgress() {
+            if (!savedProgress) return;
+            
+            currentLayerIndex = savedProgress.currentLayerIndex || 0;
+            currentQuestionIndex = savedProgress.currentQuestionIndex || 0;
+            score = savedProgress.score || 0;
+            totalAnswered = savedProgress.totalAnswered || 0;
+            elapsedTime = savedProgress.elapsedTime || 0;
+            
+            renderLayerNav();
+            loadVignetteData();
+            loadQuestion();
+            updateScore();
+            
+            hideOverview();
+            startTimer();
+        }
+
+        function saveProgress() {
+            const moduleId = getModuleId();
+            const layerProgress = {};
+            
+            // Calculate layer progress
+            deepDiveData.layers.forEach((layer, idx) => {
+                if (idx < currentLayerIndex) {
+                    layerProgress[layer.id] = { completed: layer.questions.length, total: layer.questions.length };
+                } else if (idx === currentLayerIndex) {
+                    layerProgress[layer.id] = { completed: currentQuestionIndex, total: layer.questions.length };
+                } else {
+                    layerProgress[layer.id] = { completed: 0, total: layer.questions.length };
+                }
+            });
+            
+            const progressData = {
+                currentLayerIndex,
+                currentQuestionIndex,
+                score,
+                totalAnswered,
+                elapsedTime,
+                layerProgress,
+                savedAt: new Date().toISOString()
+            };
+            
+            localStorage.setItem(`reasondx-progress-${moduleId}`, JSON.stringify(progressData));
+            savedProgress = progressData;
+        }
+
+        function togglePause() {
+            isPaused = !isPaused;
+            const overlay = document.getElementById('pausedOverlay');
+            const btn = document.getElementById('pauseBtn');
+            
+            if (isPaused) {
+                pauseTimer();
+                saveProgress();
+                overlay.classList.remove('hidden');
+                btn.classList.add('paused');
+            } else {
+                overlay.classList.add('hidden');
+                btn.classList.remove('paused');
                 startTimer();
+            }
+        }
+
+        function quitToOverview() {
+            isPaused = false;
+            document.getElementById('pausedOverlay').classList.add('hidden');
+            document.getElementById('pauseBtn').classList.remove('paused');
+            saveProgress();
+            renderOverviewScreen();
+            showOverview();
+        }
+
+        function pauseTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
             }
         }
 
@@ -1307,8 +1845,18 @@
 
         // ============ TIMER ============
         function startTimer() {
+            // Clear any existing interval
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+            
+            // Use saved elapsed time if available
+            timerSeconds = elapsedTime || 0;
+            updateTimerDisplay();
+            
             timerInterval = setInterval(() => {
                 timerSeconds++;
+                elapsedTime = timerSeconds;
                 updateTimerDisplay();
             }, 1000);
         }
@@ -1655,5 +2203,15 @@
         // Initialize
         init();
     </script>
+
+    <!-- Paused Overlay -->
+    <div class="paused-overlay hidden" id="pausedOverlay">
+        <div class="paused-message">⏸️ Session Paused</div>
+        <div class="paused-sub">Your progress has been saved</div>
+        <div class="paused-actions">
+            <button class="resume-btn-overlay" onclick="togglePause()">▶️ Resume</button>
+            <button class="quit-btn-overlay" onclick="quitToOverview()">📋 View Layers</button>
+        </div>
+    </div>
 </body>
 </html>
