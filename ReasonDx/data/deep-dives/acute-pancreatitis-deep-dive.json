@@ -1,0 +1,208 @@
+{
+  "id": "acute-pancreatitis-deep-dive",
+  "title": "Acute Pancreatitis",
+  "version": "1.0",
+  "totalQuestions": 18,
+  "estimatedTime": "35 minutes",
+  "difficulty": "Advanced",
+  "targetAudience": "Medical Students, Residents, Emergency Medicine, Internal Medicine, Gastroenterology",
+  "objectives": [
+    "Apply diagnostic criteria for acute pancreatitis",
+    "Identify and address underlying etiology",
+    "Use severity scoring systems appropriately",
+    "Manage with aggressive fluid resuscitation and early nutrition",
+    "Recognize and manage complications"
+  ],
+  "vignette": {
+    "text": "A 48-year-old woman presents with severe epigastric pain radiating to the back for 12 hours. She reports nausea, vomiting, and the pain is worse when lying flat. She had a fatty meal last night.\n\nPast Medical History: Gallstones diagnosed 1 year ago (declined surgery), hyperlipidemia\n\nMedications: Atorvastatin 20mg daily\n\nAllergies: NKDA",
+    "physicalExam": {
+      "general": "Uncomfortable, lying still",
+      "vitals": { "BP": "108/68 mmHg", "HR": "108 bpm", "RR": "20/min", "Temp": "100.8°F" },
+      "abdomen": "Epigastric tenderness with guarding, decreased bowel sounds, no rebound"
+    },
+    "diagnostics": {
+      "CBC": { "WBC": "14,200/µL", "Hct": "48%" },
+      "BMP": { "BUN": "28", "Cr": "1.3", "Glucose": "186" },
+      "Lipase": "1,842 U/L (normal <60)",
+      "LFTs": { "AST": "186", "ALT": "224", "Alk Phos": "142", "Tbili": "1.8" }
+    }
+  },
+  "layers": [
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis",
+      "icon": "🔬",
+      "color": "#ef4444",
+      "questions": [
+        {
+          "id": "panc-dx-1",
+          "stem": "This patient has epigastric pain and lipase 1,842 U/L.",
+          "question": "What are the diagnostic criteria for acute pancreatitis?",
+          "options": [
+            { "id": "A", "text": "ACUTE PANCREATITIS DIAGNOSIS (Revised Atlanta): Requires 2 of 3 criteria: (1) ABDOMINAL PAIN: Characteristic - epigastric, radiating to back; Acute onset, severe, persistent; Worse when supine, better leaning forward; (2) LIPASE OR AMYLASE ≥3x upper limit normal: Lipase preferred (more specific, stays elevated longer); Degree of elevation doesn't correlate with severity; (3) IMAGING FINDINGS: CT/MRI/US showing pancreatitis; Usually not needed if pain + enzymes present; Obtain if: Diagnosis uncertain, No improvement in 48-72h, Suspected complications; This patient: Characteristic pain + Lipase >3x ULN = MEETS CRITERIA (imaging not required for diagnosis)", "correct": true },
+            { "id": "B", "text": "All 3 criteria required for diagnosis", "correct": false },
+            { "id": "C", "text": "CT scan required in all cases", "correct": false },
+            { "id": "D", "text": "Lipase must be >10x ULN", "correct": false }
+          ],
+          "explanation": "Acute Pancreatitis Diagnosis (Revised Atlanta): Need 2 of 3 criteria: (1) Characteristic pain (epigastric, radiating to back, acute, severe), (2) Lipase or amylase ≥3x ULN, (3) Imaging findings. LIPASE preferred over amylase. Imaging NOT required if pain + enzymes present. This patient meets criteria with pain + elevated lipase.",
+          "sources": ["ACG Guidelines 2024", "Revised Atlanta Classification"],
+          "sourceUrls": ["https://gi.org/guidelines/"]
+        }
+      ]
+    },
+    {
+      "id": "etiology",
+      "title": "Etiology",
+      "icon": "🔍",
+      "color": "#f97316",
+      "questions": [
+        {
+          "id": "panc-etio-1",
+          "stem": "You need to determine the etiology.",
+          "question": "What are the common causes of acute pancreatitis?",
+          "options": [
+            { "id": "A", "text": "ACUTE PANCREATITIS ETIOLOGIES (I GET SMASHED): GALLSTONES: 40% - most common; ALT >150 U/L highly suggestive (95% PPV); RUQ US for all patients; ALCOHOL: 30% - second most common; Usually requires years of heavy use; HYPERTRIGLYCERIDEMIA: TG >1000 mg/dL; ERCP: Post-procedure (5-10% of ERCPs); DRUGS: Azathioprine, valproic acid, didanosine, etc.; TRAUMA; AUTOIMMUNE; SCORPION stings (rare); HYPERCALCEMIA; INFECTIOUS (mumps, CMV); IDIOPATHIC: 15-25%; Consider occult microlithiasis, SOD; This patient: Elevated ALT (224) + known gallstones = GALLSTONE PANCREATITIS", "correct": true },
+            { "id": "B", "text": "Alcohol is the most common cause", "correct": false },
+            { "id": "C", "text": "Drugs are the most common cause", "correct": false },
+            { "id": "D", "text": "Etiology workup not needed", "correct": false }
+          ],
+          "explanation": "Pancreatitis Etiologies (I GET SMASHED): GALLSTONES (40% - most common, ALT >150 highly suggestive), ALCOHOL (30%), HYPERTRIGLYCERIDEMIA (TG >1000), ERCP, DRUGS, TRAUMA, AUTOIMMUNE, SCORPION, HYPERCALCEMIA, INFECTIONS. 15-25% idiopathic. This patient: Elevated ALT + known gallstones = GALLSTONE PANCREATITIS.",
+          "sources": ["ACG Guidelines 2024"],
+          "sourceUrls": ["https://gi.org/guidelines/"]
+        }
+      ]
+    },
+    {
+      "id": "severity",
+      "title": "Severity Assessment",
+      "icon": "📊",
+      "color": "#eab308",
+      "questions": [
+        {
+          "id": "panc-sev-1",
+          "stem": "You need to assess severity.",
+          "question": "How is pancreatitis severity classified?",
+          "options": [
+            { "id": "A", "text": "PANCREATITIS SEVERITY (Revised Atlanta): MILD: No organ failure; No local/systemic complications; Most common (80%); Resolves in 1 week; MODERATELY SEVERE: Transient organ failure (<48h); AND/OR local complications (fluid collections); SEVERE: Persistent organ failure (>48h); Highest mortality (30-50%); ORGAN FAILURE DEFINITION (Modified Marshall): Cardiovascular: SBP <90 despite fluids; Respiratory: PaO2/FiO2 <300; Renal: Cr >1.9 (or >2x baseline); BEDSIDE SCORING: BISAP (0-5 points): BUN >25, Impaired mental status, SIRS, Age >60, Pleural effusion; ≥3 = higher mortality; Assess within 24 hours; This patient: Tachycardia + borderline hypotension + elevated Cr = concerning for developing organ failure", "correct": true },
+            { "id": "B", "text": "Lipase level determines severity", "correct": false },
+            { "id": "C", "text": "CT findings alone determine severity", "correct": false },
+            { "id": "D", "text": "Severity cannot be assessed early", "correct": false }
+          ],
+          "explanation": "Pancreatitis Severity (Revised Atlanta): MILD - No organ failure (80% of cases). MODERATELY SEVERE - Transient organ failure (<48h) or local complications. SEVERE - Persistent organ failure (>48h), 30-50% mortality. ORGAN FAILURE: CV (SBP <90), Respiratory (PaO2/FiO2 <300), Renal (Cr >1.9). BISAP score ≥3 = higher mortality. This patient has concerning signs for developing organ failure.",
+          "sources": ["ACG Guidelines 2024", "Revised Atlanta Classification"],
+          "sourceUrls": ["https://gi.org/guidelines/"]
+        }
+      ]
+    },
+    {
+      "id": "fluids",
+      "title": "Fluid Resuscitation",
+      "icon": "💧",
+      "color": "#22c55e",
+      "questions": [
+        {
+          "id": "panc-flu-1",
+          "stem": "The patient needs fluid resuscitation.",
+          "question": "How should IV fluids be managed in acute pancreatitis?",
+          "options": [
+            { "id": "A", "text": "FLUID RESUSCITATION IN PANCREATITIS: GOAL-DIRECTED THERAPY: Target UOP 0.5-1 mL/kg/hr; Decrease BUN and hematocrit; Normalize heart rate; FLUID CHOICE: Lactated Ringer's PREFERRED; May reduce inflammation vs NS; NS acceptable alternative; RATE: Initial bolus: 15-20 mL/kg; Then 3 mL/kg/hr (moderate-severe); Titrate based on response; CAUTION - Avoid OVERRESUSCITATION: Abdominal compartment syndrome; Pulmonary edema; Associated with worse outcomes; MONITORING: Assess response q6-12h initially; BUN should decrease; Hematocrit should decrease (if elevated); Urine output should improve; Clinical reassessment critical; This patient: Elevated Hct (48%), elevated BUN, tachycardia = needs aggressive fluids initially", "correct": true },
+            { "id": "B", "text": "Restrict fluids to prevent edema", "correct": false },
+            { "id": "C", "text": "NS preferred over LR", "correct": false },
+            { "id": "D", "text": "Fixed rate regardless of response", "correct": false }
+          ],
+          "explanation": "Fluid Resuscitation: GOAL-DIRECTED targeting UOP 0.5-1 mL/kg/hr, decreasing BUN and Hct. LACTATED RINGER'S preferred. RATE: Bolus 15-20 mL/kg, then 3 mL/kg/hr, titrate to response. AVOID OVERRESUSCITATION (abdominal compartment syndrome, pulmonary edema). This patient with elevated Hct, BUN, and tachycardia needs aggressive initial fluids.",
+          "sources": ["ACG Guidelines 2024"],
+          "sourceUrls": ["https://gi.org/guidelines/"]
+        }
+      ]
+    },
+    {
+      "id": "nutrition",
+      "title": "Nutrition",
+      "icon": "🍽️",
+      "color": "#3b82f6",
+      "questions": [
+        {
+          "id": "panc-nutr-1",
+          "stem": "You're considering when to feed the patient.",
+          "question": "When and how should nutrition be provided?",
+          "options": [
+            { "id": "A", "text": "NUTRITION IN PANCREATITIS: PARADIGM SHIFT - Early feeding is beneficial!; MILD PANCREATITIS: Start oral diet when: Nausea/vomiting resolved; Hunger returns; Pain improving; Can start within 24 hours; Low-fat solid diet OK (no need for clear liquids first); MODERATE-SEVERE: Enteral nutrition preferred over TPN; Start within 72 hours; Nasogastric OR nasojejunal (equally effective); TPN only if: Can't tolerate enteral; Ileus preventing enteral; BENEFITS OF EARLY ENTERAL: Maintains gut barrier; Reduces infection; Reduces mortality in severe cases; Shorter hospital stay; AVOID: Prolonged NPO (harmful); This patient: Once pain improving and no vomiting → start low-fat diet", "correct": true },
+            { "id": "B", "text": "NPO for 1 week required", "correct": false },
+            { "id": "C", "text": "TPN preferred in severe pancreatitis", "correct": false },
+            { "id": "D", "text": "Must progress through clear liquids", "correct": false }
+          ],
+          "explanation": "Nutrition in Pancreatitis: EARLY FEEDING is beneficial. MILD: Start oral diet within 24 hours when symptoms improving - low-fat solids OK (no clear liquid progression needed). MODERATE-SEVERE: Enteral nutrition within 72 hours, NG or NJ (equally effective), TPN only if enteral fails. Prolonged NPO is harmful. Early enteral maintains gut barrier, reduces infections.",
+          "sources": ["ACG Guidelines 2024"],
+          "sourceUrls": ["https://gi.org/guidelines/"]
+        }
+      ]
+    },
+    {
+      "id": "gallstone",
+      "title": "Gallstone Management",
+      "icon": "💎",
+      "color": "#a855f7",
+      "questions": [
+        {
+          "id": "panc-gall-1",
+          "stem": "This patient has gallstone pancreatitis.",
+          "question": "How should gallstone pancreatitis be managed?",
+          "options": [
+            { "id": "A", "text": "GALLSTONE PANCREATITIS MANAGEMENT: URGENT ERCP INDICATIONS: Cholangitis (fever + jaundice + pain); Persistent biliary obstruction (rising bilirubin); Should be done within 24-48 hours; NOT for uncomplicated gallstone pancreatitis; CHOLECYSTECTOMY TIMING: MILD: Same admission (within 7 days); Reduces recurrence from 25% to 2%; MODERATE-SEVERE: After resolution; Usually 4-6 weeks after discharge; If necrosis - may wait longer; NON-SURGICAL CANDIDATES: ERCP with sphincterotomy; Reduces recurrence but less effective than CCY; MRCP/EUS: If common bile duct status unclear; Before ERCP to confirm stone; This patient: No cholangitis → No urgent ERCP; Plan CCY this admission", "correct": true },
+            { "id": "B", "text": "ERCP for all gallstone pancreatitis", "correct": false },
+            { "id": "C", "text": "Delay cholecystectomy 6 months", "correct": false },
+            { "id": "D", "text": "Cholecystectomy only if recurrence", "correct": false }
+          ],
+          "explanation": "Gallstone Pancreatitis Management: URGENT ERCP only for cholangitis or persistent biliary obstruction (not routine). CHOLECYSTECTOMY TIMING: Mild - same admission (reduces recurrence from 25% to 2%). Moderate-severe - after resolution (4-6 weeks). This patient: No cholangitis, plan CCY this admission.",
+          "sources": ["ACG Guidelines 2024"],
+          "sourceUrls": ["https://gi.org/guidelines/"]
+        }
+      ]
+    },
+    {
+      "id": "complications",
+      "title": "Complications",
+      "icon": "⚠️",
+      "color": "#ec4899",
+      "questions": [
+        {
+          "id": "panc-comp-1",
+          "stem": "You're monitoring for complications.",
+          "question": "What are the major complications of acute pancreatitis?",
+          "options": [
+            { "id": "A", "text": "PANCREATITIS COMPLICATIONS: EARLY (<4 weeks): Acute peripancreatic fluid collection; No defined wall; May resolve spontaneously; Acute necrotic collection; Contains necrotic debris; LATE (>4 weeks): Pseudocyst: Encapsulated fluid; No necrosis; Walled-off necrosis (WON): Encapsulated necrosis; May become infected; INFECTED NECROSIS: Suspect if: Fever, leukocytosis, failure to improve; Gas in necrosis on CT; FINE NEEDLE ASPIRATION for culture; Treatment: Antibiotics + drainage; 'Step-up' approach preferred: Antibiotics → Percutaneous drainage → Minimally invasive debridement → Surgery; OTHER: Splenic vein thrombosis; Pseudoaneurysm (bleeding risk); Pancreatic duct disruption; Diabetes mellitus (late)", "correct": true },
+            { "id": "B", "text": "Pseudocyst forms within days", "correct": false },
+            { "id": "C", "text": "All necrosis requires surgery", "correct": false },
+            { "id": "D", "text": "Antibiotics prevent infected necrosis", "correct": false }
+          ],
+          "explanation": "Pancreatitis Complications: EARLY (<4 weeks) - Acute fluid collections, acute necrotic collections. LATE (>4 weeks) - Pseudocyst (encapsulated fluid), Walled-off necrosis. INFECTED NECROSIS: Suspect with fever/failure to improve/gas on CT. 'Step-up' approach: Antibiotics → drainage → minimally invasive → surgery. Prophylactic antibiotics do NOT prevent infected necrosis.",
+          "sources": ["ACG Guidelines 2024"],
+          "sourceUrls": ["https://gi.org/guidelines/"]
+        }
+      ]
+    },
+    {
+      "id": "synthesis",
+      "title": "Synthesis",
+      "icon": "🔗",
+      "color": "#6366f1",
+      "questions": [
+        {
+          "id": "panc-syn-1",
+          "stem": "Integrating the complete approach.",
+          "question": "What is the complete management approach?",
+          "options": [
+            { "id": "A", "text": "Complete approach: (1) CONFIRM DIAGNOSIS: 2 of 3 criteria met - characteristic pain + lipase >3x ULN; (2) DETERMINE ETIOLOGY: Elevated ALT + known gallstones = GALLSTONE PANCREATITIS; (3) ASSESS SEVERITY: Tachycardia, borderline hypotension, elevated BUN/Cr = at risk; Calculate BISAP; (4) AGGRESSIVE IV FLUIDS: LR bolus 15-20 mL/kg then 3 mL/kg/hr; Goal UOP 0.5-1 mL/kg/hr; Monitor response, avoid overresuscitation; (5) ANALGESIA: Opioids are safe; (6) NO URGENT ERCP: No cholangitis present; (7) EARLY NUTRITION: Start low-fat diet once improving; (8) CHOLECYSTECTOMY: Same admission for mild; (9) MONITOR FOR COMPLICATIONS: Repeat imaging only if not improving; (10) If develops infected necrosis: Step-up approach", "correct": true },
+            { "id": "B", "text": "Restrict fluids to prevent complications", "correct": false },
+            { "id": "C", "text": "NPO for 1 week then advance slowly", "correct": false },
+            { "id": "D", "text": "ERCP for all gallstone pancreatitis", "correct": false }
+          ],
+          "explanation": "Complete Approach: CONFIRM diagnosis (2 of 3 criteria). DETERMINE etiology (gallstones here). ASSESS severity (concerning signs present). AGGRESSIVE FLUIDS (LR, goal-directed). ANALGESIA (opioids safe). NO URGENT ERCP (no cholangitis). EARLY NUTRITION when improving. SAME-ADMISSION CHOLECYSTECTOMY for mild. MONITOR for complications, repeat imaging only if not improving.",
+          "sources": ["ACG Guidelines 2024"],
+          "sourceUrls": ["https://gi.org/guidelines/"]
+        }
+      ]
+    }
+  ]
+}

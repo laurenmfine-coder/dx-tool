@@ -1,0 +1,221 @@
+{
+  "id": "cholecystitis-cholangitis-deep-dive",
+  "title": "Acute Cholecystitis & Cholangitis",
+  "version": "1.0",
+  "totalQuestions": 20,
+  "estimatedTime": "40 minutes",
+  "difficulty": "Advanced",
+  "targetAudience": "Medical Students, Residents, Emergency Medicine, Surgery, Internal Medicine, Gastroenterology",
+  "objectives": [
+    "Apply Tokyo Guidelines diagnostic criteria for acute cholecystitis and cholangitis",
+    "Grade severity using TG18 classification (I, II, III)",
+    "Select appropriate imaging modalities",
+    "Understand management flowcharts based on severity",
+    "Choose empiric antimicrobial therapy per TG18"
+  ],
+  "guidelineReferences": [
+    {
+      "name": "Tokyo Guidelines 2018",
+      "url": "https://www.jshbps.jp/modules/en/index.php?content_id=47",
+      "keyPoints": [
+        "Severity grading guides management approach",
+        "Early laparoscopic cholecystectomy for Grade I/II",
+        "Grade III requires organ support before intervention",
+        "Biliary drainage essential for cholangitis"
+      ]
+    }
+  ],
+  "vignette": {
+    "text": "A 58-year-old woman presents with 2 days of worsening RUQ pain, fever, and nausea. Pain radiates to the right scapula and worsens after eating. No jaundice. History of gallstones diagnosed 3 years ago.\n\nPast Medical History: Hypertension, Type 2 DM, Obesity (BMI 34)\n\nMedications: Metformin, Lisinopril\n\nAllergies: Sulfa (rash)",
+    "physicalExam": {
+      "general": "Uncomfortable, lying still",
+      "vitals": { "BP": "138/86 mmHg", "HR": "98 bpm", "RR": "20/min", "Temp": "101.5°F (38.6°C)", "SpO2": "97% RA" },
+      "abdomen": {
+        "inspection": "No distension, no jaundice",
+        "palpation": "RUQ tenderness with guarding, positive Murphy's sign (inspiratory arrest with RUQ palpation)",
+        "no_palpable_mass": true
+      },
+      "skin": "No jaundice or icterus"
+    },
+    "diagnostics": {
+      "CBC": { "WBC": "15,800/µL (85% neutrophils)", "Hgb": "13.8 g/dL", "Plt": "198,000/µL" },
+      "CMP": { "AST": "52 U/L", "ALT": "68 U/L", "Alk_Phos": "145 U/L", "Total_Bili": "1.4 mg/dL", "Direct_Bili": "0.5 mg/dL", "Cr": "1.0 mg/dL" },
+      "Lipase": "42 U/L (normal)",
+      "RUQ_Ultrasound": {
+        "gallbladder": "Distended with wall thickening (5mm), multiple gallstones, positive sonographic Murphy's sign",
+        "pericholecystic_fluid": "Small amount",
+        "CBD": "4mm (normal), no stones visualized"
+      }
+    }
+  },
+  "layers": [
+    {
+      "id": "diagnosis-cholecystitis",
+      "title": "Diagnosing Cholecystitis",
+      "icon": "🩺",
+      "color": "#ef4444",
+      "questions": [
+        {
+          "id": "chole-dx-1",
+          "stem": "This patient has RUQ pain, fever, and positive Murphy's sign.",
+          "question": "What are the Tokyo Guidelines diagnostic criteria for acute cholecystitis?",
+          "options": [
+            { "id": "A", "text": "TG18 DIAGNOSTIC CRITERIA: A. LOCAL SIGNS: (1) Murphy's sign, (2) RUQ mass/pain/tenderness; B. SYSTEMIC SIGNS: (1) Fever, (2) Elevated CRP, (3) Elevated WBC; C. IMAGING: Findings characteristic of acute cholecystitis (wall thickening >4mm, pericholecystic fluid, sonographic Murphy's); DIAGNOSIS: Suspected = 1 item from A + 1 item from B; Definite = A + B + C confirmed; This patient: Murphy's sign + RUQ tenderness (A) + Fever + Leukocytosis (B) + US findings (C) = DEFINITE acute cholecystitis", "correct": true },
+            { "id": "B", "text": "Only imaging is needed for diagnosis", "correct": false },
+            { "id": "C", "text": "Elevated bilirubin required for diagnosis", "correct": false },
+            { "id": "D", "text": "CT scan required for all cases", "correct": false }
+          ],
+          "explanation": "Tokyo Guidelines 2018 Diagnostic Criteria for Acute Cholecystitis: A. LOCAL SIGNS OF INFLAMMATION: (1) Murphy's sign (inspiratory arrest with RUQ palpation), (2) RUQ mass, pain, or tenderness. B. SYSTEMIC SIGNS OF INFLAMMATION: (1) Fever (>38°C/100.4°F), (2) Elevated CRP, (3) Elevated WBC count (>10,000/µL). C. IMAGING FINDINGS: Ultrasound (first-line): Gallbladder wall thickening (>4-5mm), Pericholecystic fluid, Enlarged gallbladder, Sonographic Murphy's sign, Gallstones/sludge. CT/MRI: Similar findings, useful if US inconclusive. DIAGNOSTIC CATEGORIES: Suspected: One item from A + One item from B. Definite: Criteria A + B + C confirmed. This patient: Local: Positive Murphy's, RUQ tenderness ✓. Systemic: Fever 101.5°F, WBC 15,800 ✓. Imaging: Wall thickening 5mm, pericholecystic fluid, stones, sonographic Murphy's ✓. = DEFINITE acute cholecystitis.",
+          "sources": ["TG18 Diagnostic Criteria - https://pubmed.ncbi.nlm.nih.gov/29032636/"],
+          "sourceUrls": ["https://pubmed.ncbi.nlm.nih.gov/29032636/"]
+        }
+      ]
+    },
+    {
+      "id": "severity-grading",
+      "title": "Severity Grading",
+      "icon": "📊",
+      "color": "#f97316",
+      "questions": [
+        {
+          "id": "chole-sev-1",
+          "stem": "You need to grade this patient's severity to guide management.",
+          "question": "How is acute cholecystitis severity graded per TG18?",
+          "options": [
+            { "id": "A", "text": "TG18 SEVERITY GRADING: GRADE I (MILD): No organ dysfunction, mild gallbladder inflammation, safe for cholecystectomy; GRADE II (MODERATE): No organ dysfunction BUT any of: WBC >18,000, Palpable RUQ mass, Duration >72 hours, Marked local inflammation (gangrenous, emphysematous, pericholecystic abscess, biliary peritonitis); GRADE III (SEVERE): Organ dysfunction - CV (hypotension requiring pressors), Neuro (decreased consciousness), Respiratory (PaO2/FiO2 <300), Renal (Cr >2.0), Hepatic (INR >1.5), Hematologic (Plt <100K); This patient: WBC 15.8K, no organ dysfunction, <72h = GRADE I", "correct": true },
+            { "id": "B", "text": "Severity based only on fever height", "correct": false },
+            { "id": "C", "text": "All cholecystitis is Grade III", "correct": false },
+            { "id": "D", "text": "Grading doesn't affect treatment", "correct": false }
+          ],
+          "explanation": "TG18 Severity Grading for Acute Cholecystitis: GRADE I (MILD): Does NOT meet Grade II or III criteria. Healthy patient with no organ dysfunction. Mild inflammatory changes in gallbladder. Cholecystectomy is safe and low-risk. GRADE II (MODERATE): No organ dysfunction, but associated with any of: WBC >18,000/µL, Palpable tender mass in RUQ, Duration of symptoms >72 hours, Marked local inflammation: Gangrenous cholecystitis, Pericholecystic abscess, Hepatic abscess, Biliary peritonitis, Emphysematous cholecystitis. GRADE III (SEVERE): Acute cholecystitis with ORGAN DYSFUNCTION: Cardiovascular: Hypotension requiring vasopressors, Neurological: Decreased level of consciousness, Respiratory: PaO2/FiO2 ratio <300, Renal: Creatinine >2.0 mg/dL or oliguria, Hepatic: PT-INR >1.5, Hematological: Platelet count <100,000/µL. This patient: WBC 15,800 (<18K), symptoms 2 days (<72h), no organ dysfunction, no marked local inflammation = GRADE I (MILD).",
+          "sources": ["TG18 Severity Grading - https://pmc.ncbi.nlm.nih.gov/articles/PMC2784516/", "MDCalc - https://www.mdcalc.com/calc/10130/tokyo-guidelines-acute-cholecystitis-2018"],
+          "sourceUrls": ["https://pmc.ncbi.nlm.nih.gov/articles/PMC2784516/", "https://www.mdcalc.com/calc/10130/tokyo-guidelines-acute-cholecystitis-2018"]
+        }
+      ]
+    },
+    {
+      "id": "management-cholecystitis",
+      "title": "Management by Grade",
+      "icon": "⚕️",
+      "color": "#22c55e",
+      "questions": [
+        {
+          "id": "chole-mgmt-1",
+          "stem": "This patient has Grade I acute cholecystitis.",
+          "question": "What is the management approach for Grade I cholecystitis?",
+          "options": [
+            { "id": "A", "text": "GRADE I MANAGEMENT: EARLY LAPAROSCOPIC CHOLECYSTECTOMY preferred (within 72 hours of symptom onset, ideally <7 days of admission); Laparoscopic preferred over open (fewer complications, shorter stay); Antibiotics: Preoperative prophylaxis, NO post-op antibiotics needed for uncomplicated Grade I; If early surgery not feasible: Antibiotics + elective cholecystectomy later; GRADE II: Early cholecystectomy if experienced surgeon available; Otherwise antibiotics + gallbladder drainage (PTGBD) → delayed cholecystectomy; GRADE III: Organ support FIRST, urgent biliary drainage, delayed cholecystectomy after stabilization", "correct": true },
+            { "id": "B", "text": "All patients need 2 weeks antibiotics before surgery", "correct": false },
+            { "id": "C", "text": "Open surgery preferred over laparoscopic", "correct": false },
+            { "id": "D", "text": "Grade I always managed medically without surgery", "correct": false }
+          ],
+          "explanation": "TG18 Management by Grade: GRADE I (MILD) - This patient: EARLY LAPAROSCOPIC CHOLECYSTECTOMY: Preferred approach. Timing: Within 72 hours of symptom onset optimal (less inflammation). Laparoscopic > Open (lower wound infection, shorter LOS, faster recovery). Antibiotics: Single preoperative dose (prophylaxis). Post-op antibiotics: Generally NOT needed for uncomplicated Grade I. GRADE II (MODERATE): If experienced surgeon/facility: Early cholecystectomy still possible. If difficult surgery anticipated: Antibiotics + Percutaneous gallbladder drainage (PTGBD), Delayed cholecystectomy once inflammation resolved. Bail-out procedures if intraoperative difficulty (subtotal cholecystectomy, conversion to open). GRADE III (SEVERE): Priority: Organ support and resuscitation. Urgent biliary drainage (PTGBD) to control sepsis. Cholecystectomy DELAYED until patient stabilized. May require ICU care. GENERAL PRINCIPLES: Laparoscopic approach preferred when possible. Transfer to higher-level facility if needed.",
+          "sources": ["TG18 Flowchart - https://onlinelibrary.wiley.com/doi/full/10.1002/jhbp.516"],
+          "sourceUrls": ["https://onlinelibrary.wiley.com/doi/full/10.1002/jhbp.516"]
+        }
+      ]
+    },
+    {
+      "id": "cholangitis",
+      "title": "Acute Cholangitis",
+      "icon": "🔶",
+      "color": "#eab308",
+      "questions": [
+        {
+          "id": "cholan-1",
+          "stem": "A different patient presents with RUQ pain, fever, and jaundice.",
+          "question": "How is acute cholangitis diagnosed and differentiated from cholecystitis?",
+          "options": [
+            { "id": "A", "text": "CHARCOT'S TRIAD (50-70%): Fever/chills + RUQ pain + Jaundice; REYNOLDS' PENTAD (severe): Charcot's triad + Altered mental status + Hypotension; TG18 DIAGNOSTIC CRITERIA: A. Systemic inflammation (fever, elevated WBC/CRP); B. Cholestasis (jaundice, abnormal LFTs); C. Imaging (biliary dilation, evidence of etiology - stone, stricture, stent); KEY DIFFERENCE from cholecystitis: CHOLANGITIS = Infection of BILE DUCTS (obstruction is key), CHOLECYSTITIS = Infection of GALLBLADDER; Cholangitis requires BILIARY DRAINAGE (ERCP) as definitive treatment", "correct": true },
+            { "id": "B", "text": "Jaundice is never present in cholangitis", "correct": false },
+            { "id": "C", "text": "Cholangitis and cholecystitis are identical", "correct": false },
+            { "id": "D", "text": "No imaging needed for cholangitis", "correct": false }
+          ],
+          "explanation": "Acute Cholangitis - Distinct from Cholecystitis: CLASSIC PRESENTATIONS: Charcot's Triad (present in 50-70%): Fever/rigors/chills, RUQ pain, Jaundice. Reynolds' Pentad (severe cholangitis): Charcot's triad PLUS Altered mental status (confusion), Hypotension/shock. TG18 DIAGNOSTIC CRITERIA FOR CHOLANGITIS: A. Systemic inflammation: Fever (>38°C) and/or Elevated WBC/CRP. B. Cholestasis: Jaundice (bilirubin ≥2 mg/dL), Abnormal LFTs (ALP, GGT, AST, ALT >1.5x normal). C. Imaging: Biliary dilation AND/OR Evidence of etiology (CBD stone, stricture, stent occlusion). DEFINITE: A + B + C. SUSPECTED: A + B or A + C. KEY DIFFERENCES: CHOLANGITIS: Infection of bile DUCTS, Requires biliary OBSTRUCTION, Definitive treatment = BILIARY DRAINAGE (ERCP), Cholecystectomy not primary treatment. CHOLECYSTITIS: Infection of GALLBLADDER, Usually from stone impaction in cystic duct, Definitive treatment = CHOLECYSTECTOMY.",
+          "sources": ["TG18 Cholangitis - https://onlinelibrary.wiley.com/doi/10.1002/jhbp.512/full"],
+          "sourceUrls": ["https://onlinelibrary.wiley.com/doi/10.1002/jhbp.512/full"]
+        },
+        {
+          "id": "cholan-2",
+          "stem": "The patient with cholangitis has fever, jaundice, and hypotension.",
+          "question": "How is acute cholangitis managed?",
+          "options": [
+            { "id": "A", "text": "MANAGEMENT PRINCIPLES: (1) Resuscitation: IV fluids, correct coagulopathy, vasopressors if needed; (2) IV Antibiotics: Empiric coverage (see antimicrobial section); (3) BILIARY DRAINAGE - Essential definitive treatment: ERCP preferred (therapeutic - stone removal, stenting), Percutaneous transhepatic (PTC) if ERCP fails/unavailable, EUS-guided drainage as alternative; TIMING by severity: Grade III (severe): Urgent drainage within 24 hours, Grade II (moderate): Early drainage within 24-48 hours, Grade I (mild): Drainage can be elective if antibiotics control infection; Cholecystectomy NOT primary treatment for cholangitis", "correct": true },
+            { "id": "B", "text": "Emergency cholecystectomy is first-line", "correct": false },
+            { "id": "C", "text": "Antibiotics alone without drainage", "correct": false },
+            { "id": "D", "text": "Biliary drainage not needed", "correct": false }
+          ],
+          "explanation": "Acute Cholangitis Management: INITIAL MANAGEMENT: Resuscitation: IV fluids (sepsis likely), Correct electrolyte abnormalities, Vasopressors if hypotensive (septic shock), Correct coagulopathy if present (INR elevation common). Antibiotics: Start empiric antibiotics immediately (see next question). Blood cultures before antibiotics if possible. BILIARY DRAINAGE - ESSENTIAL: The KEY intervention - antibiotics alone insufficient. Methods (in order of preference): ERCP: Gold standard, allows therapeutic intervention (stone extraction, sphincterotomy, stenting). Percutaneous Transhepatic Cholangiography (PTC): If ERCP fails or not available. EUS-guided drainage: Emerging alternative. TIMING BY TG18 SEVERITY: Grade III (Severe - organ dysfunction): URGENT drainage within 24 hours, May require ICU care. Grade II (Moderate): Early drainage within 24-48 hours. Grade I (Mild): Elective drainage may be appropriate if antibiotics control infection. CHOLECYSTECTOMY: NOT primary treatment for cholangitis. May be needed later if gallstones are the cause.",
+          "sources": ["TG18 Management - https://dashboard.protocolosclinicos.com.br/download/anexo/2282/documento-oficial-tokyo.pdf"],
+          "sourceUrls": ["https://dashboard.protocolosclinicos.com.br/download/anexo/2282/documento-oficial-tokyo.pdf"]
+        }
+      ]
+    },
+    {
+      "id": "antibiotics",
+      "title": "Antimicrobial Therapy",
+      "icon": "💊",
+      "color": "#3b82f6",
+      "questions": [
+        {
+          "id": "chole-abx-1",
+          "stem": "You need to select empiric antibiotics.",
+          "question": "What is the antimicrobial approach per TG18?",
+          "options": [
+            { "id": "A", "text": "COMMON PATHOGENS: Gram-negatives (E. coli, Klebsiella, Enterobacter), Enterococcus, Anaerobes (Bacteroides - especially severe/complicated); COMMUNITY-ACQUIRED Grade I-II: Cephalosporin (ceftriaxone, cefazolin) ± metronidazole, Fluoroquinolone (if beta-lactam allergy) + metronidazole, Ampicillin-sulbactam; SEVERE (Grade III) / Healthcare-associated: Piperacillin-tazobactam, Carbapenems (imipenem, meropenem), Cefepime + metronidazole; DURATION: Grade I/II with cholecystectomy - preoperative only (no post-op abx needed); Cholangitis - until source controlled + clinical improvement (typically 4-7 days)", "correct": true },
+            { "id": "B", "text": "Only gram-positive coverage needed", "correct": false },
+            { "id": "C", "text": "All patients need 14 days of antibiotics", "correct": false },
+            { "id": "D", "text": "Anaerobic coverage never needed", "correct": false }
+          ],
+          "explanation": "TG18 Antimicrobial Therapy: COMMON PATHOGENS: Gram-negative Enterobacteriaceae: E. coli (most common), Klebsiella spp., Enterobacter spp. Gram-positives: Enterococcus spp. (especially healthcare-associated). Anaerobes: Bacteroides fragilis (more common in severe, complicated, elderly). EMPIRIC REGIMENS: COMMUNITY-ACQUIRED, GRADE I-II: Ceftriaxone 2g IV daily ± Metronidazole 500mg IV q8h. Cefazolin 2g IV q8h + Metronidazole. Ampicillin-sulbactam 3g IV q6h. Penicillin allergy: Fluoroquinolone (levofloxacin 750mg or ciprofloxacin 400mg) + Metronidazole. GRADE III / HEALTHCARE-ASSOCIATED: Piperacillin-tazobactam 4.5g IV q6h. Meropenem 1g IV q8h (if ESBL concern). Cefepime 2g IV q8h + Metronidazole. DURATION: CHOLECYSTITIS with cholecystectomy: Grade I/II: Preoperative prophylaxis ONLY - no post-op antibiotics needed (per TG18 RCTs). CHOLANGITIS: Continue until source controlled (drainage) + clinical improvement. Typically 4-7 days total.",
+          "sources": ["TG18 Antimicrobials - https://pubmed.ncbi.nlm.nih.gov/29090866/", "https://onlinelibrary.wiley.com/doi/full/10.1002/jhbp.518"],
+          "sourceUrls": ["https://pubmed.ncbi.nlm.nih.gov/29090866/", "https://onlinelibrary.wiley.com/doi/full/10.1002/jhbp.518"]
+        }
+      ]
+    },
+    {
+      "id": "complications",
+      "title": "Complications",
+      "icon": "⚠️",
+      "color": "#dc2626",
+      "questions": [
+        {
+          "id": "chole-comp-1",
+          "stem": "You need to recognize severe forms of cholecystitis.",
+          "question": "What are the complications and severe forms of acute cholecystitis?",
+          "options": [
+            { "id": "A", "text": "COMPLICATED CHOLECYSTITIS: GANGRENOUS: Gallbladder wall necrosis, higher perforation risk, may lack typical signs in elderly/diabetics; EMPHYSEMATOUS: Gas in gallbladder wall (seen on CT/X-ray), associated with diabetes, Clostridial infection, high mortality; PERFORATION: Localized (pericholecystic abscess) or Free (biliary peritonitis - surgical emergency); GALLSTONE ILEUS: Fistula to bowel, stone causes SBO (classic: air in biliary tree + SBO); MIRIZZI SYNDROME: Large stone in cystic duct compresses CBD → jaundice; All require urgent intervention", "correct": true },
+            { "id": "B", "text": "Complications are rare and not important", "correct": false },
+            { "id": "C", "text": "Gangrenous cholecystitis has better prognosis", "correct": false },
+            { "id": "D", "text": "All complications managed medically", "correct": false }
+          ],
+          "explanation": "Complicated Cholecystitis: GANGRENOUS CHOLECYSTITIS: Gallbladder wall necrosis and devitalization. Higher risk of perforation. May have ABSENT Murphy's sign (denervation). Higher risk in: Elderly, Diabetics, Males, Delayed presentation. Requires urgent cholecystectomy. EMPHYSEMATOUS CHOLECYSTITIS: Gas-forming organisms (Clostridium, E. coli). Gas in gallbladder wall on imaging (CT, X-ray). Risk factors: Diabetes (most common), Males, Vascular disease. High mortality (~15-25%). Urgent cholecystectomy required. PERFORATION: Localized: Pericholecystic abscess (walled-off). Free: Biliary peritonitis → surgical emergency. GALLSTONE ILEUS: Chronic cholecystitis → fistula to duodenum/colon. Large stone passes → mechanical small bowel obstruction (SBO). Rigler's triad: Pneumobilia (air in biliary tree), SBO, Ectopic gallstone. Treatment: Surgery to relieve obstruction ± cholecystectomy/fistula repair. MIRIZZI SYNDROME: Large stone impacted in cystic duct or Hartmann's pouch. Extrinsic compression of common bile duct → obstructive jaundice.",
+          "sources": ["PMC - https://pmc.ncbi.nlm.nih.gov/articles/PMC2784516/"],
+          "sourceUrls": ["https://pmc.ncbi.nlm.nih.gov/articles/PMC2784516/"]
+        }
+      ]
+    },
+    {
+      "id": "synthesis",
+      "title": "Synthesis",
+      "icon": "🔗",
+      "color": "#6366f1",
+      "questions": [
+        {
+          "id": "chole-syn-1",
+          "stem": "This 58-year-old woman has Grade I acute cholecystitis.",
+          "question": "What is the complete management approach?",
+          "options": [
+            { "id": "A", "text": "Complete approach: (1) DIAGNOSIS: Confirmed acute cholecystitis - Murphy's sign, RUQ tenderness (A) + Fever, leukocytosis (B) + US findings (C); (2) SEVERITY: Grade I - WBC <18K, <72h symptoms, no organ dysfunction; (3) INITIAL MANAGEMENT: NPO, IV fluids, analgesia, preoperative antibiotics (ceftriaxone + metronidazole given sulfa allergy); (4) DEFINITIVE TREATMENT: EARLY LAPAROSCOPIC CHOLECYSTECTOMY (within 72h of symptoms optimal); (5) POST-OP: No antibiotics needed for uncomplicated Grade I; Advance diet, discharge when tolerating PO; (6) Follow-up: Routine post-op care", "correct": true },
+            { "id": "B", "text": "2 weeks IV antibiotics before considering surgery", "correct": false },
+            { "id": "C", "text": "ERCP first then cholecystectomy", "correct": false },
+            { "id": "D", "text": "Percutaneous drainage as primary treatment", "correct": false }
+          ],
+          "explanation": "Complete Management for this patient: STEP 1 - CONFIRM DIAGNOSIS: TG18 criteria met: A (Murphy's, RUQ tenderness) + B (Fever, WBC 15.8K) + C (US: wall thickening, pericholecystic fluid, sonographic Murphy's) = DEFINITE acute cholecystitis. STEP 2 - GRADE SEVERITY: Grade I (Mild): WBC 15,800 (<18K), Duration 2 days (<72h), No organ dysfunction, No marked local inflammation. STEP 3 - INITIAL MANAGEMENT: NPO, IV fluid resuscitation, Analgesia (NSAIDs can help prevent progression), Preoperative antibiotics: Given sulfa allergy → Ceftriaxone 2g IV + Metronidazole 500mg IV (not fluoroquinolone if can use beta-lactam). STEP 4 - DEFINITIVE TREATMENT: EARLY LAPAROSCOPIC CHOLECYSTECTOMY: Optimal within 72 hours of symptom onset. Laparoscopic approach preferred. Send gallbladder for pathology. STEP 5 - POST-OPERATIVE: Grade I uncomplicated → NO post-operative antibiotics needed (per TG18 evidence). Advance diet as tolerated. Discharge typically within 24-48 hours. STEP 6 - FOLLOW-UP: Routine surgical follow-up. Counsel on low-fat diet initially.",
+          "sources": ["TG18 Guidelines - https://onlinelibrary.wiley.com/doi/full/10.1002/jhbp.516", "https://pubmed.ncbi.nlm.nih.gov/29090866/"],
+          "sourceUrls": ["https://onlinelibrary.wiley.com/doi/full/10.1002/jhbp.516", "https://pubmed.ncbi.nlm.nih.gov/29090866/"]
+        }
+      ]
+    }
+  ]
+}

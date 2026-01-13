@@ -1,0 +1,277 @@
+{
+  "id": "food-allergy-deep-dive",
+  "title": "Food Allergy",
+  "version": "1.0",
+  "totalQuestions": 18,
+  "estimatedTime": "30 minutes",
+  "difficulty": "Intermediate",
+  "targetAudience": "Medical Students, Residents, Allergy/Immunology Fellows, Primary Care",
+  "objectives": [
+    "Distinguish IgE-mediated from non-IgE-mediated food allergy",
+    "Interpret skin prick testing and specific IgE in diagnosis",
+    "Recognize oral allergy syndrome (pollen-food allergy)",
+    "Understand the role of oral food challenge as gold standard",
+    "Apply management principles: avoidance, emergency action plans, epinephrine",
+    "Discuss emerging treatments: oral immunotherapy and omalizumab"
+  ],
+  "guidelineReferences": [
+    {
+      "name": "NIAID Food Allergy Guidelines",
+      "citation": "Boyce JA, et al. Guidelines for the diagnosis and management of food allergy in the United States. J Allergy Clin Immunol. 2010;126:S1-S58",
+      "url": "https://www.jacionline.org/article/S0091-6749(10)01566-6/fulltext",
+      "keyPoints": [
+        "Oral food challenge is gold standard for diagnosis",
+        "SPT and sIgE identify sensitization, not clinical allergy",
+        "Allergen avoidance is primary management",
+        "Epinephrine is first-line for anaphylaxis"
+      ]
+    },
+    {
+      "name": "EAACI IgE-mediated Food Allergy Guidelines 2024",
+      "citation": "Santos AF, et al. EAACI guidelines on the management of IgE-mediated food allergy. Allergy. 2025;80:14-36",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39473345/"
+    }
+  ],
+  "vignette": {
+    "text": "A 3-year-old boy is brought to your clinic after an episode of hives and facial swelling 30 minutes after eating peanut butter for the first time yesterday. His mother reports he developed widespread hives, lip swelling, and vomited once. She gave diphenhydramine and symptoms resolved over 2 hours. He did not have difficulty breathing or become lethargic.\n\nHe has a history of eczema and has been drinking cow's milk formula without issue. He tolerates eggs in baked goods but has never had scrambled eggs.\n\nPast Medical History: Atopic dermatitis (moderate), no prior food reactions\n\nFamily History: Father has seasonal allergies, older sister has peanut allergy\n\nMedications: Hydrocortisone 1% cream PRN for eczema",
+    "physicalExam": {
+      "general": "Well-appearing, playful, no distress",
+      "vitals": { "HR": "100 bpm", "RR": "22/min", "Temp": "98.6°F", "SpO2": "99% RA" },
+      "skin": "Dry skin with flexural eczema, no acute urticaria, no angioedema today",
+      "HEENT": "No lip or facial swelling, oropharynx clear",
+      "respiratory": "Clear bilaterally, no wheezing",
+      "cardiovascular": "Regular rhythm, no murmurs"
+    },
+    "diagnostics": {
+      "allergyTesting": {
+        "skinPrickTest": {
+          "peanut": "12mm wheal (positive control 5mm, negative control 0mm)",
+          "treeNuts": { "almond": "3mm", "cashew": "8mm", "walnut": "4mm" },
+          "egg": "6mm",
+          "milk": "0mm"
+        },
+        "specificIgE": {
+          "peanut": { "value": "45 kU/L", "flag": "HIGH" },
+          "Ara h 2": { "value": "28 kU/L", "flag": "HIGH" },
+          "egg white": { "value": "8 kU/L", "flag": "MODERATE" },
+          "cashew": { "value": "15 kU/L", "flag": "HIGH" },
+          "milk": { "value": "<0.35 kU/L", "flag": "NEGATIVE" }
+        }
+      }
+    }
+  },
+  "layers": [
+    {
+      "id": "classification",
+      "title": "Classification of Food Allergy",
+      "icon": "📊",
+      "color": "#ef4444",
+      "questions": [
+        {
+          "id": "food-class-1",
+          "stem": "This child had an immediate reaction to peanut with urticaria, angioedema, and vomiting.",
+          "question": "How are food allergic reactions classified?",
+          "hint": "Consider timing and immune mechanism.",
+          "options": [
+            { "id": "A", "text": "IgE-mediated: Immediate onset (minutes to 2 hours), urticaria, angioedema, anaphylaxis, respiratory symptoms; Non-IgE-mediated: Delayed onset (hours to days), GI-predominant (FPIES, proctocolitis, EoE); Mixed: Features of both (eczema exacerbation)", "correct": true },
+            { "id": "B", "text": "All food allergies are IgE-mediated", "correct": false },
+            { "id": "C", "text": "Food intolerance and allergy are the same", "correct": false },
+            { "id": "D", "text": "Delayed reactions don't exist", "correct": false }
+          ],
+          "explanation": "Food allergy classification: (1) IgE-MEDIATED: Immediate (minutes-2 hours), mast cell/basophil activation, symptoms include urticaria, angioedema, vomiting, respiratory symptoms, anaphylaxis; (2) NON-IgE-MEDIATED: Delayed (hours-days), T-cell mediated, includes FPIES (vomiting 2-4 hours post-ingestion), allergic proctocolitis (bloody stools in infants), eosinophilic GI diseases; (3) MIXED IgE/non-IgE: Atopic dermatitis, eosinophilic esophagitis. This child's reaction (30 min onset, urticaria, angioedema, vomiting) is classic IgE-mediated.",
+          "whyChain": [
+            { "why": "Why does the timing matter?", "answer": "IgE-mediated reactions occur within minutes because preformed IgE on mast cells immediately triggers degranulation. Non-IgE reactions take hours to days because they require T-cell activation. This affects diagnosis (IgE testing only detects IgE-mediated allergy) and management (epinephrine for IgE-mediated anaphylaxis).", "source": "NIAID Guidelines" },
+            { "why": "What is food intolerance vs allergy?", "answer": "Food INTOLERANCE is non-immune (e.g., lactose intolerance from enzyme deficiency). Food ALLERGY is immune-mediated. 1 in 3 people report food allergy but only ~1 in 20 have true allergy when tested. Self-reported allergy often overestimates true prevalence.", "source": "NIAID Summary" }
+          ],
+          "sources": ["NIAID Guidelines - https://www.jacionline.org/article/S0091-6749(10)01566-6/fulltext"],
+          "sourceUrls": ["https://www.jacionline.org/article/S0091-6749(10)01566-6/fulltext"],
+          "remediation": { "link": "/mechanism/food-allergy-classification.html", "title": "Food Allergy Classification" }
+        }
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnostic Approach",
+      "icon": "🧪",
+      "color": "#f97316",
+      "questions": [
+        {
+          "id": "food-dx-1",
+          "stem": "You are interpreting this child's allergy testing results.",
+          "question": "What is the diagnostic approach for IgE-mediated food allergy?",
+          "hint": "Consider the role of history, testing, and food challenge.",
+          "options": [
+            { "id": "A", "text": "History + IgE sensitization (SPT or sIgE) together support diagnosis; SPT/sIgE alone show SENSITIZATION, not clinical ALLERGY; Oral food challenge is the GOLD STANDARD for diagnosis; Component testing (e.g., Ara h 2) improves specificity", "correct": true },
+            { "id": "B", "text": "Positive skin test alone confirms food allergy", "correct": false },
+            { "id": "C", "text": "sIgE testing is unnecessary if SPT is positive", "correct": false },
+            { "id": "D", "text": "Total IgE diagnoses food allergy", "correct": false }
+          ],
+          "explanation": "Diagnostic approach: (1) HISTORY: Detailed reaction history (timing, symptoms, reproducibility) is essential first step; (2) IgE TESTING: Skin prick test (SPT) or specific IgE (sIgE) detect SENSITIZATION - presence of IgE does NOT equal clinical allergy (many sensitized patients tolerate the food); (3) COMPONENT TESTING: sIgE to specific allergenic proteins (Ara h 2 for peanut, Cor a 14 for hazelnut) improves diagnostic accuracy; (4) ORAL FOOD CHALLENGE (OFC): Gold standard - controlled ingestion under medical supervision. This child has convincing history + high sIgE/Ara h 2 - peanut allergy is confirmed without needing challenge.",
+          "whyChain": [
+            { "why": "Why can't positive testing alone diagnose allergy?", "answer": "Sensitization (positive SPT/sIgE) can exist without clinical reactivity - the patient tolerates the food despite having IgE. This is especially common with cross-reactive allergens. Only ~50% of sensitized individuals are clinically allergic. Diagnosis requires history + sensitization, or oral challenge.", "source": "EAACI Diagnosis Guidelines" },
+            { "why": "What is Ara h 2?", "answer": "Ara h 2 is a 2S albumin storage protein in peanut - a 'major allergen' that's heat-stable and associated with systemic reactions. High Ara h 2 (>1-2 kU/L) has >90% PPV for clinical peanut allergy. Much better than total peanut sIgE for predicting true allergy, especially in pollen-sensitized patients.", "source": "EAACI 2024 Algorithm" }
+          ],
+          "sources": ["EAACI Diagnosis Guidelines - https://onlinelibrary.wiley.com/doi/10.1111/all.15902", "EAACI 2024 Algorithm - https://onlinelibrary.wiley.com/doi/10.1111/all.16321"],
+          "sourceUrls": ["https://onlinelibrary.wiley.com/doi/10.1111/all.15902", "https://onlinelibrary.wiley.com/doi/10.1111/all.16321"],
+          "remediation": { "link": "/mechanism/food-allergy-diagnosis.html", "title": "Food Allergy Diagnosis" }
+        },
+        {
+          "id": "food-dx-2",
+          "stem": "He has positive testing to cashew but has never eaten it.",
+          "question": "What is the significance of the positive cashew testing without prior exposure?",
+          "hint": "Consider cross-reactivity patterns.",
+          "options": [
+            { "id": "A", "text": "Tree nut cross-sensitization is common; cashew/pistachio cluster together; walnut/pecan cluster together; positive test without reaction history = sensitization, not confirmed allergy - may need oral challenge to determine if truly allergic or just cross-sensitized", "correct": true },
+            { "id": "B", "text": "He is definitely allergic to all tree nuts", "correct": false },
+            { "id": "C", "text": "Positive testing is always a false positive", "correct": false },
+            { "id": "D", "text": "Tree nuts never cross-react", "correct": false }
+          ],
+          "explanation": "Cross-sensitization vs cross-reactivity: Positive testing to a food never eaten indicates cross-sensitization (shared IgE epitopes). Tree nut cross-reactivity patterns: Cashew-pistachio (highly cross-reactive, ~70%), Walnut-pecan (highly cross-reactive), Almond often cross-reacts with stone fruits. Peanut (legume) and tree nuts are botanically unrelated but clinical co-allergy is common (~30%). This child is sensitized to cashew - but may or may not react clinically. Options: strict avoidance OR oral food challenge to clarify.",
+          "whyChain": [
+            { "why": "Should he avoid all tree nuts?", "answer": "Conservative approach: Avoid all tree nuts given peanut allergy + tree nut sensitization (often recommended for young children). Alternative: Consider supervised oral food challenge to nuts with lower sIgE (almond) if family wants to expand diet. Cashew (high sIgE 15 kU/L) should be avoided. Individual decisions based on risk tolerance.", "source": "NIAID Guidelines" }
+          ],
+          "sources": ["NIAID Guidelines - https://www.jacionline.org/article/S0091-6749(10)01566-6/fulltext"],
+          "sourceUrls": ["https://www.jacionline.org/article/S0091-6749(10)01566-6/fulltext"],
+          "remediation": { "link": "/mechanism/cross-reactivity.html", "title": "Cross-Reactivity" }
+        }
+      ]
+    },
+    {
+      "id": "management",
+      "title": "Management",
+      "icon": "🛡️",
+      "color": "#22c55e",
+      "questions": [
+        {
+          "id": "food-mgmt-1",
+          "stem": "You are counseling the family on managing this child's peanut allergy.",
+          "question": "What are the key components of food allergy management?",
+          "hint": "Consider avoidance, emergency preparedness, and education.",
+          "options": [
+            { "id": "A", "text": "Strict allergen AVOIDANCE (read labels, avoid cross-contamination), prescribe EPINEPHRINE auto-injector (first-line for anaphylaxis), written EMERGENCY ACTION PLAN, education on symptom recognition, medical alert identification, dietitian referral if needed", "correct": true },
+            { "id": "B", "text": "Antihistamines alone are sufficient treatment", "correct": false },
+            { "id": "C", "text": "Epinephrine is a last resort", "correct": false },
+            { "id": "D", "text": "Complete avoidance is unnecessary", "correct": false }
+          ],
+          "explanation": "Food allergy management pillars: (1) AVOIDANCE: Read all food labels, aware of cross-contamination (shared equipment), FALCPA requires labeling of top 8 allergens (milk, egg, peanut, tree nuts, soy, wheat, fish, shellfish + sesame now added); (2) EPINEPHRINE: Auto-injector (EpiPen, Auvi-Q) is FIRST-LINE for anaphylaxis - give immediately for systemic symptoms, prescribe 2 devices; (3) EMERGENCY ACTION PLAN: Written instructions for caregivers, schools; (4) EDUCATION: Recognize symptoms, when to give epinephrine, when to call 911; (5) Medical alert bracelet; (6) Dietitian for nutritional guidance.",
+          "whyChain": [
+            { "why": "Why epinephrine first, not antihistamines?", "answer": "Antihistamines only treat cutaneous symptoms and work slowly. Epinephrine reverses ALL anaphylaxis features: bronchospasm (β2), hypotension (α1), and inhibits further mediator release. Delayed epinephrine is associated with fatal anaphylaxis. Antihistamines are adjunctive, not first-line.", "source": "NIAID Guidelines" },
+            { "why": "When should epinephrine be given?", "answer": "Give epinephrine for: any respiratory symptoms (wheeze, stridor, cough), cardiovascular symptoms (hypotension, pale/floppy), severe GI symptoms with other system involvement, progressive symptoms, prior severe reactions. When in doubt, give it - risk of withholding far exceeds risk of giving.", "source": "EAACI Management Guidelines" }
+          ],
+          "sources": ["NIAID Guidelines - https://www.jacionline.org/article/S0091-6749(10)01566-6/fulltext", "EAACI Management Guidelines - https://pubmed.ncbi.nlm.nih.gov/39473345/"],
+          "sourceUrls": ["https://www.jacionline.org/article/S0091-6749(10)01566-6/fulltext", "https://pubmed.ncbi.nlm.nih.gov/39473345/"],
+          "remediation": { "link": "/mechanism/food-allergy-management.html", "title": "Food Allergy Management" }
+        }
+      ]
+    },
+    {
+      "id": "oas",
+      "title": "Oral Allergy Syndrome",
+      "icon": "🍎",
+      "color": "#3b82f6",
+      "questions": [
+        {
+          "id": "food-oas-1",
+          "stem": "A different patient: 25-year-old with seasonal allergies reports mouth itching when eating raw apples and carrots.",
+          "question": "What is oral allergy syndrome (pollen-food allergy syndrome)?",
+          "hint": "Consider cross-reactivity with pollens.",
+          "options": [
+            { "id": "A", "text": "OAS: IgE cross-reactivity between pollen and raw fruits/vegetables with homologous proteins; symptoms LOCALIZED to mouth (itching, tingling, mild swelling); heat-labile proteins - COOKED foods usually tolerated; rarely causes systemic reactions", "correct": true },
+            { "id": "B", "text": "OAS causes severe anaphylaxis", "correct": false },
+            { "id": "C", "text": "Cooked foods cause the same reaction", "correct": false },
+            { "id": "D", "text": "OAS is unrelated to pollen allergy", "correct": false }
+          ],
+          "explanation": "Oral Allergy Syndrome (Pollen-Food Allergy Syndrome): (1) Mechanism: IgE cross-reactivity between pollen proteins and homologous proteins in raw fruits/vegetables; (2) Common patterns: Birch pollen → apple, pear, cherry, carrot, hazelnut, soy; Ragweed → melon, banana; Grass → tomato, melon; (3) Symptoms: Localized to oropharynx (itching, tingling, mild lip/tongue swelling), resolves quickly; (4) Heat-labile: Cooking denatures proteins → cooked forms usually tolerated; (5) Rarely systemic but ~2-9% may have more severe reactions. SPT to fresh food often positive when commercial extract negative.",
+          "whyChain": [
+            { "why": "Does this patient need epinephrine?", "answer": "Most OAS patients do NOT need epinephrine prescription - reactions stay localized. However, consider epinephrine if: prior systemic reaction, reaction to cooked form, reaction to highly allergenic foods (soy, hazelnut), or significant symptoms beyond oropharynx.", "source": "NIAID Guidelines" }
+          ],
+          "sources": ["NIAID Guidelines - https://www.jacionline.org/article/S0091-6749(10)01566-6/fulltext"],
+          "sourceUrls": ["https://www.jacionline.org/article/S0091-6749(10)01566-6/fulltext"],
+          "remediation": { "link": "/mechanism/oas.html", "title": "Oral Allergy Syndrome" }
+        }
+      ]
+    },
+    {
+      "id": "emerging",
+      "title": "Emerging Treatments",
+      "icon": "💡",
+      "color": "#a855f7",
+      "questions": [
+        {
+          "id": "food-emerging-1",
+          "stem": "The family asks about treatments beyond avoidance for peanut allergy.",
+          "question": "What are the emerging treatment options for food allergy?",
+          "hint": "Consider oral immunotherapy and biologics.",
+          "options": [
+            { "id": "A", "text": "ORAL IMMUNOTHERAPY (OIT): Gradual increasing doses to raise reaction threshold (desensitization), FDA-approved Palforzia for peanut ages 4-17; OMALIZUMAB: Anti-IgE, FDA-approved for food allergy age ≥1, reduces severity; NOT a cure - ongoing treatment required for protection", "correct": true },
+            { "id": "B", "text": "No treatments exist beyond avoidance", "correct": false },
+            { "id": "C", "text": "OIT cures food allergy permanently", "correct": false },
+            { "id": "D", "text": "Omalizumab is contraindicated in food allergy", "correct": false }
+          ],
+          "explanation": "Emerging food allergy treatments: (1) ORAL IMMUNOTHERAPY (OIT): Daily ingestion of gradually increasing allergen doses under medical supervision. FDA-approved Palforzia (peanut) for ages 4-17. Achieves DESENSITIZATION (raised threshold while on treatment), NOT cure. Requires ongoing daily dosing. Risk of allergic reactions during buildup; (2) OMALIZUMAB: Anti-IgE monoclonal antibody, FDA-approved 2024 for food allergy ≥1 year. Reduces reaction severity, allows multiple allergens. 'Allergen-agnostic' approach; (3) SUBLINGUAL (SLIT) and EPICUTANEOUS (EPIT) immunotherapy under investigation. Important: These raise threshold but do NOT eliminate allergy - ongoing treatment needed.",
+          "whyChain": [
+            { "why": "Is OIT right for this 3-year-old?", "answer": "Palforzia is approved for ages 4-17. Younger children may have higher response rates but also outgrow allergies more often. Shared decision-making: OIT benefits (raised threshold, less anxiety) vs risks (daily dosing, reactions, GI symptoms in ~10%). Some families prefer strict avoidance; others want protection from accidental exposure.", "source": "EAACI Immunotherapy Guidelines" },
+            { "why": "How does omalizumab work differently?", "answer": "Omalizumab binds free IgE, reducing IgE available to trigger mast cells. It's 'allergen-agnostic' - works for multiple food allergies simultaneously. Doesn't require eating the allergen daily. May be combined with OIT. Approved for children ≥1 year with multiple food allergies.", "source": "EAACI Management Guidelines" }
+          ],
+          "sources": ["EAACI Immunotherapy Guidelines - https://pubmed.ncbi.nlm.nih.gov/29205393/", "EAACI Management Guidelines - https://pubmed.ncbi.nlm.nih.gov/39473345/"],
+          "sourceUrls": ["https://pubmed.ncbi.nlm.nih.gov/29205393/", "https://pubmed.ncbi.nlm.nih.gov/39473345/"],
+          "remediation": { "link": "/mechanism/food-immunotherapy.html", "title": "Food Allergy Immunotherapy" }
+        }
+      ]
+    },
+    {
+      "id": "natural-history",
+      "title": "Natural History",
+      "icon": "📈",
+      "color": "#ec4899",
+      "questions": [
+        {
+          "id": "food-nh-1",
+          "stem": "The family asks if he will outgrow his peanut allergy.",
+          "question": "What is the natural history of food allergies?",
+          "hint": "Consider which allergies are more likely to resolve.",
+          "options": [
+            { "id": "A", "text": "MILK and EGG: Majority outgrow by school age (80-90% by age 16); PEANUT and TREE NUTS: ~20% outgrow, most persist; FISH and SHELLFISH: Usually persist lifelong; Higher initial sIgE predicts persistence; Resolution can be confirmed by oral food challenge", "correct": true },
+            { "id": "B", "text": "All food allergies are lifelong", "correct": false },
+            { "id": "C", "text": "Peanut allergy is always outgrown", "correct": false },
+            { "id": "D", "text": "No way to predict resolution", "correct": false }
+          ],
+          "explanation": "Natural history varies by allergen: (1) MILK: 50% resolve by age 5, ~80-90% by age 16; (2) EGG: 50% resolve by age 5, ~80-90% by age 16; many tolerate baked egg before whole egg; (3) PEANUT: Only ~20% outgrow; higher Ara h 2, larger SPT, earlier/severe reactions predict persistence; (4) TREE NUTS: ~10% outgrow, most persist; (5) FISH/SHELLFISH: Usually lifelong. Predictors of persistence: Higher sIgE levels, multiple food allergies, atopic comorbidities (asthma, eczema), severe initial reactions. This child with high peanut sIgE (45) and Ara h 2 (28) is less likely to outgrow.",
+          "whyChain": [
+            { "why": "What about the egg sensitization?", "answer": "He has moderate egg sIgE (8 kU/L) and tolerates baked egg. This is common - baked egg is less allergenic (heat denatures ovomucoid). He may tolerate baked egg now and likely outgrow whole-egg allergy. Could consider introducing baked egg under guidance, or monitor with periodic testing.", "source": "NIAID Guidelines" }
+          ],
+          "sources": ["NIAID Guidelines - https://www.jacionline.org/article/S0091-6749(10)01566-6/fulltext"],
+          "sourceUrls": ["https://www.jacionline.org/article/S0091-6749(10)01566-6/fulltext"],
+          "remediation": { "link": "/mechanism/food-allergy-natural-history.html", "title": "Natural History" }
+        }
+      ]
+    },
+    {
+      "id": "synthesis",
+      "title": "Synthesis",
+      "icon": "🔗",
+      "color": "#6366f1",
+      "questions": [
+        {
+          "id": "food-syn-1",
+          "stem": "Summarizing the evaluation and management plan for this child.",
+          "question": "What is the complete assessment and plan for this child?",
+          "hint": "Integrate diagnosis, management, and follow-up.",
+          "options": [
+            { "id": "A", "text": "Diagnosis: Peanut allergy confirmed (history + high sIgE/Ara h 2); cashew sensitization (avoid pending challenge); egg: tolerates baked, monitor. Management: Strict peanut/cashew avoidance, epinephrine auto-injector x2, written action plan, school notification. Follow-up: Annual monitoring, discuss OIT when age-appropriate, consider tree nut challenge for low-sensitized nuts", "correct": true },
+            { "id": "B", "text": "No follow-up needed", "correct": false },
+            { "id": "C", "text": "Avoid all foods with positive testing forever", "correct": false },
+            { "id": "D", "text": "Antihistamines sufficient for future reactions", "correct": false }
+          ],
+          "explanation": "Complete plan: (1) DIAGNOSIS: Peanut allergy confirmed (convincing history + sIgE 45, Ara h 2 28). Cashew sensitization - avoid (high sIgE), consider future challenge. Egg - baked tolerated, may outgrow, monitor. Milk - not allergic; (2) AVOIDANCE: Strict peanut, tree nut (especially cashew/pistachio) avoidance. Read labels, cross-contamination education; (3) EMERGENCY PREP: Epinephrine auto-injector (weight-appropriate), prescribe 2, written action plan, train family and school; (4) FOLLOW-UP: Annual visits, repeat sIgE to monitor trends, consider OIT discussion at age 4+, supervised challenge for low-risk nuts if desired; (5) PREVENTION: Early introduction of other allergens in younger siblings per LEAP study principles.",
+          "whyChain": [
+            { "why": "What about his eczema and asthma risk?", "answer": "Atopic march: Children with eczema + food allergy are at increased asthma risk (~40-60%). Monitor for respiratory symptoms. Good eczema control may reduce sensitization risk. His eczema should be optimally managed. Family should be counseled about asthma symptoms.", "source": "NIAID Guidelines" }
+          ],
+          "sources": ["NIAID Guidelines - https://www.jacionline.org/article/S0091-6749(10)01566-6/fulltext"],
+          "sourceUrls": ["https://www.jacionline.org/article/S0091-6749(10)01566-6/fulltext"],
+          "remediation": { "link": "/mechanism/food-allergy-comprehensive.html", "title": "Food Allergy Comprehensive Management" }
+        }
+      ]
+    }
+  ]
+}

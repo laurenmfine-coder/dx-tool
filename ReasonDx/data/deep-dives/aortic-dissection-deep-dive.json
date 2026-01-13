@@ -1,0 +1,232 @@
+{
+  "id": "aortic-dissection-deep-dive",
+  "title": "Aortic Dissection",
+  "version": "1.0",
+  "totalQuestions": 16,
+  "estimatedTime": "30 minutes",
+  "difficulty": "Advanced",
+  "targetAudience": "Medical Students, Residents, Emergency Medicine, Critical Care",
+  "objectives": [
+    "Recognize the clinical presentation of acute aortic dissection",
+    "Apply Stanford and DeBakey classification systems",
+    "Differentiate Type A (surgical) from Type B (medical) management",
+    "Initiate anti-impulse therapy with appropriate BP and HR targets",
+    "Identify malperfusion syndromes"
+  ],
+  "guidelineReferences": [
+    {
+      "name": "2022 ACC/AHA Guideline for Aortic Disease",
+      "citation": "Isselbacher EM, et al. Circulation. 2022;146:e334-e482",
+      "url": "https://www.ahajournals.org/doi/10.1161/CIR.0000000000001106"
+    },
+    {
+      "name": "StatPearls: Aortic Dissection",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK441963/"
+    }
+  ],
+  "vignette": {
+    "text": "A 62-year-old man presents with sudden severe 'tearing' chest pain radiating to back while lifting furniture. History of poorly controlled hypertension, hyperlipidemia, and 30 pack-year smoking.",
+    "physicalExam": {
+      "vitals": { "BP_right": "185/110 mmHg", "BP_left": "145/85 mmHg", "HR": "105 bpm" },
+      "cardiovascular": "New diastolic murmur, right radial pulse stronger than left",
+      "findings": "40 mmHg BP differential between arms"
+    },
+    "diagnostics": {
+      "labs": { "D-dimer": "8,500 ng/mL (markedly elevated)", "Troponin": "0.08 ng/mL (mildly elevated)" },
+      "CTA": "Intimal flap from aortic root through descending aorta. Entry tear in ascending aorta. Small pericardial effusion."
+    }
+  },
+  "layers": [
+    {
+      "id": "recognition",
+      "title": "Recognition",
+      "icon": "🔍",
+      "color": "#ef4444",
+      "questions": [
+        {
+          "id": "ad-recog-1",
+          "stem": "Patient has sudden tearing chest/back pain, BP differential between arms, and widened mediastinum.",
+          "question": "What are the classic clinical features of acute aortic dissection?",
+          "options": [
+            { "id": "A", "text": "Sudden severe chest/back pain (tearing/ripping), interarm BP differential >20 mmHg, pulse deficits, new aortic regurgitation murmur, widened mediastinum on CXR, neurologic deficits or limb ischemia from malperfusion", "correct": true },
+            { "id": "B", "text": "Gradual onset chest pressure relieved by rest", "correct": false },
+            { "id": "C", "text": "Pleuritic chest pain worse with inspiration", "correct": false },
+            { "id": "D", "text": "Symptoms always identical to MI", "correct": false }
+          ],
+          "explanation": "Classic aortic dissection features: Sudden onset severe pain (tearing/ripping), BP differential >20 mmHg between arms, pulse deficits, new AR murmur, widened mediastinum (>8 cm). Only 15-43% correctly diagnosed at first presentation due to variable presentations.",
+          "whyChain": [
+            { "why": "Why is diagnosis often missed?", "answer": "Pain may mimic MI or PE; EKG may show ischemia from coronary malperfusion; troponin may be elevated. High suspicion needed for hypertensive patients with sudden severe pain.", "source": "StatPearls" }
+          ],
+          "sources": ["StatPearls - https://www.ncbi.nlm.nih.gov/books/NBK441963/"],
+          "sourceUrls": ["https://www.ncbi.nlm.nih.gov/books/NBK441963/"]
+        }
+      ]
+    },
+    {
+      "id": "classification",
+      "title": "Classification",
+      "icon": "📊",
+      "color": "#f97316",
+      "questions": [
+        {
+          "id": "ad-class-1",
+          "stem": "CTA shows dissection from aortic root through descending aorta.",
+          "question": "What are the Stanford and DeBakey classification systems?",
+          "options": [
+            { "id": "A", "text": "STANFORD: Type A = involves ascending aorta (SURGICAL EMERGENCY); Type B = does NOT involve ascending (initially MEDICAL). DEBAKEY: Type I = ascending + descending; Type II = ascending only; Type III = descending only", "correct": true },
+            { "id": "B", "text": "Classifications are based on patient age", "correct": false },
+            { "id": "C", "text": "All dissections are treated the same", "correct": false },
+            { "id": "D", "text": "Type B is more dangerous than Type A", "correct": false }
+          ],
+          "explanation": "Stanford Type A (any ascending involvement) is surgical emergency - mortality ~1-2% per hour without surgery (~50% dead by 48h). Type B (descending only) initially managed medically. This patient = Stanford Type A = DeBakey Type I.",
+          "whyChain": [
+            { "why": "Why does Type A require surgery?", "answer": "Type A risks: retrograde extension to coronary arteries (MI), aortic valve (acute AR), pericardium (tamponade). Surgery reduces mortality from ~50% to 15-25%.", "source": "ACC/AHA Guidelines" }
+          ],
+          "sources": ["ACC/AHA Guidelines - https://www.ahajournals.org/doi/10.1161/CIR.0000000000001106"],
+          "sourceUrls": ["https://www.ahajournals.org/doi/10.1161/CIR.0000000000001106"]
+        }
+      ]
+    },
+    {
+      "id": "risk-factors",
+      "title": "Risk Factors",
+      "icon": "⚠️",
+      "color": "#eab308",
+      "questions": [
+        {
+          "id": "ad-rf-1",
+          "stem": "Patient has poorly controlled hypertension and smoking history.",
+          "question": "What are the risk factors for aortic dissection?",
+          "options": [
+            { "id": "A", "text": "HYPERTENSION (most common, 70%), connective tissue disorders (Marfan, Ehlers-Danlos, Loeys-Dietz), bicuspid aortic valve, cocaine use, extreme exertion, prior aortic surgery, pregnancy", "correct": true },
+            { "id": "B", "text": "Dissection only occurs in young patients", "correct": false },
+            { "id": "C", "text": "Hypertension is not a risk factor", "correct": false },
+            { "id": "D", "text": "All dissections are traumatic", "correct": false }
+          ],
+          "explanation": "Hypertension present in ~70% (causes medial degeneration). Marfan syndrome in 50% of patients <40 years. Acute triggers: cocaine, weightlifting, severe emotional stress. This patient: chronic HTN + acute exertion (lifting furniture).",
+          "whyChain": [
+            { "why": "Why screen family members?", "answer": "Heritable thoracic aortic disease present in 20% of cases. First-degree relatives should undergo aortic imaging. Genetic testing recommended if <50 years or family history.", "source": "ACC/AHA Guidelines" }
+          ],
+          "sources": ["ACC/AHA Guidelines - https://www.ahajournals.org/doi/10.1161/CIR.0000000000001106"],
+          "sourceUrls": ["https://www.ahajournals.org/doi/10.1161/CIR.0000000000001106"]
+        }
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis",
+      "icon": "🖼️",
+      "color": "#22c55e",
+      "questions": [
+        {
+          "id": "ad-dx-1",
+          "stem": "You need to confirm the diagnosis urgently.",
+          "question": "What is the imaging approach for suspected aortic dissection?",
+          "options": [
+            { "id": "A", "text": "CTA is gold standard (98-100% sensitivity/specificity) - shows entry tear, extent, branch involvement; TEE alternative if unstable; CXR shows widened mediastinum but neither sensitive nor specific; D-dimer elevated in >95%", "correct": true },
+            { "id": "B", "text": "Chest X-ray alone is sufficient", "correct": false },
+            { "id": "C", "text": "Cardiac catheterization is first-line", "correct": false },
+            { "id": "D", "text": "Ultrasound of chest wall", "correct": false }
+          ],
+          "explanation": "CTA is imaging modality of choice - shows intimal flap, entry tear, extent, malperfusion. TEE useful bedside for unstable patients. D-dimer >500 in >95% of acute dissections - normal D-dimer helps rule out in low-probability cases.",
+          "sources": ["ACC/AHA Guidelines - https://www.ahajournals.org/doi/10.1161/CIR.0000000000001106"],
+          "sourceUrls": ["https://www.ahajournals.org/doi/10.1161/CIR.0000000000001106"]
+        }
+      ]
+    },
+    {
+      "id": "medical-management",
+      "title": "Medical Management",
+      "icon": "💊",
+      "color": "#3b82f6",
+      "questions": [
+        {
+          "id": "ad-med-1",
+          "stem": "While awaiting surgery, you need to stabilize this patient.",
+          "question": "What are the immediate medical management goals?",
+          "options": [
+            { "id": "A", "text": "Anti-impulse therapy: Target SBP 100-120 mmHg AND HR <60 bpm; Start IV BETA-BLOCKER first (esmolol, labetalol) to reduce dP/dt; Add vasodilator AFTER beta-blockade if needed; Opioids for pain", "correct": true },
+            { "id": "B", "text": "Aggressive fluid resuscitation", "correct": false },
+            { "id": "C", "text": "Vasodilators first, then beta-blockers", "correct": false },
+            { "id": "D", "text": "Target normal blood pressure", "correct": false }
+          ],
+          "explanation": "BETA-BLOCKER FIRST to reduce dP/dt (aortic wall stress). Vasodilators alone cause reflex tachycardia → increased wall stress → worse. Target SBP 100-120, HR <60. Esmolol (titratable) or labetalol preferred. Add nicardipine/nitroprusside only after HR controlled.",
+          "whyChain": [
+            { "why": "Why beta-blocker before vasodilator?", "answer": "Vasodilators drop afterload → reflex tachycardia → increased contractility (dP/dt) → MORE wall stress → propagation/rupture. Never give nitroprusside without beta-blockade in dissection.", "source": "StatPearls" }
+          ],
+          "sources": ["StatPearls - https://www.ncbi.nlm.nih.gov/books/NBK441963/"],
+          "sourceUrls": ["https://www.ncbi.nlm.nih.gov/books/NBK441963/"]
+        }
+      ]
+    },
+    {
+      "id": "surgical",
+      "title": "Surgical Management",
+      "icon": "🔧",
+      "color": "#a855f7",
+      "questions": [
+        {
+          "id": "ad-surg-1",
+          "stem": "Cardiothoracic surgery is consulted for this Type A dissection.",
+          "question": "What is the surgical approach for Stanford Type A dissection?",
+          "options": [
+            { "id": "A", "text": "EMERGENT open surgical repair: Replace ascending aorta, excise entry tear; Bentall procedure if root involved; Transfer to high-volume center if stable; Mortality 15-25% with surgery vs ~50% without", "correct": true },
+            { "id": "B", "text": "Endovascular stent is preferred for Type A", "correct": false },
+            { "id": "C", "text": "Surgery can be delayed weeks", "correct": false },
+            { "id": "D", "text": "Medical therapy alone is preferred", "correct": false }
+          ],
+          "explanation": "Type A requires emergent open surgery. Goals: excise entry tear, replace ascending aorta, prevent tamponade/coronary occlusion. Bentall (composite valve-graft) if aortic root involved. Type B: medical unless complicated (malperfusion, rupture, refractory pain) then TEVAR or surgery.",
+          "sources": ["ACC/AHA Guidelines - https://www.ahajournals.org/doi/10.1161/CIR.0000000000001106"],
+          "sourceUrls": ["https://www.ahajournals.org/doi/10.1161/CIR.0000000000001106"]
+        }
+      ]
+    },
+    {
+      "id": "malperfusion",
+      "title": "Malperfusion Syndromes",
+      "icon": "🩸",
+      "color": "#dc2626",
+      "questions": [
+        {
+          "id": "ad-malp-1",
+          "stem": "CTA shows left subclavian arising from false lumen, explaining BP differential.",
+          "question": "What are the malperfusion syndromes in aortic dissection?",
+          "options": [
+            { "id": "A", "text": "Branch vessels compromised by false lumen: CORONARY (MI), CEREBRAL (stroke), SPINAL (paraplegia), MESENTERIC (acidosis), RENAL (AKI), LIMB (pulse deficits); Malperfusion worsens prognosis", "correct": true },
+            { "id": "B", "text": "Malperfusion does not affect outcomes", "correct": false },
+            { "id": "C", "text": "Only cardiac complications occur", "correct": false },
+            { "id": "D", "text": "Limb ischemia never occurs", "correct": false }
+          ],
+          "explanation": "Malperfusion from false lumen compressing branches: Coronary (RCA → inferior MI), Cerebral (stroke 5-10%), Spinal (paraplegia), Mesenteric (bowel necrosis), Renal (AKI), Limb (pulse deficits). This patient: left arm malperfusion (low BP), possible coronary (elevated troponin), possible renal (elevated creatinine).",
+          "sources": ["StatPearls - https://www.ncbi.nlm.nih.gov/books/NBK441963/"],
+          "sourceUrls": ["https://www.ncbi.nlm.nih.gov/books/NBK441963/"]
+        }
+      ]
+    },
+    {
+      "id": "synthesis",
+      "title": "Synthesis",
+      "icon": "🔗",
+      "color": "#6366f1",
+      "questions": [
+        {
+          "id": "ad-syn-1",
+          "stem": "Integrating all findings for this patient with Type A dissection.",
+          "question": "What is the complete management approach?",
+          "options": [
+            { "id": "A", "text": "Immediate: IV esmolol to HR <60, then nicardipine to SBP 100-120, opioids for pain; Definitive: EMERGENT surgery for ascending aortic replacement; Long-term: Lifelong BP control, serial imaging, screen first-degree relatives", "correct": true },
+            { "id": "B", "text": "Observe with medical therapy alone", "correct": false },
+            { "id": "C", "text": "Schedule elective surgery in 1 week", "correct": false },
+            { "id": "D", "text": "Thrombolytics for possible MI", "correct": false }
+          ],
+          "explanation": "Type A = surgical emergency. Stabilize with anti-impulse therapy while preparing for OR. NEVER give thrombolytics (catastrophic). Post-surgery: lifelong BP control, serial imaging for residual dissection, genetic testing if young, screen relatives. 70-85% surgical survival; ~50% mortality without surgery at 48h.",
+          "whyChain": [
+            { "why": "Why NOT thrombolytics?", "answer": "ABSOLUTELY CONTRAINDICATED - would catastrophically worsen bleeding into false lumen → rupture → death. Elevated troponin is from malperfusion, not primary ACS.", "source": "ACC/AHA Guidelines" }
+          ],
+          "sources": ["ACC/AHA Guidelines - https://www.ahajournals.org/doi/10.1161/CIR.0000000000001106"],
+          "sourceUrls": ["https://www.ahajournals.org/doi/10.1161/CIR.0000000000001106"]
+        }
+      ]
+    }
+  ]
+}

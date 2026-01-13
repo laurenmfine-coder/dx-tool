@@ -1,0 +1,274 @@
+{
+  "id": "neutropenic-fever-deep-dive",
+  "title": "Neutropenic Fever (Febrile Neutropenia)",
+  "version": "1.0",
+  "totalQuestions": 16,
+  "estimatedTime": "30 minutes",
+  "difficulty": "Advanced",
+  "targetAudience": "Medical Students, Residents, Oncology Fellows, Emergency Medicine, Infectious Disease",
+  "objectives": [
+    "Define febrile neutropenia and calculate ANC",
+    "Risk stratify patients using MASCC score",
+    "Initiate empiric antibiotics within 1 hour",
+    "Select appropriate empiric antibiotic regimen",
+    "Recognize indications for vancomycin and antifungals",
+    "Determine when to de-escalate or discontinue antibiotics"
+  ],
+  "guidelineReferences": [
+    {
+      "name": "IDSA Clinical Practice Guideline for Antimicrobial Agents in Neutropenic Patients",
+      "citation": "Freifeld AG, et al. Clin Infect Dis. 2011;52(4):e56-e93",
+      "url": "https://academic.oup.com/cid/article/52/4/e56/382256",
+      "keyPoints": [
+        "Empiric antibiotics within 1 hour",
+        "Antipseudomonal beta-lactam monotherapy for high-risk",
+        "Vancomycin NOT routine - add for specific indications",
+        "Empiric antifungals if fever persists 4-7 days"
+      ]
+    },
+    {
+      "name": "ASCO/IDSA Outpatient FN Guideline Update",
+      "url": "https://www.idsociety.org/practice-guideline/fever-and-neutropenia-in-adults-with-cancer/"
+    },
+    {
+      "name": "StatPearls: Febrile Neutropenia",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK541102/"
+    }
+  ],
+  "vignette": {
+    "text": "A 58-year-old woman with acute myeloid leukemia (AML) presents to the ED 10 days after starting induction chemotherapy with fever and chills. She reports fatigue and mild sore throat but denies cough, diarrhea, or dysuria. She has a central venous catheter (port-a-cath) in place.\n\nPast Medical History: AML diagnosed 2 weeks ago, Type 2 diabetes, Hypertension\n\nMedications: Currently on levofloxacin prophylaxis, fluconazole prophylaxis, acyclovir prophylaxis\n\nAllergies: None\n\nChemotherapy: Cytarabine + daunorubicin (7+3 induction) completed 3 days ago",
+    "physicalExam": {
+      "general": "Ill-appearing, fatigued",
+      "vitals": { "Temp": "39.2°C (102.6°F)", "BP": "98/62 mmHg", "HR": "112 bpm", "RR": "20/min", "SpO2": "96% RA" },
+      "HEENT": "Mild mucositis, no pharyngeal exudate",
+      "cardiovascular": "Tachycardic, regular, no murmurs",
+      "pulmonary": "Clear bilaterally",
+      "abdomen": "Soft, non-tender, no hepatosplenomegaly",
+      "skin": "Port site non-erythematous, no rashes, no perianal tenderness",
+      "lymphatics": "No lymphadenopathy"
+    },
+    "diagnostics": {
+      "labs": {
+        "WBC": { "value": "0.3 x 10^9/L", "reference": "4.5-11.0", "flag": "CRITICALLY LOW" },
+        "ANC": { "value": "50/μL", "reference": ">1500", "flag": "PROFOUND NEUTROPENIA" },
+        "Hemoglobin": { "value": "8.2 g/dL", "reference": "12-16", "flag": "LOW" },
+        "Platelets": { "value": "28,000/μL", "reference": "150,000-400,000", "flag": "LOW" },
+        "Creatinine": { "value": "1.0 mg/dL", "reference": "0.6-1.2" },
+        "Lactate": { "value": "2.4 mmol/L", "reference": "<2.0", "flag": "ELEVATED" }
+      },
+      "micro": {
+        "Blood cultures": "Pending (2 sets drawn - peripheral and port)",
+        "Urinalysis": "Negative",
+        "Chest X-ray": "No infiltrates"
+      }
+    }
+  },
+  "layers": [
+    {
+      "id": "definitions",
+      "title": "Definitions",
+      "icon": "📊",
+      "color": "#ef4444",
+      "questions": [
+        {
+          "id": "fn-def-1",
+          "stem": "This patient has fever 39.2°C and ANC 50/μL.",
+          "question": "How is febrile neutropenia defined?",
+          "options": [
+            { "id": "A", "text": "FEVER: Single oral temp ≥38.3°C (101°F) OR temp ≥38.0°C (100.4°F) sustained for ≥1 hour; NEUTROPENIA: ANC <500/μL OR ANC <1000/μL expected to decline to <500; PROFOUND neutropenia: ANC <100/μL; Calculate ANC = WBC × (% neutrophils + % bands) / 100", "correct": true },
+            { "id": "B", "text": "Any fever in a cancer patient", "correct": false },
+            { "id": "C", "text": "Neutropenia without fever", "correct": false },
+            { "id": "D", "text": "ANC <5000 with any temperature", "correct": false }
+          ],
+          "explanation": "Febrile neutropenia definition (IDSA): FEVER: Single oral temp ≥38.3°C (101°F) OR sustained temp ≥38.0°C for ≥1 hour. NEUTROPENIA: ANC <500 cells/μL OR ANC 500-1000 expected to decline to <500 within 48 hours. PROFOUND neutropenia: ANC <100/μL (highest infection risk). ANC calculation: WBC × (% segs + % bands) / 100. This patient: ANC 50 = profound neutropenia + fever 39.2°C = febrile neutropenia - a MEDICAL EMERGENCY.",
+          "whyChain": [
+            { "why": "Why is this an emergency?", "answer": "Without neutrophils, patients cannot mount inflammatory response to infection. Mortality from untreated bacteremia can be 40%+. Signs of infection may be absent (no pus, minimal inflammation). Fever may be the ONLY sign of serious infection. Without empiric antibiotics, sepsis and death can occur rapidly.", "source": "IDSA Guidelines" }
+          ],
+          "sources": ["IDSA Guidelines - https://academic.oup.com/cid/article/52/4/e56/382256"],
+          "sourceUrls": ["https://academic.oup.com/cid/article/52/4/e56/382256"]
+        }
+      ]
+    },
+    {
+      "id": "risk-stratification",
+      "title": "Risk Stratification",
+      "icon": "⚖️",
+      "color": "#f97316",
+      "questions": [
+        {
+          "id": "fn-risk-1",
+          "stem": "You need to determine if this patient is high-risk or low-risk.",
+          "question": "How do you risk stratify patients with febrile neutropenia?",
+          "options": [
+            { "id": "A", "text": "HIGH-RISK: Profound neutropenia (ANC <100) expected >7 days, significant comorbidities (hypotension, pneumonia, new abdominal pain, neurologic changes), MASCC score <21, inpatient status, hematologic malignancy/HSCT; LOW-RISK: Brief neutropenia (<7 days), MASCC ≥21, stable outpatient, solid tumor", "correct": true },
+            { "id": "B", "text": "All febrile neutropenia patients are low-risk", "correct": false },
+            { "id": "C", "text": "Risk stratification is not important", "correct": false },
+            { "id": "D", "text": "Only age determines risk", "correct": false }
+          ],
+          "explanation": "Risk stratification determines treatment venue and intensity. HIGH-RISK features: Profound neutropenia (ANC ≤100) expected >7 days, Clinically unstable (hypotension, altered mental status), Pneumonia, Significant comorbidities, Hepatic/renal insufficiency, Uncontrolled cancer, MASCC score <21, Inpatient. LOW-RISK: Expected brief neutropenia (<7 days), Solid tumor (not hematologic), MASCC ≥21, No comorbidities, Outpatient. This AML patient post-induction: HIGH-RISK (profound neutropenia, expected prolonged, hematologic malignancy).",
+          "whyChain": [
+            { "why": "What is the MASCC score?", "answer": "Multinational Association for Supportive Care in Cancer Risk Index: Burden of illness (5 points mild, 3 moderate), No hypotension (5), No COPD (4), Solid tumor/no prior fungal (4), Outpatient (3), No dehydration (3), Age <60 (2). Score ≥21 = low risk (<5% serious complications). This patient would score <21 = high-risk.", "source": "StatPearls: FN" }
+          ],
+          "sources": ["StatPearls: FN - https://www.ncbi.nlm.nih.gov/books/NBK541102/"],
+          "sourceUrls": ["https://www.ncbi.nlm.nih.gov/books/NBK541102/"]
+        }
+      ]
+    },
+    {
+      "id": "workup",
+      "title": "Initial Workup",
+      "icon": "🔬",
+      "color": "#eab308",
+      "questions": [
+        {
+          "id": "fn-workup-1",
+          "stem": "You are initiating the evaluation of this patient.",
+          "question": "What is the initial workup for febrile neutropenia?",
+          "options": [
+            { "id": "A", "text": "Blood cultures x2 sets (peripheral AND central line if present) BEFORE antibiotics; CBC with differential, comprehensive metabolic panel, lactate; Urinalysis; Chest X-ray if respiratory symptoms; Site-specific cultures based on symptoms; Do NOT delay antibiotics for workup completion", "correct": true },
+            { "id": "B", "text": "Only blood cultures are needed", "correct": false },
+            { "id": "C", "text": "Wait for culture results before antibiotics", "correct": false },
+            { "id": "D", "text": "CT scan before any treatment", "correct": false }
+          ],
+          "explanation": "Initial workup: (1) BLOOD CULTURES x2 sets minimum - one from peripheral vein, one from central line (if present) - draw BEFORE antibiotics but do NOT delay treatment; (2) CBC with differential (confirm ANC); (3) Comprehensive metabolic panel (renal/hepatic function); (4) Lactate (sepsis marker); (5) Urinalysis; (6) Chest X-ray if respiratory symptoms; (7) Site-specific cultures (stool if diarrhea, wound cultures, etc.). Key: Draw cultures then START ANTIBIOTICS WITHIN 1 HOUR - do not wait for results.",
+          "whyChain": [
+            { "why": "Why both peripheral and line cultures?", "answer": "Central line-associated bloodstream infection (CLABSI) is common in neutropenic patients. Differential time to positivity (line positive >2 hours before peripheral) suggests CLABSI. Helps guide whether line removal is needed. This patient has a port - must culture both sites.", "source": "IDSA Guidelines" }
+          ],
+          "sources": ["IDSA Guidelines - https://academic.oup.com/cid/article/52/4/e56/382256"],
+          "sourceUrls": ["https://academic.oup.com/cid/article/52/4/e56/382256"]
+        }
+      ]
+    },
+    {
+      "id": "empiric-antibiotics",
+      "title": "Empiric Antibiotic Therapy",
+      "icon": "💊",
+      "color": "#22c55e",
+      "questions": [
+        {
+          "id": "fn-abx-1",
+          "stem": "Blood cultures are drawn. You need to start antibiotics immediately.",
+          "question": "What is the recommended empiric antibiotic regimen for high-risk febrile neutropenia?",
+          "options": [
+            { "id": "A", "text": "ANTIPSEUDOMONAL BETA-LACTAM MONOTHERAPY: Cefepime 2g IV q8h, OR Piperacillin-tazobactam 4.5g IV q6h, OR Meropenem 1g IV q8h, OR Imipenem-cilastatin 500mg IV q6h; Start within 1 HOUR of presentation; Vancomycin NOT routinely added", "correct": true },
+            { "id": "B", "text": "Vancomycin alone is first-line", "correct": false },
+            { "id": "C", "text": "Oral antibiotics for all patients", "correct": false },
+            { "id": "D", "text": "Wait for culture results to choose antibiotics", "correct": false }
+          ],
+          "explanation": "Empiric antibiotics for HIGH-RISK febrile neutropenia: ANTIPSEUDOMONAL BETA-LACTAM MONOTHERAPY preferred: Cefepime 2g IV q8h (most commonly used), Piperacillin-tazobactam 4.5g IV q6h, Meropenem 1g IV q8h (if ESBL concern), Imipenem-cilastatin 500mg IV q6h. Must cover Pseudomonas aeruginosa - historically most lethal pathogen in neutropenic fever. START WITHIN 1 HOUR of triage. Vancomycin NOT recommended routinely - add only for specific indications.",
+          "whyChain": [
+            { "why": "Why not routinely add vancomycin?", "answer": "Studies show no mortality benefit from empiric vancomycin. Increases nephrotoxicity, VRE selection, and cost. Add vancomycin only for: suspected CLABSI, skin/soft tissue infection, hemodynamic instability, known MRSA colonization, severe mucositis with concern for viridans streptococci.", "source": "IDSA Guidelines" },
+            { "why": "What about this patient on levofloxacin prophylaxis?", "answer": "Patients on fluoroquinolone prophylaxis should NOT receive fluoroquinolone-based empiric therapy (breakthrough organisms likely resistant). She should receive IV antipseudomonal beta-lactam. If using outpatient regimen, cannot use fluoroquinolone + amoxicillin-clavulanate.", "source": "ASCO/IDSA Update" }
+          ],
+          "sources": ["IDSA Guidelines - https://academic.oup.com/cid/article/52/4/e56/382256", "ASCO/IDSA Update - https://www.idsociety.org/practice-guideline/fever-and-neutropenia-in-adults-with-cancer/"],
+          "sourceUrls": ["https://academic.oup.com/cid/article/52/4/e56/382256", "https://www.idsociety.org/practice-guideline/fever-and-neutropenia-in-adults-with-cancer/"]
+        },
+        {
+          "id": "fn-abx-2",
+          "stem": "The patient becomes hypotensive despite fluid resuscitation.",
+          "question": "When should vancomycin or other agents be added to empiric therapy?",
+          "options": [
+            { "id": "A", "text": "ADD VANCOMYCIN for: Hemodynamic instability/sepsis, Suspected catheter-related infection, Skin/soft tissue infection, Pneumonia, Known MRSA colonization, Severe mucositis (viridans strep); ADD AMINOGLYCOSIDE or second gram-negative agent for septic shock; Consider double gram-negative coverage if resistant organisms suspected", "correct": true },
+            { "id": "B", "text": "Never add vancomycin", "correct": false },
+            { "id": "C", "text": "Add vancomycin to all patients", "correct": false },
+            { "id": "D", "text": "Vancomycin only after culture confirmation", "correct": false }
+          ],
+          "explanation": "Indications to EXPAND empiric coverage: ADD VANCOMYCIN: Hemodynamic instability/septic shock, Suspected catheter-related bloodstream infection, Skin/soft tissue infection, Pneumonia (especially in setting of MRSA risk), Known MRSA colonization, Severe mucositis (viridans streptococci can cause septic shock). ADD AMINOGLYCOSIDE or second gram-negative agent: Septic shock, Suspected resistant gram-negatives. This patient with hypotension needs vancomycin added and possibly aminoglycoside for double gram-negative coverage.",
+          "sources": ["IDSA Guidelines - https://academic.oup.com/cid/article/52/4/e56/382256"],
+          "sourceUrls": ["https://academic.oup.com/cid/article/52/4/e56/382256"]
+        }
+      ]
+    },
+    {
+      "id": "antifungals",
+      "title": "Antifungal Therapy",
+      "icon": "🍄",
+      "color": "#a855f7",
+      "questions": [
+        {
+          "id": "fn-fungal-1",
+          "stem": "The patient remains febrile after 5 days of broad-spectrum antibiotics with negative cultures.",
+          "question": "When should empiric antifungal therapy be added?",
+          "options": [
+            { "id": "A", "text": "Add empiric antifungal after 4-7 days of persistent fever on broad-spectrum antibiotics in high-risk patients (prolonged neutropenia); Options: Caspofungin, Micafungin, Liposomal amphotericin B, Voriconazole; Consider earlier if high fungal risk (prior fungal infection, prolonged steroids, HSCT)", "correct": true },
+            { "id": "B", "text": "Antifungals should be started immediately", "correct": false },
+            { "id": "C", "text": "Never add antifungals empirically", "correct": false },
+            { "id": "D", "text": "Only fluconazole is effective", "correct": false }
+          ],
+          "explanation": "Empiric antifungal therapy: Add after 4-7 days of persistent fever on appropriate antibacterial therapy in HIGH-RISK patients with expected prolonged neutropenia (>7 days). Covers invasive aspergillosis and candidiasis. Options: ECHINOCANDINS (caspofungin, micafungin) - good for Candida and some Aspergillus, Liposomal amphotericin B - broad spectrum, Voriconazole - covers Aspergillus. Note: This patient is on fluconazole prophylaxis - if adding empiric antifungal, choose different class (echinocandin or amphotericin) to cover resistant/breakthrough organisms.",
+          "whyChain": [
+            { "why": "What workup for fungal infection?", "answer": "Consider: Serum galactomannan (Aspergillus), Beta-D-glucan (pan-fungal), CT chest (pulmonary aspergillosis shows halo sign, air-crescent), CT sinuses if symptoms. Bronchoalveolar lavage if pulmonary infiltrates. Don't wait for definitive diagnosis if high clinical suspicion.", "source": "IDSA Guidelines" }
+          ],
+          "sources": ["IDSA Guidelines - https://academic.oup.com/cid/article/52/4/e56/382256"],
+          "sourceUrls": ["https://academic.oup.com/cid/article/52/4/e56/382256"]
+        }
+      ]
+    },
+    {
+      "id": "duration",
+      "title": "Duration & De-escalation",
+      "icon": "⏱️",
+      "color": "#3b82f6",
+      "questions": [
+        {
+          "id": "fn-duration-1",
+          "stem": "The patient defervesces after 3 days, cultures remain negative, and ANC is rising.",
+          "question": "When can antibiotics be discontinued in febrile neutropenia?",
+          "options": [
+            { "id": "A", "text": "Traditional: Continue until ANC ≥500 AND afebrile ≥48 hours AND clinically stable; Newer evidence supports earlier discontinuation if: Afebrile ≥48-72 hours, Clinically stable, No documented infection, ANC recovering (even if <500); De-escalate to prophylaxis if neutropenia persists but stable", "correct": true },
+            { "id": "B", "text": "Always continue for 14 days", "correct": false },
+            { "id": "C", "text": "Stop immediately when afebrile", "correct": false },
+            { "id": "D", "text": "Continue until discharge regardless of counts", "correct": false }
+          ],
+          "explanation": "Antibiotic duration: TRADITIONAL approach: Continue until ANC ≥500/μL AND afebrile for 48 hours AND clinically stable. NEWER evidence: May discontinue after 72 hours if afebrile, stable, no documented infection - even if ANC still <500 (with close monitoring). If documented infection: Complete appropriate course based on organism and site. If persistent neutropenia but stable and afebrile: Consider de-escalation to prophylaxis with close monitoring. This patient: If afebrile 48h, cultures negative, ANC rising - can consider stopping empiric antibiotics.",
+          "sources": ["PMC Review - https://pmc.ncbi.nlm.nih.gov/articles/PMC9703488/"],
+          "sourceUrls": ["https://pmc.ncbi.nlm.nih.gov/articles/PMC9703488/"]
+        }
+      ]
+    },
+    {
+      "id": "outpatient",
+      "title": "Outpatient Management",
+      "icon": "🏠",
+      "color": "#10b981",
+      "questions": [
+        {
+          "id": "fn-outpt-1",
+          "stem": "A different patient: low-risk febrile neutropenia with solid tumor and expected brief neutropenia.",
+          "question": "Who can be managed as an outpatient and with what regimen?",
+          "options": [
+            { "id": "A", "text": "LOW-RISK criteria: MASCC ≥21, Expected neutropenia <7 days, No comorbidities, Solid tumor, Outpatient at onset, Clinically stable; Empiric: Fluoroquinolone (ciprofloxacin OR levofloxacin) + amoxicillin-clavulanate (or clindamycin if PCN allergic); First dose in clinic, observe 4 hours, close follow-up", "correct": true },
+            { "id": "B", "text": "All febrile neutropenia patients need admission", "correct": false },
+            { "id": "C", "text": "Outpatients don't need antibiotics", "correct": false },
+            { "id": "D", "text": "IV antibiotics only option", "correct": false }
+          ],
+          "explanation": "Outpatient management for LOW-RISK patients: Criteria: MASCC ≥21, Expected short neutropenia (<7 days), Solid tumor, No significant comorbidities, Outpatient at fever onset, Good social support, Access to medical care. Regimen: Ciprofloxacin 500-750mg PO q12h + Amoxicillin-clavulanate 500mg PO q8h (or clindamycin 300mg q6h if PCN allergic). Protocol: First dose in clinic/ED, observe 4 hours minimum, daily follow-up. Re-evaluate for admission if not improved in 2-3 days. NOT for patients on FQ prophylaxis.",
+          "sources": ["ASCO/IDSA Update - https://www.idsociety.org/practice-guideline/fever-and-neutropenia-in-adults-with-cancer/"],
+          "sourceUrls": ["https://www.idsociety.org/practice-guideline/fever-and-neutropenia-in-adults-with-cancer/"]
+        }
+      ]
+    },
+    {
+      "id": "synthesis",
+      "title": "Synthesis",
+      "icon": "🔗",
+      "color": "#6366f1",
+      "questions": [
+        {
+          "id": "fn-syn-1",
+          "stem": "Returning to the original AML patient.",
+          "question": "What is the complete management approach for this patient?",
+          "options": [
+            { "id": "A", "text": "Immediate (within 1 hour): Blood cultures x2 sets (peripheral + port), start Cefepime 2g IV q8h (or pip-tazo/carbapenem); Add vancomycin given hypotension; Workup: CBC, CMP, lactate, UA, CXR; Supportive care: Fluids, vasopressors if needed; If persistent fever day 4-7: Add empiric antifungal; Continue until ANC ≥500 + afebrile 48h + stable", "correct": true },
+            { "id": "B", "text": "Observation without antibiotics", "correct": false },
+            { "id": "C", "text": "Oral antibiotics and discharge", "correct": false },
+            { "id": "D", "text": "Wait for culture results", "correct": false }
+          ],
+          "explanation": "Complete management for this HIGH-RISK patient: (1) IMMEDIATE (<1 hour): Draw blood cultures (peripheral + port), Start cefepime 2g IV q8h (avoid fluoroquinolone given prophylaxis), Add vancomycin given hypotension and mucositis, IV fluids for hypotension; (2) WORKUP: CBC, CMP, lactate, UA, CXR (all done); (3) MONITORING: ICU if hemodynamically unstable, daily assessment; (4) IF PERSISTENT FEVER day 4-7: Add antifungal (echinocandin preferred given fluconazole prophylaxis), Consider CT chest for pulmonary infiltrates; (5) DURATION: Continue antibiotics until ANC ≥500, afebrile 48h, clinically stable, or treat documented infection appropriately.",
+          "sources": ["IDSA Guidelines - https://academic.oup.com/cid/article/52/4/e56/382256"],
+          "sourceUrls": ["https://academic.oup.com/cid/article/52/4/e56/382256"]
+        }
+      ]
+    }
+  ]
+}

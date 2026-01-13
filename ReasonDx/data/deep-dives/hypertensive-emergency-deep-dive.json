@@ -1,0 +1,998 @@
+{
+  "id": "hypertensive-emergency-deep-dive",
+  "title": "Hypertensive Emergency",
+  "version": "1.0",
+  "totalQuestions": 24,
+  "estimatedTime": "40 minutes",
+  "difficulty": "Intermediate-Advanced",
+  "targetAudience": "Medical Students, Residents",
+  "objectives": [
+    "Differentiate hypertensive emergency from hypertensive urgency",
+    "Identify target organ damage patterns in hypertensive emergencies",
+    "Understand cerebral autoregulation and risks of rapid BP reduction",
+    "Select appropriate IV antihypertensive agents based on clinical scenario",
+    "Apply condition-specific BP targets (stroke, dissection, eclampsia)",
+    "Manage transition from IV to oral antihypertensive therapy"
+  ],
+  "guidelineReferences": [
+    {
+      "name": "StatPearls: Hypertensive Emergency",
+      "citation": "Alley WD, Schick MA. Hypertensive Emergency. StatPearls [Internet]. 2023 Jul 24",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK470371/",
+      "keyPoints": [
+        "Lower MAP by 20-25% in first 1-2 hours",
+        "Use IV titratable agents (nicardipine, labetalol, esmolol)",
+        "Oral medications have no role in immediate management",
+        "Target organ damage defines emergency vs urgency"
+      ]
+    },
+    {
+      "name": "AHA 2024 Scientific Statement",
+      "citation": "Bress AP, et al. Management of Elevated Blood Pressure in the Acute Care Setting. Hypertension. 2024;81:e94-e106",
+      "url": "https://www.ahajournals.org/doi/10.1161/HYP.0000000000000238"
+    },
+    {
+      "name": "EMCrit: Hypertensive Emergency",
+      "citation": "Farkas J. Hypertensive Emergency & Antihypertensive Medications. Internet Book of Critical Care. 2025",
+      "url": "https://emcrit.org/ibcc/htn/"
+    }
+  ],
+  "vignette": {
+    "text": "A 58-year-old man with a history of poorly controlled hypertension presents to the emergency department with severe headache, blurred vision, and confusion that developed over the past 6 hours. He ran out of his blood pressure medications 2 weeks ago and could not afford refills.\n\nPast Medical History: Hypertension (15 years, poorly controlled), Type 2 diabetes mellitus, Chronic kidney disease stage 3 (baseline Cr 1.8)\n\nMedications (not taking): Amlodipine 10mg daily, Lisinopril 40mg daily, Metformin 1000mg BID\n\nAllergies: None\n\nSocial History: Smokes 1 pack/day for 30 years, occasional alcohol use",
+    "physicalExam": {
+      "general": "Alert but confused, oriented to person only, appears uncomfortable",
+      "vitals": {
+        "BP": "228/134 mmHg (confirmed bilateral)",
+        "HR": "102 bpm",
+        "RR": "22/min",
+        "Temp": "98.8°F (37.1°C)",
+        "SpO2": "96% on room air"
+      },
+      "cardiovascular": "Tachycardic, regular rhythm, S4 gallop, no murmurs, JVP mildly elevated",
+      "pulmonary": "Bibasilar crackles",
+      "neurologic": "GCS 14 (E4V4M6), pupils equal and reactive, no focal motor deficits, reflexes symmetric",
+      "fundoscopic": "Bilateral papilledema, flame-shaped hemorrhages, cotton-wool spots, AV nicking"
+    },
+    "diagnostics": {
+      "labs": {
+        "Sodium": {
+          "value": "138 mEq/L",
+          "reference": "136-145",
+          "flag": "NORMAL"
+        },
+        "Potassium": {
+          "value": "5.4 mEq/L",
+          "reference": "3.5-5.0",
+          "flag": "HIGH"
+        },
+        "BUN": {
+          "value": "38 mg/dL",
+          "reference": "7-20",
+          "flag": "HIGH"
+        },
+        "Creatinine": {
+          "value": "2.9 mg/dL",
+          "reference": "0.7-1.3",
+          "flag": "HIGH"
+        },
+        "Glucose": {
+          "value": "186 mg/dL",
+          "reference": "70-100",
+          "flag": "HIGH"
+        },
+        "Troponin I": {
+          "value": "0.08 ng/mL",
+          "reference": "<0.04",
+          "flag": "HIGH"
+        },
+        "BNP": {
+          "value": "680 pg/mL",
+          "reference": "<100",
+          "flag": "HIGH"
+        },
+        "LDH": {
+          "value": "420 U/L",
+          "reference": "140-280",
+          "flag": "HIGH"
+        }
+      },
+      "urinalysis": {
+        "protein": "3+",
+        "blood": "1+",
+        "RBCCasts": "Present"
+      },
+      "ecg": "Sinus tachycardia, LVH with strain pattern (ST depression V5-V6)",
+      "imaging": {
+        "chestXray": "Cardiomegaly, pulmonary vascular congestion, small bilateral pleural effusions",
+        "headCT": "No acute hemorrhage or infarct, mild cerebral edema"
+      }
+    }
+  },
+  "layers": [
+    {
+      "id": "definitions",
+      "title": "Definitions & Classification",
+      "icon": "📋",
+      "color": "#ef4444",
+      "questions": [
+        {
+          "id": "htn-def-1",
+          "stem": "The patient has BP 228/134 mmHg with confusion, papilledema, acute kidney injury, and cardiac strain.",
+          "question": "What distinguishes a hypertensive EMERGENCY from hypertensive URGENCY?",
+          "hint": "Consider whether target organ damage is present.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Presence of acute target organ damage (neurologic, cardiac, renal, retinal)",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Blood pressure above 180/120 mmHg",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Symptoms such as headache or chest discomfort",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Duration of elevated blood pressure",
+              "correct": false
+            }
+          ],
+          "explanation": "Hypertensive emergency is defined by the presence of acute hypertension-mediated organ damage (HMOD), not by a specific BP threshold. Urgency = severely elevated BP WITHOUT acute organ damage. The distinction matters because emergencies require immediate IV therapy and ICU admission, while urgencies can be managed with oral agents over days.",
+          "whyChain": [
+            {
+              "why": "Why can some patients tolerate very high BP without organ damage?",
+              "answer": "Patients with chronic hypertension have rightward-shifted cerebral autoregulation curves and vascular remodeling. They can tolerate higher pressures that would cause organ damage in normotensive individuals. Conversely, previously normotensive patients (e.g., eclampsia) may develop emergencies at lower BP levels.",
+              "source": "StatPearls: Hypertensive Emergency"
+            },
+            {
+              "why": "What are the types of target organ damage?",
+              "answer": "Neurologic: hypertensive encephalopathy, stroke (ischemic/hemorrhagic), PRES. Cardiac: acute coronary syndrome, acute heart failure/pulmonary edema, aortic dissection. Renal: acute kidney injury. Ophthalmologic: papilledema, hemorrhages, exudates. Other: eclampsia, microangiopathic hemolytic anemia.",
+              "source": "AHA 2024 Scientific Statement"
+            }
+          ],
+          "sources": [
+            "StatPearls: Hypertensive Emergency - https://www.ncbi.nlm.nih.gov/books/NBK470371/",
+            "AHA 2024 Scientific Statement - https://www.ahajournals.org/doi/10.1161/HYP.0000000000000238"
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK470371/",
+            "https://www.ahajournals.org/doi/10.1161/HYP.0000000000000238"
+          ],
+          "remediation": {
+            "link": "/mechanism/htn-definitions.html",
+            "title": "Hypertensive Crisis Definitions"
+          }
+        },
+        {
+          "id": "htn-def-2",
+          "stem": "The patient has papilledema, flame hemorrhages, cotton-wool spots, and confusion with cerebral edema on CT.",
+          "question": "What syndrome does this patient's presentation represent?",
+          "hint": "Consider the classic presentation of severe hypertension with neurologic and retinal findings.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Hypertensive encephalopathy / Malignant hypertension",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Acute ischemic stroke",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Hypertensive urgency",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Chronic hypertensive retinopathy",
+              "correct": false
+            }
+          ],
+          "explanation": "This presentation is classic for hypertensive encephalopathy/malignant hypertension: severely elevated BP, encephalopathy (confusion), papilledema, retinal hemorrhages and exudates, and acute kidney injury with proteinuria. The cerebral edema on CT reflects breakdown of the blood-brain barrier. This requires urgent BP reduction.",
+          "whyChain": [
+            {
+              "why": "What is the pathophysiology of hypertensive encephalopathy?",
+              "answer": "When BP exceeds the upper limit of cerebral autoregulation, forced vasodilation causes hyperperfusion, increased cerebral blood flow, and breakdown of the blood-brain barrier. This leads to cerebral edema, particularly in posterior regions (posterior reversible encephalopathy syndrome - PRES).",
+              "source": "PMC: Management of Hypertensive Emergencies"
+            },
+            {
+              "why": "Why are posterior brain regions preferentially affected?",
+              "answer": "The posterior circulation has less sympathetic innervation than the anterior circulation, making it less able to autoregulate during acute hypertensive surges. This explains the predilection for occipital/parietal involvement in PRES.",
+              "source": "PMC: Management of Hypertensive Emergencies"
+            }
+          ],
+          "sources": [
+            "StatPearls: Hypertensive Emergency - https://www.ncbi.nlm.nih.gov/books/NBK470371/",
+            "PMC: Management of Hypertensive Emergencies - https://pmc.ncbi.nlm.nih.gov/articles/PMC9181665/"
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK470371/",
+            "https://pmc.ncbi.nlm.nih.gov/articles/PMC9181665/"
+          ],
+          "remediation": {
+            "link": "/mechanism/htn-encephalopathy.html",
+            "title": "Hypertensive Encephalopathy"
+          }
+        }
+      ]
+    },
+    {
+      "id": "pathophysiology",
+      "title": "Pathophysiology",
+      "icon": "🔬",
+      "color": "#f97316",
+      "questions": [
+        {
+          "id": "htn-path-1",
+          "stem": "The patient has chronic hypertension but developed acute symptoms after stopping medications for 2 weeks.",
+          "question": "What is the mechanism by which abrupt cessation of antihypertensives precipitates hypertensive crisis?",
+          "hint": "Consider rebound phenomena and loss of vascular adaptation.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Loss of pharmacologic vasodilation causes rebound vasoconstriction, rapidly exceeding autoregulatory capacity",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Immediate return to pre-treatment blood pressure levels",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Development of new atherosclerotic lesions",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Sudden increase in blood volume",
+              "correct": false
+            }
+          ],
+          "explanation": "Abrupt discontinuation of antihypertensives, especially beta-blockers and centrally-acting agents (clonidine), causes rebound sympathetic activation and vasoconstriction. The rapid BP rise exceeds the adapted autoregulatory range, causing end-organ hyperperfusion injury. This is one of the most common precipitants of hypertensive emergency.",
+          "whyChain": [
+            {
+              "why": "Why is clonidine withdrawal particularly dangerous?",
+              "answer": "Clonidine suppresses central sympathetic outflow. Abrupt withdrawal causes dramatic rebound sympathetic activation with catecholamine surge, potentially causing BP overshoot well above baseline. This can occur within 18-24 hours of the last dose.",
+              "source": "EMCrit: Hypertensive Emergency"
+            },
+            {
+              "why": "What other factors precipitate hypertensive emergencies?",
+              "answer": "Other causes include: sympathomimetic drugs (cocaine, amphetamines), renovascular disease, pheochromocytoma, eclampsia/preeclampsia, autonomic dysfunction (Guillain-Barré, spinal cord injury), drug interactions (MAOIs + tyramine), and acute glomerulonephritis.",
+              "source": "StatPearls: Hypertensive Emergency"
+            }
+          ],
+          "sources": [
+            "StatPearls: Hypertensive Emergency - https://www.ncbi.nlm.nih.gov/books/NBK470371/",
+            "EMCrit: Hypertensive Emergency - https://emcrit.org/ibcc/htn/"
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK470371/",
+            "https://emcrit.org/ibcc/htn/"
+          ],
+          "remediation": {
+            "link": "/mechanism/htn-precipitants.html",
+            "title": "Precipitants of Hypertensive Crisis"
+          }
+        },
+        {
+          "id": "htn-path-2",
+          "stem": "The patient has acute kidney injury with creatinine 2.9 (baseline 1.8), proteinuria, and RBC casts.",
+          "question": "What is the renal pathology underlying acute kidney injury in malignant hypertension?",
+          "hint": "Consider the vascular lesion caused by severe hypertension.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Fibrinoid necrosis of arterioles causing ischemic injury and microangiopathic changes",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Acute tubular necrosis from hypotension",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Immune complex deposition in glomeruli",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Obstructive uropathy",
+              "correct": false
+            }
+          ],
+          "explanation": "Malignant hypertension causes fibrinoid necrosis of renal arterioles - deposition of fibrin and necrotic debris in vessel walls. This leads to ischemic glomerular injury, proteinuria, and microangiopathic hemolytic anemia (schistocytes). The classic 'onion-skin' appearance of concentric intimal hyperplasia may also be seen.",
+          "whyChain": [
+            {
+              "why": "Why does this patient have elevated LDH?",
+              "answer": "LDH elevation, along with schistocytes on peripheral smear, indicates microangiopathic hemolytic anemia (MAHA). Red blood cells are sheared as they pass through damaged, fibrin-laden arterioles. This is a hallmark of malignant hypertension and thrombotic microangiopathy.",
+              "source": "StatPearls: Hypertensive Emergency"
+            },
+            {
+              "why": "Is the kidney injury reversible?",
+              "answer": "With prompt BP control, much of the acute injury is reversible. However, delay in treatment leads to irreversible nephron loss. Patients with malignant hypertension have high rates of progression to ESRD if undertreated.",
+              "source": "StatPearls: Hypertensive Emergency"
+            }
+          ],
+          "sources": [
+            "StatPearls: Hypertensive Emergency - https://www.ncbi.nlm.nih.gov/books/NBK470371/"
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK470371/"
+          ],
+          "remediation": {
+            "link": "/mechanism/htn-renal-injury.html",
+            "title": "Renal Injury in Malignant Hypertension"
+          }
+        },
+        {
+          "id": "htn-path-3",
+          "stem": "You are concerned about lowering blood pressure too quickly.",
+          "question": "What is the risk of rapid blood pressure reduction in hypertensive emergency?",
+          "hint": "Consider the shifted autoregulation curve in chronic hypertension.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Cerebral, coronary, and renal hypoperfusion due to rightward-shifted autoregulation",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Rebound hypertension",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Drug toxicity from antihypertensive overdose",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Electrolyte disturbances",
+              "correct": false
+            }
+          ],
+          "explanation": "In chronic hypertension, cerebral autoregulation curves shift rightward - the brain requires higher perfusion pressure to maintain adequate blood flow. Rapid BP reduction below the new autoregulatory range causes cerebral hypoperfusion, potentially causing watershed strokes. Similar concerns apply to coronary and renal circulation.",
+          "whyChain": [
+            {
+              "why": "How does this affect BP targets?",
+              "answer": "General guideline: reduce MAP by no more than 20-25% in the first hour, then to ~160/100-110 mmHg over 2-6 hours, then gradually normalize over 24-48 hours. This allows autoregulation to readjust. Exceptions exist (e.g., aortic dissection requires more rapid reduction).",
+              "source": "AHA 2024 Scientific Statement"
+            },
+            {
+              "why": "Can autoregulation reset with treatment?",
+              "answer": "Yes. With sustained BP control over weeks to months, autoregulation curves gradually shift back toward normal. This is why gradual titration of oral medications after the acute phase is important.",
+              "source": "Merck Manual: Hypertensive Emergencies"
+            }
+          ],
+          "sources": [
+            "AHA 2024 Scientific Statement - https://www.ahajournals.org/doi/10.1161/HYP.0000000000000238",
+            "Merck Manual: Hypertensive Emergencies - https://www.merckmanuals.com/professional/cardiovascular-disorders/hypertension/hypertensive-emergencies"
+          ],
+          "sourceUrls": [
+            "https://www.ahajournals.org/doi/10.1161/HYP.0000000000000238",
+            "https://www.merckmanuals.com/professional/cardiovascular-disorders/hypertension/hypertensive-emergencies"
+          ],
+          "remediation": {
+            "link": "/mechanism/cerebral-autoregulation.html",
+            "title": "Cerebral Autoregulation in Hypertension"
+          }
+        }
+      ]
+    },
+    {
+      "id": "clinical-presentation",
+      "title": "Clinical Presentation",
+      "icon": "🩺",
+      "color": "#eab308",
+      "questions": [
+        {
+          "id": "htn-clin-1",
+          "stem": "The patient has papilledema, flame hemorrhages, and cotton-wool spots on fundoscopy.",
+          "question": "What do these fundoscopic findings indicate?",
+          "hint": "Consider what these findings represent histopathologically.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Grade III-IV hypertensive retinopathy indicating malignant hypertension",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Diabetic retinopathy",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Central retinal vein occlusion",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Age-related macular degeneration",
+              "correct": false
+            }
+          ],
+          "explanation": "Keith-Wagener-Barker classification: Grade I = arteriolar narrowing, Grade II = AV nicking, Grade III = hemorrhages and exudates (cotton-wool spots = retinal nerve fiber layer infarcts), Grade IV = papilledema. Grades III-IV indicate malignant/accelerated hypertension with acute end-organ damage requiring emergent treatment.",
+          "whyChain": [
+            {
+              "why": "What causes cotton-wool spots?",
+              "answer": "Cotton-wool spots are superficial retinal infarcts caused by occlusion of precapillary arterioles. They appear as fluffy white lesions representing accumulation of axoplasmic debris in the nerve fiber layer due to ischemia.",
+              "source": "StatPearls: Hypertensive Emergency"
+            },
+            {
+              "why": "Why is fundoscopy important in hypertensive emergency?",
+              "answer": "The retina provides a direct, non-invasive view of end-organ vascular damage. Acute retinal findings (hemorrhages, exudates, papilledema) help distinguish emergency from urgency and correlate with severity of other organ involvement.",
+              "source": "Medscape: Hypertensive Emergencies"
+            }
+          ],
+          "sources": [
+            "StatPearls: Hypertensive Emergency - https://www.ncbi.nlm.nih.gov/books/NBK470371/",
+            "Medscape: Hypertensive Emergencies - https://emedicine.medscape.com/article/1952052-overview"
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK470371/",
+            "https://emedicine.medscape.com/article/1952052-overview"
+          ],
+          "remediation": {
+            "link": "/mechanism/htn-retinopathy.html",
+            "title": "Hypertensive Retinopathy"
+          }
+        },
+        {
+          "id": "htn-clin-2",
+          "stem": "The ECG shows LVH with strain pattern and troponin is mildly elevated.",
+          "question": "What do these cardiac findings indicate in the context of hypertensive emergency?",
+          "hint": "Consider both chronic and acute cardiac effects of hypertension.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Chronic LVH from longstanding hypertension with acute demand ischemia from hypertensive crisis",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Acute ST-elevation myocardial infarction requiring emergent catheterization",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Hypertrophic cardiomyopathy",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Pericarditis",
+              "correct": false
+            }
+          ],
+          "explanation": "LVH is a chronic consequence of longstanding hypertension. The 'strain pattern' (ST depression, T-wave inversion in lateral leads) indicates subendocardial ischemia. Mild troponin elevation in hypertensive crisis often reflects demand ischemia (Type 2 MI) from increased afterload and myocardial oxygen demand, not necessarily acute coronary occlusion.",
+          "whyChain": [
+            {
+              "why": "How should elevated troponin be managed in this context?",
+              "answer": "Priority is BP reduction, which decreases afterload and myocardial oxygen demand. Serial troponins and ECGs should be monitored. If troponin continues to rise or ECG changes worsen despite BP control, ACS should be considered and cardiology consulted.",
+              "source": "StatPearls: Hypertensive Emergency"
+            },
+            {
+              "why": "What about the elevated BNP?",
+              "answer": "BNP elevation reflects ventricular wall stress from pressure overload. Combined with bibasilar crackles and cardiomegaly on CXR, this suggests acute decompensated heart failure (hypertensive heart failure). Treatment includes BP reduction, which will improve cardiac output and reduce pulmonary congestion.",
+              "source": "EMCrit: Hypertensive Emergency"
+            }
+          ],
+          "sources": [
+            "StatPearls: Hypertensive Emergency - https://www.ncbi.nlm.nih.gov/books/NBK470371/",
+            "EMCrit: Hypertensive Emergency - https://emcrit.org/ibcc/htn/"
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK470371/",
+            "https://emcrit.org/ibcc/htn/"
+          ],
+          "remediation": {
+            "link": "/mechanism/htn-cardiac.html",
+            "title": "Cardiac Manifestations of Hypertensive Emergency"
+          }
+        }
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "icon": "💊",
+      "color": "#3b82f6",
+      "questions": [
+        {
+          "id": "htn-tx-1",
+          "stem": "You need to initiate treatment for this patient's hypertensive emergency.",
+          "question": "What is the general BP reduction goal for hypertensive emergency WITHOUT a compelling indication for more rapid reduction?",
+          "hint": "Consider the need to balance organ protection with hypoperfusion risk.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Reduce MAP by 20-25% in the first hour, then to 160/100-110 mmHg over 2-6 hours",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Reduce BP to 120/80 mmHg within the first hour",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Reduce BP by 50% in the first 30 minutes",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "No reduction needed if patient is asymptomatic",
+              "correct": false
+            }
+          ],
+          "explanation": "Per AHA 2024 guidelines: reduce MAP by 20-25% (or SBP by ~25%) in the first hour. Then reduce to 160/100-110 mmHg over the next 2-6 hours. Further gradual reduction to normal over 24-48 hours. This prevents hypoperfusion while stopping ongoing organ damage. Exceptions include aortic dissection and eclampsia.",
+          "whyChain": [
+            {
+              "why": "Why not reduce BP faster?",
+              "answer": "Rapid reduction below the shifted autoregulatory range causes hypoperfusion injury - watershed strokes, myocardial ischemia, acute kidney injury. The brain is particularly vulnerable. 'Slow and steady' is safer than aggressive normalization.",
+              "source": "AHA 2024 Scientific Statement"
+            },
+            {
+              "why": "What conditions require more rapid BP reduction?",
+              "answer": "Aortic dissection (SBP <120 mmHg in first hour), eclampsia/severe preeclampsia (rapid control to prevent seizures/stroke), pheochromocytoma crisis. These have specific pathophysiology requiring faster control despite hypoperfusion risks.",
+              "source": "StatPearls: Hypertensive Crisis"
+            }
+          ],
+          "sources": [
+            "AHA 2024 Scientific Statement - https://www.ahajournals.org/doi/10.1161/HYP.0000000000000238",
+            "StatPearls: Hypertensive Crisis - https://www.ncbi.nlm.nih.gov/books/NBK507701/"
+          ],
+          "sourceUrls": [
+            "https://www.ahajournals.org/doi/10.1161/HYP.0000000000000238",
+            "https://www.ncbi.nlm.nih.gov/books/NBK507701/"
+          ],
+          "remediation": {
+            "link": "/mechanism/htn-bp-targets.html",
+            "title": "BP Targets in Hypertensive Emergency"
+          }
+        },
+        {
+          "id": "htn-tx-2",
+          "stem": "You are selecting an IV antihypertensive for this patient.",
+          "question": "Which IV agent is considered first-line for most hypertensive emergencies?",
+          "hint": "Consider agents that address vasoconstriction (the primary problem) and are easily titratable.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Nicardipine or clevidipine (IV calcium channel blockers)",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Oral clonidine",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Sublingual nifedipine",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "IM hydralazine",
+              "correct": false
+            }
+          ],
+          "explanation": "IV dihydropyridine calcium channel blockers (nicardipine, clevidipine) are preferred first-line agents. They directly address the primary problem (excessive vasoconstriction), have rapid onset, are easily titratable, and have predictable dose-response. Oral/sublingual medications and non-titratable agents have no role in acute management.",
+          "whyChain": [
+            {
+              "why": "What are the dosing parameters for nicardipine?",
+              "answer": "Nicardipine: start at 5 mg/hour, increase by 2.5 mg/hour every 5-15 minutes, maximum 15 mg/hour. Onset 5-15 minutes, duration 40-60 minutes after stopping. Achieves target BP in 90%+ of patients.",
+              "source": "PMC: Treatment of Hypertensive Emergencies"
+            },
+            {
+              "why": "Why not use labetalol as first-line?",
+              "answer": "Labetalol is reasonable but has limitations: it's predominantly a beta-blocker (1:7 alpha:beta ratio IV), so it doesn't directly address vasoconstriction. It can reduce cardiac output in patients with already-elevated afterload. Better reserved for moderate BP elevation or when beta-blockade is specifically indicated.",
+              "source": "EMCrit: Hypertensive Emergency"
+            }
+          ],
+          "sources": [
+            "PMC: Treatment of Hypertensive Emergencies - https://pmc.ncbi.nlm.nih.gov/articles/PMC5440310/",
+            "EMCrit: Hypertensive Emergency - https://emcrit.org/ibcc/htn/"
+          ],
+          "sourceUrls": [
+            "https://pmc.ncbi.nlm.nih.gov/articles/PMC5440310/",
+            "https://emcrit.org/ibcc/htn/"
+          ],
+          "remediation": {
+            "link": "/mechanism/iv-antihypertensives.html",
+            "title": "IV Antihypertensive Selection"
+          }
+        },
+        {
+          "id": "htn-tx-3",
+          "stem": "The patient's BP has stabilized on nicardipine infusion.",
+          "question": "Which IV agent should be avoided or used with caution in patients with renal dysfunction?",
+          "hint": "Consider agents with active metabolites or renal clearance.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Sodium nitroprusside (risk of cyanide/thiocyanate toxicity)",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Nicardipine",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Labetalol",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Esmolol",
+              "correct": false
+            }
+          ],
+          "explanation": "Nitroprusside is metabolized to cyanide, which is converted to thiocyanate and renally excreted. In renal dysfunction, thiocyanate accumulates, causing toxicity (confusion, seizures, metabolic acidosis). Prolonged use (>24-48 hours) increases risk. Nitroprusside should be avoided in renal failure; if used, duration should be limited and thiocyanate levels monitored.",
+          "whyChain": [
+            {
+              "why": "What are signs of cyanide/thiocyanate toxicity?",
+              "answer": "Early: altered mental status, nausea, muscle twitching. Late: seizures, lactic acidosis, cardiovascular collapse. Thiocyanate levels >10 mg/dL are toxic. Treatment includes stopping the infusion and administering hydroxocobalamin (for cyanide) or hemodialysis (for thiocyanate).",
+              "source": "StatPearls: Hypertensive Emergency"
+            },
+            {
+              "why": "What agent is preferred in renal dysfunction?",
+              "answer": "Fenoldopam (dopamine-1 agonist) causes renal vasodilation, increases renal blood flow, and promotes natriuresis. It may be renoprotective and is a good choice in hypertensive emergency with AKI. Nicardipine and clevidipine are also safe options.",
+              "source": "PMC: Treatment of Hypertensive Emergencies"
+            }
+          ],
+          "sources": [
+            "StatPearls: Hypertensive Emergency - https://www.ncbi.nlm.nih.gov/books/NBK470371/",
+            "PMC: Treatment of Hypertensive Emergencies - https://pmc.ncbi.nlm.nih.gov/articles/PMC5440310/"
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK470371/",
+            "https://pmc.ncbi.nlm.nih.gov/articles/PMC5440310/"
+          ],
+          "remediation": {
+            "link": "/mechanism/nitroprusside-toxicity.html",
+            "title": "Nitroprusside Toxicity"
+          }
+        },
+        {
+          "id": "htn-tx-4",
+          "stem": "After 24 hours, the patient's BP is controlled on IV nicardipine at 8 mg/hour. You are planning transition to oral therapy.",
+          "question": "What is the recommended approach to transitioning from IV to oral antihypertensives?",
+          "hint": "Consider overlap and the patient's prior medication history.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Start oral agents with overlap while weaning IV infusion; consider patient's prior regimen and response to IV therapy",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Abruptly stop IV and start oral medications simultaneously",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Continue IV therapy indefinitely until BP normalizes",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Discharge on same medications patient was taking before",
+              "correct": false
+            }
+          ],
+          "explanation": "Transition requires overlap: start oral agents while IV infusion continues, then wean IV over hours as oral agents take effect. Choice should consider: response to IV therapy (if nicardipine worked, oral CCB may work), prior regimen (resume if tolerated), and comorbidities (ACEi for CKD/DM, beta-blocker for CAD). Patient was non-adherent - addressing barriers is crucial.",
+          "whyChain": [
+            {
+              "why": "How long should overlap last?",
+              "answer": "Typically 2-4 hours after starting oral agents, depending on the oral drug's onset of action. Monitor BP closely during transition. If BP rises as IV is weaned, slow the wean and increase oral doses.",
+              "source": "EMCrit: Hypertensive Emergency"
+            },
+            {
+              "why": "Should this patient restart his prior medications?",
+              "answer": "Consider whether the prior regimen was adequate and why non-adherence occurred. If cost was the issue (as stated), social work and pharmacy assistance programs should be involved. Generic alternatives and simplified regimens improve adherence.",
+              "source": "StatPearls: Hypertensive Emergency"
+            }
+          ],
+          "sources": [
+            "EMCrit: Hypertensive Emergency - https://emcrit.org/ibcc/htn/",
+            "StatPearls: Hypertensive Emergency - https://www.ncbi.nlm.nih.gov/books/NBK470371/"
+          ],
+          "sourceUrls": [
+            "https://emcrit.org/ibcc/htn/",
+            "https://www.ncbi.nlm.nih.gov/books/NBK470371/"
+          ],
+          "remediation": {
+            "link": "/mechanism/iv-to-oral-transition.html",
+            "title": "IV to Oral Antihypertensive Transition"
+          }
+        }
+      ]
+    },
+    {
+      "id": "special-situations",
+      "title": "Special Situations",
+      "icon": "⚠️",
+      "color": "#a855f7",
+      "questions": [
+        {
+          "id": "htn-spec-1",
+          "stem": "A 72-year-old man presents with acute onset right-sided weakness and BP 210/118 mmHg. CT head shows no hemorrhage. He is within the thrombolytic window.",
+          "question": "What are the BP goals for this patient with acute ischemic stroke who is eligible for thrombolysis?",
+          "hint": "Consider pre-treatment and post-treatment targets.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Lower to <185/110 mmHg before tPA; maintain <180/105 mmHg for 24 hours after",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Lower to <140/90 mmHg immediately",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Do not treat unless BP >220/120 mmHg",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Reduce MAP by 25% in first hour",
+              "correct": false
+            }
+          ],
+          "explanation": "Per AHA/ASA guidelines for tPA-eligible stroke: lower BP to <185/110 mmHg before initiating thrombolysis, then maintain <180/105 mmHg for 24 hours after. Nicardipine and labetalol are preferred. For non-tPA patients, only treat if BP >220/120 mmHg, as hypertension may be protective by maintaining perfusion to ischemic penumbra.",
+          "whyChain": [
+            {
+              "why": "Why is permissive hypertension allowed in non-tPA stroke?",
+              "answer": "Elevated BP in acute stroke may be a compensatory response to maintain perfusion to the ischemic penumbra. Aggressive lowering could extend infarct size. BP often decreases spontaneously as the acute phase resolves.",
+              "source": "StatPearls: Hypertensive Emergency"
+            },
+            {
+              "why": "What about hemorrhagic stroke?",
+              "answer": "In acute intracerebral hemorrhage, more aggressive BP reduction (SBP <140 mmHg) may improve functional outcomes by reducing hematoma expansion. The INTERACT2 and ATACH-2 trials inform this approach. Nicardipine is preferred; nitroprusside is avoided.",
+              "source": "StatPearls: Hypertensive Emergency"
+            }
+          ],
+          "sources": [
+            "StatPearls: Hypertensive Emergency - https://www.ncbi.nlm.nih.gov/books/NBK470371/"
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK470371/"
+          ],
+          "remediation": {
+            "link": "/mechanism/stroke-bp-management.html",
+            "title": "BP Management in Stroke"
+          }
+        },
+        {
+          "id": "htn-spec-2",
+          "stem": "A 32-year-old pregnant woman at 34 weeks gestation presents with BP 178/112 mmHg, headache, and proteinuria.",
+          "question": "Which antihypertensive is CONTRAINDICATED in this patient with severe preeclampsia?",
+          "hint": "Consider teratogenicity and fetal effects.",
+          "options": [
+            {
+              "id": "A",
+              "text": "ACE inhibitors (e.g., enalaprilat)",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Hydralazine",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Labetalol",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Nicardipine",
+              "correct": false
+            }
+          ],
+          "explanation": "ACE inhibitors, ARBs, and direct renin inhibitors are absolutely contraindicated in pregnancy - they cause fetal renal dysgenesis, oligohydramnios, and fetal death. Sodium nitroprusside carries risk of fetal cyanide toxicity. First-line agents for severe preeclampsia are IV labetalol, IV hydralazine, and nicardipine. Magnesium sulfate is given for seizure prophylaxis.",
+          "whyChain": [
+            {
+              "why": "What is the BP goal in severe preeclampsia?",
+              "answer": "Treat SBP ≥160 mmHg or DBP ≥110 mmHg to prevent maternal stroke and placental abruption. Target: SBP 140-150 mmHg, DBP 90-100 mmHg. Avoid excessive reduction which compromises uteroplacental perfusion.",
+              "source": "Medscape: Hypertensive Emergencies"
+            },
+            {
+              "why": "When is delivery indicated?",
+              "answer": "Delivery is the definitive treatment for preeclampsia. Timing depends on gestational age and severity. Severe features (including hypertensive emergency) typically warrant delivery after maternal stabilization, regardless of gestational age, especially after 34 weeks.",
+              "source": "StatPearls: Hypertensive Crisis"
+            }
+          ],
+          "sources": [
+            "Medscape: Hypertensive Emergencies - https://emedicine.medscape.com/article/1952052-overview",
+            "StatPearls: Hypertensive Crisis - https://www.ncbi.nlm.nih.gov/books/NBK507701/"
+          ],
+          "sourceUrls": [
+            "https://emedicine.medscape.com/article/1952052-overview",
+            "https://www.ncbi.nlm.nih.gov/books/NBK507701/"
+          ],
+          "remediation": {
+            "link": "/mechanism/preeclampsia-management.html",
+            "title": "Hypertension in Preeclampsia"
+          }
+        },
+        {
+          "id": "htn-spec-3",
+          "stem": "A 45-year-old man presents with severe tearing chest pain radiating to his back and BP 212/124 mmHg.",
+          "question": "What is the BP target and first-line agent for suspected aortic dissection?",
+          "hint": "This is an exception requiring more rapid and aggressive BP control.",
+          "options": [
+            {
+              "id": "A",
+              "text": "SBP <120 mmHg and HR 60-80 bpm within 20 minutes; first-line is IV esmolol or labetalol",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Reduce MAP by 25% in first hour; first-line is nicardipine alone",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "SBP <140 mmHg within 1 hour; first-line is hydralazine",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "No BP treatment until CT confirms dissection",
+              "correct": false
+            }
+          ],
+          "explanation": "Aortic dissection requires aggressive BP AND heart rate control to reduce aortic wall stress (dP/dt). Target SBP <120 mmHg and HR 60-80 bpm within 20 minutes. Beta-blockers (esmolol, labetalol) are first-line to reduce HR and dP/dt. Vasodilators (nicardipine) are added AFTER beta-blockade to avoid reflex tachycardia.",
+          "whyChain": [
+            {
+              "why": "Why must beta-blockers precede vasodilators?",
+              "answer": "Pure vasodilators cause reflex tachycardia, which increases dP/dt (rate of pressure rise) and shear stress on the aortic wall, potentially worsening dissection propagation. Beta-blockade first blunts this reflex.",
+              "source": "Medscape: Hypertensive Emergencies"
+            },
+            {
+              "why": "What if the patient is hypotensive?",
+              "answer": "Hypotension in dissection suggests complications: tamponade, aortic rupture, severe aortic regurgitation, or malperfusion syndrome. This is a surgical emergency. Cautious fluid resuscitation while preparing for emergent surgery; avoid vasopressors if possible as they increase wall stress.",
+              "source": "StatPearls: Hypertensive Emergency"
+            }
+          ],
+          "sources": [
+            "Medscape: Hypertensive Emergencies - https://emedicine.medscape.com/article/1952052-overview",
+            "StatPearls: Hypertensive Emergency - https://www.ncbi.nlm.nih.gov/books/NBK470371/"
+          ],
+          "sourceUrls": [
+            "https://emedicine.medscape.com/article/1952052-overview",
+            "https://www.ncbi.nlm.nih.gov/books/NBK470371/"
+          ],
+          "remediation": {
+            "link": "/mechanism/dissection-bp-management.html",
+            "title": "BP Management in Aortic Dissection"
+          }
+        }
+      ]
+    },
+    {
+      "id": "synthesis",
+      "title": "Synthesis",
+      "icon": "🔗",
+      "color": "#6366f1",
+      "questions": [
+        {
+          "id": "htn-syn-1",
+          "stem": "Integrating all the clinical information in this case.",
+          "question": "Which statement BEST synthesizes this patient's presentation and management?",
+          "hint": "Connect the precipitant to the manifestations to the treatment approach.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Medication non-adherence precipitated malignant hypertension with multi-organ damage (encephalopathy, retinopathy, AKI, cardiac strain), requiring ICU admission, IV nicardipine with gradual BP reduction, and eventual oral therapy with adherence support",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Hypertensive urgency requiring oral medication titration over days",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Primary neurologic event with secondary hypertension",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Acute coronary syndrome with elevated BP requiring emergent catheterization",
+              "correct": false
+            }
+          ],
+          "explanation": "This synthesis captures: (1) Precipitant: medication non-adherence due to cost; (2) Diagnosis: malignant hypertension/hypertensive emergency; (3) Multi-organ damage: neurologic (encephalopathy), ophthalmologic (papilledema, Grade IV retinopathy), renal (AKI with proteinuria), cardiac (LVH strain, troponin elevation, heart failure); (4) Treatment: IV titratable agent, gradual reduction, ICU monitoring; (5) Transition: oral therapy with adherence intervention.",
+          "whyChain": [
+            {
+              "why": "What is the prognosis for this patient?",
+              "answer": "With appropriate treatment, acute organ dysfunction can improve. Encephalopathy typically resolves within 24-48 hours of BP control. Renal function may recover partially or completely. However, patients with hypertensive emergencies have increased risk of cardiovascular events and mortality over the following year.",
+              "source": "StatPearls: Hypertensive Emergency"
+            }
+          ],
+          "sources": [
+            "StatPearls: Hypertensive Emergency - https://www.ncbi.nlm.nih.gov/books/NBK470371/"
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK470371/"
+          ],
+          "remediation": {
+            "link": "/mechanism/htn-synthesis.html",
+            "title": "Hypertensive Emergency Summary"
+          }
+        },
+        {
+          "id": "htn-syn-2",
+          "stem": "The patient is improving after 48 hours of treatment. You are planning discharge.",
+          "question": "What is the MOST important intervention to prevent recurrence?",
+          "hint": "Address the root cause of this admission.",
+          "options": [
+            {
+              "id": "A",
+              "text": "Address barriers to medication adherence (cost, complexity) with social work, pharmacy assistance, and simplified regimen",
+              "correct": true
+            },
+            {
+              "id": "B",
+              "text": "Prescribe more potent antihypertensives",
+              "correct": false
+            },
+            {
+              "id": "C",
+              "text": "Schedule frequent emergency department follow-up",
+              "correct": false
+            },
+            {
+              "id": "D",
+              "text": "Prescribe home IV antihypertensives",
+              "correct": false
+            }
+          ],
+          "explanation": "This patient's hypertensive emergency was caused by medication non-adherence due to cost. The most important intervention is addressing the root cause: involve social work for financial assistance programs, pharmacy for generic alternatives and discount cards, simplify the regimen (once-daily dosing, fixed-dose combinations), and ensure close outpatient follow-up with BP monitoring.",
+          "whyChain": [
+            {
+              "why": "What is the recurrence rate without intervention?",
+              "answer": "Without addressing adherence, recurrence rates are high. Studies show 50%+ of hypertensive emergencies occur in patients with known hypertension who are non-adherent. Addressing barriers is more effective than adding medications.",
+              "source": "StatPearls: Hypertensive Emergency"
+            },
+            {
+              "why": "What lifestyle modifications should be reinforced?",
+              "answer": "DASH diet (low sodium, high potassium), weight loss if overweight, regular aerobic exercise, smoking cessation (this patient smokes 1 ppd), limiting alcohol, and stress management. Each can reduce BP by 5-10 mmHg.",
+              "source": "AHA 2024 Scientific Statement"
+            }
+          ],
+          "sources": [
+            "StatPearls: Hypertensive Emergency - https://www.ncbi.nlm.nih.gov/books/NBK470371/",
+            "AHA 2024 Scientific Statement - https://www.ahajournals.org/doi/10.1161/HYP.0000000000000238"
+          ],
+          "sourceUrls": [
+            "https://www.ncbi.nlm.nih.gov/books/NBK470371/",
+            "https://www.ahajournals.org/doi/10.1161/HYP.0000000000000238"
+          ],
+          "remediation": {
+            "link": "/mechanism/htn-prevention.html",
+            "title": "Preventing Hypertensive Emergency Recurrence"
+          }
+        }
+      ]
+    }
+  ]
+}

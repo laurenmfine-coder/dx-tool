@@ -1,0 +1,250 @@
+{
+  "id": "metabolic-acidosis-deep-dive",
+  "title": "Metabolic Acidosis",
+  "version": "1.0",
+  "totalQuestions": 18,
+  "estimatedTime": "35 minutes",
+  "difficulty": "Advanced",
+  "targetAudience": "Medical Students, Residents, Critical Care, Nephrology, Emergency Medicine, Toxicology",
+  "objectives": [
+    "Calculate and interpret the anion gap",
+    "Apply GOLDMARK mnemonic for anion gap metabolic acidosis",
+    "Identify causes of non-anion gap (hyperchloremic) metabolic acidosis",
+    "Calculate the delta-delta ratio to identify mixed disorders",
+    "Utilize osmolar gap in toxic alcohol ingestion",
+    "Initiate appropriate treatment based on underlying cause"
+  ],
+  "guidelineReferences": [
+    {
+      "name": "StatPearls: Anion Gap and Non-Anion Gap Metabolic Acidosis",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK448090/"
+    },
+    {
+      "name": "GOLDMARK Mnemonic",
+      "citation": "Mehta AN, et al. GOLD MARK: an anion gap mnemonic for the 21st century. Lancet. 2008;372:892",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/18790311/"
+    },
+    {
+      "name": "CJASN: Acid-Base Disorders in the Critically Ill",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/35998977/"
+    }
+  ],
+  "vignette": {
+    "text": "A 52-year-old man is brought to the ED by EMS after being found confused in his garage. Empty bottles of antifreeze are noted nearby. He appears intoxicated and is becoming increasingly drowsy.\n\nPast Medical History: Alcohol use disorder, Depression\n\nMedications: None\n\nAllergies: NKDA",
+    "physicalExam": {
+      "general": "Lethargic, responds to voice, slurred speech",
+      "vitals": { "BP": "128/78 mmHg", "HR": "102 bpm", "RR": "28/min (deep, rapid)", "SpO2": "98% RA", "Temp": "98.0°F" },
+      "HEENT": "Pupils 4mm bilaterally, sluggishly reactive",
+      "cardiovascular": "Tachycardic, regular",
+      "pulmonary": "Deep, rapid respirations (Kussmaul breathing)",
+      "abdomen": "Soft, mild tenderness",
+      "neuro": "GCS 12 (E3V4M5), no focal deficits"
+    },
+    "diagnostics": {
+      "labs": {
+        "pH": { "value": "7.18", "reference": "7.35-7.45", "flag": "ACIDEMIC" },
+        "pCO2": { "value": "18 mmHg", "reference": "35-45", "flag": "LOW (respiratory compensation)" },
+        "HCO3": { "value": "8 mEq/L", "reference": "22-28", "flag": "SEVERELY LOW" },
+        "Sodium": { "value": "140 mEq/L", "reference": "136-145" },
+        "Chloride": { "value": "102 mEq/L", "reference": "96-106" },
+        "Potassium": { "value": "4.2 mEq/L", "reference": "3.5-5.0" },
+        "Glucose": { "value": "98 mg/dL", "reference": "70-100" },
+        "BUN": { "value": "18 mg/dL", "reference": "7-20" },
+        "Creatinine": { "value": "1.8 mg/dL", "reference": "0.7-1.3", "flag": "ELEVATED" },
+        "Lactate": { "value": "3.2 mmol/L", "reference": "<2.0", "flag": "ELEVATED" },
+        "Serum_Osmolality_measured": { "value": "328 mOsm/kg", "reference": "275-295", "flag": "ELEVATED" },
+        "Ethanol": { "value": "Negative" }
+      },
+      "calculated": {
+        "Anion_Gap": "140 - (102 + 8) = 30 mEq/L (ELEVATED)",
+        "Calculated_Osmolality": "2(140) + 98/18 + 18/2.8 = 295 mOsm/kg",
+        "Osmolar_Gap": "328 - 295 = 33 mOsm/kg (ELEVATED, normal <10)"
+      },
+      "Urinalysis": "Calcium oxalate crystals present"
+    }
+  },
+  "layers": [
+    {
+      "id": "basics",
+      "title": "Acid-Base Basics",
+      "icon": "📊",
+      "color": "#ef4444",
+      "questions": [
+        {
+          "id": "acidosis-basics-1",
+          "stem": "This patient has pH 7.18 and HCO3 8 mEq/L.",
+          "question": "How do you identify a primary metabolic acidosis?",
+          "options": [
+            { "id": "A", "text": "METABOLIC ACIDOSIS: pH <7.35 AND low HCO3 (<22 mEq/L); Check respiratory compensation: Expected pCO2 = (1.5 × HCO3) + 8 ± 2 (Winter's formula); If pCO2 matches → simple metabolic acidosis; If pCO2 higher than expected → additional respiratory acidosis; If pCO2 lower than expected → additional respiratory alkalosis; This patient: Expected pCO2 = 1.5(8) + 8 = 20 ± 2; Actual pCO2 = 18 → appropriate compensation", "correct": true },
+            { "id": "B", "text": "Any low pH is metabolic acidosis", "correct": false },
+            { "id": "C", "text": "High pCO2 defines metabolic acidosis", "correct": false },
+            { "id": "D", "text": "Compensation doesn't need to be checked", "correct": false }
+          ],
+          "explanation": "Identifying metabolic acidosis: (1) pH <7.35 (acidemia); (2) Primary process: Low HCO3 (<22 mEq/L) = metabolic acidosis. (3) Check compensation with WINTER'S FORMULA: Expected pCO2 = (1.5 × HCO3) + 8 ± 2. If actual pCO2 is within this range → appropriate respiratory compensation (simple metabolic acidosis). This patient: pH 7.18, HCO3 8. Expected pCO2 = 1.5(8) + 8 = 20 ± 2 (range 18-22). Actual pCO2 = 18 → within expected range, simple metabolic acidosis with appropriate compensation.",
+          "sources": ["StatPearls - https://www.ncbi.nlm.nih.gov/books/NBK448090/"],
+          "sourceUrls": ["https://www.ncbi.nlm.nih.gov/books/NBK448090/"]
+        }
+      ]
+    },
+    {
+      "id": "anion-gap",
+      "title": "Anion Gap Calculation",
+      "icon": "🔢",
+      "color": "#f97316",
+      "questions": [
+        {
+          "id": "acidosis-ag-1",
+          "stem": "You need to calculate the anion gap.",
+          "question": "How is the anion gap calculated and interpreted?",
+          "options": [
+            { "id": "A", "text": "Anion Gap = Na - (Cl + HCO3); Normal: 8-12 mEq/L (may vary by lab); Elevated AG indicates unmeasured anions (lactate, ketones, toxins, uremia); Always correct for albumin: For every 1 g/dL albumin below 4, add 2.5 to AG; This patient: AG = 140 - (102 + 8) = 30 (markedly elevated)", "correct": true },
+            { "id": "B", "text": "Anion gap includes potassium", "correct": false },
+            { "id": "C", "text": "Normal anion gap is 20-30", "correct": false },
+            { "id": "D", "text": "Albumin doesn't affect anion gap", "correct": false }
+          ],
+          "explanation": "Anion Gap (AG): Formula: AG = Na - (Cl + HCO3). Normal: 8-12 mEq/L (varies by lab, some use 3-11). Represents unmeasured anions (albumin, phosphate, sulfate, organic acids). ELEVATED AG: Indicates additional unmeasured anions present (lactate, ketoacids, toxic alcohols, uremia). ALBUMIN CORRECTION: Albumin is a major unmeasured anion. For every 1 g/dL albumin below 4: Add 2.5 to the calculated AG. Example: Patient with albumin 2 g/dL and calculated AG 10 → Corrected AG = 10 + 2.5(2) = 15. This patient: AG = 140 - 110 = 30 mEq/L (markedly elevated → high AG metabolic acidosis).",
+          "sources": ["BCNephro - https://bcnephro.com/metabolic-acidosis-approach-to-diagnosis/"],
+          "sourceUrls": ["https://bcnephro.com/metabolic-acidosis-approach-to-diagnosis/"]
+        }
+      ]
+    },
+    {
+      "id": "goldmark",
+      "title": "GOLDMARK Differential",
+      "icon": "📋",
+      "color": "#eab308",
+      "questions": [
+        {
+          "id": "acidosis-gold-1",
+          "stem": "The anion gap is 30, indicating high AG metabolic acidosis.",
+          "question": "What causes high anion gap metabolic acidosis (GOLDMARK)?",
+          "options": [
+            { "id": "A", "text": "GOLDMARK mnemonic: G - Glycols (ethylene glycol, propylene glycol); O - Oxoproline (acetaminophen, malnourished); L - L-Lactate (shock, sepsis, metformin, seizures); D - D-Lactate (short bowel syndrome); M - Methanol; A - Aspirin (salicylates); R - Renal failure (uremia); K - Ketoacidosis (DKA, alcoholic, starvation)", "correct": true },
+            { "id": "B", "text": "Only DKA causes elevated anion gap", "correct": false },
+            { "id": "C", "text": "MUDPILES is the only valid mnemonic", "correct": false },
+            { "id": "D", "text": "Renal failure causes non-AG acidosis", "correct": false }
+          ],
+          "explanation": "GOLDMARK (modern mnemonic, replaces MUDPILES): G - GLYCOLS: Ethylene glycol (antifreeze - this patient!), Propylene glycol (IV medications); O - OXOPROLINE (5-oxoproline): Chronic acetaminophen use, malnourished patients; L - L-LACTATE: Shock, sepsis, metformin, seizures, CO/cyanide, thiamine deficiency; D - D-LACTATE: Short bowel syndrome, bacterial overgrowth; M - METHANOL: Windshield washer fluid, solvents; A - ASPIRIN (salicylates): Classic cause, respiratory alkalosis + metabolic acidosis; R - RENAL FAILURE: Uremia, accumulation of organic acids; K - KETOACIDOSIS: DKA, alcoholic ketoacidosis, starvation ketoacidosis.",
+          "whyChain": [
+            { "why": "Why GOLDMARK over MUDPILES?", "answer": "GOLDMARK is more clinically relevant for modern practice: Includes D-lactate and oxoproline (not in MUDPILES), Drops paraldehyde (rarely used), Groups toxic alcohols logically (glycols, methanol). Iron and isoniazid (in MUDPILES) cause acidosis via lactic acidosis, so covered under 'L'. GOLDMARK is recommended as the 21st century mnemonic.", "source": "Lancet 2008" }
+          ],
+          "sources": ["Lancet GOLDMARK - https://pubmed.ncbi.nlm.nih.gov/18790311/"],
+          "sourceUrls": ["https://pubmed.ncbi.nlm.nih.gov/18790311/"]
+        }
+      ]
+    },
+    {
+      "id": "osmolar-gap",
+      "title": "Osmolar Gap",
+      "icon": "🧪",
+      "color": "#22c55e",
+      "questions": [
+        {
+          "id": "acidosis-osm-1",
+          "stem": "This patient has an osmolar gap of 33 mOsm/kg.",
+          "question": "How is the osmolar gap used in metabolic acidosis workup?",
+          "options": [
+            { "id": "A", "text": "Osmolar Gap = Measured osmolality - Calculated osmolality; Calculated = 2(Na) + Glucose/18 + BUN/2.8 (+ EtOH/4.6 if drinking); Normal <10 mOsm/kg; ELEVATED in toxic alcohols: Methanol, Ethylene glycol, Isopropyl alcohol, Propylene glycol; IMPORTANT: Gap may normalize as parent alcohol is metabolized to acid (AG rises, osmolar gap falls); Check BOTH in suspected toxic ingestion", "correct": true },
+            { "id": "B", "text": "Osmolar gap is not useful in acidosis workup", "correct": false },
+            { "id": "C", "text": "Normal osmolar gap excludes toxic alcohols", "correct": false },
+            { "id": "D", "text": "Osmolar gap should be >50 to be significant", "correct": false }
+          ],
+          "explanation": "Osmolar Gap: Formula: Measured osmolality - Calculated osmolality. Calculated = 2(Na) + Glucose/18 + BUN/2.8 [+ EtOH/4.6]. Normal: <10 mOsm/kg. ELEVATED OSMOLAR GAP: Indicates unmeasured osmoles - TOXIC ALCOHOLS: Methanol, Ethylene glycol, Isopropyl alcohol (causes ketosis but NOT acidosis), Propylene glycol. CRITICAL CONCEPT: As toxic alcohol is metabolized to organic acid, osmolar gap DECREASES while anion gap INCREASES. Early presentation: High osmolar gap, normal AG. Late presentation: Normal osmolar gap, high AG. Check BOTH for toxic alcohol - a normal osmolar gap doesn't exclude if presenting late. This patient: Osmolar gap 33 + High AG + Calcium oxalate crystals → ETHYLENE GLYCOL.",
+          "sources": ["EM Cases - https://emergencymedicinecases.com/metabolic-acidosis/"],
+          "sourceUrls": ["https://emergencymedicinecases.com/metabolic-acidosis/"]
+        }
+      ]
+    },
+    {
+      "id": "non-ag",
+      "title": "Non-Anion Gap Acidosis",
+      "icon": "📉",
+      "color": "#3b82f6",
+      "questions": [
+        {
+          "id": "acidosis-nonag-1",
+          "stem": "A different patient has metabolic acidosis with a normal anion gap.",
+          "question": "What causes non-anion gap (hyperchloremic) metabolic acidosis?",
+          "options": [
+            { "id": "A", "text": "Non-AG acidosis (HARDUP or USED CARP): GI LOSSES: Diarrhea (most common), Pancreatic/biliary fistula, Ureteral diversion; RENAL: RTA Type 1 (distal), RTA Type 2 (proximal), RTA Type 4 (hypoaldosteronism); IATROGENIC: NS resuscitation, Acetazolamide, TPN; Calculate urine anion gap to distinguish GI vs renal: Urine AG = (Na + K) - Cl; Negative = GI loss (appropriate renal response); Positive = RTA (renal cause)", "correct": true },
+            { "id": "B", "text": "Non-AG acidosis is always diarrhea", "correct": false },
+            { "id": "C", "text": "RTA causes high AG acidosis", "correct": false },
+            { "id": "D", "text": "Chloride is low in non-AG acidosis", "correct": false }
+          ],
+          "explanation": "Non-Anion Gap (Hyperchloremic) Metabolic Acidosis: Bicarbonate lost and replaced by chloride → normal AG but high Cl. Causes (HARDUP): H - Hyperalimentation (TPN), A - Acetazolamide (carbonic anhydrase inhibitor), R - Renal Tubular Acidosis, D - Diarrhea (most common), U - Ureteral diversion, P - Pancreatic fistula. URINE ANION GAP: Helps distinguish GI vs renal cause. UAG = (Urine Na + Urine K) - Urine Cl. NEGATIVE UAG (<0): GI loss - kidneys appropriately excreting NH4+ (which carries Cl-). POSITIVE UAG (>0): RTA - kidneys failing to excrete acid. RTA Types: Type 1 (distal): Can't secrete H+, urine pH >5.5, hypokalemia. Type 2 (proximal): Can't reabsorb HCO3, urine pH variable, hypokalemia. Type 4: Hypoaldosteronism, hyperkalemia.",
+          "sources": ["BCNephro - https://bcnephro.com/metabolic-acidosis-approach-to-diagnosis/"],
+          "sourceUrls": ["https://bcnephro.com/metabolic-acidosis-approach-to-diagnosis/"]
+        }
+      ]
+    },
+    {
+      "id": "delta-delta",
+      "title": "Delta-Delta Ratio",
+      "icon": "📐",
+      "color": "#a855f7",
+      "questions": [
+        {
+          "id": "acidosis-delta-1",
+          "stem": "You want to check for a mixed disorder.",
+          "question": "How is the delta-delta ratio used?",
+          "options": [
+            { "id": "A", "text": "Delta-Delta (Δ-Δ) Ratio: Δ Anion Gap / Δ HCO3 = (AG - 12) / (24 - HCO3); Ratio 1-2: Pure high AG metabolic acidosis; Ratio <1: Additional non-AG metabolic acidosis; Ratio >2: Additional metabolic alkalosis; Alternative: Add Δ AG to measured HCO3 - if >30 → metabolic alkalosis present, if <12 → non-AG acidosis present", "correct": true },
+            { "id": "B", "text": "Delta-delta is not clinically useful", "correct": false },
+            { "id": "C", "text": "Only applies if AG is normal", "correct": false },
+            { "id": "D", "text": "Ratio >2 indicates pure AG acidosis", "correct": false }
+          ],
+          "explanation": "Delta-Delta Ratio: Identifies mixed metabolic disorders. Formula: Δ AG / Δ HCO3 = (Patient AG - 12) / (24 - Patient HCO3). INTERPRETATION: Ratio 1-2: Pure high AG metabolic acidosis (for every unmeasured anion added, one HCO3 is consumed). Ratio <1: Additional NON-AG metabolic acidosis (HCO3 dropped more than expected - additional HCO3 loss). Ratio >2: Additional METABOLIC ALKALOSIS (HCO3 higher than expected - baseline was elevated or concurrent generation). SIMPLER METHOD: Add Δ AG to patient's HCO3. If result >30 → metabolic alkalosis also present. If result <12 → non-AG acidosis also present. This patient: Δ AG = 30-12 = 18, Δ HCO3 = 24-8 = 16. Ratio = 18/16 = 1.1 → pure high AG metabolic acidosis.",
+          "sources": ["BCNephro - https://bcnephro.com/metabolic-acidosis-approach-to-diagnosis/"],
+          "sourceUrls": ["https://bcnephro.com/metabolic-acidosis-approach-to-diagnosis/"]
+        }
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment Approach",
+      "icon": "💊",
+      "color": "#dc2626",
+      "questions": [
+        {
+          "id": "acidosis-tx-1",
+          "stem": "This patient has ethylene glycol poisoning.",
+          "question": "How is high AG metabolic acidosis treated?",
+          "options": [
+            { "id": "A", "text": "TREAT THE UNDERLYING CAUSE - most important!; TOXIC ALCOHOLS: Fomepizole (blocks alcohol dehydrogenase), hemodialysis for severe cases; DKA: Insulin + fluids + K replacement; LACTIC ACIDOSIS: Treat shock, improve perfusion; SALICYLATES: Alkalinization, hemodialysis if severe; UREMIA: Dialysis; BICARBONATE: Controversial - consider if pH <7.1 or hemodynamic instability, not routine", "correct": true },
+            { "id": "B", "text": "Always give bicarbonate first", "correct": false },
+            { "id": "C", "text": "Treatment is the same regardless of cause", "correct": false },
+            { "id": "D", "text": "Hemodialysis is never needed", "correct": false }
+          ],
+          "explanation": "Treatment of high AG metabolic acidosis: MOST IMPORTANT: Treat the underlying cause! TOXIC ALCOHOLS (methanol, ethylene glycol): Fomepizole (or ethanol if unavailable) - blocks alcohol dehydrogenase, prevents toxic metabolite formation. Hemodialysis for severe acidosis, renal failure, visual symptoms (methanol), or very high levels. Thiamine, folate (cofactors). DKA: Insulin (0.1 U/kg/hr), IV fluids, potassium replacement. LACTIC ACIDOSIS: Treat shock, improve perfusion, treat sepsis. SALICYLATES: Urinary alkalinization (bicarb to pH 7.5-8.0), hemodialysis if severe. UREMIA: Dialysis. BICARBONATE THERAPY: Controversial! May consider if pH <7.1 or hemodynamic instability, but does not improve outcomes in most studies. May worsen intracellular acidosis.",
+          "whyChain": [
+            { "why": "Why fomepizole for this patient?", "answer": "Ethylene glycol is metabolized by alcohol dehydrogenase to glycolic acid and oxalic acid (cause of calcium oxalate crystals, acidosis, and renal failure). Fomepizole blocks this enzyme, preventing toxic metabolite formation. Given early, it can prevent severe toxicity. Must still dialyze if already severe acidosis, renal failure, or high level.", "source": "EM Cases" }
+          ],
+          "sources": ["EM Cases - https://emergencymedicinecases.com/metabolic-acidosis/"],
+          "sourceUrls": ["https://emergencymedicinecases.com/metabolic-acidosis/"]
+        }
+      ]
+    },
+    {
+      "id": "synthesis",
+      "title": "Synthesis",
+      "icon": "🔗",
+      "color": "#6366f1",
+      "questions": [
+        {
+          "id": "acidosis-syn-1",
+          "stem": "This patient has ethylene glycol poisoning with severe metabolic acidosis.",
+          "question": "What is the complete management approach?",
+          "options": [
+            { "id": "A", "text": "Systematic approach: (1) Confirm metabolic acidosis (pH 7.18, HCO3 8); (2) Check compensation (appropriate); (3) Calculate AG (30 - elevated); (4) Calculate osmolar gap (33 - elevated); (5) Consider GOLDMARK - glycols with elevated osmolar gap and calcium oxalate crystals → ETHYLENE GLYCOL; Treatment: (1) FOMEPIZOLE 15 mg/kg loading dose STAT; (2) IV fluids; (3) Thiamine, pyridoxine, folate (cofactors); (4) Consult nephrology for HEMODIALYSIS (severe acidosis, AKI); (5) ICU admission", "correct": true },
+            { "id": "B", "text": "Wait for specific ethylene glycol level", "correct": false },
+            { "id": "C", "text": "Sodium bicarbonate only", "correct": false },
+            { "id": "D", "text": "Observation is sufficient", "correct": false }
+          ],
+          "explanation": "Complete approach to this patient: SYSTEMATIC ANALYSIS: (1) pH 7.18 + HCO3 8 = metabolic acidosis; (2) Winter's formula: expected pCO2 18-22, actual 18 = appropriate compensation; (3) AG = 30 (elevated); (4) Delta-delta = 1.1 (pure high AG acidosis); (5) Osmolar gap = 33 (elevated); (6) GOLDMARK differential with elevated osmolar gap → toxic alcohol. Clinical clues: Antifreeze bottles, calcium oxalate crystals, AKI → ETHYLENE GLYCOL. TREATMENT: (1) FOMEPIZOLE 15 mg/kg IV loading dose IMMEDIATELY - don't wait for levels; (2) IV fluids for hydration; (3) Cofactors: Thiamine 100mg, Pyridoxine 100mg, Folic acid 50mg (enhance non-toxic metabolism); (4) HEMODIALYSIS - indicated for: Severe acidosis (pH <7.3), Renal failure, High ethylene glycol level (>50 mg/dL), End-organ damage; (5) ICU admission; (6) Nephrology and toxicology consultation.",
+          "sources": ["StatPearls - https://www.ncbi.nlm.nih.gov/books/NBK448090/", "EM Cases - https://emergencymedicinecases.com/metabolic-acidosis/"],
+          "sourceUrls": ["https://www.ncbi.nlm.nih.gov/books/NBK448090/", "https://emergencymedicinecases.com/metabolic-acidosis/"]
+        }
+      ]
+    }
+  ]
+}
