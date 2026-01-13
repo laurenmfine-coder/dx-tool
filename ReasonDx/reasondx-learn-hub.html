@@ -9,462 +9,76 @@
         :root {
             --bg-primary: #ffffff;
             --bg-secondary: #f8fafc;
-            --bg-card: #ffffff;
             --text-primary: #1e293b;
             --text-secondary: #64748b;
             --text-muted: #94a3b8;
             --accent-teal: #14b8a6;
             --accent-teal-light: #ccfbf1;
             --border-color: #e2e8f0;
-            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
-            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
-            
-            /* Card colors - soft pastels */
             --card-red: #fef2f2;
-            --card-red-accent: #fecaca;
             --card-blue: #eff6ff;
-            --card-blue-accent: #bfdbfe;
             --card-green: #f0fdf4;
-            --card-green-accent: #bbf7d0;
             --card-purple: #faf5ff;
-            --card-purple-accent: #e9d5ff;
             --card-orange: #fff7ed;
-            --card-orange-accent: #fed7aa;
             --card-pink: #fdf2f8;
-            --card-pink-accent: #fbcfe8;
             --card-cyan: #ecfeff;
-            --card-cyan-accent: #a5f3fc;
             --card-yellow: #fefce8;
-            --card-yellow-accent: #fef08a;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            line-height: 1.6;
-        }
-
-        /* Navigation */
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            background: var(--bg-primary);
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 700;
-            font-size: 1.25rem;
-            color: var(--text-primary);
-            text-decoration: none;
-        }
-
-        .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: var(--accent-teal);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 0.9rem;
-        }
-
-        .logo span {
-            color: var(--accent-teal);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            transition: all 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: var(--text-primary);
-            background: var(--bg-secondary);
-        }
-
-        .nav-links a.active {
-            color: white;
-            background: var(--accent-teal);
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .streak-badge {
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-            padding: 0.4rem 0.75rem;
-            background: #fff7ed;
-            border-radius: 20px;
-            font-weight: 600;
-            color: #ea580c;
-            font-size: 0.9rem;
-        }
-
-        .avatar {
-            width: 36px;
-            height: 36px;
-            background: var(--accent-teal-light);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            color: var(--accent-teal);
-        }
-
-        /* Main Content */
-        .main {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        /* Page Header */
-        .page-header {
-            margin-bottom: 1.5rem;
-        }
-
-        .page-header h1 {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .page-header p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-        }
-
-        /* Tabs */
-        .tabs {
-            display: flex;
-            gap: 2rem;
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: 2rem;
-        }
-
-        .tab {
-            padding: 0.75rem 0;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            border-bottom: 2px solid transparent;
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-
-        .tab:hover {
-            color: var(--text-primary);
-        }
-
-        .tab.active {
-            color: var(--accent-teal);
-            border-bottom-color: var(--accent-teal);
-        }
-
-        /* Info Banner */
-        .info-banner {
-            background: var(--accent-teal-light);
-            border-left: 4px solid var(--accent-teal);
-            border-radius: 12px;
-            padding: 1.25rem 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .info-banner h3 {
-            color: var(--accent-teal);
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .info-banner p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-        }
-
-        /* Stats Row */
-        .stats-row {
-            display: flex;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 1.25rem 1.5rem;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            min-width: 140px;
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--accent-teal);
-        }
-
-        .stat-label {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* Module Cards Grid */
-        .modules-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .module-card {
-            background: var(--bg-primary);
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .module-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .card-header {
-            height: 140px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .card-header img, .card-header .card-icon {
-            width: 80px;
-            height: 80px;
-            object-fit: contain;
-        }
-
-        .card-icon {
-            font-size: 4rem;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
-        }
-
-        .card-body {
-            padding: 1.25rem;
-        }
-
-        .card-title-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-        }
-
-        .card-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .status-badge {
-            padding: 0.25rem 0.6rem;
-            border-radius: 6px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .status-badge.ready {
-            background: #dcfce7;
-            color: #16a34a;
-        }
-
-        .status-badge.coming {
-            background: #fef3c7;
-            color: #d97706;
-        }
-
-        .card-description {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            line-height: 1.5;
-        }
-
-        .card-stats {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .card-stat {
-            text-align: center;
-        }
-
-        .card-stat-value {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--accent-teal);
-        }
-
-        .card-stat-label {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* Category Headers */
-        .category-section {
-            margin-bottom: 2.5rem;
-        }
-
-        .category-header {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1.25rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 2px solid var(--border-color);
-        }
-
-        .category-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.25rem;
-        }
-
-        .category-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .category-count {
-            background: var(--bg-secondary);
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        /* Compact Module Grid */
-        .compact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1rem;
-        }
-
-        .compact-card {
-            background: white;
-            border-radius: 12px;
-            padding: 1rem 1.25rem;
-            border: 1px solid var(--border-color);
-            transition: all 0.2s ease;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .compact-card:hover {
-            border-color: var(--accent-teal);
-            box-shadow: 0 4px 12px rgba(20, 184, 166, 0.15);
-            transform: translateY(-2px);
-        }
-
-        .compact-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            flex-shrink: 0;
-        }
-
-        .compact-content {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .compact-title {
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: var(--text-primary);
-            margin-bottom: 0.25rem;
-        }
-
-        .compact-meta {
-            display: flex;
-            gap: 0.75rem;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .compact-meta span {
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-        }
-
-        /* Color schemes for cards */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-secondary); color: var(--text-primary); line-height: 1.6; }
+        .nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: var(--bg-primary); border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 100; }
+        .logo { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; font-size: 1.25rem; color: var(--text-primary); text-decoration: none; }
+        .logo-icon { width: 36px; height: 36px; background: var(--accent-teal); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; }
+        .logo span { color: var(--accent-teal); }
+        .nav-links { display: flex; gap: 0.5rem; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-weight: 500; padding: 0.5rem 1rem; border-radius: 8px; transition: all 0.2s; }
+        .nav-links a:hover { color: var(--text-primary); background: var(--bg-secondary); }
+        .nav-links a.active { color: white; background: var(--accent-teal); }
+        .nav-right { display: flex; align-items: center; gap: 1rem; }
+        .streak-badge { display: flex; align-items: center; gap: 0.25rem; padding: 0.4rem 0.75rem; background: #fff7ed; border-radius: 20px; font-weight: 600; color: #ea580c; font-size: 0.9rem; }
+        .avatar { width: 36px; height: 36px; background: var(--accent-teal-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; color: var(--accent-teal); }
+        .main { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        .page-header { margin-bottom: 1.5rem; }
+        .page-header h1 { font-size: 1.75rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; }
+        .page-header p { color: var(--text-secondary); }
+        .tabs { display: flex; gap: 2rem; border-bottom: 1px solid var(--border-color); margin-bottom: 2rem; }
+        .tab { padding: 0.75rem 0; color: var(--text-secondary); text-decoration: none; font-weight: 500; border-bottom: 2px solid transparent; cursor: pointer; }
+        .tab:hover { color: var(--text-primary); }
+        .tab.active { color: var(--accent-teal); border-bottom-color: var(--accent-teal); }
+        .info-banner { background: var(--accent-teal-light); border-left: 4px solid var(--accent-teal); border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2rem; }
+        .info-banner h3 { color: var(--accent-teal); font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .info-banner p { color: var(--text-secondary); font-size: 0.95rem; }
+        .stats-row { display: flex; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .stat-card { background: white; padding: 1.25rem 1.5rem; border-radius: 12px; border: 1px solid var(--border-color); min-width: 140px; text-align: center; }
+        .stat-number { font-size: 1.75rem; font-weight: 700; color: var(--accent-teal); }
+        .stat-label { font-size: 0.85rem; color: var(--text-secondary); text-transform: uppercase; }
+        .modules-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .module-card { background: var(--bg-primary); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); transition: all 0.3s ease; cursor: pointer; text-decoration: none; color: inherit; }
+        .module-card:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+        .card-header { height: 140px; display: flex; align-items: center; justify-content: center; }
+        .card-icon { font-size: 4rem; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1)); }
+        .card-body { padding: 1.25rem; }
+        .card-title-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
+        .card-title { font-size: 1.1rem; font-weight: 600; }
+        .status-badge { padding: 0.25rem 0.6rem; border-radius: 6px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; }
+        .status-badge.ready { background: #dcfce7; color: #16a34a; }
+        .card-description { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem; }
+        .card-stats { display: flex; gap: 1.5rem; }
+        .card-stat { text-align: center; }
+        .card-stat-value { font-size: 1.25rem; font-weight: 700; color: var(--accent-teal); }
+        .card-stat-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; }
+        .category-section { margin-bottom: 2.5rem; }
+        .category-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 2px solid var(--border-color); }
+        .category-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; }
+        .category-title { font-size: 1.25rem; font-weight: 600; }
+        .category-count { background: var(--bg-secondary); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.8rem; color: var(--text-secondary); }
+        .compact-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+        .compact-card { background: white; border-radius: 12px; padding: 1rem 1.25rem; border: 1px solid var(--border-color); transition: all 0.2s ease; cursor: pointer; text-decoration: none; color: inherit; display: flex; align-items: center; gap: 1rem; }
+        .compact-card:hover { border-color: var(--accent-teal); box-shadow: 0 4px 12px rgba(20, 184, 166, 0.15); transform: translateY(-2px); }
+        .compact-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+        .compact-content { flex: 1; }
+        .compact-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.25rem; }
+        .compact-meta { display: flex; gap: 0.75rem; font-size: 0.8rem; color: var(--text-muted); }
         .bg-red { background: var(--card-red); }
         .bg-blue { background: var(--card-blue); }
         .bg-green { background: var(--card-green); }
@@ -473,837 +87,248 @@
         .bg-pink { background: var(--card-pink); }
         .bg-cyan { background: var(--card-cyan); }
         .bg-yellow { background: var(--card-yellow); }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav {
-                flex-wrap: wrap;
-                gap: 1rem;
-            }
-            
-            .nav-links {
-                order: 3;
-                width: 100%;
-                justify-content: center;
-            }
-
-            .modules-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .compact-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .stats-row {
-                justify-content: center;
-            }
-        }
+        @media (max-width: 768px) { .nav { flex-wrap: wrap; gap: 1rem; } .modules-grid, .compact-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="nav">
-        <a href="#" class="logo">
-            <div class="logo-icon">Rx</div>
-            Reason<span>Dx</span>
+<nav class="nav">
+    <a href="#" class="logo"><div class="logo-icon">Rx</div>Reason<span>Dx</span></a>
+    <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#" class="active">Learn</a>
+        <a href="#">Review</a>
+        <a href="#">Progress</a>
+        <a href="#">Reference</a>
+    </div>
+    <div class="nav-right">
+        <div class="streak-badge">🔥 7</div>
+        <div class="avatar">LF</div>
+    </div>
+</nav>
+
+<main class="main">
+    <div class="page-header">
+        <h1>📚 Learn</h1>
+        <p>Practice clinical reasoning through cases, challenges, and pathophysiology modules</p>
+    </div>
+
+    <div class="tabs">
+        <a class="tab" href="#">Cases</a>
+        <a class="tab active" href="#">Deep Dive</a>
+        <a class="tab" href="#">MechanismDx</a>
+        <a class="tab" href="#">Board Prep</a>
+    </div>
+
+    <div class="info-banner">
+        <h3>🔬 Integrated Clinical Vignettes</h3>
+        <p>One patient case anchors 25-35 questions across anatomy, physiology, pathophysiology, pharmacology, clinical reasoning, and complications. Master the "WHY" behind every clinical finding.</p>
+    </div>
+
+    <div class="stats-row">
+        <div class="stat-card"><div class="stat-number">71</div><div class="stat-label">Modules</div></div>
+        <div class="stat-card"><div class="stat-number">1,200+</div><div class="stat-label">Questions</div></div>
+        <div class="stat-card"><div class="stat-number">12</div><div class="stat-label">Specialties</div></div>
+        <div class="stat-card"><div class="stat-number">35+</div><div class="stat-label">Hours</div></div>
+    </div>
+
+    <!-- Featured Modules -->
+    <div class="modules-grid">
+        <a href="deep-dive-player.html?module=acs-deep-dive-complete" class="module-card">
+            <div class="card-header bg-red"><div class="card-icon">🫀</div></div>
+            <div class="card-body">
+                <div class="card-title-row"><span class="card-title">Acute Coronary Syndrome</span><span class="status-badge ready">Ready</span></div>
+                <p class="card-description">58M with crushing chest pain at 2 AM. From coronary anatomy to reperfusion therapy.</p>
+                <div class="card-stats">
+                    <div class="card-stat"><div class="card-stat-value">33</div><div class="card-stat-label">Questions</div></div>
+                    <div class="card-stat"><div class="card-stat-value">7</div><div class="card-stat-label">Layers</div></div>
+                    <div class="card-stat"><div class="card-stat-value">~45m</div><div class="card-stat-label">Duration</div></div>
+                </div>
+            </div>
         </a>
-        <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#" class="active">Learn</a>
-            <a href="#">Review</a>
-            <a href="#">Progress</a>
-            <a href="#">Reference</a>
-        </div>
-        <div class="nav-right">
-            <div class="streak-badge">🔥 7</div>
-            <div class="avatar">LF</div>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="main">
-        <!-- Page Header -->
-        <div class="page-header">
-            <h1>📚 Learn</h1>
-            <p>Practice clinical reasoning through cases, challenges, and pathophysiology modules</p>
-        </div>
-
-        <!-- Tabs -->
-        <div class="tabs">
-            <a class="tab" href="#">Cases</a>
-            <a class="tab active" href="#">Deep Dive</a>
-            <a class="tab" href="#">MechanismDx</a>
-            <a class="tab" href="#">Board Prep</a>
-        </div>
-
-        <!-- Info Banner -->
-        <div class="info-banner">
-            <h3>🔬 Integrated Clinical Vignettes</h3>
-            <p>One patient case anchors 25-35 questions across anatomy, physiology, pathophysiology, pharmacology, clinical reasoning, and complications. Master the "WHY" behind every clinical finding.</p>
-        </div>
-
-        <!-- Stats Row -->
-        <div class="stats-row">
-            <div class="stat-card">
-                <div class="stat-number">71</div>
-                <div class="stat-label">Modules</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">1,200+</div>
-                <div class="stat-label">Questions</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">12</div>
-                <div class="stat-label">Specialties</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">35+</div>
-                <div class="stat-label">Hours</div>
-            </div>
-        </div>
-
-        <!-- Featured Modules (Large Cards) -->
-        <div class="modules-grid">
-            <a href="#" class="module-card">
-                <div class="card-header bg-red">
-                    <div class="card-icon">🫀</div>
+        <a href="deep-dive-player.html?module=pe-deep-dive" class="module-card">
+            <div class="card-header bg-blue"><div class="card-icon">🫁</div></div>
+            <div class="card-body">
+                <div class="card-title-row"><span class="card-title">Pulmonary Embolism</span><span class="status-badge ready">Ready</span></div>
+                <p class="card-description">42F with pleuritic chest pain after long flight. Virchow's triad to risk stratification.</p>
+                <div class="card-stats">
+                    <div class="card-stat"><div class="card-stat-value">30</div><div class="card-stat-label">Questions</div></div>
+                    <div class="card-stat"><div class="card-stat-value">7</div><div class="card-stat-label">Layers</div></div>
+                    <div class="card-stat"><div class="card-stat-value">~40m</div><div class="card-stat-label">Duration</div></div>
                 </div>
-                <div class="card-body">
-                    <div class="card-title-row">
-                        <span class="card-title">Acute Coronary Syndrome</span>
-                        <span class="status-badge ready">Ready</span>
-                    </div>
-                    <p class="card-description">58M with crushing chest pain at 2 AM. From coronary anatomy to reperfusion therapy.</p>
-                    <div class="card-stats">
-                        <div class="card-stat">
-                            <div class="card-stat-value">33</div>
-                            <div class="card-stat-label">Questions</div>
-                        </div>
-                        <div class="card-stat">
-                            <div class="card-stat-value">7</div>
-                            <div class="card-stat-label">Layers</div>
-                        </div>
-                        <div class="card-stat">
-                            <div class="card-stat-value">~45m</div>
-                            <div class="card-stat-label">Duration</div>
-                        </div>
-                    </div>
+            </div>
+        </a>
+        <a href="deep-dive-player.html?module=sepsis-deep-dive" class="module-card">
+            <div class="card-header bg-green"><div class="card-icon">🦠</div></div>
+            <div class="card-body">
+                <div class="card-title-row"><span class="card-title">Sepsis & Septic Shock</span><span class="status-badge ready">Ready</span></div>
+                <p class="card-description">68F with fever and hypotension from UTI. SIRS to multiorgan dysfunction.</p>
+                <div class="card-stats">
+                    <div class="card-stat"><div class="card-stat-value">22</div><div class="card-stat-label">Questions</div></div>
+                    <div class="card-stat"><div class="card-stat-value">7</div><div class="card-stat-label">Layers</div></div>
+                    <div class="card-stat"><div class="card-stat-value">~45m</div><div class="card-stat-label">Duration</div></div>
                 </div>
-            </a>
+            </div>
+        </a>
+    </div>
 
-            <a href="#" class="module-card">
-                <div class="card-header bg-blue">
-                    <div class="card-icon">🫁</div>
-                </div>
-                <div class="card-body">
-                    <div class="card-title-row">
-                        <span class="card-title">Pulmonary Embolism</span>
-                        <span class="status-badge ready">Ready</span>
-                    </div>
-                    <p class="card-description">42F with pleuritic chest pain after long flight. Virchow's triad to risk stratification.</p>
-                    <div class="card-stats">
-                        <div class="card-stat">
-                            <div class="card-stat-value">30</div>
-                            <div class="card-stat-label">Questions</div>
-                        </div>
-                        <div class="card-stat">
-                            <div class="card-stat-value">7</div>
-                            <div class="card-stat-label">Layers</div>
-                        </div>
-                        <div class="card-stat">
-                            <div class="card-stat-value">~40m</div>
-                            <div class="card-stat-label">Duration</div>
-                        </div>
-                    </div>
-                </div>
-            </a>
-
-            <a href="#" class="module-card">
-                <div class="card-header bg-green">
-                    <div class="card-icon">🦠</div>
-                </div>
-                <div class="card-body">
-                    <div class="card-title-row">
-                        <span class="card-title">Sepsis & Septic Shock</span>
-                        <span class="status-badge ready">Ready</span>
-                    </div>
-                    <p class="card-description">68F with fever and hypotension from UTI. SIRS to multiorgan dysfunction.</p>
-                    <div class="card-stats">
-                        <div class="card-stat">
-                            <div class="card-stat-value">22</div>
-                            <div class="card-stat-label">Questions</div>
-                        </div>
-                        <div class="card-stat">
-                            <div class="card-stat-value">7</div>
-                            <div class="card-stat-label">Layers</div>
-                        </div>
-                        <div class="card-stat">
-                            <div class="card-stat-value">~45m</div>
-                            <div class="card-stat-label">Duration</div>
-                        </div>
-                    </div>
-                </div>
-            </a>
+    <!-- CARDIOLOGY -->
+    <section class="category-section">
+        <div class="category-header"><div class="category-icon bg-red">🫀</div><h2 class="category-title">Cardiology</h2><span class="category-count">7 modules</span></div>
+        <div class="compact-grid">
+            <a href="deep-dive-player.html?module=acs-deep-dive-complete" class="compact-card"><div class="compact-icon bg-red">🫀</div><div class="compact-content"><div class="compact-title">Acute Coronary Syndrome</div><div class="compact-meta"><span>33Q</span><span>~45min</span></div></div></a>
+            <a href="deep-dive-player.html?module=afib-deep-dive" class="compact-card"><div class="compact-icon bg-red">💓</div><div class="compact-content"><div class="compact-title">Atrial Fibrillation</div><div class="compact-meta"><span>18Q</span><span>~35min</span></div></div></a>
+            <a href="deep-dive-player.html?module=heart-failure-deep-dive" class="compact-card"><div class="compact-icon bg-red">❤️</div><div class="compact-content"><div class="compact-title">Heart Failure</div><div class="compact-meta"><span>20Q</span><span>~40min</span></div></div></a>
+            <a href="deep-dive-player.html?module=aortic-dissection-deep-dive" class="compact-card"><div class="compact-icon bg-red">🩸</div><div class="compact-content"><div class="compact-title">Aortic Dissection</div><div class="compact-meta"><span>16Q</span><span>~30min</span></div></div></a>
+            <a href="deep-dive-player.html?module=cardiac-tamponade-deep-dive" class="compact-card"><div class="compact-icon bg-red">💔</div><div class="compact-content"><div class="compact-title">Cardiac Tamponade</div><div class="compact-meta"><span>14Q</span><span>~25min</span></div></div></a>
+            <a href="deep-dive-player.html?module=hypertensive-emergency-deep-dive" class="compact-card"><div class="compact-icon bg-red">📈</div><div class="compact-content"><div class="compact-title">Hypertensive Emergency</div><div class="compact-meta"><span>16Q</span><span>~30min</span></div></div></a>
+            <a href="deep-dive-player.html?module=infective-endocarditis-deep-dive" class="compact-card"><div class="compact-icon bg-red">🦠</div><div class="compact-content"><div class="compact-title">Infective Endocarditis</div><div class="compact-meta"><span>20Q</span><span>~40min</span></div></div></a>
         </div>
+    </section>
 
-        <!-- CARDIOLOGY -->
-        <section class="category-section">
-            <div class="category-header">
-                <div class="category-icon bg-red">🫀</div>
-                <h2 class="category-title">Cardiology</h2>
-                <span class="category-count">7 modules</span>
-            </div>
-            <div class="compact-grid">
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-red">🫀</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Acute Coronary Syndrome</div>
-                        <div class="compact-meta"><span>33Q</span><span>~45min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-red">💓</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Atrial Fibrillation</div>
-                        <div class="compact-meta"><span>18Q</span><span>~35min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-red">❤️</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Heart Failure</div>
-                        <div class="compact-meta"><span>20Q</span><span>~40min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-red">🩸</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Aortic Dissection</div>
-                        <div class="compact-meta"><span>16Q</span><span>~30min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-red">💔</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Cardiac Tamponade</div>
-                        <div class="compact-meta"><span>14Q</span><span>~25min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-red">📈</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Hypertensive Emergency</div>
-                        <div class="compact-meta"><span>16Q</span><span>~30min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-red">🦠</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Infective Endocarditis</div>
-                        <div class="compact-meta"><span>20Q</span><span>~40min</span></div>
-                    </div>
-                </a>
-            </div>
-        </section>
+    <!-- PULMONARY -->
+    <section class="category-section">
+        <div class="category-header"><div class="category-icon bg-blue">🫁</div><h2 class="category-title">Pulmonary</h2><span class="category-count">5 modules</span></div>
+        <div class="compact-grid">
+            <a href="deep-dive-player.html?module=pe-deep-dive" class="compact-card"><div class="compact-icon bg-blue">🫁</div><div class="compact-content"><div class="compact-title">Pulmonary Embolism</div><div class="compact-meta"><span>30Q</span><span>~40min</span></div></div></a>
+            <a href="deep-dive-player.html?module=copd-exacerbation-deep-dive" class="compact-card"><div class="compact-icon bg-blue">💨</div><div class="compact-content"><div class="compact-title">COPD Exacerbation</div><div class="compact-meta"><span>18Q</span><span>~35min</span></div></div></a>
+            <a href="deep-dive-player.html?module=asthma-exacerbation-deep-dive" class="compact-card"><div class="compact-icon bg-blue">🌬️</div><div class="compact-content"><div class="compact-title">Asthma Exacerbation</div><div class="compact-meta"><span>16Q</span><span>~30min</span></div></div></a>
+            <a href="deep-dive-player.html?module=pneumonia-deep-dive" class="compact-card"><div class="compact-icon bg-blue">🦠</div><div class="compact-content"><div class="compact-title">Community-Acquired Pneumonia</div><div class="compact-meta"><span>18Q</span><span>~35min</span></div></div></a>
+            <a href="deep-dive-player.html?module=ards-deep-dive" class="compact-card"><div class="compact-icon bg-blue">🔴</div><div class="compact-content"><div class="compact-title">ARDS</div><div class="compact-meta"><span>16Q</span><span>~30min</span></div></div></a>
+        </div>
+    </section>
 
-        <!-- PULMONARY -->
-        <section class="category-section">
-            <div class="category-header">
-                <div class="category-icon bg-blue">🫁</div>
-                <h2 class="category-title">Pulmonary</h2>
-                <span class="category-count">5 modules</span>
-            </div>
-            <div class="compact-grid">
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-blue">🫁</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Pulmonary Embolism</div>
-                        <div class="compact-meta"><span>30Q</span><span>~40min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-blue">💨</div>
-                    <div class="compact-content">
-                        <div class="compact-title">COPD Exacerbation</div>
-                        <div class="compact-meta"><span>18Q</span><span>~35min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-blue">🌬️</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Asthma Exacerbation</div>
-                        <div class="compact-meta"><span>16Q</span><span>~30min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-blue">🦠</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Community-Acquired Pneumonia</div>
-                        <div class="compact-meta"><span>18Q</span><span>~35min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-blue">🔴</div>
-                    <div class="compact-content">
-                        <div class="compact-title">ARDS</div>
-                        <div class="compact-meta"><span>16Q</span><span>~30min</span></div>
-                    </div>
-                </a>
-            </div>
-        </section>
+    <!-- GASTROENTEROLOGY -->
+    <section class="category-section">
+        <div class="category-header"><div class="category-icon bg-orange">🍽️</div><h2 class="category-title">Gastroenterology</h2><span class="category-count">6 modules</span></div>
+        <div class="compact-grid">
+            <a href="deep-dive-player.html?module=gi-bleed-deep-dive" class="compact-card"><div class="compact-icon bg-orange">🩸</div><div class="compact-content"><div class="compact-title">GI Bleeding</div><div class="compact-meta"><span>20Q</span><span>~40min</span></div></div></a>
+            <a href="deep-dive-player.html?module=acute-pancreatitis-deep-dive" class="compact-card"><div class="compact-icon bg-orange">🔥</div><div class="compact-content"><div class="compact-title">Acute Pancreatitis</div><div class="compact-meta"><span>18Q</span><span>~35min</span></div></div></a>
+            <a href="deep-dive-player.html?module=acute-liver-failure-deep-dive" class="compact-card"><div class="compact-icon bg-orange">🫀</div><div class="compact-content"><div class="compact-title">Acute Liver Failure</div><div class="compact-meta"><span>16Q</span><span>~30min</span></div></div></a>
+            <a href="deep-dive-player.html?module=bowel-obstruction-deep-dive" class="compact-card"><div class="compact-icon bg-orange">🔄</div><div class="compact-content"><div class="compact-title">Bowel Obstruction</div><div class="compact-meta"><span>16Q</span><span>~30min</span></div></div></a>
+            <a href="deep-dive-player.html?module=cholecystitis-cholangitis-deep-dive" class="compact-card"><div class="compact-icon bg-orange">💎</div><div class="compact-content"><div class="compact-title">Cholecystitis & Cholangitis</div><div class="compact-meta"><span>20Q</span><span>~35min</span></div></div></a>
+            <a href="deep-dive-player.html?module=acute-appendicitis-deep-dive" class="compact-card"><div class="compact-icon bg-orange">⚡</div><div class="compact-content"><div class="compact-title">Acute Appendicitis</div><div class="compact-meta"><span>18Q</span><span>~35min</span></div></div></a>
+        </div>
+    </section>
 
-        <!-- GASTROENTEROLOGY -->
-        <section class="category-section">
-            <div class="category-header">
-                <div class="category-icon bg-orange">🍽️</div>
-                <h2 class="category-title">Gastroenterology</h2>
-                <span class="category-count">6 modules</span>
-            </div>
-            <div class="compact-grid">
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-orange">🩸</div>
-                    <div class="compact-content">
-                        <div class="compact-title">GI Bleeding</div>
-                        <div class="compact-meta"><span>20Q</span><span>~40min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-orange">🔥</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Acute Pancreatitis</div>
-                        <div class="compact-meta"><span>18Q</span><span>~35min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-orange">🫀</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Acute Liver Failure</div>
-                        <div class="compact-meta"><span>16Q</span><span>~30min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-orange">🔄</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Bowel Obstruction</div>
-                        <div class="compact-meta"><span>16Q</span><span>~30min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-orange">💎</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Cholecystitis & Cholangitis</div>
-                        <div class="compact-meta"><span>20Q</span><span>~35min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-orange">⚡</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Acute Appendicitis</div>
-                        <div class="compact-meta"><span>18Q</span><span>~35min</span></div>
-                    </div>
-                </a>
-            </div>
-        </section>
+    <!-- NEUROLOGY -->
+    <section class="category-section">
+        <div class="category-header"><div class="category-icon bg-purple">🧠</div><h2 class="category-title">Neurology</h2><span class="category-count">8 modules</span></div>
+        <div class="compact-grid">
+            <a href="deep-dive-player.html?module=stroke-deep-dive" class="compact-card"><div class="compact-icon bg-purple">🧠</div><div class="compact-content"><div class="compact-title">Acute Ischemic Stroke</div><div class="compact-meta"><span>20Q</span><span>~40min</span></div></div></a>
+            <a href="deep-dive-player.html?module=intracranial-hemorrhage-deep-dive" class="compact-card"><div class="compact-icon bg-purple">🩸</div><div class="compact-content"><div class="compact-title">Intracranial Hemorrhage</div><div class="compact-meta"><span>16Q</span><span>~30min</span></div></div></a>
+            <a href="deep-dive-player.html?module=subarachnoid-hemorrhage-deep-dive" class="compact-card"><div class="compact-icon bg-purple">💥</div><div class="compact-content"><div class="compact-title">Subarachnoid Hemorrhage</div><div class="compact-meta"><span>16Q</span><span>~30min</span></div></div></a>
+            <a href="deep-dive-player.html?module=status-epilepticus-deep-dive" class="compact-card"><div class="compact-icon bg-purple">⚡</div><div class="compact-content"><div class="compact-title">Status Epilepticus</div><div class="compact-meta"><span>16Q</span><span>~30min</span></div></div></a>
+            <a href="deep-dive-player.html?module=meningitis-deep-dive" class="compact-card"><div class="compact-icon bg-purple">🦠</div><div class="compact-content"><div class="compact-title">Bacterial Meningitis</div><div class="compact-meta"><span>18Q</span><span>~35min</span></div></div></a>
+            <a href="deep-dive-player.html?module=encephalitis-deep-dive" class="compact-card"><div class="compact-icon bg-purple">🔥</div><div class="compact-content"><div class="compact-title">Encephalitis</div><div class="compact-meta"><span>18Q</span><span>~35min</span></div></div></a>
+            <a href="deep-dive-player.html?module=guillain-barre-deep-dive" class="compact-card"><div class="compact-icon bg-purple">🦵</div><div class="compact-content"><div class="compact-title">Guillain-Barré Syndrome</div><div class="compact-meta"><span>16Q</span><span>~30min</span></div></div></a>
+            <a href="deep-dive-player.html?module=myasthenia-crisis-deep-dive" class="compact-card"><div class="compact-icon bg-purple">💪</div><div class="compact-content"><div class="compact-title">Myasthenic Crisis</div><div class="compact-meta"><span>14Q</span><span>~25min</span></div></div></a>
+        </div>
+    </section>
 
-        <!-- NEUROLOGY -->
-        <section class="category-section">
-            <div class="category-header">
-                <div class="category-icon bg-purple">🧠</div>
-                <h2 class="category-title">Neurology</h2>
-                <span class="category-count">8 modules</span>
-            </div>
-            <div class="compact-grid">
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-purple">🧠</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Acute Ischemic Stroke</div>
-                        <div class="compact-meta"><span>20Q</span><span>~40min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-purple">🩸</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Intracranial Hemorrhage</div>
-                        <div class="compact-meta"><span>16Q</span><span>~30min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-purple">💥</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Subarachnoid Hemorrhage</div>
-                        <div class="compact-meta"><span>16Q</span><span>~30min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-purple">⚡</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Status Epilepticus</div>
-                        <div class="compact-meta"><span>16Q</span><span>~30min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-purple">🦠</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Bacterial Meningitis</div>
-                        <div class="compact-meta"><span>18Q</span><span>~35min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-purple">🔥</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Encephalitis</div>
-                        <div class="compact-meta"><span>18Q</span><span>~35min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-purple">🦵</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Guillain-Barré Syndrome</div>
-                        <div class="compact-meta"><span>16Q</span><span>~30min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-purple">💪</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Myasthenic Crisis</div>
-                        <div class="compact-meta"><span>14Q</span><span>~25min</span></div>
-                    </div>
-                </a>
-            </div>
-        </section>
+    <!-- RENAL -->
+    <section class="category-section">
+        <div class="category-header"><div class="category-icon bg-cyan">💧</div><h2 class="category-title">Renal & Electrolytes</h2><span class="category-count">6 modules</span></div>
+        <div class="compact-grid">
+            <a href="deep-dive-player.html?module=aki-deep-dive" class="compact-card"><div class="compact-icon bg-cyan">💧</div><div class="compact-content"><div class="compact-title">Acute Kidney Injury</div><div class="compact-meta"><span>18Q</span><span>~35min</span></div></div></a>
+            <a href="deep-dive-player.html?module=hyperkalemia-deep-dive" class="compact-card"><div class="compact-icon bg-cyan">⚡</div><div class="compact-content"><div class="compact-title">Hyperkalemia</div><div class="compact-meta"><span>16Q</span><span>~30min</span></div></div></a>
+            <a href="deep-dive-player.html?module=hyponatremia-deep-dive" class="compact-card"><div class="compact-icon bg-cyan">🧂</div><div class="compact-content"><div class="compact-title">Hyponatremia</div><div class="compact-meta"><span>18Q</span><span>~35min</span></div></div></a>
+            <a href="deep-dive-player.html?module=metabolic-acidosis-deep-dive" class="compact-card"><div class="compact-icon bg-cyan">⚗️</div><div class="compact-content"><div class="compact-title">Metabolic Acidosis</div><div class="compact-meta"><span>16Q</span><span>~30min</span></div></div></a>
+            <a href="deep-dive-player.html?module=hypercalcemia-malignancy-deep-dive" class="compact-card"><div class="compact-icon bg-cyan">🦴</div><div class="compact-content"><div class="compact-title">Hypercalcemia of Malignancy</div><div class="compact-meta"><span>14Q</span><span>~25min</span></div></div></a>
+            <a href="deep-dive-player.html?module=rhabdomyolysis-deep-dive" class="compact-card"><div class="compact-icon bg-cyan">🦵</div><div class="compact-content"><div class="compact-title">Rhabdomyolysis</div><div class="compact-meta"><span>16Q</span><span>~30min</span></div></div></a>
+        </div>
+    </section>
 
-        <!-- RENAL & ELECTROLYTES -->
-        <section class="category-section">
-            <div class="category-header">
-                <div class="category-icon bg-cyan">💧</div>
-                <h2 class="category-title">Renal & Electrolytes</h2>
-                <span class="category-count">6 modules</span>
-            </div>
-            <div class="compact-grid">
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-cyan">💧</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Acute Kidney Injury</div>
-                        <div class="compact-meta"><span>18Q</span><span>~35min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-cyan">⚡</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Hyperkalemia</div>
-                        <div class="compact-meta"><span>16Q</span><span>~30min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-cyan">🧂</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Hyponatremia</div>
-                        <div class="compact-meta"><span>18Q</span><span>~35min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-cyan">⚗️</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Metabolic Acidosis</div>
-                        <div class="compact-meta"><span>16Q</span><span>~30min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-cyan">🦴</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Hypercalcemia of Malignancy</div>
-                        <div class="compact-meta"><span>14Q</span><span>~25min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-cyan">🦵</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Rhabdomyolysis</div>
-                        <div class="compact-meta"><span>16Q</span><span>~30min</span></div>
-                    </div>
-                </a>
-            </div>
-        </section>
+    <!-- ENDOCRINOLOGY -->
+    <section class="category-section">
+        <div class="category-header"><div class="category-icon bg-yellow">🍬</div><h2 class="category-title">Endocrinology</h2><span class="category-count">7 modules</span></div>
+        <div class="compact-grid">
+            <a href="deep-dive-player.html?module=dka-deep-dive" class="compact-card"><div class="compact-icon bg-yellow">🍬</div><div class="compact-content"><div class="compact-title">Diabetic Ketoacidosis</div><div class="compact-meta"><span>20Q</span><span>~40min</span></div></div></a>
+            <a href="deep-dive-player.html?module=hhs-deep-dive" class="compact-card"><div class="compact-icon bg-yellow">💧</div><div class="compact-content"><div class="compact-title">HHS</div><div class="compact-meta"><span>16Q</span><span>~30min</span></div></div></a>
+            <a href="deep-dive-player.html?module=hypoglycemia-deep-dive" class="compact-card"><div class="compact-icon bg-yellow">📉</div><div class="compact-content"><div class="compact-title">Hypoglycemia</div><div class="compact-meta"><span>16Q</span><span>~30min</span></div></div></a>
+            <a href="deep-dive-player.html?module=thyroid-storm-deep-dive" class="compact-card"><div class="compact-icon bg-yellow">🔥</div><div class="compact-content"><div class="compact-title">Thyroid Storm</div><div class="compact-meta"><span>16Q</span><span>~30min</span></div></div></a>
+            <a href="deep-dive-player.html?module=myxedema-coma-deep-dive" class="compact-card"><div class="compact-icon bg-yellow">❄️</div><div class="compact-content"><div class="compact-title">Myxedema Coma</div><div class="compact-meta"><span>14Q</span><span>~25min</span></div></div></a>
+            <a href="deep-dive-player.html?module=adrenal-crisis-deep-dive" class="compact-card"><div class="compact-icon bg-yellow">⚠️</div><div class="compact-content"><div class="compact-title">Adrenal Crisis</div><div class="compact-meta"><span>14Q</span><span>~25min</span></div></div></a>
+            <a href="deep-dive-player.html?module=tumor-lysis-syndrome-deep-dive" class="compact-card"><div class="compact-icon bg-yellow">💥</div><div class="compact-content"><div class="compact-title">Tumor Lysis Syndrome</div><div class="compact-meta"><span>14Q</span><span>~25min</span></div></div></a>
+        </div>
+    </section>
 
-        <!-- ENDOCRINOLOGY -->
-        <section class="category-section">
-            <div class="category-header">
-                <div class="category-icon bg-yellow">🍬</div>
-                <h2 class="category-title">Endocrinology</h2>
-                <span class="category-count">7 modules</span>
-            </div>
-            <div class="compact-grid">
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-yellow">🍬</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Diabetic Ketoacidosis</div>
-                        <div class="compact-meta"><span>20Q</span><span>~40min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-yellow">💧</div>
-                    <div class="compact-content">
-                        <div class="compact-title">HHS</div>
-                        <div class="compact-meta"><span>16Q</span><span>~30min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-yellow">📉</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Hypoglycemia</div>
-                        <div class="compact-meta"><span>16Q</span><span>~30min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-yellow">🔥</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Thyroid Storm</div>
-                        <div class="compact-meta"><span>16Q</span><span>~30min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-yellow">❄️</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Myxedema Coma</div>
-                        <div class="compact-meta"><span>14Q</span><span>~25min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-yellow">⚠️</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Adrenal Crisis</div>
-                        <div class="compact-meta"><span>14Q</span><span>~25min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-yellow">💥</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Tumor Lysis Syndrome</div>
-                        <div class="compact-meta"><span>14Q</span><span>~25min</span></div>
-                    </div>
-                </a>
-            </div>
-        </section>
+    <!-- HEMATOLOGY -->
+    <section class="category-section">
+        <div class="category-header"><div class="category-icon bg-pink">🩸</div><h2 class="category-title">Hematology/Oncology</h2><span class="category-count">4 modules</span></div>
+        <div class="compact-grid">
+            <a href="deep-dive-player.html?module=dic-deep-dive" class="compact-card"><div class="compact-icon bg-pink">🩸</div><div class="compact-content"><div class="compact-title">DIC</div><div class="compact-meta"><span>16Q</span><span>~30min</span></div></div></a>
+            <a href="deep-dive-player.html?module=ttp-hus-deep-dive" class="compact-card"><div class="compact-icon bg-pink">🔬</div><div class="compact-content"><div class="compact-title">TTP-HUS</div><div class="compact-meta"><span>16Q</span><span>~30min</span></div></div></a>
+            <a href="deep-dive-player.html?module=neutropenic-fever-deep-dive" class="compact-card"><div class="compact-icon bg-pink">🔥</div><div class="compact-content"><div class="compact-title">Neutropenic Fever</div><div class="compact-meta"><span>16Q</span><span>~30min</span></div></div></a>
+            <a href="deep-dive-player.html?module=tumor-lysis-syndrome-deep-dive" class="compact-card"><div class="compact-icon bg-pink">💥</div><div class="compact-content"><div class="compact-title">Tumor Lysis Syndrome</div><div class="compact-meta"><span>14Q</span><span>~25min</span></div></div></a>
+        </div>
+    </section>
 
-        <!-- HEMATOLOGY -->
-        <section class="category-section">
-            <div class="category-header">
-                <div class="category-icon bg-pink">🩸</div>
-                <h2 class="category-title">Hematology/Oncology</h2>
-                <span class="category-count">4 modules</span>
-            </div>
-            <div class="compact-grid">
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-pink">🩸</div>
-                    <div class="compact-content">
-                        <div class="compact-title">DIC</div>
-                        <div class="compact-meta"><span>16Q</span><span>~30min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-pink">🔬</div>
-                    <div class="compact-content">
-                        <div class="compact-title">TTP-HUS</div>
-                        <div class="compact-meta"><span>16Q</span><span>~30min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-pink">🔥</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Neutropenic Fever</div>
-                        <div class="compact-meta"><span>16Q</span><span>~30min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-pink">💥</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Tumor Lysis Syndrome</div>
-                        <div class="compact-meta"><span>14Q</span><span>~25min</span></div>
-                    </div>
-                </a>
-            </div>
-        </section>
+    <!-- INFECTIOUS DISEASE -->
+    <section class="category-section">
+        <div class="category-header"><div class="category-icon bg-green">🦠</div><h2 class="category-title">Infectious Disease</h2><span class="category-count">9 modules</span></div>
+        <div class="compact-grid">
+            <a href="deep-dive-player.html?module=sepsis-deep-dive" class="compact-card"><div class="compact-icon bg-green">🦠</div><div class="compact-content"><div class="compact-title">Sepsis & Septic Shock</div><div class="compact-meta"><span>22Q</span><span>~45min</span></div></div></a>
+            <a href="deep-dive-player.html?module=pneumonia-deep-dive" class="compact-card"><div class="compact-icon bg-green">🫁</div><div class="compact-content"><div class="compact-title">Community-Acquired Pneumonia</div><div class="compact-meta"><span>18Q</span><span>~35min</span></div></div></a>
+            <a href="deep-dive-player.html?module=uti-pyelonephritis-deep-dive" class="compact-card"><div class="compact-icon bg-green">💧</div><div class="compact-content"><div class="compact-title">UTI & Pyelonephritis</div><div class="compact-meta"><span>18Q</span><span>~35min</span></div></div></a>
+            <a href="deep-dive-player.html?module=cellulitis-abscess-deep-dive" class="compact-card"><div class="compact-icon bg-green">🔴</div><div class="compact-content"><div class="compact-title">Cellulitis & Skin Abscess</div><div class="compact-meta"><span>18Q</span><span>~35min</span></div></div></a>
+            <a href="deep-dive-player.html?module=meningitis-deep-dive" class="compact-card"><div class="compact-icon bg-green">🧠</div><div class="compact-content"><div class="compact-title">Bacterial Meningitis</div><div class="compact-meta"><span>18Q</span><span>~35min</span></div></div></a>
+            <a href="deep-dive-player.html?module=encephalitis-deep-dive" class="compact-card"><div class="compact-icon bg-green">🔥</div><div class="compact-content"><div class="compact-title">Encephalitis</div><div class="compact-meta"><span>18Q</span><span>~35min</span></div></div></a>
+            <a href="deep-dive-player.html?module=infective-endocarditis-deep-dive" class="compact-card"><div class="compact-icon bg-green">🫀</div><div class="compact-content"><div class="compact-title">Infective Endocarditis</div><div class="compact-meta"><span>20Q</span><span>~40min</span></div></div></a>
+            <a href="deep-dive-player.html?module=osteomyelitis-deep-dive" class="compact-card"><div class="compact-icon bg-green">🦴</div><div class="compact-content"><div class="compact-title">Osteomyelitis</div><div class="compact-meta"><span>18Q</span><span>~35min</span></div></div></a>
+            <a href="deep-dive-player.html?module=neutropenic-fever-deep-dive" class="compact-card"><div class="compact-icon bg-green">⚠️</div><div class="compact-content"><div class="compact-title">Neutropenic Fever</div><div class="compact-meta"><span>16Q</span><span>~30min</span></div></div></a>
+        </div>
+    </section>
 
-        <!-- INFECTIOUS DISEASE -->
-        <section class="category-section">
-            <div class="category-header">
-                <div class="category-icon bg-green">🦠</div>
-                <h2 class="category-title">Infectious Disease</h2>
-                <span class="category-count">9 modules</span>
-            </div>
-            <div class="compact-grid">
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-green">🦠</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Sepsis & Septic Shock</div>
-                        <div class="compact-meta"><span>22Q</span><span>~45min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-green">🫁</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Community-Acquired Pneumonia</div>
-                        <div class="compact-meta"><span>18Q</span><span>~35min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-green">💧</div>
-                    <div class="compact-content">
-                        <div class="compact-title">UTI & Pyelonephritis</div>
-                        <div class="compact-meta"><span>18Q</span><span>~35min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-green">🔴</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Cellulitis & Skin Abscess</div>
-                        <div class="compact-meta"><span>18Q</span><span>~35min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-green">🧠</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Bacterial Meningitis</div>
-                        <div class="compact-meta"><span>18Q</span><span>~35min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-green">🔥</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Encephalitis</div>
-                        <div class="compact-meta"><span>18Q</span><span>~35min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-green">🫀</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Infective Endocarditis</div>
-                        <div class="compact-meta"><span>20Q</span><span>~40min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-green">🦴</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Osteomyelitis</div>
-                        <div class="compact-meta"><span>18Q</span><span>~35min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-green">⚠️</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Neutropenic Fever</div>
-                        <div class="compact-meta"><span>16Q</span><span>~30min</span></div>
-                    </div>
-                </a>
-            </div>
-        </section>
+    <!-- ALLERGY & IMMUNOLOGY -->
+    <section class="category-section">
+        <div class="category-header"><div class="category-icon bg-orange">🤧</div><h2 class="category-title">Allergy & Immunology</h2><span class="category-count">14 modules</span></div>
+        <div class="compact-grid">
+            <a href="deep-dive-player.html?module=anaphylaxis-deep-dive" class="compact-card"><div class="compact-icon bg-orange">⚠️</div><div class="compact-content"><div class="compact-title">Anaphylaxis</div><div class="compact-meta"><span>18Q</span><span>~35min</span></div></div></a>
+            <a href="deep-dive-player.html?module=drug-allergy-deep-dive" class="compact-card"><div class="compact-icon bg-orange">💊</div><div class="compact-content"><div class="compact-title">Drug Allergy & Hypersensitivity</div><div class="compact-meta"><span>20Q</span><span>~40min</span></div></div></a>
+            <a href="deep-dive-player.html?module=food-allergy-deep-dive" class="compact-card"><div class="compact-icon bg-orange">🥜</div><div class="compact-content"><div class="compact-title">Food Allergy</div><div class="compact-meta"><span>16Q</span><span>~30min</span></div></div></a>
+            <a href="deep-dive-player.html?module=fpies-deep-dive" class="compact-card"><div class="compact-icon bg-orange">👶</div><div class="compact-content"><div class="compact-title">FPIES</div><div class="compact-meta"><span>14Q</span><span>~25min</span></div></div></a>
+            <a href="deep-dive-player.html?module=venom-allergy-deep-dive" class="compact-card"><div class="compact-icon bg-orange">🐝</div><div class="compact-content"><div class="compact-title">Venom Allergy</div><div class="compact-meta"><span>16Q</span><span>~30min</span></div></div></a>
+            <a href="deep-dive-player.html?module=chronic-urticaria-angioedema-deep-dive" class="compact-card"><div class="compact-icon bg-orange">🔴</div><div class="compact-content"><div class="compact-title">Chronic Urticaria & Angioedema</div><div class="compact-meta"><span>18Q</span><span>~35min</span></div></div></a>
+            <a href="deep-dive-player.html?module=hereditary-angioedema-deep-dive" class="compact-card"><div class="compact-icon bg-orange">😮</div><div class="compact-content"><div class="compact-title">Hereditary Angioedema</div><div class="compact-meta"><span>16Q</span><span>~30min</span></div></div></a>
+            <a href="deep-dive-player.html?module=asthma-phenotyping-biologics-deep-dive" class="compact-card"><div class="compact-icon bg-orange">🫁</div><div class="compact-content"><div class="compact-title">Asthma Phenotyping & Biologics</div><div class="compact-meta"><span>18Q</span><span>~35min</span></div></div></a>
+            <a href="deep-dive-player.html?module=allergic-rhinitis-deep-dive" class="compact-card"><div class="compact-icon bg-orange">🤧</div><div class="compact-content"><div class="compact-title">Allergic Rhinitis</div><div class="compact-meta"><span>16Q</span><span>~30min</span></div></div></a>
+            <a href="deep-dive-player.html?module=atopic-dermatitis-deep-dive" class="compact-card"><div class="compact-icon bg-orange">🧴</div><div class="compact-content"><div class="compact-title">Atopic Dermatitis</div><div class="compact-meta"><span>16Q</span><span>~30min</span></div></div></a>
+            <a href="deep-dive-player.html?module=contact-dermatitis-deep-dive" class="compact-card"><div class="compact-icon bg-orange">✋</div><div class="compact-content"><div class="compact-title">Contact Dermatitis</div><div class="compact-meta"><span>14Q</span><span>~25min</span></div></div></a>
+            <a href="deep-dive-player.html?module=eosinophilia-workup-deep-dive" class="compact-card"><div class="compact-icon bg-orange">🔬</div><div class="compact-content"><div class="compact-title">Eosinophilia Workup</div><div class="compact-meta"><span>16Q</span><span>~30min</span></div></div></a>
+            <a href="deep-dive-player.html?module=mast-cell-disorders-deep-dive" class="compact-card"><div class="compact-icon bg-orange">⭐</div><div class="compact-content"><div class="compact-title">Mast Cell Disorders</div><div class="compact-meta"><span>16Q</span><span>~30min</span></div></div></a>
+            <a href="deep-dive-player.html?module=primary-immunodeficiency-deep-dive" class="compact-card"><div class="compact-icon bg-orange">🛡️</div><div class="compact-content"><div class="compact-title">Primary Immunodeficiency</div><div class="compact-meta"><span>18Q</span><span>~35min</span></div></div></a>
+        </div>
+    </section>
 
-        <!-- ALLERGY & IMMUNOLOGY -->
-        <section class="category-section">
-            <div class="category-header">
-                <div class="category-icon bg-orange">🤧</div>
-                <h2 class="category-title">Allergy & Immunology</h2>
-                <span class="category-count">14 modules</span>
-            </div>
-            <div class="compact-grid">
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-orange">⚠️</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Anaphylaxis</div>
-                        <div class="compact-meta"><span>18Q</span><span>~35min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-orange">💊</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Drug Allergy & Hypersensitivity</div>
-                        <div class="compact-meta"><span>20Q</span><span>~40min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-orange">🥜</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Food Allergy</div>
-                        <div class="compact-meta"><span>16Q</span><span>~30min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-orange">👶</div>
-                    <div class="compact-content">
-                        <div class="compact-title">FPIES</div>
-                        <div class="compact-meta"><span>14Q</span><span>~25min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-orange">🐝</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Venom Allergy</div>
-                        <div class="compact-meta"><span>16Q</span><span>~30min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-orange">🔴</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Chronic Urticaria & Angioedema</div>
-                        <div class="compact-meta"><span>18Q</span><span>~35min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-orange">😮</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Hereditary Angioedema</div>
-                        <div class="compact-meta"><span>16Q</span><span>~30min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-orange">🫁</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Asthma Phenotyping & Biologics</div>
-                        <div class="compact-meta"><span>18Q</span><span>~35min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-orange">🤧</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Allergic Rhinitis</div>
-                        <div class="compact-meta"><span>16Q</span><span>~30min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-orange">🧴</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Atopic Dermatitis</div>
-                        <div class="compact-meta"><span>16Q</span><span>~30min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-orange">✋</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Contact Dermatitis</div>
-                        <div class="compact-meta"><span>14Q</span><span>~25min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-orange">🔬</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Eosinophilia Workup</div>
-                        <div class="compact-meta"><span>16Q</span><span>~30min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-orange">⭐</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Mast Cell Disorders</div>
-                        <div class="compact-meta"><span>16Q</span><span>~30min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-orange">🛡️</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Primary Immunodeficiency</div>
-                        <div class="compact-meta"><span>18Q</span><span>~35min</span></div>
-                    </div>
-                </a>
-            </div>
-        </section>
+    <!-- TOXICOLOGY -->
+    <section class="category-section">
+        <div class="category-header"><div class="category-icon bg-purple">☠️</div><h2 class="category-title">Toxicology</h2><span class="category-count">4 modules</span></div>
+        <div class="compact-grid">
+            <a href="deep-dive-player.html?module=opioid-overdose-deep-dive" class="compact-card"><div class="compact-icon bg-purple">💉</div><div class="compact-content"><div class="compact-title">Opioid Overdose</div><div class="compact-meta"><span>14Q</span><span>~25min</span></div></div></a>
+            <a href="deep-dive-player.html?module=alcohol-withdrawal-deep-dive" class="compact-card"><div class="compact-icon bg-purple">🍺</div><div class="compact-content"><div class="compact-title">Alcohol Withdrawal</div><div class="compact-meta"><span>16Q</span><span>~30min</span></div></div></a>
+            <a href="deep-dive-player.html?module=serotonin-syndrome-deep-dive" class="compact-card"><div class="compact-icon bg-purple">⚡</div><div class="compact-content"><div class="compact-title">Serotonin Syndrome</div><div class="compact-meta"><span>14Q</span><span>~25min</span></div></div></a>
+            <a href="deep-dive-player.html?module=neuroleptic-malignant-syndrome-deep-dive" class="compact-card"><div class="compact-icon bg-purple">🔥</div><div class="compact-content"><div class="compact-title">Neuroleptic Malignant Syndrome</div><div class="compact-meta"><span>14Q</span><span>~25min</span></div></div></a>
+        </div>
+    </section>
 
-        <!-- TOXICOLOGY -->
-        <section class="category-section">
-            <div class="category-header">
-                <div class="category-icon bg-purple">☠️</div>
-                <h2 class="category-title">Toxicology</h2>
-                <span class="category-count">4 modules</span>
-            </div>
-            <div class="compact-grid">
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-purple">💉</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Opioid Overdose</div>
-                        <div class="compact-meta"><span>14Q</span><span>~25min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-purple">🍺</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Alcohol Withdrawal</div>
-                        <div class="compact-meta"><span>16Q</span><span>~30min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-purple">⚡</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Serotonin Syndrome</div>
-                        <div class="compact-meta"><span>14Q</span><span>~25min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-purple">🔥</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Neuroleptic Malignant Syndrome</div>
-                        <div class="compact-meta"><span>14Q</span><span>~25min</span></div>
-                    </div>
-                </a>
-            </div>
-        </section>
+    <!-- CRITICAL CARE -->
+    <section class="category-section">
+        <div class="category-header"><div class="category-icon bg-red">🚨</div><h2 class="category-title">Critical Care</h2><span class="category-count">3 modules</span></div>
+        <div class="compact-grid">
+            <a href="deep-dive-player.html?module=shock-deep-dive" class="compact-card"><div class="compact-icon bg-red">📉</div><div class="compact-content"><div class="compact-title">Shock</div><div class="compact-meta"><span>18Q</span><span>~35min</span></div></div></a>
+            <a href="deep-dive-player.html?module=tension-pneumothorax-deep-dive" class="compact-card"><div class="compact-icon bg-red">💨</div><div class="compact-content"><div class="compact-title">Tension Pneumothorax</div><div class="compact-meta"><span>12Q</span><span>~20min</span></div></div></a>
+            <a href="deep-dive-player.html?module=malignant-hyperthermia-deep-dive" class="compact-card"><div class="compact-icon bg-red">🔥</div><div class="compact-content"><div class="compact-title">Malignant Hyperthermia</div><div class="compact-meta"><span>14Q</span><span>~25min</span></div></div></a>
+        </div>
+    </section>
 
-        <!-- CRITICAL CARE -->
-        <section class="category-section">
-            <div class="category-header">
-                <div class="category-icon bg-red">🚨</div>
-                <h2 class="category-title">Critical Care</h2>
-                <span class="category-count">3 modules</span>
-            </div>
-            <div class="compact-grid">
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-red">📉</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Shock</div>
-                        <div class="compact-meta"><span>18Q</span><span>~35min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-red">💨</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Tension Pneumothorax</div>
-                        <div class="compact-meta"><span>12Q</span><span>~20min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-red">🔥</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Malignant Hyperthermia</div>
-                        <div class="compact-meta"><span>14Q</span><span>~25min</span></div>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <!-- ENT -->
-        <section class="category-section">
-            <div class="category-header">
-                <div class="category-icon bg-cyan">👃</div>
-                <h2 class="category-title">ENT</h2>
-                <span class="category-count">2 modules</span>
-            </div>
-            <div class="compact-grid">
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-cyan">👃</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Acute Sinusitis</div>
-                        <div class="compact-meta"><span>16Q</span><span>~30min</span></div>
-                    </div>
-                </a>
-                <a href="#" class="compact-card">
-                    <div class="compact-icon bg-cyan">🤧</div>
-                    <div class="compact-content">
-                        <div class="compact-title">Allergic Rhinitis</div>
-                        <div class="compact-meta"><span>16Q</span><span>~30min</span></div>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-    </main>
+    <!-- ENT -->
+    <section class="category-section">
+        <div class="category-header"><div class="category-icon bg-cyan">👃</div><h2 class="category-title">ENT</h2><span class="category-count">2 modules</span></div>
+        <div class="compact-grid">
+            <a href="deep-dive-player.html?module=acute-sinusitis-deep-dive" class="compact-card"><div class="compact-icon bg-cyan">👃</div><div class="compact-content"><div class="compact-title">Acute Sinusitis</div><div class="compact-meta"><span>16Q</span><span>~30min</span></div></div></a>
+            <a href="deep-dive-player.html?module=allergic-rhinitis-deep-dive" class="compact-card"><div class="compact-icon bg-cyan">🤧</div><div class="compact-content"><div class="compact-title">Allergic Rhinitis</div><div class="compact-meta"><span>16Q</span><span>~30min</span></div></div></a>
+        </div>
+    </section>
+</main>
 </body>
 </html>

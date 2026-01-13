@@ -1119,12 +1119,17 @@
         }
 
         async function loadDeepDiveData() {
-            // In production, this would fetch from a JSON file
-            // For now, using embedded sample data
+            // Get module from URL parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const moduleId = urlParams.get('module') || 'acs-deep-dive-complete';
+            
             try {
-                const response = await fetch('acs-deep-dive-complete.json');
+                // Try to fetch from data/deep-dives folder
+                const response = await fetch(`data/deep-dives/${moduleId}.json`);
+                if (!response.ok) throw new Error('Module not found');
                 return await response.json();
             } catch (e) {
+                console.error('Failed to load module:', moduleId, e);
                 // Fallback to embedded sample
                 return getSampleData();
             }
