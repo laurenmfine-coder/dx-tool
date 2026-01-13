@@ -554,7 +554,7 @@
             // Show last 5 sessions
             const recent = sessions.slice(-5).reverse();
             list.innerHTML = recent.map(s => `
-                <a href="coach-session.html?id=${s.id}" class="session-item">
+                <a href="mentor-chat.html?id=${s.id}" class="session-item">
                     <div class="session-icon">${s.icon || '📋'}</div>
                     <div class="session-info">
                         <h4>${s.title}</h4>
@@ -589,8 +589,8 @@
 
         // ============ START CASE ============
         function startCase(caseId) {
-            // In production, this would navigate to the coaching interface
-            window.location.href = `coach-session.html?case=${caseId}`;
+            // Navigate to the mentor chat interface with the selected case
+            window.location.href = `mentor-chat.html?case=${caseId}`;
         }
 
         // ============ HELPERS ============
