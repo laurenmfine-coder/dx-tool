@@ -121,17 +121,8 @@
       
       .dx-unified-nav.dark .dx-nav-logo { color: #f1f5f9; }
       
-      .dx-nav-logo-icon {
-        width: 36px;
-        height: 36px;
-        background: #14b8a6;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-weight: 700;
-        font-size: 0.875rem;
+      .dx-nav-logo svg {
+        flex-shrink: 0;
       }
       
       .dx-nav-logo-accent { color: #14b8a6; }
@@ -346,12 +337,22 @@
     const streak = parseInt(localStorage.getItem('dx-streak')) || config.streak || 0;
     const initials = localStorage.getItem('dx-user-initials') || config.userInitials || 'U';
     
+    // Stethoscope X logo SVG (inline for reliability)
+    const logoSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="28" height="28">
+      <line x1="12" y1="8" x2="28" y2="32" stroke="#14b8a6" stroke-width="3.5" stroke-linecap="round"/>
+      <ellipse cx="10.5" cy="6" rx="2.5" ry="4" transform="rotate(-28 10.5 6)" fill="#14b8a6"/>
+      <path d="M 28 8 L 18 22 Q 14 28 14 34 Q 14 40 19 44 Q 24 48 24 52" stroke="#14b8a6" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+      <ellipse cx="29.5" cy="6" rx="2.5" ry="4" transform="rotate(28 29.5 6)" fill="#14b8a6"/>
+      <circle cx="24" cy="44" r="5" fill="none" stroke="#14b8a6" stroke-width="2.5"/>
+      <circle cx="24" cy="44" r="2" fill="#14b8a6"/>
+    </svg>`;
+    
     return `
       <div class="dx-unified-nav ${config.theme === 'dark' ? 'dark' : ''}">
         <div class="dx-nav-container">
           <div class="dx-nav-left">
             <a href="${PATHS.home}" class="dx-nav-logo">
-              <div class="dx-nav-logo-icon">Rx</div>
+              ${logoSVG}
               <span>Reason<span class="dx-nav-logo-accent">Dx</span></span>
             </a>
             
