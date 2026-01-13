@@ -3,856 +3,614 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dx Learning Ecosystem - Dashboard</title>
+    <title>CoachDx - AI Clinical Mentor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1E3A5F;
-            --primary-light: #2563EB;
-            --secondary: #10B981;
-            --warning: #F59E0B;
-            --danger: #EF4444;
-            --purple: #8B5CF6;
-            --bg: #F8FAFC;
-            --card-bg: #FFFFFF;
-            --text: #1F2937;
-            --text-light: #6B7280;
-            --border: #E5E7EB;
+            --primary: #14b8a6;
+            --primary-dark: #0d9488;
+            --primary-light: #ccfbf1;
+            --secondary: #3b82f6;
+            --secondary-light: #dbeafe;
+            --success: #10b981;
+            --success-light: #d1fae5;
+            --warning: #f59e0b;
+            --warning-light: #fef3c7;
+            --error: #ef4444;
+            --bg: #f8fafc;
+            --bg-card: #ffffff;
+            --text: #1e293b;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --border: #e2e8f0;
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            --shadow: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 25px -5px rgba(0,0,0,0.1);
         }
-        
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg);
-            min-height: 100vh;
             color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
         }
-        
-        /* Top Navigation */
-        .top-nav {
-            background: var(--primary);
-            color: white;
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.3rem;
-            font-weight: 600;
-        }
-        
-        .nav-brand span {
-            opacity: 0.8;
-            font-weight: 400;
-        }
-        
-        .nav-user {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .user-level {
-            background: rgba(255,255,255,0.15);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .level-select {
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.3);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.85rem;
-        }
-        
-        .level-select option {
-            background: var(--primary);
-            color: white;
-        }
-        
-        /* Main Container */
-        .main-container {
-            max-width: 1400px;
+
+        /* Main Content */
+        .main {
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 30px;
+            padding: 2rem;
         }
-        
-        /* Welcome Section */
-        .welcome-section {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            border-radius: 16px;
-            padding: 30px;
-            color: white;
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        
-        .welcome-text h1 {
-            font-size: 1.8rem;
-            margin-bottom: 8px;
-        }
-        
-        .welcome-text p {
-            opacity: 0.9;
-            font-size: 1rem;
-        }
-        
-        .welcome-tagline {
-            font-style: italic;
-            opacity: 0.85;
-            margin-top: 8px;
-            font-size: 0.95rem;
-        }
-        
-        .coach-badge {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            background: rgba(255,255,255,0.1);
-            padding: 15px 25px;
-            border-radius: 12px;
-        }
-        
-        .coach-avatar {
-            font-size: 3rem;
-        }
-        
-        .coach-info h3 {
-            font-size: 1.1rem;
-            margin-bottom: 4px;
-        }
-        
-        .coach-info p {
-            opacity: 0.8;
-            font-size: 0.9rem;
-        }
-        
-        /* Training Level Section */
-        .level-section {
-            background: white;
-            border-radius: 16px;
-            padding: 25px;
-            margin-bottom: 30px;
-            border: 1px solid var(--border);
-        }
-        
-        .level-section h3 {
-            color: var(--primary);
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-        }
-        
-        .level-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 12px;
-        }
-        
-        .level-btn {
-            padding: 15px 20px;
-            border: 2px solid var(--border);
-            border-radius: 10px;
-            background: white;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-align: left;
-        }
-        
-        .level-btn:hover {
-            border-color: var(--primary-light);
-            background: #F0F9FF;
-        }
-        
-        .level-btn.selected {
-            border-color: var(--primary);
-            background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
-        }
-        
-        .level-btn strong {
-            display: block;
-            color: var(--primary);
-            margin-bottom: 4px;
-        }
-        
-        .level-btn span {
-            font-size: 0.85rem;
-            color: var(--text-light);
-        }
-        
-        /* Specialty Interest Section */
-        .specialty-section {
-            background: white;
-            border-radius: 16px;
-            padding: 25px;
-            margin-bottom: 30px;
-            border: 1px solid var(--border);
-        }
-        
-        .specialty-section h3 {
-            color: var(--primary);
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-        }
-        
-        .specialty-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .specialty-btn {
-            padding: 10px 18px;
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            background: white;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-size: 0.9rem;
-        }
-        
-        .specialty-btn:hover {
-            border-color: var(--purple);
-            background: #F5F3FF;
-        }
-        
-        .specialty-btn.selected {
-            border-color: var(--purple);
-            background: var(--purple);
-            color: white;
-        }
-        
-        /* SBAR Training Section */
-        .sbar-section {
-            background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
-            border-radius: 16px;
-            padding: 25px;
-            margin-bottom: 30px;
-            border: 1px solid #F59E0B;
-        }
-        
-        .sbar-section h3 {
-            color: #92400E;
-            margin-bottom: 10px;
-        }
-        
-        .sbar-section p {
-            color: #78350F;
-            margin-bottom: 15px;
-            font-size: 0.95rem;
-        }
-        
-        .sbar-launch-btn {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            background: white;
-            border: 2px solid #F59E0B;
-            border-radius: 12px;
-            padding: 15px 25px;
-            cursor: pointer;
-            transition: all 0.2s;
-            width: 100%;
-            max-width: 400px;
-        }
-        
-        .sbar-launch-btn:hover {
-            background: #FFFBEB;
-            transform: translateX(5px);
-        }
-        
-        .sbar-btn-icon {
-            font-size: 1.5rem;
-        }
-        
-        .sbar-btn-text {
-            flex: 1;
-            text-align: left;
-        }
-        
-        .sbar-btn-text strong {
-            display: block;
-            color: #92400E;
-        }
-        
-        .sbar-btn-text small {
-            color: #A16207;
-            font-size: 0.85rem;
-        }
-        
-        .sbar-btn-arrow {
-            font-size: 1.2rem;
-            color: #F59E0B;
-        }
-        
-        /* Platform Cards */
-        .platforms-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-        
-        .platform-card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            transition: all 0.3s;
-        }
-        
-        .platform-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-        }
-        
-        .platform-header {
-            padding: 25px;
-            position: relative;
-        }
-        
-        .platform-card.coachdx .platform-header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            color: white;
-        }
-        
-        .platform-card.reasondx .platform-header {
-            background: linear-gradient(135deg, var(--secondary) 0%, #059669 100%);
-            color: white;
-        }
-        
-        .platform-card.mechanismdx .platform-header {
-            background: linear-gradient(135deg, var(--purple) 0%, #7C3AED 100%);
-            color: white;
-        }
-        
-        .platform-icon {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-        
-        .platform-header h2 {
-            font-size: 1.4rem;
-            margin-bottom: 8px;
-        }
-        
-        .platform-header p {
-            opacity: 0.9;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-        
-        .platform-stats {
-            display: flex;
-            padding: 15px 25px;
-            background: #F9FAFB;
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .stat {
-            flex: 1;
+
+        /* Page Header */
+        .page-header {
             text-align: center;
+            margin-bottom: 2.5rem;
         }
-        
+
+        .page-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem 1.5rem;
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            min-width: 120px;
+        }
+
         .stat-value {
-            font-size: 1.3rem;
+            font-size: 1.75rem;
             font-weight: 700;
             color: var(--primary);
         }
-        
+
         .stat-label {
             font-size: 0.8rem;
-            color: var(--text-light);
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-        
-        .platform-actions {
-            padding: 20px 25px;
+
+        /* How It Works */
+        .how-it-works {
+            background: linear-gradient(135deg, var(--primary-light) 0%, #f0fdfa 100%);
+            border-radius: var(--radius-xl);
+            padding: 1.5rem 2rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid #99f6e4;
         }
-        
-        .platform-btn {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
+
+        .how-it-works h3 {
             font-size: 1rem;
             font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-decoration: none;
-            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
         }
-        
-        .platform-card.coachdx .platform-btn {
+
+        .steps {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .step-num {
+            width: 32px;
+            height: 32px;
             background: var(--primary);
             color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.875rem;
+            flex-shrink: 0;
         }
-        
-        .platform-card.reasondx .platform-btn {
-            background: var(--secondary);
-            color: white;
+
+        .step-text {
+            font-size: 0.9rem;
+            color: var(--text);
         }
-        
-        .platform-card.mechanismdx .platform-btn {
-            background: var(--purple);
-            color: white;
+
+        /* Section Title */
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-        
-        .platform-btn:hover {
-            transform: scale(1.02);
-            filter: brightness(1.1);
-        }
-        
-        /* Recommended Cases */
-        .recommended-section {
-            background: white;
-            border-radius: 16px;
-            padding: 25px;
-            border: 1px solid var(--border);
-        }
-        
-        .recommended-section h3 {
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-        
+
+        /* Case Grid */
         .cases-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 3rem;
         }
-        
+
         .case-card {
+            background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 18px;
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
             cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .case-card:hover {
-            border-color: var(--primary-light);
-            background: #F0F9FF;
-        }
-        
-        .case-card h4 {
-            color: var(--primary);
-            margin-bottom: 8px;
-            font-size: 1rem;
-        }
-        
-        .case-card p {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            margin-bottom: 12px;
-        }
-        
-        .case-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-        
-        .tag {
-            background: #E0E7FF;
-            color: #3730A3;
-            padding: 3px 10px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-        }
-        
-        .tag.sbar {
-            background: #FEF3C7;
-            color: #92400E;
-        }
-        
-        .tag.ai {
-            background: #D1FAE5;
-            color: #065F46;
-        }
-        
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 30px;
-            color: var(--text-light);
-            font-size: 0.9rem;
-        }
-        
-        .footer a {
-            color: var(--primary);
+            transition: all 0.2s ease;
             text-decoration: none;
+            color: inherit;
+            display: block;
         }
-        
+
+        .case-card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .case-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .case-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--primary-light);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .case-info h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .case-category {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .case-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .case-meta {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .case-tag {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.625rem;
+            background: var(--bg);
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+        }
+
+        .case-tag.difficulty-beginner { background: var(--success-light); color: #065f46; }
+        .case-tag.difficulty-intermediate { background: var(--warning-light); color: #92400e; }
+        .case-tag.difficulty-advanced { background: #fee2e2; color: #991b1b; }
+
+        /* Start Button */
+        .case-start {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .case-start:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Recent Sessions */
+        .recent-sessions {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: 1.5rem;
+        }
+
+        .session-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .session-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.15s;
+        }
+
+        .session-item:hover {
+            background: var(--primary-light);
+        }
+
+        .session-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-card);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .session-info {
+            flex: 1;
+        }
+
+        .session-info h4 {
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.125rem;
+        }
+
+        .session-info p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .session-score {
+            text-align: right;
+        }
+
+        .session-score .score {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--success);
+        }
+
+        .session-score .date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .empty-sessions {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+        }
+
+        .empty-sessions-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
-            .top-nav {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
-            }
-            
-            .welcome-section {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .platforms-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .level-grid {
-                grid-template-columns: 1fr;
-            }
+            .main { padding: 1rem; }
+            .stats-bar { gap: 1rem; }
+            .stat-item { min-width: 100px; padding: 0.75rem 1rem; }
+            .steps { flex-direction: column; gap: 1rem; }
+            .cases-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-<!-- Dx Ecosystem Navigation -->
-<nav style="background: linear-gradient(135deg, #1E3A5F 0%, #0f172a 100%); padding: 12px 24px; border-bottom: 2px solid #334155;">
-    <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
-        <a href="../index.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: #fff;">
-            <span style="font-size: 24px;">🏥</span>
-            <span style="font-size: 16px; font-weight: 600;">Dx Learning Ecosystem</span>
-        </a>
-        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <a href="../index.html" style="display: flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: rgba(255,255,255,0.8); font-size: 13px;">🏠 Home</a>
-            <a href="../mechanism/index.html" style="display: flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: rgba(255,255,255,0.8); font-size: 13px;">📚 MechanismDx</a>
-            <a href="../ReasonDx/training.html" style="display: flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: rgba(255,255,255,0.8); font-size: 13px;">🔬 ReasonDx</a>
-            <a href="coachdx-dashboard.html" style="display: flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #c4b5fd; font-size: 13px; background: rgba(124,58,237,0.3);">🧠 CoachDx</a>
-        </div>
-    </div>
-</nav>
+    <!-- Unified Navigation -->
+    <div id="dx-nav" data-active="review"></div>
 
-    <!-- Top Navigation -->
-    <nav class="top-nav">
-        <div class="nav-brand">
-            🏥 Dx Learning Ecosystem <span>| Dashboard</span>
+    <main class="main">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>🤖 CoachDx</h1>
+            <p>Practice clinical reasoning with an AI attending. Present cases, answer questions, and get real-time feedback.</p>
         </div>
-        <div class="nav-user">
-            <div class="user-level">
-                <span>🩺</span>
-                <span>Medical Student</span>
+
+        <!-- Stats -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-value" id="totalSessions">0</div>
+                <div class="stat-label">Sessions</div>
             </div>
-            <select class="level-select" id="levelSelect" onchange="changeLevel(this.value)">
-                <option value="m1-m2">M1-M2 (Pre-Clinical)</option>
-                <option value="m3" selected>M3 (Clerkships)</option>
-                <option value="m4-subi">M4 / Sub-I</option>
-            </select>
-        </div>
-    </nav>
-    
-    <!-- Main Container -->
-    <div class="main-container">
-        <!-- Welcome Section -->
-        <div class="welcome-section">
-            <div class="welcome-text">
-                <h1 id="welcomeMessage">Welcome back!</h1>
-                <p>Practice thinking, speaking, and deciding like a clinician.</p>
-                <p class="welcome-tagline">"Medical education teaches what to know. We teach how to think when it matters."</p>
+            <div class="stat-item">
+                <div class="stat-value" id="avgScore">—</div>
+                <div class="stat-label">Avg Score</div>
             </div>
-            <div class="coach-badge">
-                <div class="coach-avatar">👩‍⚕️</div>
-                <div class="coach-info">
-                    <h3>Dr. Sarah Chen</h3>
-                    <p>Your Attending Mentor</p>
-                </div>
+            <div class="stat-item">
+                <div class="stat-value" id="casesCompleted">0</div>
+                <div class="stat-label">Cases Done</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="streak">0</div>
+                <div class="stat-label">Day Streak</div>
             </div>
         </div>
-        
-        <!-- Training Level Section -->
-        <div class="level-section">
-            <h3>📚 Your Training Level</h3>
-            <div class="level-grid">
-                <button class="level-btn" data-level="m1-m2" onclick="selectLevel('m1-m2')">
-                    <strong>M1-M2</strong>
-                    <span>Mechanisms, basic reasoning, OSCE prep</span>
-                </button>
-                <button class="level-btn selected" data-level="m3" onclick="selectLevel('m3')">
-                    <strong>M3 Clerkships</strong>
-                    <span>Oral presentations, clinical reasoning, shelf prep</span>
-                </button>
-                <button class="level-btn" data-level="m4-subi" onclick="selectLevel('m4-subi')">
-                    <strong>M4 / Sub-I</strong>
-                    <span>Independent reasoning, complex cases, teaching</span>
-                </button>
-            </div>
-        </div>
-        
-        <!-- Specialty Interest Section -->
-        <div class="specialty-section">
-            <h3>🎯 Specialty Interest (Optional)</h3>
-            <div class="specialty-grid">
-                <button class="specialty-btn selected" data-specialty="im">Internal Medicine</button>
-                <button class="specialty-btn" data-specialty="em">Emergency Medicine</button>
-                <button class="specialty-btn" data-specialty="surgery">Surgery</button>
-                <button class="specialty-btn" data-specialty="peds">Pediatrics</button>
-                <button class="specialty-btn" data-specialty="obgyn">OB/GYN</button>
-                <button class="specialty-btn" data-specialty="psych">Psychiatry</button>
-                <button class="specialty-btn" data-specialty="fm">Family Medicine</button>
-                <button class="specialty-btn" data-specialty="allergy">Allergy/Immunology</button>
-            </div>
-        </div>
-        
-        <!-- SBAR Training Section -->
-        <div class="sbar-section">
-            <h3>📞 Communication Practice</h3>
-            <p>Practice oral presentations, consult calls, and patient explanations with AI feedback. Sound confident on rounds—not just prepared.</p>
-            <button class="sbar-launch-btn" onclick="launchSBAR()">
-                <span class="sbar-btn-icon">🎯</span>
-                <span class="sbar-btn-text">
-                    <strong>Start Communication Practice</strong>
-                    <small>Oral presentations, consult calls, patient education</small>
-                </span>
-                <span class="sbar-btn-arrow">→</span>
-            </button>
-        </div>
-        
-        <!-- Platform Cards -->
-        <div class="platforms-grid">
-            <!-- CoachDx -->
-            <div class="platform-card coachdx">
-                <div class="platform-header">
-                    <div class="platform-icon">🧠</div>
-                    <h2>CoachDx</h2>
-                    <p>AI-powered Socratic coaching. Your mentor asks guiding questions to build deeper clinical reasoning—not just recall.</p>
+
+        <!-- How It Works -->
+        <div class="how-it-works">
+            <h3>💡 How It Works</h3>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="step-text">Choose a clinical scenario below</div>
                 </div>
-                <div class="platform-stats">
-                    <div class="stat">
-                        <div class="stat-value" id="coachdxCases">200+</div>
-                        <div class="stat-label">Cases</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">AI</div>
-                        <div class="stat-label">Feedback</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">∞</div>
-                        <div class="stat-label">Practice</div>
-                    </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="step-text">Present the case to your AI attending</div>
                 </div>
-                <div class="platform-actions">
-                    <a href="case-library.html" class="platform-btn">Start Coaching →</a>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="step-text">Answer questions & build your reasoning</div>
                 </div>
-            </div>
-            
-            <!-- ReasonDx -->
-            <div class="platform-card reasondx">
-                <div class="platform-header">
-                    <div class="platform-icon">🔬</div>
-                    <h2>ReasonDx</h2>
-                    <p>Structured clinical reasoning cases. Practice the diagnostic process step-by-step with evidence-based feedback.</p>
-                </div>
-                <div class="platform-stats">
-                    <div class="stat">
-                        <div class="stat-value" id="reasondxCases">200+</div>
-                        <div class="stat-label">Cases</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">15</div>
-                        <div class="stat-label">Systems</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">📊</div>
-                        <div class="stat-label">Progress</div>
-                    </div>
-                </div>
-                <div class="platform-actions">
-                    <a href="../ReasonDx/training.html" class="platform-btn">Start Reasoning →</a>
-                </div>
-            </div>
-            
-            <!-- MechanismDx -->
-            <div class="platform-card mechanismdx">
-                <div class="platform-header">
-                    <div class="platform-icon">📚</div>
-                    <h2>MechanismDx</h2>
-                    <p>Build foundational knowledge with mechanism-based learning. Understand the "why" behind clinical findings.</p>
-                </div>
-                <div class="platform-stats">
-                    <div class="stat">
-                        <div class="stat-value">35+</div>
-                        <div class="stat-label">Modules</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">500+</div>
-                        <div class="stat-label">Concepts</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">🔗</div>
-                        <div class="stat-label">Linked</div>
-                    </div>
-                </div>
-                <div class="platform-actions">
-                    <a href="../mechanism/index.html" class="platform-btn">Start Learning →</a>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div class="step-text">Get feedback on your clinical thinking</div>
                 </div>
             </div>
         </div>
-        
-        <!-- Recommended Cases -->
-        <div class="recommended-section">
-            <h3>📋 Recommended for You</h3>
-            <div class="cases-grid" id="recommendedCases">
-                <!-- Populated by JavaScript based on level -->
+
+        <!-- Available Cases -->
+        <h2 class="section-title">🎯 Choose a Scenario</h2>
+        <div class="cases-grid" id="casesGrid">
+            <!-- Populated by JS -->
+        </div>
+
+        <!-- Recent Sessions -->
+        <h2 class="section-title">📋 Recent Sessions</h2>
+        <div class="recent-sessions">
+            <div class="session-list" id="sessionList">
+                <!-- Populated by JS -->
             </div>
         </div>
-    </div>
-    
-    <footer class="footer">
-        <p>Dx Learning Ecosystem | Created by <a href="#">Lauren Fine, MD, FAAAAI</a></p>
-        <p>Nova Southeastern University Dr. Kiran C. Patel College of Allopathic Medicine</p>
-    </footer>
-    
+    </main>
+
+    <!-- Unified Navigation Script -->
+    <script src="../dx-nav.js"></script>
+
     <script>
-        // Training level configurations
-        const levelConfig = {
-            'm1-m2': {
-                name: 'M1-M2 (Pre-Clinical)',
-                description: 'Mechanisms, basic reasoning, OSCE prep',
-                recommendedCases: [
-                    { title: 'Heart Sounds & Murmurs', desc: 'Identify and explain cardiac exam findings', tags: ['Cardiology', 'Physical Exam'] },
-                    { title: 'Respiratory Patterns', desc: 'Connect lung sounds to underlying pathology', tags: ['Pulmonary', 'Mechanism'] },
-                    { title: 'Abdominal Pain Approach', desc: 'Systematic approach to the acute abdomen', tags: ['GI', 'Framework'], ai: true },
-                    { title: 'OSCE: History Taking', desc: 'Practice structured patient interviews', tags: ['Communication', 'OSCE'], sbar: true },
-                    { title: 'Basic ECG Interpretation', desc: 'Recognize common rhythms and patterns', tags: ['Cardiology', 'High-Yield'] },
-                    { title: 'Anaphylaxis Recognition', desc: 'Identify and respond to allergic emergencies', tags: ['Allergy', 'Emergency'] }
-                ]
+        // ============ CASE DATA ============
+        const CASES = [
+            {
+                id: 'sepsis-workup',
+                title: 'Sepsis Workup',
+                category: 'Critical Care',
+                icon: '🦠',
+                description: 'A 68-year-old with fever, hypotension, and altered mental status. Work through the sepsis bundle.',
+                difficulty: 'intermediate',
+                duration: '15-20 min',
+                tags: ['Sepsis', 'qSOFA', 'Lactate']
             },
-            'm3': {
-                name: 'M3 (Clerkships)',
-                description: 'Oral presentations, clinical reasoning, shelf prep',
-                recommendedCases: [
-                    { title: 'Chest Pain - ACS Evaluation', desc: 'Risk stratification and initial workup', tags: ['Cardiology', 'High-Yield'], ai: true },
-                    { title: 'Acute Dyspnea Workup', desc: 'Differentiate CHF vs PE vs pneumonia', tags: ['Pulmonary', 'DDx'], sbar: true },
-                    { title: 'Altered Mental Status', desc: 'Systematic approach to AMS in elderly', tags: ['Neurology', 'Geriatrics'] },
-                    { title: 'Oral Presentation Practice', desc: 'Present a patient like an intern', tags: ['Communication', 'Rounds'], sbar: true },
-                    { title: 'Drug Allergy Evaluation', desc: 'Penicillin allergy history and delabeling', tags: ['Allergy', 'ID'] },
-                    { title: 'Post-Anaphylaxis Workup', desc: 'Component testing and management plan', tags: ['Allergy', 'Emergency'], ai: true }
-                ]
+            {
+                id: 'chest-pain-acs',
+                title: 'Chest Pain - ACS Evaluation',
+                category: 'Cardiology',
+                icon: '🫀',
+                description: 'A 55-year-old presents with crushing substernal chest pain. Risk stratify and manage.',
+                difficulty: 'intermediate',
+                duration: '15-20 min',
+                tags: ['ACS', 'Troponin', 'HEART Score']
             },
-            'm4-subi': {
-                name: 'M4 / Sub-I',
-                description: 'Independent reasoning, complex cases, teaching',
-                recommendedCases: [
-                    { title: 'Diagnostic Dilemma', desc: 'When common things aren\'t—anchoring bias', tags: ['Advanced', 'Metacognition'], ai: true },
-                    { title: 'Multi-Organ Failure', desc: 'Prioritization and systems thinking', tags: ['ICU', 'Critical'] },
-                    { title: 'Leading a Family Meeting', desc: 'Goals of care discussion', tags: ['Communication', 'Ethics'], sbar: true },
-                    { title: 'Teaching a Concept', desc: 'Explain physiology to an M3', tags: ['Teaching', 'Leadership'] },
-                    { title: 'Severe Asthma Phenotyping', desc: 'Biologics selection and advanced management', tags: ['Allergy', 'Pulmonary'] },
-                    { title: 'Immunodeficiency Workup', desc: 'CVID diagnosis and IVIG management', tags: ['Allergy', 'Hematology'], ai: true }
-                ]
+            {
+                id: 'dyspnea-workup',
+                title: 'Acute Dyspnea',
+                category: 'Pulmonary',
+                icon: '🫁',
+                description: 'A 72-year-old with sudden shortness of breath. Differentiate PE, CHF, and pneumonia.',
+                difficulty: 'intermediate',
+                duration: '20 min',
+                tags: ['PE', 'CHF', 'Wells Score']
+            },
+            {
+                id: 'anaphylaxis',
+                title: 'Anaphylaxis Management',
+                category: 'Allergy/Immunology',
+                icon: '🚨',
+                description: 'A patient develops urticaria, angioedema, and hypotension after medication administration.',
+                difficulty: 'beginner',
+                duration: '10-15 min',
+                tags: ['Anaphylaxis', 'Epinephrine', 'Airway']
+            },
+            {
+                id: 'drug-allergy',
+                title: 'Drug Allergy Evaluation',
+                category: 'Allergy/Immunology',
+                icon: '💊',
+                description: 'Patient reports "penicillin allergy." Take a history and determine next steps.',
+                difficulty: 'beginner',
+                duration: '10-15 min',
+                tags: ['Drug Allergy', 'Penicillin', 'Cross-reactivity']
+            },
+            {
+                id: 'altered-mental-status',
+                title: 'Altered Mental Status',
+                category: 'Neurology',
+                icon: '🧠',
+                description: 'An 80-year-old brought in by family for confusion. Systematic approach to AMS.',
+                difficulty: 'intermediate',
+                duration: '20 min',
+                tags: ['AMS', 'Delirium', 'Workup']
+            },
+            {
+                id: 'gi-bleed',
+                title: 'GI Bleeding',
+                category: 'Gastroenterology',
+                icon: '🩸',
+                description: 'A 60-year-old with melena and hematemesis. Resuscitate and risk stratify.',
+                difficulty: 'advanced',
+                duration: '20-25 min',
+                tags: ['UGIB', 'Glasgow-Blatchford', 'Resuscitation']
+            },
+            {
+                id: 'dka',
+                title: 'DKA Management',
+                category: 'Endocrine',
+                icon: '🍬',
+                description: 'A 28-year-old Type 1 diabetic with nausea, vomiting, and Kussmaul breathing.',
+                difficulty: 'intermediate',
+                duration: '15-20 min',
+                tags: ['DKA', 'Anion Gap', 'Insulin']
             }
-        };
-        
-        // Specialty configurations
-        const specialtyConfig = {
-            'im': { name: 'Internal Medicine', cases: ['acs', 'chf', 'copd', 'dm', 'aki'] },
-            'em': { name: 'Emergency Medicine', cases: ['chest-pain', 'dyspnea', 'trauma', 'anaphylaxis'] },
-            'surgery': { name: 'Surgery', cases: ['acute-abdomen', 'gi-bleed', 'appendicitis'] },
-            'peds': { name: 'Pediatrics', cases: ['fever', 'asthma', 'dehydration'] },
-            'obgyn': { name: 'OB/GYN', cases: ['vaginal-bleeding', 'pelvic-pain'] },
-            'psych': { name: 'Psychiatry', cases: ['depression', 'psychosis', 'anxiety'] },
-            'fm': { name: 'Family Medicine', cases: ['wellness', 'chronic-disease', 'prevention'] },
-            'allergy': { name: 'Allergy/Immunology', cases: ['anaphylaxis', 'urticaria', 'asthma', 'immunodeficiency'] }
-        };
-        
-        // Initialize
-        function init() {
-            const savedLevel = localStorage.getItem('dxTrainingLevel') || 'm3';
-            const savedSpecialty = localStorage.getItem('dxSpecialty') || 'im';
-            
-            // Set saved values
-            document.getElementById('levelSelect').value = savedLevel;
-            selectLevel(savedLevel, false);
-            selectSpecialty(savedSpecialty, false);
-            
-            // Always set as medical student for other files
-            localStorage.setItem('dxRole', 'md-do');
-            localStorage.setItem('selectedProfession', 'medical-student');
-            sessionStorage.setItem('currentProfession', 'medical-student');
-        }
-        
-        function selectLevel(level, save = true) {
-            // Update UI
-            document.querySelectorAll('.level-btn').forEach(btn => {
-                btn.classList.toggle('selected', btn.dataset.level === level);
-            });
-            document.getElementById('levelSelect').value = level;
-            
-            // Save preference
-            if (save) {
-                localStorage.setItem('dxTrainingLevel', level);
-            }
-            
-            // Update recommended cases
-            updateRecommendedCases(level);
-        }
-        
-        function changeLevel(level) {
-            selectLevel(level);
-        }
-        
-        function selectSpecialty(specialty, save = true) {
-            document.querySelectorAll('.specialty-btn').forEach(btn => {
-                btn.classList.toggle('selected', btn.dataset.specialty === specialty);
-            });
-            
-            if (save) {
-                localStorage.setItem('dxSpecialty', specialty);
-            }
-        }
-        
-        function updateRecommendedCases(level) {
-            const config = levelConfig[level];
-            const container = document.getElementById('recommendedCases');
-            
-            container.innerHTML = config.recommendedCases.map(c => `
-                <div class="case-card" onclick="launchCase('${c.title}')">
-                    <h4>${c.title}</h4>
-                    <p>${c.desc}</p>
-                    <div class="case-tags">
-                        ${c.tags.map(t => `<span class="tag">${t}</span>`).join('')}
-                        ${c.sbar ? '<span class="tag sbar">Communication</span>' : ''}
-                        ${c.ai ? '<span class="tag ai">AI Coach</span>' : ''}
+        ];
+
+        // ============ RENDER CASES ============
+        function renderCases() {
+            const grid = document.getElementById('casesGrid');
+            grid.innerHTML = CASES.map(c => `
+                <div class="case-card" onclick="startCase('${c.id}')">
+                    <div class="case-header">
+                        <div class="case-icon">${c.icon}</div>
+                        <div class="case-info">
+                            <h3>${c.title}</h3>
+                            <div class="case-category">${c.category}</div>
+                        </div>
                     </div>
+                    <p class="case-description">${c.description}</p>
+                    <div class="case-meta">
+                        <span class="case-tag difficulty-${c.difficulty}">${capitalize(c.difficulty)}</span>
+                        <span class="case-tag">⏱️ ${c.duration}</span>
+                    </div>
+                    <button class="case-start">Start Session →</button>
                 </div>
             `).join('');
         }
-        
-        function launchSBAR() {
-            window.location.href = 'sbar-trainer.html?role=md-do';
+
+        // ============ RENDER SESSIONS ============
+        function renderSessions() {
+            const sessions = JSON.parse(localStorage.getItem('coachDxSessions') || '[]');
+            const list = document.getElementById('sessionList');
+
+            if (sessions.length === 0) {
+                list.innerHTML = `
+                    <div class="empty-sessions">
+                        <div class="empty-sessions-icon">📭</div>
+                        <p>No sessions yet. Start your first coaching session above!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Show last 5 sessions
+            const recent = sessions.slice(-5).reverse();
+            list.innerHTML = recent.map(s => `
+                <a href="coach-session.html?id=${s.id}" class="session-item">
+                    <div class="session-icon">${s.icon || '📋'}</div>
+                    <div class="session-info">
+                        <h4>${s.title}</h4>
+                        <p>${s.category}</p>
+                    </div>
+                    <div class="session-score">
+                        <div class="score">${s.score || '—'}%</div>
+                        <div class="date">${formatDate(s.date)}</div>
+                    </div>
+                </a>
+            `).join('');
+
+            // Update stats
+            updateStats(sessions);
         }
-        
-        function launchCase(caseTitle) {
-            const caseId = caseTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-            window.location.href = `mentor-chat.html?case=${caseId}`;
+
+        // ============ UPDATE STATS ============
+        function updateStats(sessions) {
+            document.getElementById('totalSessions').textContent = sessions.length;
+            document.getElementById('casesCompleted').textContent = new Set(sessions.map(s => s.caseId)).size;
+
+            const scores = sessions.filter(s => s.score).map(s => s.score);
+            if (scores.length > 0) {
+                const avg = Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
+                document.getElementById('avgScore').textContent = avg + '%';
+            }
+
+            // Calculate streak
+            const streak = parseInt(localStorage.getItem('coachDxStreak') || '0');
+            document.getElementById('streak').textContent = streak;
         }
-        
-        // Event listeners for specialty buttons
-        document.querySelectorAll('.specialty-btn').forEach(btn => {
-            btn.addEventListener('click', () => selectSpecialty(btn.dataset.specialty));
-        });
-        
-        // Initialize on load
-        init();
+
+        // ============ START CASE ============
+        function startCase(caseId) {
+            // In production, this would navigate to the coaching interface
+            window.location.href = `coach-session.html?case=${caseId}`;
+        }
+
+        // ============ HELPERS ============
+        function capitalize(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        function formatDate(dateStr) {
+            const date = new Date(dateStr);
+            const now = new Date();
+            const diff = now - date;
+            
+            if (diff < 86400000) return 'Today';
+            if (diff < 172800000) return 'Yesterday';
+            return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        }
+
+        // ============ INIT ============
+        renderCases();
+        renderSessions();
     </script>
-<!-- Unified Navigation -->
-<script src="../dx-nav.js"></script>
 </body>
 </html>
