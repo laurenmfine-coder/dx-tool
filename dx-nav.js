@@ -39,7 +39,6 @@
     if (path.includes('/reasondx/')) return '..';
     if (path.includes('/mechanism/')) return '..';
     if (path.includes('/coachdx/')) return '..';
-    if (path.includes('/coach/')) return '..';
     return '.';
   }
 
@@ -51,11 +50,11 @@
     studyMode: `${BASE}/ReasonDx/study-mode.html`,
     cases: `${BASE}/ReasonDx/training.html`,
     deepDive: `${BASE}/ReasonDx/reasondx-learn-hub.html`,
-    mechanism: `${BASE}/Mechanism/index.html`,
+    mechanism: `${BASE}/mechanism/index.html`,
     boardPrep: `${BASE}/ReasonDx/board-prep.html`,
     review: `${BASE}/ReasonDx/training.html`,
     progress: `${BASE}/dx-dashboard.html`,
-    reference: `${BASE}/Mechanism/index.html`,
+    reference: `${BASE}/mechanism/index.html`,
     coach: `${BASE}/CoachDx/coachdx-dashboard.html`,
   };
 
