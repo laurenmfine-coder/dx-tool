@@ -205,6 +205,7 @@
             .search-box { min-width: auto; }
         }
     </style>
+    <link rel="stylesheet" href="../dx-unified-nav.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -214,7 +215,6 @@
             <span class="nav-title">Reason<span>Dx</span></span>
         </div>
         <!-- Unified Navigation -->
-    <link rel="stylesheet" href="../dx-unified-nav.css">
     <div id="dx-nav"></div>
         <div class="nav-right">
             <div class="nav-streak">🔥 7</div>
@@ -643,7 +643,14 @@
             });
         });
     </script>
-<script src="../dx-unified-nav.js"></script>
-    <script>if(typeof DxNav!=='undefined')DxNav.init({currentPage:'reason',basePath:'../'});</script>
+
+    <script src="../dx-unified-nav.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof DxNav !== 'undefined') {
+                DxNav.init({ currentPage: 'reason', basePath: '../' });
+            }
+        });
+    </script>
 </body>
 </html>

@@ -216,6 +216,7 @@
         @media (max-width: 900px) { .sidebar { display: none; } .content { padding: 24px; max-width: 100%; } .header { padding: 0 16px; } }
         @media (max-width: 600px) { .mode-options { grid-template-columns: 1fr; } .illness-script { grid-template-columns: 1fr; } .script-item.full { grid-column: span 1; } .start-card { padding: 28px 20px; } .results-grid { grid-template-columns: repeat(2, 1fr); } }
     </style>
+    <link rel="stylesheet" href="../dx-unified-nav.css">
 </head>
 <body>
     <div id="startScreen" class="start-screen">
@@ -267,7 +268,6 @@
                 <div class="explanation" id="explanationPanel">
                     <div class="explanation-header" id="explanationHeader"><div class="result-icon" id="resultIcon">✓</div><div class="result-text" id="resultText">Correct</div></div>
                     <!-- Unified Navigation -->
-    <link rel="stylesheet" href="../dx-unified-nav.css">
     <div id="dx-nav"></div>
                     <div class="explanation-body">
                         <div class="exp-panel active" id="panelAnswer"></div>
@@ -782,8 +782,15 @@
         // Load on init
         loadQuestions();
     </script>
-<script src="../dx-unified-nav.js"></script>
-    <script>if(typeof DxNav!=='undefined')DxNav.init({currentPage:'reason',basePath:'../'});</script>
+
+    <script src="../dx-unified-nav.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof DxNav !== 'undefined') {
+                DxNav.init({ currentPage: 'reason', basePath: '../' });
+            }
+        });
+    </script>
 </body>
 </html>
 
