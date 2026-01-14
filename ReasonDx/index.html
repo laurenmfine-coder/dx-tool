@@ -10,14 +10,10 @@
     --primary-dark: #059669;
     --primary-light: #d1fae5;
     --text: #1e293b;
-    --text-secondary: #64748b;
+    --text-muted: #64748b;
     --bg: #f8fafc;
     --card: #ffffff;
     --border: #e2e8f0;
-    --warning: #f59e0b;
-    --accent-blue: #3b82f6;
-    --accent-purple: #8b5cf6;
-    --accent-red: #ef4444;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -50,7 +46,7 @@ body {
 .nav-link {
     padding: 8px 16px;
     text-decoration: none;
-    color: var(--text-secondary);
+    color: var(--text-muted);
     font-size: 14px;
     font-weight: 500;
     border-radius: 8px;
@@ -59,250 +55,193 @@ body {
 .nav-link:hover { background: var(--primary-light); color: var(--text); }
 .nav-link.active { background: var(--primary); color: white; }
 
-/* Main Container */
+/* Main */
 .main {
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 32px 24px;
+    padding: 48px 24px;
 }
 
-/* Welcome Section */
-.welcome-section {
-    margin-bottom: 32px;
+/* Page Title */
+.page-header {
+    text-align: center;
+    margin-bottom: 48px;
 }
-.welcome-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-}
-.welcome-title {
-    font-size: 28px;
+.page-title {
+    font-size: 32px;
     font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
 }
-.welcome-subtitle {
-    color: var(--text-secondary);
+.page-subtitle {
+    color: var(--text-muted);
     font-size: 16px;
 }
 
-/* Search Bar */
-.search-container {
-    margin-bottom: 24px;
-}
-.search-bar {
-    display: flex;
-    align-items: center;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 12px 16px;
-    gap: 12px;
-    transition: border-color 0.15s;
-}
-.search-bar:focus-within {
-    border-color: var(--primary);
-}
-.search-icon { color: var(--text-secondary); }
-.search-input {
-    flex: 1;
-    border: none;
-    outline: none;
-    font-size: 15px;
-    background: transparent;
-}
-.search-shortcut {
-    background: var(--bg);
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    color: var(--text-secondary);
-}
-
-/* Case of the Day */
-.case-of-day {
-    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-    border: 1px solid #f59e0b;
-    border-radius: 12px;
-    padding: 16px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 32px;
-    cursor: pointer;
-    transition: transform 0.15s, box-shadow 0.15s;
-}
-.case-of-day:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
-}
-.case-of-day-left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-.case-of-day-icon { font-size: 24px; }
-.case-of-day-title { font-weight: 600; color: #92400e; }
-.case-of-day-bonus { font-size: 13px; color: #b45309; }
-.case-of-day-arrow { color: #92400e; font-size: 20px; }
-
-/* Section Title */
-.section-title {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-/* Training Mode Tiles */
-.modes-grid {
+/* Tiles Grid */
+.tiles-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    margin-bottom: 40px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 48px;
 }
-.mode-tile {
+
+.tile {
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 16px;
-    padding: 24px;
+    padding: 28px;
     text-decoration: none;
     color: inherit;
     transition: all 0.2s;
     display: flex;
     flex-direction: column;
 }
-.mode-tile:hover {
+.tile:hover {
     border-color: var(--primary);
     box-shadow: 0 8px 24px rgba(16, 185, 129, 0.12);
     transform: translateY(-4px);
 }
-.mode-icon { font-size: 36px; margin-bottom: 12px; }
-.mode-title { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
-.mode-desc { font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; flex: 1; }
-.mode-stats { display: flex; gap: 12px; font-size: 12px; color: var(--text-secondary); margin-bottom: 12px; }
-.mode-stats strong { color: var(--text); }
-.mode-cta {
-    padding: 10px 16px;
+
+.tile-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin-bottom: 16px;
+}
+.tile-icon.pink { background: #fce7f3; }
+.tile-icon.purple { background: #ede9fe; }
+.tile-icon.blue { background: #dbeafe; }
+.tile-icon.green { background: #d1fae5; }
+.tile-icon.amber { background: #fef3c7; }
+.tile-icon.red { background: #fee2e2; }
+.tile-icon.cyan { background: #cffafe; }
+.tile-icon.indigo { background: #e0e7ff; }
+
+.tile-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+.tile-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    flex: 1;
+}
+.tile-stats {
+    display: flex;
+    gap: 16px;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+}
+.tile-stats strong { color: var(--text); }
+
+.tile-cta {
+    padding: 12px 20px;
     background: var(--primary);
     color: white;
     border-radius: 8px;
     font-weight: 600;
-    font-size: 13px;
-    text-align: center;
-}
-.mode-tile:hover .mode-cta { background: var(--primary-dark); }
-
-/* Case Categories */
-.categories-section {
-    margin-bottom: 40px;
-}
-.category-tabs {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-}
-.category-tab {
-    padding: 8px 16px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
     font-size: 14px;
-    cursor: pointer;
-    transition: all 0.15s;
+    text-align: center;
+    transition: background 0.15s;
 }
-.category-tab:hover { border-color: var(--primary); }
-.category-tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+.tile:hover .tile-cta { background: var(--primary-dark); }
 
-/* Case Cards Grid */
-.cases-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+/* Featured Banner */
+.featured-banner {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border: 1px solid #f59e0b;
+    border-radius: 16px;
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 48px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+.featured-banner:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(245, 158, 11, 0.2);
+}
+.featured-left {
+    display: flex;
+    align-items: center;
     gap: 16px;
 }
-.case-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
-    cursor: pointer;
-    transition: all 0.15s;
-    text-decoration: none;
-    color: inherit;
-}
-.case-card:hover {
-    border-color: var(--primary);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-.case-card-header {
+.featured-icon { font-size: 32px; }
+.featured-title { font-weight: 700; font-size: 18px; color: #92400e; }
+.featured-subtitle { font-size: 14px; color: #b45309; }
+.featured-arrow { font-size: 24px; color: #92400e; }
+
+/* Section Divider */
+.section-divider {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 8px;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
 }
-.case-card-title {
+.section-divider h2 {
+    font-size: 14px;
     font-weight: 600;
-    font-size: 15px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
 }
-.case-card-difficulty {
-    font-size: 11px;
-    padding: 3px 8px;
-    border-radius: 4px;
-    font-weight: 500;
-}
-.case-card-difficulty.beginner { background: #d1fae5; color: #059669; }
-.case-card-difficulty.intermediate { background: #fef3c7; color: #b45309; }
-.case-card-difficulty.advanced { background: #fee2e2; color: #dc2626; }
-.case-card-category {
-    font-size: 12px;
-    color: var(--text-secondary);
-    margin-bottom: 8px;
-}
-.case-card-desc {
-    font-size: 13px;
-    color: var(--text-secondary);
-    line-height: 1.5;
+.section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
 }
 
 /* Quick Links */
-.quick-links {
-    display: flex;
+.quick-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 16px;
-    flex-wrap: wrap;
-    padding-top: 24px;
-    border-top: 1px solid var(--border);
 }
 .quick-link {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 10px 16px;
+    gap: 12px;
+    padding: 16px;
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 8px;
+    border-radius: 12px;
     text-decoration: none;
-    color: var(--text-secondary);
+    color: var(--text);
     font-size: 14px;
+    font-weight: 500;
     transition: all 0.15s;
 }
 .quick-link:hover {
     border-color: var(--primary);
-    color: var(--text);
+    background: var(--primary-light);
 }
+.quick-link-icon { font-size: 20px; }
 
 /* Responsive */
-@media (max-width: 1024px) {
-    .modes-grid { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 900px) {
+    .tiles-grid { grid-template-columns: repeat(2, 1fr); }
+    .quick-grid { grid-template-columns: repeat(2, 1fr); }
 }
-@media (max-width: 640px) {
-    .modes-grid { grid-template-columns: 1fr; }
+@media (max-width: 600px) {
+    .tiles-grid { grid-template-columns: 1fr; }
+    .quick-grid { grid-template-columns: 1fr; }
     .nav-links { display: none; }
-    .welcome-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .featured-banner { flex-direction: column; text-align: center; gap: 12px; }
 }
     </style>
 </head>
@@ -334,302 +273,138 @@ body {
 
     <!-- Main Content -->
     <main class="main">
-        <!-- Welcome Section -->
-        <div class="welcome-section">
-            <div class="welcome-header">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">🎯 Choose Your Training Mode</h1>
+            <p class="page-subtitle">Build clinical reasoning skills through interactive practice</p>
+        </div>
+
+        <!-- Case of the Day Banner -->
+        <a href="training.html?case=cotd" class="featured-banner">
+            <div class="featured-left">
+                <span class="featured-icon">⭐</span>
                 <div>
-                    <h1 class="welcome-title">Welcome back!</h1>
-                    <p class="welcome-subtitle">Choose a training mode to build your clinical reasoning skills</p>
+                    <div class="featured-title">Case of the Day</div>
+                    <div class="featured-subtitle">+50 bonus XP • New case every 24 hours</div>
                 </div>
             </div>
-        </div>
+            <span class="featured-arrow">→</span>
+        </a>
 
-        <!-- Search Bar -->
-        <div class="search-container">
-            <div class="search-bar">
-                <span class="search-icon">🔍</span>
-                <input type="text" class="search-input" placeholder="Search cases, conditions, or features..." id="searchInput">
-                <span class="search-shortcut">⌘K</span>
-            </div>
-        </div>
-
-        <!-- Case of the Day -->
-        <div class="case-of-day" onclick="window.location.href='training.html?case=cotd'">
-            <div class="case-of-day-left">
-                <span class="case-of-day-icon">⭐</span>
-                <div>
-                    <div class="case-of-day-title">Case of the Day</div>
-                    <div class="case-of-day-bonus">+50 bonus XP</div>
-                </div>
-            </div>
-            <span class="case-of-day-arrow">→</span>
-        </div>
-
-        <!-- Training Mode Tiles -->
-        <div class="section-title">🎯 Choose Your Training Mode</div>
-        <div class="modes-grid">
-            <a href="training.html" class="mode-tile">
-                <div class="mode-icon">🏥</div>
-                <div class="mode-title">Clinical Case Training</div>
-                <p class="mode-desc">Work through structured cases. Gather history, order tests, build differentials.</p>
-                <div class="mode-stats">
+        <!-- Main Training Tiles -->
+        <div class="tiles-grid">
+            <!-- Clinical Case Training -->
+            <a href="training.html" class="tile">
+                <div class="tile-icon pink">🏥</div>
+                <div class="tile-title">Clinical Case Training</div>
+                <p class="tile-desc">Work through structured clinical cases. Gather history, order tests, build differentials, and make diagnoses with guided feedback.</p>
+                <div class="tile-stats">
                     <span><strong>200+</strong> Cases</span>
                     <span><strong>All</strong> Specialties</span>
                 </div>
-                <div class="mode-cta">Start Training →</div>
+                <div class="tile-cta">Start Training →</div>
             </a>
 
-            <a href="deep-dive-hub.html" class="mode-tile">
-                <div class="mode-icon">🔍</div>
-                <div class="mode-title">Deep Dive Cases</div>
-                <p class="mode-desc">Master conditions layer by layer: anatomy → physiology → management.</p>
-                <div class="mode-stats">
+            <!-- Deep Dive Cases -->
+            <a href="deep-dive-hub.html" class="tile">
+                <div class="tile-icon purple">🔍</div>
+                <div class="tile-title">Deep Dive Cases</div>
+                <p class="tile-desc">Master conditions layer by layer. Each case builds from anatomy → physiology → pathophysiology → clinical features → management.</p>
+                <div class="tile-stats">
                     <span><strong>70+</strong> Conditions</span>
-                    <span><strong>6</strong> Layers</span>
+                    <span><strong>6</strong> Layers Each</span>
                 </div>
-                <div class="mode-cta">Browse Deep Dives →</div>
+                <div class="tile-cta">Browse Deep Dives →</div>
             </a>
 
-            <a href="adventure-hub.html" class="mode-tile">
-                <div class="mode-icon">🎮</div>
-                <div class="mode-title">Adventure Cases</div>
-                <p class="mode-desc">Branching scenarios where your decisions shape patient outcomes.</p>
-                <div class="mode-stats">
+            <!-- Adventure Cases -->
+            <a href="adventure-hub.html" class="tile">
+                <div class="tile-icon blue">🎮</div>
+                <div class="tile-title">Adventure Cases</div>
+                <p class="tile-desc">Immersive branching scenarios where your decisions shape patient outcomes. Experience the weight of clinical decision-making.</p>
+                <div class="tile-stats">
                     <span><strong>3</strong> Available</span>
                     <span><strong>Multiple</strong> Endings</span>
                 </div>
-                <div class="mode-cta">Start Adventure →</div>
+                <div class="tile-cta">Start Adventure →</div>
             </a>
 
-            <a href="ecg-quiz.html" class="mode-tile">
-                <div class="mode-icon">❤️</div>
-                <div class="mode-title">ECG Training</div>
-                <p class="mode-desc">Practice ECG interpretation with instant feedback.</p>
-                <div class="mode-stats">
+            <!-- ECG Training -->
+            <a href="ecg-quiz.html" class="tile">
+                <div class="tile-icon red">❤️</div>
+                <div class="tile-title">ECG Training</div>
+                <p class="tile-desc">Practice ECG interpretation with instant feedback. Learn to recognize patterns from normal variants to life-threatening arrhythmias.</p>
+                <div class="tile-stats">
                     <span><strong>50+</strong> ECGs</span>
                     <span><strong>Quiz</strong> Mode</span>
                 </div>
-                <div class="mode-cta">Practice ECGs →</div>
+                <div class="tile-cta">Practice ECGs →</div>
+            </a>
+
+            <!-- Board Prep -->
+            <a href="board-prep.html" class="tile">
+                <div class="tile-icon green">📝</div>
+                <div class="tile-title">Board Prep</div>
+                <p class="tile-desc">High-yield questions designed for USMLE, COMLEX, and shelf exams. Timed practice with detailed explanations.</p>
+                <div class="tile-stats">
+                    <span><strong>500+</strong> Questions</span>
+                    <span><strong>Timed</strong> Mode</span>
+                </div>
+                <div class="tile-cta">Start Prep →</div>
+            </a>
+
+            <!-- My Progress -->
+            <a href="analytics-dashboard.html" class="tile">
+                <div class="tile-icon cyan">📊</div>
+                <div class="tile-title">My Progress</div>
+                <p class="tile-desc">Track your improvement over time. See strengths, identify knowledge gaps, and get personalized study recommendations.</p>
+                <div class="tile-stats">
+                    <span><strong>Analytics</strong></span>
+                    <span><strong>Insights</strong></span>
+                </div>
+                <div class="tile-cta">View Progress →</div>
             </a>
         </div>
 
-        <!-- Browse Cases by Category -->
-        <div class="categories-section">
-            <div class="section-title">📚 Browse Cases by Category</div>
-            <div class="category-tabs">
-                <button class="category-tab active" data-category="all">All Cases</button>
-                <button class="category-tab" data-category="cardiology">Cardiology</button>
-                <button class="category-tab" data-category="pulmonary">Pulmonary</button>
-                <button class="category-tab" data-category="gi">GI</button>
-                <button class="category-tab" data-category="neuro">Neurology</button>
-                <button class="category-tab" data-category="infectious">Infectious Disease</button>
-                <button class="category-tab" data-category="renal">Renal</button>
-                <button class="category-tab" data-category="endocrine">Endocrine</button>
-            </div>
-
-            <div class="cases-grid" id="casesGrid">
-                <!-- Cardiology -->
-                <a href="training.html?case=chest-pain-acs" class="case-card" data-category="cardiology">
-                    <div class="case-card-header">
-                        <span class="case-card-title">Crushing Chest Pain</span>
-                        <span class="case-card-difficulty intermediate">Intermediate</span>
-                    </div>
-                    <div class="case-card-category">Cardiology • ACS</div>
-                    <p class="case-card-desc">58-year-old male with sudden onset chest pain radiating to left arm</p>
-                </a>
-
-                <a href="training.html?case=afib-rvr" class="case-card" data-category="cardiology">
-                    <div class="case-card-header">
-                        <span class="case-card-title">Rapid Palpitations</span>
-                        <span class="case-card-difficulty beginner">Beginner</span>
-                    </div>
-                    <div class="case-card-category">Cardiology • Arrhythmia</div>
-                    <p class="case-card-desc">72-year-old with new-onset palpitations and dizziness</p>
-                </a>
-
-                <a href="training.html?case=heart-failure" class="case-card" data-category="cardiology">
-                    <div class="case-card-header">
-                        <span class="case-card-title">Progressive Dyspnea</span>
-                        <span class="case-card-difficulty intermediate">Intermediate</span>
-                    </div>
-                    <div class="case-card-category">Cardiology • Heart Failure</div>
-                    <p class="case-card-desc">65-year-old with worsening shortness of breath and leg swelling</p>
-                </a>
-
-                <!-- Pulmonary -->
-                <a href="training.html?case=pe" class="case-card" data-category="pulmonary">
-                    <div class="case-card-header">
-                        <span class="case-card-title">Post-Op Dyspnea</span>
-                        <span class="case-card-difficulty advanced">Advanced</span>
-                    </div>
-                    <div class="case-card-category">Pulmonary • PE</div>
-                    <p class="case-card-desc">45-year-old 3 days post hip surgery with sudden shortness of breath</p>
-                </a>
-
-                <a href="training.html?case=copd" class="case-card" data-category="pulmonary">
-                    <div class="case-card-header">
-                        <span class="case-card-title">COPD Exacerbation</span>
-                        <span class="case-card-difficulty beginner">Beginner</span>
-                    </div>
-                    <div class="case-card-category">Pulmonary • COPD</div>
-                    <p class="case-card-desc">68-year-old smoker with increased sputum and wheezing</p>
-                </a>
-
-                <a href="training.html?case=pneumonia" class="case-card" data-category="pulmonary">
-                    <div class="case-card-header">
-                        <span class="case-card-title">Community Acquired Pneumonia</span>
-                        <span class="case-card-difficulty beginner">Beginner</span>
-                    </div>
-                    <div class="case-card-category">Pulmonary • Infection</div>
-                    <p class="case-card-desc">55-year-old with productive cough and fever for 3 days</p>
-                </a>
-
-                <!-- GI -->
-                <a href="training.html?case=gi-bleed" class="case-card" data-category="gi">
-                    <div class="case-card-header">
-                        <span class="case-card-title">Upper GI Bleed</span>
-                        <span class="case-card-difficulty intermediate">Intermediate</span>
-                    </div>
-                    <div class="case-card-category">GI • Hemorrhage</div>
-                    <p class="case-card-desc">60-year-old with hematemesis and melena</p>
-                </a>
-
-                <a href="training.html?case=pancreatitis" class="case-card" data-category="gi">
-                    <div class="case-card-header">
-                        <span class="case-card-title">Acute Abdominal Pain</span>
-                        <span class="case-card-difficulty intermediate">Intermediate</span>
-                    </div>
-                    <div class="case-card-category">GI • Pancreatitis</div>
-                    <p class="case-card-desc">48-year-old with severe epigastric pain after heavy drinking</p>
-                </a>
-
-                <!-- Infectious -->
-                <a href="training.html?case=sepsis" class="case-card" data-category="infectious">
-                    <div class="case-card-header">
-                        <span class="case-card-title">Fever and Confusion</span>
-                        <span class="case-card-difficulty advanced">Advanced</span>
-                    </div>
-                    <div class="case-card-category">Infectious • Sepsis</div>
-                    <p class="case-card-desc">78-year-old from nursing home with fever and altered mental status</p>
-                </a>
-
-                <a href="training.html?case=meningitis" class="case-card" data-category="infectious">
-                    <div class="case-card-header">
-                        <span class="case-card-title">Severe Headache</span>
-                        <span class="case-card-difficulty advanced">Advanced</span>
-                    </div>
-                    <div class="case-card-category">Infectious • Meningitis</div>
-                    <p class="case-card-desc">22-year-old college student with headache, fever, and stiff neck</p>
-                </a>
-
-                <!-- Neuro -->
-                <a href="training.html?case=stroke" class="case-card" data-category="neuro">
-                    <div class="case-card-header">
-                        <span class="case-card-title">Sudden Weakness</span>
-                        <span class="case-card-difficulty advanced">Advanced</span>
-                    </div>
-                    <div class="case-card-category">Neurology • Stroke</div>
-                    <p class="case-card-desc">70-year-old with acute onset left-sided weakness and slurred speech</p>
-                </a>
-
-                <a href="training.html?case=seizure" class="case-card" data-category="neuro">
-                    <div class="case-card-header">
-                        <span class="case-card-title">First-Time Seizure</span>
-                        <span class="case-card-difficulty intermediate">Intermediate</span>
-                    </div>
-                    <div class="case-card-category">Neurology • Seizure</div>
-                    <p class="case-card-desc">35-year-old with witnessed generalized tonic-clonic seizure</p>
-                </a>
-
-                <!-- Renal -->
-                <a href="training.html?case=aki" class="case-card" data-category="renal">
-                    <div class="case-card-header">
-                        <span class="case-card-title">Rising Creatinine</span>
-                        <span class="case-card-difficulty intermediate">Intermediate</span>
-                    </div>
-                    <div class="case-card-category">Renal • AKI</div>
-                    <p class="case-card-desc">62-year-old post-cardiac cath with oliguria and elevated creatinine</p>
-                </a>
-
-                <a href="training.html?case=hyperkalemia" class="case-card" data-category="renal">
-                    <div class="case-card-header">
-                        <span class="case-card-title">ECG Changes</span>
-                        <span class="case-card-difficulty advanced">Advanced</span>
-                    </div>
-                    <div class="case-card-category">Renal • Hyperkalemia</div>
-                    <p class="case-card-desc">58-year-old dialysis patient who missed treatment with peaked T waves</p>
-                </a>
-
-                <!-- Endocrine -->
-                <a href="training.html?case=dka" class="case-card" data-category="endocrine">
-                    <div class="case-card-header">
-                        <span class="case-card-title">DKA</span>
-                        <span class="case-card-difficulty intermediate">Intermediate</span>
-                    </div>
-                    <div class="case-card-category">Endocrine • Diabetes</div>
-                    <p class="case-card-desc">24-year-old Type 1 diabetic with nausea, vomiting, and abdominal pain</p>
-                </a>
-
-                <a href="training.html?case=thyroid-storm" class="case-card" data-category="endocrine">
-                    <div class="case-card-header">
-                        <span class="case-card-title">Thyroid Storm</span>
-                        <span class="case-card-difficulty advanced">Advanced</span>
-                    </div>
-                    <div class="case-card-category">Endocrine • Thyroid</div>
-                    <p class="case-card-desc">38-year-old with known Graves' disease presenting with fever and agitation</p>
-                </a>
-            </div>
+        <!-- Quick Access Section -->
+        <div class="section-divider">
+            <h2>Quick Access</h2>
         </div>
 
-        <!-- Quick Links -->
-        <div class="quick-links">
-            <a href="board-prep.html" class="quick-link">📝 Board Prep</a>
-            <a href="analytics-dashboard.html" class="quick-link">📊 My Progress</a>
-            <a href="ecg-generator.html" class="quick-link">📈 ECG Generator</a>
-            <a href="../reference-library.html" class="quick-link">📚 Reference Library</a>
+        <div class="quick-grid">
+            <a href="training.html?filter=cardiology" class="quick-link">
+                <span class="quick-link-icon">🫀</span>
+                Cardiology Cases
+            </a>
+            <a href="training.html?filter=pulmonary" class="quick-link">
+                <span class="quick-link-icon">🫁</span>
+                Pulmonary Cases
+            </a>
+            <a href="training.html?filter=neuro" class="quick-link">
+                <span class="quick-link-icon">🧠</span>
+                Neurology Cases
+            </a>
+            <a href="training.html?filter=gi" class="quick-link">
+                <span class="quick-link-icon">🩺</span>
+                GI Cases
+            </a>
+            <a href="ecg-generator.html" class="quick-link">
+                <span class="quick-link-icon">📈</span>
+                ECG Generator
+            </a>
+            <a href="../reference-library.html" class="quick-link">
+                <span class="quick-link-icon">📚</span>
+                Reference Library
+            </a>
+            <a href="../fingerprint-dashboard.html" class="quick-link">
+                <span class="quick-link-icon">🧬</span>
+                Reasoning Fingerprint
+            </a>
+            <a href="bookmarks.html" class="quick-link">
+                <span class="quick-link-icon">⭐</span>
+                My Bookmarks
+            </a>
         </div>
     </main>
-
-    <script>
-    // Category filtering
-    const tabs = document.querySelectorAll('.category-tab');
-    const cards = document.querySelectorAll('.case-card');
-
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            // Update active tab
-            tabs.forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
-
-            // Filter cards
-            const category = tab.dataset.category;
-            cards.forEach(card => {
-                if (category === 'all' || card.dataset.category === category) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-    });
-
-    // Search functionality
-    const searchInput = document.getElementById('searchInput');
-    searchInput.addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase();
-        cards.forEach(card => {
-            const text = card.textContent.toLowerCase();
-            card.style.display = text.includes(query) ? 'block' : 'none';
-        });
-    });
-
-    // Keyboard shortcut for search
-    document.addEventListener('keydown', (e) => {
-        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-            e.preventDefault();
-            searchInput.focus();
-        }
-    });
-    </script>
 </body>
 </html>
