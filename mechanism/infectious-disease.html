@@ -284,12 +284,9 @@
 <div class="module-header"><div class="module-inner"><div class="breadcrumb"><a href="index.html">Dashboard</a> → Infectious Disease</div><div class="module-title"><div class="module-icon">🦠</div><div><h1>Infectious Disease<span class="badge">✨ Enhanced</span></h1><p>CAP • UTI/Pyelonephritis • Endocarditis • SSTI | IDSA Guidelines</p></div></div></div></div>
 <div class="progress-bar"><div class="progress-inner"><span style="font-size:13px;color:var(--muted)">Progress</span><div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div><span id="progressCount" style="font-size:13px;font-weight:600">0/20</span><div class="xp-box">⭐ <span id="xpCount">0</span> XP</div><div class="streak-box">🔥 <span id="streakCount">0</span></div></div></div>
 <div class="patient-banner"><div class="banner-inner"><div class="patient-info"><div class="patient-name" id="patientName">Maria Rodriguez</div><div class="patient-details" id="patientDetails">45F • Productive cough, fever, RLL infiltrate</div></div><div class="vitals"><div class="vital"><div class="vital-value" id="vTemp">101.2°F</div><div class="vital-label">Temp</div></div><div class="vital"><div class="vital-value" id="vHR">98</div><div class="vital-label">HR</div></div><div class="vital"><div class="vital-value" id="vBP">118/72</div><div class="vital-label">BP</div></div><div class="vital"><div class="vital-value" id="vRR">22</div><div class="vital-label">RR</div></div></div></div></div>
-<nav class="timeline"><div class="timeline-inner">
-<div class="phase active" data-phase="1" onclick="goPhase(1)"><div class="phase-label">🫁 CAP</div><div class="phase-time">Maria</div><div class="phase-status current" id="status1">In Progress</div></div>
-<div class="phase locked" data-phase="2" onclick="goPhase(2)"><div class="phase-label">🔥 UTI/Pyelo</div><div class="phase-time">Sarah</div><div class="phase-status" id="status2">🔒</div></div>
-<div class="phase locked" data-phase="3" onclick="goPhase(3)"><div class="phase-label">❤️ Endocarditis</div><div class="phase-time">Michael</div><div class="phase-status" id="status3">🔒</div></div>
-<div class="phase locked" data-phase="4" onclick="goPhase(4)"><div class="phase-label">🩹 SSTI</div><div class="phase-time">James</div><div class="phase-status" id="status4">🔒</div></div>
-</div></nav>
+<!-- Unified Navigation -->
+    <link rel="stylesheet" href="../dx-unified-nav.css">
+    <div id="dx-nav"></div>
 <div class="container">
 <aside class="sidebar">
 <div class="card"><div class="card-header"><span>📋 Clinical Snapshot</span><span class="card-badge" id="phaseBadge">Phase 1</span></div><div class="card-body" id="caseContent"></div></div>
@@ -855,5 +852,7 @@ document.getElementById('alertBox').innerHTML=alertHTML;
 
 render();
 </script>
+<script src="../dx-unified-nav.js"></script>
+    <script>if(typeof DxNav!=='undefined')DxNav.init({currentPage:'mechanism',basePath:'../'});</script>
 </body>
 </html>

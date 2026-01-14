@@ -282,12 +282,9 @@
 <header class="header"><div class="logo">💨 ReasonDx — COPD & Asthma</div></header>
 <div class="module-header"><div class="module-title"><div class="module-icon">💨</div><div><h1>COPD & Asthma<span class="enhanced-badge">✨ MECHANISM-ENHANCED</span></h1><p>Obstructive Lung Disease: Assessment, Exacerbations, and Management</p></div></div></div>
 <div class="progress-bar"><div class="progress-inner"><span style="font-size:12px;color:var(--text-secondary)">Progress</span><div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div><span class="progress-count" id="progressCount">0/20</span></div></div>
-<nav class="timeline-nav"><div class="timeline-inner">
-<div class="timeline-phase active" onclick="goPhase(1)"><div class="phase-label">🔍 Assessment</div><div class="phase-time">GOLD & Diagnosis</div></div>
-<div class="timeline-phase locked" onclick="goPhase(2)"><div class="phase-label">🚨 Acute Exacerbation</div><div class="phase-time">AECOPD Management</div></div>
-<div class="timeline-phase locked" onclick="goPhase(3)"><div class="phase-label">😤 Asthma</div><div class="phase-time">Assessment & Treatment</div></div>
-<div class="timeline-phase locked" onclick="goPhase(4)"><div class="phase-label">💊 Chronic Management</div><div class="phase-time">Inhalers & LTOT</div></div>
-</div></nav>
+<!-- Unified Navigation -->
+    <link rel="stylesheet" href="../dx-unified-nav.css">
+    <div id="dx-nav"></div>
 <div class="main-container">
 <aside>
 <div class="phase-objectives" id="phaseObjectives"></div>
@@ -497,6 +494,8 @@ function toggleDD(btn){btn.nextElementSibling.classList.toggle('visible');btn.qu
 function updateProgress(){var done=0;for(var i=1;i<=20;i++)if(state[i].done)done++;document.getElementById('progressFill').style.width=(done/20*100)+'%';document.getElementById('progressCount').textContent=done+'/20';}
 renderPhase();
 </script>
+<script src="../dx-unified-nav.js"></script>
+    <script>if(typeof DxNav!=='undefined')DxNav.init({currentPage:'mechanism',basePath:'../'});</script>
 </body>
 </html>
 <strong>Poor control causes:</strong> Incorrect technique and non-adherence are most common. Always check technique before escalating therapy. Spacers help MDI delivery.',
@@ -526,5 +525,7 @@ function toggleDD(btn){btn.nextElementSibling.classList.toggle('visible');btn.qu
 function updateProgress(){var done=0;for(var i=1;i<=20;i++)if(state[i].done)done++;document.getElementById('progressFill').style.width=(done/20*100)+'%';document.getElementById('progressCount').textContent=done+'/20';}
 renderPhase();
 </script>
+<script src="../dx-unified-nav.js"></script>
+    <script>if(typeof DxNav!=='undefined')DxNav.init({currentPage:'mechanism',basePath:'../'});</script>
 </body>
 </html>

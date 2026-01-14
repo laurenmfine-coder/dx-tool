@@ -319,30 +319,9 @@
 </div>
 </div>
 </div>
-<nav class="timeline-nav">
-<div class="timeline-inner">
-<div class="timeline-phase active" data-phase="1" onclick="goPhase(1)">
-<div class="phase-label">💧 Hyponatremia</div>
-<div class="phase-time">Sodium Physiology</div>
-<div class="phase-status current" id="status1">In Progress</div>
-</div>
-<div class="timeline-phase locked" data-phase="2" onclick="goPhase(2)">
-<div class="phase-label">⚡ Potassium</div>
-<div class="phase-time">K+ Homeostasis</div>
-<div class="phase-status" id="status2">🔒</div>
-</div>
-<div class="timeline-phase locked" data-phase="3" onclick="goPhase(3)">
-<div class="phase-label">🧪 Acid-Base</div>
-<div class="phase-time">pH Regulation</div>
-<div class="phase-status" id="status3">🔒</div>
-</div>
-<div class="timeline-phase locked" data-phase="4" onclick="goPhase(4)">
-<div class="phase-label">🔀 Mixed Disorders</div>
-<div class="phase-time">Integration</div>
-<div class="phase-status" id="status4">🔒</div>
-</div>
-</div>
-</nav>
+<!-- Unified Navigation -->
+    <link rel="stylesheet" href="../dx-unified-nav.css">
+    <div id="dx-nav"></div>
 <div class="main-container">
 <aside class="case-panel">
 <div class="phase-objectives" id="phaseObjectives">
@@ -841,5 +820,7 @@ document.getElementById('progressCount').textContent=done+'/20';
 
 renderPhase();
 </script>
+<script src="../dx-unified-nav.js"></script>
+    <script>if(typeof DxNav!=='undefined')DxNav.init({currentPage:'mechanism',basePath:'../'});</script>
 </body>
 </html>

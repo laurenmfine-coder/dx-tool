@@ -67,22 +67,33 @@
     </style>
 </head>
 <body>
-    <nav class="dx-nav">
-        <div class="dx-nav-inner">
-            <a href="../index.html" class="dx-nav-brand"><span style="font-size:24px">🏥</span> Dx Learning Ecosystem</a>
-            <div class="dx-nav-links">
-                <a href="../index.html" class="dx-nav-link">🏠 Home</a>
-                <a href="index.html" class="dx-nav-link active">📚 MechanismDx</a>
-                <a href="../ReasonDx/training.html" class="dx-nav-link">🔬 ReasonDx</a>
-                <a href="../CoachDx/coachdx-dashboard.html" class="dx-nav-link">🧠 CoachDx</a>
-                <a href="../knowledge-web-navigator.html" class="dx-nav-link">🕸️ Knowledge Web</a>
-            </div>
-        </div>
-    </nav>
+    <!-- Unified Navigation -->
+    <link rel="stylesheet" href="../dx-unified-nav.css">
+    <div id="dx-nav"></div>
+    <script>
+        // Inline nav initialization for immediate render
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof DxNav !== 'undefined') {
+                DxNav.init({ currentPage: 'mechanism', basePath: '../' });
+            }
+        });
+    </script>
 
+    <header class="logo-header">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 120">
+            <text x="20" y="70" font-family="Georgia, serif" font-size="58" fill="#1a1a1a" letter-spacing="-1">MechanismD</text>
+            <line x1="355" y1="42" x2="379" y2="72" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round"/>
+            <ellipse cx="353" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 353 39)" fill="#1a1a1a"/>
+            <path d="M 379 42 L 363 58 Q 357 66 357 76 Q 357 86 365 92 Q 373 98 373 108" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+            <ellipse cx="381" cy="39" rx="2.5" ry="4.5" transform="rotate(28 381 39)" fill="#1a1a1a"/>
+            <circle cx="373" cy="108" r="10" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
+            <circle cx="373" cy="108" r="5" fill="#1a1a1a"/>
+        </svg>
+        <div class="tagline">Understanding why makes the difference.</div>
+    </header>
+    
     <section class="hero">
-        <img src="../Logos/mechanismdx-logo-final.svg" alt="MechanismDx" style="height: 70px; margin-bottom: 1rem;">
-        <p class="tagline" style="font-family: Georgia, serif; font-style: italic; color: #64748b; margin-bottom: 1rem;">Understanding why makes the difference.</p>
+        <h1>Mechanism<span>Dx</span></h1>
         <p>Master the pathophysiology behind clinical decisions. Interactive modules with MCQs, clinical pearls, and diagnostic algorithms.</p>
         <div class="hero-stats">
             <div class="stat"><div class="stat-num">45+</div><div class="stat-label">Modules</div></div>
@@ -389,7 +400,6 @@
         <p>© 2025-2026 MechanismDx · Part of the <a href="../index.html">Dx Learning Ecosystem</a></p>
         
     </footer>
-<!-- Unified Navigation -->
-<script src="../dx-nav.js"></script>
+    <script src="../dx-unified-nav.js"></script>
 </body>
 </html>

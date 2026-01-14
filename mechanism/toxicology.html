@@ -283,12 +283,9 @@
 <div class="module-header"><div class="module-title"><div class="module-icon">☠️</div><div><h1>Toxicology<span class="enhanced-badge">✨ MECHANISM-ENHANCED</span></h1><p>From toxidromes to antidotes</p></div></div></div>
 <div class="progress-bar"><div class="progress-inner"><span style="font-size:12px;color:var(--text-muted)">Progress</span><div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div><span class="progress-count" id="progressCount">0/20</span></div></div>
 <div class="patient-banner"><div class="patient-banner-inner"><div class="patient-info"><div class="patient-name">Multiple Overdose Patients</div><div class="patient-details">Toxidromes, Antidotes, Decontamination</div></div><div class="patient-vitals"><div class="vital critical"><div class="vital-value">Pinpoint</div><div class="vital-label">Pupils</div></div><div class="vital"><div class="vital-value">8</div><div class="vital-label">RR</div></div></div></div></div>
-<nav class="timeline-nav"><div class="timeline-inner">
-<div class="timeline-phase active" onclick="goPhase(1)"><div class="phase-label">👁️ Toxidromes</div><div class="phase-time">Recognition</div></div>
-<div class="timeline-phase locked" onclick="goPhase(2)"><div class="phase-label">💊 Common OD</div><div class="phase-time">APAP, ASA, TCA</div></div>
-<div class="timeline-phase locked" onclick="goPhase(3)"><div class="phase-label">🧪 Toxic Alcohols</div><div class="phase-time">Methanol, Ethylene Glycol</div></div>
-<div class="timeline-phase locked" onclick="goPhase(4)"><div class="phase-label">💉 Antidotes</div><div class="phase-time">Specific Treatments</div></div>
-</div></nav>
+<!-- Unified Navigation -->
+    <link rel="stylesheet" href="../dx-unified-nav.css">
+    <div id="dx-nav"></div>
 <div class="main-container">
 <aside>
 <div class="phase-objectives" id="phaseObjectives"><div class="obj-title">🎯 Phase 1 Objectives</div><ul class="obj-list"><li>Recognize major toxidromes</li><li>Identify by vital signs and pupils</li><li>Match toxidrome to drug class</li><li>Initial stabilization</li></ul></div>
@@ -562,5 +559,7 @@ function toggleDD(btn){btn.nextElementSibling.classList.toggle('visible');btn.qu
 function updateProgress(){var done=0;for(var i=1;i<=20;i++)if(state[i].done)done++;document.getElementById('progressFill').style.width=(done/20*100)+'%';document.getElementById('progressCount').textContent=done+'/20';}
 renderPhase();
 </script>
+<script src="../dx-unified-nav.js"></script>
+    <script>if(typeof DxNav!=='undefined')DxNav.init({currentPage:'mechanism',basePath:'../'});</script>
 </body>
 </html>
