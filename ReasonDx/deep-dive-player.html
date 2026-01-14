@@ -3,413 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deep Dive - ReasonDx</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>ReasonDx Deep Dive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Light theme matching Learn Hub */
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8fafc;
-            --bg-card: #ffffff;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --text-muted: #94a3b8;
-            --accent-teal: #14b8a6;
-            --accent-teal-light: #ccfbf1;
-            --accent-teal-dark: #0d9488;
-            --border-color: #e2e8f0;
+            /* Core palette - Deep medical blue with warm accents */
+            --color-bg: #0a0f1a;
+            --color-bg-elevated: #111827;
+            --color-bg-card: #1a2332;
+            --color-bg-hover: #243044;
+            --color-surface: #1e293b;
             
-            /* Status colors */
+            --color-text: #f1f5f9;
+            --color-text-secondary: #94a3b8;
+            --color-text-muted: #64748b;
+            
+            --color-primary: #3b82f6;
+            --color-primary-light: #60a5fa;
+            --color-primary-dark: #2563eb;
+            
             --color-success: #10b981;
-            --color-success-bg: #d1fae5;
+            --color-success-bg: rgba(16, 185, 129, 0.15);
             --color-error: #ef4444;
-            --color-error-bg: #fee2e2;
+            --color-error-bg: rgba(239, 68, 68, 0.15);
             --color-warning: #f59e0b;
-            --color-warning-bg: #fef3c7;
+            --color-warning-bg: rgba(245, 158, 11, 0.15);
             
             /* Layer colors */
-            --layer-anatomy: #ef4444;
-            --layer-physiology: #f59e0b;
-            --layer-pathophysiology: #8b5cf6;
-            --layer-pharmacology: #10b981;
-            --layer-clinical: #3b82f6;
-            --layer-complications: #dc2626;
-            --layer-synthesis: #6366f1;
+            --color-anatomy: #ef4444;
+            --color-physiology: #f59e0b;
+            --color-pathophysiology: #8b5cf6;
+            --color-pharmacology: #10b981;
+            --color-clinical: #3b82f6;
+            --color-complications: #dc2626;
+            --color-synthesis: #6366f1;
+            
+            /* Typography */
+            --font-display: 'Source Serif 4', Georgia, serif;
+            --font-body: 'DM Sans', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            
+            /* Spacing */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            
+            /* Borders & Shadows */
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+            
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.5);
+            --shadow-glow: 0 0 40px rgba(59, 130, 246, 0.15);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            background: var(--bg-secondary);
-            color: var(--text-primary);
+            font-family: var(--font-body);
+            background: var(--color-bg);
+            color: var(--color-text);
             line-height: 1.6;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* ========== NAVIGATION (matches Learn Hub) ========== */
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            background: var(--bg-primary);
-            border-bottom: 1px solid var(--border-color);
+        /* Background texture */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.06) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* ========== HEADER ========== */
+        .header {
             position: sticky;
             top: 0;
             z-index: 100;
+            background: rgba(10, 15, 26, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            padding: var(--space-md) var(--space-xl);
         }
 
-        .nav-left {
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
             display: flex;
             align-items: center;
-            gap: 2rem;
+            justify-content: space-between;
+            gap: var(--space-lg);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 700;
-            font-size: 1.25rem;
-            color: var(--text-primary);
-            text-decoration: none;
-        }
-
-        .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: var(--accent-teal);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 0.9rem;
-        }
-
-        .logo span { color: var(--accent-teal); }
-
-        .nav-links {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            transition: all 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: var(--text-primary);
-            background: var(--bg-secondary);
-        }
-
-        .nav-links a.active {
-            color: white;
-            background: var(--accent-teal);
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .nav-stat {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: var(--bg-secondary);
-            border-radius: 8px;
-            font-weight: 500;
-            color: var(--text-secondary);
-        }
-
-        .nav-stat.score {
-            color: var(--accent-teal);
-        }
-
-        .streak-badge {
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-            padding: 0.4rem 0.75rem;
-            background: #fff7ed;
-            border-radius: 20px;
-            font-weight: 600;
-            color: #ea580c;
-            font-size: 0.9rem;
-        }
-
-        .avatar {
-            width: 36px;
-            height: 36px;
-            background: var(--accent-teal-light);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            color: var(--accent-teal);
-        }
-
-        .pause-btn, .menu-btn {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 0.5rem;
-            cursor: pointer;
-            color: var(--text-secondary);
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .pause-btn:hover, .menu-btn:hover {
-            background: var(--accent-teal-light);
-            color: var(--accent-teal);
-            border-color: var(--accent-teal);
-        }
-
-        /* ========== OVERVIEW SCREEN ========== */
-        .overview-screen {
-            min-height: calc(100vh - 70px);
-            padding: 2rem;
-        }
-
-        .overview-screen.hidden { display: none; }
-
-        .overview-container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .overview-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .overview-header h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .overview-subtitle {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-        }
-
-        .overview-stats {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .overview-stat {
-            background: var(--bg-primary);
-            padding: 1.25rem 2rem;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            text-align: center;
-        }
-
-        .overview-stat-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--accent-teal);
-        }
-
-        .overview-stat-label {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .overview-case-preview {
-            background: var(--bg-primary);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            border: 1px solid var(--border-color);
-        }
-
-        .overview-case-preview h3 {
-            color: var(--text-primary);
-            margin-bottom: 0.75rem;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .overview-case-preview p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
-
-        .overview-layers-title {
-            margin-bottom: 1.5rem;
-        }
-
-        .overview-layers-title h2 {
-            font-size: 1.25rem;
-            color: var(--text-primary);
-            margin-bottom: 0.25rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .overview-layers-title p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        .overview-layers-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .overview-layer-card {
-            background: var(--bg-primary);
-            border-radius: 12px;
-            padding: 1.25rem;
-            border: 1px solid var(--border-color);
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .overview-layer-card:hover {
-            border-color: var(--accent-teal);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(20, 184, 166, 0.15);
-        }
-
-        .overview-layer-card.completed {
-            border-color: var(--color-success);
-            background: var(--color-success-bg);
-        }
-
-        .overview-layer-header {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .overview-layer-icon {
+            font-family: var(--font-display);
             font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-primary-light);
+            letter-spacing: -0.02em;
         }
 
-        .overview-layer-title {
-            font-weight: 600;
-            color: var(--text-primary);
+        .logo span {
+            color: var(--color-text);
         }
 
-        .overview-layer-meta {
+        .module-title {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            color: var(--color-text);
+            padding-left: var(--space-lg);
+            border-left: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .header-stats {
             display: flex;
-            justify-content: space-between;
-            color: var(--text-muted);
-            font-size: 0.85rem;
+            align-items: center;
+            gap: var(--space-xl);
         }
 
-        .overview-layer-progress {
-            background: var(--bg-secondary);
-            height: 4px;
-            border-radius: 2px;
-            margin-top: 0.75rem;
-            overflow: hidden;
-        }
-
-        .overview-layer-progress-bar {
-            height: 100%;
-            background: var(--accent-teal);
-            transition: width 0.3s;
-        }
-
-        .overview-actions {
+        .stat {
             display: flex;
-            gap: 1rem;
-            justify-content: center;
+            align-items: center;
+            gap: var(--space-sm);
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
         }
 
-        .overview-start-btn, .overview-resume-btn {
-            padding: 1rem 2rem;
-            border-radius: 10px;
-            font-size: 1rem;
+        .stat-icon {
+            width: 20px;
+            height: 20px;
+            opacity: 0.7;
+        }
+
+        .stat-value {
             font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: none;
+            color: var(--color-text);
+            font-family: var(--font-mono);
         }
 
-        .overview-start-btn {
-            background: var(--accent-teal);
-            color: white;
-        }
-
-        .overview-start-btn:hover {
-            background: var(--accent-teal-dark);
-            transform: translateY(-2px);
-        }
-
-        .overview-resume-btn {
-            background: var(--color-success);
-            color: white;
-        }
-
-        .overview-resume-btn:hover {
-            filter: brightness(1.1);
-        }
-
-        /* ========== MAIN CONTENT ========== */
+        /* ========== MAIN LAYOUT ========== */
         .main-container {
-            display: none;
             max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem;
-            gap: 2rem;
-        }
-
-        .main-container.active {
+            padding: var(--space-xl);
             display: grid;
             grid-template-columns: 320px 1fr;
+            gap: var(--space-xl);
+            min-height: calc(100vh - 80px);
         }
 
         /* ========== SIDEBAR ========== */
         .sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: var(--space-lg);
         }
 
+        /* Patient Card */
         .patient-card {
-            background: var(--accent-teal);
-            border-radius: 16px;
-            padding: 1.5rem;
-            color: white;
+            background: var(--color-bg-card);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255,255,255,0.06);
+            overflow: hidden;
         }
 
         .patient-header {
+            background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
+            padding: var(--space-md) var(--space-lg);
             display: flex;
             align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
+            gap: var(--space-md);
         }
 
         .patient-avatar {
@@ -424,130 +211,144 @@
         }
 
         .patient-info h3 {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
+            color: white;
         }
 
         .patient-info p {
-            font-size: 0.9rem;
-            opacity: 0.9;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.8);
         }
 
         .patient-vitals {
+            padding: var(--space-md) var(--space-lg);
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 0.75rem;
+            gap: var(--space-sm);
         }
 
         .vital {
-            background: rgba(255,255,255,0.15);
-            border-radius: 8px;
-            padding: 0.75rem;
+            background: var(--color-bg-elevated);
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-sm);
             text-align: center;
         }
 
         .vital-label {
-            font-size: 0.75rem;
-            opacity: 0.8;
+            font-size: 0.7rem;
+            color: var(--color-text-muted);
             text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .vital-value {
-            font-size: 1.1rem;
+            font-family: var(--font-mono);
+            font-size: 0.95rem;
             font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .vital-value.critical {
+            color: var(--color-error);
         }
 
         .vital-value.warning {
-            color: #fcd34d;
+            color: var(--color-warning);
         }
 
         .patient-toggle {
-            margin-top: 1rem;
+            padding: var(--space-sm) var(--space-lg) var(--space-md);
         }
 
         .toggle-btn {
             width: 100%;
-            background: rgba(255,255,255,0.2);
-            border: none;
-            border-radius: 8px;
-            padding: 0.75rem;
-            color: white;
-            font-weight: 500;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--color-text-secondary);
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-sm);
             cursor: pointer;
-            transition: background 0.2s;
+            font-size: 0.85rem;
+            transition: all 0.2s;
         }
 
         .toggle-btn:hover {
-            background: rgba(255,255,255,0.3);
+            background: var(--color-bg-hover);
+            color: var(--color-text);
         }
 
         /* Layer Navigation */
         .layer-nav {
-            background: var(--bg-primary);
-            border-radius: 16px;
-            padding: 1.25rem;
-            border: 1px solid var(--border-color);
+            background: var(--color-bg-card);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255,255,255,0.06);
+            padding: var(--space-md);
         }
 
         .layer-nav-title {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text-muted);
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 1rem;
+            letter-spacing: 0.1em;
+            color: var(--color-text-muted);
+            padding: 0 var(--space-sm) var(--space-sm);
+        }
+
+        .layer-list {
             display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            flex-direction: column;
+            gap: var(--space-xs);
         }
 
         .layer-item {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem;
-            border-radius: 10px;
+            gap: var(--space-md);
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-md);
             cursor: pointer;
             transition: all 0.2s;
-            margin-bottom: 0.5rem;
+            border: 1px solid transparent;
         }
 
         .layer-item:hover {
-            background: var(--bg-secondary);
+            background: var(--color-bg-hover);
         }
 
         .layer-item.active {
-            background: var(--accent-teal-light);
-        }
-
-        .layer-item.completed .layer-icon {
-            background: var(--color-success-bg);
+            background: var(--color-bg-hover);
+            border-color: var(--layer-color, var(--color-primary));
         }
 
         .layer-icon {
             width: 36px;
             height: 36px;
-            border-radius: 10px;
+            border-radius: var(--radius-sm);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
-            background: var(--bg-secondary);
+            font-size: 1.1rem;
+            background: rgba(255,255,255,0.05);
         }
 
-        .layer-info {
+        .layer-item.active .layer-icon {
+            background: var(--layer-color, var(--color-primary));
+        }
+
+        .layer-details {
             flex: 1;
         }
 
         .layer-name {
+            font-size: 0.9rem;
             font-weight: 500;
-            font-size: 0.95rem;
-            color: var(--text-primary);
+            color: var(--color-text);
         }
 
-        .layer-progress-text {
-            font-size: 0.8rem;
-            color: var(--text-muted);
+        .layer-progress {
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+            font-family: var(--font-mono);
         }
 
         .layer-dots {
@@ -559,98 +360,118 @@
             width: 6px;
             height: 6px;
             border-radius: 50%;
-            background: var(--border-color);
+            background: rgba(255,255,255,0.1);
         }
 
-        .layer-dot.completed {
+        .layer-dot.complete {
             background: var(--color-success);
         }
 
         .layer-dot.current {
-            background: var(--accent-teal);
+            background: var(--layer-color, var(--color-primary));
+            box-shadow: 0 0 8px var(--layer-color, var(--color-primary));
         }
 
-        /* ========== CONTENT AREA ========== */
+        /* ========== MAIN CONTENT ========== */
         .content-area {
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: var(--space-xl);
         }
 
+        /* Question Card */
         .question-card {
-            background: var(--bg-primary);
-            border-radius: 16px;
-            padding: 2rem;
-            border: 1px solid var(--border-color);
+            background: var(--color-bg-card);
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(255,255,255,0.06);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
         }
 
         .question-header {
+            padding: var(--space-lg) var(--space-xl);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
+            justify-content: space-between;
         }
 
         .question-layer-badge {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            background: var(--accent-teal-light);
-            border-radius: 20px;
+            gap: var(--space-sm);
+            padding: var(--space-xs) var(--space-md);
+            background: rgba(255,255,255,0.05);
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+        }
+
+        .question-layer-badge .icon {
+            font-size: 1rem;
+        }
+
+        .question-layer-badge .text {
+            color: var(--color-text);
             font-weight: 500;
-            color: var(--accent-teal);
         }
 
         .question-number {
-            color: var(--text-muted);
-            font-size: 0.9rem;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+        }
+
+        .question-body {
+            padding: var(--space-xl);
         }
 
         .question-stem {
-            background: var(--bg-secondary);
-            border-left: 4px solid var(--accent-teal);
-            padding: 1rem 1.25rem;
-            border-radius: 0 8px 8px 0;
-            margin-bottom: 1.5rem;
-            color: var(--text-secondary);
-            font-size: 0.95rem;
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-lg);
+            padding: var(--space-md) var(--space-lg);
+            background: rgba(255,255,255,0.02);
+            border-radius: var(--radius-md);
+            border-left: 3px solid var(--layer-color, var(--color-primary));
         }
 
         .question-text {
-            font-size: 1.15rem;
+            font-family: var(--font-display);
+            font-size: 1.35rem;
             font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 1.5rem;
-            line-height: 1.5;
+            color: var(--color-text);
+            line-height: 1.4;
+            margin-bottom: var(--space-xl);
         }
 
+        /* Answer Options */
         .options-list {
             display: flex;
             flex-direction: column;
-            gap: 0.75rem;
+            gap: var(--space-md);
         }
 
         .option {
             display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem 1.25rem;
-            background: var(--bg-secondary);
+            align-items: flex-start;
+            gap: var(--space-md);
+            padding: var(--space-md) var(--space-lg);
+            background: var(--color-bg-elevated);
             border: 2px solid transparent;
-            border-radius: 12px;
+            border-radius: var(--radius-md);
             cursor: pointer;
             transition: all 0.2s;
         }
 
-        .option:hover {
-            border-color: var(--accent-teal);
-            background: var(--accent-teal-light);
+        .option:hover:not(.disabled) {
+            background: var(--color-bg-hover);
+            border-color: rgba(255,255,255,0.1);
         }
 
         .option.selected {
-            border-color: var(--accent-teal);
-            background: var(--accent-teal-light);
+            border-color: var(--color-primary);
+            background: rgba(59, 130, 246, 0.1);
         }
 
         .option.correct {
@@ -663,94 +484,114 @@
             background: var(--color-error-bg);
         }
 
+        .option.disabled {
+            cursor: default;
+        }
+
         .option-letter {
             width: 32px;
             height: 32px;
-            border-radius: 8px;
-            background: var(--bg-primary);
-            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 600;
-            color: var(--text-secondary);
+            font-size: 0.9rem;
             flex-shrink: 0;
+            transition: all 0.2s;
         }
 
         .option.selected .option-letter {
-            background: var(--accent-teal);
+            background: var(--color-primary);
             color: white;
-            border-color: var(--accent-teal);
         }
 
         .option.correct .option-letter {
             background: var(--color-success);
             color: white;
-            border-color: var(--color-success);
         }
 
         .option.incorrect .option-letter {
             background: var(--color-error);
             color: white;
-            border-color: var(--color-error);
         }
 
         .option-text {
-            flex: 1;
-            color: var(--text-primary);
+            font-size: 1rem;
+            color: var(--color-text);
+            padding-top: 4px;
         }
 
+        /* Submit Button */
         .submit-container {
-            margin-top: 1.5rem;
+            padding: 0 var(--space-xl) var(--space-xl);
             display: flex;
             justify-content: flex-end;
         }
 
         .submit-btn {
-            padding: 0.875rem 2rem;
-            background: var(--accent-teal);
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
             color: white;
             border: none;
-            border-radius: 10px;
-            font-weight: 600;
+            padding: var(--space-md) var(--space-2xl);
+            border-radius: var(--radius-md);
             font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
+            box-shadow: var(--shadow-md);
         }
 
         .submit-btn:hover:not(:disabled) {
-            background: var(--accent-teal-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg), var(--shadow-glow);
         }
 
         .submit-btn:disabled {
-            background: var(--border-color);
-            color: var(--text-muted);
+            opacity: 0.5;
             cursor: not-allowed;
         }
 
         /* ========== EXPLANATION PANEL ========== */
         .explanation-panel {
+            background: var(--color-bg-card);
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(255,255,255,0.06);
+            overflow: hidden;
             display: none;
-            background: var(--bg-primary);
-            border-radius: 16px;
-            padding: 2rem;
-            border: 1px solid var(--border-color);
         }
 
         .explanation-panel.visible {
             display: block;
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .explanation-header {
-            margin-bottom: 1.5rem;
+            padding: var(--space-lg) var(--space-xl);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
         }
 
         .explanation-result {
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.25rem;
-            border-radius: 10px;
+            gap: var(--space-sm);
+            padding: var(--space-xs) var(--space-md);
+            border-radius: var(--radius-sm);
             font-weight: 600;
         }
 
@@ -764,335 +605,354 @@
             color: var(--color-error);
         }
 
-        .explanation-text {
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
+        .explanation-body {
+            padding: var(--space-xl);
         }
 
+        .explanation-text {
+            font-size: 1.05rem;
+            color: var(--color-text);
+            line-height: 1.7;
+            margin-bottom: var(--space-xl);
+        }
+
+        /* WHY Chain */
         .why-chain {
-            background: var(--bg-secondary);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            background: var(--color-bg-elevated);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            border-left: 4px solid var(--color-primary);
         }
 
         .why-chain-title {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
             font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
+            color: var(--color-primary-light);
+            margin-bottom: var(--space-lg);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: var(--space-sm);
         }
 
         .why-item {
-            background: var(--bg-primary);
-            border-radius: 10px;
-            padding: 1rem;
-            margin-bottom: 0.75rem;
-            border: 1px solid var(--border-color);
+            margin-bottom: var(--space-lg);
+            padding-left: var(--space-lg);
+            border-left: 2px solid rgba(255,255,255,0.1);
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.4s ease;
+        }
+
+        .why-item.revealed {
+            opacity: 1;
+            transform: translateX(0);
         }
 
         .why-question {
             font-weight: 600;
-            color: var(--accent-teal);
-            margin-bottom: 0.5rem;
+            color: var(--color-warning);
+            margin-bottom: var(--space-sm);
+            font-size: 0.95rem;
         }
 
         .why-answer {
-            color: var(--text-secondary);
+            color: var(--color-text-secondary);
             font-size: 0.95rem;
+            line-height: 1.6;
         }
 
         .why-source {
             font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-top: 0.5rem;
-            font-style: italic;
+            color: var(--color-text-muted);
+            margin-top: var(--space-sm);
+            font-family: var(--font-mono);
         }
 
         .reveal-why-btn {
-            background: var(--accent-teal-light);
-            color: var(--accent-teal);
-            border: none;
-            padding: 0.75rem 1.25rem;
-            border-radius: 8px;
-            font-weight: 500;
+            background: transparent;
+            border: 1px solid var(--color-primary);
+            color: var(--color-primary-light);
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: var(--radius-sm);
             cursor: pointer;
+            font-size: 0.9rem;
             transition: all 0.2s;
+            margin-top: var(--space-md);
         }
 
         .reveal-why-btn:hover {
-            background: var(--accent-teal);
-            color: white;
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        /* Sources */
+        .sources-section {
+            margin-top: var(--space-xl);
+            padding-top: var(--space-lg);
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .sources-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-text-muted);
+            margin-bottom: var(--space-md);
+        }
+
+        .source-item {
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+            padding: var(--space-sm) 0;
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-sm);
+        }
+
+        .source-item::before {
+            content: '📚';
+            font-size: 0.9rem;
+        }
+
+        /* Next Button */
+        .next-container {
+            padding: var(--space-lg) var(--space-xl);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            display: flex;
+            justify-content: flex-end;
         }
 
         .next-btn {
-            padding: 1rem 2rem;
-            background: var(--accent-teal);
+            background: linear-gradient(135deg, var(--color-success), #059669);
             color: white;
             border: none;
-            border-radius: 10px;
+            padding: var(--space-md) var(--space-2xl);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
         }
 
         .next-btn:hover {
-            background: var(--accent-teal-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
 
-        /* ========== MODAL ========== */
-        .modal {
-            display: none;
+        /* ========== VIGNETTE MODAL ========== */
+        .modal-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(8px);
             z-index: 200;
+            display: none;
             align-items: center;
             justify-content: center;
-            padding: 2rem;
+            padding: var(--space-xl);
         }
 
-        .modal.visible {
+        .modal-overlay.visible {
             display: flex;
         }
 
         .modal-content {
-            background: var(--bg-primary);
-            border-radius: 16px;
-            max-width: 700px;
+            background: var(--color-bg-card);
+            border-radius: var(--radius-xl);
+            max-width: 800px;
             max-height: 80vh;
             overflow-y: auto;
-            padding: 2rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: var(--shadow-lg);
         }
 
         .modal-header {
+            padding: var(--space-lg) var(--space-xl);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            background: var(--color-bg-card);
         }
 
-        .modal-header h2 {
+        .modal-title {
+            font-family: var(--font-display);
             font-size: 1.25rem;
-            color: var(--text-primary);
+            font-weight: 600;
         }
 
         .modal-close {
-            background: none;
+            background: transparent;
             border: none;
-            font-size: 1.5rem;
+            color: var(--color-text-muted);
             cursor: pointer;
-            color: var(--text-muted);
+            font-size: 1.5rem;
+            padding: var(--space-sm);
         }
 
         .modal-body {
-            color: var(--text-secondary);
-            line-height: 1.7;
+            padding: var(--space-xl);
         }
 
-        /* ========== PAUSED OVERLAY ========== */
-        .paused-overlay {
+        .vignette-text {
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--color-text);
+            white-space: pre-line;
+        }
+
+        .vignette-section {
+            margin-top: var(--space-xl);
+            padding-top: var(--space-lg);
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .vignette-section-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-text-muted);
+            margin-bottom: var(--space-md);
+        }
+
+        /* ========== COMPLETION SCREEN ========== */
+        .completion-screen {
             display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(255,255,255,0.95);
-            z-index: 150;
-            align-items: center;
+            text-align: center;
+            padding: var(--space-2xl);
+        }
+
+        .completion-screen.visible {
+            display: block;
+        }
+
+        .completion-icon {
+            font-size: 4rem;
+            margin-bottom: var(--space-lg);
+        }
+
+        .completion-title {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: var(--space-md);
+        }
+
+        .completion-subtitle {
+            color: var(--color-text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .completion-stats {
+            display: flex;
             justify-content: center;
-            flex-direction: column;
-            gap: 1.5rem;
+            gap: var(--space-2xl);
+            margin-bottom: var(--space-2xl);
         }
 
-        .paused-overlay.visible {
-            display: flex;
+        .completion-stat {
+            text-align: center;
         }
 
-        .paused-message {
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            font-weight: 600;
+        .completion-stat-value {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-primary-light);
         }
 
-        .paused-sub {
-            color: var(--text-secondary);
-        }
-
-        .paused-actions {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .paused-actions button {
-            padding: 0.875rem 1.5rem;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            transition: all 0.2s;
-        }
-
-        .resume-btn-overlay {
-            background: var(--accent-teal);
-            color: white;
-        }
-
-        .resume-btn-overlay:hover {
-            background: var(--accent-teal-dark);
-        }
-
-        .quit-btn-overlay {
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-        }
-
-        .quit-btn-overlay:hover {
-            background: var(--border-color);
+        .completion-stat-label {
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
         }
 
         /* ========== RESPONSIVE ========== */
         @media (max-width: 1024px) {
-            .main-container.active {
+            .main-container {
                 grid-template-columns: 1fr;
             }
-            
+
             .sidebar {
+                position: static;
                 flex-direction: row;
                 flex-wrap: wrap;
             }
-            
-            .patient-card, .layer-nav {
+
+            .patient-card {
+                flex: 1;
+                min-width: 280px;
+            }
+
+            .layer-nav {
                 flex: 1;
                 min-width: 280px;
             }
         }
 
         @media (max-width: 640px) {
-            .nav {
-                padding: 1rem;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .overview-stats {
+            .header-content {
                 flex-direction: column;
-                align-items: center;
+                align-items: flex-start;
             }
-            
-            .question-card {
-                padding: 1.25rem;
+
+            .main-container {
+                padding: var(--space-md);
+            }
+
+            .question-text {
+                font-size: 1.15rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="nav">
-        <div class="nav-left">
-            <a href="../index.html" class="logo">
-                <img src="../Logos/reasondx-logo-final.svg" alt="ReasonDx" style="height: 36px;">
-            </a>
-            <div class="nav-links">
-                <a href="../index.html">Home</a>
-                <a href="reasondx-learn-hub.html" class="active">Learn</a>
-                <a href="training.html">Review</a>
-                <a href="../dx-dashboard.html">Progress</a>
-                <a href="../Mechanism/index.html">Reference</a>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <div class="logo">Reason<span>Dx</span></div>
+                <div class="module-title" id="moduleTitle">Deep Dive: Acute Coronary Syndrome</div>
             </div>
-        </div>
-        <div class="nav-right">
-            <div class="nav-stat">
-                <span>⏱️</span>
-                <span id="timerDisplay">00:00</span>
-            </div>
-            <div class="nav-stat score">
-                <span>✓</span>
-                <span><span id="scoreDisplay">0</span>/<span id="totalQuestions">0</span></span>
-            </div>
-            <button class="pause-btn" id="pauseBtn" onclick="togglePause()" title="Pause">
-                <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
-                    <rect x="6" y="4" width="4" height="16" rx="1"/>
-                    <rect x="14" y="4" width="4" height="16" rx="1"/>
-                </svg>
-            </button>
-            <button class="menu-btn" onclick="showOverview()" title="View All Layers">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
-                    <line x1="3" y1="6" x2="21" y2="6"/>
-                    <line x1="3" y1="12" x2="21" y2="12"/>
-                    <line x1="3" y1="18" x2="21" y2="18"/>
-                </svg>
-            </button>
-            <div class="streak-badge">🔥 7</div>
-            <div class="avatar">LF</div>
-        </div>
-    </nav>
-
-    <!-- Overview Screen -->
-    <div class="overview-screen" id="overviewScreen">
-        <div class="overview-container">
-            <div class="overview-header">
-                <h1 id="overviewTitle">Deep Dive: Acute Coronary Syndrome</h1>
-                <p class="overview-subtitle">Master clinical reasoning through integrated layers</p>
-            </div>
-            
-            <div class="overview-stats">
-                <div class="overview-stat">
-                    <div class="overview-stat-value" id="overviewTotalQ">32</div>
-                    <div class="overview-stat-label">Questions</div>
+            <div class="header-stats">
+                <div class="stat">
+                    <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 6v6l4 2"/>
+                    </svg>
+                    <span class="stat-value" id="timerDisplay">00:00</span>
                 </div>
-                <div class="overview-stat">
-                    <div class="overview-stat-value" id="overviewLayers">7</div>
-                    <div class="overview-stat-label">Layers</div>
-                </div>
-                <div class="overview-stat">
-                    <div class="overview-stat-value">~45m</div>
-                    <div class="overview-stat-label">Duration</div>
+                <div class="stat">
+                    <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 12l2 2 4-4"/>
+                        <circle cx="12" cy="12" r="10"/>
+                    </svg>
+                    <span><span class="stat-value" id="scoreDisplay">0</span>/<span id="totalQuestions">0</span></span>
                 </div>
             </div>
-
-            <div class="overview-case-preview">
-                <h3>📋 Case Preview</h3>
-                <p id="overviewCaseText">Loading case...</p>
-            </div>
-
-            <div class="overview-layers-title">
-                <h2>🎯 Learning Layers</h2>
-                <p>Click any layer to begin, or start from the beginning</p>
-            </div>
-
-            <div class="overview-layers-grid" id="overviewLayersGrid">
-                <!-- Populated by JS -->
-            </div>
-
-            <div class="overview-actions">
-                <button class="overview-start-btn" onclick="startFromBeginning()">
-                    ▶️ Start from Beginning
-                </button>
-                <button class="overview-resume-btn" id="resumeBtn" onclick="resumeProgress()" style="display:none;">
-                    ↩️ Resume Progress
-                </button>
-            </div>
         </div>
-    </div>
+    </header>
 
-    <!-- Main Learning Interface -->
-    <main class="main-container" id="mainContainer">
+    <!-- Main Container -->
+    <main class="main-container">
         <!-- Sidebar -->
         <aside class="sidebar">
+            <!-- Patient Card -->
             <div class="patient-card">
                 <div class="patient-header">
                     <div class="patient-avatar">👤</div>
                     <div class="patient-info">
-                        <h3 id="patientAge">58-year-old Male</h3>
-                        <p id="patientCC">Chief Complaint: Chest Pain</p>
+                        <h3>58-year-old Male</h3>
+                        <p>Chief Complaint: Chest Pain</p>
                     </div>
                 </div>
-                <div class="patient-vitals" id="patientVitals">
+                <div class="patient-vitals">
                     <div class="vital">
                         <div class="vital-label">BP</div>
                         <div class="vital-value warning">158/98</div>
@@ -1111,20 +971,19 @@
                     </div>
                 </div>
                 <div class="patient-toggle">
-                    <button class="toggle-btn" onclick="openVignetteModal()">📄 View Full Case</button>
+                    <button class="toggle-btn" onclick="openVignetteModal()">View Full Case →</button>
                 </div>
             </div>
 
-            <nav class="layer-nav">
-                <div class="layer-nav-title">📚 Learning Layers</div>
-                <div class="layer-list" id="layerList">
-                    <!-- Populated by JS -->
-                </div>
-            </nav>
+            <!-- Layer Navigation -->
+            <!-- Unified Navigation -->
+    <link rel="stylesheet" href="../dx-unified-nav.css">
+    <div id="dx-nav"></div>
         </aside>
 
         <!-- Content Area -->
         <div class="content-area">
+            <!-- Question Card -->
             <div class="question-card" id="questionCard">
                 <div class="question-header">
                     <div class="question-layer-badge" id="layerBadge">
@@ -1143,6 +1002,7 @@
                 </div>
             </div>
 
+            <!-- Explanation Panel -->
             <div class="explanation-panel" id="explanationPanel">
                 <div class="explanation-header">
                     <div class="explanation-result" id="resultBadge">
@@ -1154,35 +1014,64 @@
                     <div class="explanation-text" id="explanationText"></div>
                     
                     <div class="why-chain" id="whyChain">
-                        <div class="why-chain-title">🔗 Why Chain - Go Deeper</div>
+                        <div class="why-chain-title">
+                            <span>🔗</span> WHY Chain - Dig Deeper
+                        </div>
                         <div id="whyItems"></div>
-                        <button class="reveal-why-btn" id="revealWhyBtn" onclick="revealNextWhy()">Ask "Why?" →</button>
+                        <button class="reveal-why-btn" id="revealWhyBtn" onclick="revealNextWhy()">Reveal Next WHY →</button>
                     </div>
-                    
-                    <button class="next-btn" onclick="nextQuestion()">Next Question →</button>
+
+                    <div class="sources-section">
+                        <div class="sources-title">Sources</div>
+                        <div id="sourcesList"></div>
+                    </div>
                 </div>
+                <div class="next-container">
+                    <button class="next-btn" onclick="nextQuestion()">
+                        Next Question
+                        <span>→</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Completion Screen -->
+            <div class="completion-screen" id="completionScreen">
+                <div class="completion-icon">🎉</div>
+                <h2 class="completion-title">Layer Complete!</h2>
+                <p class="completion-subtitle" id="completionSubtitle">You've finished the Anatomy layer</p>
+                <div class="completion-stats">
+                    <div class="completion-stat">
+                        <div class="completion-stat-value" id="layerScore">0%</div>
+                        <div class="completion-stat-label">Accuracy</div>
+                    </div>
+                    <div class="completion-stat">
+                        <div class="completion-stat-value" id="layerTime">0:00</div>
+                        <div class="completion-stat-label">Time</div>
+                    </div>
+                </div>
+                <button class="next-btn" onclick="startNextLayer()">Continue to Next Layer →</button>
             </div>
         </div>
     </main>
 
     <!-- Vignette Modal -->
-    <div class="modal" id="vignetteModal" onclick="if(event.target.id==='vignetteModal')closeVignetteModal()">
+    <div class="modal-overlay" id="vignetteModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>📋 Full Case Vignette</h2>
+                <h3 class="modal-title">📋 Full Patient Case</h3>
                 <button class="modal-close" onclick="closeVignetteModal()">×</button>
             </div>
-            <div class="modal-body" id="vignetteContent"></div>
-        </div>
-    </div>
-
-    <!-- Paused Overlay -->
-    <div class="paused-overlay" id="pausedOverlay">
-        <div class="paused-message">⏸️ Session Paused</div>
-        <div class="paused-sub">Your progress has been saved</div>
-        <div class="paused-actions">
-            <button class="resume-btn-overlay" onclick="togglePause()">▶️ Resume</button>
-            <button class="quit-btn-overlay" onclick="quitToOverview()">📋 View Layers</button>
+            <div class="modal-body">
+                <div class="vignette-text" id="vignetteText"></div>
+                <div class="vignette-section">
+                    <div class="vignette-section-title">ECG Findings</div>
+                    <div id="ecgFindings"></div>
+                </div>
+                <div class="vignette-section">
+                    <div class="vignette-section-title">Laboratory Results</div>
+                    <div id="labResults"></div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1198,10 +1087,8 @@
         let whyRevealIndex = 0;
         let timerSeconds = 0;
         let timerInterval = null;
-        let elapsedTime = 0;
-        let isPaused = false;
-        let savedProgress = null;
 
+        // Layer colors
         const layerColors = {
             'anatomy': '#ef4444',
             'physiology': '#f59e0b',
@@ -1214,170 +1101,208 @@
 
         // ============ INITIALIZATION ============
         async function init() {
+            // For demo, embed the ACS data
             deepDiveData = await loadDeepDiveData();
             
             if (deepDiveData) {
-                document.getElementById('overviewTitle').textContent = `Deep Dive: ${deepDiveData.title}`;
-                document.getElementById('totalQuestions').textContent = deepDiveData.totalQuestions || countTotalQuestions();
+                document.getElementById('moduleTitle').textContent = `Deep Dive: ${deepDiveData.title}`;
+                document.getElementById('totalQuestions').textContent = deepDiveData.totalQuestions;
                 
-                checkSavedProgress();
-                renderOverviewScreen();
-                showOverview();
+                renderLayerNav();
+                loadVignetteData();
+                loadQuestion();
+                startTimer();
             }
         }
 
-        function countTotalQuestions() {
-            if (!deepDiveData?.layers) return 0;
-            return deepDiveData.layers.reduce((sum, l) => sum + (l.questions?.length || 0), 0);
-        }
-
         async function loadDeepDiveData() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const moduleId = urlParams.get('module') || 'acs-deep-dive-complete';
-            
+            // In production, this would fetch from a JSON file
+            // For now, using embedded sample data
             try {
-                const response = await fetch(`data/deep-dives/${moduleId}.json`);
-                if (!response.ok) throw new Error('Module not found');
+                const response = await fetch('acs-deep-dive-complete.json');
                 return await response.json();
             } catch (e) {
-                console.error('Failed to load module:', moduleId, e);
+                // Fallback to embedded sample
                 return getSampleData();
             }
         }
 
-        function checkSavedProgress() {
-            const moduleId = getModuleId();
-            const saved = localStorage.getItem(`reasondx-progress-${moduleId}`);
-            if (saved) {
-                savedProgress = JSON.parse(saved);
-                document.getElementById('resumeBtn').style.display = 'block';
-            }
-        }
-
-        function getModuleId() {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get('module') || 'acs-deep-dive-complete';
-        }
-
-        // ============ OVERVIEW SCREEN ============
-        function renderOverviewScreen() {
-            const totalQ = deepDiveData.totalQuestions || countTotalQuestions();
-            document.getElementById('overviewTotalQ').textContent = totalQ;
-            document.getElementById('overviewLayers').textContent = deepDiveData.layers?.length || 0;
-            
-            if (deepDiveData.vignette?.text) {
-                document.getElementById('overviewCaseText').textContent = 
-                    deepDiveData.vignette.text.substring(0, 300) + '...';
-            }
-            
-            const grid = document.getElementById('overviewLayersGrid');
-            grid.innerHTML = '';
-            
-            deepDiveData.layers?.forEach((layer, index) => {
-                const progress = savedProgress?.layerProgress?.[layer.id] || { completed: 0, total: layer.questions?.length || 0 };
-                const isCompleted = progress.completed === progress.total && progress.total > 0;
-                
-                const card = document.createElement('div');
-                card.className = `overview-layer-card ${isCompleted ? 'completed' : ''}`;
-                card.onclick = () => startFromLayer(index);
-                card.innerHTML = `
-                    <div class="overview-layer-header">
-                        <span class="overview-layer-icon">${layer.icon || '📖'}</span>
-                        <span class="overview-layer-title">${layer.title}</span>
-                    </div>
-                    <div class="overview-layer-meta">
-                        <span>${layer.questions?.length || 0} questions</span>
-                        <span>${isCompleted ? '✅ Complete' : `${progress.completed}/${progress.total}`}</span>
-                    </div>
-                    <div class="overview-layer-progress">
-                        <div class="overview-layer-progress-bar" style="width: ${progress.total ? (progress.completed / progress.total) * 100 : 0}%"></div>
-                    </div>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        function showOverview() {
-            document.getElementById('overviewScreen').classList.remove('hidden');
-            document.getElementById('mainContainer').classList.remove('active');
-            pauseTimer();
-        }
-
-        function hideOverview() {
-            document.getElementById('overviewScreen').classList.add('hidden');
-            document.getElementById('mainContainer').classList.add('active');
-        }
-
-        function startFromBeginning() {
-            const moduleId = getModuleId();
-            localStorage.removeItem(`reasondx-progress-${moduleId}`);
-            savedProgress = null;
-            
-            currentLayerIndex = 0;
-            currentQuestionIndex = 0;
-            score = 0;
-            totalAnswered = 0;
-            elapsedTime = 0;
-            
-            renderLayerNav();
-            loadVignetteData();
-            loadQuestion();
-            hideOverview();
-            startTimer();
-        }
-
-        function startFromLayer(layerIndex) {
-            currentLayerIndex = layerIndex;
-            currentQuestionIndex = 0;
-            
-            if (savedProgress) {
-                score = savedProgress.score || 0;
-                totalAnswered = savedProgress.totalAnswered || 0;
-                elapsedTime = savedProgress.elapsedTime || 0;
-            }
-            
-            renderLayerNav();
-            loadVignetteData();
-            loadQuestion();
-            hideOverview();
-            startTimer();
-        }
-
-        function resumeProgress() {
-            if (!savedProgress) return;
-            
-            currentLayerIndex = savedProgress.currentLayerIndex || 0;
-            currentQuestionIndex = savedProgress.currentQuestionIndex || 0;
-            score = savedProgress.score || 0;
-            totalAnswered = savedProgress.totalAnswered || 0;
-            elapsedTime = savedProgress.elapsedTime || 0;
-            
-            renderLayerNav();
-            loadVignetteData();
-            loadQuestion();
-            updateScore();
-            hideOverview();
-            startTimer();
+        function getSampleData() {
+            return {
+                "title": "Acute Coronary Syndrome",
+                "totalQuestions": 33,
+                "vignette": {
+                    "text": "A 58-year-old man is brought to the emergency department by EMS after being awakened from sleep at midnight with severe chest pain. He describes the pain as a crushing pressure radiating down his left arm and into his jaw, associated with profuse diaphoresis, nausea, and shortness of breath. He rates the pain as 10/10.\n\nPast Medical History: Hypertension (10 years), Type 2 Diabetes Mellitus (8 years), Hyperlipidemia (5 years)\nMedications: Lisinopril 20mg daily, Metformin 1000mg BID, Atorvastatin 40mg nightly\nFamily History: Father died of MI at age 52. Brother had CABG at age 55.\nSocial History: 30 pack-year smoking history.\nAllergies: Penicillin (rash)",
+                    "diagnostics": {
+                        "ecg": {
+                            "description": "ST elevation 3-4mm in V1-V4, 2mm in I/aVL. Reciprocal ST depression in II, III, aVF.",
+                            "interpretation": "Acute anterior STEMI"
+                        },
+                        "labs": {
+                            "troponinI": { "value": "0.89 ng/mL", "reference": "<0.04", "flag": "CRITICAL" },
+                            "bnp": { "value": "342 pg/mL", "reference": "<100", "flag": "HIGH" }
+                        }
+                    }
+                },
+                "layers": [
+                    {
+                        "id": "anatomy",
+                        "title": "Anatomy",
+                        "icon": "🫀",
+                        "color": "#ef4444",
+                        "questions": [
+                            {
+                                "id": "anat-1",
+                                "stem": "The ECG shows ST elevation in leads V1-V4 with reciprocal changes in II, III, and aVF.",
+                                "question": "Which coronary artery is most likely occluded?",
+                                "options": [
+                                    { "id": "A", "text": "Left anterior descending (LAD) artery", "correct": true },
+                                    { "id": "B", "text": "Right coronary artery (RCA)", "correct": false },
+                                    { "id": "C", "text": "Left circumflex artery (LCx)", "correct": false },
+                                    { "id": "D", "text": "Posterior descending artery (PDA)", "correct": false }
+                                ],
+                                "explanation": "ST elevation in V1-V4 indicates anterior wall involvement, supplied by the LAD. The LAD courses in the anterior interventricular groove and supplies the anterior LV wall and anterior two-thirds of the interventricular septum.",
+                                "whyChain": [
+                                    {
+                                        "why": "Why do V1-V4 indicate anterior wall involvement?",
+                                        "answer": "Precordial leads V1-V4 overlie the anterior chest, directly over the anterior heart surface. They detect electrical changes in underlying tissue.",
+                                        "source": "OpenStax Anatomy & Physiology 2e"
+                                    },
+                                    {
+                                        "why": "Why does the LAD supply the anterior wall?",
+                                        "answer": "The LAD arises from the left main and courses down the anterior interventricular groove. Diagonal branches supply the anterior wall; septal perforators supply the septum.",
+                                        "source": "OpenStax A&P, Chapter 19.2"
+                                    }
+                                ],
+                                "sources": [
+                                    "OpenStax Anatomy & Physiology 2e, Chapter 19.2: Coronary Circulation",
+                                    "StatPearls: Myocardial Infarction (NCBI Bookshelf)"
+                                ]
+                            },
+                            {
+                                "id": "anat-2",
+                                "stem": "Understanding conduction system blood supply is critical for anticipating complications.",
+                                "question": "The AV node receives blood supply from which artery in ~90% of patients?",
+                                "options": [
+                                    { "id": "A", "text": "Right coronary artery (RCA)", "correct": true },
+                                    { "id": "B", "text": "Left anterior descending (LAD)", "correct": false },
+                                    { "id": "C", "text": "Left circumflex (LCx)", "correct": false },
+                                    { "id": "D", "text": "Left main coronary artery", "correct": false }
+                                ],
+                                "explanation": "The AV nodal artery arises from the RCA in ~90% of people (right-dominant circulation) and from LCx in ~10%. This is why inferior MIs cause AV blocks more often than anterior MIs.",
+                                "whyChain": [
+                                    {
+                                        "why": "Why does this matter clinically in our patient?",
+                                        "answer": "Our patient has anterior (LAD) STEMI. The AV node is typically NOT in LAD territory, so high-grade AV block is less likely. However, bundle branch blocks can occur from septal involvement.",
+                                        "source": "2013 AHA/ACC STEMI Guidelines"
+                                    }
+                                ],
+                                "sources": [
+                                    "OpenStax A&P 2e, Chapter 19.2",
+                                    "StatPearls: Myocardial Infarction"
+                                ]
+                            },
+                            {
+                                "id": "anat-3",
+                                "stem": "The patient reports pain radiating to his left arm and jaw.",
+                                "question": "Which mechanism explains cardiac referred pain to the arm and jaw?",
+                                "options": [
+                                    { "id": "A", "text": "Convergence of cardiac visceral afferents and somatic afferents at spinal cord T1-T4", "correct": true },
+                                    { "id": "B", "text": "Direct innervation of the arm by cardiac sympathetic fibers", "correct": false },
+                                    { "id": "C", "text": "Vagus nerve carrying pain to both heart and arm", "correct": false },
+                                    { "id": "D", "text": "Phrenic nerve irritation from diaphragm", "correct": false }
+                                ],
+                                "explanation": "Cardiac pain travels via visceral afferents to T1-T4 spinal segments, where they converge with somatic afferents from the arm (brachial plexus C5-T1) and jaw. The brain cannot distinguish the source.",
+                                "whyChain": [
+                                    {
+                                        "why": "Why T1-T4 specifically?",
+                                        "answer": "The heart develops embryologically from cervical tissue, retaining sensory connections to upper thoracic/lower cervical segments where cardiac sympathetic afferents enter the cord.",
+                                        "source": "OpenStax A&P, Chapter 13.4"
+                                    }
+                                ],
+                                "sources": [
+                                    "OpenStax A&P 2e, Chapter 13.4: Pain Processing",
+                                    "PMC4458242: Mechanisms of cardiac pain"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "id": "physiology",
+                        "title": "Physiology",
+                        "icon": "⚡",
+                        "color": "#f59e0b",
+                        "questions": [
+                            {
+                                "id": "phys-1",
+                                "stem": "The patient's heart rate is 102 bpm despite severe distress.",
+                                "question": "What is the PRIMARY mechanism driving tachycardia in this patient?",
+                                "options": [
+                                    { "id": "A", "text": "Baroreceptor reflex responding to decreased cardiac output", "correct": true },
+                                    { "id": "B", "text": "Direct effect of ischemia on SA node automaticity", "correct": false },
+                                    { "id": "C", "text": "Pain-induced vagal stimulation", "correct": false },
+                                    { "id": "D", "text": "Hyperglycemia-induced autonomic dysfunction", "correct": false }
+                                ],
+                                "explanation": "Ischemia reduces contractility → decreased stroke volume → decreased CO → decreased BP → baroreceptor unloading → sympathetic activation → tachycardia and vasoconstriction.",
+                                "whyChain": [
+                                    {
+                                        "why": "Is tachycardia helpful or harmful?",
+                                        "answer": "Double-edged sword: maintains CO but increases O2 demand and decreases diastolic time (coronary perfusion time). This is why beta-blockers benefit ACS.",
+                                        "source": "2025 AHA/ACC ACS Guidelines"
+                                    }
+                                ],
+                                "sources": [
+                                    "OpenStax A&P 2e, Chapter 20.4: Baroreceptor Reflex",
+                                    "2025 AHA/ACC ACS Guidelines"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "id": "pathophysiology",
+                        "title": "Pathophysiology",
+                        "icon": "🔬",
+                        "color": "#8b5cf6",
+                        "questions": []
+                    },
+                    {
+                        "id": "pharmacology",
+                        "title": "Pharmacology",
+                        "icon": "💊",
+                        "color": "#10b981",
+                        "questions": []
+                    },
+                    {
+                        "id": "clinical-reasoning",
+                        "title": "Clinical Reasoning",
+                        "icon": "🧠",
+                        "color": "#3b82f6",
+                        "questions": []
+                    },
+                    {
+                        "id": "complications",
+                        "title": "Complications",
+                        "icon": "⚠️",
+                        "color": "#dc2626",
+                        "questions": []
+                    },
+                    {
+                        "id": "synthesis",
+                        "title": "Synthesis",
+                        "icon": "🔗",
+                        "color": "#6366f1",
+                        "questions": []
+                    }
+                ]
+            };
         }
 
         // ============ TIMER ============
         function startTimer() {
-            if (timerInterval) clearInterval(timerInterval);
-            timerSeconds = elapsedTime || 0;
-            updateTimerDisplay();
-            
             timerInterval = setInterval(() => {
                 timerSeconds++;
-                elapsedTime = timerSeconds;
                 updateTimerDisplay();
             }, 1000);
-        }
-
-        function pauseTimer() {
-            if (timerInterval) {
-                clearInterval(timerInterval);
-                timerInterval = null;
-            }
         }
 
         function updateTimerDisplay() {
@@ -1387,277 +1312,81 @@
                 `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
         }
 
-        // ============ PAUSE/SAVE ============
-        function togglePause() {
-            isPaused = !isPaused;
-            const overlay = document.getElementById('pausedOverlay');
-            
-            if (isPaused) {
-                pauseTimer();
-                saveProgress();
-                overlay.classList.add('visible');
-            } else {
-                overlay.classList.remove('visible');
-                startTimer();
-            }
-        }
-
-        function quitToOverview() {
-            isPaused = false;
-            document.getElementById('pausedOverlay').classList.remove('visible');
-            saveProgress();
-            renderOverviewScreen();
-            showOverview();
-        }
-
-        function saveProgress() {
-            const moduleId = getModuleId();
-            const layerProgress = {};
-            
-            deepDiveData.layers?.forEach((layer, idx) => {
-                const total = layer.questions?.length || 0;
-                if (idx < currentLayerIndex) {
-                    layerProgress[layer.id] = { completed: total, total };
-                } else if (idx === currentLayerIndex) {
-                    layerProgress[layer.id] = { completed: currentQuestionIndex, total };
-                } else {
-                    layerProgress[layer.id] = { completed: 0, total };
-                }
-            });
-            
-            const progressData = {
-                currentLayerIndex,
-                currentQuestionIndex,
-                score,
-                totalAnswered,
-                elapsedTime,
-                layerProgress,
-                savedAt: new Date().toISOString()
-            };
-            
-            localStorage.setItem(`reasondx-progress-${moduleId}`, JSON.stringify(progressData));
-            savedProgress = progressData;
-        }
-
         // ============ LAYER NAVIGATION ============
         function renderLayerNav() {
             const container = document.getElementById('layerList');
             container.innerHTML = '';
 
-            deepDiveData.layers?.forEach((layer, index) => {
-                const questions = layer.questions || [];
+            deepDiveData.layers.forEach((layer, index) => {
+                const questionsInLayer = layer.questions.length;
                 const isActive = index === currentLayerIndex;
-                const isCompleted = index < currentLayerIndex;
-                
+                const isComplete = index < currentLayerIndex;
+
                 const item = document.createElement('div');
-                item.className = `layer-item ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''}`;
-                item.onclick = () => jumpToLayer(index);
-                
-                const dots = questions.map((_, qIdx) => {
+                item.className = `layer-item ${isActive ? 'active' : ''}`;
+                item.style.setProperty('--layer-color', layer.color);
+                item.onclick = () => {
+                    if (layer.questions.length > 0) {
+                        currentLayerIndex = index;
+                        currentQuestionIndex = 0;
+                        renderLayerNav();
+                        loadQuestion();
+                    }
+                };
+
+                // Create dots for questions
+                let dots = '';
+                for (let i = 0; i < Math.min(questionsInLayer, 6); i++) {
                     let dotClass = 'layer-dot';
-                    if (index < currentLayerIndex) dotClass += ' completed';
-                    else if (index === currentLayerIndex && qIdx < currentQuestionIndex) dotClass += ' completed';
-                    else if (index === currentLayerIndex && qIdx === currentQuestionIndex) dotClass += ' current';
-                    return `<div class="${dotClass}"></div>`;
-                }).join('');
-                
+                    if (isComplete || (isActive && i < currentQuestionIndex)) {
+                        dotClass += ' complete';
+                    } else if (isActive && i === currentQuestionIndex) {
+                        dotClass += ' current';
+                    }
+                    dots += `<div class="${dotClass}"></div>`;
+                }
+                if (questionsInLayer > 6) dots += `<span style="font-size:0.7rem;color:var(--color-text-muted)">+${questionsInLayer - 6}</span>`;
+
                 item.innerHTML = `
-                    <div class="layer-icon" style="background: ${layerColors[layer.id] || '#64748b'}20; color: ${layerColors[layer.id] || '#64748b'}">
-                        ${layer.icon || '📖'}
-                    </div>
-                    <div class="layer-info">
+                    <div class="layer-icon">${layer.icon}</div>
+                    <div class="layer-details">
                         <div class="layer-name">${layer.title}</div>
-                        <div class="layer-progress-text">${questions.length} questions</div>
+                        <div class="layer-progress">${questionsInLayer} questions</div>
                     </div>
                     <div class="layer-dots">${dots}</div>
                 `;
+
                 container.appendChild(item);
             });
         }
 
-        function jumpToLayer(index) {
-            currentLayerIndex = index;
-            currentQuestionIndex = 0;
-            loadQuestion();
-            renderLayerNav();
-        }
-
-        // ============ QUESTION LOADING ============
-        function loadQuestion() {
-            const layer = deepDiveData.layers?.[currentLayerIndex];
-            if (!layer) return;
-            
-            const question = layer.questions?.[currentQuestionIndex];
-            if (!question) {
-                if (currentLayerIndex < deepDiveData.layers.length - 1) {
-                    currentLayerIndex++;
-                    currentQuestionIndex = 0;
-                    loadQuestion();
-                }
-                return;
-            }
-
-            answered = false;
-            selectedOption = null;
-            whyRevealIndex = 0;
-
-            // Update badge
-            const badge = document.getElementById('layerBadge');
-            badge.innerHTML = `<span class="icon">${layer.icon || '📖'}</span><span class="text">${layer.title}</span>`;
-            badge.style.background = `${layerColors[layer.id] || '#64748b'}20`;
-            badge.style.color = layerColors[layer.id] || '#64748b';
-
-            // Update question number
-            document.getElementById('questionNumber').textContent = 
-                `Question ${currentQuestionIndex + 1} of ${layer.questions.length}`;
-
-            // Update stem and question
-            document.getElementById('questionStem').textContent = question.stem || '';
-            document.getElementById('questionText').textContent = question.question;
-
-            // Render options
-            const optionsList = document.getElementById('optionsList');
-            optionsList.innerHTML = '';
-            
-            question.options?.forEach((opt, idx) => {
-                const div = document.createElement('div');
-                div.className = 'option';
-                div.onclick = () => selectOption(idx);
-                div.innerHTML = `
-                    <div class="option-letter">${opt.id || String.fromCharCode(65 + idx)}</div>
-                    <div class="option-text">${opt.text}</div>
-                `;
-                optionsList.appendChild(div);
-            });
-
-            // Reset UI
-            document.getElementById('submitBtn').disabled = true;
-            document.getElementById('explanationPanel').classList.remove('visible');
-            document.getElementById('questionCard').style.display = 'block';
-            
-            renderLayerNav();
-        }
-
-        function selectOption(index) {
-            if (answered) return;
-            
-            selectedOption = index;
-            document.querySelectorAll('.option').forEach((opt, i) => {
-                opt.classList.toggle('selected', i === index);
-            });
-            document.getElementById('submitBtn').disabled = false;
-        }
-
-        function submitAnswer() {
-            if (selectedOption === null || answered) return;
-            
-            answered = true;
-            totalAnswered++;
-            
-            const layer = deepDiveData.layers[currentLayerIndex];
-            const question = layer.questions[currentQuestionIndex];
-            const options = question.options;
-            
-            const isCorrect = options[selectedOption]?.correct === true;
-            if (isCorrect) score++;
-            
-            updateScore();
-            
-            // Show correct/incorrect styling
-            document.querySelectorAll('.option').forEach((opt, i) => {
-                if (options[i]?.correct) {
-                    opt.classList.add('correct');
-                } else if (i === selectedOption && !options[i]?.correct) {
-                    opt.classList.add('incorrect');
-                }
-            });
-            
-            // Show explanation
-            const resultBadge = document.getElementById('resultBadge');
-            resultBadge.className = `explanation-result ${isCorrect ? 'correct' : 'incorrect'}`;
-            document.getElementById('resultIcon').textContent = isCorrect ? '✓' : '✗';
-            document.getElementById('resultText').textContent = isCorrect ? 'Correct!' : 'Incorrect';
-            
-            document.getElementById('explanationText').textContent = question.explanation || 'Great work!';
-            
-            // Setup why chain
-            const whyItems = document.getElementById('whyItems');
-            whyItems.innerHTML = '';
-            whyRevealIndex = 0;
-            
-            const whyBtn = document.getElementById('revealWhyBtn');
-            whyBtn.style.display = question.whyChain?.length ? 'block' : 'none';
-            
-            document.getElementById('explanationPanel').classList.add('visible');
-        }
-
-        function revealNextWhy() {
-            const layer = deepDiveData.layers[currentLayerIndex];
-            const question = layer.questions[currentQuestionIndex];
-            const whyChain = question.whyChain || [];
-            
-            if (whyRevealIndex >= whyChain.length) return;
-            
-            const why = whyChain[whyRevealIndex];
-            const whyItems = document.getElementById('whyItems');
-            
-            const item = document.createElement('div');
-            item.className = 'why-item';
-            item.innerHTML = `
-                <div class="why-question">${why.why}</div>
-                <div class="why-answer">${why.answer}</div>
-                ${why.source ? `<div class="why-source">— ${why.source}</div>` : ''}
-            `;
-            whyItems.appendChild(item);
-            
-            whyRevealIndex++;
-            
-            if (whyRevealIndex >= whyChain.length) {
-                document.getElementById('revealWhyBtn').style.display = 'none';
-            }
-        }
-
-        function nextQuestion() {
-            currentQuestionIndex++;
-            
-            const layer = deepDiveData.layers[currentLayerIndex];
-            if (currentQuestionIndex >= (layer.questions?.length || 0)) {
-                currentLayerIndex++;
-                currentQuestionIndex = 0;
-                
-                if (currentLayerIndex >= deepDiveData.layers.length) {
-                    showCompletion();
-                    return;
-                }
-            }
-            
-            loadQuestion();
-            saveProgress();
-        }
-
-        function updateScore() {
-            document.getElementById('scoreDisplay').textContent = score;
-        }
-
-        function showCompletion() {
-            alert(`🎉 Congratulations! You completed the Deep Dive!\n\nScore: ${score}/${totalAnswered}\nTime: ${document.getElementById('timerDisplay').textContent}`);
-            showOverview();
-        }
-
-        // ============ VIGNETTE MODAL ============
+        // ============ VIGNETTE ============
         function loadVignetteData() {
-            if (!deepDiveData.vignette) return;
+            const vignette = deepDiveData.vignette;
+            document.getElementById('vignetteText').textContent = vignette.text;
             
-            const v = deepDiveData.vignette;
-            document.getElementById('vignetteContent').innerHTML = `
-                <p style="margin-bottom: 1rem;">${v.text || ''}</p>
-                ${v.diagnostics?.ecg ? `
-                    <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
-                        <strong>ECG:</strong> ${v.diagnostics.ecg.description}<br>
-                        <em>Interpretation: ${v.diagnostics.ecg.interpretation}</em>
-                    </div>
-                ` : ''}
-            `;
+            if (vignette.diagnostics?.ecg) {
+                document.getElementById('ecgFindings').innerHTML = `
+                    <p><strong>Findings:</strong> ${vignette.diagnostics.ecg.description}</p>
+                    <p><strong>Interpretation:</strong> ${vignette.diagnostics.ecg.interpretation}</p>
+                `;
+            }
+
+            if (vignette.diagnostics?.labs) {
+                const labs = vignette.diagnostics.labs;
+                let labHtml = '<table style="width:100%;font-size:0.9rem;">';
+                for (const [key, val] of Object.entries(labs)) {
+                    const flagColor = val.flag === 'CRITICAL' ? 'var(--color-error)' : 
+                                     val.flag === 'HIGH' ? 'var(--color-warning)' : 'var(--color-text)';
+                    labHtml += `<tr>
+                        <td style="padding:4px 0;">${key}</td>
+                        <td style="color:${flagColor};font-weight:600;">${val.value}</td>
+                        <td style="color:var(--color-text-muted);">(ref: ${val.reference})</td>
+                    </tr>`;
+                }
+                labHtml += '</table>';
+                document.getElementById('labResults').innerHTML = labHtml;
+            }
         }
 
         function openVignetteModal() {
@@ -1668,53 +1397,257 @@
             document.getElementById('vignetteModal').classList.remove('visible');
         }
 
-        // ============ SAMPLE DATA ============
-        function getSampleData() {
-            return {
-                title: "Acute Coronary Syndrome",
-                totalQuestions: 32,
-                vignette: {
-                    text: "A 58-year-old man is brought to the emergency department by EMS after being awakened from sleep at midnight with severe chest pain. He describes the pain as a crushing pressure radiating down his left arm and into his jaw, associated with profuse diaphoresis, nausea, and shortness of breath.",
-                    diagnostics: {
-                        ecg: {
-                            description: "ST elevation 3-4mm in V1-V4, 2mm in I/aVL. Reciprocal ST depression in II, III, aVF.",
-                            interpretation: "Acute anterior STEMI"
-                        }
+        // ============ QUESTION LOADING ============
+        function loadQuestion() {
+            const layer = deepDiveData.layers[currentLayerIndex];
+            
+            if (!layer.questions || layer.questions.length === 0) {
+                // Skip to next layer with questions
+                for (let i = currentLayerIndex + 1; i < deepDiveData.layers.length; i++) {
+                    if (deepDiveData.layers[i].questions.length > 0) {
+                        currentLayerIndex = i;
+                        currentQuestionIndex = 0;
+                        renderLayerNav();
+                        loadQuestion();
+                        return;
                     }
-                },
-                layers: [
-                    {
-                        id: "anatomy",
-                        title: "Anatomy",
-                        icon: "🫀",
-                        questions: [
-                            {
-                                id: "anat-1",
-                                stem: "The ECG shows ST elevation in leads V1-V4.",
-                                question: "Which coronary artery is most likely occluded?",
-                                options: [
-                                    { id: "A", text: "Left anterior descending (LAD)", correct: true },
-                                    { id: "B", text: "Right coronary artery (RCA)", correct: false },
-                                    { id: "C", text: "Left circumflex (LCx)", correct: false },
-                                    { id: "D", text: "Posterior descending artery", correct: false }
-                                ],
-                                explanation: "ST elevation in V1-V4 indicates anterior wall involvement, supplied by the LAD.",
-                                whyChain: [
-                                    {
-                                        why: "Why do V1-V4 indicate anterior wall?",
-                                        answer: "Precordial leads V1-V4 overlie the anterior chest, directly over the anterior heart surface.",
-                                        source: "OpenStax Anatomy & Physiology"
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            };
+                }
+                showCompletion();
+                return;
+            }
+
+            if (currentQuestionIndex >= layer.questions.length) {
+                showLayerComplete();
+                return;
+            }
+
+            const question = layer.questions[currentQuestionIndex];
+
+            // Reset state
+            selectedOption = null;
+            answered = false;
+            whyRevealIndex = 0;
+            document.getElementById('submitBtn').disabled = true;
+            document.getElementById('explanationPanel').classList.remove('visible');
+            document.getElementById('questionCard').style.display = 'block';
+            document.getElementById('completionScreen').classList.remove('visible');
+
+            // Set layer color
+            document.documentElement.style.setProperty('--layer-color', layer.color);
+
+            // Update header
+            document.getElementById('layerBadge').innerHTML = `
+                <span class="icon">${layer.icon}</span>
+                <span class="text">${layer.title}</span>
+            `;
+            document.getElementById('questionNumber').textContent = 
+                `Question ${currentQuestionIndex + 1} of ${layer.questions.length}`;
+
+            // Update question content
+            document.getElementById('questionStem').textContent = question.stem;
+            document.getElementById('questionText').textContent = question.question;
+
+            // Render options
+            const optionsList = document.getElementById('optionsList');
+            optionsList.innerHTML = '';
+            question.options.forEach((opt, index) => {
+                const optEl = document.createElement('div');
+                optEl.className = 'option';
+                optEl.onclick = () => selectOption(index);
+                optEl.innerHTML = `
+                    <div class="option-letter">${opt.id}</div>
+                    <div class="option-text">${opt.text}</div>
+                `;
+                optionsList.appendChild(optEl);
+            });
+
+            renderLayerNav();
         }
+
+        function selectOption(index) {
+            if (answered) return;
+
+            selectedOption = index;
+            document.getElementById('submitBtn').disabled = false;
+
+            // Update visual state
+            const options = document.querySelectorAll('.option');
+            options.forEach((opt, i) => {
+                opt.classList.remove('selected');
+                if (i === index) opt.classList.add('selected');
+            });
+        }
+
+        // ============ SUBMIT & FEEDBACK ============
+        function submitAnswer() {
+            if (selectedOption === null || answered) return;
+
+            answered = true;
+            totalAnswered++;
+
+            const layer = deepDiveData.layers[currentLayerIndex];
+            const question = layer.questions[currentQuestionIndex];
+            const isCorrect = question.options[selectedOption].correct;
+
+            if (isCorrect) score++;
+            document.getElementById('scoreDisplay').textContent = score;
+
+            // Mark options
+            const options = document.querySelectorAll('.option');
+            options.forEach((opt, i) => {
+                opt.classList.add('disabled');
+                if (question.options[i].correct) {
+                    opt.classList.add('correct');
+                } else if (i === selectedOption && !isCorrect) {
+                    opt.classList.add('incorrect');
+                }
+            });
+
+            // Show explanation
+            showExplanation(question, isCorrect);
+        }
+
+        function showExplanation(question, isCorrect) {
+            const panel = document.getElementById('explanationPanel');
+            const resultBadge = document.getElementById('resultBadge');
+            
+            resultBadge.className = `explanation-result ${isCorrect ? 'correct' : 'incorrect'}`;
+            document.getElementById('resultIcon').textContent = isCorrect ? '✓' : '✗';
+            document.getElementById('resultText').textContent = isCorrect ? 'Correct!' : 'Incorrect';
+
+            document.getElementById('explanationText').textContent = question.explanation;
+
+            // Render WHY chain
+            const whyItems = document.getElementById('whyItems');
+            whyItems.innerHTML = '';
+            if (question.whyChain && question.whyChain.length > 0) {
+                question.whyChain.forEach((item, i) => {
+                    const whyEl = document.createElement('div');
+                    whyEl.className = 'why-item';
+                    whyEl.id = `why-item-${i}`;
+                    whyEl.innerHTML = `
+                        <div class="why-question">WHY: ${item.why}</div>
+                        <div class="why-answer">${item.answer}</div>
+                        ${item.source ? `<div class="why-source">📚 ${item.source}</div>` : ''}
+                    `;
+                    whyItems.appendChild(whyEl);
+                });
+                document.getElementById('revealWhyBtn').style.display = 'block';
+                whyRevealIndex = 0;
+            } else {
+                document.getElementById('revealWhyBtn').style.display = 'none';
+            }
+
+            // Render sources
+            const sourcesList = document.getElementById('sourcesList');
+            sourcesList.innerHTML = '';
+            if (question.sources) {
+                question.sources.forEach(src => {
+                    const srcEl = document.createElement('div');
+                    srcEl.className = 'source-item';
+                    srcEl.textContent = src;
+                    sourcesList.appendChild(srcEl);
+                });
+            }
+
+            panel.classList.add('visible');
+            document.getElementById('submitBtn').style.display = 'none';
+        }
+
+        function revealNextWhy() {
+            const layer = deepDiveData.layers[currentLayerIndex];
+            const question = layer.questions[currentQuestionIndex];
+
+            if (whyRevealIndex < question.whyChain.length) {
+                const whyEl = document.getElementById(`why-item-${whyRevealIndex}`);
+                whyEl.classList.add('revealed');
+                whyRevealIndex++;
+            }
+
+            if (whyRevealIndex >= question.whyChain.length) {
+                document.getElementById('revealWhyBtn').style.display = 'none';
+            }
+        }
+
+        // ============ NAVIGATION ============
+        function nextQuestion() {
+            currentQuestionIndex++;
+            document.getElementById('submitBtn').style.display = 'block';
+            loadQuestion();
+        }
+
+        function showLayerComplete() {
+            document.getElementById('questionCard').style.display = 'none';
+            document.getElementById('explanationPanel').classList.remove('visible');
+            document.getElementById('completionScreen').classList.add('visible');
+
+            const layer = deepDiveData.layers[currentLayerIndex];
+            document.getElementById('completionSubtitle').textContent = 
+                `You've completed the ${layer.title} layer`;
+
+            const accuracy = layer.questions.length > 0 
+                ? Math.round((score / totalAnswered) * 100) 
+                : 100;
+            document.getElementById('layerScore').textContent = `${accuracy}%`;
+
+            const mins = Math.floor(timerSeconds / 60);
+            const secs = timerSeconds % 60;
+            document.getElementById('layerTime').textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function startNextLayer() {
+            // Find next layer with questions
+            for (let i = currentLayerIndex + 1; i < deepDiveData.layers.length; i++) {
+                if (deepDiveData.layers[i].questions.length > 0) {
+                    currentLayerIndex = i;
+                    currentQuestionIndex = 0;
+                    document.getElementById('completionScreen').classList.remove('visible');
+                    renderLayerNav();
+                    loadQuestion();
+                    return;
+                }
+            }
+            // All layers complete
+            showCompletion();
+        }
+
+        function showCompletion() {
+            document.getElementById('questionCard').style.display = 'none';
+            document.getElementById('explanationPanel').classList.remove('visible');
+            
+            const screen = document.getElementById('completionScreen');
+            screen.classList.add('visible');
+            screen.innerHTML = `
+                <div class="completion-icon">🏆</div>
+                <h2 class="completion-title">Deep Dive Complete!</h2>
+                <p class="completion-subtitle">You've mastered ${deepDiveData.title}</p>
+                <div class="completion-stats">
+                    <div class="completion-stat">
+                        <div class="completion-stat-value">${score}/${totalAnswered}</div>
+                        <div class="completion-stat-label">Correct Answers</div>
+                    </div>
+                    <div class="completion-stat">
+                        <div class="completion-stat-value">${Math.round((score/totalAnswered)*100)}%</div>
+                        <div class="completion-stat-label">Accuracy</div>
+                    </div>
+                    <div class="completion-stat">
+                        <div class="completion-stat-value">${document.getElementById('timerDisplay').textContent}</div>
+                        <div class="completion-stat-label">Total Time</div>
+                    </div>
+                </div>
+            `;
+            clearInterval(timerInterval);
+        }
+
+        // Close modal on outside click
+        document.getElementById('vignetteModal').onclick = (e) => {
+            if (e.target.id === 'vignetteModal') closeVignetteModal();
+        };
 
         // Initialize
         init();
     </script>
+<script src="../dx-unified-nav.js"></script>
+    <script>if(typeof DxNav!=='undefined')DxNav.init({currentPage:'reason',basePath:'../'});</script>
 </body>
 </html>

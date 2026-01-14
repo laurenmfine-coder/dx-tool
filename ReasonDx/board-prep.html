@@ -221,7 +221,7 @@
     <div id="startScreen" class="start-screen">
         <div class="start-card">
             <div class="start-header">
-                <img src="../Logos/reasondx-logo-final.svg" alt="ReasonDx" style="height: 48px; margin-bottom: 1rem;">
+                <div class="start-logo">Dx</div>
                 <h1 class="start-title">Board Prep</h1>
                 <p class="start-subtitle">Evidence-based Board-style questions with guideline citations and clinical reasoning.</p>
             </div>
@@ -247,7 +247,7 @@
 
     <div id="quizScreen" style="display: none;">
         <header class="header">
-            <div class="header-left"><a href="../index.html" class="logo"><img src="../Logos/reasondx-logo-final.svg" alt="ReasonDx" style="height: 28px;"></a></div>
+            <div class="header-left"><a href="../index.html" class="logo"><div class="logo-mark">Dx</div><span>Board Prep</span></a></div>
             <div class="header-center">
                 <div class="timer" id="timer"><span id="timerDisplay">60:00</span></div>
                 <div class="progress-info"><span class="progress-text"><span id="currentQ">1</span> / <span id="totalQ">40</span></span><div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 2.5%"></div></div></div>
@@ -266,7 +266,9 @@
                 <div class="options" id="optionsContainer"></div>
                 <div class="explanation" id="explanationPanel">
                     <div class="explanation-header" id="explanationHeader"><div class="result-icon" id="resultIcon">✓</div><div class="result-text" id="resultText">Correct</div></div>
-                    <nav class="explanation-nav"><div class="exp-tab active" data-tab="answer">Answer</div><div class="exp-tab" data-tab="script">Illness Script</div><div class="exp-tab" data-tab="distractors">Why Not Others</div><div class="exp-tab" data-tab="resources">Resources</div></nav>
+                    <!-- Unified Navigation -->
+    <link rel="stylesheet" href="../dx-unified-nav.css">
+    <div id="dx-nav"></div>
                     <div class="explanation-body">
                         <div class="exp-panel active" id="panelAnswer"></div>
                         <div class="exp-panel" id="panelScript"></div>
@@ -780,11 +782,8 @@
         // Load on init
         loadQuestions();
     </script>
-
-<!-- Unified Navigation -->
-<script src="../dx-nav.js"></script>
-</body>
-</html>
+<script src="../dx-unified-nav.js"></script>
+    <script>if(typeof DxNav!=='undefined')DxNav.init({currentPage:'reason',basePath:'../'});</script>
 </body>
 </html>
 
@@ -804,8 +803,3 @@ function trackSystemPerformance() {
     localStorage.setItem('boardPrepSystems', JSON.stringify(stats));
 }
 </script>
-
-<!-- Unified Navigation -->
-<script src="../dx-nav.js"></script>
-</body>
-</html>

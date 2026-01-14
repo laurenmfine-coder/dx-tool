@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Midnight Code | ReasonDx Adventure</title>
+    <style>
+        :root {
+            --bg: #F8FAFC; --card: #FFFFFF; --border: #E2E8F0; --text: #1E293B;
+            --muted: #64748B; --accent: #7C3AED; --success: #059669;
+            --warning: #D97706; --danger: #DC2626; --info: #2563EB;
+            --header-bg: linear-gradient(135deg, #1E3A5F 0%, #2563EB 100%);
+            --input-bg: #F1F5F9; --ecg-bg: #FFFAF0;
+        }
+        [data-theme="dark"] {
+            --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9;
+            --muted: #94A3B8; --accent: #8B5CF6; --success: #10B981;
+            --warning: #F59E0B; --danger: #EF4444; --info: #3B82F6;
+            --header-bg: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+            --input-bg: rgba(0,0,0,0.3); --ecg-bg: #000000;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: var(--header-bg); color: white; padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .header-title { font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+        .badge { background: var(--accent); padding: 2px 8px; border-radius: 4px; font-size: 0.65rem; font-weight: 700; }
+        .header-controls { display: flex; align-items: center; gap: 12px; }
+        .theme-toggle { background: rgba(255,255,255,0.2); border: none; color: white; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.75rem; }
+        .header-stats { display: flex; gap: 12px; }
+        .stat { text-align: center; background: rgba(255,255,255,0.1); padding: 4px 12px; border-radius: 6px; }
+        .stat-value { font-size: 1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.55rem; opacity: 0.8; text-transform: uppercase; }
+        .main { display: grid; grid-template-columns: 1fr 280px; gap: 20px; max-width: 1200px; margin: 0 auto; padding: 20px; }
+        @media (max-width: 900px) { .main { grid-template-columns: 1fr; } .sidebar { order: -1; } }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 16px; }
+        .card-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .card-badge { font-size: 0.7rem; padding: 4px 12px; border-radius: 12px; font-weight: 600; }
+        .card-badge.critical { background: rgba(220,38,38,0.15); color: var(--danger); }
+        .card-badge.warning { background: rgba(217,119,6,0.15); color: var(--warning); }
+        .card-badge.info { background: rgba(124,58,237,0.15); color: var(--accent); }
+        .card-body { padding: 20px; }
+        .stage-phase { font-size: 0.7rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .stage-title { font-size: 1.4rem; font-weight: 700; }
+        .narrative { background: linear-gradient(135deg, rgba(124,58,237,0.08), rgba(37,99,235,0.08)); border-left: 4px solid var(--accent); padding: 16px 20px; border-radius: 0 10px 10px 0; margin-bottom: 20px; font-size: 0.95rem; line-height: 1.8; }
+        .narrative .hl { background: rgba(217,119,6,0.25); padding: 2px 6px; border-radius: 4px; }
+        .quote { background: rgba(5,150,105,0.08); border: 1px solid rgba(5,150,105,0.2); padding: 16px 20px; border-radius: 10px; margin: 16px 0; position: relative; }
+        .quote::before { content: '"'; font-size: 2.5rem; color: var(--success); position: absolute; top: -5px; left: 12px; opacity: 0.4; }
+        .quote p { font-style: italic; padding-left: 20px; }
+        .quote-attr { font-size: 0.75rem; color: var(--success); margin-top: 8px; padding-left: 20px; }
+        .vitals-panel { background: var(--card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 20px; overflow: hidden; }
+        .vitals-header { background: rgba(37,99,235,0.1); padding: 10px 16px; font-weight: 600; font-size: 0.85rem; display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); }
+        .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); gap: 1px; background: var(--border); }
+        .vital-item { background: var(--card); padding: 12px; text-align: center; }
+        .vital-value { font-size: 1.3rem; font-weight: 700; font-family: monospace; }
+        .vital-value.elevated { color: var(--warning); }
+        .vital-value.normal { color: var(--success); }
+        .vital-label { font-size: 0.7rem; color: var(--muted); }
+        .section-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin: 20px 0 12px 0; display: flex; align-items: center; gap: 10px; }
+        .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+        .question-box { background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.2); border-radius: 10px; padding: 16px 20px; margin-bottom: 16px; }
+        .question-text { font-weight: 600; margin-bottom: 12px; font-size: 0.95rem; }
+        .question-hint { font-size: 0.8rem; color: var(--muted); margin-bottom: 12px; }
+        textarea { width: 100%; min-height: 100px; background: var(--input-bg); border: 1px solid var(--border); border-radius: 8px; padding: 14px; color: var(--text); font-size: 0.9rem; font-family: inherit; resize: vertical; }
+        textarea:focus { outline: none; border-color: var(--accent); }
+        .char-count { text-align: right; font-size: 0.7rem; color: var(--muted); margin-top: 6px; }
+        .mc-options { display: flex; flex-direction: column; gap: 8px; }
+        .mc-option { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--input-bg); border: 2px solid var(--border); border-radius: 8px; cursor: pointer; transition: all 0.15s; }
+        .mc-option:hover { border-color: var(--accent); }
+        .mc-option.selected { border-color: var(--accent); background: rgba(124,58,237,0.1); }
+        .mc-option.correct { border-color: var(--success); background: rgba(5,150,105,0.1); }
+        .mc-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.1); }
+        .mc-radio { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .mc-option.selected .mc-radio { border-color: var(--accent); background: var(--accent); }
+        .mc-option.selected .mc-radio::after { content: ''; width: 8px; height: 8px; background: white; border-radius: 50%; }
+        .diff-builder { background: var(--input-bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+        .diff-input-row { display: flex; gap: 8px; margin-bottom: 12px; }
+        .diff-input { flex: 1; background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; color: var(--text); font-size: 0.9rem; }
+        .diff-add-btn { background: var(--accent); color: white; border: none; padding: 10px 18px; border-radius: 8px; font-weight: 600; cursor: pointer; }
+        .diff-list { display: flex; flex-direction: column; gap: 6px; }
+        .diff-item { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: var(--card); border: 1px solid var(--border); border-radius: 8px; }
+        .diff-rank { width: 24px; height: 24px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.75rem; color: white; }
+        .diff-rank.top { background: var(--danger); }
+        .diff-remove { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 1rem; }
+        .decision-cards { display: flex; flex-direction: column; gap: 10px; }
+        .decision-card { background: var(--card); border: 2px solid var(--border); border-radius: 10px; padding: 16px 18px; cursor: pointer; transition: all 0.15s; }
+        .decision-card:hover { border-color: var(--accent); transform: translateX(4px); }
+        .decision-card.selected { border-color: var(--accent); background: rgba(124,58,237,0.08); }
+        .decision-card.correct { border-color: var(--success); }
+        .decision-card.incorrect { border-color: var(--danger); }
+        .decision-title { font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; gap: 10px; }
+        .decision-desc { font-size: 0.85rem; color: var(--muted); }
+        .decision-time { font-size: 0.75rem; color: var(--warning); margin-top: 8px; }
+        .ecg-viewer { background: var(--ecg-bg); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 16px; }
+        .ecg-header { background: rgba(0,0,0,0.05); padding: 12px 16px; display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); }
+        .ecg-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; padding: 10px; }
+        .ecg-lead { background: var(--ecg-bg); padding: 8px; position: relative; border: 1px solid var(--border); }
+        .ecg-lead-label { position: absolute; top: 4px; left: 8px; font-size: 0.7rem; color: var(--muted); font-weight: 600; }
+        .ecg-lead canvas { width: 100%; height: 55px; display: block; }
+        .ecg-lead.highlight { outline: 2px solid var(--danger); }
+        .ecg-machine-read { padding: 12px 16px; background: rgba(220,38,38,0.08); border-top: 1px solid var(--border); font-size: 0.85rem; }
+        .interp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; }
+        .interp-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: var(--input-bg); border: 2px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 0.85rem; }
+        .interp-item:hover { border-color: var(--accent); }
+        .interp-item.selected { border-color: var(--accent); background: rgba(124,58,237,0.1); }
+        .interp-check { width: 18px; height: 18px; border: 2px solid var(--border); border-radius: 4px; display: flex; align-items: center; justify-content: center; }
+        .interp-item.selected .interp-check { background: var(--accent); border-color: var(--accent); }
+        .interp-item.selected .interp-check::after { content: '✓'; color: white; font-size: 0.7rem; }
+        .lab-panel { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 16px; }
+        .lab-header { padding: 12px 16px; background: rgba(5,150,105,0.08); display: flex; justify-content: space-between; font-weight: 600; border-bottom: 1px solid var(--border); }
+        .lab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 1px; background: var(--border); }
+        .lab-item { background: var(--card); padding: 12px; }
+        .lab-name { font-size: 0.7rem; color: var(--muted); margin-bottom: 4px; }
+        .lab-value { font-size: 1.1rem; font-weight: 600; font-family: monospace; }
+        .lab-value.critical { color: var(--danger); }
+        .lab-value.high { color: var(--warning); }
+        .lab-range { font-size: 0.65rem; color: var(--muted); margin-top: 2px; }
+        .feedback { margin-top: 20px; padding: 18px; border-radius: 10px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.excellent { background: rgba(5,150,105,0.1); border: 1px solid rgba(5,150,105,0.3); }
+        .feedback.good { background: rgba(37,99,235,0.1); border: 1px solid rgba(37,99,235,0.3); }
+        .feedback.needs-work { background: rgba(217,119,6,0.1); border: 1px solid rgba(217,119,6,0.3); }
+        .feedback-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+        .feedback-icon { font-size: 1.5rem; }
+        .feedback-title { font-size: 1.1rem; font-weight: 600; }
+        .feedback-items { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+        .feedback-item { padding: 5px 10px; border-radius: 6px; font-size: 0.8rem; }
+        .feedback-item.earned { background: rgba(5,150,105,0.15); color: var(--success); }
+        .feedback-item.missed { background: rgba(220,38,38,0.15); color: var(--danger); }
+        .feedback-pearl { background: rgba(124,58,237,0.1); border-radius: 8px; padding: 14px; margin-top: 14px; }
+        .feedback-pearl-title { font-size: 0.8rem; color: var(--accent); font-weight: 600; margin-bottom: 6px; }
+        .btn-row { display: flex; gap: 10px; margin-top: 20px; }
+        .btn { padding: 12px 24px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; cursor: pointer; border: none; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn-primary:hover { opacity: 0.9; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .sidebar { display: flex; flex-direction: column; gap: 14px; }
+        .panel { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+        .panel-header { padding: 12px 14px; background: rgba(0,0,0,0.03); font-weight: 600; font-size: 0.85rem; border-bottom: 1px solid var(--border); }
+        .panel-body { padding: 14px; }
+        .patient-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 0.85rem; border-bottom: 1px solid var(--border); }
+        .patient-row:last-child { border-bottom: none; }
+        .patient-label { color: var(--muted); }
+        .timeline-item { display: flex; gap: 10px; padding: 10px 0; padding-left: 20px; border-left: 2px solid var(--border); margin-left: 8px; position: relative; font-size: 0.8rem; }
+        .timeline-item::before { content: ''; position: absolute; left: -6px; top: 14px; width: 10px; height: 10px; background: var(--accent); border-radius: 50%; }
+        .timeline-item.current::before { background: var(--success); box-shadow: 0 0 0 3px rgba(5,150,105,0.2); }
+        .timeline-item.future { opacity: 0.5; }
+        .timeline-item.future::before { background: var(--border); }
+        .score-circle { width: 80px; height: 80px; border-radius: 50%; background: conic-gradient(var(--accent) calc(var(--pct) * 1%), var(--border) 0); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; position: relative; }
+        .score-circle::before { content: ''; position: absolute; width: 64px; height: 64px; background: var(--card); border-radius: 50%; }
+        .score-value { position: relative; font-size: 1.3rem; font-weight: 700; }
+        .score-row { display: flex; justify-content: space-between; padding: 6px 0; font-size: 0.8rem; border-bottom: 1px solid var(--border); }
+        .score-row:last-child { border-bottom: none; }
+        .alert { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; border-radius: 10px; margin-bottom: 16px; }
+        .alert.critical { background: rgba(220,38,38,0.1); border: 1px solid rgba(220,38,38,0.3); }
+        .alert-icon { font-size: 1.3rem; }
+        .alert-title { font-weight: 600; font-size: 0.9rem; }
+        .alert-desc { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+        /* Communication styles */
+        .comm-container { background: var(--card); border: 2px solid var(--accent); border-radius: 12px; overflow: hidden; }
+        .comm-header { background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(37,99,235,0.1)); padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .comm-title { font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+        .comm-turn { font-size: 0.8rem; color: var(--muted); background: var(--input-bg); padding: 4px 12px; border-radius: 20px; }
+        .comm-notice { background: rgba(37,99,235,0.1); border-left: 4px solid var(--info); padding: 12px 16px; margin: 16px; border-radius: 0 8px 8px 0; font-size: 0.85rem; }
+        .comm-character { display: flex; align-items: center; gap: 14px; padding: 16px 20px; background: var(--input-bg); margin: 0 16px; border-radius: 10px; }
+        .character-avatar { width: 50px; height: 50px; background: var(--card); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; border: 2px solid var(--warning); }
+        .character-info { flex: 1; }
+        .character-name { font-weight: 600; }
+        .character-relation { font-size: 0.8rem; color: var(--muted); }
+        .character-emotion { padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; background: rgba(217,119,6,0.15); color: var(--warning); }
+        .comm-bubble { margin: 16px; padding: 20px; background: linear-gradient(135deg, rgba(124,58,237,0.08), rgba(37,99,235,0.05)); border-radius: 16px 16px 16px 4px; }
+        .bubble-text { font-size: 1.05rem; line-height: 1.7; font-style: italic; }
+        .bubble-subtext { margin-top: 10px; font-size: 0.8rem; color: var(--muted); font-style: normal; }
+        .comm-response { padding: 16px; }
+        .response-label { display: block; font-weight: 600; margin-bottom: 10px; }
+        .comm-response textarea { min-height: 120px; }
+        .comm-feedback { margin: 16px; padding: 18px; background: var(--input-bg); border-radius: 10px; }
+        .comm-actions { padding: 16px; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; }
+        .score-bars { margin-top: 12px; }
+        .score-bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 0.85rem; }
+        .score-bar-label { width: 100px; }
+        .score-bar { flex: 1; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+        .score-fill { height: 100%; background: var(--accent); border-radius: 4px; }
+        .score-bar-value { width: 40px; text-align: right; color: var(--muted); }
+        .loading { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; animation: spin 0.8s linear infinite; margin-right: 8px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .hidden { display: none !important; }
+        /* Voice Input Styles */
+        .voice-input-container { display: flex; gap: 8px; align-items: flex-start; }
+        .voice-input-container textarea { flex: 1; }
+        .voice-btn { width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--border); background: var(--card); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; transition: all 0.2s; flex-shrink: 0; }
+        .voice-btn:hover { border-color: var(--accent); background: rgba(124,58,237,0.1); }
+        .voice-btn.recording { border-color: var(--danger); background: rgba(220,38,38,0.1); animation: pulse 1.5s infinite; }
+        .voice-btn.recording::after { content: ''; position: absolute; width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--danger); animation: ripple 1.5s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        @keyframes ripple { 0% { transform: scale(1); opacity: 0.5; } 100% { transform: scale(1.5); opacity: 0; } }
+        .voice-status { font-size: 0.8rem; color: var(--muted); margin-top: 6px; display: flex; align-items: center; gap: 6px; }
+        .voice-status.recording { color: var(--danger); }
+        .voice-status .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--danger); animation: blink 1s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .voice-not-supported { font-size: 0.8rem; color: var(--warning); padding: 8px; background: rgba(217,119,6,0.1); border-radius: 6px; margin-top: 8px; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-row">
+            <div class="header-title">🫀 The Midnight Code <span class="badge">ADVENTURE</span></div>
+            <div class="header-controls">
+                <button class="theme-toggle" onclick="Engine.toggleTheme()"><span id="themeIcon">🌙</span> <span id="themeText">Dark</span></button>
+                <div class="header-stats">
+                    <div class="stat"><div class="stat-value" id="caseTime">02:14</div><div class="stat-label">Case Time</div></div>
+                    <div class="stat"><div class="stat-value" id="scoreDisplay">0</div><div class="stat-label">Score</div></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="main">
+        <div class="content"><div id="stageContainer"></div></div>
+        <div class="sidebar">
+            <div class="panel">
+                <div class="panel-header">👤 Patient</div>
+                <div class="panel-body">
+                    <div class="patient-row"><span class="patient-label">Name</span><span class="patient-value">Robert Chen</span></div>
+                    <div class="patient-row"><span class="patient-label">Age/Sex</span><span class="patient-value">58 yo Male</span></div>
+                    <div class="patient-row"><span class="patient-label">CC</span><span class="patient-value">Chest Pain</span></div>
+                    <div class="patient-row"><span class="patient-label">Arrival</span><span class="patient-value">02:14 AM</span></div>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-header">🕐 Timeline</div>
+                <div class="panel-body" id="timeline">
+                    <div class="timeline-item current" id="tl-arrival"><span class="timeline-time">02:14</span><span>Arrival</span></div>
+                    <div class="timeline-item future" id="tl-ecg"><span class="timeline-time">--:--</span><span>ECG</span></div>
+                    <div class="timeline-item future" id="tl-family"><span class="timeline-time">--:--</span><span>Family talk</span></div>
+                    <div class="timeline-item future" id="tl-tx"><span class="timeline-time">--:--</span><span>Treatment</span></div>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-header">📋 Differential</div>
+                <div class="panel-body"><div id="sidebarDiff"><p style="font-size:0.8rem;color:var(--muted);">Build as you go.</p></div></div>
+            </div>
+            <div class="panel">
+                <div class="panel-header">🧠 Score</div>
+                <div class="panel-body" style="text-align:center;">
+                    <div class="score-circle" style="--pct:0" id="scoreCircle"><div class="score-value" id="totalScore">0</div></div>
+                    <div style="font-size:0.75rem;color:var(--muted);">Clinical Reasoning</div>
+                    <div style="margin-top:12px;">
+                        <div class="score-row"><span>History</span><span id="histScore">--</span></div>
+                        <div class="score-row"><span>Differential</span><span id="diffScore">--</span></div>
+                        <div class="score-row"><span>Interpretation</span><span id="dataScore">--</span></div>
+                        <div class="score-row"><span>Communication</span><span id="commScore">--</span></div>
+                        <div class="score-row"><span>Management</span><span id="mgmtScore">--</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    // ===== ADVENTURE ENGINE WITH COMMUNICATION =====
+    const WORKER_URL = 'https://adventure-comm.laurenmfine.workers.dev';
+    
+    const Engine = {
+        synonyms: {
+            'stemi': ['mi', 'myocardial infarction', 'heart attack', 'ami'],
+            'pe': ['pulmonary embolism', 'pulmonary embolus'],
+            'aortic dissection': ['dissection', 'aortic tear'],
+            'radiation': ['radiate', 'radiates', 'arm', 'jaw', 'neck', 'shoulder', 'back'],
+            'character': ['quality', 'sharp', 'dull', 'pressure', 'squeezing', 'crushing', 'heavy'],
+            'onset': ['start', 'started', 'when', 'sudden', 'gradual'],
+            'dyspnea': ['shortness of breath', 'sob', 'breathing', 'breathless'],
+            'associated symptoms': ['nausea', 'vomiting', 'sweating', 'diaphoresis', 'lightheaded'],
+            'risk factors': ['cardiac history', 'hypertension', 'diabetes', 'smoking', 'family history', 'cholesterol'],
+            'aspirin': ['asa'], 'heparin': ['anticoagulation', 'enoxaparin', 'lovenox'],
+            'p2y12': ['clopidogrel', 'plavix', 'ticagrelor', 'brilinta'],
+            'anterior': ['anteroseptal'], 'lad': ['left anterior descending']
+        },
+        state: {
+            stage: 'arrival', time: 0, differential: [], responses: {}, interpretations: {}, decisions: [],
+            scores: { history: 0, diff: 0, data: 0, comm: 0, mgmt: 0, total: 0 },
+            commTurn: 1, commHistory: [], commScores: []
+        },
+        matchesConcept(text, concept) {
+            const lower = text.toLowerCase();
+            if (lower.includes(concept.toLowerCase())) return true;
+            const syns = this.synonyms[concept.toLowerCase()];
+            return syns ? syns.some(s => lower.includes(s)) : false;
+        },
+        matchesDiagnosis(entry, target) {
+            const e = entry.toLowerCase().replace(/[^a-z0-9\s]/g, '');
+            const t = target.toLowerCase();
+            if (e.includes(t) || t.includes(e)) return true;
+            const syns = this.synonyms[t];
+            return syns ? syns.some(s => e.includes(s)) : false;
+        },
+        stages: {
+            arrival: {
+                phase: 'Initial Assessment', title: 'The Page', badge: { type: 'warning', text: '⏱️ Time-Sensitive' },
+                narrative: `Your pager jolts you awake at 2:14 AM. <em>"Incoming chest pain, ETA 2 minutes."</em><br><br>The paramedics wheel in a <span class="hl">58-year-old male</span>, visibly diaphoretic.`,
+                quote: { text: "Doc, it feels like an elephant sitting on my chest. Started about 45 minutes ago...", attr: "Mr. Chen, grimacing" },
+                showVitals: true, vitals: { hr: 96, bp: '145/88', rr: 20, spo2: 95 }, vitalsTime: '02:14',
+                sections: [
+                    { type: 'free-response', id: 'history', question: 'What history questions will you ask?', hint: 'Think risk stratification.', minLen: 30,
+                      concepts: [{ name: 'radiation', points: 3 }, { name: 'character', points: 3 }, { name: 'onset', points: 2 }, { name: 'dyspnea', points: 3 }, { name: 'associated symptoms', points: 3 }, { name: 'risk factors', points: 4 }] },
+                    { type: 'differential', id: 'diff', question: 'Build your differential:', hint: 'Include must-not-miss.',
+                      mustInclude: [{ name: 'STEMI', points: 5, critical: true }, { name: 'Aortic Dissection', points: 4, critical: true }, { name: 'PE', points: 4, critical: true }], bonusPoints: 2, maxBonus: 6 }
+                ],
+                next: 'ecg-decision'
+            },
+            'ecg-decision': {
+                phase: 'Immediate Management', title: 'First Actions', badge: { type: 'critical', text: '🚨 Decision' },
+                showVitals: true, vitals: { hr: 98, bp: '142/90', rr: 22, spo2: 94 }, vitalsTime: '02:17',
+                sections: [
+                    { type: 'question', id: 'd2ecg', question: 'Target door-to-ECG time?', questionType: 'mc',
+                      options: [{ id: '5', text: '5 minutes', correct: false }, { id: '10', text: '10 minutes', correct: true }, { id: '30', text: '30 minutes', correct: false }],
+                      feedback: { correct: { title: 'Correct!', body: 'ECG within 10 min is Class I recommendation.' }, incorrect: { title: 'Review', body: 'Target is 10 minutes per ACC/AHA.' } }, points: 5 },
+                    { type: 'decision', id: 'first-order', question: 'Your FIRST order?',
+                      options: [{ id: 'ecg', icon: '⚡', title: 'STAT ECG', desc: 'Get ECG now', correct: true, points: 15 }, { id: 'history', icon: '📋', title: 'Complete history', desc: 'Finish history first', correct: false, points: 5 }, { id: 'labs', icon: '🧪', title: 'Draw troponin', desc: 'Labs first', correct: false, points: 3 }] }
+                ],
+                next: 'ecg-reading'
+            },
+            'ecg-reading': {
+                phase: 'Data Interpretation', title: 'The ECG', badge: { type: 'info', text: '🔍 Interpret' },
+                narrative: 'The ECG tech hands you the tracing.',
+                showVitals: true, vitals: { hr: 100, bp: '138/86', rr: 22, spo2: 94 }, vitalsTime: '02:20',
+                showECG: true, machineRead: '***ACUTE MI SUSPECTED*** ST ELEVATION ANTERIOR',
+                sections: [
+                    { type: 'ecg-interp', id: 'ecg-findings', question: 'Identify ALL findings:',
+                      options: [{ id: 'sinus', text: 'Sinus rhythm', correct: true, points: 2 }, { id: 'ste-ant', text: 'ST elevation V1-V4', correct: true, critical: true, points: 8 }, { id: 'std-inf', text: 'Reciprocal ST depression', correct: true, points: 4 }, { id: 'afib', text: 'Atrial fibrillation', correct: false, points: -3 }, { id: 'normal', text: 'Normal ECG', correct: false, critical: true, points: -10 }] },
+                    { type: 'free-response', id: 'ecg-dx', question: 'Your diagnosis? Include localization and culprit vessel.', minLen: 15,
+                      concepts: [{ name: 'stemi', points: 5 }, { name: 'anterior', points: 4 }, { name: 'lad', points: 4 }] }
+                ],
+                labs: { title: 'STAT Labs', time: '02:25', items: [{ name: 'Troponin I', value: '0.89', unit: 'ng/mL', range: '<0.04', status: 'critical' }, { name: 'BNP', value: '342', unit: 'pg/mL', range: '<100', status: 'high' }] },
+                next: 'family-talk'
+            },
+            'family-talk': {
+                phase: 'Communication', title: 'Family Arrives', badge: { type: 'info', text: '💬 Communication' },
+                isCommunication: true,
+                narrative: `A nurse approaches: "Doctor, the patient's wife just arrived. She's very upset and asking what's happening."`,
+                next: 'treatment'
+            },
+            'treatment': {
+                phase: 'Critical Management', title: 'The Decision', badge: { type: 'critical', text: '🚨 Time-Critical' },
+                showVitals: true, vitals: { hr: 104, bp: '132/82', rr: 24, spo2: 93 }, vitalsTime: '02:35',
+                alert: { type: 'critical', title: 'Anterior STEMI Confirmed', desc: 'Troponin positive. Ongoing symptoms. Next step?' },
+                sections: [
+                    { type: 'question', id: 'd2b', question: 'Target door-to-balloon time?', questionType: 'mc',
+                      options: [{ id: '60', text: '60 min', correct: false }, { id: '90', text: '90 min', correct: true }, { id: '120', text: '120 min', correct: false }],
+                      feedback: { correct: { title: 'Correct!', body: 'D2B <90 min is the target.' }, incorrect: { title: 'Review', body: 'Target is 90 minutes.' } }, points: 5 },
+                    { type: 'decision', id: 'reperfusion', question: 'Reperfusion strategy? (24/7 cath lab available)',
+                      options: [{ id: 'cath', icon: '🏥', title: 'Activate cath lab', desc: 'Primary PCI', correct: true, points: 20 }, { id: 'lytics', icon: '💉', title: 'Fibrinolytics', desc: 'Give tPA', correct: false, points: 8 }, { id: 'wait', icon: '📞', title: 'Wait for cardiology', desc: 'Consult first', correct: false, points: 3 }] },
+                    { type: 'free-response', id: 'meds', question: 'Medications while waiting for cath lab?', hint: 'Antiplatelet, anticoagulation, symptoms.', minLen: 20,
+                      concepts: [{ name: 'aspirin', points: 5 }, { name: 'p2y12', points: 5 }, { name: 'heparin', points: 4 }] }
+                ],
+                next: 'outcome'
+            },
+            outcome: { isOutcome: true }
+        },
+        init() {
+            this.startTimer();
+            this.render('arrival');
+            if (localStorage.getItem('reasondx-theme') === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.getElementById('themeIcon').textContent = '☀️';
+                document.getElementById('themeText').textContent = 'Light';
+            }
+        },
+        toggleTheme() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
+            document.getElementById('themeIcon').textContent = isDark ? '🌙' : '☀️';
+            document.getElementById('themeText').textContent = isDark ? 'Dark' : 'Light';
+            localStorage.setItem('reasondx-theme', isDark ? 'light' : 'dark');
+            if (document.getElementById('ecgGrid')) this.drawECG();
+        },
+        startTimer() {
+            setInterval(() => {
+                this.state.time++;
+                const m = (14 + Math.floor(this.state.time / 60)) % 60;
+                const h = 2 + Math.floor((14 + Math.floor(this.state.time / 60)) / 60);
+                document.getElementById('caseTime').textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+            }, 1000);
+        },
+        // Voice Recognition
+        recognition: null,
+        isRecording: false,
+        initVoiceRecognition() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) return;
+            
+            this.recognition = new SpeechRecognition();
+            this.recognition.continuous = true;
+            this.recognition.interimResults = true;
+            this.recognition.lang = 'en-US';
+            
+            this.recognition.onstart = () => {
+                this.isRecording = true;
+                const btn = document.getElementById('voiceBtn');
+                const status = document.getElementById('voiceStatus');
+                if (btn) { btn.classList.add('recording'); document.getElementById('voiceIcon').textContent = '⏹️'; }
+                if (status) { status.innerHTML = '<span class="dot"></span> Listening... speak now'; status.classList.remove('hidden'); status.classList.add('recording'); }
+            };
+            
+            this.recognition.onend = () => {
+                this.isRecording = false;
+                const btn = document.getElementById('voiceBtn');
+                const status = document.getElementById('voiceStatus');
+                if (btn) { btn.classList.remove('recording'); document.getElementById('voiceIcon').textContent = '🎤'; }
+                if (status) { status.classList.add('hidden'); status.classList.remove('recording'); }
+            };
+            
+            this.recognition.onresult = (event) => {
+                const textarea = document.getElementById('commResponse');
+                if (!textarea) return;
+                let finalTranscript = '';
+                let interimTranscript = '';
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    if (event.results[i].isFinal) { finalTranscript += event.results[i][0].transcript + ' '; }
+                    else { interimTranscript += event.results[i][0].transcript; }
+                }
+                if (finalTranscript) { textarea.value += finalTranscript; textarea.dispatchEvent(new Event('input')); }
+                const status = document.getElementById('voiceStatus');
+                if (status && interimTranscript) { status.innerHTML = `<span class="dot"></span> ${interimTranscript}`; }
+            };
+            
+            this.recognition.onerror = (event) => {
+                console.error('Speech recognition error:', event.error);
+                const status = document.getElementById('voiceStatus');
+                if (status) { status.textContent = `Error: ${event.error}. Try again.`; status.classList.remove('hidden'); setTimeout(() => status.classList.add('hidden'), 3000); }
+                this.isRecording = false;
+                const btn = document.getElementById('voiceBtn');
+                if (btn) { btn.classList.remove('recording'); document.getElementById('voiceIcon').textContent = '🎤'; }
+            };
+        },
+        toggleVoice() {
+            if (!this.recognition) { this.initVoiceRecognition(); }
+            if (this.isRecording) { this.recognition.stop(); }
+            else { this.recognition.start(); }
+        },
+        render(stageId) {
+            const stage = this.stages[stageId];
+            this.state.stage = stageId;
+            if (stage.isOutcome) { this.renderOutcome(); return; }
+            if (stage.isCommunication) { this.renderCommunication(stage); return; }
+            
+            let html = `<div class="card"><div class="card-header"><div><div class="stage-phase">${stage.phase}</div><div class="stage-title">${stage.title}</div></div>${stage.badge ? `<span class="card-badge ${stage.badge.type}">${stage.badge.text}</span>` : ''}</div><div class="card-body">`;
+            if (stage.alert) html += `<div class="alert ${stage.alert.type}"><span class="alert-icon">🚨</span><div><div class="alert-title">${stage.alert.title}</div><div class="alert-desc">${stage.alert.desc}</div></div></div>`;
+            if (stage.narrative) html += `<div class="narrative">${stage.narrative}</div>`;
+            if (stage.quote) html += `<div class="quote"><p>${stage.quote.text}</p><div class="quote-attr">— ${stage.quote.attr}</div></div>`;
+            if (stage.showVitals) html += this.renderVitals(stage.vitals, stage.vitalsTime);
+            if (stage.showECG) html += this.renderECGViewer(stage.machineRead);
+            if (stage.labs) html += this.renderLabs(stage.labs);
+            if (stage.sections) stage.sections.forEach(s => { html += this.renderSection(s); });
+            html += `<div class="feedback" id="feedback"></div><div class="btn-row"><button class="btn btn-primary" id="continueBtn" onclick="Engine.submitStage()" disabled>Submit →</button></div></div></div>`;
+            document.getElementById('stageContainer').innerHTML = html;
+            this.setupInteractions();
+            if (stage.showECG) setTimeout(() => this.drawECG(), 100);
+        },
+        renderVitals(v, time) {
+            return `<div class="vitals-panel"><div class="vitals-header"><span>📊 Vital Signs</span><span style="font-size:0.75rem;color:var(--muted)">${time}</span></div><div class="vitals-grid">
+                <div class="vital-item"><div class="vital-value elevated">${v.hr}</div><div class="vital-label">HR</div></div>
+                <div class="vital-item"><div class="vital-value elevated">${v.bp}</div><div class="vital-label">BP</div></div>
+                <div class="vital-item"><div class="vital-value elevated">${v.rr}</div><div class="vital-label">RR</div></div>
+                <div class="vital-item"><div class="vital-value normal">${v.spo2}%</div><div class="vital-label">SpO2</div></div></div></div>`;
+        },
+        renderECGViewer(machineRead) {
+            return `<div class="section-label">📈 12-Lead ECG</div><div class="ecg-viewer"><div class="ecg-header"><span style="font-weight:600">12-Lead ECG</span><span style="font-size:0.75rem;color:var(--muted)">25mm/s</span></div><div class="ecg-grid" id="ecgGrid"></div><div class="ecg-machine-read"><div style="font-size:0.7rem;color:var(--danger);font-weight:600">⚠️ Machine Read:</div>${machineRead}</div></div>`;
+        },
+        renderLabs(labs) {
+            return `<div class="section-label">🧪 Labs</div><div class="lab-panel"><div class="lab-header"><span>${labs.title}</span><span style="font-size:0.75rem;color:var(--muted)">${labs.time}</span></div><div class="lab-grid">${labs.items.map(l => `<div class="lab-item"><div class="lab-name">${l.name}</div><div class="lab-value ${l.status}">${l.value} ${l.unit}</div><div class="lab-range">Ref: ${l.range}</div></div>`).join('')}</div></div>`;
+        },
+        renderSection(s) {
+            if (s.type === 'question') return `<div class="question-box" data-section="${s.id}"><div class="question-text">${s.question}</div><div class="mc-options">${s.options.map(o => `<div class="mc-option" data-id="${o.id}" data-correct="${o.correct}" onclick="Engine.selectMC('${s.id}','${o.id}')"><div class="mc-radio"></div><div class="mc-text">${o.text}</div></div>`).join('')}</div></div>`;
+            if (s.type === 'free-response') return `<div class="section-label">💭 Response</div><div class="question-box" data-section="${s.id}"><div class="question-text">${s.question}</div>${s.hint ? `<div class="question-hint">${s.hint}</div>` : ''}<textarea id="resp-${s.id}" data-id="${s.id}" data-min="${s.minLen||0}"></textarea><div class="char-count"><span id="count-${s.id}">0</span> chars${s.minLen ? ` (min ${s.minLen})` : ''}</div></div>`;
+            if (s.type === 'differential') return `<div class="section-label">📋 Differential</div><div class="question-box" data-section="${s.id}"><div class="question-text">${s.question}</div><div class="question-hint">${s.hint}</div><div class="diff-builder"><div class="diff-input-row"><input type="text" class="diff-input" id="diffInput" placeholder="Enter diagnosis..."><button class="diff-add-btn" onclick="Engine.addDiff()">Add</button></div><div class="diff-list" id="diffList"></div></div></div>`;
+            if (s.type === 'decision') return `<div class="section-label">⚡ Decision</div><div class="question-box" data-section="${s.id}"><div class="question-text">${s.question}</div><div class="decision-cards">${s.options.map(o => `<div class="decision-card" data-id="${o.id}" data-section="${s.id}" onclick="Engine.selectDecision('${s.id}','${o.id}')"><div class="decision-title"><span class="decision-icon">${o.icon}</span>${o.title}</div><div class="decision-desc">${o.desc}</div></div>`).join('')}</div></div>`;
+            if (s.type === 'ecg-interp') return `<div class="section-label">🔍 ECG Interpretation</div><div class="question-box" data-section="${s.id}"><div class="question-text">${s.question}</div><div class="interp-grid">${s.options.map(o => `<div class="interp-item" data-id="${o.id}" onclick="Engine.toggleInterp('${s.id}','${o.id}')"><div class="interp-check"></div><span>${o.text}</span></div>`).join('')}</div></div>`;
+            return '';
+        },
+        // Communication Assessment
+        commTurns: [
+            { prompt: "Doctor! They said my husband is having a heart attack? Is he going to be okay?", subtext: "Visibly shaking, eyes red", emotion: "anxious" },
+            { prompt: "But HOW? He quit smoking years ago, he watches what he eats...", subtext: "Looking for explanation", emotion: "confused" },
+            { prompt: "What exactly are you going to do? Is the cath lab surgery?", subtext: "Trying to understand", emotion: "worried" },
+            { prompt: "My friend's husband got clot-busting medicine. Why not that?", subtext: "Genuinely curious", emotion: "questioning" },
+            { prompt: "What are his chances? I have two kids at home. I need to know.", subtext: "Steeling herself", emotion: "vulnerable" },
+            { prompt: "Is there anything I can do? Can I see him before he goes?", subtext: "Taking deep breath", emotion: "resolving" }
+        ],
+        renderCommunication(stage) {
+            const turn = this.commTurns[this.state.commTurn - 1];
+            const speechSupported = 'webkitSpeechRecognition' in window || 'SpeechRecognition' in window;
+            const html = `<div class="comm-container">
+                <div class="comm-header"><div class="comm-title">💬 Family Discussion</div><div class="comm-turn">Turn ${this.state.commTurn} of 6</div></div>
+                <div class="comm-notice"><strong>Communication Assessment:</strong> You're being evaluated on empathy, plain language, clarity, tone, and engagement.</div>
+                <div class="comm-character"><div class="character-avatar">👩</div><div class="character-info"><div class="character-name">Mrs. Chen</div><div class="character-relation">Wife</div></div><div class="character-emotion">${turn.emotion}</div></div>
+                <div class="comm-bubble"><div class="bubble-text">"${turn.prompt}"</div><div class="bubble-subtext">${turn.subtext}</div></div>
+                ${this.state.commHistory.length > 0 ? `<div style="margin:16px;padding:12px;background:var(--input-bg);border-radius:8px;max-height:150px;overflow-y:auto;font-size:0.85rem;"><strong>Previous:</strong>${this.state.commHistory.map(h => `<div style="margin-top:8px;padding:8px;background:var(--card);border-radius:6px;"><em>"${h.prompt.substring(0,50)}..."</em><br>You: "${h.response.substring(0,80)}..."</div>`).join('')}</div>` : ''}
+                <div class="comm-response">
+                    <label class="response-label">Your response to Mrs. Chen:</label>
+                    <div class="voice-input-container">
+                        <textarea id="commResponse" placeholder="Type or click the microphone to speak..."></textarea>
+                        ${speechSupported ? `<button class="voice-btn" id="voiceBtn" onclick="Engine.toggleVoice()" title="Click to speak"><span id="voiceIcon">🎤</span></button>` : ''}
+                    </div>
+                    <div id="voiceStatus" class="voice-status hidden"></div>
+                    ${!speechSupported ? `<div class="voice-not-supported">⚠️ Voice input not supported in this browser. Please type your response.</div>` : `<div style="font-size:0.75rem;color:var(--muted);margin-top:6px;">💡 Tip: Click 🎤 to dictate your response</div>`}
+                </div>
+                <div class="comm-feedback hidden" id="commFeedback"></div>
+                <div class="comm-actions"><button class="btn btn-primary" id="commBtn" onclick="Engine.submitComm()">Submit Response</button></div>
+            </div>`;
+            document.getElementById('stageContainer').innerHTML = html;
+            document.getElementById('commResponse').addEventListener('input', () => {
+                document.getElementById('commBtn').disabled = document.getElementById('commResponse').value.trim().length < 20;
+            });
+            document.getElementById('commBtn').disabled = true;
+            this.initVoiceRecognition();
+        },
+        async submitComm() {
+            const response = document.getElementById('commResponse').value.trim();
+            const btn = document.getElementById('commBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading"></span> Evaluating...';
+            
+            try {
+                const res = await fetch(WORKER_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        scenario: 'anxious-spouse-stemi',
+                        turnNumber: this.state.commTurn,
+                        learnerResponse: response,
+                        clinicalContext: { patient: 'Robert Chen, 58yo male', diagnosis: 'Anterior STEMI', findings: 'ST elevation V1-V4, Troponin 0.89', plan: 'Emergent cath lab', status: 'Hemodynamically stable' }
+                    })
+                });
+                const evaluation = await res.json();
+                this.state.commHistory.push({ prompt: this.commTurns[this.state.commTurn - 1].prompt, response, evaluation });
+                this.state.commScores.push(evaluation);
+                this.showCommFeedback(evaluation);
+            } catch (err) {
+                console.error('Comm eval error:', err);
+                document.getElementById('commFeedback').innerHTML = `<div style="color:var(--danger)">Error: ${err.message}. Please try again.</div>`;
+                document.getElementById('commFeedback').classList.remove('hidden');
+                btn.disabled = false;
+                btn.textContent = 'Retry';
+            }
+        },
+        showCommFeedback(eval) {
+            const fb = document.getElementById('commFeedback');
+            const quality = { excellent: ['🌟', 'var(--success)'], good: ['✓', 'var(--info)'], adequate: ['○', 'var(--warning)'], 'needs-improvement': ['⚠️', 'var(--danger)'] };
+            const [icon, color] = quality[eval.overallQuality] || ['•', 'var(--muted)'];
+            
+            fb.innerHTML = `
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;font-size:1.1rem;font-weight:600;color:${color}">${icon} ${eval.overallQuality === 'excellent' ? 'Excellent!' : eval.overallQuality === 'good' ? 'Good response' : eval.overallQuality === 'adequate' ? 'Adequate' : 'Needs improvement'}</div>
+                <div style="background:var(--card);padding:12px;border-radius:8px;margin-bottom:12px;"><em>Mrs. Chen appears ${eval.nextEmotionalState}.</em> ${eval.characterReaction}</div>
+                <div class="score-bars">${Object.entries(eval.visibleScores).map(([k,v]) => `<div class="score-bar-row"><span class="score-bar-label">${k}</span><div class="score-bar"><div class="score-fill" style="width:${v*20}%"></div></div><span class="score-bar-value">${v}/5</span></div>`).join('')}</div>
+                ${eval.strengths?.length ? `<div style="margin-top:12px;color:var(--success)"><strong>💪 Strengths:</strong> ${eval.strengths.join('; ')}</div>` : ''}
+                ${eval.improvements?.length ? `<div style="margin-top:8px;color:var(--info)"><strong>📈 Improve:</strong> ${eval.improvements.join('; ')}</div>` : ''}
+                ${eval.medicalIssues?.length ? `<div style="margin-top:8px;color:var(--danger)"><strong>⚠️ Note:</strong> ${eval.medicalIssues.join('; ')}</div>` : ''}
+            `;
+            fb.classList.remove('hidden');
+            
+            const btn = document.getElementById('commBtn');
+            if (this.state.commTurn < 6) {
+                btn.textContent = 'Continue →';
+                btn.disabled = false;
+                btn.onclick = () => { this.state.commTurn++; this.renderCommunication(this.stages['family-talk']); };
+            } else {
+                btn.textContent = 'View Results →';
+                btn.disabled = false;
+                btn.onclick = () => this.showCommResults();
+            }
+        },
+        showCommResults() {
+            // Aggregate scores
+            const visible = {}, hidden = {};
+            ['empathy','plainLanguage','clarity','tone','engagement'].forEach(k => visible[k] = []);
+            ['pathophysiology','treatmentRationale','guidelineKnowledge','prognosisKnowledge','accuracy','appropriateUncertainty'].forEach(k => hidden[k] = []);
+            this.state.commScores.forEach(s => {
+                Object.entries(s.visibleScores || {}).forEach(([k,v]) => visible[k]?.push(v));
+                Object.entries(s.hiddenScores || {}).forEach(([k,v]) => { if (v !== null) hidden[k]?.push(v); });
+            });
+            const avg = arr => arr.length ? (arr.reduce((a,b)=>a+b,0)/arr.length).toFixed(1) : 'N/A';
+            const visTotal = Object.values(visible).flat().reduce((a,b)=>a+b,0);
+            const hidTotal = Object.values(hidden).flat().filter(v=>v).reduce((a,b)=>a+b,0);
+            this.state.scores.comm = Math.round(visTotal / 6);
+            this.state.scores.total += this.state.scores.comm;
+            document.getElementById('commScore').textContent = this.state.scores.comm;
+            
+            document.getElementById('stageContainer').innerHTML = `<div class="card"><div class="card-body" style="padding:24px;">
+                <h2 style="text-align:center;margin-bottom:24px;">🎯 Communication Assessment Complete</h2>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+                    <div style="background:var(--input-bg);padding:20px;border-radius:12px;">
+                        <h3>💬 Communication Skills</h3><p style="font-size:0.85rem;color:var(--muted);margin-bottom:16px;">Visible assessment</p>
+                        ${Object.entries(visible).map(([k,arr]) => `<div class="score-bar-row"><span class="score-bar-label">${k}</span><div class="score-bar"><div class="score-fill" style="width:${avg(arr)*20}%"></div></div><span class="score-bar-value">${avg(arr)}/5</span></div>`).join('')}
+                    </div>
+                    <div style="background:linear-gradient(135deg,rgba(124,58,237,0.1),rgba(37,99,235,0.05));padding:20px;border-radius:12px;border-left:4px solid var(--accent);">
+                        <h3>📚 Knowledge (Revealed)</h3><p style="font-size:0.85rem;color:var(--muted);margin-bottom:16px;">Your explanations revealed your understanding</p>
+                        ${Object.entries(hidden).filter(([k,arr])=>arr.length).map(([k,arr]) => `<div class="score-bar-row"><span class="score-bar-label">${k}</span><div class="score-bar"><div class="score-fill" style="width:${avg(arr)*20}%"></div></div><span class="score-bar-value">${avg(arr)}/5</span></div>`).join('')}
+                    </div>
+                </div>
+                <div style="background:rgba(124,58,237,0.1);padding:16px;border-radius:10px;margin-top:20px;">
+                    <strong>💡 The Hidden Assessment</strong><p style="font-size:0.9rem;margin-top:8px;">When explaining to an anxious spouse, you can't hide behind jargon. Your plain-language explanations reveal true understanding vs memorization.</p>
+                </div>
+                <div class="btn-row" style="justify-content:center;margin-top:24px;"><button class="btn btn-primary" onclick="Engine.render('treatment')">Continue to Treatment →</button></div>
+            </div></div>`;
+            document.querySelector('#tl-family').classList.remove('future');
+            document.querySelector('#tl-family').classList.add('current');
+        },
+        setupInteractions() {
+            document.querySelectorAll('textarea').forEach(ta => {
+                ta.addEventListener('input', e => {
+                    const id = e.target.dataset.id;
+                    const cnt = document.getElementById(`count-${id}`);
+                    if (cnt) cnt.textContent = e.target.value.length;
+                    this.checkCanSubmit();
+                });
+            });
+            const di = document.getElementById('diffInput');
+            if (di) di.addEventListener('keypress', e => { if (e.key === 'Enter') this.addDiff(); });
+        },
+        selectMC(sectionId, optionId) {
+            document.querySelectorAll(`.question-box[data-section="${sectionId}"] .mc-option`).forEach(o => o.classList.remove('selected'));
+            document.querySelector(`.mc-option[data-id="${optionId}"]`).classList.add('selected');
+            this.state.responses[sectionId] = optionId;
+            this.checkCanSubmit();
+        },
+        selectDecision(sectionId, optionId) {
+            document.querySelectorAll(`.decision-card[data-section="${sectionId}"]`).forEach(c => c.classList.remove('selected'));
+            document.querySelector(`.decision-card[data-id="${optionId}"]`).classList.add('selected');
+            this.state.decisions.push({ stage: this.state.stage, section: sectionId, choice: optionId });
+            this.checkCanSubmit();
+        },
+        toggleInterp(sectionId, optionId) {
+            document.querySelector(`.interp-item[data-id="${optionId}"]`).classList.toggle('selected');
+            if (!this.state.interpretations[sectionId]) this.state.interpretations[sectionId] = [];
+            const arr = this.state.interpretations[sectionId], idx = arr.indexOf(optionId);
+            if (idx >= 0) arr.splice(idx, 1); else arr.push(optionId);
+            this.checkCanSubmit();
+        },
+        addDiff() {
+            const input = document.getElementById('diffInput'), val = input.value.trim();
+            if (!val || this.state.differential.some(d => d.toLowerCase() === val.toLowerCase())) return;
+            this.state.differential.push(val);
+            this.updateDiffDisplay(); input.value = ''; this.checkCanSubmit();
+        },
+        removeDiff(idx) { this.state.differential.splice(idx, 1); this.updateDiffDisplay(); this.checkCanSubmit(); },
+        updateDiffDisplay() {
+            const list = document.getElementById('diffList'), sidebar = document.getElementById('sidebarDiff');
+            if (list) list.innerHTML = this.state.differential.map((d, i) => `<div class="diff-item"><span class="diff-rank ${i===0?'top':''}">${i+1}</span><span style="flex:1">${d}</span><button class="diff-remove" onclick="Engine.removeDiff(${i})">x</button></div>`).join('');
+            if (sidebar) sidebar.innerHTML = this.state.differential.length ? this.state.differential.map((d,i) => `<div style="font-size:0.8rem;padding:4px 0;">${i+1}. ${d}</div>`).join('') : '<p style="font-size:0.8rem;color:var(--muted);">Build as you go.</p>';
+        },
+        checkCanSubmit() {
+            const stage = this.stages[this.state.stage]; if (!stage.sections) return;
+            let can = true;
+            stage.sections.forEach(s => {
+                if (s.type === 'question' && !this.state.responses[s.id]) can = false;
+                if (s.type === 'free-response') { const ta = document.getElementById(`resp-${s.id}`); if (!ta || ta.value.length < (s.minLen||1)) can = false; }
+                if (s.type === 'differential' && this.state.differential.length < 3) can = false;
+                if (s.type === 'decision' && !this.state.decisions.find(d => d.stage === this.state.stage && d.section === s.id)) can = false;
+                if (s.type === 'ecg-interp' && (!this.state.interpretations[s.id] || this.state.interpretations[s.id].length < 1)) can = false;
+            });
+            document.getElementById('continueBtn').disabled = !can;
+        },
+        submitStage() {
+            const stage = this.stages[this.state.stage]; let pts = 0;
+            stage.sections.forEach(s => { pts += this.scoreSection(s); });
+            this.state.scores.total += pts; this.updateScoreDisplay(); this.showFeedback(pts);
+        },
+        scoreSection(s) {
+            let pts = 0;
+            if (s.type === 'question') {
+                const sel = this.state.responses[s.id], correct = s.options.find(o => o.correct);
+                if (sel === correct.id) pts = s.points || 5;
+                document.querySelectorAll(`.question-box[data-section="${s.id}"] .mc-option`).forEach(o => { if (o.dataset.correct === 'true') o.classList.add('correct'); else if (o.classList.contains('selected')) o.classList.add('incorrect'); });
+            }
+            if (s.type === 'free-response') {
+                const text = document.getElementById(`resp-${s.id}`).value; this.state.responses[s.id] = text;
+                s.concepts?.forEach(c => { if (this.matchesConcept(text, c.name)) pts += c.points; });
+                if (s.id === 'history') this.state.scores.history = pts;
+            }
+            if (s.type === 'differential') { s.mustInclude.forEach(dx => { if (this.state.differential.some(d => this.matchesDiagnosis(d, dx.name))) pts += dx.points; }); this.state.scores.diff = pts; }
+            if (s.type === 'decision') {
+                const dec = this.state.decisions.find(d => d.stage === this.state.stage && d.section === s.id);
+                if (dec) { pts = s.options.find(o => o.id === dec.choice).points; document.querySelectorAll(`.decision-card[data-section="${s.id}"]`).forEach(c => { const opt = s.options.find(o => o.id === c.dataset.id); if (opt.correct) c.classList.add('correct'); else if (c.classList.contains('selected')) c.classList.add('incorrect'); }); }
+                this.state.scores.mgmt += pts;
+            }
+            if (s.type === 'ecg-interp') { const sel = this.state.interpretations[s.id] || []; s.options.forEach(o => { if (o.correct && sel.includes(o.id)) pts += o.points; else if (!o.correct && sel.includes(o.id)) pts += o.points; }); this.state.scores.data = Math.max(0, pts); }
+            return Math.max(0, pts);
+        },
+        updateScoreDisplay() {
+            document.getElementById('scoreDisplay').textContent = this.state.scores.total;
+            document.getElementById('totalScore').textContent = this.state.scores.total;
+            ['hist','diff','data','mgmt'].forEach(k => document.getElementById(k+'Score').textContent = this.state.scores[k==='hist'?'history':k] || '--');
+            document.getElementById('scoreCircle').style.setProperty('--pct', Math.min(100, this.state.scores.total));
+        },
+        showFeedback(pts) {
+            const fb = document.getElementById('feedback');
+            fb.className = `feedback show ${pts > 20 ? 'excellent' : pts > 10 ? 'good' : 'needs-work'}`;
+            fb.innerHTML = `<div class="feedback-header"><span class="feedback-icon">${pts > 20 ? '🌟' : pts > 10 ? '✓' : '📚'}</span><span class="feedback-title">+${pts} points</span></div>`;
+            const btn = document.getElementById('continueBtn'); btn.textContent = 'Continue →'; btn.onclick = () => this.nextStage(); btn.disabled = false;
+        },
+        nextStage() { const stage = this.stages[this.state.stage]; if (stage.next) { this.render(stage.next); window.scrollTo(0, 0); } },
+        drawECG() {
+            const grid = document.getElementById('ecgGrid'); if (!grid) return;
+            const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+            const leads = [{n:'I',st:0.5},{n:'aVR',st:-1},{n:'V1',st:2.5,hl:1},{n:'V4',st:2.5,hl:1},{n:'II',st:-0.5},{n:'aVL',st:0.5},{n:'V2',st:3.5,hl:1},{n:'V5',st:1},{n:'III',st:-1},{n:'aVF',st:-1},{n:'V3',st:3,hl:1},{n:'V6',st:0.5}];
+            grid.innerHTML = leads.map(l => `<div class="ecg-lead ${l.hl?'highlight':''}"><span class="ecg-lead-label">${l.n}</span><canvas id="lead-${l.n}"></canvas></div>`).join('');
+            setTimeout(() => { leads.forEach(l => { const c = document.getElementById(`lead-${l.n}`); if (!c) return; const ctx = c.getContext('2d'), rect = c.getBoundingClientRect(); c.width = rect.width * 2; c.height = rect.height * 2; ctx.scale(2, 2); const w = rect.width, h = rect.height, mid = h/2; ctx.strokeStyle = dark ? 'rgba(255,100,100,0.15)' : 'rgba(200,50,50,0.12)'; ctx.lineWidth = 0.5; for (let x=0;x<w;x+=3){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();} for (let y=0;y<h;y+=3){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();} ctx.strokeStyle = l.hl ? (dark?'#EF4444':'#DC2626') : (dark?'#10B981':'#059669'); ctx.lineWidth = 1.5; ctx.beginPath(); const st = l.st * 2.5, bw = w/2.5; for (let b=0;b<3;b++){const bx=b*bw; ctx.moveTo(bx,mid);ctx.lineTo(bx+bw*0.12,mid);ctx.quadraticCurveTo(bx+bw*0.17,mid-4,bx+bw*0.22,mid);ctx.lineTo(bx+bw*0.3,mid+2);ctx.lineTo(bx+bw*0.35,mid-18);ctx.lineTo(bx+bw*0.4,mid+5);ctx.lineTo(bx+bw*0.5,mid-st);ctx.quadraticCurveTo(bx+bw*0.62,mid-st-(l.hl?10:5),bx+bw*0.75,mid);ctx.lineTo(bx+bw,mid);} ctx.stroke(); }); }, 50);
+        },
+        renderOutcome() {
+            const t = this.state.scores.total, pct = Math.round(t/150*100), grade = pct>=85?'A':pct>=70?'B':pct>=55?'C':'D';
+            document.getElementById('stageContainer').innerHTML = `<div class="card"><div class="card-body" style="text-align:center;padding:40px;"><div style="font-size:3rem;">🏆</div><h2>Case Complete</h2><div style="display:flex;justify-content:center;gap:40px;margin:24px 0;"><div><div style="font-size:3rem;font-weight:700;color:var(--${grade==='A'?'success':grade==='B'?'info':'warning'})">${grade}</div><div style="font-size:0.8rem;color:var(--muted)">Grade</div></div><div><div style="font-size:3rem;font-weight:700">${t}</div><div style="font-size:0.8rem;color:var(--muted)">Points</div></div></div><div style="background:var(--input-bg);padding:20px;border-radius:12px;text-align:left;max-width:400px;margin:0 auto;"><div class="score-row"><span>History</span><span>${this.state.scores.history}</span></div><div class="score-row"><span>Differential</span><span>${this.state.scores.diff}</span></div><div class="score-row"><span>Interpretation</span><span>${this.state.scores.data}</span></div><div class="score-row"><span>Communication</span><span>${this.state.scores.comm}</span></div><div class="score-row"><span>Management</span><span>${this.state.scores.mgmt}</span></div></div><div class="btn-row" style="justify-content:center;margin-top:24px;"><button class="btn btn-primary" onclick="location.reload()">Try Again</button></div></div></div>`;
+        }
+    };
+    document.addEventListener('DOMContentLoaded', () => Engine.init());
+    </script>
+</body>
+</html>
