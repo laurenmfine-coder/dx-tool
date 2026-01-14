@@ -541,22 +541,9 @@
 </nav>
 
     <!-- Top Navigation -->
-    <nav class="top-nav">
-        <div class="nav-brand">
-            🏥 Dx Learning Ecosystem <span>| Dashboard</span>
-        </div>
-        <div class="nav-user">
-            <div class="user-level">
-                <span>🩺</span>
-                <span>Medical Student</span>
-            </div>
-            <select class="level-select" id="levelSelect" onchange="changeLevel(this.value)">
-                <option value="m1-m2">M1-M2 (Pre-Clinical)</option>
-                <option value="m3" selected>M3 (Clerkships)</option>
-                <option value="m4-subi">M4 / Sub-I</option>
-            </select>
-        </div>
-    </nav>
+    <!-- Unified Navigation -->
+    <link rel="stylesheet" href="../dx-unified-nav.css">
+    <div id="dx-nav"></div>
     
     <!-- Main Container -->
     <div class="main-container">
@@ -852,5 +839,7 @@
         // Initialize on load
         init();
     </script>
+<script src="../dx-unified-nav.js"></script>
+    <script>if(typeof DxNav!=='undefined')DxNav.init({currentPage:'reason',basePath:'../'});</script>
 </body>
 </html>
