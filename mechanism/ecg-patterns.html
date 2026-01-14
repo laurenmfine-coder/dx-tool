@@ -277,6 +277,7 @@
 
     </style>
     <link rel="stylesheet" href="module-fix.css">
+    <link rel="stylesheet" href="../dx-unified-nav.css">
 </head>
 <body class="text-white">
     <header class="header">
@@ -295,7 +296,6 @@
             <span class="tagline">The right mechanism unlocks everything.</span>
         </a>
         <!-- Unified Navigation -->
-    <link rel="stylesheet" href="../dx-unified-nav.css">
     <div id="dx-nav"></div>
     </div>
 </header>
@@ -529,7 +529,14 @@
         } else showQ();
     }
     </script>
-<script src="../dx-unified-nav.js"></script>
-    <script>if(typeof DxNav!=='undefined')DxNav.init({currentPage:'mechanism',basePath:'../'});</script>
+
+    <script src="../dx-unified-nav.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof DxNav !== 'undefined') {
+                DxNav.init({ currentPage: 'mechanism', basePath: '../' });
+            }
+        });
+    </script>
 </body>
 </html>

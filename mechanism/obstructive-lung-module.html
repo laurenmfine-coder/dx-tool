@@ -205,10 +205,10 @@
         .resource-card-grid a { color: #3b82f6; text-decoration: none; font-size: 13px; font-weight: 500; }
         .resource-badge { display: inline-block; padding: 3px 8px; background: #dbeafe; color: #1d4ed8; border-radius: 4px; font-size: 11px; font-weight: 600; margin-bottom: 10px; }
     </style>
+    <link rel="stylesheet" href="../dx-unified-nav.css">
 </head>
 <body>
     <!-- Unified Navigation -->
-    <link rel="stylesheet" href="../dx-unified-nav.css">
     <div id="dx-nav"></div>
     <header class="header">
         <div class="header-inner">
@@ -1228,7 +1228,14 @@
             feedbackDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     </script>
-<script src="../dx-unified-nav.js"></script>
-    <script>if(typeof DxNav!=='undefined')DxNav.init({currentPage:'mechanism',basePath:'../'});</script>
+
+    <script src="../dx-unified-nav.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof DxNav !== 'undefined') {
+                DxNav.init({ currentPage: 'mechanism', basePath: '../' });
+            }
+        });
+    </script>
 </body>
 </html>

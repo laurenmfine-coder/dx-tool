@@ -357,6 +357,7 @@
             .saved-grid { grid-template-columns: 1fr; }
         }
     </style>
+    <link rel="stylesheet" href="../dx-unified-nav.css">
 </head>
 <body>
     <!-- Header -->
@@ -364,7 +365,6 @@
         <div class="header-inner">
             <a href="index.html" class="logo">📚 MechanismDx</a>
             <!-- Unified Navigation -->
-    <link rel="stylesheet" href="../dx-unified-nav.css">
     <div id="dx-nav"></div>
         </div>
     </header>
@@ -638,7 +638,14 @@
         // Initialize counts
         updateCounts();
     </script>
-<script src="../dx-unified-nav.js"></script>
-    <script>if(typeof DxNav!=='undefined')DxNav.init({currentPage:'mechanism',basePath:'../'});</script>
+
+    <script src="../dx-unified-nav.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof DxNav !== 'undefined') {
+                DxNav.init({ currentPage: 'mechanism', basePath: '../' });
+            }
+        });
+    </script>
 </body>
 </html>

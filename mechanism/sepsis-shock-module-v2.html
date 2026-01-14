@@ -235,6 +235,7 @@
         .module-footer a { color: #3b82f6; text-decoration: none; }
     </style>
     <link rel="stylesheet" href="module-fix.css">
+    <link rel="stylesheet" href="../dx-unified-nav.css">
 </head>
 <body class="module-wrapper">
     <!-- Header -->
@@ -245,7 +246,6 @@
                 <a href="index.html">MechanismDx</a>
             </div>
             <!-- Unified Navigation -->
-    <link rel="stylesheet" href="../dx-unified-nav.css">
     <div id="dx-nav"></div>
         </div>
     </header>
@@ -799,7 +799,14 @@
             sidebar.style.boxShadow = '4px 0 20px rgba(0,0,0,0.15)';
         }
     </script>
-<script src="../dx-unified-nav.js"></script>
-    <script>if(typeof DxNav!=='undefined')DxNav.init({currentPage:'mechanism',basePath:'../'});</script>
+
+    <script src="../dx-unified-nav.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof DxNav !== 'undefined') {
+                DxNav.init({ currentPage: 'mechanism', basePath: '../' });
+            }
+        });
+    </script>
 </body>
 </html>

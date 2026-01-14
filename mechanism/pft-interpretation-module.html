@@ -214,10 +214,10 @@
         .resource-type { font-size: 10px; font-weight: 700; text-transform: uppercase; padding: 4px 10px; background: #10b981; color: #fff; border-radius: 4px; }
         .resource-title { flex: 1; font-weight: 500; }
     </style>
+    <link rel="stylesheet" href="../dx-unified-nav.css">
 </head>
 <body>
     <!-- Unified Navigation -->
-    <link rel="stylesheet" href="../dx-unified-nav.css">
     <div id="dx-nav"></div>
     <header class="header">
         <div class="header-inner">
@@ -937,7 +937,14 @@
             document.getElementById('feedback-' + mcqId).scrollIntoView({ behavior: 'smooth' });
         }
     </script>
-<script src="../dx-unified-nav.js"></script>
-    <script>if(typeof DxNav!=='undefined')DxNav.init({currentPage:'mechanism',basePath:'../'});</script>
+
+    <script src="../dx-unified-nav.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof DxNav !== 'undefined') {
+                DxNav.init({ currentPage: 'mechanism', basePath: '../' });
+            }
+        });
+    </script>
 </body>
 </html>

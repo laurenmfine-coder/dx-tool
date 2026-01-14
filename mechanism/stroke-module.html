@@ -278,13 +278,13 @@
     </style>
     <link rel="stylesheet" href="module-enhance.css">
     <link rel="stylesheet" href="module-fix.css">
+    <link rel="stylesheet" href="../dx-unified-nav.css">
 </head>
 <body>
     <header class="header">
         <div class="header-inner">
             <div class="logo">🧠 MechanismDx</div>
             <!-- Unified Navigation -->
-    <link rel="stylesheet" href="../dx-unified-nav.css">
     <div id="dx-nav"></div>
         </div>
     </header>
@@ -800,7 +800,14 @@
     
     renderQuestions();
     </script>
-<script src="../dx-unified-nav.js"></script>
-    <script>if(typeof DxNav!=='undefined')DxNav.init({currentPage:'mechanism',basePath:'../'});</script>
+
+    <script src="../dx-unified-nav.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof DxNav !== 'undefined') {
+                DxNav.init({ currentPage: 'mechanism', basePath: '../' });
+            }
+        });
+    </script>
 </body>
 </html>

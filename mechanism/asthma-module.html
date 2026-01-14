@@ -69,10 +69,10 @@
         .footer { border-top: 1px solid #e2e8f0; padding: 32px 24px; text-align: center; color: #64748b; font-size: 13px; background: #fff; margin-top: 40px; }
         .footer a { color: #f97316; text-decoration: none; }
     </style>
+    <link rel="stylesheet" href="../dx-unified-nav.css">
 </head>
 <body>
     <!-- Unified Navigation -->
-    <link rel="stylesheet" href="../dx-unified-nav.css">
     <div id="dx-nav"></div>
 
     <header class="header">
@@ -353,7 +353,14 @@
             });
         });
     </script>
-<script src="../dx-unified-nav.js"></script>
-    <script>if(typeof DxNav!=='undefined')DxNav.init({currentPage:'mechanism',basePath:'../'});</script>
+
+    <script src="../dx-unified-nav.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof DxNav !== 'undefined') {
+                DxNav.init({ currentPage: 'mechanism', basePath: '../' });
+            }
+        });
+    </script>
 </body>
 </html>

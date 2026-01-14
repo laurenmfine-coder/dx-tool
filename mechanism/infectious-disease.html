@@ -278,6 +278,7 @@
     </style>
     <link rel="stylesheet" href="module-enhance.css">
     <link rel="stylesheet" href="module-fix.css">
+    <link rel="stylesheet" href="../dx-unified-nav.css">
 </head>
 <body>
 <header class="header"><div class="header-inner"><a href="index.html" class="logo"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#dc2626"/><circle cx="50" cy="50" r="20" fill="none" stroke="#fff" stroke-width="4"/><line x1="50" y1="15" x2="50" y2="30" stroke="#fff" stroke-width="4" stroke-linecap="round"/><line x1="50" y1="70" x2="50" y2="85" stroke="#fff" stroke-width="4" stroke-linecap="round"/><line x1="15" y1="50" x2="30" y2="50" stroke="#fff" stroke-width="4" stroke-linecap="round"/><line x1="70" y1="50" x2="85" y2="50" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg><div><strong style="font-size:18px">ReasonDx</strong><div class="tagline">Master the mechanism</div></div></a></div></header>
@@ -285,7 +286,6 @@
 <div class="progress-bar"><div class="progress-inner"><span style="font-size:13px;color:var(--muted)">Progress</span><div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div><span id="progressCount" style="font-size:13px;font-weight:600">0/20</span><div class="xp-box">⭐ <span id="xpCount">0</span> XP</div><div class="streak-box">🔥 <span id="streakCount">0</span></div></div></div>
 <div class="patient-banner"><div class="banner-inner"><div class="patient-info"><div class="patient-name" id="patientName">Maria Rodriguez</div><div class="patient-details" id="patientDetails">45F • Productive cough, fever, RLL infiltrate</div></div><div class="vitals"><div class="vital"><div class="vital-value" id="vTemp">101.2°F</div><div class="vital-label">Temp</div></div><div class="vital"><div class="vital-value" id="vHR">98</div><div class="vital-label">HR</div></div><div class="vital"><div class="vital-value" id="vBP">118/72</div><div class="vital-label">BP</div></div><div class="vital"><div class="vital-value" id="vRR">22</div><div class="vital-label">RR</div></div></div></div></div>
 <!-- Unified Navigation -->
-    <link rel="stylesheet" href="../dx-unified-nav.css">
     <div id="dx-nav"></div>
 <div class="container">
 <aside class="sidebar">
@@ -852,7 +852,14 @@ document.getElementById('alertBox').innerHTML=alertHTML;
 
 render();
 </script>
-<script src="../dx-unified-nav.js"></script>
-    <script>if(typeof DxNav!=='undefined')DxNav.init({currentPage:'mechanism',basePath:'../'});</script>
+
+    <script src="../dx-unified-nav.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof DxNav !== 'undefined') {
+                DxNav.init({ currentPage: 'mechanism', basePath: '../' });
+            }
+        });
+    </script>
 </body>
 </html>
