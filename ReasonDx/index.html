@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DxSuite | Clinical Education Platform</title>
+    <title>ReasonDx | Clinical Reasoning Training</title>
     <style>
 :root {
     --primary: #10b981;
@@ -68,97 +68,93 @@ body {
 /* Hero */
 .hero {
     text-align: center;
-    padding: 80px 24px 60px;
-    background: linear-gradient(180deg, var(--card) 0%, var(--bg) 100%);
+    padding: 60px 24px 40px;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
 }
 .hero-logo {
-    height: 70px;
-    margin-bottom: 24px;
-}
-.hero h1 {
-    font-size: 42px;
-    font-weight: 700;
+    height: 60px;
     margin-bottom: 16px;
-    color: var(--text);
 }
-.hero p {
-    font-size: 20px;
+.hero-tagline {
+    font-family: Georgia, serif;
+    font-style: italic;
     color: var(--text-secondary);
-    max-width: 600px;
-    margin: 0 auto;
+    font-size: 18px;
 }
 
-/* Main Tiles */
-.tiles-section {
-    max-width: 1000px;
+/* Main Content */
+.main {
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 40px 24px 80px;
-}
-.tiles-header {
-    text-align: center;
-    margin-bottom: 40px;
-}
-.tiles-header h2 {
-    font-size: 28px;
-    margin-bottom: 8px;
-}
-.tiles-header p {
-    color: var(--text-secondary);
+    padding: 48px 24px;
 }
 
-.tiles-grid {
+.section-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Training Modes Grid */
+.modes-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 24px;
+    margin-bottom: 48px;
 }
 
-.tile {
+.mode-card {
     background: var(--card);
-    border: 1px solid var(--border);
+    border: 2px solid var(--border);
     border-radius: 16px;
-    padding: 32px;
+    padding: 28px;
     text-decoration: none;
     color: inherit;
     transition: all 0.2s;
     display: flex;
     flex-direction: column;
 }
-.tile:hover {
+.mode-card:hover {
     border-color: var(--primary);
-    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.15);
-    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.12);
+    transform: translateY(-2px);
 }
 
-.tile-logo {
-    height: 45px;
+.mode-icon {
+    font-size: 40px;
     margin-bottom: 16px;
-    align-self: flex-start;
 }
-.tile-title {
-    font-size: 22px;
+.mode-title {
+    font-size: 20px;
     font-weight: 600;
     margin-bottom: 8px;
 }
-.tile-description {
+.mode-description {
     color: var(--text-secondary);
     font-size: 15px;
     margin-bottom: 16px;
     flex: 1;
 }
-.tile-features {
+.mode-stats {
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+    gap: 16px;
+    margin-bottom: 16px;
 }
-.tile-feature {
-    font-size: 12px;
-    padding: 4px 10px;
-    background: var(--bg);
-    border-radius: 6px;
+.mode-stat {
+    font-size: 13px;
     color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
-.tile-cta {
-    margin-top: 20px;
+.mode-stat strong {
+    color: var(--text);
+}
+.mode-cta {
     padding: 12px 20px;
     background: var(--primary);
     color: white;
@@ -168,52 +164,84 @@ body {
     text-align: center;
     transition: background 0.15s;
 }
-.tile:hover .tile-cta {
+.mode-card:hover .mode-cta {
     background: var(--primary-dark);
 }
 
-/* Secondary Links */
-.secondary-section {
-    background: var(--card);
-    border-top: 1px solid var(--border);
-    padding: 40px 24px;
+/* Learning Path */
+.learning-path {
+    background: linear-gradient(135deg, var(--primary-light) 0%, #d1fae5 100%);
+    border: 1px solid var(--primary);
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 48px;
 }
-.secondary-inner {
-    max-width: 1000px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    gap: 32px;
-    flex-wrap: wrap;
-}
-.secondary-link {
+.learning-path h3 {
+    font-size: 20px;
+    margin-bottom: 16px;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+}
+.path-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 24px 0;
+}
+.path-step {
+    background: var(--card);
+    padding: 16px 24px;
+    border-radius: 12px;
+    text-align: center;
+    min-width: 140px;
+}
+.path-step-icon { font-size: 28px; margin-bottom: 8px; }
+.path-step-title { font-weight: 600; font-size: 14px; }
+.path-step-desc { font-size: 12px; color: var(--text-secondary); }
+.path-arrow { font-size: 24px; color: var(--primary-dark); }
+.learning-path p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    background: var(--card);
+    padding: 16px;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary);
+}
+
+/* Quick Actions */
+.quick-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 32px 24px;
+    background: var(--card);
+    border-top: 1px solid var(--border);
+}
+.quick-action {
     padding: 12px 20px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
     text-decoration: none;
     color: var(--text-secondary);
     font-size: 14px;
-    border-radius: 8px;
-    border: 1px solid var(--border);
     transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
-.secondary-link:hover {
+.quick-action:hover {
     border-color: var(--primary);
     color: var(--text);
 }
 
-/* Footer */
-.footer {
-    text-align: center;
-    padding: 40px 24px;
-    color: var(--text-secondary);
-    font-size: 14px;
-}
-
 @media (max-width: 768px) {
-    .tiles-grid { grid-template-columns: 1fr; }
-    .hero h1 { font-size: 32px; }
+    .modes-grid { grid-template-columns: 1fr; }
+    .path-flow { flex-direction: column; }
+    .path-arrow { transform: rotate(90deg); }
     .nav-links { display: none; }
 }
     </style>
@@ -222,146 +250,131 @@ body {
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-inner">
-            <svg class="nav-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 120">
-                <text x="20" y="70" font-family="Georgia, serif" font-size="58" fill="#1a1a1a">D</text>
-                <line x1="68" y1="42" x2="92" y2="72" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round"/>
-                <ellipse cx="66" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 66 39)" fill="#1a1a1a"/>
-                <path d="M 92 42 L 76 58 Q 70 66 70 76 Q 70 86 78 92 Q 86 98 86 108" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                <ellipse cx="94" cy="39" rx="2.5" ry="4.5" transform="rotate(28 94 39)" fill="#1a1a1a"/>
-                <circle cx="86" cy="108" r="10" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
-                <circle cx="86" cy="108" r="5" fill="#1a1a1a"/>
-                <text x="115" y="70" font-family="Georgia, serif" font-size="58" fill="#1a1a1a" letter-spacing="-1">Suite</text>
-            </svg>
+            <a href="../index.html">
+                <svg class="nav-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 120">
+                    <text x="20" y="70" font-family="Georgia, serif" font-size="58" fill="#1a1a1a">D</text>
+                    <line x1="68" y1="42" x2="92" y2="72" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round"/>
+                    <ellipse cx="66" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 66 39)" fill="#1a1a1a"/>
+                    <path d="M 92 42 L 76 58 Q 70 66 70 76 Q 70 86 78 92 Q 86 98 86 108" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+                    <ellipse cx="94" cy="39" rx="2.5" ry="4.5" transform="rotate(28 94 39)" fill="#1a1a1a"/>
+                    <circle cx="86" cy="108" r="10" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
+                    <circle cx="86" cy="108" r="5" fill="#1a1a1a"/>
+                    <text x="115" y="70" font-family="Georgia, serif" font-size="58" fill="#1a1a1a" letter-spacing="-1">Suite</text>
+                </svg>
+            </a>
             <div class="nav-links">
-                <a href="index.html" class="nav-link active">Home</a>
-                <a href="mechanism/index.html" class="nav-link">MechanismDx</a>
-                <a href="ReasonDx/index.html" class="nav-link">ReasonDx</a>
-                <a href="CoachDx/index.html" class="nav-link">CoachDx</a>
-                <a href="dx-dashboard.html" class="nav-link">Dashboard</a>
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="../mechanism/index.html" class="nav-link">MechanismDx</a>
+                <a href="index.html" class="nav-link active">ReasonDx</a>
+                <a href="../CoachDx/index.html" class="nav-link">CoachDx</a>
+                <a href="../dx-dashboard.html" class="nav-link">Dashboard</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero -->
     <header class="hero">
-        <svg class="hero-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 120">
-            <text x="20" y="70" font-family="Georgia, serif" font-size="58" fill="#1a1a1a">D</text>
-            <line x1="68" y1="42" x2="92" y2="72" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round"/>
-            <ellipse cx="66" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 66 39)" fill="#1a1a1a"/>
-            <path d="M 92 42 L 76 58 Q 70 66 70 76 Q 70 86 78 92 Q 86 98 86 108" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-            <ellipse cx="94" cy="39" rx="2.5" ry="4.5" transform="rotate(28 94 39)" fill="#1a1a1a"/>
-            <circle cx="86" cy="108" r="10" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
-            <circle cx="86" cy="108" r="5" fill="#1a1a1a"/>
-            <text x="115" y="70" font-family="Georgia, serif" font-size="58" fill="#1a1a1a" letter-spacing="-1">Suite</text>
+        <svg class="hero-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 120">
+            <text x="20" y="70" font-family="Georgia, serif" font-size="58" fill="#1a1a1a" letter-spacing="-1">Reason</text>
+            <text x="200" y="70" font-family="Georgia, serif" font-size="58" fill="#1a1a1a">D</text>
+            <line x1="248" y1="42" x2="272" y2="72" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round"/>
+            <ellipse cx="246" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 246 39)" fill="#1a1a1a"/>
+            <path d="M 272 42 L 256 58 Q 250 66 250 76 Q 250 86 258 92 Q 266 98 266 108" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+            <ellipse cx="274" cy="39" rx="2.5" ry="4.5" transform="rotate(28 274 39)" fill="#1a1a1a"/>
+            <circle cx="266" cy="108" r="10" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
+            <circle cx="266" cy="108" r="5" fill="#1a1a1a"/>
         </svg>
-        <h1>Master Clinical Reasoning</h1>
-        <p>A comprehensive platform for medical students and clinicians to develop diagnostic expertise through interactive learning.</p>
+        <p class="hero-tagline">Asking the right questions can change everything.</p>
     </header>
 
-    <!-- Main Tiles -->
-    <section class="tiles-section">
-        <div class="tiles-header">
-            <h2>Choose Your Learning Path</h2>
-            <p>Four integrated modules designed to build clinical expertise</p>
-        </div>
+    <!-- Main Content -->
+    <main class="main">
+        <h2 class="section-title">🎯 Choose Your Training Mode</h2>
 
-        <div class="tiles-grid">
-            <!-- MechanismDx -->
-            <a href="mechanism/index.html" class="tile">
-                <svg class="tile-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 120">
-                    <text x="20" y="70" font-family="Georgia, serif" font-size="58" fill="#1a1a1a" letter-spacing="-1">MechanismD</text>
-                    <line x1="355" y1="42" x2="379" y2="72" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round"/>
-                    <ellipse cx="353" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 353 39)" fill="#1a1a1a"/>
-                    <path d="M 379 42 L 363 58 Q 357 66 357 76 Q 357 86 365 92 Q 373 98 373 108" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                    <ellipse cx="381" cy="39" rx="2.5" ry="4.5" transform="rotate(28 381 39)" fill="#1a1a1a"/>
-                    <circle cx="373" cy="108" r="10" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
-                    <circle cx="373" cy="108" r="5" fill="#1a1a1a"/>
-                </svg>
-                <div class="tile-title">Master the "Why"</div>
-                <p class="tile-description">Understand the pathophysiology behind every diagnosis. Interactive modules that connect mechanisms to clinical presentation.</p>
-                <div class="tile-features">
-                    <span class="tile-feature">45+ Modules</span>
-                    <span class="tile-feature">ABG Analyzer</span>
-                    <span class="tile-feature">ECG Patterns</span>
+        <div class="modes-grid">
+            <!-- Clinical Training -->
+            <a href="training.html" class="mode-card">
+                <div class="mode-icon">🏥</div>
+                <div class="mode-title">Clinical Case Training</div>
+                <p class="mode-description">Work through structured clinical cases. Gather history, order tests, build differentials, and make diagnoses with guided feedback.</p>
+                <div class="mode-stats">
+                    <span class="mode-stat"><strong>200+</strong> Cases</span>
+                    <span class="mode-stat"><strong>All</strong> Specialties</span>
                 </div>
-                <div class="tile-cta">Explore Modules →</div>
+                <div class="mode-cta">Start Training →</div>
             </a>
 
-            <!-- ReasonDx -->
-            <a href="ReasonDx/index.html" class="tile">
-                <svg class="tile-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 120">
-                    <text x="20" y="70" font-family="Georgia, serif" font-size="58" fill="#1a1a1a" letter-spacing="-1">Reason</text>
-                    <text x="200" y="70" font-family="Georgia, serif" font-size="58" fill="#1a1a1a">D</text>
-                    <line x1="248" y1="42" x2="272" y2="72" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round"/>
-                    <ellipse cx="246" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 246 39)" fill="#1a1a1a"/>
-                    <path d="M 272 42 L 256 58 Q 250 66 250 76 Q 250 86 258 92 Q 266 98 266 108" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                    <ellipse cx="274" cy="39" rx="2.5" ry="4.5" transform="rotate(28 274 39)" fill="#1a1a1a"/>
-                    <circle cx="266" cy="108" r="10" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
-                    <circle cx="266" cy="108" r="5" fill="#1a1a1a"/>
-                </svg>
-                <div class="tile-title">Train Your Reasoning</div>
-                <p class="tile-description">Practice clinical decision-making with interactive cases. Deep dives, branching adventures, and structured training.</p>
-                <div class="tile-features">
-                    <span class="tile-feature">200+ Cases</span>
-                    <span class="tile-feature">Deep Dives</span>
-                    <span class="tile-feature">Adventures</span>
+            <!-- Deep Dives -->
+            <a href="deep-dive-hub.html" class="mode-card">
+                <div class="mode-icon">🔍</div>
+                <div class="mode-title">Deep Dive Cases</div>
+                <p class="mode-description">Master conditions layer by layer. Each case builds from anatomy → physiology → pathophysiology → clinical features → workup → management.</p>
+                <div class="mode-stats">
+                    <span class="mode-stat"><strong>70+</strong> Conditions</span>
+                    <span class="mode-stat"><strong>6</strong> Layers Each</span>
                 </div>
-                <div class="tile-cta">Start Training →</div>
+                <div class="mode-cta">Browse Deep Dives →</div>
             </a>
 
-            <!-- CoachDx -->
-            <a href="CoachDx/index.html" class="tile">
-                <svg class="tile-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 310 120">
-                    <text x="20" y="70" font-family="Georgia, serif" font-size="58" fill="#1a1a1a" letter-spacing="-1">CoachD</text>
-                    <line x1="218" y1="42" x2="242" y2="72" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round"/>
-                    <ellipse cx="216" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 216 39)" fill="#1a1a1a"/>
-                    <path d="M 242 42 L 226 58 Q 220 66 220 76 Q 220 86 228 92 Q 236 98 236 108" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-                    <ellipse cx="244" cy="39" rx="2.5" ry="4.5" transform="rotate(28 244 39)" fill="#1a1a1a"/>
-                    <circle cx="236" cy="108" r="10" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
-                    <circle cx="236" cy="108" r="5" fill="#1a1a1a"/>
-                </svg>
-                <div class="tile-title">AI Clinical Coaching</div>
-                <p class="tile-description">Practice with an AI attending who guides you through cases using Socratic questioning. Get real-time feedback on your reasoning.</p>
-                <div class="tile-features">
-                    <span class="tile-feature">Socratic Method</span>
-                    <span class="tile-feature">SBAR Training</span>
-                    <span class="tile-feature">Case Library</span>
+            <!-- Adventure Cases -->
+            <a href="adventure-hub.html" class="mode-card">
+                <div class="mode-icon">🎮</div>
+                <div class="mode-title">Adventure Cases</div>
+                <p class="mode-description">Immersive branching scenarios where your decisions shape outcomes. Experience the weight of clinical decision-making under pressure.</p>
+                <div class="mode-stats">
+                    <span class="mode-stat"><strong>3</strong> Available</span>
+                    <span class="mode-stat"><strong>Multiple</strong> Endings</span>
                 </div>
-                <div class="tile-cta">Start Coaching →</div>
+                <div class="mode-cta">Start Adventure →</div>
             </a>
 
-            <!-- Dashboard -->
-            <a href="dx-dashboard.html" class="tile">
-                <div class="tile-title" style="margin-top: 8px;">📊 Dashboard</div>
-                <p class="tile-description">Track your progress across all modules. See your strengths, identify gaps, and monitor improvement over time.</p>
-                <div class="tile-features">
-                    <span class="tile-feature">Progress Tracking</span>
-                    <span class="tile-feature">Analytics</span>
-                    <span class="tile-feature">Fingerprint</span>
+            <!-- ECG Training -->
+            <a href="ecg-quiz.html" class="mode-card">
+                <div class="mode-icon">❤️</div>
+                <div class="mode-title">ECG Training</div>
+                <p class="mode-description">Practice ECG interpretation with instant feedback. Learn to recognize patterns from normal variants to life-threatening arrhythmias.</p>
+                <div class="mode-stats">
+                    <span class="mode-stat"><strong>50+</strong> ECGs</span>
+                    <span class="mode-stat"><strong>Quiz</strong> Mode</span>
                 </div>
-                <div class="tile-cta">View Progress →</div>
+                <div class="mode-cta">Practice ECGs →</div>
             </a>
         </div>
+
+        <!-- Learning Path Recommendation -->
+        <div class="learning-path">
+            <h3>💡 Recommended Learning Path</h3>
+            
+            <div class="path-flow">
+                <div class="path-step">
+                    <div class="path-step-icon">📚</div>
+                    <div class="path-step-title">Deep Dive</div>
+                    <div class="path-step-desc">Learn the "why"</div>
+                </div>
+                <div class="path-arrow">→</div>
+                <div class="path-step">
+                    <div class="path-step-icon">🏥</div>
+                    <div class="path-step-title">Training</div>
+                    <div class="path-step-desc">Practice cases</div>
+                </div>
+                <div class="path-arrow">→</div>
+                <div class="path-step">
+                    <div class="path-step-icon">🎮</div>
+                    <div class="path-step-title">Adventure</div>
+                    <div class="path-step-desc">Apply under pressure</div>
+                </div>
+            </div>
+            
+            <p><strong>Pro Tip:</strong> Complete a Deep Dive first to understand the underlying pathophysiology, then practice with Training Cases to build pattern recognition, and finally test yourself with Adventure Cases where your decisions have consequences.</p>
+        </div>
+    </main>
+
+    <!-- Quick Actions -->
+    <section class="quick-actions">
+        <a href="board-prep.html" class="quick-action">📝 Board Prep</a>
+        <a href="analytics-dashboard.html" class="quick-action">📊 My Progress</a>
+        <a href="ecg-generator.html" class="quick-action">📈 ECG Generator</a>
+        <a href="../reference-library.html" class="quick-action">📚 References</a>
     </section>
-
-    <!-- Secondary Links -->
-    <section class="secondary-section">
-        <div class="secondary-inner">
-            <a href="reference-library.html" class="secondary-link">
-                📚 Reference Library
-            </a>
-            <a href="fingerprint-dashboard.html" class="secondary-link">
-                🧬 Reasoning Fingerprint
-            </a>
-            <a href="ReasonDx/board-prep.html" class="secondary-link">
-                📝 Board Prep
-            </a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <p>DxSuite — Clinical Education Platform for Medical Excellence</p>
-    </footer>
 </body>
 </html>
