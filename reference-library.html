@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReasonDx - Reference Library</title>
+    <link rel="icon" href="favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        .reference-card:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="index.html" class="flex items-center gap-2 text-gray-900 no-underline">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" class="h-8">
+                        <text x="5" y="40" font-family="Georgia, serif" font-size="32" fill="#1a1a1a">Reason</text>
+                        <text x="120" y="40" font-family="Georgia, serif" font-size="32" fill="#4a9a8e">Dx</text>
+                    </svg>
+                </a>
+                <span class="text-gray-300">|</span>
+                <h1 class="text-lg font-semibold text-gray-900">Reference Library</h1>
+            </div>
+            <!-- Unified Navigation -->
+    <link rel="stylesheet" href="../dx-unified-nav.css">
+    <div id="dx-nav"></div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <!-- Intro -->
+        <div class="bg-white rounded-xl p-6 mb-8 border border-gray-200">
+            <h2 class="text-2xl font-bold text-gray-900 mb-2">📚 Medical Education Reference Library</h2>
+            <p class="text-gray-600">A curated collection of high-quality, open-access medical education resources used throughout the ReasonDx platform. All references are from reputable sources including peer-reviewed literature, professional society guidelines, and established educational materials.</p>
+        </div>
+
+        <!-- Search -->
+        <div class="mb-8">
+            <input type="text" id="searchInput" placeholder="Search references..." 
+                   class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                   onkeyup="filterReferences()">
+        </div>
+
+        <!-- Categories -->
+        <div class="space-y-8" id="referenceList">
+            
+            <!-- Open-Access Textbooks -->
+            <section class="bg-white rounded-xl p-6 border border-gray-200">
+                <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                    <span class="text-2xl">📖</span> Open-Access Textbooks
+                </h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <a href="https://openstax.org/details/books/anatomy-and-physiology-2e" target="_blank" 
+                       class="reference-card block p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <h4 class="font-semibold text-gray-900">OpenStax Anatomy & Physiology 2e</h4>
+                        <p class="text-sm text-gray-600 mt-1">Comprehensive A&P textbook, free and peer-reviewed</p>
+                        <span class="text-xs text-teal-600 mt-2 inline-block">openstax.org →</span>
+                    </a>
+                    <a href="https://www.ncbi.nlm.nih.gov/books/" target="_blank"
+                       class="reference-card block p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <h4 class="font-semibold text-gray-900">NCBI Bookshelf</h4>
+                        <p class="text-sm text-gray-600 mt-1">Free access to medical textbooks and literature</p>
+                        <span class="text-xs text-teal-600 mt-2 inline-block">ncbi.nlm.nih.gov →</span>
+                    </a>
+                    <a href="https://accessmedicine.mhmedical.com/" target="_blank"
+                       class="reference-card block p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <h4 class="font-semibold text-gray-900">AccessMedicine</h4>
+                        <p class="text-sm text-gray-600 mt-1">Harrison's, Current Medical Diagnosis & Treatment</p>
+                        <span class="text-xs text-gray-400 mt-2 inline-block">Institutional access may be required</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- StatPearls -->
+            <section class="bg-white rounded-xl p-6 border border-gray-200">
+                <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                    <span class="text-2xl">🔬</span> StatPearls (Free Medical Articles)
+                </h3>
+                <p class="text-gray-600 mb-4">StatPearls provides free, peer-reviewed medical articles updated continuously. Below are frequently referenced topics:</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-3">
+                    <a href="https://www.ncbi.nlm.nih.gov/books/NBK537054/" target="_blank" class="reference-card block p-3 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <span class="font-medium text-gray-900">Sepsis</span>
+                    </a>
+                    <a href="https://www.ncbi.nlm.nih.gov/books/NBK430939/" target="_blank" class="reference-card block p-3 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <span class="font-medium text-gray-900">Septic Shock</span>
+                    </a>
+                    <a href="https://www.ncbi.nlm.nih.gov/books/NBK441896/" target="_blank" class="reference-card block p-3 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <span class="font-medium text-gray-900">Acute Kidney Injury</span>
+                    </a>
+                    <a href="https://www.ncbi.nlm.nih.gov/books/NBK560551/" target="_blank" class="reference-card block p-3 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <span class="font-medium text-gray-900">Pulmonary Embolism</span>
+                    </a>
+                    <a href="https://www.ncbi.nlm.nih.gov/books/NBK535369/" target="_blank" class="reference-card block p-3 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <span class="font-medium text-gray-900">Stroke</span>
+                    </a>
+                    <a href="https://www.ncbi.nlm.nih.gov/books/NBK560723/" target="_blank" class="reference-card block p-3 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <span class="font-medium text-gray-900">Diabetic Ketoacidosis</span>
+                    </a>
+                    <a href="https://www.ncbi.nlm.nih.gov/books/NBK482124/" target="_blank" class="reference-card block p-3 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <span class="font-medium text-gray-900">Anaphylaxis</span>
+                    </a>
+                    <a href="https://www.ncbi.nlm.nih.gov/books/NBK430873/" target="_blank" class="reference-card block p-3 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <span class="font-medium text-gray-900">Heart Failure</span>
+                    </a>
+                    <a href="https://www.ncbi.nlm.nih.gov/books/NBK513321/" target="_blank" class="reference-card block p-3 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <span class="font-medium text-gray-900">Pneumonia</span>
+                    </a>
+                    <a href="https://www.ncbi.nlm.nih.gov/books/NBK459360/" target="_blank" class="reference-card block p-3 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <span class="font-medium text-gray-900">Meningitis</span>
+                    </a>
+                    <a href="https://www.ncbi.nlm.nih.gov/books/NBK470386/" target="_blank" class="reference-card block p-3 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <span class="font-medium text-gray-900">Hyponatremia</span>
+                    </a>
+                    <a href="https://www.ncbi.nlm.nih.gov/books/NBK526072/" target="_blank" class="reference-card block p-3 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <span class="font-medium text-gray-900">Atrial Fibrillation</span>
+                    </a>
+                </div>
+                <a href="https://www.statpearls.com/" target="_blank" class="inline-block mt-4 text-teal-600 hover:text-teal-700 text-sm font-medium">
+                    Browse all StatPearls articles →
+                </a>
+            </section>
+
+            <!-- Clinical Guidelines -->
+            <section class="bg-white rounded-xl p-6 border border-gray-200">
+                <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                    <span class="text-2xl">📋</span> Clinical Practice Guidelines
+                </h3>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <a href="https://www.sccm.org/SurvivingSepsisCampaign/Guidelines" target="_blank"
+                       class="reference-card block p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <h4 class="font-semibold text-gray-900">Surviving Sepsis Campaign</h4>
+                        <p class="text-sm text-gray-600 mt-1">International guidelines for sepsis and septic shock management</p>
+                        <span class="text-xs text-teal-600 mt-2 inline-block">sccm.org →</span>
+                    </a>
+                    <a href="https://www.acc.org/Guidelines" target="_blank"
+                       class="reference-card block p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <h4 class="font-semibold text-gray-900">ACC/AHA Guidelines</h4>
+                        <p class="text-sm text-gray-600 mt-1">Cardiovascular disease guidelines from professional societies</p>
+                        <span class="text-xs text-teal-600 mt-2 inline-block">acc.org →</span>
+                    </a>
+                    <a href="https://ginasthma.org/gina-reports/" target="_blank"
+                       class="reference-card block p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <h4 class="font-semibold text-gray-900">GINA (Asthma)</h4>
+                        <p class="text-sm text-gray-600 mt-1">Global Initiative for Asthma - diagnosis and management</p>
+                        <span class="text-xs text-teal-600 mt-2 inline-block">ginasthma.org →</span>
+                    </a>
+                    <a href="https://goldcopd.org/gold-reports/" target="_blank"
+                       class="reference-card block p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <h4 class="font-semibold text-gray-900">GOLD (COPD)</h4>
+                        <p class="text-sm text-gray-600 mt-1">Global Initiative for Chronic Obstructive Lung Disease</p>
+                        <span class="text-xs text-teal-600 mt-2 inline-block">goldcopd.org →</span>
+                    </a>
+                    <a href="https://kdigo.org/guidelines/" target="_blank"
+                       class="reference-card block p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <h4 class="font-semibold text-gray-900">KDIGO (Kidney Disease)</h4>
+                        <p class="text-sm text-gray-600 mt-1">Kidney Disease: Improving Global Outcomes guidelines</p>
+                        <span class="text-xs text-teal-600 mt-2 inline-block">kdigo.org →</span>
+                    </a>
+                    <a href="https://www.idsociety.org/practice-guideline/practice-guidelines/" target="_blank"
+                       class="reference-card block p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <h4 class="font-semibold text-gray-900">IDSA Guidelines</h4>
+                        <p class="text-sm text-gray-600 mt-1">Infectious Diseases Society of America practice guidelines</p>
+                        <span class="text-xs text-teal-600 mt-2 inline-block">idsociety.org →</span>
+                    </a>
+                    <a href="https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines" target="_blank"
+                       class="reference-card block p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <h4 class="font-semibold text-gray-900">AHA ACLS/BLS Guidelines</h4>
+                        <p class="text-sm text-gray-600 mt-1">American Heart Association resuscitation guidelines</p>
+                        <span class="text-xs text-teal-600 mt-2 inline-block">heart.org →</span>
+                    </a>
+                    <a href="https://www.rheumatology.org/Practice-Quality/Clinical-Support/Clinical-Practice-Guidelines" target="_blank"
+                       class="reference-card block p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <h4 class="font-semibold text-gray-900">ACR Guidelines</h4>
+                        <p class="text-sm text-gray-600 mt-1">American College of Rheumatology clinical guidelines</p>
+                        <span class="text-xs text-teal-600 mt-2 inline-block">rheumatology.org →</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Government & International Resources -->
+            <section class="bg-white rounded-xl p-6 border border-gray-200">
+                <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                    <span class="text-2xl">🏛️</span> Government & International Resources
+                </h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <a href="https://www.cdc.gov/" target="_blank"
+                       class="reference-card block p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <h4 class="font-semibold text-gray-900">CDC</h4>
+                        <p class="text-sm text-gray-600 mt-1">Centers for Disease Control and Prevention</p>
+                        <span class="text-xs text-teal-600 mt-2 inline-block">cdc.gov →</span>
+                    </a>
+                    <a href="https://www.who.int/publications" target="_blank"
+                       class="reference-card block p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <h4 class="font-semibold text-gray-900">WHO</h4>
+                        <p class="text-sm text-gray-600 mt-1">World Health Organization publications</p>
+                        <span class="text-xs text-teal-600 mt-2 inline-block">who.int →</span>
+                    </a>
+                    <a href="https://www.nice.org.uk/guidance" target="_blank"
+                       class="reference-card block p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <h4 class="font-semibold text-gray-900">NICE Guidelines (UK)</h4>
+                        <p class="text-sm text-gray-600 mt-1">National Institute for Health and Care Excellence</p>
+                        <span class="text-xs text-teal-600 mt-2 inline-block">nice.org.uk →</span>
+                    </a>
+                    <a href="https://pubmed.ncbi.nlm.nih.gov/" target="_blank"
+                       class="reference-card block p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <h4 class="font-semibold text-gray-900">PubMed</h4>
+                        <p class="text-sm text-gray-600 mt-1">Free access to biomedical literature</p>
+                        <span class="text-xs text-teal-600 mt-2 inline-block">pubmed.ncbi.nlm.nih.gov →</span>
+                    </a>
+                    <a href="https://medlineplus.gov/" target="_blank"
+                       class="reference-card block p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <h4 class="font-semibold text-gray-900">MedlinePlus</h4>
+                        <p class="text-sm text-gray-600 mt-1">NIH consumer health information</p>
+                        <span class="text-xs text-teal-600 mt-2 inline-block">medlineplus.gov →</span>
+                    </a>
+                    <a href="https://www.fda.gov/" target="_blank"
+                       class="reference-card block p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <h4 class="font-semibold text-gray-900">FDA</h4>
+                        <p class="text-sm text-gray-600 mt-1">Drug information, safety alerts, approvals</p>
+                        <span class="text-xs text-teal-600 mt-2 inline-block">fda.gov →</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Clinical Decision Tools -->
+            <section class="bg-white rounded-xl p-6 border border-gray-200">
+                <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                    <span class="text-2xl">🧮</span> Clinical Decision Tools & Calculators
+                </h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <a href="https://www.mdcalc.com/" target="_blank"
+                       class="reference-card block p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <h4 class="font-semibold text-gray-900">MDCalc</h4>
+                        <p class="text-sm text-gray-600 mt-1">Medical calculators, clinical scores, and decision support</p>
+                        <span class="text-xs text-teal-600 mt-2 inline-block">mdcalc.com →</span>
+                    </a>
+                    <a href="https://www.qxmd.com/calculate" target="_blank"
+                       class="reference-card block p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <h4 class="font-semibold text-gray-900">Calculate by QxMD</h4>
+                        <p class="text-sm text-gray-600 mt-1">Evidence-based clinical calculators</p>
+                        <span class="text-xs text-teal-600 mt-2 inline-block">qxmd.com →</span>
+                    </a>
+                    <a href="https://bestpractice.bmj.com/" target="_blank"
+                       class="reference-card block p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <h4 class="font-semibold text-gray-900">BMJ Best Practice</h4>
+                        <p class="text-sm text-gray-600 mt-1">Point-of-care clinical decision support</p>
+                        <span class="text-xs text-gray-400 mt-2 inline-block">Subscription may be required</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Allergy & Immunology Specific -->
+            <section class="bg-white rounded-xl p-6 border border-gray-200">
+                <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                    <span class="text-2xl">🩺</span> Allergy & Immunology Resources
+                </h3>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <a href="https://www.aaaai.org/practice-resources/practice-tools" target="_blank"
+                       class="reference-card block p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <h4 class="font-semibold text-gray-900">AAAAI Practice Resources</h4>
+                        <p class="text-sm text-gray-600 mt-1">American Academy of Allergy, Asthma & Immunology</p>
+                        <span class="text-xs text-teal-600 mt-2 inline-block">aaaai.org →</span>
+                    </a>
+                    <a href="https://www.acaai.org/resources/tools/" target="_blank"
+                       class="reference-card block p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <h4 class="font-semibold text-gray-900">ACAAI Resources</h4>
+                        <p class="text-sm text-gray-600 mt-1">American College of Allergy, Asthma & Immunology</p>
+                        <span class="text-xs text-teal-600 mt-2 inline-block">acaai.org →</span>
+                    </a>
+                    <a href="https://www.worldallergy.org/" target="_blank"
+                       class="reference-card block p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <h4 class="font-semibold text-gray-900">World Allergy Organization</h4>
+                        <p class="text-sm text-gray-600 mt-1">International allergy resources and guidelines</p>
+                        <span class="text-xs text-teal-600 mt-2 inline-block">worldallergy.org →</span>
+                    </a>
+                    <a href="https://www.foodallergy.org/" target="_blank"
+                       class="reference-card block p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-teal-300 transition no-underline">
+                        <h4 class="font-semibold text-gray-900">FARE (Food Allergy)</h4>
+                        <p class="text-sm text-gray-600 mt-1">Food Allergy Research & Education</p>
+                        <span class="text-xs text-teal-600 mt-2 inline-block">foodallergy.org →</span>
+                    </a>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Footer Note -->
+        <div class="mt-8 p-4 bg-gray-100 rounded-lg text-center text-sm text-gray-600">
+            <p>These resources are provided for educational purposes. Always verify information with primary sources and consult with qualified healthcare providers for clinical decisions.</p>
+            <p class="mt-2">© 2026 ReasonDx · <a href="index.html" class="text-teal-600 hover:text-teal-700">Return to Home</a></p>
+        </div>
+    </main>
+
+    <script>
+        function filterReferences() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const sections = document.querySelectorAll('#referenceList section');
+            
+            sections.forEach(section => {
+                const cards = section.querySelectorAll('.reference-card');
+                let hasVisibleCards = false;
+                
+                cards.forEach(card => {
+                    const text = card.textContent.toLowerCase();
+                    if (text.includes(searchTerm)) {
+                        card.style.display = 'block';
+                        hasVisibleCards = true;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                section.style.display = hasVisibleCards ? 'block' : 'none';
+            });
+        }
+    </script>
+<script src="../dx-unified-nav.js"></script>
+    <script>if(typeof DxNav!=='undefined')DxNav.init({currentPage:'reason',basePath:'../'});</script>
+</body>
+</html>

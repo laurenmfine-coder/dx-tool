@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dx Learning Ecosystem | Clinical Education Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #fafafa; color: #18181b; line-height: 1.6; }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            padding: 48px 24px 64px;
+            text-align: center;
+            color: white;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -1px;
+        }
+        .header p {
+            font-size: 18px;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .tagline {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-style: italic;
+            color: #cbd5e1;
+            margin-top: 16px;
+            font-size: 16px;
+        }
+        
+        /* Platform Cards */
+        .platforms {
+            max-width: 1100px;
+            margin: -40px auto 64px;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+        
+        .platform-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+        }
+        .platform-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        }
+        
+        .platform-card.reason { border-color: #3b82f6; }
+        .platform-card.reason:hover { background: linear-gradient(135deg, #eff6ff 0%, #fff 100%); }
+        
+        .platform-card.mechanism { border-color: #10b981; }
+        .platform-card.mechanism:hover { background: linear-gradient(135deg, #ecfdf5 0%, #fff 100%); }
+        
+        .platform-card.coach { border-color: #8b5cf6; }
+        .platform-card.coach:hover { background: linear-gradient(135deg, #f5f3ff 0%, #fff 100%); }
+        
+        .platform-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        .platform-name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .platform-name .badge {
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        .platform-card.reason .badge { background: #dbeafe; color: #1d4ed8; }
+        .platform-card.mechanism .badge { background: #d1fae5; color: #047857; }
+        .platform-card.coach .badge { background: #ede9fe; color: #6d28d9; }
+        
+        .platform-subtitle {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 16px;
+        }
+        .platform-desc {
+            font-size: 15px;
+            color: #475569;
+            line-height: 1.7;
+            flex-grow: 1;
+        }
+        .platform-stats {
+            display: flex;
+            gap: 24px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+        }
+        .platform-stat {
+            text-align: center;
+        }
+        .platform-stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+        .platform-stat-label {
+            font-size: 11px;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .enter-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .platform-card.reason .enter-btn { background: #3b82f6; color: white; }
+        .platform-card.reason .enter-btn:hover { background: #2563eb; }
+        .platform-card.mechanism .enter-btn { background: #10b981; color: white; }
+        .platform-card.mechanism .enter-btn:hover { background: #059669; }
+        .platform-card.coach .enter-btn { background: #8b5cf6; color: white; }
+        .platform-card.coach .enter-btn:hover { background: #7c3aed; }
+        
+        /* Quick Links */
+        .quick-links {
+            max-width: 1100px;
+            margin: 0 auto 64px;
+            padding: 0 24px;
+        }
+        .quick-links h2 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #64748b;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        .quick-links-grid {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .quick-link {
+            padding: 10px 20px;
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #475569;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .quick-link:hover {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+            color: #1e293b;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #fff;
+            border-top: 1px solid #e5e7eb;
+            padding: 32px 24px;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <h1>Dx Learning Ecosystem</h1>
+        <p>A comprehensive clinical education platform integrating reasoning, pathophysiology, and AI-powered coaching.</p>
+        <div class="tagline">Asking the right questions can change everything.</div>
+    </header>
+    
+    <!-- Platform Cards -->
+    <section class="platforms">
+        <!-- ReasonDx -->
+        <a href="ReasonDx/index.html" class="platform-card reason">
+            <div class="platform-icon">🔬</div>
+            <h2 class="platform-name">
+                ReasonDx
+                <span class="badge">Core Platform</span>
+            </h2>
+            <div class="platform-subtitle">Clinical Reasoning Trainer</div>
+            <p class="platform-desc">
+                Work through realistic patient cases, build differential diagnoses, order tests strategically, and develop the diagnostic thinking that defines expert clinicians.
+            </p>
+            <div class="platform-stats">
+                <div class="platform-stat">
+                    <div class="platform-stat-value">200+</div>
+                    <div class="platform-stat-label">Cases</div>
+                </div>
+                <div class="platform-stat">
+                    <div class="platform-stat-value">15</div>
+                    <div class="platform-stat-label">Specialties</div>
+                </div>
+                <div class="platform-stat">
+                    <div class="platform-stat-value">6</div>
+                    <div class="platform-stat-label">Modes</div>
+                </div>
+            </div>
+            <div class="enter-btn">Enter ReasonDx →</div>
+        </a>
+        
+        <!-- MechanismDx -->
+        <a href="mechanism/index.html" class="platform-card mechanism">
+            <div class="platform-icon">⚙️</div>
+            <h2 class="platform-name">
+                MechanismDx
+                <span class="badge">Pathophysiology</span>
+            </h2>
+            <div class="platform-subtitle">Disease Mechanism Mastery</div>
+            <p class="platform-desc">
+                Master the "why" behind diseases. Interactive modules connect pathophysiology to clinical presentation, helping you understand mechanisms that drive symptoms and guide treatment.
+            </p>
+            <div class="platform-stats">
+                <div class="platform-stat">
+                    <div class="platform-stat-value">18</div>
+                    <div class="platform-stat-label">Modules</div>
+                </div>
+                <div class="platform-stat">
+                    <div class="platform-stat-value">230+</div>
+                    <div class="platform-stat-label">MCQs</div>
+                </div>
+                <div class="platform-stat">
+                    <div class="platform-stat-value">7</div>
+                    <div class="platform-stat-label">Systems</div>
+                </div>
+            </div>
+            <div class="enter-btn">Enter MechanismDx →</div>
+        </a>
+        
+        <!-- CoachDx -->
+        <a href="CoachDx/index.html" class="platform-card coach">
+            <div class="platform-icon">💬</div>
+            <h2 class="platform-name">
+                CoachDx
+                <span class="badge">AI Coaching</span>
+            </h2>
+            <div class="platform-subtitle">Socratic Learning Partner</div>
+            <p class="platform-desc">
+                Learn through dialogue with an AI mentor that asks probing questions, challenges assumptions, and guides you to deeper understanding—just like a great attending.
+            </p>
+            <div class="platform-stats">
+                <div class="platform-stat">
+                    <div class="platform-stat-value">58+</div>
+                    <div class="platform-stat-label">Cases</div>
+                </div>
+                <div class="platform-stat">
+                    <div class="platform-stat-value">5</div>
+                    <div class="platform-stat-label">AI Coaches</div>
+                </div>
+                <div class="platform-stat">
+                    <div class="platform-stat-value">24/7</div>
+                    <div class="platform-stat-label">Available</div>
+                </div>
+            </div>
+            <div class="enter-btn">Enter CoachDx →</div>
+        </a>
+    </section>
+    
+    <!-- Quick Links -->
+    <section class="quick-links">
+        <h2>Quick Access</h2>
+        <div class="quick-links-grid">
+            <a href="ReasonDx/training.html" class="quick-link">🎯 Start Training</a>
+            <a href="CoachDx/case-library.html" class="quick-link">📚 Case Library</a>
+            <a href="fingerprint-dashboard.html" class="quick-link">🧬 Learning Fingerprint</a>
+            <a href="unified-scoreboard.html" class="quick-link">🏆 Scoreboard</a>
+            <a href="ReasonDx/predict-labs-library.html" class="quick-link">🧪 PredictLabs</a>
+            <a href="ReasonDx/guidelines-audit-tool.html" class="quick-link">📋 Guidelines</a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Dx Learning Ecosystem — Built for medical education</p>
+        <p style="margin-top: 8px; font-size: 12px; color: #64748b;">© 2025-2026 · Created by Lauren Fine, MD, FAAAAI · Nova Southeastern University</p>
+    </footer>
+</body>
+</html>

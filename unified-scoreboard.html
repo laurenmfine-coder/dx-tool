@@ -36,7 +36,9 @@
     </style>
 </head>
 <body>
-<header class="header"><div class="header-inner"><a href="mechanism/index.html" class="logo"><span class="logo-icon">🎯</span><span class="logo-text">Dx <span class="hl">Scoreboard</span></span></a><nav class="nav"><a href="ReasonDx/training.html">ReasonDx</a><a href="mechanism/index.html">MechanismDx</a><a href="CoachDx/mentor-chat.html">CoachDx</a><a href="unified-scoreboard.html" class="active">Scoreboard</a></nav></div></header>
+<header class="header"><div class="header-inner"><a href="mechanism/index.html" class="logo"><span class="logo-icon">🎯</span><span class="logo-text">Dx <span class="hl">Scoreboard</span></span></a><!-- Unified Navigation -->
+    <link rel="stylesheet" href="../dx-unified-nav.css">
+    <div id="dx-nav"></div></div></header>
 <main class="main">
 <div class="demo" id="demoBanner"><p>👋 <strong>Demo Mode:</strong> Click to load sample data!</p><button onclick="loadDemo()">Load Demo Data</button></div>
 <div class="hero">
@@ -82,5 +84,7 @@ function renderLeaderboard(ud){const b=document.getElementById('leaderboardBody'
 function getTimeAgo(ts){const s=Math.floor((Date.now()-ts)/1000);if(s<60)return 'Just now';const m=Math.floor(s/60);if(m<60)return m+'m ago';const h=Math.floor(m/60);if(h<24)return h+'h ago';return Math.floor(h/24)+'d ago';}
 document.addEventListener('DOMContentLoaded',updateDisplay);
 </script>
+<script src="../dx-unified-nav.js"></script>
+    <script>if(typeof DxNav!=='undefined')DxNav.init({currentPage:'reason',basePath:'../'});</script>
 </body>
 </html>
