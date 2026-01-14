@@ -425,8 +425,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
     </style>
     <link rel="stylesheet" href="module-enhance.css">
     <link rel="stylesheet" href="module-fix.css">
-    <link rel="stylesheet" href="../dx-unified-nav.css">
-</head>
+    </head>
 <body>
 
     <!-- UNIFIED DX NAVIGATION -->
@@ -456,13 +455,8 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         </div>
     </nav>
 
-<header class="header"><div class="logo">🫃 ReasonDx — GI/Hepatology Deep Mechanisms</div></header>
-<div class="module-header"><div class="module-title"><div class="module-icon">🫃</div><div><h1>GI & Hepatology<span class="enhanced-badge">✨ MECHANISM-ENHANCED</span></h1><p>From GI bleeding to cirrhosis complications</p></div></div></div>
-<div class="progress-bar"><div class="progress-inner"><span style="font-size:12px;color:var(--text-muted)">Module Progress</span><div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div><span class="progress-count" id="progressCount">0/20</span></div></div>
-<div class="patient-banner"><div class="patient-banner-inner"><div class="patient-info"><div class="patient-name">Multiple Patients</div><div class="patient-details">GI Bleeding, Cirrhosis, Pancreatitis, Liver Failure</div></div><div class="patient-vitals"><div class="vital critical"><div class="vital-value">7.2</div><div class="vital-label">Hgb</div></div><div class="vital"><div class="vital-value">2.8</div><div class="vital-label">INR</div></div><div class="vital"><div class="vital-value">4.2</div><div class="vital-label">T.Bili</div></div></div></div></div>
-<!-- Unified Navigation -->
-    <div id="dx-nav"></div>
-<div class="main-container">
+
+    <div class="main-container">
 <aside>
 <div class="phase-objectives" id="phaseObjectives"><div class="obj-title">🎯 Phase 1 Objectives</div><ul class="obj-list"><li>Differentiate upper vs lower GIB</li><li>Risk stratify with Glasgow-Blatchford</li><li>Manage variceal bleeding</li><li>Apply PPI timing</li></ul><div class="phase-refs"><a href="https://www.asge.org/" target="_blank">ASGE Guidelines</a></div></div>
 <div class="card"><div class="card-header"><div class="card-title">📋 Clinical Snapshot</div><div class="card-badge" id="phaseLabel">Phase 1</div></div>
@@ -735,15 +729,6 @@ function toggleDD(btn){btn.nextElementSibling.classList.toggle('visible');btn.qu
 function updateProgress(){var done=0;for(var i=1;i<=20;i++)if(state[i].done)done++;document.getElementById('progressFill').style.width=(done/20*100)+'%';document.getElementById('progressCount').textContent=done+'/20';}
 renderPhase();
 </script>
-
-    <script src="../dx-unified-nav.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof DxNav !== 'undefined') {
-                DxNav.init({ currentPage: 'mechanism', basePath: '../' });
-            }
-        });
-    </script>
 
     <!-- THEME PICKER MODAL -->
     <div class="dx-theme-modal" id="dxThemeModal">
