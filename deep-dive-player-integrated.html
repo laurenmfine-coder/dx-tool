@@ -1671,15 +1671,15 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             const moduleId = urlParams.get('module') || 'acs'; // default to ACS
             
             // Map module IDs to JSON file paths
-            const moduleFiles = {
-                'acs': 'data/deep-dives/acs-deep-dive-complete.json',
-                'pe': 'data/deep-dives/pe-deep-dive.json',
-                'sepsis': 'data/deep-dives/sepsis-deep-dive.json',
-                'aki': 'data/deep-dives/aki-deep-dive.json',
-                'gi-bleed': 'data/deep-dives/gi-bleed-deep-dive.json'
+            // Dynamic path construction - module ID maps to JSON file
+            const specialCases = {
+                'acs': 'acs-deep-dive-complete.json',
+                'dka': 'dka-deep-dive.json',
+                'diabetic-ketoacidosis': 'diabetic-ketoacidosis-deep-dive.json'
             };
             
-            const filePath = moduleFiles[moduleId] || moduleFiles['acs'];
+            const fileName = specialCases[moduleId] || `${moduleId}-deep-dive.json`;
+            const filePath = `data/deep-dives/${fileName}`;
             
             try {
                 const response = await fetch(filePath);
