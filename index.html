@@ -3,1047 +3,365 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dx Learning Ecosystem | Master Clinical Reasoning</title>
-    <meta name="description" content="An integrated learning ecosystem combining interactive cases, pathophysiology mastery, and AI coaching to transform how you learn medicine.">
+    <title>DxSuite | Clinical Education Platform</title>
     <style>
-        :root {
-            --primary: #1E3A5F;
-            --primary-light: var(--primary-dark);
-            --reason-blue: #4F46E5;
-            --mechanism-green: var(--primary);
-            --coach-purple: #8B5CF6;
-            --bg: #F0F7FF;
-            --bg-white: #FFFFFF;
-            --text: #1F2937;
-            --text-light: #6B7280;
-            --border: #E5E7EB;
-        }
-        
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg);
-            min-height: 100vh;
-            color: var(--text);
-        }
-        
-        /* Navigation */
-        .nav {
-            background: white;
-            border-bottom: 1px solid var(--border);
-            padding: 16px 32px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--primary);
-            text-decoration: none;
-        }
-        
-        .nav-brand-icon { font-size: 1.5rem; }
-        
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .nav-link {
-            padding: 10px 16px;
-            color: var(--text-light);
-            text-decoration: none;
-            font-size: 0.95rem;
-            border-radius: 8px;
-            transition: all 0.2s;
-        }
-        
-        .nav-link:hover {
-            background: var(--bg);
-            color: var(--text);
-        }
-        
-        .nav-cta {
-            background: var(--primary-light);
-            color: white !important;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 500;
-        }
-        
-        .nav-cta:hover {
-            background: var(--primary);
-        }
-
-        .nav-new {
-            background: #dcfce7;
-            color: #166534 !important;
-            font-weight: 500;
-        }
-
-        .nav-new:hover {
-            background: #bbf7d0;
-        }
-        
-        /* Hero Section */
-        .hero {
-            padding: 80px 32px;
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-        
-        .hero-content h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            color: var(--text);
-        }
-        
-        .hero-content h1 .highlight {
-            background: linear-gradient(135deg, var(--reason-blue), var(--coach-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .hero-subtitle {
-            font-size: 1.15rem;
-            color: var(--text-light);
-            line-height: 1.6;
-            margin-bottom: 32px;
-        }
-        
-        .hero-actions {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-        
-        .btn {
-            padding: 14px 28px;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            border: none;
-        }
-        
-        .btn-primary {
-            background: var(--primary-light);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background: var(--primary);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
-        }
-        
-        .btn-secondary {
-            background: white;
-            color: var(--text);
-            border: 2px solid var(--border);
-        }
-        
-        .btn-secondary:hover {
-            border-color: var(--primary-light);
-            color: var(--primary-light);
-        }
-        
-        /* Hero Cards */
-        .hero-cards {
-            position: relative;
-            height: 400px;
-        }
-        
-        .hero-card {
-            position: absolute;
-            background: white;
-            border-radius: 16px;
-            padding: 20px;
-            width: 260px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .hero-card.reason { top: 0; left: 0; z-index: 4; border-left: 4px solid var(--reason-blue); }
-        .hero-card.mechanism { top: 60px; left: 80px; z-index: 3; border-left: 4px solid var(--mechanism-green); }
-        .hero-card.coach { top: 120px; left: 40px; z-index: 2; border-left: 4px solid var(--coach-purple); }
-        .hero-card.adventure { top: 180px; left: 100px; z-index: 1; border-left: 4px solid #F59E0B; }
-        
-        .hero-cards:hover .hero-card.reason { transform: translate(-20px, -10px) rotate(-2deg); }
-        .hero-cards:hover .hero-card.mechanism { transform: translate(140px, -30px) rotate(1deg); }
-        .hero-cards:hover .hero-card.coach { transform: translate(-30px, 100px) rotate(-1deg); }
-        .hero-cards:hover .hero-card.adventure { transform: translate(160px, 80px) rotate(2deg); }
-        
-        .hero-card:hover {
-            transform: scale(1.05) !important;
-            z-index: 10 !important;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-        }
-        
-        .hero-card-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-        
-        .hero-card-icon {
-            font-size: 1.5rem;
-        }
-        
-        .hero-card-title {
-            font-weight: 600;
-            font-size: 1.1rem;
-            color: var(--text);
-        }
-        
-        .hero-card.reason .hero-card-title { color: var(--reason-blue); }
-        .hero-card.mechanism .hero-card-title { color: var(--mechanism-green); }
-        .hero-card.coach .hero-card-title { color: var(--coach-purple); }
-        .hero-card.adventure .hero-card-title { color: #F59E0B; }
-        
-        .hero-card-subtitle {
-            font-size: 0.85rem;
-            color: var(--text-light);
-        }
-        
-        .hero-card-desc {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            line-height: 1.5;
-        }
-        
-        .cards-hint {
-            text-align: center;
-            color: #9CA3AF;
-            font-size: 0.8rem;
-            margin-top: 20px;
-            position: absolute;
-            bottom: -30px;
-            width: 100%;
-        }
-        
-        /* What's Inside Section */
-        .whats-inside {
-            background: white;
-            padding: 80px 32px;
-        }
-        
-        .section-container {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 16px;
-        }
-        
-        .section-badge {
-            display: inline-block;
-            background: var(--bg);
-            color: var(--primary-light);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            margin-bottom: 12px;
-        }
-        
-        .section-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 12px;
-        }
-        
-        .section-subtitle {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            max-width: 600px;
-            margin: 0 auto 48px;
-        }
-        
-        /* Platform Cards */
-        .platform-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
-        
-        .platform-card {
-            background: white;
-            border-radius: 20px;
-            padding: 32px;
-            border: 1px solid var(--border);
-            transition: all 0.3s;
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-        
-        .platform-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-        }
-        
-        .platform-card.reason { border-top: 4px solid var(--reason-blue); }
-        .platform-card.mechanism { border-top: 4px solid var(--mechanism-green); }
-        .platform-card.coach { border-top: 4px solid var(--coach-purple); }
-        .platform-card.adventure { border-top: 4px solid #F59E0B; }
-        .platform-card.board-prep { border-top: 4px solid #1e40af; }
-        
-        .platform-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
-        
-        .platform-card.reason .platform-icon { background: #EEF2FF; }
-        .platform-card.mechanism .platform-icon { background: var(--primary-bg); }
-        .platform-card.coach .platform-icon { background: #FAF5FF; }
-        .platform-card.adventure .platform-icon { background: #FEF3C7; }
-        .platform-card.board-prep .platform-icon { background: var(--primary-bg); }
-        
-        .platform-name {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-        
-        .platform-card.reason .platform-name { color: var(--reason-blue); }
-        .platform-card.mechanism .platform-name { color: var(--mechanism-green); }
-        .platform-card.coach .platform-name { color: var(--coach-purple); }
-        .platform-card.adventure .platform-name { color: #F59E0B; }
-        .platform-card.board-prep .platform-name { color: #1e40af; }
-        
-        .platform-tagline {
-            font-size: 0.95rem;
-            color: var(--text-light);
-            margin-bottom: 16px;
-            line-height: 1.5;
-        }
-        
-        .platform-stats {
-            display: flex;
-            gap: 16px;
-            margin-bottom: 20px;
-        }
-        
-        .platform-stat {
-            text-align: center;
-        }
-        
-        .platform-stat-value {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--text);
-        }
-        
-        .platform-stat-label {
-            font-size: 0.75rem;
-            color: var(--text-light);
-        }
-        
-        .platform-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-        
-        .platform-card.reason .platform-cta { color: var(--reason-blue); }
-        .platform-card.mechanism .platform-cta { color: var(--mechanism-green); }
-        .platform-card.coach .platform-cta { color: var(--coach-purple); }
-        .platform-card.adventure .platform-cta { color: #F59E0B; }
-        .platform-card.board-prep .platform-cta { color: #1e40af; }
-
-        .new-badge {
-            display: inline-block;
-            background: #dcfce7;
-            color: #166534;
-            font-size: 0.7rem;
-            font-weight: 600;
-            padding: 2px 8px;
-            border-radius: 10px;
-            margin-left: 8px;
-            vertical-align: middle;
-        }
-        
-        /* Ecosystem Explainer */
-        .ecosystem-explainer {
-            background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%);
-            border: 1px solid #BAE6FD;
-            border-radius: 16px;
-            padding: 24px 32px;
-            margin: 48px auto 0;
-            max-width: 800px;
-            text-align: center;
-        }
-        
-        .ecosystem-explainer-title {
-            font-weight: 600;
-            color: #0369A1;
-            margin-bottom: 8px;
-            font-size: 1rem;
-        }
-        
-        .ecosystem-explainer-text {
-            color: #0C4A6E;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-        
-        .ecosystem-explainer-text strong {
-            color: #0369A1;
-        }
-        
-        /* Footer */
-        .footer {
-            background: var(--primary);
-            color: white;
-            padding: 48px 32px;
-            text-align: center;
-        }
-        
-        .footer-content {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .footer-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-        
-        .footer-text {
-            opacity: 0.8;
-            margin-bottom: 24px;
-            line-height: 1.6;
-        }
-        
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 24px;
-            margin-top: 24px;
-        }
-        
-        .footer-link {
-            color: white;
-            opacity: 0.7;
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-        
-        .footer-link:hover {
-            opacity: 1;
-        }
-        
-        /* Responsive */
-        @media (max-width: 900px) {
-            .hero {
-                grid-template-columns: 1fr;
-                text-align: center;
-                padding: 60px 24px;
-            }
-            
-            .hero-cards {
-                display: none;
-            }
-            
-            .hero-actions {
-                justify-content: center;
-            }
-            
-            .platform-grid {
-                grid-template-columns: 1fr;
-                max-width: 400px;
-                margin: 0 auto;
-            }
-        }
-        
-        @media (max-width: 600px) {
-            .nav-links { display: none; }
-            
-            .hero-cards {
-                height: auto;
-                display: flex;
-                flex-direction: column;
-                gap: 16px;
-            }
-            
-            .hero-card {
-                position: relative !important;
-                transform: none !important;
-                top: auto !important;
-                left: auto !important;
-                width: 100% !important;
-            }
-            
-            .hero-cards:hover .hero-card {
-                transform: none !important;
-            }
-            
-            .cards-hint { display: none; }
-        }
-    
-
-/* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
 :root {
     --primary: #10b981;
-    --primary-light: #6ee7b7;
     --primary-dark: #059669;
-    --primary-bg: #ecfdf5;
-    --text-primary: #1e293b;
+    --primary-light: #d1fae5;
+    --text: #1e293b;
     --text-secondary: #64748b;
-    --text-muted: #94a3b8;
-    --bg-main: #f8fafc;
-    --bg-card: #ffffff;
-    --bg-nav: #ffffff;
+    --bg: #f8fafc;
+    --card: #ffffff;
     --border: #e2e8f0;
-    --border-light: #f1f5f9;
-    --nav-text: #1e293b;
-    --nav-link: #64748b;
-    --nav-active-bg: #10b981;
-    --nav-active-text: #ffffff;
-    --shadow: 0 1px 3px rgba(0,0,0,0.1);
-    --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
-    --radius: 12px;
-    --transition: all 0.2s ease;
 }
 
-[data-theme="muted-teal"] {
-    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
-    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #d5e5e3; --nav-text: #1e293b; --nav-link: #64748b;
-    --nav-active-bg: #10b981; --nav-active-text: #ffffff;
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
 }
 
-[data-theme="deeper-teal"] {
-    --primary: #3d857a; --primary-light: #5a9f92; --primary-dark: #2d6359; --primary-bg: #dceae7;
-    --text-primary: #1a2f2a; --text-secondary: #5a6b65; --bg-main: #f5f9f8; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #c5d9d5; --nav-text: #1a2f2a; --nav-link: #5a6b65;
-    --nav-active-bg: #3d857a; --nav-active-text: #ffffff;
+/* Navigation */
+.nav {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav-logo { height: 40px; }
+.nav-links {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+.nav-link {
+    padding: 8px 16px;
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.15s;
+}
+.nav-link:hover {
+    background: var(--primary-light);
+    color: var(--text);
+}
+.nav-link.active {
+    background: var(--primary);
+    color: white;
 }
 
-[data-theme="eucalyptus"] {
-    --primary: #5b9b7a; --primary-light: #7ab894; --primary-dark: #4a7d62; --primary-bg: #e4ede8;
-    --text-primary: #2a3830; --text-secondary: #5f7568; --bg-main: #f6f9f7; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #d0ddd6; --nav-text: #2a3830; --nav-link: #5f7568;
-    --nav-active-bg: #5b9b7a; --nav-active-text: #ffffff;
+/* Hero */
+.hero {
+    text-align: center;
+    padding: 80px 24px 60px;
+    background: linear-gradient(180deg, var(--card) 0%, var(--bg) 100%);
+}
+.hero-logo {
+    height: 70px;
+    margin-bottom: 24px;
+}
+.hero h1 {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--text);
+}
+.hero p {
+    font-size: 20px;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-[data-theme="teal-cream"] {
-    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #f0ebe3;
-    --text-primary: #2d2a25; --text-secondary: #7a756a; --bg-main: #fdfcf9; --bg-card: #ffffff;
-    --bg-nav: #fdfcf9; --border: #e8e4dc; --nav-text: #2d2a25; --nav-link: #7a756a;
-    --nav-active-bg: #4a9a8e; --nav-active-text: #ffffff;
+/* Main Tiles */
+.tiles-section {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+}
+.tiles-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.tiles-header h2 {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+.tiles-header p {
+    color: var(--text-secondary);
 }
 
-[data-theme="steel-blue"] {
-    --primary: #5a8aa8; --primary-light: #7aa5c0; --primary-dark: #4a7290; --primary-bg: #e8eff5;
-    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7f9fb; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #d5dfe8; --nav-text: #1e293b; --nav-link: #64748b;
-    --nav-active-bg: #5a8aa8; --nav-active-text: #ffffff;
+.tiles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
 }
 
-[data-theme="muted-sage"] {
-    --primary: #6a9a6a; --primary-light: #8ab88a; --primary-dark: #5a805a; --primary-bg: #e8f0e8;
-    --text-primary: #2f3e36; --text-secondary: #5a6b5e; --bg-main: #f8faf8; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #dce5dc; --nav-text: #2f3e36; --nav-link: #5a6b5e;
-    --nav-active-bg: #6a9a6a; --nav-active-text: #ffffff;
+.tile {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+.tile:hover {
+    border-color: var(--primary);
+    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.15);
+    transform: translateY(-4px);
 }
 
-[data-theme="muted-lavender"] {
-    --primary: #8a7aa8; --primary-light: #a595c0; --primary-dark: #7a6a98; --primary-bg: #f0ecf5;
-    --text-primary: #2e2a3b; --text-secondary: #6b6780; --bg-main: #f9f8fb; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #e0dce8; --nav-text: #2e2a3b; --nav-link: #6b6780;
-    --nav-active-bg: #8a7aa8; --nav-active-text: #ffffff;
+.tile-logo {
+    height: 45px;
+    margin-bottom: 16px;
+    align-self: flex-start;
+}
+.tile-title {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+.tile-description {
+    color: var(--text-secondary);
+    font-size: 15px;
+    margin-bottom: 16px;
+    flex: 1;
+}
+.tile-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.tile-feature {
+    font-size: 12px;
+    padding: 4px 10px;
+    background: var(--bg);
+    border-radius: 6px;
+    color: var(--text-secondary);
+}
+.tile-cta {
+    margin-top: 20px;
+    padding: 12px 20px;
+    background: var(--primary);
+    color: white;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    transition: background 0.15s;
+}
+.tile:hover .tile-cta {
+    background: var(--primary-dark);
 }
 
-[data-theme="slate-teal"] {
-    --primary: #4a9a8e; --primary-light: #5eead4; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
-    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff;
-    --bg-nav: #334155; --border: #e2e8f0; --nav-text: #ffffff; --nav-link: #94a3b8;
-    --nav-active-bg: #5eead4; --nav-active-text: #1e293b;
+/* Secondary Links */
+.secondary-section {
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    padding: 40px 24px;
+}
+.secondary-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+}
+.secondary-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    transition: all 0.15s;
+}
+.secondary-link:hover {
+    border-color: var(--primary);
+    color: var(--text);
 }
 
-[data-theme="ocean-dark"] {
-    --primary: #38bdf8; --primary-light: #7dd3fc; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
-    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b;
-    --bg-nav: #0f172a; --border: #334155; --nav-text: #ffffff; --nav-link: #94a3b8;
-    --nav-active-bg: #38bdf8; --nav-active-text: #0f172a;
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 40px 24px;
+    color: var(--text-secondary);
+    font-size: 14px;
 }
-
-[data-theme="midnight-teal"] {
-    --primary: #5eead4; --primary-light: #99f6e4; --primary-dark: #2dd4bf; --primary-bg: #134e4a;
-    --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b;
-    --bg-nav: #022c22; --border: #115e59; --nav-text: #f0fdfa; --nav-link: #5eead4;
-    --nav-active-bg: #5eead4; --nav-active-text: #042f2e;
-}
-
-[data-theme="purple-night"] {
-    --primary: #a78bfa; --primary-light: #c4b5fd; --primary-dark: #8b5cf6; --primary-bg: #3b2f63;
-    --text-primary: #f5f3ff; --text-secondary: #c4b5fd; --bg-main: #1e1b2e; --bg-card: #2d2848;
-    --bg-nav: #1a1625; --border: #4c4270; --nav-text: #f5f3ff; --nav-link: #a78bfa;
-    --nav-active-bg: #a78bfa; --nav-active-text: #1e1b2e;
-}
-
-[data-theme="forest-night"] {
-    --primary: #86efac; --primary-light: #bbf7d0; --primary-dark: #4ade80; --primary-bg: #14532d;
-    --text-primary: #f0fdf4; --text-secondary: #86efac; --bg-main: #052e16; --bg-card: #14532d;
-    --bg-nav: #022c22; --border: #166534; --nav-text: #f0fdf4; --nav-link: #86efac;
-    --nav-active-bg: #86efac; --nav-active-text: #052e16;
-}
-
-/* Unified Navigation */
-.dx-nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; transition: var(--transition); }
-.dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-.dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--nav-text); font-weight: 600; }
-.dx-nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
-.dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
-.dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
-.dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
-.dx-theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; font-size: 14px; transition: var(--transition); }
-.dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
-
-/* Theme Modal */
-.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
-.dx-theme-modal.open { display: flex; }
-.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
-.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
-.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
-.dx-theme-section { margin-bottom: 20px; }
-.dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
-.dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
-.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
-.dx-theme-option:hover { border-color: var(--primary); }
-.dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
-.dx-theme-preview { height: 28px; border-radius: 6px; margin-bottom: 6px; display: flex; overflow: hidden; }
-.dx-theme-preview-nav { width: 30%; }
-.dx-theme-preview-main { width: 70%; }
-.dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
-.dx-theme-badge { display: inline-block; background: var(--primary); color: white; padding: 1px 5px; border-radius: 4px; font-size: 9px; margin-left: 3px; }
-
-/* Body theming */
-body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
 
 @media (max-width: 768px) {
-    .dx-nav-inner { flex-direction: column; gap: 12px; }
-    .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
+    .tiles-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 32px; }
+    .nav-links { display: none; }
 }
-
     </style>
 </head>
 <body>
-
-    <!-- UNIFIED DX NAVIGATION -->
-    <nav class="dx-nav">
-        <div class="dx-nav-inner">
-            <a href="index.html" class="dx-nav-brand">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
-    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
-    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
-    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
-    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
-    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
-    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
-    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
-    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
-</svg>
-            </a>
-            <div class="dx-nav-links">
-                <a href="index.html" class="dx-nav-link active">🏠 Home</a>
-                <a href="mechanism/index.html" class="dx-nav-link ">⚙️ MechanismDx</a>
-                <a href="ReasonDx/training.html" class="dx-nav-link ">🔬 ReasonDx</a>
-                <a href="CoachDx/case-library.html" class="dx-nav-link ">🧠 CoachDx</a>
-                <a href="reference-library.html" class="dx-nav-link ">📚 References</a>
-                <a href="dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
-                <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <svg class="nav-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 120">
+                <text x="20" y="70" font-family="Georgia, serif" font-size="58" fill="#1a1a1a">D</text>
+                <line x1="68" y1="42" x2="92" y2="72" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round"/>
+                <ellipse cx="66" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 66 39)" fill="#1a1a1a"/>
+                <path d="M 92 42 L 76 58 Q 70 66 70 76 Q 70 86 78 92 Q 86 98 86 108" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+                <ellipse cx="94" cy="39" rx="2.5" ry="4.5" transform="rotate(28 94 39)" fill="#1a1a1a"/>
+                <circle cx="86" cy="108" r="10" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
+                <circle cx="86" cy="108" r="5" fill="#1a1a1a"/>
+                <text x="115" y="70" font-family="Georgia, serif" font-size="58" fill="#1a1a1a" letter-spacing="-1">Suite</text>
+            </svg>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="mechanism/index.html" class="nav-link">MechanismDx</a>
+                <a href="ReasonDx/index.html" class="nav-link">ReasonDx</a>
+                <a href="CoachDx/index.html" class="nav-link">CoachDx</a>
+                <a href="dx-dashboard.html" class="nav-link">Dashboard</a>
             </div>
         </div>
     </nav>
 
-    <!-- Navigation -->
-    <!-- Unified Navigation -->
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Master <span class="highlight">Clinical Reasoning</span> Like Never Before</h1>
-            <p class="hero-subtitle">
-                An integrated learning ecosystem combining interactive cases, pathophysiology mastery, and AI coaching to transform how you learn medicine.
-            </p>
-            <div class="hero-actions">
-                <a href="ReasonDx/deep-dive-player-integrated.html?module=acs" class="btn btn-primary">
-                    Try Deep Dive →
-                </a>
-                <a href="dx-dashboard.html" class="btn btn-secondary">
-                    View Dashboard
-                </a>
-            </div>
+    <!-- Hero -->
+    <header class="hero">
+        <svg class="hero-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 120">
+            <text x="20" y="70" font-family="Georgia, serif" font-size="58" fill="#1a1a1a">D</text>
+            <line x1="68" y1="42" x2="92" y2="72" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round"/>
+            <ellipse cx="66" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 66 39)" fill="#1a1a1a"/>
+            <path d="M 92 42 L 76 58 Q 70 66 70 76 Q 70 86 78 92 Q 86 98 86 108" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+            <ellipse cx="94" cy="39" rx="2.5" ry="4.5" transform="rotate(28 94 39)" fill="#1a1a1a"/>
+            <circle cx="86" cy="108" r="10" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
+            <circle cx="86" cy="108" r="5" fill="#1a1a1a"/>
+            <text x="115" y="70" font-family="Georgia, serif" font-size="58" fill="#1a1a1a" letter-spacing="-1">Suite</text>
+        </svg>
+        <h1>Master Clinical Reasoning</h1>
+        <p>A comprehensive platform for medical students and clinicians to develop diagnostic expertise through interactive learning.</p>
+    </header>
+
+    <!-- Main Tiles -->
+    <section class="tiles-section">
+        <div class="tiles-header">
+            <h2>Choose Your Learning Path</h2>
+            <p>Four integrated modules designed to build clinical expertise</p>
         </div>
-        
-        <!-- Floating Cards -->
-        <div class="hero-cards">
-            <div class="hero-card reason" onclick="window.location.href='ReasonDx/training.html'">
-                <div class="hero-card-header">
-                    <div class="hero-card-icon">🩺</div>
-                    <div>
-                        <div class="hero-card-title">ReasonDx</div>
-                        <div class="hero-card-subtitle">Clinical Cases</div>
-                    </div>
+
+        <div class="tiles-grid">
+            <!-- MechanismDx -->
+            <a href="mechanism/index.html" class="tile">
+                <svg class="tile-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 120">
+                    <text x="20" y="70" font-family="Georgia, serif" font-size="58" fill="#1a1a1a" letter-spacing="-1">MechanismD</text>
+                    <line x1="355" y1="42" x2="379" y2="72" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round"/>
+                    <ellipse cx="353" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 353 39)" fill="#1a1a1a"/>
+                    <path d="M 379 42 L 363 58 Q 357 66 357 76 Q 357 86 365 92 Q 373 98 373 108" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+                    <ellipse cx="381" cy="39" rx="2.5" ry="4.5" transform="rotate(28 381 39)" fill="#1a1a1a"/>
+                    <circle cx="373" cy="108" r="10" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
+                    <circle cx="373" cy="108" r="5" fill="#1a1a1a"/>
+                </svg>
+                <div class="tile-title">Master the "Why"</div>
+                <p class="tile-description">Understand the pathophysiology behind every diagnosis. Interactive modules that connect mechanisms to clinical presentation.</p>
+                <div class="tile-features">
+                    <span class="tile-feature">45+ Modules</span>
+                    <span class="tile-feature">ABG Analyzer</span>
+                    <span class="tile-feature">ECG Patterns</span>
                 </div>
-                <p class="hero-card-desc">Work through 200+ interactive patient cases and practice real clinical decision-making.</p>
-            </div>
-            
-            <div class="hero-card mechanism" onclick="window.location.href='Mechanism/index.html'">
-                <div class="hero-card-header">
-                    <div class="hero-card-icon">⚙️</div>
-                    <div>
-                        <div class="hero-card-title">MechanismDx</div>
-                        <div class="hero-card-subtitle">Pathophysiology</div>
-                    </div>
+                <div class="tile-cta">Explore Modules →</div>
+            </a>
+
+            <!-- ReasonDx -->
+            <a href="ReasonDx/index.html" class="tile">
+                <svg class="tile-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 120">
+                    <text x="20" y="70" font-family="Georgia, serif" font-size="58" fill="#1a1a1a" letter-spacing="-1">Reason</text>
+                    <text x="200" y="70" font-family="Georgia, serif" font-size="58" fill="#1a1a1a">D</text>
+                    <line x1="248" y1="42" x2="272" y2="72" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round"/>
+                    <ellipse cx="246" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 246 39)" fill="#1a1a1a"/>
+                    <path d="M 272 42 L 256 58 Q 250 66 250 76 Q 250 86 258 92 Q 266 98 266 108" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+                    <ellipse cx="274" cy="39" rx="2.5" ry="4.5" transform="rotate(28 274 39)" fill="#1a1a1a"/>
+                    <circle cx="266" cy="108" r="10" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
+                    <circle cx="266" cy="108" r="5" fill="#1a1a1a"/>
+                </svg>
+                <div class="tile-title">Train Your Reasoning</div>
+                <p class="tile-description">Practice clinical decision-making with interactive cases. Deep dives, branching adventures, and structured training.</p>
+                <div class="tile-features">
+                    <span class="tile-feature">200+ Cases</span>
+                    <span class="tile-feature">Deep Dives</span>
+                    <span class="tile-feature">Adventures</span>
                 </div>
-                <p class="hero-card-desc">Master the "why" behind diseases with interactive modules and spaced repetition.</p>
-            </div>
-            
-            <div class="hero-card coach" onclick="window.location.href='CoachDx/case-library.html'">
-                <div class="hero-card-header">
-                    <div class="hero-card-icon">💬</div>
-                    <div>
-                        <div class="hero-card-title">CoachDx</div>
-                        <div class="hero-card-subtitle">AI Coaching</div>
-                    </div>
+                <div class="tile-cta">Start Training →</div>
+            </a>
+
+            <!-- CoachDx -->
+            <a href="CoachDx/index.html" class="tile">
+                <svg class="tile-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 310 120">
+                    <text x="20" y="70" font-family="Georgia, serif" font-size="58" fill="#1a1a1a" letter-spacing="-1">CoachD</text>
+                    <line x1="218" y1="42" x2="242" y2="72" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round"/>
+                    <ellipse cx="216" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 216 39)" fill="#1a1a1a"/>
+                    <path d="M 242 42 L 226 58 Q 220 66 220 76 Q 220 86 228 92 Q 236 98 236 108" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+                    <ellipse cx="244" cy="39" rx="2.5" ry="4.5" transform="rotate(28 244 39)" fill="#1a1a1a"/>
+                    <circle cx="236" cy="108" r="10" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
+                    <circle cx="236" cy="108" r="5" fill="#1a1a1a"/>
+                </svg>
+                <div class="tile-title">AI Clinical Coaching</div>
+                <p class="tile-description">Practice with an AI attending who guides you through cases using Socratic questioning. Get real-time feedback on your reasoning.</p>
+                <div class="tile-features">
+                    <span class="tile-feature">Socratic Method</span>
+                    <span class="tile-feature">SBAR Training</span>
+                    <span class="tile-feature">Case Library</span>
                 </div>
-                <p class="hero-card-desc">Get Socratic guidance from an AI attending who helps you think, not just memorize.</p>
-            </div>
-            
-            <div class="hero-card adventure" onclick="window.location.href='ReasonDx/chest-pain-adventure.html'">
-                <div class="hero-card-header">
-                    <div class="hero-card-icon">🫀</div>
-                    <div>
-                        <div class="hero-card-title">Adventure</div>
-                        <div class="hero-card-subtitle">Immersive Cases</div>
-                    </div>
+                <div class="tile-cta">Start Coaching →</div>
+            </a>
+
+            <!-- Dashboard -->
+            <a href="dx-dashboard.html" class="tile">
+                <div class="tile-title" style="margin-top: 8px;">📊 Dashboard</div>
+                <p class="tile-description">Track your progress across all modules. See your strengths, identify gaps, and monitor improvement over time.</p>
+                <div class="tile-features">
+                    <span class="tile-feature">Progress Tracking</span>
+                    <span class="tile-feature">Analytics</span>
+                    <span class="tile-feature">Fingerprint</span>
                 </div>
-                <p class="hero-card-desc">Experience branching scenarios with AI-evaluated family communication.</p>
-            </div>
-            
-            <p class="cards-hint">↔ Hover to explore all platforms</p>
+                <div class="tile-cta">View Progress →</div>
+            </a>
         </div>
     </section>
-    
-    <!-- What's Inside Section -->
-    <section class="whats-inside">
-        <div class="section-container">
-            <div class="section-header">
-                <span class="section-badge">WHAT'S INSIDE</span>
-                <h2 class="section-title">Five Ways to Master Clinical Reasoning</h2>
-                <p class="section-subtitle">Each component helps you build expertise in a different way—together they create complete clinical competence.</p>
-            </div>
-            
-            <div class="platform-grid">
-                <!-- Deep Dive - NEW -->
-                <a href="ReasonDx/deep-dive-player-integrated.html?module=acs" class="platform-card deep-dive" style="border: 2px solid var(--primary);">
-                    <div class="platform-icon">🔬</div>
-                    <h3 class="platform-name">Deep Dive <span class="new-badge">NEW</span></h3>
-                    <p class="platform-tagline">One patient case anchors 30+ questions across anatomy, physiology, pharmacology, and clinical reasoning. Master the WHY.</p>
-                    <div class="platform-stats">
-                        <div class="platform-stat">
-                            <div class="platform-stat-value">2</div>
-                            <div class="platform-stat-label">Modules</div>
-                        </div>
-                        <div class="platform-stat">
-                            <div class="platform-stat-value">7</div>
-                            <div class="platform-stat-label">Layers</div>
-                        </div>
-                        <div class="platform-stat">
-                            <div class="platform-stat-value">🧠</div>
-                            <div class="platform-stat-label">WHY Chains</div>
-                        </div>
-                    </div>
-                    <span class="platform-cta">Start Deep Dive →</span>
-                </a>
 
-                <!-- Board Prep -->
-                <a href="ReasonDx/board-prep.html" class="platform-card board-prep">
-                    <div class="platform-icon">📝</div>
-                    <h3 class="platform-name">Board Prep</h3>
-                    <p class="platform-tagline">Board-style questions with evidence-based explanations and guideline citations. Track your progress.</p>
-                    <div class="platform-stats">
-                        <div class="platform-stat">
-                            <div class="platform-stat-value">158+</div>
-                            <div class="platform-stat-label">Questions</div>
-                        </div>
-                        <div class="platform-stat">
-                            <div class="platform-stat-value">6</div>
-                            <div class="platform-stat-label">Systems</div>
-                        </div>
-                        <div class="platform-stat">
-                            <div class="platform-stat-value">📊</div>
-                            <div class="platform-stat-label">Analytics</div>
-                        </div>
-                    </div>
-                    <span class="platform-cta">Start Practice →</span>
-                </a>
-
-                <!-- ReasonDx -->
-                <a href="ReasonDx/training.html" class="platform-card reason">
-                    <div class="platform-icon">🩺</div>
-                    <h3 class="platform-name">ReasonDx</h3>
-                    <p class="platform-tagline">Structured clinical reasoning cases. Practice the diagnostic process step-by-step with evidence-based feedback.</p>
-                    <div class="platform-stats">
-                        <div class="platform-stat">
-                            <div class="platform-stat-value">200+</div>
-                            <div class="platform-stat-label">Cases</div>
-                        </div>
-                        <div class="platform-stat">
-                            <div class="platform-stat-value">15</div>
-                            <div class="platform-stat-label">Systems</div>
-                        </div>
-                        <div class="platform-stat">
-                            <div class="platform-stat-value">📊</div>
-                            <div class="platform-stat-label">Progress</div>
-                        </div>
-                    </div>
-                    <span class="platform-cta">Start Reasoning →</span>
-                </a>
-                
-                <!-- MechanismDx -->
-                <a href="mechanism/index.html" class="platform-card mechanism">
-                    <div class="platform-icon">⚙️</div>
-                    <h3 class="platform-name">MechanismDx</h3>
-                    <p class="platform-tagline">Build foundational knowledge with mechanism-based learning. Understand the "why" behind clinical findings.</p>
-                    <div class="platform-stats">
-                        <div class="platform-stat">
-                            <div class="platform-stat-value">35+</div>
-                            <div class="platform-stat-label">Modules</div>
-                        </div>
-                        <div class="platform-stat">
-                            <div class="platform-stat-value">500+</div>
-                            <div class="platform-stat-label">Concepts</div>
-                        </div>
-                        <div class="platform-stat">
-                            <div class="platform-stat-value">🔗</div>
-                            <div class="platform-stat-label">Linked</div>
-                        </div>
-                    </div>
-                    <span class="platform-cta">Start Learning →</span>
-                </a>
-                
-                <!-- CoachDx -->
-                <a href="CoachDx/case-library.html" class="platform-card coach">
-                    <div class="platform-icon">💬</div>
-                    <h3 class="platform-name">CoachDx</h3>
-                    <p class="platform-tagline">AI-powered Socratic coaching. Your mentor asks guiding questions to build deeper clinical reasoning.</p>
-                    <div class="platform-stats">
-                        <div class="platform-stat">
-                            <div class="platform-stat-value">200+</div>
-                            <div class="platform-stat-label">Cases</div>
-                        </div>
-                        <div class="platform-stat">
-                            <div class="platform-stat-value">AI</div>
-                            <div class="platform-stat-label">Feedback</div>
-                        </div>
-                        <div class="platform-stat">
-                            <div class="platform-stat-value">∞</div>
-                            <div class="platform-stat-label">Practice</div>
-                        </div>
-                    </div>
-                    <span class="platform-cta">Start Coaching →</span>
-                </a>
-                
-                <!-- Adventure Cases -->
-                <a href="ReasonDx/chest-pain-adventure.html" class="platform-card adventure">
-                    <div class="platform-icon">🫀</div>
-                    <h3 class="platform-name">Adventure Cases</h3>
-                    <p class="platform-tagline">Immersive branching scenarios with AI-evaluated communication. Experience realistic clinical decision-making.</p>
-                    <div class="platform-stats">
-                        <div class="platform-stat">
-                            <div class="platform-stat-value">🔀</div>
-                            <div class="platform-stat-label">Branching</div>
-                        </div>
-                        <div class="platform-stat">
-                            <div class="platform-stat-value">💬</div>
-                            <div class="platform-stat-label">Family Talk</div>
-                        </div>
-                        <div class="platform-stat">
-                            <div class="platform-stat-value">AI</div>
-                            <div class="platform-stat-label">Evaluated</div>
-                        </div>
-                    </div>
-                    <span class="platform-cta">Start Adventure →</span>
-                </a>
-            </div>
-            
-            <div class="ecosystem-explainer">
-                <div class="ecosystem-explainer-title">🔄 How It All Connects</div>
-                <p class="ecosystem-explainer-text">
-                    Start with <strong>Deep Dive</strong> to master integrated clinical reasoning, test yourself with <strong>Board Prep</strong>, 
-                    dive into <strong>MechanismDx</strong> to understand pathophysiology, practice with <strong>ReasonDx</strong> cases, 
-                    get coached by <strong>CoachDx</strong>, and experience immersive <strong>Adventure Cases</strong>. 
-                    Track everything in your <strong>Dashboard</strong>.
-                </p>
-            </div>
+    <!-- Secondary Links -->
+    <section class="secondary-section">
+        <div class="secondary-inner">
+            <a href="reference-library.html" class="secondary-link">
+                📚 Reference Library
+            </a>
+            <a href="fingerprint-dashboard.html" class="secondary-link">
+                🧬 Reasoning Fingerprint
+            </a>
+            <a href="ReasonDx/board-prep.html" class="secondary-link">
+                📝 Board Prep
+            </a>
         </div>
     </section>
-    
+
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer-content">
-            <h3 class="footer-title">Ready to Think Like a Clinician?</h3>
-            <p class="footer-text">
-                Join thousands of medical students mastering clinical reasoning with the Dx Learning Ecosystem.
-            </p>
-            <a href="ReasonDx/deep-dive-player-integrated.html?module=acs" class="btn btn-primary">Try Deep Dive →</a>
-            <div class="footer-links">
-                <a href="dx-dashboard.html" class="footer-link">Dashboard</a>
-                <a href="ReasonDx/deep-dive-player-integrated.html" class="footer-link">Deep Dive</a>
-                <a href="ReasonDx/training.html" class="footer-link">Cases</a>
-                <a href="mechanism/index.html" class="footer-link">Mechanisms</a>
-                <a href="CoachDx/case-library.html" class="footer-link">Coaching</a>
-            </div>
-        </div>
+        <p>DxSuite — Clinical Education Platform for Medical Excellence</p>
     </footer>
-    <script>DxNav.init({ currentPage: 'home' });</script>
-
-    <!-- THEME PICKER MODAL -->
-    <div class="dx-theme-modal" id="dxThemeModal">
-        <div class="dx-theme-modal-content">
-            <div class="dx-theme-modal-header">
-                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
-                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
-            </div>
-            <div class="dx-theme-section">
-                <div class="dx-theme-section-title">Light Themes</div>
-                <div class="dx-theme-grid">
-                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div>
-                        <div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div>
-                        <div class="dx-theme-name">Deeper Teal</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="eucalyptus" onclick="setDxTheme('eucalyptus')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f6f9f7"></div></div>
-                        <div class="dx-theme-name">Eucalyptus</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="teal-cream" onclick="setDxTheme('teal-cream')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fdfcf9"></div><div class="dx-theme-preview-main" style="background:#fdfcf9"></div></div>
-                        <div class="dx-theme-name">Teal on Cream</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div>
-                        <div class="dx-theme-name">Steel Blue</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div>
-                        <div class="dx-theme-name">Muted Sage</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="muted-lavender" onclick="setDxTheme('muted-lavender')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f9f8fb"></div></div>
-                        <div class="dx-theme-name">Muted Lavender</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="slate-teal" onclick="setDxTheme('slate-teal')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#334155"></div><div class="dx-theme-preview-main" style="background:#f8fafc"></div></div>
-                        <div class="dx-theme-name">Slate + Teal</div>
-                    </div>
-                </div>
-            </div>
-            <div class="dx-theme-section">
-                <div class="dx-theme-section-title">Dark Themes</div>
-                <div class="dx-theme-grid">
-                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#0f172a"></div><div class="dx-theme-preview-main" style="background:#1e293b"></div></div>
-                        <div class="dx-theme-name">Ocean Dark</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
-                        <div class="dx-theme-name">Midnight Teal</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="purple-night" onclick="setDxTheme('purple-night')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
-                        <div class="dx-theme-name">Purple Night</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="forest-night" onclick="setDxTheme('forest-night')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
-                        <div class="dx-theme-name">Forest Night</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-    // Theme System
-    (function() {
-        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
-        document.body.setAttribute('data-theme', saved);
-        document.addEventListener('DOMContentLoaded', updateThemeOptions);
-    })();
-    
-    function setDxTheme(theme) {
-        document.body.setAttribute('data-theme', theme);
-        localStorage.setItem('dx-theme', theme);
-        updateThemeOptions();
-        closeDxThemeModal();
-    }
-    
-    function updateThemeOptions() {
-        const current = document.body.getAttribute('data-theme');
-        document.querySelectorAll('.dx-theme-option').forEach(opt => {
-            opt.classList.toggle('active', opt.dataset.theme === current);
-        });
-    }
-    
-    function openDxThemeModal() {
-        document.getElementById('dxThemeModal')?.classList.add('open');
-    }
-    
-    function closeDxThemeModal() {
-        document.getElementById('dxThemeModal')?.classList.remove('open');
-    }
-    
-    document.addEventListener('click', (e) => {
-        if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
-    });
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeDxThemeModal();
-    });
-    </script>
-
 </body>
 </html>
