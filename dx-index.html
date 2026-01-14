@@ -163,11 +163,11 @@
         .footer-links a:hover{color:white}
         .footer-bottom{border-top:1px solid rgba(255,255,255,0.1);margin-top:var(--dx-space-8);padding-top:var(--dx-space-6);text-align:center;font-size:var(--dx-text-sm);opacity:0.6}
     </style>
+    <link rel="stylesheet" href="dx-unified-nav.css">
 </head>
 <body>
     <!-- Navigation -->
     <!-- Unified Navigation -->
-    <link rel="stylesheet" href="../dx-unified-nav.css">
     <div id="dx-nav"></div>
     
     <!-- Hero -->
@@ -451,7 +451,14 @@
             }
         });
     </script>
-<script src="../dx-unified-nav.js"></script>
-    <script>if(typeof DxNav!=='undefined')DxNav.init({currentPage:'reason',basePath:'../'});</script>
+
+    <script src="dx-unified-nav.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof DxNav !== 'undefined') {
+                DxNav.init({ currentPage: 'reason', basePath: '' });
+            }
+        });
+    </script>
 </body>
 </html>

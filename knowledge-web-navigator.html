@@ -100,10 +100,10 @@
         .info-section ul { padding-left: 20px; }
         @media (max-width: 768px) { .category-grid { grid-template-columns: 1fr; } .info-panel { width: calc(100% - 48px); } }
     </style>
+    <link rel="stylesheet" href="dx-unified-nav.css">
 </head>
 <body>
     <!-- Unified Navigation -->
-    <link rel="stylesheet" href="../dx-unified-nav.css">
     <div id="dx-nav"></div>
     <header class="header">
         <div class="header-inner">
@@ -366,7 +366,14 @@
         });
     }
     </script>
-<script src="../dx-unified-nav.js"></script>
-    <script>if(typeof DxNav!=='undefined')DxNav.init({currentPage:'reason',basePath:'../'});</script>
+
+    <script src="dx-unified-nav.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof DxNav !== 'undefined') {
+                DxNav.init({ currentPage: 'reason', basePath: '' });
+            }
+        });
+    </script>
 </body>
 </html>

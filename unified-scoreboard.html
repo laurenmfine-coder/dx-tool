@@ -34,10 +34,10 @@
         .act-card{background:#fff;border:1px solid #e4e4e7;border-radius:16px;padding:20px}.act-card h3{font-size:15px;font-weight:600;margin-bottom:16px}.act-item{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #f4f4f5}.act-item:last-child{border-bottom:none}.act-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}.act-icon.reason{background:#dbeafe}.act-icon.mech{background:#d1fae5}.act-icon.coach{background:#ede9fe}.act-icon.achievement{background:#fef3c7}.act-content{flex:1;min-width:0}.act-text{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.act-time{font-size:10px;color:#a1a1aa;margin-top:2px}.act-xp{font-size:13px;font-weight:600;color:#10b981;flex-shrink:0}
         .demo{background:#fef3c7;border:1px solid #fcd34d;border-radius:8px;padding:12px 16px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}.demo p{font-size:13px;color:#92400e}.demo button{padding:6px 12px;background:#f59e0b;color:#fff;border:none;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer}.demo button:hover{background:#d97706}
     </style>
+    <link rel="stylesheet" href="dx-unified-nav.css">
 </head>
 <body>
 <header class="header"><div class="header-inner"><a href="mechanism/index.html" class="logo"><span class="logo-icon">🎯</span><span class="logo-text">Dx <span class="hl">Scoreboard</span></span></a><!-- Unified Navigation -->
-    <link rel="stylesheet" href="../dx-unified-nav.css">
     <div id="dx-nav"></div></div></header>
 <main class="main">
 <div class="demo" id="demoBanner"><p>👋 <strong>Demo Mode:</strong> Click to load sample data!</p><button onclick="loadDemo()">Load Demo Data</button></div>
@@ -84,7 +84,14 @@ function renderLeaderboard(ud){const b=document.getElementById('leaderboardBody'
 function getTimeAgo(ts){const s=Math.floor((Date.now()-ts)/1000);if(s<60)return 'Just now';const m=Math.floor(s/60);if(m<60)return m+'m ago';const h=Math.floor(m/60);if(h<24)return h+'h ago';return Math.floor(h/24)+'d ago';}
 document.addEventListener('DOMContentLoaded',updateDisplay);
 </script>
-<script src="../dx-unified-nav.js"></script>
-    <script>if(typeof DxNav!=='undefined')DxNav.init({currentPage:'reason',basePath:'../'});</script>
+
+    <script src="dx-unified-nav.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof DxNav !== 'undefined') {
+                DxNav.init({ currentPage: 'reason', basePath: '' });
+            }
+        });
+    </script>
 </body>
 </html>

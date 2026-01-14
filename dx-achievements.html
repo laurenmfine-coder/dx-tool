@@ -31,10 +31,10 @@
         .footer{text-align:center;padding:var(--dx-space-8) var(--dx-space-6);color:var(--dx-text-tertiary);font-size:var(--dx-text-sm);border-top:1px solid var(--dx-border-light)}
         .footer a{color:var(--dx-blue-500);text-decoration:none}
     </style>
+    <link rel="stylesheet" href="dx-unified-nav.css">
 </head>
 <body>
     <!-- Unified Navigation -->
-    <link rel="stylesheet" href="../dx-unified-nav.css">
     <div id="dx-nav"></div>
     
     <header class="achievements-header">
@@ -139,7 +139,14 @@ function init() {
 
 document.addEventListener('DOMContentLoaded', init);
 </script>
-<script src="../dx-unified-nav.js"></script>
-    <script>if(typeof DxNav!=='undefined')DxNav.init({currentPage:'reason',basePath:'../'});</script>
+
+    <script src="dx-unified-nav.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof DxNav !== 'undefined') {
+                DxNav.init({ currentPage: 'reason', basePath: '' });
+            }
+        });
+    </script>
 </body>
 </html>

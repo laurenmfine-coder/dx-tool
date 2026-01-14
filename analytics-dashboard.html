@@ -462,11 +462,11 @@
             .header h1 { font-size: 1.5rem; }
         }
     </style>
+    <link rel="stylesheet" href="dx-unified-nav.css">
 </head>
 <body>
     <!-- Navigation -->
     <!-- Unified Navigation -->
-    <link rel="stylesheet" href="../dx-unified-nav.css">
     <div id="dx-nav"></div>
     
     <!-- Header -->
@@ -1033,7 +1033,14 @@
         // Expose globally for cross-platform communication
         window.DxAnalytics = DxAnalytics;
     </script>
-<script src="../dx-unified-nav.js"></script>
-    <script>if(typeof DxNav!=='undefined')DxNav.init({currentPage:'reason',basePath:'../'});</script>
+
+    <script src="dx-unified-nav.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof DxNav !== 'undefined') {
+                DxNav.init({ currentPage: 'reason', basePath: '' });
+            }
+        });
+    </script>
 </body>
 </html>

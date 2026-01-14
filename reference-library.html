@@ -11,6 +11,7 @@
         body { font-family: 'Inter', system-ui, sans-serif; }
         .reference-card:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1); }
     </style>
+    <link rel="stylesheet" href="dx-unified-nav.css">
 </head>
 <body class="bg-gray-50 min-h-screen">
     <!-- Header -->
@@ -27,7 +28,6 @@
                 <h1 class="text-lg font-semibold text-gray-900">Reference Library</h1>
             </div>
             <!-- Unified Navigation -->
-    <link rel="stylesheet" href="../dx-unified-nav.css">
     <div id="dx-nav"></div>
         </div>
     </header>
@@ -319,7 +319,14 @@
             });
         }
     </script>
-<script src="../dx-unified-nav.js"></script>
-    <script>if(typeof DxNav!=='undefined')DxNav.init({currentPage:'reason',basePath:'../'});</script>
+
+    <script src="dx-unified-nav.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof DxNav !== 'undefined') {
+                DxNav.init({ currentPage: 'reason', basePath: '' });
+            }
+        });
+    </script>
 </body>
 </html>
