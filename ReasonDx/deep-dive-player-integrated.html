@@ -1654,9 +1654,17 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         async function init() {
             deepDiveData = await loadDeepDiveData();
             
-            if (deepDiveData) {
-                document.getElementById('moduleTitle').textContent = `Deep Dive: ${deepDiveData.title}`;
-                document.getElementById('totalQuestions').textContent = deepDiveData.totalQuestions;
+            if (deepDiveData && deepDiveData.layers) {
+                // Update page title
+                document.title = `${deepDiveData.title || 'Deep Dive'} - ReasonDx`;
+                
+                // Update patient info if available
+                if (deepDiveData.vignette) {
+                    const patientAgeEl = document.getElementById('patientAge');
+                    const patientCCEl = document.getElementById('patientCC');
+                    if (patientAgeEl) patientAgeEl.textContent = deepDiveData.vignette.patientAge || '58-year-old Male';
+                    if (patientCCEl) patientCCEl.textContent = `Chief Complaint: ${deepDiveData.vignette.chiefComplaint || 'Chest Pain'}`;
+                }
                 document.title = `${deepDiveData.title} - ReasonDx Deep Dive`;
                 
                 loadBookmarks();
@@ -1698,8 +1706,11 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             
             try {
                 const response = await fetch(filePath);
+                console.log(`Fetching: ${filePath}, Status: ${response.status}`);
                 if (!response.ok) throw new Error('Module not found');
-                return await response.json();
+                const data = await response.json();
+                console.log('Data loaded:', data.title);
+                return data;
             } catch (e) {
                 console.log(`Could not load ${filePath}, trying fallback...`);
                 // Try alternate path (for local testing)
