@@ -1685,7 +1685,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             
             // Map module IDs to JSON file paths
             // Dynamic path construction - module ID maps to JSON file
-            // e.g., 'sepsis' -> '../data/deep-dives/sepsis-deep-dive.json'
+            // e.g., 'sepsis' -> 'data/deep-dives/sepsis-deep-dive.json'
             // Special cases for differently-named files
             const specialCases = {
                 'acs': 'acs-deep-dive-complete.json',
@@ -1694,7 +1694,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
             };
             
             const fileName = specialCases[moduleId] || `${moduleId}-deep-dive.json`;
-            const filePath = `../data/deep-dives/${fileName}`;
+            const filePath = `data/deep-dives/${fileName}`;
             
             try {
                 const response = await fetch(filePath);
@@ -1704,7 +1704,7 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 console.log(`Could not load ${filePath}, trying fallback...`);
                 // Try alternate path (for local testing)
                 try {
-                    const altPath = filePath.replace('../data/deep-dives/', '');
+                    const altPath = filePath.replace('data/deep-dives/', '');
                     const altResponse = await fetch(altPath);
                     if (altResponse.ok) return await altResponse.json();
                 } catch (e2) {
