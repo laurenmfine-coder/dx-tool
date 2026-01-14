@@ -62,7 +62,7 @@
         .emr-logo-icon {
             width: 32px;
             height: 32px;
-            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, #8b5cf6 100%);
             border-radius: 6px;
             display: flex;
             align-items: center;
@@ -77,13 +77,13 @@
             padding: 8px 16px;
             background: transparent;
             border: none;
-            color: #94a3b8;
+            color: var(--text-muted);
             border-radius: 6px;
             cursor: pointer;
             font-size: 13px;
         }
         .emr-nav-btn:hover { background: #334155; color: #fff; }
-        .emr-nav-btn.active { background: #3b82f6; color: #fff; }
+        .emr-nav-btn.active { background: var(--primary); color: #fff; }
         
         /* Patient Banner */
         .patient-banner {
@@ -102,7 +102,7 @@
         .patient-avatar {
             width: 48px;
             height: 48px;
-            background: #3b82f6;
+            background: var(--primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -116,7 +116,7 @@
         }
         .patient-meta {
             font-size: 13px;
-            color: #94a3b8;
+            color: var(--text-muted);
         }
         .patient-alerts {
             display: flex;
@@ -134,7 +134,7 @@
         }
         .alert-flag {
             background: #f59e0b;
-            color: #1e293b;
+            color: var(--text-primary);
         }
         
         /* Main Layout */
@@ -157,7 +157,7 @@
         .sidebar-title {
             font-size: 11px;
             text-transform: uppercase;
-            color: #64748b;
+            color: var(--text-secondary);
             letter-spacing: 0.5px;
             margin-bottom: 8px;
             padding-left: 8px;
@@ -170,11 +170,11 @@
             border-radius: 6px;
             cursor: pointer;
             font-size: 13px;
-            color: #94a3b8;
+            color: var(--text-muted);
             transition: all 0.15s;
         }
         .sidebar-item:hover { background: #1e293b; color: #fff; }
-        .sidebar-item.active { background: #3b82f6; color: #fff; }
+        .sidebar-item.active { background: var(--primary); color: #fff; }
         .sidebar-item-icon { font-size: 16px; }
         .sidebar-badge {
             margin-left: auto;
@@ -213,7 +213,7 @@
         }
         .lab-panel-date {
             font-size: 12px;
-            color: #64748b;
+            color: var(--text-secondary);
         }
         .lab-results-grid {
             display: grid;
@@ -227,7 +227,7 @@
         }
         .lab-name {
             font-size: 12px;
-            color: #64748b;
+            color: var(--text-secondary);
             margin-bottom: 4px;
         }
         .lab-value-row {
@@ -241,7 +241,7 @@
         }
         .lab-value.normal { color: #22c55e; }
         .lab-value.high { color: #ef4444; }
-        .lab-value.low { color: #3b82f6; }
+        .lab-value.low { color: var(--primary); }
         .lab-value.critical { color: #ef4444; animation: pulse 1s infinite; }
         @keyframes pulse {
             0%, 100% { opacity: 1; }
@@ -249,11 +249,11 @@
         }
         .lab-unit {
             font-size: 12px;
-            color: #64748b;
+            color: var(--text-secondary);
         }
         .lab-range {
             font-size: 11px;
-            color: #475569;
+            color: var(--text-secondary);
             margin-top: 4px;
         }
         .lab-trend {
@@ -262,7 +262,7 @@
         }
         .trend-up { color: #ef4444; }
         .trend-down { color: #22c55e; }
-        .trend-stable { color: #64748b; }
+        .trend-stable { color: var(--text-secondary); }
         
         /* Prediction Panel */
         .prediction-panel {
@@ -393,7 +393,7 @@
         .clinical-section-title {
             font-size: 12px;
             text-transform: uppercase;
-            color: #64748b;
+            color: var(--text-secondary);
             letter-spacing: 0.5px;
             margin-bottom: 12px;
             display: flex;
@@ -413,7 +413,7 @@
         }
         .clinical-card p {
             font-size: 12px;
-            color: #94a3b8;
+            color: var(--text-muted);
             line-height: 1.5;
         }
         
@@ -455,7 +455,7 @@
         }
         .vital-label {
             font-size: 10px;
-            color: #64748b;
+            color: var(--text-secondary);
             text-transform: uppercase;
         }
         .vital-value {
@@ -491,10 +491,10 @@
             transition: all 0.15s;
         }
         .case-option:hover {
-            border-color: #3b82f6;
+            border-color: var(--primary);
         }
         .case-option.selected {
-            border-color: #3b82f6;
+            border-color: var(--primary);
             background: #1e3a5f;
         }
         .case-option h4 {
@@ -504,16 +504,192 @@
         }
         .case-option p {
             font-size: 12px;
-            color: #64748b;
+            color: var(--text-secondary);
         }
         
         /* Hidden initially */
         .emr-view { display: none; }
         .emr-view.active { display: block; }
+    
+
+/* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
+:root {
+    --primary: #10b981;
+    --primary-light: #6ee7b7;
+    --primary-dark: #059669;
+    --primary-bg: #ecfdf5;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-nav: #ffffff;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --nav-text: #1e293b;
+    --nav-link: #64748b;
+    --nav-active-bg: #10b981;
+    --nav-active-text: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+    --radius: 12px;
+    --transition: all 0.2s ease;
+}
+
+[data-theme="muted-teal"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5e5e3; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #10b981; --nav-active-text: #ffffff;
+}
+
+[data-theme="deeper-teal"] {
+    --primary: #3d857a; --primary-light: #5a9f92; --primary-dark: #2d6359; --primary-bg: #dceae7;
+    --text-primary: #1a2f2a; --text-secondary: #5a6b65; --bg-main: #f5f9f8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #c5d9d5; --nav-text: #1a2f2a; --nav-link: #5a6b65;
+    --nav-active-bg: #3d857a; --nav-active-text: #ffffff;
+}
+
+[data-theme="eucalyptus"] {
+    --primary: #5b9b7a; --primary-light: #7ab894; --primary-dark: #4a7d62; --primary-bg: #e4ede8;
+    --text-primary: #2a3830; --text-secondary: #5f7568; --bg-main: #f6f9f7; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d0ddd6; --nav-text: #2a3830; --nav-link: #5f7568;
+    --nav-active-bg: #5b9b7a; --nav-active-text: #ffffff;
+}
+
+[data-theme="teal-cream"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #f0ebe3;
+    --text-primary: #2d2a25; --text-secondary: #7a756a; --bg-main: #fdfcf9; --bg-card: #ffffff;
+    --bg-nav: #fdfcf9; --border: #e8e4dc; --nav-text: #2d2a25; --nav-link: #7a756a;
+    --nav-active-bg: #4a9a8e; --nav-active-text: #ffffff;
+}
+
+[data-theme="steel-blue"] {
+    --primary: #5a8aa8; --primary-light: #7aa5c0; --primary-dark: #4a7290; --primary-bg: #e8eff5;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7f9fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5dfe8; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #5a8aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-sage"] {
+    --primary: #6a9a6a; --primary-light: #8ab88a; --primary-dark: #5a805a; --primary-bg: #e8f0e8;
+    --text-primary: #2f3e36; --text-secondary: #5a6b5e; --bg-main: #f8faf8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #dce5dc; --nav-text: #2f3e36; --nav-link: #5a6b5e;
+    --nav-active-bg: #6a9a6a; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-lavender"] {
+    --primary: #8a7aa8; --primary-light: #a595c0; --primary-dark: #7a6a98; --primary-bg: #f0ecf5;
+    --text-primary: #2e2a3b; --text-secondary: #6b6780; --bg-main: #f9f8fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #e0dce8; --nav-text: #2e2a3b; --nav-link: #6b6780;
+    --nav-active-bg: #8a7aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="slate-teal"] {
+    --primary: #4a9a8e; --primary-light: #5eead4; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff;
+    --bg-nav: #334155; --border: #e2e8f0; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #5eead4; --nav-active-text: #1e293b;
+}
+
+[data-theme="ocean-dark"] {
+    --primary: #38bdf8; --primary-light: #7dd3fc; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
+    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b;
+    --bg-nav: #0f172a; --border: #334155; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #38bdf8; --nav-active-text: #0f172a;
+}
+
+[data-theme="midnight-teal"] {
+    --primary: #5eead4; --primary-light: #99f6e4; --primary-dark: #2dd4bf; --primary-bg: #134e4a;
+    --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b;
+    --bg-nav: #022c22; --border: #115e59; --nav-text: #f0fdfa; --nav-link: #5eead4;
+    --nav-active-bg: #5eead4; --nav-active-text: #042f2e;
+}
+
+[data-theme="purple-night"] {
+    --primary: #a78bfa; --primary-light: #c4b5fd; --primary-dark: #8b5cf6; --primary-bg: #3b2f63;
+    --text-primary: #f5f3ff; --text-secondary: #c4b5fd; --bg-main: #1e1b2e; --bg-card: #2d2848;
+    --bg-nav: #1a1625; --border: #4c4270; --nav-text: #f5f3ff; --nav-link: #a78bfa;
+    --nav-active-bg: #a78bfa; --nav-active-text: #1e1b2e;
+}
+
+[data-theme="forest-night"] {
+    --primary: #86efac; --primary-light: #bbf7d0; --primary-dark: #4ade80; --primary-bg: #14532d;
+    --text-primary: #f0fdf4; --text-secondary: #86efac; --bg-main: #052e16; --bg-card: #14532d;
+    --bg-nav: #022c22; --border: #166534; --nav-text: #f0fdf4; --nav-link: #86efac;
+    --nav-active-bg: #86efac; --nav-active-text: #052e16;
+}
+
+/* Unified Navigation */
+.dx-nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; transition: var(--transition); }
+.dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--nav-text); font-weight: 600; }
+.dx-nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
+.dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
+.dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
+.dx-theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; font-size: 14px; transition: var(--transition); }
+.dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Theme Modal */
+.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+.dx-theme-modal.open { display: flex; }
+.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
+.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
+.dx-theme-section { margin-bottom: 20px; }
+.dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
+.dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
+.dx-theme-option:hover { border-color: var(--primary); }
+.dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
+.dx-theme-preview { height: 28px; border-radius: 6px; margin-bottom: 6px; display: flex; overflow: hidden; }
+.dx-theme-preview-nav { width: 30%; }
+.dx-theme-preview-main { width: 70%; }
+.dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
+.dx-theme-badge { display: inline-block; background: var(--primary); color: white; padding: 1px 5px; border-radius: 4px; font-size: 9px; margin-left: 3px; }
+
+/* Body theming */
+body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+
+@media (max-width: 768px) {
+    .dx-nav-inner { flex-direction: column; gap: 12px; }
+    .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
     </style>
     <link rel="stylesheet" href="dx-unified-nav.css">
 </head>
 <body>
+
+    <!-- UNIFIED DX NAVIGATION -->
+    <nav class="dx-nav">
+        <div class="dx-nav-inner">
+            <a href="index.html" class="dx-nav-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 218 100" style="height: 36px;" class="dx-logo">
+                    <text x="20" y="65" font-family="Georgia, serif" font-size="52" data-fill="brand" style="fill:#10b981">D</text>
+                    <line x1="60" y1="38" x2="80" y2="64" data-stroke="brand" style="stroke:#10b981" stroke-width="4" stroke-linecap="round"/>
+                    <ellipse cx="58.5" cy="35.5" rx="2.5" ry="4" transform="rotate(-28 58.5 35.5)" data-fill="brand" style="fill:#10b981"/>
+                    <path d="M 80 38 L 67 52 Q 62 59 62 68 Q 62 77 68 82 Q 74 87 74 95" data-stroke="brand" style="stroke:#10b981" stroke-width="4" stroke-linecap="round" fill="none"/>
+                    <ellipse cx="81.5" cy="35.5" rx="2.5" ry="4" transform="rotate(28 81.5 35.5)" data-fill="brand" style="fill:#10b981"/>
+                    <circle cx="74" cy="92" r="8" fill="none" data-stroke="brand" style="stroke:#10b981" stroke-width="2.5"/>
+                    <circle cx="74" cy="92" r="4" data-fill="brand" style="fill:#10b981"/>
+                    <text x="98" y="65" font-family="Georgia, serif" font-size="52" class="dx-logo-text" style="fill:var(--nav-text, #1a1a1a)" letter-spacing="-1">Suite</text>
+                </svg>
+            </a>
+            <div class="dx-nav-links">
+                <a href="index.html" class="dx-nav-link ">🏠 Home</a>
+                <a href="mechanism/index.html" class="dx-nav-link ">⚙️ MechanismDx</a>
+                <a href="ReasonDx/training.html" class="dx-nav-link ">🔬 ReasonDx</a>
+                <a href="CoachDx/case-library.html" class="dx-nav-link ">🧠 CoachDx</a>
+                <a href="reference-library.html" class="dx-nav-link ">📚 References</a>
+                <a href="dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
+                <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
+            </div>
+        </div>
+    </nav>
+
     <!-- EMR Header -->
     <header class="emr-header">
         <div class="emr-logo">
@@ -682,7 +858,7 @@
             
             <div class="clinical-section">
                 <div class="clinical-section-title">🎯 Clinical Question</div>
-                <div class="clinical-card" style="background: #1e3a5f; border: 1px solid #3b82f6;">
+                <div class="clinical-card" style="background: #1e3a5f; border: 1px solid var(--primary);">
                     <p id="clinicalQuestion" style="color: #93c5fd;">What labs would help with diagnosis and management?</p>
                 </div>
             </div>
@@ -1251,7 +1427,7 @@
                                 </div>
                                 <div class="lab-range">Ref: ${lab.range}</div>
                                 ${lab.interpretation ? `<div class="lab-trend" style="color: #f59e0b;">${lab.interpretation}</div>` : ''}
-                                ${lab.extra ? `<div class="lab-trend" style="color: #64748b;">(${lab.extra})</div>` : ''}
+                                ${lab.extra ? `<div class="lab-trend" style="color: var(--text-secondary);">(${lab.extra})</div>` : ''}
                             </div>
                         `).join('')}
                     </div>
@@ -1297,7 +1473,7 @@
                     <p>${pred.teaching}</p>
                 </div>
                 <div style="margin-top: 16px; text-align: center;">
-                    <span style="color: #64748b; font-size: 12px;">Question ${currentPredictionIndex + 1} of ${currentCase.predictions.length}</span>
+                    <span style="color: var(--text-secondary); font-size: 12px;">Question ${currentPredictionIndex + 1} of ${currentCase.predictions.length}</span>
                 </div>
             `;
             
@@ -1378,5 +1554,112 @@
             }
         });
     </script>
+
+    <!-- THEME PICKER MODAL -->
+    <div class="dx-theme-modal" id="dxThemeModal">
+        <div class="dx-theme-modal-content">
+            <div class="dx-theme-modal-header">
+                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
+                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Light Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div>
+                        <div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div>
+                        <div class="dx-theme-name">Deeper Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="eucalyptus" onclick="setDxTheme('eucalyptus')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f6f9f7"></div></div>
+                        <div class="dx-theme-name">Eucalyptus</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="teal-cream" onclick="setDxTheme('teal-cream')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fdfcf9"></div><div class="dx-theme-preview-main" style="background:#fdfcf9"></div></div>
+                        <div class="dx-theme-name">Teal on Cream</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div>
+                        <div class="dx-theme-name">Steel Blue</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div>
+                        <div class="dx-theme-name">Muted Sage</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-lavender" onclick="setDxTheme('muted-lavender')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f9f8fb"></div></div>
+                        <div class="dx-theme-name">Muted Lavender</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="slate-teal" onclick="setDxTheme('slate-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#334155"></div><div class="dx-theme-preview-main" style="background:#f8fafc"></div></div>
+                        <div class="dx-theme-name">Slate + Teal</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Dark Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#0f172a"></div><div class="dx-theme-preview-main" style="background:#1e293b"></div></div>
+                        <div class="dx-theme-name">Ocean Dark</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
+                        <div class="dx-theme-name">Midnight Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="purple-night" onclick="setDxTheme('purple-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
+                        <div class="dx-theme-name">Purple Night</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="forest-night" onclick="setDxTheme('forest-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
+                        <div class="dx-theme-name">Forest Night</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Theme System
+    (function() {
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
+        document.addEventListener('DOMContentLoaded', updateThemeOptions);
+    })();
+    
+    function setDxTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+        localStorage.setItem('dx-theme', theme);
+        updateThemeOptions();
+        closeDxThemeModal();
+    }
+    
+    function updateThemeOptions() {
+        const current = document.body.getAttribute('data-theme');
+        document.querySelectorAll('.dx-theme-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.theme === current);
+        });
+    }
+    
+    function openDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.add('open');
+    }
+    
+    function closeDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.remove('open');
+    }
+    
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDxThemeModal();
+    });
+    </script>
+
 </body>
 </html>
