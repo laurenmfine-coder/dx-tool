@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minutes to Act | Anaphylaxis Adventure | ReasonDx</title>
+    <style>
+        :root {
+            --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9;
+            --muted: #94A3B8; --accent: #DC2626; --success: #10B981;
+            --warning: #F59E0B; --danger: #DC2626; --info: #3B82F6;
+            --header-bg: linear-gradient(135deg, #7F1D1D 0%, #991B1B 50%, #DC2626 100%);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        
+        .header { background: var(--header-bg); color: white; padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+        .badge { background: rgba(255,255,255,0.2); padding: 3px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
+        .header-stats { display: flex; gap: 12px; }
+        .stat { text-align: center; background: rgba(0,0,0,0.2); padding: 6px 14px; border-radius: 8px; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        
+        .main { max-width: 900px; margin: 0 auto; padding: 24px; }
+        
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        
+        .narrative { background: linear-gradient(135deg, rgba(220,38,38,0.1), rgba(185,28,28,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; font-size: 1rem; line-height: 1.8; }
+        .narrative .hl { background: rgba(220,38,38,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        
+        .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 12px; margin: 20px 0; }
+        .vital { background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; text-align: center; }
+        .vital.critical { background: rgba(220,38,38,0.2); border: 1px solid rgba(220,38,38,0.4); }
+        .vital.warning { background: rgba(245,158,11,0.2); border: 1px solid rgba(245,158,11,0.4); }
+        .vital-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; }
+        .vital-value { font-size: 1.3rem; font-weight: 700; font-family: monospace; }
+        
+        .choices { display: grid; gap: 12px; margin-top: 24px; }
+        .choice-btn { background: var(--card); border: 2px solid var(--border); padding: 16px 20px; border-radius: 12px; text-align: left; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 12px; }
+        .choice-btn:hover { border-color: var(--accent); background: rgba(220,38,38,0.1); transform: translateX(4px); }
+        .choice-icon { font-size: 1.5rem; }
+        .choice-text { flex: 1; }
+        .choice-title { font-weight: 600; margin-bottom: 2px; }
+        .choice-desc { font-size: 0.85rem; color: var(--muted); }
+        
+        .alert { padding: 16px 20px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
+        .alert.danger { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+        .alert.warning { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .alert.success { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .alert-icon { font-size: 1.5rem; }
+        .alert-title { font-weight: 600; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; color: var(--muted); }
+        
+        .outcome { text-align: center; padding: 40px; }
+        .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
+        .outcome-title { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+        .outcome.good .outcome-title { color: var(--success); }
+        .outcome.bad .outcome-title { color: var(--danger); }
+        .outcome-desc { color: var(--muted); max-width: 500px; margin: 0 auto 24px; }
+        
+        .btn { padding: 12px 24px; border-radius: 10px; font-weight: 600; cursor: pointer; transition: all 0.2s; border: none; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn-primary:hover { background: #B91C1C; }
+        .btn-secondary { background: transparent; border: 2px solid var(--border); color: var(--text); }
+        
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .timer-critical { animation: pulse 0.5s infinite; color: var(--danger); }
+        
+        .symptom-tracker { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+        .symptom-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+        .symptom-icon { font-size: 1.2rem; }
+        .symptom-text { flex: 1; }
+        .symptom-severity { font-size: 0.8rem; padding: 3px 8px; border-radius: 4px; }
+        .symptom-severity.mild { background: rgba(245,158,11,0.2); color: #F59E0B; }
+        .symptom-severity.moderate { background: rgba(249,115,22,0.2); color: #F97316; }
+        .symptom-severity.severe { background: rgba(220,38,38,0.2); color: #DC2626; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-row">
+            <div class="header-title">
+                ⚠️ Minutes to Act
+                <span class="badge">ANAPHYLAXIS</span>
+            </div>
+            <div class="header-stats">
+                <div class="stat">
+                    <div class="stat-value" id="timer">00:00</div>
+                    <div class="stat-label">Time</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="epiCount">0</div>
+                    <div class="stat-label">Epi Doses</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div id="stageContainer"></div>
+    </main>
+
+    <script>
+    const state = {
+        stage: 'arrival',
+        timeElapsed: 0,
+        epiDoses: 0,
+        decisions: [],
+        lastChoice: ''
+    };
+
+    let timerInterval;
+    function startTimer() {
+        timerInterval = setInterval(() => {
+            state.timeElapsed++;
+            const mins = Math.floor(state.timeElapsed / 60);
+            const secs = state.timeElapsed % 60;
+            const timerEl = document.getElementById('timer');
+            timerEl.textContent = `${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
+            if (state.timeElapsed >= 300) timerEl.classList.add('timer-critical');
+        }, 1000);
+    }
+
+    const stages = {
+        arrival: {
+            render: () => `
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-phase">The Call</div>
+                        <div class="card-title">🍽️ "She Can't Breathe!"</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="narrative">
+                            You're a physician dining at a restaurant when you hear a commotion. A panicked mother is screaming: <span class="hl">"Help! My daughter can't breathe!"</span>
+                            <br><br>
+                            You rush over to find a <span class="hl">16-year-old girl</span> sitting in a chair, clearly in distress. She had just taken a few bites of a dish that she didn't realize contained <span class="hl">peanuts</span>.
+                        </div>
+
+                        <div class="symptom-tracker">
+                            <div class="symptom-row">
+                                <span class="symptom-icon">🔴</span>
+                                <span class="symptom-text">Hives spreading across face, neck, chest</span>
+                                <span class="symptom-severity moderate">Moderate</span>
+                            </div>
+                            <div class="symptom-row">
+                                <span class="symptom-icon">😮</span>
+                                <span class="symptom-text">Lip and tongue swelling</span>
+                                <span class="symptom-severity moderate">Moderate</span>
+                            </div>
+                            <div class="symptom-row">
+                                <span class="symptom-icon">🗣️</span>
+                                <span class="symptom-text">"My throat feels tight" - voice sounds hoarse</span>
+                                <span class="symptom-severity severe">Severe</span>
+                            </div>
+                            <div class="symptom-row">
+                                <span class="symptom-icon">😰</span>
+                                <span class="symptom-text">Visible anxiety, sitting upright</span>
+                                <span class="symptom-severity mild">Mild</span>
+                            </div>
+                        </div>
+
+                        <div class="alert danger">
+                            <span class="alert-icon">🚨</span>
+                            <div>
+                                <div class="alert-title">Clinical Recognition</div>
+                                <div class="alert-desc">Acute onset after allergen exposure + skin findings + respiratory involvement = ANAPHYLAXIS. This is a medical emergency.</div>
+                            </div>
+                        </div>
+
+                        <p style="margin-bottom: 16px;">The mother says: "She has a peanut allergy - we always carry her EpiPen!" She's frantically searching her purse.</p>
+
+                        <div class="choices">
+                            <button class="choice-btn" onclick="choose('arrival', 'get_epi')">
+                                <span class="choice-icon">💉</span>
+                                <div class="choice-text">
+                                    <div class="choice-title">"Find that EpiPen NOW!"</div>
+                                    <div class="choice-desc">Epinephrine is the first-line treatment - get it immediately</div>
+                                </div>
+                            </button>
+                            <button class="choice-btn" onclick="choose('arrival', 'call_911')">
+                                <span class="choice-icon">📞</span>
+                                <div class="choice-text">
+                                    <div class="choice-title">Call 911 First</div>
+                                    <div class="choice-desc">Get EMS en route while you assess the situation</div>
+                                </div>
+                            </button>
+                            <button class="choice-btn" onclick="choose('arrival', 'give_benadryl')">
+                                <span class="choice-icon">💊</span>
+                                <div class="choice-text">
+                                    <div class="choice-title">Ask for Benadryl</div>
+                                    <div class="choice-desc">Antihistamines should help with the allergic reaction</div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `
+        },
+
+        epi_found: {
+            render: () => `
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-phase">Critical Decision</div>
+                        <div class="card-title">💉 Time to Act</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="narrative">
+                            The mother hands you the EpiPen (0.3mg epinephrine auto-injector). The girl is now <span class="hl">wheezing audibly</span> and her voice is barely a whisper. She's gripping the table, struggling to breathe.
+                        </div>
+
+                        <div class="vitals-grid">
+                            <div class="vital warning"><div class="vital-label">HR</div><div class="vital-value">128</div></div>
+                            <div class="vital critical"><div class="vital-label">BP</div><div class="vital-value">86/50</div></div>
+                            <div class="vital critical"><div class="vital-label">SpO2</div><div class="vital-value">89%</div></div>
+                            <div class="vital warning"><div class="vital-label">RR</div><div class="vital-value">28</div></div>
+                        </div>
+
+                        <div class="alert danger">
+                            <span class="alert-icon">⏱️</span>
+                            <div>
+                                <div class="alert-title">Airway Compromise + Hypotension</div>
+                                <div class="alert-desc">This is severe anaphylaxis with cardiovascular and respiratory involvement. Every second counts.</div>
+                            </div>
+                        </div>
+
+                        <p style="margin-bottom: 16px;">Where do you administer the epinephrine?</p>
+
+                        <div class="choices">
+                            <button class="choice-btn" onclick="choose('epi_found', 'im_thigh')">
+                                <span class="choice-icon">🦵</span>
+                                <div class="choice-text">
+                                    <div class="choice-title">Intramuscular - Lateral Thigh</div>
+                                    <div class="choice-desc">Through clothing if needed, into the outer thigh muscle</div>
+                                </div>
+                            </button>
+                            <button class="choice-btn" onclick="choose('epi_found', 'iv_arm')">
+                                <span class="choice-icon">💪</span>
+                                <div class="choice-text">
+                                    <div class="choice-title">Intravenous - Find a Vein</div>
+                                    <div class="choice-desc">IV would be faster - look for antecubital access</div>
+                                </div>
+                            </button>
+                            <button class="choice-btn" onclick="choose('epi_found', 'subq_arm')">
+                                <span class="choice-icon">💉</span>
+                                <div class="choice-text">
+                                    <div class="choice-title">Subcutaneous - Upper Arm</div>
+                                    <div class="choice-desc">SubQ injection into the deltoid area</div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `
+        },
+
+        epi_given: {
+            render: () => `
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-phase">2 Minutes Post-Epinephrine</div>
+                        <div class="card-title">📊 Assessing Response</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert success">
+                            <span class="alert-icon">✓</span>
+                            <div>
+                                <div class="alert-title">Epinephrine Given IM</div>
+                                <div class="alert-desc">0.3mg epinephrine administered to lateral thigh. EMS is en route (ETA 6 minutes).</div>
+                            </div>
+                        </div>
+
+                        <div class="narrative">
+                            Within 2 minutes, you notice some improvement. The wheezing is <span class="hl">slightly better</span> but still present. Her voice is still hoarse. The hives haven't changed much yet.
+                        </div>
+
+                        <div class="vitals-grid">
+                            <div class="vital"><div class="vital-label">HR</div><div class="vital-value">118</div></div>
+                            <div class="vital warning"><div class="vital-label">BP</div><div class="vital-value">92/58</div></div>
+                            <div class="vital warning"><div class="vital-label">SpO2</div><div class="vital-value">92%</div></div>
+                            <div class="vital"><div class="vital-label">RR</div><div class="vital-value">24</div></div>
+                        </div>
+
+                        <p style="margin-bottom: 16px;">She's improved but not out of danger. It's been 5 minutes. What's your next step?</p>
+
+                        <div class="choices">
+                            <button class="choice-btn" onclick="choose('epi_given', 'second_epi')">
+                                <span class="choice-icon">💉</span>
+                                <div class="choice-text">
+                                    <div class="choice-title">Give Second Dose of Epinephrine</div>
+                                    <div class="choice-desc">Repeat IM epi - can give every 5-15 minutes if needed</div>
+                                </div>
+                            </button>
+                            <button class="choice-btn" onclick="choose('epi_given', 'wait_ems')">
+                                <span class="choice-icon">🚑</span>
+                                <div class="choice-text">
+                                    <div class="choice-title">Wait for EMS</div>
+                                    <div class="choice-desc">She's improving - let the paramedics take over</div>
+                                </div>
+                            </button>
+                            <button class="choice-btn" onclick="choose('epi_given', 'position')">
+                                <span class="choice-icon">🛏️</span>
+                                <div class="choice-text">
+                                    <div class="choice-title">Lay Her Flat, Elevate Legs</div>
+                                    <div class="choice-desc">Improve venous return to help with hypotension</div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `
+        },
+
+        second_epi_given: {
+            render: () => `
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-phase">EMS Arrival</div>
+                        <div class="card-title">🚑 Handoff</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert success">
+                            <span class="alert-icon">✓</span>
+                            <div>
+                                <div class="alert-title">Significant Improvement</div>
+                                <div class="alert-desc">After treatment, the patient has markedly improved.</div>
+                            </div>
+                        </div>
+
+                        <div class="narrative">
+                            EMS arrives to find a <span class="hl">much more stable patient</span>. Her wheezing has nearly resolved, voice is returning to normal, and she's able to speak in full sentences. The hives are beginning to fade.
+                        </div>
+
+                        <div class="vitals-grid">
+                            <div class="vital"><div class="vital-label">HR</div><div class="vital-value">102</div></div>
+                            <div class="vital"><div class="vital-label">BP</div><div class="vital-value">108/68</div></div>
+                            <div class="vital"><div class="vital-label">SpO2</div><div class="vital-value">97%</div></div>
+                            <div class="vital"><div class="vital-label">RR</div><div class="vital-value">18</div></div>
+                        </div>
+
+                        <p style="margin-bottom: 16px;">The paramedic asks for your handoff. What do you tell them is most important?</p>
+
+                        <div class="choices">
+                            <button class="choice-btn" onclick="choose('second_epi_given', 'biphasic_warning')">
+                                <span class="choice-icon">⚠️</span>
+                                <div class="choice-text">
+                                    <div class="choice-title">Warn About Biphasic Reaction</div>
+                                    <div class="choice-desc">She needs 4-6 hours of observation - symptoms can return</div>
+                                </div>
+                            </button>
+                            <button class="choice-btn" onclick="choose('second_epi_given', 'just_epi')">
+                                <span class="choice-icon">💉</span>
+                                <div class="choice-text">
+                                    <div class="choice-title">Just Report the Epi Doses</div>
+                                    <div class="choice-desc">Tell them she got ${state.epiDoses} dose(s) of 0.3mg IM epinephrine</div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `
+        },
+
+        good_outcome: {
+            isOutcome: true,
+            render: () => `
+                <div class="card">
+                    <div class="card-body">
+                        <div class="outcome good">
+                            <div class="outcome-icon">🎉</div>
+                            <div class="outcome-title">Life Saved!</div>
+                            <div class="outcome-desc">
+                                Emma was transported to the ED and observed for 6 hours. She had no biphasic reaction and was discharged with a new EpiPen prescription and allergist referral. Her mother thanked you tearfully - your quick action saved her daughter's life.
+                            </div>
+                        </div>
+
+                        <div class="alert success">
+                            <span class="alert-icon">📊</span>
+                            <div>
+                                <div class="alert-title">Your Performance</div>
+                                <div class="alert-desc">
+                                    Epinephrine doses given: ${state.epiDoses}<br>
+                                    Route: IM (correct) ✓<br>
+                                    Time to first epi: Rapid ✓
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="narrative">
+                            <strong>Key Learning Points:</strong>
+                            <ul style="margin-top: 12px; margin-left: 20px;">
+                                <li><strong>Epinephrine is FIRST-LINE</strong> - not antihistamines, not steroids</li>
+                                <li><strong>IM into lateral thigh</strong> - best absorption, can go through clothing</li>
+                                <li><strong>Dose: 0.3mg adults, 0.15mg children &lt;30kg</strong></li>
+                                <li><strong>Repeat every 5-15 minutes</strong> if symptoms persist</li>
+                                <li><strong>Biphasic reactions</strong> occur in up to 20% - need 4-6h observation</li>
+                                <li><strong>Position:</strong> Lay flat with legs elevated (unless respiratory distress)</li>
+                            </ul>
+                        </div>
+
+                        <div style="margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
+                            <button class="btn btn-primary" onclick="location.reload()">Play Again</button>
+                            <button class="btn btn-secondary" onclick="location.href='deep-dive-hub.html'">📚 Anaphylaxis Deep Dive</button>
+                            <button class="btn btn-secondary" onclick="location.href='adventure-hub.html'">← Back to Adventures</button>
+                        </div>
+                    </div>
+                </div>
+            `
+        },
+
+        bad_outcome_delayed: {
+            isOutcome: true,
+            render: () => `
+                <div class="card">
+                    <div class="card-body">
+                        <div class="outcome bad">
+                            <div class="outcome-icon">💔</div>
+                            <div class="outcome-title">Delayed Treatment</div>
+                            <div class="outcome-desc">
+                                By the time epinephrine was given, Emma's airway had nearly closed. She required emergent intubation by EMS and spent 3 days in the ICU. She survived, but the outcome could have been much better with faster treatment.
+                            </div>
+                        </div>
+
+                        <div class="alert danger">
+                            <span class="alert-icon">⚠️</span>
+                            <div>
+                                <div class="alert-title">Critical Learning Point</div>
+                                <div class="alert-desc">
+                                    <strong>Epinephrine must be given IMMEDIATELY in anaphylaxis.</strong> Antihistamines and steroids are adjuncts - they do NOT treat the life-threatening symptoms. Delayed epinephrine is the #1 cause of anaphylaxis deaths.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
+                            <button class="btn btn-primary" onclick="location.reload()">Try Again</button>
+                            <button class="btn btn-secondary" onclick="location.href='deep-dive-hub.html'">📚 Anaphylaxis Deep Dive</button>
+                        </div>
+                    </div>
+                </div>
+            `
+        },
+
+        bad_outcome_wrong_route: {
+            isOutcome: true,
+            render: () => `
+                <div class="card">
+                    <div class="card-body">
+                        <div class="outcome bad">
+                            <div class="outcome-icon">⚠️</div>
+                            <div class="outcome-title">Wrong Route</div>
+                            <div class="outcome-desc">
+                                ${state.lastChoice === 'iv_arm' ? 
+                                    'Attempting IV epinephrine without proper dilution and monitoring caused a dangerous arrhythmia. Emma survived but required cardiac monitoring.' :
+                                    'Subcutaneous absorption is too slow in anaphylaxis due to peripheral vasoconstriction. By the time the medication took effect, Emma had deteriorated significantly.'}
+                            </div>
+                        </div>
+
+                        <div class="alert warning">
+                            <span class="alert-icon">💉</span>
+                            <div>
+                                <div class="alert-title">Route Matters!</div>
+                                <div class="alert-desc">
+                                    <strong>Intramuscular (IM) into the lateral thigh</strong> is the correct route:<br>
+                                    • Best blood flow = fastest absorption<br>
+                                    • IV epi requires dilution and monitoring<br>
+                                    • SubQ is too slow due to vasoconstriction
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
+                            <button class="btn btn-primary" onclick="location.reload()">Try Again</button>
+                            <button class="btn btn-secondary" onclick="location.href='deep-dive-hub.html'">📚 Anaphylaxis Deep Dive</button>
+                        </div>
+                    </div>
+                </div>
+            `
+        }
+    };
+
+    function choose(stage, choice) {
+        state.decisions.push({ stage, choice, time: state.timeElapsed });
+        state.lastChoice = choice;
+
+        const transitions = {
+            'arrival': {
+                'get_epi': () => goTo('epi_found'),
+                'call_911': () => setTimeout(() => goTo('epi_found'), 500),
+                'give_benadryl': () => goTo('bad_outcome_delayed')
+            },
+            'epi_found': {
+                'im_thigh': () => {
+                    state.epiDoses++;
+                    document.getElementById('epiCount').textContent = state.epiDoses;
+                    goTo('epi_given');
+                },
+                'iv_arm': () => goTo('bad_outcome_wrong_route'),
+                'subq_arm': () => goTo('bad_outcome_wrong_route')
+            },
+            'epi_given': {
+                'second_epi': () => {
+                    state.epiDoses++;
+                    document.getElementById('epiCount').textContent = state.epiDoses;
+                    goTo('second_epi_given');
+                },
+                'wait_ems': () => goTo('second_epi_given'),
+                'position': () => goTo('second_epi_given')
+            },
+            'second_epi_given': {
+                'biphasic_warning': () => goTo('good_outcome'),
+                'just_epi': () => goTo('good_outcome')
+            }
+        };
+
+        if (transitions[stage] && transitions[stage][choice]) {
+            transitions[stage][choice]();
+        }
+    }
+
+    function goTo(stageId) {
+        state.stage = stageId;
+        render();
+    }
+
+    function render() {
+        const stage = stages[state.stage];
+        if (!stage) return;
+        if (stage.isOutcome) clearInterval(timerInterval);
+        document.getElementById('stageContainer').innerHTML = stage.render();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        startTimer();
+        render();
+    });
+    </script>
+</body>
+</html>

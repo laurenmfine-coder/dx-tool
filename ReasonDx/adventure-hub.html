@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adventure Cases | ReasonDx</title>
+    <style>
+/* Theme Variables */
+:root {
+    --primary: #10b981;
+    --primary-light: #6ee7b7;
+    --primary-dark: #059669;
+    --primary-bg: #ecfdf5;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --bg-main: #0f172a;
+    --bg-card: #1e293b;
+    --bg-nav: #0f172a;
+    --border: #334155;
+    --shadow: 0 4px 12px rgba(0,0,0,0.3);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.4);
+    --radius: 12px;
+    --accent-red: #ef4444;
+    --accent-blue: #3b82f6;
+    --accent-purple: #8b5cf6;
+    --accent-orange: #f59e0b;
+    --accent-teal: #14b8a6;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg-main);
+    color: #f1f5f9;
+    min-height: 100vh;
+}
+
+/* Navigation */
+.nav { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
+.nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.nav-brand { display: flex; align-items: center; text-decoration: none; }
+.nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #94a3b8; font-size: 14px; transition: all 0.15s; }
+.nav-link:hover { background: rgba(255,255,255,0.1); color: #f1f5f9; }
+.nav-link.active { background: var(--primary); color: white; }
+.theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: #94a3b8; cursor: pointer; }
+
+/* Hero Header */
+.hero {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 50%, #1e1b4b 100%);
+    padding: 60px 24px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+}
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(239, 68, 68, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+.hero-content { position: relative; z-index: 1; }
+.hero-icon { font-size: 64px; margin-bottom: 16px; }
+.hero h1 { font-size: 42px; font-weight: 700; margin-bottom: 12px; }
+.hero p { font-size: 18px; color: #94a3b8; max-width: 600px; margin: 0 auto; line-height: 1.7; }
+
+/* Breadcrumb */
+.breadcrumb {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    font-size: 14px;
+    color: #64748b;
+}
+.breadcrumb a { color: var(--primary); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+
+/* Tutorial Section */
+.tutorial {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 24px;
+}
+.tutorial-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 24px;
+}
+.tutorial-card h2 {
+    font-size: 24px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.tutorial-card .subtitle {
+    color: #94a3b8;
+    margin-bottom: 24px;
+    font-size: 16px;
+}
+
+/* How it works grid */
+.how-it-works {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+}
+.how-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+}
+.how-card-icon { font-size: 32px; margin-bottom: 12px; }
+.how-card h4 { font-size: 15px; margin-bottom: 6px; }
+.how-card p { font-size: 13px; color: #94a3b8; }
+
+/* Learning Path */
+.learning-path {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(20, 184, 166, 0.1) 100%);
+    border: 1px solid var(--primary);
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 24px;
+}
+.path-steps {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 20px;
+    align-items: center;
+    margin: 24px 0;
+}
+.path-step {
+    background: var(--bg-card);
+    padding: 24px;
+    border-radius: 12px;
+    text-align: center;
+}
+.path-step-icon { font-size: 36px; margin-bottom: 12px; }
+.path-step h4 { margin-bottom: 6px; }
+.path-step p { font-size: 14px; color: #94a3b8; }
+.path-arrow { font-size: 28px; color: var(--primary); }
+.path-tip {
+    background: var(--bg-card);
+    border-left: 4px solid var(--primary);
+    padding: 16px;
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+    color: #94a3b8;
+}
+.path-tip strong { color: #f1f5f9; }
+
+/* Cases Section */
+.cases-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px 60px;
+}
+.section-header {
+    margin-bottom: 32px;
+}
+.section-header h2 {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+.section-header p {
+    color: #94a3b8;
+}
+
+/* Case Cards */
+.cases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 24px;
+}
+.case-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    position: relative;
+}
+.case-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--accent-color, var(--primary));
+}
+.case-card.available:hover { cursor: pointer; }
+.case-card.coming-soon { opacity: 0.7; }
+.case-card.coming-soon:hover { transform: none; cursor: default; }
+
+.case-card-banner {
+    height: 8px;
+    background: var(--accent-color, var(--primary));
+}
+.case-card-body {
+    padding: 24px;
+}
+.case-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+.case-card-icon {
+    font-size: 36px;
+}
+.case-card-badges {
+    display: flex;
+    gap: 8px;
+}
+.case-badge {
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+.case-badge.difficulty {
+    background: rgba(255,255,255,0.1);
+    color: #94a3b8;
+}
+.case-badge.coming-soon {
+    background: rgba(245, 158, 11, 0.2);
+    color: #f59e0b;
+}
+.case-badge.available {
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+}
+.case-card-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+.case-card-subtitle {
+    font-size: 14px;
+    color: var(--accent-color, var(--primary));
+    margin-bottom: 12px;
+}
+.case-card-description {
+    font-size: 14px;
+    color: #94a3b8;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+.case-card-meta {
+    display: flex;
+    gap: 16px;
+    font-size: 13px;
+    color: #64748b;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+}
+.case-card-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Deep Dive Link */
+.deep-dive-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--primary);
+    text-decoration: none;
+    margin-top: 12px;
+    padding: 8px 12px;
+    background: rgba(16, 185, 129, 0.1);
+    border-radius: 6px;
+    transition: all 0.15s;
+}
+.deep-dive-link:hover {
+    background: rgba(16, 185, 129, 0.2);
+}
+
+/* CTA */
+.cta-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 24px;
+    text-align: center;
+}
+.cta-card {
+    background: linear-gradient(135deg, var(--bg-card) 0%, #1e1b4b 100%);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px;
+}
+.cta-card h3 {
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+.cta-card p {
+    color: #94a3b8;
+    margin-bottom: 24px;
+}
+.cta-btn {
+    display: inline-block;
+    padding: 14px 28px;
+    background: var(--primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.15s;
+}
+.cta-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .nav-inner { flex-direction: column; gap: 12px; }
+    .hero h1 { font-size: 32px; }
+    .path-steps { grid-template-columns: 1fr; }
+    .path-arrow { transform: rotate(90deg); justify-self: center; }
+    .cases-grid { grid-template-columns: 1fr; }
+}
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
+                    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
+                    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+                    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
+                    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
+                    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
+                    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
+                    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
+                    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="#f1f5f9" letter-spacing="-1">Suite</text>
+                </svg>
+            </a>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link">🏠 Home</a>
+                <a href="../mechanism/index.html" class="nav-link">⚙️ MechanismDx</a>
+                <a href="training.html" class="nav-link active">🔬 ReasonDx</a>
+                <a href="../CoachDx/case-library.html" class="nav-link">🧠 CoachDx</a>
+                <a href="../reference-library.html" class="nav-link">📚 References</a>
+                <a href="../dx-dashboard.html" class="nav-link">📊 Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+        <div class="hero-content">
+            <div class="hero-icon">🎮</div>
+            <h1>Adventure Cases</h1>
+            <p>Immersive branching narratives where every decision shapes the outcome. Experience the weight of clinical decision-making in story-driven scenarios.</p>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="../index.html">Home</a> → <a href="training.html">ReasonDx</a> → Adventure Cases
+    </div>
+
+    <!-- Tutorial -->
+    <section class="tutorial">
+        <div class="tutorial-card">
+            <h2>🎮 What are Adventure Cases?</h2>
+            <p class="subtitle">Unlike traditional learning, Adventure Cases put you in the driver's seat of realistic clinical scenarios.</p>
+            
+            <div class="how-it-works">
+                <div class="how-card">
+                    <div class="how-card-icon">📖</div>
+                    <h4>Story-Driven</h4>
+                    <p>Immersive narratives that unfold based on your choices</p>
+                </div>
+                <div class="how-card">
+                    <div class="how-card-icon">🔀</div>
+                    <h4>Branching Paths</h4>
+                    <p>Multiple outcomes depending on your clinical decisions</p>
+                </div>
+                <div class="how-card">
+                    <div class="how-card-icon">⏱️</div>
+                    <h4>Time Pressure</h4>
+                    <p>Feel the urgency of real clinical decision-making</p>
+                </div>
+                <div class="how-card">
+                    <div class="how-card-icon">💔</div>
+                    <h4>Real Consequences</h4>
+                    <p>Your choices affect patient outcomes - for better or worse</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Learning Path -->
+        <div class="learning-path">
+            <h2>🎯 Recommended Learning Path</h2>
+            <p class="subtitle" style="color: #94a3b8;">For the best learning experience, we recommend a two-step approach:</p>
+            
+            <div class="path-steps">
+                <div class="path-step">
+                    <div class="path-step-icon">📚</div>
+                    <h4>Step 1: Deep Dive</h4>
+                    <p>Understand the pathophysiology - learn <em>why</em> things happen</p>
+                </div>
+                <div class="path-arrow">→</div>
+                <div class="path-step">
+                    <div class="path-step-icon">🎮</div>
+                    <h4>Step 2: Adventure</h4>
+                    <p>Apply your knowledge under pressure in realistic scenarios</p>
+                </div>
+            </div>
+            
+            <div class="path-tip">
+                <strong>💡 Pro Tip:</strong> Complete a Deep Dive first to understand the underlying mechanisms, then test yourself with the corresponding Adventure Case to practice applying that knowledge in a time-pressured, branching scenario where your decisions affect patient outcomes.
+            </div>
+            
+            <a href="deep-dive-hub.html" style="display: inline-block; margin-top: 20px; padding: 12px 24px; background: rgba(16, 185, 129, 0.2); color: var(--primary); text-decoration: none; border-radius: 8px; font-weight: 600; border: 1px solid var(--primary);">
+                📚 Browse Deep Dives First →
+            </a>
+        </div>
+    </section>
+
+    <!-- Cases -->
+    <section class="cases-section">
+        <div class="section-header">
+            <h2>Choose Your Adventure</h2>
+            <p>Select a case to begin. Each adventure takes 15-30 minutes.</p>
+        </div>
+        
+        <div class="cases-grid">
+            <!-- Chest Pain - AVAILABLE -->
+            <a href="chest-pain-adventure.html" class="case-card available" style="--accent-color: #ef4444;">
+                <div class="case-card-banner"></div>
+                <div class="case-card-body">
+                    <div class="case-card-header">
+                        <span class="case-card-icon">❤️</span>
+                        <div class="case-card-badges">
+                            <span class="case-badge available">✓ Available</span>
+                            <span class="case-badge difficulty">Intermediate</span>
+                        </div>
+                    </div>
+                    <h3 class="case-card-title">The Midnight Code</h3>
+                    <p class="case-card-subtitle">Chest Pain Emergency</p>
+                    <p class="case-card-description">A 58-year-old arrives at 2 AM with crushing chest pain. Every decision matters as you race against time to identify the cause and save his life.</p>
+                    <div class="case-card-meta">
+                        <span>⏱️ 15-25 min</span>
+                        <span>🔀 Multiple endings</span>
+                    </div>
+                    <div class="deep-dive-link">📚 Prep: ACS Deep Dive</div>
+                </div>
+            </a>
+
+            <!-- Sepsis - AVAILABLE -->
+            <a href="sepsis-adventure.html" class="case-card available" style="--accent-color: #f59e0b;">
+                <div class="case-card-banner"></div>
+                <div class="case-card-body">
+                    <div class="case-card-header">
+                        <span class="case-card-icon">🦠</span>
+                        <div class="case-card-badges">
+                            <span class="case-badge available">✓ Available</span>
+                            <span class="case-badge difficulty">Intermediate</span>
+                        </div>
+                    </div>
+                    <h3 class="case-card-title">The Golden Hour</h3>
+                    <p class="case-card-subtitle">Sepsis Recognition & Management</p>
+                    <p class="case-card-description">An elderly nursing home patient arrives febrile and confused. Can you recognize sepsis early and hit the 1-hour bundle targets before it's too late?</p>
+                    <div class="case-card-meta">
+                        <span>⏱️ 20-30 min</span>
+                        <span>🔀 Multiple endings</span>
+                    </div>
+                    <div class="deep-dive-link">📚 Prep: Sepsis Deep Dive</div>
+                </div>
+            </a>
+
+            <!-- Anaphylaxis - AVAILABLE -->
+            <a href="anaphylaxis-adventure.html" class="case-card available" style="--accent-color: #dc2626;">
+                <div class="case-card-banner"></div>
+                <div class="case-card-body">
+                    <div class="case-card-header">
+                        <span class="case-card-icon">⚠️</span>
+                        <div class="case-card-badges">
+                            <span class="case-badge available">✓ Available</span>
+                            <span class="case-badge difficulty">Foundational</span>
+                        </div>
+                    </div>
+                    <h3 class="case-card-title">Minutes to Act</h3>
+                    <p class="case-card-subtitle">Anaphylaxis Emergency</p>
+                    <p class="case-card-description">A teenager collapses at a restaurant after eating. Hives are spreading, her voice is changing. Do you know the right dose, route, and timing for epinephrine?</p>
+                    <div class="case-card-meta">
+                        <span>⏱️ 10-15 min</span>
+                        <span>🔀 Multiple endings</span>
+                    </div>
+                    <div class="deep-dive-link">📚 Prep: Anaphylaxis Deep Dive</div>
+                </div>
+            </a>
+
+            <!-- PE - AVAILABLE -->
+            <a href="pe-adventure.html" class="case-card available" style="--accent-color: #8b5cf6;">
+                <div class="case-card-banner"></div>
+                <div class="case-card-body">
+                    <div class="case-card-header">
+                        <span class="case-card-icon">🫁</span>
+                        <div class="case-card-badges">
+                            <span class="case-badge available">✓ Available</span>
+                            <span class="case-badge difficulty">Advanced</span>
+                        </div>
+                    </div>
+                    <h3 class="case-card-title">The Silent Killer</h3>
+                    <p class="case-card-subtitle">Pulmonary Embolism</p>
+                    <p class="case-card-description">Post-surgical patient with sudden dyspnea. Wells score, D-dimer, CT-PA - navigate the diagnostic algorithm while the patient's oxygen keeps dropping.</p>
+                    <div class="case-card-meta">
+                        <span>⏱️ 20-30 min</span>
+                        <span>🔀 Multiple endings</span>
+                    </div>
+                    <div class="deep-dive-link">📚 Prep: PE Deep Dive</div>
+                </div>
+            </a>
+
+            <!-- DKA - AVAILABLE -->
+            <a href="dka-adventure.html" class="case-card available" style="--accent-color: #14b8a6;">
+                <div class="case-card-banner"></div>
+                <div class="case-card-body">
+                    <div class="case-card-header">
+                        <span class="case-card-icon">📊</span>
+                        <div class="case-card-badges">
+                            <span class="case-badge available">✓ Available</span>
+                            <span class="case-badge difficulty">Intermediate</span>
+                        </div>
+                    </div>
+                    <h3 class="case-card-title">The Balancing Act</h3>
+                    <p class="case-card-subtitle">Diabetic Ketoacidosis</p>
+                    <p class="case-card-description">Young diabetic found unresponsive. Glucose is sky-high, pH is tanking. Master the insulin drip, potassium replacement, and gap closure without causing cerebral edema.</p>
+                    <div class="case-card-meta">
+                        <span>⏱️ 25-35 min</span>
+                        <span>🔀 Multiple endings</span>
+                    </div>
+                    <div class="deep-dive-link">📚 Prep: DKA Deep Dive</div>
+                </div>
+            </a>
+
+            <!-- Stroke - COMING SOON -->
+            <div class="case-card coming-soon" style="--accent-color: #3b82f6;">
+                <div class="case-card-banner"></div>
+                <div class="case-card-body">
+                    <div class="case-card-header">
+                        <span class="case-card-icon">🧠</span>
+                        <div class="case-card-badges">
+                            <span class="case-badge coming-soon">Coming Soon</span>
+                            <span class="case-badge difficulty">Advanced</span>
+                        </div>
+                    </div>
+                    <h3 class="case-card-title">Race Against Time</h3>
+                    <p class="case-card-subtitle">Acute Stroke</p>
+                    <p class="case-card-description">Sudden onset weakness and slurred speech. The tPA window is closing. Can you complete the workup and make the thrombolysis decision in time?</p>
+                    <div class="case-card-meta">
+                        <span>⏱️ 20-30 min</span>
+                        <span>🔀 Multiple endings</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GI Bleed - COMING SOON -->
+            <div class="case-card coming-soon" style="--accent-color: #dc2626;">
+                <div class="case-card-banner"></div>
+                <div class="case-card-body">
+                    <div class="case-card-header">
+                        <span class="case-card-icon">🩸</span>
+                        <div class="case-card-badges">
+                            <span class="case-badge coming-soon">Coming Soon</span>
+                            <span class="case-badge difficulty">Intermediate</span>
+                        </div>
+                    </div>
+                    <h3 class="case-card-title">Code Crimson</h3>
+                    <p class="case-card-subtitle">Massive GI Hemorrhage</p>
+                    <p class="case-card-description">Hematemesis in the ED. Blood pressure is dropping, hemoglobin is falling. Resuscitate, localize, and decide: scope or IR?</p>
+                    <div class="case-card-meta">
+                        <span>⏱️ 20-30 min</span>
+                        <span>🔀 Multiple endings</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Altered Mental Status - COMING SOON -->
+            <div class="case-card coming-soon" style="--accent-color: #8b5cf6;">
+                <div class="case-card-banner"></div>
+                <div class="case-card-body">
+                    <div class="case-card-header">
+                        <span class="case-card-icon">🧠</span>
+                        <div class="case-card-badges">
+                            <span class="case-badge coming-soon">Coming Soon</span>
+                            <span class="case-badge difficulty">Advanced</span>
+                        </div>
+                    </div>
+                    <h3 class="case-card-title">Lost in Confusion</h3>
+                    <p class="case-card-subtitle">Altered Mental Status</p>
+                    <p class="case-card-description">Elderly patient brought in by family - confused and agitated. The differential is broad. Can you find the cause before it's too late?</p>
+                    <div class="case-card-meta">
+                        <span>⏱️ 20-30 min</span>
+                        <span>🔀 Multiple endings</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="cta-card">
+            <h3>📚 Not Ready for Adventures Yet?</h3>
+            <p>Start with Deep Dives to build your pathophysiology foundation first.</p>
+            <a href="deep-dive-hub.html" class="cta-btn">Browse Deep Dive Cases →</a>
+        </div>
+    </section>
+
+    <script>
+    // Handle clicks on coming soon cards
+    document.querySelectorAll('.case-card.coming-soon').forEach(card => {
+        card.addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('This adventure is coming soon! Check back later.');
+        });
+    });
+    </script>
+</body>
+</html>

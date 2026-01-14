@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Dive Hub | ReasonDx</title>
+    <style>
+/* Theme Variables */
+:root {
+    --primary: #10b981;
+    --primary-light: #6ee7b7;
+    --primary-dark: #059669;
+    --primary-bg: #ecfdf5;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-nav: #ffffff;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+    --radius: 12px;
+}
+
+[data-theme="ocean-dark"] {
+    --primary: #38bdf8; --primary-light: #7dd3fc; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
+    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b;
+    --bg-nav: #0f172a; --border: #334155;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg-main);
+    color: var(--text-primary);
+    min-height: 100vh;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Navigation */
+.nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
+.nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.nav-brand { display: flex; align-items: center; text-decoration: none; }
+.nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--text-secondary); font-size: 14px; transition: all 0.15s; }
+.nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
+.nav-link.active { background: var(--primary); color: white; }
+.theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); cursor: pointer; }
+
+/* Logo Header */
+.logo-header {
+    background: var(--primary-bg);
+    padding: 48px 24px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+}
+.tagline {
+    margin-top: 12px;
+    font-family: Georgia, serif;
+    font-size: 18px;
+    font-style: italic;
+    color: var(--text-secondary);
+}
+
+/* Breadcrumb */
+.breadcrumb {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+.breadcrumb a {
+    color: var(--primary);
+    text-decoration: none;
+}
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+/* Tutorial Section */
+.tutorial {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 24px;
+}
+.tutorial-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 32px;
+}
+.tutorial-card h2 {
+    font-size: 24px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.tutorial-card .subtitle {
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+    font-size: 16px;
+}
+.steps {
+    display: grid;
+    gap: 20px;
+}
+.step {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+.step-number {
+    background: var(--primary);
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+.step-content h4 {
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+.step-content p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Search & Filter */
+.search-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px 24px;
+}
+.search-bar {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.search-input {
+    flex: 1;
+    min-width: 250px;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 15px;
+    background: var(--bg-card);
+    color: var(--text-primary);
+}
+.search-input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+.filter-btn {
+    padding: 12px 20px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.filter-btn:hover, .filter-btn.active {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: var(--primary-bg);
+}
+.results-count {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+/* Category Sections */
+.cases-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px 60px;
+}
+.category-section {
+    margin-bottom: 40px;
+}
+.category-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--primary);
+}
+.category-icon {
+    font-size: 24px;
+}
+.category-title {
+    font-size: 20px;
+    font-weight: 600;
+}
+.category-count {
+    background: var(--primary-bg);
+    color: var(--primary);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Case Cards */
+.case-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+}
+.case-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+.case-card:hover {
+    border-color: var(--primary);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+}
+.case-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+.case-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+.case-badge {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: var(--primary-bg);
+    color: var(--primary);
+    font-weight: 500;
+}
+.case-description {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+.case-meta {
+    display: flex;
+    gap: 16px;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+.case-meta span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* No Results */
+.no-results {
+    text-align: center;
+    padding: 60px 24px;
+    color: var(--text-secondary);
+}
+.no-results h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+    .nav-inner { flex-direction: column; gap: 12px; }
+    .search-bar { flex-direction: column; }
+    .search-input { min-width: 100%; }
+}
+    </style>
+</head>
+<body data-theme="muted-teal">
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
+                    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
+                    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+                    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
+                    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
+                    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
+                    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
+                    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
+                    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
+                </svg>
+            </a>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link">🏠 Home</a>
+                <a href="../mechanism/index.html" class="nav-link">⚙️ MechanismDx</a>
+                <a href="training.html" class="nav-link active">🔬 ReasonDx</a>
+                <a href="../CoachDx/case-library.html" class="nav-link">🧠 CoachDx</a>
+                <a href="../reference-library.html" class="nav-link">📚 References</a>
+                <a href="../dx-dashboard.html" class="nav-link">📊 Dashboard</a>
+                <button class="theme-btn" onclick="openDxThemeModal()">🎨</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Logo Header -->
+    <header class="logo-header">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 90" style="height: 60px;">
+            <text x="10" y="58" font-family="Georgia, serif" font-size="46" fill="#1a1a1a" letter-spacing="-1">Reason</text>
+            <text x="165" y="58" font-family="Georgia, serif" font-size="46" fill="#10b981">D</text>
+            <line x1="198" y1="34" x2="214" y2="54" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+            <ellipse cx="196.5" cy="31.5" rx="2" ry="3" transform="rotate(-28 196.5 31.5)" fill="#10b981"/>
+            <path d="M 214 34 L 204 45 Q 200 50 200 57 Q 200 64 205 68 Q 210 72 210 78" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <ellipse cx="215.5" cy="31.5" rx="2" ry="3" transform="rotate(28 215.5 31.5)" fill="#10b981"/>
+            <circle cx="210" cy="78" r="6" fill="none" stroke="#10b981" stroke-width="2"/>
+            <circle cx="210" cy="78" r="3" fill="#10b981"/>
+        </svg>
+        <div class="tagline">Deep Dive Cases - Master clinical reasoning layer by layer</div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="../index.html">Home</a> → <a href="training.html">ReasonDx</a> → Deep Dive Hub
+    </div>
+
+    <!-- Tutorial -->
+    <section class="tutorial">
+        <div class="tutorial-card">
+            <h2>🔍 What are Deep Dives?</h2>
+            <p class="subtitle">Deep Dives guide you through clinical cases layer by layer, building understanding from anatomy to management.</p>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Choose a Case</h4>
+                        <p>Select from 70+ cases organized by category - from common presentations to rare emergencies.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Explore the Layers</h4>
+                        <p>Each case has 6 layers: Anatomy → Physiology → Pathophysiology → Clinical Features → Workup → Management</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Test Your Knowledge</h4>
+                        <p>Each layer includes interactive questions to reinforce learning and identify knowledge gaps.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Track Progress</h4>
+                        <p>Your progress is saved automatically. Return anytime to continue where you left off.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Learning Path Recommendation -->
+        <div class="tutorial-card" style="background: linear-gradient(135deg, var(--primary-bg) 0%, #d1fae5 100%); border-color: var(--primary);">
+            <h2>🎯 Recommended Learning Path</h2>
+            <p class="subtitle">For the best learning experience, we recommend a two-step approach:</p>
+            
+            <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 20px; align-items: center; margin-top: 20px;">
+                <div style="background: var(--bg-card); padding: 20px; border-radius: 12px; text-align: center;">
+                    <div style="font-size: 32px; margin-bottom: 8px;">📚</div>
+                    <h4 style="margin-bottom: 4px;">Step 1: Deep Dive</h4>
+                    <p style="font-size: 14px; color: var(--text-secondary);">Understand the pathophysiology - learn <em>why</em> things happen</p>
+                </div>
+                <div style="font-size: 24px; color: var(--primary);">→</div>
+                <div style="background: var(--bg-card); padding: 20px; border-radius: 12px; text-align: center;">
+                    <div style="font-size: 32px; margin-bottom: 8px;">🎮</div>
+                    <h4 style="margin-bottom: 4px;">Step 2: Adventure</h4>
+                    <p style="font-size: 14px; color: var(--text-secondary);">Apply your knowledge under pressure in realistic scenarios</p>
+                </div>
+            </div>
+            
+            <p style="margin-top: 20px; padding: 16px; background: var(--bg-card); border-radius: 8px; font-size: 14px; color: var(--text-secondary); border-left: 4px solid var(--primary);">
+                <strong style="color: var(--text-primary);">💡 Pro Tip:</strong> Complete a Deep Dive first to understand the underlying mechanisms, then test yourself with the corresponding Adventure Case to practice applying that knowledge in a time-pressured, branching scenario where your decisions affect patient outcomes.
+            </p>
+            
+            <a href="adventure-hub.html" style="display: inline-block; margin-top: 16px; padding: 12px 24px; background: var(--primary); color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">
+                🎮 Explore Adventure Cases →
+            </a>
+        </div>
+    </section>
+
+    <!-- Search & Filter -->
+    <section class="search-section">
+        <div class="search-bar">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search cases (e.g., 'sepsis', 'chest pain', 'AKI')..." oninput="filterCases()">
+            <button class="filter-btn active" data-filter="all" onclick="setFilter('all')">All Cases</button>
+            <button class="filter-btn" data-filter="critical" onclick="setFilter('critical')">🚨 Critical Care</button>
+            <button class="filter-btn" data-filter="cardio" onclick="setFilter('cardio')">❤️ Cardiology</button>
+            <button class="filter-btn" data-filter="pulm" onclick="setFilter('pulm')">🫁 Pulmonary</button>
+            <button class="filter-btn" data-filter="gi" onclick="setFilter('gi')">🫃 GI</button>
+            <button class="filter-btn" data-filter="allergy" onclick="setFilter('allergy')">🤧 Allergy</button>
+        </div>
+        <div class="results-count" id="resultsCount">Showing all 70+ cases</div>
+    </section>
+
+    <!-- Cases -->
+    <section class="cases-container" id="casesContainer">
+        <!-- Cases will be loaded dynamically -->
+    </section>
+
+    <!-- Theme Modal (same as other pages) -->
+    <div class="theme-modal" id="dxThemeModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:2000; align-items:center; justify-content:center;">
+        <div style="background:var(--bg-card); padding:24px; border-radius:16px; max-width:400px; width:90%;">
+            <h3 style="margin-bottom:16px;">🎨 Choose Theme</h3>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+                <button onclick="setTheme('muted-teal')" style="padding:12px; border:1px solid var(--border); border-radius:8px; cursor:pointer;">Muted Teal</button>
+                <button onclick="setTheme('ocean-dark')" style="padding:12px; border:1px solid var(--border); border-radius:8px; cursor:pointer;">Ocean Dark</button>
+            </div>
+            <button onclick="closeDxThemeModal()" style="margin-top:16px; width:100%; padding:10px; border:none; background:var(--border); border-radius:8px; cursor:pointer;">Close</button>
+        </div>
+    </div>
+
+    <script>
+    // Deep Dive Cases Data
+    const DEEP_DIVE_CASES = [
+        // Critical Care
+        { id: 'sepsis', title: 'Sepsis & Septic Shock', category: 'critical', icon: '🦠', description: 'Recognition, early management, and source control', file: 'sepsis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'ards', title: 'ARDS', category: 'critical', icon: '🫁', description: 'Acute respiratory distress syndrome pathophysiology and ventilator management', file: 'ards-deep-dive.json', layers: 6, difficulty: 'Advanced' },
+        { id: 'shock', title: 'Shock States', category: 'critical', icon: '💔', description: 'Differentiating and managing cardiogenic, distributive, hypovolemic shock', file: 'shock-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'dic', title: 'DIC', category: 'critical', icon: '🩸', description: 'Disseminated intravascular coagulation recognition and management', file: 'dic-deep-dive.json', layers: 6, difficulty: 'Advanced' },
+        { id: 'status-epilepticus', title: 'Status Epilepticus', category: 'critical', icon: '⚡', description: 'Emergency management of prolonged seizures', file: 'status-epilepticus-deep-dive.json', layers: 6, difficulty: 'Advanced' },
+        
+        // Cardiology
+        { id: 'acs', title: 'Acute Coronary Syndrome', category: 'cardio', icon: '💔', description: 'STEMI, NSTEMI, unstable angina - complete workup and management', file: 'acs-deep-dive-complete.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'heart-failure', title: 'Heart Failure', category: 'cardio', icon: '❤️', description: 'Acute decompensated HF management and chronic optimization', file: 'heart-failure-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'afib', title: 'Atrial Fibrillation', category: 'cardio', icon: '💓', description: 'Rate vs rhythm control, anticoagulation decisions', file: 'afib-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'aortic-dissection', title: 'Aortic Dissection', category: 'cardio', icon: '🫀', description: 'Type A vs B, surgical vs medical management', file: 'aortic-dissection-deep-dive.json', layers: 6, difficulty: 'Advanced' },
+        { id: 'cardiac-tamponade', title: 'Cardiac Tamponade', category: 'cardio', icon: '💜', description: 'Recognition and emergent pericardiocentesis', file: 'cardiac-tamponade-deep-dive.json', layers: 6, difficulty: 'Advanced' },
+        { id: 'hypertensive-emergency', title: 'Hypertensive Emergency', category: 'cardio', icon: '📈', description: 'Target organ damage and BP management', file: 'hypertensive-emergency-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        
+        // Pulmonary
+        { id: 'pe', title: 'Pulmonary Embolism', category: 'pulm', icon: '🫁', description: 'Risk stratification and anticoagulation', file: 'pe-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'pneumonia', title: 'Pneumonia', category: 'pulm', icon: '🦠', description: 'CAP, HAP, aspiration - antibiotic selection', file: 'pneumonia-deep-dive.json', layers: 6, difficulty: 'Foundational' },
+        { id: 'copd-exacerbation', title: 'COPD Exacerbation', category: 'pulm', icon: '💨', description: 'Acute management and discharge planning', file: 'copd-exacerbation-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'asthma-exacerbation', title: 'Asthma Exacerbation', category: 'pulm', icon: '🌬️', description: 'Severity assessment and step-up therapy', file: 'asthma-exacerbation-deep-dive.json', layers: 6, difficulty: 'Foundational' },
+        { id: 'tension-pneumothorax', title: 'Tension Pneumothorax', category: 'pulm', icon: '⚠️', description: 'Emergent needle decompression', file: 'tension-pneumothorax-deep-dive.json', layers: 6, difficulty: 'Advanced' },
+        
+        // GI
+        { id: 'gi-bleed', title: 'GI Bleeding', category: 'gi', icon: '🩸', description: 'Upper vs lower, resuscitation and intervention', file: 'gi-bleed-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'pancreatitis', title: 'Acute Pancreatitis', category: 'gi', icon: '🫃', description: 'Severity scoring and supportive care', file: 'pancreatitis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'acute-liver-failure', title: 'Acute Liver Failure', category: 'gi', icon: '🫀', description: 'Etiology workup and transplant evaluation', file: 'acute-liver-failure-deep-dive.json', layers: 6, difficulty: 'Advanced' },
+        { id: 'bowel-obstruction', title: 'Bowel Obstruction', category: 'gi', icon: '🔄', description: 'SBO vs LBO, conservative vs surgical management', file: 'bowel-obstruction-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'cholecystitis', title: 'Cholecystitis/Cholangitis', category: 'gi', icon: '💛', description: 'Tokyo guidelines and surgical timing', file: 'cholecystitis-cholangitis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        
+        // Renal/Electrolytes
+        { id: 'aki', title: 'Acute Kidney Injury', category: 'renal', icon: '💧', description: 'Pre-renal, intrinsic, post-renal workup', file: 'aki-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'hyperkalemia', title: 'Hyperkalemia', category: 'renal', icon: '⚡', description: 'ECG changes and emergent management', file: 'hyperkalemia-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'hyponatremia', title: 'Hyponatremia', category: 'renal', icon: '💦', description: 'Volume status and correction rates', file: 'hyponatremia-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'metabolic-acidosis', title: 'Metabolic Acidosis', category: 'renal', icon: '🧪', description: 'Anion gap differential and treatment', file: 'metabolic-acidosis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'rhabdomyolysis', title: 'Rhabdomyolysis', category: 'renal', icon: '💪', description: 'CK monitoring and aggressive hydration', file: 'rhabdomyolysis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        
+        // Endocrine
+        { id: 'dka', title: 'Diabetic Ketoacidosis', category: 'endo', icon: '📊', description: 'Insulin drip, gap closure, transition', file: 'dka-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'hhs', title: 'HHS', category: 'endo', icon: '💉', description: 'Hyperosmolar hyperglycemic state', file: 'hhs-deep-dive.json', layers: 6, difficulty: 'Advanced' },
+        { id: 'thyroid-storm', title: 'Thyroid Storm', category: 'endo', icon: '🔥', description: 'Burch-Wartofsky score and management', file: 'thyroid-storm-deep-dive.json', layers: 6, difficulty: 'Advanced' },
+        { id: 'myxedema-coma', title: 'Myxedema Coma', category: 'endo', icon: '❄️', description: 'Severe hypothyroidism emergency', file: 'myxedema-coma-deep-dive.json', layers: 6, difficulty: 'Advanced' },
+        { id: 'adrenal-crisis', title: 'Adrenal Crisis', category: 'endo', icon: '⚠️', description: 'Recognition and steroid replacement', file: 'adrenal-crisis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'hypoglycemia', title: 'Hypoglycemia', category: 'endo', icon: '📉', description: 'Causes and management in diabetics', file: 'hypoglycemia-deep-dive.json', layers: 6, difficulty: 'Foundational' },
+        
+        // Neurology
+        { id: 'stroke', title: 'Acute Stroke', category: 'neuro', icon: '🧠', description: 'Ischemic vs hemorrhagic, tPA decisions', file: 'stroke-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'seizure', title: 'Seizure', category: 'neuro', icon: '⚡', description: 'First seizure workup and AED selection', file: 'seizure-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'meningitis', title: 'Meningitis', category: 'neuro', icon: '🦠', description: 'Bacterial vs viral, empiric therapy', file: 'meningitis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'encephalitis', title: 'Encephalitis', category: 'neuro', icon: '🧠', description: 'HSV encephalitis and empiric acyclovir', file: 'encephalitis-deep-dive.json', layers: 6, difficulty: 'Advanced' },
+        { id: 'subarachnoid-hemorrhage', title: 'Subarachnoid Hemorrhage', category: 'neuro', icon: '🩸', description: 'Hunt-Hess grading and aneurysm management', file: 'subarachnoid-hemorrhage-deep-dive.json', layers: 6, difficulty: 'Advanced' },
+        { id: 'guillain-barre', title: 'Guillain-Barré Syndrome', category: 'neuro', icon: '🔌', description: 'Ascending weakness and respiratory monitoring', file: 'guillain-barre-deep-dive.json', layers: 6, difficulty: 'Advanced' },
+        { id: 'myasthenia-crisis', title: 'Myasthenic Crisis', category: 'neuro', icon: '💪', description: 'Respiratory failure and plasmapheresis', file: 'myasthenia-crisis-deep-dive.json', layers: 6, difficulty: 'Advanced' },
+        
+        // Infectious Disease
+        { id: 'cellulitis', title: 'Cellulitis & Abscess', category: 'id', icon: '🦠', description: 'MRSA coverage and I&D indications', file: 'cellulitis-abscess-deep-dive.json', layers: 6, difficulty: 'Foundational' },
+        { id: 'uti', title: 'UTI & Pyelonephritis', category: 'id', icon: '💧', description: 'Complicated vs uncomplicated, antibiotic selection', file: 'uti-pyelonephritis-deep-dive.json', layers: 6, difficulty: 'Foundational' },
+        { id: 'endocarditis', title: 'Infective Endocarditis', category: 'id', icon: '❤️', description: 'Duke criteria and empiric therapy', file: 'infective-endocarditis-deep-dive.json', layers: 6, difficulty: 'Advanced' },
+        { id: 'osteomyelitis', title: 'Osteomyelitis', category: 'id', icon: '🦴', description: 'Acute vs chronic, surgical debridement', file: 'osteomyelitis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'neutropenic-fever', title: 'Neutropenic Fever', category: 'id', icon: '🔥', description: 'Empiric coverage in immunocompromised', file: 'neutropenic-fever-deep-dive.json', layers: 6, difficulty: 'Advanced' },
+        
+        // Hematology/Oncology
+        { id: 'ttp-hus', title: 'TTP/HUS', category: 'heme', icon: '🩸', description: 'MAHA and plasma exchange', file: 'ttp-hus-deep-dive.json', layers: 6, difficulty: 'Advanced' },
+        { id: 'tumor-lysis', title: 'Tumor Lysis Syndrome', category: 'heme', icon: '⚠️', description: 'Prevention and management', file: 'tumor-lysis-syndrome-deep-dive.json', layers: 6, difficulty: 'Advanced' },
+        { id: 'hypercalcemia-malignancy', title: 'Hypercalcemia of Malignancy', category: 'heme', icon: '📈', description: 'Bisphosphonates and denosumab', file: 'hypercalcemia-malignancy-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        
+        // Toxicology
+        { id: 'alcohol-withdrawal', title: 'Alcohol Withdrawal', category: 'tox', icon: '🍺', description: 'CIWA protocol and seizure prevention', file: 'alcohol-withdrawal-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'opioid-overdose', title: 'Opioid Overdose', category: 'tox', icon: '💊', description: 'Naloxone dosing and monitoring', file: 'opioid-overdose-deep-dive.json', layers: 6, difficulty: 'Foundational' },
+        { id: 'serotonin-syndrome', title: 'Serotonin Syndrome', category: 'tox', icon: '🧪', description: 'Hunter criteria and cyproheptadine', file: 'serotonin-syndrome-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'nms', title: 'Neuroleptic Malignant Syndrome', category: 'tox', icon: '🔥', description: 'Differentiation from serotonin syndrome', file: 'neuroleptic-malignant-syndrome-deep-dive.json', layers: 6, difficulty: 'Advanced' },
+        { id: 'malignant-hyperthermia', title: 'Malignant Hyperthermia', category: 'tox', icon: '🌡️', description: 'Dantrolene and cooling', file: 'malignant-hyperthermia-deep-dive.json', layers: 6, difficulty: 'Advanced' },
+        
+        // Allergy & Immunology
+        { id: 'anaphylaxis', title: 'Anaphylaxis', category: 'allergy', icon: '⚠️', description: 'Epinephrine timing and biphasic reactions', file: 'anaphylaxis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'drug-allergy', title: 'Drug Allergy', category: 'allergy', icon: '💊', description: 'IgE vs non-IgE reactions, desensitization', file: 'drug-allergy-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'food-allergy', title: 'Food Allergy', category: 'allergy', icon: '🥜', description: 'Testing, avoidance, and OIT', file: 'food-allergy-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'venom-allergy', title: 'Venom Allergy', category: 'allergy', icon: '🐝', description: 'VIT indications and protocols', file: 'venom-allergy-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'urticaria', title: 'Chronic Urticaria/Angioedema', category: 'allergy', icon: '🔴', description: 'Workup and step-up therapy', file: 'chronic-urticaria-angioedema-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'hereditary-angioedema', title: 'Hereditary Angioedema', category: 'allergy', icon: '🧬', description: 'C1-INH deficiency management', file: 'hereditary-angioedema-deep-dive.json', layers: 6, difficulty: 'Advanced' },
+        { id: 'pid', title: 'Primary Immunodeficiency', category: 'allergy', icon: '🛡️', description: 'Warning signs and IVIG therapy', file: 'primary-immunodeficiency-deep-dive.json', layers: 6, difficulty: 'Advanced' },
+        { id: 'mast-cell', title: 'Mast Cell Disorders', category: 'allergy', icon: '🔬', description: 'Mastocytosis and MCAS', file: 'mast-cell-disorders-deep-dive.json', layers: 6, difficulty: 'Advanced' },
+        { id: 'eosinophilia', title: 'Eosinophilia Workup', category: 'allergy', icon: '🩸', description: 'Primary vs secondary causes', file: 'eosinophilia-workup-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'asthma-biologics', title: 'Asthma Phenotyping & Biologics', category: 'allergy', icon: '💉', description: 'Type 2 inflammation and biologic selection', file: 'asthma-phenotyping-biologics-deep-dive.json', layers: 6, difficulty: 'Advanced' },
+        { id: 'allergic-rhinitis', title: 'Allergic Rhinitis', category: 'allergy', icon: '🤧', description: 'Testing and immunotherapy', file: 'allergic-rhinitis-deep-dive.json', layers: 6, difficulty: 'Foundational' },
+        { id: 'atopic-dermatitis', title: 'Atopic Dermatitis', category: 'allergy', icon: '🧴', description: 'Topical management and dupilumab', file: 'atopic-dermatitis-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+        { id: 'contact-dermatitis', title: 'Contact Dermatitis', category: 'allergy', icon: '✋', description: 'Patch testing and allergen avoidance', file: 'contact-dermatitis-deep-dive.json', layers: 6, difficulty: 'Foundational' },
+        { id: 'fpies', title: 'FPIES', category: 'allergy', icon: '👶', description: 'Food protein-induced enterocolitis', file: 'fpies-deep-dive.json', layers: 6, difficulty: 'Intermediate' },
+    ];
+    
+    const CATEGORIES = {
+        critical: { name: 'Critical Care', icon: '🚨' },
+        cardio: { name: 'Cardiology', icon: '❤️' },
+        pulm: { name: 'Pulmonary', icon: '🫁' },
+        gi: { name: 'GI & Hepatology', icon: '🫃' },
+        renal: { name: 'Renal & Electrolytes', icon: '💧' },
+        endo: { name: 'Endocrine', icon: '📊' },
+        neuro: { name: 'Neurology', icon: '🧠' },
+        id: { name: 'Infectious Disease', icon: '🦠' },
+        heme: { name: 'Heme/Onc', icon: '🩸' },
+        tox: { name: 'Toxicology', icon: '☠️' },
+        allergy: { name: 'Allergy & Immunology', icon: '🤧' }
+    };
+    
+    let currentFilter = 'all';
+    
+    function renderCases() {
+        const container = document.getElementById('casesContainer');
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        
+        // Filter cases
+        let filteredCases = DEEP_DIVE_CASES.filter(c => {
+            const matchesFilter = currentFilter === 'all' || c.category === currentFilter;
+            const matchesSearch = !searchTerm || 
+                c.title.toLowerCase().includes(searchTerm) || 
+                c.description.toLowerCase().includes(searchTerm);
+            return matchesFilter && matchesSearch;
+        });
+        
+        // Update results count
+        document.getElementById('resultsCount').textContent = 
+            `Showing ${filteredCases.length} of ${DEEP_DIVE_CASES.length} cases`;
+        
+        if (filteredCases.length === 0) {
+            container.innerHTML = `
+                <div class="no-results">
+                    <h3>No cases found</h3>
+                    <p>Try adjusting your search or filter</p>
+                </div>
+            `;
+            return;
+        }
+        
+        // Group by category
+        const grouped = {};
+        filteredCases.forEach(c => {
+            if (!grouped[c.category]) grouped[c.category] = [];
+            grouped[c.category].push(c);
+        });
+        
+        // Render
+        let html = '';
+        Object.entries(grouped).forEach(([cat, cases]) => {
+            const catInfo = CATEGORIES[cat] || { name: cat, icon: '📋' };
+            html += `
+                <div class="category-section">
+                    <div class="category-header">
+                        <span class="category-icon">${catInfo.icon}</span>
+                        <span class="category-title">${catInfo.name}</span>
+                        <span class="category-count">${cases.length} cases</span>
+                    </div>
+                    <div class="case-grid">
+                        ${cases.map(c => `
+                            <a href="deep-dive-player.html?case=${c.id}" class="case-card">
+                                <div class="case-card-header">
+                                    <span class="case-title">${c.icon} ${c.title}</span>
+                                    <span class="case-badge">${c.difficulty}</span>
+                                </div>
+                                <p class="case-description">${c.description}</p>
+                                <div class="case-meta">
+                                    <span>📚 ${c.layers} layers</span>
+                                </div>
+                            </a>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        });
+        
+        container.innerHTML = html;
+    }
+    
+    function filterCases() {
+        renderCases();
+    }
+    
+    function setFilter(filter) {
+        currentFilter = filter;
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.filter === filter);
+        });
+        renderCases();
+    }
+    
+    function openDxThemeModal() {
+        document.getElementById('dxThemeModal').style.display = 'flex';
+    }
+    
+    function closeDxThemeModal() {
+        document.getElementById('dxThemeModal').style.display = 'none';
+    }
+    
+    function setTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+        localStorage.setItem('dx-theme', theme);
+        closeDxThemeModal();
+    }
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('dx-theme');
+        if (savedTheme) document.body.setAttribute('data-theme', savedTheme);
+        renderCases();
+    });
+    </script>
+</body>
+</html>
