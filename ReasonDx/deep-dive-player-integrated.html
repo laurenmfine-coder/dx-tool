@@ -244,6 +244,26 @@
             color: var(--text-primary);
             font-family: var(--font-mono);
         }
+        
+        .stat-item-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: var(--space-sm);
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+        }
+        
+        .stat-item-box .stat-icon {
+            font-size: 18px;
+        }
+        
+        .stat-item-box .stat-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent-primary);
+        }
 
         .nav-right {
             display: flex;
@@ -1450,6 +1470,32 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 </div>
             </div>
 
+            <!-- Progress Stats -->
+            <div class="card" id="progressCard">
+                <div class="card-header">
+                    <div class="card-title">📊 Progress</div>
+                </div>
+                <div class="card-body">
+                    <div class="stats-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); text-align: center;">
+                        <div class="stat-item-box">
+                            <div class="stat-icon">⏱️</div>
+                            <div class="stat-value" id="timerDisplay">00:00</div>
+                            <div class="stat-label" style="font-size: 11px; color: var(--text-muted);">Time</div>
+                        </div>
+                        <div class="stat-item-box">
+                            <div class="stat-icon">🎯</div>
+                            <div class="stat-value" id="scoreDisplay">0</div>
+                            <div class="stat-label" style="font-size: 11px; color: var(--text-muted);">Score</div>
+                        </div>
+                        <div class="stat-item-box">
+                            <div class="stat-icon">🔥</div>
+                            <div class="stat-value" id="streakDisplay">0</div>
+                            <div class="stat-label" style="font-size: 11px; color: var(--text-muted);">Streak</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Bookmarked Questions -->
             <div class="card" id="bookmarksCard" style="display: none;">
                 <div class="card-header">
@@ -2206,8 +2252,11 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
                 currentStreak = 0;
             }
 
-            document.getElementById('scoreDisplay').textContent = Math.round(score);
-            document.getElementById('streakDisplay').textContent = currentStreak;
+            // Safely update score and streak displays
+            const scoreEl = document.getElementById('scoreDisplay');
+            const streakEl = document.getElementById('streakDisplay');
+            if (scoreEl) scoreEl.textContent = Math.round(score);
+            if (streakEl) streakEl.textContent = currentStreak;
 
             // Mark options
             const options = document.querySelectorAll('.option');
@@ -2230,83 +2279,130 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         function showExplanation(question, isCorrect) {
             const panel = document.getElementById('explanationPanel');
             const resultBadge = document.getElementById('resultBadge');
+            const resultIcon = document.getElementById('resultIcon');
+            const resultText = document.getElementById('resultText');
+            const explanationText = document.getElementById('explanationText');
             
-            resultBadge.className = `result-badge ${isCorrect ? 'correct' : 'incorrect'}`;
-            document.getElementById('resultIcon').textContent = isCorrect ? '✓' : '✗';
-            document.getElementById('resultText').textContent = isCorrect ? 'Correct!' : 'Incorrect';
-
-            document.getElementById('explanationText').textContent = question.explanation;
+            // Safely update result badge
+            if (resultBadge) {
+                resultBadge.className = `result-badge ${isCorrect ? 'correct' : 'incorrect'}`;
+            }
+            if (resultIcon) {
+                resultIcon.textContent = isCorrect ? '✓' : '✗';
+            }
+            if (resultText) {
+                resultText.textContent = isCorrect ? 'Correct!' : 'Incorrect';
+            }
+            if (explanationText) {
+                explanationText.textContent = question.explanation || '';
+            }
 
             // Render WHY chain
             const whyItems = document.getElementById('whyItems');
-            whyItems.innerHTML = '';
-            if (question.whyChain && question.whyChain.length > 0) {
-                question.whyChain.forEach((item, i) => {
-                    const whyEl = document.createElement('div');
-                    whyEl.className = 'why-item';
-                    whyEl.id = `why-item-${i}`;
-                    whyEl.innerHTML = `
-                        <div class="why-question">WHY: ${item.why}</div>
-                        <div class="why-answer">${item.answer}</div>
-                        ${item.source ? `<div class="why-source">📚 ${item.source}</div>` : ''}
-                    `;
-                    whyItems.appendChild(whyEl);
-                });
-                document.getElementById('revealWhyBtn').style.display = 'block';
-                whyRevealIndex = 0;
-            } else {
-                document.getElementById('revealWhyBtn').style.display = 'none';
+            if (whyItems) {
+                whyItems.innerHTML = '';
+                if (question.whyChain && question.whyChain.length > 0) {
+                    question.whyChain.forEach((item, i) => {
+                        const whyEl = document.createElement('div');
+                        whyEl.className = 'why-item';
+                        whyEl.id = `why-item-${i}`;
+                        whyEl.innerHTML = `
+                            <div class="why-question">WHY: ${item.why}</div>
+                            <div class="why-answer">${item.answer}</div>
+                            ${item.source ? `<div class="why-source">📚 ${item.source}</div>` : ''}
+                        `;
+                        whyItems.appendChild(whyEl);
+                    });
+                    const revealBtn = document.getElementById('revealWhyBtn');
+                    if (revealBtn) revealBtn.style.display = 'block';
+                    whyRevealIndex = 0;
+                } else {
+                    const revealBtn = document.getElementById('revealWhyBtn');
+                    if (revealBtn) revealBtn.style.display = 'none';
+                }
             }
 
             // MechanismDx link
-            if (question.remediation) {
-                const link = document.getElementById('mechanismLink');
-                link.href = question.remediation.link || '#';
-                document.getElementById('mechanismLinkDesc').textContent = question.remediation.title || 'Review this topic';
-                link.style.display = 'flex';
-            } else {
-                document.getElementById('mechanismLink').style.display = 'none';
+            const mechanismLink = document.getElementById('mechanismLink');
+            if (mechanismLink) {
+                if (question.remediation) {
+                    mechanismLink.href = question.remediation.link || '#';
+                    const linkDesc = document.getElementById('mechanismLinkDesc');
+                    if (linkDesc) linkDesc.textContent = question.remediation.title || 'Review this topic';
+                    mechanismLink.style.display = 'flex';
+                } else {
+                    mechanismLink.style.display = 'none';
+                }
             }
 
-            // Render sources
+            // Render sources - handle both string and object formats
             const sourcesList = document.getElementById('sourcesList');
-            sourcesList.innerHTML = '';
-            if (question.sources) {
-                question.sources.forEach(src => {
-                    const srcEl = document.createElement('div');
-                    srcEl.className = 'source-item';
-                    srcEl.textContent = src;
-                    sourcesList.appendChild(srcEl);
-                });
+            if (sourcesList) {
+                sourcesList.innerHTML = '';
+                if (question.sources && question.sources.length > 0) {
+                    question.sources.forEach(src => {
+                        const srcEl = document.createElement('div');
+                        srcEl.className = 'source-item';
+                        // Handle both string sources and object sources {text, url}
+                        if (typeof src === 'string') {
+                            srcEl.textContent = src;
+                        } else if (src && typeof src === 'object') {
+                            if (src.url) {
+                                const link = document.createElement('a');
+                                link.href = src.url;
+                                link.target = '_blank';
+                                link.rel = 'noopener noreferrer';
+                                link.textContent = src.text || src.url;
+                                link.style.color = 'var(--accent-text)';
+                                srcEl.appendChild(link);
+                            } else {
+                                srcEl.textContent = src.text || '';
+                            }
+                        }
+                        sourcesList.appendChild(srcEl);
+                    });
+                }
             }
 
-            panel.classList.add('visible');
-            document.getElementById('submitBtn').style.display = 'none';
-            document.getElementById('hintBtn').style.display = 'none';
-            document.querySelector('.hint-container').style.display = 'none';
+            if (panel) panel.classList.add('visible');
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const hintBtn = document.getElementById('hintBtn');
+            const hintContainer = document.querySelector('.hint-container');
+            
+            if (submitBtn) submitBtn.style.display = 'none';
+            if (hintBtn) hintBtn.style.display = 'none';
+            if (hintContainer) hintContainer.style.display = 'none';
         }
 
         function revealNextWhy() {
             const layer = deepDiveData.layers[currentLayerIndex];
             const question = layer.questions[currentQuestionIndex];
 
-            if (whyRevealIndex < question.whyChain.length) {
+            if (question.whyChain && whyRevealIndex < question.whyChain.length) {
                 const whyEl = document.getElementById(`why-item-${whyRevealIndex}`);
-                whyEl.classList.add('revealed');
-                whyRevealIndex++;
+                if (whyEl) {
+                    whyEl.classList.add('revealed');
+                    whyRevealIndex++;
+                }
             }
 
-            if (whyRevealIndex >= question.whyChain.length) {
-                document.getElementById('revealWhyBtn').style.display = 'none';
+            if (!question.whyChain || whyRevealIndex >= question.whyChain.length) {
+                const revealBtn = document.getElementById('revealWhyBtn');
+                if (revealBtn) revealBtn.style.display = 'none';
             }
         }
 
         // ============ NAVIGATION ============
         function nextQuestion() {
             currentQuestionIndex++;
-            document.getElementById('submitBtn').style.display = 'block';
-            document.getElementById('hintBtn').style.display = 'block';
-            document.querySelector('.hint-container').style.display = 'flex';
+            const submitBtn = document.getElementById('submitBtn');
+            const hintBtn = document.getElementById('hintBtn');
+            const hintContainer = document.querySelector('.hint-container');
+            
+            if (submitBtn) submitBtn.style.display = 'block';
+            if (hintBtn) hintBtn.style.display = 'block';
+            if (hintContainer) hintContainer.style.display = 'flex';
             loadQuestion();
         }
 
