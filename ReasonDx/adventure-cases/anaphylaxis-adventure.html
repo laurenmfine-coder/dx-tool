@@ -5,6 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minutes to Act | Anaphylaxis Adventure | ReasonDx</title>
     <style>
+
+/* Multi-Theme Support */
+:root {
+    --bg: #0f172a; --bg-secondary: #1e293b; --card: #1e293b; --card-hover: #334155;
+    --card-border: #334155; --text: #f1f5f9; --text-secondary: #cbd5e1; --muted: #94a3b8;
+    --accent: #3b82f6; --accent-light: rgba(59,130,246,0.15);
+    --success: #22c55e; --success-light: rgba(34,197,94,0.15);
+    --warning: #f59e0b; --warning-light: rgba(245,158,11,0.15);
+    --danger: #ef4444; --danger-light: rgba(239,68,68,0.15);
+    --purple: #8b5cf6; --purple-light: rgba(139,92,246,0.15);
+}
+[data-theme="light"] {
+    --bg: #f8fafc; --bg-secondary: #ffffff; --card: #ffffff; --card-hover: #f1f5f9;
+    --card-border: #e2e8f0; --text: #0f172a; --text-secondary: #334155; --muted: #64748b;
+    --accent: #2563eb; --accent-light: rgba(37,99,235,0.1);
+    --success: #16a34a; --success-light: rgba(22,163,74,0.1);
+    --warning: #d97706; --warning-light: rgba(217,119,6,0.1);
+    --danger: #dc2626; --danger-light: rgba(220,38,38,0.1);
+    --purple: #7c3aed; --purple-light: rgba(124,58,237,0.1);
+}
+[data-theme="high-contrast"] {
+    --bg: #000; --bg-secondary: #1a1a1a; --card: #1a1a1a; --card-hover: #2a2a2a;
+    --card-border: #fff; --text: #fff; --text-secondary: #e0e0e0; --muted: #b0b0b0;
+    --accent: #00d4ff; --accent-light: rgba(0,212,255,0.2);
+    --success: #00ff88; --success-light: rgba(0,255,136,0.2);
+    --warning: #ffdd00; --warning-light: rgba(255,221,0,0.2);
+    --danger: #ff4444; --danger-light: rgba(255,68,68,0.2);
+    --purple: #cc88ff; --purple-light: rgba(204,136,255,0.2);
+}
+[data-theme="sepia"] {
+    --bg: #f4ecd8; --bg-secondary: #faf6eb; --card: #faf6eb; --card-hover: #f0e9d6;
+    --card-border: #d4c4a8; --text: #3d3425; --text-secondary: #5c4f3a; --muted: #8b7355;
+    --accent: #8b5a2b; --accent-light: rgba(139,90,43,0.15);
+    --success: #4a7c23; --success-light: rgba(74,124,35,0.15);
+    --warning: #b8860b; --warning-light: rgba(184,134,11,0.15);
+    --danger: #a52a2a; --danger-light: rgba(165,42,42,0.15);
+    --purple: #6b4c8a; --purple-light: rgba(107,76,138,0.15);
+}
+body { transition: background 0.3s, color 0.3s; }
+
         :root {
             --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9;
             --muted: #94A3B8; --accent: #DC2626; --success: #10B981;
@@ -80,9 +120,33 @@
         .symptom-severity.mild { background: rgba(245,158,11,0.2); color: #F59E0B; }
         .symptom-severity.moderate { background: rgba(249,115,22,0.2); color: #F97316; }
         .symptom-severity.severe { background: rgba(220,38,38,0.2); color: #DC2626; }
-    </style>
+    
+/* Assessment Question Styling */
+.assessment-box { background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(139,92,246,0.1)); border: 2px solid var(--accent); border-radius: 12px; padding: 20px; margin: 20px 0; }
+.assessment-header { font-weight: 700; font-size: 1.1rem; color: var(--accent); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.assessment-question { font-size: 1rem; margin-bottom: 16px; color: var(--text); }
+.assessment-options { display: flex; flex-direction: column; gap: 10px; }
+.assessment-option { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--card); border: 2px solid var(--card-border); border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+.assessment-option:hover { border-color: var(--accent); background: var(--accent-light); }
+.assessment-option input { display: none; }
+.assessment-option.selected { border-color: var(--accent); background: var(--accent-light); }
+.assessment-option.correct { border-color: var(--success); background: var(--success-light); }
+.assessment-option.incorrect { border-color: var(--danger); background: var(--danger-light); }
+.assessment-feedback { margin-top: 16px; padding: 12px 16px; border-radius: 8px; font-size: 0.9rem; }
+.assessment-feedback.correct { background: var(--success-light); border: 1px solid var(--success); color: var(--success); }
+.assessment-feedback.incorrect { background: var(--danger-light); border: 1px solid var(--danger); color: var(--danger); }
+
+</style>
 </head>
 <body>
+
+<div style="position: fixed; top: 10px; right: 10px; z-index: 9999; display: flex; gap: 6px; background: rgba(0,0,0,0.5); padding: 8px 12px; border-radius: 20px;">
+    <button onclick="document.body.setAttribute('data-theme','dark')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #1e293b; cursor: pointer;" title="Dark"></button>
+    <button onclick="document.body.setAttribute('data-theme','light')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #f8fafc; cursor: pointer;" title="Light"></button>
+    <button onclick="document.body.setAttribute('data-theme','high-contrast')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #000; cursor: pointer;" title="High Contrast"></button>
+    <button onclick="document.body.setAttribute('data-theme','sepia')" style="width: 24px; height: 24px; border-radius: 50%; border: 2px solid #fff; background: #f4ecd8; cursor: pointer;" title="Sepia"></button>
+</div>
+
     <header class="header">
         <div class="header-row">
             <div class="header-title">
@@ -165,12 +229,33 @@
                             </div>
                         </div>
 
-                        <div class="alert danger">
-                            <span class="alert-icon">🚨</span>
-                            <div>
-                                <div class="alert-title">Clinical Recognition</div>
-                                <div class="alert-desc">Acute onset after allergen exposure + skin findings + respiratory involvement = ANAPHYLAXIS. This is a medical emergency.</div>
+                        
+                        <div class="assessment-box">
+                            <div class="assessment-header">❓ Clinical Assessment</div>
+                            <div class="assessment-question">Based on the presentation, what is your working diagnosis?</div>
+                            <div class="assessment-options">
+                                <label class="assessment-option" onclick="checkAnswer(this, true)">
+                                    <input type="radio" name="dx1">
+                                    <span>Anaphylaxis</span>
+                                </label>
+                                <label class="assessment-option" onclick="checkAnswer(this, false)">
+                                    <input type="radio" name="dx1">
+                                    <span>Allergic rhinitis with asthma</span>
+                                </label>
+                                <label class="assessment-option" onclick="checkAnswer(this, false)">
+                                    <input type="radio" name="dx1">
+                                    <span>Panic attack with urticaria</span>
+                                </label>
+                                <label class="assessment-option" onclick="checkAnswer(this, false)">
+                                    <input type="radio" name="dx1">
+                                    <span>Isolated angioedema</span>
+                                </label>
+                                <label class="assessment-option" onclick="checkAnswer(this, false)">
+                                    <input type="radio" name="dx1">
+                                    <span>Vocal cord dysfunction</span>
+                                </label>
                             </div>
+                            <div class="assessment-feedback" style="display:none;"></div>
                         </div>
 
                         <p style="margin-bottom: 16px;">The mother says: "She has a peanut allergy - we always carry her EpiPen!" She's frantically searching her purse.</p>
@@ -539,10 +624,84 @@
         startTimer();
         render();
     });
-    </script>
+    
+
+function checkAnswer(el, isCorrect) {
+    const box = el.closest('.assessment-box');
+    const options = box.querySelectorAll('.assessment-option');
+    const feedback = box.querySelector('.assessment-feedback');
+    
+    // Disable all options
+    options.forEach(opt => {
+        opt.style.pointerEvents = 'none';
+        opt.classList.remove('selected');
+    });
+    
+    // Mark selected
+    el.classList.add('selected');
+    el.classList.add(isCorrect ? 'correct' : 'incorrect');
+    
+    // Show correct answer if wrong
+    if (!isCorrect) {
+        options.forEach(opt => {
+            if (opt.getAttribute('onclick').includes('true')) {
+                opt.classList.add('correct');
+            }
+        });
+    }
+    
+    // Show feedback
+    feedback.style.display = 'block';
+    feedback.className = 'assessment-feedback ' + (isCorrect ? 'correct' : 'incorrect');
+    feedback.innerHTML = isCorrect ? 
+        '✓ Correct! This presentation meets diagnostic criteria.' : 
+        '✗ Not quite. Review the clinical features and diagnostic criteria.';
+}
+
+</script>
 
 <!-- REASONDX ENHANCED LEARNING -->
 <style>
+
+/* Multi-Theme Support */
+:root {
+    --bg: #0f172a; --bg-secondary: #1e293b; --card: #1e293b; --card-hover: #334155;
+    --card-border: #334155; --text: #f1f5f9; --text-secondary: #cbd5e1; --muted: #94a3b8;
+    --accent: #3b82f6; --accent-light: rgba(59,130,246,0.15);
+    --success: #22c55e; --success-light: rgba(34,197,94,0.15);
+    --warning: #f59e0b; --warning-light: rgba(245,158,11,0.15);
+    --danger: #ef4444; --danger-light: rgba(239,68,68,0.15);
+    --purple: #8b5cf6; --purple-light: rgba(139,92,246,0.15);
+}
+[data-theme="light"] {
+    --bg: #f8fafc; --bg-secondary: #ffffff; --card: #ffffff; --card-hover: #f1f5f9;
+    --card-border: #e2e8f0; --text: #0f172a; --text-secondary: #334155; --muted: #64748b;
+    --accent: #2563eb; --accent-light: rgba(37,99,235,0.1);
+    --success: #16a34a; --success-light: rgba(22,163,74,0.1);
+    --warning: #d97706; --warning-light: rgba(217,119,6,0.1);
+    --danger: #dc2626; --danger-light: rgba(220,38,38,0.1);
+    --purple: #7c3aed; --purple-light: rgba(124,58,237,0.1);
+}
+[data-theme="high-contrast"] {
+    --bg: #000; --bg-secondary: #1a1a1a; --card: #1a1a1a; --card-hover: #2a2a2a;
+    --card-border: #fff; --text: #fff; --text-secondary: #e0e0e0; --muted: #b0b0b0;
+    --accent: #00d4ff; --accent-light: rgba(0,212,255,0.2);
+    --success: #00ff88; --success-light: rgba(0,255,136,0.2);
+    --warning: #ffdd00; --warning-light: rgba(255,221,0,0.2);
+    --danger: #ff4444; --danger-light: rgba(255,68,68,0.2);
+    --purple: #cc88ff; --purple-light: rgba(204,136,255,0.2);
+}
+[data-theme="sepia"] {
+    --bg: #f4ecd8; --bg-secondary: #faf6eb; --card: #faf6eb; --card-hover: #f0e9d6;
+    --card-border: #d4c4a8; --text: #3d3425; --text-secondary: #5c4f3a; --muted: #8b7355;
+    --accent: #8b5a2b; --accent-light: rgba(139,90,43,0.15);
+    --success: #4a7c23; --success-light: rgba(74,124,35,0.15);
+    --warning: #b8860b; --warning-light: rgba(184,134,11,0.15);
+    --danger: #a52a2a; --danger-light: rgba(165,42,42,0.15);
+    --purple: #6b4c8a; --purple-light: rgba(107,76,138,0.15);
+}
+body { transition: background 0.3s, color 0.3s; }
+
 .rdx-box {max-width:900px;margin:30px auto;padding:20px;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
 .why-chain {background:linear-gradient(135deg,rgba(124,58,237,0.08),rgba(139,92,246,0.12));border:1px solid rgba(124,58,237,0.25);border-radius:12px;padding:20px;margin:20px 0}
 .why-title {font-weight:700;color:#7C3AED;margin-bottom:16px;font-size:1.1rem}
