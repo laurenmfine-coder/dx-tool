@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Sweet Problem | ReasonDx Adventure</title>
+    <style>
+        :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #EC4899; --success: #10B981; --warning: #F59E0B; --danger: #DC2626; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #9D174D 0%, #EC4899 100%); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .difficulty-toggle { display: flex; background: rgba(0,0,0,0.3); border-radius: 8px; }
+        .diff-btn { padding: 6px 12px; font-size: 0.75rem; cursor: pointer; border: none; background: transparent; color: rgba(255,255,255,0.7); font-weight: 600; }
+        .diff-btn.active { background: rgba(255,255,255,0.2); color: white; }
+        .stat { text-align: center; background: rgba(0,0,0,0.2); padding: 6px 14px; border-radius: 8px; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; }
+        .main { max-width: 900px; margin: 0 auto; padding: 24px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: rgba(236,72,153,0.1); border-left: 4px solid var(--accent); padding: 20px; border-radius: 0 12px 12px 0; margin-bottom: 20px; }
+        .narrative .hl { background: rgba(236,72,153,0.3); padding: 2px 6px; border-radius: 4px; }
+        .setup-screen { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; }
+        .start-btn { background: var(--accent); color: white; border: none; padding: 16px 48px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+        .hint { background: rgba(59,130,246,0.15); padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; color: #93C5FD; }
+        .radio-options { display: flex; flex-direction: column; gap: 10px; }
+        .radio-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .radio-option.selected { border-color: var(--accent); background: rgba(236,72,153,0.15); }
+        .radio-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .radio-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .radio-circle { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 50%; }
+        .radio-option.selected .radio-circle { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 40%, transparent 40%); }
+        .feedback { padding: 20px; border-radius: 12px; margin: 20px 0; }
+        .feedback.excellent { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .feedback.incorrect { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn:disabled { opacity: 0.5; }
+        .btn-row { display: flex; gap: 12px; margin-top: 24px; }
+        .btn-link { background: transparent; border: 2px solid var(--border); color: var(--text); }
+        .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 12px; margin: 20px 0; }
+        .vital { background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; text-align: center; }
+        .vital.critical { background: rgba(220,38,38,0.2); border: 1px solid rgba(220,38,38,0.4); }
+        .vital-label { font-size: 0.7rem; color: var(--muted); }
+        .vital-value { font-size: 1.3rem; font-weight: 700; font-family: monospace; }
+        .lab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px; margin: 16px 0; }
+        .lab-item { display: flex; justify-content: space-between; padding: 8px 12px; background: rgba(0,0,0,0.2); border-radius: 6px; }
+        .lab-name { color: var(--muted); }
+        .lab-value { font-family: monospace; font-weight: 600; }
+        .lab-value.critical { color: var(--danger); }
+        .score-summary { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 24px; margin: 24px auto; max-width: 600px; }
+        .score-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .pearls-box { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); border-radius: 12px; padding: 20px; margin-top: 20px; }
+        .pearls-title { font-weight: 700; color: var(--success); margin-bottom: 12px; }
+        .pearl-item { padding: 8px 0; border-bottom: 1px solid rgba(16,185,129,0.2); font-size: 0.95rem; }
+        .cross-link { background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.3); border-radius: 8px; padding: 12px 16px; margin-top: 12px; }
+        .cross-link a { color: #C4B5FD; text-decoration: none; margin-right: 16px; }
+        .progress-bar { background: rgba(255,255,255,0.1); border-radius: 10px; height: 8px; margin: 20px 0; }
+        .progress-fill { background: var(--accent); height: 100%; }
+        .question-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .question-number { background: var(--accent); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-row">
+            <div style="font-weight:600">🍬 The Sweet Problem</div>
+            <div style="display:flex;gap:12px;align-items:center">
+                <div class="difficulty-toggle">
+                    <button class="diff-btn active" onclick="setDiff('easy')">Easy</button>
+                    <button class="diff-btn" onclick="setDiff('int')">Intermediate</button>
+                    <button class="diff-btn" onclick="setDiff('adv')">Advanced</button>
+                </div>
+                <div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Points</div></div>
+            </div>
+        </div>
+    </header>
+    <main class="main"><div id="app"></div></main>
+<script>
+const S = {stage:'setup', score:0, max:0, diff:'easy', q:0, total:8};
+const C = {
+    easy: {age:'22F',wt:'60kg',hx:'T1DM, missed insulin 2 days',exam:'Fruity breath, Kussmaul respirations',
+        vitals:{HR:'118',BP:'98/62',RR:'28'},labs:{Glu:'486',pH:'7.18',HCO3:'8',K:'5.8',AG:'24'}},
+    int: {age:'45M',wt:'85kg',hx:'New diagnosis, BMI 34',exam:'Obtunded, tachypneic',
+        vitals:{HR:'108',BP:'88/52',RR:'24'},labs:{Glu:'842',pH:'7.28',HCO3:'14',K:'4.2',AG:'18'}},
+    adv: {age:'68M',wt:'70kg',hx:'T2DM, CKD3, found unresponsive',exam:'Unresponsive, JVD',
+        vitals:{HR:'52',BP:'78/40',RR:'12'},labs:{Glu:'38',pH:'7.08',HCO3:'6',K:'7.2',AG:'28'}}
+};
+const Q = [
+    {t:'Diagnosis',q:'Hyperglycemia + acidosis + ketones + elevated AG =?',h:'Classic triad.',
+     o:[{id:'dka',txt:'Diabetic Ketoacidosis (DKA)',c:1,p:100},{id:'hhs',txt:'HHS',c:0,p:30},{id:'lac',txt:'Lactic acidosis',c:0,p:10}],
+     fb:{1:'<b>Correct!</b> DKA = Hyperglycemia + Ketosis + AG metabolic acidosis.',0:'<b>Review:</b> HHS has minimal ketones. This has significant ketosis = DKA.'}},
+    {t:'DKA Criteria',q:'Which defines DKA?',h:'Three key findings.',
+     o:[{id:'a',txt:'Glucose >250 + pH <7.3 or HCO3 <18 + Ketones',c:1,p:100},{id:'b',txt:'Glucose >500 alone',c:0,p:0},{id:'c',txt:'Glucose >400 + Ketones only',c:0,p:30}],
+     fb:{1:'<b>Correct!</b> DKA: Glucose >250 + pH <7.3/HCO3 <18 + Ketones + AG >12.',0:'<b>Need all three:</b> Hyperglycemia + Acidosis + Ketosis.'}},
+    {t:'Severity',q:c=>`pH ${c.labs.pH}. What severity?`,h:'Mild 7.25-7.3, Moderate 7.0-7.24, Severe <7.0',
+     o:[{id:'sev',txt:'Severe (<7.0)',c:0,p:0},{id:'mod',txt:'Moderate (7.0-7.24)',c:0,p:0},{id:'mild',txt:'Mild (7.25-7.3)',c:0,p:0}],
+     dyn:c=>{const ph=parseFloat(c.labs.pH);return ph<7?'sev':ph<7.25?'mod':'mild';},
+     fb:{1:'<b>Correct!</b> Severity guides ICU admission.',0:'<b>By pH:</b> <7.0=severe, 7.0-7.24=moderate, 7.25-7.3=mild.'}},
+    {t:'First Priority',q:'What is FIRST treatment?',h:'Volume depletion is massive.',
+     o:[{id:'f',txt:'IV fluid resuscitation (NS)',c:1,p:100},{id:'i',txt:'IV insulin bolus',c:0,p:20},{id:'b',txt:'Sodium bicarbonate',c:0,p:0},{id:'k',txt:'IV potassium first',c:0,p:30}],
+     fb:{1:'<b>FLUIDS FIRST!</b> 5-10L deficit. 15-20 mL/kg NS in first hour. Fluids → K assessment → Insulin.',0:'<b>Order:</b> FLUIDS → K+ check → INSULIN. Never insulin before fluids!'}},
+    {t:'Potassium Rules',q:c=>`K+ is ${c.labs.K}. When to give K+?`,h:'Insulin drives K into cells.',
+     o:[{id:'hold',txt:'Hold K+ until <5.2, then add to fluids',c:0,p:0},{id:'add',txt:'Add 20-40 mEq/L to fluids with insulin',c:0,p:0},{id:'bef',txt:'Give K+ BEFORE insulin (K<3.3)',c:0,p:0}],
+     dyn:c=>{const k=parseFloat(c.labs.K);return k>5.2?'hold':k<3.3?'bef':'add';},
+     fb:{1:'<b>Correct!</b> K<3.3→hold insulin; 3.3-5.2→add to fluids; >5.2→hold K.',0:'<b>K rules:</b> Even normal K means depletion. K<3.3 = HOLD insulin!'}},
+    {t:'Insulin Dosing',q:'Correct IV insulin regimen?',h:'Low-dose is standard.',
+     o:[{id:'a',txt:'0.1 U/kg/hr infusion (or 0.14 without bolus)',c:1,p:100},{id:'b',txt:'10U bolus then 1U/hr',c:0,p:30},{id:'c',txt:'SubQ sliding scale',c:0,p:0}],
+     fb:{1:'<b>Correct!</b> 0.1-0.14 U/kg/hr. Target drop 50-75 mg/dL/hr.',0:'<b>Modern:</b> Low-dose IV (0.1-0.14 U/kg/hr). SubQ doesn\'t work in DKA.'}},
+    {t:'Dextrose Switch',q:'When to add D5 to fluids?',h:'Continue insulin but prevent hypoglycemia.',
+     o:[{id:'a',txt:'When glucose reaches 200-250',c:1,p:100},{id:'b',txt:'When glucose <400',c:0,p:30},{id:'c',txt:'When glucose normalizes',c:0,p:0}],
+     fb:{1:'<b>Correct!</b> Add D5 at 200-250 to continue insulin (clear ketones) without hypoglycemia.',0:'<b>Key:</b> Gap must close, not just glucose. Continue insulin + add dextrose.'}},
+    {t:'Resolution',q:'DKA resolved when?',h:'Not just glucose!',
+     o:[{id:'a',txt:'AG <12 + pH >7.3 + HCO3 >18 + Glucose <200',c:1,p:100},{id:'b',txt:'Glucose <200 alone',c:0,p:20},{id:'c',txt:'Negative ketones',c:0,p:30}],
+     fb:{1:'<b>Correct!</b> ALL criteria + patient eating. Then overlap SubQ 1-2hr before stopping IV.',0:'<b>All four:</b> AG + pH + HCO3 + Glucose. Glucose normalizes first but ketoacidosis may persist.'}}
+];
+
+function setDiff(d) {
+    S.diff = d;
+    document.querySelectorAll('.diff-btn').forEach((b,i)=>b.classList.toggle('active',['easy','int','adv'][i]===d));
+    if(S.stage!=='setup'){S.stage='setup';S.score=0;S.max=0;S.q=0;document.getElementById('score').textContent='0';}
+    render();
+}
+function addPts(p,m){S.score+=p;S.max+=m;document.getElementById('score').textContent=S.score;}
+
+let sel=null;
+function pick(id){sel=id;document.querySelectorAll('.radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id));document.getElementById('sub').disabled=false;}
+
+function submit(){
+    const q=Q[S.q-1],c=C[S.diff];
+    let opts=q.o;
+    if(q.dyn){const corr=q.dyn(c);opts=opts.map(o=>({...o,c:o.id===corr?1:0,p:o.id===corr?100:o.p||0}));}
+    const opt=opts.find(o=>o.id===sel);
+    addPts(opt.p,100);
+    document.querySelectorAll('.radio-option').forEach(o=>{
+        const op=opts.find(x=>x.id===o.dataset.id);
+        if(op.c)o.classList.add('correct');
+        else if(o.dataset.id===sel)o.classList.add('incorrect');
+    });
+    document.getElementById('fb').innerHTML=`<div class="feedback ${opt.c?'excellent':'incorrect'}">${q.fb[opt.c?1:0]}</div>`;
+    document.getElementById('sub').textContent=S.q<S.total?'Next →':'Results →';
+    document.getElementById('sub').onclick=next;
+}
+
+function next(){if(S.q<S.total){S.q++;sel=null;render();}else{S.stage='outcome';render();}}
+function start(){S.q=1;S.stage='question';render();}
+function go(s){S.stage=s;render();}
+
+function render(){
+    const c=C[S.diff];
+    if(S.stage==='setup'){
+        document.getElementById('app').innerHTML=`
+        <div class="setup-screen">
+            <h1>🍬 The Sweet Problem</h1>
+            <p style="color:var(--muted);margin-bottom:32px">DKA: Diagnosis, Fluids, Insulin, Electrolytes</p>
+            <div style="background:rgba(236,72,153,0.1);border-radius:12px;padding:20px;text-align:left;margin:20px 0">
+                <div style="font-weight:600">Topics: DKA criteria, AG calculation, severity, fluid/K+/insulin management, resolution</div>
+            </div>
+            <button class="start-btn" onclick="go('pres')">Begin Case →</button>
+        </div>`;
+    } else if(S.stage==='pres'){
+        document.getElementById('app').innerHTML=`
+        <div class="card">
+            <div class="card-header"><div class="card-phase">Presentation</div><div class="card-title">🚑 Metabolic Emergency</div></div>
+            <div class="card-body">
+                <div class="narrative"><span class="hl">${c.age}</span> (${c.wt})<br><b>History:</b> ${c.hx}<br><b>Exam:</b> ${c.exam}</div>
+                <div class="vitals-grid">
+                    <div class="vital ${parseInt(c.vitals.HR)>100?'critical':''}"><div class="vital-label">HR</div><div class="vital-value">${c.vitals.HR}</div></div>
+                    <div class="vital ${parseInt(c.vitals.BP)<90?'critical':''}"><div class="vital-label">BP</div><div class="vital-value">${c.vitals.BP}</div></div>
+                    <div class="vital"><div class="vital-label">RR</div><div class="vital-value">${c.vitals.RR}</div></div>
+                </div>
+                <div class="lab-grid">
+                    <div class="lab-item"><span class="lab-name">Glucose</span><span class="lab-value critical">${c.labs.Glu}</span></div>
+                    <div class="lab-item"><span class="lab-name">pH</span><span class="lab-value critical">${c.labs.pH}</span></div>
+                    <div class="lab-item"><span class="lab-name">HCO3</span><span class="lab-value critical">${c.labs.HCO3}</span></div>
+                    <div class="lab-item"><span class="lab-name">K+</span><span class="lab-value">${c.labs.K}</span></div>
+                    <div class="lab-item"><span class="lab-name">AG</span><span class="lab-value">${c.labs.AG}</span></div>
+                </div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="start()">Begin Assessment →</button></div>
+            </div>
+        </div>`;
+    } else if(S.stage==='question'){
+        const q=Q[S.q-1];
+        const qTxt=typeof q.q==='function'?q.q(c):q.q;
+        let opts=q.o;
+        if(q.dyn){const corr=q.dyn(c);opts=opts.map(o=>({...o,c:o.id===corr?1:0}));}
+        document.getElementById('app').innerHTML=`
+        <div class="card">
+            <div class="card-header"><div class="card-phase">Q${S.q}/${S.total}</div><div class="card-title">🔍 ${q.t}</div></div>
+            <div class="card-body">
+                <div class="progress-bar"><div class="progress-fill" style="width:${S.q/S.total*100}%"></div></div>
+                <div class="question-header"><div class="question-number">${S.q}</div><div style="font-weight:600">${qTxt}</div></div>
+                <div class="hint">💡 ${q.h}</div>
+                <div class="radio-options">
+                    ${opts.map(o=>`<div class="radio-option" data-id="${o.id}" onclick="pick('${o.id}')"><div class="radio-circle"></div><div><b>${o.txt}</b></div></div>`).join('')}
+                </div>
+                <div id="fb"></div>
+                <div class="btn-row"><button class="btn btn-primary" id="sub" onclick="submit()" disabled>Submit →</button></div>
+            </div>
+        </div>`;
+    } else if(S.stage==='outcome'){
+        const pct=S.max>0?Math.round(S.score/S.max*100):0;
+        document.getElementById('app').innerHTML=`
+        <div class="card"><div class="card-body">
+            <div style="text-align:center;padding:40px">
+                <div style="font-size:4rem">${pct>=70?'🎉':'📚'}</div>
+                <div style="font-size:2rem;font-weight:700;color:${pct>=70?'var(--success)':'var(--warning)'}">${pct>=70?'Complete!':'Review Needed'}</div>
+            </div>
+            <div class="score-summary">
+                <div class="score-row"><span>Score</span><span>${S.score}/${S.max} (${pct}%)</span></div>
+            </div>
+            <div class="pearls-box">
+                <div class="pearls-title">📌 DKA Pearls</div>
+                <div class="pearl-item"><b>Criteria:</b> Glucose >250 + pH <7.3/HCO3 <18 + Ketones + AG >12</div>
+                <div class="pearl-item"><b>Order:</b> FLUIDS → K+ assessment → INSULIN</div>
+                <div class="pearl-item"><b>K+ rules:</b> <3.3=hold insulin; 3.3-5.2=add to fluids; >5.2=hold K+</div>
+                <div class="pearl-item"><b>Insulin:</b> 0.1 U/kg/hr. Target drop 50-75/hr</div>
+                <div class="pearl-item"><b>D5 switch:</b> At glucose 200-250</div>
+                <div class="pearl-item"><b>Resolution:</b> AG <12 + pH >7.3 + HCO3 >18 + Glucose <200</div>
+            </div>
+            <div class="cross-link"><a href="../mechanism/diabetes-dka-module.html">MechanismDx: DKA</a></div>
+            <div class="btn-row" style="justify-content:center;margin-top:30px">
+                <button class="btn btn-primary" onclick="location.reload()">Retry</button>
+                <button class="btn btn-link" onclick="location.href='adventure-hub.html'">Back</button>
+            </div>
+        </div></div>`;
+    }
+}
+document.addEventListener('DOMContentLoaded',render);
+</script>
+</body>
+</html>

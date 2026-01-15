@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinical Adventures | ReasonDx</title>
+    <style>
+        :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #3B82F6; --success: #10B981; --warning: #F59E0B; --danger: #DC2626; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%); padding: 24px; text-align: center; }
+        .header h1 { font-size: 2.5rem; margin-bottom: 8px; }
+        .header p { color: rgba(255,255,255,0.8); font-size: 1.1rem; }
+        .main { max-width: 1400px; margin: 0 auto; padding: 32px 24px; }
+        
+        .stats-bar { display: flex; gap: 16px; justify-content: center; margin-bottom: 32px; flex-wrap: wrap; }
+        .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px 24px; text-align: center; min-width: 140px; }
+        .stat-value { font-size: 2rem; font-weight: 700; color: var(--accent); }
+        .stat-label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; }
+        
+        .category { margin-bottom: 40px; }
+        .category-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
+        .category-icon { font-size: 1.5rem; }
+        .category-title { font-size: 1.5rem; font-weight: 700; }
+        .category-count { background: var(--accent); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }
+        
+        .cases-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+        
+        .case-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: all 0.2s; cursor: pointer; text-decoration: none; color: inherit; }
+        .case-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+        
+        .case-banner { height: 8px; }
+        .case-body { padding: 20px; }
+        .case-emoji { font-size: 2rem; margin-bottom: 8px; }
+        .case-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
+        .case-subtitle { font-size: 0.85rem; color: var(--muted); margin-bottom: 12px; }
+        .case-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+        .tag { background: rgba(255,255,255,0.1); padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; color: var(--muted); }
+        
+        .em .case-banner { background: linear-gradient(90deg, #DC2626, #EF4444); }
+        .em .case-card:hover { border-color: #EF4444; }
+        
+        .ai .case-banner { background: linear-gradient(90deg, #7C3AED, #A855F7); }
+        .ai .case-card:hover { border-color: #A855F7; }
+        
+        .derm .case-banner { background: linear-gradient(90deg, #EA580C, #F97316); }
+        .derm .case-card:hover { border-color: #F97316; }
+
+        .search-bar { max-width: 500px; margin: 0 auto 32px; }
+        .search-input { width: 100%; padding: 14px 20px; border-radius: 12px; border: 2px solid var(--border); background: var(--card); color: var(--text); font-size: 1rem; }
+        .search-input:focus { outline: none; border-color: var(--accent); }
+        .search-input::placeholder { color: var(--muted); }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.8rem; }
+            .cases-grid { grid-template-columns: 1fr; }
+            .stats-bar { gap: 8px; }
+            .stat-card { min-width: 100px; padding: 12px 16px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>🏥 Clinical Adventures</h1>
+        <p>Interactive case-based learning for clinical excellence</p>
+    </header>
+    
+    <main class="main">
+        <div class="stats-bar">
+            <div class="stat-card">
+                <div class="stat-value">50</div>
+                <div class="stat-label">Total Cases</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">35</div>
+                <div class="stat-label">EM/Medicine</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">13</div>
+                <div class="stat-label">Allergy/Immunology</div>
+            </div>
+        </div>
+
+        <div class="search-bar">
+            <input type="text" class="search-input" placeholder="🔍 Search cases by topic, diagnosis, or keyword..." oninput="filterCases(this.value)">
+        </div>
+
+        <!-- Emergency Medicine / Acute Care -->
+        <section class="category em">
+            <div class="category-header">
+                <span class="category-icon">🚨</span>
+                <span class="category-title">Emergency Medicine & Acute Care</span>
+                <span class="category-count">35 cases</span>
+            </div>
+            <div class="cases-grid">
+                <a href="sepsis-adventure.html" class="case-card" data-tags="sepsis sirs qsofa lactate infection shock">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🦠</div>
+                        <div class="case-title">The Nursing Home Transfer</div>
+                        <div class="case-subtitle">Sepsis recognition and management</div>
+                        <div class="case-tags"><span class="tag">Sepsis</span><span class="tag">qSOFA</span><span class="tag">SEP-1</span></div>
+                    </div>
+                </a>
+                
+                <a href="pe-adventure.html" class="case-card" data-tags="pe pulmonary embolism wells d-dimer ctpa dvt">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🫁</div>
+                        <div class="case-title">The Runner</div>
+                        <div class="case-subtitle">Pulmonary embolism workup</div>
+                        <div class="case-tags"><span class="tag">PE</span><span class="tag">Wells</span><span class="tag">D-dimer</span></div>
+                    </div>
+                </a>
+                
+                <a href="dka-adventure.html" class="case-card" data-tags="dka diabetic ketoacidosis diabetes insulin">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🍬</div>
+                        <div class="case-title">The Sweet Problem</div>
+                        <div class="case-subtitle">DKA diagnosis and treatment</div>
+                        <div class="case-tags"><span class="tag">DKA</span><span class="tag">Insulin</span><span class="tag">Fluids</span></div>
+                    </div>
+                </a>
+                
+                <a href="gi-bleed-adventure.html" class="case-card" data-tags="gi bleed gastrointestinal hemorrhage melena">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🩸</div>
+                        <div class="case-title">The Morning Coffee</div>
+                        <div class="case-subtitle">Upper GI bleeding management</div>
+                        <div class="case-tags"><span class="tag">GI Bleed</span><span class="tag">Glasgow-Blatchford</span></div>
+                    </div>
+                </a>
+                
+                <a href="stroke-adventure.html" class="case-card" data-tags="stroke cva tpa thrombolysis nihss">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🧠</div>
+                        <div class="case-title">The Sudden Silence</div>
+                        <div class="case-subtitle">Acute stroke management</div>
+                        <div class="case-tags"><span class="tag">Stroke</span><span class="tag">NIHSS</span><span class="tag">tPA</span></div>
+                    </div>
+                </a>
+                
+                <a href="aki-adventure.html" class="case-card" data-tags="aki acute kidney injury creatinine fena">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🫘</div>
+                        <div class="case-title">The Numbers Game</div>
+                        <div class="case-subtitle">Acute kidney injury workup</div>
+                        <div class="case-tags"><span class="tag">AKI</span><span class="tag">FENa</span><span class="tag">Prerenal</span></div>
+                    </div>
+                </a>
+                
+                <a href="chest-pain-adventure.html" class="case-card" data-tags="acs chest pain mi troponin heart">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">💔</div>
+                        <div class="case-title">The Crushing Weight</div>
+                        <div class="case-subtitle">Acute coronary syndrome</div>
+                        <div class="case-tags"><span class="tag">ACS</span><span class="tag">HEART Score</span><span class="tag">Troponin</span></div>
+                    </div>
+                </a>
+                
+                <a href="anaphylaxis-adventure.html" class="case-card" data-tags="anaphylaxis epinephrine allergic reaction">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">⚡</div>
+                        <div class="case-title">The Restaurant Reaction</div>
+                        <div class="case-subtitle">Anaphylaxis recognition</div>
+                        <div class="case-tags"><span class="tag">Anaphylaxis</span><span class="tag">Epinephrine</span></div>
+                    </div>
+                </a>
+                
+                <a href="hyperkalemia-adventure.html" class="case-card" data-tags="hyperkalemia potassium ecg calcium insulin">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">⚡</div>
+                        <div class="case-title">The Dangerous Potassium</div>
+                        <div class="case-subtitle">Hyperkalemia management</div>
+                        <div class="case-tags"><span class="tag">Hyperkalemia</span><span class="tag">ECG</span><span class="tag">Calcium</span></div>
+                    </div>
+                </a>
+                
+                <a href="hyponatremia-adventure.html" class="case-card" data-tags="hyponatremia sodium siadh osmolality">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🧠</div>
+                        <div class="case-title">The Confused Elder</div>
+                        <div class="case-subtitle">Hyponatremia workup</div>
+                        <div class="case-tags"><span class="tag">Hyponatremia</span><span class="tag">SIADH</span><span class="tag">Osm</span></div>
+                    </div>
+                </a>
+                
+                <a href="meningitis-adventure.html" class="case-card" data-tags="meningitis csf lumbar puncture bacterial">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🧠</div>
+                        <div class="case-title">The Worst Headache</div>
+                        <div class="case-subtitle">Bacterial meningitis</div>
+                        <div class="case-tags"><span class="tag">Meningitis</span><span class="tag">CSF</span><span class="tag">Empiric Abx</span></div>
+                    </div>
+                </a>
+                
+                <a href="pneumonia-adventure.html" class="case-card" data-tags="pneumonia cap curb-65 antibiotics">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🫁</div>
+                        <div class="case-title">The Productive Cough</div>
+                        <div class="case-subtitle">Community-acquired pneumonia</div>
+                        <div class="case-tags"><span class="tag">CAP</span><span class="tag">CURB-65</span><span class="tag">Abx</span></div>
+                    </div>
+                </a>
+                
+                <a href="cellulitis-adventure.html" class="case-card" data-tags="cellulitis skin infection mrsa necrotizing">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🦵</div>
+                        <div class="case-title">The Red Leg</div>
+                        <div class="case-subtitle">Cellulitis vs necrotizing fasciitis</div>
+                        <div class="case-tags"><span class="tag">Cellulitis</span><span class="tag">MRSA</span><span class="tag">Nec Fasc</span></div>
+                    </div>
+                </a>
+                
+                <a href="pyelonephritis-adventure.html" class="case-card" data-tags="uti pyelonephritis kidney infection pyuria">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🔥</div>
+                        <div class="case-title">The Flank Pain</div>
+                        <div class="case-subtitle">Pyelonephritis management</div>
+                        <div class="case-tags"><span class="tag">Pyelo</span><span class="tag">UTI</span><span class="tag">Complicated</span></div>
+                    </div>
+                </a>
+                
+                <a href="alcohol-withdrawal-adventure.html" class="case-card" data-tags="alcohol withdrawal ciwa delirium tremens seizure">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🍺</div>
+                        <div class="case-title">The Shaking Patient</div>
+                        <div class="case-subtitle">Alcohol withdrawal syndrome</div>
+                        <div class="case-tags"><span class="tag">AWS</span><span class="tag">CIWA</span><span class="tag">Benzos</span></div>
+                    </div>
+                </a>
+                
+                <a href="heart-failure-adventure.html" class="case-card" data-tags="heart failure hfref chf gdmt diuretics">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">❤️</div>
+                        <div class="case-title">The Swollen Ankles</div>
+                        <div class="case-subtitle">Acute decompensated HF</div>
+                        <div class="case-tags"><span class="tag">ADHF</span><span class="tag">GDMT</span><span class="tag">Diuretics</span></div>
+                    </div>
+                </a>
+                
+                <a href="copd-adventure.html" class="case-card" data-tags="copd aecopd exacerbation niv steroids">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🌬️</div>
+                        <div class="case-title">The Blue Bloater</div>
+                        <div class="case-subtitle">COPD exacerbation</div>
+                        <div class="case-tags"><span class="tag">AECOPD</span><span class="tag">NIV</span><span class="tag">Steroids</span></div>
+                    </div>
+                </a>
+                
+                <a href="apap-overdose-adventure.html" class="case-card" data-tags="acetaminophen tylenol overdose nac toxicology">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">💊</div>
+                        <div class="case-title">The Empty Bottle</div>
+                        <div class="case-subtitle">Acetaminophen toxicity</div>
+                        <div class="case-tags"><span class="tag">APAP</span><span class="tag">NAC</span><span class="tag">Nomogram</span></div>
+                    </div>
+                </a>
+                
+                <a href="opioid-overdose-adventure.html" class="case-card" data-tags="opioid overdose naloxone narcan fentanyl">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">💉</div>
+                        <div class="case-title">The Unresponsive Patient</div>
+                        <div class="case-subtitle">Opioid overdose</div>
+                        <div class="case-tags"><span class="tag">Opioid</span><span class="tag">Naloxone</span><span class="tag">Harm Reduction</span></div>
+                    </div>
+                </a>
+                
+                <a href="cdiff-adventure.html" class="case-card" data-tags="cdiff clostridium difficile colitis diarrhea vancomycin">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🦠</div>
+                        <div class="case-title">The Antibiotic Aftermath</div>
+                        <div class="case-subtitle">C. difficile infection</div>
+                        <div class="case-tags"><span class="tag">CDI</span><span class="tag">Vancomycin</span><span class="tag">FMT</span></div>
+                    </div>
+                </a>
+                
+                <a href="thyroid-storm-adventure.html" class="case-card" data-tags="thyroid storm hyperthyroidism graves ptu">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🔥</div>
+                        <div class="case-title">The Racing Heart</div>
+                        <div class="case-subtitle">Thyroid storm</div>
+                        <div class="case-tags"><span class="tag">Thyroid</span><span class="tag">PTU</span><span class="tag">Burch-Wartofsky</span></div>
+                    </div>
+                </a>
+                
+                <a href="adrenal-crisis-adventure.html" class="case-card" data-tags="adrenal crisis insufficiency addison hydrocortisone">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">⚡</div>
+                        <div class="case-title">The Crashing Patient</div>
+                        <div class="case-subtitle">Adrenal crisis</div>
+                        <div class="case-tags"><span class="tag">Adrenal</span><span class="tag">Hydrocortisone</span><span class="tag">Shock</span></div>
+                    </div>
+                </a>
+                
+                <a href="pancreatitis-adventure.html" class="case-card" data-tags="pancreatitis lipase atlanta bisap gallstones">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🔥</div>
+                        <div class="case-title">The Epigastric Pain</div>
+                        <div class="case-subtitle">Acute pancreatitis</div>
+                        <div class="case-tags"><span class="tag">Pancreatitis</span><span class="tag">BISAP</span><span class="tag">IVF</span></div>
+                    </div>
+                </a>
+                
+                <a href="afib-adventure.html" class="case-card" data-tags="atrial fibrillation afib rvr anticoagulation chadsvasc">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">💓</div>
+                        <div class="case-title">The Irregular Pulse</div>
+                        <div class="case-subtitle">Atrial fibrillation</div>
+                        <div class="case-tags"><span class="tag">Afib</span><span class="tag">CHA₂DS₂-VASc</span><span class="tag">DOAC</span></div>
+                    </div>
+                </a>
+                
+                <a href="syncope-adventure.html" class="case-card" data-tags="syncope fainting cardiac vasovagal">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">😵</div>
+                        <div class="case-title">The Fainting Spell</div>
+                        <div class="case-subtitle">Syncope workup</div>
+                        <div class="case-tags"><span class="tag">Syncope</span><span class="tag">Cardiac</span><span class="tag">Risk Stratification</span></div>
+                    </div>
+                </a>
+                
+                <a href="dfi-adventure.html" class="case-card" data-tags="diabetic foot infection osteomyelitis ulcer">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🦶</div>
+                        <div class="case-title">The Neglected Wound</div>
+                        <div class="case-subtitle">Diabetic foot infection</div>
+                        <div class="case-tags"><span class="tag">DFI</span><span class="tag">Osteomyelitis</span><span class="tag">Probe-to-Bone</span></div>
+                    </div>
+                </a>
+                
+                <a href="aki-workup-adventure.html" class="case-card" data-tags="aki acute kidney injury atn fena creatinine">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🧪</div>
+                        <div class="case-title">The Rising Creatinine</div>
+                        <div class="case-subtitle">AKI workup</div>
+                        <div class="case-tags"><span class="tag">AKI</span><span class="tag">ATN</span><span class="tag">FENa</span></div>
+                    </div>
+                </a>
+                
+                <a href="htn-emergency-adventure.html" class="case-card" data-tags="hypertensive emergency urgency blood pressure">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🔴</div>
+                        <div class="case-title">The Severe Headache</div>
+                        <div class="case-subtitle">Hypertensive emergency</div>
+                        <div class="case-tags"><span class="tag">HTN Emergency</span><span class="tag">End-Organ</span><span class="tag">IV Meds</span></div>
+                    </div>
+                </a>
+                
+                <a href="hypoglycemia-adventure.html" class="case-card" data-tags="hypoglycemia glucose sulfonylurea octreotide">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🍬</div>
+                        <div class="case-title">The Altered Patient</div>
+                        <div class="case-subtitle">Hypoglycemia</div>
+                        <div class="case-tags"><span class="tag">Hypoglycemia</span><span class="tag">Sulfonylurea</span><span class="tag">Octreotide</span></div>
+                    </div>
+                </a>
+                
+                <a href="alf-adventure.html" class="case-card" data-tags="acute liver failure hepatic encephalopathy nac">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🟡</div>
+                        <div class="case-title">The Jaundiced Patient</div>
+                        <div class="case-subtitle">Acute liver failure</div>
+                        <div class="case-tags"><span class="tag">ALF</span><span class="tag">Encephalopathy</span><span class="tag">NAC</span></div>
+                    </div>
+                </a>
+                
+                <a href="rhabdo-adventure.html" class="case-card" data-tags="rhabdomyolysis myoglobin ck aki">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🟤</div>
+                        <div class="case-title">The Dark Urine</div>
+                        <div class="case-subtitle">Rhabdomyolysis</div>
+                        <div class="case-tags"><span class="tag">Rhabdo</span><span class="tag">CK</span><span class="tag">Myoglobinuria</span></div>
+                    </div>
+                </a>
+                
+                <a href="status-epilepticus-adventure.html" class="case-card" data-tags="status epilepticus seizure benzodiazepine">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">⚡</div>
+                        <div class="case-title">The Seizing Patient</div>
+                        <div class="case-subtitle">Status epilepticus</div>
+                        <div class="case-tags"><span class="tag">Seizure</span><span class="tag">ESETT</span><span class="tag">Refractory</span></div>
+                    </div>
+                </a>
+                
+                <a href="tension-ptx-adventure.html" class="case-card" data-tags="tension pneumothorax trauma needle decompression">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🫁</div>
+                        <div class="case-title">The Crashing Trauma</div>
+                        <div class="case-subtitle">Tension pneumothorax</div>
+                        <div class="case-tags"><span class="tag">Tension PTX</span><span class="tag">Needle Decompression</span><span class="tag">Trauma</span></div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Allergy & Immunology -->
+        <section class="category ai">
+            <div class="category-header">
+                <span class="category-icon">🧬</span>
+                <span class="category-title">Allergy & Immunology</span>
+                <span class="category-count">13 cases</span>
+            </div>
+            <div class="cases-grid">
+                <a href="venom-allergy-adventure.html" class="case-card" data-tags="venom bee wasp sting allergy vit">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🐝</div>
+                        <div class="case-title">The Backyard Incident</div>
+                        <div class="case-subtitle">Venom allergy evaluation</div>
+                        <div class="case-tags"><span class="tag">Venom</span><span class="tag">VIT</span><span class="tag">ACE-I</span></div>
+                    </div>
+                </a>
+                
+                <a href="drug-allergy-adventure.html" class="case-card" data-tags="drug allergy penicillin pen-fast delabeling">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">💊</div>
+                        <div class="case-title">The Childhood Label</div>
+                        <div class="case-subtitle">Penicillin allergy de-labeling</div>
+                        <div class="case-tags"><span class="tag">Drug Allergy</span><span class="tag">PEN-FAST</span></div>
+                    </div>
+                </a>
+                
+                <a href="asthma-phenotyping-adventure.html" class="case-card" data-tags="asthma phenotype t2 eosinophilic biologic">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🌬️</div>
+                        <div class="case-title">The Persistent Wheeze</div>
+                        <div class="case-subtitle">Asthma phenotyping</div>
+                        <div class="case-tags"><span class="tag">Asthma</span><span class="tag">T2</span><span class="tag">Biologics</span></div>
+                    </div>
+                </a>
+                
+                <a href="urticaria-adventure.html" class="case-card" data-tags="urticaria hives chronic csu omalizumab">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🔴</div>
+                        <div class="case-title">The Itchy Mystery</div>
+                        <div class="case-subtitle">Chronic spontaneous urticaria</div>
+                        <div class="case-tags"><span class="tag">CSU</span><span class="tag">Antihistamines</span><span class="tag">Omalizumab</span></div>
+                    </div>
+                </a>
+                
+                <a href="immunodeficiency-adventure.html" class="case-card" data-tags="immunodeficiency cvid pid igg ivig">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🛡️</div>
+                        <div class="case-title">The Frequent Flyer</div>
+                        <div class="case-subtitle">Primary immunodeficiency</div>
+                        <div class="case-tags"><span class="tag">CVID</span><span class="tag">Warning Signs</span><span class="tag">IVIG</span></div>
+                    </div>
+                </a>
+                
+                <a href="eosinophilia-adventure.html" class="case-card" data-tags="eosinophilia egpa vasculitis naacp">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🔬</div>
+                        <div class="case-title">The Elevated Count</div>
+                        <div class="case-subtitle">Eosinophilia and EGPA</div>
+                        <div class="case-tags"><span class="tag">Eosinophilia</span><span class="tag">EGPA</span><span class="tag">NAACP</span></div>
+                    </div>
+                </a>
+                
+                <a href="mast-cell-adventure.html" class="case-card" data-tags="mast cell mcas mastocytosis tryptase">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🔥</div>
+                        <div class="case-title">The Flushing Episodes</div>
+                        <div class="case-subtitle">MCAS vs Mastocytosis</div>
+                        <div class="case-tags"><span class="tag">Mast Cell</span><span class="tag">Tryptase</span><span class="tag">WHO</span></div>
+                    </div>
+                </a>
+                
+                <a href="food-allergy-adventure.html" class="case-card" data-tags="food allergy peanut ige ofc testing">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🥜</div>
+                        <div class="case-title">The Lunchtime Reaction</div>
+                        <div class="case-subtitle">Food allergy evaluation</div>
+                        <div class="case-tags"><span class="tag">Food Allergy</span><span class="tag">IgE</span><span class="tag">OFC</span></div>
+                    </div>
+                </a>
+                
+                <a href="hae-adventure.html" class="case-card" data-tags="hae hereditary angioedema c4 c1 inhibitor">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">💧</div>
+                        <div class="case-title">The Swelling Mystery</div>
+                        <div class="case-subtitle">Hereditary angioedema</div>
+                        <div class="case-tags"><span class="tag">HAE</span><span class="tag">C4</span><span class="tag">Icatibant</span></div>
+                    </div>
+                </a>
+                
+                <a href="scar-adventure.html" class="case-card" data-tags="scar sjs ten stevens johnson toxic epidermal">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">⚠️</div>
+                        <div class="case-title">The Spreading Rash</div>
+                        <div class="case-subtitle">SJS/TEN recognition</div>
+                        <div class="case-tags"><span class="tag">SJS/TEN</span><span class="tag">SCORTEN</span></div>
+                    </div>
+                </a>
+                
+                <a href="allergic-rhinitis-adventure.html" class="case-card" data-tags="rhinitis allergic hay fever incs immunotherapy">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🤧</div>
+                        <div class="case-title">The Stuffy Nose</div>
+                        <div class="case-subtitle">Allergic rhinitis management</div>
+                        <div class="case-tags"><span class="tag">AR</span><span class="tag">ARIA</span><span class="tag">AIT</span></div>
+                    </div>
+                </a>
+                
+                <a href="dress-adventure.html" class="case-card" data-tags="dress drug reaction eosinophilia systemic phenytoin">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">💊</div>
+                        <div class="case-title">The Delayed Reaction</div>
+                        <div class="case-subtitle">DRESS syndrome recognition</div>
+                        <div class="case-tags"><span class="tag">DRESS</span><span class="tag">Eosinophilia</span><span class="tag">Hepatitis</span></div>
+                    </div>
+                </a>
+                
+                <a href="angioedema-adventure.html" class="case-card" data-tags="angioedema acei bradykinin histamine swelling">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">😮</div>
+                        <div class="case-title">The Swollen Face</div>
+                        <div class="case-subtitle">Angioedema differential</div>
+                        <div class="case-tags"><span class="tag">Angioedema</span><span class="tag">ACE-I</span><span class="tag">Bradykinin</span></div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Dermatology -->
+        <section class="category derm">
+            <div class="category-header">
+                <span class="category-icon">🧴</span>
+                <span class="category-title">Dermatology</span>
+                <span class="category-count">4 cases</span>
+            </div>
+            <div class="cases-grid">
+                <a href="contact-dermatitis-adventure.html" class="case-card" data-tags="contact dermatitis patch test nickel ppd acd">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🧪</div>
+                        <div class="case-title">The Persistent Rash</div>
+                        <div class="case-subtitle">Contact dermatitis evaluation</div>
+                        <div class="case-tags"><span class="tag">ACD</span><span class="tag">Patch Test</span><span class="tag">Nickel</span></div>
+                    </div>
+                </a>
+                
+                <a href="atopic-dermatitis-adventure.html" class="case-card" data-tags="atopic dermatitis eczema dupilumab easi">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">🧴</div>
+                        <div class="case-title">The Lifelong Itch</div>
+                        <div class="case-subtitle">Atopic dermatitis management</div>
+                        <div class="case-tags"><span class="tag">AD</span><span class="tag">Dupilumab</span><span class="tag">EASI</span></div>
+                    </div>
+                </a>
+                
+                <a href="scar-adventure.html" class="case-card" data-tags="scar sjs ten stevens johnson drug reaction">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">⚠️</div>
+                        <div class="case-title">The Spreading Rash</div>
+                        <div class="case-subtitle">SJS/TEN recognition</div>
+                        <div class="case-tags"><span class="tag">SJS/TEN</span><span class="tag">SCORTEN</span><span class="tag">Drug</span></div>
+                    </div>
+                </a>
+                
+                <a href="dress-adventure.html" class="case-card" data-tags="dress drug reaction eosinophilia rash">
+                    <div class="case-banner"></div>
+                    <div class="case-body">
+                        <div class="case-emoji">💊</div>
+                        <div class="case-title">The Delayed Reaction</div>
+                        <div class="case-subtitle">DRESS syndrome</div>
+                        <div class="case-tags"><span class="tag">DRESS</span><span class="tag">Eosinophilia</span><span class="tag">Organ</span></div>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function filterCases(query) {
+            const cards = document.querySelectorAll('.case-card');
+            const q = query.toLowerCase().trim();
+            
+            cards.forEach(card => {
+                const tags = card.dataset.tags || '';
+                const title = card.querySelector('.case-title')?.textContent.toLowerCase() || '';
+                const subtitle = card.querySelector('.case-subtitle')?.textContent.toLowerCase() || '';
+                const match = !q || tags.includes(q) || title.includes(q) || subtitle.includes(q);
+                card.style.display = match ? '' : 'none';
+            });
+            
+            document.querySelectorAll('.category').forEach(cat => {
+                const visibleCards = cat.querySelectorAll('.case-card:not([style*="display: none"])');
+                cat.style.display = visibleCards.length ? '' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>

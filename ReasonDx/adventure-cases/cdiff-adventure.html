@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Antibiotic Aftermath | ReasonDx Adventure</title>
+    <style>
+        :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #22C55E; --success: #10B981; --warning: #F59E0B; --danger: #DC2626; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #16A34A 0%, #22C55E 100%); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; }
+        .stat { background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 8px; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        .main { max-width: 1000px; margin: 0 auto; padding: 24px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(34,197,94,0.1), rgba(22,163,74,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; line-height: 1.8; }
+        .narrative .hl { background: rgba(34,197,94,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        .setup-screen { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; }
+        .setup-screen h1 { font-size: 2rem; margin-bottom: 8px; }
+        .setup-screen .subtitle { color: var(--muted); margin-bottom: 32px; }
+        .start-btn { background: var(--accent); color: white; border: none; padding: 16px 48px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+        .question-section { margin-bottom: 32px; }
+        .question-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .question-number { background: var(--accent); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .question-text { font-size: 1.1rem; font-weight: 600; }
+        .radio-options { display: flex; flex-direction: column; gap: 10px; }
+        .radio-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .radio-option:hover { border-color: var(--accent); }
+        .radio-option.selected { border-color: var(--accent); background: rgba(34,197,94,0.15); }
+        .radio-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .radio-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .radio-circle { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; }
+        .radio-option.selected .radio-circle { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 40%, transparent 40%); }
+        .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+        .checkbox-item { display: flex; align-items: center; gap: 10px; padding: 12px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .checkbox-item:hover { border-color: var(--accent); }
+        .checkbox-item.selected { border-color: var(--accent); background: rgba(34,197,94,0.15); }
+        .checkbox-item.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .checkbox-item.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .checkbox-box { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .checkbox-item.selected .checkbox-box { background: var(--accent); border-color: var(--accent); }
+        .checkbox-item.selected .checkbox-box::after { content: '✓'; color: white; font-weight: bold; }
+        .feedback { padding: 20px; border-radius: 12px; margin: 20px 0; }
+        .feedback.excellent { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .feedback.acceptable { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .feedback-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .feedback-icon { font-size: 1.5rem; }
+        .feedback-title { font-weight: 700; }
+        .feedback-text { color: var(--muted); line-height: 1.7; }
+        .feedback-text strong { color: var(--text); }
+        .alert { padding: 16px 20px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
+        .alert.danger { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+        .alert.info { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+        .alert-icon { font-size: 1.5rem; }
+        .alert-content { flex: 1; }
+        .alert-title { font-weight: 600; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; color: var(--muted); }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-row { display: flex; gap: 12px; margin-top: 24px; }
+        .lab-panel { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .lab-panel-title { font-weight: 600; margin-bottom: 16px; color: var(--accent); }
+        .lab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; }
+        .lab-item { background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; }
+        .lab-name { font-size: 0.8rem; color: var(--muted); }
+        .lab-value { font-size: 1.1rem; font-weight: 700; }
+        .lab-value.critical { color: var(--danger); }
+        .lab-value.high { color: var(--warning); }
+        .lab-range { font-size: 0.7rem; color: var(--muted); }
+        .outcome { text-align: center; padding: 40px 20px; }
+        .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
+        .outcome-title { font-size: 2rem; font-weight: 700; color: var(--success); margin-bottom: 8px; }
+        .outcome-desc { color: var(--muted); max-width: 600px; margin: 0 auto 24px; }
+        .score-summary { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 24px; margin: 24px auto; max-width: 500px; }
+        .score-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .score-row:last-child { border-bottom: none; }
+    </style>
+</head>
+<body>
+    <header class="header"><div class="header-row"><div class="header-title">🦠 The Antibiotic Aftermath</div><div class="stat"><div class="stat-value" id="scoreDisplay">0</div><div class="stat-label">Points</div></div></div></header>
+    <main class="main"><div id="stageContainer"></div></main>
+    <script>
+    const state = { stage:'setup', score:0 };
+    
+    function addScore(pts) { state.score += pts; document.getElementById('scoreDisplay').textContent = state.score; }
+
+    const stages = {
+        setup: { render: () => `
+            <div class="setup-screen">
+                <h1>🦠 The Antibiotic Aftermath</h1>
+                <p class="subtitle">Clostridioides difficile infection management</p>
+                <button class="start-btn" onclick="goTo('presentation')">Begin Case →</button>
+            </div>`
+        },
+        presentation: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Hospital Day 8</div><div class="card-title">📋 Post-Surgical Diarrhea</div></div>
+                <div class="card-body">
+                    <div class="narrative">A <span class="hl">74-year-old female</span> was admitted 8 days ago for hip fracture surgery. She received <span class="hl">cefazolin perioperatively</span> and then developed a post-op wound infection treated with <span class="hl">ciprofloxacin × 7 days</span>.<br><br>She now has <span class="hl">6-8 watery, foul-smelling stools daily</span> for 2 days with <span class="hl">crampy abdominal pain</span>. On exam: <span class="hl">diffuse abdominal tenderness</span>, no peritoneal signs.<br><br>Vitals: Temp 38.2°C, HR 98, BP 108/68.</div>
+                    <div class="lab-panel">
+                        <div class="lab-panel-title">Laboratory Results</div>
+                        <div class="lab-grid">
+                            <div class="lab-item"><div class="lab-name">WBC</div><div class="lab-value high">18.4 K</div><div class="lab-range">4.5-11</div></div>
+                            <div class="lab-item"><div class="lab-name">Creatinine</div><div class="lab-value">1.0 mg/dL</div><div class="lab-range">0.7-1.3</div></div>
+                            <div class="lab-item"><div class="lab-name">C. diff PCR</div><div class="lab-value critical">Positive</div><div class="lab-range">Negative</div></div>
+                            <div class="lab-item"><div class="lab-name">Toxin EIA</div><div class="lab-value critical">Positive</div><div class="lab-range">Negative</div></div>
+                            <div class="lab-item"><div class="lab-name">Albumin</div><div class="lab-value">3.2 g/dL</div><div class="lab-range">3.5-5.0</div></div>
+                            <div class="lab-item"><div class="lab-name">Lactate</div><div class="lab-value">1.4 mmol/L</div><div class="lab-range">&lt;2</div></div>
+                        </div>
+                    </div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('severity')">Classify Severity →</button></div>
+                </div>
+            </div>`
+        },
+        severity: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Assessment</div><div class="card-title">📊 CDI Severity Classification</div></div>
+                <div class="card-body">
+                    <div class="alert info"><span class="alert-icon">📋</span><div class="alert-content"><div class="alert-title">IDSA/SHEA Severity Criteria</div><div class="alert-desc">Non-severe: WBC ≤15K AND Cr &lt;1.5 | Severe: WBC &gt;15K OR Cr ≥1.5 | Fulminant: Hypotension, shock, ileus, megacolon</div></div></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">1</div><div class="question-text">With WBC 18.4K and Cr 1.0, how would you classify this CDI?</div></div>
+                        <div class="radio-options" id="sevOpts">
+                            <div class="radio-option" data-id="nonsevere" onclick="selectSev('nonsevere')"><div class="radio-circle"></div><span>Non-severe CDI</span></div>
+                            <div class="radio-option" data-id="severe" onclick="selectSev('severe')"><div class="radio-circle"></div><span>Severe CDI</span></div>
+                            <div class="radio-option" data-id="fulminant" onclick="selectSev('fulminant')"><div class="radio-circle"></div><span>Fulminant CDI</span></div>
+                        </div>
+                    </div>
+                    <div id="sevFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="sevSubmit" onclick="submitSev()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        treatment: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Treatment</div><div class="card-title">💊 First-Line Antibiotic</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">2</div><div class="question-text">What is the preferred treatment for initial episode of CDI (any severity)?</div></div>
+                        <div class="radio-options" id="txOpts">
+                            <div class="radio-option" data-id="metro" onclick="selectTx('metro')"><div class="radio-circle"></div><div><strong>Oral metronidazole</strong><br><small style="color:var(--muted)">500mg TID × 10-14 days</small></div></div>
+                            <div class="radio-option" data-id="vanco_po" onclick="selectTx('vanco_po')"><div class="radio-circle"></div><div><strong>Oral vancomycin or Fidaxomicin</strong><br><small style="color:var(--muted)">Vanc 125mg QID or Fidaxo 200mg BID</small></div></div>
+                            <div class="radio-option" data-id="vanco_iv" onclick="selectTx('vanco_iv')"><div class="radio-circle"></div><div><strong>IV vancomycin</strong><br><small style="color:var(--muted)">Systemic treatment</small></div></div>
+                            <div class="radio-option" data-id="cipro" onclick="selectTx('cipro')"><div class="radio-circle"></div><div><strong>Continue ciprofloxacin</strong><br><small style="color:var(--muted)">Broad-spectrum coverage</small></div></div>
+                        </div>
+                    </div>
+                    <div id="txFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="txSubmit" onclick="submitTx()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        fidaxo: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Drug Selection</div><div class="card-title">💊 Fidaxomicin Advantage</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">3</div><div class="question-text">What is the main advantage of fidaxomicin over vancomycin?</div></div>
+                        <div class="radio-options" id="fidOpts">
+                            <div class="radio-option" data-id="recurrence" onclick="selectFid('recurrence')"><div class="radio-circle"></div><div><strong>Lower recurrence rate</strong><br><small style="color:var(--muted)">Narrow spectrum, spares gut microbiome</small></div></div>
+                            <div class="radio-option" data-id="faster" onclick="selectFid('faster')"><div class="radio-circle"></div><div><strong>Faster symptom resolution</strong><br><small style="color:var(--muted)">Works quicker</small></div></div>
+                            <div class="radio-option" data-id="cheaper" onclick="selectFid('cheaper')"><div class="radio-circle"></div><div><strong>Lower cost</strong><br><small style="color:var(--muted)">More affordable</small></div></div>
+                            <div class="radio-option" data-id="iv" onclick="selectFid('iv')"><div class="radio-circle"></div><div><strong>Can be given IV</strong><br><small style="color:var(--muted)">For patients who can't take PO</small></div></div>
+                        </div>
+                    </div>
+                    <div id="fidFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="fidSubmit" onclick="submitFid()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        recurrence: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Recurrence</div><div class="card-title">🔄 Managing Recurrent CDI</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">4</div><div class="question-text">What is recommended for a SECOND recurrence of CDI?</div></div>
+                        <div class="radio-options" id="recOpts">
+                            <div class="radio-option" data-id="same" onclick="selectRec('same')"><div class="radio-circle"></div><span>Same regimen that was used initially</span></div>
+                            <div class="radio-option" data-id="taper" onclick="selectRec('taper')"><div class="radio-circle"></div><span>Vancomycin taper and pulse regimen</span></div>
+                            <div class="radio-option" data-id="fmt" onclick="selectRec('fmt')"><div class="radio-circle"></div><span>Fecal microbiota transplantation (FMT)</span></div>
+                            <div class="radio-option" data-id="both" onclick="selectRec('both')"><div class="radio-circle"></div><span>Vanc taper OR fidaxomicin, followed by FMT if further recurrence</span></div>
+                        </div>
+                    </div>
+                    <div id="recFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="recSubmit" onclick="submitRec()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        prevention: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Prevention</div><div class="card-title">🛡️ Infection Control</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">5</div><div class="question-text">Which infection control measures are appropriate for CDI?</div></div>
+                        <div class="checkbox-grid" id="icOpts">
+                            <div class="checkbox-item" data-id="contact" data-correct="true" onclick="toggleIC('contact')"><div class="checkbox-box"></div><span>Contact precautions</span></div>
+                            <div class="checkbox-item" data-id="soap" data-correct="true" onclick="toggleIC('soap')"><div class="checkbox-box"></div><span>Soap and water hand hygiene</span></div>
+                            <div class="checkbox-item" data-id="private" data-correct="true" onclick="toggleIC('private')"><div class="checkbox-box"></div><span>Private room preferred</span></div>
+                            <div class="checkbox-item" data-id="bleach" data-correct="true" onclick="toggleIC('bleach')"><div class="checkbox-box"></div><span>Bleach-based disinfection</span></div>
+                            <div class="checkbox-item" data-id="alcohol" data-correct="false" onclick="toggleIC('alcohol')"><div class="checkbox-box"></div><span>Alcohol-based hand rub alone</span></div>
+                            <div class="checkbox-item" data-id="airborne" data-correct="false" onclick="toggleIC('airborne')"><div class="checkbox-box"></div><span>N95 respirator required</span></div>
+                        </div>
+                    </div>
+                    <div id="icFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitIC()">Submit →</button></div>
+                </div>
+            </div>`
+        },
+        outcome: { render: () => `
+            <div class="card"><div class="card-body">
+                <div class="outcome">
+                    <div class="outcome-icon">🎉</div>
+                    <div class="outcome-title">Patient Recovered!</div>
+                    <div class="outcome-desc">The ciprofloxacin was stopped. Patient was started on oral vancomycin 125mg QID. Diarrhea resolved by day 4 of treatment. She completed a 10-day course and was discharged with close follow-up for monitoring of recurrence.</div>
+                </div>
+                <div class="score-summary">
+                    <h3 style="margin-bottom:16px">Performance</h3>
+                    <div class="score-row"><span>Severity Classification</span><span>${state.sevScore||0}/100</span></div>
+                    <div class="score-row"><span>First-Line Treatment</span><span>${state.txScore||0}/100</span></div>
+                    <div class="score-row"><span>Fidaxomicin Knowledge</span><span>${state.fidScore||0}/100</span></div>
+                    <div class="score-row"><span>Recurrence Management</span><span>${state.recScore||0}/100</span></div>
+                    <div class="score-row"><span>Infection Control</span><span>${state.icScore||0}/100</span></div>
+                    <div class="score-row" style="border-top:2px solid var(--border);padding-top:12px"><strong>Total</strong><strong>${state.score}</strong></div>
+                </div>
+                <div class="feedback excellent"><div class="feedback-header"><span class="feedback-icon">💡</span><span class="feedback-title">CDI Pearls</span></div><div class="feedback-text">
+                    • <strong>Risk factors:</strong> Antibiotics (especially FQs, clindamycin, cephalosporins), age >65, hospitalization, PPI use<br>
+                    • <strong>Severity:</strong> WBC >15K OR Cr ≥1.5 = severe. Hypotension/shock/ileus/megacolon = fulminant<br>
+                    • <strong>First-line:</strong> Oral vancomycin OR fidaxomicin (NOT metronidazole for initial episode per 2021 guidelines)<br>
+                    • <strong>IV vancomycin doesn't work</strong> - doesn't reach colon! Use oral or rectal vancomycin<br>
+                    • <strong>Fidaxomicin advantage:</strong> Lower recurrence rate (narrow spectrum, preserves microbiome)<br>
+                    • <strong>Recurrence:</strong> Vanc taper/pulse OR fidaxomicin → FMT for multiple recurrences<br>
+                    • <strong>Infection control:</strong> Contact precautions + SOAP AND WATER (alcohol doesn't kill spores) + bleach cleaning<br>
+                    • <strong>Stop the offending antibiotic</strong> if possible!
+                </div></div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Play Again</button></div>
+            </div></div>`
+        }
+    };
+
+    let selectedSev = null;
+    function selectSev(id) { selectedSev = id; document.querySelectorAll('#sevOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('sevSubmit').disabled = false; }
+    function submitSev() {
+        document.querySelectorAll('#sevOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'severe') o.classList.add('correct');
+            else if (o.dataset.id === selectedSev) o.classList.add('incorrect');
+        });
+        state.sevScore = selectedSev === 'severe' ? 100 : 40;
+        addScore(selectedSev === 'severe' ? 40 : 15);
+        document.getElementById('sevFeedback').innerHTML = `<div class="feedback ${selectedSev==='severe'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedSev==='severe'?'✅':'📚'}</span><span class="feedback-title">${selectedSev==='severe'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Severe CDI:</strong> WBC >15K (this patient has 18.4K) OR Cr ≥1.5. Patient has WBC >15K so this is severe CDI. Not fulminant because no hypotension, shock, ileus, or megacolon.</div></div>`;
+        document.getElementById('sevSubmit').textContent = 'Continue →';
+        document.getElementById('sevSubmit').onclick = () => goTo('treatment');
+    }
+
+    let selectedTx = null;
+    function selectTx(id) { selectedTx = id; document.querySelectorAll('#txOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('txSubmit').disabled = false; }
+    function submitTx() {
+        document.querySelectorAll('#txOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'vanco_po') o.classList.add('correct');
+            else if (o.dataset.id === selectedTx) o.classList.add('incorrect');
+        });
+        state.txScore = selectedTx === 'vanco_po' ? 100 : 40;
+        addScore(selectedTx === 'vanco_po' ? 40 : 15);
+        document.getElementById('txFeedback').innerHTML = `<div class="feedback ${selectedTx==='vanco_po'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedTx==='vanco_po'?'✅':'📚'}</span><span class="feedback-title">${selectedTx==='vanco_po'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>2021 IDSA Guidelines:</strong> Oral vancomycin OR fidaxomicin for ALL initial CDI episodes (metronidazole is now second-line only if others unavailable). IV vancomycin doesn't reach the colon!</div></div>`;
+        document.getElementById('txSubmit').textContent = 'Continue →';
+        document.getElementById('txSubmit').onclick = () => goTo('fidaxo');
+    }
+
+    let selectedFid = null;
+    function selectFid(id) { selectedFid = id; document.querySelectorAll('#fidOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('fidSubmit').disabled = false; }
+    function submitFid() {
+        document.querySelectorAll('#fidOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'recurrence') o.classList.add('correct');
+            else if (o.dataset.id === selectedFid) o.classList.add('incorrect');
+        });
+        state.fidScore = selectedFid === 'recurrence' ? 100 : 40;
+        addScore(selectedFid === 'recurrence' ? 40 : 15);
+        document.getElementById('fidFeedback').innerHTML = `<div class="feedback ${selectedFid==='recurrence'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedFid==='recurrence'?'✅':'📚'}</span><span class="feedback-title">${selectedFid==='recurrence'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Fidaxomicin's advantage:</strong> Lower recurrence rate (~13% vs ~27% with vancomycin). It's narrow-spectrum and spares the gut microbiome. Downside: much more expensive than vancomycin.</div></div>`;
+        document.getElementById('fidSubmit').textContent = 'Continue →';
+        document.getElementById('fidSubmit').onclick = () => goTo('recurrence');
+    }
+
+    let selectedRec = null;
+    function selectRec(id) { selectedRec = id; document.querySelectorAll('#recOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('recSubmit').disabled = false; }
+    function submitRec() {
+        document.querySelectorAll('#recOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'both') o.classList.add('correct');
+            else if (o.dataset.id === selectedRec) o.classList.add('incorrect');
+        });
+        state.recScore = selectedRec === 'both' ? 100 : (selectedRec === 'taper' || selectedRec === 'fmt' ? 60 : 30);
+        addScore(selectedRec === 'both' ? 40 : (selectedRec === 'taper' || selectedRec === 'fmt' ? 25 : 10));
+        document.getElementById('recFeedback').innerHTML = `<div class="feedback ${selectedRec==='both'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedRec==='both'?'✅':'📚'}</span><span class="feedback-title">${selectedRec==='both'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Recurrent CDI:</strong> 1st recurrence: Vanc taper/pulse OR fidaxomicin. 2nd+ recurrence: FMT is recommended after appropriate antibiotic treatment. Bezlotoxumab (anti-toxin B antibody) can reduce recurrence risk.</div></div>`;
+        document.getElementById('recSubmit').textContent = 'Continue →';
+        document.getElementById('recSubmit').onclick = () => goTo('prevention');
+    }
+
+    let selectedIC = new Set();
+    function toggleIC(id) {
+        const el = document.querySelector(`#icOpts .checkbox-item[data-id="${id}"]`);
+        if(selectedIC.has(id)) { selectedIC.delete(id); el.classList.remove('selected'); }
+        else { selectedIC.add(id); el.classList.add('selected'); }
+    }
+    function submitIC() {
+        let correct = 0;
+        const items = [{id:'contact',c:true},{id:'soap',c:true},{id:'private',c:true},{id:'bleach',c:true},{id:'alcohol',c:false},{id:'airborne',c:false}];
+        items.forEach(i => {
+            const el = document.querySelector(`#icOpts .checkbox-item[data-id="${i.id}"]`);
+            const sel = selectedIC.has(i.id);
+            if (i.c && sel) { el.classList.add('correct'); correct++; }
+            else if (!i.c && sel) { el.classList.add('incorrect'); }
+        });
+        state.icScore = Math.round(correct / 4 * 100);
+        addScore(Math.round(state.icScore / 2.5));
+        document.getElementById('icFeedback').innerHTML = `<div class="feedback ${state.icScore>=75?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${state.icScore>=75?'✅':'📚'}</span><span class="feedback-title">Infection Control</span></div><div class="feedback-text"><strong>CDI precautions:</strong> Contact isolation, SOAP AND WATER (spores resistant to alcohol!), private room, bleach-based disinfection<br><strong>NOT needed:</strong> Airborne precautions. Alcohol hand rub alone is INSUFFICIENT.</div></div>`;
+        document.querySelector('#icFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('outcome')">Complete Case →</button>`;
+    }
+
+    function goTo(id) { state.stage = id; document.getElementById('stageContainer').innerHTML = stages[id].render(); window.scrollTo(0,0); }
+    document.addEventListener('DOMContentLoaded', () => goTo('setup'));
+    </script>
+</body>
+</html>

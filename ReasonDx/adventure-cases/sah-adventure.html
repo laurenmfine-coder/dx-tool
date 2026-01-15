@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Thunderclap Headache | ReasonDx Adventure</title>
+    <style>
+        :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #F97316; --success: #10B981; --warning: #F59E0B; --danger: #DC2626; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #EA580C 0%, #F97316 100%); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; }
+        .stat { background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 8px; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        .main { max-width: 1000px; margin: 0 auto; padding: 24px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(249,115,22,0.1), rgba(234,88,12,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; line-height: 1.8; }
+        .narrative .hl { background: rgba(249,115,22,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        .setup-screen { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; }
+        .setup-screen h1 { font-size: 2rem; margin-bottom: 8px; }
+        .setup-screen .subtitle { color: var(--muted); margin-bottom: 32px; }
+        .start-btn { background: var(--accent); color: white; border: none; padding: 16px 48px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+        .question-section { margin-bottom: 32px; }
+        .question-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .question-number { background: var(--accent); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .question-text { font-size: 1.1rem; font-weight: 600; }
+        .radio-options { display: flex; flex-direction: column; gap: 10px; }
+        .radio-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .radio-option:hover { border-color: var(--accent); }
+        .radio-option.selected { border-color: var(--accent); background: rgba(249,115,22,0.15); }
+        .radio-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .radio-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .radio-circle { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; }
+        .radio-option.selected .radio-circle { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 40%, transparent 40%); }
+        .feedback { padding: 20px; border-radius: 12px; margin: 20px 0; }
+        .feedback.excellent { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .feedback.acceptable { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .feedback-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .feedback-icon { font-size: 1.5rem; }
+        .feedback-title { font-weight: 700; }
+        .feedback-text { color: var(--muted); line-height: 1.7; }
+        .feedback-text strong { color: var(--text); }
+        .alert { padding: 16px 20px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
+        .alert.info { background: rgba(249,115,22,0.15); border: 1px solid rgba(249,115,22,0.3); }
+        .alert.danger { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+        .alert-icon { font-size: 1.5rem; }
+        .alert-content { flex: 1; }
+        .alert-title { font-weight: 600; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; color: var(--muted); }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-row { display: flex; gap: 12px; margin-top: 24px; }
+        .lab-panel { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .lab-panel-title { font-weight: 600; margin-bottom: 16px; color: var(--accent); }
+        .lab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+        .lab-item { background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; }
+        .lab-name { font-size: 0.8rem; color: var(--muted); }
+        .lab-value { font-size: 1rem; font-weight: 700; }
+        .lab-value.critical { color: var(--danger); }
+        .lab-value.abnormal { color: var(--warning); }
+        .outcome { text-align: center; padding: 40px 20px; }
+        .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
+        .outcome-title { font-size: 2rem; font-weight: 700; color: var(--success); margin-bottom: 8px; }
+        .outcome-desc { color: var(--muted); max-width: 600px; margin: 0 auto 24px; }
+        .score-summary { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 24px; margin: 24px auto; max-width: 500px; }
+        .score-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .score-row:last-child { border-bottom: none; }
+    </style>
+</head>
+<body>
+    <header class="header"><div class="header-row"><div class="header-title">⚡ The Thunderclap Headache</div><div class="stat"><div class="stat-value" id="scoreDisplay">0</div><div class="stat-label">Points</div></div></div></header>
+    <main class="main"><div id="stageContainer"></div></main>
+    <script>
+    const state = { stage:'setup', score:0 };
+    
+    function addScore(pts) { state.score += pts; document.getElementById('scoreDisplay').textContent = state.score; }
+
+    const stages = {
+        setup: { render: () => `
+            <div class="setup-screen">
+                <h1>⚡ The Thunderclap Headache</h1>
+                <p class="subtitle">Subarachnoid hemorrhage workup</p>
+                <button class="start-btn" onclick="goTo('presentation')">Begin Case →</button>
+            </div>`
+        },
+        presentation: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Emergency Department</div><div class="card-title">📋 Worst Headache of My Life</div></div>
+                <div class="card-body">
+                    <div class="narrative">A <span class="hl">48-year-old female</span> presents with <span class="hl">"the worst headache of my life"</span> that started <span class="hl">suddenly 3 hours ago</span> while she was lifting groceries. The pain <span class="hl">peaked within seconds</span> and is now <span class="hl">10/10</span> intensity.<br><br>She reports <span class="hl">nausea</span>, <span class="hl">neck stiffness</span>, and <span class="hl">photophobia</span>. She has <span class="hl">no history of migraines</span>. PMH includes <span class="hl">HTN</span> and <span class="hl">smoking</span>.</div>
+                    <div class="lab-panel">
+                        <div class="lab-panel-title">Initial Assessment</div>
+                        <div class="lab-grid">
+                            <div class="lab-item"><div class="lab-name">BP</div><div class="lab-value abnormal">168/98 mmHg</div></div>
+                            <div class="lab-item"><div class="lab-name">HR</div><div class="lab-value">88 bpm</div></div>
+                            <div class="lab-item"><div class="lab-name">GCS</div><div class="lab-value">15</div></div>
+                            <div class="lab-item"><div class="lab-name">Pupils</div><div class="lab-value">Equal, reactive</div></div>
+                            <div class="lab-item"><div class="lab-name">Neck</div><div class="lab-value abnormal">Stiff, painful</div></div>
+                            <div class="lab-item"><div class="lab-name">Focal deficits</div><div class="lab-value">None</div></div>
+                        </div>
+                    </div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('definition')">Define Thunderclap →</button></div>
+                </div>
+            </div>`
+        },
+        definition: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Definition</div><div class="card-title">⚡ Thunderclap Headache</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">1</div><div class="question-text">What defines a "thunderclap headache"?</div></div>
+                        <div class="radio-options" id="defOpts">
+                            <div class="radio-option" data-id="sudden" onclick="selectDef('sudden')"><div class="radio-circle"></div><div><strong>Severe headache reaching maximum intensity within seconds to 1 minute</strong><br><small style="color:var(--muted)">"Worst headache of my life" with sudden onset</small></div></div>
+                            <div class="radio-option" data-id="severe" onclick="selectDef('severe')"><div class="radio-circle"></div><div><strong>Any severe headache (10/10)</strong><br><small style="color:var(--muted)">Intensity defines it</small></div></div>
+                            <div class="radio-option" data-id="thunder" onclick="selectDef('thunder')"><div class="radio-circle"></div><div><strong>Headache triggered by loud noise</strong><br><small style="color:var(--muted)">Sensory trigger</small></div></div>
+                        </div>
+                    </div>
+                    <div id="defFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="defSubmit" onclick="submitDef()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        workup: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Workup</div><div class="card-title">🔍 First Test</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">2</div><div class="question-text">What is the first test to order?</div></div>
+                        <div class="radio-options" id="testOpts">
+                            <div class="radio-option" data-id="ct" onclick="selectTest('ct')"><div class="radio-circle"></div><div><strong>Non-contrast CT head</strong><br><small style="color:var(--muted)">Fast, highly sensitive early</small></div></div>
+                            <div class="radio-option" data-id="lp" onclick="selectTest('lp')"><div class="radio-circle"></div><div><strong>Lumbar puncture first</strong><br><small style="color:var(--muted)">Most sensitive test</small></div></div>
+                            <div class="radio-option" data-id="cta" onclick="selectTest('cta')"><div class="radio-circle"></div><div><strong>CT angiography first</strong><br><small style="color:var(--muted)">Look for aneurysm</small></div></div>
+                            <div class="radio-option" data-id="mri" onclick="selectTest('mri')"><div class="radio-circle"></div><div><strong>MRI brain</strong><br><small style="color:var(--muted)">Best resolution</small></div></div>
+                        </div>
+                    </div>
+                    <div id="testFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="testSubmit" onclick="submitTest()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        ctsensitivity: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">CT Sensitivity</div><div class="card-title">📊 Time Matters</div></div>
+                <div class="card-body">
+                    <div class="alert info"><span class="alert-icon">📋</span><div class="alert-content"><div class="alert-title">CT Result: NEGATIVE</div><div class="alert-desc">No acute intracranial hemorrhage seen</div></div></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">3</div><div class="question-text">CT sensitivity for SAH within first 6 hours is approximately:</div></div>
+                        <div class="radio-options" id="sensOpts">
+                            <div class="radio-option" data-id="98" onclick="selectSens('98')"><div class="radio-circle"></div><div><strong>~98-100% (nearly perfect)</strong><br><small style="color:var(--muted)">Modern CT with experienced reader</small></div></div>
+                            <div class="radio-option" data-id="90" onclick="selectSens('90')"><div class="radio-circle"></div><div><strong>~90%</strong><br><small style="color:var(--muted)">Good but not perfect</small></div></div>
+                            <div class="radio-option" data-id="70" onclick="selectSens('70')"><div class="radio-circle"></div><div><strong>~70%</strong><br><small style="color:var(--muted)">Moderate sensitivity</small></div></div>
+                        </div>
+                    </div>
+                    <div id="sensFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="sensSubmit" onclick="submitSens()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        nextstep: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Next Step</div><div class="card-title">🤔 Negative CT - Now What?</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">4</div><div class="question-text">CT is negative within 6 hours. What is the next step?</div></div>
+                        <div class="radio-options" id="nextOpts">
+                            <div class="radio-option" data-id="lp" onclick="selectNext('lp')"><div class="radio-circle"></div><div><strong>Lumbar puncture</strong><br><small style="color:var(--muted)">Look for xanthochromia and RBCs</small></div></div>
+                            <div class="radio-option" data-id="discharge" onclick="selectNext('discharge')"><div class="radio-circle"></div><div><strong>Discharge - CT is sufficient within 6 hours</strong><br><small style="color:var(--muted)">Sensitivity is high enough</small></div></div>
+                            <div class="radio-option" data-id="cta" onclick="selectNext('cta')"><div class="radio-circle"></div><div><strong>CTA to look for aneurysm</strong><br><small style="color:var(--muted)">Skip LP, go to angiography</small></div></div>
+                        </div>
+                    </div>
+                    <div id="nextFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="nextSubmit" onclick="submitNext()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        lpfindings: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">LP Results</div><div class="card-title">💉 CSF Analysis</div></div>
+                <div class="card-body">
+                    <div class="lab-panel">
+                        <div class="lab-panel-title">CSF Results</div>
+                        <div class="lab-grid">
+                            <div class="lab-item"><div class="lab-name">Tube 1 RBC</div><div class="lab-value critical">12,000/µL</div></div>
+                            <div class="lab-item"><div class="lab-name">Tube 4 RBC</div><div class="lab-value critical">11,500/µL</div></div>
+                            <div class="lab-item"><div class="lab-name">WBC</div><div class="lab-value">15/µL</div></div>
+                            <div class="lab-item"><div class="lab-name">Xanthochromia</div><div class="lab-value critical">POSITIVE</div></div>
+                            <div class="lab-item"><div class="lab-name">Glucose</div><div class="lab-value">62 mg/dL</div></div>
+                            <div class="lab-item"><div class="lab-name">Protein</div><div class="lab-value">68 mg/dL</div></div>
+                        </div>
+                    </div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">5</div><div class="question-text">What finding confirms SAH (not traumatic tap)?</div></div>
+                        <div class="radio-options" id="lpOpts">
+                            <div class="radio-option" data-id="xanth" onclick="selectLP('xanth')"><div class="radio-circle"></div><div><strong>Xanthochromia (yellow CSF from RBC breakdown)</strong><br><small style="color:var(--muted)">Takes ~12 hours to develop</small></div></div>
+                            <div class="radio-option" data-id="rbc" onclick="selectLP('rbc')"><div class="radio-circle"></div><div><strong>High RBC count alone</strong><br><small style="color:var(--muted)">Many RBCs present</small></div></div>
+                            <div class="radio-option" data-id="noclear" onclick="selectLP('noclear')"><div class="radio-circle"></div><div><strong>RBCs that don't clear between tubes</strong><br><small style="color:var(--muted)">Consistent RBC count</small></div></div>
+                        </div>
+                    </div>
+                    <div id="lpFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="lpSubmit" onclick="submitLP()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        grading: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Classification</div><div class="card-title">📊 Hunt-Hess Grade</div></div>
+                <div class="card-body">
+                    <div class="alert info"><span class="alert-icon">📋</span><div class="alert-content"><div class="alert-title">Hunt-Hess Classification</div><div class="alert-desc">Grade 1: Asymptomatic or mild headache | Grade 2: Moderate-severe headache, nuchal rigidity, no focal deficit | Grade 3: Drowsy, confused, mild focal deficit | Grade 4: Stuporous, moderate-severe hemiparesis | Grade 5: Deep coma, decerebrate posturing</div></div></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">6</div><div class="question-text">This patient (severe headache, neck stiffness, GCS 15, no focal deficits) is Hunt-Hess Grade:</div></div>
+                        <div class="radio-options" id="gradeOpts">
+                            <div class="radio-option" data-id="1" onclick="selectGrade('1')"><div class="radio-circle"></div><span>Grade 1</span></div>
+                            <div class="radio-option" data-id="2" onclick="selectGrade('2')"><div class="radio-circle"></div><span>Grade 2</span></div>
+                            <div class="radio-option" data-id="3" onclick="selectGrade('3')"><div class="radio-circle"></div><span>Grade 3</span></div>
+                            <div class="radio-option" data-id="4" onclick="selectGrade('4')"><div class="radio-circle"></div><span>Grade 4</span></div>
+                        </div>
+                    </div>
+                    <div id="gradeFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="gradeSubmit" onclick="submitGrade()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        outcome: { render: () => `
+            <div class="card"><div class="card-body">
+                <div class="outcome">
+                    <div class="outcome-icon">🎉</div>
+                    <div class="outcome-title">SAH Diagnosed!</div>
+                    <div class="outcome-desc">CTA revealed a 7mm anterior communicating artery aneurysm. Neurosurgery was consulted and the patient underwent successful endovascular coiling on hospital day 2. She was monitored in neuro-ICU for vasospasm (transcranial Doppler daily, nimodipine). She was discharged on day 14 with minimal residual symptoms and excellent neurologic function.</div>
+                </div>
+                <div class="score-summary">
+                    <h3 style="margin-bottom:16px">Performance</h3>
+                    <div class="score-row"><span>Thunderclap Definition</span><span>${state.defScore||0}/100</span></div>
+                    <div class="score-row"><span>Initial Test</span><span>${state.testScore||0}/100</span></div>
+                    <div class="score-row"><span>CT Sensitivity</span><span>${state.sensScore||0}/100</span></div>
+                    <div class="score-row"><span>Next Step</span><span>${state.nextScore||0}/100</span></div>
+                    <div class="score-row"><span>LP Interpretation</span><span>${state.lpScore||0}/100</span></div>
+                    <div class="score-row"><span>Hunt-Hess Grading</span><span>${state.gradeScore||0}/100</span></div>
+                    <div class="score-row" style="border-top:2px solid var(--border);padding-top:12px"><strong>Total</strong><strong>${state.score}</strong></div>
+                </div>
+                <div class="feedback excellent"><div class="feedback-header"><span class="feedback-icon">💡</span><span class="feedback-title">SAH Pearls</span></div><div class="feedback-text">
+                    • <strong>Thunderclap:</strong> Severe headache maximal within SECONDS - think SAH until proven otherwise<br>
+                    • <strong>"Worst headache of my life":</strong> Classic description - but 10-40% have atypical presentations!<br>
+                    • <strong>CT sensitivity:</strong> ~98-100% within 6 hours, drops to ~90% at 24h, ~50% at 1 week<br>
+                    • <strong>LP still needed?</strong> Controversial - some argue CT + CTA within 6h is sufficient, but LP remains standard at most centers<br>
+                    • <strong>Xanthochromia:</strong> Yellow CSF from bilirubin (RBC breakdown) - takes 12h to develop, lasts 2+ weeks<br>
+                    • <strong>Traumatic tap:</strong> RBCs should CLEAR between tubes (Tube 1 >> Tube 4), no xanthochromia<br>
+                    • <strong>Nimodipine:</strong> CCB given to ALL SAH patients - reduces vasospasm/delayed cerebral ischemia<br>
+                    • <strong>Vasospasm window:</strong> Days 4-14 post-SAH - highest risk period<br>
+                    • <strong>Rebleeding:</strong> Highest in first 24h - secure aneurysm early (clip or coil)
+                </div></div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Play Again</button></div>
+            </div></div>`
+        }
+    };
+
+    let selectedDef = null;
+    function selectDef(id) { selectedDef = id; document.querySelectorAll('#defOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('defSubmit').disabled = false; }
+    function submitDef() {
+        document.querySelectorAll('#defOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'sudden') o.classList.add('correct');
+            else if (o.dataset.id === selectedDef) o.classList.add('incorrect');
+        });
+        state.defScore = selectedDef === 'sudden' ? 100 : 30;
+        addScore(selectedDef === 'sudden' ? 35 : 10);
+        document.getElementById('defFeedback').innerHTML = `<div class="feedback ${selectedDef==='sudden'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedDef==='sudden'?'✅':'📚'}</span><span class="feedback-title">${selectedDef==='sudden'?'Correct!':'Key Point'}</span></div><div class="feedback-text"><strong>Thunderclap = SUDDEN onset, maximal within seconds.</strong> Like a "clap of thunder." The rapidity of onset is what defines it, not just severity. This is the hallmark of SAH - aneurysm rupture causes instantaneous severe headache.</div></div>`;
+        document.getElementById('defSubmit').textContent = 'Continue →';
+        document.getElementById('defSubmit').onclick = () => goTo('workup');
+    }
+
+    let selectedTest = null;
+    function selectTest(id) { selectedTest = id; document.querySelectorAll('#testOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('testSubmit').disabled = false; }
+    function submitTest() {
+        document.querySelectorAll('#testOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'ct') o.classList.add('correct');
+            else if (o.dataset.id === selectedTest) o.classList.add('incorrect');
+        });
+        state.testScore = selectedTest === 'ct' ? 100 : 40;
+        addScore(selectedTest === 'ct' ? 35 : 15);
+        document.getElementById('testFeedback').innerHTML = `<div class="feedback ${selectedTest==='ct'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedTest==='ct'?'✅':'📚'}</span><span class="feedback-title">${selectedTest==='ct'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Non-contrast CT head is first.</strong> Fast, widely available, and highly sensitive early. Blood appears bright (hyperdense) in subarachnoid space, basal cisterns, ventricles. LP comes AFTER negative CT, not first (and avoids LP in patients with mass lesion).</div></div>`;
+        document.getElementById('testSubmit').textContent = 'Continue →';
+        document.getElementById('testSubmit').onclick = () => goTo('ctsensitivity');
+    }
+
+    let selectedSens = null;
+    function selectSens(id) { selectedSens = id; document.querySelectorAll('#sensOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('sensSubmit').disabled = false; }
+    function submitSens() {
+        document.querySelectorAll('#sensOpts .radio-option').forEach(o => {
+            if (o.dataset.id === '98') o.classList.add('correct');
+            else if (o.dataset.id === selectedSens) o.classList.add('incorrect');
+        });
+        state.sensScore = selectedSens === '98' ? 100 : 50;
+        addScore(selectedSens === '98' ? 35 : 15);
+        document.getElementById('sensFeedback').innerHTML = `<div class="feedback ${selectedSens==='98'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedSens==='98'?'✅':'📚'}</span><span class="feedback-title">${selectedSens==='98'?'Correct!':'Important Numbers'}</span></div><div class="feedback-text"><strong>Modern CT within 6 hours: ~98-100% sensitive.</strong> But sensitivity drops: ~93% at 12h, ~85% at 24h, ~50% at 1 week. Blood is reabsorbed! This is why timing matters and why LP may be needed for delayed presentations.</div></div>`;
+        document.getElementById('sensSubmit').textContent = 'Continue →';
+        document.getElementById('sensSubmit').onclick = () => goTo('nextstep');
+    }
+
+    let selectedNext = null;
+    function selectNext(id) { selectedNext = id; document.querySelectorAll('#nextOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('nextSubmit').disabled = false; }
+    function submitNext() {
+        const correct = selectedNext === 'lp' || selectedNext === 'discharge';
+        document.querySelectorAll('#nextOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'lp') o.classList.add('correct');
+            else if (o.dataset.id === 'discharge' && selectedNext === 'discharge') o.classList.add('correct');
+            else if (o.dataset.id === selectedNext) o.classList.add('incorrect');
+        });
+        state.nextScore = correct ? 100 : 40;
+        addScore(correct ? 35 : 15);
+        document.getElementById('nextFeedback').innerHTML = `<div class="feedback ${correct?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${correct?'✅':'📚'}</span><span class="feedback-title">${correct?'Correct!':'Controversial Topic'}</span></div><div class="feedback-text"><strong>Traditional approach: LP after negative CT.</strong> However, recent evidence suggests CT within 6 hours may be sufficient to rule out SAH (Ottawa SAH Rule study). Practice varies - many centers now accept CT + CTA within 6 hours as adequate. Know your institution's protocol!</div></div>`;
+        document.getElementById('nextSubmit').textContent = 'Continue →';
+        document.getElementById('nextSubmit').onclick = () => goTo('lpfindings');
+    }
+
+    let selectedLP = null;
+    function selectLP(id) { selectedLP = id; document.querySelectorAll('#lpOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('lpSubmit').disabled = false; }
+    function submitLP() {
+        document.querySelectorAll('#lpOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'xanth') o.classList.add('correct');
+            else if (o.dataset.id === selectedLP) o.classList.add('incorrect');
+        });
+        state.lpScore = selectedLP === 'xanth' ? 100 : 50;
+        addScore(selectedLP === 'xanth' ? 35 : 20);
+        document.getElementById('lpFeedback').innerHTML = `<div class="feedback ${selectedLP==='xanth'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedLP==='xanth'?'✅':'📚'}</span><span class="feedback-title">${selectedLP==='xanth'?'Correct!':'Key Distinction'}</span></div><div class="feedback-text"><strong>Xanthochromia is the key!</strong> Yellow/pink CSF from bilirubin (RBC breakdown) - takes ~12h to develop. In traumatic tap, RBCs should clear (Tube 1 >> Tube 4) and NO xanthochromia. Non-clearing RBCs suggest SAH but aren't definitive.</div></div>`;
+        document.getElementById('lpSubmit').textContent = 'Continue →';
+        document.getElementById('lpSubmit').onclick = () => goTo('grading');
+    }
+
+    let selectedGrade = null;
+    function selectGrade(id) { selectedGrade = id; document.querySelectorAll('#gradeOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('gradeSubmit').disabled = false; }
+    function submitGrade() {
+        document.querySelectorAll('#gradeOpts .radio-option').forEach(o => {
+            if (o.dataset.id === '2') o.classList.add('correct');
+            else if (o.dataset.id === selectedGrade) o.classList.add('incorrect');
+        });
+        state.gradeScore = selectedGrade === '2' ? 100 : 50;
+        addScore(selectedGrade === '2' ? 35 : 15);
+        document.getElementById('gradeFeedback').innerHTML = `<div class="feedback ${selectedGrade==='2'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedGrade==='2'?'✅':'📚'}</span><span class="feedback-title">${selectedGrade==='2'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Hunt-Hess Grade 2:</strong> Moderate-severe headache + nuchal rigidity + NO focal deficit + alert. Grade 1 would be mild/no headache. Grade 3 requires drowsiness/confusion. This grading predicts outcomes and guides management intensity.</div></div>`;
+        document.getElementById('gradeSubmit').textContent = 'Complete →';
+        document.getElementById('gradeSubmit').onclick = () => goTo('outcome');
+    }
+
+    function goTo(id) { state.stage = id; document.getElementById('stageContainer').innerHTML = stages[id].render(); window.scrollTo(0,0); }
+    document.addEventListener('DOMContentLoaded', () => goTo('setup'));
+    </script>
+</body>
+</html>

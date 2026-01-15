@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Nursing Home Transfer | ReasonDx Adventure</title>
+    <style>
+        :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #F59E0B; --success: #10B981; --warning: #F59E0B; --danger: #DC2626; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #78350F 0%, #B45309 100%); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; }
+        .header-controls { display: flex; gap: 12px; align-items: center; }
+        .difficulty-toggle { display: flex; background: rgba(0,0,0,0.3); border-radius: 8px; overflow: hidden; }
+        .diff-btn { padding: 6px 12px; font-size: 0.75rem; cursor: pointer; border: none; background: transparent; color: rgba(255,255,255,0.7); font-weight: 600; transition: all 0.2s; }
+        .diff-btn.active { background: rgba(255,255,255,0.2); color: white; }
+        .diff-btn:hover { background: rgba(255,255,255,0.1); }
+        .stat { text-align: center; background: rgba(0,0,0,0.2); padding: 6px 14px; border-radius: 8px; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        .main { max-width: 900px; margin: 0 auto; padding: 24px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(180,83,9,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; line-height: 1.8; }
+        .narrative .hl { background: rgba(245,158,11,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        .setup-screen { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; }
+        .setup-screen h1 { font-size: 2rem; margin-bottom: 8px; }
+        .setup-screen .subtitle { color: var(--muted); margin-bottom: 32px; }
+        .start-btn { background: var(--accent); color: #000; border: none; padding: 16px 48px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+        .question-section { margin-bottom: 32px; }
+        .question-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .question-number { background: var(--accent); color: #000; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; }
+        .question-text { font-size: 1.1rem; font-weight: 600; }
+        .hint { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-size: 0.9rem; color: #93C5FD; }
+        .hint-label { font-weight: 600; color: #60A5FA; }
+        .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; margin-bottom: 16px; }
+        .checkbox-option { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.2s; }
+        .checkbox-option:hover { border-color: var(--accent); }
+        .checkbox-option.selected { border-color: var(--accent); background: rgba(245,158,11,0.15); }
+        .checkbox-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .checkbox-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .checkbox-option.missed { border-color: var(--warning); background: rgba(245,158,11,0.1); }
+        .checkbox-box { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .checkbox-option.selected .checkbox-box { border-color: var(--accent); background: var(--accent); }
+        .checkbox-option.selected .checkbox-box::after { content: '✓'; color: #000; font-weight: 700; font-size: 14px; }
+        .radio-options { display: flex; flex-direction: column; gap: 10px; }
+        .radio-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.2s; }
+        .radio-option:hover { border-color: var(--accent); }
+        .radio-option.selected { border-color: var(--accent); background: rgba(245,158,11,0.15); }
+        .radio-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .radio-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .radio-option.acceptable { border-color: var(--warning); background: rgba(245,158,11,0.15); }
+        .radio-circle { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; }
+        .radio-option.selected .radio-circle { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 40%, transparent 40%); }
+        .feedback { padding: 20px; border-radius: 12px; margin: 20px 0; }
+        .feedback.excellent { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .feedback.acceptable { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .feedback.incorrect { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+        .feedback-text { color: var(--muted); line-height: 1.7; }
+        .feedback-text strong { color: var(--text); }
+        .reference-box { background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.3); border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 0.9rem; }
+        .reference-box a { color: #60A5FA; text-decoration: none; }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: #000; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-row { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+        .btn-link { background: transparent; border: 2px solid var(--border); color: var(--text); }
+        .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 12px; margin: 20px 0; }
+        .vital { background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; text-align: center; }
+        .vital.critical { background: rgba(220,38,38,0.2); border: 1px solid rgba(220,38,38,0.4); }
+        .vital.warning { background: rgba(245,158,11,0.2); border: 1px solid rgba(245,158,11,0.4); }
+        .vital-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; }
+        .vital-value { font-size: 1.3rem; font-weight: 700; font-family: monospace; }
+        .lab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; margin: 16px 0; }
+        .lab-item { display: flex; justify-content: space-between; padding: 8px 12px; background: rgba(0,0,0,0.2); border-radius: 6px; }
+        .lab-name { color: var(--muted); }
+        .lab-value { font-family: monospace; font-weight: 600; }
+        .lab-value.critical { color: var(--danger); }
+        .lab-value.warning { color: var(--warning); }
+        .outcome { text-align: center; padding: 40px 20px; }
+        .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
+        .outcome-title { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+        .score-summary { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 24px; margin: 24px auto; max-width: 600px; }
+        .score-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .score-row:last-child { border-bottom: none; font-weight: 700; }
+        .cross-link { background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.3); border-radius: 8px; padding: 12px 16px; margin-top: 12px; }
+        .cross-link-title { font-weight: 600; color: #A78BFA; margin-bottom: 8px; }
+        .cross-link a { color: #C4B5FD; text-decoration: none; margin-right: 16px; }
+        .pearls-box { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); border-radius: 12px; padding: 20px; margin-top: 20px; }
+        .pearls-title { font-weight: 700; color: var(--success); margin-bottom: 12px; }
+        .pearl-item { padding: 8px 0; border-bottom: 1px solid rgba(16,185,129,0.2); font-size: 0.95rem; }
+        .pearl-item:last-child { border-bottom: none; }
+        .progress-bar { background: rgba(255,255,255,0.1); border-radius: 10px; height: 8px; margin: 20px 0; overflow: hidden; }
+        .progress-fill { background: var(--accent); height: 100%; transition: width 0.3s; }
+        .order-section { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .order-title { font-weight: 600; margin-bottom: 12px; color: var(--accent); }
+        .order-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .order-column h4 { font-size: 0.85rem; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-row">
+            <div class="header-title">🏥 The Nursing Home Transfer</div>
+            <div class="header-controls">
+                <div class="difficulty-toggle">
+                    <button class="diff-btn active" data-level="easy" onclick="setDifficulty('easy')">Easy</button>
+                    <button class="diff-btn" data-level="intermediate" onclick="setDifficulty('intermediate')">Intermediate</button>
+                    <button class="diff-btn" data-level="advanced" onclick="setDifficulty('advanced')">Advanced</button>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="scoreDisplay">0</div>
+                    <div class="stat-label">Points</div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="main"><div id="stageContainer"></div></main>
+
+    <script>
+    const state = { 
+        stage: 'setup', 
+        score: 0, 
+        maxScore: 0,
+        difficulty: 'easy',
+        answers: {},
+        questionNum: 0,
+        totalQuestions: 10
+    };
+
+    const difficultyConfig = {
+        easy: { label: 'Easy (UME)', hints: true, passingScore: 70 },
+        intermediate: { label: 'Intermediate (GME)', hints: false, passingScore: 80 },
+        advanced: { label: 'Advanced (CME)', hints: false, passingScore: 90 }
+    };
+
+    const caseContent = {
+        easy: {
+            age: '78-year-old female',
+            weight: '65 kg',
+            source: 'Sunny Acres Nursing Home',
+            presentation: 'altered mental status and fever',
+            history: 'HTN, DM2, recent UTI treated 2 weeks ago',
+            exam: 'Foley catheter with cloudy, foul-smelling urine. Decreased breath sounds at right base. Lethargic but rousable.',
+            vitals: { Temp: '102.4°F', HR: '118', BP: '84/52', RR: '26', SpO2: '92%' },
+            labs: { WBC: '18.2', Lactate: '4.8', Cr: '2.1', Glucose: '186', Procalcitonin: '8.4' }
+        },
+        intermediate: {
+            age: '62-year-old male',
+            weight: '90 kg',
+            source: 'home',
+            presentation: 'productive cough, confusion for 2 days',
+            history: 'COPD on home O2, alcoholism, recent ED visit for COPD exacerbation',
+            exam: 'Coarse rhonchi bilaterally, RLL consolidation. Appears chronically ill. Poor dentition.',
+            vitals: { Temp: '100.8°F', HR: '104', BP: '92/58', RR: '28', SpO2: '88%' },
+            labs: { WBC: '14.8', Lactate: '3.2', Cr: '1.8', Glucose: '142', Procalcitonin: '4.2' }
+        },
+        advanced: {
+            age: '45-year-old female',
+            weight: '70 kg',
+            source: 'home',
+            presentation: 'abdominal pain, fever, hypotension',
+            history: 'Recent cholecystectomy 5 days ago, diabetes, immunosuppressed (transplant)',
+            exam: 'Diffuse abdominal tenderness, guarding. Surgical incision with surrounding erythema and purulent drainage.',
+            vitals: { Temp: '96.8°F', HR: '124', BP: '78/44', RR: '24', SpO2: '94%' },
+            labs: { WBC: '2.1', Lactate: '6.2', Cr: '2.8', Glucose: '312', Procalcitonin: '22' }
+        }
+    };
+
+    const questions = {
+        q1_recognition: {
+            title: 'Pattern Recognition',
+            question: 'Based on this presentation, what clinical syndrome should you be most concerned about?',
+            hint: 'Infection + organ dysfunction = think about a specific syndrome. The vitals and mental status changes are key.',
+            getOptions: (diff) => [
+                { id: 'sepsis', text: 'Sepsis', desc: 'Infection with life-threatening organ dysfunction', correct: true, points: 100 },
+                { id: 'uti', text: 'Simple UTI', desc: 'Uncomplicated urinary tract infection', correct: false, points: 0 },
+                { id: 'pneumonia', text: 'Community-acquired pneumonia only', desc: 'Isolated respiratory infection', correct: false, points: 20 },
+                { id: 'dehydration', text: 'Dehydration', desc: 'Volume depletion', correct: false, points: 0 }
+            ],
+            feedback: {
+                correct: '<strong>Correct!</strong> This is sepsis - defined as life-threatening organ dysfunction caused by dysregulated host response to infection. Key findings: suspected infection (UTI, pneumonia) PLUS organ dysfunction (hypotension, altered mental status, elevated lactate, AKI).',
+                incorrect: '<strong>Critical Recognition!</strong> While UTI or pneumonia may be the SOURCE, the presence of hypotension, altered mental status, and organ dysfunction (elevated creatinine, lactate) indicates this has progressed to SEPSIS - a medical emergency requiring immediate intervention.'
+            },
+            reference: 'Surviving Sepsis Campaign 2021'
+        },
+
+        q2_sirs: {
+            title: 'SIRS Criteria Recognition',
+            question: 'Select ALL findings that are part of the SIRS (Systemic Inflammatory Response Syndrome) criteria:',
+            hint: 'SIRS has 4 criteria related to temperature, heart rate, respiratory rate, and WBC count.',
+            type: 'checkbox',
+            getOptions: (diff) => [
+                { id: 'temp_high', text: 'Temperature > 38°C (100.4°F)', correct: true },
+                { id: 'temp_low', text: 'Temperature < 36°C (96.8°F)', correct: true },
+                { id: 'hr', text: 'Heart rate > 90 bpm', correct: true },
+                { id: 'rr', text: 'Respiratory rate > 20/min', correct: true },
+                { id: 'wbc_high', text: 'WBC > 12,000/mm³', correct: true },
+                { id: 'wbc_low', text: 'WBC < 4,000/mm³', correct: true },
+                { id: 'bp', text: 'Systolic BP < 90 mmHg', correct: false },
+                { id: 'lactate', text: 'Lactate > 2 mmol/L', correct: false },
+                { id: 'ams', text: 'Altered mental status', correct: false },
+                { id: 'cr', text: 'Elevated creatinine', correct: false }
+            ],
+            feedback: {
+                correct: '<strong>Excellent!</strong> SIRS criteria (need ≥2): <strong>1)</strong> Temp >38°C or <36°C, <strong>2)</strong> HR >90, <strong>3)</strong> RR >20 or PaCO2 <32, <strong>4)</strong> WBC >12K or <4K or >10% bands. Note: Hypotension, lactate, and organ dysfunction are NOT SIRS criteria - they indicate sepsis severity!',
+                incorrect: '<strong>Review SIRS criteria:</strong> Temperature (>38°C or <36°C), Heart rate (>90), Respiratory rate (>20), WBC (>12K or <4K). Hypotension and lactate elevation indicate SEPTIC SHOCK, not SIRS itself.'
+            },
+            reference: 'Bone RC et al. Chest 1992'
+        },
+
+        q3_qsofa: {
+            title: 'qSOFA Calculation',
+            question: (content) => `Calculate this patient's qSOFA score. Vitals: BP ${content.vitals.BP}, RR ${content.vitals.RR}, mental status is altered.`,
+            hint: 'qSOFA has 3 components, each worth 1 point: SBP ≤100, RR ≥22, altered mental status.',
+            getOptions: (diff, content) => [
+                { id: '3', text: 'qSOFA = 3', desc: 'All three criteria met', correct: true, points: 100 },
+                { id: '2', text: 'qSOFA = 2', desc: 'Two criteria met', correct: false, points: 50 },
+                { id: '1', text: 'qSOFA = 1', desc: 'One criterion met', correct: false, points: 0 },
+                { id: '0', text: 'qSOFA = 0', desc: 'No criteria met', correct: false, points: 0 }
+            ],
+            feedback: {
+                correct: '<strong>Correct! qSOFA = 3.</strong> <strong>1)</strong> SBP ≤100 ✓ (84 mmHg), <strong>2)</strong> RR ≥22 ✓ (26/min), <strong>3)</strong> Altered mental status ✓. qSOFA ≥2 identifies patients at high risk for poor outcomes and should prompt ICU consideration.',
+                incorrect: '<strong>Let\'s calculate:</strong> SBP 84 ≤100 ✓ (+1), RR 26 ≥22 ✓ (+1), Altered mental status ✓ (+1) = <strong>qSOFA 3</strong>. Score ≥2 suggests high mortality risk.'
+            },
+            reference: 'Seymour CW et al. JAMA 2016'
+        },
+
+        q4_sepsis_vs_shock: {
+            title: 'Sepsis vs Septic Shock',
+            question: (content) => `With BP ${content.vitals.BP} and lactate ${content.labs.Lactate} mmol/L, does this patient meet criteria for septic shock?`,
+            hint: 'Septic shock = sepsis + persistent hypotension requiring vasopressors + lactate >2 despite adequate fluid resuscitation.',
+            getOptions: (diff) => [
+                { id: 'shock', text: 'Yes - this is septic shock', desc: 'Hypotension + elevated lactate indicates tissue hypoperfusion', correct: true, points: 100 },
+                { id: 'sepsis', text: 'No - sepsis only (not shock)', desc: 'Doesn\'t meet shock criteria yet', correct: false, points: 30 },
+                { id: 'sirs', text: 'No - just SIRS with infection', desc: 'No organ dysfunction', correct: false, points: 0 }
+            ],
+            feedback: {
+                correct: '<strong>Correct!</strong> Septic shock = sepsis + vasopressor requirement to maintain MAP ≥65 + lactate >2 mmol/L despite adequate fluid resuscitation. This patient has hypotension AND lactate >4 = high likelihood of septic shock. Start SEP-1 bundle immediately!',
+                incorrect: '<strong>Key distinction:</strong> Lactate >4 mmol/L with hypotension strongly suggests septic shock. The Sepsis-3 definition requires vasopressor need AFTER fluids, but with lactate this high, presume shock and act accordingly.'
+            },
+            reference: 'Singer M et al. JAMA 2016 (Sepsis-3)'
+        },
+
+        q5_fluid_type: {
+            title: 'Fluid Selection',
+            question: 'What is the recommended FIRST-LINE crystalloid for sepsis resuscitation?',
+            hint: 'Think about which fluid stays in the intravascular space and is isotonic.',
+            getOptions: (diff) => {
+                const opts = [
+                    { id: 'lr', text: 'Lactated Ringer\'s (LR)', desc: 'Balanced crystalloid', correct: true, points: 100 },
+                    { id: 'ns', text: 'Normal Saline (0.9% NaCl)', desc: 'Isotonic crystalloid', correct: false, points: 80, acceptable: true },
+                    { id: 'd5w', text: 'D5W', desc: 'Dextrose in water', correct: false, points: 0 },
+                    { id: 'albumin', text: 'Albumin 5%', desc: 'Colloid', correct: false, points: 30 }
+                ];
+                if (diff === 'advanced') opts.push({ id: 'plasmalyte', text: 'PlasmaLyte', desc: 'Balanced crystalloid', correct: true, points: 100 });
+                return opts;
+            },
+            feedback: {
+                correct: '<strong>Correct!</strong> Balanced crystalloids (LR, PlasmaLyte) are preferred over NS per Surviving Sepsis Campaign 2021. They cause less hyperchloremic acidosis and may have mortality benefit (SMART trial). NS is acceptable if balanced crystalloids unavailable.',
+                acceptable: '<strong>Acceptable.</strong> Normal saline works but may cause hyperchloremic metabolic acidosis with large volumes. Balanced crystalloids (LR, PlasmaLyte) are now preferred by SSC 2021 guidelines.',
+                incorrect: '<strong>Not recommended.</strong> D5W distributes throughout total body water (only 1/3 stays intravascular) - ineffective for resuscitation. Albumin is not first-line. Use balanced crystalloids or NS.'
+            },
+            reference: 'Surviving Sepsis Campaign 2021; SMART Trial (NEJM 2018)'
+        },
+
+        q6_fluid_volume: {
+            title: 'Fluid Volume Calculation',
+            question: (content) => `This patient weighs ${content.weight}. Per SEP-1/Surviving Sepsis guidelines, what is the initial fluid bolus target?`,
+            hint: 'The guideline recommends a specific mL/kg amount within the first 3 hours.',
+            getOptions: (diff, content) => {
+                const wt = parseInt(content.weight);
+                const target = wt * 30;
+                return [
+                    { id: 'correct', text: `30 mL/kg = ${target} mL (approximately ${Math.round(target/1000*10)/10} L)`, desc: 'Within first 3 hours for hypotension or lactate ≥4', correct: true, points: 100 },
+                    { id: 'low', text: `10 mL/kg = ${wt * 10} mL`, desc: 'Conservative approach', correct: false, points: 20 },
+                    { id: 'high', text: `50 mL/kg = ${wt * 50} mL`, desc: 'Aggressive resuscitation', correct: false, points: 30 },
+                    { id: 'fixed', text: '2 liters for everyone', desc: 'Fixed volume regardless of weight', correct: false, points: 40 }
+                ];
+            },
+            feedback: {
+                correct: '<strong>Correct!</strong> SEP-1 bundle requires <strong>30 mL/kg crystalloid</strong> within 3 hours for patients with hypotension OR lactate ≥4 mmol/L. This is a minimum target - reassess and give more if needed based on clinical response.',
+                incorrect: '<strong>Remember:</strong> 30 mL/kg is the guideline target, not 10 or 50. For this patient, that\'s about 2L. Fixed volumes (like "2L for everyone") don\'t account for patient size. Weight-based dosing is essential.'
+            },
+            reference: 'SEP-1 Core Measure; SSC 2021'
+        },
+
+        q7_fluid_rate: {
+            title: 'Fluid Administration Rate',
+            question: 'At what rate should the initial fluid bolus be given?',
+            hint: 'This is resuscitation, not maintenance. Think fast!',
+            getOptions: (diff) => [
+                { id: 'bolus', text: 'Wide open / Bolus (over 30-60 minutes)', desc: 'Rapid infusion for resuscitation', correct: true, points: 100 },
+                { id: 'fast', text: '500 mL/hour', desc: 'Fast but controlled', correct: false, points: 50, acceptable: true },
+                { id: 'slow', text: '125 mL/hour', desc: 'Standard maintenance rate', correct: false, points: 0 },
+                { id: 'vslow', text: '50 mL/hour', desc: 'Slow infusion', correct: false, points: 0 }
+            ],
+            feedback: {
+                correct: '<strong>Correct!</strong> Initial resuscitation should be given as a <strong>bolus over 30-60 minutes</strong>, not maintenance rate. You can use pressure bags or push fluids. Reassess frequently - listen for rales, check JVP, but don\'t delay resuscitation in obvious shock.',
+                acceptable: '<strong>Faster is better in shock.</strong> 500 mL/hr might work but true resuscitation needs bolus rates. In septic shock, every hour of delayed resuscitation increases mortality.',
+                incorrect: '<strong>Too slow!</strong> Maintenance rates (125 mL/hr) are for stable patients, not septic shock. This patient needs rapid volume expansion to restore perfusion pressure.'
+            },
+            reference: 'SSC 2021; Rivers E et al. NEJM 2001'
+        },
+
+        q8_antibiotics: {
+            title: 'Antibiotic Timing',
+            question: 'When should antibiotics be administered in sepsis/septic shock?',
+            hint: 'Time is tissue. Each hour of delay increases mortality.',
+            getOptions: (diff) => [
+                { id: '1hr', text: 'Within 1 hour of recognition', desc: 'Ideally after cultures but don\'t delay for them', correct: true, points: 100 },
+                { id: '3hr', text: 'Within 3 hours', desc: 'Part of 3-hour bundle', correct: false, points: 50, acceptable: true },
+                { id: 'cultures', text: 'Only after culture results return', desc: 'To ensure targeted therapy', correct: false, points: 0 },
+                { id: '6hr', text: 'Within 6 hours', desc: 'Before completing workup', correct: false, points: 20 }
+            ],
+            feedback: {
+                correct: '<strong>Correct!</strong> Antibiotics within <strong>1 HOUR</strong> for septic shock, ideally within 3 hours for sepsis without shock. Each hour of delay in antibiotics increases mortality by ~7.6%. Draw cultures FIRST if possible, but <strong>never delay antibiotics for cultures</strong>.',
+                acceptable: '<strong>Close, but earlier is better.</strong> The 3-hour bundle includes antibiotics, but septic SHOCK needs antibiotics within 1 hour. Don\'t wait.',
+                incorrect: '<strong>Critical error!</strong> Waiting for cultures = waiting for patient to die. Start empiric broad-spectrum antibiotics immediately. You can always narrow later.'
+            },
+            reference: 'Kumar A et al. Crit Care Med 2006; SSC 2021'
+        },
+
+        q9_antibiotic_choice: {
+            title: 'Empiric Antibiotic Selection',
+            question: (content) => `For this patient with suspected ${content.source === 'Sunny Acres Nursing Home' ? 'UTI/pneumonia from nursing home' : content.exam.includes('pneumonia') ? 'pneumonia' : 'intra-abdominal infection'}, what empiric antibiotic regimen provides appropriate coverage?`,
+            hint: 'Need to cover gram-positives (including MRSA if risk factors), gram-negatives (including Pseudomonas), and consider source.',
+            getOptions: (diff, content) => {
+                if (diff === 'easy') {
+                    return [
+                        { id: 'broad', text: 'Vancomycin + Piperacillin-tazobactam (Zosyn)', desc: 'Covers MRSA + broad gram-negative including Pseudomonas', correct: true, points: 100 },
+                        { id: 'narrow', text: 'Ceftriaxone alone', desc: 'Third-generation cephalosporin', correct: false, points: 20 },
+                        { id: 'oral', text: 'Oral ciprofloxacin', desc: 'Fluoroquinolone', correct: false, points: 0 }
+                    ];
+                } else {
+                    return [
+                        { id: 'broad', text: 'Vancomycin + Piperacillin-tazobactam', desc: 'MRSA + broad gram-negative coverage', correct: true, points: 100 },
+                        { id: 'mero', text: 'Vancomycin + Meropenem', desc: 'MRSA + carbapenem for MDR coverage', correct: true, points: 100 },
+                        { id: 'cef', text: 'Ceftriaxone + Azithromycin', desc: 'Standard CAP regimen', correct: false, points: 40 },
+                        { id: 'vanc', text: 'Vancomycin alone', desc: 'Gram-positive only', correct: false, points: 20 }
+                    ];
+                }
+            },
+            feedback: {
+                correct: '<strong>Excellent!</strong> Empiric coverage for septic shock should include: <strong>MRSA coverage</strong> (vancomycin or daptomycin) + <strong>Pseudomonas coverage</strong> (pip-tazo, cefepime, or carbapenem). Healthcare-associated infections (nursing home) need broader coverage than community-acquired.',
+                incorrect: '<strong>Too narrow!</strong> Septic shock requires BROAD empiric coverage. Missing MRSA or Pseudomonas in severe sepsis can be fatal. You can always de-escalate when cultures return.'
+            },
+            reference: 'SSC 2021; IDSA Guidelines'
+        },
+
+        q10_vasopressors: {
+            title: 'Vasopressor Initiation',
+            question: 'After 30 mL/kg fluids, MAP remains 58 mmHg. What is the first-line vasopressor?',
+            hint: 'SSC guidelines are clear on first-line choice. Think about receptor effects.',
+            getOptions: (diff) => [
+                { id: 'norepi', text: 'Norepinephrine (Levophed)', desc: 'α1 >> β1 agonist', correct: true, points: 100 },
+                { id: 'dopa', text: 'Dopamine', desc: 'Dose-dependent α/β/DA agonist', correct: false, points: 30 },
+                { id: 'phenyl', text: 'Phenylephrine (Neo-Synephrine)', desc: 'Pure α1 agonist', correct: false, points: 40 },
+                { id: 'epi', text: 'Epinephrine', desc: 'α and β agonist', correct: false, points: 50, acceptable: true },
+                { id: 'vaso', text: 'Vasopressin', desc: 'V1 receptor agonist', correct: false, points: 40 }
+            ],
+            feedback: {
+                correct: '<strong>Correct!</strong> <strong>Norepinephrine is FIRST-LINE</strong> per SSC 2021. It provides potent α1 vasoconstriction (↑SVR) with mild β1 effect (maintains CO). Start at 0.1-0.5 mcg/kg/min, titrate to MAP ≥65. Vasopressin can be added as second agent.',
+                acceptable: '<strong>Epinephrine is second-line.</strong> It can be added to norepinephrine or used if norepinephrine unavailable. But norepinephrine remains first choice due to better hemodynamic profile in septic shock.',
+                incorrect: '<strong>Not first-line.</strong> Dopamine has more arrhythmias than norepinephrine. Phenylephrine (pure α) may decrease cardiac output. Vasopressin is adjunctive, not first-line. <strong>Norepinephrine first!</strong>'
+            },
+            reference: 'SSC 2021; De Backer D et al. NEJM 2010'
+        }
+    };
+
+    let selectedOptions = {};
+
+    function setDifficulty(level) {
+        state.difficulty = level;
+        document.querySelectorAll('.diff-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.level === level));
+        if (state.stage !== 'setup') {
+            state.stage = 'setup'; state.score = 0; state.maxScore = 0; state.answers = {}; state.questionNum = 0;
+            document.getElementById('scoreDisplay').textContent = '0';
+        }
+        render();
+    }
+
+    function addScore(pts, max) { state.score += pts; state.maxScore += max; document.getElementById('scoreDisplay').textContent = state.score; }
+    function getProgressPercent() { return Math.round((state.questionNum / state.totalQuestions) * 100); }
+
+    function selectOption(qId, answerId) {
+        selectedOptions[qId] = answerId;
+        document.querySelectorAll(`#${qId} .radio-option`).forEach(o => o.classList.toggle('selected', o.dataset.id === answerId));
+        document.getElementById(`${qId}Submit`).disabled = false;
+    }
+
+    function toggleCheckbox(qId, optionId) {
+        if (!selectedOptions[qId]) selectedOptions[qId] = [];
+        const idx = selectedOptions[qId].indexOf(optionId);
+        if (idx > -1) selectedOptions[qId].splice(idx, 1);
+        else selectedOptions[qId].push(optionId);
+        document.querySelector(`#${qId} [data-id="${optionId}"]`).classList.toggle('selected');
+        document.getElementById(`${qId}Submit`).disabled = selectedOptions[qId].length === 0;
+    }
+
+    function getQuestionKey(num) {
+        const keys = ['q1_recognition', 'q2_sirs', 'q3_qsofa', 'q4_sepsis_vs_shock', 'q5_fluid_type', 'q6_fluid_volume', 'q7_fluid_rate', 'q8_antibiotics', 'q9_antibiotic_choice', 'q10_vasopressors'];
+        return keys[num - 1];
+    }
+
+    function startQuestions() { state.questionNum = 1; state.stage = 'question'; render(); }
+
+    function submitQuestion() {
+        const qKey = getQuestionKey(state.questionNum);
+        const q = questions[qKey];
+        const content = caseContent[state.difficulty];
+        
+        if (q.type === 'checkbox') {
+            const selected = selectedOptions['qOpts'] || [];
+            const options = q.getOptions(state.difficulty, content);
+            const correctIds = options.filter(o => o.correct).map(o => o.id);
+            const correctSelected = selected.filter(id => correctIds.includes(id)).length;
+            const incorrectSelected = selected.filter(id => !correctIds.includes(id)).length;
+            const missed = correctIds.filter(id => !selected.includes(id)).length;
+            
+            const maxPts = correctIds.length * 15;
+            const pts = Math.max(0, (correctSelected * 15) - (incorrectSelected * 10) - (missed * 5));
+            addScore(pts, maxPts);
+            
+            document.querySelectorAll('#qOpts .checkbox-option').forEach(o => {
+                const isCorrect = correctIds.includes(o.dataset.id);
+                const isSelected = selected.includes(o.dataset.id);
+                if (isCorrect && isSelected) o.classList.add('correct');
+                else if (isCorrect && !isSelected) o.classList.add('missed');
+                else if (!isCorrect && isSelected) o.classList.add('incorrect');
+            });
+            
+            const allCorrect = correctSelected === correctIds.length && incorrectSelected === 0;
+            showFeedback(q, allCorrect ? 'correct' : 'incorrect');
+        } else {
+            const selected = document.querySelector('#qOpts .radio-option.selected');
+            if (!selected) return;
+            
+            const isCorrect = selected.dataset.correct === 'true';
+            const isAcceptable = selected.dataset.acceptable === 'true';
+            const points = parseInt(selected.dataset.points);
+            addScore(points, 100);
+            
+            document.querySelectorAll('#qOpts .radio-option').forEach(o => {
+                if (o.dataset.correct === 'true') o.classList.add('correct');
+                else if (o === selected && !isCorrect) o.classList.add(isAcceptable ? 'acceptable' : 'incorrect');
+            });
+            
+            showFeedback(q, isCorrect ? 'correct' : (isAcceptable ? 'acceptable' : 'incorrect'));
+        }
+    }
+
+    function showFeedback(q, type) {
+        const feedbackText = q.feedback[type] || q.feedback.incorrect;
+        const feedbackClass = type === 'correct' ? 'excellent' : (type === 'acceptable' ? 'acceptable' : 'incorrect');
+        
+        document.getElementById('qFeedback').innerHTML = `
+            <div class="feedback ${feedbackClass}">
+                <div class="feedback-text">${feedbackText}</div>
+                ${q.reference ? `<div class="reference-box"><strong>📚 Reference:</strong> ${q.reference}</div>` : ''}
+            </div>`;
+        
+        const btn = document.getElementById('qOptsSubmit');
+        btn.textContent = state.questionNum < state.totalQuestions ? 'Next Question →' : 'See Results →';
+        btn.onclick = nextQuestion;
+    }
+
+    function nextQuestion() {
+        if (state.questionNum < state.totalQuestions) {
+            state.questionNum++;
+            selectedOptions = {};
+            render();
+        } else {
+            state.stage = 'outcome';
+            render();
+        }
+    }
+
+    function goTo(stageId) { state.stage = stageId; render(); window.scrollTo(0, 0); }
+
+    const stages = {
+        setup: {
+            render: () => {
+                const config = difficultyConfig[state.difficulty];
+                return `
+                <div class="setup-screen">
+                    <h1>🏥 The Nursing Home Transfer</h1>
+                    <p class="subtitle">Active clinical reasoning: Sepsis recognition, resuscitation, and management</p>
+                    <div style="background: rgba(245,158,11,0.1); border-radius: 12px; padding: 20px; margin: 20px 0; text-align: left;">
+                        <div style="font-weight: 600; margin-bottom: 8px;">Difficulty: ${config.label}</div>
+                        <div style="font-size: 0.9rem; color: var(--muted);">
+                            ${config.hints ? '✅ Hints enabled' : '❌ No hints'} • Pass: ${config.passingScore}%
+                        </div>
+                        <div style="margin-top: 12px; font-size: 0.85rem; color: var(--muted);">
+                            <strong>Topics:</strong> SIRS criteria, qSOFA, Sepsis-3 definitions, fluid selection/dosing/rate, antibiotic timing/selection, vasopressor choice
+                        </div>
+                    </div>
+                    <button class="start-btn" onclick="goTo('presentation')">Begin Case →</button>
+                </div>`;
+            }
+        },
+
+        presentation: {
+            render: () => {
+                const c = caseContent[state.difficulty];
+                return `
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-phase">EMS Report</div>
+                        <div class="card-title">📞 Incoming Patient</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="narrative">
+                            EMS brings a <span class="hl">${c.age}</span> (${c.weight}) from <span class="hl">${c.source}</span> 
+                            with chief complaint of <span class="hl">${c.presentation}</span>.
+                            <br><br>
+                            <strong>History:</strong> ${c.history}<br>
+                            <strong>Exam:</strong> ${c.exam}
+                        </div>
+                        
+                        <div class="vitals-grid">
+                            <div class="vital ${parseFloat(c.vitals.Temp) > 100.4 || parseFloat(c.vitals.Temp) < 96.8 ? 'warning' : ''}">
+                                <div class="vital-label">Temp</div><div class="vital-value">${c.vitals.Temp}</div>
+                            </div>
+                            <div class="vital ${parseInt(c.vitals.HR) > 90 ? 'warning' : ''}">
+                                <div class="vital-label">HR</div><div class="vital-value">${c.vitals.HR}</div>
+                            </div>
+                            <div class="vital ${parseInt(c.vitals.BP) < 90 ? 'critical' : ''}">
+                                <div class="vital-label">BP</div><div class="vital-value">${c.vitals.BP}</div>
+                            </div>
+                            <div class="vital ${parseInt(c.vitals.RR) > 20 ? 'warning' : ''}">
+                                <div class="vital-label">RR</div><div class="vital-value">${c.vitals.RR}</div>
+                            </div>
+                            <div class="vital ${parseInt(c.vitals.SpO2) < 94 ? 'critical' : ''}">
+                                <div class="vital-label">SpO2</div><div class="vital-value">${c.vitals.SpO2}</div>
+                            </div>
+                        </div>
+
+                        <div class="lab-grid">
+                            <div class="lab-item"><span class="lab-name">WBC</span><span class="lab-value ${parseFloat(c.labs.WBC) > 12 || parseFloat(c.labs.WBC) < 4 ? 'warning' : ''}">${c.labs.WBC} K/µL</span></div>
+                            <div class="lab-item"><span class="lab-name">Lactate</span><span class="lab-value ${parseFloat(c.labs.Lactate) > 2 ? 'critical' : ''}">${c.labs.Lactate} mmol/L</span></div>
+                            <div class="lab-item"><span class="lab-name">Creatinine</span><span class="lab-value ${parseFloat(c.labs.Cr) > 1.2 ? 'warning' : ''}">${c.labs.Cr} mg/dL</span></div>
+                            <div class="lab-item"><span class="lab-name">Glucose</span><span class="lab-value">${c.labs.Glucose} mg/dL</span></div>
+                            <div class="lab-item"><span class="lab-name">Procalcitonin</span><span class="lab-value ${parseFloat(c.labs.Procalcitonin) > 2 ? 'critical' : ''}">${c.labs.Procalcitonin} ng/mL</span></div>
+                        </div>
+
+                        <div class="btn-row">
+                            <button class="btn btn-primary" onclick="startQuestions()">Begin Assessment →</button>
+                        </div>
+                    </div>
+                </div>`;
+            }
+        },
+
+        question: {
+            render: () => {
+                const qKey = getQuestionKey(state.questionNum);
+                const q = questions[qKey];
+                const config = difficultyConfig[state.difficulty];
+                const content = caseContent[state.difficulty];
+                const hint = config.hints && q.hint ? `<div class="hint"><span class="hint-label">💡 Hint:</span> ${q.hint}</div>` : '';
+                const questionText = typeof q.question === 'function' ? q.question(content) : q.question;
+                const options = q.getOptions(state.difficulty, content);
+
+                let optionsHtml;
+                if (q.type === 'checkbox') {
+                    optionsHtml = `<div class="checkbox-grid" id="qOpts">
+                        ${options.map(o => `
+                            <div class="checkbox-option" data-id="${o.id}" data-correct="${o.correct}" onclick="toggleCheckbox('qOpts', '${o.id}')">
+                                <div class="checkbox-box"></div>
+                                <span>${o.text}</span>
+                            </div>
+                        `).join('')}
+                    </div>`;
+                } else {
+                    optionsHtml = `<div class="radio-options" id="qOpts">
+                        ${options.map(o => `
+                            <div class="radio-option" data-id="${o.id}" data-correct="${o.correct}" data-points="${o.points}" data-acceptable="${o.acceptable || false}" onclick="selectOption('qOpts', '${o.id}')">
+                                <div class="radio-circle"></div>
+                                <div><strong>${o.text}</strong>${o.desc ? `<br><small style="color:var(--muted)">${o.desc}</small>` : ''}</div>
+                            </div>
+                        `).join('')}
+                    </div>`;
+                }
+
+                return `
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-phase">Question ${state.questionNum} of ${state.totalQuestions}</div>
+                        <div class="card-title">🔍 ${q.title}</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="progress-bar"><div class="progress-fill" style="width: ${getProgressPercent()}%"></div></div>
+                        <div class="question-section">
+                            <div class="question-header">
+                                <div class="question-number">${state.questionNum}</div>
+                                <div class="question-text">${questionText}</div>
+                            </div>
+                            ${hint}
+                            ${optionsHtml}
+                        </div>
+                        <div id="qFeedback"></div>
+                        <div class="btn-row">
+                            <button class="btn btn-primary" id="qOptsSubmit" onclick="submitQuestion()" disabled>Submit →</button>
+                        </div>
+                    </div>
+                </div>`;
+            }
+        },
+
+        outcome: {
+            render: () => {
+                const config = difficultyConfig[state.difficulty];
+                const percent = state.maxScore > 0 ? Math.round((state.score / state.maxScore) * 100) : 0;
+                const passed = percent >= config.passingScore;
+                
+                return `
+                <div class="card">
+                    <div class="card-body">
+                        <div class="outcome">
+                            <div class="outcome-icon">${passed ? '🎉' : '📚'}</div>
+                            <div class="outcome-title" style="color: ${passed ? 'var(--success)' : 'var(--warning)'}">${passed ? 'Case Complete!' : 'Review Needed'}</div>
+                            <div class="outcome-desc">${passed ? 'Excellent work on sepsis recognition and management!' : 'Review the SEP-1 bundle and sepsis definitions.'}</div>
+                        </div>
+
+                        <div class="score-summary">
+                            <div class="score-row"><span>Your Score</span><span>${state.score} / ${state.maxScore}</span></div>
+                            <div class="score-row"><span>Percentage</span><span>${percent}%</span></div>
+                            <div class="score-row"><span>Passing</span><span>${config.passingScore}%</span></div>
+                            <div class="score-row"><span>Result</span><span style="color: ${passed ? 'var(--success)' : 'var(--warning)'}">${passed ? '✅ PASSED' : '⚠️ REVIEW'}</span></div>
+                        </div>
+
+                        <div class="pearls-box">
+                            <div class="pearls-title">📌 Clinical Pearls - Sepsis</div>
+                            <div class="pearl-item"><strong>SIRS criteria (≥2):</strong> Temp >38°C/<36°C, HR >90, RR >20, WBC >12K/<4K</div>
+                            <div class="pearl-item"><strong>qSOFA (≥2 = high risk):</strong> SBP ≤100, RR ≥22, Altered mental status</div>
+                            <div class="pearl-item"><strong>Septic shock:</strong> Sepsis + vasopressor requirement + lactate >2 despite fluids</div>
+                            <div class="pearl-item"><strong>SEP-1 bundle (3hr):</strong> Lactate, cultures, antibiotics, 30 mL/kg if hypotensive/lactate ≥4</div>
+                            <div class="pearl-item"><strong>Fluids:</strong> Balanced crystalloids (LR) preferred, 30 mL/kg bolus over 30-60 min</div>
+                            <div class="pearl-item"><strong>Antibiotics:</strong> Within 1 hour for shock, broad empiric coverage (Vanc + Zosyn)</div>
+                            <div class="pearl-item"><strong>Vasopressor:</strong> Norepinephrine FIRST-LINE, titrate to MAP ≥65</div>
+                        </div>
+
+                        <div class="reference-box">
+                            <strong>📚 References:</strong><br>
+                            <a href="https://www.sccm.org/SurvivingSepsisCampaign/Guidelines" target="_blank">Surviving Sepsis Campaign 2021</a><br>
+                            <a href="https://www.ncbi.nlm.nih.gov/books/NBK537054/" target="_blank">StatPearls: Sepsis</a>
+                        </div>
+
+                        <div class="cross-link">
+                            <div class="cross-link-title">🔗 Continue Learning</div>
+                            <a href="../mechanism/sepsis-shock-module.html">MechanismDx: Sepsis Pathophysiology</a>
+                        </div>
+
+                        <div class="btn-row" style="justify-content: center; margin-top: 30px;">
+                            <button class="btn btn-primary" onclick="location.reload()">Try Again</button>
+                            <button class="btn btn-link" onclick="location.href='adventure-hub.html'">Back to Cases</button>
+                        </div>
+                    </div>
+                </div>`;
+            }
+        }
+    };
+
+    function render() {
+        const stage = stages[state.stage];
+        if (stage) document.getElementById('stageContainer').innerHTML = stage.render();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => render());
+    </script>
+</body>
+</html>
