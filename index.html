@@ -3,128 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dx Suite - Clinical Education Platform</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Dx Suite | Clinical Education Platform</title>
     <style>
-        .gradient-bg { background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 50%, #1e3a5f 100%); }
-        .card-hover { transition: all 0.3s ease; }
-        .card-hover:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
-        .platform-card { background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%); backdrop-filter: blur(10px); }
-        .glow { box-shadow: 0 0 40px rgba(59, 130, 246, 0.3); }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        :root { --primary: #3b82f6; --primary-bg: #eff6ff; --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff; --bg-nav: #1e293b; --border: #e2e8f0; --nav-link: #94a3b8; --nav-active-bg: #3b82f6; --nav-active-text: #fff; --transition: all 0.3s; }
+        [data-theme="ocean-dark"] { --primary: #3b82f6; --primary-bg: #1e3a5f; --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b; --bg-nav: #0f172a; --border: #334155; }
+        [data-theme="midnight-teal"] { --primary: #5eead4; --primary-bg: #0d3d3b; --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b; --bg-nav: #022c22; --border: #115e59; --nav-link: #86efac; --nav-active-bg: #5eead4; --nav-active-text: #052e16; }
+        [data-theme="muted-teal"] { --primary: #4a9a8e; --primary-bg: #e8f2f0; --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #fff; --bg-nav: #f7fafa; --border: #d5e5e3; --nav-link: #64748b; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg-main); color: var(--text-primary); min-height: 100vh; transition: var(--transition); }
+        
+        /* Streamlined Nav */
+        .nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+        .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-brand { text-decoration: none; } .nav-brand svg { height: 36px; }
+        .nav-links { display: flex; gap: 4px; align-items: center; }
+        .nav-link { padding: 8px 14px; text-decoration: none; color: var(--nav-link); font-size: 14px; font-weight: 500; border-radius: 8px; transition: var(--transition); }
+        .nav-link:hover { background: rgba(255,255,255,0.1); color: var(--text-primary); }
+        .nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
+        .theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: transparent; color: var(--nav-link); cursor: pointer; font-size: 14px; }
+        .theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+        
+        /* Hero */
+        .hero { text-align: center; padding: 60px 24px 40px; }
+        .hero-logo svg { height: 80px; margin-bottom: 16px; }
+        .hero .subtitle { font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 8px; }
+        .hero .institution { font-size: 0.9rem; color: var(--text-secondary); opacity: 0.7; }
+        
+        /* Stats */
+        .stats { display: flex; justify-content: center; gap: 40px; margin: 40px 0; flex-wrap: wrap; }
+        .stat { text-align: center; }
+        .stat-value { font-size: 2.5rem; font-weight: 700; color: var(--text-primary); }
+        .stat-label { font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase; }
+        
+        /* Platform Cards */
+        .platforms { max-width: 1000px; margin: 0 auto; padding: 0 24px 40px; }
+        .platforms-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .platform-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-decoration: none; color: inherit; transition: var(--transition); }
+        .platform-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.15); border-color: var(--primary); }
+        .platform-logo svg { height: 45px; margin-bottom: 12px; }
+        .platform-subtitle { font-size: 0.9rem; color: var(--primary); font-weight: 500; margin-bottom: 10px; }
+        .platform-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 14px; }
+        .platform-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+        .tag { font-size: 0.7rem; padding: 4px 8px; background: var(--primary-bg); color: var(--primary); border-radius: 4px; }
+        
+        /* Quick Links */
+        .quick-section { background: var(--bg-card); border-top: 1px solid var(--border); padding: 32px 24px; }
+        .quick-inner { max-width: 1000px; margin: 0 auto; }
+        .quick-title { font-size: 1rem; font-weight: 600; margin-bottom: 16px; }
+        .quick-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+        .quick-link { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 16px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 10px; text-decoration: none; color: inherit; transition: var(--transition); }
+        .quick-link:hover { border-color: var(--primary); }
+        .quick-icon { font-size: 1.3rem; }
+        .quick-text { font-size: 0.8rem; font-weight: 500; }
+        
+        /* Footer */
+        .footer { text-align: center; padding: 20px; color: var(--text-secondary); font-size: 0.75rem; }
+        
+        /* Theme Modal */
+        .theme-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 1000; align-items: center; justify-content: center; }
+        .theme-modal.open { display: flex; }
+        .theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 380px; width: 90%; }
+        .theme-modal-header { display: flex; justify-content: space-between; margin-bottom: 16px; }
+        .theme-modal-title { font-weight: 600; }
+        .theme-modal-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-secondary); }
+        .theme-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 8px; cursor: pointer; }
+        .theme-option:hover, .theme-option.selected { border-color: var(--primary); }
+        .theme-preview { height: 32px; border-radius: 4px; margin-bottom: 6px; }
+        .theme-name { font-size: 0.8rem; }
+        
+        @media (max-width: 900px) { .platforms-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 600px) { .nav-links { display: none; } .quick-grid { grid-template-columns: repeat(2, 1fr); } .stats { gap: 24px; } }
     </style>
 </head>
-<body class="bg-slate-900 min-h-screen">
-    <!-- Hero Section -->
-    <header class="gradient-bg text-white py-16 px-4">
-        <div class="max-w-6xl mx-auto text-center">
-            <h1 class="text-5xl md:text-6xl font-bold mb-4">
-                <span class="text-blue-300">Dx</span> Suite
-            </h1>
-            <p class="text-2xl text-blue-100 mb-2">Clinical Education Platform</p>
-            <p class="text-lg text-blue-200/80">NSU Dr. Kiran C. Patel College of Allopathic Medicine</p>
-            
-            <!-- Stats -->
-            <div class="flex justify-center gap-8 mt-10 flex-wrap">
-                <div class="text-center">
-                    <div class="text-4xl font-bold text-white">226</div>
-                    <div class="text-sm text-blue-200">Clinical Cases</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-4xl font-bold text-white">84</div>
-                    <div class="text-sm text-blue-200">Modules</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-4xl font-bold text-white">50+</div>
-                    <div class="text-sm text-blue-200">SBAR Scenarios</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-4xl font-bold text-white">800+</div>
-                    <div class="text-sm text-blue-200">Diagnoses</div>
-                </div>
+<body data-theme="ocean-dark">
+    <!-- STREAMLINED NAV: Home | MechanismDx | ReasonDx | CoachDx | Dashboard -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 120"><text x="20" y="70" font-family="Georgia, serif" font-size="58" fill="currentColor">D</text><line x1="68" y1="42" x2="92" y2="72" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><ellipse cx="66" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 66 39)" fill="currentColor"/><path d="M 92 42 L 76 58 Q 70 66 70 76 Q 70 86 78 92 Q 86 98 86 108" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/><ellipse cx="94" cy="39" rx="2.5" ry="4.5" transform="rotate(28 94 39)" fill="currentColor"/><circle cx="86" cy="108" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="86" cy="108" r="5" fill="currentColor"/><text x="115" y="70" font-family="Georgia, serif" font-size="58" fill="currentColor" letter-spacing="-1">Suite</text></svg>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">🏠 Home</a>
+                <a href="mechanism/index.html" class="nav-link">⚙️ MechanismDx</a>
+                <a href="ReasonDx/index.html" class="nav-link">🩺 ReasonDx</a>
+                <a href="CoachDx/index.html" class="nav-link">🗣️ CoachDx</a>
+                <a href="ReasonDx/analytics-dashboard.html" class="nav-link">📊 Dashboard</a>
+                <button class="theme-btn" onclick="openThemeModal()">🎨</button>
             </div>
         </div>
-    </header>
+    </nav>
 
-    <!-- Main Platforms -->
-    <main class="max-w-6xl mx-auto px-4 -mt-8">
-        <div class="grid md:grid-cols-3 gap-6 mb-12">
-            <!-- ReasonDx -->
-            <a href="ReasonDx/index.html" class="card-hover platform-card rounded-2xl p-8 shadow-xl glow border border-blue-200/50">
-                <div class="text-5xl mb-4">🩺</div>
-                <h2 class="text-2xl font-bold text-blue-900 mb-2">ReasonDx</h2>
-                <p class="text-blue-700 font-medium mb-3">Clinical Reasoning Trainer</p>
-                <p class="text-gray-600 text-sm mb-4">Work through 226 cases using the RPFS framework. Build differentials, order tests, and develop clinical reasoning skills.</p>
-                <div class="flex flex-wrap gap-2">
-                    <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">226 Cases</span>
-                    <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">22 Categories</span>
-                    <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">RPFS Framework</span>
-                </div>
+    <section class="hero">
+        <div class="hero-logo">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 120"><text x="20" y="70" font-family="Georgia, serif" font-size="58" fill="currentColor">D</text><line x1="68" y1="42" x2="92" y2="72" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><ellipse cx="66" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 66 39)" fill="currentColor"/><path d="M 92 42 L 76 58 Q 70 66 70 76 Q 70 86 78 92 Q 86 98 86 108" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/><ellipse cx="94" cy="39" rx="2.5" ry="4.5" transform="rotate(28 94 39)" fill="currentColor"/><circle cx="86" cy="108" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="86" cy="108" r="5" fill="currentColor"/><text x="115" y="70" font-family="Georgia, serif" font-size="58" fill="currentColor" letter-spacing="-1">Suite</text></svg>
+        </div>
+        <p class="subtitle">Clinical Education Platform</p>
+        <p class="institution">NSU Dr. Kiran C. Patel College of Allopathic Medicine</p>
+        <div class="stats">
+            <div class="stat"><div class="stat-value">226</div><div class="stat-label">Clinical Cases</div></div>
+            <div class="stat"><div class="stat-value">84</div><div class="stat-label">Modules</div></div>
+            <div class="stat"><div class="stat-value">50+</div><div class="stat-label">SBAR Scenarios</div></div>
+            <div class="stat"><div class="stat-value">800+</div><div class="stat-label">Diagnoses</div></div>
+        </div>
+    </section>
+
+    <section class="platforms">
+        <div class="platforms-grid">
+            <a href="ReasonDx/index.html" class="platform-card">
+                <div class="platform-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 120"><text x="20" y="70" font-family="Georgia, serif" font-size="58" fill="#1a1a1a" letter-spacing="-1">Reason</text><text x="200" y="70" font-family="Georgia, serif" font-size="58" fill="#1a1a1a">D</text><line x1="248" y1="42" x2="272" y2="72" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round"/><ellipse cx="246" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 246 39)" fill="#1a1a1a"/><path d="M 272 42 L 256 58 Q 250 66 250 76 Q 250 86 258 92 Q 266 98 266 108" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round" fill="none"/><ellipse cx="274" cy="39" rx="2.5" ry="4.5" transform="rotate(28 274 39)" fill="#1a1a1a"/><circle cx="266" cy="108" r="10" fill="none" stroke="#1a1a1a" stroke-width="2.5"/><circle cx="266" cy="108" r="5" fill="#1a1a1a"/></svg></div>
+                <div class="platform-subtitle">Clinical Reasoning Trainer</div>
+                <p class="platform-desc">Work through 226 cases using the RPFS framework. Build differentials, order tests, and develop clinical reasoning.</p>
+                <div class="platform-tags"><span class="tag">226 Cases</span><span class="tag">22 Categories</span></div>
             </a>
-
-            <!-- MechanismDx -->
-            <a href="mechanism/index.html" class="card-hover platform-card rounded-2xl p-8 shadow-xl border border-teal-200/50">
-                <div class="text-5xl mb-4">⚙️</div>
-                <h2 class="text-2xl font-bold text-teal-900 mb-2">MechanismDx</h2>
-                <p class="text-teal-700 font-medium mb-3">Pathophysiology Modules</p>
-                <p class="text-gray-600 text-sm mb-4">Interactive modules covering disease mechanisms, from cellular pathology to clinical manifestations.</p>
-                <div class="flex flex-wrap gap-2">
-                    <span class="bg-teal-100 text-teal-700 px-3 py-1 rounded-full text-xs font-medium">84 Modules</span>
-                    <span class="bg-teal-100 text-teal-700 px-3 py-1 rounded-full text-xs font-medium">15 Systems</span>
-                    <span class="bg-teal-100 text-teal-700 px-3 py-1 rounded-full text-xs font-medium">Interactive</span>
-                </div>
+            <a href="mechanism/index.html" class="platform-card">
+                <div class="platform-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 120"><text x="20" y="70" font-family="Georgia, serif" font-size="58" fill="#1a1a1a" letter-spacing="-1">MechanismD</text><line x1="355" y1="42" x2="379" y2="72" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round"/><ellipse cx="353" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 353 39)" fill="#1a1a1a"/><path d="M 379 42 L 363 58 Q 357 66 357 76 Q 357 86 365 92 Q 373 98 373 108" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round" fill="none"/><ellipse cx="381" cy="39" rx="2.5" ry="4.5" transform="rotate(28 381 39)" fill="#1a1a1a"/><circle cx="373" cy="108" r="10" fill="none" stroke="#1a1a1a" stroke-width="2.5"/><circle cx="373" cy="108" r="5" fill="#1a1a1a"/></svg></div>
+                <div class="platform-subtitle">Pathophysiology Modules</div>
+                <p class="platform-desc">Interactive modules covering disease mechanisms, from cellular pathology to clinical manifestations.</p>
+                <div class="platform-tags"><span class="tag">84 Modules</span><span class="tag">15 Systems</span></div>
             </a>
-
-            <!-- CoachDx -->
-            <a href="CoachDx/index.html" class="card-hover platform-card rounded-2xl p-8 shadow-xl border border-orange-200/50">
-                <div class="text-5xl mb-4">🗣️</div>
-                <h2 class="text-2xl font-bold text-orange-900 mb-2">CoachDx</h2>
-                <p class="text-orange-700 font-medium mb-3">Communication Trainer</p>
-                <p class="text-gray-600 text-sm mb-4">Practice SBAR presentations with an AI mentor. Get real-time feedback on clinical communication.</p>
-                <div class="flex flex-wrap gap-2">
-                    <span class="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-xs font-medium">50+ Scenarios</span>
-                    <span class="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-xs font-medium">AI Mentor</span>
-                    <span class="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-xs font-medium">SBAR</span>
-                </div>
+            <a href="CoachDx/index.html" class="platform-card">
+                <div class="platform-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 310 120"><text x="20" y="70" font-family="Georgia, serif" font-size="58" fill="#1a1a1a" letter-spacing="-1">CoachD</text><line x1="218" y1="42" x2="242" y2="72" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round"/><ellipse cx="216" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 216 39)" fill="#1a1a1a"/><path d="M 242 42 L 226 58 Q 220 66 220 76 Q 220 86 228 92 Q 236 98 236 108" stroke="#1a1a1a" stroke-width="3.5" stroke-linecap="round" fill="none"/><ellipse cx="244" cy="39" rx="2.5" ry="4.5" transform="rotate(28 244 39)" fill="#1a1a1a"/><circle cx="236" cy="108" r="10" fill="none" stroke="#1a1a1a" stroke-width="2.5"/><circle cx="236" cy="108" r="5" fill="#1a1a1a"/></svg></div>
+                <div class="platform-subtitle">Communication Trainer</div>
+                <p class="platform-desc">Practice SBAR presentations with an AI mentor. Get real-time feedback on clinical communication.</p>
+                <div class="platform-tags"><span class="tag">50+ Scenarios</span><span class="tag">AI Mentor</span></div>
             </a>
         </div>
+    </section>
 
-        <!-- Secondary Links -->
-        <div class="bg-slate-800/50 rounded-2xl p-8 mb-12">
-            <h2 class="text-xl font-bold text-white mb-6">Quick Links</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <a href="ReasonDx/training.html" class="bg-slate-700/50 hover:bg-slate-700 rounded-lg p-4 text-center transition">
-                    <div class="text-2xl mb-2">🎮</div>
-                    <div class="text-white font-medium text-sm">Start Case</div>
-                </a>
-                <a href="allergy-immunology-hub.html" class="bg-slate-700/50 hover:bg-slate-700 rounded-lg p-4 text-center transition">
-                    <div class="text-2xl mb-2">🌸</div>
-                    <div class="text-white font-medium text-sm">A/I Hub</div>
-                </a>
-                <a href="ReasonDx/adventure-hub.html" class="bg-slate-700/50 hover:bg-slate-700 rounded-lg p-4 text-center transition">
-                    <div class="text-2xl mb-2">🗺️</div>
-                    <div class="text-white font-medium text-sm">Adventures</div>
-                </a>
-                <a href="dx-index.html" class="bg-slate-700/50 hover:bg-slate-700 rounded-lg p-4 text-center transition">
-                    <div class="text-2xl mb-2">📖</div>
-                    <div class="text-white font-medium text-sm">Full Index</div>
-                </a>
+    <section class="quick-section">
+        <div class="quick-inner">
+            <h2 class="quick-title">Quick Links</h2>
+            <div class="quick-grid">
+                <a href="ReasonDx/training.html" class="quick-link"><span class="quick-icon">🎮</span><span class="quick-text">Start Case</span></a>
+                <a href="ReasonDx/adventure-hub.html" class="quick-link"><span class="quick-icon">🗺️</span><span class="quick-text">Adventures</span></a>
+                <a href="allergy-immunology-hub.html" class="quick-link"><span class="quick-icon">🌸</span><span class="quick-text">A/I Hub</span></a>
+                <a href="ReasonDx/board-prep.html" class="quick-link"><span class="quick-icon">📝</span><span class="quick-text">Board Prep</span></a>
             </div>
         </div>
+    </section>
 
-        <!-- Integration Note -->
-        <div class="bg-gradient-to-r from-purple-900/30 to-blue-900/30 rounded-xl p-6 border border-purple-500/30 mb-12">
-            <h3 class="text-lg font-bold text-white mb-2">🔗 Integrated Learning</h3>
-            <p class="text-gray-300 text-sm">All three platforms are cross-linked. Start with a case in ReasonDx, dive into the pathophysiology in MechanismDx, then practice presenting with CoachDx.</p>
-        </div>
-    </main>
+    <footer class="footer">Dx Suite Clinical Education Platform • NSU Dr. Kiran C. Patel College of Allopathic Medicine</footer>
 
-    <!-- Footer -->
-    <footer class="bg-slate-950 text-gray-400 py-8 mt-12">
-        <div class="max-w-6xl mx-auto px-4 text-center">
-            <p class="text-sm">Dx Suite Clinical Education Platform</p>
-            <p class="text-xs text-gray-500 mt-2">NSU Dr. Kiran C. Patel College of Allopathic Medicine</p>
-            <p class="text-xs text-gray-600 mt-4">226 Cases • 84 Modules • 50+ SBAR Scenarios • 800+ Diagnoses</p>
+    <div class="theme-modal" id="themeModal">
+        <div class="theme-modal-content">
+            <div class="theme-modal-header"><span class="theme-modal-title">🎨 Theme</span><button class="theme-modal-close" onclick="closeThemeModal()">&times;</button></div>
+            <div class="theme-grid">
+                <div class="theme-option" data-theme="ocean-dark" onclick="selectTheme('ocean-dark')"><div class="theme-preview" style="background: linear-gradient(135deg, #0f172a 50%, #1e293b 50%);"></div><div class="theme-name">Ocean Dark</div></div>
+                <div class="theme-option" data-theme="midnight-teal" onclick="selectTheme('midnight-teal')"><div class="theme-preview" style="background: linear-gradient(135deg, #022c22 50%, #0d3d3b 50%);"></div><div class="theme-name">Midnight Teal</div></div>
+                <div class="theme-option" data-theme="muted-teal" onclick="selectTheme('muted-teal')"><div class="theme-preview" style="background: linear-gradient(135deg, #f7fafa 50%, #e8f2f0 50%);"></div><div class="theme-name">Light</div></div>
+            </div>
         </div>
-    </footer>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => { applyTheme(localStorage.getItem('dxsuite-theme') || 'ocean-dark'); });
+        function openThemeModal() { document.getElementById('themeModal').classList.add('open'); }
+        function closeThemeModal() { document.getElementById('themeModal').classList.remove('open'); }
+        document.getElementById('themeModal').addEventListener('click', e => { if (e.target.id === 'themeModal') closeThemeModal(); });
+        function selectTheme(t) { applyTheme(t); localStorage.setItem('dxsuite-theme', t); }
+        function applyTheme(t) { document.body.setAttribute('data-theme', t); document.querySelectorAll('.theme-option').forEach(o => o.classList.toggle('selected', o.dataset.theme === t)); }
+    </script>
 </body>
 </html>
