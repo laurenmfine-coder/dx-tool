@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReasonDx Board Prep</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fafafa; --bg-card: #ffffff; --bg-subtle: #f5f5f5;
+            --text: #1a1a1a; --text-secondary: #525252; --text-muted: #737373;
+            --border: #e5e5e5; --border-strong: #d4d4d4;
+            --accent: #1e40af; --accent-light: var(--primary-bg);
+            --correct: #166534; --correct-bg: #dcfce7;
+            --incorrect: #991b1b; --incorrect-bg: #fee2e2;
+            --warning: #92400e;
+            --radius: 4px; --radius-lg: 8px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        .serif { font-family: 'Source Serif 4', Georgia, serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        .header { background: var(--bg-card); border-bottom: 1px solid var(--border); padding: 0 32px; height: 56px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+        .header-left { display: flex; align-items: center; gap: 24px; }
+        .logo { font-weight: 600; font-size: 15px; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .logo-mark { width: 24px; height: 24px; background: var(--accent); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: 700; }
+        .header-center { display: flex; align-items: center; gap: 32px; }
+        .timer { font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--text-secondary); }
+        .timer.warning { color: var(--warning); }
+        .timer.danger { color: var(--incorrect); }
+        .progress-info { display: flex; align-items: center; gap: 12px; }
+        .progress-text { font-size: 13px; color: var(--text-muted); }
+        .progress-bar { width: 160px; height: 4px; background: var(--bg-subtle); border-radius: 2px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--accent); transition: width 0.3s; }
+
+        .btn { padding: 8px 14px; font-size: 13px; font-weight: 500; border-radius: var(--radius); cursor: pointer; transition: all 0.15s; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+        .btn:hover { background: var(--bg-subtle); border-color: var(--border-strong); color: var(--text); }
+        .btn-primary { background: var(--accent); border-color: var(--accent); color: white; }
+        .btn-primary:hover { background: #1e3a8a; border-color: #1e3a8a; color: white; }
+        .btn-lg { padding: 12px 20px; font-size: 14px; }
+        .btn-flag.active { background: #fef3c7; border-color: var(--warning); color: var(--warning); }
+
+        .main { display: flex; min-height: calc(100vh - 56px); }
+        .sidebar { width: 240px; background: var(--bg-card); border-right: 1px solid var(--border); padding: 20px 14px; flex-shrink: 0; overflow-y: auto; max-height: calc(100vh - 56px); }
+        .sidebar-section { margin-bottom: 24px; }
+        .sidebar-label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+        .question-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; }
+        .q-num { position: relative; aspect-ratio: 1; background: var(--bg-subtle); border: 1px solid transparent; border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; color: var(--text-muted); cursor: pointer; }
+        .q-num:hover { background: #eee; }
+        .q-num.current { background: var(--accent); color: white; }
+        .q-num.answered { border-color: var(--border-strong); color: var(--text-secondary); }
+        .q-num.flagged::after { content: ''; position: absolute; top: 2px; right: 2px; width: 4px; height: 4px; background: var(--warning); border-radius: 50%; }
+        .q-num.correct { background: var(--correct-bg); color: var(--correct); }
+        .q-num.incorrect { background: var(--incorrect-bg); color: var(--incorrect); }
+
+        .stats-list { display: flex; flex-direction: column; gap: 6px; }
+        .stat-row { display: flex; justify-content: space-between; font-size: 12px; }
+        .stat-label { color: var(--text-muted); }
+        .stat-value { font-weight: 500; }
+        .stat-value.correct { color: var(--correct); }
+        .stat-value.flagged { color: var(--warning); }
+
+        .filter-group { margin-bottom: 16px; }
+        .filter-label { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
+        .filter-select { width: 100%; padding: 6px 8px; font-size: 12px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-card); }
+
+        .content { flex: 1; padding: 32px 40px; max-width: 800px; overflow-y: auto; }
+        .question-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; font-size: 12px; flex-wrap: wrap; }
+        .question-id { font-weight: 600; color: var(--text-muted); }
+        .tag { padding: 2px 8px; background: var(--bg-subtle); border-radius: 3px; font-size: 11px; font-weight: 500; color: var(--text-secondary); }
+
+        .vignette { font-family: 'Source Serif 4', Georgia, serif; font-size: 15px; line-height: 1.8; margin-bottom: 24px; color: var(--text); }
+        .vignette p { margin-bottom: 12px; }
+        .clinical-data { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--text-secondary); background: var(--bg-subtle); padding: 14px 16px; border-radius: var(--radius); margin: 14px 0; }
+        .clinical-data .label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 6px; }
+        .data-row { display: flex; flex-wrap: wrap; gap: 4px 14px; }
+        .data-item { display: flex; gap: 4px; }
+        .data-name { color: var(--text-muted); }
+        .data-value { font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+        .data-value.abnormal { color: var(--incorrect); font-weight: 500; }
+
+        .question-stem { font-size: 14px; font-weight: 500; margin-bottom: 16px; line-height: 1.5; }
+        .options { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
+        .option { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); cursor: pointer; transition: all 0.1s; }
+        .option:hover:not(.disabled) { border-color: var(--border-strong); background: var(--bg-subtle); }
+        .option.selected { border-color: var(--accent); background: var(--accent-light); }
+        .option.correct { border-color: var(--correct); background: var(--correct-bg); }
+        .option.incorrect { border-color: var(--incorrect); background: var(--incorrect-bg); }
+        .option.disabled { cursor: default; }
+        .option.show-correct { border-color: var(--correct); background: var(--correct-bg); }
+        .option-letter { width: 22px; height: 22px; border: 1px solid var(--border-strong); border-radius: 3px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: var(--text-muted); flex-shrink: 0; }
+        .option.selected .option-letter { background: var(--accent); border-color: var(--accent); color: white; }
+        .option.correct .option-letter, .option.show-correct .option-letter { background: var(--correct); border-color: var(--correct); color: white; }
+        .option.incorrect .option-letter { background: var(--incorrect); border-color: var(--incorrect); color: white; }
+        .option-text { font-size: 13px; flex: 1; color: var(--text); }
+        .option-stats { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+        .stat-bar-mini { width: 60px; height: 3px; background: rgba(0,0,0,0.08); border-radius: 2px; overflow: hidden; }
+        .stat-bar-fill { height: 100%; background: var(--text-muted); }
+        .option.correct .stat-bar-fill, .option.show-correct .stat-bar-fill { background: var(--correct); }
+        .stat-percent { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); }
+
+        .explanation { border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--bg-card); overflow: hidden; margin-bottom: 20px; display: none; }
+        .explanation.show { display: block; }
+        .explanation-header { padding: 14px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+        .explanation-header.correct { background: var(--correct-bg); }
+        .explanation-header.incorrect { background: var(--incorrect-bg); }
+        .result-icon { width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+        .result-icon.correct { background: var(--correct); color: white; }
+        .result-icon.incorrect { background: var(--incorrect); color: white; }
+        .result-text { font-size: 13px; font-weight: 600; }
+        .result-text.correct { color: var(--correct); }
+        .result-text.incorrect { color: var(--incorrect); }
+
+        .explanation-nav { display: flex; border-bottom: 1px solid var(--border); background: var(--bg-subtle); overflow-x: auto; }
+        .exp-tab { padding: 10px 16px; font-size: 12px; font-weight: 500; color: var(--text-muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: nowrap; }
+        .exp-tab:hover { color: var(--text-secondary); }
+        .exp-tab.active { color: var(--accent); border-bottom-color: var(--accent); background: var(--bg-card); }
+
+        .explanation-body { padding: 20px; }
+        .exp-panel { display: none; }
+        .exp-panel.active { display: block; }
+
+        .section { margin-bottom: 20px; }
+        .section:last-child { margin-bottom: 0; }
+        .section-title { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .section-text { font-size: 13px; color: var(--text); line-height: 1.7; }
+        .section-text strong { font-weight: 600; }
+
+        .key-points { display: flex; flex-direction: column; gap: 6px; }
+        .key-point { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; line-height: 1.5; }
+        .key-point::before { content: '→'; color: var(--accent); font-weight: 600; flex-shrink: 0; }
+
+        .evidence-card { background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; margin-top: 14px; }
+        .evidence-title { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+        .evidence-cite { font-size: 11px; color: var(--text-muted); font-style: italic; margin-bottom: 10px; }
+        .evidence-points { font-size: 12px; color: var(--text-secondary); line-height: 1.6; margin-left: 14px; }
+        .evidence-points li { margin-bottom: 3px; }
+        .evidence-link { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; color: var(--accent); text-decoration: none; margin-top: 10px; }
+        .evidence-link:hover { text-decoration: underline; }
+
+        .illness-script { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .script-item { background: var(--bg-subtle); border-radius: var(--radius); padding: 12px; }
+        .script-item.full { grid-column: span 2; }
+        .script-label { font-size: 9px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 4px; }
+        .script-value { font-size: 12px; color: var(--text); line-height: 1.5; }
+
+        .wrong-list { display: flex; flex-direction: column; gap: 10px; }
+        .wrong-item { padding: 12px; background: var(--bg-subtle); border-radius: var(--radius); border-left: 3px solid var(--border-strong); }
+        .wrong-header { display: flex; align-items: center; gap: 6px; margin-bottom: 4px; }
+        .wrong-letter { font-size: 11px; font-weight: 600; color: var(--text-muted); }
+        .wrong-name { font-size: 12px; color: var(--text-secondary); }
+        .wrong-explanation { font-size: 12px; color: var(--text); line-height: 1.5; }
+
+        .resources-section { margin-bottom: 16px; }
+        .resources-title { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .resource-list { display: flex; flex-direction: column; gap: 8px; }
+        .resource-link { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--radius); text-decoration: none; transition: all 0.1s; }
+        .resource-link:hover { border-color: var(--accent); background: var(--accent-light); }
+        .resource-icon { width: 32px; height: 32px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; font-size: 14px; }
+        .resource-info { flex: 1; }
+        .resource-name { font-size: 12px; font-weight: 500; color: var(--text); margin-bottom: 1px; }
+        .resource-desc { font-size: 11px; color: var(--text-muted); }
+        .resource-arrow { color: var(--text-muted); font-size: 12px; }
+        .resource-link:hover .resource-arrow { color: var(--accent); }
+
+        .action-bar { display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 1px solid var(--border); }
+        .action-left, .action-right { display: flex; gap: 6px; }
+
+        .start-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 40px; }
+        .start-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 40px; max-width: 520px; width: 100%; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+        .start-header { text-align: center; margin-bottom: 28px; }
+        .start-logo { width: 40px; height: 40px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; font-weight: 700; margin: 0 auto 16px; }
+        .start-title { font-family: 'Source Serif 4', Georgia, serif; font-size: 22px; font-weight: 600; margin-bottom: 6px; }
+        .start-subtitle { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+        .start-stats { display: flex; justify-content: center; gap: 24px; margin: 20px 0; padding: 16px; background: var(--bg-subtle); border-radius: var(--radius); }
+        .start-stat { text-align: center; }
+        .start-stat-value { font-size: 20px; font-weight: 600; color: var(--accent); }
+        .start-stat-label { font-size: 11px; color: var(--text-muted); }
+        .mode-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 24px; }
+        .mode-option { padding: 14px; background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--radius); cursor: pointer; transition: all 0.1s; }
+        .mode-option:hover { border-color: var(--border-strong); }
+        .mode-option.selected { border-color: var(--accent); background: var(--accent-light); }
+        .mode-name { font-size: 13px; font-weight: 500; margin-bottom: 2px; }
+        .mode-desc { font-size: 11px; color: var(--text-muted); }
+        .settings-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+        .setting-row { display: flex; justify-content: space-between; align-items: center; }
+        .setting-label { font-size: 12px; color: var(--text-secondary); }
+        .setting-select { padding: 6px 10px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); font-size: 12px; min-width: 160px; }
+        .btn-start { width: 100%; justify-content: center; }
+
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; z-index: 1000; opacity: 0; visibility: hidden; transition: all 0.2s; }
+        .modal-overlay.show { opacity: 1; visibility: visible; }
+        .modal { background: var(--bg-card); border-radius: var(--radius-lg); width: 90%; max-width: 440px; box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+        .modal-header { padding: 18px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+        .modal-title { font-size: 15px; font-weight: 600; }
+        .modal-close { width: 24px; height: 24px; background: transparent; border: none; color: var(--text-muted); cursor: pointer; border-radius: var(--radius); font-size: 16px; }
+        .modal-close:hover { background: var(--bg-subtle); }
+        .modal-body { padding: 20px; }
+        .results-score { text-align: center; padding: 20px 0; }
+        .score-number { font-family: 'Source Serif 4', Georgia, serif; font-size: 48px; font-weight: 600; color: var(--accent); }
+        .score-label { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+        .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 16px; }
+        .result-card { background: var(--bg-subtle); border-radius: var(--radius); padding: 14px; text-align: center; }
+        .result-value { font-size: 18px; font-weight: 600; }
+        .result-value.correct { color: var(--correct); }
+        .result-value.incorrect { color: var(--incorrect); }
+        .result-label { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+        .modal-actions { display: flex; gap: 8px; margin-top: 20px; }
+        .modal-actions .btn { flex: 1; justify-content: center; }
+
+        .loading { display: flex; align-items: center; justify-content: center; padding: 60px; color: var(--text-muted); }
+
+        @media (max-width: 900px) { .sidebar { display: none; } .content { padding: 24px; max-width: 100%; } .header { padding: 0 16px; } }
+        @media (max-width: 600px) { .mode-options { grid-template-columns: 1fr; } .illness-script { grid-template-columns: 1fr; } .script-item.full { grid-column: span 1; } .start-card { padding: 28px 20px; } .results-grid { grid-template-columns: repeat(2, 1fr); } }
+    
+
+/* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
+:root {
+    --primary: #10b981;
+    --primary-light: #6ee7b7;
+    --primary-dark: #059669;
+    --primary-bg: #ecfdf5;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-nav: #ffffff;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --nav-text: #1e293b;
+    --nav-link: #64748b;
+    --nav-active-bg: #10b981;
+    --nav-active-text: #ffffff;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+    --radius: 12px;
+    --transition: all 0.2s ease;
+}
+
+[data-theme="muted-teal"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5e5e3; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #10b981; --nav-active-text: #ffffff;
+}
+
+[data-theme="deeper-teal"] {
+    --primary: #3d857a; --primary-light: #5a9f92; --primary-dark: #2d6359; --primary-bg: #dceae7;
+    --text-primary: #1a2f2a; --text-secondary: #5a6b65; --bg-main: #f5f9f8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #c5d9d5; --nav-text: #1a2f2a; --nav-link: #5a6b65;
+    --nav-active-bg: #3d857a; --nav-active-text: #ffffff;
+}
+
+[data-theme="eucalyptus"] {
+    --primary: #5b9b7a; --primary-light: #7ab894; --primary-dark: #4a7d62; --primary-bg: #e4ede8;
+    --text-primary: #2a3830; --text-secondary: #5f7568; --bg-main: #f6f9f7; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d0ddd6; --nav-text: #2a3830; --nav-link: #5f7568;
+    --nav-active-bg: #5b9b7a; --nav-active-text: #ffffff;
+}
+
+[data-theme="teal-cream"] {
+    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #f0ebe3;
+    --text-primary: #2d2a25; --text-secondary: #7a756a; --bg-main: #fdfcf9; --bg-card: #ffffff;
+    --bg-nav: #fdfcf9; --border: #e8e4dc; --nav-text: #2d2a25; --nav-link: #7a756a;
+    --nav-active-bg: #4a9a8e; --nav-active-text: #ffffff;
+}
+
+[data-theme="steel-blue"] {
+    --primary: #5a8aa8; --primary-light: #7aa5c0; --primary-dark: #4a7290; --primary-bg: #e8eff5;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7f9fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #d5dfe8; --nav-text: #1e293b; --nav-link: #64748b;
+    --nav-active-bg: #5a8aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-sage"] {
+    --primary: #6a9a6a; --primary-light: #8ab88a; --primary-dark: #5a805a; --primary-bg: #e8f0e8;
+    --text-primary: #2f3e36; --text-secondary: #5a6b5e; --bg-main: #f8faf8; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #dce5dc; --nav-text: #2f3e36; --nav-link: #5a6b5e;
+    --nav-active-bg: #6a9a6a; --nav-active-text: #ffffff;
+}
+
+[data-theme="muted-lavender"] {
+    --primary: #8a7aa8; --primary-light: #a595c0; --primary-dark: #7a6a98; --primary-bg: #f0ecf5;
+    --text-primary: #2e2a3b; --text-secondary: #6b6780; --bg-main: #f9f8fb; --bg-card: #ffffff;
+    --bg-nav: #ffffff; --border: #e0dce8; --nav-text: #2e2a3b; --nav-link: #6b6780;
+    --nav-active-bg: #8a7aa8; --nav-active-text: #ffffff;
+}
+
+[data-theme="slate-teal"] {
+    --primary: #4a9a8e; --primary-light: #5eead4; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
+    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff;
+    --bg-nav: #334155; --border: #e2e8f0; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #5eead4; --nav-active-text: #1e293b;
+}
+
+[data-theme="ocean-dark"] {
+    --primary: #38bdf8; --primary-light: #7dd3fc; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
+    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b;
+    --bg-nav: #0f172a; --border: #334155; --nav-text: #ffffff; --nav-link: #94a3b8;
+    --nav-active-bg: #38bdf8; --nav-active-text: #0f172a;
+}
+
+[data-theme="midnight-teal"] {
+    --primary: #5eead4; --primary-light: #99f6e4; --primary-dark: #2dd4bf; --primary-bg: #134e4a;
+    --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b;
+    --bg-nav: #022c22; --border: #115e59; --nav-text: #f0fdfa; --nav-link: #5eead4;
+    --nav-active-bg: #5eead4; --nav-active-text: #042f2e;
+}
+
+[data-theme="purple-night"] {
+    --primary: #a78bfa; --primary-light: #c4b5fd; --primary-dark: #8b5cf6; --primary-bg: #3b2f63;
+    --text-primary: #f5f3ff; --text-secondary: #c4b5fd; --bg-main: #1e1b2e; --bg-card: #2d2848;
+    --bg-nav: #1a1625; --border: #4c4270; --nav-text: #f5f3ff; --nav-link: #a78bfa;
+    --nav-active-bg: #a78bfa; --nav-active-text: #1e1b2e;
+}
+
+[data-theme="forest-night"] {
+    --primary: #86efac; --primary-light: #bbf7d0; --primary-dark: #4ade80; --primary-bg: #14532d;
+    --text-primary: #f0fdf4; --text-secondary: #86efac; --bg-main: #052e16; --bg-card: #14532d;
+    --bg-nav: #022c22; --border: #166534; --nav-text: #f0fdf4; --nav-link: #86efac;
+    --nav-active-bg: #86efac; --nav-active-text: #052e16;
+}
+
+/* Unified Navigation */
+.dx-nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; transition: var(--transition); }
+.dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+.dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--nav-text); font-weight: 600; }
+.dx-nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
+.dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
+.dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
+.dx-theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; font-size: 14px; transition: var(--transition); }
+.dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+/* Theme Modal */
+.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+.dx-theme-modal.open { display: flex; }
+.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
+.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
+.dx-theme-section { margin-bottom: 20px; }
+.dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
+.dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
+.dx-theme-option:hover { border-color: var(--primary); }
+.dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
+.dx-theme-preview { height: 28px; border-radius: 6px; margin-bottom: 6px; display: flex; overflow: hidden; }
+.dx-theme-preview-nav { width: 30%; }
+.dx-theme-preview-main { width: 70%; }
+.dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
+.dx-theme-badge { display: inline-block; background: var(--primary); color: white; padding: 1px 5px; border-radius: 4px; font-size: 9px; margin-left: 3px; }
+
+/* Body theming */
+body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
+
+@media (max-width: 768px) {
+    .dx-nav-inner { flex-direction: column; gap: 12px; }
+    .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+    </style>
+    </head>
+<body>
+
+    <!-- UNIFIED DX NAVIGATION -->
+    <nav class="dx-nav">
+        <div class="dx-nav-inner">
+            <a href="../index.html" class="dx-nav-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
+    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
+    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
+    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
+    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
+    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
+    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
+</svg>
+            </a>
+            <div class="dx-nav-links">
+                <a href="../index.html" class="dx-nav-link ">🏠 Home</a>
+                <a href="../mechanism/index.html" class="dx-nav-link ">⚙️ MechanismDx</a>
+                <a href="../ReasonDx/training.html" class="dx-nav-link active">🔬 ReasonDx</a>
+                <a href="../CoachDx/case-library.html" class="dx-nav-link ">🧠 CoachDx</a>
+                <a href="../reference-library.html" class="dx-nav-link ">📚 References</a>
+                <a href="../dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
+                <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
+            </div>
+        </div>
+    </nav>
+
+    <div id="startScreen" class="start-screen">
+        <div class="start-card">
+            <div class="start-header">
+                <div class="start-logo">Dx</div>
+                <h1 class="start-title">Board Prep</h1>
+                <p class="start-subtitle">Evidence-based Board-style questions with guideline citations and clinical reasoning.</p>
+            </div>
+            <div class="start-stats">
+                <div class="start-stat"><div class="start-stat-value" id="totalQuestions">--</div><div class="start-stat-label">Questions</div></div>
+                <div class="start-stat"><div class="start-stat-value" id="totalSystems">--</div><div class="start-stat-label">Systems</div></div>
+                <div class="start-stat"><div class="start-stat-value" id="totalGuidelines">--</div><div class="start-stat-label">Guidelines</div></div>
+            </div>
+            <div class="mode-options">
+                <div class="mode-option selected" data-mode="timed"><div class="mode-name">Timed Block</div><div class="mode-desc">40 questions · 60 min</div></div>
+                <div class="mode-option" data-mode="tutor"><div class="mode-name">Tutor Mode</div><div class="mode-desc">Untimed · Immediate feedback</div></div>
+                <div class="mode-option" data-mode="quick"><div class="mode-name">Quick Practice</div><div class="mode-desc">10 questions · 15 min</div></div>
+                <div class="mode-option" data-mode="review"><div class="mode-name">Review Missed</div><div class="mode-desc">Previously incorrect</div></div>
+            </div>
+            <div class="settings-group">
+                <div class="setting-row"><span class="setting-label">System</span><select class="setting-select" id="systemSelect"><option value="all">All Systems</option></select></div>
+                <div class="setting-row"><span class="setting-label">Question Type</span><select class="setting-select" id="typeSelect"><option value="all">All Types</option><option value="Diagnosis">Diagnosis</option><option value="Next Step">Next Step</option><option value="Workup">Workup</option></select></div>
+                <div class="setting-row"><span class="setting-label">Difficulty</span><select class="setting-select" id="difficultySelect"><option value="all">All Difficulties</option><option value="foundational">Foundational</option><option value="intermediate">Intermediate</option><option value="advanced">Advanced</option></select></div>
+            </div>
+            <button class="btn btn-primary btn-lg btn-start" onclick="startQuiz()" id="startBtn" disabled>Loading Questions...</button>
+        </div>
+    </div>
+
+    <div id="quizScreen" style="display: none;">
+        <header class="header">
+            <div class="header-left"><a href="../index.html" class="logo"><div class="logo-mark">Dx</div><span>Board Prep</span></a></div>
+            <div class="header-center">
+                <div class="timer" id="timer"><span id="timerDisplay">60:00</span></div>
+                <div class="progress-info"><span class="progress-text"><span id="currentQ">1</span> / <span id="totalQ">40</span></span><div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 2.5%"></div></div></div>
+            </div>
+            <div class="header-right"><button class="btn" onclick="endQuiz()">End Session</button></div>
+        </header>
+        <main class="main">
+            <aside class="sidebar">
+                <div class="sidebar-section"><div class="sidebar-label">Questions</div><div class="question-grid" id="questionGrid"></div></div>
+                <div class="sidebar-section"><div class="sidebar-label">Progress</div><div class="stats-list"><div class="stat-row"><span class="stat-label">Answered</span><span class="stat-value" id="answeredCount">0 / 40</span></div><div class="stat-row"><span class="stat-label">Correct</span><span class="stat-value correct" id="correctCount">—</span></div><div class="stat-row"><span class="stat-label">Flagged</span><span class="stat-value flagged" id="flaggedCount">0</span></div></div></div>
+            </aside>
+            <div class="content">
+                <div class="question-meta"><span class="question-id">Question <span id="qNum">1</span></span><span class="tag" id="qType">Diagnosis</span><span class="tag" id="qSystem">Pulmonary</span><span class="tag" id="qDifficulty">Intermediate</span></div>
+                <div class="vignette" id="vignette"></div>
+                <div class="question-stem" id="questionStem"></div>
+                <div class="options" id="optionsContainer"></div>
+                <div class="explanation" id="explanationPanel">
+                    <div class="explanation-header" id="explanationHeader"><div class="result-icon" id="resultIcon">✓</div><div class="result-text" id="resultText">Correct</div></div>
+                    <!-- Unified Navigation -->
+    <div class="explanation-body">
+                        <div class="exp-panel active" id="panelAnswer"></div>
+                        <div class="exp-panel" id="panelScript"></div>
+                        <div class="exp-panel" id="panelDistractors"></div>
+                        <div class="exp-panel" id="panelResources"></div>
+                    </div>
+                </div>
+                <div class="action-bar">
+                    <div class="action-left"><button class="btn btn-flag" id="flagBtn" onclick="toggleFlag()">Flag for Review</button></div>
+                    <div class="action-right"><button class="btn" onclick="prevQuestion()" id="prevBtn">← Previous</button><button class="btn btn-primary" onclick="submitOrNext()" id="submitBtn">Submit</button></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal-overlay" id="resultsModal">
+        <div class="modal">
+            <div class="modal-header"><h2 class="modal-title">Session Complete</h2><button class="modal-close" onclick="closeResults()">×</button></div>
+            <div class="modal-body">
+                <div class="results-score"><div class="score-number" id="finalScore">78%</div><div class="score-label">Overall Score</div></div>
+                <div class="results-grid"><div class="result-card"><div class="result-value correct" id="totalCorrect">31</div><div class="result-label">Correct</div></div><div class="result-card"><div class="result-value incorrect" id="totalIncorrect">9</div><div class="result-label">Incorrect</div></div><div class="result-card"><div class="result-value" id="timeSpent">45:23</div><div class="result-label">Time</div></div></div>
+                <div class="modal-actions"><button class="btn" onclick="reviewQuestions()">Review Answers</button><button class="btn btn-primary" onclick="startNewBlock()">New Session</button></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let questionBank = [];
+        let state = { mode: 'timed', currentQuestion: 0, questions: [], answers: {}, flagged: new Set(), startTime: null, timeRemaining: 3600, timerInterval: null, submitted: {}, tutorMode: false };
+
+        // Load questions from JSON
+        async function loadQuestions() {
+            // Try multiple paths to find the JSON file
+            const paths = [
+                'data/board-prep-questions.json',
+                './data/board-prep-questions.json',
+                '/ReasonDx/data/board-prep-questions.json',
+                '/data/board-prep-questions.json',
+                '../data/board-prep-questions.json',
+                'board-prep-questions.json'
+            ];
+            
+            const errors = [];
+            for (const path of paths) {
+                try {
+                    console.log('Trying to load from:', path);
+                    const response = await fetch(path);
+                    if (response.ok) {
+                        const text = await response.text();
+                        questionBank = JSON.parse(text);
+                        console.log('✓ Loaded', questionBank.length, 'questions from:', path);
+                        initializeUI();
+                        return;
+                    } else {
+                        errors.push(`${path}: HTTP ${response.status}`);
+                    }
+                } catch (err) {
+                    errors.push(`${path}: ${err.message}`);
+                }
+            }
+            
+            // All paths failed - show detailed error
+            console.error('All load attempts failed:', errors);
+            const btn = document.getElementById('startBtn');
+            btn.textContent = 'Error Loading Questions';
+            btn.style.background = '#dc2626';
+            
+            // Show help message
+            const helpDiv = document.createElement('div');
+            helpDiv.style.cssText = 'margin-top:16px;padding:16px;background:#fef2f2;border:1px solid #fecaca;border-radius:8px;font-size:13px;color:#991b1b;text-align:left;';
+            helpDiv.innerHTML = `
+                <strong>Could not load questions file.</strong><br><br>
+                Make sure <code>board-prep-questions.json</code> is in the <code>data/</code> folder.<br><br>
+                <strong>Expected structure:</strong><br>
+                <code>ReasonDx/board-prep.html</code><br>
+                <code>ReasonDx/data/board-prep-questions.json</code><br><br>
+                <details><summary>Technical details</summary><pre style="font-size:11px;margin-top:8px;">${errors.join('\n')}</pre></details>
+            `;
+            btn.parentNode.appendChild(helpDiv);
+        }
+
+        function initializeUI() {
+            // Update stats
+            document.getElementById('totalQuestions').textContent = questionBank.length;
+            const systems = [...new Set(questionBank.map(q => q.system))];
+            document.getElementById('totalSystems').textContent = systems.length;
+            const withGuidelines = questionBank.filter(q => q.teaching?.evidence).length;
+            document.getElementById('totalGuidelines').textContent = withGuidelines;
+
+            // Populate system filter
+            const systemSelect = document.getElementById('systemSelect');
+            systems.sort().forEach(s => {
+                const opt = document.createElement('option');
+                opt.value = s;
+                opt.textContent = s;
+                systemSelect.appendChild(opt);
+            });
+
+            // Enable start button
+            document.getElementById('startBtn').textContent = 'Begin Session';
+            document.getElementById('startBtn').disabled = false;
+        }
+
+        function getFilteredQuestions() {
+            const system = document.getElementById('systemSelect').value;
+            const type = document.getElementById('typeSelect').value;
+            const difficulty = document.getElementById('difficultySelect').value;
+
+            return questionBank.filter(q => {
+                if (system !== 'all' && q.system !== system) return false;
+                if (type !== 'all' && q.type !== type) return false;
+                if (difficulty !== 'all' && q.difficulty !== difficulty) return false;
+                return true;
+            });
+        }
+
+        function startQuiz() {
+            const mode = document.querySelector('.mode-option.selected')?.dataset.mode || 'timed';
+            state.mode = mode;
+            
+            let filtered = getFilteredQuestions();
+            if (filtered.length === 0) {
+                alert('No questions match your filters. Please adjust and try again.');
+                return;
+            }
+
+            // Shuffle
+            filtered = filtered.sort(() => Math.random() - 0.5);
+
+            // Set count based on mode
+            if (mode === 'quick') {
+                state.questions = filtered.slice(0, Math.min(10, filtered.length));
+                state.timeRemaining = 900;
+            } else if (mode === 'timed') {
+                state.questions = filtered.slice(0, Math.min(40, filtered.length));
+                state.timeRemaining = 3600;
+            } else {
+                state.questions = filtered.slice(0, Math.min(40, filtered.length));
+                state.timeRemaining = null;
+            }
+
+            state.tutorMode = mode === 'tutor';
+            state.currentQuestion = 0;
+            state.answers = {};
+            state.flagged = new Set();
+            state.submitted = {};
+            state.startTime = Date.now();
+
+            document.getElementById('startScreen').style.display = 'none';
+            document.getElementById('quizScreen').style.display = 'block';
+
+            buildGrid();
+            loadQuestion(0);
+            updateStats();
+
+            if (!state.tutorMode && state.timeRemaining) {
+                startTimer();
+            } else {
+                document.getElementById('timer').style.display = 'none';
+            }
+
+            document.getElementById('totalQ').textContent = state.questions.length;
+        }
+
+        function buildGrid() {
+            const grid = document.getElementById('questionGrid');
+            grid.innerHTML = state.questions.map((_, i) => 
+                `<div class="q-num" onclick="goToQuestion(${i})">${i + 1}</div>`
+            ).join('');
+            updateGrid();
+        }
+
+        function updateGrid() {
+            document.querySelectorAll('.q-num').forEach((el, i) => {
+                el.className = 'q-num';
+                if (i === state.currentQuestion) el.classList.add('current');
+                if (state.answers[i] !== undefined) {
+                    el.classList.add('answered');
+                    if (state.submitted[i]) {
+                        const q = state.questions[i];
+                        const correctIdx = q.options.findIndex(o => o.correct);
+                        el.classList.add(state.answers[i] === correctIdx ? 'correct' : 'incorrect');
+                    }
+                }
+                if (state.flagged.has(i)) el.classList.add('flagged');
+            });
+        }
+
+        function loadQuestion(idx) {
+            const q = state.questions[idx];
+            state.currentQuestion = idx;
+
+            document.getElementById('qNum').textContent = idx + 1;
+            document.getElementById('currentQ').textContent = idx + 1;
+            document.getElementById('progressFill').style.width = ((idx + 1) / state.questions.length * 100) + '%';
+            document.getElementById('qType').textContent = q.type || 'Question';
+            document.getElementById('qSystem').textContent = q.system || 'General';
+            document.getElementById('qDifficulty').textContent = q.difficulty || 'Intermediate';
+            document.getElementById('vignette').innerHTML = q.vignette || '';
+            document.getElementById('questionStem').textContent = q.stem || '';
+
+            const isSubmitted = state.submitted[idx];
+            const correctIdx = q.options.findIndex(o => o.correct);
+
+            document.getElementById('optionsContainer').innerHTML = q.options.map((o, i) => {
+                let classes = 'option';
+                if (state.answers[idx] === i) classes += ' selected';
+                if (isSubmitted) {
+                    classes += ' disabled';
+                    if (o.correct) classes += ' show-correct';
+                    if (state.answers[idx] === i && !o.correct) classes += ' incorrect';
+                    if (state.answers[idx] === i && o.correct) classes = classes.replace('show-correct', 'correct');
+                }
+                return `<div class="${classes}" onclick="selectOption(${i})">
+                    <div class="option-letter">${o.letter}</div>
+                    <div class="option-text">${o.text}
+                        ${isSubmitted ? `<div class="option-stats"><div class="stat-bar-mini"><div class="stat-bar-fill" style="width:${o.stats || 25}%"></div></div><span class="stat-percent">${o.stats || 25}%</span></div>` : ''}
+                    </div>
+                </div>`;
+            }).join('');
+
+            const exp = document.getElementById('explanationPanel');
+            if (isSubmitted) {
+                showExplanation(q, state.answers[idx]);
+                exp.classList.add('show');
+            } else {
+                exp.classList.remove('show');
+            }
+
+            document.getElementById('flagBtn').classList.toggle('active', state.flagged.has(idx));
+            document.getElementById('submitBtn').textContent = isSubmitted ? (idx < state.questions.length - 1 ? 'Next →' : 'Finish') : 'Submit';
+            document.getElementById('prevBtn').disabled = idx === 0;
+
+            updateGrid();
+        }
+
+        function showExplanation(q, selectedIdx) {
+            const correctIdx = q.options.findIndex(o => o.correct);
+            const isCorrect = selectedIdx === correctIdx;
+
+            document.getElementById('explanationHeader').className = 'explanation-header ' + (isCorrect ? 'correct' : 'incorrect');
+            document.getElementById('resultIcon').className = 'result-icon ' + (isCorrect ? 'correct' : 'incorrect');
+            document.getElementById('resultIcon').textContent = isCorrect ? '✓' : '✗';
+            document.getElementById('resultText').className = 'result-text ' + (isCorrect ? 'correct' : 'incorrect');
+            document.getElementById('resultText').textContent = isCorrect ? 'Correct' : `Incorrect — Answer: ${q.options[correctIdx].letter}`;
+
+            // Answer panel
+            let answerHTML = '';
+            if (q.teaching) {
+                if (q.teaching.keyPoint) {
+                    answerHTML += `<div class="section"><div class="section-title">Key Point</div><div class="section-text">${q.teaching.keyPoint}</div></div>`;
+                }
+                if (q.teaching.reasoning && q.teaching.reasoning.length) {
+                    answerHTML += `<div class="section"><div class="section-title">Clinical Reasoning</div><div class="key-points">${q.teaching.reasoning.map(r => `<div class="key-point">${r}</div>`).join('')}</div></div>`;
+                }
+                if (q.teaching.evidence) {
+                    const e = q.teaching.evidence;
+                    answerHTML += `<div class="evidence-card">
+                        <div class="evidence-title">${e.title || 'Guidelines'}</div>
+                        <div class="evidence-cite">${e.cite || ''}</div>
+                        ${e.points && e.points.length ? `<ul class="evidence-points">${e.points.map(p => `<li>${p}</li>`).join('')}</ul>` : ''}
+                        ${e.url && e.url !== '#' ? `<a href="${e.url}" target="_blank" class="evidence-link">View Full Guideline →</a>` : ''}
+                    </div>`;
+                }
+            }
+            document.getElementById('panelAnswer').innerHTML = answerHTML || '<p>No explanation available.</p>';
+
+            // Illness script panel
+            if (q.illnessScript) {
+                const s = q.illnessScript;
+                document.getElementById('panelScript').innerHTML = `<div class="illness-script">
+                    <div class="script-item"><div class="script-label">Epidemiology</div><div class="script-value">${s.epidemiology || '—'}</div></div>
+                    <div class="script-item"><div class="script-label">Pathophysiology</div><div class="script-value">${s.pathophysiology || '—'}</div></div>
+                    <div class="script-item"><div class="script-label">Key Features</div><div class="script-value">${s.keyFeatures || '—'}</div></div>
+                    <div class="script-item"><div class="script-label">Workup</div><div class="script-value">${s.workup || '—'}</div></div>
+                    <div class="script-item full"><div class="script-label">Treatment</div><div class="script-value">${s.treatment || '—'}</div></div>
+                </div>`;
+            } else {
+                document.getElementById('panelScript').innerHTML = '<p>No illness script available.</p>';
+            }
+
+            // Distractors panel
+            if (q.distractors && q.distractors.length) {
+                document.getElementById('panelDistractors').innerHTML = `<div class="wrong-list">${q.distractors.map(d => `
+                    <div class="wrong-item">
+                        <div class="wrong-header"><span class="wrong-name">${d.text}</span></div>
+                        <div class="wrong-explanation">${d.explanation || 'Not the best answer for this presentation.'}</div>
+                    </div>
+                `).join('')}</div>`;
+            } else {
+                document.getElementById('panelDistractors').innerHTML = '<p>No distractor analysis available.</p>';
+            }
+
+            // Resources panel
+            let resourcesHTML = '';
+            if (q.resources) {
+                if (q.resources.guidelines && q.resources.guidelines.length) {
+                    resourcesHTML += `<div class="resources-section"><div class="resources-title">Evidence & Guidelines</div><div class="resource-list">${q.resources.guidelines.map(g => `
+                        <a href="${g.url || '#'}" target="_blank" class="resource-link">
+                            <div class="resource-icon">📄</div>
+                            <div class="resource-info"><div class="resource-name">${g.title}</div><div class="resource-desc">${g.desc || ''}</div></div>
+                            <div class="resource-arrow">→</div>
+                        </a>
+                    `).join('')}</div></div>`;
+                }
+                if (q.resources.platform && q.resources.platform.length) {
+                    resourcesHTML += `<div class="resources-section"><div class="resources-title">Platform Resources</div><div class="resource-list">${q.resources.platform.map(p => `
+                        <a href="${p.url || '#'}" class="resource-link">
+                            <div class="resource-icon">${p.type === 'MechanismDx' ? '🧬' : '💬'}</div>
+                            <div class="resource-info"><div class="resource-name">${p.title}</div><div class="resource-desc">${p.type} · ${p.desc || ''}</div></div>
+                            <div class="resource-arrow">→</div>
+                        </a>
+                    `).join('')}</div></div>`;
+                }
+            }
+            document.getElementById('panelResources').innerHTML = resourcesHTML || '<p>No additional resources.</p>';
+        }
+
+        function selectOption(i) {
+            if (state.submitted[state.currentQuestion]) return;
+            state.answers[state.currentQuestion] = i;
+            loadQuestion(state.currentQuestion);
+            updateStats();
+
+            // Auto-submit in tutor mode
+            if (state.tutorMode) {
+                state.submitted[state.currentQuestion] = true;
+                saveProgress();
+                loadQuestion(state.currentQuestion);
+                updateStats();
+            }
+        }
+
+        function submitOrNext() {
+            const i = state.currentQuestion;
+            if (!state.submitted[i]) {
+                if (state.answers[i] === undefined) {
+                    alert('Please select an answer.');
+                    return;
+                }
+                state.submitted[i] = true;
+                saveProgress();
+                loadQuestion(i);
+                updateStats();
+            } else {
+                if (i < state.questions.length - 1) {
+                    loadQuestion(i + 1);
+                } else {
+                    showResults();
+                }
+            }
+        }
+
+        function prevQuestion() {
+            if (state.currentQuestion > 0) loadQuestion(state.currentQuestion - 1);
+        }
+
+        function goToQuestion(i) {
+            loadQuestion(i);
+        }
+
+        function toggleFlag() {
+            if (state.flagged.has(state.currentQuestion)) {
+                state.flagged.delete(state.currentQuestion);
+            } else {
+                state.flagged.add(state.currentQuestion);
+            }
+            loadQuestion(state.currentQuestion);
+            updateStats();
+        }
+
+        function startTimer() {
+            state.timerInterval = setInterval(() => {
+                state.timeRemaining--;
+                const m = Math.floor(state.timeRemaining / 60);
+                const s = state.timeRemaining % 60;
+                document.getElementById('timerDisplay').textContent = `${m}:${s.toString().padStart(2, '0')}`;
+                
+                const timerEl = document.getElementById('timer');
+                timerEl.classList.toggle('warning', state.timeRemaining <= 600 && state.timeRemaining > 300);
+                timerEl.classList.toggle('danger', state.timeRemaining <= 300);
+
+                if (state.timeRemaining <= 0) {
+                    clearInterval(state.timerInterval);
+                    showResults();
+                }
+            }, 1000);
+        }
+
+        function updateStats() {
+            document.getElementById('answeredCount').textContent = `${Object.keys(state.answers).length} / ${state.questions.length}`;
+            document.getElementById('flaggedCount').textContent = state.flagged.size;
+
+            const submittedCount = Object.keys(state.submitted).length;
+            if (submittedCount > 0) {
+                let correct = 0;
+                for (const i in state.submitted) {
+                    const q = state.questions[i];
+                    const correctIdx = q.options.findIndex(o => o.correct);
+                    if (state.answers[i] === correctIdx) correct++;
+                }
+                document.getElementById('correctCount').textContent = `${correct} / ${submittedCount}`;
+            }
+        }
+
+        function saveProgress() {
+            // Save to localStorage for review
+            const progressData = {
+                date: new Date().toISOString(),
+                mode: state.mode,
+                questions: state.questions.map(q => q.id),
+                answers: state.answers,
+                submitted: state.submitted,
+                flagged: [...state.flagged]
+            };
+            
+            const history = JSON.parse(localStorage.getItem('boardPrepHistory') || '[]');
+            history.unshift(progressData);
+            localStorage.setItem('boardPrepHistory', JSON.stringify(history.slice(0, 50)));
+        }
+
+        function showResults() {
+            if (state.timerInterval) clearInterval(state.timerInterval);
+
+            let correct = 0, incorrect = 0;
+            state.questions.forEach((q, i) => {
+                const correctIdx = q.options.findIndex(o => o.correct);
+                if (state.answers[i] === correctIdx) correct++;
+                else if (state.answers[i] !== undefined) incorrect++;
+            });
+
+            const elapsed = Math.floor((Date.now() - state.startTime) / 1000);
+            const mins = Math.floor(elapsed / 60);
+            const secs = elapsed % 60;
+
+            document.getElementById('finalScore').textContent = Math.round(correct / state.questions.length * 100) + '%';
+            document.getElementById('totalCorrect').textContent = correct;
+            document.getElementById('totalIncorrect').textContent = incorrect;
+            document.getElementById('timeSpent').textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+
+            document.getElementById('resultsModal').classList.add('show');
+
+            // Update cumulative stats
+            updateCumulativeStats(correct, incorrect);
+            trackSystemPerformance();
+        }
+
+        function updateCumulativeStats(correct, incorrect) {
+            const stats = JSON.parse(localStorage.getItem('boardPrepStats') || '{"totalCorrect":0,"totalIncorrect":0,"sessions":0}');
+            stats.totalCorrect += correct;
+            stats.totalIncorrect += incorrect;
+            stats.sessions++;
+            stats.lastSession = new Date().toISOString();
+            localStorage.setItem('boardPrepStats', JSON.stringify(stats));
+        }
+
+        function closeResults() {
+            document.getElementById('resultsModal').classList.remove('show');
+        }
+
+        function reviewQuestions() {
+            closeResults();
+            loadQuestion(0);
+        }
+
+        function startNewBlock() {
+            closeResults();
+            document.getElementById('quizScreen').style.display = 'none';
+            document.getElementById('startScreen').style.display = 'flex';
+        }
+
+        function endQuiz() {
+            if (confirm('End this session? Your progress will be saved.')) {
+                showResults();
+            }
+        }
+
+        // Tab switching
+        document.querySelectorAll('.exp-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.exp-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.exp-panel').forEach(p => p.classList.remove('active'));
+                tab.classList.add('active');
+                const panelId = {answer: 'panelAnswer', script: 'panelScript', distractors: 'panelDistractors', resources: 'panelResources'}[tab.dataset.tab];
+                document.getElementById(panelId).classList.add('active');
+            });
+        });
+
+        // Mode selection
+        document.querySelectorAll('.mode-option').forEach(opt => {
+            opt.addEventListener('click', () => {
+                document.querySelectorAll('.mode-option').forEach(o => o.classList.remove('selected'));
+                opt.classList.add('selected');
+            });
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', e => {
+            if (document.getElementById('quizScreen').style.display === 'none') return;
+            const key = e.key.toUpperCase();
+            if ('ABCDE'.includes(key)) {
+                const idx = key.charCodeAt(0) - 65;
+                if (idx < state.questions[state.currentQuestion].options.length) selectOption(idx);
+            }
+            if (e.key === 'Enter') submitOrNext();
+            if (e.key === 'ArrowLeft') prevQuestion();
+            if (e.key === 'ArrowRight' && state.submitted[state.currentQuestion] && state.currentQuestion < state.questions.length - 1) loadQuestion(state.currentQuestion + 1);
+            if (e.key === 'f' || e.key === 'F') toggleFlag();
+        });
+
+        // Load on init
+        loadQuestions();
+    </script>
+
+    <!-- THEME PICKER MODAL -->
+    <div class="dx-theme-modal" id="dxThemeModal">
+        <div class="dx-theme-modal-content">
+            <div class="dx-theme-modal-header">
+                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
+                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Light Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div>
+                        <div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div>
+                        <div class="dx-theme-name">Deeper Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="eucalyptus" onclick="setDxTheme('eucalyptus')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f6f9f7"></div></div>
+                        <div class="dx-theme-name">Eucalyptus</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="teal-cream" onclick="setDxTheme('teal-cream')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fdfcf9"></div><div class="dx-theme-preview-main" style="background:#fdfcf9"></div></div>
+                        <div class="dx-theme-name">Teal on Cream</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div>
+                        <div class="dx-theme-name">Steel Blue</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div>
+                        <div class="dx-theme-name">Muted Sage</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="muted-lavender" onclick="setDxTheme('muted-lavender')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f9f8fb"></div></div>
+                        <div class="dx-theme-name">Muted Lavender</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="slate-teal" onclick="setDxTheme('slate-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#334155"></div><div class="dx-theme-preview-main" style="background:#f8fafc"></div></div>
+                        <div class="dx-theme-name">Slate + Teal</div>
+                    </div>
+                </div>
+            </div>
+            <div class="dx-theme-section">
+                <div class="dx-theme-section-title">Dark Themes</div>
+                <div class="dx-theme-grid">
+                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#0f172a"></div><div class="dx-theme-preview-main" style="background:#1e293b"></div></div>
+                        <div class="dx-theme-name">Ocean Dark</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
+                        <div class="dx-theme-name">Midnight Teal</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="purple-night" onclick="setDxTheme('purple-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
+                        <div class="dx-theme-name">Purple Night</div>
+                    </div>
+                    <div class="dx-theme-option" data-theme="forest-night" onclick="setDxTheme('forest-night')">
+                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
+                        <div class="dx-theme-name">Forest Night</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Theme System
+    (function() {
+        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
+        document.body.setAttribute('data-theme', saved);
+        document.addEventListener('DOMContentLoaded', updateThemeOptions);
+    })();
+    
+    function setDxTheme(theme) {
+        document.body.setAttribute('data-theme', theme);
+        localStorage.setItem('dx-theme', theme);
+        updateThemeOptions();
+        closeDxThemeModal();
+    }
+    
+    function updateThemeOptions() {
+        const current = document.body.getAttribute('data-theme');
+        document.querySelectorAll('.dx-theme-option').forEach(opt => {
+            opt.classList.toggle('active', opt.dataset.theme === current);
+        });
+    }
+    
+    function openDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.add('open');
+    }
+    
+    function closeDxThemeModal() {
+        document.getElementById('dxThemeModal')?.classList.remove('open');
+    }
+    
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeDxThemeModal();
+    });
+    </script>
+
+</body>
+</html>
+
+<script>
+// System tracking for dashboard
+function trackSystemPerformance() {
+    const stats = JSON.parse(localStorage.getItem('boardPrepSystems') || '{}');
+    state.questions.forEach((q, i) => {
+        if (state.submitted[i]) {
+            const system = q.system || 'General';
+            if (!stats[system]) stats[system] = { correct: 0, incorrect: 0 };
+            const correctIdx = q.options.findIndex(o => o.correct);
+            if (state.answers[i] === correctIdx) stats[system].correct++;
+            else stats[system].incorrect++;
+        }
+    });
+    localStorage.setItem('boardPrepSystems', JSON.stringify(stats));
+}
+</script>
