@@ -3,637 +3,331 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adventure Cases | ReasonDx</title>
+    <title>Clinical Adventures | ReasonDx</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Georgia&display=swap" rel="stylesheet">
     <style>
-/* Theme Variables */
-:root {
-    --primary: #10b981;
-    --primary-light: #6ee7b7;
-    --primary-dark: #059669;
-    --primary-bg: #ecfdf5;
-    --text-primary: #1e293b;
-    --text-secondary: #64748b;
-    --text-muted: #94a3b8;
-    --bg-main: #0f172a;
-    --bg-card: #1e293b;
-    --bg-nav: #0f172a;
-    --border: #334155;
-    --shadow: 0 4px 12px rgba(0,0,0,0.3);
-    --shadow-lg: 0 8px 24px rgba(0,0,0,0.4);
-    --radius: 12px;
-    --accent-red: #ef4444;
-    --accent-blue: #3b82f6;
-    --accent-purple: #8b5cf6;
-    --accent-orange: #f59e0b;
-    --accent-teal: #14b8a6;
-}
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        :root {
+            --primary: #3b82f6; --primary-light: #60a5fa; --primary-bg: #1e3a5f;
+            --text-primary: #f1f5f9; --text-secondary: #94a3b8;
+            --bg-main: #0f172a; --bg-card: #1e293b; --bg-nav: #0f172a; --border: #334155;
+            --nav-text: #ffffff; --nav-link: #94a3b8; --nav-active-bg: #3b82f6; --nav-active-text: #ffffff;
+            --success: #10b981; --warning: #f59e0b; --danger: #ef4444;
+            --transition: all 0.3s ease;
+        }
+        
+        [data-theme="ocean-dark"] {
+            --primary: #3b82f6; --primary-light: #60a5fa; --primary-bg: #1e3a5f;
+            --text-primary: #f1f5f9; --text-secondary: #94a3b8;
+            --bg-main: #0f172a; --bg-card: #1e293b; --bg-nav: #0f172a; --border: #334155;
+        }
+        
+        [data-theme="midnight-teal"] {
+            --primary: #5eead4; --primary-light: #99f6e4; --primary-bg: #0d3d3b;
+            --text-primary: #f0fdfa; --text-secondary: #99f6e4;
+            --bg-main: #042f2e; --bg-card: #0d3d3b; --bg-nav: #022c22; --border: #115e59;
+            --nav-link: #86efac; --nav-active-bg: #5eead4; --nav-active-text: #022c22;
+        }
+        
+        [data-theme="muted-teal"] {
+            --primary: #4a9a8e; --primary-light: #6abfb0; --primary-bg: #e8f2f0;
+            --text-primary: #1e293b; --text-secondary: #64748b;
+            --bg-main: #f7fafa; --bg-card: #ffffff; --bg-nav: #f7fafa; --border: #d5e5e3;
+            --nav-text: #1e293b; --nav-link: #64748b; --nav-active-bg: #4a9a8e; --nav-active-text: #ffffff;
+        }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: var(--bg-main);
-    color: #f1f5f9;
-    min-height: 100vh;
-}
-
-/* Navigation */
-.nav { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; }
-.nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-.nav-brand { display: flex; align-items: center; text-decoration: none; }
-.nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
-.nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #94a3b8; font-size: 14px; transition: all 0.15s; }
-.nav-link:hover { background: rgba(255,255,255,0.1); color: #f1f5f9; }
-.nav-link.active { background: var(--primary); color: white; }
-.theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: #94a3b8; cursor: pointer; }
-
-/* Hero Header */
-.hero {
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 50%, #1e1b4b 100%);
-    padding: 60px 24px;
-    text-align: center;
-    border-bottom: 1px solid var(--border);
-    position: relative;
-    overflow: hidden;
-}
-.hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 30% 50%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 70% 50%, rgba(239, 68, 68, 0.1) 0%, transparent 50%);
-    pointer-events: none;
-}
-.hero-content { position: relative; z-index: 1; }
-.hero-icon { font-size: 64px; margin-bottom: 16px; }
-.hero h1 { font-size: 42px; font-weight: 700; margin-bottom: 12px; }
-.hero p { font-size: 18px; color: #94a3b8; max-width: 600px; margin: 0 auto; line-height: 1.7; }
-
-/* Breadcrumb */
-.breadcrumb {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 16px 24px;
-    font-size: 14px;
-    color: #64748b;
-}
-.breadcrumb a { color: var(--primary); text-decoration: none; }
-.breadcrumb a:hover { text-decoration: underline; }
-
-/* Tutorial Section */
-.tutorial {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 40px 24px;
-}
-.tutorial-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 32px;
-    margin-bottom: 24px;
-}
-.tutorial-card h2 {
-    font-size: 24px;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-.tutorial-card .subtitle {
-    color: #94a3b8;
-    margin-bottom: 24px;
-    font-size: 16px;
-}
-
-/* How it works grid */
-.how-it-works {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
-    margin-top: 24px;
-}
-.how-card {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
-    text-align: center;
-}
-.how-card-icon { font-size: 32px; margin-bottom: 12px; }
-.how-card h4 { font-size: 15px; margin-bottom: 6px; }
-.how-card p { font-size: 13px; color: #94a3b8; }
-
-/* Learning Path */
-.learning-path {
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(20, 184, 166, 0.1) 100%);
-    border: 1px solid var(--primary);
-    border-radius: 16px;
-    padding: 32px;
-    margin-bottom: 24px;
-}
-.path-steps {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    gap: 20px;
-    align-items: center;
-    margin: 24px 0;
-}
-.path-step {
-    background: var(--bg-card);
-    padding: 24px;
-    border-radius: 12px;
-    text-align: center;
-}
-.path-step-icon { font-size: 36px; margin-bottom: 12px; }
-.path-step h4 { margin-bottom: 6px; }
-.path-step p { font-size: 14px; color: #94a3b8; }
-.path-arrow { font-size: 28px; color: var(--primary); }
-.path-tip {
-    background: var(--bg-card);
-    border-left: 4px solid var(--primary);
-    padding: 16px;
-    border-radius: 0 8px 8px 0;
-    font-size: 14px;
-    color: #94a3b8;
-}
-.path-tip strong { color: #f1f5f9; }
-
-/* Cases Section */
-.cases-section {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 24px 60px;
-}
-.section-header {
-    margin-bottom: 32px;
-}
-.section-header h2 {
-    font-size: 28px;
-    margin-bottom: 8px;
-}
-.section-header p {
-    color: #94a3b8;
-}
-
-/* Case Cards */
-.cases-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 24px;
-}
-.case-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    overflow: hidden;
-    transition: all 0.3s;
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    position: relative;
-}
-.case-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
-    border-color: var(--accent-color, var(--primary));
-}
-.case-card.available:hover { cursor: pointer; }
-.case-card.coming-soon { opacity: 0.7; }
-.case-card.coming-soon:hover { transform: none; cursor: default; }
-
-.case-card-banner {
-    height: 8px;
-    background: var(--accent-color, var(--primary));
-}
-.case-card-body {
-    padding: 24px;
-}
-.case-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 12px;
-}
-.case-card-icon {
-    font-size: 36px;
-}
-.case-card-badges {
-    display: flex;
-    gap: 8px;
-}
-.case-badge {
-    font-size: 11px;
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-weight: 600;
-}
-.case-badge.difficulty {
-    background: rgba(255,255,255,0.1);
-    color: #94a3b8;
-}
-.case-badge.coming-soon {
-    background: rgba(245, 158, 11, 0.2);
-    color: #f59e0b;
-}
-.case-badge.available {
-    background: rgba(16, 185, 129, 0.2);
-    color: #10b981;
-}
-.case-card-title {
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 4px;
-}
-.case-card-subtitle {
-    font-size: 14px;
-    color: var(--accent-color, var(--primary));
-    margin-bottom: 12px;
-}
-.case-card-description {
-    font-size: 14px;
-    color: #94a3b8;
-    line-height: 1.6;
-    margin-bottom: 16px;
-}
-.case-card-meta {
-    display: flex;
-    gap: 16px;
-    font-size: 13px;
-    color: #64748b;
-    padding-top: 16px;
-    border-top: 1px solid var(--border);
-}
-.case-card-meta span {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-/* Deep Dive Link */
-.deep-dive-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    color: var(--primary);
-    text-decoration: none;
-    margin-top: 12px;
-    padding: 8px 12px;
-    background: rgba(16, 185, 129, 0.1);
-    border-radius: 6px;
-    transition: all 0.15s;
-}
-.deep-dive-link:hover {
-    background: rgba(16, 185, 129, 0.2);
-}
-
-/* CTA */
-.cta-section {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 40px 24px;
-    text-align: center;
-}
-.cta-card {
-    background: linear-gradient(135deg, var(--bg-card) 0%, #1e1b4b 100%);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 40px;
-}
-.cta-card h3 {
-    font-size: 24px;
-    margin-bottom: 12px;
-}
-.cta-card p {
-    color: #94a3b8;
-    margin-bottom: 24px;
-}
-.cta-btn {
-    display: inline-block;
-    padding: 14px 28px;
-    background: var(--primary);
-    color: white;
-    text-decoration: none;
-    border-radius: 10px;
-    font-weight: 600;
-    font-size: 16px;
-    transition: all 0.15s;
-}
-.cta-btn:hover {
-    background: var(--primary-dark);
-    transform: translateY(-2px);
-}
-
-@media (max-width: 768px) {
-    .nav-inner { flex-direction: column; gap: 12px; }
-    .hero h1 { font-size: 32px; }
-    .path-steps { grid-template-columns: 1fr; }
-    .path-arrow { transform: rotate(90deg); justify-self: center; }
-    .cases-grid { grid-template-columns: 1fr; }
-}
+        body { font-family: 'Inter', sans-serif; background: var(--bg-main); color: var(--text-primary); min-height: 100vh; line-height: 1.6; transition: var(--transition); }
+        
+        /* Navigation */
+        .nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+        .nav-inner { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-brand { display: flex; align-items: center; text-decoration: none; }
+        .nav-brand svg { height: 32px; }
+        .nav-links { display: flex; gap: 4px; align-items: center; }
+        .nav-link { padding: 8px 12px; text-decoration: none; color: var(--nav-link); font-size: 13px; font-weight: 500; border-radius: 6px; transition: var(--transition); }
+        .nav-link:hover { background: rgba(255,255,255,0.1); color: var(--nav-text); }
+        .nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
+        .theme-btn { padding: 6px 10px; border-radius: 6px; border: 1px solid var(--border); background: transparent; color: var(--nav-link); cursor: pointer; font-size: 13px; }
+        .theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+        
+        .header { padding: 32px 24px; text-align: center; }
+        .header h1 { font-size: 1.8rem; margin-bottom: 8px; font-weight: 700; }
+        .header p { color: var(--text-secondary); font-size: 1rem; }
+        .main { max-width: 1400px; margin: 0 auto; padding: 0 24px 48px; }
+        
+        .stats-bar { display: flex; gap: 16px; justify-content: center; margin-bottom: 24px; flex-wrap: wrap; }
+        .stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 20px; text-align: center; min-width: 110px; }
+        .stat-value { font-size: 1.6rem; font-weight: 700; color: var(--primary); }
+        .stat-label { font-size: 0.7rem; color: var(--text-secondary); text-transform: uppercase; }
+        
+        .filter-section { margin-bottom: 24px; }
+        .search-bar { max-width: 500px; margin: 0 auto 16px; }
+        .search-input { width: 100%; padding: 12px 16px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-primary); font-size: 0.9rem; }
+        .search-input:focus { outline: none; border-color: var(--primary); }
+        .search-input::placeholder { color: var(--text-secondary); }
+        
+        .filter-bar { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
+        .filter-btn { padding: 6px 12px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 6px; color: var(--text-secondary); cursor: pointer; font-size: 0.75rem; transition: var(--transition); }
+        .filter-btn:hover, .filter-btn.active { background: var(--primary); border-color: var(--primary); color: white; }
+        
+        .category { margin-bottom: 36px; }
+        .category.hidden { display: none; }
+        .category-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid var(--border); }
+        .category-icon { font-size: 1.3rem; }
+        .category-title { font-size: 1.2rem; font-weight: 700; }
+        .category-count { background: var(--primary); color: white; padding: 2px 10px; border-radius: 12px; font-size: 0.7rem; font-weight: 600; }
+        
+        .cases-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+        
+        .case-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: var(--transition); text-decoration: none; color: inherit; display: block; }
+        .case-card:hover { transform: translateY(-3px); border-color: var(--primary); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+        .case-card.hidden { display: none; }
+        
+        .case-banner { height: 5px; }
+        .case-body { padding: 14px; }
+        .case-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
+        .case-emoji { font-size: 1.4rem; }
+        .case-badges { display: flex; gap: 4px; flex-wrap: wrap; }
+        .badge { padding: 2px 6px; border-radius: 4px; font-size: 0.6rem; font-weight: 600; }
+        .badge-available { background: var(--success); color: white; }
+        .badge-enhanced { background: #8b5cf6; color: white; }
+        .badge-level { background: rgba(255,255,255,0.1); color: var(--text-secondary); }
+        .case-title { font-size: 0.95rem; font-weight: 600; margin-bottom: 2px; }
+        .case-subtitle { font-size: 0.75rem; color: var(--primary); margin-bottom: 6px; }
+        .case-desc { font-size: 0.75rem; color: var(--text-secondary); line-height: 1.4; }
+        .case-meta { display: flex; gap: 10px; font-size: 0.65rem; color: var(--text-secondary); margin-top: 8px; }
+        
+        /* Category Colors */
+        .cat-ai .case-banner { background: linear-gradient(90deg, #8b5cf6, #a855f7); }
+        .cat-cardio .case-banner { background: linear-gradient(90deg, #ec4899, #f472b6); }
+        .cat-pulm .case-banner { background: linear-gradient(90deg, #06b6d4, #22d3ee); }
+        .cat-gi .case-banner { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+        .cat-neuro .case-banner { background: linear-gradient(90deg, #6366f1, #818cf8); }
+        .cat-endo .case-banner { background: linear-gradient(90deg, #14b8a6, #2dd4bf); }
+        .cat-renal .case-banner { background: linear-gradient(90deg, #f97316, #fb923c); }
+        .cat-heme .case-banner { background: linear-gradient(90deg, #e11d48, #f43f5e); }
+        .cat-id .case-banner { background: linear-gradient(90deg, #84cc16, #a3e635); }
+        .cat-peds .case-banner { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+        .cat-tox .case-banner { background: linear-gradient(90deg, #7c3aed, #8b5cf6); }
+        .cat-derm .case-banner { background: linear-gradient(90deg, #ea580c, #f97316); }
+        .cat-em .case-banner { background: linear-gradient(90deg, #dc2626, #ef4444); }
+        
+        /* Theme Modal */
+        .theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 1000; align-items: center; justify-content: center; }
+        .theme-modal.open { display: flex; }
+        .theme-modal-content { background: var(--bg-card); border-radius: 12px; padding: 20px; max-width: 400px; width: 90%; border: 1px solid var(--border); }
+        .theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .theme-modal-title { font-size: 1rem; font-weight: 600; }
+        .theme-modal-close { background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text-secondary); }
+        .theme-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 8px; cursor: pointer; transition: var(--transition); }
+        .theme-option:hover, .theme-option.selected { border-color: var(--primary); }
+        .theme-preview { height: 30px; border-radius: 4px; margin-bottom: 6px; }
+        .theme-name { font-size: 0.8rem; font-weight: 500; }
+        
+        .footer { text-align: center; padding: 20px; color: var(--text-secondary); font-size: 0.75rem; border-top: 1px solid var(--border); }
+        
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.4rem; }
+            .cases-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+        }
     </style>
 </head>
-<body>
+<body data-theme="ocean-dark">
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-inner">
             <a href="../index.html" class="nav-brand">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
-                    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#1a1a1a">D</text>
-                    <line x1="38" y1="30" x2="52" y2="46" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
-                    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#1a1a1a"/>
-                    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round" fill="none"/>
-                    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#1a1a1a"/>
-                    <circle cx="48" cy="67" r="5" fill="none" stroke="#1a1a1a" stroke-width="1.8"/>
-                    <circle cx="48" cy="67" r="2.5" fill="#1a1a1a"/>
-                    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="#f1f5f9" letter-spacing="-1">Suite</text>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 120">
+                    <text x="20" y="70" font-family="Georgia, serif" font-size="58" fill="currentColor">D</text>
+                    <line x1="68" y1="42" x2="92" y2="72" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+                    <ellipse cx="66" cy="39" rx="2.5" ry="4.5" transform="rotate(-28 66 39)" fill="currentColor"/>
+                    <path d="M 92 42 L 76 58 Q 70 66 70 76 Q 70 86 78 92 Q 86 98 86 108" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+                    <ellipse cx="94" cy="39" rx="2.5" ry="4.5" transform="rotate(28 94 39)" fill="currentColor"/>
+                    <circle cx="86" cy="108" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/>
+                    <circle cx="86" cy="108" r="5" fill="currentColor"/>
+                    <text x="115" y="70" font-family="Georgia, serif" font-size="58" fill="currentColor" letter-spacing="-1">Suite</text>
                 </svg>
             </a>
             <div class="nav-links">
                 <a href="../index.html" class="nav-link">🏠 Home</a>
                 <a href="../mechanism/index.html" class="nav-link">⚙️ MechanismDx</a>
-                <a href="training.html" class="nav-link active">🔬 ReasonDx</a>
-                <a href="../CoachDx/case-library.html" class="nav-link">🧠 CoachDx</a>
-                <a href="../reference-library.html" class="nav-link">📚 References</a>
-                <a href="../dx-dashboard.html" class="nav-link">📊 Dashboard</a>
+                <a href="index.html" class="nav-link active">🩺 ReasonDx</a>
+                <a href="../CoachDx/index.html" class="nav-link">🗣️ CoachDx</a>
+                <a href="training.html" class="nav-link">📚 Cases</a>
+                <button class="theme-btn" onclick="openThemeModal()">🎨</button>
             </div>
         </div>
     </nav>
 
-    <!-- Hero -->
-    <header class="hero">
-        <div class="hero-content">
-            <div class="hero-icon">🎮</div>
-            <h1>Adventure Cases</h1>
-            <p>Immersive branching narratives where every decision shapes the outcome. Experience the weight of clinical decision-making in story-driven scenarios.</p>
-        </div>
+    <header class="header">
+        <h1>Choose Your Adventure</h1>
+        <p>Select a case to begin. Each adventure takes 15-30 minutes.</p>
     </header>
+    
+    <main class="main">
+        <div class="stats-bar">
+            <div class="stat-card"><div class="stat-value">98</div><div class="stat-label">Adventures</div></div>
+            <div class="stat-card"><div class="stat-value">36</div><div class="stat-label">Enhanced</div></div>
+            <div class="stat-card"><div class="stat-value">12</div><div class="stat-label">Categories</div></div>
+        </div>
 
-    <!-- Breadcrumb -->
-    <div class="breadcrumb">
-        <a href="../index.html">Home</a> → <a href="training.html">ReasonDx</a> → Adventure Cases
-    </div>
-
-    <!-- Tutorial -->
-    <section class="tutorial">
-        <div class="tutorial-card">
-            <h2>🎮 What are Adventure Cases?</h2>
-            <p class="subtitle">Unlike traditional learning, Adventure Cases put you in the driver's seat of realistic clinical scenarios.</p>
-            
-            <div class="how-it-works">
-                <div class="how-card">
-                    <div class="how-card-icon">📖</div>
-                    <h4>Story-Driven</h4>
-                    <p>Immersive narratives that unfold based on your choices</p>
-                </div>
-                <div class="how-card">
-                    <div class="how-card-icon">🔀</div>
-                    <h4>Branching Paths</h4>
-                    <p>Multiple outcomes depending on your clinical decisions</p>
-                </div>
-                <div class="how-card">
-                    <div class="how-card-icon">⏱️</div>
-                    <h4>Time Pressure</h4>
-                    <p>Feel the urgency of real clinical decision-making</p>
-                </div>
-                <div class="how-card">
-                    <div class="how-card-icon">💔</div>
-                    <h4>Real Consequences</h4>
-                    <p>Your choices affect patient outcomes - for better or worse</p>
-                </div>
+        <div class="filter-section">
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="🔍 Search by topic, diagnosis, or keyword..." oninput="filterCases(this.value)" id="searchInput">
+            </div>
+            <div class="filter-bar">
+                <button class="filter-btn active" onclick="filterByCategory('all', this)">All</button>
+                <button class="filter-btn" onclick="filterByCategory('ai', this)">🌸 Allergy</button>
+                <button class="filter-btn" onclick="filterByCategory('cardio', this)">❤️ Cardio</button>
+                <button class="filter-btn" onclick="filterByCategory('pulm', this)">🫁 Pulm</button>
+                <button class="filter-btn" onclick="filterByCategory('gi', this)">🍽️ GI</button>
+                <button class="filter-btn" onclick="filterByCategory('neuro', this)">🧠 Neuro</button>
+                <button class="filter-btn" onclick="filterByCategory('id', this)">🦠 ID</button>
+                <button class="filter-btn" onclick="filterByCategory('endo', this)">🦋 Endo</button>
+                <button class="filter-btn" onclick="filterByCategory('heme', this)">🩸 Heme</button>
+                <button class="filter-btn" onclick="filterByCategory('renal', this)">🫘 Renal</button>
+                <button class="filter-btn" onclick="filterByCategory('tox', this)">☠️ Tox</button>
+                <button class="filter-btn" onclick="filterByCategory('peds', this)">👶 Peds</button>
+                <button class="filter-btn" onclick="filterByCategory('derm', this)">🩹 Derm</button>
             </div>
         </div>
 
-        <!-- Learning Path -->
-        <div class="learning-path">
-            <h2>🎯 Recommended Learning Path</h2>
-            <p class="subtitle" style="color: #94a3b8;">For the best learning experience, we recommend a two-step approach:</p>
-            
-            <div class="path-steps">
-                <div class="path-step">
-                    <div class="path-step-icon">📚</div>
-                    <h4>Step 1: Deep Dive</h4>
-                    <p>Understand the pathophysiology - learn <em>why</em> things happen</p>
-                </div>
-                <div class="path-arrow">→</div>
-                <div class="path-step">
-                    <div class="path-step-icon">🎮</div>
-                    <h4>Step 2: Adventure</h4>
-                    <p>Apply your knowledge under pressure in realistic scenarios</p>
-                </div>
+        <!-- ALLERGY/IMMUNOLOGY - 20 adventures -->
+        <section class="category cat-ai" data-category="ai">
+            <div class="category-header">
+                <span class="category-icon">🌸</span>
+                <span class="category-title">Allergy & Immunology</span>
+                <span class="category-count">20</span>
             </div>
-            
-            <div class="path-tip">
-                <strong>💡 Pro Tip:</strong> Complete a Deep Dive first to understand the underlying mechanisms, then test yourself with the corresponding Adventure Case to practice applying that knowledge in a time-pressured, branching scenario where your decisions affect patient outcomes.
+            <div class="cases-grid">
+                <a href="anaphylaxis-adventure-enhanced.html" class="case-card" data-tags="anaphylaxis epinephrine allergic emergency"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">⚠️</div><div class="case-badges"><span class="badge badge-available">✓</span><span class="badge badge-enhanced">Enhanced</span></div></div><div class="case-title">Minutes to Act</div><div class="case-subtitle">Anaphylaxis Emergency</div><div class="case-desc">Teenager collapses at restaurant. Hives spreading, voice changing.</div><div class="case-meta"><span>⏱ 10-15 min</span><span>📊 Foundational</span></div></div></a>
+                <a href="anaphylaxis-adventure.html" class="case-card" data-tags="anaphylaxis allergic reaction"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🚨</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">The Restaurant Emergency</div><div class="case-subtitle">Anaphylaxis Recognition</div><div class="case-desc">Classic anaphylaxis with multi-system involvement.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
+                <a href="anaphylaxis-adventure-v2.html" class="case-card" data-tags="anaphylaxis biphasic"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">⚡</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">The Second Wave</div><div class="case-subtitle">Biphasic Anaphylaxis</div><div class="case-desc">Patient returns after initial treatment.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
+                <a href="drug-allergy-adventure-enhanced.html" class="case-card" data-tags="drug allergy penicillin cross-reactivity"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">💊</div><div class="case-badges"><span class="badge badge-available">✓</span><span class="badge badge-enhanced">Enhanced</span></div></div><div class="case-title">The Penicillin Question</div><div class="case-subtitle">Drug Allergy Evaluation</div><div class="case-desc">Patient reports allergy but needs antibiotics.</div><div class="case-meta"><span>⏱ 20-25 min</span></div></div></a>
+                <a href="drug-allergy-adventure.html" class="case-card" data-tags="drug allergy medication"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">💉</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">Antibiotic Dilemma</div><div class="case-subtitle">Drug Allergy Workup</div><div class="case-desc">Evaluate and manage reported drug allergies.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
+                <a href="food-allergy-adventure-enhanced.html" class="case-card" data-tags="food allergy peanut IgE"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🥜</div><div class="case-badges"><span class="badge badge-available">✓</span><span class="badge badge-enhanced">Enhanced</span></div></div><div class="case-title">The Peanut Problem</div><div class="case-subtitle">Food Allergy Diagnosis</div><div class="case-desc">Child with suspected peanut allergy.</div><div class="case-meta"><span>⏱ 20-25 min</span></div></div></a>
+                <a href="food-allergy-adventure.html" class="case-card" data-tags="food allergy reaction"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🍽️</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">Dinner Gone Wrong</div><div class="case-subtitle">Food Allergy Evaluation</div><div class="case-desc">Food-triggered allergic reactions.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
+                <a href="urticaria-adventure-enhanced.html" class="case-card" data-tags="urticaria hives chronic antihistamine"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🔴</div><div class="case-badges"><span class="badge badge-available">✓</span><span class="badge badge-enhanced">Enhanced</span></div></div><div class="case-title">The Itchy Mystery</div><div class="case-subtitle">Chronic Urticaria</div><div class="case-desc">Recurrent hives for months.</div><div class="case-meta"><span>⏱ 20-25 min</span></div></div></a>
+                <a href="urticaria-adventure.html" class="case-card" data-tags="urticaria hives"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🩹</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">Breaking Out</div><div class="case-subtitle">Urticaria Management</div><div class="case-desc">Acute and chronic urticaria.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
+                <a href="angioedema-adventure-enhanced.html" class="case-card" data-tags="angioedema ACE inhibitor hereditary"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">😮</div><div class="case-badges"><span class="badge badge-available">✓</span><span class="badge badge-enhanced">Enhanced</span></div></div><div class="case-title">The Swelling Face</div><div class="case-subtitle">Angioedema Differential</div><div class="case-desc">Facial swelling without hives.</div><div class="case-meta"><span>⏱ 20-25 min</span></div></div></a>
+                <a href="angioedema-adventure.html" class="case-card" data-tags="angioedema swelling"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">💨</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">Lip Swelling</div><div class="case-subtitle">Angioedema Workup</div><div class="case-desc">Evaluate angioedema etiology.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
+                <a href="hae-adventure.html" class="case-card" data-tags="hereditary angioedema HAE C4"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🧬</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">Family History</div><div class="case-subtitle">Hereditary Angioedema</div><div class="case-desc">Recurrent angioedema with family pattern.</div><div class="case-meta"><span>⏱ 20-25 min</span></div></div></a>
+                <a href="asthma-phenotyping-adventure-enhanced.html" class="case-card" data-tags="asthma phenotype eosinophilic biologics"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🫁</div><div class="case-badges"><span class="badge badge-available">✓</span><span class="badge badge-enhanced">Enhanced</span></div></div><div class="case-title">Beyond the Inhaler</div><div class="case-subtitle">Asthma Phenotyping</div><div class="case-desc">Severe asthma despite treatment.</div><div class="case-meta"><span>⏱ 25-30 min</span></div></div></a>
+                <a href="asthma-phenotyping-adventure.html" class="case-card" data-tags="asthma phenotype severe"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🌬️</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">The Frequent Flyer</div><div class="case-subtitle">Severe Asthma Workup</div><div class="case-desc">Characterize asthma phenotype.</div><div class="case-meta"><span>⏱ 20-25 min</span></div></div></a>
+                <a href="eosinophilia-adventure-enhanced.html" class="case-card" data-tags="eosinophilia parasites EGPA HES"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🔬</div><div class="case-badges"><span class="badge badge-available">✓</span><span class="badge badge-enhanced">Enhanced</span></div></div><div class="case-title">The High Count</div><div class="case-subtitle">Eosinophilia Workup</div><div class="case-desc">Marked eosinophilia discovered.</div><div class="case-meta"><span>⏱ 25-30 min</span></div></div></a>
+                <a href="eosinophilia-adventure.html" class="case-card" data-tags="eosinophilia differential"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">📊</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">The Elevated Eos</div><div class="case-subtitle">Eosinophilia Differential</div><div class="case-desc">Systematic approach.</div><div class="case-meta"><span>⏱ 20-25 min</span></div></div></a>
+                <a href="immunodeficiency-adventure-enhanced.html" class="case-card" data-tags="immunodeficiency CVID antibody"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🛡️</div><div class="case-badges"><span class="badge badge-available">✓</span><span class="badge badge-enhanced">Enhanced</span></div></div><div class="case-title">Frequent Infections</div><div class="case-subtitle">Primary Immunodeficiency</div><div class="case-desc">Recurrent sinopulmonary infections.</div><div class="case-meta"><span>⏱ 25-30 min</span></div></div></a>
+                <a href="immunodeficiency-adventure.html" class="case-card" data-tags="immunodeficiency infections"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🦠</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">Always Sick</div><div class="case-subtitle">Immunodeficiency Screening</div><div class="case-desc">When to suspect immunodeficiency.</div><div class="case-meta"><span>⏱ 20-25 min</span></div></div></a>
+                <a href="mast-cell-adventure-enhanced.html" class="case-card" data-tags="mast cell mastocytosis tryptase"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">⚡</div><div class="case-badges"><span class="badge badge-available">✓</span><span class="badge badge-enhanced">Enhanced</span></div></div><div class="case-title">The Flushing Spells</div><div class="case-subtitle">Mast Cell Disorders</div><div class="case-desc">Episodic flushing and GI symptoms.</div><div class="case-meta"><span>⏱ 25-30 min</span></div></div></a>
+                <a href="mast-cell-adventure.html" class="case-card" data-tags="mast cell activation"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🎯</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">The Spells</div><div class="case-subtitle">Mast Cell Evaluation</div><div class="case-desc">Suspected mast cell activation.</div><div class="case-meta"><span>⏱ 20-25 min</span></div></div></a>
+                <a href="venom-allergy-adventure-enhanced.html" class="case-card" data-tags="venom allergy bee sting immunotherapy"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🐝</div><div class="case-badges"><span class="badge badge-available">✓</span><span class="badge badge-enhanced">Enhanced</span></div></div><div class="case-title">The Bee Sting</div><div class="case-subtitle">Venom Allergy</div><div class="case-desc">Systemic reaction to insect sting.</div><div class="case-meta"><span>⏱ 20-25 min</span></div></div></a>
+                <a href="venom-allergy-adventure.html" class="case-card" data-tags="venom allergy insect"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🦟</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">Summer Hazard</div><div class="case-subtitle">Insect Sting Allergy</div><div class="case-desc">Venom hypersensitivity evaluation.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
+                <a href="allergic-rhinitis-adventure-enhanced.html" class="case-card" data-tags="allergic rhinitis hay fever"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🤧</div><div class="case-badges"><span class="badge badge-available">✓</span><span class="badge badge-enhanced">Enhanced</span></div></div><div class="case-title">The Sniffles</div><div class="case-subtitle">Allergic Rhinitis</div><div class="case-desc">Chronic nasal symptoms evaluation.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
+                <a href="allergic-rhinitis-adventure.html" class="case-card" data-tags="allergic rhinitis"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">👃</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">Seasonal Misery</div><div class="case-subtitle">Rhinitis Workup</div><div class="case-desc">Allergic vs non-allergic rhinitis.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
             </div>
-            
-            <a href="deep-dive-hub.html" style="display: inline-block; margin-top: 20px; padding: 12px 24px; background: rgba(16, 185, 129, 0.2); color: var(--primary); text-decoration: none; border-radius: 8px; font-weight: 600; border: 1px solid var(--primary);">
-                📚 Browse Deep Dives First →
-            </a>
-        </div>
-    </section>
+        </section>
 
-    <!-- Cases -->
-    <section class="cases-section">
-        <div class="section-header">
-            <h2>Choose Your Adventure</h2>
-            <p>Select a case to begin. Each adventure takes 15-30 minutes.</p>
-        </div>
-        
-        <div class="cases-grid">
-            <!-- Chest Pain - AVAILABLE -->
-            <a href="chest-pain-adventure.html" class="case-card available" style="--accent-color: #ef4444;">
-                <div class="case-card-banner"></div>
-                <div class="case-card-body">
-                    <div class="case-card-header">
-                        <span class="case-card-icon">❤️</span>
-                        <div class="case-card-badges">
-                            <span class="case-badge available">✓ Available</span>
-                            <span class="case-badge difficulty">Intermediate</span>
-                        </div>
-                    </div>
-                    <h3 class="case-card-title">The Midnight Code</h3>
-                    <p class="case-card-subtitle">Chest Pain Emergency</p>
-                    <p class="case-card-description">A 58-year-old arrives at 2 AM with crushing chest pain. Every decision matters as you race against time to identify the cause and save his life.</p>
-                    <div class="case-card-meta">
-                        <span>⏱️ 15-25 min</span>
-                        <span>🔀 Multiple endings</span>
-                    </div>
-                    <div class="deep-dive-link">📚 Prep: ACS Deep Dive</div>
-                </div>
-            </a>
-
-            <!-- Sepsis - AVAILABLE -->
-            <a href="sepsis-adventure.html" class="case-card available" style="--accent-color: #f59e0b;">
-                <div class="case-card-banner"></div>
-                <div class="case-card-body">
-                    <div class="case-card-header">
-                        <span class="case-card-icon">🦠</span>
-                        <div class="case-card-badges">
-                            <span class="case-badge available">✓ Available</span>
-                            <span class="case-badge difficulty">Intermediate</span>
-                        </div>
-                    </div>
-                    <h3 class="case-card-title">The Golden Hour</h3>
-                    <p class="case-card-subtitle">Sepsis Recognition & Management</p>
-                    <p class="case-card-description">An elderly nursing home patient arrives febrile and confused. Can you recognize sepsis early and hit the 1-hour bundle targets before it's too late?</p>
-                    <div class="case-card-meta">
-                        <span>⏱️ 20-30 min</span>
-                        <span>🔀 Multiple endings</span>
-                    </div>
-                    <div class="deep-dive-link">📚 Prep: Sepsis Deep Dive</div>
-                </div>
-            </a>
-
-            <!-- Anaphylaxis - AVAILABLE -->
-            <a href="anaphylaxis-adventure.html" class="case-card available" style="--accent-color: #dc2626;">
-                <div class="case-card-banner"></div>
-                <div class="case-card-body">
-                    <div class="case-card-header">
-                        <span class="case-card-icon">⚠️</span>
-                        <div class="case-card-badges">
-                            <span class="case-badge available">✓ Available</span>
-                            <span class="case-badge difficulty">Foundational</span>
-                        </div>
-                    </div>
-                    <h3 class="case-card-title">Minutes to Act</h3>
-                    <p class="case-card-subtitle">Anaphylaxis Emergency</p>
-                    <p class="case-card-description">A teenager collapses at a restaurant after eating. Hives are spreading, her voice is changing. Do you know the right dose, route, and timing for epinephrine?</p>
-                    <div class="case-card-meta">
-                        <span>⏱️ 10-15 min</span>
-                        <span>🔀 Multiple endings</span>
-                    </div>
-                    <div class="deep-dive-link">📚 Prep: Anaphylaxis Deep Dive</div>
-                </div>
-            </a>
-
-            <!-- PE - AVAILABLE -->
-            <a href="pe-adventure.html" class="case-card available" style="--accent-color: #8b5cf6;">
-                <div class="case-card-banner"></div>
-                <div class="case-card-body">
-                    <div class="case-card-header">
-                        <span class="case-card-icon">🫁</span>
-                        <div class="case-card-badges">
-                            <span class="case-badge available">✓ Available</span>
-                            <span class="case-badge difficulty">Advanced</span>
-                        </div>
-                    </div>
-                    <h3 class="case-card-title">The Silent Killer</h3>
-                    <p class="case-card-subtitle">Pulmonary Embolism</p>
-                    <p class="case-card-description">Post-surgical patient with sudden dyspnea. Wells score, D-dimer, CT-PA - navigate the diagnostic algorithm while the patient's oxygen keeps dropping.</p>
-                    <div class="case-card-meta">
-                        <span>⏱️ 20-30 min</span>
-                        <span>🔀 Multiple endings</span>
-                    </div>
-                    <div class="deep-dive-link">📚 Prep: PE Deep Dive</div>
-                </div>
-            </a>
-
-            <!-- DKA - AVAILABLE -->
-            <a href="dka-adventure.html" class="case-card available" style="--accent-color: #14b8a6;">
-                <div class="case-card-banner"></div>
-                <div class="case-card-body">
-                    <div class="case-card-header">
-                        <span class="case-card-icon">📊</span>
-                        <div class="case-card-badges">
-                            <span class="case-badge available">✓ Available</span>
-                            <span class="case-badge difficulty">Intermediate</span>
-                        </div>
-                    </div>
-                    <h3 class="case-card-title">The Balancing Act</h3>
-                    <p class="case-card-subtitle">Diabetic Ketoacidosis</p>
-                    <p class="case-card-description">Young diabetic found unresponsive. Glucose is sky-high, pH is tanking. Master the insulin drip, potassium replacement, and gap closure without causing cerebral edema.</p>
-                    <div class="case-card-meta">
-                        <span>⏱️ 25-35 min</span>
-                        <span>🔀 Multiple endings</span>
-                    </div>
-                    <div class="deep-dive-link">📚 Prep: DKA Deep Dive</div>
-                </div>
-            </a>
-
-            <!-- Stroke - COMING SOON -->
-            <div class="case-card coming-soon" style="--accent-color: #3b82f6;">
-                <div class="case-card-banner"></div>
-                <div class="case-card-body">
-                    <div class="case-card-header">
-                        <span class="case-card-icon">🧠</span>
-                        <div class="case-card-badges">
-                            <span class="case-badge coming-soon">Coming Soon</span>
-                            <span class="case-badge difficulty">Advanced</span>
-                        </div>
-                    </div>
-                    <h3 class="case-card-title">Race Against Time</h3>
-                    <p class="case-card-subtitle">Acute Stroke</p>
-                    <p class="case-card-description">Sudden onset weakness and slurred speech. The tPA window is closing. Can you complete the workup and make the thrombolysis decision in time?</p>
-                    <div class="case-card-meta">
-                        <span>⏱️ 20-30 min</span>
-                        <span>🔀 Multiple endings</span>
-                    </div>
-                </div>
+        <!-- CARDIOLOGY - 12 adventures -->
+        <section class="category cat-cardio" data-category="cardio">
+            <div class="category-header">
+                <span class="category-icon">❤️</span>
+                <span class="category-title">Cardiology</span>
+                <span class="category-count">12</span>
             </div>
-
-            <!-- GI Bleed - COMING SOON -->
-            <div class="case-card coming-soon" style="--accent-color: #dc2626;">
-                <div class="case-card-banner"></div>
-                <div class="case-card-body">
-                    <div class="case-card-header">
-                        <span class="case-card-icon">🩸</span>
-                        <div class="case-card-badges">
-                            <span class="case-badge coming-soon">Coming Soon</span>
-                            <span class="case-badge difficulty">Intermediate</span>
-                        </div>
-                    </div>
-                    <h3 class="case-card-title">Code Crimson</h3>
-                    <p class="case-card-subtitle">Massive GI Hemorrhage</p>
-                    <p class="case-card-description">Hematemesis in the ED. Blood pressure is dropping, hemoglobin is falling. Resuscitate, localize, and decide: scope or IR?</p>
-                    <div class="case-card-meta">
-                        <span>⏱️ 20-30 min</span>
-                        <span>🔀 Multiple endings</span>
-                    </div>
-                </div>
+            <div class="cases-grid">
+                <a href="acs-adventure-enhanced.html" class="case-card" data-tags="acs stemi nstemi chest pain troponin"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">❤️</div><div class="case-badges"><span class="badge badge-available">✓</span><span class="badge badge-enhanced">Enhanced</span></div></div><div class="case-title">The Midnight Code</div><div class="case-subtitle">Chest Pain Emergency</div><div class="case-desc">58-year-old with crushing chest pain at 2 AM.</div><div class="case-meta"><span>⏱ 15-25 min</span></div></div></a>
+                <a href="chest-pain-adventure.html" class="case-card" data-tags="chest pain differential"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">💔</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">The Chest Pain Puzzle</div><div class="case-subtitle">Chest Pain Differential</div><div class="case-desc">Systematic approach to chest pain.</div><div class="case-meta"><span>⏱ 20-25 min</span></div></div></a>
+                <a href="afib-adventure-enhanced.html" class="case-card" data-tags="afib atrial fibrillation anticoagulation"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">💓</div><div class="case-badges"><span class="badge badge-available">✓</span><span class="badge badge-enhanced">Enhanced</span></div></div><div class="case-title">The Racing Heart</div><div class="case-subtitle">Atrial Fibrillation</div><div class="case-desc">New-onset afib with RVR.</div><div class="case-meta"><span>⏱ 20-25 min</span></div></div></a>
+                <a href="afib-adventure.html" class="case-card" data-tags="afib atrial fibrillation"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">📈</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">Irregular Rhythm</div><div class="case-subtitle">AFib Management</div><div class="case-desc">Rate vs rhythm control decisions.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
+                <a href="svt-wpw-adventure.html" class="case-card" data-tags="svt wpw tachycardia"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">⚡</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">Too Fast</div><div class="case-subtitle">SVT & WPW</div><div class="case-desc">Young patient with palpitations.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
+                <a href="heart-failure-adventure-enhanced.html" class="case-card" data-tags="heart failure chf bnp diuretic"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🫀</div><div class="case-badges"><span class="badge badge-available">✓</span><span class="badge badge-enhanced">Enhanced</span></div></div><div class="case-title">The Breathless Patient</div><div class="case-subtitle">Acute Heart Failure</div><div class="case-desc">Acute decompensated CHF.</div><div class="case-meta"><span>⏱ 25-30 min</span></div></div></a>
+                <a href="heart-failure-adventure.html" class="case-card" data-tags="heart failure chf"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">💧</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">Fluid Overload</div><div class="case-subtitle">CHF Exacerbation</div><div class="case-desc">Managing decompensation.</div><div class="case-meta"><span>⏱ 20-25 min</span></div></div></a>
+                <a href="htn-emergency-adventure-enhanced.html" class="case-card" data-tags="hypertension emergency end organ"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">📊</div><div class="case-badges"><span class="badge badge-available">✓</span><span class="badge badge-enhanced">Enhanced</span></div></div><div class="case-title">Under Pressure</div><div class="case-subtitle">Hypertensive Emergency</div><div class="case-desc">BP 220/120 with symptoms.</div><div class="case-meta"><span>⏱ 20-25 min</span></div></div></a>
+                <a href="htn-emergency-adventure.html" class="case-card" data-tags="hypertension emergency"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🩺</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">Sky-High BP</div><div class="case-subtitle">HTN Emergency</div><div class="case-desc">Recognize and manage HTN emergency.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
+                <a href="aortic-dissection-adventure-enhanced.html" class="case-card" data-tags="aortic dissection tearing chest pain"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🔪</div><div class="case-badges"><span class="badge badge-available">✓</span><span class="badge badge-enhanced">Enhanced</span></div></div><div class="case-title">The Tearing Pain</div><div class="case-subtitle">Aortic Dissection</div><div class="case-desc">Sudden tearing chest pain to back.</div><div class="case-meta"><span>⏱ 20-25 min</span></div></div></a>
+                <a href="aortic-dissection-adventure.html" class="case-card" data-tags="aortic dissection"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">⚡</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">Don't Miss This</div><div class="case-subtitle">Aortic Emergency</div><div class="case-desc">High-stakes diagnosis.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
+                <a href="syncope-adventure-enhanced.html" class="case-card" data-tags="syncope fainting cardiac"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">😵</div><div class="case-badges"><span class="badge badge-available">✓</span><span class="badge badge-enhanced">Enhanced</span></div></div><div class="case-title">The Fainting Spell</div><div class="case-subtitle">Syncope Workup</div><div class="case-desc">Vasovagal? Cardiac? Risk stratify.</div><div class="case-meta"><span>⏱ 20-25 min</span></div></div></a>
+                <a href="syncope-adventure.html" class="case-card" data-tags="syncope"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🌀</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">Passed Out</div><div class="case-subtitle">Syncope Evaluation</div><div class="case-desc">Systematic syncope workup.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
             </div>
+        </section>
 
-            <!-- Altered Mental Status - COMING SOON -->
-            <div class="case-card coming-soon" style="--accent-color: #8b5cf6;">
-                <div class="case-card-banner"></div>
-                <div class="case-card-body">
-                    <div class="case-card-header">
-                        <span class="case-card-icon">🧠</span>
-                        <div class="case-card-badges">
-                            <span class="case-badge coming-soon">Coming Soon</span>
-                            <span class="case-badge difficulty">Advanced</span>
-                        </div>
-                    </div>
-                    <h3 class="case-card-title">Lost in Confusion</h3>
-                    <p class="case-card-subtitle">Altered Mental Status</p>
-                    <p class="case-card-description">Elderly patient brought in by family - confused and agitated. The differential is broad. Can you find the cause before it's too late?</p>
-                    <div class="case-card-meta">
-                        <span>⏱️ 20-30 min</span>
-                        <span>🔀 Multiple endings</span>
-                    </div>
-                </div>
+        <!-- PULMONARY - 8 adventures -->
+        <section class="category cat-pulm" data-category="pulm">
+            <div class="category-header">
+                <span class="category-icon">🫁</span>
+                <span class="category-title">Pulmonary</span>
+                <span class="category-count">8</span>
             </div>
-        </div>
-    </section>
+            <div class="cases-grid">
+                <a href="pe-adventure-enhanced.html" class="case-card" data-tags="pulmonary embolism pe wells d-dimer"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🫁</div><div class="case-badges"><span class="badge badge-available">✓</span><span class="badge badge-enhanced">Enhanced</span></div></div><div class="case-title">The Silent Killer</div><div class="case-subtitle">Pulmonary Embolism</div><div class="case-desc">Post-surgical with sudden dyspnea.</div><div class="case-meta"><span>⏱ 20-30 min</span></div></div></a>
+                <a href="pe-adventure.html" class="case-card" data-tags="pe pulmonary embolism"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🩸</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">The Runner</div><div class="case-subtitle">PE Workup</div><div class="case-desc">Navigate PE diagnosis algorithms.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
+                <a href="copd-adventure-enhanced.html" class="case-card" data-tags="copd exacerbation bronchodilator"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">💨</div><div class="case-badges"><span class="badge badge-available">✓</span><span class="badge badge-enhanced">Enhanced</span></div></div><div class="case-title">Can't Breathe</div><div class="case-subtitle">COPD Exacerbation</div><div class="case-desc">Severe COPD flare management.</div><div class="case-meta"><span>⏱ 20-25 min</span></div></div></a>
+                <a href="copd-adventure.html" class="case-card" data-tags="copd exacerbation"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🌬️</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">The Smoker's Cough</div><div class="case-subtitle">COPD Management</div><div class="case-desc">Acute exacerbation management.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
+                <a href="pneumonia-adventure-enhanced.html" class="case-card" data-tags="pneumonia cap antibiotics curb65"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🦠</div><div class="case-badges"><span class="badge badge-available">✓</span><span class="badge badge-enhanced">Enhanced</span></div></div><div class="case-title">The Fever and Cough</div><div class="case-subtitle">Community-Acquired Pneumonia</div><div class="case-desc">CAP severity and antibiotics.</div><div class="case-meta"><span>⏱ 20-25 min</span></div></div></a>
+                <a href="pneumonia-adventure.html" class="case-card" data-tags="pneumonia cap"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🤒</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">Walking Pneumonia</div><div class="case-subtitle">CAP Workup</div><div class="case-desc">Evaluate and treat pneumonia.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
+                <a href="tension-ptx-adventure.html" class="case-card" data-tags="tension pneumothorax needle decompression"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🎈</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">Under Pressure</div><div class="case-subtitle">Tension Pneumothorax</div><div class="case-desc">Rapidly deteriorating patient.</div><div class="case-meta"><span>⏱ 10-15 min</span></div></div></a>
+                <a href="shock-differentiation-adventure.html" class="case-card" data-tags="shock cardiogenic distributive hypovolemic"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">📉</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">The Crashing Patient</div><div class="case-subtitle">Shock Differentiation</div><div class="case-desc">Identify shock type and intervene.</div><div class="case-meta"><span>⏱ 20-25 min</span></div></div></a>
+            </div>
+        </section>
 
-    <!-- CTA -->
-    <section class="cta-section">
-        <div class="cta-card">
-            <h3>📚 Not Ready for Adventures Yet?</h3>
-            <p>Start with Deep Dives to build your pathophysiology foundation first.</p>
-            <a href="deep-dive-hub.html" class="cta-btn">Browse Deep Dive Cases →</a>
-        </div>
-    </section>
+        <!-- INFECTIOUS DISEASE - 10 adventures -->
+        <section class="category cat-id" data-category="id">
+            <div class="category-header">
+                <span class="category-icon">🦠</span>
+                <span class="category-title">Infectious Disease</span>
+                <span class="category-count">10</span>
+            </div>
+            <div class="cases-grid">
+                <a href="sepsis-adventure-enhanced.html" class="case-card" data-tags="sepsis sirs qsofa lactate shock"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🔥</div><div class="case-badges"><span class="badge badge-available">✓</span><span class="badge badge-enhanced">Enhanced</span></div></div><div class="case-title">The Golden Hour</div><div class="case-subtitle">Sepsis Recognition</div><div class="case-desc">Hit the 1-hour bundle targets.</div><div class="case-meta"><span>⏱ 20-30 min</span></div></div></a>
+                <a href="sepsis-adventure.html" class="case-card" data-tags="sepsis sirs"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🦠</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">Nursing Home Transfer</div><div class="case-subtitle">Sepsis Recognition</div><div class="case-desc">Recognize and manage sepsis.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
+                <a href="sepsis-adventure-v2.html" class="case-card" data-tags="sepsis source control"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🎯</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">Find the Source</div><div class="case-subtitle">Sepsis Source Control</div><div class="case-desc">Source identification and control.</div><div class="case-meta"><span>⏱ 20-25 min</span></div></div></a>
+                <a href="meningitis-adventure-enhanced.html" class="case-card" data-tags="meningitis lumbar puncture csf"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🧠</div><div class="case-badges"><span class="badge badge-available">✓</span><span class="badge badge-enhanced">Enhanced</span></div></div><div class="case-title">The Worst Headache</div><div class="case-subtitle">Meningitis Workup</div><div class="case-desc">Fever, headache, neck stiffness.</div><div class="case-meta"><span>⏱ 20-25 min</span></div></div></a>
+                <a href="meningitis-adventure.html" class="case-card" data-tags="meningitis"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">💉</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">Stiff Neck</div><div class="case-subtitle">CNS Infection</div><div class="case-desc">Approach to suspected meningitis.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
+                <a href="cellulitis-adventure.html" class="case-card" data-tags="cellulitis skin soft tissue"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🦵</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">The Red Leg</div><div class="case-subtitle">Cellulitis</div><div class="case-desc">Skin and soft tissue infection.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
+                <a href="nec-fasc-adventure.html" class="case-card" data-tags="necrotizing fasciitis surgical emergency"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">⚠️</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">Pain Out of Proportion</div><div class="case-subtitle">Necrotizing Fasciitis</div><div class="case-desc">Surgical emergency recognition.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
+                <a href="cdiff-adventure.html" class="case-card" data-tags="c diff colitis diarrhea"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🚽</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">Post-Antibiotic Diarrhea</div><div class="case-subtitle">C. diff Colitis</div><div class="case-desc">Clostridioides difficile infection.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
+                <a href="neutropenic-fever-adventure-enhanced.html" class="case-card" data-tags="neutropenic fever oncology"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🔬</div><div class="case-badges"><span class="badge badge-available">✓</span><span class="badge badge-enhanced">Enhanced</span></div></div><div class="case-title">The Chemo Patient</div><div class="case-subtitle">Neutropenic Fever</div><div class="case-desc">Oncologic emergency.</div><div class="case-meta"><span>⏱ 20-25 min</span></div></div></a>
+                <a href="neutropenic-fever-adventure.html" class="case-card" data-tags="neutropenic fever"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🩺</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">Low Counts, High Stakes</div><div class="case-subtitle">Febrile Neutropenia</div><div class="case-desc">Empiric coverage decisions.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
+            </div>
+        </section>
 
-    <script>
-    // Handle clicks on coming soon cards
-    document.querySelectorAll('.case-card.coming-soon').forEach(card => {
-        card.addEventListener('click', (e) => {
-            e.preventDefault();
-            alert('This adventure is coming soon! Check back later.');
-        });
-    });
-    </script>
-</body>
-</html>
+        <!-- GI - 8 adventures -->
+        <section class="category cat-gi" data-category="gi">
+            <div class="category-header">
+                <span class="category-icon">🍽️</span>
+                <span class="category-title">GI & Hepatology</span>
+                <span class="category-count">8</span>
+            </div>
+            <div class="cases-grid">
+                <a href="gi-bleed-adventure-enhanced.html" class="case-card" data-tags="gi bleed melena hematemesis"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🩸</div><div class="case-badges"><span class="badge badge-available">✓</span><span class="badge badge-enhanced">Enhanced</span></div></div><div class="case-title">The Morning Coffee</div><div class="case-subtitle">Upper GI Bleeding</div><div class="case-desc">Glasgow-Blatchford score and management.</div><div class="case-meta"><span>⏱ 20-25 min</span></div></div></a>
+                <a href="gi-bleed-adventure.html" class="case-card" data-tags="gi bleed"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🍷</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">Black Stools</div><div class="case-subtitle">GI Bleed Workup</div><div class="case-desc">Upper vs lower GI bleeding.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
+                <a href="pancreatitis-adventure-enhanced.html" class="case-card" data-tags="pancreatitis lipase atlanta bisap"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🔥</div><div class="case-badges"><span class="badge badge-available">✓</span><span class="badge badge-enhanced">Enhanced</span></div></div><div class="case-title">The Epigastric Pain</div><div class="case-subtitle">Acute Pancreatitis</div><div class="case-desc">Severity scoring and management.</div><div class="case-meta"><span>⏱ 20-25 min</span></div></div></a>
+                <a href="pancreatitis-adventure.html" class="case-card" data-tags="pancreatitis"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🍺</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">After the Party</div><div class="case-subtitle">Pancreatitis Workup</div><div class="case-desc">Etiology and severity assessment.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
+                <a href="alf-adventure.html" class="case-card" data-tags="acute liver failure hepatic encephalopathy"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🫁</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">The Yellow Patient</div><div class="case-subtitle">Acute Liver Failure</div><div class="case-desc">Fulminant hepatic failure.</div><div class="case-meta"><span>⏱ 20-25 min</span></div></div></a>
+                <a href="dfi-adventure.html" class="case-card" data-tags="diabetic foot infection osteomyelitis"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🦶</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">The Diabetic Foot</div><div class="case-subtitle">Diabetic Foot Infection</div><div class="case-desc">Osteomyelitis evaluation.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
+                <a href="pyelonephritis-adventure.html" class="case-card" data-tags="pyelonephritis uti kidney"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🫘</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">Flank Pain and Fever</div><div class="case-subtitle">Pyelonephritis</div><div class="case-desc">Upper urinary tract infection.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
+                <a href="sah-adventure.html" class="case-card" data-tags="subarachnoid hemorrhage thunderclap headache"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">💥</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">Thunderclap</div><div class="case-subtitle">Subarachnoid Hemorrhage</div><div class="case-desc">Worst headache of life.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
+            </div>
+        </section>
+
+        <!-- NEUROLOGY - 8 adventures -->
+        <section class="category cat-neuro" data-category="neuro">
+            <div class="category-header">
+                <span class="category-icon">🧠</span>
+                <span class="category-title">Neurology</span>
+                <span class="category-count">8</span>
+            </div>
+            <div class="cases-grid">
+                <a href="stroke-adventure-enhanced.html" class="case-card" data-tags="stroke cva tpa nihss"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🧠</div><div class="case-badges"><span class="badge badge-available">✓</span><span class="badge badge-enhanced">Enhanced</span></div></div><div class="case-title">Race Against Time</div><div class="case-subtitle">Acute Stroke</div><div class="case-desc">tPA window closing fast.</div><div class="case-meta"><span>⏱ 20-30 min</span></div></div></a>
+                <a href="stroke-adventure.html" class="case-card" data-tags="stroke cva"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">⏰</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">The Sudden Silence</div><div class="case-subtitle">Stroke Management</div><div class="case-desc">Acute stroke workup.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
+                <a href="status-epilepticus-adventure-enhanced.html" class="case-card" data-tags="status epilepticus seizure benzodiazepine"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">⚡</div><div class="case-badges"><span class="badge badge-available">✓</span><span class="badge badge-enhanced">Enhanced</span></div></div><div class="case-title">Won't Stop Seizing</div><div class="case-subtitle">Status Epilepticus</div><div class="case-desc">Treatment timeline and escalation.</div><div class="case-meta"><span>⏱ 20-25 min</span></div></div></a>
+                <a href="status-epilepticus-adventure.html" class="case-card" data-tags="status epilepticus seizure"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🔄</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">Continuous Seizures</div><div class="case-subtitle">Status Management</div><div class="case-desc">Benzodiazepines and beyond.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
+                <a href="alcohol-withdrawal-adventure-enhanced.html" class="case-card" data-tags="alcohol withdrawal delirium tremens ciwa"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🍺</div><div class="case-badges"><span class="badge badge-available">✓</span><span class="badge badge-enhanced">Enhanced</span></div></div><div class="case-title">The Shakes</div><div class="case-subtitle">Alcohol Withdrawal</div><div class="case-desc">CIWA protocol and DTs prevention.</div><div class="case-meta"><span>⏱ 20-25 min</span></div></div></a>
+                <a href="alcohol-withdrawal-adventure.html" class="case-card" data-tags="alcohol withdrawal"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">🥃</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">Tremulous</div><div class="case-subtitle">Withdrawal Management</div><div class="case-desc">Recognize and treat withdrawal.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
+                <a href="hyponatremia-adventure-enhanced.html" class="case-card" data-tags="hyponatremia sodium osmolality"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">💧</div><div class="case-badges"><span class="badge badge-available">✓</span><span class="badge badge-enhanced">Enhanced</span></div></div><div class="case-title">Low Sodium</div><div class="case-subtitle">Hyponatremia Workup</div><div class="case-desc">Algorithm and correction rate.</div><div class="case-meta"><span>⏱ 20-25 min</span></div></div></a>
+                <a href="hyponatremia-adventure.html" class="case-card" data-tags="hyponatremia"><div class="case-banner"></div><div class="case-body"><div class="case-header"><div class="case-emoji">⚗️</div><div class="case-badges"><span class="badge badge-available">✓</span></div></div><div class="case-title">Confused and Wet</div><div class="case-subtitle">Sodium Disorders</div><div class="case-desc">Hyponatremia differential.</div><div class="case-meta"><span>⏱ 15-20 min</span></div></div></a>
+            </div>
+        </section>
