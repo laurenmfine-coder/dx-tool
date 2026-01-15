@@ -3,35 +3,335 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Swelling Emergency | ReasonDx Adventure</title>
-    <style>:root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#F87171;--success:#10B981;--warning:#F59E0B;--danger:#DC2626}*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}.header{background:linear-gradient(135deg,#DC2626,#F87171);padding:12px 20px;position:sticky;top:0;z-index:100}.header-row{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}.diff-toggle{display:flex;background:rgba(0,0,0,.3);border-radius:8px}.diff-btn{padding:6px 12px;font-size:.75rem;cursor:pointer;border:none;background:0 0;color:rgba(255,255,255,.7);font-weight:600}.diff-btn.active{background:rgba(255,255,255,.2);color:#fff}.stat{text-align:center;background:rgba(0,0,0,.2);padding:6px 14px;border-radius:8px}.stat-value{font-size:1.1rem;font-weight:700;font-family:monospace}.stat-label{font-size:.6rem;opacity:.8}.main{max-width:900px;margin:0 auto;padding:24px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px}.card-header{padding:20px 24px;border-bottom:1px solid var(--border)}.card-phase{font-size:.75rem;color:var(--accent);text-transform:uppercase}.card-title{font-size:1.5rem;font-weight:700}.card-body{padding:24px}.narrative{background:rgba(248,113,113,.1);border-left:4px solid var(--accent);padding:20px;border-radius:0 12px 12px 0;margin-bottom:20px}.narrative .hl{background:rgba(248,113,113,.3);padding:2px 6px;border-radius:4px}.setup-screen{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center}.start-btn{background:var(--accent);color:#fff;border:none;padding:16px 48px;border-radius:12px;font-size:1.1rem;font-weight:700;cursor:pointer}.hint{background:rgba(59,130,246,.15);padding:12px 16px;border-radius:8px;margin-bottom:16px;color:#93C5FD}.radio-options{display:flex;flex-direction:column;gap:10px}.radio-option{display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(0,0,0,.2);border:2px solid var(--border);border-radius:10px;cursor:pointer}.radio-option.selected{border-color:var(--accent);background:rgba(248,113,113,.15)}.radio-option.correct{border-color:var(--success);background:rgba(16,185,129,.15)}.radio-option.incorrect{border-color:var(--danger);background:rgba(220,38,38,.15)}.radio-circle{width:22px;height:22px;border:2px solid var(--border);border-radius:50%}.radio-option.selected .radio-circle{border-color:var(--accent);background:radial-gradient(circle,var(--accent) 40%,transparent 40%)}.feedback{padding:20px;border-radius:12px;margin:20px 0}.feedback.excellent{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3)}.feedback.incorrect{background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.3)}.btn{padding:14px 28px;border-radius:10px;font-weight:600;cursor:pointer;border:none}.btn-primary{background:var(--accent);color:#fff}.btn:disabled{opacity:.5}.btn-row{display:flex;gap:12px;margin-top:24px}.btn-link{background:0 0;border:2px solid var(--border);color:var(--text)}.vitals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:12px;margin:20px 0}.vital{background:rgba(0,0,0,.2);padding:12px;border-radius:10px;text-align:center}.vital-label{font-size:.7rem;color:var(--muted)}.vital-value{font-size:1.3rem;font-weight:700;font-family:monospace}.lab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:16px 0}.lab-item{display:flex;justify-content:space-between;padding:8px 12px;background:rgba(0,0,0,.2);border-radius:6px}.lab-name{color:var(--muted)}.lab-value{font-family:monospace;font-weight:600}.score-summary{background:rgba(0,0,0,.2);border-radius:12px;padding:24px;margin:24px auto;max-width:600px}.score-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}.pearls-box{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:20px;margin-top:20px}.pearls-title{font-weight:700;color:var(--success);margin-bottom:12px}.pearl-item{padding:8px 0;border-bottom:1px solid rgba(16,185,129,.2);font-size:.95rem}.cross-link{background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);border-radius:8px;padding:12px 16px;margin-top:12px}.cross-link a{color:#C4B5FD;text-decoration:none}.progress-bar{background:rgba(255,255,255,.1);border-radius:10px;height:8px;margin:20px 0}.progress-fill{background:var(--accent);height:100%;border-radius:10px}.question-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}.question-number{background:var(--accent);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}</style>
+    <title>The Swollen Face | ReasonDx Adventure</title>
+    <style>
+        :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #14B8A6; --success: #10B981; --warning: #F59E0B; --danger: #DC2626; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #0D9488 0%, #14B8A6 100%); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; }
+        .stat { background: rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 8px; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        .main { max-width: 1000px; margin: 0 auto; padding: 24px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(20,184,166,0.1), rgba(13,148,136,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; line-height: 1.8; }
+        .narrative .hl { background: rgba(20,184,166,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        .setup-screen { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; }
+        .setup-screen h1 { font-size: 2rem; margin-bottom: 8px; }
+        .setup-screen .subtitle { color: var(--muted); margin-bottom: 32px; }
+        .start-btn { background: var(--accent); color: #1a1a1a; border: none; padding: 16px 48px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+        .question-section { margin-bottom: 32px; }
+        .question-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .question-number { background: var(--accent); color: #1a1a1a; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .question-text { font-size: 1.1rem; font-weight: 600; }
+        .radio-options { display: flex; flex-direction: column; gap: 10px; }
+        .radio-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .radio-option:hover { border-color: var(--accent); }
+        .radio-option.selected { border-color: var(--accent); background: rgba(20,184,166,0.15); }
+        .radio-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .radio-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .radio-circle { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; }
+        .radio-option.selected .radio-circle { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 40%, transparent 40%); }
+        .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+        .checkbox-item { display: flex; align-items: center; gap: 10px; padding: 12px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .checkbox-item:hover { border-color: var(--accent); }
+        .checkbox-item.selected { border-color: var(--accent); background: rgba(20,184,166,0.15); }
+        .checkbox-item.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .checkbox-item.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .checkbox-box { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .checkbox-item.selected .checkbox-box { background: var(--accent); border-color: var(--accent); }
+        .checkbox-item.selected .checkbox-box::after { content: '✓'; color: #1a1a1a; font-weight: bold; }
+        .feedback { padding: 20px; border-radius: 12px; margin: 20px 0; }
+        .feedback.excellent { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .feedback.acceptable { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .feedback-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .feedback-icon { font-size: 1.5rem; }
+        .feedback-title { font-weight: 700; }
+        .feedback-text { color: var(--muted); line-height: 1.7; }
+        .feedback-text strong { color: var(--text); }
+        .alert { padding: 16px 20px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
+        .alert.info { background: rgba(20,184,166,0.15); border: 1px solid rgba(20,184,166,0.3); }
+        .alert-icon { font-size: 1.5rem; }
+        .alert-content { flex: 1; }
+        .alert-title { font-weight: 600; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; color: var(--muted); }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: #1a1a1a; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-row { display: flex; gap: 12px; margin-top: 24px; }
+        .outcome { text-align: center; padding: 40px 20px; }
+        .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
+        .outcome-title { font-size: 2rem; font-weight: 700; color: var(--success); margin-bottom: 8px; }
+        .outcome-desc { color: var(--muted); max-width: 600px; margin: 0 auto 24px; }
+        .score-summary { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 24px; margin: 24px auto; max-width: 500px; }
+        .score-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .score-row:last-child { border-bottom: none; }
+        .patient-panel { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 16px; margin-bottom: 20px; }
+        .patient-panel-title { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; }
+        .patient-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
+        .patient-info-label { font-size: 0.7rem; color: var(--muted); }
+        .patient-info-value { font-weight: 600; }
+        .compare-table { width: 100%; margin: 20px 0; font-size: 0.85rem; border-collapse: collapse; }
+        .compare-table th { text-align: left; padding: 10px; color: var(--accent); border-bottom: 2px solid var(--border); }
+        .compare-table td { padding: 10px; border-bottom: 1px solid var(--border); color: var(--muted); }
+        .compare-table tr:hover td { background: rgba(255,255,255,0.03); }
+    </style>
 </head>
 <body>
-    <header class="header"><div class="header-row"><div style="font-weight:600">😮 The Swelling Emergency</div><div style="display:flex;gap:12px;align-items:center"><div class="diff-toggle"><button class="diff-btn active" onclick="setDiff('easy')">Easy</button><button class="diff-btn" onclick="setDiff('int')">Intermediate</button><button class="diff-btn" onclick="setDiff('adv')">Advanced</button></div><div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Points</div></div></div></div></header>
-    <main class="main"><div id="app"></div></main>
-<script>
-const S={stage:'setup',score:0,max:0,diff:'easy',q:0,total:8};
-const C={easy:{age:'55M',wt:'88kg',hx:'Lip swelling 2hrs after starting lisinopril',exam:'Lip angioedema, no urticaria, no stridor',vitals:{HR:'82',BP:'148/92'},labs:{Meds:'Lisinopril started 1 week ago'}},int:{age:'32F',wt:'62kg',hx:'Recurrent facial/abdominal swelling since teens, family hx',exam:'Facial edema, no urticaria',vitals:{HR:'78',BP:'118/72'},labs:{C4:'<5',C3:'Normal'}},adv:{age:'45F',wt:'68kg',hx:'Severe laryngeal edema, on ACEi, not responding to epi',exam:'Stridor, drooling, tongue swelling',vitals:{HR:'108',BP:'142/88',SpO2:'91%'},labs:{Hx:'ACEi x3yrs, first episode'}}};
-const Q=[
-{t:'Histaminergic vs Bradykinin',q:'Angioedema WITHOUT urticaria. Mechanism?',h:'Key distinction',o:[{id:'a',txt:'Bradykinin-mediated (ACEi, HAE)',c:1,p:100},{id:'b',txt:'Histamine/IgE-mediated',c:0,p:30},{id:'c',txt:'Unknown',c:0,p:20}],fb:{1:'<b>Correct!</b> No urticaria = likely bradykinin. With urticaria = histaminergic/allergic. Critical distinction for treatment.',0:'<b>Key rule:</b> Urticaria = histaminergic. No urticaria = bradykinin (wont respond to antihistamines).'}},
-{t:'ACEi Angioedema',q:'ACEi angioedema. Why doesnt epinephrine work well?',h:'Mediator difference',o:[{id:'a',txt:'Bradykinin-mediated, not histamine - epi targets wrong pathway',c:1,p:100},{id:'b',txt:'Wrong dose of epi',c:0,p:20},{id:'c',txt:'Epi always works',c:0,p:0}],fb:{1:'<b>Correct!</b> ACEi angioedema = bradykinin excess (decreased degradation). Epi/antihistamines/steroids minimally effective.',0:'<b>ACEi mechanism:</b> Bradykinin accumulation. Epi targets wrong pathway.'}},
-{t:'ACEi Treatment',q:'ACEi angioedema with airway compromise. Treatment?',h:'Specific therapies available',o:[{id:'a',txt:'Icatibant (bradykinin B2 antagonist) or C1-INH concentrate, secure airway',c:1,p:100},{id:'b',txt:'Epinephrine alone',c:0,p:30},{id:'c',txt:'High-dose steroids',c:0,p:20}],fb:{1:'<b>Correct!</b> Icatibant or C1-INH if available. Prepare for airway management. FFP if specific agents unavailable.',0:'<b>ACEi Rx:</b> Icatibant, C1-INH, or FFP. Airway management priority.'}},
-{t:'HAE Screening',q:'Recurrent angioedema without urticaria, family history. First test?',h:'Complement pathway',o:[{id:'a',txt:'C4 level (screening test - low in HAE)',c:1,p:100},{id:'b',txt:'IgE level',c:0,p:10},{id:'c',txt:'Tryptase',c:0,p:20}],fb:{1:'<b>Correct!</b> C4 is screening test - low during AND between attacks in HAE. If low, check C1-INH level and function.',0:'<b>C4:</b> Screening test for HAE. Low = check C1-INH level and function.'}},
-{t:'HAE Types',q:'Low C4, low C1-INH level and function. HAE type?',h:'Type 1 vs Type 2',o:[{id:'a',txt:'HAE Type 1 (85% - low quantity)',c:1,p:100},{id:'b',txt:'HAE Type 2 (dysfunctional)',c:0,p:40},{id:'c',txt:'Acquired angioedema',c:0,p:20}],fb:{1:'<b>Correct!</b> Type 1: Low C1-INH level AND function. Type 2: Normal/high level, low function. Acquired: check C1q (low in acquired).',0:'<b>HAE types:</b> Type 1 = low level. Type 2 = dysfunctional. Check C1q to exclude acquired.'}},
-{t:'HAE Acute Treatment',q:'Acute HAE attack with laryngeal involvement. Treatment?',h:'On-demand therapy',o:[{id:'a',txt:'C1-INH concentrate, icatibant, or ecallantide',c:1,p:100},{id:'b',txt:'Epinephrine and steroids',c:0,p:20},{id:'c',txt:'Antihistamines',c:0,p:0}],fb:{1:'<b>Correct!</b> HAE acute: C1-INH (Berinert, Cinryze), icatibant (Firazyr), ecallantide (Kalbitor). NOT epi/steroids/antihistamines.',0:'<b>HAE acute Rx:</b> C1-INH, icatibant, or ecallantide. Traditional allergic Rx doesnt work.'}},
-{t:'HAE Prophylaxis',q:'HAE with frequent attacks. Long-term prophylaxis?',h:'Prevent attacks',o:[{id:'a',txt:'Lanadelumab (anti-kallikrein) or subcutaneous C1-INH',c:1,p:100},{id:'b',txt:'Daily antihistamines',c:0,p:0},{id:'c',txt:'Long-term steroids',c:0,p:10}],fb:{1:'<b>Correct!</b> Prophylaxis: Lanadelumab q2-4wks, SC C1-INH twice weekly, or berotralstat (oral). Danazol rarely used now.',0:'<b>HAE prophylaxis:</b> Lanadelumab, SC C1-INH, berotralstat. Modern therapies very effective.'}},
-{t:'Acquired Angioedema',q:'New-onset angioedema age 50, low C1-INH and low C1q. Consider?',h:'Not hereditary',o:[{id:'a',txt:'Acquired angioedema (associated with lymphoproliferative disorders)',c:1,p:100},{id:'b',txt:'HAE presenting late',c:0,p:30},{id:'c',txt:'ACEi angioedema',c:0,p:20}],fb:{1:'<b>Correct!</b> Acquired: Low C1q (normal in HAE). Associated with lymphoma, MGUS, autoimmune. Screen for underlying malignancy.',0:'<b>Acquired:</b> Low C1q distinguishes from HAE. Look for lymphoproliferative disease.'}}
-];
-let sel=null;
-function setDiff(d){S.diff=d;document.querySelectorAll('.diff-btn').forEach((b,i)=>b.classList.toggle('active',['easy','int','adv'][i]===d));if(S.stage!=='setup'){S.stage='setup';S.score=0;S.max=0;S.q=0;document.getElementById('score').textContent='0';}render();}
-function addPts(p,m){S.score+=p;S.max+=m;document.getElementById('score').textContent=S.score;}
-function pick(id){sel=id;document.querySelectorAll('.radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id));document.getElementById('sub').disabled=false;}
-function submit(){const q=Q[S.q-1];const opt=q.o.find(o=>o.id===sel);addPts(opt.p||0,100);document.querySelectorAll('.radio-option').forEach(o=>{const op=q.o.find(x=>x.id===o.dataset.id);if(op&&op.c)o.classList.add('correct');else if(o.dataset.id===sel)o.classList.add('incorrect');});document.getElementById('fb').innerHTML='<div class="feedback '+(opt&&opt.c?'excellent':'incorrect')+'">'+q.fb[opt&&opt.c?1:0]+'</div>';document.getElementById('sub').textContent=S.q<S.total?'Next':'Results';document.getElementById('sub').onclick=next;}
-function next(){if(S.q<S.total){S.q++;sel=null;render();}else{S.stage='outcome';render();}}
-function start(){S.q=1;S.stage='question';render();}
-function go(s){S.stage=s;render();}
-function render(){const c=C[S.diff];if(S.stage==='setup'){document.getElementById('app').innerHTML='<div class="setup-screen"><h1>😮 The Swelling Emergency</h1><p style="color:var(--muted);margin-bottom:32px">Angioedema: ACEi, HAE types, bradykinin vs histamine, acute treatment</p><button class="start-btn" onclick="go(\'pres\')">Begin Case</button></div>';}else if(S.stage==='pres'){document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Presentation</div><div class="card-title">🚨 Airway Emergency</div></div><div class="card-body"><div class="narrative"><span class="hl">'+c.age+'</span> ('+c.wt+')<br><b>Hx:</b> '+c.hx+'<br><b>Exam:</b> '+c.exam+'</div><div class="vitals-grid">'+Object.entries(c.vitals).map(function(e){return'<div class="vital"><div class="vital-label">'+e[0]+'</div><div class="vital-value">'+e[1]+'</div></div>';}).join('')+'</div><div class="lab-grid">'+Object.entries(c.labs).map(function(e){return'<div class="lab-item"><span class="lab-name">'+e[0]+'</span><span class="lab-value">'+e[1]+'</span></div>';}).join('')+'</div><div class="btn-row"><button class="btn btn-primary" onclick="start()">Begin Assessment</button></div></div></div>';}else if(S.stage==='question'){var q=Q[S.q-1];document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Q'+S.q+'/'+S.total+'</div><div class="card-title">'+q.t+'</div></div><div class="card-body"><div class="progress-bar"><div class="progress-fill" style="width:'+(S.q/S.total*100)+'%"></div></div><div class="question-header"><div class="question-number">'+S.q+'</div><div style="font-weight:600">'+q.q+'</div></div><div class="hint">'+q.h+'</div><div class="radio-options">'+q.o.map(function(o){return'<div class="radio-option" data-id="'+o.id+'" onclick="pick(\''+o.id+'\')"><div class="radio-circle"></div><div><b>'+o.txt+'</b></div></div>';}).join('')+'</div><div id="fb"></div><div class="btn-row"><button class="btn btn-primary" id="sub" onclick="submit()" disabled>Submit</button></div></div></div>';}else{var pct=S.max>0?Math.round(S.score/S.max*100):0;document.getElementById('app').innerHTML='<div class="card"><div class="card-body"><div style="text-align:center;padding:40px"><div style="font-size:4rem">'+(pct>=70?'🎉':'📚')+'</div><div style="font-size:2rem;font-weight:700;color:'+(pct>=70?'var(--success)':'var(--warning)')+'">'+(pct>=70?'Complete!':'Review')+'</div></div><div class="score-summary"><div class="score-row"><span>Score</span><span>'+S.score+'/'+S.max+' ('+pct+'%)</span></div></div><div class="pearls-box"><div class="pearls-title">Angioedema Pearls</div><div class="pearl-item"><b>Key rule:</b> No urticaria = bradykinin (not histaminergic)</div><div class="pearl-item"><b>ACEi:</b> Icatibant or C1-INH. Epi doesnt work well</div><div class="pearl-item"><b>HAE screen:</b> C4 (low during and between attacks)</div><div class="pearl-item"><b>HAE acute:</b> C1-INH, icatibant, ecallantide</div><div class="pearl-item"><b>Acquired:</b> Low C1q (normal in HAE)</div></div><div class="cross-link"><a href="../mechanism/allergy-immunology.html">MechanismDx: Allergy</a></div><div class="btn-row" style="justify-content:center;margin-top:30px"><button class="btn btn-primary" onclick="location.reload()">Retry</button><button class="btn btn-link" onclick="location.href=\'adventure-hub.html\'">Back</button></div></div></div>';}}
-document.addEventListener('DOMContentLoaded',render);
-</script>
+    <header class="header"><div class="header-row"><div class="header-title">😮 The Swollen Face</div><div class="stat"><div class="stat-value" id="scoreDisplay">0</div><div class="stat-label">Points</div></div></div></header>
+    <main class="main"><div id="stageContainer"></div></main>
+    <script>
+    const state = { stage:'setup', score:0 };
+    
+    const histamineClues = [
+        { id: 'urticaria', text: 'Associated urticaria (hives)', isHist: true },
+        { id: 'pruritus', text: 'Pruritic (itchy) swelling', isHist: true },
+        { id: 'rapid', text: 'Rapid onset (minutes-hours)', isHist: true },
+        { id: 'trigger', text: 'Clear allergic trigger', isHist: true },
+        { id: 'no_hives', text: 'NO associated urticaria', isHist: false },
+        { id: 'acei', text: 'On ACE inhibitor', isHist: false },
+        { id: 'family', text: 'Family history of swelling', isHist: false }
+    ];
+
+    const aceClues = [
+        { id: 'acei_use', text: 'Currently on ACE inhibitor', isACE: true },
+        { id: 'no_itch', text: 'Non-pruritic swelling', isACE: true },
+        { id: 'no_urticaria', text: 'No associated urticaria', isACE: true },
+        { id: 'lips_tongue', text: 'Lips/tongue predominant', isACE: true },
+        { id: 'anytime', text: 'Can occur any time (even years into use)', isACE: true },
+        { id: 'hives', text: 'Urticaria present', isACE: false }
+    ];
+
+    function addScore(pts) { state.score += pts; document.getElementById('scoreDisplay').textContent = state.score; }
+
+    const stages = {
+        setup: { render: () => `
+            <div class="setup-screen">
+                <h1>😮 The Swollen Face</h1>
+                <p class="subtitle">Angioedema differential diagnosis</p>
+                <button class="start-btn" onclick="goTo('referral')">Begin Case →</button>
+            </div>`
+        },
+        referral: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Emergency Department</div><div class="card-title">📋 Facial Swelling</div></div>
+                <div class="card-body">
+                    <div class="narrative">A <span class="hl">58-year-old male</span> presents with <span class="hl">lip and tongue swelling</span> that started 4 hours ago. He denies any new foods, medications, or known allergens.<br><br>He has <span class="hl">NO urticaria (hives)</span> and the swelling is <span class="hl">NOT itchy</span>. He has <span class="hl">hypertension</span> treated with <span class="hl">lisinopril</span> for <span class="hl">3 years</span>.<br><br>This is his <span class="hl">first episode</span>. He has <span class="hl">NO family history</span> of similar episodes. Epinephrine was given in the ED with <span class="hl">minimal improvement</span>.</div>
+                    <div class="patient-panel">
+                        <div class="patient-panel-title">Patient Information</div>
+                        <div class="patient-info-grid">
+                            <div><div class="patient-info-label">Age/Sex</div><div class="patient-info-value">58 y/o Male</div></div>
+                            <div><div class="patient-info-label">Location</div><div class="patient-info-value">Lips, tongue</div></div>
+                            <div><div class="patient-info-label">Urticaria</div><div class="patient-info-value">None</div></div>
+                            <div><div class="patient-info-label">Pruritus</div><div class="patient-info-value">None</div></div>
+                            <div><div class="patient-info-label">Medications</div><div class="patient-info-value">Lisinopril × 3 years</div></div>
+                            <div><div class="patient-info-label">Epi Response</div><div class="patient-info-value">Minimal</div></div>
+                        </div>
+                    </div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('mechanism')">Determine Mechanism →</button></div>
+                </div>
+            </div>`
+        },
+        mechanism: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Pathophysiology</div><div class="card-title">🔬 Angioedema Mechanism</div></div>
+                <div class="card-body">
+                    <div class="alert info"><span class="alert-icon">💡</span><div class="alert-content"><div class="alert-title">Two Main Mechanisms</div><div class="alert-desc"><strong>Histamine-mediated:</strong> IgE/mast cell → responds to antihistamines/epi<br><strong>Bradykinin-mediated:</strong> ACE-I, HAE → does NOT respond to antihistamines/epi</div></div></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">1</div><div class="question-text">What mechanism is most likely in this patient?</div></div>
+                        <div class="radio-options" id="mechOpts">
+                            <div class="radio-option" data-id="histamine" onclick="selectMech('histamine')"><div class="radio-circle"></div><div><strong>Histamine-mediated (mast cell)</strong><br><small style="color:var(--muted)">IgE, allergic, responds to epi/antihistamines</small></div></div>
+                            <div class="radio-option" data-id="bradykinin" onclick="selectMech('bradykinin')"><div class="radio-circle"></div><div><strong>Bradykinin-mediated</strong><br><small style="color:var(--muted)">ACE-I or hereditary, does NOT respond to epi</small></div></div>
+                            <div class="radio-option" data-id="unknown" onclick="selectMech('unknown')"><div class="radio-circle"></div><div><strong>Idiopathic</strong><br><small style="color:var(--muted)">Unknown mechanism</small></div></div>
+                        </div>
+                    </div>
+                    <div id="mechFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="mechSubmit" onclick="submitMech()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        histamine_clues: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Recognition</div><div class="card-title">🔍 Histaminergic Clues</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">2</div><div class="question-text">Which features suggest HISTAMINE-mediated angioedema?</div></div>
+                        <div class="checkbox-grid" id="histOpts">${histamineClues.map(c=>`<div class="checkbox-item" data-id="${c.id}" data-hist="${c.isHist}" onclick="toggleHist('${c.id}')"><div class="checkbox-box"></div><span>${c.text}</span></div>`).join('')}</div>
+                    </div>
+                    <div id="histFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitHist()">Submit →</button></div>
+                </div>
+            </div>`
+        },
+        acei_clues: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">ACE-I Angioedema</div><div class="card-title">💊 ACE Inhibitor Clues</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">3</div><div class="question-text">Which features suggest ACE INHIBITOR-induced angioedema?</div></div>
+                        <div class="checkbox-grid" id="aceOpts">${aceClues.map(c=>`<div class="checkbox-item" data-id="${c.id}" data-ace="${c.isACE}" onclick="toggleACE('${c.id}')"><div class="checkbox-box"></div><span>${c.text}</span></div>`).join('')}</div>
+                    </div>
+                    <div id="aceFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitACE()">Submit →</button></div>
+                </div>
+            </div>`
+        },
+        treatment: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Treatment</div><div class="card-title">💉 Acute Management</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">4</div><div class="question-text">What is the BEST treatment for ACE-I angioedema?</div></div>
+                        <div class="radio-options" id="txOpts">
+                            <div class="radio-option" data-id="epi" onclick="selectTx('epi')"><div class="radio-circle"></div><div><strong>More epinephrine</strong><br><small style="color:var(--muted)">Standard anaphylaxis treatment</small></div></div>
+                            <div class="radio-option" data-id="steroids" onclick="selectTx('steroids')"><div class="radio-circle"></div><div><strong>High-dose corticosteroids</strong><br><small style="color:var(--muted)">Anti-inflammatory</small></div></div>
+                            <div class="radio-option" data-id="icatibant" onclick="selectTx('icatibant')"><div class="radio-circle"></div><div><strong>Icatibant (bradykinin antagonist)</strong><br><small style="color:var(--muted)">Blocks bradykinin B2 receptor</small></div></div>
+                            <div class="radio-option" data-id="antihistamine" onclick="selectTx('antihistamine')"><div class="radio-circle"></div><div><strong>IV antihistamines</strong><br><small style="color:var(--muted)">H1/H2 blockers</small></div></div>
+                        </div>
+                    </div>
+                    <div id="txFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="txSubmit" onclick="submitTx()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        prevention: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Prevention</div><div class="card-title">🛡️ Long-term Management</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">5</div><div class="question-text">Which statement about ACE-I angioedema prevention is TRUE?</div></div>
+                        <div class="radio-options" id="prevOpts">
+                            <div class="radio-option" data-id="stop_all" onclick="selectPrev('stop_all')"><div class="radio-circle"></div><div><strong>Stop ACE-I permanently, ARBs are safe alternative</strong><br><small style="color:var(--muted)">Switch to losartan or other ARB</small></div></div>
+                            <div class="radio-option" data-id="reduce" onclick="selectPrev('reduce')"><div class="radio-circle"></div><div><strong>Reduce ACE-I dose and monitor</strong><br><small style="color:var(--muted)">Lower dose may be tolerated</small></div></div>
+                            <div class="radio-option" data-id="stop_caution" onclick="selectPrev('stop_caution')"><div class="radio-circle"></div><div><strong>Stop ACE-I permanently, use ARBs with caution</strong><br><small style="color:var(--muted)">~10% cross-reactivity with ARBs</small></div></div>
+                            <div class="radio-option" data-id="continue" onclick="selectPrev('continue')"><div class="radio-circle"></div><div><strong>Continue ACE-I with prophylactic antihistamines</strong><br><small style="color:var(--muted)">Preventive therapy</small></div></div>
+                        </div>
+                    </div>
+                    <div id="prevFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="prevSubmit" onclick="submitPrev()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        outcome: { render: () => `
+            <div class="card"><div class="card-body">
+                <div class="outcome">
+                    <div class="outcome-icon">🎉</div>
+                    <div class="outcome-title">Angioedema Resolved!</div>
+                    <div class="outcome-desc">Lisinopril was permanently discontinued. Patient was observed and swelling resolved over 24-48 hours with supportive care. He was switched to amlodipine for blood pressure. He was counseled about the ~10% ARB cross-reactivity risk and avoiding all ACE inhibitors for life.</div>
+                </div>
+                <div class="score-summary">
+                    <h3 style="margin-bottom:16px">Performance</h3>
+                    <div class="score-row"><span>Mechanism</span><span>${state.mechScore||0}/100</span></div>
+                    <div class="score-row"><span>Histamine Clues</span><span>${state.histScore||0}/100</span></div>
+                    <div class="score-row"><span>ACE-I Clues</span><span>${state.aceScore||0}/100</span></div>
+                    <div class="score-row"><span>Treatment</span><span>${state.txScore||0}/100</span></div>
+                    <div class="score-row"><span>Prevention</span><span>${state.prevScore||0}/100</span></div>
+                    <div class="score-row" style="border-top:2px solid var(--border);padding-top:12px"><strong>Total</strong><strong>${state.score}</strong></div>
+                </div>
+                <div class="feedback excellent"><div class="feedback-header"><span class="feedback-icon">💡</span><span class="feedback-title">Angioedema Pearls</span></div><div class="feedback-text">• <strong>Two mechanisms:</strong> Histamine (mast cell) vs Bradykinin (ACE-I, HAE)<br>• <strong>Histamine clues:</strong> Urticaria, pruritus, rapid onset, responds to epi/antihistamines<br>• <strong>Bradykinin clues:</strong> NO urticaria, NOT itchy, NO response to epi<br>• <strong>ACE-I angioedema:</strong> Can occur ANY time (even years into use), lips/tongue, ~0.5% of users<br>• <strong>Treatment:</strong> Icatibant, C1-INH concentrate, ecallantide (epi/steroids/antihistamines don't work!)<br>• <strong>Prevention:</strong> Stop ACE-I permanently, ARBs with caution (~10% cross-react)<br>• <strong>Don't forget HAE:</strong> Family history, recurrent episodes, abdominal attacks</div></div>
+                <table class="compare-table">
+                    <tr><th>Feature</th><th>Histamine-mediated</th><th>Bradykinin-mediated</th></tr>
+                    <tr><td>Urticaria</td><td>Usually present</td><td>Absent</td></tr>
+                    <tr><td>Pruritus</td><td>Yes</td><td>No</td></tr>
+                    <tr><td>Response to epi</td><td>Yes</td><td>No</td></tr>
+                    <tr><td>Response to antihistamines</td><td>Yes</td><td>No</td></tr>
+                    <tr><td>Causes</td><td>Allergy, CSU</td><td>ACE-I, HAE</td></tr>
+                </table>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Play Again</button></div>
+            </div></div>`
+        }
+    };
+
+    let selectedMech = null;
+    function selectMech(id) { selectedMech = id; document.querySelectorAll('#mechOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('mechSubmit').disabled = false; }
+    function submitMech() {
+        document.querySelectorAll('#mechOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'bradykinin') o.classList.add('correct');
+            else if (o.dataset.id === selectedMech) o.classList.add('incorrect');
+        });
+        state.mechScore = selectedMech === 'bradykinin' ? 100 : 40;
+        addScore(selectedMech === 'bradykinin' ? 40 : 15);
+        document.getElementById('mechFeedback').innerHTML = `<div class="feedback ${selectedMech==='bradykinin'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedMech==='bradykinin'?'✅':'📚'}</span><span class="feedback-title">${selectedMech==='bradykinin'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Bradykinin-mediated clues:</strong> On ACE-I, NO urticaria, NOT itchy, minimal response to epinephrine. ACE inhibitors block bradykinin degradation → accumulation → angioedema.</div></div>`;
+        document.getElementById('mechSubmit').textContent = 'Continue →';
+        document.getElementById('mechSubmit').onclick = () => goTo('histamine_clues');
+    }
+
+    let selectedHist = new Set();
+    function toggleHist(id) {
+        const el = document.querySelector(`#histOpts .checkbox-item[data-id="${id}"]`);
+        if(selectedHist.has(id)) { selectedHist.delete(id); el.classList.remove('selected'); }
+        else { selectedHist.add(id); el.classList.add('selected'); }
+    }
+    function submitHist() {
+        let correct = 0;
+        histamineClues.forEach(c => {
+            const el = document.querySelector(`#histOpts .checkbox-item[data-id="${c.id}"]`);
+            const sel = selectedHist.has(c.id);
+            if (c.isHist && sel) { el.classList.add('correct'); correct++; }
+            else if (!c.isHist && sel) { el.classList.add('incorrect'); }
+        });
+        state.histScore = Math.round(correct / 4 * 100);
+        addScore(Math.round(state.histScore / 2.5));
+        document.getElementById('histFeedback').innerHTML = `<div class="feedback ${state.histScore>=75?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${state.histScore>=75?'✅':'📚'}</span><span class="feedback-title">Histamine Clues</span></div><div class="feedback-text"><strong>Histamine-mediated:</strong> Urticaria present, pruritic, rapid onset, clear trigger, responds to epi/antihistamines<br><strong>NOT histamine:</strong> No hives, ACE-I use, family history (think bradykinin!)</div></div>`;
+        document.querySelector('#histFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('acei_clues')">Learn ACE-I Clues →</button>`;
+    }
+
+    let selectedACE = new Set();
+    function toggleACE(id) {
+        const el = document.querySelector(`#aceOpts .checkbox-item[data-id="${id}"]`);
+        if(selectedACE.has(id)) { selectedACE.delete(id); el.classList.remove('selected'); }
+        else { selectedACE.add(id); el.classList.add('selected'); }
+    }
+    function submitACE() {
+        let correct = 0;
+        aceClues.forEach(c => {
+            const el = document.querySelector(`#aceOpts .checkbox-item[data-id="${c.id}"]`);
+            const sel = selectedACE.has(c.id);
+            if (c.isACE && sel) { el.classList.add('correct'); correct++; }
+            else if (!c.isACE && sel) { el.classList.add('incorrect'); }
+        });
+        state.aceScore = Math.round(correct / 5 * 100);
+        addScore(Math.round(state.aceScore / 2.5));
+        document.getElementById('aceFeedback').innerHTML = `<div class="feedback ${state.aceScore>=75?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${state.aceScore>=75?'✅':'📚'}</span><span class="feedback-title">ACE-I Angioedema</span></div><div class="feedback-text"><strong>Key features:</strong> On ACE-I (can be years!), no urticaria, non-pruritic, lips/tongue, poor response to standard allergy treatment. Affects ~0.5% of ACE-I users, higher risk in Black patients.</div></div>`;
+        document.querySelector('#aceFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('treatment')">Plan Treatment →</button>`;
+    }
+
+    let selectedTx = null;
+    function selectTx(id) { selectedTx = id; document.querySelectorAll('#txOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('txSubmit').disabled = false; }
+    function submitTx() {
+        document.querySelectorAll('#txOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'icatibant') o.classList.add('correct');
+            else if (o.dataset.id === selectedTx) o.classList.add('incorrect');
+        });
+        state.txScore = selectedTx === 'icatibant' ? 100 : 40;
+        addScore(selectedTx === 'icatibant' ? 40 : 15);
+        document.getElementById('txFeedback').innerHTML = `<div class="feedback ${selectedTx==='icatibant'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedTx==='icatibant'?'✅':'📚'}</span><span class="feedback-title">${selectedTx==='icatibant'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Bradykinin-targeted therapy:</strong> Icatibant (B2 receptor antagonist), C1-INH concentrate, ecallantide<br><strong>Don't work:</strong> Epinephrine, antihistamines, steroids (different pathway!)<br>Note: Often resolves with supportive care after stopping ACE-I (24-72h)</div></div>`;
+        document.getElementById('txSubmit').textContent = 'Continue →';
+        document.getElementById('txSubmit').onclick = () => goTo('prevention');
+    }
+
+    let selectedPrev = null;
+    function selectPrev(id) { selectedPrev = id; document.querySelectorAll('#prevOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('prevSubmit').disabled = false; }
+    function submitPrev() {
+        document.querySelectorAll('#prevOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'stop_caution') o.classList.add('correct');
+            else if (o.dataset.id === selectedPrev) o.classList.add('incorrect');
+        });
+        state.prevScore = selectedPrev === 'stop_caution' ? 100 : (selectedPrev === 'stop_all' ? 70 : 40);
+        addScore(selectedPrev === 'stop_caution' ? 40 : (selectedPrev === 'stop_all' ? 25 : 15));
+        document.getElementById('prevFeedback').innerHTML = `<div class="feedback ${selectedPrev==='stop_caution'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedPrev==='stop_caution'?'✅':'📚'}</span><span class="feedback-title">${selectedPrev==='stop_caution'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Must stop ACE-I permanently</strong> - never rechallenge!<br><strong>ARBs:</strong> ~10% cross-reactivity reported, use with caution if needed<br><strong>Safe alternatives:</strong> CCBs (amlodipine), thiazides, etc.</div></div>`;
+        document.getElementById('prevSubmit').textContent = 'Complete →';
+        document.getElementById('prevSubmit').onclick = () => goTo('outcome');
+    }
+
+    function goTo(id) { state.stage = id; document.getElementById('stageContainer').innerHTML = stages[id].render(); window.scrollTo(0,0); }
+    document.addEventListener('DOMContentLoaded', () => goTo('setup'));
+    </script>
 </body>
 </html>

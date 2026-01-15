@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Nursing Home Transfer | ReasonDx Adventure</title>
+    <style>
+        :root {
+            --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9;
+            --muted: #94A3B8; --accent: #F59E0B; --success: #10B981;
+            --warning: #F59E0B; --danger: #DC2626; --info: #3B82F6;
+            --header-bg: linear-gradient(135deg, #1E3A5F 0%, #0F172A 100%);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        
+        .header { background: var(--header-bg); color: white; padding: 12px 20px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border); }
+        .header-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; display: flex; align-items: center; gap: 10px; }
+        .header-stats { display: flex; gap: 12px; align-items: center; }
+        .stat { text-align: center; background: rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 8px; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        .difficulty-badge { padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+        .difficulty-badge.easy { background: #10B981; }
+        .difficulty-badge.hard { background: #F59E0B; }
+        .difficulty-badge.hardest { background: #DC2626; }
+        
+        .main { max-width: 1000px; margin: 0 auto; padding: 24px; }
+        
+        .setup-screen { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; }
+        .setup-screen h1 { font-size: 2rem; margin-bottom: 8px; }
+        .setup-screen .subtitle { color: var(--muted); margin-bottom: 32px; }
+        .setup-options { display: grid; gap: 24px; max-width: 500px; margin: 0 auto; text-align: left; }
+        .setup-group label { display: block; font-weight: 600; margin-bottom: 8px; }
+        .setup-group select { width: 100%; padding: 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 1rem; }
+        .timer-toggle { display: flex; align-items: center; gap: 12px; }
+        .timer-toggle input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--accent); }
+        .start-btn { background: var(--accent); color: #000; border: none; padding: 16px 48px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; margin-top: 24px; }
+        .start-btn:hover { background: #D97706; }
+        
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        
+        .narrative { background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(217,119,6,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; font-size: 1rem; line-height: 1.8; }
+        .narrative .hl { background: rgba(245,158,11,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        
+        .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 10px; margin: 20px 0; }
+        .vital { background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; text-align: center; }
+        .vital.critical { background: rgba(220,38,38,0.2); border: 1px solid rgba(220,38,38,0.4); }
+        .vital.warning { background: rgba(245,158,11,0.2); border: 1px solid rgba(245,158,11,0.4); }
+        .vital-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; }
+        .vital-value { font-size: 1.2rem; font-weight: 700; font-family: monospace; }
+        
+        .question-section { margin-bottom: 32px; }
+        .question-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .question-number { background: var(--accent); color: #000; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; }
+        .question-text { font-size: 1.1rem; font-weight: 600; }
+        .question-hint { color: var(--muted); font-size: 0.9rem; margin-bottom: 16px; }
+        
+        .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
+        .checkbox-item { display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.15s; }
+        .checkbox-item:hover { border-color: var(--accent); background: rgba(245,158,11,0.1); }
+        .checkbox-item.selected { border-color: var(--accent); background: rgba(245,158,11,0.15); }
+        .checkbox-item.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .checkbox-item.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .checkbox-item.missed { border-color: var(--info); background: rgba(59,130,246,0.15); }
+        .checkbox-box { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .checkbox-item.selected .checkbox-box { background: var(--accent); border-color: var(--accent); }
+        .checkbox-item.selected .checkbox-box::after { content: '✓'; color: #000; font-weight: bold; }
+        
+        .radio-options { display: flex; flex-direction: column; gap: 10px; }
+        .radio-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.15s; }
+        .radio-option:hover { border-color: var(--accent); }
+        .radio-option.selected { border-color: var(--accent); background: rgba(245,158,11,0.15); }
+        .radio-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .radio-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .radio-circle { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .radio-option.selected .radio-circle { border-color: var(--accent); }
+        .radio-option.selected .radio-circle::after { content: ''; width: 12px; height: 12px; background: var(--accent); border-radius: 50%; }
+        
+        .order-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 20px 0; }
+        .order-column { background: rgba(0,0,0,0.2); border-radius: 12px; overflow: hidden; }
+        .order-column-header { padding: 12px 16px; font-weight: 600; font-size: 0.9rem; border-bottom: 1px solid var(--border); }
+        .order-column-header.chemistry { background: rgba(59,130,246,0.2); color: #60A5FA; }
+        .order-column-header.hematology { background: rgba(16,185,129,0.2); color: #34D399; }
+        .order-column-header.micro { background: rgba(245,158,11,0.2); color: #FBBF24; }
+        .order-column-header.imaging { background: rgba(168,85,247,0.2); color: #C084FC; }
+        .order-column-body { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+        .order-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: rgba(255,255,255,0.05); border: 1px solid transparent; border-radius: 8px; cursor: pointer; font-size: 0.9rem; transition: all 0.15s; }
+        .order-item:hover { background: rgba(255,255,255,0.1); border-color: var(--border); }
+        .order-item.selected { background: rgba(245,158,11,0.2); border-color: var(--accent); }
+        .order-checkbox { width: 18px; height: 18px; border: 2px solid var(--border); border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .order-item.selected .order-checkbox { background: var(--accent); border-color: var(--accent); }
+        .order-item.selected .order-checkbox::after { content: '✓'; color: #000; font-size: 0.75rem; font-weight: bold; }
+        
+        .fluid-form { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 20px 0; }
+        @media (max-width: 768px) { .fluid-form { grid-template-columns: 1fr; } }
+        .fluid-column { background: rgba(0,0,0,0.2); border-radius: 12px; overflow: hidden; }
+        .fluid-column-header { padding: 12px 16px; font-weight: 600; font-size: 0.9rem; background: rgba(59,130,246,0.2); color: #60A5FA; border-bottom: 1px solid var(--border); }
+        .fluid-column-body { padding: 12px; display: flex; flex-direction: column; gap: 6px; }
+        .fluid-option { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: rgba(255,255,255,0.05); border: 1px solid transparent; border-radius: 8px; cursor: pointer; font-size: 0.85rem; transition: all 0.15s; }
+        .fluid-option:hover { background: rgba(255,255,255,0.1); border-color: var(--border); }
+        .fluid-option.selected { background: rgba(59,130,246,0.2); border-color: #3B82F6; }
+        .fluid-option.correct { background: rgba(16,185,129,0.2); border-color: var(--success); }
+        .fluid-option.acceptable { background: rgba(245,158,11,0.2); border-color: var(--warning); }
+        .fluid-option.incorrect { background: rgba(220,38,38,0.2); border-color: var(--danger); }
+        .fluid-radio { width: 16px; height: 16px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; }
+        .fluid-option.selected .fluid-radio { border-color: #3B82F6; background: radial-gradient(circle, #3B82F6 40%, transparent 40%); }
+        
+        .abx-form { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 20px 0; }
+        @media (max-width: 600px) { .abx-form { grid-template-columns: 1fr; } }
+        .abx-column { background: rgba(0,0,0,0.2); border-radius: 12px; overflow: hidden; }
+        .abx-column-header { padding: 12px 16px; font-weight: 600; font-size: 0.9rem; border-bottom: 1px solid var(--border); }
+        .abx-column-header.gp { background: rgba(168,85,247,0.2); color: #C084FC; }
+        .abx-column-header.gn { background: rgba(16,185,129,0.2); color: #34D399; }
+        .abx-column-body { padding: 12px; display: flex; flex-direction: column; gap: 6px; }
+        
+        .feedback { padding: 20px; border-radius: 12px; margin: 20px 0; }
+        .feedback.excellent { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .feedback.good { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); }
+        .feedback.acceptable { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .feedback.poor { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+        .feedback-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .feedback-icon { font-size: 1.5rem; }
+        .feedback-title { font-weight: 700; font-size: 1.1rem; }
+        .feedback-text { color: var(--muted); line-height: 1.7; }
+        .feedback-text strong { color: var(--text); }
+        
+        .alert { padding: 16px 20px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
+        .alert.danger { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+        .alert.warning { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .alert.success { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .alert.info { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); }
+        .alert-icon { font-size: 1.5rem; flex-shrink: 0; }
+        .alert-content { flex: 1; }
+        .alert-title { font-weight: 600; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; color: var(--muted); }
+        
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; transition: all 0.2s; border: none; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: #000; }
+        .btn-primary:hover { background: #D97706; }
+        .btn-secondary { background: transparent; border: 2px solid var(--border); color: var(--text); }
+        .btn-secondary:hover { border-color: var(--accent); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-row { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+        
+        .lab-results { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .lab-results-title { font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .lab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+        .lab-item { background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; }
+        .lab-name { font-size: 0.8rem; color: var(--muted); margin-bottom: 4px; }
+        .lab-value { font-size: 1.2rem; font-weight: 700; font-family: monospace; }
+        .lab-value.critical { color: var(--danger); }
+        .lab-value.high { color: var(--warning); }
+        .lab-value.normal { color: var(--success); }
+        .lab-range { font-size: 0.7rem; color: var(--muted); margin-top: 2px; }
+        
+        .bundle-progress { margin: 20px 0; }
+        .bundle-title { font-size: 0.85rem; color: var(--muted); margin-bottom: 8px; }
+        .bundle-bar { height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+        .bundle-fill { height: 100%; background: var(--success); transition: width 0.5s; }
+        .bundle-items { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+        .bundle-item { font-size: 0.8rem; padding: 4px 10px; border-radius: 6px; background: rgba(255,255,255,0.1); }
+        .bundle-item.done { background: rgba(16,185,129,0.2); color: var(--success); }
+        
+        .outcome { text-align: center; padding: 40px 20px; }
+        .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
+        .outcome-title { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+        .outcome.good .outcome-title { color: var(--success); }
+        .outcome.partial .outcome-title { color: var(--warning); }
+        .outcome.bad .outcome-title { color: var(--danger); }
+        .outcome-desc { color: var(--muted); max-width: 600px; margin: 0 auto 24px; line-height: 1.7; }
+        
+        .score-summary { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 24px; margin: 24px auto; text-align: left; max-width: 500px; }
+        .score-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .score-row:last-child { border-bottom: none; }
+        .score-label { color: var(--muted); }
+        .score-value { font-weight: 600; }
+        .score-value.good { color: var(--success); }
+        .score-value.ok { color: var(--warning); }
+        .score-value.poor { color: var(--danger); }
+        
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .timer-critical { animation: pulse 1s infinite; color: var(--danger) !important; }
+        
+        .patient-panel { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 16px; margin-bottom: 20px; }
+        .patient-panel-title { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+        .patient-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; }
+        .patient-info-label { font-size: 0.7rem; color: var(--muted); }
+        .patient-info-value { font-weight: 600; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-row">
+            <div class="header-title">🏥 <span id="caseTitle">The Nursing Home Transfer</span></div>
+            <div class="header-stats">
+                <span class="difficulty-badge easy" id="difficultyBadge">Easy</span>
+                <div class="stat" id="timerStat" style="display: none;">
+                    <div class="stat-value" id="timer">00:00</div>
+                    <div class="stat-label">Time</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="scoreDisplay">0</div>
+                    <div class="stat-label">Points</div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="main"><div id="stageContainer"></div></main>
+    <script>
+    // ========== GAME STATE ==========
+    const state = {
+        stage: 'setup', difficulty: 'easy', timerEnabled: false, timerSeconds: 0, timerLimit: 0,
+        score: 0, patientWeight: 68, correctDiagnosis: false, labsOrdered: [], 
+        fluidType: null, fluidVolume: null, fluidRate: null, antibioticsSelected: [],
+        sirsScore: 0, labScore: 0, fluidScore: 0, abxScore: 0,
+        bundle: { lactate: false, cultures: false, antibiotics: false, fluids: false, vasopressors: false, repeat_lactate: false },
+        patientBP: 88, patientMAP: 59
+    };
+    let timerInterval = null;
+
+    const difficultySettings = {
+        easy: { label: 'Easy', timerLimit: 1800, sirsOptions: 6, diagnosisOptions: 4, fluidTypeOptions: 4, fluidVolumeOptions: 5, fluidRateOptions: 5, antibioticOptions: 6 },
+        hard: { label: 'Challenging', timerLimit: 900, sirsOptions: 8, diagnosisOptions: 6, fluidTypeOptions: 6, fluidVolumeOptions: 6, fluidRateOptions: 6, antibioticOptions: 10 },
+        hardest: { label: 'Expert', timerLimit: 600, sirsOptions: 10, diagnosisOptions: 8, fluidTypeOptions: 8, fluidVolumeOptions: 8, fluidRateOptions: 8, antibioticOptions: 14 }
+    };
+
+    // ========== DATA POOLS ==========
+    const sirsOptionsPool = [
+        { id: 'temp_high', text: 'Temperature > 38°C (100.4°F)', correct: true },
+        { id: 'temp_low', text: 'Temperature < 36°C (96.8°F)', correct: true },
+        { id: 'hr', text: 'Heart rate > 90 bpm', correct: true },
+        { id: 'rr', text: 'Respiratory rate > 20/min', correct: true },
+        { id: 'wbc_high', text: 'WBC > 12,000/μL', correct: true },
+        { id: 'wbc_low', text: 'WBC < 4,000/μL', correct: true },
+        { id: 'bp', text: 'Systolic BP < 90 mmHg', correct: false },
+        { id: 'lactate', text: 'Lactate > 2 mmol/L', correct: false },
+        { id: 'ams', text: 'Altered mental status', correct: false },
+        { id: 'spo2', text: 'SpO₂ < 94% on room air', correct: false }
+    ];
+
+    const diagnosisOptionsPool = [
+        { id: 'uti', text: 'Uncomplicated urinary tract infection', correct: false, feedback: 'UTI alone wouldn\'t explain the hemodynamic instability and altered mental status.' },
+        { id: 'pneumonia', text: 'Community-acquired pneumonia', correct: false, feedback: 'While she may have pneumonia, this doesn\'t capture the full severity of her presentation.' },
+        { id: 'delirium', text: 'Delirium - workup needed for cause', correct: false, feedback: 'Delirium is present, but this misses the underlying infectious process.' },
+        { id: 'sepsis', text: 'Sepsis with likely multi-source infection', correct: true, feedback: 'Correct! Fever + suspected infection + hypotension + AMS = sepsis requiring urgent intervention.' },
+        { id: 'bacteremia', text: 'Bacteremia without sepsis', correct: false, feedback: 'Her hemodynamic instability indicates this is more than simple bacteremia.' },
+        { id: 'stroke', text: 'Acute stroke', correct: false, feedback: 'Fever and suspected infection point away from primary stroke.' },
+        { id: 'chf', text: 'Decompensated heart failure', correct: false, feedback: 'The fever and infectious symptoms make this less likely.' },
+        { id: 'drug_reaction', text: 'Adverse drug reaction', correct: false, feedback: 'No new medications mentioned, and this wouldn\'t explain the infectious signs.' }
+    ];
+
+    const labOptionsPool = {
+        chemistry: [
+            { id: 'bmp', text: 'BMP', essential: true }, { id: 'cmp', text: 'CMP' },
+            { id: 'lactate', text: 'Lactate', essential: true, critical: true },
+            { id: 'lfts', text: 'LFTs' }, { id: 'lipase', text: 'Lipase' },
+            { id: 'procalcitonin', text: 'Procalcitonin', helpful: true },
+            { id: 'troponin', text: 'Troponin' }, { id: 'bnp', text: 'BNP' }
+        ],
+        hematology: [
+            { id: 'cbc', text: 'CBC', essential: true },
+            { id: 'cbc_diff', text: 'CBC with differential', essential: true },
+            { id: 'coags', text: 'PT/INR/PTT', helpful: true },
+            { id: 'ddimer', text: 'D-dimer' }, { id: 'type_screen', text: 'Type & Screen', helpful: true }
+        ],
+        micro: [
+            { id: 'blood_cx', text: 'Blood cultures x2', essential: true, critical: true },
+            { id: 'ua', text: 'Urinalysis', essential: true },
+            { id: 'urine_cx', text: 'Urine culture', essential: true },
+            { id: 'sputum_cx', text: 'Sputum culture', helpful: true },
+            { id: 'resp_viral', text: 'Respiratory viral panel' }, { id: 'covid', text: 'COVID-19 PCR' }
+        ],
+        imaging: [
+            { id: 'cxr', text: 'Chest X-ray', essential: true },
+            { id: 'ct_chest', text: 'CT Chest' }, { id: 'ct_abd', text: 'CT Abdomen/Pelvis' }
+        ]
+    };
+
+    const fluidOptionsPool = {
+        type: [
+            { id: 'ns', text: 'Normal Saline (0.9% NaCl)', correct: true, optimal: true },
+            { id: 'lr', text: 'Lactated Ringer\'s', correct: true, optimal: true },
+            { id: 'plasmalyte', text: 'Plasmalyte', correct: true },
+            { id: 'd5w', text: 'D5W', correct: false, feedback: 'D5W distributes throughout total body water - ineffective for resuscitation.' },
+            { id: 'd5ns', text: 'D5 ½ NS', correct: false, feedback: 'Hypotonic - not appropriate for volume resuscitation.' },
+            { id: 'half_ns', text: '½ NS (0.45% NaCl)', correct: false, feedback: 'Hypotonic - will not stay in intravascular space.' },
+            { id: 'hypertonic', text: '3% Hypertonic Saline', correct: false, feedback: 'Reserved for severe hyponatremia, not volume resuscitation.' },
+            { id: 'albumin', text: 'Albumin 5%', correct: false, feedback: 'No proven benefit over crystalloid in sepsis.' }
+        ],
+        volume: [
+            { id: '500', text: '500 mL', correct: false, feedback: 'Too conservative for sepsis resuscitation.' },
+            { id: '1000', text: '1000 mL', correct: false, feedback: 'Guidelines recommend 30 mL/kg - insufficient for most adults.' },
+            { id: '1500', text: '1500 mL', correct: false, feedback: 'Close but still below 30 mL/kg for this patient.' },
+            { id: '2000', text: '2000 mL (~30 mL/kg)', correct: true, optimal: true },
+            { id: '2500', text: '2500 mL', correct: true, feedback: 'Acceptable but slightly above 30 mL/kg.' },
+            { id: '3000', text: '3000 mL', correct: false, feedback: 'Risk of fluid overload - start with 30 mL/kg and reassess.' },
+            { id: '4000', text: '4000 mL', correct: false, feedback: 'Excessive - high risk of pulmonary edema.' },
+            { id: '250', text: '250 mL', correct: false, feedback: 'Far too little for sepsis resuscitation.' }
+        ],
+        rate: [
+            { id: '100', text: '100 mL/hr', correct: false, feedback: 'Far too slow for sepsis resuscitation.' },
+            { id: '250', text: '250 mL/hr', correct: false, feedback: 'Too slow - patient needs rapid volume.' },
+            { id: '500', text: '500 mL/hr', correct: false, feedback: 'Still too slow for initial resuscitation.' },
+            { id: '1000', text: '1000 mL/hr', correct: true, feedback: 'Acceptable but could be faster.' },
+            { id: 'bolus_30', text: 'Bolus over 30 minutes', correct: true, optimal: true },
+            { id: 'bolus_15', text: 'Bolus over 15 minutes', correct: true, optimal: true },
+            { id: 'wide_open', text: 'Wide open / as fast as possible', correct: true, feedback: 'Acceptable - monitor for fluid overload.' },
+            { id: 'gravity', text: 'Gravity drip (~150 mL/hr)', correct: false, feedback: 'Much too slow for sepsis resuscitation.' }
+        ]
+    };
+
+    const antibioticOptionsPool = {
+        gram_positive: [
+            { id: 'vanc', text: 'Vancomycin', mrsa: true, essential: true },
+            { id: 'daptomycin', text: 'Daptomycin', mrsa: true },
+            { id: 'linezolid', text: 'Linezolid', mrsa: true },
+            { id: 'cefazolin', text: 'Cefazolin', mrsa: false },
+            { id: 'ampicillin', text: 'Ampicillin', mrsa: false },
+            { id: 'nafcillin', text: 'Nafcillin', mrsa: false },
+            { id: 'clindamycin', text: 'Clindamycin', mrsa: false }
+        ],
+        gram_negative: [
+            { id: 'pip_tazo', text: 'Piperacillin-Tazobactam', pseudomonas: true, essential: true },
+            { id: 'cefepime', text: 'Cefepime', pseudomonas: true },
+            { id: 'meropenem', text: 'Meropenem', pseudomonas: true },
+            { id: 'ceftriaxone', text: 'Ceftriaxone', pseudomonas: false },
+            { id: 'ceftazidime', text: 'Ceftazidime', pseudomonas: true },
+            { id: 'aztreonam', text: 'Aztreonam', pseudomonas: true },
+            { id: 'cipro', text: 'Ciprofloxacin', pseudomonas: true },
+            { id: 'levoflox', text: 'Levofloxacin', pseudomonas: false },
+            { id: 'gentamicin', text: 'Gentamicin', pseudomonas: true },
+            { id: 'tobramycin', text: 'Tobramycin', pseudomonas: true },
+            { id: 'amikacin', text: 'Amikacin', pseudomonas: true },
+            { id: 'tmp_smx', text: 'TMP-SMX', pseudomonas: false },
+            { id: 'amox_clav', text: 'Amoxicillin-Clavulanate', pseudomonas: false },
+            { id: 'amp_sulb', text: 'Ampicillin-Sulbactam', pseudomonas: false }
+        ]
+    };
+
+    // ========== TIMER ==========
+    function startTimer() {
+        if (!state.timerEnabled) return;
+        document.getElementById('timerStat').style.display = 'block';
+        timerInterval = setInterval(() => {
+            state.timerSeconds++;
+            const mins = Math.floor(state.timerSeconds / 60), secs = state.timerSeconds % 60;
+            const el = document.getElementById('timer');
+            el.textContent = `${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
+            if (state.timerLimit > 0) {
+                const rem = state.timerLimit - state.timerSeconds;
+                if (rem <= 60) el.classList.add('timer-critical');
+                else if (rem <= 180) el.style.color = '#F59E0B';
+                if (rem <= 0) { clearInterval(timerInterval); goTo('time_consequence'); }
+            }
+        }, 1000);
+    }
+
+    function addScore(pts) { state.score += pts; document.getElementById('scoreDisplay').textContent = state.score; }
+
+    function getBundleHTML() {
+        const items = [{key:'lactate',label:'Lactate'},{key:'cultures',label:'Blood Cultures'},{key:'antibiotics',label:'Antibiotics'},{key:'fluids',label:'30mL/kg Fluids'},{key:'vasopressors',label:'Vasopressors'},{key:'repeat_lactate',label:'Repeat Lactate'}];
+        const done = Object.values(state.bundle).filter(v=>v).length;
+        return `<div class="bundle-progress"><div class="bundle-title">SEP-1 Bundle Progress</div><div class="bundle-bar"><div class="bundle-fill" style="width:${done/6*100}%"></div></div><div class="bundle-items">${items.map(i=>`<span class="bundle-item ${state.bundle[i.key]?'done':''}">${state.bundle[i.key]?'✓':'○'} ${i.label}</span>`).join('')}</div></div>`;
+    }
+    // ========== STAGES CONTINUED ==========
+        fluid_response: { render: () => {
+            const typeOk = fluidOptionsPool.type.find(f=>f.id===state.fluidType)?.correct;
+            const volOk = fluidOptionsPool.volume.find(f=>f.id===state.fluidVolume)?.correct;
+            let newBP = typeOk && volOk ? 82 : 78, newMAP = typeOk && volOk ? 59 : 52;
+            state.patientBP=newBP; state.patientMAP=newMAP;
+            return `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">30 Minutes Later</div><div class="card-title">📈 Reassessment</div></div>
+                <div class="card-body">
+                    ${!typeOk?`<div class="alert danger"><span class="alert-icon">🚨</span><div class="alert-content"><div class="alert-title">Patient Deteriorating!</div><div class="alert-desc">Your fluid choice was suboptimal. Blood pressure dropped further.</div></div></div>`:`<div class="alert warning"><span class="alert-icon">⚠️</span><div class="alert-content"><div class="alert-title">Partial Response</div><div class="alert-desc">Blood pressure has not improved adequately despite 30 mL/kg crystalloid.</div></div></div>`}
+                    <div class="vitals-grid">
+                        <div class="vital"><div class="vital-label">Temp</div><div class="vital-value">101.2°F</div></div>
+                        <div class="vital warning"><div class="vital-label">HR</div><div class="vital-value">108</div></div>
+                        <div class="vital critical"><div class="vital-label">BP</div><div class="vital-value">${newBP}/48</div></div>
+                        <div class="vital critical"><div class="vital-label">MAP</div><div class="vital-value">${newMAP}</div></div>
+                        <div class="vital"><div class="vital-label">SpO₂</div><div class="vital-value">96%</div></div>
+                        <div class="vital warning"><div class="vital-label">Urine</div><div class="vital-value">15 mL/hr</div></div>
+                    </div>
+                    <div class="alert danger"><span class="alert-icon">⚠️</span><div class="alert-content"><div class="alert-title">Fluid-Refractory Hypotension</div><div class="alert-desc">MAP <65 despite 30mL/kg crystalloid. This is persistent septic shock.</div></div></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">7</div><div class="question-text">The patient remains hypotensive. What do you do?</div></div>
+                        <div class="radio-options" id="pressorOpts">
+                            <div class="radio-option" data-id="start_pressors" onclick="selectPressor('start_pressors')"><div class="radio-circle"></div><div><strong>Start Norepinephrine</strong><br><small style="color:var(--muted)">Begin vasopressor through peripheral IV while central line is placed</small></div></div>
+                            <div class="radio-option" data-id="more_fluids" onclick="selectPressor('more_fluids')"><div class="radio-circle"></div><div><strong>Give More Fluids</strong><br><small style="color:var(--muted)">Another 2 liters before starting pressors</small></div></div>
+                            <div class="radio-option" data-id="wait_central" onclick="selectPressor('wait_central')"><div class="radio-circle"></div><div><strong>Wait for Central Line</strong><br><small style="color:var(--muted)">Vasopressors are dangerous peripherally - wait for central access</small></div></div>
+                        </div>
+                    </div>
+                    <div id="pressorFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="pressorSubmit" onclick="submitPressor()" disabled>Submit Decision →</button></div>
+                </div>
+            </div>`}
+        },
+        fluid_overload: { render: () => `
+            <div class="card"><div class="card-body">
+                <div class="outcome bad">
+                    <div class="outcome-icon">💔</div>
+                    <div class="outcome-title">Fluid Overload</div>
+                    <div class="outcome-desc">Continued aggressive fluids without vasopressors led to massive fluid overload. The patient developed pulmonary edema and required emergent intubation.</div>
+                </div>
+                <div class="feedback poor"><div class="feedback-header"><span class="feedback-icon">⚠️</span><span class="feedback-title">Critical Learning Point</span></div><div class="feedback-text"><strong>After 30 mL/kg, if hypotension persists, the answer is VASOPRESSORS - not more fluids.</strong><br><br>Fluid overload increases mortality in sepsis.</div></div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Try Again</button><button class="btn btn-secondary" onclick="location.href='adventure-hub.html'">← Back to Adventures</button></div>
+            </div></div>`
+        },
+        delayed_pressors: { render: () => `
+            <div class="card"><div class="card-body">
+                <div class="outcome bad">
+                    <div class="outcome-icon">⏳</div>
+                    <div class="outcome-title">Delayed Vasopressors</div>
+                    <div class="outcome-desc">While waiting 45 minutes for central line placement, the patient's blood pressure continued to drop. She developed worsening acidosis.</div>
+                </div>
+                <div class="feedback acceptable"><div class="feedback-header"><span class="feedback-icon">📚</span><span class="feedback-title">Learning Point</span></div><div class="feedback-text"><strong>Peripheral vasopressors are SAFE for short-term use.</strong><br><br>Dilute norepinephrine can be safely administered through a well-functioning peripheral IV. Delaying pressors worsens outcomes.</div></div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Try Again</button><button class="btn btn-secondary" onclick="location.href='adventure-hub.html'">← Back to Adventures</button></div>
+            </div></div>`
+        },
+        pressors_started: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Hour Two</div><div class="card-title">📈 Stabilization</div></div>
+                <div class="card-body">
+                    <div class="alert success"><span class="alert-icon">✓</span><div class="alert-content"><div class="alert-title">Good Decision!</div><div class="alert-desc">Norepinephrine started through peripheral IV. The patient is responding.</div></div></div>
+                    ${getBundleHTML()}
+                    <div class="vitals-grid">
+                        <div class="vital"><div class="vital-label">Temp</div><div class="vital-value">100.8°F</div></div>
+                        <div class="vital"><div class="vital-label">HR</div><div class="vital-value">96</div></div>
+                        <div class="vital"><div class="vital-label">BP</div><div class="vital-value">98/62</div></div>
+                        <div class="vital" style="background:rgba(16,185,129,0.2)"><div class="vital-label">MAP</div><div class="vital-value" style="color:#10B981">74</div></div>
+                        <div class="vital"><div class="vital-label">SpO₂</div><div class="vital-value">97%</div></div>
+                        <div class="vital"><div class="vital-label">Urine</div><div class="vital-value">35 mL/hr</div></div>
+                    </div>
+                    <div class="lab-results"><div class="lab-results-title">🔬 Repeat Lactate</div><div class="lab-grid"><div class="lab-item"><div class="lab-name">Lactate (repeat)</div><div class="lab-value high">3.2 mmol/L</div><div class="lab-range">Previous: 4.8 (↓33%)</div></div></div></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('good_outcome')">Complete Case →</button></div>
+                </div>
+            </div>`
+        },
+        good_outcome: { render: () => `
+            <div class="card"><div class="card-body">
+                <div class="outcome good">
+                    <div class="outcome-icon">🎉</div>
+                    <div class="outcome-title">Patient Stabilized!</div>
+                    <div class="outcome-desc">Through prompt recognition, appropriate workup, timely antibiotics, effective resuscitation, and early vasopressors, you successfully managed this septic shock patient.</div>
+                </div>
+                ${getBundleHTML()}
+                <div class="score-summary">
+                    <h3 style="margin-bottom:16px">📊 Performance Summary</h3>
+                    <div class="score-row"><span class="score-label">Diagnosis Recognition</span><span class="score-value ${state.correctDiagnosis?'good':'poor'}">${state.correctDiagnosis?'Correct':'Incorrect'}</span></div>
+                    <div class="score-row"><span class="score-label">SIRS Criteria Knowledge</span><span class="score-value">${state.sirsScore}/100</span></div>
+                    <div class="score-row"><span class="score-label">Lab Ordering</span><span class="score-value">${state.labScore}/100</span></div>
+                    <div class="score-row"><span class="score-label">Fluid Resuscitation</span><span class="score-value">${state.fluidScore}/100</span></div>
+                    <div class="score-row"><span class="score-label">Antibiotic Selection</span><span class="score-value">${state.abxScore}/100</span></div>
+                    <div class="score-row" style="border-top:2px solid var(--border);margin-top:12px;padding-top:12px"><span class="score-label"><strong>Total Score</strong></span><span class="score-value good"><strong>${state.score} points</strong></span></div>
+                    ${state.timerEnabled?`<div class="score-row"><span class="score-label">Time Taken</span><span class="score-value">${Math.floor(state.timerSeconds/60)}:${String(state.timerSeconds%60).padStart(2,'0')}</span></div>`:''}
+                </div>
+                <div class="feedback excellent"><div class="feedback-header"><span class="feedback-icon">💡</span><span class="feedback-title">Key Takeaways - Hour-1 Bundle</span></div><div class="feedback-text">• Measure lactate (remeasure if >2)<br>• Obtain blood cultures before antibiotics<br>• Administer broad-spectrum antibiotics<br>• Begin 30 mL/kg crystalloid for hypotension or lactate ≥4<br>• Start vasopressors if MAP <65 after fluids</div></div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Play Again</button><button class="btn btn-secondary" onclick="location.href='adventure-hub.html'">← Back to Adventures</button></div>
+            </div></div>`
+        },
+        time_consequence: { render: () => `
+            <div class="card"><div class="card-body">
+                <div class="outcome bad">
+                    <div class="outcome-icon">⏰</div>
+                    <div class="outcome-title">Time Ran Out</div>
+                    <div class="outcome-desc">The delay allowed the patient's condition to deteriorate. In sepsis, every hour of delayed treatment increases mortality by ~7.6%.</div>
+                </div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Try Again</button><button class="btn btn-secondary" onclick="location.href='adventure-hub.html'">← Back to Adventures</button></div>
+            </div></div>`
+        }
+    };
+
+    // ========== INTERACTION HANDLERS ==========
+    function startCase() {
+        state.difficulty = document.getElementById('difficultySelect').value;
+        state.timerEnabled = document.getElementById('timerToggle').checked;
+        const s = difficultySettings[state.difficulty];
+        state.timerLimit = state.timerEnabled ? s.timerLimit : 0;
+        document.getElementById('difficultyBadge').textContent = s.label;
+        document.getElementById('difficultyBadge').className = 'difficulty-badge ' + state.difficulty;
+        if(state.timerEnabled) startTimer();
+        goTo('arrival');
+    }
+
+    let selectedDiagnosis = null;
+    function selectDiagnosis(id) {
+        selectedDiagnosis = id;
+        document.querySelectorAll('#diagnosisOptions .radio-option').forEach(o => o.classList.toggle('selected', o.dataset.id === id));
+        document.getElementById('diagnosisSubmit').disabled = false;
+    }
+    function submitDiagnosis() {
+        const opt = diagnosisOptionsPool.find(o => o.id === selectedDiagnosis);
+        document.querySelectorAll('#diagnosisOptions .radio-option').forEach(o => {
+            const d = diagnosisOptionsPool.find(x => x.id === o.dataset.id);
+            if(d.correct) o.classList.add('correct');
+            else if(o.dataset.id === selectedDiagnosis) o.classList.add('incorrect');
+        });
+        state.correctDiagnosis = opt.correct;
+        addScore(opt.correct ? 50 : 10);
+        document.getElementById('diagnosisFeedback').innerHTML = `<div class="feedback ${opt.correct?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${opt.correct?'✅':'📚'}</span><span class="feedback-title">${opt.correct?'Excellent!':'Not Quite'}</span></div><div class="feedback-text">${opt.feedback}${opt.correct?'':'<br><br><strong>Best answer: Sepsis with likely multi-source infection.</strong>'}</div></div>`;
+        document.getElementById('diagnosisSubmit').textContent = 'Continue →';
+        document.getElementById('diagnosisSubmit').onclick = () => goTo('sirs_question');
+    }
+
+    let selectedSirs = new Set();
+    function toggleSirs(id) {
+        const el = document.querySelector(`#sirsOptions .checkbox-item[data-id="${id}"]`);
+        if(selectedSirs.has(id)) { selectedSirs.delete(id); el.classList.remove('selected'); }
+        else { selectedSirs.add(id); el.classList.add('selected'); }
+    }
+    function submitSirs() {
+        let correct=0, incorrect=0;
+        document.querySelectorAll('#sirsOptions .checkbox-item').forEach(el => {
+            const isCorrect = el.dataset.correct === 'true', wasSel = selectedSirs.has(el.dataset.id);
+            if(isCorrect && wasSel) { el.classList.add('correct'); correct++; }
+            else if(isCorrect && !wasSel) { el.classList.add('missed'); }
+            else if(!isCorrect && wasSel) { el.classList.add('incorrect'); incorrect++; }
+        });
+        const score = Math.max(0, Math.round((correct - incorrect) / 4 * 100));
+        state.sirsScore = score;
+        addScore(Math.round(score / 2));
+        document.getElementById('sirsFeedback').innerHTML = `<div class="feedback ${score>=80?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${score>=80?'✅':'📚'}</span><span class="feedback-title">${score>=80?'Excellent':'Review Needed'} (${score}%)</span></div><div class="feedback-text"><strong>The 4 SIRS criteria:</strong><br>• Temp >38°C or <36°C<br>• HR >90<br>• RR >20 or PaCO₂ <32<br>• WBC >12K or <4K or >10% bands<br><br><strong>NOT SIRS:</strong> Hypotension, lactate, AMS, hypoxia (these indicate severity).</div></div>`;
+        document.querySelector('#sirsOptions').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('sirs_count')">Continue →</button>`;
+    }
+
+    let selectedSirsCount = null;
+    function selectSirsCount(n) {
+        selectedSirsCount = n;
+        document.querySelectorAll('#sirsCountOpts .radio-option').forEach(o => o.classList.toggle('selected', parseInt(o.dataset.value) === n));
+        document.getElementById('sirsCountSubmit').disabled = false;
+    }
+    function submitSirsCount() {
+        const correct = 3; // Temp, HR, RR
+        document.querySelectorAll('#sirsCountOpts .radio-option').forEach(o => {
+            const v = parseInt(o.dataset.value);
+            if(v === correct) o.classList.add('correct');
+            else if(v === selectedSirsCount) o.classList.add('incorrect');
+        });
+        addScore(selectedSirsCount === correct ? 30 : 10);
+        document.getElementById('sirsCountFeedback').innerHTML = `<div class="feedback ${selectedSirsCount===correct?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedSirsCount===correct?'✅':'📚'}</span><span class="feedback-title">${selectedSirsCount===correct?'Correct!':'Not Quite'}</span></div><div class="feedback-text">This patient meets <strong>3 SIRS criteria</strong>:<br>• Temp 101.8°F (38.8°C) > 38°C ✓<br>• HR 112 > 90 ✓<br>• RR 24 > 20 ✓<br><br>Note: BP 88/54 is NOT a SIRS criterion.</div></div>`;
+        document.getElementById('sirsCountSubmit').textContent = 'Continue →';
+        document.getElementById('sirsCountSubmit').onclick = () => goTo('lab_ordering');
+    }
+
+    function toggleLab(id) {
+        const el = document.querySelector(`.order-item[data-id="${id}"]`);
+        if(state.labsOrdered.includes(id)) { state.labsOrdered = state.labsOrdered.filter(l=>l!==id); el.classList.remove('selected'); }
+        else { state.labsOrdered.push(id); el.classList.add('selected'); }
+    }
+    function submitLabs() {
+        const essential = ['lactate','cbc','cbc_diff','blood_cx','ua','urine_cx','cxr','bmp'];
+        const critical = ['lactate','blood_cx'];
+        const essOrd = essential.filter(e => state.labsOrdered.includes(e)).length;
+        const critOrd = critical.filter(c => state.labsOrdered.includes(c)).length;
+        const score = Math.round((essOrd/essential.length)*70 + (critOrd/critical.length)*30);
+        state.labScore = score;
+        addScore(Math.round(score/2));
+        if(state.labsOrdered.includes('lactate')) state.bundle.lactate = true;
+        if(state.labsOrdered.includes('blood_cx')) state.bundle.cultures = true;
+        document.getElementById('labFeedback').innerHTML = `<div class="feedback ${score>=80?'excellent':score>=50?'good':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${score>=80?'✅':score>=50?'👍':'📚'}</span><span class="feedback-title">${score>=80?'Excellent':score>=50?'Good Start':'Incomplete'} (${score}%)</span></div><div class="feedback-text">${!state.labsOrdered.includes('lactate')?'<strong>Don\'t forget lactate!</strong> ':''} ${!state.labsOrdered.includes('blood_cx')?'<strong>Blood cultures before antibiotics!</strong>':''}</div></div>`;
+        document.querySelector('#labFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('fluid_ordering')">Continue to Fluid Orders →</button>`;
+    }
+
+    function selectFluid(col, id) {
+        if(col==='fluidType') state.fluidType = id;
+        else if(col==='fluidVolume') state.fluidVolume = id;
+        else if(col==='fluidRate') state.fluidRate = id;
+        document.querySelectorAll(`#${col} .fluid-option`).forEach(o => o.classList.toggle('selected', o.dataset.id === id));
+        document.getElementById('fluidSubmit').disabled = !(state.fluidType && state.fluidVolume && state.fluidRate);
+    }
+    function submitFluids() {
+        const typeD = fluidOptionsPool.type.find(f=>f.id===state.fluidType);
+        const volD = fluidOptionsPool.volume.find(f=>f.id===state.fluidVolume);
+        const rateD = fluidOptionsPool.rate.find(f=>f.id===state.fluidRate);
+        let score = 0, fb = [];
+        if(typeD.optimal) { score+=40; fb.push({t:'Fluid type: Optimal',c:'good'}); }
+        else if(typeD.correct) { score+=30; fb.push({t:'Fluid type: Acceptable',c:'ok'}); }
+        else { fb.push({t:'Fluid type: '+typeD.feedback,c:'bad'}); }
+        if(volD.optimal) { score+=35; fb.push({t:'Volume: Correct - 30 mL/kg',c:'good'}); }
+        else if(volD.correct) { score+=25; fb.push({t:'Volume: '+(volD.feedback||'Acceptable'),c:'ok'}); }
+        else { score+=5; fb.push({t:'Volume: '+volD.feedback,c:'bad'}); }
+        if(rateD.optimal) { score+=25; fb.push({t:'Rate: Optimal',c:'good'}); }
+        else if(rateD.correct) { score+=15; fb.push({t:'Rate: '+(rateD.feedback||'Acceptable'),c:'ok'}); }
+        else { fb.push({t:'Rate: '+rateD.feedback,c:'bad'}); }
+        state.fluidScore = score;
+        addScore(Math.round(score/2));
+        state.bundle.fluids = true;
+        document.getElementById('fluidFeedback').innerHTML = `<div class="feedback ${score>=80?'excellent':score>=50?'good':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${score>=80?'✅':score>=50?'👍':'📚'}</span><span class="feedback-title">Fluid Orders (${score}%)</span></div><div class="feedback-text">${fb.map(f=>`<div style="color:${f.c==='good'?'var(--success)':f.c==='ok'?'var(--warning)':'var(--danger)'}">• ${f.t}</div>`).join('')}</div></div>`;
+        document.getElementById('fluidSubmit').textContent = 'Continue →';
+        document.getElementById('fluidSubmit').onclick = () => goTo('lab_results');
+    }
+
+    function toggleAbx(id) {
+        const el = document.querySelector(`.order-item[data-id="${id}"]`);
+        if(state.antibioticsSelected.includes(id)) { state.antibioticsSelected = state.antibioticsSelected.filter(a=>a!==id); el.classList.remove('selected'); }
+        else { state.antibioticsSelected.push(id); el.classList.add('selected'); }
+    }
+    function submitAbx() {
+        const hasMRSA = state.antibioticsSelected.some(id => antibioticOptionsPool.gram_positive.find(a=>a.id===id)?.mrsa);
+        const hasPSA = state.antibioticsSelected.some(id => antibioticOptionsPool.gram_negative.find(a=>a.id===id)?.pseudomonas);
+        const hasGN = state.antibioticsSelected.some(id => antibioticOptionsPool.gram_negative.find(a=>a.id===id));
+        let score = 0, fb = [];
+        if(hasMRSA) { score+=35; fb.push({t:'MRSA coverage: Appropriate for healthcare-associated infection',c:'good'}); }
+        else { score+=10; fb.push({t:'Missing MRSA coverage - nursing home patients have high MRSA risk',c:'bad'}); }
+        if(hasPSA) { score+=35; fb.push({t:'Pseudomonas coverage: Appropriate',c:'good'}); }
+        else if(hasGN) { score+=20; fb.push({t:'GN coverage present but lacks Pseudomonas activity',c:'ok'}); }
+        else { fb.push({t:'Missing gram-negative coverage!',c:'bad'}); }
+        const hasVanc = state.antibioticsSelected.includes('vanc');
+        const hasBroad = ['pip_tazo','cefepime','meropenem'].some(a=>state.antibioticsSelected.includes(a));
+        if(hasVanc && hasBroad) { score+=30; fb.push({t:'Excellent empiric combination',c:'good'}); }
+        state.abxScore = Math.min(100,score);
+        addScore(Math.round(state.abxScore/2));
+        state.bundle.antibiotics = true;
+        document.getElementById('abxFeedback').innerHTML = `<div class="feedback ${score>=80?'excellent':score>=50?'good':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${score>=80?'✅':score>=50?'👍':'📚'}</span><span class="feedback-title">Antibiotic Selection (${Math.min(100,score)}%)</span></div><div class="feedback-text">${fb.map(f=>`<div style="color:${f.c==='good'?'var(--success)':f.c==='ok'?'var(--warning)':'var(--danger)'}">• ${f.t}</div>`).join('')}<br><strong>Recommended:</strong> Vancomycin + Piperacillin-Tazobactam</div></div>`;
+        document.querySelector('#abxFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('fluid_response')">Assess Response →</button>`;
+    }
+
+    let selectedPressor = null;
+    function selectPressor(id) {
+        selectedPressor = id;
+        document.querySelectorAll('#pressorOpts .radio-option').forEach(o => o.classList.toggle('selected', o.dataset.id === id));
+        document.getElementById('pressorSubmit').disabled = false;
+    }
+    function submitPressor() {
+        if(selectedPressor === 'start_pressors') {
+            addScore(50);
+            state.bundle.vasopressors = true;
+            state.bundle.repeat_lactate = true;
+            document.getElementById('pressorFeedback').innerHTML = `<div class="feedback excellent"><div class="feedback-header"><span class="feedback-icon">✅</span><span class="feedback-title">Correct Decision!</span></div><div class="feedback-text">Starting norepinephrine through peripheral IV is safe and appropriate. Delaying for central access worsens outcomes.</div></div>`;
+            document.getElementById('pressorSubmit').textContent = 'Continue →';
+            document.getElementById('pressorSubmit').onclick = () => goTo('pressors_started');
+        } else if(selectedPressor === 'more_fluids') {
+            document.getElementById('pressorFeedback').innerHTML = `<div class="feedback poor"><div class="feedback-header"><span class="feedback-icon">⚠️</span><span class="feedback-title">Suboptimal</span></div><div class="feedback-text">After 30 mL/kg, more fluids without pressors increases fluid overload risk.</div></div>`;
+            document.getElementById('pressorSubmit').textContent = 'See Consequence →';
+            document.getElementById('pressorSubmit').onclick = () => goTo('fluid_overload');
+        } else {
+            document.getElementById('pressorFeedback').innerHTML = `<div class="feedback acceptable"><div class="feedback-header"><span class="feedback-icon">📚</span><span class="feedback-title">Outdated Practice</span></div><div class="feedback-text">Peripheral pressors are safe short-term. Waiting delays treatment.</div></div>`;
+            document.getElementById('pressorSubmit').textContent = 'See Consequence →';
+            document.getElementById('pressorSubmit').onclick = () => goTo('delayed_pressors');
+        }
+    }
+
+    function goTo(id) { state.stage = id; render(); window.scrollTo(0,0); }
+    function render() {
+        const s = stages[state.stage];
+        if(!s) return;
+        if(s.isOutcome) clearInterval(timerInterval);
+        document.getElementById('stageContainer').innerHTML = s.render();
+    }
+    document.addEventListener('DOMContentLoaded', render);
+    </script>
+</body>
+</html>

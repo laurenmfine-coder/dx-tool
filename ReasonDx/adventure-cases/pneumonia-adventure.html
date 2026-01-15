@@ -3,35 +3,324 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Coughing Crisis | ReasonDx Adventure</title>
-    <style>:root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#14B8A6;--success:#10B981;--warning:#F59E0B;--danger:#DC2626}*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}.header{background:linear-gradient(135deg,#0F766E,#14B8A6);padding:12px 20px;position:sticky;top:0;z-index:100}.header-row{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}.diff-toggle{display:flex;background:rgba(0,0,0,.3);border-radius:8px}.diff-btn{padding:6px 12px;font-size:.75rem;cursor:pointer;border:none;background:0 0;color:rgba(255,255,255,.7);font-weight:600}.diff-btn.active{background:rgba(255,255,255,.2);color:#fff}.stat{text-align:center;background:rgba(0,0,0,.2);padding:6px 14px;border-radius:8px}.stat-value{font-size:1.1rem;font-weight:700;font-family:monospace}.stat-label{font-size:.6rem;opacity:.8}.main{max-width:900px;margin:0 auto;padding:24px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px}.card-header{padding:20px 24px;border-bottom:1px solid var(--border)}.card-phase{font-size:.75rem;color:var(--accent);text-transform:uppercase}.card-title{font-size:1.5rem;font-weight:700}.card-body{padding:24px}.narrative{background:rgba(20,184,166,.1);border-left:4px solid var(--accent);padding:20px;border-radius:0 12px 12px 0;margin-bottom:20px}.narrative .hl{background:rgba(20,184,166,.3);padding:2px 6px;border-radius:4px}.setup-screen{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center}.start-btn{background:var(--accent);color:#fff;border:none;padding:16px 48px;border-radius:12px;font-size:1.1rem;font-weight:700;cursor:pointer}.hint{background:rgba(59,130,246,.15);padding:12px 16px;border-radius:8px;margin-bottom:16px;color:#93C5FD}.radio-options{display:flex;flex-direction:column;gap:10px}.radio-option{display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(0,0,0,.2);border:2px solid var(--border);border-radius:10px;cursor:pointer}.radio-option.selected{border-color:var(--accent);background:rgba(20,184,166,.15)}.radio-option.correct{border-color:var(--success);background:rgba(16,185,129,.15)}.radio-option.incorrect{border-color:var(--danger);background:rgba(220,38,38,.15)}.radio-circle{width:22px;height:22px;border:2px solid var(--border);border-radius:50%}.radio-option.selected .radio-circle{border-color:var(--accent);background:radial-gradient(circle,var(--accent) 40%,transparent 40%)}.feedback{padding:20px;border-radius:12px;margin:20px 0}.feedback.excellent{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3)}.feedback.incorrect{background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.3)}.btn{padding:14px 28px;border-radius:10px;font-weight:600;cursor:pointer;border:none}.btn-primary{background:var(--accent);color:#fff}.btn:disabled{opacity:.5}.btn-row{display:flex;gap:12px;margin-top:24px}.btn-link{background:0 0;border:2px solid var(--border);color:var(--text)}.vitals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:12px;margin:20px 0}.vital{background:rgba(0,0,0,.2);padding:12px;border-radius:10px;text-align:center}.vital-label{font-size:.7rem;color:var(--muted)}.vital-value{font-size:1.3rem;font-weight:700;font-family:monospace}.lab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:16px 0}.lab-item{display:flex;justify-content:space-between;padding:8px 12px;background:rgba(0,0,0,.2);border-radius:6px}.lab-name{color:var(--muted)}.lab-value{font-family:monospace;font-weight:600}.score-summary{background:rgba(0,0,0,.2);border-radius:12px;padding:24px;margin:24px auto;max-width:600px}.score-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}.pearls-box{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:20px;margin-top:20px}.pearls-title{font-weight:700;color:var(--success);margin-bottom:12px}.pearl-item{padding:8px 0;border-bottom:1px solid rgba(16,185,129,.2);font-size:.95rem}.cross-link{background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);border-radius:8px;padding:12px 16px;margin-top:12px}.cross-link a{color:#C4B5FD;text-decoration:none}.progress-bar{background:rgba(255,255,255,.1);border-radius:10px;height:8px;margin:20px 0}.progress-fill{background:var(--accent);height:100%}.question-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}.question-number{background:var(--accent);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}</style>
+    <title>The Productive Cough | ReasonDx Adventure</title>
+    <style>
+        :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #8B5CF6; --success: #10B981; --warning: #F59E0B; --danger: #DC2626; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #7C3AED 0%, #8B5CF6 100%); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; }
+        .stat { background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 8px; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        .main { max-width: 1000px; margin: 0 auto; padding: 24px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(124,58,237,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; line-height: 1.8; }
+        .narrative .hl { background: rgba(139,92,246,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        .setup-screen { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; }
+        .setup-screen h1 { font-size: 2rem; margin-bottom: 8px; }
+        .setup-screen .subtitle { color: var(--muted); margin-bottom: 32px; }
+        .start-btn { background: var(--accent); color: white; border: none; padding: 16px 48px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+        .question-section { margin-bottom: 32px; }
+        .question-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .question-number { background: var(--accent); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .question-text { font-size: 1.1rem; font-weight: 600; }
+        .radio-options { display: flex; flex-direction: column; gap: 10px; }
+        .radio-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .radio-option:hover { border-color: var(--accent); }
+        .radio-option.selected { border-color: var(--accent); background: rgba(139,92,246,0.15); }
+        .radio-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .radio-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .radio-circle { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; }
+        .radio-option.selected .radio-circle { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 40%, transparent 40%); }
+        .feedback { padding: 20px; border-radius: 12px; margin: 20px 0; }
+        .feedback.excellent { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .feedback.acceptable { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .feedback-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .feedback-icon { font-size: 1.5rem; }
+        .feedback-title { font-weight: 700; }
+        .feedback-text { color: var(--muted); line-height: 1.7; }
+        .feedback-text strong { color: var(--text); }
+        .alert { padding: 16px 20px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
+        .alert.info { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); }
+        .alert-icon { font-size: 1.5rem; }
+        .alert-content { flex: 1; }
+        .alert-title { font-weight: 600; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; color: var(--muted); }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-row { display: flex; gap: 12px; margin-top: 24px; }
+        .lab-panel { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .lab-panel-title { font-weight: 600; margin-bottom: 16px; color: var(--accent); }
+        .lab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; }
+        .lab-item { background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; }
+        .lab-name { font-size: 0.8rem; color: var(--muted); }
+        .lab-value { font-size: 1.1rem; font-weight: 700; }
+        .lab-value.critical { color: var(--danger); }
+        .lab-value.high { color: var(--warning); }
+        .lab-range { font-size: 0.7rem; color: var(--muted); }
+        .outcome { text-align: center; padding: 40px 20px; }
+        .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
+        .outcome-title { font-size: 2rem; font-weight: 700; color: var(--success); margin-bottom: 8px; }
+        .outcome-desc { color: var(--muted); max-width: 600px; margin: 0 auto 24px; }
+        .score-summary { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 24px; margin: 24px auto; max-width: 500px; }
+        .score-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .score-row:last-child { border-bottom: none; }
+        .curb-box { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .curb-title { font-weight: 600; color: var(--accent); margin-bottom: 12px; }
+        .curb-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); }
+        .curb-item:last-child { border-bottom: none; }
+    </style>
 </head>
 <body>
-    <header class="header"><div class="header-row"><div style="font-weight:600">🦠 The Coughing Crisis</div><div style="display:flex;gap:12px;align-items:center"><div class="diff-toggle"><button class="diff-btn active" onclick="setDiff('easy')">Easy</button><button class="diff-btn" onclick="setDiff('int')">Intermediate</button><button class="diff-btn" onclick="setDiff('adv')">Advanced</button></div><div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Points</div></div></div></div></header>
-    <main class="main"><div id="app"></div></main>
-<script>
-const S={stage:'setup',score:0,max:0,diff:'easy',q:0,total:8};
-const C={easy:{age:'52M',wt:'78kg',hx:'Cough, fever, rusty sputum x4d, previously healthy',exam:'RLL crackles, dullness to percussion',vitals:{HR:'98',BP:'128/78',RR:'22',T:'39.2'},labs:{WBC:'16.4',CXR:'RLL consolidation',ProCal:'2.4'}},int:{age:'78F',wt:'55kg',hx:'Nursing home resident, confusion, cough, aspiration risk',exam:'Decreased breath sounds bilat, rhonchi',vitals:{HR:'108',BP:'92/58',RR:'26',T:'38.1'},labs:{WBC:'14.2',CXR:'Bilateral infiltrates',Cr:'1.8'}},adv:{age:'45M',wt:'82kg',hx:'HIV+ (CD4 85), dry cough x2wks, hypoxic on exertion',exam:'Clear lungs, tachypneic, oral thrush',vitals:{HR:'92',BP:'118/72',RR:'28',SpO2:'88%'},labs:{WBC:'8.2',LDH:'480',CXR:'Bilateral interstitial infiltrates'}}};
-const Q=[
-{t:'Severity Score',q:'Which score determines CAP admission?',h:'Outpatient vs inpatient decision',o:[{id:'a',txt:'CURB-65 or PSI (Pneumonia Severity Index)',c:1,p:100},{id:'b',txt:'APACHE II',c:0,p:20},{id:'c',txt:'qSOFA only',c:0,p:30}],fb:{1:'<b>Correct!</b> CURB-65: Confusion, Urea>7, RR≥30, BP<90/60, Age≥65. 0-1=outpatient, 2=admit, ≥3=ICU consider.',0:'<b>Scoring:</b> CURB-65 or PSI for disposition. qSOFA identifies sepsis.'}},
-{t:'CAP Antibiotics',q:'Empiric antibiotics for CAP requiring admission (non-ICU)?',h:'Cover typical + atypical',o:[{id:'a',txt:'Beta-lactam (ceftriaxone) + macrolide (azithro) OR respiratory FQ',c:1,p:100},{id:'b',txt:'Vancomycin + pip-tazo',c:0,p:20},{id:'c',txt:'Amoxicillin alone',c:0,p:30}],fb:{1:'<b>Correct!</b> CAP: Ceftriaxone + azithro (or doxy) OR respiratory FQ (levoflox, moxiflox) alone.',0:'<b>CAP coverage:</b> S. pneumo, H. flu, atypicals. Beta-lactam + macrolide or FQ.'}},
-{t:'ICU Criteria',q:'Major criteria for severe CAP requiring ICU?',h:'IDSA/ATS criteria',o:[{id:'a',txt:'Septic shock requiring pressors OR mechanical ventilation',c:1,p:100},{id:'b',txt:'Any hypoxia',c:0,p:20},{id:'c',txt:'WBC >15k',c:0,p:10}],fb:{1:'<b>Correct!</b> Major: septic shock or mech vent. Minor (≥3): RR≥30, PaO2/FiO2<250, multilobar, confusion, BUN>20, WBC<4k, plt<100k, temp<36, hypotension needing fluids.',0:'<b>ICU criteria:</b> 1 major OR 3 minor = ICU admission.'}},
-{t:'HCAP/Aspiration',q:'Nursing home patient with aspiration risk. Coverage?',h:'Consider resistant organisms',o:[{id:'a',txt:'Broader coverage: pip-tazo or ceftriaxone + metronidazole',c:1,p:100},{id:'b',txt:'Same as CAP',c:0,p:30},{id:'c',txt:'Vancomycin monotherapy',c:0,p:0}],fb:{1:'<b>Correct!</b> Aspiration/HCAP: Cover GNRs + anaerobes. Pip-tazo or ceftriaxone+metronidazole. Add MRSA coverage if risk factors.',0:'<b>HCAP:</b> Broader coverage for resistant organisms and anaerobes.'}},
-{t:'PCP Pneumonia',q:'HIV patient, bilateral interstitial infiltrates, LDH elevated. Likely diagnosis and treatment?',h:'CD4 <200 puts at risk',o:[{id:'a',txt:'PCP - TMP-SMX 15-20 mg/kg/day + steroids if hypoxic',c:1,p:100},{id:'b',txt:'Bacterial CAP - ceftriaxone',c:0,p:20},{id:'c',txt:'TB - RIPE',c:0,p:30}],fb:{1:'<b>Correct!</b> PCP: TMP-SMX (15-20 mg/kg/day of TMP). Add prednisone if PaO2<70 or A-a gradient>35.',0:'<b>PCP:</b> CD4<200, elevated LDH, interstitial pattern. TMP-SMX + steroids if hypoxic.'}},
-{t:'Steroid Adjunct',q:'When are steroids indicated in CAP?',h:'Specific indications',o:[{id:'a',txt:'Severe CAP with high inflammatory markers, or PCP with hypoxia',c:1,p:100},{id:'b',txt:'All pneumonia',c:0,p:0},{id:'c',txt:'Never',c:0,p:20}],fb:{1:'<b>Correct!</b> Steroids: PCP with hypoxia (proven), severe CAP (emerging data). Not routine for all CAP.',0:'<b>Steroids:</b> Clear benefit in PCP. Consider in severe CAP.'}},
-{t:'Duration',q:'Antibiotic duration for uncomplicated CAP?',h:'Shorter courses effective',o:[{id:'a',txt:'5 days (if afebrile 48-72 hrs and clinically stable)',c:1,p:100},{id:'b',txt:'14 days minimum',c:0,p:20},{id:'c',txt:'Until CXR clears',c:0,p:10}],fb:{1:'<b>Correct!</b> 5 days adequate if: afebrile ≥48hrs, clinically improving, able to take PO. Longer for complications.',0:'<b>Duration:</b> 5 days usually sufficient. Extend for empyema, abscess, or slow response.'}},
-{t:'Treatment Failure',q:'No improvement at 72 hrs. Next steps?',h:'Reassess diagnosis and coverage',o:[{id:'a',txt:'CT chest, broaden coverage, consider resistant organisms or alternative dx',c:1,p:100},{id:'b',txt:'Continue same antibiotics longer',c:0,p:10},{id:'c',txt:'Discharge home',c:0,p:0}],fb:{1:'<b>Correct!</b> Failure workup: CT (effusion, abscess, PE), cultures, bronchoscopy if needed. Consider MRSA, Pseudomonas, TB, fungal, or non-infectious causes.',0:'<b>Failure:</b> Reassess diagnosis, imaging, and antibiotic coverage.'}}
-];
-let sel=null;
-function setDiff(d){S.diff=d;document.querySelectorAll('.diff-btn').forEach((b,i)=>b.classList.toggle('active',['easy','int','adv'][i]===d));if(S.stage!=='setup'){S.stage='setup';S.score=0;S.max=0;S.q=0;document.getElementById('score').textContent='0';}render();}
-function addPts(p,m){S.score+=p;S.max+=m;document.getElementById('score').textContent=S.score;}
-function pick(id){sel=id;document.querySelectorAll('.radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id));document.getElementById('sub').disabled=false;}
-function submit(){const q=Q[S.q-1];const opt=q.o.find(o=>o.id===sel);addPts(opt.p||0,100);document.querySelectorAll('.radio-option').forEach(o=>{const op=q.o.find(x=>x.id===o.dataset.id);if(op&&op.c)o.classList.add('correct');else if(o.dataset.id===sel)o.classList.add('incorrect');});document.getElementById('fb').innerHTML='<div class="feedback '+(opt&&opt.c?'excellent':'incorrect')+'">'+q.fb[opt&&opt.c?1:0]+'</div>';document.getElementById('sub').textContent=S.q<S.total?'Next →':'Results →';document.getElementById('sub').onclick=next;}
-function next(){if(S.q<S.total){S.q++;sel=null;render();}else{S.stage='outcome';render();}}
-function start(){S.q=1;S.stage='question';render();}
-function go(s){S.stage=s;render();}
-function render(){const c=C[S.diff];if(S.stage==='setup'){document.getElementById('app').innerHTML='<div class="setup-screen"><h1>🦠 The Coughing Crisis</h1><p style="color:var(--muted);margin-bottom:32px">Pneumonia: CURB-65, CAP antibiotics, ICU criteria, PCP, duration</p><button class="start-btn" onclick="go(\'pres\')">Begin Case →</button></div>';}else if(S.stage==='pres'){document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Presentation</div><div class="card-title">🫁 Pulmonary Infection</div></div><div class="card-body"><div class="narrative"><span class="hl">'+c.age+'</span> ('+c.wt+')<br><b>Hx:</b> '+c.hx+'<br><b>Exam:</b> '+c.exam+'</div><div class="vitals-grid">'+Object.entries(c.vitals).map(function(e){return'<div class="vital"><div class="vital-label">'+e[0]+'</div><div class="vital-value">'+e[1]+'</div></div>';}).join('')+'</div><div class="lab-grid">'+Object.entries(c.labs).map(function(e){return'<div class="lab-item"><span class="lab-name">'+e[0]+'</span><span class="lab-value">'+e[1]+'</span></div>';}).join('')+'</div><div class="btn-row"><button class="btn btn-primary" onclick="start()">Begin Assessment →</button></div></div></div>';}else if(S.stage==='question'){var q=Q[S.q-1];document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Q'+S.q+'/'+S.total+'</div><div class="card-title">🔍 '+q.t+'</div></div><div class="card-body"><div class="progress-bar"><div class="progress-fill" style="width:'+(S.q/S.total*100)+'%"></div></div><div class="question-header"><div class="question-number">'+S.q+'</div><div style="font-weight:600">'+q.q+'</div></div><div class="hint">💡 '+q.h+'</div><div class="radio-options">'+q.o.map(function(o){return'<div class="radio-option" data-id="'+o.id+'" onclick="pick(\''+o.id+'\')"><div class="radio-circle"></div><div><b>'+o.txt+'</b></div></div>';}).join('')+'</div><div id="fb"></div><div class="btn-row"><button class="btn btn-primary" id="sub" onclick="submit()" disabled>Submit →</button></div></div></div>';}else{var pct=S.max>0?Math.round(S.score/S.max*100):0;document.getElementById('app').innerHTML='<div class="card"><div class="card-body"><div style="text-align:center;padding:40px"><div style="font-size:4rem">'+(pct>=70?'🎉':'📚')+'</div><div style="font-size:2rem;font-weight:700;color:'+(pct>=70?'var(--success)':'var(--warning)')+'">'+(pct>=70?'Complete!':'Review')+'</div></div><div class="score-summary"><div class="score-row"><span>Score</span><span>'+S.score+'/'+S.max+' ('+pct+'%)</span></div></div><div class="pearls-box"><div class="pearls-title">📌 Pneumonia Pearls</div><div class="pearl-item"><b>CURB-65:</b> 0-1=outpatient, 2=admit, ≥3=consider ICU</div><div class="pearl-item"><b>CAP:</b> Ceftriaxone + azithro OR respiratory FQ</div><div class="pearl-item"><b>ICU:</b> Septic shock OR mech vent (major criteria)</div><div class="pearl-item"><b>PCP:</b> TMP-SMX + steroids if PaO2<70</div><div class="pearl-item"><b>Duration:</b> 5 days if improving</div></div><div class="cross-link"><a href="../mechanism/pneumonia-module.html">MechanismDx: Pneumonia</a></div><div class="btn-row" style="justify-content:center;margin-top:30px"><button class="btn btn-primary" onclick="location.reload()">Retry</button><button class="btn btn-link" onclick="location.href=\'adventure-hub.html\'">Back</button></div></div></div>';}}
-document.addEventListener('DOMContentLoaded',render);
-</script>
+    <header class="header"><div class="header-row"><div class="header-title">🫁 The Productive Cough</div><div class="stat"><div class="stat-value" id="scoreDisplay">0</div><div class="stat-label">Points</div></div></div></header>
+    <main class="main"><div id="stageContainer"></div></main>
+    <script>
+    const state = { stage:'setup', score:0 };
+    
+    function addScore(pts) { state.score += pts; document.getElementById('scoreDisplay').textContent = state.score; }
+
+    const stages = {
+        setup: { render: () => `
+            <div class="setup-screen">
+                <h1>🫁 The Productive Cough</h1>
+                <p class="subtitle">Community-acquired pneumonia management</p>
+                <button class="start-btn" onclick="goTo('presentation')">Begin Case →</button>
+            </div>`
+        },
+        presentation: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Emergency Department</div><div class="card-title">📋 Cough and Fever</div></div>
+                <div class="card-body">
+                    <div class="narrative">A <span class="hl">67-year-old male</span> with <span class="hl">COPD</span> and <span class="hl">diabetes</span> presents with <span class="hl">3 days of productive cough</span> with yellow-green sputum, <span class="hl">fever (38.8°C)</span>, and <span class="hl">dyspnea</span>.<br><br>Vitals: BP 118/72, HR 102, RR 24, SpO2 91% on RA. Exam reveals <span class="hl">right lower lobe crackles</span> and <span class="hl">dullness to percussion</span>. He is <span class="hl">oriented but appears ill</span>.</div>
+                    <div class="lab-panel">
+                        <div class="lab-panel-title">Initial Studies</div>
+                        <div class="lab-grid">
+                            <div class="lab-item"><div class="lab-name">WBC</div><div class="lab-value high">16.8 K</div><div class="lab-range">4.5-11</div></div>
+                            <div class="lab-item"><div class="lab-name">BUN</div><div class="lab-value high">24 mg/dL</div><div class="lab-range">7-20</div></div>
+                            <div class="lab-item"><div class="lab-name">Creatinine</div><div class="lab-value">1.1 mg/dL</div><div class="lab-range">0.7-1.3</div></div>
+                            <div class="lab-item"><div class="lab-name">Procalcitonin</div><div class="lab-value high">2.4 ng/mL</div><div class="lab-range">&lt;0.1</div></div>
+                            <div class="lab-item"><div class="lab-name">Lactate</div><div class="lab-value">1.8 mmol/L</div><div class="lab-range">&lt;2</div></div>
+                        </div>
+                    </div>
+                    <div class="alert info"><span class="alert-icon">📷</span><div class="alert-content"><div class="alert-title">Chest X-Ray</div><div class="alert-desc">Right lower lobe consolidation with air bronchograms. No pleural effusion.</div></div></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('severity')">Assess Severity →</button></div>
+                </div>
+            </div>`
+        },
+        severity: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Risk Stratification</div><div class="card-title">📊 CURB-65 Score</div></div>
+                <div class="card-body">
+                    <div class="curb-box">
+                        <div class="curb-title">Calculate CURB-65</div>
+                        <div class="curb-item"><span><strong>C</strong>onfusion</span><span>No = 0</span></div>
+                        <div class="curb-item"><span><strong>U</strong>rea (BUN &gt;19 mg/dL)</span><span>Yes (24) = 1</span></div>
+                        <div class="curb-item"><span><strong>R</strong>espiratory rate ≥30</span><span>No (24) = 0</span></div>
+                        <div class="curb-item"><span><strong>B</strong>P systolic &lt;90 or diastolic ≤60</span><span>No = 0</span></div>
+                        <div class="curb-item"><span>Age ≥<strong>65</strong></span><span>Yes (67) = 1</span></div>
+                        <div class="curb-item" style="background:rgba(139,92,246,0.2);margin-top:8px;padding:12px;border-radius:8px"><span><strong>Total Score</strong></span><span><strong>2</strong></span></div>
+                    </div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">1</div><div class="question-text">Based on CURB-65 score of 2, what is the recommended disposition?</div></div>
+                        <div class="radio-options" id="dispOpts">
+                            <div class="radio-option" data-id="home" onclick="selectDisp('home')"><div class="radio-circle"></div><span>Outpatient treatment (home)</span></div>
+                            <div class="radio-option" data-id="admit" onclick="selectDisp('admit')"><div class="radio-circle"></div><span>Hospital admission (ward)</span></div>
+                            <div class="radio-option" data-id="icu" onclick="selectDisp('icu')"><div class="radio-circle"></div><span>ICU admission</span></div>
+                        </div>
+                    </div>
+                    <div id="dispFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="dispSubmit" onclick="submitDisp()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        workup: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Diagnostics</div><div class="card-title">🧪 Additional Workup</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">2</div><div class="question-text">Which diagnostic studies are recommended for this hospitalized CAP patient?</div></div>
+                        <div class="radio-options" id="workupOpts">
+                            <div class="radio-option" data-id="none" onclick="selectWorkup('none')"><div class="radio-circle"></div><span>No additional workup - treat empirically</span></div>
+                            <div class="radio-option" data-id="sputum" onclick="selectWorkup('sputum')"><div class="radio-circle"></div><span>Sputum culture only</span></div>
+                            <div class="radio-option" data-id="blood_sputum" onclick="selectWorkup('blood_sputum')"><div class="radio-circle"></div><span>Blood cultures + sputum culture</span></div>
+                            <div class="radio-option" data-id="full" onclick="selectWorkup('full')"><div class="radio-circle"></div><span>Blood cultures + sputum + Legionella/pneumococcal urine antigens</span></div>
+                        </div>
+                    </div>
+                    <div id="workupFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="workupSubmit" onclick="submitWorkup()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        antibiotics: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Treatment</div><div class="card-title">💊 Empiric Antibiotics</div></div>
+                <div class="card-body">
+                    <div class="alert info"><span class="alert-icon">📋</span><div class="alert-content"><div class="alert-title">ATS/IDSA Guidelines</div><div class="alert-desc">Empiric therapy should cover typical (S. pneumoniae, H. influenzae, M. catarrhalis) AND atypical (Mycoplasma, Chlamydia, Legionella) pathogens</div></div></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">3</div><div class="question-text">What is the appropriate empiric regimen for non-severe CAP (ward admission)?</div></div>
+                        <div class="radio-options" id="abxOpts">
+                            <div class="radio-option" data-id="azithro" onclick="selectAbx('azithro')"><div class="radio-circle"></div><div><strong>Azithromycin alone</strong><br><small style="color:var(--muted)">Atypical coverage</small></div></div>
+                            <div class="radio-option" data-id="ceftri" onclick="selectAbx('ceftri')"><div class="radio-circle"></div><div><strong>Ceftriaxone alone</strong><br><small style="color:var(--muted)">Typical coverage</small></div></div>
+                            <div class="radio-option" data-id="ceftri_azithro" onclick="selectAbx('ceftri_azithro')"><div class="radio-circle"></div><div><strong>Ceftriaxone + Azithromycin</strong><br><small style="color:var(--muted)">OR respiratory fluoroquinolone alone</small></div></div>
+                            <div class="radio-option" data-id="vanco_zosyn" onclick="selectAbx('vanco_zosyn')"><div class="radio-circle"></div><div><strong>Vancomycin + Piperacillin-tazobactam</strong><br><small style="color:var(--muted)">Broad-spectrum coverage</small></div></div>
+                        </div>
+                    </div>
+                    <div id="abxFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="abxSubmit" onclick="submitAbx()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        steroids: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Adjunctive Therapy</div><div class="card-title">💉 Corticosteroids in CAP</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">4</div><div class="question-text">Should this patient receive corticosteroids?</div></div>
+                        <div class="radio-options" id="steroidOpts">
+                            <div class="radio-option" data-id="yes_all" onclick="selectSteroid('yes_all')"><div class="radio-circle"></div><span>Yes - all hospitalized CAP patients benefit</span></div>
+                            <div class="radio-option" data-id="yes_severe" onclick="selectSteroid('yes_severe')"><div class="radio-circle"></div><span>Yes - but only for severe CAP (ICU-level)</span></div>
+                            <div class="radio-option" data-id="no" onclick="selectSteroid('no')"><div class="radio-circle"></div><span>No - steroids have no role in CAP</span></div>
+                            <div class="radio-option" data-id="maybe" onclick="selectSteroid('maybe')"><div class="radio-circle"></div><span>Consider for severe CAP with high inflammatory markers</span></div>
+                        </div>
+                    </div>
+                    <div id="steroidFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="steroidSubmit" onclick="submitSteroid()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        duration: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Duration</div><div class="card-title">📅 Treatment Duration</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">5</div><div class="question-text">What is the recommended antibiotic duration for uncomplicated CAP?</div></div>
+                        <div class="radio-options" id="durOpts">
+                            <div class="radio-option" data-id="3" onclick="selectDur('3')"><div class="radio-circle"></div><span>3 days</span></div>
+                            <div class="radio-option" data-id="5" onclick="selectDur('5')"><div class="radio-circle"></div><span>5 days (minimum)</span></div>
+                            <div class="radio-option" data-id="10" onclick="selectDur('10')"><div class="radio-circle"></div><span>10-14 days</span></div>
+                            <div class="radio-option" data-id="21" onclick="selectDur('21')"><div class="radio-circle"></div><span>21 days</span></div>
+                        </div>
+                    </div>
+                    <div id="durFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="durSubmit" onclick="submitDur()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        outcome: { render: () => `
+            <div class="card"><div class="card-body">
+                <div class="outcome">
+                    <div class="outcome-icon">🎉</div>
+                    <div class="outcome-title">Patient Recovered!</div>
+                    <div class="outcome-desc">Patient was admitted to the ward and started on ceftriaxone + azithromycin. Sputum culture grew S. pneumoniae. He was afebrile by day 2, transitioned to oral amoxicillin-clavulanate on day 3, and discharged to complete a 5-day total course. Follow-up chest X-ray at 6 weeks showed resolution.</div>
+                </div>
+                <div class="score-summary">
+                    <h3 style="margin-bottom:16px">Performance</h3>
+                    <div class="score-row"><span>Disposition</span><span>${state.dispScore||0}/100</span></div>
+                    <div class="score-row"><span>Workup</span><span>${state.workupScore||0}/100</span></div>
+                    <div class="score-row"><span>Antibiotics</span><span>${state.abxScore||0}/100</span></div>
+                    <div class="score-row"><span>Steroids</span><span>${state.steroidScore||0}/100</span></div>
+                    <div class="score-row"><span>Duration</span><span>${state.durScore||0}/100</span></div>
+                    <div class="score-row" style="border-top:2px solid var(--border);padding-top:12px"><strong>Total</strong><strong>${state.score}</strong></div>
+                </div>
+                <div class="feedback excellent"><div class="feedback-header"><span class="feedback-icon">💡</span><span class="feedback-title">CAP Pearls</span></div><div class="feedback-text">
+                    • <strong>CURB-65:</strong> 0-1 = outpatient, 2 = consider admission, 3+ = hospitalize, 4-5 = ICU<br>
+                    • <strong>Non-severe inpatient CAP:</strong> β-lactam + macrolide OR respiratory FQ alone<br>
+                    • <strong>Severe CAP (ICU):</strong> β-lactam + macrolide OR β-lactam + FQ (not FQ alone)<br>
+                    • <strong>Duration:</strong> Minimum 5 days, can stop when afebrile 48h and clinically stable<br>
+                    • <strong>Steroids:</strong> May benefit severe CAP with high CRP/inflammatory markers<br>
+                    • <strong>MRSA/Pseudomonas:</strong> Only add if risk factors (prior culture, severe CAP, recent hospitalization)<br>
+                    • <strong>Procalcitonin:</strong> Can guide antibiotic de-escalation (stop when &lt;0.25 or ↓80%)
+                </div></div>
+                <div class="curb-box">
+                    <div class="curb-title">CURB-65 Interpretation</div>
+                    <div class="curb-item"><span>Score 0-1</span><span>Low risk (1-3% mortality) → Outpatient</span></div>
+                    <div class="curb-item"><span>Score 2</span><span>Intermediate (9% mortality) → Consider admission</span></div>
+                    <div class="curb-item"><span>Score 3-5</span><span>High risk (15-40% mortality) → Hospitalize/ICU</span></div>
+                </div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Play Again</button></div>
+            </div></div>`
+        }
+    };
+
+    let selectedDisp = null;
+    function selectDisp(id) { selectedDisp = id; document.querySelectorAll('#dispOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('dispSubmit').disabled = false; }
+    function submitDisp() {
+        document.querySelectorAll('#dispOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'admit') o.classList.add('correct');
+            else if (o.dataset.id === selectedDisp) o.classList.add('incorrect');
+        });
+        state.dispScore = selectedDisp === 'admit' ? 100 : 40;
+        addScore(selectedDisp === 'admit' ? 40 : 15);
+        document.getElementById('dispFeedback').innerHTML = `<div class="feedback ${selectedDisp==='admit'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedDisp==='admit'?'✅':'📚'}</span><span class="feedback-title">${selectedDisp==='admit'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>CURB-65 = 2:</strong> Intermediate risk (~9% mortality), hospital admission recommended. Score 0-1 = outpatient, Score ≥3 = consider ICU. Also factor in hypoxia (SpO2 91%), comorbidities (COPD, DM).</div></div>`;
+        document.getElementById('dispSubmit').textContent = 'Continue →';
+        document.getElementById('dispSubmit').onclick = () => goTo('workup');
+    }
+
+    let selectedWorkup = null;
+    function selectWorkup(id) { selectedWorkup = id; document.querySelectorAll('#workupOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('workupSubmit').disabled = false; }
+    function submitWorkup() {
+        document.querySelectorAll('#workupOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'blood_sputum') o.classList.add('correct');
+            else if (o.dataset.id === selectedWorkup) o.classList.add('incorrect');
+        });
+        state.workupScore = selectedWorkup === 'blood_sputum' ? 100 : (selectedWorkup === 'full' ? 80 : 40);
+        addScore(selectedWorkup === 'blood_sputum' ? 30 : (selectedWorkup === 'full' ? 25 : 10));
+        document.getElementById('workupFeedback').innerHTML = `<div class="feedback ${selectedWorkup==='blood_sputum'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedWorkup==='blood_sputum'?'✅':'📚'}</span><span class="feedback-title">${selectedWorkup==='blood_sputum'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Non-severe inpatient CAP:</strong> Blood cultures + sputum culture recommended<br><strong>Urine antigens:</strong> Add for severe CAP or specific risk factors (Legionella outbreaks, travel)</div></div>`;
+        document.getElementById('workupSubmit').textContent = 'Continue →';
+        document.getElementById('workupSubmit').onclick = () => goTo('antibiotics');
+    }
+
+    let selectedAbx = null;
+    function selectAbx(id) { selectedAbx = id; document.querySelectorAll('#abxOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('abxSubmit').disabled = false; }
+    function submitAbx() {
+        document.querySelectorAll('#abxOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'ceftri_azithro') o.classList.add('correct');
+            else if (o.dataset.id === selectedAbx) o.classList.add('incorrect');
+        });
+        state.abxScore = selectedAbx === 'ceftri_azithro' ? 100 : 40;
+        addScore(selectedAbx === 'ceftri_azithro' ? 40 : 15);
+        document.getElementById('abxFeedback').innerHTML = `<div class="feedback ${selectedAbx==='ceftri_azithro'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedAbx==='ceftri_azithro'?'✅':'📚'}</span><span class="feedback-title">${selectedAbx==='ceftri_azithro'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Non-severe inpatient CAP:</strong> β-lactam (ceftriaxone, ampicillin-sulbactam) + macrolide (azithromycin) OR respiratory FQ alone (levofloxacin, moxifloxacin)<br><strong>Rationale:</strong> Must cover both typical AND atypical pathogens</div></div>`;
+        document.getElementById('abxSubmit').textContent = 'Continue →';
+        document.getElementById('abxSubmit').onclick = () => goTo('steroids');
+    }
+
+    let selectedSteroid = null;
+    function selectSteroid(id) { selectedSteroid = id; document.querySelectorAll('#steroidOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('steroidSubmit').disabled = false; }
+    function submitSteroid() {
+        document.querySelectorAll('#steroidOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'maybe') o.classList.add('correct');
+            else if (o.dataset.id === selectedSteroid) o.classList.add('incorrect');
+        });
+        state.steroidScore = selectedSteroid === 'maybe' ? 100 : (selectedSteroid === 'yes_severe' ? 70 : 40);
+        addScore(selectedSteroid === 'maybe' ? 30 : (selectedSteroid === 'yes_severe' ? 20 : 10));
+        document.getElementById('steroidFeedback').innerHTML = `<div class="feedback ${selectedSteroid==='maybe'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedSteroid==='maybe'?'✅':'📚'}</span><span class="feedback-title">${selectedSteroid==='maybe'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Steroids in CAP:</strong> Consider for severe CAP with high inflammatory markers (CRP &gt;150 mg/L). Recent trials suggest benefit in reducing mortality and treatment failure. Not routinely recommended for non-severe CAP.</div></div>`;
+        document.getElementById('steroidSubmit').textContent = 'Continue →';
+        document.getElementById('steroidSubmit').onclick = () => goTo('duration');
+    }
+
+    let selectedDur = null;
+    function selectDur(id) { selectedDur = id; document.querySelectorAll('#durOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('durSubmit').disabled = false; }
+    function submitDur() {
+        document.querySelectorAll('#durOpts .radio-option').forEach(o => {
+            if (o.dataset.id === '5') o.classList.add('correct');
+            else if (o.dataset.id === selectedDur) o.classList.add('incorrect');
+        });
+        state.durScore = selectedDur === '5' ? 100 : 40;
+        addScore(selectedDur === '5' ? 40 : 15);
+        document.getElementById('durFeedback').innerHTML = `<div class="feedback ${selectedDur==='5'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedDur==='5'?'✅':'📚'}</span><span class="feedback-title">${selectedDur==='5'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Duration:</strong> Minimum 5 days for uncomplicated CAP. Can discontinue when afebrile ≥48h and clinically stable. Longer courses (7-14 days) only for complications (empyema, lung abscess, certain pathogens).</div></div>`;
+        document.getElementById('durSubmit').textContent = 'Complete →';
+        document.getElementById('durSubmit').onclick = () => goTo('outcome');
+    }
+
+    function goTo(id) { state.stage = id; document.getElementById('stageContainer').innerHTML = stages[id].render(); window.scrollTo(0,0); }
+    document.addEventListener('DOMContentLoaded', () => goTo('setup'));
+    </script>
 </body>
 </html>

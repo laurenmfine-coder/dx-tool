@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Allergic Reaction | ReasonDx Adventure</title>
+    <style>
+        :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #DC2626; --success: #10B981; --warning: #F59E0B; --danger: #DC2626; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #7F1D1D 0%, #DC2626 100%); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; }
+        .header-controls { display: flex; gap: 12px; align-items: center; }
+        .difficulty-toggle { display: flex; background: rgba(0,0,0,0.3); border-radius: 8px; overflow: hidden; }
+        .diff-btn { padding: 6px 12px; font-size: 0.75rem; cursor: pointer; border: none; background: transparent; color: rgba(255,255,255,0.7); font-weight: 600; transition: all 0.2s; }
+        .diff-btn.active { background: rgba(255,255,255,0.2); color: white; }
+        .diff-btn:hover { background: rgba(255,255,255,0.1); }
+        .stat { text-align: center; background: rgba(0,0,0,0.2); padding: 6px 14px; border-radius: 8px; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        .main { max-width: 900px; margin: 0 auto; padding: 24px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(220,38,38,0.1), rgba(185,28,28,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; line-height: 1.8; }
+        .narrative .hl { background: rgba(220,38,38,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        .setup-screen { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; }
+        .setup-screen h1 { font-size: 2rem; margin-bottom: 8px; }
+        .setup-screen .subtitle { color: var(--muted); margin-bottom: 32px; }
+        .start-btn { background: var(--accent); color: white; border: none; padding: 16px 48px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+        .question-section { margin-bottom: 32px; }
+        .question-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .question-number { background: var(--accent); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .question-text { font-size: 1.1rem; font-weight: 600; }
+        .hint { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-size: 0.9rem; color: #93C5FD; }
+        .hint-label { font-weight: 600; color: #60A5FA; }
+        .radio-options { display: flex; flex-direction: column; gap: 10px; }
+        .radio-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .radio-option:hover { border-color: var(--accent); }
+        .radio-option.selected { border-color: var(--accent); background: rgba(220,38,38,0.15); }
+        .radio-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .radio-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .radio-circle { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; }
+        .radio-option.selected .radio-circle { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 40%, transparent 40%); }
+        .feedback { padding: 20px; border-radius: 12px; margin: 20px 0; }
+        .feedback.excellent { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .feedback.acceptable { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .feedback-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .feedback-icon { font-size: 1.5rem; }
+        .feedback-title { font-weight: 700; }
+        .feedback-text { color: var(--muted); line-height: 1.7; }
+        .feedback-text strong { color: var(--text); }
+        .reference-box { background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.3); border-radius: 8px; padding: 12px 16px; margin-top: 16px; }
+        .reference-box a { color: #60A5FA; text-decoration: none; }
+        .reference-box a:hover { text-decoration: underline; }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-row { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+        .btn-link { background: transparent; border: 2px solid var(--border); color: var(--text); }
+        .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 12px; margin: 20px 0; }
+        .vital { background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; text-align: center; }
+        .vital.critical { background: rgba(220,38,38,0.2); border: 1px solid rgba(220,38,38,0.4); }
+        .vital-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; }
+        .vital-value { font-size: 1.3rem; font-weight: 700; font-family: monospace; }
+        .symptom-list { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+        .symptom-item { padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; }
+        .symptom-item:last-child { border-bottom: none; }
+        .outcome { text-align: center; padding: 40px 20px; }
+        .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
+        .outcome-title { font-size: 2rem; font-weight: 700; color: var(--success); margin-bottom: 8px; }
+        .outcome-desc { color: var(--muted); max-width: 600px; margin: 0 auto 24px; }
+        .score-summary { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 24px; margin: 24px auto; max-width: 500px; }
+        .score-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .score-row:last-child { border-bottom: none; }
+        .cross-link { background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.3); border-radius: 8px; padding: 12px 16px; margin-top: 12px; }
+        .cross-link-title { font-weight: 600; color: #A78BFA; margin-bottom: 8px; }
+        .cross-link a { color: #C4B5FD; text-decoration: none; margin-right: 16px; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-row">
+            <div class="header-title">🚨 The Allergic Reaction</div>
+            <div class="header-controls">
+                <div class="difficulty-toggle">
+                    <button class="diff-btn active" data-level="easy" onclick="setDifficulty('easy')">Easy</button>
+                    <button class="diff-btn" data-level="intermediate" onclick="setDifficulty('intermediate')">Intermediate</button>
+                    <button class="diff-btn" data-level="advanced" onclick="setDifficulty('advanced')">Advanced</button>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="scoreDisplay">0</div>
+                    <div class="stat-label">Points</div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="main"><div id="stageContainer"></div></main>
+
+    <script>
+    // STATE
+    const state = { 
+        stage: 'setup', 
+        score: 0, 
+        difficulty: 'easy',
+        answers: {}
+    };
+
+    // DIFFICULTY CONFIGURATIONS
+    const difficultyConfig = {
+        easy: {
+            label: 'Easy (UME)',
+            presentation: 'classic',
+            hints: true,
+            passingScore: 70,
+            feedbackStyle: 'teaching',
+            timeLimit: null,
+            distractors: 3
+        },
+        intermediate: {
+            label: 'Intermediate (GME)',
+            presentation: 'atypical',
+            hints: false,
+            passingScore: 80,
+            feedbackStyle: 'efficiency',
+            timeLimit: 300,
+            distractors: 4
+        },
+        advanced: {
+            label: 'Advanced (CME)',
+            presentation: 'complex',
+            hints: false,
+            passingScore: 90,
+            feedbackStyle: 'guideline',
+            timeLimit: 180,
+            distractors: 5
+        }
+    };
+
+    // CASE CONTENT BY DIFFICULTY
+    const caseContent = {
+        easy: {
+            age: '16-year-old',
+            setting: 'restaurant',
+            trigger: 'peanuts',
+            symptoms: [
+                '🔴 Hives spreading across face, neck, chest',
+                '🔴 Lip and tongue swelling',
+                '🔴 Throat tightness, difficulty swallowing',
+                '🔴 Wheezing, shortness of breath',
+                '🟡 Nausea, abdominal cramping'
+            ],
+            vitals: { BP: '88/50', HR: '128', RR: '28', SpO2: '91%' }
+        },
+        intermediate: {
+            age: '45-year-old',
+            setting: 'office after lunch',
+            trigger: 'unknown - ate salad with multiple ingredients',
+            symptoms: [
+                '🔴 Diffuse flushing (no discrete hives)',
+                '🔴 Voice change, "lump in throat"',
+                '🟡 Lightheadedness, feeling "off"',
+                '🟡 Mild wheezing',
+                '🟡 Pruritus without visible rash'
+            ],
+            vitals: { BP: '95/60', HR: '108', RR: '22', SpO2: '94%' }
+        },
+        advanced: {
+            age: '68-year-old on beta-blocker',
+            setting: 'post-CT contrast',
+            trigger: 'IV contrast 20 minutes ago',
+            symptoms: [
+                '🔴 Profound hypotension refractory to initial fluids',
+                '🔴 Bradycardia (on beta-blocker)',
+                '🟡 Subtle facial flushing',
+                '🟡 Vague abdominal discomfort',
+                '⚪ No visible urticaria'
+            ],
+            vitals: { BP: '72/40', HR: '52', RR: '24', SpO2: '89%' }
+        }
+    };
+
+    function setDifficulty(level) {
+        state.difficulty = level;
+        document.querySelectorAll('.diff-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.level === level);
+        });
+        if (state.stage !== 'setup') {
+            state.stage = 'setup';
+            state.score = 0;
+            state.answers = {};
+            document.getElementById('scoreDisplay').textContent = '0';
+        }
+        render();
+    }
+
+    function addScore(pts) { 
+        state.score += pts; 
+        document.getElementById('scoreDisplay').textContent = state.score; 
+    }
+
+    const stages = {
+        setup: {
+            render: () => {
+                const config = difficultyConfig[state.difficulty];
+                return `
+                <div class="setup-screen">
+                    <h1>🚨 The Allergic Reaction</h1>
+                    <p class="subtitle">Active learning case: You make the diagnosis</p>
+                    <div style="background: rgba(220,38,38,0.1); border-radius: 12px; padding: 20px; margin: 20px 0; text-align: left;">
+                        <div style="font-weight: 600; margin-bottom: 8px;">Current Difficulty: ${config.label}</div>
+                        <div style="font-size: 0.9rem; color: var(--muted);">
+                            ${config.hints ? '✅ Hints enabled' : '❌ No hints'} • 
+                            ${config.timeLimit ? `⏱️ ${config.timeLimit}s time limit` : '⏱️ Untimed'} • 
+                            Pass: ${config.passingScore}%
+                        </div>
+                    </div>
+                    <button class="start-btn" onclick="goTo('presentation')">Begin Case →</button>
+                </div>`;
+            }
+        },
+
+        presentation: {
+            render: () => {
+                const content = caseContent[state.difficulty];
+                const config = difficultyConfig[state.difficulty];
+                return `
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-phase">Initial Presentation</div>
+                        <div class="card-title">📋 Acute Reaction</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="narrative">
+                            A <span class="hl">${content.age}</span> ${state.difficulty === 'easy' ? 'female' : 'patient'} is brought to you ${content.setting === 'restaurant' ? 'at a restaurant where you are dining' : 'in the ' + content.setting}. 
+                            ${content.trigger.includes('peanuts') ? 
+                                `She just ate food containing <span class="hl">${content.trigger}</span>.` : 
+                                `History: <span class="hl">${content.trigger}</span>.`}
+                        </div>
+                        
+                        <div class="symptom-list">
+                            <div style="font-weight: 600; margin-bottom: 12px; color: var(--accent);">Observed Findings:</div>
+                            ${content.symptoms.map(s => `<div class="symptom-item">${s}</div>`).join('')}
+                        </div>
+
+                        <div class="vitals-grid">
+                            <div class="vital ${parseInt(content.vitals.BP) < 90 ? 'critical' : ''}">
+                                <div class="vital-label">BP</div>
+                                <div class="vital-value">${content.vitals.BP}</div>
+                            </div>
+                            <div class="vital ${parseInt(content.vitals.HR) > 100 ? 'critical' : ''}">
+                                <div class="vital-label">HR</div>
+                                <div class="vital-value">${content.vitals.HR}</div>
+                            </div>
+                            <div class="vital">
+                                <div class="vital-label">RR</div>
+                                <div class="vital-value">${content.vitals.RR}</div>
+                            </div>
+                            <div class="vital ${parseInt(content.vitals.SpO2) < 94 ? 'critical' : ''}">
+                                <div class="vital-label">SpO2</div>
+                                <div class="vital-value">${content.vitals.SpO2}</div>
+                            </div>
+                        </div>
+
+                        <div class="btn-row">
+                            <button class="btn btn-primary" onclick="goTo('q1_diagnosis')">What is the Diagnosis? →</button>
+                        </div>
+                    </div>
+                </div>`;
+            }
+        },
+
+        q1_diagnosis: {
+            render: () => {
+                const config = difficultyConfig[state.difficulty];
+                const hint = config.hints ? `
+                    <div class="hint">
+                        <span class="hint-label">💡 Hint:</span> Consider the combination of multi-system involvement (skin + respiratory + cardiovascular) with rapid onset after exposure.
+                    </div>` : '';
+                
+                const options = state.difficulty === 'easy' ? [
+                    { id: 'anaphylaxis', text: 'Anaphylaxis', desc: 'Severe allergic reaction involving multiple organ systems' },
+                    { id: 'urticaria', text: 'Acute urticaria', desc: 'Hives without systemic involvement' },
+                    { id: 'panic', text: 'Panic attack', desc: 'Anxiety with hyperventilation' }
+                ] : state.difficulty === 'intermediate' ? [
+                    { id: 'anaphylaxis', text: 'Anaphylaxis', desc: 'Type I hypersensitivity reaction' },
+                    { id: 'urticaria', text: 'Acute urticaria with angioedema', desc: 'Limited to skin/mucosal' },
+                    { id: 'vasovagal', text: 'Vasovagal syncope', desc: 'Neurocardiogenic' },
+                    { id: 'asthma', text: 'Acute asthma exacerbation', desc: 'Isolated respiratory' }
+                ] : [
+                    { id: 'anaphylaxis', text: 'Anaphylaxis', desc: 'Despite atypical features (bradycardia, minimal skin findings)' },
+                    { id: 'contrast', text: 'Non-allergic contrast reaction', desc: 'Direct mast cell activation' },
+                    { id: 'cardiogenic', text: 'Cardiogenic shock', desc: 'Primary cardiac event' },
+                    { id: 'sepsis', text: 'Early sepsis', desc: 'Distributive shock' },
+                    { id: 'vasovagal', text: 'Severe vasovagal episode', desc: 'Neurocardiogenic' }
+                ];
+
+                return `
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-phase">Question 1 of 5</div>
+                        <div class="card-title">🔍 Identify the Diagnosis</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="question-section">
+                            <div class="question-header">
+                                <div class="question-number">1</div>
+                                <div class="question-text">Based on this presentation, what is the MOST likely diagnosis?</div>
+                            </div>
+                            ${hint}
+                            <div class="radio-options" id="q1Opts">
+                                ${options.map(o => `
+                                    <div class="radio-option" data-id="${o.id}" onclick="selectQ1('${o.id}')">
+                                        <div class="radio-circle"></div>
+                                        <div>
+                                            <strong>${o.text}</strong><br>
+                                            <small style="color:var(--muted)">${o.desc}</small>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                        <div id="q1Feedback"></div>
+                        <div class="btn-row">
+                            <button class="btn btn-primary" id="q1Submit" onclick="submitQ1()" disabled>Submit →</button>
+                        </div>
+                    </div>
+                </div>`;
+            }
+        },
+
+        q2_criteria: {
+            render: () => {
+                const config = difficultyConfig[state.difficulty];
+                const hint = config.hints ? `
+                    <div class="hint">
+                        <span class="hint-label">💡 Hint:</span> The NIAID/FAAN criteria include 3 scenarios. This patient had a known allergen exposure followed by rapid onset of symptoms involving skin AND respiratory OR hypotension.
+                    </div>` : '';
+
+                return `
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-phase">Question 2 of 5</div>
+                        <div class="card-title">📋 Apply Diagnostic Criteria</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="question-section">
+                            <div class="question-header">
+                                <div class="question-number">2</div>
+                                <div class="question-text">According to the NIAID/FAAN clinical criteria, anaphylaxis is highly likely when:</div>
+                            </div>
+                            ${hint}
+                            <div class="radio-options" id="q2Opts">
+                                <div class="radio-option" data-id="correct" onclick="selectQ2('correct')">
+                                    <div class="radio-circle"></div>
+                                    <div>
+                                        <strong>Acute onset (minutes to hours) with involvement of skin/mucosal tissue AND respiratory compromise OR hypotension</strong><br>
+                                        <small style="color:var(--muted)">After exposure to likely allergen</small>
+                                    </div>
+                                </div>
+                                <div class="radio-option" data-id="skinonly" onclick="selectQ2('skinonly')">
+                                    <div class="radio-circle"></div>
+                                    <div>
+                                        <strong>Any allergic skin reaction (hives or angioedema)</strong><br>
+                                        <small style="color:var(--muted)">Skin involvement alone is sufficient</small>
+                                    </div>
+                                </div>
+                                <div class="radio-option" data-id="bp" onclick="selectQ2('bp')">
+                                    <div class="radio-circle"></div>
+                                    <div>
+                                        <strong>Only if systolic BP drops below 90 mmHg</strong><br>
+                                        <small style="color:var(--muted)">Hypotension is required</small>
+                                    </div>
+                                </div>
+                                <div class="radio-option" data-id="ige" onclick="selectQ2('ige')">
+                                    <div class="radio-circle"></div>
+                                    <div>
+                                        <strong>Positive IgE test to the suspected allergen</strong><br>
+                                        <small style="color:var(--muted)">Laboratory confirmation required</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="q2Feedback"></div>
+                        <div class="btn-row">
+                            <button class="btn btn-primary" id="q2Submit" onclick="submitQ2()" disabled>Submit →</button>
+                        </div>
+                    </div>
+                </div>`;
+            }
+        },
+
+        q3_severity: {
+            render: () => {
+                const content = caseContent[state.difficulty];
+                const config = difficultyConfig[state.difficulty];
+                const hint = config.hints ? `
+                    <div class="hint">
+                        <span class="hint-label">💡 Hint:</span> Grade severity based on the MOST affected organ system. Hypotension and/or hypoxia indicate severe disease regardless of skin findings.
+                    </div>` : '';
+
+                return `
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-phase">Question 3 of 5</div>
+                        <div class="card-title">📊 Classify Severity</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="question-section">
+                            <div class="question-header">
+                                <div class="question-number">3</div>
+                                <div class="question-text">Based on the clinical findings (BP ${content.vitals.BP}, SpO2 ${content.vitals.SpO2}), what is the severity grade?</div>
+                            </div>
+                            ${hint}
+                            <div class="radio-options" id="q3Opts">
+                                <div class="radio-option" data-id="severe" onclick="selectQ3('severe')">
+                                    <div class="radio-circle"></div>
+                                    <div>
+                                        <strong>SEVERE (Grade 3-4)</strong><br>
+                                        <small style="color:var(--muted)">Hypotension and/or severe respiratory compromise</small>
+                                    </div>
+                                </div>
+                                <div class="radio-option" data-id="moderate" onclick="selectQ3('moderate')">
+                                    <div class="radio-circle"></div>
+                                    <div>
+                                        <strong>MODERATE (Grade 2)</strong><br>
+                                        <small style="color:var(--muted)">Respiratory symptoms without hypotension</small>
+                                    </div>
+                                </div>
+                                <div class="radio-option" data-id="mild" onclick="selectQ3('mild')">
+                                    <div class="radio-circle"></div>
+                                    <div>
+                                        <strong>MILD (Grade 1)</strong><br>
+                                        <small style="color:var(--muted)">Skin/mucosal symptoms only</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="q3Feedback"></div>
+                        <div class="btn-row">
+                            <button class="btn btn-primary" id="q3Submit" onclick="submitQ3()" disabled>Submit →</button>
+                        </div>
+                    </div>
+                </div>`;
+            }
+        },
+
+        q4_treatment: {
+            render: () => {
+                const config = difficultyConfig[state.difficulty];
+                const hint = config.hints ? `
+                    <div class="hint">
+                        <span class="hint-label">💡 Hint:</span> Think about which medication addresses the underlying pathophysiology (mast cell mediator release) and reverses bronchospasm AND hypotension simultaneously.
+                    </div>` : '';
+
+                return `
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-phase">Question 4 of 5</div>
+                        <div class="card-title">💊 First-Line Treatment</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="question-section">
+                            <div class="question-header">
+                                <div class="question-number">4</div>
+                                <div class="question-text">What is the FIRST medication that should be administered?</div>
+                            </div>
+                            ${hint}
+                            <div class="radio-options" id="q4Opts">
+                                <div class="radio-option" data-id="epinephrine" onclick="selectQ4('epinephrine')">
+                                    <div class="radio-circle"></div>
+                                    <div>
+                                        <strong>Epinephrine (intramuscular)</strong><br>
+                                        <small style="color:var(--muted)">0.3-0.5 mg IM (1:1000) into lateral thigh</small>
+                                    </div>
+                                </div>
+                                <div class="radio-option" data-id="benadryl" onclick="selectQ4('benadryl')">
+                                    <div class="radio-circle"></div>
+                                    <div>
+                                        <strong>Diphenhydramine (IV/IM)</strong><br>
+                                        <small style="color:var(--muted)">H1-antihistamine</small>
+                                    </div>
+                                </div>
+                                <div class="radio-option" data-id="steroids" onclick="selectQ4('steroids')">
+                                    <div class="radio-circle"></div>
+                                    <div>
+                                        <strong>Methylprednisolone (IV)</strong><br>
+                                        <small style="color:var(--muted)">Systemic corticosteroid</small>
+                                    </div>
+                                </div>
+                                <div class="radio-option" data-id="albuterol" onclick="selectQ4('albuterol')">
+                                    <div class="radio-circle"></div>
+                                    <div>
+                                        <strong>Albuterol (nebulized)</strong><br>
+                                        <small style="color:var(--muted)">Beta-2 agonist bronchodilator</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="q4Feedback"></div>
+                        <div class="btn-row">
+                            <button class="btn btn-primary" id="q4Submit" onclick="submitQ4()" disabled>Submit →</button>
+                        </div>
+                    </div>
+                </div>`;
+            }
+        },
+
+        q5_pitfall: {
+            render: () => {
+                const advancedPitfall = state.difficulty === 'advanced' ? `
+                    <div class="radio-option" data-id="glucagon" onclick="selectQ5('glucagon')">
+                        <div class="radio-circle"></div>
+                        <div>
+                            <strong>Forgetting glucagon in beta-blocker patients</strong><br>
+                            <small style="color:var(--muted)">Epinephrine may be less effective</small>
+                        </div>
+                    </div>` : '';
+
+                return `
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-phase">Question 5 of 5</div>
+                        <div class="card-title">⚠️ Recognize the Pitfall</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="question-section">
+                            <div class="question-header">
+                                <div class="question-number">5</div>
+                                <div class="question-text">What is the MOST dangerous error in anaphylaxis management?</div>
+                            </div>
+                            <div class="radio-options" id="q5Opts">
+                                <div class="radio-option" data-id="delay" onclick="selectQ5('delay')">
+                                    <div class="radio-circle"></div>
+                                    <div>
+                                        <strong>Delaying epinephrine while giving antihistamines/steroids</strong><br>
+                                        <small style="color:var(--muted)">Adjuncts don't treat the core pathophysiology</small>
+                                    </div>
+                                </div>
+                                <div class="radio-option" data-id="lowdose" onclick="selectQ5('lowdose')">
+                                    <div class="radio-circle"></div>
+                                    <div>
+                                        <strong>Using too low a dose of epinephrine</strong><br>
+                                        <small style="color:var(--muted)">Underdosing is ineffective</small>
+                                    </div>
+                                </div>
+                                <div class="radio-option" data-id="iv" onclick="selectQ5('iv')">
+                                    <div class="radio-circle"></div>
+                                    <div>
+                                        <strong>Giving IV epinephrine without dilution</strong><br>
+                                        <small style="color:var(--muted)">Risk of arrhythmia</small>
+                                    </div>
+                                </div>
+                                ${advancedPitfall}
+                            </div>
+                        </div>
+                        <div id="q5Feedback"></div>
+                        <div class="btn-row">
+                            <button class="btn btn-primary" id="q5Submit" onclick="submitQ5()" disabled>Submit →</button>
+                        </div>
+                    </div>
+                </div>`;
+            }
+        },
+
+        outcome: {
+            render: () => {
+                const config = difficultyConfig[state.difficulty];
+                const maxScore = 500;
+                const percentage = Math.round((state.score / maxScore) * 100);
+                const passed = percentage >= config.passingScore;
+
+                return `
+                <div class="card">
+                    <div class="card-body">
+                        <div class="outcome">
+                            <div class="outcome-icon">${passed ? '🎉' : '📚'}</div>
+                            <div class="outcome-title" style="color: ${passed ? 'var(--success)' : 'var(--warning)'}">
+                                ${passed ? 'Case Complete!' : 'Keep Learning'}
+                            </div>
+                            <div class="outcome-desc">
+                                ${passed ? 
+                                    'Epinephrine was given immediately. The patient responded well and was observed for 4-6 hours for biphasic reaction. She was discharged with an epinephrine auto-injector prescription and allergy referral.' :
+                                    `You scored ${percentage}% (passing: ${config.passingScore}%). Review the key concepts below and try again.`}
+                            </div>
+                        </div>
+
+                        <div class="score-summary">
+                            <h3 style="margin-bottom:16px">Performance (${config.label})</h3>
+                            <div class="score-row"><span>Recognition</span><span>${state.answers.q1 === 'anaphylaxis' ? '100' : '0'}/100</span></div>
+                            <div class="score-row"><span>Criteria</span><span>${state.answers.q2 === 'correct' ? '100' : '0'}/100</span></div>
+                            <div class="score-row"><span>Severity</span><span>${state.answers.q3 === 'severe' ? '100' : '0'}/100</span></div>
+                            <div class="score-row"><span>Treatment</span><span>${state.answers.q4 === 'epinephrine' ? '100' : '0'}/100</span></div>
+                            <div class="score-row"><span>Pitfall</span><span>${state.answers.q5 === 'delay' ? '100' : '0'}/100</span></div>
+                            <div class="score-row" style="border-top:2px solid var(--border);padding-top:12px">
+                                <strong>Total</strong>
+                                <strong>${state.score}/500 (${percentage}%)</strong>
+                            </div>
+                        </div>
+
+                        <div class="feedback excellent">
+                            <div class="feedback-header">
+                                <span class="feedback-icon">💡</span>
+                                <span class="feedback-title">Key Concepts</span>
+                            </div>
+                            <div class="feedback-text">
+                                • <strong>NIAID/FAAN Criteria:</strong> Acute onset + skin/mucosal involvement + respiratory OR hypotension (after likely allergen)<br>
+                                • <strong>Epinephrine is FIRST-LINE</strong> - antihistamines and steroids are adjuncts only<br>
+                                • <strong>IM into lateral thigh</strong> - best absorption even through clothing<br>
+                                • <strong>Dose:</strong> 0.3-0.5mg adults (1:1000), repeat q5-15 min as needed<br>
+                                • <strong>Biphasic reactions:</strong> Up to 20% - observe 4-6 hours minimum<br>
+                                • <strong>Beta-blocker patients:</strong> May need glucagon if refractory to epinephrine
+                            </div>
+                        </div>
+
+                        <div class="reference-box">
+                            <strong>📚 Evidence-Based References:</strong><br>
+                            <a href="https://www.aaaai.org/Aaaai/media/MediaLibrary/PDF%20Documents/Practice%20and%20Parameters/Anaphylaxis-2015.pdf" target="_blank">AAAAI/ACAAI Anaphylaxis Practice Parameter 2015</a><br>
+                            <a href="https://www.ncbi.nlm.nih.gov/books/NBK482124/" target="_blank">StatPearls: Anaphylaxis</a><br>
+                            <a href="https://www.uptodate.com/contents/anaphylaxis-emergency-treatment" target="_blank">UpToDate: Anaphylaxis Emergency Treatment</a>
+                        </div>
+
+                        <div class="cross-link">
+                            <div class="cross-link-title">🔗 Related DxSuite Modules:</div>
+                            <a href="../mechanism/anaphylaxis-module.html">MechanismDx: Anaphylaxis Pathophysiology</a>
+                            <a href="../mechanism/epinephrine-module.html">MechanismDx: Epinephrine Pharmacology</a>
+                            <a href="../mechanism/type1-hypersensitivity.html">MechanismDx: Type I Hypersensitivity</a>
+                        </div>
+
+                        <div class="btn-row">
+                            <button class="btn btn-primary" onclick="location.reload()">Play Again</button>
+                            <button class="btn btn-link" onclick="setDifficulty('${state.difficulty === 'easy' ? 'intermediate' : state.difficulty === 'intermediate' ? 'advanced' : 'easy'}')">
+                                Try ${state.difficulty === 'easy' ? 'Intermediate' : state.difficulty === 'intermediate' ? 'Advanced' : 'Easy'} Mode
+                            </button>
+                            <button class="btn btn-link" onclick="location.href='adventure-hub.html'">← Back to Cases</button>
+                        </div>
+                    </div>
+                </div>`;
+            }
+        }
+    };
+
+    // Question handlers
+    let selectedQ1 = null;
+    function selectQ1(id) {
+        selectedQ1 = id;
+        document.querySelectorAll('#q1Opts .radio-option').forEach(o => o.classList.toggle('selected', o.dataset.id === id));
+        document.getElementById('q1Submit').disabled = false;
+    }
+
+    function submitQ1() {
+        state.answers.q1 = selectedQ1;
+        const correct = selectedQ1 === 'anaphylaxis';
+        document.querySelectorAll('#q1Opts .radio-option').forEach(o => {
+            if (o.dataset.id === 'anaphylaxis') o.classList.add('correct');
+            else if (o.dataset.id === selectedQ1) o.classList.add('incorrect');
+        });
+        if (correct) addScore(100);
+        
+        const feedback = correct ?
+            `<div class="feedback excellent"><div class="feedback-text"><strong>Correct!</strong> This is anaphylaxis - an acute, potentially life-threatening systemic reaction with multi-organ involvement (skin + respiratory + cardiovascular).</div></div>` :
+            `<div class="feedback acceptable"><div class="feedback-text"><strong>Review:</strong> The combination of rapid onset, skin involvement (hives, angioedema), respiratory compromise (wheezing), AND hypotension after allergen exposure defines anaphylaxis.</div></div>`;
+        
+        document.getElementById('q1Feedback').innerHTML = feedback;
+        document.getElementById('q1Submit').textContent = 'Continue →';
+        document.getElementById('q1Submit').onclick = () => goTo('q2_criteria');
+    }
+
+    let selectedQ2 = null;
+    function selectQ2(id) {
+        selectedQ2 = id;
+        document.querySelectorAll('#q2Opts .radio-option').forEach(o => o.classList.toggle('selected', o.dataset.id === id));
+        document.getElementById('q2Submit').disabled = false;
+    }
+
+    function submitQ2() {
+        state.answers.q2 = selectedQ2;
+        const correct = selectedQ2 === 'correct';
+        document.querySelectorAll('#q2Opts .radio-option').forEach(o => {
+            if (o.dataset.id === 'correct') o.classList.add('correct');
+            else if (o.dataset.id === selectedQ2) o.classList.add('incorrect');
+        });
+        if (correct) addScore(100);
+        
+        document.getElementById('q2Feedback').innerHTML = `<div class="feedback ${correct ? 'excellent' : 'acceptable'}"><div class="feedback-text">${correct ? '<strong>Correct!</strong>' : '<strong>Review:</strong>'} NIAID/FAAN criteria: Anaphylaxis is highly likely when there is acute onset (minutes to hours) of illness with involvement of skin/mucosal tissue AND either respiratory compromise OR reduced BP, after exposure to a likely allergen.</div></div>`;
+        document.getElementById('q2Submit').textContent = 'Continue →';
+        document.getElementById('q2Submit').onclick = () => goTo('q3_severity');
+    }
+
+    let selectedQ3 = null;
+    function selectQ3(id) {
+        selectedQ3 = id;
+        document.querySelectorAll('#q3Opts .radio-option').forEach(o => o.classList.toggle('selected', o.dataset.id === id));
+        document.getElementById('q3Submit').disabled = false;
+    }
+
+    function submitQ3() {
+        state.answers.q3 = selectedQ3;
+        const correct = selectedQ3 === 'severe';
+        document.querySelectorAll('#q3Opts .radio-option').forEach(o => {
+            if (o.dataset.id === 'severe') o.classList.add('correct');
+            else if (o.dataset.id === selectedQ3) o.classList.add('incorrect');
+        });
+        if (correct) addScore(100);
+        
+        document.getElementById('q3Feedback').innerHTML = `<div class="feedback ${correct ? 'excellent' : 'acceptable'}"><div class="feedback-text">${correct ? '<strong>Correct!</strong>' : '<strong>Review:</strong>'} This patient has SEVERE anaphylaxis with hypotension (SBP <90) and hypoxia (SpO2 <94%). Severity is graded by the most affected system - cardiovascular collapse indicates severe/life-threatening disease.</div></div>`;
+        document.getElementById('q3Submit').textContent = 'Continue →';
+        document.getElementById('q3Submit').onclick = () => goTo('q4_treatment');
+    }
+
+    let selectedQ4 = null;
+    function selectQ4(id) {
+        selectedQ4 = id;
+        document.querySelectorAll('#q4Opts .radio-option').forEach(o => o.classList.toggle('selected', o.dataset.id === id));
+        document.getElementById('q4Submit').disabled = false;
+    }
+
+    function submitQ4() {
+        state.answers.q4 = selectedQ4;
+        const correct = selectedQ4 === 'epinephrine';
+        document.querySelectorAll('#q4Opts .radio-option').forEach(o => {
+            if (o.dataset.id === 'epinephrine') o.classList.add('correct');
+            else if (o.dataset.id === selectedQ4) o.classList.add('incorrect');
+        });
+        if (correct) addScore(100);
+        
+        document.getElementById('q4Feedback').innerHTML = `<div class="feedback ${correct ? 'excellent' : 'acceptable'}"><div class="feedback-text">${correct ? '<strong>Correct!</strong>' : '<strong>Critical!</strong>'} <strong>EPINEPHRINE IM is FIRST-LINE.</strong> It is the ONLY medication that addresses all aspects of anaphylaxis: α1-vasoconstriction (↑BP), β1-inotropy (↑CO), β2-bronchodilation, and mast cell stabilization. Antihistamines and steroids are adjuncts only!</div></div>`;
+        document.getElementById('q4Submit').textContent = 'Continue →';
+        document.getElementById('q4Submit').onclick = () => goTo('q5_pitfall');
+    }
+
+    let selectedQ5 = null;
+    function selectQ5(id) {
+        selectedQ5 = id;
+        document.querySelectorAll('#q5Opts .radio-option').forEach(o => o.classList.toggle('selected', o.dataset.id === id));
+        document.getElementById('q5Submit').disabled = false;
+    }
+
+    function submitQ5() {
+        state.answers.q5 = selectedQ5;
+        const correct = selectedQ5 === 'delay';
+        document.querySelectorAll('#q5Opts .radio-option').forEach(o => {
+            if (o.dataset.id === 'delay') o.classList.add('correct');
+            else if (o.dataset.id === selectedQ5) o.classList.add('incorrect');
+        });
+        if (correct) addScore(100);
+        
+        document.getElementById('q5Feedback').innerHTML = `<div class="feedback ${correct ? 'excellent' : 'acceptable'}"><div class="feedback-text">${correct ? '<strong>Correct!</strong>' : '<strong>Remember:</strong>'} <strong>Delayed epinephrine is the #1 cause of anaphylaxis deaths.</strong> Antihistamines relieve itching but don't reverse airway or cardiovascular compromise. Steroids take hours to work. Every minute without epinephrine increases mortality risk.</div></div>`;
+        document.getElementById('q5Submit').textContent = 'Complete Case →';
+        document.getElementById('q5Submit').onclick = () => goTo('outcome');
+    }
+
+    function goTo(stageId) {
+        state.stage = stageId;
+        render();
+        window.scrollTo(0, 0);
+    }
+
+    function render() {
+        const stage = stages[state.stage];
+        if (stage) {
+            document.getElementById('stageContainer').innerHTML = stage.render();
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => render());
+    </script>
+</body>
+</html>

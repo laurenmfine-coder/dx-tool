@@ -3,37 +3,359 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Deadly K | ReasonDx Adventure</title>
-    <style>:root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#F59E0B;--success:#10B981;--warning:#F59E0B;--danger:#DC2626}*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}.header{background:linear-gradient(135deg,#B45309,#F59E0B);padding:12px 20px;position:sticky;top:0;z-index:100}.header-row{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}.diff-toggle{display:flex;background:rgba(0,0,0,.3);border-radius:8px}.diff-btn{padding:6px 12px;font-size:.75rem;cursor:pointer;border:none;background:0 0;color:rgba(255,255,255,.7);font-weight:600}.diff-btn.active{background:rgba(255,255,255,.2);color:#fff}.stat{text-align:center;background:rgba(0,0,0,.2);padding:6px 14px;border-radius:8px}.stat-value{font-size:1.1rem;font-weight:700;font-family:monospace}.stat-label{font-size:.6rem;opacity:.8}.main{max-width:900px;margin:0 auto;padding:24px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px}.card-header{padding:20px 24px;border-bottom:1px solid var(--border)}.card-phase{font-size:.75rem;color:var(--accent);text-transform:uppercase}.card-title{font-size:1.5rem;font-weight:700}.card-body{padding:24px}.narrative{background:rgba(245,158,11,.1);border-left:4px solid var(--accent);padding:20px;border-radius:0 12px 12px 0;margin-bottom:20px}.narrative .hl{background:rgba(245,158,11,.3);padding:2px 6px;border-radius:4px}.setup-screen{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center}.start-btn{background:var(--accent);color:#000;border:none;padding:16px 48px;border-radius:12px;font-size:1.1rem;font-weight:700;cursor:pointer}.hint{background:rgba(59,130,246,.15);padding:12px 16px;border-radius:8px;margin-bottom:16px;color:#93C5FD}.radio-options{display:flex;flex-direction:column;gap:10px}.radio-option{display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(0,0,0,.2);border:2px solid var(--border);border-radius:10px;cursor:pointer}.radio-option.selected{border-color:var(--accent);background:rgba(245,158,11,.15)}.radio-option.correct{border-color:var(--success);background:rgba(16,185,129,.15)}.radio-option.incorrect{border-color:var(--danger);background:rgba(220,38,38,.15)}.radio-circle{width:22px;height:22px;border:2px solid var(--border);border-radius:50%}.radio-option.selected .radio-circle{border-color:var(--accent);background:radial-gradient(circle,var(--accent) 40%,transparent 40%)}.feedback{padding:20px;border-radius:12px;margin:20px 0}.feedback.excellent{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3)}.feedback.incorrect{background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.3)}.btn{padding:14px 28px;border-radius:10px;font-weight:600;cursor:pointer;border:none}.btn-primary{background:var(--accent);color:#000}.btn:disabled{opacity:.5}.btn-row{display:flex;gap:12px;margin-top:24px}.btn-link{background:0 0;border:2px solid var(--border);color:var(--text)}.vitals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:12px;margin:20px 0}.vital{background:rgba(0,0,0,.2);padding:12px;border-radius:10px;text-align:center}.vital-label{font-size:.7rem;color:var(--muted)}.vital-value{font-size:1.3rem;font-weight:700;font-family:monospace}.lab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:16px 0}.lab-item{display:flex;justify-content:space-between;padding:8px 12px;background:rgba(0,0,0,.2);border-radius:6px}.lab-name{color:var(--muted)}.lab-value{font-family:monospace;font-weight:600}.score-summary{background:rgba(0,0,0,.2);border-radius:12px;padding:24px;margin:24px auto;max-width:600px}.score-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}.pearls-box{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:20px;margin-top:20px}.pearls-title{font-weight:700;color:var(--success);margin-bottom:12px}.pearl-item{padding:8px 0;border-bottom:1px solid rgba(16,185,129,.2);font-size:.95rem}.cross-link{background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);border-radius:8px;padding:12px 16px;margin-top:12px}.cross-link a{color:#C4B5FD;text-decoration:none}.progress-bar{background:rgba(255,255,255,.1);border-radius:10px;height:8px;margin:20px 0}.progress-fill{background:var(--accent);height:100%}.question-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}.question-number{background:var(--accent);color:#000;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}</style>
+    <title>The Dangerous Potassium | ReasonDx Adventure</title>
+    <style>
+        :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #F59E0B; --success: #10B981; --warning: #F59E0B; --danger: #DC2626; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #D97706 0%, #F59E0B 100%); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; color: #1a1a1a; }
+        .stat { background: rgba(0,0,0,0.2); padding: 6px 14px; border-radius: 8px; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; color: #1a1a1a; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; color: #1a1a1a; }
+        .main { max-width: 1000px; margin: 0 auto; padding: 24px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(217,119,6,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; line-height: 1.8; }
+        .narrative .hl { background: rgba(245,158,11,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        .setup-screen { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; }
+        .setup-screen h1 { font-size: 2rem; margin-bottom: 8px; }
+        .setup-screen .subtitle { color: var(--muted); margin-bottom: 32px; }
+        .start-btn { background: var(--accent); color: #1a1a1a; border: none; padding: 16px 48px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+        .question-section { margin-bottom: 32px; }
+        .question-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .question-number { background: var(--accent); color: #1a1a1a; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .question-text { font-size: 1.1rem; font-weight: 600; }
+        .radio-options { display: flex; flex-direction: column; gap: 10px; }
+        .radio-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .radio-option:hover { border-color: var(--accent); }
+        .radio-option.selected { border-color: var(--accent); background: rgba(245,158,11,0.15); }
+        .radio-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .radio-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .radio-circle { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; }
+        .radio-option.selected .radio-circle { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 40%, transparent 40%); }
+        .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+        .checkbox-item { display: flex; align-items: center; gap: 10px; padding: 12px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .checkbox-item:hover { border-color: var(--accent); }
+        .checkbox-item.selected { border-color: var(--accent); background: rgba(245,158,11,0.15); }
+        .checkbox-item.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .checkbox-item.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .checkbox-box { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .checkbox-item.selected .checkbox-box { background: var(--accent); border-color: var(--accent); }
+        .checkbox-item.selected .checkbox-box::after { content: '✓'; color: #1a1a1a; font-weight: bold; }
+        .feedback { padding: 20px; border-radius: 12px; margin: 20px 0; }
+        .feedback.excellent { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .feedback.acceptable { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .feedback-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .feedback-icon { font-size: 1.5rem; }
+        .feedback-title { font-weight: 700; }
+        .feedback-text { color: var(--muted); line-height: 1.7; }
+        .feedback-text strong { color: var(--text); }
+        .alert { padding: 16px 20px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
+        .alert.danger { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+        .alert.info { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .alert-icon { font-size: 1.5rem; }
+        .alert-content { flex: 1; }
+        .alert-title { font-weight: 600; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; color: var(--muted); }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: #1a1a1a; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-row { display: flex; gap: 12px; margin-top: 24px; }
+        .lab-panel { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .lab-panel-title { font-weight: 600; margin-bottom: 16px; color: var(--accent); }
+        .lab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; }
+        .lab-item { background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; }
+        .lab-name { font-size: 0.8rem; color: var(--muted); }
+        .lab-value { font-size: 1.1rem; font-weight: 700; }
+        .lab-value.critical { color: var(--danger); }
+        .lab-value.high { color: var(--warning); }
+        .lab-range { font-size: 0.7rem; color: var(--muted); }
+        .ecg-box { background: #1a1a1a; border-radius: 12px; padding: 20px; margin: 20px 0; text-align: center; }
+        .ecg-title { color: var(--accent); font-weight: 600; margin-bottom: 12px; }
+        .ecg-findings { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+        .ecg-finding { background: rgba(220,38,38,0.2); color: var(--danger); padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; }
+        .outcome { text-align: center; padding: 40px 20px; }
+        .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
+        .outcome-title { font-size: 2rem; font-weight: 700; color: var(--success); margin-bottom: 8px; }
+        .outcome-desc { color: var(--muted); max-width: 600px; margin: 0 auto 24px; }
+        .score-summary { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 24px; margin: 24px auto; max-width: 500px; }
+        .score-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .score-row:last-child { border-bottom: none; }
+    </style>
 </head>
 <body>
-    <header class="header"><div class="header-row"><div style="font-weight:600">⚡ The Deadly K</div><div style="display:flex;gap:12px;align-items:center"><div class="diff-toggle"><button class="diff-btn active" onclick="setDiff('easy')">Easy</button><button class="diff-btn" onclick="setDiff('int')">Intermediate</button><button class="diff-btn" onclick="setDiff('adv')">Advanced</button></div><div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Points</div></div></div></div></header>
-    <main class="main"><div id="app"></div></main>
-<script>
-const S={stage:'setup',score:0,max:0,diff:'easy',q:0,total:8};
-const C={easy:{age:'68M',wt:'75kg',hx:'CKD4, missed dialysis x2 sessions, weakness',exam:'Generalized weakness, no distress',vitals:{HR:'58',BP:'152/88',RR:'16'},labs:{K:'6.8',Cr:'6.2',ECG:'Peaked T waves'}},
-int:{age:'72F',wt:'60kg',hx:'CHF on spironolactone+lisinopril, fatigue',exam:'Bradycardic, weak',vitals:{HR:'48',BP:'98/62',RR:'18'},labs:{K:'7.4',Cr:'2.1',ECG:'Widened QRS, peaked T'}},
-adv:{age:'55M',wt:'85kg',hx:'DM, hyperglycemia 800, found unresponsive',exam:'Unresponsive, Kussmaul respirations',vitals:{HR:'42',BP:'78/40',RR:'28'},labs:{K:'8.2',Cr:'4.8',pH:'7.08',ECG:'Sine wave pattern'}}};
-const Q=[
-{t:'ECG Recognition',q:'Peaked T waves, widened QRS. What is the arrhythmia risk?',h:'ECG changes predict cardiac toxicity',o:[{id:'a',txt:'High - can progress to VFib/asystole',c:1,p:100},{id:'b',txt:'Low - just monitor',c:0,p:0},{id:'c',txt:'Moderate',c:0,p:30}],fb:{1:'<b>Correct!</b> ECG progression: Peaked T → PR prolongation → QRS widening → Sine wave → VFib/Asystole. Treat immediately with ECG changes!',0:'<b>Critical!</b> ECG changes = cardiac membrane instability. Can rapidly progress to fatal arrhythmia.'}},
-{t:'First Treatment',q:'K+ 7.4 with widened QRS. FIRST intervention?',h:'Stabilize the membrane before shifting K+',o:[{id:'a',txt:'IV Calcium gluconate (membrane stabilization)',c:1,p:100},{id:'b',txt:'Insulin + glucose',c:0,p:40},{id:'c',txt:'Kayexalate',c:0,p:0}],fb:{1:'<b>Correct!</b> CALCIUM FIRST! Stabilizes cardiac membrane within minutes. Does NOT lower K+, but prevents arrhythmia while you give other treatments.',0:'<b>Order matters:</b> Calcium → Insulin/glucose → Bicarbonate → Dialysis. Calcium first for membrane protection.'}},
-{t:'Calcium Dosing',q:'Calcium gluconate dose for hyperkalemia?',h:'Different preparations have different calcium content',o:[{id:'a',txt:'1-2 g (10-20 mL of 10%) IV over 2-3 min',c:1,p:100},{id:'b',txt:'100 mg IV push',c:0,p:0},{id:'c',txt:'10 g IV',c:0,p:0}],fb:{1:'<b>Correct!</b> Ca gluconate: 1-2 g (10-20 mL of 10% solution) IV over 2-3 min. Can repeat in 5 min if ECG unchanged. CaCl has 3x more calcium (use central line).',0:'<b>Dosing:</b> 1-2 g Ca gluconate IV. Works in 1-3 min, lasts 30-60 min.'}},
-{t:'Shifting K+',q:'Best agent to shift K+ into cells?',h:'Think about mechanism and speed',o:[{id:'a',txt:'Insulin 10U regular + D50 (or D10 if diabetic)',c:1,p:100},{id:'b',txt:'Albuterol alone',c:0,p:50},{id:'c',txt:'Bicarbonate alone',c:0,p:30}],fb:{1:'<b>Correct!</b> Insulin + glucose: Most effective shift. 10U regular + 25g dextrose. Onset 15-30 min. Albuterol additive. Bicarb less effective unless acidotic.',0:'<b>Shift agents:</b> Insulin+glucose most reliable. Monitor glucose for 4-6 hrs (hypoglycemia risk).'}},
-{t:'Glucose Monitoring',q:'After insulin for hyperkalemia, glucose monitoring duration?',h:'Hypoglycemia is common',o:[{id:'a',txt:'Every 1 hr for at least 4-6 hours',c:1,p:100},{id:'b',txt:'Once at 1 hour',c:0,p:20},{id:'c',txt:'No monitoring needed',c:0,p:0}],fb:{1:'<b>Correct!</b> Hypoglycemia occurs in 10-75% of patients. Check glucose q1hr x 4-6 hrs. Give D50 empirically in ESRD patients. D10 infusion safer than bolus.',0:'<b>Safety!</b> Hypoglycemia is major risk. Frequent glucose monitoring mandatory.'}},
-{t:'Removal Agents',q:'Which actually REMOVES K+ from body?',h:'Shift vs remove - different mechanisms',o:[{id:'a',txt:'Dialysis, loop diuretics, Kayexalate/patiromer',c:1,p:100},{id:'b',txt:'Insulin + glucose',c:0,p:0},{id:'c',txt:'Calcium',c:0,p:0}],fb:{1:'<b>Correct!</b> REMOVAL: Dialysis (fastest, most effective), Loop diuretics (if urine output), GI binders (kayexalate, patiromer). Insulin/bicarb/albuterol only SHIFT K+ temporarily.',0:'<b>Shift vs Remove:</b> Calcium=membrane, Insulin/bicarb/albuterol=shift, Dialysis/diuretics/binders=remove.'}},
-{t:'Dialysis Indication',q:'When is emergent dialysis indicated?',h:'Refractory or severe',o:[{id:'a',txt:'K+ >6.5 with ECG changes refractory to medical Rx, or K+ >7 in ESRD',c:1,p:100},{id:'b',txt:'Any K+ >5.5',c:0,p:10},{id:'c',txt:'Never emergent',c:0,p:0}],fb:{1:'<b>Correct!</b> Emergent dialysis: Refractory to medical therapy, severe ECG changes, K+ >6.5 with ECG changes, or ESRD with K+ >7. Hemodialysis removes 25-50 mEq/hr.',0:'<b>Dialysis:</b> Most effective removal. Indicated when medical therapy fails or in ESRD.'}},
-{t:'Avoid in Hyperkalemia',q:'Which medications should be HELD?',h:'Drug causes matter',o:[{id:'a',txt:'ACEi/ARBs, K-sparing diuretics, NSAIDs',c:1,p:100},{id:'b',txt:'Loop diuretics',c:0,p:0},{id:'c',txt:'Calcium channel blockers',c:0,p:0}],fb:{1:'<b>Correct!</b> STOP: ACEi, ARBs, spironolactone, amiloride, NSAIDs, K+ supplements, TMP-SMX. Review all meds for K+-raising potential.',0:'<b>Med review:</b> Many drugs raise K+. RAAS inhibitors, K-sparing diuretics, NSAIDs all contribute.'}}
-];
-let sel=null;
-function setDiff(d){S.diff=d;document.querySelectorAll('.diff-btn').forEach((b,i)=>b.classList.toggle('active',['easy','int','adv'][i]===d));if(S.stage!=='setup'){S.stage='setup';S.score=0;S.max=0;S.q=0;document.getElementById('score').textContent='0';}render();}
-function addPts(p,m){S.score+=p;S.max+=m;document.getElementById('score').textContent=S.score;}
-function pick(id){sel=id;document.querySelectorAll('.radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id));document.getElementById('sub').disabled=false;}
-function submit(){const q=Q[S.q-1];const opt=q.o.find(o=>o.id===sel);addPts(opt.p||0,100);document.querySelectorAll('.radio-option').forEach(o=>{const op=q.o.find(x=>x.id===o.dataset.id);if(op&&op.c)o.classList.add('correct');else if(o.dataset.id===sel)o.classList.add('incorrect');});document.getElementById('fb').innerHTML=`<div class="feedback ${opt&&opt.c?'excellent':'incorrect'}">${q.fb[opt&&opt.c?1:0]}</div>`;document.getElementById('sub').textContent=S.q<S.total?'Next →':'Results →';document.getElementById('sub').onclick=next;}
-function next(){if(S.q<S.total){S.q++;sel=null;render();}else{S.stage='outcome';render();}}
-function start(){S.q=1;S.stage='question';render();}
-function go(s){S.stage=s;render();}
-function render(){const c=C[S.diff];if(S.stage==='setup'){document.getElementById('app').innerHTML=`<div class="setup-screen"><h1>⚡ The Deadly K</h1><p style="color:var(--muted);margin-bottom:32px">Hyperkalemia: ECG changes, calcium dosing, insulin/glucose, dialysis indications</p><button class="start-btn" onclick="go('pres')">Begin Case →</button></div>`;}else if(S.stage==='pres'){document.getElementById('app').innerHTML=`<div class="card"><div class="card-header"><div class="card-phase">Presentation</div><div class="card-title">🔋 Electrolyte Emergency</div></div><div class="card-body"><div class="narrative"><span class="hl">${c.age}</span> (${c.wt})<br><b>Hx:</b> ${c.hx}<br><b>Exam:</b> ${c.exam}</div><div class="vitals-grid">${Object.entries(c.vitals).map(([k,v])=>`<div class="vital"><div class="vital-label">${k}</div><div class="vital-value">${v}</div></div>`).join('')}</div><div class="lab-grid">${Object.entries(c.labs).map(([k,v])=>`<div class="lab-item"><span class="lab-name">${k}</span><span class="lab-value">${v}</span></div>`).join('')}</div><div class="btn-row"><button class="btn btn-primary" onclick="start()">Begin Assessment →</button></div></div></div>`;}else if(S.stage==='question'){const q=Q[S.q-1];document.getElementById('app').innerHTML=`<div class="card"><div class="card-header"><div class="card-phase">Q${S.q}/${S.total}</div><div class="card-title">🔍 ${q.t}</div></div><div class="card-body"><div class="progress-bar"><div class="progress-fill" style="width:${S.q/S.total*100}%"></div></div><div class="question-header"><div class="question-number">${S.q}</div><div style="font-weight:600">${q.q}</div></div><div class="hint">💡 ${q.h}</div><div class="radio-options">${q.o.map(o=>`<div class="radio-option" data-id="${o.id}" onclick="pick('${o.id}')"><div class="radio-circle"></div><div><b>${o.txt}</b></div></div>`).join('')}</div><div id="fb"></div><div class="btn-row"><button class="btn btn-primary" id="sub" onclick="submit()" disabled>Submit →</button></div></div></div>`;}else{const pct=S.max>0?Math.round(S.score/S.max*100):0;document.getElementById('app').innerHTML=`<div class="card"><div class="card-body"><div style="text-align:center;padding:40px"><div style="font-size:4rem">${pct>=70?'🎉':'📚'}</div><div style="font-size:2rem;font-weight:700;color:${pct>=70?'var(--success)':'var(--warning)'}">${pct>=70?'Complete!':'Review'}</div></div><div class="score-summary"><div class="score-row"><span>Score</span><span>${S.score}/${S.max} (${pct}%)</span></div></div><div class="pearls-box"><div class="pearls-title">📌 Hyperkalemia Pearls</div><div class="pearl-item"><b>ECG progression:</b> Peaked T → PR prolonged → QRS wide → Sine wave → VFib</div><div class="pearl-item"><b>Order:</b> Calcium FIRST (membrane), then Insulin+glucose (shift), then Dialysis (remove)</div><div class="pearl-item"><b>Calcium:</b> 1-2g gluconate IV over 2-3 min. Repeat in 5 min if ECG unchanged</div><div class="pearl-item"><b>Insulin:</b> 10U regular + D50. Monitor glucose q1hr x 4-6 hrs</div><div class="pearl-item"><b>Stop:</b> ACEi, ARBs, K-sparing diuretics, NSAIDs, K+ supplements</div></div><div class="cross-link"><a href="../mechanism/potassium-module.html">MechanismDx: Potassium</a></div><div class="btn-row" style="justify-content:center;margin-top:30px"><button class="btn btn-primary" onclick="location.reload()">Retry</button><button class="btn btn-link" onclick="location.href='adventure-hub.html'">Back</button></div></div></div>`;}}
-document.addEventListener('DOMContentLoaded',render);
-</script>
+    <header class="header"><div class="header-row"><div class="header-title">⚡ The Dangerous Potassium</div><div class="stat"><div class="stat-value" id="scoreDisplay">0</div><div class="stat-label">Points</div></div></div></header>
+    <main class="main"><div id="stageContainer"></div></main>
+    <script>
+    const state = { stage:'setup', score:0 };
+    
+    const ecgFindings = [
+        { id: 'peaked_t', text: 'Peaked T waves', isHyperK: true },
+        { id: 'wide_qrs', text: 'Widened QRS', isHyperK: true },
+        { id: 'flat_p', text: 'Flattened/absent P waves', isHyperK: true },
+        { id: 'sine', text: 'Sine wave pattern', isHyperK: true },
+        { id: 'st_dep', text: 'ST depression', isHyperK: false },
+        { id: 'qtc', text: 'Prolonged QTc', isHyperK: false },
+        { id: 'u_wave', text: 'U waves', isHyperK: false }
+    ];
+
+    const treatments = [
+        { id: 'calcium', text: 'IV Calcium gluconate', isCorrect: true },
+        { id: 'insulin', text: 'Insulin + Dextrose', isCorrect: true },
+        { id: 'bicarb', text: 'Sodium bicarbonate', isCorrect: true },
+        { id: 'albuterol', text: 'Nebulized albuterol', isCorrect: true },
+        { id: 'kayexalate', text: 'Kayexalate (sodium polystyrene)', isCorrect: false },
+        { id: 'furosemide', text: 'IV Furosemide', isCorrect: false }
+    ];
+
+    function addScore(pts) { state.score += pts; document.getElementById('scoreDisplay').textContent = state.score; }
+
+    const stages = {
+        setup: { render: () => `
+            <div class="setup-screen">
+                <h1>⚡ The Dangerous Potassium</h1>
+                <p class="subtitle">Hyperkalemia recognition and emergency management</p>
+                <button class="start-btn" onclick="goTo('presentation')">Begin Case →</button>
+            </div>`
+        },
+        presentation: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Emergency Department</div><div class="card-title">📋 Weakness and Fatigue</div></div>
+                <div class="card-body">
+                    <div class="narrative">A <span class="hl">68-year-old male</span> with <span class="hl">CKD stage 4</span>, <span class="hl">heart failure</span>, and <span class="hl">type 2 diabetes</span> presents with <span class="hl">progressive weakness</span> over 2 days.<br><br>Medications include <span class="hl">lisinopril</span>, <span class="hl">spironolactone</span>, and <span class="hl">metformin</span>. He ran out of his furosemide 5 days ago.<br><br>Vitals: BP 158/94, HR 52, irregular. He appears fatigued with <span class="hl">diffuse muscle weakness</span>.</div>
+                    <div class="lab-panel">
+                        <div class="lab-panel-title">STAT Laboratory Results</div>
+                        <div class="lab-grid">
+                            <div class="lab-item"><div class="lab-name">Potassium</div><div class="lab-value critical">7.2 mEq/L</div><div class="lab-range">3.5-5.0</div></div>
+                            <div class="lab-item"><div class="lab-name">Sodium</div><div class="lab-value">138 mEq/L</div><div class="lab-range">136-145</div></div>
+                            <div class="lab-item"><div class="lab-name">Creatinine</div><div class="lab-value high">4.8 mg/dL</div><div class="lab-range">0.7-1.3</div></div>
+                            <div class="lab-item"><div class="lab-name">BUN</div><div class="lab-value high">68 mg/dL</div><div class="lab-range">7-20</div></div>
+                            <div class="lab-item"><div class="lab-name">Glucose</div><div class="lab-value">142 mg/dL</div><div class="lab-range">70-100</div></div>
+                            <div class="lab-item"><div class="lab-name">Bicarb</div><div class="lab-value high">18 mEq/L</div><div class="lab-range">22-28</div></div>
+                        </div>
+                    </div>
+                    <div class="alert danger"><span class="alert-icon">⚠️</span><div class="alert-content"><div class="alert-title">Critical Value Alert</div><div class="alert-desc">K+ 7.2 mEq/L - Severe hyperkalemia requiring immediate intervention</div></div></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('ecg')">Get ECG →</button></div>
+                </div>
+            </div>`
+        },
+        ecg: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Diagnosis</div><div class="card-title">💓 ECG Interpretation</div></div>
+                <div class="card-body">
+                    <div class="ecg-box">
+                        <div class="ecg-title">12-Lead ECG Findings</div>
+                        <div class="ecg-findings">
+                            <span class="ecg-finding">Peaked T waves (V2-V6)</span>
+                            <span class="ecg-finding">Widened QRS (140ms)</span>
+                            <span class="ecg-finding">Flattened P waves</span>
+                            <span class="ecg-finding">Bradycardia (52 bpm)</span>
+                        </div>
+                    </div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">1</div><div class="question-text">Which ECG findings are classic for hyperkalemia?</div></div>
+                        <div class="checkbox-grid" id="ecgOpts">${ecgFindings.map(f=>`<div class="checkbox-item" data-id="${f.id}" data-correct="${f.isHyperK}" onclick="toggleECG('${f.id}')"><div class="checkbox-box"></div><span>${f.text}</span></div>`).join('')}</div>
+                    </div>
+                    <div id="ecgFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitECG()">Submit →</button></div>
+                </div>
+            </div>`
+        },
+        severity: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Assessment</div><div class="card-title">📊 Severity Classification</div></div>
+                <div class="card-body">
+                    <div class="alert info"><span class="alert-icon">📋</span><div class="alert-content"><div class="alert-title">Hyperkalemia Classification</div><div class="alert-desc">Mild: 5.5-6.0 | Moderate: 6.1-6.9 | Severe: ≥7.0 or ANY ECG changes</div></div></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">2</div><div class="question-text">How would you classify this patient's hyperkalemia?</div></div>
+                        <div class="radio-options" id="sevOpts">
+                            <div class="radio-option" data-id="mild" onclick="selectSev('mild')"><div class="radio-circle"></div><span>Mild - can manage outpatient</span></div>
+                            <div class="radio-option" data-id="moderate" onclick="selectSev('moderate')"><div class="radio-circle"></div><span>Moderate - urgent but not emergent</span></div>
+                            <div class="radio-option" data-id="severe" onclick="selectSev('severe')"><div class="radio-circle"></div><span>Severe - emergent treatment required</span></div>
+                        </div>
+                    </div>
+                    <div id="sevFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="sevSubmit" onclick="submitSev()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        firstStep: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Treatment</div><div class="card-title">🚨 First Intervention</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">3</div><div class="question-text">What is the FIRST treatment you should give?</div></div>
+                        <div class="radio-options" id="firstOpts">
+                            <div class="radio-option" data-id="calcium" onclick="selectFirst('calcium')"><div class="radio-circle"></div><div><strong>IV Calcium gluconate</strong><br><small style="color:var(--muted)">Cardiac membrane stabilization</small></div></div>
+                            <div class="radio-option" data-id="insulin" onclick="selectFirst('insulin')"><div class="radio-circle"></div><div><strong>Insulin + Dextrose</strong><br><small style="color:var(--muted)">Intracellular K+ shift</small></div></div>
+                            <div class="radio-option" data-id="dialysis" onclick="selectFirst('dialysis')"><div class="radio-circle"></div><div><strong>Emergent hemodialysis</strong><br><small style="color:var(--muted)">K+ removal</small></div></div>
+                            <div class="radio-option" data-id="kayexalate" onclick="selectFirst('kayexalate')"><div class="radio-circle"></div><div><strong>Kayexalate</strong><br><small style="color:var(--muted)">GI K+ binding</small></div></div>
+                        </div>
+                    </div>
+                    <div id="firstFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="firstSubmit" onclick="submitFirst()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        allTreatments: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Management</div><div class="card-title">💊 Acute Treatment Options</div></div>
+                <div class="card-body">
+                    <div class="alert info"><span class="alert-icon">💡</span><div class="alert-content"><div class="alert-title">Treatment Categories</div><div class="alert-desc"><strong>Stabilize:</strong> Calcium (protects heart)<br><strong>Shift:</strong> Insulin/glucose, bicarb, albuterol (move K+ into cells)<br><strong>Remove:</strong> Dialysis, diuretics, GI binders (eliminate K+)</div></div></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">4</div><div class="question-text">Which are appropriate ACUTE treatments for severe hyperkalemia with ECG changes?</div></div>
+                        <div class="checkbox-grid" id="txOpts">${treatments.map(t=>`<div class="checkbox-item" data-id="${t.id}" data-correct="${t.isCorrect}" onclick="toggleTx('${t.id}')"><div class="checkbox-box"></div><span>${t.text}</span></div>`).join('')}</div>
+                    </div>
+                    <div id="txFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitTx()">Submit →</button></div>
+                </div>
+            </div>`
+        },
+        causes: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Etiology</div><div class="card-title">🔍 Identify Contributing Factors</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">5</div><div class="question-text">Which factors contributed to this patient's hyperkalemia?</div></div>
+                        <div class="checkbox-grid" id="causeOpts">
+                            <div class="checkbox-item" data-id="ckd" data-correct="true" onclick="toggleCause('ckd')"><div class="checkbox-box"></div><span>CKD (decreased excretion)</span></div>
+                            <div class="checkbox-item" data-id="acei" data-correct="true" onclick="toggleCause('acei')"><div class="checkbox-box"></div><span>ACE inhibitor (lisinopril)</span></div>
+                            <div class="checkbox-item" data-id="aldo" data-correct="true" onclick="toggleCause('aldo')"><div class="checkbox-box"></div><span>Aldosterone antagonist (spironolactone)</span></div>
+                            <div class="checkbox-item" data-id="nodiuretic" data-correct="true" onclick="toggleCause('nodiuretic')"><div class="checkbox-box"></div><span>Stopped diuretic (furosemide)</span></div>
+                            <div class="checkbox-item" data-id="metformin" data-correct="false" onclick="toggleCause('metformin')"><div class="checkbox-box"></div><span>Metformin use</span></div>
+                            <div class="checkbox-item" data-id="hf" data-correct="false" onclick="toggleCause('hf')"><div class="checkbox-box"></div><span>Heart failure itself</span></div>
+                        </div>
+                    </div>
+                    <div id="causeFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitCause()">Submit →</button></div>
+                </div>
+            </div>`
+        },
+        outcome: { render: () => `
+            <div class="card"><div class="card-body">
+                <div class="outcome">
+                    <div class="outcome-icon">🎉</div>
+                    <div class="outcome-title">Patient Stabilized!</div>
+                    <div class="outcome-desc">Calcium gluconate was given immediately, followed by insulin/dextrose and albuterol. Repeat K+ at 2 hours was 5.8 mEq/L. Nephrology was consulted - patient did not require emergent dialysis. Spironolactone was discontinued, furosemide restarted, and he was transitioned to an ARB with close monitoring.</div>
+                </div>
+                <div class="score-summary">
+                    <h3 style="margin-bottom:16px">Performance</h3>
+                    <div class="score-row"><span>ECG Recognition</span><span>${state.ecgScore||0}/100</span></div>
+                    <div class="score-row"><span>Severity Assessment</span><span>${state.sevScore||0}/100</span></div>
+                    <div class="score-row"><span>First Intervention</span><span>${state.firstScore||0}/100</span></div>
+                    <div class="score-row"><span>Treatment Selection</span><span>${state.txScore||0}/100</span></div>
+                    <div class="score-row"><span>Cause Identification</span><span>${state.causeScore||0}/100</span></div>
+                    <div class="score-row" style="border-top:2px solid var(--border);padding-top:12px"><strong>Total</strong><strong>${state.score}</strong></div>
+                </div>
+                <div class="feedback excellent"><div class="feedback-header"><span class="feedback-icon">💡</span><span class="feedback-title">Hyperkalemia Pearls</span></div><div class="feedback-text">
+                    • <strong>ECG progression:</strong> Peaked T → PR prolongation → P wave loss → QRS widening → sine wave → VF/asystole<br>
+                    • <strong>FIRST:</strong> Calcium (stabilizes membrane in 1-3 min, lasts 30-60 min) - give if ANY ECG changes<br>
+                    • <strong>SHIFT (temporary):</strong> Insulin/D50 (onset 15-30 min), Albuterol (onset 15-30 min), Bicarb (if acidotic)<br>
+                    • <strong>REMOVE (definitive):</strong> Dialysis (most effective), Loop diuretics (if making urine), GI binders (slow)<br>
+                    • <strong>Kayexalate:</strong> Slow onset (hours), NOT for acute emergency, questionable efficacy<br>
+                    • <strong>Common causes:</strong> CKD, K+-sparing diuretics, ACE-I/ARBs, NSAIDs, rhabdomyolysis, tumor lysis
+                </div></div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Play Again</button></div>
+            </div></div>`
+        }
+    };
+
+    let selectedECG = new Set();
+    function toggleECG(id) {
+        const el = document.querySelector(`#ecgOpts .checkbox-item[data-id="${id}"]`);
+        if(selectedECG.has(id)) { selectedECG.delete(id); el.classList.remove('selected'); }
+        else { selectedECG.add(id); el.classList.add('selected'); }
+    }
+    function submitECG() {
+        let correct = 0;
+        ecgFindings.forEach(f => {
+            const el = document.querySelector(`#ecgOpts .checkbox-item[data-id="${f.id}"]`);
+            const sel = selectedECG.has(f.id);
+            if (f.isHyperK && sel) { el.classList.add('correct'); correct++; }
+            else if (!f.isHyperK && sel) { el.classList.add('incorrect'); }
+        });
+        state.ecgScore = Math.round(correct / 4 * 100);
+        addScore(Math.round(state.ecgScore / 2.5));
+        document.getElementById('ecgFeedback').innerHTML = `<div class="feedback ${state.ecgScore>=75?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${state.ecgScore>=75?'✅':'📚'}</span><span class="feedback-title">ECG in Hyperkalemia</span></div><div class="feedback-text"><strong>Classic progression:</strong> Peaked T waves → PR prolongation → Flattened P waves → Widened QRS → Sine wave → VF<br><strong>NOT hyperkalemia:</strong> ST depression and prolonged QTc are hypokalemia features; U waves suggest hypokalemia</div></div>`;
+        document.querySelector('#ecgFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('severity')">Assess Severity →</button>`;
+    }
+
+    let selectedSev = null;
+    function selectSev(id) { selectedSev = id; document.querySelectorAll('#sevOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('sevSubmit').disabled = false; }
+    function submitSev() {
+        document.querySelectorAll('#sevOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'severe') o.classList.add('correct');
+            else if (o.dataset.id === selectedSev) o.classList.add('incorrect');
+        });
+        state.sevScore = selectedSev === 'severe' ? 100 : 40;
+        addScore(selectedSev === 'severe' ? 30 : 10);
+        document.getElementById('sevFeedback').innerHTML = `<div class="feedback ${selectedSev==='severe'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedSev==='severe'?'✅':'📚'}</span><span class="feedback-title">${selectedSev==='severe'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Severe hyperkalemia:</strong> K+ ≥7.0 OR any ECG changes. This patient has BOTH (K+ 7.2 AND peaked T waves, widened QRS). Requires immediate treatment.</div></div>`;
+        document.getElementById('sevSubmit').textContent = 'Continue →';
+        document.getElementById('sevSubmit').onclick = () => goTo('firstStep');
+    }
+
+    let selectedFirst = null;
+    function selectFirst(id) { selectedFirst = id; document.querySelectorAll('#firstOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('firstSubmit').disabled = false; }
+    function submitFirst() {
+        document.querySelectorAll('#firstOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'calcium') o.classList.add('correct');
+            else if (o.dataset.id === selectedFirst) o.classList.add('incorrect');
+        });
+        state.firstScore = selectedFirst === 'calcium' ? 100 : (selectedFirst === 'insulin' ? 60 : 30);
+        addScore(selectedFirst === 'calcium' ? 40 : (selectedFirst === 'insulin' ? 20 : 10));
+        document.getElementById('firstFeedback').innerHTML = `<div class="feedback ${selectedFirst==='calcium'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedFirst==='calcium'?'✅':'📚'}</span><span class="feedback-title">${selectedFirst==='calcium'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Calcium is FIRST</strong> when ECG changes are present. It stabilizes the cardiac membrane within 1-3 minutes (doesn't lower K+). Insulin/dextrose is next to shift K+ intracellularly. Dialysis is definitive but takes time to arrange.</div></div>`;
+        document.getElementById('firstSubmit').textContent = 'Continue →';
+        document.getElementById('firstSubmit').onclick = () => goTo('allTreatments');
+    }
+
+    let selectedTx = new Set();
+    function toggleTx(id) {
+        const el = document.querySelector(`#txOpts .checkbox-item[data-id="${id}"]`);
+        if(selectedTx.has(id)) { selectedTx.delete(id); el.classList.remove('selected'); }
+        else { selectedTx.add(id); el.classList.add('selected'); }
+    }
+    function submitTx() {
+        let correct = 0;
+        treatments.forEach(t => {
+            const el = document.querySelector(`#txOpts .checkbox-item[data-id="${t.id}"]`);
+            const sel = selectedTx.has(t.id);
+            if (t.isCorrect && sel) { el.classList.add('correct'); correct++; }
+            else if (!t.isCorrect && sel) { el.classList.add('incorrect'); }
+        });
+        state.txScore = Math.round(correct / 4 * 100);
+        addScore(Math.round(state.txScore / 2.5));
+        document.getElementById('txFeedback').innerHTML = `<div class="feedback ${state.txScore>=75?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${state.txScore>=75?'✅':'📚'}</span><span class="feedback-title">Acute Treatments</span></div><div class="feedback-text"><strong>Acute treatments:</strong> Calcium (stabilize), Insulin/D50 (shift), Albuterol (shift), Bicarb (shift if acidotic)<br><strong>NOT acute:</strong> Kayexalate is slow (hours) and controversial; Furosemide only works if patient makes urine and is not first-line for emergency</div></div>`;
+        document.querySelector('#txFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('causes')">Identify Causes →</button>`;
+    }
+
+    let selectedCause = new Set();
+    function toggleCause(id) {
+        const el = document.querySelector(`#causeOpts .checkbox-item[data-id="${id}"]`);
+        if(selectedCause.has(id)) { selectedCause.delete(id); el.classList.remove('selected'); }
+        else { selectedCause.add(id); el.classList.add('selected'); }
+    }
+    function submitCause() {
+        let correct = 0;
+        const causes = [{id:'ckd',c:true},{id:'acei',c:true},{id:'aldo',c:true},{id:'nodiuretic',c:true},{id:'metformin',c:false},{id:'hf',c:false}];
+        causes.forEach(ca => {
+            const el = document.querySelector(`#causeOpts .checkbox-item[data-id="${ca.id}"]`);
+            const sel = selectedCause.has(ca.id);
+            if (ca.c && sel) { el.classList.add('correct'); correct++; }
+            else if (!ca.c && sel) { el.classList.add('incorrect'); }
+        });
+        state.causeScore = Math.round(correct / 4 * 100);
+        addScore(Math.round(state.causeScore / 2.5));
+        document.getElementById('causeFeedback').innerHTML = `<div class="feedback ${state.causeScore>=75?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${state.causeScore>=75?'✅':'📚'}</span><span class="feedback-title">Contributing Factors</span></div><div class="feedback-text"><strong>This patient's causes:</strong> CKD (can't excrete K+), ACE-I (blocks aldosterone), Spironolactone (K+-sparing), Stopped furosemide (lost K+ wasting)<br><strong>Not direct causes:</strong> Metformin doesn't affect K+; HF alone doesn't cause hyperkalemia</div></div>`;
+        document.querySelector('#causeFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('outcome')">Complete Case →</button>`;
+    }
+
+    function goTo(id) { state.stage = id; document.getElementById('stageContainer').innerHTML = stages[id].render(); window.scrollTo(0,0); }
+    document.addEventListener('DOMContentLoaded', () => goTo('setup'));
+    </script>
 </body>
 </html>

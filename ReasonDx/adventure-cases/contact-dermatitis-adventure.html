@@ -3,35 +3,327 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Rash Detective | ReasonDx Adventure</title>
-    <style>:root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#14B8A6;--success:#10B981;--warning:#F59E0B;--danger:#DC2626}*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}.header{background:linear-gradient(135deg,#0D9488,#14B8A6);padding:12px 20px;position:sticky;top:0;z-index:100}.header-row{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}.diff-toggle{display:flex;background:rgba(0,0,0,.3);border-radius:8px}.diff-btn{padding:6px 12px;font-size:.75rem;cursor:pointer;border:none;background:0 0;color:rgba(255,255,255,.7);font-weight:600}.diff-btn.active{background:rgba(255,255,255,.2);color:#fff}.stat{text-align:center;background:rgba(0,0,0,.2);padding:6px 14px;border-radius:8px}.stat-value{font-size:1.1rem;font-weight:700;font-family:monospace}.stat-label{font-size:.6rem;opacity:.8}.main{max-width:900px;margin:0 auto;padding:24px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px}.card-header{padding:20px 24px;border-bottom:1px solid var(--border)}.card-phase{font-size:.75rem;color:var(--accent);text-transform:uppercase}.card-title{font-size:1.5rem;font-weight:700}.card-body{padding:24px}.narrative{background:rgba(20,184,166,.1);border-left:4px solid var(--accent);padding:20px;border-radius:0 12px 12px 0;margin-bottom:20px}.narrative .hl{background:rgba(20,184,166,.3);padding:2px 6px;border-radius:4px}.setup-screen{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center}.start-btn{background:var(--accent);color:#fff;border:none;padding:16px 48px;border-radius:12px;font-size:1.1rem;font-weight:700;cursor:pointer}.hint{background:rgba(59,130,246,.15);padding:12px 16px;border-radius:8px;margin-bottom:16px;color:#93C5FD}.radio-options{display:flex;flex-direction:column;gap:10px}.radio-option{display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(0,0,0,.2);border:2px solid var(--border);border-radius:10px;cursor:pointer}.radio-option.selected{border-color:var(--accent);background:rgba(20,184,166,.15)}.radio-option.correct{border-color:var(--success);background:rgba(16,185,129,.15)}.radio-option.incorrect{border-color:var(--danger);background:rgba(220,38,38,.15)}.radio-circle{width:22px;height:22px;border:2px solid var(--border);border-radius:50%}.radio-option.selected .radio-circle{border-color:var(--accent);background:radial-gradient(circle,var(--accent) 40%,transparent 40%)}.feedback{padding:20px;border-radius:12px;margin:20px 0}.feedback.excellent{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3)}.feedback.incorrect{background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.3)}.btn{padding:14px 28px;border-radius:10px;font-weight:600;cursor:pointer;border:none}.btn-primary{background:var(--accent);color:#fff}.btn:disabled{opacity:.5}.btn-row{display:flex;gap:12px;margin-top:24px}.btn-link{background:0 0;border:2px solid var(--border);color:var(--text)}.vitals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:12px;margin:20px 0}.vital{background:rgba(0,0,0,.2);padding:12px;border-radius:10px;text-align:center}.vital-label{font-size:.7rem;color:var(--muted)}.vital-value{font-size:1.3rem;font-weight:700;font-family:monospace}.lab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:16px 0}.lab-item{display:flex;justify-content:space-between;padding:8px 12px;background:rgba(0,0,0,.2);border-radius:6px}.lab-name{color:var(--muted)}.lab-value{font-family:monospace;font-weight:600}.score-summary{background:rgba(0,0,0,.2);border-radius:12px;padding:24px;margin:24px auto;max-width:600px}.score-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}.pearls-box{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:20px;margin-top:20px}.pearls-title{font-weight:700;color:var(--success);margin-bottom:12px}.pearl-item{padding:8px 0;border-bottom:1px solid rgba(16,185,129,.2);font-size:.95rem}.cross-link{background:rgba(20,184,166,.1);border:1px solid rgba(20,184,166,.3);border-radius:8px;padding:12px 16px;margin-top:12px}.cross-link a{color:#5EEAD4;text-decoration:none}.progress-bar{background:rgba(255,255,255,.1);border-radius:10px;height:8px;margin:20px 0}.progress-fill{background:var(--accent);height:100%;border-radius:10px}.question-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}.question-number{background:var(--accent);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}</style>
+    <title>The Persistent Rash | ReasonDx Adventure</title>
+    <style>
+        :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #F97316; --success: #10B981; --warning: #F59E0B; --danger: #DC2626; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #EA580C 0%, #F97316 100%); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; }
+        .stat { background: rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 8px; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        .main { max-width: 1000px; margin: 0 auto; padding: 24px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(249,115,22,0.1), rgba(234,88,12,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; line-height: 1.8; }
+        .narrative .hl { background: rgba(249,115,22,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        .setup-screen { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; }
+        .setup-screen h1 { font-size: 2rem; margin-bottom: 8px; }
+        .setup-screen .subtitle { color: var(--muted); margin-bottom: 32px; }
+        .start-btn { background: var(--accent); color: white; border: none; padding: 16px 48px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+        .question-section { margin-bottom: 32px; }
+        .question-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .question-number { background: var(--accent); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .question-text { font-size: 1.1rem; font-weight: 600; }
+        .radio-options { display: flex; flex-direction: column; gap: 10px; }
+        .radio-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .radio-option:hover { border-color: var(--accent); }
+        .radio-option.selected { border-color: var(--accent); background: rgba(249,115,22,0.15); }
+        .radio-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .radio-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .radio-circle { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; }
+        .radio-option.selected .radio-circle { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 40%, transparent 40%); }
+        .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+        .checkbox-item { display: flex; align-items: center; gap: 10px; padding: 12px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .checkbox-item:hover { border-color: var(--accent); }
+        .checkbox-item.selected { border-color: var(--accent); background: rgba(249,115,22,0.15); }
+        .checkbox-item.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .checkbox-item.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .checkbox-box { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .checkbox-item.selected .checkbox-box { background: var(--accent); border-color: var(--accent); }
+        .checkbox-item.selected .checkbox-box::after { content: '✓'; color: white; font-weight: bold; }
+        .feedback { padding: 20px; border-radius: 12px; margin: 20px 0; }
+        .feedback.excellent { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .feedback.acceptable { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .feedback-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .feedback-icon { font-size: 1.5rem; }
+        .feedback-title { font-weight: 700; }
+        .feedback-text { color: var(--muted); line-height: 1.7; }
+        .feedback-text strong { color: var(--text); }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-row { display: flex; gap: 12px; margin-top: 24px; }
+        .outcome { text-align: center; padding: 40px 20px; }
+        .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
+        .outcome-title { font-size: 2rem; font-weight: 700; color: var(--success); margin-bottom: 8px; }
+        .outcome-desc { color: var(--muted); max-width: 600px; margin: 0 auto 24px; }
+        .score-summary { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 24px; margin: 24px auto; max-width: 500px; }
+        .score-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .score-row:last-child { border-bottom: none; }
+        .patient-panel { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 16px; margin-bottom: 20px; }
+        .patient-panel-title { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; }
+        .patient-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
+        .patient-info-label { font-size: 0.7rem; color: var(--muted); }
+        .patient-info-value { font-weight: 600; }
+        .allergen-table { width: 100%; margin: 20px 0; font-size: 0.85rem; }
+        .allergen-table th { text-align: left; padding: 10px; color: var(--accent); border-bottom: 1px solid var(--border); }
+        .allergen-table td { padding: 10px; border-bottom: 1px solid var(--border); color: var(--muted); }
+    </style>
 </head>
 <body>
-    <header class="header"><div class="header-row"><div style="font-weight:600">🔍 The Rash Detective</div><div style="display:flex;gap:12px;align-items:center"><div class="diff-toggle"><button class="diff-btn active" onclick="setDiff('easy')">Easy</button><button class="diff-btn" onclick="setDiff('int')">Intermediate</button><button class="diff-btn" onclick="setDiff('adv')">Advanced</button></div><div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Points</div></div></div></div></header>
-    <main class="main"><div id="app"></div></main>
-<script>
-const S={stage:'setup',score:0,max:0,diff:'easy',q:0,total:8};
-const C={easy:{age:'35F',wt:'65kg',hx:'Itchy rash on earlobes and wrist for 2 weeks, new jewelry',exam:'Erythematous, vesicular eruption on earlobes and wrist under watch band',vitals:{HR:'72',BP:'118/74',Temp:'98.4°F',SpO2:'99%'},labs:{Hx:'New costume jewelry',Pattern:'Geometric, matches jewelry'}},int:{age:'45M',wt:'82kg',hx:'Healthcare worker with hand dermatitis, worse at work, improves on vacation',exam:'Dorsal hand erythema, fissuring, vesicles at glove line',vitals:{HR:'76',BP:'124/78',Temp:'98.2°F',SpO2:'99%'},labs:{Job:'OR nurse, latex gloves',Pattern:'Spares palms, glove distribution'}},adv:{age:'28F',wt:'58kg',hx:'Hairdresser with chronic hand eczema, periorbital dermatitis from hair products',exam:'Chronic hand dermatitis, bilateral periorbital erythema and edema',vitals:{HR:'68',BP:'112/68',Temp:'98.4°F',SpO2:'99%'},labs:{Job:'Hairdresser x5 years',Suspect:'PPD, fragrance, preservatives'}}};
-const Q=[
-{t:'Contact Dermatitis Types',q:'What distinguishes allergic contact dermatitis (ACD) from irritant contact dermatitis (ICD)?',h:'Mechanism matters',o:[{id:'a',txt:'ACD: Type IV hypersensitivity (delayed, T-cell); ICD: Direct toxic effect (no sensitization)',c:1,p:100},{id:'b',txt:'ACD is immediate, ICD is delayed',c:0,p:20},{id:'c',txt:'No clinical difference',c:0,p:10}],fb:{1:'<b>Correct!</b> ACD: Delayed (Type IV) T-cell mediated, requires prior sensitization, reactions spread beyond contact area. ICD: Direct chemical/physical damage, anyone can get it, strictly confined to contact area.',0:'<b>Key difference:</b> ACD = immune (Type IV), ICD = direct damage.'}},
-{t:'Clinical Clues',q:'Which clinical features suggest allergic rather than irritant contact dermatitis?',h:'Distribution and morphology help',o:[{id:'a',txt:'Geometric/patterned distribution, vesicles, spread beyond contact site, delayed onset',c:1,p:100},{id:'b',txt:'Immediate burning',c:0,p:20},{id:'c',txt:'Only affects hands',c:0,p:10}],fb:{1:'<b>Correct!</b> ACD clues: Geometric pattern matching contactant, vesicles (acute), spreads beyond original site, 24-72h delay after exposure. ICD: burns immediately, strictly confined, often affects everyone exposed.',0:'<b>ACD clues:</b> Geometric pattern, vesicles, spread, delayed onset.'}},
-{t:'Common Allergens',q:'Most common contact allergen worldwide?',h:'Think metals',o:[{id:'a',txt:'Nickel (jewelry, belt buckles, cell phones)',c:1,p:100},{id:'b',txt:'Latex',c:0,p:30},{id:'c',txt:'Poison ivy',c:0,p:30}],fb:{1:'<b>Correct!</b> Nickel is #1 allergen globally. Found in jewelry, belt buckles, cell phones, coins. Classic: earlobes, wrist (watch), waistline (buckle). Dimethylglyoxime test can detect nickel.',0:'<b>Nickel:</b> #1 allergen. Classic distribution matches metal contact points.'}},
-{t:'Diagnostic Gold Standard',q:'Gold standard test for diagnosing allergic contact dermatitis?',h:'Not skin prick testing',o:[{id:'a',txt:'Patch testing (allergens applied under occlusion for 48-72h)',c:1,p:100},{id:'b',txt:'Skin prick testing',c:0,p:20},{id:'c',txt:'Serum IgE levels',c:0,p:10}],fb:{1:'<b>Correct!</b> Patch testing: Allergens applied on back under occlusion, read at 48h and 72-96h. Tests Type IV (delayed) hypersensitivity. Skin prick tests Type I (immediate). Standard series + occupation-specific.',0:'<b>Patch testing:</b> Gold standard for ACD. Applied 48h, read at 48h and 72-96h.'}},
-{t:'Occupational Exposure',q:'Healthcare worker with hand dermatitis in glove distribution. Top considerations?',h:'Occupational contact dermatitis',o:[{id:'a',txt:'Rubber accelerators (thiurams, carbamates) > latex protein allergy',c:1,p:100},{id:'b',txt:'Latex always',c:0,p:40},{id:'c',txt:'Just irritant from handwashing',c:0,p:30}],fb:{1:'<b>Correct!</b> Rubber chemical allergies (thiurams, carbamates, mercaptobenzothiazole) are more common than true latex protein allergy. Latex protein causes Type I (urticaria/anaphylaxis). Rubber chemicals cause Type IV ACD.',0:'<b>Glove dermatitis:</b> Rubber chemicals > latex protein. Different mechanisms.'}},
-{t:'Hair Dye Allergy',q:'Active ingredient in permanent hair dyes causing allergic contact dermatitis?',h:'Common occupational allergen',o:[{id:'a',txt:'Paraphenylenediamine (PPD) - cross-reacts with black henna, some medications',c:1,p:100},{id:'b',txt:'Ammonia',c:0,p:20},{id:'c',txt:'Peroxide',c:0,p:20}],fb:{1:'<b>Correct!</b> PPD causes severe ACD to hair dyes. Cross-reactions: black henna tattoos, PABA sunscreens, certain medications (sulfonamides, local anesthetics). Hairdressers at high risk.',0:'<b>PPD:</b> Hair dye allergen. Watch for cross-reactions with black henna.'}},
-{t:'Treatment Approach',q:'Management of acute, severe allergic contact dermatitis?',h:'Beyond allergen avoidance',o:[{id:'a',txt:'Allergen avoidance + potent topical steroids (+ short course oral if widespread)',c:1,p:100},{id:'b',txt:'Antihistamines only',c:0,p:20},{id:'c',txt:'Immediate immunotherapy',c:0,p:10}],fb:{1:'<b>Correct!</b> Primary: Identify and avoid allergen. Acute treatment: Potent TCS, wet compresses for vesicles. Systemic steroids if >20% BSA or face/hands severely affected. Barrier creams for prevention.',0:'<b>Treatment:</b> Avoid allergen + topical steroids. Systemic if severe/widespread.'}},
-{t:'Prevention Strategies',q:'How can nickel-allergic patients reduce exposure?',h:'Practical advice',o:[{id:'a',txt:'Nickel-free jewelry, barrier creams, coat metal items with clear nail polish',c:1,p:100},{id:'b',txt:'Desensitization shots',c:0,p:20},{id:'c',txt:'Antihistamines preventively',c:0,p:20}],fb:{1:'<b>Correct!</b> Nickel avoidance: Hypoallergenic jewelry, dimethylglyoxime test items before purchase, coat metal with clear polish, barrier creams. No desensitization available for contact allergens.',0:'<b>Nickel avoidance:</b> Hypoallergenic items, barrier strategies, test items for nickel.'}}
-];
-let sel=null;
-function setDiff(d){S.diff=d;document.querySelectorAll('.diff-btn').forEach((b,i)=>b.classList.toggle('active',['easy','int','adv'][i]===d));if(S.stage!=='setup'){S.stage='setup';S.score=0;S.max=0;S.q=0;document.getElementById('score').textContent='0';}render();}
-function addPts(p,m){S.score+=p;S.max+=m;document.getElementById('score').textContent=S.score;}
-function pick(id){sel=id;document.querySelectorAll('.radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id));document.getElementById('sub').disabled=false;}
-function submit(){const q=Q[S.q-1];const opt=q.o.find(o=>o.id===sel);addPts(opt.p||0,100);document.querySelectorAll('.radio-option').forEach(o=>{const op=q.o.find(x=>x.id===o.dataset.id);if(op&&op.c)o.classList.add('correct');else if(o.dataset.id===sel)o.classList.add('incorrect');});document.getElementById('fb').innerHTML='<div class="feedback '+(opt&&opt.c?'excellent':'incorrect')+'">'+q.fb[opt&&opt.c?1:0]+'</div>';document.getElementById('sub').textContent=S.q<S.total?'Next':'Results';document.getElementById('sub').onclick=next;}
-function next(){if(S.q<S.total){S.q++;sel=null;render();}else{S.stage='outcome';render();}}
-function start(){S.q=1;S.stage='question';render();}
-function go(s){S.stage=s;render();}
-function render(){const c=C[S.diff];if(S.stage==='setup'){document.getElementById('app').innerHTML='<div class="setup-screen"><h1>🔍 The Rash Detective</h1><p style="color:var(--muted);margin-bottom:32px">Contact Dermatitis: ACD vs ICD, patch testing, common allergens, occupational exposures</p><button class="start-btn" onclick="go(\'pres\')">Begin Case</button></div>';}else if(S.stage==='pres'){document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Presentation</div><div class="card-title">🔍 Patterned Dermatitis</div></div><div class="card-body"><div class="narrative"><span class="hl">'+c.age+'</span> ('+c.wt+')<br><b>Hx:</b> '+c.hx+'<br><b>Exam:</b> '+c.exam+'</div><div class="vitals-grid">'+Object.entries(c.vitals).map(function(e){return'<div class="vital"><div class="vital-label">'+e[0]+'</div><div class="vital-value">'+e[1]+'</div></div>';}).join('')+'</div><div class="lab-grid">'+Object.entries(c.labs).map(function(e){return'<div class="lab-item"><span class="lab-name">'+e[0]+'</span><span class="lab-value">'+e[1]+'</span></div>';}).join('')+'</div><div class="btn-row"><button class="btn btn-primary" onclick="start()">Begin Assessment</button></div></div></div>';}else if(S.stage==='question'){var q=Q[S.q-1];document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Q'+S.q+'/'+S.total+'</div><div class="card-title">'+q.t+'</div></div><div class="card-body"><div class="progress-bar"><div class="progress-fill" style="width:'+(S.q/S.total*100)+'%"></div></div><div class="question-header"><div class="question-number">'+S.q+'</div><div style="font-weight:600">'+q.q+'</div></div><div class="hint">'+q.h+'</div><div class="radio-options">'+q.o.map(function(o){return'<div class="radio-option" data-id="'+o.id+'" onclick="pick(\''+o.id+'\')"><div class="radio-circle"></div><div><b>'+o.txt+'</b></div></div>';}).join('')+'</div><div id="fb"></div><div class="btn-row"><button class="btn btn-primary" id="sub" onclick="submit()" disabled>Submit</button></div></div></div>';}else{var pct=S.max>0?Math.round(S.score/S.max*100):0;document.getElementById('app').innerHTML='<div class="card"><div class="card-body"><div style="text-align:center;padding:40px"><div style="font-size:4rem">'+(pct>=70?'🎉':'📚')+'</div><div style="font-size:2rem;font-weight:700;color:'+(pct>=70?'var(--success)':'var(--warning)')+'">'+(pct>=70?'Complete!':'Review')+'</div></div><div class="score-summary"><div class="score-row"><span>Score</span><span>'+S.score+'/'+S.max+' ('+pct+'%)</span></div></div><div class="pearls-box"><div class="pearls-title">Contact Dermatitis Pearls</div><div class="pearl-item"><b>ACD vs ICD:</b> ACD = Type IV immune; ICD = direct damage</div><div class="pearl-item"><b>ACD clues:</b> Geometric pattern, vesicles, spread, 24-72h delay</div><div class="pearl-item"><b>#1 allergen:</b> Nickel (jewelry, buckles, phones)</div><div class="pearl-item"><b>Gold standard:</b> Patch testing (read at 48h and 72-96h)</div><div class="pearl-item"><b>Gloves:</b> Rubber chemicals > latex protein allergy</div><div class="pearl-item"><b>Hair dye:</b> PPD - cross-reacts with black henna</div><div class="pearl-item"><b>Treatment:</b> Avoid allergen + potent TCS</div></div><div class="cross-link"><a href="atopic-dermatitis-adventure-enhanced.html">Related: Atopic Dermatitis</a> | <a href="drug-allergy-adventure-enhanced.html">Drug Allergy</a></div><div class="btn-row" style="justify-content:center;margin-top:30px"><button class="btn btn-primary" onclick="location.reload()">Retry</button><button class="btn btn-link" onclick="location.href=\'adventure-hub.html\'">Back</button></div></div></div>';}}
-document.addEventListener('DOMContentLoaded',render);
-</script>
+    <header class="header"><div class="header-row"><div class="header-title">🧴 The Persistent Rash</div><div class="stat"><div class="stat-value" id="scoreDisplay">0</div><div class="stat-label">Points</div></div></div></header>
+    <main class="main"><div id="stageContainer"></div></main>
+    <script>
+    const state = { stage:'setup', score:0 };
+    
+    const acdFeatures = [
+        { id: 'eczematous', text: 'Eczematous morphology', isACD: true },
+        { id: 'geometric', text: 'Geometric/linear pattern', isACD: true },
+        { id: 'exposed', text: 'Limited to exposed areas', isACD: true },
+        { id: 'delayed', text: 'Delayed onset (24-72h)', isACD: true },
+        { id: 'immediate', text: 'Immediate wheals', isACD: false },
+        { id: 'urticaria', text: 'Migratory urticaria', isACD: false }
+    ];
+
+    const commonAllergens = [
+        { id: 'nickel', text: 'Nickel (jewelry, belt buckles)', isCommon: true },
+        { id: 'fragrance', text: 'Fragrance mix', isCommon: true },
+        { id: 'preservatives', text: 'Preservatives (MI/MCI, formaldehyde)', isCommon: true },
+        { id: 'ppd', text: 'PPD (hair dye)', isCommon: true },
+        { id: 'neomycin', text: 'Neomycin/bacitracin', isCommon: true },
+        { id: 'dust_mite', text: 'Dust mites', isCommon: false },
+        { id: 'pollen', text: 'Tree pollen', isCommon: false }
+    ];
+
+    function addScore(pts) { state.score += pts; document.getElementById('scoreDisplay').textContent = state.score; }
+
+    const stages = {
+        setup: { render: () => `
+            <div class="setup-screen">
+                <h1>🧴 The Persistent Rash</h1>
+                <p class="subtitle">Allergic contact dermatitis evaluation</p>
+                <button class="start-btn" onclick="goTo('referral')">Begin Case →</button>
+            </div>`
+        },
+        referral: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Dermatology</div><div class="card-title">📋 Recurrent Eczematous Rash</div></div>
+                <div class="card-body">
+                    <div class="narrative">A <span class="hl">35-year-old hairdresser</span> presents with a <span class="hl">recurrent itchy rash on her hands</span> for 6 months. The rash improves on weekends and vacations but <span class="hl">flares during work</span>.<br><br>She notes <span class="hl">erythema, vesicles, and fissuring</span> on her fingers and dorsal hands. She's also developed a <span class="hl">rash around her earlobes</span> and <span class="hl">periumbilical area</span> recently.<br><br>PMH: Atopic dermatitis as a child (resolved). Uses multiple <span class="hl">hair products</span> at work and wears <span class="hl">costume jewelry</span>.</div>
+                    <div class="patient-panel">
+                        <div class="patient-panel-title">Patient Information</div>
+                        <div class="patient-info-grid">
+                            <div><div class="patient-info-label">Age/Sex</div><div class="patient-info-value">35 y/o Female</div></div>
+                            <div><div class="patient-info-label">Occupation</div><div class="patient-info-value">Hairdresser</div></div>
+                            <div><div class="patient-info-label">Pattern</div><div class="patient-info-value">Work-related flares</div></div>
+                            <div><div class="patient-info-label">Distribution</div><div class="patient-info-value">Hands, earlobes, umbilicus</div></div>
+                            <div><div class="patient-info-label">PMH</div><div class="patient-info-value">Childhood atopic dermatitis</div></div>
+                            <div><div class="patient-info-label">Exposures</div><div class="patient-info-value">Hair products, jewelry</div></div>
+                        </div>
+                    </div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('type')">Determine Type →</button></div>
+                </div>
+            </div>`
+        },
+        type: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Classification</div><div class="card-title">🔍 Contact Dermatitis Type</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">1</div><div class="question-text">What type of contact dermatitis is most likely?</div></div>
+                        <div class="radio-options" id="typeOpts">
+                            <div class="radio-option" data-id="acd" onclick="selectType('acd')"><div class="radio-circle"></div><div><strong>Allergic Contact Dermatitis (ACD)</strong><br><small style="color:var(--muted)">Type IV hypersensitivity, delayed</small></div></div>
+                            <div class="radio-option" data-id="icd" onclick="selectType('icd')"><div class="radio-circle"></div><div><strong>Irritant Contact Dermatitis (ICD)</strong><br><small style="color:var(--muted)">Direct damage, no immune component</small></div></div>
+                            <div class="radio-option" data-id="contact_urticaria" onclick="selectType('contact_urticaria')"><div class="radio-circle"></div><div><strong>Contact Urticaria</strong><br><small style="color:var(--muted)">IgE-mediated, immediate</small></div></div>
+                            <div class="radio-option" data-id="id_reaction" onclick="selectType('id_reaction')"><div class="radio-circle"></div><div><strong>Id Reaction</strong><br><small style="color:var(--muted)">Secondary to distant infection</small></div></div>
+                        </div>
+                    </div>
+                    <div id="typeFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="typeSubmit" onclick="submitType()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        features: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Recognition</div><div class="card-title">📊 ACD Features</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">2</div><div class="question-text">Which features suggest ALLERGIC contact dermatitis?</div></div>
+                        <div class="checkbox-grid" id="featOpts">${acdFeatures.map(f=>`<div class="checkbox-item" data-id="${f.id}" data-acd="${f.isACD}" onclick="toggleFeat('${f.id}')"><div class="checkbox-box"></div><span>${f.text}</span></div>`).join('')}</div>
+                    </div>
+                    <div id="featFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitFeat()">Submit →</button></div>
+                </div>
+            </div>`
+        },
+        testing: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Diagnosis</div><div class="card-title">🧪 Diagnostic Testing</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">3</div><div class="question-text">What is the gold standard test for ACD?</div></div>
+                        <div class="radio-options" id="testOpts">
+                            <div class="radio-option" data-id="patch" onclick="selectTest('patch')"><div class="radio-circle"></div><div><strong>Patch testing</strong><br><small style="color:var(--muted)">Allergens applied 48h, read at 48h and 72-96h</small></div></div>
+                            <div class="radio-option" data-id="spt" onclick="selectTest('spt')"><div class="radio-circle"></div><div><strong>Skin prick testing</strong><br><small style="color:var(--muted)">Immediate IgE-mediated reactions</small></div></div>
+                            <div class="radio-option" data-id="sige" onclick="selectTest('sige')"><div class="radio-circle"></div><div><strong>Serum specific IgE</strong><br><small style="color:var(--muted)">Blood test for IgE antibodies</small></div></div>
+                            <div class="radio-option" data-id="biopsy" onclick="selectTest('biopsy')"><div class="radio-circle"></div><div><strong>Skin biopsy</strong><br><small style="color:var(--muted)">Histopathology</small></div></div>
+                        </div>
+                    </div>
+                    <div id="testFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="testSubmit" onclick="submitTest()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        allergens: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Knowledge</div><div class="card-title">🎯 Common Contact Allergens</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">4</div><div class="question-text">Which are common CONTACT allergens (patch test positive)?</div></div>
+                        <div class="checkbox-grid" id="allergOpts">${commonAllergens.map(a=>`<div class="checkbox-item" data-id="${a.id}" data-common="${a.isCommon}" onclick="toggleAllerg('${a.id}')"><div class="checkbox-box"></div><span>${a.text}</span></div>`).join('')}</div>
+                    </div>
+                    <div id="allergFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitAllerg()">Submit →</button></div>
+                </div>
+            </div>`
+        },
+        results: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Results</div><div class="card-title">📋 Patch Test Results</div></div>
+                <div class="card-body">
+                    <table class="allergen-table">
+                        <tr><th>Allergen</th><th>48h</th><th>96h</th><th>Relevance</th></tr>
+                        <tr><td><strong>Nickel sulfate</strong></td><td style="color:var(--danger)">++</td><td style="color:var(--danger)">+++</td><td>Jewelry, belt buckle</td></tr>
+                        <tr><td><strong>PPD (paraphenylenediamine)</strong></td><td style="color:var(--danger)">+</td><td style="color:var(--danger)">++</td><td>Hair dye at work</td></tr>
+                        <tr><td>Fragrance mix</td><td>-</td><td>-</td><td>-</td></tr>
+                        <tr><td>Formaldehyde</td><td>-</td><td>-</td><td>-</td></tr>
+                        <tr><td>Balsam of Peru</td><td>-</td><td>-</td><td>-</td></tr>
+                    </table>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">5</div><div class="question-text">What explains her earlobe and periumbilical rash?</div></div>
+                        <div class="radio-options" id="explainOpts">
+                            <div class="radio-option" data-id="nickel" onclick="selectExplain('nickel')"><div class="radio-circle"></div><div><strong>Nickel allergy</strong><br><small style="color:var(--muted)">Costume jewelry earrings, belt buckle contact</small></div></div>
+                            <div class="radio-option" data-id="ppd" onclick="selectExplain('ppd')"><div class="radio-circle"></div><div><strong>PPD cross-reactivity</strong><br><small style="color:var(--muted)">Hair dye spreading to these areas</small></div></div>
+                            <div class="radio-option" data-id="atopic" onclick="selectExplain('atopic')"><div class="radio-circle"></div><div><strong>Atopic dermatitis flare</strong><br><small style="color:var(--muted)">Underlying eczema</small></div></div>
+                        </div>
+                    </div>
+                    <div id="explainFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="explainSubmit" onclick="submitExplain()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        outcome: { render: () => `
+            <div class="card"><div class="card-body">
+                <div class="outcome">
+                    <div class="outcome-icon">🎉</div>
+                    <div class="outcome-title">ACD Identified!</div>
+                    <div class="outcome-desc">Patient was counseled on strict nickel avoidance (nickel-free jewelry, barrier on belt buckles) and PPD avoidance (use PPD-free hair dyes or wear gloves). With avoidance, her dermatitis cleared significantly.</div>
+                </div>
+                <div class="score-summary">
+                    <h3 style="margin-bottom:16px">Performance</h3>
+                    <div class="score-row"><span>CD Type</span><span>${state.typeScore||0}/100</span></div>
+                    <div class="score-row"><span>ACD Features</span><span>${state.featScore||0}/100</span></div>
+                    <div class="score-row"><span>Diagnostic Test</span><span>${state.testScore||0}/100</span></div>
+                    <div class="score-row"><span>Common Allergens</span><span>${state.allergScore||0}/100</span></div>
+                    <div class="score-row"><span>Clinical Correlation</span><span>${state.explainScore||0}/100</span></div>
+                    <div class="score-row" style="border-top:2px solid var(--border);padding-top:12px"><strong>Total</strong><strong>${state.score}</strong></div>
+                </div>
+                <div class="feedback excellent"><div class="feedback-header"><span class="feedback-icon">💡</span><span class="feedback-title">Contact Dermatitis Pearls</span></div><div class="feedback-text">• <strong>ACD:</strong> Type IV (delayed) hypersensitivity, eczematous, geometric patterns<br>• <strong>ICD:</strong> Direct irritant damage, no sensitization required<br>• <strong>Patch testing</strong> = gold standard (applied 48h, read 48h & 72-96h)<br>• <strong>Top allergens:</strong> Nickel (#1), fragrance, preservatives, PPD, neomycin<br>• <strong>Nickel sources:</strong> Jewelry, belt buckles, coins, cell phones<br>• <strong>PPD:</strong> Hair dye, temporary tattoos (cross-reacts with PABA, benzocaine)<br>• <strong>Treatment:</strong> Allergen avoidance is key! + topical steroids for acute</div></div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Play Again</button></div>
+            </div></div>`
+        }
+    };
+
+    let selectedType = null;
+    function selectType(id) { selectedType = id; document.querySelectorAll('#typeOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('typeSubmit').disabled = false; }
+    function submitType() {
+        document.querySelectorAll('#typeOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'acd') o.classList.add('correct');
+            else if (o.dataset.id === selectedType) o.classList.add('incorrect');
+        });
+        state.typeScore = selectedType === 'acd' ? 100 : 40;
+        addScore(selectedType === 'acd' ? 30 : 10);
+        document.getElementById('typeFeedback').innerHTML = `<div class="feedback ${selectedType==='acd'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedType==='acd'?'✅':'📚'}</span><span class="feedback-title">${selectedType==='acd'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>ACD clues:</strong> Eczematous rash, specific distribution (earlobes = jewelry, umbilicus = belt buckle = nickel!), occupation-related, improvement away from work. ICD would affect everyone equally with exposure.</div></div>`;
+        document.getElementById('typeSubmit').textContent = 'Continue →';
+        document.getElementById('typeSubmit').onclick = () => goTo('features');
+    }
+
+    let selectedFeat = new Set();
+    function toggleFeat(id) {
+        const el = document.querySelector(`#featOpts .checkbox-item[data-id="${id}"]`);
+        if(selectedFeat.has(id)) { selectedFeat.delete(id); el.classList.remove('selected'); }
+        else { selectedFeat.add(id); el.classList.add('selected'); }
+    }
+    function submitFeat() {
+        let correct = 0;
+        acdFeatures.forEach(f => {
+            const el = document.querySelector(`#featOpts .checkbox-item[data-id="${f.id}"]`);
+            const sel = selectedFeat.has(f.id);
+            if (f.isACD && sel) { el.classList.add('correct'); correct++; }
+            else if (!f.isACD && sel) { el.classList.add('incorrect'); }
+        });
+        state.featScore = Math.round(correct / 4 * 100);
+        addScore(Math.round(state.featScore / 3));
+        document.getElementById('featFeedback').innerHTML = `<div class="feedback ${state.featScore>=75?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${state.featScore>=75?'✅':'📚'}</span><span class="feedback-title">ACD Features</span></div><div class="feedback-text"><strong>ACD:</strong> Eczematous (vesicles, scale, fissures), geometric/linear patterns, exposed areas, delayed onset (24-72h after contact)<br><strong>Not ACD:</strong> Immediate wheals = contact urticaria (IgE-mediated)</div></div>`;
+        document.querySelector('#featFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('testing')">Order Testing →</button>`;
+    }
+
+    let selectedTest = null;
+    function selectTest(id) { selectedTest = id; document.querySelectorAll('#testOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('testSubmit').disabled = false; }
+    function submitTest() {
+        document.querySelectorAll('#testOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'patch') o.classList.add('correct');
+            else if (o.dataset.id === selectedTest) o.classList.add('incorrect');
+        });
+        state.testScore = selectedTest === 'patch' ? 100 : 40;
+        addScore(selectedTest === 'patch' ? 30 : 10);
+        document.getElementById('testFeedback').innerHTML = `<div class="feedback ${selectedTest==='patch'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedTest==='patch'?'✅':'📚'}</span><span class="feedback-title">${selectedTest==='patch'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Patch testing</strong> = gold standard for ACD (Type IV)<br>• Allergens applied to back for 48 hours<br>• Read at 48h AND 72-96h (delayed reactions!)<br>• SPT/sIgE test for IgE (Type I) - wrong mechanism</div></div>`;
+        document.getElementById('testSubmit').textContent = 'Continue →';
+        document.getElementById('testSubmit').onclick = () => goTo('allergens');
+    }
+
+    let selectedAllerg = new Set();
+    function toggleAllerg(id) {
+        const el = document.querySelector(`#allergOpts .checkbox-item[data-id="${id}"]`);
+        if(selectedAllerg.has(id)) { selectedAllerg.delete(id); el.classList.remove('selected'); }
+        else { selectedAllerg.add(id); el.classList.add('selected'); }
+    }
+    function submitAllerg() {
+        let correct = 0;
+        commonAllergens.forEach(a => {
+            const el = document.querySelector(`#allergOpts .checkbox-item[data-id="${a.id}"]`);
+            const sel = selectedAllerg.has(a.id);
+            if (a.isCommon && sel) { el.classList.add('correct'); correct++; }
+            else if (!a.isCommon && sel) { el.classList.add('incorrect'); }
+        });
+        state.allergScore = Math.round(correct / 5 * 100);
+        addScore(Math.round(state.allergScore / 3));
+        document.getElementById('allergFeedback').innerHTML = `<div class="feedback ${state.allergScore>=75?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${state.allergScore>=75?'✅':'📚'}</span><span class="feedback-title">Contact Allergens</span></div><div class="feedback-text"><strong>Top contact allergens:</strong> Nickel, fragrance, preservatives (MI/MCI), PPD, neomycin/bacitracin, rubber chemicals<br><strong>Not contact allergens:</strong> Dust mites, pollen = aeroallergens (cause respiratory/Type I reactions)</div></div>`;
+        document.querySelector('#allergFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('results')">See Results →</button>`;
+    }
+
+    let selectedExplain = null;
+    function selectExplain(id) { selectedExplain = id; document.querySelectorAll('#explainOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('explainSubmit').disabled = false; }
+    function submitExplain() {
+        document.querySelectorAll('#explainOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'nickel') o.classList.add('correct');
+            else if (o.dataset.id === selectedExplain) o.classList.add('incorrect');
+        });
+        state.explainScore = selectedExplain === 'nickel' ? 100 : 40;
+        addScore(selectedExplain === 'nickel' ? 30 : 10);
+        document.getElementById('explainFeedback').innerHTML = `<div class="feedback ${selectedExplain==='nickel'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedExplain==='nickel'?'✅':'📚'}</span><span class="feedback-title">${selectedExplain==='nickel'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Classic nickel ACD distribution:</strong><br>• Earlobes = earrings<br>• Periumbilical = jean buttons, belt buckles<br>• Wrists = watches, bracelets<br>• Neck = necklaces<br>The location tells you the allergen!</div></div>`;
+        document.getElementById('explainSubmit').textContent = 'Complete →';
+        document.getElementById('explainSubmit').onclick = () => goTo('outcome');
+    }
+
+    function goTo(id) { state.stage = id; document.getElementById('stageContainer').innerHTML = stages[id].render(); window.scrollTo(0,0); }
+    document.addEventListener('DOMContentLoaded', () => goTo('setup'));
+    </script>
 </body>
 </html>

@@ -3,35 +3,328 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Irregular Beat | ReasonDx Adventure</title>
-    <style>:root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#8B5CF6;--success:#10B981;--warning:#F59E0B;--danger:#DC2626}*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}.header{background:linear-gradient(135deg,#5B21B6,#8B5CF6);padding:12px 20px;position:sticky;top:0;z-index:100}.header-row{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}.diff-toggle{display:flex;background:rgba(0,0,0,.3);border-radius:8px}.diff-btn{padding:6px 12px;font-size:.75rem;cursor:pointer;border:none;background:0 0;color:rgba(255,255,255,.7);font-weight:600}.diff-btn.active{background:rgba(255,255,255,.2);color:#fff}.stat{text-align:center;background:rgba(0,0,0,.2);padding:6px 14px;border-radius:8px}.stat-value{font-size:1.1rem;font-weight:700;font-family:monospace}.stat-label{font-size:.6rem;opacity:.8}.main{max-width:900px;margin:0 auto;padding:24px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px}.card-header{padding:20px 24px;border-bottom:1px solid var(--border)}.card-phase{font-size:.75rem;color:var(--accent);text-transform:uppercase}.card-title{font-size:1.5rem;font-weight:700}.card-body{padding:24px}.narrative{background:rgba(139,92,246,.1);border-left:4px solid var(--accent);padding:20px;border-radius:0 12px 12px 0;margin-bottom:20px}.narrative .hl{background:rgba(139,92,246,.3);padding:2px 6px;border-radius:4px}.setup-screen{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center}.start-btn{background:var(--accent);color:#fff;border:none;padding:16px 48px;border-radius:12px;font-size:1.1rem;font-weight:700;cursor:pointer}.hint{background:rgba(59,130,246,.15);padding:12px 16px;border-radius:8px;margin-bottom:16px;color:#93C5FD}.radio-options{display:flex;flex-direction:column;gap:10px}.radio-option{display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(0,0,0,.2);border:2px solid var(--border);border-radius:10px;cursor:pointer}.radio-option.selected{border-color:var(--accent);background:rgba(139,92,246,.15)}.radio-option.correct{border-color:var(--success);background:rgba(16,185,129,.15)}.radio-option.incorrect{border-color:var(--danger);background:rgba(220,38,38,.15)}.radio-circle{width:22px;height:22px;border:2px solid var(--border);border-radius:50%}.radio-option.selected .radio-circle{border-color:var(--accent);background:radial-gradient(circle,var(--accent) 40%,transparent 40%)}.feedback{padding:20px;border-radius:12px;margin:20px 0}.feedback.excellent{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3)}.feedback.incorrect{background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.3)}.btn{padding:14px 28px;border-radius:10px;font-weight:600;cursor:pointer;border:none}.btn-primary{background:var(--accent);color:#fff}.btn:disabled{opacity:.5}.btn-row{display:flex;gap:12px;margin-top:24px}.btn-link{background:0 0;border:2px solid var(--border);color:var(--text)}.vitals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:12px;margin:20px 0}.vital{background:rgba(0,0,0,.2);padding:12px;border-radius:10px;text-align:center}.vital-label{font-size:.7rem;color:var(--muted)}.vital-value{font-size:1.3rem;font-weight:700;font-family:monospace}.lab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:16px 0}.lab-item{display:flex;justify-content:space-between;padding:8px 12px;background:rgba(0,0,0,.2);border-radius:6px}.lab-name{color:var(--muted)}.lab-value{font-family:monospace;font-weight:600}.score-summary{background:rgba(0,0,0,.2);border-radius:12px;padding:24px;margin:24px auto;max-width:600px}.score-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}.pearls-box{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:20px;margin-top:20px}.pearls-title{font-weight:700;color:var(--success);margin-bottom:12px}.pearl-item{padding:8px 0;border-bottom:1px solid rgba(16,185,129,.2);font-size:.95rem}.cross-link{background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);border-radius:8px;padding:12px 16px;margin-top:12px}.cross-link a{color:#C4B5FD;text-decoration:none}.progress-bar{background:rgba(255,255,255,.1);border-radius:10px;height:8px;margin:20px 0}.progress-fill{background:var(--accent);height:100%}.question-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}.question-number{background:var(--accent);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}</style>
+    <title>The Irregular Pulse | ReasonDx Adventure</title>
+    <style>
+        :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #EC4899; --success: #10B981; --warning: #F59E0B; --danger: #DC2626; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #DB2777 0%, #EC4899 100%); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; }
+        .stat { background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 8px; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        .main { max-width: 1000px; margin: 0 auto; padding: 24px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(236,72,153,0.1), rgba(219,39,119,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; line-height: 1.8; }
+        .narrative .hl { background: rgba(236,72,153,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        .setup-screen { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; }
+        .setup-screen h1 { font-size: 2rem; margin-bottom: 8px; }
+        .setup-screen .subtitle { color: var(--muted); margin-bottom: 32px; }
+        .start-btn { background: var(--accent); color: white; border: none; padding: 16px 48px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+        .question-section { margin-bottom: 32px; }
+        .question-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .question-number { background: var(--accent); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .question-text { font-size: 1.1rem; font-weight: 600; }
+        .radio-options { display: flex; flex-direction: column; gap: 10px; }
+        .radio-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .radio-option:hover { border-color: var(--accent); }
+        .radio-option.selected { border-color: var(--accent); background: rgba(236,72,153,0.15); }
+        .radio-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .radio-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .radio-circle { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; }
+        .radio-option.selected .radio-circle { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 40%, transparent 40%); }
+        .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+        .checkbox-item { display: flex; align-items: center; gap: 10px; padding: 12px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .checkbox-item:hover { border-color: var(--accent); }
+        .checkbox-item.selected { border-color: var(--accent); background: rgba(236,72,153,0.15); }
+        .checkbox-item.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .checkbox-item.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .checkbox-box { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .checkbox-item.selected .checkbox-box { background: var(--accent); border-color: var(--accent); }
+        .checkbox-item.selected .checkbox-box::after { content: '✓'; color: white; font-weight: bold; }
+        .feedback { padding: 20px; border-radius: 12px; margin: 20px 0; }
+        .feedback.excellent { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .feedback.acceptable { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .feedback-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .feedback-icon { font-size: 1.5rem; }
+        .feedback-title { font-weight: 700; }
+        .feedback-text { color: var(--muted); line-height: 1.7; }
+        .feedback-text strong { color: var(--text); }
+        .alert { padding: 16px 20px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
+        .alert.info { background: rgba(236,72,153,0.15); border: 1px solid rgba(236,72,153,0.3); }
+        .alert.danger { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+        .alert-icon { font-size: 1.5rem; }
+        .alert-content { flex: 1; }
+        .alert-title { font-weight: 600; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; color: var(--muted); }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-row { display: flex; gap: 12px; margin-top: 24px; }
+        .lab-panel { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .lab-panel-title { font-weight: 600; margin-bottom: 16px; color: var(--accent); }
+        .lab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; }
+        .lab-item { background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; }
+        .lab-name { font-size: 0.8rem; color: var(--muted); }
+        .lab-value { font-size: 1.1rem; font-weight: 700; }
+        .lab-value.critical { color: var(--danger); }
+        .lab-value.high { color: var(--warning); }
+        .lab-range { font-size: 0.7rem; color: var(--muted); }
+        .outcome { text-align: center; padding: 40px 20px; }
+        .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
+        .outcome-title { font-size: 2rem; font-weight: 700; color: var(--success); margin-bottom: 8px; }
+        .outcome-desc { color: var(--muted); max-width: 600px; margin: 0 auto 24px; }
+        .score-summary { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 24px; margin: 24px auto; max-width: 500px; }
+        .score-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .score-row:last-child { border-bottom: none; }
+        .score-box { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .score-box-title { font-weight: 600; color: var(--accent); margin-bottom: 12px; }
+        .score-item { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        .score-item:last-child { border-bottom: none; }
+    </style>
 </head>
 <body>
-    <header class="header"><div class="header-row"><div style="font-weight:600">💗 The Irregular Beat</div><div style="display:flex;gap:12px;align-items:center"><div class="diff-toggle"><button class="diff-btn active" onclick="setDiff('easy')">Easy</button><button class="diff-btn" onclick="setDiff('int')">Intermediate</button><button class="diff-btn" onclick="setDiff('adv')">Advanced</button></div><div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Points</div></div></div></div></header>
-    <main class="main"><div id="app"></div></main>
-<script>
-const S={stage:'setup',score:0,max:0,diff:'easy',q:0,total:8};
-const C={easy:{age:'68F',wt:'70kg',hx:'Palpitations x2 days, HTN',exam:'Irregularly irregular, no distress',vitals:{HR:'124',BP:'148/88'},labs:{TSH:'2.1',K:'4.2',ECG:'AFib with RVR'}},int:{age:'55M',wt:'90kg',hx:'New AFib on routine ECG, DM, asymptomatic',exam:'Normal exam',vitals:{HR:'92',BP:'138/82'},labs:{TSH:'1.8',Cr:'1.1',ECG:'AFib, controlled'}},adv:{age:'78M',wt:'65kg',hx:'AFib with RVR, hypotensive, CHF history',exam:'JVD, rales, cool extremities',vitals:{HR:'156',BP:'82/54'},labs:{BNP:'1840',Cr:'2.1',ECG:'Wide complex irregular'}}};
-const Q=[
-{t:'Rate Control Target',q:'Initial HR target for AFib rate control?',h:'RACE II showed lenient is OK',o:[{id:'a',txt:'<110 bpm at rest (lenient)',c:1,p:100},{id:'b',txt:'<80 bpm strict',c:0,p:60},{id:'c',txt:'<60 bpm',c:0,p:0}],fb:{1:'<b>Correct!</b> RACE II: Lenient (<110) non-inferior to strict (<80). Tighten only if symptomatic.',0:'<b>RACE II:</b> Lenient (<110) is acceptable initial target.'}},
-{t:'Rate Control Agents',q:'First-line rate control for AFib with preserved EF?',h:'Multiple options',o:[{id:'a',txt:'Beta-blocker OR diltiazem/verapamil',c:1,p:100},{id:'b',txt:'Digoxin alone',c:0,p:30},{id:'c',txt:'Amiodarone',c:0,p:20}],fb:{1:'<b>Correct!</b> BB or CCB first-line. Digoxin adjunct only. AVOID CCB in HFrEF!',0:'<b>First-line:</b> BB or non-DHP CCB. Digoxin add-on only.'}},
-{t:'CHA2DS2-VASc',q:'68F with HTN. Calculate stroke risk score.',h:'Age 65-74=1, female=1, HTN=1',o:[{id:'a',txt:'Score=3 (anticoagulate)',c:1,p:100},{id:'b',txt:'Score=1',c:0,p:20},{id:'c',txt:'Score=2',c:0,p:50}],fb:{1:'<b>Correct!</b> HTN(1)+Age65-74(1)+Female(1)=3. Score ≥2 men, ≥3 women = anticoagulate.',0:'<b>Calculate:</b> C-H-A2-D-S2-V-A-Sc. This patient scores 3.'}},
-{t:'Anticoagulation Choice',q:'Preferred anticoagulation for non-valvular AFib?',h:'DOACs vs warfarin',o:[{id:'a',txt:'DOAC (apixaban, rivaroxaban, etc)',c:1,p:100},{id:'b',txt:'Warfarin',c:0,p:50},{id:'c',txt:'Aspirin',c:0,p:0}],fb:{1:'<b>Correct!</b> DOACs preferred. Warfarin only for mechanical valves or moderate-severe MS.',0:'<b>DOACs first-line</b> for non-valvular AFib.'}},
-{t:'Cardioversion Safety',q:'AFib >48 hrs. Safe to cardiovert?',h:'Thrombus risk in LAA',o:[{id:'a',txt:'Only after 3wks anticoag OR TEE to exclude thrombus',c:1,p:100},{id:'b',txt:'Cardiovert immediately',c:0,p:0},{id:'c',txt:'Never cardiovert',c:0,p:20}],fb:{1:'<b>Correct!</b> >48hrs: anticoag 3wks before + 4wks after, OR TEE first.',0:'<b>48-hour rule:</b> Need anticoag or TEE before cardioversion.'}},
-{t:'Unstable AFib',q:'Hypotensive AFib with RVR. Immediate treatment?',h:'Hemodynamic instability',o:[{id:'a',txt:'Synchronized cardioversion',c:1,p:100},{id:'b',txt:'IV diltiazem',c:0,p:20},{id:'c',txt:'Oral amiodarone',c:0,p:0}],fb:{1:'<b>Correct!</b> Unstable = immediate cardioversion regardless of duration.',0:'<b>Unstable = cardiovert!</b> Hemodynamic instability overrides 48-hour rule.'}},
-{t:'WPW + AFib',q:'Wide complex irregular rhythm with delta waves. What is CONTRAINDICATED?',h:'AV nodal blockers can be fatal',o:[{id:'a',txt:'Diltiazem, beta-blockers, digoxin, adenosine',c:1,p:100},{id:'b',txt:'Procainamide',c:0,p:0},{id:'c',txt:'Cardioversion',c:0,p:0}],fb:{1:'<b>Critical!</b> AV nodal blockers in WPW+AFib = VFib. Use procainamide or cardiovert.',0:'<b>Life-threatening!</b> Never AV nodal blockers in pre-excited AFib.'}},
-{t:'Rhythm Control',q:'Antiarrhythmic for AFib with normal heart?',h:'Structural heart limits options',o:[{id:'a',txt:'Flecainide, propafenone, or dronedarone',c:1,p:100},{id:'b',txt:'Amiodarone first-line',c:0,p:40},{id:'c',txt:'Digoxin',c:0,p:0}],fb:{1:'<b>Correct!</b> Normal heart: Class IC or dronedarone. Amiodarone reserved for HF/CAD.',0:'<b>Agent selection:</b> Depends on structural heart disease.'}}
-];
-let sel=null;
-function setDiff(d){S.diff=d;document.querySelectorAll('.diff-btn').forEach((b,i)=>b.classList.toggle('active',['easy','int','adv'][i]===d));if(S.stage!=='setup'){S.stage='setup';S.score=0;S.max=0;S.q=0;document.getElementById('score').textContent='0';}render();}
-function addPts(p,m){S.score+=p;S.max+=m;document.getElementById('score').textContent=S.score;}
-function pick(id){sel=id;document.querySelectorAll('.radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id));document.getElementById('sub').disabled=false;}
-function submit(){const q=Q[S.q-1];const opt=q.o.find(o=>o.id===sel);addPts(opt.p||0,100);document.querySelectorAll('.radio-option').forEach(o=>{const op=q.o.find(x=>x.id===o.dataset.id);if(op&&op.c)o.classList.add('correct');else if(o.dataset.id===sel)o.classList.add('incorrect');});document.getElementById('fb').innerHTML='<div class="feedback '+(opt&&opt.c?'excellent':'incorrect')+'">'+q.fb[opt&&opt.c?1:0]+'</div>';document.getElementById('sub').textContent=S.q<S.total?'Next →':'Results →';document.getElementById('sub').onclick=next;}
-function next(){if(S.q<S.total){S.q++;sel=null;render();}else{S.stage='outcome';render();}}
-function start(){S.q=1;S.stage='question';render();}
-function go(s){S.stage=s;render();}
-function render(){const c=C[S.diff];if(S.stage==='setup'){document.getElementById('app').innerHTML='<div class="setup-screen"><h1>💗 The Irregular Beat</h1><p style="color:var(--muted);margin-bottom:32px">AFib: Rate control, CHA2DS2-VASc, anticoagulation, cardioversion, WPW</p><button class="start-btn" onclick="go(\'pres\')">Begin Case →</button></div>';}else if(S.stage==='pres'){document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Presentation</div><div class="card-title">💓 Arrhythmia Case</div></div><div class="card-body"><div class="narrative"><span class="hl">'+c.age+'</span> ('+c.wt+')<br><b>Hx:</b> '+c.hx+'<br><b>Exam:</b> '+c.exam+'</div><div class="vitals-grid">'+Object.entries(c.vitals).map(function(e){return'<div class="vital"><div class="vital-label">'+e[0]+'</div><div class="vital-value">'+e[1]+'</div></div>';}).join('')+'</div><div class="lab-grid">'+Object.entries(c.labs).map(function(e){return'<div class="lab-item"><span class="lab-name">'+e[0]+'</span><span class="lab-value">'+e[1]+'</span></div>';}).join('')+'</div><div class="btn-row"><button class="btn btn-primary" onclick="start()">Begin Assessment →</button></div></div></div>';}else if(S.stage==='question'){var q=Q[S.q-1];document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Q'+S.q+'/'+S.total+'</div><div class="card-title">🔍 '+q.t+'</div></div><div class="card-body"><div class="progress-bar"><div class="progress-fill" style="width:'+(S.q/S.total*100)+'%"></div></div><div class="question-header"><div class="question-number">'+S.q+'</div><div style="font-weight:600">'+q.q+'</div></div><div class="hint">💡 '+q.h+'</div><div class="radio-options">'+q.o.map(function(o){return'<div class="radio-option" data-id="'+o.id+'" onclick="pick(\''+o.id+'\')"><div class="radio-circle"></div><div><b>'+o.txt+'</b></div></div>';}).join('')+'</div><div id="fb"></div><div class="btn-row"><button class="btn btn-primary" id="sub" onclick="submit()" disabled>Submit →</button></div></div></div>';}else{var pct=S.max>0?Math.round(S.score/S.max*100):0;document.getElementById('app').innerHTML='<div class="card"><div class="card-body"><div style="text-align:center;padding:40px"><div style="font-size:4rem">'+(pct>=70?'🎉':'📚')+'</div><div style="font-size:2rem;font-weight:700;color:'+(pct>=70?'var(--success)':'var(--warning)')+'">'+(pct>=70?'Complete!':'Review')+'</div></div><div class="score-summary"><div class="score-row"><span>Score</span><span>'+S.score+'/'+S.max+' ('+pct+'%)</span></div></div><div class="pearls-box"><div class="pearls-title">📌 AFib Pearls</div><div class="pearl-item"><b>Rate control:</b> BB or CCB. Target <110 (lenient OK)</div><div class="pearl-item"><b>CHA2DS2-VASc:</b> ≥2(M) or ≥3(F) = anticoagulate</div><div class="pearl-item"><b>DOACs:</b> First-line for non-valvular AFib</div><div class="pearl-item"><b>>48hrs:</b> 3wks anticoag or TEE before cardioversion</div><div class="pearl-item"><b>WPW+AFib:</b> NO AV nodal blockers! Procainamide or cardiovert</div></div><div class="cross-link"><a href="../mechanism/syncope-arrhythmia-module.html">MechanismDx: Arrhythmias</a></div><div class="btn-row" style="justify-content:center;margin-top:30px"><button class="btn btn-primary" onclick="location.reload()">Retry</button><button class="btn btn-link" onclick="location.href=\'adventure-hub.html\'">Back</button></div></div></div>';}}
-document.addEventListener('DOMContentLoaded',render);
-</script>
+    <header class="header"><div class="header-row"><div class="header-title">💓 The Irregular Pulse</div><div class="stat"><div class="stat-value" id="scoreDisplay">0</div><div class="stat-label">Points</div></div></div></header>
+    <main class="main"><div id="stageContainer"></div></main>
+    <script>
+    const state = { stage:'setup', score:0 };
+    
+    function addScore(pts) { state.score += pts; document.getElementById('scoreDisplay').textContent = state.score; }
+
+    const stages = {
+        setup: { render: () => `
+            <div class="setup-screen">
+                <h1>💓 The Irregular Pulse</h1>
+                <p class="subtitle">Atrial fibrillation management</p>
+                <button class="start-btn" onclick="goTo('presentation')">Begin Case →</button>
+            </div>`
+        },
+        presentation: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Emergency Department</div><div class="card-title">📋 Palpitations and Fatigue</div></div>
+                <div class="card-body">
+                    <div class="narrative">A <span class="hl">72-year-old female</span> with <span class="hl">hypertension</span> and <span class="hl">diabetes</span> presents with <span class="hl">2 days of palpitations</span>, <span class="hl">fatigue</span>, and <span class="hl">mild dyspnea on exertion</span>. She denies chest pain or syncope.<br><br>History includes <span class="hl">prior TIA 3 years ago</span>. Not on anticoagulation. On exam: <span class="hl">irregularly irregular pulse</span>, no JVD, lungs clear.<br><br>Vitals: HR 124 (irregular), BP 142/88, SpO2 97% on RA.</div>
+                    <div class="lab-panel">
+                        <div class="lab-panel-title">ECG & Labs</div>
+                        <div class="lab-grid">
+                            <div class="lab-item"><div class="lab-name">ECG</div><div class="lab-value critical">Afib RVR</div><div class="lab-range">-</div></div>
+                            <div class="lab-item"><div class="lab-name">Troponin</div><div class="lab-value">0.02 ng/mL</div><div class="lab-range">&lt;0.04</div></div>
+                            <div class="lab-item"><div class="lab-name">TSH</div><div class="lab-value">2.1 mU/L</div><div class="lab-range">0.4-4.0</div></div>
+                            <div class="lab-item"><div class="lab-name">BNP</div><div class="lab-value high">312 pg/mL</div><div class="lab-range">&lt;100</div></div>
+                            <div class="lab-item"><div class="lab-name">Creatinine</div><div class="lab-value">1.1 mg/dL</div><div class="lab-range">0.7-1.3</div></div>
+                            <div class="lab-item"><div class="lab-name">K+</div><div class="lab-value">4.2 mEq/L</div><div class="lab-range">3.5-5.0</div></div>
+                        </div>
+                    </div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('stability')">Assess Stability →</button></div>
+                </div>
+            </div>`
+        },
+        stability: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Assessment</div><div class="card-title">⚡ Hemodynamic Stability</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">1</div><div class="question-text">This patient has Afib with RVR. Is she hemodynamically UNSTABLE requiring immediate cardioversion?</div></div>
+                        <div class="radio-options" id="stabOpts">
+                            <div class="radio-option" data-id="unstable" onclick="selectStab('unstable')"><div class="radio-circle"></div><div><strong>Yes - Unstable, needs immediate cardioversion</strong><br><small style="color:var(--muted)">HR >100 is always unstable</small></div></div>
+                            <div class="radio-option" data-id="stable" onclick="selectStab('stable')"><div class="radio-circle"></div><div><strong>No - Stable, can use rate control first</strong><br><small style="color:var(--muted)">No hypotension, ACS, or severe HF symptoms</small></div></div>
+                        </div>
+                    </div>
+                    <div id="stabFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="stabSubmit" onclick="submitStab()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        rateControl: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Rate Control</div><div class="card-title">💊 Medication Selection</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">2</div><div class="question-text">What is the first-line agent for rate control in Afib RVR?</div></div>
+                        <div class="radio-options" id="rateOpts">
+                            <div class="radio-option" data-id="bb_ccb" onclick="selectRate('bb_ccb')"><div class="radio-circle"></div><div><strong>Beta-blocker or Non-DHP CCB</strong><br><small style="color:var(--muted)">Metoprolol, diltiazem</small></div></div>
+                            <div class="radio-option" data-id="digoxin" onclick="selectRate('digoxin')"><div class="radio-circle"></div><div><strong>Digoxin</strong><br><small style="color:var(--muted)">Slower onset, good for HFrEF</small></div></div>
+                            <div class="radio-option" data-id="amio" onclick="selectRate('amio')"><div class="radio-circle"></div><div><strong>Amiodarone</strong><br><small style="color:var(--muted)">Antiarrhythmic</small></div></div>
+                            <div class="radio-option" data-id="flecainide" onclick="selectRate('flecainide')"><div class="radio-circle"></div><div><strong>Flecainide</strong><br><small style="color:var(--muted)">Rhythm control</small></div></div>
+                        </div>
+                    </div>
+                    <div id="rateFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="rateSubmit" onclick="submitRate()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        chadsvasc: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Stroke Risk</div><div class="card-title">📊 CHA₂DS₂-VASc Score</div></div>
+                <div class="card-body">
+                    <div class="score-box">
+                        <div class="score-box-title">CHA₂DS₂-VASc Components</div>
+                        <div class="score-item"><span>C - CHF (1 point)</span><span>?</span></div>
+                        <div class="score-item"><span>H - Hypertension (1 point)</span><span>✓</span></div>
+                        <div class="score-item"><span>A₂ - Age ≥75 (2 points)</span><span>?</span></div>
+                        <div class="score-item"><span>D - Diabetes (1 point)</span><span>✓</span></div>
+                        <div class="score-item"><span>S₂ - Stroke/TIA (2 points)</span><span>✓</span></div>
+                        <div class="score-item"><span>V - Vascular disease (1 point)</span><span>?</span></div>
+                        <div class="score-item"><span>A - Age 65-74 (1 point)</span><span>✓</span></div>
+                        <div class="score-item"><span>Sc - Sex category female (1 point)</span><span>✓</span></div>
+                    </div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">3</div><div class="question-text">Calculate this patient's CHA₂DS₂-VASc score (HTN, DM, prior TIA, age 72, female):</div></div>
+                        <div class="radio-options" id="chadOpts">
+                            <div class="radio-option" data-id="3" onclick="selectChad('3')"><div class="radio-circle"></div><span>3 points</span></div>
+                            <div class="radio-option" data-id="5" onclick="selectChad('5')"><div class="radio-circle"></div><span>5 points</span></div>
+                            <div class="radio-option" data-id="6" onclick="selectChad('6')"><div class="radio-circle"></div><span>6 points</span></div>
+                            <div class="radio-option" data-id="7" onclick="selectChad('7')"><div class="radio-circle"></div><span>7 points</span></div>
+                        </div>
+                    </div>
+                    <div id="chadFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="chadSubmit" onclick="submitChad()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        anticoag: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Anticoagulation</div><div class="card-title">💊 Stroke Prevention</div></div>
+                <div class="card-body">
+                    <div class="alert info"><span class="alert-icon">📋</span><div class="alert-content"><div class="alert-title">Anticoagulation Threshold</div><div class="alert-desc">CHA₂DS₂-VASc ≥2 in men or ≥3 in women → Anticoagulation recommended</div></div></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">4</div><div class="question-text">What is the preferred anticoagulation for this patient with non-valvular Afib?</div></div>
+                        <div class="radio-options" id="antiOpts">
+                            <div class="radio-option" data-id="doac" onclick="selectAnti('doac')"><div class="radio-circle"></div><div><strong>DOAC (apixaban, rivaroxaban, etc.)</strong><br><small style="color:var(--muted)">Preferred over warfarin for non-valvular Afib</small></div></div>
+                            <div class="radio-option" data-id="warfarin" onclick="selectAnti('warfarin')"><div class="radio-circle"></div><div><strong>Warfarin (goal INR 2-3)</strong><br><small style="color:var(--muted)">Vitamin K antagonist</small></div></div>
+                            <div class="radio-option" data-id="aspirin" onclick="selectAnti('aspirin')"><div class="radio-circle"></div><div><strong>Aspirin alone</strong><br><small style="color:var(--muted)">Antiplatelet</small></div></div>
+                            <div class="radio-option" data-id="none" onclick="selectAnti('none')"><div class="radio-circle"></div><div><strong>No anticoagulation needed</strong><br><small style="color:var(--muted)">Low risk</small></div></div>
+                        </div>
+                    </div>
+                    <div id="antiFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="antiSubmit" onclick="submitAnti()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        cardioversion: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Rhythm Control</div><div class="card-title">⚡ Cardioversion Considerations</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">5</div><div class="question-text">If cardioversion is planned for Afib of unknown or >48h duration, what is required?</div></div>
+                        <div class="radio-options" id="cvOpts">
+                            <div class="radio-option" data-id="tee_or_anticoag" onclick="selectCV('tee_or_anticoag')"><div class="radio-circle"></div><div><strong>TEE to rule out LAA thrombus OR 3+ weeks anticoagulation</strong><br><small style="color:var(--muted)">Prevent stroke from dislodged clot</small></div></div>
+                            <div class="radio-option" data-id="immediate" onclick="selectCV('immediate')"><div class="radio-circle"></div><div><strong>Can cardiovert immediately</strong><br><small style="color:var(--muted)">No need to wait</small></div></div>
+                            <div class="radio-option" data-id="tte" onclick="selectCV('tte')"><div class="radio-circle"></div><div><strong>TTE is sufficient</strong><br><small style="color:var(--muted)">Standard echo</small></div></div>
+                        </div>
+                    </div>
+                    <div id="cvFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="cvSubmit" onclick="submitCV()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        outcome: { render: () => `
+            <div class="card"><div class="card-body">
+                <div class="outcome">
+                    <div class="outcome-icon">🎉</div>
+                    <div class="outcome-title">Patient Stabilized!</div>
+                    <div class="outcome-desc">Patient received IV diltiazem with HR control to 80s. Given her high CHA₂DS₂-VASc score (6), she was started on apixaban. After rate control and 3 weeks of anticoagulation, she underwent successful elective cardioversion to sinus rhythm. Continued on apixaban long-term.</div>
+                </div>
+                <div class="score-summary">
+                    <h3 style="margin-bottom:16px">Performance</h3>
+                    <div class="score-row"><span>Stability Assessment</span><span>${state.stabScore||0}/100</span></div>
+                    <div class="score-row"><span>Rate Control</span><span>${state.rateScore||0}/100</span></div>
+                    <div class="score-row"><span>CHA₂DS₂-VASc</span><span>${state.chadScore||0}/100</span></div>
+                    <div class="score-row"><span>Anticoagulation</span><span>${state.antiScore||0}/100</span></div>
+                    <div class="score-row"><span>Cardioversion</span><span>${state.cvScore||0}/100</span></div>
+                    <div class="score-row" style="border-top:2px solid var(--border);padding-top:12px"><strong>Total</strong><strong>${state.score}</strong></div>
+                </div>
+                <div class="feedback excellent"><div class="feedback-header"><span class="feedback-icon">💡</span><span class="feedback-title">Afib Pearls</span></div><div class="feedback-text">
+                    • <strong>Unstable signs:</strong> Hypotension, ACS, acute HF, altered mental status → Immediate cardioversion<br>
+                    • <strong>Rate control first-line:</strong> Beta-blockers or non-DHP CCBs (diltiazem, verapamil)<br>
+                    • <strong>Rate goal:</strong> Lenient (<110 at rest) vs strict (<80) - RACE II showed lenient is non-inferior<br>
+                    • <strong>CHA₂DS₂-VASc:</strong> ≥2 men, ≥3 women → Anticoagulate. Prior stroke/TIA = 2 points!<br>
+                    • <strong>DOAC preferred:</strong> Over warfarin for non-valvular Afib (exception: mechanical valve, mod-severe MS)<br>
+                    • <strong>Cardioversion timing:</strong> If Afib >48h or unknown duration → TEE or 3+ weeks anticoag first<br>
+                    • <strong>Post-cardioversion:</strong> Anticoagulate 4+ weeks (risk of stunning), long-term if high CHA₂DS₂-VASc
+                </div></div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Play Again</button></div>
+            </div></div>`
+        }
+    };
+
+    let selectedStab = null;
+    function selectStab(id) { selectedStab = id; document.querySelectorAll('#stabOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('stabSubmit').disabled = false; }
+    function submitStab() {
+        document.querySelectorAll('#stabOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'stable') o.classList.add('correct');
+            else if (o.dataset.id === selectedStab) o.classList.add('incorrect');
+        });
+        state.stabScore = selectedStab === 'stable' ? 100 : 40;
+        addScore(selectedStab === 'stable' ? 40 : 15);
+        document.getElementById('stabFeedback').innerHTML = `<div class="feedback ${selectedStab==='stable'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedStab==='stable'?'✅':'📚'}</span><span class="feedback-title">${selectedStab==='stable'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Hemodynamically STABLE:</strong> Tachycardia alone doesn't = unstable. Look for: hypotension, ACS, acute pulmonary edema, altered mental status. This patient has none → rate control first.</div></div>`;
+        document.getElementById('stabSubmit').textContent = 'Continue →';
+        document.getElementById('stabSubmit').onclick = () => goTo('rateControl');
+    }
+
+    let selectedRate = null;
+    function selectRate(id) { selectedRate = id; document.querySelectorAll('#rateOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('rateSubmit').disabled = false; }
+    function submitRate() {
+        document.querySelectorAll('#rateOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'bb_ccb') o.classList.add('correct');
+            else if (o.dataset.id === selectedRate) o.classList.add('incorrect');
+        });
+        state.rateScore = selectedRate === 'bb_ccb' ? 100 : 40;
+        addScore(selectedRate === 'bb_ccb' ? 40 : 15);
+        document.getElementById('rateFeedback').innerHTML = `<div class="feedback ${selectedRate==='bb_ccb'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedRate==='bb_ccb'?'✅':'📚'}</span><span class="feedback-title">${selectedRate==='bb_ccb'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>First-line rate control:</strong> Beta-blockers (metoprolol, esmolol) or non-DHP CCBs (diltiazem, verapamil). Digoxin is slower onset, use in HFrEF. Amiodarone/flecainide are for rhythm control.</div></div>`;
+        document.getElementById('rateSubmit').textContent = 'Continue →';
+        document.getElementById('rateSubmit').onclick = () => goTo('chadsvasc');
+    }
+
+    let selectedChad = null;
+    function selectChad(id) { selectedChad = id; document.querySelectorAll('#chadOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('chadSubmit').disabled = false; }
+    function submitChad() {
+        document.querySelectorAll('#chadOpts .radio-option').forEach(o => {
+            if (o.dataset.id === '6') o.classList.add('correct');
+            else if (o.dataset.id === selectedChad) o.classList.add('incorrect');
+        });
+        state.chadScore = selectedChad === '6' ? 100 : (selectedChad === '5' ? 60 : 30);
+        addScore(selectedChad === '6' ? 40 : (selectedChad === '5' ? 25 : 10));
+        document.getElementById('chadFeedback').innerHTML = `<div class="feedback ${selectedChad==='6'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedChad==='6'?'✅':'📚'}</span><span class="feedback-title">${selectedChad==='6'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>CHA₂DS₂-VASc = 6:</strong> HTN (1) + DM (1) + Prior TIA (2) + Age 65-74 (1) + Female (1) = 6 points. Very high stroke risk (~9.8%/year without anticoagulation).</div></div>`;
+        document.getElementById('chadSubmit').textContent = 'Continue →';
+        document.getElementById('chadSubmit').onclick = () => goTo('anticoag');
+    }
+
+    let selectedAnti = null;
+    function selectAnti(id) { selectedAnti = id; document.querySelectorAll('#antiOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('antiSubmit').disabled = false; }
+    function submitAnti() {
+        document.querySelectorAll('#antiOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'doac') o.classList.add('correct');
+            else if (o.dataset.id === selectedAnti) o.classList.add('incorrect');
+        });
+        state.antiScore = selectedAnti === 'doac' ? 100 : (selectedAnti === 'warfarin' ? 70 : 30);
+        addScore(selectedAnti === 'doac' ? 40 : (selectedAnti === 'warfarin' ? 30 : 10));
+        document.getElementById('antiFeedback').innerHTML = `<div class="feedback ${selectedAnti==='doac'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedAnti==='doac'?'✅':'📚'}</span><span class="feedback-title">${selectedAnti==='doac'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>DOACs preferred:</strong> Over warfarin for non-valvular Afib (better safety, no INR monitoring). Aspirin alone is NOT adequate for stroke prevention in Afib. Warfarin still needed for mechanical valves and mod-severe mitral stenosis.</div></div>`;
+        document.getElementById('antiSubmit').textContent = 'Continue →';
+        document.getElementById('antiSubmit').onclick = () => goTo('cardioversion');
+    }
+
+    let selectedCV = null;
+    function selectCV(id) { selectedCV = id; document.querySelectorAll('#cvOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('cvSubmit').disabled = false; }
+    function submitCV() {
+        document.querySelectorAll('#cvOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'tee_or_anticoag') o.classList.add('correct');
+            else if (o.dataset.id === selectedCV) o.classList.add('incorrect');
+        });
+        state.cvScore = selectedCV === 'tee_or_anticoag' ? 100 : 30;
+        addScore(selectedCV === 'tee_or_anticoag' ? 40 : 10);
+        document.getElementById('cvFeedback').innerHTML = `<div class="feedback ${selectedCV==='tee_or_anticoag'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedCV==='tee_or_anticoag'?'✅':'📚'}</span><span class="feedback-title">${selectedCV==='tee_or_anticoag'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>If Afib >48h or unknown:</strong> TEE to rule out LAA thrombus OR 3+ weeks therapeutic anticoagulation before cardioversion. TTE cannot adequately visualize LAA. Risk is dislodging thrombus → stroke.</div></div>`;
+        document.getElementById('cvSubmit').textContent = 'Complete →';
+        document.getElementById('cvSubmit').onclick = () => goTo('outcome');
+    }
+
+    function goTo(id) { state.stage = id; document.getElementById('stageContainer').innerHTML = stages[id].render(); window.scrollTo(0,0); }
+    document.addEventListener('DOMContentLoaded', () => goTo('setup'));
+    </script>
 </body>
 </html>

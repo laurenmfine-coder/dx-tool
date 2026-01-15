@@ -3,35 +3,484 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Failing Filter | ReasonDx Adventure</title>
-    <style>:root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#06B6D4;--success:#10B981;--warning:#F59E0B;--danger:#DC2626}*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}.header{background:linear-gradient(135deg,#0E7490,#06B6D4);padding:12px 20px;position:sticky;top:0;z-index:100}.header-row{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}.diff-toggle{display:flex;background:rgba(0,0,0,.3);border-radius:8px}.diff-btn{padding:6px 12px;font-size:.75rem;cursor:pointer;border:none;background:0 0;color:rgba(255,255,255,.7);font-weight:600}.diff-btn.active{background:rgba(255,255,255,.2);color:#fff}.stat{text-align:center;background:rgba(0,0,0,.2);padding:6px 14px;border-radius:8px}.stat-value{font-size:1.1rem;font-weight:700;font-family:monospace}.stat-label{font-size:.6rem;opacity:.8}.main{max-width:900px;margin:0 auto;padding:24px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px}.card-header{padding:20px 24px;border-bottom:1px solid var(--border)}.card-phase{font-size:.75rem;color:var(--accent);text-transform:uppercase}.card-title{font-size:1.5rem;font-weight:700}.card-body{padding:24px}.narrative{background:rgba(6,182,212,.1);border-left:4px solid var(--accent);padding:20px;border-radius:0 12px 12px 0;margin-bottom:20px}.narrative .hl{background:rgba(6,182,212,.3);padding:2px 6px;border-radius:4px}.setup-screen{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center}.start-btn{background:var(--accent);color:#000;border:none;padding:16px 48px;border-radius:12px;font-size:1.1rem;font-weight:700;cursor:pointer}.hint{background:rgba(59,130,246,.15);padding:12px 16px;border-radius:8px;margin-bottom:16px;color:#93C5FD}.radio-options{display:flex;flex-direction:column;gap:10px}.radio-option{display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(0,0,0,.2);border:2px solid var(--border);border-radius:10px;cursor:pointer}.radio-option.selected{border-color:var(--accent);background:rgba(6,182,212,.15)}.radio-option.correct{border-color:var(--success);background:rgba(16,185,129,.15)}.radio-option.incorrect{border-color:var(--danger);background:rgba(220,38,38,.15)}.radio-circle{width:22px;height:22px;border:2px solid var(--border);border-radius:50%}.radio-option.selected .radio-circle{border-color:var(--accent);background:radial-gradient(circle,var(--accent) 40%,transparent 40%)}.feedback{padding:20px;border-radius:12px;margin:20px 0}.feedback.excellent{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3)}.feedback.incorrect{background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.3)}.btn{padding:14px 28px;border-radius:10px;font-weight:600;cursor:pointer;border:none}.btn-primary{background:var(--accent);color:#000}.btn:disabled{opacity:.5}.btn-row{display:flex;gap:12px;margin-top:24px}.btn-link{background:0 0;border:2px solid var(--border);color:var(--text)}.vitals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:12px;margin:20px 0}.vital{background:rgba(0,0,0,.2);padding:12px;border-radius:10px;text-align:center}.vital-label{font-size:.7rem;color:var(--muted)}.vital-value{font-size:1.3rem;font-weight:700;font-family:monospace}.lab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:16px 0}.lab-item{display:flex;justify-content:space-between;padding:8px 12px;background:rgba(0,0,0,.2);border-radius:6px}.lab-name{color:var(--muted)}.lab-value{font-family:monospace;font-weight:600}.score-summary{background:rgba(0,0,0,.2);border-radius:12px;padding:24px;margin:24px auto;max-width:600px}.score-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}.pearls-box{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:20px;margin-top:20px}.pearls-title{font-weight:700;color:var(--success);margin-bottom:12px}.pearl-item{padding:8px 0;border-bottom:1px solid rgba(16,185,129,.2);font-size:.95rem}.cross-link{background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);border-radius:8px;padding:12px 16px;margin-top:12px}.cross-link a{color:#C4B5FD;text-decoration:none}.progress-bar{background:rgba(255,255,255,.1);border-radius:10px;height:8px;margin:20px 0}.progress-fill{background:var(--accent);height:100%}.question-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}.question-number{background:var(--accent);color:#000;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}</style>
+    <title>The Numbers Game | ReasonDx Adventure</title>
+    <style>
+        :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #8B5CF6; --success: #10B981; --warning: #F59E0B; --danger: #DC2626; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #6D28D9 0%, #8B5CF6 100%); color: white; padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; }
+        .header-stats { display: flex; gap: 12px; }
+        .stat { background: rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 8px; text-align: center; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        .difficulty-badge { padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+        .difficulty-badge.easy { background: #10B981; }
+        .difficulty-badge.hard { background: #F59E0B; }
+        .difficulty-badge.hardest { background: #DC2626; }
+        .main { max-width: 1000px; margin: 0 auto; padding: 24px; }
+        .setup-screen { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; }
+        .setup-screen h1 { font-size: 2rem; margin-bottom: 8px; }
+        .setup-screen .subtitle { color: var(--muted); margin-bottom: 32px; }
+        .setup-options { display: grid; gap: 24px; max-width: 500px; margin: 0 auto; text-align: left; }
+        .setup-group label { display: block; font-weight: 600; margin-bottom: 8px; }
+        .setup-group select { width: 100%; padding: 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; color: var(--text); }
+        .start-btn { background: var(--accent); color: white; border: none; padding: 16px 48px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; margin-top: 24px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(109,40,217,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; line-height: 1.8; }
+        .narrative .hl { background: rgba(139,92,246,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 10px; margin: 20px 0; }
+        .vital { background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; text-align: center; }
+        .vital.critical { background: rgba(220,38,38,0.2); border: 1px solid rgba(220,38,38,0.4); }
+        .vital.warning { background: rgba(245,158,11,0.2); border: 1px solid rgba(245,158,11,0.4); }
+        .vital-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; }
+        .vital-value { font-size: 1.2rem; font-weight: 700; font-family: monospace; }
+        .lab-panel { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .lab-panel-title { font-weight: 600; margin-bottom: 16px; color: var(--accent); }
+        .lab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+        .lab-item { background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; }
+        .lab-name { font-size: 0.8rem; color: var(--muted); }
+        .lab-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .lab-value.critical { color: var(--danger); }
+        .lab-value.high { color: var(--warning); }
+        .lab-value.low { color: #3B82F6; }
+        .lab-range { font-size: 0.7rem; color: var(--muted); }
+        .question-section { margin-bottom: 32px; }
+        .question-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .question-number { background: var(--accent); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .question-text { font-size: 1.1rem; font-weight: 600; }
+        .question-hint { color: var(--muted); font-size: 0.9rem; margin-bottom: 16px; }
+        .radio-options { display: flex; flex-direction: column; gap: 10px; }
+        .radio-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .radio-option:hover { border-color: var(--accent); }
+        .radio-option.selected { border-color: var(--accent); background: rgba(139,92,246,0.15); }
+        .radio-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .radio-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .radio-circle { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; }
+        .radio-option.selected .radio-circle { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 40%, transparent 40%); }
+        .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+        .checkbox-item { display: flex; align-items: flex-start; gap: 10px; padding: 12px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .checkbox-item:hover { border-color: var(--accent); }
+        .checkbox-item.selected { border-color: var(--accent); background: rgba(139,92,246,0.15); }
+        .checkbox-item.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .checkbox-item.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .checkbox-box { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+        .checkbox-item.selected .checkbox-box { background: var(--accent); border-color: var(--accent); }
+        .checkbox-item.selected .checkbox-box::after { content: '✓'; color: white; font-weight: bold; font-size: 0.8rem; }
+        .feedback { padding: 20px; border-radius: 12px; margin: 20px 0; }
+        .feedback.excellent { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .feedback.good { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); }
+        .feedback.acceptable { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .feedback.poor { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+        .feedback-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .feedback-icon { font-size: 1.5rem; }
+        .feedback-title { font-weight: 700; font-size: 1.1rem; }
+        .feedback-text { color: var(--muted); line-height: 1.7; }
+        .feedback-text strong { color: var(--text); }
+        .alert { padding: 16px 20px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
+        .alert.danger { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+        .alert.warning { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .alert.success { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .alert-icon { font-size: 1.5rem; flex-shrink: 0; }
+        .alert-content { flex: 1; }
+        .alert-title { font-weight: 600; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; color: var(--muted); }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn-secondary { background: transparent; border: 2px solid var(--border); color: var(--text); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-row { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+        .calc-box { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .calc-title { font-weight: 600; margin-bottom: 12px; color: var(--accent); }
+        .calc-formula { font-family: monospace; background: rgba(0,0,0,0.3); padding: 12px; border-radius: 8px; margin-bottom: 12px; }
+        .calc-result { font-size: 1.3rem; font-weight: 700; }
+        .outcome { text-align: center; padding: 40px 20px; }
+        .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
+        .outcome-title { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+        .outcome.good .outcome-title { color: var(--success); }
+        .outcome.bad .outcome-title { color: var(--danger); }
+        .outcome-desc { color: var(--muted); max-width: 600px; margin: 0 auto 24px; line-height: 1.7; }
+        .score-summary { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 24px; margin: 24px auto; max-width: 500px; }
+        .score-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .score-row:last-child { border-bottom: none; }
+        .patient-panel { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 16px; margin-bottom: 20px; }
+        .patient-panel-title { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+        .patient-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; }
+        .patient-info-label { font-size: 0.7rem; color: var(--muted); }
+        .patient-info-value { font-weight: 600; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        .comparison-table th, .comparison-table td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border); }
+        .comparison-table th { color: var(--accent); font-size: 0.85rem; }
+        .comparison-table td { font-size: 0.9rem; }
+    </style>
 </head>
 <body>
-    <header class="header"><div class="header-row"><div style="font-weight:600">🫘 The Failing Filter</div><div style="display:flex;gap:12px;align-items:center"><div class="diff-toggle"><button class="diff-btn active" onclick="setDiff('easy')">Easy</button><button class="diff-btn" onclick="setDiff('int')">Intermediate</button><button class="diff-btn" onclick="setDiff('adv')">Advanced</button></div><div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Points</div></div></div></div></header>
-    <main class="main"><div id="app"></div></main>
-<script>
-const S={stage:'setup',score:0,max:0,diff:'easy',q:0,total:8};
-const C={easy:{age:'72M',wt:'78kg',hx:'Vomiting x3d, decreased PO, on lisinopril',exam:'Dry membranes, poor turgor',vitals:{HR:'108',BP:'92/58'},labs:{Cr:'3.2',BUN:'58',K:'5.4',FENa:'0.4%'}},int:{age:'58F',wt:'65kg',hx:'Post-cath 24hrs, CKD3 baseline',exam:'Rales, edema',vitals:{HR:'88',BP:'158/92'},labs:{Cr:'4.1',BUN:'42',K:'5.8',FENa:'2.8%'}},adv:{age:'45M',wt:'85kg',hx:'Rhabdo post-marathon, dark urine',exam:'Muscle tenderness',vitals:{HR:'98',BP:'108/68'},labs:{Cr:'6.8',CK:'45000',K:'6.9'}}};
-const Q=[
-{t:'KDIGO Staging',q:'Cr 1.1→3.2. What stage AKI?',h:'Stage 3=≥3x or Cr≥4',o:[{id:'a',txt:'Stage 3 (≥3x baseline)',c:1,p:100},{id:'b',txt:'Stage 2',c:0,p:40},{id:'c',txt:'Stage 1',c:0,p:0}],fb:{1:'<b>Correct!</b> 3.2/1.1=2.9x=Stage 3. KDIGO: 1(1.5-1.9x), 2(2-2.9x), 3(≥3x or Cr≥4).',0:'<b>KDIGO:</b> Calculate fold-change. ≥3x=Stage 3.'}},
-{t:'FENa Interpretation',q:'FENa 0.4%. What type AKI?',h:'Low FENa=kidneys holding Na',o:[{id:'a',txt:'Prerenal (FENa <1%)',c:1,p:100},{id:'b',txt:'Intrinsic/ATN (FENa >2%)',c:0,p:0},{id:'c',txt:'Postrenal',c:0,p:10}],fb:{1:'<b>Correct!</b> FENa <1%=prerenal (kidneys working, underperfused). >2%=ATN (tubular damage).',0:'<b>FENa:</b> <1%=prerenal, >2%=intrinsic.'}},
-{t:'FENa Formula',q:'FENa calculation?',h:'Compares Na to Cr clearance',o:[{id:'a',txt:'(UNa×PCr)/(PNa×UCr)×100',c:1,p:100},{id:'b',txt:'UNa/PNa×100',c:0,p:30},{id:'c',txt:'BUN/Cr',c:0,p:0}],fb:{1:'<b>Correct!</b> FENa=(UNa×PCr)/(PNa×UCr)×100. Use FEUrea if on diuretics.',0:'<b>Formula:</b> Needs spot urine Na/Cr and serum Na/Cr.'}},
-{t:'Prerenal Treatment',q:'Prerenal AKI with hypotension. First treatment?',h:'Fix underlying cause',o:[{id:'a',txt:'IV fluid resuscitation',c:1,p:100},{id:'b',txt:'Furosemide',c:0,p:0},{id:'c',txt:'Dialysis',c:0,p:10}],fb:{1:'<b>Correct!</b> Prerenal=underperfusion. Give fluids, hold nephrotoxins (ACEi, NSAIDs).',0:'<b>Prerenal:</b> Volume resuscitation. Diuretics contraindicated.'}},
-{t:'Contrast Prevention',q:'Prevent contrast nephropathy?',h:'Hydration is key',o:[{id:'a',txt:'IV NS pre/post, minimize contrast, hold metformin',c:1,p:100},{id:'b',txt:'Furosemide before',c:0,p:0},{id:'c',txt:'NAC definitely works',c:0,p:20}],fb:{1:'<b>Correct!</b> Prevention: hydration, minimize contrast, hold metformin. NAC evidence weak.',0:'<b>CIN prevention:</b> Hydration most important.'}},
-{t:'Rhabdo Treatment',q:'CK 45000 with AKI. Urine output goal?',h:'Aggressive fluids',o:[{id:'a',txt:'200-300 mL/hr (aggressive IVF)',c:1,p:100},{id:'b',txt:'30 mL/hr',c:0,p:20},{id:'c',txt:'Restrict fluids',c:0,p:0}],fb:{1:'<b>Correct!</b> Rhabdo: AGGRESSIVE fluids, 200-300 mL/hr UOP. Consider bicarb for urine alkalinization.',0:'<b>Rhabdo:</b> May need 10+ L/day. Goal 200-300 mL/hr UOP.'}},
-{t:'Dialysis Indications',q:'When emergent dialysis?',h:'AEIOU mnemonic',o:[{id:'a',txt:'Acidosis, Electrolytes (K), Ingestion, Overload, Uremia refractory to Rx',c:1,p:100},{id:'b',txt:'Any Cr >3',c:0,p:10},{id:'c',txt:'Stage 2 AKI',c:0,p:0}],fb:{1:'<b>Correct!</b> AEIOU: Acidosis (pH<7.1), Electrolytes (K>6.5 refractory), Ingestions, Overload, Uremic symptoms.',0:'<b>AEIOU:</b> Dialysis for refractory complications, not Cr number alone.'}},
-{t:'Nephrotoxin Hold',q:'Which meds to HOLD in AKI?',h:'Multiple drug classes harm kidneys',o:[{id:'a',txt:'ACEi/ARBs, NSAIDs, aminoglycosides, contrast',c:1,p:100},{id:'b',txt:'Beta-blockers',c:0,p:0},{id:'c',txt:'PPIs only',c:0,p:10}],fb:{1:'<b>Correct!</b> Hold: ACEi/ARBs (↓GFR), NSAIDs (↓renal blood flow), aminoglycosides, contrast, metformin.',0:'<b>Nephrotoxins:</b> ACEi, ARBs, NSAIDs, aminoglycosides, contrast, metformin.'}}
-];
-let sel=null;
-function setDiff(d){S.diff=d;document.querySelectorAll('.diff-btn').forEach((b,i)=>b.classList.toggle('active',['easy','int','adv'][i]===d));if(S.stage!=='setup'){S.stage='setup';S.score=0;S.max=0;S.q=0;document.getElementById('score').textContent='0';}render();}
-function addPts(p,m){S.score+=p;S.max+=m;document.getElementById('score').textContent=S.score;}
-function pick(id){sel=id;document.querySelectorAll('.radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id));document.getElementById('sub').disabled=false;}
-function submit(){const q=Q[S.q-1];const opt=q.o.find(o=>o.id===sel);addPts(opt.p||0,100);document.querySelectorAll('.radio-option').forEach(o=>{const op=q.o.find(x=>x.id===o.dataset.id);if(op&&op.c)o.classList.add('correct');else if(o.dataset.id===sel)o.classList.add('incorrect');});document.getElementById('fb').innerHTML='<div class="feedback '+(opt&&opt.c?'excellent':'incorrect')+'">'+q.fb[opt&&opt.c?1:0]+'</div>';document.getElementById('sub').textContent=S.q<S.total?'Next →':'Results →';document.getElementById('sub').onclick=next;}
-function next(){if(S.q<S.total){S.q++;sel=null;render();}else{S.stage='outcome';render();}}
-function start(){S.q=1;S.stage='question';render();}
-function go(s){S.stage=s;render();}
-function render(){const c=C[S.diff];if(S.stage==='setup'){document.getElementById('app').innerHTML='<div class="setup-screen"><h1>🫘 The Failing Filter</h1><p style="color:var(--muted);margin-bottom:32px">AKI: KDIGO staging, FENa, prerenal vs intrinsic, dialysis indications</p><button class="start-btn" onclick="go(\'pres\')">Begin Case →</button></div>';}else if(S.stage==='pres'){document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Presentation</div><div class="card-title">🔬 Renal Emergency</div></div><div class="card-body"><div class="narrative"><span class="hl">'+c.age+'</span> ('+c.wt+')<br><b>Hx:</b> '+c.hx+'<br><b>Exam:</b> '+c.exam+'</div><div class="vitals-grid">'+Object.entries(c.vitals).map(function(e){return'<div class="vital"><div class="vital-label">'+e[0]+'</div><div class="vital-value">'+e[1]+'</div></div>';}).join('')+'</div><div class="lab-grid">'+Object.entries(c.labs).map(function(e){return'<div class="lab-item"><span class="lab-name">'+e[0]+'</span><span class="lab-value">'+e[1]+'</span></div>';}).join('')+'</div><div class="btn-row"><button class="btn btn-primary" onclick="start()">Begin Assessment →</button></div></div></div>';}else if(S.stage==='question'){var q=Q[S.q-1];document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Q'+S.q+'/'+S.total+'</div><div class="card-title">🔍 '+q.t+'</div></div><div class="card-body"><div class="progress-bar"><div class="progress-fill" style="width:'+(S.q/S.total*100)+'%"></div></div><div class="question-header"><div class="question-number">'+S.q+'</div><div style="font-weight:600">'+q.q+'</div></div><div class="hint">💡 '+q.h+'</div><div class="radio-options">'+q.o.map(function(o){return'<div class="radio-option" data-id="'+o.id+'" onclick="pick(\''+o.id+'\')"><div class="radio-circle"></div><div><b>'+o.txt+'</b></div></div>';}).join('')+'</div><div id="fb"></div><div class="btn-row"><button class="btn btn-primary" id="sub" onclick="submit()" disabled>Submit →</button></div></div></div>';}else{var pct=S.max>0?Math.round(S.score/S.max*100):0;document.getElementById('app').innerHTML='<div class="card"><div class="card-body"><div style="text-align:center;padding:40px"><div style="font-size:4rem">'+(pct>=70?'🎉':'📚')+'</div><div style="font-size:2rem;font-weight:700;color:'+(pct>=70?'var(--success)':'var(--warning)')+'">'+(pct>=70?'Complete!':'Review')+'</div></div><div class="score-summary"><div class="score-row"><span>Score</span><span>'+S.score+'/'+S.max+' ('+pct+'%)</span></div></div><div class="pearls-box"><div class="pearls-title">📌 AKI Pearls</div><div class="pearl-item"><b>KDIGO:</b> Stage 1(1.5-1.9x), 2(2-2.9x), 3(≥3x or Cr≥4)</div><div class="pearl-item"><b>FENa:</b> <1%=prerenal, >2%=ATN. Use FEUrea if on diuretics</div><div class="pearl-item"><b>Prerenal Rx:</b> Fluids, hold nephrotoxins</div><div class="pearl-item"><b>Dialysis (AEIOU):</b> Acidosis, Electrolytes, Ingestion, Overload, Uremia</div><div class="pearl-item"><b>Rhabdo:</b> Aggressive IVF, goal UOP 200-300 mL/hr</div></div><div class="cross-link"><a href="../mechanism/aki-module.html">MechanismDx: AKI</a></div><div class="btn-row" style="justify-content:center;margin-top:30px"><button class="btn btn-primary" onclick="location.reload()">Retry</button><button class="btn btn-link" onclick="location.href=\'adventure-hub.html\'">Back</button></div></div></div>';}}
-document.addEventListener('DOMContentLoaded',render);
-</script>
+    <header class="header">
+        <div class="header-row">
+            <div class="header-title">🔢 The Numbers Game</div>
+            <div class="header-stats">
+                <span class="difficulty-badge easy" id="difficultyBadge">Easy</span>
+                <div class="stat"><div class="stat-value" id="scoreDisplay">0</div><div class="stat-label">Points</div></div>
+            </div>
+        </div>
+    </header>
+    <main class="main"><div id="stageContainer"></div></main>
+
+    <script>
+    const state = { stage:'setup', difficulty:'easy', score:0, akiCategory:null, fenaCalc:null, fluidChoice:null };
+
+    const difficultySettings = {
+        easy: { label:'Easy', categoryOptions:4, causeOptions:6, managementOptions:4 },
+        hard: { label:'Challenging', categoryOptions:5, causeOptions:8, managementOptions:6 },
+        hardest: { label:'Expert', categoryOptions:6, causeOptions:10, managementOptions:8 }
+    };
+
+    const categoryPool = [
+        { id: 'prerenal', text: 'Pre-renal AKI (decreased perfusion)', correct: true },
+        { id: 'intrinsic_atn', text: 'Intrinsic AKI - Acute Tubular Necrosis', correct: false, feedback: 'FENa <1% and BUN/Cr >20 suggest pre-renal, not ATN' },
+        { id: 'intrinsic_ain', text: 'Intrinsic AKI - Acute Interstitial Nephritis', correct: false, feedback: 'No rash, eosinophilia, or new drug exposure suggesting AIN' },
+        { id: 'intrinsic_gn', text: 'Intrinsic AKI - Glomerulonephritis', correct: false, feedback: 'No hematuria, proteinuria, or RBC casts on UA' },
+        { id: 'postrenal', text: 'Post-renal AKI (obstruction)', correct: false, feedback: 'Ultrasound shows no hydronephrosis' },
+        { id: 'hepatorenal', text: 'Hepatorenal syndrome', correct: false, feedback: 'No stigmata of liver disease or cirrhosis' }
+    ];
+
+    const causePool = [
+        { id: 'volume_depletion', text: 'Volume depletion (dehydration)', correct: true, optimal: true },
+        { id: 'chf', text: 'Decreased effective circulating volume (CHF)', correct: true, feedback: 'Also causes pre-renal, but patient has no CHF signs' },
+        { id: 'nsaids', text: 'NSAID-induced afferent arteriolar constriction', correct: true, feedback: 'NSAIDs can cause pre-renal AKI by reducing GFR' },
+        { id: 'ace_arb', text: 'ACE-I/ARB effect on efferent arteriole', correct: true, feedback: 'Can contribute to pre-renal physiology' },
+        { id: 'contrast', text: 'Contrast-induced nephropathy', correct: false, feedback: 'No recent contrast exposure' },
+        { id: 'aminoglycoside', text: 'Aminoglycoside toxicity', correct: false, feedback: 'No aminoglycoside exposure; causes ATN not pre-renal' },
+        { id: 'rhabdo', text: 'Rhabdomyolysis', correct: false, feedback: 'CK not elevated; causes ATN' },
+        { id: 'obstruction', text: 'Ureteral obstruction', correct: false, feedback: 'Ultrasound shows no hydronephrosis' },
+        { id: 'ttp', text: 'TTP/HUS', correct: false, feedback: 'No thrombocytopenia or hemolysis' },
+        { id: 'sepsis', text: 'Septic AKI', correct: false, feedback: 'Patient is afebrile with normal WBC' }
+    ];
+
+    const managementPool = [
+        { id: 'iv_fluids', text: 'IV fluid resuscitation (NS or LR)', correct: true, optimal: true },
+        { id: 'oral_fluids', text: 'Encourage oral fluid intake', correct: true, feedback: 'Acceptable if patient can tolerate PO' },
+        { id: 'hold_nsaids', text: 'Hold NSAIDs and nephrotoxins', correct: true, optimal: true },
+        { id: 'diuretics', text: 'IV furosemide to improve urine output', correct: false, feedback: 'Diuretics worsen pre-renal AKI by further depleting volume' },
+        { id: 'dialysis', text: 'Urgent hemodialysis', correct: false, feedback: 'No indication for emergent dialysis (no severe acidosis, hyperkalemia, or uremia)' },
+        { id: 'steroids', text: 'IV corticosteroids', correct: false, feedback: 'Steroids indicated for AIN, not pre-renal AKI' },
+        { id: 'renal_biopsy', text: 'Urgent renal biopsy', correct: false, feedback: 'Not indicated for clear pre-renal AKI' },
+        { id: 'dopamine', text: 'Low-dose dopamine for renal protection', correct: false, feedback: 'Renal-dose dopamine has no proven benefit' }
+    ];
+
+    function addScore(pts) { state.score += pts; document.getElementById('scoreDisplay').textContent = state.score; }
+
+    const stages = {
+        setup: { render: () => `
+            <div class="setup-screen">
+                <h1>🔢 The Numbers Game</h1>
+                <p class="subtitle">A clinical reasoning adventure in acute kidney injury</p>
+                <div class="setup-options">
+                    <div class="setup-group">
+                        <label>Select Difficulty</label>
+                        <select id="difficultySelect">
+                            <option value="easy">Easy - Core concepts</option>
+                            <option value="hard">Challenging - More differentials</option>
+                            <option value="hardest">Expert - Full complexity</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="start-btn" onclick="startCase()">Begin Case →</button>
+            </div>`
+        },
+        arrival: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Emergency Department</div><div class="card-title">📋 Abnormal Lab Alert</div></div>
+                <div class="card-body">
+                    <div class="narrative">A <span class="hl">72-year-old male</span> presents with <span class="hl">weakness and decreased appetite</span> for 3 days. He mentions he's been having <span class="hl">diarrhea for a week</span> after eating at a buffet, and hasn't been drinking much because he feels nauseated.<br><br>He takes <span class="hl">lisinopril for hypertension</span> and has been using <span class="hl">ibuprofen for arthritis pain</span>. His wife notes his urine has been <span class="hl">darker and less frequent</span> than usual.</div>
+                    <div class="patient-panel">
+                        <div class="patient-panel-title">Patient Information</div>
+                        <div class="patient-info-grid">
+                            <div><div class="patient-info-label">Age/Sex</div><div class="patient-info-value">72 y/o Male</div></div>
+                            <div><div class="patient-info-label">Chief Complaint</div><div class="patient-info-value">Weakness, poor appetite</div></div>
+                            <div><div class="patient-info-label">PMH</div><div class="patient-info-value">HTN, Osteoarthritis</div></div>
+                            <div><div class="patient-info-label">Medications</div><div class="patient-info-value">Lisinopril, Ibuprofen PRN</div></div>
+                        </div>
+                    </div>
+                    <div class="vitals-grid">
+                        <div class="vital"><div class="vital-label">Temp</div><div class="vital-value">98.4°F</div></div>
+                        <div class="vital warning"><div class="vital-label">HR</div><div class="vital-value">96</div></div>
+                        <div class="vital warning"><div class="vital-label">BP</div><div class="vital-value">102/68</div></div>
+                        <div class="vital"><div class="vital-label">RR</div><div class="vital-value">16</div></div>
+                        <div class="vital"><div class="vital-label">SpO₂</div><div class="vital-value">98%</div></div>
+                    </div>
+                    <div class="narrative"><strong>Physical Exam:</strong> Dry mucous membranes, <span class="hl">decreased skin turgor</span>, flat neck veins when supine. Abdomen soft, non-tender. No peripheral edema.</div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('labs')">Review Labs →</button></div>
+                </div>
+            </div>`
+        },
+        labs: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Laboratory Results</div><div class="card-title">🧪 Critical Values</div></div>
+                <div class="card-body">
+                    <div class="alert danger"><span class="alert-icon">🚨</span><div class="alert-content"><div class="alert-title">Acute Kidney Injury</div><div class="alert-desc">Creatinine elevated from baseline 1.0 to 2.8 mg/dL</div></div></div>
+                    <div class="lab-panel">
+                        <div class="lab-panel-title">Basic Metabolic Panel</div>
+                        <div class="lab-grid">
+                            <div class="lab-item"><div class="lab-name">Sodium</div><div class="lab-value">138 mEq/L</div><div class="lab-range">136-145</div></div>
+                            <div class="lab-item"><div class="lab-name">Potassium</div><div class="lab-value high">5.4 mEq/L</div><div class="lab-range">3.5-5.0</div></div>
+                            <div class="lab-item"><div class="lab-name">Chloride</div><div class="lab-value">104 mEq/L</div><div class="lab-range">98-106</div></div>
+                            <div class="lab-item"><div class="lab-name">Bicarbonate</div><div class="lab-value low">20 mEq/L</div><div class="lab-range">22-28</div></div>
+                            <div class="lab-item"><div class="lab-name">BUN</div><div class="lab-value critical">68 mg/dL</div><div class="lab-range">7-20</div></div>
+                            <div class="lab-item"><div class="lab-name">Creatinine</div><div class="lab-value critical">2.8 mg/dL</div><div class="lab-range">0.7-1.3</div></div>
+                            <div class="lab-item"><div class="lab-name">Glucose</div><div class="lab-value">112 mg/dL</div><div class="lab-range">70-100</div></div>
+                            <div class="lab-item"><div class="lab-name">BUN/Cr Ratio</div><div class="lab-value high">24</div><div class="lab-range">10-20</div></div>
+                        </div>
+                    </div>
+                    <div class="lab-panel">
+                        <div class="lab-panel-title">Urinalysis & Urine Chemistry</div>
+                        <div class="lab-grid">
+                            <div class="lab-item"><div class="lab-name">Specific Gravity</div><div class="lab-value high">1.030</div><div class="lab-range">1.005-1.030</div></div>
+                            <div class="lab-item"><div class="lab-name">Urine Na</div><div class="lab-value low">8 mEq/L</div><div class="lab-range">&gt;20 in ATN</div></div>
+                            <div class="lab-item"><div class="lab-name">Urine Cr</div><div class="lab-value">180 mg/dL</div></div>
+                            <div class="lab-item"><div class="lab-name">Protein</div><div class="lab-value">Trace</div></div>
+                            <div class="lab-item"><div class="lab-name">Blood</div><div class="lab-value">Negative</div></div>
+                            <div class="lab-item"><div class="lab-name">WBC</div><div class="lab-value">0-2/hpf</div></div>
+                        </div>
+                    </div>
+                    <div class="alert success"><span class="alert-icon">📊</span><div class="alert-content"><div class="alert-title">Renal Ultrasound</div><div class="alert-desc">Bilateral kidneys normal size, no hydronephrosis, no masses or stones.</div></div></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('fena')">Calculate FENa →</button></div>
+                </div>
+            </div>`
+        },
+        fena: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Diagnostic Workup</div><div class="card-title">🧮 Fractional Excretion of Sodium</div></div>
+                <div class="card-body">
+                    <div class="calc-box">
+                        <div class="calc-title">FENa Formula</div>
+                        <div class="calc-formula">FENa = (Urine Na × Serum Cr) / (Serum Na × Urine Cr) × 100</div>
+                        <div style="margin:12px 0;color:var(--muted)">
+                            <strong>Given values:</strong><br>
+                            Urine Na = 8 mEq/L | Serum Cr = 2.8 mg/dL<br>
+                            Serum Na = 138 mEq/L | Urine Cr = 180 mg/dL
+                        </div>
+                    </div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">1</div><div class="question-text">Calculate the FENa. What is the result?</div></div>
+                        <div class="radio-options" id="fenaOpts">
+                            <div class="radio-option" data-id="0.09" onclick="selectFena('0.09')"><div class="radio-circle"></div><span>0.09% (FENa &lt;1%)</span></div>
+                            <div class="radio-option" data-id="0.9" onclick="selectFena('0.9')"><div class="radio-circle"></div><span>0.9% (FENa &lt;1%)</span></div>
+                            <div class="radio-option" data-id="2.1" onclick="selectFena('2.1')"><div class="radio-circle"></div><span>2.1% (FENa &gt;1%)</span></div>
+                            <div class="radio-option" data-id="9.0" onclick="selectFena('9.0')"><div class="radio-circle"></div><span>9.0% (FENa &gt;1%)</span></div>
+                        </div>
+                    </div>
+                    <div id="fenaFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="fenaSubmit" onclick="submitFena()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        category: { render: () => {
+            const opts = categoryPool.slice(0, difficultySettings[state.difficulty].categoryOptions);
+            return `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Classification</div><div class="card-title">📍 Categorize the AKI</div></div>
+                <div class="card-body">
+                    <div class="calc-box">
+                        <div class="calc-title">Key Findings Summary</div>
+                        <table class="comparison-table">
+                            <tr><th>Finding</th><th>This Patient</th><th>Interpretation</th></tr>
+                            <tr><td>BUN/Cr Ratio</td><td>24 (&gt;20)</td><td>Suggests pre-renal</td></tr>
+                            <tr><td>FENa</td><td>0.09% (&lt;1%)</td><td>Suggests pre-renal</td></tr>
+                            <tr><td>Urine Specific Gravity</td><td>1.030 (concentrated)</td><td>Kidneys retaining water</td></tr>
+                            <tr><td>Urine Na</td><td>8 mEq/L (&lt;20)</td><td>Kidneys retaining sodium</td></tr>
+                            <tr><td>Urine sediment</td><td>Bland</td><td>No casts or cells</td></tr>
+                            <tr><td>Ultrasound</td><td>No hydronephrosis</td><td>No obstruction</td></tr>
+                        </table>
+                    </div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">2</div><div class="question-text">Based on these findings, what is the category of AKI?</div></div>
+                        <div class="radio-options" id="categoryOpts">${opts.map(o=>`<div class="radio-option" data-id="${o.id}" onclick="selectCategory('${o.id}')"><div class="radio-circle"></div><span>${o.text}</span></div>`).join('')}</div>
+                    </div>
+                    <div id="categoryFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="categorySubmit" onclick="submitCategory()" disabled>Submit →</button></div>
+                </div>
+            </div>`}
+        },
+        causes: { render: () => {
+            const opts = causePool.slice(0, difficultySettings[state.difficulty].causeOptions);
+            return `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Etiology</div><div class="card-title">🔍 Identify Contributing Factors</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">3</div><div class="question-text">Select ALL factors contributing to this patient's pre-renal AKI:</div></div>
+                        <p class="question-hint">Consider: 1 week of diarrhea, poor oral intake, lisinopril use, ibuprofen use</p>
+                        <div class="checkbox-grid" id="causeOpts">${opts.map(o=>`<div class="checkbox-item" data-id="${o.id}" data-correct="${o.correct}" onclick="toggleCause('${o.id}')"><div class="checkbox-box"></div><span>${o.text}</span></div>`).join('')}</div>
+                    </div>
+                    <div id="causeFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitCauses()">Submit →</button></div>
+                </div>
+            </div>`}
+        },
+        management: { render: () => {
+            const opts = managementPool.slice(0, difficultySettings[state.difficulty].managementOptions);
+            return `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Management</div><div class="card-title">💊 Treatment Plan</div></div>
+                <div class="card-body">
+                    <div class="alert warning"><span class="alert-icon">⚠️</span><div class="alert-content"><div class="alert-title">Pre-renal AKI from Volume Depletion</div><div class="alert-desc">Cr 2.8 (baseline 1.0), K+ 5.4, oliguric. What interventions are appropriate?</div></div></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">4</div><div class="question-text">Select ALL appropriate management steps:</div></div>
+                        <div class="checkbox-grid" id="mgmtOpts">${opts.map(o=>`<div class="checkbox-item" data-id="${o.id}" data-correct="${o.correct}" onclick="toggleMgmt('${o.id}')"><div class="checkbox-box"></div><span>${o.text}</span></div>`).join('')}</div>
+                    </div>
+                    <div id="mgmtFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitMgmt()">Submit →</button></div>
+                </div>
+            </div>`}
+        },
+        response: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">24 Hours Later</div><div class="card-title">📈 Response to Treatment</div></div>
+                <div class="card-body">
+                    <div class="alert success"><span class="alert-icon">✓</span><div class="alert-content"><div class="alert-title">Improving!</div><div class="alert-desc">After IV fluids and holding nephrotoxins, the patient is making good urine.</div></div></div>
+                    <div class="lab-panel">
+                        <div class="lab-panel-title">Repeat Labs (24 hours)</div>
+                        <div class="lab-grid">
+                            <div class="lab-item"><div class="lab-name">BUN</div><div class="lab-value high">42 mg/dL</div><div class="lab-range">↓ from 68</div></div>
+                            <div class="lab-item"><div class="lab-name">Creatinine</div><div class="lab-value high">1.8 mg/dL</div><div class="lab-range">↓ from 2.8</div></div>
+                            <div class="lab-item"><div class="lab-name">Potassium</div><div class="lab-value">4.6 mEq/L</div><div class="lab-range">↓ from 5.4</div></div>
+                            <div class="lab-item"><div class="lab-name">Urine Output</div><div class="lab-value">1.2 mL/kg/hr</div><div class="lab-range">Good output</div></div>
+                        </div>
+                    </div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('outcome')">Complete Case →</button></div>
+                </div>
+            </div>`
+        },
+        outcome: { render: () => `
+            <div class="card"><div class="card-body">
+                <div class="outcome good">
+                    <div class="outcome-icon">🎉</div>
+                    <div class="outcome-title">AKI Resolved!</div>
+                    <div class="outcome-desc">Through appropriate recognition of pre-renal AKI, volume resuscitation, and removal of nephrotoxic medications, you successfully reversed this patient's acute kidney injury. He was discharged on day 3 with Cr back to baseline.</div>
+                </div>
+                <div class="score-summary">
+                    <h3 style="margin-bottom:16px">📊 Performance Summary</h3>
+                    <div class="score-row"><span>FENa Calculation</span><span>${state.fenaScore||0}/100</span></div>
+                    <div class="score-row"><span>AKI Classification</span><span>${state.categoryScore||0}/100</span></div>
+                    <div class="score-row"><span>Etiology Identification</span><span>${state.causeScore||0}/100</span></div>
+                    <div class="score-row"><span>Management</span><span>${state.mgmtScore||0}/100</span></div>
+                    <div class="score-row" style="border-top:2px solid var(--border);margin-top:12px;padding-top:12px"><span><strong>Total Score</strong></span><span style="color:var(--success)"><strong>${state.score}</strong></span></div>
+                </div>
+                <div class="feedback excellent"><div class="feedback-header"><span class="feedback-icon">💡</span><span class="feedback-title">AKI Pearls</span></div><div class="feedback-text">• <strong>Pre-renal clues:</strong> BUN/Cr &gt;20, FENa &lt;1%, concentrated urine, low urine Na<br>• <strong>Intrinsic (ATN) clues:</strong> BUN/Cr ~10-15, FENa &gt;2%, muddy brown casts<br>• <strong>Post-renal clues:</strong> Hydronephrosis on imaging, bladder distension<br>• <strong>Management:</strong> Treat underlying cause - fluids for pre-renal, relieve obstruction for post-renal<br>• <strong>Avoid:</strong> Diuretics in pre-renal AKI (worsens volume depletion)</div></div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Play Again</button><button class="btn btn-secondary" onclick="location.href='adventure-hub.html'">← Adventures</button></div>
+            </div></div>`
+        },
+        diuretic_consequence: { render: () => `
+            <div class="card"><div class="card-body">
+                <div class="outcome bad">
+                    <div class="outcome-icon">⚠️</div>
+                    <div class="outcome-title">Worsening AKI</div>
+                    <div class="outcome-desc">Giving diuretics to a volume-depleted patient worsened the pre-renal state. Creatinine rose to 4.2 and the patient became oliguric. Nephrology was consulted for possible dialysis.</div>
+                </div>
+                <div class="feedback poor"><div class="feedback-header"><span class="feedback-icon">💡</span><span class="feedback-title">Key Lesson</span></div><div class="feedback-text">In pre-renal AKI, the kidneys are responding appropriately to decreased perfusion by retaining sodium and water. Diuretics worsen this by further depleting intravascular volume. The treatment is volume repletion, not diuresis.</div></div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Try Again</button></div>
+            </div></div>`
+        }
+    };
+
+    function startCase() {
+        state.difficulty = document.getElementById('difficultySelect').value;
+        document.getElementById('difficultyBadge').textContent = difficultySettings[state.difficulty].label;
+        document.getElementById('difficultyBadge').className = 'difficulty-badge ' + state.difficulty;
+        goTo('arrival');
+    }
+
+    let selectedFena = null;
+    function selectFena(id) { selectedFena = id; document.querySelectorAll('#fenaOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('fenaSubmit').disabled = false; }
+    function submitFena() {
+        // FENa = (8 × 2.8) / (138 × 180) × 100 = 22.4 / 24840 × 100 = 0.09%
+        const correct = '0.09';
+        document.querySelectorAll('#fenaOpts .radio-option').forEach(o => {
+            if (o.dataset.id === correct) o.classList.add('correct');
+            else if (o.dataset.id === selectedFena) o.classList.add('incorrect');
+        });
+        state.fenaScore = selectedFena === correct ? 100 : 30;
+        addScore(selectedFena === correct ? 40 : 10);
+        document.getElementById('fenaFeedback').innerHTML = `<div class="feedback ${selectedFena===correct?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedFena===correct?'✅':'📚'}</span><span class="feedback-title">${selectedFena===correct?'Correct!':'Review Calculation'}</span></div><div class="feedback-text"><strong>FENa = (8 × 2.8) / (138 × 180) × 100</strong><br>= 22.4 / 24,840 × 100<br>= <strong>0.09%</strong><br><br>FENa &lt;1% strongly suggests pre-renal AKI (kidneys appropriately retaining sodium).</div></div>`;
+        document.getElementById('fenaSubmit').textContent = 'Continue →';
+        document.getElementById('fenaSubmit').onclick = () => goTo('category');
+    }
+
+    let selectedCategory = null;
+    function selectCategory(id) { selectedCategory = id; document.querySelectorAll('#categoryOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('categorySubmit').disabled = false; }
+    function submitCategory() {
+        const opt = categoryPool.find(o => o.id === selectedCategory);
+        state.categoryScore = opt.correct ? 100 : 30;
+        addScore(opt.correct ? 40 : 10);
+        document.querySelectorAll('#categoryOpts .radio-option').forEach(o => {
+            if (categoryPool.find(x=>x.id===o.dataset.id).correct) o.classList.add('correct');
+            else if (o.dataset.id === selectedCategory) o.classList.add('incorrect');
+        });
+        document.getElementById('categoryFeedback').innerHTML = `<div class="feedback ${opt.correct?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${opt.correct?'✅':'📚'}</span><span class="feedback-title">${opt.correct?'Correct!':'Review Classification'}</span></div><div class="feedback-text">${opt.correct?'All findings point to pre-renal AKI: elevated BUN/Cr ratio, FENa <1%, concentrated urine, low urine sodium, and bland sediment.':opt.feedback}</div></div>`;
+        document.getElementById('categorySubmit').textContent = 'Continue →';
+        document.getElementById('categorySubmit').onclick = () => goTo('causes');
+    }
+
+    let selectedCauses = new Set();
+    function toggleCause(id) {
+        const el = document.querySelector(`#causeOpts .checkbox-item[data-id="${id}"]`);
+        if(selectedCauses.has(id)) { selectedCauses.delete(id); el.classList.remove('selected'); }
+        else { selectedCauses.add(id); el.classList.add('selected'); }
+    }
+    function submitCauses() {
+        const opts = causePool.slice(0, difficultySettings[state.difficulty].causeOptions);
+        let correct = 0, incorrect = 0;
+        opts.forEach(item => {
+            const el = document.querySelector(`#causeOpts .checkbox-item[data-id="${item.id}"]`);
+            const wasSel = selectedCauses.has(item.id);
+            if (item.correct && wasSel) { el.classList.add('correct'); correct++; }
+            else if (item.correct && !wasSel) { /* missed */ }
+            else if (!item.correct && wasSel) { el.classList.add('incorrect'); incorrect++; }
+        });
+        const score = Math.max(0, Math.round((correct * 25) - (incorrect * 15)));
+        state.causeScore = Math.min(100, score);
+        addScore(Math.round(score / 2.5));
+        document.getElementById('causeFeedback').innerHTML = `<div class="feedback ${score>=60?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${score>=60?'✅':'📚'}</span><span class="feedback-title">Contributing Factors</span></div><div class="feedback-text"><strong>This patient's pre-renal AKI is multifactorial:</strong><br>• <strong>Volume depletion</strong> from diarrhea and poor intake (primary cause)<br>• <strong>NSAIDs</strong> reduce prostaglandin-mediated afferent arteriolar dilation<br>• <strong>ACE-I</strong> blocks angiotensin II-mediated efferent arteriolar constriction<br><br>The combination of volume depletion + NSAID + ACE-I is a classic "triple whammy" for AKI.</div></div>`;
+        document.querySelector('#causeFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('management')">Plan Management →</button>`;
+    }
+
+    let selectedMgmt = new Set();
+    function toggleMgmt(id) {
+        const el = document.querySelector(`#mgmtOpts .checkbox-item[data-id="${id}"]`);
+        if(selectedMgmt.has(id)) { selectedMgmt.delete(id); el.classList.remove('selected'); }
+        else { selectedMgmt.add(id); el.classList.add('selected'); }
+    }
+    function submitMgmt() {
+        const opts = managementPool.slice(0, difficultySettings[state.difficulty].managementOptions);
+        let correct = 0, incorrect = 0, gaveDiuretics = selectedMgmt.has('diuretics');
+        opts.forEach(item => {
+            const el = document.querySelector(`#mgmtOpts .checkbox-item[data-id="${item.id}"]`);
+            const wasSel = selectedMgmt.has(item.id);
+            if (item.correct && wasSel) { el.classList.add('correct'); correct++; }
+            else if (!item.correct && wasSel) { el.classList.add('incorrect'); incorrect++; }
+        });
+        const score = Math.max(0, Math.round((correct * 30) - (incorrect * 20)));
+        state.mgmtScore = Math.min(100, score);
+        addScore(Math.round(score / 2.5));
+        
+        if (gaveDiuretics) {
+            document.getElementById('mgmtFeedback').innerHTML = `<div class="feedback poor"><div class="feedback-header"><span class="feedback-icon">⚠️</span><span class="feedback-title">Critical Error</span></div><div class="feedback-text">Giving diuretics to a patient with pre-renal AKI from volume depletion will worsen kidney function by further depleting intravascular volume.</div></div>`;
+            document.querySelector('#mgmtFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('diuretic_consequence')">See Consequence →</button>`;
+        } else {
+            document.getElementById('mgmtFeedback').innerHTML = `<div class="feedback ${score>=60?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${score>=60?'✅':'📚'}</span><span class="feedback-title">Management Plan</span></div><div class="feedback-text"><strong>Correct approach to pre-renal AKI:</strong><br>• <strong>IV fluid resuscitation</strong> - restore intravascular volume<br>• <strong>Hold nephrotoxins</strong> - stop NSAIDs, consider holding ACE-I<br>• <strong>Monitor</strong> - expect Cr to improve within 24-48 hours<br><br>Diuretics are contraindicated in pre-renal AKI.</div></div>`;
+            document.querySelector('#mgmtFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('response')">See Response →</button>`;
+        }
+    }
+
+    function goTo(id) { state.stage = id; render(); window.scrollTo(0,0); }
+    function render() { const s = stages[state.stage]; if(s) document.getElementById('stageContainer').innerHTML = s.render(); }
+    document.addEventListener('DOMContentLoaded', render);
+    </script>
 </body>
 </html>

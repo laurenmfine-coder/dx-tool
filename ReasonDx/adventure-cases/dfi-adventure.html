@@ -1,5 +1,326 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Diabetic Foot | ReasonDx Adventure</title><style>:root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#F97316;--success:#10B981;--warning:#F59E0B;--danger:#DC2626}*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}.header{background:linear-gradient(135deg,#EA580C,#F97316);padding:12px 20px;position:sticky;top:0;z-index:100}.header-row{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}.diff-toggle{display:flex;background:rgba(0,0,0,.3);border-radius:8px}.diff-btn{padding:6px 12px;font-size:.75rem;cursor:pointer;border:none;background:0 0;color:rgba(255,255,255,.7);font-weight:600}.diff-btn.active{background:rgba(255,255,255,.2);color:#fff}.stat{text-align:center;background:rgba(0,0,0,.2);padding:6px 14px;border-radius:8px}.stat-value{font-size:1.1rem;font-weight:700;font-family:monospace}.stat-label{font-size:.6rem;opacity:.8}.main{max-width:900px;margin:0 auto;padding:24px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px}.card-header{padding:20px 24px;border-bottom:1px solid var(--border)}.card-phase{font-size:.75rem;color:var(--accent);text-transform:uppercase}.card-title{font-size:1.5rem;font-weight:700}.card-body{padding:24px}.narrative{background:rgba(249,115,22,.1);border-left:4px solid var(--accent);padding:20px;border-radius:0 12px 12px 0;margin-bottom:20px}.narrative .hl{background:rgba(249,115,22,.3);padding:2px 6px;border-radius:4px}.setup-screen{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center}.start-btn{background:var(--accent);color:#fff;border:none;padding:16px 48px;border-radius:12px;font-size:1.1rem;font-weight:700;cursor:pointer}.hint{background:rgba(59,130,246,.15);padding:12px 16px;border-radius:8px;margin-bottom:16px;color:#93C5FD}.radio-options{display:flex;flex-direction:column;gap:10px}.radio-option{display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(0,0,0,.2);border:2px solid var(--border);border-radius:10px;cursor:pointer}.radio-option.selected{border-color:var(--accent);background:rgba(249,115,22,.15)}.radio-option.correct{border-color:var(--success);background:rgba(16,185,129,.15)}.radio-option.incorrect{border-color:var(--danger);background:rgba(220,38,38,.15)}.radio-circle{width:22px;height:22px;border:2px solid var(--border);border-radius:50%}.radio-option.selected .radio-circle{border-color:var(--accent);background:radial-gradient(circle,var(--accent) 40%,transparent 40%)}.feedback{padding:20px;border-radius:12px;margin:20px 0}.feedback.excellent{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3)}.feedback.incorrect{background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.3)}.btn{padding:14px 28px;border-radius:10px;font-weight:600;cursor:pointer;border:none}.btn-primary{background:var(--accent);color:#fff}.btn:disabled{opacity:.5}.btn-row{display:flex;gap:12px;margin-top:24px}.btn-link{background:0 0;border:2px solid var(--border);color:var(--text)}.vitals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:12px;margin:20px 0}.vital{background:rgba(0,0,0,.2);padding:12px;border-radius:10px;text-align:center}.vital-label{font-size:.7rem;color:var(--muted)}.vital-value{font-size:1.3rem;font-weight:700;font-family:monospace}.lab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:16px 0}.lab-item{display:flex;justify-content:space-between;padding:8px 12px;background:rgba(0,0,0,.2);border-radius:6px}.lab-name{color:var(--muted)}.lab-value{font-family:monospace;font-weight:600}.score-summary{background:rgba(0,0,0,.2);border-radius:12px;padding:24px;margin:24px auto;max-width:600px}.score-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}.pearls-box{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:20px;margin-top:20px}.pearls-title{font-weight:700;color:var(--success);margin-bottom:12px}.pearl-item{padding:8px 0;border-bottom:1px solid rgba(16,185,129,.2);font-size:.95rem}.cross-link{background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.3);border-radius:8px;padding:12px 16px;margin-top:12px}.cross-link a{color:#FDBA74;text-decoration:none}.progress-bar{background:rgba(255,255,255,.1);border-radius:10px;height:8px;margin:20px 0}.progress-fill{background:var(--accent);height:100%;border-radius:10px}.question-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}.question-number{background:var(--accent);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}</style></head><body><header class="header"><div class="header-row"><div style="font-weight:600">🦶 Diabetic Foot</div><div style="display:flex;gap:12px;align-items:center"><div class="diff-toggle"><button class="diff-btn active" onclick="setDiff('easy')">Easy</button><button class="diff-btn" onclick="setDiff('int')">Intermediate</button><button class="diff-btn" onclick="setDiff('adv')">Advanced</button></div><div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Points</div></div></div></div></header><main class="main"><div id="app"></div></main>
-<script>
-const S={stage:'setup',score:0,max:0,diff:'easy',q:0,total:8};const C={easy:{age:'62yo M',wt:'95kg',hx:'DM2 x15yr, foot ulcer x2 weeks, purulent drainage, mild erythema',exam:'2cm ulcer plantar 1st MTP, superficial, <2cm erythema, no crepitus',vitals:{HR:'82',BP:'138/82',Temp:'99.2°F',SpO2:'98%'},labs:{WBC:'11k',Gluc:'245',HbA1c:'8.9%','X-ray':'No osteo'}},int:{age:'58yo F',wt:'88kg',hx:'DM2 poorly controlled, deep ulcer probing to bone, spreading cellulitis',exam:'4cm ulcer with exposed tendon, 5cm erythema, palpable dorsalis pedis',vitals:{HR:'98',BP:'145/88',Temp:'101.2°F',SpO2:'96%'},labs:{WBC:'16k',ESR:'85',CRP:'12','X-ray':'Periosteal reaction'}},adv:{age:'68yo M',wt:'102kg',hx:'Known PAD, gangrenous toes, septic, foul odor, crepitus',exam:'Necrotic toes, crepitus, absent pulses, severe sepsis',vitals:{HR:'118',BP:'92/58',Temp:'103.5°F',SpO2:'91%'},labs:{WBC:'22k',Lactate:'4.2','X-ray':'Gas in soft tissue',Hx:'Wet gangrene + sepsis'}}};
-const Q=[{t:'Classification',q:'IDSA classification of diabetic foot infections?',h:'Severity grading',o:[{id:'a',txt:'Mild: Superficial, <2cm erythema. Moderate: Deeper or >2cm erythema. Severe: Systemic signs/sepsis',c:1,p:100},{id:'b',txt:'All are severe',c:0,p:20},{id:'c',txt:'Size only matters',c:0,p:20}],fb:{1:'<b>Correct!</b> IDSA: Uninfected (no purulence/inflammation). Mild: Local, superficial, <2cm. Moderate: Deeper (abscess, osteo) or >2cm cellulitis. Severe: SIRS/sepsis.',0:'<b>IDSA:</b> Mild (<2cm superficial), Moderate (deeper/>2cm), Severe (systemic).'}},{t:'Probe to Bone',q:'Significance of probe-to-bone test in diabetic foot?',h:'Osteomyelitis detection',o:[{id:'a',txt:'Positive probe-to-bone has high PPV (~90%) for osteomyelitis in high-risk ulcers; MRI confirms',c:1,p:100},{id:'b',txt:'Not useful',c:0,p:20},{id:'c',txt:'Always means surgery',c:0,p:20}],fb:{1:'<b>Correct!</b> Probe-to-bone: PPV ~87% for osteo in infected ulcers. If positive + high pretest probability = treat for osteo. MRI is gold standard imaging. Bone biopsy for culture.',0:'<b>Probe-to-bone:</b> High PPV for osteo. Confirm with MRI.'}},{t:'Imaging',q:'Best imaging for diabetic foot osteomyelitis?',h:'Sensitivity comparison',o:[{id:'a',txt:'MRI is most sensitive/specific; X-ray first (low sensitivity but specific), bone scan if MRI contraindicated',c:1,p:100},{id:'b',txt:'X-ray always sufficient',c:0,p:30},{id:'c',txt:'CT scan preferred',c:0,p:20}],fb:{1:'<b>Correct!</b> X-ray first: Low sensitivity (may take 2-4wk to see changes) but specific. MRI: 90% sensitive, 80% specific. Changes on X-ray: Periosteal reaction, cortical erosion.',0:'<b>Imaging:</b> X-ray first, MRI most sensitive for osteo.'}},{t:'Microbiology',q:'Common pathogens in diabetic foot infections?',h:'Coverage targets',o:[{id:'a',txt:'Mild: Gram-positive (Staph, Strep). Moderate/severe: Add gram-negatives, anaerobes, Pseudomonas',c:1,p:100},{id:'b',txt:'Pseudomonas only',c:0,p:20},{id:'c',txt:'Fungal always',c:0,p:20}],fb:{1:'<b>Correct!</b> Mild: S. aureus, Strep. Chronic/severe: Polymicrobial (GNR, anaerobes). Pseudomonas if water exposure, macerated. MRSA risk: Prior MRSA, severe, failed therapy.',0:'<b>Pathogens:</b> Mild = Gram+. Severe = polymicrobial.'}},{t:'Antibiotic Selection',q:'Empiric antibiotics for moderate-severe diabetic foot infection?',h:'Broad coverage',o:[{id:'a',txt:'Broad spectrum: Pip-tazo, ampicillin-sulbactam, or carbapenem. Add vancomycin for MRSA risk.',c:1,p:100},{id:'b',txt:'Oral cephalexin',c:0,p:20},{id:'c',txt:'No antibiotics needed',c:0,p:10}],fb:{1:'<b>Correct!</b> Moderate: Amp-sulbactam, pip-tazo, or ertapenem. Add vanc if MRSA risk. Mild: Oral abx (cephalexin, augmentin, clinda). Culture wound before abx. Duration: 1-2wk soft tissue, 4-6wk osteo.',0:'<b>Moderate-severe:</b> Broad coverage (pip-tazo, amp-sulbactam) ± vanc.'}},{t:'Surgical Indications',q:'When is surgical intervention required in diabetic foot infection?',h:'Urgent debridement',o:[{id:'a',txt:'Abscess, necrotizing infection, gas gangrene, osteomyelitis with sequestrum, compartment syndrome',c:1,p:100},{id:'b',txt:'Never needed',c:0,p:10},{id:'c',txt:'All infections',c:0,p:20}],fb:{1:'<b>Correct!</b> Urgent surgery: Abscess drainage, nec fasc, gas gangrene, severe osteo, critical limb ischemia. Debridement improves antibiotic penetration. May need amputation if limb-threatening.',0:'<b>Surgery:</b> Abscess, nec fasc, gangrene, severe osteo.'}},{t:'Vascular Assessment',q:'Why is vascular assessment critical in diabetic foot?',h:'PAD prevalence',o:[{id:'a',txt:'PAD common in DM; inadequate perfusion impairs healing and increases amputation risk. Check ABI, consider revascularization.',c:1,p:100},{id:'b',txt:'Not important',c:0,p:10},{id:'c',txt:'Always amputate',c:0,p:10}],fb:{1:'<b>Correct!</b> PAD in 50% of DFI. Check pulses, ABI (may be falsely elevated due to calcification), toe pressures. Revascularization before/with wound care if critical limb ischemia.',0:'<b>Vascular:</b> PAD common, check ABI, consider revasc.'}},{t:'Osteomyelitis Treatment',q:'Duration of antibiotics for diabetic foot osteomyelitis?',h:'Bone infection duration',o:[{id:'a',txt:'4-6 weeks if no surgery; can shorten to 2-4 weeks if bone resected with clean margins',c:1,p:100},{id:'b',txt:'3 days',c:0,p:10},{id:'c',txt:'Lifelong',c:0,p:10}],fb:{1:'<b>Correct!</b> DFO duration: 4-6wk medical therapy. If complete resection with clean margins: 2-4wk. Culture bone (not swab) to guide therapy. Follow inflammatory markers.',0:'<b>DFO:</b> 4-6wk abx, shorter if surgically resected.'}}];
-let sel=null;function setDiff(d){S.diff=d;document.querySelectorAll('.diff-btn').forEach((b,i)=>b.classList.toggle('active',['easy','int','adv'][i]===d));if(S.stage!=='setup'){S.stage='setup';S.score=0;S.max=0;S.q=0;document.getElementById('score').textContent='0';}render();}function addPts(p,m){S.score+=p;S.max+=m;document.getElementById('score').textContent=S.score;}function pick(id){sel=id;document.querySelectorAll('.radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id));document.getElementById('sub').disabled=false;}function submit(){const q=Q[S.q-1];const opt=q.o.find(o=>o.id===sel);addPts(opt.p||0,100);document.querySelectorAll('.radio-option').forEach(o=>{const op=q.o.find(x=>x.id===o.dataset.id);if(op&&op.c)o.classList.add('correct');else if(o.dataset.id===sel)o.classList.add('incorrect');});document.getElementById('fb').innerHTML='<div class="feedback '+(opt&&opt.c?'excellent':'incorrect')+'">'+q.fb[opt&&opt.c?1:0]+'</div>';document.getElementById('sub').textContent=S.q<S.total?'Next':'Results';document.getElementById('sub').onclick=next;}function next(){if(S.q<S.total){S.q++;sel=null;render();}else{S.stage='outcome';render();}}function start(){S.q=1;S.stage='question';render();}function go(s){S.stage=s;render();}function render(){const c=C[S.diff];if(S.stage==='setup'){document.getElementById('app').innerHTML='<div class="setup-screen"><h1>🦶 Diabetic Foot</h1><p style="color:var(--muted);margin-bottom:32px">Diabetic Foot Infection: Classification, osteo workup, antibiotics, surgery</p><button class="start-btn" onclick="go(\'pres\')">Begin Case</button></div>';}else if(S.stage==='pres'){document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Presentation</div><div class="card-title">🦶 Foot Ulcer</div></div><div class="card-body"><div class="narrative"><span class="hl">'+c.age+'</span> ('+c.wt+')<br><b>Hx:</b> '+c.hx+'<br><b>Exam:</b> '+c.exam+'</div><div class="vitals-grid">'+Object.entries(c.vitals).map(function(e){return'<div class="vital"><div class="vital-label">'+e[0]+'</div><div class="vital-value">'+e[1]+'</div></div>';}).join('')+'</div><div class="lab-grid">'+Object.entries(c.labs).map(function(e){return'<div class="lab-item"><span class="lab-name">'+e[0]+'</span><span class="lab-value">'+e[1]+'</span></div>';}).join('')+'</div><div class="btn-row"><button class="btn btn-primary" onclick="start()">Begin Assessment</button></div></div></div>';}else if(S.stage==='question'){var q=Q[S.q-1];document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Q'+S.q+'/'+S.total+'</div><div class="card-title">'+q.t+'</div></div><div class="card-body"><div class="progress-bar"><div class="progress-fill" style="width:'+(S.q/S.total*100)+'%"></div></div><div class="question-header"><div class="question-number">'+S.q+'</div><div style="font-weight:600">'+q.q+'</div></div><div class="hint">'+q.h+'</div><div class="radio-options">'+q.o.map(function(o){return'<div class="radio-option" data-id="'+o.id+'" onclick="pick(\''+o.id+'\')"><div class="radio-circle"></div><div><b>'+o.txt+'</b></div></div>';}).join('')+'</div><div id="fb"></div><div class="btn-row"><button class="btn btn-primary" id="sub" onclick="submit()" disabled>Submit</button></div></div></div>';}else{var pct=S.max>0?Math.round(S.score/S.max*100):0;document.getElementById('app').innerHTML='<div class="card"><div class="card-body"><div style="text-align:center;padding:40px"><div style="font-size:4rem">'+(pct>=70?'🎉':'📚')+'</div><div style="font-size:2rem;font-weight:700;color:'+(pct>=70?'var(--success)':'var(--warning)')+'">'+(pct>=70?'Complete!':'Review')+'</div></div><div class="score-summary"><div class="score-row"><span>Score</span><span>'+S.score+'/'+S.max+' ('+pct+'%)</span></div></div><div class="pearls-box"><div class="pearls-title">Diabetic Foot Pearls</div><div class="pearl-item"><b>IDSA:</b> Mild <2cm, Moderate deeper/>2cm, Severe systemic</div><div class="pearl-item"><b>Probe-to-bone:</b> High PPV for osteo</div><div class="pearl-item"><b>Imaging:</b> X-ray first, MRI most sensitive</div><div class="pearl-item"><b>Coverage:</b> Mild Gram+, Severe polymicrobial</div><div class="pearl-item"><b>Osteo duration:</b> 4-6 weeks (shorter if resected)</div><div class="pearl-item"><b>Vascular:</b> Always assess - PAD common</div></div><div class="cross-link"><a href="cellulitis-adventure-enhanced.html">Related: Cellulitis</a></div><div class="btn-row" style="justify-content:center;margin-top:30px"><button class="btn btn-primary" onclick="location.reload()">Retry</button><button class="btn btn-link" onclick="location.href=\'adventure-hub.html\'">Back</button></div></div></div>';}}document.addEventListener('DOMContentLoaded',render);</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Neglected Wound | ReasonDx Adventure</title>
+    <style>
+        :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #F97316; --success: #10B981; --warning: #F59E0B; --danger: #DC2626; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #EA580C 0%, #F97316 100%); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; }
+        .stat { background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 8px; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        .main { max-width: 1000px; margin: 0 auto; padding: 24px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(249,115,22,0.1), rgba(234,88,12,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; line-height: 1.8; }
+        .narrative .hl { background: rgba(249,115,22,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        .setup-screen { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; }
+        .setup-screen h1 { font-size: 2rem; margin-bottom: 8px; }
+        .setup-screen .subtitle { color: var(--muted); margin-bottom: 32px; }
+        .start-btn { background: var(--accent); color: white; border: none; padding: 16px 48px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+        .question-section { margin-bottom: 32px; }
+        .question-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .question-number { background: var(--accent); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .question-text { font-size: 1.1rem; font-weight: 600; }
+        .radio-options { display: flex; flex-direction: column; gap: 10px; }
+        .radio-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .radio-option:hover { border-color: var(--accent); }
+        .radio-option.selected { border-color: var(--accent); background: rgba(249,115,22,0.15); }
+        .radio-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .radio-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .radio-circle { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; }
+        .radio-option.selected .radio-circle { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 40%, transparent 40%); }
+        .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+        .checkbox-item { display: flex; align-items: center; gap: 10px; padding: 12px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .checkbox-item:hover { border-color: var(--accent); }
+        .checkbox-item.selected { border-color: var(--accent); background: rgba(249,115,22,0.15); }
+        .checkbox-item.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .checkbox-item.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .checkbox-box { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .checkbox-item.selected .checkbox-box { background: var(--accent); border-color: var(--accent); }
+        .checkbox-item.selected .checkbox-box::after { content: '✓'; color: white; font-weight: bold; }
+        .feedback { padding: 20px; border-radius: 12px; margin: 20px 0; }
+        .feedback.excellent { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .feedback.acceptable { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .feedback-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .feedback-icon { font-size: 1.5rem; }
+        .feedback-title { font-weight: 700; }
+        .feedback-text { color: var(--muted); line-height: 1.7; }
+        .feedback-text strong { color: var(--text); }
+        .alert { padding: 16px 20px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
+        .alert.info { background: rgba(249,115,22,0.15); border: 1px solid rgba(249,115,22,0.3); }
+        .alert.danger { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+        .alert-icon { font-size: 1.5rem; }
+        .alert-content { flex: 1; }
+        .alert-title { font-weight: 600; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; color: var(--muted); }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-row { display: flex; gap: 12px; margin-top: 24px; }
+        .lab-panel { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .lab-panel-title { font-weight: 600; margin-bottom: 16px; color: var(--accent); }
+        .lab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; }
+        .lab-item { background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; }
+        .lab-name { font-size: 0.8rem; color: var(--muted); }
+        .lab-value { font-size: 1.1rem; font-weight: 700; }
+        .lab-value.critical { color: var(--danger); }
+        .lab-value.high { color: var(--warning); }
+        .lab-range { font-size: 0.7rem; color: var(--muted); }
+        .outcome { text-align: center; padding: 40px 20px; }
+        .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
+        .outcome-title { font-size: 2rem; font-weight: 700; color: var(--success); margin-bottom: 8px; }
+        .outcome-desc { color: var(--muted); max-width: 600px; margin: 0 auto 24px; }
+        .score-summary { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 24px; margin: 24px auto; max-width: 500px; }
+        .score-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .score-row:last-child { border-bottom: none; }
+    </style>
+</head>
+<body>
+    <header class="header"><div class="header-row"><div class="header-title">🦶 The Neglected Wound</div><div class="stat"><div class="stat-value" id="scoreDisplay">0</div><div class="stat-label">Points</div></div></div></header>
+    <main class="main"><div id="stageContainer"></div></main>
+    <script>
+    const state = { stage:'setup', score:0 };
+    
+    function addScore(pts) { state.score += pts; document.getElementById('scoreDisplay').textContent = state.score; }
+
+    const stages = {
+        setup: { render: () => `
+            <div class="setup-screen">
+                <h1>🦶 The Neglected Wound</h1>
+                <p class="subtitle">Diabetic foot infection management</p>
+                <button class="start-btn" onclick="goTo('presentation')">Begin Case →</button>
+            </div>`
+        },
+        presentation: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Emergency Department</div><div class="card-title">📋 Swollen Red Foot</div></div>
+                <div class="card-body">
+                    <div class="narrative">A <span class="hl">62-year-old male</span> with <span class="hl">poorly controlled T2DM</span> (HbA1c 10.2%), <span class="hl">peripheral neuropathy</span>, and <span class="hl">PAD</span> presents with a <span class="hl">2-week history of a non-healing foot ulcer</span> that has become increasingly red and swollen over the past 3 days.<br><br>On exam: <span class="hl">2cm plantar ulcer</span> over 1st metatarsal head with <span class="hl">purulent drainage</span>, <span class="hl">erythema extending 4cm</span> from wound edge, <span class="hl">probe-to-bone positive</span>, diminished DP/PT pulses. Foot is malodorous.<br><br>Vitals: Temp 38.4°C, HR 98, BP 142/88.</div>
+                    <div class="lab-panel">
+                        <div class="lab-panel-title">Laboratory Results</div>
+                        <div class="lab-grid">
+                            <div class="lab-item"><div class="lab-name">WBC</div><div class="lab-value high">16.8 K</div><div class="lab-range">4.5-11</div></div>
+                            <div class="lab-item"><div class="lab-name">ESR</div><div class="lab-value high">82 mm/hr</div><div class="lab-range">&lt;20</div></div>
+                            <div class="lab-item"><div class="lab-name">CRP</div><div class="lab-value high">124 mg/L</div><div class="lab-range">&lt;10</div></div>
+                            <div class="lab-item"><div class="lab-name">Glucose</div><div class="lab-value high">312 mg/dL</div><div class="lab-range">70-100</div></div>
+                            <div class="lab-item"><div class="lab-name">Creatinine</div><div class="lab-value">1.2 mg/dL</div><div class="lab-range">0.7-1.3</div></div>
+                            <div class="lab-item"><div class="lab-name">HbA1c</div><div class="lab-value high">10.2%</div><div class="lab-range">&lt;5.7%</div></div>
+                        </div>
+                    </div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('severity')">Assess Severity →</button></div>
+                </div>
+            </div>`
+        },
+        severity: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Classification</div><div class="card-title">📊 IDSA/IWGDF Severity</div></div>
+                <div class="card-body">
+                    <div class="alert info"><span class="alert-icon">📋</span><div class="alert-content"><div class="alert-title">DFI Severity Classification</div><div class="alert-desc">Mild: Superficial, &lt;2cm erythema | Moderate: Deeper, &gt;2cm erythema, no systemic signs | Severe: Systemic toxicity or metabolic instability</div></div></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">1</div><div class="question-text">With probe-to-bone positive, 4cm erythema, fever, and leukocytosis, what is the severity?</div></div>
+                        <div class="radio-options" id="sevOpts">
+                            <div class="radio-option" data-id="mild" onclick="selectSev('mild')"><div class="radio-circle"></div><span>Mild (outpatient oral antibiotics)</span></div>
+                            <div class="radio-option" data-id="moderate" onclick="selectSev('moderate')"><div class="radio-circle"></div><span>Moderate (may need IV antibiotics)</span></div>
+                            <div class="radio-option" data-id="severe" onclick="selectSev('severe')"><div class="radio-circle"></div><span>Severe (admission + IV antibiotics + surgery consult)</span></div>
+                        </div>
+                    </div>
+                    <div id="sevFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="sevSubmit" onclick="submitSev()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        probebone: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Osteomyelitis</div><div class="card-title">🦴 Probe-to-Bone Test</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">2</div><div class="question-text">A positive probe-to-bone test (sterile metal probe reaches bone through ulcer) suggests:</div></div>
+                        <div class="radio-options" id="ptbOpts">
+                            <div class="radio-option" data-id="osteo" onclick="selectPTB('osteo')"><div class="radio-circle"></div><div><strong>High probability of osteomyelitis</strong><br><small style="color:var(--muted)">PPV ~90% in high-risk DFI</small></div></div>
+                            <div class="radio-option" data-id="soft" onclick="selectPTB('soft')"><div class="radio-circle"></div><div><strong>Soft tissue infection only</strong><br><small style="color:var(--muted)">Bone not involved</small></div></div>
+                            <div class="radio-option" data-id="unreliable" onclick="selectPTB('unreliable')"><div class="radio-circle"></div><div><strong>Test is unreliable</strong><br><small style="color:var(--muted)">Doesn't help diagnosis</small></div></div>
+                        </div>
+                    </div>
+                    <div id="ptbFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="ptbSubmit" onclick="submitPTB()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        imaging: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Imaging</div><div class="card-title">📷 Diagnostic Studies</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">3</div><div class="question-text">What is the best imaging modality for diabetic foot osteomyelitis?</div></div>
+                        <div class="radio-options" id="imgOpts">
+                            <div class="radio-option" data-id="mri" onclick="selectImg('mri')"><div class="radio-circle"></div><div><strong>MRI</strong><br><small style="color:var(--muted)">Gold standard, best sensitivity/specificity</small></div></div>
+                            <div class="radio-option" data-id="xray" onclick="selectImg('xray')"><div class="radio-circle"></div><div><strong>Plain X-ray alone</strong><br><small style="color:var(--muted)">First-line, but limited sensitivity</small></div></div>
+                            <div class="radio-option" data-id="ct" onclick="selectImg('ct')"><div class="radio-circle"></div><div><strong>CT scan</strong><br><small style="color:var(--muted)">Better for bone detail</small></div></div>
+                            <div class="radio-option" data-id="us" onclick="selectImg('us')"><div class="radio-circle"></div><div><strong>Ultrasound</strong><br><small style="color:var(--muted)">Good for soft tissue</small></div></div>
+                        </div>
+                    </div>
+                    <div id="imgFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="imgSubmit" onclick="submitImg()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        microbiology: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Microbiology</div><div class="card-title">🦠 Common Pathogens</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">4</div><div class="question-text">Which organisms are commonly found in moderate-severe diabetic foot infections?</div></div>
+                        <div class="checkbox-grid" id="microOpts">
+                            <div class="checkbox-item" data-id="staph" data-correct="true" onclick="toggleMicro('staph')"><div class="checkbox-box"></div><span>S. aureus (including MRSA)</span></div>
+                            <div class="checkbox-item" data-id="strep" data-correct="true" onclick="toggleMicro('strep')"><div class="checkbox-box"></div><span>Streptococci</span></div>
+                            <div class="checkbox-item" data-id="gnr" data-correct="true" onclick="toggleMicro('gnr')"><div class="checkbox-box"></div><span>Gram-negative rods</span></div>
+                            <div class="checkbox-item" data-id="anaerobes" data-correct="true" onclick="toggleMicro('anaerobes')"><div class="checkbox-box"></div><span>Anaerobes</span></div>
+                            <div class="checkbox-item" data-id="pseudo" data-correct="true" onclick="toggleMicro('pseudo')"><div class="checkbox-box"></div><span>Pseudomonas</span></div>
+                            <div class="checkbox-item" data-id="fungal" data-correct="false" onclick="toggleMicro('fungal')"><div class="checkbox-box"></div><span>Fungal (primary pathogen)</span></div>
+                        </div>
+                    </div>
+                    <div id="microFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitMicro()">Submit →</button></div>
+                </div>
+            </div>`
+        },
+        antibiotics: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Treatment</div><div class="card-title">💊 Empiric Antibiotics</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">5</div><div class="question-text">For severe DFI with osteomyelitis, what empiric coverage is needed?</div></div>
+                        <div class="radio-options" id="abxOpts">
+                            <div class="radio-option" data-id="broad" onclick="selectAbx('broad')"><div class="radio-circle"></div><div><strong>Broad spectrum: MRSA + Gram-negatives + Anaerobes</strong><br><small style="color:var(--muted)">Vanc + pip-tazo or carbapenem</small></div></div>
+                            <div class="radio-option" data-id="cephalex" onclick="selectAbx('cephalex')"><div class="radio-circle"></div><div><strong>Cephalexin alone</strong><br><small style="color:var(--muted)">First-gen cephalosporin</small></div></div>
+                            <div class="radio-option" data-id="cipro" onclick="selectAbx('cipro')"><div class="radio-circle"></div><div><strong>Ciprofloxacin alone</strong><br><small style="color:var(--muted)">Covers Pseudomonas</small></div></div>
+                            <div class="radio-option" data-id="vanco" onclick="selectAbx('vanco')"><div class="radio-circle"></div><div><strong>Vancomycin alone</strong><br><small style="color:var(--muted)">Covers MRSA</small></div></div>
+                        </div>
+                    </div>
+                    <div id="abxFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="abxSubmit" onclick="submitAbx()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        outcome: { render: () => `
+            <div class="card"><div class="card-body">
+                <div class="outcome">
+                    <div class="outcome-icon">🎉</div>
+                    <div class="outcome-title">Limb Salvaged!</div>
+                    <div class="outcome-desc">Patient was admitted and started on vancomycin + piperacillin-tazobactam. MRI confirmed osteomyelitis of the 1st metatarsal. Surgery performed debridement with bone biopsy confirming MRSA osteomyelitis. He received 6 weeks of IV antibiotics, wound care, and glycemic optimization. Limb was saved with eventual wound healing.</div>
+                </div>
+                <div class="score-summary">
+                    <h3 style="margin-bottom:16px">Performance</h3>
+                    <div class="score-row"><span>Severity Classification</span><span>${state.sevScore||0}/100</span></div>
+                    <div class="score-row"><span>Probe-to-Bone</span><span>${state.ptbScore||0}/100</span></div>
+                    <div class="score-row"><span>Imaging Selection</span><span>${state.imgScore||0}/100</span></div>
+                    <div class="score-row"><span>Microbiology</span><span>${state.microScore||0}/100</span></div>
+                    <div class="score-row"><span>Antibiotic Coverage</span><span>${state.abxScore||0}/100</span></div>
+                    <div class="score-row" style="border-top:2px solid var(--border);padding-top:12px"><strong>Total</strong><strong>${state.score}</strong></div>
+                </div>
+                <div class="feedback excellent"><div class="feedback-header"><span class="feedback-icon">💡</span><span class="feedback-title">DFI Pearls</span></div><div class="feedback-text">
+                    • <strong>Severity:</strong> Mild (&lt;2cm erythema, superficial) | Moderate (&gt;2cm, deeper) | Severe (systemic signs, metabolic instability)<br>
+                    • <strong>Probe-to-bone:</strong> If positive in high-risk DFI, PPV ~90% for osteomyelitis<br>
+                    • <strong>MRI:</strong> Gold standard for osteomyelitis (Sens 90%, Spec 80%); X-ray changes take 2-4 weeks<br>
+                    • <strong>Polymicrobial:</strong> Moderate-severe DFI often has Staph + Strep + GNR + Anaerobes<br>
+                    • <strong>Severe DFI abx:</strong> MRSA coverage (vanc/dapto/linezolid) + GNR + Anaerobes (pip-tazo, carbapenem)<br>
+                    • <strong>Osteomyelitis duration:</strong> 4-6 weeks if bone remains; can shorten if complete resection<br>
+                    • <strong>Surgery:</strong> Consult for debridement, assess for abscess, evaluate for revascularization<br>
+                    • <strong>Multidisciplinary:</strong> ID, surgery, vascular, wound care, endocrine, orthotics
+                </div></div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Play Again</button></div>
+            </div></div>`
+        }
+    };
+
+    let selectedSev = null;
+    function selectSev(id) { selectedSev = id; document.querySelectorAll('#sevOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('sevSubmit').disabled = false; }
+    function submitSev() {
+        document.querySelectorAll('#sevOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'severe') o.classList.add('correct');
+            else if (o.dataset.id === selectedSev) o.classList.add('incorrect');
+        });
+        state.sevScore = selectedSev === 'severe' ? 100 : 40;
+        addScore(selectedSev === 'severe' ? 40 : 15);
+        document.getElementById('sevFeedback').innerHTML = `<div class="feedback ${selectedSev==='severe'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedSev==='severe'?'✅':'📚'}</span><span class="feedback-title">${selectedSev==='severe'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Severe DFI:</strong> Systemic signs present (fever 38.4°C, leukocytosis 16.8K). Plus probe-to-bone suggests osteomyelitis. Requires admission, IV antibiotics, and surgical evaluation.</div></div>`;
+        document.getElementById('sevSubmit').textContent = 'Continue →';
+        document.getElementById('sevSubmit').onclick = () => goTo('probebone');
+    }
+
+    let selectedPTB = null;
+    function selectPTB(id) { selectedPTB = id; document.querySelectorAll('#ptbOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('ptbSubmit').disabled = false; }
+    function submitPTB() {
+        document.querySelectorAll('#ptbOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'osteo') o.classList.add('correct');
+            else if (o.dataset.id === selectedPTB) o.classList.add('incorrect');
+        });
+        state.ptbScore = selectedPTB === 'osteo' ? 100 : 40;
+        addScore(selectedPTB === 'osteo' ? 40 : 15);
+        document.getElementById('ptbFeedback').innerHTML = `<div class="feedback ${selectedPTB==='osteo'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedPTB==='osteo'?'✅':'📚'}</span><span class="feedback-title">${selectedPTB==='osteo'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Probe-to-bone:</strong> In high-prevalence setting (infected DFU), positive PTB has ~90% PPV for osteomyelitis. Simple, bedside test. If positive, presume osteo until proven otherwise.</div></div>`;
+        document.getElementById('ptbSubmit').textContent = 'Continue →';
+        document.getElementById('ptbSubmit').onclick = () => goTo('imaging');
+    }
+
+    let selectedImg = null;
+    function selectImg(id) { selectedImg = id; document.querySelectorAll('#imgOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('imgSubmit').disabled = false; }
+    function submitImg() {
+        document.querySelectorAll('#imgOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'mri') o.classList.add('correct');
+            else if (o.dataset.id === selectedImg) o.classList.add('incorrect');
+        });
+        state.imgScore = selectedImg === 'mri' ? 100 : (selectedImg === 'xray' ? 50 : 30);
+        addScore(selectedImg === 'mri' ? 40 : (selectedImg === 'xray' ? 20 : 10));
+        document.getElementById('imgFeedback').innerHTML = `<div class="feedback ${selectedImg==='mri'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedImg==='mri'?'✅':'📚'}</span><span class="feedback-title">${selectedImg==='mri'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>MRI is gold standard:</strong> Sensitivity ~90%, specificity ~80% for osteomyelitis. X-ray is first-line but changes take 2-4 weeks to appear (30-50% bone loss needed). Always get X-ray first, then MRI if osteo suspected.</div></div>`;
+        document.getElementById('imgSubmit').textContent = 'Continue →';
+        document.getElementById('imgSubmit').onclick = () => goTo('microbiology');
+    }
+
+    let selectedMicro = new Set();
+    function toggleMicro(id) {
+        const el = document.querySelector(`#microOpts .checkbox-item[data-id="${id}"]`);
+        if(selectedMicro.has(id)) { selectedMicro.delete(id); el.classList.remove('selected'); }
+        else { selectedMicro.add(id); el.classList.add('selected'); }
+    }
+    function submitMicro() {
+        let correct = 0;
+        const items = [{id:'staph',c:true},{id:'strep',c:true},{id:'gnr',c:true},{id:'anaerobes',c:true},{id:'pseudo',c:true},{id:'fungal',c:false}];
+        items.forEach(i => {
+            const el = document.querySelector(`#microOpts .checkbox-item[data-id="${i.id}"]`);
+            const sel = selectedMicro.has(i.id);
+            if (i.c && sel) { el.classList.add('correct'); correct++; }
+            else if (!i.c && sel) { el.classList.add('incorrect'); }
+        });
+        state.microScore = Math.round(correct / 5 * 100);
+        addScore(Math.round(state.microScore / 2.5));
+        document.getElementById('microFeedback').innerHTML = `<div class="feedback ${state.microScore>=75?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${state.microScore>=75?'✅':'📚'}</span><span class="feedback-title">DFI Microbiology</span></div><div class="feedback-text"><strong>Moderate-severe DFI is polymicrobial:</strong> S. aureus (MRSA in 20-50%), Streptococci, Enterobacteriaceae, Pseudomonas (especially wet/macerated wounds), Anaerobes (necrotic/gangrenous). Fungal rarely primary pathogen.</div></div>`;
+        document.querySelector('#microFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('antibiotics')">Select Antibiotics →</button>`;
+    }
+
+    let selectedAbx = null;
+    function selectAbx(id) { selectedAbx = id; document.querySelectorAll('#abxOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('abxSubmit').disabled = false; }
+    function submitAbx() {
+        document.querySelectorAll('#abxOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'broad') o.classList.add('correct');
+            else if (o.dataset.id === selectedAbx) o.classList.add('incorrect');
+        });
+        state.abxScore = selectedAbx === 'broad' ? 100 : 30;
+        addScore(selectedAbx === 'broad' ? 40 : 10);
+        document.getElementById('abxFeedback').innerHTML = `<div class="feedback ${selectedAbx==='broad'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedAbx==='broad'?'✅':'📚'}</span><span class="feedback-title">${selectedAbx==='broad'?'Correct!':'Critical Point'}</span></div><div class="feedback-text"><strong>Severe DFI needs broad coverage:</strong> MRSA (vanc/dapto/linezolid) + Gram-negatives including Pseudomonas + Anaerobes. Common regimens: Vanc + pip-tazo, or Vanc + cefepime + metronidazole, or Vanc + carbapenem.</div></div>`;
+        document.getElementById('abxSubmit').textContent = 'Complete →';
+        document.getElementById('abxSubmit').onclick = () => goTo('outcome');
+    }
+
+    function goTo(id) { state.stage = id; document.getElementById('stageContainer').innerHTML = stages[id].render(); window.scrollTo(0,0); }
+    document.addEventListener('DOMContentLoaded', () => goTo('setup'));
+    </script>
+</body>
+</html>

@@ -3,35 +3,309 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Infection Prone | ReasonDx Adventure</title>
-    <style>:root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#A78BFA;--success:#10B981;--warning:#F59E0B;--danger:#DC2626}*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}.header{background:linear-gradient(135deg,#7C3AED,#A78BFA);padding:12px 20px;position:sticky;top:0;z-index:100}.header-row{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}.diff-toggle{display:flex;background:rgba(0,0,0,.3);border-radius:8px}.diff-btn{padding:6px 12px;font-size:.75rem;cursor:pointer;border:none;background:0 0;color:rgba(255,255,255,.7);font-weight:600}.diff-btn.active{background:rgba(255,255,255,.2);color:#fff}.stat{text-align:center;background:rgba(0,0,0,.2);padding:6px 14px;border-radius:8px}.stat-value{font-size:1.1rem;font-weight:700;font-family:monospace}.stat-label{font-size:.6rem;opacity:.8}.main{max-width:900px;margin:0 auto;padding:24px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px}.card-header{padding:20px 24px;border-bottom:1px solid var(--border)}.card-phase{font-size:.75rem;color:var(--accent);text-transform:uppercase}.card-title{font-size:1.5rem;font-weight:700}.card-body{padding:24px}.narrative{background:rgba(167,139,250,.1);border-left:4px solid var(--accent);padding:20px;border-radius:0 12px 12px 0;margin-bottom:20px}.narrative .hl{background:rgba(167,139,250,.3);padding:2px 6px;border-radius:4px}.setup-screen{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center}.start-btn{background:var(--accent);color:#fff;border:none;padding:16px 48px;border-radius:12px;font-size:1.1rem;font-weight:700;cursor:pointer}.hint{background:rgba(59,130,246,.15);padding:12px 16px;border-radius:8px;margin-bottom:16px;color:#93C5FD}.radio-options{display:flex;flex-direction:column;gap:10px}.radio-option{display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(0,0,0,.2);border:2px solid var(--border);border-radius:10px;cursor:pointer}.radio-option.selected{border-color:var(--accent);background:rgba(167,139,250,.15)}.radio-option.correct{border-color:var(--success);background:rgba(16,185,129,.15)}.radio-option.incorrect{border-color:var(--danger);background:rgba(220,38,38,.15)}.radio-circle{width:22px;height:22px;border:2px solid var(--border);border-radius:50%}.radio-option.selected .radio-circle{border-color:var(--accent);background:radial-gradient(circle,var(--accent) 40%,transparent 40%)}.feedback{padding:20px;border-radius:12px;margin:20px 0}.feedback.excellent{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3)}.feedback.incorrect{background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.3)}.btn{padding:14px 28px;border-radius:10px;font-weight:600;cursor:pointer;border:none}.btn-primary{background:var(--accent);color:#fff}.btn:disabled{opacity:.5}.btn-row{display:flex;gap:12px;margin-top:24px}.btn-link{background:0 0;border:2px solid var(--border);color:var(--text)}.vitals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:12px;margin:20px 0}.vital{background:rgba(0,0,0,.2);padding:12px;border-radius:10px;text-align:center}.vital-label{font-size:.7rem;color:var(--muted)}.vital-value{font-size:1.3rem;font-weight:700;font-family:monospace}.lab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:16px 0}.lab-item{display:flex;justify-content:space-between;padding:8px 12px;background:rgba(0,0,0,.2);border-radius:6px}.lab-name{color:var(--muted)}.lab-value{font-family:monospace;font-weight:600}.score-summary{background:rgba(0,0,0,.2);border-radius:12px;padding:24px;margin:24px auto;max-width:600px}.score-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}.pearls-box{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:20px;margin-top:20px}.pearls-title{font-weight:700;color:var(--success);margin-bottom:12px}.pearl-item{padding:8px 0;border-bottom:1px solid rgba(16,185,129,.2);font-size:.95rem}.cross-link{background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);border-radius:8px;padding:12px 16px;margin-top:12px}.cross-link a{color:#C4B5FD;text-decoration:none}.progress-bar{background:rgba(255,255,255,.1);border-radius:10px;height:8px;margin:20px 0}.progress-fill{background:var(--accent);height:100%}.question-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}.question-number{background:var(--accent);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}</style>
+    <title>The Frequent Flyer | ReasonDx Adventure</title>
+    <style>
+        :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #A855F7; --success: #10B981; --warning: #F59E0B; --danger: #DC2626; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #9333EA 0%, #A855F7 100%); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; }
+        .stat { background: rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 8px; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        .main { max-width: 1000px; margin: 0 auto; padding: 24px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(147,51,234,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; line-height: 1.8; }
+        .narrative .hl { background: rgba(168,85,247,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        .setup-screen { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; }
+        .setup-screen h1 { font-size: 2rem; margin-bottom: 8px; }
+        .setup-screen .subtitle { color: var(--muted); margin-bottom: 32px; }
+        .start-btn { background: var(--accent); color: white; border: none; padding: 16px 48px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+        .question-section { margin-bottom: 32px; }
+        .question-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .question-number { background: var(--accent); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .question-text { font-size: 1.1rem; font-weight: 600; }
+        .radio-options { display: flex; flex-direction: column; gap: 10px; }
+        .radio-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .radio-option:hover { border-color: var(--accent); }
+        .radio-option.selected { border-color: var(--accent); background: rgba(168,85,247,0.15); }
+        .radio-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .radio-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .radio-circle { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; }
+        .radio-option.selected .radio-circle { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 40%, transparent 40%); }
+        .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 10px; }
+        .checkbox-item { display: flex; align-items: center; gap: 10px; padding: 12px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .checkbox-item:hover { border-color: var(--accent); }
+        .checkbox-item.selected { border-color: var(--accent); background: rgba(168,85,247,0.15); }
+        .checkbox-item.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .checkbox-item.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .checkbox-box { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .checkbox-item.selected .checkbox-box { background: var(--accent); border-color: var(--accent); }
+        .checkbox-item.selected .checkbox-box::after { content: '✓'; color: white; font-weight: bold; }
+        .feedback { padding: 20px; border-radius: 12px; margin: 20px 0; }
+        .feedback.excellent { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .feedback.acceptable { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .feedback-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .feedback-icon { font-size: 1.5rem; }
+        .feedback-title { font-weight: 700; }
+        .feedback-text { color: var(--muted); line-height: 1.7; }
+        .feedback-text strong { color: var(--text); }
+        .alert { padding: 16px 20px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
+        .alert.danger { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+        .alert.success { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .alert-icon { font-size: 1.5rem; }
+        .alert-content { flex: 1; }
+        .alert-title { font-weight: 600; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; color: var(--muted); }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn-secondary { background: transparent; border: 2px solid var(--border); color: var(--text); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-row { display: flex; gap: 12px; margin-top: 24px; }
+        .lab-panel { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .lab-panel-title { font-weight: 600; margin-bottom: 16px; color: var(--accent); }
+        .lab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+        .lab-item { background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; }
+        .lab-name { font-size: 0.8rem; color: var(--muted); }
+        .lab-value { font-size: 1.1rem; font-weight: 700; }
+        .lab-value.critical { color: var(--danger); }
+        .lab-range { font-size: 0.7rem; color: var(--muted); }
+        .outcome { text-align: center; padding: 40px 20px; }
+        .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
+        .outcome-title { font-size: 2rem; font-weight: 700; color: var(--success); margin-bottom: 8px; }
+        .outcome-desc { color: var(--muted); max-width: 600px; margin: 0 auto 24px; }
+        .score-summary { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 24px; margin: 24px auto; max-width: 500px; }
+        .score-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .score-row:last-child { border-bottom: none; }
+        .patient-panel { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 16px; margin-bottom: 20px; }
+        .patient-panel-title { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; }
+        .patient-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
+        .patient-info-label { font-size: 0.7rem; color: var(--muted); }
+        .patient-info-value { font-weight: 600; }
+    </style>
 </head>
 <body>
-    <header class="header"><div class="header-row"><div style="font-weight:600">🛡️ The Infection Prone</div><div style="display:flex;gap:12px;align-items:center"><div class="diff-toggle"><button class="diff-btn active" onclick="setDiff('easy')">Easy</button><button class="diff-btn" onclick="setDiff('int')">Intermediate</button><button class="diff-btn" onclick="setDiff('adv')">Advanced</button></div><div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Points</div></div></div></div></header>
-    <main class="main"><div id="app"></div></main>
-<script>
-const S={stage:'setup',score:0,max:0,diff:'easy',q:0,total:8};
-const C={easy:{age:'28M',wt:'75kg',hx:'4 sinus infections, 2 pneumonias in 2 years',exam:'Hypoplastic tonsils, no lymphadenopathy',vitals:{HR:'78',BP:'122/78'},labs:{IgG:'180',IgA:'<7',IgM:'25',Lymph:'1800'}},int:{age:'35F',wt:'62kg',hx:'Recurrent sinopulmonary infections since teens, bronchiectasis',exam:'Clubbing, crackles bilateral bases',vitals:{HR:'82',BP:'118/72'},labs:{IgG:'320',IgA:'45',IgM:'38',CD19:'2%'}},adv:{age:'8M',wt:'25kg',hx:'Recurrent Staph abscesses, pneumatoceles, eczema',exam:'Coarse facies, retained primary teeth',vitals:{HR:'92',BP:'98/62'},labs:{IgE:'8500',Eos:'12%',ANC:'Normal'}}};
-const Q=[
-{t:'Warning Signs',q:'How many serious infections warrant immunodeficiency workup?',h:'Jeffrey Modell Foundation criteria',o:[{id:'a',txt:'>=2 serious infections/yr OR >=4 ear infections/yr OR >=2 pneumonias/yr',c:1,p:100},{id:'b',txt:'Only 1 hospitalization',c:0,p:20},{id:'c',txt:'Any infection at all',c:0,p:10}],fb:{1:'<b>Correct!</b> JMF 10 Warning Signs include: >=2 deep-seated infections, >=4 ear infections, >=2 pneumonias, recurrent abscesses, FTT, need for IV antibiotics.',0:'<b>JMF criteria:</b> Pattern of recurrent, severe, or unusual infections.'}},
-{t:'CVID Diagnosis',q:'Low IgG, low IgA, poor vaccine responses. Diagnosis?',h:'Most common symptomatic primary immunodeficiency',o:[{id:'a',txt:'Common Variable Immunodeficiency (CVID)',c:1,p:100},{id:'b',txt:'X-linked agammaglobulinemia',c:0,p:30},{id:'c',txt:'IgA deficiency only',c:0,p:20}],fb:{1:'<b>Correct!</b> CVID: Low IgG + low IgA or IgM + poor vaccine response. Age >4. Most common symptomatic PID in adults.',0:'<b>CVID:</b> Low IgG/IgA/IgM + poor vaccine responses + exclusion of other causes.'}},
-{t:'CVID vs XLA',q:'Male infant with no B cells (CD19 0%). Likely diagnosis?',h:'Absent B cells key finding',o:[{id:'a',txt:'X-linked agammaglobulinemia (Bruton)',c:1,p:100},{id:'b',txt:'CVID',c:0,p:30},{id:'c',txt:'SCID',c:0,p:20}],fb:{1:'<b>Correct!</b> XLA: Male, absent B cells (BTK mutation), very low all Ig classes. Presents 6-12 months when maternal Ab wanes.',0:'<b>XLA:</b> No B cells. Males. Very low immunoglobulins. Recurrent bacterial infections.'}},
-{t:'IgG Replacement',q:'CVID treatment mainstay?',h:'Replace the deficient immunoglobulin',o:[{id:'a',txt:'IgG replacement (IVIG or SCIG) lifelong',c:1,p:100},{id:'b',txt:'Prophylactic antibiotics only',c:0,p:30},{id:'c',txt:'Bone marrow transplant',c:0,p:10}],fb:{1:'<b>Correct!</b> IgG replacement standard: IVIG q3-4wks or SCIG weekly. Target trough IgG >500-700. Reduces infections dramatically.',0:'<b>IgG replacement:</b> IVIG or SCIG lifelong. Target adequate trough levels.'}},
-{t:'SCIG vs IVIG',q:'Advantage of subcutaneous Ig (SCIG) over IVIG?',h:'Route differences',o:[{id:'a',txt:'Home administration, steady levels, fewer systemic reactions',c:1,p:100},{id:'b',txt:'Higher peak levels',c:0,p:20},{id:'c',txt:'Less frequent dosing',c:0,p:30}],fb:{1:'<b>Correct!</b> SCIG: Home self-administration, stable serum levels (no peaks/troughs), fewer systemic side effects. Weekly dosing.',0:'<b>SCIG:</b> Home-based, steady levels, fewer reactions vs IVIG.'}},
-{t:'Hyper-IgE Syndrome',q:'Recurrent Staph abscesses + eczema + very high IgE + retained teeth. Syndrome?',h:'Job syndrome',o:[{id:'a',txt:'Hyper-IgE Syndrome (HIES/Job syndrome)',c:1,p:100},{id:'b',txt:'Atopic dermatitis',c:0,p:30},{id:'c',txt:'CGD',c:0,p:20}],fb:{1:'<b>Correct!</b> HIES: STAT3 mutation. Cold abscesses, pneumatoceles, eczema, retained primary teeth, coarse facies, scoliosis. IgE often >2000.',0:'<b>HIES:</b> Cold Staph abscesses, pneumatoceles, skeletal abnormalities, very high IgE.'}},
-{t:'CGD Pattern',q:'Recurrent catalase-positive organism infections (Staph, Aspergillus, Serratia). Defect?',h:'NADPH oxidase deficiency',o:[{id:'a',txt:'Chronic Granulomatous Disease (CGD)',c:1,p:100},{id:'b',txt:'CVID',c:0,p:10},{id:'c',txt:'Complement deficiency',c:0,p:20}],fb:{1:'<b>Correct!</b> CGD: NADPH oxidase defect. Cant kill catalase+ organisms. DHR flow cytometry or NBT test for diagnosis.',0:'<b>CGD:</b> Catalase+ infections (SPLAANE: Staph, Pseudomonas, Listeria, Aspergillus, Nocardia, E.coli).'}},
-{t:'Complement Deficiency',q:'Recurrent Neisseria infections (meningococcus). Suspect?',h:'Terminal complement pathway',o:[{id:'a',txt:'Terminal complement deficiency (C5-C9)',c:1,p:100},{id:'b',txt:'IgG deficiency',c:0,p:20},{id:'c',txt:'T-cell deficiency',c:0,p:10}],fb:{1:'<b>Correct!</b> Terminal complement (MAC) deficiency: Recurrent Neisseria. Check CH50 (total hemolytic complement). Vaccinate for Neisseria.',0:'<b>Complement:</b> Neisseria = terminal complement. CH50 screens all complement components.'}}
-];
-let sel=null;
-function setDiff(d){S.diff=d;document.querySelectorAll('.diff-btn').forEach((b,i)=>b.classList.toggle('active',['easy','int','adv'][i]===d));if(S.stage!=='setup'){S.stage='setup';S.score=0;S.max=0;S.q=0;document.getElementById('score').textContent='0';}render();}
-function addPts(p,m){S.score+=p;S.max+=m;document.getElementById('score').textContent=S.score;}
-function pick(id){sel=id;document.querySelectorAll('.radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id));document.getElementById('sub').disabled=false;}
-function submit(){const q=Q[S.q-1];const opt=q.o.find(o=>o.id===sel);addPts(opt.p||0,100);document.querySelectorAll('.radio-option').forEach(o=>{const op=q.o.find(x=>x.id===o.dataset.id);if(op&&op.c)o.classList.add('correct');else if(o.dataset.id===sel)o.classList.add('incorrect');});document.getElementById('fb').innerHTML='<div class="feedback '+(opt&&opt.c?'excellent':'incorrect')+'">'+q.fb[opt&&opt.c?1:0]+'</div>';document.getElementById('sub').textContent=S.q<S.total?'Next':'Results';document.getElementById('sub').onclick=next;}
-function next(){if(S.q<S.total){S.q++;sel=null;render();}else{S.stage='outcome';render();}}
-function start(){S.q=1;S.stage='question';render();}
-function go(s){S.stage=s;render();}
-function render(){const c=C[S.diff];if(S.stage==='setup'){document.getElementById('app').innerHTML='<div class="setup-screen"><h1>🛡️ The Infection Prone</h1><p style="color:var(--muted);margin-bottom:32px">Immunodeficiency: CVID, XLA, HIES, CGD, complement deficiency, IgG replacement</p><button class="start-btn" onclick="go(\'pres\')">Begin Case</button></div>';}else if(S.stage==='pres'){document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Presentation</div><div class="card-title">🔬 Immune Evaluation</div></div><div class="card-body"><div class="narrative"><span class="hl">'+c.age+'</span> ('+c.wt+')<br><b>Hx:</b> '+c.hx+'<br><b>Exam:</b> '+c.exam+'</div><div class="vitals-grid">'+Object.entries(c.vitals).map(function(e){return'<div class="vital"><div class="vital-label">'+e[0]+'</div><div class="vital-value">'+e[1]+'</div></div>';}).join('')+'</div><div class="lab-grid">'+Object.entries(c.labs).map(function(e){return'<div class="lab-item"><span class="lab-name">'+e[0]+'</span><span class="lab-value">'+e[1]+'</span></div>';}).join('')+'</div><div class="btn-row"><button class="btn btn-primary" onclick="start()">Begin Assessment</button></div></div></div>';}else if(S.stage==='question'){var q=Q[S.q-1];document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Q'+S.q+'/'+S.total+'</div><div class="card-title">'+q.t+'</div></div><div class="card-body"><div class="progress-bar"><div class="progress-fill" style="width:'+(S.q/S.total*100)+'%"></div></div><div class="question-header"><div class="question-number">'+S.q+'</div><div style="font-weight:600">'+q.q+'</div></div><div class="hint">'+q.h+'</div><div class="radio-options">'+q.o.map(function(o){return'<div class="radio-option" data-id="'+o.id+'" onclick="pick(\''+o.id+'\')"><div class="radio-circle"></div><div><b>'+o.txt+'</b></div></div>';}).join('')+'</div><div id="fb"></div><div class="btn-row"><button class="btn btn-primary" id="sub" onclick="submit()" disabled>Submit</button></div></div></div>';}else{var pct=S.max>0?Math.round(S.score/S.max*100):0;document.getElementById('app').innerHTML='<div class="card"><div class="card-body"><div style="text-align:center;padding:40px"><div style="font-size:4rem">'+(pct>=70?'🎉':'📚')+'</div><div style="font-size:2rem;font-weight:700;color:'+(pct>=70?'var(--success)':'var(--warning)')+'">'+(pct>=70?'Complete!':'Review')+'</div></div><div class="score-summary"><div class="score-row"><span>Score</span><span>'+S.score+'/'+S.max+' ('+pct+'%)</span></div></div><div class="pearls-box"><div class="pearls-title">Immunodeficiency Pearls</div><div class="pearl-item"><b>CVID:</b> Low IgG + IgA/IgM + poor vaccine response</div><div class="pearl-item"><b>XLA:</b> Males, absent B cells, very low all Ig</div><div class="pearl-item"><b>HIES:</b> Cold abscesses, pneumatoceles, IgE >2000</div><div class="pearl-item"><b>CGD:</b> Catalase+ infections (DHR test)</div><div class="pearl-item"><b>Complement:</b> Neisseria = terminal complement (CH50)</div></div><div class="cross-link"><a href="../mechanism/immunodeficiency-module.html">MechanismDx: Immunodeficiency</a></div><div class="btn-row" style="justify-content:center;margin-top:30px"><button class="btn btn-primary" onclick="location.reload()">Retry</button><button class="btn btn-link" onclick="location.href=\'adventure-hub.html\'">Back</button></div></div></div>';}}
-document.addEventListener('DOMContentLoaded',render);
-</script>
+    <header class="header"><div class="header-row"><div class="header-title">🛡️ The Frequent Flyer</div><div class="stat"><div class="stat-value" id="scoreDisplay">0</div><div class="stat-label">Points</div></div></div></header>
+    <main class="main"><div id="stageContainer"></div></main>
+    <script>
+    const state = { stage:'setup', score:0 };
+    const screeningTests = [
+        { id: 'cbc', text: 'CBC with differential', correct: true },
+        { id: 'quant_ig', text: 'Quantitative immunoglobulins', correct: true },
+        { id: 'hiv', text: 'HIV testing', correct: true },
+        { id: 'vaccine', text: 'Vaccine response titers', correct: true },
+        { id: 'ige', text: 'Total IgE', correct: false },
+        { id: 'ana', text: 'ANA', correct: false }
+    ];
+
+    function addScore(pts) { state.score += pts; document.getElementById('scoreDisplay').textContent = state.score; }
+
+    const stages = {
+        setup: { render: () => `
+            <div class="setup-screen">
+                <h1>🛡️ The Frequent Flyer</h1>
+                <p class="subtitle">Primary immunodeficiency recognition and workup</p>
+                <button class="start-btn" onclick="goTo('referral')">Begin Case →</button>
+            </div>`
+        },
+        referral: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Primary Care</div><div class="card-title">📋 Recurrent Infections</div></div>
+                <div class="card-body">
+                    <div class="narrative">A <span class="hl">28-year-old male</span> presents with <span class="hl">recurrent sinus and lung infections</span>. He's had <span class="hl">4 sinus infections</span> and <span class="hl">2 pneumonias</span> in the past year, one requiring hospitalization.<br><br>Antibiotics "take forever to work" - he often needs <span class="hl">extended courses or IV antibiotics</span>. His brother has a similar history and was <span class="hl">diagnosed with an immune problem</span>.</div>
+                    <div class="patient-panel">
+                        <div class="patient-panel-title">Patient Information</div>
+                        <div class="patient-info-grid">
+                            <div><div class="patient-info-label">Age/Sex</div><div class="patient-info-value">28 y/o Male</div></div>
+                            <div><div class="patient-info-label">Sinus infections/yr</div><div class="patient-info-value">4</div></div>
+                            <div><div class="patient-info-label">Pneumonias/yr</div><div class="patient-info-value">2</div></div>
+                            <div><div class="patient-info-label">Family Hx</div><div class="patient-info-value">Brother - PID</div></div>
+                        </div>
+                    </div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('warning')">Assess Warning Signs →</button></div>
+                </div>
+            </div>`
+        },
+        warning: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Recognition</div><div class="card-title">🚩 Warning Signs</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">1</div><div class="question-text">How many PID warning signs does this patient have?</div></div>
+                        <p style="color:var(--muted);margin-bottom:16px;font-size:0.9rem">Warning signs: ≥2 sinus infections/yr, ≥1 pneumonia/yr, IV abx needed, family history of PID</p>
+                        <div class="radio-options" id="countOpts">
+                            <div class="radio-option" data-id="1" onclick="selectCount('1')"><div class="radio-circle"></div><span>1 warning sign</span></div>
+                            <div class="radio-option" data-id="2" onclick="selectCount('2')"><div class="radio-circle"></div><span>2 warning signs</span></div>
+                            <div class="radio-option" data-id="4" onclick="selectCount('4')"><div class="radio-circle"></div><span>4 warning signs</span></div>
+                        </div>
+                    </div>
+                    <div id="countFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="countSubmit" onclick="submitCount()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        screening: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Workup</div><div class="card-title">🔬 Screening Tests</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">2</div><div class="question-text">Which tests for initial PID screening?</div></div>
+                        <div class="checkbox-grid" id="testOpts">${screeningTests.map(t=>`<div class="checkbox-item" data-id="${t.id}" data-correct="${t.correct}" onclick="toggleTest('${t.id}')"><div class="checkbox-box"></div><span>${t.text}</span></div>`).join('')}</div>
+                    </div>
+                    <div id="testFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitTest()">Submit →</button></div>
+                </div>
+            </div>`
+        },
+        results: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Results</div><div class="card-title">📋 Lab Findings</div></div>
+                <div class="card-body">
+                    <div class="lab-panel">
+                        <div class="lab-panel-title">Quantitative Immunoglobulins</div>
+                        <div class="lab-grid">
+                            <div class="lab-item"><div class="lab-name">IgG</div><div class="lab-value critical">180 mg/dL</div><div class="lab-range">700-1600</div></div>
+                            <div class="lab-item"><div class="lab-name">IgA</div><div class="lab-value critical">12 mg/dL</div><div class="lab-range">70-400</div></div>
+                            <div class="lab-item"><div class="lab-name">IgM</div><div class="lab-value critical">35 mg/dL</div><div class="lab-range">40-230</div></div>
+                        </div>
+                    </div>
+                    <div class="lab-panel">
+                        <div class="lab-panel-title">Vaccine Titers</div>
+                        <div class="lab-grid">
+                            <div class="lab-item"><div class="lab-name">Tetanus Ab</div><div class="lab-value critical">&lt;0.1 IU/mL</div><div class="lab-range">&gt;0.1</div></div>
+                            <div class="lab-item"><div class="lab-name">Pneumococcal</div><div class="lab-value critical">1/14 protective</div><div class="lab-range">&gt;70%</div></div>
+                            <div class="lab-item"><div class="lab-name">HIV</div><div class="lab-value">Negative</div></div>
+                        </div>
+                    </div>
+                    <div class="alert danger"><span class="alert-icon">🚨</span><div class="alert-content"><div class="alert-title">Profoundly Low Immunoglobulins</div><div class="alert-desc">IgG, IgA, IgM all low with poor vaccine responses</div></div></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('diagnosis')">Interpret →</button></div>
+                </div>
+            </div>`
+        },
+        diagnosis: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Diagnosis</div><div class="card-title">🎯 What's the Diagnosis?</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">3</div><div class="question-text">Most likely diagnosis?</div></div>
+                        <div class="radio-options" id="dxOpts">
+                            <div class="radio-option" data-id="cvid" onclick="selectDx('cvid')"><div class="radio-circle"></div><div><strong>Common Variable Immunodeficiency (CVID)</strong><br><small style="color:var(--muted)">Low IgG + low IgA/IgM, poor vaccine response, adult onset</small></div></div>
+                            <div class="radio-option" data-id="xla" onclick="selectDx('xla')"><div class="radio-circle"></div><div><strong>X-linked Agammaglobulinemia</strong><br><small style="color:var(--muted)">Absent B cells, presents in infancy</small></div></div>
+                            <div class="radio-option" data-id="iga" onclick="selectDx('iga')"><div class="radio-circle"></div><div><strong>Selective IgA Deficiency</strong><br><small style="color:var(--muted)">Low IgA only, normal IgG</small></div></div>
+                        </div>
+                    </div>
+                    <div id="dxFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="dxSubmit" onclick="submitDx()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        treatment: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Management</div><div class="card-title">💊 Treatment</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">4</div><div class="question-text">Mainstay of CVID treatment?</div></div>
+                        <div class="radio-options" id="rxOpts">
+                            <div class="radio-option" data-id="ivig" onclick="selectRx('ivig')"><div class="radio-circle"></div><strong>Immunoglobulin replacement (IVIG/SCIG)</strong></div>
+                            <div class="radio-option" data-id="abx" onclick="selectRx('abx')"><div class="radio-circle"></div><span>Prophylactic antibiotics only</span></div>
+                            <div class="radio-option" data-id="vaccines" onclick="selectRx('vaccines')"><div class="radio-circle"></div><span>Aggressive revaccination</span></div>
+                        </div>
+                    </div>
+                    <div id="rxFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="rxSubmit" onclick="submitRx()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        outcome: { render: () => `
+            <div class="card"><div class="card-body">
+                <div class="outcome">
+                    <div class="outcome-icon">🎉</div>
+                    <div class="outcome-title">Patient Treated!</div>
+                    <div class="outcome-desc">After starting monthly IVIG, infections dramatically decreased. No pneumonias and only 1 sinus infection in the following year.</div>
+                </div>
+                <div class="score-summary">
+                    <h3 style="margin-bottom:16px">Performance</h3>
+                    <div class="score-row"><span>Warning Signs</span><span>${state.countScore||0}/100</span></div>
+                    <div class="score-row"><span>Screening Tests</span><span>${state.testScore||0}/100</span></div>
+                    <div class="score-row"><span>Diagnosis</span><span>${state.dxScore||0}/100</span></div>
+                    <div class="score-row"><span>Treatment</span><span>${state.rxScore||0}/100</span></div>
+                    <div class="score-row" style="border-top:2px solid var(--border);padding-top:12px"><strong>Total</strong><strong>${state.score}</strong></div>
+                </div>
+                <div class="feedback excellent"><div class="feedback-header"><span class="feedback-icon">💡</span><span class="feedback-title">PID Pearls</span></div><div class="feedback-text">• <strong>≥2 warning signs</strong> → immunology referral<br>• <strong>CVID:</strong> Most common symptomatic PID in adults<br>• <strong>Screening:</strong> CBC, quantitative Ig, HIV, vaccine titers<br>• <strong>Treatment:</strong> Lifelong Ig replacement (IVIG or SCIG)<br>• <strong>Target IgG trough:</strong> >700 mg/dL<br>• <strong>Live vaccines contraindicated</strong></div></div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Play Again</button><button class="btn btn-secondary" onclick="location.href='adventure-hub.html'">← Adventures</button></div>
+            </div></div>`
+        }
+    };
+
+    let selectedCount = null;
+    function selectCount(id) { selectedCount = id; document.querySelectorAll('#countOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('countSubmit').disabled = false; }
+    function submitCount() {
+        document.querySelectorAll('#countOpts .radio-option').forEach(o => {
+            if (o.dataset.id === '4') o.classList.add('correct');
+            else if (o.dataset.id === selectedCount) o.classList.add('incorrect');
+        });
+        state.countScore = selectedCount === '4' ? 100 : 40;
+        addScore(selectedCount === '4' ? 40 : 15);
+        document.getElementById('countFeedback').innerHTML = `<div class="feedback ${selectedCount==='4'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedCount==='4'?'✅':'📚'}</span><span class="feedback-title">Warning Signs</span></div><div class="feedback-text"><strong>4 warning signs:</strong> ≥2 sinus infections ✓, ≥1 pneumonia ✓, IV abx needed ✓, family history ✓</div></div>`;
+        document.getElementById('countSubmit').textContent = 'Continue →';
+        document.getElementById('countSubmit').onclick = () => goTo('screening');
+    }
+
+    let selectedTests = new Set();
+    function toggleTest(id) {
+        const el = document.querySelector(`#testOpts .checkbox-item[data-id="${id}"]`);
+        if(selectedTests.has(id)) { selectedTests.delete(id); el.classList.remove('selected'); }
+        else { selectedTests.add(id); el.classList.add('selected'); }
+    }
+    function submitTest() {
+        let correct = 0;
+        screeningTests.forEach(t => {
+            const el = document.querySelector(`#testOpts .checkbox-item[data-id="${t.id}"]`);
+            const sel = selectedTests.has(t.id);
+            if (t.correct && sel) { el.classList.add('correct'); correct++; }
+            else if (!t.correct && sel) { el.classList.add('incorrect'); }
+        });
+        state.testScore = Math.round(correct / 4 * 100);
+        addScore(Math.round(state.testScore / 2.5));
+        document.getElementById('testFeedback').innerHTML = `<div class="feedback ${state.testScore>=75?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${state.testScore>=75?'✅':'📚'}</span><span class="feedback-title">PID Screening</span></div><div class="feedback-text"><strong>Correct:</strong> CBC, quantitative Ig, HIV, vaccine titers<br><strong>Not first-line:</strong> Total IgE, ANA</div></div>`;
+        document.querySelector('#testFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('results')">See Results →</button>`;
+    }
+
+    let selectedDx = null;
+    function selectDx(id) { selectedDx = id; document.querySelectorAll('#dxOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('dxSubmit').disabled = false; }
+    function submitDx() {
+        document.querySelectorAll('#dxOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'cvid') o.classList.add('correct');
+            else if (o.dataset.id === selectedDx) o.classList.add('incorrect');
+        });
+        state.dxScore = selectedDx === 'cvid' ? 100 : 40;
+        addScore(selectedDx === 'cvid' ? 40 : 15);
+        document.getElementById('dxFeedback').innerHTML = `<div class="feedback ${selectedDx==='cvid'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedDx==='cvid'?'✅':'📚'}</span><span class="feedback-title">${selectedDx==='cvid'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>CVID:</strong> Low IgG + low IgA/IgM, poor vaccine response, adult onset. XLA presents in infancy. IgA def has normal IgG.</div></div>`;
+        document.getElementById('dxSubmit').textContent = 'Continue →';
+        document.getElementById('dxSubmit').onclick = () => goTo('treatment');
+    }
+
+    let selectedRx = null;
+    function selectRx(id) { selectedRx = id; document.querySelectorAll('#rxOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('rxSubmit').disabled = false; }
+    function submitRx() {
+        document.querySelectorAll('#rxOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'ivig') o.classList.add('correct');
+            else if (o.dataset.id === selectedRx) o.classList.add('incorrect');
+        });
+        state.rxScore = selectedRx === 'ivig' ? 100 : 40;
+        addScore(selectedRx === 'ivig' ? 40 : 15);
+        document.getElementById('rxFeedback').innerHTML = `<div class="feedback ${selectedRx==='ivig'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedRx==='ivig'?'✅':'📚'}</span><span class="feedback-title">${selectedRx==='ivig'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Ig replacement is mainstay:</strong> IVIG (IV q3-4wk) or SCIG (SC weekly). Lifelong. Can't revaccinate - they can't make antibodies.</div></div>`;
+        document.getElementById('rxSubmit').textContent = 'Complete →';
+        document.getElementById('rxSubmit').onclick = () => goTo('outcome');
+    }
+
+    function goTo(id) { state.stage = id; document.getElementById('stageContainer').innerHTML = stages[id].render(); window.scrollTo(0,0); }
+    document.addEventListener('DOMContentLoaded', () => goTo('setup'));
+    </script>
 </body>
 </html>

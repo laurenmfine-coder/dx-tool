@@ -3,35 +3,343 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Rising Eos | ReasonDx Adventure</title>
-    <style>:root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#34D399;--success:#10B981;--warning:#F59E0B;--danger:#DC2626}*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}.header{background:linear-gradient(135deg,#059669,#34D399);padding:12px 20px;position:sticky;top:0;z-index:100}.header-row{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}.diff-toggle{display:flex;background:rgba(0,0,0,.3);border-radius:8px}.diff-btn{padding:6px 12px;font-size:.75rem;cursor:pointer;border:none;background:0 0;color:rgba(255,255,255,.7);font-weight:600}.diff-btn.active{background:rgba(255,255,255,.2);color:#fff}.stat{text-align:center;background:rgba(0,0,0,.2);padding:6px 14px;border-radius:8px}.stat-value{font-size:1.1rem;font-weight:700;font-family:monospace}.stat-label{font-size:.6rem;opacity:.8}.main{max-width:900px;margin:0 auto;padding:24px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px}.card-header{padding:20px 24px;border-bottom:1px solid var(--border)}.card-phase{font-size:.75rem;color:var(--accent);text-transform:uppercase}.card-title{font-size:1.5rem;font-weight:700}.card-body{padding:24px}.narrative{background:rgba(52,211,153,.1);border-left:4px solid var(--accent);padding:20px;border-radius:0 12px 12px 0;margin-bottom:20px}.narrative .hl{background:rgba(52,211,153,.3);padding:2px 6px;border-radius:4px}.setup-screen{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center}.start-btn{background:var(--accent);color:#000;border:none;padding:16px 48px;border-radius:12px;font-size:1.1rem;font-weight:700;cursor:pointer}.hint{background:rgba(59,130,246,.15);padding:12px 16px;border-radius:8px;margin-bottom:16px;color:#93C5FD}.radio-options{display:flex;flex-direction:column;gap:10px}.radio-option{display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(0,0,0,.2);border:2px solid var(--border);border-radius:10px;cursor:pointer}.radio-option.selected{border-color:var(--accent);background:rgba(52,211,153,.15)}.radio-option.correct{border-color:var(--success);background:rgba(16,185,129,.15)}.radio-option.incorrect{border-color:var(--danger);background:rgba(220,38,38,.15)}.radio-circle{width:22px;height:22px;border:2px solid var(--border);border-radius:50%}.radio-option.selected .radio-circle{border-color:var(--accent);background:radial-gradient(circle,var(--accent) 40%,transparent 40%)}.feedback{padding:20px;border-radius:12px;margin:20px 0}.feedback.excellent{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3)}.feedback.incorrect{background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.3)}.btn{padding:14px 28px;border-radius:10px;font-weight:600;cursor:pointer;border:none}.btn-primary{background:var(--accent);color:#000}.btn:disabled{opacity:.5}.btn-row{display:flex;gap:12px;margin-top:24px}.btn-link{background:0 0;border:2px solid var(--border);color:var(--text)}.vitals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:12px;margin:20px 0}.vital{background:rgba(0,0,0,.2);padding:12px;border-radius:10px;text-align:center}.vital-label{font-size:.7rem;color:var(--muted)}.vital-value{font-size:1.3rem;font-weight:700;font-family:monospace}.lab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:16px 0}.lab-item{display:flex;justify-content:space-between;padding:8px 12px;background:rgba(0,0,0,.2);border-radius:6px}.lab-name{color:var(--muted)}.lab-value{font-family:monospace;font-weight:600}.score-summary{background:rgba(0,0,0,.2);border-radius:12px;padding:24px;margin:24px auto;max-width:600px}.score-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}.pearls-box{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:20px;margin-top:20px}.pearls-title{font-weight:700;color:var(--success);margin-bottom:12px}.pearl-item{padding:8px 0;border-bottom:1px solid rgba(16,185,129,.2);font-size:.95rem}.cross-link{background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);border-radius:8px;padding:12px 16px;margin-top:12px}.cross-link a{color:#C4B5FD;text-decoration:none}.progress-bar{background:rgba(255,255,255,.1);border-radius:10px;height:8px;margin:20px 0}.progress-fill{background:var(--accent);height:100%;border-radius:10px}.question-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}.question-number{background:var(--accent);color:#000;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}</style>
+    <title>The Elevated Count | ReasonDx Adventure</title>
+    <style>
+        :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #22C55E; --success: #10B981; --warning: #F59E0B; --danger: #DC2626; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #16A34A 0%, #22C55E 100%); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; }
+        .stat { background: rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 8px; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        .main { max-width: 1000px; margin: 0 auto; padding: 24px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(34,197,94,0.1), rgba(22,163,74,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; line-height: 1.8; }
+        .narrative .hl { background: rgba(34,197,94,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        .setup-screen { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; }
+        .setup-screen h1 { font-size: 2rem; margin-bottom: 8px; }
+        .setup-screen .subtitle { color: var(--muted); margin-bottom: 32px; }
+        .start-btn { background: var(--accent); color: #1a1a1a; border: none; padding: 16px 48px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+        .question-section { margin-bottom: 32px; }
+        .question-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .question-number { background: var(--accent); color: #1a1a1a; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .question-text { font-size: 1.1rem; font-weight: 600; }
+        .radio-options { display: flex; flex-direction: column; gap: 10px; }
+        .radio-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .radio-option:hover { border-color: var(--accent); }
+        .radio-option.selected { border-color: var(--accent); background: rgba(34,197,94,0.15); }
+        .radio-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .radio-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .radio-circle { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; }
+        .radio-option.selected .radio-circle { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 40%, transparent 40%); }
+        .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+        .checkbox-item { display: flex; align-items: center; gap: 10px; padding: 12px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .checkbox-item:hover { border-color: var(--accent); }
+        .checkbox-item.selected { border-color: var(--accent); background: rgba(34,197,94,0.15); }
+        .checkbox-item.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .checkbox-item.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .checkbox-box { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .checkbox-item.selected .checkbox-box { background: var(--accent); border-color: var(--accent); }
+        .checkbox-item.selected .checkbox-box::after { content: '✓'; color: #1a1a1a; font-weight: bold; }
+        .feedback { padding: 20px; border-radius: 12px; margin: 20px 0; }
+        .feedback.excellent { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .feedback.acceptable { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .feedback-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .feedback-icon { font-size: 1.5rem; }
+        .feedback-title { font-weight: 700; }
+        .feedback-text { color: var(--muted); line-height: 1.7; }
+        .feedback-text strong { color: var(--text); }
+        .alert { padding: 16px 20px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
+        .alert.warning { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .alert.danger { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+        .alert-icon { font-size: 1.5rem; }
+        .alert-content { flex: 1; }
+        .alert-title { font-weight: 600; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; color: var(--muted); }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: #1a1a1a; }
+        .btn-secondary { background: transparent; border: 2px solid var(--border); color: var(--text); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-row { display: flex; gap: 12px; margin-top: 24px; }
+        .lab-panel { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .lab-panel-title { font-weight: 600; margin-bottom: 16px; color: var(--accent); }
+        .lab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+        .lab-item { background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; }
+        .lab-name { font-size: 0.8rem; color: var(--muted); }
+        .lab-value { font-size: 1.1rem; font-weight: 700; }
+        .lab-value.high { color: var(--warning); }
+        .lab-value.critical { color: var(--danger); }
+        .lab-range { font-size: 0.7rem; color: var(--muted); }
+        .outcome { text-align: center; padding: 40px 20px; }
+        .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
+        .outcome-title { font-size: 2rem; font-weight: 700; color: var(--success); margin-bottom: 8px; }
+        .outcome-desc { color: var(--muted); max-width: 600px; margin: 0 auto 24px; }
+        .score-summary { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 24px; margin: 24px auto; max-width: 500px; }
+        .score-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .score-row:last-child { border-bottom: none; }
+        .patient-panel { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 16px; margin-bottom: 20px; }
+        .patient-panel-title { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; }
+        .patient-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
+        .patient-info-label { font-size: 0.7rem; color: var(--muted); }
+        .patient-info-value { font-weight: 600; }
+        .ddx-box { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .ddx-box h4 { color: var(--accent); margin-bottom: 12px; }
+        .ddx-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .ddx-cols ul { font-size: 0.9rem; color: var(--muted); padding-left: 20px; }
+    </style>
 </head>
 <body>
-    <header class="header"><div class="header-row"><div style="font-weight:600">🔬 The Rising Eos</div><div style="display:flex;gap:12px;align-items:center"><div class="diff-toggle"><button class="diff-btn active" onclick="setDiff('easy')">Easy</button><button class="diff-btn" onclick="setDiff('int')">Intermediate</button><button class="diff-btn" onclick="setDiff('adv')">Advanced</button></div><div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Points</div></div></div></div></header>
-    <main class="main"><div id="app"></div></main>
-<script>
-const S={stage:'setup',score:0,max:0,diff:'easy',q:0,total:8};
-const C={easy:{age:'28F',wt:'62kg',hx:'Allergic rhinitis, eczema, AEC 800',exam:'Nasal congestion, mild eczema',vitals:{HR:'72',BP:'118/72'},labs:{AEC:'800',IgE:'420',Eos:'6%'}},int:{age:'45M',wt:'78kg',hx:'New cough, AEC 2500, recent travel to South America',exam:'Wheezing, hepatomegaly',vitals:{HR:'82',BP:'128/78'},labs:{AEC:'2500',IgE:'1200',LFTs:'Elevated'}},adv:{age:'52F',wt:'68kg',hx:'AEC 8500, new cardiac symptoms, rash',exam:'Heart failure signs, purpuric rash',vitals:{HR:'108',BP:'98/62'},labs:{AEC:'8500',Trop:'0.8',BNP:'1840'}}};
-const Q=[
-{t:'Eosinophilia Definition',q:'Absolute eosinophil count (AEC) defining eosinophilia?',h:'Mild, moderate, severe thresholds',o:[{id:'a',txt:'>500 cells/uL (mild 500-1500, moderate 1500-5000, severe >5000)',c:1,p:100},{id:'b',txt:'>100 cells/uL',c:0,p:20},{id:'c',txt:'>10,000 cells/uL',c:0,p:10}],fb:{1:'<b>Correct!</b> AEC >500 = eosinophilia. Mild 500-1500, Moderate 1500-5000, Severe >5000. Hypereosinophilia >1500 x2.',0:'<b>AEC thresholds:</b> >500 mild, >1500 moderate, >5000 severe.'}},
-{t:'NAACP Mnemonic',q:'Common causes of eosinophilia (NAACP)?',h:'Differential diagnosis mnemonic',o:[{id:'a',txt:'Neoplasm, Allergy/Atopy, Adrenal insufficiency, Collagen vascular, Parasites',c:1,p:100},{id:'b',txt:'Neutropenia causes',c:0,p:0},{id:'c',txt:'Anemia causes',c:0,p:0}],fb:{1:'<b>Correct!</b> NAACP: Neoplasm, Allergy/Atopy, Adrenal insufficiency, Collagen vascular disease, Parasites. Also drugs (DRESS).',0:'<b>NAACP:</b> Neoplasm, Allergy, Adrenal, Collagen vascular, Parasites.'}},
-{t:'Parasitic Workup',q:'AEC 2500, travel to endemic area. First parasitic test?',h:'Tissue-invasive helminths cause eosinophilia',o:[{id:'a',txt:'Strongyloides serology + stool O&P x3',c:1,p:100},{id:'b',txt:'Blood smear only',c:0,p:30},{id:'c',txt:'No testing needed',c:0,p:0}],fb:{1:'<b>Correct!</b> Strongyloides can cause hyperinfection if immunosuppressed. Serology more sensitive than stool. Also consider Toxocara, filaria.',0:'<b>Parasites:</b> Strongyloides serology essential before any immunosuppression.'}},
-{t:'Drug-Induced',q:'Eosinophilia with new medication, rash, fever. Concern?',h:'DRESS syndrome',o:[{id:'a',txt:'DRESS syndrome (stop drug, may need steroids)',c:1,p:100},{id:'b',txt:'Continue medication',c:0,p:0},{id:'c',txt:'Simple drug rash',c:0,p:30}],fb:{1:'<b>Correct!</b> DRESS: Drug Reaction with Eosinophilia and Systemic Symptoms. Stop drug immediately. Mortality 10%.',0:'<b>DRESS:</b> Eosinophilia + rash + organ involvement = DRESS until proven otherwise.'}},
-{t:'Hypereosinophilic Syndrome',q:'AEC >1500 x6 months with organ damage, no secondary cause. Diagnosis?',h:'HES criteria',o:[{id:'a',txt:'Hypereosinophilic Syndrome (HES)',c:1,p:100},{id:'b',txt:'Simple allergies',c:0,p:10},{id:'c',txt:'Normal variant',c:0,p:0}],fb:{1:'<b>Correct!</b> HES: AEC >1500 for >6mo (or >1mo with symptoms) + organ damage + exclusion of secondary causes. Check FIP1L1-PDGFRA.',0:'<b>HES:</b> Persistent hypereosinophilia + organ damage + no secondary cause.'}},
-{t:'Cardiac Involvement',q:'HES with elevated troponin and heart failure. Pathology?',h:'Loeffler endocarditis',o:[{id:'a',txt:'Eosinophilic myocarditis/Loeffler endocarditis',c:1,p:100},{id:'b',txt:'Viral myocarditis',c:0,p:30},{id:'c',txt:'Unrelated ACS',c:0,p:20}],fb:{1:'<b>Correct!</b> Cardiac involvement in 40-50% of HES. Eosinophilic myocarditis → endomyocardial fibrosis. Need urgent treatment.',0:'<b>Cardiac HES:</b> Eosinophilic infiltration → myocarditis → fibrosis. High mortality.'}},
-{t:'HES Treatment',q:'First-line treatment for HES (without FIP1L1-PDGFRA)?',h:'Anti-inflammatory',o:[{id:'a',txt:'Systemic corticosteroids (prednisone 1mg/kg)',c:1,p:100},{id:'b',txt:'Antihistamines',c:0,p:10},{id:'c',txt:'Observation',c:0,p:0}],fb:{1:'<b>Correct!</b> Steroids first-line for most HES. If FIP1L1-PDGFRA+: imatinib. Steroid-refractory: mepolizumab, hydroxyurea.',0:'<b>HES Rx:</b> Steroids first. FIP1L1-PDGFRA+ = imatinib.'}},
-{t:'EGPA Recognition',q:'Asthma + sinusitis + eosinophilia + vasculitis. Diagnosis?',h:'Eosinophilic granulomatosis with polyangiitis',o:[{id:'a',txt:'EGPA (Churg-Strauss)',c:1,p:100},{id:'b',txt:'Allergic asthma only',c:0,p:20},{id:'c',txt:'GPA (Wegener)',c:0,p:30}],fb:{1:'<b>Correct!</b> EGPA: Asthma + eosinophilia + vasculitis. ANCA+ in 40% (MPO). Treat with steroids +/- cyclophosphamide, mepolizumab.',0:'<b>EGPA:</b> Asthma + eosinophilia + vasculitis. Check ANCA.'}}
-];
-let sel=null;
-function setDiff(d){S.diff=d;document.querySelectorAll('.diff-btn').forEach((b,i)=>b.classList.toggle('active',['easy','int','adv'][i]===d));if(S.stage!=='setup'){S.stage='setup';S.score=0;S.max=0;S.q=0;document.getElementById('score').textContent='0';}render();}
-function addPts(p,m){S.score+=p;S.max+=m;document.getElementById('score').textContent=S.score;}
-function pick(id){sel=id;document.querySelectorAll('.radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id));document.getElementById('sub').disabled=false;}
-function submit(){const q=Q[S.q-1];const opt=q.o.find(o=>o.id===sel);addPts(opt.p||0,100);document.querySelectorAll('.radio-option').forEach(o=>{const op=q.o.find(x=>x.id===o.dataset.id);if(op&&op.c)o.classList.add('correct');else if(o.dataset.id===sel)o.classList.add('incorrect');});document.getElementById('fb').innerHTML='<div class="feedback '+(opt&&opt.c?'excellent':'incorrect')+'">'+q.fb[opt&&opt.c?1:0]+'</div>';document.getElementById('sub').textContent=S.q<S.total?'Next':'Results';document.getElementById('sub').onclick=next;}
-function next(){if(S.q<S.total){S.q++;sel=null;render();}else{S.stage='outcome';render();}}
-function start(){S.q=1;S.stage='question';render();}
-function go(s){S.stage=s;render();}
-function render(){const c=C[S.diff];if(S.stage==='setup'){document.getElementById('app').innerHTML='<div class="setup-screen"><h1>🔬 The Rising Eos</h1><p style="color:var(--muted);margin-bottom:32px">Eosinophilia: NAACP differential, parasites, HES, EGPA, cardiac involvement</p><button class="start-btn" onclick="go(\'pres\')">Begin Case</button></div>';}else if(S.stage==='pres'){document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Presentation</div><div class="card-title">🩸 Hematologic Evaluation</div></div><div class="card-body"><div class="narrative"><span class="hl">'+c.age+'</span> ('+c.wt+')<br><b>Hx:</b> '+c.hx+'<br><b>Exam:</b> '+c.exam+'</div><div class="vitals-grid">'+Object.entries(c.vitals).map(function(e){return'<div class="vital"><div class="vital-label">'+e[0]+'</div><div class="vital-value">'+e[1]+'</div></div>';}).join('')+'</div><div class="lab-grid">'+Object.entries(c.labs).map(function(e){return'<div class="lab-item"><span class="lab-name">'+e[0]+'</span><span class="lab-value">'+e[1]+'</span></div>';}).join('')+'</div><div class="btn-row"><button class="btn btn-primary" onclick="start()">Begin Assessment</button></div></div></div>';}else if(S.stage==='question'){var q=Q[S.q-1];document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Q'+S.q+'/'+S.total+'</div><div class="card-title">'+q.t+'</div></div><div class="card-body"><div class="progress-bar"><div class="progress-fill" style="width:'+(S.q/S.total*100)+'%"></div></div><div class="question-header"><div class="question-number">'+S.q+'</div><div style="font-weight:600">'+q.q+'</div></div><div class="hint">'+q.h+'</div><div class="radio-options">'+q.o.map(function(o){return'<div class="radio-option" data-id="'+o.id+'" onclick="pick(\''+o.id+'\')"><div class="radio-circle"></div><div><b>'+o.txt+'</b></div></div>';}).join('')+'</div><div id="fb"></div><div class="btn-row"><button class="btn btn-primary" id="sub" onclick="submit()" disabled>Submit</button></div></div></div>';}else{var pct=S.max>0?Math.round(S.score/S.max*100):0;document.getElementById('app').innerHTML='<div class="card"><div class="card-body"><div style="text-align:center;padding:40px"><div style="font-size:4rem">'+(pct>=70?'🎉':'📚')+'</div><div style="font-size:2rem;font-weight:700;color:'+(pct>=70?'var(--success)':'var(--warning)')+'">'+(pct>=70?'Complete!':'Review')+'</div></div><div class="score-summary"><div class="score-row"><span>Score</span><span>'+S.score+'/'+S.max+' ('+pct+'%)</span></div></div><div class="pearls-box"><div class="pearls-title">Eosinophilia Pearls</div><div class="pearl-item"><b>AEC:</b> >500 mild, >1500 moderate, >5000 severe</div><div class="pearl-item"><b>NAACP:</b> Neoplasm, Allergy, Adrenal, Collagen, Parasites</div><div class="pearl-item"><b>Strongyloides:</b> Always check before immunosuppression</div><div class="pearl-item"><b>HES:</b> >1500 + organ damage. Steroids first-line</div><div class="pearl-item"><b>EGPA:</b> Asthma + eos + vasculitis</div></div><div class="cross-link"><a href="../mechanism/allergy-immunology.html">MechanismDx: A/I</a></div><div class="btn-row" style="justify-content:center;margin-top:30px"><button class="btn btn-primary" onclick="location.reload()">Retry</button><button class="btn btn-link" onclick="location.href=\'adventure-hub.html\'">Back</button></div></div></div>';}}
-document.addEventListener('DOMContentLoaded',render);
-</script>
+    <header class="header"><div class="header-row"><div class="header-title">🔬 The Elevated Count</div><div class="stat"><div class="stat-value" id="scoreDisplay">0</div><div class="stat-label">Points</div></div></div></header>
+    <main class="main"><div id="stageContainer"></div></main>
+    <script>
+    const state = { stage:'setup', score:0 };
+    
+    const secondaryCauses = [
+        { id: 'parasites', text: 'Parasitic infections', correct: true },
+        { id: 'allergy', text: 'Allergic diseases', correct: true },
+        { id: 'drugs', text: 'Drug reactions', correct: true },
+        { id: 'adrenal', text: 'Adrenal insufficiency', correct: true },
+        { id: 'malignancy', text: 'Malignancy (lymphoma)', correct: true },
+        { id: 'autoimmune', text: 'Autoimmune diseases', correct: true },
+        { id: 'viral', text: 'Viral infections (common colds)', correct: false },
+        { id: 'iron_def', text: 'Iron deficiency anemia', correct: false }
+    ];
+
+    const egpaCriteria = [
+        { id: 'asthma', text: 'Asthma', isCriteria: true },
+        { id: 'eos_10', text: 'Eosinophilia >10%', isCriteria: true },
+        { id: 'sinus', text: 'Paranasal sinus abnormality', isCriteria: true },
+        { id: 'mono', text: 'Mononeuritis/polyneuropathy', isCriteria: true },
+        { id: 'pulm', text: 'Pulmonary infiltrates (migratory)', isCriteria: true },
+        { id: 'biopsy', text: 'Extravascular eosinophils on biopsy', isCriteria: true },
+        { id: 'hives', text: 'Urticaria', isCriteria: false },
+        { id: 'renal', text: 'Renal failure', isCriteria: false }
+    ];
+
+    function addScore(pts) { state.score += pts; document.getElementById('scoreDisplay').textContent = state.score; }
+
+    const stages = {
+        setup: { render: () => `
+            <div class="setup-screen">
+                <h1>🔬 The Elevated Count</h1>
+                <p class="subtitle">Eosinophilia workup and differential diagnosis</p>
+                <button class="start-btn" onclick="goTo('referral')">Begin Case →</button>
+            </div>`
+        },
+        referral: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Hematology Clinic</div><div class="card-title">📋 Eosinophilia Referral</div></div>
+                <div class="card-body">
+                    <div class="narrative">A <span class="hl">48-year-old male</span> is referred for <span class="hl">persistent eosinophilia</span> discovered on routine labs. He has a history of <span class="hl">adult-onset asthma</span> (diagnosed 3 years ago) and <span class="hl">chronic rhinosinusitis with nasal polyps</span>.<br><br>Over the past 6 months, he's developed <span class="hl">numbness and tingling</span> in his feet (worse at night), <span class="hl">migratory joint pains</span>, and a <span class="hl">non-pruritic rash</span> on his legs. He's also noticed <span class="hl">increasing shortness of breath</span> despite being on inhaled steroids.</div>
+                    <div class="patient-panel">
+                        <div class="patient-panel-title">Patient Information</div>
+                        <div class="patient-info-grid">
+                            <div><div class="patient-info-label">Age/Sex</div><div class="patient-info-value">48 y/o Male</div></div>
+                            <div><div class="patient-info-label">PMH</div><div class="patient-info-value">Asthma, CRSwNP</div></div>
+                            <div><div class="patient-info-label">New Symptoms</div><div class="patient-info-value">Neuropathy, rash</div></div>
+                            <div><div class="patient-info-label">Duration</div><div class="patient-info-value">6 months</div></div>
+                        </div>
+                    </div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('labs')">Review Labs →</button></div>
+                </div>
+            </div>`
+        },
+        labs: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Laboratory</div><div class="card-title">🧪 Lab Results</div></div>
+                <div class="card-body">
+                    <div class="lab-panel">
+                        <div class="lab-panel-title">Complete Blood Count</div>
+                        <div class="lab-grid">
+                            <div class="lab-item"><div class="lab-name">WBC</div><div class="lab-value high">14.2 K/μL</div><div class="lab-range">4.5-11.0</div></div>
+                            <div class="lab-item"><div class="lab-name">Eosinophils</div><div class="lab-value critical">3,200/μL (22%)</div><div class="lab-range">&lt;500</div></div>
+                            <div class="lab-item"><div class="lab-name">Hemoglobin</div><div class="lab-value">13.8 g/dL</div><div class="lab-range">14-18</div></div>
+                            <div class="lab-item"><div class="lab-name">Platelets</div><div class="lab-value">285 K/μL</div><div class="lab-range">150-400</div></div>
+                        </div>
+                    </div>
+                    <div class="lab-panel">
+                        <div class="lab-panel-title">Additional Studies</div>
+                        <div class="lab-grid">
+                            <div class="lab-item"><div class="lab-name">CRP</div><div class="lab-value high">28 mg/L</div><div class="lab-range">&lt;10</div></div>
+                            <div class="lab-item"><div class="lab-name">ESR</div><div class="lab-value high">65 mm/hr</div><div class="lab-range">&lt;20</div></div>
+                            <div class="lab-item"><div class="lab-name">IgE</div><div class="lab-value high">580 IU/mL</div><div class="lab-range">&lt;100</div></div>
+                            <div class="lab-item"><div class="lab-name">ANCA</div><div class="lab-value critical">p-ANCA positive</div><div class="lab-range">Negative</div></div>
+                        </div>
+                    </div>
+                    <div class="alert warning"><span class="alert-icon">⚠️</span><div class="alert-content"><div class="alert-title">Significant Eosinophilia</div><div class="alert-desc">AEC 3,200/μL is moderate-severe (&gt;1,500 = hypereosinophilia)</div></div></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('classify')">Classify Eosinophilia →</button></div>
+                </div>
+            </div>`
+        },
+        classify: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Classification</div><div class="card-title">📊 Severity Assessment</div></div>
+                <div class="card-body">
+                    <div class="ddx-box">
+                        <h4>Eosinophilia Classification</h4>
+                        <p style="color:var(--muted);font-size:0.9rem">• <strong>Mild:</strong> 500-1,500/μL<br>• <strong>Moderate:</strong> 1,500-5,000/μL<br>• <strong>Severe:</strong> >5,000/μL<br>• <strong>Hypereosinophilia:</strong> >1,500/μL on 2 occasions OR tissue eosinophilia</p>
+                    </div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">1</div><div class="question-text">What is this patient's eosinophilia classification?</div></div>
+                        <div class="radio-options" id="classOpts">
+                            <div class="radio-option" data-id="mild" onclick="selectClass('mild')"><div class="radio-circle"></div><span>Mild eosinophilia</span></div>
+                            <div class="radio-option" data-id="moderate" onclick="selectClass('moderate')"><div class="radio-circle"></div><span>Moderate eosinophilia / Hypereosinophilia</span></div>
+                            <div class="radio-option" data-id="severe" onclick="selectClass('severe')"><div class="radio-circle"></div><span>Severe eosinophilia</span></div>
+                        </div>
+                    </div>
+                    <div id="classFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="classSubmit" onclick="submitClass()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        ddx: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Differential</div><div class="card-title">🔍 Secondary Causes</div></div>
+                <div class="card-body">
+                    <div class="ddx-box">
+                        <h4>NAACP Mnemonic for Secondary Eosinophilia</h4>
+                        <div class="ddx-cols">
+                            <div><ul><li><strong>N</strong>eoplasm</li><li><strong>A</strong>llergy/Atopy</li><li><strong>A</strong>drenal insufficiency</li></ul></div>
+                            <div><ul><li><strong>C</strong>onnective tissue disease</li><li><strong>P</strong>arasites</li></ul></div>
+                        </div>
+                    </div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">2</div><div class="question-text">Which are causes of SECONDARY eosinophilia?</div></div>
+                        <div class="checkbox-grid" id="ddxOpts">${secondaryCauses.map(c=>`<div class="checkbox-item" data-id="${c.id}" data-correct="${c.correct}" onclick="toggleDdx('${c.id}')"><div class="checkbox-box"></div><span>${c.text}</span></div>`).join('')}</div>
+                    </div>
+                    <div id="ddxFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitDdx()">Submit →</button></div>
+                </div>
+            </div>`
+        },
+        egpa: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Diagnosis</div><div class="card-title">🎯 EGPA Criteria</div></div>
+                <div class="card-body">
+                    <div class="alert danger"><span class="alert-icon">🚨</span><div class="alert-content"><div class="alert-title">Suspected EGPA (Churg-Strauss)</div><div class="alert-desc">Asthma + eosinophilia + multisystem involvement + p-ANCA positive</div></div></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">3</div><div class="question-text">Which are ACR criteria for EGPA? (need 4 of 6)</div></div>
+                        <div class="checkbox-grid" id="egpaOpts">${egpaCriteria.map(c=>`<div class="checkbox-item" data-id="${c.id}" data-criteria="${c.isCriteria}" onclick="toggleEgpa('${c.id}')"><div class="checkbox-box"></div><span>${c.text}</span></div>`).join('')}</div>
+                    </div>
+                    <div id="egpaFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitEgpa()">Submit →</button></div>
+                </div>
+            </div>`
+        },
+        treatment: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Management</div><div class="card-title">💊 Treatment</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">4</div><div class="question-text">First-line treatment for EGPA?</div></div>
+                        <div class="radio-options" id="rxOpts">
+                            <div class="radio-option" data-id="steroids" onclick="selectRx('steroids')"><div class="radio-circle"></div><div><strong>High-dose corticosteroids</strong><br><small style="color:var(--muted)">Prednisone 1mg/kg or pulse methylpred</small></div></div>
+                            <div class="radio-option" data-id="mepo" onclick="selectRx('mepo')"><div class="radio-circle"></div><div><strong>Mepolizumab (anti-IL5)</strong><br><small style="color:var(--muted)">FDA-approved for EGPA</small></div></div>
+                            <div class="radio-option" data-id="cyclophosphamide" onclick="selectRx('cyclophosphamide')"><div class="radio-circle"></div><div><strong>Cyclophosphamide</strong><br><small style="color:var(--muted)">Immunosuppressant</small></div></div>
+                        </div>
+                    </div>
+                    <div id="rxFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="rxSubmit" onclick="submitRx()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        outcome: { render: () => `
+            <div class="card"><div class="card-body">
+                <div class="outcome">
+                    <div class="outcome-icon">🎉</div>
+                    <div class="outcome-title">EGPA Diagnosed & Treated!</div>
+                    <div class="outcome-desc">The patient was started on high-dose prednisone with dramatic improvement. Mepolizumab was added as steroid-sparing agent. At 6 months, eosinophils normalized, neuropathy improved, and steroids are being tapered.</div>
+                </div>
+                <div class="score-summary">
+                    <h3 style="margin-bottom:16px">Performance</h3>
+                    <div class="score-row"><span>Classification</span><span>${state.classScore||0}/100</span></div>
+                    <div class="score-row"><span>Secondary Causes</span><span>${state.ddxScore||0}/100</span></div>
+                    <div class="score-row"><span>EGPA Criteria</span><span>${state.egpaScore||0}/100</span></div>
+                    <div class="score-row"><span>Treatment</span><span>${state.rxScore||0}/100</span></div>
+                    <div class="score-row" style="border-top:2px solid var(--border);padding-top:12px"><strong>Total</strong><strong>${state.score}</strong></div>
+                </div>
+                <div class="feedback excellent"><div class="feedback-header"><span class="feedback-icon">💡</span><span class="feedback-title">Eosinophilia Pearls</span></div><div class="feedback-text">• <strong>NAACP:</strong> Neoplasm, Allergy, Adrenal insufficiency, Connective tissue, Parasites<br>• <strong>Hypereosinophilia:</strong> AEC >1,500 on 2 occasions or tissue involvement<br>• <strong>EGPA triad:</strong> Asthma + eosinophilia + vasculitis<br>• <strong>ANCA:</strong> ~40% p-ANCA positive (MPO), correlates with vasculitic phenotype<br>• <strong>Treatment:</strong> Steroids first-line; mepolizumab FDA-approved add-on<br>• <strong>Monitor:</strong> Cardiac involvement (leading cause of mortality)</div></div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Play Again</button><button class="btn btn-secondary" onclick="location.href='adventure-hub.html'">← Adventures</button></div>
+            </div></div>`
+        }
+    };
+
+    let selectedClass = null;
+    function selectClass(id) { selectedClass = id; document.querySelectorAll('#classOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('classSubmit').disabled = false; }
+    function submitClass() {
+        document.querySelectorAll('#classOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'moderate') o.classList.add('correct');
+            else if (o.dataset.id === selectedClass) o.classList.add('incorrect');
+        });
+        state.classScore = selectedClass === 'moderate' ? 100 : 40;
+        addScore(selectedClass === 'moderate' ? 40 : 15);
+        document.getElementById('classFeedback').innerHTML = `<div class="feedback ${selectedClass==='moderate'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedClass==='moderate'?'✅':'📚'}</span><span class="feedback-title">Classification</span></div><div class="feedback-text"><strong>AEC 3,200/μL = Moderate (1,500-5,000)</strong><br>Also meets criteria for hypereosinophilia (>1,500/μL). This warrants evaluation for end-organ damage and underlying cause.</div></div>`;
+        document.getElementById('classSubmit').textContent = 'Continue →';
+        document.getElementById('classSubmit').onclick = () => goTo('ddx');
+    }
+
+    let selectedDdx = new Set();
+    function toggleDdx(id) {
+        const el = document.querySelector(`#ddxOpts .checkbox-item[data-id="${id}"]`);
+        if(selectedDdx.has(id)) { selectedDdx.delete(id); el.classList.remove('selected'); }
+        else { selectedDdx.add(id); el.classList.add('selected'); }
+    }
+    function submitDdx() {
+        let correct = 0;
+        secondaryCauses.forEach(c => {
+            const el = document.querySelector(`#ddxOpts .checkbox-item[data-id="${c.id}"]`);
+            const sel = selectedDdx.has(c.id);
+            if (c.correct && sel) { el.classList.add('correct'); correct++; }
+            else if (!c.correct && sel) { el.classList.add('incorrect'); }
+        });
+        state.ddxScore = Math.round(correct / 6 * 100);
+        addScore(Math.round(state.ddxScore / 2.5));
+        document.getElementById('ddxFeedback').innerHTML = `<div class="feedback ${state.ddxScore>=75?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${state.ddxScore>=75?'✅':'📚'}</span><span class="feedback-title">Secondary Causes</span></div><div class="feedback-text"><strong>NAACP:</strong> Neoplasm, Allergy, Adrenal insufficiency, Connective tissue, Parasites. Also: drugs (DRESS), infections. NOT: viral colds, iron deficiency.</div></div>`;
+        document.querySelector('#ddxFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('egpa')">Consider EGPA →</button>`;
+    }
+
+    let selectedEgpa = new Set();
+    function toggleEgpa(id) {
+        const el = document.querySelector(`#egpaOpts .checkbox-item[data-id="${id}"]`);
+        if(selectedEgpa.has(id)) { selectedEgpa.delete(id); el.classList.remove('selected'); }
+        else { selectedEgpa.add(id); el.classList.add('selected'); }
+    }
+    function submitEgpa() {
+        let correct = 0;
+        egpaCriteria.forEach(c => {
+            const el = document.querySelector(`#egpaOpts .checkbox-item[data-id="${c.id}"]`);
+            const sel = selectedEgpa.has(c.id);
+            if (c.isCriteria && sel) { el.classList.add('correct'); correct++; }
+            else if (!c.isCriteria && sel) { el.classList.add('incorrect'); }
+        });
+        state.egpaScore = Math.round(correct / 6 * 100);
+        addScore(Math.round(state.egpaScore / 2.5));
+        document.getElementById('egpaFeedback').innerHTML = `<div class="feedback ${state.egpaScore>=75?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${state.egpaScore>=75?'✅':'📚'}</span><span class="feedback-title">EGPA Criteria</span></div><div class="feedback-text"><strong>ACR criteria (4 of 6):</strong> Asthma, eosinophilia >10%, paranasal sinus abnormality, mononeuritis/polyneuropathy, pulmonary infiltrates, extravascular eosinophils on biopsy.<br><strong>This patient has:</strong> Asthma ✓, eosinophilia 22% ✓, sinusitis ✓, neuropathy ✓ = 4 criteria!</div></div>`;
+        document.querySelector('#egpaFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('treatment')">Plan Treatment →</button>`;
+    }
+
+    let selectedRx = null;
+    function selectRx(id) { selectedRx = id; document.querySelectorAll('#rxOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('rxSubmit').disabled = false; }
+    function submitRx() {
+        document.querySelectorAll('#rxOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'steroids') o.classList.add('correct');
+            else if (o.dataset.id === selectedRx) o.classList.add('incorrect');
+        });
+        state.rxScore = selectedRx === 'steroids' ? 100 : (selectedRx === 'mepo' ? 70 : 40);
+        addScore(selectedRx === 'steroids' ? 40 : (selectedRx === 'mepo' ? 25 : 15));
+        document.getElementById('rxFeedback').innerHTML = `<div class="feedback ${selectedRx==='steroids'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedRx==='steroids'?'✅':'📚'}</span><span class="feedback-title">${selectedRx==='steroids'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>High-dose steroids first-line</strong> for EGPA (prednisone 1mg/kg). Most patients respond dramatically.<br><strong>Mepolizumab:</strong> FDA-approved for relapsing/refractory EGPA, steroid-sparing<br><strong>Cyclophosphamide:</strong> Reserved for severe organ-threatening disease</div></div>`;
+        document.getElementById('rxSubmit').textContent = 'Complete →';
+        document.getElementById('rxSubmit').onclick = () => goTo('outcome');
+    }
+
+    function goTo(id) { state.stage = id; document.getElementById('stageContainer').innerHTML = stages[id].render(); window.scrollTo(0,0); }
+    document.addEventListener('DOMContentLoaded', () => goTo('setup'));
+    </script>
 </body>
 </html>

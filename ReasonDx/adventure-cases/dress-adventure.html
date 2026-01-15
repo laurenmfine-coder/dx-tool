@@ -4,34 +4,332 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Delayed Reaction | ReasonDx Adventure</title>
-    <style>:root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#EF4444;--success:#10B981;--warning:#F59E0B;--danger:#DC2626}*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}.header{background:linear-gradient(135deg,#B91C1C,#EF4444);padding:12px 20px;position:sticky;top:0;z-index:100}.header-row{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}.diff-toggle{display:flex;background:rgba(0,0,0,.3);border-radius:8px}.diff-btn{padding:6px 12px;font-size:.75rem;cursor:pointer;border:none;background:0 0;color:rgba(255,255,255,.7);font-weight:600}.diff-btn.active{background:rgba(255,255,255,.2);color:#fff}.stat{text-align:center;background:rgba(0,0,0,.2);padding:6px 14px;border-radius:8px}.stat-value{font-size:1.1rem;font-weight:700;font-family:monospace}.stat-label{font-size:.6rem;opacity:.8}.main{max-width:900px;margin:0 auto;padding:24px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px}.card-header{padding:20px 24px;border-bottom:1px solid var(--border)}.card-phase{font-size:.75rem;color:var(--accent);text-transform:uppercase}.card-title{font-size:1.5rem;font-weight:700}.card-body{padding:24px}.narrative{background:rgba(239,68,68,.1);border-left:4px solid var(--accent);padding:20px;border-radius:0 12px 12px 0;margin-bottom:20px}.narrative .hl{background:rgba(239,68,68,.3);padding:2px 6px;border-radius:4px}.setup-screen{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center}.start-btn{background:var(--accent);color:#fff;border:none;padding:16px 48px;border-radius:12px;font-size:1.1rem;font-weight:700;cursor:pointer}.hint{background:rgba(59,130,246,.15);padding:12px 16px;border-radius:8px;margin-bottom:16px;color:#93C5FD}.radio-options{display:flex;flex-direction:column;gap:10px}.radio-option{display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(0,0,0,.2);border:2px solid var(--border);border-radius:10px;cursor:pointer}.radio-option.selected{border-color:var(--accent);background:rgba(239,68,68,.15)}.radio-option.correct{border-color:var(--success);background:rgba(16,185,129,.15)}.radio-option.incorrect{border-color:var(--danger);background:rgba(220,38,38,.15)}.radio-circle{width:22px;height:22px;border:2px solid var(--border);border-radius:50%}.radio-option.selected .radio-circle{border-color:var(--accent);background:radial-gradient(circle,var(--accent) 40%,transparent 40%)}.feedback{padding:20px;border-radius:12px;margin:20px 0}.feedback.excellent{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3)}.feedback.incorrect{background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.3)}.btn{padding:14px 28px;border-radius:10px;font-weight:600;cursor:pointer;border:none}.btn-primary{background:var(--accent);color:#fff}.btn:disabled{opacity:.5}.btn-row{display:flex;gap:12px;margin-top:24px}.btn-link{background:0 0;border:2px solid var(--border);color:var(--text)}.vitals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:12px;margin:20px 0}.vital{background:rgba(0,0,0,.2);padding:12px;border-radius:10px;text-align:center}.vital-label{font-size:.7rem;color:var(--muted)}.vital-value{font-size:1.3rem;font-weight:700;font-family:monospace}.lab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:16px 0}.lab-item{display:flex;justify-content:space-between;padding:8px 12px;background:rgba(0,0,0,.2);border-radius:6px}.lab-name{color:var(--muted)}.lab-value{font-family:monospace;font-weight:600}.score-summary{background:rgba(0,0,0,.2);border-radius:12px;padding:24px;margin:24px auto;max-width:600px}.score-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}.pearls-box{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:20px;margin-top:20px}.pearls-title{font-weight:700;color:var(--success);margin-bottom:12px}.pearl-item{padding:8px 0;border-bottom:1px solid rgba(16,185,129,.2);font-size:.95rem}.cross-link{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:8px;padding:12px 16px;margin-top:12px}.cross-link a{color:#FCA5A5;text-decoration:none}.progress-bar{background:rgba(255,255,255,.1);border-radius:10px;height:8px;margin:20px 0}.progress-fill{background:var(--accent);height:100%;border-radius:10px}.question-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}.question-number{background:var(--accent);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}</style>
+    <style>
+        :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #EC4899; --success: #10B981; --warning: #F59E0B; --danger: #DC2626; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #DB2777 0%, #EC4899 100%); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; }
+        .stat { background: rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 8px; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        .main { max-width: 1000px; margin: 0 auto; padding: 24px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(236,72,153,0.1), rgba(219,39,119,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; line-height: 1.8; }
+        .narrative .hl { background: rgba(236,72,153,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        .setup-screen { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; }
+        .setup-screen h1 { font-size: 2rem; margin-bottom: 8px; }
+        .setup-screen .subtitle { color: var(--muted); margin-bottom: 32px; }
+        .start-btn { background: var(--accent); color: white; border: none; padding: 16px 48px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+        .question-section { margin-bottom: 32px; }
+        .question-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .question-number { background: var(--accent); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .question-text { font-size: 1.1rem; font-weight: 600; }
+        .radio-options { display: flex; flex-direction: column; gap: 10px; }
+        .radio-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .radio-option:hover { border-color: var(--accent); }
+        .radio-option.selected { border-color: var(--accent); background: rgba(236,72,153,0.15); }
+        .radio-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .radio-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .radio-circle { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; }
+        .radio-option.selected .radio-circle { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 40%, transparent 40%); }
+        .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+        .checkbox-item { display: flex; align-items: center; gap: 10px; padding: 12px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .checkbox-item:hover { border-color: var(--accent); }
+        .checkbox-item.selected { border-color: var(--accent); background: rgba(236,72,153,0.15); }
+        .checkbox-item.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .checkbox-item.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .checkbox-box { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .checkbox-item.selected .checkbox-box { background: var(--accent); border-color: var(--accent); }
+        .checkbox-item.selected .checkbox-box::after { content: '✓'; color: white; font-weight: bold; }
+        .feedback { padding: 20px; border-radius: 12px; margin: 20px 0; }
+        .feedback.excellent { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .feedback.acceptable { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .feedback-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .feedback-icon { font-size: 1.5rem; }
+        .feedback-title { font-weight: 700; }
+        .feedback-text { color: var(--muted); line-height: 1.7; }
+        .feedback-text strong { color: var(--text); }
+        .alert { padding: 16px 20px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
+        .alert.info { background: rgba(236,72,153,0.15); border: 1px solid rgba(236,72,153,0.3); }
+        .alert-icon { font-size: 1.5rem; }
+        .alert-content { flex: 1; }
+        .alert-title { font-weight: 600; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; color: var(--muted); }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-row { display: flex; gap: 12px; margin-top: 24px; }
+        .lab-panel { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .lab-panel-title { font-weight: 600; margin-bottom: 16px; color: var(--accent); }
+        .lab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+        .lab-item { background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; }
+        .lab-name { font-size: 0.8rem; color: var(--muted); }
+        .lab-value { font-size: 1.1rem; font-weight: 700; }
+        .lab-value.critical { color: var(--danger); }
+        .lab-value.high { color: var(--warning); }
+        .lab-range { font-size: 0.7rem; color: var(--muted); }
+        .outcome { text-align: center; padding: 40px 20px; }
+        .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
+        .outcome-title { font-size: 2rem; font-weight: 700; color: var(--success); margin-bottom: 8px; }
+        .outcome-desc { color: var(--muted); max-width: 600px; margin: 0 auto 24px; }
+        .score-summary { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 24px; margin: 24px auto; max-width: 500px; }
+        .score-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .score-row:last-child { border-bottom: none; }
+        .patient-panel { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 16px; margin-bottom: 20px; }
+        .patient-panel-title { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; }
+        .patient-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
+        .patient-info-label { font-size: 0.7rem; color: var(--muted); }
+        .patient-info-value { font-weight: 600; }
+    </style>
 </head>
 <body>
-    <header class="header"><div class="header-row"><div style="font-weight:600">💊 The Delayed Reaction</div><div style="display:flex;gap:12px;align-items:center"><div class="diff-toggle"><button class="diff-btn active" onclick="setDiff('easy')">Easy</button><button class="diff-btn" onclick="setDiff('int')">Intermediate</button><button class="diff-btn" onclick="setDiff('adv')">Advanced</button></div><div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Points</div></div></div></div></header>
-    <main class="main"><div id="app"></div></main>
-<script>
-const S={stage:'setup',score:0,max:0,diff:'easy',q:0,total:8};
-const C={easy:{age:'28M',wt:'72kg',hx:'Started lamotrigine 3 weeks ago, now fever and spreading rash',exam:'Morbilliform rash on trunk/extremities, facial edema, cervical lymphadenopathy',vitals:{HR:'98',BP:'118/72',Temp:'102.4°F',SpO2:'98%'},labs:{WBC:'12.8',Eos:'18%',ALT:'285',Hx:'New anticonvulsant'}},int:{age:'45F',wt:'68kg',hx:'Allopurinol started 5 weeks ago for gout, diffuse rash, jaundice',exam:'Confluent erythema, facial edema, hepatomegaly, icteric sclerae',vitals:{HR:'108',BP:'102/68',Temp:'103.2°F',SpO2:'96%'},labs:{WBC:'15.2',Eos:'22%',ALT:'850',Cr:'2.1',Hx:'HLA-B*58:01 not checked'}},adv:{age:'62M',wt:'80kg',hx:'Vancomycin x6 weeks for osteomyelitis, rash and renal failure',exam:'Exfoliative erythroderma, bullae formation, oliguria',vitals:{HR:'118',BP:'88/58',Temp:'104°F',SpO2:'92%'},labs:{WBC:'18.5',Eos:'28%',ALT:'1250',Cr:'4.8',Hx:'On multiple antibiotics'}}};
-const Q=[
-{t:'DRESS Timing',q:'How long after drug initiation does DRESS typically present?',h:'Distinguishes from other drug reactions',o:[{id:'a',txt:'2-8 weeks (longer latency than other drug reactions)',c:1,p:100},{id:'b',txt:'Within 24 hours',c:0,p:10},{id:'c',txt:'6-12 months',c:0,p:10}],fb:{1:'<b>Correct!</b> DRESS has characteristically long latency (2-8 weeks). SJS/TEN typically 1-3 weeks. Immediate reactions within hours.',0:'<b>DRESS timing:</b> 2-8 weeks. This long latency is a key diagnostic feature.'}},
-{t:'DRESS Features',q:'Which findings are characteristic of DRESS syndrome?',h:'RegiSCAR criteria',o:[{id:'a',txt:'Fever + rash + lymphadenopathy + eosinophilia + organ involvement',c:1,p:100},{id:'b',txt:'Blisters and skin detachment',c:0,p:20},{id:'c',txt:'Urticaria and angioedema',c:0,p:10}],fb:{1:'<b>Correct!</b> DRESS = Drug Reaction with Eosinophilia and Systemic Symptoms. Key features: fever, morbilliform rash, facial edema, lymphadenopathy, eosinophilia, and organ involvement (liver most common).',0:'<b>DRESS:</b> Fever, rash, LAD, eosinophilia, internal organ involvement.'}},
-{t:'Common Culprits',q:'Which drugs most commonly cause DRESS?',h:'High-risk medications',o:[{id:'a',txt:'Anticonvulsants (carbamazepine, phenytoin, lamotrigine), allopurinol, sulfonamides',c:1,p:100},{id:'b',txt:'Penicillins only',c:0,p:20},{id:'c',txt:'NSAIDs',c:0,p:20}],fb:{1:'<b>Correct!</b> Classic DRESS drugs: aromatic anticonvulsants (carbamazepine, phenytoin, lamotrigine, phenobarbital), allopurinol, sulfonamides, dapsone, minocycline, vancomycin.',0:'<b>High-risk drugs:</b> Anticonvulsants, allopurinol, sulfonamides, vancomycin.'}},
-{t:'Genetic Risk',q:'HLA-B*58:01 screening is recommended before starting which drug in high-risk populations?',h:'Pharmacogenomic testing',o:[{id:'a',txt:'Allopurinol (especially in Asian populations)',c:1,p:100},{id:'b',txt:'Lamotrigine',c:0,p:30},{id:'c',txt:'All antibiotics',c:0,p:10}],fb:{1:'<b>Correct!</b> HLA-B*58:01 strongly associated with allopurinol-induced DRESS/SJS. Screen in Han Chinese, Thai, Korean populations before starting. HLA-B*15:02 for carbamazepine.',0:'<b>Pharmacogenomics:</b> HLA-B*58:01 for allopurinol, HLA-B*15:02 for carbamazepine.'}},
-{t:'Organ Involvement',q:'Most commonly affected internal organ in DRESS?',h:'Monitor this closely',o:[{id:'a',txt:'Liver (hepatitis in 50-80%)',c:1,p:100},{id:'b',txt:'Heart',c:0,p:30},{id:'c',txt:'Lungs',c:0,p:20}],fb:{1:'<b>Correct!</b> Liver involvement most common (50-80%). Also kidney (10-30%), heart (myocarditis), lungs (pneumonitis), thyroid. Multi-organ failure possible.',0:'<b>Organ involvement:</b> Liver most common. Monitor LFTs closely.'}},
-{t:'Viral Reactivation',q:'Which viral reactivation is characteristically associated with DRESS?',h:'May contribute to pathogenesis',o:[{id:'a',txt:'HHV-6 reactivation (also EBV, CMV)',c:1,p:100},{id:'b',txt:'HIV',c:0,p:0},{id:'c',txt:'Hepatitis B',c:0,p:20}],fb:{1:'<b>Correct!</b> HHV-6 reactivation occurs in many DRESS cases and may contribute to prolonged/relapsing course. EBV, CMV also seen. Check viral titers.',0:'<b>Viral reactivation:</b> HHV-6, EBV, CMV commonly reactivate in DRESS.'}},
-{t:'Treatment',q:'Primary treatment for DRESS syndrome?',h:'Beyond stopping the drug',o:[{id:'a',txt:'Stop culprit drug + systemic corticosteroids for severe cases',c:1,p:100},{id:'b',txt:'Antihistamines only',c:0,p:10},{id:'c',txt:'IVIG first-line',c:0,p:20}],fb:{1:'<b>Correct!</b> Stop drug immediately (most important). Systemic steroids (1-2mg/kg prednisone) for significant organ involvement. Slow taper over weeks to prevent relapse.',0:'<b>Treatment:</b> Stop drug + steroids for severe cases. Slow taper essential.'}},
-{t:'Prognosis & Monitoring',q:'Important long-term considerations after DRESS?',h:'Not just acute management',o:[{id:'a',txt:'Mortality 5-10%, monitor for autoimmune sequelae (thyroiditis, diabetes)',c:1,p:100},{id:'b',txt:'Full recovery within days',c:0,p:10},{id:'c',txt:'No long-term effects',c:0,p:10}],fb:{1:'<b>Correct!</b> Mortality 5-10%. Long-term autoimmune sequelae develop in 10-20%: thyroiditis (most common), type 1 diabetes, autoimmune hepatitis. Follow TSH, glucose for 1 year.',0:'<b>Prognosis:</b> 5-10% mortality. Monitor for autoimmune sequelae long-term.'}}
-];
-let sel=null;
-function setDiff(d){S.diff=d;document.querySelectorAll('.diff-btn').forEach((b,i)=>b.classList.toggle('active',['easy','int','adv'][i]===d));if(S.stage!=='setup'){S.stage='setup';S.score=0;S.max=0;S.q=0;document.getElementById('score').textContent='0';}render();}
-function addPts(p,m){S.score+=p;S.max+=m;document.getElementById('score').textContent=S.score;}
-function pick(id){sel=id;document.querySelectorAll('.radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id));document.getElementById('sub').disabled=false;}
-function submit(){const q=Q[S.q-1];const opt=q.o.find(o=>o.id===sel);addPts(opt.p||0,100);document.querySelectorAll('.radio-option').forEach(o=>{const op=q.o.find(x=>x.id===o.dataset.id);if(op&&op.c)o.classList.add('correct');else if(o.dataset.id===sel)o.classList.add('incorrect');});document.getElementById('fb').innerHTML='<div class="feedback '+(opt&&opt.c?'excellent':'incorrect')+'">'+q.fb[opt&&opt.c?1:0]+'</div>';document.getElementById('sub').textContent=S.q<S.total?'Next':'Results';document.getElementById('sub').onclick=next;}
-function next(){if(S.q<S.total){S.q++;sel=null;render();}else{S.stage='outcome';render();}}
-function start(){S.q=1;S.stage='question';render();}
-function go(s){S.stage=s;render();}
-function render(){const c=C[S.diff];if(S.stage==='setup'){document.getElementById('app').innerHTML='<div class="setup-screen"><h1>💊 The Delayed Reaction</h1><p style="color:var(--muted);margin-bottom:32px">DRESS Syndrome: Timing, features, culprits, treatment, and monitoring</p><button class="start-btn" onclick="go(\'pres\')">Begin Case</button></div>';}else if(S.stage==='pres'){document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Presentation</div><div class="card-title">💊 Severe Drug Reaction</div></div><div class="card-body"><div class="narrative"><span class="hl">'+c.age+'</span> ('+c.wt+')<br><b>Hx:</b> '+c.hx+'<br><b>Exam:</b> '+c.exam+'</div><div class="vitals-grid">'+Object.entries(c.vitals).map(function(e){return'<div class="vital"><div class="vital-label">'+e[0]+'</div><div class="vital-value">'+e[1]+'</div></div>';}).join('')+'</div><div class="lab-grid">'+Object.entries(c.labs).map(function(e){return'<div class="lab-item"><span class="lab-name">'+e[0]+'</span><span class="lab-value">'+e[1]+'</span></div>';}).join('')+'</div><div class="btn-row"><button class="btn btn-primary" onclick="start()">Begin Assessment</button></div></div></div>';}else if(S.stage==='question'){var q=Q[S.q-1];document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Q'+S.q+'/'+S.total+'</div><div class="card-title">'+q.t+'</div></div><div class="card-body"><div class="progress-bar"><div class="progress-fill" style="width:'+(S.q/S.total*100)+'%"></div></div><div class="question-header"><div class="question-number">'+S.q+'</div><div style="font-weight:600">'+q.q+'</div></div><div class="hint">'+q.h+'</div><div class="radio-options">'+q.o.map(function(o){return'<div class="radio-option" data-id="'+o.id+'" onclick="pick(\''+o.id+'\')"><div class="radio-circle"></div><div><b>'+o.txt+'</b></div></div>';}).join('')+'</div><div id="fb"></div><div class="btn-row"><button class="btn btn-primary" id="sub" onclick="submit()" disabled>Submit</button></div></div></div>';}else{var pct=S.max>0?Math.round(S.score/S.max*100):0;document.getElementById('app').innerHTML='<div class="card"><div class="card-body"><div style="text-align:center;padding:40px"><div style="font-size:4rem">'+(pct>=70?'🎉':'📚')+'</div><div style="font-size:2rem;font-weight:700;color:'+(pct>=70?'var(--success)':'var(--warning)')+'\">'+(pct>=70?'Complete!':'Review')+'</div></div><div class="score-summary"><div class="score-row"><span>Score</span><span>'+S.score+'/'+S.max+' ('+pct+'%)</span></div></div><div class="pearls-box"><div class="pearls-title">DRESS Clinical Pearls</div><div class="pearl-item"><b>Timing:</b> 2-8 weeks after drug start (longer than other reactions)</div><div class="pearl-item"><b>Features:</b> Fever, rash, facial edema, LAD, eosinophilia, organ involvement</div><div class="pearl-item"><b>Culprits:</b> Anticonvulsants, allopurinol, sulfonamides</div><div class="pearl-item"><b>Pharmacogenomics:</b> HLA-B*58:01 (allopurinol), HLA-B*15:02 (carbamazepine)</div><div class="pearl-item"><b>Organs:</b> Liver most common (50-80%)</div><div class="pearl-item"><b>Viral:</b> HHV-6 reactivation characteristic</div><div class="pearl-item"><b>Treatment:</b> Stop drug + steroids, slow taper</div><div class="pearl-item"><b>Follow-up:</b> Monitor for autoimmune sequelae (thyroiditis)</div></div><div class="cross-link"><a href="drug-allergy-adventure-enhanced.html">Related: Drug Allergy Evaluation</a></div><div class="btn-row" style="justify-content:center;margin-top:30px"><button class="btn btn-primary" onclick="location.reload()">Retry</button><button class="btn btn-link" onclick="location.href=\'adventure-hub.html\'">Back</button></div></div></div>';}}
-document.addEventListener('DOMContentLoaded',render);
-</script>
+    <header class="header"><div class="header-row"><div class="header-title">💊 The Delayed Reaction</div><div class="stat"><div class="stat-value" id="scoreDisplay">0</div><div class="stat-label">Points</div></div></div></header>
+    <main class="main"><div id="stageContainer"></div></main>
+    <script>
+    const state = { stage:'setup', score:0 };
+    
+    const dressFeatures = [
+        { id: 'fever', text: 'High fever (>38.5°C)', isFeat: true },
+        { id: 'rash', text: 'Diffuse morbilliform rash', isFeat: true },
+        { id: 'lymph', text: 'Lymphadenopathy', isFeat: true },
+        { id: 'eos', text: 'Eosinophilia', isFeat: true },
+        { id: 'organ', text: 'Internal organ involvement', isFeat: true },
+        { id: 'blisters', text: 'Widespread blistering/detachment', isFeat: false },
+        { id: 'mucosal', text: 'Severe mucosal erosions', isFeat: false }
+    ];
+
+    const dressOrgans = [
+        { id: 'liver', text: 'Liver (hepatitis)', isOrgan: true },
+        { id: 'kidney', text: 'Kidney (nephritis)', isOrgan: true },
+        { id: 'lung', text: 'Lung (pneumonitis)', isOrgan: true },
+        { id: 'heart', text: 'Heart (myocarditis)', isOrgan: true },
+        { id: 'thyroid', text: 'Thyroid (thyroiditis - delayed)', isOrgan: true },
+        { id: 'skin_only', text: 'Skin only (no internal)', isOrgan: false }
+    ];
+
+    function addScore(pts) { state.score += pts; document.getElementById('scoreDisplay').textContent = state.score; }
+
+    const stages = {
+        setup: { render: () => `
+            <div class="setup-screen">
+                <h1>💊 The Delayed Reaction</h1>
+                <p class="subtitle">DRESS syndrome recognition and management</p>
+                <button class="start-btn" onclick="goTo('referral')">Begin Case →</button>
+            </div>`
+        },
+        referral: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Hospital Medicine</div><div class="card-title">📋 Fever and Rash</div></div>
+                <div class="card-body">
+                    <div class="narrative">A <span class="hl">52-year-old male</span> with new-onset seizures was started on <span class="hl">phenytoin 4 weeks ago</span>. He now presents with <span class="hl">high fever (39.5°C)</span>, <span class="hl">diffuse rash</span>, and <span class="hl">facial swelling</span>.<br><br>The rash is <span class="hl">morbilliform (measles-like)</span> covering >50% BSA but <span class="hl">no blistering or skin detachment</span>. He has <span class="hl">tender lymphadenopathy</span> in cervical and axillary regions. He also reports <span class="hl">dark urine</span> and <span class="hl">RUQ discomfort</span>.</div>
+                    <div class="lab-panel">
+                        <div class="lab-panel-title">Laboratory Results</div>
+                        <div class="lab-grid">
+                            <div class="lab-item"><div class="lab-name">WBC</div><div class="lab-value high">18.5 K</div><div class="lab-range">4.5-11</div></div>
+                            <div class="lab-item"><div class="lab-name">Eosinophils</div><div class="lab-value critical">2,800/μL</div><div class="lab-range"><500</div></div>
+                            <div class="lab-item"><div class="lab-name">Atypical lymphs</div><div class="lab-value high">12%</div><div class="lab-range"><1%</div></div>
+                            <div class="lab-item"><div class="lab-name">AST</div><div class="lab-value critical">485 U/L</div><div class="lab-range">10-40</div></div>
+                            <div class="lab-item"><div class="lab-name">ALT</div><div class="lab-value critical">612 U/L</div><div class="lab-range">7-56</div></div>
+                            <div class="lab-item"><div class="lab-name">Creatinine</div><div class="lab-value">1.1 mg/dL</div><div class="lab-range">0.7-1.3</div></div>
+                        </div>
+                    </div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('diagnosis')">Make Diagnosis →</button></div>
+                </div>
+            </div>`
+        },
+        diagnosis: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Diagnosis</div><div class="card-title">🎯 Identify the Reaction</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">1</div><div class="question-text">What is the most likely diagnosis?</div></div>
+                        <div class="radio-options" id="dxOpts">
+                            <div class="radio-option" data-id="dress" onclick="selectDx('dress')"><div class="radio-circle"></div><div><strong>DRESS Syndrome</strong><br><small style="color:var(--muted)">Drug reaction with eosinophilia and systemic symptoms</small></div></div>
+                            <div class="radio-option" data-id="sjs" onclick="selectDx('sjs')"><div class="radio-circle"></div><div><strong>Stevens-Johnson Syndrome</strong><br><small style="color:var(--muted)">Mucosal involvement, epidermal detachment</small></div></div>
+                            <div class="radio-option" data-id="viral" onclick="selectDx('viral')"><div class="radio-circle"></div><div><strong>Viral exanthem with hepatitis</strong><br><small style="color:var(--muted)">EBV, CMV mononucleosis</small></div></div>
+                            <div class="radio-option" data-id="serum" onclick="selectDx('serum')"><div class="radio-circle"></div><div><strong>Serum sickness-like reaction</strong><br><small style="color:var(--muted)">Fever, rash, arthralgias</small></div></div>
+                        </div>
+                    </div>
+                    <div id="dxFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="dxSubmit" onclick="submitDx()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        features: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Recognition</div><div class="card-title">🔍 DRESS Features</div></div>
+                <div class="card-body">
+                    <div class="alert info"><span class="alert-icon">📋</span><div class="alert-content"><div class="alert-title">RegiSCAR Criteria for DRESS</div><div class="alert-desc">Hospitalization + drug suspected + acute rash + fever >38.5°C + enlarged lymph nodes + involvement of ≥1 internal organ + blood count abnormalities (eosinophilia, atypical lymphocytes)</div></div></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">2</div><div class="question-text">Which features characterize DRESS (vs SJS/TEN)?</div></div>
+                        <div class="checkbox-grid" id="featOpts">${dressFeatures.map(f=>`<div class="checkbox-item" data-id="${f.id}" data-feat="${f.isFeat}" onclick="toggleFeat('${f.id}')"><div class="checkbox-box"></div><span>${f.text}</span></div>`).join('')}</div>
+                    </div>
+                    <div id="featFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitFeat()">Submit →</button></div>
+                </div>
+            </div>`
+        },
+        timing: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Timing</div><div class="card-title">⏱️ Latency Period</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">3</div><div class="question-text">What is the typical latency for DRESS after drug initiation?</div></div>
+                        <div class="radio-options" id="timeOpts">
+                            <div class="radio-option" data-id="days" onclick="selectTime('days')"><div class="radio-circle"></div><span>1-3 days</span></div>
+                            <div class="radio-option" data-id="week" onclick="selectTime('week')"><div class="radio-circle"></div><span>1-2 weeks</span></div>
+                            <div class="radio-option" data-id="weeks" onclick="selectTime('weeks')"><div class="radio-circle"></div><span>2-8 weeks (typically 2-6)</span></div>
+                            <div class="radio-option" data-id="months" onclick="selectTime('months')"><div class="radio-circle"></div><span>3-6 months</span></div>
+                        </div>
+                    </div>
+                    <div id="timeFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="timeSubmit" onclick="submitTime()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        organs: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Complications</div><div class="card-title">🫀 Organ Involvement</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">4</div><div class="question-text">Which organs can be affected in DRESS?</div></div>
+                        <div class="checkbox-grid" id="organOpts">${dressOrgans.map(o=>`<div class="checkbox-item" data-id="${o.id}" data-organ="${o.isOrgan}" onclick="toggleOrgan('${o.id}')"><div class="checkbox-box"></div><span>${o.text}</span></div>`).join('')}</div>
+                    </div>
+                    <div id="organFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitOrgan()">Submit →</button></div>
+                </div>
+            </div>`
+        },
+        management: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Management</div><div class="card-title">💊 Treatment</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">5</div><div class="question-text">What is first-line treatment for DRESS with significant organ involvement?</div></div>
+                        <div class="radio-options" id="txOpts">
+                            <div class="radio-option" data-id="steroids" onclick="selectTx('steroids')"><div class="radio-circle"></div><div><strong>Systemic corticosteroids</strong><br><small style="color:var(--muted)">Prednisone 1-2 mg/kg with slow taper</small></div></div>
+                            <div class="radio-option" data-id="ivig" onclick="selectTx('ivig')"><div class="radio-circle"></div><div><strong>IVIG</strong><br><small style="color:var(--muted)">Immunomodulation</small></div></div>
+                            <div class="radio-option" data-id="cyclo" onclick="selectTx('cyclo')"><div class="radio-circle"></div><div><strong>Cyclosporine</strong><br><small style="color:var(--muted)">T-cell inhibition</small></div></div>
+                            <div class="radio-option" data-id="supportive" onclick="selectTx('supportive')"><div class="radio-circle"></div><div><strong>Supportive care only</strong><br><small style="color:var(--muted)">Drug withdrawal and monitoring</small></div></div>
+                        </div>
+                    </div>
+                    <div id="txFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="txSubmit" onclick="submitTx()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        outcome: { render: () => `
+            <div class="card"><div class="card-body">
+                <div class="outcome">
+                    <div class="outcome-icon">🎉</div>
+                    <div class="outcome-title">Patient Recovered!</div>
+                    <div class="outcome-desc">Phenytoin was stopped immediately. Patient was started on prednisone 1 mg/kg with a slow 8-12 week taper. Liver enzymes normalized over 4 weeks. He was counseled about lifelong avoidance of aromatic anticonvulsants and the need for thyroid monitoring for 6-12 months (delayed thyroiditis risk).</div>
+                </div>
+                <div class="score-summary">
+                    <h3 style="margin-bottom:16px">Performance</h3>
+                    <div class="score-row"><span>Diagnosis</span><span>${state.dxScore||0}/100</span></div>
+                    <div class="score-row"><span>DRESS Features</span><span>${state.featScore||0}/100</span></div>
+                    <div class="score-row"><span>Timing</span><span>${state.timeScore||0}/100</span></div>
+                    <div class="score-row"><span>Organ Involvement</span><span>${state.organScore||0}/100</span></div>
+                    <div class="score-row"><span>Treatment</span><span>${state.txScore||0}/100</span></div>
+                    <div class="score-row" style="border-top:2px solid var(--border);padding-top:12px"><strong>Total</strong><strong>${state.score}</strong></div>
+                </div>
+                <div class="feedback excellent"><div class="feedback-header"><span class="feedback-icon">💡</span><span class="feedback-title">DRESS Pearls</span></div><div class="feedback-text">• <strong>DRESS vs SJS/TEN:</strong> DRESS has eosinophilia, lymphadenopathy, organ involvement, NO blistering<br>• <strong>Timing:</strong> DRESS = 2-8 weeks; SJS/TEN = 1-3 weeks<br>• <strong>High-risk drugs:</strong> Aromatic anticonvulsants (phenytoin, carbamazepine, lamotrigine), allopurinol, sulfonamides<br>• <strong>Organs:</strong> Liver (#1), kidney, lung, heart, thyroid (delayed!)<br>• <strong>Treatment:</strong> Stop drug + systemic steroids with SLOW taper (8-12 weeks)<br>• <strong>HHV-6 reactivation</strong> common and may drive disease<br>• <strong>Long-term:</strong> Monitor thyroid for 6-12 months, avoid cross-reactive drugs</div></div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Play Again</button></div>
+            </div></div>`
+        }
+    };
+
+    let selectedDx = null;
+    function selectDx(id) { selectedDx = id; document.querySelectorAll('#dxOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('dxSubmit').disabled = false; }
+    function submitDx() {
+        document.querySelectorAll('#dxOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'dress') o.classList.add('correct');
+            else if (o.dataset.id === selectedDx) o.classList.add('incorrect');
+        });
+        state.dxScore = selectedDx === 'dress' ? 100 : 40;
+        addScore(selectedDx === 'dress' ? 40 : 15);
+        document.getElementById('dxFeedback').innerHTML = `<div class="feedback ${selectedDx==='dress'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedDx==='dress'?'✅':'📚'}</span><span class="feedback-title">${selectedDx==='dress'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>DRESS clues:</strong> Aromatic anticonvulsant (phenytoin), 4-week latency, morbilliform rash WITHOUT blistering, facial edema, lymphadenopathy, eosinophilia, hepatitis. SJS/TEN would have mucosal involvement and epidermal detachment.</div></div>`;
+        document.getElementById('dxSubmit').textContent = 'Continue →';
+        document.getElementById('dxSubmit').onclick = () => goTo('features');
+    }
+
+    let selectedFeat = new Set();
+    function toggleFeat(id) {
+        const el = document.querySelector(`#featOpts .checkbox-item[data-id="${id}"]`);
+        if(selectedFeat.has(id)) { selectedFeat.delete(id); el.classList.remove('selected'); }
+        else { selectedFeat.add(id); el.classList.add('selected'); }
+    }
+    function submitFeat() {
+        let correct = 0;
+        dressFeatures.forEach(f => {
+            const el = document.querySelector(`#featOpts .checkbox-item[data-id="${f.id}"]`);
+            const sel = selectedFeat.has(f.id);
+            if (f.isFeat && sel) { el.classList.add('correct'); correct++; }
+            else if (!f.isFeat && sel) { el.classList.add('incorrect'); }
+        });
+        state.featScore = Math.round(correct / 5 * 100);
+        addScore(Math.round(state.featScore / 2.5));
+        document.getElementById('featFeedback').innerHTML = `<div class="feedback ${state.featScore>=75?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${state.featScore>=75?'✅':'📚'}</span><span class="feedback-title">DRESS Features</span></div><div class="feedback-text"><strong>DRESS:</strong> Fever, morbilliform rash, lymphadenopathy, eosinophilia, organ involvement<br><strong>NOT DRESS (think SJS/TEN):</strong> Blistering, epidermal detachment, mucosal erosions</div></div>`;
+        document.querySelector('#featFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('timing')">Assess Timing →</button>`;
+    }
+
+    let selectedTime = null;
+    function selectTime(id) { selectedTime = id; document.querySelectorAll('#timeOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('timeSubmit').disabled = false; }
+    function submitTime() {
+        document.querySelectorAll('#timeOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'weeks') o.classList.add('correct');
+            else if (o.dataset.id === selectedTime) o.classList.add('incorrect');
+        });
+        state.timeScore = selectedTime === 'weeks' ? 100 : 40;
+        addScore(selectedTime === 'weeks' ? 30 : 10);
+        document.getElementById('timeFeedback').innerHTML = `<div class="feedback ${selectedTime==='weeks'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedTime==='weeks'?'✅':'📚'}</span><span class="feedback-title">${selectedTime==='weeks'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>DRESS latency:</strong> 2-8 weeks (typically 2-6 weeks)<br><strong>SJS/TEN latency:</strong> 1-3 weeks<br>This longer latency helps distinguish DRESS from other drug reactions.</div></div>`;
+        document.getElementById('timeSubmit').textContent = 'Continue →';
+        document.getElementById('timeSubmit').onclick = () => goTo('organs');
+    }
+
+    let selectedOrgan = new Set();
+    function toggleOrgan(id) {
+        const el = document.querySelector(`#organOpts .checkbox-item[data-id="${id}"]`);
+        if(selectedOrgan.has(id)) { selectedOrgan.delete(id); el.classList.remove('selected'); }
+        else { selectedOrgan.add(id); el.classList.add('selected'); }
+    }
+    function submitOrgan() {
+        let correct = 0;
+        dressOrgans.forEach(o => {
+            const el = document.querySelector(`#organOpts .checkbox-item[data-id="${o.id}"]`);
+            const sel = selectedOrgan.has(o.id);
+            if (o.isOrgan && sel) { el.classList.add('correct'); correct++; }
+            else if (!o.isOrgan && sel) { el.classList.add('incorrect'); }
+        });
+        state.organScore = Math.round(correct / 5 * 100);
+        addScore(Math.round(state.organScore / 2.5));
+        document.getElementById('organFeedback').innerHTML = `<div class="feedback ${state.organScore>=75?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${state.organScore>=75?'✅':'📚'}</span><span class="feedback-title">Organ Involvement</span></div><div class="feedback-text"><strong>Common:</strong> Liver (#1, ~80%), kidney, lung<br><strong>Serious:</strong> Myocarditis (can be fatal)<br><strong>Delayed:</strong> Thyroiditis - may occur weeks-months after resolution, monitor TSH!</div></div>`;
+        document.querySelector('#organFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('management')">Plan Treatment →</button>`;
+    }
+
+    let selectedTx = null;
+    function selectTx(id) { selectedTx = id; document.querySelectorAll('#txOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('txSubmit').disabled = false; }
+    function submitTx() {
+        document.querySelectorAll('#txOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'steroids') o.classList.add('correct');
+            else if (o.dataset.id === selectedTx) o.classList.add('incorrect');
+        });
+        state.txScore = selectedTx === 'steroids' ? 100 : 40;
+        addScore(selectedTx === 'steroids' ? 40 : 15);
+        document.getElementById('txFeedback').innerHTML = `<div class="feedback ${selectedTx==='steroids'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedTx==='steroids'?'✅':'📚'}</span><span class="feedback-title">${selectedTx==='steroids'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>First-line:</strong> Systemic corticosteroids (prednisone 1-2 mg/kg)<br><strong>Critical:</strong> SLOW taper over 8-12 weeks (rapid taper → flare!)<br>Unlike SJS/TEN where steroids are controversial, steroids are beneficial in DRESS.</div></div>`;
+        document.getElementById('txSubmit').textContent = 'Complete →';
+        document.getElementById('txSubmit').onclick = () => goTo('outcome');
+    }
+
+    function goTo(id) { state.stage = id; document.getElementById('stageContainer').innerHTML = stages[id].render(); window.scrollTo(0,0); }
+    document.addEventListener('DOMContentLoaded', () => goTo('setup'));
+    </script>
 </body>
 </html>

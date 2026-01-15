@@ -3,35 +3,327 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Failing Pump | ReasonDx Adventure</title>
-    <style>:root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#DC2626;--success:#10B981;--warning:#F59E0B;--danger:#DC2626}*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}.header{background:linear-gradient(135deg,#991B1B,#DC2626);padding:12px 20px;position:sticky;top:0;z-index:100}.header-row{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}.diff-toggle{display:flex;background:rgba(0,0,0,.3);border-radius:8px}.diff-btn{padding:6px 12px;font-size:.75rem;cursor:pointer;border:none;background:0 0;color:rgba(255,255,255,.7);font-weight:600}.diff-btn.active{background:rgba(255,255,255,.2);color:#fff}.stat{text-align:center;background:rgba(0,0,0,.2);padding:6px 14px;border-radius:8px}.stat-value{font-size:1.1rem;font-weight:700;font-family:monospace}.stat-label{font-size:.6rem;opacity:.8}.main{max-width:900px;margin:0 auto;padding:24px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px}.card-header{padding:20px 24px;border-bottom:1px solid var(--border)}.card-phase{font-size:.75rem;color:var(--accent);text-transform:uppercase}.card-title{font-size:1.5rem;font-weight:700}.card-body{padding:24px}.narrative{background:rgba(220,38,38,.1);border-left:4px solid var(--accent);padding:20px;border-radius:0 12px 12px 0;margin-bottom:20px}.narrative .hl{background:rgba(220,38,38,.3);padding:2px 6px;border-radius:4px}.setup-screen{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center}.start-btn{background:var(--accent);color:#fff;border:none;padding:16px 48px;border-radius:12px;font-size:1.1rem;font-weight:700;cursor:pointer}.hint{background:rgba(59,130,246,.15);padding:12px 16px;border-radius:8px;margin-bottom:16px;color:#93C5FD}.radio-options{display:flex;flex-direction:column;gap:10px}.radio-option{display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(0,0,0,.2);border:2px solid var(--border);border-radius:10px;cursor:pointer}.radio-option.selected{border-color:var(--accent);background:rgba(220,38,38,.15)}.radio-option.correct{border-color:var(--success);background:rgba(16,185,129,.15)}.radio-option.incorrect{border-color:var(--danger);background:rgba(220,38,38,.15)}.radio-circle{width:22px;height:22px;border:2px solid var(--border);border-radius:50%}.radio-option.selected .radio-circle{border-color:var(--accent);background:radial-gradient(circle,var(--accent) 40%,transparent 40%)}.feedback{padding:20px;border-radius:12px;margin:20px 0}.feedback.excellent{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3)}.feedback.incorrect{background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.3)}.btn{padding:14px 28px;border-radius:10px;font-weight:600;cursor:pointer;border:none}.btn-primary{background:var(--accent);color:#fff}.btn:disabled{opacity:.5}.btn-row{display:flex;gap:12px;margin-top:24px}.btn-link{background:0 0;border:2px solid var(--border);color:var(--text)}.vitals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:12px;margin:20px 0}.vital{background:rgba(0,0,0,.2);padding:12px;border-radius:10px;text-align:center}.vital-label{font-size:.7rem;color:var(--muted)}.vital-value{font-size:1.3rem;font-weight:700;font-family:monospace}.lab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:16px 0}.lab-item{display:flex;justify-content:space-between;padding:8px 12px;background:rgba(0,0,0,.2);border-radius:6px}.lab-name{color:var(--muted)}.lab-value{font-family:monospace;font-weight:600}.score-summary{background:rgba(0,0,0,.2);border-radius:12px;padding:24px;margin:24px auto;max-width:600px}.score-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}.pearls-box{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:20px;margin-top:20px}.pearls-title{font-weight:700;color:var(--success);margin-bottom:12px}.pearl-item{padding:8px 0;border-bottom:1px solid rgba(16,185,129,.2);font-size:.95rem}.cross-link{background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.3);border-radius:8px;padding:12px 16px;margin-top:12px}.cross-link a{color:#FCA5A5;text-decoration:none}.progress-bar{background:rgba(255,255,255,.1);border-radius:10px;height:8px;margin:20px 0}.progress-fill{background:var(--accent);height:100%;border-radius:10px}.question-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}.question-number{background:var(--accent);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}</style>
+    <title>The Hypotensive Patient | ReasonDx Adventure</title>
+    <style>
+        :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #DC2626; --success: #10B981; --warning: #F59E0B; --danger: #DC2626; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #B91C1C 0%, #DC2626 100%); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; }
+        .stat { background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 8px; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        .main { max-width: 1000px; margin: 0 auto; padding: 24px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(220,38,38,0.1), rgba(185,28,28,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; line-height: 1.8; }
+        .narrative .hl { background: rgba(220,38,38,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        .setup-screen { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; }
+        .setup-screen h1 { font-size: 2rem; margin-bottom: 8px; }
+        .setup-screen .subtitle { color: var(--muted); margin-bottom: 32px; }
+        .start-btn { background: var(--accent); color: white; border: none; padding: 16px 48px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+        .question-section { margin-bottom: 32px; }
+        .question-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .question-number { background: var(--accent); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .question-text { font-size: 1.1rem; font-weight: 600; }
+        .radio-options { display: flex; flex-direction: column; gap: 10px; }
+        .radio-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .radio-option:hover { border-color: var(--accent); }
+        .radio-option.selected { border-color: var(--accent); background: rgba(220,38,38,0.15); }
+        .radio-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .radio-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .radio-circle { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; }
+        .radio-option.selected .radio-circle { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 40%, transparent 40%); }
+        .feedback { padding: 20px; border-radius: 12px; margin: 20px 0; }
+        .feedback.excellent { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .feedback.acceptable { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .feedback-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .feedback-icon { font-size: 1.5rem; }
+        .feedback-title { font-weight: 700; }
+        .feedback-text { color: var(--muted); line-height: 1.7; }
+        .feedback-text strong { color: var(--text); }
+        .alert { padding: 16px 20px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
+        .alert.info { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+        .alert-icon { font-size: 1.5rem; }
+        .alert-content { flex: 1; }
+        .alert-title { font-weight: 600; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; color: var(--muted); }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-row { display: flex; gap: 12px; margin-top: 24px; }
+        .scenario-grid { display: grid; gap: 16px; margin: 20px 0; }
+        .scenario-card { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 16px; border: 2px solid var(--border); }
+        .scenario-title { font-weight: 600; color: var(--accent); margin-bottom: 8px; }
+        .scenario-findings { font-size: 0.9rem; color: var(--muted); }
+        .table-container { overflow-x: auto; margin: 20px 0; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border); }
+        th { color: var(--accent); font-weight: 600; }
+        .outcome { text-align: center; padding: 40px 20px; }
+        .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
+        .outcome-title { font-size: 2rem; font-weight: 700; color: var(--success); margin-bottom: 8px; }
+        .outcome-desc { color: var(--muted); max-width: 600px; margin: 0 auto 24px; }
+        .score-summary { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 24px; margin: 24px auto; max-width: 500px; }
+        .score-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .score-row:last-child { border-bottom: none; }
+    </style>
 </head>
 <body>
-    <header class="header"><div class="header-row"><div style="font-weight:600">💔 The Failing Pump</div><div style="display:flex;gap:12px;align-items:center"><div class="diff-toggle"><button class="diff-btn active" onclick="setDiff('easy')">Easy</button><button class="diff-btn" onclick="setDiff('int')">Intermediate</button><button class="diff-btn" onclick="setDiff('adv')">Advanced</button></div><div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Points</div></div></div></div></header>
-    <main class="main"><div id="app"></div></main>
-<script>
-const S={stage:'setup',score:0,max:0,diff:'easy',q:0,total:8};
-const C={easy:{age:'65M',wt:'78kg',hx:'Chest pain, diaphoresis, now hypotensive after large anterior MI',exam:'Cool extremities, JVD, crackles bilateral bases, weak pulse',vitals:{HR:'112',BP:'78/52',Temp:'97.8°F',SpO2:'88%'},labs:{Lactate:'4.8',ScvO2:'55%',Hx:'STEMI, cardiogenic shock'}},int:{age:'42F',wt:'65kg',hx:'Fever, dysuria, now confused and hypotensive despite 2L fluids',exam:'Warm extremities, delayed cap refill, tachypneic',vitals:{HR:'118',BP:'82/48',Temp:'102.8°F',SpO2:'94%'},labs:{Lactate:'5.2',WBC:'22k',Hx:'UTI source, septic shock'}},adv:{age:'28M',wt:'82kg',hx:'MVC with chest trauma, progressive hypotension, muffled heart sounds',exam:'JVD, muffled heart sounds, pulsus paradoxus',vitals:{HR:'128',BP:'72/58',Temp:'98.2°F',SpO2:'92%'},labs:{Lactate:'3.8',Hx:'Becks triad present'}}};
-const Q=[
-{t:'Shock Definition',q:'What defines shock at the cellular level?',h:'Beyond blood pressure',o:[{id:'a',txt:'Inadequate tissue oxygen delivery leading to cellular hypoxia and organ dysfunction',c:1,p:100},{id:'b',txt:'Low blood pressure only',c:0,p:30},{id:'c',txt:'Fast heart rate',c:0,p:10}],fb:{1:'<b>Correct!</b> Shock = inadequate tissue perfusion/oxygenation. Can have shock with normal BP (compensated). Key markers: lactate, mental status, urine output, cap refill.',0:'<b>Shock:</b> Inadequate tissue O2 delivery. BP alone is insufficient.'}},
-{t:'Four Categories',q:'What are the four main categories of shock?',h:'Hemodynamic classification',o:[{id:'a',txt:'Distributive, Cardiogenic, Hypovolemic, Obstructive',c:1,p:100},{id:'b',txt:'Septic, Hemorrhagic, Cardiac',c:0,p:30},{id:'c',txt:'Warm shock and cold shock only',c:0,p:20}],fb:{1:'<b>Correct!</b> Four types: Distributive (sepsis, anaphylaxis, neurogenic), Cardiogenic (MI, arrhythmia), Hypovolemic (hemorrhage, dehydration), Obstructive (PE, tamponade, tension PTX).',0:'<b>4 types:</b> Distributive, Cardiogenic, Hypovolemic, Obstructive.'}},
-{t:'Distributive Shock',q:'Hemodynamic profile of distributive (septic) shock?',h:'Vasodilation pattern',o:[{id:'a',txt:'Low SVR, high CO (early), warm extremities initially',c:1,p:100},{id:'b',txt:'High SVR, low CO',c:0,p:30},{id:'c',txt:'Normal SVR',c:0,p:20}],fb:{1:'<b>Correct!</b> Distributive: Low SVR (vasodilation), initially high/normal CO (hyperdynamic), warm extremities. Later: myocardial depression, cold extremities. Sepsis, anaphylaxis, neurogenic all distributive.',0:'<b>Distributive:</b> Low SVR, initially high CO, warm extremities.'}},
-{t:'Cardiogenic Shock',q:'Hemodynamic profile of cardiogenic shock?',h:'Pump failure',o:[{id:'a',txt:'Low CO, high SVR (compensatory vasoconstriction), elevated filling pressures',c:1,p:100},{id:'b',txt:'Low SVR, high CO',c:0,p:20},{id:'c',txt:'Normal filling pressures',c:0,p:20}],fb:{1:'<b>Correct!</b> Cardiogenic: Low CO (pump failure), high SVR (compensation), high PCWP/CVP. Cold extremities, JVD, pulmonary edema. Avoid excessive fluids!',0:'<b>Cardiogenic:</b> Low CO, high SVR, high filling pressures. Cold, wet.'}},
-{t:'Obstructive Shock',q:'What findings suggest obstructive shock from cardiac tamponade?',h:'Becks triad',o:[{id:'a',txt:'Becks triad: JVD, hypotension, muffled heart sounds; pulsus paradoxus',c:1,p:100},{id:'b',txt:'Clear lung sounds only',c:0,p:20},{id:'c',txt:'Wide pulse pressure',c:0,p:10}],fb:{1:'<b>Correct!</b> Tamponade (Becks triad): JVD, hypotension, muffled heart sounds. Pulsus paradoxus >10mmHg. Electrical alternans on ECG. Emergency pericardiocentesis needed.',0:'<b>Tamponade:</b> Becks triad + pulsus paradoxus. Echo confirms.'}},
-{t:'Lactate Significance',q:'What does an elevated lactate indicate in shock?',h:'Marker of perfusion',o:[{id:'a',txt:'Tissue hypoperfusion and anaerobic metabolism; higher lactate = worse prognosis',c:1,p:100},{id:'b',txt:'Infection only',c:0,p:20},{id:'c',txt:'Dehydration only',c:0,p:20}],fb:{1:'<b>Correct!</b> Lactate reflects anaerobic metabolism from hypoperfusion. >2 mmol/L abnormal, >4 severe. Serial lactate clearance guides resuscitation. Target >10% decrease per 2 hours.',0:'<b>Lactate:</b> Tissue hypoperfusion marker. Track clearance.'}},
-{t:'Initial Resuscitation',q:'First-line vasopressor for septic shock after adequate fluid resuscitation?',h:'Surviving Sepsis guidelines',o:[{id:'a',txt:'Norepinephrine (target MAP ≥65 mmHg)',c:1,p:100},{id:'b',txt:'Dopamine',c:0,p:30},{id:'c',txt:'Phenylephrine',c:0,p:20}],fb:{1:'<b>Correct!</b> Norepinephrine first-line for septic shock (alpha + beta effects). Target MAP ≥65. Add vasopressin if refractory. Dopamine associated with more arrhythmias.',0:'<b>Septic shock:</b> Norepinephrine first-line. Target MAP ≥65.'}},
-{t:'Cardiogenic Shock Pressors',q:'Preferred inotrope/vasopressor approach for cardiogenic shock?',h:'Different from sepsis',o:[{id:'a',txt:'Dobutamine for inotropy ± norepinephrine for pressure; avoid excessive fluids',c:1,p:100},{id:'b',txt:'Aggressive fluid resuscitation',c:0,p:20},{id:'c',txt:'Phenylephrine alone',c:0,p:20}],fb:{1:'<b>Correct!</b> Cardiogenic: Dobutamine (β1 agonist) for inotropy, ± norepinephrine if hypotensive. Limit fluids (already volume overloaded). Consider mechanical support (IABP, Impella).',0:'<b>Cardiogenic:</b> Dobutamine ± norepinephrine. Limit fluids!'}}
-];
-let sel=null;
-function setDiff(d){S.diff=d;document.querySelectorAll('.diff-btn').forEach((b,i)=>b.classList.toggle('active',['easy','int','adv'][i]===d));if(S.stage!=='setup'){S.stage='setup';S.score=0;S.max=0;S.q=0;document.getElementById('score').textContent='0';}render();}
-function addPts(p,m){S.score+=p;S.max+=m;document.getElementById('score').textContent=S.score;}
-function pick(id){sel=id;document.querySelectorAll('.radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id));document.getElementById('sub').disabled=false;}
-function submit(){const q=Q[S.q-1];const opt=q.o.find(o=>o.id===sel);addPts(opt.p||0,100);document.querySelectorAll('.radio-option').forEach(o=>{const op=q.o.find(x=>x.id===o.dataset.id);if(op&&op.c)o.classList.add('correct');else if(o.dataset.id===sel)o.classList.add('incorrect');});document.getElementById('fb').innerHTML='<div class="feedback '+(opt&&opt.c?'excellent':'incorrect')+'">'+q.fb[opt&&opt.c?1:0]+'</div>';document.getElementById('sub').textContent=S.q<S.total?'Next':'Results';document.getElementById('sub').onclick=next;}
-function next(){if(S.q<S.total){S.q++;sel=null;render();}else{S.stage='outcome';render();}}
-function start(){S.q=1;S.stage='question';render();}
-function go(s){S.stage=s;render();}
-function render(){const c=C[S.diff];if(S.stage==='setup'){document.getElementById('app').innerHTML='<div class="setup-screen"><h1>💔 The Failing Pump</h1><p style="color:var(--muted);margin-bottom:32px">Shock Differentiation: 4 types, hemodynamics, lactate, vasopressors</p><button class="start-btn" onclick="go(\'pres\')">Begin Case</button></div>';}else if(S.stage==='pres'){document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Presentation</div><div class="card-title">💔 Hemodynamic Instability</div></div><div class="card-body"><div class="narrative"><span class="hl">'+c.age+'</span> ('+c.wt+')<br><b>Hx:</b> '+c.hx+'<br><b>Exam:</b> '+c.exam+'</div><div class="vitals-grid">'+Object.entries(c.vitals).map(function(e){return'<div class="vital"><div class="vital-label">'+e[0]+'</div><div class="vital-value">'+e[1]+'</div></div>';}).join('')+'</div><div class="lab-grid">'+Object.entries(c.labs).map(function(e){return'<div class="lab-item"><span class="lab-name">'+e[0]+'</span><span class="lab-value">'+e[1]+'</span></div>';}).join('')+'</div><div class="btn-row"><button class="btn btn-primary" onclick="start()">Begin Assessment</button></div></div></div>';}else if(S.stage==='question'){var q=Q[S.q-1];document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Q'+S.q+'/'+S.total+'</div><div class="card-title">'+q.t+'</div></div><div class="card-body"><div class="progress-bar"><div class="progress-fill" style="width:'+(S.q/S.total*100)+'%"></div></div><div class="question-header"><div class="question-number">'+S.q+'</div><div style="font-weight:600">'+q.q+'</div></div><div class="hint">'+q.h+'</div><div class="radio-options">'+q.o.map(function(o){return'<div class="radio-option" data-id="'+o.id+'" onclick="pick(\''+o.id+'\')"><div class="radio-circle"></div><div><b>'+o.txt+'</b></div></div>';}).join('')+'</div><div id="fb"></div><div class="btn-row"><button class="btn btn-primary" id="sub" onclick="submit()" disabled>Submit</button></div></div></div>';}else{var pct=S.max>0?Math.round(S.score/S.max*100):0;document.getElementById('app').innerHTML='<div class="card"><div class="card-body"><div style="text-align:center;padding:40px"><div style="font-size:4rem">'+(pct>=70?'🎉':'📚')+'</div><div style="font-size:2rem;font-weight:700;color:'+(pct>=70?'var(--success)':'var(--warning)')+'">'+(pct>=70?'Complete!':'Review')+'</div></div><div class="score-summary"><div class="score-row"><span>Score</span><span>'+S.score+'/'+S.max+' ('+pct+'%)</span></div></div><div class="pearls-box"><div class="pearls-title">Shock Differentiation Pearls</div><div class="pearl-item"><b>Definition:</b> Inadequate tissue O2 delivery, not just low BP</div><div class="pearl-item"><b>4 Types:</b> Distributive, Cardiogenic, Hypovolemic, Obstructive</div><div class="pearl-item"><b>Distributive:</b> Low SVR, high CO, warm (early)</div><div class="pearl-item"><b>Cardiogenic:</b> Low CO, high SVR, cold, high filling pressures</div><div class="pearl-item"><b>Tamponade:</b> Becks triad + pulsus paradoxus</div><div class="pearl-item"><b>Lactate:</b> Perfusion marker, track clearance</div><div class="pearl-item"><b>Septic:</b> Norepinephrine first-line</div><div class="pearl-item"><b>Cardiogenic:</b> Dobutamine ± norepi, limit fluids</div></div><div class="cross-link"><a href="sepsis-adventure-enhanced.html">Related: Sepsis</a> | <a href="acs-adventure-enhanced.html">ACS</a></div><div class="btn-row" style="justify-content:center;margin-top:30px"><button class="btn btn-primary" onclick="location.reload()">Retry</button><button class="btn btn-link" onclick="location.href=\'adventure-hub.html\'">Back</button></div></div></div>';}}
-document.addEventListener('DOMContentLoaded',render);
-</script>
+    <header class="header"><div class="header-row"><div class="header-title">🩸 The Hypotensive Patient</div><div class="stat"><div class="stat-value" id="scoreDisplay">0</div><div class="stat-label">Points</div></div></div></header>
+    <main class="main"><div id="stageContainer"></div></main>
+    <script>
+    const state = { stage:'setup', score:0 };
+    
+    function addScore(pts) { state.score += pts; document.getElementById('scoreDisplay').textContent = state.score; }
+
+    const stages = {
+        setup: { render: () => `
+            <div class="setup-screen">
+                <h1>🩸 The Hypotensive Patient</h1>
+                <p class="subtitle">Shock differentiation and management</p>
+                <button class="start-btn" onclick="goTo('framework')">Begin Case →</button>
+            </div>`
+        },
+        framework: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Framework</div><div class="card-title">📊 Four Types of Shock</div></div>
+                <div class="card-body">
+                    <div class="alert info"><span class="alert-icon">🧠</span><div class="alert-content"><div class="alert-title">Shock = Inadequate tissue perfusion</div><div class="alert-desc">Not just low blood pressure - look for end-organ dysfunction</div></div></div>
+                    <div class="table-container">
+                        <table>
+                            <tr><th>Type</th><th>Mechanism</th><th>CVP/JVD</th><th>CO</th><th>SVR</th></tr>
+                            <tr><td><strong>Hypovolemic</strong></td><td>↓ Preload (volume loss)</td><td>LOW</td><td>↓</td><td>↑</td></tr>
+                            <tr><td><strong>Cardiogenic</strong></td><td>Pump failure</td><td>HIGH</td><td>↓</td><td>↑</td></tr>
+                            <tr><td><strong>Distributive</strong></td><td>Vasodilation (sepsis, anaphylaxis)</td><td>LOW/normal</td><td>↑ or ↓</td><td>↓</td></tr>
+                            <tr><td><strong>Obstructive</strong></td><td>Mechanical (PE, tamponade, tension)</td><td>HIGH</td><td>↓</td><td>↑</td></tr>
+                        </table>
+                    </div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">1</div><div class="question-text">What differentiates cardiogenic from hypovolemic shock?</div></div>
+                        <div class="radio-options" id="q1Opts">
+                            <div class="radio-option" data-id="jvd" onclick="selectQ1('jvd')"><div class="radio-circle"></div><div><strong>JVD/CVP - elevated in cardiogenic, low in hypovolemic</strong><br><small style="color:var(--muted)">Both have low CO and high SVR</small></div></div>
+                            <div class="radio-option" data-id="bp" onclick="selectQ1('bp')"><div class="radio-circle"></div><div><strong>Blood pressure level</strong><br><small style="color:var(--muted)">Lower in one vs other</small></div></div>
+                            <div class="radio-option" data-id="hr" onclick="selectQ1('hr')"><div class="radio-circle"></div><div><strong>Heart rate</strong><br><small style="color:var(--muted)">Faster in one</small></div></div>
+                        </div>
+                    </div>
+                    <div id="q1Feedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="q1Submit" onclick="submitQ1()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        case1: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Case 1</div><div class="card-title">🚗 The Trauma Patient</div></div>
+                <div class="card-body">
+                    <div class="narrative">A <span class="hl">32-year-old male</span> arrives after an <span class="hl">MVC with abdominal trauma</span>. He's <span class="hl">pale, diaphoretic, confused</span>.<br><br>Vitals: BP <span class="hl">78/50</span>, HR <span class="hl">128</span>, RR 24. Exam: <span class="hl">Flat neck veins</span>, <span class="hl">cold extremities</span>, <span class="hl">distended abdomen</span>. FAST positive.</div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">2</div><div class="question-text">What type of shock?</div></div>
+                        <div class="radio-options" id="c1Opts">
+                            <div class="radio-option" data-id="hypovolemic" onclick="selectC1('hypovolemic')"><div class="radio-circle"></div><span>Hypovolemic (hemorrhagic)</span></div>
+                            <div class="radio-option" data-id="cardiogenic" onclick="selectC1('cardiogenic')"><div class="radio-circle"></div><span>Cardiogenic</span></div>
+                            <div class="radio-option" data-id="distributive" onclick="selectC1('distributive')"><div class="radio-circle"></div><span>Distributive</span></div>
+                            <div class="radio-option" data-id="obstructive" onclick="selectC1('obstructive')"><div class="radio-circle"></div><span>Obstructive</span></div>
+                        </div>
+                    </div>
+                    <div id="c1Feedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="c1Submit" onclick="submitC1()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        case2: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Case 2</div><div class="card-title">💔 The MI Patient</div></div>
+                <div class="card-body">
+                    <div class="narrative">A <span class="hl">68-year-old male</span> with <span class="hl">STEMI</span> (just had cath, 100% LAD occlusion stented) now has <span class="hl">worsening hypotension</span> despite fluids.<br><br>Vitals: BP <span class="hl">82/58</span>, HR <span class="hl">112</span>. Exam: <span class="hl">JVD present</span>, <span class="hl">bilateral crackles</span>, <span class="hl">cold/mottled extremities</span>, <span class="hl">S3 gallop</span>.</div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">3</div><div class="question-text">What type of shock?</div></div>
+                        <div class="radio-options" id="c2Opts">
+                            <div class="radio-option" data-id="hypovolemic" onclick="selectC2('hypovolemic')"><div class="radio-circle"></div><span>Hypovolemic</span></div>
+                            <div class="radio-option" data-id="cardiogenic" onclick="selectC2('cardiogenic')"><div class="radio-circle"></div><span>Cardiogenic</span></div>
+                            <div class="radio-option" data-id="distributive" onclick="selectC2('distributive')"><div class="radio-circle"></div><span>Distributive</span></div>
+                            <div class="radio-option" data-id="obstructive" onclick="selectC2('obstructive')"><div class="radio-circle"></div><span>Obstructive</span></div>
+                        </div>
+                    </div>
+                    <div id="c2Feedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="c2Submit" onclick="submitC2()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        case3: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Case 3</div><div class="card-title">🦠 The Septic Patient</div></div>
+                <div class="card-body">
+                    <div class="narrative">A <span class="hl">72-year-old female</span> from a nursing home with <span class="hl">UTI</span>. Found <span class="hl">confused with fever 39.2°C</span>.<br><br>Vitals: BP <span class="hl">84/42</span>, HR <span class="hl">118</span>. Exam: <span class="hl">Warm extremities</span>, <span class="hl">flat neck veins</span>, <span class="hl">bounding pulses</span>. Lactate 4.8.</div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">4</div><div class="question-text">What type of shock?</div></div>
+                        <div class="radio-options" id="c3Opts">
+                            <div class="radio-option" data-id="hypovolemic" onclick="selectC3('hypovolemic')"><div class="radio-circle"></div><span>Hypovolemic</span></div>
+                            <div class="radio-option" data-id="cardiogenic" onclick="selectC3('cardiogenic')"><div class="radio-circle"></div><span>Cardiogenic</span></div>
+                            <div class="radio-option" data-id="distributive" onclick="selectC3('distributive')"><div class="radio-circle"></div><span>Distributive (septic)</span></div>
+                            <div class="radio-option" data-id="obstructive" onclick="selectC3('obstructive')"><div class="radio-circle"></div><span>Obstructive</span></div>
+                        </div>
+                    </div>
+                    <div id="c3Feedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="c3Submit" onclick="submitC3()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        case4: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Case 4</div><div class="card-title">🫀 The Muffled Hearts</div></div>
+                <div class="card-body">
+                    <div class="narrative">A <span class="hl">58-year-old male</span> with <span class="hl">metastatic lung cancer</span> presents with <span class="hl">progressive dyspnea</span> and <span class="hl">lightheadedness</span>.<br><br>Vitals: BP <span class="hl">88/72</span> (narrow pulse pressure), HR <span class="hl">108</span>. Exam: <span class="hl">Marked JVD</span>, <span class="hl">muffled heart sounds</span>, <span class="hl">pulsus paradoxus 18 mmHg</span>.</div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">5</div><div class="question-text">What type of shock?</div></div>
+                        <div class="radio-options" id="c4Opts">
+                            <div class="radio-option" data-id="hypovolemic" onclick="selectC4('hypovolemic')"><div class="radio-circle"></div><span>Hypovolemic</span></div>
+                            <div class="radio-option" data-id="cardiogenic" onclick="selectC4('cardiogenic')"><div class="radio-circle"></div><span>Cardiogenic</span></div>
+                            <div class="radio-option" data-id="distributive" onclick="selectC4('distributive')"><div class="radio-circle"></div><span>Distributive</span></div>
+                            <div class="radio-option" data-id="obstructive" onclick="selectC4('obstructive')"><div class="radio-circle"></div><span>Obstructive (tamponade)</span></div>
+                        </div>
+                    </div>
+                    <div id="c4Feedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="c4Submit" onclick="submitC4()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        treatment: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Treatment</div><div class="card-title">💊 Management Principles</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">6</div><div class="question-text">Match the shock type with its PRIMARY treatment:</div></div>
+                        <div class="scenario-grid">
+                            <div class="scenario-card"><div class="scenario-title">Hypovolemic</div><div class="scenario-findings">Volume resuscitation (blood products if hemorrhagic) + source control</div></div>
+                            <div class="scenario-card"><div class="scenario-title">Cardiogenic</div><div class="scenario-findings">Inotropes (dobutamine), limit fluids, treat underlying cause, consider mechanical support</div></div>
+                            <div class="scenario-card"><div class="scenario-title">Distributive</div><div class="scenario-findings">Fluids first, then vasopressors (norepinephrine), treat source</div></div>
+                            <div class="scenario-card"><div class="scenario-title">Obstructive</div><div class="scenario-findings">Relieve obstruction (pericardiocentesis, thrombolytics, needle decompression)</div></div>
+                        </div>
+                        <div class="radio-options" id="txOpts">
+                            <div class="radio-option" data-id="correct" onclick="selectTx('correct')"><div class="radio-circle"></div><span>I understand these treatment principles</span></div>
+                            <div class="radio-option" data-id="review" onclick="selectTx('review')"><div class="radio-circle"></div><span>I need to review this more</span></div>
+                        </div>
+                    </div>
+                    <div id="txFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="txSubmit" onclick="submitTx()" disabled>Complete →</button></div>
+                </div>
+            </div>`
+        },
+        outcome: { render: () => `
+            <div class="card"><div class="card-body">
+                <div class="outcome">
+                    <div class="outcome-icon">🎉</div>
+                    <div class="outcome-title">Shock Expert!</div>
+                    <div class="outcome-desc">You can now differentiate the four types of shock by their hemodynamic profiles and clinical findings. This foundational knowledge is critical for rapid diagnosis and appropriate management in critically ill patients.</div>
+                </div>
+                <div class="score-summary">
+                    <h3 style="margin-bottom:16px">Performance</h3>
+                    <div class="score-row"><span>Framework Understanding</span><span>${state.q1Score||0}/100</span></div>
+                    <div class="score-row"><span>Hypovolemic Case</span><span>${state.c1Score||0}/100</span></div>
+                    <div class="score-row"><span>Cardiogenic Case</span><span>${state.c2Score||0}/100</span></div>
+                    <div class="score-row"><span>Distributive Case</span><span>${state.c3Score||0}/100</span></div>
+                    <div class="score-row"><span>Obstructive Case</span><span>${state.c4Score||0}/100</span></div>
+                    <div class="score-row" style="border-top:2px solid var(--border);padding-top:12px"><strong>Total</strong><strong>${state.score}</strong></div>
+                </div>
+                <div class="feedback excellent"><div class="feedback-header"><span class="feedback-icon">💡</span><span class="feedback-title">Shock Differentiation Pearls</span></div><div class="feedback-text">
+                    • <strong>JVD is KEY:</strong> High in cardiogenic/obstructive, Low in hypovolemic/distributive<br>
+                    • <strong>Extremities:</strong> Cold in hypovolemic/cardiogenic (vasoconstriction), Warm in distributive (vasodilation)<br>
+                    • <strong>Cardiogenic clues:</strong> JVD + pulmonary edema + S3 + cold extremities + history of MI/CHF<br>
+                    • <strong>Distributive clues:</strong> Warm + bounding pulses + wide pulse pressure + fever (sepsis) or rash (anaphylaxis)<br>
+                    • <strong>Obstructive clues:</strong> JVD + clear lungs (vs cardiogenic) + specific signs (Beck's triad, tracheal deviation)<br>
+                    • <strong>Beck's triad (tamponade):</strong> JVD + hypotension + muffled heart sounds<br>
+                    • <strong>Pulsus paradoxus:</strong> >10 mmHg drop in SBP with inspiration = tamponade or severe asthma<br>
+                    • <strong>Mixed shock:</strong> Common in real patients (e.g., sepsis + cardiogenic in septic cardiomyopathy)
+                </div></div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Play Again</button></div>
+            </div></div>`
+        }
+    };
+
+    let selectedQ1 = null;
+    function selectQ1(id) { selectedQ1 = id; document.querySelectorAll('#q1Opts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('q1Submit').disabled = false; }
+    function submitQ1() {
+        document.querySelectorAll('#q1Opts .radio-option').forEach(o => {
+            if (o.dataset.id === 'jvd') o.classList.add('correct');
+            else if (o.dataset.id === selectedQ1) o.classList.add('incorrect');
+        });
+        state.q1Score = selectedQ1 === 'jvd' ? 100 : 40;
+        addScore(selectedQ1 === 'jvd' ? 35 : 10);
+        document.getElementById('q1Feedback').innerHTML = `<div class="feedback ${selectedQ1==='jvd'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedQ1==='jvd'?'✅':'📚'}</span><span class="feedback-title">${selectedQ1==='jvd'?'Correct!':'Key Point'}</span></div><div class="feedback-text"><strong>JVD/CVP differentiates them:</strong> Both have ↓CO and ↑SVR. But cardiogenic = pump failure = blood backs up = HIGH JVD. Hypovolemic = empty tank = LOW/flat JVD. This is your most reliable bedside tool!</div></div>`;
+        document.getElementById('q1Submit').textContent = 'Continue →';
+        document.getElementById('q1Submit').onclick = () => goTo('case1');
+    }
+
+    let selectedC1 = null;
+    function selectC1(id) { selectedC1 = id; document.querySelectorAll('#c1Opts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('c1Submit').disabled = false; }
+    function submitC1() {
+        document.querySelectorAll('#c1Opts .radio-option').forEach(o => {
+            if (o.dataset.id === 'hypovolemic') o.classList.add('correct');
+            else if (o.dataset.id === selectedC1) o.classList.add('incorrect');
+        });
+        state.c1Score = selectedC1 === 'hypovolemic' ? 100 : 30;
+        addScore(selectedC1 === 'hypovolemic' ? 35 : 10);
+        document.getElementById('c1Feedback').innerHTML = `<div class="feedback ${selectedC1==='hypovolemic'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedC1==='hypovolemic'?'✅':'📚'}</span><span class="feedback-title">${selectedC1==='hypovolemic'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Hemorrhagic (hypovolemic) shock:</strong> Trauma + FLAT neck veins + cold extremities + positive FAST = bleeding. Treatment: Stop the bleeding + blood products. Crystalloid is bridging only!</div></div>`;
+        document.getElementById('c1Submit').textContent = 'Continue →';
+        document.getElementById('c1Submit').onclick = () => goTo('case2');
+    }
+
+    let selectedC2 = null;
+    function selectC2(id) { selectedC2 = id; document.querySelectorAll('#c2Opts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('c2Submit').disabled = false; }
+    function submitC2() {
+        document.querySelectorAll('#c2Opts .radio-option').forEach(o => {
+            if (o.dataset.id === 'cardiogenic') o.classList.add('correct');
+            else if (o.dataset.id === selectedC2) o.classList.add('incorrect');
+        });
+        state.c2Score = selectedC2 === 'cardiogenic' ? 100 : 30;
+        addScore(selectedC2 === 'cardiogenic' ? 35 : 10);
+        document.getElementById('c2Feedback').innerHTML = `<div class="feedback ${selectedC2==='cardiogenic'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedC2==='cardiogenic'?'✅':'📚'}</span><span class="feedback-title">${selectedC2==='cardiogenic'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Cardiogenic shock:</strong> Recent MI + JVD + pulmonary edema + cold extremities + S3. Pump failure! Treatment: Inotropes (dobutamine), avoid aggressive fluids (will worsen pulmonary edema), consider mechanical support (IABP, Impella).</div></div>`;
+        document.getElementById('c2Submit').textContent = 'Continue →';
+        document.getElementById('c2Submit').onclick = () => goTo('case3');
+    }
+
+    let selectedC3 = null;
+    function selectC3(id) { selectedC3 = id; document.querySelectorAll('#c3Opts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('c3Submit').disabled = false; }
+    function submitC3() {
+        document.querySelectorAll('#c3Opts .radio-option').forEach(o => {
+            if (o.dataset.id === 'distributive') o.classList.add('correct');
+            else if (o.dataset.id === selectedC3) o.classList.add('incorrect');
+        });
+        state.c3Score = selectedC3 === 'distributive' ? 100 : 30;
+        addScore(selectedC3 === 'distributive' ? 35 : 10);
+        document.getElementById('c3Feedback').innerHTML = `<div class="feedback ${selectedC3==='distributive'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedC3==='distributive'?'✅':'📚'}</span><span class="feedback-title">${selectedC3==='distributive'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Septic (distributive) shock:</strong> Infection + WARM extremities + bounding pulses + flat JVD. Vasodilation causes relative hypovolemia. Treatment: Fluids (30 mL/kg) → vasopressors (norepi) → antibiotics + source control.</div></div>`;
+        document.getElementById('c3Submit').textContent = 'Continue →';
+        document.getElementById('c3Submit').onclick = () => goTo('case4');
+    }
+
+    let selectedC4 = null;
+    function selectC4(id) { selectedC4 = id; document.querySelectorAll('#c4Opts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('c4Submit').disabled = false; }
+    function submitC4() {
+        document.querySelectorAll('#c4Opts .radio-option').forEach(o => {
+            if (o.dataset.id === 'obstructive') o.classList.add('correct');
+            else if (o.dataset.id === selectedC4) o.classList.add('incorrect');
+        });
+        state.c4Score = selectedC4 === 'obstructive' ? 100 : 30;
+        addScore(selectedC4 === 'obstructive' ? 35 : 10);
+        document.getElementById('c4Feedback').innerHTML = `<div class="feedback ${selectedC4==='obstructive'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedC4==='obstructive'?'✅':'📚'}</span><span class="feedback-title">${selectedC4==='obstructive'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Obstructive (tamponade):</strong> Cancer + JVD + muffled hearts + pulsus paradoxus + narrow pulse pressure. Beck's triad! Treatment: Emergent pericardiocentesis. Fluids can temporize by increasing preload.</div></div>`;
+        document.getElementById('c4Submit').textContent = 'Continue →';
+        document.getElementById('c4Submit').onclick = () => goTo('treatment');
+    }
+
+    let selectedTx = null;
+    function selectTx(id) { selectedTx = id; document.querySelectorAll('#txOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('txSubmit').disabled = false; }
+    function submitTx() {
+        addScore(25);
+        goTo('outcome');
+    }
+
+    function goTo(id) { state.stage = id; document.getElementById('stageContainer').innerHTML = stages[id].render(); window.scrollTo(0,0); }
+    document.addEventListener('DOMContentLoaded', () => goTo('setup'));
+    </script>
 </body>
 </html>

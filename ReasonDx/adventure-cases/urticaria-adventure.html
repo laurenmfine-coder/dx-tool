@@ -4,34 +4,309 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Itchy Mystery | ReasonDx Adventure</title>
-    <style>:root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#FB7185;--success:#10B981;--warning:#F59E0B;--danger:#DC2626}*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}.header{background:linear-gradient(135deg,#E11D48,#FB7185);padding:12px 20px;position:sticky;top:0;z-index:100}.header-row{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}.diff-toggle{display:flex;background:rgba(0,0,0,.3);border-radius:8px}.diff-btn{padding:6px 12px;font-size:.75rem;cursor:pointer;border:none;background:0 0;color:rgba(255,255,255,.7);font-weight:600}.diff-btn.active{background:rgba(255,255,255,.2);color:#fff}.stat{text-align:center;background:rgba(0,0,0,.2);padding:6px 14px;border-radius:8px}.stat-value{font-size:1.1rem;font-weight:700;font-family:monospace}.stat-label{font-size:.6rem;opacity:.8}.main{max-width:900px;margin:0 auto;padding:24px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px}.card-header{padding:20px 24px;border-bottom:1px solid var(--border)}.card-phase{font-size:.75rem;color:var(--accent);text-transform:uppercase}.card-title{font-size:1.5rem;font-weight:700}.card-body{padding:24px}.narrative{background:rgba(251,113,133,.1);border-left:4px solid var(--accent);padding:20px;border-radius:0 12px 12px 0;margin-bottom:20px}.narrative .hl{background:rgba(251,113,133,.3);padding:2px 6px;border-radius:4px}.setup-screen{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center}.start-btn{background:var(--accent);color:#fff;border:none;padding:16px 48px;border-radius:12px;font-size:1.1rem;font-weight:700;cursor:pointer}.hint{background:rgba(59,130,246,.15);padding:12px 16px;border-radius:8px;margin-bottom:16px;color:#93C5FD}.radio-options{display:flex;flex-direction:column;gap:10px}.radio-option{display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(0,0,0,.2);border:2px solid var(--border);border-radius:10px;cursor:pointer}.radio-option.selected{border-color:var(--accent);background:rgba(251,113,133,.15)}.radio-option.correct{border-color:var(--success);background:rgba(16,185,129,.15)}.radio-option.incorrect{border-color:var(--danger);background:rgba(220,38,38,.15)}.radio-circle{width:22px;height:22px;border:2px solid var(--border);border-radius:50%}.radio-option.selected .radio-circle{border-color:var(--accent);background:radial-gradient(circle,var(--accent) 40%,transparent 40%)}.feedback{padding:20px;border-radius:12px;margin:20px 0}.feedback.excellent{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3)}.feedback.incorrect{background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.3)}.btn{padding:14px 28px;border-radius:10px;font-weight:600;cursor:pointer;border:none}.btn-primary{background:var(--accent);color:#fff}.btn:disabled{opacity:.5}.btn-row{display:flex;gap:12px;margin-top:24px}.btn-link{background:0 0;border:2px solid var(--border);color:var(--text)}.vitals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:12px;margin:20px 0}.vital{background:rgba(0,0,0,.2);padding:12px;border-radius:10px;text-align:center}.vital-label{font-size:.7rem;color:var(--muted)}.vital-value{font-size:1.3rem;font-weight:700;font-family:monospace}.lab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:16px 0}.lab-item{display:flex;justify-content:space-between;padding:8px 12px;background:rgba(0,0,0,.2);border-radius:6px}.lab-name{color:var(--muted)}.lab-value{font-family:monospace;font-weight:600}.score-summary{background:rgba(0,0,0,.2);border-radius:12px;padding:24px;margin:24px auto;max-width:600px}.score-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}.pearls-box{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:20px;margin-top:20px}.pearls-title{font-weight:700;color:var(--success);margin-bottom:12px}.pearl-item{padding:8px 0;border-bottom:1px solid rgba(16,185,129,.2);font-size:.95rem}.cross-link{background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);border-radius:8px;padding:12px 16px;margin-top:12px}.cross-link a{color:#C4B5FD;text-decoration:none}.progress-bar{background:rgba(255,255,255,.1);border-radius:10px;height:8px;margin:20px 0}.progress-fill{background:var(--accent);height:100%}.question-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}.question-number{background:var(--accent);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}</style>
+    <style>
+        :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #F97316; --success: #10B981; --warning: #F59E0B; --danger: #DC2626; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #EA580C 0%, #F97316 100%); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; }
+        .header-stats { display: flex; gap: 12px; }
+        .stat { background: rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 8px; text-align: center; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        .difficulty-badge { padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; background: #10B981; }
+        .main { max-width: 1000px; margin: 0 auto; padding: 24px; }
+        .setup-screen, .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; }
+        .setup-screen { padding: 40px; text-align: center; }
+        .setup-screen h1 { font-size: 2rem; margin-bottom: 8px; }
+        .setup-screen .subtitle { color: var(--muted); margin-bottom: 32px; }
+        .start-btn { background: var(--accent); color: white; border: none; padding: 16px 48px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; margin-top: 24px; }
+        .card { margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(249,115,22,0.1), rgba(234,88,12,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; line-height: 1.8; }
+        .narrative .hl { background: rgba(249,115,22,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        .question-section { margin-bottom: 32px; }
+        .question-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .question-number { background: var(--accent); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .question-text { font-size: 1.1rem; font-weight: 600; }
+        .question-hint { color: var(--muted); font-size: 0.9rem; margin-bottom: 16px; }
+        .radio-options { display: flex; flex-direction: column; gap: 10px; }
+        .radio-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .radio-option:hover { border-color: var(--accent); }
+        .radio-option.selected { border-color: var(--accent); background: rgba(249,115,22,0.15); }
+        .radio-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .radio-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .radio-circle { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; }
+        .radio-option.selected .radio-circle { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 40%, transparent 40%); }
+        .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+        .checkbox-item { display: flex; align-items: center; gap: 10px; padding: 12px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .checkbox-item:hover { border-color: var(--accent); }
+        .checkbox-item.selected { border-color: var(--accent); background: rgba(249,115,22,0.15); }
+        .checkbox-item.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .checkbox-item.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .checkbox-box { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .checkbox-item.selected .checkbox-box { background: var(--accent); border-color: var(--accent); }
+        .checkbox-item.selected .checkbox-box::after { content: '✓'; color: white; font-weight: bold; }
+        .feedback { padding: 20px; border-radius: 12px; margin: 20px 0; }
+        .feedback.excellent { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .feedback.acceptable { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .feedback-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .feedback-icon { font-size: 1.5rem; }
+        .feedback-title { font-weight: 700; font-size: 1.1rem; }
+        .feedback-text { color: var(--muted); line-height: 1.7; }
+        .feedback-text strong { color: var(--text); }
+        .alert { padding: 16px 20px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
+        .alert.warning { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .alert.success { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .alert-icon { font-size: 1.5rem; }
+        .alert-content { flex: 1; }
+        .alert-title { font-weight: 600; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; color: var(--muted); }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn-secondary { background: transparent; border: 2px solid var(--border); color: var(--text); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-row { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+        .outcome { text-align: center; padding: 40px 20px; }
+        .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
+        .outcome-title { font-size: 2rem; font-weight: 700; margin-bottom: 8px; color: var(--success); }
+        .outcome-desc { color: var(--muted); max-width: 600px; margin: 0 auto 24px; }
+        .score-summary { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 24px; margin: 24px auto; max-width: 500px; }
+        .score-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .score-row:last-child { border-bottom: none; }
+        .patient-panel { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 16px; margin-bottom: 20px; }
+        .patient-panel-title { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; }
+        .patient-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
+        .patient-info-label { font-size: 0.7rem; color: var(--muted); }
+        .patient-info-value { font-weight: 600; }
+        .step-box { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .step-title { color: var(--accent); font-weight: 600; margin-bottom: 12px; }
+        .step-content { color: var(--muted); font-size: 0.95rem; }
+    </style>
 </head>
 <body>
-    <header class="header"><div class="header-row"><div style="font-weight:600">🔴 The Itchy Mystery</div><div style="display:flex;gap:12px;align-items:center"><div class="diff-toggle"><button class="diff-btn active" onclick="setDiff('easy')">Easy</button><button class="diff-btn" onclick="setDiff('int')">Intermediate</button><button class="diff-btn" onclick="setDiff('adv')">Advanced</button></div><div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Points</div></div></div></div></header>
-    <main class="main"><div id="app"></div></main>
-<script>
-const S={stage:'setup',score:0,max:0,diff:'easy',q:0,total:8};
-const C={easy:{age:'32F',wt:'65kg',hx:'Hives x3 months, daily, no trigger identified',exam:'Wheals trunk/extremities, dermographism+',vitals:{HR:'78',BP:'118/72'},labs:{CBC:'Normal',TSH:'2.1',CMP:'Normal'}},int:{age:'45M',wt:'82kg',hx:'Chronic hives x8 months, partially responsive to cetirizine 10mg',exam:'Widespread wheals, no angioedema',vitals:{HR:'82',BP:'132/78'},labs:{ANA:'Neg',TSH:'1.8',Tryptase:'8'}},adv:{age:'28F',wt:'58kg',hx:'Hives after exercise and hot showers, resolves in 30min',exam:'Small punctate wheals after exercise test',vitals:{HR:'92',BP:'108/68'},labs:{Methacholine:'Positive',Tryptase:'Normal'}}};
-const Q=[
-{t:'Acute vs Chronic',q:'Urticaria >6 weeks. Classification?',h:'Duration determines workup',o:[{id:'a',txt:'Chronic urticaria (spontaneous or inducible)',c:1,p:100},{id:'b',txt:'Acute urticaria',c:0,p:0},{id:'c',txt:'Allergic urticaria',c:0,p:30}],fb:{1:'<b>Correct!</b> Chronic: >6 weeks. Usually NOT allergic. 80-90% chronic spontaneous urticaria (CSU) has no identifiable trigger.',0:'<b>Definition:</b> Acute <6wks, Chronic >6wks. Most chronic is idiopathic/autoimmune.'}},
-{t:'First-Line Treatment',q:'First-line treatment for chronic urticaria?',h:'Guidelines recommend this class',o:[{id:'a',txt:'Second-generation H1 antihistamine (cetirizine, loratadine, etc)',c:1,p:100},{id:'b',txt:'First-generation antihistamine (diphenhydramine)',c:0,p:30},{id:'c',txt:'Systemic steroids',c:0,p:10}],fb:{1:'<b>Correct!</b> 2nd-gen H1 antihistamine first-line. Less sedating, once-daily dosing. Can uptitrate to 4x standard dose.',0:'<b>First-line:</b> 2nd-gen antihistamines. Avoid 1st-gen due to sedation/anticholinergic effects.'}},
-{t:'Antihistamine Dosing',q:'Standard dose cetirizine not working. Next step?',h:'Guidelines allow dose escalation',o:[{id:'a',txt:'Increase to 2-4x standard dose (up to 40mg cetirizine)',c:1,p:100},{id:'b',txt:'Add oral steroids',c:0,p:20},{id:'c',txt:'Switch to first-gen antihistamine',c:0,p:10}],fb:{1:'<b>Correct!</b> Uptitrate 2nd-gen antihistamine up to 4x before adding other agents. Well-tolerated at higher doses.',0:'<b>Uptitrate:</b> Up to 4x dose before adding omalizumab or other agents.'}},
-{t:'Omalizumab Indication',q:'Refractory to high-dose antihistamines. Next step?',h:'Anti-IgE therapy',o:[{id:'a',txt:'Omalizumab (anti-IgE, approved for CSU)',c:1,p:100},{id:'b',txt:'Long-term steroids',c:0,p:10},{id:'c',txt:'Immunosuppressants first',c:0,p:30}],fb:{1:'<b>Correct!</b> Omalizumab 150-300mg q4wks for refractory CSU. 65-90% response rate. Avoid chronic steroids.',0:'<b>Omalizumab:</b> FDA-approved for CSU refractory to antihistamines.'}},
-{t:'Inducible Urticaria',q:'Hives only with exercise/heat that resolve in 30 min. Type?',h:'Physical trigger',o:[{id:'a',txt:'Cholinergic urticaria (inducible)',c:1,p:100},{id:'b',txt:'Chronic spontaneous urticaria',c:0,p:30},{id:'c',txt:'Food allergy',c:0,p:10}],fb:{1:'<b>Correct!</b> Cholinergic: Small punctate wheals triggered by heat, exercise, stress. Resolves quickly. Treat with antihistamines before triggers.',0:'<b>Cholinergic:</b> Heat/exercise/emotion trigger. Small wheals. Pre-treat with antihistamines.'}},
-{t:'Workup Approach',q:'Extensive allergy testing in chronic urticaria?',h:'Low yield in CSU',o:[{id:'a',txt:'NOT recommended routinely (rarely identifies cause)',c:1,p:100},{id:'b',txt:'Test for all foods',c:0,p:0},{id:'c',txt:'Skin prick panel essential',c:0,p:20}],fb:{1:'<b>Correct!</b> Chronic urticaria rarely allergic. Extensive testing low yield. Consider: CBC, TSH, CMP. Skin biopsy if urticarial vasculitis suspected.',0:'<b>Limited workup:</b> CBC, TSH, CMP. Avoid extensive allergy panels - low yield.'}},
-{t:'Red Flags',q:'Wheals lasting >24 hrs with bruising. Concern?',h:'Not typical urticaria',o:[{id:'a',txt:'Urticarial vasculitis (needs biopsy)',c:1,p:100},{id:'b',txt:'Severe CSU',c:0,p:30},{id:'c',txt:'Drug reaction',c:0,p:20}],fb:{1:'<b>Correct!</b> Red flags: Wheals >24hrs, painful (not itchy), bruising/purpura, systemic symptoms. Biopsy for leukocytoclastic vasculitis.',0:'<b>Vasculitis:</b> Painful, >24hrs, bruising. Different from typical urticaria.'}},
-{t:'UAS7 Score',q:'Urticaria Activity Score measures?',h:'Disease monitoring tool',o:[{id:'a',txt:'Daily wheal count + itch severity over 7 days (max 42)',c:1,p:100},{id:'b',txt:'Tryptase level',c:0,p:10},{id:'c',txt:'Antihistamine doses needed',c:0,p:20}],fb:{1:'<b>Correct!</b> UAS7: Daily wheals (0-3) + itch (0-3) x 7 days. Max 42. Well-controlled <6, mild 7-15, moderate 16-27, severe 28-42.',0:'<b>UAS7:</b> Patient-reported. Track disease activity and treatment response.'}}
-];
-let sel=null;
-function setDiff(d){S.diff=d;document.querySelectorAll('.diff-btn').forEach((b,i)=>b.classList.toggle('active',['easy','int','adv'][i]===d));if(S.stage!=='setup'){S.stage='setup';S.score=0;S.max=0;S.q=0;document.getElementById('score').textContent='0';}render();}
-function addPts(p,m){S.score+=p;S.max+=m;document.getElementById('score').textContent=S.score;}
-function pick(id){sel=id;document.querySelectorAll('.radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id));document.getElementById('sub').disabled=false;}
-function submit(){const q=Q[S.q-1];const opt=q.o.find(o=>o.id===sel);addPts(opt.p||0,100);document.querySelectorAll('.radio-option').forEach(o=>{const op=q.o.find(x=>x.id===o.dataset.id);if(op&&op.c)o.classList.add('correct');else if(o.dataset.id===sel)o.classList.add('incorrect');});document.getElementById('fb').innerHTML='<div class="feedback '+(opt&&opt.c?'excellent':'incorrect')+'">'+q.fb[opt&&opt.c?1:0]+'</div>';document.getElementById('sub').textContent=S.q<S.total?'Next':'Results';document.getElementById('sub').onclick=next;}
-function next(){if(S.q<S.total){S.q++;sel=null;render();}else{S.stage='outcome';render();}}
-function start(){S.q=1;S.stage='question';render();}
-function go(s){S.stage=s;render();}
-function render(){const c=C[S.diff];if(S.stage==='setup'){document.getElementById('app').innerHTML='<div class="setup-screen"><h1>🔴 The Itchy Mystery</h1><p style="color:var(--muted);margin-bottom:32px">Urticaria: Acute vs chronic, antihistamine dosing, omalizumab, inducible types</p><button class="start-btn" onclick="go(\'pres\')">Begin Case</button></div>';}else if(S.stage==='pres'){document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Presentation</div><div class="card-title">🩺 Dermatologic Assessment</div></div><div class="card-body"><div class="narrative"><span class="hl">'+c.age+'</span> ('+c.wt+')<br><b>Hx:</b> '+c.hx+'<br><b>Exam:</b> '+c.exam+'</div><div class="vitals-grid">'+Object.entries(c.vitals).map(function(e){return'<div class="vital"><div class="vital-label">'+e[0]+'</div><div class="vital-value">'+e[1]+'</div></div>';}).join('')+'</div><div class="lab-grid">'+Object.entries(c.labs).map(function(e){return'<div class="lab-item"><span class="lab-name">'+e[0]+'</span><span class="lab-value">'+e[1]+'</span></div>';}).join('')+'</div><div class="btn-row"><button class="btn btn-primary" onclick="start()">Begin Assessment</button></div></div></div>';}else if(S.stage==='question'){var q=Q[S.q-1];document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Q'+S.q+'/'+S.total+'</div><div class="card-title">'+q.t+'</div></div><div class="card-body"><div class="progress-bar"><div class="progress-fill" style="width:'+(S.q/S.total*100)+'%"></div></div><div class="question-header"><div class="question-number">'+S.q+'</div><div style="font-weight:600">'+q.q+'</div></div><div class="hint">'+q.h+'</div><div class="radio-options">'+q.o.map(function(o){return'<div class="radio-option" data-id="'+o.id+'" onclick="pick(\''+o.id+'\')"><div class="radio-circle"></div><div><b>'+o.txt+'</b></div></div>';}).join('')+'</div><div id="fb"></div><div class="btn-row"><button class="btn btn-primary" id="sub" onclick="submit()" disabled>Submit</button></div></div></div>';}else{var pct=S.max>0?Math.round(S.score/S.max*100):0;document.getElementById('app').innerHTML='<div class="card"><div class="card-body"><div style="text-align:center;padding:40px"><div style="font-size:4rem">'+(pct>=70?'🎉':'📚')+'</div><div style="font-size:2rem;font-weight:700;color:'+(pct>=70?'var(--success)':'var(--warning)')+'">'+(pct>=70?'Complete!':'Review')+'</div></div><div class="score-summary"><div class="score-row"><span>Score</span><span>'+S.score+'/'+S.max+' ('+pct+'%)</span></div></div><div class="pearls-box"><div class="pearls-title">Urticaria Pearls</div><div class="pearl-item"><b>Chronic:</b> >6 weeks, usually NOT allergic</div><div class="pearl-item"><b>First-line:</b> 2nd-gen antihistamine, up to 4x dose</div><div class="pearl-item"><b>Refractory:</b> Omalizumab (avoid chronic steroids)</div><div class="pearl-item"><b>Cholinergic:</b> Small wheals with heat/exercise</div><div class="pearl-item"><b>Red flags:</b> >24hr, painful, bruising = vasculitis</div></div><div class="cross-link"><a href="../mechanism/allergy-immunology.html">MechanismDx: Allergy</a></div><div class="btn-row" style="justify-content:center;margin-top:30px"><button class="btn btn-primary" onclick="location.reload()">Retry</button><button class="btn btn-link" onclick="location.href=\'adventure-hub.html\'">Back</button></div></div></div>';}}
-document.addEventListener('DOMContentLoaded',render);
-</script>
+    <header class="header"><div class="header-row"><div class="header-title">🔴 The Itchy Mystery</div><div class="header-stats"><span class="difficulty-badge" id="difficultyBadge">Easy</span><div class="stat"><div class="stat-value" id="scoreDisplay">0</div><div class="stat-label">Points</div></div></div></div></header>
+    <main class="main"><div id="stageContainer"></div></main>
+    <script>
+    const state = { stage:'setup', score:0 };
+
+    const workupTests = [
+        { id: 'cbc', text: 'CBC with differential', correct: true },
+        { id: 'tsh', text: 'TSH', correct: true },
+        { id: 'crp', text: 'CRP/ESR', correct: true },
+        { id: 'allergy', text: 'Allergy skin testing', correct: false, feedback: 'Not indicated in chronic spontaneous urticaria' },
+        { id: 'ige', text: 'Total IgE', correct: false, feedback: 'Not routinely needed' },
+        { id: 'ana', text: 'ANA', correct: false, feedback: 'Only if systemic symptoms suggest autoimmune disease' },
+        { id: 'food_panel', text: 'Food allergy panel', correct: false, feedback: 'Food rarely causes chronic urticaria' }
+    ];
+
+    const stepwiseOptions = [
+        { id: 'updose', text: 'Increase antihistamine to 2-4x standard dose', correct: true },
+        { id: 'add_h2', text: 'Add H2 blocker (famotidine)', correct: false, feedback: 'Limited evidence; not first-line step-up' },
+        { id: 'steroids', text: 'Start daily prednisone', correct: false, feedback: 'Avoid long-term steroids for chronic urticaria' },
+        { id: 'omalizumab', text: 'Add omalizumab now', correct: false, feedback: 'Omalizumab after failing high-dose antihistamines' },
+        { id: 'switch_ah', text: 'Switch to a different antihistamine', correct: false, feedback: 'Updosing same antihistamine is preferred' }
+    ];
+
+    function addScore(pts) { state.score += pts; document.getElementById('scoreDisplay').textContent = state.score; }
+
+    const stages = {
+        setup: { render: () => `
+            <div class="setup-screen">
+                <h1>🔴 The Itchy Mystery</h1>
+                <p class="subtitle">Chronic urticaria evaluation and management</p>
+                <button class="start-btn" onclick="goTo('referral')">Begin Case →</button>
+            </div>`
+        },
+        referral: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Allergy Clinic</div><div class="card-title">📋 Chronic Hives Referral</div></div>
+                <div class="card-body">
+                    <div class="narrative">A <span class="hl">34-year-old female</span> presents with <span class="hl">daily hives for 3 months</span>. The wheals appear randomly on her trunk and extremities, are <span class="hl">intensely itchy</span>, and each individual wheal fades within <span class="hl">24 hours</span> without bruising.<br><br>She has tried OTC cetirizine 10mg daily with <span class="hl">minimal improvement</span>. She has <span class="hl">no angioedema</span>, no known triggers, no new medications, and no systemic symptoms. She thought it might be a food allergy but eliminating various foods hasn't helped.<br><br>Her primary care ordered a "food allergy panel" which showed <span class="hl">low-level positives</span> to wheat, milk, and eggs.</div>
+                    <div class="patient-panel">
+                        <div class="patient-panel-title">Patient Information</div>
+                        <div class="patient-info-grid">
+                            <div><div class="patient-info-label">Age/Sex</div><div class="patient-info-value">34 y/o Female</div></div>
+                            <div><div class="patient-info-label">Duration</div><div class="patient-info-value">3 months (daily)</div></div>
+                            <div><div class="patient-info-label">Angioedema</div><div class="patient-info-value">None</div></div>
+                            <div><div class="patient-info-label">Current Rx</div><div class="patient-info-value">Cetirizine 10mg daily</div></div>
+                            <div><div class="patient-info-label">Triggers</div><div class="patient-info-value">None identified</div></div>
+                            <div><div class="patient-info-label">Wheal Duration</div><div class="patient-info-value">&lt;24 hours each</div></div>
+                        </div>
+                    </div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('classify')">Classify Urticaria →</button></div>
+                </div>
+            </div>`
+        },
+        classify: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Classification</div><div class="card-title">📊 Urticaria Type</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">1</div><div class="question-text">What type of urticaria does this patient have?</div></div>
+                        <div class="radio-options" id="classOpts">
+                            <div class="radio-option" data-id="acute" onclick="selectClass('acute')"><div class="radio-circle"></div><div><strong>Acute Urticaria</strong><br><small style="color:var(--muted)">&lt;6 weeks duration, often allergic/infectious trigger</small></div></div>
+                            <div class="radio-option" data-id="csu" onclick="selectClass('csu')"><div class="radio-circle"></div><div><strong>Chronic Spontaneous Urticaria (CSU)</strong><br><small style="color:var(--muted)">≥6 weeks, no identifiable trigger</small></div></div>
+                            <div class="radio-option" data-id="ciu" onclick="selectClass('ciu')"><div class="radio-circle"></div><div><strong>Chronic Inducible Urticaria</strong><br><small style="color:var(--muted)">Triggered by physical stimuli (cold, pressure, etc)</small></div></div>
+                            <div class="radio-option" data-id="vasculitis" onclick="selectClass('vasculitis')"><div class="radio-circle"></div><div><strong>Urticarial Vasculitis</strong><br><small style="color:var(--muted)">Wheals &gt;24h, painful, bruising</small></div></div>
+                        </div>
+                    </div>
+                    <div id="classFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="classSubmit" onclick="submitClass()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        workup: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Workup</div><div class="card-title">🔬 Limited Evaluation</div></div>
+                <div class="card-body">
+                    <div class="alert warning"><span class="alert-icon">📋</span><div class="alert-content"><div class="alert-title">CSU Workup Principles</div><div class="alert-desc">Extensive testing rarely identifies a cause. Guidelines recommend LIMITED workup focused on ruling out underlying conditions.</div></div></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">2</div><div class="question-text">Which tests are appropriate for CSU workup?</div></div>
+                        <p class="question-hint">Select tests recommended by guidelines. Avoid unnecessary testing.</p>
+                        <div class="checkbox-grid" id="workupOpts">${workupTests.map(t=>`<div class="checkbox-item" data-id="${t.id}" data-correct="${t.correct}" onclick="toggleWorkup('${t.id}')"><div class="checkbox-box"></div><span>${t.text}</span></div>`).join('')}</div>
+                    </div>
+                    <div id="workupFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitWorkup()">Submit →</button></div>
+                </div>
+            </div>`
+        },
+        treatment: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Treatment Step 1</div><div class="card-title">💊 First-Line Failed</div></div>
+                <div class="card-body">
+                    <div class="step-box">
+                        <div class="step-title">International Guidelines - CSU Treatment Ladder</div>
+                        <div class="step-content">
+                            <strong>Step 1:</strong> 2nd-gen antihistamine (standard dose)<br>
+                            <strong>Step 2:</strong> Increase antihistamine up to 4x dose<br>
+                            <strong>Step 3:</strong> Add omalizumab<br>
+                            <strong>Step 4:</strong> Add cyclosporine
+                        </div>
+                    </div>
+                    <div class="alert warning"><span class="alert-icon">⚠️</span><div class="alert-content"><div class="alert-title">Current Status</div><div class="alert-desc">Patient taking cetirizine 10mg daily (standard dose) with poor control. What's next?</div></div></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">3</div><div class="question-text">What is the appropriate next step?</div></div>
+                        <div class="radio-options" id="stepOpts">${stepwiseOptions.map(o=>`<div class="radio-option" data-id="${o.id}" onclick="selectStep('${o.id}')"><div class="radio-circle"></div><span>${o.text}</span></div>`).join('')}</div>
+                    </div>
+                    <div id="stepFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="stepSubmit" onclick="submitStep()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        updose_result: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">4 Weeks Later</div><div class="card-title">📈 Response to Updosing</div></div>
+                <div class="card-body">
+                    <div class="narrative">You increased cetirizine to <span class="hl">20mg twice daily</span> (4x standard dose). After 4 weeks, the patient reports <span class="hl">~50% improvement</span> but still has daily breakthrough hives affecting her quality of life and sleep.</div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">4</div><div class="question-text">High-dose antihistamines partially effective. What now?</div></div>
+                        <div class="radio-options" id="nextOpts">
+                            <div class="radio-option" data-id="omalizumab" onclick="selectNext('omalizumab')"><div class="radio-circle"></div><div><strong>Add omalizumab (Xolair)</strong><br><small style="color:var(--muted)">Anti-IgE; FDA-approved for CSU</small></div></div>
+                            <div class="radio-option" data-id="cyclosporine" onclick="selectNext('cyclosporine')"><div class="radio-circle"></div><div><strong>Add cyclosporine</strong><br><small style="color:var(--muted)">Immunosuppressant</small></div></div>
+                            <div class="radio-option" data-id="prednisone" onclick="selectNext('prednisone')"><div class="radio-circle"></div><div><strong>Start daily prednisone</strong><br><small style="color:var(--muted)">Systemic steroid</small></div></div>
+                            <div class="radio-option" data-id="more_ah" onclick="selectNext('more_ah')"><div class="radio-circle"></div><div><strong>Add more antihistamines</strong><br><small style="color:var(--muted)">Try different combination</small></div></div>
+                        </div>
+                    </div>
+                    <div id="nextFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="nextSubmit" onclick="submitNext()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        outcome: { render: () => `
+            <div class="card"><div class="card-body">
+                <div class="outcome">
+                    <div class="outcome-icon">🎉</div>
+                    <div class="outcome-title">CSU Controlled!</div>
+                    <div class="outcome-desc">After starting omalizumab 300mg monthly, the patient's hives resolved within 4 weeks. She remains on high-dose antihistamines plus omalizumab with excellent control and improved quality of life.</div>
+                </div>
+                <div class="score-summary">
+                    <h3 style="margin-bottom:16px">Performance</h3>
+                    <div class="score-row"><span>Classification</span><span>${state.classScore||0}/100</span></div>
+                    <div class="score-row"><span>Appropriate Workup</span><span>${state.workupScore||0}/100</span></div>
+                    <div class="score-row"><span>Stepwise Treatment</span><span>${state.stepScore||0}/100</span></div>
+                    <div class="score-row"><span>Add-on Therapy</span><span>${state.nextScore||0}/100</span></div>
+                    <div class="score-row" style="border-top:2px solid var(--border);padding-top:12px"><strong>Total</strong><strong>${state.score}</strong></div>
+                </div>
+                <div class="feedback excellent"><div class="feedback-header"><span class="feedback-icon">💡</span><span class="feedback-title">Chronic Urticaria Pearls</span></div><div class="feedback-text">• <strong>CSU definition:</strong> Daily/near-daily hives ≥6 weeks, no trigger<br>• <strong>Wheals &lt;24h, no bruising</strong> = urticaria (not vasculitis)<br>• <strong>Limited workup:</strong> CBC, TSH, CRP - avoid extensive panels<br>• <strong>Food allergy testing NOT indicated</strong> - false positives cause confusion<br>• <strong>Step 1:</strong> Standard dose 2nd-gen antihistamine<br>• <strong>Step 2:</strong> UPDOSE to 2-4x (e.g., cetirizine 40mg/day)<br>• <strong>Step 3:</strong> Add omalizumab (works regardless of IgE level in CSU)<br>• <strong>Avoid chronic steroids</strong> - too many side effects for chronic use</div></div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Play Again</button><button class="btn btn-secondary" onclick="location.href='adventure-hub.html'">← Adventures</button></div>
+            </div></div>`
+        }
+    };
+
+    let selectedClass = null;
+    function selectClass(id) { selectedClass = id; document.querySelectorAll('#classOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('classSubmit').disabled = false; }
+    function submitClass() {
+        const correct = 'csu';
+        document.querySelectorAll('#classOpts .radio-option').forEach(o => {
+            if (o.dataset.id === correct) o.classList.add('correct');
+            else if (o.dataset.id === selectedClass) o.classList.add('incorrect');
+        });
+        state.classScore = selectedClass === correct ? 100 : 40;
+        addScore(selectedClass === correct ? 40 : 15);
+        document.getElementById('classFeedback').innerHTML = `<div class="feedback ${selectedClass===correct?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedClass===correct?'✅':'📚'}</span><span class="feedback-title">${selectedClass===correct?'Correct!':'Review Classification'}</span></div><div class="feedback-text"><strong>This is Chronic Spontaneous Urticaria (CSU):</strong><br>• Duration >6 weeks (she has 3 months) ✓<br>• No identifiable trigger ✓<br>• Individual wheals fade <24 hours ✓<br>• No bruising (rules out vasculitis) ✓<br>• Not triggered by physical stimuli (rules out inducible)</div></div>`;
+        document.getElementById('classSubmit').textContent = 'Continue →';
+        document.getElementById('classSubmit').onclick = () => goTo('workup');
+    }
+
+    let selectedWorkup = new Set();
+    function toggleWorkup(id) {
+        const el = document.querySelector(`#workupOpts .checkbox-item[data-id="${id}"]`);
+        if(selectedWorkup.has(id)) { selectedWorkup.delete(id); el.classList.remove('selected'); }
+        else { selectedWorkup.add(id); el.classList.add('selected'); }
+    }
+    function submitWorkup() {
+        let correct = 0, incorrect = 0;
+        workupTests.forEach(t => {
+            const el = document.querySelector(`#workupOpts .checkbox-item[data-id="${t.id}"]`);
+            const sel = selectedWorkup.has(t.id);
+            if (t.correct && sel) { el.classList.add('correct'); correct++; }
+            else if (!t.correct && sel) { el.classList.add('incorrect'); incorrect++; }
+        });
+        const score = Math.max(0, Math.round((correct * 33) - (incorrect * 20)));
+        state.workupScore = Math.min(100, score);
+        addScore(Math.round(score / 2.5));
+        document.getElementById('workupFeedback').innerHTML = `<div class="feedback ${score>=60?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${score>=60?'✅':'📚'}</span><span class="feedback-title">CSU Workup</span></div><div class="feedback-text"><strong>Recommended:</strong> CBC, TSH, CRP/ESR<br><strong>NOT recommended:</strong><br>• Allergy testing - CSU is not allergic<br>• Food panels - cause confusion with false positives<br>• Extensive autoimmune workup - only if systemic symptoms</div></div>`;
+        document.querySelector('#workupFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('treatment')">Plan Treatment →</button>`;
+    }
+
+    let selectedStep = null;
+    function selectStep(id) { selectedStep = id; document.querySelectorAll('#stepOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('stepSubmit').disabled = false; }
+    function submitStep() {
+        const correct = 'updose';
+        document.querySelectorAll('#stepOpts .radio-option').forEach(o => {
+            if (o.dataset.id === correct) o.classList.add('correct');
+            else if (o.dataset.id === selectedStep) o.classList.add('incorrect');
+        });
+        state.stepScore = selectedStep === correct ? 100 : 40;
+        addScore(selectedStep === correct ? 40 : 15);
+        const opt = stepwiseOptions.find(o => o.id === selectedStep);
+        document.getElementById('stepFeedback').innerHTML = `<div class="feedback ${selectedStep===correct?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedStep===correct?'✅':'📚'}</span><span class="feedback-title">${selectedStep===correct?'Correct!':'Review Guidelines'}</span></div><div class="feedback-text">${selectedStep===correct?'<strong>Updosing antihistamines to 2-4x</strong> is the correct next step per international guidelines. This is safe and effective in ~60-70% of patients who fail standard dosing.':opt.feedback}</div></div>`;
+        document.getElementById('stepSubmit').textContent = 'Continue →';
+        document.getElementById('stepSubmit').onclick = () => goTo('updose_result');
+    }
+
+    let selectedNext = null;
+    function selectNext(id) { selectedNext = id; document.querySelectorAll('#nextOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('nextSubmit').disabled = false; }
+    function submitNext() {
+        const correct = 'omalizumab';
+        document.querySelectorAll('#nextOpts .radio-option').forEach(o => {
+            if (o.dataset.id === correct) o.classList.add('correct');
+            else if (o.dataset.id === selectedNext) o.classList.add('incorrect');
+        });
+        state.nextScore = selectedNext === correct ? 100 : 40;
+        addScore(selectedNext === correct ? 40 : 15);
+        document.getElementById('nextFeedback').innerHTML = `<div class="feedback ${selectedNext===correct?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedNext===correct?'✅':'📚'}</span><span class="feedback-title">${selectedNext===correct?'Correct!':'Review Step 3'}</span></div><div class="feedback-text"><strong>Omalizumab is Step 3:</strong><br>• FDA-approved for CSU refractory to antihistamines<br>• Works in CSU regardless of IgE level (different from asthma)<br>• 300mg monthly injection<br>• ~70% response rate<br><br>Cyclosporine is Step 4, only after omalizumab fails. Avoid chronic steroids.</div></div>`;
+        document.getElementById('nextSubmit').textContent = 'Complete Case →';
+        document.getElementById('nextSubmit').onclick = () => goTo('outcome');
+    }
+
+    function goTo(id) { state.stage = id; document.getElementById('stageContainer').innerHTML = stages[id].render(); window.scrollTo(0,0); }
+    document.addEventListener('DOMContentLoaded', () => goTo('setup'));
+    </script>
 </body>
 </html>

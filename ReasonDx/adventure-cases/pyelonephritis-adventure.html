@@ -1,5 +1,328 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Kidney Fire | ReasonDx Adventure</title><style>:root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#8B5CF6;--success:#10B981;--warning:#F59E0B;--danger:#DC2626}*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}.header{background:linear-gradient(135deg,#7C3AED,#8B5CF6);padding:12px 20px;position:sticky;top:0;z-index:100}.header-row{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}.diff-toggle{display:flex;background:rgba(0,0,0,.3);border-radius:8px}.diff-btn{padding:6px 12px;font-size:.75rem;cursor:pointer;border:none;background:0 0;color:rgba(255,255,255,.7);font-weight:600}.diff-btn.active{background:rgba(255,255,255,.2);color:#fff}.stat{text-align:center;background:rgba(0,0,0,.2);padding:6px 14px;border-radius:8px}.stat-value{font-size:1.1rem;font-weight:700;font-family:monospace}.stat-label{font-size:.6rem;opacity:.8}.main{max-width:900px;margin:0 auto;padding:24px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px}.card-header{padding:20px 24px;border-bottom:1px solid var(--border)}.card-phase{font-size:.75rem;color:var(--accent);text-transform:uppercase}.card-title{font-size:1.5rem;font-weight:700}.card-body{padding:24px}.narrative{background:rgba(139,92,246,.1);border-left:4px solid var(--accent);padding:20px;border-radius:0 12px 12px 0;margin-bottom:20px}.narrative .hl{background:rgba(139,92,246,.3);padding:2px 6px;border-radius:4px}.setup-screen{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center}.start-btn{background:var(--accent);color:#fff;border:none;padding:16px 48px;border-radius:12px;font-size:1.1rem;font-weight:700;cursor:pointer}.hint{background:rgba(59,130,246,.15);padding:12px 16px;border-radius:8px;margin-bottom:16px;color:#93C5FD}.radio-options{display:flex;flex-direction:column;gap:10px}.radio-option{display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(0,0,0,.2);border:2px solid var(--border);border-radius:10px;cursor:pointer}.radio-option.selected{border-color:var(--accent);background:rgba(139,92,246,.15)}.radio-option.correct{border-color:var(--success);background:rgba(16,185,129,.15)}.radio-option.incorrect{border-color:var(--danger);background:rgba(220,38,38,.15)}.radio-circle{width:22px;height:22px;border:2px solid var(--border);border-radius:50%}.radio-option.selected .radio-circle{border-color:var(--accent);background:radial-gradient(circle,var(--accent) 40%,transparent 40%)}.feedback{padding:20px;border-radius:12px;margin:20px 0}.feedback.excellent{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3)}.feedback.incorrect{background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.3)}.btn{padding:14px 28px;border-radius:10px;font-weight:600;cursor:pointer;border:none}.btn-primary{background:var(--accent);color:#fff}.btn:disabled{opacity:.5}.btn-row{display:flex;gap:12px;margin-top:24px}.btn-link{background:0 0;border:2px solid var(--border);color:var(--text)}.vitals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:12px;margin:20px 0}.vital{background:rgba(0,0,0,.2);padding:12px;border-radius:10px;text-align:center}.vital-label{font-size:.7rem;color:var(--muted)}.vital-value{font-size:1.3rem;font-weight:700;font-family:monospace}.lab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:16px 0}.lab-item{display:flex;justify-content:space-between;padding:8px 12px;background:rgba(0,0,0,.2);border-radius:6px}.lab-name{color:var(--muted)}.lab-value{font-family:monospace;font-weight:600}.score-summary{background:rgba(0,0,0,.2);border-radius:12px;padding:24px;margin:24px auto;max-width:600px}.score-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}.pearls-box{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:20px;margin-top:20px}.pearls-title{font-weight:700;color:var(--success);margin-bottom:12px}.pearl-item{padding:8px 0;border-bottom:1px solid rgba(16,185,129,.2);font-size:.95rem}.cross-link{background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);border-radius:8px;padding:12px 16px;margin-top:12px}.cross-link a{color:#C4B5FD;text-decoration:none}.progress-bar{background:rgba(255,255,255,.1);border-radius:10px;height:8px;margin:20px 0}.progress-fill{background:var(--accent);height:100%;border-radius:10px}.question-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}.question-number{background:var(--accent);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}</style></head><body><header class="header"><div class="header-row"><div style="font-weight:600">🔥 Kidney Fire</div><div style="display:flex;gap:12px;align-items:center"><div class="diff-toggle"><button class="diff-btn active" onclick="setDiff('easy')">Easy</button><button class="diff-btn" onclick="setDiff('int')">Intermediate</button><button class="diff-btn" onclick="setDiff('adv')">Advanced</button></div><div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Points</div></div></div></div></header><main class="main"><div id="app"></div></main>
-<script>
-const S={stage:'setup',score:0,max:0,diff:'easy',q:0,total:8};const C={easy:{age:'28yo F',wt:'62kg',hx:'Dysuria, frequency x3 days, now fever and flank pain, no vomiting',exam:'CVA tenderness right, suprapubic tenderness, no peritoneal signs',vitals:{HR:'98',BP:'118/72',Temp:'101.8°F',SpO2:'98%'},labs:{WBC:'14k',UA:'Pyuria, bacteria, nitrites+','Cr':'0.9'}},int:{age:'45yo F',wt:'75kg',hx:'DM2, recurrent UTIs, now severe flank pain, rigors, vomiting, unable to tolerate PO',exam:'Ill-appearing, CVA tenderness bilateral, dry mucous membranes',vitals:{HR:'112',BP:'98/62',Temp:'103.5°F',SpO2:'95%'},labs:{WBC:'22k',Cr:'1.6',Gluc:'285',Lactate:'2.4',UA:'WBC casts'}},adv:{age:'62yo M',wt:'88kg',hx:'Known kidney stone, now septic with pyonephrosis, obstructed kidney',exam:'Septic shock, CVA tenderness, distended bladder',vitals:{HR:'128',BP:'78/45',Temp:'104°F',SpO2:'91%'},labs:{WBC:'28k',Cr:'3.2',Lactate:'5.8',CT:'Hydronephrosis with stone'}}};
-const Q=[{t:'Diagnosis',q:'How is pyelonephritis diagnosed?',h:'Clinical + lab',o:[{id:'a',txt:'Fever + flank pain + CVA tenderness + pyuria/bacteriuria. Upper tract symptoms distinguish from cystitis.',c:1,p:100},{id:'b',txt:'Dysuria alone',c:0,p:20},{id:'c',txt:'Imaging required',c:0,p:30}],fb:{1:'<b>Correct!</b> Pyelo: Fever, flank/CVA pain, nausea/vomiting + pyuria/bacteriuria. WBC casts specific for upper tract. Culture confirms. Imaging only if complicated or not improving.',0:'<b>Pyelo:</b> Fever + flank pain + CVA tenderness + pyuria.'}},{t:'Uncomplicated vs Complicated',q:'What makes pyelonephritis complicated?',h:'Risk factors',o:[{id:'a',txt:'Male sex, pregnancy, structural abnormality, stones, catheter, immunocompromised, diabetes, recent instrumentation',c:1,p:100},{id:'b',txt:'Any pyelo is complicated',c:0,p:20},{id:'c',txt:'Fever alone',c:0,p:20}],fb:{1:'<b>Correct!</b> Complicated: Male, pregnant, structural (stones, obstruction, reflux), catheter, immunocompromised, DM, hospital-acquired, treatment failure, single kidney.',0:'<b>Complicated:</b> Male, pregnant, structural, catheter, immunocompromised, DM.'}},{t:'Outpatient Treatment',q:'When can pyelonephritis be treated outpatient?',h:'Uncomplicated criteria',o:[{id:'a',txt:'Uncomplicated, tolerating PO, not pregnant, reliable follow-up, no sepsis',c:1,p:100},{id:'b',txt:'Never outpatient',c:0,p:20},{id:'c',txt:'All pyelo outpatient',c:0,p:20}],fb:{1:'<b>Correct!</b> Outpatient if: Uncomplicated, mild-moderate symptoms, tolerating PO, not pregnant, reliable follow-up, no comorbidities. Observe 4-6hr, ensure afebrile trend.',0:'<b>Outpatient:</b> Uncomplicated, tolerating PO, not pregnant, reliable f/u.'}},{t:'Antibiotic Selection',q:'First-line antibiotics for uncomplicated pyelonephritis?',h:'Outpatient regimen',o:[{id:'a',txt:'Fluoroquinolone (cipro 500 BID x7d or levo 750 daily x5d) or TMP-SMX x14d if susceptible',c:1,p:100},{id:'b',txt:'Nitrofurantoin',c:0,p:30},{id:'c',txt:'Amoxicillin alone',c:0,p:20}],fb:{1:'<b>Correct!</b> Outpatient: Cipro 500mg BID x7d or levo 750mg daily x5d. TMP-SMX x14d if local resistance <20%. Nitrofurantoin does NOT achieve renal tissue levels - for cystitis only!',0:'<b>Outpatient pyelo:</b> FQ x5-7d or TMP-SMX x14d. NOT nitrofurantoin.'}},{t:'Inpatient Antibiotics',q:'Empiric IV antibiotics for complicated pyelonephritis?',h:'Broader coverage',o:[{id:'a',txt:'Ceftriaxone, fluoroquinolone, or pip-tazo depending on severity and resistance patterns',c:1,p:100},{id:'b',txt:'Oral amoxicillin',c:0,p:20},{id:'c',txt:'No antibiotics needed',c:0,p:10}],fb:{1:'<b>Correct!</b> Inpatient: Ceftriaxone 1g daily, cipro IV, or pip-tazo if severe/ESBL risk. Add vanc if gram-positive suspected. Narrow based on culture. Duration 10-14d for complicated.',0:'<b>Inpatient:</b> Ceftriaxone, FQ IV, or pip-tazo. Narrow by culture.'}},{t:'Imaging Indications',q:'When is imaging indicated in pyelonephritis?',h:'Rule out complications',o:[{id:'a',txt:'Complicated pyelo, not improving at 48-72hr, concern for obstruction/abscess, recurrent infections',c:1,p:100},{id:'b',txt:'All cases',c:0,p:30},{id:'c',txt:'Never needed',c:0,p:10}],fb:{1:'<b>Correct!</b> Imaging (CT preferred): Not improving 48-72hr, complicated, concern for abscess/obstruction, recurrent, atypical presentation. Hydronephrosis with infection = urologic emergency.',0:'<b>Imaging:</b> If not improving 48-72hr, complicated, abscess concern.'}},{t:'Pyonephrosis',q:'What is pyonephrosis and how is it managed?',h:'Urologic emergency',o:[{id:'a',txt:'Infected obstructed kidney. Urologic emergency - requires urgent drainage (percutaneous nephrostomy or stent) + antibiotics.',c:1,p:100},{id:'b',txt:'Antibiotics only',c:0,p:20},{id:'c',txt:'Watchful waiting',c:0,p:10}],fb:{1:'<b>Correct!</b> Pyonephrosis: Pus in obstructed collecting system. Mortality high without drainage. Emergent decompression (perc nephrostomy tube or ureteral stent) + IV abx + ICU if septic.',0:'<b>Pyonephrosis:</b> Urgent drainage required. Abx alone insufficient.'}},{t:'Treatment Duration',q:'Duration of antibiotic therapy for pyelonephritis?',h:'Based on complexity',o:[{id:'a',txt:'Uncomplicated: 5-7 days with FQ. Complicated: 10-14 days. Abscess/bacteremia may need longer.',c:1,p:100},{id:'b',txt:'3 days for all',c:0,p:20},{id:'c',txt:'6 weeks always',c:0,p:10}],fb:{1:'<b>Correct!</b> Duration: Uncomplicated - FQ 5-7d (or TMP-SMX 14d). Complicated - 10-14d. Abscess - drain + 4-6wk. Follow clinical response and cultures.',0:'<b>Duration:</b> Uncomplicated 5-7d FQ, complicated 10-14d.'}}];
-let sel=null;function setDiff(d){S.diff=d;document.querySelectorAll('.diff-btn').forEach((b,i)=>b.classList.toggle('active',['easy','int','adv'][i]===d));if(S.stage!=='setup'){S.stage='setup';S.score=0;S.max=0;S.q=0;document.getElementById('score').textContent='0';}render();}function addPts(p,m){S.score+=p;S.max+=m;document.getElementById('score').textContent=S.score;}function pick(id){sel=id;document.querySelectorAll('.radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id));document.getElementById('sub').disabled=false;}function submit(){const q=Q[S.q-1];const opt=q.o.find(o=>o.id===sel);addPts(opt.p||0,100);document.querySelectorAll('.radio-option').forEach(o=>{const op=q.o.find(x=>x.id===o.dataset.id);if(op&&op.c)o.classList.add('correct');else if(o.dataset.id===sel)o.classList.add('incorrect');});document.getElementById('fb').innerHTML='<div class="feedback '+(opt&&opt.c?'excellent':'incorrect')+'">'+q.fb[opt&&opt.c?1:0]+'</div>';document.getElementById('sub').textContent=S.q<S.total?'Next':'Results';document.getElementById('sub').onclick=next;}function next(){if(S.q<S.total){S.q++;sel=null;render();}else{S.stage='outcome';render();}}function start(){S.q=1;S.stage='question';render();}function go(s){S.stage=s;render();}function render(){const c=C[S.diff];if(S.stage==='setup'){document.getElementById('app').innerHTML='<div class="setup-screen"><h1>🔥 Kidney Fire</h1><p style="color:var(--muted);margin-bottom:32px">Pyelonephritis: Diagnosis, antibiotics, imaging, pyonephrosis</p><button class="start-btn" onclick="go(\'pres\')">Begin Case</button></div>';}else if(S.stage==='pres'){document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Presentation</div><div class="card-title">🔥 Flank Pain + Fever</div></div><div class="card-body"><div class="narrative"><span class="hl">'+c.age+'</span> ('+c.wt+')<br><b>Hx:</b> '+c.hx+'<br><b>Exam:</b> '+c.exam+'</div><div class="vitals-grid">'+Object.entries(c.vitals).map(function(e){return'<div class="vital"><div class="vital-label">'+e[0]+'</div><div class="vital-value">'+e[1]+'</div></div>';}).join('')+'</div><div class="lab-grid">'+Object.entries(c.labs).map(function(e){return'<div class="lab-item"><span class="lab-name">'+e[0]+'</span><span class="lab-value">'+e[1]+'</span></div>';}).join('')+'</div><div class="btn-row"><button class="btn btn-primary" onclick="start()">Begin Assessment</button></div></div></div>';}else if(S.stage==='question'){var q=Q[S.q-1];document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Q'+S.q+'/'+S.total+'</div><div class="card-title">'+q.t+'</div></div><div class="card-body"><div class="progress-bar"><div class="progress-fill" style="width:'+(S.q/S.total*100)+'%"></div></div><div class="question-header"><div class="question-number">'+S.q+'</div><div style="font-weight:600">'+q.q+'</div></div><div class="hint">'+q.h+'</div><div class="radio-options">'+q.o.map(function(o){return'<div class="radio-option" data-id="'+o.id+'" onclick="pick(\''+o.id+'\')"><div class="radio-circle"></div><div><b>'+o.txt+'</b></div></div>';}).join('')+'</div><div id="fb"></div><div class="btn-row"><button class="btn btn-primary" id="sub" onclick="submit()" disabled>Submit</button></div></div></div>';}else{var pct=S.max>0?Math.round(S.score/S.max*100):0;document.getElementById('app').innerHTML='<div class="card"><div class="card-body"><div style="text-align:center;padding:40px"><div style="font-size:4rem">'+(pct>=70?'🎉':'📚')+'</div><div style="font-size:2rem;font-weight:700;color:'+(pct>=70?'var(--success)':'var(--warning)')+'">'+(pct>=70?'Complete!':'Review')+'</div></div><div class="score-summary"><div class="score-row"><span>Score</span><span>'+S.score+'/'+S.max+' ('+pct+'%)</span></div></div><div class="pearls-box"><div class="pearls-title">Pyelonephritis Pearls</div><div class="pearl-item"><b>Diagnosis:</b> Fever + flank pain + CVA tenderness + pyuria</div><div class="pearl-item"><b>Complicated:</b> Male, pregnant, structural, catheter, DM</div><div class="pearl-item"><b>Outpatient:</b> FQ 5-7d or TMP-SMX 14d. NOT nitrofurantoin!</div><div class="pearl-item"><b>Inpatient:</b> Ceftriaxone, FQ IV, or pip-tazo</div><div class="pearl-item"><b>Imaging:</b> If not improving 48-72hr or complicated</div><div class="pearl-item"><b>Pyonephrosis:</b> Urgent drainage + antibiotics</div></div><div class="cross-link"><a href="sepsis-adventure-enhanced.html">Related: Sepsis</a></div><div class="btn-row" style="justify-content:center;margin-top:30px"><button class="btn btn-primary" onclick="location.reload()">Retry</button><button class="btn btn-link" onclick="location.href=\'adventure-hub.html\'">Back</button></div></div></div>';}}document.addEventListener('DOMContentLoaded',render);</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Flank Pain | ReasonDx Adventure</title>
+    <style>
+        :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #EC4899; --success: #10B981; --warning: #F59E0B; --danger: #DC2626; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #DB2777 0%, #EC4899 100%); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; }
+        .stat { background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 8px; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        .main { max-width: 1000px; margin: 0 auto; padding: 24px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(236,72,153,0.1), rgba(219,39,119,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; line-height: 1.8; }
+        .narrative .hl { background: rgba(236,72,153,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        .setup-screen { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; }
+        .setup-screen h1 { font-size: 2rem; margin-bottom: 8px; }
+        .setup-screen .subtitle { color: var(--muted); margin-bottom: 32px; }
+        .start-btn { background: var(--accent); color: white; border: none; padding: 16px 48px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+        .question-section { margin-bottom: 32px; }
+        .question-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .question-number { background: var(--accent); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .question-text { font-size: 1.1rem; font-weight: 600; }
+        .radio-options { display: flex; flex-direction: column; gap: 10px; }
+        .radio-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .radio-option:hover { border-color: var(--accent); }
+        .radio-option.selected { border-color: var(--accent); background: rgba(236,72,153,0.15); }
+        .radio-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .radio-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .radio-circle { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; }
+        .radio-option.selected .radio-circle { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 40%, transparent 40%); }
+        .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+        .checkbox-item { display: flex; align-items: center; gap: 10px; padding: 12px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .checkbox-item:hover { border-color: var(--accent); }
+        .checkbox-item.selected { border-color: var(--accent); background: rgba(236,72,153,0.15); }
+        .checkbox-item.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .checkbox-item.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .checkbox-box { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .checkbox-item.selected .checkbox-box { background: var(--accent); border-color: var(--accent); }
+        .checkbox-item.selected .checkbox-box::after { content: '✓'; color: white; font-weight: bold; }
+        .feedback { padding: 20px; border-radius: 12px; margin: 20px 0; }
+        .feedback.excellent { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .feedback.acceptable { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .feedback-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .feedback-icon { font-size: 1.5rem; }
+        .feedback-title { font-weight: 700; }
+        .feedback-text { color: var(--muted); line-height: 1.7; }
+        .feedback-text strong { color: var(--text); }
+        .alert { padding: 16px 20px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
+        .alert.info { background: rgba(236,72,153,0.15); border: 1px solid rgba(236,72,153,0.3); }
+        .alert-icon { font-size: 1.5rem; }
+        .alert-content { flex: 1; }
+        .alert-title { font-weight: 600; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; color: var(--muted); }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-row { display: flex; gap: 12px; margin-top: 24px; }
+        .lab-panel { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .lab-panel-title { font-weight: 600; margin-bottom: 16px; color: var(--accent); }
+        .lab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; }
+        .lab-item { background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; }
+        .lab-name { font-size: 0.8rem; color: var(--muted); }
+        .lab-value { font-size: 1.1rem; font-weight: 700; }
+        .lab-value.critical { color: var(--danger); }
+        .lab-value.high { color: var(--warning); }
+        .lab-range { font-size: 0.7rem; color: var(--muted); }
+        .outcome { text-align: center; padding: 40px 20px; }
+        .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
+        .outcome-title { font-size: 2rem; font-weight: 700; color: var(--success); margin-bottom: 8px; }
+        .outcome-desc { color: var(--muted); max-width: 600px; margin: 0 auto 24px; }
+        .score-summary { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 24px; margin: 24px auto; max-width: 500px; }
+        .score-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .score-row:last-child { border-bottom: none; }
+    </style>
+</head>
+<body>
+    <header class="header"><div class="header-row"><div class="header-title">🔥 The Flank Pain</div><div class="stat"><div class="stat-value" id="scoreDisplay">0</div><div class="stat-label">Points</div></div></div></header>
+    <main class="main"><div id="stageContainer"></div></main>
+    <script>
+    const state = { stage:'setup', score:0 };
+    
+    function addScore(pts) { state.score += pts; document.getElementById('scoreDisplay').textContent = state.score; }
+
+    const complicatedFactors = [
+        { id: 'male', text: 'Male sex', isComp: true },
+        { id: 'pregnant', text: 'Pregnancy', isComp: true },
+        { id: 'catheter', text: 'Indwelling catheter', isComp: true },
+        { id: 'obstruction', text: 'Urinary obstruction', isComp: true },
+        { id: 'immunocomp', text: 'Immunocompromised', isComp: true },
+        { id: 'anatomic', text: 'Anatomic abnormality', isComp: true },
+        { id: 'young_woman', text: 'Young healthy woman', isComp: false },
+        { id: 'sexually_active', text: 'Sexual activity alone', isComp: false }
+    ];
+
+    const stages = {
+        setup: { render: () => `
+            <div class="setup-screen">
+                <h1>🔥 The Flank Pain</h1>
+                <p class="subtitle">Pyelonephritis diagnosis and management</p>
+                <button class="start-btn" onclick="goTo('presentation')">Begin Case →</button>
+            </div>`
+        },
+        presentation: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Emergency Department</div><div class="card-title">📋 Fever and Flank Pain</div></div>
+                <div class="card-body">
+                    <div class="narrative">A <span class="hl">28-year-old woman</span> presents with <span class="hl">2 days of dysuria and frequency</span>, followed by <span class="hl">fever (39.1°C)</span>, <span class="hl">right flank pain</span>, and <span class="hl">nausea</span>.<br><br>She is otherwise healthy with no prior UTIs. She is sexually active and uses condoms for contraception. On exam: <span class="hl">right CVA tenderness</span>, no suprapubic tenderness.</div>
+                    <div class="lab-panel">
+                        <div class="lab-panel-title">Laboratory Results</div>
+                        <div class="lab-grid">
+                            <div class="lab-item"><div class="lab-name">WBC</div><div class="lab-value high">15.2 K</div><div class="lab-range">4.5-11</div></div>
+                            <div class="lab-item"><div class="lab-name">Creatinine</div><div class="lab-value">0.9 mg/dL</div><div class="lab-range">0.7-1.3</div></div>
+                            <div class="lab-item"><div class="lab-name">UA WBC</div><div class="lab-value critical">>100/hpf</div><div class="lab-range">&lt;5</div></div>
+                            <div class="lab-item"><div class="lab-name">UA Bacteria</div><div class="lab-value critical">Many</div><div class="lab-range">None</div></div>
+                            <div class="lab-item"><div class="lab-name">Nitrites</div><div class="lab-value critical">Positive</div><div class="lab-range">Negative</div></div>
+                            <div class="lab-item"><div class="lab-name">Leuk esterase</div><div class="lab-value critical">3+</div><div class="lab-range">Negative</div></div>
+                        </div>
+                    </div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('diagnosis')">Make Diagnosis →</button></div>
+                </div>
+            </div>`
+        },
+        diagnosis: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Diagnosis</div><div class="card-title">🎯 Clinical Diagnosis</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">1</div><div class="question-text">What is the diagnosis?</div></div>
+                        <div class="radio-options" id="dxOpts">
+                            <div class="radio-option" data-id="cystitis" onclick="selectDx('cystitis')"><div class="radio-circle"></div><div><strong>Acute cystitis (lower UTI)</strong><br><small style="color:var(--muted)">Bladder infection only</small></div></div>
+                            <div class="radio-option" data-id="pyelo" onclick="selectDx('pyelo')"><div class="radio-circle"></div><div><strong>Acute pyelonephritis (upper UTI)</strong><br><small style="color:var(--muted)">Kidney infection</small></div></div>
+                            <div class="radio-option" data-id="abscess" onclick="selectDx('abscess')"><div class="radio-circle"></div><div><strong>Renal abscess</strong><br><small style="color:var(--muted)">Focal collection</small></div></div>
+                            <div class="radio-option" data-id="stone" onclick="selectDx('stone')"><div class="radio-circle"></div><div><strong>Nephrolithiasis</strong><br><small style="color:var(--muted)">Kidney stone</small></div></div>
+                        </div>
+                    </div>
+                    <div id="dxFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="dxSubmit" onclick="submitDx()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        complicated: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Classification</div><div class="card-title">📊 Complicated vs Uncomplicated</div></div>
+                <div class="card-body">
+                    <div class="alert info"><span class="alert-icon">📋</span><div class="alert-content"><div class="alert-title">Why Classification Matters</div><div class="alert-desc">Complicated UTI requires broader antibiotics, longer treatment, and often imaging. Uncomplicated pyelo in healthy women can often be treated as outpatient.</div></div></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">2</div><div class="question-text">Which factors make a UTI "complicated"?</div></div>
+                        <div class="checkbox-grid" id="compOpts">${complicatedFactors.map(f=>`<div class="checkbox-item" data-id="${f.id}" data-comp="${f.isComp}" onclick="toggleComp('${f.id}')"><div class="checkbox-box"></div><span>${f.text}</span></div>`).join('')}</div>
+                    </div>
+                    <div id="compFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitComp()">Submit →</button></div>
+                </div>
+            </div>`
+        },
+        disposition: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Disposition</div><div class="card-title">🏥 Inpatient vs Outpatient</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">3</div><div class="question-text">This patient (healthy young woman, uncomplicated pyelo, tolerating PO) can be treated:</div></div>
+                        <div class="radio-options" id="dispOpts">
+                            <div class="radio-option" data-id="outpatient" onclick="selectDisp('outpatient')"><div class="radio-circle"></div><div><strong>Outpatient with oral antibiotics</strong><br><small style="color:var(--muted)">If tolerating PO, reliable, can follow up</small></div></div>
+                            <div class="radio-option" data-id="admit" onclick="selectDisp('admit')"><div class="radio-circle"></div><div><strong>Hospital admission required</strong><br><small style="color:var(--muted)">All pyelonephritis needs IV antibiotics</small></div></div>
+                            <div class="radio-option" data-id="observe" onclick="selectDisp('observe')"><div class="radio-circle"></div><div><strong>Observation unit then decide</strong><br><small style="color:var(--muted)">Watch for 24 hours</small></div></div>
+                        </div>
+                    </div>
+                    <div id="dispFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="dispSubmit" onclick="submitDisp()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        antibiotics: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Treatment</div><div class="card-title">💊 Antibiotic Selection</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">4</div><div class="question-text">What is the best empiric oral antibiotic for uncomplicated pyelonephritis?</div></div>
+                        <div class="radio-options" id="abxOpts">
+                            <div class="radio-option" data-id="nitro" onclick="selectAbx('nitro')"><div class="radio-circle"></div><div><strong>Nitrofurantoin</strong><br><small style="color:var(--muted)">Concentrated in urine</small></div></div>
+                            <div class="radio-option" data-id="fq" onclick="selectAbx('fq')"><div class="radio-circle"></div><div><strong>Fluoroquinolone (ciprofloxacin/levofloxacin)</strong><br><small style="color:var(--muted)">Excellent tissue penetration</small></div></div>
+                            <div class="radio-option" data-id="tmp" onclick="selectAbx('tmp')"><div class="radio-circle"></div><div><strong>TMP-SMX</strong><br><small style="color:var(--muted)">If susceptibility known and local resistance &lt;20%</small></div></div>
+                            <div class="radio-option" data-id="amox" onclick="selectAbx('amox')"><div class="radio-circle"></div><div><strong>Amoxicillin</strong><br><small style="color:var(--muted)">Beta-lactam</small></div></div>
+                        </div>
+                    </div>
+                    <div id="abxFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="abxSubmit" onclick="submitAbx()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        duration: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Duration</div><div class="card-title">📅 Treatment Length</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">5</div><div class="question-text">What is the appropriate duration for uncomplicated pyelonephritis with fluoroquinolones?</div></div>
+                        <div class="radio-options" id="durOpts">
+                            <div class="radio-option" data-id="3" onclick="selectDur('3')"><div class="radio-circle"></div><span>3 days</span></div>
+                            <div class="radio-option" data-id="5-7" onclick="selectDur('5-7')"><div class="radio-circle"></div><span>5-7 days</span></div>
+                            <div class="radio-option" data-id="10-14" onclick="selectDur('10-14')"><div class="radio-circle"></div><span>10-14 days</span></div>
+                            <div class="radio-option" data-id="21" onclick="selectDur('21')"><div class="radio-circle"></div><span>21 days</span></div>
+                        </div>
+                    </div>
+                    <div id="durFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="durSubmit" onclick="submitDur()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        outcome: { render: () => `
+            <div class="card"><div class="card-body">
+                <div class="outcome">
+                    <div class="outcome-icon">🎉</div>
+                    <div class="outcome-title">Patient Recovered!</div>
+                    <div class="outcome-desc">Patient was discharged with ciprofloxacin 500mg BID × 7 days. Urine culture grew E. coli susceptible to fluoroquinolones. She was afebrile within 48 hours and completed the course without complications.</div>
+                </div>
+                <div class="score-summary">
+                    <h3 style="margin-bottom:16px">Performance</h3>
+                    <div class="score-row"><span>Diagnosis</span><span>${state.dxScore||0}/100</span></div>
+                    <div class="score-row"><span>Complicated Factors</span><span>${state.compScore||0}/100</span></div>
+                    <div class="score-row"><span>Disposition</span><span>${state.dispScore||0}/100</span></div>
+                    <div class="score-row"><span>Antibiotic Selection</span><span>${state.abxScore||0}/100</span></div>
+                    <div class="score-row"><span>Duration</span><span>${state.durScore||0}/100</span></div>
+                    <div class="score-row" style="border-top:2px solid var(--border);padding-top:12px"><strong>Total</strong><strong>${state.score}</strong></div>
+                </div>
+                <div class="feedback excellent"><div class="feedback-header"><span class="feedback-icon">💡</span><span class="feedback-title">Pyelonephritis Pearls</span></div><div class="feedback-text">
+                    • <strong>Pyelo vs cystitis:</strong> Fever, flank pain, CVA tenderness = pyelo. Dysuria/frequency alone = cystitis<br>
+                    • <strong>Complicated factors:</strong> Male, pregnant, catheter, obstruction, immunocompromised, anatomic abnormality<br>
+                    • <strong>Outpatient candidates:</strong> Uncomplicated, tolerating PO, reliable follow-up, no sepsis<br>
+                    • <strong>Empiric antibiotics:</strong> FQ (cipro/levo) first-line for pyelo. TMP-SMX if susceptible. NOT nitrofurantoin (no tissue penetration)<br>
+                    • <strong>Duration:</strong> FQ × 5-7 days, TMP-SMX × 14 days, beta-lactam × 10-14 days<br>
+                    • <strong>Always culture:</strong> Urine culture before starting antibiotics, adjust based on susceptibilities<br>
+                    • <strong>Imaging:</strong> Not routine; get CT if no improvement at 48-72h, concern for abscess/obstruction
+                </div></div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Play Again</button></div>
+            </div></div>`
+        }
+    };
+
+    let selectedDx = null;
+    function selectDx(id) { selectedDx = id; document.querySelectorAll('#dxOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('dxSubmit').disabled = false; }
+    function submitDx() {
+        document.querySelectorAll('#dxOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'pyelo') o.classList.add('correct');
+            else if (o.dataset.id === selectedDx) o.classList.add('incorrect');
+        });
+        state.dxScore = selectedDx === 'pyelo' ? 100 : 40;
+        addScore(selectedDx === 'pyelo' ? 40 : 15);
+        document.getElementById('dxFeedback').innerHTML = `<div class="feedback ${selectedDx==='pyelo'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedDx==='pyelo'?'✅':'📚'}</span><span class="feedback-title">${selectedDx==='pyelo'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Pyelonephritis triad:</strong> Fever + flank pain + CVA tenderness. UTI symptoms (dysuria, frequency) often precede by 1-2 days. Pyuria and bacteriuria confirm UTI. Cystitis alone does not cause fever or flank pain.</div></div>`;
+        document.getElementById('dxSubmit').textContent = 'Continue →';
+        document.getElementById('dxSubmit').onclick = () => goTo('complicated');
+    }
+
+    let selectedComp = new Set();
+    function toggleComp(id) {
+        const el = document.querySelector(`#compOpts .checkbox-item[data-id="${id}"]`);
+        if(selectedComp.has(id)) { selectedComp.delete(id); el.classList.remove('selected'); }
+        else { selectedComp.add(id); el.classList.add('selected'); }
+    }
+    function submitComp() {
+        let correct = 0;
+        complicatedFactors.forEach(f => {
+            const el = document.querySelector(`#compOpts .checkbox-item[data-id="${f.id}"]`);
+            const sel = selectedComp.has(f.id);
+            if (f.isComp && sel) { el.classList.add('correct'); correct++; }
+            else if (!f.isComp && sel) { el.classList.add('incorrect'); }
+        });
+        state.compScore = Math.round(correct / 6 * 100);
+        addScore(Math.round(state.compScore / 2.5));
+        document.getElementById('compFeedback').innerHTML = `<div class="feedback ${state.compScore>=75?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${state.compScore>=75?'✅':'📚'}</span><span class="feedback-title">Complicated UTI Factors</span></div><div class="feedback-text"><strong>Complicated:</strong> Male (any UTI), pregnant, catheter, obstruction, immunocompromised, anatomic abnormality, diabetes (controversial)<br><strong>NOT complicated:</strong> Young healthy sexually active woman - this is actually the definition of uncomplicated!</div></div>`;
+        document.querySelector('#compFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('disposition')">Determine Disposition →</button>`;
+    }
+
+    let selectedDisp = null;
+    function selectDisp(id) { selectedDisp = id; document.querySelectorAll('#dispOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('dispSubmit').disabled = false; }
+    function submitDisp() {
+        document.querySelectorAll('#dispOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'outpatient') o.classList.add('correct');
+            else if (o.dataset.id === selectedDisp) o.classList.add('incorrect');
+        });
+        state.dispScore = selectedDisp === 'outpatient' ? 100 : 40;
+        addScore(selectedDisp === 'outpatient' ? 30 : 10);
+        document.getElementById('dispFeedback').innerHTML = `<div class="feedback ${selectedDisp==='outpatient'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedDisp==='outpatient'?'✅':'📚'}</span><span class="feedback-title">${selectedDisp==='outpatient'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Outpatient candidates:</strong> Uncomplicated pyelo, tolerating PO, reliable, no sepsis, can follow up. Studies show oral antibiotics are effective for uncomplicated pyelonephritis.</div></div>`;
+        document.getElementById('dispSubmit').textContent = 'Continue →';
+        document.getElementById('dispSubmit').onclick = () => goTo('antibiotics');
+    }
+
+    let selectedAbx = null;
+    function selectAbx(id) { selectedAbx = id; document.querySelectorAll('#abxOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('abxSubmit').disabled = false; }
+    function submitAbx() {
+        document.querySelectorAll('#abxOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'fq') o.classList.add('correct');
+            else if (o.dataset.id === selectedAbx) o.classList.add('incorrect');
+        });
+        state.abxScore = selectedAbx === 'fq' ? 100 : (selectedAbx === 'tmp' ? 70 : 40);
+        addScore(selectedAbx === 'fq' ? 40 : (selectedAbx === 'tmp' ? 25 : 10));
+        document.getElementById('abxFeedback').innerHTML = `<div class="feedback ${selectedAbx==='fq'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedAbx==='fq'?'✅':'📚'}</span><span class="feedback-title">${selectedAbx==='fq'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>First-line for pyelo:</strong> Fluoroquinolones (cipro, levo) - excellent tissue penetration<br><strong>Alternative:</strong> TMP-SMX if susceptible and local resistance &lt;20%<br><strong>NOT for pyelo:</strong> Nitrofurantoin (concentrates only in urine, not tissue), amoxicillin (high resistance)</div></div>`;
+        document.getElementById('abxSubmit').textContent = 'Continue →';
+        document.getElementById('abxSubmit').onclick = () => goTo('duration');
+    }
+
+    let selectedDur = null;
+    function selectDur(id) { selectedDur = id; document.querySelectorAll('#durOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('durSubmit').disabled = false; }
+    function submitDur() {
+        document.querySelectorAll('#durOpts .radio-option').forEach(o => {
+            if (o.dataset.id === '5-7') o.classList.add('correct');
+            else if (o.dataset.id === selectedDur) o.classList.add('incorrect');
+        });
+        state.durScore = selectedDur === '5-7' ? 100 : 40;
+        addScore(selectedDur === '5-7' ? 40 : 15);
+        document.getElementById('durFeedback').innerHTML = `<div class="feedback ${selectedDur==='5-7'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedDur==='5-7'?'✅':'📚'}</span><span class="feedback-title">${selectedDur==='5-7'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Duration by antibiotic:</strong><br>• Fluoroquinolones: 5-7 days<br>• TMP-SMX: 14 days<br>• Beta-lactams: 10-14 days<br>Shorter courses with FQs are effective due to excellent tissue levels.</div></div>`;
+        document.getElementById('durSubmit').textContent = 'Complete →';
+        document.getElementById('durSubmit').onclick = () => goTo('outcome');
+    }
+
+    function goTo(id) { state.stage = id; document.getElementById('stageContainer').innerHTML = stages[id].render(); window.scrollTo(0,0); }
+    document.addEventListener('DOMContentLoaded', () => goTo('setup'));
+    </script>
+</body>
+</html>

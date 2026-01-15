@@ -3,35 +3,250 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Suspicious Rash | ReasonDx Adventure</title>
-    <style>:root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#F472B6;--success:#10B981;--warning:#F59E0B;--danger:#DC2626}*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}.header{background:linear-gradient(135deg,#BE185D,#F472B6);padding:12px 20px;position:sticky;top:0;z-index:100}.header-row{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}.diff-toggle{display:flex;background:rgba(0,0,0,.3);border-radius:8px}.diff-btn{padding:6px 12px;font-size:.75rem;cursor:pointer;border:none;background:0 0;color:rgba(255,255,255,.7);font-weight:600}.diff-btn.active{background:rgba(255,255,255,.2);color:#fff}.stat{text-align:center;background:rgba(0,0,0,.2);padding:6px 14px;border-radius:8px}.stat-value{font-size:1.1rem;font-weight:700;font-family:monospace}.stat-label{font-size:.6rem;opacity:.8}.main{max-width:900px;margin:0 auto;padding:24px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px}.card-header{padding:20px 24px;border-bottom:1px solid var(--border)}.card-phase{font-size:.75rem;color:var(--accent);text-transform:uppercase}.card-title{font-size:1.5rem;font-weight:700}.card-body{padding:24px}.narrative{background:rgba(244,114,182,.1);border-left:4px solid var(--accent);padding:20px;border-radius:0 12px 12px 0;margin-bottom:20px}.narrative .hl{background:rgba(244,114,182,.3);padding:2px 6px;border-radius:4px}.setup-screen{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center}.start-btn{background:var(--accent);color:#fff;border:none;padding:16px 48px;border-radius:12px;font-size:1.1rem;font-weight:700;cursor:pointer}.hint{background:rgba(59,130,246,.15);padding:12px 16px;border-radius:8px;margin-bottom:16px;color:#93C5FD}.radio-options{display:flex;flex-direction:column;gap:10px}.radio-option{display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(0,0,0,.2);border:2px solid var(--border);border-radius:10px;cursor:pointer}.radio-option.selected{border-color:var(--accent);background:rgba(244,114,182,.15)}.radio-option.correct{border-color:var(--success);background:rgba(16,185,129,.15)}.radio-option.incorrect{border-color:var(--danger);background:rgba(220,38,38,.15)}.radio-circle{width:22px;height:22px;border:2px solid var(--border);border-radius:50%}.radio-option.selected .radio-circle{border-color:var(--accent);background:radial-gradient(circle,var(--accent) 40%,transparent 40%)}.feedback{padding:20px;border-radius:12px;margin:20px 0}.feedback.excellent{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3)}.feedback.incorrect{background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.3)}.btn{padding:14px 28px;border-radius:10px;font-weight:600;cursor:pointer;border:none}.btn-primary{background:var(--accent);color:#fff}.btn:disabled{opacity:.5}.btn-row{display:flex;gap:12px;margin-top:24px}.btn-link{background:0 0;border:2px solid var(--border);color:var(--text)}.vitals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:12px;margin:20px 0}.vital{background:rgba(0,0,0,.2);padding:12px;border-radius:10px;text-align:center}.vital-label{font-size:.7rem;color:var(--muted)}.vital-value{font-size:1.3rem;font-weight:700;font-family:monospace}.lab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:16px 0}.lab-item{display:flex;justify-content:space-between;padding:8px 12px;background:rgba(0,0,0,.2);border-radius:6px}.lab-name{color:var(--muted)}.lab-value{font-family:monospace;font-weight:600}.score-summary{background:rgba(0,0,0,.2);border-radius:12px;padding:24px;margin:24px auto;max-width:600px}.score-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}.pearls-box{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:20px;margin-top:20px}.pearls-title{font-weight:700;color:var(--success);margin-bottom:12px}.pearl-item{padding:8px 0;border-bottom:1px solid rgba(16,185,129,.2);font-size:.95rem}.cross-link{background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);border-radius:8px;padding:12px 16px;margin-top:12px}.cross-link a{color:#C4B5FD;text-decoration:none}.progress-bar{background:rgba(255,255,255,.1);border-radius:10px;height:8px;margin:20px 0}.progress-fill{background:var(--accent);height:100%}.question-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}.question-number{background:var(--accent);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}</style>
+    <title>The Childhood Label | ReasonDx Adventure</title>
+    <style>
+        :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #F472B6; --success: #10B981; --warning: #F59E0B; --danger: #DC2626; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #DB2777 0%, #F472B6 100%); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; }
+        .header-stats { display: flex; gap: 12px; }
+        .stat { background: rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 8px; text-align: center; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        .difficulty-badge { padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; background: #10B981; }
+        .main { max-width: 1000px; margin: 0 auto; padding: 24px; }
+        .setup-screen, .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; }
+        .setup-screen { padding: 40px; text-align: center; }
+        .setup-screen h1 { font-size: 2rem; margin-bottom: 8px; }
+        .setup-screen .subtitle { color: var(--muted); margin-bottom: 32px; }
+        .start-btn { background: var(--accent); color: white; border: none; padding: 16px 48px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; margin-top: 24px; }
+        .card { margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(244,114,182,0.1), rgba(219,39,119,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; line-height: 1.8; }
+        .narrative .hl { background: rgba(244,114,182,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        .question-section { margin-bottom: 32px; }
+        .question-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .question-number { background: var(--accent); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .question-text { font-size: 1.1rem; font-weight: 600; }
+        .radio-options { display: flex; flex-direction: column; gap: 10px; }
+        .radio-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .radio-option:hover { border-color: var(--accent); }
+        .radio-option.selected { border-color: var(--accent); background: rgba(244,114,182,0.15); }
+        .radio-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .radio-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .radio-circle { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; }
+        .radio-option.selected .radio-circle { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 40%, transparent 40%); }
+        .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 10px; }
+        .checkbox-item { display: flex; align-items: center; gap: 10px; padding: 12px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .checkbox-item:hover { border-color: var(--accent); }
+        .checkbox-item.selected { border-color: var(--accent); background: rgba(244,114,182,0.15); }
+        .checkbox-item.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .checkbox-item.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .checkbox-box { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .checkbox-item.selected .checkbox-box { background: var(--accent); border-color: var(--accent); }
+        .checkbox-item.selected .checkbox-box::after { content: '✓'; color: white; font-weight: bold; }
+        .feedback { padding: 20px; border-radius: 12px; margin: 20px 0; }
+        .feedback.excellent { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .feedback.acceptable { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .feedback-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .feedback-icon { font-size: 1.5rem; }
+        .feedback-title { font-weight: 700; font-size: 1.1rem; }
+        .feedback-text { color: var(--muted); line-height: 1.7; }
+        .feedback-text strong { color: var(--text); }
+        .alert { padding: 16px 20px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
+        .alert.warning { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .alert.success { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .alert-icon { font-size: 1.5rem; }
+        .alert-content { flex: 1; }
+        .alert-title { font-weight: 600; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; color: var(--muted); }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn-secondary { background: transparent; border: 2px solid var(--border); color: var(--text); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-row { display: flex; gap: 12px; margin-top: 24px; }
+        .outcome { text-align: center; padding: 40px 20px; }
+        .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
+        .outcome-title { font-size: 2rem; font-weight: 700; margin-bottom: 8px; color: var(--success); }
+        .outcome-desc { color: var(--muted); max-width: 600px; margin: 0 auto 24px; }
+        .score-summary { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 24px; margin: 24px auto; max-width: 500px; }
+        .score-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .score-row:last-child { border-bottom: none; }
+        .patient-panel { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 16px; margin-bottom: 20px; }
+        .patient-panel-title { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; }
+        .patient-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
+        .patient-info-label { font-size: 0.7rem; color: var(--muted); }
+        .patient-info-value { font-weight: 600; }
+    </style>
 </head>
 <body>
-    <header class="header"><div class="header-row"><div style="font-weight:600">💊 The Suspicious Rash</div><div style="display:flex;gap:12px;align-items:center"><div class="diff-toggle"><button class="diff-btn active" onclick="setDiff('easy')">Easy</button><button class="diff-btn" onclick="setDiff('int')">Intermediate</button><button class="diff-btn" onclick="setDiff('adv')">Advanced</button></div><div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Points</div></div></div></div></header>
-    <main class="main"><div id="app"></div></main>
-<script>
-const S={stage:'setup',score:0,max:0,diff:'easy',q:0,total:8};
-const C={easy:{age:'35F',wt:'68kg',hx:'Urticaria after amoxicillin 30 min ago, childhood penicillin rash',exam:'Diffuse urticaria, no angioedema, stable',vitals:{HR:'88',BP:'128/78'},labs:{History:'Childhood rash with penicillin'}},int:{age:'52M',wt:'82kg',hx:'Needs hip replacement, reported penicillin allergy age 10',exam:'No current symptoms',vitals:{HR:'72',BP:'138/82'},labs:{PenTest:'Negative skin test'}},adv:{age:'28F',wt:'62kg',hx:'Rash, fever, facial swelling 3wks after starting allopurinol',exam:'Morbilliform rash, facial edema, lymphadenopathy',vitals:{HR:'102',BP:'108/68',T:'39.1'},labs:{Eos:'18%',ALT:'245',Cr:'1.8'}}};
-const Q=[
-{t:'Penicillin Cross-Reactivity',q:'True penicillin allergy. Cross-reactivity with cephalosporins?',h:'Updated data shows low risk',o:[{id:'a',txt:'1-2% with all cephalosporins (not 10% as previously thought)',c:1,p:100},{id:'b',txt:'10% cross-reactivity',c:0,p:30},{id:'c',txt:'100% - never give cephalosporins',c:0,p:0}],fb:{1:'<b>Correct!</b> Cross-reactivity ~1-2% overall. Higher with 1st gen (similar R1 side chain). 3rd/4th gen very low risk.',0:'<b>Updated data:</b> 1-2% cross-reactivity. The 10% myth is outdated.'}},
-{t:'Skin Testing',q:'Penicillin skin testing includes which components?',h:'Major and minor determinants',o:[{id:'a',txt:'Penicilloyl-polylysine (major) + penicillin G + minor determinant mix',c:1,p:100},{id:'b',txt:'Amoxicillin only',c:0,p:20},{id:'c',txt:'Penicillin G only',c:0,p:30}],fb:{1:'<b>Correct!</b> Full testing: PPL (major determinant), penicillin G, minor determinant mix. NPV >95% if all negative.',0:'<b>Testing:</b> Major + minor determinants. Negative test = safe to give penicillin.'}},
-{t:'Negative Skin Test',q:'Negative penicillin skin test. Next step?',h:'Oral challenge confirms safety',o:[{id:'a',txt:'Oral amoxicillin challenge (usually single dose)',c:1,p:100},{id:'b',txt:'Full penicillin course without challenge',c:0,p:30},{id:'c',txt:'Never give penicillin anyway',c:0,p:0}],fb:{1:'<b>Correct!</b> After negative skin test: oral challenge (typically amoxicillin 250-500mg). If tolerated, remove penicillin allergy label.',0:'<b>After negative test:</b> Oral challenge confirms. Then de-label the patient.'}},
-{t:'DRESS Criteria',q:'Rash + fever + eosinophilia + organ involvement. Diagnosis?',h:'Drug Reaction with Eosinophilia and Systemic Symptoms',o:[{id:'a',txt:'DRESS syndrome (RegiSCAR criteria)',c:1,p:100},{id:'b',txt:'Simple drug rash',c:0,p:20},{id:'c',txt:'SJS/TEN',c:0,p:30}],fb:{1:'<b>Correct!</b> DRESS: Rash + fever + eosinophilia + organ involvement (liver, kidney, lung) + lymphadenopathy. Onset 2-8 wks.',0:'<b>DRESS:</b> Systemic reaction with eosinophilia and organ involvement. High mortality.'}},
-{t:'DRESS Treatment',q:'Confirmed DRESS syndrome. Treatment?',h:'Stop drug + supportive',o:[{id:'a',txt:'Stop offending drug + systemic corticosteroids',c:1,p:100},{id:'b',txt:'Continue drug at lower dose',c:0,p:0},{id:'c',txt:'Antihistamines only',c:0,p:20}],fb:{1:'<b>Correct!</b> DRESS: Immediate drug discontinuation + systemic steroids (prednisone 1-2 mg/kg). Monitor for viral reactivation (HHV-6).',0:'<b>DRESS Rx:</b> Stop drug immediately. Steroids for severe cases.'}},
-{t:'SJS/TEN Distinction',q:'How to distinguish SJS from TEN?',h:'Body surface area involvement',o:[{id:'a',txt:'SJS <10% BSA, SJS-TEN overlap 10-30%, TEN >30%',c:1,p:100},{id:'b',txt:'Same disease, different names',c:0,p:10},{id:'c',txt:'TEN has blisters, SJS doesnt',c:0,p:20}],fb:{1:'<b>Correct!</b> SJS <10% BSA detachment, TEN >30%. Both have mucosal involvement and epidermal necrosis.',0:'<b>BSA classification:</b> <10% SJS, 10-30% overlap, >30% TEN.'}},
-{t:'Desensitization Indication',q:'When is drug desensitization appropriate?',h:'No alternative exists',o:[{id:'a',txt:'When drug is essential and no safe alternative (eg penicillin for syphilis in pregnancy)',c:1,p:100},{id:'b',txt:'Any patient with drug allergy',c:0,p:10},{id:'c',txt:'DRESS or SJS history',c:0,p:0}],fb:{1:'<b>Correct!</b> Desensitization for IgE-mediated reactions when drug essential. NEVER for DRESS, SJS/TEN, or severe cutaneous reactions.',0:'<b>Desensitization:</b> Only for IgE-mediated. Contraindicated in severe delayed reactions.'}},
-{t:'Common Culprits',q:'Most common drugs causing DRESS?',h:'Anticonvulsants and antibiotics',o:[{id:'a',txt:'Anticonvulsants (carbamazepine, phenytoin), allopurinol, sulfonamides',c:1,p:100},{id:'b',txt:'Penicillins only',c:0,p:20},{id:'c',txt:'NSAIDs',c:0,p:30}],fb:{1:'<b>Correct!</b> DRESS culprits: Aromatic anticonvulsants, allopurinol (especially in HLA-B*5801+), sulfonamides, vancomycin.',0:'<b>DRESS drugs:</b> Anticonvulsants, allopurinol, sulfonamides most common.'}}
-];
-let sel=null;
-function setDiff(d){S.diff=d;document.querySelectorAll('.diff-btn').forEach((b,i)=>b.classList.toggle('active',['easy','int','adv'][i]===d));if(S.stage!=='setup'){S.stage='setup';S.score=0;S.max=0;S.q=0;document.getElementById('score').textContent='0';}render();}
-function addPts(p,m){S.score+=p;S.max+=m;document.getElementById('score').textContent=S.score;}
-function pick(id){sel=id;document.querySelectorAll('.radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id));document.getElementById('sub').disabled=false;}
-function submit(){const q=Q[S.q-1];const opt=q.o.find(o=>o.id===sel);addPts(opt.p||0,100);document.querySelectorAll('.radio-option').forEach(o=>{const op=q.o.find(x=>x.id===o.dataset.id);if(op&&op.c)o.classList.add('correct');else if(o.dataset.id===sel)o.classList.add('incorrect');});document.getElementById('fb').innerHTML='<div class="feedback '+(opt&&opt.c?'excellent':'incorrect')+'">'+q.fb[opt&&opt.c?1:0]+'</div>';document.getElementById('sub').textContent=S.q<S.total?'Next':'Results';document.getElementById('sub').onclick=next;}
-function next(){if(S.q<S.total){S.q++;sel=null;render();}else{S.stage='outcome';render();}}
-function start(){S.q=1;S.stage='question';render();}
-function go(s){S.stage=s;render();}
-function render(){const c=C[S.diff];if(S.stage==='setup'){document.getElementById('app').innerHTML='<div class="setup-screen"><h1>💊 The Suspicious Rash</h1><p style="color:var(--muted);margin-bottom:32px">Drug Allergy: Penicillin testing, cross-reactivity, DRESS, SJS/TEN, desensitization</p><button class="start-btn" onclick="go(\'pres\')">Begin Case</button></div>';}else if(S.stage==='pres'){document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Presentation</div><div class="card-title">💉 Drug Reaction</div></div><div class="card-body"><div class="narrative"><span class="hl">'+c.age+'</span> ('+c.wt+')<br><b>Hx:</b> '+c.hx+'<br><b>Exam:</b> '+c.exam+'</div><div class="vitals-grid">'+Object.entries(c.vitals).map(function(e){return'<div class="vital"><div class="vital-label">'+e[0]+'</div><div class="vital-value">'+e[1]+'</div></div>';}).join('')+'</div><div class="lab-grid">'+Object.entries(c.labs).map(function(e){return'<div class="lab-item"><span class="lab-name">'+e[0]+'</span><span class="lab-value">'+e[1]+'</span></div>';}).join('')+'</div><div class="btn-row"><button class="btn btn-primary" onclick="start()">Begin Assessment</button></div></div></div>';}else if(S.stage==='question'){var q=Q[S.q-1];document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Q'+S.q+'/'+S.total+'</div><div class="card-title">'+q.t+'</div></div><div class="card-body"><div class="progress-bar"><div class="progress-fill" style="width:'+(S.q/S.total*100)+'%"></div></div><div class="question-header"><div class="question-number">'+S.q+'</div><div style="font-weight:600">'+q.q+'</div></div><div class="hint">'+q.h+'</div><div class="radio-options">'+q.o.map(function(o){return'<div class="radio-option" data-id="'+o.id+'" onclick="pick(\''+o.id+'\')"><div class="radio-circle"></div><div><b>'+o.txt+'</b></div></div>';}).join('')+'</div><div id="fb"></div><div class="btn-row"><button class="btn btn-primary" id="sub" onclick="submit()" disabled>Submit</button></div></div></div>';}else{var pct=S.max>0?Math.round(S.score/S.max*100):0;document.getElementById('app').innerHTML='<div class="card"><div class="card-body"><div style="text-align:center;padding:40px"><div style="font-size:4rem">'+(pct>=70?'🎉':'📚')+'</div><div style="font-size:2rem;font-weight:700;color:'+(pct>=70?'var(--success)':'var(--warning)')+'">'+(pct>=70?'Complete!':'Review')+'</div></div><div class="score-summary"><div class="score-row"><span>Score</span><span>'+S.score+'/'+S.max+' ('+pct+'%)</span></div></div><div class="pearls-box"><div class="pearls-title">Drug Allergy Pearls</div><div class="pearl-item"><b>Cross-reactivity:</b> PCN-ceph only 1-2% (not 10%)</div><div class="pearl-item"><b>Skin test:</b> PPL + penicillin G + minor determinants</div><div class="pearl-item"><b>DRESS:</b> Rash + fever + eos + organ involvement. Steroids.</div><div class="pearl-item"><b>SJS/TEN:</b> <10% vs >30% BSA detachment</div><div class="pearl-item"><b>Desensitization:</b> Only IgE-mediated, never DRESS/SJS</div></div><div class="cross-link"><a href="../mechanism/allergy-immunology.html">MechanismDx: Allergy</a></div><div class="btn-row" style="justify-content:center;margin-top:30px"><button class="btn btn-primary" onclick="location.reload()">Retry</button><button class="btn btn-link" onclick="location.href=\'adventure-hub.html\'">Back</button></div></div></div>';}}
-document.addEventListener('DOMContentLoaded',render);
-</script>
+    <header class="header"><div class="header-row"><div class="header-title">💊 The Childhood Label</div><div class="header-stats"><span class="difficulty-badge" id="difficultyBadge">Easy</span><div class="stat"><div class="stat-value" id="scoreDisplay">0</div><div class="stat-label">Points</div></div></div></div></header>
+    <main class="main"><div id="stageContainer"></div></main>
+    <script>
+    const state = { stage:'setup', score:0 };
+    const redFlags = [
+        { id: 'sjs', text: 'Stevens-Johnson syndrome', isFlag: true },
+        { id: 'dress', text: 'DRESS syndrome', isFlag: true },
+        { id: 'nephritis', text: 'Interstitial nephritis', isFlag: true },
+        { id: 'hemolytic', text: 'Hemolytic anemia', isFlag: true },
+        { id: 'hives', text: 'Isolated hives', isFlag: false },
+        { id: 'gi', text: 'GI upset (nausea)', isFlag: false },
+        { id: 'itch', text: 'Itching without rash', isFlag: false }
+    ];
+
+    function addScore(pts) { state.score += pts; document.getElementById('scoreDisplay').textContent = state.score; }
+
+    const stages = {
+        setup: { render: () => `
+            <div class="setup-screen">
+                <h1>💊 The Childhood Label</h1>
+                <p class="subtitle">Drug allergy evaluation and de-labeling</p>
+                <button class="start-btn" onclick="goTo('referral')">Begin Case →</button>
+            </div>`
+        },
+        referral: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Allergy Clinic</div><div class="card-title">📋 Pre-Surgical Evaluation</div></div>
+                <div class="card-body">
+                    <div class="narrative">A <span class="hl">52-year-old female</span> is referred for penicillin allergy evaluation before <span class="hl">hip replacement surgery</span>. Her chart lists "Penicillin - rash" as an allergy.<br><br>She recalls: "When I was <span class="hl">about 8 years old</span>, I had amoxicillin for an ear infection. My mom said I got a <span class="hl">rash</span>. I've avoided penicillin since - that's <span class="hl">44 years</span>."<br><br>She cannot recall rash details or if she needed treatment.</div>
+                    <div class="patient-panel">
+                        <div class="patient-panel-title">Patient Information</div>
+                        <div class="patient-info-grid">
+                            <div><div class="patient-info-label">Age</div><div class="patient-info-value">52 y/o Female</div></div>
+                            <div><div class="patient-info-label">Reaction Age</div><div class="patient-info-value">~8 years old</div></div>
+                            <div><div class="patient-info-label">Years Ago</div><div class="patient-info-value">~44 years</div></div>
+                            <div><div class="patient-info-label">Surgery</div><div class="patient-info-value">Hip replacement</div></div>
+                        </div>
+                    </div>
+                    <div class="alert warning"><span class="alert-icon">📊</span><div class="alert-content"><div class="alert-title">Why De-Label?</div><div class="alert-desc">>95% of "penicillin allergic" patients can tolerate penicillins. Labels lead to broader antibiotics, more C. diff, higher costs.</div></div></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('risk')">Assess Risk →</button></div>
+                </div>
+            </div>`
+        },
+        risk: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Risk Stratification</div><div class="card-title">📊 Assess Risk Level</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">1</div><div class="question-text">Based on her history, what is the risk level?</div></div>
+                        <div class="radio-options" id="riskOpts">
+                            <div class="radio-option" data-id="low" onclick="selectRisk('low')"><div class="radio-circle"></div><div><strong>Low Risk</strong><br><small style="color:var(--muted)">Remote, vague childhood rash - direct challenge OK</small></div></div>
+                            <div class="radio-option" data-id="mod" onclick="selectRisk('mod')"><div class="radio-circle"></div><div><strong>Moderate Risk</strong><br><small style="color:var(--muted)">Skin test recommended first</small></div></div>
+                            <div class="radio-option" data-id="high" onclick="selectRisk('high')"><div class="radio-circle"></div><div><strong>High Risk</strong><br><small style="color:var(--muted)">Full allergy workup required</small></div></div>
+                        </div>
+                    </div>
+                    <div id="riskFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="riskSubmit" onclick="submitRisk()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        flags: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">History Review</div><div class="card-title">🚩 Red Flag Reactions</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">2</div><div class="question-text">Which reactions are RED FLAGS requiring full workup?</div></div>
+                        <div class="checkbox-grid" id="flagOpts">${redFlags.map(f=>`<div class="checkbox-item" data-id="${f.id}" data-flag="${f.isFlag}" onclick="toggleFlag('${f.id}')"><div class="checkbox-box"></div><span>${f.text}</span></div>`).join('')}</div>
+                    </div>
+                    <div id="flagFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitFlags()">Submit →</button></div>
+                </div>
+            </div>`
+        },
+        challenge: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Oral Challenge</div><div class="card-title">💊 Amoxicillin Challenge</div></div>
+                <div class="card-body">
+                    <div class="narrative">You proceed with <span class="hl">direct oral amoxicillin challenge</span>:<br>• Amoxicillin 250mg orally<br>• 60 minute observation</div>
+                    <div class="alert success"><span class="alert-icon">✓</span><div class="alert-content"><div class="alert-title">Challenge Successful!</div><div class="alert-desc">No reaction. Patient tolerated full dose.</div></div></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">3</div><div class="question-text">What do you tell the patient?</div></div>
+                        <div class="radio-options" id="resultOpts">
+                            <div class="radio-option" data-id="clear" onclick="selectResult('clear')"><div class="radio-circle"></div><strong>You are NOT allergic - remove the label</strong></div>
+                            <div class="radio-option" data-id="maybe" onclick="selectResult('maybe')"><div class="radio-circle"></div><span>Probably not allergic but can't be sure</span></div>
+                            <div class="radio-option" data-id="avoid" onclick="selectResult('avoid')"><div class="radio-circle"></div><span>Still avoid penicillins to be safe</span></div>
+                        </div>
+                    </div>
+                    <div id="resultFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="resultSubmit" onclick="submitResult()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        outcome: { render: () => `
+            <div class="card"><div class="card-body">
+                <div class="outcome">
+                    <div class="outcome-icon">🎉</div>
+                    <div class="outcome-title">Allergy De-Labeled!</div>
+                    <div class="outcome-desc">You successfully evaluated and de-labeled this patient. She can now receive cefazolin for surgery and use penicillins safely.</div>
+                </div>
+                <div class="score-summary">
+                    <h3 style="margin-bottom:16px">Performance</h3>
+                    <div class="score-row"><span>Risk Assessment</span><span>${state.riskScore||0}/100</span></div>
+                    <div class="score-row"><span>Red Flag Knowledge</span><span>${state.flagScore||0}/100</span></div>
+                    <div class="score-row"><span>Result Interpretation</span><span>${state.resultScore||0}/100</span></div>
+                    <div class="score-row" style="border-top:2px solid var(--border);padding-top:12px"><strong>Total</strong><strong>${state.score}</strong></div>
+                </div>
+                <div class="feedback excellent"><div class="feedback-header"><span class="feedback-icon">💡</span><span class="feedback-title">Drug Allergy Pearls</span></div><div class="feedback-text">• <strong>>95%</strong> of labeled patients can tolerate penicillins<br>• <strong>Low-risk:</strong> Remote, vague history → direct challenge OK<br>• <strong>Red flags:</strong> SJS, DRESS, nephritis, hemolysis → full workup<br>• <strong>Negative challenge</strong> = remove label completely<br>• <strong>Cross-reactivity</strong> PCN-cephalosporin is only ~1-2%</div></div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Play Again</button><button class="btn btn-secondary" onclick="location.href='adventure-hub.html'">← Adventures</button></div>
+            </div></div>`
+        }
+    };
+
+    let selectedRisk = null;
+    function selectRisk(id) { selectedRisk = id; document.querySelectorAll('#riskOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('riskSubmit').disabled = false; }
+    function submitRisk() {
+        document.querySelectorAll('#riskOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'low') o.classList.add('correct');
+            else if (o.dataset.id === selectedRisk) o.classList.add('incorrect');
+        });
+        state.riskScore = selectedRisk === 'low' ? 100 : 40;
+        addScore(selectedRisk === 'low' ? 40 : 15);
+        document.getElementById('riskFeedback').innerHTML = `<div class="feedback ${selectedRisk==='low'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedRisk==='low'?'✅':'📚'}</span><span class="feedback-title">${selectedRisk==='low'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>This is LOW risk:</strong> Reaction >5 years ago (-2 points), unknown details, no severe features. Direct challenge appropriate.</div></div>`;
+        document.getElementById('riskSubmit').textContent = 'Continue →';
+        document.getElementById('riskSubmit').onclick = () => goTo('flags');
+    }
+
+    let selectedFlags = new Set();
+    function toggleFlag(id) {
+        const el = document.querySelector(`#flagOpts .checkbox-item[data-id="${id}"]`);
+        if(selectedFlags.has(id)) { selectedFlags.delete(id); el.classList.remove('selected'); }
+        else { selectedFlags.add(id); el.classList.add('selected'); }
+    }
+    function submitFlags() {
+        let correct = 0;
+        redFlags.forEach(f => {
+            const el = document.querySelector(`#flagOpts .checkbox-item[data-id="${f.id}"]`);
+            const sel = selectedFlags.has(f.id);
+            if (f.isFlag && sel) { el.classList.add('correct'); correct++; }
+            else if (!f.isFlag && sel) { el.classList.add('incorrect'); }
+        });
+        state.flagScore = Math.round(correct / 4 * 100);
+        addScore(Math.round(state.flagScore / 2.5));
+        document.getElementById('flagFeedback').innerHTML = `<div class="feedback ${state.flagScore>=75?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${state.flagScore>=75?'✅':'📚'}</span><span class="feedback-title">Red Flags</span></div><div class="feedback-text"><strong>Avoid direct challenge if:</strong> SJS/TEN, DRESS, interstitial nephritis, hemolytic anemia.<br><strong>OK to challenge:</strong> Isolated hives, GI symptoms, itching.</div></div>`;
+        document.querySelector('#flagFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('challenge')">Proceed →</button>`;
+    }
+
+    let selectedResult = null;
+    function selectResult(id) { selectedResult = id; document.querySelectorAll('#resultOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('resultSubmit').disabled = false; }
+    function submitResult() {
+        document.querySelectorAll('#resultOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'clear') o.classList.add('correct');
+            else if (o.dataset.id === selectedResult) o.classList.add('incorrect');
+        });
+        state.resultScore = selectedResult === 'clear' ? 100 : 40;
+        addScore(selectedResult === 'clear' ? 40 : 15);
+        document.getElementById('resultFeedback').innerHTML = `<div class="feedback ${selectedResult==='clear'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedResult==='clear'?'✅':'📚'}</span><span class="feedback-title">${selectedResult==='clear'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Negative challenge = NOT allergic.</strong> Remove label from chart. Patient can use ALL penicillins.</div></div>`;
+        document.getElementById('resultSubmit').textContent = 'Complete →';
+        document.getElementById('resultSubmit').onclick = () => goTo('outcome');
+    }
+
+    function goTo(id) { state.stage = id; document.getElementById('stageContainer').innerHTML = stages[id].render(); window.scrollTo(0,0); }
+    document.addEventListener('DOMContentLoaded', () => goTo('setup'));
+    </script>
 </body>
 </html>

@@ -3,92 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Breathless Runner | ReasonDx Adventure</title>
+    <title>The Runner | ReasonDx Adventure</title>
     <style>
-        :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #8B5CF6; --success: #10B981; --warning: #F59E0B; --danger: #DC2626; }
+        :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #8B5CF6; --success: #10B981; --warning: #F59E0B; --danger: #DC2626; --info: #3B82F6; --header-bg: linear-gradient(135deg, #4C1D95 0%, #5B21B6 50%, #7C3AED 100%); }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
-        .header { background: linear-gradient(135deg, #5B21B6 0%, #7C3AED 100%); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header { background: var(--header-bg); color: white; padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
         .header-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; max-width: 1200px; margin: 0 auto; }
         .header-title { font-size: 1.1rem; font-weight: 600; }
-        .difficulty-toggle { display: flex; background: rgba(0,0,0,0.3); border-radius: 8px; overflow: hidden; }
-        .diff-btn { padding: 6px 12px; font-size: 0.75rem; cursor: pointer; border: none; background: transparent; color: rgba(255,255,255,0.7); font-weight: 600; }
-        .diff-btn.active { background: rgba(255,255,255,0.2); color: white; }
-        .stat { text-align: center; background: rgba(0,0,0,0.2); padding: 6px 14px; border-radius: 8px; }
+        .header-stats { display: flex; gap: 12px; align-items: center; }
+        .stat { text-align: center; background: rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 8px; }
         .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
         .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
-        .main { max-width: 900px; margin: 0 auto; padding: 24px; }
-        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; }
+        .difficulty-badge { padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+        .difficulty-badge.easy { background: #10B981; }
+        .difficulty-badge.hard { background: #F59E0B; }
+        .difficulty-badge.hardest { background: #DC2626; }
+        .main { max-width: 1000px; margin: 0 auto; padding: 24px; }
+        .setup-screen { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; }
+        .setup-screen h1 { font-size: 2rem; margin-bottom: 8px; }
+        .setup-screen .subtitle { color: var(--muted); margin-bottom: 32px; }
+        .setup-options { display: grid; gap: 24px; max-width: 500px; margin: 0 auto; text-align: left; }
+        .setup-group label { display: block; font-weight: 600; margin-bottom: 8px; }
+        .setup-group select { width: 100%; padding: 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 1rem; }
+        .timer-toggle { display: flex; align-items: center; gap: 12px; }
+        .timer-toggle input { width: 20px; height: 20px; accent-color: var(--accent); }
+        .start-btn { background: var(--accent); color: white; border: none; padding: 16px 48px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; margin-top: 24px; }
+        .start-btn:hover { opacity: 0.9; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
         .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
-        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
         .card-title { font-size: 1.5rem; font-weight: 700; }
         .card-body { padding: 24px; }
-        .narrative { background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(124,58,237,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; line-height: 1.8; }
+        .narrative { background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(124,58,237,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; font-size: 1rem; line-height: 1.8; }
         .narrative .hl { background: rgba(139,92,246,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
-        .setup-screen { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; }
-        .start-btn { background: var(--accent); color: white; border: none; padding: 16px 48px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; }
-        .hint { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-size: 0.9rem; color: #93C5FD; }
-        .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
-        .checkbox-option { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
-        .checkbox-option.selected { border-color: var(--accent); background: rgba(139,92,246,0.15); }
-        .checkbox-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
-        .checkbox-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
-        .checkbox-option.missed { border-color: var(--warning); background: rgba(245,158,11,0.1); }
-        .checkbox-box { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-        .checkbox-option.selected .checkbox-box { border-color: var(--accent); background: var(--accent); }
-        .checkbox-option.selected .checkbox-box::after { content: '✓'; color: white; font-weight: 700; }
-        .radio-options { display: flex; flex-direction: column; gap: 10px; }
-        .radio-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
-        .radio-option.selected { border-color: var(--accent); background: rgba(139,92,246,0.15); }
-        .radio-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
-        .radio-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
-        .radio-option.acceptable { border-color: var(--warning); background: rgba(245,158,11,0.15); }
-        .radio-circle { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; }
-        .radio-option.selected .radio-circle { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 40%, transparent 40%); }
-        .feedback { padding: 20px; border-radius: 12px; margin: 20px 0; }
-        .feedback.excellent { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
-        .feedback.acceptable { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
-        .feedback.incorrect { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
-        .feedback-text { color: var(--muted); line-height: 1.7; }
-        .feedback-text strong { color: var(--text); }
-        .reference-box { background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.3); border-radius: 8px; padding: 12px 16px; margin-top: 16px; font-size: 0.9rem; }
-        .reference-box a { color: #60A5FA; text-decoration: none; }
-        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
-        .btn-primary { background: var(--accent); color: white; }
-        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
-        .btn-row { display: flex; gap: 12px; margin-top: 24px; }
-        .btn-link { background: transparent; border: 2px solid var(--border); color: var(--text); }
-        .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 12px; margin: 20px 0; }
+        .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 10px; margin: 20px 0; }
         .vital { background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; text-align: center; }
         .vital.critical { background: rgba(220,38,38,0.2); border: 1px solid rgba(220,38,38,0.4); }
         .vital.warning { background: rgba(245,158,11,0.2); border: 1px solid rgba(245,158,11,0.4); }
         .vital-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; }
-        .vital-value { font-size: 1.3rem; font-weight: 700; font-family: monospace; }
-        .score-summary { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 24px; margin: 24px auto; max-width: 600px; }
-        .score-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
-        .pearls-box { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); border-radius: 12px; padding: 20px; margin-top: 20px; }
-        .pearls-title { font-weight: 700; color: var(--success); margin-bottom: 12px; }
-        .pearl-item { padding: 8px 0; border-bottom: 1px solid rgba(16,185,129,0.2); font-size: 0.95rem; }
-        .cross-link { background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.3); border-radius: 8px; padding: 12px 16px; margin-top: 12px; }
-        .cross-link-title { font-weight: 600; color: #A78BFA; margin-bottom: 8px; }
-        .cross-link a { color: #C4B5FD; text-decoration: none; margin-right: 16px; }
-        .progress-bar { background: rgba(255,255,255,0.1); border-radius: 10px; height: 8px; margin: 20px 0; overflow: hidden; }
-        .progress-fill { background: var(--accent); height: 100%; }
+        .vital-value { font-size: 1.2rem; font-weight: 700; font-family: monospace; }
+        .question-section { margin-bottom: 32px; }
         .question-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-        .question-number { background: var(--accent); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .question-number { background: var(--accent); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; }
         .question-text { font-size: 1.1rem; font-weight: 600; }
+        .question-hint { color: var(--muted); font-size: 0.9rem; margin-bottom: 16px; }
+        .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px; }
+        .checkbox-item { display: flex; align-items: flex-start; gap: 10px; padding: 12px 16px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.15s; }
+        .checkbox-item:hover { border-color: var(--accent); background: rgba(139,92,246,0.1); }
+        .checkbox-item.selected { border-color: var(--accent); background: rgba(139,92,246,0.15); }
+        .checkbox-item.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .checkbox-item.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .checkbox-item.missed { border-color: var(--info); background: rgba(59,130,246,0.15); }
+        .checkbox-box { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+        .checkbox-item.selected .checkbox-box { background: var(--accent); border-color: var(--accent); }
+        .checkbox-item.selected .checkbox-box::after { content: '✓'; color: white; font-weight: bold; }
+        .radio-options { display: flex; flex-direction: column; gap: 10px; }
+        .radio-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all 0.15s; }
+        .radio-option:hover { border-color: var(--accent); }
+        .radio-option.selected { border-color: var(--accent); background: rgba(139,92,246,0.15); }
+        .radio-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .radio-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .radio-circle { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; }
+        .radio-option.selected .radio-circle { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 40%, transparent 40%); }
+        .feedback { padding: 20px; border-radius: 12px; margin: 20px 0; }
+        .feedback.excellent { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .feedback.good { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); }
+        .feedback.acceptable { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .feedback.poor { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+        .feedback-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .feedback-icon { font-size: 1.5rem; }
+        .feedback-title { font-weight: 700; font-size: 1.1rem; }
+        .feedback-text { color: var(--muted); line-height: 1.7; }
+        .feedback-text strong { color: var(--text); }
+        .alert { padding: 16px 20px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
+        .alert.danger { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+        .alert.warning { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .alert.success { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .alert.info { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); }
+        .alert-icon { font-size: 1.5rem; flex-shrink: 0; }
+        .alert-content { flex: 1; }
+        .alert-title { font-weight: 600; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; color: var(--muted); }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; transition: all 0.2s; border: none; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn-primary:hover { opacity: 0.9; }
+        .btn-secondary { background: transparent; border: 2px solid var(--border); color: var(--text); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-row { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+        .wells-calculator { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .wells-title { font-weight: 600; margin-bottom: 16px; display: flex; justify-content: space-between; }
+        .wells-score { font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+        .outcome { text-align: center; padding: 40px 20px; }
+        .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
+        .outcome-title { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+        .outcome.good .outcome-title { color: var(--success); }
+        .outcome.bad .outcome-title { color: var(--danger); }
+        .outcome-desc { color: var(--muted); max-width: 600px; margin: 0 auto 24px; line-height: 1.7; }
+        .score-summary { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 24px; margin: 24px auto; max-width: 500px; }
+        .score-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .score-row:last-child { border-bottom: none; }
+        .patient-panel { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 16px; margin-bottom: 20px; }
+        .patient-panel-title { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+        .patient-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; }
+        .patient-info-label { font-size: 0.7rem; color: var(--muted); }
+        .patient-info-value { font-weight: 600; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .timer-critical { animation: pulse 1s infinite; color: var(--danger) !important; }
     </style>
 </head>
 <body>
     <header class="header">
         <div class="header-row">
-            <div class="header-title">🏃 The Breathless Runner</div>
-            <div style="display: flex; gap: 12px; align-items: center;">
-                <div class="difficulty-toggle">
-                    <button class="diff-btn active" data-level="easy" onclick="setDifficulty('easy')">Easy</button>
-                    <button class="diff-btn" data-level="intermediate" onclick="setDifficulty('intermediate')">Intermediate</button>
-                    <button class="diff-btn" data-level="advanced" onclick="setDifficulty('advanced')">Advanced</button>
-                </div>
+            <div class="header-title">🫁 The Runner</div>
+            <div class="header-stats">
+                <span class="difficulty-badge easy" id="difficultyBadge">Easy</span>
+                <div class="stat" id="timerStat" style="display:none"><div class="stat-value" id="timer">00:00</div><div class="stat-label">Time</div></div>
                 <div class="stat"><div class="stat-value" id="scoreDisplay">0</div><div class="stat-label">Points</div></div>
             </div>
         </div>
@@ -96,303 +126,391 @@
     <main class="main"><div id="stageContainer"></div></main>
 
     <script>
-    const state = { stage: 'setup', score: 0, maxScore: 0, difficulty: 'easy', questionNum: 0, totalQuestions: 8 };
-    const difficultyConfig = {
-        easy: { label: 'Easy (UME)', hints: true, passingScore: 70 },
-        intermediate: { label: 'Intermediate (GME)', hints: false, passingScore: 80 },
-        advanced: { label: 'Advanced (CME)', hints: false, passingScore: 90 }
+    const state = { stage:'setup', difficulty:'easy', timerEnabled:false, timerSeconds:0, timerLimit:0, score:0, wellsScore:0, selectedWells:new Set(), ddimer:null, imagingChoice:null, anticoagChoice:null, correctDiagnosis:false };
+    let timerInterval = null;
+
+    const difficultySettings = {
+        easy: { label:'Easy', timerLimit:1800, wellsOptions:6, diagnosisOptions:4, imagingOptions:4, anticoagOptions:4 },
+        hard: { label:'Challenging', timerLimit:900, wellsOptions:8, diagnosisOptions:6, imagingOptions:6, anticoagOptions:6 },
+        hardest: { label:'Expert', timerLimit:600, wellsOptions:10, diagnosisOptions:8, imagingOptions:8, anticoagOptions:8 }
     };
 
-    const caseContent = {
-        easy: {
-            age: '28-year-old female', weight: '68 kg',
-            presentation: 'sudden shortness of breath while jogging',
-            history: 'Started OCPs 3 months ago. Otherwise healthy.',
-            exam: 'Anxious. Clear lungs. Right calf swollen and tender.',
-            vitals: { HR: '108', BP: '118/72', RR: '22', SpO2: '94%' },
-            wellsScore: 7.5
-        },
-        intermediate: {
-            age: '52-year-old male', weight: '95 kg',
-            presentation: 'progressive dyspnea over 3 days, pleuritic chest pain',
-            history: 'Recent 12-hour flight from Tokyo. HTN.',
-            exam: 'Mild distress. Decreased breath sounds right base.',
-            vitals: { HR: '98', BP: '138/88', RR: '24', SpO2: '92%' },
-            wellsScore: 4.5
-        },
-        advanced: {
-            age: '67-year-old male', weight: '72 kg',
-            presentation: 'syncope, now dyspneic',
-            history: 'Metastatic prostate cancer. Hip surgery 2 weeks ago.',
-            exam: 'Ill-appearing. JVD. Loud P2.',
-            vitals: { HR: '124', BP: '88/54', RR: '28', SpO2: '88%' },
-            wellsScore: 10
-        }
-    };
+    // Wells Criteria for PE (original scoring)
+    const wellsCriteriaPool = [
+        { id: 'dvt_signs', text: 'Clinical signs/symptoms of DVT (leg swelling, pain with palpation)', points: 3, correct: true, present: true },
+        { id: 'pe_likely', text: 'PE is #1 diagnosis OR equally likely', points: 3, correct: true, present: true },
+        { id: 'hr_100', text: 'Heart rate > 100', points: 1.5, correct: true, present: true },
+        { id: 'immobilization', text: 'Immobilization ≥3 days OR surgery in past 4 weeks', points: 1.5, correct: true, present: true },
+        { id: 'prior_pe_dvt', text: 'Previous PE or DVT', points: 1.5, correct: true, present: false },
+        { id: 'hemoptysis', text: 'Hemoptysis', points: 1, correct: true, present: false },
+        { id: 'malignancy', text: 'Malignancy (treatment within 6 months or palliative)', points: 1, correct: true, present: false },
+        // Wrong options (not Wells criteria)
+        { id: 'dyspnea', text: 'Dyspnea at rest', points: 0, correct: false },
+        { id: 'chest_pain', text: 'Pleuritic chest pain', points: 0, correct: false },
+        { id: 'hypoxia', text: 'Hypoxia (SpO₂ < 94%)', points: 0, correct: false }
+    ];
 
-    const questions = {
-        q1: { title: 'Pattern Recognition',
-            question: 'Young woman on OCPs with sudden dyspnea and unilateral leg swelling. Top diagnosis?',
-            hint: 'OCPs + leg swelling + sudden dyspnea = classic triad.',
-            options: [
-                { id: 'pe', text: 'Pulmonary embolism', correct: true, points: 100 },
-                { id: 'anxiety', text: 'Panic attack', correct: false, points: 0 },
-                { id: 'asthma', text: 'Asthma', correct: false, points: 10 }
-            ],
-            feedback: { correct: '<strong>Correct!</strong> OCPs (↑VTE risk), leg swelling (DVT source), sudden dyspnea = PE until proven otherwise.',
-                       incorrect: '<strong>Don\'t miss PE!</strong> This classic triad requires urgent workup.' }
-        },
-        q2: { title: 'Wells Criteria', type: 'checkbox',
-            question: 'Select ALL components of Wells PE Criteria:',
-            hint: '7 components: symptoms, signs, risk factors, clinical gestalt.',
-            options: [
-                { id: 'dvt', text: 'DVT signs/symptoms (+3)', correct: true },
-                { id: 'likely', text: 'PE most likely diagnosis (+3)', correct: true },
-                { id: 'hr', text: 'HR > 100 (+1.5)', correct: true },
-                { id: 'immob', text: 'Immobilization/surgery (+1.5)', correct: true },
-                { id: 'vte', text: 'Prior DVT/PE (+1.5)', correct: true },
-                { id: 'hemo', text: 'Hemoptysis (+1)', correct: true },
-                { id: 'cancer', text: 'Active cancer (+1)', correct: true },
-                { id: 'ocp', text: 'OCP use', correct: false },
-                { id: 'hypox', text: 'Hypoxia', correct: false }
-            ],
-            feedback: { correct: '<strong>Excellent!</strong> Note: OCPs increase risk but aren\'t in Wells scoring!',
-                       incorrect: '<strong>Review:</strong> 7 criteria. OCPs and hypoxia are NOT Wells components.' }
-        },
-        q3: { title: 'D-dimer Decision',
-            question: (c) => c.wellsScore > 4 ? 'Wells >4 (PE Likely). Check D-dimer first?' : 'Wells ≤4 (PE Unlikely). Role of D-dimer?',
-            hint: 'D-dimer rules OUT, never rules IN.',
-            getOptions: (c) => c.wellsScore > 4 ? [
-                { id: 'no', text: 'No - go directly to CTPA', desc: 'D-dimer won\'t change management', correct: true, points: 100 },
-                { id: 'yes', text: 'Yes - check D-dimer first', correct: false, points: 20 }
-            ] : [
-                { id: 'rule', text: 'Negative D-dimer rules out PE', desc: 'No imaging needed', correct: true, points: 100 },
-                { id: 'image', text: 'Must image regardless', correct: false, points: 0 }
-            ],
-            feedback: { correct: '<strong>Correct!</strong> PE Unlikely + neg D-dimer = ruled out. PE Likely = straight to CTPA.',
-                       incorrect: '<strong>Algorithm:</strong> D-dimer only useful when PE unlikely (Wells ≤4).' }
-        },
-        q4: { title: 'Imaging Choice',
-            question: 'First-line imaging for PE?',
-            hint: 'Think availability, speed, accuracy.',
-            options: [
-                { id: 'ctpa', text: 'CT Pulmonary Angiography', correct: true, points: 100 },
-                { id: 'vq', text: 'V/Q scan', correct: false, points: 60, acceptable: true },
-                { id: 'cxr', text: 'Chest X-ray', correct: false, points: 0 },
-                { id: 'echo', text: 'Echocardiogram', correct: false, points: 30 }
-            ],
-            feedback: { correct: '<strong>Correct!</strong> CTPA: high sensitivity/specificity, widely available.',
-                       acceptable: '<strong>V/Q is second-line</strong> - use if CTPA contraindicated (pregnancy, contrast allergy).',
-                       incorrect: '<strong>CTPA first-line.</strong> CXR insensitive. Echo shows RV strain but doesn\'t diagnose.' }
-        },
-        q5: { title: 'PE Risk Stratification',
-            question: 'What defines "massive" (high-risk) PE?',
-            hint: 'Defined by hemodynamics, not clot size.',
-            options: [
-                { id: 'shock', text: 'Sustained hypotension (SBP <90) or shock', correct: true, points: 100 },
-                { id: 'rv', text: 'RV dysfunction without hypotension', desc: 'Submassive', correct: false, points: 50 },
-                { id: 'clot', text: 'Large clot burden on CT', correct: false, points: 0 }
-            ],
-            feedback: { correct: '<strong>Correct!</strong> Massive = hemodynamic instability. Submassive = RV strain, stable BP.',
-                       incorrect: '<strong>Key:</strong> "Massive" = hemodynamic impact, NOT clot size.' }
-        },
-        q6: { title: 'Initial Anticoagulation',
-            question: 'First-line anticoagulation for stable PE?',
-            options: [
-                { id: 'doac', text: 'DOAC (apixaban or rivaroxaban)', desc: 'No parenteral lead-in needed', correct: true, points: 100 },
-                { id: 'lmwh', text: 'LMWH bridge to warfarin', correct: false, points: 70, acceptable: true },
-                { id: 'warf', text: 'Warfarin alone', correct: false, points: 0 }
-            ],
-            feedback: { correct: '<strong>Correct!</strong> DOACs first-line per CHEST 2016. No INR monitoring needed.',
-                       acceptable: '<strong>Acceptable</strong> if DOAC contraindicated. Must bridge ≥5 days.',
-                       incorrect: '<strong>Never warfarin alone!</strong> Initially prothrombotic - must bridge.' }
-        },
-        q7: { title: 'DOAC Dosing',
-            question: 'Correct apixaban dosing for acute PE?',
-            hint: 'Loading dose period exists.',
-            options: [
-                { id: 'correct', text: '10 mg BID × 7 days, then 5 mg BID', correct: true, points: 100 },
-                { id: 'noload', text: '5 mg BID from start', correct: false, points: 40 },
-                { id: 'low', text: '2.5 mg BID', desc: 'AFib dose, not VTE', correct: false, points: 0 }
-            ],
-            feedback: { correct: '<strong>Correct!</strong> Loading: 10 mg BID × 7d. Maintenance: 5 mg BID. (Rivaroxaban: 15 BID × 21d → 20 daily)',
-                       incorrect: '<strong>Critical!</strong> 10 mg loading needed. 2.5 mg is for AFib, NOT VTE treatment.' }
-        },
-        q8: { title: 'Treatment Duration',
-            question: 'Minimum anticoagulation for first unprovoked PE?',
-            options: [
-                { id: '3mo', text: 'At least 3 months, consider indefinite', correct: true, points: 100 },
-                { id: '1mo', text: '1 month', correct: false, points: 0 },
-                { id: 'life', text: 'Lifelong mandatory', correct: false, points: 60 }
-            ],
-            feedback: { correct: '<strong>Correct!</strong> Minimum 3 months. Unprovoked = high recurrence → consider indefinite.',
-                       incorrect: '<strong>Duration:</strong> Min 3 months all PE. Unprovoked = extended/indefinite.' }
-        }
-    };
+    const diagnosisOptionsPool = [
+        { id: 'pe', text: 'Pulmonary embolism', correct: true },
+        { id: 'pneumonia', text: 'Community-acquired pneumonia', correct: false },
+        { id: 'anxiety', text: 'Anxiety/panic attack', correct: false },
+        { id: 'mi', text: 'Acute coronary syndrome', correct: false },
+        { id: 'chf', text: 'Decompensated heart failure', correct: false },
+        { id: 'pericarditis', text: 'Pericarditis', correct: false },
+        { id: 'costochondritis', text: 'Costochondritis', correct: false },
+        { id: 'asthma', text: 'Asthma exacerbation', correct: false }
+    ];
 
-    let selectedOptions = {};
-    function setDifficulty(level) {
-        state.difficulty = level;
-        document.querySelectorAll('.diff-btn').forEach(b => b.classList.toggle('active', b.dataset.level === level));
-        if (state.stage !== 'setup') { state.stage = 'setup'; state.score = 0; state.maxScore = 0; state.questionNum = 0; document.getElementById('scoreDisplay').textContent = '0'; }
-        render();
-    }
-    function addScore(pts, max) { state.score += pts; state.maxScore += max; document.getElementById('scoreDisplay').textContent = state.score; }
+    const imagingOptionsPool = [
+        { id: 'ctpa', text: 'CT Pulmonary Angiography (CTPA)', correct: true, optimal: true },
+        { id: 'vq', text: 'V/Q Scan', correct: true, optimal: false, note: 'Good alternative if CTPA contraindicated' },
+        { id: 'cxr', text: 'Chest X-ray', correct: false, feedback: 'CXR is often normal in PE - not diagnostic' },
+        { id: 'echo', text: 'Echocardiogram', correct: false, feedback: 'Echo shows RV strain but not diagnostic for PE' },
+        { id: 'leg_us', text: 'Lower extremity ultrasound', correct: true, optimal: false, note: 'If positive, confirms VTE' },
+        { id: 'ct_chest', text: 'CT Chest without contrast', correct: false, feedback: 'Need contrast (CTA) to visualize PE' },
+        { id: 'mri', text: 'MRI Chest', correct: false, feedback: 'Not first-line for acute PE' },
+        { id: 'angio', text: 'Pulmonary angiography (invasive)', correct: true, optimal: false, note: 'Gold standard but invasive - rarely used' }
+    ];
 
-    function selectOption(id) {
-        selectedOptions.current = id;
-        document.querySelectorAll('#qOpts .radio-option').forEach(o => o.classList.toggle('selected', o.dataset.id === id));
-        document.getElementById('submitBtn').disabled = false;
-    }
-    function toggleCheckbox(id) {
-        if (!selectedOptions.checks) selectedOptions.checks = [];
-        const idx = selectedOptions.checks.indexOf(id);
-        if (idx > -1) selectedOptions.checks.splice(idx, 1); else selectedOptions.checks.push(id);
-        document.querySelector(`#qOpts [data-id="${id}"]`).classList.toggle('selected');
-        document.getElementById('submitBtn').disabled = selectedOptions.checks.length === 0;
+    const anticoagOptionsPool = [
+        { id: 'heparin', text: 'Unfractionated heparin IV', correct: true, optimal: true, note: 'Good for unstable patients, easily reversible' },
+        { id: 'enoxaparin', text: 'Enoxaparin (LMWH)', correct: true, optimal: true },
+        { id: 'rivaroxaban', text: 'Rivaroxaban (DOAC)', correct: true, optimal: true },
+        { id: 'apixaban', text: 'Apixaban (DOAC)', correct: true, optimal: true },
+        { id: 'warfarin', text: 'Warfarin alone', correct: false, feedback: 'Warfarin alone causes initial hypercoagulability - need bridge' },
+        { id: 'aspirin', text: 'Aspirin', correct: false, feedback: 'Aspirin is not adequate anticoagulation for PE' },
+        { id: 'clopidogrel', text: 'Clopidogrel', correct: false, feedback: 'Antiplatelet, not anticoagulant' },
+        { id: 'tpa', text: 'tPA (thrombolysis)', correct: false, feedback: 'Reserved for massive PE with hemodynamic instability' }
+    ];
+
+    function startTimer() {
+        if(!state.timerEnabled) return;
+        document.getElementById('timerStat').style.display = 'block';
+        timerInterval = setInterval(() => {
+            state.timerSeconds++;
+            const m = Math.floor(state.timerSeconds/60), s = state.timerSeconds%60;
+            const el = document.getElementById('timer');
+            el.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+            if(state.timerLimit > 0 && state.timerSeconds >= state.timerLimit) { clearInterval(timerInterval); goTo('time_up'); }
+        }, 1000);
     }
 
-    function submitQuestion() {
-        const qKey = 'q' + state.questionNum;
-        const q = questions[qKey];
-        const content = caseContent[state.difficulty];
-        
-        if (q.type === 'checkbox') {
-            const selected = selectedOptions.checks || [];
-            const correctIds = q.options.filter(o => o.correct).map(o => o.id);
-            const correct = selected.filter(id => correctIds.includes(id)).length;
-            const wrong = selected.filter(id => !correctIds.includes(id)).length;
-            addScore(Math.max(0, correct * 14 - wrong * 10), correctIds.length * 14);
-            document.querySelectorAll('#qOpts .checkbox-option').forEach(o => {
-                if (correctIds.includes(o.dataset.id)) o.classList.add(selected.includes(o.dataset.id) ? 'correct' : 'missed');
-                else if (selected.includes(o.dataset.id)) o.classList.add('incorrect');
-            });
-            showFeedback(q, correct === correctIds.length && wrong === 0);
-        } else {
-            const sel = document.querySelector('#qOpts .radio-option.selected');
-            const opts = q.getOptions ? q.getOptions(content) : q.options;
-            const opt = opts.find(o => o.id === sel.dataset.id);
-            addScore(opt.points, 100);
-            document.querySelectorAll('#qOpts .radio-option').forEach(o => {
-                const op = opts.find(x => x.id === o.dataset.id);
-                if (op.correct) o.classList.add('correct');
-                else if (o === sel) o.classList.add(op.acceptable ? 'acceptable' : 'incorrect');
-            });
-            showFeedback(q, opt.correct, opt.acceptable);
-        }
-    }
-
-    function showFeedback(q, correct, acceptable) {
-        const type = correct ? 'correct' : (acceptable ? 'acceptable' : 'incorrect');
-        document.getElementById('qFeedback').innerHTML = `<div class="feedback ${correct ? 'excellent' : acceptable ? 'acceptable' : 'incorrect'}"><div class="feedback-text">${q.feedback[type] || q.feedback.incorrect}</div></div>`;
-        document.getElementById('submitBtn').textContent = state.questionNum < state.totalQuestions ? 'Next →' : 'Results →';
-        document.getElementById('submitBtn').onclick = nextQuestion;
-    }
-
-    function nextQuestion() {
-        if (state.questionNum < state.totalQuestions) { state.questionNum++; selectedOptions = {}; render(); }
-        else { state.stage = 'outcome'; render(); }
-    }
-
-    function startQuestions() { state.questionNum = 1; state.stage = 'question'; render(); }
-    function goTo(s) { state.stage = s; render(); }
+    function addScore(pts) { state.score += pts; document.getElementById('scoreDisplay').textContent = state.score; }
 
     const stages = {
         setup: { render: () => `
             <div class="setup-screen">
-                <h1>🏃 The Breathless Runner</h1>
-                <p style="color: var(--muted); margin-bottom: 32px;">PE: Recognition, Risk Stratification, Treatment</p>
-                <div style="background: rgba(139,92,246,0.1); border-radius: 12px; padding: 20px; margin: 20px 0; text-align: left;">
-                    <div style="font-weight: 600;">${difficultyConfig[state.difficulty].label}</div>
-                    <div style="font-size: 0.85rem; color: var(--muted); margin-top: 8px;">
-                        <strong>Topics:</strong> Wells criteria, D-dimer algorithm, imaging, risk stratification, anticoagulation dosing
+                <h1>🫁 The Runner</h1>
+                <p class="subtitle">A clinical reasoning adventure in PE diagnosis and management</p>
+                <div class="setup-options">
+                    <div class="setup-group">
+                        <label>Select Difficulty</label>
+                        <select id="difficultySelect">
+                            <option value="easy">Easy - Fewer options, more guidance</option>
+                            <option value="hard">Challenging - More options, less guidance</option>
+                            <option value="hardest">Expert - Full complexity</option>
+                        </select>
+                    </div>
+                    <div class="setup-group">
+                        <div class="timer-toggle"><input type="checkbox" id="timerToggle"><label>Enable Timer</label></div>
                     </div>
                 </div>
-                <button class="start-btn" onclick="goTo('presentation')">Begin Case →</button>
-            </div>` },
-        presentation: { render: () => {
-            const c = caseContent[state.difficulty];
-            return `
+                <button class="start-btn" onclick="startCase()">Begin Case →</button>
+            </div>`
+        },
+        arrival: { render: () => `
             <div class="card">
-                <div class="card-header"><div class="card-phase">Presentation</div><div class="card-title">😰 Sudden Dyspnea</div></div>
+                <div class="card-header"><div class="card-phase">Emergency Department</div><div class="card-title">🏃 A Runner in Distress</div></div>
                 <div class="card-body">
-                    <div class="narrative">
-                        <span class="hl">${c.age}</span> (${c.weight}) with <span class="hl">${c.presentation}</span>.<br><br>
-                        <strong>History:</strong> ${c.history}<br>
-                        <strong>Exam:</strong> ${c.exam}
+                    <div class="narrative">A <span class="hl">42-year-old female</span> marathon runner presents to the ED with <span class="hl">sudden onset shortness of breath and right-sided chest pain</span> that started 2 hours ago during a training run. She had to stop running due to the symptoms.<br><br>She reports the chest pain is <span class="hl">sharp and worsens with deep breathing</span>. She also noticed her <span class="hl">left calf has been swollen and tender</span> for the past 3 days - she assumed it was from training.<br><br><strong>History:</strong> She had <span class="hl">arthroscopic knee surgery 2 weeks ago</span> and has been less active since then.</div>
+                    <div class="patient-panel">
+                        <div class="patient-panel-title">Patient Information</div>
+                        <div class="patient-info-grid">
+                            <div><div class="patient-info-label">Age/Sex</div><div class="patient-info-value">42 y/o Female</div></div>
+                            <div><div class="patient-info-label">BMI</div><div class="patient-info-value">22</div></div>
+                            <div><div class="patient-info-label">Recent Surgery</div><div class="patient-info-value">2 weeks ago</div></div>
+                            <div><div class="patient-info-label">Chief Complaint</div><div class="patient-info-value">Dyspnea + Chest Pain</div></div>
+                        </div>
                     </div>
                     <div class="vitals-grid">
-                        <div class="vital ${parseInt(c.vitals.HR)>100?'warning':''}"><div class="vital-label">HR</div><div class="vital-value">${c.vitals.HR}</div></div>
-                        <div class="vital ${parseInt(c.vitals.BP)<90?'critical':''}"><div class="vital-label">BP</div><div class="vital-value">${c.vitals.BP}</div></div>
-                        <div class="vital"><div class="vital-label">RR</div><div class="vital-value">${c.vitals.RR}</div></div>
-                        <div class="vital ${parseInt(c.vitals.SpO2)<95?'critical':''}"><div class="vital-label">SpO2</div><div class="vital-value">${c.vitals.SpO2}</div></div>
+                        <div class="vital"><div class="vital-label">Temp</div><div class="vital-value">98.6°F</div></div>
+                        <div class="vital warning"><div class="vital-label">HR</div><div class="vital-value">112</div></div>
+                        <div class="vital"><div class="vital-label">BP</div><div class="vital-value">128/82</div></div>
+                        <div class="vital warning"><div class="vital-label">RR</div><div class="vital-value">24</div></div>
+                        <div class="vital warning"><div class="vital-label">SpO₂</div><div class="vital-value">92%</div></div>
                     </div>
-                    <div class="btn-row"><button class="btn btn-primary" onclick="startQuestions()">Begin Assessment →</button></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('diagnosis_question')">Begin Assessment →</button></div>
                 </div>
-            </div>`; }
+            </div>`
         },
-        question: { render: () => {
-            const q = questions['q' + state.questionNum];
-            const c = caseContent[state.difficulty];
-            const config = difficultyConfig[state.difficulty];
-            const hint = config.hints && q.hint ? `<div class="hint">💡 ${q.hint}</div>` : '';
-            const qText = typeof q.question === 'function' ? q.question(c) : q.question;
-            const opts = q.getOptions ? q.getOptions(c) : q.options;
-            
-            const optsHtml = q.type === 'checkbox' ?
-                `<div class="checkbox-grid" id="qOpts">${opts.map(o => `
-                    <div class="checkbox-option" data-id="${o.id}" onclick="toggleCheckbox('${o.id}')">
-                        <div class="checkbox-box"></div><span>${o.text}</span>
-                    </div>`).join('')}</div>` :
-                `<div class="radio-options" id="qOpts">${opts.map(o => `
-                    <div class="radio-option" data-id="${o.id}" onclick="selectOption('${o.id}')">
-                        <div class="radio-circle"></div>
-                        <div><strong>${o.text}</strong>${o.desc ? `<br><small style="color:var(--muted)">${o.desc}</small>` : ''}</div>
-                    </div>`).join('')}</div>`;
-            
+        diagnosis_question: { render: () => {
+            const opts = diagnosisOptionsPool.slice(0, difficultySettings[state.difficulty].diagnosisOptions);
             return `
             <div class="card">
-                <div class="card-header"><div class="card-phase">Q${state.questionNum}/${state.totalQuestions}</div><div class="card-title">🔍 ${q.title}</div></div>
+                <div class="card-header"><div class="card-phase">Clinical Reasoning</div><div class="card-title">🧠 What's Your Top Diagnosis?</div></div>
                 <div class="card-body">
-                    <div class="progress-bar"><div class="progress-fill" style="width:${state.questionNum/state.totalQuestions*100}%"></div></div>
-                    <div class="question-header"><div class="question-number">${state.questionNum}</div><div class="question-text">${qText}</div></div>
-                    ${hint}${optsHtml}
-                    <div id="qFeedback"></div>
-                    <div class="btn-row"><button class="btn btn-primary" id="submitBtn" onclick="submitQuestion()" disabled>Submit →</button></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">1</div><div class="question-text">Based on this presentation, what is your LEADING diagnosis?</div></div>
+                        <p class="question-hint">Consider: sudden dyspnea, pleuritic chest pain, unilateral leg swelling, recent surgery, tachycardia, hypoxia</p>
+                        <div class="radio-options" id="diagnosisOpts">${opts.map(o=>`<div class="radio-option" data-id="${o.id}" onclick="selectDiagnosis('${o.id}')"><div class="radio-circle"></div><span>${o.text}</span></div>`).join('')}</div>
+                    </div>
+                    <div id="diagnosisFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="diagnosisSubmit" onclick="submitDiagnosis()" disabled>Submit →</button></div>
                 </div>
-            </div>`; }
+            </div>`}
         },
-        outcome: { render: () => {
-            const pct = state.maxScore > 0 ? Math.round(state.score/state.maxScore*100) : 0;
-            const passed = pct >= difficultyConfig[state.difficulty].passingScore;
+        wells_question: { render: () => {
+            const n = difficultySettings[state.difficulty].wellsOptions;
+            const correct = wellsCriteriaPool.filter(w=>w.correct).slice(0,6);
+            const incorrect = wellsCriteriaPool.filter(w=>!w.correct).slice(0,n-6);
+            const opts = [...correct,...incorrect].sort(()=>Math.random()-0.5);
             return `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Risk Stratification</div><div class="card-title">📋 Wells Criteria for PE</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">2</div><div class="question-text">Select ALL criteria that are part of the Wells Score for PE:</div></div>
+                        <p class="question-hint">The Wells Score helps stratify pre-test probability for PE. Select all valid criteria.</p>
+                        <div class="checkbox-grid" id="wellsOpts">${opts.map(w=>`<div class="checkbox-item" data-id="${w.id}" data-correct="${w.correct}" data-points="${w.points||0}" onclick="toggleWells('${w.id}')"><div class="checkbox-box"></div><div><span>${w.text}</span>${w.points?`<br><small style="color:var(--accent)">(${w.points} points)</small>`:''}</div></div>`).join('')}</div>
+                    </div>
+                    <div id="wellsFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitWells()">Submit →</button></div>
+                </div>
+            </div>`}
+        },
+        wells_apply: { render: () => {
+            const present = wellsCriteriaPool.filter(w=>w.correct && w.present);
+            return `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Apply the Score</div><div class="card-title">🔢 Calculate This Patient's Wells Score</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">3</div><div class="question-text">Which Wells criteria does THIS patient meet?</div></div>
+                        <p class="question-hint">Review the case: Recent surgery, leg swelling/pain, sudden dyspnea, HR 112</p>
+                        <div class="checkbox-grid" id="wellsApplyOpts">${present.map(w=>`<div class="checkbox-item" data-id="${w.id}" data-points="${w.points}" onclick="toggleWellsApply('${w.id}')"><div class="checkbox-box"></div><div><span>${w.text}</span><br><small style="color:var(--accent)">(${w.points} points)</small></div></div>`).join('')}</div>
+                        <div class="wells-calculator"><div class="wells-title"><span>Calculated Wells Score:</span><span class="wells-score" id="wellsScoreDisplay">0</span></div><div id="wellsInterpretation" style="color:var(--muted);font-size:0.9rem"></div></div>
+                    </div>
+                    <div id="wellsApplyFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitWellsApply()">Submit →</button></div>
+                </div>
+            </div>`}
+        },
+        ddimer_decision: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Diagnostic Strategy</div><div class="card-title">🧪 D-dimer Decision</div></div>
+                <div class="card-body">
+                    <div class="wells-calculator"><div class="wells-title"><span>This Patient's Wells Score:</span><span class="wells-score">${state.wellsScore.toFixed(1)}</span></div><div style="color:var(--muted)">${state.wellsScore > 4 ? 'HIGH probability (>4)' : state.wellsScore >= 2 ? 'MODERATE probability (2-4)' : 'LOW probability (<2)'}</div></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">4</div><div class="question-text">Based on the Wells score, what is your next step?</div></div>
+                        <div class="radio-options" id="ddimerOpts">
+                            <div class="radio-option" data-id="ddimer_first" onclick="selectDdimer('ddimer_first')"><div class="radio-circle"></div><div><strong>Order D-dimer first</strong><br><small style="color:var(--muted)">If negative, can rule out PE</small></div></div>
+                            <div class="radio-option" data-id="ctpa_direct" onclick="selectDdimer('ctpa_direct')"><div class="radio-circle"></div><div><strong>Proceed directly to CTPA</strong><br><small style="color:var(--muted)">Skip D-dimer, go straight to imaging</small></div></div>
+                            <div class="radio-option" data-id="no_workup" onclick="selectDdimer('no_workup')"><div class="radio-circle"></div><div><strong>Low probability - no further workup</strong><br><small style="color:var(--muted)">Clinical suspicion is too low</small></div></div>
+                        </div>
+                    </div>
+                    <div id="ddimerFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="ddimerSubmit" onclick="submitDdimer()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        imaging_choice: { render: () => {
+            const opts = imagingOptionsPool.slice(0, difficultySettings[state.difficulty].imagingOptions);
+            return `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Imaging</div><div class="card-title">📷 Select Diagnostic Imaging</div></div>
+                <div class="card-body">
+                    <div class="alert info"><span class="alert-icon">📊</span><div class="alert-content"><div class="alert-title">D-dimer Result: 2.4 μg/mL (elevated)</div><div class="alert-desc">Normal <0.5 μg/mL. This elevated D-dimer with high clinical suspicion warrants imaging.</div></div></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">5</div><div class="question-text">What imaging study do you order to confirm/exclude PE?</div></div>
+                        <div class="radio-options" id="imagingOpts">${opts.map(o=>`<div class="radio-option" data-id="${o.id}" onclick="selectImaging('${o.id}')"><div class="radio-circle"></div><span>${o.text}</span></div>`).join('')}</div>
+                    </div>
+                    <div id="imagingFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="imagingSubmit" onclick="submitImaging()" disabled>Submit →</button></div>
+                </div>
+            </div>`}
+        },
+        ctpa_result: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Results</div><div class="card-title">🔍 CTPA Findings</div></div>
+                <div class="card-body">
+                    <div class="alert danger"><span class="alert-icon">🚨</span><div class="alert-content"><div class="alert-title">PE Confirmed!</div><div class="alert-desc">CTPA shows <strong>bilateral pulmonary emboli</strong> with a large saddle embolus at the main pulmonary artery bifurcation. There is evidence of <strong>right ventricular strain</strong> (RV:LV ratio >1).</div></div></div>
+                    <div class="vitals-grid">
+                        <div class="vital"><div class="vital-label">HR</div><div class="vital-value">108</div></div>
+                        <div class="vital"><div class="vital-label">BP</div><div class="vital-value">118/76</div></div>
+                        <div class="vital warning"><div class="vital-label">SpO₂</div><div class="vital-value">91%</div></div>
+                        <div class="vital"><div class="vital-label">RR</div><div class="vital-value">22</div></div>
+                    </div>
+                    <div class="narrative">The patient remains hemodynamically stable but has imaging evidence of RV strain. She needs anticoagulation urgently.</div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('anticoag_choice')">Select Treatment →</button></div>
+                </div>
+            </div>`
+        },
+        anticoag_choice: { render: () => {
+            const opts = anticoagOptionsPool.slice(0, difficultySettings[state.difficulty].anticoagOptions);
+            return `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Treatment</div><div class="card-title">💊 Anticoagulation Selection</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">6</div><div class="question-text">What anticoagulation do you initiate?</div></div>
+                        <p class="question-hint">Consider: hemodynamically stable, RV strain present, normal renal function, no contraindications</p>
+                        <div class="radio-options" id="anticoagOpts">${opts.map(o=>`<div class="radio-option" data-id="${o.id}" onclick="selectAnticoag('${o.id}')"><div class="radio-circle"></div><span>${o.text}</span></div>`).join('')}</div>
+                    </div>
+                    <div id="anticoagFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="anticoagSubmit" onclick="submitAnticoag()" disabled>Submit →</button></div>
+                </div>
+            </div>`}
+        },
+        good_outcome: { render: () => `
             <div class="card"><div class="card-body">
-                <div style="text-align:center;padding:40px">
-                    <div style="font-size:4rem">${passed ? '🎉' : '📚'}</div>
-                    <div style="font-size:2rem;font-weight:700;color:${passed?'var(--success)':'var(--warning)'}">${passed ? 'Complete!' : 'Review Needed'}</div>
+                <div class="outcome good">
+                    <div class="outcome-icon">🎉</div>
+                    <div class="outcome-title">Patient Stabilized!</div>
+                    <div class="outcome-desc">Through systematic application of the Wells criteria, appropriate use of D-dimer, and timely imaging, you correctly diagnosed this PE and initiated appropriate anticoagulation. The patient was admitted for monitoring and did well.</div>
                 </div>
                 <div class="score-summary">
-                    <div class="score-row"><span>Score</span><span>${state.score}/${state.maxScore} (${pct}%)</span></div>
-                    <div class="score-row"><span>Result</span><span style="color:${passed?'var(--success)':'var(--warning)'}">${passed?'✅ PASSED':'⚠️ REVIEW'}</span></div>
+                    <h3 style="margin-bottom:16px">📊 Performance Summary</h3>
+                    <div class="score-row"><span>Diagnosis Recognition</span><span style="color:${state.correctDiagnosis?'var(--success)':'var(--danger)'}">${state.correctDiagnosis?'Correct':'Incorrect'}</span></div>
+                    <div class="score-row"><span>Wells Criteria Knowledge</span><span>${state.wellsKnowledge||0}/100</span></div>
+                    <div class="score-row"><span>Diagnostic Approach</span><span>${state.diagnosticScore||0}/100</span></div>
+                    <div class="score-row"><span>Treatment Selection</span><span>${state.treatmentScore||0}/100</span></div>
+                    <div class="score-row" style="border-top:2px solid var(--border);margin-top:12px;padding-top:12px"><span><strong>Total Score</strong></span><span style="color:var(--success)"><strong>${state.score}</strong></span></div>
                 </div>
-                <div class="pearls-box">
-                    <div class="pearls-title">📌 PE Clinical Pearls</div>
-                    <div class="pearl-item"><strong>Wells:</strong> DVT(+3), PE likely(+3), HR>100(+1.5), Immob(+1.5), Prior VTE(+1.5), Hemoptysis(+1), Cancer(+1)</div>
-                    <div class="pearl-item"><strong>Wells ≤4:</strong> D-dimer → if neg, ruled out. <strong>Wells >4:</strong> CTPA directly</div>
-                    <div class="pearl-item"><strong>DOAC dosing:</strong> Apixaban 10mg BID×7d → 5mg BID. Rivaroxaban 15mg BID×21d → 20mg daily</div>
-                    <div class="pearl-item"><strong>Duration:</strong> Min 3mo; unprovoked → consider indefinite</div>
+                <div class="feedback excellent"><div class="feedback-header"><span class="feedback-icon">💡</span><span class="feedback-title">PE Diagnostic Algorithm</span></div><div class="feedback-text">• <strong>Low/Moderate probability</strong> → D-dimer first → if negative, PE excluded<br>• <strong>High probability</strong> → Proceed to CTPA (D-dimer won't change management)<br>• <strong>Treatment:</strong> DOACs (rivaroxaban, apixaban) or LMWH→warfarin<br>• <strong>Thrombolysis:</strong> Only for massive PE with hemodynamic instability</div></div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Play Again</button><button class="btn btn-secondary" onclick="location.href='adventure-hub.html'">← Adventures</button></div>
+            </div></div>`
+        },
+        missed_pe: { render: () => `
+            <div class="card"><div class="card-body">
+                <div class="outcome bad">
+                    <div class="outcome-icon">💔</div>
+                    <div class="outcome-title">PE Missed</div>
+                    <div class="outcome-desc">By not pursuing appropriate workup, the PE was not diagnosed. The patient was discharged and returned 2 days later in cardiac arrest from a massive PE.</div>
                 </div>
-                <div class="reference-box"><a href="https://www.ncbi.nlm.nih.gov/books/NBK560551/" target="_blank">StatPearls: PE</a></div>
-                <div class="cross-link"><div class="cross-link-title">🔗 Continue</div><a href="../mechanism/vte-pe-module.html">MechanismDx: VTE</a></div>
-                <div class="btn-row" style="justify-content:center;margin-top:30px">
-                    <button class="btn btn-primary" onclick="location.reload()">Retry</button>
-                    <button class="btn btn-link" onclick="location.href='adventure-hub.html'">Back</button>
-                </div>
-            </div></div>`; }
+                <div class="feedback poor"><div class="feedback-header"><span class="feedback-icon">⚠️</span><span class="feedback-title">Critical Learning</span></div><div class="feedback-text">This patient had <strong>high clinical probability</strong> for PE (Wells >4). In high-probability patients, D-dimer has limited utility - proceed directly to imaging. Never dismiss concerning symptoms without appropriate workup.</div></div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Try Again</button><button class="btn btn-secondary" onclick="location.href='adventure-hub.html'">← Adventures</button></div>
+            </div></div>`
+        },
+        time_up: { render: () => `
+            <div class="card"><div class="card-body">
+                <div class="outcome bad"><div class="outcome-icon">⏰</div><div class="outcome-title">Time Ran Out</div><div class="outcome-desc">PE is a time-sensitive diagnosis. Delays in treatment increase mortality.</div></div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Try Again</button></div>
+            </div></div>`
         }
     };
 
-    function render() { document.getElementById('stageContainer').innerHTML = stages[state.stage].render(); }
+    // Handlers
+    function startCase() {
+        state.difficulty = document.getElementById('difficultySelect').value;
+        state.timerEnabled = document.getElementById('timerToggle').checked;
+        state.timerLimit = state.timerEnabled ? difficultySettings[state.difficulty].timerLimit : 0;
+        document.getElementById('difficultyBadge').textContent = difficultySettings[state.difficulty].label;
+        document.getElementById('difficultyBadge').className = 'difficulty-badge ' + state.difficulty;
+        if(state.timerEnabled) startTimer();
+        goTo('arrival');
+    }
+
+    let selectedDiag = null;
+    function selectDiagnosis(id) { selectedDiag = id; document.querySelectorAll('#diagnosisOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('diagnosisSubmit').disabled=false; }
+    function submitDiagnosis() {
+        const opt = diagnosisOptionsPool.find(o=>o.id===selectedDiag);
+        state.correctDiagnosis = opt.correct;
+        addScore(opt.correct ? 50 : 10);
+        document.querySelectorAll('#diagnosisOpts .radio-option').forEach(o=>{ if(diagnosisOptionsPool.find(x=>x.id===o.dataset.id).correct) o.classList.add('correct'); else if(o.dataset.id===selectedDiag) o.classList.add('incorrect'); });
+        document.getElementById('diagnosisFeedback').innerHTML = `<div class="feedback ${opt.correct?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${opt.correct?'✅':'📚'}</span><span class="feedback-title">${opt.correct?'Correct!':'Not Quite'}</span></div><div class="feedback-text">${opt.correct?'The classic triad of sudden dyspnea, pleuritic chest pain, and unilateral leg swelling with recent surgery is highly suspicious for PE.':'This presentation (sudden dyspnea, pleuritic pain, leg swelling, recent surgery, tachycardia) is classic for <strong>Pulmonary Embolism</strong>.'}</div></div>`;
+        document.getElementById('diagnosisSubmit').textContent = 'Continue →';
+        document.getElementById('diagnosisSubmit').onclick = () => goTo('wells_question');
+    }
+
+    function toggleWells(id) {
+        const el = document.querySelector(`#wellsOpts .checkbox-item[data-id="${id}"]`);
+        if(state.selectedWells.has(id)) { state.selectedWells.delete(id); el.classList.remove('selected'); }
+        else { state.selectedWells.add(id); el.classList.add('selected'); }
+    }
+    function submitWells() {
+        let correct=0, incorrect=0;
+        document.querySelectorAll('#wellsOpts .checkbox-item').forEach(el=>{
+            const isCorr = el.dataset.correct==='true', wasSel = state.selectedWells.has(el.dataset.id);
+            if(isCorr && wasSel) { el.classList.add('correct'); correct++; }
+            else if(isCorr && !wasSel) el.classList.add('missed');
+            else if(!isCorr && wasSel) { el.classList.add('incorrect'); incorrect++; }
+        });
+        const score = Math.max(0, Math.round((correct-incorrect)/6*100));
+        state.wellsKnowledge = score;
+        addScore(Math.round(score/2));
+        document.getElementById('wellsFeedback').innerHTML = `<div class="feedback ${score>=80?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${score>=80?'✅':'📚'}</span><span class="feedback-title">${score>=80?'Excellent':'Review'} (${score}%)</span></div><div class="feedback-text"><strong>Wells Criteria for PE:</strong><br>• Clinical signs of DVT (+3)<br>• PE #1 diagnosis (+3)<br>• HR >100 (+1.5)<br>• Immobilization/surgery (+1.5)<br>• Prior PE/DVT (+1.5)<br>• Hemoptysis (+1)<br>• Malignancy (+1)</div></div>`;
+        document.querySelector('#wellsFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('wells_apply')">Continue →</button>`;
+    }
+
+    let appliedWells = new Set();
+    function toggleWellsApply(id) {
+        const el = document.querySelector(`#wellsApplyOpts .checkbox-item[data-id="${id}"]`);
+        if(appliedWells.has(id)) { appliedWells.delete(id); el.classList.remove('selected'); }
+        else { appliedWells.add(id); el.classList.add('selected'); }
+        // Calculate score
+        let total = 0;
+        appliedWells.forEach(wid => { const w = wellsCriteriaPool.find(x=>x.id===wid); if(w) total += w.points; });
+        document.getElementById('wellsScoreDisplay').textContent = total.toFixed(1);
+        document.getElementById('wellsInterpretation').textContent = total > 4 ? 'HIGH probability - proceed to imaging' : total >= 2 ? 'MODERATE probability - D-dimer may help' : 'LOW probability - D-dimer can rule out';
+    }
+    function submitWellsApply() {
+        // Correct: dvt_signs(3) + pe_likely(3) + hr_100(1.5) + immobilization(1.5) = 9 points
+        const correctTotal = 9;
+        let total = 0;
+        appliedWells.forEach(wid => { const w = wellsCriteriaPool.find(x=>x.id===wid); if(w) total += w.points; });
+        state.wellsScore = total;
+        const accuracy = 100 - Math.abs(correctTotal - total) * 10;
+        addScore(Math.max(0, Math.round(accuracy/2)));
+        document.getElementById('wellsApplyFeedback').innerHTML = `<div class="feedback ${Math.abs(correctTotal-total)<2?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${Math.abs(correctTotal-total)<2?'✅':'📚'}</span><span class="feedback-title">Score: ${total.toFixed(1)} (Correct: ${correctTotal})</span></div><div class="feedback-text"><strong>This patient has:</strong><br>• DVT signs (leg swelling/pain) +3<br>• PE is top diagnosis +3<br>• HR 112 >100 +1.5<br>• Surgery 2 weeks ago +1.5<br><strong>Total: 9 = HIGH probability</strong></div></div>`;
+        state.wellsScore = correctTotal; // Use correct score for next steps
+        document.querySelector('#wellsApplyFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('ddimer_decision')">Continue →</button>`;
+    }
+
+    let ddimerChoice = null;
+    function selectDdimer(id) { ddimerChoice=id; document.querySelectorAll('#ddimerOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('ddimerSubmit').disabled=false; }
+    function submitDdimer() {
+        // With Wells >4 (high probability), should go directly to CTPA
+        const correct = state.wellsScore > 4 ? 'ctpa_direct' : 'ddimer_first';
+        const isCorrect = ddimerChoice === correct || (ddimerChoice === 'ctpa_direct' && state.wellsScore > 4);
+        document.querySelectorAll('#ddimerOpts .radio-option').forEach(o=>{ if(o.dataset.id===correct || (o.dataset.id==='ctpa_direct' && state.wellsScore>4)) o.classList.add('correct'); else if(o.dataset.id===ddimerChoice && !isCorrect) o.classList.add('incorrect'); });
+        if(ddimerChoice === 'no_workup') {
+            document.getElementById('ddimerFeedback').innerHTML = `<div class="feedback poor"><div class="feedback-header"><span class="feedback-icon">⚠️</span><span class="feedback-title">Dangerous Decision</span></div><div class="feedback-text">This patient has HIGH probability for PE. Dismissing without workup is dangerous.</div></div>`;
+            document.getElementById('ddimerSubmit').textContent = 'See Consequence →';
+            document.getElementById('ddimerSubmit').onclick = () => goTo('missed_pe');
+            return;
+        }
+        state.diagnosticScore = isCorrect ? 100 : 70;
+        addScore(isCorrect ? 40 : 25);
+        document.getElementById('ddimerFeedback').innerHTML = `<div class="feedback ${isCorrect?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${isCorrect?'✅':'📚'}</span><span class="feedback-title">${isCorrect?'Optimal Approach':'Acceptable'}</span></div><div class="feedback-text">${state.wellsScore>4?'With HIGH probability (Wells >4), D-dimer won\'t change management - proceed directly to CTPA.':'With moderate probability, D-dimer can help - if negative, PE is ruled out.'}</div></div>`;
+        document.getElementById('ddimerSubmit').textContent = 'Continue →';
+        document.getElementById('ddimerSubmit').onclick = () => goTo('imaging_choice');
+    }
+
+    let imagingChoice = null;
+    function selectImaging(id) { imagingChoice=id; document.querySelectorAll('#imagingOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('imagingSubmit').disabled=false; }
+    function submitImaging() {
+        const opt = imagingOptionsPool.find(o=>o.id===imagingChoice);
+        document.querySelectorAll('#imagingOpts .radio-option').forEach(o=>{ const d=imagingOptionsPool.find(x=>x.id===o.dataset.id); if(d.optimal) o.classList.add('correct'); else if(o.dataset.id===imagingChoice && !d.correct) o.classList.add('incorrect'); });
+        addScore(opt.optimal ? 40 : opt.correct ? 25 : 10);
+        document.getElementById('imagingFeedback').innerHTML = `<div class="feedback ${opt.optimal?'excellent':opt.correct?'good':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${opt.optimal?'✅':opt.correct?'👍':'📚'}</span><span class="feedback-title">${opt.optimal?'Optimal Choice':opt.correct?'Acceptable':'Suboptimal'}</span></div><div class="feedback-text">${opt.feedback||opt.note||'CTPA is the gold standard for PE diagnosis - fast, widely available, and highly sensitive/specific.'}</div></div>`;
+        document.getElementById('imagingSubmit').textContent = 'Continue →';
+        document.getElementById('imagingSubmit').onclick = () => goTo(opt.correct ? 'ctpa_result' : 'imaging_choice');
+    }
+
+    let anticoagChoice = null;
+    function selectAnticoag(id) { anticoagChoice=id; document.querySelectorAll('#anticoagOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('anticoagSubmit').disabled=false; }
+    function submitAnticoag() {
+        const opt = anticoagOptionsPool.find(o=>o.id===anticoagChoice);
+        document.querySelectorAll('#anticoagOpts .radio-option').forEach(o=>{ const d=anticoagOptionsPool.find(x=>x.id===o.dataset.id); if(d.optimal) o.classList.add('correct'); else if(o.dataset.id===anticoagChoice && !d.correct) o.classList.add('incorrect'); });
+        state.treatmentScore = opt.optimal ? 100 : opt.correct ? 70 : 30;
+        addScore(opt.optimal ? 50 : opt.correct ? 30 : 10);
+        document.getElementById('anticoagFeedback').innerHTML = `<div class="feedback ${opt.optimal?'excellent':opt.correct?'good':'poor'}"><div class="feedback-header"><span class="feedback-icon">${opt.optimal?'✅':opt.correct?'👍':'⚠️'}</span><span class="feedback-title">${opt.optimal?'Excellent':opt.correct?'Acceptable':'Incorrect'}</span></div><div class="feedback-text">${opt.feedback||opt.note||'DOACs (rivaroxaban, apixaban) or LMWH are first-line for acute PE in hemodynamically stable patients.'}</div></div>`;
+        document.getElementById('anticoagSubmit').textContent = 'Complete Case →';
+        document.getElementById('anticoagSubmit').onclick = () => goTo('good_outcome');
+    }
+
+    function goTo(id) { state.stage=id; render(); window.scrollTo(0,0); }
+    function render() { const s=stages[state.stage]; if(s) document.getElementById('stageContainer').innerHTML=s.render(); }
     document.addEventListener('DOMContentLoaded', render);
     </script>
 </body>

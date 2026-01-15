@@ -3,35 +3,380 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Stiff Neck | ReasonDx Adventure</title>
-    <style>:root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#F97316;--success:#10B981;--warning:#F59E0B;--danger:#DC2626}*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}.header{background:linear-gradient(135deg,#C2410C,#F97316);padding:12px 20px;position:sticky;top:0;z-index:100}.header-row{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}.diff-toggle{display:flex;background:rgba(0,0,0,.3);border-radius:8px}.diff-btn{padding:6px 12px;font-size:.75rem;cursor:pointer;border:none;background:0 0;color:rgba(255,255,255,.7);font-weight:600}.diff-btn.active{background:rgba(255,255,255,.2);color:#fff}.stat{text-align:center;background:rgba(0,0,0,.2);padding:6px 14px;border-radius:8px}.stat-value{font-size:1.1rem;font-weight:700;font-family:monospace}.stat-label{font-size:.6rem;opacity:.8}.main{max-width:900px;margin:0 auto;padding:24px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px}.card-header{padding:20px 24px;border-bottom:1px solid var(--border)}.card-phase{font-size:.75rem;color:var(--accent);text-transform:uppercase}.card-title{font-size:1.5rem;font-weight:700}.card-body{padding:24px}.narrative{background:rgba(249,115,22,.1);border-left:4px solid var(--accent);padding:20px;border-radius:0 12px 12px 0;margin-bottom:20px}.narrative .hl{background:rgba(249,115,22,.3);padding:2px 6px;border-radius:4px}.setup-screen{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center}.start-btn{background:var(--accent);color:#fff;border:none;padding:16px 48px;border-radius:12px;font-size:1.1rem;font-weight:700;cursor:pointer}.hint{background:rgba(59,130,246,.15);padding:12px 16px;border-radius:8px;margin-bottom:16px;color:#93C5FD}.radio-options{display:flex;flex-direction:column;gap:10px}.radio-option{display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(0,0,0,.2);border:2px solid var(--border);border-radius:10px;cursor:pointer}.radio-option.selected{border-color:var(--accent);background:rgba(249,115,22,.15)}.radio-option.correct{border-color:var(--success);background:rgba(16,185,129,.15)}.radio-option.incorrect{border-color:var(--danger);background:rgba(220,38,38,.15)}.radio-circle{width:22px;height:22px;border:2px solid var(--border);border-radius:50%}.radio-option.selected .radio-circle{border-color:var(--accent);background:radial-gradient(circle,var(--accent) 40%,transparent 40%)}.feedback{padding:20px;border-radius:12px;margin:20px 0}.feedback.excellent{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3)}.feedback.incorrect{background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.3)}.btn{padding:14px 28px;border-radius:10px;font-weight:600;cursor:pointer;border:none}.btn-primary{background:var(--accent);color:#fff}.btn:disabled{opacity:.5}.btn-row{display:flex;gap:12px;margin-top:24px}.btn-link{background:0 0;border:2px solid var(--border);color:var(--text)}.vitals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:12px;margin:20px 0}.vital{background:rgba(0,0,0,.2);padding:12px;border-radius:10px;text-align:center}.vital-label{font-size:.7rem;color:var(--muted)}.vital-value{font-size:1.3rem;font-weight:700;font-family:monospace}.lab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:16px 0}.lab-item{display:flex;justify-content:space-between;padding:8px 12px;background:rgba(0,0,0,.2);border-radius:6px}.lab-name{color:var(--muted)}.lab-value{font-family:monospace;font-weight:600}.score-summary{background:rgba(0,0,0,.2);border-radius:12px;padding:24px;margin:24px auto;max-width:600px}.score-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}.pearls-box{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:20px;margin-top:20px}.pearls-title{font-weight:700;color:var(--success);margin-bottom:12px}.pearl-item{padding:8px 0;border-bottom:1px solid rgba(16,185,129,.2);font-size:.95rem}.cross-link{background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);border-radius:8px;padding:12px 16px;margin-top:12px}.cross-link a{color:#C4B5FD;text-decoration:none}.progress-bar{background:rgba(255,255,255,.1);border-radius:10px;height:8px;margin:20px 0}.progress-fill{background:var(--accent);height:100%}.question-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}.question-number{background:var(--accent);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}</style>
+    <title>The Worst Headache | ReasonDx Adventure</title>
+    <style>
+        :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #EF4444; --success: #10B981; --warning: #F59E0B; --danger: #DC2626; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #DC2626 0%, #EF4444 100%); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; }
+        .stat { background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 8px; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        .main { max-width: 1000px; margin: 0 auto; padding: 24px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(239,68,68,0.1), rgba(220,38,38,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; line-height: 1.8; }
+        .narrative .hl { background: rgba(239,68,68,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        .setup-screen { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; }
+        .setup-screen h1 { font-size: 2rem; margin-bottom: 8px; }
+        .setup-screen .subtitle { color: var(--muted); margin-bottom: 32px; }
+        .start-btn { background: var(--accent); color: white; border: none; padding: 16px 48px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+        .question-section { margin-bottom: 32px; }
+        .question-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .question-number { background: var(--accent); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .question-text { font-size: 1.1rem; font-weight: 600; }
+        .radio-options { display: flex; flex-direction: column; gap: 10px; }
+        .radio-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .radio-option:hover { border-color: var(--accent); }
+        .radio-option.selected { border-color: var(--accent); background: rgba(239,68,68,0.15); }
+        .radio-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .radio-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .radio-circle { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; }
+        .radio-option.selected .radio-circle { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 40%, transparent 40%); }
+        .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+        .checkbox-item { display: flex; align-items: center; gap: 10px; padding: 12px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .checkbox-item:hover { border-color: var(--accent); }
+        .checkbox-item.selected { border-color: var(--accent); background: rgba(239,68,68,0.15); }
+        .checkbox-item.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .checkbox-item.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .checkbox-box { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .checkbox-item.selected .checkbox-box { background: var(--accent); border-color: var(--accent); }
+        .checkbox-item.selected .checkbox-box::after { content: '✓'; color: white; font-weight: bold; }
+        .feedback { padding: 20px; border-radius: 12px; margin: 20px 0; }
+        .feedback.excellent { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .feedback.acceptable { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .feedback-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .feedback-icon { font-size: 1.5rem; }
+        .feedback-title { font-weight: 700; }
+        .feedback-text { color: var(--muted); line-height: 1.7; }
+        .feedback-text strong { color: var(--text); }
+        .alert { padding: 16px 20px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
+        .alert.danger { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+        .alert.info { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+        .alert-icon { font-size: 1.5rem; }
+        .alert-content { flex: 1; }
+        .alert-title { font-weight: 600; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; color: var(--muted); }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-row { display: flex; gap: 12px; margin-top: 24px; }
+        .lab-panel { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .lab-panel-title { font-weight: 600; margin-bottom: 16px; color: var(--accent); }
+        .lab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; }
+        .lab-item { background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; }
+        .lab-name { font-size: 0.8rem; color: var(--muted); }
+        .lab-value { font-size: 1.1rem; font-weight: 700; }
+        .lab-value.critical { color: var(--danger); }
+        .lab-value.high { color: var(--warning); }
+        .lab-range { font-size: 0.7rem; color: var(--muted); }
+        .outcome { text-align: center; padding: 40px 20px; }
+        .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
+        .outcome-title { font-size: 2rem; font-weight: 700; color: var(--success); margin-bottom: 8px; }
+        .outcome-desc { color: var(--muted); max-width: 600px; margin: 0 auto 24px; }
+        .score-summary { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 24px; margin: 24px auto; max-width: 500px; }
+        .score-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .score-row:last-child { border-bottom: none; }
+        .csf-table { width: 100%; margin: 20px 0; border-collapse: collapse; font-size: 0.85rem; }
+        .csf-table th { text-align: left; padding: 10px; color: var(--accent); border-bottom: 2px solid var(--border); }
+        .csf-table td { padding: 10px; border-bottom: 1px solid var(--border); color: var(--muted); }
+    </style>
 </head>
 <body>
-    <header class="header"><div class="header-row"><div style="font-weight:600">🧠 The Stiff Neck</div><div style="display:flex;gap:12px;align-items:center"><div class="diff-toggle"><button class="diff-btn active" onclick="setDiff('easy')">Easy</button><button class="diff-btn" onclick="setDiff('int')">Intermediate</button><button class="diff-btn" onclick="setDiff('adv')">Advanced</button></div><div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Points</div></div></div></div></header>
-    <main class="main"><div id="app"></div></main>
-<script>
-const S={stage:'setup',score:0,max:0,diff:'easy',q:0,total:8};
-const C={easy:{age:'22M',wt:'75kg',hx:'College student, fever, severe headache, neck stiffness x1d',exam:'Nuchal rigidity, photophobia, + Kernig, petechial rash',vitals:{HR:'112',BP:'108/62',T:'39.8'},labs:{WBC:'18.2',CSF:'Gram+ diplococci'}},int:{age:'68F',wt:'62kg',hx:'DM, fever, confusion x2d, recent sinusitis',exam:'Altered, neck stiff, no focal deficits',vitals:{HR:'98',BP:'148/88',T:'38.9'},labs:{WBC:'14.8',CSF:'PMN predominant, low glucose'}},adv:{age:'35M',wt:'80kg',hx:'HIV+ (CD4 45), headache x1wk, fever, confusion',exam:'Papilledema, CN VI palsy, minimal neck stiffness',vitals:{HR:'88',BP:'138/82',T:'38.2'},labs:{WBC:'6.2',CSF:'Lymphocytes, India ink +'}}};
-const Q=[
-{t:'Classic Triad',q:'Classic triad of bacterial meningitis?',h:'Present in <50% of patients',o:[{id:'a',txt:'Fever + neck stiffness + altered mental status',c:1,p:100},{id:'b',txt:'Fever + rash + headache',c:0,p:40},{id:'c',txt:'Headache + vomiting + photophobia',c:0,p:30}],fb:{1:'<b>Correct!</b> Classic triad present in only 44%. 95% have at least 2 of 4: headache, fever, neck stiffness, AMS.',0:'<b>Triad:</b> Fever, nuchal rigidity, AMS. Most have at least 2 of these.'}},
-{t:'LP Timing',q:'When should LP be delayed for CT first?',h:'Risk of herniation',o:[{id:'a',txt:'Focal neuro deficits, papilledema, seizure, immunocompromised, GCS<10',c:1,p:100},{id:'b',txt:'All suspected meningitis',c:0,p:10},{id:'c',txt:'Never delay LP',c:0,p:0}],fb:{1:'<b>Correct!</b> CT before LP if: focal deficits, papilledema, seizure within 1wk, immunocompromised, GCS<10, or age>60. Give antibiotics before CT!',0:'<b>CT first:</b> When herniation risk present. BUT give antibiotics immediately regardless.'}},
-{t:'Empiric Antibiotics',q:'Empiric antibiotics for adult bacterial meningitis?',h:'Cover common pathogens',o:[{id:'a',txt:'Vancomycin + ceftriaxone (+ ampicillin if >50 or immunocompromised)',c:1,p:100},{id:'b',txt:'Ceftriaxone alone',c:0,p:40},{id:'c',txt:'Penicillin G',c:0,p:20}],fb:{1:'<b>Correct!</b> Vanc (MRSA, resistant pneumo) + ceftriaxone (pneumo, meningococcus, H flu). Add ampicillin >50yo for Listeria.',0:'<b>Empiric:</b> Vanc + ceftriaxone. Add ampicillin for Listeria risk (age>50, immunocompromised, alcoholism).'}},
-{t:'Dexamethasone',q:'When to give dexamethasone in meningitis?',h:'Timing is critical',o:[{id:'a',txt:'Give BEFORE or WITH first antibiotic dose (not after)',c:1,p:100},{id:'b',txt:'After culture results',c:0,p:0},{id:'c',txt:'Never indicated',c:0,p:10}],fb:{1:'<b>Correct!</b> Dexamethasone 0.15 mg/kg q6h x4d. Give before or with first antibiotic. Reduces mortality in pneumococcal meningitis.',0:'<b>Timing:</b> Steroids BEFORE or WITH antibiotics. No benefit if given after.'}},
-{t:'CSF Interpretation',q:'CSF: WBC 1200 (90% PMN), protein 180, glucose 25 (serum 120). Pattern?',h:'Bacterial vs viral vs fungal',o:[{id:'a',txt:'Bacterial meningitis (PMN predominant, low glucose)',c:1,p:100},{id:'b',txt:'Viral meningitis',c:0,p:0},{id:'c',txt:'Fungal meningitis',c:0,p:20}],fb:{1:'<b>Correct!</b> Bacterial: PMN predominant, high protein, LOW glucose (<40 or ratio<0.4). Viral: lymphocytes, normal glucose. Fungal: lymphocytes, low glucose.',0:'<b>CSF patterns:</b> Bacterial=PMN/low glucose. Viral=lymph/normal glucose. Fungal=lymph/low glucose.'}},
-{t:'Cryptococcal Meningitis',q:'HIV patient with headache, + India ink. Treatment?',h:'Antifungal induction',o:[{id:'a',txt:'Amphotericin B + flucytosine x2wks, then fluconazole consolidation',c:1,p:100},{id:'b',txt:'Fluconazole alone',c:0,p:30},{id:'c',txt:'Ceftriaxone',c:0,p:0}],fb:{1:'<b>Correct!</b> Crypto: Induction (AmB + 5-FC x2wks) → Consolidation (fluconazole 400mg x8wks) → Maintenance (fluconazole 200mg until CD4>200).',0:'<b>Crypto treatment:</b> AmB + flucytosine induction, then fluconazole.'}},
-{t:'Prophylaxis',q:'Close contacts of meningococcal meningitis. Prophylaxis?',h:'Prevent secondary cases',o:[{id:'a',txt:'Ciprofloxacin 500mg x1 OR rifampin x2d OR ceftriaxone IM x1',c:1,p:100},{id:'b',txt:'No prophylaxis needed',c:0,p:0},{id:'c',txt:'Penicillin',c:0,p:20}],fb:{1:'<b>Correct!</b> Chemoprophylaxis for close contacts within 24 hrs. Cipro single dose (adults), rifampin x2d, or ceftriaxone IM (pregnant).',0:'<b>Prophylaxis:</b> Cipro, rifampin, or ceftriaxone for close contacts.'}},
-{t:'HSV Encephalitis',q:'Altered mental status, fever, temporal lobe on MRI. Add what?',h:'Viral encephalitis treatment',o:[{id:'a',txt:'Acyclovir 10 mg/kg IV q8h',c:1,p:100},{id:'b',txt:'More antibiotics',c:0,p:20},{id:'c',txt:'Steroids only',c:0,p:10}],fb:{1:'<b>Correct!</b> HSV encephalitis: Acyclovir 10 mg/kg q8h x14-21d. Start empirically if suspected. Temporal lobe involvement classic.',0:'<b>HSV encephalitis:</b> Acyclovir 10 mg/kg q8h. Dont delay for PCR.'}}
-];
-let sel=null;
-function setDiff(d){S.diff=d;document.querySelectorAll('.diff-btn').forEach((b,i)=>b.classList.toggle('active',['easy','int','adv'][i]===d));if(S.stage!=='setup'){S.stage='setup';S.score=0;S.max=0;S.q=0;document.getElementById('score').textContent='0';}render();}
-function addPts(p,m){S.score+=p;S.max+=m;document.getElementById('score').textContent=S.score;}
-function pick(id){sel=id;document.querySelectorAll('.radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id));document.getElementById('sub').disabled=false;}
-function submit(){const q=Q[S.q-1];const opt=q.o.find(o=>o.id===sel);addPts(opt.p||0,100);document.querySelectorAll('.radio-option').forEach(o=>{const op=q.o.find(x=>x.id===o.dataset.id);if(op&&op.c)o.classList.add('correct');else if(o.dataset.id===sel)o.classList.add('incorrect');});document.getElementById('fb').innerHTML='<div class="feedback '+(opt&&opt.c?'excellent':'incorrect')+'">'+q.fb[opt&&opt.c?1:0]+'</div>';document.getElementById('sub').textContent=S.q<S.total?'Next':'Results';document.getElementById('sub').onclick=next;}
-function next(){if(S.q<S.total){S.q++;sel=null;render();}else{S.stage='outcome';render();}}
-function start(){S.q=1;S.stage='question';render();}
-function go(s){S.stage=s;render();}
-function render(){const c=C[S.diff];if(S.stage==='setup'){document.getElementById('app').innerHTML='<div class="setup-screen"><h1>🧠 The Stiff Neck</h1><p style="color:var(--muted);margin-bottom:32px">Meningitis: LP timing, empiric Abx, dexamethasone, CSF patterns, crypto</p><button class="start-btn" onclick="go(\'pres\')">Begin Case</button></div>';}else if(S.stage==='pres'){document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Presentation</div><div class="card-title">🦠 CNS Infection</div></div><div class="card-body"><div class="narrative"><span class="hl">'+c.age+'</span> ('+c.wt+')<br><b>Hx:</b> '+c.hx+'<br><b>Exam:</b> '+c.exam+'</div><div class="vitals-grid">'+Object.entries(c.vitals).map(function(e){return'<div class="vital"><div class="vital-label">'+e[0]+'</div><div class="vital-value">'+e[1]+'</div></div>';}).join('')+'</div><div class="lab-grid">'+Object.entries(c.labs).map(function(e){return'<div class="lab-item"><span class="lab-name">'+e[0]+'</span><span class="lab-value">'+e[1]+'</span></div>';}).join('')+'</div><div class="btn-row"><button class="btn btn-primary" onclick="start()">Begin Assessment</button></div></div></div>';}else if(S.stage==='question'){var q=Q[S.q-1];document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Q'+S.q+'/'+S.total+'</div><div class="card-title">'+q.t+'</div></div><div class="card-body"><div class="progress-bar"><div class="progress-fill" style="width:'+(S.q/S.total*100)+'%"></div></div><div class="question-header"><div class="question-number">'+S.q+'</div><div style="font-weight:600">'+q.q+'</div></div><div class="hint">'+q.h+'</div><div class="radio-options">'+q.o.map(function(o){return'<div class="radio-option" data-id="'+o.id+'" onclick="pick(\''+o.id+'\')"><div class="radio-circle"></div><div><b>'+o.txt+'</b></div></div>';}).join('')+'</div><div id="fb"></div><div class="btn-row"><button class="btn btn-primary" id="sub" onclick="submit()" disabled>Submit</button></div></div></div>';}else{var pct=S.max>0?Math.round(S.score/S.max*100):0;document.getElementById('app').innerHTML='<div class="card"><div class="card-body"><div style="text-align:center;padding:40px"><div style="font-size:4rem">'+(pct>=70?'🎉':'📚')+'</div><div style="font-size:2rem;font-weight:700;color:'+(pct>=70?'var(--success)':'var(--warning)')+'">'+(pct>=70?'Complete!':'Review')+'</div></div><div class="score-summary"><div class="score-row"><span>Score</span><span>'+S.score+'/'+S.max+' ('+pct+'%)</span></div></div><div class="pearls-box"><div class="pearls-title">Meningitis Pearls</div><div class="pearl-item"><b>Empiric:</b> Vanc + ceftriaxone. Add ampicillin if >50</div><div class="pearl-item"><b>Steroids:</b> Dexamethasone BEFORE or WITH first antibiotic</div><div class="pearl-item"><b>CT first:</b> Focal deficits, papilledema, seizure, immunocompromised</div><div class="pearl-item"><b>Bacterial CSF:</b> PMN predominant, low glucose</div><div class="pearl-item"><b>HSV:</b> Acyclovir 10 mg/kg q8h</div></div><div class="cross-link"><a href="../mechanism/neurology.html">MechanismDx: Neurology</a></div><div class="btn-row" style="justify-content:center;margin-top:30px"><button class="btn btn-primary" onclick="location.reload()">Retry</button><button class="btn btn-link" onclick="location.href=\'adventure-hub.html\'">Back</button></div></div></div>';}}
-document.addEventListener('DOMContentLoaded',render);
-</script>
+    <header class="header"><div class="header-row"><div class="header-title">🧠 The Worst Headache</div><div class="stat"><div class="stat-value" id="scoreDisplay">0</div><div class="stat-label">Points</div></div></div></header>
+    <main class="main"><div id="stageContainer"></div></main>
+    <script>
+    const state = { stage:'setup', score:0 };
+    
+    function addScore(pts) { state.score += pts; document.getElementById('scoreDisplay').textContent = state.score; }
+
+    const stages = {
+        setup: { render: () => `
+            <div class="setup-screen">
+                <h1>🧠 The Worst Headache</h1>
+                <p class="subtitle">Bacterial meningitis recognition and management</p>
+                <button class="start-btn" onclick="goTo('presentation')">Begin Case →</button>
+            </div>`
+        },
+        presentation: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Emergency Department</div><div class="card-title">📋 Fever and Headache</div></div>
+                <div class="card-body">
+                    <div class="narrative">A <span class="hl">22-year-old college student</span> presents with <span class="hl">severe headache</span>, <span class="hl">fever (39.2°C)</span>, and <span class="hl">neck stiffness</span> for 12 hours. He reports <span class="hl">photophobia</span> and has vomited twice.<br><br>He lives in a dormitory and is otherwise healthy. No recent travel or sick contacts. On exam: <span class="hl">positive Kernig and Brudzinski signs</span>, <span class="hl">petechial rash</span> on trunk and legs. GCS 14 (confused).</div>
+                    <div class="alert danger"><span class="alert-icon">🚨</span><div class="alert-content"><div class="alert-title">High-Risk Features</div><div class="alert-desc">Classic meningitis triad (fever, neck stiffness, altered mental status) + petechial rash suggests bacterial meningitis until proven otherwise</div></div></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('firstAction')">What's Your First Action? →</button></div>
+                </div>
+            </div>`
+        },
+        firstAction: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Critical Decision</div><div class="card-title">⏱️ Time-Sensitive Management</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">1</div><div class="question-text">What is the MOST important first action?</div></div>
+                        <div class="radio-options" id="firstOpts">
+                            <div class="radio-option" data-id="ct" onclick="selectFirst('ct')"><div class="radio-circle"></div><div><strong>CT head first</strong><br><small style="color:var(--muted)">Rule out mass before LP</small></div></div>
+                            <div class="radio-option" data-id="lp" onclick="selectFirst('lp')"><div class="radio-circle"></div><div><strong>Lumbar puncture immediately</strong><br><small style="color:var(--muted)">Need CSF before antibiotics</small></div></div>
+                            <div class="radio-option" data-id="abx" onclick="selectFirst('abx')"><div class="radio-circle"></div><div><strong>Empiric antibiotics + dexamethasone NOW</strong><br><small style="color:var(--muted)">Don't delay for testing</small></div></div>
+                            <div class="radio-option" data-id="blood" onclick="selectFirst('blood')"><div class="radio-circle"></div><div><strong>Blood cultures then observe</strong><br><small style="color:var(--muted)">See if symptoms progress</small></div></div>
+                        </div>
+                    </div>
+                    <div id="firstFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="firstSubmit" onclick="submitFirst()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        ctIndications: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Imaging</div><div class="card-title">🧠 CT Before LP?</div></div>
+                <div class="card-body">
+                    <div class="alert info"><span class="alert-icon">📋</span><div class="alert-content"><div class="alert-title">IDSA Guidelines</div><div class="alert-desc">CT before LP is NOT routinely needed. Only required for specific indications to rule out mass effect.</div></div></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">2</div><div class="question-text">Which are indications for CT BEFORE LP?</div></div>
+                        <div class="checkbox-grid" id="ctOpts">
+                            <div class="checkbox-item" data-id="immuno" data-correct="true" onclick="toggleCT('immuno')"><div class="checkbox-box"></div><span>Immunocompromised</span></div>
+                            <div class="checkbox-item" data-id="cns" data-correct="true" onclick="toggleCT('cns')"><div class="checkbox-box"></div><span>History of CNS disease</span></div>
+                            <div class="checkbox-item" data-id="seizure" data-correct="true" onclick="toggleCT('seizure')"><div class="checkbox-box"></div><span>New seizure</span></div>
+                            <div class="checkbox-item" data-id="papill" data-correct="true" onclick="toggleCT('papill')"><div class="checkbox-box"></div><span>Papilledema</span></div>
+                            <div class="checkbox-item" data-id="focal" data-correct="true" onclick="toggleCT('focal')"><div class="checkbox-box"></div><span>Focal neurologic deficit</span></div>
+                            <div class="checkbox-item" data-id="gcs" data-correct="true" onclick="toggleCT('gcs')"><div class="checkbox-box"></div><span>GCS ≤10 (severely impaired)</span></div>
+                            <div class="checkbox-item" data-id="fever" data-correct="false" onclick="toggleCT('fever')"><div class="checkbox-box"></div><span>Fever alone</span></div>
+                            <div class="checkbox-item" data-id="headache" data-correct="false" onclick="toggleCT('headache')"><div class="checkbox-box"></div><span>Headache alone</span></div>
+                        </div>
+                    </div>
+                    <div id="ctFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitCT()">Submit →</button></div>
+                </div>
+            </div>`
+        },
+        empiric: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Treatment</div><div class="card-title">💊 Empiric Antibiotics</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">3</div><div class="question-text">What is the appropriate empiric regimen for this 22-year-old?</div></div>
+                        <div class="radio-options" id="abxOpts">
+                            <div class="radio-option" data-id="ceftri" onclick="selectAbx('ceftri')"><div class="radio-circle"></div><div><strong>Ceftriaxone alone</strong><br><small style="color:var(--muted)">Third-generation cephalosporin</small></div></div>
+                            <div class="radio-option" data-id="ceftri_vanco" onclick="selectAbx('ceftri_vanco')"><div class="radio-circle"></div><div><strong>Ceftriaxone + Vancomycin</strong><br><small style="color:var(--muted)">Cover resistant pneumococcus</small></div></div>
+                            <div class="radio-option" data-id="ceftri_vanco_amp" onclick="selectAbx('ceftri_vanco_amp')"><div class="radio-circle"></div><div><strong>Ceftriaxone + Vancomycin + Ampicillin</strong><br><small style="color:var(--muted)">Add Listeria coverage</small></div></div>
+                            <div class="radio-option" data-id="meropenem" onclick="selectAbx('meropenem')"><div class="radio-circle"></div><div><strong>Meropenem</strong><br><small style="color:var(--muted)">Broad gram-negative coverage</small></div></div>
+                        </div>
+                    </div>
+                    <div id="abxFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="abxSubmit" onclick="submitAbx()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        csf: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Diagnostics</div><div class="card-title">🧪 CSF Analysis</div></div>
+                <div class="card-body">
+                    <div class="lab-panel">
+                        <div class="lab-panel-title">Lumbar Puncture Results</div>
+                        <div class="lab-grid">
+                            <div class="lab-item"><div class="lab-name">Opening Pressure</div><div class="lab-value high">32 cm H₂O</div><div class="lab-range">10-20</div></div>
+                            <div class="lab-item"><div class="lab-name">WBC</div><div class="lab-value critical">2,400/μL</div><div class="lab-range">&lt;5</div></div>
+                            <div class="lab-item"><div class="lab-name">Neutrophils</div><div class="lab-value critical">92%</div><div class="lab-range">0%</div></div>
+                            <div class="lab-item"><div class="lab-name">Protein</div><div class="lab-value high">280 mg/dL</div><div class="lab-range">15-45</div></div>
+                            <div class="lab-item"><div class="lab-name">Glucose</div><div class="lab-value critical">18 mg/dL</div><div class="lab-range">40-70</div></div>
+                            <div class="lab-item"><div class="lab-name">Gram Stain</div><div class="lab-value critical">GN diplococci</div><div class="lab-range">Negative</div></div>
+                        </div>
+                    </div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">4</div><div class="question-text">This CSF pattern is most consistent with:</div></div>
+                        <div class="radio-options" id="csfOpts">
+                            <div class="radio-option" data-id="bacterial" onclick="selectCSF('bacterial')"><div class="radio-circle"></div><div><strong>Bacterial meningitis</strong><br><small style="color:var(--muted)">High WBC (PMN predominant), high protein, low glucose</small></div></div>
+                            <div class="radio-option" data-id="viral" onclick="selectCSF('viral')"><div class="radio-circle"></div><div><strong>Viral meningitis</strong><br><small style="color:var(--muted)">Lymphocyte predominant, normal glucose</small></div></div>
+                            <div class="radio-option" data-id="tb" onclick="selectCSF('tb')"><div class="radio-circle"></div><div><strong>TB meningitis</strong><br><small style="color:var(--muted)">Lymphocyte predominant, very low glucose</small></div></div>
+                            <div class="radio-option" data-id="fungal" onclick="selectCSF('fungal')"><div class="radio-circle"></div><div><strong>Fungal meningitis</strong><br><small style="color:var(--muted)">Lymphocyte predominant, subacute course</small></div></div>
+                        </div>
+                    </div>
+                    <div id="csfFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="csfSubmit" onclick="submitCSF()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        organism: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Microbiology</div><div class="card-title">🔬 Identify the Pathogen</div></div>
+                <div class="card-body">
+                    <div class="alert info"><span class="alert-icon">🔬</span><div class="alert-content"><div class="alert-title">Gram Stain: Gram-Negative Diplococci</div><div class="alert-desc">College student with petechial rash + GN diplococci on CSF gram stain</div></div></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">5</div><div class="question-text">What is the most likely organism?</div></div>
+                        <div class="radio-options" id="orgOpts">
+                            <div class="radio-option" data-id="nmen" onclick="selectOrg('nmen')"><div class="radio-circle"></div><div><strong>Neisseria meningitidis</strong><br><small style="color:var(--muted)">GN diplococci, petechiae, college outbreak</small></div></div>
+                            <div class="radio-option" data-id="spn" onclick="selectOrg('spn')"><div class="radio-circle"></div><div><strong>Streptococcus pneumoniae</strong><br><small style="color:var(--muted)">GP diplococci, most common overall</small></div></div>
+                            <div class="radio-option" data-id="hib" onclick="selectOrg('hib')"><div class="radio-circle"></div><div><strong>Haemophilus influenzae</strong><br><small style="color:var(--muted)">GN coccobacilli</small></div></div>
+                            <div class="radio-option" data-id="listeria" onclick="selectOrg('listeria')"><div class="radio-circle"></div><div><strong>Listeria monocytogenes</strong><br><small style="color:var(--muted)">GP rods</small></div></div>
+                        </div>
+                    </div>
+                    <div id="orgFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="orgSubmit" onclick="submitOrg()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        prophylaxis: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Public Health</div><div class="card-title">🛡️ Chemoprophylaxis</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">6</div><div class="question-text">Who needs chemoprophylaxis for N. meningitidis exposure?</div></div>
+                        <div class="checkbox-grid" id="prophOpts">
+                            <div class="checkbox-item" data-id="household" data-correct="true" onclick="toggleProph('household')"><div class="checkbox-box"></div><span>Household contacts</span></div>
+                            <div class="checkbox-item" data-id="roommate" data-correct="true" onclick="toggleProph('roommate')"><div class="checkbox-box"></div><span>Dormitory roommate</span></div>
+                            <div class="checkbox-item" data-id="intubate" data-correct="true" onclick="toggleProph('intubate')"><div class="checkbox-box"></div><span>Healthcare worker who intubated</span></div>
+                            <div class="checkbox-item" data-id="kissing" data-correct="true" onclick="toggleProph('kissing')"><div class="checkbox-box"></div><span>Intimate/kissing contacts</span></div>
+                            <div class="checkbox-item" data-id="classmate" data-correct="false" onclick="toggleProph('classmate')"><div class="checkbox-box"></div><span>All classmates</span></div>
+                            <div class="checkbox-item" data-id="cafeteria" data-correct="false" onclick="toggleProph('cafeteria')"><div class="checkbox-box"></div><span>Cafeteria workers</span></div>
+                        </div>
+                    </div>
+                    <div id="prophFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitProph()">Submit →</button></div>
+                </div>
+            </div>`
+        },
+        outcome: { render: () => `
+            <div class="card"><div class="card-body">
+                <div class="outcome">
+                    <div class="outcome-icon">🎉</div>
+                    <div class="outcome-title">Patient Recovered!</div>
+                    <div class="outcome-desc">Blood and CSF cultures confirmed N. meningitidis. Patient completed 7 days of ceftriaxone. Close contacts received rifampin prophylaxis. Public health was notified and dorm contacts were identified for post-exposure prophylaxis. Full neurologic recovery at discharge.</div>
+                </div>
+                <div class="score-summary">
+                    <h3 style="margin-bottom:16px">Performance</h3>
+                    <div class="score-row"><span>First Action</span><span>${state.firstScore||0}/100</span></div>
+                    <div class="score-row"><span>CT Indications</span><span>${state.ctScore||0}/100</span></div>
+                    <div class="score-row"><span>Empiric Antibiotics</span><span>${state.abxScore||0}/100</span></div>
+                    <div class="score-row"><span>CSF Interpretation</span><span>${state.csfScore||0}/100</span></div>
+                    <div class="score-row"><span>Organism ID</span><span>${state.orgScore||0}/100</span></div>
+                    <div class="score-row"><span>Prophylaxis</span><span>${state.prophScore||0}/100</span></div>
+                    <div class="score-row" style="border-top:2px solid var(--border);padding-top:12px"><strong>Total</strong><strong>${state.score}</strong></div>
+                </div>
+                <div class="feedback excellent"><div class="feedback-header"><span class="feedback-icon">💡</span><span class="feedback-title">Meningitis Pearls</span></div><div class="feedback-text">
+                    • <strong>Don't delay antibiotics!</strong> Give within 1 hour; dexamethasone BEFORE or WITH first dose<br>
+                    • <strong>CT before LP:</strong> Only if immunocompromised, CNS disease, seizure, papilledema, focal deficit, GCS ≤10<br>
+                    • <strong>Empiric (age 2-50):</strong> Ceftriaxone + Vancomycin (add Ampicillin if &gt;50 or immunocompromised for Listeria)<br>
+                    • <strong>Dexamethasone:</strong> Give 15-20 min before first antibiotic dose (reduces mortality in pneumococcal)<br>
+                    • <strong>CSF bacterial:</strong> High WBC (PMN), high protein, LOW glucose (&lt;40 or CSF:serum &lt;0.4)<br>
+                    • <strong>N. meningitidis:</strong> GN diplococci, petechiae, college/military outbreaks<br>
+                    • <strong>Prophylaxis:</strong> Rifampin, ciprofloxacin, or ceftriaxone for close contacts
+                </div></div>
+                <table class="csf-table">
+                    <tr><th>Type</th><th>WBC</th><th>Predominant</th><th>Protein</th><th>Glucose</th></tr>
+                    <tr><td>Bacterial</td><td>1000-5000+</td><td>PMN</td><td>High</td><td>Low</td></tr>
+                    <tr><td>Viral</td><td>10-500</td><td>Lymph</td><td>Normal/High</td><td>Normal</td></tr>
+                    <tr><td>TB/Fungal</td><td>10-500</td><td>Lymph</td><td>High</td><td>Low</td></tr>
+                </table>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Play Again</button></div>
+            </div></div>`
+        }
+    };
+
+    let selectedFirst = null;
+    function selectFirst(id) { selectedFirst = id; document.querySelectorAll('#firstOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('firstSubmit').disabled = false; }
+    function submitFirst() {
+        document.querySelectorAll('#firstOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'abx') o.classList.add('correct');
+            else if (o.dataset.id === selectedFirst) o.classList.add('incorrect');
+        });
+        state.firstScore = selectedFirst === 'abx' ? 100 : 30;
+        addScore(selectedFirst === 'abx' ? 40 : 10);
+        document.getElementById('firstFeedback').innerHTML = `<div class="feedback ${selectedFirst==='abx'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedFirst==='abx'?'✅':'📚'}</span><span class="feedback-title">${selectedFirst==='abx'?'Correct!':'Critical Point'}</span></div><div class="feedback-text"><strong>Antibiotics should NEVER be delayed</strong> for imaging or LP. Give empiric antibiotics + dexamethasone within 1 hour. Blood cultures can be drawn quickly but don't wait for results. CSF cultures remain positive for hours after antibiotics.</div></div>`;
+        document.getElementById('firstSubmit').textContent = 'Continue →';
+        document.getElementById('firstSubmit').onclick = () => goTo('ctIndications');
+    }
+
+    let selectedCT = new Set();
+    function toggleCT(id) {
+        const el = document.querySelector(`#ctOpts .checkbox-item[data-id="${id}"]`);
+        if(selectedCT.has(id)) { selectedCT.delete(id); el.classList.remove('selected'); }
+        else { selectedCT.add(id); el.classList.add('selected'); }
+    }
+    function submitCT() {
+        let correct = 0;
+        const items = [{id:'immuno',c:true},{id:'cns',c:true},{id:'seizure',c:true},{id:'papill',c:true},{id:'focal',c:true},{id:'gcs',c:true},{id:'fever',c:false},{id:'headache',c:false}];
+        items.forEach(i => {
+            const el = document.querySelector(`#ctOpts .checkbox-item[data-id="${i.id}"]`);
+            const sel = selectedCT.has(i.id);
+            if (i.c && sel) { el.classList.add('correct'); correct++; }
+            else if (!i.c && sel) { el.classList.add('incorrect'); }
+        });
+        state.ctScore = Math.round(correct / 6 * 100);
+        addScore(Math.round(state.ctScore / 2.5));
+        document.getElementById('ctFeedback').innerHTML = `<div class="feedback ${state.ctScore>=75?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${state.ctScore>=75?'✅':'📚'}</span><span class="feedback-title">CT Before LP Indications</span></div><div class="feedback-text"><strong>CT needed if:</strong> Immunocompromised, CNS disease history, new seizure, papilledema, focal neuro deficit, GCS ≤10<br><strong>NOT indications:</strong> Fever and headache alone do not require CT before LP</div></div>`;
+        document.querySelector('#ctFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('empiric')">Select Antibiotics →</button>`;
+    }
+
+    let selectedAbx = null;
+    function selectAbx(id) { selectedAbx = id; document.querySelectorAll('#abxOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('abxSubmit').disabled = false; }
+    function submitAbx() {
+        document.querySelectorAll('#abxOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'ceftri_vanco') o.classList.add('correct');
+            else if (o.dataset.id === selectedAbx) o.classList.add('incorrect');
+        });
+        state.abxScore = selectedAbx === 'ceftri_vanco' ? 100 : (selectedAbx === 'ceftri_vanco_amp' ? 70 : 40);
+        addScore(selectedAbx === 'ceftri_vanco' ? 30 : (selectedAbx === 'ceftri_vanco_amp' ? 20 : 10));
+        document.getElementById('abxFeedback').innerHTML = `<div class="feedback ${selectedAbx==='ceftri_vanco'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedAbx==='ceftri_vanco'?'✅':'📚'}</span><span class="feedback-title">${selectedAbx==='ceftri_vanco'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Age 2-50:</strong> Ceftriaxone + Vancomycin (covers S. pneumoniae including resistant strains, N. meningitidis)<br><strong>Add Ampicillin</strong> if &gt;50, immunocompromised, alcoholic (Listeria coverage)<br><strong>Dexamethasone</strong> 0.15 mg/kg Q6h × 4 days - give BEFORE or WITH first antibiotic dose</div></div>`;
+        document.getElementById('abxSubmit').textContent = 'Continue →';
+        document.getElementById('abxSubmit').onclick = () => goTo('csf');
+    }
+
+    let selectedCSF = null;
+    function selectCSF(id) { selectedCSF = id; document.querySelectorAll('#csfOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('csfSubmit').disabled = false; }
+    function submitCSF() {
+        document.querySelectorAll('#csfOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'bacterial') o.classList.add('correct');
+            else if (o.dataset.id === selectedCSF) o.classList.add('incorrect');
+        });
+        state.csfScore = selectedCSF === 'bacterial' ? 100 : 40;
+        addScore(selectedCSF === 'bacterial' ? 30 : 10);
+        document.getElementById('csfFeedback').innerHTML = `<div class="feedback ${selectedCSF==='bacterial'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedCSF==='bacterial'?'✅':'📚'}</span><span class="feedback-title">${selectedCSF==='bacterial'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Bacterial CSF:</strong> WBC 1000-5000+ (PMN &gt;80%), protein &gt;100, glucose &lt;40<br><strong>Viral:</strong> WBC 10-500 (lymphocyte), normal glucose<br><strong>TB/Fungal:</strong> WBC 10-500 (lymphocyte), LOW glucose, subacute course</div></div>`;
+        document.getElementById('csfSubmit').textContent = 'Continue →';
+        document.getElementById('csfSubmit').onclick = () => goTo('organism');
+    }
+
+    let selectedOrg = null;
+    function selectOrg(id) { selectedOrg = id; document.querySelectorAll('#orgOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('orgSubmit').disabled = false; }
+    function submitOrg() {
+        document.querySelectorAll('#orgOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'nmen') o.classList.add('correct');
+            else if (o.dataset.id === selectedOrg) o.classList.add('incorrect');
+        });
+        state.orgScore = selectedOrg === 'nmen' ? 100 : 40;
+        addScore(selectedOrg === 'nmen' ? 30 : 10);
+        document.getElementById('orgFeedback').innerHTML = `<div class="feedback ${selectedOrg==='nmen'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedOrg==='nmen'?'✅':'📚'}</span><span class="feedback-title">${selectedOrg==='nmen'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>N. meningitidis:</strong> GN diplococci + petechial rash + college setting = classic<br><strong>S. pneumoniae:</strong> GP diplococci (lancet-shaped), most common in adults overall<br><strong>H. influenzae:</strong> GN coccobacilli<br><strong>Listeria:</strong> GP rods, elderly/immunocompromised</div></div>`;
+        document.getElementById('orgSubmit').textContent = 'Continue →';
+        document.getElementById('orgSubmit').onclick = () => goTo('prophylaxis');
+    }
+
+    let selectedProph = new Set();
+    function toggleProph(id) {
+        const el = document.querySelector(`#prophOpts .checkbox-item[data-id="${id}"]`);
+        if(selectedProph.has(id)) { selectedProph.delete(id); el.classList.remove('selected'); }
+        else { selectedProph.add(id); el.classList.add('selected'); }
+    }
+    function submitProph() {
+        let correct = 0;
+        const items = [{id:'household',c:true},{id:'roommate',c:true},{id:'intubate',c:true},{id:'kissing',c:true},{id:'classmate',c:false},{id:'cafeteria',c:false}];
+        items.forEach(i => {
+            const el = document.querySelector(`#prophOpts .checkbox-item[data-id="${i.id}"]`);
+            const sel = selectedProph.has(i.id);
+            if (i.c && sel) { el.classList.add('correct'); correct++; }
+            else if (!i.c && sel) { el.classList.add('incorrect'); }
+        });
+        state.prophScore = Math.round(correct / 4 * 100);
+        addScore(Math.round(state.prophScore / 2.5));
+        document.getElementById('prophFeedback').innerHTML = `<div class="feedback ${state.prophScore>=75?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${state.prophScore>=75?'✅':'📚'}</span><span class="feedback-title">Chemoprophylaxis</span></div><div class="feedback-text"><strong>Close contacts need prophylaxis:</strong> Household, roommates, intimate contacts, HCW with direct respiratory exposure (intubation, mouth-to-mouth)<br><strong>NOT needed:</strong> Casual contacts, classmates without close exposure, cafeteria workers</div></div>`;
+        document.querySelector('#prophFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('outcome')">Complete Case →</button>`;
+    }
+
+    function goTo(id) { state.stage = id; document.getElementById('stageContainer').innerHTML = stages[id].render(); window.scrollTo(0,0); }
+    document.addEventListener('DOMContentLoaded', () => goTo('setup'));
+    </script>
 </body>
 </html>

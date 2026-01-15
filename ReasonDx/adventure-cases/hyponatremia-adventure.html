@@ -3,35 +3,370 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Low Salt | ReasonDx Adventure</title>
-    <style>:root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#3B82F6;--success:#10B981;--warning:#F59E0B;--danger:#DC2626}*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}.header{background:linear-gradient(135deg,#1D4ED8,#3B82F6);padding:12px 20px;position:sticky;top:0;z-index:100}.header-row{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}.diff-toggle{display:flex;background:rgba(0,0,0,.3);border-radius:8px}.diff-btn{padding:6px 12px;font-size:.75rem;cursor:pointer;border:none;background:0 0;color:rgba(255,255,255,.7);font-weight:600}.diff-btn.active{background:rgba(255,255,255,.2);color:#fff}.stat{text-align:center;background:rgba(0,0,0,.2);padding:6px 14px;border-radius:8px}.stat-value{font-size:1.1rem;font-weight:700;font-family:monospace}.stat-label{font-size:.6rem;opacity:.8}.main{max-width:900px;margin:0 auto;padding:24px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px}.card-header{padding:20px 24px;border-bottom:1px solid var(--border)}.card-phase{font-size:.75rem;color:var(--accent);text-transform:uppercase}.card-title{font-size:1.5rem;font-weight:700}.card-body{padding:24px}.narrative{background:rgba(59,130,246,.1);border-left:4px solid var(--accent);padding:20px;border-radius:0 12px 12px 0;margin-bottom:20px}.narrative .hl{background:rgba(59,130,246,.3);padding:2px 6px;border-radius:4px}.setup-screen{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center}.start-btn{background:var(--accent);color:#fff;border:none;padding:16px 48px;border-radius:12px;font-size:1.1rem;font-weight:700;cursor:pointer}.hint{background:rgba(59,130,246,.15);padding:12px 16px;border-radius:8px;margin-bottom:16px;color:#93C5FD}.radio-options{display:flex;flex-direction:column;gap:10px}.radio-option{display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(0,0,0,.2);border:2px solid var(--border);border-radius:10px;cursor:pointer}.radio-option.selected{border-color:var(--accent);background:rgba(59,130,246,.15)}.radio-option.correct{border-color:var(--success);background:rgba(16,185,129,.15)}.radio-option.incorrect{border-color:var(--danger);background:rgba(220,38,38,.15)}.radio-circle{width:22px;height:22px;border:2px solid var(--border);border-radius:50%}.radio-option.selected .radio-circle{border-color:var(--accent);background:radial-gradient(circle,var(--accent) 40%,transparent 40%)}.feedback{padding:20px;border-radius:12px;margin:20px 0}.feedback.excellent{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3)}.feedback.incorrect{background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.3)}.btn{padding:14px 28px;border-radius:10px;font-weight:600;cursor:pointer;border:none}.btn-primary{background:var(--accent);color:#fff}.btn:disabled{opacity:.5}.btn-row{display:flex;gap:12px;margin-top:24px}.btn-link{background:0 0;border:2px solid var(--border);color:var(--text)}.vitals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:12px;margin:20px 0}.vital{background:rgba(0,0,0,.2);padding:12px;border-radius:10px;text-align:center}.vital-label{font-size:.7rem;color:var(--muted)}.vital-value{font-size:1.3rem;font-weight:700;font-family:monospace}.lab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:16px 0}.lab-item{display:flex;justify-content:space-between;padding:8px 12px;background:rgba(0,0,0,.2);border-radius:6px}.lab-name{color:var(--muted)}.lab-value{font-family:monospace;font-weight:600}.score-summary{background:rgba(0,0,0,.2);border-radius:12px;padding:24px;margin:24px auto;max-width:600px}.score-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}.pearls-box{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:20px;margin-top:20px}.pearls-title{font-weight:700;color:var(--success);margin-bottom:12px}.pearl-item{padding:8px 0;border-bottom:1px solid rgba(16,185,129,.2);font-size:.95rem}.cross-link{background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);border-radius:8px;padding:12px 16px;margin-top:12px}.cross-link a{color:#C4B5FD;text-decoration:none}.progress-bar{background:rgba(255,255,255,.1);border-radius:10px;height:8px;margin:20px 0}.progress-fill{background:var(--accent);height:100%}.question-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}.question-number{background:var(--accent);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}</style>
+    <title>The Confused Elder | ReasonDx Adventure</title>
+    <style>
+        :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #06B6D4; --success: #10B981; --warning: #F59E0B; --danger: #DC2626; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #0891B2 0%, #06B6D4 100%); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; color: #1a1a1a; }
+        .stat { background: rgba(0,0,0,0.2); padding: 6px 14px; border-radius: 8px; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; color: #1a1a1a; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; color: #1a1a1a; }
+        .main { max-width: 1000px; margin: 0 auto; padding: 24px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(6,182,212,0.1), rgba(8,145,178,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; line-height: 1.8; }
+        .narrative .hl { background: rgba(6,182,212,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        .setup-screen { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; }
+        .setup-screen h1 { font-size: 2rem; margin-bottom: 8px; }
+        .setup-screen .subtitle { color: var(--muted); margin-bottom: 32px; }
+        .start-btn { background: var(--accent); color: #1a1a1a; border: none; padding: 16px 48px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+        .question-section { margin-bottom: 32px; }
+        .question-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .question-number { background: var(--accent); color: #1a1a1a; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .question-text { font-size: 1.1rem; font-weight: 600; }
+        .radio-options { display: flex; flex-direction: column; gap: 10px; }
+        .radio-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .radio-option:hover { border-color: var(--accent); }
+        .radio-option.selected { border-color: var(--accent); background: rgba(6,182,212,0.15); }
+        .radio-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .radio-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .radio-circle { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; }
+        .radio-option.selected .radio-circle { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 40%, transparent 40%); }
+        .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+        .checkbox-item { display: flex; align-items: center; gap: 10px; padding: 12px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .checkbox-item:hover { border-color: var(--accent); }
+        .checkbox-item.selected { border-color: var(--accent); background: rgba(6,182,212,0.15); }
+        .checkbox-item.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .checkbox-item.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .checkbox-box { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .checkbox-item.selected .checkbox-box { background: var(--accent); border-color: var(--accent); }
+        .checkbox-item.selected .checkbox-box::after { content: '✓'; color: #1a1a1a; font-weight: bold; }
+        .feedback { padding: 20px; border-radius: 12px; margin: 20px 0; }
+        .feedback.excellent { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .feedback.acceptable { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .feedback-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .feedback-icon { font-size: 1.5rem; }
+        .feedback-title { font-weight: 700; }
+        .feedback-text { color: var(--muted); line-height: 1.7; }
+        .feedback-text strong { color: var(--text); }
+        .alert { padding: 16px 20px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
+        .alert.info { background: rgba(6,182,212,0.15); border: 1px solid rgba(6,182,212,0.3); }
+        .alert-icon { font-size: 1.5rem; }
+        .alert-content { flex: 1; }
+        .alert-title { font-weight: 600; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; color: var(--muted); }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: #1a1a1a; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-row { display: flex; gap: 12px; margin-top: 24px; }
+        .lab-panel { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .lab-panel-title { font-weight: 600; margin-bottom: 16px; color: var(--accent); }
+        .lab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; }
+        .lab-item { background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; }
+        .lab-name { font-size: 0.8rem; color: var(--muted); }
+        .lab-value { font-size: 1.1rem; font-weight: 700; }
+        .lab-value.critical { color: var(--danger); }
+        .lab-value.high { color: var(--warning); }
+        .lab-value.low { color: var(--accent); }
+        .lab-range { font-size: 0.7rem; color: var(--muted); }
+        .outcome { text-align: center; padding: 40px 20px; }
+        .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
+        .outcome-title { font-size: 2rem; font-weight: 700; color: var(--success); margin-bottom: 8px; }
+        .outcome-desc { color: var(--muted); max-width: 600px; margin: 0 auto 24px; }
+        .score-summary { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 24px; margin: 24px auto; max-width: 500px; }
+        .score-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .score-row:last-child { border-bottom: none; }
+        .flowchart { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .flowchart-title { font-weight: 600; color: var(--accent); margin-bottom: 16px; text-align: center; }
+        .flowchart-step { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .flowchart-box { background: rgba(6,182,212,0.2); border: 1px solid rgba(6,182,212,0.3); padding: 10px 16px; border-radius: 8px; flex: 1; text-align: center; }
+        .flowchart-arrow { color: var(--accent); font-size: 1.2rem; }
+    </style>
 </head>
 <body>
-    <header class="header"><div class="header-row"><div style="font-weight:600">🧂 The Low Salt</div><div style="display:flex;gap:12px;align-items:center"><div class="diff-toggle"><button class="diff-btn active" onclick="setDiff('easy')">Easy</button><button class="diff-btn" onclick="setDiff('int')">Intermediate</button><button class="diff-btn" onclick="setDiff('adv')">Advanced</button></div><div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Points</div></div></div></div></header>
-    <main class="main"><div id="app"></div></main>
-<script>
-const S={stage:'setup',score:0,max:0,diff:'easy',q:0,total:8};
-const C={easy:{age:'72F',wt:'58kg',hx:'Thiazide started 2wks ago, now confused',exam:'Euvolemic, oriented x1',vitals:{HR:'78',BP:'128/78'},labs:{Na:'118',K:'3.2',Osm:'248',UOsm:'450',UNa:'45'}},int:{age:'55M',wt:'75kg',hx:'SCLC, fatigue, nausea x1wk',exam:'Euvolemic, no edema',vitals:{HR:'82',BP:'138/82'},labs:{Na:'122',K:'4.0',Osm:'258',UOsm:'520',UNa:'65'}},adv:{age:'45F',wt:'62kg',hx:'Marathon runner, collapsed at finish, seizing',exam:'Altered, seizing',vitals:{HR:'108',BP:'148/92'},labs:{Na:'112',K:'4.2',Osm:'238',UOsm:'180'}}};
-const Q=[
-{t:'First Step',q:'Na 118. What is the FIRST diagnostic step?',h:'True vs pseudo',o:[{id:'a',txt:'Check serum osmolality (rule out pseudohyponatremia)',c:1,p:100},{id:'b',txt:'Give hypertonic saline',c:0,p:20},{id:'c',txt:'Fluid restrict',c:0,p:30}],fb:{1:'<b>Correct!</b> Serum Osm first. Low (<280)=hypotonic (true). Normal=pseudohyponatremia (lipids, proteins). High=hyperglycemia, mannitol.',0:'<b>First:</b> Confirm true hyponatremia with serum osmolality.'}},
-{t:'Volume Status',q:'After confirming hypotonic hyponatremia, next step?',h:'Guides treatment',o:[{id:'a',txt:'Assess volume status (hypo, eu, hypervolemic)',c:1,p:100},{id:'b',txt:'Give 3% saline',c:0,p:20},{id:'c',txt:'Order MRI brain',c:0,p:10}],fb:{1:'<b>Correct!</b> Volume status determines cause: Hypo (GI/renal loss), Eu (SIADH, hypothyroid, adrenal), Hyper (CHF, cirrhosis, nephrotic).',0:'<b>Volume status:</b> Key to differential and treatment.'}},
-{t:'SIADH Criteria',q:'Euvolemic, UOsm>100, UNa>40, low serum Osm. Diagnosis?',h:'Diagnosis of exclusion',o:[{id:'a',txt:'SIADH (after excluding hypothyroid and adrenal insufficiency)',c:1,p:100},{id:'b',txt:'Primary polydipsia',c:0,p:20},{id:'c',txt:'Diuretic-induced',c:0,p:30}],fb:{1:'<b>Correct!</b> SIADH: Euvolemic, serum Osm<275, UOsm>100 (usually >300), UNa>40. Must exclude hypothyroid, adrenal insufficiency first.',0:'<b>SIADH:</b> Inappropriate ADH despite low osmolality.'}},
-{t:'Acute Symptomatic',q:'Na 112 with seizure. Immediate treatment?',h:'Severe symptoms need urgent correction',o:[{id:'a',txt:'3% hypertonic saline 100-150mL bolus over 10-20 min',c:1,p:100},{id:'b',txt:'Normal saline',c:0,p:20},{id:'c',txt:'Fluid restriction',c:0,p:0}],fb:{1:'<b>Correct!</b> Acute symptomatic: 3% saline 100-150mL bolus, can repeat x2 if needed. Goal: raise Na 4-6 mEq/L to stop symptoms.',0:'<b>Symptomatic:</b> 3% saline bolus for seizures/severe AMS.'}},
-{t:'Correction Rate',q:'Maximum safe Na correction rate in chronic hyponatremia?',h:'Avoid osmotic demyelination',o:[{id:'a',txt:'8-10 mEq/L in 24 hrs (6-8 if high risk)',c:1,p:100},{id:'b',txt:'20 mEq/L in 24 hrs',c:0,p:0},{id:'c',txt:'2 mEq/L per hour',c:0,p:30}],fb:{1:'<b>Correct!</b> Limit: 8-10 mEq/L in 24hrs, 6-8 if high risk (alcoholism, malnutrition, K<3, Na<105). Overcorrection causes ODS.',0:'<b>ODS risk:</b> Limit correction to 8-10 mEq/L/day.'}},
-{t:'Overcorrection',q:'Na corrected 14 mEq in 12 hours. What to do?',h:'Prevent ODS',o:[{id:'a',txt:'Relower Na with D5W +/- desmopressin',c:1,p:100},{id:'b',txt:'Continue current management',c:0,p:0},{id:'c',txt:'Give more hypertonic saline',c:0,p:0}],fb:{1:'<b>Correct!</b> Overcorrection: Give D5W (3-6 mL/kg/hr) +/- desmopressin 2mcg q8h to relower. Target lowering 1-2 mEq/hr until safe range.',0:'<b>Overcorrection Rx:</b> D5W and desmopressin to relower Na.'}},
-{t:'Thiazide Hyponatremia',q:'New thiazide with Na 118. Treatment?',h:'Common cause in elderly',o:[{id:'a',txt:'Stop thiazide, often need NS initially (volume depleted)',c:1,p:100},{id:'b',txt:'Continue thiazide, add salt tablets',c:0,p:0},{id:'c',txt:'3% saline',c:0,p:30}],fb:{1:'<b>Correct!</b> Thiazide-induced: Stop drug, give NS (often volume depleted despite appearing euvolemic). Usually corrects within days.',0:'<b>Thiazide:</b> Stop drug, give NS. Watch for rapid correction.'}},
-{t:'Exercise-Associated',q:'Marathon runner with Na 112, seizing. Pathophysiology?',h:'Excessive free water intake',o:[{id:'a',txt:'Exercise-associated hyponatremia (excess hypotonic fluid intake)',c:1,p:100},{id:'b',txt:'SIADH',c:0,p:30},{id:'c',txt:'Salt loss from sweat',c:0,p:20}],fb:{1:'<b>Correct!</b> EAH: Excessive hypotonic fluid intake during exercise overwhelms kidneys. Treat with 3% saline if symptomatic. Do NOT give more fluids.',0:'<b>EAH:</b> From overdrinking, not salt loss. 3% saline for symptoms.'}}
-];
-let sel=null;
-function setDiff(d){S.diff=d;document.querySelectorAll('.diff-btn').forEach((b,i)=>b.classList.toggle('active',['easy','int','adv'][i]===d));if(S.stage!=='setup'){S.stage='setup';S.score=0;S.max=0;S.q=0;document.getElementById('score').textContent='0';}render();}
-function addPts(p,m){S.score+=p;S.max+=m;document.getElementById('score').textContent=S.score;}
-function pick(id){sel=id;document.querySelectorAll('.radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id));document.getElementById('sub').disabled=false;}
-function submit(){const q=Q[S.q-1];const opt=q.o.find(o=>o.id===sel);addPts(opt.p||0,100);document.querySelectorAll('.radio-option').forEach(o=>{const op=q.o.find(x=>x.id===o.dataset.id);if(op&&op.c)o.classList.add('correct');else if(o.dataset.id===sel)o.classList.add('incorrect');});document.getElementById('fb').innerHTML='<div class="feedback '+(opt&&opt.c?'excellent':'incorrect')+'">'+q.fb[opt&&opt.c?1:0]+'</div>';document.getElementById('sub').textContent=S.q<S.total?'Next':'Results';document.getElementById('sub').onclick=next;}
-function next(){if(S.q<S.total){S.q++;sel=null;render();}else{S.stage='outcome';render();}}
-function start(){S.q=1;S.stage='question';render();}
-function go(s){S.stage=s;render();}
-function render(){const c=C[S.diff];if(S.stage==='setup'){document.getElementById('app').innerHTML='<div class="setup-screen"><h1>🧂 The Low Salt</h1><p style="color:var(--muted);margin-bottom:32px">Hyponatremia: Volume status, SIADH, correction rate, ODS prevention</p><button class="start-btn" onclick="go(\'pres\')">Begin Case</button></div>';}else if(S.stage==='pres'){document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Presentation</div><div class="card-title">🔬 Electrolyte Emergency</div></div><div class="card-body"><div class="narrative"><span class="hl">'+c.age+'</span> ('+c.wt+')<br><b>Hx:</b> '+c.hx+'<br><b>Exam:</b> '+c.exam+'</div><div class="vitals-grid">'+Object.entries(c.vitals).map(function(e){return'<div class="vital"><div class="vital-label">'+e[0]+'</div><div class="vital-value">'+e[1]+'</div></div>';}).join('')+'</div><div class="lab-grid">'+Object.entries(c.labs).map(function(e){return'<div class="lab-item"><span class="lab-name">'+e[0]+'</span><span class="lab-value">'+e[1]+'</span></div>';}).join('')+'</div><div class="btn-row"><button class="btn btn-primary" onclick="start()">Begin Assessment</button></div></div></div>';}else if(S.stage==='question'){var q=Q[S.q-1];document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Q'+S.q+'/'+S.total+'</div><div class="card-title">'+q.t+'</div></div><div class="card-body"><div class="progress-bar"><div class="progress-fill" style="width:'+(S.q/S.total*100)+'%"></div></div><div class="question-header"><div class="question-number">'+S.q+'</div><div style="font-weight:600">'+q.q+'</div></div><div class="hint">'+q.h+'</div><div class="radio-options">'+q.o.map(function(o){return'<div class="radio-option" data-id="'+o.id+'" onclick="pick(\''+o.id+'\')"><div class="radio-circle"></div><div><b>'+o.txt+'</b></div></div>';}).join('')+'</div><div id="fb"></div><div class="btn-row"><button class="btn btn-primary" id="sub" onclick="submit()" disabled>Submit</button></div></div></div>';}else{var pct=S.max>0?Math.round(S.score/S.max*100):0;document.getElementById('app').innerHTML='<div class="card"><div class="card-body"><div style="text-align:center;padding:40px"><div style="font-size:4rem">'+(pct>=70?'🎉':'📚')+'</div><div style="font-size:2rem;font-weight:700;color:'+(pct>=70?'var(--success)':'var(--warning)')+'">'+(pct>=70?'Complete!':'Review')+'</div></div><div class="score-summary"><div class="score-row"><span>Score</span><span>'+S.score+'/'+S.max+' ('+pct+'%)</span></div></div><div class="pearls-box"><div class="pearls-title">Hyponatremia Pearls</div><div class="pearl-item"><b>First:</b> Serum Osm to confirm true hyponatremia</div><div class="pearl-item"><b>Then:</b> Volume status (hypo, eu, hypervolemic)</div><div class="pearl-item"><b>SIADH:</b> Euvolemic, UOsm>100, UNa>40</div><div class="pearl-item"><b>Symptomatic:</b> 3% saline 100-150mL bolus</div><div class="pearl-item"><b>Limit:</b> 8-10 mEq/L per 24hrs (avoid ODS)</div></div><div class="cross-link"><a href="../mechanism/hyponatremia-module.html">MechanismDx: Hyponatremia</a></div><div class="btn-row" style="justify-content:center;margin-top:30px"><button class="btn btn-primary" onclick="location.reload()">Retry</button><button class="btn btn-link" onclick="location.href=\'adventure-hub.html\'">Back</button></div></div></div>';}}
-document.addEventListener('DOMContentLoaded',render);
-</script>
+    <header class="header"><div class="header-row"><div class="header-title">🧠 The Confused Elder</div><div class="stat"><div class="stat-value" id="scoreDisplay">0</div><div class="stat-label">Points</div></div></div></header>
+    <main class="main"><div id="stageContainer"></div></main>
+    <script>
+    const state = { stage:'setup', score:0 };
+    
+    function addScore(pts) { state.score += pts; document.getElementById('scoreDisplay').textContent = state.score; }
+
+    const stages = {
+        setup: { render: () => `
+            <div class="setup-screen">
+                <h1>🧠 The Confused Elder</h1>
+                <p class="subtitle">Hyponatremia evaluation and management</p>
+                <button class="start-btn" onclick="goTo('presentation')">Begin Case →</button>
+            </div>`
+        },
+        presentation: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Emergency Department</div><div class="card-title">📋 Altered Mental Status</div></div>
+                <div class="card-body">
+                    <div class="narrative">A <span class="hl">72-year-old female</span> is brought in by family for <span class="hl">confusion and lethargy</span> over 3 days. She has <span class="hl">hypertension</span> treated with <span class="hl">hydrochlorothiazide</span> and was recently started on <span class="hl">sertraline</span> for depression 2 weeks ago.<br><br>She appears <span class="hl">euvolemic</span> on exam - no edema, JVP normal, mucous membranes moist. Vitals are stable with BP 128/78.</div>
+                    <div class="lab-panel">
+                        <div class="lab-panel-title">Laboratory Results</div>
+                        <div class="lab-grid">
+                            <div class="lab-item"><div class="lab-name">Sodium</div><div class="lab-value critical">118 mEq/L</div><div class="lab-range">136-145</div></div>
+                            <div class="lab-item"><div class="lab-name">Potassium</div><div class="lab-value">3.8 mEq/L</div><div class="lab-range">3.5-5.0</div></div>
+                            <div class="lab-item"><div class="lab-name">Serum Osm</div><div class="lab-value low">248 mOsm/kg</div><div class="lab-range">280-295</div></div>
+                            <div class="lab-item"><div class="lab-name">Urine Osm</div><div class="lab-value high">520 mOsm/kg</div><div class="lab-range">300-900</div></div>
+                            <div class="lab-item"><div class="lab-name">Urine Na</div><div class="lab-value high">58 mEq/L</div><div class="lab-range">&lt;20 if hypovolemic</div></div>
+                            <div class="lab-item"><div class="lab-name">Glucose</div><div class="lab-value">102 mg/dL</div><div class="lab-range">70-100</div></div>
+                            <div class="lab-item"><div class="lab-name">Creatinine</div><div class="lab-value">0.9 mg/dL</div><div class="lab-range">0.7-1.3</div></div>
+                            <div class="lab-item"><div class="lab-name">TSH</div><div class="lab-value">2.1 mIU/L</div><div class="lab-range">0.5-4.5</div></div>
+                        </div>
+                    </div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('osmolality')">Analyze Labs →</button></div>
+                </div>
+            </div>`
+        },
+        osmolality: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Step 1</div><div class="card-title">🔬 Serum Osmolality</div></div>
+                <div class="card-body">
+                    <div class="alert info"><span class="alert-icon">📋</span><div class="alert-content"><div class="alert-title">First Step: Check Serum Osmolality</div><div class="alert-desc">Hypotonic (&lt;280): True hyponatremia | Isotonic (280-295): Pseudohyponatremia | Hypertonic (&gt;295): Translocational</div></div></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">1</div><div class="question-text">Based on serum osmolality of 248 mOsm/kg, this is:</div></div>
+                        <div class="radio-options" id="osmOpts">
+                            <div class="radio-option" data-id="hypotonic" onclick="selectOsm('hypotonic')"><div class="radio-circle"></div><div><strong>Hypotonic hyponatremia</strong><br><small style="color:var(--muted)">True excess water relative to sodium</small></div></div>
+                            <div class="radio-option" data-id="isotonic" onclick="selectOsm('isotonic')"><div class="radio-circle"></div><div><strong>Isotonic (pseudo) hyponatremia</strong><br><small style="color:var(--muted)">Lab artifact from lipids/proteins</small></div></div>
+                            <div class="radio-option" data-id="hypertonic" onclick="selectOsm('hypertonic')"><div class="radio-circle"></div><div><strong>Hypertonic hyponatremia</strong><br><small style="color:var(--muted)">Osmotic shift (hyperglycemia)</small></div></div>
+                        </div>
+                    </div>
+                    <div id="osmFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="osmSubmit" onclick="submitOsm()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        volume: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Step 2</div><div class="card-title">💧 Volume Status</div></div>
+                <div class="card-body">
+                    <div class="alert info"><span class="alert-icon">📋</span><div class="alert-content"><div class="alert-title">Second Step: Assess Volume Status</div><div class="alert-desc">Hypovolemic: Dehydration, vomiting, diuretics | Euvolemic: SIADH, hypothyroid, adrenal | Hypervolemic: CHF, cirrhosis, nephrotic</div></div></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">2</div><div class="question-text">Based on exam (no edema, normal JVP, moist membranes), volume status is:</div></div>
+                        <div class="radio-options" id="volOpts">
+                            <div class="radio-option" data-id="hypo" onclick="selectVol('hypo')"><div class="radio-circle"></div><span>Hypovolemic</span></div>
+                            <div class="radio-option" data-id="eu" onclick="selectVol('eu')"><div class="radio-circle"></div><span>Euvolemic</span></div>
+                            <div class="radio-option" data-id="hyper" onclick="selectVol('hyper')"><div class="radio-circle"></div><span>Hypervolemic</span></div>
+                        </div>
+                    </div>
+                    <div id="volFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="volSubmit" onclick="submitVol()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        urineNa: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Step 3</div><div class="card-title">🧪 Urine Studies</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">3</div><div class="question-text">Urine Na is 58 mEq/L and Urine Osm is 520. In euvolemic hyponatremia, this suggests:</div></div>
+                        <div class="radio-options" id="urineOpts">
+                            <div class="radio-option" data-id="siadh" onclick="selectUrine('siadh')"><div class="radio-circle"></div><div><strong>SIADH</strong><br><small style="color:var(--muted)">Inappropriately concentrated urine, high urine Na</small></div></div>
+                            <div class="radio-option" data-id="polydipsia" onclick="selectUrine('polydipsia')"><div class="radio-circle"></div><div><strong>Primary polydipsia</strong><br><small style="color:var(--muted)">Excessive water intake</small></div></div>
+                            <div class="radio-option" data-id="hypothyroid" onclick="selectUrine('hypothyroid')"><div class="radio-circle"></div><div><strong>Hypothyroidism</strong><br><small style="color:var(--muted)">Low T4 causes water retention</small></div></div>
+                            <div class="radio-option" data-id="adrenal" onclick="selectUrine('adrenal')"><div class="radio-circle"></div><div><strong>Adrenal insufficiency</strong><br><small style="color:var(--muted)">Low cortisol</small></div></div>
+                        </div>
+                    </div>
+                    <div id="urineFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="urineSubmit" onclick="submitUrine()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        cause: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Etiology</div><div class="card-title">🔍 SIADH Causes</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">4</div><div class="question-text">Which medication(s) likely caused SIADH in this patient?</div></div>
+                        <div class="checkbox-grid" id="causeOpts">
+                            <div class="checkbox-item" data-id="ssri" data-correct="true" onclick="toggleCause('ssri')"><div class="checkbox-box"></div><span>Sertraline (SSRI)</span></div>
+                            <div class="checkbox-item" data-id="thiazide" data-correct="true" onclick="toggleCause('thiazide')"><div class="checkbox-box"></div><span>Hydrochlorothiazide</span></div>
+                            <div class="checkbox-item" data-id="ace" data-correct="false" onclick="toggleCause('ace')"><div class="checkbox-box"></div><span>ACE inhibitors</span></div>
+                            <div class="checkbox-item" data-id="statins" data-correct="false" onclick="toggleCause('statins')"><div class="checkbox-box"></div><span>Statins</span></div>
+                        </div>
+                    </div>
+                    <div id="causeFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitCause()">Submit →</button></div>
+                </div>
+            </div>`
+        },
+        treatment: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Management</div><div class="card-title">💊 Treatment Approach</div></div>
+                <div class="card-body">
+                    <div class="alert info"><span class="alert-icon">⚠️</span><div class="alert-content"><div class="alert-title">Correction Rate Matters!</div><div class="alert-desc">Too fast correction → Osmotic demyelination syndrome (ODS)<br>Goal: ≤8-10 mEq/L per 24 hours, ≤18 mEq/L per 48 hours</div></div></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">5</div><div class="question-text">What is the BEST initial treatment for this symptomatic patient (Na 118, confused)?</div></div>
+                        <div class="radio-options" id="txOpts">
+                            <div class="radio-option" data-id="hypertonic" onclick="selectTx('hypertonic')"><div class="radio-circle"></div><div><strong>Hypertonic saline (3% NaCl)</strong><br><small style="color:var(--muted)">100-150 mL bolus for severe symptoms</small></div></div>
+                            <div class="radio-option" data-id="ns" onclick="selectTx('ns')"><div class="radio-circle"></div><div><strong>Normal saline infusion</strong><br><small style="color:var(--muted)">0.9% NaCl</small></div></div>
+                            <div class="radio-option" data-id="restrict" onclick="selectTx('restrict')"><div class="radio-circle"></div><div><strong>Fluid restriction alone</strong><br><small style="color:var(--muted)">Limit to &lt;1L/day</small></div></div>
+                            <div class="radio-option" data-id="vaptan" onclick="selectTx('vaptan')"><div class="radio-circle"></div><div><strong>Tolvaptan (V2 antagonist)</strong><br><small style="color:var(--muted)">Aquaretic</small></div></div>
+                        </div>
+                    </div>
+                    <div id="txFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="txSubmit" onclick="submitTx()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        monitoring: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Safety</div><div class="card-title">📊 Monitoring</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">6</div><div class="question-text">If sodium rises too quickly, what intervention can SLOW correction?</div></div>
+                        <div class="radio-options" id="monOpts">
+                            <div class="radio-option" data-id="d5w" onclick="selectMon('d5w')"><div class="radio-circle"></div><div><strong>D5W infusion ± desmopressin (DDAVP)</strong><br><small style="color:var(--muted)">Re-lower sodium if overcorrection</small></div></div>
+                            <div class="radio-option" data-id="more_saline" onclick="selectMon('more_saline')"><div class="radio-circle"></div><div><strong>More hypertonic saline</strong><br><small style="color:var(--muted)">Continue correction</small></div></div>
+                            <div class="radio-option" data-id="lasix" onclick="selectMon('lasix')"><div class="radio-circle"></div><div><strong>Furosemide</strong><br><small style="color:var(--muted)">Increase urine output</small></div></div>
+                            <div class="radio-option" data-id="nothing" onclick="selectMon('nothing')"><div class="radio-circle"></div><div><strong>Nothing - overcorrection is not dangerous</strong><br><small style="color:var(--muted)">Just monitor</small></div></div>
+                        </div>
+                    </div>
+                    <div id="monFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="monSubmit" onclick="submitMon()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        outcome: { render: () => `
+            <div class="card"><div class="card-body">
+                <div class="outcome">
+                    <div class="outcome-icon">🎉</div>
+                    <div class="outcome-title">Patient Improved!</div>
+                    <div class="outcome-desc">100 mL 3% saline bolus was given, then slow infusion with Q2h sodium checks. Sodium increased to 124 over 24 hours (6 mEq rise). Sertraline was held and thiazide changed to amlodipine. Mental status returned to baseline by day 2.</div>
+                </div>
+                <div class="score-summary">
+                    <h3 style="margin-bottom:16px">Performance</h3>
+                    <div class="score-row"><span>Osmolality Assessment</span><span>${state.osmScore||0}/100</span></div>
+                    <div class="score-row"><span>Volume Status</span><span>${state.volScore||0}/100</span></div>
+                    <div class="score-row"><span>Urine Interpretation</span><span>${state.urineScore||0}/100</span></div>
+                    <div class="score-row"><span>Cause Identification</span><span>${state.causeScore||0}/100</span></div>
+                    <div class="score-row"><span>Treatment Selection</span><span>${state.txScore||0}/100</span></div>
+                    <div class="score-row"><span>Safety Monitoring</span><span>${state.monScore||0}/100</span></div>
+                    <div class="score-row" style="border-top:2px solid var(--border);padding-top:12px"><strong>Total</strong><strong>${state.score}</strong></div>
+                </div>
+                <div class="feedback excellent"><div class="feedback-header"><span class="feedback-icon">💡</span><span class="feedback-title">Hyponatremia Pearls</span></div><div class="feedback-text">
+                    • <strong>Algorithm:</strong> Serum Osm → Volume status → Urine studies<br>
+                    • <strong>SIADH criteria:</strong> Euvolemic, Serum Osm &lt;280, Urine Osm &gt;100, Urine Na &gt;30, normal thyroid/adrenal<br>
+                    • <strong>Common SIADH causes:</strong> SSRIs, carbamazepine, lung disease, CNS disease, pain, nausea<br>
+                    • <strong>Thiazides:</strong> Unique diuretic that causes hyponatremia (impairs dilution, not SIADH)<br>
+                    • <strong>Symptomatic (severe):</strong> 3% saline 100-150 mL bolus, can repeat × 2<br>
+                    • <strong>Correction limit:</strong> ≤8-10 mEq/L per 24h to prevent ODS<br>
+                    • <strong>Overcorrection rescue:</strong> D5W + DDAVP to re-lower sodium<br>
+                    • <strong>Chronic/asymptomatic:</strong> Fluid restriction, treat underlying cause
+                </div></div>
+                <div class="flowchart">
+                    <div class="flowchart-title">Hyponatremia Algorithm</div>
+                    <div class="flowchart-step"><div class="flowchart-box">Serum Osm</div><span class="flowchart-arrow">→</span><div class="flowchart-box">&lt;280 = True hyponatremia</div></div>
+                    <div class="flowchart-step"><div class="flowchart-box">Volume Status</div><span class="flowchart-arrow">→</span><div class="flowchart-box">Hypo / Eu / Hyper</div></div>
+                    <div class="flowchart-step"><div class="flowchart-box">Urine Na/Osm</div><span class="flowchart-arrow">→</span><div class="flowchart-box">Guides specific diagnosis</div></div>
+                </div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Play Again</button></div>
+            </div></div>`
+        }
+    };
+
+    let selectedOsm = null;
+    function selectOsm(id) { selectedOsm = id; document.querySelectorAll('#osmOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('osmSubmit').disabled = false; }
+    function submitOsm() {
+        document.querySelectorAll('#osmOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'hypotonic') o.classList.add('correct');
+            else if (o.dataset.id === selectedOsm) o.classList.add('incorrect');
+        });
+        state.osmScore = selectedOsm === 'hypotonic' ? 100 : 40;
+        addScore(selectedOsm === 'hypotonic' ? 30 : 10);
+        document.getElementById('osmFeedback').innerHTML = `<div class="feedback ${selectedOsm==='hypotonic'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedOsm==='hypotonic'?'✅':'📚'}</span><span class="feedback-title">${selectedOsm==='hypotonic'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Serum Osm 248</strong> is hypotonic (&lt;280), confirming true hyponatremia with excess free water. Pseudohyponatremia (lipids/proteins) would have normal Osm. Hypertonic (from glucose) would show elevated Osm.</div></div>`;
+        document.getElementById('osmSubmit').textContent = 'Continue →';
+        document.getElementById('osmSubmit').onclick = () => goTo('volume');
+    }
+
+    let selectedVol = null;
+    function selectVol(id) { selectedVol = id; document.querySelectorAll('#volOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('volSubmit').disabled = false; }
+    function submitVol() {
+        document.querySelectorAll('#volOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'eu') o.classList.add('correct');
+            else if (o.dataset.id === selectedVol) o.classList.add('incorrect');
+        });
+        state.volScore = selectedVol === 'eu' ? 100 : 40;
+        addScore(selectedVol === 'eu' ? 30 : 10);
+        document.getElementById('volFeedback').innerHTML = `<div class="feedback ${selectedVol==='eu'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedVol==='eu'?'✅':'📚'}</span><span class="feedback-title">${selectedVol==='eu'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Euvolemic:</strong> No edema, normal JVP, moist membranes. This narrows differential to SIADH, hypothyroidism, or adrenal insufficiency.</div></div>`;
+        document.getElementById('volSubmit').textContent = 'Continue →';
+        document.getElementById('volSubmit').onclick = () => goTo('urineNa');
+    }
+
+    let selectedUrine = null;
+    function selectUrine(id) { selectedUrine = id; document.querySelectorAll('#urineOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('urineSubmit').disabled = false; }
+    function submitUrine() {
+        document.querySelectorAll('#urineOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'siadh') o.classList.add('correct');
+            else if (o.dataset.id === selectedUrine) o.classList.add('incorrect');
+        });
+        state.urineScore = selectedUrine === 'siadh' ? 100 : 40;
+        addScore(selectedUrine === 'siadh' ? 30 : 10);
+        document.getElementById('urineFeedback').innerHTML = `<div class="feedback ${selectedUrine==='siadh'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedUrine==='siadh'?'✅':'📚'}</span><span class="feedback-title">${selectedUrine==='siadh'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>SIADH diagnosis:</strong> Urine Osm &gt;100 (inappropriately concentrated - here 520), Urine Na &gt;30 (here 58), euvolemic, normal TSH, serum Osm &lt;280. Primary polydipsia would have dilute urine (Osm &lt;100).</div></div>`;
+        document.getElementById('urineSubmit').textContent = 'Continue →';
+        document.getElementById('urineSubmit').onclick = () => goTo('cause');
+    }
+
+    let selectedCause = new Set();
+    function toggleCause(id) {
+        const el = document.querySelector(`#causeOpts .checkbox-item[data-id="${id}"]`);
+        if(selectedCause.has(id)) { selectedCause.delete(id); el.classList.remove('selected'); }
+        else { selectedCause.add(id); el.classList.add('selected'); }
+    }
+    function submitCause() {
+        let correct = 0;
+        const causes = [{id:'ssri',c:true},{id:'thiazide',c:true},{id:'ace',c:false},{id:'statins',c:false}];
+        causes.forEach(ca => {
+            const el = document.querySelector(`#causeOpts .checkbox-item[data-id="${ca.id}"]`);
+            const sel = selectedCause.has(ca.id);
+            if (ca.c && sel) { el.classList.add('correct'); correct++; }
+            else if (!ca.c && sel) { el.classList.add('incorrect'); }
+        });
+        state.causeScore = Math.round(correct / 2 * 100);
+        addScore(Math.round(state.causeScore / 2.5));
+        document.getElementById('causeFeedback').innerHTML = `<div class="feedback ${state.causeScore>=75?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${state.causeScore>=75?'✅':'📚'}</span><span class="feedback-title">SIADH Causes</span></div><div class="feedback-text"><strong>SSRIs:</strong> Common cause of SIADH, especially in elderly<br><strong>Thiazides:</strong> Impair urinary dilution (unique among diuretics)<br>ACE-I and statins do not typically cause hyponatremia</div></div>`;
+        document.querySelector('#causeFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('treatment')">Plan Treatment →</button>`;
+    }
+
+    let selectedTx = null;
+    function selectTx(id) { selectedTx = id; document.querySelectorAll('#txOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('txSubmit').disabled = false; }
+    function submitTx() {
+        document.querySelectorAll('#txOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'hypertonic') o.classList.add('correct');
+            else if (o.dataset.id === selectedTx) o.classList.add('incorrect');
+        });
+        state.txScore = selectedTx === 'hypertonic' ? 100 : (selectedTx === 'restrict' ? 50 : 30);
+        addScore(selectedTx === 'hypertonic' ? 40 : (selectedTx === 'restrict' ? 20 : 10));
+        document.getElementById('txFeedback').innerHTML = `<div class="feedback ${selectedTx==='hypertonic'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedTx==='hypertonic'?'✅':'📚'}</span><span class="feedback-title">${selectedTx==='hypertonic'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Symptomatic hyponatremia:</strong> 3% saline 100-150 mL bolus (can repeat ×2). Normal saline may worsen SIADH! Fluid restriction is for chronic/asymptomatic. Vaptans risky due to unpredictable correction.</div></div>`;
+        document.getElementById('txSubmit').textContent = 'Continue →';
+        document.getElementById('txSubmit').onclick = () => goTo('monitoring');
+    }
+
+    let selectedMon = null;
+    function selectMon(id) { selectedMon = id; document.querySelectorAll('#monOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('monSubmit').disabled = false; }
+    function submitMon() {
+        document.querySelectorAll('#monOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'd5w') o.classList.add('correct');
+            else if (o.dataset.id === selectedMon) o.classList.add('incorrect');
+        });
+        state.monScore = selectedMon === 'd5w' ? 100 : 30;
+        addScore(selectedMon === 'd5w' ? 40 : 10);
+        document.getElementById('monFeedback').innerHTML = `<div class="feedback ${selectedMon==='d5w'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedMon==='d5w'?'✅':'📚'}</span><span class="feedback-title">${selectedMon==='d5w'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Overcorrection rescue:</strong> D5W infusion (free water) ± DDAVP (prevents water excretion) can re-lower sodium if rising too fast. Overcorrection (&gt;10-12 mEq/24h) risks osmotic demyelination syndrome (ODS).</div></div>`;
+        document.getElementById('monSubmit').textContent = 'Complete →';
+        document.getElementById('monSubmit').onclick = () => goTo('outcome');
+    }
+
+    function goTo(id) { state.stage = id; document.getElementById('stageContainer').innerHTML = stages[id].render(); window.scrollTo(0,0); }
+    document.addEventListener('DOMContentLoaded', () => goTo('setup'));
+    </script>
 </body>
 </html>

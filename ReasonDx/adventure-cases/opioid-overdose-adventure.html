@@ -4,34 +4,319 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Unresponsive Patient | ReasonDx Adventure</title>
-    <style>:root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#7C3AED;--success:#10B981;--warning:#F59E0B;--danger:#DC2626}*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}.header{background:linear-gradient(135deg,#5B21B6,#7C3AED);padding:12px 20px;position:sticky;top:0;z-index:100}.header-row{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}.diff-toggle{display:flex;background:rgba(0,0,0,.3);border-radius:8px}.diff-btn{padding:6px 12px;font-size:.75rem;cursor:pointer;border:none;background:0 0;color:rgba(255,255,255,.7);font-weight:600}.diff-btn.active{background:rgba(255,255,255,.2);color:#fff}.stat{text-align:center;background:rgba(0,0,0,.2);padding:6px 14px;border-radius:8px}.stat-value{font-size:1.1rem;font-weight:700;font-family:monospace}.stat-label{font-size:.6rem;opacity:.8}.main{max-width:900px;margin:0 auto;padding:24px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px}.card-header{padding:20px 24px;border-bottom:1px solid var(--border)}.card-phase{font-size:.75rem;color:var(--accent);text-transform:uppercase}.card-title{font-size:1.5rem;font-weight:700}.card-body{padding:24px}.narrative{background:rgba(124,58,237,.1);border-left:4px solid var(--accent);padding:20px;border-radius:0 12px 12px 0;margin-bottom:20px}.narrative .hl{background:rgba(124,58,237,.3);padding:2px 6px;border-radius:4px}.setup-screen{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center}.start-btn{background:var(--accent);color:#fff;border:none;padding:16px 48px;border-radius:12px;font-size:1.1rem;font-weight:700;cursor:pointer}.hint{background:rgba(59,130,246,.15);padding:12px 16px;border-radius:8px;margin-bottom:16px;color:#93C5FD}.radio-options{display:flex;flex-direction:column;gap:10px}.radio-option{display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(0,0,0,.2);border:2px solid var(--border);border-radius:10px;cursor:pointer}.radio-option.selected{border-color:var(--accent);background:rgba(124,58,237,.15)}.radio-option.correct{border-color:var(--success);background:rgba(16,185,129,.15)}.radio-option.incorrect{border-color:var(--danger);background:rgba(220,38,38,.15)}.radio-circle{width:22px;height:22px;border:2px solid var(--border);border-radius:50%}.radio-option.selected .radio-circle{border-color:var(--accent);background:radial-gradient(circle,var(--accent) 40%,transparent 40%)}.feedback{padding:20px;border-radius:12px;margin:20px 0}.feedback.excellent{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3)}.feedback.incorrect{background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.3)}.btn{padding:14px 28px;border-radius:10px;font-weight:600;cursor:pointer;border:none}.btn-primary{background:var(--accent);color:#fff}.btn:disabled{opacity:.5}.btn-row{display:flex;gap:12px;margin-top:24px}.btn-link{background:0 0;border:2px solid var(--border);color:var(--text)}.vitals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:12px;margin:20px 0}.vital{background:rgba(0,0,0,.2);padding:12px;border-radius:10px;text-align:center}.vital-label{font-size:.7rem;color:var(--muted)}.vital-value{font-size:1.3rem;font-weight:700;font-family:monospace}.lab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:16px 0}.lab-item{display:flex;justify-content:space-between;padding:8px 12px;background:rgba(0,0,0,.2);border-radius:6px}.lab-name{color:var(--muted)}.lab-value{font-family:monospace;font-weight:600}.score-summary{background:rgba(0,0,0,.2);border-radius:12px;padding:24px;margin:24px auto;max-width:600px}.score-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}.pearls-box{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:20px;margin-top:20px}.pearls-title{font-weight:700;color:var(--success);margin-bottom:12px}.pearl-item{padding:8px 0;border-bottom:1px solid rgba(16,185,129,.2);font-size:.95rem}.cross-link{background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.3);border-radius:8px;padding:12px 16px;margin-top:12px}.cross-link a{color:#C4B5FD;text-decoration:none}.progress-bar{background:rgba(255,255,255,.1);border-radius:10px;height:8px;margin:20px 0}.progress-fill{background:var(--accent);height:100%;border-radius:10px}.question-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}.question-number{background:var(--accent);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}</style>
+    <style>
+        :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #F43F5E; --success: #10B981; --warning: #F59E0B; --danger: #DC2626; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #E11D48 0%, #F43F5E 100%); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; }
+        .stat { background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 8px; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        .main { max-width: 1000px; margin: 0 auto; padding: 24px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(244,63,94,0.1), rgba(225,29,72,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; line-height: 1.8; }
+        .narrative .hl { background: rgba(244,63,94,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        .setup-screen { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; }
+        .setup-screen h1 { font-size: 2rem; margin-bottom: 8px; }
+        .setup-screen .subtitle { color: var(--muted); margin-bottom: 32px; }
+        .start-btn { background: var(--accent); color: white; border: none; padding: 16px 48px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+        .question-section { margin-bottom: 32px; }
+        .question-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .question-number { background: var(--accent); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .question-text { font-size: 1.1rem; font-weight: 600; }
+        .radio-options { display: flex; flex-direction: column; gap: 10px; }
+        .radio-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .radio-option:hover { border-color: var(--accent); }
+        .radio-option.selected { border-color: var(--accent); background: rgba(244,63,94,0.15); }
+        .radio-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .radio-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .radio-circle { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; }
+        .radio-option.selected .radio-circle { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 40%, transparent 40%); }
+        .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+        .checkbox-item { display: flex; align-items: center; gap: 10px; padding: 12px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .checkbox-item:hover { border-color: var(--accent); }
+        .checkbox-item.selected { border-color: var(--accent); background: rgba(244,63,94,0.15); }
+        .checkbox-item.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .checkbox-item.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .checkbox-box { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .checkbox-item.selected .checkbox-box { background: var(--accent); border-color: var(--accent); }
+        .checkbox-item.selected .checkbox-box::after { content: '✓'; color: white; font-weight: bold; }
+        .feedback { padding: 20px; border-radius: 12px; margin: 20px 0; }
+        .feedback.excellent { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .feedback.acceptable { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .feedback-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .feedback-icon { font-size: 1.5rem; }
+        .feedback-title { font-weight: 700; }
+        .feedback-text { color: var(--muted); line-height: 1.7; }
+        .feedback-text strong { color: var(--text); }
+        .alert { padding: 16px 20px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
+        .alert.danger { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+        .alert.info { background: rgba(244,63,94,0.15); border: 1px solid rgba(244,63,94,0.3); }
+        .alert-icon { font-size: 1.5rem; }
+        .alert-content { flex: 1; }
+        .alert-title { font-weight: 600; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; color: var(--muted); }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-row { display: flex; gap: 12px; margin-top: 24px; }
+        .outcome { text-align: center; padding: 40px 20px; }
+        .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
+        .outcome-title { font-size: 2rem; font-weight: 700; color: var(--success); margin-bottom: 8px; }
+        .outcome-desc { color: var(--muted); max-width: 600px; margin: 0 auto 24px; }
+        .score-summary { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 24px; margin: 24px auto; max-width: 500px; }
+        .score-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .score-row:last-child { border-bottom: none; }
+        .triad-box { background: rgba(244,63,94,0.1); border: 1px solid rgba(244,63,94,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; text-align: center; }
+        .triad-title { font-weight: 700; color: var(--accent); margin-bottom: 12px; font-size: 1.1rem; }
+        .triad-items { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 16px; }
+        .triad-item { text-align: center; }
+        .triad-icon { font-size: 2rem; margin-bottom: 4px; }
+        .triad-label { font-size: 0.85rem; color: var(--muted); }
+    </style>
 </head>
 <body>
-    <header class="header"><div class="header-row"><div style="font-weight:600">💉 The Unresponsive Patient</div><div style="display:flex;gap:12px;align-items:center"><div class="diff-toggle"><button class="diff-btn active" onclick="setDiff('easy')">Easy</button><button class="diff-btn" onclick="setDiff('int')">Intermediate</button><button class="diff-btn" onclick="setDiff('adv')">Advanced</button></div><div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Points</div></div></div></div></header>
-    <main class="main"><div id="app"></div></main>
-<script>
-const S={stage:'setup',score:0,max:0,diff:'easy',q:0,total:8};
-const C={easy:{age:'28M',wt:'72kg',hx:'Found unresponsive by friend, known heroin use, needle nearby',exam:'Unresponsive, pinpoint pupils, RR 4, cyanotic',vitals:{HR:'52',BP:'88/52',RR:'4',SpO2:'78%'},labs:{Pupils:'1mm bilat',Hx:'IVDU, track marks'}},int:{age:'45F',wt:'65kg',hx:'Chronic pain patient, prescribed fentanyl patches, found confused',exam:'Somnolent, small pupils, shallow breathing, multiple fentanyl patches on body',vitals:{HR:'58',BP:'92/58',RR:'6',Temp:'96.8°F',SpO2:'82%'},labs:{Pupils:'2mm bilat',Hx:'3 patches visible (should be 1)'}},adv:{age:'19M',wt:'68kg',hx:'Party, unknown substance ingestion, multiple drugs suspected',exam:'Unresponsive, miosis, bradypnea, also has hyperthermia and rigidity',vitals:{HR:'48',BP:'78/48',RR:'4',Temp:'104°F',SpO2:'72%'},labs:{Pupils:'2mm',Hx:'Fentanyl + ?other substances'}}};
-const Q=[
-{t:'Toxidrome Recognition',q:'Classic triad of opioid toxidrome?',h:'The three key findings',o:[{id:'a',txt:'CNS depression + respiratory depression + miosis (pinpoint pupils)',c:1,p:100},{id:'b',txt:'Tachycardia + mydriasis + hyperthermia',c:0,p:10},{id:'c',txt:'Hypertension + tremor + diaphoresis',c:0,p:10}],fb:{1:'<b>Correct!</b> Opioid toxidrome: CNS depression (sedation → coma), respiratory depression (↓RR, apnea), miosis (pinpoint pupils). Also: hypotension, hypothermia, decreased bowel sounds.',0:'<b>Opioid toxidrome:</b> CNS depression, respiratory depression, miosis.'}},
-{t:'Immediate Management',q:'First priority in suspected opioid overdose with respiratory depression?',h:'ABCs first',o:[{id:'a',txt:'Airway management and ventilatory support (bag-mask ventilation)',c:1,p:100},{id:'b',txt:'Naloxone first',c:0,p:40},{id:'c',txt:'IV fluids',c:0,p:20}],fb:{1:'<b>Correct!</b> Airway and breathing first! Provide supplemental O2, bag-mask ventilation if needed. Naloxone important but dont delay ventilation waiting for it.',0:'<b>ABCs first:</b> Secure airway, provide ventilation. Naloxone is adjunct.'}},
-{t:'Naloxone Dosing',q:'Appropriate initial naloxone dose for suspected opioid overdose?',h:'Start low, titrate up',o:[{id:'a',txt:'0.04-0.4mg IV, titrate to respiratory effort (avoid full reversal if opioid-dependent)',c:1,p:100},{id:'b',txt:'2mg IV always',c:0,p:30},{id:'c',txt:'10mg IV to ensure reversal',c:0,p:10}],fb:{1:'<b>Correct!</b> Start low (0.04-0.4mg) and titrate. Goal: adequate respirations, NOT full alertness. High doses in dependent patients cause severe withdrawal (vomiting, aspiration risk, agitation).',0:'<b>Naloxone dosing:</b> Start low, titrate to respirations. Avoid precipitating withdrawal.'}},
-{t:'Naloxone Routes',q:'Alternative naloxone routes if no IV access?',h:'Multiple options available',o:[{id:'a',txt:'IM, SC, intranasal (4mg), or nebulized - all effective',c:1,p:100},{id:'b',txt:'IV only',c:0,p:20},{id:'c',txt:'Oral only',c:0,p:10}],fb:{1:'<b>Correct!</b> Multiple routes: IM (0.4mg), intranasal (4mg spray), SC, nebulized. Intranasal widely available to lay public. IM may have slightly delayed onset vs IV.',0:'<b>Routes:</b> IM, intranasal, SC all work. Intranasal available OTC.'}},
-{t:'Duration Concerns',q:'Why is observation important after naloxone administration?',h:'Half-life mismatch',o:[{id:'a',txt:'Naloxone half-life (30-90 min) shorter than most opioids - resedation can occur',c:1,p:100},{id:'b',txt:'Naloxone causes delayed toxicity',c:0,p:10},{id:'c',txt:'One dose always sufficient',c:0,p:20}],fb:{1:'<b>Correct!</b> Naloxone duration ~30-90 min. Many opioids last longer (methadone 24-36hr, fentanyl patches hours). Monitor for resedation, may need repeat doses or infusion.',0:'<b>Resedation:</b> Naloxone wears off before many opioids. Observe closely.'}},
-{t:'Synthetic Opioids',q:'Why might fentanyl overdose require higher naloxone doses?',h:'Potency matters',o:[{id:'a',txt:'Higher receptor affinity and potency require more competitive antagonism',c:1,p:100},{id:'b',txt:'Fentanyl is not an opioid',c:0,p:0},{id:'c',txt:'Lower doses always work',c:0,p:20}],fb:{1:'<b>Correct!</b> Fentanyl is ~100x more potent than morphine with high receptor affinity. May need higher naloxone doses (total 10mg+) and prolonged observation/infusion.',0:'<b>Fentanyl:</b> High potency may require larger naloxone doses.'}},
-{t:'Pulmonary Complications',q:'What pulmonary complication should you watch for in opioid overdose?',h:'Even after naloxone',o:[{id:'a',txt:'Non-cardiogenic pulmonary edema (NCPE) - can occur even after reversal',c:1,p:100},{id:'b',txt:'Pneumothorax',c:0,p:10},{id:'c',txt:'Pulmonary embolism',c:0,p:20}],fb:{1:'<b>Correct!</b> NCPE can develop hours after reversal. Pink frothy sputum, hypoxia despite reversal. Treat with O2, positive pressure. Also aspiration pneumonia/pneumonitis common.',0:'<b>NCPE:</b> Can occur even after successful reversal. Monitor oxygenation.'}},
-{t:'Discharge Planning',q:'What should be provided to all opioid overdose survivors at discharge?',h:'Harm reduction',o:[{id:'a',txt:'Naloxone prescription/kit, overdose education, addiction treatment referral',c:1,p:100},{id:'b',txt:'Just prescribe more opioids',c:0,p:0},{id:'c',txt:'No follow-up needed',c:0,p:10}],fb:{1:'<b>Correct!</b> Harm reduction: Naloxone kit with training, OEND (overdose education), MAT referral (buprenorphine, methadone), safe injection resources. Prior OD is major risk factor for future OD death.',0:'<b>Discharge:</b> Naloxone kit, education, treatment referral. Prior OD = high risk.'}}
-];
-let sel=null;
-function setDiff(d){S.diff=d;document.querySelectorAll('.diff-btn').forEach((b,i)=>b.classList.toggle('active',['easy','int','adv'][i]===d));if(S.stage!=='setup'){S.stage='setup';S.score=0;S.max=0;S.q=0;document.getElementById('score').textContent='0';}render();}
-function addPts(p,m){S.score+=p;S.max+=m;document.getElementById('score').textContent=S.score;}
-function pick(id){sel=id;document.querySelectorAll('.radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id));document.getElementById('sub').disabled=false;}
-function submit(){const q=Q[S.q-1];const opt=q.o.find(o=>o.id===sel);addPts(opt.p||0,100);document.querySelectorAll('.radio-option').forEach(o=>{const op=q.o.find(x=>x.id===o.dataset.id);if(op&&op.c)o.classList.add('correct');else if(o.dataset.id===sel)o.classList.add('incorrect');});document.getElementById('fb').innerHTML='<div class="feedback '+(opt&&opt.c?'excellent':'incorrect')+'">'+q.fb[opt&&opt.c?1:0]+'</div>';document.getElementById('sub').textContent=S.q<S.total?'Next':'Results';document.getElementById('sub').onclick=next;}
-function next(){if(S.q<S.total){S.q++;sel=null;render();}else{S.stage='outcome';render();}}
-function start(){S.q=1;S.stage='question';render();}
-function go(s){S.stage=s;render();}
-function render(){const c=C[S.diff];if(S.stage==='setup'){document.getElementById('app').innerHTML='<div class="setup-screen"><h1>💉 The Unresponsive Patient</h1><p style="color:var(--muted);margin-bottom:32px">Opioid Overdose: Toxidrome, naloxone dosing, resedation risk, harm reduction</p><button class="start-btn" onclick="go(\'pres\')">Begin Case</button></div>';}else if(S.stage==='pres'){document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Presentation</div><div class="card-title">💉 Altered Mental Status</div></div><div class="card-body"><div class="narrative"><span class="hl">'+c.age+'</span> ('+c.wt+')<br><b>Hx:</b> '+c.hx+'<br><b>Exam:</b> '+c.exam+'</div><div class="vitals-grid">'+Object.entries(c.vitals).map(function(e){return'<div class="vital"><div class="vital-label">'+e[0]+'</div><div class="vital-value">'+e[1]+'</div></div>';}).join('')+'</div><div class="lab-grid">'+Object.entries(c.labs).map(function(e){return'<div class="lab-item"><span class="lab-name">'+e[0]+'</span><span class="lab-value">'+e[1]+'</span></div>';}).join('')+'</div><div class="btn-row"><button class="btn btn-primary" onclick="start()">Begin Assessment</button></div></div></div>';}else if(S.stage==='question'){var q=Q[S.q-1];document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Q'+S.q+'/'+S.total+'</div><div class="card-title">'+q.t+'</div></div><div class="card-body"><div class="progress-bar"><div class="progress-fill" style="width:'+(S.q/S.total*100)+'%"></div></div><div class="question-header"><div class="question-number">'+S.q+'</div><div style="font-weight:600">'+q.q+'</div></div><div class="hint">'+q.h+'</div><div class="radio-options">'+q.o.map(function(o){return'<div class="radio-option" data-id="'+o.id+'" onclick="pick(\''+o.id+'\')"><div class="radio-circle"></div><div><b>'+o.txt+'</b></div></div>';}).join('')+'</div><div id="fb"></div><div class="btn-row"><button class="btn btn-primary" id="sub" onclick="submit()" disabled>Submit</button></div></div></div>';}else{var pct=S.max>0?Math.round(S.score/S.max*100):0;document.getElementById('app').innerHTML='<div class="card"><div class="card-body"><div style="text-align:center;padding:40px"><div style="font-size:4rem">'+(pct>=70?'🎉':'📚')+'</div><div style="font-size:2rem;font-weight:700;color:'+(pct>=70?'var(--success)':'var(--warning)')+'">'+(pct>=70?'Complete!':'Review')+'</div></div><div class="score-summary"><div class="score-row"><span>Score</span><span>'+S.score+'/'+S.max+' ('+pct+'%)</span></div></div><div class="pearls-box"><div class="pearls-title">Opioid Overdose Pearls</div><div class="pearl-item"><b>Toxidrome:</b> CNS depression + respiratory depression + miosis</div><div class="pearl-item"><b>ABCs first:</b> Ventilate before/during naloxone</div><div class="pearl-item"><b>Naloxone:</b> Start 0.04-0.4mg, titrate to respirations</div><div class="pearl-item"><b>Routes:</b> IV, IM, intranasal (4mg), SC all effective</div><div class="pearl-item"><b>Resedation:</b> Naloxone shorter than most opioids</div><div class="pearl-item"><b>Fentanyl:</b> May need higher doses (10mg+)</div><div class="pearl-item"><b>Discharge:</b> Naloxone kit, education, treatment referral</div></div><div class="cross-link"><a href="alcohol-withdrawal-adventure-enhanced.html">Related: Alcohol Withdrawal</a></div><div class="btn-row" style="justify-content:center;margin-top:30px"><button class="btn btn-primary" onclick="location.reload()">Retry</button><button class="btn btn-link" onclick="location.href=\'adventure-hub.html\'">Back</button></div></div></div>';}}
-document.addEventListener('DOMContentLoaded',render);
-</script>
+    <header class="header"><div class="header-row"><div class="header-title">💉 The Unresponsive Patient</div><div class="stat"><div class="stat-value" id="scoreDisplay">0</div><div class="stat-label">Points</div></div></div></header>
+    <main class="main"><div id="stageContainer"></div></main>
+    <script>
+    const state = { stage:'setup', score:0 };
+    
+    function addScore(pts) { state.score += pts; document.getElementById('scoreDisplay').textContent = state.score; }
+
+    const stages = {
+        setup: { render: () => `
+            <div class="setup-screen">
+                <h1>💉 The Unresponsive Patient</h1>
+                <p class="subtitle">Opioid overdose recognition and management</p>
+                <button class="start-btn" onclick="goTo('presentation')">Begin Case →</button>
+            </div>`
+        },
+        presentation: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Emergency Scene</div><div class="card-title">📋 Found Down</div></div>
+                <div class="card-body">
+                    <div class="narrative">EMS brings in a <span class="hl">28-year-old male</span> found <span class="hl">unresponsive in a bathroom</span>. Bystanders found him <span class="hl">blue and not breathing</span>. Drug paraphernalia was found nearby.<br><br>On arrival: <span class="hl">GCS 3</span>, <span class="hl">RR 4</span> (shallow), <span class="hl">pupils 1mm bilaterally</span>. SpO2 undetectable initially, now 78% on BVM.<br><br>Vitals: HR 52, BP 88/54.</div>
+                    <div class="triad-box">
+                        <div class="triad-title">Classic Opioid Toxidrome</div>
+                        <div class="triad-items">
+                            <div class="triad-item"><div class="triad-icon">😴</div><div class="triad-label">CNS Depression</div></div>
+                            <div class="triad-item"><div class="triad-icon">🔵</div><div class="triad-label">Respiratory Depression</div></div>
+                            <div class="triad-item"><div class="triad-icon">👁️</div><div class="triad-label">Miosis (Pinpoint Pupils)</div></div>
+                        </div>
+                    </div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('firstAction')">Take Action →</button></div>
+                </div>
+            </div>`
+        },
+        firstAction: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Critical Action</div><div class="card-title">🚨 First Priority</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">1</div><div class="question-text">What is the FIRST priority in this unresponsive, apneic patient?</div></div>
+                        <div class="radio-options" id="firstOpts">
+                            <div class="radio-option" data-id="airway" onclick="selectFirst('airway')"><div class="radio-circle"></div><div><strong>Airway management and ventilation</strong><br><small style="color:var(--muted)">BVM, oxygen, consider intubation</small></div></div>
+                            <div class="radio-option" data-id="naloxone" onclick="selectFirst('naloxone')"><div class="radio-circle"></div><div><strong>Naloxone immediately</strong><br><small style="color:var(--muted)">Reverse the opioid</small></div></div>
+                            <div class="radio-option" data-id="iv" onclick="selectFirst('iv')"><div class="radio-circle"></div><div><strong>IV access and fluids</strong><br><small style="color:var(--muted)">Treat hypotension</small></div></div>
+                            <div class="radio-option" data-id="history" onclick="selectFirst('history')"><div class="radio-circle"></div><div><strong>Get detailed history</strong><br><small style="color:var(--muted)">Determine what was taken</small></div></div>
+                        </div>
+                    </div>
+                    <div id="firstFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="firstSubmit" onclick="submitFirst()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        naloxone: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Antidote</div><div class="card-title">💊 Naloxone Administration</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">2</div><div class="question-text">What is the appropriate initial naloxone dose and route?</div></div>
+                        <div class="radio-options" id="doseOpts">
+                            <div class="radio-option" data-id="low_iv" onclick="selectDose('low_iv')"><div class="radio-circle"></div><div><strong>0.04-0.4 mg IV, titrate up</strong><br><small style="color:var(--muted)">Start low in opioid-dependent patients</small></div></div>
+                            <div class="radio-option" data-id="high_iv" onclick="selectDose('high_iv')"><div class="radio-circle"></div><div><strong>2 mg IV immediately</strong><br><small style="color:var(--muted)">Maximum reversal</small></div></div>
+                            <div class="radio-option" data-id="intranasal" onclick="selectDose('intranasal')"><div class="radio-circle"></div><div><strong>4 mg intranasal if no IV</strong><br><small style="color:var(--muted)">Community/EMS formulation</small></div></div>
+                            <div class="radio-option" data-id="all_valid" onclick="selectDose('all_valid')"><div class="radio-circle"></div><div><strong>All can be appropriate depending on setting</strong><br><small style="color:var(--muted)">Hospital: titrate IV; Field: IN or IM</small></div></div>
+                        </div>
+                    </div>
+                    <div id="doseFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="doseSubmit" onclick="submitDose()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        response: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Response</div><div class="card-title">Patient Wakes Up</div></div>
+                <div class="card-body">
+                    <div class="narrative">After 0.4 mg IV naloxone, the patient <span class="hl">begins breathing spontaneously</span> at 14/min. SpO2 improves to 96%. He becomes <span class="hl">agitated and combative</span>, trying to leave. He is <span class="hl">angry about being "brought back"</span> and wants to leave AMA.</div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">3</div><div class="question-text">Why was a lower starting dose preferred in this case?</div></div>
+                        <div class="radio-options" id="whyOpts">
+                            <div class="radio-option" data-id="withdrawal" onclick="selectWhy('withdrawal')"><div class="radio-circle"></div><div><strong>Prevent acute withdrawal</strong><br><small style="color:var(--muted)">High doses cause severe withdrawal in dependent patients</small></div></div>
+                            <div class="radio-option" data-id="allergy" onclick="selectWhy('allergy')"><div class="radio-circle"></div><div><strong>Reduce allergic reaction risk</strong><br><small style="color:var(--muted)">Naloxone can cause anaphylaxis</small></div></div>
+                            <div class="radio-option" data-id="supply" onclick="selectWhy('supply')"><div class="radio-circle"></div><div><strong>Conserve naloxone supply</strong><br><small style="color:var(--muted)">Limited availability</small></div></div>
+                        </div>
+                    </div>
+                    <div id="whyFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="whySubmit" onclick="submitWhy()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        monitoring: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Monitoring</div><div class="card-title">⏱️ Observation Period</div></div>
+                <div class="card-body">
+                    <div class="alert danger"><span class="alert-icon">⚠️</span><div class="alert-content"><div class="alert-title">Critical Warning</div><div class="alert-desc">Naloxone duration is 30-90 minutes. Many opioids (especially fentanyl, methadone) last much longer!</div></div></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">4</div><div class="question-text">How long should this patient be monitored after naloxone?</div></div>
+                        <div class="radio-options" id="monOpts">
+                            <div class="radio-option" data-id="1h" onclick="selectMon('1h')"><div class="radio-circle"></div><span>1 hour is sufficient</span></div>
+                            <div class="radio-option" data-id="4h" onclick="selectMon('4h')"><div class="radio-circle"></div><span>Minimum 4-6 hours (longer for long-acting opioids)</span></div>
+                            <div class="radio-option" data-id="24h" onclick="selectMon('24h')"><div class="radio-circle"></div><span>24 hours minimum</span></div>
+                            <div class="radio-option" data-id="discharge" onclick="selectMon('discharge')"><div class="radio-circle"></div><span>Can discharge once awake and alert</span></div>
+                        </div>
+                    </div>
+                    <div id="monFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="monSubmit" onclick="submitMon()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        discharge: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Harm Reduction</div><div class="card-title">🏠 Discharge Planning</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">5</div><div class="question-text">What harm reduction interventions should be offered?</div></div>
+                        <div class="checkbox-grid" id="harmOpts">
+                            <div class="checkbox-item" data-id="narcan" data-correct="true" onclick="toggleHarm('narcan')"><div class="checkbox-box"></div><span>Naloxone kit prescription</span></div>
+                            <div class="checkbox-item" data-id="moud" data-correct="true" onclick="toggleHarm('moud')"><div class="checkbox-box"></div><span>MOUD referral (buprenorphine/methadone)</span></div>
+                            <div class="checkbox-item" data-id="education" data-correct="true" onclick="toggleHarm('education')"><div class="checkbox-box"></div><span>Overdose prevention education</span></div>
+                            <div class="checkbox-item" data-id="fentanyl" data-correct="true" onclick="toggleHarm('fentanyl')"><div class="checkbox-box"></div><span>Fentanyl test strip counseling</span></div>
+                            <div class="checkbox-item" data-id="abstinence" data-correct="false" onclick="toggleHarm('abstinence')"><div class="checkbox-box"></div><span>Abstinence-only counseling</span></div>
+                            <div class="checkbox-item" data-id="refuse" data-correct="false" onclick="toggleHarm('refuse')"><div class="checkbox-box"></div><span>Refuse care if patient declines treatment</span></div>
+                        </div>
+                    </div>
+                    <div id="harmFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitHarm()">Submit →</button></div>
+                </div>
+            </div>`
+        },
+        outcome: { render: () => `
+            <div class="card"><div class="card-body">
+                <div class="outcome">
+                    <div class="outcome-icon">🎉</div>
+                    <div class="outcome-title">Patient Survived!</div>
+                    <div class="outcome-desc">Patient was monitored for 6 hours without recurrent respiratory depression. He accepted naloxone kit, received harm reduction education, and agreed to outpatient buprenorphine clinic referral. Peer recovery coach met with him before discharge.</div>
+                </div>
+                <div class="score-summary">
+                    <h3 style="margin-bottom:16px">Performance</h3>
+                    <div class="score-row"><span>First Priority</span><span>${state.firstScore||0}/100</span></div>
+                    <div class="score-row"><span>Naloxone Dosing</span><span>${state.doseScore||0}/100</span></div>
+                    <div class="score-row"><span>Dose Rationale</span><span>${state.whyScore||0}/100</span></div>
+                    <div class="score-row"><span>Monitoring Period</span><span>${state.monScore||0}/100</span></div>
+                    <div class="score-row"><span>Harm Reduction</span><span>${state.harmScore||0}/100</span></div>
+                    <div class="score-row" style="border-top:2px solid var(--border);padding-top:12px"><strong>Total</strong><strong>${state.score}</strong></div>
+                </div>
+                <div class="feedback excellent"><div class="feedback-header"><span class="feedback-icon">💡</span><span class="feedback-title">Opioid Overdose Pearls</span></div><div class="feedback-text">
+                    • <strong>Triad:</strong> CNS depression + respiratory depression + miosis (pinpoint pupils)<br>
+                    • <strong>AIRWAY FIRST:</strong> Ventilation is priority; naloxone reverses opioid but patient needs oxygen NOW<br>
+                    • <strong>Naloxone dosing:</strong> Start low (0.04-0.4 mg IV), titrate to respiratory rate - avoid full reversal/withdrawal<br>
+                    • <strong>Routes:</strong> IV, IM, IN, SQ all work; IN (4 mg) for community/bystander use<br>
+                    • <strong>Duration mismatch:</strong> Naloxone lasts 30-90 min; fentanyl, methadone last hours - WATCH FOR RE-SEDATION<br>
+                    • <strong>Monitoring:</strong> Minimum 4-6 hours; longer for long-acting opioids or sustained-release formulations<br>
+                    • <strong>Harm reduction:</strong> Naloxone prescription, MOUD referral, education, fentanyl test strips - NEVER refuse care<br>
+                    • <strong>Drip:</strong> Consider naloxone infusion (2/3 of reversal dose per hour) for long-acting opioids
+                </div></div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Play Again</button></div>
+            </div></div>`
+        }
+    };
+
+    let selectedFirst = null;
+    function selectFirst(id) { selectedFirst = id; document.querySelectorAll('#firstOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('firstSubmit').disabled = false; }
+    function submitFirst() {
+        document.querySelectorAll('#firstOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'airway') o.classList.add('correct');
+            else if (o.dataset.id === selectedFirst) o.classList.add('incorrect');
+        });
+        state.firstScore = selectedFirst === 'airway' ? 100 : 40;
+        addScore(selectedFirst === 'airway' ? 40 : 15);
+        document.getElementById('firstFeedback').innerHTML = `<div class="feedback ${selectedFirst==='airway'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedFirst==='airway'?'✅':'📚'}</span><span class="feedback-title">${selectedFirst==='airway'?'Correct!':'Critical Point'}</span></div><div class="feedback-text"><strong>Airway and ventilation FIRST!</strong> This patient is hypoxic and apneic. Naloxone takes 2-5 minutes to work - the patient needs oxygen NOW. BVM ventilation while preparing naloxone. ABCs before antidote.</div></div>`;
+        document.getElementById('firstSubmit').textContent = 'Continue →';
+        document.getElementById('firstSubmit').onclick = () => goTo('naloxone');
+    }
+
+    let selectedDose = null;
+    function selectDose(id) { selectedDose = id; document.querySelectorAll('#doseOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('doseSubmit').disabled = false; }
+    function submitDose() {
+        document.querySelectorAll('#doseOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'all_valid') o.classList.add('correct');
+            else if (o.dataset.id === selectedDose) o.classList.add('incorrect');
+        });
+        state.doseScore = selectedDose === 'all_valid' ? 100 : (selectedDose === 'low_iv' ? 80 : 50);
+        addScore(selectedDose === 'all_valid' ? 40 : (selectedDose === 'low_iv' ? 30 : 15));
+        document.getElementById('doseFeedback').innerHTML = `<div class="feedback ${selectedDose==='all_valid'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedDose==='all_valid'?'✅':'📚'}</span><span class="feedback-title">${selectedDose==='all_valid'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Context matters:</strong> In hospital with IV access, titrate 0.04-0.4 mg IV. In field/community, IN 4 mg or IM 0.4-2 mg is appropriate. Goal: restore breathing, NOT full alertness (avoid withdrawal).</div></div>`;
+        document.getElementById('doseSubmit').textContent = 'Continue →';
+        document.getElementById('doseSubmit').onclick = () => goTo('response');
+    }
+
+    let selectedWhy = null;
+    function selectWhy(id) { selectedWhy = id; document.querySelectorAll('#whyOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('whySubmit').disabled = false; }
+    function submitWhy() {
+        document.querySelectorAll('#whyOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'withdrawal') o.classList.add('correct');
+            else if (o.dataset.id === selectedWhy) o.classList.add('incorrect');
+        });
+        state.whyScore = selectedWhy === 'withdrawal' ? 100 : 40;
+        addScore(selectedWhy === 'withdrawal' ? 40 : 15);
+        document.getElementById('whyFeedback').innerHTML = `<div class="feedback ${selectedWhy==='withdrawal'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedWhy==='withdrawal'?'✅':'📚'}</span><span class="feedback-title">${selectedWhy==='withdrawal'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Prevent acute withdrawal:</strong> High-dose naloxone in opioid-dependent patients causes severe withdrawal (vomiting, diarrhea, agitation, tachycardia). Goal is to restore breathing, not consciousness. Titrate to RR >12.</div></div>`;
+        document.getElementById('whySubmit').textContent = 'Continue →';
+        document.getElementById('whySubmit').onclick = () => goTo('monitoring');
+    }
+
+    let selectedMon = null;
+    function selectMon(id) { selectedMon = id; document.querySelectorAll('#monOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('monSubmit').disabled = false; }
+    function submitMon() {
+        document.querySelectorAll('#monOpts .radio-option').forEach(o => {
+            if (o.dataset.id === '4h') o.classList.add('correct');
+            else if (o.dataset.id === selectedMon) o.classList.add('incorrect');
+        });
+        state.monScore = selectedMon === '4h' ? 100 : 40;
+        addScore(selectedMon === '4h' ? 40 : 15);
+        document.getElementById('monFeedback').innerHTML = `<div class="feedback ${selectedMon==='4h'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedMon==='4h'?'✅':'📚'}</span><span class="feedback-title">${selectedMon==='4h'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Minimum 4-6 hours observation</strong> due to risk of re-sedation. Naloxone wears off (30-90 min) before opioid does. Longer for methadone, fentanyl patches, sustained-release. Consider naloxone drip for recurrent sedation.</div></div>`;
+        document.getElementById('monSubmit').textContent = 'Continue →';
+        document.getElementById('monSubmit').onclick = () => goTo('discharge');
+    }
+
+    let selectedHarm = new Set();
+    function toggleHarm(id) {
+        const el = document.querySelector(`#harmOpts .checkbox-item[data-id="${id}"]`);
+        if(selectedHarm.has(id)) { selectedHarm.delete(id); el.classList.remove('selected'); }
+        else { selectedHarm.add(id); el.classList.add('selected'); }
+    }
+    function submitHarm() {
+        let correct = 0;
+        const items = [{id:'narcan',c:true},{id:'moud',c:true},{id:'education',c:true},{id:'fentanyl',c:true},{id:'abstinence',c:false},{id:'refuse',c:false}];
+        items.forEach(i => {
+            const el = document.querySelector(`#harmOpts .checkbox-item[data-id="${i.id}"]`);
+            const sel = selectedHarm.has(i.id);
+            if (i.c && sel) { el.classList.add('correct'); correct++; }
+            else if (!i.c && sel) { el.classList.add('incorrect'); }
+        });
+        state.harmScore = Math.round(correct / 4 * 100);
+        addScore(Math.round(state.harmScore / 2.5));
+        document.getElementById('harmFeedback').innerHTML = `<div class="feedback ${state.harmScore>=75?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${state.harmScore>=75?'✅':'📚'}</span><span class="feedback-title">Harm Reduction</span></div><div class="feedback-text"><strong>Evidence-based harm reduction:</strong> Naloxone kit, MOUD referral (buprenorphine/methadone), overdose education, fentanyl test strips<br><strong>NOT appropriate:</strong> Abstinence-only approaches or refusing care - these increase mortality</div></div>`;
+        document.querySelector('#harmFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('outcome')">Complete Case →</button>`;
+    }
+
+    function goTo(id) { state.stage = id; document.getElementById('stageContainer').innerHTML = stages[id].render(); window.scrollTo(0,0); }
+    document.addEventListener('DOMContentLoaded', () => goTo('setup'));
+    </script>
 </body>
 </html>

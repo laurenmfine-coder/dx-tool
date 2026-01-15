@@ -3,35 +3,289 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Itch That Won't Stop | ReasonDx Adventure</title>
-    <style>:root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#EC4899;--success:#10B981;--warning:#F59E0B;--danger:#DC2626}*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}.header{background:linear-gradient(135deg,#BE185D,#EC4899);padding:12px 20px;position:sticky;top:0;z-index:100}.header-row{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}.diff-toggle{display:flex;background:rgba(0,0,0,.3);border-radius:8px}.diff-btn{padding:6px 12px;font-size:.75rem;cursor:pointer;border:none;background:0 0;color:rgba(255,255,255,.7);font-weight:600}.diff-btn.active{background:rgba(255,255,255,.2);color:#fff}.stat{text-align:center;background:rgba(0,0,0,.2);padding:6px 14px;border-radius:8px}.stat-value{font-size:1.1rem;font-weight:700;font-family:monospace}.stat-label{font-size:.6rem;opacity:.8}.main{max-width:900px;margin:0 auto;padding:24px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px}.card-header{padding:20px 24px;border-bottom:1px solid var(--border)}.card-phase{font-size:.75rem;color:var(--accent);text-transform:uppercase}.card-title{font-size:1.5rem;font-weight:700}.card-body{padding:24px}.narrative{background:rgba(236,72,153,.1);border-left:4px solid var(--accent);padding:20px;border-radius:0 12px 12px 0;margin-bottom:20px}.narrative .hl{background:rgba(236,72,153,.3);padding:2px 6px;border-radius:4px}.setup-screen{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center}.start-btn{background:var(--accent);color:#fff;border:none;padding:16px 48px;border-radius:12px;font-size:1.1rem;font-weight:700;cursor:pointer}.hint{background:rgba(59,130,246,.15);padding:12px 16px;border-radius:8px;margin-bottom:16px;color:#93C5FD}.radio-options{display:flex;flex-direction:column;gap:10px}.radio-option{display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(0,0,0,.2);border:2px solid var(--border);border-radius:10px;cursor:pointer}.radio-option.selected{border-color:var(--accent);background:rgba(236,72,153,.15)}.radio-option.correct{border-color:var(--success);background:rgba(16,185,129,.15)}.radio-option.incorrect{border-color:var(--danger);background:rgba(220,38,38,.15)}.radio-circle{width:22px;height:22px;border:2px solid var(--border);border-radius:50%}.radio-option.selected .radio-circle{border-color:var(--accent);background:radial-gradient(circle,var(--accent) 40%,transparent 40%)}.feedback{padding:20px;border-radius:12px;margin:20px 0}.feedback.excellent{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3)}.feedback.incorrect{background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.3)}.btn{padding:14px 28px;border-radius:10px;font-weight:600;cursor:pointer;border:none}.btn-primary{background:var(--accent);color:#fff}.btn:disabled{opacity:.5}.btn-row{display:flex;gap:12px;margin-top:24px}.btn-link{background:0 0;border:2px solid var(--border);color:var(--text)}.vitals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:12px;margin:20px 0}.vital{background:rgba(0,0,0,.2);padding:12px;border-radius:10px;text-align:center}.vital-label{font-size:.7rem;color:var(--muted)}.vital-value{font-size:1.3rem;font-weight:700;font-family:monospace}.lab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:16px 0}.lab-item{display:flex;justify-content:space-between;padding:8px 12px;background:rgba(0,0,0,.2);border-radius:6px}.lab-name{color:var(--muted)}.lab-value{font-family:monospace;font-weight:600}.score-summary{background:rgba(0,0,0,.2);border-radius:12px;padding:24px;margin:24px auto;max-width:600px}.score-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}.pearls-box{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:20px;margin-top:20px}.pearls-title{font-weight:700;color:var(--success);margin-bottom:12px}.pearl-item{padding:8px 0;border-bottom:1px solid rgba(16,185,129,.2);font-size:.95rem}.cross-link{background:rgba(236,72,153,.1);border:1px solid rgba(236,72,153,.3);border-radius:8px;padding:12px 16px;margin-top:12px}.cross-link a{color:#F9A8D4;text-decoration:none}.progress-bar{background:rgba(255,255,255,.1);border-radius:10px;height:8px;margin:20px 0}.progress-fill{background:var(--accent);height:100%;border-radius:10px}.question-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}.question-number{background:var(--accent);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}</style>
+    <title>The Lifelong Itch | ReasonDx Adventure</title>
+    <style>
+        :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #A855F7; --success: #10B981; --warning: #F59E0B; --danger: #DC2626; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #9333EA 0%, #A855F7 100%); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; }
+        .stat { background: rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 8px; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        .main { max-width: 1000px; margin: 0 auto; padding: 24px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(147,51,234,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; line-height: 1.8; }
+        .narrative .hl { background: rgba(168,85,247,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        .setup-screen { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; }
+        .setup-screen h1 { font-size: 2rem; margin-bottom: 8px; }
+        .setup-screen .subtitle { color: var(--muted); margin-bottom: 32px; }
+        .start-btn { background: var(--accent); color: white; border: none; padding: 16px 48px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+        .question-section { margin-bottom: 32px; }
+        .question-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .question-number { background: var(--accent); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .question-text { font-size: 1.1rem; font-weight: 600; }
+        .radio-options { display: flex; flex-direction: column; gap: 10px; }
+        .radio-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .radio-option:hover { border-color: var(--accent); }
+        .radio-option.selected { border-color: var(--accent); background: rgba(168,85,247,0.15); }
+        .radio-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .radio-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .radio-circle { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; }
+        .radio-option.selected .radio-circle { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 40%, transparent 40%); }
+        .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+        .checkbox-item { display: flex; align-items: center; gap: 10px; padding: 12px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .checkbox-item:hover { border-color: var(--accent); }
+        .checkbox-item.selected { border-color: var(--accent); background: rgba(168,85,247,0.15); }
+        .checkbox-item.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .checkbox-item.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .checkbox-box { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .checkbox-item.selected .checkbox-box { background: var(--accent); border-color: var(--accent); }
+        .checkbox-item.selected .checkbox-box::after { content: '✓'; color: white; font-weight: bold; }
+        .feedback { padding: 20px; border-radius: 12px; margin: 20px 0; }
+        .feedback.excellent { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .feedback.acceptable { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .feedback-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .feedback-icon { font-size: 1.5rem; }
+        .feedback-title { font-weight: 700; }
+        .feedback-text { color: var(--muted); line-height: 1.7; }
+        .feedback-text strong { color: var(--text); }
+        .alert { padding: 16px 20px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
+        .alert.info { background: rgba(168,85,247,0.15); border: 1px solid rgba(168,85,247,0.3); }
+        .alert-icon { font-size: 1.5rem; }
+        .alert-content { flex: 1; }
+        .alert-title { font-weight: 600; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; color: var(--muted); }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-row { display: flex; gap: 12px; margin-top: 24px; }
+        .outcome { text-align: center; padding: 40px 20px; }
+        .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
+        .outcome-title { font-size: 2rem; font-weight: 700; color: var(--success); margin-bottom: 8px; }
+        .outcome-desc { color: var(--muted); max-width: 600px; margin: 0 auto 24px; }
+        .score-summary { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 24px; margin: 24px auto; max-width: 500px; }
+        .score-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .score-row:last-child { border-bottom: none; }
+        .patient-panel { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 16px; margin-bottom: 20px; }
+        .patient-panel-title { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; }
+        .patient-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
+        .patient-info-label { font-size: 0.7rem; color: var(--muted); }
+        .patient-info-value { font-weight: 600; }
+    </style>
 </head>
 <body>
-    <header class="header"><div class="header-row"><div style="font-weight:600">🔴 The Itch That Won't Stop</div><div style="display:flex;gap:12px;align-items:center"><div class="diff-toggle"><button class="diff-btn active" onclick="setDiff('easy')">Easy</button><button class="diff-btn" onclick="setDiff('int')">Intermediate</button><button class="diff-btn" onclick="setDiff('adv')">Advanced</button></div><div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Points</div></div></div></div></header>
-    <main class="main"><div id="app"></div></main>
-<script>
-const S={stage:'setup',score:0,max:0,diff:'easy',q:0,total:8};
-const C={easy:{age:'8M',wt:'28kg',hx:'Itchy rash since infancy, worse in winter, family history of asthma',exam:'Erythematous patches in antecubital/popliteal fossae, lichenification, xerosis',vitals:{HR:'88',BP:'98/62',Temp:'98.4°F',SpO2:'99%'},labs:{IgE:'485 (H)',Hx:'Seasonal allergies, food allergies'}},int:{age:'24F',wt:'62kg',hx:'Lifelong eczema, failed multiple topicals, severe sleep disruption from itch',exam:'Widespread lichenified plaques, excoriations, superinfected areas',vitals:{HR:'78',BP:'112/72',Temp:'99.2°F',SpO2:'99%'},labs:{IgE:'1250 (H)',Eos:'8%',Hx:'Asthma, rhinitis, food allergies'}},adv:{age:'45M',wt:'85kg',hx:'Adult-onset severe AD, erythrodermic, recurrent skin infections',exam:'Erythroderma >90% BSA, weeping lesions, lymphadenopathy',vitals:{HR:'102',BP:'108/68',Temp:'100.4°F',SpO2:'97%'},labs:{IgE:'3500 (H)',Eos:'15%',Hx:'Failed dupilumab, on cyclosporine'}}};
-const Q=[
-{t:'Diagnostic Criteria',q:'Essential features for atopic dermatitis diagnosis?',h:'Hanifin and Rajka criteria',o:[{id:'a',txt:'Pruritus + chronic/relapsing eczematous dermatitis + typical morphology/distribution',c:1,p:100},{id:'b',txt:'Positive skin prick testing',c:0,p:20},{id:'c',txt:'Elevated IgE required',c:0,p:20}],fb:{1:'<b>Correct!</b> AD is clinical diagnosis: pruritus (essential), typical morphology (acute: vesicles, chronic: lichenification), age-appropriate distribution (infants: face/extensors; children/adults: flexural).',0:'<b>AD diagnosis:</b> Clinical. IgE and allergy testing supportive but not required.'}},
-{t:'The Atopic March',q:'Natural progression of atopic diseases in childhood?',h:'Sequential development pattern',o:[{id:'a',txt:'AD → Food allergy → Asthma → Allergic rhinitis',c:1,p:100},{id:'b',txt:'Rhinitis first',c:0,p:20},{id:'c',txt:'Asthma first',c:0,p:20}],fb:{1:'<b>Correct!</b> Atopic march: AD often first (infancy), food allergy, then asthma (preschool), then allergic rhinitis (school age). Skin barrier dysfunction may drive sensitization.',0:'<b>Atopic march:</b> AD → food allergy → asthma → rhinitis. Early AD intervention may prevent progression.'}},
-{t:'First-Line Treatment',q:'Mainstay of atopic dermatitis management?',h:'Foundational therapy',o:[{id:'a',txt:'Emollients + topical corticosteroids (TCS)',c:1,p:100},{id:'b',txt:'Oral antihistamines',c:0,p:30},{id:'c',txt:'Strict elimination diets',c:0,p:10}],fb:{1:'<b>Correct!</b> Emollients (moisturizers) are foundation - apply liberally, frequently. TCS for flares: low potency for face/folds, medium-high for body. Soak-and-seal technique.',0:'<b>Foundation:</b> Emollients + TCS. Antihistamines for itch, not inflammation.'}},
-{t:'TCS Concerns',q:'Common concern with topical corticosteroid use that leads to undertreatment?',h:'Steroid phobia',o:[{id:'a',txt:'Steroid phobia - often unfounded fears leading to inadequate treatment',c:1,p:100},{id:'b',txt:'Immediate anaphylaxis risk',c:0,p:0},{id:'c',txt:'No concerns, use strongest available',c:0,p:10}],fb:{1:'<b>Correct!</b> Steroid phobia is major barrier to AD control. Educate: appropriate TCS use is safe. Local side effects (atrophy, striae) rare with proper use. Systemic effects very rare with topicals.',0:'<b>Steroid phobia:</b> Address fears, emphasize safety of appropriate use.'}},
-{t:'Steroid-Sparing Options',q:'Non-steroidal topical options for maintenance therapy?',h:'TCI and PDE4 inhibitors',o:[{id:'a',txt:'Tacrolimus/pimecrolimus (TCIs) and crisaborole (PDE4i)',c:1,p:100},{id:'b',txt:'Topical antihistamines',c:0,p:10},{id:'c',txt:'Topical antibiotics daily',c:0,p:10}],fb:{1:'<b>Correct!</b> TCIs (tacrolimus, pimecrolimus): Good for face/folds, maintenance. Burning sensation initially. Crisaborole: PDE4 inhibitor, mild-moderate AD. Ruxolitinib: JAK inhibitor, newest.',0:'<b>Steroid-sparing:</b> TCIs for sensitive areas, crisaborole, ruxolitinib.'}},
-{t:'Biologic Therapy',q:'First-line biologic for moderate-severe atopic dermatitis?',h:'IL-4/IL-13 pathway',o:[{id:'a',txt:'Dupilumab (anti-IL4Rα, blocks IL-4 and IL-13)',c:1,p:100},{id:'b',txt:'Omalizumab',c:0,p:30},{id:'c',txt:'TNF inhibitors',c:0,p:10}],fb:{1:'<b>Correct!</b> Dupilumab: First FDA-approved biologic for AD. Blocks IL-4Rα, inhibiting IL-4 and IL-13 (key T2 cytokines). SC q2 weeks. Very effective, well-tolerated. Watch for conjunctivitis.',0:'<b>Dupilumab:</b> First-line biologic, targets IL-4/IL-13 pathway.'}},
-{t:'Infection Risk',q:'Most common infectious complication in atopic dermatitis?',h:'Impaired skin barrier',o:[{id:'a',txt:'Staphylococcus aureus infection/colonization (90%+ colonized)',c:1,p:100},{id:'b',txt:'Fungal infections',c:0,p:30},{id:'c',txt:'Viral infections only',c:0,p:20}],fb:{1:'<b>Correct!</b> S. aureus colonizes >90% of AD skin. Impetiginization common. Dilute bleach baths (1/4-1/2 cup per full tub, 2x/week) reduce colonization. Eczema herpeticum is viral emergency.',0:'<b>Infections:</b> S. aureus most common. Bleach baths help. Watch for eczema herpeticum.'}},
-{t:'Eczema Herpeticum',q:'What is eczema herpeticum and how is it managed?',h:'Dermatologic emergency',o:[{id:'a',txt:'HSV superinfection causing punched-out erosions - treat with acyclovir urgently',c:1,p:100},{id:'b',txt:'Bacterial infection, treat with topical antibiotics',c:0,p:20},{id:'c',txt:'Worsening eczema, increase steroids',c:0,p:0}],fb:{1:'<b>Correct!</b> Eczema herpeticum: HSV dissemination on eczematous skin. Punched-out erosions, vesicles, fever. Emergency - can be fatal. IV acyclovir if severe, oral if mild. Stop immunosuppressants.',0:'<b>Eczema herpeticum:</b> HSV emergency. Punched-out lesions, systemic acyclovir.'}}
-];
-let sel=null;
-function setDiff(d){S.diff=d;document.querySelectorAll('.diff-btn').forEach((b,i)=>b.classList.toggle('active',['easy','int','adv'][i]===d));if(S.stage!=='setup'){S.stage='setup';S.score=0;S.max=0;S.q=0;document.getElementById('score').textContent='0';}render();}
-function addPts(p,m){S.score+=p;S.max+=m;document.getElementById('score').textContent=S.score;}
-function pick(id){sel=id;document.querySelectorAll('.radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id));document.getElementById('sub').disabled=false;}
-function submit(){const q=Q[S.q-1];const opt=q.o.find(o=>o.id===sel);addPts(opt.p||0,100);document.querySelectorAll('.radio-option').forEach(o=>{const op=q.o.find(x=>x.id===o.dataset.id);if(op&&op.c)o.classList.add('correct');else if(o.dataset.id===sel)o.classList.add('incorrect');});document.getElementById('fb').innerHTML='<div class="feedback '+(opt&&opt.c?'excellent':'incorrect')+'">'+q.fb[opt&&opt.c?1:0]+'</div>';document.getElementById('sub').textContent=S.q<S.total?'Next':'Results';document.getElementById('sub').onclick=next;}
-function next(){if(S.q<S.total){S.q++;sel=null;render();}else{S.stage='outcome';render();}}
-function start(){S.q=1;S.stage='question';render();}
-function go(s){S.stage=s;render();}
-function render(){const c=C[S.diff];if(S.stage==='setup'){document.getElementById('app').innerHTML='<div class="setup-screen"><h1>🔴 The Itch That Won\'t Stop</h1><p style="color:var(--muted);margin-bottom:32px">Atopic Dermatitis: Diagnosis, atopic march, treatment ladder, biologics</p><button class="start-btn" onclick="go(\'pres\')">Begin Case</button></div>';}else if(S.stage==='pres'){document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Presentation</div><div class="card-title">🔴 Chronic Eczematous Dermatitis</div></div><div class="card-body"><div class="narrative"><span class="hl">'+c.age+'</span> ('+c.wt+')<br><b>Hx:</b> '+c.hx+'<br><b>Exam:</b> '+c.exam+'</div><div class="vitals-grid">'+Object.entries(c.vitals).map(function(e){return'<div class="vital"><div class="vital-label">'+e[0]+'</div><div class="vital-value">'+e[1]+'</div></div>';}).join('')+'</div><div class="lab-grid">'+Object.entries(c.labs).map(function(e){return'<div class="lab-item"><span class="lab-name">'+e[0]+'</span><span class="lab-value">'+e[1]+'</span></div>';}).join('')+'</div><div class="btn-row"><button class="btn btn-primary" onclick="start()">Begin Assessment</button></div></div></div>';}else if(S.stage==='question'){var q=Q[S.q-1];document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Q'+S.q+'/'+S.total+'</div><div class="card-title">'+q.t+'</div></div><div class="card-body"><div class="progress-bar"><div class="progress-fill" style="width:'+(S.q/S.total*100)+'%"></div></div><div class="question-header"><div class="question-number">'+S.q+'</div><div style="font-weight:600">'+q.q+'</div></div><div class="hint">'+q.h+'</div><div class="radio-options">'+q.o.map(function(o){return'<div class="radio-option" data-id="'+o.id+'" onclick="pick(\''+o.id+'\')"><div class="radio-circle"></div><div><b>'+o.txt+'</b></div></div>';}).join('')+'</div><div id="fb"></div><div class="btn-row"><button class="btn btn-primary" id="sub" onclick="submit()" disabled>Submit</button></div></div></div>';}else{var pct=S.max>0?Math.round(S.score/S.max*100):0;document.getElementById('app').innerHTML='<div class="card"><div class="card-body"><div style="text-align:center;padding:40px"><div style="font-size:4rem">'+(pct>=70?'🎉':'📚')+'</div><div style="font-size:2rem;font-weight:700;color:'+(pct>=70?'var(--success)':'var(--warning)')+'\">'+(pct>=70?'Complete!':'Review')+'</div></div><div class="score-summary"><div class="score-row"><span>Score</span><span>'+S.score+'/'+S.max+' ('+pct+'%)</span></div></div><div class="pearls-box"><div class="pearls-title">Atopic Dermatitis Pearls</div><div class="pearl-item"><b>Diagnosis:</b> Clinical - pruritus + chronic eczema + typical distribution</div><div class="pearl-item"><b>Atopic march:</b> AD → food allergy → asthma → rhinitis</div><div class="pearl-item"><b>Foundation:</b> Emollients + topical corticosteroids</div><div class="pearl-item"><b>Steroid-sparing:</b> TCIs (tacrolimus), crisaborole, ruxolitinib</div><div class="pearl-item"><b>Biologic:</b> Dupilumab (anti-IL4Rα) first-line for moderate-severe</div><div class="pearl-item"><b>S. aureus:</b> >90% colonized, consider bleach baths</div><div class="pearl-item"><b>Emergency:</b> Eczema herpeticum - acyclovir urgently</div></div><div class="cross-link"><a href="urticaria-adventure-enhanced.html">Related: Urticaria</a> | <a href="asthma-phenotyping-adventure-enhanced.html">Asthma Phenotyping</a></div><div class="btn-row" style="justify-content:center;margin-top:30px"><button class="btn btn-primary" onclick="location.reload()">Retry</button><button class="btn btn-link" onclick="location.href=\'adventure-hub.html\'">Back</button></div></div></div>';}}
-document.addEventListener('DOMContentLoaded',render);
-</script>
+    <header class="header"><div class="header-row"><div class="header-title">🧴 The Lifelong Itch</div><div class="stat"><div class="stat-value" id="scoreDisplay">0</div><div class="stat-label">Points</div></div></div></header>
+    <main class="main"><div id="stageContainer"></div></main>
+    <script>
+    const state = { stage:'setup', score:0 };
+    
+    const adCriteria = [
+        { id: 'pruritus', text: 'Pruritus (essential)', isCrit: true },
+        { id: 'flexural', text: 'Typical distribution (flexural)', isCrit: true },
+        { id: 'chronic', text: 'Chronic/relapsing course', isCrit: true },
+        { id: 'atopy', text: 'Personal/family atopy history', isCrit: true },
+        { id: 'urticaria', text: 'Migratory urticaria', isCrit: false },
+        { id: 'blisters', text: 'Tense bullae', isCrit: false }
+    ];
+
+    const topicalTx = [
+        { id: 'emollients', text: 'Emollients (maintenance)', isCorrect: true },
+        { id: 'tcs', text: 'Topical corticosteroids (flares)', isCorrect: true },
+        { id: 'tci', text: 'Topical calcineurin inhibitors', isCorrect: true },
+        { id: 'oral_steroids', text: 'Long-term oral steroids', isCorrect: false },
+        { id: 'antihistamines', text: 'Antihistamines (for itch)', isCorrect: false }
+    ];
+
+    function addScore(pts) { state.score += pts; document.getElementById('scoreDisplay').textContent = state.score; }
+
+    const stages = {
+        setup: { render: () => `
+            <div class="setup-screen">
+                <h1>🧴 The Lifelong Itch</h1>
+                <p class="subtitle">Atopic dermatitis management</p>
+                <button class="start-btn" onclick="goTo('referral')">Begin Case →</button>
+            </div>`
+        },
+        referral: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Allergy Clinic</div><div class="card-title">📋 Refractory Eczema</div></div>
+                <div class="card-body">
+                    <div class="narrative">A <span class="hl">24-year-old male</span> presents with <span class="hl">severe eczema since childhood</span>. Despite <span class="hl">high-potency topical steroids</span> and <span class="hl">tacrolimus</span>, he has frequent flares requiring <span class="hl">oral prednisone (~6×/year)</span>.<br><br>His skin significantly affects <span class="hl">sleep and quality of life</span>. He has <span class="hl">~40% BSA involvement</span> of flexural areas, face, and trunk. He also has <span class="hl">allergic rhinitis</span> and <span class="hl">peanut/tree nut allergy</span>.<br><br>Exam: <span class="hl">Lichenified plaques</span> in antecubital/popliteal fossae, excoriations, xerosis. <span class="hl">EASI score: 28</span>.</div>
+                    <div class="patient-panel">
+                        <div class="patient-panel-title">Patient Information</div>
+                        <div class="patient-info-grid">
+                            <div><div class="patient-info-label">Age/Sex</div><div class="patient-info-value">24 y/o Male</div></div>
+                            <div><div class="patient-info-label">BSA</div><div class="patient-info-value">~40%</div></div>
+                            <div><div class="patient-info-label">EASI</div><div class="patient-info-value">28 (severe)</div></div>
+                            <div><div class="patient-info-label">Current Tx</div><div class="patient-info-value">TCS, TCI, prednisone</div></div>
+                            <div><div class="patient-info-label">Comorbidities</div><div class="patient-info-value">AR, food allergy</div></div>
+                            <div><div class="patient-info-label">Duration</div><div class="patient-info-value">Since childhood</div></div>
+                        </div>
+                    </div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('diagnosis')">Confirm Diagnosis →</button></div>
+                </div>
+            </div>`
+        },
+        diagnosis: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Diagnosis</div><div class="card-title">🔍 AD Criteria</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">1</div><div class="question-text">Which are features of atopic dermatitis?</div></div>
+                        <div class="checkbox-grid" id="critOpts">${adCriteria.map(c=>`<div class="checkbox-item" data-id="${c.id}" data-crit="${c.isCrit}" onclick="toggleCrit('${c.id}')"><div class="checkbox-box"></div><span>${c.text}</span></div>`).join('')}</div>
+                    </div>
+                    <div id="critFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitCrit()">Submit →</button></div>
+                </div>
+            </div>`
+        },
+        severity: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Assessment</div><div class="card-title">📊 Severity</div></div>
+                <div class="card-body">
+                    <div class="alert info"><span class="alert-icon">📋</span><div class="alert-content"><div class="alert-title">EASI Score</div><div class="alert-desc">0=Clear | 0.1-5.9=Almost clear | 6-15.9=Mild | 16-22.9=Moderate | 23-72=Severe</div></div></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">2</div><div class="question-text">What is this patient's AD severity (EASI 28)?</div></div>
+                        <div class="radio-options" id="sevOpts">
+                            <div class="radio-option" data-id="mild" onclick="selectSev('mild')"><div class="radio-circle"></div><span>Mild</span></div>
+                            <div class="radio-option" data-id="moderate" onclick="selectSev('moderate')"><div class="radio-circle"></div><span>Moderate</span></div>
+                            <div class="radio-option" data-id="severe" onclick="selectSev('severe')"><div class="radio-circle"></div><span>Severe</span></div>
+                        </div>
+                    </div>
+                    <div id="sevFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="sevSubmit" onclick="submitSev()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        topical: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Topical</div><div class="card-title">💊 Topical Management</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">3</div><div class="question-text">Which are appropriate topical treatments?</div></div>
+                        <div class="checkbox-grid" id="topOpts">${topicalTx.map(t=>`<div class="checkbox-item" data-id="${t.id}" data-correct="${t.isCorrect}" onclick="toggleTop('${t.id}')"><div class="checkbox-box"></div><span>${t.text}</span></div>`).join('')}</div>
+                    </div>
+                    <div id="topFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitTop()">Submit →</button></div>
+                </div>
+            </div>`
+        },
+        systemic: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Systemic</div><div class="card-title">💉 Biologic Selection</div></div>
+                <div class="card-body">
+                    <p style="color:var(--muted);margin-bottom:20px">Patient has severe AD refractory to topical therapy. What systemic treatment is first-line?</p>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">4</div><div class="question-text">First-line systemic therapy for moderate-severe AD?</div></div>
+                        <div class="radio-options" id="sysOpts">
+                            <div class="radio-option" data-id="dupilumab" onclick="selectSys('dupilumab')"><div class="radio-circle"></div><div><strong>Dupilumab (anti-IL-4/IL-13)</strong><br><small style="color:var(--muted)">FDA-approved biologic for AD</small></div></div>
+                            <div class="radio-option" data-id="cyclosporine" onclick="selectSys('cyclosporine')"><div class="radio-circle"></div><div><strong>Cyclosporine</strong><br><small style="color:var(--muted)">Traditional immunosuppressant</small></div></div>
+                            <div class="radio-option" data-id="methotrexate" onclick="selectSys('methotrexate')"><div class="radio-circle"></div><div><strong>Methotrexate</strong><br><small style="color:var(--muted)">Traditional immunosuppressant</small></div></div>
+                            <div class="radio-option" data-id="prednisone" onclick="selectSys('prednisone')"><div class="radio-circle"></div><div><strong>Long-term prednisone</strong><br><small style="color:var(--muted)">Oral corticosteroid</small></div></div>
+                        </div>
+                    </div>
+                    <div id="sysFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="sysSubmit" onclick="submitSys()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        outcome: { render: () => `
+            <div class="card"><div class="card-body">
+                <div class="outcome">
+                    <div class="outcome-icon">🎉</div>
+                    <div class="outcome-title">AD Under Control!</div>
+                    <div class="outcome-desc">Patient was started on dupilumab with excellent response. After 16 weeks, his EASI improved from 28 to 4 (almost clear). He was able to stop prednisone and reduce topical steroids. His sleep and quality of life dramatically improved.</div>
+                </div>
+                <div class="score-summary">
+                    <h3 style="margin-bottom:16px">Performance</h3>
+                    <div class="score-row"><span>AD Criteria</span><span>${state.critScore||0}/100</span></div>
+                    <div class="score-row"><span>Severity Assessment</span><span>${state.sevScore||0}/100</span></div>
+                    <div class="score-row"><span>Topical Therapy</span><span>${state.topScore||0}/100</span></div>
+                    <div class="score-row"><span>Systemic Selection</span><span>${state.sysScore||0}/100</span></div>
+                    <div class="score-row" style="border-top:2px solid var(--border);padding-top:12px"><strong>Total</strong><strong>${state.score}</strong></div>
+                </div>
+                <div class="feedback excellent"><div class="feedback-header"><span class="feedback-icon">💡</span><span class="feedback-title">Atopic Dermatitis Pearls</span></div><div class="feedback-text">• <strong>Essential features:</strong> Pruritus + typical distribution + chronic course<br>• <strong>Topical foundation:</strong> Emollients (always!) + TCS (flares) + TCI (face/maintenance)<br>• <strong>Avoid long-term oral steroids</strong> - significant side effects<br>• <strong>Dupilumab</strong> = first-line biologic (anti-IL-4/IL-13), very safe<br>• <strong>JAK inhibitors:</strong> Upadacitinib, abrocitinib (oral options)<br>• <strong>Antihistamines:</strong> Don't help AD itch (different mechanism)<br>• <strong>Atopic march:</strong> AD → food allergy → AR → asthma</div></div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Play Again</button></div>
+            </div></div>`
+        }
+    };
+
+    let selectedCrit = new Set();
+    function toggleCrit(id) {
+        const el = document.querySelector(`#critOpts .checkbox-item[data-id="${id}"]`);
+        if(selectedCrit.has(id)) { selectedCrit.delete(id); el.classList.remove('selected'); }
+        else { selectedCrit.add(id); el.classList.add('selected'); }
+    }
+    function submitCrit() {
+        let correct = 0;
+        adCriteria.forEach(c => {
+            const el = document.querySelector(`#critOpts .checkbox-item[data-id="${c.id}"]`);
+            const sel = selectedCrit.has(c.id);
+            if (c.isCrit && sel) { el.classList.add('correct'); correct++; }
+            else if (!c.isCrit && sel) { el.classList.add('incorrect'); }
+        });
+        state.critScore = Math.round(correct / 4 * 100);
+        addScore(Math.round(state.critScore / 2.5));
+        document.getElementById('critFeedback').innerHTML = `<div class="feedback ${state.critScore>=75?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${state.critScore>=75?'✅':'📚'}</span><span class="feedback-title">AD Features</span></div><div class="feedback-text"><strong>Essential:</strong> Pruritus (must have!), eczematous morphology, typical distribution, chronic/relapsing<br><strong>Associated:</strong> Personal/family atopy, xerosis, early onset</div></div>`;
+        document.querySelector('#critFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('severity')">Assess Severity →</button>`;
+    }
+
+    let selectedSev = null;
+    function selectSev(id) { selectedSev = id; document.querySelectorAll('#sevOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('sevSubmit').disabled = false; }
+    function submitSev() {
+        document.querySelectorAll('#sevOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'severe') o.classList.add('correct');
+            else if (o.dataset.id === selectedSev) o.classList.add('incorrect');
+        });
+        state.sevScore = selectedSev === 'severe' ? 100 : 40;
+        addScore(selectedSev === 'severe' ? 40 : 15);
+        document.getElementById('sevFeedback').innerHTML = `<div class="feedback ${selectedSev==='severe'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedSev==='severe'?'✅':'📚'}</span><span class="feedback-title">${selectedSev==='severe'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>EASI 28 = Severe</strong> (≥23 is severe)<br>Also consider: Impact on QOL, sleep disturbance, treatment requirements</div></div>`;
+        document.getElementById('sevSubmit').textContent = 'Continue →';
+        document.getElementById('sevSubmit').onclick = () => goTo('topical');
+    }
+
+    let selectedTop = new Set();
+    function toggleTop(id) {
+        const el = document.querySelector(`#topOpts .checkbox-item[data-id="${id}"]`);
+        if(selectedTop.has(id)) { selectedTop.delete(id); el.classList.remove('selected'); }
+        else { selectedTop.add(id); el.classList.add('selected'); }
+    }
+    function submitTop() {
+        let correct = 0;
+        topicalTx.forEach(t => {
+            const el = document.querySelector(`#topOpts .checkbox-item[data-id="${t.id}"]`);
+            const sel = selectedTop.has(t.id);
+            if (t.isCorrect && sel) { el.classList.add('correct'); correct++; }
+            else if (!t.isCorrect && sel) { el.classList.add('incorrect'); }
+        });
+        state.topScore = Math.round(correct / 3 * 100);
+        addScore(Math.round(state.topScore / 2.5));
+        document.getElementById('topFeedback').innerHTML = `<div class="feedback ${state.topScore>=75?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${state.topScore>=75?'✅':'📚'}</span><span class="feedback-title">Topical Therapy</span></div><div class="feedback-text"><strong>Yes:</strong> Emollients (always), TCS (flares), TCI (steroid-sparing, face)<br><strong>No:</strong> Long-term oral steroids (side effects). Antihistamines don't help AD itch.</div></div>`;
+        document.querySelector('#topFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('systemic')">Consider Systemic →</button>`;
+    }
+
+    let selectedSys = null;
+    function selectSys(id) { selectedSys = id; document.querySelectorAll('#sysOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('sysSubmit').disabled = false; }
+    function submitSys() {
+        document.querySelectorAll('#sysOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'dupilumab') o.classList.add('correct');
+            else if (o.dataset.id === selectedSys) o.classList.add('incorrect');
+        });
+        state.sysScore = selectedSys === 'dupilumab' ? 100 : 40;
+        addScore(selectedSys === 'dupilumab' ? 40 : 15);
+        document.getElementById('sysFeedback').innerHTML = `<div class="feedback ${selectedSys==='dupilumab'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedSys==='dupilumab'?'✅':'📚'}</span><span class="feedback-title">${selectedSys==='dupilumab'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Dupilumab</strong> = first-line biologic for mod-severe AD<br>• Anti-IL-4/IL-13, blocks T2 inflammation<br>• Very safe profile, minimal monitoring<br>• Also treats asthma, CRSwNP, EoE<br><br>Cyclosporine/MTX: Traditional options but more toxicity. Avoid long-term prednisone!</div></div>`;
+        document.getElementById('sysSubmit').textContent = 'Complete →';
+        document.getElementById('sysSubmit').onclick = () => goTo('outcome');
+    }
+
+    function goTo(id) { state.stage = id; document.getElementById('stageContainer').innerHTML = stages[id].render(); window.scrollTo(0,0); }
+    document.addEventListener('DOMContentLoaded', () => goTo('setup'));
+    </script>
 </body>
 </html>

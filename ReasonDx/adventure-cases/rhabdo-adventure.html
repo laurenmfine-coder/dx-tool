@@ -3,35 +3,323 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muscle Breakdown | ReasonDx Adventure</title>
-    <style>:root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#F97316;--success:#10B981;--warning:#F59E0B;--danger:#DC2626}*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}.header{background:linear-gradient(135deg,#EA580C,#F97316);padding:12px 20px;position:sticky;top:0;z-index:100}.header-row{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}.diff-toggle{display:flex;background:rgba(0,0,0,.3);border-radius:8px}.diff-btn{padding:6px 12px;font-size:.75rem;cursor:pointer;border:none;background:0 0;color:rgba(255,255,255,.7);font-weight:600}.diff-btn.active{background:rgba(255,255,255,.2);color:#fff}.stat{text-align:center;background:rgba(0,0,0,.2);padding:6px 14px;border-radius:8px}.stat-value{font-size:1.1rem;font-weight:700;font-family:monospace}.stat-label{font-size:.6rem;opacity:.8}.main{max-width:900px;margin:0 auto;padding:24px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px}.card-header{padding:20px 24px;border-bottom:1px solid var(--border)}.card-phase{font-size:.75rem;color:var(--accent);text-transform:uppercase}.card-title{font-size:1.5rem;font-weight:700}.card-body{padding:24px}.narrative{background:rgba(249,115,22,.1);border-left:4px solid var(--accent);padding:20px;border-radius:0 12px 12px 0;margin-bottom:20px}.narrative .hl{background:rgba(249,115,22,.3);padding:2px 6px;border-radius:4px}.setup-screen{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center}.start-btn{background:var(--accent);color:#fff;border:none;padding:16px 48px;border-radius:12px;font-size:1.1rem;font-weight:700;cursor:pointer}.hint{background:rgba(59,130,246,.15);padding:12px 16px;border-radius:8px;margin-bottom:16px;color:#93C5FD}.radio-options{display:flex;flex-direction:column;gap:10px}.radio-option{display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(0,0,0,.2);border:2px solid var(--border);border-radius:10px;cursor:pointer}.radio-option.selected{border-color:var(--accent);background:rgba(249,115,22,.15)}.radio-option.correct{border-color:var(--success);background:rgba(16,185,129,.15)}.radio-option.incorrect{border-color:var(--danger);background:rgba(220,38,38,.15)}.radio-circle{width:22px;height:22px;border:2px solid var(--border);border-radius:50%}.radio-option.selected .radio-circle{border-color:var(--accent);background:radial-gradient(circle,var(--accent) 40%,transparent 40%)}.feedback{padding:20px;border-radius:12px;margin:20px 0}.feedback.excellent{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3)}.feedback.incorrect{background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.3)}.btn{padding:14px 28px;border-radius:10px;font-weight:600;cursor:pointer;border:none}.btn-primary{background:var(--accent);color:#fff}.btn:disabled{opacity:.5}.btn-row{display:flex;gap:12px;margin-top:24px}.btn-link{background:0 0;border:2px solid var(--border);color:var(--text)}.vitals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:12px;margin:20px 0}.vital{background:rgba(0,0,0,.2);padding:12px;border-radius:10px;text-align:center}.vital-label{font-size:.7rem;color:var(--muted)}.vital-value{font-size:1.3rem;font-weight:700;font-family:monospace}.lab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:16px 0}.lab-item{display:flex;justify-content:space-between;padding:8px 12px;background:rgba(0,0,0,.2);border-radius:6px}.lab-name{color:var(--muted)}.lab-value{font-family:monospace;font-weight:600}.score-summary{background:rgba(0,0,0,.2);border-radius:12px;padding:24px;margin:24px auto;max-width:600px}.score-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}.pearls-box{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:20px;margin-top:20px}.pearls-title{font-weight:700;color:var(--success);margin-bottom:12px}.pearl-item{padding:8px 0;border-bottom:1px solid rgba(16,185,129,.2);font-size:.95rem}.cross-link{background:rgba(249,115,22,.1);border:1px solid rgba(249,115,22,.3);border-radius:8px;padding:12px 16px;margin-top:12px}.cross-link a{color:#FDBA74;text-decoration:none}.progress-bar{background:rgba(255,255,255,.1);border-radius:10px;height:8px;margin:20px 0}.progress-fill{background:var(--accent);height:100%;border-radius:10px}.question-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}.question-number{background:var(--accent);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}</style>
+    <title>The Dark Urine | ReasonDx Adventure</title>
+    <style>
+        :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #A855F7; --success: #10B981; --warning: #F59E0B; --danger: #DC2626; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #9333EA 0%, #A855F7 100%); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; }
+        .stat { background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 8px; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        .main { max-width: 1000px; margin: 0 auto; padding: 24px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(147,51,234,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; line-height: 1.8; }
+        .narrative .hl { background: rgba(168,85,247,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        .setup-screen { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; }
+        .setup-screen h1 { font-size: 2rem; margin-bottom: 8px; }
+        .setup-screen .subtitle { color: var(--muted); margin-bottom: 32px; }
+        .start-btn { background: var(--accent); color: white; border: none; padding: 16px 48px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+        .question-section { margin-bottom: 32px; }
+        .question-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .question-number { background: var(--accent); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .question-text { font-size: 1.1rem; font-weight: 600; }
+        .radio-options { display: flex; flex-direction: column; gap: 10px; }
+        .radio-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .radio-option:hover { border-color: var(--accent); }
+        .radio-option.selected { border-color: var(--accent); background: rgba(168,85,247,0.15); }
+        .radio-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .radio-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .radio-circle { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; }
+        .radio-option.selected .radio-circle { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 40%, transparent 40%); }
+        .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+        .checkbox-item { display: flex; align-items: center; gap: 10px; padding: 12px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .checkbox-item:hover { border-color: var(--accent); }
+        .checkbox-item.selected { border-color: var(--accent); background: rgba(168,85,247,0.15); }
+        .checkbox-item.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .checkbox-item.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .checkbox-box { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .checkbox-item.selected .checkbox-box { background: var(--accent); border-color: var(--accent); }
+        .checkbox-item.selected .checkbox-box::after { content: '✓'; color: white; font-weight: bold; }
+        .feedback { padding: 20px; border-radius: 12px; margin: 20px 0; }
+        .feedback.excellent { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .feedback.acceptable { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .feedback-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .feedback-icon { font-size: 1.5rem; }
+        .feedback-title { font-weight: 700; }
+        .feedback-text { color: var(--muted); line-height: 1.7; }
+        .feedback-text strong { color: var(--text); }
+        .alert { padding: 16px 20px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
+        .alert.info { background: rgba(168,85,247,0.15); border: 1px solid rgba(168,85,247,0.3); }
+        .alert.danger { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+        .alert-icon { font-size: 1.5rem; }
+        .alert-content { flex: 1; }
+        .alert-title { font-weight: 600; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; color: var(--muted); }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-row { display: flex; gap: 12px; margin-top: 24px; }
+        .lab-panel { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .lab-panel-title { font-weight: 600; margin-bottom: 16px; color: var(--accent); }
+        .lab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; }
+        .lab-item { background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; }
+        .lab-name { font-size: 0.8rem; color: var(--muted); }
+        .lab-value { font-size: 1.1rem; font-weight: 700; }
+        .lab-value.critical { color: var(--danger); }
+        .lab-value.high { color: var(--warning); }
+        .lab-range { font-size: 0.7rem; color: var(--muted); }
+        .outcome { text-align: center; padding: 40px 20px; }
+        .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
+        .outcome-title { font-size: 2rem; font-weight: 700; color: var(--success); margin-bottom: 8px; }
+        .outcome-desc { color: var(--muted); max-width: 600px; margin: 0 auto 24px; }
+        .score-summary { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 24px; margin: 24px auto; max-width: 500px; }
+        .score-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .score-row:last-child { border-bottom: none; }
+    </style>
 </head>
 <body>
-    <header class="header"><div class="header-row"><div style="font-weight:600">💪 Muscle Breakdown</div><div style="display:flex;gap:12px;align-items:center"><div class="diff-toggle"><button class="diff-btn active" onclick="setDiff('easy')">Easy</button><button class="diff-btn" onclick="setDiff('int')">Intermediate</button><button class="diff-btn" onclick="setDiff('adv')">Advanced</button></div><div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Points</div></div></div></div></header>
-    <main class="main"><div id="app"></div></main>
-<script>
-const S={stage:'setup',score:0,max:0,diff:'easy',q:0,total:8};
-const C={easy:{age:'28M',wt:'82kg',hx:'Intense CrossFit workout yesterday, now severe muscle pain and dark urine',exam:'Diffuse muscle tenderness, swollen thighs, tea-colored urine',vitals:{HR:'98',BP:'138/88',Temp:'99.1°F',SpO2:'99%'},labs:{CK:'45,000 (H)',Cr:'1.4',K:'5.2',Hx:'New to CrossFit'}},int:{age:'45M',wt:'95kg',hx:'Found down after cocaine binge, confused, muscle rigidity',exam:'Agitated, diffuse rigidity, diaphoretic, mydriasis',vitals:{HR:'128',BP:'178/102',Temp:'103.8°F',SpO2:'94%'},labs:{CK:'125,000 (H)',Cr:'3.2',K:'6.8',Hx:'Cocaine use'}},adv:{age:'62F',wt:'70kg',hx:'Started statin 3 weeks ago, progressive weakness, now oliguric',exam:'Proximal weakness, diffuse tenderness, minimal urine output',vitals:{HR:'92',BP:'148/92',Temp:'98.6°F',SpO2:'97%'},labs:{CK:'85,000 (H)',Cr:'5.8',K:'6.2',Hx:'New atorvastatin'}}};
-const Q=[
-{t:'Diagnosis',q:'CK level threshold for rhabdomyolysis diagnosis?',h:'Muscle enzyme elevation',o:[{id:'a',txt:'CK >5x upper limit of normal (typically >1000 U/L)',c:1,p:100},{id:'b',txt:'Any CK elevation',c:0,p:30},{id:'c',txt:'CK >100,000 only',c:0,p:20}],fb:{1:'<b>Correct!</b> Rhabdomyolysis defined as CK >5x ULN. Higher CK correlates with AKI risk. CK >15,000-20,000 significantly increases renal risk.',0:'<b>Definition:</b> CK >5x ULN. Higher levels = higher AKI risk.'}},
-{t:'Common Causes',q:'Most common causes of rhabdomyolysis?',h:'Think trauma, toxins, exertion',o:[{id:'a',txt:'Trauma/crush injury, exertional, drugs/toxins (statins, cocaine, alcohol)',c:1,p:100},{id:'b',txt:'Infections only',c:0,p:20},{id:'c',txt:'Autoimmune diseases',c:0,p:20}],fb:{1:'<b>Correct!</b> Common causes: Trauma/immobilization, exertional (exercise, seizures, heat stroke), toxins (alcohol, cocaine, statins), infections, electrolyte disorders.',0:'<b>Causes:</b> Trauma, exertion, drugs/toxins most common.'}},
-{t:'AKI Mechanism',q:'How does rhabdomyolysis cause acute kidney injury?',h:'Myoglobin nephrotoxicity',o:[{id:'a',txt:'Myoglobin causes tubular obstruction, direct toxicity, and renal vasoconstriction',c:1,p:100},{id:'b',txt:'CK directly damages kidneys',c:0,p:20},{id:'c',txt:'Volume overload',c:0,p:10}],fb:{1:'<b>Correct!</b> Myoglobin precipitates in tubules (especially in acidic urine), causes direct oxidative injury, and triggers renal vasoconstriction. CK itself is not nephrotoxic.',0:'<b>Mechanism:</b> Myoglobin (not CK) causes tubular obstruction and toxicity.'}},
-{t:'Fluid Therapy',q:'Primary treatment for rhabdomyolysis to prevent AKI?',h:'Volume is key',o:[{id:'a',txt:'Aggressive IV fluids (goal UOP 200-300 mL/hr)',c:1,p:100},{id:'b',txt:'Fluid restriction',c:0,p:0},{id:'c',txt:'Diuretics first',c:0,p:20}],fb:{1:'<b>Correct!</b> Aggressive crystalloid resuscitation is cornerstone. Goal UOP 200-300 mL/hr (or 3 mL/kg/hr). May need 10+ L/day initially. Monitor for volume overload.',0:'<b>Fluids:</b> Aggressive hydration, target UOP 200-300 mL/hr.'}},
-{t:'Urine Alkalinization',q:'Role of bicarbonate in rhabdomyolysis treatment?',h:'Controversial practice',o:[{id:'a',txt:'Urine alkalinization (target pH >6.5) may reduce myoglobin precipitation - evidence limited',c:1,p:100},{id:'b',txt:'Always required',c:0,p:30},{id:'c',txt:'Contraindicated',c:0,p:20}],fb:{1:'<b>Correct!</b> Bicarb may help by alkalinizing urine (reduces myoglobin precipitation) and treating acidosis. Evidence is limited. Use if severe rhabdo or metabolic acidosis.',0:'<b>Bicarb:</b> Optional, may help with severe cases. Evidence limited.'}},
-{t:'Compartment Syndrome',q:'When to suspect compartment syndrome in rhabdomyolysis?',h:'Surgical emergency',o:[{id:'a',txt:'Pain out of proportion, pain with passive stretch, tense compartment, paresthesias',c:1,p:100},{id:'b',txt:'Only with fractures',c:0,p:20},{id:'c',txt:'High CK alone',c:0,p:20}],fb:{1:'<b>Correct!</b> 5 Ps: Pain (especially passive stretch), Pressure (tense), Paresthesias, Paralysis, Pulselessness (late). Compartment pressure >30 mmHg or within 30 of diastolic = fasciotomy.',0:'<b>Compartment syndrome:</b> Pain with passive stretch is key early sign.'}},
-{t:'Electrolyte Management',q:'Most dangerous early electrolyte abnormality in rhabdomyolysis?',h:'Released from damaged muscle',o:[{id:'a',txt:'Hyperkalemia (can cause fatal arrhythmias)',c:1,p:100},{id:'b',txt:'Hyponatremia',c:0,p:20},{id:'c',txt:'Hypercalcemia',c:0,p:10}],fb:{1:'<b>Correct!</b> Hyperkalemia from muscle breakdown is life-threatening. Also watch for hyperphosphatemia (early), hypocalcemia (early), hypercalcemia (recovery phase).',0:'<b>Electrolytes:</b> Hyperkalemia is most dangerous early. Treat aggressively.'}},
-{t:'Dialysis Indications',q:'When is dialysis indicated in rhabdomyolysis?',h:'Standard AKI indications',o:[{id:'a',txt:'Refractory hyperkalemia, severe acidosis, volume overload, uremic symptoms',c:1,p:100},{id:'b',txt:'CK >50,000 alone',c:0,p:30},{id:'c',txt:'All rhabdomyolysis cases',c:0,p:10}],fb:{1:'<b>Correct!</b> Dialysis for standard AKI indications (AEIOU). High CK alone is not indication. Most patients recover renal function with aggressive fluids.',0:'<b>Dialysis:</b> Standard AKI indications, not CK level alone.'}}
-];
-let sel=null;
-function setDiff(d){S.diff=d;document.querySelectorAll('.diff-btn').forEach((b,i)=>b.classList.toggle('active',['easy','int','adv'][i]===d));if(S.stage!=='setup'){S.stage='setup';S.score=0;S.max=0;S.q=0;document.getElementById('score').textContent='0';}render();}
-function addPts(p,m){S.score+=p;S.max+=m;document.getElementById('score').textContent=S.score;}
-function pick(id){sel=id;document.querySelectorAll('.radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id));document.getElementById('sub').disabled=false;}
-function submit(){const q=Q[S.q-1];const opt=q.o.find(o=>o.id===sel);addPts(opt.p||0,100);document.querySelectorAll('.radio-option').forEach(o=>{const op=q.o.find(x=>x.id===o.dataset.id);if(op&&op.c)o.classList.add('correct');else if(o.dataset.id===sel)o.classList.add('incorrect');});document.getElementById('fb').innerHTML='<div class="feedback '+(opt&&opt.c?'excellent':'incorrect')+'">'+q.fb[opt&&opt.c?1:0]+'</div>';document.getElementById('sub').textContent=S.q<S.total?'Next':'Results';document.getElementById('sub').onclick=next;}
-function next(){if(S.q<S.total){S.q++;sel=null;render();}else{S.stage='outcome';render();}}
-function start(){S.q=1;S.stage='question';render();}
-function go(s){S.stage=s;render();}
-function render(){const c=C[S.diff];if(S.stage==='setup'){document.getElementById('app').innerHTML='<div class="setup-screen"><h1>💪 Muscle Breakdown</h1><p style="color:var(--muted);margin-bottom:32px">Rhabdomyolysis: Diagnosis, causes, AKI prevention, fluid management, compartment syndrome</p><button class="start-btn" onclick="go(\'pres\')">Begin Case</button></div>';}else if(S.stage==='pres'){document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Presentation</div><div class="card-title">💪 Muscle Injury</div></div><div class="card-body"><div class="narrative"><span class="hl">'+c.age+'</span> ('+c.wt+')<br><b>Hx:</b> '+c.hx+'<br><b>Exam:</b> '+c.exam+'</div><div class="vitals-grid">'+Object.entries(c.vitals).map(function(e){return'<div class="vital"><div class="vital-label">'+e[0]+'</div><div class="vital-value">'+e[1]+'</div></div>';}).join('')+'</div><div class="lab-grid">'+Object.entries(c.labs).map(function(e){return'<div class="lab-item"><span class="lab-name">'+e[0]+'</span><span class="lab-value">'+e[1]+'</span></div>';}).join('')+'</div><div class="btn-row"><button class="btn btn-primary" onclick="start()">Begin Assessment</button></div></div></div>';}else if(S.stage==='question'){var q=Q[S.q-1];document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Q'+S.q+'/'+S.total+'</div><div class="card-title">'+q.t+'</div></div><div class="card-body"><div class="progress-bar"><div class="progress-fill" style="width:'+(S.q/S.total*100)+'%"></div></div><div class="question-header"><div class="question-number">'+S.q+'</div><div style="font-weight:600">'+q.q+'</div></div><div class="hint">'+q.h+'</div><div class="radio-options">'+q.o.map(function(o){return'<div class="radio-option" data-id="'+o.id+'" onclick="pick(\''+o.id+'\')"><div class="radio-circle"></div><div><b>'+o.txt+'</b></div></div>';}).join('')+'</div><div id="fb"></div><div class="btn-row"><button class="btn btn-primary" id="sub" onclick="submit()" disabled>Submit</button></div></div></div>';}else{var pct=S.max>0?Math.round(S.score/S.max*100):0;document.getElementById('app').innerHTML='<div class="card"><div class="card-body"><div style="text-align:center;padding:40px"><div style="font-size:4rem">'+(pct>=70?'🎉':'📚')+'</div><div style="font-size:2rem;font-weight:700;color:'+(pct>=70?'var(--success)':'var(--warning)')+'">'+(pct>=70?'Complete!':'Review')+'</div></div><div class="score-summary"><div class="score-row"><span>Score</span><span>'+S.score+'/'+S.max+' ('+pct+'%)</span></div></div><div class="pearls-box"><div class="pearls-title">Rhabdomyolysis Pearls</div><div class="pearl-item"><b>Diagnosis:</b> CK >5x ULN (typically >1000)</div><div class="pearl-item"><b>Causes:</b> Trauma, exertion, drugs/toxins (statins, cocaine)</div><div class="pearl-item"><b>Fluids:</b> Aggressive IVF, target UOP 200-300 mL/hr</div><div class="pearl-item"><b>Bicarb:</b> Consider for severe cases, evidence limited</div><div class="pearl-item"><b>Hyperkalemia:</b> Most dangerous early electrolyte issue</div><div class="pearl-item"><b>Compartment:</b> Pain with passive stretch = emergency</div><div class="pearl-item"><b>Dialysis:</b> Standard AKI indications, not CK level</div></div><div class="cross-link"><a href="aki-adventure-enhanced.html">Related: AKI</a> | <a href="hyperkalemia-adventure-enhanced.html">Hyperkalemia</a></div><div class="btn-row" style="justify-content:center;margin-top:30px"><button class="btn btn-primary" onclick="location.reload()">Retry</button><button class="btn btn-link" onclick="location.href=\'adventure-hub.html\'">Back</button></div></div></div>';}}
-document.addEventListener('DOMContentLoaded',render);
-</script>
+    <header class="header"><div class="header-row"><div class="header-title">🟤 The Dark Urine</div><div class="stat"><div class="stat-value" id="scoreDisplay">0</div><div class="stat-label">Points</div></div></div></header>
+    <main class="main"><div id="stageContainer"></div></main>
+    <script>
+    const state = { stage:'setup', score:0 };
+    
+    function addScore(pts) { state.score += pts; document.getElementById('scoreDisplay').textContent = state.score; }
+
+    const stages = {
+        setup: { render: () => `
+            <div class="setup-screen">
+                <h1>🟤 The Dark Urine</h1>
+                <p class="subtitle">Rhabdomyolysis recognition and management</p>
+                <button class="start-btn" onclick="goTo('presentation')">Begin Case →</button>
+            </div>`
+        },
+        presentation: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Emergency Department</div><div class="card-title">📋 Muscle Pain After Exertion</div></div>
+                <div class="card-body">
+                    <div class="narrative">A <span class="hl">24-year-old male</span> presents with <span class="hl">severe muscle pain</span> and <span class="hl">"dark brown urine"</span> for 2 days. He started <span class="hl">CrossFit 4 days ago</span> and did an intense workout with multiple sets of squats and deadlifts.<br><br>He also admits to taking <span class="hl">pre-workout supplements</span> and hadn't been drinking much water. His <span class="hl">thighs and calves are severely tender</span> and <span class="hl">swollen bilaterally</span>.<br><br>Vitals: HR 104, BP 142/92, Temp 37.8°C. Urine appears <span class="hl">tea-colored</span>.</div>
+                    <div class="lab-panel">
+                        <div class="lab-panel-title">Laboratory Results</div>
+                        <div class="lab-grid">
+                            <div class="lab-item"><div class="lab-name">CK</div><div class="lab-value critical">84,000 U/L</div><div class="lab-range">30-200</div></div>
+                            <div class="lab-item"><div class="lab-name">Creatinine</div><div class="lab-value high">2.4 mg/dL</div><div class="lab-range">0.7-1.3</div></div>
+                            <div class="lab-item"><div class="lab-name">Potassium</div><div class="lab-value high">5.8 mEq/L</div><div class="lab-range">3.5-5.0</div></div>
+                            <div class="lab-item"><div class="lab-name">Calcium</div><div class="lab-value">7.8 mg/dL</div><div class="lab-range">8.5-10.5</div></div>
+                            <div class="lab-item"><div class="lab-name">Phosphorus</div><div class="lab-value high">6.2 mg/dL</div><div class="lab-range">2.5-4.5</div></div>
+                            <div class="lab-item"><div class="lab-name">UA Dipstick</div><div class="lab-value critical">Blood 3+</div><div class="lab-range">Negative</div></div>
+                        </div>
+                    </div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('diagnosis')">Confirm Diagnosis →</button></div>
+                </div>
+            </div>`
+        },
+        diagnosis: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Diagnosis</div><div class="card-title">🔬 UA Dipstick Clue</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">1</div><div class="question-text">UA dipstick shows "Blood 3+" but microscopy shows 0-2 RBCs. What causes this discrepancy?</div></div>
+                        <div class="radio-options" id="dxOpts">
+                            <div class="radio-option" data-id="myoglobin" onclick="selectDx('myoglobin')"><div class="radio-circle"></div><div><strong>Myoglobin in urine (myoglobinuria)</strong><br><small style="color:var(--muted)">Dipstick detects heme, not just hemoglobin</small></div></div>
+                            <div class="radio-option" data-id="hemolysis" onclick="selectDx('hemolysis')"><div class="radio-circle"></div><div><strong>Hemolysis (hemoglobinuria)</strong><br><small style="color:var(--muted)">Free hemoglobin in urine</small></div></div>
+                            <div class="radio-option" data-id="lab_error" onclick="selectDx('lab_error')"><div class="radio-circle"></div><div><strong>Lab error</strong><br><small style="color:var(--muted)">False positive</small></div></div>
+                        </div>
+                    </div>
+                    <div id="dxFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="dxSubmit" onclick="submitDx()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        causes: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Etiology</div><div class="card-title">🔍 Causes of Rhabdomyolysis</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">2</div><div class="question-text">Which are common causes of rhabdomyolysis?</div></div>
+                        <div class="checkbox-grid" id="causeOpts">
+                            <div class="checkbox-item" data-id="exertion" data-correct="true" onclick="toggleCause('exertion')"><div class="checkbox-box"></div><span>Exertional (exercise)</span></div>
+                            <div class="checkbox-item" data-id="trauma" data-correct="true" onclick="toggleCause('trauma')"><div class="checkbox-box"></div><span>Trauma/crush injury</span></div>
+                            <div class="checkbox-item" data-id="drugs" data-correct="true" onclick="toggleCause('drugs')"><div class="checkbox-box"></div><span>Drugs (statins, cocaine)</span></div>
+                            <div class="checkbox-item" data-id="immobility" data-correct="true" onclick="toggleCause('immobility')"><div class="checkbox-box"></div><span>Prolonged immobility</span></div>
+                            <div class="checkbox-item" data-id="infection" data-correct="true" onclick="toggleCause('infection')"><div class="checkbox-box"></div><span>Infections (influenza)</span></div>
+                            <div class="checkbox-item" data-id="uti" data-correct="false" onclick="toggleCause('uti')"><div class="checkbox-box"></div><span>UTI</span></div>
+                        </div>
+                    </div>
+                    <div id="causeFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitCause()">Submit →</button></div>
+                </div>
+            </div>`
+        },
+        complications: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Complications</div><div class="card-title">⚠️ Life-Threatening Consequences</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">3</div><div class="question-text">What is the most serious complication of rhabdomyolysis?</div></div>
+                        <div class="radio-options" id="compOpts">
+                            <div class="radio-option" data-id="aki" onclick="selectComp('aki')"><div class="radio-circle"></div><div><strong>Acute kidney injury from myoglobin toxicity</strong><br><small style="color:var(--muted)">Pigment nephropathy</small></div></div>
+                            <div class="radio-option" data-id="pain" onclick="selectComp('pain')"><div class="radio-circle"></div><div><strong>Severe muscle pain</strong><br><small style="color:var(--muted)">Discomfort</small></div></div>
+                            <div class="radio-option" data-id="hypocalcemia" onclick="selectComp('hypocalcemia')"><div class="radio-circle"></div><div><strong>Hypocalcemia</strong><br><small style="color:var(--muted)">Low calcium</small></div></div>
+                        </div>
+                    </div>
+                    <div id="compFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="compSubmit" onclick="submitComp()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        treatment: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Treatment</div><div class="card-title">💧 Aggressive Hydration</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">4</div><div class="question-text">What is the cornerstone of rhabdomyolysis treatment?</div></div>
+                        <div class="radio-options" id="txOpts">
+                            <div class="radio-option" data-id="ivf" onclick="selectTx('ivf')"><div class="radio-circle"></div><div><strong>Aggressive IV fluids (200-300 mL/hr)</strong><br><small style="color:var(--muted)">Target UOP 200-300 mL/hr</small></div></div>
+                            <div class="radio-option" data-id="bicarb" onclick="selectTx('bicarb')"><div class="radio-circle"></div><div><strong>IV bicarbonate</strong><br><small style="color:var(--muted)">Alkalinize urine</small></div></div>
+                            <div class="radio-option" data-id="mannitol" onclick="selectTx('mannitol')"><div class="radio-circle"></div><div><strong>Mannitol</strong><br><small style="color:var(--muted)">Osmotic diuresis</small></div></div>
+                            <div class="radio-option" data-id="dialysis" onclick="selectTx('dialysis')"><div class="radio-circle"></div><div><strong>Immediate dialysis</strong><br><small style="color:var(--muted)">Remove myoglobin</small></div></div>
+                        </div>
+                    </div>
+                    <div id="txFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="txSubmit" onclick="submitTx()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        electrolytes: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Electrolytes</div><div class="card-title">⚡ Metabolic Derangements</div></div>
+                <div class="card-body">
+                    <div class="alert danger"><span class="alert-icon">⚠️</span><div class="alert-content"><div class="alert-title">Electrolyte Pattern in Rhabdo</div><div class="alert-desc">↑K, ↑Phosphorus, ↓Calcium (early), ↑Uric acid</div></div></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">5</div><div class="question-text">Why does calcium supplementation require caution in rhabdomyolysis?</div></div>
+                        <div class="radio-options" id="caOpts">
+                            <div class="radio-option" data-id="rebound" onclick="selectCa('rebound')"><div class="radio-circle"></div><div><strong>Risk of rebound hypercalcemia during recovery</strong><br><small style="color:var(--muted)">Calcium released from damaged muscle</small></div></div>
+                            <div class="radio-option" data-id="worsen" onclick="selectCa('worsen')"><div class="radio-circle"></div><div><strong>Calcium worsens muscle damage</strong><br><small style="color:var(--muted)">Direct toxicity</small></div></div>
+                            <div class="radio-option" data-id="always_safe" onclick="selectCa('always_safe')"><div class="radio-circle"></div><div><strong>It's always safe to give</strong><br><small style="color:var(--muted)">No concerns</small></div></div>
+                        </div>
+                    </div>
+                    <div id="caFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="caSubmit" onclick="submitCa()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        outcome: { render: () => `
+            <div class="card"><div class="card-body">
+                <div class="outcome">
+                    <div class="outcome-icon">🎉</div>
+                    <div class="outcome-title">Kidney Function Preserved!</div>
+                    <div class="outcome-desc">Patient received aggressive IV fluid resuscitation (NS at 250 mL/hr initially, then adjusted to maintain UOP 200-300 mL/hr). CK peaked at 112,000 on day 2, then gradually declined. Creatinine peaked at 2.8 then improved without dialysis. Potassium managed with medical therapy. Discharged on day 5 with CK 8,400 and Cr 1.4. Counseled on gradual exercise progression and hydration.</div>
+                </div>
+                <div class="score-summary">
+                    <h3 style="margin-bottom:16px">Performance</h3>
+                    <div class="score-row"><span>Diagnostic Clue</span><span>${state.dxScore||0}/100</span></div>
+                    <div class="score-row"><span>Causes</span><span>${state.causeScore||0}/100</span></div>
+                    <div class="score-row"><span>Complications</span><span>${state.compScore||0}/100</span></div>
+                    <div class="score-row"><span>Treatment</span><span>${state.txScore||0}/100</span></div>
+                    <div class="score-row"><span>Electrolyte Knowledge</span><span>${state.caScore||0}/100</span></div>
+                    <div class="score-row" style="border-top:2px solid var(--border);padding-top:12px"><strong>Total</strong><strong>${state.score}</strong></div>
+                </div>
+                <div class="feedback excellent"><div class="feedback-header"><span class="feedback-icon">💡</span><span class="feedback-title">Rhabdomyolysis Pearls</span></div><div class="feedback-text">
+                    • <strong>Classic triad:</strong> Myalgias + weakness + dark urine (tea/cola colored)<br>
+                    • <strong>UA clue:</strong> Dipstick blood+ with few RBCs = myoglobinuria (or hemoglobinuria)<br>
+                    • <strong>CK threshold:</strong> Usually &gt;5× ULN (~1000 U/L) for diagnosis; AKI risk increases with higher CK<br>
+                    • <strong>AKI mechanism:</strong> Myoglobin precipitates in tubules (especially in acidic urine) + direct tubular toxicity<br>
+                    • <strong>Treatment:</strong> AGGRESSIVE IV fluids (NS) - goal UOP 200-300 mL/hr. Bicarb/mannitol controversial<br>
+                    • <strong>Electrolytes:</strong> ↑K (cell lysis), ↑Phos, ↓Ca (early - calcium deposits in damaged muscle), ↑uric acid<br>
+                    • <strong>Calcium caution:</strong> Avoid unless symptomatic - risk of rebound hypercalcemia during recovery<br>
+                    • <strong>Compartment syndrome:</strong> Watch for it, especially with trauma/crush injuries
+                </div></div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Play Again</button></div>
+            </div></div>`
+        }
+    };
+
+    let selectedDx = null;
+    function selectDx(id) { selectedDx = id; document.querySelectorAll('#dxOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('dxSubmit').disabled = false; }
+    function submitDx() {
+        document.querySelectorAll('#dxOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'myoglobin') o.classList.add('correct');
+            else if (o.dataset.id === selectedDx) o.classList.add('incorrect');
+        });
+        state.dxScore = selectedDx === 'myoglobin' ? 100 : 50;
+        addScore(selectedDx === 'myoglobin' ? 40 : 20);
+        document.getElementById('dxFeedback').innerHTML = `<div class="feedback ${selectedDx==='myoglobin'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedDx==='myoglobin'?'✅':'📚'}</span><span class="feedback-title">${selectedDx==='myoglobin'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Myoglobinuria!</strong> UA dipstick detects heme (the peroxidase reaction) - it can't distinguish between hemoglobin, myoglobin, or RBCs. "Blood+" with no RBCs on microscopy = pigmenturia (myoglobin or hemoglobin). Context of muscle injury → myoglobin.</div></div>`;
+        document.getElementById('dxSubmit').textContent = 'Continue →';
+        document.getElementById('dxSubmit').onclick = () => goTo('causes');
+    }
+
+    let selectedCause = new Set();
+    function toggleCause(id) {
+        const el = document.querySelector(`#causeOpts .checkbox-item[data-id="${id}"]`);
+        if(selectedCause.has(id)) { selectedCause.delete(id); el.classList.remove('selected'); }
+        else { selectedCause.add(id); el.classList.add('selected'); }
+    }
+    function submitCause() {
+        let correct = 0;
+        const items = [{id:'exertion',c:true},{id:'trauma',c:true},{id:'drugs',c:true},{id:'immobility',c:true},{id:'infection',c:true},{id:'uti',c:false}];
+        items.forEach(i => {
+            const el = document.querySelector(`#causeOpts .checkbox-item[data-id="${i.id}"]`);
+            const sel = selectedCause.has(i.id);
+            if (i.c && sel) { el.classList.add('correct'); correct++; }
+            else if (!i.c && sel) { el.classList.add('incorrect'); }
+        });
+        state.causeScore = Math.round(correct / 5 * 100);
+        addScore(Math.round(state.causeScore / 2.5));
+        document.getElementById('causeFeedback').innerHTML = `<div class="feedback ${state.causeScore>=75?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${state.causeScore>=75?'✅':'📚'}</span><span class="feedback-title">Rhabdo Causes</span></div><div class="feedback-text"><strong>Major causes:</strong> Exertion/exercise, trauma/crush, drugs (statins, cocaine, alcohol), prolonged immobility (found down), infections (influenza, legionella), seizures, hyperthermia, electrolyte disorders. UTI does not cause rhabdo.</div></div>`;
+        document.querySelector('#causeFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('complications')">Learn Complications →</button>`;
+    }
+
+    let selectedComp = null;
+    function selectComp(id) { selectedComp = id; document.querySelectorAll('#compOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('compSubmit').disabled = false; }
+    function submitComp() {
+        document.querySelectorAll('#compOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'aki') o.classList.add('correct');
+            else if (o.dataset.id === selectedComp) o.classList.add('incorrect');
+        });
+        state.compScore = selectedComp === 'aki' ? 100 : 40;
+        addScore(selectedComp === 'aki' ? 40 : 15);
+        document.getElementById('compFeedback').innerHTML = `<div class="feedback ${selectedComp==='aki'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedComp==='aki'?'✅':'📚'}</span><span class="feedback-title">${selectedComp==='aki'?'Correct!':'Critical Point'}</span></div><div class="feedback-text"><strong>AKI from pigment nephropathy</strong> is the most serious complication. Myoglobin precipitates in renal tubules (worse in acidic, concentrated urine), causes direct tubular toxicity, and renal vasoconstriction. ~15-30% of rhabdo patients develop AKI. Risk increases with higher CK levels.</div></div>`;
+        document.getElementById('compSubmit').textContent = 'Continue →';
+        document.getElementById('compSubmit').onclick = () => goTo('treatment');
+    }
+
+    let selectedTx = null;
+    function selectTx(id) { selectedTx = id; document.querySelectorAll('#txOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('txSubmit').disabled = false; }
+    function submitTx() {
+        document.querySelectorAll('#txOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'ivf') o.classList.add('correct');
+            else if (o.dataset.id === selectedTx) o.classList.add('incorrect');
+        });
+        state.txScore = selectedTx === 'ivf' ? 100 : 40;
+        addScore(selectedTx === 'ivf' ? 40 : 15);
+        document.getElementById('txFeedback').innerHTML = `<div class="feedback ${selectedTx==='ivf'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedTx==='ivf'?'✅':'📚'}</span><span class="feedback-title">${selectedTx==='ivf'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>AGGRESSIVE IV FLUIDS (NS)</strong> is the cornerstone! Goal UOP 200-300 mL/hr. May need 1-2L/hr initially. Bicarb and mannitol are controversial - no proven benefit in trials. Dialysis reserved for refractory complications (hyperK, acidosis, volume overload).</div></div>`;
+        document.getElementById('txSubmit').textContent = 'Continue →';
+        document.getElementById('txSubmit').onclick = () => goTo('electrolytes');
+    }
+
+    let selectedCa = null;
+    function selectCa(id) { selectedCa = id; document.querySelectorAll('#caOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('caSubmit').disabled = false; }
+    function submitCa() {
+        document.querySelectorAll('#caOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'rebound') o.classList.add('correct');
+            else if (o.dataset.id === selectedCa) o.classList.add('incorrect');
+        });
+        state.caScore = selectedCa === 'rebound' ? 100 : 40;
+        addScore(selectedCa === 'rebound' ? 40 : 15);
+        document.getElementById('caFeedback').innerHTML = `<div class="feedback ${selectedCa==='rebound'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedCa==='rebound'?'✅':'📚'}</span><span class="feedback-title">${selectedCa==='rebound'?'Correct!':'Important'}</span></div><div class="feedback-text"><strong>Rebound hypercalcemia risk!</strong> Early hypocalcemia occurs because calcium deposits in damaged muscle. As muscle heals, this calcium is released back into blood → hypercalcemia. Only give calcium if symptomatic (tetany, arrhythmia) or severe. Otherwise, it will self-correct.</div></div>`;
+        document.getElementById('caSubmit').textContent = 'Complete →';
+        document.getElementById('caSubmit').onclick = () => goTo('outcome');
+    }
+
+    function goTo(id) { state.stage = id; document.getElementById('stageContainer').innerHTML = stages[id].render(); window.scrollTo(0,0); }
+    document.addEventListener('DOMContentLoaded', () => goTo('setup'));
+    </script>
 </body>
 </html>

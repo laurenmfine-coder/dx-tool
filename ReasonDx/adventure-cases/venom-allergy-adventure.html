@@ -3,35 +3,354 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Sting | ReasonDx Adventure</title>
-    <style>:root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#FBBF24;--success:#10B981;--warning:#F59E0B;--danger:#DC2626}*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}.header{background:linear-gradient(135deg,#D97706,#FBBF24);padding:12px 20px;position:sticky;top:0;z-index:100}.header-row{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}.diff-toggle{display:flex;background:rgba(0,0,0,.3);border-radius:8px}.diff-btn{padding:6px 12px;font-size:.75rem;cursor:pointer;border:none;background:0 0;color:rgba(255,255,255,.7);font-weight:600}.diff-btn.active{background:rgba(255,255,255,.2);color:#fff}.stat{text-align:center;background:rgba(0,0,0,.2);padding:6px 14px;border-radius:8px}.stat-value{font-size:1.1rem;font-weight:700;font-family:monospace}.stat-label{font-size:.6rem;opacity:.8}.main{max-width:900px;margin:0 auto;padding:24px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px}.card-header{padding:20px 24px;border-bottom:1px solid var(--border)}.card-phase{font-size:.75rem;color:var(--accent);text-transform:uppercase}.card-title{font-size:1.5rem;font-weight:700}.card-body{padding:24px}.narrative{background:rgba(251,191,36,.1);border-left:4px solid var(--accent);padding:20px;border-radius:0 12px 12px 0;margin-bottom:20px}.narrative .hl{background:rgba(251,191,36,.3);padding:2px 6px;border-radius:4px}.setup-screen{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center}.start-btn{background:var(--accent);color:#000;border:none;padding:16px 48px;border-radius:12px;font-size:1.1rem;font-weight:700;cursor:pointer}.hint{background:rgba(59,130,246,.15);padding:12px 16px;border-radius:8px;margin-bottom:16px;color:#93C5FD}.radio-options{display:flex;flex-direction:column;gap:10px}.radio-option{display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(0,0,0,.2);border:2px solid var(--border);border-radius:10px;cursor:pointer}.radio-option.selected{border-color:var(--accent);background:rgba(251,191,36,.15)}.radio-option.correct{border-color:var(--success);background:rgba(16,185,129,.15)}.radio-option.incorrect{border-color:var(--danger);background:rgba(220,38,38,.15)}.radio-circle{width:22px;height:22px;border:2px solid var(--border);border-radius:50%}.radio-option.selected .radio-circle{border-color:var(--accent);background:radial-gradient(circle,var(--accent) 40%,transparent 40%)}.feedback{padding:20px;border-radius:12px;margin:20px 0}.feedback.excellent{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3)}.feedback.incorrect{background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.3)}.btn{padding:14px 28px;border-radius:10px;font-weight:600;cursor:pointer;border:none}.btn-primary{background:var(--accent);color:#000}.btn:disabled{opacity:.5}.btn-row{display:flex;gap:12px;margin-top:24px}.btn-link{background:0 0;border:2px solid var(--border);color:var(--text)}.vitals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:12px;margin:20px 0}.vital{background:rgba(0,0,0,.2);padding:12px;border-radius:10px;text-align:center}.vital-label{font-size:.7rem;color:var(--muted)}.vital-value{font-size:1.3rem;font-weight:700;font-family:monospace}.lab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:16px 0}.lab-item{display:flex;justify-content:space-between;padding:8px 12px;background:rgba(0,0,0,.2);border-radius:6px}.lab-name{color:var(--muted)}.lab-value{font-family:monospace;font-weight:600}.score-summary{background:rgba(0,0,0,.2);border-radius:12px;padding:24px;margin:24px auto;max-width:600px}.score-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}.pearls-box{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:20px;margin-top:20px}.pearls-title{font-weight:700;color:var(--success);margin-bottom:12px}.pearl-item{padding:8px 0;border-bottom:1px solid rgba(16,185,129,.2);font-size:.95rem}.cross-link{background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);border-radius:8px;padding:12px 16px;margin-top:12px}.cross-link a{color:#C4B5FD;text-decoration:none}.progress-bar{background:rgba(255,255,255,.1);border-radius:10px;height:8px;margin:20px 0}.progress-fill{background:var(--accent);height:100%;border-radius:10px}.question-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}.question-number{background:var(--accent);color:#000;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}</style>
+    <title>The Backyard Incident | ReasonDx Adventure</title>
+    <style>
+        :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #EAB308; --success: #10B981; --warning: #F59E0B; --danger: #DC2626; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #CA8A04 0%, #EAB308 100%); color: white; padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; }
+        .header-stats { display: flex; gap: 12px; }
+        .stat { background: rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 8px; text-align: center; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        .difficulty-badge { padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+        .difficulty-badge.easy { background: #10B981; }
+        .difficulty-badge.hard { background: #F59E0B; }
+        .difficulty-badge.hardest { background: #DC2626; }
+        .main { max-width: 1000px; margin: 0 auto; padding: 24px; }
+        .setup-screen { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; }
+        .setup-screen h1 { font-size: 2rem; margin-bottom: 8px; }
+        .setup-screen .subtitle { color: var(--muted); margin-bottom: 32px; }
+        .start-btn { background: var(--accent); color: #1a1a1a; border: none; padding: 16px 48px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; margin-top: 24px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(234,179,8,0.1), rgba(202,138,4,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; line-height: 1.8; }
+        .narrative .hl { background: rgba(234,179,8,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        .question-section { margin-bottom: 32px; }
+        .question-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .question-number { background: var(--accent); color: #1a1a1a; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .question-text { font-size: 1.1rem; font-weight: 600; }
+        .question-hint { color: var(--muted); font-size: 0.9rem; margin-bottom: 16px; }
+        .radio-options { display: flex; flex-direction: column; gap: 10px; }
+        .radio-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .radio-option:hover { border-color: var(--accent); }
+        .radio-option.selected { border-color: var(--accent); background: rgba(234,179,8,0.15); }
+        .radio-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .radio-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .radio-circle { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; }
+        .radio-option.selected .radio-circle { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 40%, transparent 40%); }
+        .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
+        .checkbox-item { display: flex; align-items: flex-start; gap: 10px; padding: 12px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .checkbox-item:hover { border-color: var(--accent); }
+        .checkbox-item.selected { border-color: var(--accent); background: rgba(234,179,8,0.15); }
+        .checkbox-item.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .checkbox-item.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .checkbox-box { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+        .checkbox-item.selected .checkbox-box { background: var(--accent); border-color: var(--accent); }
+        .checkbox-item.selected .checkbox-box::after { content: '✓'; color: #1a1a1a; font-weight: bold; font-size: 0.8rem; }
+        .feedback { padding: 20px; border-radius: 12px; margin: 20px 0; }
+        .feedback.excellent { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .feedback.acceptable { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .feedback-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .feedback-icon { font-size: 1.5rem; }
+        .feedback-title { font-weight: 700; font-size: 1.1rem; }
+        .feedback-text { color: var(--muted); line-height: 1.7; }
+        .feedback-text strong { color: var(--text); }
+        .alert { padding: 16px 20px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
+        .alert.warning { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .alert.success { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .alert-icon { font-size: 1.5rem; flex-shrink: 0; }
+        .alert-content { flex: 1; }
+        .alert-title { font-weight: 600; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; color: var(--muted); }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: #1a1a1a; }
+        .btn-secondary { background: transparent; border: 2px solid var(--border); color: var(--text); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-row { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+        .info-box { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .info-box-title { font-weight: 600; margin-bottom: 12px; color: var(--accent); }
+        .outcome { text-align: center; padding: 40px 20px; }
+        .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
+        .outcome-title { font-size: 2rem; font-weight: 700; margin-bottom: 8px; color: var(--success); }
+        .outcome-desc { color: var(--muted); max-width: 600px; margin: 0 auto 24px; line-height: 1.7; }
+        .score-summary { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 24px; margin: 24px auto; max-width: 500px; }
+        .score-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .score-row:last-child { border-bottom: none; }
+        .patient-panel { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 16px; margin-bottom: 20px; }
+        .patient-panel-title { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+        .patient-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; }
+        .patient-info-label { font-size: 0.7rem; color: var(--muted); }
+        .patient-info-value { font-weight: 600; }
+        .setup-group { max-width: 500px; margin: 0 auto; text-align: left; }
+        .setup-group label { display: block; font-weight: 600; margin-bottom: 8px; }
+        .setup-group select { width: 100%; padding: 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; color: var(--text); }
+    </style>
 </head>
 <body>
-    <header class="header"><div class="header-row"><div style="font-weight:600">🐝 The Sting</div><div style="display:flex;gap:12px;align-items:center"><div class="diff-toggle"><button class="diff-btn active" onclick="setDiff('easy')">Easy</button><button class="diff-btn" onclick="setDiff('int')">Intermediate</button><button class="diff-btn" onclick="setDiff('adv')">Advanced</button></div><div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Points</div></div></div></div></header>
-    <main class="main"><div id="app"></div></main>
-<script>
-const S={stage:'setup',score:0,max:0,diff:'easy',q:0,total:8};
-const C={easy:{age:'42M',wt:'85kg',hx:'Bee sting 20min ago, hives spreading, throat tight',exam:'Diffuse urticaria, mild stridor, no hypotension',vitals:{HR:'108',BP:'128/82',SpO2:'96%'},labs:{Hx:'First systemic reaction'}},int:{age:'55F',wt:'68kg',hx:'Yellow jacket sting, prior anaphylaxis 2yrs ago, no epi used',exam:'Urticaria, wheezing, dizzy',vitals:{HR:'118',BP:'88/58',SpO2:'92%'},labs:{Tryptase:'Pending',Hx:'Prior anaphylaxis'}},adv:{age:'35M',wt:'78kg',hx:'Beekeeper, multiple stings, on beta-blocker for HTN',exam:'Severe angioedema, stridor, refractory hypotension',vitals:{HR:'62',BP:'72/48',SpO2:'88%'},labs:{Hx:'Beta-blocker use'}}};
-const Q=[
-{t:'Reaction Classification',q:'Systemic urticaria + respiratory symptoms after sting. Grade?',h:'Mueller grading system',o:[{id:'a',txt:'Grade III (systemic + respiratory)',c:1,p:100},{id:'b',txt:'Large local reaction',c:0,p:0},{id:'c',txt:'Grade I (urticaria only)',c:0,p:30}],fb:{1:'<b>Correct!</b> Mueller: I=urticaria/pruritus, II=+angioedema/GI, III=+respiratory, IV=+cardiovascular. Grade III-IV need VIT.',0:'<b>Mueller grades:</b> I-II cutaneous, III respiratory, IV cardiovascular.'}},
-{t:'Acute Management',q:'First-line treatment for venom anaphylaxis?',h:'Same as all anaphylaxis',o:[{id:'a',txt:'Epinephrine IM 0.3-0.5mg (anterolateral thigh)',c:1,p:100},{id:'b',txt:'Antihistamines first',c:0,p:20},{id:'c',txt:'IV steroids',c:0,p:20}],fb:{1:'<b>Correct!</b> Epinephrine IM first, always. Antihistamines and steroids are adjuncts only.',0:'<b>Epinephrine first!</b> Delays increase mortality risk.'}},
-{t:'Beta-Blocker Challenge',q:'Anaphylaxis in patient on beta-blocker, refractory to epi. Next?',h:'Glucagon bypasses beta-blockade',o:[{id:'a',txt:'Glucagon 1-5mg IV (bypasses beta-receptor)',c:1,p:100},{id:'b',txt:'More epinephrine only',c:0,p:30},{id:'c',txt:'Stop treatment',c:0,p:0}],fb:{1:'<b>Correct!</b> Glucagon activates cAMP via non-adrenergic pathway. Also consider IV epinephrine infusion.',0:'<b>Glucagon:</b> 1-5mg IV for beta-blocker refractory anaphylaxis.'}},
-{t:'Testing Indication',q:'Who needs venom allergy testing?',h:'Risk stratification',o:[{id:'a',txt:'Any systemic reaction (not just large local)',c:1,p:100},{id:'b',txt:'All bee stings',c:0,p:10},{id:'c',txt:'Only Grade IV reactions',c:0,p:30}],fb:{1:'<b>Correct!</b> Test anyone with systemic symptoms. Large local reactions have <5% risk of future anaphylaxis.',0:'<b>Testing:</b> Systemic reactions warrant testing. Large local = low risk.'}},
-{t:'Testing Timing',q:'When to perform venom skin testing after reaction?',h:'Allow sensitization to stabilize',o:[{id:'a',txt:'Wait 4-6 weeks (avoid false negatives)',c:1,p:100},{id:'b',txt:'Immediately',c:0,p:20},{id:'c',txt:'Wait 1 year',c:0,p:30}],fb:{1:'<b>Correct!</b> Wait 4-6 weeks. Testing too early may yield false negatives due to anergy. sIgE can be drawn earlier.',0:'<b>Timing:</b> 4-6 weeks for skin testing. sIgE can be earlier.'}},
-{t:'VIT Indication',q:'Grade III reaction, positive venom testing. Management?',h:'Venom immunotherapy',o:[{id:'a',txt:'Venom immunotherapy (VIT) - 98% effective',c:1,p:100},{id:'b',txt:'Avoidance only',c:0,p:30},{id:'c',txt:'Epi auto-injector only',c:0,p:40}],fb:{1:'<b>Correct!</b> VIT reduces re-sting reaction from 60% to 2%. Only disease-modifying treatment. Duration typically 5 years.',0:'<b>VIT:</b> 98% effective. Standard 5-year course.'}},
-{t:'VIT Duration',q:'Standard duration of venom immunotherapy?',h:'Landmark studies',o:[{id:'a',txt:'5 years (can consider lifelong if severe initial reaction or mast cell disorder)',c:1,p:100},{id:'b',txt:'1 year',c:0,p:20},{id:'c',txt:'Lifelong for everyone',c:0,p:30}],fb:{1:'<b>Correct!</b> Standard 5 years. Consider indefinite if: initial severe reaction, systemic reaction during VIT, mast cell disorder, high exposure.',0:'<b>Duration:</b> 5 years standard. Longer for high-risk patients.'}},
-{t:'Mastocytosis Connection',q:'Recurrent severe sting anaphylaxis with elevated baseline tryptase. Consider?',h:'Mast cell disorder screening',o:[{id:'a',txt:'Mastocytosis/mast cell activation syndrome',c:1,p:100},{id:'b',txt:'IgE deficiency',c:0,p:0},{id:'c',txt:'Complement deficiency',c:0,p:10}],fb:{1:'<b>Correct!</b> Elevated baseline tryptase (>11.4) suggests mastocytosis. Higher VIT failure risk. Consider lifelong VIT and bone marrow evaluation.',0:'<b>Mastocytosis:</b> Screen with baseline tryptase if severe reactions.'}}
-];
-let sel=null;
-function setDiff(d){S.diff=d;document.querySelectorAll('.diff-btn').forEach((b,i)=>b.classList.toggle('active',['easy','int','adv'][i]===d));if(S.stage!=='setup'){S.stage='setup';S.score=0;S.max=0;S.q=0;document.getElementById('score').textContent='0';}render();}
-function addPts(p,m){S.score+=p;S.max+=m;document.getElementById('score').textContent=S.score;}
-function pick(id){sel=id;document.querySelectorAll('.radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id));document.getElementById('sub').disabled=false;}
-function submit(){const q=Q[S.q-1];const opt=q.o.find(o=>o.id===sel);addPts(opt.p||0,100);document.querySelectorAll('.radio-option').forEach(o=>{const op=q.o.find(x=>x.id===o.dataset.id);if(op&&op.c)o.classList.add('correct');else if(o.dataset.id===sel)o.classList.add('incorrect');});document.getElementById('fb').innerHTML='<div class="feedback '+(opt&&opt.c?'excellent':'incorrect')+'">'+q.fb[opt&&opt.c?1:0]+'</div>';document.getElementById('sub').textContent=S.q<S.total?'Next':'Results';document.getElementById('sub').onclick=next;}
-function next(){if(S.q<S.total){S.q++;sel=null;render();}else{S.stage='outcome';render();}}
-function start(){S.q=1;S.stage='question';render();}
-function go(s){S.stage=s;render();}
-function render(){const c=C[S.diff];if(S.stage==='setup'){document.getElementById('app').innerHTML='<div class="setup-screen"><h1>🐝 The Sting</h1><p style="color:var(--muted);margin-bottom:32px">Venom Allergy: Grading, acute management, testing, VIT, mastocytosis</p><button class="start-btn" onclick="go(\'pres\')">Begin Case</button></div>';}else if(S.stage==='pres'){document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Presentation</div><div class="card-title">🦟 Envenomation Emergency</div></div><div class="card-body"><div class="narrative"><span class="hl">'+c.age+'</span> ('+c.wt+')<br><b>Hx:</b> '+c.hx+'<br><b>Exam:</b> '+c.exam+'</div><div class="vitals-grid">'+Object.entries(c.vitals).map(function(e){return'<div class="vital"><div class="vital-label">'+e[0]+'</div><div class="vital-value">'+e[1]+'</div></div>';}).join('')+'</div><div class="lab-grid">'+Object.entries(c.labs).map(function(e){return'<div class="lab-item"><span class="lab-name">'+e[0]+'</span><span class="lab-value">'+e[1]+'</span></div>';}).join('')+'</div><div class="btn-row"><button class="btn btn-primary" onclick="start()">Begin Assessment</button></div></div></div>';}else if(S.stage==='question'){var q=Q[S.q-1];document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Q'+S.q+'/'+S.total+'</div><div class="card-title">'+q.t+'</div></div><div class="card-body"><div class="progress-bar"><div class="progress-fill" style="width:'+(S.q/S.total*100)+'%"></div></div><div class="question-header"><div class="question-number">'+S.q+'</div><div style="font-weight:600">'+q.q+'</div></div><div class="hint">'+q.h+'</div><div class="radio-options">'+q.o.map(function(o){return'<div class="radio-option" data-id="'+o.id+'" onclick="pick(\''+o.id+'\')"><div class="radio-circle"></div><div><b>'+o.txt+'</b></div></div>';}).join('')+'</div><div id="fb"></div><div class="btn-row"><button class="btn btn-primary" id="sub" onclick="submit()" disabled>Submit</button></div></div></div>';}else{var pct=S.max>0?Math.round(S.score/S.max*100):0;document.getElementById('app').innerHTML='<div class="card"><div class="card-body"><div style="text-align:center;padding:40px"><div style="font-size:4rem">'+(pct>=70?'🎉':'📚')+'</div><div style="font-size:2rem;font-weight:700;color:'+(pct>=70?'var(--success)':'var(--warning)')+'">'+(pct>=70?'Complete!':'Review')+'</div></div><div class="score-summary"><div class="score-row"><span>Score</span><span>'+S.score+'/'+S.max+' ('+pct+'%)</span></div></div><div class="pearls-box"><div class="pearls-title">Venom Allergy Pearls</div><div class="pearl-item"><b>Mueller:</b> I-II cutaneous, III respiratory, IV cardiovascular</div><div class="pearl-item"><b>Testing:</b> Wait 4-6 weeks, systemic reactions only</div><div class="pearl-item"><b>VIT:</b> 98% effective, standard 5 years</div><div class="pearl-item"><b>Beta-blocker:</b> Glucagon 1-5mg IV if refractory</div><div class="pearl-item"><b>Mastocytosis:</b> Check baseline tryptase if severe</div></div><div class="cross-link"><a href="../mechanism/allergy-immunology.html">MechanismDx: Allergy</a></div><div class="btn-row" style="justify-content:center;margin-top:30px"><button class="btn btn-primary" onclick="location.reload()">Retry</button><button class="btn btn-link" onclick="location.href=\'adventure-hub.html\'">Back</button></div></div></div>';}}
-document.addEventListener('DOMContentLoaded',render);
-</script>
+    <header class="header">
+        <div class="header-row">
+            <div class="header-title">🐝 The Backyard Incident</div>
+            <div class="header-stats">
+                <span class="difficulty-badge easy" id="difficultyBadge">Easy</span>
+                <div class="stat"><div class="stat-value" id="scoreDisplay">0</div><div class="stat-label">Points</div></div>
+            </div>
+        </div>
+    </header>
+    <main class="main"><div id="stageContainer"></div></main>
+
+    <script>
+    const state = { stage:'setup', difficulty:'easy', score:0 };
+
+    const reactionPool = [
+        { id: 'systemic_anaph', text: 'Systemic reaction - Anaphylaxis', correct: true },
+        { id: 'systemic_mild', text: 'Systemic reaction - Mild (urticaria only)', correct: false },
+        { id: 'large_local', text: 'Large local reaction', correct: false },
+        { id: 'normal', text: 'Normal local reaction', correct: false }
+    ];
+
+    const riskPool = [
+        { id: 'prior_systemic', text: 'Prior systemic reaction to sting', correct: true },
+        { id: 'ace_inhibitor', text: 'ACE inhibitor use', correct: true },
+        { id: 'short_interval', text: 'Short time from sting to symptoms', correct: true },
+        { id: 'atopy', text: 'History of atopic disease', correct: false },
+        { id: 'prior_local', text: 'Prior large local reaction', correct: false }
+    ];
+
+    const testPool = [
+        { id: 'skin_test', text: 'Skin prick and intradermal testing', correct: true },
+        { id: 'specific_ige', text: 'Serum specific IgE to venoms', correct: true },
+        { id: 'tryptase', text: 'Baseline serum tryptase', correct: true },
+        { id: 'total_ige', text: 'Total IgE level', correct: false }
+    ];
+
+    const mgmtPool = [
+        { id: 'vit', text: 'Venom immunotherapy (VIT)', correct: true },
+        { id: 'epi_rx', text: 'Epinephrine auto-injector prescription', correct: true },
+        { id: 'action_plan', text: 'Anaphylaxis action plan education', correct: true },
+        { id: 'avoidance', text: 'Avoidance counseling', correct: true },
+        { id: 'pretreat_antihistamine', text: 'Daily antihistamine prophylaxis', correct: false }
+    ];
+
+    function addScore(pts) { state.score += pts; document.getElementById('scoreDisplay').textContent = state.score; }
+
+    const stages = {
+        setup: { render: () => `
+            <div class="setup-screen">
+                <h1>🐝 The Backyard Incident</h1>
+                <p class="subtitle">A clinical reasoning adventure in venom allergy evaluation</p>
+                <div class="setup-group">
+                    <label>Select Difficulty</label>
+                    <select id="difficultySelect">
+                        <option value="easy">Easy</option>
+                        <option value="hard">Challenging</option>
+                        <option value="hardest">Expert</option>
+                    </select>
+                </div>
+                <button class="start-btn" onclick="startCase()">Begin Case →</button>
+            </div>`
+        },
+        referral: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Allergy Clinic</div><div class="card-title">📋 New Patient Referral</div></div>
+                <div class="card-body">
+                    <div class="narrative">A <span class="hl">45-year-old male landscaper</span> is referred after an incident <span class="hl">2 weeks ago</span>. He was trimming hedges when he felt a <span class="hl">yellow jacket sting</span>.<br><br>Within <span class="hl">10 minutes</span>, he developed <span class="hl">diffuse hives</span>, <span class="hl">throat tightness</span>, <span class="hl">difficulty breathing</span>, and felt <span class="hl">lightheaded</span>. EMS documented <span class="hl">BP 82/50</span> and <span class="hl">wheezing</span>. He received <span class="hl">epinephrine IM</span>.<br><br>He had been stung <span class="hl">twice before</span> - 5 years ago (local swelling) and 2 years ago (mild hives).</div>
+                    <div class="patient-panel">
+                        <div class="patient-panel-title">Patient Information</div>
+                        <div class="patient-info-grid">
+                            <div><div class="patient-info-label">Age/Sex</div><div class="patient-info-value">45 y/o Male</div></div>
+                            <div><div class="patient-info-label">Occupation</div><div class="patient-info-value">Landscaper</div></div>
+                            <div><div class="patient-info-label">Medications</div><div class="patient-info-value">Lisinopril</div></div>
+                            <div><div class="patient-info-label">Prior Stings</div><div class="patient-info-value">2 previous</div></div>
+                        </div>
+                    </div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('classify')">Classify Reaction →</button></div>
+                </div>
+            </div>`
+        },
+        classify: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Assessment</div><div class="card-title">📊 Classify the Reaction</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">1</div><div class="question-text">How would you classify this reaction?</div></div>
+                        <div class="radio-options" id="classifyOpts">${reactionPool.map(o=>`<div class="radio-option" data-id="${o.id}" onclick="selectClassify('${o.id}')"><div class="radio-circle"></div><span>${o.text}</span></div>`).join('')}</div>
+                    </div>
+                    <div id="classifyFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="classifySubmit" onclick="submitClassify()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        risk_factors: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Risk Assessment</div><div class="card-title">⚠️ Risk Factors</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">2</div><div class="question-text">Which factors increase risk for severe future reactions?</div></div>
+                        <div class="checkbox-grid" id="riskOpts">${riskPool.map(o=>`<div class="checkbox-item" data-id="${o.id}" onclick="toggleRisk('${o.id}')"><div class="checkbox-box"></div><span>${o.text}</span></div>`).join('')}</div>
+                    </div>
+                    <div id="riskFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitRisk()">Submit →</button></div>
+                </div>
+            </div>`
+        },
+        testing: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Diagnostic Workup</div><div class="card-title">🔬 Testing Strategy</div></div>
+                <div class="card-body">
+                    <div class="info-box"><div class="info-box-title">Testing Timing</div><p style="color:var(--muted)">Test <strong>4-6 weeks post-reaction</strong> to avoid false negatives.</p></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">3</div><div class="question-text">What testing do you recommend?</div></div>
+                        <div class="checkbox-grid" id="testOpts">${testPool.map(o=>`<div class="checkbox-item" data-id="${o.id}" onclick="toggleTest('${o.id}')"><div class="checkbox-box"></div><span>${o.text}</span></div>`).join('')}</div>
+                    </div>
+                    <div id="testFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitTest()">Submit →</button></div>
+                </div>
+            </div>`
+        },
+        results: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Test Results</div><div class="card-title">📋 Results</div></div>
+                <div class="card-body">
+                    <div class="info-box">
+                        <div class="info-box-title">Skin Testing</div>
+                        <p style="color:var(--muted)">• Yellow jacket: <span style="color:var(--danger)">Positive</span><br>• Honey bee: Negative<br>• White-faced hornet: Positive</p>
+                    </div>
+                    <div class="info-box">
+                        <div class="info-box-title">Labs</div>
+                        <p style="color:var(--muted)">• Baseline tryptase: 4.2 ng/mL (normal)<br>• Yellow jacket IgE: 18.5 kU/L (positive)</p>
+                    </div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('management')">Plan Management →</button></div>
+                </div>
+            </div>`
+        },
+        management: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Management</div><div class="card-title">💊 Treatment Plan</div></div>
+                <div class="card-body">
+                    <div class="alert warning"><span class="alert-icon">📊</span><div class="alert-content"><div class="alert-title">Confirmed Yellow Jacket Allergy</div><div class="alert-desc">Anaphylaxis history + positive testing. High occupational risk.</div></div></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">4</div><div class="question-text">Select appropriate management:</div></div>
+                        <div class="checkbox-grid" id="mgmtOpts">${mgmtPool.map(o=>`<div class="checkbox-item" data-id="${o.id}" onclick="toggleMgmt('${o.id}')"><div class="checkbox-box"></div><span>${o.text}</span></div>`).join('')}</div>
+                    </div>
+                    <div id="mgmtFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitMgmt()">Submit →</button></div>
+                </div>
+            </div>`
+        },
+        outcome: { render: () => `
+            <div class="card"><div class="card-body">
+                <div class="outcome">
+                    <div class="outcome-icon">🎉</div>
+                    <div class="outcome-title">Excellent Management!</div>
+                    <div class="outcome-desc">You correctly diagnosed venom anaphylaxis and initiated VIT. After 3-5 years of immunotherapy, his risk drops from 60% to less than 5%.</div>
+                </div>
+                <div class="score-summary">
+                    <h3 style="margin-bottom:16px">📊 Performance</h3>
+                    <div class="score-row"><span>Classification</span><span>${state.classifyScore||0}/100</span></div>
+                    <div class="score-row"><span>Risk Factors</span><span>${state.riskScore||0}/100</span></div>
+                    <div class="score-row"><span>Testing</span><span>${state.testScore||0}/100</span></div>
+                    <div class="score-row"><span>Management</span><span>${state.mgmtScore||0}/100</span></div>
+                    <div class="score-row" style="border-top:2px solid var(--border);margin-top:12px;padding-top:12px"><span><strong>Total</strong></span><span style="color:var(--success)"><strong>${state.score}</strong></span></div>
+                </div>
+                <div class="feedback excellent"><div class="feedback-header"><span class="feedback-icon">💡</span><span class="feedback-title">Venom Allergy Pearls</span></div><div class="feedback-text">• <strong>Test 4-6 weeks post-reaction</strong><br>• <strong>VIT is 95-98% effective</strong><br>• <strong>Always prescribe epinephrine</strong><br>• <strong>Consider switching ACE-I/β-blockers</strong><br>• <strong>Atopy is NOT a risk factor</strong></div></div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Play Again</button><button class="btn btn-secondary" onclick="location.href='adventure-hub.html'">← Adventures</button></div>
+            </div></div>`
+        }
+    };
+
+    function startCase() {
+        state.difficulty = document.getElementById('difficultySelect').value;
+        document.getElementById('difficultyBadge').textContent = state.difficulty.charAt(0).toUpperCase() + state.difficulty.slice(1);
+        goTo('referral');
+    }
+
+    let selectedClassify = null;
+    function selectClassify(id) { selectedClassify = id; document.querySelectorAll('#classifyOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('classifySubmit').disabled = false; }
+    function submitClassify() {
+        const opt = reactionPool.find(o => o.id === selectedClassify);
+        state.classifyScore = opt.correct ? 100 : 30;
+        addScore(opt.correct ? 40 : 10);
+        document.querySelectorAll('#classifyOpts .radio-option').forEach(o => {
+            if (reactionPool.find(x=>x.id===o.dataset.id).correct) o.classList.add('correct');
+            else if (o.dataset.id === selectedClassify) o.classList.add('incorrect');
+        });
+        document.getElementById('classifyFeedback').innerHTML = `<div class="feedback ${opt.correct?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${opt.correct?'✅':'📚'}</span><span class="feedback-title">${opt.correct?'Correct!':'Review'}</span></div><div class="feedback-text">This is anaphylaxis: multisystem involvement (skin + respiratory + cardiovascular) with hypotension requiring epinephrine.</div></div>`;
+        document.getElementById('classifySubmit').textContent = 'Continue →';
+        document.getElementById('classifySubmit').onclick = () => goTo('risk_factors');
+    }
+
+    let selectedRisk = new Set();
+    function toggleRisk(id) {
+        const el = document.querySelector(`#riskOpts .checkbox-item[data-id="${id}"]`);
+        if(selectedRisk.has(id)) { selectedRisk.delete(id); el.classList.remove('selected'); }
+        else { selectedRisk.add(id); el.classList.add('selected'); }
+    }
+    function submitRisk() {
+        let correct = 0, incorrect = 0;
+        riskPool.forEach(item => {
+            const el = document.querySelector(`#riskOpts .checkbox-item[data-id="${item.id}"]`);
+            const wasSel = selectedRisk.has(item.id);
+            if (item.correct && wasSel) { el.classList.add('correct'); correct++; }
+            else if (!item.correct && wasSel) { el.classList.add('incorrect'); incorrect++; }
+        });
+        const score = Math.max(0, (correct * 30) - (incorrect * 20));
+        state.riskScore = Math.min(100, score);
+        addScore(Math.round(score / 2.5));
+        document.getElementById('riskFeedback').innerHTML = `<div class="feedback ${score>=60?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${score>=60?'✅':'📚'}</span><span class="feedback-title">Risk Factors</span></div><div class="feedback-text"><strong>True risk factors:</strong> Prior systemic reaction, ACE-I use, rapid onset.<br><strong>NOT a risk factor:</strong> Atopy (common misconception).</div></div>`;
+        document.querySelector('#riskFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('testing')">Testing →</button>`;
+    }
+
+    let selectedTest = new Set();
+    function toggleTest(id) {
+        const el = document.querySelector(`#testOpts .checkbox-item[data-id="${id}"]`);
+        if(selectedTest.has(id)) { selectedTest.delete(id); el.classList.remove('selected'); }
+        else { selectedTest.add(id); el.classList.add('selected'); }
+    }
+    function submitTest() {
+        let correct = 0, incorrect = 0;
+        testPool.forEach(item => {
+            const el = document.querySelector(`#testOpts .checkbox-item[data-id="${item.id}"]`);
+            const wasSel = selectedTest.has(item.id);
+            if (item.correct && wasSel) { el.classList.add('correct'); correct++; }
+            else if (!item.correct && wasSel) { el.classList.add('incorrect'); incorrect++; }
+        });
+        const score = Math.max(0, (correct * 30) - (incorrect * 20));
+        state.testScore = Math.min(100, score);
+        addScore(Math.round(score / 2.5));
+        document.getElementById('testFeedback').innerHTML = `<div class="feedback ${score>=60?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${score>=60?'✅':'📚'}</span><span class="feedback-title">Testing</span></div><div class="feedback-text"><strong>Recommended:</strong> Skin testing, specific IgE, baseline tryptase.<br><strong>Not useful:</strong> Total IgE.</div></div>`;
+        document.querySelector('#testFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('results')">Results →</button>`;
+    }
+
+    let selectedMgmt = new Set();
+    function toggleMgmt(id) {
+        const el = document.querySelector(`#mgmtOpts .checkbox-item[data-id="${id}"]`);
+        if(selectedMgmt.has(id)) { selectedMgmt.delete(id); el.classList.remove('selected'); }
+        else { selectedMgmt.add(id); el.classList.add('selected'); }
+    }
+    function submitMgmt() {
+        let correct = 0, incorrect = 0;
+        mgmtPool.forEach(item => {
+            const el = document.querySelector(`#mgmtOpts .checkbox-item[data-id="${item.id}"]`);
+            const wasSel = selectedMgmt.has(item.id);
+            if (item.correct && wasSel) { el.classList.add('correct'); correct++; }
+            else if (!item.correct && wasSel) { el.classList.add('incorrect'); incorrect++; }
+        });
+        const score = Math.max(0, (correct * 25) - (incorrect * 20));
+        state.mgmtScore = Math.min(100, score);
+        addScore(Math.round(score / 2.5));
+        document.getElementById('mgmtFeedback').innerHTML = `<div class="feedback ${score>=60?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${score>=60?'✅':'📚'}</span><span class="feedback-title">Management</span></div><div class="feedback-text"><strong>Essential:</strong> VIT, epinephrine Rx, action plan, avoidance.<br><strong>Not helpful:</strong> Daily antihistamines don't prevent anaphylaxis.</div></div>`;
+        document.querySelector('#mgmtFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('outcome')">Complete →</button>`;
+    }
+
+    function goTo(id) { state.stage = id; render(); window.scrollTo(0,0); }
+    function render() { const s = stages[state.stage]; if(s) document.getElementById('stageContainer').innerHTML = s.render(); }
+    document.addEventListener('DOMContentLoaded', render);
+    </script>
 </body>
 </html>

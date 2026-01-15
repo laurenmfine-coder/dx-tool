@@ -3,63 +3,363 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Brain Attack | ReasonDx Adventure</title>
+    <title>The Sudden Silence | ReasonDx Adventure</title>
     <style>
-        :root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#7C3AED;--success:#10B981;--warning:#F59E0B;--danger:#DC2626}
-        *{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
-        .header{background:linear-gradient(135deg,#5B21B6,#7C3AED);padding:12px 20px;position:sticky;top:0;z-index:100}
-        .header-row{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}
-        .diff-toggle{display:flex;background:rgba(0,0,0,.3);border-radius:8px}.diff-btn{padding:6px 12px;font-size:.75rem;cursor:pointer;border:none;background:0 0;color:rgba(255,255,255,.7);font-weight:600}.diff-btn.active{background:rgba(255,255,255,.2);color:#fff}
-        .stat{text-align:center;background:rgba(0,0,0,.2);padding:6px 14px;border-radius:8px}.stat-value{font-size:1.1rem;font-weight:700;font-family:monospace}.stat-label{font-size:.6rem;opacity:.8}
-        .main{max-width:900px;margin:0 auto;padding:24px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px}
-        .card-header{padding:20px 24px;border-bottom:1px solid var(--border)}.card-phase{font-size:.75rem;color:var(--accent);text-transform:uppercase}.card-title{font-size:1.5rem;font-weight:700}.card-body{padding:24px}
-        .narrative{background:rgba(124,58,237,.1);border-left:4px solid var(--accent);padding:20px;border-radius:0 12px 12px 0;margin-bottom:20px}.narrative .hl{background:rgba(124,58,237,.3);padding:2px 6px;border-radius:4px}
-        .setup-screen{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center}
-        .start-btn{background:var(--accent);color:#fff;border:none;padding:16px 48px;border-radius:12px;font-size:1.1rem;font-weight:700;cursor:pointer}
-        .hint{background:rgba(59,130,246,.15);padding:12px 16px;border-radius:8px;margin-bottom:16px;color:#93C5FD}
-        .radio-options{display:flex;flex-direction:column;gap:10px}.radio-option{display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(0,0,0,.2);border:2px solid var(--border);border-radius:10px;cursor:pointer}
-        .radio-option.selected{border-color:var(--accent);background:rgba(124,58,237,.15)}.radio-option.correct{border-color:var(--success);background:rgba(16,185,129,.15)}.radio-option.incorrect{border-color:var(--danger);background:rgba(220,38,38,.15)}
-        .radio-circle{width:22px;height:22px;border:2px solid var(--border);border-radius:50%}.radio-option.selected .radio-circle{border-color:var(--accent);background:radial-gradient(circle,var(--accent) 40%,transparent 40%)}
-        .feedback{padding:20px;border-radius:12px;margin:20px 0}.feedback.excellent{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3)}.feedback.incorrect{background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.3)}
-        .btn{padding:14px 28px;border-radius:10px;font-weight:600;cursor:pointer;border:none}.btn-primary{background:var(--accent);color:#fff}.btn:disabled{opacity:.5}.btn-row{display:flex;gap:12px;margin-top:24px}.btn-link{background:0 0;border:2px solid var(--border);color:var(--text)}
-        .vitals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:12px;margin:20px 0}.vital{background:rgba(0,0,0,.2);padding:12px;border-radius:10px;text-align:center}.vital.critical{background:rgba(220,38,38,.2);border:1px solid rgba(220,38,38,.4)}
-        .vital-label{font-size:.7rem;color:var(--muted)}.vital-value{font-size:1.3rem;font-weight:700;font-family:monospace}
-        .lab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:16px 0}.lab-item{display:flex;justify-content:space-between;padding:8px 12px;background:rgba(0,0,0,.2);border-radius:6px}.lab-name{color:var(--muted)}.lab-value{font-family:monospace;font-weight:600}
-        .score-summary{background:rgba(0,0,0,.2);border-radius:12px;padding:24px;margin:24px auto;max-width:600px}.score-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}
-        .pearls-box{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:20px;margin-top:20px}.pearls-title{font-weight:700;color:var(--success);margin-bottom:12px}.pearl-item{padding:8px 0;border-bottom:1px solid rgba(16,185,129,.2);font-size:.95rem}
-        .cross-link{background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);border-radius:8px;padding:12px 16px;margin-top:12px}.cross-link a{color:#C4B5FD;text-decoration:none}
-        .progress-bar{background:rgba(255,255,255,.1);border-radius:10px;height:8px;margin:20px 0}.progress-fill{background:var(--accent);height:100%}
-        .question-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}.question-number{background:var(--accent);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}
+        :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #3B82F6; --success: #10B981; --warning: #F59E0B; --danger: #DC2626; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%); color: white; padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; }
+        .header-stats { display: flex; gap: 12px; }
+        .stat { background: rgba(255,255,255,0.1); padding: 6px 14px; border-radius: 8px; text-align: center; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        .time-critical { background: rgba(220,38,38,0.3) !important; animation: pulse 1s infinite; }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.7; } }
+        .difficulty-badge { padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; }
+        .difficulty-badge.easy { background: #10B981; }
+        .difficulty-badge.hard { background: #F59E0B; }
+        .difficulty-badge.hardest { background: #7C3AED; }
+        .main { max-width: 1000px; margin: 0 auto; padding: 24px; }
+        .setup-screen { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; }
+        .setup-screen h1 { font-size: 2rem; margin-bottom: 8px; }
+        .setup-screen .subtitle { color: var(--muted); margin-bottom: 32px; }
+        .setup-options { display: grid; gap: 24px; max-width: 500px; margin: 0 auto; text-align: left; }
+        .setup-group label { display: block; font-weight: 600; margin-bottom: 8px; }
+        .setup-group select { width: 100%; padding: 12px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; color: var(--text); }
+        .start-btn { background: var(--accent); color: white; border: none; padding: 16px 48px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; margin-top: 24px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(30,64,175,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; line-height: 1.8; }
+        .narrative .hl { background: rgba(59,130,246,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        .time-banner { background: linear-gradient(90deg, #DC2626, #B91C1C); color: white; padding: 16px 24px; border-radius: 12px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .time-banner-title { font-weight: 700; font-size: 1.1rem; }
+        .time-banner-clock { font-size: 1.5rem; font-weight: 700; font-family: monospace; }
+        .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 10px; margin: 20px 0; }
+        .vital { background: rgba(0,0,0,0.2); padding: 12px; border-radius: 10px; text-align: center; }
+        .vital.critical { background: rgba(220,38,38,0.2); border: 1px solid rgba(220,38,38,0.4); }
+        .vital-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; }
+        .vital-value { font-size: 1.2rem; font-weight: 700; font-family: monospace; }
+        .nihss-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; margin: 20px 0; }
+        .nihss-item { background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+        .nihss-category { font-weight: 600; margin-bottom: 8px; color: var(--accent); font-size: 0.9rem; }
+        .nihss-options { display: flex; flex-direction: column; gap: 6px; }
+        .nihss-option { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: rgba(255,255,255,0.05); border: 1px solid transparent; border-radius: 6px; cursor: pointer; font-size: 0.85rem; }
+        .nihss-option:hover { background: rgba(255,255,255,0.1); border-color: var(--border); }
+        .nihss-option.selected { background: rgba(59,130,246,0.2); border-color: var(--accent); }
+        .nihss-radio { width: 14px; height: 14px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; }
+        .nihss-option.selected .nihss-radio { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 40%, transparent 40%); }
+        .question-section { margin-bottom: 32px; }
+        .question-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .question-number { background: var(--accent); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .question-text { font-size: 1.1rem; font-weight: 600; }
+        .question-hint { color: var(--muted); font-size: 0.9rem; margin-bottom: 16px; }
+        .radio-options { display: flex; flex-direction: column; gap: 10px; }
+        .radio-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .radio-option:hover { border-color: var(--accent); }
+        .radio-option.selected { border-color: var(--accent); background: rgba(59,130,246,0.15); }
+        .radio-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .radio-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .radio-circle { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; }
+        .radio-option.selected .radio-circle { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 40%, transparent 40%); }
+        .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 10px; }
+        .checkbox-item { display: flex; align-items: flex-start; gap: 10px; padding: 12px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .checkbox-item:hover { border-color: var(--accent); }
+        .checkbox-item.selected { border-color: var(--accent); background: rgba(59,130,246,0.15); }
+        .checkbox-item.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .checkbox-item.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .checkbox-box { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+        .checkbox-item.selected .checkbox-box { background: var(--accent); border-color: var(--accent); }
+        .checkbox-item.selected .checkbox-box::after { content: '✓'; color: white; font-weight: bold; font-size: 0.8rem; }
+        .feedback { padding: 20px; border-radius: 12px; margin: 20px 0; }
+        .feedback.excellent { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .feedback.acceptable { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .feedback.poor { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+        .feedback-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .feedback-icon { font-size: 1.5rem; }
+        .feedback-title { font-weight: 700; font-size: 1.1rem; }
+        .feedback-text { color: var(--muted); line-height: 1.7; }
+        .feedback-text strong { color: var(--text); }
+        .alert { padding: 16px 20px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
+        .alert.danger { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+        .alert.success { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .alert-icon { font-size: 1.5rem; flex-shrink: 0; }
+        .alert-content { flex: 1; }
+        .alert-title { font-weight: 600; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; color: var(--muted); }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn-secondary { background: transparent; border: 2px solid var(--border); color: var(--text); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-row { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; }
+        .score-calc { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .score-calc-title { font-weight: 600; margin-bottom: 12px; display: flex; justify-content: space-between; }
+        .score-calc-value { font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+        .outcome { text-align: center; padding: 40px 20px; }
+        .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
+        .outcome-title { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+        .outcome.good .outcome-title { color: var(--success); }
+        .outcome.bad .outcome-title { color: var(--danger); }
+        .outcome-desc { color: var(--muted); max-width: 600px; margin: 0 auto 24px; line-height: 1.7; }
+        .score-summary { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 24px; margin: 24px auto; max-width: 500px; }
+        .score-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .score-row:last-child { border-bottom: none; }
+        .patient-panel { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 16px; margin-bottom: 20px; }
+        .patient-panel-title { font-size: 0.8rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+        .patient-info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; }
+        .patient-info-label { font-size: 0.7rem; color: var(--muted); }
+        .patient-info-value { font-weight: 600; }
     </style>
 </head>
 <body>
-    <header class="header"><div class="header-row"><div style="font-weight:600">🧠 The Brain Attack</div><div style="display:flex;gap:12px;align-items:center"><div class="diff-toggle"><button class="diff-btn active" onclick="setDiff('easy')">Easy</button><button class="diff-btn" onclick="setDiff('int')">Intermediate</button><button class="diff-btn" onclick="setDiff('adv')">Advanced</button></div><div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Points</div></div></div></div></header>
-    <main class="main"><div id="app"></div></main>
-<script>
-const S={stage:'setup',score:0,max:0,diff:'easy',q:0,total:8};
-const C={easy:{age:'68M',wt:'82kg',hx:'Sudden R arm/leg weakness, slurred speech 1hr ago',exam:'R hemiparesis, dysarthria, L gaze deviation',vitals:{HR:'88',BP:'178/98',RR:'16'},labs:{Glu:'142',NIHSS:'14',CT:'No hemorrhage'}},
-int:{age:'72F',wt:'65kg',hx:'Found with L weakness, last known well 6hrs ago',exam:'L hemiplegia, neglect, aphasia',vitals:{HR:'92',BP:'195/105',RR:'18'},labs:{Glu:'168',NIHSS:'18',CT:'Hyperdense MCA'}},
-adv:{age:'55M',wt:'90kg',hx:'Collapse 2hrs ago, on warfarin for AFib',exam:'Unresponsive, posturing, blown pupil',vitals:{HR:'62',BP:'210/120',RR:'8'},labs:{Glu:'126',INR:'2.8',CT:'Large ICH with midline shift'}}};
-const Q=[
-{t:'tPA Window',q:'IV alteplase window for ischemic stroke?',h:'Time is brain',o:[{id:'a',txt:'0-4.5 hours from last known well',c:1,p:100},{id:'b',txt:'0-3 hours only',c:0,p:50},{id:'c',txt:'0-6 hours',c:0,p:20}],fb:{1:'<b>Correct!</b> tPA: 0-4.5 hrs. Door-to-needle goal <60 min. Additional exclusions 3-4.5 hr window.',0:'<b>Window:</b> Up to 4.5 hours with specific criteria.'}},
-{t:'tPA Dosing',q:'Alteplase dose for acute ischemic stroke?',h:'Different from MI dosing',o:[{id:'a',txt:'0.9 mg/kg (max 90mg): 10% bolus, 90% over 60 min',c:1,p:100},{id:'b',txt:'100 mg total',c:0,p:20},{id:'c',txt:'0.6 mg/kg',c:0,p:30}],fb:{1:'<b>Correct!</b> Stroke: 0.9 mg/kg, max 90mg. 10% bolus + 90% infusion. Lower than MI to reduce ICH.',0:'<b>Dosing:</b> 0.9 mg/kg (max 90), 10% bolus + 90% over 1 hour.'}},
-{t:'BP Before tPA',q:'BP threshold before giving tPA?',h:'Must lower for safe thrombolysis',o:[{id:'a',txt:'Lower if >185/110',c:1,p:100},{id:'b',txt:'Lower if >140/90',c:0,p:0},{id:'c',txt:'Never lower BP',c:0,p:0}],fb:{1:'<b>Correct!</b> Pre-tPA: lower if >185/110. Post-tPA: maintain <180/105 x24hrs.',0:'<b>tPA BP limits:</b> <185/110 before, <180/105 after.'}},
-{t:'BP Without tPA',q:'Ischemic stroke NOT getting tPA. Treat BP when?',h:'Permissive hypertension',o:[{id:'a',txt:'Only if >220/120',c:1,p:100},{id:'b',txt:'Treat any BP >140',c:0,p:0},{id:'c',txt:'Treat if >180',c:0,p:30}],fb:{1:'<b>Correct!</b> Without tPA: permissive HTN, only treat >220/120. Aggressive lowering worsens penumbra.',0:'<b>Permissive HTN:</b> Allow up to 220/120 without thrombolysis.'}},
-{t:'LVO Screening',q:'Which suggests large vessel occlusion needing thrombectomy?',h:'NIHSS and cortical signs',o:[{id:'a',txt:'NIHSS ≥6, cortical signs (aphasia, neglect, gaze)',c:1,p:100},{id:'b',txt:'Any NIHSS',c:0,p:20},{id:'c',txt:'Lacunar only',c:0,p:0}],fb:{1:'<b>Correct!</b> LVO: NIHSS ≥6, cortical signs, hyperdense vessel. CTA confirms. Thrombectomy up to 24hrs with good imaging.',0:'<b>LVO screening:</b> High NIHSS + cortical signs = get CTA.'}},
-{t:'Thrombectomy Window',q:'Mechanical thrombectomy window?',h:'DAWN, DEFUSE-3 extended it',o:[{id:'a',txt:'Up to 24 hours with favorable perfusion imaging',c:1,p:100},{id:'b',txt:'0-6 hours only',c:0,p:40},{id:'c',txt:'Same as tPA',c:0,p:20}],fb:{1:'<b>Correct!</b> DAWN/DEFUSE-3: up to 24 hrs with small core, large penumbra on perfusion imaging.',0:'<b>Extended window:</b> 6-24 hours if favorable imaging.'}},
-{t:'ICH Reversal',q:c=>c.labs.INR>2?'INR 2.8 with ICH. Reversal?':'Warfarin reversal in ICH?',h:'Rapid reversal critical',o:[{id:'a',txt:'4-factor PCC + Vitamin K 10mg IV',c:1,p:100},{id:'b',txt:'FFP alone',c:0,p:30},{id:'c',txt:'Vitamin K alone',c:0,p:20}],fb:{1:'<b>Correct!</b> ICH + warfarin: 4F-PCC (25-50 U/kg) for rapid reversal + Vit K for sustained effect.',0:'<b>ICH reversal:</b> PCC >> FFP for speed.'}},
-{t:'ICH BP Target',q:'Target BP in acute ICH?',h:'INTERACT2, ATACH-2',o:[{id:'a',txt:'SBP <140 if presenting 150-220',c:1,p:100},{id:'b',txt:'SBP <180',c:0,p:40},{id:'c',txt:'SBP <120',c:0,p:20}],fb:{1:'<b>Correct!</b> ICH: Target SBP <140 if presenting 150-220. More aggressive than ischemic. Reduces hematoma expansion.',0:'<b>ICH BP:</b> More aggressive than ischemic stroke. Target <140.'}}
-];
-let sel=null;
-function setDiff(d){S.diff=d;document.querySelectorAll('.diff-btn').forEach((b,i)=>b.classList.toggle('active',['easy','int','adv'][i]===d));if(S.stage!=='setup'){S.stage='setup';S.score=0;S.max=0;S.q=0;document.getElementById('score').textContent='0';}render();}
-function addPts(p,m){S.score+=p;S.max+=m;document.getElementById('score').textContent=S.score;}
-function pick(id){sel=id;document.querySelectorAll('.radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id));document.getElementById('sub').disabled=false;}
-function submit(){const q=Q[S.q-1],c=C[S.diff];let opts=q.o;if(q.dyn){const corr=q.dyn(c);opts=opts.map(o=>({...o,c:o.id===corr?1:0,p:o.id===corr?100:o.p||0}));}const opt=opts.find(o=>o.id===sel);addPts(opt.p||0,100);document.querySelectorAll('.radio-option').forEach(o=>{const op=opts.find(x=>x.id===o.dataset.id);if(op&&op.c)o.classList.add('correct');else if(o.dataset.id===sel)o.classList.add('incorrect');});document.getElementById('fb').innerHTML=`<div class="feedback ${opt&&opt.c?'excellent':'incorrect'}">${q.fb[opt&&opt.c?1:0]}</div>`;document.getElementById('sub').textContent=S.q<S.total?'Next →':'Results →';document.getElementById('sub').onclick=next;}
-function next(){if(S.q<S.total){S.q++;sel=null;render();}else{S.stage='outcome';render();}}
-function start(){S.q=1;S.stage='question';render();}
-function go(s){S.stage=s;render();}
-function render(){const c=C[S.diff];if(S.stage==='setup'){document.getElementById('app').innerHTML=`<div class="setup-screen"><h1>🧠 The Brain Attack</h1><p style="color:var(--muted);margin-bottom:32px">Stroke: tPA criteria, dosing, BP management, thrombectomy, ICH</p><button class="start-btn" onclick="go('pres')">Begin Case →</button></div>`;}else if(S.stage==='pres'){document.getElementById('app').innerHTML=`<div class="card"><div class="card-header"><div class="card-phase">Presentation</div><div class="card-title">⚡ Acute Neurologic Emergency</div></div><div class="card-body"><div class="narrative"><span class="hl">${c.age}</span> (${c.wt})<br><b>Hx:</b> ${c.hx}<br><b>Exam:</b> ${c.exam}</div><div class="vitals-grid">${Object.entries(c.vitals).map(([k,v])=>`<div class="vital"><div class="vital-label">${k}</div><div class="vital-value">${v}</div></div>`).join('')}</div><div class="lab-grid">${Object.entries(c.labs).map(([k,v])=>`<div class="lab-item"><span class="lab-name">${k}</span><span class="lab-value">${v}</span></div>`).join('')}</div><div class="btn-row"><button class="btn btn-primary" onclick="start()">Begin Assessment →</button></div></div></div>`;}else if(S.stage==='question'){const q=Q[S.q-1];const qTxt=typeof q.q==='function'?q.q(c):q.q;document.getElementById('app').innerHTML=`<div class="card"><div class="card-header"><div class="card-phase">Q${S.q}/${S.total}</div><div class="card-title">🔍 ${q.t}</div></div><div class="card-body"><div class="progress-bar"><div class="progress-fill" style="width:${S.q/S.total*100}%"></div></div><div class="question-header"><div class="question-number">${S.q}</div><div style="font-weight:600">${qTxt}</div></div><div class="hint">💡 ${q.h}</div><div class="radio-options">${q.o.map(o=>`<div class="radio-option" data-id="${o.id}" onclick="pick('${o.id}')"><div class="radio-circle"></div><div><b>${o.txt}</b></div></div>`).join('')}</div><div id="fb"></div><div class="btn-row"><button class="btn btn-primary" id="sub" onclick="submit()" disabled>Submit →</button></div></div></div>`;}else{const pct=S.max>0?Math.round(S.score/S.max*100):0;document.getElementById('app').innerHTML=`<div class="card"><div class="card-body"><div style="text-align:center;padding:40px"><div style="font-size:4rem">${pct>=70?'🎉':'📚'}</div><div style="font-size:2rem;font-weight:700;color:${pct>=70?'var(--success)':'var(--warning)'}">${pct>=70?'Complete!':'Review'}</div></div><div class="score-summary"><div class="score-row"><span>Score</span><span>${S.score}/${S.max} (${pct}%)</span></div></div><div class="pearls-box"><div class="pearls-title">📌 Stroke Pearls</div><div class="pearl-item"><b>tPA:</b> 0-4.5 hrs, 0.9 mg/kg (max 90), 10% bolus</div><div class="pearl-item"><b>BP pre-tPA:</b> <185/110. Post-tPA: <180/105 x24hrs</div><div class="pearl-item"><b>No tPA:</b> Permissive HTN, treat only >220/120</div><div class="pearl-item"><b>Thrombectomy:</b> Up to 24hrs with favorable imaging</div><div class="pearl-item"><b>ICH:</b> Target SBP <140. PCC + Vit K for warfarin reversal</div></div><div class="cross-link"><a href="../mechanism/stroke-module.html">MechanismDx: Stroke</a></div><div class="btn-row" style="justify-content:center;margin-top:30px"><button class="btn btn-primary" onclick="location.reload()">Retry</button><button class="btn btn-link" onclick="location.href='adventure-hub.html'">Back</button></div></div></div>`;}}
-document.addEventListener('DOMContentLoaded',render);
-</script>
+    <header class="header">
+        <div class="header-row">
+            <div class="header-title">🧠 The Sudden Silence</div>
+            <div class="header-stats">
+                <span class="difficulty-badge easy" id="difficultyBadge">Easy</span>
+                <div class="stat time-critical"><div class="stat-value">2.5h</div><div class="stat-label">Since Onset</div></div>
+                <div class="stat"><div class="stat-value" id="scoreDisplay">0</div><div class="stat-label">Points</div></div>
+            </div>
+        </div>
+    </header>
+    <main class="main"><div id="stageContainer"></div></main>
+
+    <script>
+    const state = { stage:'setup', difficulty:'easy', score:0, nihssScores:{}, totalNIHSS:0 };
+
+    const nihssComponents = [
+        { id: 'loc', category: '1a. Level of Consciousness', options: [{score:0,text:'Alert'},{score:1,text:'Drowsy'},{score:2,text:'Obtunded'},{score:3,text:'Unresponsive'}], patientScore: 0 },
+        { id: 'gaze', category: '2. Best Gaze', options: [{score:0,text:'Normal'},{score:1,text:'Partial gaze palsy'},{score:2,text:'Forced deviation'}], patientScore: 1 },
+        { id: 'facial', category: '4. Facial Palsy', options: [{score:0,text:'Normal'},{score:1,text:'Minor'},{score:2,text:'Partial'},{score:3,text:'Complete'}], patientScore: 2 },
+        { id: 'motor_arm_r', category: '5b. Motor Arm - Right', options: [{score:0,text:'No drift'},{score:1,text:'Drift'},{score:2,text:'Some effort'},{score:3,text:'No effort'},{score:4,text:'No movement'}], patientScore: 3 },
+        { id: 'motor_leg_r', category: '6b. Motor Leg - Right', options: [{score:0,text:'No drift'},{score:1,text:'Drift'},{score:2,text:'Some effort'},{score:3,text:'No effort'},{score:4,text:'No movement'}], patientScore: 2 },
+        { id: 'language', category: '9. Best Language', options: [{score:0,text:'No aphasia'},{score:1,text:'Mild aphasia'},{score:2,text:'Severe aphasia'},{score:3,text:'Mute/global'}], patientScore: 2 }
+    ];
+
+    const contraindications = [
+        { id: 'bp_high', text: 'BP >185/110 despite treatment', isContra: true },
+        { id: 'glucose_low', text: 'Blood glucose <50 mg/dL', isContra: true },
+        { id: 'platelets', text: 'Platelet count <100,000', isContra: true },
+        { id: 'inr', text: 'INR >1.7', isContra: true },
+        { id: 'ich_history', text: 'History of intracranial hemorrhage', isContra: true },
+        { id: 'recent_stroke', text: 'Ischemic stroke within 3 months', isContra: true },
+        { id: 'headache', text: 'Patient has headache', isContra: false },
+        { id: 'age_over_80', text: 'Age over 80 years', isContra: false },
+        { id: 'afib', text: 'History of atrial fibrillation', isContra: false },
+        { id: 'diabetes', text: 'History of diabetes', isContra: false }
+    ];
+
+    function addScore(pts) { state.score += pts; document.getElementById('scoreDisplay').textContent = state.score; }
+
+    const stages = {
+        setup: { render: () => `
+            <div class="setup-screen">
+                <h1>🧠 The Sudden Silence</h1>
+                <p class="subtitle">A clinical reasoning adventure in acute stroke management</p>
+                <div class="setup-options">
+                    <div class="setup-group">
+                        <label>Select Difficulty</label>
+                        <select id="difficultySelect">
+                            <option value="easy">Easy</option>
+                            <option value="hard">Challenging</option>
+                            <option value="hardest">Expert</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="start-btn" onclick="startCase()">Begin Case →</button>
+            </div>`
+        },
+        arrival: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Stroke Alert</div><div class="card-title">🚨 Code Stroke Activated</div></div>
+                <div class="card-body">
+                    <div class="time-banner">
+                        <div><div class="time-banner-title">⏰ TIME IS BRAIN</div><div style="font-size:0.85rem;opacity:0.9">Last known well: 08:15 | Current: 10:45</div></div>
+                        <div class="time-banner-clock">2h 30min</div>
+                    </div>
+                    <div class="narrative">A <span class="hl">68-year-old female</span> is brought in by EMS after her husband found her unable to speak clearly with <span class="hl">right-sided weakness</span>. She was normal at <span class="hl">08:15 AM</span>.<br><br>She is awake but <span class="hl">cannot form words</span> and appears frustrated.</div>
+                    <div class="patient-panel">
+                        <div class="patient-panel-title">Patient Information</div>
+                        <div class="patient-info-grid">
+                            <div><div class="patient-info-label">Age/Sex</div><div class="patient-info-value">68 y/o Female</div></div>
+                            <div><div class="patient-info-label">Last Known Well</div><div class="patient-info-value">08:15 AM</div></div>
+                            <div><div class="patient-info-label">PMH</div><div class="patient-info-value">HTN, A-fib, DM2</div></div>
+                            <div><div class="patient-info-label">Meds</div><div class="patient-info-value">Metoprolol, Metformin</div></div>
+                        </div>
+                    </div>
+                    <div class="vitals-grid">
+                        <div class="vital"><div class="vital-label">HR</div><div class="vital-value">88 irreg</div></div>
+                        <div class="vital critical"><div class="vital-label">BP</div><div class="vital-value">178/96</div></div>
+                        <div class="vital"><div class="vital-label">SpO₂</div><div class="vital-value">97%</div></div>
+                        <div class="vital"><div class="vital-label">Glucose</div><div class="vital-value">142</div></div>
+                    </div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('nihss')">Perform NIHSS →</button></div>
+                </div>
+            </div>`
+        },
+        nihss: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Assessment</div><div class="card-title">📋 NIH Stroke Scale</div></div>
+                <div class="card-body">
+                    <div class="time-banner"><div><div class="time-banner-title">Score each component</div></div><div class="time-banner-clock">Window: 2h</div></div>
+                    <div class="nihss-grid" id="nihssGrid">
+                        ${nihssComponents.map(item => `
+                            <div class="nihss-item">
+                                <div class="nihss-category">${item.category}</div>
+                                <div class="nihss-options">
+                                    ${item.options.map(opt => `
+                                        <div class="nihss-option" data-id="${item.id}" data-score="${opt.score}" onclick="selectNIHSS('${item.id}', ${opt.score})">
+                                            <div class="nihss-radio"></div>
+                                            <span>${opt.score} - ${opt.text}</span>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="score-calc"><div class="score-calc-title"><span>Total NIHSS:</span><span class="score-calc-value" id="nihssTotal">0</span></div><div id="nihssInterp" style="color:var(--muted)">Select all components</div></div>
+                    <div id="nihssFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitNIHSS()">Submit NIHSS →</button></div>
+                </div>
+            </div>`
+        },
+        ct_results: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Imaging</div><div class="card-title">🧠 CT Head Results</div></div>
+                <div class="card-body">
+                    <div class="alert success"><span class="alert-icon">✓</span><div class="alert-content"><div class="alert-title">No Hemorrhage</div><div class="alert-desc">Non-contrast CT: <strong>No acute hemorrhage</strong>. Early ischemic changes in left MCA territory.</div></div></div>
+                    <div class="narrative"><strong>CTA:</strong> <span class="hl">Left M1 MCA occlusion</span> identified.<br><br><strong>Labs:</strong> INR 1.0, Platelets 210K, Cr 0.9</div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('contraindications')">Assess tPA Eligibility →</button></div>
+                </div>
+            </div>`
+        },
+        contraindications: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Eligibility</div><div class="card-title">⚠️ tPA Contraindications</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">2</div><div class="question-text">Select ABSOLUTE contraindications to IV tPA:</div></div>
+                        <p class="question-hint">This patient: 2.5h from onset, BP 178/96, not on anticoagulation</p>
+                        <div class="checkbox-grid" id="contraOpts">${contraindications.map(c=>`<div class="checkbox-item" data-id="${c.id}" data-contra="${c.isContra}" onclick="toggleContra('${c.id}')"><div class="checkbox-box"></div><span>${c.text}</span></div>`).join('')}</div>
+                    </div>
+                    <div id="contraFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitContra()">Submit →</button></div>
+                </div>
+            </div>`
+        },
+        treatment: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Treatment</div><div class="card-title">🎯 Treatment Decision</div></div>
+                <div class="card-body">
+                    <div class="alert success"><span class="alert-icon">✓</span><div class="alert-content"><div class="alert-title">Patient is tPA Eligible</div><div class="alert-desc">No contraindications. NIHSS: ${state.totalNIHSS}. LVO confirmed (M1).</div></div></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">3</div><div class="question-text">What is your treatment plan?</div></div>
+                        <div class="radio-options" id="treatmentOpts">
+                            <div class="radio-option" data-id="tpa_thrombectomy" onclick="selectTreatment('tpa_thrombectomy')"><div class="radio-circle"></div><div><strong>tPA + alert IR for thrombectomy</strong><br><small style="color:var(--muted)">Best for LVO (NIHSS ≥6)</small></div></div>
+                            <div class="radio-option" data-id="tpa_only" onclick="selectTreatment('tpa_only')"><div class="radio-circle"></div><span>IV tPA only</span></div>
+                            <div class="radio-option" data-id="thrombectomy_only" onclick="selectTreatment('thrombectomy_only')"><div class="radio-circle"></div><span>Thrombectomy only</span></div>
+                            <div class="radio-option" data-id="aspirin" onclick="selectTreatment('aspirin')"><div class="radio-circle"></div><span>Aspirin 325mg</span></div>
+                        </div>
+                    </div>
+                    <div id="treatmentFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="treatmentSubmit" onclick="submitTreatment()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        outcome: { render: () => `
+            <div class="card"><div class="card-body">
+                <div class="outcome good">
+                    <div class="outcome-icon">🎉</div>
+                    <div class="outcome-title">Successful Reperfusion!</div>
+                    <div class="outcome-desc">IV tPA administered within 3 hours. Thrombectomy achieved TICI 2b/3 recanalization. At 24 hours, NIHSS improved from ${state.totalNIHSS} to 4.</div>
+                </div>
+                <div class="score-summary">
+                    <h3 style="margin-bottom:16px">📊 Performance Summary</h3>
+                    <div class="score-row"><span>NIHSS Assessment</span><span>${state.nihssScore||0}/100</span></div>
+                    <div class="score-row"><span>Contraindication Knowledge</span><span>${state.contraScore||0}/100</span></div>
+                    <div class="score-row"><span>Treatment Decision</span><span>${state.treatmentScore||0}/100</span></div>
+                    <div class="score-row" style="border-top:2px solid var(--border);margin-top:12px;padding-top:12px"><span><strong>Total Score</strong></span><span style="color:var(--success)"><strong>${state.score}</strong></span></div>
+                </div>
+                <div class="feedback excellent"><div class="feedback-header"><span class="feedback-icon">💡</span><span class="feedback-title">Stroke Pearls</span></div><div class="feedback-text">• <strong>tPA window:</strong> 0-4.5 hours<br>• <strong>BP target pre-tPA:</strong> <185/110<br>• <strong>Thrombectomy:</strong> For LVO, up to 24h in select patients<br>• <strong>NIHSS ≥6:</strong> Consider LVO, alert IR early</div></div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Play Again</button><button class="btn btn-secondary" onclick="location.href='adventure-hub.html'">← Adventures</button></div>
+            </div></div>`
+        }
+    };
+
+    function startCase() {
+        state.difficulty = document.getElementById('difficultySelect').value;
+        document.getElementById('difficultyBadge').textContent = state.difficulty.charAt(0).toUpperCase() + state.difficulty.slice(1);
+        document.getElementById('difficultyBadge').className = 'difficulty-badge ' + state.difficulty;
+        goTo('arrival');
+    }
+
+    function selectNIHSS(id, score) {
+        state.nihssScores[id] = score;
+        document.querySelectorAll(`.nihss-option[data-id="${id}"]`).forEach(opt => opt.classList.toggle('selected', parseInt(opt.dataset.score) === score));
+        let total = 0;
+        Object.values(state.nihssScores).forEach(s => total += s);
+        state.totalNIHSS = total;
+        document.getElementById('nihssTotal').textContent = total;
+        document.getElementById('nihssInterp').textContent = total <= 4 ? 'Minor stroke' : total <= 15 ? 'Moderate stroke' : 'Severe stroke';
+    }
+
+    function submitNIHSS() {
+        const correctTotal = 10; // 0+1+2+3+2+2
+        const accuracy = 100 - Math.abs(correctTotal - state.totalNIHSS) * 10;
+        state.nihssScore = Math.max(0, accuracy);
+        addScore(Math.round(accuracy / 2.5));
+        state.totalNIHSS = correctTotal;
+        document.getElementById('nihssFeedback').innerHTML = `<div class="feedback ${Math.abs(correctTotal-state.totalNIHSS)<=2?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${Math.abs(correctTotal-state.totalNIHSS)<=2?'✅':'📚'}</span><span class="feedback-title">NIHSS: ${state.totalNIHSS} (Expected: ~${correctTotal})</span></div><div class="feedback-text">Key findings: gaze palsy (+1), facial droop (+2), right arm weakness (+3), right leg weakness (+2), expressive aphasia (+2). NIHSS ≥6 → likely LVO.</div></div>`;
+        document.querySelector('#nihssFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('ct_results')">Get CT Results →</button>`;
+    }
+
+    let selectedContra = new Set();
+    function toggleContra(id) {
+        const el = document.querySelector(`#contraOpts .checkbox-item[data-id="${id}"]`);
+        if(selectedContra.has(id)) { selectedContra.delete(id); el.classList.remove('selected'); }
+        else { selectedContra.add(id); el.classList.add('selected'); }
+    }
+    function submitContra() {
+        let correct = 0;
+        contraindications.forEach(item => {
+            const el = document.querySelector(`#contraOpts .checkbox-item[data-id="${item.id}"]`);
+            const wasSel = selectedContra.has(item.id);
+            if (item.isContra && wasSel) { el.classList.add('correct'); correct++; }
+            else if (item.isContra && !wasSel) { el.classList.add('incorrect'); }
+            else if (!item.isContra && wasSel) { el.classList.add('incorrect'); }
+            else { correct++; }
+        });
+        const score = Math.round(correct / contraindications.length * 100);
+        state.contraScore = score;
+        addScore(Math.round(score / 2.5));
+        document.getElementById('contraFeedback').innerHTML = `<div class="feedback ${score>=70?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${score>=70?'✅':'📚'}</span><span class="feedback-title">Score: ${score}%</span></div><div class="feedback-text"><strong>Absolute contraindications:</strong> BP >185/110, glucose <50, platelets <100K, INR >1.7, ICH history, recent stroke.<br><strong>NOT contraindications:</strong> Age, a-fib, diabetes, headache alone.</div></div>`;
+        document.querySelector('#contraFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('treatment')">Treatment Decision →</button>`;
+    }
+
+    let selectedTreatment = null;
+    function selectTreatment(id) { selectedTreatment = id; document.querySelectorAll('#treatmentOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('treatmentSubmit').disabled = false; }
+    function submitTreatment() {
+        const correct = ['tpa_thrombectomy', 'tpa_only'];
+        const isCorrect = correct.includes(selectedTreatment);
+        const isOptimal = selectedTreatment === 'tpa_thrombectomy';
+        document.querySelectorAll('#treatmentOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'tpa_thrombectomy') o.classList.add('correct');
+            else if (o.dataset.id === selectedTreatment && !isCorrect) o.classList.add('incorrect');
+        });
+        state.treatmentScore = isOptimal ? 100 : isCorrect ? 70 : 30;
+        addScore(isOptimal ? 50 : isCorrect ? 30 : 10);
+        document.getElementById('treatmentFeedback').innerHTML = `<div class="feedback ${isOptimal?'excellent':isCorrect?'acceptable':'poor'}"><div class="feedback-header"><span class="feedback-icon">${isOptimal?'✅':isCorrect?'👍':'⚠️'}</span><span class="feedback-title">${isOptimal?'Optimal':isCorrect?'Acceptable':'Suboptimal'}</span></div><div class="feedback-text">${isOptimal?'For LVO with NIHSS ≥6, give tPA AND alert IR for thrombectomy.':isCorrect?'tPA is correct, but with confirmed LVO, thrombectomy improves outcomes.':'tPA should not be delayed. Aspirin is given 24h after tPA.'}</div></div>`;
+        document.getElementById('treatmentSubmit').textContent = 'See Outcome →';
+        document.getElementById('treatmentSubmit').onclick = () => goTo('outcome');
+    }
+
+    function goTo(id) { state.stage = id; render(); window.scrollTo(0,0); }
+    function render() { const s = stages[state.stage]; if(s) document.getElementById('stageContainer').innerHTML = s.render(); }
+    document.addEventListener('DOMContentLoaded', render);
+    </script>
 </body>
 </html>

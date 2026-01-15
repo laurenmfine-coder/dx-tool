@@ -3,35 +3,337 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Thyroid Storm | ReasonDx Adventure</title>
-    <style>:root{--bg:#0F172A;--card:#1E293B;--border:#334155;--text:#F1F5F9;--muted:#94A3B8;--accent:#F97316;--success:#10B981;--warning:#F59E0B;--danger:#DC2626}*{box-sizing:border-box;margin:0;padding:0}body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}.header{background:linear-gradient(135deg,#C2410C,#F97316);padding:12px 20px;position:sticky;top:0;z-index:100}.header-row{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}.diff-toggle{display:flex;background:rgba(0,0,0,.3);border-radius:8px}.diff-btn{padding:6px 12px;font-size:.75rem;cursor:pointer;border:none;background:0 0;color:rgba(255,255,255,.7);font-weight:600}.diff-btn.active{background:rgba(255,255,255,.2);color:#fff}.stat{text-align:center;background:rgba(0,0,0,.2);padding:6px 14px;border-radius:8px}.stat-value{font-size:1.1rem;font-weight:700;font-family:monospace}.stat-label{font-size:.6rem;opacity:.8}.main{max-width:900px;margin:0 auto;padding:24px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;margin-bottom:20px}.card-header{padding:20px 24px;border-bottom:1px solid var(--border)}.card-phase{font-size:.75rem;color:var(--accent);text-transform:uppercase}.card-title{font-size:1.5rem;font-weight:700}.card-body{padding:24px}.narrative{background:rgba(249,115,22,.1);border-left:4px solid var(--accent);padding:20px;border-radius:0 12px 12px 0;margin-bottom:20px}.narrative .hl{background:rgba(249,115,22,.3);padding:2px 6px;border-radius:4px}.setup-screen{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:40px;text-align:center}.start-btn{background:var(--accent);color:#fff;border:none;padding:16px 48px;border-radius:12px;font-size:1.1rem;font-weight:700;cursor:pointer}.hint{background:rgba(59,130,246,.15);padding:12px 16px;border-radius:8px;margin-bottom:16px;color:#93C5FD}.radio-options{display:flex;flex-direction:column;gap:10px}.radio-option{display:flex;align-items:center;gap:12px;padding:14px 18px;background:rgba(0,0,0,.2);border:2px solid var(--border);border-radius:10px;cursor:pointer}.radio-option.selected{border-color:var(--accent);background:rgba(249,115,22,.15)}.radio-option.correct{border-color:var(--success);background:rgba(16,185,129,.15)}.radio-option.incorrect{border-color:var(--danger);background:rgba(220,38,38,.15)}.radio-circle{width:22px;height:22px;border:2px solid var(--border);border-radius:50%}.radio-option.selected .radio-circle{border-color:var(--accent);background:radial-gradient(circle,var(--accent) 40%,transparent 40%)}.feedback{padding:20px;border-radius:12px;margin:20px 0}.feedback.excellent{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3)}.feedback.incorrect{background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.3)}.btn{padding:14px 28px;border-radius:10px;font-weight:600;cursor:pointer;border:none}.btn-primary{background:var(--accent);color:#fff}.btn:disabled{opacity:.5}.btn-row{display:flex;gap:12px;margin-top:24px}.btn-link{background:0 0;border:2px solid var(--border);color:var(--text)}.vitals-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:12px;margin:20px 0}.vital{background:rgba(0,0,0,.2);padding:12px;border-radius:10px;text-align:center}.vital-label{font-size:.7rem;color:var(--muted)}.vital-value{font-size:1.3rem;font-weight:700;font-family:monospace}.lab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:16px 0}.lab-item{display:flex;justify-content:space-between;padding:8px 12px;background:rgba(0,0,0,.2);border-radius:6px}.lab-name{color:var(--muted)}.lab-value{font-family:monospace;font-weight:600}.score-summary{background:rgba(0,0,0,.2);border-radius:12px;padding:24px;margin:24px auto;max-width:600px}.score-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}.pearls-box{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:12px;padding:20px;margin-top:20px}.pearls-title{font-weight:700;color:var(--success);margin-bottom:12px}.pearl-item{padding:8px 0;border-bottom:1px solid rgba(16,185,129,.2);font-size:.95rem}.cross-link{background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.3);border-radius:8px;padding:12px 16px;margin-top:12px}.cross-link a{color:#C4B5FD;text-decoration:none}.progress-bar{background:rgba(255,255,255,.1);border-radius:10px;height:8px;margin:20px 0}.progress-fill{background:var(--accent);height:100%;border-radius:10px}.question-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}.question-number{background:var(--accent);color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}</style>
+    <title>The Racing Heart | ReasonDx Adventure</title>
+    <style>
+        :root { --bg: #0F172A; --card: #1E293B; --border: #334155; --text: #F1F5F9; --muted: #94A3B8; --accent: #F59E0B; --success: #10B981; --warning: #F59E0B; --danger: #DC2626; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #D97706 0%, #F59E0B 100%); padding: 12px 20px; position: sticky; top: 0; z-index: 100; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .header-title { font-size: 1.1rem; font-weight: 600; }
+        .stat { background: rgba(255,255,255,0.2); padding: 6px 14px; border-radius: 8px; }
+        .stat-value { font-size: 1.1rem; font-weight: 700; font-family: monospace; }
+        .stat-label { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; }
+        .main { max-width: 1000px; margin: 0 auto; padding: 24px; }
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; }
+        .card-header { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+        .card-phase { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+        .card-title { font-size: 1.5rem; font-weight: 700; }
+        .card-body { padding: 24px; }
+        .narrative { background: linear-gradient(135deg, rgba(245,158,11,0.1), rgba(217,119,6,0.1)); border-left: 4px solid var(--accent); padding: 20px 24px; border-radius: 0 12px 12px 0; margin-bottom: 24px; line-height: 1.8; }
+        .narrative .hl { background: rgba(245,158,11,0.3); padding: 2px 6px; border-radius: 4px; font-weight: 500; }
+        .setup-screen { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: center; }
+        .setup-screen h1 { font-size: 2rem; margin-bottom: 8px; }
+        .setup-screen .subtitle { color: var(--muted); margin-bottom: 32px; }
+        .start-btn { background: var(--accent); color: white; border: none; padding: 16px 48px; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; }
+        .question-section { margin-bottom: 32px; }
+        .question-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .question-number { background: var(--accent); color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .question-text { font-size: 1.1rem; font-weight: 600; }
+        .radio-options { display: flex; flex-direction: column; gap: 10px; }
+        .radio-option { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .radio-option:hover { border-color: var(--accent); }
+        .radio-option.selected { border-color: var(--accent); background: rgba(245,158,11,0.15); }
+        .radio-option.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .radio-option.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .radio-circle { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 50%; flex-shrink: 0; }
+        .radio-option.selected .radio-circle { border-color: var(--accent); background: radial-gradient(circle, var(--accent) 40%, transparent 40%); }
+        .checkbox-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+        .checkbox-item { display: flex; align-items: center; gap: 10px; padding: 12px; background: rgba(0,0,0,0.2); border: 2px solid var(--border); border-radius: 10px; cursor: pointer; }
+        .checkbox-item:hover { border-color: var(--accent); }
+        .checkbox-item.selected { border-color: var(--accent); background: rgba(245,158,11,0.15); }
+        .checkbox-item.correct { border-color: var(--success); background: rgba(16,185,129,0.15); }
+        .checkbox-item.incorrect { border-color: var(--danger); background: rgba(220,38,38,0.15); }
+        .checkbox-box { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .checkbox-item.selected .checkbox-box { background: var(--accent); border-color: var(--accent); }
+        .checkbox-item.selected .checkbox-box::after { content: '✓'; color: white; font-weight: bold; }
+        .feedback { padding: 20px; border-radius: 12px; margin: 20px 0; }
+        .feedback.excellent { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); }
+        .feedback.acceptable { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .feedback-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .feedback-icon { font-size: 1.5rem; }
+        .feedback-title { font-weight: 700; }
+        .feedback-text { color: var(--muted); line-height: 1.7; }
+        .feedback-text strong { color: var(--text); }
+        .alert { padding: 16px 20px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 12px; }
+        .alert.danger { background: rgba(220,38,38,0.15); border: 1px solid rgba(220,38,38,0.3); }
+        .alert.info { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.3); }
+        .alert-icon { font-size: 1.5rem; }
+        .alert-content { flex: 1; }
+        .alert-title { font-weight: 600; margin-bottom: 4px; }
+        .alert-desc { font-size: 0.9rem; color: var(--muted); }
+        .btn { padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-row { display: flex; gap: 12px; margin-top: 24px; }
+        .lab-panel { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .lab-panel-title { font-weight: 600; margin-bottom: 16px; color: var(--accent); }
+        .lab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; }
+        .lab-item { background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; }
+        .lab-name { font-size: 0.8rem; color: var(--muted); }
+        .lab-value { font-size: 1.1rem; font-weight: 700; }
+        .lab-value.critical { color: var(--danger); }
+        .lab-value.high { color: var(--warning); }
+        .lab-range { font-size: 0.7rem; color: var(--muted); }
+        .outcome { text-align: center; padding: 40px 20px; }
+        .outcome-icon { font-size: 4rem; margin-bottom: 16px; }
+        .outcome-title { font-size: 2rem; font-weight: 700; color: var(--success); margin-bottom: 8px; }
+        .outcome-desc { color: var(--muted); max-width: 600px; margin: 0 auto 24px; }
+        .score-summary { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 24px; margin: 24px auto; max-width: 500px; }
+        .score-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+        .score-row:last-child { border-bottom: none; }
+        .burch-box { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .burch-title { font-weight: 600; color: var(--accent); margin-bottom: 12px; }
+        .burch-item { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        .burch-item:last-child { border-bottom: none; }
+    </style>
 </head>
 <body>
-    <header class="header"><div class="header-row"><div style="font-weight:600">🔥 The Thyroid Storm</div><div style="display:flex;gap:12px;align-items:center"><div class="diff-toggle"><button class="diff-btn active" onclick="setDiff('easy')">Easy</button><button class="diff-btn" onclick="setDiff('int')">Intermediate</button><button class="diff-btn" onclick="setDiff('adv')">Advanced</button></div><div class="stat"><div class="stat-value" id="score">0</div><div class="stat-label">Points</div></div></div></div></header>
-    <main class="main"><div id="app"></div></main>
-<script>
-const S={stage:'setup',score:0,max:0,diff:'easy',q:0,total:8};
-const C={easy:{age:'35F',wt:'55kg',hx:'Known Graves, stopped meds, now fever, agitation, palpitations',exam:'Tremor, lid lag, goiter, diaphoretic, agitated',vitals:{HR:'142',BP:'158/68',T:'39.8'},labs:{TSH:'<0.01',FT4:'6.8',FT3:'18'}},int:{age:'52F',wt:'62kg',hx:'Recent IV contrast, now altered, hypotensive',exam:'Tachycardic, warm, confused',vitals:{HR:'158',BP:'88/52',T:'40.2'},labs:{TSH:'<0.01',FT4:'8.2'}},adv:{age:'28F',wt:'58kg',hx:'New AFib with RVR, HF symptoms, no known thyroid disease',exam:'JVD, rales, irregular rhythm, exophthalmos',vitals:{HR:'168',BP:'142/78',T:'38.8'},labs:{TSH:'<0.01',BNP:'1840'}}};
-const Q=[
-{t:'Burch-Wartofsky Score',q:'How is thyroid storm diagnosed?',h:'Clinical scoring system',o:[{id:'a',txt:'Burch-Wartofsky Score >=45 (clinical criteria, not just labs)',c:1,p:100},{id:'b',txt:'TSH alone',c:0,p:20},{id:'c',txt:'T4 level >10',c:0,p:20}],fb:{1:'<b>Correct!</b> Burch-Wartofsky: Temp, CNS, GI, CV, precipitant. >=45 = storm, 25-44 = impending. Labs dont distinguish storm from severe hyperthyroidism.',0:'<b>Clinical diagnosis:</b> Burch-Wartofsky score. Labs similar in storm vs severe hyperthyroidism.'}},
-{t:'Treatment Order',q:'Correct order of thyroid storm treatment?',h:'Sequence matters',o:[{id:'a',txt:'Beta-blocker → PTU/methimazole → iodine (1hr after PTU) → steroids',c:1,p:100},{id:'b',txt:'Iodine first',c:0,p:0},{id:'c',txt:'Surgery immediately',c:0,p:10}],fb:{1:'<b>Correct!</b> BB first (symptom control), then thionamide (block synthesis), then iodine 1hr later (block release - Wolff-Chaikoff). Steroids decrease T4→T3.',0:'<b>Order:</b> BB → PTU → Iodine (wait 1hr) → Steroids. Iodine before PTU worsens storm.'}},
-{t:'Why PTU Before Iodine',q:'Why give PTU at least 1 hour before iodine?',h:'Prevent hormone synthesis from iodine',o:[{id:'a',txt:'Block organification first so iodine cant become more T4',c:1,p:100},{id:'b',txt:'No specific reason',c:0,p:10},{id:'c',txt:'Iodine inactivates PTU',c:0,p:20}],fb:{1:'<b>Correct!</b> PTU blocks TPO (organification). If you give iodine first, thyroid uses it to make more hormone (Jod-Basedow).',0:'<b>Sequence:</b> PTU blocks hormone synthesis. Then iodine blocks release (Wolff-Chaikoff).'}},
-{t:'PTU vs Methimazole',q:'PTU advantage over methimazole in thyroid storm?',h:'Extra mechanism',o:[{id:'a',txt:'PTU also blocks peripheral T4→T3 conversion',c:1,p:100},{id:'b',txt:'Faster onset',c:0,p:30},{id:'c',txt:'No difference',c:0,p:20}],fb:{1:'<b>Correct!</b> PTU inhibits type 1 deiodinase (peripheral conversion). Methimazole only blocks thyroid synthesis. PTU preferred in storm.',0:'<b>PTU:</b> Blocks synthesis AND peripheral conversion. Preferred in storm.'}},
-{t:'Beta-Blocker Choice',q:'Preferred beta-blocker in thyroid storm?',h:'Consider comorbidities',o:[{id:'a',txt:'Propranolol (also blocks T4→T3) or esmolol if concern for HF',c:1,p:100},{id:'b',txt:'Metoprolol only',c:0,p:40},{id:'c',txt:'Avoid all beta-blockers',c:0,p:0}],fb:{1:'<b>Correct!</b> Propranolol: Non-selective, also inhibits T4→T3. Esmolol: Short-acting, titratable if HF concern.',0:'<b>Propranolol:</b> Preferred for extra T4→T3 blocking. Esmolol if unstable.'}},
-{t:'Steroid Rationale',q:'Why give hydrocortisone in thyroid storm?',h:'Multiple reasons',o:[{id:'a',txt:'Decreases T4→T3, treats relative adrenal insufficiency, anti-inflammatory',c:1,p:100},{id:'b',txt:'Treats underlying Graves',c:0,p:20},{id:'c',txt:'Not indicated',c:0,p:0}],fb:{1:'<b>Correct!</b> Steroids: Block peripheral conversion, treat relative adrenal insufficiency (increased cortisol metabolism), anti-inflammatory.',0:'<b>Steroids:</b> Multiple mechanisms. Give hydrocortisone 100mg q8h.'}},
-{t:'Precipitants',q:'Common precipitants of thyroid storm?',h:'What triggers decompensation',o:[{id:'a',txt:'Infection, surgery, trauma, iodine contrast, stopping medications, DKA',c:1,p:100},{id:'b',txt:'Only infection',c:0,p:20},{id:'c',txt:'Spontaneous only',c:0,p:10}],fb:{1:'<b>Correct!</b> Always look for precipitant: Infection (#1), surgery, trauma, iodine load (contrast, amiodarone), med non-compliance, DKA, MI.',0:'<b>Precipitants:</b> Infection most common. Also surgery, iodine, trauma, DKA.'}},
-{t:'Cardiac Complications',q:'New AFib in thyrotoxicosis. Key management difference?',h:'Rate control challenges',o:[{id:'a',txt:'Often refractory to digoxin (increased clearance), need higher BB doses',c:1,p:100},{id:'b',txt:'Standard AFib treatment',c:0,p:30},{id:'c',txt:'Immediate cardioversion',c:0,p:20}],fb:{1:'<b>Correct!</b> Digoxin less effective (increased clearance). Need higher BB doses. AFib often converts with euthyroid state. Anticoagulate.',0:'<b>AFib:</b> Resistant to digoxin. Higher BB doses needed. Often resolves with treatment.'}}
-];
-let sel=null;
-function setDiff(d){S.diff=d;document.querySelectorAll('.diff-btn').forEach((b,i)=>b.classList.toggle('active',['easy','int','adv'][i]===d));if(S.stage!=='setup'){S.stage='setup';S.score=0;S.max=0;S.q=0;document.getElementById('score').textContent='0';}render();}
-function addPts(p,m){S.score+=p;S.max+=m;document.getElementById('score').textContent=S.score;}
-function pick(id){sel=id;document.querySelectorAll('.radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id));document.getElementById('sub').disabled=false;}
-function submit(){const q=Q[S.q-1];const opt=q.o.find(o=>o.id===sel);addPts(opt.p||0,100);document.querySelectorAll('.radio-option').forEach(o=>{const op=q.o.find(x=>x.id===o.dataset.id);if(op&&op.c)o.classList.add('correct');else if(o.dataset.id===sel)o.classList.add('incorrect');});document.getElementById('fb').innerHTML='<div class="feedback '+(opt&&opt.c?'excellent':'incorrect')+'">'+q.fb[opt&&opt.c?1:0]+'</div>';document.getElementById('sub').textContent=S.q<S.total?'Next':'Results';document.getElementById('sub').onclick=next;}
-function next(){if(S.q<S.total){S.q++;sel=null;render();}else{S.stage='outcome';render();}}
-function start(){S.q=1;S.stage='question';render();}
-function go(s){S.stage=s;render();}
-function render(){const c=C[S.diff];if(S.stage==='setup'){document.getElementById('app').innerHTML='<div class="setup-screen"><h1>🔥 The Thyroid Storm</h1><p style="color:var(--muted);margin-bottom:32px">Thyroid Storm: Burch-Wartofsky, treatment order, PTU vs MMI, precipitants</p><button class="start-btn" onclick="go(\'pres\')">Begin Case</button></div>';}else if(S.stage==='pres'){document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Presentation</div><div class="card-title">🌡️ Endocrine Emergency</div></div><div class="card-body"><div class="narrative"><span class="hl">'+c.age+'</span> ('+c.wt+')<br><b>Hx:</b> '+c.hx+'<br><b>Exam:</b> '+c.exam+'</div><div class="vitals-grid">'+Object.entries(c.vitals).map(function(e){return'<div class="vital"><div class="vital-label">'+e[0]+'</div><div class="vital-value">'+e[1]+'</div></div>';}).join('')+'</div><div class="lab-grid">'+Object.entries(c.labs).map(function(e){return'<div class="lab-item"><span class="lab-name">'+e[0]+'</span><span class="lab-value">'+e[1]+'</span></div>';}).join('')+'</div><div class="btn-row"><button class="btn btn-primary" onclick="start()">Begin Assessment</button></div></div></div>';}else if(S.stage==='question'){var q=Q[S.q-1];document.getElementById('app').innerHTML='<div class="card"><div class="card-header"><div class="card-phase">Q'+S.q+'/'+S.total+'</div><div class="card-title">'+q.t+'</div></div><div class="card-body"><div class="progress-bar"><div class="progress-fill" style="width:'+(S.q/S.total*100)+'%"></div></div><div class="question-header"><div class="question-number">'+S.q+'</div><div style="font-weight:600">'+q.q+'</div></div><div class="hint">'+q.h+'</div><div class="radio-options">'+q.o.map(function(o){return'<div class="radio-option" data-id="'+o.id+'" onclick="pick(\''+o.id+'\')"><div class="radio-circle"></div><div><b>'+o.txt+'</b></div></div>';}).join('')+'</div><div id="fb"></div><div class="btn-row"><button class="btn btn-primary" id="sub" onclick="submit()" disabled>Submit</button></div></div></div>';}else{var pct=S.max>0?Math.round(S.score/S.max*100):0;document.getElementById('app').innerHTML='<div class="card"><div class="card-body"><div style="text-align:center;padding:40px"><div style="font-size:4rem">'+(pct>=70?'🎉':'📚')+'</div><div style="font-size:2rem;font-weight:700;color:'+(pct>=70?'var(--success)':'var(--warning)')+'">'+(pct>=70?'Complete!':'Review')+'</div></div><div class="score-summary"><div class="score-row"><span>Score</span><span>'+S.score+'/'+S.max+' ('+pct+'%)</span></div></div><div class="pearls-box"><div class="pearls-title">Thyroid Storm Pearls</div><div class="pearl-item"><b>Diagnosis:</b> Burch-Wartofsky >=45 (clinical)</div><div class="pearl-item"><b>Order:</b> BB → PTU → Iodine (1hr later) → Steroids</div><div class="pearl-item"><b>PTU:</b> Also blocks peripheral T4→T3</div><div class="pearl-item"><b>Propranolol:</b> Preferred (blocks conversion too)</div><div class="pearl-item"><b>Find precipitant:</b> Infection most common</div></div><div class="cross-link"><a href="../mechanism/thyroid-module.html">MechanismDx: Thyroid</a></div><div class="btn-row" style="justify-content:center;margin-top:30px"><button class="btn btn-primary" onclick="location.reload()">Retry</button><button class="btn btn-link" onclick="location.href=\'adventure-hub.html\'">Back</button></div></div></div>';}}
-document.addEventListener('DOMContentLoaded',render);
-</script>
+    <header class="header"><div class="header-row"><div class="header-title">🔥 The Racing Heart</div><div class="stat"><div class="stat-value" id="scoreDisplay">0</div><div class="stat-label">Points</div></div></div></header>
+    <main class="main"><div id="stageContainer"></div></main>
+    <script>
+    const state = { stage:'setup', score:0 };
+    
+    function addScore(pts) { state.score += pts; document.getElementById('scoreDisplay').textContent = state.score; }
+
+    const stages = {
+        setup: { render: () => `
+            <div class="setup-screen">
+                <h1>🔥 The Racing Heart</h1>
+                <p class="subtitle">Thyroid storm recognition and management</p>
+                <button class="start-btn" onclick="goTo('presentation')">Begin Case →</button>
+            </div>`
+        },
+        presentation: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Emergency Department</div><div class="card-title">📋 Agitation and Fever</div></div>
+                <div class="card-body">
+                    <div class="narrative">A <span class="hl">42-year-old female</span> with <span class="hl">known Graves' disease</span> (non-compliant with methimazole) presents with <span class="hl">2 days of fever</span>, <span class="hl">agitation</span>, <span class="hl">palpitations</span>, and <span class="hl">diarrhea</span>. She recently had a <span class="hl">dental extraction</span> 3 days ago.<br><br>On exam: <span class="hl">anxious and tremulous</span>, <span class="hl">diffuse goiter</span>, <span class="hl">lid lag</span>, <span class="hl">warm moist skin</span>. Lungs clear but <span class="hl">irregular heart rhythm</span>.<br><br>Vitals: Temp 39.4°C, HR 142 (irregular), BP 158/62, RR 24.</div>
+                    <div class="lab-panel">
+                        <div class="lab-panel-title">Laboratory Results</div>
+                        <div class="lab-grid">
+                            <div class="lab-item"><div class="lab-name">TSH</div><div class="lab-value critical">&lt;0.01 mU/L</div><div class="lab-range">0.4-4.0</div></div>
+                            <div class="lab-item"><div class="lab-name">Free T4</div><div class="lab-value critical">6.8 ng/dL</div><div class="lab-range">0.8-1.8</div></div>
+                            <div class="lab-item"><div class="lab-name">Free T3</div><div class="lab-value critical">18.2 pg/mL</div><div class="lab-range">2.3-4.2</div></div>
+                            <div class="lab-item"><div class="lab-name">AST</div><div class="lab-value high">124 U/L</div><div class="lab-range">10-40</div></div>
+                            <div class="lab-item"><div class="lab-name">Glucose</div><div class="lab-value high">186 mg/dL</div><div class="lab-range">70-100</div></div>
+                            <div class="lab-item"><div class="lab-name">ECG</div><div class="lab-value critical">Afib RVR</div><div class="lab-range">-</div></div>
+                        </div>
+                    </div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="goTo('diagnosis')">Make Diagnosis →</button></div>
+                </div>
+            </div>`
+        },
+        diagnosis: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Diagnosis</div><div class="card-title">🎯 Clinical Recognition</div></div>
+                <div class="card-body">
+                    <div class="burch-box">
+                        <div class="burch-title">Burch-Wartofsky Score (≥45 = Thyroid Storm)</div>
+                        <div class="burch-item"><span>Temperature 39.4°C</span><span>+20</span></div>
+                        <div class="burch-item"><span>Tachycardia 140s + Afib</span><span>+25</span></div>
+                        <div class="burch-item"><span>Moderate agitation</span><span>+10</span></div>
+                        <div class="burch-item"><span>GI: Diarrhea</span><span>+10</span></div>
+                        <div class="burch-item"><span>Precipitating event (infection/procedure)</span><span>+10</span></div>
+                        <div class="burch-item" style="background:rgba(245,158,11,0.2);margin-top:8px;padding:12px;border-radius:8px"><span><strong>Total Score</strong></span><span><strong>75</strong></span></div>
+                    </div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">1</div><div class="question-text">With Burch-Wartofsky score of 75, what is the diagnosis?</div></div>
+                        <div class="radio-options" id="dxOpts">
+                            <div class="radio-option" data-id="uncomplicated" onclick="selectDx('uncomplicated')"><div class="radio-circle"></div><span>Uncomplicated hyperthyroidism</span></div>
+                            <div class="radio-option" data-id="impending" onclick="selectDx('impending')"><div class="radio-circle"></div><span>Impending thyroid storm (score 25-44)</span></div>
+                            <div class="radio-option" data-id="storm" onclick="selectDx('storm')"><div class="radio-circle"></div><span>Thyroid storm (score ≥45)</span></div>
+                        </div>
+                    </div>
+                    <div id="dxFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="dxSubmit" onclick="submitDx()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        treatment: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Treatment</div><div class="card-title">💊 Medication Sequence</div></div>
+                <div class="card-body">
+                    <div class="alert danger"><span class="alert-icon">⚠️</span><div class="alert-content"><div class="alert-title">Critical Sequence</div><div class="alert-desc">The ORDER of medications matters! Giving iodine before thionamide can worsen thyrotoxicosis.</div></div></div>
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">2</div><div class="question-text">What is the correct sequence of thyroid storm treatment?</div></div>
+                        <div class="radio-options" id="seqOpts">
+                            <div class="radio-option" data-id="correct" onclick="selectSeq('correct')"><div class="radio-circle"></div><div><strong>Beta-blocker → Thionamide → Iodine (1 hour later)</strong><br><small style="color:var(--muted)">Block symptoms → Block synthesis → Block release</small></div></div>
+                            <div class="radio-option" data-id="iodine_first" onclick="selectSeq('iodine_first')"><div class="radio-circle"></div><div><strong>Iodine → Thionamide → Beta-blocker</strong><br><small style="color:var(--muted)">Block release first</small></div></div>
+                            <div class="radio-option" data-id="bb_only" onclick="selectSeq('bb_only')"><div class="radio-circle"></div><div><strong>Beta-blocker alone</strong><br><small style="color:var(--muted)">Just control symptoms</small></div></div>
+                            <div class="radio-option" data-id="steroids_first" onclick="selectSeq('steroids_first')"><div class="radio-circle"></div><div><strong>Steroids → Everything else</strong><br><small style="color:var(--muted)">Anti-inflammatory first</small></div></div>
+                        </div>
+                    </div>
+                    <div id="seqFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="seqSubmit" onclick="submitSeq()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        medications: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Medications</div><div class="card-title">💉 Drug Selection</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">3</div><div class="question-text">Which medications are part of thyroid storm treatment?</div></div>
+                        <div class="checkbox-grid" id="medOpts">
+                            <div class="checkbox-item" data-id="ptu" data-correct="true" onclick="toggleMed('ptu')"><div class="checkbox-box"></div><span>PTU (propylthiouracil)</span></div>
+                            <div class="checkbox-item" data-id="propranolol" data-correct="true" onclick="toggleMed('propranolol')"><div class="checkbox-box"></div><span>Propranolol</span></div>
+                            <div class="checkbox-item" data-id="sski" data-correct="true" onclick="toggleMed('sski')"><div class="checkbox-box"></div><span>SSKI/Lugol's iodine</span></div>
+                            <div class="checkbox-item" data-id="hydrocort" data-correct="true" onclick="toggleMed('hydrocort')"><div class="checkbox-box"></div><span>Hydrocortisone</span></div>
+                            <div class="checkbox-item" data-id="levothyrox" data-correct="false" onclick="toggleMed('levothyrox')"><div class="checkbox-box"></div><span>Levothyroxine</span></div>
+                            <div class="checkbox-item" data-id="amiodarone" data-correct="false" onclick="toggleMed('amiodarone')"><div class="checkbox-box"></div><span>Amiodarone first-line</span></div>
+                        </div>
+                    </div>
+                    <div id="medFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" onclick="submitMed()">Submit →</button></div>
+                </div>
+            </div>`
+        },
+        ptu: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Drug Selection</div><div class="card-title">💊 PTU vs Methimazole</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">4</div><div class="question-text">Why is PTU preferred over methimazole in thyroid storm?</div></div>
+                        <div class="radio-options" id="ptuOpts">
+                            <div class="radio-option" data-id="peripheral" onclick="selectPTU('peripheral')"><div class="radio-circle"></div><div><strong>PTU blocks peripheral T4→T3 conversion</strong><br><small style="color:var(--muted)">Additional mechanism beyond blocking synthesis</small></div></div>
+                            <div class="radio-option" data-id="faster" onclick="selectPTU('faster')"><div class="radio-circle"></div><div><strong>PTU works faster</strong><br><small style="color:var(--muted)">Quicker onset of action</small></div></div>
+                            <div class="radio-option" data-id="safer" onclick="selectPTU('safer')"><div class="radio-circle"></div><div><strong>PTU has fewer side effects</strong><br><small style="color:var(--muted)">Better safety profile</small></div></div>
+                            <div class="radio-option" data-id="iv" onclick="selectPTU('iv')"><div class="radio-circle"></div><div><strong>PTU can be given IV</strong><br><small style="color:var(--muted)">Available IV formulation</small></div></div>
+                        </div>
+                    </div>
+                    <div id="ptuFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="ptuSubmit" onclick="submitPTU()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        steroids: { render: () => `
+            <div class="card">
+                <div class="card-header"><div class="card-phase">Steroids</div><div class="card-title">💉 Role of Glucocorticoids</div></div>
+                <div class="card-body">
+                    <div class="question-section">
+                        <div class="question-header"><div class="question-number">5</div><div class="question-text">Why are glucocorticoids given in thyroid storm?</div></div>
+                        <div class="radio-options" id="sterOpts">
+                            <div class="radio-option" data-id="adrenal" onclick="selectSter('adrenal')"><div class="radio-circle"></div><div><strong>Prevent relative adrenal insufficiency + block T4→T3</strong><br><small style="color:var(--muted)">Hypermetabolic state depletes cortisol</small></div></div>
+                            <div class="radio-option" data-id="antiinflam" onclick="selectSter('antiinflam')"><div class="radio-circle"></div><div><strong>Reduce thyroid inflammation</strong><br><small style="color:var(--muted)">Anti-inflammatory effect</small></div></div>
+                            <div class="radio-option" data-id="fever" onclick="selectSter('fever')"><div class="radio-circle"></div><div><strong>Reduce fever</strong><br><small style="color:var(--muted)">Antipyretic effect</small></div></div>
+                        </div>
+                    </div>
+                    <div id="sterFeedback"></div>
+                    <div class="btn-row"><button class="btn btn-primary" id="sterSubmit" onclick="submitSter()" disabled>Submit →</button></div>
+                </div>
+            </div>`
+        },
+        outcome: { render: () => `
+            <div class="card"><div class="card-body">
+                <div class="outcome">
+                    <div class="outcome-icon">🎉</div>
+                    <div class="outcome-title">Patient Stabilized!</div>
+                    <div class="outcome-desc">Patient received propranolol, PTU, SSKI (1 hour after PTU), and hydrocortisone. Her heart rate decreased to 90s, fever resolved, and mental status improved over 48 hours. She was transitioned to methimazole and referred for definitive treatment with radioactive iodine ablation.</div>
+                </div>
+                <div class="score-summary">
+                    <h3 style="margin-bottom:16px">Performance</h3>
+                    <div class="score-row"><span>Diagnosis</span><span>${state.dxScore||0}/100</span></div>
+                    <div class="score-row"><span>Treatment Sequence</span><span>${state.seqScore||0}/100</span></div>
+                    <div class="score-row"><span>Medication Selection</span><span>${state.medScore||0}/100</span></div>
+                    <div class="score-row"><span>PTU Rationale</span><span>${state.ptuScore||0}/100</span></div>
+                    <div class="score-row"><span>Steroid Rationale</span><span>${state.sterScore||0}/100</span></div>
+                    <div class="score-row" style="border-top:2px solid var(--border);padding-top:12px"><strong>Total</strong><strong>${state.score}</strong></div>
+                </div>
+                <div class="feedback excellent"><div class="feedback-header"><span class="feedback-icon">💡</span><span class="feedback-title">Thyroid Storm Pearls</span></div><div class="feedback-text">
+                    • <strong>Burch-Wartofsky:</strong> Score ≥45 = thyroid storm, 25-44 = impending storm<br>
+                    • <strong>Precipitants:</strong> Infection, surgery, trauma, iodine load, medication non-compliance<br>
+                    • <strong>Treatment sequence:</strong> Beta-blocker → Thionamide → Iodine (1h later) → Steroids<br>
+                    • <strong>Why PTU:</strong> Blocks peripheral T4→T3 conversion (methimazole doesn't)<br>
+                    • <strong>Why delay iodine:</strong> Iodine before thionamide provides substrate for MORE hormone synthesis (Jod-Basedow)<br>
+                    • <strong>Steroids:</strong> Block T4→T3 conversion + prevent relative adrenal insufficiency<br>
+                    • <strong>Cooling:</strong> Use acetaminophen, NOT aspirin (aspirin displaces T4 from binding proteins)<br>
+                    • <strong>Mortality:</strong> 10-30% even with treatment; requires ICU-level care
+                </div></div>
+                <div class="btn-row"><button class="btn btn-primary" onclick="location.reload()">Play Again</button></div>
+            </div></div>`
+        }
+    };
+
+    let selectedDx = null;
+    function selectDx(id) { selectedDx = id; document.querySelectorAll('#dxOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('dxSubmit').disabled = false; }
+    function submitDx() {
+        document.querySelectorAll('#dxOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'storm') o.classList.add('correct');
+            else if (o.dataset.id === selectedDx) o.classList.add('incorrect');
+        });
+        state.dxScore = selectedDx === 'storm' ? 100 : 40;
+        addScore(selectedDx === 'storm' ? 40 : 15);
+        document.getElementById('dxFeedback').innerHTML = `<div class="feedback ${selectedDx==='storm'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedDx==='storm'?'✅':'📚'}</span><span class="feedback-title">${selectedDx==='storm'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Burch-Wartofsky ≥45 = Thyroid Storm.</strong> This patient scores 75. Note: This is a clinical diagnosis - thyroid hormone levels don't differentiate storm from uncomplicated hyperthyroidism!</div></div>`;
+        document.getElementById('dxSubmit').textContent = 'Continue →';
+        document.getElementById('dxSubmit').onclick = () => goTo('treatment');
+    }
+
+    let selectedSeq = null;
+    function selectSeq(id) { selectedSeq = id; document.querySelectorAll('#seqOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('seqSubmit').disabled = false; }
+    function submitSeq() {
+        document.querySelectorAll('#seqOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'correct') o.classList.add('correct');
+            else if (o.dataset.id === selectedSeq) o.classList.add('incorrect');
+        });
+        state.seqScore = selectedSeq === 'correct' ? 100 : 30;
+        addScore(selectedSeq === 'correct' ? 40 : 10);
+        document.getElementById('seqFeedback').innerHTML = `<div class="feedback ${selectedSeq==='correct'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedSeq==='correct'?'✅':'📚'}</span><span class="feedback-title">${selectedSeq==='correct'?'Correct!':'Critical Point'}</span></div><div class="feedback-text"><strong>Sequence matters!</strong> Beta-blocker (symptoms) → Thionamide (block synthesis) → Iodine 1 HOUR LATER (block release). Giving iodine before thionamide provides substrate for more hormone synthesis!</div></div>`;
+        document.getElementById('seqSubmit').textContent = 'Continue →';
+        document.getElementById('seqSubmit').onclick = () => goTo('medications');
+    }
+
+    let selectedMed = new Set();
+    function toggleMed(id) {
+        const el = document.querySelector(`#medOpts .checkbox-item[data-id="${id}"]`);
+        if(selectedMed.has(id)) { selectedMed.delete(id); el.classList.remove('selected'); }
+        else { selectedMed.add(id); el.classList.add('selected'); }
+    }
+    function submitMed() {
+        let correct = 0;
+        const items = [{id:'ptu',c:true},{id:'propranolol',c:true},{id:'sski',c:true},{id:'hydrocort',c:true},{id:'levothyrox',c:false},{id:'amiodarone',c:false}];
+        items.forEach(i => {
+            const el = document.querySelector(`#medOpts .checkbox-item[data-id="${i.id}"]`);
+            const sel = selectedMed.has(i.id);
+            if (i.c && sel) { el.classList.add('correct'); correct++; }
+            else if (!i.c && sel) { el.classList.add('incorrect'); }
+        });
+        state.medScore = Math.round(correct / 4 * 100);
+        addScore(Math.round(state.medScore / 2.5));
+        document.getElementById('medFeedback').innerHTML = `<div class="feedback ${state.medScore>=75?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${state.medScore>=75?'✅':'📚'}</span><span class="feedback-title">Thyroid Storm Medications</span></div><div class="feedback-text"><strong>Core treatment:</strong> PTU (or methimazole), beta-blocker (propranolol preferred - also blocks T4→T3), iodine (SSKI/Lugol's), glucocorticoids<br><strong>NOT used:</strong> Levothyroxine (worsens!), Amiodarone is not first-line (contains iodine, complex effects)</div></div>`;
+        document.querySelector('#medFeedback').closest('.card-body').querySelector('.btn-row').innerHTML = `<button class="btn btn-primary" onclick="goTo('ptu')">Learn PTU Rationale →</button>`;
+    }
+
+    let selectedPTU = null;
+    function selectPTU(id) { selectedPTU = id; document.querySelectorAll('#ptuOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('ptuSubmit').disabled = false; }
+    function submitPTU() {
+        document.querySelectorAll('#ptuOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'peripheral') o.classList.add('correct');
+            else if (o.dataset.id === selectedPTU) o.classList.add('incorrect');
+        });
+        state.ptuScore = selectedPTU === 'peripheral' ? 100 : 40;
+        addScore(selectedPTU === 'peripheral' ? 40 : 15);
+        document.getElementById('ptuFeedback').innerHTML = `<div class="feedback ${selectedPTU==='peripheral'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedPTU==='peripheral'?'✅':'📚'}</span><span class="feedback-title">${selectedPTU==='peripheral'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>PTU blocks peripheral T4→T3 conversion</strong> (type 1 deiodinase) in addition to blocking thyroid hormone synthesis. Methimazole only blocks synthesis. This makes PTU preferred in thyroid storm (though higher hepatotoxicity risk).</div></div>`;
+        document.getElementById('ptuSubmit').textContent = 'Continue →';
+        document.getElementById('ptuSubmit').onclick = () => goTo('steroids');
+    }
+
+    let selectedSter = null;
+    function selectSter(id) { selectedSter = id; document.querySelectorAll('#sterOpts .radio-option').forEach(o=>o.classList.toggle('selected',o.dataset.id===id)); document.getElementById('sterSubmit').disabled = false; }
+    function submitSter() {
+        document.querySelectorAll('#sterOpts .radio-option').forEach(o => {
+            if (o.dataset.id === 'adrenal') o.classList.add('correct');
+            else if (o.dataset.id === selectedSter) o.classList.add('incorrect');
+        });
+        state.sterScore = selectedSter === 'adrenal' ? 100 : 40;
+        addScore(selectedSter === 'adrenal' ? 40 : 15);
+        document.getElementById('sterFeedback').innerHTML = `<div class="feedback ${selectedSter==='adrenal'?'excellent':'acceptable'}"><div class="feedback-header"><span class="feedback-icon">${selectedSter==='adrenal'?'✅':'📚'}</span><span class="feedback-title">${selectedSter==='adrenal'?'Correct!':'Review'}</span></div><div class="feedback-text"><strong>Glucocorticoids serve dual purpose:</strong> (1) Prevent relative adrenal insufficiency from hypermetabolic state, (2) Block peripheral T4→T3 conversion. Use hydrocortisone 100mg q8h or dexamethasone 2mg q6h.</div></div>`;
+        document.getElementById('sterSubmit').textContent = 'Complete →';
+        document.getElementById('sterSubmit').onclick = () => goTo('outcome');
+    }
+
+    function goTo(id) { state.stage = id; document.getElementById('stageContainer').innerHTML = stages[id].render(); window.scrollTo(0,0); }
+    document.addEventListener('DOMContentLoaded', () => goTo('setup'));
+    </script>
 </body>
 </html>
