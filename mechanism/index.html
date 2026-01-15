@@ -3,666 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MechanismDx | Pathophysiology Mastery</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>MechanismDx - Pathophysiology Modules</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg-main); color: var(--text-primary); line-height: 1.6; }
-        
-        .dx-nav { background: var(--bg-card); padding: 12px 24px; border-bottom: 1px solid var(--border); }
-        .dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-        .dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-primary); font-weight: 600; }
-        .dx-nav-links { display: flex; gap: 8px; flex-wrap: wrap; }
-        .dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--text-secondary); font-size: 13px; transition: all 0.15s; }
-        .dx-nav-link:hover { background: var(--border-light); color: var(--text-primary); }
-        .dx-nav-link.active { background: var(--primary); color: #fff; }
-        
-        .logo-header { background: var(--bg-card); padding: 40px 24px; text-align: center; border-bottom: 1px solid var(--border); }
-        .logo-header svg { height: 70px; width: auto; }
-        .tagline { margin-top: 8px; font-family: Georgia, serif; font-size: 17px; font-style: italic; color: var(--text-secondary); }
-        
-        .hero { background: linear-gradient(135deg, var(--primary-bg) 0%, #d1fae5 50%, #fff 100%); padding: 48px 24px; text-align: center; border-bottom: 1px solid var(--border); }
-        .hero h1 { font-size: 36px; font-weight: 700; margin-bottom: 16px; color: var(--text-primary); }
-        .hero h1 span { color: var(--primary); }
-        .hero p { font-size: 16px; color: var(--text-secondary); max-width: 600px; margin: 0 auto 32px; }
-        .hero-stats { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; }
-        .stat { text-align: center; }
-        .stat-num { font-size: 32px; font-weight: 700; color: var(--primary); }
-        .stat-label { font-size: 14px; color: var(--text-secondary); }
-        
-        .main { max-width: 1200px; margin: 0 auto; padding: 48px 24px; }
-        
-        .category-section { margin-bottom: 48px; }
-        .category-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--border); }
-        .category-icon { font-size: 24px; }
-        .category-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
-        .category-count { background: #e2e8f0; color: var(--text-secondary); padding: 2px 10px; border-radius: 12px; font-size: 12px; }
-        
-        .module-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-        .module-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; transition: all 0.2s; text-decoration: none; color: inherit; display: block; }
-        .module-card:hover { border-color: var(--primary); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1); transform: translateY(-2px); }
-        .module-icon { font-size: 32px; margin-bottom: 12px; }
-        .module-title { font-size: 16px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; }
-        .module-desc { font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; line-height: 1.5; }
-        .module-meta { display: flex; gap: 16px; font-size: 12px; color: var(--text-muted); }
-        
-        .tools-section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 48px; }
-        .section-title { font-size: 20px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; }
-        .section-subtitle { font-size: 14px; color: var(--text-secondary); margin-bottom: 20px; }
-        .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; }
-        .tool-card { background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; padding: 16px; text-align: center; text-decoration: none; color: inherit; transition: all 0.2s; }
-        .tool-card:hover { background: var(--primary-bg); border-color: #86efac; }
-        .tool-icon { font-size: 28px; margin-bottom: 8px; }
-        .tool-name { font-size: 14px; font-weight: 500; color: var(--text-primary); }
-        
-        .footer { border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; color: var(--text-secondary); font-size: 13px; background: var(--bg-card); }
-        .footer a { color: var(--primary); text-decoration: none; }
-        .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; }
-        
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 28px; }
-            .hero-stats { gap: 24px; }
-            .module-grid { grid-template-columns: 1fr; }
-        }
-    
-
-/* ============= DX SUITE THEME SYSTEM - 12 THEMES ============= */
-:root {
-    --primary: #10b981;
-    --primary-light: #6ee7b7;
-    --primary-dark: #059669;
-    --primary-bg: #ecfdf5;
-    --text-primary: #1e293b;
-    --text-secondary: #64748b;
-    --text-muted: #94a3b8;
-    --bg-main: #f8fafc;
-    --bg-card: #ffffff;
-    --bg-nav: #ffffff;
-    --border: #e2e8f0;
-    --border-light: #f1f5f9;
-    --nav-text: #1e293b;
-    --nav-link: #64748b;
-    --nav-active-bg: #10b981;
-    --nav-active-text: #ffffff;
-    --shadow: 0 1px 3px rgba(0,0,0,0.1);
-    --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
-    --radius: 12px;
-    --transition: all 0.2s ease;
-}
-
-[data-theme="muted-teal"] {
-    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
-    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7fafa; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #d5e5e3; --nav-text: #1e293b; --nav-link: #64748b;
-    --nav-active-bg: #10b981; --nav-active-text: #ffffff;
-}
-
-[data-theme="deeper-teal"] {
-    --primary: #3d857a; --primary-light: #5a9f92; --primary-dark: #2d6359; --primary-bg: #dceae7;
-    --text-primary: #1a2f2a; --text-secondary: #5a6b65; --bg-main: #f5f9f8; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #c5d9d5; --nav-text: #1a2f2a; --nav-link: #5a6b65;
-    --nav-active-bg: #3d857a; --nav-active-text: #ffffff;
-}
-
-[data-theme="eucalyptus"] {
-    --primary: #5b9b7a; --primary-light: #7ab894; --primary-dark: #4a7d62; --primary-bg: #e4ede8;
-    --text-primary: #2a3830; --text-secondary: #5f7568; --bg-main: #f6f9f7; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #d0ddd6; --nav-text: #2a3830; --nav-link: #5f7568;
-    --nav-active-bg: #5b9b7a; --nav-active-text: #ffffff;
-}
-
-[data-theme="teal-cream"] {
-    --primary: #4a9a8e; --primary-light: #6abfb0; --primary-dark: #3d857a; --primary-bg: #f0ebe3;
-    --text-primary: #2d2a25; --text-secondary: #7a756a; --bg-main: #fdfcf9; --bg-card: #ffffff;
-    --bg-nav: #fdfcf9; --border: #e8e4dc; --nav-text: #2d2a25; --nav-link: #7a756a;
-    --nav-active-bg: #4a9a8e; --nav-active-text: #ffffff;
-}
-
-[data-theme="steel-blue"] {
-    --primary: #5a8aa8; --primary-light: #7aa5c0; --primary-dark: #4a7290; --primary-bg: #e8eff5;
-    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f7f9fb; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #d5dfe8; --nav-text: #1e293b; --nav-link: #64748b;
-    --nav-active-bg: #5a8aa8; --nav-active-text: #ffffff;
-}
-
-[data-theme="muted-sage"] {
-    --primary: #6a9a6a; --primary-light: #8ab88a; --primary-dark: #5a805a; --primary-bg: #e8f0e8;
-    --text-primary: #2f3e36; --text-secondary: #5a6b5e; --bg-main: #f8faf8; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #dce5dc; --nav-text: #2f3e36; --nav-link: #5a6b5e;
-    --nav-active-bg: #6a9a6a; --nav-active-text: #ffffff;
-}
-
-[data-theme="muted-lavender"] {
-    --primary: #8a7aa8; --primary-light: #a595c0; --primary-dark: #7a6a98; --primary-bg: #f0ecf5;
-    --text-primary: #2e2a3b; --text-secondary: #6b6780; --bg-main: #f9f8fb; --bg-card: #ffffff;
-    --bg-nav: #ffffff; --border: #e0dce8; --nav-text: #2e2a3b; --nav-link: #6b6780;
-    --nav-active-bg: #8a7aa8; --nav-active-text: #ffffff;
-}
-
-[data-theme="slate-teal"] {
-    --primary: #4a9a8e; --primary-light: #5eead4; --primary-dark: #3d857a; --primary-bg: #e8f2f0;
-    --text-primary: #1e293b; --text-secondary: #64748b; --bg-main: #f8fafc; --bg-card: #ffffff;
-    --bg-nav: #334155; --border: #e2e8f0; --nav-text: #ffffff; --nav-link: #94a3b8;
-    --nav-active-bg: #5eead4; --nav-active-text: #1e293b;
-}
-
-[data-theme="ocean-dark"] {
-    --primary: #38bdf8; --primary-light: #7dd3fc; --primary-dark: #0284c7; --primary-bg: #1e3a5f;
-    --text-primary: #f1f5f9; --text-secondary: #94a3b8; --bg-main: #0f172a; --bg-card: #1e293b;
-    --bg-nav: #0f172a; --border: #334155; --nav-text: #ffffff; --nav-link: #94a3b8;
-    --nav-active-bg: #38bdf8; --nav-active-text: #0f172a;
-}
-
-[data-theme="midnight-teal"] {
-    --primary: #5eead4; --primary-light: #99f6e4; --primary-dark: #2dd4bf; --primary-bg: #134e4a;
-    --text-primary: #f0fdfa; --text-secondary: #99f6e4; --bg-main: #042f2e; --bg-card: #0d3d3b;
-    --bg-nav: #022c22; --border: #115e59; --nav-text: #f0fdfa; --nav-link: #5eead4;
-    --nav-active-bg: #5eead4; --nav-active-text: #042f2e;
-}
-
-[data-theme="purple-night"] {
-    --primary: #a78bfa; --primary-light: #c4b5fd; --primary-dark: #8b5cf6; --primary-bg: #3b2f63;
-    --text-primary: #f5f3ff; --text-secondary: #c4b5fd; --bg-main: #1e1b2e; --bg-card: #2d2848;
-    --bg-nav: #1a1625; --border: #4c4270; --nav-text: #f5f3ff; --nav-link: #a78bfa;
-    --nav-active-bg: #a78bfa; --nav-active-text: #1e1b2e;
-}
-
-[data-theme="forest-night"] {
-    --primary: #86efac; --primary-light: #bbf7d0; --primary-dark: #4ade80; --primary-bg: #14532d;
-    --text-primary: #f0fdf4; --text-secondary: #86efac; --bg-main: #052e16; --bg-card: #14532d;
-    --bg-nav: #022c22; --border: #166534; --nav-text: #f0fdf4; --nav-link: #86efac;
-    --nav-active-bg: #86efac; --nav-active-text: #052e16;
-}
-
-/* Unified Navigation */
-.dx-nav { background: var(--bg-nav); padding: 12px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; transition: var(--transition); }
-.dx-nav-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-.dx-nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--nav-text); font-weight: 600; }
-.dx-nav-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
-.dx-nav-link { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: var(--nav-link); font-size: 14px; transition: var(--transition); }
-.dx-nav-link:hover { background: var(--primary-bg); color: var(--text-primary); }
-.dx-nav-link.active { background: var(--nav-active-bg); color: var(--nav-active-text); }
-.dx-theme-btn { padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; font-size: 14px; transition: var(--transition); }
-.dx-theme-btn:hover { border-color: var(--primary); color: var(--primary); }
-
-/* Theme Modal */
-.dx-theme-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
-.dx-theme-modal.open { display: flex; }
-.dx-theme-modal-content { background: var(--bg-card); border-radius: 16px; padding: 24px; max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
-.dx-theme-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-.dx-theme-modal-title { font-size: 18px; font-weight: 600; color: var(--text-primary); }
-.dx-theme-modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-secondary); }
-.dx-theme-section { margin-bottom: 20px; }
-.dx-theme-section-title { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; }
-.dx-theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
-.dx-theme-option { padding: 10px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: var(--transition); background: var(--bg-card); }
-.dx-theme-option:hover { border-color: var(--primary); }
-.dx-theme-option.active { border-color: var(--primary); background: var(--primary-bg); }
-.dx-theme-preview { height: 28px; border-radius: 6px; margin-bottom: 6px; display: flex; overflow: hidden; }
-.dx-theme-preview-nav { width: 30%; }
-.dx-theme-preview-main { width: 70%; }
-.dx-theme-name { font-size: 11px; font-weight: 500; color: var(--text-primary); }
-.dx-theme-badge { display: inline-block; background: var(--primary); color: white; padding: 1px 5px; border-radius: 4px; font-size: 9px; margin-left: 3px; }
-
-/* Body theming */
-body { background: var(--bg-main); color: var(--text-primary); transition: background 0.3s, color 0.3s; }
-
-@media (max-width: 768px) {
-    .dx-nav-inner { flex-direction: column; gap: 12px; }
-    .dx-theme-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
+        .gradient-bg { background: linear-gradient(135deg, #0d9488 0%, #0891b2 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.15); }
+        .stat-card { background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%); }
     </style>
 </head>
-<body>
-
-    <!-- UNIFIED DX NAVIGATION -->
-    <nav class="dx-nav">
-        <div class="dx-nav-inner">
-            <a href="../index.html" class="dx-nav-brand">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" style="height: 36px;">
-    <text x="10" y="52" font-family="Georgia, serif" font-size="40" fill="#10b981">D</text>
-    <line x1="38" y1="30" x2="52" y2="46" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
-    <ellipse cx="36.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(-28 36.5 27.5)" fill="#10b981"/>
-    <path d="M 52 30 L 44 39 Q 40 44 40 50 Q 40 56 44 59 Q 48 62 48 67" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
-    <ellipse cx="53.5" cy="27.5" rx="1.8" ry="2.8" transform="rotate(28 53.5 27.5)" fill="#10b981"/>
-    <circle cx="48" cy="67" r="5" fill="none" stroke="#10b981" stroke-width="1.8"/>
-    <circle cx="48" cy="67" r="2.5" fill="#10b981"/>
-    <text x="68" y="52" font-family="Georgia, serif" font-size="40" fill="currentColor" letter-spacing="-1">Suite</text>
-</svg>
-            </a>
-            <div class="dx-nav-links">
-                <a href="../index.html" class="dx-nav-link ">🏠 Home</a>
-                <a href="../mechanism/index.html" class="dx-nav-link active">⚙️ MechanismDx</a>
-                <a href="../ReasonDx/training.html" class="dx-nav-link ">🔬 ReasonDx</a>
-                <a href="../CoachDx/case-library.html" class="dx-nav-link ">🧠 CoachDx</a>
-                <a href="../reference-library.html" class="dx-nav-link ">📚 References</a>
-                <a href="../dx-dashboard.html" class="dx-nav-link ">📊 Dashboard</a>
-                <button class="dx-theme-btn" onclick="openDxThemeModal()">🎨</button>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Unified Navigation -->
-    <header class="logo-header">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 90" style="height: 55px;">
-    <text x="10" y="58" font-family="Georgia, serif" font-size="46" fill="#1a1a1a" letter-spacing="-1">Mechanism</text>
-    <text x="265" y="58" font-family="Georgia, serif" font-size="46" fill="#10b981">D</text>
-    <line x1="298" y1="34" x2="314" y2="54" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
-    <ellipse cx="296.5" cy="31.5" rx="2" ry="3" transform="rotate(-28 296.5 31.5)" fill="#10b981"/>
-    <path d="M 314 34 L 304 45 Q 300 50 300 57 Q 300 64 305 68 Q 310 72 310 78" stroke="#10b981" stroke-width="3" stroke-linecap="round" fill="none"/>
-    <ellipse cx="315.5" cy="31.5" rx="2" ry="3" transform="rotate(28 315.5 31.5)" fill="#10b981"/>
-    <circle cx="310" cy="78" r="6" fill="none" stroke="#10b981" stroke-width="2"/>
-    <circle cx="310" cy="78" r="3" fill="#10b981"/>
-</svg>
-        <div class="tagline">Understanding why makes the difference.</div>
-    </header>
-    
-    
-    
-    <main class="main">
-        <!-- Critical Care -->
-        <div class="category-section">
-            <div class="category-header">
-                <span class="category-icon">🚨</span>
-                <span class="category-title">Critical Care</span>
-                <span class="category-count">2 modules</span>
-            </div>
-            <div class="module-grid">
-                <a href="sepsis-shock-module.html" class="module-card">
-                    <div class="module-icon">🚨</div>
-                    <div class="module-title">Sepsis & Shock</div>
-                    <div class="module-desc">Sepsis-3, Hour-1 bundle, vasopressors, lactate physiology, resuscitation targets.</div>
-                    <div class="module-meta"><span>📚 18 concepts</span><span>❓ 15 MCQs</span></div>
-                </a>
-            </div>
-        </div>
-        
-        <!-- Cardiovascular -->
-        <div class="category-section">
-            <div class="category-header">
-                <span class="category-icon">❤️</span>
-                <span class="category-title">Cardiovascular</span>
-                <span class="category-count">5 modules</span>
-            </div>
-            <div class="module-grid">
-                <a href="acs-module.html" class="module-card">
-                    <div class="module-icon">🫀</div>
-                    <div class="module-title">Acute Coronary Syndrome</div>
-                    <div class="module-desc">STEMI vs NSTEMI, troponins, reperfusion, risk stratification.</div>
-                    <div class="module-meta"><span>📚 20 concepts</span><span>❓ 15 MCQs</span></div>
-                </a>
-                <a href="hf-module.html" class="module-card">
-                    <div class="module-icon">💔</div>
-                    <div class="module-title">Heart Failure</div>
-                    <div class="module-desc">HFrEF vs HFpEF, hemodynamics, GDMT, volume assessment.</div>
-                    <div class="module-meta"><span>📚 16 concepts</span><span>❓ 12 MCQs</span></div>
-                </a>
-                <a href="vte-module.html" class="module-card">
-                    <div class="module-icon">🩸</div>
-                    <div class="module-title">VTE & Pulmonary Embolism</div>
-                    <div class="module-desc">Virchow's triad, Wells criteria, anticoagulation selection.</div>
-                    <div class="module-meta"><span>📚 14 concepts</span><span>❓ 12 MCQs</span></div>
-                </a>
-                <a href="syncope-arrhythmia-module.html" class="module-card">
-                    <div class="module-icon">⚡</div>
-                    <div class="module-title">Syncope & Arrhythmias</div>
-                    <div class="module-desc">Risk stratification, ECG interpretation, management algorithms.</div>
-                    <div class="module-meta"><span>📚 12 concepts</span><span>❓ 10 MCQs</span></div>
-                </a>
-            </div>
-        </div>
-        
-        <!-- Pulmonary -->
-        <div class="category-section">
-            <div class="category-header">
-                <span class="category-icon">🫁</span>
-                <span class="category-title">Pulmonary</span>
-                <span class="category-count">4 modules</span>
-            </div>
-            <div class="module-grid">
-                <a href="obstructive-lung-module.html" class="module-card">
-                    <div class="module-icon">💨</div>
-                    <div class="module-title">Obstructive Lung Disease</div>
-                    <div class="module-desc">COPD vs Asthma, spirometry, inhaler selection.</div>
-                    <div class="module-meta"><span>📚 14 concepts</span><span>❓ 12 MCQs</span></div>
-                </a>
-                <a href="pneumonia-module.html" class="module-card">
-                    <div class="module-icon">🦠</div>
-                    <div class="module-title">Pneumonia</div>
-                    <div class="module-desc">CAP, HAP, CURB-65, antibiotic selection.</div>
-                    <div class="module-meta"><span>📚 16 concepts</span><span>❓ 14 MCQs</span></div>
-                </a>
-                <a href="respiratory-pft-module.html" class="module-card">
-                    <div class="module-icon">📊</div>
-                    <div class="module-title">PFT Interpretation</div>
-                    <div class="module-desc">Spirometry patterns, flow-volume loops, DLCO.</div>
-                    <div class="module-meta"><span>🛠️ Interactive tool</span></div>
-                </a>
-            </div>
-        </div>
-        
-        <!-- Renal -->
-        <div class="category-section">
-            <div class="category-header">
-                <span class="category-icon">🫘</span>
-                <span class="category-title">Renal & Electrolytes</span>
-                <span class="category-count">5 modules</span>
-            </div>
-            <div class="module-grid">
-                <a href="aki-module.html" class="module-card">
-                    <div class="module-icon">💧</div>
-                    <div class="module-title">Acute Kidney Injury</div>
-                    <div class="module-desc">Pre-renal vs intrinsic vs post-renal, FENa, urinalysis.</div>
-                    <div class="module-meta"><span>📚 12 concepts</span><span>❓ 10 MCQs</span></div>
-                </a>
-                <a href="hyponatremia-module.html" class="module-card">
-                    <div class="module-icon">🧂</div>
-                    <div class="module-title">Hyponatremia</div>
-                    <div class="module-desc">Osmolality approach, SIADH, safe correction rates.</div>
-                    <div class="module-meta"><span>📚 10 concepts</span><span>❓ 8 MCQs</span></div>
-                </a>
-                <a href="potassium-module.html" class="module-card">
-                    <div class="module-icon">⚡</div>
-                    <div class="module-title">Potassium Disorders</div>
-                    <div class="module-desc">ECG changes, emergency management, magnesium connection.</div>
-                    <div class="module-meta"><span>📚 14 concepts</span><span>❓ 12 MCQs</span></div>
-                </a>
-                <a href="acid-base-module.html" class="module-card">
-                    <div class="module-icon">⚗️</div>
-                    <div class="module-title">Acid-Base Disorders</div>
-                    <div class="module-desc">5-step ABG interpretation, anion gap, Winter's formula.</div>
-                    <div class="module-meta"><span>📚 12 concepts</span><span>❓ 8 MCQs</span></div>
-                </a>
-            </div>
-        </div>
-        
-        <!-- Neurology -->
-        <div class="category-section">
-            <div class="category-header">
-                <span class="category-icon">🧠</span>
-                <span class="category-title">Neurology</span>
-                <span class="category-count">2 modules</span>
-            </div>
-            <div class="module-grid">
-                <a href="stroke-module.html" class="module-card">
-                    <div class="module-icon">⚡</div>
-                    <div class="module-title">Stroke</div>
-                    <div class="module-desc">Ischemic vs hemorrhagic, tPA window, thrombectomy criteria.</div>
-                    <div class="module-meta"><span>📚 14 concepts</span><span>❓ 12 MCQs</span></div>
-                </a>
-            </div>
-        </div>
-        
-        <!-- Endocrine -->
-        <div class="category-section">
-            <div class="category-header">
-                <span class="category-icon">🦋</span>
-                <span class="category-title">Endocrine</span>
-                <span class="category-count">3 modules</span>
-            </div>
-            <div class="module-grid">
-                <a href="diabetes-dka-module.html" class="module-card">
-                    <div class="module-icon">🍬</div>
-                    <div class="module-title">Diabetes & DKA</div>
-                    <div class="module-desc">DKA vs HHS, anion gap closure, insulin protocols.</div>
-                    <div class="module-meta"><span>📚 14 concepts</span><span>❓ 12 MCQs</span></div>
-                </a>
-                <a href="thyroid-module.html" class="module-card">
-                    <div class="module-icon">🦋</div>
-                    <div class="module-title">Thyroid Disorders</div>
-                    <div class="module-desc">HPT axis, Graves vs Hashimoto, thyroid storm.</div>
-                    <div class="module-meta"><span>📚 10 concepts</span><span>❓ 8 MCQs</span></div>
-                </a>
-            </div>
-        </div>
-        
-        <!-- GI -->
-        <div class="category-section">
-            <div class="category-header">
-                <span class="category-icon">🩺</span>
-                <span class="category-title">GI & Hepatology</span>
-                <span class="category-count">3 modules</span>
-            </div>
-            <div class="module-grid">
-                <a href="gi-bleeding-module.html" class="module-card">
-                    <div class="module-icon">🩸</div>
-                    <div class="module-title">GI Bleeding</div>
-                    <div class="module-desc">Upper vs lower, risk scores, PPI timing, varices.</div>
-                    <div class="module-meta"><span>📚 12 concepts</span><span>❓ 10 MCQs</span></div>
-                </a>
-                <a href="liver-cirrhosis-module.html" class="module-card">
-                    <div class="module-icon">🫁</div>
-                    <div class="module-title">Liver & Cirrhosis</div>
-                    <div class="module-desc">Portal hypertension, ascites, hepatic encephalopathy.</div>
-                    <div class="module-meta"><span>📚 16 concepts</span><span>❓ 12 MCQs</span></div>
-                </a>
-                <a href="acute-abdomen-module.html" class="module-card">
-                    <div class="module-icon">🤕</div>
-                    <div class="module-title">Acute Abdomen</div>
-                    <div class="module-desc">Appendicitis, cholecystitis, pancreatitis, obstruction.</div>
-                    <div class="module-meta"><span>📚 Surgical focus</span></div>
-                </a>
-            </div>
-        </div>
-        
-        <!-- Hematology -->
-        <div class="category-section">
-            <div class="category-header">
-                <span class="category-icon">🔴</span>
-                <span class="category-title">Hematology</span>
-                <span class="category-count">1 module</span>
-            </div>
-            <div class="module-grid">
-                <a href="anemia-module.html" class="module-card">
-                    <div class="module-icon">🔴</div>
-                    <div class="module-title">Anemia</div>
-                    <div class="module-desc">MCV-based approach, iron studies, hemolysis workup.</div>
-                    <div class="module-meta"><span>📚 10 concepts</span><span>❓ 8 MCQs</span></div>
-                </a>
-            </div>
-        </div>
-        
-        <!-- Allergy & Immunology -->
-        <div class="category-section">
-            <div class="category-header">
-                <span class="category-icon">🧬</span>
-                <span class="category-title">Allergy & Immunology</span>
-                <span class="category-count">8 modules</span>
-            </div>
-            <div class="module-grid">
-                <a href="anaphylaxis-module.html" class="module-card">
-                    <div class="module-icon">⚠️</div>
-                    <div class="module-title">Anaphylaxis</div>
-                    <div class="module-desc">Recognition, epinephrine dosing, biphasic reactions, tryptase.</div>
-                    <div class="module-meta"><span>📚 15 concepts</span><span>❓ 12 MCQs</span></div>
-                </a>
-                <a href="allergy-testing-module.html" class="module-card">
-                    <div class="module-icon">🔬</div>
-                    <div class="module-title">Allergy Testing</div>
-                    <div class="module-desc">SPT vs sIgE, component testing, interpretation pearls.</div>
-                    <div class="module-meta"><span>📚 12 concepts</span><span>❓ 10 MCQs</span></div>
-                </a>
-                <a href="food-allergy-management.html" class="module-card">
-                    <div class="module-icon">🥜</div>
-                    <div class="module-title">Food Allergy</div>
-                    <div class="module-desc">Diagnosis, avoidance, OIT, labeling laws.</div>
-                    <div class="module-meta"><span>📚 Patient-focused</span></div>
-                </a>
-                <a href="mast-cell-module.html" class="module-card">
-                    <div class="module-icon">🧫</div>
-                    <div class="module-title">Mast Cell Biology</div>
-                    <div class="module-desc">Mediators, mastocytosis, MCAS.</div>
-                    <div class="module-meta"><span>📚 10 concepts</span></div>
-                </a>
-                <a href="epinephrine-module.html" class="module-card">
-                    <div class="module-icon">💉</div>
-                    <div class="module-title">Epinephrine</div>
-                    <div class="module-desc">Mechanism, devices, dosing, barriers to use.</div>
-                    <div class="module-meta"><span>📚 Critical knowledge</span></div>
-                </a>
-                <a href="immunotherapy-module.html" class="module-card">
-                    <div class="module-icon">💊</div>
-                    <div class="module-title">Allergen Immunotherapy</div>
-                    <div class="module-desc">SCIT, SLIT, build-up protocols, reactions.</div>
-                    <div class="module-meta"><span>📚 14 concepts</span></div>
-                </a>
-                <a href="ivig-scig-module.html" class="module-card">
-                    <div class="module-icon">💧</div>
-                    <div class="module-title">IVIG & SCIG</div>
-                    <div class="module-desc">Immunoglobulin replacement, indications, reactions.</div>
-                    <div class="module-meta"><span>📚 Specialty focus</span></div>
-                </a>
-            </div>
-        </div>
-        
-        <!-- Tools -->
-        <div class="tools-section">
-            <h2 class="section-title">🛠️ Platform Tools</h2>
-            <p class="section-subtitle">Cross-platform integration with the Dx Learning Ecosystem</p>
-            <div class="tools-grid">
-                <a href="../ReasonDx/training.html" class="tool-card">
-                    <div class="tool-icon">🏥</div>
-                    <div class="tool-name">ReasonDx Cases</div>
-                </a>
-                <a href="../CoachDx/coachdx-dashboard.html" class="tool-card">
-                    <div class="tool-icon">💬</div>
-                    <div class="tool-name">CoachDx AI</div>
-                </a>
-                <a href="../knowledge-web-navigator.html" class="tool-card">
-                    <div class="tool-icon">🕸️</div>
-                    <div class="tool-name">Knowledge Web</div>
-                </a>
-                <a href="../unified-scoreboard.html" class="tool-card">
-                    <div class="tool-icon">📊</div>
-                    <div class="tool-name">Scoreboard</div>
-                </a>
-                <a href="abg-analyzer.html" class="tool-card">
-                    <div class="tool-icon">🧪</div>
-                    <div class="tool-name">ABG Analyzer</div>
-                </a>
-                <a href="challenges.html" class="tool-card">
-                    <div class="tool-icon">🎯</div>
-                    <div class="tool-name">Challenges</div>
-                </a>
-            </div>
-        </div>
-    </main>
-    
-    <footer class="footer">
-        <div class="footer-links">
-            <a href="../ReasonDx/training.html">ReasonDx</a>
-            <a href="../CoachDx/coachdx-dashboard.html">CoachDx</a>
-            <a href="../knowledge-web-navigator.html">Knowledge Web</a>
-        </div>
-        <p>© 2025-2026 MechanismDx · Part of the <a href="../index.html">Dx Learning Ecosystem</a></p>
-        
-    </footer>
-    <!-- THEME PICKER MODAL -->
-    <div class="dx-theme-modal" id="dxThemeModal">
-        <div class="dx-theme-modal-content">
-            <div class="dx-theme-modal-header">
-                <h3 class="dx-theme-modal-title">🎨 Choose Theme</h3>
-                <button class="dx-theme-modal-close" onclick="closeDxThemeModal()">×</button>
-            </div>
-            <div class="dx-theme-section">
-                <div class="dx-theme-section-title">Light Themes</div>
-                <div class="dx-theme-grid">
-                    <div class="dx-theme-option" data-theme="muted-teal" onclick="setDxTheme('muted-teal')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7fafa"></div></div>
-                        <div class="dx-theme-name">Muted Teal<span class="dx-theme-badge">Default</span></div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="deeper-teal" onclick="setDxTheme('deeper-teal')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f5f9f8"></div></div>
-                        <div class="dx-theme-name">Deeper Teal</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="eucalyptus" onclick="setDxTheme('eucalyptus')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f6f9f7"></div></div>
-                        <div class="dx-theme-name">Eucalyptus</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="teal-cream" onclick="setDxTheme('teal-cream')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fdfcf9"></div><div class="dx-theme-preview-main" style="background:#fdfcf9"></div></div>
-                        <div class="dx-theme-name">Teal on Cream</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="steel-blue" onclick="setDxTheme('steel-blue')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f7f9fb"></div></div>
-                        <div class="dx-theme-name">Steel Blue</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="muted-sage" onclick="setDxTheme('muted-sage')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f8faf8"></div></div>
-                        <div class="dx-theme-name">Muted Sage</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="muted-lavender" onclick="setDxTheme('muted-lavender')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#fff"></div><div class="dx-theme-preview-main" style="background:#f9f8fb"></div></div>
-                        <div class="dx-theme-name">Muted Lavender</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="slate-teal" onclick="setDxTheme('slate-teal')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#334155"></div><div class="dx-theme-preview-main" style="background:#f8fafc"></div></div>
-                        <div class="dx-theme-name">Slate + Teal</div>
-                    </div>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="gradient-bg text-white py-8 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-4xl font-bold mb-2">⚙️ MechanismDx</h1>
+                    <p class="text-xl text-teal-100">Interactive Pathophysiology Modules</p>
                 </div>
+                <a href="../index.html" class="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition">
+                    ← Back to Dx Suite
+                </a>
             </div>
-            <div class="dx-theme-section">
-                <div class="dx-theme-section-title">Dark Themes</div>
-                <div class="dx-theme-grid">
-                    <div class="dx-theme-option" data-theme="ocean-dark" onclick="setDxTheme('ocean-dark')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#0f172a"></div><div class="dx-theme-preview-main" style="background:#1e293b"></div></div>
-                        <div class="dx-theme-name">Ocean Dark</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="midnight-teal" onclick="setDxTheme('midnight-teal')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#042f2e"></div></div>
-                        <div class="dx-theme-name">Midnight Teal</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="purple-night" onclick="setDxTheme('purple-night')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#1a1625"></div><div class="dx-theme-preview-main" style="background:#1e1b2e"></div></div>
-                        <div class="dx-theme-name">Purple Night</div>
-                    </div>
-                    <div class="dx-theme-option" data-theme="forest-night" onclick="setDxTheme('forest-night')">
-                        <div class="dx-theme-preview"><div class="dx-theme-preview-nav" style="background:#022c22"></div><div class="dx-theme-preview-main" style="background:#052e16"></div></div>
-                        <div class="dx-theme-name">Forest Night</div>
-                    </div>
+        </div>
+    </header>
+
+    <!-- Stats Bar -->
+    <div class="bg-white border-b shadow-sm py-6">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="stat-card rounded-lg p-4 text-center">
+                    <div class="text-3xl font-bold text-teal-600">84</div>
+                    <div class="text-sm text-gray-600">Modules</div>
+                </div>
+                <div class="stat-card rounded-lg p-4 text-center">
+                    <div class="text-3xl font-bold text-cyan-600">15</div>
+                    <div class="text-sm text-gray-600">Organ Systems</div>
+                </div>
+                <div class="stat-card rounded-lg p-4 text-center">
+                    <div class="text-3xl font-bold text-emerald-600">6</div>
+                    <div class="text-sm text-gray-600">Core Modules</div>
+                </div>
+                <div class="stat-card rounded-lg p-4 text-center">
+                    <div class="text-3xl font-bold text-blue-600">∞</div>
+                    <div class="text-sm text-gray-600">Cross-Links</div>
                 </div>
             </div>
         </div>
     </div>
 
-    <script>
-    // Theme System
-    (function() {
-        const saved = localStorage.getItem('dx-theme') || 'muted-teal';
-        document.body.setAttribute('data-theme', saved);
-        document.addEventListener('DOMContentLoaded', updateThemeOptions);
-    })();
-    
-    function setDxTheme(theme) {
-        document.body.setAttribute('data-theme', theme);
-        localStorage.setItem('dx-theme', theme);
-        updateThemeOptions();
-        closeDxThemeModal();
-    }
-    
-    function updateThemeOptions() {
-        const current = document.body.getAttribute('data-theme');
-        document.querySelectorAll('.dx-theme-option').forEach(opt => {
-            opt.classList.toggle('active', opt.dataset.theme === current);
-        });
-    }
-    
-    function openDxThemeModal() {
-        document.getElementById('dxThemeModal')?.classList.add('open');
-    }
-    
-    function closeDxThemeModal() {
-        document.getElementById('dxThemeModal')?.classList.remove('open');
-    }
-    
-    document.addEventListener('click', (e) => {
-        if (e.target.classList.contains('dx-theme-modal')) closeDxThemeModal();
-    });
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeDxThemeModal();
-    });
-    </script>
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 py-8">
+        <!-- Core Modules -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Core Pathophysiology Modules</h2>
+            <div class="grid md:grid-cols-3 gap-4">
+                <a href="sepsis-shock-module.html" class="card-hover bg-gradient-to-br from-red-500 to-red-700 text-white rounded-xl p-5 shadow-lg">
+                    <div class="text-3xl mb-3">🔥</div>
+                    <h3 class="text-xl font-bold mb-2">Sepsis & Shock</h3>
+                    <p class="text-red-100 text-sm">SIRS criteria, shock types, vasopressor selection, lactate clearance</p>
+                </a>
+                <a href="acs-module.html" class="card-hover bg-gradient-to-br from-pink-500 to-pink-700 text-white rounded-xl p-5 shadow-lg">
+                    <div class="text-3xl mb-3">❤️</div>
+                    <h3 class="text-xl font-bold mb-2">Acute Coronary Syndrome</h3>
+                    <p class="text-pink-100 text-sm">STEMI/NSTEMI pathophysiology, troponin dynamics, reperfusion</p>
+                </a>
+                <a href="stroke-module.html" class="card-hover bg-gradient-to-br from-purple-500 to-purple-700 text-white rounded-xl p-5 shadow-lg">
+                    <div class="text-3xl mb-3">🧠</div>
+                    <h3 class="text-xl font-bold mb-2">Stroke</h3>
+                    <p class="text-purple-100 text-sm">Ischemic vs hemorrhagic, penumbra, tPA window, NIH Stroke Scale</p>
+                </a>
+                <a href="aki-module.html" class="card-hover bg-gradient-to-br from-amber-500 to-amber-700 text-white rounded-xl p-5 shadow-lg">
+                    <div class="text-3xl mb-3">🫘</div>
+                    <h3 class="text-xl font-bold mb-2">Acute Kidney Injury</h3>
+                    <p class="text-amber-100 text-sm">Pre-renal/intrinsic/post-renal, FENa, RIFLE criteria</p>
+                </a>
+                <a href="diabetes-dka-module.html" class="card-hover bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-xl p-5 shadow-lg">
+                    <div class="text-3xl mb-3">🦋</div>
+                    <h3 class="text-xl font-bold mb-2">DKA & HHS</h3>
+                    <p class="text-blue-100 text-sm">Insulin deficiency, anion gap, fluid management, potassium shifts</p>
+                </a>
+                <a href="anaphylaxis-module.html" class="card-hover bg-gradient-to-br from-orange-500 to-orange-700 text-white rounded-xl p-5 shadow-lg">
+                    <div class="text-3xl mb-3">⚠️</div>
+                    <h3 class="text-xl font-bold mb-2">Anaphylaxis</h3>
+                    <p class="text-orange-100 text-sm">IgE-mediated cascade, epinephrine mechanism, biphasic reactions</p>
+                </a>
+            </div>
+        </section>
 
+        <!-- By Organ System -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Browse by Organ System</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3">
+                <a href="pulmonary.html" class="card-hover bg-white rounded-lg p-4 text-center shadow border hover:border-teal-300">
+                    <div class="text-2xl mb-1">🫁</div>
+                    <div class="font-medium text-gray-700">Pulmonary</div>
+                    <div class="text-xs text-gray-500">12 modules</div>
+                </a>
+                <a href="heart-failure.html" class="card-hover bg-white rounded-lg p-4 text-center shadow border hover:border-teal-300">
+                    <div class="text-2xl mb-1">❤️</div>
+                    <div class="font-medium text-gray-700">Cardiology</div>
+                    <div class="text-xs text-gray-500">10 modules</div>
+                </a>
+                <a href="gi-hepatology.html" class="card-hover bg-white rounded-lg p-4 text-center shadow border hover:border-teal-300">
+                    <div class="text-2xl mb-1">🍽️</div>
+                    <div class="font-medium text-gray-700">GI/Hepatology</div>
+                    <div class="text-xs text-gray-500">8 modules</div>
+                </a>
+                <a href="neurology.html" class="card-hover bg-white rounded-lg p-4 text-center shadow border hover:border-teal-300">
+                    <div class="text-2xl mb-1">🧠</div>
+                    <div class="font-medium text-gray-700">Neurology</div>
+                    <div class="text-xs text-gray-500">7 modules</div>
+                </a>
+                <a href="infectious-disease.html" class="card-hover bg-white rounded-lg p-4 text-center shadow border hover:border-teal-300">
+                    <div class="text-2xl mb-1">🦠</div>
+                    <div class="font-medium text-gray-700">Infectious</div>
+                    <div class="text-xs text-gray-500">8 modules</div>
+                </a>
+                <a href="electrolytes-acidbase.html" class="card-hover bg-white rounded-lg p-4 text-center shadow border hover:border-teal-300">
+                    <div class="text-2xl mb-1">⚗️</div>
+                    <div class="font-medium text-gray-700">Electrolytes</div>
+                    <div class="text-xs text-gray-500">6 modules</div>
+                </a>
+                <a href="endocrine-emergencies.html" class="card-hover bg-white rounded-lg p-4 text-center shadow border hover:border-teal-300">
+                    <div class="text-2xl mb-1">🦋</div>
+                    <div class="font-medium text-gray-700">Endocrine</div>
+                    <div class="text-xs text-gray-500">5 modules</div>
+                </a>
+                <a href="hematology.html" class="card-hover bg-white rounded-lg p-4 text-center shadow border hover:border-teal-300">
+                    <div class="text-2xl mb-1">🩸</div>
+                    <div class="font-medium text-gray-700">Hematology</div>
+                    <div class="text-xs text-gray-500">6 modules</div>
+                </a>
+                <a href="toxicology.html" class="card-hover bg-white rounded-lg p-4 text-center shadow border hover:border-teal-300">
+                    <div class="text-2xl mb-1">☠️</div>
+                    <div class="font-medium text-gray-700">Toxicology</div>
+                    <div class="text-xs text-gray-500">5 modules</div>
+                </a>
+                <a href="allergy-immunology.html" class="card-hover bg-white rounded-lg p-4 text-center shadow border hover:border-teal-300">
+                    <div class="text-2xl mb-1">🌸</div>
+                    <div class="font-medium text-gray-700">Allergy/Immuno</div>
+                    <div class="text-xs text-gray-500">8 modules</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Special Tools -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Interactive Tools</h2>
+            <div class="grid md:grid-cols-3 gap-4">
+                <a href="abg-analyzer.html" class="card-hover bg-white rounded-lg p-5 shadow border hover:border-cyan-300">
+                    <div class="text-2xl mb-2">🧪</div>
+                    <h3 class="font-bold text-gray-800">ABG Analyzer</h3>
+                    <p class="text-sm text-gray-600">Interactive arterial blood gas interpretation with step-by-step analysis.</p>
+                </a>
+                <a href="ecg-patterns.html" class="card-hover bg-white rounded-lg p-5 shadow border hover:border-pink-300">
+                    <div class="text-2xl mb-2">📈</div>
+                    <h3 class="font-bold text-gray-800">ECG Patterns</h3>
+                    <p class="text-sm text-gray-600">Visual guide to key ECG findings with clinical correlations.</p>
+                </a>
+                <a href="fingerprint-dashboard.html" class="card-hover bg-white rounded-lg p-5 shadow border hover:border-purple-300">
+                    <div class="text-2xl mb-2">🔬</div>
+                    <h3 class="font-bold text-gray-800">Lab Fingerprints</h3>
+                    <p class="text-sm text-gray-600">Disease-specific lab patterns and diagnostic clues.</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- Platform Links -->
+        <section>
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Dx Suite Platform</h2>
+            <div class="grid md:grid-cols-3 gap-4">
+                <a href="../ReasonDx/index.html" class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-5 border border-blue-200">
+                    <div class="text-2xl mb-2">🩺</div>
+                    <h3 class="font-bold text-blue-800">ReasonDx</h3>
+                    <p class="text-sm text-blue-700">226 clinical reasoning cases with RPFS framework</p>
+                </a>
+                <a href="../CoachDx/index.html" class="card-hover bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-5 border border-orange-200">
+                    <div class="text-2xl mb-2">🗣️</div>
+                    <h3 class="font-bold text-orange-800">CoachDx</h3>
+                    <p class="text-sm text-orange-700">SBAR communication trainer with AI mentor</p>
+                </a>
+                <a href="../allergy-immunology-hub.html" class="card-hover bg-gradient-to-br from-pink-50 to-pink-100 rounded-lg p-5 border border-pink-200">
+                    <div class="text-2xl mb-2">🌸</div>
+                    <h3 class="font-bold text-pink-800">A/I Specialty Hub</h3>
+                    <p class="text-sm text-pink-700">Allergy & Immunology focused content</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-6 mt-12">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-sm">MechanismDx Pathophysiology Platform | NSU Dr. Kiran C. Patel College of Allopathic Medicine</p>
+            <p class="text-xs text-gray-500 mt-2">84 Modules • 15 Organ Systems • Interactive Learning</p>
+        </div>
+    </footer>
 </body>
 </html>

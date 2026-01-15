@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hypertensive Emergency | MechanismDx</title>
+    <style>
+        :root { --primary: #7c3aed; --primary-dark: #5b21b6; --primary-light: #f5f3ff; --text: #1e293b; --text-secondary: #64748b; --bg: #f8fafc; --card: #ffffff; --border: #e2e8f0; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%); padding: 16px 24px; color: white; }
+        .header-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+        .header-brand { font-size: 18px; font-weight: 600; text-decoration: none; color: white; }
+        .header-nav { display: flex; gap: 8px; }
+        .header-link { padding: 8px 16px; border-radius: 8px; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 14px; }
+        .header-link:hover { background: rgba(255,255,255,0.15); color: white; }
+        .hero { background: linear-gradient(135deg, #6d28d9 0%, #4c1d95 100%); padding: 40px 24px; color: white; }
+        .hero-inner { max-width: 900px; margin: 0 auto; }
+        .hero h1 { font-size: 32px; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; }
+        .hero p { font-size: 16px; opacity: 0.9; margin-bottom: 16px; }
+        .hero-meta { display: flex; gap: 20px; flex-wrap: wrap; font-size: 14px; opacity: 0.85; }
+        .main { max-width: 900px; margin: 0 auto; padding: 32px 24px; }
+        .section { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+        .section-title { font-size: 20px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+        .concept-box { background: var(--primary-light); border-left: 4px solid var(--primary); padding: 16px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+        .concept-box h4 { font-weight: 600; margin-bottom: 8px; color: var(--primary-dark); }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 16px 0; }
+        .card { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+        .card-title { font-weight: 600; font-size: 15px; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .card p { font-size: 14px; color: var(--text-secondary); margin: 0; }
+        .tag { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 500; margin: 2px; }
+        .tag-red { background: #fef2f2; color: #dc2626; }
+        .tag-blue { background: #eff6ff; color: #2563eb; }
+        .tag-green { background: #f0fdf4; color: #16a34a; }
+        .tag-purple { background: #faf5ff; color: #9333ea; }
+        .tag-amber { background: #fffbeb; color: #d97706; }
+        .flow-diagram { background: var(--bg); border-radius: 10px; padding: 20px; margin: 16px 0; }
+        .flow-step { display: flex; align-items: flex-start; gap: 12px; padding: 12px; background: var(--card); border-radius: 8px; margin-bottom: 8px; border-left: 4px solid var(--primary); }
+        .flow-step-num { background: var(--primary); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; flex-shrink: 0; }
+        .table-wrap { overflow-x: auto; margin: 16px 0; }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border); }
+        th { background: var(--bg); font-weight: 600; }
+        .highlight { background: #fef3c7; }
+        .danger { background: #fef2f2; }
+        .integration-box { background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 1px solid #86efac; border-radius: 12px; padding: 20px; margin-top: 24px; }
+        .integration-box h3 { color: #166534; margin-bottom: 12px; }
+        .integration-links { display: flex; flex-wrap: wrap; gap: 10px; }
+        .integration-link { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; background: white; border: 1px solid #86efac; border-radius: 8px; text-decoration: none; color: var(--text); font-size: 14px; font-weight: 500; }
+        .integration-link:hover { background: #f0fdf4; border-color: #22c55e; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 8px; }
+        .organ-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 16px 0; }
+        .organ-card { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 14px; text-align: center; }
+        .organ-icon { font-size: 28px; margin-bottom: 8px; }
+        .organ-name { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+        .organ-finding { font-size: 13px; color: var(--text-secondary); }
+        @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } .hero h1 { font-size: 24px; } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <a href="../index.html" class="header-brand">🩺 Dx Suite</a>
+            <nav class="header-nav">
+                <a href="index.html" class="header-link">MechanismDx</a>
+                <a href="../ReasonDx/index.html" class="header-link">ReasonDx</a>
+                <a href="../CoachDx/index.html" class="header-link">CoachDx</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-inner">
+            <h1>🔴 Hypertensive Emergency</h1>
+            <p>Master the pathophysiology of end-organ damage, recognize clinical presentations, and understand evidence-based BP targets for this critical diagnosis.</p>
+            <div class="hero-meta">
+                <span>⏱️ 20 min</span>
+                <span>📊 High Yield</span>
+                <span>🎯 Emergency Medicine</span>
+            </div>
+        </div>
+    </section>
+
+    <main class="main">
+        <!-- Definitions -->
+        <div class="section">
+            <h2 class="section-title">📋 Definitions: Emergency vs Urgency</h2>
+            
+            <div class="grid-2">
+                <div class="card" style="border-left: 4px solid #dc2626;">
+                    <div class="card-title">🚨 Hypertensive Emergency</div>
+                    <p><strong>Definition:</strong> Severely elevated BP WITH acute end-organ damage</p>
+                    <p style="margin-top: 8px;"><strong>Management:</strong> IV antihypertensives, ICU admission, controlled BP reduction</p>
+                    <p style="margin-top: 8px;"><span class="tag tag-red">Requires immediate treatment</span></p>
+                </div>
+                <div class="card" style="border-left: 4px solid #f59e0b;">
+                    <div class="card-title">⚠️ Hypertensive Urgency</div>
+                    <p><strong>Definition:</strong> Severely elevated BP WITHOUT acute end-organ damage</p>
+                    <p style="margin-top: 8px;"><strong>Management:</strong> Oral antihypertensives, outpatient follow-up, gradual reduction</p>
+                    <p style="margin-top: 8px;"><span class="tag tag-amber">Less time-sensitive</span></p>
+                </div>
+            </div>
+
+            <div class="concept-box">
+                <h4>🎯 Key Distinction</h4>
+                <p>The absolute BP number matters less than the presence of end-organ damage. A patient with BP 220/120 and no symptoms may be urgency, while BP 180/110 with pulmonary edema is an emergency. Always assess for end-organ damage!</p>
+            </div>
+        </div>
+
+        <!-- Pathophysiology -->
+        <div class="section">
+            <h2 class="section-title">🔬 Pathophysiology</h2>
+            
+            <div class="flow-diagram">
+                <div class="flow-step">
+                    <span class="flow-step-num">1</span>
+                    <div><strong>Failure of Autoregulation</strong>
+                        <br>Normally, cerebral and renal vessels autoregulate to maintain constant blood flow despite BP changes. In hypertensive emergency, BP exceeds the autoregulatory range.</div>
+                </div>
+                <div class="flow-step">
+                    <span class="flow-step-num">2</span>
+                    <div><strong>Endothelial Dysfunction</strong>
+                        <br>Mechanical stress damages endothelium → loss of vasodilatory capacity → further vasoconstriction → vicious cycle of worsening hypertension.</div>
+                </div>
+                <div class="flow-step">
+                    <span class="flow-step-num">3</span>
+                    <div><strong>Fibrinoid Necrosis</strong>
+                        <br>Severe pressure damages arteriolar walls → plasma proteins leak into vessel wall → "onion-skinning" appearance on histology.</div>
+                </div>
+                <div class="flow-step">
+                    <span class="flow-step-num">4</span>
+                    <div><strong>End-Organ Ischemia</strong>
+                        <br>Tissue hypoperfusion despite high BP due to microvascular damage → organ dysfunction manifests clinically.</div>
+                </div>
+            </div>
+
+            <div class="concept-box">
+                <h4>⚠️ The Autoregulation Curve Shifts</h4>
+                <p>In chronic hypertension, the autoregulation curve shifts rightward. These patients tolerate higher BPs but are vulnerable to hypoperfusion if BP is lowered too quickly. This is why we target 10-20% reduction in the first hour, not normalization!</p>
+            </div>
+        </div>
+
+        <!-- End-Organ Damage -->
+        <div class="section">
+            <h2 class="section-title">🎯 End-Organ Damage Manifestations</h2>
+            
+            <div class="organ-grid">
+                <div class="organ-card">
+                    <div class="organ-icon">🧠</div>
+                    <div class="organ-name">Brain</div>
+                    <div class="organ-finding">Encephalopathy, stroke, PRES</div>
+                </div>
+                <div class="organ-card">
+                    <div class="organ-icon">👁️</div>
+                    <div class="organ-name">Eyes</div>
+                    <div class="organ-finding">Papilledema, hemorrhages, exudates</div>
+                </div>
+                <div class="organ-card">
+                    <div class="organ-icon">❤️</div>
+                    <div class="organ-name">Heart</div>
+                    <div class="organ-finding">ACS, acute HF, pulmonary edema</div>
+                </div>
+                <div class="organ-card">
+                    <div class="organ-icon">🫁</div>
+                    <div class="organ-name">Lungs</div>
+                    <div class="organ-finding">Flash pulmonary edema</div>
+                </div>
+                <div class="organ-card">
+                    <div class="organ-icon">🫘</div>
+                    <div class="organ-name">Kidneys</div>
+                    <div class="organ-finding">AKI, hematuria, proteinuria</div>
+                </div>
+                <div class="organ-card">
+                    <div class="organ-icon">🩸</div>
+                    <div class="organ-name">Vessels</div>
+                    <div class="organ-finding">Aortic dissection, MAHA</div>
+                </div>
+            </div>
+
+            <div class="table-wrap">
+                <table>
+                    <tr>
+                        <th>Target Organ</th>
+                        <th>Clinical Syndrome</th>
+                        <th>Key Findings</th>
+                        <th>Workup</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Brain</strong></td>
+                        <td>Hypertensive encephalopathy</td>
+                        <td>Headache, confusion, seizures, visual changes</td>
+                        <td>CT/MRI (PRES pattern)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Brain</strong></td>
+                        <td>Hemorrhagic stroke</td>
+                        <td>Focal deficits, decreased LOC</td>
+                        <td>CT head (stat)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Heart</strong></td>
+                        <td>Acute coronary syndrome</td>
+                        <td>Chest pain, dyspnea, diaphoresis</td>
+                        <td>ECG, troponin</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Heart</strong></td>
+                        <td>Acute heart failure</td>
+                        <td>Dyspnea, orthopnea, crackles, JVD</td>
+                        <td>CXR, BNP, echo</td>
+                    </tr>
+                    <tr class="danger">
+                        <td><strong>Aorta</strong></td>
+                        <td>Aortic dissection</td>
+                        <td>Tearing pain, BP differential, pulse deficit</td>
+                        <td>CTA chest</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kidneys</strong></td>
+                        <td>Acute kidney injury</td>
+                        <td>Oliguria, elevated Cr, hematuria</td>
+                        <td>BMP, UA, renal US</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Eyes</strong></td>
+                        <td>Hypertensive retinopathy</td>
+                        <td>Blurred vision, visual field cuts</td>
+                        <td>Fundoscopy</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Blood</strong></td>
+                        <td>MAHA (microangiopathic hemolytic anemia)</td>
+                        <td>Schistocytes, ↑LDH, ↓haptoglobin</td>
+                        <td>Smear, hemolysis labs</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Management -->
+        <div class="section">
+            <h2 class="section-title">💊 Management Principles</h2>
+            
+            <div class="concept-box">
+                <h4>🎯 BP Reduction Targets</h4>
+                <p><strong>General rule:</strong> Reduce MAP by 10-20% in the first hour, then gradually to 160/100-110 over the next 2-6 hours. Avoid rapid normalization which risks watershed infarction!</p>
+            </div>
+
+            <h3 style="margin: 20px 0 12px;">Condition-Specific Targets</h3>
+            <div class="table-wrap">
+                <table>
+                    <tr>
+                        <th>Condition</th>
+                        <th>Initial Target</th>
+                        <th>Preferred Agent</th>
+                        <th>Notes</th>
+                    </tr>
+                    <tr class="highlight">
+                        <td><strong>Aortic Dissection</strong></td>
+                        <td>SBP &lt;120, HR &lt;60</td>
+                        <td>Esmolol + Nitroprusside</td>
+                        <td>BB first to prevent reflex tachy</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Acute Ischemic Stroke</strong></td>
+                        <td>&lt;185/110 if tPA candidate</td>
+                        <td>Nicardipine, Labetalol</td>
+                        <td>Don't treat if not tPA candidate unless &gt;220/120</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hemorrhagic Stroke</strong></td>
+                        <td>SBP 140 (per INTERACT2)</td>
+                        <td>Nicardipine, Labetalol</td>
+                        <td>More aggressive than ischemic</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Acute Pulmonary Edema</strong></td>
+                        <td>Symptom-guided</td>
+                        <td>Nitroprusside, Nitroglycerin</td>
+                        <td>Afterload reduction key</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ACS</strong></td>
+                        <td>Symptom-guided</td>
+                        <td>Nitroglycerin, BB</td>
+                        <td>Reduce O2 demand</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Eclampsia/Preeclampsia</strong></td>
+                        <td>SBP &lt;160, DBP &lt;110</td>
+                        <td>Hydralazine, Labetalol</td>
+                        <td>Give MgSO4 for seizure prophylaxis</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pheochromocytoma</strong></td>
+                        <td>Gradual reduction</td>
+                        <td>Phentolamine</td>
+                        <td>Never BB alone (unopposed alpha)</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h3 style="margin: 20px 0 12px;">IV Antihypertensive Agents</h3>
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">💉 Nicardipine</div>
+                    <ul>
+                        <li>CCB - vasodilator</li>
+                        <li>Predictable, titratable</li>
+                        <li>Good for most indications</li>
+                        <li>Start 5 mg/hr, titrate by 2.5 mg/hr</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-title">💉 Labetalol</div>
+                    <ul>
+                        <li>Combined α/β blocker</li>
+                        <li>No reflex tachycardia</li>
+                        <li>Good for dissection, pregnancy</li>
+                        <li>Bolus 20mg or infusion</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-title">💉 Esmolol</div>
+                    <ul>
+                        <li>Ultra-short acting β1 blocker</li>
+                        <li>Ideal for dissection (rate control)</li>
+                        <li>Highly titratable</li>
+                        <li>Load 500 mcg/kg, infuse 50-200</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-title">💉 Nitroprusside</div>
+                    <ul>
+                        <li>Arterial + venous dilator</li>
+                        <li>Most potent, fastest onset</li>
+                        <li>Cyanide toxicity risk</li>
+                        <li>Requires A-line monitoring</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Special Populations -->
+        <div class="section">
+            <h2 class="section-title">👥 Special Considerations</h2>
+            
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">🤰 Pregnancy (Eclampsia)</div>
+                    <ul>
+                        <li>Labetalol or hydralazine first-line</li>
+                        <li>MgSO4 for seizure prophylaxis</li>
+                        <li>Avoid ACEi, ARBs, nitroprusside</li>
+                        <li>Definitive treatment = delivery</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-title">💊 Cocaine/Sympathomimetics</div>
+                    <ul>
+                        <li>Benzodiazepines first!</li>
+                        <li>Avoid pure beta-blockers (unopposed alpha)</li>
+                        <li>Phentolamine for refractory HTN</li>
+                        <li>Nicardipine is safe</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Integration Box -->
+        <div class="integration-box">
+            <h3>🔗 Continue Your Learning</h3>
+            <p>Master hypertensive emergencies across all three platforms:</p>
+            <div class="integration-links">
+                <a href="../ReasonDx/htn-emergency-adventure.html" class="integration-link">
+                    🎮 <strong>ReasonDx:</strong> HTN Emergency Case
+                </a>
+                <a href="../CoachDx/mentor-chat.html?case=htn-emergency" class="integration-link">
+                    🗣️ <strong>CoachDx:</strong> HTN Emergency SBAR
+                </a>
+                <a href="aortic-dissection-module.html" class="integration-link">
+                    📚 <strong>Related:</strong> Aortic Dissection
+                </a>
+                <a href="stroke-module.html" class="integration-link">
+                    📚 <strong>Related:</strong> Stroke Module
+                </a>
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="section">
+            <h2 class="section-title">📝 Key Takeaways</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">🎯 Must Know</div>
+                    <ul>
+                        <li>Emergency = elevated BP + end-organ damage</li>
+                        <li>Urgency = elevated BP alone</li>
+                        <li>Always look for target organ damage</li>
+                        <li>The BP number alone doesn't define it</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-title">💊 Treatment Pearls</div>
+                    <ul>
+                        <li>Reduce MAP 10-20% in first hour</li>
+                        <li>Avoid rapid normalization</li>
+                        <li>Condition-specific targets matter</li>
+                        <li>Nicardipine is versatile first-line</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
