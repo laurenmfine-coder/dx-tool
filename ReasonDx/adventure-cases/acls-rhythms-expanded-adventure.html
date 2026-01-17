@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACLS Rhythms & Cardiac Arrest - Expanded Deep Dive Adventure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .stage-card { transition: all 0.3s ease; }
+        .why-chain { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); }
+        .mechanism-box { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); }
+        .pearl-box { background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%); }
+        .pitfall-box { background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); }
+        .optimal-path { background-color: #dcfce7; border-left: 4px solid #22c55e; }
+        .suboptimal-path { background-color: #fef9c3; border-left: 4px solid #eab308; }
+        .wrong-path { background-color: #fecaca; border-left: 4px solid #ef4444; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-red-50 min-h-screen">
+    <div id="app" class="container mx-auto px-4 py-8 max-w-5xl">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between flex-wrap gap-4">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">💓 ACLS Rhythms & Cardiac Arrest</h1>
+                    <p class="text-gray-500 mt-1">Expanded Deep Dive Adventure • 10 Stages</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="text-right">
+                        <div class="text-sm text-gray-500">Progress</div>
+                        <div class="text-2xl font-bold text-red-600" id="score">0%</div>
+                    </div>
+                    <button onclick="resetGame()" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium">🔄 Restart</button>
+                </div>
+            </div>
+            <div class="mt-4 h-3 bg-gray-100 rounded-full overflow-hidden">
+                <div id="progressBar" class="h-full bg-gradient-to-r from-red-500 to-rose-500 transition-all duration-500" style="width: 0%"></div>
+            </div>
+        </div>
+        <div id="gameContainer" class="space-y-6"></div>
+        <div id="summaryPanel" class="hidden"></div>
+    </div>
+
+    <script>
+        let currentStage = 0;
+        let totalScore = 0;
+        let maxScore = 0;
+        const decisionPath = [];
+
+        const stages = [
+            {
+                id: 1,
+                title: "Cardiac Arrest Recognition",
+                scenario: "You're called to a hospital room where a 62-year-old male is found unresponsive. He had been admitted for chest pain and was awaiting stress testing.\n\nYou arrive to find him slumped in the bed, not moving. The nurse says he was talking 2 minutes ago.\n\nWhat is your FIRST action?",
+                question: "What is the first step in approaching this patient?",
+                options: [
+                    {
+                        id: "A",
+                        text: "Check for pulse and breathing simultaneously while calling for help",
+                        outcome: "Correct first step",
+                        feedback: "Correct! The first step is to check for responsiveness and pulse/breathing while simultaneously calling for help (activate code team). You should assess for no more than 10 seconds.",
+                        points: 10,
+                        isOptimal: true
+                    },
+                    {
+                        id: "B",
+                        text: "Start chest compressions immediately",
+                        outcome: "Need assessment first",
+                        feedback: "You need to confirm cardiac arrest before starting CPR. Check responsiveness and pulse first - this takes only seconds but is essential. The patient might be sleeping or have another issue.",
+                        points: 4,
+                        isOptimal: false
+                    },
+                    {
+                        id: "C",
+                        text: "Get the crash cart and defibrillator first",
+                        outcome: "Assessment comes first",
+                        feedback: "While you'll need these, assessment comes first. Call for help (someone else can get the cart) while you assess the patient. Don't leave the patient alone.",
+                        points: 3,
+                        isOptimal: false
+                    },
+                    {
+                        id: "D",
+                        text: "Check blood pressure and oxygen saturation",
+                        outcome: "Not appropriate for arrest",
+                        feedback: "In suspected cardiac arrest, checking BP and pulse ox wastes precious time. You need to assess for pulse and breathing directly - these monitors won't help if the patient is pulseless.",
+                        points: 1,
+                        isOptimal: false
+                    }
+                ],
+                whyChain: {
+                    title: "WHY assess before CPR?",
+                    steps: [
+                        "Confirms true cardiac arrest vs other causes of unresponsiveness",
+                        "Assessment takes <10 seconds if done properly",
+                        "Starting CPR on a patient with a pulse can be harmful",
+                        "Calling for help while assessing is efficient",
+                        "Establishes baseline rhythm for treatment decisions"
+                    ]
+                },
+                mechanism: {
+                    title: "BLS/ACLS Initial Assessment",
+                    content: "CHAIN OF SURVIVAL:\n1. Early recognition and calling for help\n2. Early CPR with emphasis on compressions\n3. Rapid defibrillation\n4. Effective advanced life support\n5. Post-cardiac arrest care\n\nASSESSMENT (≤10 seconds):\n• Check responsiveness (tap, shout)\n• Check breathing (look for chest rise)\n• Check pulse (carotid in adults)\n• If no pulse/abnormal breathing → start CPR\n\nCALLING FOR HELP:\n• In hospital: Activate code team\n• Out of hospital: Call 911\n• Request AED/defibrillator\n• Don't leave patient alone if possible"
+                },
+                pearl: "You can check pulse and breathing simultaneously - place your hand on the carotid while looking at the chest for breathing. This saves time.",
+                pitfall: "Don't spend more than 10 seconds checking for pulse. If you're not sure, start CPR - it's safer to do CPR on someone with a pulse than to withhold it from someone without."
+            },
+            {
+                id: 2,
+                title: "Rhythm Identification - VF",
+                scenario: "You confirm no pulse and agonal breathing. CPR is started immediately. The defibrillator arrives and pads are placed.\n\nThe rhythm check shows:\n• Chaotic, irregular waveforms\n• No discernible P waves or QRS complexes\n• Rapid, disorganized electrical activity\n• Varying amplitude and frequency",
+                question: "What rhythm is this and what is your next action?",
+                options: [
+                    {
+                        id: "A",
+                        text: "Ventricular fibrillation - SHOCK immediately (shockable rhythm)",
+                        outcome: "Correct identification and action",
+                        feedback: "Correct! This is VF - a shockable rhythm. Defibrillate immediately with biphasic 120-200J (or manufacturer recommendation). Minimize interruptions to CPR. Resume CPR immediately after shock.",
+                        points: 10,
+                        isOptimal: true
+                    },
+                    {
+                        id: "B",
+                        text: "Asystole - epinephrine and CPR",
+                        outcome: "Wrong rhythm",
+                        feedback: "Asystole is a flat line with no electrical activity. This rhythm shows chaotic activity - that's VF. VF is shockable; asystole is not.",
+                        points: 2,
+                        isOptimal: false
+                    },
+                    {
+                        id: "C",
+                        text: "Atrial fibrillation - cardioversion",
+                        outcome: "Different rhythm",
+                        feedback: "Atrial fibrillation has narrow QRS complexes and is typically not a cardiac arrest rhythm. This chaotic pattern without identifiable QRS complexes is VF.",
+                        points: 1,
+                        isOptimal: false
+                    },
+                    {
+                        id: "D",
+                        text: "Ventricular fibrillation - give epinephrine first, then shock",
+                        outcome: "Wrong sequence",
+                        feedback: "In VF, defibrillation is the priority! Don't delay shock for medications. The earlier you defibrillate, the better the chance of successful conversion. Epinephrine comes after the first shock.",
+                        points: 5,
+                        isOptimal: false
+                    }
+                ],
+                whyChain: {
+                    title: "WHY immediate defibrillation for VF?",
+                    steps: [
+                        "VF is disorganized electrical activity - heart quivers, doesn't pump",
+                        "Defibrillation 'resets' the heart's electrical system",
+                        "Success rate drops 7-10% per minute without defibrillation",
+                        "CPR buys time but only defibrillation can convert VF",
+                        "Every minute of delay decreases survival significantly"
+                    ]
+                },
+                mechanism: {
+                    title: "Ventricular Fibrillation",
+                    content: "VF CHARACTERISTICS:\n• Chaotic, irregular waveform\n• No identifiable P, QRS, or T waves\n• Varying amplitude (coarse vs fine)\n• Rate: too disorganized to measure\n• No cardiac output\n\nTREATMENT:\n• Shockable rhythm!\n• Defibrillate immediately\n• Biphasic: 120-200J (or per device)\n• Monophasic: 360J\n• Resume CPR immediately after shock\n• Rhythm check every 2 minutes\n\nCOARSE vs FINE VF:\n• Coarse: Higher amplitude, more likely to convert\n• Fine: Lower amplitude, may look like asystole\n• If unsure, treat as VF (shock)\n\nCAUSES (H's and T's):\n• Ischemia/infarction (most common)\n• Electrolyte abnormalities\n• Drug toxicity\n• Structural heart disease"
+                },
+                pearl: "Coarse VF has better prognosis than fine VF. If VF becomes fine despite treatment, consider if you're addressing underlying causes (H's and T's).",
+                pitfall: "Fine VF can look like asystole. Check multiple leads. If there's any doubt, treat as VF and shock - you won't harm asystole, but you might save VF."
+            },
+            {
+                id: 3,
+                title: "Post-Shock Management",
+                scenario: "You deliver a 200J biphasic shock. CPR is resumed immediately.\n\nAfter 2 minutes of CPR, the rhythm check shows the same VF pattern.\n\nWhat is your next step?",
+                question: "The rhythm is still VF after the first shock. What do you do?",
+                options: [
+                    {
+                        id: "A",
+                        text: "Shock again + resume CPR + give epinephrine 1mg IV",
+                        outcome: "Correct ACLS sequence",
+                        feedback: "Correct! For persistent VF: Shock → immediate CPR for 2 min → rhythm check. After 2nd shock, give epinephrine 1mg IV/IO every 3-5 minutes. Consider antiarrhythmic after 3rd shock.",
+                        points: 10,
+                        isOptimal: true
+                    },
+                    {
+                        id: "B",
+                        text: "Increase the joules and shock again",
+                        outcome: "Partially correct",
+                        feedback: "You can consider escalating energy, but epinephrine should also be given at this point. The ACLS algorithm calls for epinephrine after the second shock for persistent VF/pVT.",
+                        points: 6,
+                        isOptimal: false
+                    },
+                    {
+                        id: "C",
+                        text: "Give amiodarone 300mg IV before the next shock",
+                        outcome: "Too early for amiodarone",
+                        feedback: "Amiodarone is given after the THIRD shock if VF/pVT persists. We're only on the second shock. Epinephrine comes first (after 2nd shock), then amiodarone (after 3rd shock).",
+                        points: 4,
+                        isOptimal: false
+                    },
+                    {
+                        id: "D",
+                        text: "Stop and check for pulse before proceeding",
+                        outcome: "Don't interrupt CPR",
+                        feedback: "You already did the rhythm check at 2 minutes. With persistent VF, continue the algorithm - shock, CPR, epinephrine. Don't interrupt CPR unnecessarily.",
+                        points: 2,
+                        isOptimal: false
+                    }
+                ],
+                whyChain: {
+                    title: "WHY epinephrine after 2nd shock?",
+                    steps: [
+                        "Epinephrine increases coronary perfusion pressure during CPR",
+                        "Alpha effects cause vasoconstriction → better coronary blood flow",
+                        "First shock has highest chance of success - don't delay it for meds",
+                        "If first shock fails, adding epinephrine may help subsequent shocks work",
+                        "Gives drug time to circulate before next rhythm check"
+                    ]
+                },
+                mechanism: {
+                    title: "VF/pVT Algorithm",
+                    content: "SHOCKABLE RHYTHM SEQUENCE:\n\n1st shock → CPR 2 min → rhythm check\n↓\nStill VF/pVT?\n↓\n2nd shock → CPR 2 min → EPINEPHRINE 1mg\n↓\nStill VF/pVT?\n↓\n3rd shock → CPR 2 min → AMIODARONE 300mg\n↓\nContinue cycle:\n• Shock every 2 min if shockable\n• Epinephrine every 3-5 min\n• Amiodarone 150mg x1 if needed\n\nMEDICATIONS:\n• Epinephrine: 1mg IV/IO q3-5min\n• Amiodarone: 300mg, then 150mg\n• Alternative: Lidocaine 1-1.5mg/kg\n\nKEY POINTS:\n• Minimize CPR interruptions\n• High-quality compressions are critical\n• Treat reversible causes (H's and T's)"
+                },
+                pearl: "Medication administration should happen DURING CPR, not instead of it. Push drugs, then continue compressions. The 2-minute CPR cycle allows drugs to circulate.",
+                pitfall: "Don't delay shocks to give medications. Defibrillation is the definitive treatment for VF - epinephrine and amiodarone are adjuncts."
+            },
+            {
+                id: 4,
+                title: "Pulseless Electrical Activity (PEA)",
+                scenario: "After the third shock and amiodarone, the rhythm check shows:\n• Organized rhythm at 70 bpm\n• Narrow QRS complexes\n• Regular R-R intervals\n\nHowever, the patient still has NO pulse.",
+                question: "What is this rhythm and what should you do?",
+                options: [
+                    {
+                        id: "A",
+                        text: "PEA (Pulseless Electrical Activity) - CPR, epinephrine, search for reversible causes",
+                        outcome: "Correct identification and management",
+                        feedback: "Correct! Organized rhythm without a pulse = PEA. This is NON-shockable. Continue CPR, give epinephrine q3-5min, and aggressively search for reversible causes (H's and T's).",
+                        points: 10,
+                        isOptimal: true
+                    },
+                    {
+                        id: "B",
+                        text: "Normal sinus rhythm - patient has ROSC, stop CPR",
+                        outcome: "Dangerous assumption",
+                        feedback: "NEVER assume pulse based on rhythm alone! You must check for pulse. This patient has NO pulse despite the organized rhythm - that's PEA, and CPR must continue.",
+                        points: 0,
+                        isOptimal: false
+                    },
+                    {
+                        id: "C",
+                        text: "Shock the rhythm - it looks different now",
+                        outcome: "PEA is not shockable",
+                        feedback: "PEA is NOT a shockable rhythm. The heart has organized electrical activity but isn't pumping effectively. Shocking won't help - you need to find and fix the underlying cause.",
+                        points: 2,
+                        isOptimal: false
+                    },
+                    {
+                        id: "D",
+                        text: "Start transcutaneous pacing",
+                        outcome: "Pacing won't help",
+                        feedback: "Pacing is for bradycardia with a pulse. In PEA, there's already electrical activity but no mechanical response - pacing won't create a pulse. Find reversible causes.",
+                        points: 3,
+                        isOptimal: false
+                    }
+                ],
+                whyChain: {
+                    title: "WHY does PEA occur?",
+                    steps: [
+                        "Electrical system is working but heart can't pump effectively",
+                        "Usually due to a reversible mechanical problem",
+                        "Heart may be empty (hypovolemia), compressed (tamponade), or blocked (PE)",
+                        "May also be metabolic (severe acidosis, hyperkalemia)",
+                        "Treatment requires identifying and fixing the underlying cause"
+                    ]
+                },
+                mechanism: {
+                    title: "Pulseless Electrical Activity",
+                    content: "PEA DEFINITION:\n• Organized electrical rhythm\n• No palpable pulse\n• Not VF/VT/asystole\n\nTREATMENT:\n• NOT shockable!\n• High-quality CPR\n• Epinephrine 1mg q3-5min\n• Find and treat reversible causes\n\nH's AND T's:\n\nH's:\n• Hypovolemia (fluids, blood)\n• Hypoxia (ventilate, oxygen)\n• Hydrogen ion (acidosis, bicarb)\n• Hypo/Hyperkalemia (calcium, insulin)\n• Hypothermia (warm)\n\nT's:\n• Tension pneumothorax (needle, chest tube)\n• Tamponade (pericardiocentesis)\n• Toxins (antidotes)\n• Thrombosis - coronary (PCI)\n• Thrombosis - pulmonary (tPA)\n\nPROGNOSIS:\n• Depends on underlying cause\n• Treatable causes have better outcomes\n• Wide QRS PEA = worse prognosis"
+                },
+                pearl: "Wide QRS in PEA suggests hyperkalemia or severe metabolic derangement. Narrow QRS PEA is more likely mechanical (tamponade, PE, hypovolemia).",
+                pitfall: "Don't shock PEA! The problem isn't the electrical system - it's that the heart can't pump. Find the mechanical or metabolic cause."
+            },
+            {
+                id: 5,
+                title: "Identifying Reversible Causes",
+                scenario: "You're treating PEA. The team reports:\n• Patient was admitted with chest pain\n• Large IV fluids given with no response\n• Neck veins are distended (JVD)\n• Heart sounds are muffled\n• Blood pressure (when obtained by art line during CPR) shows very narrow pulse pressure\n• Recent echocardiogram for chest pain showed small pericardial effusion",
+                question: "What is the most likely reversible cause of this PEA?",
+                options: [
+                    {
+                        id: "A",
+                        text: "Cardiac tamponade - need emergent pericardiocentesis",
+                        outcome: "Correct diagnosis",
+                        feedback: "Correct! Beck's triad (JVD, muffled heart sounds, hypotension) + known pericardial effusion + PEA = tamponade. Emergent pericardiocentesis is needed. Fluids alone won't fix this.",
+                        points: 10,
+                        isOptimal: true
+                    },
+                    {
+                        id: "B",
+                        text: "Tension pneumothorax - need needle decompression",
+                        outcome: "Different presentation",
+                        feedback: "Tension pneumothorax also causes JVD, but you'd expect absent breath sounds and tracheal deviation. The muffled heart sounds and known pericardial effusion point to tamponade.",
+                        points: 5,
+                        isOptimal: false
+                    },
+                    {
+                        id: "C",
+                        text: "Hypovolemia - give more fluids",
+                        outcome: "Already tried, doesn't fit",
+                        feedback: "JVD is NOT consistent with hypovolemia (you'd expect flat neck veins). Also, fluids were already given without response. The JVD and muffled heart sounds point to tamponade.",
+                        points: 2,
+                        isOptimal: false
+                    },
+                    {
+                        id: "D",
+                        text: "Massive PE - give tPA",
+                        outcome: "Possible but less likely",
+                        feedback: "PE can cause PEA and JVD, but wouldn't typically cause muffled heart sounds. The known pericardial effusion makes tamponade more likely. However, PE should stay on the differential.",
+                        points: 6,
+                        isOptimal: false
+                    }
+                ],
+                whyChain: {
+                    title: "WHY does tamponade cause PEA?",
+                    steps: [
+                        "Fluid accumulates in pericardial space",
+                        "Pericardium is non-compliant, can't stretch",
+                        "Pressure compresses the heart chambers",
+                        "Heart can't fill during diastole",
+                        "No filling = no output, despite normal electrical activity"
+                    ]
+                },
+                mechanism: {
+                    title: "Cardiac Tamponade",
+                    content: "BECK'S TRIAD:\n1. JVD (elevated CVP)\n2. Muffled heart sounds\n3. Hypotension\n\nADDITIONAL SIGNS:\n• Narrow pulse pressure\n• Pulsus paradoxus (>10mmHg drop in SBP with inspiration)\n• Electrical alternans on ECG\n• Tachycardia\n\nPATHOPHYSIOLOGY:\n• Pericardial fluid compresses heart\n• Right heart affected first (lower pressures)\n• Impaired diastolic filling\n• Decreased stroke volume and cardiac output\n\nTREATMENT:\n• Pericardiocentesis (emergent)\n• Subxiphoid approach\n• Ultrasound-guided if available\n• Remove as little as 20-30mL can improve hemodynamics\n• May need surgical window for recurrence\n\nIN CARDIAC ARREST:\n• Don't delay for imaging\n• Bedside echo if immediately available\n• Otherwise clinical diagnosis + intervention"
+                },
+                pearl: "In cardiac arrest with tamponade, even removing 20-30mL of fluid can restore enough cardiac output to get ROSC. Don't wait for the full evacuation.",
+                pitfall: "Don't rely on pulsus paradoxus in cardiac arrest - there's no pulse to measure! Use the other signs: JVD, muffled sounds, known effusion."
+            },
+            {
+                id: 6,
+                title: "Asystole Recognition",
+                scenario: "Different patient: A 78-year-old woman is found unresponsive at home. EMS has been doing CPR for 10 minutes. She has no shockable rhythm.\n\nThe monitor shows:\n• Flat line\n• No electrical activity\n• Confirmed in multiple leads\n• Electrodes checked - good contact",
+                question: "What is this rhythm and how should it be managed?",
+                options: [
+                    {
+                        id: "A",
+                        text: "Asystole - CPR, epinephrine, search for reversible causes; NOT shockable",
+                        outcome: "Correct identification and management",
+                        feedback: "Correct! Asystole is complete absence of electrical activity. It's NOT shockable. Treatment: high-quality CPR, epinephrine q3-5min, search for H's and T's. Prognosis is generally poor.",
+                        points: 10,
+                        isOptimal: true
+                    },
+                    {
+                        id: "B",
+                        text: "Fine VF - shock immediately",
+                        outcome: "Need to confirm",
+                        feedback: "Fine VF can look like asystole, but this was confirmed flat in multiple leads. If there's any doubt, you could shock once, but true asystole won't respond to defibrillation.",
+                        points: 5,
+                        isOptimal: false
+                    },
+                    {
+                        id: "C",
+                        text: "Lead disconnect - check the electrodes",
+                        outcome: "Already done",
+                        feedback: "Good thinking - always check electrodes and gain settings. However, the scenario states electrodes were checked and have good contact. This is true asystole.",
+                        points: 4,
+                        isOptimal: false
+                    },
+                    {
+                        id: "D",
+                        text: "Asystole - start transcutaneous pacing",
+                        outcome: "Pacing won't help",
+                        feedback: "Pacing requires some underlying electrical activity to capture. In true asystole, there's no activity for the pacer to synchronize with. Pacing asystole is not effective.",
+                        points: 2,
+                        isOptimal: false
+                    }
+                ],
+                whyChain: {
+                    title: "WHY is asystole not shockable?",
+                    steps: [
+                        "Defibrillation works by 'resetting' chaotic electrical activity",
+                        "Asystole has NO electrical activity to reset",
+                        "Shocking asystole won't create organized rhythm",
+                        "The underlying cause must be addressed",
+                        "Focus resources on CPR and reversible causes"
+                    ]
+                },
+                mechanism: {
+                    title: "Asystole",
+                    content: "ASYSTOLE DEFINITION:\n• Complete absence of electrical activity\n• Flat line on monitor\n• Must confirm in 2+ leads\n• Check electrodes and gain\n\nTREATMENT:\n• NOT shockable!\n• High-quality CPR\n• Epinephrine 1mg q3-5min\n• Search for H's and T's\n• Consider termination criteria\n\nCONFIRMATION:\n• Check in multiple leads\n• Ensure leads connected\n• Increase gain/amplitude\n• Rule out fine VF\n\nPROGNOSIS:\n• Generally poor\n• Better if due to reversible cause\n• Worse with prolonged downtime\n• Worse if initial rhythm (vs. deteriorated)\n\nTERMINATION CONSIDERATIONS:\n• No ROSC after 20+ min ACLS\n• No reversible causes found\n• End-tidal CO2 <10 after 20 min\n• Age, comorbidities, wishes"
+                },
+                pearl: "Always confirm asystole in multiple leads and check electrode contact. Fine VF can look like asystole - when in doubt, shock once.",
+                pitfall: "Don't mistake a loose lead or monitor malfunction for asystole. Check connections, increase gain, confirm in 2+ leads before concluding true asystole."
+            },
+            {
+                id: 7,
+                title: "Return of Spontaneous Circulation",
+                scenario: "Back to the first patient: After pericardiocentesis (removing 100mL of bloody fluid), the next rhythm check shows:\n• Organized rhythm at 85 bpm\n• Narrow QRS complexes\n• You feel a strong carotid pulse\n• BP reads 95/60\n• ETCO2 suddenly jumped from 15 to 42",
+                question: "The patient has ROSC. What are your immediate priorities?",
+                options: [
+                    {
+                        id: "A",
+                        text: "Optimize ventilation, target BP and oxygenation, check 12-lead ECG, consider targeted temperature management",
+                        outcome: "Correct post-ROSC care",
+                        feedback: "Correct! Post-ROSC priorities: Optimize oxygenation (target SpO2 94-98%), ventilation (target normocapnia), hemodynamics (MAP >65), 12-lead ECG for STEMI, and consider TTM for comatose patients.",
+                        points: 10,
+                        isOptimal: true
+                    },
+                    {
+                        id: "B",
+                        text: "Continue CPR for another 2 minutes to ensure stability",
+                        outcome: "Not indicated",
+                        feedback: "CPR is not indicated once you have confirmed ROSC. Continuing chest compressions could be harmful to a patient with a pulse and blood pressure.",
+                        points: 1,
+                        isOptimal: false
+                    },
+                    {
+                        id: "C",
+                        text: "Immediately give prophylactic amiodarone",
+                        outcome: "Not routine",
+                        feedback: "Prophylactic amiodarone after ROSC is not routinely recommended. Monitor for arrhythmias and treat if they occur, but don't give prophylactic antiarrhythmics.",
+                        points: 3,
+                        isOptimal: false
+                    },
+                    {
+                        id: "D",
+                        text: "Rush to CT scan to rule out other causes",
+                        outcome: "Stabilize first",
+                        feedback: "Stabilization comes before imaging. Ensure airway, breathing, circulation are optimized. CT may be needed but not emergently in someone who just achieved ROSC.",
+                        points: 4,
+                        isOptimal: false
+                    }
+                ],
+                whyChain: {
+                    title: "WHY is ETCO2 important for ROSC?",
+                    steps: [
+                        "ETCO2 reflects pulmonary blood flow",
+                        "During CPR, ETCO2 is low (minimal cardiac output)",
+                        "When heart restarts, pulmonary blood flow increases dramatically",
+                        "ETCO2 suddenly rises - often the first sign of ROSC",
+                        "More reliable than trying to feel a pulse during CPR"
+                    ]
+                },
+                mechanism: {
+                    title: "Post-Cardiac Arrest Care",
+                    content: "IMMEDIATE PRIORITIES:\n\n1. AIRWAY/BREATHING:\n• Target SpO2 94-98% (avoid hyperoxia)\n• Target ETCO2 35-45 (avoid hypo/hyperventilation)\n• Confirm ETT placement\n\n2. CIRCULATION:\n• Target MAP ≥65 mmHg (or SBP >90)\n• Vasopressors as needed\n• IV fluids cautiously\n• Treat arrhythmias if occur\n\n3. 12-LEAD ECG:\n• Identify STEMI → emergent PCI\n• Even without STEMI, consider cath for suspected ACS\n\n4. TARGETED TEMPERATURE MANAGEMENT:\n• For comatose patients\n• Target 32-36°C for 24+ hours\n• Prevents secondary brain injury\n\n5. OTHER:\n• Treat underlying cause\n• Glucose control\n• Seizure management\n• Prognostication (wait 72+ hours)"
+                },
+                pearl: "A sudden jump in ETCO2 during CPR (from ~10-15 to >40) is often the earliest sign of ROSC - even before you can feel a pulse.",
+                pitfall: "Don't hyperventilate after ROSC! This is common due to excitement, but hypocapnia causes cerebral vasoconstriction and worsens neurological outcomes."
+            },
+            {
+                id: 8,
+                title: "Bradycardia with a Pulse",
+                scenario: "New patient: A 65-year-old man on metoprolol presents with lightheadedness. \n\nVitals: HR 38, BP 78/50, confused\nECG: Complete heart block (third-degree AV block)\n• Regular P waves at 80/min\n• Regular ventricular escape at 38/min\n• No relationship between P waves and QRS",
+                question: "How should this symptomatic bradycardia be managed?",
+                options: [
+                    {
+                        id: "A",
+                        text: "Atropine 1mg IV, prepare for transcutaneous pacing, consider dopamine or epinephrine infusion",
+                        outcome: "Correct ACLS approach",
+                        feedback: "Correct! For symptomatic bradycardia: Atropine 1mg IV (may repeat q3-5min, max 3mg). If atropine fails (especially in complete heart block), transcutaneous pacing. Dopamine or epinephrine infusion as bridge.",
+                        points: 10,
+                        isOptimal: true
+                    },
+                    {
+                        id: "B",
+                        text: "Defibrillate - this is a dangerous rhythm",
+                        outcome: "Not indicated",
+                        feedback: "Defibrillation is for shockable rhythms (VF/pVT). This patient has a pulse with bradycardia - defibrillation is not appropriate.",
+                        points: 0,
+                        isOptimal: false
+                    },
+                    {
+                        id: "C",
+                        text: "Observe and wait - bradycardia is often benign",
+                        outcome: "Patient is symptomatic!",
+                        feedback: "This patient is SYMPTOMATIC (hypotension, confusion). Symptomatic bradycardia requires treatment. You can't wait and watch when the patient is hypotensive and confused.",
+                        points: 2,
+                        isOptimal: false
+                    },
+                    {
+                        id: "D",
+                        text: "Give adenosine to break the block",
+                        outcome: "Adenosine is wrong drug",
+                        feedback: "Adenosine slows conduction and causes transient heart block - the OPPOSITE of what you want! Adenosine is for SVT, not bradycardia.",
+                        points: 0,
+                        isOptimal: false
+                    }
+                ],
+                whyChain: {
+                    title: "WHY may atropine not work in complete heart block?",
+                    steps: [
+                        "Atropine works by blocking vagal tone at the AV node",
+                        "In complete heart block, the AV node is completely blocked",
+                        "Increasing SA node rate doesn't help if impulses can't conduct",
+                        "Ventricular escape rhythm is below the AV node",
+                        "Pacing bypasses the conduction system entirely"
+                    ]
+                },
+                mechanism: {
+                    title: "Symptomatic Bradycardia Algorithm",
+                    content: "WHEN TO TREAT:\n• HR <50 AND symptoms due to bradycardia\n• Symptoms: hypotension, confusion, chest pain, CHF, syncope\n\nATROPINE:\n• First-line for symptomatic bradycardia\n• 1mg IV, repeat q3-5min\n• Maximum total dose: 3mg\n• Less effective for infranodal block (Mobitz II, complete block)\n\nTRANSCUTANEOUS PACING:\n• If atropine fails\n• Especially for high-grade blocks\n• Set rate 60-80\n• Increase mA until capture\n• Sedation/analgesia for conscious patients\n\nDRUG INFUSIONS:\n• Dopamine 5-20 mcg/kg/min\n• Epinephrine 2-10 mcg/min\n• Bridge to transvenous pacing\n\nDEFINITIVE:\n• Transvenous pacing\n• Permanent pacemaker"
+                },
+                pearl: "Atropine is less effective for infranodal blocks (Mobitz II, complete heart block) because the block is below where atropine acts. Prepare pacing early for these rhythms.",
+                pitfall: "Don't give atropine repeatedly if it's not working. In complete heart block, it rarely helps. Move quickly to pacing."
+            },
+            {
+                id: 9,
+                title: "Unstable Tachycardia",
+                scenario: "New patient: A 45-year-old woman presents with palpitations and now chest pain.\n\nVitals: HR 185 regular, BP 82/55, SpO2 96%\nShe is diaphoretic and has altered mental status\nECG: Regular narrow-complex tachycardia at 185 bpm",
+                question: "How should this unstable tachycardia be managed?",
+                options: [
+                    {
+                        id: "A",
+                        text: "Synchronized cardioversion - patient is unstable",
+                        outcome: "Correct for unstable tachycardia",
+                        feedback: "Correct! Unstable tachycardia (hypotension, altered mental status, chest pain, CHF) requires immediate synchronized cardioversion. For narrow complex, start at 50-100J. Don't delay for medications.",
+                        points: 10,
+                        isOptimal: true
+                    },
+                    {
+                        id: "B",
+                        text: "Adenosine 6mg rapid IV push",
+                        outcome: "Not for unstable patient",
+                        feedback: "Adenosine is for STABLE narrow-complex tachycardia. This patient is UNSTABLE (hypotension, altered mental status, chest pain). Cardioversion is needed urgently.",
+                        points: 4,
+                        isOptimal: false
+                    },
+                    {
+                        id: "C",
+                        text: "Valsalva maneuver and carotid massage first",
+                        outcome: "Not for unstable patient",
+                        feedback: "Vagal maneuvers are for STABLE SVT. This patient is unstable with hypotension and AMS - you need immediate cardioversion, not vagal maneuvers.",
+                        points: 3,
+                        isOptimal: false
+                    },
+                    {
+                        id: "D",
+                        text: "Amiodarone 150mg IV over 10 minutes",
+                        outcome: "Too slow for unstable patient",
+                        feedback: "Amiodarone takes time to work and is for stable patients or refractory arrhythmias. This unstable patient needs immediate cardioversion - don't wait for medications.",
+                        points: 2,
+                        isOptimal: false
+                    }
+                ],
+                whyChain: {
+                    title: "WHY cardioversion for unstable tachycardia?",
+                    steps: [
+                        "Unstable = symptoms caused by the tachycardia itself",
+                        "Medications take time to work",
+                        "Patient is decompensating NOW",
+                        "Cardioversion immediately terminates the arrhythmia",
+                        "Electrical is faster and more reliable than chemical"
+                    ]
+                },
+                mechanism: {
+                    title: "Tachycardia Algorithm",
+                    content: "UNSTABLE SIGNS (caused by tachycardia):\n• Hypotension (SBP <90)\n• Altered mental status\n• Chest pain (ischemia)\n• Heart failure symptoms\n\nUNSTABLE TACHYCARDIA:\n• Synchronized cardioversion immediately\n• Narrow complex: 50-100J → 100-200J\n• Wide complex: 100J → 200J → 360J\n• Sedate if patient conscious (don't delay if crashing)\n\nSTABLE NARROW COMPLEX:\n• Vagal maneuvers\n• Adenosine 6mg → 12mg → 12mg\n• Rate control (diltiazem, metoprolol)\n• Consider rhythm control\n\nSTABLE WIDE COMPLEX:\n• If regular, consider adenosine (may be SVT with aberrancy)\n• Amiodarone 150mg over 10 min\n• Procainamide\n• Expert consultation\n\nSYNC vs UNSYNC:\n• Sync for organized rhythms WITH pulse\n• Unsync (defib) for VF/pulseless VT"
+                },
+                pearl: "If unsure whether symptoms are from tachycardia, look for response to rate/rhythm control. But don't experiment with an unstable patient - when in doubt, cardiovert.",
+                pitfall: "Make sure to use SYNCHRONIZED cardioversion for tachycardia with a pulse! Unsynchronized shock (defibrillation) on organized rhythm can cause VF."
+            },
+            {
+                id: 10,
+                title: "Quality Metrics and Team Dynamics",
+                scenario: "You're leading a code team. During the resuscitation, you notice:\n• CPR is being paused for 20+ seconds during rhythm checks\n• Compressions look shallow and slow\n• The person doing compressions seems tired\n• Someone is about to push epinephrine through the same line as the bicarb that was just given",
+                question: "Which intervention will most improve resuscitation quality?",
+                options: [
+                    {
+                        id: "A",
+                        text: "Ensure high-quality CPR: full recoil, 100-120/min, 2-inch depth, minimal interruptions, rotate compressors q2min",
+                        outcome: "Most important intervention",
+                        feedback: "Correct! High-quality CPR is the single most important factor in resuscitation success. Rate 100-120/min, depth 2+ inches (5+ cm), full chest recoil, minimal interruptions (<10 sec), rotate compressors to prevent fatigue.",
+                        points: 10,
+                        isOptimal: true
+                    },
+                    {
+                        id: "B",
+                        text: "Give more epinephrine to improve coronary perfusion",
+                        outcome: "CPR quality matters more",
+                        feedback: "Epinephrine only helps if delivered by adequate compressions. Poor CPR = poor drug delivery. Fix the CPR first - it's the foundation of resuscitation.",
+                        points: 4,
+                        isOptimal: false
+                    },
+                    {
+                        id: "C",
+                        text: "Focus on getting advanced airway placed",
+                        outcome: "CPR is higher priority",
+                        feedback: "Advanced airway can actually WORSEN outcomes if it interrupts CPR. BVM ventilation is adequate. High-quality compressions are more important than intubation.",
+                        points: 3,
+                        isOptimal: false
+                    },
+                    {
+                        id: "D",
+                        text: "Give sodium bicarbonate to treat acidosis",
+                        outcome: "Not routine, CPR is priority",
+                        feedback: "Routine bicarb is not recommended. CPR with good ventilation manages acidosis better. Also, bicarb precipitates with calcium and catecholamines - don't mix in same line!",
+                        points: 2,
+                        isOptimal: false
+                    }
+                ],
+                whyChain: {
+                    title: "WHY is CPR quality so critical?",
+                    steps: [
+                        "Compressions generate the only cardiac output during arrest",
+                        "Coronary perfusion depends on compression quality",
+                        "Drugs can't reach the heart without adequate circulation",
+                        "Defibrillation works better with well-perfused myocardium",
+                        "Every pause in CPR drops coronary perfusion to zero"
+                    ]
+                },
+                mechanism: {
+                    title: "High-Quality CPR Metrics",
+                    content: "CPR QUALITY TARGETS:\n• Rate: 100-120 compressions/min\n• Depth: ≥2 inches (5 cm) adult\n• Full chest recoil between compressions\n• Minimize interruptions (<10 sec)\n• Avoid excessive ventilation\n\nROTATION:\n• Change compressors every 2 minutes\n• Fatigue decreases quality rapidly\n• Switch during rhythm checks\n\nCHEST COMPRESSION FRACTION:\n• Target >80% (time with compressions)\n• Minimize pauses for rhythm checks, intubation, etc.\n\nMONITORING CPR QUALITY:\n• Waveform capnography (ETCO2 >10 suggests adequate CPR)\n• Arterial line if in place (diastolic >20 suggests adequate)\n• Real-time feedback devices\n\nTEAM DYNAMICS:\n• Clear roles assigned\n• Closed-loop communication\n• Leader coordinates, doesn't do compressions\n• Debrief after resuscitation"
+                },
+                pearl: "If ETCO2 is persistently <10 mmHg during CPR, it suggests inadequate compressions (or no cardiac output to measure). Improve CPR quality first.",
+                pitfall: "Don't pause CPR for intubation attempts! If you can't intubate in one attempt without pausing compressions, use BVM. CPR quality matters more than advanced airway."
+            }
+        ];
+
+        // [Standard game logic functions would continue here...]
+        
+        function initGame() {
+            maxScore = stages.reduce((sum, stage) => sum + Math.max(...stage.options.map(o => o.points)), 0);
+            renderStage();
+        }
+
+        function renderStage() {
+            const stage = stages[currentStage];
+            const container = document.getElementById('gameContainer');
+            
+            container.innerHTML = `
+                <div class="stage-card bg-white rounded-2xl shadow-lg p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-sm font-medium">Stage ${stage.id} of ${stages.length}</span>
+                        <h2 class="text-xl font-bold text-gray-800">${stage.title}</h2>
+                    </div>
+                    
+                    <div class="bg-slate-50 rounded-xl p-4 mb-6">
+                        <pre class="whitespace-pre-wrap font-sans text-gray-700">${stage.scenario}</pre>
+                    </div>
+                    
+                    <p class="font-semibold text-gray-800 mb-4">${stage.question}</p>
+                    
+                    <div class="space-y-3" id="optionsContainer">
+                        ${stage.options.map(opt => `
+                            <button onclick="selectOption('${opt.id}')" 
+                                class="w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-red-400 hover:bg-red-50 transition-all">
+                                <span class="font-bold text-red-600">${opt.id}.</span> ${opt.text}
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function selectOption(optionId) {
+            const stage = stages[currentStage];
+            const option = stage.options.find(o => o.id === optionId);
+            const optimalOption = stage.options.find(o => o.isOptimal);
+            
+            totalScore += option.points;
+            decisionPath.push({
+                stage: stage.id,
+                title: stage.title,
+                choice: optionId,
+                choiceText: option.text,
+                outcome: option.outcome,
+                points: option.points,
+                maxPoints: Math.max(...stage.options.map(o => o.points)),
+                isOptimal: option.isOptimal,
+                optimalChoice: optimalOption.id,
+                optimalText: optimalOption.text
+            });
+            
+            updateProgress();
+            showFeedback(stage, option);
+        }
+
+        function updateProgress() {
+            const progress = ((currentStage + 1) / stages.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('score').textContent = Math.round((totalScore / maxScore) * 100) + '%';
+        }
+
+        function showFeedback(stage, option) {
+            const container = document.getElementById('gameContainer');
+            
+            let pathClass = option.isOptimal ? 'optimal-path' : (option.points >= 5 ? 'suboptimal-path' : 'wrong-path');
+            let pathLabel = option.isOptimal ? '✓ Optimal Choice' : (option.points >= 5 ? '~ Suboptimal' : '✗ Incorrect');
+            
+            container.innerHTML = `
+                <div class="stage-card bg-white rounded-2xl shadow-lg p-6">
+                    <div class="${pathClass} p-4 rounded-xl mb-6">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="font-bold">${pathLabel}</span>
+                            <span class="text-gray-600">• ${option.points} points</span>
+                        </div>
+                        <p class="font-semibold text-gray-800">${option.outcome}</p>
+                    </div>
+                    
+                    <div class="bg-blue-50 rounded-xl p-4 mb-6">
+                        <p class="text-gray-700">${option.feedback}</p>
+                    </div>
+                    
+                    <div class="why-chain rounded-xl p-4 mb-6">
+                        <h3 class="font-bold text-blue-800 mb-3">🔗 ${stage.whyChain.title}</h3>
+                        <div class="space-y-2">
+                            ${stage.whyChain.steps.map((step, i) => `
+                                <div class="flex items-start gap-2">
+                                    <span class="text-blue-500 font-bold">${i + 1}.</span>
+                                    <span class="text-gray-700">${step}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="mechanism-box rounded-xl p-4 mb-6">
+                        <h3 class="font-bold text-green-800 mb-3">⚙️ ${stage.mechanism.title}</h3>
+                        <pre class="whitespace-pre-wrap font-sans text-gray-700 text-sm">${stage.mechanism.content}</pre>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-4 mb-6">
+                        <div class="pearl-box rounded-xl p-4">
+                            <h4 class="font-bold text-yellow-800 mb-2">💎 Clinical Pearl</h4>
+                            <p class="text-gray-700 text-sm">${stage.pearl}</p>
+                        </div>
+                        <div class="pitfall-box rounded-xl p-4">
+                            <h4 class="font-bold text-red-800 mb-2">⚠️ Pitfall</h4>
+                            <p class="text-gray-700 text-sm">${stage.pitfall}</p>
+                        </div>
+                    </div>
+                    
+                    <button onclick="nextStage()" class="w-full py-3 bg-gradient-to-r from-red-500 to-rose-500 text-white rounded-xl font-semibold hover:opacity-90 transition-opacity">
+                        ${currentStage < stages.length - 1 ? 'Continue to Next Stage →' : 'View Final Summary'}
+                    </button>
+                </div>
+            `;
+        }
+
+        function nextStage() {
+            currentStage++;
+            if (currentStage < stages.length) {
+                renderStage();
+            } else {
+                showSummary();
+            }
+        }
+
+        function showSummary() {
+            document.getElementById('gameContainer').classList.add('hidden');
+            const panel = document.getElementById('summaryPanel');
+            panel.classList.remove('hidden');
+            
+            const percentage = Math.round((totalScore / maxScore) * 100);
+            let grade, gradeColor;
+            if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = 'text-green-600'; }
+            else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = 'text-blue-600'; }
+            else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = 'text-yellow-600'; }
+            else { grade = 'Keep Learning!'; gradeColor = 'text-red-600'; }
+            
+            panel.innerHTML = `
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">📊 Case Complete!</h2>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="text-4xl font-bold ${gradeColor}">${percentage}%</div>
+                        <div class="text-xl text-gray-600">${grade}</div>
+                    </div>
+                    
+                    <h3 class="font-bold text-gray-800 mb-4">Your Decision Path:</h3>
+                    <div class="space-y-3">
+                        ${decisionPath.map(d => {
+                            let pathClass = d.isOptimal ? 'optimal-path' : (d.points >= 5 ? 'suboptimal-path' : 'wrong-path');
+                            return `
+                                <div class="${pathClass} p-3 rounded-lg">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <span class="font-bold">Stage ${d.stage}:</span> ${d.title}
+                                            <div class="text-sm mt-1">Your choice: <strong>${d.choice}</strong> - ${d.outcome}</div>
+                                            ${!d.isOptimal ? `<div class="text-sm text-gray-600 mt-1">Better: ${d.optimalChoice} - ${d.optimalText.substring(0, 50)}...</div>` : ''}
+                                        </div>
+                                        <span class="text-sm font-medium">${d.points}/${d.maxPoints}</span>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                    
+                    <div class="mt-6 p-4 bg-red-50 rounded-xl">
+                        <h4 class="font-bold text-red-800 mb-2">🎯 ACLS Key Points</h4>
+                        <ul class="text-sm text-gray-700 space-y-1">
+                            <li>• High-quality CPR is the foundation - rate, depth, recoil, minimal interruptions</li>
+                            <li>• VF/pVT are shockable; PEA/asystole are NOT shockable</li>
+                            <li>• Always search for reversible causes (H's and T's)</li>
+                            <li>• Unstable patients with pulse: cardioversion; without pulse: defibrillation</li>
+                            <li>• Post-ROSC: optimize oxygenation, ventilation, hemodynamics</li>
+                        </ul>
+                    </div>
+                    
+                    <button onclick="resetGame()" class="mt-6 w-full py-3 bg-gradient-to-r from-red-500 to-rose-500 text-white rounded-xl font-semibold hover:opacity-90">
+                        🔄 Try Again
+                    </button>
+                </div>
+            `;
+        }
+
+        function resetGame() {
+            currentStage = 0;
+            totalScore = 0;
+            decisionPath.length = 0;
+            document.getElementById('summaryPanel').classList.add('hidden');
+            document.getElementById('gameContainer').classList.remove('hidden');
+            document.getElementById('progressBar').style.width = '0%';
+            document.getElementById('score').textContent = '0%';
+            renderStage();
+        }
+
+        initGame();
+    </script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+/* Enhanced Feature Styles */
+.rdx-difficulty-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 300px;
+}
+.rdx-diff-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin: 2px;
+}
+.rdx-diff-btn.active {
+    background: #3b82f6;
+    color: white;
+}
+.rdx-diff-btn:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+}
+.rdx-diff-btn:hover:not(.active) {
+    background: #e2e8f0;
+}
+.rdx-refs-panel {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #93c5fd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+.rdx-refs-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+.rdx-refs-links {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+.rdx-refs-links a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.rdx-refs-links a:hover {
+    text-decoration: underline;
+}
+.rdx-debrief-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rdx-debrief-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #1f2937;
+}
+.rdx-path-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.rdx-path-optimal {
+    background: #dcfce7;
+    border-left: 4px solid #22c55e;
+}
+.rdx-path-suboptimal {
+    background: #fef9c3;
+    border-left: 4px solid #eab308;
+}
+.rdx-path-wrong {
+    background: #fecaca;
+    border-left: 4px solid #ef4444;
+}
+.rdx-hint-beginner {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+.rdx-hint-advanced {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+</style>
+
+<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
+    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
+        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    </div>
+</div>
+
+
+<!-- CROSS-PLATFORM LEARNING LINKS -->
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
+            <a href="../mechanism/syncope-arrhythmia-module.html" style="display: block; color: #2563eb; font-size: 14px;">→ ACLS Rhythms</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
+            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="heart-failure-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Heart Failure</a>
+            <a href="acs-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Acs</a>
+            <a href="aortic-dissection-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Aortic Dissection</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
+            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../CoachDx/mentor-chat.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../CoachDx/sbar-trainer.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+<!-- END CROSS-PLATFORM LINKS -->
+<div class="rdx-refs-panel" id="rdxRefsPanel">
+    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
+    <div class="rdx-refs-links"><a href="https://www.ahajournals.org/doi/10.1161/CIR.0000000000000916" target="_blank" class="text-blue-600 hover:underline">AHA ACLS Guidelines 2020</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK459216/" target="_blank" class="text-blue-600 hover:underline">StatPearls: Acute Coronary Syndrome</a></div>
+</div>
+
+<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
+    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+</div>
+
+<script>
+// ReasonDx Enhanced Features Module
+(function() {
+    // Decision tracking
+    window.rdxDecisionPath = window.rdxDecisionPath || [];
+    window.rdxTotalScore = window.rdxTotalScore || 0;
+    window.rdxMaxScore = window.rdxMaxScore || 0;
+    window.rdxDifficulty = 'intermediate';
+    
+    // Difficulty control
+    window.rdxSetDifficulty = function(level) {
+        window.rdxDifficulty = level;
+        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('rdx-btn-' + level).classList.add('active');
+        
+        // Update hint visibility
+        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
+            el.style.display = level === 'beginner' ? 'block' : 'none';
+        });
+        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
+            el.style.display = level === 'advanced' ? 'block' : 'none';
+        });
+    };
+    
+    // Track a decision
+    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+        window.rdxDecisionPath.push({
+            stage: stageId,
+            title: stageTitle,
+            choice: choiceId,
+            choiceText: choiceText,
+            outcome: outcome,
+            points: points,
+            maxPoints: maxPoints,
+            isOptimal: isOptimal,
+            optimalChoice: optimalChoice,
+            optimalText: optimalText
+        });
+        window.rdxTotalScore += points;
+        window.rdxMaxScore += maxPoints;
+    };
+    
+    // Show visual debrief
+    window.rdxShowDebrief = function() {
+        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
+        
+        let grade, gradeColor, gradeEmoji;
+        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
+        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
+        
+        let pathHTML = '';
+        if (window.rdxDecisionPath.length > 0) {
+            pathHTML = window.rdxDecisionPath.map(d => {
+                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
+                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
+                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
+                return '<div class="' + pathClass + ' rdx-path-item">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
+                    '<div>' +
+                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
+                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
+                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
+                    '</div>' +
+                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
+                    '</div></div>';
+            }).join('');
+        } else {
+            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+        }
+        
+        document.getElementById('rdxDebriefContent').innerHTML = 
+            '<div style="text-align:center;margin-bottom:24px;">' +
+            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
+            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
+            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
+            '</div></div>' +
+            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
+            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
+            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
+            '</div></div>' +
+            '<div style="display:flex;gap:12px;">' +
+            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '</div>';
+        
+        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
+    };
+    
+    // Auto-inject hint examples into existing content
+    window.rdxInit = function() {
+        // Could add dynamic hint injection here based on difficulty
+        console.log('ReasonDx Enhanced Features loaded for: Acls Rhythms Expanded Adventure');
+    };
+    
+    // Initialize on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.rdxInit);
+    } else {
+        window.rdxInit();
+    }
+})();
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+</body>
+</html>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meningitis Complete | Clinical Adventure</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: linear-gradient(135deg, #312e81 0%, #4f46e5 100%); min-height: 100vh; color: #e2e8f0; line-height: 1.6; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: rgba(49, 46, 129, 0.9); border-radius: 16px; margin-bottom: 20px; }
+        .badge { padding: 4px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; background: #6366f1; margin-left: 10px; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #6366f1, #a5b4fc); border-radius: 3px; }
+        .scene { background: linear-gradient(135deg, #312e81, #3730a3); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+        .scene-header { background: rgba(99, 102, 241, 0.15); padding: 16px 20px; }
+        .scene-phase { font-size: 0.75rem; color: #a5b4fc; text-transform: uppercase; }
+        .scene-title { font-size: 1.4rem; font-weight: 700; }
+        .scene-body { padding: 24px; }
+        .highlight { color: #fbbf24; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .safe { color: #4ade80; font-weight: 600; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(99, 102, 241, 0.2)); border: 1px solid rgba(139, 92, 246, 0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
+        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; }
+        .boards-tip { background: rgba(251, 191, 36, 0.15); border: 1px solid rgba(251, 191, 36, 0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .boards-tip-title { font-weight: 700; color: #fbbf24; margin-bottom: 10px; }
+        .alert-box { background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.5); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .alert-title { font-weight: 700; color: #f87171; margin-bottom: 10px; }
+        .btn { padding: 16px 28px; background: linear-gradient(135deg, #6366f1, #4f46e5); border: none; border-radius: 12px; color: white; font-weight: 600; cursor: pointer; width: 100%; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+        .comparison-table th { background: rgba(0,0,0,0.3); color: #a5b4fc; }
+        .why-chain { background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(99, 102, 241, 0.15)); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 16px; padding: 24px; margin: 24px 0; }
+        .why-chain-title { font-size: 1.2rem; font-weight: 700; color: #c4b5fd; margin-bottom: 20px; }
+        .why-item { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 18px; margin-bottom: 14px; }
+        .why-q { font-weight: 600; color: #e9d5ff; margin-bottom: 10px; }
+        .tips { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+        .pearl, .pitfall { padding: 20px; border-radius: 12px; }
+        .pearl { background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); }
+        .pitfall { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); }
+        .tip-header { font-weight: 600; margin-bottom: 10px; }
+        .pearl .tip-header { color: #4ade80; }
+        .pitfall .tip-header { color: #f87171; }
+        @media (max-width: 640px) { .tips { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container" id="app"></div>
+    <script>
+    const STAGES = ['arrival', 'classic_triad', 'organisms_age', 'lp_decision', 'csf_analysis', 'empiric_abx', 'steroids', 'viral', 'hsv', 'complications', 'prophylaxis', 'debrief'];
+    const state = { stage: 0 };
+
+    function render() {
+        const progress = ((state.stage + 1) / STAGES.length) * 100;
+        let c = `<div class="header"><div style="font-size:1.3rem;font-weight:700">🧠 Meningitis Complete<span class="badge">12 STAGES</span></div><div style="font-size:1.3rem;font-weight:700">${state.stage + 1}/${STAGES.length}</div></div><div class="progress-bar"><div class="progress-fill" style="width:${progress}%"></div></div>`;
+        switch(STAGES[state.stage]) {
+            case 'arrival': c += renderArrival(); break;
+            case 'classic_triad': c += renderTriad(); break;
+            case 'organisms_age': c += renderOrganisms(); break;
+            case 'lp_decision': c += renderLP(); break;
+            case 'csf_analysis': c += renderCSF(); break;
+            case 'empiric_abx': c += renderEmpiric(); break;
+            case 'steroids': c += renderSteroids(); break;
+            case 'viral': c += renderViral(); break;
+            case 'hsv': c += renderHSV(); break;
+            case 'complications': c += renderComplications(); break;
+            case 'prophylaxis': c += renderProphylaxis(); break;
+            case 'debrief': c += renderDebrief(); break;
+        }
+        document.getElementById('app').innerHTML = c;
+    }
+
+    function renderArrival() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 1 of 12</div><div class="scene-title">Fever and Headache</div></div><div class="scene-body"><div class="narrative"><p>A <span class="highlight">22-year-old college student</span> presents with <span class="critical">severe headache, fever, and neck stiffness</span> for 12 hours. Roommate reports she's been "confused."</p><p style="margin-top:12px;"><strong>Vitals:</strong> T 102.8°F, HR 112, BP 108/68, RR 20<br><strong>Exam:</strong> Toxic-appearing, photophobia, nuchal rigidity, petechial rash on trunk<br><strong>Neuro:</strong> GCS 14 (confused), no focal deficits</p></div><div class="alert-box"><div class="alert-title">🚨 Meningitis Until Proven Otherwise</div><p>Fever + headache + neck stiffness + altered mental status = bacterial meningitis until LP proves otherwise. Time is brain - each hour of delay increases mortality.</p></div><div class="mechanism-box"><div class="mechanism-title">🧬 Meningitis Pathophysiology</div><div class="pathway">Bacteria reach meninges via:<br>• Hematogenous spread (most common)<br>• Direct extension (sinusitis, otitis)<br>• Neurosurgical procedures<br><br>→ Subarachnoid space infection<br>→ Inflammatory cascade (cytokines)<br>→ BBB breakdown → vasogenic edema<br>→ ↑ ICP → ↓ cerebral perfusion<br>→ Neuronal injury</div></div><button class="btn" onclick="nextStage()">Classic Triad →</button></div></div>`;
+    }
+
+    function renderTriad() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 2 of 12</div><div class="scene-title">Clinical Features</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Classic Triad (Only 44% Have All Three!)</div><table class="comparison-table"><tr><th>Sign</th><th>Sensitivity</th><th>Mechanism</th></tr><tr><td><strong>Fever</strong></td><td>85%</td><td>Systemic inflammatory response</td></tr><tr><td><strong>Neck stiffness</strong></td><td>70%</td><td>Meningeal irritation</td></tr><tr><td><strong>Altered mental status</strong></td><td>67%</td><td>Cerebral edema, ↑ ICP</td></tr></table><p style="margin-top:8px;"><strong>95% have at least 2 of: headache, fever, neck stiffness, or AMS</strong></p></div><div class="mechanism-box"><div class="mechanism-title">🧬 Physical Exam Signs</div><div class="pathway"><strong>Kernig sign:</strong><br>Hip flexed 90° → pain with knee extension<br><br><strong>Brudzinski sign:</strong><br>Passive neck flexion → involuntary hip/knee flexion<br><br>Sensitivity: Only 5%! Absence doesn't rule out meningitis<br><br><strong>Jolt accentuation:</strong><br>Rotate head 2-3×/sec → worsened headache<br>Sensitivity ~97% (if negative, less likely meningitis)</div></div><div class="alert-box"><div class="alert-title">⚠️ Petechial Rash = Think Meningococcus!</div><p>Neisseria meningitidis causes petechiae/purpura in 50-80% of cases. Can rapidly progress to purpura fulminans and DIC. This is a medical emergency.</p></div><button class="btn" onclick="nextStage()">Organisms by Age →</button></div></div>`;
+    }
+
+    function renderOrganisms() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 3 of 12</div><div class="scene-title">Bugs by Age Group</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Common Pathogens by Age - BOARDS FAVORITE</div><table class="comparison-table"><tr><th>Age</th><th>Organisms</th><th>Key Points</th></tr><tr><td><strong>Neonates (<1 mo)</strong></td><td>GBS, E. coli, Listeria</td><td>Maternal flora; ampicillin for Listeria</td></tr><tr><td><strong>1-23 months</strong></td><td>S. pneumoniae, N. meningitidis, H. influenzae, GBS</td><td>Vaccinations have changed epidemiology</td></tr><tr><td><strong>2-50 years</strong></td><td>S. pneumoniae, N. meningitidis</td><td>College students: meningococcus outbreaks</td></tr><tr><td><strong>>50 years</strong></td><td>S. pneumoniae, N. meningitidis, Listeria, GNRs</td><td>ADD ampicillin for Listeria coverage</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Why Listeria in Elderly/Immunocompromised?</div><div class="pathway">Listeria monocytogenes:<br>• Gram-positive rod, intracellular<br>• Found in unpasteurized dairy, deli meats<br>• Cell-mediated immunity required to clear<br><br>At risk:<br>• Age >50 (waning immunity)<br>• Pregnancy (immunosuppression)<br>• Immunocompromised (steroids, HIV, transplant)<br><br>Standard cephalosporins DON'T cover Listeria!<br>Need ampicillin.</div></div><div class="narrative"><p><strong>This patient:</strong> 22 years old, college student, petechial rash = <span class="critical">N. meningitidis highest suspicion</span> (also cover S. pneumoniae)</p></div><button class="btn" onclick="nextStage()">LP Decision →</button></div></div>`;
+    }
+
+    function renderLP() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 4 of 12</div><div class="scene-title">To LP or Not to LP</div></div><div class="scene-body"><div class="alert-box"><div class="alert-title">🚨 Don't Delay Antibiotics for LP!</div><p>If meningitis is suspected and LP will be delayed (CT needed, coagulopathy), give antibiotics FIRST. Blood cultures before abx if possible, but don't wait.</p></div><div class="boards-tip"><div class="boards-tip-title">📚 When to Get CT Before LP</div><table class="comparison-table"><tr><th>Indication</th><th>Rationale</th></tr><tr><td>Immunocompromised</td><td>Higher risk of mass lesion</td></tr><tr><td>History of CNS disease</td><td>Tumor, stroke, prior infection</td></tr><tr><td>New-onset seizure</td><td>May indicate focal lesion</td></tr><tr><td>Papilledema</td><td>Suggests ↑ ICP</td></tr><tr><td>Focal neurologic deficit</td><td>Localizing lesion</td></tr><tr><td>Altered consciousness (GCS <10)</td><td>May indicate mass effect</td></tr></table><p style="margin-top:8px;">If none of these: Go straight to LP!</p></div><div class="mechanism-box"><div class="mechanism-title">🧬 LP Timing and Antibiotics</div><div class="pathway"><strong>Ideal sequence:</strong><br>1. Blood cultures<br>2. Empiric antibiotics + dexamethasone<br>3. CT head (if indicated)<br>4. Lumbar puncture<br><br><strong>CSF remains diagnostic for hours after abx:</strong><br>• Cell count: unchanged for 24h+<br>• Protein/glucose: unchanged for hours<br>• Gram stain: may be negative after 2h<br>• Culture: ~4h before sterilization<br><br>Don't let LP delay treatment!</div></div><button class="btn" onclick="nextStage()">CSF Analysis →</button></div></div>`;
+    }
+
+    function renderCSF() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 5 of 12</div><div class="scene-title">Reading the Spinal Fluid</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 CSF Patterns - MUST KNOW</div><table class="comparison-table"><tr><th>Parameter</th><th>Bacterial</th><th>Viral</th><th>TB/Fungal</th></tr><tr><td><strong>WBC</strong></td><td>>1000 (often >10,000)</td><td>10-500</td><td>50-500</td></tr><tr><td><strong>Differential</strong></td><td>>80% PMNs</td><td>Lymphocytes</td><td>Lymphocytes</td></tr><tr><td><strong>Glucose</strong></td><td><40 (or <2/3 serum)</td><td>Normal</td><td>Low</td></tr><tr><td><strong>Protein</strong></td><td>>200 mg/dL</td><td>50-100</td><td>100-500</td></tr><tr><td><strong>Opening pressure</strong></td><td>Elevated (>25 cm)</td><td>Normal/mild ↑</td><td>Elevated</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Why Glucose Is Low in Bacterial</div><div class="pathway">Bacteria and neutrophils consume glucose<br>→ ↓ CSF glucose<br><br>CSF:serum glucose ratio <0.4 suggests bacterial<br>(Draw serum glucose with LP)<br><br>Viral meningitis: Cells don't consume glucose<br>→ CSF glucose stays normal</div></div><div class="why-chain"><div class="why-chain-title">🔗 WHY Chain: PMNs vs Lymphocytes</div><div class="why-item"><div class="why-q">Why PMN predominance in bacterial?</div>Acute bacterial infection triggers rapid neutrophil recruitment (innate immunity). Takes time for lymphocytes to mobilize.</div><div class="why-item"><div class="why-q">Can viral start with PMNs?</div>Yes! Early viral meningitis (<24h) may show PMN predominance before shifting to lymphocytes. Repeat LP in 12-24h if uncertain.</div></div><button class="btn" onclick="nextStage()">Empiric Antibiotics →</button></div></div>`;
+    }
+
+    function renderEmpiric() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 6 of 12</div><div class="scene-title">Antibiotic Selection</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Empiric Regimens by Age</div><table class="comparison-table"><tr><th>Age</th><th>Regimen</th></tr><tr><td><strong><1 month</strong></td><td>Ampicillin + cefotaxime (or gent)</td></tr><tr><td><strong>1-23 months</strong></td><td>Vancomycin + ceftriaxone</td></tr><tr><td><strong>2-50 years</strong></td><td>Vancomycin + ceftriaxone</td></tr><tr><td><strong>>50 years</strong></td><td>Vancomycin + ceftriaxone + AMPICILLIN</td></tr><tr><td><strong>Immunocompromised</strong></td><td>Vancomycin + ceftriaxone + ampicillin</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Why These Drugs?</div><div class="pathway"><strong>Ceftriaxone:</strong><br>• Excellent CSF penetration<br>• Covers pneumococcus, meningococcus, H. flu<br><br><strong>Vancomycin:</strong><br>• Covers penicillin-resistant pneumococcus<br>• ~30% of S. pneumoniae now resistant<br><br><strong>Ampicillin:</strong><br>• Covers Listeria monocytogenes<br>• Cephalosporins have NO Listeria activity</div></div><div class="alert-box"><div class="alert-title">⚠️ Once Culture Returns</div><p>Narrow antibiotics based on sensitivities. If N. meningitidis confirmed: penicillin G or ceftriaxone. If S. pneumoniae: based on MIC (ceftriaxone if sensitive, add vanco if MIC high).</p></div><button class="btn" onclick="nextStage()">Steroids →</button></div></div>`;
+    }
+
+    function renderSteroids() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 7 of 12</div><div class="scene-title">Dexamethasone Timing</div></div><div class="scene-body"><div class="alert-box"><div class="alert-title">🚨 BOARDS FAVORITE: Steroids BEFORE or WITH First Antibiotic Dose</div><p>Dexamethasone must be given 15-20 minutes before OR simultaneously with first antibiotic dose to be effective. Given after = no benefit.</p></div><div class="boards-tip"><div class="boards-tip-title">📚 Dexamethasone Protocol</div><table class="comparison-table"><tr><th>Parameter</th><th>Details</th></tr><tr><td>Indication</td><td>Suspected bacterial meningitis in adults</td></tr><tr><td>Dose</td><td>0.15 mg/kg IV q6h × 4 days</td></tr><tr><td>Timing</td><td>BEFORE or WITH first antibiotic dose</td></tr><tr><td>Benefit</td><td>↓ mortality & hearing loss in PNEUMOCOCCAL meningitis</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Why Steroids Help</div><div class="pathway">Antibiotics kill bacteria<br>→ Cell wall lysis → release of inflammatory components<br>→ Intense inflammatory response<br>→ Cerebral edema, ↑ ICP, vasculitis<br><br>Dexamethasone:<br>→ Dampens inflammatory cascade<br>→ Reduces cerebral edema<br>→ Prevents hearing loss (CN VIII)<br><br>Must be given EARLY to prevent inflammation<br>If given after abx-induced lysis: too late!</div></div><div class="why-chain"><div class="why-chain-title">🔗 WHY Chain: Steroid Controversies</div><div class="why-item"><div class="why-q">Why only proven for pneumococcus?</div>The major trial (de Gans) showed benefit primarily in pneumococcal meningitis. May still give empirically before organism known.</div><div class="why-item"><div class="why-q">Do steroids reduce antibiotic penetration?</div>Theoretically could reduce vancomycin CSF levels. If using vanco, some experts give higher doses or repeat LP to confirm sterilization.</div></div><button class="btn" onclick="nextStage()">Viral Meningitis →</button></div></div>`;
+    }
+
+    function renderViral() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 8 of 12</div><div class="scene-title">Aseptic Meningitis</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Common Viral Causes</div><table class="comparison-table"><tr><th>Virus</th><th>Season/Setting</th><th>Notes</th></tr><tr><td><strong>Enteroviruses</strong></td><td>Summer/fall</td><td>Most common cause (85%)</td></tr><tr><td><strong>HSV-2</strong></td><td>Any time</td><td>Primary genital herpes; recurrent meningitis (Mollaret's)</td></tr><tr><td><strong>VZV</strong></td><td>Any time</td><td>May occur without rash</td></tr><tr><td><strong>HIV</strong></td><td>Seroconversion</td><td>Acute retroviral syndrome</td></tr><tr><td><strong>Mumps</strong></td><td>Unvaccinated</td><td>Parotitis may be absent</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Viral vs Bacterial: CSF Clues</div><div class="pathway"><strong>Favors viral:</strong><br>• Lymphocyte predominance<br>• Normal glucose<br>• Protein mildly elevated (50-100)<br>• Normal or mildly ↑ opening pressure<br>• Gram stain negative<br><br><strong>Caveat:</strong> Early viral (<24h) can have PMNs<br>Partially treated bacterial can look "viral"<br><br>When in doubt, treat for bacterial!</div></div><div class="alert-box"><div class="alert-title">✓ Viral Meningitis Management</div><p>Supportive care: hydration, analgesia, antiemetics. Usually self-limited (7-14 days). No antibiotics needed IF confident viral (but this is rarely certain initially).</p></div><button class="btn" onclick="nextStage()">HSV Encephalitis →</button></div></div>`;
+    }
+
+    function renderHSV() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 9 of 12</div><div class="scene-title">HSV Encephalitis: Don't Miss It!</div></div><div class="scene-body"><div class="alert-box"><div class="alert-title">🚨 HSV Encephalitis ≠ HSV Meningitis</div><p>HSV encephalitis (HSV-1) affects brain parenchyma and is FATAL without treatment. If any suspicion, add acyclovir immediately.</p></div><div class="boards-tip"><div class="boards-tip-title">📚 HSV Encephalitis Features</div><table class="comparison-table"><tr><th>Feature</th><th>Details</th></tr><tr><td>Presentation</td><td>Fever, headache, confusion, seizures, personality change</td></tr><tr><td>Location</td><td>Temporal lobe predilection</td></tr><tr><td>CSF</td><td>Lymphocytes, RBCs (hemorrhagic), ↑ protein</td></tr><tr><td>MRI</td><td>Temporal lobe hyperintensity (T2/FLAIR)</td></tr><tr><td>Diagnosis</td><td>CSF HSV PCR (gold standard)</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Why Temporal Lobe?</div><div class="pathway">HSV-1 travels via CN V (trigeminal)<br>→ Reactivates in trigeminal ganglion<br>→ Spreads to temporal/frontal lobes<br>→ Hemorrhagic necrosis<br><br>Untreated mortality: 70%<br>With acyclovir: ~20%<br><br>Start acyclovir (10 mg/kg IV q8h) empirically<br>Continue until HSV PCR negative (can take 72h)</div></div><div class="why-chain"><div class="why-chain-title">🔗 WHY Chain: When to Suspect HSV-E</div><div class="why-item"><div class="why-q">What differentiates from meningitis?</div>Encephalitis = brain parenchyma involvement. Look for: seizures, focal deficits, personality changes, altered consciousness out of proportion to fever.</div><div class="why-item"><div class="why-q">Can you rule out with negative PCR?</div>PCR may be negative in first 72 hours. If high suspicion, continue acyclovir and repeat LP/PCR in 3-5 days.</div></div><button class="btn" onclick="nextStage()">Complications →</button></div></div>`;
+    }
+
+    function renderComplications() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 10 of 12</div><div class="scene-title">What Can Go Wrong</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Complications of Bacterial Meningitis</div><table class="comparison-table"><tr><th>Complication</th><th>Frequency</th><th>Management</th></tr><tr><td><strong>Hearing loss</strong></td><td>10-30%</td><td>Steroids reduce; get audiology</td></tr><tr><td><strong>Seizures</strong></td><td>15-30%</td><td>Antiepileptics; may be focal</td></tr><tr><td><strong>Cerebral edema</strong></td><td>Variable</td><td>Elevate HOB, mannitol, hypertonic saline</td></tr><tr><td><strong>Hydrocephalus</strong></td><td>5%</td><td>May need VP shunt</td></tr><tr><td><strong>Subdural empyema</strong></td><td>Rare</td><td>Surgical drainage</td></tr><tr><td><strong>Stroke (vasculitis)</strong></td><td>15-20%</td><td>Supportive care</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Waterhouse-Friderichsen Syndrome</div><div class="pathway">Meningococcal sepsis<br>→ Bilateral adrenal hemorrhage<br>→ Acute adrenal insufficiency<br><br>Features:<br>• Purpura fulminans (extensive skin necrosis)<br>• DIC<br>• Shock refractory to fluids<br>• Hypoglycemia, hyponatremia<br><br>Treatment:<br>• Stress-dose hydrocortisone<br>• Aggressive resuscitation<br>• Often fatal despite treatment</div></div><button class="btn" onclick="nextStage()">Prophylaxis →</button></div></div>`;
+    }
+
+    function renderProphylaxis() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 11 of 12</div><div class="scene-title">Protecting Contacts</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 When to Give Prophylaxis</div><table class="comparison-table"><tr><th>Organism</th><th>Prophylaxis?</th><th>Who?</th></tr><tr><td><strong>N. meningitidis</strong></td><td>YES</td><td>Close contacts (household, kissing, shared utensils, healthcare workers with direct exposure)</td></tr><tr><td><strong>H. influenzae type b</strong></td><td>YES</td><td>Household with unvaccinated child <4yo</td></tr><tr><td><strong>S. pneumoniae</strong></td><td>NO</td><td>Not transmitted person-to-person</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Prophylaxis Regimens</div><div class="pathway"><strong>Meningococcus:</strong><br>• Rifampin 600mg PO BID × 2 days, OR<br>• Ciprofloxacin 500mg PO × 1, OR<br>• Ceftriaxone 250mg IM × 1 (preferred in pregnancy)<br><br><strong>H. influenzae:</strong><br>• Rifampin 600mg PO daily × 4 days<br><br>Give within 24 hours of diagnosis!<br>Index patient also needs prophylaxis before discharge<br>(unless treated with ceftriaxone, which eradicates carriage)</div></div><div class="alert-box"><div class="alert-title">⚠️ Don't Forget the Index Patient!</div><p>Penicillin and chloramphenicol do NOT eliminate nasopharyngeal carriage. If patient was treated with these (rare), give rifampin before discharge to prevent transmission.</p></div><button class="btn" onclick="nextStage()">Debrief →</button></div></div>`;
+    }
+
+    function renderDebrief() {
+        return `<div class="scene"><div style="text-align:center;padding:40px;"><div style="font-size:4rem;margin-bottom:12px;">🧠</div><div style="font-size:1.8rem;font-weight:700;color:#4ade80;">Meningitis Mastery Complete!</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 High-Yield Summary</div><table class="comparison-table"><tr><th>Concept</th><th>Key Point</th></tr><tr><td>Classic triad</td><td>Fever + neck stiffness + AMS (only 44% have all 3)</td></tr><tr><td>Organisms by age</td><td>Add ampicillin for Listeria if >50 or immunocompromised</td></tr><tr><td>CSF bacterial</td><td>High WBC (PMNs), low glucose, high protein</td></tr><tr><td>Empiric treatment</td><td>Vanc + ceftriaxone (± ampicillin)</td></tr><tr><td>Steroids</td><td>Dex BEFORE or WITH first antibiotic dose</td></tr><tr><td>HSV encephalitis</td><td>Add acyclovir if ANY suspicion</td></tr><tr><td>Prophylaxis</td><td>Meningococcus and H. flu only; not pneumococcus</td></tr></table></div><div class="why-chain"><div class="why-chain-title">🔗 Master WHY Chain</div><div class="why-item"><div class="why-q">Why add ampicillin in elderly?</div>Listeria risk increases with age/immunocompromise. Cephalosporins have zero Listeria activity.</div><div class="why-item"><div class="why-q">Why steroids before antibiotics?</div>Antibiotic-induced bacterial lysis triggers inflammation. Steroids given after can't prevent this cascade.</div></div><div class="tips"><div class="pearl"><div class="tip-header">✓ Clinical Pearls</div><ul style="margin-left:16px;"><li>Don't delay abx for LP</li><li>Petechiae + fever = meningococcus</li><li>Dex timing is critical</li><li>HSV-E: temporal lobe, seizures</li></ul></div><div class="pitfall"><div class="tip-header">✗ Pitfalls</div><ul style="margin-left:16px;"><li>Waiting for CT before antibiotics</li><li>Forgetting ampicillin in elderly</li><li>Giving steroids AFTER antibiotics</li><li>Missing HSV encephalitis</li></ul></div></div><button class="btn" onclick="location.reload()">🔄 Restart Case</button></div></div>`;
+    }
+
+    function nextStage() { state.stage++; render(); }
+    render();
+    </script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+/* Enhanced Feature Styles */
+.rdx-difficulty-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 300px;
+}
+.rdx-diff-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin: 2px;
+}
+.rdx-diff-btn.active {
+    background: #3b82f6;
+    color: white;
+}
+.rdx-diff-btn:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+}
+.rdx-diff-btn:hover:not(.active) {
+    background: #e2e8f0;
+}
+.rdx-refs-panel {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #93c5fd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+.rdx-refs-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+.rdx-refs-links {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+.rdx-refs-links a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.rdx-refs-links a:hover {
+    text-decoration: underline;
+}
+.rdx-debrief-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rdx-debrief-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #1f2937;
+}
+.rdx-path-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.rdx-path-optimal {
+    background: #dcfce7;
+    border-left: 4px solid #22c55e;
+}
+.rdx-path-suboptimal {
+    background: #fef9c3;
+    border-left: 4px solid #eab308;
+}
+.rdx-path-wrong {
+    background: #fecaca;
+    border-left: 4px solid #ef4444;
+}
+.rdx-hint-beginner {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+.rdx-hint-advanced {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+</style>
+
+<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
+    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
+        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    </div>
+</div>
+
+
+<!-- CROSS-PLATFORM LEARNING LINKS -->
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
+            <a href="../mechanism/infectious-disease-module.html" style="display: block; color: #2563eb; font-size: 14px;">→ CNS Infections</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
+            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="tbi-icp-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Tbi Icp</a>
+            <a href="spinal-cord-compression-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Spinal Cord Compression</a>
+            <a href="sah-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Sah</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
+            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../CoachDx/mentor-chat.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../CoachDx/sbar-trainer.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+<!-- END CROSS-PLATFORM LINKS -->
+<div class="rdx-refs-panel" id="rdxRefsPanel">
+    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
+    <div class="rdx-refs-links"><a href="https://www.ahajournals.org/doi/10.1161/STR.0000000000000211" target="_blank" class="text-blue-600 hover:underline">AHA Stroke Guidelines</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK535369/" target="_blank" class="text-blue-600 hover:underline">StatPearls: Stroke</a></div>
+</div>
+
+<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
+    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+</div>
+
+<script>
+// ReasonDx Enhanced Features Module
+(function() {
+    // Decision tracking
+    window.rdxDecisionPath = window.rdxDecisionPath || [];
+    window.rdxTotalScore = window.rdxTotalScore || 0;
+    window.rdxMaxScore = window.rdxMaxScore || 0;
+    window.rdxDifficulty = 'intermediate';
+    
+    // Difficulty control
+    window.rdxSetDifficulty = function(level) {
+        window.rdxDifficulty = level;
+        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('rdx-btn-' + level).classList.add('active');
+        
+        // Update hint visibility
+        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
+            el.style.display = level === 'beginner' ? 'block' : 'none';
+        });
+        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
+            el.style.display = level === 'advanced' ? 'block' : 'none';
+        });
+    };
+    
+    // Track a decision
+    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+        window.rdxDecisionPath.push({
+            stage: stageId,
+            title: stageTitle,
+            choice: choiceId,
+            choiceText: choiceText,
+            outcome: outcome,
+            points: points,
+            maxPoints: maxPoints,
+            isOptimal: isOptimal,
+            optimalChoice: optimalChoice,
+            optimalText: optimalText
+        });
+        window.rdxTotalScore += points;
+        window.rdxMaxScore += maxPoints;
+    };
+    
+    // Show visual debrief
+    window.rdxShowDebrief = function() {
+        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
+        
+        let grade, gradeColor, gradeEmoji;
+        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
+        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
+        
+        let pathHTML = '';
+        if (window.rdxDecisionPath.length > 0) {
+            pathHTML = window.rdxDecisionPath.map(d => {
+                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
+                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
+                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
+                return '<div class="' + pathClass + ' rdx-path-item">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
+                    '<div>' +
+                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
+                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
+                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
+                    '</div>' +
+                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
+                    '</div></div>';
+            }).join('');
+        } else {
+            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+        }
+        
+        document.getElementById('rdxDebriefContent').innerHTML = 
+            '<div style="text-align:center;margin-bottom:24px;">' +
+            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
+            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
+            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
+            '</div></div>' +
+            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
+            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
+            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
+            '</div></div>' +
+            '<div style="display:flex;gap:12px;">' +
+            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '</div>';
+        
+        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
+    };
+    
+    // Auto-inject hint examples into existing content
+    window.rdxInit = function() {
+        // Could add dynamic hint injection here based on difficulty
+        console.log('ReasonDx Enhanced Features loaded for: Meningitis Expanded Adventure');
+    };
+    
+    // Initialize on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.rdxInit);
+    } else {
+        window.rdxInit();
+    }
+})();
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+</body>
+</html>

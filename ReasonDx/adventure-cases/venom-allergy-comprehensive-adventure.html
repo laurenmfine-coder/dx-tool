@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venom Allergy | Clinical Adventure</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: linear-gradient(135deg, #78350f 0%, #d97706 100%); min-height: 100vh; color: #e2e8f0; line-height: 1.6; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: rgba(120, 53, 15, 0.9); border-radius: 16px; margin-bottom: 20px; }
+        .case-title { font-size: 1.2rem; font-weight: 700; }
+        .badge { padding: 4px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; background: #f59e0b; margin-left: 10px; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #f59e0b, #fcd34d); border-radius: 3px; }
+        .scene { background: linear-gradient(135deg, #78350f, #92400e); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+        .scene-header { background: rgba(245, 158, 11, 0.15); padding: 16px 20px; }
+        .scene-phase { font-size: 0.75rem; color: #fcd34d; text-transform: uppercase; }
+        .scene-title { font-size: 1.4rem; font-weight: 700; }
+        .scene-body { padding: 24px; }
+        .narrative { font-size: 1.05rem; line-height: 1.9; margin-bottom: 20px; }
+        .highlight { color: #fbbf24; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(245, 158, 11, 0.2)); border: 1px solid rgba(139, 92, 246, 0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
+        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; }
+        .boards-tip { background: rgba(251, 191, 36, 0.15); border: 1px solid rgba(251, 191, 36, 0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .boards-tip-title { font-weight: 700; color: #fbbf24; margin-bottom: 10px; }
+        .alert-box { background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.5); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .alert-title { font-weight: 700; color: #f87171; margin-bottom: 10px; }
+        .success-box { background: rgba(34, 197, 94, 0.2); border: 1px solid rgba(34, 197, 94, 0.5); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .success-title { font-weight: 700; color: #4ade80; margin-bottom: 10px; }
+        .btn { padding: 16px 28px; background: linear-gradient(135deg, #f59e0b, #d97706); border: none; border-radius: 12px; color: white; font-weight: 600; cursor: pointer; width: 100%; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+        .comparison-table th { background: rgba(0,0,0,0.3); color: #fcd34d; }
+        .why-chain { background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(245, 158, 11, 0.15)); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 16px; padding: 24px; margin: 24px 0; }
+        .why-chain-title { font-size: 1.2rem; font-weight: 700; color: #c4b5fd; margin-bottom: 20px; }
+        .why-item { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 18px; margin-bottom: 14px; }
+        .why-q { font-weight: 600; color: #e9d5ff; margin-bottom: 10px; }
+        .outcome-banner { text-align: center; padding: 40px; }
+        .tips { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+        .pearl { background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); padding: 20px; border-radius: 12px; }
+        .pitfall { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); padding: 20px; border-radius: 12px; }
+        .tip-header { font-weight: 600; margin-bottom: 10px; }
+        .pearl .tip-header { color: #4ade80; }
+        .pitfall .tip-header { color: #f87171; }
+        @media (max-width: 640px) { .tips { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container" id="app"></div>
+    <script>
+    const STAGES = ['arrival', 'identify', 'testing', 'risk', 'vit', 'monitoring', 'debrief'];
+    const state = { stage: 0 };
+
+    function render() {
+        const progress = ((state.stage + 1) / STAGES.length) * 100;
+        let c = `<div class="header"><div class="case-title">🐝 Hymenoptera Venom Allergy<span class="badge">ALLERGY</span></div>
+            <div style="font-size:1.3rem;font-weight:700">${state.stage + 1}/${STAGES.length}</div></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:${progress}%"></div></div>`;
+        switch(STAGES[state.stage]) {
+            case 'arrival': c += renderArrival(); break;
+            case 'identify': c += renderIdentify(); break;
+            case 'testing': c += renderTesting(); break;
+            case 'risk': c += renderRisk(); break;
+            case 'vit': c += renderVIT(); break;
+            case 'monitoring': c += renderMonitoring(); break;
+            case 'debrief': c += renderDebrief(); break;
+        }
+        document.getElementById('app').innerHTML = c;
+    }
+
+    function renderArrival() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 1 of 7</div><div class="scene-title">Post-Sting Anaphylaxis</div></div>
+            <div class="scene-body">
+                <div class="narrative"><p>A <span class="highlight">55-year-old man</span> is referred 3 weeks after experiencing <span class="critical">anaphylaxis</span> following a sting while gardening. He developed hives, throat tightness, and near-syncope within 10 minutes. He was treated with epinephrine in the ED.</p></div>
+                <div class="boards-tip"><div class="boards-tip-title">📚 Hymenoptera Sting Reactions</div>
+                    <table class="comparison-table">
+                        <tr><th>Reaction Type</th><th>Features</th><th>Management</th></tr>
+                        <tr><td><strong>Normal local</strong></td><td>&lt;10cm swelling at site</td><td>Ice, antihistamine</td></tr>
+                        <tr><td><strong>Large local</strong></td><td>&gt;10cm, peaks 24-48h</td><td>Consider steroids, NOT VIT indication</td></tr>
+                        <tr><td><strong>Systemic (non-life-threatening)</strong></td><td>Generalized urticaria only</td><td>Epi-pen, consider VIT</td></tr>
+                        <tr><td><span class="critical"><strong>Anaphylaxis</strong></span></td><td>Hypotension, respiratory, severe</td><td><span class="critical">Epi-pen + VIT indicated</span></td></tr>
+                    </table></div>
+                <button class="btn" onclick="nextStage()">Identify Culprit →</button>
+            </div></div>`;
+    }
+
+    function renderIdentify() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 2 of 7</div><div class="scene-title">Identify the Insect</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 Hymenoptera Identification</div>
+                    <table class="comparison-table">
+                        <tr><th>Insect</th><th>Key Features</th><th>Sting Pattern</th></tr>
+                        <tr><td><strong>Honeybee</strong></td><td>Fuzzy, barbed stinger left behind</td><td>Single sting, dies after</td></tr>
+                        <tr><td><strong>Yellow jacket</strong></td><td>Yellow/black, smooth, scavenger</td><td>Can sting multiple times, aggressive</td></tr>
+                        <tr><td><strong>Paper wasp</strong></td><td>Long legs, dangling, paper nests</td><td>Multiple stings possible</td></tr>
+                        <tr><td><strong>Hornet</strong></td><td>Larger, aerial nests</td><td>Very aggressive if disturbed</td></tr>
+                        <tr><td><strong>Fire ant</strong></td><td>Red/black, mound nests, Southern US</td><td>Multiple stings, sterile pustules</td></tr>
+                    </table></div>
+                <div class="narrative"><p><strong>This patient:</strong> "It was yellow and black, flew away after stinging me. There was no stinger left behind." → Most likely <span class="highlight">yellow jacket</span>.</p></div>
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Venom Cross-Reactivity</div>
+                    <div class="pathway">Vespids (yellow jacket, wasp, hornet):<br>→ Significant cross-reactivity<br>→ Often test positive to multiple vespids<br><br>Honeybee:<br>→ Little cross-reactivity with vespids<br>→ Unique venom proteins<br><br>Fire ant:<br>→ No cross-reactivity with flying Hymenoptera</div></div>
+                <button class="btn" onclick="nextStage()">Allergy Testing →</button>
+            </div></div>`;
+    }
+
+    function renderTesting() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 3 of 7</div><div class="scene-title">Venom Allergy Testing</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 Testing Protocol</div>
+                    <ul style="margin-left:20px;line-height:2;"><li><strong>Wait 4-6 weeks</strong> after sting (refractory period)</li><li><strong>Skin prick testing</strong> first (safer)</li><li><strong>Intradermal testing</strong> if prick negative</li><li><strong>Serum specific IgE</strong> as adjunct or if skin testing not possible</li></ul></div>
+                <div class="narrative"><p><strong>This patient's results (at 6 weeks):</strong></p>
+                    <ul style="margin-left:20px;"><li>Yellow jacket: Skin prick <span class="highlight">positive</span>, sIgE 8.5 kU/L</li><li>Wasp: Skin prick positive (cross-reactivity)</li><li>Honeybee: Negative</li><li>Baseline tryptase: 5.2 ng/mL (normal)</li></ul></div>
+                <div class="alert-box"><div class="alert-title">⚠️ Always Check Baseline Tryptase!</div>
+                    <p>Elevated baseline tryptase (>11.4) suggests mastocytosis. These patients have HIGHER risk of severe reactions and may need lifelong VIT.</p></div>
+                <button class="btn" onclick="nextStage()">Risk Assessment →</button>
+            </div></div>`;
+    }
+
+    function renderRisk() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 4 of 7</div><div class="scene-title">Risk Stratification</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 Risk Factors for Severe Reactions</div>
+                    <table class="comparison-table">
+                        <tr><th>Higher Risk</th><th>Lower Risk</th></tr>
+                        <tr><td>Prior severe reaction</td><td>Cutaneous-only reaction</td></tr>
+                        <tr><td>Older age</td><td>Pediatric age</td></tr>
+                        <tr><td>Cardiovascular disease</td><td>No comorbidities</td></tr>
+                        <tr><td>Beta-blocker/ACEi use</td><td>No interfering medications</td></tr>
+                        <tr><td>Elevated baseline tryptase</td><td>Normal tryptase</td></tr>
+                        <tr><td>Mastocytosis</td><td>No mast cell disorder</td></tr>
+                        <tr><td>Honeybee (beekeepers)</td><td>Incidental stings</td></tr>
+                    </table></div>
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Why Beta-Blockers Increase Risk</div>
+                    <div class="pathway">Beta-blockers block β-adrenergic receptors<br>→ Epinephrine less effective during anaphylaxis<br>→ Can't increase heart rate/contractility<br>→ Refractory hypotension<br>→ May need glucagon for treatment</div></div>
+                <div class="narrative"><p><strong>This patient:</strong> Age 55, prior anaphylaxis, on lisinopril (ACEi), normal tryptase → <span class="highlight">Moderate-high risk</span>. Strong indication for VIT.</p></div>
+                <button class="btn" onclick="nextStage()">Venom Immunotherapy →</button>
+            </div></div>`;
+    }
+
+    function renderVIT() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 5 of 7</div><div class="scene-title">Venom Immunotherapy (VIT)</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 VIT Protocol</div>
+                    <table class="comparison-table">
+                        <tr><th>Phase</th><th>Duration</th><th>Details</th></tr>
+                        <tr><td><strong>Build-up</strong></td><td>8-16 weeks (conventional)<br>or 1-2 days (rush)</td><td>Escalating doses to 100 mcg</td></tr>
+                        <tr><td><strong>Maintenance</strong></td><td>100 mcg q4 weeks</td><td>Can extend to q6-8 weeks after 1 year</td></tr>
+                        <tr><td><strong>Duration</strong></td><td>3-5 years minimum</td><td>Lifelong if mastocytosis or severe reaction</td></tr>
+                    </table></div>
+                <div class="success-box"><div class="success-title">✓ VIT Efficacy</div>
+                    <ul style="margin-left:20px;"><li><strong>98% effective</strong> in preventing systemic reactions to stings</li><li>Reduces risk of anaphylaxis from ~60% to &lt;5%</li><li>Protection persists years after stopping</li></ul></div>
+                <div class="mechanism-box"><div class="mechanism-title">🧬 How VIT Works</div>
+                    <div class="pathway">Repeated venom exposure at escalating doses<br>→ Shift from Th2 to Th1/Treg response<br>→ ↓ Venom-specific IgE over time<br>→ ↑ Venom-specific IgG4 (blocking antibody)<br>→ Mast cell/basophil desensitization<br>→ Tolerance achieved</div></div>
+                <button class="btn" onclick="nextStage()">Monitoring →</button>
+            </div></div>`;
+    }
+
+    function renderMonitoring() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 6 of 7</div><div class="scene-title">VIT Monitoring & Stopping</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 During VIT</div>
+                    <ul style="margin-left:20px;line-height:2;"><li>Observe 30 min after each injection</li><li>Adjust dose if local reactions >10cm</li><li>Hold if systemic reaction; premedicate or slower build-up</li><li>Continue epinephrine autoinjector prescription</li></ul></div>
+                <div class="boards-tip"><div class="boards-tip-title">📚 When to Stop VIT</div>
+                    <table class="comparison-table">
+                        <tr><th>Patient Type</th><th>Duration</th></tr>
+                        <tr><td>Standard patient</td><td>3-5 years</td></tr>
+                        <tr><td>Very severe initial reaction</td><td>Consider longer/lifelong</td></tr>
+                        <tr><td>Elevated tryptase/mastocytosis</td><td>Lifelong recommended</td></tr>
+                        <tr><td>Occupational exposure (beekeeper)</td><td>Consider lifelong</td></tr>
+                    </table></div>
+                <div class="alert-box"><div class="alert-title">🚨 After Stopping VIT</div>
+                    <p>Re-sting risk is ~5-10% even after successful VIT. Most recommend keeping epinephrine available, especially first few years after stopping.</p></div>
+                <button class="btn" onclick="nextStage()">Complete →</button>
+            </div></div>`;
+    }
+
+    function renderDebrief() {
+        return `<div class="outcome-banner"><div style="font-size:5rem">🏆</div><div style="font-size:2rem;font-weight:700;color:#4ade80;">Case Complete!</div></div>
+            <div class="debrief-section"><div class="debrief-title">📋 Summary</div><p>55yo man with yellow jacket anaphylaxis. Confirmed with skin testing. Started VIT with conventional build-up. Reached maintenance at 100 mcg q4 weeks. After 3 years, was restung accidentally - experienced only mild local reaction. VIT continued for 5 years total then stopped with close follow-up.</p></div>
+            <div class="why-chain"><div class="why-chain-title">🔗 WHY Chain</div>
+                <div class="why-item"><div class="why-q">Why wait 4-6 weeks after sting to test?</div><div class="why-a">Immediately after anaphylaxis, mast cells/basophils are degranulated and "refractory." IgE may be consumed. Testing too early may be falsely negative. The refractory period allows regeneration of mediators and IgE.</div></div>
+                <div class="why-item"><div class="why-q">Why is 100 mcg the maintenance dose?</div><div class="why-a">100 mcg approximates the amount of venom in 1-2 stings. This provides protection against field stings. Some allergists use 200 mcg for patients with mastocytosis or very severe reactions.</div></div>
+                <div class="why-item"><div class="why-q">Why does protection persist after stopping?</div><div class="why-a">VIT induces long-term immunologic tolerance via Treg cells and IgG4 blocking antibodies. These persist even after stopping injections. However, very long intervals (>10 years) may see some waning.</div></div></div>
+            <div class="tips">
+                <div class="pearl"><div class="tip-header">💎 Pearl</div><p><strong>Children with cutaneous-only reactions (hives alone) have <3% risk of systemic reaction on re-sting.</strong> VIT not routinely recommended for pediatric cutaneous-only reactions.</p></div>
+                <div class="pitfall"><div class="tip-header">⚠️ Pitfall</div><p><strong>Large local reactions do NOT predict systemic reactions.</strong> VIT is not indicated for large local reactions alone, regardless of size or duration.</p></div></div>
+            <button class="btn" onclick="location.reload()">🔄 Restart</button>`;
+    }
+
+    function nextStage() { state.stage++; render(); }
+    render();
+    </script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+/* Enhanced Feature Styles */
+.rdx-difficulty-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 300px;
+}
+.rdx-diff-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin: 2px;
+}
+.rdx-diff-btn.active {
+    background: #3b82f6;
+    color: white;
+}
+.rdx-diff-btn:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+}
+.rdx-diff-btn:hover:not(.active) {
+    background: #e2e8f0;
+}
+.rdx-refs-panel {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #93c5fd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+.rdx-refs-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+.rdx-refs-links {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+.rdx-refs-links a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.rdx-refs-links a:hover {
+    text-decoration: underline;
+}
+.rdx-debrief-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rdx-debrief-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #1f2937;
+}
+.rdx-path-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.rdx-path-optimal {
+    background: #dcfce7;
+    border-left: 4px solid #22c55e;
+}
+.rdx-path-suboptimal {
+    background: #fef9c3;
+    border-left: 4px solid #eab308;
+}
+.rdx-path-wrong {
+    background: #fecaca;
+    border-left: 4px solid #ef4444;
+}
+.rdx-hint-beginner {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+.rdx-hint-advanced {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+</style>
+
+<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
+    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
+        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    </div>
+</div>
+
+
+<!-- CROSS-PLATFORM LEARNING LINKS -->
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
+            <a href="../mechanism/venom-allergy-module.html" style="display: block; color: #2563eb; font-size: 14px;">→ Venom Allergy</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
+            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="asthma-exacerbation-expanded-dual-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Asthma Exacerbation Expanded D</a>
+            <a href="allergic-rhinitis-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Allergic Rhinitis</a>
+            <a href="penicillin-delabeling-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Penicillin Delabeling</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
+            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../CoachDx/mentor-chat.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../CoachDx/sbar-trainer.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+<!-- END CROSS-PLATFORM LINKS -->
+<div class="rdx-refs-panel" id="rdxRefsPanel">
+    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
+    <div class="rdx-refs-links"><a href="https://www.aaaai.org/practice-resources/statements-and-practice-parameters" target="_blank" class="text-blue-600 hover:underline">AAAAI Practice Parameters</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK482124/" target="_blank" class="text-blue-600 hover:underline">StatPearls: Anaphylaxis</a></div>
+</div>
+
+<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
+    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+</div>
+
+<script>
+// ReasonDx Enhanced Features Module
+(function() {
+    // Decision tracking
+    window.rdxDecisionPath = window.rdxDecisionPath || [];
+    window.rdxTotalScore = window.rdxTotalScore || 0;
+    window.rdxMaxScore = window.rdxMaxScore || 0;
+    window.rdxDifficulty = 'intermediate';
+    
+    // Difficulty control
+    window.rdxSetDifficulty = function(level) {
+        window.rdxDifficulty = level;
+        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('rdx-btn-' + level).classList.add('active');
+        
+        // Update hint visibility
+        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
+            el.style.display = level === 'beginner' ? 'block' : 'none';
+        });
+        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
+            el.style.display = level === 'advanced' ? 'block' : 'none';
+        });
+    };
+    
+    // Track a decision
+    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+        window.rdxDecisionPath.push({
+            stage: stageId,
+            title: stageTitle,
+            choice: choiceId,
+            choiceText: choiceText,
+            outcome: outcome,
+            points: points,
+            maxPoints: maxPoints,
+            isOptimal: isOptimal,
+            optimalChoice: optimalChoice,
+            optimalText: optimalText
+        });
+        window.rdxTotalScore += points;
+        window.rdxMaxScore += maxPoints;
+    };
+    
+    // Show visual debrief
+    window.rdxShowDebrief = function() {
+        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
+        
+        let grade, gradeColor, gradeEmoji;
+        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
+        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
+        
+        let pathHTML = '';
+        if (window.rdxDecisionPath.length > 0) {
+            pathHTML = window.rdxDecisionPath.map(d => {
+                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
+                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
+                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
+                return '<div class="' + pathClass + ' rdx-path-item">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
+                    '<div>' +
+                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
+                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
+                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
+                    '</div>' +
+                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
+                    '</div></div>';
+            }).join('');
+        } else {
+            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+        }
+        
+        document.getElementById('rdxDebriefContent').innerHTML = 
+            '<div style="text-align:center;margin-bottom:24px;">' +
+            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
+            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
+            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
+            '</div></div>' +
+            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
+            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
+            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
+            '</div></div>' +
+            '<div style="display:flex;gap:12px;">' +
+            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '</div>';
+        
+        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
+    };
+    
+    // Auto-inject hint examples into existing content
+    window.rdxInit = function() {
+        // Could add dynamic hint injection here based on difficulty
+        console.log('ReasonDx Enhanced Features loaded for: Venom Allergy Comprehensive Adventure');
+    };
+    
+    // Initialize on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.rdxInit);
+    } else {
+        window.rdxInit();
+    }
+})();
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+</body>
+</html>

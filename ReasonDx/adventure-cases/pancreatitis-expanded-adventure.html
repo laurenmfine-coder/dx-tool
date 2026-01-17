@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pancreatitis Complete | Clinical Adventure</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: linear-gradient(135deg, #92400e 0%, #d97706 100%); min-height: 100vh; color: #e2e8f0; line-height: 1.6; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: rgba(146, 64, 14, 0.9); border-radius: 16px; margin-bottom: 20px; }
+        .badge { padding: 4px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; background: #d97706; margin-left: 10px; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #d97706, #fcd34d); border-radius: 3px; }
+        .scene { background: linear-gradient(135deg, #92400e, #b45309); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+        .scene-header { background: rgba(217, 119, 6, 0.15); padding: 16px 20px; }
+        .scene-phase { font-size: 0.75rem; color: #fcd34d; text-transform: uppercase; }
+        .scene-title { font-size: 1.4rem; font-weight: 700; }
+        .scene-body { padding: 24px; }
+        .highlight { color: #fbbf24; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(217,119,6,0.2)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
+        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; }
+        .boards-tip { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .boards-tip-title { font-weight: 700; color: #fbbf24; margin-bottom: 10px; }
+        .alert-box { background: rgba(239,68,68,0.2); border: 1px solid rgba(239,68,68,0.5); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .alert-title { font-weight: 700; color: #f87171; margin-bottom: 10px; }
+        .btn { padding: 16px 28px; background: linear-gradient(135deg, #d97706, #b45309); border: none; border-radius: 12px; color: white; font-weight: 600; cursor: pointer; width: 100%; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+        .comparison-table th { background: rgba(0,0,0,0.3); color: #fcd34d; }
+        .why-chain { background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(217,119,6,0.15)); border: 1px solid rgba(139,92,246,0.3); border-radius: 16px; padding: 24px; margin: 24px 0; }
+        .why-chain-title { font-size: 1.2rem; font-weight: 700; color: #c4b5fd; margin-bottom: 20px; }
+        .why-item { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 18px; margin-bottom: 14px; }
+        .why-q { font-weight: 600; color: #e9d5ff; margin-bottom: 10px; }
+        .tips { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+        .pearl, .pitfall { padding: 20px; border-radius: 12px; }
+        .pearl { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); }
+        .pitfall { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); }
+        .tip-header { font-weight: 600; margin-bottom: 10px; }
+        .pearl .tip-header { color: #4ade80; }
+        .pitfall .tip-header { color: #f87171; }
+        @media (max-width: 640px) { .tips { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container" id="app"></div>
+    <script>
+    const STAGES = ['arrival','diagnosis','etiology','severity','fluids','nutrition','complications','necrotizing','debrief'];
+    const state = { stage: 0 };
+    function render() {
+        const p = ((state.stage + 1) / STAGES.length) * 100;
+        let c = `<div class="header"><div style="font-size:1.3rem;font-weight:700">🥞 Pancreatitis Complete<span class="badge">9 STAGES</span></div><div>${state.stage + 1}/${STAGES.length}</div></div><div class="progress-bar"><div class="progress-fill" style="width:${p}%"></div></div>`;
+        c += window['render_' + STAGES[state.stage]]();
+        document.getElementById('app').innerHTML = c;
+    }
+    function nextStage() { state.stage++; render(); }
+
+    window.render_arrival = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 1 of 9</div><div class="scene-title">Severe Epigastric Pain</div></div><div class="scene-body"><div class="narrative"><p>A <span class="highlight">48-year-old man</span> presents with <span class="critical">severe epigastric pain radiating to the back</span>, nausea, and vomiting for 8 hours. History of heavy alcohol use.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 110, BP 105/70, RR 22, T 100.8°F<br><strong>Exam:</strong> Diffuse abdominal tenderness, guarding, decreased bowel sounds<br><strong>Labs:</strong> Lipase 1,850 U/L (normal <60), WBC 14.2</p></div><div class="mechanism-box"><div class="mechanism-title">🧬 Pathophysiology</div><div class="pathway">Premature trypsinogen activation → trypsin<br>→ Autodigestion of pancreas<br>→ Local inflammation → cytokines<br>→ SIRS → potential MODS<br><br>Pain radiates to back (retroperitoneal)</div></div><button class="btn" onclick="nextStage()">Diagnosis →</button></div></div>`;
+    };
+
+    window.render_diagnosis = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 2 of 9</div><div class="scene-title">Making the Diagnosis</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Revised Atlanta Criteria (2 of 3)</div><table class="comparison-table"><tr><th>#</th><th>Criterion</th></tr><tr><td>1</td><td>Characteristic abdominal pain</td></tr><tr><td>2</td><td>Lipase (or amylase) ≥3× ULN</td></tr><tr><td>3</td><td>Imaging findings</td></tr></table><p style="margin-top:12px;">Pain + lipase ≥3× = diagnosis. CT NOT required!</p></div><div class="mechanism-box"><div class="mechanism-title">🧬 Lipase vs Amylase</div><div class="pathway"><strong>Lipase preferred:</strong><br>• More specific for pancreas<br>• Stays elevated longer (8-14 days)<br><br>Degree of elevation ≠ severity!</div></div><button class="btn" onclick="nextStage()">Etiology →</button></div></div>`;
+    };
+
+    window.render_etiology = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 3 of 9</div><div class="scene-title">Causes: I GET SMASHED</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Etiologies</div><table class="comparison-table"><tr><th>Letter</th><th>Cause</th></tr><tr><td><strong>I</strong></td><td>Idiopathic (10-20%)</td></tr><tr><td><strong>G</strong></td><td>Gallstones (#1, 40%)</td></tr><tr><td><strong>E</strong></td><td>Ethanol (#2, 30%)</td></tr><tr><td><strong>T</strong></td><td>Trauma, ERCP</td></tr><tr><td><strong>S</strong></td><td>Steroids, drugs</td></tr><tr><td><strong>M</strong></td><td>Mumps, infections</td></tr><tr><td><strong>A</strong></td><td>Autoimmune (IgG4)</td></tr><tr><td><strong>S</strong></td><td>Scorpion stings</td></tr><tr><td><strong>H</strong></td><td>HyperTG, HyperCa</td></tr><tr><td><strong>E</strong></td><td>ERCP</td></tr><tr><td><strong>D</strong></td><td>Drugs (valproate, thiazides)</td></tr></table></div><div class="alert-box"><div class="alert-title">⚠️ Always Get RUQ Ultrasound!</div><p>Evaluate for gallstones in ALL patients.</p></div><button class="btn" onclick="nextStage()">Severity →</button></div></div>`;
+    };
+
+    window.render_severity = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 4 of 9</div><div class="scene-title">Severity Assessment</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 BISAP Score</div><div class="pathway"><strong>B</strong>UN >25 mg/dL<br><strong>I</strong>mpaired mental status<br><strong>S</strong>IRS (≥2 criteria)<br><strong>A</strong>ge >60<br><strong>P</strong>leural effusion<br><br>Score ≥3 → severe pancreatitis</div></div><div class="alert-box"><div class="alert-title">🚨 Revised Atlanta Classification</div><p><strong>Mild:</strong> No organ failure, no complications<br><strong>Moderate:</strong> Transient organ failure (<48h)<br><strong>Severe:</strong> Persistent organ failure (>48h)</p></div><button class="btn" onclick="nextStage()">Fluids →</button></div></div>`;
+    };
+
+    window.render_fluids = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 5 of 9</div><div class="scene-title">Fluid Resuscitation</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Fluid Strategy</div><table class="comparison-table"><tr><th>Parameter</th><th>Recommendation</th></tr><tr><td>Fluid type</td><td>Lactated Ringer's preferred</td></tr><tr><td>Rate</td><td>250-500 mL/hr initially</td></tr><tr><td>Goals</td><td>HR <120, UOP ≥0.5 mL/kg/hr</td></tr></table></div><div class="why-chain"><div class="why-chain-title">🔗 WHY Chain</div><div class="why-item"><div class="why-q">Why aggressive fluids?</div>Third-spacing + vomiting → hypovolemia → pancreatic hypoperfusion → worsened necrosis.</div><div class="why-item"><div class="why-q">Why LR over NS?</div>NS causes hyperchloremic acidosis. LR may have anti-inflammatory effects.</div></div><button class="btn" onclick="nextStage()">Nutrition →</button></div></div>`;
+    };
+
+    window.render_nutrition = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 6 of 9</div><div class="scene-title">Early Feeding</div></div><div class="scene-body"><div class="alert-box"><div class="alert-title">🚨 Paradigm Shift: Early Feeding Is Better!</div><p>Old dogma: NPO to "rest pancreas"<br>New evidence: Early enteral feeding reduces infections and mortality!</p></div><div class="boards-tip"><div class="boards-tip-title">📚 Nutrition Approach</div><table class="comparison-table"><tr><th>Severity</th><th>Approach</th></tr><tr><td>Mild</td><td>Oral diet when pain improving</td></tr><tr><td>Moderate-Severe</td><td>Enteral feeding within 48-72h</td></tr></table></div><div class="why-chain"><div class="why-chain-title">🔗 WHY Chain</div><div class="why-item"><div class="why-q">Why enteral > TPN?</div>Maintains gut barrier, reduces bacterial translocation, lowers infection rates.</div></div><button class="btn" onclick="nextStage()">Complications →</button></div></div>`;
+    };
+
+    window.render_complications = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 7 of 9</div><div class="scene-title">Local Complications</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Fluid Collections</div><table class="comparison-table"><tr><th>Timing</th><th>Non-necrotic</th><th>Necrotic</th></tr><tr><td><4 weeks</td><td>Acute fluid collection</td><td>Acute necrotic collection</td></tr><tr><td>>4 weeks</td><td>Pseudocyst</td><td>Walled-off necrosis (WON)</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Pseudocyst vs WON</div><div class="pathway"><strong>Pseudocyst:</strong> Fluid only, no solid<br>• Drain only if symptomatic/infected<br><br><strong>WON:</strong> Contains necrotic debris<br>• Higher infection risk<br>• May need necrosectomy</div></div><button class="btn" onclick="nextStage()">Necrotizing →</button></div></div>`;
+    };
+
+    window.render_necrotizing = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 8 of 9</div><div class="scene-title">Infected Necrosis</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Sterile vs Infected</div><table class="comparison-table"><tr><th>Feature</th><th>Sterile</th><th>Infected</th></tr><tr><td>Management</td><td>Supportive</td><td>Abx + drainage</td></tr><tr><td>CT clue</td><td>No gas</td><td>Gas bubbles</td></tr><tr><td>Mortality</td><td>~10%</td><td>~30%</td></tr></table></div><div class="alert-box"><div class="alert-title">🚨 Step-Up Approach</div><p>Delay intervention ≥4 weeks if possible!<br>Percutaneous drain → Endoscopic necrosectomy → Surgery (last resort)</p></div><div class="mechanism-box"><div class="mechanism-title">🧬 When to Suspect Infection</div><div class="pathway">• Deterioration after initial improvement<br>• New fever, ↑WBC after 7-10 days<br>• Gas in pancreatic bed on CT</div></div><button class="btn" onclick="nextStage()">Debrief →</button></div></div>`;
+    };
+
+    window.render_debrief = function() {
+        return `<div class="scene"><div style="text-align:center;padding:40px;"><div style="font-size:4rem;margin-bottom:12px;">🥞</div><div style="font-size:1.8rem;font-weight:700;color:#4ade80;">Pancreatitis Mastery Complete!</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 High-Yield Summary</div><table class="comparison-table"><tr><th>Concept</th><th>Key Point</th></tr><tr><td>Diagnosis</td><td>2 of 3: pain + lipase ≥3× + imaging</td></tr><tr><td>Top causes</td><td>Gallstones (#1), Alcohol (#2)</td></tr><tr><td>Fluids</td><td>LR preferred, goal-directed</td></tr><tr><td>Nutrition</td><td>Early enteral (don't keep NPO!)</td></tr><tr><td>Severity</td><td>BISAP; persistent organ failure = severe</td></tr><tr><td>Infected necrosis</td><td>Gas on CT; step-up approach</td></tr></table></div><div class="tips"><div class="pearl"><div class="tip-header">✓ Pearls</div><ul style="margin-left:16px;"><li>Always RUQ ultrasound</li><li>Lipase level ≠ severity</li><li>Early feeding is better</li><li>Delay intervention for WON</li></ul></div><div class="pitfall"><div class="tip-header">✗ Pitfalls</div><ul style="margin-left:16px;"><li>Keeping NPO too long</li><li>CT too early (<72h)</li><li>Prophylactic antibiotics</li><li>Early surgical necrosectomy</li></ul></div></div><button class="btn" onclick="state.stage=0;render()">🔄 Restart Case</button></div></div>`;
+    };
+
+    render();
+    </script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+/* Enhanced Feature Styles */
+.rdx-difficulty-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 300px;
+}
+.rdx-diff-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin: 2px;
+}
+.rdx-diff-btn.active {
+    background: #3b82f6;
+    color: white;
+}
+.rdx-diff-btn:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+}
+.rdx-diff-btn:hover:not(.active) {
+    background: #e2e8f0;
+}
+.rdx-refs-panel {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #93c5fd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+.rdx-refs-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+.rdx-refs-links {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+.rdx-refs-links a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.rdx-refs-links a:hover {
+    text-decoration: underline;
+}
+.rdx-debrief-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rdx-debrief-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #1f2937;
+}
+.rdx-path-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.rdx-path-optimal {
+    background: #dcfce7;
+    border-left: 4px solid #22c55e;
+}
+.rdx-path-suboptimal {
+    background: #fef9c3;
+    border-left: 4px solid #eab308;
+}
+.rdx-path-wrong {
+    background: #fecaca;
+    border-left: 4px solid #ef4444;
+}
+.rdx-hint-beginner {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+.rdx-hint-advanced {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+</style>
+
+<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
+    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
+        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    </div>
+</div>
+
+
+<!-- CROSS-PLATFORM LEARNING LINKS -->
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
+            <a href="../mechanism/acute-abdomen-module.html" style="display: block; color: #2563eb; font-size: 14px;">→ Pancreatitis</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
+            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="cdiff-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Cdiff</a>
+            <a href="acute-abdomen-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Acute Abdomen</a>
+            <a href="gi-bleed-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Gi Bleed</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
+            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../CoachDx/mentor-chat.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../CoachDx/sbar-trainer.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+<!-- END CROSS-PLATFORM LINKS -->
+<div class="rdx-refs-panel" id="rdxRefsPanel">
+    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
+    <div class="rdx-refs-links"><a href="https://gi.org/guidelines/" target="_blank" class="text-blue-600 hover:underline">ACG Guidelines</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK470300/" target="_blank" class="text-blue-600 hover:underline">StatPearls: GI Bleeding</a></div>
+</div>
+
+<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
+    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+</div>
+
+<script>
+// ReasonDx Enhanced Features Module
+(function() {
+    // Decision tracking
+    window.rdxDecisionPath = window.rdxDecisionPath || [];
+    window.rdxTotalScore = window.rdxTotalScore || 0;
+    window.rdxMaxScore = window.rdxMaxScore || 0;
+    window.rdxDifficulty = 'intermediate';
+    
+    // Difficulty control
+    window.rdxSetDifficulty = function(level) {
+        window.rdxDifficulty = level;
+        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('rdx-btn-' + level).classList.add('active');
+        
+        // Update hint visibility
+        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
+            el.style.display = level === 'beginner' ? 'block' : 'none';
+        });
+        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
+            el.style.display = level === 'advanced' ? 'block' : 'none';
+        });
+    };
+    
+    // Track a decision
+    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+        window.rdxDecisionPath.push({
+            stage: stageId,
+            title: stageTitle,
+            choice: choiceId,
+            choiceText: choiceText,
+            outcome: outcome,
+            points: points,
+            maxPoints: maxPoints,
+            isOptimal: isOptimal,
+            optimalChoice: optimalChoice,
+            optimalText: optimalText
+        });
+        window.rdxTotalScore += points;
+        window.rdxMaxScore += maxPoints;
+    };
+    
+    // Show visual debrief
+    window.rdxShowDebrief = function() {
+        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
+        
+        let grade, gradeColor, gradeEmoji;
+        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
+        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
+        
+        let pathHTML = '';
+        if (window.rdxDecisionPath.length > 0) {
+            pathHTML = window.rdxDecisionPath.map(d => {
+                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
+                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
+                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
+                return '<div class="' + pathClass + ' rdx-path-item">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
+                    '<div>' +
+                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
+                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
+                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
+                    '</div>' +
+                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
+                    '</div></div>';
+            }).join('');
+        } else {
+            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+        }
+        
+        document.getElementById('rdxDebriefContent').innerHTML = 
+            '<div style="text-align:center;margin-bottom:24px;">' +
+            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
+            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
+            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
+            '</div></div>' +
+            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
+            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
+            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
+            '</div></div>' +
+            '<div style="display:flex;gap:12px;">' +
+            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '</div>';
+        
+        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
+    };
+    
+    // Auto-inject hint examples into existing content
+    window.rdxInit = function() {
+        // Could add dynamic hint injection here based on difficulty
+        console.log('ReasonDx Enhanced Features loaded for: Pancreatitis Expanded Adventure');
+    };
+    
+    // Initialize on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.rdxInit);
+    } else {
+        window.rdxInit();
+    }
+})();
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+</body>
+</html>

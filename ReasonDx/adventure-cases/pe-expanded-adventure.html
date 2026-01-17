@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pulmonary Embolism Complete | Clinical Adventure</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); min-height: 100vh; color: #e2e8f0; line-height: 1.6; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: rgba(30, 58, 138, 0.9); border-radius: 16px; margin-bottom: 20px; }
+        .badge { padding: 4px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; background: #3b82f6; margin-left: 10px; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #3b82f6, #93c5fd); border-radius: 3px; }
+        .scene { background: linear-gradient(135deg, #1e3a8a, #1d4ed8); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+        .scene-header { background: rgba(59, 130, 246, 0.15); padding: 16px 20px; }
+        .scene-phase { font-size: 0.75rem; color: #93c5fd; text-transform: uppercase; }
+        .scene-title { font-size: 1.4rem; font-weight: 700; }
+        .scene-body { padding: 24px; }
+        .highlight { color: #fbbf24; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(59, 130, 246, 0.2)); border: 1px solid rgba(139, 92, 246, 0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
+        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; }
+        .boards-tip { background: rgba(251, 191, 36, 0.15); border: 1px solid rgba(251, 191, 36, 0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .boards-tip-title { font-weight: 700; color: #fbbf24; margin-bottom: 10px; }
+        .alert-box { background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.5); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .alert-title { font-weight: 700; color: #f87171; margin-bottom: 10px; }
+        .btn { padding: 16px 28px; background: linear-gradient(135deg, #3b82f6, #1d4ed8); border: none; border-radius: 12px; color: white; font-weight: 600; cursor: pointer; width: 100%; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+        .comparison-table th { background: rgba(0,0,0,0.3); color: #93c5fd; }
+        .why-chain { background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(59, 130, 246, 0.15)); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 16px; padding: 24px; margin: 24px 0; }
+        .why-chain-title { font-size: 1.2rem; font-weight: 700; color: #c4b5fd; margin-bottom: 20px; }
+        .why-item { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 18px; margin-bottom: 14px; }
+        .why-q { font-weight: 600; color: #e9d5ff; margin-bottom: 10px; }
+        .outcome-banner { text-align: center; padding: 40px; }
+        .tips { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+        .pearl, .pitfall { padding: 20px; border-radius: 12px; }
+        .pearl { background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); }
+        .pitfall { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); }
+        .tip-header { font-weight: 600; margin-bottom: 10px; }
+        .pearl .tip-header { color: #4ade80; }
+        .pitfall .tip-header { color: #f87171; }
+        @media (max-width: 640px) { .tips { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container" id="app"></div>
+    <script>
+    const STAGES = [
+        'arrival', 'pretest_prob', 'wells_score', 'perc_rule', 'dimer',
+        'imaging', 'risk_stratify', 'hemodynamics', 'anticoagulation', 'thrombolysis',
+        'interventional', 'special_pops', 'duration', 'debrief'
+    ];
+    const state = { stage: 0 };
+
+    function render() {
+        const progress = ((state.stage + 1) / STAGES.length) * 100;
+        let c = `<div class="header">
+            <div style="font-size:1.3rem;font-weight:700">🫁 PE Complete<span class="badge">14 STAGES</span></div>
+            <div style="font-size:1.3rem;font-weight:700">${state.stage + 1}/${STAGES.length}</div></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:${progress}%"></div></div>`;
+        
+        switch(STAGES[state.stage]) {
+            case 'arrival': c += renderArrival(); break;
+            case 'pretest_prob': c += renderPretest(); break;
+            case 'wells_score': c += renderWells(); break;
+            case 'perc_rule': c += renderPERC(); break;
+            case 'dimer': c += renderDimer(); break;
+            case 'imaging': c += renderImaging(); break;
+            case 'risk_stratify': c += renderRiskStratify(); break;
+            case 'hemodynamics': c += renderHemodynamics(); break;
+            case 'anticoagulation': c += renderAnticoag(); break;
+            case 'thrombolysis': c += renderThrombolysis(); break;
+            case 'interventional': c += renderInterventional(); break;
+            case 'special_pops': c += renderSpecialPops(); break;
+            case 'duration': c += renderDuration(); break;
+            case 'debrief': c += renderDebrief(); break;
+        }
+        document.getElementById('app').innerHTML = c;
+    }
+
+    function renderArrival() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 1 of 14</div><div class="scene-title">The Dyspneic Patient</div></div>
+            <div class="scene-body">
+                <div class="narrative"><p>A <span class="highlight">52-year-old woman</span> presents with <span class="critical">acute onset dyspnea and pleuritic chest pain</span> that started 6 hours ago. She returned from a 12-hour flight from Tokyo 3 days ago.</p>
+                <p style="margin-top:12px;"><strong>PMH:</strong> Obesity, recent knee arthroscopy 2 weeks ago<br>
+                <strong>Vitals:</strong> BP 118/76, HR 112, RR 24, SpO2 92% on RA, T 99.1°F<br>
+                <strong>Exam:</strong> Tachypneic, clear lungs, RLE mildly swollen, no JVD</p></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 Virchow's Triad</div>
+                    <div class="pathway"><strong>1. Stasis:</strong> Immobility, long travel, paralysis<br><strong>2. Endothelial injury:</strong> Surgery, trauma, catheters<br><strong>3. Hypercoagulability:</strong> Cancer, pregnancy, OCP, thrombophilia</div>
+                    <p style="margin-top:12px;">This patient has: Long flight (stasis) + recent surgery (injury) + obesity (hypercoag)</p></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 PE Pathophysiology</div>
+                    <div class="pathway">DVT forms (usually in legs)<br>→ Embolizes to pulmonary arteries<br>→ Mechanical obstruction + vasoconstriction<br>→ ↑ Pulmonary vascular resistance<br>→ ↑ RV afterload → RV dilation → RV failure<br>→ ↓ LV preload → ↓ cardiac output → shock</div></div>
+                <button class="btn" onclick="nextStage()">Pretest Probability →</button>
+            </div></div>`;
+    }
+
+    function renderPretest() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 2 of 14</div><div class="scene-title">Clinical Decision Rules</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 PE Diagnostic Algorithm</div>
+                    <div class="pathway">Step 1: Estimate pretest probability<br>   → Wells Score or Geneva Score<br><br>Step 2: Low probability?<br>   → Apply PERC rule (if Wells ≤4)<br>   → If PERC negative: STOP, no testing needed<br><br>Step 3: Not PERC negative?<br>   → D-dimer (age-adjusted)<br>   → If negative: PE ruled out<br><br>Step 4: D-dimer positive?<br>   → CT pulmonary angiography (CTPA)</div></div>
+                
+                <div class="alert-box"><div class="alert-title">⚠️ Why This Matters</div>
+                    <p>CTPA has radiation exposure and contrast risks. D-dimer is sensitive but not specific. Using clinical decision rules prevents unnecessary testing while not missing PE.</p></div>
+                <button class="btn" onclick="nextStage()">Wells Score →</button>
+            </div></div>`;
+    }
+
+    function renderWells() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 3 of 14</div><div class="scene-title">Wells Score for PE</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 Wells Criteria</div>
+                    <table class="comparison-table">
+                        <tr><th>Criterion</th><th>Points</th><th>Patient</th></tr>
+                        <tr><td>Clinical signs/symptoms of DVT</td><td>3</td><td>3 ✓ (leg swelling)</td></tr>
+                        <tr><td>PE most likely diagnosis</td><td>3</td><td>3 ✓</td></tr>
+                        <tr><td>HR > 100</td><td>1.5</td><td>1.5 ✓</td></tr>
+                        <tr><td>Immobilization ≥3 days or surgery <4 wks</td><td>1.5</td><td>1.5 ✓</td></tr>
+                        <tr><td>Previous PE or DVT</td><td>1.5</td><td>0</td></tr>
+                        <tr><td>Hemoptysis</td><td>1</td><td>0</td></tr>
+                        <tr><td>Malignancy</td><td>1</td><td>0</td></tr>
+                    </table>
+                    <p style="margin-top:12px;"><strong>Total: 9 points</strong></p></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 Interpretation</div>
+                    <table class="comparison-table">
+                        <tr><th>Score</th><th>Risk</th><th>PE Probability</th></tr>
+                        <tr><td>≤4</td><td>Low (PE unlikely)</td><td>~8%</td></tr>
+                        <tr><td>>4</td><td>High (PE likely)</td><td>~34%</td></tr>
+                    </table>
+                    <p style="margin-top:12px;"><strong>This patient: High probability (>4)</strong> → Proceed to imaging</p></div>
+                <button class="btn" onclick="nextStage()">PERC Rule →</button>
+            </div></div>`;
+    }
+
+    function renderPERC() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 4 of 14</div><div class="scene-title">PERC Rule</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 PERC (Pulmonary Embolism Rule-out Criteria)</div>
+                    <p><strong>Only apply if Wells ≤4 (low probability)!</strong></p>
+                    <table class="comparison-table">
+                        <tr><th>Criterion</th><th>Present?</th></tr>
+                        <tr><td>Age ≥50</td><td>Yes ✗</td></tr>
+                        <tr><td>HR ≥100</td><td>Yes ✗</td></tr>
+                        <tr><td>SpO2 <95% on RA</td><td>Yes ✗</td></tr>
+                        <tr><td>Unilateral leg swelling</td><td>Yes ✗</td></tr>
+                        <tr><td>Hemoptysis</td><td>No</td></tr>
+                        <tr><td>Recent surgery or trauma</td><td>Yes ✗</td></tr>
+                        <tr><td>Prior PE or DVT</td><td>No</td></tr>
+                        <tr><td>Exogenous estrogen</td><td>No</td></tr>
+                    </table></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 PERC Rule Logic</div>
+                    <div class="pathway">If ALL criteria are ABSENT in a LOW-risk patient:<br>→ PE risk <2% (below test threshold)<br>→ No further testing needed<br>→ D-dimer would cause more harm than benefit<br><br>This patient: Wells >4, so PERC doesn't apply<br>Even if it did: Multiple PERC criteria positive</div></div>
+                
+                <div class="alert-box"><div class="alert-title">⚠️ PERC Pitfall</div>
+                    <p>PERC only applies to LOW pretest probability patients. Never use PERC to rule out PE in moderate/high probability patients!</p></div>
+                <button class="btn" onclick="nextStage()">D-Dimer →</button>
+            </div></div>`;
+    }
+
+    function renderDimer() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 5 of 14</div><div class="scene-title">D-Dimer Testing</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 D-Dimer Characteristics</div>
+                    <table class="comparison-table">
+                        <tr><td><strong>Sensitivity</strong></td><td>95-97% (excellent rule-out)</td></tr>
+                        <tr><td><strong>Specificity</strong></td><td>~40% (many false positives)</td></tr>
+                        <tr><td><strong>Use</strong></td><td>Rule OUT PE in low/moderate probability</td></tr>
+                        <tr><td><strong>Cutoff</strong></td><td>500 ng/mL (or age-adjusted)</td></tr>
+                    </table></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Age-Adjusted D-Dimer</div>
+                    <div class="pathway">Cutoff = Age × 10 (for patients >50 years)<br><br>Example: 70-year-old<br>→ Cutoff = 70 × 10 = 700 ng/mL<br><br>Increases specificity without sacrificing sensitivity<br>Reduces unnecessary CTPA in elderly</div></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 When D-Dimer is Elevated (Non-PE)</div>
+                    <ul style="margin-left:20px;line-height:1.8;">
+                        <li>Age (increases with age)</li>
+                        <li>Pregnancy</li>
+                        <li>Recent surgery/trauma</li>
+                        <li>Malignancy</li>
+                        <li>Infection/sepsis</li>
+                        <li>Liver disease</li>
+                        <li>Renal disease</li>
+                        <li>Hospitalization</li>
+                    </ul></div>
+                
+                <div class="narrative"><p><strong>This patient:</strong> High pretest probability (Wells 9) → Skip D-dimer, proceed directly to CTPA</p></div>
+                <button class="btn" onclick="nextStage()">Imaging →</button>
+            </div></div>`;
+    }
+
+    function renderImaging() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 6 of 14</div><div class="scene-title">Diagnostic Imaging</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 CT Pulmonary Angiography (CTPA)</div>
+                    <ul style="margin-left:20px;line-height:2;">
+                        <li><strong>Gold standard</strong> for PE diagnosis</li>
+                        <li>Sensitivity 83%, Specificity 96%</li>
+                        <li>Visualizes clot directly</li>
+                        <li>Can assess RV strain</li>
+                        <li>May reveal alternative diagnosis</li>
+                    </ul></div>
+                
+                <div class="narrative"><p><strong>This patient's CTPA:</strong> <span class="critical">Bilateral pulmonary emboli</span> with saddle embolus at main PA bifurcation. RV:LV ratio 1.3 (RV strain).</p></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 Alternative Imaging</div>
+                    <table class="comparison-table">
+                        <tr><th>Modality</th><th>When to Use</th></tr>
+                        <tr><td><strong>V/Q scan</strong></td><td>Contrast allergy, renal failure, pregnancy</td></tr>
+                        <tr><td><strong>Lower extremity US</strong></td><td>If DVT found, treat as VTE (no CTPA needed if unstable)</td></tr>
+                        <tr><td><strong>Echo</strong></td><td>Unstable patient, assess RV function</td></tr>
+                        <tr><td><strong>MRA</strong></td><td>Rarely used (lower sensitivity)</td></tr>
+                    </table></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 RV Strain on CT</div>
+                    <div class="pathway">RV:LV ratio >0.9 = RV dilation<br>→ Indicates significant PE burden<br>→ Associated with worse outcomes<br>→ May warrant more aggressive therapy<br><br>Other signs: Septal bowing, reflux of contrast into IVC/hepatic veins</div></div>
+                <button class="btn" onclick="nextStage()">Risk Stratification →</button>
+            </div></div>`;
+    }
+
+    function renderRiskStratify() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 7 of 14</div><div class="scene-title">Risk Stratification</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 PE Severity Classification</div>
+                    <table class="comparison-table">
+                        <tr><th>Category</th><th>Criteria</th><th>Mortality</th></tr>
+                        <tr><td><strong>Massive (High-risk)</strong></td><td>Sustained hypotension or cardiac arrest</td><td>25-65%</td></tr>
+                        <tr><td><strong>Submassive (Intermediate)</strong></td><td>Normotensive + RV dysfunction or ↑ troponin</td><td>3-15%</td></tr>
+                        <tr><td><strong>Low-risk</strong></td><td>Normotensive, no RV strain, normal biomarkers</td><td><1%</td></tr>
+                    </table></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 PESI Score (Simplified)</div>
+                    <table class="comparison-table">
+                        <tr><th>Criterion</th><th>Points</th><th>Patient</th></tr>
+                        <tr><td>Age >80</td><td>1</td><td>0</td></tr>
+                        <tr><td>Cancer</td><td>1</td><td>0</td></tr>
+                        <tr><td>Chronic cardiopulmonary disease</td><td>1</td><td>0</td></tr>
+                        <tr><td>HR ≥110</td><td>1</td><td>1 ✓</td></tr>
+                        <tr><td>SBP <100</td><td>1</td><td>0</td></tr>
+                        <tr><td>SpO2 <90%</td><td>1</td><td>0</td></tr>
+                    </table>
+                    <p style="margin-top:12px;"><strong>sPESI 1</strong> = Not low-risk (≥1 point)</p></div>
+                
+                <div class="narrative"><p><strong>This patient:</strong> BP stable but RV strain on CT + elevated troponin = <span class="critical">Submassive (Intermediate-risk) PE</span></p></div>
+                <button class="btn" onclick="nextStage()">Hemodynamic Assessment →</button>
+            </div></div>`;
+    }
+
+    function renderHemodynamics() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 8 of 14</div><div class="scene-title">Hemodynamic Assessment</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 Signs of RV Failure</div>
+                    <table class="comparison-table">
+                        <tr><th>Finding</th><th>Mechanism</th></tr>
+                        <tr><td>Hypotension</td><td>↓ LV preload from RV failure</td></tr>
+                        <tr><td>JVD</td><td>↑ RA pressure from RV backup</td></tr>
+                        <tr><td>Hepatomegaly</td><td>Hepatic congestion</td></tr>
+                        <tr><td>Tricuspid regurgitation</td><td>RV dilation</td></tr>
+                        <tr><td>S3/S4 right-sided</td><td>RV dysfunction</td></tr>
+                    </table></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Echo Findings in PE</div>
+                    <div class="pathway"><strong>RV dilation</strong> (RV:LV >1:1)<br><strong>McConnell's sign:</strong> RV free wall akinesis with apical sparing<br><strong>D-sign:</strong> Septal flattening/bowing into LV<br><strong>60/60 sign:</strong> RVSP <60 + PA acceleration time <60ms<br><strong>Tricuspid regurgitation</strong><br><strong>IVC dilation</strong> without respiratory variation</div></div>
+                
+                <div class="alert-box"><div class="alert-title">🚨 Biomarkers</div>
+                    <ul style="margin-left:20px;">
+                        <li><strong>Troponin:</strong> RV myocardial injury (↑ = worse prognosis)</li>
+                        <li><strong>BNP/NT-proBNP:</strong> RV strain (↑ = worse prognosis)</li>
+                        <li>Both help identify intermediate-risk patients</li>
+                    </ul></div>
+                <button class="btn" onclick="nextStage()">Anticoagulation →</button>
+            </div></div>`;
+    }
+
+    function renderAnticoag() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 9 of 14</div><div class="scene-title">Anticoagulation</div></div>
+            <div class="scene-body">
+                <div class="alert-box"><div class="alert-title">🚨 Start Anticoagulation Immediately!</div>
+                    <p>Don't wait for imaging confirmation if high clinical suspicion.</p></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 Anticoagulant Options</div>
+                    <table class="comparison-table">
+                        <tr><th>Drug</th><th>Dosing</th><th>Notes</th></tr>
+                        <tr style="background:rgba(34,197,94,0.2);"><td><strong>Rivaroxaban</strong></td><td>15mg BID × 3 wks → 20mg daily</td><td>No bridging needed</td></tr>
+                        <tr style="background:rgba(34,197,94,0.2);"><td><strong>Apixaban</strong></td><td>10mg BID × 7 days → 5mg BID</td><td>No bridging needed</td></tr>
+                        <tr><td><strong>LMWH → warfarin</strong></td><td>Enoxaparin 1mg/kg BID</td><td>Bridge until INR 2-3</td></tr>
+                        <tr><td><strong>UFH</strong></td><td>80 U/kg bolus → 18 U/kg/hr</td><td>For massive PE, renal failure</td></tr>
+                        <tr><td><strong>Dabigatran/Edoxaban</strong></td><td>After 5-10 days parenteral</td><td>Require LMWH lead-in</td></tr>
+                    </table></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Why DOACs Preferred</div>
+                    <div class="pathway">• Non-inferior efficacy to warfarin<br>• Lower bleeding risk (especially ICH)<br>• No monitoring required<br>• Fixed dosing<br>• Faster onset (no bridging for riva/apix)<br>• Better quality of life</div></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 When NOT to Use DOACs</div>
+                    <ul style="margin-left:20px;line-height:1.8;">
+                        <li>Severe renal impairment (CrCl <15-30)</li>
+                        <li>Active cancer (LMWH or edoxaban preferred)</li>
+                        <li>Antiphospholipid syndrome (warfarin)</li>
+                        <li>Pregnancy (LMWH only)</li>
+                        <li>Mechanical heart valves (warfarin)</li>
+                    </ul></div>
+                <button class="btn" onclick="nextStage()">Thrombolysis →</button>
+            </div></div>`;
+    }
+
+    function renderThrombolysis() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 10 of 14</div><div class="scene-title">Systemic Thrombolysis</div></div>
+            <div class="scene-body">
+                <div class="alert-box"><div class="alert-title">🚨 Thrombolysis for Massive PE</div>
+                    <p><strong>Clear indication:</strong> Hemodynamically unstable (SBP <90 for >15 min or requiring pressors)</p></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 Thrombolytic Regimens</div>
+                    <table class="comparison-table">
+                        <tr><th>Drug</th><th>Dose</th><th>Duration</th></tr>
+                        <tr><td><strong>Alteplase (tPA)</strong></td><td>100mg</td><td>Over 2 hours</td></tr>
+                        <tr><td><strong>Alteplase (accelerated)</strong></td><td>0.6 mg/kg (max 50mg)</td><td>Over 15 min</td></tr>
+                        <tr><td><strong>Tenecteplase</strong></td><td>Weight-based bolus</td><td>Single bolus</td></tr>
+                    </table></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Thrombolysis Mechanism</div>
+                    <div class="pathway">tPA activates plasminogen → plasmin<br>→ Plasmin lyses fibrin clot<br>→ Rapid clot dissolution<br>→ ↓ Pulmonary vascular resistance<br>→ ↓ RV afterload → RV recovery<br>→ Improved hemodynamics within hours</div></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 Contraindications</div>
+                    <p><strong>Absolute:</strong></p>
+                    <ul style="margin-left:20px;">
+                        <li>Prior ICH</li>
+                        <li>Ischemic stroke <3 months</li>
+                        <li>Active bleeding</li>
+                        <li>Known intracranial malignancy/AVM</li>
+                        <li>Recent brain/spine surgery</li>
+                    </ul>
+                    <p style="margin-top:8px;"><strong>In cardiac arrest from PE:</strong> Consider thrombolysis even with relative contraindications</p></div>
+                
+                <div class="narrative"><p><strong>This patient:</strong> Submassive PE with stable BP → Anticoagulation alone, with close monitoring for deterioration</p></div>
+                <button class="btn" onclick="nextStage()">Interventional Options →</button>
+            </div></div>`;
+    }
+
+    function renderInterventional() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 11 of 14</div><div class="scene-title">Catheter-Directed & Surgical Options</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 Catheter-Directed Therapy (CDT)</div>
+                    <ul style="margin-left:20px;line-height:2;">
+                        <li><strong>Catheter-directed thrombolysis:</strong> Lower dose tPA directly into PA</li>
+                        <li><strong>Mechanical thrombectomy:</strong> Aspiration or fragmentation</li>
+                        <li><strong>Combined:</strong> "Pharmaco-mechanical"</li>
+                    </ul>
+                    <p style="margin-top:12px;"><strong>Advantages:</strong> Lower systemic bleeding risk, may work faster</p></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 Surgical Embolectomy</div>
+                    <p><strong>Indications:</strong></p>
+                    <ul style="margin-left:20px;">
+                        <li>Massive PE with contraindication to thrombolysis</li>
+                        <li>Failed thrombolysis</li>
+                        <li>Intracardiac thrombus (PFO with paradoxical embolism)</li>
+                        <li>Chronic thromboembolic pulmonary HTN (CTEPH)</li>
+                    </ul>
+                    <p style="margin-top:12px;">Requires cardiopulmonary bypass, experienced center</p></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 IVC Filter</div>
+                    <div class="pathway"><strong>Indications:</strong><br>• Contraindication to anticoagulation<br>• Recurrent PE despite adequate anticoagulation<br>• Post-massive PE with residual DVT<br><br><strong>Modern approach:</strong> Retrievable filters<br>→ Remove once anticoagulation possible<br>→ Long-term filters have complications</div></div>
+                <button class="btn" onclick="nextStage()">Special Populations →</button>
+            </div></div>`;
+    }
+
+    function renderSpecialPops() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 12 of 14</div><div class="scene-title">Special Populations</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 Pregnancy</div>
+                    <ul style="margin-left:20px;line-height:1.8;">
+                        <li><strong>Diagnosis:</strong> D-dimer often elevated; use V/Q or limited CTPA</li>
+                        <li><strong>Treatment:</strong> LMWH only (DOACs and warfarin contraindicated)</li>
+                        <li><strong>Duration:</strong> Continue until 6 weeks postpartum (minimum 3 months total)</li>
+                    </ul></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 Cancer-Associated VTE</div>
+                    <ul style="margin-left:20px;line-height:1.8;">
+                        <li><strong>Higher recurrence and bleeding risk</strong></li>
+                        <li><strong>LMWH</strong> traditionally preferred over warfarin</li>
+                        <li><strong>Edoxaban/rivaroxaban</strong> now options (avoid with GI/GU cancers - ↑ bleeding)</li>
+                        <li><strong>Duration:</strong> Continue while cancer active or on treatment</li>
+                    </ul></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 Renal Impairment</div>
+                    <table class="comparison-table">
+                        <tr><th>CrCl</th><th>Preferred Agent</th></tr>
+                        <tr><td>>50 mL/min</td><td>Any DOAC or LMWH</td></tr>
+                        <tr><td>15-50 mL/min</td><td>Dose-adjusted DOAC or reduced LMWH</td></tr>
+                        <tr><td><15 mL/min</td><td>UFH or warfarin</td></tr>
+                    </table></div>
+                <button class="btn" onclick="nextStage()">Duration of Therapy →</button>
+            </div></div>`;
+    }
+
+    function renderDuration() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 13 of 14</div><div class="scene-title">Duration of Anticoagulation</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 Duration Guidelines</div>
+                    <table class="comparison-table">
+                        <tr><th>Scenario</th><th>Duration</th></tr>
+                        <tr><td><strong>Provoked by surgery/trauma</strong></td><td>3 months</td></tr>
+                        <tr><td><strong>Provoked by transient risk</strong> (travel, OCPs, pregnancy)</td><td>3 months (consider extended if major PE)</td></tr>
+                        <tr><td><strong>Unprovoked (first episode)</strong></td><td>Minimum 3 months, consider indefinite</td></tr>
+                        <tr><td><strong>Unprovoked (recurrent)</strong></td><td>Indefinite</td></tr>
+                        <tr><td><strong>Active cancer</strong></td><td>Indefinite (while cancer active)</td></tr>
+                        <tr><td><strong>Antiphospholipid syndrome</strong></td><td>Indefinite</td></tr>
+                    </table></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Deciding on Extended Therapy</div>
+                    <div class="pathway"><strong>Factors favoring extended therapy:</strong><br>• Unprovoked PE<br>• Male sex (higher recurrence)<br>• Residual DVT on ultrasound<br>• Elevated D-dimer after stopping anticoag<br>• Positive thrombophilia testing<br>• Patient preference (low bleeding risk)<br><br><strong>Factors favoring stopping:</strong><br>• High bleeding risk<br>• Strong transient provocation<br>• Patient preference</div></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 Extended Low-Dose Options</div>
+                    <p>After initial treatment, can use reduced doses:</p>
+                    <ul style="margin-left:20px;">
+                        <li>Rivaroxaban 10mg daily</li>
+                        <li>Apixaban 2.5mg BID</li>
+                        <li>Aspirin (less effective but reduces recurrence)</li>
+                    </ul></div>
+                <button class="btn" onclick="nextStage()">Complete →</button>
+            </div></div>`;
+    }
+
+    function renderDebrief() {
+        return `<div class="outcome-banner">
+            <div style="font-size:5rem">🏆</div>
+            <div style="font-size:2rem;font-weight:700;color:#4ade80;">Case Complete!</div>
+            <div style="color:#94a3b8;margin-top:8px;">Submassive PE → Anticoagulation → Monitoring → Extended Therapy</div>
+        </div>
+        
+        <div class="why-chain"><div class="why-chain-title">🔗 Key WHY Chains</div>
+            <div class="why-item"><div class="why-q">Why skip D-dimer in high pretest probability?</div>
+                <div class="why-a">D-dimer has ~40% specificity. In high-probability patients, a negative D-dimer doesn't sufficiently lower post-test probability to rule out PE. You'd still need imaging, so D-dimer just wastes time.</div></div>
+            <div class="why-item"><div class="why-q">Why does PE cause hypoxia even with patent airways?</div>
+                <div class="why-a">PE causes V/Q mismatch (dead space ventilation) - ventilated alveoli with no perfusion. Also causes shunt physiology from atelectasis, and decreased mixed venous O2 from low cardiac output increases the A-a gradient.</div></div>
+            <div class="why-item"><div class="why-q">Why is the RV so vulnerable in massive PE?</div>
+                <div class="why-a">The RV is thin-walled and designed for low-pressure pulmonary circuit. Acute increase in afterload causes rapid dilation, increased wall tension, decreased coronary perfusion, and ischemia. Unlike LV, RV cannot acutely adapt to high pressures.</div></div>
+            <div class="why-item"><div class="why-q">Why LMWH in cancer patients traditionally?</div>
+                <div class="why-a">CLOT trial showed LMWH superior to warfarin for cancer VTE (lower recurrence). Cancer patients have variable warfarin metabolism, drug interactions with chemo, and difficulty maintaining INR. DOACs now an option but increase GI bleeding with GI malignancies.</div></div>
+        </div>
+        
+        <div class="tips">
+            <div class="pearl"><div class="tip-header">💎 Pearl</div>
+                <p><strong>McConnell's sign is specific for acute PE.</strong> RV free wall akinesis with apical sparing distinguishes acute PE from other causes of RV dysfunction (the apex is tethered to the LV).</p></div>
+            <div class="pitfall"><div class="tip-header">⚠️ Pitfall</div>
+                <p><strong>Don't use PERC in moderate/high probability patients.</strong> PERC was only validated in low-risk (Wells ≤4) patients. Using it inappropriately can miss PE.</p></div>
+        </div>
+        
+        <div class="tips">
+            <div class="pearl"><div class="tip-header">💎 Pearl</div>
+                <p><strong>Consider PE in every syncopal patient.</strong> PE is found in ~17% of patients hospitalized for first syncope. Massive PE can present as syncope from transient cardiac output drop.</p></div>
+            <div class="pitfall"><div class="tip-header">⚠️ Pitfall</div>
+                <p><strong>Don't delay anticoagulation for imaging.</strong> If clinical suspicion is high, start anticoagulation while awaiting CTPA. The risk of waiting exceeds the risk of brief anticoagulation if PE is ruled out.</p></div>
+        </div>
+        
+        <button class="btn" onclick="location.reload()">🔄 Restart Case</button>`;
+    }
+
+    function nextStage() { 
+        if (state.stage < STAGES.length - 1) {
+            state.stage++; 
+            render(); 
+            window.scrollTo(0, 0);
+        }
+    }
+    
+    render();
+    </script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+/* Enhanced Feature Styles */
+.rdx-difficulty-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 300px;
+}
+.rdx-diff-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin: 2px;
+}
+.rdx-diff-btn.active {
+    background: #3b82f6;
+    color: white;
+}
+.rdx-diff-btn:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+}
+.rdx-diff-btn:hover:not(.active) {
+    background: #e2e8f0;
+}
+.rdx-refs-panel {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #93c5fd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+.rdx-refs-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+.rdx-refs-links {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+.rdx-refs-links a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.rdx-refs-links a:hover {
+    text-decoration: underline;
+}
+.rdx-debrief-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rdx-debrief-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #1f2937;
+}
+.rdx-path-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.rdx-path-optimal {
+    background: #dcfce7;
+    border-left: 4px solid #22c55e;
+}
+.rdx-path-suboptimal {
+    background: #fef9c3;
+    border-left: 4px solid #eab308;
+}
+.rdx-path-wrong {
+    background: #fecaca;
+    border-left: 4px solid #ef4444;
+}
+.rdx-hint-beginner {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+.rdx-hint-advanced {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+</style>
+
+<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
+    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
+        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    </div>
+</div>
+
+
+<!-- CROSS-PLATFORM LEARNING LINKS -->
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
+            <a href="../mechanism/vte-pe-module.html" style="display: block; color: #2563eb; font-size: 14px;">→ Pulmonary Embolism</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
+            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="asthma-exacerbation-expanded-dual-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Asthma Exacerbation Expanded D</a>
+            <a href="tension-ptx-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Tension Ptx</a>
+            <a href="asthma-phenotyping-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Asthma Phenotyping</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
+            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../CoachDx/mentor-chat.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../CoachDx/sbar-trainer.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+<!-- END CROSS-PLATFORM LINKS -->
+<div class="rdx-refs-panel" id="rdxRefsPanel">
+    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
+    <div class="rdx-refs-links"><a href="https://ginasthma.org/gina-reports/" target="_blank" class="text-blue-600 hover:underline">GINA Asthma Guidelines</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK560551/" target="_blank" class="text-blue-600 hover:underline">StatPearls: Pulmonary Embolism</a></div>
+</div>
+
+<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
+    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+</div>
+
+<script>
+// ReasonDx Enhanced Features Module
+(function() {
+    // Decision tracking
+    window.rdxDecisionPath = window.rdxDecisionPath || [];
+    window.rdxTotalScore = window.rdxTotalScore || 0;
+    window.rdxMaxScore = window.rdxMaxScore || 0;
+    window.rdxDifficulty = 'intermediate';
+    
+    // Difficulty control
+    window.rdxSetDifficulty = function(level) {
+        window.rdxDifficulty = level;
+        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('rdx-btn-' + level).classList.add('active');
+        
+        // Update hint visibility
+        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
+            el.style.display = level === 'beginner' ? 'block' : 'none';
+        });
+        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
+            el.style.display = level === 'advanced' ? 'block' : 'none';
+        });
+    };
+    
+    // Track a decision
+    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+        window.rdxDecisionPath.push({
+            stage: stageId,
+            title: stageTitle,
+            choice: choiceId,
+            choiceText: choiceText,
+            outcome: outcome,
+            points: points,
+            maxPoints: maxPoints,
+            isOptimal: isOptimal,
+            optimalChoice: optimalChoice,
+            optimalText: optimalText
+        });
+        window.rdxTotalScore += points;
+        window.rdxMaxScore += maxPoints;
+    };
+    
+    // Show visual debrief
+    window.rdxShowDebrief = function() {
+        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
+        
+        let grade, gradeColor, gradeEmoji;
+        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
+        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
+        
+        let pathHTML = '';
+        if (window.rdxDecisionPath.length > 0) {
+            pathHTML = window.rdxDecisionPath.map(d => {
+                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
+                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
+                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
+                return '<div class="' + pathClass + ' rdx-path-item">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
+                    '<div>' +
+                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
+                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
+                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
+                    '</div>' +
+                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
+                    '</div></div>';
+            }).join('');
+        } else {
+            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+        }
+        
+        document.getElementById('rdxDebriefContent').innerHTML = 
+            '<div style="text-align:center;margin-bottom:24px;">' +
+            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
+            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
+            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
+            '</div></div>' +
+            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
+            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
+            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
+            '</div></div>' +
+            '<div style="display:flex;gap:12px;">' +
+            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '</div>';
+        
+        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
+    };
+    
+    // Auto-inject hint examples into existing content
+    window.rdxInit = function() {
+        // Could add dynamic hint injection here based on difficulty
+        console.log('ReasonDx Enhanced Features loaded for: Pe Expanded Adventure');
+    };
+    
+    // Initialize on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.rdxInit);
+    } else {
+        window.rdxInit();
+    }
+})();
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+</body>
+</html>

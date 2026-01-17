@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anaphylaxis Complete | Clinical Adventure</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: linear-gradient(135deg, #581c87 0%, #9333ea 100%); min-height: 100vh; color: #e2e8f0; line-height: 1.6; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: rgba(88, 28, 135, 0.9); border-radius: 16px; margin-bottom: 20px; }
+        .badge { padding: 4px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; background: #a855f7; margin-left: 10px; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #a855f7, #d8b4fe); border-radius: 3px; }
+        .scene { background: linear-gradient(135deg, #581c87, #7e22ce); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+        .scene-header { background: rgba(168, 85, 247, 0.15); padding: 16px 20px; }
+        .scene-phase { font-size: 0.75rem; color: #d8b4fe; text-transform: uppercase; }
+        .scene-title { font-size: 1.4rem; font-weight: 700; }
+        .scene-body { padding: 24px; }
+        .highlight { color: #fbbf24; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(168, 85, 247, 0.2)); border: 1px solid rgba(139, 92, 246, 0.5); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
+        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; }
+        .boards-tip { background: rgba(251, 191, 36, 0.15); border: 1px solid rgba(251, 191, 36, 0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .boards-tip-title { font-weight: 700; color: #fbbf24; margin-bottom: 10px; }
+        .alert-box { background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.5); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .alert-title { font-weight: 700; color: #f87171; margin-bottom: 10px; }
+        .btn { padding: 16px 28px; background: linear-gradient(135deg, #a855f7, #9333ea); border: none; border-radius: 12px; color: white; font-weight: 600; cursor: pointer; width: 100%; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+        .comparison-table th { background: rgba(0,0,0,0.3); color: #d8b4fe; }
+        .why-chain { background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(168, 85, 247, 0.15)); border: 1px solid rgba(139, 92, 246, 0.4); border-radius: 16px; padding: 24px; margin: 24px 0; }
+        .why-chain-title { font-size: 1.2rem; font-weight: 700; color: #c4b5fd; margin-bottom: 20px; }
+        .why-item { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 18px; margin-bottom: 14px; }
+        .why-q { font-weight: 600; color: #e9d5ff; margin-bottom: 10px; }
+        .outcome-banner { text-align: center; padding: 40px; }
+        .tips { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+        .pearl, .pitfall { padding: 20px; border-radius: 12px; }
+        .pearl { background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); }
+        .pitfall { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); }
+        .tip-header { font-weight: 600; margin-bottom: 10px; }
+        .pearl .tip-header { color: #4ade80; }
+        .pitfall .tip-header { color: #f87171; }
+        @media (max-width: 640px) { .tips { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container" id="app"></div>
+    <script>
+    const STAGES = [
+        'arrival', 'recognition', 'criteria', 'pathophysiology', 'epinephrine',
+        'positioning', 'adjuncts', 'refractory', 'biphasic', 'tryptase',
+        'discharge', 'prevention', 'debrief'
+    ];
+    const state = { stage: 0 };
+
+    function render() {
+        const progress = ((state.stage + 1) / STAGES.length) * 100;
+        let c = `<div class="header">
+            <div style="font-size:1.3rem;font-weight:700">⚠️ Anaphylaxis Complete<span class="badge">13 STAGES</span></div>
+            <div style="font-size:1.3rem;font-weight:700">${state.stage + 1}/${STAGES.length}</div></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:${progress}%"></div></div>`;
+        
+        switch(STAGES[state.stage]) {
+            case 'arrival': c += renderArrival(); break;
+            case 'recognition': c += renderRecognition(); break;
+            case 'criteria': c += renderCriteria(); break;
+            case 'pathophysiology': c += renderPathophys(); break;
+            case 'epinephrine': c += renderEpinephrine(); break;
+            case 'positioning': c += renderPositioning(); break;
+            case 'adjuncts': c += renderAdjuncts(); break;
+            case 'refractory': c += renderRefractory(); break;
+            case 'biphasic': c += renderBiphasic(); break;
+            case 'tryptase': c += renderTryptase(); break;
+            case 'discharge': c += renderDischarge(); break;
+            case 'prevention': c += renderPrevention(); break;
+            case 'debrief': c += renderDebrief(); break;
+        }
+        document.getElementById('app').innerHTML = c;
+    }
+
+    function renderArrival() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 1 of 13</div><div class="scene-title">Acute Presentation</div></div>
+            <div class="scene-body">
+                <div class="narrative"><p>A <span class="highlight">32-year-old woman</span> arrives by EMS after eating shrimp at a restaurant. She developed <span class="critical">diffuse urticaria, lip swelling, throat tightness, and difficulty breathing</span> within 15 minutes of eating.</p>
+                <p style="margin-top:12px;"><strong>Vitals:</strong> BP 78/50, HR 125, RR 28, SpO2 88% on RA<br>
+                <strong>Exam:</strong> Diffuse urticaria, angioedema of lips/tongue, stridor, diffuse wheezing</p></div>
+                
+                <div class="alert-box"><div class="alert-title">🚨 This is Anaphylaxis!</div>
+                    <p>Multi-system involvement (skin + respiratory + cardiovascular) after allergen exposure. <strong>Give epinephrine NOW.</strong></p></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 Common Triggers</div>
+                    <ul style="margin-left:20px;line-height:1.8;">
+                        <li><strong>Foods:</strong> Peanuts, tree nuts, shellfish, fish, milk, eggs, wheat, soy</li>
+                        <li><strong>Medications:</strong> Antibiotics (penicillins, cephalosporins), NSAIDs, contrast media</li>
+                        <li><strong>Venoms:</strong> Hymenoptera (bees, wasps, hornets, fire ants)</li>
+                        <li><strong>Other:</strong> Latex, exercise, idiopathic</li>
+                    </ul></div>
+                <button class="btn" onclick="nextStage()">Recognition →</button>
+            </div></div>`;
+    }
+
+    function renderRecognition() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 2 of 13</div><div class="scene-title">Clinical Recognition</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 System Involvement</div>
+                    <table class="comparison-table">
+                        <tr><th>System</th><th>Manifestations</th><th>Frequency</th></tr>
+                        <tr><td><strong>Skin/Mucosal</strong></td><td>Urticaria, flushing, angioedema, pruritus</td><td>80-90%</td></tr>
+                        <tr><td><strong>Respiratory</strong></td><td>Dyspnea, wheeze, stridor, hypoxia</td><td>70%</td></tr>
+                        <tr><td><strong>Cardiovascular</strong></td><td>Hypotension, tachycardia, syncope</td><td>45%</td></tr>
+                        <tr><td><strong>GI</strong></td><td>Nausea, vomiting, cramping, diarrhea</td><td>45%</td></tr>
+                        <tr><td><strong>Neurologic</strong></td><td>Dizziness, confusion, sense of doom</td><td>15%</td></tr>
+                    </table></div>
+                
+                <div class="alert-box"><div class="alert-title">⚠️ Skin Findings May Be Absent!</div>
+                    <p>10-20% of anaphylaxis cases have <strong>no skin findings</strong>. Don't wait for hives to diagnose anaphylaxis. Cardiovascular collapse can occur without urticaria.</p></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Presentation Patterns</div>
+                    <div class="pathway"><strong>Uniphasic (80-90%):</strong> Single episode, resolves<br><br><strong>Biphasic (5-20%):</strong> Recurrence 1-72h later<br>→ Higher risk: severe initial reaction, delayed epi<br><br><strong>Protracted:</strong> Symptoms last >24h<br>→ Usually with ongoing allergen exposure</div></div>
+                <button class="btn" onclick="nextStage()">Diagnostic Criteria →</button>
+            </div></div>`;
+    }
+
+    function renderCriteria() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 3 of 13</div><div class="scene-title">Diagnostic Criteria</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 WAO Anaphylaxis Criteria (2020)</div>
+                    <p>Anaphylaxis is <strong>highly likely</strong> when ANY ONE of these criteria is met:</p></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">Criterion 1</div>
+                    <div class="pathway">Acute onset (minutes to hours) of:<br>• Skin/mucosal involvement (hives, angioedema, pruritus, flushing)<br><strong>PLUS</strong> at least ONE of:<br>  → Respiratory compromise (dyspnea, wheeze, stridor, hypoxia)<br>  → Cardiovascular compromise (hypotension, syncope, incontinence)</div></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">Criterion 2</div>
+                    <div class="pathway">Acute onset after <strong>known or likely allergen</strong> exposure:<br>• ≥2 organ systems involved:<br>  → Skin/mucosal<br>  → Respiratory<br>  → Cardiovascular<br>  → GI (persistent cramps, vomiting)</div></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">Criterion 3</div>
+                    <div class="pathway">Acute hypotension after <strong>known allergen</strong> exposure:<br>• Adults: SBP <90 or >30% drop from baseline<br>• Infants/children: Age-specific low SBP or >30% drop</div></div>
+                
+                <div class="narrative"><p><strong>This patient meets Criterion 1:</strong> Skin (urticaria, angioedema) + Respiratory (stridor, wheeze) + Cardiovascular (hypotension)</p></div>
+                <button class="btn" onclick="nextStage()">Pathophysiology →</button>
+            </div></div>`;
+    }
+
+    function renderPathophys() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 4 of 13</div><div class="scene-title">Pathophysiology</div></div>
+            <div class="scene-body">
+                <div class="mechanism-box"><div class="mechanism-title">🧬 IgE-Mediated Anaphylaxis</div>
+                    <div class="pathway">Prior sensitization → Allergen-specific IgE produced<br>→ IgE binds to mast cells/basophils (FcεRI receptor)<br><br>Re-exposure → Allergen crosslinks IgE on mast cells<br>→ Mast cell degranulation (within seconds)<br>→ Release of preformed mediators:<br>   • Histamine (vasodilation, bronchoconstriction)<br>   • Tryptase (marker of mast cell activation)<br>   • Proteases, heparin<br>→ De novo synthesis:<br>   • Leukotrienes (bronchoconstriction)<br>   • Prostaglandins (vasodilation)<br>   • PAF (platelet aggregation, hypotension)</div></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 Non-IgE Anaphylaxis</div>
+                    <table class="comparison-table">
+                        <tr><th>Mechanism</th><th>Triggers</th></tr>
+                        <tr><td>Direct mast cell activation</td><td>Opioids, vancomycin, radiocontrast</td></tr>
+                        <tr><td>Complement activation</td><td>Blood products, dialysis membranes</td></tr>
+                        <tr><td>Unknown</td><td>Exercise, cold, idiopathic</td></tr>
+                    </table>
+                    <p style="margin-top:8px;">Clinically identical to IgE-mediated. Treat the same way!</p></div>
+                <button class="btn" onclick="nextStage()">Epinephrine →</button>
+            </div></div>`;
+    }
+
+    function renderEpinephrine() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 5 of 13</div><div class="scene-title">Epinephrine: The ONLY First-Line Treatment</div></div>
+            <div class="scene-body">
+                <div class="alert-box"><div class="alert-title">🚨 Give Epinephrine Immediately!</div>
+                    <p>Delayed epinephrine = increased mortality. There are <strong>NO absolute contraindications</strong> in anaphylaxis.</p></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 Epinephrine Dosing</div>
+                    <table class="comparison-table">
+                        <tr><th>Route</th><th>Dose</th><th>Notes</th></tr>
+                        <tr style="background:rgba(34,197,94,0.2);"><td><strong>IM (anterolateral thigh)</strong></td><td>0.3-0.5mg (1:1000)</td><td>First-line, repeat q5-15min</td></tr>
+                        <tr><td>Autoinjector</td><td>0.3mg (>25kg) or 0.15mg</td><td>EpiPen, Auvi-Q</td></tr>
+                        <tr><td><strong>IV (refractory)</strong></td><td>0.1mg (1:10,000) slow push</td><td>For shock unresponsive to IM</td></tr>
+                        <tr><td>IV infusion</td><td>1-10 mcg/min</td><td>Titrate to BP</td></tr>
+                    </table></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Why Epinephrine Works</div>
+                    <div class="pathway"><strong>α1 effects:</strong><br>→ Vasoconstriction → ↑ BP, ↓ angioedema<br>→ ↓ Mucosal edema → relieves airway obstruction<br><br><strong>β1 effects:</strong><br>→ ↑ Inotropy, chronotropy → ↑ cardiac output<br><br><strong>β2 effects:</strong><br>→ Bronchodilation → relieves wheezing<br>→ Stabilizes mast cells → ↓ mediator release</div></div>
+                
+                <div class="alert-box"><div class="alert-title">⚠️ Common Mistakes</div>
+                    <ul style="margin-left:20px;">
+                        <li>Giving antihistamines instead of epinephrine</li>
+                        <li>Using subcutaneous route (slower absorption)</li>
+                        <li>Waiting to see if patient improves</li>
+                        <li>Under-dosing in obese patients</li>
+                    </ul></div>
+                <button class="btn" onclick="nextStage()">Positioning →</button>
+            </div></div>`;
+    }
+
+    function renderPositioning() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 6 of 13</div><div class="scene-title">Patient Positioning</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 Position Based on Predominant Symptoms</div>
+                    <table class="comparison-table">
+                        <tr><th>Symptoms</th><th>Position</th><th>Rationale</th></tr>
+                        <tr><td>Hypotension/shock</td><td><strong>Supine, legs elevated</strong></td><td>↑ Venous return</td></tr>
+                        <tr><td>Respiratory distress</td><td><strong>Sitting up</strong></td><td>Optimize breathing</td></tr>
+                        <tr><td>Vomiting</td><td><strong>Recovery position</strong></td><td>Prevent aspiration</td></tr>
+                        <tr><td>Pregnant</td><td><strong>Left lateral</strong></td><td>Avoid IVC compression</td></tr>
+                    </table></div>
+                
+                <div class="alert-box"><div class="alert-title">🚨 Do NOT Sit or Stand Hypotensive Patients!</div>
+                    <p>Sudden position change in anaphylactic shock can cause "empty ventricle syndrome" and cardiac arrest. Several deaths reported from patients sitting up during anaphylaxis.</p></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Why Position Matters</div>
+                    <div class="pathway">Anaphylaxis → massive vasodilation + capillary leak<br>→ Relative hypovolemia (blood pooling in periphery)<br>→ ↓ Venous return → ↓ cardiac output<br><br>Supine + legs up:<br>→ Gravity assists venous return<br>→ Maintains preload until fluid resuscitation</div></div>
+                <button class="btn" onclick="nextStage()">Adjunctive Therapies →</button>
+            </div></div>`;
+    }
+
+    function renderAdjuncts() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 7 of 13</div><div class="scene-title">Adjunctive Therapies</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 Second-Line Medications</div>
+                    <table class="comparison-table">
+                        <tr><th>Drug</th><th>Dose</th><th>Purpose</th></tr>
+                        <tr><td><strong>H1 antihistamine</strong></td><td>Diphenhydramine 25-50mg IV</td><td>Urticaria, pruritus (NOT life-saving)</td></tr>
+                        <tr><td><strong>H2 antihistamine</strong></td><td>Famotidine 20mg IV</td><td>May help with urticaria</td></tr>
+                        <tr><td><strong>Corticosteroids</strong></td><td>Methylpred 125mg IV</td><td>May prevent biphasic (unproven)</td></tr>
+                        <tr><td><strong>Bronchodilators</strong></td><td>Albuterol nebs</td><td>Wheezing refractory to epi</td></tr>
+                        <tr><td><strong>IV fluids</strong></td><td>NS 1-2L bolus</td><td>Hypotension, volume depletion</td></tr>
+                    </table></div>
+                
+                <div class="alert-box"><div class="alert-title">⚠️ Antihistamines Do NOT Treat Anaphylaxis!</div>
+                    <p>H1 blockers only help with urticaria and itching. They do NOT reverse hypotension, bronchospasm, or airway edema. NEVER substitute for epinephrine.</p></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Fluid Resuscitation</div>
+                    <div class="pathway">Capillary leak → Up to 35% of intravascular volume<br>can shift to extravascular space in minutes<br><br>May need 5-10 liters of crystalloid in severe cases<br>→ Aggressive fluid replacement is critical<br>→ Colloids (albumin) not proven superior</div></div>
+                <button class="btn" onclick="nextStage()">Refractory Anaphylaxis →</button>
+            </div></div>`;
+    }
+
+    function renderRefractory() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 8 of 13</div><div class="scene-title">Refractory Anaphylaxis</div></div>
+            <div class="scene-body">
+                <div class="alert-box"><div class="alert-title">🚨 Not Responding to IM Epinephrine?</div>
+                    <p>After 2-3 doses of IM epinephrine without improvement, escalate therapy.</p></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 Refractory Anaphylaxis Management</div>
+                    <ol style="margin-left:20px;line-height:2;">
+                        <li><strong>IV epinephrine infusion:</strong> 1-10 mcg/min, titrate to effect</li>
+                        <li><strong>Glucagon:</strong> 1-5mg IV (for patients on beta-blockers)</li>
+                        <li><strong>Vasopressin:</strong> 0.01-0.04 units/min</li>
+                        <li><strong>Methylene blue:</strong> 1-2 mg/kg (nitric oxide scavenger)</li>
+                        <li><strong>ECMO:</strong> For cardiovascular collapse refractory to all above</li>
+                    </ol></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Beta-Blocker Paradox</div>
+                    <div class="pathway">Patients on β-blockers:<br>→ Blunted response to epinephrine<br>→ Cannot increase HR or contractility<br>→ May have paradoxical bradycardia<br><br><strong>Glucagon bypasses β-receptors:</strong><br>→ Activates adenylyl cyclase directly<br>→ ↑ cAMP → ↑ inotropy/chronotropy<br>→ Essential for β-blocker-refractory cases</div></div>
+                <button class="btn" onclick="nextStage()">Biphasic Reactions →</button>
+            </div></div>`;
+    }
+
+    function renderBiphasic() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 9 of 13</div><div class="scene-title">Biphasic Reactions</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 Biphasic Anaphylaxis</div>
+                    <ul style="margin-left:20px;line-height:2;">
+                        <li>Occurs in 5-20% of cases</li>
+                        <li>Recurrence typically 1-72 hours after initial reaction</li>
+                        <li>Can be as severe or more severe than initial episode</li>
+                        <li>Cannot reliably predict who will have biphasic</li>
+                    </ul></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Risk Factors for Biphasic</div>
+                    <div class="pathway">• Severe initial reaction<br>• Delayed epinephrine administration<br>• Requirement for multiple epi doses<br>• Unknown trigger<br>• Wide pulse pressure at presentation<br>• History of prior biphasic reaction</div></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 Observation Period</div>
+                    <p><strong>Minimum 4-6 hours</strong> for mild-moderate reactions<br>
+                    <strong>Extended (12-24h)</strong> for severe reactions, delayed epi, prior biphasic, or poor access to care</p>
+                    <p style="margin-top:12px;">Patient must have epinephrine autoinjector before discharge!</p></div>
+                <button class="btn" onclick="nextStage()">Tryptase →</button>
+            </div></div>`;
+    }
+
+    function renderTryptase() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 10 of 13</div><div class="scene-title">Serum Tryptase</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 When to Check Tryptase</div>
+                    <ul style="margin-left:20px;line-height:2;">
+                        <li>Diagnostic confirmation of mast cell degranulation</li>
+                        <li>Unclear diagnosis (was it really anaphylaxis?)</li>
+                        <li>Severe/refractory cases (screen for mastocytosis)</li>
+                        <li>Medicolegal documentation</li>
+                    </ul></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Tryptase Timing</div>
+                    <div class="pathway">• Draw within 15 min to 3 hours of symptom onset<br>• Peaks at 60-90 minutes<br>• Returns to baseline by 6-8 hours<br><br>Elevated tryptase supports anaphylaxis diagnosis<br>Normal tryptase does NOT rule out anaphylaxis<br>(Especially food-induced, where tryptase often normal)</div></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 Interpretation</div>
+                    <table class="comparison-table">
+                        <tr><th>Level</th><th>Interpretation</th></tr>
+                        <tr><td>< 11.4 ng/mL</td><td>Normal (but doesn't exclude anaphylaxis)</td></tr>
+                        <tr><td>> 11.4 ng/mL</td><td>Elevated - supports mast cell activation</td></tr>
+                        <tr><td>> 20 ng/mL baseline</td><td>Consider mastocytosis workup</td></tr>
+                        <tr><td>Acute > 1.2× baseline + 2</td><td>Significant rise (more specific)</td></tr>
+                    </table></div>
+                <button class="btn" onclick="nextStage()">Discharge Planning →</button>
+            </div></div>`;
+    }
+
+    function renderDischarge() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 11 of 13</div><div class="scene-title">Discharge Planning</div></div>
+            <div class="scene-body">
+                <div class="alert-box"><div class="alert-title">🚨 Mandatory Discharge Requirements</div>
+                    <ol style="margin-left:20px;line-height:2;">
+                        <li><strong>Epinephrine autoinjector prescription</strong> (at least 2)</li>
+                        <li><strong>Anaphylaxis action plan</strong> in writing</li>
+                        <li><strong>Allergen avoidance education</strong></li>
+                        <li><strong>Medical alert identification</strong> (bracelet/necklace)</li>
+                        <li><strong>Allergist referral</strong></li>
+                    </ol></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 Autoinjector Training</div>
+                    <ul style="margin-left:20px;line-height:1.8;">
+                        <li>Demonstrate proper technique (anterolateral thigh)</li>
+                        <li>Can inject through clothing</li>
+                        <li>Hold for 10 seconds</li>
+                        <li>Carry 2 devices (may need repeat dose)</li>
+                        <li>Check expiration dates</li>
+                        <li>Use trainer device for practice</li>
+                    </ul></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Discharge Medications</div>
+                    <div class="pathway"><strong>Consider short course of:</strong><br>• H1 antihistamine (cetirizine, fexofenadine)<br>• Prednisone 40-60mg × 3-5 days<br><br>These may help with persistent urticaria<br>but do NOT prevent biphasic reactions<br>(No evidence steroids prevent recurrence)</div></div>
+                <button class="btn" onclick="nextStage()">Prevention →</button>
+            </div></div>`;
+    }
+
+    function renderPrevention() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 12 of 13</div><div class="scene-title">Long-Term Prevention</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 Allergist Workup</div>
+                    <ul style="margin-left:20px;line-height:2;">
+                        <li><strong>Skin prick testing</strong> - 4-6 weeks after reaction</li>
+                        <li><strong>Specific IgE testing</strong> - serum</li>
+                        <li><strong>Component-resolved diagnostics</strong> - identify major allergens</li>
+                        <li><strong>Oral food challenge</strong> - if diagnosis unclear</li>
+                        <li><strong>Baseline tryptase</strong> - screen for mastocytosis</li>
+                    </ul></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 Immunotherapy Options</div>
+                    <table class="comparison-table">
+                        <tr><th>Trigger</th><th>Prevention Strategy</th></tr>
+                        <tr><td>Hymenoptera (bee/wasp)</td><td><strong>Venom immunotherapy</strong> - 97% effective!</td></tr>
+                        <tr><td>Peanut (children)</td><td>OIT (Palforzia) - FDA approved</td></tr>
+                        <tr><td>Drug allergy</td><td>Drug desensitization protocol</td></tr>
+                        <tr><td>Food allergy (general)</td><td>Strict avoidance + emergency plan</td></tr>
+                    </table></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Venom Immunotherapy</div>
+                    <div class="pathway">Indicated for: Systemic reaction to Hymenoptera sting<br>+ positive skin test or specific IgE<br><br>Schedule: Weekly build-up → monthly maintenance<br>Duration: Typically 5 years (lifelong if severe)<br><br>Reduces risk of systemic reaction to future stings<br>from ~60% to ~5% (highly effective!)</div></div>
+                <button class="btn" onclick="nextStage()">Complete →</button>
+            </div></div>`;
+    }
+
+    function renderDebrief() {
+        return `<div class="outcome-banner">
+            <div style="font-size:5rem">🏆</div>
+            <div style="font-size:2rem;font-weight:700;color:#4ade80;">Case Complete!</div>
+            <div style="color:#94a3b8;margin-top:8px;">Shellfish Anaphylaxis → Rapid Treatment → Full Recovery → Prevention Plan</div>
+        </div>
+        
+        <div class="why-chain"><div class="why-chain-title">🔗 Key WHY Chains</div>
+            <div class="why-item"><div class="why-q">Why IM and not subcutaneous epinephrine?</div>
+                <div class="why-a">IM injection into the anterolateral thigh has superior absorption due to higher blood flow. Peak plasma concentration is faster with IM (8 min) vs SC (34 min). In anaphylaxis, rapid delivery is critical.</div></div>
+            <div class="why-item"><div class="why-q">Why might tryptase be normal in food anaphylaxis?</div>
+                <div class="why-a">Food-induced anaphylaxis may involve basophils more than mast cells, or may trigger local GI mast cells that don't release enough tryptase systemically. Tryptase is more reliably elevated in venom and drug anaphylaxis.</div></div>
+            <div class="why-item"><div class="why-q">Why give glucagon for patients on beta-blockers?</div>
+                <div class="why-a">Beta-blockers prevent epinephrine from increasing heart rate and contractility via β1 receptors. Glucagon bypasses β-receptors entirely, directly activating adenylyl cyclase to increase cAMP and cardiac output.</div></div>
+            <div class="why-item"><div class="why-q">Why is venom immunotherapy so effective?</div>
+                <div class="why-a">VIT induces tolerance through multiple mechanisms: generates blocking IgG4 antibodies, shifts T-cell response from Th2 to Th1/Treg, and reduces mast cell/basophil reactivity. The 97% protection rate makes it one of the most effective immunotherapies.</div></div>
+        </div>
+        
+        <div class="tips">
+            <div class="pearl"><div class="tip-header">💎 Pearl</div>
+                <p><strong>Epinephrine is massively under-dosed.</strong> Studies show only 25-30% of patients with anaphylaxis receive epinephrine. Antihistamines are not a substitute. When in doubt, give epi.</p></div>
+            <div class="pitfall"><div class="tip-header">⚠️ Pitfall</div>
+                <p><strong>Don't rely on antihistamines or steroids.</strong> They help with hives but do NOT treat hypotension, airway edema, or bronchospasm. Epinephrine is the ONLY life-saving medication.</p></div>
+        </div>
+        
+        <div class="tips">
+            <div class="pearl"><div class="tip-header">💎 Pearl</div>
+                <p><strong>Prescribe 2 autoinjectors.</strong> Up to 20% of patients need a second dose. One device may malfunction. Teach patients to use the second dose if symptoms return or don't improve in 5-15 minutes.</p></div>
+            <div class="pitfall"><div class="tip-header">⚠️ Pitfall</div>
+                <p><strong>Don't let patients sit or stand up if hypotensive.</strong> "Empty ventricle syndrome" from sudden position change has caused cardiac arrests. Keep hypotensive patients supine with legs elevated.</p></div>
+        </div>
+        
+        <button class="btn" onclick="location.reload()">🔄 Restart Case</button>`;
+    }
+
+    function nextStage() { 
+        if (state.stage < STAGES.length - 1) {
+            state.stage++; 
+            render(); 
+            window.scrollTo(0, 0);
+        }
+    }
+    
+    render();
+    </script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+/* Enhanced Feature Styles */
+.rdx-difficulty-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 300px;
+}
+.rdx-diff-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin: 2px;
+}
+.rdx-diff-btn.active {
+    background: #3b82f6;
+    color: white;
+}
+.rdx-diff-btn:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+}
+.rdx-diff-btn:hover:not(.active) {
+    background: #e2e8f0;
+}
+.rdx-refs-panel {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #93c5fd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+.rdx-refs-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+.rdx-refs-links {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+.rdx-refs-links a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.rdx-refs-links a:hover {
+    text-decoration: underline;
+}
+.rdx-debrief-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rdx-debrief-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #1f2937;
+}
+.rdx-path-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.rdx-path-optimal {
+    background: #dcfce7;
+    border-left: 4px solid #22c55e;
+}
+.rdx-path-suboptimal {
+    background: #fef9c3;
+    border-left: 4px solid #eab308;
+}
+.rdx-path-wrong {
+    background: #fecaca;
+    border-left: 4px solid #ef4444;
+}
+.rdx-hint-beginner {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+.rdx-hint-advanced {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+</style>
+
+<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
+    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
+        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    </div>
+</div>
+
+
+<!-- CROSS-PLATFORM LEARNING LINKS -->
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
+            <a href="../mechanism/anaphylaxis-module.html" style="display: block; color: #2563eb; font-size: 14px;">→ Anaphylaxis</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
+            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="asthma-exacerbation-expanded-dual-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Asthma Exacerbation Expanded D</a>
+            <a href="allergic-rhinitis-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Allergic Rhinitis</a>
+            <a href="penicillin-delabeling-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Penicillin Delabeling</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
+            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../CoachDx/mentor-chat.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../CoachDx/sbar-trainer.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+<!-- END CROSS-PLATFORM LINKS -->
+<div class="rdx-refs-panel" id="rdxRefsPanel">
+    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
+    <div class="rdx-refs-links"><a href="https://www.aaaai.org/practice-resources/statements-and-practice-parameters" target="_blank" class="text-blue-600 hover:underline">AAAAI Practice Parameters</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK482124/" target="_blank" class="text-blue-600 hover:underline">StatPearls: Anaphylaxis</a></div>
+</div>
+
+<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
+    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+</div>
+
+<script>
+// ReasonDx Enhanced Features Module
+(function() {
+    // Decision tracking
+    window.rdxDecisionPath = window.rdxDecisionPath || [];
+    window.rdxTotalScore = window.rdxTotalScore || 0;
+    window.rdxMaxScore = window.rdxMaxScore || 0;
+    window.rdxDifficulty = 'intermediate';
+    
+    // Difficulty control
+    window.rdxSetDifficulty = function(level) {
+        window.rdxDifficulty = level;
+        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('rdx-btn-' + level).classList.add('active');
+        
+        // Update hint visibility
+        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
+            el.style.display = level === 'beginner' ? 'block' : 'none';
+        });
+        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
+            el.style.display = level === 'advanced' ? 'block' : 'none';
+        });
+    };
+    
+    // Track a decision
+    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+        window.rdxDecisionPath.push({
+            stage: stageId,
+            title: stageTitle,
+            choice: choiceId,
+            choiceText: choiceText,
+            outcome: outcome,
+            points: points,
+            maxPoints: maxPoints,
+            isOptimal: isOptimal,
+            optimalChoice: optimalChoice,
+            optimalText: optimalText
+        });
+        window.rdxTotalScore += points;
+        window.rdxMaxScore += maxPoints;
+    };
+    
+    // Show visual debrief
+    window.rdxShowDebrief = function() {
+        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
+        
+        let grade, gradeColor, gradeEmoji;
+        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
+        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
+        
+        let pathHTML = '';
+        if (window.rdxDecisionPath.length > 0) {
+            pathHTML = window.rdxDecisionPath.map(d => {
+                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
+                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
+                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
+                return '<div class="' + pathClass + ' rdx-path-item">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
+                    '<div>' +
+                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
+                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
+                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
+                    '</div>' +
+                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
+                    '</div></div>';
+            }).join('');
+        } else {
+            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+        }
+        
+        document.getElementById('rdxDebriefContent').innerHTML = 
+            '<div style="text-align:center;margin-bottom:24px;">' +
+            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
+            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
+            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
+            '</div></div>' +
+            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
+            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
+            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
+            '</div></div>' +
+            '<div style="display:flex;gap:12px;">' +
+            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '</div>';
+        
+        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
+    };
+    
+    // Auto-inject hint examples into existing content
+    window.rdxInit = function() {
+        // Could add dynamic hint injection here based on difficulty
+        console.log('ReasonDx Enhanced Features loaded for: Anaphylaxis Expanded Adventure');
+    };
+    
+    // Initialize on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.rdxInit);
+    } else {
+        window.rdxInit();
+    }
+})();
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+</body>
+</html>

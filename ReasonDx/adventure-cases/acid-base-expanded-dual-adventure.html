@@ -1,0 +1,672 @@
+E</strong></td><td>Ethylene glycol</td><td>Calcium oxalate crystals, osmol gap</td></tr>
+                    <tr><td><strong>S</strong></td><td>Salicylates</td><td>Tinnitus, mixed disorder</td></tr>
+                </table>
+                ${state.mode === 'peds' ? '<p style="margin-top:12px;color:#fbbf24;"><strong>Peds: Most common = DKA, sepsis (lactic), inborn errors of metabolism</strong></p>' : ''}
+            </div>
+            
+            <div class="why-chain">
+                <div class="why-chain-title">🔗 WHY Chain: Why Does AG Increase?</div>
+                <p><strong>WHY does adding acid increase the anion gap?</strong></p>
+                <p>→ Acid = H⁺ + anion (e.g., lactate, ketoacids)</p>
+                <p>→ H⁺ is buffered by HCO₃⁻ (consuming bicarbonate)</p>
+                <p>→ The anion remains, replacing HCO₃⁻</p>
+                <p>→ Na stays same, Cl stays same, HCO₃ drops → AG rises</p>
+            </div>
+            
+            <div class="boards-tip">
+                <div class="boards-tip-title">📚 Non-Anion Gap (Hyperchloremic) Causes: HARDASS</div>
+                <div class="pathway"><strong>H</strong>yperalimentation
+<strong>A</strong>ddison's disease
+<strong>R</strong>TA (renal tubular acidosis)
+<strong>D</strong>iarrhea (GI HCO₃ loss)
+<strong>A</strong>cetazolamide
+<strong>S</strong>aline infusion (dilutional)
+<strong>S</strong>pironolactone</div>
+            </div>
+            
+            <button class="btn" onclick="nextStage()">Delta-Delta Analysis →</button>
+        </div>
+    </div>`;
+};
+
+window.render_delta_delta = function() {
+    return `
+    <div class="scene">
+        <div class="scene-header">
+            <div class="scene-phase">Stage 5 of 10</div>
+            <div class="scene-title">Delta-Delta (Δ/Δ) Analysis</div>
+        </div>
+        <div class="scene-body">
+            <div class="alert-box">
+                <div class="alert-title">⚠️ HIGH-YIELD: Unmask Hidden Disorders!</div>
+                <p><strong>The delta-delta ratio reveals additional metabolic disorders hiding behind an anion gap acidosis.</strong></p>
+            </div>
+            
+            <div class="mechanism-box">
+                <div class="mechanism-title">🧬 How to Calculate</div>
+                <div class="pathway"><strong>Delta-Delta Ratio = ΔAG / ΔHCO₃</strong>
+
+ΔAG = Calculated AG - 12 (normal AG)
+ΔHCO₃ = 24 - Measured HCO₃
+
+<strong>Example:</strong>
+Na 140, Cl 100, HCO₃ 10
+AG = 140 - 100 - 10 = 30
+ΔAG = 30 - 12 = 18
+ΔHCO₃ = 24 - 10 = 14
+Ratio = 18/14 = 1.3 (pure AGMA)</div>
+            </div>
+            
+            <div class="boards-tip">
+                <div class="boards-tip-title">📚 Interpreting the Ratio</div>
+                <table class="comparison-table">
+                    <tr><th>Ratio</th><th>Interpretation</th><th>What's Happening</th></tr>
+                    <tr><td>&lt;1</td><td>AGMA + Non-AG acidosis</td><td>More HCO₃ lost than expected from AG acid</td></tr>
+                    <tr style="background:rgba(34,197,94,0.2);"><td>1-2</td><td>Pure AGMA</td><td>AG rise matches HCO₃ drop</td></tr>
+                    <tr><td>&gt;2</td><td>AGMA + Metabolic alkalosis</td><td>Less HCO₃ drop than expected (something raising it)</td></tr>
+                </table>
+            </div>
+            
+            <div class="why-chain">
+                <div class="why-chain-title">🔗 WHY Chain: Understanding the Ratio</div>
+                <p><strong>WHY should ΔAG = ΔHCO₃ in pure AGMA?</strong></p>
+                <p>→ For every H⁺ added, one HCO₃⁻ is consumed (1:1)</p>
+                <p>→ The anion from the acid replaces the lost HCO₃</p>
+                <p>→ If ratio ≠ 1, something else is affecting HCO₃</p>
+            </div>
+            
+            <div class="alert-box">
+                <div class="alert-title">📋 Clinical Example</div>
+                <p><strong>DKA patient with vomiting:</strong></p>
+                <p>AG = 28, HCO₃ = 18</p>
+                <p>ΔAG = 16, ΔHCO₃ = 6</p>
+                <p>Ratio = 16/6 = 2.7 → AGMA + metabolic alkalosis (from vomiting!)</p>
+            </div>
+            
+            <button class="btn" onclick="nextStage()">Metabolic Alkalosis →</button>
+        </div>
+    </div>`;
+};
+
+window.render_metabolic_alk = function() {
+    return `
+    <div class="scene">
+        <div class="scene-header">
+            <div class="scene-phase">Stage 6 of 10</div>
+            <div class="scene-title">Metabolic Alkalosis</div>
+        </div>
+        <div class="scene-body">
+            <div class="alert-box">
+                <div class="alert-title">📋 Definition</div>
+                <p><strong>High pH + High HCO₃⁻ (primary process is gain of bicarbonate or loss of acid)</strong></p>
+            </div>
+            
+            <div class="boards-tip">
+                <div class="boards-tip-title">📚 Expected Compensation</div>
+                <div class="pathway"><strong>Expected PaCO₂ = 0.7 × [HCO₃⁻] + 21 (±2)</strong>
+
+Or simpler: PaCO₂ rises ~0.7 for each 1 mEq/L rise in HCO₃
+
+<strong>Maximum compensation:</strong>
+CO₂ rarely rises above 55 mmHg
+(hypoxic drive limits further hypoventilation)</div>
+            </div>
+            
+            <div class="mechanism-box">
+                <div class="mechanism-title">🧬 Classify by Urine Chloride</div>
+                <div class="pathway"><strong>Urine Cl < 20 mEq/L: CHLORIDE-RESPONSIVE</strong>
+(Saline will fix it!)
+• Vomiting / NG suction
+• Diuretics (late)
+• Post-hypercapnia
+• Villous adenoma
+
+<strong>Urine Cl > 20 mEq/L: CHLORIDE-RESISTANT</strong>
+(Saline won't fix - treat underlying cause)
+• Primary hyperaldosteronism
+• Cushing's syndrome
+• Severe hypokalemia
+• Bartter's/Gitelman's syndromes
+• Current diuretic use
+• Licorice ingestion</div>
+            </div>
+            
+            <div class="why-chain">
+                <div class="why-chain-title">🔗 WHY Chain: Vomiting Causes Alkalosis</div>
+                <p><strong>WHY does losing gastric acid cause metabolic alkalosis?</strong></p>
+                <p>→ Stomach secretes HCl (H⁺ + Cl⁻)</p>
+                <p>→ H⁺ comes from H₂O + CO₂ → H⁺ + HCO₃⁻</p>
+                <p>→ HCO₃⁻ enters bloodstream for every H⁺ secreted</p>
+                <p>→ Normally HCO₃⁻ is neutralized downstream, but vomiting prevents this</p>
+                <p>→ Net gain of HCO₃⁻ = metabolic alkalosis</p>
+            </div>
+            
+            ${state.mode === 'peds' ? `
+            <div class="alert-box">
+                <div class="alert-title">👶 Pediatric Pearl: Pyloric Stenosis</div>
+                <p><strong>Classic presentation:</strong> 3-6 week old with projectile vomiting</p>
+                <p><strong>Classic labs:</strong> Hypochloremic, hypokalemic metabolic alkalosis</p>
+            </div>` : ''}
+            
+            <button class="btn" onclick="nextStage()">Respiratory Disorders →</button>
+        </div>
+    </div>`;
+};
+
+window.render_respiratory = function() {
+    return `
+    <div class="scene">
+        <div class="scene-header">
+            <div class="scene-phase">Stage 7 of 10</div>
+            <div class="scene-title">Respiratory Acid-Base Disorders</div>
+        </div>
+        <div class="scene-body">
+            <div class="boards-tip">
+                <div class="boards-tip-title">📚 Respiratory Acidosis (↑CO₂)</div>
+                <table class="comparison-table">
+                    <tr><th>Compensation</th><th>Formula</th></tr>
+                    <tr><td><strong>Acute</strong></td><td>HCO₃ ↑ 1 for every 10 ↑ CO₂</td></tr>
+                    <tr><td><strong>Chronic</strong></td><td>HCO₃ ↑ 3.5 for every 10 ↑ CO₂</td></tr>
+                </table>
+                <p style="margin-top:12px;"><strong>Causes:</strong> COPD, hypoventilation, neuromuscular disease, airway obstruction, CNS depression</p>
+            </div>
+            
+            <div class="boards-tip">
+                <div class="boards-tip-title">📚 Respiratory Alkalosis (↓CO₂)</div>
+                <table class="comparison-table">
+                    <tr><th>Compensation</th><th>Formula</th></tr>
+                    <tr><td><strong>Acute</strong></td><td>HCO₃ ↓ 2 for every 10 ↓ CO₂</td></tr>
+                    <tr><td><strong>Chronic</strong></td><td>HCO₃ ↓ 5 for every 10 ↓ CO₂</td></tr>
+                </table>
+                <p style="margin-top:12px;"><strong>Causes:</strong> Anxiety, pain, fever, PE, sepsis (early), high altitude, pregnancy, salicylate toxicity, liver failure</p>
+            </div>
+            
+            <div class="mechanism-box">
+                <div class="mechanism-title">🧬 Acute vs. Chronic: How to Tell</div>
+                <div class="pathway"><strong>Key principle:</strong>
+Renal compensation takes 3-5 days to fully develop
+
+<strong>If HCO₃ change is minimal:</strong>
+→ Acute respiratory disorder
+
+<strong>If HCO₃ is significantly altered:</strong>
+→ Chronic (or mixed disorder)
+
+<strong>Clinical context helps:</strong>
+• COPD with baseline CO₂ 60 and HCO₃ 32 = chronic
+• Drug overdose with CO₃ 70 and HCO₃ 26 = acute</div>
+            </div>
+            
+            <div class="why-chain">
+                <div class="why-chain-title">🔗 WHY Chain: Chronic Compensation is Greater</div>
+                <p><strong>WHY does chronic have more compensation than acute?</strong></p>
+                <p>→ Acute: Only buffering (hemoglobin, proteins) - limited capacity</p>
+                <p>→ Chronic: Kidneys upregulate H⁺ excretion and HCO₃⁻ reabsorption</p>
+                <p>→ This takes 3-5 days to reach maximum</p>
+            </div>
+            
+            <button class="btn" onclick="nextStage()">Mixed Disorders →</button>
+        </div>
+    </div>`;
+};
+
+window.render_mixed = function() {
+    return `
+    <div class="scene">
+        <div class="scene-header">
+            <div class="scene-phase">Stage 8 of 10</div>
+            <div class="scene-title">Mixed Acid-Base Disorders</div>
+        </div>
+        <div class="scene-body">
+            <div class="alert-box">
+                <div class="alert-title">🚨 When to Suspect a Mixed Disorder</div>
+                <ul style="margin-left:20px;margin-top:8px;">
+                    <li>Normal pH with significantly abnormal PaCO₂ and HCO₃</li>
+                    <li>Compensation falls outside expected range</li>
+                    <li>Clinical picture suggests multiple processes</li>
+                </ul>
+            </div>
+            
+            <div class="boards-tip">
+                <div class="boards-tip-title">📚 Classic Mixed Disorders</div>
+                <table class="comparison-table">
+                    <tr><th>Combination</th><th>pH Effect</th><th>Classic Example</th></tr>
+                    <tr style="background:rgba(239,68,68,0.2);"><td>Resp acidosis + Met acidosis</td><td>Severe ↓↓ pH</td><td>Cardiopulmonary arrest</td></tr>
+                    <tr style="background:rgba(34,197,94,0.2);"><td>Resp alkalosis + Met alkalosis</td><td>Severe ↑↑ pH</td><td>Liver failure + vomiting</td></tr>
+                    <tr><td>Resp acidosis + Met alkalosis</td><td>Near normal</td><td>COPD + diuretics</td></tr>
+                    <tr><td>Resp alkalosis + Met acidosis</td><td>Near normal</td><td>Salicylate toxicity</td></tr>
+                    <tr><td>Met acidosis + Met alkalosis</td><td>Variable</td><td>DKA + vomiting</td></tr>
+                </table>
+            </div>
+            
+            <div class="mechanism-box">
+                <div class="mechanism-title">🧬 Triple Disorders Exist!</div>
+                <div class="pathway"><strong>Example: Alcoholic patient</strong>
+
+1. Metabolic acidosis (ketoacidosis)
+2. Metabolic alkalosis (vomiting)
+3. Respiratory alkalosis (withdrawal/hepatic)
+
+<strong>How to identify:</strong>
+• Calculate AG (high = AGMA present)
+• Calculate delta-delta (reveals met alk if >2)
+• Check if CO₂ is appropriate (if not = resp component)</div>
+            </div>
+            
+            <div class="why-chain">
+                <div class="why-chain-title">🔗 WHY Chain: Salicylate Mixed Disorder</div>
+                <p><strong>WHY does aspirin cause BOTH resp alkalosis AND met acidosis?</strong></p>
+                <p>→ Early: Direct CNS stimulation → hyperventilation → resp alkalosis</p>
+                <p>→ Late: Salicylic acid accumulates → AGMA</p>
+                <p>→ Also: Uncouples oxidative phosphorylation → lactic acidosis</p>
+                <p>→ Classic pattern: Low CO₂, low HCO₃, near-normal pH</p>
+            </div>
+            
+            <button class="btn" onclick="nextStage()">Pediatric Considerations →</button>
+        </div>
+    </div>`;
+};
+
+window.render_peds = function() {
+    return `
+    <div class="scene">
+        <div class="scene-header">
+            <div class="scene-phase">Stage 9 of 10</div>
+            <div class="scene-title">Pediatric Acid-Base Pearls</div>
+        </div>
+        <div class="scene-body">
+            <div class="boards-tip">
+                <div class="boards-tip-title">📚 Pediatric-Specific Considerations</div>
+                <table class="comparison-table">
+                    <tr><th>Age Group</th><th>Key Differences</th></tr>
+                    <tr><td><strong>Neonates</strong></td><td>Lower baseline HCO₃ (~20), higher RR, immature renal compensation</td></tr>
+                    <tr><td><strong>Infants</strong></td><td>Inborn errors of metabolism more common, higher metabolic rate</td></tr>
+                    <tr><td><strong>Children</strong></td><td>DKA common (new-onset diabetes), same compensation formulas</td></tr>
+                </table>
+            </div>
+            
+            <div class="mechanism-box">
+                <div class="mechanism-title">🧬 High-Yield Pediatric Scenarios</div>
+                <div class="pathway"><strong>1. Pyloric Stenosis (2-6 weeks)</strong>
+• Hypochloremic, hypokalemic metabolic alkalosis
+• Paradoxical aciduria (kidneys retain H+ to save K+)
+
+<strong>2. Inborn Errors of Metabolism</strong>
+• Organic acidemias → AGMA
+• Often present in first days/weeks of life
+• Elevated ammonia is a clue
+
+<strong>3. Diarrhea</strong>
+• Most common cause of met acidosis in kids
+• Non-anion gap (HCO₃ loss)
+
+<strong>4. Diabetic Ketoacidosis</strong>
+• Often first presentation of Type 1 DM
+• AGMA with high glucose, ketones</div>
+            </div>
+            
+            <div class="alert-box">
+                <div class="alert-title">⚠️ RTA in Children</div>
+                <p><strong>Renal Tubular Acidosis types:</strong></p>
+                <p><strong>Type 1 (Distal):</strong> Can't secrete H⁺, urine pH >5.5, hypokalemia</p>
+                <p><strong>Type 2 (Proximal):</strong> Can't reabsorb HCO₃, Fanconi syndrome</p>
+                <p><strong>Type 4:</strong> Hypoaldosteronism, HYPERkalemia</p>
+            </div>
+            
+            <div class="why-chain">
+                <div class="why-chain-title">🔗 WHY Chain: Paradoxical Aciduria</div>
+                <p><strong>WHY does alkalemic patient in pyloric stenosis make acidic urine?</strong></p>
+                <p>→ Severe volume depletion and hypokalemia</p>
+                <p>→ Kidneys prioritize K⁺ retention over acid-base</p>
+                <p>→ To retain K⁺, must excrete H⁺ instead</p>
+                <p>→ Results in acidic urine despite systemic alkalosis</p>
+            </div>
+            
+            <button class="btn" onclick="nextStage()">Summary & Debrief →</button>
+        </div>
+    </div>`;
+};
+
+window.render_debrief = function() {
+    return `
+    <div class="scene">
+        <div style="text-align:center;padding:40px;">
+            <div style="font-size:4rem;margin-bottom:12px;">🏆</div>
+            <div style="font-size:1.8rem;font-weight:700;color:#4ade80;">Acid-Base Mastery!</div>
+        </div>
+        <div class="scene-body">
+            <div class="boards-tip">
+                <div class="boards-tip-title">📚 High-Yield Summary</div>
+                <table class="comparison-table">
+                    <tr><th>Step</th><th>What to Do</th></tr>
+                    <tr><td>1. pH</td><td>Acidemia (&lt;7.35) or Alkalemia (&gt;7.45)?</td></tr>
+                    <tr><td>2. Primary</td><td>Which value (CO₂ or HCO₃) explains the pH?</td></tr>
+                    <tr><td>3. Compensation</td><td>Is it appropriate? (Winter's, etc.)</td></tr>
+                    <tr><td>4. Anion Gap</td><td>Calculate if metabolic acidosis present</td></tr>
+                    <tr><td>5. Delta-Delta</td><td>Calculate if AG elevated (reveal hidden disorders)</td></tr>
+                </table>
+            </div>
+            
+            <div class="boards-tip">
+                <div class="boards-tip-title">📚 Quick Formulas</div>
+                <div class="pathway"><strong>Metabolic Acidosis (Winter's):</strong>
+Expected CO₂ = 1.5 × HCO₃ + 8 (±2)
+
+<strong>Metabolic Alkalosis:</strong>
+Expected CO₂ = 0.7 × HCO₃ + 21 (±2)
+
+<strong>Respiratory Acidosis:</strong>
+Acute: HCO₃ ↑ 1 per 10 CO₂
+Chronic: HCO₃ ↑ 3.5 per 10 CO₂
+
+<strong>Respiratory Alkalosis:</strong>
+Acute: HCO₃ ↓ 2 per 10 CO₂
+Chronic: HCO₃ ↓ 5 per 10 CO₂</div>
+            </div>
+            
+            <div class="tips">
+                <div class="pearl">
+                    <div class="tip-header">✓ Pearls</div>
+                    <ul style="margin-left:16px;">
+                        <li>MUDPILES for AG metabolic acidosis</li>
+                        <li>Delta-delta > 2 = hidden met alkalosis</li>
+                        <li>Compensation NEVER overcorrects pH</li>
+                        <li>Urine Cl distinguishes met alkalosis types</li>
+                    </ul>
+                </div>
+                <div class="pitfall">
+                    <div class="tip-header">✗ Pitfalls</div>
+                    <ul style="margin-left:16px;">
+                        <li>Forgetting to correct AG for albumin</li>
+                        <li>Missing mixed disorders with normal pH</li>
+                        <li>Not calculating delta-delta</li>
+                        <li>Confusing acute vs chronic compensation</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <button class="btn" onclick="state.stage=0;renderStage();">🔄 Review Again</button>
+        </div>
+    </div>`;
+};
+
+// Initialize
+renderStage();
+</script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+/* Enhanced Feature Styles */
+.rdx-difficulty-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 300px;
+}
+.rdx-diff-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin: 2px;
+}
+.rdx-diff-btn.active {
+    background: #3b82f6;
+    color: white;
+}
+.rdx-diff-btn:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+}
+.rdx-diff-btn:hover:not(.active) {
+    background: #e2e8f0;
+}
+.rdx-refs-panel {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #93c5fd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+.rdx-refs-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+.rdx-refs-links {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+.rdx-refs-links a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.rdx-refs-links a:hover {
+    text-decoration: underline;
+}
+.rdx-debrief-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rdx-debrief-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #1f2937;
+}
+.rdx-path-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.rdx-path-optimal {
+    background: #dcfce7;
+    border-left: 4px solid #22c55e;
+}
+.rdx-path-suboptimal {
+    background: #fef9c3;
+    border-left: 4px solid #eab308;
+}
+.rdx-path-wrong {
+    background: #fecaca;
+    border-left: 4px solid #ef4444;
+}
+.rdx-hint-beginner {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+.rdx-hint-advanced {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+</style>
+
+<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
+    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
+        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    </div>
+</div>
+
+
+<!-- CROSS-PLATFORM LEARNING LINKS -->
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
+            <a href="../mechanism/acid-base-module.html" style="display: block; color: #2563eb; font-size: 14px;">→ Acid-Base</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
+            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="aki-workup-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Aki Workup</a>
+            <a href="hyperkalemia-expanded-dual-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Hyperkalemia Expanded Dual</a>
+            <a href="peds-kawasaki-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Peds Kawasaki</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
+            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../CoachDx/mentor-chat.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../CoachDx/sbar-trainer.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+<!-- END CROSS-PLATFORM LINKS -->
+<div class="rdx-refs-panel" id="rdxRefsPanel">
+    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
+    <div class="rdx-refs-links"><a href="https://www.ncbi.nlm.nih.gov/books/NBK430685/" target="_blank" class="text-blue-600 hover:underline">StatPearls Medical Library</a> | <a href="https://www.merckmanuals.com/professional" target="_blank" class="text-blue-600 hover:underline">Merck Manual Professional</a></div>
+</div>
+
+<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
+    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+</div>
+
+<script>
+// ReasonDx Enhanced Features Module
+(function() {
+    // Decision tracking
+    window.rdxDecisionPath = window.rdxDecisionPath || [];
+    window.rdxTotalScore = window.rdxTotalScore || 0;
+    window.rdxMaxScore = window.rdxMaxScore || 0;
+    window.rdxDifficulty = 'intermediate';
+    
+    // Difficulty control
+    window.rdxSetDifficulty = function(level) {
+        window.rdxDifficulty = level;
+        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('rdx-btn-' + level).classList.add('active');
+        
+        // Update hint visibility
+        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
+            el.style.display = level === 'beginner' ? 'block' : 'none';
+        });
+        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
+            el.style.display = level === 'advanced' ? 'block' : 'none';
+        });
+    };
+    
+    // Track a decision
+    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+        window.rdxDecisionPath.push({
+            stage: stageId,
+            title: stageTitle,
+            choice: choiceId,
+            choiceText: choiceText,
+            outcome: outcome,
+            points: points,
+            maxPoints: maxPoints,
+            isOptimal: isOptimal,
+            optimalChoice: optimalChoice,
+            optimalText: optimalText
+        });
+        window.rdxTotalScore += points;
+        window.rdxMaxScore += maxPoints;
+    };
+    
+    // Show visual debrief
+    window.rdxShowDebrief = function() {
+        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
+        
+        let grade, gradeColor, gradeEmoji;
+        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
+        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
+        
+        let pathHTML = '';
+        if (window.rdxDecisionPath.length > 0) {
+            pathHTML = window.rdxDecisionPath.map(d => {
+                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
+                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
+                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
+                return '<div class="' + pathClass + ' rdx-path-item">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
+                    '<div>' +
+                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
+                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
+                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
+                    '</div>' +
+                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
+                    '</div></div>';
+            }).join('');
+        } else {
+            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+        }
+        
+        document.getElementById('rdxDebriefContent').innerHTML = 
+            '<div style="text-align:center;margin-bottom:24px;">' +
+            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
+            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
+            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
+            '</div></div>' +
+            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
+            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
+            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
+            '</div></div>' +
+            '<div style="display:flex;gap:12px;">' +
+            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '</div>';
+        
+        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
+    };
+    
+    // Auto-inject hint examples into existing content
+    window.rdxInit = function() {
+        // Could add dynamic hint injection here based on difficulty
+        console.log('ReasonDx Enhanced Features loaded for: Acid Base Expanded Dual Adventure');
+    };
+    
+    // Initialize on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.rdxInit);
+    } else {
+        window.rdxInit();
+    }
+})();
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+</body>
+</html>

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acute Abdomen - Expanded Deep Dive Adventure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .stage-card { transition: all 0.3s ease; }
+        .why-chain { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); }
+        .mechanism-box { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); }
+        .pearl-box { background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%); }
+        .pitfall-box { background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-rose-50 min-h-screen">
+    <div id="app" class="container mx-auto px-4 py-8 max-w-5xl">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between flex-wrap gap-4">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">🔪 Acute Abdomen</h1>
+                    <p class="text-gray-500 mt-1">Expanded Deep Dive Adventure • 10 Stages</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="text-right">
+                        <div class="text-sm text-gray-500">Progress</div>
+                        <div class="text-2xl font-bold text-rose-600" id="score">0%</div>
+                    </div>
+                    <button onclick="resetGame()" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium">🔄 Restart</button>
+                </div>
+            </div>
+            <div class="mt-4 h-3 bg-gray-100 rounded-full overflow-hidden">
+                <div id="progressBar" class="h-full bg-gradient-to-r from-rose-500 to-red-500 transition-all duration-500" style="width: 0%"></div>
+            </div>
+        </div>
+        <div id="gameContainer" class="space-y-6"></div>
+        <div id="summaryPanel" class="hidden"></div>
+    </div>
+    <script>
+const caseData = {
+    title: "Acute Abdomen",
+    totalStages: 10,
+    stages: [
+        {
+            id: 1,
+            title: "Peritonitis - The Surgical Abdomen",
+            scenario: "A 65-year-old man presents with severe diffuse abdominal pain that started suddenly 4 hours ago. He has a history of peptic ulcer disease and stopped taking his PPI.\n\nVitals: HR 120, BP 95/60, Temp 100.4°F, RR 24\n\nExam:\n• Lying very still, knees drawn up\n• Diffuse abdominal tenderness\n• Rigid, board-like abdomen\n• Involuntary guarding throughout\n• Absent bowel sounds\n• Severe pain with any movement or coughing",
+            question: "What physical exam findings indicate peritonitis and likely need for surgery?",
+            options: [
+                { id: "A", text: "The tachycardia and hypotension are the key findings", outcome: "Misses peritoneal signs", feedback: "While vital signs indicate shock, the PERITONEAL SIGNS are what indicate surgical abdomen: rigidity, involuntary guarding, and rebound tenderness. These indicate peritoneal inflammation requiring surgical evaluation.", points: 4, isOptimal: false },
+                { id: "B", text: "Board-like rigidity, involuntary guarding, and immobility indicate peritonitis - this is a surgical abdomen", outcome: "Correct identification", feedback: "Correct! Classic peritonitis: Patient lies still (movement worsens pain), board-like rigidity, involuntary guarding (can't relax despite trying), absent bowel sounds. This suggests perforated viscus (likely peptic ulcer) and needs emergent surgery.", points: 10, isOptimal: true },
+                { id: "C", text: "Absent bowel sounds alone confirm obstruction requiring surgery", outcome: "Incomplete assessment", feedback: "Absent bowel sounds occur in many conditions (ileus, peritonitis, late obstruction). The combination of rigidity, guarding, and immobility is what defines peritonitis and surgical abdomen.", points: 3, isOptimal: false },
+                { id: "D", text: "These findings suggest gastroenteritis - supportive care indicated", outcome: "Dangerous misdiagnosis", feedback: "Gastroenteritis does NOT cause board-like rigidity, involuntary guarding, or this degree of immobility. These are peritoneal signs indicating surgical emergency, not viral gastroenteritis.", points: 0, isOptimal: false }
+            ],
+            whyChain: { title: "WHY does peritonitis cause these findings?", steps: ["Peritoneum is highly innervated with somatic nerves", "Inflammation/contamination causes severe somatic pain", "Any movement stretches inflamed peritoneum → more pain", "Patient lies completely still to minimize peritoneal movement", "Abdominal muscles involuntarily contract to 'splint' and protect (guarding)", "Board-like rigidity = maximal involuntary guarding"] },
+            mechanism: { title: "Peritonitis and Surgical Abdomen", content: "PERITONEAL SIGNS:\n\nInvoluntary guarding:\n• Muscles contract reflexively despite patient trying to relax\n• Different from voluntary guarding (anxiety, ticklishness)\n• Test: Have patient take deep breath - involuntary guarding persists\n\nRigidity:\n• Board-like hardness of abdominal wall\n• Represents severe involuntary guarding\n• Pathognomonic for peritonitis\n\nRebound tenderness:\n• Pain worse with release than with pressure\n• Indicates peritoneal inflammation\n• Can also test with cough or percussion\n\nImmobility:\n• Patient lies perfectly still\n• Resists any movement\n• Opposite of colicky pain (where patient writhes)\n\nCAUSES OF PERITONITIS:\n\nPerforated viscus:\n• Peptic ulcer (sudden, severe, epigastric → diffuse)\n• Appendicitis\n• Diverticulitis\n• Bowel ischemia\n• Trauma\n\nOther:\n• Spontaneous bacterial peritonitis (cirrhosis)\n• Pancreatitis (chemical peritonitis)\n• Ruptured ectopic/ovarian cyst\n\nPAIN PATTERNS:\n\nSudden onset diffuse:\n• Perforated ulcer\n• Ruptured AAA\n• Mesenteric ischemia\n\nLocalized → diffuse:\n• Appendicitis\n• Cholecystitis\n• Diverticulitis\n\nColicky (waxing/waning):\n• Bowel obstruction\n• Biliary colic\n• Renal colic" },
+            pearl: "The patient who lies perfectly still likely has peritonitis. The patient who writhes and can't get comfortable likely has colic (obstruction, biliary, renal). This behavioral difference is diagnostically useful.",
+            pitfall: "Elderly and immunocompromised patients may have blunted peritoneal signs. Don't be falsely reassured by less impressive exam findings in these populations - they can have perforation with minimal guarding."
+        },
+        {
+            id: 2,
+            title: "Perforated Peptic Ulcer",
+            scenario: "Continuing with the previous patient, you suspect perforated peptic ulcer.\n\nAdditional history: He's been taking ibuprofen daily for back pain for 3 months.\n\nUpright chest X-ray shows: Free air under the diaphragm (pneumoperitoneum)\n\nLabs: WBC 18,000, lactate 3.2",
+            question: "What does free air under the diaphragm indicate and what is the management?",
+            options: [
+                { id: "A", text: "Free air confirms bowel obstruction - place NG tube and observe", outcome: "Wrong interpretation", feedback: "Free air indicates PERFORATION, not obstruction. Obstruction causes dilated bowel and air-fluid levels, not pneumoperitoneum. This patient has a perforated viscus and needs surgery.", points: 2, isOptimal: false },
+                { id: "B", text: "Pneumoperitoneum confirms perforated viscus - NPO, IV fluids, antibiotics, emergent surgical consultation", outcome: "Correct interpretation and management", feedback: "Correct! Free air under the diaphragm = perforated viscus until proven otherwise. Management: NPO, IV resuscitation, broad-spectrum antibiotics, emergent surgery (usually laparoscopic repair or omental patch).", points: 10, isOptimal: true },
+                { id: "C", text: "Free air can be normal after recent procedures - check history before acting", outcome: "Delays necessary care", feedback: "While post-procedural pneumoperitoneum exists, this patient has peritonitis, history of PUD and NSAIDs, and no recent procedures mentioned. This is perforated ulcer needing emergent surgery.", points: 3, isOptimal: false },
+                { id: "D", text: "CT abdomen is required before any surgical decision", outcome: "May be appropriate but don't delay", feedback: "CT can help identify the perforation site, but in an unstable patient with clear pneumoperitoneum and peritonitis, delaying surgery for CT may not be appropriate. Surgical consultation should happen immediately.", points: 5, isOptimal: false }
+            ],
+            whyChain: { title: "WHY does perforation cause free air?", steps: ["GI tract normally contains air (swallowed, bacterial)", "Peritoneal cavity normally has no free air", "When bowel wall perforates, air escapes into peritoneum", "Air rises to highest point (under diaphragm when upright)", "Visible as lucency between diaphragm and liver on upright CXR", "Pneumoperitoneum = perforated viscus until proven otherwise"] },
+            mechanism: { title: "Perforated Peptic Ulcer", content: "RISK FACTORS:\n• NSAIDs (most common modifiable risk)\n• H. pylori infection\n• Smoking\n• Alcohol\n• Stress (ICU patients)\n• Previous ulcer history\n• Steroid use\n\nPRESENTATION:\n• Sudden, severe epigastric pain ('like being stabbed')\n• Pain may radiate to back or shoulder (diaphragmatic irritation)\n• Rapidly becomes diffuse as gastric contents spread\n• Peritonitis develops within hours\n• May have preceding dyspepsia\n\nDIAGNOSIS:\n\nUpright CXR:\n• Free air under diaphragm (70-80% sensitive)\n• Need upright film or lateral decubitus\n\nCT abdomen:\n• More sensitive for small amounts of free air\n• Can identify perforation site\n• Shows associated findings (fluid, inflammation)\n\nLabs:\n• Leukocytosis\n• Elevated lactate (if delayed/ischemia)\n• Amylase may be elevated\n\nMANAGEMENT:\n\nResuscitation:\n• NPO\n• IV fluids (crystalloid)\n• NG tube (decompress stomach)\n• Broad-spectrum antibiotics (cover GI flora)\n• PPI IV (reduce acid output)\n\nSurgery:\n• Emergent laparoscopy or laparotomy\n• Omental patch (Graham patch) for most ulcers\n• Definitive ulcer surgery rarely done acutely now\n\nPost-op:\n• H. pylori testing and treatment\n• Stop NSAIDs\n• PPI therapy long-term" },
+            pearl: "An upright CXR showing free air is fast and often diagnostic. If upright isn't possible, a left lateral decubitus film can show air between liver and abdominal wall.",
+            pitfall: "About 20-30% of perforations don't show free air on plain X-ray (sealed perforation, small amount). If clinical suspicion is high, get CT or proceed to surgery anyway."
+        },
+        {
+            id: 3,
+            title: "Mesenteric Ischemia",
+            scenario: "A 78-year-old woman presents with sudden severe abdominal pain for 2 hours. PMH includes HTN, CHF, and a cardiac arrhythmia (on rate control, not anticoagulation due to fall risk). She describes the pain as 'the worst of my life.'\n\nVitals: HR 110 (irregular), BP 150/90, Temp 99.0°F\n\nExam:\n• Writhing in pain, very distressed\n• Abdomen: Soft, mildly tender diffusely\n• NO peritoneal signs\n• Bowel sounds present\n\nLabs: WBC 14,000, lactate 4.5, pH 7.28",
+            question: "What classic finding is demonstrated here and what is the diagnosis?",
+            options: [
+                { id: "A", text: "The soft abdomen rules out serious pathology - likely gastroenteritis", outcome: "Misses critical diagnosis", feedback: "This is the classic and dangerous trap! 'Pain out of proportion to exam' is the hallmark of mesenteric ischemia. Severe pain + soft abdomen + AFib + elevated lactate = mesenteric ischemia until proven otherwise.", points: 0, isOptimal: false },
+                { id: "B", text: "Pain out of proportion to physical exam in patient with AFib - acute mesenteric ischemia likely from arterial embolism", outcome: "Correct diagnosis", feedback: "Correct! The triad: (1) Severe pain, (2) Benign-appearing abdomen, (3) Risk factors (AFib, atherosclerosis). This 'pain out of proportion to exam' is because the ischemia hasn't yet caused full-thickness necrosis and peritonitis.", points: 10, isOptimal: true },
+                { id: "C", text: "Elevated lactate indicates sepsis - start sepsis protocol", outcome: "Misses the cause", feedback: "Lactate is elevated from gut ischemia, not sepsis (yet). The source of the elevated lactate is the ischemic bowel. Treating as sepsis without addressing the ischemic bowel will lead to death.", points: 3, isOptimal: false },
+                { id: "D", text: "Renal colic - the writhing behavior is classic for kidney stone", outcome: "Wrong pattern", feedback: "While writhing suggests colicky pain, the age, AFib, and elevated lactate don't fit renal colic. Mesenteric ischemia also causes patients to writhe early (before peritonitis develops).", points: 2, isOptimal: false }
+            ],
+            whyChain: { title: "WHY is exam benign early in mesenteric ischemia?", steps: ["Initially, only mucosa is ischemic (innermost layer)", "Peritoneum (outermost) isn't yet involved", "No peritoneal irritation = no guarding, rigidity, rebound", "Visceral pain from gut is poorly localized, causes writhing", "As ischemia progresses to full-thickness necrosis → peritonitis develops", "By the time exam is impressive, bowel is dead and prognosis is poor"] },
+            mechanism: { title: "Acute Mesenteric Ischemia", content: "TYPES:\n\nArterial embolism (50%):\n• Usually from AFib (left atrial thrombus)\n• Sudden onset, severe pain\n• Often proximal SMA occlusion\n• May have history of peripheral emboli\n\nArterial thrombosis (25%):\n• Atherosclerosis of mesenteric vessels\n• May have preceding 'intestinal angina' (postprandial pain)\n• More gradual onset\n\nVenous thrombosis (5-15%):\n• Hypercoagulable states, malignancy, cirrhosis\n• More insidious onset\n• Better prognosis\n\nNon-occlusive (NOMI) (20%):\n• Low-flow states (shock, heart failure, dialysis)\n• Vasopressors are risk factor\n• Often in ICU patients\n\nCLASSIC PRESENTATION:\n• Severe abdominal pain ('worst ever')\n• Pain out of proportion to physical exam\n• Rapid emptying of gut (vomiting, diarrhea) early\n• AFib or atherosclerotic risk factors\n• Elevated lactate, metabolic acidosis\n\nPROGRESSION:\n• Early: Pain, soft abdomen, hyperactive bowel sounds\n• Middle: Bloody diarrhea, ileus develops\n• Late: Peritonitis, sepsis, shock (bowel necrosis)\n\nDIAGNOSIS:\n• CT angiography (test of choice)\n  - Shows occluded vessel\n  - Bowel wall thickening or pneumatosis\n  - Mesenteric stranding\n• Lactate elevated (not specific but sensitive)\n\nTREATMENT:\n\nResuscitation:\n• IV fluids\n• Correct acidosis\n• Broad-spectrum antibiotics\n• Avoid vasoconstrictors if possible\n\nRevascularization:\n• Surgical embolectomy OR\n• Endovascular thrombectomy/thrombolysis\n• May need bowel resection if necrosis\n\nMORTALITY:\n• 60-80% if diagnosis delayed\n• 30% if caught early and treated" },
+            pearl: "The classic teaching: 'Pain out of proportion to exam' = mesenteric ischemia. A patient with severe pain and a soft abdomen should terrify you, not reassure you.",
+            pitfall: "Don't wait for peritonitis to diagnose mesenteric ischemia. By then, the bowel is dead. High lactate + AFib + severe pain + soft abdomen = get CTA immediately."
+        },
+        {
+            id: 4,
+            title: "Small Bowel Obstruction",
+            scenario: "A 55-year-old woman with history of appendectomy 20 years ago presents with crampy abdominal pain, vomiting, and inability to pass gas or stool for 24 hours.\n\nVitals: HR 105, BP 130/85, Temp 99.2°F\n\nExam:\n• Moderately distended abdomen\n• Diffuse tenderness, worse periumbilically\n• No peritoneal signs\n• High-pitched, tinkling bowel sounds with rushes\n\nAbdominal X-ray: Dilated small bowel loops with air-fluid levels, minimal colonic gas",
+            question: "What is the most likely cause of SBO in this patient and what imaging finding would suggest strangulation?",
+            options: [
+                { id: "A", text: "Hernia is most likely; look for incarcerated hernia on exam", outcome: "Misses most common cause", feedback: "While hernias can cause SBO, the most common cause in someone with prior abdominal surgery is ADHESIONS. Always examine for hernias, but adhesive SBO is most likely here.", points: 5, isOptimal: false },
+                { id: "B", text: "Adhesions from prior surgery; closed-loop obstruction, bowel wall thickening, or mesenteric haziness on CT suggests strangulation", outcome: "Correct cause and strangulation signs", feedback: "Correct! Adhesions are the #1 cause of SBO in developed countries (60-70%). CT signs of strangulation: closed-loop obstruction, bowel wall thickening/edema, mesenteric haziness, reduced wall enhancement, free fluid.", points: 10, isOptimal: true },
+                { id: "C", text: "Malignancy is most likely at her age; colonoscopy needed", outcome: "Less common cause of SBO", feedback: "Malignancy more commonly causes large bowel obstruction, not SBO. In a patient with prior surgery, adhesions are far more likely. Colonoscopy isn't indicated for SBO workup.", points: 3, isOptimal: false },
+                { id: "D", text: "Ileus from viral infection; high-pitched bowel sounds confirm this", outcome: "Wrong diagnosis", feedback: "Ileus has ABSENT or hypoactive bowel sounds. High-pitched, tinkling bowel sounds with rushes are classic for mechanical obstruction (the bowel is trying to push past the obstruction).", points: 2, isOptimal: false }
+            ],
+            whyChain: { title: "WHY do adhesions cause obstruction years later?", steps: ["Surgery causes tissue injury and inflammation", "Healing forms fibrous bands (adhesions) between structures", "Adhesions are normally asymptomatic", "Bowel can become kinked, compressed, or trapped by adhesions", "A loop of bowel slides into position where adhesion causes obstruction", "Can happen any time - even decades after surgery"] },
+            mechanism: { title: "Small Bowel Obstruction", content: "CAUSES:\n\nDeveloped countries:\n• Adhesions (60-70%) - prior surgery\n• Hernias (15-20%)\n• Malignancy (10-15%)\n• Crohn's disease\n\nDeveloping countries:\n• Hernias are #1 cause\n\nCLASSIFICATION:\n\nPartial vs Complete:\n• Partial: Some gas/stool still passes\n• Complete: Obstipation, no flatus\n\nSimple vs Strangulated:\n• Simple: Lumen blocked but blood flow intact\n• Strangulated: Blood supply compromised → ischemia/necrosis\n\nCLINICAL FEATURES:\n• Colicky abdominal pain (comes and goes)\n• Vomiting (earlier in proximal obstruction)\n• Distension (more with distal obstruction)\n• Obstipation (no gas or stool)\n• High-pitched bowel sounds with rushes\n\nX-RAY FINDINGS:\n• Dilated small bowel (>3cm)\n• Air-fluid levels at different heights (step-ladder)\n• Minimal colonic gas (distal obstruction)\n• 'String of pearls' sign (small air bubbles in a row)\n\nCT FINDINGS:\n• Transition point (dilated → decompressed)\n• Cause may be visible (hernia, mass, adhesion)\n• Signs of strangulation:\n  - Closed-loop obstruction\n  - Bowel wall thickening (>3mm)\n  - Mesenteric haziness\n  - Reduced wall enhancement\n  - Pneumatosis (air in bowel wall)\n  - Free fluid\n\nMANAGEMENT:\n\nConservative (partial SBO, no strangulation):\n• NPO, IV fluids\n• NG tube decompression\n• Serial abdominal exams\n• Gastrografin challenge (diagnostic and therapeutic)\n\nSurgical:\n• Complete obstruction not resolving\n• Signs of strangulation\n• Closed-loop obstruction\n• Peritonitis\n• Failure of conservative management (3-5 days)" },
+            pearl: "The 'transition point' on CT (where bowel goes from dilated to decompressed) localizes the obstruction. Following the bowel to this point helps identify the cause.",
+            pitfall: "Don't assume all SBO needs surgery. Adhesive SBO often resolves with conservative management (65-80% success). But don't delay surgery if there are signs of strangulation."
+        },
+        {
+            id: 5,
+            title: "Large Bowel Obstruction",
+            scenario: "A 72-year-old man presents with 4 days of progressive abdominal distension, crampy pain, and inability to have a bowel movement. He passed gas once yesterday. He's had some blood mixed with stool over the past 2 months.\n\nVitals: HR 95, BP 140/85, Temp 98.8°F\n\nExam:\n• Markedly distended abdomen, tympanitic\n• Mild diffuse tenderness, no peritoneal signs\n• Reduced bowel sounds\n• Rectal exam: Empty vault, small amount of blood on glove\n\nCT abdomen: Dilated colon to 8cm with abrupt cutoff at sigmoid, mass visible at transition point, no free air",
+            question: "What is the most likely diagnosis and what is the urgent concern with large bowel obstruction?",
+            options: [
+                { id: "A", text: "Sigmoid volvulus - emergent sigmoidoscopy for detorsion", outcome: "Different imaging appearance", feedback: "Volvulus shows the 'coffee bean' sign with twisted mesentery. This CT shows an abrupt cutoff with a mass - this is obstructing colon cancer, not volvulus.", points: 4, isOptimal: false },
+                { id: "B", text: "Obstructing colon cancer - risk of cecal perforation if ileocecal valve competent and cecum overdistends", outcome: "Correct diagnosis and complication", feedback: "Correct! Colon cancer is the most common cause of LBO. If the ileocecal valve is competent (closed-loop), the cecum can't decompress backward and may perforate when >12cm. Cecum is the thinnest-walled part of the colon.", points: 10, isOptimal: true },
+                { id: "C", text: "Diverticulitis with stricture - treat with antibiotics", outcome: "Doesn't explain mass", feedback: "While diverticulitis can cause stricture, the CT shows a mass. Additionally, the blood in stool for 2 months suggests malignancy. This needs surgical evaluation, not just antibiotics.", points: 3, isOptimal: false },
+                { id: "D", text: "Fecal impaction - disimpact manually and give laxatives", outcome: "Doesn't explain findings", feedback: "Fecal impaction would show stool in the rectum (his was empty) and wouldn't cause an abrupt cutoff with a mass. This is obstructing malignancy.", points: 1, isOptimal: false }
+            ],
+            whyChain: { title: "WHY is cecal perforation the concern?", steps: ["In LBO, colon proximal to obstruction dilates", "If ileocecal valve is competent, small bowel contents can't reflux back", "This creates a 'closed loop' between ileocecal valve and obstruction", "Cecum is thinnest-walled part of colon (Law of Laplace: tension increases with radius)", "Cecum dilates most and is most at risk for perforation", "Cecum >12cm on imaging = high risk of perforation"] },
+            mechanism: { title: "Large Bowel Obstruction", content: "CAUSES:\n• Colon cancer (60%) - most common\n• Diverticular disease/stricture (20%)\n• Volvulus (10-15%)\n  - Sigmoid (more common)\n  - Cecal\n• Hernia\n• Fecal impaction\n\nCOMPETENT VS INCOMPETENT ILEOCECAL VALVE:\n\nCompetent (closed-loop):\n• Contents can't reflux to small bowel\n• Higher pressure in colon\n• Higher risk of cecal perforation\n• More emergent\n\nIncompetent:\n• Contents reflux to small bowel\n• Acts like SBO\n• Lower perforation risk\n• Still needs treatment\n\nCLINICAL FEATURES:\n• More gradual onset than SBO\n• Distension (prominent)\n• Colicky pain\n• Change in bowel habits\n• Blood in stool (if cancer)\n• Vomiting (late finding, if at all)\n\nDIAGNOSIS:\n• CT with contrast (test of choice)\n• Shows transition point, cause, and complications\n• Plain X-ray: Dilated colon, loss of haustral markings\n\nURGENT FINDINGS:\n• Cecal diameter >12cm = high perforation risk\n• Free air = perforation\n• Pneumatosis = ischemia\n\nMANAGEMENT:\n\nEmergent surgery if:\n• Signs of perforation or ischemia\n• Cecum >12cm\n• Peritonitis\n\nSigmoid cancer:\n• Colonic stent as bridge to surgery (if stable)\n• Emergency surgery with possible colostomy\n\nVolvulus:\n• Sigmoid: Sigmoidoscopic decompression, then elective sigmoid resection\n• Cecal: Usually requires surgery\n\nRight-sided cancers:\n• Right hemicolectomy with primary anastomosis usually possible\n\nLeft-sided cancers:\n• May need Hartmann procedure (resection + colostomy)\n• Or stent as bridge to one-stage surgery" },
+            pearl: "In LBO, measure the cecum on CT. Cecal diameter >12cm is a surgical emergency regardless of other findings - perforation is imminent.",
+            pitfall: "Don't assume all elderly patients with distension have constipation. Blood in stool + obstruction symptoms = colon cancer until proven otherwise. Get imaging before assuming benign cause."
+        },
+        {
+            id: 6,
+            title: "Acute Diverticulitis",
+            scenario: "A 58-year-old man presents with 2 days of left lower quadrant pain, fever, and constipation. He's had similar but milder episodes before.\n\nVitals: HR 100, BP 135/80, Temp 101.5°F\n\nExam:\n• Tender in LLQ with some voluntary guarding\n• No rebound, no rigidity\n• Bowel sounds present\n\nLabs: WBC 15,000\n\nCT abdomen: Sigmoid diverticulosis with wall thickening, pericolonic fat stranding, no abscess, no free air",
+            question: "What is the classification of this diverticulitis and how should it be managed?",
+            options: [
+                { id: "A", text: "Complicated diverticulitis - requires emergent surgery", outcome: "Misclassifies severity", feedback: "This is UNCOMPLICATED diverticulitis (no abscess, perforation, fistula, or obstruction). Uncomplicated cases don't require surgery - they're managed medically.", points: 3, isOptimal: false },
+                { id: "B", text: "Uncomplicated diverticulitis - outpatient antibiotics (if mild) or admit for IV antibiotics and bowel rest", outcome: "Correct classification and management", feedback: "Correct! CT shows uncomplicated diverticulitis (inflammation without abscess, free air, or perforation). Can be managed outpatient with oral antibiotics if tolerating PO, or admit for IV antibiotics if more ill. No emergent surgery needed.", points: 10, isOptimal: true },
+                { id: "C", text: "Acute appendicitis - take to OR", outcome: "Wrong location", feedback: "Left lower quadrant with sigmoid findings on CT = diverticulitis. Appendicitis is right lower quadrant. The location and CT findings are diagnostic of diverticulitis.", points: 1, isOptimal: false },
+                { id: "D", text: "This is just diverticulosis - no treatment needed", outcome: "Misses active infection", feedback: "Diverticulosis (presence of diverticula) is often asymptomatic. This patient has diverticulitis (inflamed diverticulum) with fever, leukocytosis, and CT changes. Active infection needs treatment.", points: 2, isOptimal: false }
+            ],
+            whyChain: { title: "WHY does diverticulitis occur?", steps: ["Diverticula are outpouchings of colonic mucosa through muscle wall", "Most common in sigmoid colon (highest intraluminal pressure)", "Fecalith can obstruct diverticulum neck", "Obstruction → bacterial overgrowth → microperforation → inflammation", "If contained → uncomplicated diverticulitis", "If spreads → abscess, free perforation, fistula, obstruction (complicated)"] },
+            mechanism: { title: "Acute Diverticulitis", content: "CLASSIFICATION:\n\nUncomplicated (~75%):\n• Localized inflammation\n• No abscess, perforation, fistula, or obstruction\n• Managed medically\n\nComplicated (~25%):\n• Abscess (most common complication)\n• Free perforation with peritonitis\n• Fistula (colovesical, colovaginal)\n• Obstruction/stricture\n\nHINCHEY CLASSIFICATION:\n• Stage I: Pericolic/mesenteric abscess\n• Stage II: Pelvic or distant abscess\n• Stage III: Purulent peritonitis\n• Stage IV: Fecal peritonitis\n\nCLINICAL FEATURES:\n• LLQ pain (sigmoid most common)\n• Fever\n• Change in bowel habits (usually constipation)\n• Nausea/vomiting\n• Urinary symptoms if bladder involved\n\nDIAGNOSIS:\n• CT abdomen/pelvis with contrast (gold standard)\n• Shows: Wall thickening, pericolonic fat stranding, diverticula\n• Can identify complications (abscess, free air)\n\nMANAGEMENT:\n\nUncomplicated:\n• Outpatient (if tolerating PO, no comorbidities):\n  - Oral antibiotics x 7-10 days (FQ + metronidazole or Augmentin)\n  - Clear liquids → advance diet\n  - Recent data suggests antibiotics may not be necessary for mild cases\n• Inpatient (if ill-appearing, can't tolerate PO):\n  - IV antibiotics\n  - Bowel rest\n  - Advance diet as tolerated\n\nComplicated:\n• Abscess <4cm: IV antibiotics, may resolve\n• Abscess ≥4cm: Percutaneous drainage + antibiotics\n• Free perforation/peritonitis: Emergent surgery (Hartmann procedure or resection with anastomosis)\n• Fistula: Elective surgery after acute inflammation resolved\n\nFOLLOW-UP:\n• Colonoscopy 6-8 weeks after recovery (rule out cancer)\n• Elective surgery after 2+ episodes (controversial - individualize)" },
+            pearl: "Right-sided diverticulitis can occur (especially in Asian populations) and mimics appendicitis. CT helps distinguish them.",
+            pitfall: "Don't do colonoscopy during acute diverticulitis - risk of perforation. Wait 6-8 weeks after resolution, then scope to rule out underlying malignancy."
+        },
+        {
+            id: 7,
+            title: "Ruptured Abdominal Aortic Aneurysm",
+            scenario: "A 75-year-old man with hypertension and smoking history presents with sudden severe back and abdominal pain. He feels like he might pass out.\n\nVitals: HR 120, BP 85/50, diaphoretic, pale\n\nExam:\n• Cold, clammy extremities\n• Diffusely tender abdomen\n• Pulsatile abdominal mass palpated\n• Decreased femoral pulses bilaterally",
+            question: "What is the most likely diagnosis and what is the management?",
+            options: [
+                { id: "A", text: "Kidney stone with syncope - IV fluids and pain control, CT for stone protocol", outcome: "Misses vascular emergency", feedback: "Kidney stones don't cause hypotension, pulsatile mass, or decreased femoral pulses. This is a ruptured AAA - a true vascular emergency. CT stone protocol would miss it.", points: 0, isOptimal: false },
+                { id: "B", text: "Ruptured AAA - emergent vascular surgery consultation, massive transfusion protocol, OR for open repair or EVAR", outcome: "Correct diagnosis and management", feedback: "Correct! Classic triad: Abdominal/back pain + hypotension + pulsatile mass = ruptured AAA until proven otherwise. Mortality without surgery is 100%. Emergent repair (open or endovascular) is lifesaving.", points: 10, isOptimal: true },
+                { id: "C", text: "Mesenteric ischemia - CTA and heparin", outcome: "Different presentation", feedback: "Mesenteric ischemia doesn't cause pulsatile mass or decreased femoral pulses. The hypotension with pulsatile mass indicates ruptured AAA.", points: 3, isOptimal: false },
+                { id: "D", text: "Acute pancreatitis - aggressive fluid resuscitation and pain control", outcome: "Wrong diagnosis", feedback: "Pancreatitis doesn't cause pulsatile mass, decreased femoral pulses, or this degree of shock. This is ruptured AAA requiring immediate surgery.", points: 2, isOptimal: false }
+            ],
+            whyChain: { title: "WHY the classic triad?", steps: ["Aneurysm ruptures through aortic wall", "Blood tracks into retroperitoneum → severe back and abdominal pain", "Ongoing hemorrhage → hypotension, tachycardia, shock", "Enlarged aorta may be palpable as pulsatile mass", "Thrombus or hypotension → decreased distal pulses", "Without repair, ongoing hemorrhage leads to death"] },
+            mechanism: { title: "Ruptured Abdominal Aortic Aneurysm", content: "RISK FACTORS:\n• Age >65\n• Male sex (6:1)\n• Smoking (most important modifiable)\n• Hypertension\n• Family history\n• Connective tissue disorders\n\nAAA DEFINED:\n• Aortic diameter >3cm (normal ~2cm)\n• Rupture risk increases with size:\n  - <4cm: ~0%/year\n  - 4-5cm: ~1%/year\n  - 5-6cm: ~5-10%/year\n  - 6-7cm: ~10-20%/year\n  - >7cm: ~30-50%/year\n\nRUPTURE PRESENTATION:\n\nClassic triad (50% have all three):\n1. Abdominal and/or back pain\n2. Hypotension\n3. Pulsatile abdominal mass\n\nOther features:\n• Pain may radiate to groin, flank\n• Syncope\n• Grey-Turner sign (flank ecchymosis) - late\n• Cullen sign (periumbilical ecchymosis) - late\n• Decreased femoral pulses\n\nCONTAINED VS FREE RUPTURE:\n\nContained (retroperitoneal):\n• Tamponade effect limits initial hemorrhage\n• May be transiently stable\n• Window for intervention\n\nFree (intraperitoneal):\n• Massive hemorrhage\n• Rapidly fatal\n• Often dead before arrival\n\nDIAGNOSIS:\n• Unstable: Clinical diagnosis → OR immediately\n• Stable: CT angiography (if doesn't delay OR)\n• Bedside US can detect AAA but not reliably diagnose rupture\n\nMANAGEMENT:\n\nResuscitation:\n• Permissive hypotension (SBP 80-100) - higher BP increases bleeding\n• Massive transfusion protocol\n• Avoid aggressive fluid resuscitation until surgical control\n\nSurgery:\n• Open repair: Aortic cross-clamp, graft replacement\n• EVAR (endovascular aneurysm repair): If anatomy suitable and team available\n\nMORTALITY:\n• Without surgery: 100%\n• With open repair: 40-50%\n• With EVAR: 20-30%\n• Many die before reaching hospital" },
+            pearl: "Permissive hypotension in ruptured AAA: Keep SBP 80-100 until surgical control. Higher BP increases bleeding from the rupture site. Don't chase normal BP with fluids.",
+            pitfall: "Pulsatile mass is only palpable in ~50% of ruptured AAAs (obesity, hypotension, contained rupture). Don't rule out AAA because you can't feel a mass."
+        },
+        {
+            id: 8,
+            title: "Ischemic Colitis",
+            scenario: "An 82-year-old woman with heart failure and atrial fibrillation presents with crampy left-sided abdominal pain and bloody diarrhea starting 6 hours ago. Her heart failure medication was recently increased.\n\nVitals: HR 95 (irregular), BP 110/70, Temp 99.0°F\n\nExam:\n• Mild LLQ tenderness\n• No peritoneal signs\n• Hyperactive bowel sounds\n• Rectal: Bright red blood mixed with stool",
+            question: "What is the most likely diagnosis and what distinguishes this from acute mesenteric ischemia?",
+            options: [
+                { id: "A", text: "Acute mesenteric ischemia - emergent CTA and surgery", outcome: "Different entity", feedback: "Mesenteric ischemia (SMA occlusion) presents with severe pain out of proportion to exam, not bloody diarrhea. Ischemic colitis affects the colon, is often self-limited, and has different management.", points: 4, isOptimal: false },
+                { id: "B", text: "Ischemic colitis - usually affects watershed areas (splenic flexure), often non-occlusive and self-limited", outcome: "Correct diagnosis and key features", feedback: "Correct! Ischemic colitis affects the colon (vs mesenteric ischemia which affects small bowel), typically at watershed areas. Usually non-occlusive (low-flow, not embolism) and often resolves with supportive care.", points: 10, isOptimal: true },
+                { id: "C", text: "Infectious colitis - stool cultures and supportive care", outcome: "Less likely given presentation", feedback: "While infectious colitis is in the differential, the setting (elderly, heart failure, AFib, recent medication change) and location (left-sided) make ischemic colitis more likely. CT findings will help distinguish.", points: 5, isOptimal: false },
+                { id: "D", text: "Ulcerative colitis flare - start steroids", outcome: "Different clinical picture", feedback: "New-onset UC at age 82 is rare. The acute onset with cardiac history suggests ischemic colitis. UC also wouldn't be triggered by heart failure medication changes.", points: 2, isOptimal: false }
+            ],
+            whyChain: { title: "WHY watershed areas?", steps: ["Colon receives blood from SMA (right colon) and IMA (left colon)", "Watershed areas have 'dual supply' that's actually marginal", "Splenic flexure = junction of SMA and IMA territories", "Rectosigmoid junction = junction of IMA and internal iliac", "During low-flow states, these areas are first to become ischemic", "Right colon (SMA territory) rarely affected in ischemic colitis"] },
+            mechanism: { title: "Ischemic Colitis", content: "PATHOPHYSIOLOGY:\n• Usually NON-OCCLUSIVE (low-flow)\n• Differs from acute mesenteric ischemia (often occlusive)\n• Watershed areas vulnerable during hypoperfusion\n\nRISK FACTORS:\n• Age >60\n• Heart failure\n• Hypotension/shock\n• Arrhythmias (AFib)\n• Aortic surgery (IMA ligation)\n• Vasopressors\n• Dialysis\n• Constipation (increased luminal pressure)\n\nLOCATION:\n• Splenic flexure (most common)\n• Descending/sigmoid colon\n• Rectosigmoid junction\n• Right colon (rare, worse prognosis)\n• Rectum usually spared (dual blood supply)\n\nCLINICAL FEATURES:\n• Crampy abdominal pain (usually left-sided)\n• Bloody diarrhea (hallmark)\n• Mild to moderate tenderness\n• Usually NO peritoneal signs (unless transmural)\n• Less severe than mesenteric ischemia\n\nDIAGNOSIS:\n• CT with contrast:\n  - Segmental wall thickening\n  - 'Thumbprinting' (submucosal edema)\n  - Pericolonic fat stranding\n  - Usually at watershed areas\n• Colonoscopy (after ruling out perforation):\n  - Pale, edematous mucosa\n  - Hemorrhagic ulcerations\n  - Sharp demarcation at watershed\n\nSEVERITY:\n• Mild: Mucosal/submucosal ischemia (most common)\n• Moderate: Muscle layer involvement\n• Severe: Transmural necrosis (requires surgery)\n\nMANAGEMENT:\n\nMost cases (non-gangrenous):\n• Bowel rest\n• IV fluids\n• Optimize cardiac output\n• Avoid vasoconstrictors\n• Broad-spectrum antibiotics\n• Serial abdominal exams\n\nSurgery if:\n• Peritonitis\n• Perforation\n• Pneumatosis/portal venous gas\n• Clinical deterioration\n• Right-sided involvement (worse prognosis)\n\nPROGNOSIS:\n• 80-85% resolve with conservative management\n• 15-20% need surgery\n• May develop stricture later" },
+            pearl: "Bloody diarrhea with left-sided pain in an elderly cardiac patient = ischemic colitis. This is different from mesenteric ischemia (small bowel, often occlusive, more severe).",
+            pitfall: "Right-sided ischemic colitis has worse prognosis (SMA territory, more severe ischemia). If CT shows right colon involvement, be more aggressive with surgical consultation."
+        },
+        {
+            id: 9,
+            title: "Boerhaave Syndrome",
+            scenario: "A 45-year-old man presents with severe chest and upper abdominal pain after several episodes of forceful vomiting following heavy alcohol consumption. He's now short of breath.\n\nVitals: HR 130, BP 95/60, Temp 101°F, RR 28, SpO2 90% on RA\n\nExam:\n• Ill-appearing, diaphoretic\n• Decreased breath sounds at left base\n• Subcutaneous emphysema in neck\n• Epigastric tenderness with some rigidity\n\nCXR: Left pleural effusion, pneumomediastinum, subcutaneous emphysema",
+            question: "What is the diagnosis and what triad is classically described?",
+            options: [
+                { id: "A", text: "Perforated peptic ulcer - emergent laparoscopy", outcome: "Doesn't explain findings", feedback: "Perforated ulcer wouldn't cause pneumomediastinum, subcutaneous emphysema in the neck, or pleural effusion. These findings indicate esophageal perforation.", points: 3, isOptimal: false },
+                { id: "B", text: "Boerhaave syndrome (spontaneous esophageal perforation) - Mackler triad: vomiting, chest pain, subcutaneous emphysema", outcome: "Correct diagnosis", feedback: "Correct! Boerhaave syndrome: Full-thickness esophageal perforation from forceful vomiting. Mackler triad: (1) Vomiting, (2) Chest pain, (3) Subcutaneous emphysema. This is surgical emergency with high mortality if delayed.", points: 10, isOptimal: true },
+                { id: "C", text: "Mallory-Weiss tear - supportive care and PPI", outcome: "Different severity", feedback: "Mallory-Weiss is a MUCOSAL tear causing bleeding, not perforation. Boerhaave is FULL-THICKNESS perforation causing mediastinitis. The emphysema and pleural effusion indicate Boerhaave.", points: 2, isOptimal: false },
+                { id: "D", text: "Tension pneumothorax - needle decompression", outcome: "Wrong diagnosis", feedback: "While there's a pleural effusion and he has respiratory distress, the subcutaneous emphysema in the neck and pneumomediastinum indicate esophageal source. This is Boerhaave syndrome, not simple pneumothorax.", points: 2, isOptimal: false }
+            ],
+            whyChain: { title: "WHY does vomiting cause esophageal perforation?", steps: ["Forceful vomiting generates high intraluminal pressure", "Pressure is greatest at distal esophagus (above closed LES)", "Esophageal wall is weakest on left posterolateral side (no supporting structures)", "Full-thickness tear occurs - most commonly left posterolateral distal esophagus", "Gastric contents spill into mediastinum and left pleural space", "Mediastinitis develops rapidly - very high mortality without treatment"] },
+            mechanism: { title: "Boerhaave Syndrome", content: "DEFINITION:\n• Spontaneous full-thickness esophageal perforation\n• Usually from forceful vomiting/retching\n• Named for Hermann Boerhaave (1724)\n\nMECHANISM:\n• Sudden increase in intraesophageal pressure\n• Against closed cricopharyngeus and LES\n• Perforation occurs at weakest point\n• Location: Left posterolateral distal esophagus (90%)\n\nMACKLER TRIAD (classic but only ~50% have all):\n1. Vomiting/retching\n2. Chest pain (severe)\n3. Subcutaneous emphysema\n\nOTHER FEATURES:\n• Epigastric pain\n• Dyspnea\n• Sepsis (develops rapidly)\n• Hamman sign (mediastinal crunch on auscultation)\n• Pleural effusion (usually left)\n\nDIAGNOSIS:\n• CXR: Pneumomediastinum, pleural effusion, subcutaneous emphysema\n• CT with oral contrast: Shows perforation site, mediastinal contamination\n• Water-soluble contrast esophagram (Gastrografin): If CT inconclusive\n• Don't use barium (causes severe mediastinitis if it leaks)\n\nCOMPLICATIONS:\n• Mediastinitis (develops within hours)\n• Empyema\n• Sepsis\n• Multi-organ failure\n• Death (30-40% mortality even with treatment)\n\nMANAGEMENT:\n\nImmediate:\n• NPO, NG tube\n• IV fluids, broad-spectrum antibiotics\n• Chest tube if effusion/empyema\n\nDefinitive:\n• Surgical repair: Primary repair + drainage (if <24 hours, contained)\n• Esophageal stent: Emerging option for selected cases\n• Esophagectomy: If delayed, severe contamination, or failed repair\n\nPROGNOSIS:\n• Mortality increases dramatically with delay:\n  - <12 hours: ~10% mortality\n  - 12-24 hours: ~30% mortality\n  - >24 hours: ~50-75% mortality" },
+            pearl: "Subcutaneous emphysema in the neck after vomiting = Boerhaave until proven otherwise. This finding plus chest pain is highly specific.",
+            pitfall: "Don't use barium for contrast study if esophageal perforation is suspected - barium in the mediastinum causes severe inflammation. Use water-soluble contrast (Gastrografin)."
+        },
+        {
+            id: 10,
+            title: "Acute Abdomen Summary",
+            scenario: "Match these presentations to their diagnoses:\n\n• A: Elderly with AFib, severe pain but soft abdomen, lactate 4.5\n• B: RLQ pain, migration from periumbilical, rebound, low-grade fever\n• C: Post-vomiting chest pain, subcutaneous emphysema, pleural effusion\n• D: Left-sided crampy pain, bloody diarrhea, elderly with heart failure\n• E: Sudden severe epigastric pain, rigid abdomen, free air on X-ray",
+            question: "Match each presentation with the correct diagnosis:",
+            options: [
+                { id: "A", text: "A=Mesenteric ischemia, B=Appendicitis, C=Boerhaave, D=Ischemic colitis, E=Perforated ulcer", outcome: "All correct", feedback: "Correct! A: Pain out of proportion + AFib = mesenteric ischemia. B: Classic appendicitis history. C: Mackler triad = Boerhaave. D: Bloody diarrhea + cardiac disease = ischemic colitis. E: Sudden pain + rigid + free air = perforation.", points: 10, isOptimal: true },
+                { id: "B", text: "A=Ischemic colitis, B=Appendicitis, C=MI, D=Mesenteric ischemia, E=Perforated ulcer", outcome: "A and D switched", feedback: "Mesenteric ischemia (small bowel) has pain out of proportion to exam. Ischemic colitis (large bowel) has bloody diarrhea. Don't confuse these - they have different severity and management.", points: 5, isOptimal: false },
+                { id: "C", text: "A=Pancreatitis, B=Cholecystitis, C=Esophagitis, D=Diverticulitis, E=SBO", outcome: "Multiple errors", feedback: "A lacks pancreatitis features (pain to back, no imaging findings mentioned). B is wrong location for cholecystitis (RUQ not RLQ). C has perforation findings not simple esophagitis. D is wrong side for diverticulitis presentation. E has free air = perforation not obstruction.", points: 2, isOptimal: false },
+                { id: "D", text: "All need emergent surgery", outcome: "Not all surgical", feedback: "Not all require surgery: Ischemic colitis (D) usually resolves with supportive care. Mesenteric ischemia (A) may need surgery but also benefits from endovascular options. The indication and timing for surgery varies by diagnosis.", points: 3, isOptimal: false }
+            ],
+            whyChain: { title: "WHY pattern recognition matters", steps: ["Acute abdomen has many causes requiring different treatments", "Surgical conditions need rapid identification", "Delay in perforated viscus = higher mortality", "Some conditions (ischemic colitis) usually resolve without surgery", "Mesenteric ischemia has soft exam EARLY but needs urgent intervention", "Pattern recognition guides appropriate workup and treatment"] },
+            mechanism: { title: "Acute Abdomen Pattern Recognition", content: "SUDDEN SEVERE ONSET:\n• Perforated ulcer (epigastric → diffuse)\n• Ruptured AAA (back/abdomen + shock + mass)\n• Mesenteric ischemia (pain >> exam)\n• Ruptured ectopic (pelvic + shock)\n\nCOLICKY PAIN (waxing/waning):\n• Bowel obstruction (distension, vomiting, no flatus)\n• Biliary colic (RUQ, after fatty meal)\n• Renal colic (flank → groin, hematuria)\n\nPROGRESSIVE LOCALIZED → GENERALIZED:\n• Appendicitis (periumbilical → RLQ → diffuse if perforated)\n• Cholecystitis (RUQ → generalized if gallbladder ruptures)\n• Diverticulitis (LLQ → generalized if perforated)\n\nBLOODY DIARRHEA + ABDOMINAL PAIN:\n• Ischemic colitis (elderly, cardiac disease, left-sided)\n• IBD (younger, chronic/relapsing)\n• Infectious colitis (fever, sick contacts)\n\nRIGID ABDOMEN:\n• Any perforated viscus\n• Generalized peritonitis\n• = Surgical emergency\n\nKEY IMAGING FINDINGS:\n• Free air under diaphragm = Perforation\n• Dilated bowel + air-fluid levels = Obstruction\n• Target sign/fat stranding = Inflammation (appendicitis, diverticulitis)\n• Bowel wall thickening + pneumatosis = Ischemia/necrosis\n\nWHEN TO GO TO OR IMMEDIATELY:\n• Peritonitis with hemodynamic instability\n• Free air on imaging\n• Ruptured AAA\n• Strangulated bowel (obstruction + ischemia signs)\n• Mesenteric ischemia with peritonitis" },
+            pearl: "The acute abdomen algorithm: (1) Is the patient in shock? (2) Is there peritonitis? (3) Is there free air? If yes to any → likely surgical emergency.",
+            pitfall: "Don't let a 'soft abdomen' falsely reassure you. Mesenteric ischemia kills precisely because the exam is benign until too late. A soft abdomen with severe pain is WORRISOME."
+        }
+    ]
+};
+
+let currentStage = 1, totalScore = 0, maxPossibleScore = 0, answeredStages = {};
+function init() { caseData.stages.forEach(s => { maxPossibleScore += Math.max(...s.options.map(o => o.points)); }); renderStage(currentStage); }
+function renderStage(stageNum) { const stage = caseData.stages[stageNum - 1]; if (!stage) { renderSummary(); return; } const answered = answeredStages[stageNum]; document.getElementById('gameContainer').innerHTML = `<div class="stage-card bg-white rounded-2xl shadow-lg overflow-hidden"><div class="bg-gradient-to-r from-rose-600 to-red-600 text-white p-6"><span class="bg-white/20 px-3 py-1 rounded-full text-sm">Stage ${stageNum} of ${caseData.totalStages}</span><h2 class="text-2xl font-bold mt-3">${stage.title}</h2></div><div class="p-6"><div class="bg-slate-50 rounded-xl p-5 mb-6"><h3 class="font-semibold text-gray-700 mb-2">📋 Clinical Scenario</h3><div class="text-gray-700 whitespace-pre-line">${stage.scenario}</div></div><div class="bg-rose-50 rounded-xl p-5 mb-6"><h3 class="font-semibold text-rose-800 mb-2">🤔 Clinical Question</h3><p class="text-rose-900 font-medium">${stage.question}</p></div><div class="space-y-3">${stage.options.map(opt => `<button onclick="selectOption(${stageNum}, '${opt.id}')" ${answered ? 'disabled' : ''} class="w-full text-left p-4 rounded-xl border-2 transition-all ${answered && answered.selected === opt.id ? (opt.isOptimal ? 'border-green-500 bg-green-50' : 'border-amber-500 bg-amber-50') : answered && opt.isOptimal ? 'border-green-500 bg-green-50' : 'border-gray-200 hover:border-rose-300 hover:bg-rose-50'} ${answered ? 'cursor-default' : 'cursor-pointer'}"><div class="flex items-start gap-3"><span class="flex-shrink-0 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center font-bold ${answered && opt.isOptimal ? 'bg-green-500 text-white' : ''}">${opt.id}</span><span class="font-medium">${opt.text}</span></div></button>`).join('')}</div>${answered ? renderFeedback(stage, answered) : ''}</div></div>`; updateProgress(); }
+function renderFeedback(stage, answered) { const selected = stage.options.find(o => o.id === answered.selected); const optimal = stage.options.find(o => o.isOptimal); return `<div class="mt-6 space-y-4"><div class="${selected.isOptimal ? 'bg-green-50 border-green-200' : 'bg-amber-50 border-amber-200'} border rounded-xl p-5"><h4 class="font-bold ${selected.isOptimal ? 'text-green-800' : 'text-amber-800'} mb-2">${selected.isOptimal ? '✅ Optimal!' : '⚠️ ' + selected.outcome}</h4><p class="text-gray-700">${selected.feedback}</p></div>${!selected.isOptimal ? `<div class="bg-green-50 border border-green-200 rounded-xl p-5"><h4 class="font-bold text-green-800 mb-2">✅ Optimal: ${optimal.text}</h4><p class="text-gray-700">${optimal.feedback}</p></div>` : ''}<div class="why-chain rounded-xl p-5"><h4 class="font-bold text-blue-800 mb-3">🔗 ${stage.whyChain.title}</h4><div class="space-y-2">${stage.whyChain.steps.map((s,i) => `<div class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-blue-200 text-blue-800 flex items-center justify-center text-sm font-bold">${i+1}</span><span class="text-gray-700">${s}</span></div>`).join('')}</div></div><div class="mechanism-box rounded-xl p-5"><h4 class="font-bold text-green-800 mb-3">⚙️ ${stage.mechanism.title}</h4><div class="text-gray-700 whitespace-pre-line text-sm">${stage.mechanism.content}</div></div><div class="grid md:grid-cols-2 gap-4"><div class="pearl-box rounded-xl p-4"><h4 class="font-bold text-yellow-800 mb-2">💎 Pearl</h4><p class="text-gray-700 text-sm">${stage.pearl}</p></div><div class="pitfall-box rounded-xl p-4"><h4 class="font-bold text-red-800 mb-2">⚠️ Pitfall</h4><p class="text-gray-700 text-sm">${stage.pitfall}</p></div></div><button onclick="nextStage()" class="w-full mt-4 py-4 bg-gradient-to-r from-rose-600 to-red-600 text-white rounded-xl font-bold text-lg">${currentStage < caseData.totalStages ? 'Continue to Stage ' + (currentStage + 1) + ' →' : 'View Summary →'}</button></div>`; }
+function selectOption(stageNum, optionId) { if (answeredStages[stageNum]) return; const option = caseData.stages[stageNum - 1].options.find(o => o.id === optionId); answeredStages[stageNum] = { selected: optionId, points: option.points }; totalScore += option.points; renderStage(stageNum); }
+function nextStage() { currentStage++; currentStage > caseData.totalStages ? renderSummary() : (renderStage(currentStage), window.scrollTo({ top: 0, behavior: 'smooth' })); }
+function updateProgress() { document.getElementById('progressBar').style.width = (Object.keys(answeredStages).length / caseData.totalStages * 100) + '%'; document.getElementById('score').textContent = Math.round(totalScore / maxPossibleScore * 100) + '%'; }
+function renderSummary() { const pct = Math.round(totalScore / maxPossibleScore * 100); document.getElementById('gameContainer').classList.add('hidden'); document.getElementById('summaryPanel').classList.remove('hidden'); document.getElementById('summaryPanel').innerHTML = `<div class="bg-white rounded-2xl shadow-lg p-8"><div class="text-center mb-8"><div class="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-rose-600 to-red-600">${pct >= 90 ? 'A' : pct >= 80 ? 'B' : pct >= 70 ? 'C' : 'D'}</div><div class="text-3xl font-bold text-gray-800">${pct}%</div></div><div class="bg-slate-50 rounded-xl p-6 mb-6"><h3 class="font-bold text-xl mb-4">📚 Key Learning Points</h3><ul class="space-y-2 text-gray-700"><li>✓ Peritonitis: Board-like rigidity, involuntary guarding, patient lies still</li><li>✓ Free air under diaphragm = perforated viscus (surgical emergency)</li><li>✓ Mesenteric ischemia: Pain out of proportion to exam + AFib + elevated lactate</li><li>✓ SBO: Adhesions #1 cause; look for closed-loop and strangulation on CT</li><li>✓ LBO: Cecum >12cm = high perforation risk (surgical emergency)</li><li>✓ Diverticulitis: CT to classify; uncomplicated often managed medically</li><li>✓ Ruptured AAA: Pain + hypotension + pulsatile mass; permissive hypotension</li><li>✓ Ischemic colitis: Bloody diarrhea, watershed areas, usually non-operative</li><li>✓ Boerhaave: Mackler triad - vomiting, chest pain, subcutaneous emphysema</li></ul></div><button onclick="resetGame()" class="w-full py-4 bg-gradient-to-r from-rose-600 to-red-600 text-white rounded-xl font-bold">🔄 Restart Case</button></div>`; }
+function resetGame() { currentStage = 1; totalScore = 0; answeredStages = {}; document.getElementById('gameContainer').classList.remove('hidden'); document.getElementById('summaryPanel').classList.add('hidden'); renderStage(1); }
+init();
+    </script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+/* Enhanced Feature Styles */
+.rdx-difficulty-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 300px;
+}
+.rdx-diff-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin: 2px;
+}
+.rdx-diff-btn.active {
+    background: #3b82f6;
+    color: white;
+}
+.rdx-diff-btn:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+}
+.rdx-diff-btn:hover:not(.active) {
+    background: #e2e8f0;
+}
+.rdx-refs-panel {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #93c5fd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+.rdx-refs-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+.rdx-refs-links {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+.rdx-refs-links a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.rdx-refs-links a:hover {
+    text-decoration: underline;
+}
+.rdx-debrief-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rdx-debrief-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #1f2937;
+}
+.rdx-path-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.rdx-path-optimal {
+    background: #dcfce7;
+    border-left: 4px solid #22c55e;
+}
+.rdx-path-suboptimal {
+    background: #fef9c3;
+    border-left: 4px solid #eab308;
+}
+.rdx-path-wrong {
+    background: #fecaca;
+    border-left: 4px solid #ef4444;
+}
+.rdx-hint-beginner {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+.rdx-hint-advanced {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+</style>
+
+<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
+    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
+        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    </div>
+</div>
+
+
+<!-- CROSS-PLATFORM LEARNING LINKS -->
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
+            <a href="../mechanism/acute-abdomen-module.html" style="display: block; color: #2563eb; font-size: 14px;">→ Acute Abdomen</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
+            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="cdiff-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Cdiff</a>
+            <a href="gi-bleed-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Gi Bleed</a>
+            <a href="cholecystitis-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Cholecystitis</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
+            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../CoachDx/mentor-chat.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../CoachDx/sbar-trainer.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+<!-- END CROSS-PLATFORM LINKS -->
+<div class="rdx-refs-panel" id="rdxRefsPanel">
+    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
+    <div class="rdx-refs-links"><a href="https://gi.org/guidelines/" target="_blank" class="text-blue-600 hover:underline">ACG Guidelines</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK470300/" target="_blank" class="text-blue-600 hover:underline">StatPearls: GI Bleeding</a></div>
+</div>
+
+<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
+    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+</div>
+
+<script>
+// ReasonDx Enhanced Features Module
+(function() {
+    // Decision tracking
+    window.rdxDecisionPath = window.rdxDecisionPath || [];
+    window.rdxTotalScore = window.rdxTotalScore || 0;
+    window.rdxMaxScore = window.rdxMaxScore || 0;
+    window.rdxDifficulty = 'intermediate';
+    
+    // Difficulty control
+    window.rdxSetDifficulty = function(level) {
+        window.rdxDifficulty = level;
+        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('rdx-btn-' + level).classList.add('active');
+        
+        // Update hint visibility
+        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
+            el.style.display = level === 'beginner' ? 'block' : 'none';
+        });
+        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
+            el.style.display = level === 'advanced' ? 'block' : 'none';
+        });
+    };
+    
+    // Track a decision
+    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+        window.rdxDecisionPath.push({
+            stage: stageId,
+            title: stageTitle,
+            choice: choiceId,
+            choiceText: choiceText,
+            outcome: outcome,
+            points: points,
+            maxPoints: maxPoints,
+            isOptimal: isOptimal,
+            optimalChoice: optimalChoice,
+            optimalText: optimalText
+        });
+        window.rdxTotalScore += points;
+        window.rdxMaxScore += maxPoints;
+    };
+    
+    // Show visual debrief
+    window.rdxShowDebrief = function() {
+        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
+        
+        let grade, gradeColor, gradeEmoji;
+        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
+        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
+        
+        let pathHTML = '';
+        if (window.rdxDecisionPath.length > 0) {
+            pathHTML = window.rdxDecisionPath.map(d => {
+                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
+                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
+                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
+                return '<div class="' + pathClass + ' rdx-path-item">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
+                    '<div>' +
+                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
+                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
+                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
+                    '</div>' +
+                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
+                    '</div></div>';
+            }).join('');
+        } else {
+            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+        }
+        
+        document.getElementById('rdxDebriefContent').innerHTML = 
+            '<div style="text-align:center;margin-bottom:24px;">' +
+            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
+            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
+            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
+            '</div></div>' +
+            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
+            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
+            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
+            '</div></div>' +
+            '<div style="display:flex;gap:12px;">' +
+            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '</div>';
+        
+        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
+    };
+    
+    // Auto-inject hint examples into existing content
+    window.rdxInit = function() {
+        // Could add dynamic hint injection here based on difficulty
+        console.log('ReasonDx Enhanced Features loaded for: Acute Abdomen Expanded Adventure');
+    };
+    
+    // Initialize on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.rdxInit);
+    } else {
+        window.rdxInit();
+    }
+})();
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+</body>
+</html>

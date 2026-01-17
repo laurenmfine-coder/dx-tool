@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACS Complete | Clinical Adventure</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: linear-gradient(135deg, #7f1d1d 0%, #dc2626 100%); min-height: 100vh; color: #e2e8f0; line-height: 1.6; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: rgba(127, 29, 29, 0.9); border-radius: 16px; margin-bottom: 20px; }
+        .badge { padding: 4px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; background: #ef4444; margin-left: 10px; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #ef4444, #fca5a5); border-radius: 3px; transition: width 0.3s; }
+        .scene { background: linear-gradient(135deg, #7f1d1d, #991b1b); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+        .scene-header { background: rgba(239, 68, 68, 0.15); padding: 16px 20px; }
+        .scene-phase { font-size: 0.75rem; color: #fca5a5; text-transform: uppercase; letter-spacing: 1px; }
+        .scene-title { font-size: 1.4rem; font-weight: 700; }
+        .scene-body { padding: 24px; }
+        .narrative { font-size: 1.05rem; line-height: 1.9; margin-bottom: 20px; }
+        .highlight { color: #fbbf24; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .safe { color: #4ade80; font-weight: 600; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(239, 68, 68, 0.2)); border: 1px solid rgba(139, 92, 246, 0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: 'SF Mono', Monaco, monospace; font-size: 0.9rem; line-height: 1.8; }
+        .boards-tip { background: rgba(251, 191, 36, 0.15); border: 1px solid rgba(251, 191, 36, 0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .boards-tip-title { font-weight: 700; color: #fbbf24; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        .alert-box { background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.5); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .alert-title { font-weight: 700; color: #f87171; margin-bottom: 10px; }
+        .success-box { background: rgba(34, 197, 94, 0.2); border: 1px solid rgba(34, 197, 94, 0.5); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .success-title { font-weight: 700; color: #4ade80; margin-bottom: 10px; }
+        .btn { padding: 16px 28px; background: linear-gradient(135deg, #ef4444, #dc2626); border: none; border-radius: 12px; color: white; font-weight: 600; cursor: pointer; width: 100%; font-size: 1rem; transition: transform 0.2s, box-shadow 0.2s; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(239, 68, 68, 0.4); }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 12px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+        .comparison-table th { background: rgba(0,0,0,0.3); color: #fca5a5; font-weight: 600; }
+        .comparison-table tr:nth-child(even) { background: rgba(0,0,0,0.1); }
+        .why-chain { background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(239, 68, 68, 0.15)); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 16px; padding: 24px; margin: 24px 0; }
+        .why-chain-title { font-size: 1.2rem; font-weight: 700; color: #c4b5fd; margin-bottom: 20px; }
+        .why-item { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 18px; margin-bottom: 14px; }
+        .why-q { font-weight: 600; color: #e9d5ff; margin-bottom: 10px; }
+        .why-a { color: #cbd5e1; line-height: 1.7; }
+        .outcome-banner { text-align: center; padding: 40px 20px; }
+        .tips { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+        .pearl { background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); padding: 20px; border-radius: 12px; }
+        .pitfall { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); padding: 20px; border-radius: 12px; }
+        .tip-header { font-weight: 600; margin-bottom: 10px; }
+        .pearl .tip-header { color: #4ade80; }
+        .pitfall .tip-header { color: #f87171; }
+        .ecg-box { background: rgba(0,0,0,0.4); border: 2px solid #fbbf24; border-radius: 12px; padding: 20px; margin: 20px 0; font-family: monospace; }
+        .ecg-title { color: #fbbf24; font-weight: 700; margin-bottom: 12px; }
+        @media (max-width: 640px) { .tips { grid-template-columns: 1fr; } .comparison-table { font-size: 0.75rem; } }
+    </style>
+</head>
+<body>
+    <div class="container" id="app"></div>
+    <script>
+    const STAGES = [
+        'arrival', 'initial_ecg', 'ecg_localization', 'acs_spectrum', 'risk_stratify',
+        'initial_therapy', 'reperfusion_decision', 'antiplatelet', 'anticoagulation',
+        'adjunctive', 'complications', 'post_mi', 'discharge', 'debrief'
+    ];
+    const state = { stage: 0 };
+
+    function render() {
+        const progress = ((state.stage + 1) / STAGES.length) * 100;
+        let c = `<div class="header">
+            <div style="font-size:1.3rem;font-weight:700">🫀 ACS Complete<span class="badge">14 STAGES</span></div>
+            <div style="font-size:1.3rem;font-weight:700">${state.stage + 1}/${STAGES.length}</div></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:${progress}%"></div></div>`;
+        
+        switch(STAGES[state.stage]) {
+            case 'arrival': c += renderArrival(); break;
+            case 'initial_ecg': c += renderInitialECG(); break;
+            case 'ecg_localization': c += renderECGLocalization(); break;
+            case 'acs_spectrum': c += renderACSSpectrum(); break;
+            case 'risk_stratify': c += renderRiskStratify(); break;
+            case 'initial_therapy': c += renderInitialTherapy(); break;
+            case 'reperfusion_decision': c += renderReperfusion(); break;
+            case 'antiplatelet': c += renderAntiplatelet(); break;
+            case 'anticoagulation': c += renderAnticoagulation(); break;
+            case 'adjunctive': c += renderAdjunctive(); break;
+            case 'complications': c += renderComplications(); break;
+            case 'post_mi': c += renderPostMI(); break;
+            case 'discharge': c += renderDischarge(); break;
+            case 'debrief': c += renderDebrief(); break;
+        }
+        document.getElementById('app').innerHTML = c;
+    }
+
+    function renderArrival() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 1 of 14</div><div class="scene-title">The Chest Pain Patient</div></div>
+            <div class="scene-body">
+                <div class="narrative"><p>A <span class="highlight">58-year-old man</span> presents with <span class="critical">crushing substernal chest pain</span> radiating to his left arm, started 45 minutes ago while raking leaves. He is diaphoretic and nauseated.</p>
+                <p style="margin-top:12px;"><strong>PMH:</strong> HTN, hyperlipidemia, DM2, 30 pack-year smoking history<br>
+                <strong>Vitals:</strong> BP 158/94, HR 98, RR 22, SpO2 96% on RA</p></div>
+                
+                <div class="alert-box"><div class="alert-title">🚨 Time is Muscle!</div>
+                    <p>Every 30 minutes of delay in reperfusion = measurable increase in mortality. Door-to-balloon goal: <strong>&lt;90 minutes</strong>. Door-to-needle (fibrinolysis): <strong>&lt;30 minutes</strong>.</p></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 Immediate Actions</div>
+                    <ul style="margin-left:20px;line-height:2;">
+                        <li><strong>ECG within 10 minutes</strong> of arrival</li>
+                        <li>IV access, continuous monitoring</li>
+                        <li>Aspirin 325mg (chewed) STAT</li>
+                        <li>Oxygen only if SpO2 &lt;90%</li>
+                        <li>Brief focused history while preparing</li>
+                    </ul></div>
+                <button class="btn" onclick="nextStage()">Get ECG →</button>
+            </div></div>`;
+    }
+
+    function renderInitialECG() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 2 of 14</div><div class="scene-title">ECG Interpretation</div></div>
+            <div class="scene-body">
+                <div class="ecg-box">
+                    <div class="ecg-title">📊 12-Lead ECG Findings</div>
+                    <p>Rate: 98 bpm, Rhythm: Sinus<br>
+                    <span class="critical">ST elevation 3mm in V2-V4</span><br>
+                    <span class="critical">ST elevation 2mm in V5-V6, I, aVL</span><br>
+                    Reciprocal ST depression in III, aVF<br>
+                    No Q waves yet</p>
+                </div>
+                
+                <div class="alert-box"><div class="alert-title">🚨 STEMI Criteria</div>
+                    <table class="comparison-table">
+                        <tr><th>Location</th><th>ST Elevation Required</th></tr>
+                        <tr><td>V2-V3 (men ≥40)</td><td>≥2mm</td></tr>
+                        <tr><td>V2-V3 (men &lt;40)</td><td>≥2.5mm</td></tr>
+                        <tr><td>V2-V3 (women)</td><td>≥1.5mm</td></tr>
+                        <tr><td>All other leads</td><td>≥1mm in 2 contiguous leads</td></tr>
+                    </table></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Why ST Elevation?</div>
+                    <div class="pathway">Complete coronary occlusion<br>→ Transmural ischemia (full thickness)<br>→ Injured myocardium has altered resting potential<br>→ Current of injury flows toward electrode<br>→ ST segment elevation on ECG<br><br>Subendocardial ischemia (NSTEMI) → ST depression</div></div>
+                <button class="btn" onclick="nextStage()">Localize the MI →</button>
+            </div></div>`;
+    }
+
+    function renderECGLocalization() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 3 of 14</div><div class="scene-title">ECG Localization</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 Which Artery is Occluded?</div>
+                    <table class="comparison-table">
+                        <tr><th>ECG Leads</th><th>Wall</th><th>Artery</th></tr>
+                        <tr style="background:rgba(239,68,68,0.2);"><td><strong>V1-V4</strong></td><td>Anterior/Septal</td><td><span class="critical">LAD</span></td></tr>
+                        <tr><td>V5-V6, I, aVL</td><td>Lateral</td><td>LCx or LAD diagonal</td></tr>
+                        <tr><td>II, III, aVF</td><td>Inferior</td><td>RCA (85%) or LCx (15%)</td></tr>
+                        <tr><td>V1-V2 (ST depression) + V7-V9</td><td>Posterior</td><td>RCA or LCx</td></tr>
+                        <tr><td>V1, V4R</td><td>Right ventricle</td><td>Proximal RCA</td></tr>
+                    </table></div>
+                
+                <div class="narrative"><p><strong>This patient:</strong> ST elevation V2-V6, I, aVL with reciprocal changes in inferior leads = <span class="critical">Anterolateral STEMI</span> → <span class="critical">LAD occlusion</span> (likely proximal)</p></div>
+                
+                <div class="alert-box"><div class="alert-title">⚠️ Why LAD is "Widow Maker"</div>
+                    <p>Proximal LAD supplies 40-50% of LV mass including anterior wall, septum, and apex. Large territory at risk → high mortality if not reperfused quickly.</p></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Reciprocal Changes</div>
+                    <div class="pathway">ST elevation in one territory<br>→ ST depression in opposite leads (reciprocal)<br>→ Confirms acute MI (not pericarditis/BER)<br>→ More reciprocal = more specific for STEMI<br><br>Anterior MI → inferior reciprocal depression<br>Inferior MI → anterior/lateral reciprocal depression</div></div>
+                <button class="btn" onclick="nextStage()">ACS Spectrum →</button>
+            </div></div>`;
+    }
+
+    function renderACSSpectrum() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 4 of 14</div><div class="scene-title">The ACS Spectrum</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 ACS Classification</div>
+                    <table class="comparison-table">
+                        <tr><th>Type</th><th>ECG</th><th>Troponin</th><th>Pathology</th></tr>
+                        <tr style="background:rgba(239,68,68,0.2);"><td><strong>STEMI</strong></td><td>ST elevation</td><td>Elevated</td><td>Complete occlusion, transmural</td></tr>
+                        <tr><td><strong>NSTEMI</strong></td><td>ST depression, T inversion, or normal</td><td>Elevated</td><td>Partial occlusion, subendocardial</td></tr>
+                        <tr><td><strong>Unstable Angina</strong></td><td>ST depression, T inversion, or normal</td><td>Normal</td><td>Partial occlusion, no necrosis</td></tr>
+                    </table></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Pathophysiology of ACS</div>
+                    <div class="pathway">Atherosclerotic plaque rupture or erosion<br>→ Platelet adhesion and activation<br>→ Thrombus formation<br>→ Partial occlusion (UA/NSTEMI) or complete (STEMI)<br>→ Myocardial ischemia → necrosis if prolonged<br><br>Troponin rises 2-4h after onset, peaks 12-24h<br>High-sensitivity troponin detects smaller infarcts</div></div>
+                
+                <div class="narrative"><p><strong>This patient has STEMI</strong> - requires immediate reperfusion strategy!</p></div>
+                <button class="btn" onclick="nextStage()">Risk Stratification →</button>
+            </div></div>`;
+    }
+
+    function renderRiskStratify() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 5 of 14</div><div class="scene-title">Risk Stratification</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 TIMI Risk Score for STEMI</div>
+                    <table class="comparison-table">
+                        <tr><th>Factor</th><th>Points</th><th>Patient</th></tr>
+                        <tr><td>Age 65-74 / ≥75</td><td>2 / 3</td><td>0</td></tr>
+                        <tr><td>DM, HTN, or angina</td><td>1</td><td>1 ✓</td></tr>
+                        <tr><td>SBP &lt;100</td><td>3</td><td>0</td></tr>
+                        <tr><td>HR &gt;100</td><td>2</td><td>0</td></tr>
+                        <tr><td>Killip II-IV</td><td>2</td><td>0</td></tr>
+                        <tr><td>Weight &lt;67 kg</td><td>1</td><td>0</td></tr>
+                        <tr><td>Anterior STEMI or LBBB</td><td>1</td><td>1 ✓</td></tr>
+                        <tr><td>Time to treatment &gt;4h</td><td>1</td><td>0</td></tr>
+                    </table>
+                    <p style="margin-top:12px;"><strong>Score: 2</strong> → 30-day mortality ~4%</p></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 Killip Classification</div>
+                    <table class="comparison-table">
+                        <tr><th>Class</th><th>Findings</th><th>Mortality</th></tr>
+                        <tr><td>I</td><td>No heart failure</td><td>6%</td></tr>
+                        <tr><td>II</td><td>Rales, S3, JVD</td><td>17%</td></tr>
+                        <tr><td>III</td><td>Pulmonary edema</td><td>38%</td></tr>
+                        <tr><td>IV</td><td>Cardiogenic shock</td><td>81%</td></tr>
+                    </table></div>
+                <button class="btn" onclick="nextStage()">Initial Therapy →</button>
+            </div></div>`;
+    }
+
+    function renderInitialTherapy() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 6 of 14</div><div class="scene-title">Initial Medical Therapy</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 "MONA-B" + More</div>
+                    <table class="comparison-table">
+                        <tr><th>Drug</th><th>Dose</th><th>Rationale</th></tr>
+                        <tr><td><strong>Morphine</strong></td><td>2-4mg IV PRN</td><td>Pain relief, ↓ preload (use cautiously)</td></tr>
+                        <tr><td><strong>Oxygen</strong></td><td>If SpO2 &lt;90%</td><td>Hyperoxia may be harmful!</td></tr>
+                        <tr><td><strong>Nitrates</strong></td><td>SL NTG 0.4mg q5min × 3</td><td>↓ Preload, coronary vasodilation</td></tr>
+                        <tr><td><strong>Aspirin</strong></td><td>325mg chewed</td><td>Irreversible platelet inhibition</td></tr>
+                        <tr><td><strong>Beta-blocker</strong></td><td>Metoprolol 5mg IV</td><td>↓ HR, ↓ O2 demand, ↓ arrhythmia</td></tr>
+                    </table></div>
+                
+                <div class="alert-box"><div class="alert-title">⚠️ Contraindications</div>
+                    <ul style="margin-left:20px;">
+                        <li><strong>Nitrates:</strong> RV infarct (preload dependent), recent PDE5 inhibitor, SBP &lt;90</li>
+                        <li><strong>Beta-blockers:</strong> HR &lt;60, SBP &lt;100, severe HF, 2nd/3rd degree block, active bronchospasm</li>
+                        <li><strong>Morphine:</strong> Hypotension, respiratory depression (associated with worse outcomes)</li>
+                    </ul></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Why Beta-Blockers Help</div>
+                    <div class="pathway">↓ Heart rate → ↓ myocardial O2 demand<br>↓ Contractility → ↓ wall stress<br>↑ Diastolic filling time → ↑ coronary perfusion<br>↓ Catecholamine-induced arrhythmias<br><br>Net effect: Shrink the infarct, prevent VF</div></div>
+                <button class="btn" onclick="nextStage()">Reperfusion Strategy →</button>
+            </div></div>`;
+    }
+
+    function renderReperfusion() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 7 of 14</div><div class="scene-title">Reperfusion Decision</div></div>
+            <div class="scene-body">
+                <div class="alert-box"><div class="alert-title">🚨 Primary PCI vs Fibrinolysis</div>
+                    <table class="comparison-table">
+                        <tr><th>Factor</th><th>Primary PCI</th><th>Fibrinolysis</th></tr>
+                        <tr><td>Preferred if...</td><td>Available within 120 min of FMC</td><td>PCI delay &gt;120 min</td></tr>
+                        <tr><td>Time goal</td><td>Door-to-balloon &lt;90 min</td><td>Door-to-needle &lt;30 min</td></tr>
+                        <tr><td>Efficacy</td><td>Superior (TIMI 3 flow ~95%)</td><td>TIMI 3 flow ~55%</td></tr>
+                        <tr><td>Contraindications</td><td>Fewer</td><td>Many absolute/relative</td></tr>
+                    </table></div>
+                
+                <div class="narrative"><p><strong>This patient:</strong> PCI-capable center, cath lab activated. Door-to-balloon target &lt;90 minutes.</p></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 Fibrinolysis Contraindications</div>
+                    <p><strong>Absolute:</strong></p>
+                    <ul style="margin-left:20px;">
+                        <li>Prior ICH or hemorrhagic stroke ever</li>
+                        <li>Ischemic stroke within 3 months</li>
+                        <li>Known intracranial neoplasm or AVM</li>
+                        <li>Active internal bleeding</li>
+                        <li>Suspected aortic dissection</li>
+                    </ul>
+                    <p style="margin-top:12px;"><strong>Relative:</strong> Recent surgery, prolonged CPR, pregnancy, active PUD, current anticoagulation</p></div>
+                <button class="btn" onclick="nextStage()">Antiplatelet Therapy →</button>
+            </div></div>`;
+    }
+
+    function renderAntiplatelet() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 8 of 14</div><div class="scene-title">Dual Antiplatelet Therapy (DAPT)</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 P2Y12 Inhibitor Selection</div>
+                    <table class="comparison-table">
+                        <tr><th>Drug</th><th>Dose</th><th>Key Features</th></tr>
+                        <tr><td><strong>Clopidogrel</strong></td><td>600mg load → 75mg daily</td><td>Prodrug, variable response, cheapest</td></tr>
+                        <tr><td><strong>Ticagrelor</strong></td><td>180mg load → 90mg BID</td><td>Faster onset, reversible, dyspnea SE</td></tr>
+                        <tr><td><strong>Prasugrel</strong></td><td>60mg load → 10mg daily</td><td>Stronger, contraindicated if prior stroke/TIA</td></tr>
+                    </table></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Why DAPT?</div>
+                    <div class="pathway">Aspirin: Blocks COX-1 → ↓ TXA2 → ↓ platelet aggregation<br>P2Y12 inhibitor: Blocks ADP receptor → ↓ platelet activation<br><br>Two different pathways = synergistic effect<br>Essential after stent placement to prevent stent thrombosis</div></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 DAPT Duration</div>
+                    <ul style="margin-left:20px;line-height:2;">
+                        <li><strong>ACS + stent:</strong> 12 months minimum</li>
+                        <li><strong>Stable CAD + DES:</strong> 6 months minimum</li>
+                        <li><strong>High bleeding risk:</strong> Consider shorter (1-3 months)</li>
+                        <li><strong>High ischemic risk:</strong> Consider extended (&gt;12 months)</li>
+                    </ul></div>
+                <button class="btn" onclick="nextStage()">Anticoagulation →</button>
+            </div></div>`;
+    }
+
+    function renderAnticoagulation() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 9 of 14</div><div class="scene-title">Anticoagulation in ACS</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 Anticoagulant Options</div>
+                    <table class="comparison-table">
+                        <tr><th>Drug</th><th>Mechanism</th><th>Use</th></tr>
+                        <tr><td><strong>UFH</strong></td><td>Activates antithrombin</td><td>PCI (easily reversible)</td></tr>
+                        <tr><td><strong>Enoxaparin</strong></td><td>Anti-Xa &gt; anti-IIa</td><td>Medical management, some PCI</td></tr>
+                        <tr><td><strong>Bivalirudin</strong></td><td>Direct thrombin inhibitor</td><td>PCI (↓ bleeding vs UFH)</td></tr>
+                        <tr><td><strong>Fondaparinux</strong></td><td>Factor Xa inhibitor</td><td>NSTEMI (avoid in PCI alone)</td></tr>
+                    </table></div>
+                
+                <div class="narrative"><p><strong>This patient:</strong> Going to PCI → UFH bolus (70-100 U/kg) or bivalirudin in cath lab.</p></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Why Anticoagulation?</div>
+                    <div class="pathway">Plaque rupture exposes tissue factor<br>→ Activates coagulation cascade<br>→ Thrombin generation → fibrin clot<br><br>Anticoagulation prevents clot propagation<br>Antiplatelet prevents platelet plug formation<br>Both needed for optimal outcomes</div></div>
+                <button class="btn" onclick="nextStage()">Adjunctive Therapies →</button>
+            </div></div>`;
+    }
+
+    function renderAdjunctive() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 10 of 14</div><div class="scene-title">Adjunctive Therapies</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 Evidence-Based Therapies</div>
+                    <table class="comparison-table">
+                        <tr><th>Drug</th><th>When to Start</th><th>Benefit</th></tr>
+                        <tr><td><strong>High-intensity statin</strong></td><td>Immediately</td><td>↓ Mortality, plaque stabilization</td></tr>
+                        <tr><td><strong>ACE inhibitor</strong></td><td>Within 24h if stable</td><td>↓ Remodeling, ↓ mortality in LV dysfunction</td></tr>
+                        <tr><td><strong>Beta-blocker</strong></td><td>Within 24h if stable</td><td>↓ Mortality, ↓ reinfarction</td></tr>
+                        <tr><td><strong>Aldosterone antagonist</strong></td><td>If EF ≤40% + HF/DM</td><td>↓ Mortality (EPHESUS)</td></tr>
+                    </table></div>
+                
+                <div class="alert-box"><div class="alert-title">📊 Statin Intensity</div>
+                    <p><strong>High-intensity (↓ LDL ≥50%):</strong></p>
+                    <ul style="margin-left:20px;">
+                        <li>Atorvastatin 40-80mg</li>
+                        <li>Rosuvastatin 20-40mg</li>
+                    </ul>
+                    <p style="margin-top:8px;">Start regardless of baseline LDL. Goal LDL &lt;70 mg/dL (or &lt;55 for very high risk).</p></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Pleiotropic Effects of Statins</div>
+                    <div class="pathway">Beyond LDL lowering:<br>→ ↓ Inflammation (↓ CRP)<br>→ Improved endothelial function<br>→ Plaque stabilization<br>→ ↓ Platelet aggregation<br>→ Antithrombotic effects</div></div>
+                <button class="btn" onclick="nextStage()">Complications →</button>
+            </div></div>`;
+    }
+
+    function renderComplications() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 11 of 14</div><div class="scene-title">MI Complications</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 Timing of Complications</div>
+                    <table class="comparison-table">
+                        <tr><th>Timing</th><th>Complication</th><th>Mechanism</th></tr>
+                        <tr><td>Minutes-hours</td><td>Arrhythmias (VF, VT, bradycardia)</td><td>Ischemia-induced electrical instability</td></tr>
+                        <tr><td>Hours-days</td><td>Cardiogenic shock, acute MR</td><td>Pump failure, papillary muscle dysfunction</td></tr>
+                        <tr><td>Days 3-5</td><td><span class="critical">Free wall rupture</span></td><td>Necrotic tissue softens (macrophages)</td></tr>
+                        <tr><td>Days 3-5</td><td>VSD, papillary rupture</td><td>Same mechanism</td></tr>
+                        <tr><td>Days-weeks</td><td>LV aneurysm, mural thrombus</td><td>Scar formation, stasis</td></tr>
+                        <tr><td>Weeks</td><td>Dressler syndrome</td><td>Autoimmune pericarditis</td></tr>
+                    </table></div>
+                
+                <div class="alert-box"><div class="alert-title">🚨 Free Wall Rupture</div>
+                    <p>Sudden hemodynamic collapse, PEA. Usually fatal. Risk factors: First MI, anterior MI, elderly, female, delayed reperfusion. <strong>Days 3-5 = highest risk period.</strong></p></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Why Days 3-5?</div>
+                    <div class="pathway">Day 0-2: Coagulative necrosis begins<br>Day 3-5: Neutrophils and macrophages infiltrate<br>→ Release proteases → tissue softens<br>→ Tensile strength at minimum<br>→ Wall rupture can occur with minimal stress<br>Day 7+: Granulation tissue strengthens wall</div></div>
+                <button class="btn" onclick="nextStage()">Post-MI Management →</button>
+            </div></div>`;
+    }
+
+    function renderPostMI() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 12 of 14</div><div class="scene-title">Post-MI Evaluation</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 Echocardiogram</div>
+                    <ul style="margin-left:20px;line-height:2;">
+                        <li>Assess LV function (EF)</li>
+                        <li>Regional wall motion abnormalities</li>
+                        <li>Mechanical complications (VSD, MR, aneurysm)</li>
+                        <li>LV thrombus (especially anterior MI)</li>
+                        <li>RV involvement</li>
+                    </ul></div>
+                
+                <div class="narrative"><p><strong>This patient's echo:</strong> EF 40%, anterior and apical hypokinesis, no thrombus, trace MR.</p></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 Indications for ICD</div>
+                    <ul style="margin-left:20px;line-height:2;">
+                        <li><strong>EF ≤35%</strong> at least 40 days post-MI (primary prevention)</li>
+                        <li>Must be on optimal medical therapy</li>
+                        <li>Must wait 40 days (EF may recover)</li>
+                        <li><strong>EF ≤30%</strong> if ischemic cardiomyopathy</li>
+                        <li>Survived VT/VF arrest (secondary prevention)</li>
+                    </ul></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Why Wait 40 Days?</div>
+                    <div class="pathway">Stunned myocardium may recover after reperfusion<br>→ EF often improves over weeks<br>→ Early ICD placement may be unnecessary<br><br>DINAMIT and IRIS trials: Early ICD (≤40 days)<br>did NOT reduce mortality (↑ non-arrhythmic deaths)</div></div>
+                <button class="btn" onclick="nextStage()">Discharge Planning →</button>
+            </div></div>`;
+    }
+
+    function renderDischarge() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 13 of 14</div><div class="scene-title">Discharge Medications</div></div>
+            <div class="scene-body">
+                <div class="success-box"><div class="success-title">✅ "ABCDE" of Post-MI Discharge</div>
+                    <table class="comparison-table">
+                        <tr><th>Letter</th><th>Medication</th><th>This Patient</th></tr>
+                        <tr><td><strong>A</strong></td><td>ACE inhibitor (or ARB)</td><td>Lisinopril 5mg daily ✓</td></tr>
+                        <tr><td><strong>A</strong></td><td>Antiplatelet (DAPT)</td><td>ASA 81mg + Ticagrelor 90mg BID ✓</td></tr>
+                        <tr><td><strong>B</strong></td><td>Beta-blocker</td><td>Metoprolol succinate 25mg daily ✓</td></tr>
+                        <tr><td><strong>C</strong></td><td>Cholesterol (high-intensity statin)</td><td>Atorvastatin 80mg daily ✓</td></tr>
+                        <tr><td><strong>D</strong></td><td>Diabetes management</td><td>Continue metformin, add SGLT2i ✓</td></tr>
+                        <tr><td><strong>E</strong></td><td>Education/Exercise (cardiac rehab)</td><td>Referred ✓</td></tr>
+                    </table></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 Lifestyle Modifications</div>
+                    <ul style="margin-left:20px;line-height:2;">
+                        <li><strong>Smoking cessation</strong> - single most important intervention</li>
+                        <li>Mediterranean diet</li>
+                        <li>Cardiac rehabilitation (30% ↓ mortality!)</li>
+                        <li>BP goal &lt;130/80</li>
+                        <li>LDL goal &lt;70 (or &lt;55 if very high risk)</li>
+                        <li>A1c &lt;7% (individualized)</li>
+                    </ul></div>
+                
+                <div class="alert-box"><div class="alert-title">⚠️ Driving Restrictions</div>
+                    <p>Private driving: Usually 1-2 weeks post-uncomplicated MI<br>
+                    Commercial driving: Usually 4-6 weeks, may need stress testing</p></div>
+                <button class="btn" onclick="nextStage()">Complete Case →</button>
+            </div></div>`;
+    }
+
+    function renderDebrief() {
+        return `<div class="outcome-banner">
+            <div style="font-size:5rem">🏆</div>
+            <div style="font-size:2rem;font-weight:700;color:#4ade80;">Case Complete!</div>
+            <div style="color:#94a3b8;margin-top:8px;">Anterolateral STEMI → Successful PCI → Optimal Medical Therapy</div>
+        </div>
+        
+        <div class="why-chain"><div class="why-chain-title">🔗 Key WHY Chains</div>
+            <div class="why-item"><div class="why-q">Why aspirin AND P2Y12 inhibitor?</div>
+                <div class="why-a">Platelets have multiple activation pathways. Aspirin blocks TXA2 (via COX-1), P2Y12 inhibitors block ADP signaling. Blocking both pathways provides synergistic antiplatelet effect, essential for preventing stent thrombosis and recurrent events.</div></div>
+            <div class="why-item"><div class="why-q">Why do beta-blockers reduce mortality?</div>
+                <div class="why-a">↓ Heart rate → ↓ myocardial O2 demand AND ↑ diastolic filling time → ↑ coronary perfusion. Also ↓ catecholamine surge → ↓ arrhythmias. Net effect: smaller infarct, fewer arrhythmic deaths, less remodeling.</div></div>
+            <div class="why-item"><div class="why-q">Why high-intensity statin immediately?</div>
+                <div class="why-a">Statins stabilize vulnerable plaques within days through anti-inflammatory effects. Pleiotropic benefits occur before significant LDL lowering. Early treatment captures this window when plaques are most vulnerable to re-rupture.</div></div>
+            <div class="why-item"><div class="why-q">Why wait 40 days for ICD after MI?</div>
+                <div class="why-a">Stunned (hibernating) myocardium can recover after reperfusion. EF measured acutely may improve substantially over weeks. Trials (DINAMIT, IRIS) showed no survival benefit from immediate ICD—wait, optimize meds, reassess.</div></div>
+        </div>
+        
+        <div class="tips">
+            <div class="pearl"><div class="tip-header">💎 Pearl</div>
+                <p><strong>Cardiac rehab reduces mortality by 30%</strong> - one of the most underutilized interventions in cardiology. Refer everyone!</p></div>
+            <div class="pitfall"><div class="tip-header">⚠️ Pitfall</div>
+                <p><strong>Don't give nitrates in RV infarct.</strong> RV is preload-dependent. Nitrates ↓ preload → severe hypotension. Check right-sided ECG (V4R) in inferior STEMI.</p></div>
+        </div>
+        
+        <div class="tips">
+            <div class="pearl"><div class="tip-header">💎 Pearl</div>
+                <p><strong>Ticagrelor causes dyspnea</strong> in ~15% of patients. It's due to adenosine effects, not bronchospasm. Usually mild and self-limited.</p></div>
+            <div class="pitfall"><div class="tip-header">⚠️ Pitfall</div>
+                <p><strong>Prasugrel contraindicated if prior stroke/TIA</strong> - significantly increased ICH risk. Use ticagrelor or clopidogrel instead.</p></div>
+        </div>
+        
+        <button class="btn" onclick="location.reload()">🔄 Restart Case</button>`;
+    }
+
+    function nextStage() { 
+        if (state.stage < STAGES.length - 1) {
+            state.stage++; 
+            render(); 
+            window.scrollTo(0, 0);
+        }
+    }
+    
+    render();
+    </script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+/* Enhanced Feature Styles */
+.rdx-difficulty-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 300px;
+}
+.rdx-diff-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin: 2px;
+}
+.rdx-diff-btn.active {
+    background: #3b82f6;
+    color: white;
+}
+.rdx-diff-btn:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+}
+.rdx-diff-btn:hover:not(.active) {
+    background: #e2e8f0;
+}
+.rdx-refs-panel {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #93c5fd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+.rdx-refs-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+.rdx-refs-links {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+.rdx-refs-links a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.rdx-refs-links a:hover {
+    text-decoration: underline;
+}
+.rdx-debrief-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rdx-debrief-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #1f2937;
+}
+.rdx-path-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.rdx-path-optimal {
+    background: #dcfce7;
+    border-left: 4px solid #22c55e;
+}
+.rdx-path-suboptimal {
+    background: #fef9c3;
+    border-left: 4px solid #eab308;
+}
+.rdx-path-wrong {
+    background: #fecaca;
+    border-left: 4px solid #ef4444;
+}
+.rdx-hint-beginner {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+.rdx-hint-advanced {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+</style>
+
+<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
+    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
+        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    </div>
+</div>
+
+
+<!-- CROSS-PLATFORM LEARNING LINKS -->
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
+            <a href="../mechanism/acs-module.html" style="display: block; color: #2563eb; font-size: 14px;">→ Acute Coronary Syndrome</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
+            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="heart-failure-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Heart Failure</a>
+            <a href="acls-rhythms-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Acls Rhythms</a>
+            <a href="aortic-dissection-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Aortic Dissection</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
+            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../CoachDx/mentor-chat.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../CoachDx/sbar-trainer.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+<!-- END CROSS-PLATFORM LINKS -->
+<div class="rdx-refs-panel" id="rdxRefsPanel">
+    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
+    <div class="rdx-refs-links"><a href="https://www.ahajournals.org/doi/10.1161/CIR.0000000000000916" target="_blank" class="text-blue-600 hover:underline">AHA ACLS Guidelines 2020</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK459216/" target="_blank" class="text-blue-600 hover:underline">StatPearls: Acute Coronary Syndrome</a></div>
+</div>
+
+<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
+    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+</div>
+
+<script>
+// ReasonDx Enhanced Features Module
+(function() {
+    // Decision tracking
+    window.rdxDecisionPath = window.rdxDecisionPath || [];
+    window.rdxTotalScore = window.rdxTotalScore || 0;
+    window.rdxMaxScore = window.rdxMaxScore || 0;
+    window.rdxDifficulty = 'intermediate';
+    
+    // Difficulty control
+    window.rdxSetDifficulty = function(level) {
+        window.rdxDifficulty = level;
+        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('rdx-btn-' + level).classList.add('active');
+        
+        // Update hint visibility
+        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
+            el.style.display = level === 'beginner' ? 'block' : 'none';
+        });
+        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
+            el.style.display = level === 'advanced' ? 'block' : 'none';
+        });
+    };
+    
+    // Track a decision
+    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+        window.rdxDecisionPath.push({
+            stage: stageId,
+            title: stageTitle,
+            choice: choiceId,
+            choiceText: choiceText,
+            outcome: outcome,
+            points: points,
+            maxPoints: maxPoints,
+            isOptimal: isOptimal,
+            optimalChoice: optimalChoice,
+            optimalText: optimalText
+        });
+        window.rdxTotalScore += points;
+        window.rdxMaxScore += maxPoints;
+    };
+    
+    // Show visual debrief
+    window.rdxShowDebrief = function() {
+        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
+        
+        let grade, gradeColor, gradeEmoji;
+        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
+        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
+        
+        let pathHTML = '';
+        if (window.rdxDecisionPath.length > 0) {
+            pathHTML = window.rdxDecisionPath.map(d => {
+                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
+                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
+                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
+                return '<div class="' + pathClass + ' rdx-path-item">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
+                    '<div>' +
+                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
+                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
+                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
+                    '</div>' +
+                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
+                    '</div></div>';
+            }).join('');
+        } else {
+            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+        }
+        
+        document.getElementById('rdxDebriefContent').innerHTML = 
+            '<div style="text-align:center;margin-bottom:24px;">' +
+            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
+            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
+            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
+            '</div></div>' +
+            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
+            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
+            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
+            '</div></div>' +
+            '<div style="display:flex;gap:12px;">' +
+            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '</div>';
+        
+        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
+    };
+    
+    // Auto-inject hint examples into existing content
+    window.rdxInit = function() {
+        // Could add dynamic hint injection here based on difficulty
+        console.log('ReasonDx Enhanced Features loaded for: Acs Expanded Adventure');
+    };
+    
+    // Initialize on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.rdxInit);
+    } else {
+        window.rdxInit();
+    }
+})();
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+</body>
+</html>

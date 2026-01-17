@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Angioedema - Expanded Clinical Reasoning Adventure</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);min-height:100vh;color:#e2e8f0;line-height:1.6;padding:20px}
+.container{max-width:800px;margin:0 auto}
+.scene{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:24px;margin-bottom:20px}
+.scene-header{margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.1)}
+.scene-phase{font-size:0.85rem;color:#f472b6;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.scene-title{font-size:1.5rem;font-weight:700;color:#fff}
+.scene-body{font-size:1rem;color:#cbd5e1}
+.alert-box{background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.4);border-radius:12px;padding:16px;margin:16px 0}
+.alert-title{color:#f87171;font-weight:700;font-size:1.1rem;margin-bottom:8px}
+.mechanism-box{background:linear-gradient(135deg,rgba(59,130,246,0.1),rgba(139,92,246,0.1));border:1px solid rgba(96,165,250,0.3);border-radius:12px;padding:16px;margin:16px 0}
+.mechanism-title{color:#60a5fa;font-weight:700;font-size:1rem;margin-bottom:12px}
+.pathway{font-family:'SF Mono',Monaco,monospace;font-size:0.85rem;color:#94a3b8;padding:12px;background:rgba(0,0,0,0.2);border-radius:8px;white-space:pre-wrap}
+.boards-tip{background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:12px;padding:16px;margin:16px 0}
+.boards-tip-title{color:#4ade80;font-weight:700;margin-bottom:12px}
+.comparison-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:0.9rem}
+.comparison-table th,.comparison-table td{border:1px solid rgba(255,255,255,0.1);padding:10px;text-align:left}
+.comparison-table th{background:rgba(96,165,250,0.2);color:#60a5fa}
+.comparison-table tr:nth-child(even){background:rgba(255,255,255,0.02)}
+.btn{background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;border:none;padding:12px 24px;border-radius:8px;font-size:1rem;cursor:pointer;width:100%;margin-top:16px;transition:transform 0.2s,box-shadow 0.2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 4px 20px rgba(59,130,246,0.4)}
+.tips{display:grid;gap:12px;margin-top:16px}
+.pearl{background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:8px;padding:12px}
+.pitfall{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:8px;padding:12px}
+.tip-header{font-weight:700;margin-bottom:8px;font-size:0.9rem}
+.pearl .tip-header{color:#4ade80}
+.pitfall .tip-header{color:#f87171}
+.why-chain{background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:8px;padding:12px;margin:12px 0}
+.why-chain-title{color:#fbbf24;font-weight:700;margin-bottom:8px}
+</style>
+</head>
+<body>
+<div class="container" id="app"></div>
+
+<script>
+const defined = {
+    title: "Angioedema",
+    subtitle: "Histaminergic vs Bradykinin-Mediated",
+    stages: ["intro","pathophys","histamine_vs_bradykinin","allergic","acei","hae_types","hae_acute","hae_prophylaxis","workup","debrief"]
+};
+
+let state = { stage: 0 };
+
+function nextStage() {
+    if (state.stage < defined.stages.length - 1) {
+        state.stage++;
+        renderStage();
+    }
+}
+
+function renderStage() {
+    const stageName = defined.stages[state.stage];
+    const renderFn = window['render_' + stageName];
+    if (renderFn) {
+        document.getElementById('app').innerHTML = renderFn();
+    }
+}
+
+window.render_intro = function() {
+    return `
+    <div class="scene">
+        <div class="scene-header">
+            <div class="scene-phase">Stage 1 of 10</div>
+            <div class="scene-title">🚨 The Case</div>
+        </div>
+        <div class="scene-body">
+            <p style="font-size:1.1rem;margin-bottom:16px;">A 55-year-old with hypertension presents with <strong>sudden swelling of the lips and tongue</strong> that started 2 hours ago. No urticaria. He takes lisinopril, started 6 months ago. This is his third similar episode.</p>
+            
+            <div class="alert-box">
+                <div class="alert-title">🚨 Airway First!</div>
+                <p><strong>Angioedema involving the tongue, pharynx, or larynx is a medical emergency.</strong> Assess airway immediately and prepare for potential intubation.</p>
+            </div>
+            
+            <div class="mechanism-box">
+                <div class="mechanism-title">🧬 What is Angioedema?</div>
+                <div class="pathway"><strong>Definition:</strong>
+Self-limited, localized swelling of submucosal
+or subcutaneous tissue due to increased
+vascular permeability
+
+<strong>Key locations:</strong>
+• Face (lips, eyelids)
+• Tongue, pharynx, larynx (DANGER!)
+• Extremities
+• Bowel wall (abdominal attacks)
+• Genitalia
+
+<strong>NOT pitting edema</strong> - this is different!</div>
+            </div>
+            
+            <div class="why-chain">
+                <div class="why-chain-title">🔗 WHY Chain: Why These Locations?</div>
+                <p><strong>WHY does angioedema favor certain sites?</strong></p>
+                <p>→ Areas with loose connective tissue</p>
+                <p>→ Rich vascular supply allows fluid extravasation</p>
+                <p>→ Less structural resistance to swelling</p>
+                <p>→ Similar to why black eyes spread easily</p>
+            </div>
+            
+            <button class="btn" onclick="nextStage()">Understand the Pathophysiology →</button>
+        </div>
+    </div>`;
+};
+
+window.render_pathophys = function() {
+    return `
+    <div class="scene">
+        <div class="scene-header">
+            <div class="scene-phase">Stage 2 of 10</div>
+            <div class="scene-title">Two Distinct Mechanisms</div>
+        </div>
+        <div class="scene-body">
+            <div class="alert-box">
+                <div class="alert-title">⚠️ CRITICAL Distinction</div>
+                <p><strong>The mechanism determines treatment!</strong> Histamine-mediated responds to epinephrine/antihistamines. Bradykinin-mediated does NOT.</p>
+            </div>
+            
+            <div class="mechanism-box">
+                <div class="mechanism-title">🧬 Histamine-Mediated (Mast Cell)</div>
+                <div class="pathway">Trigger (allergen, physical, idiopathic)
+    ↓
+Mast cell degranulation
+    ↓
+HISTAMINE release
+    ↓
+Vasodilation + increased permeability
+    ↓
+Angioedema + URTICARIA (usually)
+
+<strong>Responds to:</strong>
+✓ Epinephrine
+✓ Antihistamines
+✓ Corticosteroids</div>
+            </div>
+            
+            <div class="mechanism-box">
+                <div class="mechanism-title">🧬 Bradykinin-Mediated</div>
+                <div class="pathway">Trigger (ACEi, C1-INH deficiency)
+    ↓
+Excess BRADYKININ
+    ↓
+Bradykinin B2 receptor activation
+    ↓
+Vasodilation + increased permeability
+    ↓
+Angioedema WITHOUT urticaria
+
+<strong>Does NOT respond to:</strong>
+✗ Epinephrine
+✗ Antihistamines  
+✗ Corticosteroids
+
+<strong>Requires specific therapy!</strong></div>
+            </div>
+            
+            <button class="btn" onclick="nextStage()">How to Differentiate →</button>
+        </div>
+    </div>`;
+};
+
+window.render_histamine_vs_bradykinin = function() {
+    return `
+    <div class="scene">
+        <div class="scene-header">
+            <div class="scene-phase">Stage 3 of 10</div>
+            <div class="scene-title">Clinical Differentiation</div>
+        </div>
+        <div class="scene-body">
+            <div class="boards-tip">
+                <div class="boards-tip-title">📚 Key Distinguishing Features</div>
+                <table class="comparison-table">
+                    <tr><th>Feature</th><th>Histamine-Mediated</th><th>Bradykinin-Mediated</th></tr>
+                    <tr style="background:rgba(34,197,94,0.2);"><td><strong>Urticaria</strong></td><td><strong>Usually present</strong></td><td><strong>ABSENT</strong></td></tr>
+                    <tr><td>Pruritus</td><td>Common</td><td>Rare</td></tr>
+                    <tr><td>Onset</td><td>Minutes to hours</td><td>Hours (slower)</td></tr>
+                    <tr><td>Duration</td><td>Hours (responds to tx)</td><td>2-5 days (self-limited)</td></tr>
+                    <tr><td>Triggers</td><td>Allergens, NSAIDs, physical</td><td>ACEi, trauma, stress</td></tr>
+                    <tr><td>Epinephrine response</td><td>Yes</td><td>No</td></tr>
+                    <tr><td>Family history</td><td>Sometimes atopy</td><td>Yes in HAE</td></tr>
+                </table>
+            </div>
+            
+            <div class="why-chain">
+                <div class="why-chain-title">🔗 WHY Chain: No Urticaria in Bradykinin</div>
+                <p><strong>WHY is urticaria absent in bradykinin-mediated angioedema?</strong></p>
+                <p>→ Urticaria requires histamine release from mast cells</p>
+                <p>→ Bradykinin doesn't activate mast cells</p>
+                <p>→ It acts directly on vascular endothelium</p>
+                <p>→ No urticaria = think bradykinin!</p>
+            </div>
+            
+            <div class="alert-box">
+                <div class="alert-title">🚨 The Key Clinical Pearl</div>
+                <p><strong>Angioedema WITHOUT urticaria = suspect bradykinin-mediated until proven otherwise.</strong> Ask about ACE inhibitors and family history!</p>
+            </div>
+            
+            <button class="btn" onclick="nextStage()">Allergic/Histaminergic Types →</button>
+        </div>
+    </div>`;
+};
+
+window.render_allergic = function() {
+    return `
+    <div class="scene">
+        <div class="scene-header">
+            <div class="scene-phase">Stage 4 of 10</div>
+            <div class="scene-title">Histamine-Mediated Angioedema</div>
+        </div>
+        <div class="scene-body">
+            <div class="boards-tip">
+                <div class="boards-tip-title">📚 Types of Histaminergic Angioedema</div>
+                <table class="comparison-table">
+                    <tr><th>Type</th><th>Trigger</th><th>Management</th></tr>
+                    <tr><td><strong>Allergic (IgE)</strong></td><td>Foods, drugs, insect stings</td><td>Avoid trigger, epinephrine</td></tr>
+                    <tr><td><strong>NSAID-induced</strong></td><td>Aspirin, ibuprofen (COX-1)</td><td>Avoid NSAIDs, use COX-2 selective</td></tr>
+                    <tr><td><strong>Physical</strong></td><td>Cold, pressure, vibration</td><td>Avoid trigger, antihistamines</td></tr>
+                    <tr><td><strong>Idiopathic</strong></td><td>Unknown</td><td>Chronic antihistamines, omalizumab</td></tr>
+                </table>
+            </div>
+            
+            <div class="mechanism-box">
+                <div class="mechanism-title">🧬 Acute Treatment</div>
+                <div class="pathway"><strong>For histamine-mediated with airway concern:</strong>
+
+1. <strong>Epinephrine IM</strong> (0.3-0.5 mg)
+   - First-line for severe/anaphylaxis
+   - Can repeat every 5-15 minutes
+
+2. <strong>H1 antihistamine</strong>
+   - Diphenhydramine 50 mg IV/IM
+   - Or cetirizine/loratadine
+
+3. <strong>H2 antihistamine</strong>
+   - Famotidine 20 mg IV
+   - Adds to H1 effect
+
+4. <strong>Corticosteroids</strong>
+   - Methylprednisolone 125 mg IV
+   - Prevents biphasic reaction
+
+<strong>Airway management if needed!</strong></div>
+            </div>
+            
+            <div class="why-chain">
+                <div class="why-chain-title">🔗 WHY Chain: NSAID Cross-Reactivity</div>
+                <p><strong>WHY do some patients react to ALL NSAIDs?</strong></p>
+                <p>→ Not IgE-mediated (not true allergy)</p>
+                <p>→ COX-1 inhibition shifts arachidonic acid to leukotrienes</p>
+                <p>→ Leukotrienes cause mast cell activation</p>
+                <p>→ COX-2 selective drugs often tolerated</p>
+            </div>
+            
+            <button class="btn" onclick="nextStage()">ACE Inhibitor Angioedema →</button>
+        </div>
+    </div>`;
+};
+
+window.render_acei = function() {
+    return `
+    <div class="scene">
+        <div class="scene-header">
+            <div class="scene-phase">Stage 5 of 10</div>
+            <div class="scene-title">ACE Inhibitor Angioedema</div>
+        </div>
+        <div class="scene-body">
+            <div class="alert-box">
+                <div class="alert-title">💊 Most Common Cause of Bradykinin Angioedema</div>
+                <p><strong>Affects 0.1-0.7% of ACEi users. More common in African Americans (4-5x higher risk).</strong></p>
+            </div>
+            
+            <div class="boards-tip">
+                <div class="boards-tip-title">📚 Key Features of ACEi Angioedema</div>
+                <table class="comparison-table">
+                    <tr><th>Feature</th><th>Details</th></tr>
+                    <tr><td>Onset after starting ACEi</td><td>Can be days to YEARS (often months-years!)</td></tr>
+                    <tr><td>Location</td><td>Face, lips, tongue most common; can be bowel</td></tr>
+                    <tr style="background:rgba(239,68,68,0.2);"><td><strong>Urticaria</strong></td><td><strong>ABSENT</strong></td></tr>
+                    <tr><td>Duration</td><td>24-72 hours (self-limited)</td></tr>
+                    <tr><td>Recurrence</td><td>Will recur if ACEi continued</td></tr>
+                </table>
+            </div>
+            
+            <div class="mechanism-box">
+                <div class="mechanism-title">🧬 Why ACE Inhibitors Cause Angioedema</div>
+                <div class="pathway">ACE normally degrades bradykinin
+    ↓
+ACE inhibitor blocks this degradation
+    ↓
+Bradykinin accumulates
+    ↓
+In susceptible individuals → angioedema
+
+<strong>Why only some patients?</strong>
+• Genetic variants in bradykinin metabolism
+• Aminopeptidase P, dipeptidyl peptidase IV
+• Some have redundant degradation, some don't</div>
+            </div>
+            
+            <div class="boards-tip">
+                <div class="boards-tip-title">📚 Management</div>
+                <div class="pathway"><strong>Acute episode:</strong>
+• Airway management is priority
+• Standard therapy (epi, antihistamines) often ineffective
+• Icatibant (bradykinin B2 antagonist) may help
+• Fresh frozen plasma (provides ACE)
+• C1-INH concentrate (off-label)
+
+<strong>Prevention:</strong>
+• STOP the ACE inhibitor permanently
+• ARBs have low but real cross-reactivity (~10%)
+• Consider alternative antihypertensive</div>
+            </div>
+            
+            <div class="why-chain">
+                <div class="why-chain-title">🔗 WHY Chain: Can You Use ARBs?</div>
+                <p><strong>WHY might ARBs still cause angioedema?</strong></p>
+                <p>→ ARBs don't inhibit ACE directly</p>
+                <p>→ But some patients still react (~2-10%)</p>
+                <p>→ Possible shared pathway or coincidental HAE</p>
+                <p>→ Use with caution, inform patient of risk</p>
+            </div>
+            
+            <button class="btn" onclick="nextStage()">Hereditary Angioedema →</button>
+        </div>
+    </div>`;
+};
+
+window.render_hae_types = function() {
+    return `
+    <div class="scene">
+        <div class="scene-header">
+            <div class="scene-phase">Stage 6 of 10</div>
+            <div class="scene-title">Hereditary Angioedema (HAE)</div>
+        </div>
+        <div class="scene-body">
+            <div class="alert-box">
+                <div class="alert-title">🧬 Genetic Disorder of C1-Inhibitor</div>
+                <p><strong>Autosomal dominant. Recurrent angioedema episodes starting in childhood/adolescence. Family history in ~75%.</strong></p>
+            </div>
+            
+            <div class="boards-tip">
+                <div class="boards-tip-title">📚 HAE Types</div>
+                <table class="comparison-table">
+                    <tr><th>Type</th><th>C1-INH Level</th><th>C1-INH Function</th><th>C4</th><th>Frequency</th></tr>
+                    <tr style="background:rgba(34,197,94,0.2);"><td><strong>Type 1</strong></td><td><strong>LOW</strong></td><td>Low</td><td>Low</td><td><strong>~85%</strong></td></tr>
+                    <tr><td>Type 2</td><td>Normal/High</td><td><strong>LOW</strong></td><td>Low</td><td>~15%</td></tr>
+                    <tr><td>HAE with normal C1-INH</td><td>Normal</td><td>Normal</td><td>Normal</td><td>Rare</td></tr>
+                </table>
+            </div>
+            
+            <div class="mechanism-box">
+                <div class="mechanism-title">🧬 How C1-INH Deficiency Causes Angioedema</div>
+                <div class="pathway">C1-inhibitor normally regulates:
+• Contact/kinin system → bradykinin
+• Complement system → C4, C2
+• Fibrinolysis
+
+C1-INH deficiency:
+    ↓
+Uncontrolled activation of contact system
+    ↓
+Excess BRADYKININ production
+    ↓
+Vascular permeability
+    ↓
+Angioedema attacks
+
+<strong>NOT histamine-mediated!</strong></div>
+            </div>
+            
+            <div class="why-chain">
+                <div class="why-chain-title">🔗 WHY Chain: Why is C4 Low?</div>
+                <p><strong>WHY is C4 a useful screening test?</strong></p>
+                <p>→ C1-INH also regulates complement</p>
+                <p>→ Deficiency leads to C4 consumption</p>
+                <p>→ C4 is low even between attacks (98% sensitive)</p>
+                <p>→ Normal C4 essentially rules out HAE types 1&2</p>
+            </div>
+            
+            <div class="boards-tip">
+                <div class="boards-tip-title">📚 Clinical Features</div>
+                <div class="pathway"><strong>Attack triggers:</strong>
+• Trauma (including dental procedures)
+• Stress, illness, surgery
+• Estrogen (pregnancy, OCPs)
+• Sometimes spontaneous
+
+<strong>Attack locations:</strong>
+• Face, lips, tongue, larynx (dangerous!)
+• Extremities
+• ABDOMINAL (bowel wall edema) - can mimic acute abdomen!
+• Genitalia
+
+<strong>No urticaria, no pruritus</strong></div>
+            </div>
+            
+            <button class="btn" onclick="nextStage()">HAE Acute Treatment →</button>
+        </div>
+    </div>`;
+};
+
+window.render_hae_acute = function() {
+    return `
+    <div class="scene">
+        <div class="scene-header">
+            <div class="scene-phase">Stage 7 of 10</div>
+            <div class="scene-title">Acute HAE Attack Treatment</div>
+        </div>
+        <div class="scene-body">
+            <div class="alert-box">
+                <div class="alert-title">🚨 Standard Allergy Meds DON'T Work!</div>
+                <p><strong>Epinephrine, antihistamines, and steroids are INEFFECTIVE in HAE.</strong> Specific therapy is required.</p>
+            </div>
+            
+            <div class="boards-tip">
+                <div class="boards-tip-title">📚 FDA-Approved Acute Treatments</div>
+                <table class="comparison-table">
+                    <tr><th>Drug</th><th>Mechanism</th><th>Route</th><th>Notes</th></tr>
+                    <tr style="background:rgba(34,197,94,0.2);"><td><strong>C1-INH concentrate (Berinert, Cinryze)</strong></td><td>Replaces missing protein</td><td>IV</td><td>Plasma-derived</td></tr>
+                    <tr><td>C1-INH (Ruconest)</td><td>Replaces missing protein</td><td>IV</td><td>Recombinant</td></tr>
+                    <tr style="background:rgba(34,197,94,0.2);"><td><strong>Icatibant (Firazyr)</strong></td><td>Bradykinin B2 receptor antagonist</td><td>SC</td><td>Self-administered</td></tr>
+                    <tr><td>Ecallantide (Kalbitor)</td><td>Kallikrein inhibitor</td><td>SC</td><td>Must be given by HCP (anaphylaxis risk)</td></tr>
+                </table>
+            </div>
+            
+            <div class="mechanism-box">
+                <div class="mechanism-title">🧬 Treatment Algorithm</div>
+                <div class="pathway"><strong>Laryngeal/Airway involvement:</strong>
+• Treat immediately with on-demand therapy
+• Prepare for intubation
+• May still need airway intervention
+
+<strong>Abdominal attacks:</strong>
+• Often severe pain, vomiting
+• Can mimic surgical abdomen
+• Treat with HAE-specific therapy
+• Usually resolves in 24-72 hours
+
+<strong>Peripheral/facial:</strong>
+• Less urgent but still treat
+• Prevents progression
+
+<strong>If no HAE-specific therapy available:</strong>
+• Fresh frozen plasma (contains C1-INH)
+• Caution: may worsen attack initially</div>
+            </div>
+            
+            <div class="why-chain">
+                <div class="why-chain-title">🔗 WHY Chain: FFP Paradox</div>
+                <p><strong>WHY might FFP initially worsen HAE?</strong></p>
+                <p>→ FFP contains C1-INH (good)</p>
+                <p>→ But also contains contact system substrates</p>
+                <p>→ May fuel more bradykinin production initially</p>
+                <p>→ Usually helps but use specific therapy if available</p>
+            </div>
+            
+            <button class="btn" onclick="nextStage()">HAE Prophylaxis →</button>
+        </div>
+    </div>`;
+};
+
+window.render_hae_prophylaxis = function() {
+    return `
+    <div class="scene">
+        <div class="scene-header">
+            <div class="scene-phase">Stage 8 of 10</div>
+            <div class="scene-title">HAE Prophylaxis</div>
+        </div>
+        <div class="scene-body">
+            <div class="boards-tip">
+                <div class="boards-tip-title">📚 Long-Term Prophylaxis Options</div>
+                <table class="comparison-table">
+                    <tr><th>Drug</th><th>Mechanism</th><th>Frequency</th></tr>
+                    <tr style="background:rgba(34,197,94,0.2);"><td><strong>Lanadelumab (Takhzyro)</strong></td><td>Anti-kallikrein monoclonal Ab</td><td>SC q2-4 weeks</td></tr>
+                    <tr><td>C1-INH (Cinryze, Haegarda)</td><td>C1-INH replacement</td><td>IV or SC 2x/week</td></tr>
+                    <tr><td>Berotralstat (Orladeyo)</td><td>Oral kallikrein inhibitor</td><td>Daily oral</td></tr>
+                    <tr><td>Androgens (danazol)</td><td>↑ C1-INH production</td><td>Daily oral (older therapy)</td></tr>
+                </table>
+            </div>
+            
+            <div class="mechanism-box">
+                <div class="mechanism-title">🧬 Short-Term Prophylaxis</div>
+                <div class="pathway"><strong>Before procedures (dental, surgery):</strong>
+
+• C1-INH concentrate 1-6 hours before
+• Or fresh frozen plasma if C1-INH unavailable
+
+<strong>High-risk procedures:</strong>
+• Dental work (especially extractions)
+• Intubation
+• Endoscopy
+• Any oropharyngeal manipulation
+
+<strong>Have on-demand therapy available!</strong></div>
+            </div>
+            
+            <div class="alert-box">
+                <div class="alert-title">⚠️ Medications to AVOID in HAE</div>
+                <p><strong>ACE inhibitors:</strong> Absolutely contraindicated (block bradykinin degradation)</p>
+                <p><strong>Estrogen-containing contraceptives:</strong> Can trigger/worsen attacks</p>
+                <p><strong>Consider progestin-only or non-hormonal contraception</strong></p>
+            </div>
+            
+            <div class="why-chain">
+                <div class="why-chain-title">🔗 WHY Chain: Androgens Work</div>
+                <p><strong>WHY do androgens increase C1-INH?</strong></p>
+                <p>→ Androgens stimulate hepatic C1-INH synthesis</p>
+                <p>→ Can raise levels enough to reduce attacks</p>
+                <p>→ Side effects limit use (virilization, lipids, liver)</p>
+                <p>→ Newer therapies preferred but androgens still used</p>
+            </div>
+            
+            <button class="btn" onclick="nextStage()">Diagnostic Workup →</button>
+        </div>
+    </div>`;
+};
+
+window.render_workup = function() {
+    return `
+    <div class="scene">
+        <div class="scene-header">
+            <div class="scene-phase">Stage 9 of 10</div>
+            <div class="scene-title">Diagnostic Approach</div>
+        </div>
+        <div class="scene-body">
+            <div class="boards-tip">
+                <div class="boards-tip-title">📚 Workup Algorithm</div>
+                <table class="comparison-table">
+                    <tr><th>Step</th><th>Test</th><th>Interpretation</th></tr>
+                    <tr><td>1</td><td>C4 level</td><td>Low = suggests HAE; Normal = HAE 1&2 unlikely</td></tr>
+                    <tr><td>2</td><td>C1-INH level (quantitative)</td><td>Low = Type 1 HAE</td></tr>
+                    <tr><td>3</td><td>C1-INH function (functional assay)</td><td>Low = Type 2 HAE (if level normal)</td></tr>
+                    <tr><td>4</td><td>C1q level</td><td>Low = Acquired angioedema (not hereditary)</td></tr>
+                </table>
+            </div>
+            
+            <div class="mechanism-box">
+                <div class="mechanism-title">🧬 Distinguishing HAE from Acquired</div>
+                <div class="pathway"><strong>Hereditary (HAE):</strong>
+• Family history (75%)
+• Onset in childhood/adolescence
+• C1q NORMAL
+• Lifelong condition
+
+<strong>Acquired C1-INH Deficiency:</strong>
+• Onset in adulthood (>40 years)
+• No family history
+• C1q LOW (key distinguisher!)
+• Associated with:
+  - Lymphoproliferative disorders
+  - Autoimmune diseases
+  - Anti-C1-INH antibodies
+
+<strong>Must rule out malignancy in acquired!</strong></div>
+            </div>
+            
+            <div class="alert-box">
+                <div class="alert-title">📋 When to Test</div>
+                <p><strong>Consider HAE workup if:</strong></p>
+                <ul style="margin-left:20px;margin-top:8px;">
+                    <li>Recurrent angioedema WITHOUT urticaria</li>
+                    <li>Family history of angioedema</li>
+                    <li>Angioedema not responding to standard therapy</li>
+                    <li>Recurrent unexplained abdominal pain</li>
+                    <li>Onset in childhood/adolescence</li>
+                </ul>
+            </div>
+            
+            <button class="btn" onclick="nextStage()">Summary & Debrief →</button>
+        </div>
+    </div>`;
+};
+
+window.render_debrief = function() {
+    return `
+    <div class="scene">
+        <div style="text-align:center;padding:40px;">
+            <div style="font-size:4rem;margin-bottom:12px;">🏆</div>
+            <div style="font-size:1.8rem;font-weight:700;color:#4ade80;">Angioedema Mastery!</div>
+        </div>
+        <div class="scene-body">
+            <div class="boards-tip">
+                <div class="boards-tip-title">📚 High-Yield Summary</div>
+                <table class="comparison-table">
+                    <tr><th>Concept</th><th>Key Point</th></tr>
+                    <tr style="background:rgba(34,197,94,0.2);"><td><strong>No urticaria</strong></td><td><strong>Think bradykinin (ACEi, HAE)</strong></td></tr>
+                    <tr><td>ACEi angioedema</td><td>Can occur years after starting; stop permanently</td></tr>
+                    <tr><td>HAE screening</td><td>C4 (low even between attacks)</td></tr>
+                    <tr><td>HAE Type 1 vs 2</td><td>Type 1: low level; Type 2: low function</td></tr>
+                    <tr><td>Acquired vs hereditary</td><td>Check C1q (low in acquired)</td></tr>
+                    <tr><td>HAE acute treatment</td><td>C1-INH, icatibant, ecallantide (NOT epi/antihistamines)</td></tr>
+                    <tr><td>HAE prophylaxis</td><td>Lanadelumab, C1-INH, berotralstat</td></tr>
+                    <tr><td>Avoid in HAE</td><td>ACE inhibitors, estrogen</td></tr>
+                </table>
+            </div>
+            
+            <div class="tips">
+                <div class="pearl">
+                    <div class="tip-header">✓ Pearls</div>
+                    <ul style="margin-left:16px;">
+                        <li>Angioedema + urticaria = histamine-mediated</li>
+                        <li>Angioedema WITHOUT urticaria = bradykinin</li>
+                        <li>C4 is 98% sensitive for HAE types 1&2</li>
+                        <li>ACEi angioedema: African Americans 4-5x higher risk</li>
+                        <li>HAE abdominal attacks mimic surgical abdomen</li>
+                    </ul>
+                </div>
+                <div class="pitfall">
+                    <div class="tip-header">✗ Pitfalls</div>
+                    <ul style="margin-left:16px;">
+                        <li>Giving epi/antihistamines for HAE (won't work)</li>
+                        <li>Not asking about ACE inhibitors</li>
+                        <li>Missing ACEi angioedema years after starting drug</li>
+                        <li>Surgery for HAE abdominal attacks</li>
+                        <li>Prescribing ACEi to HAE patients</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <button class="btn" onclick="state.stage=0;renderStage();">🔄 Review Again</button>
+        </div>
+    </div>`;
+};
+
+// Initialize
+renderStage();
+</script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+/* Enhanced Feature Styles */
+.rdx-difficulty-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 300px;
+}
+.rdx-diff-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin: 2px;
+}
+.rdx-diff-btn.active {
+    background: #3b82f6;
+    color: white;
+}
+.rdx-diff-btn:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+}
+.rdx-diff-btn:hover:not(.active) {
+    background: #e2e8f0;
+}
+.rdx-refs-panel {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #93c5fd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+.rdx-refs-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+.rdx-refs-links {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+.rdx-refs-links a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.rdx-refs-links a:hover {
+    text-decoration: underline;
+}
+.rdx-debrief-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rdx-debrief-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #1f2937;
+}
+.rdx-path-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.rdx-path-optimal {
+    background: #dcfce7;
+    border-left: 4px solid #22c55e;
+}
+.rdx-path-suboptimal {
+    background: #fef9c3;
+    border-left: 4px solid #eab308;
+}
+.rdx-path-wrong {
+    background: #fecaca;
+    border-left: 4px solid #ef4444;
+}
+.rdx-hint-beginner {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+.rdx-hint-advanced {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+</style>
+
+<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
+    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
+        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    </div>
+</div>
+
+
+<!-- CROSS-PLATFORM LEARNING LINKS -->
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
+            <a href="../mechanism/angioedema-module.html" style="display: block; color: #2563eb; font-size: 14px;">→ Angioedema</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
+            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="asthma-exacerbation-expanded-dual-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Asthma Exacerbation Expanded D</a>
+            <a href="allergic-rhinitis-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Allergic Rhinitis</a>
+            <a href="penicillin-delabeling-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Penicillin Delabeling</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
+            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../CoachDx/mentor-chat.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../CoachDx/sbar-trainer.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+<!-- END CROSS-PLATFORM LINKS -->
+<div class="rdx-refs-panel" id="rdxRefsPanel">
+    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
+    <div class="rdx-refs-links"><a href="https://www.aaaai.org/practice-resources/statements-and-practice-parameters" target="_blank" class="text-blue-600 hover:underline">AAAAI Practice Parameters</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK482124/" target="_blank" class="text-blue-600 hover:underline">StatPearls: Anaphylaxis</a></div>
+</div>
+
+<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
+    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+</div>
+
+<script>
+// ReasonDx Enhanced Features Module
+(function() {
+    // Decision tracking
+    window.rdxDecisionPath = window.rdxDecisionPath || [];
+    window.rdxTotalScore = window.rdxTotalScore || 0;
+    window.rdxMaxScore = window.rdxMaxScore || 0;
+    window.rdxDifficulty = 'intermediate';
+    
+    // Difficulty control
+    window.rdxSetDifficulty = function(level) {
+        window.rdxDifficulty = level;
+        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('rdx-btn-' + level).classList.add('active');
+        
+        // Update hint visibility
+        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
+            el.style.display = level === 'beginner' ? 'block' : 'none';
+        });
+        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
+            el.style.display = level === 'advanced' ? 'block' : 'none';
+        });
+    };
+    
+    // Track a decision
+    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+        window.rdxDecisionPath.push({
+            stage: stageId,
+            title: stageTitle,
+            choice: choiceId,
+            choiceText: choiceText,
+            outcome: outcome,
+            points: points,
+            maxPoints: maxPoints,
+            isOptimal: isOptimal,
+            optimalChoice: optimalChoice,
+            optimalText: optimalText
+        });
+        window.rdxTotalScore += points;
+        window.rdxMaxScore += maxPoints;
+    };
+    
+    // Show visual debrief
+    window.rdxShowDebrief = function() {
+        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
+        
+        let grade, gradeColor, gradeEmoji;
+        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
+        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
+        
+        let pathHTML = '';
+        if (window.rdxDecisionPath.length > 0) {
+            pathHTML = window.rdxDecisionPath.map(d => {
+                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
+                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
+                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
+                return '<div class="' + pathClass + ' rdx-path-item">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
+                    '<div>' +
+                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
+                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
+                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
+                    '</div>' +
+                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
+                    '</div></div>';
+            }).join('');
+        } else {
+            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+        }
+        
+        document.getElementById('rdxDebriefContent').innerHTML = 
+            '<div style="text-align:center;margin-bottom:24px;">' +
+            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
+            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
+            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
+            '</div></div>' +
+            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
+            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
+            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
+            '</div></div>' +
+            '<div style="display:flex;gap:12px;">' +
+            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '</div>';
+        
+        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
+    };
+    
+    // Auto-inject hint examples into existing content
+    window.rdxInit = function() {
+        // Could add dynamic hint injection here based on difficulty
+        console.log('ReasonDx Enhanced Features loaded for: Angioedema Expanded Adventure');
+    };
+    
+    // Initialize on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.rdxInit);
+    } else {
+        window.rdxInit();
+    }
+})();
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+</body>
+</html>

@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C. difficile Colitis - Expanded Deep Dive Adventure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .stage-card { transition: all 0.3s ease; }
+        .why-chain { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); }
+        .mechanism-box { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); }
+        .pearl-box { background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%); }
+        .pitfall-box { background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-green-50 min-h-screen">
+    <div id="app" class="container mx-auto px-4 py-8 max-w-5xl">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between flex-wrap gap-4">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">🦠 C. difficile Colitis</h1>
+                    <p class="text-gray-500 mt-1">Expanded Deep Dive Adventure • 10 Stages</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="text-right">
+                        <div class="text-sm text-gray-500">Progress</div>
+                        <div class="text-2xl font-bold text-green-600" id="score">0%</div>
+                    </div>
+                    <button onclick="resetGame()" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium">🔄 Restart</button>
+                </div>
+            </div>
+            <div class="mt-4 h-3 bg-gray-100 rounded-full overflow-hidden">
+                <div id="progressBar" class="h-full bg-gradient-to-r from-green-500 to-teal-500 transition-all duration-500" style="width: 0%"></div>
+            </div>
+        </div>
+        <div id="gameContainer" class="space-y-6"></div>
+        <div id="summaryPanel" class="hidden"></div>
+    </div>
+    <script>
+const caseData = {
+    title: "C. difficile Colitis",
+    totalStages: 10,
+    stages: [
+        {
+            id: 1,
+            title: "Post-Hospitalization Diarrhea",
+            scenario: "A 72-year-old woman presents with 3 days of profuse watery diarrhea (10-12 episodes/day), crampy abdominal pain, and low-grade fever. She was discharged 10 days ago after treatment for pneumonia with IV ceftriaxone then oral levofloxacin.\n\nPMH: HTN, DM2, GERD (on PPI)\nVitals: BP 98/62, HR 108, Temp 101.2°F\nExam: Diffuse abdominal tenderness, no peritoneal signs\nLabs: WBC 18,500 with 15% bands, Cr 1.6 (baseline 0.9), Lactate 1.8",
+            question: "What is the most appropriate initial diagnostic test?",
+            options: [
+                { id: "A", text: "Stool culture for bacterial pathogens", outcome: "Delays diagnosis", feedback: "Stool culture takes 2-3 days. In this context (recent antibiotics, hospitalization), C. diff is highly likely.", points: 3, isOptimal: false },
+                { id: "B", text: "Stool PCR for C. difficile toxin gene", outcome: "Good but incomplete", feedback: "PCR detects toxin GENE, not protein. It can be positive in asymptomatic carriers. IDSA recommends multi-step testing.", points: 7, isOptimal: false },
+                { id: "C", text: "Multi-step C. diff testing: GDH/toxin EIA or NAAT with toxin confirmation", outcome: "Optimal diagnostic approach", feedback: "Correct! IDSA recommends multi-step algorithm to distinguish active disease from colonization.", points: 10, isOptimal: true },
+                { id: "D", text: "CT abdomen to look for colitis", outcome: "Helpful but not diagnostic", feedback: "CT shows colitis patterns but can't confirm C. diff specifically. Shouldn't delay stool testing.", points: 4, isOptimal: false }
+            ],
+            whyChain: { title: "WHY does testing strategy matter?", steps: ["C. diff colonization occurs in 5-15% of hospitalized patients WITHOUT disease", "PCR/NAAT detects toxin GENE - positive in colonizers AND infected", "Toxin EIA detects actual toxin PROTEIN - more specific for active disease", "Treating colonizers exposes them to antibiotics without benefit", "Multi-step testing identifies true disease vs colonization"] },
+            mechanism: { title: "Understanding C. diff Testing", content: "GDH: Detects C. diff antigen, very sensitive (~95%), needs toxin confirmation\nToxin EIA: Detects toxin proteins, high specificity (~99%), lower sensitivity\nNAAT/PCR: Detects toxin gene, very sensitive but can't distinguish colonization\n\nRECOMMENDED: GDH→Toxin EIA, or NAAT→Toxin EIA confirmation" },
+            pearl: "A positive PCR/NAAT does not always mean active infection. 5-15% of hospitalized adults are colonized. Toxin EIA positivity provides stronger evidence.",
+            pitfall: "Don't order C. diff testing on formed stool! Only test stool that takes the shape of its container."
+        },
+        {
+            id: 2,
+            title: "Risk Factor Assessment",
+            scenario: "Her history:\n• 72 years old\n• Recent hospitalization (14 days) for pneumonia\n• IV ceftriaxone x3 days, then PO levofloxacin x7 days\n• Omeprazole 20mg daily for GERD\n• Type 2 diabetes\n• No prior C. diff",
+            question: "Which factors put her at HIGHEST risk for CDI?",
+            options: [
+                { id: "A", text: "Diabetes and age", outcome: "Minor contributors", feedback: "Age is a factor, diabetes has modest association. Most important: antibiotic exposure and certain medications.", points: 3, isOptimal: false },
+                { id: "B", text: "Fluoroquinolone use and PPI therapy", outcome: "Correct major risk factors", feedback: "Excellent! Fluoroquinolones are highest-risk antibiotics. PPIs allow more spores to survive gastric transit.", points: 10, isOptimal: true },
+                { id: "C", text: "Hospitalization alone", outcome: "Incomplete", feedback: "Healthcare exposure matters, but antibiotics and acid suppression are key modifiable factors.", points: 5, isOptimal: false },
+                { id: "D", text: "Ceftriaxone specifically", outcome: "Important but incomplete", feedback: "Ceftriaxone is high-risk, but fluoroquinolones associate with MORE severe and recurrent CDI.", points: 6, isOptimal: false }
+            ],
+            whyChain: { title: "WHY do certain antibiotics cause more CDI?", steps: ["Antibiotics disrupt normal gut microbiome ('colonization resistance')", "Healthy flora prevent C. diff overgrowth through competition", "Broad-spectrum antibiotics cause greatest dysbiosis", "Fluoroquinolones select for hypervirulent NAP1/BI/027 strain", "PPIs allow more spores to survive gastric transit"] },
+            mechanism: { title: "Risk Factor Hierarchy", content: "HIGHEST RISK ANTIBIOTICS:\n1. Fluoroquinolones\n2. Clindamycin\n3. 3rd/4th gen cephalosporins\n4. Carbapenems\n\nOTHER FACTORS:\n• Age >65, PPI use (OR 1.5-2.0)\n• Healthcare exposure, Prior C. diff\n• Immunocompromise, IBD" },
+            pearl: "PPIs are often overlooked but consistently associated with CDI. Consider deprescribing in hospitalized patients on antibiotics.",
+            pitfall: "Community-acquired CDI is increasing (30-40% of cases). Always ask about recent antibiotics in any diarrhea patient."
+        },
+        {
+            id: 3,
+            title: "Severity Classification",
+            scenario: "Test results:\n• GDH: Positive\n• Toxin EIA: Positive (confirms CDI)\n\nStatus: WBC 18,500, Cr 1.6 (baseline 0.9), BP 98/62, HR 108\n10-12 watery stools/day, diffuse tenderness, no peritoneal signs",
+            question: "How would you classify the severity?",
+            options: [
+                { id: "A", text: "Non-severe CDI - no shock or ileus", outcome: "Underestimates severity", feedback: "She has SEVERE markers: WBC >15,000 AND Cr elevated >1.5x baseline. IDSA defines severe by these criteria.", points: 2, isOptimal: false },
+                { id: "B", text: "Severe CDI - WBC >15,000 AND Cr >1.5x baseline", outcome: "Correct classification", feedback: "Correct! This is SEVERE CDI. IDSA criteria: WBC ≥15,000 OR Cr >1.5x baseline. She has BOTH.", points: 10, isOptimal: true },
+                { id: "C", text: "Fulminant CDI - hypotension indicates critical illness", outcome: "Overestimates", feedback: "Fulminant requires: hypotension/shock, ileus, OR megacolon. She's severe but not fulminant.", points: 5, isOptimal: false },
+                { id: "D", text: "Moderate CDI - somewhere in the middle", outcome: "Category doesn't exist", feedback: "IDSA classifies as non-severe, severe, or fulminant only.", points: 0, isOptimal: false }
+            ],
+            whyChain: { title: "WHY does severity classification matter?", steps: ["Severity determines first-line antibiotic choice", "Non-severe: vancomycin, fidaxomicin, OR metronidazole", "Severe: metronidazole is INFERIOR - use vancomycin/fidaxomicin", "Fulminant: combination therapy + surgical evaluation", "Accurate classification directly impacts outcomes"] },
+            mechanism: { title: "CDI Severity (IDSA 2021)", content: "NON-SEVERE: WBC <15,000 AND Cr <1.5x baseline\n\nSEVERE: WBC ≥15,000 OR Cr >1.5x baseline\n\nFULMINANT: Hypotension/shock, Ileus, Megacolon" },
+            pearl: "WBC >15,000 OR Cr >1.5x baseline = SEVERE. This determines treatment choice.",
+            pitfall: "Don't wait for WBC >30,000 or shock. WBC ≥15,000 alone makes it severe by IDSA criteria."
+        },
+        {
+            id: 4,
+            title: "Initial Treatment Selection",
+            scenario: "This is SEVERE CDI.\n\nPatient status:\n• Alert, tolerating oral fluids\n• No abdominal distention or ileus\n• Can take oral medications",
+            question: "What is the recommended first-line treatment?",
+            options: [
+                { id: "A", text: "IV metronidazole 500mg q8h", outcome: "Wrong for severe CDI", feedback: "Metronidazole NOT recommended for severe CDI. Studies show higher failure rates vs vancomycin.", points: 0, isOptimal: false },
+                { id: "B", text: "Oral vancomycin 125mg QID for 10 days", outcome: "Correct first-line", feedback: "Correct! Oral vancomycin 125mg QID x10 days is first-line for severe CDI. >90% response rate.", points: 10, isOptimal: true },
+                { id: "C", text: "Fidaxomicin 200mg BID for 10 days", outcome: "Excellent alternative", feedback: "Equally effective with LOWER recurrence rates (~13% vs 27%). Cost may be prohibitive (~$3000).", points: 9, isOptimal: false },
+                { id: "D", text: "Oral vancomycin 500mg QID", outcome: "Excessive dosing", feedback: "125mg QID achieves adequate levels. 500mg QID only for fulminant CDI.", points: 4, isOptimal: false }
+            ],
+            whyChain: { title: "WHY oral vancomycin?", steps: ["Oral vancomycin is NOT absorbed - stays in GI tract", "Achieves colonic concentrations 100-1000x higher than MIC", "Metronidazole is absorbed → lower colonic levels", "Clinical trials show vancomycin superiority for severe CDI", "C. diff vancomycin resistance is essentially non-existent"] },
+            mechanism: { title: "CDI Treatment (IDSA 2021)", content: "NON-SEVERE: Fidaxomicin OR Vancomycin 125mg QID\n(Metronidazole only if others unavailable)\n\nSEVERE: Fidaxomicin OR Vancomycin 125mg QID\n(Metronidazole NOT recommended)\n\nFULMINANT: Vancomycin 500mg QID + IV metro + surgical consult" },
+            pearl: "Oral vancomycin stays in the gut. Don't worry about 'vancomycin resistance' - C. diff has never developed meaningful resistance.",
+            pitfall: "IV vancomycin is useless for CDI! It's eliminated by kidneys, not excreted into colon."
+        },
+        {
+            id: 5,
+            title: "Antibiotic Stewardship",
+            scenario: "Patient is on day 7 (last day) of levofloxacin for pneumonia.\n\nPneumonia symptoms resolved. Afebrile, cough improved. CXR shows resolving infiltrate.\n\nYou're about to start vancomycin for CDI.",
+            question: "What should you do about the levofloxacin?",
+            options: [
+                { id: "A", text: "Continue levofloxacin alongside vancomycin", outcome: "Perpetuates dysbiosis", feedback: "Continuing offending antibiotic worsens CDI outcomes. She's completed treatment and is improved.", points: 0, isOptimal: false },
+                { id: "B", text: "Stop levofloxacin immediately", outcome: "Correct - stop offending agent", feedback: "Excellent! Discontinue unnecessary antibiotics, especially high-risk fluoroquinolones.", points: 10, isOptimal: true },
+                { id: "C", text: "Switch to azithromycin to complete pneumonia treatment", outcome: "Unnecessary switch", feedback: "She's completed 7 days and is clinically resolved. No need to switch - just stop.", points: 5, isOptimal: false },
+                { id: "D", text: "Add probiotics while continuing levofloxacin", outcome: "Inadequate intervention", feedback: "Probiotics have limited evidence for CDI treatment. Stop the fluoroquinolone.", points: 2, isOptimal: false }
+            ],
+            whyChain: { title: "WHY stop antibiotics?", steps: ["Continued antibiotics perpetuate microbiome disruption", "Each day of antibiotics extends dysbiosis period", "Fluoroquinolones specifically select for resistant C. diff strains", "Stopping inciting agent is key to recovery", "Shorter courses equally effective for most infections"] },
+            mechanism: { title: "Antibiotic Stewardship in CDI", content: "CRITICAL STEPS:\n1. Stop all unnecessary antibiotics immediately\n2. If antibiotics needed, use lowest-risk options\n3. Use shortest effective duration\n4. Avoid fluoroquinolones, clindamycin if possible\n\nLOWER-RISK OPTIONS (if needed):\n• Doxycycline, macrolides, TMP-SMX\n• Aminoglycosides (minimal anaerobe disruption)" },
+            pearl: "Every unnecessary antibiotic day delays microbiome recovery. Be aggressive about stopping or narrowing.",
+            pitfall: "Don't reflexively extend antibiotics 'to be safe.' Complete courses are often shorter than traditionally taught."
+        },
+        {
+            id: 6,
+            title: "Day 3 Reassessment",
+            scenario: "Day 3 on oral vancomycin 125mg QID.\n\nProgress:\n• Diarrhea improved: 5-6 episodes/day (was 10-12)\n• Less abdominal pain\n• Temp 99.1°F (was 101.2°F)\n• WBC 14,200 (was 18,500)\n• Cr 1.3 (was 1.6)\n• Still has loose stools",
+            question: "How do you interpret this response and what's your next step?",
+            options: [
+                { id: "A", text: "Treatment failure - switch to fidaxomicin", outcome: "Premature escalation", feedback: "This is appropriate clinical response! CDI improvement takes 3-5 days. She's trending in right direction.", points: 2, isOptimal: false },
+                { id: "B", text: "Appropriate response - continue vancomycin, reassess at end of course", outcome: "Correct management", feedback: "Correct! Clinical improvement by day 3-5 is expected. Complete 10-day course. Full resolution may take longer.", points: 10, isOptimal: true },
+                { id: "C", text: "Add IV metronidazole for synergy", outcome: "Unnecessary combination", feedback: "Combination therapy only for fulminant CDI. She's responding to vancomycin alone.", points: 0, isOptimal: false },
+                { id: "D", text: "Order repeat C. diff testing to confirm cure", outcome: "Don't test during treatment", feedback: "Never repeat C. diff testing to assess response or cure! Tests remain positive for weeks even with successful treatment.", points: 1, isOptimal: false }
+            ],
+            whyChain: { title: "WHY doesn't diarrhea resolve immediately?", steps: ["Toxins already produced continue causing mucosal damage", "Epithelial recovery takes days to weeks", "Microbiome restoration is gradual", "Clinical improvement precedes complete resolution", "Full diarrhea resolution may take 2+ weeks even with successful treatment"] },
+            mechanism: { title: "Expected Treatment Response", content: "TYPICAL TIMELINE:\nDay 1-2: Minimal change expected\nDay 3-5: Fever, WBC, diarrhea should start improving\nDay 7-10: Significant clinical improvement\n2-4 weeks: Complete symptom resolution\n\nWHEN TO WORRY:\n• No improvement by day 5-7\n• Worsening despite treatment\n• New ileus, distension, hypotension" },
+            pearl: "Patience is key! CDI takes 3-5 days to show improvement. Don't abandon effective therapy too early.",
+            pitfall: "NEVER repeat C. diff testing during or after treatment to 'confirm cure.' PCR stays positive for weeks. Test only if NEW symptoms after completing therapy."
+        },
+        {
+            id: 7,
+            title: "Completion of Treatment",
+            scenario: "Day 10: Completed vancomycin course.\n\n• Diarrhea resolved - 1-2 formed stools daily\n• No abdominal pain\n• Labs normalized\n• Appetite returning\n\nShe asks: 'Am I cured? Will this come back?'",
+            question: "What do you tell her about recurrence risk and prevention?",
+            options: [
+                { id: "A", text: "Very low recurrence risk - she completed full treatment", outcome: "Underestimates risk", feedback: "Unfortunately, CDI recurrence is common - 15-30% after first episode. She has risk factors (age, antibiotics).", points: 3, isOptimal: false },
+                { id: "B", text: "15-30% recurrence risk; consider bezlotoxumab for high-risk patients", outcome: "Accurate counseling", feedback: "Correct! Recurrence affects 15-30% after first episode. Bezlotoxumab (anti-toxin B antibody) reduces recurrence risk and should be considered in high-risk patients.", points: 10, isOptimal: true },
+                { id: "C", text: "Take probiotics indefinitely to prevent recurrence", outcome: "Insufficient evidence", feedback: "Probiotics have weak evidence for recurrence prevention. Better options exist for high-risk patients.", points: 4, isOptimal: false },
+                { id: "D", text: "Schedule monthly vancomycin pulses for prophylaxis", outcome: "Not recommended", feedback: "Prophylactic vancomycin not recommended. Focus on antibiotic stewardship and specific high-risk interventions.", points: 2, isOptimal: false }
+            ],
+            whyChain: { title: "WHY is recurrence so common?", steps: ["C. diff spores persist in colon and environment", "Microbiome remains disrupted for weeks-months after CDI", "Inadequate anti-toxin antibody response predicts recurrence", "Reinfection from environment and persistent spores", "Each recurrence increases risk of subsequent recurrence"] },
+            mechanism: { title: "CDI Recurrence Facts", content: "RECURRENCE RATES:\n• After 1st episode: 15-30%\n• After 1st recurrence: 40-60%\n• After 2nd recurrence: >60%\n\nRISK FACTORS FOR RECURRENCE:\n• Age >65\n• Continued antibiotic use\n• PPIs, immunosuppression\n• Severe initial episode\n• Prior CDI history\n\nBEZLOTOXUMAB (anti-toxin B antibody):\n• Single IV infusion during treatment\n• Reduces recurrence by ~40%\n• Consider if: age >65, severe CDI, immunocompromised, prior episode" },
+            pearl: "Each CDI recurrence increases risk of the next. Be proactive about prevention, especially bezlotoxumab in high-risk patients.",
+            pitfall: "Don't assume 'cure' means 'never again.' Counsel all patients about recurrence risk and signs to watch for."
+        },
+        {
+            id: 8,
+            title: "First Recurrence",
+            scenario: "5 weeks later, she returns with recurrent watery diarrhea (8 episodes/day). She required amoxicillin-clavulanate 2 weeks ago for a UTI.\n\nC. diff testing:\n• GDH: Positive\n• Toxin EIA: Positive\n\nWBC 12,000, Cr 1.1 (normal for her now)",
+            question: "How do you treat this first recurrence?",
+            options: [
+                { id: "A", text: "Same treatment - vancomycin 125mg QID x 10 days", outcome: "Acceptable but not optimal", feedback: "Standard vancomycin is acceptable but has high re-recurrence rate. Pulsed/tapered regimen or fidaxomicin preferred.", points: 5, isOptimal: false },
+                { id: "B", text: "Fidaxomicin 200mg BID x 10 days (preferred for recurrence)", outcome: "Optimal for recurrence", feedback: "Correct! Fidaxomicin is preferred for first recurrence due to lower re-recurrence rates compared to standard vancomycin.", points: 10, isOptimal: true },
+                { id: "C", text: "Vancomycin tapered/pulsed regimen over 6 weeks", outcome: "Good alternative", feedback: "This is also a good choice for recurrence. Pulsed regimen allows spore germination between doses.", points: 9, isOptimal: false },
+                { id: "D", text: "Refer for immediate FMT", outcome: "Premature", feedback: "FMT is generally reserved for 2+ recurrences despite appropriate antibiotic therapy.", points: 4, isOptimal: false }
+            ],
+            whyChain: { title: "WHY different treatment for recurrence?", steps: ["Standard 10-day regimens have ~40-60% re-recurrence rate", "Fidaxomicin preserves microbiome better than vancomycin", "Pulsed vancomycin allows spores to germinate then kills vegetative cells", "Extended regimens give microbiome more time to recover", "Breaking the recurrence cycle requires different approach"] },
+            mechanism: { title: "Recurrence Treatment Options", content: "FIRST RECURRENCE:\n• Preferred: Fidaxomicin 200mg BID x 10 days\n• Alternative: Vancomycin tapered/pulsed:\n  - 125mg QID x 10-14 days\n  - 125mg BID x 7 days\n  - 125mg daily x 7 days\n  - 125mg q2-3 days x 2-8 weeks\n\n2+ RECURRENCES:\n• Consider FMT\n• Bezlotoxumab if not given previously\n• Extended pulsed vancomycin\n• Fidaxomicin extended regimen" },
+            pearl: "Fidaxomicin's narrow spectrum preserves Bacteroides and reduces recurrence. Worth the cost for recurrence.",
+            pitfall: "Don't just repeat the same 10-day vancomycin course that already failed. Use pulsed regimen or fidaxomicin."
+        },
+        {
+            id: 9,
+            title: "Multiple Recurrences - FMT Consideration",
+            scenario: "3 months later: Third episode of CDI despite fidaxomicin for the second recurrence.\n\nShe's frustrated and exhausted. Quality of life is significantly impacted.\n\nC. diff toxin EIA: Positive again\nWBC 10,500, Cr 1.0, otherwise stable",
+            question: "What treatment option should be discussed for this multiply recurrent CDI?",
+            options: [
+                { id: "A", text: "Another course of fidaxomicin with extended taper", outcome: "Unlikely to break cycle", feedback: "Multiple recurrences despite fidaxomicin suggests antibiotic approaches alone won't work. Time for microbiome restoration.", points: 3, isOptimal: false },
+                { id: "B", text: "Fecal microbiota transplantation (FMT)", outcome: "Appropriate for multiple recurrences", feedback: "Correct! FMT is highly effective (85-90% cure rate) for multiply recurrent CDI. Restores microbiome diversity.", points: 10, isOptimal: true },
+                { id: "C", text: "Long-term suppressive vancomycin", outcome: "Not recommended", feedback: "Chronic suppression perpetuates dysbiosis and doesn't address underlying microbiome depletion.", points: 2, isOptimal: false },
+                { id: "D", text: "Surgical colectomy for refractory disease", outcome: "Reserved for fulminant/complicated", feedback: "Colectomy is reserved for fulminant CDI with perforation/toxic megacolon, not recurrent uncomplicated disease.", points: 0, isOptimal: false }
+            ],
+            whyChain: { title: "WHY does FMT work?", steps: ["Healthy donor stool contains diverse microbiome", "Transplanted bacteria restore 'colonization resistance'", "Normal flora outcompete C. diff for nutrients and space", "Bacteria produce bacteriocins and short-chain fatty acids inhibiting C. diff", "Single FMT can durably restore microbiome ecology"] },
+            mechanism: { title: "Fecal Microbiota Transplantation", content: "INDICATIONS:\n• 2+ recurrences despite appropriate antibiotics\n• Refractory CDI not responding to standard therapy\n\nDELIVERY METHODS:\n• Colonoscopy (highest success)\n• Encapsulated oral preparations (SER-109, Vowst)\n• Enema (less effective)\n\nSUCCESS RATES:\n• 85-90% cure after single FMT\n• >95% with repeat FMT if needed\n\nFDA-APPROVED OPTIONS:\n• Rebyota (fecal microbiota live-jslm)\n• Vowst (fecal microbiota spores live-brpk)" },
+            pearl: "FDA-approved FMT products now exist! Vowst is an oral capsule option. Don't delay referral for multiply recurrent CDI.",
+            pitfall: "FMT is NOT for first episode or first recurrence. But don't wait until patients have 5+ recurrences either - 2-3 recurrences is appropriate timing."
+        },
+        {
+            id: 10,
+            title: "Prevention Strategies",
+            scenario: "After successful FMT, she's been CDI-free for 6 months.\n\nNow she needs a hip replacement. The surgeon asks about perioperative antibiotic prophylaxis.\n\nShe's concerned: 'Will I get C. diff again from the surgery antibiotics?'",
+            question: "What CDI prevention strategies should be implemented?",
+            options: [
+                { id: "A", text: "Avoid all antibiotics - the surgery risk is too high", outcome: "Inappropriate - prophylaxis is standard", feedback: "Surgical prophylaxis is standard of care for hip replacement. Goal is minimizing CDI risk, not avoiding necessary antibiotics.", points: 0, isOptimal: false },
+                { id: "B", text: "Standard cefazolin prophylaxis only; probiotics for prevention", outcome: "Insufficient prevention strategy", feedback: "Probiotics have limited evidence. More robust prevention needed for someone with CDI history.", points: 4, isOptimal: false },
+                { id: "C", text: "Cefazolin prophylaxis + vancomycin secondary prophylaxis during/after antibiotics", outcome: "Reasonable approach", feedback: "Vancomycin secondary prophylaxis during high-risk antibiotic courses is supported for patients with prior CDI.", points: 8, isOptimal: false },
+                { id: "D", text: "Shortest effective cefazolin course + oral vancomycin prophylaxis + avoid PPIs + bezlotoxumab consideration", outcome: "Comprehensive prevention bundle", feedback: "Excellent! Multimodal approach: minimize antibiotic duration, consider vancomycin prophylaxis, deprescribe PPIs, consider bezlotoxumab for high-risk patients.", points: 10, isOptimal: true }
+            ],
+            whyChain: { title: "WHY multimodal prevention?", steps: ["No single intervention completely prevents CDI", "Antibiotic stewardship reduces but doesn't eliminate risk", "Secondary prophylaxis provides additional protection", "PPI deprescribing removes a modifiable risk factor", "Bezlotoxumab provides passive immunity against toxin B"] },
+            mechanism: { title: "CDI Prevention Strategies", content: "ANTIBIOTIC STEWARDSHIP:\n• Shortest effective courses\n• Avoid high-risk agents when possible\n• De-escalate promptly\n\nSECONDARY PROPHYLAXIS:\n• Oral vancomycin 125mg daily during high-risk antibiotics\n• Consider for patients with prior CDI\n\nDEPRESCRIBING:\n• Stop PPIs if not clearly indicated\n• Stop unnecessary acid suppression\n\nBEZLOTOXUMAB:\n• Consider in high-risk patients before antibiotic exposure\n\nINFECTION CONTROL:\n• Hand hygiene (soap and water > alcohol)\n• Contact precautions\n• Environmental cleaning with sporicidal agents" },
+            pearl: "Hand hygiene with SOAP AND WATER is critical. Alcohol-based sanitizers do NOT kill C. diff spores!",
+            pitfall: "Don't assume FMT 'cured' the underlying susceptibility. Patients with CDI history remain at higher risk and need prevention strategies for future antibiotic exposures."
+        }
+    ]
+};
+
+let currentStage = 1, totalScore = 0, maxPossibleScore = 0, answeredStages = {};
+
+function init() {
+    caseData.stages.forEach(s => { maxPossibleScore += Math.max(...s.options.map(o => o.points)); });
+    renderStage(currentStage);
+}
+
+function renderStage(stageNum) {
+    const stage = caseData.stages[stageNum - 1];
+    if (!stage) { renderSummary(); return; }
+    const answered = answeredStages[stageNum];
+    const container = document.getElementById('gameContainer');
+    container.innerHTML = `
+        <div class="stage-card bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div class="bg-gradient-to-r from-green-600 to-teal-600 text-white p-6">
+                <div class="flex justify-between items-center">
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Stage ${stageNum} of ${caseData.totalStages}</span>
+                </div>
+                <h2 class="text-2xl font-bold mt-3">${stage.title}</h2>
+            </div>
+            <div class="p-6">
+                <div class="bg-slate-50 rounded-xl p-5 mb-6">
+                    <h3 class="font-semibold text-gray-700 mb-2">📋 Clinical Scenario</h3>
+                    <div class="text-gray-700 whitespace-pre-line">${stage.scenario}</div>
+                </div>
+                <div class="bg-green-50 rounded-xl p-5 mb-6">
+                    <h3 class="font-semibold text-green-800 mb-2">🤔 Clinical Question</h3>
+                    <p class="text-green-900 font-medium">${stage.question}</p>
+                </div>
+                <div class="space-y-3">
+                    ${stage.options.map(opt => `
+                        <button onclick="selectOption(${stageNum}, '${opt.id}')" ${answered ? 'disabled' : ''}
+                            class="w-full text-left p-4 rounded-xl border-2 transition-all
+                                ${answered && answered.selected === opt.id ? (opt.isOptimal ? 'border-green-500 bg-green-50' : 'border-amber-500 bg-amber-50')
+                                    : answered && opt.isOptimal ? 'border-green-500 bg-green-50' : 'border-gray-200 hover:border-green-300 hover:bg-green-50'}
+                                ${answered ? 'cursor-default' : 'cursor-pointer'}">
+                            <div class="flex items-start gap-3">
+                                <span class="flex-shrink-0 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center font-bold ${answered && opt.isOptimal ? 'bg-green-500 text-white' : ''}">${opt.id}</span>
+                                <span class="font-medium">${opt.text}</span>
+                            </div>
+                        </button>
+                    `).join('')}
+                </div>
+                ${answered ? renderFeedback(stage, answered) : ''}
+            </div>
+        </div>`;
+    updateProgress();
+}
+
+function renderFeedback(stage, answered) {
+    const selected = stage.options.find(o => o.id === answered.selected);
+    const optimal = stage.options.find(o => o.isOptimal);
+    return `
+        <div class="mt-6 space-y-4">
+            <div class="${selected.isOptimal ? 'bg-green-50 border-green-200' : 'bg-amber-50 border-amber-200'} border rounded-xl p-5">
+                <h4 class="font-bold ${selected.isOptimal ? 'text-green-800' : 'text-amber-800'} mb-2">${selected.isOptimal ? '✅ Optimal!' : '⚠️ ' + selected.outcome}</h4>
+                <p class="text-gray-700">${selected.feedback}</p>
+                <div class="mt-3 text-sm font-medium ${selected.isOptimal ? 'text-green-600' : 'text-amber-600'}">Points: +${selected.points}/${Math.max(...stage.options.map(o => o.points))}</div>
+            </div>
+            ${!selected.isOptimal ? `<div class="bg-green-50 border border-green-200 rounded-xl p-5"><h4 class="font-bold text-green-800 mb-2">✅ Optimal: ${optimal.text}</h4><p class="text-gray-700">${optimal.feedback}</p></div>` : ''}
+            <div class="why-chain rounded-xl p-5">
+                <h4 class="font-bold text-blue-800 mb-3">🔗 ${stage.whyChain.title}</h4>
+                <div class="space-y-2">${stage.whyChain.steps.map((step, i) => `<div class="flex items-start gap-3"><span class="flex-shrink-0 w-6 h-6 rounded-full bg-blue-200 text-blue-800 flex items-center justify-center text-sm font-bold">${i + 1}</span><span class="text-gray-700">${step}</span></div>`).join('')}</div>
+            </div>
+            <div class="mechanism-box rounded-xl p-5">
+                <h4 class="font-bold text-green-800 mb-3">⚙️ ${stage.mechanism.title}</h4>
+                <div class="text-gray-700 whitespace-pre-line text-sm">${stage.mechanism.content}</div>
+            </div>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="pearl-box rounded-xl p-4"><h4 class="font-bold text-yellow-800 mb-2">💎 Pearl</h4><p class="text-gray-700 text-sm">${stage.pearl}</p></div>
+                <div class="pitfall-box rounded-xl p-4"><h4 class="font-bold text-red-800 mb-2">⚠️ Pitfall</h4><p class="text-gray-700 text-sm">${stage.pitfall}</p></div>
+            </div>
+            <button onclick="nextStage()" class="w-full mt-4 py-4 bg-gradient-to-r from-green-600 to-teal-600 text-white rounded-xl font-bold text-lg hover:from-green-700 hover:to-teal-700">
+                ${currentStage < caseData.totalStages ? 'Continue to Stage ' + (currentStage + 1) + ' →' : 'View Summary →'}
+            </button>
+        </div>`;
+}
+
+function selectOption(stageNum, optionId) {
+    if (answeredStages[stageNum]) return;
+    const stage = caseData.stages[stageNum - 1];
+    const option = stage.options.find(o => o.id === optionId);
+    answeredStages[stageNum] = { selected: optionId, points: option.points };
+    totalScore += option.points;
+    renderStage(stageNum);
+}
+
+function nextStage() {
+    currentStage++;
+    if (currentStage > caseData.totalStages) { renderSummary(); }
+    else { renderStage(currentStage); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+}
+
+function updateProgress() {
+    const progress = (Object.keys(answeredStages).length / caseData.totalStages) * 100;
+    document.getElementById('progressBar').style.width = progress + '%';
+    document.getElementById('score').textContent = Math.round((totalScore / maxPossibleScore) * 100) + '%';
+}
+
+function renderSummary() {
+    const pct = Math.round((totalScore / maxPossibleScore) * 100);
+    let grade = pct >= 90 ? 'A' : pct >= 80 ? 'B' : pct >= 70 ? 'C' : 'D';
+    document.getElementById('gameContainer').classList.add('hidden');
+    document.getElementById('summaryPanel').classList.remove('hidden');
+    document.getElementById('summaryPanel').innerHTML = `
+        <div class="bg-white rounded-2xl shadow-lg p-8">
+            <div class="text-center mb-8">
+                <div class="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-teal-600 mb-2">${grade}</div>
+                <div class="text-3xl font-bold text-gray-800">${pct}%</div>
+            </div>
+            <div class="bg-slate-50 rounded-xl p-6 mb-6">
+                <h3 class="font-bold text-xl mb-4">📚 Key Learning Points</h3>
+                <ul class="space-y-2 text-gray-700">
+                    <li>✓ Multi-step testing (GDH/toxin EIA or NAAT + toxin) distinguishes infection from colonization</li>
+                    <li>✓ Severity: WBC ≥15,000 OR Cr >1.5x baseline = SEVERE</li>
+                    <li>✓ Severe CDI: Oral vancomycin or fidaxomicin (NOT metronidazole)</li>
+                    <li>✓ Stop offending antibiotics immediately</li>
+                    <li>✓ Never test to confirm cure - only test for new symptoms</li>
+                    <li>✓ Recurrence: 15-30% after first episode; use fidaxomicin or tapered vancomycin</li>
+                    <li>✓ FMT for 2+ recurrences (85-90% cure rate)</li>
+                </ul>
+            </div>
+            <button onclick="resetGame()" class="w-full py-4 bg-gradient-to-r from-green-600 to-teal-600 text-white rounded-xl font-bold">🔄 Restart Case</button>
+        </div>`;
+}
+
+function resetGame() {
+    currentStage = 1; totalScore = 0; answeredStages = {};
+    document.getElementById('gameContainer').classList.remove('hidden');
+    document.getElementById('summaryPanel').classList.add('hidden');
+    renderStage(1);
+}
+
+init();
+    </script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+/* Enhanced Feature Styles */
+.rdx-difficulty-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 300px;
+}
+.rdx-diff-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin: 2px;
+}
+.rdx-diff-btn.active {
+    background: #3b82f6;
+    color: white;
+}
+.rdx-diff-btn:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+}
+.rdx-diff-btn:hover:not(.active) {
+    background: #e2e8f0;
+}
+.rdx-refs-panel {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #93c5fd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+.rdx-refs-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+.rdx-refs-links {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+.rdx-refs-links a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.rdx-refs-links a:hover {
+    text-decoration: underline;
+}
+.rdx-debrief-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rdx-debrief-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #1f2937;
+}
+.rdx-path-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.rdx-path-optimal {
+    background: #dcfce7;
+    border-left: 4px solid #22c55e;
+}
+.rdx-path-suboptimal {
+    background: #fef9c3;
+    border-left: 4px solid #eab308;
+}
+.rdx-path-wrong {
+    background: #fecaca;
+    border-left: 4px solid #ef4444;
+}
+.rdx-hint-beginner {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+.rdx-hint-advanced {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+</style>
+
+<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
+    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
+        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    </div>
+</div>
+
+
+<!-- CROSS-PLATFORM LEARNING LINKS -->
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
+            <a href="../mechanism/infectious-disease-module.html" style="display: block; color: #2563eb; font-size: 14px;">→ C. diff</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
+            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="acute-abdomen-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Acute Abdomen</a>
+            <a href="gi-bleed-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Gi Bleed</a>
+            <a href="cholecystitis-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Cholecystitis</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
+            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../CoachDx/mentor-chat.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../CoachDx/sbar-trainer.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+<!-- END CROSS-PLATFORM LINKS -->
+<div class="rdx-refs-panel" id="rdxRefsPanel">
+    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
+    <div class="rdx-refs-links"><a href="https://gi.org/guidelines/" target="_blank" class="text-blue-600 hover:underline">ACG Guidelines</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK470300/" target="_blank" class="text-blue-600 hover:underline">StatPearls: GI Bleeding</a></div>
+</div>
+
+<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
+    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+</div>
+
+<script>
+// ReasonDx Enhanced Features Module
+(function() {
+    // Decision tracking
+    window.rdxDecisionPath = window.rdxDecisionPath || [];
+    window.rdxTotalScore = window.rdxTotalScore || 0;
+    window.rdxMaxScore = window.rdxMaxScore || 0;
+    window.rdxDifficulty = 'intermediate';
+    
+    // Difficulty control
+    window.rdxSetDifficulty = function(level) {
+        window.rdxDifficulty = level;
+        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('rdx-btn-' + level).classList.add('active');
+        
+        // Update hint visibility
+        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
+            el.style.display = level === 'beginner' ? 'block' : 'none';
+        });
+        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
+            el.style.display = level === 'advanced' ? 'block' : 'none';
+        });
+    };
+    
+    // Track a decision
+    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+        window.rdxDecisionPath.push({
+            stage: stageId,
+            title: stageTitle,
+            choice: choiceId,
+            choiceText: choiceText,
+            outcome: outcome,
+            points: points,
+            maxPoints: maxPoints,
+            isOptimal: isOptimal,
+            optimalChoice: optimalChoice,
+            optimalText: optimalText
+        });
+        window.rdxTotalScore += points;
+        window.rdxMaxScore += maxPoints;
+    };
+    
+    // Show visual debrief
+    window.rdxShowDebrief = function() {
+        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
+        
+        let grade, gradeColor, gradeEmoji;
+        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
+        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
+        
+        let pathHTML = '';
+        if (window.rdxDecisionPath.length > 0) {
+            pathHTML = window.rdxDecisionPath.map(d => {
+                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
+                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
+                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
+                return '<div class="' + pathClass + ' rdx-path-item">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
+                    '<div>' +
+                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
+                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
+                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
+                    '</div>' +
+                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
+                    '</div></div>';
+            }).join('');
+        } else {
+            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+        }
+        
+        document.getElementById('rdxDebriefContent').innerHTML = 
+            '<div style="text-align:center;margin-bottom:24px;">' +
+            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
+            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
+            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
+            '</div></div>' +
+            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
+            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
+            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
+            '</div></div>' +
+            '<div style="display:flex;gap:12px;">' +
+            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '</div>';
+        
+        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
+    };
+    
+    // Auto-inject hint examples into existing content
+    window.rdxInit = function() {
+        // Could add dynamic hint injection here based on difficulty
+        console.log('ReasonDx Enhanced Features loaded for: Cdiff Expanded Adventure');
+    };
+    
+    // Initialize on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.rdxInit);
+    } else {
+        window.rdxInit();
+    }
+})();
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+</body>
+</html>

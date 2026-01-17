@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Immunodeficiency Workup - Expanded Deep Dive Adventure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .stage-card { transition: all 0.3s ease; }
+        .why-chain { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); }
+        .mechanism-box { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); }
+        .pearl-box { background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%); }
+        .pitfall-box { background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-indigo-50 min-h-screen">
+    <div id="app" class="container mx-auto px-4 py-8 max-w-5xl">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between flex-wrap gap-4">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">🛡️ Immunodeficiency Workup</h1>
+                    <p class="text-gray-500 mt-1">Expanded Deep Dive Adventure • 10 Stages</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="text-right">
+                        <div class="text-sm text-gray-500">Progress</div>
+                        <div class="text-2xl font-bold text-indigo-600" id="score">0%</div>
+                    </div>
+                    <button onclick="resetGame()" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium">🔄 Restart</button>
+                </div>
+            </div>
+            <div class="mt-4 h-3 bg-gray-100 rounded-full overflow-hidden">
+                <div id="progressBar" class="h-full bg-gradient-to-r from-indigo-500 to-purple-500 transition-all duration-500" style="width: 0%"></div>
+            </div>
+        </div>
+        <div id="gameContainer" class="space-y-6"></div>
+        <div id="summaryPanel" class="hidden"></div>
+    </div>
+    <script>
+const caseData = {
+    title: "Immunodeficiency Workup",
+    totalStages: 10,
+    stages: [
+        {
+            id: 1,
+            title: "The Recurrent Infection Pattern",
+            scenario: "A 32-year-old man is referred for evaluation of recurrent infections. Over the past 5 years:\n• 4 episodes of bacterial pneumonia (2 requiring hospitalization)\n• 3 episodes of acute bacterial sinusitis requiring antibiotics\n• 2 episodes of bacterial conjunctivitis\n• 1 episode of Giardia enteritis\n• Chronic productive cough between acute episodes\n\nPMH: Childhood 'ear infections' (tubes placed), mild asthma\nFamily Hx: Sister has 'low immune system' - on monthly infusions\nMedications: Albuterol PRN\nVitals and exam unremarkable except for mildly enlarged tonsils",
+            question: "What pattern of infections suggests the most likely immune defect?",
+            options: [
+                { id: "A", text: "T-cell deficiency - viral and fungal infections predominate", outcome: "Wrong infection pattern", feedback: "T-cell defects cause opportunistic infections (PCP, CMV, Candida, Crypto). This patient has encapsulated BACTERIAL infections and Giardia - classic antibody deficiency pattern.", points: 2, isOptimal: false },
+                { id: "B", text: "Antibody (B-cell) deficiency - sinopulmonary bacterial infections", outcome: "Correct pattern recognition", feedback: "Excellent! Recurrent sinopulmonary infections with encapsulated bacteria (Strep pneumo, H. flu) + Giardia = classic antibody deficiency. Family history of sister on 'infusions' (likely IVIG) supports this.", points: 10, isOptimal: true },
+                { id: "C", text: "Neutrophil defect - skin abscesses and deep-seated infections", outcome: "Wrong infection pattern", feedback: "Neutrophil defects cause skin infections, abscesses, lymphadenitis, and infections with catalase-positive organisms (Staph, Aspergillus). This isn't his pattern.", points: 2, isOptimal: false },
+                { id: "D", text: "Complement deficiency - Neisseria infections", outcome: "Wrong infection pattern", feedback: "Terminal complement defects cause recurrent Neisseria (meningococcus, gonococcus). He has sinopulmonary infections, not meningitis or disseminated gonococcal infection.", points: 2, isOptimal: false }
+            ],
+            whyChain: { title: "WHY does antibody deficiency cause THIS pattern?", steps: ["Antibodies opsonize encapsulated bacteria (Strep pneumo, H. flu, Moraxella)", "Without antibodies, these bacteria evade phagocytosis", "Respiratory tract is constantly exposed → recurrent sinopulmonary infections", "Giardia is cleared by IgA in gut → Giardia susceptibility is classic for antibody deficiency", "Sister's 'monthly infusions' = IVIG replacement, suggesting familial antibody deficiency"] },
+            mechanism: { title: "Infection Patterns by Immune Defect", content: "ANTIBODY DEFICIENCY:\n• Sinopulmonary infections (pneumonia, sinusitis, otitis)\n• Encapsulated bacteria: S. pneumo, H. flu, Moraxella\n• GI: Giardia, Campylobacter, chronic enteropathy\n• May have bronchiectasis from recurrent infections\n\nT-CELL DEFICIENCY:\n• Opportunistic infections: PCP, CMV, EBV, HSV\n• Fungal: Candida, Cryptococcus, Histoplasma\n• Mycobacteria (including atypical)\n• Severe viral infections\n\nNEUTROPHIL DEFECTS:\n• Skin abscesses, cellulitis\n• Lymphadenitis, hepatic abscesses\n• Catalase-positive: Staph, Aspergillus, Nocardia, Serratia\n\nCOMPLEMENT DEFICIENCY:\n• Terminal (C5-C9): Neisseria meningitidis/gonorrhoeae\n• Early (C1-C4): Autoimmunity + encapsulated bacteria" },
+            pearl: "The SPUR mnemonic for antibody deficiency infections: Sinopulmonary (sinusitis, pneumonia), Persistent, Unusual (Giardia), Recurrent. If you see this pattern, check immunoglobulins!",
+            pitfall: "Don't assume asthma explains recurrent respiratory infections. True asthma causes wheeze and obstruction, not bacterial pneumonia. Recurrent bacterial infections warrant immunodeficiency workup."
+        },
+        {
+            id: 2,
+            title: "Initial Laboratory Evaluation",
+            scenario: "You suspect antibody deficiency based on the clinical pattern.\n\nBefore ordering tests, you review his prior records:\n• CBC from 6 months ago: WBC 6.2, normal differential, lymphocytes 1,800\n• No previous immunology workup\n• Has received all routine childhood vaccines per records",
+            question: "What is the most appropriate FIRST-LINE immunology workup?",
+            options: [
+                { id: "A", text: "Flow cytometry for T and B cell subsets", outcome: "Too advanced for first-line", feedback: "Flow cytometry is important but comes AFTER quantitative immunoglobulins. Always start with the simplest test that can diagnose the most common conditions.", points: 4, isOptimal: false },
+                { id: "B", text: "Quantitative immunoglobulins (IgG, IgA, IgM)", outcome: "Correct first-line test", feedback: "Correct! Quantitative Igs are the cornerstone of antibody deficiency evaluation. Simple, widely available, and directly measures the suspected defect. Always start here.", points: 10, isOptimal: true },
+                { id: "C", text: "Genetic testing for common variable immunodeficiency genes", outcome: "Premature without phenotype", feedback: "Genetic testing may be useful eventually, but most CVID is genetically undefined. Establish the immunological phenotype first with Ig levels and functional antibody assessment.", points: 2, isOptimal: false },
+                { id: "D", text: "Vaccine response titers to assess antibody function", outcome: "Important but second-line", feedback: "Vaccine responses assess antibody FUNCTION, which is crucial. However, check quantitative Igs first - if IgG is very low, vaccine responses will obviously be impaired.", points: 6, isOptimal: false }
+            ],
+            whyChain: { title: "WHY start with quantitative immunoglobulins?", steps: ["Directly measures the suspected defect (low antibodies)", "Simple blood test, widely available, inexpensive", "Can diagnose common conditions: CVID, XLA, IgA deficiency", "Results guide need for additional testing", "If normal, shifts focus away from antibody deficiency"] },
+            mechanism: { title: "First-Line Immunodeficiency Workup", content: "INITIAL SCREEN (suspected antibody deficiency):\n1. Quantitative IgG, IgA, IgM\n2. CBC with differential (lymphocyte count)\n3. Consider: protein electrophoresis if low total protein\n\nSECOND-LINE (if Igs abnormal or high suspicion):\n4. Vaccine response titers (diphtheria, tetanus, pneumococcal)\n5. B cell count (CD19+ or CD20+)\n6. IgG subclasses (if total IgG borderline)\n\nTHIRD-LINE:\n7. T cell subsets (CD4, CD8)\n8. Specific antibody response to vaccination challenge\n9. Genetic testing if phenotype unclear\n\nCOMPLEMENT (if suspected):\n• CH50 (total hemolytic complement)\n• Individual components if CH50 abnormal" },
+            pearl: "The immunodeficiency workup follows a logical sequence. Don't skip steps! Quantitative immunoglobulins → vaccine responses → lymphocyte subsets → genetics.",
+            pitfall: "Don't order expensive genetic panels before establishing the basic immunological phenotype. The genes for most CVID cases remain unknown anyway."
+        },
+        {
+            id: 3,
+            title: "Interpreting Results",
+            scenario: "Lab results return:\n\nQuantitative Immunoglobulins:\n• IgG: 285 mg/dL (normal 700-1600)\n• IgA: <7 mg/dL (normal 70-400)\n• IgM: 42 mg/dL (normal 40-230)\n\nCBC: WBC 5.8, lymphocytes 1,650 (normal)\nTotal protein: 5.2 g/dL (normal 6.0-8.3)",
+            question: "How do you interpret these immunoglobulin results?",
+            options: [
+                { id: "A", text: "Selective IgA deficiency - IgA is undetectable", outcome: "Incomplete interpretation", feedback: "IgA deficiency is present, but IgG is ALSO severely low (285 vs normal >700). This is panhypogammaglobulinemia, not selective IgA deficiency.", points: 3, isOptimal: false },
+                { id: "B", text: "Panhypogammaglobulinemia - markedly low IgG and IgA with low-normal IgM", outcome: "Correct interpretation", feedback: "Exactly right! IgG is markedly reduced (~40% of lower limit), IgA undetectable, IgM at lower limit. This is panhypogammaglobulinemia consistent with Common Variable Immunodeficiency (CVID).", points: 10, isOptimal: true },
+                { id: "C", text: "Secondary hypogammaglobulinemia - likely from protein loss", outcome: "Possible but unlikely primary", feedback: "The low total protein could suggest loss/poor production, but his clinical history (recurrent infections from childhood, family history) strongly favors primary immunodeficiency.", points: 5, isOptimal: false },
+                { id: "D", text: "Normal variant - some people run low immunoglobulins", outcome: "Dangerous normalization", feedback: "IgG of 285 is NOT a normal variant - it's severely low. Combined with his infection history, this is pathological hypogammaglobulinemia requiring treatment.", points: 0, isOptimal: false }
+            ],
+            whyChain: { title: "WHY does low IgG cause most of his symptoms?", steps: ["IgG is the predominant serum antibody (~75% of total Ig)", "IgG1 and IgG2 opsonize encapsulated bacteria", "IgG2 is particularly important for polysaccharide responses", "Low IgG = poor opsonization = recurrent bacterial infections", "IgA protects mucosal surfaces - low IgA contributes to respiratory and GI infections"] },
+            mechanism: { title: "Interpreting Immunoglobulin Levels", content: "NORMAL ADULT RANGES (approximate):\n• IgG: 700-1600 mg/dL (predominant, longest half-life)\n• IgA: 70-400 mg/dL (mucosal immunity)\n• IgM: 40-230 mg/dL (primary response, pentamer)\n\nSEVERITY ASSESSMENT:\n• Mild: IgG 400-600\n• Moderate: IgG 200-400\n• Severe: IgG <200\n\nPATTERNS:\n• Panhypogammaglobulinemia (all low): CVID, XLA, secondary\n• Selective IgA deficiency: IgA <7 with normal IgG/IgM\n• IgG subclass deficiency: Low subclass with normal total IgG\n• Hyper-IgM: Low IgG/IgA with elevated IgM (class switch defect)\n\nSECONDARY CAUSES TO CONSIDER:\n• Protein-losing enteropathy\n• Nephrotic syndrome\n• Medications (rituximab, immunosuppressants)\n• Malignancy (CLL, myeloma with suppression)" },
+            pearl: "Low total protein (5.2 g/dL) with low IgG makes sense - immunoglobulins are a major component of serum protein. This confirms the Ig measurement isn't an error.",
+            pitfall: "Don't dismiss severely low IgG as 'lab variation.' Repeat if uncertain, but an IgG of 285 in a patient with recurrent infections is diagnostic, not borderline."
+        },
+        {
+            id: 4,
+            title: "Confirming the Diagnosis",
+            scenario: "You suspect Common Variable Immunodeficiency (CVID). To confirm the diagnosis, you need to assess antibody FUNCTION, not just quantity.\n\nHis vaccine history shows he received all childhood vaccines including pneumococcal conjugate (Prevnar) and DTaP.\n\nYou order specific antibody titers:\n• Tetanus IgG: 0.08 IU/mL (protective >0.1)\n• Diphtheria IgG: 0.05 IU/mL (protective >0.1)\n• Pneumococcal serotype antibodies: 2/23 serotypes protective",
+            question: "What do these vaccine response results indicate?",
+            options: [
+                { id: "A", text: "Normal responses - most serotypes are not needed", outcome: "Misinterprets results", feedback: "Only 2/23 pneumococcal serotypes have protective responses - this is severely impaired. Normal response is ≥70% (16+/23) of serotypes. His tetanus/diphtheria are also non-protective.", points: 0, isOptimal: false },
+                { id: "B", text: "Impaired antibody function - confirms antibody deficiency diagnosis", outcome: "Correct interpretation", feedback: "Correct! Despite prior vaccination, he has non-protective titers to protein antigens (tetanus, diphtheria) AND polysaccharide antigens (pneumococcal). This confirms functional antibody deficiency - CVID.", points: 10, isOptimal: true },
+                { id: "C", text: "Need to revaccinate and recheck titers to confirm", outcome: "Not necessary with these levels and history", feedback: "With severely low IgG AND poor baseline titers in a symptomatic patient, revaccination isn't needed to confirm diagnosis. He clearly has CVID. Revaccination challenge is for borderline cases.", points: 5, isOptimal: false },
+                { id: "D", text: "Polysaccharide response is low but protein response is adequate", outcome: "Misreads values", feedback: "Both tetanus (0.08) and diphtheria (0.05) are BELOW protective levels (>0.1). Both protein AND polysaccharide responses are impaired.", points: 2, isOptimal: false }
+            ],
+            whyChain: { title: "WHY test vaccine responses?", steps: ["Quantitative Ig measures AMOUNT of antibody", "Vaccine titers measure FUNCTIONAL antibody production", "Some patients have low-normal Ig but can't make specific antibodies", "Impaired responses to BOTH protein and polysaccharide antigens = severe defect", "This distinguishes CVID from milder conditions like specific antibody deficiency"] },
+            mechanism: { title: "Vaccine Response Assessment", content: "PROTEIN ANTIGENS (T-dependent):\n• Tetanus, diphtheria, Hib\n• Require T cell help for B cell response\n• Protective levels: tetanus >0.1 IU/mL, diphtheria >0.1 IU/mL\n\nPOLYSACCHARIDE ANTIGENS (T-independent):\n• Pneumococcal polysaccharides (23 serotypes)\n• Test with Pneumovax (PPSV23), not Prevnar\n• Normal response: ≥70% serotypes with ≥1.3 mcg/mL\n\nINTERPRETATION:\n• Both impaired: CVID, XLA, severe combined\n• Polysaccharide only impaired: Specific antibody deficiency, IgG2 deficiency\n• Protein only impaired: Rare, consider combined ID\n\nVACCINATION CHALLENGE:\n• Used when baseline titers borderline and diagnosis unclear\n• Vaccinate → recheck titers at 4-8 weeks\n• Poor response confirms functional defect" },
+            pearl: "CVID requires BOTH low IgG AND impaired vaccine responses. Low IgG alone isn't sufficient for diagnosis - must demonstrate functional impairment.",
+            pitfall: "When checking pneumococcal responses, ensure serotypes tested are those in PPSV23 (polysaccharide vaccine), not just PCV13/15/20 serotypes. Different vaccines test different responses."
+        },
+        {
+            id: 5,
+            title: "Additional Workup",
+            scenario: "You've confirmed the diagnosis of CVID:\n• Low IgG, IgA (IgM low-normal)\n• Impaired vaccine responses to protein and polysaccharide antigens\n• Consistent clinical history\n\nBefore starting treatment, you want to complete the evaluation.",
+            question: "What additional testing is recommended for newly diagnosed CVID?",
+            options: [
+                { id: "A", text: "No additional testing needed - start IVIG immediately", outcome: "Incomplete evaluation", feedback: "CVID patients need baseline evaluation for complications and to exclude combined immunodeficiency. Lymphocyte subsets and CT chest at minimum.", points: 3, isOptimal: false },
+                { id: "B", text: "Lymphocyte subsets (T and B cells), CT chest for bronchiectasis, consider autoimmune screening", outcome: "Comprehensive baseline evaluation", feedback: "Correct! CVID patients need: B cell count (confirm B cells present - distinguishes from XLA), T cell assessment (exclude combined ID), CT chest (baseline bronchiectasis), autoimmune screening (common in CVID).", points: 10, isOptimal: true },
+                { id: "C", text: "Bone marrow biopsy to rule out malignancy", outcome: "Not routinely indicated", feedback: "Bone marrow isn't routine for CVID diagnosis. Consider if concerned about malignancy (cytopenias, lymphadenopathy) but not as standard workup.", points: 3, isOptimal: false },
+                { id: "D", text: "Whole exome sequencing for genetic diagnosis", outcome: "Low yield in CVID", feedback: "Genetic testing identifies a cause in only ~25% of CVID. It's not required for diagnosis or treatment decisions. Consider for family planning or research.", points: 4, isOptimal: false }
+            ],
+            whyChain: { title: "WHY this additional workup?", steps: ["B cell count: Present in CVID, absent in XLA (different inheritance/prognosis)", "T cell subsets: Exclude combined immunodeficiency (worse prognosis)", "CT chest: Bronchiectasis present in ~30% at diagnosis (affects prognosis)", "Autoimmune screening: 25-30% of CVID patients have autoimmune complications", "This baseline guides monitoring and anticipatory management"] },
+            mechanism: { title: "Complete CVID Evaluation", content: "IMMUNOLOGICAL:\n• CD19+ or CD20+ B cells (should be >1% in CVID)\n• CD4 and CD8 T cells (should be relatively normal)\n• Consider: memory B cells, class-switched B cells\n\nPULMONARY:\n• CT chest without contrast (bronchiectasis, granulomas, lymphadenopathy)\n• PFTs (baseline lung function)\n\nGI/HEPATIC:\n• Consider endoscopy if GI symptoms (nodular lymphoid hyperplasia, enteropathy)\n• LFTs, hepatitis serologies\n\nAUTOIMMUNE SCREENING:\n• CBC (ITP, AIHA common)\n• TSH, anti-thyroid antibodies\n• Consider: ANA, direct Coombs\n\nINFECTIOUS:\n• HIV (exclude as cause of hypogammaglobulinemia)\n• Hepatitis B and C serologies" },
+            pearl: "CVID has B cells present (unlike XLA). If B cell count is zero or near-zero, consider X-linked agammaglobulinemia (XLA) - different inheritance pattern and earlier onset.",
+            pitfall: "Don't forget HIV testing! HIV can cause acquired hypogammaglobulinemia. Always exclude secondary causes before diagnosing primary immunodeficiency."
+        },
+        {
+            id: 6,
+            title: "Lymphocyte Subsets Return",
+            scenario: "Additional test results:\n\nLymphocyte Subsets:\n• Total lymphocytes: 1,650/μL\n• CD19+ B cells: 180/μL (10.9%) - normal range 100-500\n• CD3+ T cells: 1,320/μL - normal\n• CD4+ T cells: 780/μL - normal\n• CD8+ T cells: 520/μL - normal\n• CD4/CD8 ratio: 1.5 - normal\n\nCT Chest: Mild bronchiectasis in right middle lobe and lingula. No masses or granulomas.\n\nCBC: Normal (no cytopenias)\nHIV: Negative",
+            question: "How do these results inform your diagnosis and management?",
+            options: [
+                { id: "A", text: "B cells present with normal T cells confirms CVID; bronchiectasis indicates need for aggressive treatment", outcome: "Correct interpretation and management implication", feedback: "Exactly right! B cells present (rules out XLA), normal T cells (rules out combined ID), but bronchiectasis present (irreversible damage already occurred). This reinforces urgent need for IgG replacement.", points: 10, isOptimal: true },
+                { id: "B", text: "Results suggest combined immunodeficiency - need to add T cell-directed therapy", outcome: "Misinterprets normal T cells", feedback: "T cells are entirely normal (count and CD4/CD8 ratio). This is pure antibody deficiency, not combined immunodeficiency. IVIG alone is appropriate.", points: 2, isOptimal: false },
+                { id: "C", text: "Mild bronchiectasis is incidental - not related to CVID", outcome: "Misses causal connection", feedback: "Bronchiectasis in a 32-year-old with recurrent pneumonia is NOT incidental - it's a complication of his untreated immunodeficiency. This damage could have been prevented with earlier diagnosis.", points: 0, isOptimal: false },
+                { id: "D", text: "Normal B cell count means he can't have CVID", outcome: "Misunderstands CVID", feedback: "CVID patients have B cells - they just don't function properly. Zero B cells = XLA. His B cells are present but can't produce functional antibodies (the 'variable' in CVID refers to varied phenotypes).", points: 1, isOptimal: false }
+            ],
+            whyChain: { title: "WHY does bronchiectasis matter?", steps: ["Bronchiectasis = permanent airway dilation from chronic infection/inflammation", "Once established, bronchiectasis is irreversible", "Leads to further infections (vicious cycle), chronic cough, progressive lung damage", "Its presence indicates delayed diagnosis - damage occurred while untreated", "Aggressive IgG replacement can prevent FURTHER damage but not reverse existing injury"] },
+            mechanism: { title: "CVID vs Other Antibody Deficiencies", content: "CVID:\n• B cells PRESENT (usually normal or low-normal)\n• Low IgG + low IgA or IgM\n• Impaired vaccine responses\n• Onset typically >4 years old (often adulthood)\n• Heterogeneous genetics (~25% have known mutation)\n\nX-LINKED AGAMMAGLOBULINEMIA (XLA):\n• B cells ABSENT (<1-2%)\n• Very low/absent all Igs\n• Males only (X-linked)\n• Onset typically <1 year old\n• BTK mutation diagnostic\n\nSPECIFIC ANTIBODY DEFICIENCY:\n• Normal Ig levels\n• Impaired polysaccharide responses specifically\n• May respond to PPSV23 vaccination\n\nTRANSIENT HYPOGAMMAGLOBULINEMIA OF INFANCY:\n• Low IgG in infant/toddler\n• Normalizes by age 2-4\n• Preserved vaccine responses" },
+            pearl: "CT chest at diagnosis establishes baseline. Even without current symptoms, many CVID patients have subclinical bronchiectasis. Early detection guides airway clearance and monitoring.",
+            pitfall: "Don't assume young patients can't have bronchiectasis. Chronic untreated antibody deficiency causes bronchiectasis regardless of age. His middle lobe/lingular distribution is classic for aspiration-type injury."
+        },
+        {
+            id: 7,
+            title: "Treatment Initiation",
+            scenario: "Final diagnosis: Common Variable Immunodeficiency (CVID) with:\n• Panhypogammaglobulinemia (IgG 285, IgA <7, IgM 42)\n• Impaired vaccine responses\n• Established bronchiectasis\n• No autoimmune complications currently\n\nYou're ready to start immunoglobulin replacement therapy.",
+            question: "What is the recommended approach to IgG replacement?",
+            options: [
+                { id: "A", text: "Start low-dose IVIG and titrate based on infection frequency", outcome: "Suboptimal dosing strategy", feedback: "Don't start low with intent to titrate up by infections. Goal is to PREVENT infections, not react to them. Start with adequate dosing from the beginning.", points: 4, isOptimal: false },
+                { id: "B", text: "IVIG or SCIG at 400-600 mg/kg/month, targeting trough IgG >500 mg/dL (ideally >800)", outcome: "Correct dosing strategy", feedback: "Correct! Standard dosing is 400-600 mg/kg/month, adjusting to achieve trough IgG >500 mg/dL (many target >800 for patients with bronchiectasis or ongoing infections). Route (IV vs SC) based on patient preference.", points: 10, isOptimal: true },
+                { id: "C", text: "SCIG only - IVIG has too many infusion reactions", outcome: "Unnecessarily restricts options", feedback: "Both IVIG and SCIG are effective. IVIG reactions occur but are usually manageable with premedication and slow infusion. Offer both options and let patient choose.", points: 5, isOptimal: false },
+                { id: "D", text: "Fresh frozen plasma weekly - provides all immunoglobulins", outcome: "Outdated/inappropriate", feedback: "FFP is not used for immunodeficiency replacement. It has infection risk, volume issues, and low Ig concentration. Purified immunoglobulin products (IVIG/SCIG) are standard of care.", points: 0, isOptimal: false }
+            ],
+            whyChain: { title: "WHY these IgG trough targets?", steps: ["Trough IgG correlates with infection protection", "Trough >500 mg/dL reduces serious bacterial infections significantly", "Higher troughs (>800) may be needed for established lung disease", "Each patient has individual trough requirement - titrate based on response", "Preventing infections prevents further organ damage"] },
+            mechanism: { title: "Immunoglobulin Replacement Therapy", content: "DOSING:\n• Starting: 400-600 mg/kg/month\n• Adjust to achieve trough IgG >500 (ideally >800 with lung disease)\n• Higher doses may be needed (up to 800 mg/kg/month)\n\nROUTES:\n• IVIG: Every 3-4 weeks, infusion center or home\n  - Pro: Less frequent, larger volume per session\n  - Con: IV access, infusion reactions, peak-trough variation\n\n• SCIG: Weekly or more frequent, self-administered at home\n  - Pro: Stable levels, fewer systemic reactions, independence\n  - Con: More frequent injections, local site reactions\n\nMONITORING:\n• Trough IgG level before each infusion (initially)\n• Once stable, check every 6-12 months\n• Adjust dose to maintain target trough\n\nCOST:\n• ~$30,000-100,000/year depending on dose and product\n• Insurance coverage variable but generally covered for CVID" },
+            pearl: "SCIG provides more stable IgG levels without the peak-trough fluctuation of IVIG. Many patients prefer the independence of self-administration at home.",
+            pitfall: "Don't measure IgG immediately post-infusion - it will be artificially high. Always measure TROUGH (right before next scheduled dose) to assess adequacy."
+        },
+        {
+            id: 8,
+            title: "Managing Complications",
+            scenario: "After 1 year of SCIG (achieving trough IgG of 850 mg/dL):\n• No new pneumonias (major improvement!)\n• Chronic cough persists (from bronchiectasis)\n• Still has 1-2 sinusitis episodes per year (down from 3+)\n\nNew labs show:\n• Platelets: 68,000 (baseline was 220,000)\n• Hemoglobin: 10.2 g/dL (baseline 14.5)\n• Reticulocyte count: elevated\n• Direct Coombs: positive\n• LDH: elevated",
+            question: "What complication of CVID has developed?",
+            options: [
+                { id: "A", text: "IVIG-related hemolysis - switch to SCIG immediately", outcome: "Misattributes cause", feedback: "He's already on SCIG, not IVIG. And while IVIG can cause hemolysis, his pattern (ITP + AIHA with positive Coombs) suggests autoimmune cytopenias - a CVID complication, not treatment-related.", points: 3, isOptimal: false },
+                { id: "B", text: "Evans syndrome (autoimmune thrombocytopenia + hemolytic anemia) - CVID-associated autoimmunity", outcome: "Correct diagnosis", feedback: "Excellent! Evans syndrome = ITP + AIHA. The positive Coombs and elevated reticulocytes confirm autoimmune hemolysis. Autoimmune cytopenias occur in 25-30% of CVID patients, sometimes years after diagnosis.", points: 10, isOptimal: true },
+                { id: "C", text: "Progression to combined immunodeficiency with bone marrow failure", outcome: "Incorrect mechanism", feedback: "CVID doesn't 'progress' to combined immunodeficiency. His T cells were normal. This is autoimmune destruction (positive Coombs, elevated retics = hemolysis, not marrow failure).", points: 2, isOptimal: false },
+                { id: "D", text: "Developing lymphoma - CVID patients are at increased cancer risk", outcome: "Wrong diagnosis (but correct about cancer risk)", feedback: "CVID does increase lymphoma risk, but lymphoma wouldn't cause positive Coombs with reticulocytosis. This is autoimmune hemolysis + ITP, not malignancy.", points: 4, isOptimal: false }
+            ],
+            whyChain: { title: "WHY do CVID patients develop autoimmunity?", steps: ["CVID involves B cell dysregulation, not just deficiency", "Regulatory mechanisms that prevent autoimmunity are impaired", "Chronic immune activation drives autoreactive B cell expansion", "Autoimmune cytopenias, thyroiditis, and inflammatory conditions common", "Paradox: immune 'deficiency' coexists with immune 'dysregulation'"] },
+            mechanism: { title: "CVID-Associated Complications", content: "AUTOIMMUNE (25-30%):\n• ITP (immune thrombocytopenia)\n• AIHA (autoimmune hemolytic anemia)\n• Evans syndrome (ITP + AIHA)\n• Autoimmune thyroiditis\n• Rheumatoid arthritis, IBD-like disease\n\nLUNG DISEASE:\n• Bronchiectasis (30-50%)\n• Granulomatous-lymphocytic interstitial lung disease (GLILD)\n• Recurrent infections despite Ig replacement\n\nGI DISEASE:\n• Nodular lymphoid hyperplasia\n• Villous atrophy/enteropathy\n• Giardiasis, chronic diarrhea\n\nMALIGNANCY (increased risk):\n• Non-Hodgkin lymphoma (10-30x increased)\n• Gastric cancer (50x increased if H. pylori)\n\nGRANULOMATOUS DISEASE:\n• Can affect any organ (lung, liver, spleen, LN)\n• Mimics sarcoidosis clinically" },
+            pearl: "CVID is more than infection susceptibility - it's an immune dysregulation disorder. Screen regularly for autoimmune complications and monitor for malignancy.",
+            pitfall: "Don't assume thrombocytopenia in CVID is benign. ITP can cause serious bleeding. Similarly, anemia needs workup - could be AIHA, GI blood loss, or B12/iron deficiency from enteropathy."
+        },
+        {
+            id: 9,
+            title: "Treatment of Evans Syndrome",
+            scenario: "Confirmed Evans syndrome in CVID:\n• Platelets: 68,000\n• Hemoglobin: 10.2 g/dL\n• Direct Coombs: positive (IgG)\n• Spleen mildly enlarged\n• No active bleeding\n\nYou continue SCIG for underlying CVID. Now you need to treat the Evans syndrome.",
+            question: "What is the first-line treatment for Evans syndrome in CVID?",
+            options: [
+                { id: "A", text: "Increase SCIG dose - higher IgG levels will suppress autoimmunity", outcome: "Incorrect approach", feedback: "IgG replacement treats the immunodeficiency but doesn't effectively treat autoimmune complications. Evans syndrome needs specific immunomodulatory therapy.", points: 2, isOptimal: false },
+                { id: "B", text: "Corticosteroids as first-line, but anticipate need for steroid-sparing agents", outcome: "Correct initial approach", feedback: "Correct! Corticosteroids are first-line for autoimmune cytopenias including in CVID. However, CVID patients often need steroid-sparing agents (rituximab, MMF) due to infection risk with prolonged steroids.", points: 10, isOptimal: true },
+                { id: "C", text: "Proceed directly to splenectomy - most effective for ITP component", outcome: "Too aggressive initially", feedback: "Splenectomy is avoided in CVID if possible - these patients are already at high risk for encapsulated bacterial infections, and splenectomy further increases this risk.", points: 2, isOptimal: false },
+                { id: "D", text: "Rituximab first-line - avoids steroid side effects", outcome: "Reasonable but not first-line", feedback: "Rituximab is effective in CVID-associated autoimmunity and often needed, but steroids are typically tried first. Rituximab further depletes B cells which is a consideration in someone who already can't make antibodies.", points: 6, isOptimal: false }
+            ],
+            whyChain: { title: "WHY are steroids challenging in CVID?", steps: ["Steroids effectively suppress autoimmune destruction initially", "BUT steroids increase infection risk (especially problematic in immunodeficiency)", "Prolonged steroids cause additional morbidity (osteoporosis, diabetes, etc.)", "CVID patients often need steroid-sparing agents earlier than typical ITP/AIHA", "Goal: control autoimmunity while minimizing infection risk"] },
+            mechanism: { title: "Managing Autoimmune Cytopenias in CVID", content: "FIRST-LINE:\n• Corticosteroids (prednisone 1 mg/kg)\n• Continue IgG replacement (doesn't treat autoimmunity directly but maintains coverage)\n\nSECOND-LINE/STEROID-SPARING:\n• Rituximab (most commonly used)\n• MMF (mycophenolate mofetil)\n• Sirolimus (especially if GLILD present too)\n\nAVOID IF POSSIBLE:\n• Splenectomy (infection risk in CVID)\n• Long-term high-dose steroids\n\nMONITORING:\n• Frequent CBCs during treatment\n• Watch for infections during immunosuppression\n• May need antibiotic prophylaxis during intensive treatment\n\nPROGNOSIS:\n• Often chronic/relapsing course\n• May need long-term low-dose immunomodulation" },
+            pearl: "Rituximab depletes B cells, which seems counterintuitive in B cell immunodeficiency. However, the autoreactive B cells are causing harm, and IgG replacement provides the protective antibodies.",
+            pitfall: "Avoid splenectomy in CVID patients if at all possible. Post-splenectomy, these patients have extremely high risk of overwhelming sepsis with encapsulated organisms."
+        },
+        {
+            id: 10,
+            title: "Long-Term Management",
+            scenario: "After treatment with steroids followed by rituximab, his Evans syndrome is in remission. He's now 34 years old.\n\nCurrent status:\n• On SCIG 8g weekly (trough IgG 820 mg/dL)\n• No infections in past 6 months\n• Cytopenias resolved\n• Bronchiectasis stable on chest CT\n• Working full-time, good quality of life\n\nHe asks about long-term expectations and family planning.",
+            question: "What counseling do you provide about long-term CVID management?",
+            options: [
+                { id: "A", text: "He's stable now - can consider stopping IgG replacement", outcome: "Dangerous advice", feedback: "CVID is lifelong. IgG replacement must continue indefinitely. Stopping would lead to recurrent infections and further organ damage.", points: 0, isOptimal: false },
+                { id: "B", text: "Lifelong IgG replacement, regular monitoring for complications, genetic counseling for family planning", outcome: "Comprehensive long-term plan", feedback: "Correct! CVID requires lifelong IgG replacement, ongoing surveillance for pulmonary, autoimmune, GI, and malignant complications, and genetic counseling given family history and his future children's risk.", points: 10, isOptimal: true },
+                { id: "C", text: "Consider bone marrow transplant for cure", outcome: "Not standard for CVID", feedback: "BMT is rarely done for CVID - the risks of transplant typically outweigh benefits when IgG replacement is effective. Reserved for very severe phenotypes with refractory complications.", points: 3, isOptimal: false },
+                { id: "D", text: "His children won't be affected - CVID isn't inherited", outcome: "Incorrect genetic counseling", feedback: "While most CVID is sporadic, ~10-25% have familial clustering. His sister has immunodeficiency too. Genetic counseling is important for family planning.", points: 2, isOptimal: false }
+            ],
+            whyChain: { title: "WHY lifelong management?", steps: ["CVID is a primary (genetic/intrinsic) defect - it doesn't resolve", "IgG replacement is replacement therapy, not cure", "Ongoing monitoring detects complications early", "Proactive management prevents irreversible organ damage", "With proper care, near-normal life expectancy achievable"] },
+            mechanism: { title: "Long-Term CVID Management", content: "ONGOING TREATMENT:\n• IgG replacement: LIFELONG, adjust dose for trough >500-800\n• Prophylactic antibiotics: consider for bronchiectasis (azithromycin)\n• Airway clearance: for established bronchiectasis\n\nSURVEILLANCE:\n• Annual: CBC (cytopenias), LFTs, IgG trough, PFTs\n• Every 3-5 years: CT chest (bronchiectasis, GLILD, lymphoma)\n• As indicated: GI evaluation if symptoms, cancer screening\n\nVACCINES:\n• Inactivated vaccines safe and recommended\n• Live vaccines contraindicated (MMR, varicella, yellow fever, live influenza)\n• Household contacts should receive all vaccines\n\nGENETIC COUNSELING:\n• Family screening (siblings, parents)\n• Children: risk depends on inheritance pattern (usually unknown)\n• Prenatal testing generally not available (most genes unknown)\n\nPROGNOSIS:\n• With treatment: near-normal life expectancy for many\n• Worse outcomes: bronchiectasis, GLILD, lymphoma, autoimmunity" },
+            pearl: "CVID patients can live full, productive lives with appropriate management. Early diagnosis and consistent IgG replacement prevent most serious complications.",
+            pitfall: "Don't give live vaccines to CVID patients! They cannot mount protective responses and may develop vaccine-strain disease. Check vaccine type before administering."
+        }
+    ]
+};
+
+let currentStage = 1, totalScore = 0, maxPossibleScore = 0, answeredStages = {};
+
+function init() {
+    caseData.stages.forEach(s => { maxPossibleScore += Math.max(...s.options.map(o => o.points)); });
+    renderStage(currentStage);
+}
+
+function renderStage(stageNum) {
+    const stage = caseData.stages[stageNum - 1];
+    if (!stage) { renderSummary(); return; }
+    const answered = answeredStages[stageNum];
+    document.getElementById('gameContainer').innerHTML = `
+        <div class="stage-card bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-6">
+                <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Stage ${stageNum} of ${caseData.totalStages}</span>
+                <h2 class="text-2xl font-bold mt-3">${stage.title}</h2>
+            </div>
+            <div class="p-6">
+                <div class="bg-slate-50 rounded-xl p-5 mb-6"><h3 class="font-semibold text-gray-700 mb-2">📋 Clinical Scenario</h3><div class="text-gray-700 whitespace-pre-line">${stage.scenario}</div></div>
+                <div class="bg-indigo-50 rounded-xl p-5 mb-6"><h3 class="font-semibold text-indigo-800 mb-2">🤔 Clinical Question</h3><p class="text-indigo-900 font-medium">${stage.question}</p></div>
+                <div class="space-y-3">${stage.options.map(opt => `
+                    <button onclick="selectOption(${stageNum}, '${opt.id}')" ${answered ? 'disabled' : ''} class="w-full text-left p-4 rounded-xl border-2 transition-all ${answered && answered.selected === opt.id ? (opt.isOptimal ? 'border-green-500 bg-green-50' : 'border-amber-500 bg-amber-50') : answered && opt.isOptimal ? 'border-green-500 bg-green-50' : 'border-gray-200 hover:border-indigo-300 hover:bg-indigo-50'} ${answered ? 'cursor-default' : 'cursor-pointer'}">
+                        <div class="flex items-start gap-3"><span class="flex-shrink-0 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center font-bold ${answered && opt.isOptimal ? 'bg-green-500 text-white' : ''}">${opt.id}</span><span class="font-medium">${opt.text}</span></div>
+                    </button>`).join('')}</div>
+                ${answered ? renderFeedback(stage, answered) : ''}
+            </div>
+        </div>`;
+    updateProgress();
+}
+
+function renderFeedback(stage, answered) {
+    const selected = stage.options.find(o => o.id === answered.selected);
+    const optimal = stage.options.find(o => o.isOptimal);
+    return `<div class="mt-6 space-y-4">
+        <div class="${selected.isOptimal ? 'bg-green-50 border-green-200' : 'bg-amber-50 border-amber-200'} border rounded-xl p-5">
+            <h4 class="font-bold ${selected.isOptimal ? 'text-green-800' : 'text-amber-800'} mb-2">${selected.isOptimal ? '✅ Optimal!' : '⚠️ ' + selected.outcome}</h4>
+            <p class="text-gray-700">${selected.feedback}</p>
+        </div>
+        ${!selected.isOptimal ? `<div class="bg-green-50 border border-green-200 rounded-xl p-5"><h4 class="font-bold text-green-800 mb-2">✅ Optimal: ${optimal.text}</h4><p class="text-gray-700">${optimal.feedback}</p></div>` : ''}
+        <div class="why-chain rounded-xl p-5"><h4 class="font-bold text-blue-800 mb-3">🔗 ${stage.whyChain.title}</h4><div class="space-y-2">${stage.whyChain.steps.map((s,i) => `<div class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-blue-200 text-blue-800 flex items-center justify-center text-sm font-bold">${i+1}</span><span class="text-gray-700">${s}</span></div>`).join('')}</div></div>
+        <div class="mechanism-box rounded-xl p-5"><h4 class="font-bold text-green-800 mb-3">⚙️ ${stage.mechanism.title}</h4><div class="text-gray-700 whitespace-pre-line text-sm">${stage.mechanism.content}</div></div>
+        <div class="grid md:grid-cols-2 gap-4"><div class="pearl-box rounded-xl p-4"><h4 class="font-bold text-yellow-800 mb-2">💎 Pearl</h4><p class="text-gray-700 text-sm">${stage.pearl}</p></div><div class="pitfall-box rounded-xl p-4"><h4 class="font-bold text-red-800 mb-2">⚠️ Pitfall</h4><p class="text-gray-700 text-sm">${stage.pitfall}</p></div></div>
+        <button onclick="nextStage()" class="w-full mt-4 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-bold text-lg">${currentStage < caseData.totalStages ? 'Continue to Stage ' + (currentStage + 1) + ' →' : 'View Summary →'}</button>
+    </div>`;
+}
+
+function selectOption(stageNum, optionId) {
+    if (answeredStages[stageNum]) return;
+    const option = caseData.stages[stageNum - 1].options.find(o => o.id === optionId);
+    answeredStages[stageNum] = { selected: optionId, points: option.points };
+    totalScore += option.points;
+    renderStage(stageNum);
+}
+
+function nextStage() { currentStage++; currentStage > caseData.totalStages ? renderSummary() : (renderStage(currentStage), window.scrollTo({ top: 0, behavior: 'smooth' })); }
+function updateProgress() { document.getElementById('progressBar').style.width = (Object.keys(answeredStages).length / caseData.totalStages * 100) + '%'; document.getElementById('score').textContent = Math.round(totalScore / maxPossibleScore * 100) + '%'; }
+function renderSummary() {
+    const pct = Math.round(totalScore / maxPossibleScore * 100);
+    document.getElementById('gameContainer').classList.add('hidden');
+    document.getElementById('summaryPanel').classList.remove('hidden');
+    document.getElementById('summaryPanel').innerHTML = `<div class="bg-white rounded-2xl shadow-lg p-8"><div class="text-center mb-8"><div class="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">${pct >= 90 ? 'A' : pct >= 80 ? 'B' : pct >= 70 ? 'C' : 'D'}</div><div class="text-3xl font-bold text-gray-800">${pct}%</div></div><div class="bg-slate-50 rounded-xl p-6 mb-6"><h3 class="font-bold text-xl mb-4">📚 Key Learning Points</h3><ul class="space-y-2 text-gray-700"><li>✓ Infection pattern guides immune workup: sinopulmonary + Giardia = antibody deficiency</li><li>✓ Start with quantitative IgG, IgA, IgM</li><li>✓ CVID requires low IgG AND impaired vaccine responses</li><li>✓ B cells present in CVID (vs absent in XLA)</li><li>✓ Check for bronchiectasis at diagnosis</li><li>✓ IgG replacement: 400-600 mg/kg/month, target trough >500-800</li><li>✓ CVID patients develop autoimmune complications in 25-30%</li><li>✓ Lifelong treatment and monitoring required</li></ul></div><button onclick="resetGame()" class="w-full py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-bold">🔄 Restart Case</button></div>`;
+}
+function resetGame() { currentStage = 1; totalScore = 0; answeredStages = {}; document.getElementById('gameContainer').classList.remove('hidden'); document.getElementById('summaryPanel').classList.add('hidden'); renderStage(1); }
+init();
+    </script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+/* Enhanced Feature Styles */
+.rdx-difficulty-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 300px;
+}
+.rdx-diff-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin: 2px;
+}
+.rdx-diff-btn.active {
+    background: #3b82f6;
+    color: white;
+}
+.rdx-diff-btn:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+}
+.rdx-diff-btn:hover:not(.active) {
+    background: #e2e8f0;
+}
+.rdx-refs-panel {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #93c5fd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+.rdx-refs-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+.rdx-refs-links {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+.rdx-refs-links a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.rdx-refs-links a:hover {
+    text-decoration: underline;
+}
+.rdx-debrief-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rdx-debrief-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #1f2937;
+}
+.rdx-path-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.rdx-path-optimal {
+    background: #dcfce7;
+    border-left: 4px solid #22c55e;
+}
+.rdx-path-suboptimal {
+    background: #fef9c3;
+    border-left: 4px solid #eab308;
+}
+.rdx-path-wrong {
+    background: #fecaca;
+    border-left: 4px solid #ef4444;
+}
+.rdx-hint-beginner {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+.rdx-hint-advanced {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+</style>
+
+<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
+    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
+        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    </div>
+</div>
+
+
+<!-- CROSS-PLATFORM LEARNING LINKS -->
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
+            <a href="../mechanism/immunodeficiency-module.html" style="display: block; color: #2563eb; font-size: 14px;">→ Immunodeficiency</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
+            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="adventure-hub.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Browse All Cases</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
+            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../CoachDx/mentor-chat.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../CoachDx/sbar-trainer.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+<!-- END CROSS-PLATFORM LINKS -->
+<div class="rdx-refs-panel" id="rdxRefsPanel">
+    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
+    <div class="rdx-refs-links"><a href="https://www.aaaai.org/practice-resources/statements-and-practice-parameters" target="_blank" class="text-blue-600 hover:underline">AAAAI Practice Parameters</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK482124/" target="_blank" class="text-blue-600 hover:underline">StatPearls: Anaphylaxis</a></div>
+</div>
+
+<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
+    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+</div>
+
+<script>
+// ReasonDx Enhanced Features Module
+(function() {
+    // Decision tracking
+    window.rdxDecisionPath = window.rdxDecisionPath || [];
+    window.rdxTotalScore = window.rdxTotalScore || 0;
+    window.rdxMaxScore = window.rdxMaxScore || 0;
+    window.rdxDifficulty = 'intermediate';
+    
+    // Difficulty control
+    window.rdxSetDifficulty = function(level) {
+        window.rdxDifficulty = level;
+        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('rdx-btn-' + level).classList.add('active');
+        
+        // Update hint visibility
+        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
+            el.style.display = level === 'beginner' ? 'block' : 'none';
+        });
+        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
+            el.style.display = level === 'advanced' ? 'block' : 'none';
+        });
+    };
+    
+    // Track a decision
+    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+        window.rdxDecisionPath.push({
+            stage: stageId,
+            title: stageTitle,
+            choice: choiceId,
+            choiceText: choiceText,
+            outcome: outcome,
+            points: points,
+            maxPoints: maxPoints,
+            isOptimal: isOptimal,
+            optimalChoice: optimalChoice,
+            optimalText: optimalText
+        });
+        window.rdxTotalScore += points;
+        window.rdxMaxScore += maxPoints;
+    };
+    
+    // Show visual debrief
+    window.rdxShowDebrief = function() {
+        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
+        
+        let grade, gradeColor, gradeEmoji;
+        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
+        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
+        
+        let pathHTML = '';
+        if (window.rdxDecisionPath.length > 0) {
+            pathHTML = window.rdxDecisionPath.map(d => {
+                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
+                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
+                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
+                return '<div class="' + pathClass + ' rdx-path-item">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
+                    '<div>' +
+                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
+                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
+                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
+                    '</div>' +
+                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
+                    '</div></div>';
+            }).join('');
+        } else {
+            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+        }
+        
+        document.getElementById('rdxDebriefContent').innerHTML = 
+            '<div style="text-align:center;margin-bottom:24px;">' +
+            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
+            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
+            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
+            '</div></div>' +
+            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
+            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
+            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
+            '</div></div>' +
+            '<div style="display:flex;gap:12px;">' +
+            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '</div>';
+        
+        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
+    };
+    
+    // Auto-inject hint examples into existing content
+    window.rdxInit = function() {
+        // Could add dynamic hint injection here based on difficulty
+        console.log('ReasonDx Enhanced Features loaded for: Immunodeficiency Expanded Adventure');
+    };
+    
+    // Initialize on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.rdxInit);
+    } else {
+        window.rdxInit();
+    }
+})();
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+</body>
+</html>

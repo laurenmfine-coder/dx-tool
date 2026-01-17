@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status Epilepticus | Dual-Mode Clinical Adventure</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; min-height: 100vh; color: #e2e8f0; line-height: 1.6; padding: 20px; }
+        body.adult { background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%); }
+        body.peds { background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%); }
+        .container { max-width: 900px; margin: 0 auto; }
+        .mode-toggle { display: flex; justify-content: center; margin-bottom: 20px; background: rgba(0,0,0,0.3); border-radius: 12px; padding: 4px; }
+        .mode-btn { flex: 1; padding: 12px 24px; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; background: transparent; color: #e2e8f0; }
+        .mode-btn.active { background: rgba(255,255,255,0.2); }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-radius: 16px; margin-bottom: 20px; }
+        .adult .header { background: rgba(30, 58, 95, 0.9); }
+        .peds .header { background: rgba(124, 58, 237, 0.9); }
+        .badge { padding: 4px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; margin-left: 10px; }
+        .adult .badge { background: #2563eb; }
+        .peds .badge { background: #a78bfa; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; border-radius: 3px; }
+        .adult .progress-fill { background: linear-gradient(90deg, #2563eb, #93c5fd); }
+        .peds .progress-fill { background: linear-gradient(90deg, #a78bfa, #c4b5fd); }
+        .scene { border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+        .adult .scene { background: linear-gradient(135deg, #1e3a5f, #1e40af); }
+        .peds .scene { background: linear-gradient(135deg, #6d28d9, #7c3aed); }
+        .scene-header { padding: 16px 20px; }
+        .adult .scene-header { background: rgba(37, 99, 235, 0.15); }
+        .peds .scene-header { background: rgba(167, 139, 250, 0.15); }
+        .scene-phase { font-size: 0.75rem; text-transform: uppercase; }
+        .scene-title { font-size: 1.4rem; font-weight: 700; }
+        .scene-body { padding: 24px; }
+        .highlight { color: #fbbf24; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(37,99,235,0.2)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
+        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; }
+        .boards-tip { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .boards-tip-title { font-weight: 700; color: #fbbf24; margin-bottom: 10px; }
+        .alert-box { background: rgba(239,68,68,0.2); border: 1px solid rgba(239,68,68,0.5); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .alert-title { font-weight: 700; color: #f87171; margin-bottom: 10px; }
+        .btn { padding: 16px 28px; border: none; border-radius: 12px; color: white; font-weight: 600; cursor: pointer; width: 100%; }
+        .adult .btn { background: linear-gradient(135deg, #2563eb, #1e40af); }
+        .peds .btn { background: linear-gradient(135deg, #a78bfa, #7c3aed); }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+        .comparison-table th { background: rgba(0,0,0,0.3); }
+        .why-chain { background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(37,99,235,0.15)); border: 1px solid rgba(139,92,246,0.3); border-radius: 16px; padding: 24px; margin: 24px 0; }
+        .why-chain-title { font-size: 1.2rem; font-weight: 700; color: #c4b5fd; margin-bottom: 20px; }
+        .why-item { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 18px; margin-bottom: 14px; }
+        .why-q { font-weight: 600; color: #e9d5ff; margin-bottom: 10px; }
+        .tips { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+        .pearl, .pitfall { padding: 20px; border-radius: 12px; }
+        .pearl { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); }
+        .pitfall { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); }
+        .tip-header { font-weight: 600; margin-bottom: 10px; }
+        .pearl .tip-header { color: #4ade80; }
+        .pitfall .tip-header { color: #f87171; }
+        @media (max-width: 640px) { .tips { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body class="adult">
+    <div class="container">
+        <div class="mode-toggle">
+            <button class="mode-btn active" onclick="setMode('adult')">🏥 Adult</button>
+            <button class="mode-btn" onclick="setMode('peds')">👶 Pediatric</button>
+        </div>
+        <div id="app"></div>
+    </div>
+    <script>
+    const STAGES = ['arrival','definition','causes','initial','benzos','second_line','refractory','super_refractory','complications','post_ictal','debrief'];
+    const state = { stage: 0, mode: 'adult' };
+
+    function setMode(m) { state.mode = m; state.stage = 0; document.body.className = m; document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active')); event.target.classList.add('active'); render(); }
+    function nextStage() { state.stage++; render(); }
+
+    function render() {
+        const p = ((state.stage + 1) / STAGES.length) * 100;
+        const icon = state.mode === 'adult' ? '⚡' : '👶⚡';
+        const title = state.mode === 'adult' ? 'Status Epilepticus' : 'Pediatric Status Epilepticus';
+        let c = `<div class="header"><div style="font-size:1.3rem;font-weight:700">${icon} ${title}<span class="badge">11 STAGES</span></div><div>${state.stage + 1}/${STAGES.length}</div></div><div class="progress-bar"><div class="progress-fill" style="width:${p}%"></div></div>`;
+        c += window['render_' + STAGES[state.stage]]();
+        document.getElementById('app').innerHTML = c;
+    }
+
+    window.render_arrival = function() {
+        if (state.mode === 'adult') {
+            return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 1 of 11</div><div class="scene-title">Actively Seizing</div></div><div class="scene-body"><div class="narrative"><p>EMS brings a <span class="highlight">45-year-old man</span> with <span class="critical">ongoing generalized tonic-clonic seizure</span> for 12 minutes. History of epilepsy, ran out of medications.</p><p style="margin-top:12px;"><strong>EMS report:</strong> Witnessed onset, continuous convulsions, one dose of IM midazolam given<br><strong>Vitals:</strong> HR 130, BP 180/100, RR agonal, SpO2 88%<br><strong>Exam:</strong> Generalized tonic-clonic activity, cyanotic, unresponsive</p></div><div class="alert-box"><div class="alert-title">🚨 Time Is Brain!</div><p>Seizures >5 minutes unlikely to stop spontaneously. Prolonged seizures cause excitotoxic neuronal injury. Treat immediately!</p></div><button class="btn" onclick="nextStage()">Definition →</button></div></div>`;
+        } else {
+            return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 1 of 11</div><div class="scene-title">The Seizing Child</div></div><div class="scene-body"><div class="narrative"><p>A <span class="highlight">4-year-old girl</span> arrives with <span class="critical">ongoing seizure</span> for 8 minutes. Developed fever today, then started convulsing.</p><p style="margin-top:12px;"><strong>EMS report:</strong> Generalized tonic-clonic, no IV access yet<br><strong>Vitals:</strong> HR 160, T 103.2°F, SpO2 92%<br><strong>Weight:</strong> 18 kg</p></div><div class="alert-box"><div class="alert-title">⚠️ Febrile Status Epilepticus</div><p>Prolonged febrile seizure (>15 min) requires same urgent treatment as other status. Don't assume it will stop on its own!</p></div><button class="btn" onclick="nextStage()">Definition →</button></div></div>`;
+        }
+    };
+
+    window.render_definition = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 2 of 11</div><div class="scene-title">What Is Status Epilepticus?</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Status Epilepticus Definition</div><table class="comparison-table"><tr><th>Time</th><th>Clinical Significance</th></tr><tr><td><strong>5 minutes</strong></td><td>Operational definition - START treatment</td></tr><tr><td><strong>30 minutes</strong></td><td>Risk of permanent neuronal injury begins</td></tr><tr><td><strong>60 minutes</strong></td><td>Refractory status epilepticus</td></tr></table><p style="margin-top:12px;"><strong>Old definition:</strong> 30 minutes. <strong>Current:</strong> Treat at 5 minutes!</p></div><div class="mechanism-box"><div class="mechanism-title">🧬 Why 5 Minutes Matters</div><div class="pathway">Most self-limited seizures stop within 2-3 minutes<br><br>After 5 minutes:<br>• GABA receptor internalization begins<br>• Benzodiazepines become less effective<br>• Glutamate excitotoxicity increases<br>• Self-termination unlikely<br><br>Each minute of delay → worse outcomes</div></div><button class="btn" onclick="nextStage()">Causes →</button></div></div>`;
+    };
+
+    window.render_causes = function() {
+        if (state.mode === 'adult') {
+            return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 3 of 11</div><div class="scene-title">Etiology</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Common Causes (Adults)</div><table class="comparison-table"><tr><th>Category</th><th>Examples</th></tr><tr><td><strong>AED non-compliance</strong></td><td>Most common in known epileptics</td></tr><tr><td><strong>Alcohol-related</strong></td><td>Withdrawal, intoxication</td></tr><tr><td><strong>CNS infection</strong></td><td>Meningitis, encephalitis</td></tr><tr><td><strong>Stroke</strong></td><td>Especially hemorrhagic</td></tr><tr><td><strong>Metabolic</strong></td><td>Hypoglycemia, hyponatremia, uremia</td></tr><tr><td><strong>Drugs/toxins</strong></td><td>Cocaine, isoniazid, theophylline</td></tr><tr><td><strong>Tumor</strong></td><td>Primary or metastatic</td></tr></table></div><div class="alert-box"><div class="alert-title">⚠️ Check Glucose Immediately!</div><p>Hypoglycemia is rapidly reversible cause. Point-of-care glucose should be checked within first minute.</p></div><button class="btn" onclick="nextStage()">Initial Management →</button></div></div>`;
+        } else {
+            return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 3 of 11</div><div class="scene-title">Pediatric Causes</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Common Causes (Children)</div><table class="comparison-table"><tr><th>Age</th><th>Common Causes</th></tr><tr><td><strong>Neonate</strong></td><td>HIE, infection, metabolic, structural</td></tr><tr><td><strong>Infant</strong></td><td>Febrile, infection, metabolic</td></tr><tr><td><strong>Toddler</strong></td><td>Febrile SE (most common), infection</td></tr><tr><td><strong>School-age</strong></td><td>AED non-compliance, idiopathic, infection</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Febrile Status Epilepticus</div><div class="pathway">Prolonged febrile seizure (>15 min)<br>• ~5% of febrile seizures become prolonged<br>• Associated with later epilepsy risk<br>• Treat the same as other SE<br>• Also treat the fever!<br><br>Rule out meningitis if:<br>• <6 months old<br>• Prolonged postictal period<br>• Meningeal signs</div></div><button class="btn" onclick="nextStage()">Initial Management →</button></div></div>`;
+        }
+    };
+
+    window.render_initial = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 4 of 11</div><div class="scene-title">First 5 Minutes</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 ABCs + Immediate Actions</div><ul style="margin-left:20px;line-height:2;"><li><strong>Airway:</strong> Position, suction, NPA/OPA (don't force anything in mouth!)</li><li><strong>Breathing:</strong> O2, BVM if needed</li><li><strong>Circulation:</strong> IV/IO access</li><li><strong>Glucose:</strong> Check immediately, give D50${state.mode === 'peds' ? ' (D25 or D10 in kids)' : ''} if low</li><li><strong>Thiamine:</strong> Give before glucose ${state.mode === 'adult' ? 'in adults' : 'if malnourished'}</li></ul></div><div class="mechanism-box"><div class="mechanism-title">🧬 Stabilization Priorities</div><div class="pathway"><strong>0-5 minutes:</strong><br>• Time the seizure<br>• Protect from injury (pad rails)<br>• Establish IV access<br>• Check fingerstick glucose<br>• Draw labs: BMP, CBC, AED levels, toxicology<br>• Prepare first-line benzodiazepine<br><br>DON'T: Restrain forcefully, put things in mouth</div></div><button class="btn" onclick="nextStage()">Benzodiazepines →</button></div></div>`;
+    };
+
+    window.render_benzos = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 5 of 11</div><div class="scene-title">First-Line: Benzodiazepines</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Benzodiazepine Options</div><table class="comparison-table"><tr><th>Drug</th><th>Route</th><th>Dose</th></tr><tr style="background:rgba(34,197,94,0.2);"><td><strong>Midazolam IM</strong></td><td>IM (no IV needed!)</td><td>${state.mode === 'adult' ? '10 mg' : '0.2 mg/kg (max 10 mg)'}</td></tr><tr><td><strong>Lorazepam IV</strong></td><td>IV</td><td>${state.mode === 'adult' ? '4 mg' : '0.1 mg/kg (max 4 mg)'}</td></tr><tr><td><strong>Diazepam IV</strong></td><td>IV</td><td>${state.mode === 'adult' ? '10 mg' : '0.2 mg/kg (max 10 mg)'}</td></tr><tr><td><strong>Diazepam PR</strong></td><td>Rectal</td><td>${state.mode === 'adult' ? '20 mg' : '0.5 mg/kg'}</td></tr><tr><td><strong>Midazolam IN</strong></td><td>Intranasal</td><td>${state.mode === 'peds' ? '0.2 mg/kg (max 10 mg)' : '10 mg'}</td></tr></table></div><div class="alert-box"><div class="alert-title">🚨 RAMPART Trial: IM Midazolam = IV Lorazepam</div><p>IM midazolam is as effective as IV lorazepam and faster to give (no IV needed). Give it first if no IV access!</p></div><div class="mechanism-box"><div class="mechanism-title">🧬 Repeat Dosing</div><div class="pathway">If seizure continues after 5 minutes:<br>→ Give SECOND dose of benzodiazepine<br><br>Maximum 2 doses of benzodiazepines<br>(further doses have diminishing returns<br>and increase respiratory depression)<br><br>After 2 doses → move to second-line agent</div></div><button class="btn" onclick="nextStage()">Second-Line Agents →</button></div></div>`;
+    };
+
+    window.render_second_line = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 6 of 11</div><div class="scene-title">Second-Line Antiepileptics</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Second-Line Options (Give ONE)</div><table class="comparison-table"><tr><th>Drug</th><th>Dose</th><th>Considerations</th></tr><tr style="background:rgba(251,191,36,0.15);"><td><strong>Levetiracetam</strong></td><td>${state.mode === 'adult' ? '60 mg/kg (max 4500 mg)' : '60 mg/kg (max 4500 mg)'}</td><td>Fewest interactions, well-tolerated</td></tr><tr style="background:rgba(251,191,36,0.15);"><td><strong>Fosphenytoin</strong></td><td>20 mg PE/kg</td><td>Avoid in known allergy; cardiac monitoring</td></tr><tr style="background:rgba(251,191,36,0.15);"><td><strong>Valproate</strong></td><td>${state.mode === 'adult' ? '40 mg/kg (max 3000 mg)' : '40 mg/kg'}</td><td>Avoid in pregnancy, liver disease, <2 yo</td></tr></table></div><div class="alert-box"><div class="alert-title">⚠️ ESETT Trial: All Three Are Equivalent!</div><p>Levetiracetam, fosphenytoin, and valproate showed similar efficacy (~50% response). Choose based on patient factors and availability.</p></div><div class="why-chain"><div class="why-chain-title">🔗 WHY Chain</div><div class="why-item"><div class="why-q">Why not phenytoin directly?</div>Phenytoin requires slow infusion (risk of hypotension, arrhythmias). Fosphenytoin is a prodrug that can be given faster and IM if needed.</div>${state.mode === 'peds' ? `<div class="why-item"><div class="why-q">Why avoid valproate <2 years?</div>Increased risk of hepatotoxicity and mitochondrial disease unmasking in young children.</div>` : ''}</div><button class="btn" onclick="nextStage()">Refractory SE →</button></div></div>`;
+    };
+
+    window.render_refractory = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 7 of 11</div><div class="scene-title">Refractory Status Epilepticus</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Definition & Management</div><p><strong>Refractory SE:</strong> Seizures persist despite benzodiazepine + one second-line agent</p><table class="comparison-table" style="margin-top:16px;"><tr><th>Agent</th><th>Loading</th><th>Notes</th></tr><tr><td><strong>Midazolam infusion</strong></td><td>0.2 mg/kg bolus → 0.1-0.4 mg/kg/hr</td><td>Titrate to burst suppression</td></tr><tr><td><strong>Propofol</strong></td><td>2 mg/kg bolus → 1-5 mg/kg/hr</td><td>Propofol infusion syndrome risk${state.mode === 'peds' ? ' (avoid prolonged use in kids)' : ''}</td></tr><tr><td><strong>Pentobarbital</strong></td><td>5-15 mg/kg → 0.5-5 mg/kg/hr</td><td>Most reliable, but hemodynamically unstable</td></tr></table></div><div class="alert-box"><div class="alert-title">🚨 Requires Intubation!</div><p>Continuous infusion of anesthetics requires intubation, ICU admission, and continuous EEG monitoring. These patients are critically ill.</p></div><div class="mechanism-box"><div class="mechanism-title">🧬 EEG Goals</div><div class="pathway"><strong>Target: Burst suppression or seizure freedom</strong><br><br>Continuous EEG monitoring essential:<br>• Confirm electrical seizure cessation<br>• Detect nonconvulsive SE<br>• Guide anesthetic titration<br><br>Maintain suppression for 24-48 hours<br>Then slowly wean anesthetics</div></div><button class="btn" onclick="nextStage()">Super-Refractory SE →</button></div></div>`;
+    };
+
+    window.render_super_refractory = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 8 of 11</div><div class="scene-title">Super-Refractory SE</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Definition</div><p><strong>Super-refractory SE:</strong> Continues ≥24 hours after anesthetic initiation, OR recurs during anesthetic wean</p></div><div class="mechanism-box"><div class="mechanism-title">🧬 Additional Options</div><div class="pathway"><strong>Consider:</strong><br>• Ketamine infusion (NMDA antagonist)<br>• Additional AEDs (lacosamide, phenobarbital)<br>• Immunotherapy if autoimmune suspected<br>• Ketogenic diet<br>• Hypothermia<br>• Electroconvulsive therapy<br>• Epilepsy surgery evaluation<br><br><strong>Search for underlying cause:</strong><br>• Autoimmune encephalitis (anti-NMDA, LGI1)<br>• Paraneoplastic<br>• Infectious</div></div><div class="alert-box"><div class="alert-title">⚠️ Prognosis</div><p>Mortality in super-refractory SE: 30-50%. Survivors often have significant neurologic morbidity. Outcome depends heavily on underlying etiology.</p></div><button class="btn" onclick="nextStage()">Complications →</button></div></div>`;
+    };
+
+    window.render_complications = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 9 of 11</div><div class="scene-title">Complications</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Systemic Complications of SE</div><table class="comparison-table"><tr><th>System</th><th>Complication</th></tr><tr><td>Respiratory</td><td>Aspiration, hypoxia, neurogenic pulmonary edema</td></tr><tr><td>Cardiac</td><td>Arrhythmias, takotsubo, cardiac injury</td></tr><tr><td>Metabolic</td><td>Lactic acidosis, hyperthermia, rhabdomyolysis</td></tr><tr><td>Renal</td><td>AKI from rhabdomyolysis, dehydration</td></tr><tr><td>Neurologic</td><td>Excitotoxic injury, cerebral edema</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Excitotoxicity</div><div class="pathway">Prolonged seizures → excessive glutamate release<br>→ Ca²⁺ influx into neurons<br>→ Mitochondrial dysfunction<br>→ Free radical generation<br>→ Neuronal death<br><br>Injury occurs in hippocampus, cortex<br>→ Memory deficits, cognitive impairment<br>→ Increased epilepsy risk</div></div><button class="btn" onclick="nextStage()">Postictal Period →</button></div></div>`;
+    };
+
+    window.render_post_ictal = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 10 of 11</div><div class="scene-title">After the Seizure Stops</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Postictal Evaluation</div><ul style="margin-left:20px;line-height:2;"><li>Continue monitoring (may have nonconvulsive SE)</li><li>Obtain neuroimaging (CT vs MRI)</li><li>Consider LP if infection suspected</li><li>Start maintenance AED</li><li>Identify and treat underlying cause</li><li>Neurology consultation</li></ul></div><div class="alert-box"><div class="alert-title">⚠️ Nonconvulsive Status Epilepticus</div><p>Up to 20% of comatose ICU patients have NCSE. If patient doesn't wake up appropriately, get continuous EEG. Prolonged postictal state should prompt EEG.</p></div><div class="mechanism-box"><div class="mechanism-title">🧬 Maintenance AED Selection</div><div class="pathway"><strong>If not already on AED:</strong><br>Levetiracetam often first choice (few interactions)<br><br><strong>If breakthrough on AED:</strong><br>• Check levels, ensure compliance<br>• Optimize current regimen first<br>• Consider adding second agent<br><br><strong>Special considerations:</strong><br>• Pregnancy: Levetiracetam, lamotrigine preferred<br>• Elderly: Levetiracetam, lamotrigine (fewer interactions)</div></div><button class="btn" onclick="nextStage()">Debrief →</button></div></div>`;
+    };
+
+    window.render_debrief = function() {
+        return `<div class="scene"><div style="text-align:center;padding:40px;"><div style="font-size:4rem;margin-bottom:12px;">⚡</div><div style="font-size:1.8rem;font-weight:700;color:#4ade80;">Status Epilepticus Mastery!</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 High-Yield Summary</div><table class="comparison-table"><tr><th>Concept</th><th>Key Point</th></tr><tr><td>Definition</td><td>Treat at 5 minutes (don't wait for 30)</td></tr><tr><td>First-line</td><td>Benzodiazepine × 2 doses max</td></tr><tr><td>RAMPART</td><td>IM midazolam = IV lorazepam</td></tr><tr><td>Second-line</td><td>Levetiracetam, fosphenytoin, or valproate (ESETT: equivalent)</td></tr><tr><td>Refractory</td><td>Anesthetic infusion + continuous EEG</td></tr><tr><td>Don't forget</td><td>Check glucose! Treat underlying cause</td></tr></table></div><div class="tips"><div class="pearl"><div class="tip-header">✓ Pearls</div><ul style="margin-left:16px;"><li>IM midazolam if no IV</li><li>Max 2 benzo doses</li><li>Check glucose immediately</li><li>Prolonged postictal → EEG</li></ul></div><div class="pitfall"><div class="tip-header">✗ Pitfalls</div><ul style="margin-left:16px;"><li>Waiting too long to treat</li><li>Repeated benzo doses (>2)</li><li>Forgetting to intubate for anesthetics</li><li>Missing nonconvulsive SE</li></ul></div></div><button class="btn" onclick="state.stage=0;render()">🔄 Restart Case</button></div></div>`;
+    };
+
+    render();
+    </script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+/* Enhanced Feature Styles */
+.rdx-difficulty-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 300px;
+}
+.rdx-diff-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin: 2px;
+}
+.rdx-diff-btn.active {
+    background: #3b82f6;
+    color: white;
+}
+.rdx-diff-btn:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+}
+.rdx-diff-btn:hover:not(.active) {
+    background: #e2e8f0;
+}
+.rdx-refs-panel {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #93c5fd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+.rdx-refs-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+.rdx-refs-links {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+.rdx-refs-links a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.rdx-refs-links a:hover {
+    text-decoration: underline;
+}
+.rdx-debrief-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rdx-debrief-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #1f2937;
+}
+.rdx-path-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.rdx-path-optimal {
+    background: #dcfce7;
+    border-left: 4px solid #22c55e;
+}
+.rdx-path-suboptimal {
+    background: #fef9c3;
+    border-left: 4px solid #eab308;
+}
+.rdx-path-wrong {
+    background: #fecaca;
+    border-left: 4px solid #ef4444;
+}
+.rdx-hint-beginner {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+.rdx-hint-advanced {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+</style>
+
+<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
+    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
+        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    </div>
+</div>
+
+
+<!-- CROSS-PLATFORM LEARNING LINKS -->
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
+            <a href="../mechanism/neurology-module.html" style="display: block; color: #2563eb; font-size: 14px;">→ Status Epilepticus</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
+            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="adventure-hub.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Browse All Cases</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
+            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../CoachDx/mentor-chat.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../CoachDx/sbar-trainer.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+<!-- END CROSS-PLATFORM LINKS -->
+<div class="rdx-refs-panel" id="rdxRefsPanel">
+    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
+    <div class="rdx-refs-links"><a href="https://www.ahajournals.org/doi/10.1161/STR.0000000000000211" target="_blank" class="text-blue-600 hover:underline">AHA Stroke Guidelines</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK535369/" target="_blank" class="text-blue-600 hover:underline">StatPearls: Stroke</a></div>
+</div>
+
+<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
+    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+</div>
+
+<script>
+// ReasonDx Enhanced Features Module
+(function() {
+    // Decision tracking
+    window.rdxDecisionPath = window.rdxDecisionPath || [];
+    window.rdxTotalScore = window.rdxTotalScore || 0;
+    window.rdxMaxScore = window.rdxMaxScore || 0;
+    window.rdxDifficulty = 'intermediate';
+    
+    // Difficulty control
+    window.rdxSetDifficulty = function(level) {
+        window.rdxDifficulty = level;
+        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('rdx-btn-' + level).classList.add('active');
+        
+        // Update hint visibility
+        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
+            el.style.display = level === 'beginner' ? 'block' : 'none';
+        });
+        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
+            el.style.display = level === 'advanced' ? 'block' : 'none';
+        });
+    };
+    
+    // Track a decision
+    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+        window.rdxDecisionPath.push({
+            stage: stageId,
+            title: stageTitle,
+            choice: choiceId,
+            choiceText: choiceText,
+            outcome: outcome,
+            points: points,
+            maxPoints: maxPoints,
+            isOptimal: isOptimal,
+            optimalChoice: optimalChoice,
+            optimalText: optimalText
+        });
+        window.rdxTotalScore += points;
+        window.rdxMaxScore += maxPoints;
+    };
+    
+    // Show visual debrief
+    window.rdxShowDebrief = function() {
+        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
+        
+        let grade, gradeColor, gradeEmoji;
+        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
+        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
+        
+        let pathHTML = '';
+        if (window.rdxDecisionPath.length > 0) {
+            pathHTML = window.rdxDecisionPath.map(d => {
+                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
+                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
+                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
+                return '<div class="' + pathClass + ' rdx-path-item">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
+                    '<div>' +
+                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
+                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
+                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
+                    '</div>' +
+                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
+                    '</div></div>';
+            }).join('');
+        } else {
+            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+        }
+        
+        document.getElementById('rdxDebriefContent').innerHTML = 
+            '<div style="text-align:center;margin-bottom:24px;">' +
+            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
+            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
+            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
+            '</div></div>' +
+            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
+            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
+            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
+            '</div></div>' +
+            '<div style="display:flex;gap:12px;">' +
+            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '</div>';
+        
+        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
+    };
+    
+    // Auto-inject hint examples into existing content
+    window.rdxInit = function() {
+        // Could add dynamic hint injection here based on difficulty
+        console.log('ReasonDx Enhanced Features loaded for: Status Epilepticus Expanded Dual Adventure');
+    };
+    
+    // Initialize on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.rdxInit);
+    } else {
+        window.rdxInit();
+    }
+})();
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+</body>
+</html>

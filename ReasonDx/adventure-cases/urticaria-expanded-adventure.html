@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urticaria Workup - Expanded Deep Dive Adventure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .stage-card { transition: all 0.3s ease; }
+        .stage-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+        .highlight { animation: highlight 0.5s ease; }
+        @keyframes highlight { 0% { background-color: #fef3c7; } 100% { background-color: transparent; } }
+        .pulse { animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+        .path-correct { border-left: 4px solid #10b981; }
+        .path-suboptimal { border-left: 4px solid #f59e0b; }
+        .path-incorrect { border-left: 4px solid #ef4444; }
+        .why-chain { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); }
+        .mechanism-box { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); }
+        .pearl-box { background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%); }
+        .pitfall-box { background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen">
+    <div id="app" class="container mx-auto px-4 py-8 max-w-5xl">
+        
+        <!-- Header -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between flex-wrap gap-4">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">🔬 Urticaria Workup</h1>
+                    <p class="text-gray-500 mt-1">Expanded Deep Dive Adventure • 10 Stages</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="text-right">
+                        <div class="text-sm text-gray-500">Progress</div>
+                        <div class="text-2xl font-bold text-blue-600" id="score">0%</div>
+                    </div>
+                    <button onclick="resetGame()" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium transition-colors">
+                        🔄 Restart
+                    </button>
+                </div>
+            </div>
+            <div class="mt-4 h-3 bg-gray-100 rounded-full overflow-hidden">
+                <div id="progressBar" class="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-500" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <!-- Game Container -->
+        <div id="gameContainer" class="space-y-6">
+            <!-- Stages will be rendered here -->
+        </div>
+
+        <!-- Summary Panel (hidden initially) -->
+        <div id="summaryPanel" class="hidden">
+            <!-- Summary content rendered by JS -->
+        </div>
+    </div>
+
+    <script>
+const defined = v => v !== undefined && v !== null;
+
+const caseData = {
+    title: "Urticaria Workup",
+    subtitle: "Chronic Hives: More Than Skin Deep",
+    totalStages: 10,
+    
+    stages: [
+        {
+            id: 1,
+            title: "The Hives That Won't Quit",
+            scenario: `A 34-year-old woman presents with raised, itchy welts appearing daily for 8 weeks. Each individual wheal lasts 2-4 hours then resolves, but new ones appear constantly. She's tried OTC antihistamines with minimal relief. She denies facial swelling, difficulty breathing, or GI symptoms.
+
+Vital Signs: BP 122/78, HR 76, Temp 98.4°F
+Exam: Multiple erythematous, raised wheals on trunk and extremities, ranging 1-4 cm. Lesions blanch with pressure. No angioedema. Dermographism present on back scratch.`,
+            
+            question: "What is your initial classification of this patient's urticaria?",
+            
+            options: [
+                {
+                    id: "A",
+                    text: "Acute urticaria - likely allergic cause, need allergy testing",
+                    outcome: "Incorrect classification",
+                    feedback: "Acute urticaria is defined as symptoms present for <6 weeks. This patient has had daily symptoms for 8 weeks, making this chronic urticaria by definition.",
+                    points: 0,
+                    isOptimal: false,
+                    pathClass: "path-incorrect"
+                },
+                {
+                    id: "B",
+                    text: "Chronic spontaneous urticaria (CSU) - symptoms >6 weeks without identifiable trigger",
+                    outcome: "Correct classification",
+                    feedback: "Excellent! This is chronic spontaneous urticaria (CSU) - daily or near-daily wheals for >6 weeks without a consistent external trigger. CSU is the most common form of chronic urticaria, affecting ~1% of the population.",
+                    points: 10,
+                    isOptimal: true,
+                    pathClass: "path-correct"
+                },
+                {
+                    id: "C",
+                    text: "Chronic inducible urticaria - need to identify the physical trigger",
+                    outcome: "Partially correct but missing the primary diagnosis",
+                    feedback: "The dermographism noted is a form of chronic inducible urticaria, BUT this patient also has spontaneous wheals appearing without triggers. She has CSU with concomitant dermographism - a common combination.",
+                    points: 5,
+                    isOptimal: false,
+                    pathClass: "path-suboptimal"
+                },
+                {
+                    id: "D",
+                    text: "Urticarial vasculitis - wheals lasting hours suggests vessel inflammation",
+                    outcome: "Incorrect - missing key features",
+                    feedback: "Urticarial vasculitis wheals typically last >24 hours (often 3-5 days), are painful more than itchy, and leave residual pigmentation/bruising. This patient's wheals resolve in 2-4 hours with no residua - classic CSU pattern.",
+                    points: 0,
+                    isOptimal: false,
+                    pathClass: "path-incorrect"
+                }
+            ],
+            
+            whyChain: {
+                title: "WHY does duration define acute vs. chronic urticaria?",
+                steps: [
+                    "Acute urticaria (<6 weeks) is often triggered by identifiable causes (infection, drug, food, contact allergen)",
+                    "The immune response in acute urticaria typically resolves once the trigger is removed",
+                    "Chronic urticaria (>6 weeks) indicates mast cell dysregulation that persists beyond typical trigger-response timeframes",
+                    "CSU specifically involves autoimmune mechanisms in 30-50% of cases (autoantibodies against IgE or FcεRI receptor)",
+                    "This mechanistic difference explains why allergy testing is LOW YIELD in CSU (rarely identifies causative allergens)"
+                ]
+            },
+            
+            mechanism: {
+                title: "Pathophysiology of the Wheal",
+                content: `The classic urticarial wheal forms through a specific sequence:
+
+1. MAST CELL ACTIVATION → release of histamine, tryptase, prostaglandins, leukotrienes
+2. HISTAMINE EFFECTS → vasodilation (erythema), increased vascular permeability (edema/wheal), sensory nerve stimulation (pruritus)
+3. WHEAL FORMATION → fluid extravasates into dermis, creating raised, edematous plaque
+4. RESOLUTION → histamine metabolized (half-life ~2 min), fluid reabsorbed, wheal resolves in 2-24 hours
+
+CSU vs Normal: In CSU, mast cells are hyperreactive or activated by:
+• Type I autoimmune: IgG autoantibodies against IgE cross-link mast cells
+• Type IIb autoimmune: IgG autoantibodies against FcεRI receptor activate mast cells directly
+• Intrinsic mast cell defects: altered signaling thresholds`
+            },
+            
+            pearl: "The 6-week rule: In ACUTE urticaria, investigate for allergic triggers. In CHRONIC urticaria (>6 weeks), allergic triggers are rarely identified (<10% of cases). This fundamentally changes your diagnostic approach.",
+            
+            pitfall: "Don't order extensive allergy panels for chronic urticaria! IgE testing, skin prick testing, and food elimination diets have very low yield in CSU and may lead patients down costly, frustrating rabbit holes."
+        },
+        
+        {
+            id: 2,
+            title: "The Diagnostic Workup Question",
+            scenario: `You've classified this as chronic spontaneous urticaria. The patient asks what tests she needs.
+
+Her symptoms:
+- Daily wheals for 8 weeks
+- No angioedema
+- No systemic symptoms (fever, weight loss, joint pain)
+- Dermographism present
+- No medication changes
+- No new foods correlating with flares`,
+            
+            question: "What laboratory workup is indicated for straightforward CSU?",
+            
+            options: [
+                {
+                    id: "A",
+                    text: "Comprehensive panel: CBC, CMP, TSH, ESR, CRP, ANA, complement levels, tryptase, IgE panels",
+                    outcome: "Excessive testing",
+                    feedback: "Guidelines (EAACI/GA²LEN/EuroGuiDerm 2022) recommend LIMITED testing for uncomplicated CSU. Extensive panels rarely change management and increase cost/anxiety. Only CBC and CRP/ESR are routinely recommended.",
+                    points: 3,
+                    isOptimal: false,
+                    pathClass: "path-suboptimal"
+                },
+                {
+                    id: "B",
+                    text: "CBC with differential and inflammatory markers (CRP or ESR) only",
+                    outcome: "Guideline-concordant approach",
+                    feedback: "Correct! Current guidelines recommend only CBC (to exclude eosinophilia, basophilia suggesting other conditions) and CRP/ESR (to screen for underlying inflammatory conditions). Additional tests only if history suggests specific concerns.",
+                    points: 10,
+                    isOptimal: true,
+                    pathClass: "path-correct"
+                },
+                {
+                    id: "C",
+                    text: "No testing needed - clinical diagnosis, start treatment empirically",
+                    outcome: "Reasonable but not guideline-concordant",
+                    feedback: "While CSU is largely a clinical diagnosis, basic labs help exclude mimics and identify subsets (elevated inflammatory markers predict poorer response to antihistamines). The minimal recommended workup is quick and informative.",
+                    points: 5,
+                    isOptimal: false,
+                    pathClass: "path-suboptimal"
+                },
+                {
+                    id: "D",
+                    text: "Skin biopsy first to rule out urticarial vasculitis",
+                    outcome: "Not indicated for typical CSU",
+                    feedback: "Biopsy is only indicated when features suggest urticarial vasculitis: wheals >24 hours, painful rather than pruritic, residual purpura/pigmentation, systemic symptoms. This patient has none of these red flags.",
+                    points: 2,
+                    isOptimal: false,
+                    pathClass: "path-incorrect"
+                }
+            ],
+            
+            whyChain: {
+                title: "WHY is extensive testing not recommended?",
+                steps: [
+                    "Multiple studies show allergy testing identifies causative triggers in <10% of CSU patients",
+                    "Extensive workups often reveal incidental findings that don't affect management",
+                    "False-positive allergy tests lead to unnecessary food avoidance and anxiety",
+                    "CSU is primarily a mast cell/autoimmune condition, not an allergic condition",
+                    "Cost-effectiveness analysis supports targeted testing based on clinical suspicion, not routine panels"
+                ]
+            },
+            
+            mechanism: {
+                title: "What CBC and CRP Actually Tell You",
+                content: `CBC findings that matter:
+• EOSINOPHILIA → consider parasites, drug reaction, eosinophilic conditions, atopy
+• BASOPHILIA → may indicate autoimmune CSU subtype (basopenia often seen in active autoimmune CSU)
+• ANEMIA/THROMBOCYTOSIS → suggests underlying inflammatory/systemic condition
+
+CRP/ESR findings:
+• ELEVATED → poorer response to antihistamines predicted, consider underlying condition
+• VERY ELEVATED → urticarial vasculitis, autoinflammatory syndrome, infection
+• NORMAL → typical CSU, usually good antihistamine response
+
+Why NOT routine thyroid testing?
+• ~15-20% of CSU patients have thyroid autoantibodies
+• BUT treating thyroid disease rarely improves CSU
+• Test if symptomatic or refractory to standard therapy`
+            },
+            
+            pearl: "The less-is-more principle: In CSU without red flags, CBC + CRP is sufficient. Save extensive workups for patients with: atypical features, systemic symptoms, poor treatment response, or specific historical clues.",
+            
+            pitfall: "Thyroid antibody testing is controversial. While common in CSU, euthyroid patients with antibodies don't benefit from treatment. Only test TSH; pursue antibodies if TSH abnormal or CSU refractory."
+        },
+        
+        {
+            id: 3,
+            title: "First-Line Treatment",
+            scenario: `Lab results return:
+- CBC: WBC 7.2, normal differential, no eosinophilia
+- CRP: 0.4 mg/dL (normal)
+
+The patient reports she's been taking diphenhydramine (Benadryl) 25mg twice daily with minimal improvement. She's frustrated and wants something that works.`,
+            
+            question: "What is the appropriate first-line treatment for CSU?",
+            
+            options: [
+                {
+                    id: "A",
+                    text: "Continue diphenhydramine but increase to 50mg four times daily",
+                    outcome: "Wrong antihistamine class",
+                    feedback: "First-generation antihistamines (diphenhydramine) are NOT recommended for CSU due to sedation, cognitive impairment, and short duration. Second-generation H1-antihistamines are first-line.",
+                    points: 0,
+                    isOptimal: false,
+                    pathClass: "path-incorrect"
+                },
+                {
+                    id: "B",
+                    text: "Start a second-generation H1-antihistamine at standard dose (e.g., cetirizine 10mg daily)",
+                    outcome: "Correct initial approach",
+                    feedback: "Correct first step! Second-generation H1-antihistamines (cetirizine, loratadine, fexofenadine, levocetirizine, desloratadine) are first-line. Start at standard dose and assess response over 2-4 weeks.",
+                    points: 10,
+                    isOptimal: true,
+                    pathClass: "path-correct"
+                },
+                {
+                    id: "C",
+                    text: "Start prednisone 40mg daily for 2 weeks to get rapid control",
+                    outcome: "Inappropriate long-term management",
+                    feedback: "Systemic corticosteroids should be avoided or used only as brief rescue (3-7 days max) for severe exacerbations. Long-term steroids cause significant harm and don't address underlying CSU pathophysiology.",
+                    points: 2,
+                    isOptimal: false,
+                    pathClass: "path-incorrect"
+                },
+                {
+                    id: "D",
+                    text: "Start omalizumab (Xolair) - this is chronic and refractory to OTC antihistamines",
+                    outcome: "Premature escalation",
+                    feedback: "Omalizumab is third-line therapy. She hasn't tried appropriate first-line treatment (second-gen H1-antihistamines at proper doses). Many patients respond to guideline-directed antihistamine therapy.",
+                    points: 3,
+                    isOptimal: false,
+                    pathClass: "path-suboptimal"
+                }
+            ],
+            
+            whyChain: {
+                title: "WHY second-generation over first-generation antihistamines?",
+                steps: [
+                    "Second-gen H1-antihistamines don't cross blood-brain barrier significantly → minimal sedation/cognitive effects",
+                    "Longer half-life allows once or twice daily dosing (vs q4-6h for first-gen)",
+                    "Equivalent or superior efficacy at blocking peripheral H1 receptors",
+                    "No anticholinergic side effects (dry mouth, urinary retention, constipation)",
+                    "Safe for long-term use, even at higher-than-standard doses in CSU"
+                ]
+            },
+            
+            mechanism: {
+                title: "Antihistamine Pharmacology in CSU",
+                content: `H1 Receptor Blockade:
+• Histamine binds H1 receptors → vasodilation, increased permeability, pruritus
+• Antihistamines are INVERSE AGONISTS (not just blockers) - stabilize receptor in inactive state
+• Continuous dosing more effective than PRN (maintains receptor occupancy)
+
+Second-Generation Advantages:
+• Cetirizine/Levocetirizine: highest potency, slight sedation potential
+• Fexofenadine: truly non-sedating, but lower potency
+• Loratadine/Desloratadine: intermediate, good tolerability
+
+Why Higher Doses Work in CSU:
+• Standard doses achieve ~70% H1 receptor occupancy
+• CSU often requires ~90% occupancy for symptom control
+• Guidelines endorse up to 4x standard dosing (safe, well-tolerated)
+• Higher doses particularly help autoimmune CSU subtype`
+            },
+            
+            pearl: "Second-generation antihistamines can safely be dosed up to 4x standard dose in CSU (e.g., cetirizine 40mg/day). This is licensed in many countries and endorsed by international guidelines. Always try dose escalation before adding other medications.",
+            
+            pitfall: "Don't let patients languish on first-gen antihistamines! Diphenhydramine causes cognitive impairment equivalent to legal intoxication. It's a poor choice for any chronic condition requiring daily treatment."
+        },
+        
+        {
+            id: 4,
+            title: "Inadequate Response - Escalation",
+            scenario: `The patient returns after 4 weeks on cetirizine 10mg daily. She reports ~50% improvement but still has daily wheals affecting her sleep and work.
+
+She asks: "Is there anything stronger? This is still really impacting my life."`,
+            
+            question: "What is the next step according to current guidelines?",
+            
+            options: [
+                {
+                    id: "A",
+                    text: "Add a different second-gen antihistamine (e.g., add fexofenadine to cetirizine)",
+                    outcome: "Not guideline-recommended",
+                    feedback: "Combining different second-gen antihistamines isn't clearly supported. They all target the same H1 receptor. The recommended approach is to increase the dose of ONE antihistamine up to 4x standard.",
+                    points: 4,
+                    isOptimal: false,
+                    pathClass: "path-suboptimal"
+                },
+                {
+                    id: "B",
+                    text: "Increase cetirizine to 20mg daily (2x standard dose), reassess in 2-4 weeks",
+                    outcome: "Optimal guideline-directed approach",
+                    feedback: "Exactly right! Step 2 is increasing the second-gen antihistamine up to 4x standard dose. Start with 2x and titrate up as needed. This is effective for many patients who fail standard dosing.",
+                    points: 10,
+                    isOptimal: true,
+                    pathClass: "path-correct"
+                },
+                {
+                    id: "C",
+                    text: "Add H2-blocker (famotidine) and leukotriene inhibitor (montelukast)",
+                    outcome: "Outdated approach",
+                    feedback: "H2-blockers and montelukast were previously recommended as add-ons but current guidelines (2022) do NOT recommend them routinely - evidence of benefit is weak. Dose escalation of H1-antihistamines is preferred.",
+                    points: 3,
+                    isOptimal: false,
+                    pathClass: "path-suboptimal"
+                },
+                {
+                    id: "D",
+                    text: "Refer to allergy/immunology for omalizumab",
+                    outcome: "Premature - hasn't completed step 2",
+                    feedback: "Omalizumab (step 3) is indicated after failure of antihistamines at UP TO 4x dose. She's only on 1x dose. Try dose escalation first - many patients respond and avoid the need for biologics.",
+                    points: 5,
+                    isOptimal: false,
+                    pathClass: "path-suboptimal"
+                }
+            ],
+            
+            whyChain: {
+                title: "WHY does dose escalation work?",
+                steps: [
+                    "Standard antihistamine doses were determined for allergic rhinitis, not CSU",
+                    "CSU involves more intense/sustained histamine release than seasonal allergies",
+                    "Higher receptor occupancy needed to overcome increased histamine levels",
+                    "Studies show linear dose-response up to 4x standard dose in CSU",
+                    "Higher doses remain safe due to wide therapeutic window of second-gen antihistamines"
+                ]
+            },
+            
+            mechanism: {
+                title: "The Updated Treatment Ladder (2022 Guidelines)",
+                content: `Step 1: Second-gen H1-antihistamine at standard dose (2-4 weeks)
+        ↓ If inadequate response
+Step 2: Increase to 2x, then 3x, then 4x standard dose (can escalate every 2-4 weeks)
+        ↓ If still inadequate at 4x dose
+Step 3: Add omalizumab (anti-IgE biologic)
+        ↓ If inadequate response after 6 months
+Step 4: Add cyclosporine (or other immunosuppressant)
+
+What's NO LONGER RECOMMENDED:
+• H2-blockers (famotidine, ranitidine) - weak evidence
+• Leukotriene inhibitors (montelukast) - may help some but not routine
+• First-generation antihistamines - side effect burden
+• Routine oral corticosteroids - harm > benefit for chronic use`
+            },
+            
+            pearl: "The treatment ladder is sequential, not parallel. Fully optimize each step before escalating. Many patients who 'failed' antihistamines were never tried at appropriate doses (up to 4x).",
+            
+            pitfall: "Don't skip to omalizumab too quickly! It's expensive (~$30,000/year), requires injections every 2-4 weeks, and many patients respond to high-dose antihistamines alone. Complete the ladder."
+        },
+        
+        {
+            id: 5,
+            title: "Activity Assessment",
+            scenario: `You increase cetirizine to 20mg daily. Before she leaves, you want to objectively track her disease activity and treatment response.
+
+"How do doctors usually measure whether the hives are getting better?" she asks.`,
+            
+            question: "What validated tool should you use to monitor CSU activity?",
+            
+            options: [
+                {
+                    id: "A",
+                    text: "Weekly photographs of skin lesions",
+                    outcome: "Helpful but not standardized",
+                    feedback: "Photos can be useful for documentation but aren't validated for tracking disease activity. Wheals come and go quickly, so photos capture only a moment. Standardized scoring tools are preferred.",
+                    points: 4,
+                    isOptimal: false,
+                    pathClass: "path-suboptimal"
+                },
+                {
+                    id: "B",
+                    text: "Urticaria Activity Score (UAS7) - daily tracking of wheals and pruritus",
+                    outcome: "Gold standard assessment",
+                    feedback: "Excellent! UAS7 is the validated, guideline-recommended tool for monitoring CSU. Patients rate daily wheal number (0-3) and itch intensity (0-3), summed over 7 days (max 42). It's free, simple, and predicts treatment response.",
+                    points: 10,
+                    isOptimal: true,
+                    pathClass: "path-correct"
+                },
+                {
+                    id: "C",
+                    text: "Monthly clinical assessment - 'Are your hives better, worse, or same?'",
+                    outcome: "Insufficient for tracking",
+                    feedback: "Subjective recall is unreliable for fluctuating conditions like CSU. Patients often can't remember symptom patterns. Prospective daily tracking with UAS7 gives much more accurate data for treatment decisions.",
+                    points: 3,
+                    isOptimal: false,
+                    pathClass: "path-suboptimal"
+                },
+                {
+                    id: "D",
+                    text: "Serial tryptase levels to track mast cell activity",
+                    outcome: "Not useful for CSU monitoring",
+                    feedback: "Tryptase is elevated during anaphylaxis and in mastocytosis, but is typically normal in CSU (mast cells degranulate locally, not enough to elevate serum levels). It's not a valid monitoring tool.",
+                    points: 0,
+                    isOptimal: false,
+                    pathClass: "path-incorrect"
+                }
+            ],
+            
+            whyChain: {
+                title: "WHY does UAS7 matter for management?",
+                steps: [
+                    "CSU fluctuates day-to-day; single-visit assessments miss the full picture",
+                    "UAS7 captures weekly disease burden through prospective daily tracking",
+                    "Score correlates with quality of life impairment and predicts treatment needs",
+                    "Enables objective comparison of treatment phases (baseline vs. on-treatment)",
+                    "Required for omalizumab eligibility in many healthcare systems (UAS7 ≥16 despite antihistamines)"
+                ]
+            },
+            
+            mechanism: {
+                title: "How to Use UAS7",
+                content: `Daily Scoring (patient self-reports each evening):
+
+WHEAL SCORE (0-3):
+0 = None
+1 = Mild (<20 wheals/24h)
+2 = Moderate (20-50 wheals/24h)
+3 = Severe (>50 wheals or large confluent areas)
+
+PRURITUS SCORE (0-3):
+0 = None
+1 = Mild (present but not bothersome)
+2 = Moderate (bothersome but doesn't interfere with daily activities/sleep)
+3 = Severe (significantly interferes with activities/sleep)
+
+WEEKLY SUM (UAS7):
+• 0 = Complete control (urticaria-free)
+• 1-6 = Well-controlled
+• 7-15 = Mild activity
+• 16-27 = Moderate activity
+• 28-42 = Severe activity
+
+Treatment goals: UAS7 ≤6 (well-controlled) or ideally 0`
+            },
+            
+            pearl: "Document a baseline UAS7 before starting/changing treatment. This creates objective evidence for treatment decisions and is required for biologic authorization in many insurance systems.",
+            
+            pitfall: "Don't eyeball it! Patients and physicians tend to underestimate or overestimate disease severity from recall. UAS7 takes 30 seconds daily and dramatically improves management decisions."
+        },
+        
+        {
+            id: 6,
+            title: "Partial Response Continues",
+            scenario: `8 weeks later: Patient has titrated up to cetirizine 40mg daily (4x standard dose). Her UAS7 improved from 28 (severe) at baseline to 18 (moderate) currently.
+
+She still has daily wheals and moderate itch. Sleep is disrupted 3-4 nights per week. She's ready for the next step.
+
+Labs remain normal. No signs of underlying disease.`,
+            
+            question: "What treatment should be added for this antihistamine-refractory CSU?",
+            
+            options: [
+                {
+                    id: "A",
+                    text: "Add montelukast and famotidine as combination therapy",
+                    outcome: "Not recommended by current guidelines",
+                    feedback: "While previously used, 2022 guidelines removed routine recommendation for montelukast and H2-blockers due to weak evidence. Proceed to omalizumab which has strong evidence for antihistamine-refractory CSU.",
+                    points: 3,
+                    isOptimal: false,
+                    pathClass: "path-suboptimal"
+                },
+                {
+                    id: "B",
+                    text: "Start omalizumab 300mg subcutaneously every 4 weeks",
+                    outcome: "Correct - guideline step 3",
+                    feedback: "Correct! Omalizumab (anti-IgE monoclonal antibody) is the recommended step 3 treatment for CSU refractory to high-dose antihistamines. Standard dose is 300mg q4 weeks regardless of IgE level or body weight (unlike asthma dosing).",
+                    points: 10,
+                    isOptimal: true,
+                    pathClass: "path-correct"
+                },
+                {
+                    id: "C",
+                    text: "Start cyclosporine for faster immunosuppression",
+                    outcome: "Skipping ahead in algorithm",
+                    feedback: "Cyclosporine is step 4 - reserved for omalizumab failures. It has more side effects (nephrotoxicity, hypertension, immunosuppression) than omalizumab and requires close monitoring. Try omalizumab first.",
+                    points: 3,
+                    isOptimal: false,
+                    pathClass: "path-incorrect"
+                },
+                {
+                    id: "D",
+                    text: "Short course of prednisone 40mg for 2 weeks to 'reset' the immune system",
+                    outcome: "Inappropriate approach",
+                    feedback: "There's no evidence that steroid bursts 'reset' anything in CSU. They provide temporary relief but symptoms return when stopped. Guideline limit is 10 days max for acute flares only, not as a management strategy.",
+                    points: 0,
+                    isOptimal: false,
+                    pathClass: "path-incorrect"
+                }
+            ],
+            
+            whyChain: {
+                title: "WHY does omalizumab work in CSU?",
+                steps: [
+                    "Omalizumab binds free IgE, reducing circulating IgE levels by ~95%",
+                    "Lower IgE → downregulation of FcεRI (high-affinity IgE receptor) on mast cells and basophils",
+                    "With fewer receptors, mast cells are less easily activated by any trigger",
+                    "In autoimmune CSU, fewer FcεRI receptors = fewer targets for anti-FcεRI autoantibodies",
+                    "Additionally, omalizumab may directly stabilize mast cells independent of IgE pathway"
+                ]
+            },
+            
+            mechanism: {
+                title: "Omalizumab in CSU: Practical Points",
+                content: `Dosing:
+• FIXED dose: 300mg SC every 4 weeks (can try q2 weeks if partial response)
+• Unlike asthma, CSU dosing is NOT based on IgE level or weight
+• Continue high-dose antihistamines concurrently
+
+Onset:
+• Fast responders: improvement within 1-2 weeks
+• Standard response: 12 weeks
+• Late responders: up to 6 months (don't give up too early!)
+
+Response rates:
+• ~65-70% achieve UAS7 ≤6 (well-controlled)
+• ~35-40% achieve UAS7 = 0 (complete response)
+• ~15-20% are true non-responders
+
+Monitoring:
+• Observe 30 min after first 3 injections (anaphylaxis risk ~0.1%)
+• Can transition to home self-injection after initial doses
+• No routine lab monitoring required`
+            },
+            
+            pearl: "Unlike asthma, CSU omalizumab dosing is fixed at 300mg q4 weeks regardless of baseline IgE. Some insurance companies incorrectly apply asthma weight/IgE dosing tables - be prepared to appeal with guidelines.",
+            
+            pitfall: "Don't stop omalizumab too early! Up to 25% of responders take 3-6 months to respond. The recommended trial period is at least 6 months before concluding treatment failure."
+        },
+        
+        {
+            id: 7,
+            title: "Omalizumab Response",
+            scenario: `The patient starts omalizumab 300mg q4 weeks while continuing cetirizine 40mg daily.
+
+At 12-week follow-up:
+UAS7: 4 (down from 18) - well-controlled!
+She's thrilled: "I feel like I have my life back. How long do I need to stay on this?"`,
+            
+            question: "What is the recommended approach regarding omalizumab duration?",
+            
+            options: [
+                {
+                    id: "A",
+                    text: "Continue indefinitely - CSU is chronic and requires lifelong treatment",
+                    outcome: "Overly pessimistic",
+                    feedback: "While some patients need long-term treatment, CSU does remit spontaneously in many patients. Guidelines recommend attempting discontinuation after sustained control to identify those who can stop therapy.",
+                    points: 5,
+                    isOptimal: false,
+                    pathClass: "path-suboptimal"
+                },
+                {
+                    id: "B",
+                    text: "Stop now since UAS7 is controlled - she's cured",
+                    outcome: "Premature discontinuation",
+                    feedback: "Stopping immediately often leads to relapse. The recommended approach is to continue for a period of sustained control (typically 6-12 months) before attempting discontinuation.",
+                    points: 2,
+                    isOptimal: false,
+                    pathClass: "path-incorrect"
+                },
+                {
+                    id: "C",
+                    text: "Continue for 6-12 months of sustained control, then attempt discontinuation or dose spacing",
+                    outcome: "Optimal approach",
+                    feedback: "Correct! After achieving sustained control (6+ months), attempt discontinuation or extended dosing intervals (e.g., q6-8 weeks). ~30-50% of well-controlled patients maintain remission off therapy. Restart if symptoms recur.",
+                    points: 10,
+                    isOptimal: true,
+                    pathClass: "path-correct"
+                },
+                {
+                    id: "D",
+                    text: "Taper the antihistamines first, then stop omalizumab",
+                    outcome: "Reasonable but not standard sequence",
+                    feedback: "Some clinicians do taper antihistamines first, but the more common approach is to maintain antihistamines (which are cheap and safe) while spacing omalizumab intervals. There's no strong evidence either way.",
+                    points: 6,
+                    isOptimal: false,
+                    pathClass: "path-suboptimal"
+                }
+            ],
+            
+            whyChain: {
+                title: "WHY is discontinuation attempted?",
+                steps: [
+                    "CSU has spontaneous remission rate of ~30-50% within 5 years",
+                    "Omalizumab may provide sustained benefit even after stopping (immunomodulatory effect)",
+                    "Cost of continuous omalizumab is substantial (~$30,000/year)",
+                    "Some patients remain in remission months to years after stopping",
+                    "Those who relapse can restart with expectation of rapid re-response"
+                ]
+            },
+            
+            mechanism: {
+                title: "Understanding CSU Natural History",
+                content: `Remission Patterns:
+• ~30-50% of CSU patients achieve spontaneous remission within 5 years
+• Average duration of disease: 2-5 years
+• Some patients have lifelong disease (especially autoimmune subtype)
+
+Factors predicting longer duration:
+• Autoimmune markers (positive autologous serum skin test, anti-TPO antibodies)
+• More severe baseline disease
+• Presence of angioedema
+• Coexisting chronic inducible urticaria
+
+Off-treatment expectations:
+• If omalizumab stopped after sustained control: ~30-50% remain in remission
+• Most relapses occur within 4-8 weeks of stopping
+• Re-treatment with omalizumab is typically equally effective
+
+Discontinuation strategy:
+• Option 1: Stop abruptly after 6-12 months control, restart if relapse
+• Option 2: Extend intervals (q6w → q8w) to find minimum effective frequency`
+            },
+            
+            pearl: "CSU is NOT necessarily lifelong. Always plan for eventual discontinuation attempts in patients who achieve good control. Many patients are pleasantly surprised to remain in remission.",
+            
+            pitfall: "Don't forget to continue antihistamines! Even well-controlled patients on omalizumab should maintain antihistamine therapy. The combination is more effective than either alone."
+        },
+        
+        {
+            id: 8,
+            title: "The Angioedema Question",
+            scenario: `At a later visit, the patient mentions her mother was recently diagnosed with "hereditary angioedema" after a severe swelling episode.
+
+"Should I be worried? Could my hives be related to what my mother has?"
+
+She has never had angioedema herself - only the urticaria we've been treating.`,
+            
+            question: "How do you address her concern about hereditary angioedema (HAE)?",
+            
+            options: [
+                {
+                    id: "A",
+                    text: "Order C4 and C1-INH levels now - HAE testing is indicated given family history",
+                    outcome: "Appropriate screening given family history",
+                    feedback: "Good clinical reasoning! While her presentation (CSU without angioedema) is NOT consistent with HAE, a first-degree relative with HAE warrants screening since HAE is autosomal dominant with 50% inheritance risk. C4 is the best screen.",
+                    points: 10,
+                    isOptimal: true,
+                    pathClass: "path-correct"
+                },
+                {
+                    id: "B",
+                    text: "Reassure her - HAE causes angioedema without hives, so her CSU is unrelated",
+                    outcome: "Correct distinction but misses screening opportunity",
+                    feedback: "You're right that HAE causes angioedema WITHOUT urticaria (key distinguishing feature!), so her CSU is indeed a separate condition. However, given 50% inheritance risk, she should still be screened even though asymptomatic currently.",
+                    points: 6,
+                    isOptimal: false,
+                    pathClass: "path-suboptimal"
+                },
+                {
+                    id: "C",
+                    text: "Her mother probably has the same thing she has - CSU often runs in families",
+                    outcome: "Dangerous assumption",
+                    feedback: "Critical error! HAE and CSU are completely different conditions. HAE involves bradykinin, is potentially life-threatening (laryngeal edema), and requires specific treatment. Never assume they're the same without proper evaluation.",
+                    points: 0,
+                    isOptimal: false,
+                    pathClass: "path-incorrect"
+                },
+                {
+                    id: "D",
+                    text: "Refer to genetics - HAE testing is too specialized for primary care",
+                    outcome: "Unnecessary delay",
+                    feedback: "HAE screening is simple: order C4 level (low in 95%+ of HAE patients even between attacks). If low, confirm with C1-INH level and function. This can be done in any clinic. Genetics referral not needed for initial screening.",
+                    points: 4,
+                    isOptimal: false,
+                    pathClass: "path-suboptimal"
+                }
+            ],
+            
+            whyChain: {
+                title: "WHY distinguish HAE from allergic/CSU angioedema?",
+                steps: [
+                    "HAE is bradykinin-mediated; CSU/allergic angioedema is histamine-mediated",
+                    "Antihistamines, epinephrine, and corticosteroids DON'T WORK for HAE",
+                    "HAE requires specific treatments (C1-INH concentrate, icatibant, ecallantide)",
+                    "Laryngeal HAE attacks can be fatal if not treated with HAE-specific therapy",
+                    "Misdiagnosis delays life-saving treatment and leads to unnecessary ER visits"
+                ]
+            },
+            
+            mechanism: {
+                title: "HAE vs. Histaminergic Angioedema",
+                content: `HISTAMINERGIC (allergic/CSU):
+• Usually accompanies urticaria
+• Responds to antihistamines, epinephrine, steroids
+• Pruritic
+• Onset minutes to hours
+• Usually resolves <24 hours
+
+BRADYKININ-MEDIATED (HAE):
+• NO urticaria - angioedema alone
+• Does NOT respond to antihistamines/epi/steroids
+• Painful/burning rather than itchy
+• Slower onset (hours to days)
+• Lasts 2-5 days without treatment
+• Can affect GI tract (severe abdominal pain)
+
+HAE Types:
+• Type 1 (85%): Low C1-INH level and function
+• Type 2 (15%): Normal C1-INH level, low function
+• Type 3 (rare): Normal C1-INH, often Factor XII mutations
+
+Screening: C4 level (low in >95% of HAE patients even when asymptomatic)`
+            },
+            
+            pearl: "The presence or absence of urticaria is the key clinical clue: Angioedema + hives = histaminergic (allergic or CSU). Angioedema WITHOUT hives = must consider HAE, ACE inhibitor, or idiopathic bradykinin-mediated.",
+            
+            pitfall: "HAE attacks can be triggered by ACE inhibitors even in previously asymptomatic carriers. If this patient has undiagnosed HAE, she must never take ACE inhibitors. Another reason to screen!"
+        },
+        
+        {
+            id: 9,
+            title: "Chronic Inducible Urticaria",
+            scenario: `During discussion, the patient mentions: "I've noticed that sometimes when I exercise or take a hot shower, I get a different kind of rash - tiny little bumps instead of the big hives. And cold weather makes my hands swell."
+
+You realize she may have additional forms of urticaria beyond her CSU.`,
+            
+            question: "What type(s) of chronic inducible urticaria should you consider testing for?",
+            
+            options: [
+                {
+                    id: "A",
+                    text: "Cold urticaria only - the cold-triggered hand swelling is most concerning",
+                    outcome: "Incomplete evaluation",
+                    feedback: "Cold urticaria should be tested, but you're missing the heat/exercise trigger which suggests cholinergic urticaria. Her description of 'tiny bumps' with heat is classic for cholinergic. Evaluate for both.",
+                    points: 5,
+                    isOptimal: false,
+                    pathClass: "path-suboptimal"
+                },
+                {
+                    id: "B",
+                    text: "Both cholinergic urticaria (heat/exercise) and cold urticaria - confirm with provocation tests",
+                    outcome: "Comprehensive approach",
+                    feedback: "Correct! She describes two distinct inducible urticarias: cholinergic (small wheals with heat/exercise/sweating) and cold urticaria (swelling with cold exposure). Ice cube test and exercise challenge can confirm. Important to identify both for management.",
+                    points: 10,
+                    isOptimal: true,
+                    pathClass: "path-correct"
+                },
+                {
+                    id: "C",
+                    text: "This is all the same CSU - no need to differentiate subtypes",
+                    outcome: "Missing important distinctions",
+                    feedback: "Chronic inducible urticarias are distinct from CSU and have specific triggers and management considerations. Cold urticaria, in particular, has anaphylaxis risk with cold water immersion. Must identify and counsel appropriately.",
+                    points: 2,
+                    isOptimal: false,
+                    pathClass: "path-incorrect"
+                },
+                {
+                    id: "D",
+                    text: "Solar urticaria - exercise outdoors involves sun exposure",
+                    outcome: "Incorrect trigger identified",
+                    feedback: "Her symptoms correlate with heat/sweating and cold, not UV exposure. Solar urticaria causes wheals in sun-exposed areas minutes after UV exposure and resolves quickly in shade. Her pattern fits cholinergic and cold urticaria.",
+                    points: 2,
+                    isOptimal: false,
+                    pathClass: "path-incorrect"
+                }
+            ],
+            
+            whyChain: {
+                title: "WHY identify chronic inducible urticarias?",
+                steps: [
+                    "Patients often have CSU plus one or more inducible urticarias",
+                    "Each type has specific triggers to avoid",
+                    "Cold urticaria has unique anaphylaxis risk (cold water immersion)",
+                    "Treatment may need to target specific pathways",
+                    "Proper diagnosis enables effective counseling and risk mitigation"
+                ]
+            },
+            
+            mechanism: {
+                title: "Common Chronic Inducible Urticarias",
+                content: `CHOLINERGIC URTICARIA:
+• Trigger: Sweating (exercise, heat, emotion, spicy food)
+• Appearance: Small (1-3mm) punctate wheals with surrounding flare
+• Mechanism: Possibly autoimmune against sweat gland antigens
+• Test: Exercise challenge until sweating, passive warming (hot bath)
+• Treatment: Antihistamines, exercise desensitization
+
+COLD URTICARIA:
+• Trigger: Cold air, water, objects
+• Appearance: Wheals/angioedema at cold contact sites
+• Mechanism: Unknown - cold-dependent mast cell degranulation
+• Test: Ice cube test (apply ice 5 min, observe rewarming)
+• Treatment: Antihistamines, omalizumab; CRITICAL: avoid cold water immersion (anaphylaxis risk)
+
+DERMOGRAPHISM (symptomatic):
+• Trigger: Mechanical pressure/friction
+• Test: Firm stroke with blunt object, observe for wheal
+• She already has this (noted on initial exam)
+
+Less common: Solar, aquagenic, pressure, vibratory, contact`
+            },
+            
+            pearl: "The 'small bumps' description is pathognomonic for cholinergic urticaria. Classic CSU has larger wheals (1-5+ cm). When patients describe distinct morphologies or clear triggers, investigate for coexisting inducible urticarias.",
+            
+            pitfall: "Cold urticaria is potentially fatal! Patients must be counseled NEVER to jump into cold water (pools, lakes, oceans). Sudden cold water immersion can trigger massive mast cell degranulation and anaphylactic shock."
+        },
+        
+        {
+            id: 10,
+            title: "Long-Term Management Plan",
+            scenario: `Summary of this patient's diagnoses:
+1. Chronic spontaneous urticaria - controlled on omalizumab + cetirizine
+2. Dermographism
+3. Cholinergic urticaria (confirmed with exercise challenge)
+4. Cold urticaria (confirmed with ice cube test)
+5. HAE screening: C4 normal - reassured
+
+She's doing well and asks about long-term management and what to watch for.`,
+            
+            question: "Which elements should be included in her long-term management plan?",
+            
+            options: [
+                {
+                    id: "A",
+                    text: "Continue current medications indefinitely with annual follow-up",
+                    outcome: "Incomplete plan",
+                    feedback: "While stable follow-up is good, the plan should include periodic reassessment for omalizumab discontinuation, trigger avoidance counseling for her inducible urticarias, and safety planning for cold urticaria anaphylaxis risk.",
+                    points: 5,
+                    isOptimal: false,
+                    pathClass: "path-suboptimal"
+                },
+                {
+                    id: "B",
+                    text: "Comprehensive plan: periodic UAS7 assessment, omalizumab discontinuation trial when stable, cold water avoidance, epinephrine for cold urticaria, exercise pre-medication protocol",
+                    outcome: "Excellent comprehensive approach",
+                    feedback: "Perfect! This addresses all her conditions: monitor CSU control, plan eventual medication reduction, safety counseling for cold urticaria (avoid cold immersion, carry epinephrine), and management strategy for exercise-induced symptoms.",
+                    points: 10,
+                    isOptimal: true,
+                    pathClass: "path-correct"
+                },
+                {
+                    id: "C",
+                    text: "Refer to allergy/immunology for all future management since she has multiple diagnoses",
+                    outcome: "Appropriate but may not be necessary",
+                    feedback: "Allergy referral is reasonable given complexity, but many of these conditions can be managed in primary care once stabilized. The key is having a structured plan regardless of who manages it.",
+                    points: 7,
+                    isOptimal: false,
+                    pathClass: "path-suboptimal"
+                },
+                {
+                    id: "D",
+                    text: "Focus only on CSU management - the inducible urticarias are minor issues",
+                    outcome: "Dangerous underestimation",
+                    feedback: "Cold urticaria is NOT minor - cold water immersion can cause fatal anaphylaxis. All diagnoses require appropriate counseling and management, even if the inducible urticarias seem less bothersome day-to-day.",
+                    points: 2,
+                    isOptimal: false,
+                    pathClass: "path-incorrect"
+                }
+            ],
+            
+            whyChain: {
+                title: "WHY is comprehensive planning important?",
+                steps: [
+                    "Multiple urticaria types require individualized trigger avoidance",
+                    "Cold urticaria has life-threatening potential requiring specific safety measures",
+                    "CSU may remit - ongoing reassessment identifies opportunities to reduce treatment",
+                    "Quality of life depends on effective management of ALL urticaria types",
+                    "Patient education prevents both over-treatment and dangerous under-treatment"
+                ]
+            },
+            
+            mechanism: {
+                title: "Comprehensive Urticaria Management Plan",
+                content: `FOR CSU:
+□ Continue omalizumab + high-dose antihistamine
+□ Track UAS7 every 3-6 months
+□ Attempt omalizumab spacing/discontinuation after 6-12 months of UAS7 ≤6
+□ Annual assessment for spontaneous remission
+
+FOR COLD URTICARIA:
+□ Avoid cold water immersion (pools, lakes, oceans) - CRITICAL
+□ Carry epinephrine auto-injector (for anaphylaxis risk)
+□ Pre-treat with antihistamines before cold exposure
+□ Wear protective clothing in cold weather
+□ Omalizumab helps this too (bonus!)
+
+FOR CHOLINERGIC URTICARIA:
+□ Pre-treat with antihistamines 1-2 hours before exercise
+□ Consider exercise desensitization (gradual increase in activity)
+□ Avoid triggers when possible (hot baths, spicy food)
+□ Omalizumab may help refractory cases
+
+FOR DERMOGRAPHISM:
+□ Avoid tight clothing, friction
+□ Antihistamines generally effective
+□ Low-impact condition - mainly nuisance`
+            },
+            
+            pearl: "Omalizumab is a 'three-for-one' in this patient - it treats CSU, cold urticaria, and cholinergic urticaria. When multiple urticaria types coexist, omalizumab may be particularly valuable for comprehensive control.",
+            
+            pitfall: "Never forget the epinephrine! Any patient with cold urticaria should have an epinephrine auto-injector and be trained to use it. Cold water anaphylaxis can occur even in patients with 'mild' cold urticaria."
+        }
+    ]
+};
+
+let currentStage = 1;
+let totalScore = 0;
+let maxPossibleScore = 0;
+let answeredStages = {};
+let selectedMode = 'adult';
+
+function init() {
+    caseData.stages.forEach(s => {
+        maxPossibleScore += Math.max(...s.options.map(o => o.points));
+    });
+    renderStage(currentStage);
+}
+
+function renderStage(stageNum) {
+    const stage = caseData.stages[stageNum - 1];
+    if (!stage) {
+        renderSummary();
+        return;
+    }
+    
+    const container = document.getElementById('gameContainer');
+    const answered = answeredStages[stageNum];
+    
+    container.innerHTML = `
+        <div class="stage-card bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-6">
+                <div class="flex justify-between items-center">
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-sm">Stage ${stageNum} of ${caseData.totalStages}</span>
+                    <span class="text-purple-100">Urticaria Workup</span>
+                </div>
+                <h2 class="text-2xl font-bold mt-3">${stage.title}</h2>
+            </div>
+            
+            <div class="p-6">
+                <div class="bg-slate-50 rounded-xl p-5 mb-6">
+                    <h3 class="font-semibold text-gray-700 mb-2">📋 Clinical Scenario</h3>
+                    <div class="text-gray-700 whitespace-pre-line">${stage.scenario}</div>
+                </div>
+                
+                <div class="bg-blue-50 rounded-xl p-5 mb-6">
+                    <h3 class="font-semibold text-blue-800 mb-2">🤔 Clinical Question</h3>
+                    <p class="text-blue-900 font-medium">${stage.question}</p>
+                </div>
+                
+                <div class="space-y-3">
+                    ${stage.options.map(opt => `
+                        <button 
+                            onclick="selectOption(${stageNum}, '${opt.id}')"
+                            ${answered ? 'disabled' : ''}
+                            class="w-full text-left p-4 rounded-xl border-2 transition-all
+                                ${answered && answered.selected === opt.id 
+                                    ? (opt.isOptimal ? 'border-green-500 bg-green-50' : 'border-amber-500 bg-amber-50')
+                                    : answered && opt.isOptimal 
+                                        ? 'border-green-500 bg-green-50'
+                                        : 'border-gray-200 hover:border-blue-300 hover:bg-blue-50'
+                                }
+                                ${answered ? 'cursor-default' : 'cursor-pointer'}"
+                        >
+                            <div class="flex items-start gap-3">
+                                <span class="flex-shrink-0 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center font-bold ${answered && opt.isOptimal ? 'bg-green-500 text-white' : ''}">${opt.id}</span>
+                                <span class="font-medium">${opt.text}</span>
+                            </div>
+                        </button>
+                    `).join('')}
+                </div>
+                
+                ${answered ? renderFeedback(stage, answered) : ''}
+            </div>
+        </div>
+    `;
+    
+    updateProgress();
+}
+
+function renderFeedback(stage, answered) {
+    const selected = stage.options.find(o => o.id === answered.selected);
+    const optimal = stage.options.find(o => o.isOptimal);
+    
+    return `
+        <div class="mt-6 space-y-4">
+            <div class="${selected.isOptimal ? 'bg-green-50 border-green-200' : 'bg-amber-50 border-amber-200'} border rounded-xl p-5">
+                <h4 class="font-bold ${selected.isOptimal ? 'text-green-800' : 'text-amber-800'} mb-2">
+                    ${selected.isOptimal ? '✅ Optimal Choice!' : '⚠️ ' + selected.outcome}
+                </h4>
+                <p class="text-gray-700">${selected.feedback}</p>
+                <div class="mt-3 text-sm font-medium ${selected.isOptimal ? 'text-green-600' : 'text-amber-600'}">
+                    Points: +${selected.points}/${Math.max(...stage.options.map(o => o.points))}
+                </div>
+            </div>
+            
+            ${!selected.isOptimal ? `
+                <div class="bg-green-50 border border-green-200 rounded-xl p-5">
+                    <h4 class="font-bold text-green-800 mb-2">✅ Optimal Approach: ${optimal.text}</h4>
+                    <p class="text-gray-700">${optimal.feedback}</p>
+                </div>
+            ` : ''}
+            
+            <div class="why-chain rounded-xl p-5">
+                <h4 class="font-bold text-blue-800 mb-3">🔗 ${stage.whyChain.title}</h4>
+                <div class="space-y-2">
+                    ${stage.whyChain.steps.map((step, i) => `
+                        <div class="flex items-start gap-3">
+                            <span class="flex-shrink-0 w-6 h-6 rounded-full bg-blue-200 text-blue-800 flex items-center justify-center text-sm font-bold">${i + 1}</span>
+                            <span class="text-gray-700">${step}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+            
+            <div class="mechanism-box rounded-xl p-5">
+                <h4 class="font-bold text-green-800 mb-3">⚙️ ${stage.mechanism.title}</h4>
+                <div class="text-gray-700 whitespace-pre-line text-sm">${stage.mechanism.content}</div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="pearl-box rounded-xl p-4">
+                    <h4 class="font-bold text-yellow-800 mb-2">💎 Clinical Pearl</h4>
+                    <p class="text-gray-700 text-sm">${stage.pearl}</p>
+                </div>
+                <div class="pitfall-box rounded-xl p-4">
+                    <h4 class="font-bold text-red-800 mb-2">⚠️ Pitfall to Avoid</h4>
+                    <p class="text-gray-700 text-sm">${stage.pitfall}</p>
+                </div>
+            </div>
+            
+            <button 
+                onclick="nextStage()"
+                class="w-full mt-4 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-bold text-lg hover:from-blue-700 hover:to-purple-700 transition-all"
+            >
+                ${currentStage < caseData.totalStages ? 'Continue to Stage ' + (currentStage + 1) + ' →' : 'View Summary →'}
+            </button>
+        </div>
+    `;
+}
+
+function selectOption(stageNum, optionId) {
+    if (answeredStages[stageNum]) return;
+    
+    const stage = caseData.stages[stageNum - 1];
+    const option = stage.options.find(o => o.id === optionId);
+    
+    answeredStages[stageNum] = {
+        selected: optionId,
+        points: option.points
+    };
+    
+    totalScore += option.points;
+    renderStage(stageNum);
+}
+
+function nextStage() {
+    currentStage++;
+    if (currentStage > caseData.totalStages) {
+        renderSummary();
+    } else {
+        renderStage(currentStage);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+}
+
+function updateProgress() {
+    const progress = (Object.keys(answeredStages).length / caseData.totalStages) * 100;
+    document.getElementById('progressBar').style.width = `${progress}%`;
+    document.getElementById('score').textContent = `${Math.round((totalScore / maxPossibleScore) * 100)}%`;
+}
+
+function renderSummary() {
+    const percentage = Math.round((totalScore / maxPossibleScore) * 100);
+    let grade, message;
+    
+    if (percentage >= 90) { grade = 'A'; message = 'Outstanding! You have mastered urticaria workup!'; }
+    else if (percentage >= 80) { grade = 'B'; message = 'Great work! Strong understanding of CSU management.'; }
+    else if (percentage >= 70) { grade = 'C'; message = 'Good foundation. Review the treatment ladder and inducible urticarias.'; }
+    else { grade = 'D'; message = 'Consider reviewing urticaria guidelines for improved understanding.'; }
+    
+    document.getElementById('gameContainer').classList.add('hidden');
+    document.getElementById('summaryPanel').classList.remove('hidden');
+    document.getElementById('summaryPanel').innerHTML = `
+        <div class="bg-white rounded-2xl shadow-lg p-8">
+            <div class="text-center mb-8">
+                <div class="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 mb-2">${grade}</div>
+                <div class="text-3xl font-bold text-gray-800">${percentage}%</div>
+                <p class="text-gray-600 mt-2">${message}</p>
+            </div>
+            
+            <div class="bg-slate-50 rounded-xl p-6 mb-6">
+                <h3 class="font-bold text-xl mb-4">📚 Key Learning Points</h3>
+                <ul class="space-y-3 text-gray-700">
+                    <li>✓ <strong>Classification:</strong> Acute (<6 weeks) vs Chronic (>6 weeks) urticaria have different etiologies and workup</li>
+                    <li>✓ <strong>CSU Workup:</strong> Limited testing recommended (CBC, CRP only) - extensive allergy testing is low yield</li>
+                    <li>✓ <strong>Treatment Ladder:</strong> Second-gen antihistamine → up to 4x dose → omalizumab → cyclosporine</li>
+                    <li>✓ <strong>Omalizumab:</strong> Fixed 300mg q4wk dosing in CSU (different from asthma), trial for 6 months</li>
+                    <li>✓ <strong>HAE vs CSU:</strong> Angioedema WITHOUT urticaria suggests bradykinin-mediated; needs different treatment</li>
+                    <li>✓ <strong>Inducible Urticarias:</strong> Cold urticaria has anaphylaxis risk - counsel on cold water avoidance and epinephrine</li>
+                    <li>✓ <strong>UAS7:</strong> Validated tool for monitoring disease activity and treatment response</li>
+                </ul>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-4 mb-6">
+                <div class="bg-blue-50 rounded-xl p-4">
+                    <h4 class="font-bold text-blue-800 mb-2">Updated Guidelines (2022)</h4>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                        <li>• H2-blockers removed from algorithm</li>
+                        <li>• Montelukast not routinely recommended</li>
+                        <li>• Antihistamine updosing to 4x before biologics</li>
+                        <li>• Omalizumab before cyclosporine</li>
+                    </ul>
+                </div>
+                <div class="bg-purple-50 rounded-xl p-4">
+                    <h4 class="font-bold text-purple-800 mb-2">Critical Safety Points</h4>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                        <li>• Cold urticaria + cold water = anaphylaxis risk</li>
+                        <li>• Always screen HAE in first-degree relatives</li>
+                        <li>• Avoid first-gen antihistamines chronically</li>
+                        <li>• Steroids: 10 days max, not routine</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <button onclick="resetGame()" class="w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-bold hover:from-blue-700 hover:to-purple-700 transition-all">
+                🔄 Restart Case
+            </button>
+        </div>
+    `;
+}
+
+function resetGame() {
+    currentStage = 1;
+    totalScore = 0;
+    answeredStages = {};
+    document.getElementById('gameContainer').classList.remove('hidden');
+    document.getElementById('summaryPanel').classList.add('hidden');
+    renderStage(1);
+}
+
+init();
+    </script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+/* Enhanced Feature Styles */
+.rdx-difficulty-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 300px;
+}
+.rdx-diff-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin: 2px;
+}
+.rdx-diff-btn.active {
+    background: #3b82f6;
+    color: white;
+}
+.rdx-diff-btn:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+}
+.rdx-diff-btn:hover:not(.active) {
+    background: #e2e8f0;
+}
+.rdx-refs-panel {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #93c5fd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+.rdx-refs-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+.rdx-refs-links {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+.rdx-refs-links a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.rdx-refs-links a:hover {
+    text-decoration: underline;
+}
+.rdx-debrief-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rdx-debrief-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #1f2937;
+}
+.rdx-path-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.rdx-path-optimal {
+    background: #dcfce7;
+    border-left: 4px solid #22c55e;
+}
+.rdx-path-suboptimal {
+    background: #fef9c3;
+    border-left: 4px solid #eab308;
+}
+.rdx-path-wrong {
+    background: #fecaca;
+    border-left: 4px solid #ef4444;
+}
+.rdx-hint-beginner {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+.rdx-hint-advanced {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+</style>
+
+<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
+    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
+        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    </div>
+</div>
+
+
+<!-- CROSS-PLATFORM LEARNING LINKS -->
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
+            <a href="../mechanism/allergy-module.html" style="display: block; color: #2563eb; font-size: 14px;">→ Urticaria</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
+            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="asthma-exacerbation-expanded-dual-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Asthma Exacerbation Expanded D</a>
+            <a href="allergic-rhinitis-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Allergic Rhinitis</a>
+            <a href="penicillin-delabeling-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Penicillin Delabeling</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
+            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../CoachDx/mentor-chat.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../CoachDx/sbar-trainer.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+<!-- END CROSS-PLATFORM LINKS -->
+<div class="rdx-refs-panel" id="rdxRefsPanel">
+    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
+    <div class="rdx-refs-links"><a href="https://www.aaaai.org/practice-resources/statements-and-practice-parameters" target="_blank" class="text-blue-600 hover:underline">AAAAI Practice Parameters</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK482124/" target="_blank" class="text-blue-600 hover:underline">StatPearls: Anaphylaxis</a></div>
+</div>
+
+<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
+    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+</div>
+
+<script>
+// ReasonDx Enhanced Features Module
+(function() {
+    // Decision tracking
+    window.rdxDecisionPath = window.rdxDecisionPath || [];
+    window.rdxTotalScore = window.rdxTotalScore || 0;
+    window.rdxMaxScore = window.rdxMaxScore || 0;
+    window.rdxDifficulty = 'intermediate';
+    
+    // Difficulty control
+    window.rdxSetDifficulty = function(level) {
+        window.rdxDifficulty = level;
+        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('rdx-btn-' + level).classList.add('active');
+        
+        // Update hint visibility
+        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
+            el.style.display = level === 'beginner' ? 'block' : 'none';
+        });
+        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
+            el.style.display = level === 'advanced' ? 'block' : 'none';
+        });
+    };
+    
+    // Track a decision
+    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+        window.rdxDecisionPath.push({
+            stage: stageId,
+            title: stageTitle,
+            choice: choiceId,
+            choiceText: choiceText,
+            outcome: outcome,
+            points: points,
+            maxPoints: maxPoints,
+            isOptimal: isOptimal,
+            optimalChoice: optimalChoice,
+            optimalText: optimalText
+        });
+        window.rdxTotalScore += points;
+        window.rdxMaxScore += maxPoints;
+    };
+    
+    // Show visual debrief
+    window.rdxShowDebrief = function() {
+        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
+        
+        let grade, gradeColor, gradeEmoji;
+        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
+        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
+        
+        let pathHTML = '';
+        if (window.rdxDecisionPath.length > 0) {
+            pathHTML = window.rdxDecisionPath.map(d => {
+                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
+                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
+                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
+                return '<div class="' + pathClass + ' rdx-path-item">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
+                    '<div>' +
+                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
+                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
+                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
+                    '</div>' +
+                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
+                    '</div></div>';
+            }).join('');
+        } else {
+            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+        }
+        
+        document.getElementById('rdxDebriefContent').innerHTML = 
+            '<div style="text-align:center;margin-bottom:24px;">' +
+            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
+            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
+            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
+            '</div></div>' +
+            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
+            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
+            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
+            '</div></div>' +
+            '<div style="display:flex;gap:12px;">' +
+            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '</div>';
+        
+        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
+    };
+    
+    // Auto-inject hint examples into existing content
+    window.rdxInit = function() {
+        // Could add dynamic hint injection here based on difficulty
+        console.log('ReasonDx Enhanced Features loaded for: Urticaria Expanded Adventure');
+    };
+    
+    // Initialize on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.rdxInit);
+    } else {
+        window.rdxInit();
+    }
+})();
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+</body>
+</html>

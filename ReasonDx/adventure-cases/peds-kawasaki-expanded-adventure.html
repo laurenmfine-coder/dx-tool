@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kawasaki Disease - Expanded Deep Dive Adventure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .stage-card { transition: all 0.3s ease; }
+        .why-chain { background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); }
+        .mechanism-box { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); }
+        .pearl-box { background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%); }
+        .pitfall-box { background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); }
+        .optimal-path { background-color: #dcfce7; border-left: 4px solid #22c55e; }
+        .suboptimal-path { background-color: #fef9c3; border-left: 4px solid #eab308; }
+        .wrong-path { background-color: #fecaca; border-left: 4px solid #ef4444; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-orange-50 to-red-50 min-h-screen">
+    <div id="app" class="container mx-auto px-4 py-8 max-w-5xl">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between flex-wrap gap-4">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">🔥 Kawasaki Disease</h1>
+                    <p class="text-gray-500 mt-1">Expanded Deep Dive Adventure • 10 Stages</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="text-right">
+                        <div class="text-sm text-gray-500">Progress</div>
+                        <div class="text-2xl font-bold text-orange-600" id="score">0%</div>
+                    </div>
+                    <button onclick="resetGame()" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium">🔄 Restart</button>
+                </div>
+            </div>
+            <div class="mt-4 h-3 bg-gray-100 rounded-full overflow-hidden">
+                <div id="progressBar" class="h-full bg-gradient-to-r from-orange-500 to-red-500 transition-all duration-500" style="width: 0%"></div>
+            </div>
+        </div>
+        <div id="gameContainer" class="space-y-6"></div>
+        <div id="summaryPanel" class="hidden"></div>
+    </div>
+
+    <script>
+        let currentStage = 0;
+        let totalScore = 0;
+        let maxScore = 0;
+        const decisionPath = [];
+
+        const stages = [
+            {
+                id: 1,
+                title: "Initial Presentation",
+                scenario: "A 3-year-old boy is brought to the pediatric clinic with 5 days of high fever (39-40°C) that hasn't responded to acetaminophen or ibuprofen. Parents report he's been very irritable.\n\nOn exam, you note:\n• Bilateral conjunctival injection WITHOUT exudate\n• Cracked, red lips and a 'strawberry tongue'\n• Diffuse maculopapular rash on trunk\n• Swollen, erythematous hands and feet\n• No significant lymphadenopathy\n\nHe appears non-toxic but is quite fussy and inconsolable.",
+                question: "Based on this presentation, what is your leading diagnosis?",
+                options: [
+                    { id: "A", text: "Kawasaki disease - meets classic diagnostic criteria", outcome: "Correct diagnosis", feedback: "Correct! This child has classic Kawasaki disease: fever ≥5 days PLUS 4 of 5 criteria (conjunctivitis, oral changes, rash, extremity changes). Lymphadenopathy is the least common criterion.", points: 10, isOptimal: true },
+                    { id: "B", text: "Viral exanthem - likely roseola or enterovirus", outcome: "Would not explain all findings", feedback: "Viral exanthems don't typically cause the combination of conjunctivitis, oral changes, AND extremity swelling. The persistence of fever with these specific findings points to Kawasaki.", points: 3, isOptimal: false },
+                    { id: "C", text: "Scarlet fever - needs strep testing", outcome: "Different presentation", feedback: "Scarlet fever has sandpaper rash, circumoral pallor, and follows strep pharyngitis. The conjunctivitis, lip changes, and extremity edema are not typical.", points: 4, isOptimal: false },
+                    { id: "D", text: "Drug reaction - review recent medications", outcome: "No medication history given", feedback: "While drug reactions can cause rash and fever, the specific constellation of findings is classic for Kawasaki disease.", points: 3, isOptimal: false }
+                ],
+                whyChain: { title: "WHY is this Kawasaki disease?", steps: ["Fever ≥5 days (required criterion)", "4 of 5 clinical criteria present", "Bilateral non-exudative conjunctivitis", "Oral changes - cracked lips, strawberry tongue", "Extremity changes - edema, erythema", "Polymorphous rash"] },
+                mechanism: { title: "Kawasaki Disease Pathophysiology", content: "ETIOLOGY:\n• Unknown - likely infectious trigger\n• Peak incidence: 6 months to 5 years\n• More common in Asian populations\n\nPATHOPHYSIOLOGY:\n• Systemic vasculitis of medium arteries\n• Intense coronary artery inflammation\n• Endothelial damage → aneurysms\n• Immune activation with cytokine storm\n\nCLINICAL FEATURES:\n• Conjunctivitis: Limbic sparing characteristic\n• Oral changes: Mucosal inflammation\n• Extremity changes: Distal vessel vasculitis\n• Irritability: Possible aseptic meningitis" },
+                pearl: "The conjunctivitis in Kawasaki disease spares the limbus (clear zone around iris) - look for this 'limbic sparing' to differentiate from bacterial conjunctivitis.",
+                pitfall: "Don't wait for all 5 criteria - classic Kawasaki only requires 4 of 5. Lymphadenopathy is present in only 50-75% of cases."
+            },
+            {
+                id: 2,
+                title: "Diagnostic Criteria",
+                scenario: "You recall the classic Kawasaki diagnostic criteria: Fever ≥5 days PLUS at least 4 of 5 clinical features.\n\nThe 5 criteria are: (1) Bilateral conjunctival injection, (2) Oral changes, (3) Rash, (4) Extremity changes, (5) Cervical lymphadenopathy.\n\nReview your exam findings from Stage 1: conjunctivitis present, strawberry tongue with cracked lips, polymorphous trunk rash, hand/foot edema with erythema. You did NOT detect cervical lymphadenopathy.",
+                question: "Based on your examination, how many of the 5 clinical criteria are present?",
+                options: [
+                    { id: "A", text: "4 criteria (conjunctivitis, oral, rash, extremities) - sufficient for classic Kawasaki", outcome: "Correct count", feedback: "Correct! 4 of 5 criteria is sufficient for classic Kawasaki when combined with ≥5 days fever. Lymphadenopathy is absent but not required.", points: 10, isOptimal: true },
+                    { id: "B", text: "5 criteria - all are present", outcome: "No lymphadenopathy noted", feedback: "The patient does NOT have cervical lymphadenopathy. Only 4 criteria are met, but this is still sufficient.", points: 5, isOptimal: false },
+                    { id: "C", text: "3 criteria - need more for diagnosis", outcome: "Undercounting", feedback: "Count again: conjunctivitis (1), oral (2), rash (3), extremities (4). That's 4 criteria - sufficient for diagnosis.", points: 3, isOptimal: false },
+                    { id: "D", text: "Cannot diagnose without lab confirmation", outcome: "Kawasaki is clinical diagnosis", feedback: "Kawasaki is a CLINICAL diagnosis - no confirmatory lab test exists. Labs support but don't confirm.", points: 2, isOptimal: false }
+                ],
+                whyChain: { title: "WHY these criteria?", steps: ["Developed through clinical observation", "Each reflects underlying vasculitis", "Combination is highly specific", "Individual findings occur in other conditions", "Together form recognizable syndrome"] },
+                mechanism: { title: "Kawasaki Diagnostic Criteria", content: "CLASSIC KAWASAKI:\nFever ≥5 days PLUS ≥4 of 5:\n\n1. CONJUNCTIVAL INJECTION\n   • Bilateral, non-exudative, limbic sparing\n\n2. ORAL CHANGES\n   • Cracked lips, strawberry tongue\n\n3. EXTREMITY CHANGES\n   • Acute: edema, erythema\n   • Subacute: periungual peeling\n\n4. POLYMORPHOUS RASH\n   • Variable appearance, NOT vesicular\n\n5. CERVICAL LYMPHADENOPATHY\n   • Unilateral, ≥1.5 cm (least common)\n\nMNEMONIC: CRASH and Burn\nConjunctivitis, Rash, Adenopathy,\nStrawberry tongue, Hands + Burn (fever)" },
+                pearl: "Use 'CRASH and Burn' - Conjunctivitis, Rash, Adenopathy, Strawberry tongue, Hands/feet + Burn (fever).",
+                pitfall: "Criteria may appear sequentially - serial examination is key."
+            },
+            {
+                id: 3,
+                title: "Laboratory Evaluation",
+                scenario: "Lab results:\n• WBC: 18,500/μL with left shift\n• Hemoglobin: 10.2 g/dL\n• Platelets: 450,000/μL (rising)\n• ESR: 85 mm/hr, CRP: 12.5 mg/dL\n• ALT: 62 U/L, Albumin: 2.9 g/dL\n• Urinalysis: 25 WBCs/hpf, culture negative, no bacteria seen",
+                question: "Which laboratory finding is MOST characteristic of Kawasaki disease and often helps distinguish it from UTI?",
+                options: [
+                    { id: "A", text: "Sterile pyuria - reflects urethritis from vasculitis", outcome: "Correct - very characteristic", feedback: "Correct! Sterile pyuria occurs in 80% of cases, reflecting urethral inflammation. It helps differentiate from UTI.", points: 10, isOptimal: true },
+                    { id: "B", text: "Elevated ESR and CRP", outcome: "Common but nonspecific", feedback: "Elevated inflammatory markers are expected but occur in many conditions. Sterile pyuria is more specific.", points: 5, isOptimal: false },
+                    { id: "C", text: "Thrombocytosis", outcome: "Characteristic but later", feedback: "Thrombocytosis peaks in week 2-3. Sterile pyuria appears earlier and is more specific.", points: 6, isOptimal: false },
+                    { id: "D", text: "Leukocytosis with left shift", outcome: "Nonspecific", feedback: "Occurs in many inflammatory conditions. Sterile pyuria is more specific to Kawasaki.", points: 4, isOptimal: false }
+                ],
+                whyChain: { title: "WHY is sterile pyuria characteristic?", steps: ["Kawasaki causes urethritis", "WBCs from inflamed urethra, not bladder", "Culture is NEGATIVE", "Helps differentiate from UTI", "Present in ~80% of cases"] },
+                mechanism: { title: "Lab Findings in Kawasaki", content: "ACUTE PHASE (Week 1):\n• Leukocytosis, anemia\n• Elevated ESR, CRP\n• Elevated ALT, low albumin\n• Sterile pyuria (80%)\n• Normal/low platelets initially\n\nSUBACUTE PHASE (Weeks 2-4):\n• Thrombocytosis (peaks week 2-3)\n• Can exceed 1,000,000/μL\n• Desquamation begins\n\nNO DIAGNOSTIC TEST:\n• Kawasaki is clinical\n• Labs support but don't confirm" },
+                pearl: "Sterile pyuria in a febrile child with rash - think Kawasaki!",
+                pitfall: "Don't be reassured by normal early platelets - thrombocytosis develops in weeks 2-3."
+            },
+            {
+                id: 4,
+                title: "Cardiac Complications",
+                scenario: "You order an echocardiogram. Parents ask why heart testing is needed for 'just a fever and rash.'",
+                question: "What is the most important cardiac complication?",
+                options: [
+                    { id: "A", text: "Coronary artery aneurysms - #1 cause of acquired heart disease in children", outcome: "Correct - key complication", feedback: "Correct! Without treatment, 25% develop coronary aneurysms. With IVIG, <5%. Kawasaki is the leading cause of acquired heart disease in children.", points: 10, isOptimal: true },
+                    { id: "B", text: "Myocarditis", outcome: "Can occur but not primary concern", feedback: "Myocarditis is usually mild and self-limited. Coronary involvement has long-term consequences.", points: 5, isOptimal: false },
+                    { id: "C", text: "Valvular disease", outcome: "Less common", feedback: "Mitral regurgitation can occur but usually resolves. Coronary aneurysms are the primary concern.", points: 4, isOptimal: false },
+                    { id: "D", text: "Pericarditis", outcome: "Usually mild", feedback: "Pericarditis is usually small and self-limited. Coronary disease drives treatment urgency.", points: 3, isOptimal: false }
+                ],
+                whyChain: { title: "WHY are coronary aneurysms important?", steps: ["25% untreated vs <5% with IVIG", "Can cause MI from thrombosis", "May cause sudden cardiac death", "Aneurysms may persist into adulthood", "Giant aneurysms (>8mm) worst prognosis"] },
+                mechanism: { title: "Cardiac Complications", content: "CORONARY ANEURYSMS:\n• Risk: 25% untreated → <5% with IVIG\n• Peak: 2-4 weeks after fever\n• Classification:\n   - Small: <5mm\n   - Medium: 5-8mm\n   - Giant: ≥8mm (worst)\n\nCONSEQUENCES:\n• Thrombosis → MI\n• Progressive stenosis\n• Rupture (rare)\n\nRISK FACTORS:\n• Age <1 or >5 years\n• Male sex\n• Prolonged fever\n• Delayed treatment\n• IVIG resistance" },
+                pearl: "Kawasaki surpassed rheumatic heart disease as #1 acquired heart disease in children - early recognition is critical.",
+                pitfall: "Normal initial echo doesn't rule out future aneurysms - serial echos required."
+            },
+            {
+                id: 5,
+                title: "Initial Treatment",
+                scenario: "Echo shows coronary arteries at upper limits of normal (Z-score +2.0). It is day 5 of illness.",
+                question: "What is first-line treatment?",
+                options: [
+                    { id: "A", text: "IVIG 2g/kg single infusion PLUS high-dose aspirin (80-100 mg/kg/day)", outcome: "Correct standard therapy", feedback: "Correct! IVIG 2g/kg over 10-12 hours PLUS high-dose aspirin reduces aneurysm risk from 25% to <5% when given within 10 days.", points: 10, isOptimal: true },
+                    { id: "B", text: "High-dose aspirin alone", outcome: "Insufficient", feedback: "Aspirin alone does NOT prevent coronary aneurysms. IVIG is the key treatment.", points: 3, isOptimal: false },
+                    { id: "C", text: "IV antibiotics", outcome: "Kawasaki is not bacterial", feedback: "Kawasaki is not bacterial infection. IVIG + aspirin is the treatment.", points: 2, isOptimal: false },
+                    { id: "D", text: "Corticosteroids alone", outcome: "Not first-line", feedback: "Steroids may be added in high-risk or resistant cases but IVIG remains cornerstone.", points: 4, isOptimal: false }
+                ],
+                whyChain: { title: "WHY IVIG + aspirin?", steps: ["IVIG: Immunomodulatory effect", "IVIG: Reduces aneurysm risk 25%→<5%", "Single 2g/kg more effective than split dosing", "Aspirin high-dose: Anti-inflammatory", "Aspirin low-dose later: Antiplatelet"] },
+                mechanism: { title: "Kawasaki Treatment", content: "FIRST-LINE:\n\n1. IVIG 2g/kg\n   • Single infusion over 10-12 hours\n   • Most effective within 10 days\n\n2. ASPIRIN\n   • Acute: 80-100 mg/kg/day ÷ 4\n   • Until afebrile 48-72 hours\n   • Then: 3-5 mg/kg/day × 6-8 weeks\n\nTIMING:\n• Within 10 days: <5% aneurysm risk\n• After 10 days: Still beneficial if inflamed" },
+                pearl: "Give IVIG even after day 10 if still febrile - never too late to prevent coronary damage.",
+                pitfall: "Don't split IVIG - single 2g/kg is MORE effective than divided dosing."
+            },
+            {
+                id: 6,
+                title: "Aspirin Dosing",
+                scenario: "The nurse questions aspirin use in children due to Reye syndrome risk.",
+                question: "What is correct aspirin dosing?",
+                options: [
+                    { id: "A", text: "High-dose (80-100 mg/kg/day) until afebrile 48-72h, then low-dose (3-5 mg/kg/day) for 6-8 weeks", outcome: "Correct strategy", feedback: "Correct! High-dose for anti-inflammatory effect, then low-dose for antiplatelet effect. Benefit far outweighs Reye syndrome risk.", points: 10, isOptimal: true },
+                    { id: "B", text: "Avoid aspirin due to Reye syndrome", outcome: "Benefits outweigh risks", feedback: "Reye risk is theoretical and very low. Proven benefit in preventing coronary complications far outweighs this.", points: 2, isOptimal: false },
+                    { id: "C", text: "Low-dose only", outcome: "High-dose has benefit", feedback: "High-dose has anti-inflammatory effects in acute phase. Traditional approach is high then low.", points: 5, isOptimal: false },
+                    { id: "D", text: "High-dose indefinitely", outcome: "Risks outweigh benefits long-term", feedback: "High-dose long-term causes GI toxicity. Low-dose provides protection after acute phase.", points: 3, isOptimal: false }
+                ],
+                whyChain: { title: "WHY this aspirin strategy?", steps: ["High-dose: Anti-inflammatory acute effect", "Switch when afebrile: Inflammation resolving", "Low-dose: Antiplatelet effect", "6-8 weeks: Covers aneurysm risk period"] },
+                mechanism: { title: "Aspirin in Kawasaki", content: "HIGH-DOSE (80-100 mg/kg/day):\n• Divided QID\n• Anti-inflammatory\n• Until afebrile 48-72 hours\n\nLOW-DOSE (3-5 mg/kg/day):\n• Single daily dose\n• Antiplatelet effect\n• Duration:\n   - No coronary: 6-8 weeks\n   - With aneurysms: Until resolved\n\nREYE SYNDROME:\n• Very rare in Kawasaki\n• Benefits far outweigh risks\n• Hold during varicella/influenza" },
+                pearl: "Tell parents to hold aspirin and call if child gets chickenpox or flu.",
+                pitfall: "Don't continue high-dose for weeks - switch to low-dose once afebrile 48-72h."
+            },
+            {
+                id: 7,
+                title: "IVIG Resistance",
+                scenario: "After IVIG, child defervesces then spikes 39.5°C on day 7. CRP remains elevated.",
+                question: "How do you manage IVIG resistance?",
+                options: [
+                    { id: "A", text: "IVIG resistance = fever ≥36h post-IVIG. Give second IVIG 2g/kg ± corticosteroids", outcome: "Correct management", feedback: "Correct! IVIG resistance (10-20% of patients) is fever persisting ≥36h after IVIG. Treat with second IVIG ± steroids. These patients have higher aneurysm risk.", points: 10, isOptimal: true },
+                    { id: "B", text: "Wait another 48 hours", outcome: "Delay increases risk", feedback: "Waiting increases coronary complication risk. Retreatment shouldn't be delayed.", points: 3, isOptimal: false },
+                    { id: "C", text: "Switch to antibiotics", outcome: "Not bacterial", feedback: "Persistent fever is refractory Kawasaki inflammation, not bacterial. Need more immunomodulation.", points: 2, isOptimal: false },
+                    { id: "D", text: "Start infliximab first", outcome: "Second IVIG typically first", feedback: "Second IVIG ± steroids tried first. Infliximab reserved for cases failing multiple IVIG doses.", points: 5, isOptimal: false }
+                ],
+                whyChain: { title: "WHY is resistance important?", steps: ["Occurs in 10-20%", "Higher coronary aneurysm risk", "Requires additional therapy", "Multiple rescue options available"] },
+                mechanism: { title: "IVIG-Resistant Kawasaki", content: "DEFINITION:\n• Fever ≥36h after IVIG completion\n• Occurs in 10-20%\n\nTREATMENT OPTIONS:\n1. Second IVIG 2g/kg\n2. Corticosteroids\n   • Methylprednisolone 2mg/kg/day OR\n   • Pulse: 30mg/kg × 3 days\n3. Infliximab 5mg/kg (refractory)\n4. Cyclosporine, plasma exchange (rare)" },
+                pearl: "IVIG-resistant patients have HIGHER aneurysm risk - be aggressive with retreatment.",
+                pitfall: "Ensure fever isn't from another source before retreating."
+            },
+            {
+                id: 8,
+                title: "Echo Follow-up",
+                scenario: "After second IVIG and steroids, child defervesces. You plan echo follow-up.\n\nInitial echo (day 5): Z-score +2.0",
+                question: "What is the recommended echo schedule?",
+                options: [
+                    { id: "A", text: "Baseline, 2 weeks, and 6-8 weeks minimum. More frequent if abnormalities", outcome: "Correct schedule", feedback: "Correct! Minimum: diagnosis, 2 weeks, 6-8 weeks. Aneurysms may develop late, so 6-8 week echo is critical.", points: 10, isOptimal: true },
+                    { id: "B", text: "Only at diagnosis", outcome: "Misses delayed aneurysms", feedback: "Aneurysms develop 2-4 weeks post-fever. Single normal echo does NOT rule out future problems.", points: 2, isOptimal: false },
+                    { id: "C", text: "Weekly for first year", outcome: "Excessive for uncomplicated", feedback: "Weekly is excessive for routine cases. Reserve for significant coronary involvement.", points: 4, isOptimal: false },
+                    { id: "D", text: "Only if symptoms develop", outcome: "Aneurysms often asymptomatic", feedback: "Aneurysms are often ASYMPTOMATIC until complications. Scheduled surveillance is essential.", points: 3, isOptimal: false }
+                ],
+                whyChain: { title: "WHY this schedule?", steps: ["Baseline: Documents status before treatment", "2 weeks: Peak aneurysm development time", "6-8 weeks: Captures delayed abnormalities", "Long-term based on findings"] },
+                mechanism: { title: "Echo Surveillance", content: "MINIMUM SCHEDULE:\n• At diagnosis\n• 2 weeks\n• 6-8 weeks\n\nZ-SCORE CLASSIFICATION:\n• Normal: <2.0\n• Dilation: 2.0-2.5\n• Small aneurysm: 2.5-5\n• Medium: 5-10\n• Giant: ≥10 or ≥8mm\n\nLONG-TERM:\n• No involvement: May discharge\n• Any changes: Ongoing cardiology\n• Giant: Lifelong + anticoagulation" },
+                pearl: "Always complete the 6-8 week echo even with normal initial findings - some aneurysms develop late.",
+                pitfall: "Use Z-scores, not absolute measurements, to classify coronary abnormalities."
+            },
+            {
+                id: 9,
+                title: "Incomplete Kawasaki",
+                scenario: "Colleague consults about 8-month-old with 6 days fever, only 2 criteria (rash, conjunctivitis). Labs: WBC 22K, platelets 550K, CRP 9, sterile pyuria.",
+                question: "How should you approach possible incomplete Kawasaki?",
+                options: [
+                    { id: "A", text: "Likely incomplete Kawasaki - fever ≥5d, elevated markers, 2-3 criteria, supportive labs → treat and get echo", outcome: "Correct approach", feedback: "Correct! Incomplete Kawasaki: fever ≥5d, <4 criteria, but elevated markers AND supportive findings. Infants are highest risk for incomplete presentation AND complications. When in doubt, treat.", points: 10, isOptimal: true },
+                    { id: "B", text: "Cannot diagnose without 4 criteria - observe", outcome: "Dangerous in infant", feedback: "Incomplete Kawasaki is common in infants <1 year who have HIGHER aneurysm risk. Don't wait for full criteria.", points: 2, isOptimal: false },
+                    { id: "C", text: "Start antibiotics", outcome: "Missing diagnosis", feedback: "The constellation strongly suggests Kawasaki, not bacterial infection.", points: 3, isOptimal: false },
+                    { id: "D", text: "Wait for desquamation", outcome: "Late finding", feedback: "Desquamation occurs weeks 2-3. Waiting delays treatment.", points: 2, isOptimal: false }
+                ],
+                whyChain: { title: "WHY recognize incomplete Kawasaki?", steps: ["15-20% of cases", "Most common in infants", "Infants have HIGHEST aneurysm risk", "Delayed diagnosis = more complications", "Supportive labs help diagnosis"] },
+                mechanism: { title: "Incomplete Kawasaki", content: "DEFINITION:\n• Fever ≥5 days\n• 2-3 clinical criteria\n• Elevated CRP ≥3, ESR ≥40\n• No alternative diagnosis\n\nSUPPORTIVE LABS:\n• Anemia, WBC ≥15K\n• Platelets ≥450K after day 7\n• Albumin ≤3.0, elevated ALT\n• Sterile pyuria\n\nALGORITHM:\n• ≥3 supportive labs → treat\n• <3 labs → echo\n• Echo positive → treat\n\nHIGH-RISK: Infants <12 months" },
+                pearl: "When in doubt, treat! Missing Kawasaki (aneurysms) is worse than giving IVIG to viral illness.",
+                pitfall: "Never say 'too young for Kawasaki' - infants get it and have highest complication rates."
+            },
+            {
+                id: 10,
+                title: "Discharge Planning",
+                scenario: "Child responds to retreatment, afebrile 72 hours. 2-week echo: mild coronary dilation (Z-score +2.3 LAD), no aneurysms.\n\nYou plan discharge and follow-up.",
+                question: "What are key discharge instructions?",
+                options: [
+                    { id: "A", text: "Low-dose aspirin until 6-8 week echo; avoid live vaccines 11 months post-IVIG; activity restrictions until cleared; cardiology follow-up", outcome: "Correct comprehensive plan", feedback: "Correct! Continue low-dose aspirin, avoid live vaccines (IVIG interferes with response), restrict contact sports until echo clears, and arrange cardiology follow-up for ongoing monitoring.", points: 10, isOptimal: true },
+                    { id: "B", text: "Stop all medications - treatment is complete", outcome: "Needs ongoing aspirin", feedback: "Low-dose aspirin must continue through 6-8 week echo minimum. Coronary risk persists during this period.", points: 2, isOptimal: false },
+                    { id: "C", text: "No activity restrictions needed", outcome: "Risk with coronary changes", feedback: "With coronary dilation, contact sports should be restricted until cleared by cardiology.", points: 4, isOptimal: false },
+                    { id: "D", text: "Routine vaccines on schedule", outcome: "IVIG interferes with live vaccines", feedback: "Live vaccines (MMR, varicella) should be delayed 11 months after IVIG due to interference with immune response.", points: 3, isOptimal: false }
+                ],
+                whyChain: { title: "WHY these precautions?", steps: ["Low-dose aspirin: Antiplatelet protection", "Live vaccine delay: IVIG antibodies interfere", "Activity restrictions: Prevent coronary stress", "Cardiology follow-up: Monitor coronary status"] },
+                mechanism: { title: "Discharge & Follow-up", content: "MEDICATIONS:\n• Low-dose aspirin (3-5 mg/kg/day)\n• Duration: 6-8 weeks minimum\n• Longer if coronary involvement\n\nVACCINES:\n• Delay live vaccines 11 months post-IVIG\n• MMR, varicella affected\n• Inactivated vaccines OK\n\nACTIVITY:\n• No contact sports until cleared\n• Based on coronary status\n\nFOLLOW-UP:\n• Cardiology for echo monitoring\n• PCP for routine care\n• Return if fever recurs\n\nLONG-TERM PROGNOSIS:\n• No coronary: Excellent\n• Transient dilation: Usually resolves\n• Aneurysms: Lifelong monitoring" },
+                pearl: "Give parents written instructions - they won't remember everything after the stress of hospitalization.",
+                pitfall: "Don't forget the 11-month live vaccine delay - mark it clearly in the chart and discharge summary."
+            }
+        ];
+
+        function initGame() {
+            maxScore = stages.reduce((sum, stage) => sum + Math.max(...stage.options.map(o => o.points)), 0);
+            renderStage();
+        }
+
+        function renderStage() {
+            const stage = stages[currentStage];
+            const container = document.getElementById('gameContainer');
+            
+            container.innerHTML = `
+                <div class="stage-card bg-white rounded-2xl shadow-lg p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-medium">Stage ${stage.id} of ${stages.length}</span>
+                        <h2 class="text-xl font-bold text-gray-800">${stage.title}</h2>
+                    </div>
+                    
+                    <div class="bg-slate-50 rounded-xl p-4 mb-6">
+                        <pre class="whitespace-pre-wrap font-sans text-gray-700">${stage.scenario}</pre>
+                    </div>
+                    
+                    <p class="font-semibold text-gray-800 mb-4">${stage.question}</p>
+                    
+                    <div class="space-y-3" id="optionsContainer">
+                        ${stage.options.map(opt => `
+                            <button onclick="selectOption('${opt.id}')" class="w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-orange-400 hover:bg-orange-50 transition-all">
+                                <span class="font-bold text-orange-600">${opt.id}.</span> ${opt.text}
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function selectOption(optionId) {
+            const stage = stages[currentStage];
+            const option = stage.options.find(o => o.id === optionId);
+            const optimalOption = stage.options.find(o => o.isOptimal);
+            
+            totalScore += option.points;
+            decisionPath.push({
+                stage: stage.id, title: stage.title, choice: optionId,
+                choiceText: option.text, outcome: option.outcome, points: option.points,
+                maxPoints: Math.max(...stage.options.map(o => o.points)),
+                isOptimal: option.isOptimal, optimalChoice: optimalOption.id, optimalText: optimalOption.text
+            });
+            
+            updateProgress();
+            showFeedback(stage, option);
+        }
+
+        function updateProgress() {
+            const progress = ((currentStage + 1) / stages.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('score').textContent = Math.round((totalScore / maxScore) * 100) + '%';
+        }
+
+        function showFeedback(stage, option) {
+            const container = document.getElementById('gameContainer');
+            let pathClass = option.isOptimal ? 'optimal-path' : (option.points >= 5 ? 'suboptimal-path' : 'wrong-path');
+            let pathLabel = option.isOptimal ? '✓ Optimal Choice' : (option.points >= 5 ? '~ Suboptimal' : '✗ Incorrect');
+            
+            container.innerHTML = `
+                <div class="stage-card bg-white rounded-2xl shadow-lg p-6">
+                    <div class="${pathClass} p-4 rounded-xl mb-6">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="font-bold">${pathLabel}</span>
+                            <span class="text-gray-600">• ${option.points} points</span>
+                        </div>
+                        <p class="font-semibold text-gray-800">${option.outcome}</p>
+                    </div>
+                    
+                    <div class="bg-blue-50 rounded-xl p-4 mb-6">
+                        <p class="text-gray-700">${option.feedback}</p>
+                    </div>
+                    
+                    <div class="why-chain rounded-xl p-4 mb-6">
+                        <h3 class="font-bold text-red-800 mb-3">🔗 ${stage.whyChain.title}</h3>
+                        <div class="space-y-2">
+                            ${stage.whyChain.steps.map((step, i) => `
+                                <div class="flex items-start gap-2">
+                                    <span class="text-red-500 font-bold">${i + 1}.</span>
+                                    <span class="text-gray-700">${step}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="mechanism-box rounded-xl p-4 mb-6">
+                        <h3 class="font-bold text-green-800 mb-3">⚙️ ${stage.mechanism.title}</h3>
+                        <pre class="whitespace-pre-wrap font-sans text-gray-700 text-sm">${stage.mechanism.content}</pre>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-4 mb-6">
+                        <div class="pearl-box rounded-xl p-4">
+                            <h4 class="font-bold text-yellow-800 mb-2">💎 Clinical Pearl</h4>
+                            <p class="text-gray-700 text-sm">${stage.pearl}</p>
+                        </div>
+                        <div class="pitfall-box rounded-xl p-4">
+                            <h4 class="font-bold text-red-800 mb-2">⚠️ Pitfall</h4>
+                            <p class="text-gray-700 text-sm">${stage.pitfall}</p>
+                        </div>
+                    </div>
+                    
+                    <button onclick="nextStage()" class="w-full py-3 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-xl font-semibold hover:opacity-90 transition-opacity">
+                        ${currentStage < stages.length - 1 ? 'Continue to Next Stage →' : 'View Final Summary'}
+                    </button>
+                </div>
+            `;
+        }
+
+        function nextStage() {
+            currentStage++;
+            if (currentStage < stages.length) { renderStage(); } else { showSummary(); }
+        }
+
+        function showSummary() {
+            document.getElementById('gameContainer').classList.add('hidden');
+            const panel = document.getElementById('summaryPanel');
+            panel.classList.remove('hidden');
+            
+            const percentage = Math.round((totalScore / maxScore) * 100);
+            let grade, gradeColor;
+            if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = 'text-green-600'; }
+            else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = 'text-blue-600'; }
+            else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = 'text-yellow-600'; }
+            else { grade = 'Keep Learning!'; gradeColor = 'text-red-600'; }
+            
+            panel.innerHTML = `
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">📊 Case Complete!</h2>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="text-4xl font-bold ${gradeColor}">${percentage}%</div>
+                        <div class="text-xl text-gray-600">${grade}</div>
+                    </div>
+                    
+                    <h3 class="font-bold text-gray-800 mb-4">Your Decision Path:</h3>
+                    <div class="space-y-3 mb-6">
+                        ${decisionPath.map(d => {
+                            let pathClass = d.isOptimal ? 'optimal-path' : (d.points >= 5 ? 'suboptimal-path' : 'wrong-path');
+                            return `<div class="${pathClass} p-3 rounded-lg">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <span class="font-bold">Stage ${d.stage}:</span> ${d.title}
+                                        <div class="text-sm mt-1">Choice: <strong>${d.choice}</strong> - ${d.outcome}</div>
+                                        ${!d.isOptimal ? `<div class="text-sm text-gray-600">Better: ${d.optimalChoice}</div>` : ''}
+                                    </div>
+                                    <span class="text-sm font-medium">${d.points}/${d.maxPoints}</span>
+                                </div>
+                            </div>`;
+                        }).join('')}
+                    </div>
+                    
+                    <div class="mt-6 p-4 bg-orange-50 rounded-xl">
+                        <h4 class="font-bold text-orange-800 mb-2">🎯 Kawasaki Key Points</h4>
+                        <ul class="text-sm text-gray-700 space-y-1">
+                            <li>• Fever ≥5 days + ≥4 of 5 criteria = Classic Kawasaki</li>
+                            <li>• CRASH and Burn mnemonic for criteria</li>
+                            <li>• IVIG 2g/kg + aspirin = first-line treatment</li>
+                            <li>• Coronary aneurysms: 25% untreated → <5% with IVIG</li>
+                            <li>• Echo: baseline, 2 weeks, 6-8 weeks minimum</li>
+                            <li>• Incomplete Kawasaki common in infants - treat when in doubt</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mt-4 p-4 bg-blue-50 rounded-xl">
+                        <h4 class="font-bold text-blue-800 mb-2">📚 References</h4>
+                        <p class="text-sm text-gray-700">
+                            <a href="https://www.ahajournals.org/doi/10.1161/CIR.0000000000000484" target="_blank" class="text-blue-600 hover:underline">AHA Kawasaki Guidelines 2017</a> |
+                            <a href="https://www.ncbi.nlm.nih.gov/books/NBK537163/" target="_blank" class="text-blue-600 hover:underline">StatPearls: Kawasaki Disease</a>
+                        </p>
+                    </div>
+                    
+                    <button onclick="resetGame()" class="mt-6 w-full py-3 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-xl font-semibold hover:opacity-90">🔄 Try Again</button>
+                </div>
+            `;
+        }
+
+        function resetGame() {
+            currentStage = 0; totalScore = 0; decisionPath.length = 0;
+            document.getElementById('summaryPanel').classList.add('hidden');
+            document.getElementById('gameContainer').classList.remove('hidden');
+            document.getElementById('progressBar').style.width = '0%';
+            document.getElementById('score').textContent = '0%';
+            renderStage();
+        }
+
+        initGame();
+    </script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+.rdx-difficulty-panel { position: fixed; top: 80px; right: 20px; background: rgba(255,255,255,0.95); border-radius: 12px; padding: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); z-index: 1000; display: flex; flex-direction: column; gap: 8px; }
+.rdx-diff-btn { padding: 8px 16px; border: 2px solid #e2e8f0; border-radius: 8px; background: white; cursor: pointer; font-size: 14px; transition: all 0.2s; }
+.rdx-diff-btn:hover { border-color: #3b82f6; background: #eff6ff; }
+.rdx-diff-btn.active { border-color: #3b82f6; background: #3b82f6; color: white; }
+.rdx-refs-panel { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-radius: 12px; padding: 16px; margin: 20px 0; border: 1px solid #bfdbfe; }
+.rdx-refs-title { font-weight: 700; color: #1e40af; margin-bottom: 12px; font-size: 16px; }
+.rdx-refs-links { display: flex; flex-wrap: wrap; gap: 10px; }
+.rdx-refs-links a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #2563eb; font-size: 13px; border: 1px solid #bfdbfe; transition: all 0.2s; }
+.rdx-refs-links a:hover { background: #2563eb; color: white; }
+.rdx-hint-beginner { display: none; }
+.rdx-hint-advanced { display: none; }
+[data-difficulty="beginner"] .rdx-hint-beginner { display: block; }
+[data-difficulty="advanced"] .rdx-hint-advanced { display: block; }
+</style>
+
+<div class="rdx-difficulty-panel">
+    <div style="font-weight: 600; font-size: 12px; color: #64748b; margin-bottom: 4px;">DIFFICULTY</div>
+    <button class="rdx-diff-btn" onclick="window.rdxSetDifficulty('beginner')">🌱 Beginner</button>
+    <button class="rdx-diff-btn active" onclick="window.rdxSetDifficulty('standard')">📚 Standard</button>
+    <button class="rdx-diff-btn" onclick="window.rdxSetDifficulty('advanced')">🎯 Advanced</button>
+</div>
+
+
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning Journey</h4>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+        <div style="background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 8px;">📚 MechanismDx Modules</h5>
+            <p style="font-size: 13px; color: #64748b; margin-bottom: 8px;">Master the pathophysiology</p>
+            <a href="../mechanism/pediatrics-module.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Pediatric Emergencies</a>
+            <a href="../mechanism/rheum-emergencies-module.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Vasculitis & Rheum</a>
+        </div>
+        
+        <div style="background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #3b82f6;">
+            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 8px;">🎮 Related ReasonDx Cases</h5>
+            <p style="font-size: 13px; color: #64748b; margin-bottom: 8px;">Practice similar scenarios</p>
+            <a href="kawasaki-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Adult Kawasaki-like</a>
+            <a href="peds-febrile-seizure-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Pediatric Febrile Seizure</a>
+            <a href="sepsis-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Sepsis Workup</a>
+        </div>
+        
+        <div style="background: white; border-radius: 8px; padding: 16px; border-left: 4px solid #10b981;">
+            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 8px;">💬 CoachDx Practice</h5>
+            <p style="font-size: 13px; color: #64748b; margin-bottom: 8px;">Practice communication skills</p>
+            <a href="../CoachDx/mentor-chat.html?case=peds-fever" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Pediatric Fever Coach</a>
+            <a href="../CoachDx/sbar-trainer.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+
+<div class="rdx-refs-panel" style="max-width: 1000px; margin: 20px auto;">
+    <div class="rdx-refs-title">📚 Open-Access References</div>
+    <div class="rdx-refs-links">
+        <a href="https://www.ncbi.nlm.nih.gov/books/" target="_blank">StatPearls Library</a>
+        <a href="https://www.ahajournals.org/doi/10.1161/CIR.0000000000000484" target="_blank">AHA Kawasaki Guidelines 2017</a><a href="https://www.ncbi.nlm.nih.gov/books/NBK537163/" target="_blank">StatPearls: Kawasaki Disease</a>
+    </div>
+</div>
+
+<script>
+// Difficulty Toggle
+window.rdxSetDifficulty = function(level) {
+    document.body.setAttribute('data-difficulty', level);
+    document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+};
+document.body.setAttribute('data-difficulty', 'standard');
+
+// Decision Path Tracking (enhanced)
+window.rdxDecisionPath = window.rdxDecisionPath || [];
+window.rdxTotalScore = window.rdxTotalScore || 0;
+window.rdxMaxScore = window.rdxMaxScore || 0;
+
+window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+    window.rdxDecisionPath.push({ stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText });
+    window.rdxTotalScore += points;
+    window.rdxMaxScore += maxPoints;
+};
+
+// Visual Debrief (enhanced)
+window.rdxShowDebrief = function() {
+    const pct = Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) || 0;
+    let grade = pct >= 90 ? '🌟 Outstanding!' : pct >= 80 ? '✨ Excellent!' : pct >= 70 ? '👍 Good Work!' : '📚 Keep Learning!';
+    
+    const overlay = document.createElement('div');
+    overlay.className = 'rdx-debrief-overlay';
+    overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;';
+    
+    let pathHtml = window.rdxDecisionPath.map(d => {
+        let cls = d.isOptimal ? 'background:#dcfce7;border-left:4px solid #22c55e;' : d.points >= d.maxPoints*0.5 ? 'background:#fef9c3;border-left:4px solid #eab308;' : 'background:#fecaca;border-left:4px solid #ef4444;';
+        return `<div style="${cls}padding:12px;border-radius:8px;margin:8px 0;">
+            <div style="display:flex;justify-content:space-between;"><strong>Stage ${d.stageId}: ${d.stageTitle}</strong><span>${d.points}/${d.maxPoints}</span></div>
+            <div style="font-size:14px;margin-top:4px;">${d.outcome}</div>
+            ${!d.isOptimal ? `<div style="font-size:13px;color:#666;margin-top:4px;">Better: ${d.optimalChoice}</div>` : ''}
+        </div>`;
+    }).join('');
+    
+    overlay.innerHTML = `<div style="background:white;border-radius:16px;max-width:700px;max-height:90vh;overflow-y:auto;padding:24px;">
+        <h2 style="font-size:24px;margin-bottom:8px;">📊 Performance Summary</h2>
+        <div style="font-size:36px;font-weight:700;color:#2563eb;">${pct}%</div>
+        <div style="font-size:18px;margin-bottom:20px;">${grade}</div>
+        <h3 style="margin-bottom:12px;">Your Decision Path:</h3>
+        ${pathHtml}
+        <div style="margin-top:16px;padding:12px;background:#f1f5f9;border-radius:8px;font-size:13px;">
+            <strong>Legend:</strong> 🟢 Optimal | 🟡 Suboptimal | 🔴 Incorrect
+        </div>
+        <button onclick="this.closest('.rdx-debrief-overlay').remove()" style="margin-top:20px;width:100%;padding:12px;background:#3b82f6;color:white;border:none;border-radius:8px;font-size:16px;cursor:pointer;">Close</button>
+    </div>`;
+    document.body.appendChild(overlay);
+};
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+</body>
+</html>

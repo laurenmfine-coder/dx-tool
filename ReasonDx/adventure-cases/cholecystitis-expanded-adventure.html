@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cholecystitis | Clinical Adventure</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: linear-gradient(135deg, #065f46 0%, #10b981 100%); min-height: 100vh; color: #e2e8f0; line-height: 1.6; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: rgba(6, 95, 70, 0.9); border-radius: 16px; margin-bottom: 20px; }
+        .badge { padding: 4px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; background: #10b981; margin-left: 10px; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #10b981, #6ee7b7); border-radius: 3px; }
+        .scene { background: linear-gradient(135deg, #065f46, #047857); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+        .scene-header { background: rgba(16, 185, 129, 0.15); padding: 16px 20px; }
+        .scene-phase { font-size: 0.75rem; color: #6ee7b7; text-transform: uppercase; }
+        .scene-title { font-size: 1.4rem; font-weight: 700; }
+        .scene-body { padding: 24px; }
+        .highlight { color: #fbbf24; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(16,185,129,0.2)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
+        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; }
+        .boards-tip { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .boards-tip-title { font-weight: 700; color: #fbbf24; margin-bottom: 10px; }
+        .alert-box { background: rgba(239,68,68,0.2); border: 1px solid rgba(239,68,68,0.5); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .alert-title { font-weight: 700; color: #f87171; margin-bottom: 10px; }
+        .btn { padding: 16px 28px; background: linear-gradient(135deg, #10b981, #047857); border: none; border-radius: 12px; color: white; font-weight: 600; cursor: pointer; width: 100%; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+        .comparison-table th { background: rgba(0,0,0,0.3); color: #6ee7b7; }
+        .tips { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+        .pearl, .pitfall { padding: 20px; border-radius: 12px; }
+        .pearl { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); }
+        .pitfall { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); }
+        .tip-header { font-weight: 600; margin-bottom: 10px; }
+        .pearl .tip-header { color: #4ade80; }
+        .pitfall .tip-header { color: #f87171; }
+        @media (max-width: 640px) { .tips { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container" id="app"></div>
+    <script>
+    const STAGES = ['arrival','pathophys','murphy','imaging','labs','severity','cholangitis','acalculous','management','debrief'];
+    const state = { stage: 0 };
+    function render() {
+        const p = ((state.stage + 1) / STAGES.length) * 100;
+        let c = `<div class="header"><div style="font-size:1.3rem;font-weight:700">🫀 Cholecystitis<span class="badge">10 STAGES</span></div><div>${state.stage + 1}/${STAGES.length}</div></div><div class="progress-bar"><div class="progress-fill" style="width:${p}%"></div></div>`;
+        c += window['render_' + STAGES[state.stage]]();
+        document.getElementById('app').innerHTML = c;
+    }
+    function nextStage() { state.stage++; render(); }
+
+    window.render_arrival = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 1 of 10</div><div class="scene-title">RUQ Pain After Fatty Meal</div></div><div class="scene-body"><div class="narrative"><p>A <span class="highlight">48-year-old woman</span> presents with <span class="critical">severe RUQ pain × 12 hours</span> that began after eating fried chicken. Pain radiates to right scapula. Associated with nausea and vomiting.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 98, T 101.1°F, BP 138/88<br><strong>Exam:</strong> RUQ tenderness with guarding, positive Murphy's sign<br><strong>History:</strong> Similar but milder episodes before</p></div><div class="alert-box"><div class="alert-title">🚨 Classic Cholecystitis Presentation!</div><p>The "4 F's" risk factors: Female, Forty, Fertile, Fat. Pain lasting >6 hours (vs biliary colic <6h), fever, and positive Murphy's sign point to cholecystitis.</p></div><div class="mechanism-box"><div class="mechanism-title">🧬 Biliary Colic vs Cholecystitis</div><div class="pathway"><strong>Biliary colic:</strong><br>• Stone transiently obstructs cystic duct<br>• Pain <6 hours, self-resolves<br>• No fever, no inflammation<br><br><strong>Acute cholecystitis:</strong><br>• Persistent obstruction → inflammation<br>• Pain >6 hours, constant<br>• Fever, elevated WBC, positive Murphy's</div></div><button class="btn" onclick="nextStage()">Pathophysiology →</button></div></div>`;
+    };
+
+    window.render_pathophys = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 2 of 10</div><div class="scene-title">Pathophysiology</div></div><div class="scene-body"><div class="mechanism-box"><div class="mechanism-title">🧬 How Cholecystitis Develops</div><div class="pathway">Gallstone impacts cystic duct<br>→ Gallbladder distension<br>→ Venous/lymphatic congestion<br>→ Wall ischemia<br>→ Inflammation (initially sterile)<br>→ Secondary bacterial infection (50%)<br><br>If untreated:<br>→ Gangrenous cholecystitis<br>→ Perforation<br>→ Biliary peritonitis</div></div><div class="boards-tip"><div class="boards-tip-title">📚 Types of Cholecystitis</div><table class="comparison-table"><tr><th>Type</th><th>Cause</th><th>Population</th></tr><tr><td><strong>Calculous (90%)</strong></td><td>Gallstone obstruction</td><td>General population</td></tr><tr><td><strong>Acalculous (10%)</strong></td><td>Stasis, ischemia (no stones)</td><td>ICU, critically ill</td></tr></table></div><button class="btn" onclick="nextStage()">Murphy's Sign →</button></div></div>`;
+    };
+
+    window.render_murphy = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 3 of 10</div><div class="scene-title">Murphy's Sign</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Physical Exam Findings</div><table class="comparison-table"><tr><th>Sign</th><th>Technique</th><th>Significance</th></tr><tr><td><strong>Murphy's sign</strong></td><td>Deep inspiration with RUQ palpation → inspiratory arrest</td><td>95% sensitive for cholecystitis</td></tr><tr><td><strong>Sonographic Murphy's</strong></td><td>Pain when probe compresses GB</td><td>More specific than clinical</td></tr><tr><td><strong>Boas' sign</strong></td><td>Hyperesthesia below right scapula</td><td>Referred pain</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Murphy's Sign Technique</div><div class="pathway"><strong>How to perform:</strong><br>1. Place hand at RUQ (subcostal)<br>2. Ask patient to take deep breath<br>3. Inflamed GB descends onto fingers<br>4. POSITIVE = Inspiratory arrest from pain<br><br><strong>False negative if:</strong><br>• Elderly (blunted response)<br>• Gangrenous (destroyed nerves)<br>• Perforated (decompressed)</div></div><button class="btn" onclick="nextStage()">Imaging →</button></div></div>`;
+    };
+
+    window.render_imaging = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 4 of 10</div><div class="scene-title">Imaging Studies</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Imaging Modalities</div><table class="comparison-table"><tr><th>Test</th><th>Sensitivity</th><th>Findings</th></tr><tr style="background:rgba(34,197,94,0.2);"><td><strong>RUQ Ultrasound</strong></td><td>85-95%</td><td>First-line! Gallstones, wall thickening, pericholecystic fluid, sono Murphy's</td></tr><tr><td><strong>HIDA scan</strong></td><td>95%+</td><td>Non-visualization of GB = cystic duct obstruction</td></tr><tr><td><strong>CT abdomen</strong></td><td>~85%</td><td>Wall thickening, pericholecystic fluid, complications</td></tr><tr><td><strong>MRCP</strong></td><td>High</td><td>CBD stones, anatomy</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Ultrasound Criteria</div><div class="pathway"><strong>Cholecystitis findings:</strong><br>• Gallstones (may be impacted in neck)<br>• GB wall thickening >3 mm<br>• Pericholecystic fluid<br>• Sonographic Murphy's sign<br>• GB distension >10 cm<br><br><strong>When to get HIDA:</strong><br>• Equivocal ultrasound<br>• High suspicion, stones not seen<br>• Acalculous cholecystitis suspected</div></div><button class="btn" onclick="nextStage()">Labs →</button></div></div>`;
+    };
+
+    window.render_labs = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 5 of 10</div><div class="scene-title">Laboratory Findings</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Lab Results</div><table class="comparison-table"><tr><th>Test</th><th>Finding</th><th>Notes</th></tr><tr><td><strong>WBC</strong></td><td>↑ Elevated (12-15K typical)</td><td>May be normal early</td></tr><tr><td><strong>CRP</strong></td><td>↑ Elevated</td><td>Correlates with severity</td></tr><tr><td><strong>LFTs</strong></td><td>Usually normal or mild ↑</td><td>Significant ↑ suggests CBD stone</td></tr><tr><td><strong>Bilirubin</strong></td><td>May be mildly elevated</td><td>High bilirubin → choledocholithiasis</td></tr><tr><td><strong>Lipase</strong></td><td>Usually normal</td><td>If elevated → gallstone pancreatitis</td></tr></table></div><div class="alert-box"><div class="alert-title">⚠️ CBD Stone Clues</div><p>Very elevated bilirubin (>4), elevated ALP, dilated CBD on US → suspect choledocholithiasis. May need ERCP before or during cholecystectomy.</p></div><button class="btn" onclick="nextStage()">Severity →</button></div></div>`;
+    };
+
+    window.render_severity = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 6 of 10</div><div class="scene-title">Tokyo Guidelines Severity</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Tokyo Guidelines 2018</div><table class="comparison-table"><tr><th>Grade</th><th>Criteria</th><th>Management</th></tr><tr><td><strong>Grade I (Mild)</strong></td><td>No organ dysfunction, mild inflammation</td><td>Early lap chole</td></tr><tr><td><strong>Grade II (Moderate)</strong></td><td>WBC >18K, palpable mass, duration >72h, marked inflammation</td><td>Early lap chole if possible; may need drainage first</td></tr><tr><td><strong>Grade III (Severe)</strong></td><td>Organ dysfunction (CV, neuro, renal, hepatic, hematologic)</td><td>Stabilize, cholecystostomy tube, delayed chole</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Complicated Cholecystitis</div><div class="pathway"><strong>Gangrenous:</strong><br>• Wall necrosis, high perforation risk<br>• May have paradoxically less pain<br><br><strong>Emphysematous:</strong><br>• Gas in GB wall (gas-forming organisms)<br>• Often diabetics, high mortality<br><br><strong>Perforation:</strong><br>• Free or contained<br>• Peritonitis, abscess formation</div></div><button class="btn" onclick="nextStage()">Cholangitis →</button></div></div>`;
+    };
+
+    window.render_cholangitis = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 7 of 10</div><div class="scene-title">Cholangitis</div></div><div class="scene-body"><div class="alert-box"><div class="alert-title">🚨 Cholangitis = Biliary Emergency!</div><p>Infected bile with biliary obstruction. Without drainage → sepsis → death. ERCP is therapeutic!</p></div><div class="boards-tip"><div class="boards-tip-title">📚 Charcot's Triad & Reynolds' Pentad</div><table class="comparison-table"><tr><th>Charcot's Triad</th><th>Reynolds' Pentad (add)</th></tr><tr><td>RUQ pain</td><td>+ Altered mental status</td></tr><tr><td>Fever</td><td>+ Hypotension</td></tr><tr><td>Jaundice</td><td></td></tr></table><p style="margin-top:12px;">Reynolds' pentad = Severe cholangitis with sepsis</p></div><div class="mechanism-box"><div class="mechanism-title">🧬 Cholangitis vs Cholecystitis</div><div class="pathway"><strong>Cholecystitis:</strong> GB inflammation<br>• Pain, fever, Murphy's positive<br>• Bilirubin usually normal/mild ↑<br>• Treatment: Cholecystectomy<br><br><strong>Cholangitis:</strong> Bile duct infection<br>• Charcot's triad (pain, fever, jaundice)<br>• Bilirubin significantly elevated<br>• Treatment: ERCP for drainage!</div></div><button class="btn" onclick="nextStage()">Acalculous →</button></div></div>`;
+    };
+
+    window.render_acalculous = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 8 of 10</div><div class="scene-title">Acalculous Cholecystitis</div></div><div class="scene-body"><div class="alert-box"><div class="alert-title">🚨 Think of This in ICU Patients!</div><p>~10% of cholecystitis. No gallstones! High mortality (30-50%). Common in critically ill, post-op, trauma, burns, TPN patients.</p></div><div class="boards-tip"><div class="boards-tip-title">📚 Risk Factors</div><table class="comparison-table"><tr><th>Risk Factor</th><th>Mechanism</th></tr><tr><td>Critical illness</td><td>Hypoperfusion, stasis</td></tr><tr><td>NPO/TPN</td><td>GB stasis (no CCK stimulation)</td></tr><tr><td>Mechanical ventilation</td><td>Positive pressure, splanchnic hypoperfusion</td></tr><tr><td>Major surgery/trauma</td><td>Systemic inflammation</td></tr><tr><td>Burns</td><td>Dehydration, hypoperfusion</td></tr><tr><td>Vasopressors</td><td>Splanchnic vasoconstriction</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Diagnosis Challenges</div><div class="pathway">• Patient often sedated, intubated<br>• Can't report RUQ pain<br>• Murphy's sign not assessable<br>• Fever may be attributed to other cause<br><br><strong>Clues:</strong><br>• Unexplained sepsis in ICU patient<br>• Rising WBC, bilirubin<br>• US: GB sludge, wall thickening, distension<br>• HIDA most accurate if equivocal</div></div><button class="btn" onclick="nextStage()">Management →</button></div></div>`;
+    };
+
+    window.render_management = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 9 of 10</div><div class="scene-title">Management</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Treatment Approach</div><table class="comparison-table"><tr><th>Component</th><th>Details</th></tr><tr><td><strong>NPO</strong></td><td>Bowel rest</td></tr><tr><td><strong>IV fluids</strong></td><td>Resuscitation</td></tr><tr><td><strong>Pain control</strong></td><td>Opioids (morphine OK despite old myth)</td></tr><tr><td><strong>Antibiotics</strong></td><td>Gram-neg + anaerobe coverage</td></tr><tr style="background:rgba(34,197,94,0.2);"><td><strong>Cholecystectomy</strong></td><td>Definitive treatment - EARLY preferred</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Timing of Surgery</div><div class="pathway"><strong>Early cholecystectomy (<72 hours):</strong><br>Preferred for Grade I/II<br>• Lower morbidity<br>• Shorter hospital stay<br>• Lower cost<br><br><strong>Delayed/Interval:</strong><br>• Grade III (severe) - stabilize first<br>• Percutaneous cholecystostomy for poor surgical candidates<br><br><strong>Antibiotics:</strong><br>Ceftriaxone + metronidazole OR<br>Piperacillin-tazobactam</div></div><button class="btn" onclick="nextStage()">Debrief →</button></div></div>`;
+    };
+
+    window.render_debrief = function() {
+        return `<div class="scene"><div style="text-align:center;padding:40px;"><div style="font-size:4rem;margin-bottom:12px;">🫀</div><div style="font-size:1.8rem;font-weight:700;color:#4ade80;">Cholecystitis Mastery!</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 High-Yield Summary</div><table class="comparison-table"><tr><th>Concept</th><th>Key Point</th></tr><tr><td>Pain duration</td><td>>6 hours (vs biliary colic <6h)</td></tr><tr><td>Murphy's sign</td><td>Inspiratory arrest with RUQ palpation</td></tr><tr><td>First-line imaging</td><td>RUQ ultrasound</td></tr><tr><td>Treatment</td><td>Early lap chole (<72h) preferred</td></tr><tr><td>Charcot's triad</td><td>Pain + fever + jaundice = cholangitis</td></tr><tr><td>Acalculous</td><td>ICU patients, no stones, high mortality</td></tr></table></div><div class="tips"><div class="pearl"><div class="tip-header">✓ Pearls</div><ul style="margin-left:16px;"><li>Sonographic Murphy's most specific</li><li>High bilirubin → CBD stone</li><li>Early surgery = better outcomes</li><li>Think acalculous in ICU sepsis</li></ul></div><div class="pitfall"><div class="tip-header">✗ Pitfalls</div><ul style="margin-left:16px;"><li>False-negative Murphy's in elderly/gangrenous</li><li>Missing CBD stone (check LFTs)</li><li>Delaying surgery unnecessarily</li><li>Missing acalculous in critically ill</li></ul></div></div><button class="btn" onclick="state.stage=0;render()">🔄 Restart Case</button></div></div>`;
+    };
+
+    render();
+    </script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+/* Enhanced Feature Styles */
+.rdx-difficulty-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 300px;
+}
+.rdx-diff-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin: 2px;
+}
+.rdx-diff-btn.active {
+    background: #3b82f6;
+    color: white;
+}
+.rdx-diff-btn:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+}
+.rdx-diff-btn:hover:not(.active) {
+    background: #e2e8f0;
+}
+.rdx-refs-panel {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #93c5fd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+.rdx-refs-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+.rdx-refs-links {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+.rdx-refs-links a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.rdx-refs-links a:hover {
+    text-decoration: underline;
+}
+.rdx-debrief-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rdx-debrief-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #1f2937;
+}
+.rdx-path-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.rdx-path-optimal {
+    background: #dcfce7;
+    border-left: 4px solid #22c55e;
+}
+.rdx-path-suboptimal {
+    background: #fef9c3;
+    border-left: 4px solid #eab308;
+}
+.rdx-path-wrong {
+    background: #fecaca;
+    border-left: 4px solid #ef4444;
+}
+.rdx-hint-beginner {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+.rdx-hint-advanced {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+</style>
+
+<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
+    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
+        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    </div>
+</div>
+
+
+<!-- CROSS-PLATFORM LEARNING LINKS -->
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
+            <a href="../mechanism/acute-abdomen-module.html" style="display: block; color: #2563eb; font-size: 14px;">→ Biliary Disease</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
+            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="cdiff-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Cdiff</a>
+            <a href="acute-abdomen-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Acute Abdomen</a>
+            <a href="gi-bleed-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Gi Bleed</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
+            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../CoachDx/mentor-chat.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../CoachDx/sbar-trainer.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+<!-- END CROSS-PLATFORM LINKS -->
+<div class="rdx-refs-panel" id="rdxRefsPanel">
+    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
+    <div class="rdx-refs-links"><a href="https://gi.org/guidelines/" target="_blank" class="text-blue-600 hover:underline">ACG Guidelines</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK470300/" target="_blank" class="text-blue-600 hover:underline">StatPearls: GI Bleeding</a></div>
+</div>
+
+<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
+    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+</div>
+
+<script>
+// ReasonDx Enhanced Features Module
+(function() {
+    // Decision tracking
+    window.rdxDecisionPath = window.rdxDecisionPath || [];
+    window.rdxTotalScore = window.rdxTotalScore || 0;
+    window.rdxMaxScore = window.rdxMaxScore || 0;
+    window.rdxDifficulty = 'intermediate';
+    
+    // Difficulty control
+    window.rdxSetDifficulty = function(level) {
+        window.rdxDifficulty = level;
+        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('rdx-btn-' + level).classList.add('active');
+        
+        // Update hint visibility
+        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
+            el.style.display = level === 'beginner' ? 'block' : 'none';
+        });
+        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
+            el.style.display = level === 'advanced' ? 'block' : 'none';
+        });
+    };
+    
+    // Track a decision
+    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+        window.rdxDecisionPath.push({
+            stage: stageId,
+            title: stageTitle,
+            choice: choiceId,
+            choiceText: choiceText,
+            outcome: outcome,
+            points: points,
+            maxPoints: maxPoints,
+            isOptimal: isOptimal,
+            optimalChoice: optimalChoice,
+            optimalText: optimalText
+        });
+        window.rdxTotalScore += points;
+        window.rdxMaxScore += maxPoints;
+    };
+    
+    // Show visual debrief
+    window.rdxShowDebrief = function() {
+        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
+        
+        let grade, gradeColor, gradeEmoji;
+        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
+        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
+        
+        let pathHTML = '';
+        if (window.rdxDecisionPath.length > 0) {
+            pathHTML = window.rdxDecisionPath.map(d => {
+                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
+                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
+                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
+                return '<div class="' + pathClass + ' rdx-path-item">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
+                    '<div>' +
+                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
+                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
+                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
+                    '</div>' +
+                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
+                    '</div></div>';
+            }).join('');
+        } else {
+            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+        }
+        
+        document.getElementById('rdxDebriefContent').innerHTML = 
+            '<div style="text-align:center;margin-bottom:24px;">' +
+            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
+            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
+            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
+            '</div></div>' +
+            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
+            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
+            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
+            '</div></div>' +
+            '<div style="display:flex;gap:12px;">' +
+            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '</div>';
+        
+        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
+    };
+    
+    // Auto-inject hint examples into existing content
+    window.rdxInit = function() {
+        // Could add dynamic hint injection here based on difficulty
+        console.log('ReasonDx Enhanced Features loaded for: Cholecystitis Expanded Adventure');
+    };
+    
+    // Initialize on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.rdxInit);
+    } else {
+        window.rdxInit();
+    }
+})();
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+</body>
+</html>

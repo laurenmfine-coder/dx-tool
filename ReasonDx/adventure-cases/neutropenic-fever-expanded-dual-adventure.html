@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neutropenic Fever | Dual-Mode Clinical Adventure</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; min-height: 100vh; color: #e2e8f0; line-height: 1.6; padding: 20px; }
+        body.adult { background: linear-gradient(135deg, #1e3a5f 0%, #3b82f6 100%); }
+        body.peds { background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%); }
+        .container { max-width: 900px; margin: 0 auto; }
+        .mode-toggle { display: flex; justify-content: center; margin-bottom: 20px; background: rgba(0,0,0,0.3); border-radius: 12px; padding: 4px; }
+        .mode-btn { flex: 1; padding: 12px 24px; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; background: transparent; color: #e2e8f0; }
+        .mode-btn.active { background: rgba(255,255,255,0.2); }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-radius: 16px; margin-bottom: 20px; }
+        .adult .header { background: rgba(30, 58, 95, 0.9); }
+        .peds .header { background: rgba(124, 58, 237, 0.9); }
+        .badge { padding: 4px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; margin-left: 10px; }
+        .adult .badge { background: #3b82f6; }
+        .peds .badge { background: #a78bfa; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; border-radius: 3px; }
+        .adult .progress-fill { background: linear-gradient(90deg, #3b82f6, #93c5fd); }
+        .peds .progress-fill { background: linear-gradient(90deg, #a78bfa, #c4b5fd); }
+        .scene { border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+        .adult .scene { background: linear-gradient(135deg, #1e3a5f, #1e40af); }
+        .peds .scene { background: linear-gradient(135deg, #6d28d9, #7c3aed); }
+        .scene-header { padding: 16px 20px; }
+        .adult .scene-header { background: rgba(59, 130, 246, 0.15); }
+        .peds .scene-header { background: rgba(167, 139, 250, 0.15); }
+        .scene-phase { font-size: 0.75rem; text-transform: uppercase; }
+        .scene-title { font-size: 1.4rem; font-weight: 700; }
+        .scene-body { padding: 24px; }
+        .highlight { color: #fbbf24; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(59,130,246,0.2)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
+        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; }
+        .boards-tip { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .boards-tip-title { font-weight: 700; color: #fbbf24; margin-bottom: 10px; }
+        .alert-box { background: rgba(239,68,68,0.2); border: 1px solid rgba(239,68,68,0.5); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .alert-title { font-weight: 700; color: #f87171; margin-bottom: 10px; }
+        .btn { padding: 16px 28px; border: none; border-radius: 12px; color: white; font-weight: 600; cursor: pointer; width: 100%; }
+        .adult .btn { background: linear-gradient(135deg, #3b82f6, #1e40af); }
+        .peds .btn { background: linear-gradient(135deg, #a78bfa, #7c3aed); }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+        .comparison-table th { background: rgba(0,0,0,0.3); }
+        .tips { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+        .pearl, .pitfall { padding: 20px; border-radius: 12px; }
+        .pearl { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); }
+        .pitfall { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); }
+        .tip-header { font-weight: 600; margin-bottom: 10px; }
+        .pearl .tip-header { color: #4ade80; }
+        .pitfall .tip-header { color: #f87171; }
+        @media (max-width: 640px) { .tips { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body class="adult">
+    <div class="container">
+        <div class="mode-toggle">
+            <button class="mode-btn active" onclick="setMode('adult')">🏥 Adult</button>
+            <button class="mode-btn" onclick="setMode('peds')">👶 Pediatric</button>
+        </div>
+        <div id="app"></div>
+    </div>
+    <script>
+    const STAGES = ['arrival','definitions','risk','workup','empiric','escalation','fungal','duration','prophylaxis','debrief'];
+    const state = { stage: 0, mode: 'adult' };
+
+    function setMode(m) { state.mode = m; state.stage = 0; document.body.className = m; document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active')); event.target.classList.add('active'); render(); }
+    function nextStage() { state.stage++; render(); }
+
+    function render() {
+        const p = ((state.stage + 1) / STAGES.length) * 100;
+        const icon = state.mode === 'adult' ? '🦠' : '👶🦠';
+        const title = state.mode === 'adult' ? 'Neutropenic Fever' : 'Pediatric Neutropenic Fever';
+        let c = `<div class="header"><div style="font-size:1.3rem;font-weight:700">${icon} ${title}<span class="badge">10 STAGES</span></div><div>${state.stage + 1}/${STAGES.length}</div></div><div class="progress-bar"><div class="progress-fill" style="width:${p}%"></div></div>`;
+        c += window['render_' + STAGES[state.stage]]();
+        document.getElementById('app').innerHTML = c;
+    }
+
+    window.render_arrival = function() {
+        if (state.mode === 'adult') {
+            return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 1 of 10</div><div class="scene-title">Fever After Chemotherapy</div></div><div class="scene-body"><div class="narrative"><p>A <span class="highlight">58-year-old man</span> with AML, day 10 after induction chemotherapy, presents with <span class="critical">fever to 101.8°F and chills</span>. Has a tunneled central line.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 110, BP 98/60, T 101.8°F, RR 20<br><strong>Labs:</strong> WBC 0.3 (ANC 80), Hgb 8.2, Plt 18K<br><strong>Exam:</strong> Mild mucositis, no focal source, port site clean</p></div><div class="alert-box"><div class="alert-title">🚨 Neutropenic Fever = Medical Emergency!</div><p>ANC <500 + fever = start antibiotics within 60 minutes! Infection can progress to sepsis and death within hours.</p></div><div class="mechanism-box"><div class="mechanism-title">🧬 Why So Dangerous?</div><div class="pathway">No neutrophils → no pus formation<br>→ No inflammatory signs<br>→ Fever may be ONLY sign<br>→ Rapid bacterial proliferation<br>→ Sepsis within hours</div></div><button class="btn" onclick="nextStage()">Definitions →</button></div></div>`;
+        } else {
+            return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 1 of 10</div><div class="scene-title">Fever in a Child with Leukemia</div></div><div class="scene-body"><div class="narrative"><p>A <span class="highlight">6-year-old girl</span> with ALL, day 14 of induction, presents with <span class="critical">fever to 102.2°F</span>. Parents note she's been more tired today. Has a port-a-cath.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 130, BP 90/55, T 102.2°F, RR 24<br><strong>Labs:</strong> WBC 0.2 (ANC 40), Hgb 7.8, Plt 22K<br><strong>Weight:</strong> 22 kg</p></div><div class="alert-box"><div class="alert-title">🚨 Pediatric Oncologic Emergency!</div><p>ALL is the most common pediatric cancer. Fever during chemotherapy-induced neutropenia requires immediate broad-spectrum antibiotics.</p></div><div class="mechanism-box"><div class="mechanism-title">🧬 Pediatric Considerations</div><div class="pathway"><strong>Common pediatric malignancies:</strong><br>• ALL (most common)<br>• AML<br>• Neuroblastoma<br>• Lymphoma<br><br>Children may not show typical signs<br>of infection when neutropenic<br><br>Tachycardia may be only early sign!</div></div><button class="btn" onclick="nextStage()">Definitions →</button></div></div>`;
+        }
+    };
+
+    window.render_definitions = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 2 of 10</div><div class="scene-title">Key Definitions</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Neutropenic Fever Definition</div><table class="comparison-table"><tr><th>Term</th><th>Definition</th></tr><tr><td><strong>Neutropenia</strong></td><td>ANC <500/μL OR <1000 expected to fall to <500</td></tr><tr><td><strong>Fever</strong></td><td>Single temp ≥38.3°C (101°F) OR ≥38.0°C × 1 hour</td></tr><tr><td><strong>Profound</strong></td><td>ANC <100/μL</td></tr><tr><td><strong>Prolonged</strong></td><td>>7 days duration</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 ANC Calculation</div><div class="pathway"><strong>ANC = WBC × (% segs + % bands)</strong><br><br>Example (${state.mode === 'adult' ? 'this patient' : 'this child'}):<br>WBC = ${state.mode === 'adult' ? '0.3 (300/μL)' : '0.2 (200/μL)'}<br>Segs = 20%, Bands = 5%<br>ANC = ${state.mode === 'adult' ? '300' : '200'} × 0.25 = ${state.mode === 'adult' ? '75' : '50'}/μL<br><br>This is PROFOUND neutropenia (ANC <100)</div></div>${state.mode === 'peds' ? `<div class="alert-box"><div class="alert-title">⚠️ Pediatric Note</div><p>Never take rectal temperatures in neutropenic children - risk of bacteremia from mucosal trauma!</p></div>` : ''}<button class="btn" onclick="nextStage()">Risk Stratification →</button></div></div>`;
+    };
+
+    window.render_risk = function() {
+        if (state.mode === 'adult') {
+            return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 3 of 10</div><div class="scene-title">MASCC Score</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 MASCC Risk Index (Adults)</div><table class="comparison-table"><tr><th>Characteristic</th><th>Points</th></tr><tr><td>Burden of illness: mild or none</td><td>5</td></tr><tr><td>Burden of illness: moderate</td><td>3</td></tr><tr><td>No hypotension (SBP >90)</td><td>5</td></tr><tr><td>No COPD</td><td>4</td></tr><tr><td>Solid tumor or no prior fungal infection</td><td>4</td></tr><tr><td>Outpatient status</td><td>3</td></tr><tr><td>No dehydration</td><td>3</td></tr><tr><td>Age <60</td><td>2</td></tr></table><p style="margin-top:12px;"><strong>≥21:</strong> Low risk - outpatient candidate<br><strong><21:</strong> High risk - inpatient required</p></div><button class="btn" onclick="nextStage()">Workup →</button></div></div>`;
+        } else {
+            return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 3 of 10</div><div class="scene-title">Pediatric Risk Stratification</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Low-Risk Criteria (Pediatric)</div><table class="comparison-table"><tr><th>Low-Risk Features</th></tr><tr><td>ANC ≥100 or rising</td></tr><tr><td>No comorbidities</td></tr><tr><td>No central line infection</td></tr><tr><td>No significant mucositis</td></tr><tr><td>Expected neutropenia <7 days</td></tr><tr><td>No hypotension</td></tr><tr><td>Normal chest X-ray</td></tr><tr><td>Reliable family, close follow-up available</td></tr></table></div><div class="alert-box"><div class="alert-title">⚠️ High-Risk Features in Children</div><ul style="margin-left:20px;"><li>AML (higher risk than ALL)</li><li>Relapsed leukemia</li><li>HSCT recipient</li><li>Profound neutropenia (ANC <100)</li><li>Significant comorbidity</li><li>Hypotension or ill-appearing</li></ul></div><button class="btn" onclick="nextStage()">Workup →</button></div></div>`;
+        }
+    };
+
+    window.render_workup = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 4 of 10</div><div class="scene-title">Diagnostic Evaluation</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Initial Workup</div><table class="comparison-table"><tr><th>Test</th><th>Notes</th></tr><tr><td><strong>Blood cultures × 2</strong></td><td>Peripheral AND from each catheter lumen</td></tr><tr><td><strong>CBC with diff</strong></td><td>Confirm ANC, trending</td></tr><tr><td><strong>CMP</strong></td><td>Renal, hepatic function</td></tr><tr><td><strong>Urinalysis + culture</strong></td><td>Even without symptoms</td></tr><tr><td><strong>Chest X-ray</strong></td><td>Even without respiratory symptoms</td></tr><tr><td><strong>Site-specific cultures</strong></td><td>Wound, stool (C. diff if diarrhea)</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Culture-Negative Fever</div><div class="pathway"><strong>Only 20-30% have documented infection!</strong><br><br>Possible explanations:<br>• Infection present but not culturable<br>• Drug fever, tumor fever<br>• Mucositis (common in ${state.mode === 'peds' ? 'children on chemo' : 'AML induction'})<br><br><strong>Regardless: Treat empirically!</strong><br>Don't wait for culture results</div></div><button class="btn" onclick="nextStage()">Empiric Therapy →</button></div></div>`;
+    };
+
+    window.render_empiric = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 5 of 10</div><div class="scene-title">Empiric Antibiotics</div></div><div class="scene-body"><div class="alert-box"><div class="alert-title">🚨 Start Within 60 Minutes!</div><p>Each hour of delay increases mortality. Must cover Pseudomonas aeruginosa.</p></div><div class="boards-tip"><div class="boards-tip-title">📚 Empiric Monotherapy Options</div><table class="comparison-table"><tr><th>Drug</th><th>${state.mode === 'adult' ? 'Adult Dose' : 'Pediatric Dose'}</th></tr><tr style="background:rgba(34,197,94,0.2);"><td><strong>Cefepime</strong></td><td>${state.mode === 'adult' ? '2 g IV q8h' : '50 mg/kg IV q8h (max 2g)'}</td></tr><tr style="background:rgba(34,197,94,0.2);"><td><strong>Piperacillin-tazobactam</strong></td><td>${state.mode === 'adult' ? '4.5 g IV q6h' : '100 mg/kg IV q6h (max 4.5g)'}</td></tr><tr style="background:rgba(34,197,94,0.2);"><td><strong>Meropenem</strong></td><td>${state.mode === 'adult' ? '1 g IV q8h' : '20 mg/kg IV q8h (max 1g)'}</td></tr></table><p style="margin-top:12px;">Monotherapy is adequate for most patients - equivalent to combination therapy.</p></div><div class="mechanism-box"><div class="mechanism-title">🧬 Why These Agents?</div><div class="pathway"><strong>Requirements:</strong><br>• Antipseudomonal activity<br>• Gram-negative coverage<br>• Bactericidal<br>• Good safety profile<br><br>${state.mode === 'peds' ? '<strong>Peds note:</strong> Cefepime or pip-tazo most commonly used. Carbapenems reserved for resistant organisms or severe sepsis.' : ''}</div></div><button class="btn" onclick="nextStage()">When to Escalate →</button></div></div>`;
+    };
+
+    window.render_escalation = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 6 of 10</div><div class="scene-title">Expanded Coverage</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 When to Add Vancomycin</div><table class="comparison-table"><tr><th>Indication</th></tr><tr><td>Hemodynamic instability/sepsis</td></tr><tr><td>Skin/soft tissue infection</td></tr><tr><td>Suspected catheter infection</td></tr><tr><td>Pneumonia</td></tr><tr><td>Known MRSA colonization</td></tr><tr><td>Severe mucositis (especially with FQ prophylaxis)</td></tr></table><p style="margin-top:12px;"><strong>Vanc dose:</strong> ${state.mode === 'adult' ? '15-20 mg/kg IV q8-12h' : '15 mg/kg IV q6h'}</p></div><div class="alert-box"><div class="alert-title">⚠️ Don't Add Vancomycin Routinely!</div><p>Add only for specific indications. Discontinue at 48-72h if no Gram-positive organism identified.</p></div><div class="mechanism-box"><div class="mechanism-title">🧬 Other Considerations</div><div class="pathway"><strong>Anaerobic coverage:</strong><br>• Perirectal infection, necrotizing mucositis<br>• Add metronidazole if not on pip-tazo<br><br><strong>C. difficile:</strong><br>• Test if diarrhea<br>• Oral vancomycin ${state.mode === 'adult' ? '125 mg QID' : '10 mg/kg QID (max 125mg)'}</div></div><button class="btn" onclick="nextStage()">Fungal Coverage →</button></div></div>`;
+    };
+
+    window.render_fungal = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 7 of 10</div><div class="scene-title">Antifungal Therapy</div></div><div class="scene-body"><div class="alert-box"><div class="alert-title">🚨 Persistent Fever >4-7 Days = Think Fungal!</div><p>If neutropenia persists and fever continues despite broad antibacterials, add empiric antifungal coverage.</p></div><div class="boards-tip"><div class="boards-tip-title">📚 Antifungal Options</div><table class="comparison-table"><tr><th>Drug</th><th>${state.mode === 'adult' ? 'Adult Dose' : 'Pediatric Dose'}</th><th>Coverage</th></tr><tr><td><strong>Caspofungin</strong></td><td>${state.mode === 'adult' ? '70mg load, then 50mg daily' : '70 mg/m² load (max 70), then 50 mg/m² daily'}</td><td>Candida, Aspergillus</td></tr><tr><td><strong>Micafungin</strong></td><td>${state.mode === 'adult' ? '100 mg daily' : '2-4 mg/kg daily'}</td><td>Candida, Aspergillus</td></tr><tr><td><strong>Liposomal ampho B</strong></td><td>${state.mode === 'adult' ? '3-5 mg/kg daily' : '3-5 mg/kg daily'}</td><td>Broadest</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Fungal Pathogens</div><div class="pathway"><strong>Candida:</strong> Most common; blood, catheter<br><strong>Aspergillus:</strong> Pulmonary infiltrates, halo sign<br>${state.mode === 'peds' ? '<strong>Peds note:</strong> Hepatosplenic candidiasis more common in pediatric ALL during recovery' : ''}<br><br>Get CT chest if persistent fever -<br>look for nodules, halo sign</div></div><button class="btn" onclick="nextStage()">Duration →</button></div></div>`;
+    };
+
+    window.render_duration = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 8 of 10</div><div class="scene-title">How Long to Treat</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Duration of Therapy</div><table class="comparison-table"><tr><th>Scenario</th><th>Duration</th></tr><tr><td>Afebrile, ANC recovering, no source</td><td>Until ANC ≥500 × 2 days</td></tr><tr><td>Documented infection</td><td>Complete appropriate course</td></tr><tr><td>Persistent fever, no source</td><td>Continue until ANC recovery</td></tr><tr><td>Low-risk, clinically stable</td><td>May step down to oral (${state.mode === 'adult' ? 'cipro + amox-clav' : 'institution-specific protocols'})</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Response Assessment at 48-72h</div><div class="pathway"><strong>Responding (afebrile):</strong><br>• Continue regimen<br>• De-escalate if cultures negative<br><br><strong>Persistent fever:</strong><br>• Reassess for new source<br>• CT chest (fungal?)<br>• Add antifungal if >4-7 days<br><br><strong>Deteriorating:</strong><br>• Broaden coverage<br>• ICU transfer if unstable</div></div><button class="btn" onclick="nextStage()">Prophylaxis →</button></div></div>`;
+    };
+
+    window.render_prophylaxis = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 9 of 10</div><div class="scene-title">Antimicrobial Prophylaxis</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Prophylaxis in High-Risk Patients</div><table class="comparison-table"><tr><th>Type</th><th>Agent</th><th>Indication</th></tr><tr><td><strong>Antibacterial</strong></td><td>${state.mode === 'adult' ? 'Levofloxacin 500mg daily' : 'Levofloxacin (limited peds data)'}</td><td>Prolonged neutropenia</td></tr><tr><td><strong>Antifungal</strong></td><td>Posaconazole, fluconazole</td><td>AML, HSCT</td></tr><tr><td><strong>Antiviral</strong></td><td>Acyclovir</td><td>HSV seropositive</td></tr><tr><td><strong>PCP</strong></td><td>TMP-SMX</td><td>${state.mode === 'adult' ? 'Steroids, ALL, HSCT' : 'ALL maintenance, HSCT'}</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 G-CSF (Filgrastim)</div><div class="pathway"><strong>Granulocyte colony-stimulating factor:</strong><br>• Shortens neutropenia duration<br>• Reduces infections<br>• Used prophylactically after chemo<br><br><strong>Dose:</strong> ${state.mode === 'adult' ? '5 mcg/kg daily' : '5 mcg/kg daily'}<br><br><strong>Note:</strong> NOT recommended for treatment<br>of established neutropenic fever<br>(no mortality benefit)</div></div>${state.mode === 'peds' ? `<div class="alert-box"><div class="alert-title">⚠️ Pediatric PCP Prophylaxis</div><p>TMP-SMX is standard for ALL patients. Give on 2-3 consecutive days per week throughout maintenance therapy.</p></div>` : ''}<button class="btn" onclick="nextStage()">Debrief →</button></div></div>`;
+    };
+
+    window.render_debrief = function() {
+        return `<div class="scene"><div style="text-align:center;padding:40px;"><div style="font-size:4rem;margin-bottom:12px;">🦠</div><div style="font-size:1.8rem;font-weight:700;color:#4ade80;">${state.mode === 'adult' ? 'Neutropenic Fever' : 'Pediatric Neutropenic Fever'} Mastery!</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 High-Yield Summary</div><table class="comparison-table"><tr><th>Concept</th><th>Key Point</th></tr><tr><td>Definition</td><td>ANC <500 + T ≥38.3°C</td></tr><tr><td>Time to abx</td><td>Within 60 minutes!</td></tr><tr><td>Empiric</td><td>Cefepime, pip-tazo, or meropenem</td></tr><tr><td>Vancomycin</td><td>Only for specific indications</td></tr><tr><td>Antifungal</td><td>Add if fever persists >4-7 days</td></tr><tr><td>Duration</td><td>Until ANC ≥500 × 2 days + afebrile</td></tr></table></div><div class="tips"><div class="pearl"><div class="tip-header">✓ Pearls</div><ul style="margin-left:16px;"><li>Monotherapy usually adequate</li><li>Culture before antibiotics (but don't delay!)</li><li>CT chest for persistent fever</li>${state.mode === 'peds' ? '<li>No rectal temps in neutropenic kids!</li>' : '<li>20-30% are culture-negative</li>'}</ul></div><div class="pitfall"><div class="tip-header">✗ Pitfalls</div><ul style="margin-left:16px;"><li>Delaying antibiotics</li><li>Adding vanc to everyone</li><li>Missing fungal infection</li><li>Stopping abx before ANC recovery</li></ul></div></div><button class="btn" onclick="state.stage=0;render()">🔄 Restart Case</button></div></div>`;
+    };
+
+    render();
+    </script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+/* Enhanced Feature Styles */
+.rdx-difficulty-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 300px;
+}
+.rdx-diff-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin: 2px;
+}
+.rdx-diff-btn.active {
+    background: #3b82f6;
+    color: white;
+}
+.rdx-diff-btn:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+}
+.rdx-diff-btn:hover:not(.active) {
+    background: #e2e8f0;
+}
+.rdx-refs-panel {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #93c5fd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+.rdx-refs-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+.rdx-refs-links {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+.rdx-refs-links a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.rdx-refs-links a:hover {
+    text-decoration: underline;
+}
+.rdx-debrief-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rdx-debrief-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #1f2937;
+}
+.rdx-path-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.rdx-path-optimal {
+    background: #dcfce7;
+    border-left: 4px solid #22c55e;
+}
+.rdx-path-suboptimal {
+    background: #fef9c3;
+    border-left: 4px solid #eab308;
+}
+.rdx-path-wrong {
+    background: #fecaca;
+    border-left: 4px solid #ef4444;
+}
+.rdx-hint-beginner {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+.rdx-hint-advanced {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+</style>
+
+<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
+    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
+        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    </div>
+</div>
+
+
+<!-- CROSS-PLATFORM LEARNING LINKS -->
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
+            <a href="../mechanism/hematology-module.html" style="display: block; color: #2563eb; font-size: 14px;">→ Neutropenic Fever</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
+            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="shock-expanded-dual-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Shock Expanded Dual</a>
+            <a href="sepsis-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Sepsis</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
+            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../CoachDx/mentor-chat.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../CoachDx/sbar-trainer.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+<!-- END CROSS-PLATFORM LINKS -->
+<div class="rdx-refs-panel" id="rdxRefsPanel">
+    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
+    <div class="rdx-refs-links"><a href="https://ginasthma.org/gina-reports/" target="_blank" class="text-blue-600 hover:underline">GINA Asthma Guidelines</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK560551/" target="_blank" class="text-blue-600 hover:underline">StatPearls: Pulmonary Embolism</a></div>
+</div>
+
+<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
+    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+</div>
+
+<script>
+// ReasonDx Enhanced Features Module
+(function() {
+    // Decision tracking
+    window.rdxDecisionPath = window.rdxDecisionPath || [];
+    window.rdxTotalScore = window.rdxTotalScore || 0;
+    window.rdxMaxScore = window.rdxMaxScore || 0;
+    window.rdxDifficulty = 'intermediate';
+    
+    // Difficulty control
+    window.rdxSetDifficulty = function(level) {
+        window.rdxDifficulty = level;
+        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('rdx-btn-' + level).classList.add('active');
+        
+        // Update hint visibility
+        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
+            el.style.display = level === 'beginner' ? 'block' : 'none';
+        });
+        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
+            el.style.display = level === 'advanced' ? 'block' : 'none';
+        });
+    };
+    
+    // Track a decision
+    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+        window.rdxDecisionPath.push({
+            stage: stageId,
+            title: stageTitle,
+            choice: choiceId,
+            choiceText: choiceText,
+            outcome: outcome,
+            points: points,
+            maxPoints: maxPoints,
+            isOptimal: isOptimal,
+            optimalChoice: optimalChoice,
+            optimalText: optimalText
+        });
+        window.rdxTotalScore += points;
+        window.rdxMaxScore += maxPoints;
+    };
+    
+    // Show visual debrief
+    window.rdxShowDebrief = function() {
+        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
+        
+        let grade, gradeColor, gradeEmoji;
+        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
+        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
+        
+        let pathHTML = '';
+        if (window.rdxDecisionPath.length > 0) {
+            pathHTML = window.rdxDecisionPath.map(d => {
+                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
+                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
+                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
+                return '<div class="' + pathClass + ' rdx-path-item">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
+                    '<div>' +
+                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
+                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
+                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
+                    '</div>' +
+                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
+                    '</div></div>';
+            }).join('');
+        } else {
+            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+        }
+        
+        document.getElementById('rdxDebriefContent').innerHTML = 
+            '<div style="text-align:center;margin-bottom:24px;">' +
+            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
+            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
+            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
+            '</div></div>' +
+            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
+            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
+            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
+            '</div></div>' +
+            '<div style="display:flex;gap:12px;">' +
+            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '</div>';
+        
+        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
+    };
+    
+    // Auto-inject hint examples into existing content
+    window.rdxInit = function() {
+        // Could add dynamic hint injection here based on difficulty
+        console.log('ReasonDx Enhanced Features loaded for: Neutropenic Fever Expanded Dual Adventure');
+    };
+    
+    // Initialize on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.rdxInit);
+    } else {
+        window.rdxInit();
+    }
+})();
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+</body>
+</html>

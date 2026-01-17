@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AKI Complete | Clinical Adventure</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%); min-height: 100vh; color: #e2e8f0; line-height: 1.6; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: rgba(30, 58, 95, 0.9); border-radius: 16px; margin-bottom: 20px; }
+        .badge { padding: 4px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; background: #3b82f6; margin-left: 10px; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #3b82f6, #93c5fd); border-radius: 3px; }
+        .scene { background: linear-gradient(135deg, #1e3a5f, #1e40af); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+        .scene-header { background: rgba(59, 130, 246, 0.15); padding: 16px 20px; }
+        .scene-phase { font-size: 0.75rem; color: #93c5fd; text-transform: uppercase; }
+        .scene-title { font-size: 1.4rem; font-weight: 700; }
+        .scene-body { padding: 24px; }
+        .highlight { color: #fbbf24; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .safe { color: #4ade80; font-weight: 600; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(59, 130, 246, 0.2)); border: 1px solid rgba(139, 92, 246, 0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
+        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; }
+        .boards-tip { background: rgba(251, 191, 36, 0.15); border: 1px solid rgba(251, 191, 36, 0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .boards-tip-title { font-weight: 700; color: #fbbf24; margin-bottom: 10px; }
+        .alert-box { background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.5); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .alert-title { font-weight: 700; color: #f87171; margin-bottom: 10px; }
+        .btn { padding: 16px 28px; background: linear-gradient(135deg, #3b82f6, #1d4ed8); border: none; border-radius: 12px; color: white; font-weight: 600; cursor: pointer; width: 100%; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+        .comparison-table th { background: rgba(0,0,0,0.3); color: #93c5fd; }
+        .why-chain { background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(59, 130, 246, 0.15)); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 16px; padding: 24px; margin: 24px 0; }
+        .why-chain-title { font-size: 1.2rem; font-weight: 700; color: #c4b5fd; margin-bottom: 20px; }
+        .why-item { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 18px; margin-bottom: 14px; }
+        .why-q { font-weight: 600; color: #e9d5ff; margin-bottom: 10px; }
+        .outcome-banner { text-align: center; padding: 40px; }
+        .tips { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+        .pearl, .pitfall { padding: 20px; border-radius: 12px; }
+        .pearl { background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); }
+        .pitfall { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); }
+        .tip-header { font-weight: 600; margin-bottom: 10px; }
+        .pearl .tip-header { color: #4ade80; }
+        .pitfall .tip-header { color: #f87171; }
+        @media (max-width: 640px) { .tips { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container" id="app"></div>
+    <script>
+    const STAGES = ['arrival', 'kdigo_criteria', 'prerenal', 'intrinsic', 'postrenal', 'ua_sediment', 'fena', 'imaging', 'atn_management', 'contrast_aki', 'hepatorenal', 'dialysis_indications', 'recovery', 'debrief'];
+    const state = { stage: 0 };
+
+    function render() {
+        const progress = ((state.stage + 1) / STAGES.length) * 100;
+        let c = `<div class="header"><div style="font-size:1.3rem;font-weight:700">🫘 AKI Complete<span class="badge">14 STAGES</span></div><div style="font-size:1.3rem;font-weight:700">${state.stage + 1}/${STAGES.length}</div></div><div class="progress-bar"><div class="progress-fill" style="width:${progress}%"></div></div>`;
+        switch(STAGES[state.stage]) {
+            case 'arrival': c += renderArrival(); break;
+            case 'kdigo_criteria': c += renderKDIGO(); break;
+            case 'prerenal': c += renderPrerenal(); break;
+            case 'intrinsic': c += renderIntrinsic(); break;
+            case 'postrenal': c += renderPostrenal(); break;
+            case 'ua_sediment': c += renderUASediment(); break;
+            case 'fena': c += renderFeNa(); break;
+            case 'imaging': c += renderImaging(); break;
+            case 'atn_management': c += renderATN(); break;
+            case 'contrast_aki': c += renderContrastAKI(); break;
+            case 'hepatorenal': c += renderHRS(); break;
+            case 'dialysis_indications': c += renderDialysis(); break;
+            case 'recovery': c += renderRecovery(); break;
+            case 'debrief': c += renderDebrief(); break;
+        }
+        document.getElementById('app').innerHTML = c;
+    }
+
+    function renderArrival() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 1 of 14</div><div class="scene-title">The Rising Creatinine</div></div>
+            <div class="scene-body">
+                <div class="narrative"><p>A <span class="highlight">72-year-old woman</span> is admitted for pneumonia. Day 2 labs show <span class="critical">creatinine 2.4 mg/dL</span> (baseline 1.0).</p>
+                <p style="margin-top:12px;"><strong>History:</strong> HTN, DM2, CHF (EF 35%), takes lisinopril, metformin, furosemide<br>
+                <strong>Vitals:</strong> T 101.2°F, HR 98, BP 102/68<br><strong>Exam:</strong> Dry mucous membranes, crackles at right base<br>
+                <strong>Labs:</strong> Na 142, K 5.4, BUN 48, Cr 2.4</p></div>
+                <div class="alert-box"><div class="alert-title">🚨 AKI Red Flags</div><p>Cr increased >2x baseline = KDIGO Stage 2. Hyperkalemia (K 5.4) requires monitoring.</p></div>
+                <div class="mechanism-box"><div class="mechanism-title">🧬 AKI Pathophysiology Overview</div>
+                    <div class="pathway">Kidney function depends on:<br>• Adequate perfusion (prerenal)<br>• Intact parenchyma (intrinsic)<br>• Unobstructed outflow (postrenal)<br><br>↓ GFR → ↓ Cr clearance → ↑ serum Cr<br>→ ↓ K+ excretion → hyperkalemia<br>→ ↓ Acid excretion → metabolic acidosis</div></div>
+                <button class="btn" onclick="nextStage()">KDIGO Staging →</button></div></div>`;
+    }
+
+    function renderKDIGO() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 2 of 14</div><div class="scene-title">KDIGO AKI Criteria</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 KDIGO AKI Definition</div>
+                    <p><strong>AKI is any of:</strong> ↑Cr ≥0.3 within 48h, ↑Cr ≥1.5× baseline within 7d, or UOP <0.5 mL/kg/hr × 6h</p>
+                    <table class="comparison-table">
+                        <tr><th>Stage</th><th>Creatinine</th><th>Urine Output</th></tr>
+                        <tr><td>1</td><td>1.5-1.9× baseline OR ↑≥0.3</td><td><0.5 mL/kg/hr × 6-12h</td></tr>
+                        <tr><td>2</td><td>2.0-2.9× baseline</td><td><0.5 mL/kg/hr × ≥12h</td></tr>
+                        <tr><td>3</td><td>≥3× baseline OR Cr≥4 OR dialysis</td><td><0.3 mL/kg/hr × 24h OR anuria ≥12h</td></tr>
+                    </table></div>
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Why Does Creatinine Lag?</div>
+                    <div class="pathway">Creatinine is a lagging indicator:<br>Muscle produces Cr at steady state<br>→ Takes time to reach new equilibrium<br><br>If GFR drops 50% suddenly:<br>• Day 1: Cr may only ↑ 0.5-1.0<br>• Day 2-3: Cr continues rising<br>• Day 3-4: Approaches steady state</div></div>
+                <div class="why-chain"><div class="why-chain-title">🔗 WHY Chain: Cr vs GFR</div>
+                    <div class="why-item"><div class="why-q">Why use Cr not GFR equations?</div>GFR equations assume steady state. In AKI, Cr hasn't equilibrated, so GFR formulas are inaccurate.</div>
+                    <div class="why-item"><div class="why-q">Why check urine output?</div>Oliguria can indicate AKI even before Cr rises. Real-time marker of function.</div></div>
+                <p><strong>This patient:</strong> Cr 1.0 → 2.4 = 2.4× baseline = <span class="critical">KDIGO Stage 2 AKI</span></p>
+                <button class="btn" onclick="nextStage()">Prerenal Causes →</button></div></div>`;
+    }
+
+    function renderPrerenal() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 3 of 14</div><div class="scene-title">Prerenal AKI</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 Prerenal Causes</div>
+                    <table class="comparison-table">
+                        <tr><th>Mechanism</th><th>Examples</th></tr>
+                        <tr><td>↓ Effective volume</td><td>Hemorrhage, dehydration, third-spacing</td></tr>
+                        <tr><td>↓ Cardiac output</td><td>CHF, cardiogenic shock, PE</td></tr>
+                        <tr><td>Vasodilation</td><td>Sepsis, cirrhosis, anaphylaxis</td></tr>
+                        <tr><td>Renal vasoconstriction</td><td>NSAIDs, hypercalcemia, hepatorenal</td></tr>
+                        <tr><td>Impaired autoregulation</td><td>ACEi/ARB + volume depletion</td></tr>
+                    </table></div>
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Renal Autoregulation</div>
+                    <div class="pathway">Normal kidney maintains GFR across MAP 80-180:<br><br><strong>Afferent arteriole:</strong> Dilates when BP drops<br>• Prostaglandins mediate → NSAIDs block<br><br><strong>Efferent arteriole:</strong> Constricts via Ang II<br>• ACEi/ARB block this response<br><br>Both blocked = loss of autoregulation</div></div>
+                <div class="alert-box"><div class="alert-title">⚠️ The Triple Whammy</div><p><strong>ACEi/ARB + Diuretic + NSAID</strong> = High AKI risk. Each impairs a compensatory mechanism.</p></div>
+                <p><strong>This patient:</strong> Dehydration + sepsis + ACEi + diuretic = <span class="highlight">High likelihood prerenal</span></p>
+                <button class="btn" onclick="nextStage()">Intrinsic Causes →</button></div></div>`;
+    }
+
+    function renderIntrinsic() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 4 of 14</div><div class="scene-title">Intrinsic AKI</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 Intrinsic AKI Categories</div>
+                    <table class="comparison-table">
+                        <tr><th>Location</th><th>Disease</th><th>Findings</th></tr>
+                        <tr><td>Tubular</td><td>ATN</td><td>Muddy brown casts, FeNa >2%</td></tr>
+                        <tr><td>Interstitial</td><td>AIN</td><td>WBC casts, eosinophils, rash/fever</td></tr>
+                        <tr><td>Glomerular</td><td>GN</td><td>RBC casts, dysmorphic RBCs, proteinuria</td></tr>
+                        <tr><td>Vascular</td><td>TMA, vasculitis</td><td>Schistocytes, ↓ platelets</td></tr>
+                    </table></div>
+                <div class="mechanism-box"><div class="mechanism-title">🧬 ATN Pathophysiology</div>
+                    <div class="pathway"><strong>Ischemic ATN:</strong><br>Prolonged prerenal → Tubular hypoxia<br>→ Cell death (S3 segment, TAL)<br>→ Sloughed cells form casts<br>→ Obstruction + backleak → ↓↓ GFR<br><br><strong>Toxic ATN:</strong><br>Nephrotoxins → Direct tubular injury<br>→ Same cascade</div></div>
+                <div class="boards-tip"><div class="boards-tip-title">📚 Common Nephrotoxins</div>
+                    <table class="comparison-table">
+                        <tr><th>Category</th><th>Examples</th></tr>
+                        <tr><td>Antibiotics</td><td>Aminoglycosides, vancomycin, amphotericin</td></tr>
+                        <tr><td>Contrast</td><td>Iodinated contrast</td></tr>
+                        <tr><td>Pigments</td><td>Myoglobin (rhabdo), hemoglobin</td></tr>
+                        <tr><td>Crystals</td><td>Uric acid, methotrexate, acyclovir</td></tr>
+                    </table></div>
+                <button class="btn" onclick="nextStage()">Postrenal Causes →</button></div></div>`;
+    }
+
+    function renderPostrenal() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 5 of 14</div><div class="scene-title">Postrenal (Obstructive) AKI</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 Obstruction Levels</div>
+                    <table class="comparison-table">
+                        <tr><th>Level</th><th>Causes</th><th>Notes</th></tr>
+                        <tr><td>Bladder outlet</td><td>BPH, prostate cancer</td><td>Most common in elderly men</td></tr>
+                        <tr><td>Bilateral ureters</td><td>Pelvic malignancy, RPF</td><td>Must be bilateral for AKI</td></tr>
+                        <tr><td>Unilateral ureter</td><td>Stone, stricture</td><td>AKI only if solitary kidney</td></tr>
+                    </table></div>
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Why Bilateral?</div>
+                    <div class="pathway">Each kidney = ~50% GFR<br><br>Unilateral obstruction:<br>→ Contralateral kidney compensates<br>→ Cr may not change significantly<br><br>Bilateral obstruction:<br>→ No compensation possible<br>→ Urine backs up → ↑ tubular pressure<br>→ ↓↓ GFR</div></div>
+                <div class="alert-box"><div class="alert-title">🚨 Always Rule Out Obstruction!</div><p>Postrenal AKI is often <span class="safe">reversible</span> with simple intervention (Foley, nephrostomy). Get renal US early!</p></div>
+                <div class="why-chain"><div class="why-chain-title">🔗 WHY Chain: Post-Obstructive Diuresis</div>
+                    <div class="why-item"><div class="why-q">Why massive diuresis after relief?</div>Accumulated urea = osmotic diuretic. Tubular dysfunction impairs Na/water reabsorption.</div>
+                    <div class="why-item"><div class="why-q">What's the risk?</div>Massive fluid/electrolyte losses. Replace ~50% of UOP if >200 mL/hr.</div></div>
+                <button class="btn" onclick="nextStage()">Urinalysis & Sediment →</button></div></div>`;
+    }
+
+    function renderUASediment() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 6 of 14</div><div class="scene-title">Urine Sediment Analysis</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 Sediment Findings</div>
+                    <table class="comparison-table">
+                        <tr><th>Finding</th><th>Diagnosis</th></tr>
+                        <tr><td>Muddy brown casts</td><td>ATN</td></tr>
+                        <tr><td>WBC casts</td><td>AIN, pyelonephritis</td></tr>
+                        <tr><td>RBC casts</td><td>Glomerulonephritis ← BOARDS!</td></tr>
+                        <tr><td>Dysmorphic RBCs</td><td>Glomerular bleeding</td></tr>
+                        <tr><td>Bland sediment</td><td>Prerenal or postrenal</td></tr>
+                    </table></div>
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Cast Formation</div>
+                    <div class="pathway">Tamm-Horsfall protein (uromodulin):<br>→ Secreted by thick ascending limb<br>→ Polymerizes → forms cast matrix<br><br>What gets trapped:<br>• Nothing = hyaline (normal)<br>• Tubular cells = muddy brown (ATN)<br>• WBCs = WBC cast (AIN)<br>• RBCs = RBC cast (GN) ← KEY FINDING</div></div>
+                <p><strong>This patient's UA:</strong> SG 1.025, no protein, hyaline casts. <span class="highlight">Bland sediment</span> → supports prerenal.</p>
+                <button class="btn" onclick="nextStage()">FeNa & Indices →</button></div></div>`;
+    }
+
+    function renderFeNa() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 7 of 14</div><div class="scene-title">Fractional Excretion of Sodium</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 FeNa Calculation</div>
+                    <div class="pathway" style="text-align:center;font-size:1.1rem;">FeNa = (UNa × PCr) / (PNa × UCr) × 100</div>
+                    <table class="comparison-table" style="margin-top:16px;">
+                        <tr><th>FeNa</th><th>Interpretation</th></tr>
+                        <tr style="background:rgba(34,197,94,0.2);"><td><strong><1%</strong></td><td>Prerenal (kidneys avidly retaining Na)</td></tr>
+                        <tr><td><strong>>2%</strong></td><td>ATN (tubular damage, can't reabsorb Na)</td></tr>
+                        <tr><td><strong>1-2%</strong></td><td>Indeterminate</td></tr>
+                    </table></div>
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Why FeNa Works</div>
+                    <div class="pathway"><strong>Prerenal:</strong><br>↓ Perfusion sensed by kidney<br>→ RAAS activation → aldosterone<br>→ Maximal Na reabsorption in DCT/CD<br>→ FeNa <1%<br><br><strong>ATN:</strong><br>Tubular damage → can't reabsorb Na<br>→ Sodium "leaks" into urine<br>→ FeNa >2%</div></div>
+                <div class="alert-box"><div class="alert-title">⚠️ FeNa Limitations</div>
+                    <p><strong>FeNa <1% despite intrinsic disease:</strong> Contrast nephropathy, myoglobinuria, early sepsis, acute GN, AIN (sometimes)</p>
+                    <p style="margin-top:8px;"><strong>FeNa >1% despite prerenal:</strong> Diuretics, CKD baseline, high Na intake</p>
+                    <p style="margin-top:8px;">If on diuretics, use <strong>FeUrea</strong> instead (<35% = prerenal)</p></div>
+                <p><strong>This patient:</strong> UNa 12, UCr 80, FeNa = (12×2.4)/(142×0.8)×100 = <span class="highlight">0.25% = Prerenal</span></p>
+                <button class="btn" onclick="nextStage()">Imaging →</button></div></div>`;
+    }
+
+    function renderImaging() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 8 of 14</div><div class="scene-title">Imaging in AKI</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 Renal Ultrasound Findings</div>
+                    <table class="comparison-table">
+                        <tr><th>Finding</th><th>Interpretation</th></tr>
+                        <tr><td>Hydronephrosis</td><td>Obstruction (postrenal)</td></tr>
+                        <tr><td>Small, echogenic kidneys</td><td>Chronic kidney disease</td></tr>
+                        <tr><td>Normal size, ↑ echogenicity</td><td>Acute intrinsic disease</td></tr>
+                        <tr><td>Enlarged kidneys</td><td>Infiltrative (amyloid, HIV), acute GN</td></tr>
+                        <tr><td>Asymmetric size</td><td>Renal artery stenosis, reflux</td></tr>
+                    </table></div>
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Why US First?</div>
+                    <div class="pathway">Renal ultrasound advantages:<br>• No contrast (no nephrotoxicity)<br>• No radiation<br>• Bedside availability<br>• Rules out obstruction quickly<br><br>When to get CT:<br>• Stone suspected (CT KUB)<br>• Vascular pathology (CTA)<br>• Mass characterization</div></div>
+                <div class="why-chain"><div class="why-chain-title">🔗 WHY Chain: Kidney Size</div>
+                    <div class="why-item"><div class="why-q">Why small kidneys = CKD?</div>Chronic injury → nephron loss → fibrosis and scarring → kidney shrinks. Irreversible.</div>
+                    <div class="why-item"><div class="why-q">Why matters for AKI workup?</div>If kidneys already small, this is AKI-on-CKD. Different baseline, less likely to fully recover.</div></div>
+                <p><strong>This patient:</strong> US shows normal-sized kidneys, no hydronephrosis. <span class="safe">Rules out obstruction.</span></p>
+                <button class="btn" onclick="nextStage()">ATN Management →</button></div></div>`;
+    }
+
+    function renderATN() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 9 of 14</div><div class="scene-title">ATN Management</div></div>
+            <div class="scene-body">
+                <div class="alert-box"><div class="alert-title">🚨 ATN Treatment: Supportive Care</div>
+                    <p>There is NO specific treatment for ATN. Management is supportive while waiting for tubular regeneration.</p></div>
+                <div class="boards-tip"><div class="boards-tip-title">📚 ATN Management Principles</div>
+                    <ul style="margin-left:20px;line-height:2;">
+                        <li><strong>Remove offending agents:</strong> Stop nephrotoxins</li>
+                        <li><strong>Optimize hemodynamics:</strong> Maintain perfusion pressure</li>
+                        <li><strong>Avoid further injury:</strong> Dose-adjust renally cleared drugs</li>
+                        <li><strong>Manage complications:</strong> Hyperkalemia, acidosis, volume</li>
+                        <li><strong>Nutrition:</strong> Adequate protein (0.8-1 g/kg if not dialyzed)</li>
+                        <li><strong>Dialysis:</strong> If indicated (see next stages)</li>
+                    </ul></div>
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Tubular Regeneration</div>
+                    <div class="pathway">Proximal tubule has regenerative capacity:<br>→ Surviving cells dedifferentiate<br>→ Migrate and proliferate<br>→ Redifferentiate into mature epithelium<br><br>Timeline:<br>• Oliguric phase: Days to weeks<br>• Recovery phase: 1-3 weeks typically<br>• May have polyuric phase (tubular dysfunction)<br><br>⚠️ ~20-50% progress to CKD despite recovery</div></div>
+                <div class="tips">
+                    <div class="pearl"><div class="tip-header">✓ Pearl</div>Diuretics do NOT improve ATN outcomes. May convert oliguric to non-oliguric (easier management) but don't speed recovery.</div>
+                    <div class="pitfall"><div class="tip-header">✗ Pitfall</div>"Renal-dose dopamine" is a myth. No evidence it prevents or treats ATN. Don't use it.</div>
+                </div>
+                <button class="btn" onclick="nextStage()">Contrast-Induced AKI →</button></div></div>`;
+    }
+
+    function renderContrastAKI() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 10 of 14</div><div class="scene-title">Contrast-Induced AKI</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 CI-AKI Definition</div>
+                    <p>↑ Cr ≥0.5 mg/dL or ≥25% from baseline within 48-72h of contrast, without other cause.</p>
+                    <table class="comparison-table">
+                        <tr><th>Risk Factor</th><th>Impact</th></tr>
+                        <tr><td>Pre-existing CKD (eGFR <60)</td><td>Strongest risk factor</td></tr>
+                        <tr><td>Diabetes</td><td>Especially with CKD</td></tr>
+                        <tr><td>Volume depletion</td><td>Modifiable!</td></tr>
+                        <tr><td>High contrast volume</td><td>Dose-dependent</td></tr>
+                        <tr><td>Hemodynamic instability</td><td>CHF, shock</td></tr>
+                    </table></div>
+                <div class="mechanism-box"><div class="mechanism-title">🧬 CI-AKI Pathophysiology</div>
+                    <div class="pathway">Contrast causes:<br>1. Renal vasoconstriction (outer medulla)<br>→ Medullary hypoxia<br><br>2. Direct tubular toxicity<br>→ Oxidative stress, apoptosis<br><br>3. Increased viscosity<br>→ Sluggish flow, prolonged exposure<br><br>Result: ATN pattern but typically milder<br>Usually recovers in 7-14 days</div></div>
+                <div class="boards-tip"><div class="boards-tip-title">📚 Prevention Strategies</div>
+                    <ul style="margin-left:20px;line-height:2;">
+                        <li><strong>IV fluids:</strong> NS or bicarb, before and after (most important!)</li>
+                        <li><strong>Minimize contrast volume:</strong> <100 mL if possible</li>
+                        <li><strong>Use iso-osmolar contrast:</strong> Iodixanol if high risk</li>
+                        <li><strong>Hold metformin:</strong> Risk of lactic acidosis if AKI develops</li>
+                        <li><strong>Avoid:</strong> NSAIDs, nephrotoxins peri-procedure</li>
+                    </ul></div>
+                <div class="alert-box"><div class="alert-title">⚠️ N-acetylcysteine: The Controversy</div><p>Multiple trials show NAC does NOT prevent CI-AKI. It may falsely lower Cr (assay interference). <strong>Don't use it.</strong></p></div>
+                <button class="btn" onclick="nextStage()">Hepatorenal Syndrome →</button></div></div>`;
+    }
+
+    function renderHRS() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 11 of 14</div><div class="scene-title">Hepatorenal Syndrome</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 HRS Diagnostic Criteria</div>
+                    <ul style="margin-left:20px;line-height:2;">
+                        <li>Cirrhosis with ascites</li>
+                        <li>AKI (Cr ↑≥0.3 or ≥50%)</li>
+                        <li>No improvement after diuretic withdrawal + albumin challenge</li>
+                        <li>No shock or nephrotoxins</li>
+                        <li>No proteinuria, hematuria, or abnormal US</li>
+                    </ul></div>
+                <div class="mechanism-box"><div class="mechanism-title">🧬 HRS Pathophysiology</div>
+                    <div class="pathway">Portal hypertension → splanchnic vasodilation<br>→ ↓ Effective arterial blood volume<br>→ Compensatory renal vasoconstriction<br>→ ↓↓ Renal blood flow → ↓ GFR<br><br>Kidneys are structurally normal!<br>(HRS kidneys work fine if transplanted)<br><br>Treatment targets:<br>• ↑ Effective volume (albumin)<br>• ↓ Splanchnic vasodilation (vasoconstrictors)</div></div>
+                <div class="boards-tip"><div class="boards-tip-title">📚 HRS Treatment</div>
+                    <table class="comparison-table">
+                        <tr><th>Therapy</th><th>Regimen</th></tr>
+                        <tr><td><strong>Albumin</strong></td><td>1 g/kg/day (max 100g) × 2 days, then 20-40g/day</td></tr>
+                        <tr><td><strong>Terlipressin</strong></td><td>Splanchnic vasoconstrictor (first-line if available)</td></tr>
+                        <tr><td><strong>Midodrine + Octreotide</strong></td><td>Alternative to terlipressin in US</td></tr>
+                        <tr><td><strong>Norepinephrine</strong></td><td>ICU setting</td></tr>
+                        <tr><td><strong>TIPS</strong></td><td>Bridge to transplant</td></tr>
+                        <tr><td><strong>Liver transplant</strong></td><td>Definitive treatment</td></tr>
+                    </table></div>
+                <button class="btn" onclick="nextStage()">Dialysis Indications →</button></div></div>`;
+    }
+
+    function renderDialysis() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 12 of 14</div><div class="scene-title">Dialysis Indications</div></div>
+            <div class="scene-body">
+                <div class="alert-box"><div class="alert-title">🚨 AEIOU - Emergent Dialysis Indications</div>
+                    <table class="comparison-table">
+                        <tr><th>Letter</th><th>Indication</th><th>Details</th></tr>
+                        <tr><td><strong>A</strong></td><td>Acidosis</td><td>Severe metabolic acidosis (pH <7.1) refractory to bicarb</td></tr>
+                        <tr><td><strong>E</strong></td><td>Electrolytes</td><td>Hyperkalemia refractory to medical management</td></tr>
+                        <tr><td><strong>I</strong></td><td>Intoxication</td><td>Dialyzable toxins (methanol, ethylene glycol, lithium, salicylates)</td></tr>
+                        <tr><td><strong>O</strong></td><td>Overload</td><td>Volume overload refractory to diuretics (pulmonary edema)</td></tr>
+                        <tr><td><strong>U</strong></td><td>Uremia</td><td>Uremic symptoms (pericarditis, encephalopathy, bleeding)</td></tr>
+                    </table></div>
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Timing: Early vs Late Initiation</div>
+                    <div class="pathway">AKIKI & STARRT-AKI trials:<br><br>Early initiation (Cr-based trigger)<br>vs Late initiation (AEIOU indications)<br><br>Result: No mortality difference!<br>Early start → more dialysis exposure<br>→ More catheter complications<br>→ Some never needed dialysis<br><br>Current practice: Start for AEIOU<br>or clinical deterioration, not Cr alone</div></div>
+                <div class="boards-tip"><div class="boards-tip-title">📚 Dialysis Modalities in AKI</div>
+                    <table class="comparison-table">
+                        <tr><th>Modality</th><th>Best For</th></tr>
+                        <tr><td><strong>Intermittent HD</strong></td><td>Hemodynamically stable, rapid toxin removal</td></tr>
+                        <tr><td><strong>CRRT (CVVH/CVVHD)</strong></td><td>Hemodynamically unstable, ICU patients</td></tr>
+                        <tr><td><strong>SLED</strong></td><td>Hybrid: slower than HD, shorter than CRRT</td></tr>
+                    </table></div>
+                <p><strong>This patient:</strong> K 5.4 (elevated but not emergent), no acidosis, no volume overload. <span class="safe">No dialysis indication currently.</span></p>
+                <button class="btn" onclick="nextStage()">Recovery & Prognosis →</button></div></div>`;
+    }
+
+    function renderRecovery() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 13 of 14</div><div class="scene-title">Recovery and Long-Term Outcomes</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 AKI Recovery Patterns</div>
+                    <table class="comparison-table">
+                        <tr><th>Pattern</th><th>Definition</th><th>Prognosis</th></tr>
+                        <tr><td>Complete recovery</td><td>Return to baseline Cr</td><td>Best outcomes</td></tr>
+                        <tr><td>Partial recovery</td><td>Cr improves but above baseline</td><td>Higher CKD risk</td></tr>
+                        <tr><td>No recovery</td><td>Persistent elevation or dialysis</td><td>May need chronic RRT</td></tr>
+                    </table></div>
+                <div class="mechanism-box"><div class="mechanism-title">🧬 AKI → CKD Transition</div>
+                    <div class="pathway">Even "recovered" AKI increases CKD risk:<br><br>AKI causes:<br>• Maladaptive repair (fibrosis)<br>• Nephron loss<br>• Chronic inflammation<br>• Vascular rarefaction<br><br>Long-term risks:<br>• 2-3× higher risk of CKD<br>• ↑ Risk of ESRD<br>• ↑ Cardiovascular mortality<br>• ↑ Risk of recurrent AKI</div></div>
+                <div class="boards-tip"><div class="boards-tip-title">📚 Post-AKI Follow-Up</div>
+                    <ul style="margin-left:20px;line-height:2;">
+                        <li>Recheck Cr at 3 months post-discharge</li>
+                        <li>Monitor for proteinuria</li>
+                        <li>BP control (target <130/80 if albuminuria)</li>
+                        <li>Avoid nephrotoxins when possible</li>
+                        <li>Nephrology referral if not recovering</li>
+                    </ul></div>
+                <div class="narrative"><p><strong>This patient:</strong> After IV fluids and holding ACEi/diuretic, Cr improved 2.4 → 1.8 → 1.2 over 5 days. Plan for outpatient Cr check in 1-2 weeks, cautious restart of ACEi at lower dose once stable.</p></div>
+                <button class="btn" onclick="nextStage()">Debrief →</button></div></div>`;
+    }
+
+    function renderDebrief() {
+        return `<div class="scene">
+            <div class="outcome-banner">
+                <div style="font-size:4rem;margin-bottom:12px;">🫘</div>
+                <div style="font-size:1.8rem;font-weight:700;color:#4ade80;">AKI Mastery Complete!</div>
+            </div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 High-Yield Summary</div>
+                    <table class="comparison-table">
+                        <tr><th>Concept</th><th>Key Point</th></tr>
+                        <tr><td>KDIGO staging</td><td>Cr 1.5×=Stage 1, 2×=Stage 2, 3×=Stage 3</td></tr>
+                        <tr><td>Prerenal</td><td>FeNa <1%, bland sediment, responds to fluids</td></tr>
+                        <tr><td>ATN</td><td>FeNa >2%, muddy brown casts, supportive care</td></tr>
+                        <tr><td>AIN</td><td>WBC casts, eosinophils, drug-induced (stop offender)</td></tr>
+                        <tr><td>GN</td><td>RBC casts, dysmorphic RBCs, needs biopsy</td></tr>
+                        <tr><td>Postrenal</td><td>Always check US, often reversible</td></tr>
+                        <tr><td>Dialysis</td><td>AEIOU indications, not Cr alone</td></tr>
+                        <tr><td>Recovery</td><td>Even recovered AKI → ↑ CKD risk</td></tr>
+                    </table></div>
+                <div class="why-chain"><div class="why-chain-title">🔗 Master WHY Chain</div>
+                    <div class="why-item"><div class="why-q">Why does FeNa differentiate prerenal vs ATN?</div>Prerenal: intact tubules reabsorb Na avidly (FeNa<1%). ATN: damaged tubules leak Na (FeNa>2%).</div>
+                    <div class="why-item"><div class="why-q">Why RBC casts = GN?</div>RBCs can only get into tubules through damaged glomerular basement membrane. Cast formation confirms renal origin.</div>
+                    <div class="why-item"><div class="why-q">Why does AKI cause CKD?</div>Maladaptive repair leads to fibrosis and permanent nephron loss, even if Cr normalizes.</div></div>
+                <div class="tips">
+                    <div class="pearl"><div class="tip-header">✓ Clinical Pearls</div>
+                        <ul style="margin-left:16px;"><li>Triple whammy: ACEi + diuretic + NSAID</li><li>Always check US to rule out obstruction</li><li>FeUrea if on diuretics (<35% = prerenal)</li></ul></div>
+                    <div class="pitfall"><div class="tip-header">✗ Avoid These Pitfalls</div>
+                        <ul style="margin-left:16px;"><li>Using GFR equations in AKI</li><li>NAC for contrast prophylaxis (doesn't work)</li><li>"Renal-dose dopamine" (myth)</li></ul></div>
+                </div>
+                <button class="btn" onclick="location.reload()">🔄 Restart Case</button></div></div>`;
+    }
+
+    function nextStage() { state.stage++; render(); }
+    render();
+    </script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+/* Enhanced Feature Styles */
+.rdx-difficulty-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 300px;
+}
+.rdx-diff-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin: 2px;
+}
+.rdx-diff-btn.active {
+    background: #3b82f6;
+    color: white;
+}
+.rdx-diff-btn:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+}
+.rdx-diff-btn:hover:not(.active) {
+    background: #e2e8f0;
+}
+.rdx-refs-panel {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #93c5fd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+.rdx-refs-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+.rdx-refs-links {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+.rdx-refs-links a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.rdx-refs-links a:hover {
+    text-decoration: underline;
+}
+.rdx-debrief-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rdx-debrief-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #1f2937;
+}
+.rdx-path-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.rdx-path-optimal {
+    background: #dcfce7;
+    border-left: 4px solid #22c55e;
+}
+.rdx-path-suboptimal {
+    background: #fef9c3;
+    border-left: 4px solid #eab308;
+}
+.rdx-path-wrong {
+    background: #fecaca;
+    border-left: 4px solid #ef4444;
+}
+.rdx-hint-beginner {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+.rdx-hint-advanced {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+</style>
+
+<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
+    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
+        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    </div>
+</div>
+
+
+<!-- CROSS-PLATFORM LEARNING LINKS -->
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
+            <a href="../mechanism/aki-ckd-module.html" style="display: block; color: #2563eb; font-size: 14px;">→ AKI</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
+            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="aki-workup-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Aki Workup</a>
+            <a href="acid-base-expanded-dual-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Acid Base Expanded Dual</a>
+            <a href="hyperkalemia-expanded-dual-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Hyperkalemia Expanded Dual</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
+            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../CoachDx/mentor-chat.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../CoachDx/sbar-trainer.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+<!-- END CROSS-PLATFORM LINKS -->
+<div class="rdx-refs-panel" id="rdxRefsPanel">
+    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
+    <div class="rdx-refs-links"><a href="https://kdigo.org/guidelines/acute-kidney-injury/" target="_blank" class="text-blue-600 hover:underline">KDIGO AKI Guidelines</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK441896/" target="_blank" class="text-blue-600 hover:underline">StatPearls: Acute Kidney Injury</a></div>
+</div>
+
+<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
+    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+</div>
+
+<script>
+// ReasonDx Enhanced Features Module
+(function() {
+    // Decision tracking
+    window.rdxDecisionPath = window.rdxDecisionPath || [];
+    window.rdxTotalScore = window.rdxTotalScore || 0;
+    window.rdxMaxScore = window.rdxMaxScore || 0;
+    window.rdxDifficulty = 'intermediate';
+    
+    // Difficulty control
+    window.rdxSetDifficulty = function(level) {
+        window.rdxDifficulty = level;
+        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('rdx-btn-' + level).classList.add('active');
+        
+        // Update hint visibility
+        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
+            el.style.display = level === 'beginner' ? 'block' : 'none';
+        });
+        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
+            el.style.display = level === 'advanced' ? 'block' : 'none';
+        });
+    };
+    
+    // Track a decision
+    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+        window.rdxDecisionPath.push({
+            stage: stageId,
+            title: stageTitle,
+            choice: choiceId,
+            choiceText: choiceText,
+            outcome: outcome,
+            points: points,
+            maxPoints: maxPoints,
+            isOptimal: isOptimal,
+            optimalChoice: optimalChoice,
+            optimalText: optimalText
+        });
+        window.rdxTotalScore += points;
+        window.rdxMaxScore += maxPoints;
+    };
+    
+    // Show visual debrief
+    window.rdxShowDebrief = function() {
+        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
+        
+        let grade, gradeColor, gradeEmoji;
+        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
+        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
+        
+        let pathHTML = '';
+        if (window.rdxDecisionPath.length > 0) {
+            pathHTML = window.rdxDecisionPath.map(d => {
+                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
+                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
+                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
+                return '<div class="' + pathClass + ' rdx-path-item">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
+                    '<div>' +
+                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
+                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
+                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
+                    '</div>' +
+                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
+                    '</div></div>';
+            }).join('');
+        } else {
+            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+        }
+        
+        document.getElementById('rdxDebriefContent').innerHTML = 
+            '<div style="text-align:center;margin-bottom:24px;">' +
+            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
+            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
+            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
+            '</div></div>' +
+            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
+            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
+            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
+            '</div></div>' +
+            '<div style="display:flex;gap:12px;">' +
+            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '</div>';
+        
+        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
+    };
+    
+    // Auto-inject hint examples into existing content
+    window.rdxInit = function() {
+        // Could add dynamic hint injection here based on difficulty
+        console.log('ReasonDx Enhanced Features loaded for: Aki Expanded Adventure');
+    };
+    
+    // Initialize on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.rdxInit);
+    } else {
+        window.rdxInit();
+    }
+})();
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+</body>
+</html>

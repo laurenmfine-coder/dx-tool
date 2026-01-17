@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Failure Complete | Clinical Adventure</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: linear-gradient(135deg, #7f1d1d 0%, #dc2626 100%); min-height: 100vh; color: #e2e8f0; line-height: 1.6; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: rgba(127, 29, 29, 0.9); border-radius: 16px; margin-bottom: 20px; }
+        .badge { padding: 4px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; background: #dc2626; margin-left: 10px; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #dc2626, #fca5a5); border-radius: 3px; }
+        .scene { background: linear-gradient(135deg, #7f1d1d, #991b1b); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+        .scene-header { background: rgba(220, 38, 38, 0.15); padding: 16px 20px; }
+        .scene-phase { font-size: 0.75rem; color: #fca5a5; text-transform: uppercase; }
+        .scene-title { font-size: 1.4rem; font-weight: 700; }
+        .scene-body { padding: 24px; }
+        .highlight { color: #fbbf24; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .safe { color: #4ade80; font-weight: 600; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(220, 38, 38, 0.2)); border: 1px solid rgba(139, 92, 246, 0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
+        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; }
+        .boards-tip { background: rgba(251, 191, 36, 0.15); border: 1px solid rgba(251, 191, 36, 0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .boards-tip-title { font-weight: 700; color: #fbbf24; margin-bottom: 10px; }
+        .alert-box { background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.5); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .alert-title { font-weight: 700; color: #f87171; margin-bottom: 10px; }
+        .btn { padding: 16px 28px; background: linear-gradient(135deg, #dc2626, #b91c1c); border: none; border-radius: 12px; color: white; font-weight: 600; cursor: pointer; width: 100%; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+        .comparison-table th { background: rgba(0,0,0,0.3); color: #fca5a5; }
+        .why-chain { background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(220, 38, 38, 0.15)); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 16px; padding: 24px; margin: 24px 0; }
+        .why-chain-title { font-size: 1.2rem; font-weight: 700; color: #c4b5fd; margin-bottom: 20px; }
+        .why-item { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 18px; margin-bottom: 14px; }
+        .why-q { font-weight: 600; color: #e9d5ff; margin-bottom: 10px; }
+        .tips { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+        .pearl, .pitfall { padding: 20px; border-radius: 12px; }
+        .pearl { background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); }
+        .pitfall { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); }
+        .tip-header { font-weight: 600; margin-bottom: 10px; }
+        .pearl .tip-header { color: #4ade80; }
+        .pitfall .tip-header { color: #f87171; }
+        @media (max-width: 640px) { .tips { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container" id="app"></div>
+    <script>
+    const STAGES = ['arrival', 'classification', 'hfref_hfpef', 'pathophys', 'bnp', 'acute_tx', 'diuretics', 'vasodilators', 'gdmt', 'arni', 'devices', 'prognosis', 'discharge', 'debrief'];
+    const state = { stage: 0 };
+
+    function render() {
+        const progress = ((state.stage + 1) / STAGES.length) * 100;
+        let c = `<div class="header"><div style="font-size:1.3rem;font-weight:700">❤️ Heart Failure Complete<span class="badge">14 STAGES</span></div><div style="font-size:1.3rem;font-weight:700">${state.stage + 1}/${STAGES.length}</div></div><div class="progress-bar"><div class="progress-fill" style="width:${progress}%"></div></div>`;
+        switch(STAGES[state.stage]) {
+            case 'arrival': c += renderArrival(); break;
+            case 'classification': c += renderClassification(); break;
+            case 'hfref_hfpef': c += renderTypes(); break;
+            case 'pathophys': c += renderPathophys(); break;
+            case 'bnp': c += renderBNP(); break;
+            case 'acute_tx': c += renderAcuteTx(); break;
+            case 'diuretics': c += renderDiuretics(); break;
+            case 'vasodilators': c += renderVasodilators(); break;
+            case 'gdmt': c += renderGDMT(); break;
+            case 'arni': c += renderARNI(); break;
+            case 'devices': c += renderDevices(); break;
+            case 'prognosis': c += renderPrognosis(); break;
+            case 'discharge': c += renderDischarge(); break;
+            case 'debrief': c += renderDebrief(); break;
+        }
+        document.getElementById('app').innerHTML = c;
+    }
+
+    function renderArrival() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 1 of 14</div><div class="scene-title">The Dyspneic Patient</div></div><div class="scene-body">
+            <div class="narrative"><p>A <span class="highlight">68-year-old man</span> with HTN and prior MI presents with <span class="critical">progressive dyspnea, orthopnea, and leg swelling</span> over 2 weeks.</p>
+            <p style="margin-top:12px;"><strong>History:</strong> MI 3 years ago, stents to LAD, EF was 35% on last echo<br><strong>Vitals:</strong> HR 102, BP 148/92, RR 24, SpO2 91% on RA<br><strong>Exam:</strong> JVD to angle of jaw, bibasilar crackles, S3 gallop, 2+ pitting edema to knees<br><strong>Labs:</strong> BNP 1840, Cr 1.6 (baseline 1.1), troponin negative</p></div>
+            <div class="alert-box"><div class="alert-title">🚨 Acute Decompensated Heart Failure</div><p>This patient has classic signs of volume overload. Key question: What precipitated this exacerbation?</p></div>
+            <div class="mechanism-box"><div class="mechanism-title">🧬 Heart Failure Overview</div><div class="pathway">Heart cannot pump enough blood to meet demands<br>OR can only do so at elevated filling pressures<br><br>Results in:<br>• Backward failure → congestion (edema, JVD)<br>• Forward failure → hypoperfusion (fatigue, renal dysfunction)</div></div>
+            <button class="btn" onclick="nextStage()">Classification →</button></div></div>`;
+    }
+
+    function renderClassification() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 2 of 14</div><div class="scene-title">NYHA & ACC/AHA Staging</div></div><div class="scene-body">
+            <div class="boards-tip"><div class="boards-tip-title">📚 NYHA Functional Classification</div>
+            <table class="comparison-table">
+                <tr><th>Class</th><th>Symptoms</th></tr>
+                <tr><td>I</td><td>No limitation - ordinary activity doesn't cause symptoms</td></tr>
+                <tr><td>II</td><td>Slight limitation - comfortable at rest, ordinary activity causes symptoms</td></tr>
+                <tr><td>III</td><td>Marked limitation - comfortable at rest, less than ordinary activity causes symptoms</td></tr>
+                <tr><td>IV</td><td>Unable to carry out any activity without symptoms; symptoms at rest</td></tr>
+            </table></div>
+            <div class="boards-tip"><div class="boards-tip-title">📚 ACC/AHA Stages</div>
+            <table class="comparison-table">
+                <tr><th>Stage</th><th>Description</th></tr>
+                <tr><td>A</td><td>At risk (HTN, DM, CAD) but no structural disease or symptoms</td></tr>
+                <tr><td>B</td><td>Structural disease (low EF, LVH) but no symptoms</td></tr>
+                <tr><td>C</td><td>Structural disease WITH current or prior symptoms</td></tr>
+                <tr><td>D</td><td>Refractory HF requiring advanced therapies</td></tr>
+            </table>
+            <p style="margin-top:8px;">NYHA can fluctuate; ACC/AHA stages only progress (can't go backward)</p></div>
+            <div class="narrative"><p><strong>This patient:</strong> NYHA Class III-IV (symptoms with minimal activity, now at rest), ACC/AHA Stage C</p></div>
+            <button class="btn" onclick="nextStage()">HFrEF vs HFpEF →</button></div></div>`;
+    }
+
+    function renderTypes() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 3 of 14</div><div class="scene-title">Types of Heart Failure</div></div><div class="scene-body">
+            <div class="boards-tip"><div class="boards-tip-title">📚 HF Classification by EF</div>
+            <table class="comparison-table">
+                <tr><th>Type</th><th>EF</th><th>Pathophysiology</th></tr>
+                <tr><td><strong>HFrEF</strong></td><td>≤40%</td><td>Reduced contractility (systolic dysfunction)</td></tr>
+                <tr><td><strong>HFmrEF</strong></td><td>41-49%</td><td>Mildly reduced (intermediate)</td></tr>
+                <tr><td><strong>HFpEF</strong></td><td>≥50%</td><td>Impaired relaxation (diastolic dysfunction)</td></tr>
+            </table></div>
+            <div class="mechanism-box"><div class="mechanism-title">🧬 HFrEF vs HFpEF Pathophysiology</div><div class="pathway"><strong>HFrEF (Systolic):</strong><br>• Weak squeeze → ↓ stroke volume<br>• Dilated LV<br>• Causes: Post-MI, dilated CMP, chronic MR<br><br><strong>HFpEF (Diastolic):</strong><br>• Normal squeeze but stiff ventricle<br>• Can't relax/fill properly<br>• ↑ filling pressures → congestion<br>• Causes: HTN, LVH, infiltrative (amyloid)<br><br>Treatment differs significantly!</div></div>
+            <div class="why-chain"><div class="why-chain-title">🔗 WHY Chain: Why EF Matters</div>
+                <div class="why-item"><div class="why-q">Why classify by EF?</div>HFrEF has proven mortality-reducing therapies (ACEi, BB, MRA, ARNI). HFpEF treatment is mostly symptom management - different approach.</div>
+            </div>
+            <div class="narrative"><p><strong>This patient:</strong> Prior MI, EF 35% = <span class="highlight">HFrEF</span></p></div>
+            <button class="btn" onclick="nextStage()">Pathophysiology Deep Dive →</button></div></div>`;
+    }
+
+    function renderPathophys() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 4 of 14</div><div class="scene-title">The Neurohormonal Cascade</div></div><div class="scene-body">
+            <div class="mechanism-box"><div class="mechanism-title">🧬 Compensatory Mechanisms Gone Wrong</div><div class="pathway"><strong>Initial insult</strong> (MI, HTN, valve disease)<br>→ ↓ Cardiac output<br><br><strong>Compensatory responses:</strong><br>1. RAAS activation → Na/H2O retention → ↑ preload<br>2. SNS activation → ↑ HR, ↑ contractility<br>3. Ventricular remodeling → dilation, hypertrophy<br><br><strong>Short-term:</strong> Maintain CO<br><strong>Long-term:</strong> These become MALADAPTIVE<br>→ Volume overload<br>→ Increased wall stress<br>→ Progressive remodeling<br>→ Worsening HF</div></div>
+            <div class="why-chain"><div class="why-chain-title">🔗 WHY Chain: Treatment Targets</div>
+                <div class="why-item"><div class="why-q">Why ACEi/ARBs?</div>Block RAAS → reduce preload, afterload, and remodeling. Mortality benefit proven.</div>
+                <div class="why-item"><div class="why-q">Why beta-blockers in a "weak heart"?</div>Chronic SNS activation is toxic (apoptosis, arrhythmias). Beta-blockers reduce HR, allow remodeling reversal. Start low, go slow.</div>
+                <div class="why-item"><div class="why-q">Why MRAs (spironolactone)?</div>Aldosterone causes fibrosis and K+ wasting. Blocking it reduces mortality by ~30% in severe HF.</div>
+            </div>
+            <button class="btn" onclick="nextStage()">BNP Interpretation →</button></div></div>`;
+    }
+
+    function renderBNP() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 5 of 14</div><div class="scene-title">Natriuretic Peptides</div></div><div class="scene-body">
+            <div class="boards-tip"><div class="boards-tip-title">📚 BNP and NT-proBNP</div>
+            <table class="comparison-table">
+                <tr><th>Marker</th><th>HF Unlikely</th><th>HF Likely</th><th>Gray Zone</th></tr>
+                <tr><td>BNP</td><td><100 pg/mL</td><td>>400 pg/mL</td><td>100-400</td></tr>
+                <tr><td>NT-proBNP</td><td><300 pg/mL</td><td>>900 (or age-adjusted)</td><td>300-900</td></tr>
+            </table>
+            <p style="margin-top:8px;">NT-proBNP age cutoffs: >450 (<50 yo), >900 (50-75), >1800 (>75)</p></div>
+            <div class="mechanism-box"><div class="mechanism-title">🧬 What Elevates BNP?</div><div class="pathway">Released from ventricles in response to stretch<br><br><strong>Elevated in:</strong><br>• Heart failure (volume/pressure overload)<br>• ACS, PE, pulmonary HTN<br>• Renal failure (decreased clearance)<br>• Sepsis, critical illness<br>• Age, female sex<br><br><strong>Falsely LOW in:</strong><br>• Obesity (adipose tissue clearance)<br>• Flash pulmonary edema (no time to rise)</div></div>
+            <div class="why-chain"><div class="why-chain-title">🔗 WHY Chain: BNP Uses</div>
+                <div class="why-item"><div class="why-q">Why check BNP in acute dyspnea?</div>High negative predictive value. BNP <100 essentially rules out HF as cause of dyspnea.</div>
+                <div class="why-item"><div class="why-q">Why trend BNP during admission?</div>Decrease >30% from admission suggests successful decongestion. Failure to decrease = poor prognosis.</div>
+            </div>
+            <div class="narrative"><p><strong>This patient:</strong> BNP 1840 = <span class="critical">markedly elevated</span>, confirms HF exacerbation</p></div>
+            <button class="btn" onclick="nextStage()">Acute Treatment →</button></div></div>`;
+    }
+
+    function renderAcuteTx() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 6 of 14</div><div class="scene-title">Acute Decompensation Management</div></div><div class="scene-body">
+            <div class="boards-tip"><div class="boards-tip-title">📚 ADHF Profiles ("Warm/Cold, Wet/Dry")</div>
+            <table class="comparison-table">
+                <tr><th></th><th>Dry (no congestion)</th><th>Wet (congested)</th></tr>
+                <tr><td><strong>Warm (perfused)</strong></td><td>Compensated (optimize GDMT)</td><td>Most common - diuretics</td></tr>
+                <tr><td><strong>Cold (hypoperfused)</strong></td><td>Consider hypovolemia</td><td>Cardiogenic shock - inotropes</td></tr>
+            </table></div>
+            <div class="mechanism-box"><div class="mechanism-title">🧬 Assess Perfusion and Congestion</div><div class="pathway"><strong>Signs of CONGESTION (wet):</strong><br>• JVD, hepatojugular reflux<br>• Crackles, S3<br>• Peripheral edema<br>• Orthopnea, PND<br><br><strong>Signs of HYPOPERFUSION (cold):</strong><br>• Narrow pulse pressure<br>• Cool extremities<br>• Altered mentation<br>• Low urine output<br>• Worsening renal function</div></div>
+            <div class="narrative"><p><strong>This patient:</strong> JVD, crackles, edema (wet) + normal mentation, BP adequate (warm) = <span class="highlight">Warm and Wet</span> → Primary treatment is diuresis</p></div>
+            <button class="btn" onclick="nextStage()">Diuretic Strategy →</button></div></div>`;
+    }
+
+    function renderDiuretics() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 7 of 14</div><div class="scene-title">Diuretic Therapy</div></div><div class="scene-body">
+            <div class="boards-tip"><div class="boards-tip-title">📚 Loop Diuretic Dosing</div>
+            <table class="comparison-table">
+                <tr><th>Principle</th><th>Details</th></tr>
+                <tr><td>Initial dose</td><td>IV furosemide ≥ home oral dose (or 40mg if naive)</td></tr>
+                <tr><td>Goal output</td><td>3-5 L negative per day initially</td></tr>
+                <tr><td>Monitoring</td><td>Daily weights, I/Os, BMP (K+, Cr)</td></tr>
+                <tr><td>If inadequate</td><td>Double the dose, then add thiazide</td></tr>
+            </table></div>
+            <div class="mechanism-box"><div class="mechanism-title">🧬 Diuretic Resistance</div><div class="pathway"><strong>Causes:</strong><br>• Underdosing (need higher IV doses)<br>• Poor gut absorption if edematous<br>• Reduced renal perfusion<br>• Post-diuretic Na retention<br><br><strong>Solutions:</strong><br>1. Increase loop diuretic dose<br>2. Continuous infusion (more consistent levels)<br>3. Add thiazide (sequential nephron blockade)<br>4. Add metolazone (synergistic, watch K+)<br>5. Consider ultrafiltration</div></div>
+            <div class="why-chain"><div class="why-chain-title">🔗 WHY Chain: IV vs Oral</div>
+                <div class="why-item"><div class="why-q">Why IV in acute HF?</div>Gut edema impairs oral absorption. IV bypasses this and provides predictable delivery.</div>
+                <div class="why-item"><div class="why-q">Why does creatinine often rise?</div>Some "permissive" Cr rise is expected with aggressive diuresis. If patient is decongesting and feels better, tolerate modest Cr increase.</div>
+            </div>
+            <button class="btn" onclick="nextStage()">Vasodilators →</button></div></div>`;
+    }
+
+    function renderVasodilators() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 8 of 14</div><div class="scene-title">Vasodilators in ADHF</div></div><div class="scene-body">
+            <div class="boards-tip"><div class="boards-tip-title">📚 IV Vasodilators</div>
+            <table class="comparison-table">
+                <tr><th>Drug</th><th>Mechanism</th><th>Use When</th></tr>
+                <tr><td><strong>Nitroglycerin</strong></td><td>Venodilation > arteriolar</td><td>HTN, ischemia, flash pulm edema</td></tr>
+                <tr><td><strong>Nitroprusside</strong></td><td>Balanced vasodilation</td><td>Severe HTN, MR/AR, ICU setting</td></tr>
+                <tr><td><strong>Nesiritide</strong></td><td>Recombinant BNP</td><td>Rarely used; no mortality benefit</td></tr>
+            </table></div>
+            <div class="mechanism-box"><div class="mechanism-title">🧬 Why Vasodilators Work</div><div class="pathway"><strong>In HF:</strong><br>• SVR is elevated (compensatory vasoconstriction)<br>• This increases afterload on failing heart<br><br><strong>Vasodilation:</strong><br>→ ↓ Afterload → ↑ forward flow<br>→ ↓ Preload → ↓ pulmonary congestion<br>→ Symptom relief<br><br>Best for "warm and wet" patients with elevated BP</div></div>
+            <div class="alert-box"><div class="alert-title">⚠️ Contraindications</div><p>Avoid vasodilators in hypotension (SBP <90), severe aortic stenosis, or hypertrophic obstructive cardiomyopathy. May precipitate cardiogenic shock.</p></div>
+            <button class="btn" onclick="nextStage()">Guideline-Directed Medical Therapy →</button></div></div>`;
+    }
+
+    function renderGDMT() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 9 of 14</div><div class="scene-title">The Four Pillars of HFrEF</div></div><div class="scene-body">
+            <div class="alert-box"><div class="alert-title">🚨 GDMT for HFrEF - All 4 Reduce Mortality!</div><p>Every HFrEF patient should be on all four drug classes unless contraindicated. Each provides ~20-30% mortality reduction.</p></div>
+            <div class="boards-tip"><div class="boards-tip-title">📚 The Four Pillars</div>
+            <table class="comparison-table">
+                <tr><th>Class</th><th>Drugs</th><th>Key Points</th></tr>
+                <tr style="background:rgba(34,197,94,0.15);"><td><strong>ARNI/ACEi/ARB</strong></td><td>Sacubitril-valsartan, lisinopril, losartan</td><td>ARNI preferred if tolerated</td></tr>
+                <tr style="background:rgba(34,197,94,0.15);"><td><strong>Beta-blocker</strong></td><td>Carvedilol, metoprolol succinate, bisoprolol</td><td>Only these 3 have evidence!</td></tr>
+                <tr style="background:rgba(34,197,94,0.15);"><td><strong>MRA</strong></td><td>Spironolactone, eplerenone</td><td>If EF ≤35% and NYHA II-IV</td></tr>
+                <tr style="background:rgba(34,197,94,0.15);"><td><strong>SGLT2i</strong></td><td>Dapagliflozin, empagliflozin</td><td>Even without DM!</td></tr>
+            </table></div>
+            <div class="mechanism-box"><div class="mechanism-title">🧬 Start Early, Titrate Up</div><div class="pathway"><strong>During hospitalization:</strong><br>• Start/continue beta-blocker if stable<br>• Initiate SGLT2i (safe even if "wet")<br>• Start MRA if EF ≤35%<br>• Start ACEi/ARB (switch to ARNI outpatient)<br><br><strong>After discharge:</strong><br>• Titrate to target doses over weeks<br>• Don't stop for mild side effects<br>• All 4 drugs within 1 month if possible</div></div>
+            <button class="btn" onclick="nextStage()">ARNI Deep Dive →</button></div></div>`;
+    }
+
+    function renderARNI() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 10 of 14</div><div class="scene-title">Sacubitril-Valsartan (Entresto)</div></div><div class="scene-body">
+            <div class="boards-tip"><div class="boards-tip-title">📚 ARNI Mechanism</div>
+            <table class="comparison-table">
+                <tr><th>Component</th><th>Action</th></tr>
+                <tr><td><strong>Sacubitril</strong></td><td>Neprilysin inhibitor → ↑ natriuretic peptides → vasodilation, diuresis</td></tr>
+                <tr><td><strong>Valsartan</strong></td><td>ARB → blocks RAAS</td></tr>
+            </table></div>
+            <div class="mechanism-box"><div class="mechanism-title">🧬 Why ARNI > ACEi</div><div class="pathway">PARADIGM-HF Trial:<br>ARNI vs ACEi (enalapril) in HFrEF<br><br>Results:<br>• 20% ↓ CV death or HF hospitalization<br>• 16% ↓ all-cause mortality<br>• Trial stopped early for benefit<br><br>ARNI is now first-line over ACEi/ARB!</div></div>
+            <div class="alert-box"><div class="alert-title">⚠️ ARNI Prescribing Rules</div>
+            <ul style="margin-left:20px;">
+                <li>Stop ACEi 36 hours before starting (angioedema risk)</li>
+                <li>Never combine with ACEi</li>
+                <li>Can switch directly from ARB</li>
+                <li>Monitor BP, K+, renal function</li>
+            </ul></div>
+            <button class="btn" onclick="nextStage()">Devices →</button></div></div>`;
+    }
+
+    function renderDevices() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 11 of 14</div><div class="scene-title">Device Therapy</div></div><div class="scene-body">
+            <div class="boards-tip"><div class="boards-tip-title">📚 ICD Indications (Primary Prevention)</div>
+            <table class="comparison-table">
+                <tr><th>Criteria</th><th>Requirement</th></tr>
+                <tr><td>EF</td><td>≤35%</td></tr>
+                <tr><td>NYHA</td><td>Class II-III</td></tr>
+                <tr><td>On GDMT</td><td>≥3 months optimized therapy</td></tr>
+                <tr><td>Life expectancy</td><td>>1 year</td></tr>
+            </table></div>
+            <div class="boards-tip"><div class="boards-tip-title">📚 CRT (Biventricular Pacing) Indications</div>
+            <table class="comparison-table">
+                <tr><th>Criteria</th><th>Requirement</th></tr>
+                <tr><td>EF</td><td>≤35%</td></tr>
+                <tr><td>QRS</td><td>≥150ms (LBBB best response)</td></tr>
+                <tr><td>NYHA</td><td>Class II-IV on GDMT</td></tr>
+                <tr><td>Rhythm</td><td>Sinus (AF response less clear)</td></tr>
+            </table></div>
+            <div class="mechanism-box"><div class="mechanism-title">🧬 Why CRT Works</div><div class="pathway">LBBB → dyssynchronous contraction<br>→ Septum and lateral wall don't contract together<br>→ Inefficient pump, wasted energy<br><br>CRT paces both ventricles simultaneously<br>→ Resynchronizes contraction<br>→ ↑ EF, ↓ symptoms, ↓ mortality<br><br>Best response: LBBB + QRS ≥150ms</div></div>
+            <button class="btn" onclick="nextStage()">Prognosis →</button></div></div>`;
+    }
+
+    function renderPrognosis() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 12 of 14</div><div class="scene-title">Prognostic Markers</div></div><div class="scene-body">
+            <div class="boards-tip"><div class="boards-tip-title">📚 Poor Prognostic Indicators</div>
+            <table class="comparison-table">
+                <tr><th>Category</th><th>Markers</th></tr>
+                <tr><td>Clinical</td><td>Low BP, tachycardia, cachexia, renal dysfunction</td></tr>
+                <tr><td>Labs</td><td>↑ BNP, hyponatremia, ↑ troponin</td></tr>
+                <tr><td>Functional</td><td>Low peak VO2, 6MWT <300m</td></tr>
+                <tr><td>Hospitalizations</td><td>Frequent readmissions (30-day rate 25%)</td></tr>
+            </table></div>
+            <div class="mechanism-box"><div class="mechanism-title">🧬 Why Hyponatremia Is Bad</div><div class="pathway">Hyponatremia in HF usually means:<br>• Severe neurohormonal activation<br>• High ADH (water retention > Na)<br>• Advanced disease state<br><br>Na <134 associated with:<br>• 2× mortality risk<br>• Longer hospitalizations<br>• Poor response to diuretics</div></div>
+            <div class="alert-box"><div class="alert-title">⚠️ When to Consider Advanced Therapies</div>
+            <ul style="margin-left:20px;">
+                <li>EF <25% despite optimal GDMT</li>
+                <li>Peak VO2 <14 mL/kg/min</li>
+                <li>Recurrent hospitalizations</li>
+                <li>Inotrope dependence</li>
+            </ul>
+            <p style="margin-top:8px;">Consider referral for LVAD or transplant evaluation</p></div>
+            <button class="btn" onclick="nextStage()">Discharge Planning →</button></div></div>`;
+    }
+
+    function renderDischarge() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 13 of 14</div><div class="scene-title">Transition of Care</div></div><div class="scene-body">
+            <div class="boards-tip"><div class="boards-tip-title">📚 Discharge Criteria</div>
+            <ul style="margin-left:20px;line-height:2;">
+                <li>Euvolemic or approaching dry weight</li>
+                <li>Transitioned to oral diuretics (stable dose 24h)</li>
+                <li>On optimal GDMT (or plan to uptitrate)</li>
+                <li>Stable renal function</li>
+                <li>Patient educated on self-care</li>
+            </ul></div>
+            <div class="mechanism-box"><div class="mechanism-title">🧬 Preventing Readmission</div><div class="pathway"><strong>Before discharge:</strong><br>• Daily weights teaching<br>• Low-sodium diet education (<2g/day)<br>• Medication reconciliation<br>• Identify precipitant and address<br><br><strong>Post-discharge:</strong><br>• Follow-up within 7 days<br>• Phone call within 48-72 hours<br>• Cardiac rehab referral<br>• Consider HF disease management program</div></div>
+            <div class="tips">
+                <div class="pearl"><div class="tip-header">✓ Key Discharge Metrics</div><ul style="margin-left:16px;"><li>All 4 GDMT classes initiated/continued</li><li>Follow-up scheduled <7 days</li><li>Dry weight documented</li><li>Action plan for weight gain</li></ul></div>
+                <div class="pitfall"><div class="tip-header">✗ Common Causes of Readmission</div><ul style="margin-left:16px;"><li>Dietary indiscretion (salt/fluid)</li><li>Medication non-adherence</li><li>Undertreated (inadequate GDMT)</li><li>No close follow-up</li></ul></div>
+            </div>
+            <button class="btn" onclick="nextStage()">Debrief →</button></div></div>`;
+    }
+
+    function renderDebrief() {
+        return `<div class="scene"><div style="text-align:center;padding:40px;"><div style="font-size:4rem;margin-bottom:12px;">❤️</div><div style="font-size:1.8rem;font-weight:700;color:#4ade80;">Heart Failure Mastery Complete!</div></div><div class="scene-body">
+            <div class="boards-tip"><div class="boards-tip-title">📚 High-Yield Summary</div>
+            <table class="comparison-table">
+                <tr><th>Concept</th><th>Key Point</th></tr>
+                <tr><td>Classification</td><td>HFrEF (≤40%), HFpEF (≥50%), NYHA I-IV</td></tr>
+                <tr><td>Acute assessment</td><td>Warm/cold (perfusion) + Wet/dry (congestion)</td></tr>
+                <tr><td>BNP</td><td><100 rules out HF; track for decongestion</td></tr>
+                <tr><td>Four Pillars</td><td>ARNI + BB + MRA + SGLT2i (all reduce mortality)</td></tr>
+                <tr><td>Diuretics</td><td>IV initially; add thiazide if resistant</td></tr>
+                <tr><td>Devices</td><td>ICD if EF≤35%; CRT if LBBB + wide QRS</td></tr>
+            </table></div>
+            <div class="why-chain"><div class="why-chain-title">🔗 Master WHY Chain</div>
+                <div class="why-item"><div class="why-q">Why beta-blockers in a weak heart?</div>Chronic SNS activation is toxic. BBs allow reverse remodeling. Start low, go slow - mortality benefit proven.</div>
+                <div class="why-item"><div class="why-q">Why ARNI over ACEi?</div>Dual mechanism (neprilysin + RAAS blockade) provides additional 20% mortality reduction.</div>
+                <div class="why-item"><div class="why-q">Why SGLT2i without diabetes?</div>Direct cardiac benefits (reduce preload, improve energetics) independent of glucose-lowering.</div>
+            </div>
+            <div class="tips">
+                <div class="pearl"><div class="tip-header">✓ Clinical Pearls</div><ul style="margin-left:16px;"><li>All 4 pillars should be started</li><li>Only 3 beta-blockers have HF evidence</li><li>36-hour ACEi washout before ARNI</li><li>Follow-up within 7 days of discharge</li></ul></div>
+                <div class="pitfall"><div class="tip-header">✗ Avoid These Pitfalls</div><ul style="margin-left:16px;"><li>Stopping BB for "low EF"</li><li>Not starting GDMT during hospitalization</li><li>Using non-evidence-based BB</li><li>Discharging without euvolemia</li></ul></div>
+            </div>
+            <button class="btn" onclick="location.reload()">🔄 Restart Case</button></div></div>`;
+    }
+
+    function nextStage() { state.stage++; render(); }
+    render();
+    </script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+/* Enhanced Feature Styles */
+.rdx-difficulty-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 300px;
+}
+.rdx-diff-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin: 2px;
+}
+.rdx-diff-btn.active {
+    background: #3b82f6;
+    color: white;
+}
+.rdx-diff-btn:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+}
+.rdx-diff-btn:hover:not(.active) {
+    background: #e2e8f0;
+}
+.rdx-refs-panel {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #93c5fd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+.rdx-refs-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+.rdx-refs-links {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+.rdx-refs-links a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.rdx-refs-links a:hover {
+    text-decoration: underline;
+}
+.rdx-debrief-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rdx-debrief-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #1f2937;
+}
+.rdx-path-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.rdx-path-optimal {
+    background: #dcfce7;
+    border-left: 4px solid #22c55e;
+}
+.rdx-path-suboptimal {
+    background: #fef9c3;
+    border-left: 4px solid #eab308;
+}
+.rdx-path-wrong {
+    background: #fecaca;
+    border-left: 4px solid #ef4444;
+}
+.rdx-hint-beginner {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+.rdx-hint-advanced {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+</style>
+
+<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
+    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
+        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    </div>
+</div>
+
+
+<!-- CROSS-PLATFORM LEARNING LINKS -->
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
+            <a href="../mechanism/hf-module.html" style="display: block; color: #2563eb; font-size: 14px;">→ Heart Failure</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
+            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="acls-rhythms-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Acls Rhythms</a>
+            <a href="acs-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Acs</a>
+            <a href="aortic-dissection-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Aortic Dissection</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
+            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../CoachDx/mentor-chat.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../CoachDx/sbar-trainer.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+<!-- END CROSS-PLATFORM LINKS -->
+<div class="rdx-refs-panel" id="rdxRefsPanel">
+    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
+    <div class="rdx-refs-links"><a href="https://www.ahajournals.org/doi/10.1161/CIR.0000000000000916" target="_blank" class="text-blue-600 hover:underline">AHA ACLS Guidelines 2020</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK459216/" target="_blank" class="text-blue-600 hover:underline">StatPearls: Acute Coronary Syndrome</a></div>
+</div>
+
+<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
+    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+</div>
+
+<script>
+// ReasonDx Enhanced Features Module
+(function() {
+    // Decision tracking
+    window.rdxDecisionPath = window.rdxDecisionPath || [];
+    window.rdxTotalScore = window.rdxTotalScore || 0;
+    window.rdxMaxScore = window.rdxMaxScore || 0;
+    window.rdxDifficulty = 'intermediate';
+    
+    // Difficulty control
+    window.rdxSetDifficulty = function(level) {
+        window.rdxDifficulty = level;
+        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('rdx-btn-' + level).classList.add('active');
+        
+        // Update hint visibility
+        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
+            el.style.display = level === 'beginner' ? 'block' : 'none';
+        });
+        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
+            el.style.display = level === 'advanced' ? 'block' : 'none';
+        });
+    };
+    
+    // Track a decision
+    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+        window.rdxDecisionPath.push({
+            stage: stageId,
+            title: stageTitle,
+            choice: choiceId,
+            choiceText: choiceText,
+            outcome: outcome,
+            points: points,
+            maxPoints: maxPoints,
+            isOptimal: isOptimal,
+            optimalChoice: optimalChoice,
+            optimalText: optimalText
+        });
+        window.rdxTotalScore += points;
+        window.rdxMaxScore += maxPoints;
+    };
+    
+    // Show visual debrief
+    window.rdxShowDebrief = function() {
+        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
+        
+        let grade, gradeColor, gradeEmoji;
+        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
+        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
+        
+        let pathHTML = '';
+        if (window.rdxDecisionPath.length > 0) {
+            pathHTML = window.rdxDecisionPath.map(d => {
+                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
+                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
+                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
+                return '<div class="' + pathClass + ' rdx-path-item">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
+                    '<div>' +
+                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
+                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
+                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
+                    '</div>' +
+                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
+                    '</div></div>';
+            }).join('');
+        } else {
+            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+        }
+        
+        document.getElementById('rdxDebriefContent').innerHTML = 
+            '<div style="text-align:center;margin-bottom:24px;">' +
+            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
+            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
+            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
+            '</div></div>' +
+            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
+            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
+            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
+            '</div></div>' +
+            '<div style="display:flex;gap:12px;">' +
+            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '</div>';
+        
+        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
+    };
+    
+    // Auto-inject hint examples into existing content
+    window.rdxInit = function() {
+        // Could add dynamic hint injection here based on difficulty
+        console.log('ReasonDx Enhanced Features loaded for: Heart Failure Expanded Adventure');
+    };
+    
+    // Initialize on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.rdxInit);
+    } else {
+        window.rdxInit();
+    }
+})();
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+</body>
+</html>

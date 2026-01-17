@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eosinophilia Workup - Expanded Clinical Reasoning Adventure</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%);min-height:100vh;color:#e2e8f0;line-height:1.6;padding:20px}
+.container{max-width:800px;margin:0 auto}
+.scene{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:24px;margin-bottom:20px}
+.scene-header{margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.1)}
+.scene-phase{font-size:0.85rem;color:#f472b6;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.scene-title{font-size:1.5rem;font-weight:700;color:#fff}
+.scene-body{font-size:1rem;color:#cbd5e1}
+.alert-box{background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.4);border-radius:12px;padding:16px;margin:16px 0}
+.alert-title{color:#f87171;font-weight:700;font-size:1.1rem;margin-bottom:8px}
+.mechanism-box{background:linear-gradient(135deg,rgba(59,130,246,0.1),rgba(139,92,246,0.1));border:1px solid rgba(96,165,250,0.3);border-radius:12px;padding:16px;margin:16px 0}
+.mechanism-title{color:#60a5fa;font-weight:700;font-size:1rem;margin-bottom:12px}
+.pathway{font-family:'SF Mono',Monaco,monospace;font-size:0.85rem;color:#94a3b8;padding:12px;background:rgba(0,0,0,0.2);border-radius:8px;white-space:pre-wrap}
+.boards-tip{background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:12px;padding:16px;margin:16px 0}
+.boards-tip-title{color:#4ade80;font-weight:700;margin-bottom:12px}
+.comparison-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:0.9rem}
+.comparison-table th,.comparison-table td{border:1px solid rgba(255,255,255,0.1);padding:10px;text-align:left}
+.comparison-table th{background:rgba(96,165,250,0.2);color:#60a5fa}
+.comparison-table tr:nth-child(even){background:rgba(255,255,255,0.02)}
+.btn{background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;border:none;padding:12px 24px;border-radius:8px;font-size:1rem;cursor:pointer;width:100%;margin-top:16px;transition:transform 0.2s,box-shadow 0.2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 4px 20px rgba(59,130,246,0.4)}
+.tips{display:grid;gap:12px;margin-top:16px}
+.pearl{background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:8px;padding:12px}
+.pitfall{background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:8px;padding:12px}
+.tip-header{font-weight:700;margin-bottom:8px;font-size:0.9rem}
+.pearl .tip-header{color:#4ade80}
+.pitfall .tip-header{color:#f87171}
+.why-chain{background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:8px;padding:12px;margin:12px 0}
+.why-chain-title{color:#fbbf24;font-weight:700;margin-bottom:8px}
+</style>
+</head>
+<body>
+<div class="container" id="app"></div>
+
+<script>
+const defined = {
+    title: "Eosinophilia Workup",
+    subtitle: "Systematic Approach to Elevated Eosinophils",
+    stages: ["intro","definition","causes","parasites","drugs","allergic","neoplastic","organ_damage","workup","debrief"]
+};
+
+let state = { stage: 0 };
+
+function nextStage() {
+    if (state.stage < defined.stages.length - 1) {
+        state.stage++;
+        renderStage();
+    }
+}
+
+function renderStage() {
+    const stageName = defined.stages[state.stage];
+    const renderFn = window['render_' + stageName];
+    if (renderFn) {
+        document.getElementById('app').innerHTML = renderFn();
+    }
+}
+
+window.render_intro = function() {
+    return `
+    <div class="scene">
+        <div class="scene-header">
+            <div class="scene-phase">Stage 1 of 10</div>
+            <div class="scene-title">🔬 The Case</div>
+        </div>
+        <div class="scene-body">
+            <p style="font-size:1.1rem;margin-bottom:16px;">A 35-year-old returns from 6 months working in rural Southeast Asia with fatigue, intermittent abdominal pain, and mild cough. CBC shows <strong>WBC 12,000 with 25% eosinophils (absolute count 3,000/µL)</strong>.</p>
+            
+            <div class="alert-box">
+                <div class="alert-title">🚨 When Eosinophilia Matters</div>
+                <p><strong>The differential is broad but systematic evaluation is essential.</strong> High eosinophil counts can cause organ damage regardless of cause.</p>
+            </div>
+            
+            <div class="mechanism-box">
+                <div class="mechanism-title">🧬 What Do Eosinophils Do?</div>
+                <div class="pathway"><strong>Normal function:</strong>
+• Defense against parasites (helminths)
+• Modulate allergic inflammation
+• Tissue remodeling
+
+<strong>How they cause damage:</strong>
+• Release toxic granules (MBP, ECP, EDN)
+• Generate reactive oxygen species
+• Recruit more inflammatory cells
+
+<strong>Target organs for damage:</strong>
+Heart, lungs, GI tract, skin, nervous system</div>
+            </div>
+            
+            <div class="why-chain">
+                <div class="why-chain-title">🔗 WHY Chain: Why Parasites and Allergies?</div>
+                <p><strong>WHY do parasites and allergies both cause eosinophilia?</strong></p>
+                <p>→ Both trigger Th2 immune response</p>
+                <p>→ IL-5 is the key eosinophil growth factor</p>
+                <p>→ IL-4 and IL-13 also contribute</p>
+                <p>→ Same pathway, different triggers</p>
+            </div>
+            
+            <button class="btn" onclick="nextStage()">Define Eosinophilia →</button>
+        </div>
+    </div>`;
+};
+
+window.render_definition = function() {
+    return `
+    <div class="scene">
+        <div class="scene-header">
+            <div class="scene-phase">Stage 2 of 10</div>
+            <div class="scene-title">Definitions & Classification</div>
+        </div>
+        <div class="scene-body">
+            <div class="boards-tip">
+                <div class="boards-tip-title">📚 Eosinophilia Classification</div>
+                <table class="comparison-table">
+                    <tr><th>Severity</th><th>Absolute Eosinophil Count</th><th>Clinical Significance</th></tr>
+                    <tr><td>Normal</td><td>&lt;500/µL</td><td>No concern</td></tr>
+                    <tr><td>Mild</td><td>500-1,500/µL</td><td>Common, often benign</td></tr>
+                    <tr><td>Moderate</td><td>1,500-5,000/µL</td><td>Warrants workup</td></tr>
+                    <tr style="background:rgba(239,68,68,0.2);"><td><strong>Severe</strong></td><td><strong>>5,000/µL</strong></td><td><strong>High risk organ damage</strong></td></tr>
+                </table>
+            </div>
+            
+            <div class="mechanism-box">
+                <div class="mechanism-title">🧬 Key Terminology</div>
+                <div class="pathway"><strong>Eosinophilia:</strong>
+AEC >500/µL (some use >450)
+
+<strong>Hypereosinophilia (HE):</strong>
+AEC >1,500/µL on two occasions ≥1 month apart
+OR tissue HE with blood eos >1,500
+
+<strong>Hypereosinophilic Syndrome (HES):</strong>
+= Hypereosinophilia + organ damage
++ other causes excluded
+
+<strong>IMPORTANT:</strong>
+Calculate AEC = WBC × % eosinophils
+Don't just use percentage!</div>
+            </div>
+            
+            <div class="why-chain">
+                <div class="why-chain-title">🔗 WHY Chain: Why Absolute Count Matters</div>
+                <p><strong>WHY use AEC instead of percentage?</strong></p>
+                <p>→ Percentage depends on other cell counts</p>
+                <p>→ 10% eos with WBC 3,000 = AEC 300 (normal)</p>
+                <p>→ 10% eos with WBC 15,000 = AEC 1,500 (significant)</p>
+                <p>→ Absolute count correlates with disease severity</p>
+            </div>
+            
+            <button class="btn" onclick="nextStage()">Broad Differential →</button>
+        </div>
+    </div>`;
+};
+
+window.render_causes = function() {
+    return `
+    <div class="scene">
+        <div class="scene-header">
+            <div class="scene-phase">Stage 3 of 10</div>
+            <div class="scene-title">Differential Diagnosis Overview</div>
+        </div>
+        <div class="scene-body">
+            <div class="alert-box">
+                <div class="alert-title">📋 The Classic Mnemonic: NAACP</div>
+                <p>(Not politically correct but memorable!)</p>
+            </div>
+            
+            <div class="boards-tip">
+                <div class="boards-tip-title">📚 NAACP Differential</div>
+                <table class="comparison-table">
+                    <tr><th>Category</th><th>Examples</th><th>Clues</th></tr>
+                    <tr style="background:rgba(239,68,68,0.2);"><td><strong>N</strong>eoplasm</td><td>Lymphoma, leukemia, solid tumors</td><td>Weight loss, lymphadenopathy</td></tr>
+                    <tr><td><strong>A</strong>llergy/Atopy</td><td>Asthma, eczema, allergic rhinitis</td><td>Personal/family history</td></tr>
+                    <tr><td><strong>A</strong>dison's disease</td><td>Adrenal insufficiency</td><td>Fatigue, hypotension, hyponatremia</td></tr>
+                    <tr><td><strong>C</strong>ollagen vascular disease</td><td>EGPA, eosinophilic fasciitis</td><td>Multi-system involvement</td></tr>
+                    <tr style="background:rgba(34,197,94,0.2);"><td><strong>P</strong>arasites</td><td>Helminths (tissue-invasive)</td><td><strong>Most common cause worldwide!</strong></td></tr>
+                </table>
+            </div>
+            
+            <div class="mechanism-box">
+                <div class="mechanism-title">🧬 Additional Causes to Remember</div>
+                <div class="pathway"><strong>DRUGS (very common!):</strong>
+NSAIDs, antibiotics, anticonvulsants, allopurinol
+
+<strong>Infections (not just parasites):</strong>
+HIV, HTLV, fungal (coccidioidomycosis)
+
+<strong>Dermatologic:</strong>
+Drug rash, bullous pemphigoid, dermatitis
+
+<strong>Pulmonary:</strong>
+ABPA, eosinophilic pneumonia, EGPA
+
+<strong>GI:</strong>
+Eosinophilic esophagitis/gastroenteritis, IBD
+
+<strong>Primary/clonal:</strong>
+Chronic eosinophilic leukemia, FIP1L1-PDGFRA</div>
+            </div>
+            
+            <button class="btn" onclick="nextStage()">Parasites Deep Dive →</button>
+        </div>
+    </div>`;
+};
+
+window.render_parasites = function() {
+    return `
+    <div class="scene">
+        <div class="scene-header">
+            <div class="scene-phase">Stage 4 of 10</div>
+            <div class="scene-title">Parasitic Causes</div>
+        </div>
+        <div class="scene-body">
+            <div class="alert-box">
+                <div class="alert-title">🌍 Geographic/Travel History is CRITICAL</div>
+                <p><strong>Tissue-invasive helminths cause eosinophilia. Protozoa (malaria, Giardia) do NOT!</strong></p>
+            </div>
+            
+            <div class="boards-tip">
+                <div class="boards-tip-title">📚 Key Parasites Causing Eosinophilia</div>
+                <table class="comparison-table">
+                    <tr><th>Parasite</th><th>Geography</th><th>Key Features</th></tr>
+                    <tr><td><strong>Strongyloides</strong></td><td>Tropical, SE US</td><td>Can persist decades, hyperinfection if immunosuppressed</td></tr>
+                    <tr><td><strong>Ascaris</strong></td><td>Worldwide</td><td>Löffler syndrome (pulmonary migration)</td></tr>
+                    <tr><td><strong>Hookworm</strong></td><td>Tropical</td><td>Iron deficiency anemia</td></tr>
+                    <tr><td><strong>Toxocara</strong></td><td>Worldwide</td><td>Visceral larva migrans</td></tr>
+                    <tr><td><strong>Filaria</strong></td><td>Africa, Asia</td><td>Lymphedema, tropical pulmonary eosinophilia</td></tr>
+                    <tr><td><strong>Schistosoma</strong></td><td>Africa, Asia, S America</td><td>Freshwater exposure, Katayama fever</td></tr>
+                </table>
+            </div>
+            
+            <div class="mechanism-box">
+                <div class="mechanism-title">🧬 Why Tissue Phase = Eosinophilia</div>
+                <div class="pathway"><strong>Life cycle matters:</strong>
+
+Ingested/skin entry → bloodstream → TISSUE MIGRATION
+    ↓
+Tissue phase triggers Th2 response
+    ↓
+IL-5 → eosinophil production and recruitment
+    ↓
+Eosinophils attack larvae in tissues
+
+<strong>GI-only parasites (Giardia, Cryptosporidium):</strong>
+No tissue invasion → No eosinophilia</div>
+            </div>
+            
+            <div class="why-chain">
+                <div class="why-chain-title">🔗 WHY Chain: Strongyloides is Special</div>
+                <p><strong>WHY is Strongyloides so dangerous?</strong></p>
+                <p>→ Autoinfection cycle (can persist for decades)</p>
+                <p>→ Patient may have left endemic area 40 years ago</p>
+                <p>→ Immunosuppression (steroids!) causes hyperinfection</p>
+                <p>→ ALWAYS screen before starting steroids in at-risk patients!</p>
+            </div>
+            
+            <button class="btn" onclick="nextStage()">Drug-Induced Eosinophilia →</button>
+        </div>
+    </div>`;
+};
+
+window.render_drugs = function() {
+    return `
+    <div class="scene">
+        <div class="scene-header">
+            <div class="scene-phase">Stage 5 of 10</div>
+            <div class="scene-title">Drug-Induced Eosinophilia</div>
+        </div>
+        <div class="scene-body">
+            <div class="alert-box">
+                <div class="alert-title">💊 Most Common Cause in Developed Countries</div>
+                <p><strong>Drug-induced eosinophilia is often asymptomatic but can progress to DRESS syndrome!</strong></p>
+            </div>
+            
+            <div class="boards-tip">
+                <div class="boards-tip-title">📚 High-Risk Medications</div>
+                <table class="comparison-table">
+                    <tr><th>Drug Class</th><th>Examples</th><th>Notes</th></tr>
+                    <tr><td>Antibiotics</td><td>Penicillins, cephalosporins, sulfonamides</td><td>Very common cause</td></tr>
+                    <tr><td>Anticonvulsants</td><td>Phenytoin, carbamazepine, lamotrigine</td><td>Watch for DRESS</td></tr>
+                    <tr><td>NSAIDs</td><td>All classes</td><td>Can cause pulmonary eos</td></tr>
+                    <tr style="background:rgba(239,68,68,0.2);"><td><strong>Allopurinol</strong></td><td>-</td><td><strong>High risk for DRESS</strong></td></tr>
+                    <tr><td>Dapsone</td><td>-</td><td>Hypersensitivity syndrome</td></tr>
+                    <tr><td>Gold, methotrexate</td><td>-</td><td>Pulmonary toxicity</td></tr>
+                </table>
+            </div>
+            
+            <div class="mechanism-box">
+                <div class="mechanism-title">🧬 DRESS Syndrome (Don't Miss!)</div>
+                <div class="pathway"><strong>Drug Reaction with Eosinophilia and Systemic Symptoms</strong>
+
+<strong>Classic triad:</strong>
+1. Skin eruption (may be subtle initially)
+2. Eosinophilia +/- atypical lymphocytes
+3. Internal organ involvement (liver most common)
+
+<strong>Timeline:</strong>
+2-8 weeks after drug initiation (delayed!)
+
+<strong>Key features:</strong>
+• Fever, lymphadenopathy
+• Facial edema
+• Hepatitis (can be severe)
+• HHV-6 reactivation common
+
+<strong>MORTALITY: 5-10% if untreated!</strong></div>
+            </div>
+            
+            <div class="why-chain">
+                <div class="why-chain-title">🔗 WHY Chain: Delayed Onset</div>
+                <p><strong>WHY does DRESS occur 2-8 weeks after starting the drug?</strong></p>
+                <p>→ Requires hapten formation + T-cell sensitization</p>
+                <p>→ HHV-6 reactivation amplifies response</p>
+                <p>→ Unlike immediate IgE reactions</p>
+                <p>→ High index of suspicion needed for "new" drugs</p>
+            </div>
+            
+            <button class="btn" onclick="nextStage()">Allergic/Atopic Causes →</button>
+        </div>
+    </div>`;
+};
+
+window.render_allergic = function() {
+    return `
+    <div class="scene">
+        <div class="scene-header">
+            <div class="scene-phase">Stage 6 of 10</div>
+            <div class="scene-title">Allergic & Immunologic Causes</div>
+        </div>
+        <div class="scene-body">
+            <div class="boards-tip">
+                <div class="boards-tip-title">📚 Atopic Conditions</div>
+                <table class="comparison-table">
+                    <tr><th>Condition</th><th>Typical AEC</th><th>Notes</th></tr>
+                    <tr><td>Allergic rhinitis</td><td>Mild (500-1000)</td><td>Most common allergic disease</td></tr>
+                    <tr><td>Atopic dermatitis</td><td>Mild-moderate</td><td>Correlates with severity</td></tr>
+                    <tr><td>Asthma</td><td>Mild-moderate</td><td>Eos predict steroid response</td></tr>
+                    <tr><td>Food allergies</td><td>Variable</td><td>Often normal AEC</td></tr>
+                </table>
+            </div>
+            
+            <div class="mechanism-box">
+                <div class="mechanism-title">🧬 Eosinophilic GI Disorders</div>
+                <div class="pathway"><strong>Eosinophilic Esophagitis (EoE):</strong>
+• Dysphagia, food impaction
+• >15 eos/hpf on biopsy
+• Peripheral eos often normal!
+• Treat: PPI, swallowed steroids, diet
+
+<strong>Eosinophilic Gastroenteritis:</strong>
+• Abdominal pain, diarrhea, weight loss
+• Peripheral eosinophilia common
+• Biopsy required for diagnosis
+
+<strong>Eosinophilic Colitis:</strong>
+• Bloody diarrhea
+• Rule out parasites, IBD, drug reaction</div>
+            </div>
+            
+            <div class="boards-tip">
+                <div class="boards-tip-title">📚 EGPA (Churg-Strauss)</div>
+                <div class="pathway"><strong>Eosinophilic Granulomatosis with Polyangiitis</strong>
+
+<strong>Classic triad:</strong>
+1. Asthma (late-onset, severe)
+2. Eosinophilia (often >1500)
+3. Vasculitis (multiple organs)
+
+<strong>Phases:</strong>
+• Prodrome: Allergic rhinitis, asthma
+• Eosinophilic: Pulmonary infiltrates, eos
+• Vasculitic: Neuropathy, cardiac, GI
+
+<strong>ANCA:</strong> MPO-positive in ~40%
+
+<strong>Cardiac involvement = major cause of death!</strong></div>
+            </div>
+            
+            <button class="btn" onclick="nextStage()">Neoplastic Causes →</button>
+        </div>
+    </div>`;
+};
+
+window.render_neoplastic = function() {
+    return `
+    <div class="scene">
+        <div class="scene-header">
+            <div class="scene-phase">Stage 7 of 10</div>
+            <div class="scene-title">Neoplastic Eosinophilia</div>
+        </div>
+        <div class="scene-body">
+            <div class="alert-box">
+                <div class="alert-title">🚨 Primary vs Secondary Neoplastic</div>
+                <p><strong>Primary:</strong> Eosinophils are the malignant clone</p>
+                <p><strong>Secondary:</strong> Tumor produces IL-5 or other factors</p>
+            </div>
+            
+            <div class="boards-tip">
+                <div class="boards-tip-title">📚 Primary Eosinophilic Neoplasms</div>
+                <table class="comparison-table">
+                    <tr><th>Entity</th><th>Key Features</th><th>Treatment</th></tr>
+                    <tr style="background:rgba(239,68,68,0.2);"><td><strong>FIP1L1-PDGFRA+ disease</strong></td><td>Male predominance, cardiac damage</td><td><strong>Imatinib (dramatic response!)</strong></td></tr>
+                    <tr><td>Chronic eosinophilic leukemia</td><td>Clonal eos without specific mutation</td><td>Steroids, cytoreduction</td></tr>
+                    <tr><td>Myeloid neoplasms with eos</td><td>Other driver mutations</td><td>Mutation-specific therapy</td></tr>
+                </table>
+            </div>
+            
+            <div class="mechanism-box">
+                <div class="mechanism-title">🧬 FIP1L1-PDGFRA Fusion</div>
+                <div class="pathway"><strong>The "CML of eosinophilia":</strong>
+
+• Cryptic deletion on chromosome 4
+• Creates constitutively active tyrosine kinase
+• Drives clonal eosinophil expansion
+
+<strong>Clinical pearls:</strong>
+• 90% male
+• Often presents with cardiac damage
+• AEC can be dramatically elevated
+• FISH needed for diagnosis (not karyotype)
+
+<strong>Imatinib response:</strong>
+• Start at LOW dose (100mg, not 400mg)
+• Rapid lysis can cause cardiac damage
+• Usually complete hematologic response</div>
+            </div>
+            
+            <div class="boards-tip">
+                <div class="boards-tip-title">📚 Secondary Neoplastic Eosinophilia</div>
+                <table class="comparison-table">
+                    <tr><th>Malignancy</th><th>Mechanism</th></tr>
+                    <tr><td>Hodgkin lymphoma</td><td>IL-5 production by Reed-Sternberg cells</td></tr>
+                    <tr><td>T-cell lymphoma</td><td>Th2 cytokine production</td></tr>
+                    <tr><td>Solid tumors (lung, GI)</td><td>Paraneoplastic IL-5</td></tr>
+                </table>
+            </div>
+            
+            <button class="btn" onclick="nextStage()">Organ Damage →</button>
+        </div>
+    </div>`;
+};
+
+window.render_organ_damage = function() {
+    return `
+    <div class="scene">
+        <div class="scene-header">
+            <div class="scene-phase">Stage 8 of 10</div>
+            <div class="scene-title">End-Organ Damage</div>
+        </div>
+        <div class="scene-body">
+            <div class="alert-box">
+                <div class="alert-title">🚨 Regardless of Cause, High AEC Can Damage Organs</div>
+                <p><strong>AEC >1,500 sustained over weeks = evaluate for organ involvement. AEC >5,000 = urgent evaluation!</strong></p>
+            </div>
+            
+            <div class="boards-tip">
+                <div class="boards-tip-title">📚 Organ Manifestations</div>
+                <table class="comparison-table">
+                    <tr><th>Organ</th><th>Manifestation</th><th>How to Detect</th></tr>
+                    <tr style="background:rgba(239,68,68,0.2);"><td><strong>Heart</strong></td><td>Eosinophilic myocarditis, endomyocardial fibrosis</td><td>Troponin, echo, cardiac MRI</td></tr>
+                    <tr><td>Lung</td><td>Infiltrates, effusion, fibrosis</td><td>CXR, CT, PFTs</td></tr>
+                    <tr><td>GI</td><td>Eosinophilic gastroenteritis, ascites</td><td>Endoscopy with biopsy</td></tr>
+                    <tr><td>Skin</td><td>Urticaria, angioedema, pruritus</td><td>Clinical exam</td></tr>
+                    <tr><td>Nervous system</td><td>Neuropathy, stroke, encephalopathy</td><td>EMG/NCS, MRI</td></tr>
+                    <tr><td>Hematologic</td><td>Thrombosis</td><td>D-dimer, imaging</td></tr>
+                </table>
+            </div>
+            
+            <div class="mechanism-box">
+                <div class="mechanism-title">🧬 Cardiac Involvement is Critical!</div>
+                <div class="pathway"><strong>Stages of eosinophilic heart disease:</strong>
+
+1. <strong>Acute necrotic stage:</strong>
+   Eosinophilic myocarditis
+   Troponin elevation, arrhythmias
+
+2. <strong>Thrombotic stage:</strong>
+   Mural thrombi formation
+   Embolic risk (stroke, etc.)
+
+3. <strong>Fibrotic stage:</strong>
+   Restrictive cardiomyopathy
+   Irreversible damage
+
+<strong>Screening:</strong>
+• Troponin (most sensitive early marker)
+• Echo (may be normal early)
+• Cardiac MRI (gold standard)
+
+<strong>FIP1L1-PDGFRA patients at highest risk!</strong></div>
+            </div>
+            
+            <button class="btn" onclick="nextStage()">Systematic Workup →</button>
+        </div>
+    </div>`;
+};
+
+window.render_workup = function() {
+    return `
+    <div class="scene">
+        <div class="scene-header">
+            <div class="scene-phase">Stage 9 of 10</div>
+            <div class="scene-title">Systematic Evaluation</div>
+        </div>
+        <div class="scene-body">
+            <div class="boards-tip">
+                <div class="boards-tip-title">📚 Initial Workup (All Patients)</div>
+                <table class="comparison-table">
+                    <tr><th>Test</th><th>Purpose</th></tr>
+                    <tr><td>Repeat CBC with differential</td><td>Confirm persistence, calculate AEC</td></tr>
+                    <tr><td>Comprehensive metabolic panel</td><td>Renal, hepatic function</td></tr>
+                    <tr><td>LDH, uric acid</td><td>Cell turnover (clonal?)</td></tr>
+                    <tr style="background:rgba(34,197,94,0.2);"><td><strong>Stool O&P × 3, Strongyloides serology</strong></td><td><strong>Rule out parasites!</strong></td></tr>
+                    <tr><td>IgE level</td><td>Elevated in allergic, some HES</td></tr>
+                    <tr><td>B12</td><td>Elevated in myeloproliferative</td></tr>
+                    <tr><td>Tryptase</td><td>Mast cell disorders</td></tr>
+                </table>
+            </div>
+            
+            <div class="mechanism-box">
+                <div class="mechanism-title">🧬 Extended Workup (AEC >1,500 or Symptoms)</div>
+                <div class="pathway"><strong>For organ involvement:</strong>
+• Troponin (cardiac screening)
+• Echo +/- cardiac MRI
+• CXR or CT chest
+• PFTs if pulmonary symptoms
+
+<strong>For clonal disease:</strong>
+• Peripheral blood smear
+• B12 (elevated suggests myeloproliferative)
+• FISH for FIP1L1-PDGFRA
+• Bone marrow biopsy if AEC >5,000 or refractory
+
+<strong>Additional based on symptoms:</strong>
+• HIV testing
+• ANCA (EGPA)
+• CT abdomen (lymphadenopathy, organomegaly)
+• Endoscopy if GI symptoms</div>
+            </div>
+            
+            <div class="alert-box">
+                <div class="alert-title">⚠️ When to Treat Empirically</div>
+                <p><strong>If AEC >5,000 with organ involvement:</strong></p>
+                <p>Start corticosteroids (prednisone 1mg/kg) while completing workup. Don't wait for all results if patient is symptomatic!</p>
+                <p style="margin-top:8px;"><strong>BUT:</strong> Check FIP1L1-PDGFRA first if possible - imatinib is preferred. Steroids can cause tumor lysis in PDGFRA+ disease.</p>
+            </div>
+            
+            <button class="btn" onclick="nextStage()">Summary & Debrief →</button>
+        </div>
+    </div>`;
+};
+
+window.render_debrief = function() {
+    return `
+    <div class="scene">
+        <div style="text-align:center;padding:40px;">
+            <div style="font-size:4rem;margin-bottom:12px;">🏆</div>
+            <div style="font-size:1.8rem;font-weight:700;color:#4ade80;">Eosinophilia Workup Mastery!</div>
+        </div>
+        <div class="scene-body">
+            <div class="boards-tip">
+                <div class="boards-tip-title">📚 High-Yield Summary</div>
+                <table class="comparison-table">
+                    <tr><th>Concept</th><th>Key Point</th></tr>
+                    <tr><td>Definition</td><td>AEC >500/µL (use absolute, not %)</td></tr>
+                    <tr><td>Severe</td><td>AEC >5,000 - high risk for organ damage</td></tr>
+                    <tr><td>NAACP differential</td><td>Neoplasm, Allergy, Addison's, Collagen vascular, Parasites</td></tr>
+                    <tr><td>Most common worldwide</td><td>Parasites (tissue-invasive helminths)</td></tr>
+                    <tr><td>Most common developed countries</td><td>Drugs, allergic disease</td></tr>
+                    <tr><td>Critical organ</td><td>Heart - check troponin!</td></tr>
+                    <tr style="background:rgba(34,197,94,0.2);"><td><strong>FIP1L1-PDGFRA</strong></td><td><strong>Test before steroids, responds to imatinib</strong></td></tr>
+                </table>
+            </div>
+            
+            <div class="tips">
+                <div class="pearl">
+                    <div class="tip-header">✓ Pearls</div>
+                    <ul style="margin-left:16px;">
+                        <li>Always calculate AEC, don't use %</li>
+                        <li>Strongyloides can persist for decades</li>
+                        <li>Screen for Strongyloides before steroids!</li>
+                        <li>Cardiac damage is major cause of morbidity</li>
+                        <li>FIP1L1-PDGFRA responds dramatically to imatinib</li>
+                    </ul>
+                </div>
+                <div class="pitfall">
+                    <div class="tip-header">✗ Pitfalls</div>
+                    <ul style="margin-left:16px;">
+                        <li>Forgetting travel history (even remote)</li>
+                        <li>Missing drug-induced eosinophilia</li>
+                        <li>Not checking for cardiac involvement</li>
+                        <li>Starting steroids before checking FIP1L1-PDGFRA</li>
+                        <li>Thinking protozoa (Giardia) cause eosinophilia</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <button class="btn" onclick="state.stage=0;renderStage();">🔄 Review Again</button>
+        </div>
+    </div>`;
+};
+
+// Initialize
+renderStage();
+</script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+/* Enhanced Feature Styles */
+.rdx-difficulty-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 300px;
+}
+.rdx-diff-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin: 2px;
+}
+.rdx-diff-btn.active {
+    background: #3b82f6;
+    color: white;
+}
+.rdx-diff-btn:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+}
+.rdx-diff-btn:hover:not(.active) {
+    background: #e2e8f0;
+}
+.rdx-refs-panel {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #93c5fd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+.rdx-refs-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+.rdx-refs-links {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+.rdx-refs-links a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.rdx-refs-links a:hover {
+    text-decoration: underline;
+}
+.rdx-debrief-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rdx-debrief-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #1f2937;
+}
+.rdx-path-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.rdx-path-optimal {
+    background: #dcfce7;
+    border-left: 4px solid #22c55e;
+}
+.rdx-path-suboptimal {
+    background: #fef9c3;
+    border-left: 4px solid #eab308;
+}
+.rdx-path-wrong {
+    background: #fecaca;
+    border-left: 4px solid #ef4444;
+}
+.rdx-hint-beginner {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+.rdx-hint-advanced {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+</style>
+
+<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
+    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
+        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    </div>
+</div>
+
+
+<!-- CROSS-PLATFORM LEARNING LINKS -->
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
+            <a href="../mechanism/eosinophilia-module.html" style="display: block; color: #2563eb; font-size: 14px;">→ Eosinophilia</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
+            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="asthma-exacerbation-expanded-dual-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Asthma Exacerbation Expanded D</a>
+            <a href="allergic-rhinitis-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Allergic Rhinitis</a>
+            <a href="penicillin-delabeling-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Penicillin Delabeling</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
+            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../CoachDx/mentor-chat.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../CoachDx/sbar-trainer.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+<!-- END CROSS-PLATFORM LINKS -->
+<div class="rdx-refs-panel" id="rdxRefsPanel">
+    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
+    <div class="rdx-refs-links"><a href="https://www.aaaai.org/practice-resources/statements-and-practice-parameters" target="_blank" class="text-blue-600 hover:underline">AAAAI Practice Parameters</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK482124/" target="_blank" class="text-blue-600 hover:underline">StatPearls: Anaphylaxis</a></div>
+</div>
+
+<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
+    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+</div>
+
+<script>
+// ReasonDx Enhanced Features Module
+(function() {
+    // Decision tracking
+    window.rdxDecisionPath = window.rdxDecisionPath || [];
+    window.rdxTotalScore = window.rdxTotalScore || 0;
+    window.rdxMaxScore = window.rdxMaxScore || 0;
+    window.rdxDifficulty = 'intermediate';
+    
+    // Difficulty control
+    window.rdxSetDifficulty = function(level) {
+        window.rdxDifficulty = level;
+        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('rdx-btn-' + level).classList.add('active');
+        
+        // Update hint visibility
+        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
+            el.style.display = level === 'beginner' ? 'block' : 'none';
+        });
+        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
+            el.style.display = level === 'advanced' ? 'block' : 'none';
+        });
+    };
+    
+    // Track a decision
+    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+        window.rdxDecisionPath.push({
+            stage: stageId,
+            title: stageTitle,
+            choice: choiceId,
+            choiceText: choiceText,
+            outcome: outcome,
+            points: points,
+            maxPoints: maxPoints,
+            isOptimal: isOptimal,
+            optimalChoice: optimalChoice,
+            optimalText: optimalText
+        });
+        window.rdxTotalScore += points;
+        window.rdxMaxScore += maxPoints;
+    };
+    
+    // Show visual debrief
+    window.rdxShowDebrief = function() {
+        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
+        
+        let grade, gradeColor, gradeEmoji;
+        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
+        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
+        
+        let pathHTML = '';
+        if (window.rdxDecisionPath.length > 0) {
+            pathHTML = window.rdxDecisionPath.map(d => {
+                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
+                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
+                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
+                return '<div class="' + pathClass + ' rdx-path-item">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
+                    '<div>' +
+                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
+                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
+                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
+                    '</div>' +
+                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
+                    '</div></div>';
+            }).join('');
+        } else {
+            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+        }
+        
+        document.getElementById('rdxDebriefContent').innerHTML = 
+            '<div style="text-align:center;margin-bottom:24px;">' +
+            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
+            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
+            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
+            '</div></div>' +
+            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
+            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
+            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
+            '</div></div>' +
+            '<div style="display:flex;gap:12px;">' +
+            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '</div>';
+        
+        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
+    };
+    
+    // Auto-inject hint examples into existing content
+    window.rdxInit = function() {
+        // Could add dynamic hint injection here based on difficulty
+        console.log('ReasonDx Enhanced Features loaded for: Eosinophilia Expanded Adventure');
+    };
+    
+    // Initialize on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.rdxInit);
+    } else {
+        window.rdxInit();
+    }
+})();
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+</body>
+</html>

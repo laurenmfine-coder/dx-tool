@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delirium | Clinical Adventure</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%); min-height: 100vh; color: #e2e8f0; line-height: 1.6; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: rgba(76, 29, 149, 0.9); border-radius: 16px; margin-bottom: 20px; }
+        .badge { padding: 4px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; background: #7c3aed; margin-left: 10px; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #7c3aed, #c4b5fd); border-radius: 3px; }
+        .scene { background: linear-gradient(135deg, #4c1d95, #6d28d9); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+        .scene-header { background: rgba(124, 58, 237, 0.15); padding: 16px 20px; }
+        .scene-phase { font-size: 0.75rem; color: #c4b5fd; text-transform: uppercase; }
+        .scene-title { font-size: 1.4rem; font-weight: 700; }
+        .scene-body { padding: 24px; }
+        .highlight { color: #fbbf24; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(124,58,237,0.2)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
+        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; }
+        .boards-tip { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .boards-tip-title { font-weight: 700; color: #fbbf24; margin-bottom: 10px; }
+        .alert-box { background: rgba(239,68,68,0.2); border: 1px solid rgba(239,68,68,0.5); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .alert-title { font-weight: 700; color: #f87171; margin-bottom: 10px; }
+        .btn { padding: 16px 28px; background: linear-gradient(135deg, #7c3aed, #6d28d9); border: none; border-radius: 12px; color: white; font-weight: 600; cursor: pointer; width: 100%; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+        .comparison-table th { background: rgba(0,0,0,0.3); color: #c4b5fd; }
+        .tips { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+        .pearl, .pitfall { padding: 20px; border-radius: 12px; }
+        .pearl { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); }
+        .pitfall { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); }
+        .tip-header { font-weight: 600; margin-bottom: 10px; }
+        .pearl .tip-header { color: #4ade80; }
+        .pitfall .tip-header { color: #f87171; }
+        @media (max-width: 640px) { .tips { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container" id="app"></div>
+    <script>
+    const STAGES = ['arrival','definition','subtypes','causes','cam','workup','dementia','nonpharm','pharm','debrief'];
+    const state = { stage: 0 };
+    function render() {
+        const p = ((state.stage + 1) / STAGES.length) * 100;
+        let c = `<div class="header"><div style="font-size:1.3rem;font-weight:700">🧠 Delirium<span class="badge">10 STAGES</span></div><div>${state.stage + 1}/${STAGES.length}</div></div><div class="progress-bar"><div class="progress-fill" style="width:${p}%"></div></div>`;
+        c += window['render_' + STAGES[state.stage]]();
+        document.getElementById('app').innerHTML = c;
+    }
+    function nextStage() { state.stage++; render(); }
+
+    window.render_arrival = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 1 of 10</div><div class="scene-title">Acute Confusion</div></div><div class="scene-body"><div class="narrative"><p>An <span class="highlight">82-year-old woman</span> admitted for hip fracture is now <span class="critical">confused, agitated, and pulling at her IV lines</span>. She was oriented yesterday. Family says "this isn't like her."</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 102, BP 158/92, T 100.2°F, RR 20<br><strong>Exam:</strong> Disoriented, inattentive, fluctuating alertness<br><strong>Meds:</strong> Started on oxycodone, diphenhydramine for sleep</p></div><div class="alert-box"><div class="alert-title">🚨 Delirium = Medical Emergency!</div><p>Delirium indicates underlying medical problem. Associated with increased mortality, prolonged hospitalization, and long-term cognitive decline. Find and treat the cause!</p></div><div class="mechanism-box"><div class="mechanism-title">🧬 Key Concept</div><div class="pathway"><strong>Delirium = ACUTE change in attention + cognition</strong><br><br>Not baseline (family confirms)<br>Develops over hours to days<br>Fluctuates throughout the day<br>Has an underlying CAUSE<br><br>Think: "Acute brain failure"</div></div><button class="btn" onclick="nextStage()">Definition →</button></div></div>`;
+    };
+
+    window.render_definition = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 2 of 10</div><div class="scene-title">DSM-5 Criteria</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Delirium Diagnostic Criteria</div><table class="comparison-table"><tr><th>Criterion</th><th>Description</th></tr><tr><td><strong>A</strong></td><td>Disturbance in attention AND awareness</td></tr><tr><td><strong>B</strong></td><td>Develops over SHORT period (hours-days), ACUTE change from baseline, FLUCTUATES</td></tr><tr><td><strong>C</strong></td><td>Additional cognitive disturbance (memory, orientation, language, perception)</td></tr><tr><td><strong>D</strong></td><td>Not explained by pre-existing neurocognitive disorder</td></tr><tr><td><strong>E</strong></td><td>Evidence of underlying medical cause</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Inattention is KEY</div><div class="pathway"><strong>Testing attention:</strong><br>• Digit span (forward/backward)<br>• Days of week/months backward<br>• Serial 7s<br>• Spell WORLD backward<br><br>Inattention = hallmark of delirium<br>(distinguishes from dementia)</div></div><button class="btn" onclick="nextStage()">Subtypes →</button></div></div>`;
+    };
+
+    window.render_subtypes = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 3 of 10</div><div class="scene-title">Delirium Subtypes</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Motor Subtypes</div><table class="comparison-table"><tr><th>Subtype</th><th>Features</th><th>Detection</th></tr><tr><td><strong>Hyperactive</strong></td><td>Agitation, restlessness, pulling lines, combative</td><td>Easy - obvious</td></tr><tr><td><strong>Hypoactive</strong></td><td>Withdrawn, quiet, decreased activity, sleepy</td><td>Often MISSED</td></tr><tr><td><strong>Mixed</strong></td><td>Fluctuates between hyper and hypoactive</td><td>Variable</td></tr></table></div><div class="alert-box"><div class="alert-title">🚨 Hypoactive Delirium is Most Dangerous!</div><p>Often missed because patient is "quiet." Associated with WORSE outcomes than hyperactive. Always assess cognition in quiet, withdrawn patients!</p></div><div class="mechanism-box"><div class="mechanism-title">🧬 Prevalence</div><div class="pathway">Hypoactive: ~45%<br>Mixed: ~35%<br>Hyperactive: ~20%<br><br>Most delirium is NOT agitated!<br>Screen all high-risk patients</div></div><button class="btn" onclick="nextStage()">Causes →</button></div></div>`;
+    };
+
+    window.render_causes = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 4 of 10</div><div class="scene-title">Delirium Causes</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 "I WATCH DEATH" Mnemonic</div><table class="comparison-table"><tr><th>Letter</th><th>Cause</th></tr><tr><td><strong>I</strong></td><td>Infection (UTI, pneumonia, sepsis)</td></tr><tr><td><strong>W</strong></td><td>Withdrawal (alcohol, benzos, opioids)</td></tr><tr><td><strong>A</strong></td><td>Acute metabolic (electrolytes, glucose, uremia)</td></tr><tr><td><strong>T</strong></td><td>Trauma (head injury, pain, surgery)</td></tr><tr><td><strong>C</strong></td><td>CNS pathology (stroke, seizure, bleed)</td></tr><tr><td><strong>H</strong></td><td>Hypoxia</td></tr><tr><td><strong>D</strong></td><td>Deficiencies (B12, thiamine)</td></tr><tr><td><strong>E</strong></td><td>Endocrine (thyroid, adrenal)</td></tr><tr><td><strong>A</strong></td><td>Acute vascular (MI, PE, stroke)</td></tr><tr><td><strong>T</strong></td><td>Toxins/drugs</td></tr><tr><td><strong>H</strong></td><td>Heavy metals</td></tr></table></div><div class="alert-box"><div class="alert-title">⚠️ Medications are Common Culprits!</div><p>Anticholinergics, opioids, benzos, steroids, antihistamines (diphenhydramine!), muscle relaxants. Review med list carefully!</p></div><button class="btn" onclick="nextStage()">CAM Assessment →</button></div></div>`;
+    };
+
+    window.render_cam = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 5 of 10</div><div class="scene-title">CAM Assessment</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Confusion Assessment Method (CAM)</div><table class="comparison-table"><tr><th>Feature</th><th>Assessment</th></tr><tr style="background:rgba(34,197,94,0.2);"><td><strong>1. Acute onset + fluctuating</strong></td><td>Is this different from baseline? Does it come and go?</td></tr><tr style="background:rgba(34,197,94,0.2);"><td><strong>2. Inattention</strong></td><td>Does patient have difficulty focusing? Easily distracted?</td></tr><tr><td><strong>3. Disorganized thinking</strong></td><td>Rambling, illogical, unpredictable?</td></tr><tr><td><strong>4. Altered LOC</strong></td><td>Alert, vigilant, lethargic, stupor, coma?</td></tr></table><p style="margin-top:16px;"><strong>Delirium = Features 1 + 2 + (either 3 OR 4)</strong></p></div><div class="mechanism-box"><div class="mechanism-title">🧬 CAM-ICU for Intubated Patients</div><div class="pathway">Modified CAM for non-verbal patients:<br>• Uses RASS for consciousness<br>• Visual attention tasks<br>• Yes/no questions<br>• Simple commands<br><br>Score RASS first:<br>If -4 or -5 → Cannot assess (coma)<br>If -3 to +4 → Proceed with CAM-ICU</div></div><button class="btn" onclick="nextStage()">Workup →</button></div></div>`;
+    };
+
+    window.render_workup = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 6 of 10</div><div class="scene-title">Diagnostic Workup</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Initial Evaluation</div><table class="comparison-table"><tr><th>Test</th><th>Looking For</th></tr><tr><td><strong>CBC</strong></td><td>Infection, anemia</td></tr><tr><td><strong>BMP</strong></td><td>Electrolytes, glucose, renal function</td></tr><tr><td><strong>Urinalysis</strong></td><td>UTI (but beware asymptomatic bacteriuria!)</td></tr><tr><td><strong>LFTs</strong></td><td>Hepatic encephalopathy</td></tr><tr><td><strong>TSH</strong></td><td>Thyroid dysfunction</td></tr><tr><td><strong>Pulse ox/ABG</strong></td><td>Hypoxia, hypercarbia</td></tr><tr><td><strong>CXR</strong></td><td>Pneumonia</td></tr><tr><td><strong>ECG</strong></td><td>MI, arrhythmia</td></tr><tr><td><strong>Med review</strong></td><td>Offending medications</td></tr></table></div><div class="alert-box"><div class="alert-title">⚠️ Selective Additional Testing</div><p><strong>Consider if indicated:</strong> CT head (focal signs, fall, anticoag), LP (fever + meningeal signs), EEG (seizure concern), B12/folate, ammonia, blood cultures</p></div><button class="btn" onclick="nextStage()">Delirium vs Dementia →</button></div></div>`;
+    };
+
+    window.render_dementia = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 7 of 10</div><div class="scene-title">Delirium vs Dementia</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Key Differences</div><table class="comparison-table"><tr><th>Feature</th><th>Delirium</th><th>Dementia</th></tr><tr><td><strong>Onset</strong></td><td>Acute (hours-days)</td><td>Insidious (months-years)</td></tr><tr><td><strong>Course</strong></td><td>Fluctuating</td><td>Progressive, stable day-to-day</td></tr><tr><td><strong>Attention</strong></td><td>IMPAIRED (hallmark)</td><td>Usually intact early</td></tr><tr><td><strong>Consciousness</strong></td><td>Altered (hyper/hypoalert)</td><td>Alert until late stages</td></tr><tr><td><strong>Reversibility</strong></td><td>Usually reversible</td><td>Generally irreversible</td></tr><tr><td><strong>Cause</strong></td><td>Medical condition</td><td>Neurodegenerative</td></tr></table></div><div class="alert-box"><div class="alert-title">🚨 Delirium Superimposed on Dementia</div><p>Dementia is a RISK FACTOR for delirium! Always compare to baseline. Any acute change in a dementia patient = delirium until proven otherwise.</p></div><button class="btn" onclick="nextStage()">Non-Pharm Treatment →</button></div></div>`;
+    };
+
+    window.render_nonpharm = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 8 of 10</div><div class="scene-title">Non-Pharmacologic Management</div></div><div class="scene-body"><div class="alert-box"><div class="alert-title">🚨 #1 Priority: Treat Underlying Cause!</div><p>Antibiotics for infection, correct electrolytes, stop offending meds, treat pain, etc. Delirium won't resolve until cause is addressed.</p></div><div class="boards-tip"><div class="boards-tip-title">📚 Prevention & Treatment Strategies</div><table class="comparison-table"><tr><th>Domain</th><th>Intervention</th></tr><tr><td><strong>Orientation</strong></td><td>Clocks, calendars, familiar objects, family photos</td></tr><tr><td><strong>Sleep</strong></td><td>Preserve sleep-wake cycle, reduce nighttime interruptions</td></tr><tr><td><strong>Mobility</strong></td><td>Early mobilization, avoid restraints</td></tr><tr><td><strong>Sensory</strong></td><td>Glasses, hearing aids, adequate lighting</td></tr><tr><td><strong>Hydration</strong></td><td>Ensure adequate fluid intake</td></tr><tr><td><strong>Cognition</strong></td><td>Cognitively stimulating activities</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 HELP Program</div><div class="pathway"><strong>Hospital Elder Life Program:</strong><br>Proven to reduce delirium by 30-40%!<br><br>• Daily orientation<br>• Therapeutic activities<br>• Sleep enhancement<br>• Early mobilization<br>• Vision/hearing optimization<br>• Hydration assistance</div></div><button class="btn" onclick="nextStage()">Pharmacologic Treatment →</button></div></div>`;
+    };
+
+    window.render_pharm = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 9 of 10</div><div class="scene-title">Pharmacologic Management</div></div><div class="scene-body"><div class="alert-box"><div class="alert-title">⚠️ Medications are LAST Resort!</div><p>No medication treats delirium itself. Use only for severe agitation endangering patient/staff safety. May prolong delirium!</p></div><div class="boards-tip"><div class="boards-tip-title">📚 Medication Options (If Needed)</div><table class="comparison-table"><tr><th>Agent</th><th>Dose</th><th>Notes</th></tr><tr><td><strong>Haloperidol</strong></td><td>0.5-1 mg PO/IM/IV</td><td>Traditional first-line; QTc risk</td></tr><tr><td><strong>Quetiapine</strong></td><td>12.5-25 mg PO</td><td>Sedating; good for sleep</td></tr><tr><td><strong>Risperidone</strong></td><td>0.25-0.5 mg PO</td><td>Less sedating</td></tr><tr><td><strong>Olanzapine</strong></td><td>2.5-5 mg PO/IM</td><td>More sedating</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Special Situations</div><div class="pathway"><strong>Alcohol/benzo withdrawal:</strong><br>→ Use benzodiazepines (lorazepam)<br><br><strong>Parkinson's/Lewy body:</strong><br>→ AVOID antipsychotics (worsen motor)<br>→ Consider quetiapine if absolutely needed<br><br><strong>QTc prolongation:</strong><br>→ Avoid haloperidol<br>→ Use quetiapine or valproate</div></div><button class="btn" onclick="nextStage()">Debrief →</button></div></div>`;
+    };
+
+    window.render_debrief = function() {
+        return `<div class="scene"><div style="text-align:center;padding:40px;"><div style="font-size:4rem;margin-bottom:12px;">🧠</div><div style="font-size:1.8rem;font-weight:700;color:#4ade80;">Delirium Mastery!</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 High-Yield Summary</div><table class="comparison-table"><tr><th>Concept</th><th>Key Point</th></tr><tr><td>Definition</td><td>Acute change in attention + cognition, fluctuates</td></tr><tr><td>Hallmark</td><td>Inattention (distinguishes from dementia)</td></tr><tr><td>CAM criteria</td><td>Acute + fluctuating + inattention + (disorganized OR altered LOC)</td></tr><tr><td>Most common subtype</td><td>Hypoactive (often missed!)</td></tr><tr><td>Treatment priority</td><td>Find and treat underlying cause</td></tr><tr><td>Medications</td><td>Last resort for severe agitation only</td></tr></table></div><div class="tips"><div class="pearl"><div class="tip-header">✓ Pearls</div><ul style="margin-left:16px;"><li>Hypoactive is most common & missed</li><li>Review medications (anticholinergics!)</li><li>Non-pharm interventions first</li><li>Dementia + acute change = delirium</li></ul></div><div class="pitfall"><div class="tip-header">✗ Pitfalls</div><ul style="margin-left:16px;"><li>Missing hypoactive delirium</li><li>Treating agitation without finding cause</li><li>Benzos (except for withdrawal)</li><li>Antipsychotics in Parkinson's/LBD</li></ul></div></div><button class="btn" onclick="state.stage=0;render()">🔄 Restart Case</button></div></div>`;
+    };
+
+    render();
+    </script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+/* Enhanced Feature Styles */
+.rdx-difficulty-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 300px;
+}
+.rdx-diff-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin: 2px;
+}
+.rdx-diff-btn.active {
+    background: #3b82f6;
+    color: white;
+}
+.rdx-diff-btn:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+}
+.rdx-diff-btn:hover:not(.active) {
+    background: #e2e8f0;
+}
+.rdx-refs-panel {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #93c5fd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+.rdx-refs-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+.rdx-refs-links {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+.rdx-refs-links a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.rdx-refs-links a:hover {
+    text-decoration: underline;
+}
+.rdx-debrief-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rdx-debrief-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #1f2937;
+}
+.rdx-path-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.rdx-path-optimal {
+    background: #dcfce7;
+    border-left: 4px solid #22c55e;
+}
+.rdx-path-suboptimal {
+    background: #fef9c3;
+    border-left: 4px solid #eab308;
+}
+.rdx-path-wrong {
+    background: #fecaca;
+    border-left: 4px solid #ef4444;
+}
+.rdx-hint-beginner {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+.rdx-hint-advanced {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+</style>
+
+<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
+    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
+        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    </div>
+</div>
+
+
+<!-- CROSS-PLATFORM LEARNING LINKS -->
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
+            <a href="../mechanism/neurology-module.html" style="display: block; color: #2563eb; font-size: 14px;">→ Altered Mental Status</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
+            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="tbi-icp-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Tbi Icp</a>
+            <a href="spinal-cord-compression-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Spinal Cord Compression</a>
+            <a href="sah-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Sah</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
+            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../CoachDx/mentor-chat.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../CoachDx/sbar-trainer.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+<!-- END CROSS-PLATFORM LINKS -->
+<div class="rdx-refs-panel" id="rdxRefsPanel">
+    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
+    <div class="rdx-refs-links"><a href="https://www.ahajournals.org/doi/10.1161/STR.0000000000000211" target="_blank" class="text-blue-600 hover:underline">AHA Stroke Guidelines</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK535369/" target="_blank" class="text-blue-600 hover:underline">StatPearls: Stroke</a></div>
+</div>
+
+<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
+    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+</div>
+
+<script>
+// ReasonDx Enhanced Features Module
+(function() {
+    // Decision tracking
+    window.rdxDecisionPath = window.rdxDecisionPath || [];
+    window.rdxTotalScore = window.rdxTotalScore || 0;
+    window.rdxMaxScore = window.rdxMaxScore || 0;
+    window.rdxDifficulty = 'intermediate';
+    
+    // Difficulty control
+    window.rdxSetDifficulty = function(level) {
+        window.rdxDifficulty = level;
+        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('rdx-btn-' + level).classList.add('active');
+        
+        // Update hint visibility
+        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
+            el.style.display = level === 'beginner' ? 'block' : 'none';
+        });
+        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
+            el.style.display = level === 'advanced' ? 'block' : 'none';
+        });
+    };
+    
+    // Track a decision
+    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+        window.rdxDecisionPath.push({
+            stage: stageId,
+            title: stageTitle,
+            choice: choiceId,
+            choiceText: choiceText,
+            outcome: outcome,
+            points: points,
+            maxPoints: maxPoints,
+            isOptimal: isOptimal,
+            optimalChoice: optimalChoice,
+            optimalText: optimalText
+        });
+        window.rdxTotalScore += points;
+        window.rdxMaxScore += maxPoints;
+    };
+    
+    // Show visual debrief
+    window.rdxShowDebrief = function() {
+        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
+        
+        let grade, gradeColor, gradeEmoji;
+        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
+        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
+        
+        let pathHTML = '';
+        if (window.rdxDecisionPath.length > 0) {
+            pathHTML = window.rdxDecisionPath.map(d => {
+                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
+                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
+                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
+                return '<div class="' + pathClass + ' rdx-path-item">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
+                    '<div>' +
+                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
+                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
+                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
+                    '</div>' +
+                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
+                    '</div></div>';
+            }).join('');
+        } else {
+            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+        }
+        
+        document.getElementById('rdxDebriefContent').innerHTML = 
+            '<div style="text-align:center;margin-bottom:24px;">' +
+            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
+            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
+            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
+            '</div></div>' +
+            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
+            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
+            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
+            '</div></div>' +
+            '<div style="display:flex;gap:12px;">' +
+            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '</div>';
+        
+        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
+    };
+    
+    // Auto-inject hint examples into existing content
+    window.rdxInit = function() {
+        // Could add dynamic hint injection here based on difficulty
+        console.log('ReasonDx Enhanced Features loaded for: Delirium Expanded Adventure');
+    };
+    
+    // Initialize on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.rdxInit);
+    } else {
+        window.rdxInit();
+    }
+})();
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+</body>
+</html>

@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sepsis Complete | Clinical Adventure</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 100%); min-height: 100vh; color: #e2e8f0; line-height: 1.6; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: rgba(127, 29, 29, 0.9); border-radius: 16px; margin-bottom: 20px; }
+        .badge { padding: 4px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; background: #dc2626; margin-left: 10px; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #dc2626, #fca5a5); border-radius: 3px; }
+        .scene { background: linear-gradient(135deg, #7f1d1d, #991b1b); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+        .scene-header { background: rgba(220, 38, 38, 0.15); padding: 16px 20px; }
+        .scene-phase { font-size: 0.75rem; color: #fca5a5; text-transform: uppercase; }
+        .scene-title { font-size: 1.4rem; font-weight: 700; }
+        .scene-body { padding: 24px; }
+        .highlight { color: #fbbf24; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .safe { color: #4ade80; font-weight: 600; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(220, 38, 38, 0.2)); border: 1px solid rgba(139, 92, 246, 0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
+        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; }
+        .boards-tip { background: rgba(251, 191, 36, 0.15); border: 1px solid rgba(251, 191, 36, 0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .boards-tip-title { font-weight: 700; color: #fbbf24; margin-bottom: 10px; }
+        .alert-box { background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.5); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .alert-title { font-weight: 700; color: #f87171; margin-bottom: 10px; }
+        .btn { padding: 16px 28px; background: linear-gradient(135deg, #dc2626, #b91c1c); border: none; border-radius: 12px; color: white; font-weight: 600; cursor: pointer; width: 100%; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+        .comparison-table th { background: rgba(0,0,0,0.3); color: #fca5a5; }
+        .why-chain { background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(220, 38, 38, 0.15)); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 16px; padding: 24px; margin: 24px 0; }
+        .why-chain-title { font-size: 1.2rem; font-weight: 700; color: #c4b5fd; margin-bottom: 20px; }
+        .why-item { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 18px; margin-bottom: 14px; }
+        .why-q { font-weight: 600; color: #e9d5ff; margin-bottom: 10px; }
+        .outcome-banner { text-align: center; padding: 40px; }
+        .tips { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+        .pearl, .pitfall { padding: 20px; border-radius: 12px; }
+        .pearl { background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); }
+        .pitfall { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); }
+        .tip-header { font-weight: 600; margin-bottom: 10px; }
+        .pearl .tip-header { color: #4ade80; }
+        .pitfall .tip-header { color: #f87171; }
+        @media (max-width: 640px) { .tips { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container" id="app"></div>
+    <script>
+    const STAGES = [
+        'arrival', 'definitions', 'qsofa_sofa', 'hour1_bundle', 'fluid_resus', 
+        'vasopressors', 'antibiotics', 'source_control', 'lactate', 'steroids',
+        'refractory', 'organ_support', 'deescalation', 'debrief'
+    ];
+    const state = { stage: 0 };
+
+    function render() {
+        const progress = ((state.stage + 1) / STAGES.length) * 100;
+        let c = `<div class="header">
+            <div style="font-size:1.3rem;font-weight:700">🦠 Sepsis Complete<span class="badge">14 STAGES</span></div>
+            <div style="font-size:1.3rem;font-weight:700">${state.stage + 1}/${STAGES.length}</div></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:${progress}%"></div></div>`;
+        
+        switch(STAGES[state.stage]) {
+            case 'arrival': c += renderArrival(); break;
+            case 'definitions': c += renderDefinitions(); break;
+            case 'qsofa_sofa': c += renderScores(); break;
+            case 'hour1_bundle': c += renderBundle(); break;
+            case 'fluid_resus': c += renderFluids(); break;
+            case 'vasopressors': c += renderVasopressors(); break;
+            case 'antibiotics': c += renderAntibiotics(); break;
+            case 'source_control': c += renderSourceControl(); break;
+            case 'lactate': c += renderLactate(); break;
+            case 'steroids': c += renderSteroids(); break;
+            case 'refractory': c += renderRefractory(); break;
+            case 'organ_support': c += renderOrganSupport(); break;
+            case 'deescalation': c += renderDeescalation(); break;
+            case 'debrief': c += renderDebrief(); break;
+        }
+        document.getElementById('app').innerHTML = c;
+    }
+
+    function renderArrival() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 1 of 14</div><div class="scene-title">The Septic Patient</div></div>
+            <div class="scene-body">
+                <div class="narrative"><p>A <span class="highlight">72-year-old woman</span> with DM and COPD presents from nursing home with <span class="critical">confusion, fever, and hypotension</span>.</p>
+                <p style="margin-top:12px;"><strong>Vitals:</strong> T 102.8°F, HR 118, BP 82/54, RR 26, SpO2 91% on RA<br>
+                <strong>Exam:</strong> Confused, dry mucous membranes, decreased breath sounds at right base, suprapubic tenderness<br>
+                <strong>Labs:</strong> WBC 18.5, Cr 2.1 (baseline 1.0), Lactate 4.8</p></div>
+                
+                <div class="alert-box"><div class="alert-title">🚨 Recognize Sepsis Early!</div>
+                    <p>Every hour of delay in antibiotics increases mortality by ~4%. Time to treatment is critical.</p></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Sepsis Pathophysiology Overview</div>
+                    <div class="pathway">Infection triggers immune response<br>→ Cytokine storm (IL-1, IL-6, TNF-α)<br>→ Endothelial dysfunction → capillary leak<br>→ Vasodilation → ↓ SVR → distributive shock<br>→ Microvascular thrombosis → organ dysfunction<br>→ Cellular hypoxia despite adequate O2 delivery</div></div>
+                <button class="btn" onclick="nextStage()">Definitions →</button>
+            </div></div>`;
+    }
+
+    function renderDefinitions() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 2 of 14</div><div class="scene-title">Sepsis-3 Definitions</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 Sepsis-3 (2016) Definitions</div>
+                    <table class="comparison-table">
+                        <tr><th>Term</th><th>Definition</th></tr>
+                        <tr><td><strong>Sepsis</strong></td><td>Life-threatening organ dysfunction caused by dysregulated host response to infection (SOFA ≥2)</td></tr>
+                        <tr><td><strong>Septic Shock</strong></td><td>Sepsis + vasopressors needed for MAP ≥65 despite adequate fluids + lactate >2 mmol/L</td></tr>
+                    </table></div>
+                
+                <div class="alert-box"><div class="alert-title">⚠️ SIRS is Out!</div>
+                    <p>Old SIRS criteria (temp, HR, RR, WBC) were too sensitive and non-specific. Sepsis-3 focuses on organ dysfunction, which better predicts mortality.</p></div>
+                
+                <div class="narrative"><p><strong>This patient:</strong> Infection (likely UTI + possible pneumonia) + organ dysfunction (AKI, altered mental status, hypotension) = <span class="critical">Sepsis</span></p>
+                <p>Needs vasopressors + lactate >2 = <span class="critical">Septic Shock</span></p></div>
+                <button class="btn" onclick="nextStage()">Scoring Systems →</button>
+            </div></div>`;
+    }
+
+    function renderScores() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 3 of 14</div><div class="scene-title">qSOFA and SOFA Scores</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 qSOFA (Quick SOFA) - Screening</div>
+                    <table class="comparison-table">
+                        <tr><th>Criterion</th><th>Points</th><th>Patient</th></tr>
+                        <tr><td>RR ≥22</td><td>1</td><td>1 ✓ (RR 26)</td></tr>
+                        <tr><td>Altered mental status</td><td>1</td><td>1 ✓ (confused)</td></tr>
+                        <tr><td>SBP ≤100</td><td>1</td><td>1 ✓ (SBP 82)</td></tr>
+                    </table>
+                    <p style="margin-top:12px;"><strong>Score ≥2:</strong> High risk, investigate for organ dysfunction</p></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 SOFA Score - Organ Dysfunction</div>
+                    <table class="comparison-table">
+                        <tr><th>System</th><th>Parameter</th><th>0-4 points</th></tr>
+                        <tr><td>Respiratory</td><td>PaO2/FiO2</td><td><400, <300, <200, <100</td></tr>
+                        <tr><td>Coagulation</td><td>Platelets</td><td>>150, <150, <100, <50, <20</td></tr>
+                        <tr><td>Liver</td><td>Bilirubin</td><td><1.2 to >12</td></tr>
+                        <tr><td>Cardiovascular</td><td>MAP/vasopressors</td><td>MAP≥70 to high-dose pressors</td></tr>
+                        <tr><td>CNS</td><td>GCS</td><td>15 to <6</td></tr>
+                        <tr><td>Renal</td><td>Creatinine/UOP</td><td><1.2 to >5 or anuria</td></tr>
+                    </table>
+                    <p style="margin-top:12px;"><strong>SOFA ≥2 = Sepsis</strong> (10% mortality)</p></div>
+                <button class="btn" onclick="nextStage()">Hour-1 Bundle →</button>
+            </div></div>`;
+    }
+
+    function renderBundle() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 4 of 14</div><div class="scene-title">Hour-1 Bundle (2021 Guidelines)</div></div>
+            <div class="scene-body">
+                <div class="alert-box"><div class="alert-title">🚨 Do ALL Within 1 Hour of Recognition</div>
+                    <ol style="margin-left:20px;line-height:2.2;">
+                        <li><strong>Measure lactate</strong> (remeasure if initial >2)</li>
+                        <li><strong>Obtain blood cultures</strong> before antibiotics</li>
+                        <li><strong>Administer broad-spectrum antibiotics</strong></li>
+                        <li><strong>Begin rapid fluid resuscitation</strong> (30 mL/kg crystalloid for hypotension or lactate ≥4)</li>
+                        <li><strong>Apply vasopressors</strong> if hypotensive during/after fluids (target MAP ≥65)</li>
+                    </ol></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Why 1 Hour?</div>
+                    <div class="pathway">Kumar et al. (2006): Each hour delay in abx<br>→ ~7.6% increase in mortality<br><br>Seymour et al. (2017): Faster bundle completion<br>→ Lower risk-adjusted mortality<br><br>Golden hour concept applies to sepsis!</div></div>
+                
+                <div class="narrative"><p><strong>This patient:</strong> Lactate drawn ✓, cultures sent ✓, antibiotics ordered ✓, fluids started ✓</p></div>
+                <button class="btn" onclick="nextStage()">Fluid Resuscitation →</button>
+            </div></div>`;
+    }
+
+    function renderFluids() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 5 of 14</div><div class="scene-title">Fluid Resuscitation</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 Initial Fluid Bolus</div>
+                    <ul style="margin-left:20px;line-height:2;">
+                        <li><strong>30 mL/kg</strong> crystalloid within first 3 hours</li>
+                        <li>For 70 kg patient = 2.1 liters</li>
+                        <li><strong>Balanced crystalloids preferred</strong> (LR, Plasmalyte)</li>
+                        <li>NS acceptable but risk of hyperchloremic acidosis</li>
+                    </ul></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Why Balanced Crystalloids?</div>
+                    <div class="pathway">Normal saline: 154 mEq/L chloride (plasma ~100)<br>→ Large volumes → hyperchloremic acidosis<br>→ Renal vasoconstriction → ↓ GFR<br><br>SMART trial: Balanced crystalloids<br>→ ↓ Major adverse kidney events<br>→ ↓ Mortality in sepsis subgroup</div></div>
+                
+                <div class="alert-box"><div class="alert-title">⚠️ Fluid Responsiveness</div>
+                    <p>After initial bolus, assess if patient is fluid responsive before giving more:</p>
+                    <ul style="margin-left:20px;">
+                        <li>Passive leg raise test</li>
+                        <li>Pulse pressure variation (if mechanically ventilated)</li>
+                        <li>Bedside echo (IVC variability, cardiac output)</li>
+                    </ul>
+                    <p style="margin-top:8px;"><strong>Avoid fluid overload!</strong> Associated with worse outcomes.</p></div>
+                <button class="btn" onclick="nextStage()">Vasopressors →</button>
+            </div></div>`;
+    }
+
+    function renderVasopressors() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 6 of 14</div><div class="scene-title">Vasopressor Selection</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 Vasopressor Hierarchy</div>
+                    <table class="comparison-table">
+                        <tr><th>Line</th><th>Drug</th><th>Mechanism</th><th>Notes</th></tr>
+                        <tr style="background:rgba(34,197,94,0.2);"><td><strong>1st</strong></td><td>Norepinephrine</td><td>α1 >> β1</td><td>↑ SVR, some inotropy</td></tr>
+                        <tr><td><strong>2nd</strong></td><td>Vasopressin</td><td>V1 receptor</td><td>Add if NE 0.25-0.5 mcg/kg/min</td></tr>
+                        <tr><td><strong>3rd</strong></td><td>Epinephrine</td><td>α1, β1, β2</td><td>Add for cardiac dysfunction</td></tr>
+                        <tr><td>Alt</td><td>Dopamine</td><td>Dose-dependent</td><td>More arrhythmias, avoid if possible</td></tr>
+                    </table></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Why Norepinephrine First?</div>
+                    <div class="pathway">Septic shock = distributive (↓↓ SVR)<br>→ Need vasoconstriction primarily<br><br>Norepinephrine:<br>• Strong α1 agonist → ↑ SVR<br>• Some β1 → maintains cardiac output<br>• Less tachycardia than dopamine<br>• Fewer arrhythmias than dopamine</div></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 Vasopressin Rationale</div>
+                    <ul style="margin-left:20px;line-height:1.8;">
+                        <li>Endogenous vasopressin depleted in septic shock</li>
+                        <li>Acts on V1 receptors (different than catecholamines)</li>
+                        <li>Fixed dose: 0.03-0.04 units/min (not titrated)</li>
+                        <li>Allows lower NE dose → less ischemic complications</li>
+                    </ul></div>
+                <button class="btn" onclick="nextStage()">Antibiotics →</button>
+            </div></div>`;
+    }
+
+    function renderAntibiotics() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 7 of 14</div><div class="scene-title">Empiric Antibiotics</div></div>
+            <div class="scene-body">
+                <div class="alert-box"><div class="alert-title">🚨 Broad Spectrum Initially</div>
+                    <p>Cover all likely pathogens. Can narrow once cultures return.</p></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 Common Regimens</div>
+                    <table class="comparison-table">
+                        <tr><th>Source</th><th>Empiric Coverage</th></tr>
+                        <tr><td>Unknown/undifferentiated</td><td>Vanc + Pip-tazo (or meropenem)</td></tr>
+                        <tr><td>Pneumonia (CAP)</td><td>Ceftriaxone + azithromycin (or FQ)</td></tr>
+                        <tr><td>Pneumonia (HAP/VAP)</td><td>Vanc + pip-tazo + consider aminoglycoside</td></tr>
+                        <tr><td>UTI/urosepsis</td><td>Ceftriaxone or pip-tazo (+ vanc if concern MRSA)</td></tr>
+                        <tr><td>Intra-abdominal</td><td>Pip-tazo or meropenem (anaerobic coverage)</td></tr>
+                        <tr><td>Skin/soft tissue</td><td>Vanc + pip-tazo (cover MRSA + GNR + anaerobes)</td></tr>
+                    </table></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Why Cultures Before Antibiotics?</div>
+                    <div class="pathway">Blood cultures positive in ~30% of sepsis<br>→ Guides de-escalation<br>→ Identifies resistance patterns<br><br>BUT: Don't delay antibiotics for cultures!<br>If cultures will take >45 min → give abx first<br>Cultures still useful even after 1-2 doses</div></div>
+                
+                <div class="narrative"><p><strong>This patient:</strong> Likely UTI + possible pneumonia → Vancomycin + Piperacillin-tazobactam</p></div>
+                <button class="btn" onclick="nextStage()">Source Control →</button>
+            </div></div>`;
+    }
+
+    function renderSourceControl() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 8 of 14</div><div class="scene-title">Source Control</div></div>
+            <div class="scene-body">
+                <div class="alert-box"><div class="alert-title">🚨 Antibiotics Alone May Not Be Enough!</div>
+                    <p>If there's a drainable/removable source, intervene within 6-12 hours.</p></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 Source Control Interventions</div>
+                    <table class="comparison-table">
+                        <tr><th>Source</th><th>Intervention</th></tr>
+                        <tr><td>Abscess</td><td>Percutaneous or surgical drainage</td></tr>
+                        <tr><td>Cholangitis</td><td>ERCP with stent/sphincterotomy</td></tr>
+                        <tr><td>Cholecystitis</td><td>Cholecystectomy or perc cholecystostomy</td></tr>
+                        <tr><td>Necrotizing fasciitis</td><td>Emergent surgical debridement</td></tr>
+                        <tr><td>Infected catheter</td><td>Remove the line!</td></tr>
+                        <tr><td>Obstructed UTI</td><td>Foley or nephrostomy tube</td></tr>
+                        <tr><td>Perforated viscus</td><td>Surgery</td></tr>
+                    </table></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Why Source Control Matters</div>
+                    <div class="pathway">Antibiotics can't penetrate:<br>• Abscess cavities (no blood flow)<br>• Necrotic tissue<br>• Biofilm on devices<br><br>Must physically remove/drain the nidus<br>of infection for antibiotics to work</div></div>
+                
+                <div class="narrative"><p><strong>This patient:</strong> Foley catheter exchanged (potential source). CT abdomen ordered to rule out abscess.</p></div>
+                <button class="btn" onclick="nextStage()">Lactate Monitoring →</button>
+            </div></div>`;
+    }
+
+    function renderLactate() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 9 of 14</div><div class="scene-title">Lactate-Guided Resuscitation</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 Lactate in Sepsis</div>
+                    <ul style="margin-left:20px;line-height:2;">
+                        <li><strong>Lactate ≥4 mmol/L</strong> = severe tissue hypoperfusion</li>
+                        <li>Higher lactate = higher mortality</li>
+                        <li>Goal: <strong>Normalize lactate</strong> or ↓ by ≥10% every 2 hours</li>
+                        <li>Lactate clearance predicts survival</li>
+                    </ul></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Why is Lactate Elevated?</div>
+                    <div class="pathway"><strong>Type A (hypoxic):</strong><br>Tissue hypoperfusion → anaerobic metabolism<br>→ Pyruvate shunted to lactate<br><br><strong>Type B (non-hypoxic):</strong><br>• Catecholamine-driven aerobic glycolysis<br>• Impaired lactate clearance (liver)<br>• Mitochondrial dysfunction<br>• Medications (metformin, epinephrine)</div></div>
+                
+                <div class="narrative"><p><strong>This patient:</strong> Initial lactate 4.8 → After 2L fluids and NE: lactate 3.6 (25% clearance ✓)</p></div>
+                
+                <div class="alert-box"><div class="alert-title">📊 Lactate Clearance vs ScvO2</div>
+                    <p>ANDROMEDA-SHOCK (2019): Lactate-guided resuscitation was non-inferior to ScvO2-guided, with trend toward better outcomes. Lactate is simpler and doesn't require central line.</p></div>
+                <button class="btn" onclick="nextStage()">Steroids →</button>
+            </div></div>`;
+    }
+
+    function renderSteroids() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 10 of 14</div><div class="scene-title">Corticosteroids in Septic Shock</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 When to Use Steroids</div>
+                    <ul style="margin-left:20px;line-height:2;">
+                        <li><strong>Refractory shock:</strong> Vasopressors escalating or not responding</li>
+                        <li>Surviving Sepsis 2021: Consider if ongoing vasopressor requirement</li>
+                        <li><strong>Hydrocortisone 200mg/day</strong> (50mg q6h or 200mg continuous)</li>
+                        <li>Continue until vasopressors discontinued</li>
+                    </ul></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Why Steroids Help</div>
+                    <div class="pathway">Critical illness-related corticosteroid insufficiency:<br>• Adrenal reserve exhausted<br>• Tissue resistance to cortisol<br><br>Hydrocortisone:<br>• Restores vascular tone (↑ catecholamine sensitivity)<br>• Reduces inflammation<br>• Speeds shock reversal<br>• May not reduce mortality but faster resolution</div></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 Key Trials</div>
+                    <table class="comparison-table">
+                        <tr><th>Trial</th><th>Finding</th></tr>
+                        <tr><td>CORTICUS</td><td>No mortality benefit; faster shock reversal</td></tr>
+                        <tr><td>ADRENAL</td><td>No 90-day mortality benefit</td></tr>
+                        <tr><td>APROCCHSS</td><td>↓ 90-day mortality with hydro + fludrocortisone</td></tr>
+                    </table>
+                    <p style="margin-top:8px;">Evidence mixed, but generally recommended for refractory shock.</p></div>
+                <button class="btn" onclick="nextStage()">Refractory Shock →</button>
+            </div></div>`;
+    }
+
+    function renderRefractory() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 11 of 14</div><div class="scene-title">Refractory Septic Shock</div></div>
+            <div class="scene-body">
+                <div class="alert-box"><div class="alert-title">🚨 Not Responding to Standard Therapy?</div>
+                    <p>Re-evaluate: Is the diagnosis correct? Is source controlled? Is antibiotic coverage adequate?</p></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 Differential for Refractory Shock</div>
+                    <ul style="margin-left:20px;line-height:1.8;">
+                        <li><strong>Uncontrolled source</strong> - undrained abscess, missed perforation</li>
+                        <li><strong>Wrong antibiotics</strong> - resistant organism, fungal, viral</li>
+                        <li><strong>Adrenal insufficiency</strong> - give stress-dose steroids</li>
+                        <li><strong>Cardiac dysfunction</strong> - septic cardiomyopathy</li>
+                        <li><strong>Occult bleeding</strong></li>
+                        <li><strong>Concomitant PE or MI</strong></li>
+                    </ul></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Septic Cardiomyopathy</div>
+                    <div class="pathway">~40% of septic shock patients develop LV dysfunction<br>→ Cytokines depress myocardial contractility<br>→ May need inotrope (dobutamine, epinephrine)<br>→ Bedside echo crucial for assessment<br>→ Usually reversible if patient survives</div></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 Salvage Therapies</div>
+                    <ul style="margin-left:20px;line-height:1.8;">
+                        <li>Add epinephrine for cardiac dysfunction</li>
+                        <li>Methylene blue (nitric oxide scavenger)</li>
+                        <li>Angiotensin II (Giapreza)</li>
+                        <li>ECMO (VA-ECMO for cardiac, VV-ECMO for respiratory)</li>
+                    </ul></div>
+                <button class="btn" onclick="nextStage()">Organ Support →</button>
+            </div></div>`;
+    }
+
+    function renderOrganSupport() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 12 of 14</div><div class="scene-title">Multi-Organ Support</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 Organ-Specific Support</div>
+                    <table class="comparison-table">
+                        <tr><th>Organ</th><th>Dysfunction</th><th>Support</th></tr>
+                        <tr><td>Lungs</td><td>ARDS</td><td>Lung-protective ventilation (6 mL/kg, Pplat <30)</td></tr>
+                        <tr><td>Kidneys</td><td>AKI</td><td>RRT if indicated (not prophylactic)</td></tr>
+                        <tr><td>Blood</td><td>Anemia, coagulopathy</td><td>Transfuse Hgb <7 (unless bleeding/ischemia)</td></tr>
+                        <tr><td>GI</td><td>Ileus, stress ulcers</td><td>PPI/H2 blocker for GI prophylaxis</td></tr>
+                        <tr><td>Neuro</td><td>Encephalopathy</td><td>Avoid deliriogenic meds, early mobilization</td></tr>
+                    </table></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 ARDS Ventilation</div>
+                    <div class="pathway">ARDSNet protocol:<br>• Tidal volume: 6 mL/kg IBW (not actual weight)<br>• Plateau pressure: <30 cm H2O<br>• PEEP per FiO2 table<br>• Permissive hypercapnia acceptable<br>• Prone positioning if P/F <150</div></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 Blood Transfusion in Sepsis</div>
+                    <p><strong>TRICC and TRISS trials:</strong> Restrictive strategy (Hgb <7) is safe and may be better than liberal (Hgb <10). Exception: active bleeding, acute coronary syndrome.</p></div>
+                <button class="btn" onclick="nextStage()">De-escalation →</button>
+            </div></div>`;
+    }
+
+    function renderDeescalation() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 13 of 14</div><div class="scene-title">Antibiotic De-escalation</div></div>
+            <div class="scene-body">
+                <div class="boards-tip"><div class="boards-tip-title">📚 When to Narrow Antibiotics</div>
+                    <ul style="margin-left:20px;line-height:2;">
+                        <li>Culture results available (usually 48-72h)</li>
+                        <li>Clinical improvement noted</li>
+                        <li>Source controlled</li>
+                        <li>Procalcitonin trending down</li>
+                    </ul></div>
+                
+                <div class="mechanism-box"><div class="mechanism-title">🧬 Procalcitonin-Guided Therapy</div>
+                    <div class="pathway">Procalcitonin: Marker of bacterial infection<br>• Rises within 6-12h of bacterial infection<br>• Falls rapidly with treatment (half-life ~24h)<br>• Can guide antibiotic duration<br><br>Stop antibiotics when PCT <0.5 or ↓80%<br>→ Reduces antibiotic exposure<br>→ No increase in mortality (ProACT, SAPS)</div></div>
+                
+                <div class="boards-tip"><div class="boards-tip-title">📚 Duration of Therapy</div>
+                    <table class="comparison-table">
+                        <tr><th>Source</th><th>Typical Duration</th></tr>
+                        <tr><td>Uncomplicated bacteremia</td><td>7-14 days</td></tr>
+                        <tr><td>Pneumonia</td><td>5-7 days</td></tr>
+                        <tr><td>UTI/pyelonephritis</td><td>7-10 days</td></tr>
+                        <tr><td>Intra-abdominal (source controlled)</td><td>4-7 days</td></tr>
+                        <tr><td>Skin/soft tissue</td><td>5-10 days</td></tr>
+                    </table>
+                    <p style="margin-top:8px;">Shorter courses often adequate if good source control and clinical response.</p></div>
+                <button class="btn" onclick="nextStage()">Complete →</button>
+            </div></div>`;
+    }
+
+    function renderDebrief() {
+        return `<div class="outcome-banner">
+            <div style="font-size:5rem">🏆</div>
+            <div style="font-size:2rem;font-weight:700;color:#4ade80;">Case Complete!</div>
+            <div style="color:#94a3b8;margin-top:8px;">Septic Shock → Rapid Resuscitation → Source Control → Recovery</div>
+        </div>
+        
+        <div class="why-chain"><div class="why-chain-title">🔗 Key WHY Chains</div>
+            <div class="why-item"><div class="why-q">Why norepinephrine over dopamine?</div>
+                <div class="why-a">Septic shock is primarily distributive (low SVR). NE provides potent α1 vasoconstriction to restore vascular tone. Dopamine causes more tachycardia and arrhythmias (SOAP II trial showed higher mortality with dopamine).</div></div>
+            <div class="why-item"><div class="why-q">Why is lactate clearance important?</div>
+                <div class="why-a">Lactate reflects tissue hypoperfusion. Clearance indicates improving oxygen delivery and utilization. Failure to clear lactate despite resuscitation suggests ongoing shock, inadequate source control, or wrong antibiotics.</div></div>
+            <div class="why-item"><div class="why-q">Why balanced crystalloids over NS?</div>
+                <div class="why-a">Large-volume NS causes hyperchloremic metabolic acidosis. High chloride causes renal vasoconstriction, reducing GFR. SMART trial showed balanced crystalloids reduced composite of death, new RRT, and persistent renal dysfunction.</div></div>
+            <div class="why-item"><div class="why-q">Why don't steroids always improve mortality?</div>
+                <div class="why-a">Steroids help reverse shock faster but may have trade-offs (hyperglycemia, weakness, immunosuppression). They restore catecholamine sensitivity and reduce inflammation, but the underlying infection and organ damage determine survival.</div></div>
+        </div>
+        
+        <div class="tips">
+            <div class="pearl"><div class="tip-header">💎 Pearl</div>
+                <p><strong>Lactate can be elevated without hypoperfusion</strong> (Type B). Epinephrine infusion, metformin, liver failure, and thiamine deficiency all raise lactate. Don't chase a number—treat the patient.</p></div>
+            <div class="pitfall"><div class="tip-header">⚠️ Pitfall</div>
+                <p><strong>Don't delay vasopressors waiting for fluid resuscitation to "finish."</strong> Start NE early if MAP <65 despite initial fluids. Peripheral NE is safe short-term while getting central access.</p></div>
+        </div>
+        
+        <div class="tips">
+            <div class="pearl"><div class="tip-header">💎 Pearl</div>
+                <p><strong>Source control is the most important intervention</strong> after antibiotics. An undrained abscess or retained infected catheter will lead to treatment failure regardless of antibiotics.</p></div>
+            <div class="pitfall"><div class="tip-header">⚠️ Pitfall</div>
+                <p><strong>Don't give too much fluid.</strong> After initial 30 mL/kg, reassess responsiveness. Fluid overload is associated with increased mortality, prolonged ventilation, and AKI.</p></div>
+        </div>
+        
+        <button class="btn" onclick="location.reload()">🔄 Restart Case</button>`;
+    }
+
+    function nextStage() { 
+        if (state.stage < STAGES.length - 1) {
+            state.stage++; 
+            render(); 
+            window.scrollTo(0, 0);
+        }
+    }
+    
+    render();
+    </script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+/* Enhanced Feature Styles */
+.rdx-difficulty-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 300px;
+}
+.rdx-diff-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin: 2px;
+}
+.rdx-diff-btn.active {
+    background: #3b82f6;
+    color: white;
+}
+.rdx-diff-btn:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+}
+.rdx-diff-btn:hover:not(.active) {
+    background: #e2e8f0;
+}
+.rdx-refs-panel {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #93c5fd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+.rdx-refs-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+.rdx-refs-links {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+.rdx-refs-links a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.rdx-refs-links a:hover {
+    text-decoration: underline;
+}
+.rdx-debrief-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rdx-debrief-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #1f2937;
+}
+.rdx-path-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.rdx-path-optimal {
+    background: #dcfce7;
+    border-left: 4px solid #22c55e;
+}
+.rdx-path-suboptimal {
+    background: #fef9c3;
+    border-left: 4px solid #eab308;
+}
+.rdx-path-wrong {
+    background: #fecaca;
+    border-left: 4px solid #ef4444;
+}
+.rdx-hint-beginner {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+.rdx-hint-advanced {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+</style>
+
+<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
+    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
+        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    </div>
+</div>
+
+
+<!-- CROSS-PLATFORM LEARNING LINKS -->
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
+            <a href="../mechanism/sepsis-shock-module.html" style="display: block; color: #2563eb; font-size: 14px;">→ Sepsis</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
+            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="neutropenic-fever-expanded-dual-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Neutropenic Fever Expanded Dua</a>
+            <a href="shock-expanded-dual-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Shock Expanded Dual</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
+            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../CoachDx/mentor-chat.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../CoachDx/sbar-trainer.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+<!-- END CROSS-PLATFORM LINKS -->
+<div class="rdx-refs-panel" id="rdxRefsPanel">
+    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
+    <div class="rdx-refs-links"><a href="https://www.sccm.org/SurvivingSepsisCampaign/Guidelines" target="_blank" class="text-blue-600 hover:underline">Surviving Sepsis Campaign 2021</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK507824/" target="_blank" class="text-blue-600 hover:underline">StatPearls: Sepsis</a></div>
+</div>
+
+<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
+    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+</div>
+
+<script>
+// ReasonDx Enhanced Features Module
+(function() {
+    // Decision tracking
+    window.rdxDecisionPath = window.rdxDecisionPath || [];
+    window.rdxTotalScore = window.rdxTotalScore || 0;
+    window.rdxMaxScore = window.rdxMaxScore || 0;
+    window.rdxDifficulty = 'intermediate';
+    
+    // Difficulty control
+    window.rdxSetDifficulty = function(level) {
+        window.rdxDifficulty = level;
+        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('rdx-btn-' + level).classList.add('active');
+        
+        // Update hint visibility
+        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
+            el.style.display = level === 'beginner' ? 'block' : 'none';
+        });
+        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
+            el.style.display = level === 'advanced' ? 'block' : 'none';
+        });
+    };
+    
+    // Track a decision
+    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+        window.rdxDecisionPath.push({
+            stage: stageId,
+            title: stageTitle,
+            choice: choiceId,
+            choiceText: choiceText,
+            outcome: outcome,
+            points: points,
+            maxPoints: maxPoints,
+            isOptimal: isOptimal,
+            optimalChoice: optimalChoice,
+            optimalText: optimalText
+        });
+        window.rdxTotalScore += points;
+        window.rdxMaxScore += maxPoints;
+    };
+    
+    // Show visual debrief
+    window.rdxShowDebrief = function() {
+        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
+        
+        let grade, gradeColor, gradeEmoji;
+        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
+        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
+        
+        let pathHTML = '';
+        if (window.rdxDecisionPath.length > 0) {
+            pathHTML = window.rdxDecisionPath.map(d => {
+                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
+                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
+                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
+                return '<div class="' + pathClass + ' rdx-path-item">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
+                    '<div>' +
+                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
+                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
+                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
+                    '</div>' +
+                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
+                    '</div></div>';
+            }).join('');
+        } else {
+            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+        }
+        
+        document.getElementById('rdxDebriefContent').innerHTML = 
+            '<div style="text-align:center;margin-bottom:24px;">' +
+            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
+            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
+            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
+            '</div></div>' +
+            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
+            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
+            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
+            '</div></div>' +
+            '<div style="display:flex;gap:12px;">' +
+            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '</div>';
+        
+        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
+    };
+    
+    // Auto-inject hint examples into existing content
+    window.rdxInit = function() {
+        // Could add dynamic hint injection here based on difficulty
+        console.log('ReasonDx Enhanced Features loaded for: Sepsis Expanded Adventure');
+    };
+    
+    // Initialize on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.rdxInit);
+    } else {
+        window.rdxInit();
+    }
+})();
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+</body>
+</html>

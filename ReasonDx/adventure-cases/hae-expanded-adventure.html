@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hereditary Angioedema - Expanded Deep Dive Adventure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .stage-card { transition: all 0.3s ease; }
+        .why-chain { background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); }
+        .mechanism-box { background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); }
+        .pearl-box { background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%); }
+        .pitfall-box { background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%); }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-violet-50 min-h-screen">
+    <div id="app" class="container mx-auto px-4 py-8 max-w-5xl">
+        <div class="bg-white rounded-2xl shadow-lg p-6 mb-6">
+            <div class="flex items-center justify-between flex-wrap gap-4">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-800">🧬 Hereditary Angioedema</h1>
+                    <p class="text-gray-500 mt-1">Expanded Deep Dive Adventure • 10 Stages</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="text-right">
+                        <div class="text-sm text-gray-500">Progress</div>
+                        <div class="text-2xl font-bold text-violet-600" id="score">0%</div>
+                    </div>
+                    <button onclick="resetGame()" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium">🔄 Restart</button>
+                </div>
+            </div>
+            <div class="mt-4 h-3 bg-gray-100 rounded-full overflow-hidden">
+                <div id="progressBar" class="h-full bg-gradient-to-r from-violet-500 to-purple-500 transition-all duration-500" style="width: 0%"></div>
+            </div>
+        </div>
+        <div id="gameContainer" class="space-y-6"></div>
+        <div id="summaryPanel" class="hidden"></div>
+    </div>
+    <script>
+const caseData = {
+    title: "Hereditary Angioedema",
+    totalStages: 10,
+    stages: [
+        {
+            id: 1,
+            title: "The Recurrent Swelling Patient",
+            scenario: "A 24-year-old woman presents with a 2-day history of progressive facial swelling without urticaria. She describes similar episodes occurring 1-2 times monthly since age 16.\n\nKey history:\n• Episodes involve face, hands, feet, and sometimes abdomen\n• Swelling peaks over 24-36 hours, resolves in 3-5 days\n• NO HIVES ever accompany swelling\n• No clear trigger identified\n• Antihistamines and steroids 'don't really help'\n• Family: Mother and maternal uncle have 'the same thing'\n\nCurrent episode:\n• Right-sided facial swelling x 2 days\n• Mild abdominal cramping\n• No difficulty breathing or swallowing currently\n• No urticaria on exam",
+            question: "What is the most likely diagnosis?",
+            options: [
+                { id: "A", text: "Allergic angioedema - recurrent episodes suggest chronic allergen exposure", outcome: "Misses key features", feedback: "Allergic angioedema would have accompanying urticaria in >90% of cases and responds to antihistamines/steroids. Her swelling is WITHOUT hives, doesn't respond to antihistamines, and has a strong family history - classic HAE.", points: 2, isOptimal: false },
+                { id: "B", text: "Hereditary angioedema (HAE) - recurrent angioedema without urticaria, family history, steroid/antihistamine-refractory", outcome: "Correct diagnosis", feedback: "Excellent! This is classic HAE: recurrent angioedema WITHOUT urticaria, positive family history (autosomal dominant), onset in adolescence, antihistamine/steroid-refractory, prolonged attack duration (2-5 days). The abdominal symptoms are also characteristic.", points: 10, isOptimal: true },
+                { id: "C", text: "ACE inhibitor-induced angioedema", outcome: "No ACE inhibitor exposure mentioned", feedback: "ACE inhibitor angioedema can present similarly (bradykinin-mediated, no urticaria) but requires ACE inhibitor use. There's no mention of any medications. Her family history strongly suggests inherited condition.", points: 3, isOptimal: false },
+                { id: "D", text: "Idiopathic angioedema - no clear cause identified", outcome: "Ignores distinctive features", feedback: "Idiopathic angioedema is a diagnosis of exclusion. Her presentation is NOT idiopathic - it has characteristic HAE features: family history, no urticaria, antihistamine-refractory, prolonged duration. Always consider HAE before labeling angioedema as idiopathic.", points: 4, isOptimal: false }
+            ],
+            whyChain: { title: "WHY is the absence of urticaria so important?", steps: ["Histamine-mediated angioedema (allergic/CSU) almost always includes urticaria (>90%)", "Bradykinin-mediated angioedema (HAE, ACEi) does NOT cause urticaria", "This distinction immediately narrows the differential", "Absence of urticaria predicts poor response to antihistamines/steroids/epinephrine", "Different mechanism = different treatment required"] },
+            mechanism: { title: "HAE Clinical Clues", content: "CLASSIC HAE PRESENTATION:\n• Recurrent angioedema WITHOUT urticaria\n• Family history (autosomal dominant, but 25% new mutations)\n• Onset in childhood/adolescence (typically before age 20)\n• Episodes last 2-5 days (longer than allergic)\n• Prodrome: tingling, fatigue, erythema marginatum\n• Antihistamines, steroids, epinephrine DON'T WORK\n\nCOMMON ATTACK SITES:\n• Face (lips, eyelids, tongue)\n• Extremities (hands, feet, genitals)\n• Abdomen (can mimic acute abdomen!)\n• Larynx (potentially fatal - 25% lifetime risk)\n\nTRIGGERS:\n• Trauma (dental procedures!)\n• Stress, anxiety\n• Infections\n• Hormonal changes (menses, pregnancy)\n• ACE inhibitors (avoid in HAE!)\n• Estrogen (OCPs can worsen)\n\nRED FLAG FOR HAE:\n'Angioedema without urticaria that doesn't respond to typical treatments'" },
+            pearl: "The rule of H's: HAE = 'Hives-less, Histamine-independent, Hereditary, antiHistamine-refractory.' If angioedema has no hives and doesn't respond to antihistamines, think bradykinin.",
+            pitfall: "Don't assume young patients have allergies. HAE typically presents in childhood/adolescence. Ask specifically about family history of 'swelling' - family members may not have formal diagnosis."
+        },
+        {
+            id: 2,
+            title: "Diagnostic Workup",
+            scenario: "You suspect HAE. The patient is currently stable (facial swelling, no airway involvement).\n\nHer mother 'takes some medication for swelling' but doesn't know the details. Uncle had 'swelling episodes' and 'almost died once from throat swelling.'",
+            question: "What is the best initial diagnostic test for suspected HAE?",
+            options: [
+                { id: "A", text: "Skin prick testing for allergens", outcome: "Won't diagnose HAE", feedback: "Skin testing evaluates IgE-mediated allergy, not bradykinin-mediated HAE. Her presentation is NOT allergic. Wrong diagnostic pathway.", points: 0, isOptimal: false },
+                { id: "B", text: "C4 level (complement component 4)", outcome: "Best screening test", feedback: "Correct! C4 is the best screening test for HAE - it's LOW in >95% of HAE patients even BETWEEN attacks. It's inexpensive, widely available, and highly sensitive. If C4 is low, proceed to C1-INH level and function.", points: 10, isOptimal: true },
+                { id: "C", text: "Genetic testing for SERPING1 mutations", outcome: "Confirmatory, not first-line", feedback: "Genetic testing can confirm HAE and identify the specific mutation, but it's expensive and takes weeks. C4 is faster, cheaper, and usually diagnostic. Genetics are for confirmation or research.", points: 4, isOptimal: false },
+                { id: "D", text: "Tryptase level to rule out mast cell disease", outcome: "Not the priority here", feedback: "Tryptase evaluates mast cell activation. HAE is NOT mast cell-mediated. Tryptase would be normal in HAE. While excluding mastocytosis is reasonable, C4 specifically evaluates for HAE.", points: 2, isOptimal: false }
+            ],
+            whyChain: { title: "WHY is C4 the best screen?", steps: ["C1-INH normally inhibits activated complement (C1r, C1s)", "When C1-INH is deficient/dysfunctional, complement activates uncontrolled", "This consumes C4 (and C2) continuously", "C4 is LOW in >95% of HAE patients even when asymptomatic", "Normal C4 essentially rules out Types 1 and 2 HAE"] },
+            mechanism: { title: "HAE Diagnostic Algorithm", content: "STEP 1: SCREEN WITH C4\n• LOW C4: Proceed to C1-INH testing\n• NORMAL C4: HAE Type 1/2 very unlikely (>95% sensitive)\n  - Consider Type 3 HAE or other diagnosis\n\nSTEP 2: C1-INH LEVEL AND FUNCTION\n• C1-INH Level (antigenic)\n• C1-INH Function (chromogenic or ELISA assay)\n\nINTERPRETATION:\n\nHAE Type 1 (85% of cases):\n• C4: Low\n• C1-INH level: LOW (<50% normal)\n• C1-INH function: LOW\n\nHAE Type 2 (15% of cases):\n• C4: Low\n• C1-INH level: NORMAL or HIGH\n• C1-INH function: LOW\n\nHAE with normal C1-INH (Type 3, rare):\n• C4: Usually normal\n• C1-INH: Normal level AND function\n• Often Factor XII or other mutations\n• Harder to diagnose\n\nAcquired Angioedema (AAE):\n• C4: Low\n• C1-INH: Low level and function\n• C1q: LOW (distinguishes from HAE)\n• Often associated with lymphoproliferative disorders" },
+            pearl: "C4 is LOW even between attacks in HAE. You don't need to test during an active episode. A normal C4 in a well patient effectively rules out HAE Types 1 and 2.",
+            pitfall: "Don't just order 'C1-INH level' without function. Type 2 HAE has normal or high C1-INH protein but dysfunctional enzyme. You'll miss 15% of HAE if you only check the level."
+        },
+        {
+            id: 3,
+            title: "Test Results",
+            scenario: "Lab results return:\n\n• C4: 8 mg/dL (normal 14-40) - LOW\n• C1-INH level: 12 mg/dL (normal 21-39) - LOW\n• C1-INH function: 25% (normal >67%) - LOW\n• C1q: 18 mg/dL (normal 11-21) - NORMAL\n\nCBC, CMP, and other routine labs are normal.",
+            question: "What is the diagnosis based on these results?",
+            options: [
+                { id: "A", text: "HAE Type 1 - low C1-INH level and function", outcome: "Correct diagnosis", feedback: "Correct! This is HAE Type 1: low C4, low C1-INH level, low C1-INH function, and normal C1q (rules out acquired form). Type 1 is the most common form (85%), caused by mutations leading to decreased C1-INH production.", points: 10, isOptimal: true },
+                { id: "B", text: "HAE Type 2 - dysfunctional C1-INH", outcome: "Close but wrong type", feedback: "Type 2 has dysfunctional C1-INH but NORMAL or elevated C1-INH protein levels. Her C1-INH level is LOW (12 mg/dL), indicating reduced production, not dysfunctional protein. This is Type 1.", points: 5, isOptimal: false },
+                { id: "C", text: "Acquired angioedema - secondary to underlying condition", outcome: "Ruled out by normal C1q", feedback: "Acquired C1-INH deficiency has similar C4 and C1-INH findings BUT C1q is LOW (consumed in the underlying process). Her C1q is NORMAL, confirming hereditary, not acquired.", points: 4, isOptimal: false },
+                { id: "D", text: "Cannot diagnose without genetic testing", outcome: "Not required for diagnosis", feedback: "Clinical presentation + lab findings (low C4, low C1-INH level and function, normal C1q) are diagnostic for HAE Type 1. Genetic testing can confirm but isn't required for diagnosis or treatment initiation.", points: 2, isOptimal: false }
+            ],
+            whyChain: { title: "WHY does C1q differentiate hereditary from acquired?", steps: ["HAE is caused by mutations in SERPING1 gene (C1-INH) - primary defect", "Acquired angioedema is caused by C1-INH consumption or autoantibodies - secondary", "In acquired form, C1q is consumed along with C1-INH", "In HAE, C1q production is normal - only C1-INH is affected", "Low C1q + low C1-INH = acquired; Normal C1q + low C1-INH = hereditary"] },
+            mechanism: { title: "HAE Types Comparison", content: "HAE TYPE 1 (85%):\n• Genetics: SERPING1 mutations\n• Mechanism: Reduced C1-INH production\n• C4: Low\n• C1-INH level: LOW\n• C1-INH function: LOW\n• C1q: Normal\n\nHAE TYPE 2 (15%):\n• Genetics: SERPING1 mutations (different sites)\n• Mechanism: Dysfunctional C1-INH protein\n• C4: Low\n• C1-INH level: NORMAL or HIGH\n• C1-INH function: LOW\n• C1q: Normal\n\nHAE WITH NORMAL C1-INH (Type 3, rare):\n• Genetics: Factor XII, plasminogen, others, or unknown\n• Mechanism: Bradykinin pathway affected differently\n• C4: Usually normal\n• C1-INH: Normal level AND function\n• Diagnosis: Clinical + genetic testing\n• More common in women, estrogen-sensitive\n\nACQUIRED C1-INH DEFICIENCY:\n• Cause: Lymphoproliferative disease, autoantibodies\n• C4: Low\n• C1-INH: Low level and function\n• C1q: LOW (key distinguishing feature)\n• Onset: Older age (40s+), no family history" },
+            pearl: "HAE Type 3 (normal C1-INH) is difficult to diagnose by labs alone. If clinical picture is highly suggestive but C4/C1-INH are normal, consider genetic testing and empiric treatment trial.",
+            pitfall: "Don't forget acquired angioedema in older patients with new-onset symptoms. Check C1q - if low, search for underlying lymphoproliferative or autoimmune disease."
+        },
+        {
+            id: 4,
+            title: "Acute Attack Management",
+            scenario: "Later that day, her swelling worsens. She now has:\n• Significant lip and tongue swelling\n• Voice change - 'muffled' quality\n• Mild stridor on inspiration\n• Oxygen saturation 96% on room air\n• Able to speak in full sentences but with effort\n\nThis is concerning for laryngeal involvement.",
+            question: "What is the priority treatment for this acute HAE attack with airway involvement?",
+            options: [
+                { id: "A", text: "Epinephrine IM and IV corticosteroids", outcome: "Won't work for HAE", feedback: "Epinephrine, steroids, and antihistamines are INEFFECTIVE for HAE because it's bradykinin-mediated, not histamine-mediated. Using these wastes precious time. HAE needs specific therapy.", points: 0, isOptimal: false },
+                { id: "B", text: "C1-INH concentrate (Berinert or Cinryze) IV or icatibant SC", outcome: "Correct first-line treatment", feedback: "Correct! HAE acute attacks require specific therapy: C1-INH replacement (Berinert, Cinryze, Ruconest) OR bradykinin B2 receptor antagonist (icatibant). These work within 30-60 minutes. Airway involvement is an emergency requiring immediate treatment.", points: 10, isOptimal: true },
+                { id: "C", text: "Fresh frozen plasma (FFP) as temporizing measure", outcome: "Backup option only", feedback: "FFP contains C1-INH and can work, but it also contains kallikrein substrates that may initially WORSEN swelling. It's a backup when specific HAE therapies are unavailable, not first-line.", points: 5, isOptimal: false },
+                { id: "D", text: "Intubation first, then treat", outcome: "Premature - treat first", feedback: "While airway protection is paramount, HAE-specific treatment works quickly (30-60 min). Treat urgently while preparing for possible intubation. Intubation in swollen airway is extremely difficult - avoid if possible.", points: 4, isOptimal: false }
+            ],
+            whyChain: { title: "WHY don't standard anaphylaxis treatments work?", steps: ["HAE is caused by BRADYKININ, not histamine", "Epinephrine counteracts histamine effects and causes vasoconstriction", "Bradykinin's vascular effects are not blocked by epinephrine", "Steroids suppress inflammation but don't stop bradykinin production", "Antihistamines block H1/H2 receptors - irrelevant for bradykinin", "Must target bradykinin pathway specifically"] },
+            mechanism: { title: "HAE Acute Attack Treatment", content: "FIRST-LINE THERAPIES:\n\n1. C1-INH CONCENTRATE (IV):\n• Berinert (plasma-derived): 20 units/kg\n• Cinryze (plasma-derived): 1000 units\n• Ruconest (recombinant): 50 units/kg (max 4200)\n• Onset: 30-60 minutes\n\n2. BRADYKININ B2 RECEPTOR ANTAGONIST:\n• Icatibant (Firazyr): 30mg SC\n• Can repeat q6h if needed (max 3 doses/24h)\n• Onset: 30-60 minutes\n\n3. KALLIKREIN INHIBITOR:\n• Ecallantide (Kalbitor): 30mg SC (3 injections of 10mg)\n• Must be given by healthcare provider (anaphylaxis risk ~3%)\n• Onset: 30-60 minutes\n\nIF SPECIFIC THERAPIES UNAVAILABLE:\n• Fresh frozen plasma: 2-4 units IV\n• May worsen initially, but contains C1-INH\n• Truly last resort\n\nAIRWAY MANAGEMENT:\n• Treat attack URGENTLY\n• Have intubation equipment ready\n• Consider early intubation if rapid progression\n• Tracheostomy may be needed if intubation fails\n\nDO NOT RELY ON:\n• Epinephrine (won't work)\n• Steroids (won't work acutely)\n• Antihistamines (won't work)" },
+            pearl: "All HAE patients should have on-demand therapy at home for self-treatment. Icatibant is particularly convenient for self-injection. Early treatment = shorter attacks.",
+            pitfall: "Don't delay HAE-specific treatment while trying epinephrine/steroids 'just in case it's allergic.' If HAE is diagnosed, go straight to specific therapy. Every minute of delay extends the attack."
+        },
+        {
+            id: 5,
+            title: "Response to Treatment",
+            scenario: "You administer C1-INH concentrate (Berinert 20 units/kg IV).\n\nWithin 45 minutes:\n• Voice quality improving\n• Stridor resolving\n• Lip swelling starting to decrease\n• Patient more comfortable\n\nWithin 4 hours:\n• Significant improvement in all symptoms\n• No longer any airway concern\n• Facial swelling 50% improved",
+            question: "What is the expected course after acute treatment?",
+            options: [
+                { id: "A", text: "She's cured - discharge with no follow-up needed", outcome: "Incomplete care", feedback: "Acute treatment addressed this attack, but HAE is lifelong. She needs prophylaxis discussion, on-demand therapy prescription, family screening, and specialist follow-up. This is just the beginning.", points: 0, isOptimal: false },
+                { id: "B", text: "Full resolution typically within 12-24 hours; plan for prophylaxis and on-demand therapy education", outcome: "Appropriate next steps", feedback: "Correct! After C1-INH treatment, resolution typically occurs over 12-24 hours. Now focus on: (1) prescribing on-demand therapy for home use, (2) discussing prophylaxis options, (3) educating on emergency care, (4) family screening.", points: 10, isOptimal: true },
+                { id: "C", text: "Keep her hospitalized for several days to ensure no relapse", outcome: "Excessive observation", feedback: "HAE attacks don't typically 'relapse' once treated. After ensuring resolution of airway symptoms, she can be discharged with appropriate education and prescriptions. Prolonged hospitalization isn't necessary.", points: 4, isOptimal: false },
+                { id: "D", text: "Symptoms will resolve but brain swelling may be delayed - order head CT", outcome: "HAE doesn't cause CNS involvement", feedback: "HAE causes subcutaneous and submucosal edema only - it does NOT affect the CNS. Brain swelling is not a feature of HAE. No imaging needed.", points: 1, isOptimal: false }
+            ],
+            whyChain: { title: "WHY does HAE respond so quickly to specific therapy?", steps: ["C1-INH replacement directly corrects the deficiency", "Restored C1-INH immediately begins inhibiting kallikrein and activated Factor XII", "Bradykinin generation is rapidly reduced", "Vascular permeability normalizes over hours", "Edema fluid reabsorbs as leak is plugged"] },
+            mechanism: { title: "HAE Attack Treatment Timeline", content: "TYPICAL RESPONSE TO TREATMENT:\n\n0-30 minutes:\n• Symptom progression stops\n• Patient reports relief starting\n\n30-60 minutes:\n• Noticeable improvement begins\n• Airway symptoms improve first (critical)\n\n2-4 hours:\n• Significant symptom reduction\n• Most airway crises resolved\n\n12-24 hours:\n• Near-complete or complete resolution\n• Some residual swelling may persist\n\n24-48 hours:\n• Full resolution of attack\n\nIF NO IMPROVEMENT:\n• Ensure correct diagnosis\n• Consider repeat dose (per product labeling)\n• Rule out mechanical airway obstruction\n\nUNTREATED ATTACK DURATION:\n• 2-5 days typically\n• Laryngeal attacks: Risk of asphyxiation\n• Abdominal attacks: Severe pain, can mimic surgical abdomen\n\nNOTE: Early treatment = shorter attacks\n• Treat at first sign of swelling\n• Don't wait to see if it progresses" },
+            pearl: "HAE attacks are self-limited even without treatment (2-5 days), but laryngeal attacks can kill. The benefit of treatment is both rapid relief and preventing potentially fatal progression.",
+            pitfall: "Don't assume a good response means she doesn't need follow-up. Untreated HAE has 25-40% lifetime risk of fatal laryngeal attack. Comprehensive management is essential."
+        },
+        {
+            id: 6,
+            title: "Long-Term Prophylaxis Discussion",
+            scenario: "Now stable, you discuss long-term management. Her attack history:\n\n• 1-2 attacks per month\n• ~4 attacks per year involve face/airway\n• Several abdominal attacks per year (missed work)\n• Current QoL significantly impacted\n• Fears attacks, avoids activities",
+            question: "What prophylaxis options should you discuss?",
+            options: [
+                { id: "A", text: "Daily antihistamines for prevention", outcome: "Ineffective for HAE", feedback: "Antihistamines don't prevent HAE attacks - they're histamine blockers, and HAE is bradykinin-mediated. This approach would fail.", points: 0, isOptimal: false },
+                { id: "B", text: "Modern prophylaxis: lanadelumab (anti-kallikrein antibody), berotralstat (oral kallikrein inhibitor), or C1-INH prophylaxis", outcome: "Current evidence-based options", feedback: "Correct! Modern HAE prophylaxis includes: lanadelumab (SC q2-4wk, reduces attacks 87%), berotralstat (oral daily), or C1-INH replacement (IV or SC regular dosing). All dramatically reduce attack frequency and improve QoL.", points: 10, isOptimal: true },
+                { id: "C", text: "Androgens (danazol) - first-line prophylaxis for all HAE patients", outcome: "Outdated first-line choice", feedback: "Androgens were traditional prophylaxis but have significant side effects (virilization, liver toxicity, dyslipidemia). Modern therapies are more effective and safer. Androgens are now reserved for patients who can't access/tolerate modern options.", points: 4, isOptimal: false },
+                { id: "D", text: "No prophylaxis needed - just treat attacks as they come", outcome: "Misses opportunity for prevention", feedback: "With 1-2 attacks monthly significantly impacting QoL, prophylaxis is strongly indicated. Modern prophylaxis reduces attacks by 70-90% and transforms patients' lives. Reactive-only treatment is suboptimal for frequent attackers.", points: 3, isOptimal: false }
+            ],
+            whyChain: { title: "WHY has HAE prophylaxis improved so much?", steps: ["Traditional androgens had ~50-60% attack reduction but significant toxicity", "Understanding of kallikrein-bradykinin pathway led to targeted therapies", "Lanadelumab blocks kallikrein (upstream of bradykinin)", "Berotralstat inhibits kallikrein (oral option!)", "C1-INH replacement corrects underlying deficiency", "Modern therapies achieve 70-90% attack reduction with better safety"] },
+            mechanism: { title: "HAE Prophylaxis Options (2024)", content: "MODERN FIRST-LINE OPTIONS:\n\n1. LANADELUMAB (Takhzyro)\n• Mechanism: Anti-kallikrein monoclonal antibody\n• Dosing: 300mg SC every 2-4 weeks\n• Efficacy: 87% reduction in attacks (can achieve attack-free)\n• Advantages: Long dosing interval, very effective\n• Disadvantages: Injection, cost (~$500,000/year)\n\n2. BEROTRALSTAT (Orladeyo)\n• Mechanism: Oral kallikrein inhibitor\n• Dosing: 150mg PO daily\n• Efficacy: ~44% reduction in attacks\n• Advantages: ORAL, once daily, convenient\n• Disadvantages: Less effective than lanadelumab, GI side effects\n\n3. C1-INH REPLACEMENT:\n• Cinryze: 1000 units IV every 3-4 days\n• Haegarda: 60 units/kg SC every 3-4 days\n• Efficacy: 50-95% reduction\n• Advantages: Replaces deficient protein directly\n• Disadvantages: Frequent dosing, IV access (Cinryze)\n\nLESS PREFERRED OPTIONS:\n\n4. ANDROGENS (danazol, stanozolol):\n• Efficacy: ~50-60% reduction\n• Side effects: Virilization, liver toxicity, dyslipidemia\n• Use: When modern therapies unavailable/not tolerated\n\n5. ANTIFIBRINOLYTICS (tranexamic acid):\n• Mild efficacy\n• Used in children or as adjunct" },
+            pearl: "Lanadelumab has revolutionized HAE care - many patients become attack-free. It's now considered first-line by many experts for patients who want maximum attack reduction.",
+            pitfall: "Don't prescribe estrogen-containing contraceptives to HAE patients - estrogen can trigger and worsen attacks. Use progestin-only methods or non-hormonal contraception."
+        },
+        {
+            id: 7,
+            title: "Short-Term Prophylaxis",
+            scenario: "Your patient is scheduled for dental extraction next month (wisdom tooth). She asks about preventing an attack.\n\nShe recalls having severe facial swelling after a dental procedure years ago before HAE was diagnosed.",
+            question: "What is the recommended approach for procedure prophylaxis?",
+            options: [
+                { id: "A", text: "No special precautions - just have on-demand therapy available", outcome: "Insufficient for high-risk procedure", feedback: "Dental procedures are high-risk triggers for HAE attacks. Having on-demand therapy is necessary but prophylaxis is strongly recommended to PREVENT the attack, not just treat it.", points: 3, isOptimal: false },
+                { id: "B", text: "Pre-procedure C1-INH concentrate, typically 1-6 hours before procedure", outcome: "Standard short-term prophylaxis", feedback: "Correct! For procedures with significant airway/facial trauma risk, give C1-INH concentrate 1-6 hours before (timing varies by product). Have additional on-demand therapy available. This dramatically reduces procedure-triggered attacks.", points: 10, isOptimal: true },
+                { id: "C", text: "Start androgens one week before and continue for one week after", outcome: "Older approach, longer lead time", feedback: "Androgen prophylaxis can work but requires 5-7 days lead time to be effective. C1-INH concentrate can be given same-day and is preferred for short-term prophylaxis when available.", points: 5, isOptimal: false },
+                { id: "D", text: "Cancel the procedure - too risky with HAE", outcome: "Unnecessarily restrictive", feedback: "HAE patients can safely undergo procedures with appropriate prophylaxis and on-demand therapy availability. Denying necessary dental care is not appropriate management.", points: 1, isOptimal: false }
+            ],
+            whyChain: { title: "WHY do dental procedures trigger HAE?", steps: ["Physical trauma activates contact (kallikrein) system", "Dental procedures involve significant tissue trauma to oral/facial area", "Activated kallikrein generates bradykinin in the area", "Bradykinin causes local vascular leak → angioedema", "Without functioning C1-INH, this cascade goes unchecked"] },
+            mechanism: { title: "Short-Term Prophylaxis", content: "HIGH-RISK PROCEDURES:\n• Dental work (extractions, implants, root canals)\n• Intubation/bronchoscopy\n• ENT procedures\n• Facial/neck surgery\n• Upper GI endoscopy\n\nMODERATE-RISK:\n• Other surgeries\n• Colonoscopy\n• Central line placement\n\nPROPHYLAXIS OPTIONS:\n\n1. C1-INH CONCENTRATE (preferred):\n• Berinert: 20 units/kg, 1-6 hours pre-procedure\n• Cinryze: 1000 units, 1-24 hours pre-procedure\n• Haegarda: Can use for short-term if on it already\n\n2. ANDROGENS (if C1-INH unavailable):\n• Danazol: 600mg/day x 5 days before, 2-3 days after\n• Requires advance planning\n\n3. FRESH FROZEN PLASMA:\n• 2 units, 1-6 hours pre-procedure\n• If no other options available\n\nADDITIONAL MEASURES:\n• Have on-demand therapy available at procedure\n• Alert proceduralist to HAE diagnosis\n• Plan for potential airway complications\n• Post-procedure observation period" },
+            pearl: "Even with prophylaxis, have on-demand therapy immediately available. Prophylaxis reduces but doesn't eliminate attack risk. Alert the dental team so they're prepared.",
+            pitfall: "Intubation itself is a trigger for HAE. When HAE patients need emergency intubation, prophylaxis isn't possible - have on-demand treatment ready and consider early surgical airway if intubation is difficult."
+        },
+        {
+            id: 8,
+            title: "Family Screening",
+            scenario: "You recommend screening her mother and siblings for HAE.\n\nFamily status:\n• Mother: Has 'swelling episodes,' on some medication\n• Brother (28): No symptoms, never tested\n• Sister (20): Had 'some swelling episodes in college' - not evaluated\n\nYour patient is planning to have children and asks about inheritance.",
+            question: "What counseling do you provide about genetics and family screening?",
+            options: [
+                { id: "A", text: "Only symptomatic family members need testing", outcome: "Misses asymptomatic carriers", feedback: "HAE is autosomal dominant - 50% of first-degree relatives carry the mutation. Some carriers have mild or no symptoms but can still have fatal attacks. ALL first-degree relatives should be screened.", points: 3, isOptimal: false },
+                { id: "B", text: "Autosomal dominant inheritance - 50% chance for each child; screen all first-degree relatives regardless of symptoms", outcome: "Correct counseling", feedback: "Correct! HAE is autosomal dominant (50% chance per offspring). Screen ALL first-degree relatives - asymptomatic carriers exist and can have attacks. Early diagnosis enables prophylaxis and on-demand therapy availability.", points: 10, isOptimal: true },
+                { id: "C", text: "Males are not affected - only screen female relatives", outcome: "Incorrect inheritance pattern", feedback: "HAE affects males and females equally (autosomal dominant). Her brother needs screening just as much as her sister. Males may even have more severe disease in some families.", points: 0, isOptimal: false },
+                { id: "D", text: "Genetic counseling is optional - she can decide based on symptoms in children", outcome: "Dangerous delay in children", feedback: "HAE can present with a fatal laryngeal attack as the first symptom. Waiting to see if children develop symptoms is dangerous. Screen early (can test at any age) so affected children have treatment available.", points: 2, isOptimal: false }
+            ],
+            whyChain: { title: "WHY screen asymptomatic relatives?", steps: ["HAE is autosomal dominant - 50% of first-degree relatives carry mutation", "Some carriers are asymptomatic or have very mild disease", "Asymptomatic carriers can have fatal laryngeal attack as first severe episode", "Early diagnosis allows on-demand therapy prescription before first attack", "Knowledge enables trigger avoidance (ACE inhibitors, estrogen)"] },
+            mechanism: { title: "HAE Genetics and Family Screening", content: "INHERITANCE:\n• Autosomal dominant\n• 50% risk to each offspring\n• Males and females equally affected\n• Variable expressivity (severity varies within families)\n• ~25% are NEW mutations (no family history)\n\nWHO TO SCREEN:\n• All first-degree relatives (parents, siblings, children)\n• Regardless of symptoms\n• Can screen at any age (including newborns)\n\nSCREENING TEST:\n• C4 level (first-line, low in >95% with HAE)\n• If C4 low: C1-INH level and function\n• Genetic testing: Can be done for confirmation, prenatal testing\n\nPREGNANCY CONSIDERATIONS:\n• HAE can worsen during pregnancy (estrogen effect)\n• Some improve (variable)\n• Safe treatments during pregnancy: C1-INH concentrate\n• Avoid: Androgens, ACE inhibitors (teratogenic)\n• Can breastfeed on most HAE therapies\n\nCHILDREN WITH HAE:\n• Usually asymptomatic in infancy\n• Attacks often begin in childhood/adolescence\n• Should have on-demand therapy available\n• Age-appropriate education about symptoms" },
+            pearl: "Newborns of affected parents can be screened immediately, but false results can occur (complement levels change in infancy). Confirm testing after age 1 if initial results are equivocal.",
+            pitfall: "Don't assume absence of family history rules out HAE. About 25% of HAE patients have de novo mutations with no family history. The patient may be the 'index case' for a new mutation."
+        },
+        {
+            id: 9,
+            title: "Abdominal Attack Recognition",
+            scenario: "Six months later (now on lanadelumab prophylaxis with excellent control), your patient calls with severe abdominal pain that started this morning.\n\nSymptoms:\n• Severe crampy abdominal pain\n• Nausea, vomiting\n• No diarrhea\n• No facial or extremity swelling currently\n• Pain is diffuse, coming in waves\n\nShe went to an urgent care, where exam showed diffuse abdominal tenderness and CT abdomen showed 'bowel wall thickening and ascites.' They're recommending surgical consultation.",
+            question: "What do you advise?",
+            options: [
+                { id: "A", text: "This is likely appendicitis - proceed with surgical evaluation", outcome: "Likely misdiagnosis", feedback: "HAE abdominal attacks MIMIC surgical abdomen with severe pain, bowel wall edema on CT, and ascites. This is classic HAE presentation. Unnecessary surgery is a major complication of unrecognized HAE.", points: 2, isOptimal: false },
+                { id: "B", text: "Likely HAE abdominal attack - treat with on-demand therapy urgently before considering surgery", outcome: "Correct approach", feedback: "Correct! This is classic HAE abdominal attack: severe pain, bowel wall thickening (edema), ascites - all from bradykinin-mediated vascular leak in GI tract. Treat with C1-INH or icatibant. If pain resolves, it confirms HAE and avoids unnecessary surgery.", points: 10, isOptimal: true },
+                { id: "C", text: "Can't be HAE - she's on prophylaxis and has no skin swelling", outcome: "Misunderstanding of HAE", feedback: "Prophylaxis reduces but doesn't eliminate attacks (even lanadelumab has ~13% breakthrough). Abdominal attacks can occur WITHOUT skin involvement - GI edema can be the only manifestation. Always consider HAE in known patients with abdominal pain.", points: 3, isOptimal: false },
+                { id: "D", text: "Order more imaging to differentiate before treating", outcome: "Delays necessary treatment", feedback: "Additional imaging won't change management - HAE abdominal attacks look like surgical emergencies on CT. The diagnostic AND therapeutic approach is giving HAE treatment. Response confirms the diagnosis.", points: 4, isOptimal: false }
+            ],
+            whyChain: { title: "WHY do HAE patients get unnecessary surgeries?", steps: ["Abdominal HAE attacks cause severe visceral edema", "CT shows bowel wall thickening, ascites - looks like surgical pathology", "Pain is severe - patients appear to have 'acute abdomen'", "Without HAE diagnosis, surgery often performed", "Treatment with C1-INH or icatibant resolves symptoms rapidly, avoiding surgery"] },
+            mechanism: { title: "HAE Abdominal Attacks", content: "PRESENTATION:\n• Severe crampy abdominal pain\n• Nausea, vomiting (very common)\n• Diarrhea can occur (but often absent)\n• May have ascites (transudative)\n• Usually NO cutaneous swelling (30-50% have skin involvement)\n\nIMAGING FINDINGS:\n• CT: Bowel wall thickening (edema)\n• Ascites (free fluid)\n• May mimic: Appendicitis, bowel obstruction, ischemia\n\nMISDIAGNOSIS CONSEQUENCES:\n• Unnecessary exploratory laparotomy\n• Appendectomy in normal appendix\n• Delay in effective treatment\n\nMANAGEMENT:\n• High index of suspicion in known HAE patients\n• Treat with on-demand therapy (C1-INH, icatibant)\n• Response within 1-2 hours supports HAE diagnosis\n• Surgical consultation if no response or peritoneal signs\n\nDISTINGUISHING FEATURES:\n• Known HAE patient\n• History of similar episodes\n• Absence of fever (usually)\n• Rapid response to HAE treatment\n• No surgical pathology at operation (if done)\n\nREPORTED UNNECESSARY SURGERIES:\n• Up to 30% of undiagnosed HAE patients have unnecessary abdominal surgery" },
+            pearl: "HAE patients with abdominal pain: TREAT FIRST, watch for response. Improvement with HAE therapy within 1-2 hours confirms diagnosis and avoids unnecessary surgery.",
+            pitfall: "Being on prophylaxis doesn't prevent all attacks. Even well-controlled patients have breakthrough attacks. Never dismiss symptoms just because patient is on prophylaxis."
+        },
+        {
+            id: 10,
+            title: "Comprehensive Care Model",
+            scenario: "You've managed this patient for 2 years now. Summary:\n\n• Diagnosis: HAE Type 1, confirmed\n• Treatment: Lanadelumab prophylaxis (attack-free for 18 months)\n• On-demand: Icatibant at home for breakthrough\n• Family: Mother diagnosed, on C1-INH prophylaxis; Brother tested positive, asymptomatic, has on-demand therapy; Sister negative\n• QoL: Dramatically improved, no longer fears attacks\n• Triggers: Avoids ACE inhibitors, uses progestin-only contraception",
+            question: "What elements define comprehensive HAE care?",
+            options: [
+                { id: "A", text: "Just prescribe prophylaxis and see annually", outcome: "Incomplete model", feedback: "HAE requires more comprehensive management: prophylaxis optimization, on-demand therapy access, procedure planning, family screening, trigger education, emergency planning, and regular follow-up.", points: 3, isOptimal: false },
+                { id: "B", text: "Prophylaxis + on-demand therapy + family screening + trigger avoidance + emergency planning + multidisciplinary care", outcome: "Comprehensive care model", feedback: "Correct! Complete HAE care includes: effective prophylaxis, accessible on-demand therapy, family screening, trigger education (ACE-I, estrogen, trauma), procedure prophylaxis planning, emergency action plan, specialist follow-up, and psychological support.", points: 10, isOptimal: true },
+                { id: "C", text: "Primary care can manage HAE independently once stable", outcome: "Specialist involvement needed", feedback: "HAE requires ongoing specialist involvement for therapy optimization, new treatment options, procedure planning, and emergency management guidance. HAE specialists/immunologists should remain involved.", points: 4, isOptimal: false },
+                { id: "D", text: "Once attack-free on prophylaxis, on-demand therapy is no longer needed", outcome: "Dangerous assumption", feedback: "Even with excellent prophylaxis, breakthrough attacks occur. On-demand therapy must ALWAYS be available. Being attack-free doesn't mean she's cured - she's well-controlled.", points: 1, isOptimal: false }
+            ],
+            whyChain: { title: "WHY is comprehensive care so important?", steps: ["HAE is lifelong with potentially fatal attacks", "Multiple management components needed simultaneously", "New treatments require specialist knowledge", "Procedures require specific prophylaxis planning", "Family members need screening and education", "Emergency situations require pre-planned responses"] },
+            mechanism: { title: "Comprehensive HAE Care Model", content: "1. PROPHYLAXIS MANAGEMENT:\n• Select optimal therapy (individualized)\n• Monitor for breakthrough attacks\n• Adjust as needed\n• Consider newer options as available\n\n2. ON-DEMAND THERAPY:\n• ALWAYS have accessible\n• Patient self-administration training\n• Backup supply at home\n• Carry when traveling\n\n3. TRIGGER EDUCATION:\n• Avoid ACE inhibitors (absolute)\n• Avoid estrogen-containing contraceptives\n• Recognize early attack symptoms\n• Stress, trauma, infection awareness\n\n4. PROCEDURE PLANNING:\n• Short-term prophylaxis protocols\n• Communication with surgeons/dentists\n• On-demand therapy availability\n\n5. FAMILY SCREENING:\n• Test all first-degree relatives\n• Genetic counseling\n• Pediatric considerations\n\n6. EMERGENCY PLANNING:\n• Written action plan\n• Medical alert identification\n• ER communication letter\n• Local ER notified of diagnosis\n\n7. FOLLOW-UP:\n• Regular specialist visits\n• Attack diary review\n• QoL assessment\n• Therapy optimization\n\n8. PSYCHOLOGICAL SUPPORT:\n• Address anxiety around attacks\n• Support for lifestyle limitations\n• Patient support groups (HAEA)" },
+            pearl: "The HAE patient community is active and supportive. Refer patients to HAEA (Hereditary Angioedema Association) at haea.org for education, support, and advocacy resources.",
+            pitfall: "Never prescribe ACE inhibitors to HAE patients under ANY circumstances. Even 'one pill' can trigger fatal laryngeal edema. Document HAE prominently as ACE-I contraindication."
+        }
+    ]
+};
+
+let currentStage = 1, totalScore = 0, maxPossibleScore = 0, answeredStages = {};
+function init() { caseData.stages.forEach(s => { maxPossibleScore += Math.max(...s.options.map(o => o.points)); }); renderStage(currentStage); }
+function renderStage(stageNum) {
+    const stage = caseData.stages[stageNum - 1]; if (!stage) { renderSummary(); return; }
+    const answered = answeredStages[stageNum];
+    document.getElementById('gameContainer').innerHTML = `<div class="stage-card bg-white rounded-2xl shadow-lg overflow-hidden"><div class="bg-gradient-to-r from-violet-600 to-purple-600 text-white p-6"><span class="bg-white/20 px-3 py-1 rounded-full text-sm">Stage ${stageNum} of ${caseData.totalStages}</span><h2 class="text-2xl font-bold mt-3">${stage.title}</h2></div><div class="p-6"><div class="bg-slate-50 rounded-xl p-5 mb-6"><h3 class="font-semibold text-gray-700 mb-2">📋 Clinical Scenario</h3><div class="text-gray-700 whitespace-pre-line">${stage.scenario}</div></div><div class="bg-violet-50 rounded-xl p-5 mb-6"><h3 class="font-semibold text-violet-800 mb-2">🤔 Clinical Question</h3><p class="text-violet-900 font-medium">${stage.question}</p></div><div class="space-y-3">${stage.options.map(opt => `<button onclick="selectOption(${stageNum}, '${opt.id}')" ${answered ? 'disabled' : ''} class="w-full text-left p-4 rounded-xl border-2 transition-all ${answered && answered.selected === opt.id ? (opt.isOptimal ? 'border-green-500 bg-green-50' : 'border-amber-500 bg-amber-50') : answered && opt.isOptimal ? 'border-green-500 bg-green-50' : 'border-gray-200 hover:border-violet-300 hover:bg-violet-50'} ${answered ? 'cursor-default' : 'cursor-pointer'}"><div class="flex items-start gap-3"><span class="flex-shrink-0 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center font-bold ${answered && opt.isOptimal ? 'bg-green-500 text-white' : ''}">${opt.id}</span><span class="font-medium">${opt.text}</span></div></button>`).join('')}</div>${answered ? renderFeedback(stage, answered) : ''}</div></div>`; updateProgress();
+}
+function renderFeedback(stage, answered) { const selected = stage.options.find(o => o.id === answered.selected); const optimal = stage.options.find(o => o.isOptimal); return `<div class="mt-6 space-y-4"><div class="${selected.isOptimal ? 'bg-green-50 border-green-200' : 'bg-amber-50 border-amber-200'} border rounded-xl p-5"><h4 class="font-bold ${selected.isOptimal ? 'text-green-800' : 'text-amber-800'} mb-2">${selected.isOptimal ? '✅ Optimal!' : '⚠️ ' + selected.outcome}</h4><p class="text-gray-700">${selected.feedback}</p></div>${!selected.isOptimal ? `<div class="bg-green-50 border border-green-200 rounded-xl p-5"><h4 class="font-bold text-green-800 mb-2">✅ Optimal: ${optimal.text}</h4><p class="text-gray-700">${optimal.feedback}</p></div>` : ''}<div class="why-chain rounded-xl p-5"><h4 class="font-bold text-blue-800 mb-3">🔗 ${stage.whyChain.title}</h4><div class="space-y-2">${stage.whyChain.steps.map((s,i) => `<div class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-blue-200 text-blue-800 flex items-center justify-center text-sm font-bold">${i+1}</span><span class="text-gray-700">${s}</span></div>`).join('')}</div></div><div class="mechanism-box rounded-xl p-5"><h4 class="font-bold text-green-800 mb-3">⚙️ ${stage.mechanism.title}</h4><div class="text-gray-700 whitespace-pre-line text-sm">${stage.mechanism.content}</div></div><div class="grid md:grid-cols-2 gap-4"><div class="pearl-box rounded-xl p-4"><h4 class="font-bold text-yellow-800 mb-2">💎 Pearl</h4><p class="text-gray-700 text-sm">${stage.pearl}</p></div><div class="pitfall-box rounded-xl p-4"><h4 class="font-bold text-red-800 mb-2">⚠️ Pitfall</h4><p class="text-gray-700 text-sm">${stage.pitfall}</p></div></div><button onclick="nextStage()" class="w-full mt-4 py-4 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-xl font-bold text-lg">${currentStage < caseData.totalStages ? 'Continue to Stage ' + (currentStage + 1) + ' →' : 'View Summary →'}</button></div>`; }
+function selectOption(stageNum, optionId) { if (answeredStages[stageNum]) return; const option = caseData.stages[stageNum - 1].options.find(o => o.id === optionId); answeredStages[stageNum] = { selected: optionId, points: option.points }; totalScore += option.points; renderStage(stageNum); }
+function nextStage() { currentStage++; currentStage > caseData.totalStages ? renderSummary() : (renderStage(currentStage), window.scrollTo({ top: 0, behavior: 'smooth' })); }
+function updateProgress() { document.getElementById('progressBar').style.width = (Object.keys(answeredStages).length / caseData.totalStages * 100) + '%'; document.getElementById('score').textContent = Math.round(totalScore / maxPossibleScore * 100) + '%'; }
+function renderSummary() { const pct = Math.round(totalScore / maxPossibleScore * 100); document.getElementById('gameContainer').classList.add('hidden'); document.getElementById('summaryPanel').classList.remove('hidden'); document.getElementById('summaryPanel').innerHTML = `<div class="bg-white rounded-2xl shadow-lg p-8"><div class="text-center mb-8"><div class="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-purple-600">${pct >= 90 ? 'A' : pct >= 80 ? 'B' : pct >= 70 ? 'C' : 'D'}</div><div class="text-3xl font-bold text-gray-800">${pct}%</div></div><div class="bg-slate-50 rounded-xl p-6 mb-6"><h3 class="font-bold text-xl mb-4">📚 Key Learning Points</h3><ul class="space-y-2 text-gray-700"><li>✓ HAE = angioedema WITHOUT urticaria, antihistamine-refractory, family history</li><li>✓ Screen with C4 (low in >95% of Type 1/2 HAE even between attacks)</li><li>✓ Confirm with C1-INH level AND function (Type 2 has normal level, low function)</li><li>✓ Acute treatment: C1-INH concentrate, icatibant, or ecallantide - NOT epi/steroids</li><li>✓ Modern prophylaxis: lanadelumab, berotralstat, C1-INH replacement</li><li>✓ Abdominal attacks mimic surgical abdomen - treat first, avoid unnecessary surgery</li><li>✓ Screen all first-degree relatives (50% inheritance risk)</li><li>✓ NEVER prescribe ACE inhibitors to HAE patients</li></ul></div><button onclick="resetGame()" class="w-full py-4 bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-xl font-bold">🔄 Restart Case</button></div>`; }
+function resetGame() { currentStage = 1; totalScore = 0; answeredStages = {}; document.getElementById('gameContainer').classList.remove('hidden'); document.getElementById('summaryPanel').classList.add('hidden'); renderStage(1); }
+init();
+    </script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+/* Enhanced Feature Styles */
+.rdx-difficulty-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 300px;
+}
+.rdx-diff-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin: 2px;
+}
+.rdx-diff-btn.active {
+    background: #3b82f6;
+    color: white;
+}
+.rdx-diff-btn:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+}
+.rdx-diff-btn:hover:not(.active) {
+    background: #e2e8f0;
+}
+.rdx-refs-panel {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #93c5fd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+.rdx-refs-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+.rdx-refs-links {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+.rdx-refs-links a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.rdx-refs-links a:hover {
+    text-decoration: underline;
+}
+.rdx-debrief-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rdx-debrief-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #1f2937;
+}
+.rdx-path-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.rdx-path-optimal {
+    background: #dcfce7;
+    border-left: 4px solid #22c55e;
+}
+.rdx-path-suboptimal {
+    background: #fef9c3;
+    border-left: 4px solid #eab308;
+}
+.rdx-path-wrong {
+    background: #fecaca;
+    border-left: 4px solid #ef4444;
+}
+.rdx-hint-beginner {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+.rdx-hint-advanced {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+</style>
+
+<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
+    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
+        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    </div>
+</div>
+
+
+<!-- CROSS-PLATFORM LEARNING LINKS -->
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
+            <a href="../mechanism/angioedema-module.html" style="display: block; color: #2563eb; font-size: 14px;">→ HAE</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
+            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="asthma-exacerbation-expanded-dual-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Asthma Exacerbation Expanded D</a>
+            <a href="allergic-rhinitis-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Allergic Rhinitis</a>
+            <a href="penicillin-delabeling-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Penicillin Delabeling</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
+            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../CoachDx/mentor-chat.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../CoachDx/sbar-trainer.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+<!-- END CROSS-PLATFORM LINKS -->
+<div class="rdx-refs-panel" id="rdxRefsPanel">
+    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
+    <div class="rdx-refs-links"><a href="https://www.aaaai.org/practice-resources/statements-and-practice-parameters" target="_blank" class="text-blue-600 hover:underline">AAAAI Practice Parameters</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK482124/" target="_blank" class="text-blue-600 hover:underline">StatPearls: Anaphylaxis</a></div>
+</div>
+
+<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
+    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+</div>
+
+<script>
+// ReasonDx Enhanced Features Module
+(function() {
+    // Decision tracking
+    window.rdxDecisionPath = window.rdxDecisionPath || [];
+    window.rdxTotalScore = window.rdxTotalScore || 0;
+    window.rdxMaxScore = window.rdxMaxScore || 0;
+    window.rdxDifficulty = 'intermediate';
+    
+    // Difficulty control
+    window.rdxSetDifficulty = function(level) {
+        window.rdxDifficulty = level;
+        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('rdx-btn-' + level).classList.add('active');
+        
+        // Update hint visibility
+        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
+            el.style.display = level === 'beginner' ? 'block' : 'none';
+        });
+        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
+            el.style.display = level === 'advanced' ? 'block' : 'none';
+        });
+    };
+    
+    // Track a decision
+    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+        window.rdxDecisionPath.push({
+            stage: stageId,
+            title: stageTitle,
+            choice: choiceId,
+            choiceText: choiceText,
+            outcome: outcome,
+            points: points,
+            maxPoints: maxPoints,
+            isOptimal: isOptimal,
+            optimalChoice: optimalChoice,
+            optimalText: optimalText
+        });
+        window.rdxTotalScore += points;
+        window.rdxMaxScore += maxPoints;
+    };
+    
+    // Show visual debrief
+    window.rdxShowDebrief = function() {
+        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
+        
+        let grade, gradeColor, gradeEmoji;
+        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
+        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
+        
+        let pathHTML = '';
+        if (window.rdxDecisionPath.length > 0) {
+            pathHTML = window.rdxDecisionPath.map(d => {
+                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
+                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
+                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
+                return '<div class="' + pathClass + ' rdx-path-item">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
+                    '<div>' +
+                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
+                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
+                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
+                    '</div>' +
+                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
+                    '</div></div>';
+            }).join('');
+        } else {
+            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+        }
+        
+        document.getElementById('rdxDebriefContent').innerHTML = 
+            '<div style="text-align:center;margin-bottom:24px;">' +
+            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
+            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
+            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
+            '</div></div>' +
+            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
+            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
+            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
+            '</div></div>' +
+            '<div style="display:flex;gap:12px;">' +
+            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '</div>';
+        
+        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
+    };
+    
+    // Auto-inject hint examples into existing content
+    window.rdxInit = function() {
+        // Could add dynamic hint injection here based on difficulty
+        console.log('ReasonDx Enhanced Features loaded for: Hae Expanded Adventure');
+    };
+    
+    // Initialize on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.rdxInit);
+    } else {
+        window.rdxInit();
+    }
+})();
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+</body>
+</html>

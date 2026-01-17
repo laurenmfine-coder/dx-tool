@@ -1,0 +1,479 @@
+• Duodenal atresia
+• Jejunal/ileal atresia
+• Hirschsprung disease
+• Meconium ileus
+
+MALROTATION KEY POINTS:
+• Can occur at ANY age
+• Volvulus causes intestinal ischemia
+• SURGICAL EMERGENCY
+• Upper GI series is diagnostic
+• Surgery within hours needed" },
+                pearl: "Bilious vomiting in a neonate = surgical emergency until proven otherwise. Don't delay imaging or surgical consultation.",
+                pitfall: "Never assume a vomiting infant has pyloric stenosis without checking the color of the vomitus. GREEN = distal obstruction = different and more urgent workup."
+            },
+            {
+                id: 10,
+                title: "Long-Term Outcomes",
+                scenario: "The infant underwent successful pyloromyotomy 6 months ago. The parents bring him for a well-child visit and ask about long-term effects.\n\nHe has been feeding well, gaining weight appropriately, and has no GI complaints.",
+                question: "What should the parents be told about long-term outcomes after pyloromyotomy?",
+                options: [
+                    { id: "A", text: "He will need lifelong GI follow-up and dietary restrictions", outcome: "Not accurate", feedback: "Pyloromyotomy is curative with excellent long-term outcomes. No lifelong follow-up or dietary restrictions are needed.", points: 2, isOptimal: false },
+                    { id: "B", text: "Excellent prognosis - curative surgery with no long-term sequelae expected; normal life expectancy and no dietary restrictions", outcome: "Correct prognosis", feedback: "Correct! Pyloromyotomy is curative. Children have normal GI function, normal diet, and no increased risk of other GI conditions. Recurrence is extremely rare (<1%).", points: 10, isOptimal: true },
+                    { id: "C", text: "He has increased risk of pyloric stenosis recurrence as an adult", outcome: "Not accurate", feedback: "Recurrence is extremely rare (<1%). Adult pyloric stenosis is a different condition (usually related to ulcer disease).", points: 3, isOptimal: false },
+                    { id: "D", text: "He may have increased risk of stomach cancer from the surgery", outcome: "Not accurate", feedback: "There is no increased risk of stomach cancer after pyloromyotomy. This is a safe, curative procedure.", points: 1, isOptimal: false }
+                ],
+                whyChain: { title: "WHY is prognosis so good?", steps: ["Surgery completely relieves the obstruction", "No tissue is removed, only muscle is split", "Stomach and pylorus function normally after healing", "No ongoing inflammation or damage", "Children develop normally with no restrictions"] },
+                mechanism: { title: "Long-Term Outcomes", content: "EXCELLENT PROGNOSIS:\n• Cure rate >99%\n• Recurrence <1%\n• Normal life expectancy\n• No dietary restrictions\n• No long-term medications\n\nFOLLOW-UP:\n• Routine well-child care\n• No specific GI follow-up needed\n• Scar may be minimal (especially laparoscopic)\n\nFAMILY COUNSELING:\n• Genetic component - may recur in future children\n• 15x increased risk with affected parent\n• Watch for symptoms in siblings\n\nRARE COMPLICATIONS:\n• Incisional hernia (<1%)\n• Cosmetic concerns (scar)\n• Extremely rare recurrence" },
+                pearl: "Pyloric stenosis is one of the most satisfying surgical conditions to treat - a curative operation with excellent outcomes and minimal long-term issues.",
+                pitfall: "Don't forget to counsel parents that there's a familial component. Future siblings should be watched for symptoms, and the patient may have higher risk for their own children."
+            }
+        ];
+
+        function initGame() {
+            maxScore = stages.reduce((sum, stage) => sum + Math.max(...stage.options.map(o => o.points)), 0);
+            renderStage();
+        }
+
+        function renderStage() {
+            const stage = stages[currentStage];
+            const container = document.getElementById('gameContainer');
+            
+            container.innerHTML = `
+                <div class="stage-card bg-white rounded-2xl shadow-lg p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">Stage ${stage.id} of ${stages.length}</span>
+                        <h2 class="text-xl font-bold text-gray-800">${stage.title}</h2>
+                    </div>
+                    <div class="bg-slate-50 rounded-xl p-4 mb-6">
+                        <pre class="whitespace-pre-wrap font-sans text-gray-700">${stage.scenario}</pre>
+                    </div>
+                    <p class="font-semibold text-gray-800 mb-4">${stage.question}</p>
+                    <div class="space-y-3" id="optionsContainer">
+                        ${stage.options.map(opt => `
+                            <button onclick="selectOption('${opt.id}')" class="w-full text-left p-4 rounded-xl border-2 border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition-all">
+                                <span class="font-bold text-blue-600">${opt.id}.</span> ${opt.text}
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function selectOption(optionId) {
+            const stage = stages[currentStage];
+            const option = stage.options.find(o => o.id === optionId);
+            const optimalOption = stage.options.find(o => o.isOptimal);
+            
+            totalScore += option.points;
+            decisionPath.push({
+                stage: stage.id, title: stage.title, choice: optionId, choiceText: option.text,
+                outcome: option.outcome, points: option.points,
+                maxPoints: Math.max(...stage.options.map(o => o.points)),
+                isOptimal: option.isOptimal, optimalChoice: optimalOption.id, optimalText: optimalOption.text
+            });
+            
+            updateProgress();
+            showFeedback(stage, option);
+        }
+
+        function updateProgress() {
+            const progress = ((currentStage + 1) / stages.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('score').textContent = Math.round((totalScore / maxScore) * 100) + '%';
+        }
+
+        function showFeedback(stage, option) {
+            const container = document.getElementById('gameContainer');
+            let pathClass = option.isOptimal ? 'optimal-path' : (option.points >= 4 ? 'suboptimal-path' : 'wrong-path');
+            let pathLabel = option.isOptimal ? '✓ Optimal Choice' : (option.points >= 4 ? '~ Suboptimal' : '✗ Incorrect');
+            
+            container.innerHTML = `
+                <div class="stage-card bg-white rounded-2xl shadow-lg p-6">
+                    <div class="${pathClass} p-4 rounded-xl mb-6">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="font-bold">${pathLabel}</span>
+                            <span class="text-gray-600">• ${option.points} points</span>
+                        </div>
+                        <p class="font-semibold text-gray-800">${option.outcome}</p>
+                    </div>
+                    <div class="bg-blue-50 rounded-xl p-4 mb-6">
+                        <p class="text-gray-700">${option.feedback}</p>
+                    </div>
+                    <div class="why-chain rounded-xl p-4 mb-6">
+                        <h3 class="font-bold text-blue-800 mb-3">🔗 ${stage.whyChain.title}</h3>
+                        <div class="space-y-2">
+                            ${stage.whyChain.steps.map((step, i) => `
+                                <div class="flex items-start gap-2">
+                                    <span class="text-blue-500 font-bold">${i + 1}.</span>
+                                    <span class="text-gray-700">${step}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    <div class="mechanism-box rounded-xl p-4 mb-6">
+                        <h3 class="font-bold text-green-800 mb-3">⚙️ ${stage.mechanism.title}</h3>
+                        <pre class="whitespace-pre-wrap font-sans text-gray-700 text-sm">${stage.mechanism.content}</pre>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-4 mb-6">
+                        <div class="pearl-box rounded-xl p-4">
+                            <h4 class="font-bold text-yellow-800 mb-2">💎 Clinical Pearl</h4>
+                            <p class="text-gray-700 text-sm">${stage.pearl}</p>
+                        </div>
+                        <div class="pitfall-box rounded-xl p-4">
+                            <h4 class="font-bold text-red-800 mb-2">⚠️ Pitfall</h4>
+                            <p class="text-gray-700 text-sm">${stage.pitfall}</p>
+                        </div>
+                    </div>
+                    <button onclick="nextStage()" class="w-full py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-xl font-semibold hover:opacity-90 transition-opacity">
+                        ${currentStage < stages.length - 1 ? 'Continue to Next Stage →' : 'View Final Summary'}
+                    </button>
+                </div>
+            `;
+        }
+
+        function nextStage() {
+            currentStage++;
+            if (currentStage < stages.length) { renderStage(); } else { showSummary(); }
+        }
+
+        function showSummary() {
+            document.getElementById('gameContainer').classList.add('hidden');
+            const panel = document.getElementById('summaryPanel');
+            panel.classList.remove('hidden');
+            
+            const percentage = Math.round((totalScore / maxScore) * 100);
+            let grade, gradeColor;
+            if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = 'text-green-600'; }
+            else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = 'text-blue-600'; }
+            else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = 'text-yellow-600'; }
+            else { grade = 'Keep Learning!'; gradeColor = 'text-red-600'; }
+            
+            panel.innerHTML = `
+                <div class="bg-white rounded-2xl shadow-lg p-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">📊 Case Complete!</h2>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="text-4xl font-bold ${gradeColor}">${percentage}%</div>
+                        <div class="text-xl text-gray-600">${grade}</div>
+                    </div>
+                    <h3 class="font-bold text-gray-800 mb-4">Your Decision Path:</h3>
+                    <div class="space-y-3">
+                        ${decisionPath.map(d => {
+                            let pathClass = d.isOptimal ? 'optimal-path' : (d.points >= 4 ? 'suboptimal-path' : 'wrong-path');
+                            return `
+                                <div class="${pathClass} p-3 rounded-lg">
+                                    <div class="flex justify-between items-start">
+                                        <div>
+                                            <span class="font-bold">Stage ${d.stage}:</span> ${d.title}
+                                            <div class="text-sm mt-1">Your choice: <strong>${d.choice}</strong> - ${d.outcome}</div>
+                                            ${!d.isOptimal ? `<div class="text-sm text-gray-600 mt-1">Better: ${d.optimalChoice} - ${d.optimalText.substring(0, 50)}...</div>` : ''}
+                                        </div>
+                                        <span class="text-sm font-medium">${d.points}/${d.maxPoints}</span>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                    <div class="mt-6 p-4 bg-blue-50 rounded-xl">
+                        <h4 class="font-bold text-blue-800 mb-2">🎯 Pyloric Stenosis Key Points</h4>
+                        <ul class="text-sm text-gray-700 space-y-1">
+                            <li>• Classic triad: Projectile non-bilious vomiting, palpable olive, visible peristalsis</li>
+                            <li>• Metabolic picture: Hypochloremic, hypokalemic metabolic alkalosis</li>
+                            <li>• Ultrasound criteria: Muscle >3mm, length >15mm</li>
+                            <li>• Medical emergency FIRST (correct electrolytes), surgical urgency SECOND</li>
+                            <li>• Bilious vomiting = NOT pyloric stenosis, consider malrotation</li>
+                        </ul>
+                    </div>
+                    <button onclick="resetGame()" class="mt-6 w-full py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-xl font-semibold hover:opacity-90">🔄 Try Again</button>
+                </div>
+            `;
+        }
+
+        function resetGame() {
+            currentStage = 0; totalScore = 0; decisionPath.length = 0;
+            document.getElementById('summaryPanel').classList.add('hidden');
+            document.getElementById('gameContainer').classList.remove('hidden');
+            document.getElementById('progressBar').style.width = '0%';
+            document.getElementById('score').textContent = '0%';
+            renderStage();
+        }
+
+        initGame();
+    </script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+/* Enhanced Feature Styles */
+.rdx-difficulty-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 300px;
+}
+.rdx-diff-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin: 2px;
+}
+.rdx-diff-btn.active {
+    background: #3b82f6;
+    color: white;
+}
+.rdx-diff-btn:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+}
+.rdx-diff-btn:hover:not(.active) {
+    background: #e2e8f0;
+}
+.rdx-refs-panel {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #93c5fd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+.rdx-refs-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+.rdx-refs-links {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+.rdx-refs-links a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.rdx-refs-links a:hover {
+    text-decoration: underline;
+}
+.rdx-debrief-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rdx-debrief-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #1f2937;
+}
+.rdx-path-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.rdx-path-optimal {
+    background: #dcfce7;
+    border-left: 4px solid #22c55e;
+}
+.rdx-path-suboptimal {
+    background: #fef9c3;
+    border-left: 4px solid #eab308;
+}
+.rdx-path-wrong {
+    background: #fecaca;
+    border-left: 4px solid #ef4444;
+}
+.rdx-hint-beginner {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+.rdx-hint-advanced {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+</style>
+
+<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
+    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
+        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    </div>
+</div>
+
+
+<!-- CROSS-PLATFORM LEARNING LINKS -->
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
+            <a href="../mechanism/pediatrics-module.html" style="display: block; color: #2563eb; font-size: 14px;">→ Pyloric Stenosis</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
+            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="peds-dka-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Peds Dka</a>
+            <a href="peds-kawasaki-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Peds Kawasaki</a>
+            <a href="intussusception-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Intussusception</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
+            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../CoachDx/mentor-chat.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../CoachDx/sbar-trainer.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+<!-- END CROSS-PLATFORM LINKS -->
+<div class="rdx-refs-panel" id="rdxRefsPanel">
+    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
+    <div class="rdx-refs-links"><a href="https://www.aap.org/en/clinical-guidance/" target="_blank" class="text-blue-600 hover:underline">AAP Clinical Guidelines</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK526088/" target="_blank" class="text-blue-600 hover:underline">StatPearls: Pediatric Assessment</a></div>
+</div>
+
+<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
+    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+</div>
+
+<script>
+// ReasonDx Enhanced Features Module
+(function() {
+    // Decision tracking
+    window.rdxDecisionPath = window.rdxDecisionPath || [];
+    window.rdxTotalScore = window.rdxTotalScore || 0;
+    window.rdxMaxScore = window.rdxMaxScore || 0;
+    window.rdxDifficulty = 'intermediate';
+    
+    // Difficulty control
+    window.rdxSetDifficulty = function(level) {
+        window.rdxDifficulty = level;
+        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('rdx-btn-' + level).classList.add('active');
+        
+        // Update hint visibility
+        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
+            el.style.display = level === 'beginner' ? 'block' : 'none';
+        });
+        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
+            el.style.display = level === 'advanced' ? 'block' : 'none';
+        });
+    };
+    
+    // Track a decision
+    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+        window.rdxDecisionPath.push({
+            stage: stageId,
+            title: stageTitle,
+            choice: choiceId,
+            choiceText: choiceText,
+            outcome: outcome,
+            points: points,
+            maxPoints: maxPoints,
+            isOptimal: isOptimal,
+            optimalChoice: optimalChoice,
+            optimalText: optimalText
+        });
+        window.rdxTotalScore += points;
+        window.rdxMaxScore += maxPoints;
+    };
+    
+    // Show visual debrief
+    window.rdxShowDebrief = function() {
+        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
+        
+        let grade, gradeColor, gradeEmoji;
+        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
+        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
+        
+        let pathHTML = '';
+        if (window.rdxDecisionPath.length > 0) {
+            pathHTML = window.rdxDecisionPath.map(d => {
+                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
+                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
+                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
+                return '<div class="' + pathClass + ' rdx-path-item">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
+                    '<div>' +
+                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
+                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
+                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
+                    '</div>' +
+                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
+                    '</div></div>';
+            }).join('');
+        } else {
+            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+        }
+        
+        document.getElementById('rdxDebriefContent').innerHTML = 
+            '<div style="text-align:center;margin-bottom:24px;">' +
+            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
+            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
+            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
+            '</div></div>' +
+            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
+            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
+            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
+            '</div></div>' +
+            '<div style="display:flex;gap:12px;">' +
+            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '</div>';
+        
+        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
+    };
+    
+    // Auto-inject hint examples into existing content
+    window.rdxInit = function() {
+        // Could add dynamic hint injection here based on difficulty
+        console.log('ReasonDx Enhanced Features loaded for: Pyloric Stenosis Expanded Adventure');
+    };
+    
+    // Initialize on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.rdxInit);
+    } else {
+        window.rdxInit();
+    }
+})();
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+</body>
+</html>

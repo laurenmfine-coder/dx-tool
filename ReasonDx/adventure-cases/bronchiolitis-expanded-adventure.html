@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bronchiolitis | Pediatric Clinical Adventure</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%); min-height: 100vh; color: #e2e8f0; line-height: 1.6; padding: 20px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: rgba(124, 58, 237, 0.9); border-radius: 16px; margin-bottom: 20px; }
+        .badge { padding: 4px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; background: #a78bfa; margin-left: 10px; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #a78bfa, #c4b5fd); border-radius: 3px; }
+        .scene { background: linear-gradient(135deg, #6d28d9, #7c3aed); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+        .scene-header { background: rgba(167, 139, 250, 0.15); padding: 16px 20px; }
+        .scene-phase { font-size: 0.75rem; color: #c4b5fd; text-transform: uppercase; }
+        .scene-title { font-size: 1.4rem; font-weight: 700; }
+        .scene-body { padding: 24px; }
+        .highlight { color: #fbbf24; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(167,139,250,0.2)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
+        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; }
+        .boards-tip { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .boards-tip-title { font-weight: 700; color: #fbbf24; margin-bottom: 10px; }
+        .alert-box { background: rgba(239,68,68,0.2); border: 1px solid rgba(239,68,68,0.5); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .alert-title { font-weight: 700; color: #f87171; margin-bottom: 10px; }
+        .btn { padding: 16px 28px; background: linear-gradient(135deg, #a78bfa, #7c3aed); border: none; border-radius: 12px; color: white; font-weight: 600; cursor: pointer; width: 100%; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+        .comparison-table th { background: rgba(0,0,0,0.3); color: #c4b5fd; }
+        .tips { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+        .pearl, .pitfall { padding: 20px; border-radius: 12px; }
+        .pearl { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); }
+        .pitfall { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); }
+        .tip-header { font-weight: 600; margin-bottom: 10px; }
+        .pearl .tip-header { color: #4ade80; }
+        .pitfall .tip-header { color: #f87171; }
+        @media (max-width: 640px) { .tips { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container" id="app"></div>
+    <script>
+    const STAGES = ['arrival','diagnosis','severity','rsv','supportive','notrecommended','oxygen','admission','prevention','debrief'];
+    const state = { stage: 0 };
+    function render() {
+        const p = ((state.stage + 1) / STAGES.length) * 100;
+        let c = `<div class="header"><div style="font-size:1.3rem;font-weight:700">👶🫁 Bronchiolitis<span class="badge">10 STAGES</span></div><div>${state.stage + 1}/${STAGES.length}</div></div><div class="progress-bar"><div class="progress-fill" style="width:${p}%"></div></div>`;
+        c += window['render_' + STAGES[state.stage]]();
+        document.getElementById('app').innerHTML = c;
+    }
+    function nextStage() { state.stage++; render(); }
+
+    window.render_arrival = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 1 of 10</div><div class="scene-title">The Wheezy Infant</div></div><div class="scene-body"><div class="narrative"><p>A <span class="highlight">4-month-old boy</span> presents with <span class="critical">cough, rhinorrhea × 3 days, now with increased work of breathing</span>. Older sibling had a cold last week.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 160, RR 58, SpO2 92% on RA, T 100.8°F<br><strong>Exam:</strong> Nasal flaring, subcostal retractions, diffuse wheezes and crackles<br><strong>Weight:</strong> 6 kg</p></div><div class="alert-box"><div class="alert-title">🚨 Bronchiolitis = #1 Cause of Hospitalization in Infants!</div><p>Peak age: 2-6 months. Peak season: November-March (RSV season). Usually self-limited but can be severe in high-risk infants.</p></div><div class="mechanism-box"><div class="mechanism-title">🧬 Pathophysiology</div><div class="pathway">Viral infection of bronchioles<br>→ Epithelial necrosis + inflammation<br>→ Mucus production + edema<br>→ Small airway obstruction<br>→ Air trapping, atelectasis<br>→ V/Q mismatch → Hypoxemia<br><br>Small airways already small in infants<br>→ Small changes = big obstruction!</div></div><button class="btn" onclick="nextStage()">Diagnosis →</button></div></div>`;
+    };
+
+    window.render_diagnosis = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 2 of 10</div><div class="scene-title">Clinical Diagnosis</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Bronchiolitis is a CLINICAL Diagnosis!</div><table class="comparison-table"><tr><th>Feature</th><th>Description</th></tr><tr><td><strong>Age</strong></td><td><2 years (peak 2-6 months)</td></tr><tr><td><strong>Prodrome</strong></td><td>URI symptoms × 1-3 days</td></tr><tr><td><strong>Exam</strong></td><td>Wheezes, crackles, tachypnea, retractions</td></tr><tr><td><strong>Season</strong></td><td>Winter (RSV season)</td></tr><tr><td><strong>First episode</strong></td><td>Of wheezing in this age group</td></tr></table></div><div class="alert-box"><div class="alert-title">⚠️ Labs and Imaging NOT Routinely Needed!</div><p>Diagnosis is clinical. CXR, viral testing, and labs should NOT be routine - they don't change management and lead to unnecessary interventions.</p></div><div class="mechanism-box"><div class="mechanism-title">🧬 When to Consider Testing</div><div class="pathway"><strong>CXR if:</strong><br>• Severe disease requiring ICU<br>• Suspected complication (pneumonia)<br>• Not improving as expected<br><br><strong>Viral testing if:</strong><br>• Cohorting/infection control<br>• Immunocompromised patient<br>• Decision affects isolation<br><br><strong>CXR findings (if done):</strong><br>Hyperinflation, peribronchial thickening,<br>patchy atelectasis</div></div><button class="btn" onclick="nextStage()">Severity →</button></div></div>`;
+    };
+
+    window.render_severity = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 3 of 10</div><div class="scene-title">Severity Assessment</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Severity Indicators</div><table class="comparison-table"><tr><th>Mild</th><th>Moderate</th><th>Severe</th></tr><tr><td>SpO2 >95%</td><td>SpO2 90-95%</td><td>SpO2 <90%</td></tr><tr><td>RR mildly elevated</td><td>RR 60-70</td><td>RR >70</td></tr><tr><td>Mild retractions</td><td>Moderate retractions</td><td>Severe retractions</td></tr><tr><td>Feeding well</td><td>↓ Feeding, some dehydration</td><td>Cannot feed, dehydrated</td></tr><tr><td>Alert</td><td>Irritable</td><td>Lethargic/exhausted</td></tr></table></div><div class="alert-box"><div class="alert-title">🚨 High-Risk Infants</div><ul style="margin-left:20px;"><li>Age <12 weeks</li><li>Premature (<37 weeks, especially <32 weeks)</li><li>Chronic lung disease (BPD)</li><li>Congenital heart disease</li><li>Immunodeficiency</li><li>Neuromuscular disease</li></ul></div><button class="btn" onclick="nextStage()">RSV →</button></div></div>`;
+    };
+
+    window.render_rsv = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 4 of 10</div><div class="scene-title">RSV and Other Viruses</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Viral Causes</div><table class="comparison-table"><tr><th>Virus</th><th>Percentage</th></tr><tr><td><strong>RSV</strong></td><td>50-80% of cases</td></tr><tr><td>Rhinovirus</td><td>~25%</td></tr><tr><td>Parainfluenza</td><td>~10%</td></tr><tr><td>Human metapneumovirus</td><td>~5-10%</td></tr><tr><td>Influenza</td><td>~5%</td></tr><tr><td>Adenovirus</td><td>~5%</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 RSV Facts</div><div class="pathway"><strong>Respiratory Syncytial Virus:</strong><br>• Nearly all children infected by age 2<br>• Most common cause of bronchiolitis<br>• Peak: November - March<br>• Highly contagious (droplet + contact)<br>• Reinfection common (incomplete immunity)<br><br><strong>Severe RSV risk:</strong><br>• Premature infants<br>• <6 months old<br>• Congenital heart/lung disease<br>• Immunocompromised</div></div><button class="btn" onclick="nextStage()">Supportive Care →</button></div></div>`;
+    };
+
+    window.render_supportive = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 5 of 10</div><div class="scene-title">Supportive Care</div></div><div class="scene-body"><div class="alert-box"><div class="alert-title">🚨 Supportive Care is the ONLY Evidence-Based Treatment!</div><p>No medications have been shown to change outcomes. Focus on: oxygen, hydration, and nasal suctioning.</p></div><div class="boards-tip"><div class="boards-tip-title">📚 Supportive Measures</div><table class="comparison-table"><tr><th>Intervention</th><th>Details</th></tr><tr style="background:rgba(34,197,94,0.2);"><td><strong>Nasal suctioning</strong></td><td>Before feeds, PRN; bulb suction or NP suction</td></tr><tr style="background:rgba(34,197,94,0.2);"><td><strong>Oxygen</strong></td><td>If SpO2 persistently <90-92%</td></tr><tr style="background:rgba(34,197,94,0.2);"><td><strong>Hydration</strong></td><td>Encourage feeds; IV/NG if cannot feed</td></tr><tr style="background:rgba(34,197,94,0.2);"><td><strong>Positioning</strong></td><td>Elevate head of bed</td></tr><tr><td>Saline drops</td><td>Before suctioning to loosen secretions</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Feeding in Bronchiolitis</div><div class="pathway"><strong>Why feeding is difficult:</strong><br>• Tachypnea → can't coordinate suck-swallow<br>• Nasal congestion → obligate nose breathers!<br>• Increased metabolic demands<br><br><strong>Strategies:</strong><br>• Suction BEFORE feeds<br>• Smaller, more frequent feeds<br>• NG tube if RR >60-70 or can't feed<br>• IV fluids if very ill</div></div><button class="btn" onclick="nextStage()">What NOT to Do →</button></div></div>`;
+    };
+
+    window.render_notrecommended = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 6 of 10</div><div class="scene-title">Interventions NOT Recommended</div></div><div class="scene-body"><div class="alert-box"><div class="alert-title">🚨 AAP Guidelines: Do NOT Routinely Use!</div><table class="comparison-table"><tr><th>Intervention</th><th>Why Not Recommended</th></tr><tr><td><strong>Bronchodilators</strong></td><td>No benefit; may cause tachycardia</td></tr><tr><td><strong>Epinephrine</strong></td><td>No sustained benefit</td></tr><tr><td><strong>Corticosteroids</strong></td><td>No benefit in bronchiolitis</td></tr><tr><td><strong>Antibiotics</strong></td><td>It's viral! No benefit</td></tr><tr><td><strong>Hypertonic saline</strong></td><td>Inconsistent evidence; not for ED use</td></tr><tr><td><strong>Chest physiotherapy</strong></td><td>No benefit</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Why Don't Bronchodilators Work?</div><div class="pathway"><strong>Bronchiolitis ≠ Asthma!</strong><br><br>In bronchiolitis:<br>• Obstruction from edema + mucus + debris<br>• NOT bronchospasm<br>• Infants have few β2 receptors<br><br>In asthma:<br>• Obstruction from bronchospasm<br>• Bronchodilators relax smooth muscle<br>• More β2 receptors in older children<br><br>β-agonists don't help the mechanism!</div></div><button class="btn" onclick="nextStage()">Oxygen →</button></div></div>`;
+    };
+
+    window.render_oxygen = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 7 of 10</div><div class="scene-title">Oxygen Therapy</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Oxygen Guidelines</div><table class="comparison-table"><tr><th>Recommendation</th></tr><tr><td>Supplement O2 if SpO2 <90% (AAP 2014)</td></tr><tr><td>Some guidelines use <92% threshold</td></tr><tr><td>Target SpO2 ≥90% (not normal!)</td></tr><tr><td>Continuous monitoring NOT needed once stable</td></tr><tr><td>Intermittent desats during sleep are common and OK</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 High-Flow Nasal Cannula (HFNC)</div><div class="pathway"><strong>Increasingly used for moderate-severe:</strong><br>• Provides heated, humidified O2<br>• Generates small amount of CPAP<br>• Washes out nasopharyngeal dead space<br>• May reduce need for intubation<br><br><strong>Typical settings:</strong><br>Flow: 1-2 L/kg/min (max ~8 L/min in infants)<br>FiO2: Titrate to SpO2 ≥90-92%<br><br><strong>Escalate to CPAP/intubation if:</strong><br>Worsening despite max HFNC</div></div><button class="btn" onclick="nextStage()">Admission →</button></div></div>`;
+    };
+
+    window.render_admission = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 8 of 10</div><div class="scene-title">Disposition</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Admission Criteria</div><table class="comparison-table"><tr><th>Admit If:</th></tr><tr><td>Persistent SpO2 <90-92% on room air</td></tr><tr><td>Respiratory distress (RR >70, severe retractions)</td></tr><tr><td>Unable to feed or dehydrated</td></tr><tr><td>High-risk infant (preterm, cardiac, etc.)</td></tr><tr><td>Age <4-6 weeks</td></tr><tr><td>Apnea</td></tr><tr><td>Unreliable follow-up/social concerns</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Safe Discharge Criteria</div><div class="pathway"><strong>Discharge if:</strong><br>• SpO2 ≥90% on room air<br>• Tolerating feeds adequately<br>• Respiratory distress improved<br>• Caregivers comfortable with care<br>• Close follow-up arranged<br><br><strong>Counsel parents:</strong><br>• Illness peaks days 3-5<br>• Recovery takes 1-2 weeks<br>• When to return: not feeding, color<br>  change, apnea, worsening distress</div></div><button class="btn" onclick="nextStage()">Prevention →</button></div></div>`;
+    };
+
+    window.render_prevention = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 9 of 10</div><div class="scene-title">Prevention</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 RSV Prophylaxis</div><table class="comparison-table"><tr><th>Agent</th><th>Indication</th></tr><tr><td><strong>Palivizumab (Synagis)</strong></td><td>Monthly IM injection for high-risk infants</td></tr><tr><td><strong>Nirsevimab (Beyfortus)</strong></td><td>Single-dose monoclonal antibody (newer)</td></tr><tr><td><strong>RSV vaccine</strong></td><td>For pregnant women (protects newborn) and older adults</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Palivizumab Eligibility</div><div class="pathway"><strong>AAP recommendations include:</strong><br>• Preterm <29 weeks, <12 months at season start<br>• Chronic lung disease of prematurity<br>• Hemodynamically significant CHD<br><br>Given monthly during RSV season<br>(typically November - March)<br><br><strong>Prevention measures:</strong><br>• Hand hygiene<br>• Avoid sick contacts<br>• Avoid secondhand smoke<br>• Breastfeeding (protective)</div></div><button class="btn" onclick="nextStage()">Debrief →</button></div></div>`;
+    };
+
+    window.render_debrief = function() {
+        return `<div class="scene"><div style="text-align:center;padding:40px;"><div style="font-size:4rem;margin-bottom:12px;">👶🫁</div><div style="font-size:1.8rem;font-weight:700;color:#4ade80;">Bronchiolitis Mastery!</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 High-Yield Summary</div><table class="comparison-table"><tr><th>Concept</th><th>Key Point</th></tr><tr><td>Diagnosis</td><td>Clinical! No routine labs/CXR</td></tr><tr><td>Cause</td><td>RSV (~50-80%)</td></tr><tr><td>Treatment</td><td>Supportive only: O2, hydration, suctioning</td></tr><tr><td>NOT recommended</td><td>Bronchodilators, steroids, antibiotics</td></tr><tr><td>O2 threshold</td><td>Supplement if SpO2 <90%</td></tr><tr><td>Peak illness</td><td>Days 3-5</td></tr></table></div><div class="tips"><div class="pearl"><div class="tip-header">✓ Pearls</div><ul style="margin-left:16px;"><li>Suction before feeds</li><li>Bronchiolitis ≠ asthma</li><li>Most don't need admission</li><li>RSV prophylaxis for high-risk</li></ul></div><div class="pitfall"><div class="tip-header">✗ Pitfalls</div><ul style="margin-left:16px;"><li>Routine CXR (leads to unnecessary abx)</li><li>Bronchodilators (don't help)</li><li>Steroids (no benefit)</li><li>Antibiotics (it's viral!)</li></ul></div></div><button class="btn" onclick="state.stage=0;render()">🔄 Restart Case</button></div></div>`;
+    };
+
+    render();
+    </script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+/* Enhanced Feature Styles */
+.rdx-difficulty-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 300px;
+}
+.rdx-diff-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin: 2px;
+}
+.rdx-diff-btn.active {
+    background: #3b82f6;
+    color: white;
+}
+.rdx-diff-btn:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+}
+.rdx-diff-btn:hover:not(.active) {
+    background: #e2e8f0;
+}
+.rdx-refs-panel {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #93c5fd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+.rdx-refs-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+.rdx-refs-links {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+.rdx-refs-links a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.rdx-refs-links a:hover {
+    text-decoration: underline;
+}
+.rdx-debrief-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rdx-debrief-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #1f2937;
+}
+.rdx-path-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.rdx-path-optimal {
+    background: #dcfce7;
+    border-left: 4px solid #22c55e;
+}
+.rdx-path-suboptimal {
+    background: #fef9c3;
+    border-left: 4px solid #eab308;
+}
+.rdx-path-wrong {
+    background: #fecaca;
+    border-left: 4px solid #ef4444;
+}
+.rdx-hint-beginner {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+.rdx-hint-advanced {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+</style>
+
+<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
+    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
+        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    </div>
+</div>
+
+
+<!-- CROSS-PLATFORM LEARNING LINKS -->
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
+            <a href="../mechanism/pediatrics-module.html" style="display: block; color: #2563eb; font-size: 14px;">→ Bronchiolitis</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
+            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="peds-dka-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Peds Dka</a>
+            <a href="peds-kawasaki-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Peds Kawasaki</a>
+            <a href="intussusception-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Intussusception</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
+            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../CoachDx/mentor-chat.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../CoachDx/sbar-trainer.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+<!-- END CROSS-PLATFORM LINKS -->
+<div class="rdx-refs-panel" id="rdxRefsPanel">
+    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
+    <div class="rdx-refs-links"><a href="https://ginasthma.org/gina-reports/" target="_blank" class="text-blue-600 hover:underline">GINA Asthma Guidelines</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK560551/" target="_blank" class="text-blue-600 hover:underline">StatPearls: Pulmonary Embolism</a></div>
+</div>
+
+<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
+    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+</div>
+
+<script>
+// ReasonDx Enhanced Features Module
+(function() {
+    // Decision tracking
+    window.rdxDecisionPath = window.rdxDecisionPath || [];
+    window.rdxTotalScore = window.rdxTotalScore || 0;
+    window.rdxMaxScore = window.rdxMaxScore || 0;
+    window.rdxDifficulty = 'intermediate';
+    
+    // Difficulty control
+    window.rdxSetDifficulty = function(level) {
+        window.rdxDifficulty = level;
+        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('rdx-btn-' + level).classList.add('active');
+        
+        // Update hint visibility
+        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
+            el.style.display = level === 'beginner' ? 'block' : 'none';
+        });
+        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
+            el.style.display = level === 'advanced' ? 'block' : 'none';
+        });
+    };
+    
+    // Track a decision
+    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+        window.rdxDecisionPath.push({
+            stage: stageId,
+            title: stageTitle,
+            choice: choiceId,
+            choiceText: choiceText,
+            outcome: outcome,
+            points: points,
+            maxPoints: maxPoints,
+            isOptimal: isOptimal,
+            optimalChoice: optimalChoice,
+            optimalText: optimalText
+        });
+        window.rdxTotalScore += points;
+        window.rdxMaxScore += maxPoints;
+    };
+    
+    // Show visual debrief
+    window.rdxShowDebrief = function() {
+        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
+        
+        let grade, gradeColor, gradeEmoji;
+        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
+        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
+        
+        let pathHTML = '';
+        if (window.rdxDecisionPath.length > 0) {
+            pathHTML = window.rdxDecisionPath.map(d => {
+                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
+                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
+                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
+                return '<div class="' + pathClass + ' rdx-path-item">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
+                    '<div>' +
+                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
+                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
+                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
+                    '</div>' +
+                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
+                    '</div></div>';
+            }).join('');
+        } else {
+            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+        }
+        
+        document.getElementById('rdxDebriefContent').innerHTML = 
+            '<div style="text-align:center;margin-bottom:24px;">' +
+            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
+            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
+            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
+            '</div></div>' +
+            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
+            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
+            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
+            '</div></div>' +
+            '<div style="display:flex;gap:12px;">' +
+            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '</div>';
+        
+        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
+    };
+    
+    // Auto-inject hint examples into existing content
+    window.rdxInit = function() {
+        // Could add dynamic hint injection here based on difficulty
+        console.log('ReasonDx Enhanced Features loaded for: Bronchiolitis Expanded Adventure');
+    };
+    
+    // Initialize on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.rdxInit);
+    } else {
+        window.rdxInit();
+    }
+})();
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+</body>
+</html>

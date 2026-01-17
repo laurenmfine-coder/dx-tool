@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyponatremia Complete | Dual-Mode Clinical Adventure</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; min-height: 100vh; color: #e2e8f0; line-height: 1.6; padding: 20px; }
+        body.adult { background: linear-gradient(135deg, #0369a1 0%, #0ea5e9 100%); }
+        body.peds { background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%); }
+        .container { max-width: 900px; margin: 0 auto; }
+        .mode-toggle { display: flex; justify-content: center; margin-bottom: 20px; background: rgba(0,0,0,0.3); border-radius: 12px; padding: 4px; }
+        .mode-btn { flex: 1; padding: 12px 24px; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; background: transparent; color: #e2e8f0; }
+        .mode-btn.active { background: rgba(255,255,255,0.2); }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-radius: 16px; margin-bottom: 20px; }
+        .adult .header { background: rgba(3, 105, 161, 0.9); }
+        .peds .header { background: rgba(124, 58, 237, 0.9); }
+        .badge { padding: 4px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; margin-left: 10px; }
+        .adult .badge { background: #0ea5e9; }
+        .peds .badge { background: #a78bfa; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; border-radius: 3px; }
+        .adult .progress-fill { background: linear-gradient(90deg, #0ea5e9, #7dd3fc); }
+        .peds .progress-fill { background: linear-gradient(90deg, #a78bfa, #c4b5fd); }
+        .scene { border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
+        .adult .scene { background: linear-gradient(135deg, #0369a1, #0284c7); }
+        .peds .scene { background: linear-gradient(135deg, #6d28d9, #7c3aed); }
+        .scene-header { padding: 16px 20px; }
+        .adult .scene-header { background: rgba(14, 165, 233, 0.15); }
+        .peds .scene-header { background: rgba(167, 139, 250, 0.15); }
+        .scene-phase { font-size: 0.75rem; text-transform: uppercase; }
+        .scene-title { font-size: 1.4rem; font-weight: 700; }
+        .scene-body { padding: 24px; }
+        .highlight { color: #fbbf24; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(14,165,233,0.2)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
+        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; }
+        .boards-tip { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .boards-tip-title { font-weight: 700; color: #fbbf24; margin-bottom: 10px; }
+        .alert-box { background: rgba(239,68,68,0.2); border: 1px solid rgba(239,68,68,0.5); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .alert-title { font-weight: 700; color: #f87171; margin-bottom: 10px; }
+        .btn { padding: 16px 28px; border: none; border-radius: 12px; color: white; font-weight: 600; cursor: pointer; width: 100%; }
+        .adult .btn { background: linear-gradient(135deg, #0ea5e9, #0284c7); }
+        .peds .btn { background: linear-gradient(135deg, #a78bfa, #7c3aed); }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+        .comparison-table th { background: rgba(0,0,0,0.3); }
+        .why-chain { background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(14,165,233,0.15)); border: 1px solid rgba(139,92,246,0.3); border-radius: 16px; padding: 24px; margin: 24px 0; }
+        .why-chain-title { font-size: 1.2rem; font-weight: 700; color: #c4b5fd; margin-bottom: 20px; }
+        .why-item { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 18px; margin-bottom: 14px; }
+        .why-q { font-weight: 600; color: #e9d5ff; margin-bottom: 10px; }
+        .tips { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+        .pearl, .pitfall { padding: 20px; border-radius: 12px; }
+        .pearl { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); }
+        .pitfall { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); }
+        .tip-header { font-weight: 600; margin-bottom: 10px; }
+        .pearl .tip-header { color: #4ade80; }
+        .pitfall .tip-header { color: #f87171; }
+        @media (max-width: 640px) { .tips { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body class="adult">
+    <div class="container">
+        <div class="mode-toggle">
+            <button class="mode-btn active" onclick="setMode('adult')">🏥 Adult</button>
+            <button class="mode-btn" onclick="setMode('peds')">👶 Pediatric</button>
+        </div>
+        <div id="app"></div>
+    </div>
+    <script>
+    const STAGES = ['arrival','approach','osmolality','volume','siadh','csw','treatment','correction','ods','chronic','debrief'];
+    const state = { stage: 0, mode: 'adult' };
+
+    function setMode(m) { state.mode = m; state.stage = 0; document.body.className = m; document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active')); event.target.classList.add('active'); render(); }
+    function nextStage() { state.stage++; render(); }
+
+    function render() {
+        const p = ((state.stage + 1) / STAGES.length) * 100;
+        const icon = state.mode === 'adult' ? '💧' : '👶💧';
+        const title = state.mode === 'adult' ? 'Hyponatremia Complete' : 'Pediatric Hyponatremia';
+        let c = `<div class="header"><div style="font-size:1.3rem;font-weight:700">${icon} ${title}<span class="badge">11 STAGES</span></div><div>${state.stage + 1}/${STAGES.length}</div></div><div class="progress-bar"><div class="progress-fill" style="width:${p}%"></div></div>`;
+        c += window['render_' + STAGES[state.stage]]();
+        document.getElementById('app').innerHTML = c;
+    }
+
+    window.render_arrival = function() {
+        if (state.mode === 'adult') {
+            return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 1 of 11</div><div class="scene-title">Confusion and Low Sodium</div></div><div class="scene-body"><div class="narrative"><p>A <span class="highlight">68-year-old woman</span> with SCLC presents with <span class="critical">confusion, nausea, and headache</span> over 3 days.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 78, BP 128/76, euvolemic on exam<br><strong>Labs:</strong> Na 118 mEq/L, K 4.0, Cr 0.9, Glucose 95<br><strong>Serum Osm:</strong> 248 mOsm/kg, Urine Osm: 520 mOsm/kg, Urine Na: 45 mEq/L</p></div><div class="alert-box"><div class="alert-title">🚨 Severe Hyponatremia</div><p>Na <120 with neurologic symptoms = medical emergency. Risk of cerebral edema, herniation, and death.</p></div><div class="mechanism-box"><div class="mechanism-title">🧬 Why Brain Swells</div><div class="pathway">↓ Serum osmolality<br>→ Water moves into cells (osmosis)<br>→ Brain cells swell<br>→ Limited space in skull<br>→ ↑ ICP → herniation risk<br><br>Symptoms correlate with RATE of fall<br>more than absolute value</div></div><button class="btn" onclick="nextStage()">Diagnostic Approach →</button></div></div>`;
+        } else {
+            return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 1 of 11</div><div class="scene-title">The Lethargic Infant</div></div><div class="scene-body"><div class="narrative"><p>A <span class="highlight">6-month-old boy</span> presents with <span class="critical">lethargy and seizure</span>. Parents report giving diluted formula due to cost concerns.</p><p style="margin-top:12px;"><strong>Vitals:</strong> HR 140, RR 32, euvolemic<br><strong>Labs:</strong> Na 119 mEq/L, K 4.2, Glucose 78<br><strong>Weight:</strong> 7 kg</p></div><div class="alert-box"><div class="alert-title">🚨 Water Intoxication in Infants</div><p>Diluted formula or excess free water is a common cause of pediatric hyponatremia. Infants have limited ability to excrete free water!</p></div><div class="mechanism-box"><div class="mechanism-title">🧬 Pediatric Considerations</div><div class="pathway">Children at higher risk because:<br>• Higher brain:skull ratio<br>• Less room for brain swelling<br>• Seizure threshold lower<br><br>Common pediatric causes:<br>• Diluted formula/free water<br>• Gastroenteritis with hypotonic fluids<br>• SIADH (meningitis, pneumonia)<br>• Cerebral salt wasting (CNS injury)</div></div><button class="btn" onclick="nextStage()">Diagnostic Approach →</button></div></div>`;
+        }
+    };
+
+    window.render_approach = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 2 of 11</div><div class="scene-title">Systematic Approach</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Step-by-Step Algorithm</div><div class="pathway">Step 1: Is it REAL? (check serum osm)<br>         ↓<br>Step 2: Is the kidney responding? (urine osm)<br>         ↓<br>Step 3: What is the volume status?<br>         ↓<br>Step 4: Check urine sodium<br>         ↓<br>Step 5: Identify the cause</div></div><div class="mechanism-box"><div class="mechanism-title">🧬 The Key Questions</div><div class="pathway"><strong>Serum Osm:</strong> True hyponatremia? (<280)<br><br><strong>Urine Osm:</strong> Is ADH active?<br>• <100 = ADH suppressed (appropriate)<br>• >100 = ADH active (investigate why)<br><br><strong>Volume status:</strong> Hypo/Eu/Hypervolemic?<br><br><strong>Urine Na:</strong> Renal vs extrarenal loss?<br>• <20 = kidneys retaining (extrarenal)<br>• >20 = kidneys wasting (renal/SIADH)</div></div><button class="btn" onclick="nextStage()">Serum Osmolality →</button></div></div>`;
+    };
+
+    window.render_osmolality = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 3 of 11</div><div class="scene-title">True vs Pseudo Hyponatremia</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Categorize by Serum Osmolality</div><table class="comparison-table"><tr><th>Osm</th><th>Category</th><th>Causes</th></tr><tr><td><strong><280</strong></td><td>Hypotonic (TRUE)</td><td>Most causes - continue workup</td></tr><tr><td><strong>280-295</strong></td><td>Isotonic (PSEUDO)</td><td>Hyperlipidemia, hyperproteinemia</td></tr><tr><td><strong>>295</strong></td><td>Hypertonic</td><td>Hyperglycemia, mannitol</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Corrected Sodium for Glucose</div><div class="pathway"><strong>For every 100 mg/dL glucose >100:</strong><br>Add 1.6-2.4 mEq/L to measured Na<br><br>Example: Glucose 500, Na 125<br>Correction: (500-100)/100 × 1.6 = 6.4<br>Corrected Na = 125 + 6.4 = 131.4<br><br>This patient has dilutional hyponatremia<br>from osmotic shift, not true hyponatremia</div></div><div class="why-chain"><div class="why-chain-title">🔗 WHY Chain</div><div class="why-item"><div class="why-q">Why does hyperglycemia cause low Na?</div>Glucose is an effective osmole. High glucose pulls water from cells into ECF, diluting sodium. Treat the glucose, Na will correct.</div></div><button class="btn" onclick="nextStage()">Volume Status →</button></div></div>`;
+    };
+
+    window.render_volume = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 4 of 11</div><div class="scene-title">Volume Assessment</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Hyponatremia by Volume Status</div><table class="comparison-table"><tr><th>Volume</th><th>Causes</th><th>Urine Na</th></tr><tr><td><strong>Hypovolemic</strong></td><td>GI losses, diuretics, adrenal insufficiency</td><td><20 (GI) or >20 (renal/diuretics)</td></tr><tr><td><strong>Euvolemic</strong></td><td>SIADH, hypothyroid, psychogenic polydipsia</td><td>>20 (SIADH) or <20 (polydipsia)</td></tr><tr><td><strong>Hypervolemic</strong></td><td>CHF, cirrhosis, nephrotic syndrome</td><td><20 (avid retention)</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Clinical Assessment</div><div class="pathway"><strong>Hypovolemic clues:</strong><br>• Tachycardia, orthostatic hypotension<br>• Poor skin turgor, dry mucous membranes<br>• BUN/Cr ratio >20<br><br><strong>Euvolemic clues:</strong><br>• Normal vital signs<br>• No edema, no signs of depletion<br>• Most common category!<br><br><strong>Hypervolemic clues:</strong><br>• Edema, JVD, ascites<br>• History of CHF, liver, kidney disease</div></div><button class="btn" onclick="nextStage()">SIADH →</button></div></div>`;
+    };
+
+    window.render_siadh = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 5 of 11</div><div class="scene-title">SIADH</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 SIADH Diagnostic Criteria</div><ul style="margin-left:20px;line-height:2;"><li>Serum Osm <275 mOsm/kg</li><li>Urine Osm >100 mOsm/kg (inappropriately concentrated)</li><li>Euvolemic</li><li>Urine Na >20-40 mEq/L</li><li>Normal thyroid, adrenal function</li><li>No diuretics</li></ul></div><div class="mechanism-box"><div class="mechanism-title">🧬 Causes of SIADH</div><div class="pathway"><strong>CNS:</strong> Stroke, SAH, meningitis, trauma<br><strong>Pulmonary:</strong> Pneumonia, TB, COPD, ventilator<br><strong>Malignancy:</strong> SCLC (#1), head/neck, lymphoma<br><strong>Drugs:</strong> SSRIs, carbamazepine, opioids,<br>         cyclophosphamide, oxytocin, MDMA<br><strong>Other:</strong> Pain, nausea, postoperative<br><br>${state.mode === 'peds' ? '<strong>Pediatric:</strong> Meningitis, pneumonia, bronchiolitis' : ''}</div></div><div class="alert-box"><div class="alert-title">⚠️ This Patient Has SCLC!</div><p>Small cell lung cancer is the classic malignancy causing SIADH via ectopic ADH production. Always consider paraneoplastic syndromes.</p></div><button class="btn" onclick="nextStage()">CSW vs SIADH →</button></div></div>`;
+    };
+
+    window.render_csw = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 6 of 11</div><div class="scene-title">Cerebral Salt Wasting</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 SIADH vs CSW - BOARDS FAVORITE</div><table class="comparison-table"><tr><th>Feature</th><th>SIADH</th><th>CSW</th></tr><tr><td>Volume status</td><td><strong>Euvolemic</strong></td><td><strong>Hypovolemic</strong></td></tr><tr><td>Urine output</td><td>Normal/low</td><td>High (polyuria)</td></tr><tr><td>Uric acid</td><td>Low</td><td>Low</td></tr><tr><td>BUN</td><td>Low-normal</td><td>Elevated</td></tr><tr><td>Treatment</td><td>Fluid restriction</td><td>Volume replacement (NS)</td></tr><tr><td>Context</td><td>Various</td><td>CNS injury (SAH, TBI, surgery)</td></tr></table></div><div class="why-chain"><div class="why-chain-title">🔗 WHY Chain</div><div class="why-item"><div class="why-q">Why does the distinction matter?</div>Treatment is OPPOSITE! SIADH = fluid restrict. CSW = give fluids. Giving fluids in SIADH worsens hyponatremia. Restricting fluids in CSW worsens hypovolemia.</div><div class="why-item"><div class="why-q">Why does CSW occur after brain injury?</div>Brain natriuretic peptide (BNP) release causes renal sodium wasting. The kidney "wastes" salt, and water follows → volume depletion.</div></div><button class="btn" onclick="nextStage()">Treatment →</button></div></div>`;
+    };
+
+    window.render_treatment = function() {
+        if (state.mode === 'adult') {
+            return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 7 of 11</div><div class="scene-title">Treatment Strategy</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Treatment by Severity</div><table class="comparison-table"><tr><th>Presentation</th><th>Treatment</th></tr><tr><td><strong>Severe symptoms</strong> (seizure, coma)</td><td>Hypertonic saline (3% NaCl) 100-150 mL bolus</td></tr><tr><td><strong>Moderate symptoms</strong> (confusion, N/V)</td><td>3% NaCl infusion, slower correction</td></tr><tr><td><strong>Asymptomatic</strong></td><td>Treat underlying cause, fluid restriction</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Hypertonic Saline</div><div class="pathway"><strong>3% NaCl = 513 mEq/L sodium</strong><br><br>Acute symptomatic hyponatremia:<br>• 100-150 mL bolus over 10 min<br>• Can repeat 1-2× if severe symptoms persist<br>• Goal: ↑ Na by 4-6 mEq/L initially<br><br>Calculate infusion rate:<br>• Adroni-Madias formula<br>• Or 1-2 mL/kg/hr of 3% saline<br><br>Check Na every 2-4 hours initially</div></div><div class="alert-box"><div class="alert-title">🚨 Seizure or Obtundation = 3% Saline NOW</div><p>Don't wait! Severe neurologic symptoms require immediate treatment. The risk of NOT treating outweighs the risk of overcorrection.</p></div><button class="btn" onclick="nextStage()">Correction Rate →</button></div></div>`;
+        } else {
+            return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 7 of 11</div><div class="scene-title">Pediatric Treatment</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Pediatric Hypertonic Saline</div><table class="comparison-table"><tr><th>Indication</th><th>Dose</th></tr><tr><td><strong>Seizure/severe</strong></td><td>3% NaCl 2-5 mL/kg bolus over 10-20 min</td></tr><tr><td><strong>Symptomatic</strong></td><td>3% NaCl infusion, target ↑4-6 mEq/L</td></tr><tr><td><strong>Asymptomatic</strong></td><td>Fluid restriction, treat cause</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Calculating 3% Saline</div><div class="pathway"><strong>Goal:</strong> Raise Na by ~5 mEq/L acutely<br><br>mL of 3% NaCl = Weight (kg) × desired ↑ × 2<br><br>Example: 7 kg infant, want ↑5 mEq/L<br>= 7 × 5 × 2 = 70 mL of 3% NaCl<br><br>Give over 10-20 minutes if seizing<br>Can give as slow infusion if stable</div></div><div class="alert-box"><div class="alert-title">⚠️ This Infant Needs 3% Saline!</div><p>Seizure = give 3% saline immediately. 2-5 mL/kg bolus. Don't delay for calculations - better to treat than to let seizure continue.</p></div><button class="btn" onclick="nextStage()">Correction Rate →</button></div></div>`;
+        }
+    };
+
+    window.render_correction = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 8 of 11</div><div class="scene-title">Safe Correction Rate</div></div><div class="scene-body"><div class="alert-box"><div class="alert-title">🚨 CRITICAL: Don't Overcorrect!</div><p><strong>Maximum correction:</strong><br>• 8-10 mEq/L in first 24 hours<br>• 18 mEq/L in first 48 hours<br><br>High-risk patients (alcoholism, malnutrition, hypokalemia): limit to 6-8 mEq/L/day</p></div><div class="mechanism-box"><div class="mechanism-title">🧬 Why Slow Correction?</div><div class="pathway">Chronic hyponatremia → brain adapts<br>→ Brain cells lose osmolytes<br>→ Rapid correction = brain shrinks<br>→ Osmotic demyelination syndrome (ODS)<br><br><strong>ODS risk factors:</strong><br>• Chronic hyponatremia (>48h)<br>• Na <120 mEq/L<br>• Alcoholism, malnutrition<br>• Hypokalemia<br>• Liver disease</div></div><div class="boards-tip"><div class="boards-tip-title">📚 What If You Overcorrect?</div><div class="pathway"><strong>If Na rises too fast, LOWER it back!</strong><br><br>Options to relower sodium:<br>• D5W infusion<br>• DDAVP 1-2 mcg IV q8h<br>• Combination of both<br><br>Goal: Get back under the safe limit</div></div><button class="btn" onclick="nextStage()">Osmotic Demyelination →</button></div></div>`;
+    };
+
+    window.render_ods = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 9 of 11</div><div class="scene-title">Osmotic Demyelination Syndrome</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 ODS (formerly Central Pontine Myelinolysis)</div><table class="comparison-table"><tr><th>Feature</th><th>Details</th></tr><tr><td>Timing</td><td>2-6 days after overcorrection</td></tr><tr><td>Classic triad</td><td>Dysarthria, dysphagia, quadriparesis</td></tr><tr><td>Severe</td><td>"Locked-in" syndrome</td></tr><tr><td>Imaging</td><td>MRI: T2 hyperintensity in pons</td></tr><tr><td>Prognosis</td><td>Variable - some recover, some permanent</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Pathophysiology</div><div class="pathway">Chronic hyponatremia → brain adapts<br>• Neurons lose K+, organic osmolytes<br>• This prevents brain swelling<br><br>Rapid Na correction:<br>• Water leaves brain cells rapidly<br>• But osmolytes can't return quickly<br>• Brain cells shrink excessively<br>• Oligodendrocytes damaged → demyelination<br><br>Pons is most vulnerable (extrapontine<br>myelinolysis can also occur)</div></div><button class="btn" onclick="nextStage()">Chronic Management →</button></div></div>`;
+    };
+
+    window.render_chronic = function() {
+        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 10 of 11</div><div class="scene-title">Chronic SIADH Management</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 Long-Term Treatment Options</div><table class="comparison-table"><tr><th>Treatment</th><th>Mechanism</th><th>Notes</th></tr><tr><td><strong>Fluid restriction</strong></td><td>Limit intake</td><td>First-line; 1-1.5 L/day</td></tr><tr><td><strong>Salt tablets</strong></td><td>Increase solute</td><td>With loop diuretic</td></tr><tr><td><strong>Urea</strong></td><td>Osmotic diuresis</td><td>Effective but poorly tolerated</td></tr><tr><td><strong>Vaptans</strong></td><td>V2 receptor antagonist</td><td>Tolvaptan - monitor closely</td></tr><tr><td><strong>Demeclocycline</strong></td><td>Induces nephrogenic DI</td><td>Slow onset, nephrotoxic</td></tr></table></div><div class="mechanism-box"><div class="mechanism-title">🧬 Vaptans (Tolvaptan)</div><div class="pathway"><strong>V2 receptor antagonist</strong><br>• Blocks ADH at collecting duct<br>• Causes aquaresis (water diuresis)<br>• Does NOT affect sodium excretion<br><br><strong>Cautions:</strong><br>• Start in hospital (unpredictable response)<br>• Can overcorrect rapidly!<br>• Hepatotoxicity risk<br>• Expensive<br>• Contraindicated in hypovolemic hyponatremia</div></div><button class="btn" onclick="nextStage()">Debrief →</button></div></div>`;
+    };
+
+    window.render_debrief = function() {
+        return `<div class="scene"><div style="text-align:center;padding:40px;"><div style="font-size:4rem;margin-bottom:12px;">💧</div><div style="font-size:1.8rem;font-weight:700;color:#4ade80;">${state.mode === 'adult' ? 'Hyponatremia' : 'Pediatric Hyponatremia'} Mastery!</div></div><div class="scene-body"><div class="boards-tip"><div class="boards-tip-title">📚 High-Yield Summary</div><table class="comparison-table"><tr><th>Concept</th><th>Key Point</th></tr><tr><td>Step 1</td><td>Check serum osm (true vs pseudo)</td></tr><tr><td>Step 2</td><td>Check urine osm (ADH on/off?)</td></tr><tr><td>Step 3</td><td>Assess volume status</td></tr><tr><td>SIADH vs CSW</td><td>SIADH = euvolemic; CSW = hypovolemic</td></tr><tr><td>Severe symptoms</td><td>3% NaCl bolus immediately</td></tr><tr><td>Correction limit</td><td>8-10 mEq/L per 24 hours max</td></tr><tr><td>ODS</td><td>From overcorrection; locked-in syndrome</td></tr></table></div><div class="tips"><div class="pearl"><div class="tip-header">✓ Pearls</div><ul style="margin-left:16px;"><li>Urine osm >100 = ADH is active</li><li>Seizure = treat first, worry later</li><li>SIADH: fluid restrict</li><li>CSW: give fluids</li></ul></div><div class="pitfall"><div class="tip-header">✗ Pitfalls</div><ul style="margin-left:16px;"><li>Forgetting to check serum osm</li><li>Confusing SIADH with CSW</li><li>Overcorrecting chronic hyponatremia</li><li>Not rechecking Na frequently</li></ul></div></div><button class="btn" onclick="state.stage=0;render()">🔄 Restart Case</button></div></div>`;
+    };
+
+    render();
+    </script>
+
+<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
+<style>
+/* Enhanced Feature Styles */
+.rdx-difficulty-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    max-width: 300px;
+}
+.rdx-diff-btn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    margin: 2px;
+}
+.rdx-diff-btn.active {
+    background: #3b82f6;
+    color: white;
+}
+.rdx-diff-btn:not(.active) {
+    background: #f1f5f9;
+    color: #475569;
+}
+.rdx-diff-btn:hover:not(.active) {
+    background: #e2e8f0;
+}
+.rdx-refs-panel {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 1px solid #93c5fd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 20px auto;
+    max-width: 900px;
+}
+.rdx-refs-title {
+    font-weight: 700;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+.rdx-refs-links {
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+.rdx-refs-links a {
+    color: #2563eb;
+    text-decoration: none;
+}
+.rdx-refs-links a:hover {
+    text-decoration: underline;
+}
+.rdx-debrief-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.rdx-debrief-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #1f2937;
+}
+.rdx-path-item {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+.rdx-path-optimal {
+    background: #dcfce7;
+    border-left: 4px solid #22c55e;
+}
+.rdx-path-suboptimal {
+    background: #fef9c3;
+    border-left: 4px solid #eab308;
+}
+.rdx-path-wrong {
+    background: #fecaca;
+    border-left: 4px solid #ef4444;
+}
+.rdx-hint-beginner {
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+.rdx-hint-advanced {
+    background: #fef3c7;
+    border: 1px solid #fcd34d;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    display: none;
+}
+</style>
+
+<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
+    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap;">
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
+        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
+        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    </div>
+</div>
+
+
+<!-- CROSS-PLATFORM LEARNING LINKS -->
+<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
+    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
+            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
+            <a href="../mechanism/hyponatremia-module.html" style="display: block; color: #2563eb; font-size: 14px;">→ Hyponatremia</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
+            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
+            <a href="aki-workup-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Aki Workup</a>
+            <a href="acid-base-expanded-dual-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Acid Base Expanded Dual</a>
+            <a href="hyperkalemia-expanded-dual-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Hyperkalemia Expanded Dual</a>
+        </div>
+        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
+            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
+            <a href="../CoachDx/mentor-chat.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
+            <a href="../CoachDx/sbar-trainer.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+        </div>
+    </div>
+</div>
+<!-- END CROSS-PLATFORM LINKS -->
+<div class="rdx-refs-panel" id="rdxRefsPanel">
+    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
+    <div class="rdx-refs-links"><a href="https://kdigo.org/guidelines/acute-kidney-injury/" target="_blank" class="text-blue-600 hover:underline">KDIGO AKI Guidelines</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK441896/" target="_blank" class="text-blue-600 hover:underline">StatPearls: Acute Kidney Injury</a></div>
+</div>
+
+<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
+    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+</div>
+
+<script>
+// ReasonDx Enhanced Features Module
+(function() {
+    // Decision tracking
+    window.rdxDecisionPath = window.rdxDecisionPath || [];
+    window.rdxTotalScore = window.rdxTotalScore || 0;
+    window.rdxMaxScore = window.rdxMaxScore || 0;
+    window.rdxDifficulty = 'intermediate';
+    
+    // Difficulty control
+    window.rdxSetDifficulty = function(level) {
+        window.rdxDifficulty = level;
+        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('rdx-btn-' + level).classList.add('active');
+        
+        // Update hint visibility
+        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
+            el.style.display = level === 'beginner' ? 'block' : 'none';
+        });
+        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
+            el.style.display = level === 'advanced' ? 'block' : 'none';
+        });
+    };
+    
+    // Track a decision
+    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
+        window.rdxDecisionPath.push({
+            stage: stageId,
+            title: stageTitle,
+            choice: choiceId,
+            choiceText: choiceText,
+            outcome: outcome,
+            points: points,
+            maxPoints: maxPoints,
+            isOptimal: isOptimal,
+            optimalChoice: optimalChoice,
+            optimalText: optimalText
+        });
+        window.rdxTotalScore += points;
+        window.rdxMaxScore += maxPoints;
+    };
+    
+    // Show visual debrief
+    window.rdxShowDebrief = function() {
+        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
+        
+        let grade, gradeColor, gradeEmoji;
+        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
+        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
+        
+        let pathHTML = '';
+        if (window.rdxDecisionPath.length > 0) {
+            pathHTML = window.rdxDecisionPath.map(d => {
+                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
+                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
+                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
+                return '<div class="' + pathClass + ' rdx-path-item">' +
+                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
+                    '<div>' +
+                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
+                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
+                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
+                    '</div>' +
+                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
+                    '</div></div>';
+            }).join('');
+        } else {
+            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+        }
+        
+        document.getElementById('rdxDebriefContent').innerHTML = 
+            '<div style="text-align:center;margin-bottom:24px;">' +
+            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
+            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
+            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
+            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
+            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
+            '</div></div>' +
+            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
+            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
+            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
+            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
+            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
+            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
+            '</div></div>' +
+            '<div style="display:flex;gap:12px;">' +
+            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
+            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
+            '</div>';
+        
+        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
+    };
+    
+    // Auto-inject hint examples into existing content
+    window.rdxInit = function() {
+        // Could add dynamic hint injection here based on difficulty
+        console.log('ReasonDx Enhanced Features loaded for: Hyponatremia Expanded Dual Adventure');
+    };
+    
+    // Initialize on load
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', window.rdxInit);
+    } else {
+        window.rdxInit();
+    }
+})();
+</script>
+<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+</body>
+</html>
