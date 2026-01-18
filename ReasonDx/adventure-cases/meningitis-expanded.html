@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bacterial Meningitis - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.1); }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .scene-phase { font-size: 0.85rem; color: #c4b5fd; text-transform: uppercase; letter-spacing: 1px; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #f5f3ff; }
+        .narrative { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #8b5cf6; line-height: 1.7; }
+        .socratic-prompt { background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(139,92,246,0.15)); border: 1px solid rgba(251,191,36,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .socratic-prompt h4 { color: #fbbf24; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 12px; }
+        .socratic-prompt p { font-size: 1.1rem; font-style: italic; color: #fef3c7; }
+        .question-box { background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(251,191,36,0.15)); border: 1px solid rgba(139,92,246,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; margin-bottom: 16px; }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); transform: translateX(4px); }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
+        .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.15) !important; }
+        .option-letter { font-weight: 700; min-width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 8px; }
+        .mcq-option.correct .option-letter { background: #22c55e; color: white; }
+        .mcq-option.incorrect .option-letter { background: #ef4444; color: white; }
+        .feedback { margin-top: 16px; padding: 16px; border-radius: 10px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+        .feedback.incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+        .feedback-title { font-weight: 700; margin-bottom: 8px; }
+        .feedback.correct-feedback .feedback-title { color: #4ade80; }
+        .feedback.incorrect-feedback .feedback-title { color: #f87171; }
+        .teaching-point { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point.show { display: block; }
+        .teaching-point h4 { color: #c4b5fd; margin-bottom: 12px; }
+        .why-chain { background: rgba(251,191,36,0.1); border: 1px solid rgba(251,191,36,0.3); border-radius: 10px; padding: 16px; margin-top: 12px; display: none; }
+        .why-chain.show { display: block; }
+        .why-chain h4 { color: #fbbf24; margin-bottom: 12px; }
+        .why-chain .why-item { margin-bottom: 12px; padding-left: 16px; border-left: 2px solid rgba(251,191,36,0.5); }
+        .why-chain .why-q { color: #fbbf24; font-weight: 600; margin-bottom: 4px; }
+        .why-chain .why-a { color: #e2e8f0; line-height: 1.6; }
+        .btn { background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; border: none; padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
+        .btn.show { display: inline-block; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #8b5cf6, #c4b5fd); border-radius: 3px; transition: width 0.5s; }
+        .score-tracker { position: fixed; top: 20px; right: 20px; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius: 10px; z-index: 100; }
+        .score-label { font-size: 0.8rem; color: #94a3b8; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
+        .difficulty-panel { position: fixed; top: 85px; right: 20px; background: rgba(255,255,255,0.95); padding: 12px 16px; border-radius: 10px; z-index: 100; }
+        .diff-label { font-size: 0.75rem; color: #475569; margin-bottom: 8px; font-weight: 600; }
+        .diff-btns { display: flex; gap: 4px; }
+        .diff-btn { padding: 6px 10px; border: none; border-radius: 6px; font-size: 0.75rem; cursor: pointer; background: #f1f5f9; color: #475569; }
+        .diff-btn.active { background: #8b5cf6; color: white; }
+        .hint-beginner, .hint-advanced { padding: 12px 16px; border-radius: 8px; margin: 12px 0; display: none; }
+        .hint-beginner { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: #86efac; }
+        .hint-advanced { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.3); color: #fcd34d; }
+        .completion { text-align: center; padding: 40px 20px; }
+        .completion-grade { font-size: 2.5rem; font-weight: 800; }
+        .completion-percent { font-size: 4rem; font-weight: 800; margin: 8px 0 16px; }
+        .completion-breakdown { text-align: left; background: rgba(0,0,0,0.2); border-radius: 12px; padding: 20px; margin: 24px 0; }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background: white; border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #bfdbfe; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #1e40af; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #2563eb; font-size: 0.85rem; border: 1px solid #bfdbfe; transition: all 0.2s; }
+.references-content a:hover { background: #2563eb; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="score-tracker"><div class="score-label">Score</div><div class="score-value"><span id="score">0</span>/<span id="maxScore">0</span></div></div>
+        <div class="difficulty-panel"><div class="diff-label">DIFFICULTY</div><div class="diff-btns"><button class="diff-btn" onclick="setDifficulty('beginner',this)">Beginner</button><button class="diff-btn active" onclick="setDifficulty('standard',this)">Standard</button><button class="diff-btn" onclick="setDifficulty('advanced',this)">Advanced</button></div></div>
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.ncbi.nlm.nih.gov/books/NBK459360/" target="_blank" rel="noopener">Meningitis - StatPearls (StatPearls)</a>
+<a href="https://www.cdc.gov/meningitis/bacterial.html" target="_blank" rel="noopener">Bacterial Meningitis - CDC (CDC)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    
+<!-- Platform Recommendations -->
+<div class="platform-panel">
+    <div class="platform-header">🔗 Continue Learning</div>
+    <div class="platform-item"><span class="platform-icon">🔬</span><span>MechanismDx: CNS Infections Module</span></div><div class="platform-item"><span class="platform-icon">🎯</span><span>CoachDx: Fever & Neuro Changes Scenario</span></div><div class="platform-item"><span class="platform-icon">📖</span><span>Deep Dive: CSF Analysis</span></div>
+</div>
+
+</div>
+<script>
+let currentStage=0,score=0,maxScore=0,difficulty='standard',answeredQuestions=new Set(),decisionPath=[];
+const stages=[
+{title:"The Confused Febrile Patient",content:`<div class="narrative"><p>22-year-old college student brought by roommate for fever, severe headache, and confusion developing over 12 hours.</p><p style="margin-top:12px;"><strong>Vitals:</strong> T 103.5F, HR 118, RR 22, BP 98/62, SpO2 97% RA<br><strong>Exam:</strong> Lethargic, photophobic, nuchal rigidity present, petechial rash on trunk and extremities<br><strong>GCS:</strong> 13 (E3V4M6)</p></div><div class="socratic-prompt"><h4>Recognize the Emergency</h4><p>What clinical features suggest bacterial meningitis, and what is the FIRST priority?</p></div>`,
+hint_beginner:"Classic triad: fever + headache + neck stiffness; petechiae suggest Neisseria",hint_advanced:"What percentage have the classic triad?",
+question:{prompt:"What is the FIRST priority in this patient?",
+options:[{text:"Empiric antibiotics IMMEDIATELY - do not delay for LP or CT; every hour of delay increases mortality",correct:true},
+{text:"CT head before any treatment",correct:false},
+{text:"Lumbar puncture first to confirm diagnosis",correct:false},
+{text:"Blood cultures then wait for results",correct:false}],
+explanation:{correct:"TIME IS BRAIN. In suspected bacterial meningitis, give empiric antibiotics IMMEDIATELY. Each hour delay increases mortality 12-15%. LP and CT can wait - antibiotics cannot.",incorrect:"Never delay antibiotics for imaging or LP. Mortality increases with each hour of delay. Draw blood cultures if quick, then give antibiotics immediately."},
+teaching:`<h4>Meningitis - Time Critical</h4><p><strong>Classic triad:</strong> Fever, headache, neck stiffness (only 44% have all 3)</p><p><strong>Kernig/Brudzinski:</strong> Specific but not sensitive</p><p><strong>Petechiae:</strong> Think N. meningitidis</p><p><strong>FIRST ACTION:</strong> Empiric antibiotics - do not delay!</p>`,
+why_chain:[{q:"Why does delay increase mortality?",a:"Bacterial replication in CSF is exponential. Each hour of delay allows log-fold increase in bacterial load, worsening inflammation and neuronal damage. Studies show 12-15% increased mortality per hour of delay."}],points:15}},
+
+{title:"Empiric Antibiotic Selection",content:`<div class="narrative"><p>You're drawing blood cultures while preparing antibiotics.</p></div><div class="socratic-prompt"><h4>Cover the Pathogens</h4><p>What empiric regimen covers the likely organisms in a 22-year-old?</p></div>`,
+hint_beginner:"Age determines likely pathogens: young adults = pneumococcus + meningococcus",hint_advanced:"When to add ampicillin for Listeria?",
+question:{prompt:"What empiric antibiotic regimen for this 22-year-old?",
+options:[{text:"Ceftriaxone 2g IV + Vancomycin (for resistant pneumococcus); add Ampicillin if >50yo or immunocompromised (Listeria coverage)",correct:true},
+{text:"Ceftriaxone alone is sufficient",correct:false},
+{text:"Vancomycin alone covers everything",correct:false},
+{text:"Ampicillin + gentamicin for all ages",correct:false}],
+explanation:{correct:"Standard empiric: Ceftriaxone (meningococcus, pneumococcus) + Vancomycin (penicillin-resistant pneumococcus). Add Ampicillin for Listeria coverage if: age >50, immunocompromised, alcoholism, pregnancy.",incorrect:"Must add vancomycin for resistant pneumococcus (up to 35% resistance). Ampicillin for Listeria only in high-risk groups."},
+teaching:`<h4>Empiric Meningitis Coverage by Age</h4><p><strong>Adults 18-50:</strong> Ceftriaxone + Vancomycin</p><p><strong>Adults >50:</strong> Add Ampicillin (Listeria)</p><p><strong>Immunocompromised:</strong> Add Ampicillin</p><p><strong>Neonates:</strong> Ampicillin + Cefotaxime (or gentamicin)</p>`,
+why_chain:[{q:"Why vancomycin in all adults?",a:"Penicillin-resistant S. pneumoniae is common (up to 35%). Ceftriaxone MIC may be too high. Vancomycin ensures coverage until sensitivities known."},{q:"Why not use meropenem?",a:"Meropenem has poor CSF penetration at standard doses. Ceftriaxone achieves excellent CSF levels and covers the key pathogens."}],points:15}},
+
+{title:"Dexamethasone Decision",content:`<div class="narrative"><p>Antibiotics are being prepared. The nurse asks about steroids.</p></div><div class="socratic-prompt"><h4>Adjunctive Therapy</h4><p>Should dexamethasone be given, and if so, when?</p></div>`,
+hint_beginner:"Dexamethasone reduces inflammation from bacterial lysis",hint_advanced:"What's the evidence for steroids in meningitis?",
+question:{prompt:"When should dexamethasone be given?",
+options:[{text:"Give dexamethasone 0.15 mg/kg BEFORE or WITH first antibiotic dose - reduces mortality in pneumococcal meningitis; less benefit if given after antibiotics",correct:true},
+{text:"Never give steroids in meningitis",correct:false},
+{text:"Give steroids 6 hours after antibiotics",correct:false},
+{text:"Only if patient is hypotensive",correct:false}],
+explanation:{correct:"Dexamethasone 0.15 mg/kg q6h x 4 days, given BEFORE or WITH first antibiotic dose. Reduces mortality in pneumococcal meningitis by dampening inflammatory response to bacterial lysis. Benefit lost if given after antibiotics.",incorrect:"Timing is critical - give BEFORE or WITH antibiotics. The anti-inflammatory effect prevents damage from the inflammatory surge when bacteria lyse."},
+teaching:`<h4>Dexamethasone in Meningitis</h4><p><strong>Dose:</strong> 0.15 mg/kg IV q6h x 4 days</p><p><strong>Timing:</strong> BEFORE or WITH first antibiotic dose</p><p><strong>Benefit:</strong> Reduces mortality in S. pneumoniae meningitis</p><p><strong>Continue if:</strong> Gram stain shows GPC or culture confirms pneumococcus</p>`,
+why_chain:[{q:"Why does timing matter?",a:"When antibiotics kill bacteria, cell wall components (lipopolysaccharide, peptidoglycan) are released, triggering massive inflammation. Steroids given before/with antibiotics blunt this response."},{q:"Should you continue if meningococcus?",a:"Evidence for mortality benefit is strongest for pneumococcus. Many continue for all bacterial meningitis, but can stop if N. meningitidis confirmed."}],points:10}},
+
+{title:"CT Before LP Decision",content:`<div class="narrative"><p>Antibiotics and dexamethasone given. Now considering LP.</p></div><div class="socratic-prompt"><h4>Imaging Decision</h4><p>Does this patient need CT before LP?</p></div>`,
+hint_beginner:"CT before LP only for specific indications - not routine",hint_advanced:"What are the herniation risk factors?",
+question:{prompt:"Does this patient need CT before LP?",
+options:[{text:"YES - altered mental status (GCS 13) is indication for CT before LP; other indications: focal neuro signs, papilledema, seizure, immunocompromised",correct:true},
+{text:"All meningitis patients need CT before LP",correct:false},
+{text:"Never need CT - LP is always safe",correct:false},
+{text:"CT replaces need for LP",correct:false}],
+explanation:{correct:"CT before LP indicated if: altered mental status, focal neurologic deficit, papilledema, seizure within 1 week, immunocompromised. This patient has GCS 13 (altered) - needs CT. But do NOT delay antibiotics for CT.",incorrect:"CT before LP is not routine but IS indicated for altered mental status, focal signs, papilledema, recent seizure, immunocompromised."},
+teaching:`<h4>CT Before LP Indications</h4><p><strong>Altered mental status</strong> (this patient)</p><p><strong>Focal neurologic deficit</strong></p><p><strong>Papilledema</strong></p><p><strong>Seizure within 1 week</strong></p><p><strong>Immunocompromised</strong></p><p><strong>Key:</strong> Give antibiotics BEFORE CT - don't delay treatment</p>`,
+why_chain:[{q:"Why CT before LP in these patients?",a:"Risk of herniation if mass lesion or severely elevated ICP. CT identifies contraindications to LP. But absence of mass doesn't guarantee LP is safe - clinical judgment still needed."}],points:10}},
+
+{title:"CSF Interpretation",content:`<div class="narrative"><p>CT shows no mass or shift. LP performed.<br>CSF: WBC 2,400 (92% PMN), Protein 285, Glucose 22 (serum 110), Gram stain: gram-positive diplococci</p></div><div class="socratic-prompt"><h4>Analyze the CSF</h4><p>What do these CSF findings indicate?</p></div>`,
+hint_beginner:"High WBC with PMN predominance + low glucose = bacterial",hint_advanced:"What CSF:serum glucose ratio suggests bacterial?",
+question:{prompt:"What do these CSF findings indicate?",
+options:[{text:"Bacterial meningitis: high WBC with PMN predominance, elevated protein, LOW glucose (ratio <0.4), gram-positive diplococci = S. pneumoniae",correct:true},
+{text:"Viral meningitis - elevated WBC",correct:false},
+{text:"Normal CSF",correct:false},
+{text:"Fungal meningitis",correct:false}],
+explanation:{correct:"Classic bacterial CSF: WBC >1000 with PMN predominance (>80%), protein elevated (>100), glucose LOW (<40 or ratio <0.4). Gram-positive diplococci = S. pneumoniae (most common adult pathogen).",incorrect:"The PMN predominance, very high WBC, low glucose, and gram-positive diplococci are classic for bacterial (pneumococcal) meningitis."},
+teaching:`<h4>CSF Patterns</h4><p><strong>Bacterial:</strong> WBC 1000-10000, >80% PMN, protein >100, glucose <40</p><p><strong>Viral:</strong> WBC 50-1000, lymphocyte predominant, protein mildly elevated, glucose normal</p><p><strong>Fungal/TB:</strong> WBC 50-500, lymphocytes, very high protein, very low glucose</p>`,
+why_chain:[{q:"Why is glucose low in bacterial meningitis?",a:"Bacteria consume glucose. Also, inflammation impairs glucose transport across blood-brain barrier. CSF:serum ratio <0.4 is highly suggestive of bacterial infection."}],points:10}},
+
+{title:"Antibiotic Adjustment",content:`<div class="narrative"><p>Gram stain shows gram-positive diplococci. Culture pending.</p></div><div class="socratic-prompt"><h4>Narrow or Continue?</h4><p>How do you adjust antibiotics based on Gram stain?</p></div>`,
+hint_beginner:"GPC diplococci = pneumococcus; continue vanc until sensitivities",hint_advanced:"When can you stop vancomycin?",
+question:{prompt:"Based on gram-positive diplococci, how do you adjust antibiotics?",
+options:[{text:"Continue ceftriaxone + vancomycin until culture sensitivities; if penicillin MIC <0.1, can narrow to penicillin G or ceftriaxone alone",correct:true},
+{text:"Stop all antibiotics - diagnosis confirmed",correct:false},
+{text:"Switch to ampicillin only",correct:false},
+{text:"Add gentamicin for synergy",correct:false}],
+explanation:{correct:"GPC diplococci = likely S. pneumoniae. Continue vancomycin until sensitivities known (resistance common). If MIC favorable, can narrow. Continue dexamethasone for pneumococcal meningitis.",incorrect:"Don't narrow until sensitivities confirm susceptibility. Resistant pneumococcus is common. Vancomycin coverage essential until MIC known."},
+teaching:`<h4>Antibiotic Adjustment Based on Gram Stain</h4><p><strong>GPC diplococci (pneumococcus):</strong> Continue ceftriaxone + vanc; narrow when MIC known</p><p><strong>GNC diplococci (meningococcus):</strong> Ceftriaxone alone adequate; stop vanc</p><p><strong>GNR (Listeria, etc):</strong> Ensure ampicillin coverage</p>`,
+why_chain:[{q:"When discontinue vancomycin?",a:"When culture confirms S. pneumoniae with penicillin MIC <0.1 mcg/mL or ceftriaxone MIC <1. If MIC higher, continue vancomycin throughout treatment."}],points:10}},
+
+{title:"Contact Prophylaxis",content:`<div class="narrative"><p>Culture confirms N. meningitidis (different patient scenario). Roommates and close contacts are concerned.</p></div><div class="socratic-prompt"><h4>Prevent Spread</h4><p>Who needs prophylaxis for meningococcal exposure?</p></div>`,
+hint_beginner:"Close contacts within 7 days of symptom onset",hint_advanced:"What prophylaxis options exist?",
+question:{prompt:"Who needs prophylaxis for meningococcal meningitis?",
+options:[{text:"Close contacts (household, roommates, kissing contacts, healthcare workers with unprotected airway exposure) within 7 days; give rifampin, ciprofloxacin, or ceftriaxone",correct:true},
+{text:"Everyone in the same building",correct:false},
+{text:"Only if they develop symptoms",correct:false},
+{text:"No prophylaxis needed for meningococcus",correct:false}],
+explanation:{correct:"Prophylaxis for CLOSE contacts within 7 days: household members, roommates, intimate contacts, anyone with direct exposure to secretions. Options: rifampin 600mg BID x 2 days, ciprofloxacin 500mg x 1, or ceftriaxone 250mg IM x 1.",incorrect:"Prophylaxis is for close contacts only - not casual contacts. Healthcare workers need prophylaxis only if unprotected exposure to respiratory secretions (intubation, suctioning)."},
+teaching:`<h4>Meningococcal Prophylaxis</h4><p><strong>Who:</strong> Household, roommates, intimate contacts, unprotected healthcare exposure</p><p><strong>When:</strong> Within 7 days of patient's symptom onset</p><p><strong>Options:</strong> Rifampin 600mg BID x 2d, Cipro 500mg x 1, Ceftriaxone 250mg IM x 1</p>`,
+why_chain:[{q:"Why doesn't the patient's treatment serve as prophylaxis?",a:"Ceftriaxone at treatment doses does eliminate nasopharyngeal carriage, but if patient received another regimen, they may need prophylaxis before discharge to prevent transmission to new contacts."}],points:10}},
+
+{title:"Case Synthesis",content:`<div class="narrative"><p>Patient treated for 14 days. Gradual improvement. No hearing loss detected. Discharged with follow-up.</p></div><div class="socratic-prompt"><h4>Key Principles</h4><p>What are the critical management principles for bacterial meningitis?</p></div>`,
+hint_beginner:"Antibiotics immediately, dex with/before abx, CT only if indicated",hint_advanced:"What is mortality without treatment vs with treatment?",
+question:{prompt:"What are the critical meningitis management principles?",
+options:[{text:"Empiric antibiotics IMMEDIATELY (don't delay for LP/CT), dexamethasone BEFORE/WITH antibiotics, CT only if altered/focal/papilledema, adjust based on Gram stain and culture",correct:true},
+{text:"Always CT before antibiotics",correct:false},
+{text:"Steroids contraindicated",correct:false},
+{text:"Wait for culture before treating",correct:false}],
+explanation:{correct:"Key principles: 1) Antibiotics IMMEDIATELY - don't delay, 2) Dexamethasone before/with first dose, 3) CT only for specific indications, 4) Adjust based on Gram stain/culture, 5) Prophylaxis for close contacts if meningococcal.",incorrect:"Time is critical. Every hour of antibiotic delay increases mortality. Steroids reduce mortality in pneumococcal meningitis."},
+teaching:`<h4>Meningitis Management Summary</h4><p>1. Antibiotics IMMEDIATELY - do not delay</p><p>2. Dexamethasone BEFORE or WITH antibiotics</p><p>3. CT before LP only if: altered, focal, papilledema, seizure, immunocompromised</p><p>4. CSF analysis: WBC, protein, glucose, Gram stain, culture</p><p>5. Adjust antibiotics based on results</p><p>6. Prophylaxis for close contacts (meningococcus)</p>`,
+why_chain:[{q:"What is mortality with vs without treatment?",a:"Untreated bacterial meningitis is nearly 100% fatal. With prompt treatment, mortality is 15-25% for pneumococcal, 5-10% for meningococcal. Delay dramatically worsens outcomes."}],points:10}}
+];
+function shuffleArray(a){const s=[...a];for(let i=s.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[s[i],s[j]]=[s[j],s[i]];}return s;}
+function setDifficulty(l,b){difficulty=l;document.querySelectorAll('.diff-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderStage(currentStage);}
+function renderStage(i){
+const s=stages[i],opts=shuffleArray(s.question.options.map((o,idx)=>({...o,idx}))),ltrs='ABCD';
+let hints='';
+if(difficulty==='beginner'&&s.hint_beginner)hints=`<div class="hint-beginner" style="display:block;">Hint: ${s.hint_beginner}</div>`;
+else if(difficulty==='advanced'&&s.hint_advanced)hints=`<div class="hint-advanced" style="display:block;">Challenge: ${s.hint_advanced}</div>`;
+const why=s.question.why_chain?`<div class="why-chain" id="why"><h4>WHY Chain</h4>${s.question.why_chain.map(w=>`<div class="why-item"><div class="why-q">Q: ${w.q}</div><div class="why-a">${w.a}</div></div>`).join('')}</div>`:'';
+document.getElementById('progress').style.width=((i)/stages.length*100)+'%';
+document.getElementById('scene-container').innerHTML=`<div class="scene"><div class="scene-header"><div class="scene-phase">Stage ${i+1} of ${stages.length}</div><div class="scene-title">${s.title}</div></div>${s.content}${hints}<div class="question-box"><div class="question-prompt">${s.question.prompt}</div><div class="mcq-options">${opts.map((o,j)=>`<div class="mcq-option" data-correct="${o.correct}" onclick="selectOption(this,${i})"><span class="option-letter">${ltrs[j]}</span><span class="option-text">${o.text}</span></div>`).join('')}</div><div class="feedback correct-feedback" id="fb-c"><div class="feedback-title">Correct!</div><div>${s.question.explanation.correct}</div></div><div class="feedback incorrect-feedback" id="fb-i"><div class="feedback-title">Not Quite</div><div>${s.question.explanation.incorrect}</div></div><div class="teaching-point" id="teach">${s.question.teaching}</div>${why}<button class="btn" id="next-btn" onclick="nextStage()">Continue</button></div></div>`;
+}
+function selectOption(el,i){
+if(answeredQuestions.has(i))return;
+const c=el.dataset.correct==='true',s=stages[i];
+answeredQuestions.add(i);decisionPath.push({stage:s.title,correct:c,points:c?s.question.points:0});
+if(c)score+=s.question.points;maxScore+=s.question.points;
+document.getElementById('score').textContent=score;document.getElementById('maxScore').textContent=maxScore;
+document.querySelectorAll('.mcq-option').forEach(o=>{o.classList.add('disabled');if(o.dataset.correct==='true')o.classList.add('correct');else if(o===el&&!c)o.classList.add('incorrect');});
+document.getElementById(c?'fb-c':'fb-i').classList.add('show');
+document.getElementById('teach').classList.add('show');
+const w=document.getElementById('why');if(w)w.classList.add('show');
+document.getElementById('next-btn').classList.add('show');
+}
+function nextStage(){if(++currentStage<stages.length){renderStage(currentStage);window.scrollTo({top:0,behavior:'smooth'});}else showCompletion();}
+function showCompletion(){
+const p=Math.round(score/maxScore*100);
+let g,m,clr;
+if(p>=90){g='Outstanding!';clr='#22c55e';m='Excellent meningitis management!';}
+else if(p>=80){g='Great Work!';clr='#3b82f6';m='Strong grasp. Review CSF patterns.';}
+else if(p>=70){g='Good Progress';clr='#f59e0b';m='Focus on timing of antibiotics and steroids.';}
+else{g='Keep Learning';clr='#ef4444';m='Review empiric coverage and CT indications.';}
+document.getElementById('scene-container').innerHTML=`<div class="scene completion"><div class="completion-grade" style="color:${clr}">${g}</div><div class="completion-percent" style="color:${clr}">${p}%</div><div style="font-size:1.3rem;margin-bottom:8px">${score}/${maxScore} points</div><div style="margin:16px 0;color:#e2e8f0">${m}</div><div class="completion-breakdown"><h4 style="margin-bottom:16px">Your Journey</h4>${decisionPath.map((d,j)=>`<div style="padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;"><span style="color:${d.correct?'#4ade80':'#f87171'}">${d.correct?'Y':'N'} ${d.stage}</span><span style="color:#94a3b8">${d.points}/${stages[j].question.points}</span></div>`).join('')}</div></div>`;
+document.getElementById('progress').style.width='100%';
+}
+document.addEventListener('DOMContentLoaded',()=>renderStage(0));
+
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#3b82f6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color:#f59e0b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+</body>
+</html>

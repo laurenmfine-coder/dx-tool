@@ -3,900 +3,967 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GI Bleed Complete | Clinical Adventure</title>
+    <title>Gastrointestinal Bleeding - ReasonDx Socratic Case</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 100%); min-height: 100vh; color: #e2e8f0; line-height: 1.6; padding: 20px; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d1b4e 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #f8fafc;
+        }
         .container { max-width: 900px; margin: 0 auto; }
-        .header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: rgba(127, 29, 29, 0.9); border-radius: 16px; margin-bottom: 20px; }
-        .badge { padding: 4px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; background: #dc2626; margin-left: 10px; }
-        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, #dc2626, #fca5a5); border-radius: 3px; }
-        .scene { background: linear-gradient(135deg, #7f1d1d, #991b1b); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
-        .scene-header { background: rgba(220, 38, 38, 0.15); padding: 16px 20px; }
-        .scene-phase { font-size: 0.75rem; color: #fca5a5; text-transform: uppercase; }
-        .scene-title { font-size: 1.4rem; font-weight: 700; }
-        .scene-body { padding: 24px; }
-        .highlight { color: #fbbf24; font-weight: 600; }
+        .scene {
+            background: rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .scene-header {
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .scene-phase { 
+            font-size: 0.85rem; 
+            color: #94a3b8; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        .scene-title { 
+            font-size: 1.5rem; 
+            font-weight: 700;
+            color: #f1f5f9;
+        }
+        .narrative {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-left: 4px solid #3b82f6;
+            line-height: 1.7;
+        }
+        .narrative ul, .narrative ol { margin-left: 20px; margin-top: 8px; }
+        .narrative li { margin-bottom: 4px; }
+        .highlight { color: #60a5fa; font-weight: 600; }
         .critical { color: #f87171; font-weight: 600; }
-        .safe { color: #4ade80; font-weight: 600; }
-        .mechanism-box { background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(220, 38, 38, 0.2)); border: 1px solid rgba(139, 92, 246, 0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
-        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
-        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; }
-        .boards-tip { background: rgba(251, 191, 36, 0.15); border: 1px solid rgba(251, 191, 36, 0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
-        .boards-tip-title { font-weight: 700; color: #fbbf24; margin-bottom: 10px; }
-        .alert-box { background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.5); border-radius: 12px; padding: 20px; margin: 20px 0; }
-        .alert-title { font-weight: 700; color: #f87171; margin-bottom: 10px; }
-        .btn { padding: 16px 28px; background: linear-gradient(135deg, #dc2626, #b91c1c); border: none; border-radius: 12px; color: white; font-weight: 600; cursor: pointer; width: 100%; }
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(220, 38, 38, 0.4); }
-        .comparison-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.85rem; }
-        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
-        .comparison-table th { background: rgba(0,0,0,0.3); color: #fca5a5; }
-        .why-chain { background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(220, 38, 38, 0.15)); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 16px; padding: 24px; margin: 24px 0; }
-        .why-chain-title { font-size: 1.2rem; font-weight: 700; color: #c4b5fd; margin-bottom: 20px; }
-        .why-item { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 18px; margin-bottom: 14px; }
-        .why-q { font-weight: 600; color: #e9d5ff; margin-bottom: 10px; }
-        .outcome-banner { text-align: center; padding: 40px; }
-        .tips { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
-        .pearl, .pitfall { padding: 20px; border-radius: 12px; }
-        .pearl { background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); }
-        .pitfall { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); }
-        .tip-header { font-weight: 600; margin-bottom: 10px; }
-        .pearl .tip-header { color: #4ade80; }
-        .pitfall .tip-header { color: #f87171; }
-        @media (max-width: 640px) { .tips { grid-template-columns: 1fr; } }
-    </style>
+        .lab-value { color: #fbbf24; font-weight: 600; }
+        
+        /* Patient info card */
+        .patient-card {
+            background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(139,92,246,0.1));
+            border: 1px solid rgba(59,130,246,0.2);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+        }
+        .patient-card h4 { color: #93c5fd; margin-bottom: 12px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin-top: 12px; }
+        .vital-item { background: rgba(0,0,0,0.2); padding: 8px 12px; border-radius: 8px; text-align: center; }
+        .vital-label { font-size: 0.75rem; color: #94a3b8; }
+        .vital-value { font-size: 1.1rem; font-weight: 700; }
+        .vital-value.abnormal { color: #f87171; }
+        .vital-value.normal { color: #4ade80; }
+        
+        /* Question styling */
+        .question-box {
+            background: linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(139,92,246,0.15) 100%);
+            border: 1px solid rgba(59,130,246,0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .question-prompt {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.15);
+            border-radius: 10px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .mcq-option:hover:not(.selected):not(.correct):not(.incorrect):not(.disabled) {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.3);
+            transform: translateX(4px);
+        }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { 
+            border-color: #22c55e !important; 
+            background: rgba(34,197,94,0.2) !important;
+            opacity: 1 !important;
+        }
+        .mcq-option.incorrect { 
+            border-color: #ef4444 !important; 
+            background: rgba(239,68,68,0.15) !important;
+        }
+        .option-letter {
+            font-weight: 700;
+            min-width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            flex-shrink: 0;
+        }
+        .mcq-option.correct .option-letter { background: #22c55e; color: white; }
+        .mcq-option.incorrect .option-letter { background: #ef4444; color: white; }
+        .option-text { flex: 1; line-height: 1.5; }
+        
+        /* Feedback styling */
+        .feedback {
+            margin-top: 16px;
+            padding: 16px;
+            border-radius: 10px;
+            display: none;
+        }
+        .feedback.show { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .feedback.correct-feedback {
+            background: rgba(34,197,94,0.15);
+            border: 1px solid rgba(34,197,94,0.3);
+        }
+        .feedback.incorrect-feedback {
+            background: rgba(239,68,68,0.15);
+            border: 1px solid rgba(239,68,68,0.3);
+        }
+        .feedback-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.05rem;
+        }
+        .feedback.correct-feedback .feedback-title { color: #4ade80; }
+        .feedback.incorrect-feedback .feedback-title { color: #f87171; }
+        .feedback-explanation {
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+        
+        /* Teaching point */
+        .teaching-point {
+            background: rgba(139,92,246,0.15);
+            border: 1px solid rgba(139,92,246,0.3);
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 16px;
+            display: none;
+        }
+        .teaching-point.show { display: block; animation: fadeIn 0.3s ease 0.2s both; }
+        .teaching-point h4 {
+            color: #a78bfa;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+        .teaching-point ul, .teaching-point ol { margin-left: 20px; margin-top: 8px; }
+        .teaching-point li { margin-bottom: 6px; line-height: 1.5; color: #e2e8f0; }
+        .teaching-point p { line-height: 1.6; margin-top: 8px; color: #e2e8f0; }
+        .teaching-point em { color: #94a3b8; }
+        .teaching-point strong { color: #f1f5f9; }
+        .teaching-point table { width: 100%; margin-top: 12px; border-collapse: collapse; }
+        .teaching-point td, .teaching-point th { 
+            padding: 10px 12px; 
+            border-bottom: 1px solid rgba(255,255,255,0.1); 
+            text-align: left;
+        }
+        .teaching-point th { color: #a78bfa; font-size: 0.85rem; text-transform: uppercase; }
+        
+        .btn {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: none;
+            margin-top: 16px;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(59,130,246,0.4); }
+        .btn.show { display: inline-block; animation: fadeIn 0.3s ease 0.4s both; }
+        
+        /* Progress bar */
+        .progress-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+        
+        /* Score tracker */
+        .score-tracker {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            padding: 12px 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .score-label { font-size: 0.8rem; color: #94a3b8; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
+        
+        /* Difficulty toggle */
+        .difficulty-panel {
+            position: fixed;
+            top: 85px;
+            right: 20px;
+            background: rgba(255,255,255,0.95);
+            padding: 12px 16px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+        .diff-label { font-size: 0.75rem; color: #475569; margin-bottom: 8px; font-weight: 600; }
+        .diff-btns { display: flex; gap: 4px; }
+        .diff-btn {
+            padding: 6px 10px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            background: #f1f5f9;
+            color: #475569;
+            transition: all 0.2s;
+        }
+        .diff-btn:hover { background: #e2e8f0; }
+        .diff-btn.active { background: #3b82f6; color: white; }
+        
+        /* Hints */
+        .hint-beginner, .hint-advanced {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin: 12px 0;
+            display: none;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        .hint-beginner {
+            background: rgba(34,197,94,0.15);
+            border: 1px solid rgba(34,197,94,0.3);
+            color: #86efac;
+        }
+        .hint-advanced {
+            background: rgba(251,191,36,0.15);
+            border: 1px solid rgba(251,191,36,0.3);
+            color: #fcd34d;
+        }
+        
+        /* Completion screen */
+        .completion { text-align: center; padding: 60px 40px; }
+        .completion-grade { font-size: 2.5rem; font-weight: 700; margin-bottom: 16px; }
+        .completion-score { font-size: 1.5rem; margin-bottom: 8px; }
+        .completion-percent { font-size: 3rem; font-weight: 700; margin: 20px 0; }
+        .completion-message { color: #94a3b8; font-size: 1.1rem; margin-bottom: 24px; }
+        .completion-breakdown { text-align: left; max-width: 500px; margin: 24px auto; }
+        .completion-breakdown h4 { color: #94a3b8; margin-bottom: 12px; font-size: 0.9rem; }
+        
+        /* Cross-platform links */
+        .crossplatform {
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 24px;
+        }
+        .crossplatform h4 { color: #94a3b8; margin-bottom: 16px; font-size: 0.9rem; }
+        .crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
+        .crossplatform-link {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: #93c5fd;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .score-tracker { position: static; display: inline-block; margin-bottom: 12px; }
+            .difficulty-panel { position: static; display: inline-block; margin-left: 12px; margin-bottom: 12px; }
+            body { padding: 12px; }
+            .scene { padding: 16px; }
+            .vitals-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background: white; border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #bfdbfe; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #1e40af; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #2563eb; font-size: 0.85rem; border: 1px solid #bfdbfe; transition: all 0.2s; }
+.references-content a:hover { background: #2563eb; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+</style>
 </head>
 <body>
-    <div class="container" id="app"></div>
-    <script>
-    const STAGES = [
-        'arrival', 'upper_vs_lower', 'ugib_etiologies', 'risk_stratification', 
-        'resuscitation', 'transfusion', 'ppi_role', 'endoscopy_timing', 
-        'endoscopic_therapy', 'post_endo', 'variceal_bleed', 'lower_gi', 
-        'rebleeding', 'debrief'
-    ];
-    const state = { stage: 0 };
-
-    function render() {
-        const progress = ((state.stage + 1) / STAGES.length) * 100;
-        let c = `<div class="header">
-            <div style="font-size:1.3rem;font-weight:700">🩸 GI Bleed Complete<span class="badge">14 STAGES</span></div>
-            <div style="font-size:1.3rem;font-weight:700">${state.stage + 1}/${STAGES.length}</div></div>
-            <div class="progress-bar"><div class="progress-fill" style="width:${progress}%"></div></div>`;
-        
-        switch(STAGES[state.stage]) {
-            case 'arrival': c += renderArrival(); break;
-            case 'upper_vs_lower': c += renderUpperVsLower(); break;
-            case 'ugib_etiologies': c += renderUGIBEtiologies(); break;
-            case 'risk_stratification': c += renderRiskStrat(); break;
-            case 'resuscitation': c += renderResuscitation(); break;
-            case 'transfusion': c += renderTransfusion(); break;
-            case 'ppi_role': c += renderPPI(); break;
-            case 'endoscopy_timing': c += renderEndoscopyTiming(); break;
-            case 'endoscopic_therapy': c += renderEndoscopicTherapy(); break;
-            case 'post_endo': c += renderPostEndo(); break;
-            case 'variceal_bleed': c += renderVariceal(); break;
-            case 'lower_gi': c += renderLowerGI(); break;
-            case 'rebleeding': c += renderRebleeding(); break;
-            case 'debrief': c += renderDebrief(); break;
-        }
-        document.getElementById('app').innerHTML = c;
-    }
-
-    function renderArrival() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 1 of 14</div><div class="scene-title">The Bleeding Patient</div></div>
-            <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Hematemesis/melena = upper GI; Hematochezia usually = lower GI</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> Restrictive (Hgb <7) vs liberal transfusion strategy - what's the evidence?</p>
-                </div>
-                <div class="rdx-clinical-pearl" style="background:#eff6ff; border:1px solid #3b82f6; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #3b82f6;">
-                    <p style="margin:0; color:#1e40af; font-size:0.9rem;"><strong>💡 Clinical Pearl:</strong> Variceal bleed: Octreotide + PPI + antibiotics (ceftriaxone)</p>
-                </div>
-                <div class="narrative"><p>A <span class="highlight">68-year-old man</span> presents to the ED with <span class="critical">coffee-ground emesis and melena</span> since this morning.</p>
-                <p style="margin-top:12px;"><strong>History:</strong> HTN, osteoarthritis (takes ibuprofen daily), H. pylori treated 10 years ago<br>
-                <strong>Vitals:</strong> HR 112, BP 92/58, RR 20, SpO2 96% on RA<br>
-                <strong>Exam:</strong> Pale, diaphoretic, abdomen soft with epigastric tenderness, melena on rectal</p></div>
-                
-                <div class="alert-box"><div class="alert-title">🚨 Recognize Hemodynamic Instability</div>
-                    <p>Tachycardia + hypotension suggests significant blood loss (>15-30% blood volume). This patient needs immediate resuscitation.</p></div>
-                
-                <div class="mechanism-box"><div class="mechanism-title">🧬 GI Bleed Pathophysiology Overview</div>
-                    <div class="pathway">Mucosal injury (NSAID, H. pylori, stress)<br>→ Erosion into submucosal vessels<br>→ Arterial bleeding (peptic ulcer) or venous (varices)<br>→ Hematemesis/melena (upper) or hematochezia (lower)<br>→ Volume depletion → ↓ preload → ↓ cardiac output<br>→ Compensatory tachycardia → eventual shock</div></div>
-                <button class="btn" onclick="nextStage()">Upper vs Lower GI Bleed →</button>
-            </div></div>`;
-    }
-
-    function renderUpperVsLower() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 2 of 14</div><div class="scene-title">Localizing the Bleed</div></div>
-            <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Resuscitate first: 2 large-bore IVs, type & screen, assess stability</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> How does cirrhosis change management (variceal vs non-variceal)?</p>
-                </div>
-                <div class="boards-tip"><div class="boards-tip-title">📚 Upper vs Lower GI Bleeding</div>
-                    <table class="comparison-table">
-                        <tr><th>Feature</th><th>Upper GIB</th><th>Lower GIB</th></tr>
-                        <tr><td><strong>Location</strong></td><td>Proximal to ligament of Treitz</td><td>Distal to ligament of Treitz</td></tr>
-                        <tr><td><strong>Presentation</strong></td><td>Hematemesis, coffee grounds, melena</td><td>Hematochezia, maroon stool</td></tr>
-                        <tr><td><strong>BUN:Cr ratio</strong></td><td>>20:1 (digested blood = urea)</td><td>Normal</td></tr>
-                        <tr><td><strong>NG aspirate</strong></td><td>Blood or coffee grounds</td><td>Clear or bilious</td></tr>
-                    </table></div>
-                
-                <div class="mechanism-box"><div class="mechanism-title">🧬 Why Does UGIB Cause Melena?</div>
-                    <div class="pathway">Blood in upper GI tract<br>→ Hemoglobin exposed to gastric acid<br>→ Oxidation of heme → hematin (black)<br>→ Transit through small bowel (>14 hours)<br>→ Bacterial degradation<br>→ Black, tarry, malodorous stool (melena)<br><br>⚠️ Brisk UGIB can cause hematochezia<br>(rapid transit = no time for oxidation)</div></div>
-
-                <div class="why-chain"><div class="why-chain-title">🔗 WHY Chain: BUN:Cr Ratio</div>
-                    <div class="why-item"><div class="why-q">Why is BUN elevated in UGIB?</div>
-                        Blood in GI tract is digested → protein broken down → absorbed as amino acids → converted to urea in liver</div>
-                    <div class="why-item"><div class="why-q">Why doesn't Cr rise equally?</div>
-                        Creatinine comes from muscle metabolism, not diet. GI blood doesn't contain significant creatinine.</div>
-                    <div class="why-item"><div class="why-q">Why is this ratio useful?</div>
-                        BUN:Cr >20:1 has ~90% specificity for UGIB vs LGIB or non-GI causes of anemia.</div>
-                </div>
-                
-                <div class="narrative"><p><strong>This patient:</strong> Coffee-ground emesis + melena + BUN 42/Cr 1.4 (ratio 30:1) = <span class="critical">Upper GI bleed</span></p></div>
-                <button class="btn" onclick="nextStage()">UGIB Etiologies →</button>
-            </div></div>`;
-    }
-
-    function renderUGIBEtiologies() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 3 of 14</div><div class="scene-title">Causes of Upper GI Bleeding</div></div>
-            <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Glasgow-Blatchford score: 0 = very low risk, consider outpatient</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> What's the role of erythromycin/metoclopramide before endoscopy?</p>
-                </div>
-                <div class="rdx-clinical-pearl" style="background:#eff6ff; border:1px solid #3b82f6; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #3b82f6;">
-                    <p style="margin:0; color:#1e40af; font-size:0.9rem;"><strong>💡 Clinical Pearl:</strong> BUN/Cr ratio >30 suggests upper GI source (digested blood = urea)</p>
-                </div>
-                <div class="boards-tip"><div class="boards-tip-title">📚 UGIB Etiologies by Frequency</div>
-                    <table class="comparison-table">
-                        <tr><th>Cause</th><th>%</th><th>Key Features</th></tr>
-                        <tr><td><strong>Peptic ulcer disease</strong></td><td>40-50%</td><td>NSAID use, H. pylori, epigastric pain</td></tr>
-                        <tr><td><strong>Erosive disease</strong></td><td>15-25%</td><td>Multiple superficial erosions, often stress-related</td></tr>
-                        <tr><td><strong>Esophageal varices</strong></td><td>10-15%</td><td>Cirrhosis, massive bleeding</td></tr>
-                        <tr><td><strong>Mallory-Weiss tear</strong></td><td>5-10%</td><td>Retching/vomiting before hematemesis</td></tr>
-                        <tr><td><strong>Malignancy</strong></td><td>2-5%</td><td>Weight loss, anemia, older age</td></tr>
-                        <tr><td><strong>Dieulafoy lesion</strong></td><td>1-2%</td><td>Massive bleed, normal-looking mucosa</td></tr>
-                    </table></div>
-                
-                <div class="mechanism-box"><div class="mechanism-title">🧬 Peptic Ulcer Pathophysiology</div>
-                    <div class="pathway"><strong>Normal gastric defense:</strong><br>Mucus layer + bicarbonate + prostaglandins<br>→ Protects against acid/pepsin<br><br><strong>NSAIDs:</strong><br>Inhibit COX-1 → ↓ prostaglandins<br>→ ↓ mucus, ↓ bicarbonate, ↓ blood flow<br>→ Mucosal breakdown → ulceration<br><br><strong>H. pylori:</strong><br>Urease → ammonia (neutralizes local acid)<br>→ But causes chronic inflammation<br>→ Disrupts mucosal defense → ulcer</div></div>
-
-                <div class="alert-box"><div class="alert-title">⚠️ High-Risk Features for Rebleeding</div>
-                    <ul style="margin-left: 20px; margin-top: 8px;">
-                        <li>Visible vessel in ulcer base</li>
-                        <li>Active spurting or oozing</li>
-                        <li>Adherent clot</li>
-                        <li>Ulcer size >2cm</li>
-                        <li>Posterior duodenal ulcer (near GDA)</li>
-                    </ul></div>
-
-                <div class="narrative"><p><strong>This patient:</strong> Daily NSAID use = high risk for peptic ulcer disease. Most likely diagnosis is <span class="highlight">NSAID-induced gastric or duodenal ulcer</span>.</p></div>
-                <button class="btn" onclick="nextStage()">Risk Stratification →</button>
-            </div></div>`;
-    }
-
-    function renderRiskStrat() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 4 of 14</div><div class="scene-title">Risk Stratification</div></div>
-            <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> PPI infusion (80mg bolus then 8mg/hr) for suspected upper GI bleed</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> When should you involve IR for angiography/embolization?</p>
-                </div>
-                <div class="boards-tip"><div class="boards-tip-title">📚 Glasgow-Blatchford Score (Pre-Endoscopy)</div>
-                    <table class="comparison-table">
-                        <tr><th>Parameter</th><th>Points</th></tr>
-                        <tr><td>BUN 18.2-22.4 mg/dL</td><td>2</td></tr>
-                        <tr><td>BUN 22.4-28 mg/dL</td><td>3</td></tr>
-                        <tr><td>BUN 28-70 mg/dL</td><td>4</td></tr>
-                        <tr><td>BUN >70 mg/dL</td><td>6</td></tr>
-                        <tr><td>Hgb 12-13 (men) or 10-12 (women)</td><td>1</td></tr>
-                        <tr><td>Hgb 10-12 (men) or <10 (women)</td><td>3</td></tr>
-                        <tr><td>Hgb <10 (men)</td><td>6</td></tr>
-                        <tr><td>SBP 100-109</td><td>1</td></tr>
-                        <tr><td>SBP 90-99</td><td>2</td></tr>
-                        <tr><td>SBP <90</td><td>3</td></tr>
-                        <tr><td>HR ≥100</td><td>1</td></tr>
-                        <tr><td>Melena</td><td>1</td></tr>
-                        <tr><td>Syncope</td><td>2</td></tr>
-                        <tr><td>Hepatic disease</td><td>2</td></tr>
-                        <tr><td>Cardiac failure</td><td>2</td></tr>
-                    </table>
-                    <p style="margin-top: 12px;"><strong>GBS = 0:</strong> Very low risk, consider outpatient management<br>
-                    <strong>GBS ≥6:</strong> High risk, needs inpatient care and likely intervention</p></div>
-                
-                <div class="boards-tip"><div class="boards-tip-title">📚 Rockall Score (Post-Endoscopy)</div>
-                    <p>Predicts rebleeding and mortality AFTER endoscopy. Incorporates endoscopic findings:</p>
-                    <ul style="margin-left: 20px; margin-top: 8px;">
-                        <li>Clean base ulcer = low risk</li>
-                        <li>Flat pigmented spot = low risk</li>
-                        <li>Adherent clot = intermediate risk</li>
-                        <li>Visible vessel = high risk</li>
-                        <li>Active bleeding = high risk</li>
-                    </ul></div>
-
-                <div class="narrative"><p><strong>This patient's GBS:</strong> BUN 42 (4 pts) + Hgb 8.2 (6 pts) + SBP 92 (2 pts) + HR 112 (1 pt) + Melena (1 pt) = <span class="critical">14 points = High risk</span></p></div>
-                <button class="btn" onclick="nextStage()">Resuscitation →</button>
-            </div></div>`;
-    }
-
-    function renderResuscitation() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 5 of 14</div><div class="scene-title">Initial Resuscitation</div></div>
-            <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Hold anticoagulation; reverse if life-threatening bleeding</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> Discuss TIPS vs endoscopic therapy for refractory variceal bleeding</p>
-                </div>
-                <div class="rdx-clinical-pearl" style="background:#fef2f2; border:1px solid #ef4444; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #ef4444;">
-                    <p style="margin:0; color:#991b1b; font-size:0.9rem;"><strong>⚠️ Don't Miss:</strong> Aortoenteric fistula: Prior aortic surgery + GI bleed = surgical emergency</p>
-                </div>
-                <div class="alert-box"><div class="alert-title">🚨 ABCs of GI Bleed Resuscitation</div>
-                    <ol style="margin-left: 20px; line-height: 2.2;">
-                        <li><strong>Airway:</strong> Intubate if massive hematemesis + altered mental status</li>
-                        <li><strong>Breathing:</strong> Supplemental O2, monitor SpO2</li>
-                        <li><strong>Circulation:</strong> 2 large-bore IVs (18G or larger), crystalloid resuscitation</li>
-                    </ol></div>
-                
-                <div class="boards-tip"><div class="boards-tip-title">📚 IV Access Principles</div>
-                    <table class="comparison-table">
-                        <tr><th>Catheter Size</th><th>Flow Rate</th><th>Use</th></tr>
-                        <tr><td>14G</td><td>~300 mL/min</td><td>Massive transfusion</td></tr>
-                        <tr><td>16G</td><td>~200 mL/min</td><td>Active bleeding</td></tr>
-                        <tr><td>18G</td><td>~100 mL/min</td><td>Standard resuscitation</td></tr>
-                        <tr><td>20G</td><td>~60 mL/min</td><td>Maintenance only</td></tr>
-                    </table>
-                    <p style="margin-top: 10px;">Flow rate ∝ r⁴ (Poiseuille's law) - catheter diameter matters more than length!</p></div>
-                
-                <div class="mechanism-box"><div class="mechanism-title">🧬 Why Crystalloid Before Blood?</div>
-                    <div class="pathway">Acute blood loss → ↓ intravascular volume<br>→ ↓ venous return → ↓ cardiac output<br>→ Tissue hypoperfusion<br><br>Crystalloid:<br>• Immediately available<br>• Restores intravascular volume<br>• Buys time for crossmatch<br><br>⚠️ Don't over-resuscitate!<br>Aggressive fluids before hemostasis<br>→ Dilutional coagulopathy<br>→ May worsen bleeding</div></div>
-
-                <div class="narrative"><p><strong>Orders:</strong> 2 large-bore IVs, 1L LR bolus, type & screen, crossmatch 4 units PRBCs, CBC, BMP, coags, LFTs</p></div>
-                <button class="btn" onclick="nextStage()">Transfusion Strategy →</button>
-            </div></div>`;
-    }
-
-    function renderTransfusion() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 6 of 14</div><div class="scene-title">Transfusion Thresholds</div></div>
-            <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> NPO in preparation for endoscopy</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> How do you manage GI bleed in a patient who needs anticoagulation?</p>
-                </div>
-                <div class="boards-tip"><div class="boards-tip-title">📚 Restrictive vs Liberal Transfusion</div>
-                    <table class="comparison-table">
-                        <tr><th>Strategy</th><th>Threshold</th><th>Evidence</th></tr>
-                        <tr style="background:rgba(34,197,94,0.2);"><td><strong>Restrictive</strong></td><td>Hgb <7 g/dL</td><td>↓ mortality, ↓ rebleeding in UGIB</td></tr>
-                        <tr><td>Liberal</td><td>Hgb <9 g/dL</td><td>Traditional approach, now discouraged</td></tr>
-                        <tr><td>ACS exception</td><td>Hgb <8 g/dL</td><td>Higher threshold for active cardiac ischemia</td></tr>
-                    </table></div>
-                
-                <div class="mechanism-box"><div class="mechanism-title">🧬 Why Restrictive is Better</div>
-                    <div class="pathway"><strong>Villanueva et al. (NEJM 2013):</strong><br>Restrictive (Hgb <7) vs Liberal (Hgb <9)<br><br>Restrictive transfusion:<br>→ ↓ 45-day mortality (5% vs 9%)<br>→ ↓ Rebleeding (10% vs 16%)<br>→ ↓ Complications<br><br><strong>Mechanism:</strong><br>Transfusion → ↑ portal pressure<br>→ Especially harmful in varices<br>→ Triggers rebleeding<br><br>Also: transfusion is immunosuppressive<br>and associated with nosocomial infection</div></div>
-
-                <div class="why-chain"><div class="why-chain-title">🔗 WHY Chain: Transfusion Thresholds</div>
-                    <div class="why-item"><div class="why-q">Why not transfuse to "normal" Hgb?</div>
-                        Higher Hgb doesn't improve outcomes and increases portal pressure in cirrhosis, promoting variceal rebleeding.</div>
-                    <div class="why-item"><div class="why-q">Why is ACS an exception?</div>
-                        Myocardium extracts maximum O2 even at baseline. Anemia → supply-demand mismatch → ischemia worsens.</div>
-                    <div class="why-item"><div class="why-q">When to use uncrossmatched blood?</div>
-                        Massive hemorrhage with hemodynamic collapse. Type O negative until crossmatch complete.</div>
-                </div>
-
-                <div class="narrative"><p><strong>This patient:</strong> Hgb 8.2 g/dL, no ACS. <span class="safe">Do not transfuse yet</span> unless hemodynamically unstable despite fluids or Hgb drops <7.</p></div>
-                <button class="btn" onclick="nextStage()">PPI Therapy →</button>
-            </div></div>`;
-    }
-
-    function renderPPI() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 7 of 14</div><div class="scene-title">Proton Pump Inhibitors</div></div>
-            <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Hematemesis/melena = upper GI; Hematochezia usually = lower GI</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> Restrictive (Hgb <7) vs liberal transfusion strategy - what's the evidence?</p>
-                </div>
-                <div class="rdx-clinical-pearl" style="background:#fef2f2; border:1px solid #ef4444; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #ef4444;">
-                    <p style="margin:0; color:#991b1b; font-size:0.9rem;"><strong>⚠️ Don't Miss:</strong> Dieulafoy lesion: Massive bleed, normal-appearing mucosa - easily missed</p>
-                </div>
-                <div class="boards-tip"><div class="boards-tip-title">📚 PPI Dosing in UGIB</div>
-                    <table class="comparison-table">
-                        <tr><th>Timing</th><th>Regimen</th><th>Rationale</th></tr>
-                        <tr><td><strong>Pre-endoscopy</strong></td><td>IV PPI bolus (80mg)</td><td>Downstages lesions, may reduce intervention</td></tr>
-                        <tr><td><strong>Post-endoscopy (high-risk stigmata)</strong></td><td>IV PPI 8mg/hr × 72h</td><td>Maintains pH >6 for clot stability</td></tr>
-                        <tr><td><strong>Post-endoscopy (low-risk)</strong></td><td>Oral PPI BID</td><td>Standard acid suppression</td></tr>
-                    </table></div>
-                
-                <div class="mechanism-box"><div class="mechanism-title">🧬 Why High-Dose PPI After Endoscopy?</div>
-                    <div class="pathway">Endoscopic hemostasis → clot forms at ulcer<br><br>Gastric acid (pH <5):<br>→ Inhibits platelet aggregation<br>→ Dissolves fibrin clot (pepsin active)<br>→ Clot destabilization → rebleeding<br><br>High-dose IV PPI:<br>→ Maintains gastric pH >6<br>→ Clot stabilization<br>→ ↓ Rebleeding by 20-30%<br><br>⚠️ Benefit only proven for high-risk stigmata<br>(active bleeding, visible vessel, adherent clot)</div></div>
-
-                <div class="alert-box"><div class="alert-title">⚠️ Pre-Endoscopy PPI Controversy</div>
-                    <p>Pre-endoscopy PPI may downstage lesions (fewer high-risk stigmata seen), but does NOT reduce mortality, rebleeding, or need for surgery. Give it, but don't delay endoscopy to do so.</p></div>
-
-                <div class="narrative"><p><strong>Orders:</strong> Pantoprazole 80mg IV bolus now. Plan for high-dose infusion post-endoscopy if high-risk stigmata found.</p></div>
-                <button class="btn" onclick="nextStage()">Endoscopy Timing →</button>
-            </div></div>`;
-    }
-
-    function renderEndoscopyTiming() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 8 of 14</div><div class="scene-title">When to Scope</div></div>
-            <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Resuscitate first: 2 large-bore IVs, type & screen, assess stability</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> How does cirrhosis change management (variceal vs non-variceal)?</p>
-                </div>
-                <div class="boards-tip"><div class="boards-tip-title">📚 Endoscopy Timing Guidelines</div>
-                    <table class="comparison-table">
-                        <tr><th>Category</th><th>Timing</th><th>Criteria</th></tr>
-                        <tr><td><strong>Emergent</strong></td><td><12 hours</td><td>Hemodynamic instability despite resuscitation, ongoing active bleeding</td></tr>
-                        <tr><td><strong>Urgent</strong></td><td>12-24 hours</td><td>High-risk features (GBS ≥12), bloody NG aspirate</td></tr>
-                        <tr><td><strong>Elective</strong></td><td>>24 hours</td><td>Low-risk, stable patients (GBS 0-1)</td></tr>
-                    </table></div>
-                
-                <div class="mechanism-box"><div class="mechanism-title">🧬 Why Not Ultra-Early (<6h) for Everyone?</div>
-                    <div class="pathway">TRIGGER trial & meta-analyses:<br>Ultra-early (<6h) vs early (6-24h) EGD<br><br>Ultra-early:<br>✗ No mortality benefit<br>✗ No reduction in rebleeding<br>✗ May have worse visualization (blood)<br>✗ Higher procedural risk if unstable<br><br>Exceptions:<br>✓ Suspected variceal bleed → <12h<br>✓ Massive ongoing hemorrhage<br>✓ Hemodynamic instability persists</div></div>
-
-                <div class="alert-box"><div class="alert-title">🚨 Before Endoscopy Checklist</div>
-                    <ul style="margin-left: 20px;">
-                        <li>Adequate resuscitation (not hypotensive)</li>
-                        <li>Airway protection if massive bleeding/encephalopathy</li>
-                        <li>NPO for at least 2 hours (ideally longer)</li>
-                        <li>Erythromycin 250mg IV (optional) - prokinetic to clear blood</li>
-                        <li>Consent obtained</li>
-                    </ul></div>
-
-                <div class="narrative"><p><strong>This patient:</strong> GBS 14 (high-risk), BP improving with fluids. Plan for <span class="highlight">urgent EGD within 12-24 hours</span>.</p></div>
-                <button class="btn" onclick="nextStage()">Endoscopic Therapy →</button>
-            </div></div>`;
-    }
-
-    function renderEndoscopicTherapy() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 9 of 14</div><div class="scene-title">Endoscopic Hemostasis</div></div>
-            <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Glasgow-Blatchford score: 0 = very low risk, consider outpatient</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> What's the role of erythromycin/metoclopramide before endoscopy?</p>
-                </div>
-                <div class="rdx-clinical-pearl" style="background:#fefce8; border:1px solid #eab308; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #eab308;">
-                    <p style="margin:0; color:#854d0e; font-size:0.9rem;"><strong>🚫 Common Mistake:</strong> Don't delay endoscopy for NG lavage - it doesn't change outcomes</p>
-                </div>
-                <div class="boards-tip"><div class="boards-tip-title">📚 Forrest Classification</div>
-                    <table class="comparison-table">
-                        <tr><th>Class</th><th>Appearance</th><th>Rebleed Risk</th><th>Treat?</th></tr>
-                        <tr style="background:rgba(239,68,68,0.2);"><td>Ia</td><td>Spurting hemorrhage</td><td>90%</td><td>Yes</td></tr>
-                        <tr style="background:rgba(239,68,68,0.2);"><td>Ib</td><td>Oozing hemorrhage</td><td>50%</td><td>Yes</td></tr>
-                        <tr style="background:rgba(251,191,36,0.2);"><td>IIa</td><td>Visible vessel</td><td>50%</td><td>Yes</td></tr>
-                        <tr style="background:rgba(251,191,36,0.2);"><td>IIb</td><td>Adherent clot</td><td>30%</td><td>Consider</td></tr>
-                        <tr><td>IIc</td><td>Flat pigmented spot</td><td>10%</td><td>No</td></tr>
-                        <tr><td>III</td><td>Clean base</td><td>5%</td><td>No</td></tr>
-                    </table></div>
-                
-                <div class="boards-tip"><div class="boards-tip-title">📚 Endoscopic Modalities</div>
-                    <table class="comparison-table">
-                        <tr><th>Method</th><th>Mechanism</th><th>Best For</th></tr>
-                        <tr><td><strong>Epinephrine injection</strong></td><td>Vasoconstriction + tamponade</td><td>Adjunct only (not monotherapy)</td></tr>
-                        <tr><td><strong>Thermal (bipolar, APC)</strong></td><td>Coagulation of vessel</td><td>Oozing, visible vessels</td></tr>
-                        <tr><td><strong>Mechanical (clips)</strong></td><td>Physical closure of vessel</td><td>Spurting, larger vessels</td></tr>
-                        <tr><td><strong>Hemostatic spray (TC-325)</strong></td><td>Forms mechanical barrier</td><td>Diffuse oozing, bridge therapy</td></tr>
-                    </table></div>
-
-                <div class="mechanism-box"><div class="mechanism-title">🧬 Why Dual Therapy?</div>
-                    <div class="pathway">Epinephrine alone:<br>→ Temporary vasoconstriction (wears off)<br>→ 15-20% rebleed rate<br><br>Dual therapy (epi + thermal/clip):<br>→ Epi reduces bleeding for visualization<br>→ Thermal/clip provides definitive hemostasis<br>→ Rebleed rate 5-10%<br><br>Guidelines: NEVER use epinephrine as monotherapy</div></div>
-
-                <div class="narrative"><p><strong>EGD findings:</strong> 1.5cm duodenal ulcer with <span class="critical">visible vessel (Forrest IIa)</span>. Treated with epinephrine injection + bipolar cautery + hemoclip placement. Hemostasis achieved.</p></div>
-                <button class="btn" onclick="nextStage()">Post-Endoscopy Care →</button>
-            </div></div>`;
-    }
-
-    function renderPostEndo() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 10 of 14</div><div class="scene-title">Post-Endoscopy Management</div></div>
-            <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> PPI infusion (80mg bolus then 8mg/hr) for suspected upper GI bleed</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> When should you involve IR for angiography/embolization?</p>
-                </div>
-                <div class="boards-tip"><div class="boards-tip-title">📚 Post-EGD Orders for High-Risk Stigmata</div>
-                    <ul style="margin-left: 20px; line-height: 2;">
-                        <li><strong>PPI infusion:</strong> 8mg/hr × 72 hours, then oral BID</li>
-                        <li><strong>NPO:</strong> Clear liquids after 6h if stable</li>
-                        <li><strong>Monitoring:</strong> Q4h vitals, daily Hgb</li>
-                        <li><strong>Activity:</strong> Bed rest × 24h</li>
-                        <li><strong>Discontinue:</strong> NSAIDs, anticoagulants (case-by-case)</li>
-                        <li><strong>H. pylori testing:</strong> Stool antigen or biopsy urease</li>
-                    </ul></div>
-                
-                <div class="alert-box"><div class="alert-title">🚨 H. pylori - Test and Treat!</div>
-                    <p>H. pylori eradication reduces ulcer recurrence from 60-80% to <10%. Always test in PUD regardless of NSAID use. If positive, treat with triple or quadruple therapy.</p></div>
-
-                <div class="mechanism-box"><div class="mechanism-title">🧬 When to Resume Anticoagulation?</div>
-                    <div class="pathway">Timing depends on thrombotic vs bleeding risk:<br><br><strong>High thrombotic risk (mechanical valve, recent VTE):</strong><br>→ Resume 3-7 days post-hemostasis<br>→ Bridge with heparin if needed<br><br><strong>Lower thrombotic risk (AFib for stroke prevention):</strong><br>→ Resume 7-14 days post-hemostasis<br><br><strong>Aspirin for secondary prevention:</strong><br>→ Resume within 3-5 days<br>→ Withholding increases CV events 3-fold</div></div>
-
-                <div class="tips">
-                    <div class="pearl"><div class="tip-header">✓ Pearl</div>
-                        Second-look endoscopy is NOT routinely recommended. Only if clinical signs of rebleeding.</div>
-                    <div class="pitfall"><div class="tip-header">✗ Pitfall</div>
-                        Stopping aspirin after MI/stent to "prevent rebleeding" - CV events kill more than GI bleeds.</div>
-                </div>
-
-                <div class="narrative"><p><strong>Plan:</strong> PPI infusion × 72h, H. pylori stool antigen ordered, hold NSAID permanently, GI follow-up in 8 weeks for repeat EGD.</p></div>
-                <button class="btn" onclick="nextStage()">Variceal Bleeding →</button>
-            </div></div>`;
-    }
-
-    function renderVariceal() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 11 of 14</div><div class="scene-title">Variceal Hemorrhage</div></div>
-            <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Hold anticoagulation; reverse if life-threatening bleeding</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> Discuss TIPS vs endoscopic therapy for refractory variceal bleeding</p>
-                </div>
-                <div class="rdx-clinical-pearl" style="background:#f5f3ff; border:1px solid #8b5cf6; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #8b5cf6;">
-                    <p style="margin:0; color:#5b21b6; font-size:0.9rem;"><strong>📋 Board Tip:</strong> EGD timing: Within 24h for most UGIB, within 12h if high-risk features</p>
-                </div>
-                <div class="alert-box"><div class="alert-title">🚨 Variceal Bleed = Different Algorithm!</div>
-                    <p>If cirrhosis suspected, assume variceal until proven otherwise. Different management than peptic ulcer.</p></div>
-
-                <div class="boards-tip"><div class="boards-tip-title">📚 Variceal Bleed Bundle</div>
-                    <table class="comparison-table">
-                        <tr><th>Intervention</th><th>Timing</th><th>Rationale</th></tr>
-                        <tr><td><strong>Octreotide</strong></td><td>Immediate</td><td>↓ splanchnic blood flow, ↓ portal pressure</td></tr>
-                        <tr><td><strong>IV antibiotics</strong></td><td>Within 24h</td><td>↓ mortality, ↓ bacterial translocation</td></tr>
-                        <tr><td><strong>Restrictive transfusion</strong></td><td>Hgb <7</td><td>Avoid ↑ portal pressure</td></tr>
-                        <tr><td><strong>EGD with banding</strong></td><td><12 hours</td><td>Definitive hemostasis</td></tr>
-                        <tr><td><strong>TIPS (rescue)</strong></td><td>If EGD fails</td><td>Decompresses portal system</td></tr>
-                    </table></div>
-                
-                <div class="mechanism-box"><div class="mechanism-title">🧬 Variceal Pathophysiology</div>
-                    <div class="pathway">Cirrhosis → ↑ intrahepatic resistance<br>→ Portal hypertension (HVPG >10 mmHg)<br>→ Portosystemic collaterals form<br>→ Esophageal/gastric varices<br><br>Varices rupture when:<br>• Wall tension exceeds strength<br>• LaPlace: Tension = P × r / wall thickness<br>• Large varices + high pressure = rupture<br><br>Mortality: 15-20% at 6 weeks<br>Rebleed risk: 60% at 1 year untreated</div></div>
-
-                <div class="why-chain"><div class="why-chain-title">🔗 WHY Chain: Antibiotics in Variceal Bleed</div>
-                    <div class="why-item"><div class="why-q">Why give antibiotics prophylactically?</div>
-                        Cirrhosis = immune dysfunction. GI bleed + bacterial translocation → 20-50% develop infection. Abx reduce mortality by ~30%.</div>
-                    <div class="why-item"><div class="why-q">Which antibiotic?</div>
-                        Ceftriaxone 1g IV daily × 7 days. Covers gut flora, good biliary penetration.</div>
-                    <div class="why-item"><div class="why-q">Why octreotide?</div>
-                        Splanchnic vasoconstriction → ↓ portal inflow → ↓ variceal pressure → ↓ bleeding. Start before EGD, continue × 3-5 days.</div>
-                </div>
-                <button class="btn" onclick="nextStage()">Lower GI Bleeding →</button>
-            </div></div>`;
-    }
-
-    function renderLowerGI() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 12 of 14</div><div class="scene-title">Lower GI Bleeding</div></div>
-            <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> NPO in preparation for endoscopy</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> How do you manage GI bleed in a patient who needs anticoagulation?</p>
-                </div>
-                <div class="boards-tip"><div class="boards-tip-title">📚 LGIB Etiologies by Age</div>
-                    <table class="comparison-table">
-                        <tr><th>Cause</th><th>Age Group</th><th>Features</th></tr>
-                        <tr><td><strong>Diverticulosis</strong></td><td>>50</td><td>Painless, large-volume, right colon</td></tr>
-                        <tr><td><strong>Angiodysplasia</strong></td><td>>70</td><td>Chronic/occult, right colon, often with aortic stenosis</td></tr>
-                        <tr><td><strong>Hemorrhoids</strong></td><td>Any</td><td>Bright red blood on paper/bowl, painless</td></tr>
-                        <tr><td><strong>Colitis (IBD, ischemic, infectious)</strong></td><td>Varies</td><td>Bloody diarrhea, cramping, tenesmus</td></tr>
-                        <tr><td><strong>Colorectal cancer</strong></td><td>>50</td><td>Occult blood, weight loss, iron deficiency</td></tr>
-                        <tr><td><strong>Post-polypectomy</strong></td><td>Any</td><td>5-14 days after colonoscopy</td></tr>
-                    </table></div>
-                
-                <div class="mechanism-box"><div class="mechanism-title">🧬 Diverticular Bleeding Mechanism</div>
-                    <div class="pathway">Diverticulum forms at weak point in colon wall<br>(where vasa recta penetrate)<br><br>Artery draped over dome of diverticulum<br>→ Chronic injury from fecaliths<br>→ Intimal thickening + medial thinning<br>→ Eccentric rupture into lumen<br>→ Painless, brisk arterial bleeding<br><br>80% stop spontaneously<br>20% require intervention</div></div>
-
-                <div class="boards-tip"><div class="boards-tip-title">📚 LGIB Diagnostic Approach</div>
-                    <ul style="margin-left: 20px; line-height: 2;">
-                        <li><strong>Stable:</strong> Colonoscopy after rapid prep (4-6h GoLytely)</li>
-                        <li><strong>Ongoing bleeding:</strong> CTA first to localize</li>
-                        <li><strong>Massive:</strong> CTA → IR angiography with embolization</li>
-                        <li><strong>If negative CTA/colonoscopy:</strong> Consider small bowel source (capsule, enteroscopy)</li>
-                    </ul></div>
-
-                <div class="alert-box"><div class="alert-title">⚠️ Don't Forget: Brisk UGIB = Hematochezia</div>
-                    <p>10-15% of hematochezia is actually from UGIB with rapid transit. If unstable with hematochezia, consider EGD first or do both upper and lower endoscopy.</p></div>
-                <button class="btn" onclick="nextStage()">Managing Rebleeding →</button>
-            </div></div>`;
-    }
-
-    function renderRebleeding() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 13 of 14</div><div class="scene-title">Rebleeding Management</div></div>
-            <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Hematemesis/melena = upper GI; Hematochezia usually = lower GI</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> Restrictive (Hgb <7) vs liberal transfusion strategy - what's the evidence?</p>
-                </div>
-                <div class="rdx-clinical-pearl" style="background:#eff6ff; border:1px solid #3b82f6; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #3b82f6;">
-                    <p style="margin:0; color:#1e40af; font-size:0.9rem;"><strong>💡 Clinical Pearl:</strong> Variceal bleed: Octreotide + PPI + antibiotics (ceftriaxone)</p>
-                </div>
-                <div class="alert-box"><div class="alert-title">🚨 Signs of Rebleeding</div>
-                    <ul style="margin-left: 20px;">
-                        <li>Fresh hematemesis or melena</li>
-                        <li>Tachycardia or hypotension recurrence</li>
-                        <li>Hgb drop >2 g/dL in 24h</li>
-                        <li>Ongoing transfusion requirement</li>
-                    </ul></div>
-
-                <div class="boards-tip"><div class="boards-tip-title">📚 Rebleeding Algorithm</div>
-                    <table class="comparison-table">
-                        <tr><th>Step</th><th>Intervention</th><th>Success Rate</th></tr>
-                        <tr><td>1st</td><td>Repeat endoscopy with therapy</td><td>70-80%</td></tr>
-                        <tr><td>2nd</td><td>Interventional radiology (embolization)</td><td>80-90%</td></tr>
-                        <tr><td>3rd</td><td>Surgery (oversew ulcer, resection)</td><td>Last resort</td></tr>
-                    </table></div>
-
-                <div class="mechanism-box"><div class="mechanism-title">🧬 When to Go Straight to IR/Surgery</div>
-                    <div class="pathway"><strong>Skip repeat EGD if:</strong><br>• Massive ongoing hemorrhage<br>• Hemodynamic collapse<br>• Posterior duodenal ulcer (GDA erosion)<br>• Known Dieulafoy or large vessel<br><br><strong>IR embolization:</strong><br>• Requires active bleeding >0.5 mL/min for CTA<br>• Superselective catheterization of GDA/gastric<br>• Coil or gelfoam embolization<br><br><strong>Surgery:</strong><br>• Oversew + vagotomy/pyloroplasty<br>• Gastrectomy if malignancy or massive ulcer</div></div>
-
-                <div class="tips">
-                    <div class="pearl"><div class="tip-header">✓ Pearl</div>
-                        Posterior duodenal ulcers erode into gastroduodenal artery - high rebleed risk, low threshold for IR/surgery.</div>
-                    <div class="pitfall"><div class="tip-header">✗ Pitfall</div>
-                        Repeated EGD attempts in unstable patient - know when to escalate to IR or surgery.</div>
-                </div>
-                <button class="btn" onclick="nextStage()">Debrief →</button>
-            </div></div>`;
-    }
-
-    function renderDebrief() {
-        return `<div class="scene">
-            <div class="outcome-banner">
-                <div style="font-size:4rem;margin-bottom:12px;">🩸</div>
-                <div style="font-size:1.8rem;font-weight:700;color:#4ade80;">GI Bleed Mastery Complete!</div>
-            </div>
-            <div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Resuscitate first: 2 large-bore IVs, type & screen, assess stability</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> How does cirrhosis change management (variceal vs non-variceal)?</p>
-                </div>
-                <div class="boards-tip"><div class="boards-tip-title">📚 High-Yield Summary</div>
-                    <table class="comparison-table">
-                        <tr><th>Concept</th><th>Key Point</th></tr>
-                        <tr><td>Upper vs Lower</td><td>BUN:Cr >20 = UGIB; melena = upper, hematochezia = lower (usually)</td></tr>
-                        <tr><td>Risk stratification</td><td>Glasgow-Blatchford (pre-EGD), Rockall (post-EGD)</td></tr>
-                        <tr><td>Transfusion</td><td>Restrictive (Hgb <7) reduces mortality and rebleeding</td></tr>
-                        <tr><td>Timing</td><td>Urgent EGD 12-24h; emergent <12h if hemodynamically unstable</td></tr>
-                        <tr><td>Endoscopic therapy</td><td>Dual therapy for high-risk stigmata; never epi monotherapy</td></tr>
-                        <tr><td>Post-EGD</td><td>High-dose PPI × 72h for high-risk; test and treat H. pylori</td></tr>
-                        <tr><td>Variceal</td><td>Octreotide + antibiotics + banding; TIPS if refractory</td></tr>
-                        <tr><td>Rebleed</td><td>Repeat EGD → IR embolization → Surgery</td></tr>
-                    </table></div>
-
-                <div class="why-chain"><div class="why-chain-title">🔗 Master WHY Chain: The Complete Picture</div>
-                    <div class="why-item"><div class="why-q">Why do NSAIDs cause ulcers?</div>
-                        COX-1 inhibition → ↓ prostaglandins → ↓ mucus/bicarbonate → mucosal vulnerability</div>
-                    <div class="why-item"><div class="why-q">Why restrictive transfusion?</div>
-                        Liberal transfusion → ↑ portal pressure → variceal/ulcer rebleeding; also immunosuppressive</div>
-                    <div class="why-item"><div class="why-q">Why high-dose PPI?</div>
-                        pH >6 prevents clot lysis by pepsin; stabilizes hemostasis for 72h healing window</div>
-                    <div class="why-item"><div class="why-q">Why dual endoscopic therapy?</div>
-                        Epinephrine = temporary; thermal/mechanical = definitive. Combined approach cuts rebleeding.</div>
-                </div>
-
-                <div class="tips">
-                    <div class="pearl"><div class="tip-header">✓ Clinical Pearls</div>
-                        <ul style="margin-left:16px;">
-                            <li>Coffee grounds = partially digested blood = UGIB</li>
-                            <li>GBS 0 = safe for outpatient EGD</li>
-                            <li>Always test for H. pylori in PUD</li>
-                            <li>Resume aspirin early after hemostasis</li>
-                        </ul></div>
-                    <div class="pitfall"><div class="tip-header">✗ Avoid These Pitfalls</div>
-                        <ul style="margin-left:16px;">
-                            <li>Over-transfusing (worsens outcomes)</li>
-                            <li>Epinephrine monotherapy (high rebleed)</li>
-                            <li>Delaying endoscopy for "stability"</li>
-                            <li>Missing variceal bleed in cirrhosis</li>
-                        </ul></div>
-                </div>
-
-                <button class="btn" onclick="location.reload()">🔄 Restart Case</button>
-            </div></div>`;
-    }
-
-    function nextStage() { state.stage++; render(); }
-    render();
-    </script>
-
-<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
-<style>
-/* Enhanced Feature Styles */
-.rdx-difficulty-panel {
-    background: white;
-    border-radius: 16px;
-    padding: 16px 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    z-index: 1000;
-    max-width: 300px;
-}
-.rdx-diff-btn {
-    padding: 8px 16px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 0.85rem;
-    transition: all 0.2s;
-    margin: 2px;
-}
-.rdx-diff-btn.active {
-    background: #3b82f6;
-    color: white;
-}
-.rdx-diff-btn:not(.active) {
-    background: #f1f5f9;
-    color: #475569;
-}
-.rdx-diff-btn:hover:not(.active) {
-    background: #e2e8f0;
-}
-.rdx-refs-panel {
-    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-    border: 1px solid #93c5fd;
-    border-radius: 12px;
-    padding: 16px 20px;
-    margin: 20px auto;
-    max-width: 900px;
-}
-.rdx-refs-title {
-    font-weight: 700;
-    color: #1e40af;
-    margin-bottom: 8px;
-}
-.rdx-refs-links {
-    font-size: 0.9rem;
-    line-height: 1.8;
-}
-.rdx-refs-links a {
-    color: #2563eb;
-    text-decoration: none;
-}
-.rdx-refs-links a:hover {
-    text-decoration: underline;
-}
-.rdx-debrief-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0,0,0,0.8);
-    z-index: 2000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-.rdx-debrief-panel {
-    background: white;
-    border-radius: 20px;
-    padding: 32px;
-    max-width: 800px;
-    width: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
-    color: #1f2937;
-}
-.rdx-path-item {
-    padding: 12px 16px;
-    border-radius: 8px;
-    margin-bottom: 8px;
-}
-.rdx-path-optimal {
-    background: #dcfce7;
-    border-left: 4px solid #22c55e;
-}
-.rdx-path-suboptimal {
-    background: #fef9c3;
-    border-left: 4px solid #eab308;
-}
-.rdx-path-wrong {
-    background: #fecaca;
-    border-left: 4px solid #ef4444;
-}
-.rdx-hint-beginner {
-    background: #ecfdf5;
-    border: 1px solid #6ee7b7;
-    padding: 10px 14px;
-    border-radius: 8px;
-    margin: 8px 0;
-    font-size: 0.9rem;
-    display: none;
-}
-.rdx-hint-advanced {
-    background: #fef3c7;
-    border: 1px solid #fcd34d;
-    padding: 10px 14px;
-    border-radius: 8px;
-    margin: 8px 0;
-    font-size: 0.9rem;
-    display: none;
-}
-</style>
-
-<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
-    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
-    <div style="display:flex;gap:4px;flex-wrap:wrap;">
-        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
-        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
-        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    <div class="score-tracker">
+        <div class="score-label">Score</div>
+        <div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div>
     </div>
-</div>
-
-
-<!-- CROSS-PLATFORM LEARNING LINKS -->
-<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
-    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
-        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
-            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
-            <a href="../mechanism/gi-bleeding-module.html" style="display: block; color: #2563eb; font-size: 14px;">→ GI Bleeding</a>
-        </div>
-        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
-            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
-            <a href="cdiff-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Cdiff</a>
-            <a href="acute-abdomen-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Acute Abdomen</a>
-            <a href="cholecystitis-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Cholecystitis</a>
-        </div>
-        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
-            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
-            <a href="../CoachDx/mentor-chat.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
-            <a href="../CoachDx/sbar-trainer.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+    
+    <div class="difficulty-panel">
+        <div class="diff-label">📊 Difficulty</div>
+        <div class="diff-btns">
+            <button class="diff-btn" id="diff-beginner" onclick="setDifficulty('beginner', this)">🌱 Beginner</button>
+            <button class="diff-btn active" id="diff-standard" onclick="setDifficulty('standard', this)">📚 Standard</button>
+            <button class="diff-btn" id="diff-advanced" onclick="setDifficulty('advanced', this)">🎯 Advanced</button>
         </div>
     </div>
-</div>
-<!-- END CROSS-PLATFORM LINKS -->
-<div class="rdx-refs-panel" id="rdxRefsPanel">
-    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
-    <div class="rdx-refs-links"><a href="https://gi.org/guidelines/" target="_blank" class="text-blue-600 hover:underline">ACG Guidelines</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK470300/" target="_blank" class="text-blue-600 hover:underline">StatPearls: GI Bleeding</a></div>
-</div>
+    
+    <div class="container">
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 0%"></div>
 
-<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
-    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.ncbi.nlm.nih.gov/books/NBK537291/" target="_blank" rel="noopener">GI Bleeding - StatPearls (StatPearls)</a>
+<a href="https://www.mdcalc.com/calc/1735/glasgow-blatchford-bleeding-score-gbs" target="_blank" rel="noopener">Glasgow-Blatchford Score (MDCalc)</a>
+    </div>
 </div>
+</div>
+        <div id="scene-container"></div>
+    </div>
 
 <script>
-// ReasonDx Enhanced Features Module
-(function() {
-    // Decision tracking
-    window.rdxDecisionPath = window.rdxDecisionPath || [];
-    window.rdxTotalScore = window.rdxTotalScore || 0;
-    window.rdxMaxScore = window.rdxMaxScore || 0;
-    window.rdxDifficulty = 'intermediate';
-    
-    // Difficulty control
-    window.rdxSetDifficulty = function(level) {
-        window.rdxDifficulty = level;
-        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
-        document.getElementById('rdx-btn-' + level).classList.add('active');
-        
-        // Update hint visibility
-        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
-            el.style.display = level === 'beginner' ? 'block' : 'none';
-        });
-        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
-            el.style.display = level === 'advanced' ? 'block' : 'none';
-        });
-    };
-    
-    // Track a decision
-    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
-        window.rdxDecisionPath.push({
-            stage: stageId,
-            title: stageTitle,
-            choice: choiceId,
-            choiceText: choiceText,
-            outcome: outcome,
-            points: points,
-            maxPoints: maxPoints,
-            isOptimal: isOptimal,
-            optimalChoice: optimalChoice,
-            optimalText: optimalText
-        });
-        window.rdxTotalScore += points;
-        window.rdxMaxScore += maxPoints;
-    };
-    
-    // Show visual debrief
-    window.rdxShowDebrief = function() {
-        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
-        
-        let grade, gradeColor, gradeEmoji;
-        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
-        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
-        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
-        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
-        
-        let pathHTML = '';
-        if (window.rdxDecisionPath.length > 0) {
-            pathHTML = window.rdxDecisionPath.map(d => {
-                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
-                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
-                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
-                return '<div class="' + pathClass + ' rdx-path-item">' +
-                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
-                    '<div>' +
-                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
-                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
-                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
-                    '</div>' +
-                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
-                    '</div></div>';
-            }).join('');
-        } else {
-            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+let currentStage = 0;
+let score = 0;
+let maxScore = 0;
+let difficulty = 'standard';
+let answeredQuestions = new Set();
+let decisionPath = [];
+
+const stages = [
+    {
+        "title": "Initial Presentation",
+        "content": "<div class=\"narrative\">\n                <p>A <span class=\"highlight\">62-year-old man</span> presents with 3 episodes of black, tarry stools over 24 hours and lightheadedness when standing. PMH: Afib on apixaban, HTN, osteoarthritis (takes ibuprofen regularly).</p>\n            </div>\n            <div class=\"patient-card\">\n                <h4>Initial Assessment</h4>\n                <div class=\"vitals-grid\">\n                    <div class=\"vital-item\"><div class=\"vital-label\">HR</div><div class=\"vital-value abnormal\">108</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">BP lying</div><div class=\"vital-value normal\">118/76</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">BP standing</div><div class=\"vital-value abnormal\">92/60</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">Hgb</div><div class=\"vital-value abnormal\">8.2 g/dL</div></div>\n                </div>\n            </div>",
+        "hint_beginner": "What does melena indicate? Upper or lower GI source?",
+        "hint_advanced": "How do you interpret orthostatic vital signs? What volume of blood loss do they suggest?",
+        "question": {
+            "prompt": "What does the orthostatic hypotension (BP drop on standing) indicate about blood loss?",
+            "options": [
+                {
+                    "text": "Approximately 15-30% volume loss (moderate hemorrhage) - significant blood loss requiring aggressive resuscitation",
+                    "correct": true
+                },
+                {
+                    "text": "Minimal blood loss - orthostatic changes are nonspecific and occur with dehydration",
+                    "correct": false
+                },
+                {
+                    "text": "Greater than 40% volume loss - patient is in hemorrhagic shock",
+                    "correct": false
+                },
+                {
+                    "text": "Cannot estimate volume loss from orthostatics - only hemoglobin is reliable",
+                    "correct": false
+                },
+                {
+                    "text": "Orthostatic changes indicate autonomic dysfunction from afib, not blood loss",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Orthostatic hypotension (SBP drop greater than 20 or DBP drop greater than 10) suggests 15-30% volume loss (Class II hemorrhage, 750-1500 mL). He also has tachycardia and significant hemoglobin drop. This is moderate-severe hemorrhage requiring volume resuscitation.",
+                "incorrect": "Orthostatic changes are clinically significant - they indicate ~15-30% volume loss. Combined with tachycardia and anemia, this patient has substantial blood loss. Hemoglobin alone underestimates acute blood loss due to hemoconcentration."
+            },
+            "teaching": "<h4>\ud83d\udcda Hemorrhage Classification</h4>\n                    <table>\n                        <tr><th>Class</th><th>Blood Loss</th><th>Signs</th></tr>\n                        <tr><td>I</td><td>Less than 15%</td><td>Minimal - may have anxiety</td></tr>\n                        <tr><td>II</td><td>15-30%</td><td>Tachycardia, orthostatic hypotension</td></tr>\n                        <tr><td>III</td><td>30-40%</td><td>Hypotension, tachycardia, altered mental status</td></tr>\n                        <tr><td>IV</td><td>Greater than 40%</td><td>Severe hypotension, obtunded</td></tr>\n                    </table>",
+            "points": 10
         }
-        
-        document.getElementById('rdxDebriefContent').innerHTML = 
-            '<div style="text-align:center;margin-bottom:24px;">' +
-            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
-            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
-            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
-            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
-            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
-            '</div></div>' +
-            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
-            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
-            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
-            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
-            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
-            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
-            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
-            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
-            '</div></div>' +
-            '<div style="display:flex;gap:12px;">' +
-            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
-            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
-            '</div>';
-        
-        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
-    };
-    
-    // Auto-inject hint examples into existing content
-    window.rdxInit = function() {
-        // Could add dynamic hint injection here based on difficulty
-        console.log('ReasonDx Enhanced Features loaded for: Gi Bleed Expanded Adventure');
-    };
-    
-    // Initialize on load
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', window.rdxInit);
-    } else {
-        window.rdxInit();
+    },
+    {
+        "title": "Resuscitation",
+        "content": "<div class=\"narrative\">\n                <p>You initiate resuscitation with IV access and crystalloid. The nurse asks about blood transfusion.</p>\n            </div>",
+        "hint_beginner": "What hemoglobin threshold triggers transfusion in GI bleeding?",
+        "hint_advanced": "What did the TRIGGER trial and restrictive transfusion studies show?",
+        "question": {
+            "prompt": "At what hemoglobin threshold should you transfuse this patient?",
+            "options": [
+                {
+                    "text": "Transfuse for Hgb less than 7 g/dL (restrictive strategy) unless active massive bleeding, coronary disease, or hemodynamic instability",
+                    "correct": true
+                },
+                {
+                    "text": "Transfuse now - Hgb 8.2 is below 10 and he is symptomatic",
+                    "correct": false
+                },
+                {
+                    "text": "No transfusion threshold in acute bleeding - transfuse based on symptoms only",
+                    "correct": false
+                },
+                {
+                    "text": "Transfuse for Hgb less than 9 in all GI bleeding patients due to rebleeding risk",
+                    "correct": false
+                },
+                {
+                    "text": "Wait for hemoglobin to equilibrate in 24 hours before transfusing",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Restrictive transfusion (Hgb less than 7) improves outcomes in GI bleeding compared to liberal strategy (TRIGGER trial). More liberal threshold (less than 8-9) may be used for active massive hemorrhage, CAD, or hemodynamic instability. This patient is 8.2 and responsive to fluids, so watch and recheck.",
+                "incorrect": "Restrictive transfusion (target Hgb 7-9) has better outcomes in GI bleeding than liberal (target 9-11). Over-transfusion may worsen portal hypertension in variceal bleeding and increases mortality. His Hgb 8.2 does not mandate immediate transfusion unless he deteriorates."
+            },
+            "teaching": "<h4>\ud83d\udcda Transfusion in GI Bleeding</h4>\n                    <p><strong>Restrictive strategy (Hgb less than 7):</strong></p>\n                    <ul>\n                        <li>Lower mortality than liberal strategy</li>\n                        <li>Less rebleeding (especially variceal)</li>\n                        <li>Reduces portal pressure</li>\n                    </ul>\n                    <p><strong>Consider higher threshold (less than 8-9) if:</strong></p>\n                    <ul>\n                        <li>Active massive hemorrhage</li>\n                        <li>Coronary artery disease</li>\n                        <li>Hemodynamic instability despite resuscitation</li>\n                    </ul>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Risk Stratification",
+        "content": "<div class=\"narrative\">\n                <p>The patient is stabilizing with IV fluids. You need to determine timing of endoscopy.</p>\n            </div>",
+        "hint_beginner": "What scoring systems help risk-stratify upper GI bleeding?",
+        "hint_advanced": "When is urgent (less than 24h) vs emergent (less than 12h) endoscopy indicated?",
+        "question": {
+            "prompt": "When should this patient undergo upper endoscopy?",
+            "options": [
+                {
+                    "text": "Within 24 hours after resuscitation and hemodynamic stabilization - standard timing for acute upper GI bleeding",
+                    "correct": true
+                },
+                {
+                    "text": "Emergently within 2 hours - all upper GI bleeding requires immediate endoscopy",
+                    "correct": false
+                },
+                {
+                    "text": "Within 72 hours - early endoscopy has not shown benefit over delayed",
+                    "correct": false
+                },
+                {
+                    "text": "After hemoglobin normalizes with transfusion to optimize visualization",
+                    "correct": false
+                },
+                {
+                    "text": "Only if bleeding continues - stable patients may not need endoscopy",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Standard recommendation is EGD within 24 hours of presentation for acute upper GI bleeding. Emergent EGD (less than 12 hours) may be indicated for hemodynamic instability, ongoing active bleeding, or high-risk features. Very early EGD (less than 6h) has not shown mortality benefit in most patients.",
+                "incorrect": "Upper GI bleeding should have EGD within 24 hours. Emergent (less than 12h) EGD is reserved for hemodynamically unstable patients or massive bleeding. Waiting 72 hours is too long. All acute upper GI bleeds warrant endoscopy for diagnosis and potential therapy."
+            },
+            "teaching": "<h4>\ud83d\udcda Timing of Endoscopy in UGIB</h4>\n                    <table>\n                        <tr><th>Timing</th><th>Indication</th></tr>\n                        <tr><td><strong>Within 24 hours</strong></td><td>All acute upper GI bleeding (standard)</td></tr>\n                        <tr><td><strong>Within 12 hours</strong></td><td>High-risk features, hemodynamic instability</td></tr>\n                        <tr><td><strong>Emergent (less than 6h)</strong></td><td>Massive ongoing hemorrhage, suspected variceal bleeding</td></tr>\n                    </table>\n                    <p><em>Glasgow-Blatchford Score helps identify low-risk patients who may not need admission</em></p>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Endoscopy Findings",
+        "content": "<div class=\"narrative\">\n                <p>EGD reveals a gastric ulcer with visible vessel but no active bleeding. The gastroenterologist performs epinephrine injection and hemoclip placement.</p>\n            </div>",
+        "hint_beginner": "What is the Forrest classification? What does it predict?",
+        "hint_advanced": "What medical therapy should be started after endoscopic hemostasis?",
+        "question": {
+            "prompt": "What medical therapy should be initiated after successful endoscopic hemostasis?",
+            "options": [
+                {
+                    "text": "High-dose IV PPI (e.g., pantoprazole 80mg bolus then 8mg/hr infusion for 72 hours) to maintain gastric pH greater than 6",
+                    "correct": true
+                },
+                {
+                    "text": "Oral PPI twice daily is equivalent to IV and preferred for cost savings",
+                    "correct": false
+                },
+                {
+                    "text": "H2 blocker (famotidine) is preferred over PPI for peptic ulcer bleeding",
+                    "correct": false
+                },
+                {
+                    "text": "Sucralfate for mucosal protection - PPIs are not indicated post-hemostasis",
+                    "correct": false
+                },
+                {
+                    "text": "No acid suppression needed after successful endoscopic therapy",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "High-dose IV PPI after successful endoscopic therapy for high-risk ulcers (active bleeding, visible vessel, adherent clot) reduces rebleeding. Standard: 80mg bolus then 8mg/hr continuous infusion for 72 hours, then transition to oral PPI. Goal is pH greater than 6 to stabilize clot.",
+                "incorrect": "IV PPI infusion (not intermittent or oral) is standard after endoscopic hemostasis for high-risk ulcers. The continuous infusion maintains gastric pH greater than 6, allowing clot stabilization. This reduces rebleeding from ~25% to ~8%."
+            },
+            "teaching": "<h4>\ud83d\udcda Post-Endoscopy Management</h4>\n                    <p><strong>High-risk stigmata (need IV PPI):</strong></p>\n                    <ul>\n                        <li>Active spurting (Forrest Ia)</li>\n                        <li>Active oozing (Forrest Ib)</li>\n                        <li>Visible vessel (Forrest IIa)</li>\n                        <li>Adherent clot (Forrest IIb)</li>\n                    </ul>\n                    <p><strong>IV PPI protocol:</strong> 80mg bolus then 8mg/hr x 72 hours</p>\n                    <p><em>Low-risk stigmata (flat spot, clean base): Oral PPI is acceptable</em></p>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Anticoagulation Management",
+        "content": "<div class=\"narrative\">\n                <p>The patient is on apixaban for atrial fibrillation (CHA2DS2-VASc 4). The bleeding has stopped.</p>\n            </div>",
+        "hint_beginner": "When should anticoagulation be restarted after GI bleeding?",
+        "hint_advanced": "How do you weigh stroke risk vs rebleeding risk? What does the evidence show?",
+        "question": {
+            "prompt": "When should you restart anticoagulation in this patient?",
+            "options": [
+                {
+                    "text": "Resume anticoagulation within 7 days (often by day 3-5) after hemostasis confirmed - stroke risk outweighs rebleeding risk for most patients",
+                    "correct": true
+                },
+                {
+                    "text": "Wait 30 days after GI bleeding before restarting any anticoagulation",
+                    "correct": false
+                },
+                {
+                    "text": "Never restart anticoagulation after GI bleeding - use aspirin alone",
+                    "correct": false
+                },
+                {
+                    "text": "Restart immediately after endoscopy to prevent stroke",
+                    "correct": false
+                },
+                {
+                    "text": "Switch to warfarin as it is safer than DOACs after GI bleeding",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "For most patients with Afib, restart anticoagulation within 7 days (often day 3-5) after hemostasis is confirmed. Delaying beyond 7 days significantly increases stroke risk. With CHA2DS2-VASc 4, his annual stroke risk (~6%) exceeds rebleeding risk.",
+                "incorrect": "Early anticoagulation resumption (within 7 days) is associated with better outcomes than delayed resumption. Stroke/thrombotic risk typically outweighs rebleeding risk. DOACs are actually safer than warfarin for GI bleeding (lower intracranial hemorrhage)."
+            },
+            "teaching": "<h4>\ud83d\udcda Anticoagulation After GI Bleeding</h4>\n                    <p><strong>Timing of resumption:</strong></p>\n                    <ul>\n                        <li>Most patients: Resume within 7 days (often day 3-5)</li>\n                        <li>Very high risk (extensive ulcer, failed hemostasis): May wait longer</li>\n                        <li>Delaying beyond 7 days increases net harm in most AF patients</li>\n                    </ul>\n                    <p><strong>Evidence:</strong> Observational studies show lower mortality with early resumption (7 days) vs delayed or never resuming</p>",
+            "points": 15
+        }
     }
-})();
+,
+{
+        "title": "Risk Stratification",
+        "content": "<div class=\"narrative\"><p>You assess the severity and risk factors to guide management intensity.</p></div>",
+        "hint_beginner": "What clinical features indicate higher severity?",
+        "hint_advanced": "What validated scoring systems exist for this condition?",
+        "question": {
+                "prompt": "Which factor most influences prognosis and management intensity?",
+                "options": [
+                        {
+                                "text": "Integration of clinical presentation, comorbidities, vital signs, and objective findings",
+                                "correct": true
+                        },
+                        {
+                                "text": "A single laboratory value in isolation",
+                                "correct": false
+                        },
+                        {
+                                "text": "Patient age alone",
+                                "correct": false
+                        },
+                        {
+                                "text": "Time of presentation to the ED",
+                                "correct": false
+                        },
+                        {
+                                "text": "Insurance status or ability to follow up",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "Clinical decision-making integrates multiple factors including presentation severity, comorbidities, vital signs, laboratory findings, and patient-specific factors. No single element should drive management in isolation.",
+                        "incorrect": "Risk stratification requires integration of multiple clinical factors, not reliance on any single element."
+                },
+                "teaching": "<h4>\ud83d\udcca Risk Stratification Principles</h4><ul><li>Assess severity of presenting illness</li><li>Consider relevant comorbidities</li><li>Review vital signs and trajectory</li><li>Integrate laboratory and imaging findings</li><li>Apply validated scoring tools when available</li></ul>",
+                "points": 10
+        }
+},
+{
+        "title": "Treatment Selection",
+        "content": "<div class=\"narrative\"><p>Based on your assessment, you must select the most appropriate initial treatment approach.</p></div>",
+        "hint_beginner": "What are the first-line evidence-based treatments?",
+        "hint_advanced": "How do patient-specific factors modify treatment selection?",
+        "question": {
+                "prompt": "What principle guides initial treatment selection?",
+                "options": [
+                        {
+                                "text": "Evidence-based guidelines tailored to patient-specific factors (comorbidities, allergies, severity)",
+                                "correct": true
+                        },
+                        {
+                                "text": "Always use the newest available medication",
+                                "correct": false
+                        },
+                        {
+                                "text": "Most expensive treatments provide best outcomes",
+                                "correct": false
+                        },
+                        {
+                                "text": "Whatever was used for the last similar patient",
+                                "correct": false
+                        },
+                        {
+                                "text": "Patient preference alone should determine treatment",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "Treatment should follow current evidence-based guidelines while accounting for individual patient factors including comorbidities, allergies, contraindications, disease severity, and patient preferences when appropriate.",
+                        "incorrect": "Evidence-based medicine combined with patient-centered care guides optimal treatment selection."
+                },
+                "teaching": "<h4>\ud83d\udc8a Treatment Principles</h4><ul><li>Follow current evidence-based guidelines</li><li>Assess for contraindications and allergies</li><li>Consider patient-specific factors</li><li>Start with first-line agents unless contraindicated</li><li>Monitor for response and adverse effects</li></ul>",
+                "points": 10
+        }
+},
+{
+        "title": "Monitoring and Reassessment",
+        "content": "<div class=\"narrative\"><p>After initiating treatment, you must establish monitoring parameters and reassessment criteria.</p></div>",
+        "hint_beginner": "What should you monitor to assess treatment response?",
+        "hint_advanced": "What triggers require escalation or change in management?",
+        "question": {
+                "prompt": "What is most important in the monitoring plan?",
+                "options": [
+                        {
+                                "text": "Clear criteria for expected response timeline and specific triggers for escalation",
+                                "correct": true
+                        },
+                        {
+                                "text": "Scheduling a follow-up appointment",
+                                "correct": false
+                        },
+                        {
+                                "text": "Completing documentation thoroughly",
+                                "correct": false
+                        },
+                        {
+                                "text": "Ensuring patient satisfaction scores",
+                                "correct": false
+                        },
+                        {
+                                "text": "Waiting for specialist consultation before any reassessment",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "Effective monitoring requires defining what improvement to expect and when, establishing clear escalation triggers, and setting specific reassessment timepoints. This allows early identification of treatment failure.",
+                        "incorrect": "While all aspects of care matter, defining response criteria and escalation triggers is critical for patient safety."
+                },
+                "teaching": "<h4>\ud83d\udcc8 Monitoring Essentials</h4><ul><li>Define expected response and timeline</li><li>Establish vital sign parameters</li><li>Set escalation triggers (specific criteria for concern)</li><li>Plan reassessment intervals</li><li>Document baseline for comparison</li></ul>",
+                "points": 10
+        }
+}];
+
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
+function setDifficulty(level, btn) {
+    difficulty = level;
+    document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    document.querySelectorAll('.hint-beginner').forEach(el => {
+        el.style.display = level === 'beginner' ? 'block' : 'none';
+    });
+    document.querySelectorAll('.hint-advanced').forEach(el => {
+        el.style.display = level === 'advanced' ? 'block' : 'none';
+    });
+}
+
+function renderStage(index) {
+    const stage = stages[index];
+    const container = document.getElementById('scene-container');
+    const letters = ['A', 'B', 'C', 'D', 'E'];
+    const shuffledOptions = shuffleArray(stage.question.options);
+    
+    const optionsHTML = shuffledOptions.map((opt, i) => `
+        <div class="mcq-option" data-correct="${opt.correct}" data-text="${opt.text.replace(/"/g, '&quot;')}" onclick="selectOption(this)">
+            <span class="option-letter">${letters[i]}</span>
+            <span class="option-text">${opt.text}</span>
+        </div>
+    `).join('');
+    
+    container.innerHTML = `
+        <div class="scene">
+            <div class="scene-header">
+                <div class="scene-phase">Stage ${index + 1} of ${stages.length}</div>
+                <div class="scene-title">${stage.title}</div>
+            </div>
+            <div class="scene-body">
+                ${stage.content}
+                
+                <div class="hint-beginner">🌱 <strong>Hint:</strong> ${stage.hint_beginner}</div>
+                <div class="hint-advanced">🎯 <strong>Challenge:</strong> ${stage.hint_advanced}</div>
+                
+                <div class="question-box">
+                    <div class="question-prompt">${stage.question.prompt}</div>
+                    <div class="mcq-options" id="options-container">${optionsHTML}</div>
+                    
+                    <div class="feedback correct-feedback" id="feedback-correct">
+                        <div class="feedback-title">✓ Correct!</div>
+                        <div class="feedback-explanation">${stage.question.explanation.correct}</div>
+                    </div>
+                    <div class="feedback incorrect-feedback" id="feedback-incorrect">
+                        <div class="feedback-title">✗ Not quite</div>
+                        <div class="feedback-explanation">${stage.question.explanation.incorrect}</div>
+                    </div>
+                    
+                    <div class="teaching-point" id="teaching">
+                        ${stage.question.teaching}
+                    </div>
+                    
+                    <button class="btn" id="nextBtn" onclick="nextStage()">Continue →</button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Apply difficulty
+    document.querySelectorAll('.hint-beginner').forEach(el => {
+        el.style.display = difficulty === 'beginner' ? 'block' : 'none';
+    });
+    document.querySelectorAll('.hint-advanced').forEach(el => {
+        el.style.display = difficulty === 'advanced' ? 'block' : 'none';
+    });
+    
+    document.getElementById('progress').style.width = ((index + 1) / stages.length * 100) + '%';
+}
+
+function selectOption(element) {
+    if (answeredQuestions.has(currentStage)) return;
+    answeredQuestions.add(currentStage);
+    
+    const stage = stages[currentStage];
+    const isCorrect = element.dataset.correct === 'true';
+    const selectedText = element.dataset.text;
+    
+    // Track decision
+    decisionPath.push({
+        stage: currentStage + 1,
+        title: stage.title,
+        correct: isCorrect,
+        selected: selectedText,
+        points: isCorrect ? stage.question.points : 0,
+        maxPoints: stage.question.points
+    });
+    
+    // Mark options
+    document.querySelectorAll('.mcq-option').forEach(opt => {
+        opt.classList.add('disabled');
+        if (opt.dataset.correct === 'true') opt.classList.add('correct');
+    });
+    
+    if (!isCorrect) element.classList.add('incorrect');
+    
+    // Update score
+    if (isCorrect) {
+        score += stage.question.points;
+        document.getElementById('feedback-correct').classList.add('show');
+    } else {
+        document.getElementById('feedback-incorrect').classList.add('show');
+    }
+    
+    maxScore += stage.question.points;
+    document.getElementById('score').textContent = score;
+    document.getElementById('maxScore').textContent = maxScore;
+    
+    document.getElementById('teaching').classList.add('show');
+    document.getElementById('nextBtn').classList.add('show');
+}
+
+function nextStage() {
+    currentStage++;
+    if (currentStage < stages.length) {
+        renderStage(currentStage);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+        showCompletion();
+    }
+}
+
+function showCompletion() {
+    const percentage = Math.round((score / maxScore) * 100);
+    let grade, color, emoji;
+    if (percentage >= 90) { grade = 'Outstanding!'; color = '#22c55e'; emoji = '🏆'; }
+    else if (percentage >= 80) { grade = 'Excellent Work!'; color = '#3b82f6'; emoji = '⭐'; }
+    else if (percentage >= 70) { grade = 'Good Progress!'; color = '#eab308'; emoji = '👍'; }
+    else { grade = 'Keep Practicing!'; color = '#f87171'; emoji = '📚'; }
+    
+    const pathHTML = decisionPath.map(d => {
+        const icon = d.correct ? '✓' : '✗';
+        const cls = d.correct ? 'color: #4ade80' : 'color: #f87171';
+        return `<div style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between;">
+            <span><span style="${cls}; font-weight: 700;">${icon}</span> Stage ${d.stage}: ${d.title}</span>
+            <span style="color: #94a3b8;">${d.points}/${d.maxPoints}</span>
+        </div>`;
+    }).join('');
+    
+    document.getElementById('scene-container').innerHTML = `
+        <div class="scene completion">
+            <div style="font-size: 4rem; margin-bottom: 16px;">${emoji}</div>
+            <div class="completion-grade" style="color: ${color};">${grade}</div>
+            <div class="completion-percent" style="color: ${color};">${percentage}%</div>
+            <div class="completion-score">Final Score: ${score} / ${maxScore}</div>
+            <div class="completion-message">You've completed this Socratic Case</div>
+            
+            <div class="completion-breakdown">
+                <h4>📋 Your Decision Path</h4>
+                ${pathHTML}
+            </div>
+            
+            <div class="crossplatform">
+                <h4>🎯 Continue Learning</h4>
+                <div class="crossplatform-links">
+                    <a href="../mechanism/gi-bleed-module.html" class="crossplatform-link">📚 GI Bleed Pathophysiology</a>
+
+                </div>
+            </div>
+            
+            <button class="btn show" onclick="location.reload()" style="margin-top: 24px;">Try Again</button>
+        </div>
+    `;
+}
+
+// Initialize
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => renderStage(0));
+} else {
+    renderStage(0);
+}
+
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#3b82f6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color:#f59e0b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
 </script>
-<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
 
 </body>
 </html>

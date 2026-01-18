@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atrial Fibrillation - ReasonDx Socratic Case</title>
+    <title>Food Allergy - ReasonDx Socratic Case</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { 
@@ -385,8 +385,8 @@
         <button onclick="toggleReferences()" class="refs-toggle">▼</button>
     </div>
     <div class="references-content" id="referencesContent">
-        <a href="https://www.ncbi.nlm.nih.gov/books/NBK526072/" target="_blank" rel="noopener">Atrial Fibrillation - StatPearls (StatPearls)</a>
-<a href="https://www.mdcalc.com/calc/801/cha2ds2-vasc-score-atrial-fibrillation-stroke-risk" target="_blank" rel="noopener">CHA2DS2-VASc Score (MDCalc)</a>
+        <a href="https://www.aaaai.org/conditions-treatments/allergies/food-allergy" target="_blank" rel="noopener">Food Allergy - AAAAI (AAAAI)</a>
+<a href="https://www.ncbi.nlm.nih.gov/books/NBK482187/" target="_blank" rel="noopener">Food Allergy - StatPearls (StatPearls)</a>
     </div>
 </div>
 </div>
@@ -403,299 +403,447 @@ let decisionPath = [];
 
 const stages = [
     {
-        "title": "Initial Presentation",
-        "content": "<div class=\"narrative\">\n                <p>A <span class=\"highlight\">67-year-old woman</span> presents with palpitations and mild dyspnea for 8 hours. She has never had this before. PMH: Hypertension, type 2 diabetes.</p>\n            </div>\n            <div class=\"patient-card\">\n                <h4>Initial Assessment</h4>\n                <div class=\"vitals-grid\">\n                    <div class=\"vital-item\"><div class=\"vital-label\">HR</div><div class=\"vital-value abnormal\">142 irreg</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">BP</div><div class=\"vital-value normal\">138/88</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">SpO2</div><div class=\"vital-value normal\">96% RA</div></div>\n                </div>\n            </div>",
-        "hint_beginner": "How do you differentiate afib from other SVTs on exam and ECG?",
-        "hint_advanced": "What is her stroke risk? Calculate her CHA2DS2-VASc score.",
+        "title": "Initial Evaluation",
+        "content": "<div class=\"narrative\">\n                <p>Parents bring their <span class=\"highlight\">18-month-old boy</span> for evaluation after he developed hives, facial swelling, and vomiting within 15 minutes of eating scrambled eggs for the first time.</p>\n                <p style=\"margin-top:12px;\"><strong>Prior exposures:</strong> Previously tolerated baked goods containing egg (cookies, muffins)</p>\n            </div>",
+        "hint_beginner": "What is the clinical presentation of IgE-mediated food allergy?",
+        "hint_advanced": "How does tolerance to baked egg affect the diagnosis and prognosis?",
         "question": {
-            "prompt": "What ECG finding confirms atrial fibrillation?",
+            "prompt": "What does the tolerance to baked egg but reaction to scrambled egg suggest?",
             "options": [
                 {
-                    "text": "Irregularly irregular rhythm with absence of P waves and fibrillatory baseline",
+                    "text": "Allergy to heat-labile egg proteins (ovomucoid is heat-stable; ovotransferrin and ovalbumin are heat-labile); baked-egg tolerance suggests better prognosis",
                     "correct": true
                 },
                 {
-                    "text": "Regular narrow complex tachycardia at 150 bpm with sawtooth pattern",
+                    "text": "This is not true egg allergy - reactions should occur to all forms of egg",
                     "correct": false
                 },
                 {
-                    "text": "Narrow complex tachycardia with visible P waves before each QRS",
+                    "text": "He can safely continue eating baked egg but has severe egg allergy requiring full avoidance",
                     "correct": false
                 },
                 {
-                    "text": "Wide complex irregular tachycardia with fusion beats",
+                    "text": "Baked egg tolerance means he has outgrown his egg allergy",
                     "correct": false
                 },
                 {
-                    "text": "Regular narrow complex at 180 with short RP interval",
+                    "text": "The reaction to scrambled egg was coincidental; true egg allergy was ruled out by baked egg tolerance",
                     "correct": false
                 }
             ],
             "explanation": {
-                "correct": "Atrial fibrillation = irregularly irregular rhythm + absent P waves + fibrillatory baseline (f waves). The irregularity is the key distinguishing feature from other SVTs. Atrial flutter has regular sawtooth waves. SVT is typically regular.",
-                "incorrect": "Afib is diagnosed by: 1) Irregular irregularity (variable RR intervals), 2) Absent organized P waves, 3) Fibrillatory baseline. Sawtooth = flutter. Regular narrow complex = SVT/flutter. Wide irregular = afib with aberrancy or WPW."
+                "correct": "Many egg-allergic children tolerate baked egg because heating denatures conformational epitopes on heat-labile proteins (ovalbumin, ovotransferrin). Allergy to heat-stable ovomucoid causes reaction to all forms. Baked-egg tolerance is a POSITIVE prognostic factor - these children are more likely to outgrow their allergy.",
+                "incorrect": "Egg allergy exists on a spectrum. Tolerance to baked/heated egg (where proteins are denatured) while reacting to less-cooked egg is common and prognostically favorable. This is true egg allergy. Continued baked egg consumption may actually help accelerate tolerance development."
             },
-            "teaching": "<h4>\ud83d\udcda Atrial Fibrillation ECG Features</h4>\n                    <ul>\n                        <li><strong>Irregularly irregular RR intervals</strong> - the hallmark</li>\n                        <li><strong>Absent P waves</strong> - replaced by fibrillatory waves</li>\n                        <li><strong>Variable ventricular rate</strong> - typically 100-180 if untreated</li>\n                        <li><strong>Narrow QRS</strong> - unless bundle branch block or WPW</li>\n                    </ul>",
+            "teaching": "<h4>\ud83d\udcda Egg Allergy Spectrum</h4>\n                    <p><strong>Major egg allergens:</strong></p>\n                    <ul>\n                        <li>Ovomucoid (Gal d 1): Heat-stable - allergy = reacts to ALL egg forms</li>\n                        <li>Ovalbumin (Gal d 2): Heat-labile - may tolerate baked egg</li>\n                        <li>Ovotransferrin (Gal d 3): Heat-labile</li>\n                    </ul>\n                    <p><strong>Baked egg tolerance:</strong></p>\n                    <ul>\n                        <li>70% of egg-allergic children tolerate baked egg</li>\n                        <li>Better prognosis for outgrowing allergy</li>\n                        <li>Continued baked egg intake may accelerate tolerance</li>\n                    </ul>",
             "points": 10
         }
     },
     {
-        "title": "Rate vs Rhythm Control",
-        "content": "<div class=\"narrative\">\n                <p>ECG confirms afib with RVR at 145 bpm. The patient is hemodynamically stable but uncomfortable.</p>\n            </div>",
-        "hint_beginner": "What is the first decision - rate control or rhythm control?",
-        "hint_advanced": "What did AFFIRM and EAST-AFNET4 trials show about rate vs rhythm control?",
+        "title": "Diagnostic Testing",
+        "content": "<div class=\"narrative\">\n                <p>You want to confirm egg allergy with testing.</p>\n            </div>",
+        "hint_beginner": "What tests are available for food allergy diagnosis?",
+        "hint_advanced": "How do you interpret specific IgE levels? What are the 95% positive predictive values?",
         "question": {
-            "prompt": "For this patient with new-onset afib less than 24 hours, what is the most appropriate initial approach?",
+            "prompt": "Skin prick testing to egg white is positive (8mm wheal). Serum egg white specific IgE is 15 kU/L. How do you interpret these results?",
             "options": [
                 {
-                    "text": "Rate control with IV beta-blocker or diltiazem first; if symptoms persist and patient is candidate, consider cardioversion",
+                    "text": "Confirms IgE sensitization to egg; combined with convincing clinical history, confirms diagnosis; the high specific IgE suggests allergy unlikely to be outgrown soon",
                     "correct": true
                 },
                 {
-                    "text": "Immediate electrical cardioversion - all new-onset afib should be cardioverted urgently",
+                    "text": "Positive testing confirms he will have anaphylaxis with any egg exposure",
                     "correct": false
                 },
                 {
-                    "text": "Rate control only - rhythm control offers no advantage and increases hospitalization",
+                    "text": "Need oral food challenge to make diagnosis - testing alone cannot diagnose food allergy",
                     "correct": false
                 },
                 {
-                    "text": "Amiodarone IV as first-line for both rate and rhythm control",
+                    "text": "Results are indeterminate - specific IgE must be greater than 50 kU/L to diagnose allergy",
                     "correct": false
                 },
                 {
-                    "text": "Observation only - most new-onset afib converts spontaneously within 48 hours",
+                    "text": "Skin testing is unreliable in children under 2 years and should be repeated later",
                     "correct": false
                 }
             ],
             "explanation": {
-                "correct": "Initial approach is usually rate control (beta-blocker or CCB). If onset less than 48 hours and patient is symptomatic, cardioversion can be considered without TEE. EAST-AFNET4 suggests early rhythm control may be beneficial, but rate control first ensures safety.",
-                "incorrect": "Rate control is typically first-line for stable patients. However, rhythm control (cardioversion) can be considered early in new-onset afib (less than 48h). EAST-AFNET4 showed benefit of early rhythm control. Immediate cardioversion is for unstable patients only."
+                "correct": "Positive skin test + elevated specific IgE + convincing clinical history = confirmed egg allergy. The specific IgE level of 15 kU/L exceeds the 95% PPV threshold for egg (~7 kU/L), meaning >95% chance of reaction. Higher IgE levels correlate with persistence (less likely to outgrow soon).",
+                "incorrect": "Testing confirms IgE sensitization, which with clinical history confirms allergy. Testing cannot predict severity of future reactions. The specific IgE level is useful for prognosis - higher levels suggest longer duration of allergy. Oral challenges are for unclear cases or monitoring for resolution."
             },
-            "teaching": "<h4>\ud83d\udcda Rate vs Rhythm Control</h4>\n                    <p><strong>Rate control first-line agents:</strong></p>\n                    <ul>\n                        <li>Beta-blockers (metoprolol, esmolol)</li>\n                        <li>Non-dihydropyridine CCBs (diltiazem, verapamil)</li>\n                        <li>Target HR less than 110 at rest (lenient control)</li>\n                    </ul>\n                    <p><strong>Consider early rhythm control if:</strong></p>\n                    <ul>\n                        <li>Symptoms persist despite rate control</li>\n                        <li>New-onset (less than 12 months) - EAST-AFNET4</li>\n                        <li>Young patient with structurally normal heart</li>\n                    </ul>",
+            "teaching": "<h4>\ud83d\udcda Food Allergy Testing</h4>\n                    <p><strong>Skin prick testing:</strong></p>\n                    <ul>\n                        <li>Wheal greater than 3mm above negative control = positive</li>\n                        <li>High sensitivity, lower specificity</li>\n                        <li>Negative test: high negative predictive value (95%+)</li>\n                    </ul>\n                    <p><strong>Specific IgE levels (95% PPV thresholds):</strong></p>\n                    <ul>\n                        <li>Egg: ~7 kU/L (children), ~6 kU/L (less than 2 years)</li>\n                        <li>Milk: ~15 kU/L</li>\n                        <li>Peanut: ~14 kU/L</li>\n                    </ul>\n                    <p><em>Specific IgE levels correlate with persistence, not severity</em></p>",
             "points": 10
         }
     },
     {
-        "title": "Anticoagulation Decision",
-        "content": "<div class=\"narrative\">\n                <p>Rate controlled on diltiazem. Now addressing stroke prevention. Her CHA2DS2-VASc: Age 67 (+1), Female (+1), HTN (+1), DM (+1) = 4.</p>\n            </div>",
-        "hint_beginner": "At what CHA2DS2-VASc score is anticoagulation indicated?",
-        "hint_advanced": "What are the advantages of DOACs over warfarin for afib?",
+        "title": "Management Counseling",
+        "content": "<div class=\"narrative\">\n                <p>You confirm egg allergy. The parents ask about management and prognosis.</p>\n            </div>",
+        "hint_beginner": "What is the natural history of egg allergy? Do children outgrow it?",
+        "hint_advanced": "Should baked egg be continued in children who tolerate it? What about oral immunotherapy?",
         "question": {
-            "prompt": "What anticoagulation strategy is most appropriate?",
+            "prompt": "What dietary management do you recommend?",
             "options": [
                 {
-                    "text": "DOAC (apixaban, rivaroxaban, dabigatran, or edoxaban) - preferred over warfarin for non-valvular afib",
+                    "text": "Strict avoidance of uncooked/lightly cooked egg; can continue baked egg if tolerated (may help accelerate tolerance); prescribe epinephrine auto-injector",
                     "correct": true
                 },
                 {
-                    "text": "Aspirin alone - adequate stroke prevention for CHA2DS2-VASc less than 6",
+                    "text": "Strict avoidance of ALL egg including baked goods; reintroduce only after negative testing",
                     "correct": false
                 },
                 {
-                    "text": "Warfarin (INR 2-3) - remains the gold standard for afib anticoagulation",
+                    "text": "No avoidance needed if reactions have been mild; treat symptoms as they occur",
                     "correct": false
                 },
                 {
-                    "text": "No anticoagulation needed until afib recurs or becomes permanent",
+                    "text": "Avoid egg only during respiratory illnesses when risk of severe reaction is higher",
                     "correct": false
                 },
                 {
-                    "text": "Aspirin plus clopidogrel as an alternative to oral anticoagulation",
+                    "text": "Start oral immunotherapy immediately to prevent development of severe allergy",
                     "correct": false
                 }
             ],
             "explanation": {
-                "correct": "With CHA2DS2-VASc of 4 (~4% annual stroke risk), anticoagulation is clearly indicated. DOACs are preferred over warfarin for non-valvular afib based on multiple trials showing non-inferior efficacy, lower bleeding (especially intracranial), and no need for monitoring.",
-                "incorrect": "CHA2DS2-VASc of 2 or more (1 or more in men) indicates anticoagulation. DOACs are now preferred over warfarin for most non-valvular afib. Aspirin alone is not adequate for stroke prevention in afib. Dual antiplatelet therapy is inferior to anticoagulation."
+                "correct": "Management: 1) Avoid trigger form (uncooked/lightly cooked egg), 2) Continue baked egg if tolerated - studies suggest this may accelerate tolerance, 3) Epinephrine auto-injector, 4) Education on label reading and cross-contamination. About 70-80% of egg-allergic children outgrow their allergy by school age.",
+                "incorrect": "Continued baked egg consumption in tolerant children is safe and may help accelerate tolerance development. Complete avoidance of all forms is not necessary if baked form is tolerated. OIT is an option but not first-line for egg allergy at this age."
             },
-            "teaching": "<h4>\ud83d\udcda Anticoagulation in Afib</h4>\n                    <p><strong>CHA2DS2-VASc and treatment:</strong></p>\n                    <ul>\n                        <li>0 (men) or 1 (women): May omit anticoagulation</li>\n                        <li>1 (men) or 2 (women): Consider anticoagulation</li>\n                        <li>2 or more (men) or 3 or more (women): Anticoagulation recommended</li>\n                    </ul>\n                    <p><strong>DOAC advantages over warfarin:</strong></p>\n                    <ul>\n                        <li>Lower intracranial hemorrhage</li>\n                        <li>No INR monitoring</li>\n                        <li>Fewer drug interactions</li>\n                        <li>Predictable pharmacokinetics</li>\n                    </ul>",
+            "teaching": "<h4>\ud83d\udcda Egg Allergy Management</h4>\n                    <p><strong>Avoidance:</strong> Avoid trigger forms (adjust based on individual tolerance)</p>\n                    <p><strong>Baked egg tolerance:</strong></p>\n                    <ul>\n                        <li>If tolerating baked egg, can continue</li>\n                        <li>May accelerate development of complete tolerance</li>\n                        <li>BADE study showed benefit of baked egg introduction</li>\n                    </ul>\n                    <p><strong>Epinephrine:</strong> Prescribe for all IgE-mediated food allergies</p>\n                    <p><strong>Prognosis:</strong> 70-80% outgrow by school age; higher specific IgE = longer duration</p>",
             "points": 10
         }
     },
     {
-        "title": "Cardioversion Consideration",
-        "content": "<div class=\"narrative\">\n                <p>Despite rate control, she remains symptomatic. You consider cardioversion. It has now been 18 hours since symptom onset.</p>\n            </div>",
-        "hint_beginner": "When can you cardiovert without TEE? What is the 48-hour rule?",
-        "hint_advanced": "What is the risk of thromboembolism with cardioversion? How does anticoagulation mitigate this?",
+        "title": "Peanut Allergy Scenario",
+        "content": "<div class=\"narrative\">\n                <p>Your next patient is a <span class=\"highlight\">6-month-old infant</span> with severe eczema. The parents ask about peanut introduction.</p>\n                <p style=\"margin-top:12px;\"><strong>Family history:</strong> Older sibling has peanut allergy</p>\n            </div>",
+        "hint_beginner": "What did the LEAP study show about early peanut introduction?",
+        "hint_advanced": "Which infants should have testing before peanut introduction? What are the guidelines?",
         "question": {
-            "prompt": "Is TEE required before cardioversion in this patient?",
+            "prompt": "What is the appropriate approach to peanut introduction in this high-risk infant?",
             "options": [
                 {
-                    "text": "No - onset less than 48 hours; can cardiovert after starting anticoagulation, though some guidelines suggest TEE if any uncertainty about timing",
+                    "text": "Testing (skin prick or specific IgE) before introduction given severe eczema; if negative or low-level positive, introduce early (4-6 months) to prevent allergy development",
                     "correct": true
                 },
                 {
-                    "text": "Yes - TEE required before all cardioversions regardless of duration",
+                    "text": "Avoid peanut until age 3 given high risk factors (eczema, family history)",
                     "correct": false
                 },
                 {
-                    "text": "No - TEE is never required; just start anticoagulation post-cardioversion",
+                    "text": "No testing needed; introduce peanut at home like any other food",
                     "correct": false
                 },
                 {
-                    "text": "Yes - TEE required if CHA2DS2-VASc greater than 2",
+                    "text": "Family history of peanut allergy is absolute contraindication to introduction",
                     "correct": false
                 },
                 {
-                    "text": "Not applicable - cardioversion contraindicated within 48 hours of onset",
+                    "text": "Wait until eczema is fully controlled before introducing any allergenic foods",
                     "correct": false
                 }
             ],
             "explanation": {
-                "correct": "For afib duration less than 48 hours with reliable symptom onset time, cardioversion can proceed without TEE after therapeutic anticoagulation is initiated. However, if any doubt about duration, TEE should be performed to rule out LA thrombus. Continue anticoagulation for at least 4 weeks post-cardioversion.",
-                "incorrect": "The 48-hour rule: If onset clearly less than 48 hours, cardioversion can proceed without TEE (low thrombus risk). If duration greater than 48 hours or uncertain, either TEE to rule out thrombus OR 3 weeks therapeutic anticoagulation before cardioversion. Always anticoagulate for 4 weeks after."
+                "correct": "The LEAP study revolutionized peanut allergy prevention. For high-risk infants (severe eczema and/or egg allergy), guidelines recommend: 1) Test first (SPT or specific IgE), 2) If negative: introduce peanut by 4-6 months, 3) If low-level positive: may introduce in supervised setting or at home based on level. Early introduction reduces peanut allergy risk by 70-80%.",
+                "incorrect": "Old advice to delay allergenic foods has been reversed! LEAP showed early peanut introduction PREVENTS allergy. High-risk infants benefit MOST from early introduction. Testing helps stratify approach but negative test or mild sensitization = introduce early."
             },
-            "teaching": "<h4>\ud83d\udcda Cardioversion and Anticoagulation</h4>\n                    <p><strong>If afib duration less than 48 hours:</strong></p>\n                    <ul>\n                        <li>Can cardiovert without TEE</li>\n                        <li>Start anticoagulation before or immediately after</li>\n                    </ul>\n                    <p><strong>If afib duration greater than 48 hours or unknown:</strong></p>\n                    <ul>\n                        <li>Option 1: TEE to rule out LA thrombus, then cardiovert</li>\n                        <li>Option 2: 3 weeks therapeutic anticoagulation, then cardiovert</li>\n                    </ul>\n                    <p><strong>Post-cardioversion:</strong> Anticoagulate for at least 4 weeks (atrial stunning)</p>",
-            "points": 10
-        }
-    },
-    {
-        "title": "Special Situation",
-        "content": "<div class=\"narrative\">\n                <p>A nurse calls urgently about another patient - a 45-year-old with known WPW presenting with irregular wide-complex tachycardia at 180 bpm. He is hypotensive at 85/60.</p>\n            </div>",
-        "hint_beginner": "What is dangerous about afib in WPW?",
-        "hint_advanced": "Why are AV nodal blocking agents contraindicated in WPW with afib?",
-        "question": {
-            "prompt": "What is the most appropriate treatment for this patient with WPW and presumed afib?",
-            "options": [
-                {
-                    "text": "Immediate synchronized cardioversion - AV nodal blockers are contraindicated in WPW with afib",
-                    "correct": true
-                },
-                {
-                    "text": "IV diltiazem for rate control as in typical afib",
-                    "correct": false
-                },
-                {
-                    "text": "IV metoprolol for rate control",
-                    "correct": false
-                },
-                {
-                    "text": "IV adenosine to slow the rhythm",
-                    "correct": false
-                },
-                {
-                    "text": "Observation - this is likely a regular SVT, not afib",
-                    "correct": false
-                }
-            ],
-            "explanation": {
-                "correct": "WPW + Afib with hypotension = emergent cardioversion. AV nodal blockers (beta-blockers, CCBs, digoxin, adenosine) are CONTRAINDICATED - they can preferentially block the AV node, forcing all conduction down the accessory pathway, potentially causing VF.",
-                "incorrect": "AV nodal blockers are DANGEROUS in WPW + Afib! They block the AV node but not the accessory pathway, which can paradoxically increase ventricular rate and cause VF. Treatment: cardioversion if unstable, or procainamide/ibutilide if stable."
-            },
-            "teaching": "<h4>\ud83d\udcda WPW + Atrial Fibrillation</h4>\n                    <p><strong>DANGER: AV nodal blockers contraindicated!</strong></p>\n                    <ul>\n                        <li>No beta-blockers</li>\n                        <li>No diltiazem/verapamil</li>\n                        <li>No digoxin</li>\n                        <li>No adenosine</li>\n                    </ul>\n                    <p><strong>Treatment:</strong></p>\n                    <ul>\n                        <li>Unstable: Synchronized cardioversion</li>\n                        <li>Stable: Procainamide or ibutilide</li>\n                    </ul>\n                    <p><strong>Why dangerous?</strong> Blocking AV node forces conduction down accessory pathway \u2192 very rapid ventricular rate \u2192 can degenerate to VF</p>",
+            "teaching": "<h4>\ud83d\udcda Early Peanut Introduction (LEAP/LEAP-On)</h4>\n                    <p><strong>Who is high-risk?</strong> Severe eczema and/or egg allergy</p>\n                    <p><strong>Guidelines:</strong></p>\n                    <table>\n                        <tr><th>Risk Level</th><th>Approach</th></tr>\n                        <tr><td>Severe eczema/egg allergy</td><td>Test first, then introduce by 4-6 months</td></tr>\n                        <tr><td>Mild-moderate eczema</td><td>Introduce at ~6 months, testing optional</td></tr>\n                        <tr><td>No eczema, no food allergy</td><td>Introduce with other solids</td></tr>\n                    </table>\n                    <p><strong>LEAP results:</strong> 70-80% reduction in peanut allergy with early introduction</p>\n                    <p><em>Do NOT delay allergenic foods - early introduction is protective!</em></p>",
             "points": 15
         }
     }
 ,
 {
-        "title": "Rate vs Rhythm Control",
-        "content": "<div class=\"narrative\"><p>Your patient is hemodynamically stable with new-onset AFib. Heart rate is 142 bpm. You need to decide on a management strategy.</p></div>",
-        "hint_beginner": "Rate control slows the heart; rhythm control tries to restore normal sinus rhythm.",
-        "hint_advanced": "What does AFFIRM trial tell us? When is rhythm control preferred?",
+        "title": "Component Testing Deep Dive",
+        "content": "<div class=\"narrative\"><p>You order <span class=\"highlight\">component-resolved diagnostics</span> to better characterize the allergy.</p><p style=\"margin-top:12px;\"><strong>Results:</strong><br>Ovomucoid (Gal d 1): <span class=\"lab-value\">0.5 kU/L</span><br>Ovalbumin (Gal d 2): <span class=\"lab-value\">12 kU/L</span><br>Ovotransferrin: <span class=\"lab-value\">8 kU/L</span></p></div>",
+        "hint_beginner": "Component testing tells you WHICH proteins the patient is allergic to, helping predict prognosis.",
+        "hint_advanced": "How do sequential epitope vs conformational epitope sensitivities affect tolerance development?",
         "question": {
-                "prompt": "For most patients with AFib, which statement about rate vs rhythm control is TRUE?",
+                "prompt": "The LOW ovomucoid but HIGH ovalbumin IgE suggests:",
                 "options": [
                         {
-                                "text": "Rate and rhythm control have similar mortality outcomes; choice depends on symptoms and patient factors",
+                                "text": "Sensitization primarily to heat-labile proteins - excellent prognosis, likely to outgrow allergy",
                                 "correct": true
                         },
                         {
-                                "text": "Rhythm control is always superior and should be attempted in all patients",
+                                "text": "Severe persistent allergy requiring lifelong strict avoidance",
                                 "correct": false
                         },
                         {
-                                "text": "Rate control is always preferred to avoid antiarrhythmic drug toxicity",
+                                "text": "Testing error - ovomucoid should always be the dominant allergen in egg allergy",
                                 "correct": false
                         },
                         {
-                                "text": "Rhythm control eliminates the need for anticoagulation",
+                                "text": "Need to repeat testing in 6 months before drawing any conclusions",
                                 "correct": false
                         },
                         {
-                                "text": "Rate control is only for patients who fail rhythm control",
+                                "text": "Cross-reactivity with chicken meat requiring poultry avoidance",
                                 "correct": false
                         }
                 ],
                 "explanation": {
-                        "correct": "AFFIRM trial showed no mortality difference between rate and rhythm control strategies. Choice depends on symptoms, patient preference, likelihood of maintaining sinus rhythm, and comorbidities. Anticoagulation is based on stroke risk, not rhythm strategy.",
-                        "incorrect": "Neither strategy is universally superior. The AFFIRM trial demonstrated equivalent outcomes. Rhythm control does NOT eliminate stroke risk or need for anticoagulation based on CHA2DS2-VASc score."
+                        "correct": "Low Gal d 1 (ovomucoid - heat-stable) with high Gal d 2 (ovalbumin - heat-labile) indicates sensitization primarily to conformational epitopes destroyed by heating. This pattern predicts baked egg tolerance and faster resolution of allergy.",
+                        "incorrect": "Component testing provides important prognostic information. Low ovomucoid IgE is favorable - these children typically tolerate baked egg and outgrow their allergy faster than those with high ovomucoid."
                 },
-                "teaching": "<h4>\ud83d\udcca Rate vs Rhythm Control</h4><table class=\"comparison-table\"><tr><th>Consideration</th><th>Favors Rhythm</th><th>Favors Rate</th></tr><tr><td>Symptoms</td><td>Highly symptomatic</td><td>Minimal symptoms</td></tr><tr><td>Age</td><td>Younger</td><td>Elderly</td></tr><tr><td>First episode</td><td>Yes</td><td>Longstanding</td></tr><tr><td>Heart failure</td><td>Consider early rhythm</td><td>Rate control safe</td></tr></table>",
+                "teaching": "<h4>\ud83d\udd2c Component Testing Interpretation</h4><table class=\"comparison-table\"><tr><th>Pattern</th><th>Baked Egg</th><th>Prognosis</th></tr><tr><td>High Gal d 1 (ovomucoid)</td><td>Usually reacts</td><td>Slower resolution</td></tr><tr><td>Low Gal d 1, High Gal d 2</td><td>Usually tolerates</td><td>Faster resolution</td></tr></table><p style=\"margin-top:12px;\">Component testing helps guide dietary advice and set realistic expectations for families.</p>",
                 "points": 10
         }
 },
 {
-        "title": "Anticoagulation Decision",
-        "content": "<div class=\"narrative\"><p>Regardless of rate vs rhythm strategy, you must assess stroke risk and need for anticoagulation.</p></div>",
-        "hint_beginner": "CHA2DS2-VASc score guides anticoagulation decisions.",
-        "hint_advanced": "What scores mandate anticoagulation? When can you safely omit it?",
+        "title": "Epinephrine Education",
+        "content": "<div class=\"narrative\"><p>You prescribe epinephrine auto-injectors. The parents ask: <em>\"When exactly should we use this?\"</em></p></div>",
+        "hint_beginner": "Epinephrine is for anaphylaxis - severe reactions affecting breathing or circulation.",
+        "hint_advanced": "What are the indications vs relative contraindications? When should you NOT wait to give epinephrine?",
         "question": {
-                "prompt": "A 72-year-old woman with AFib, hypertension, and diabetes (CHA2DS2-VASc = 4) - what anticoagulation is indicated?",
+                "prompt": "Which scenario warrants IMMEDIATE epinephrine administration?",
                 "options": [
                         {
-                                "text": "Oral anticoagulation recommended - DOAC preferred over warfarin for most patients",
+                                "text": "Hives PLUS throat tightness, difficulty breathing, or voice changes after egg exposure",
                                 "correct": true
                         },
                         {
-                                "text": "Aspirin alone is adequate for this moderate-risk patient",
+                                "text": "A few hives on the face 30 minutes after eating, child acting normally",
                                 "correct": false
                         },
                         {
-                                "text": "No anticoagulation needed if rate is well-controlled",
+                                "text": "Single episode of vomiting without any other symptoms",
                                 "correct": false
                         },
                         {
-                                "text": "Warfarin is always preferred for patients over 70",
+                                "text": "Skin itching and mild flushing without hives or systemic symptoms",
                                 "correct": false
                         },
                         {
-                                "text": "Anticoagulation only needed if cardioversion is planned",
+                                "text": "Lip tingling that resolves within 5 minutes",
                                 "correct": false
                         }
                 ],
                 "explanation": {
-                        "correct": "CHA2DS2-VASc \u22652 in women (\u22651 in men) indicates anticoagulation is recommended. DOACs are preferred over warfarin for non-valvular AFib due to similar efficacy, lower bleeding risk, and no INR monitoring requirement.",
-                        "incorrect": "Score of 4 is high-risk - oral anticoagulation is clearly indicated. Aspirin is NOT adequate for stroke prevention in AFib. Rate control doesn't eliminate stroke risk."
+                        "correct": "Respiratory symptoms (throat tightness, stridor, wheezing, dyspnea, voice changes) indicate anaphylaxis requiring immediate epinephrine. Don't wait - antihistamines cannot reverse airway obstruction or cardiovascular collapse.",
+                        "incorrect": "Isolated mild skin symptoms or single GI symptoms typically don't require epinephrine. The key is multi-system involvement OR respiratory/cardiovascular compromise = anaphylaxis = epinephrine immediately."
                 },
-                "teaching": "<h4>\ud83d\udc8a Anticoagulation in AFib</h4><p><strong>CHA2DS2-VASc Components:</strong></p><ul><li>CHF (+1), Hypertension (+1), Age\u226575 (+2)</li><li>Diabetes (+1), Stroke/TIA (+2)</li><li>Vascular disease (+1), Age 65-74 (+1), Sex female (+1)</li></ul><p><strong>Recommendations:</strong><br>Score 0 (men) or 1 (women): No anticoag<br>Score 1 (men) or 2 (women): Consider anticoag<br>Score \u22652 (men) or \u22653 (women): Anticoag recommended</p>",
+                "teaching": "<h4>\ud83d\udc89 Epinephrine Indications</h4><p><strong>Give IMMEDIATELY for:</strong></p><ul><li>Respiratory: stridor, wheeze, throat tightness, hoarse voice</li><li>Cardiovascular: hypotension, syncope, severe dizziness</li><li>Multi-system involvement with rapid progression</li></ul><p style=\"margin-top:12px;\"><strong>Dosing:</strong> 0.01 mg/kg IM (max 0.5mg adult, 0.3mg child)<br>EpiPen Jr (0.15mg): 10-25 kg<br>EpiPen (0.3mg): >25 kg</p>",
                 "points": 10
         }
 },
 {
-        "title": "Acute Rate Control",
-        "content": "<div class=\"narrative\"><p>You choose rate control for this stable patient. Heart rate is 138 bpm. Which agent do you use?</p></div>",
-        "hint_beginner": "Beta-blockers and calcium channel blockers are mainstays of rate control.",
-        "hint_advanced": "When would you avoid beta-blockers? When is digoxin useful?",
+        "title": "Natural History Counseling",
+        "content": "<div class=\"narrative\"><p>The parents ask the most important question: <em>\"Will he ever be able to eat eggs normally?\"</em></p></div>",
+        "hint_beginner": "Egg allergy has a good prognosis - most children outgrow it.",
+        "hint_advanced": "What factors predict faster vs slower resolution? How does continued baked egg exposure affect outcomes?",
         "question": {
-                "prompt": "For acute rate control in AFib, which is the most appropriate first-line agent?",
+                "prompt": "What do you tell them about prognosis for egg allergy?",
                 "options": [
                         {
-                                "text": "IV metoprolol or diltiazem - both are appropriate first-line options",
+                                "text": "~70% of egg-allergic children outgrow it by school age; his baked egg tolerance suggests he's likely in this favorable group",
                                 "correct": true
                         },
                         {
-                                "text": "Digoxin - provides reliable acute rate control",
+                                "text": "Egg allergy is typically lifelong, similar to peanut and tree nut allergies",
                                 "correct": false
                         },
                         {
-                                "text": "Amiodarone - best for rate control",
+                                "text": "He will definitely outgrow it by age 3 based on current testing",
                                 "correct": false
                         },
                         {
-                                "text": "Adenosine - will convert the rhythm",
+                                "text": "Cannot predict outcome - it's essentially 50/50 whether he'll outgrow it",
                                 "correct": false
                         },
                         {
-                                "text": "Magnesium - first-line for all tachyarrhythmias",
+                                "text": "Prognosis is poor because he reacted on first known exposure",
                                 "correct": false
                         }
                 ],
                 "explanation": {
-                        "correct": "IV beta-blockers (metoprolol) or non-DHP calcium channel blockers (diltiazem) are first-line for acute rate control. Both work by slowing AV nodal conduction. Choice depends on comorbidities (avoid CCB in HFrEF, avoid BB in acute asthma).",
-                        "incorrect": "Digoxin has slow onset (hours) - not ideal for acute control. Amiodarone is for rhythm control. Adenosine works on reentrant SVT, not AFib. Magnesium is adjunctive only."
+                        "correct": "Most children outgrow egg allergy, especially those who tolerate baked egg. Positive prognostic factors include: baked egg tolerance, lower specific IgE levels, younger age at diagnosis, and sensitization primarily to heat-labile proteins (as shown by component testing).",
+                        "incorrect": "Egg allergy has much better prognosis than peanut/tree nut allergies. While we cannot guarantee resolution, baked egg tolerance is a strong favorable indicator. Continuing baked egg in the diet may actually accelerate tolerance development."
                 },
-                "teaching": "<h4>\ud83d\udc93 Acute Rate Control Agents</h4><table class=\"comparison-table\"><tr><th>Agent</th><th>Dose</th><th>Avoid if</th></tr><tr><td>Metoprolol</td><td>5mg IV q5min x3</td><td>Acute HF, asthma</td></tr><tr><td>Diltiazem</td><td>0.25mg/kg IV, then infusion</td><td>HFrEF, hypotension</td></tr><tr><td>Digoxin</td><td>0.5mg IV, then 0.25mg q6h</td><td>Need rapid control</td></tr></table>",
+                "teaching": "<h4>\ud83d\udcca Food Allergy Natural History</h4><table class=\"comparison-table\"><tr><th>Allergen</th><th>Resolution Rate</th></tr><tr><td>Egg</td><td>~70% by school age</td></tr><tr><td>Milk</td><td>~80% by school age</td></tr><tr><td>Wheat</td><td>~65% by age 12</td></tr><tr><td>Peanut</td><td>~20%</td></tr><tr><td>Tree nuts</td><td>~10%</td></tr><tr><td>Shellfish</td><td>Rarely outgrown</td></tr></table>",
+                "points": 10
+        }
+},
+{
+        "title": "Cross-Reactivity Assessment",
+        "content": "<div class=\"narrative\"><p>The parents have more questions: <em>\"Should we avoid chicken too? What about the flu shot - isn't it grown in eggs?\"</em></p></div>",
+        "hint_beginner": "Egg allergy doesn't mean allergy to all poultry products.",
+        "hint_advanced": "What's the actual cross-reactivity rate between egg and chicken? Current vaccine recommendations?",
+        "question": {
+                "prompt": "What guidance do you provide about cross-reactive foods and vaccines?",
+                "options": [
+                        {
+                                "text": "Chicken meat is safe (different proteins); influenza vaccine is safe for egg-allergic patients per current ACIP guidelines",
+                                "correct": true
+                        },
+                        {
+                                "text": "Avoid all poultry products including chicken meat due to cross-reactivity",
+                                "correct": false
+                        },
+                        {
+                                "text": "He cannot receive any vaccines that were grown in eggs",
+                                "correct": false
+                        },
+                        {
+                                "text": "Avoid chicken meat but influenza vaccine is safe",
+                                "correct": false
+                        },
+                        {
+                                "text": "Needs allergy testing to chicken before eating any poultry",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "Egg proteins (albumin, ovomucoid) differ significantly from chicken muscle proteins - clinical cross-reactivity is rare. Current ACIP guidelines state influenza vaccine can be given to egg-allergic patients regardless of reaction severity (observe 30 min for history of severe reactions).",
+                        "incorrect": "Chicken meat is generally safe for egg-allergic patients - different protein profiles. Flu vaccines contain minimal residual egg protein and are recommended for egg-allergic individuals per current guidelines."
+                },
+                "teaching": "<h4>\ud83d\udd04 Egg Allergy Cross-Reactivity</h4><ul><li><strong>Chicken meat:</strong> Safe - different proteins (muscle vs egg proteins)</li><li><strong>Influenza vaccine:</strong> Safe per ACIP 2023 guidelines for all severities</li><li><strong>Yellow fever vaccine:</strong> Contraindicated (high egg protein content)</li><li><strong>MMR vaccine:</strong> Safe (grown in chick fibroblasts, not egg)</li></ul>",
+                "points": 10
+        }
+},
+{
+        "title": "Emergency Action Plan",
+        "content": "<div class=\"narrative\"><p>Before the family leaves, you create a written <span class=\"highlight\">Food Allergy Emergency Action Plan</span> for home, school, and daycare.</p></div>",
+        "hint_beginner": "Emergency plans should clearly outline symptoms and when to use epinephrine.",
+        "hint_advanced": "What about biphasic reactions? What elements are required for school action plans?",
+        "question": {
+                "prompt": "Which element is MOST critical in the emergency action plan?",
+                "options": [
+                        {
+                                "text": "Clear criteria for epinephrine use with instruction to ALWAYS call 911 immediately after administration",
+                                "correct": true
+                        },
+                        {
+                                "text": "Comprehensive list of all foods containing egg to avoid",
+                                "correct": false
+                        },
+                        {
+                                "text": "Physician contact information and office hours",
+                                "correct": false
+                        },
+                        {
+                                "text": "Detailed antihistamine dosing instructions for mild reactions",
+                                "correct": false
+                        },
+                        {
+                                "text": "Instructions to observe and wait before giving epinephrine",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "The action plan must prioritize recognition of anaphylaxis and immediate epinephrine administration followed by calling 911. Observation is needed because biphasic reactions occur in 5-20% of anaphylaxis cases, sometimes hours after the initial reaction.",
+                        "incorrect": "While all components matter, the most critical element is ensuring epinephrine is given promptly for anaphylaxis. Studies show delays in epinephrine administration are associated with fatal outcomes in food allergy reactions."
+                },
+                "teaching": "<h4>\ud83d\udccb Emergency Action Plan Components</h4><ol><li>Patient identification with photo</li><li>Allergen(s) clearly listed</li><li><strong>Symptoms requiring epinephrine</strong> (most critical)</li><li>Epinephrine device instructions with pictures</li><li>Call 911 AFTER epinephrine</li><li>Emergency contacts</li><li>Signed by physician</li></ol>",
+                "points": 10
+        }
+},
+{
+        "title": "School/Daycare Considerations",
+        "content": "<div class=\"narrative\"><p>The child attends daycare. What specific accommodations are needed?</p></div>",
+        "hint_beginner": "Schools must have access to epinephrine and trained staff.",
+        "hint_advanced": "What laws protect children with food allergies in schools? 504 plans?",
+        "question": {
+                "prompt": "What is essential for safe daycare/school attendance?",
+                "options": [
+                        {
+                                "text": "Epinephrine stored on-site, staff trained in administration, written action plan on file, and allergen-aware policies",
+                                "correct": true
+                        },
+                        {
+                                "text": "Complete egg elimination from the entire school menu for all students",
+                                "correct": false
+                        },
+                        {
+                                "text": "Requiring the child to eat in isolation from other children",
+                                "correct": false
+                        },
+                        {
+                                "text": "Parent must be present during all meals and snacks",
+                                "correct": false
+                        },
+                        {
+                                "text": "Homeschooling until the allergy is outgrown",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "Key elements include: epinephrine availability, trained personnel, written emergency plan, allergen-aware food policies, and communication systems. A 504 plan may provide legal protections and accommodations.",
+                        "incorrect": "Complete elimination or isolation is not necessary or appropriate. The goal is safe inclusion through preparedness, training, and reasonable accommodations."
+                },
+                "teaching": "<h4>\ud83c\udfeb School Food Allergy Management</h4><ul><li>Epinephrine accessible and non-expired</li><li>Multiple staff trained in recognition and epi administration</li><li>Emergency action plan in health office AND classroom</li><li>Communication plan (field trips, substitutes)</li><li>Consider 504 plan for legal protections</li><li>Allergen-aware, not allergen-free policies</li></ul>",
+                "points": 10
+        }
+},
+{
+        "title": "Follow-up Planning",
+        "content": "<div class=\"narrative\"><p>Before discharge, you discuss the long-term follow-up plan with the family.</p></div>",
+        "hint_beginner": "Food allergy requires ongoing monitoring to assess for resolution.",
+        "hint_advanced": "When would you consider an oral food challenge? What parameters guide timing?",
+        "question": {
+                "prompt": "What follow-up do you recommend for monitoring egg allergy?",
+                "options": [
+                        {
+                                "text": "Annual re-evaluation with specific IgE testing; consider supervised oral food challenge when IgE decreases significantly",
+                                "correct": true
+                        },
+                        {
+                                "text": "No follow-up needed until he's school-age, then retest",
+                                "correct": false
+                        },
+                        {
+                                "text": "Home reintroduction of egg once he hasn't had symptoms for 6 months",
+                                "correct": false
+                        },
+                        {
+                                "text": "Repeat skin testing every 3 months to monitor closely",
+                                "correct": false
+                        },
+                        {
+                                "text": "Follow-up only if he has another reaction",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "Annual monitoring allows tracking of specific IgE trends. Declining IgE levels suggest developing tolerance. Supervised oral food challenges should be performed in a medical setting when there is evidence suggesting possible resolution - never at home.",
+                        "incorrect": "Regular follow-up is important - egg allergy can resolve, and continued unnecessary avoidance limits nutrition and quality of life. However, challenges should always be supervised, never done at home."
+                },
+                "teaching": "<h4>\ud83d\udcc5 Follow-up Strategy</h4><ul><li>Re-evaluate every 12-24 months</li><li>Track specific IgE trends over time</li><li>Consider oral challenge when IgE drops >50% or below decision thresholds</li><li>Supervised challenges only - NEVER home introduction</li><li>Continue baked egg if tolerated (may accelerate resolution)</li></ul>",
+                "points": 10
+        }
+},
+{
+        "title": "Case Resolution",
+        "content": "<div class=\"narrative\"><p><strong>One year follow-up:</strong></p><p>Specific IgE to egg white has dropped from 15 to <span class=\"lab-value\">4 kU/L</span>. Component testing shows ovomucoid remains low. He has been eating baked egg regularly without reactions.</p><p style=\"margin-top:12px;\">You perform a supervised oral food challenge to scrambled egg in the office. He tolerates it without reaction!</p><p style=\"margin-top:12px;\"><em>He is now eating eggs in all forms at home without problems.</em></p></div>",
+        "hint_beginner": "This is a successful outcome - think about what predicted it.",
+        "hint_advanced": "What would you tell the family about ongoing monitoring?",
+        "question": {
+                "prompt": "This favorable outcome was best predicted by which factor at initial presentation?",
+                "options": [
+                        {
+                                "text": "Baked egg tolerance combined with low ovomucoid-specific IgE on component testing",
+                                "correct": true
+                        },
+                        {
+                                "text": "Young age at first allergic reaction",
+                                "correct": false
+                        },
+                        {
+                                "text": "The mild severity of his initial reaction (no anaphylaxis)",
+                                "correct": false
+                        },
+                        {
+                                "text": "This outcome was unexpected - most egg allergies persist",
+                                "correct": false
+                        },
+                        {
+                                "text": "The specific IgE level of 15 kU/L at diagnosis",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "Baked egg tolerance and low ovomucoid (Gal d 1) IgE were the key favorable prognostic factors identified at diagnosis. These predicted his high likelihood of outgrowing the allergy relatively quickly.",
+                        "incorrect": "The strongest predictors of egg allergy resolution were baked egg tolerance and the favorable component testing pattern (low ovomucoid), not age or initial reaction severity."
+                },
+                "teaching": "<h4>\ud83c\udfaf Key Takeaways: Egg Allergy</h4><ul><li>Egg allergy exists on a spectrum of severity</li><li>Baked egg tolerance = favorable prognosis</li><li>Component testing guides counseling and expectations</li><li>Most children (70%+) outgrow egg allergy</li><li>Always prescribe epinephrine auto-injectors</li><li>Annual monitoring allows timely identification of resolution</li><li>Oral challenges must be supervised</li></ul>",
                 "points": 10
         }
 }];
@@ -866,7 +1014,8 @@ function showCompletion() {
             <div class="crossplatform">
                 <h4>🎯 Continue Learning</h4>
                 <div class="crossplatform-links">
-                    <a href="../mechanism/afib-module.html" class="crossplatform-link">📚 Afib Mechanisms</a>
+                    <a href="../mechanism/food-allergy-module.html" class="crossplatform-link">📚 Food Allergy Mechanisms</a>
+<a href="anaphylaxis-socratic-adventure.html" class="crossplatform-link">🎯 Anaphylaxis</a>
 
                 </div>
             </div>

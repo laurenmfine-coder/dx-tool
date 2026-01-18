@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acute Heart Failure - ReasonDx Socratic Case</title>
+    <title>COPD Exacerbation - ReasonDx Socratic Case</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { 
@@ -385,8 +385,8 @@
         <button onclick="toggleReferences()" class="refs-toggle">▼</button>
     </div>
     <div class="references-content" id="referencesContent">
-        <a href="https://www.ncbi.nlm.nih.gov/books/NBK430873/" target="_blank" rel="noopener">Heart Failure - StatPearls (StatPearls)</a>
-<a href="https://www.heart.org/en/health-topics/heart-failure" target="_blank" rel="noopener">AHA Heart Failure Guidelines (AHA)</a>
+        <a href="https://www.ncbi.nlm.nih.gov/books/NBK539701/" target="_blank" rel="noopener">COPD Exacerbation - StatPearls (StatPearls)</a>
+<a href="https://goldcopd.org/gold-reports/" target="_blank" rel="noopener">GOLD Guidelines (GOLD)</a>
     </div>
 </div>
 </div>
@@ -404,301 +404,301 @@ let decisionPath = [];
 const stages = [
     {
         "title": "Initial Presentation",
-        "content": "<div class=\"narrative\">\n                <p>A <span class=\"highlight\">68-year-old man</span> with history of ischemic cardiomyopathy (EF 30%) presents with worsening dyspnea over 3 days. He reports orthopnea (now sleeping on 4 pillows) and lower extremity swelling.</p>\n                <p style=\"margin-top:12px;\"><strong>Medications:</strong> Lisinopril 20mg, carvedilol 25mg BID, furosemide 40mg daily, spironolactone 25mg</p>\n            </div>\n            <div class=\"patient-card\">\n                <h4>Initial Assessment</h4>\n                <div class=\"vitals-grid\">\n                    <div class=\"vital-item\"><div class=\"vital-label\">HR</div><div class=\"vital-value abnormal\">102</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">BP</div><div class=\"vital-value normal\">142/88</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">RR</div><div class=\"vital-value abnormal\">24</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">SpO2</div><div class=\"vital-value abnormal\">89% RA</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">Temp</div><div class=\"vital-value normal\">98.4 F</div></div>\n                </div>\n            </div>",
-        "hint_beginner": "What symptoms suggest fluid overload? What exam findings would you look for?",
-        "hint_advanced": "How would you classify his hemodynamic profile (warm/cold, wet/dry)?",
+        "content": "<div class=\"narrative\">\n                <p>A <span class=\"highlight\">68-year-old man</span> with severe COPD (FEV1 35% predicted) presents with 3 days of worsening dyspnea, increased sputum production, and yellow-green sputum. He uses home oxygen 2L continuously.</p>\n            </div>\n            <div class=\"patient-card\">\n                <h4>Initial Assessment</h4>\n                <div class=\"vitals-grid\">\n                    <div class=\"vital-item\"><div class=\"vital-label\">HR</div><div class=\"vital-value abnormal\">108</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">RR</div><div class=\"vital-value abnormal\">28</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">SpO2</div><div class=\"vital-value abnormal\">86% on 2L</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">Temp</div><div class=\"vital-value normal\">99.8 F</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">BP</div><div class=\"vital-value normal\">148/88</div></div>\n                </div>\n            </div>",
+        "hint_beginner": "What cardinal symptoms define a COPD exacerbation?",
+        "hint_advanced": "How do you classify exacerbation severity? What are the Anthonisen criteria?",
         "question": {
-            "prompt": "Based on the presentation, what is the most likely hemodynamic profile?",
+            "prompt": "Based on the cardinal symptoms, how would you classify this exacerbation?",
             "options": [
                 {
-                    "text": "Warm and wet - adequate perfusion (warm, normal BP) with signs of congestion (orthopnea, edema, hypoxia)",
+                    "text": "Anthonisen Type 1 (severe) - all three cardinal symptoms present: increased dyspnea, increased sputum volume, and increased sputum purulence",
                     "correct": true
                 },
                 {
-                    "text": "Cold and wet - hypoperfusion with congestion requiring inotropic support",
+                    "text": "Mild exacerbation - he is not in respiratory failure",
                     "correct": false
                 },
                 {
-                    "text": "Cold and dry - cardiogenic shock without significant volume overload",
+                    "text": "Moderate exacerbation - requires only bronchodilators",
                     "correct": false
                 },
                 {
-                    "text": "Warm and dry - compensated heart failure not requiring acute intervention",
+                    "text": "Cannot classify without ABG and chest X-ray results",
                     "correct": false
                 },
                 {
-                    "text": "Cannot determine profile without invasive hemodynamic monitoring",
+                    "text": "Pneumonia, not COPD exacerbation, due to fever and purulent sputum",
                     "correct": false
                 }
             ],
             "explanation": {
-                "correct": "This is \"warm and wet\" - the most common ADHF presentation. Warm = adequate perfusion (BP 142/88, no cool extremities or altered mental status). Wet = congested (orthopnea, edema, crackles, hypoxia). Treatment: diuresis and vasodilators. No inotropes needed.",
-                "incorrect": "Use the Forrester classification: Warm/Cold (perfusion) vs Wet/Dry (congestion). He has good BP (warm) but clear congestion (wet). This guides therapy - warm and wet = diuretics and vasodilators, cold and wet = may need inotropes."
+                "correct": "Anthonisen criteria define COPD exacerbation severity by cardinal symptoms: increased dyspnea, increased sputum volume, increased sputum purulence. Type 1 (severe) = all 3 symptoms; Type 2 (moderate) = 2 of 3; Type 3 (mild) = 1 symptom plus URI or fever. He has all three = Type 1.",
+                "incorrect": "The three cardinal symptoms are: dyspnea, sputum volume, sputum purulence. Type 1 = all three present (this patient). Purulent sputum in COPD exacerbation does not automatically mean pneumonia - it indicates bacterial involvement warranting antibiotics."
             },
-            "teaching": "<h4>\ud83d\udcda Hemodynamic Profiles in ADHF</h4>\n                    <table>\n                        <tr><th></th><th>Dry (No Congestion)</th><th>Wet (Congested)</th></tr>\n                        <tr><td><strong>Warm (Perfused)</strong></td><td>Compensated</td><td><strong>Most common (this patient)</strong></td></tr>\n                        <tr><td><strong>Cold (Hypoperfused)</strong></td><td>Rare - needs volume</td><td>Cardiogenic shock</td></tr>\n                    </table>\n                    <p><strong>Signs of congestion (wet):</strong> Orthopnea, JVD, edema, crackles, hepatomegaly</p>\n                    <p><strong>Signs of hypoperfusion (cold):</strong> Cool extremities, narrow pulse pressure, altered mental status, low urine output</p>",
+            "teaching": "<h4>\ud83d\udcda COPD Exacerbation Classification</h4>\n                    <p><strong>Anthonisen Criteria (Cardinal Symptoms):</strong></p>\n                    <ol>\n                        <li>Increased dyspnea</li>\n                        <li>Increased sputum volume</li>\n                        <li>Increased sputum purulence</li>\n                    </ol>\n                    <table>\n                        <tr><th>Type</th><th>Criteria</th><th>Treatment</th></tr>\n                        <tr><td>Type 1 (Severe)</td><td>All 3 symptoms</td><td>Bronchodilators + steroids + antibiotics</td></tr>\n                        <tr><td>Type 2 (Moderate)</td><td>2 of 3 symptoms</td><td>Bronchodilators + steroids \u00b1 antibiotics</td></tr>\n                        <tr><td>Type 3 (Mild)</td><td>1 symptom + URI/fever</td><td>Bronchodilators \u00b1 steroids</td></tr>\n                    </table>",
             "points": 10
         }
     },
     {
-        "title": "Physical Examination",
-        "content": "<div class=\"narrative\">\n                <p>You perform a focused cardiovascular exam:</p>\n                <ul style=\"margin-top:12px;\">\n                    <li><strong>JVP:</strong> Elevated to angle of jaw at 45 degrees</li>\n                    <li><strong>Lungs:</strong> Bilateral crackles to mid-lung fields</li>\n                    <li><strong>Heart:</strong> S3 gallop, no murmurs</li>\n                    <li><strong>Abdomen:</strong> Hepatomegaly, positive hepatojugular reflux</li>\n                    <li><strong>Extremities:</strong> 2+ pitting edema to knees bilaterally, warm</li>\n                </ul>\n            </div>",
-        "hint_beginner": "What does an S3 gallop indicate? Why is JVP important in heart failure assessment?",
-        "hint_advanced": "How do you estimate right atrial pressure from JVP? What does hepatojugular reflux indicate?",
+        "title": "Initial ABG",
+        "content": "<div class=\"narrative\">\n                <p>You obtain an arterial blood gas on 4L nasal cannula:</p>\n                <ul style=\"margin-top:12px;\">\n                    <li><strong>pH:</strong> 7.31</li>\n                    <li><strong>pCO2:</strong> 58 mmHg</li>\n                    <li><strong>pO2:</strong> 54 mmHg</li>\n                    <li><strong>HCO3:</strong> 28 mEq/L</li>\n                </ul>\n            </div>",
+        "hint_beginner": "How do you interpret this ABG? Acute vs chronic respiratory acidosis?",
+        "hint_advanced": "What is the expected compensation for acute vs chronic hypercapnia? How do you calculate?",
         "question": {
-            "prompt": "What is the significance of the S3 gallop in this patient?",
+            "prompt": "How would you interpret this ABG?",
             "options": [
                 {
-                    "text": "S3 indicates elevated left ventricular filling pressure and is a marker of decompensation in systolic heart failure",
+                    "text": "Acute on chronic respiratory acidosis - pH lower than expected for chronic compensation, elevated HCO3 suggests baseline chronic hypercapnia with acute worsening",
                     "correct": true
                 },
                 {
-                    "text": "S3 is a normal finding in adults and does not indicate cardiac pathology",
+                    "text": "Pure acute respiratory acidosis - renal compensation takes days",
                     "correct": false
                 },
                 {
-                    "text": "S3 indicates aortic stenosis and requires echocardiogram before treatment",
+                    "text": "Chronic respiratory acidosis - pH is compensated, no acute component",
                     "correct": false
                 },
                 {
-                    "text": "S3 suggests pericardial effusion and need for emergent pericardiocentesis",
+                    "text": "Mixed respiratory acidosis and metabolic acidosis",
                     "correct": false
                 },
                 {
-                    "text": "S3 is caused by the mitral valve and indicates mitral regurgitation",
+                    "text": "Cannot interpret without knowing baseline ABG values",
                     "correct": false
                 }
             ],
             "explanation": {
-                "correct": "S3 (ventricular gallop) occurs in early diastole when blood rapidly fills a non-compliant, volume-overloaded ventricle. In adults with heart failure, S3 indicates elevated filling pressures and worse prognosis. It is a specific sign of decompensation.",
-                "incorrect": "S3 is pathological in adults (normal in children/young adults). It occurs from rapid ventricular filling in early diastole and indicates elevated filling pressures. In heart failure, S3 correlates with elevated PCWP and is a marker of decompensation."
+                "correct": "Acute on chronic respiratory acidosis: 1) Elevated pCO2 with low pH = respiratory acidosis, 2) HCO3 of 28 suggests chronic compensation (normally 24), but pH 7.31 is too low for full chronic compensation, 3) Expected chronic compensation: HCO3 rises 3.5 per 10 mmHg CO2 above 40 \u2192 should be ~30 with pH ~7.35. His pH 7.31 indicates acute worsening.",
+                "incorrect": "The elevated HCO3 (28) indicates renal compensation (chronic). But the pH (7.31) is lower than expected for fully compensated chronic hypercapnia (should be ~7.35-7.38). This indicates acute worsening on top of chronic CO2 retention = acute on chronic respiratory acidosis."
             },
-            "teaching": "<h4>\ud83d\udcda Heart Sounds in Heart Failure</h4>\n                    <table>\n                        <tr><th>Sound</th><th>Timing</th><th>Significance</th></tr>\n                        <tr><td><strong>S3</strong></td><td>Early diastole</td><td>Volume overload, elevated filling pressures, HF decompensation</td></tr>\n                        <tr><td><strong>S4</strong></td><td>Late diastole (pre-systolic)</td><td>Stiff ventricle, diastolic dysfunction, HTN</td></tr>\n                    </table>\n                    <p><strong>JVP estimation:</strong> Height of pulsation above sternal angle + 5 cm = RAP</p>\n                    <p><em>This patient: JVP to jaw angle (~12-15 cm above RA) indicates severely elevated RAP</em></p>",
-            "points": 10
-        }
-    },
-    {
-        "title": "Initial Management",
-        "content": "<div class=\"narrative\">\n                <p>You confirm warm and wet profile. Labs return:</p>\n                <ul style=\"margin-top:12px;\">\n                    <li><strong>BNP:</strong> 1,842 pg/mL (normal less than 100)</li>\n                    <li><strong>Cr:</strong> 1.6 mg/dL (baseline 1.2)</li>\n                    <li><strong>K:</strong> 4.8 mEq/L</li>\n                    <li><strong>Na:</strong> 132 mEq/L</li>\n                    <li><strong>Troponin:</strong> 0.08 ng/mL (mildly elevated)</li>\n                </ul>\n            </div>",
-        "hint_beginner": "What is the initial treatment for warm and wet heart failure?",
-        "hint_advanced": "How do you dose loop diuretics in patients already on chronic diuretic therapy?",
-        "question": {
-            "prompt": "What is the most appropriate initial treatment strategy?",
-            "options": [
-                {
-                    "text": "IV furosemide at dose equal to or higher than home oral dose (e.g., 80mg IV), supplemental O2, and consider nitrates for afterload reduction",
-                    "correct": true
-                },
-                {
-                    "text": "Dobutamine infusion to improve cardiac output before attempting diuresis",
-                    "correct": false
-                },
-                {
-                    "text": "Aggressive fluid restriction and salt restriction without diuretics to avoid worsening renal function",
-                    "correct": false
-                },
-                {
-                    "text": "Emergent dialysis given rising creatinine and volume overload",
-                    "correct": false
-                },
-                {
-                    "text": "Hold all diuretics due to elevated creatinine and risk of cardiorenal syndrome",
-                    "correct": false
-                }
-            ],
-            "explanation": {
-                "correct": "For warm and wet ADHF: IV loop diuretics are first-line. Dose at least equal to home dose (he is on 40mg PO, so give at least 40-80mg IV). Add oxygen for hypoxia. Nitrates (if BP adequate) reduce preload and afterload. Inotropes not needed if warm.",
-                "incorrect": "Warm and wet = diuretics first! Don't hold diuretics for mild creatinine elevation - decongestion often improves renal function. Inotropes only for cold (hypoperfused) patients. The creatinine bump is likely from venous congestion, not low output."
-            },
-            "teaching": "<h4>\ud83d\udcda Initial ADHF Management by Profile</h4>\n                    <table>\n                        <tr><th>Profile</th><th>Treatment</th></tr>\n                        <tr><td><strong>Warm and Wet</strong></td><td>IV diuretics + vasodilators (nitrates if HTN)</td></tr>\n                        <tr><td><strong>Cold and Wet</strong></td><td>Inotropes + careful diuresis</td></tr>\n                        <tr><td><strong>Cold and Dry</strong></td><td>Cautious volume + inotropes if needed</td></tr>\n                    </table>\n                    <p><strong>IV Diuretic Dosing:</strong></p>\n                    <ul>\n                        <li>Diuretic-naive: Furosemide 20-40mg IV</li>\n                        <li>On chronic diuretic: IV dose greater than or equal to home PO dose</li>\n                        <li>Can give bolus or continuous infusion</li>\n                    </ul>",
-            "points": 10
-        }
-    },
-    {
-        "title": "Diuretic Response",
-        "content": "<div class=\"narrative\">\n                <p>You give furosemide 80mg IV. Over the next 4 hours:</p>\n                <ul style=\"margin-top:12px;\">\n                    <li><strong>Urine output:</strong> 400 mL total (inadequate response)</li>\n                    <li><strong>Symptoms:</strong> Still short of breath</li>\n                    <li><strong>Weight:</strong> Down 0.5 kg (from 92 to 91.5 kg)</li>\n                    <li><strong>BP:</strong> 136/82</li>\n                </ul>\n                <p style=\"margin-top:12px;\">You expected more diuresis. The patient seems diuretic resistant.</p>\n            </div>",
-        "hint_beginner": "What are strategies to overcome diuretic resistance?",
-        "hint_advanced": "What is the mechanism of the braking phenomenon? How do thiazides augment loop diuretic effect?",
-        "question": {
-            "prompt": "What is the best next step for this diuretic-resistant patient?",
-            "options": [
-                {
-                    "text": "Add metolazone (thiazide) for sequential nephron blockade, or increase furosemide dose, or switch to continuous infusion",
-                    "correct": true
-                },
-                {
-                    "text": "Accept the current response - aggressive diuresis will worsen renal function",
-                    "correct": false
-                },
-                {
-                    "text": "Start dopamine at renal dose to improve diuretic responsiveness",
-                    "correct": false
-                },
-                {
-                    "text": "Urgent nephrology consult for dialysis given diuretic resistance",
-                    "correct": false
-                },
-                {
-                    "text": "Stop diuretics and start nesiritide (BNP analog) for refractory heart failure",
-                    "correct": false
-                }
-            ],
-            "explanation": {
-                "correct": "For diuretic resistance: 1) Increase dose, 2) Add thiazide for sequential nephron blockade (blocks compensatory distal Na reabsorption), 3) Consider continuous infusion (more sustained drug levels), 4) Ensure adequate cardiac output. Renal-dose dopamine has no proven benefit.",
-                "incorrect": "Diuretic resistance is common and treatable. Options: higher doses, continuous infusion, or add thiazide (metolazone). Accepting inadequate diuresis leaves the patient congested. Renal-dose dopamine is ineffective. Dialysis is last resort if all else fails."
-            },
-            "teaching": "<h4>\ud83d\udcda Overcoming Diuretic Resistance</h4>\n                    <p><strong>Strategies (in order):</strong></p>\n                    <ol>\n                        <li><strong>Increase loop diuretic dose</strong> - ceiling effect varies by patient</li>\n                        <li><strong>Add thiazide</strong> (metolazone 5-10mg PO) - sequential nephron blockade</li>\n                        <li><strong>Continuous infusion</strong> - maintains drug levels above threshold</li>\n                        <li><strong>Acetazolamide</strong> - recent ADVOR trial showed benefit</li>\n                        <li><strong>Ultrafiltration</strong> - if all else fails</li>\n                    </ol>\n                    <p><strong>Why thiazides work:</strong> Loop diuretics increase Na delivery to distal tubule, which upregulates Na-Cl cotransporter. Thiazides block this compensatory absorption.</p>",
+            "teaching": "<h4>\ud83d\udcda ABG Interpretation in COPD</h4>\n                    <p><strong>Compensation rules for respiratory acidosis:</strong></p>\n                    <ul>\n                        <li><strong>Acute:</strong> HCO3 rises 1 mEq/L per 10 mmHg CO2 increase</li>\n                        <li><strong>Chronic:</strong> HCO3 rises 3.5 mEq/L per 10 mmHg CO2 increase</li>\n                    </ul>\n                    <p><strong>This patient:</strong></p>\n                    <ul>\n                        <li>CO2 is 58 (18 above 40)</li>\n                        <li>Expected chronic HCO3: 24 + (3.5 \u00d7 1.8) = ~30</li>\n                        <li>His HCO3 is 28 (close to chronic)</li>\n                        <li>But pH 7.31 is lower than expected (should be ~7.35-7.38)</li>\n                        <li>= Acute on chronic respiratory acidosis</li>\n                    </ul>",
             "points": 10
         }
     },
     {
         "title": "Oxygen Management",
-        "content": "<div class=\"narrative\">\n                <p>Diuresis improves with metolazone. However, the patient remains hypoxic.</p>\n                <ul style=\"margin-top:12px;\">\n                    <li><strong>SpO2:</strong> 88% on 4L NC</li>\n                    <li><strong>Respiratory rate:</strong> 28</li>\n                    <li><strong>Work of breathing:</strong> Increased, using accessory muscles</li>\n                </ul>\n            </div>",
-        "hint_beginner": "What oxygen delivery options are available for acute respiratory failure in heart failure?",
-        "hint_advanced": "What are the benefits of non-invasive positive pressure ventilation in ADHF? Does it improve mortality?",
+        "content": "<div class=\"narrative\">\n                <p>You need to improve oxygenation but are concerned about CO2 retention.</p>\n                <p style=\"margin-top:12px;\"><strong>Current:</strong> SpO2 86% on 4L NC</p>\n            </div>",
+        "hint_beginner": "What is the target SpO2 in COPD? Why not 100%?",
+        "hint_advanced": "What is oxygen-induced hypercapnia? Is it due to loss of hypoxic drive?",
         "question": {
-            "prompt": "What is the most appropriate next step for respiratory support?",
+            "prompt": "What is the appropriate oxygen target for this patient?",
             "options": [
                 {
-                    "text": "Non-invasive positive pressure ventilation (BiPAP/CPAP) - reduces work of breathing, improves oxygenation, and decreases preload",
+                    "text": "Target SpO2 88-92% - higher oxygen targets in COPD can worsen hypercapnia through V/Q mismatch and Haldane effect, not just hypoxic drive suppression",
                     "correct": true
                 },
                 {
-                    "text": "Increase supplemental oxygen to 15L non-rebreather and observe",
+                    "text": "Target SpO2 94-98% as in all acutely ill patients",
                     "correct": false
                 },
                 {
-                    "text": "Emergent intubation for airway protection given impending respiratory failure",
+                    "text": "Keep SpO2 above 85% is acceptable to avoid CO2 retention",
                     "correct": false
                 },
                 {
-                    "text": "High-flow nasal cannula is contraindicated in heart failure due to fluid retention",
+                    "text": "Withhold oxygen entirely until BiPAP is available to prevent hypercapnia",
                     "correct": false
                 },
                 {
-                    "text": "Morphine to reduce respiratory drive and patient anxiety",
+                    "text": "High-flow oxygen to maximize FiO2 then address CO2 with BiPAP",
                     "correct": false
                 }
             ],
             "explanation": {
-                "correct": "NIPPV (BiPAP or CPAP) is excellent for cardiogenic pulmonary edema. Benefits: reduces preload (positive intrathoracic pressure), reduces afterload, decreases work of breathing, improves oxygenation. Studies show reduced intubation rates. Consider early before patient fatigues.",
-                "incorrect": "NIPPV is first-line for acute pulmonary edema with respiratory distress. It provides multiple hemodynamic benefits beyond just oxygenation. Don't wait until patient is exhausted. Morphine is no longer recommended (may increase mortality). High-flow NC is acceptable but NIPPV is preferred for its hemodynamic effects."
+                "correct": "Target SpO2 88-92% in COPD exacerbation. Higher oxygen can worsen hypercapnia through: 1) V/Q mismatch (oxygen releases hypoxic vasoconstriction), 2) Haldane effect (oxygenated Hgb binds CO2 less), 3) Some hypoxic drive suppression. Never withhold oxygen from hypoxic patient - just titrate carefully.",
+                "incorrect": "Target 88-92% in COPD. Higher targets can worsen CO2 retention but this is NOT primarily from hypoxic drive suppression - V/Q mismatch and Haldane effect are more important. Don't withhold oxygen from hypoxic patients, just titrate to target."
             },
-            "teaching": "<h4>\ud83d\udcda NIPPV in Cardiogenic Pulmonary Edema</h4>\n                    <p><strong>Mechanisms of benefit:</strong></p>\n                    <ul>\n                        <li>Reduces preload (positive pressure decreases venous return)</li>\n                        <li>Reduces afterload (decreases transmural LV pressure)</li>\n                        <li>Improves oxygenation (recruits alveoli)</li>\n                        <li>Decreases work of breathing</li>\n                    </ul>\n                    <p><strong>Evidence:</strong> Reduces intubation rate (NNT ~8); may reduce mortality</p>\n                    <p><strong>Settings:</strong> CPAP 5-10 cm H2O or BiPAP (IPAP 10-15, EPAP 5-10)</p>\n                    <p><em>Note: Morphine is NOT recommended - associated with worse outcomes</em></p>",
+            "teaching": "<h4>\ud83d\udcda Oxygen-Induced Hypercapnia in COPD</h4>\n                    <p><strong>Target:</strong> SpO2 88-92%</p>\n                    <p><strong>Mechanisms (not just hypoxic drive!):</strong></p>\n                    <ul>\n                        <li><strong>V/Q mismatch:</strong> Oxygen reverses hypoxic pulmonary vasoconstriction \u2192 blood flow to poorly ventilated areas</li>\n                        <li><strong>Haldane effect:</strong> Oxygenated hemoglobin binds CO2 less \u2192 releases CO2 into blood</li>\n                        <li><strong>Hypoxic drive:</strong> Minor role - most COPD patients maintain CO2 drive</li>\n                    </ul>\n                    <p><em>Never withhold oxygen from hypoxic patient - titrate to target</em></p>",
             "points": 10
         }
     },
     {
-        "title": "Medication Adjustment",
-        "content": "<div class=\"narrative\">\n                <p>Day 2: Patient has improved significantly with diuresis and BiPAP.</p>\n                <ul style=\"margin-top:12px;\">\n                    <li><strong>Net negative:</strong> 3 L over 24 hours</li>\n                    <li><strong>SpO2:</strong> 94% on 2L NC</li>\n                    <li><strong>BP:</strong> 108/68</li>\n                    <li><strong>Cr:</strong> 1.8 mg/dL (up from 1.6)</li>\n                    <li><strong>K:</strong> 4.2 mEq/L</li>\n                </ul>\n                <p style=\"margin-top:12px;\">You're ready to transition to oral diuretics. His BP is lower than admission.</p>\n            </div>",
-        "hint_beginner": "Should you continue his home dose of GDMT given lower BP?",
-        "hint_advanced": "What does the creatinine increase represent - worsening renal function or expected diuresis effect?",
+        "title": "Pharmacologic Treatment",
+        "content": "<div class=\"narrative\">\n                <p>You start appropriate oxygen therapy. Now planning pharmacologic treatment for this Type 1 exacerbation.</p>\n            </div>",
+        "hint_beginner": "What are the mainstays of COPD exacerbation treatment?",
+        "hint_advanced": "What is the optimal steroid dose and duration? Which antibiotics?",
         "question": {
-            "prompt": "How should you manage his guideline-directed medical therapy (GDMT) during this admission?",
+            "prompt": "What pharmacologic regimen is most appropriate?",
             "options": [
                 {
-                    "text": "Continue beta-blocker and ACE-I at current doses if BP tolerates; mild creatinine rise acceptable if patient is decongesting well",
+                    "text": "Nebulized bronchodilators (albuterol + ipratropium) + systemic corticosteroids (prednisone 40mg x 5 days) + antibiotics (respiratory fluoroquinolone or macrolide)",
                     "correct": true
                 },
                 {
-                    "text": "Stop carvedilol - beta-blockers are contraindicated in acute decompensated heart failure",
+                    "text": "Nebulized bronchodilators only - steroids and antibiotics not indicated for COPD exacerbation",
                     "correct": false
                 },
                 {
-                    "text": "Stop lisinopril due to rising creatinine; switch to hydralazine-nitrate combination",
+                    "text": "High-dose IV methylprednisolone 125mg q6h for 7-14 days",
                     "correct": false
                 },
                 {
-                    "text": "Reduce all GDMT by 50% due to lower blood pressure during acute illness",
+                    "text": "Bronchodilators and steroids but antibiotics only if chest X-ray shows infiltrate",
                     "correct": false
                 },
                 {
-                    "text": "Add digoxin for rate control since he is still tachycardic",
+                    "text": "Theophylline is first-line bronchodilator for severe exacerbations",
                     "correct": false
                 }
             ],
             "explanation": {
-                "correct": "Continue GDMT during ADHF if BP tolerates! Don't reflexively stop beta-blockers (can worsen HF if stopped abruptly) or ACE-I. Mild Cr rise (less than 0.5) during effective decongestion is acceptable and often improves with continued diuresis. These drugs improve long-term outcomes.",
-                "incorrect": "GDMT should be continued if hemodynamically tolerated. Stopping beta-blockers can cause rebound tachycardia and decompensation. Small Cr increase during diuresis is common and acceptable. The goal is not to achieve lowest Cr but to decongest while maintaining renal function."
+                "correct": "Type 1 exacerbation treatment: 1) Bronchodilators (albuterol + ipratropium), 2) Systemic steroids (prednisone 40mg x 5 days - REDUCE trial showed 5 days non-inferior to 14), 3) Antibiotics for purulent sputum (fluoroquinolone, macrolide, or amoxicillin-clavulanate).",
+                "incorrect": "All Type 1 exacerbations get bronchodilators, steroids, AND antibiotics (purulent sputum indicates bacterial involvement). Steroids: 40mg prednisone x 5 days is now standard (not high-dose, not prolonged). Theophylline has fallen out of favor due to toxicity."
             },
-            "teaching": "<h4>\ud83d\udcda GDMT During ADHF Hospitalization</h4>\n                    <p><strong>General principles:</strong></p>\n                    <ul>\n                        <li><strong>Beta-blockers:</strong> Continue unless cardiogenic shock or significant hypotension</li>\n                        <li><strong>ACE-I/ARB:</strong> Continue if BP and K tolerate; hold for AKI or hyperkalemia</li>\n                        <li><strong>MRA:</strong> May need to hold if K rising significantly</li>\n                    </ul>\n                    <p><strong>Creatinine during diuresis:</strong></p>\n                    <ul>\n                        <li>Mild increase (less than 0.5) is acceptable if decongesting</li>\n                        <li>Hemoconcentration causes Cr rise</li>\n                        <li>Venous congestion itself impairs renal function</li>\n                    </ul>\n                    <p><em>Decongestion often IMPROVES renal function despite initial Cr bump</em></p>",
+            "teaching": "<h4>\ud83d\udcda COPD Exacerbation Treatment</h4>\n                    <p><strong>Bronchodilators:</strong></p>\n                    <ul>\n                        <li>Short-acting beta-agonist (albuterol) + anticholinergic (ipratropium)</li>\n                        <li>Nebulized or MDI with spacer (equivalent efficacy)</li>\n                    </ul>\n                    <p><strong>Corticosteroids:</strong></p>\n                    <ul>\n                        <li>Prednisone 40mg daily x 5 days (REDUCE trial)</li>\n                        <li>IV if unable to take PO</li>\n                    </ul>\n                    <p><strong>Antibiotics (if purulent sputum or severe):</strong></p>\n                    <ul>\n                        <li>Respiratory fluoroquinolone (levofloxacin, moxifloxacin)</li>\n                        <li>Macrolide (azithromycin)</li>\n                        <li>Amoxicillin-clavulanate or doxycycline</li>\n                    </ul>",
             "points": 10
         }
     },
     {
-        "title": "Discharge Planning",
-        "content": "<div class=\"narrative\">\n                <p>Day 4: Patient is euvolemic, off oxygen, ambulating. Ready for discharge.</p>\n                <ul style=\"margin-top:12px;\">\n                    <li><strong>Weight:</strong> 86 kg (down 6 kg from admission)</li>\n                    <li><strong>BP:</strong> 112/72</li>\n                    <li><strong>Cr:</strong> 1.4 mg/dL (improved)</li>\n                    <li><strong>K:</strong> 4.4 mEq/L</li>\n                </ul>\n            </div>",
-        "hint_beginner": "What are the pillars of heart failure GDMT that should be optimized?",
-        "hint_advanced": "What are the new HF therapies (SGLT2-i, vericiguat) and when are they indicated?",
+        "title": "Respiratory Support",
+        "content": "<div class=\"narrative\">\n                <p>Despite treatment, his respiratory status worsens:</p>\n                <ul style=\"margin-top:12px;\">\n                    <li><strong>RR:</strong> 32, using accessory muscles</li>\n                    <li><strong>pH:</strong> 7.25</li>\n                    <li><strong>pCO2:</strong> 68 mmHg</li>\n                    <li><strong>SpO2:</strong> 88% on 6L</li>\n                </ul>\n            </div>",
+        "hint_beginner": "When is non-invasive ventilation indicated in COPD exacerbation?",
+        "hint_advanced": "What are the contraindications to NIPPV? What about high-flow nasal cannula?",
         "question": {
-            "prompt": "Which medication class should you consider adding to his regimen before discharge?",
+            "prompt": "What is the most appropriate respiratory support?",
             "options": [
                 {
-                    "text": "SGLT2 inhibitor (dapagliflozin or empagliflozin) - reduces HF hospitalization and mortality in HFrEF",
+                    "text": "Non-invasive positive pressure ventilation (BiPAP) - first-line for COPD exacerbation with respiratory acidosis (pH less than 7.35)",
                     "correct": true
                 },
                 {
-                    "text": "Digoxin - improves symptoms and reduces hospitalizations in all HF patients",
+                    "text": "Intubation and mechanical ventilation - pH less than 7.25 requires invasive ventilation",
                     "correct": false
                 },
                 {
-                    "text": "Amiodarone - prevents sudden cardiac death in patients with low EF",
+                    "text": "High-flow nasal cannula - better tolerated than BiPAP",
                     "correct": false
                 },
                 {
-                    "text": "Ivabradine - should be started in all HFrEF patients before discharge",
+                    "text": "Continue current management - give more time for bronchodilators to work",
                     "correct": false
                 },
                 {
-                    "text": "No changes - he is already on comprehensive GDMT with ACE-I, BB, and MRA",
+                    "text": "CPAP is equivalent to BiPAP for COPD exacerbation",
                     "correct": false
                 }
             ],
             "explanation": {
-                "correct": "SGLT2 inhibitors (dapagliflozin, empagliflozin) are now a pillar of HFrEF therapy based on DAPA-HF and EMPEROR-Reduced trials. They reduce HF hospitalization and CV death regardless of diabetes status. Can be started during hospitalization or at discharge.",
-                "incorrect": "Current HFrEF GDMT pillars are: 1) ACE-I/ARB/ARNI, 2) Beta-blocker, 3) MRA, 4) SGLT2 inhibitor. He is on the first three but missing SGLT2-i. Digoxin is symptom control only. Amiodarone does not prevent SCD. Ivabradine is for persistent tachycardia on max BB."
+                "correct": "BiPAP is first-line for COPD exacerbation with respiratory acidosis (pH <7.35). Strong evidence base: reduces intubation rate, mortality, and length of stay. BiPAP provides inspiratory support (offloads respiratory muscles) and expiratory pressure (counteracts auto-PEEP). CPAP alone doesn't provide the same inspiratory support.",
+                "incorrect": "BiPAP is first-line before intubation. Indications: pH <7.35 with elevated CO2 in COPD. Strong mortality benefit. Only intubate if BiPAP fails, contraindicated (decreased consciousness, aspiration risk, facial trauma), or patient too unstable."
             },
-            "teaching": "<h4>\ud83d\udcda Four Pillars of HFrEF Therapy</h4>\n                    <table>\n                        <tr><th>Pillar</th><th>Options</th><th>Benefit</th></tr>\n                        <tr><td>1. RAAS inhibition</td><td>ACE-I, ARB, or ARNI</td><td>Mortality + hospitalization</td></tr>\n                        <tr><td>2. Beta-blocker</td><td>Carvedilol, metoprolol XL, bisoprolol</td><td>Mortality</td></tr>\n                        <tr><td>3. MRA</td><td>Spironolactone, eplerenone</td><td>Mortality</td></tr>\n                        <tr><td>4. SGLT2 inhibitor</td><td>Dapagliflozin, empagliflozin</td><td>Mortality + hospitalization</td></tr>\n                    </table>\n                    <p><strong>Goal:</strong> All four pillars at target doses (or max tolerated)</p>\n                    <p><em>Consider ARNI instead of ACE-I for additional benefit if BP tolerates</em></p>",
-            "points": 10
-        }
-    },
-    {
-        "title": "Follow-up Planning",
-        "content": "<div class=\"narrative\">\n                <p>You add empagliflozin to his regimen. Final discharge plan being completed.</p>\n                <p style=\"margin-top:12px;\">The patient asks when he should follow up and what warning signs to watch for.</p>\n            </div>",
-        "hint_beginner": "What is the optimal follow-up timing after HF hospitalization?",
-        "hint_advanced": "What interventions reduce 30-day readmission after HF hospitalization?",
-        "question": {
-            "prompt": "What is the most important discharge intervention to reduce readmission?",
-            "options": [
-                {
-                    "text": "Follow-up appointment within 7 days, daily weights with instructions to call if gain more than 3 lbs, and medication reconciliation",
-                    "correct": true
-                },
-                {
-                    "text": "Follow-up in 30 days with PCP; earlier follow-up unnecessary if patient understands discharge instructions",
-                    "correct": false
-                },
-                {
-                    "text": "Home health for daily vital signs is the single most important intervention",
-                    "correct": false
-                },
-                {
-                    "text": "Implantable hemodynamic monitor (CardioMEMS) for all HFrEF patients before discharge",
-                    "correct": false
-                },
-                {
-                    "text": "Strict 1.5 L fluid restriction is the key intervention to prevent readmission",
-                    "correct": false
-                }
-            ],
-            "explanation": {
-                "correct": "Early follow-up (within 7 days, ideally within 3 days) is associated with lower 30-day readmission. Daily weights with clear instructions (call if more than 3 lb gain in 1-2 days) allow early intervention. Medication reconciliation prevents errors. These are higher yield than strict fluid restriction.",
-                "incorrect": "Early follow-up (less than 7 days) reduces readmissions - don't wait 30 days! Daily weights are key for early detection of congestion. CardioMEMS is not for everyone. Strict fluid restriction is of limited value compared to sodium restriction and proper diuretic dosing."
-            },
-            "teaching": "<h4>\ud83d\udcda Reducing HF Readmission</h4>\n                    <p><strong>High-yield interventions:</strong></p>\n                    <ul>\n                        <li><strong>Early follow-up:</strong> Within 7 days (ideally 3 days)</li>\n                        <li><strong>Daily weights:</strong> Call if more than 3 lb gain in 1-2 days</li>\n                        <li><strong>Medication reconciliation:</strong> Ensure patient has and understands all meds</li>\n                        <li><strong>Teach-back:</strong> Have patient explain their medications and warning signs</li>\n                    </ul>\n                    <p><strong>Warning signs to teach:</strong></p>\n                    <ul>\n                        <li>Weight gain more than 2-3 lbs</li>\n                        <li>Increased shortness of breath</li>\n                        <li>Increased leg swelling</li>\n                        <li>Need to sleep more upright</li>\n                    </ul>",
-            "points": 10
+            "teaching": "<h4>\ud83d\udcda NIPPV in COPD Exacerbation</h4>\n                    <p><strong>Indications for BiPAP:</strong></p>\n                    <ul>\n                        <li>Respiratory acidosis (pH less than 7.35)</li>\n                        <li>Severe dyspnea with accessory muscle use</li>\n                        <li>Persistent hypoxemia despite supplemental O2</li>\n                    </ul>\n                    <p><strong>Benefits:</strong></p>\n                    <ul>\n                        <li>Reduces intubation rate (NNT ~5)</li>\n                        <li>Reduces mortality (NNT ~8)</li>\n                        <li>Reduces length of stay</li>\n                    </ul>\n                    <p><strong>Contraindications:</strong> Decreased consciousness, aspiration risk, facial trauma, hemodynamic instability, unable to protect airway</p>",
+            "points": 15
         }
     }
-];
+,
+{
+        "title": "Risk Stratification",
+        "content": "<div class=\"narrative\"><p>You assess the severity and risk factors to guide management intensity.</p></div>",
+        "hint_beginner": "What clinical features indicate higher severity?",
+        "hint_advanced": "What validated scoring systems exist for this condition?",
+        "question": {
+                "prompt": "Which factor most influences prognosis and management intensity?",
+                "options": [
+                        {
+                                "text": "Integration of clinical presentation, comorbidities, vital signs, and objective findings",
+                                "correct": true
+                        },
+                        {
+                                "text": "A single laboratory value in isolation",
+                                "correct": false
+                        },
+                        {
+                                "text": "Patient age alone",
+                                "correct": false
+                        },
+                        {
+                                "text": "Time of presentation to the ED",
+                                "correct": false
+                        },
+                        {
+                                "text": "Insurance status or ability to follow up",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "Clinical decision-making integrates multiple factors including presentation severity, comorbidities, vital signs, laboratory findings, and patient-specific factors. No single element should drive management in isolation.",
+                        "incorrect": "Risk stratification requires integration of multiple clinical factors, not reliance on any single element."
+                },
+                "teaching": "<h4>\ud83d\udcca Risk Stratification Principles</h4><ul><li>Assess severity of presenting illness</li><li>Consider relevant comorbidities</li><li>Review vital signs and trajectory</li><li>Integrate laboratory and imaging findings</li><li>Apply validated scoring tools when available</li></ul>",
+                "points": 10
+        }
+},
+{
+        "title": "Treatment Selection",
+        "content": "<div class=\"narrative\"><p>Based on your assessment, you must select the most appropriate initial treatment approach.</p></div>",
+        "hint_beginner": "What are the first-line evidence-based treatments?",
+        "hint_advanced": "How do patient-specific factors modify treatment selection?",
+        "question": {
+                "prompt": "What principle guides initial treatment selection?",
+                "options": [
+                        {
+                                "text": "Evidence-based guidelines tailored to patient-specific factors (comorbidities, allergies, severity)",
+                                "correct": true
+                        },
+                        {
+                                "text": "Always use the newest available medication",
+                                "correct": false
+                        },
+                        {
+                                "text": "Most expensive treatments provide best outcomes",
+                                "correct": false
+                        },
+                        {
+                                "text": "Whatever was used for the last similar patient",
+                                "correct": false
+                        },
+                        {
+                                "text": "Patient preference alone should determine treatment",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "Treatment should follow current evidence-based guidelines while accounting for individual patient factors including comorbidities, allergies, contraindications, disease severity, and patient preferences when appropriate.",
+                        "incorrect": "Evidence-based medicine combined with patient-centered care guides optimal treatment selection."
+                },
+                "teaching": "<h4>\ud83d\udc8a Treatment Principles</h4><ul><li>Follow current evidence-based guidelines</li><li>Assess for contraindications and allergies</li><li>Consider patient-specific factors</li><li>Start with first-line agents unless contraindicated</li><li>Monitor for response and adverse effects</li></ul>",
+                "points": 10
+        }
+},
+{
+        "title": "Monitoring and Reassessment",
+        "content": "<div class=\"narrative\"><p>After initiating treatment, you must establish monitoring parameters and reassessment criteria.</p></div>",
+        "hint_beginner": "What should you monitor to assess treatment response?",
+        "hint_advanced": "What triggers require escalation or change in management?",
+        "question": {
+                "prompt": "What is most important in the monitoring plan?",
+                "options": [
+                        {
+                                "text": "Clear criteria for expected response timeline and specific triggers for escalation",
+                                "correct": true
+                        },
+                        {
+                                "text": "Scheduling a follow-up appointment",
+                                "correct": false
+                        },
+                        {
+                                "text": "Completing documentation thoroughly",
+                                "correct": false
+                        },
+                        {
+                                "text": "Ensuring patient satisfaction scores",
+                                "correct": false
+                        },
+                        {
+                                "text": "Waiting for specialist consultation before any reassessment",
+                                "correct": false
+                        }
+                ],
+                "explanation": {
+                        "correct": "Effective monitoring requires defining what improvement to expect and when, establishing clear escalation triggers, and setting specific reassessment timepoints. This allows early identification of treatment failure.",
+                        "incorrect": "While all aspects of care matter, defining response criteria and escalation triggers is critical for patient safety."
+                },
+                "teaching": "<h4>\ud83d\udcc8 Monitoring Essentials</h4><ul><li>Define expected response and timeline</li><li>Establish vital sign parameters</li><li>Set escalation triggers (specific criteria for concern)</li><li>Plan reassessment intervals</li><li>Document baseline for comparison</li></ul>",
+                "points": 10
+        }
+}];
 
 function shuffleArray(array) {
     const shuffled = [...array];
@@ -866,8 +866,7 @@ function showCompletion() {
             <div class="crossplatform">
                 <h4>🎯 Continue Learning</h4>
                 <div class="crossplatform-links">
-                    <a href="../mechanism/heart-failure-module.html" class="crossplatform-link">📚 HF Pathophysiology</a>
-<a href="shock-socratic-adventure.html" class="crossplatform-link">🎯 Cardiogenic Shock</a>
+                    <a href="../mechanism/copd-module.html" class="crossplatform-link">📚 COPD Pathophysiology</a>
 
                 </div>
             </div>

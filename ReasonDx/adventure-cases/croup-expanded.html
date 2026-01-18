@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Croup - ReasonDx Socratic Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #0369a1 0%, #0ea5e9 100%); min-height: 100vh; padding: 20px; color: #f8fafc; }
+        .container { max-width: 900px; margin: 0 auto; }
+        .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .scene-phase { font-size: 0.85rem; color: #7dd3fc; text-transform: uppercase; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; color: #bae6fd; }
+        .narrative { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #0ea5e9; line-height: 1.7; }
+        .highlight { color: #fbbf24; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .question-box { background: linear-gradient(135deg, rgba(14,165,233,0.15), rgba(251,191,36,0.15)); border: 1px solid rgba(14,165,233,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; color: #bae6fd; margin-bottom: 16px; }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { border-color: #22c55e !important; background: rgba(34,197,94,0.2) !important; opacity: 1 !important; }
+        .mcq-option.incorrect { border-color: #ef4444 !important; background: rgba(239,68,68,0.15) !important; }
+        .option-letter { font-weight: 700; min-width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 8px; }
+        .feedback { margin-top: 16px; padding: 16px; border-radius: 10px; display: none; }
+        .feedback.show { display: block; }
+        .feedback.correct-feedback { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); }
+        .feedback.incorrect-feedback { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); }
+        .teaching-point { background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
+        .teaching-point.show { display: block; }
+        .mechanism-box { background: linear-gradient(135deg, rgba(139,92,246,0.2), rgba(14,165,233,0.1)); border: 1px solid rgba(139,92,246,0.4); border-radius: 12px; padding: 20px; margin: 16px 0; }
+        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
+        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; white-space: pre-line; }
+        .btn { background: linear-gradient(135deg, #0ea5e9, #0369a1); color: white; border: none; padding: 14px 28px; border-radius: 10px; font-weight: 600; cursor: pointer; display: none; margin-top: 16px; }
+        .btn.show { display: inline-block; }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #0ea5e9, #7dd3fc); border-radius: 3px; transition: width 0.5s; }
+        .score-tracker { position: fixed; top: 20px; right: 20px; background: rgba(0,0,0,0.8); padding: 12px 20px; border-radius: 10px; z-index: 100; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+        .comparison-table th { background: rgba(0,0,0,0.3); color: #7dd3fc; }
+        .alert-box { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); border-radius: 12px; padding: 16px; margin: 16px 0; }
+        .alert-title { color: #f87171; font-weight: 700; margin-bottom: 8px; }
+        .completion { text-align: center; padding: 60px 40px; }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background: white; border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #bfdbfe; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #1e40af; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #2563eb; font-size: 0.85rem; border: 1px solid #bfdbfe; transition: all 0.2s; }
+.references-content a:hover { background: #2563eb; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+</style>
+</head>
+<body>
+    <div class="score-tracker"><div style="font-size:0.8rem;color:#94a3b8">Score</div><div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div></div>
+    <div class="container">
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div>
+
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.ncbi.nlm.nih.gov/books/NBK431070/" target="_blank" rel="noopener">Croup - StatPearls (StatPearls)</a>
+<a href="https://www.mdcalc.com/calc/556/westley-croup-score" target="_blank" rel="noopener">Westley Croup Score (MDCalc)</a>
+    </div>
+</div>
+</div>
+        <div id="scene-container"></div>
+    </div>
+    <script>
+    let decisionPath = [];
+let currentStage = 0, score = 0;
+    const stages = [
+        {title:"The Barking Cough",content:'<div class="narrative"><p>A <span class="highlight">2-year-old boy</span> presents at 2 AM with a <span class="critical">"barking" cough</span> and noisy breathing. He had runny nose and low-grade fever for 2 days. Parents say he sounds like a seal.</p><p style="margin-top:12px;"><strong>Vitals:</strong> T 38.2°C, HR 130, RR 32, SpO2 96%<br><strong>Exam:</strong> Inspiratory stridor at rest, mild retractions, barking cough</p></div>',question:{prompt:"What is the CLASSIC sound of croup?",options:[{text:"Expiratory wheezing",correct:false},{text:"Barking (seal-like) cough with inspiratory stridor",correct:true},{text:"Grunting respirations",correct:false},{text:"High-pitched expiratory sound",correct:false}],explanation:{correct:"Correct! Classic croup: barking/seal-like cough + inspiratory stridor. Stridor is from subglottic narrowing. Worse at night. Usually preceded by URI symptoms.",incorrect:"Barking cough + inspiratory stridor = croup. The bark sounds like a seal. Stridor is from subglottic edema."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Croup Presentation</div><div class="pathway">CLASSIC FEATURES:\n• Barking cough (seal-like)\n• Inspiratory stridor\n• Hoarse voice\n• Low-grade fever\n• URI prodrome (1-2 days)\n\nWORSE AT NIGHT!\n(Cool night air = temporary relief)\n\nPEAK AGE: 6 months - 3 years\nPEAK SEASON: Fall/early winter\n\nCAUSE: Parainfluenza (75%)\nAlso: RSV, influenza, adenovirus</div></div>',why_chain:[],points:10}},
+        {title:"Anatomy and Pathophysiology",content:'<div class="narrative"><p>Understanding why children get croup helps guide management.</p></div>',question:{prompt:"Where is the anatomic site of obstruction in croup?",options:[{text:"Supraglottic (above vocal cords)",correct:false},{text:"Subglottic (below vocal cords)",correct:true},{text:"Lower trachea",correct:false},{text:"Bronchi",correct:false}],explanation:{correct:"Correct! Croup affects the subglottic area (below vocal cords). This is the narrowest part of a child\'s airway. Edema here causes stridor and the characteristic barking cough.",incorrect:"Subglottic = below vocal cords. This is the narrowest part of the pediatric airway. Edema here causes stridor."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Anatomy</div><div class="pathway">SUBGLOTTIC AREA:\n• Narrowest part of child\'s airway\n• Surrounded by rigid cricoid cartilage\n• 1mm edema = significant narrowing\n\nWHY CHILDREN?\n• Smaller airway diameter\n• Subglottis relatively narrower\n• More compliant tissues\n\nX-RAY FINDING:\n"Steeple sign" or "pencil sign"\n(subglottic narrowing on AP view)\n\nNote: X-ray rarely needed if classic presentation</div></div>',why_chain:[],points:10}},
+        {title:"Severity Assessment",content:'<div class="narrative"><p>Your patient has stridor at rest and mild retractions. How severe is this?</p></div>',question:{prompt:"Which feature indicates SEVERE croup?",options:[{text:"Barking cough only",correct:false},{text:"Stridor only with agitation",correct:false},{text:"Stridor at rest with significant retractions, decreased air entry, or altered mental status",correct:true},{text:"Low-grade fever",correct:false}],explanation:{correct:"Correct! Severe croup: stridor at rest + significant retractions + decreased air entry ± cyanosis/AMS. Mild = occasional barking cough, no stridor at rest. Moderate = stridor at rest, mild retractions.",incorrect:"Severe = stridor at rest + marked retractions + poor air entry ± AMS. Mild has no resting stridor."},teaching:'<h4>Westley Croup Score</h4><table class="comparison-table"><tr><th>Feature</th><th>Score</th></tr><tr><td>Stridor: none/agitation/at rest</td><td>0/1/2</td></tr><tr><td>Retractions: none/mild/moderate/severe</td><td>0/1/2/3</td></tr><tr><td>Air entry: normal/decreased/markedly decreased</td><td>0/1/2</td></tr><tr><td>Cyanosis: none/with agitation/at rest</td><td>0/4/5</td></tr><tr><td>Level of consciousness: normal/altered</td><td>0/5</td></tr></table><p style="margin-top:12px;">Mild ≤2 | Moderate 3-7 | Severe ≥8</p>',why_chain:[],points:10}},
+        {title:"Treatment: Corticosteroids",content:'<div class="narrative"><p>Your patient has moderate croup. Time for treatment!</p></div>',question:{prompt:"What is the FIRST-LINE treatment for croup?",options:[{text:"Nebulized albuterol",correct:false},{text:"Oral or IM dexamethasone",correct:true},{text:"Antibiotics",correct:false},{text:"Intubation",correct:false}],explanation:{correct:"Correct! Dexamethasone is first-line for ALL croup (even mild). Single dose 0.6 mg/kg (max 10mg) PO or IM. Works within 6 hours, lasts 2-3 days. Reduces symptoms, return visits, and admissions.",incorrect:"Dexamethasone is first-line for ALL severity levels. Single dose, PO or IM. Albuterol doesn\'t help (not bronchospasm)."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Dexamethasone</div><div class="pathway">DOSE: 0.6 mg/kg (max 10 mg)\nROUTE: PO preferred (or IM)\nFREQUENCY: Single dose!\n\nONSET: 6 hours\nDURATION: 2-3 days\n\nGIVE TO ALL CROUP:\n• Even mild cases benefit\n• Reduces symptoms\n• Reduces return visits\n• Reduces hospitalizations\n\nALTERNATIVE:\nPrednisolone 1-2 mg/kg\n(if dex unavailable)</div></div>',why_chain:[],points:10}},
+        {title:"Treatment: Nebulized Epinephrine",content:'<div class="narrative"><p>Despite dexamethasone, the child still has stridor at rest and moderate retractions.</p></div>',question:{prompt:"When is nebulized epinephrine indicated in croup?",options:[{text:"All cases of croup",correct:false},{text:"Moderate-to-severe croup with stridor at rest",correct:true},{text:"Only if intubation is planned",correct:false},{text:"Mild croup as first-line",correct:false}],explanation:{correct:"Correct! Nebulized epinephrine for moderate-severe croup (stridor at rest). Works within minutes but wears off in 2 hours. Must observe for rebound! Racemic or L-epinephrine both work.",incorrect:"Neb epi for moderate-severe (stridor at rest). Works fast but wears off - observe for rebound."},teaching:'<div class="mechanism-box"><div class="mechanism-title">📋 Nebulized Epinephrine</div><div class="pathway">INDICATION:\nModerate-severe croup\n(stridor at rest, significant distress)\n\nDOSE:\n• Racemic epi: 0.5 mL of 2.25%\n• L-epinephrine: 0.5 mL/kg of 1:1000 (max 5mL)\n\nONSET: Minutes\nDURATION: ~2 hours\n\n⚠️ MUST OBSERVE 2-4 HOURS!\nRebound/return of symptoms possible\n\nCan repeat if needed</div></div>',why_chain:[],points:10}},
+        {title:"Differentiating from Epiglottitis",content:'<div class="narrative"><p>It is critical to distinguish croup from epiglottitis, which is a true emergency.</p></div>',question:{prompt:"Which feature suggests EPIGLOTTITIS rather than croup?",options:[{text:"Barking cough",correct:false},{text:"Gradual onset with URI prodrome",correct:false},{text:"Toxic-appearing, drooling, tripod position, muffled voice",correct:true},{text:"Symptoms worse at night",correct:false}],explanation:{correct:"Correct! Epiglottitis: toxic-appearing, high fever, drooling, tripod position, muffled (not hoarse) voice, NO cough, rapid progression. Croup: barking cough, gradual onset, less toxic.",incorrect:"Epiglottitis = toxic, drooling, tripod, muffled voice, no cough. Croup = barking cough, gradual, less toxic."},teaching:'<h4>Croup vs Epiglottitis</h4><table class="comparison-table"><tr><th>Feature</th><th>Croup</th><th>Epiglottitis</th></tr><tr><td>Onset</td><td>Gradual (days)</td><td>Rapid (hours)</td></tr><tr><td>Cough</td><td>Barking</td><td>None/minimal</td></tr><tr><td>Voice</td><td>Hoarse</td><td>Muffled ("hot potato")</td></tr><tr><td>Drooling</td><td>No</td><td>Yes</td></tr><tr><td>Position</td><td>Any</td><td>Tripod/sniffing</td></tr><tr><td>Appearance</td><td>Non-toxic</td><td>Toxic</td></tr><tr><td>Age</td><td>6mo-3yr</td><td>2-7yr (now rare)</td></tr></table>',why_chain:[],points:10}},
+        {title:"Case Resolution",content:'<div class="narrative"><p>Your patient received dexamethasone 0.6 mg/kg PO and nebulized epinephrine. Stridor resolved within 30 minutes. After 3-hour observation with no return of stridor, he was discharged with return precautions.</p></div><div class="mechanism-box"><div class="mechanism-title">📚 Croup Summary</div><div class="pathway">CLASSIC: Barking cough + stridor\nPEAK: 6 months - 3 years, fall/winter\nCAUSE: Parainfluenza (75%)\n\nANATOMY: Subglottic edema\nX-RAY: Steeple sign (if needed)\n\nTREATMENT:\n• Dexamethasone 0.6 mg/kg for ALL\n• Neb epinephrine if moderate-severe\n• Observe 2-4h after neb epi\n\nDISPOSITION:\n• Mild: Discharge after dex\n• Needed neb epi: Observe 2-4h\n• Severe/no improvement: Admit</div></div>',question:{prompt:"After nebulized epinephrine, how long should you observe before discharge?",options:[{text:"30 minutes",correct:false},{text:"2-4 hours",correct:true},{text:"24 hours",correct:false},{text:"No observation needed",correct:false}],explanation:{correct:"Correct! Observe 2-4 hours after nebulized epinephrine. Effects wear off in ~2 hours and rebound can occur. If no return of stridor, safe to discharge.",incorrect:"Observe 2-4 hours after neb epi. Rebound can occur as it wears off (~2 hours)."},teaching:'<h4>Key Takeaways</h4><ul style="line-height:2;margin-left:20px;"><li>Barking cough + stridor = croup</li><li>Peak age 6 months - 3 years</li><li>Dexamethasone for ALL severity</li><li>Neb epinephrine for moderate-severe</li><li>Observe 2-4h after neb epi</li><li>Know croup vs epiglottitis differences</li></ul>',why_chain:[],points:10}},
+        {title:"Clinical Integration",content:'<div class="narrative"><p>You synthesize all the clinical information to ensure optimal patient care.</p></div>',question:{prompt:"What principle is MOST important for excellent clinical outcomes?",options:[{text:"Integrating clinical presentation with evidence-based guidelines while reassessing response to treatment",correct:true},{text:"Following protocols exactly without clinical judgment",correct:false},{text:"Ordering comprehensive testing to avoid any missed diagnoses",correct:false},{text:"Making a diagnosis quickly and committing to it without reconsideration",correct:false}],explanation:{correct:"Excellent clinical care combines systematic assessment, evidence-based treatment, and ongoing reassessment. Guidelines inform but don't replace clinical reasoning.",incorrect:"Good clinical care requires flexibility, reassessment, and integration of guidelines with patient-specific factors."},teaching:'<h4>Clinical Reasoning</h4><ul><li>Systematic data gathering</li><li>Evidence-based management</li><li>Regular reassessment</li><li>Patient-centered communication</li></ul>',why_chain:[],points:10}}
+    ];
+    function updateProgress(){document.getElementById('progress').style.width=((currentStage+1)/stages.length*100)+'%';document.getElementById('maxScore').textContent=stages.length*10;}
+    function renderStage(){const stage=stages[currentStage];let html='<div class="scene"><div class="scene-header"><div class="scene-phase">Stage '+(currentStage+1)+' of '+stages.length+'</div><div class="scene-title">'+stage.title+'</div></div>'+stage.content;if(stage.question){html+='<div class="question-box"><div class="question-prompt">'+stage.question.prompt+'</div><div class="mcq-options">';stage.question.options.forEach((opt,i)=>{html+='<div class="mcq-option" onclick="checkAnswer('+i+','+opt.correct+')"><div class="option-letter">'+String.fromCharCode(65+i)+'</div><div>'+opt.text+'</div></div>';});html+='</div><div class="feedback correct-feedback" id="fb-correct"><div style="font-weight:700;margin-bottom:8px;">✓ Correct!</div>'+stage.question.explanation.correct+'</div><div class="feedback incorrect-feedback" id="fb-incorrect"><div style="font-weight:700;margin-bottom:8px;">✗ Not quite</div>'+stage.question.explanation.incorrect+'</div>';if(stage.question.teaching)html+='<div class="teaching-point" id="teaching">'+stage.question.teaching+'</div>';html+='<button class="btn" id="next-btn" onclick="nextStage()">Continue →</button></div>';}html+='</div>';document.getElementById('scene-container').innerHTML=html;updateProgress();}
+    function checkAnswer(idx,correct){const options=document.querySelectorAll('.mcq-option');if(options[0].classList.contains('disabled'))return;options.forEach((opt,i)=>{opt.classList.add('disabled');if(stages[currentStage].question.options[i].correct)opt.classList.add('correct');else if(i===idx&&!correct)opt.classList.add('incorrect');});if(correct){document.getElementById('fb-correct').classList.add('show');score+=stages[currentStage].question.points;document.getElementById('score').textContent=score;}else{document.getElementById('fb-incorrect').classList.add('show');}const t=document.getElementById('teaching');if(t)t.classList.add('show');document.getElementById('next-btn').classList.add('show');}
+    function nextStage(){if(currentStage<stages.length-1){currentStage++;renderStage();window.scrollTo(0,0);}else{document.getElementById('scene-container').innerHTML='<div class="scene completion"><h2 style="color:#4ade80;margin-bottom:20px;">🎉 Case Complete!</h2><p style="font-size:1.3rem;margin-bottom:20px;">Final Score: <strong>'+score+'</strong> / '+stages.length*10+'</p><p>You mastered Croup!</p></div>';}}
+    renderStage();
+    
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#3b82f6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color:#f59e0b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+</script>
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
+
+</body>
+</html>

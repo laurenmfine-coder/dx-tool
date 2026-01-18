@@ -3,689 +3,968 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DKA Complete | Clinical Adventure</title>
+    <title>Diabetic Ketoacidosis - ReasonDx Socratic Case</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: linear-gradient(135deg, #7c2d12 0%, #c2410c 100%); min-height: 100vh; color: #e2e8f0; line-height: 1.6; padding: 20px; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d1b4e 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #f8fafc;
+        }
         .container { max-width: 900px; margin: 0 auto; }
-        .header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: rgba(124, 45, 18, 0.9); border-radius: 16px; margin-bottom: 20px; }
-        .badge { padding: 4px 12px; border-radius: 12px; font-size: 0.7rem; font-weight: 700; background: #ea580c; margin-left: 10px; }
-        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, #ea580c, #fdba74); border-radius: 3px; }
-        .scene { background: linear-gradient(135deg, #7c2d12, #9a3412); border-radius: 16px; overflow: hidden; margin-bottom: 20px; }
-        .scene-header { background: rgba(234, 88, 12, 0.15); padding: 16px 20px; }
-        .scene-phase { font-size: 0.75rem; color: #fdba74; text-transform: uppercase; }
-        .scene-title { font-size: 1.4rem; font-weight: 700; }
-        .scene-body { padding: 24px; }
-        .highlight { color: #fbbf24; font-weight: 600; }
+        .scene {
+            background: rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .scene-header {
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .scene-phase { 
+            font-size: 0.85rem; 
+            color: #94a3b8; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        .scene-title { 
+            font-size: 1.5rem; 
+            font-weight: 700;
+            color: #f1f5f9;
+        }
+        .narrative {
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-left: 4px solid #3b82f6;
+            line-height: 1.7;
+        }
+        .narrative ul, .narrative ol { margin-left: 20px; margin-top: 8px; }
+        .narrative li { margin-bottom: 4px; }
+        .highlight { color: #60a5fa; font-weight: 600; }
         .critical { color: #f87171; font-weight: 600; }
-        .safe { color: #4ade80; font-weight: 600; }
-        .mechanism-box { background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(234, 88, 12, 0.2)); border: 1px solid rgba(139, 92, 246, 0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
-        .mechanism-title { font-weight: 700; color: #c4b5fd; margin-bottom: 12px; }
-        .pathway { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; }
-        .boards-tip { background: rgba(251, 191, 36, 0.15); border: 1px solid rgba(251, 191, 36, 0.4); border-radius: 12px; padding: 20px; margin: 20px 0; }
-        .boards-tip-title { font-weight: 700; color: #fbbf24; margin-bottom: 10px; }
-        .alert-box { background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.5); border-radius: 12px; padding: 20px; margin: 20px 0; }
-        .alert-title { font-weight: 700; color: #f87171; margin-bottom: 10px; }
-        .btn { padding: 16px 28px; background: linear-gradient(135deg, #ea580c, #c2410c); border: none; border-radius: 12px; color: white; font-weight: 600; cursor: pointer; width: 100%; }
-        .comparison-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.85rem; }
-        .comparison-table th, .comparison-table td { padding: 10px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
-        .comparison-table th { background: rgba(0,0,0,0.3); color: #fdba74; }
-        .why-chain { background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(234, 88, 12, 0.15)); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 16px; padding: 24px; margin: 24px 0; }
-        .why-chain-title { font-size: 1.2rem; font-weight: 700; color: #c4b5fd; margin-bottom: 20px; }
-        .why-item { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 18px; margin-bottom: 14px; }
-        .why-q { font-weight: 600; color: #e9d5ff; margin-bottom: 10px; }
-        .tips { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
-        .pearl, .pitfall { padding: 20px; border-radius: 12px; }
-        .pearl { background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); }
-        .pitfall { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); }
-        .tip-header { font-weight: 600; margin-bottom: 10px; }
-        .pearl .tip-header { color: #4ade80; }
-        .pitfall .tip-header { color: #f87171; }
-        @media (max-width: 640px) { .tips { grid-template-columns: 1fr; } }
-    </style>
+        .lab-value { color: #fbbf24; font-weight: 600; }
+        
+        /* Patient info card */
+        .patient-card {
+            background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(139,92,246,0.1));
+            border: 1px solid rgba(59,130,246,0.2);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 16px 0;
+        }
+        .patient-card h4 { color: #93c5fd; margin-bottom: 12px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .vitals-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; margin-top: 12px; }
+        .vital-item { background: rgba(0,0,0,0.2); padding: 8px 12px; border-radius: 8px; text-align: center; }
+        .vital-label { font-size: 0.75rem; color: #94a3b8; }
+        .vital-value { font-size: 1.1rem; font-weight: 700; }
+        .vital-value.abnormal { color: #f87171; }
+        .vital-value.normal { color: #4ade80; }
+        
+        /* Question styling */
+        .question-box {
+            background: linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(139,92,246,0.15) 100%);
+            border: 1px solid rgba(59,130,246,0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .question-prompt {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.15);
+            border-radius: 10px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .mcq-option:hover:not(.selected):not(.correct):not(.incorrect):not(.disabled) {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.3);
+            transform: translateX(4px);
+        }
+        .mcq-option.disabled { cursor: default; opacity: 0.7; }
+        .mcq-option.correct { 
+            border-color: #22c55e !important; 
+            background: rgba(34,197,94,0.2) !important;
+            opacity: 1 !important;
+        }
+        .mcq-option.incorrect { 
+            border-color: #ef4444 !important; 
+            background: rgba(239,68,68,0.15) !important;
+        }
+        .option-letter {
+            font-weight: 700;
+            min-width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            flex-shrink: 0;
+        }
+        .mcq-option.correct .option-letter { background: #22c55e; color: white; }
+        .mcq-option.incorrect .option-letter { background: #ef4444; color: white; }
+        .option-text { flex: 1; line-height: 1.5; }
+        
+        /* Feedback styling */
+        .feedback {
+            margin-top: 16px;
+            padding: 16px;
+            border-radius: 10px;
+            display: none;
+        }
+        .feedback.show { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .feedback.correct-feedback {
+            background: rgba(34,197,94,0.15);
+            border: 1px solid rgba(34,197,94,0.3);
+        }
+        .feedback.incorrect-feedback {
+            background: rgba(239,68,68,0.15);
+            border: 1px solid rgba(239,68,68,0.3);
+        }
+        .feedback-title {
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.05rem;
+        }
+        .feedback.correct-feedback .feedback-title { color: #4ade80; }
+        .feedback.incorrect-feedback .feedback-title { color: #f87171; }
+        .feedback-explanation {
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+        
+        /* Teaching point */
+        .teaching-point {
+            background: rgba(139,92,246,0.15);
+            border: 1px solid rgba(139,92,246,0.3);
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 16px;
+            display: none;
+        }
+        .teaching-point.show { display: block; animation: fadeIn 0.3s ease 0.2s both; }
+        .teaching-point h4 {
+            color: #a78bfa;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+        .teaching-point ul, .teaching-point ol { margin-left: 20px; margin-top: 8px; }
+        .teaching-point li { margin-bottom: 6px; line-height: 1.5; color: #e2e8f0; }
+        .teaching-point p { line-height: 1.6; margin-top: 8px; color: #e2e8f0; }
+        .teaching-point em { color: #94a3b8; }
+        .teaching-point strong { color: #f1f5f9; }
+        .teaching-point table { width: 100%; margin-top: 12px; border-collapse: collapse; }
+        .teaching-point td, .teaching-point th { 
+            padding: 10px 12px; 
+            border-bottom: 1px solid rgba(255,255,255,0.1); 
+            text-align: left;
+        }
+        .teaching-point th { color: #a78bfa; font-size: 0.85rem; text-transform: uppercase; }
+        
+        .btn {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: none;
+            margin-top: 16px;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(59,130,246,0.4); }
+        .btn.show { display: inline-block; animation: fadeIn 0.3s ease 0.4s both; }
+        
+        /* Progress bar */
+        .progress-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+        
+        /* Score tracker */
+        .score-tracker {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            padding: 12px 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .score-label { font-size: 0.8rem; color: #94a3b8; }
+        .score-value { font-size: 1.4rem; font-weight: 700; color: #4ade80; }
+        
+        /* Difficulty toggle */
+        .difficulty-panel {
+            position: fixed;
+            top: 85px;
+            right: 20px;
+            background: rgba(255,255,255,0.95);
+            padding: 12px 16px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+        .diff-label { font-size: 0.75rem; color: #475569; margin-bottom: 8px; font-weight: 600; }
+        .diff-btns { display: flex; gap: 4px; }
+        .diff-btn {
+            padding: 6px 10px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            background: #f1f5f9;
+            color: #475569;
+            transition: all 0.2s;
+        }
+        .diff-btn:hover { background: #e2e8f0; }
+        .diff-btn.active { background: #3b82f6; color: white; }
+        
+        /* Hints */
+        .hint-beginner, .hint-advanced {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin: 12px 0;
+            display: none;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        .hint-beginner {
+            background: rgba(34,197,94,0.15);
+            border: 1px solid rgba(34,197,94,0.3);
+            color: #86efac;
+        }
+        .hint-advanced {
+            background: rgba(251,191,36,0.15);
+            border: 1px solid rgba(251,191,36,0.3);
+            color: #fcd34d;
+        }
+        
+        /* Completion screen */
+        .completion { text-align: center; padding: 60px 40px; }
+        .completion-grade { font-size: 2.5rem; font-weight: 700; margin-bottom: 16px; }
+        .completion-score { font-size: 1.5rem; margin-bottom: 8px; }
+        .completion-percent { font-size: 3rem; font-weight: 700; margin: 20px 0; }
+        .completion-message { color: #94a3b8; font-size: 1.1rem; margin-bottom: 24px; }
+        .completion-breakdown { text-align: left; max-width: 500px; margin: 24px auto; }
+        .completion-breakdown h4 { color: #94a3b8; margin-bottom: 12px; font-size: 0.9rem; }
+        
+        /* Cross-platform links */
+        .crossplatform {
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 24px;
+        }
+        .crossplatform h4 { color: #94a3b8; margin-bottom: 16px; font-size: 0.9rem; }
+        .crossplatform-links { display: flex; gap: 12px; flex-wrap: wrap; }
+        .crossplatform-link {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: #93c5fd;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .crossplatform-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .score-tracker { position: static; display: inline-block; margin-bottom: 12px; }
+            .difficulty-panel { position: static; display: inline-block; margin-left: 12px; margin-bottom: 12px; }
+            body { padding: 12px; }
+            .scene { padding: 16px; }
+            .vitals-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+    
+/* Visual Debrief Styles */
+.debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+.debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+.debrief-content { background: white; border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+.debrief-header { text-align: center; margin-bottom: 24px; }
+.debrief-grade { font-size: 4rem; margin-bottom: 8px; }
+.debrief-score { font-size: 2.5rem; font-weight: 700; }
+.debrief-label { font-size: 1rem; color: #6b7280; }
+.decision-path { margin: 24px 0; }
+.decision-path h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 16px; color: #1f2937; }
+.path-item { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+.path-optimal { background: #dcfce7; border: 2px solid #22c55e; }
+.path-suboptimal { background: #fef3c7; border: 2px solid #f59e0b; }
+.path-incorrect { background: #fee2e2; border: 2px solid #ef4444; }
+.path-stage { font-weight: 700; color: #1f2937; }
+.path-choice { font-size: 0.9rem; margin-top: 4px; color: #4b5563; }
+.path-better { font-size: 0.85rem; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.05); border-radius: 6px; color: #6b7280; }
+.path-points { font-weight: 600; font-size: 0.9rem; }
+.debrief-summary { background: #f3f4f6; padding: 20px; border-radius: 12px; margin-top: 24px; }
+.debrief-summary h4 { font-weight: 700; margin-bottom: 12px; }
+.debrief-summary ul { margin-left: 20px; }
+.debrief-summary li { margin-bottom: 8px; }
+.debrief-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 24px; }
+.debrief-btn:hover { opacity: 0.9; }
+
+/* References Panel Styles */
+.references-panel { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #bfdbfe; border-radius: 12px; margin: 20px 0; overflow: hidden; }
+.references-header { padding: 14px 20px; font-weight: 600; color: #1e40af; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.refs-toggle { background: none; border: none; font-size: 0.8rem; cursor: pointer; margin-left: auto; }
+.references-content { padding: 0 20px 16px; display: flex; flex-wrap: wrap; gap: 10px; }
+.references-content a { background: white; padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #2563eb; font-size: 0.85rem; border: 1px solid #bfdbfe; transition: all 0.2s; }
+.references-content a:hover { background: #2563eb; color: white; }
+
+/* Platform Panel Styles */
+.platform-panel { background: linear-gradient(135deg, #faf5ff, #f3e8ff); border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px 20px; margin: 20px 0; }
+.platform-header { font-weight: 600; color: #7c3aed; margin-bottom: 12px; }
+.platform-item { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 0.9rem; color: #5b21b6; }
+.platform-icon { font-size: 1.1rem; }
+
+</style>
 </head>
 <body>
-    <div class="container" id="app"></div>
-    <script>
-    const STAGES = ['arrival', 'diagnosis', 'pathophys', 'fluid_resus', 'potassium', 'insulin', 'anion_gap', 'bicarb', 'cerebral_edema', 'transition', 'hhs', 'precipitants', 'prevention', 'debrief'];
-    const state = { stage: 0 };
-
-    function render() {
-        const progress = ((state.stage + 1) / STAGES.length) * 100;
-        let c = `<div class="header"><div style="font-size:1.3rem;font-weight:700">🍬 DKA Complete<span class="badge">14 STAGES</span></div><div style="font-size:1.3rem;font-weight:700">${state.stage + 1}/${STAGES.length}</div></div><div class="progress-bar"><div class="progress-fill" style="width:${progress}%"></div></div>`;
-        switch(STAGES[state.stage]) {
-            case 'arrival': c += renderArrival(); break;
-            case 'diagnosis': c += renderDiagnosis(); break;
-            case 'pathophys': c += renderPathophys(); break;
-            case 'fluid_resus': c += renderFluids(); break;
-            case 'potassium': c += renderPotassium(); break;
-            case 'insulin': c += renderInsulin(); break;
-            case 'anion_gap': c += renderAnionGap(); break;
-            case 'bicarb': c += renderBicarb(); break;
-            case 'cerebral_edema': c += renderCerebralEdema(); break;
-            case 'transition': c += renderTransition(); break;
-            case 'hhs': c += renderHHS(); break;
-            case 'precipitants': c += renderPrecipitants(); break;
-            case 'prevention': c += renderPrevention(); break;
-            case 'debrief': c += renderDebrief(); break;
-        }
-        document.getElementById('app').innerHTML = c;
-    }
-
-    function renderArrival() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 1 of 14</div><div class="scene-title">The Dehydrated Diabetic</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> DKA triad: Hyperglycemia (usually >250), Ketosis, Acidosis (pH <7.3)</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> What's the role of bicarbonate therapy in severe DKA (pH <6.9)?</p>
-                </div>
-                <div class="rdx-clinical-pearl" style="background:#eff6ff; border:1px solid #3b82f6; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #3b82f6;">
-                    <p style="margin:0; color:#1e40af; font-size:0.9rem;"><strong>💡 Clinical Pearl:</strong> Continue insulin drip until anion gap closes, not just until glucose normalizes</p>
-                </div>
-            <div class="narrative"><p>A <span class="highlight">24-year-old woman</span> with Type 1 DM presents with <span class="critical">nausea, vomiting, abdominal pain, and confusion</span> for 2 days. She ran out of insulin last week.</p>
-            <p style="margin-top:12px;"><strong>Vitals:</strong> HR 124, BP 92/58, RR 28 (deep), T 99.1°F<br><strong>Exam:</strong> Dry mucous membranes, fruity breath, diffuse abdominal tenderness, lethargic<br><strong>Labs:</strong> Glucose 486, pH 7.18, HCO3 8, K 5.8, Na 131, BUN 38, Cr 1.9</p></div>
-            <div class="alert-box"><div class="alert-title">🚨 DKA Triad</div><p>Hyperglycemia + Ketosis + Acidosis = DKA. This is a medical emergency requiring immediate treatment.</p></div>
-            <div class="mechanism-box"><div class="mechanism-title">🧬 DKA Overview</div><div class="pathway">Insulin deficiency + counter-regulatory hormones<br>→ Hyperglycemia (no glucose uptake)<br>→ Lipolysis → free fatty acids → ketones<br>→ Metabolic acidosis<br>→ Osmotic diuresis → dehydration<br>→ Electrolyte depletion</div></div>
-            <button class="btn" onclick="nextStage()">Diagnostic Criteria →</button></div></div>`;
-    }
-
-    function renderDiagnosis() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 2 of 14</div><div class="scene-title">Making the Diagnosis</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Fluid first! Start with 1-2L NS in first hour, then reassess</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> How does SGLT2 inhibitor-associated euglycemic DKA differ in management?</p>
-                </div>
-            <div class="boards-tip"><div class="boards-tip-title">📚 DKA Diagnostic Criteria</div>
-            <table class="comparison-table">
-                <tr><th>Parameter</th><th>Mild</th><th>Moderate</th><th>Severe</th></tr>
-                <tr><td>Glucose</td><td colspan="3">>250 mg/dL (usually)</td></tr>
-                <tr><td>pH</td><td>7.25-7.30</td><td>7.00-7.24</td><td><7.00</td></tr>
-                <tr><td>HCO3</td><td>15-18</td><td>10-15</td><td><10</td></tr>
-                <tr><td>Anion gap</td><td colspan="3">>12 (elevated)</td></tr>
-                <tr><td>Ketones</td><td colspan="3">Positive (serum or urine)</td></tr>
-                <tr><td>Mental status</td><td>Alert</td><td>Drowsy</td><td>Stupor/coma</td></tr>
-            </table></div>
-            <div class="mechanism-box"><div class="mechanism-title">🧬 Euglycemic DKA</div><div class="pathway">DKA with glucose <250 mg/dL<br><br>Causes:<br>• SGLT2 inhibitors (empagliflozin, dapagliflozin)<br>• Pregnancy<br>• Partial treatment<br>• Poor oral intake<br><br>⚠️ Don't rule out DKA just because glucose isn't sky-high!</div></div>
-            <div class="narrative"><p><strong>This patient:</strong> pH 7.18, HCO3 8, glucose 486 = <span class="critical">Moderate-Severe DKA</span></p></div>
-            <button class="btn" onclick="nextStage()">Pathophysiology Deep Dive →</button></div></div>`;
-    }
-
-    function renderPathophys() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 3 of 14</div><div class="scene-title">The Metabolic Cascade</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Potassium before insulin: If K <3.3, hold insulin until K repleted</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> When should you suspect cerebral edema (especially in pediatrics)?</p>
-                </div>
-                <div class="rdx-clinical-pearl" style="background:#eff6ff; border:1px solid #3b82f6; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #3b82f6;">
-                    <p style="margin:0; color:#1e40af; font-size:0.9rem;"><strong>💡 Clinical Pearl:</strong> Transition to subQ insulin with 2-hour overlap before stopping IV</p>
-                </div>
-            <div class="mechanism-box"><div class="mechanism-title">🧬 Complete DKA Pathophysiology</div><div class="pathway"><strong>ILIN DEFICIENCY:</strong><br>→ Glucose can't enter cells<br>→ Hyperglycemia (liver gluconeogenesis ↑)<br>→ Osmotic diuresis (glucose in urine)<br>→ Volume depletion + electrolyte loss<br><br><strong>COUNTER-REGULATORY EXCESS:</strong><br>Glucagon, cortisol, catecholamines, GH all ↑<br>→ Lipolysis in adipose tissue<br>→ Free fatty acids to liver<br>→ Beta-oxidation → Acetyl-CoA<br>→ Ketogenesis: acetoacetate, β-hydroxybutyrate<br>→ Metabolic acidosis (ketoacids)</div></div>
-            <div class="why-chain"><div class="why-chain-title">🔗 WHY Chain: Symptoms</div>
-                <div class="why-item"><div class="why-q">Why Kussmaul respirations?</div>Metabolic acidosis → respiratory compensation → deep, rapid breathing to blow off CO2.</div>
-                <div class="why-item"><div class="why-q">Why fruity breath?</div>Acetone (ketone) is volatile and exhaled through lungs, producing characteristic odor.</div>
-                <div class="why-item"><div class="why-q">Why abdominal pain?</div>Unclear mechanism - possibly gastroparesis, mesenteric ischemia from dehydration, or direct effect of ketones. Resolves with treatment.</div>
-                <div class="why-item"><div class="why-q">Why altered mental status?</div>Hyperosmolality → brain cell dehydration. Acidosis also impairs neuronal function.</div>
-            </div>
-            <button class="btn" onclick="nextStage()">Fluid Resuscitation →</button></div></div>`;
-    }
-
-    function renderFluids() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 4 of 14</div><div class="scene-title">Fluid Resuscitation</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Anion gap = Na - (Cl + HCO3); normal 8-12, DKA typically >20</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> How do you transition from IV to subcutaneous insulin optimally?</p>
-                </div>
-            <div class="alert-box"><div class="alert-title">🚨 Fluids Are Priority #1</div><p>Average fluid deficit in DKA is 5-7 liters. Aggressive early resuscitation improves outcomes.</p></div>
-            <div class="boards-tip"><div class="boards-tip-title">📚 Fluid Protocol</div>
-            <table class="comparison-table">
-                <tr><th>Phase</th><th>Fluid</th><th>Rate</th></tr>
-                <tr><td><strong>Initial (Hour 1)</strong></td><td>NS (0.9% NaCl)</td><td>1-1.5 L bolus</td></tr>
-                <tr><td><strong>Subsequent</strong></td><td>NS or 1/2 NS*</td><td>250-500 mL/hr</td></tr>
-                <tr><td><strong>When glucose <200</strong></td><td>D5 1/2 NS</td><td>150-250 mL/hr</td></tr>
-            </table>
-            <p style="margin-top:8px;">*Use 1/2 NS if corrected Na normal/high; NS if corrected Na low</p></div>
-            <div class="mechanism-box"><div class="mechanism-title">🧬 Corrected Sodium</div><div class="pathway">Measured Na is falsely low due to osmotic water shift<br><br>Corrected Na = Measured Na + 1.6 × [(Glucose - 100)/100]<br><br>Example: Na 131, Glucose 486<br>Corrected = 131 + 1.6 × (386/100) = 131 + 6.2 = <strong>137</strong><br><br>If corrected Na >145 → use 1/2 NS<br>If corrected Na <135 → use NS</div></div>
-            <div class="why-chain"><div class="why-chain-title">🔗 WHY Chain: Why NS First?</div>
-                <div class="why-item"><div class="why-q">Why not start insulin immediately?</div>Insulin drives K+ into cells. If you don't give fluids and check K+ first, you can cause fatal hypokalemia.</div>
-                <div class="why-item"><div class="why-q">Why switch to D5 when glucose drops?</div>You need to continue insulin to clear ketones, but need dextrose to prevent hypoglycemia. Glucose target is 150-200, not "normal."</div>
-            </div>
-            <button class="btn" onclick="nextStage()">Potassium Management →</button></div></div>`;
-    }
-
-    function renderPotassium() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 5 of 14</div><div class="scene-title">The Potassium Paradox</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Look for precipitant: Infection, Infarction, Insulin non-compliance</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> Discuss the two-bag system for glucose/insulin management</p>
-                </div>
-                <div class="rdx-clinical-pearl" style="background:#fef2f2; border:1px solid #ef4444; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #ef4444;">
-                    <p style="margin:0; color:#991b1b; font-size:0.9rem;"><strong>⚠️ Don't Miss:</strong> Mucormycosis: Diabetic + facial pain + black eschar - emergency!</p>
-                </div>
-            <div class="alert-box"><div class="alert-title">🚨 BOARDS FAVORITE: K+ May Be High But Total Body K+ Is LOW</div><p>Serum K+ is often elevated in DKA, but total body potassium is severely depleted. Insulin will cause rapid drop!</p></div>
-            <div class="mechanism-box"><div class="mechanism-title">🧬 Why K+ Appears High</div><div class="pathway">Total body K+ depleted by:<br>• Osmotic diuresis (urinary losses)<br>• Vomiting<br>• Secondary hyperaldosteronism<br><br>But serum K+ elevated because:<br>• Acidosis → H+ enters cells, K+ exits<br>• Insulin deficiency → K+ stays extracellular<br>• Hyperosmolality → water leaves cells, K+ follows<br><br>When you give insulin:<br>→ K+ shifts INTO cells rapidly<br>→ Serum K+ plummets<br>→ Fatal arrhythmias if not replaced!</div></div>
-            <div class="boards-tip"><div class="boards-tip-title">📚 Potassium Protocol</div>
-            <table class="comparison-table">
-                <tr><th>Serum K+</th><th>Action</th></tr>
-                <tr style="background:rgba(239,68,68,0.2);"><td><strong><3.3 mEq/L</strong></td><td>HOLD insulin, give 20-40 mEq/hr K+ until >3.3</td></tr>
-                <tr><td>3.3-5.3 mEq/L</td><td>Give 20-30 mEq K+ per liter of fluid</td></tr>
-                <tr><td>>5.3 mEq/L</td><td>Don't add K+ to fluids, recheck in 2 hours</td></tr>
-            </table></div>
-            <div class="narrative"><p><strong>This patient:</strong> K+ 5.8 → Don't add K+ initially, but recheck frequently. Expect rapid drop with insulin.</p></div>
-            <button class="btn" onclick="nextStage()">Insulin Therapy →</button></div></div>`;
-    }
-
-    function renderInsulin() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 6 of 14</div><div class="scene-title">Insulin Protocol</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Check glucose hourly; goal is drop of 50-70 mg/dL per hour</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> When should this patient be admitted to ICU vs floor?</p>
-                </div>
-            <div class="boards-tip"><div class="boards-tip-title">📚 Insulin Administration</div>
-            <table class="comparison-table">
-                <tr><th>Step</th><th>Details</th></tr>
-                <tr><td><strong>Confirm K+ ≥3.3</strong></td><td>Do NOT start insulin if K+ <3.3!</td></tr>
-                <tr><td><strong>Bolus (optional)</strong></td><td>0.1 units/kg IV regular insulin</td></tr>
-                <tr><td><strong>Infusion</strong></td><td>0.1 units/kg/hr OR 0.14 units/kg/hr (no bolus)</td></tr>
-                <tr><td><strong>Goal</strong></td><td>Glucose ↓ by 50-70 mg/dL per hour</td></tr>
-                <tr><td><strong>If not dropping</strong></td><td>Double infusion rate</td></tr>
-            </table></div>
-            <div class="mechanism-box"><div class="mechanism-title">🧬 Why IV Regular Insulin?</div><div class="pathway">• Short half-life (5-7 min) → easy to titrate<br>• Predictable onset<br>• Can stop immediately if needed<br><br>SubQ insulin in severe DKA:<br>• Poor absorption (dehydration, hypoperfusion)<br>• Unpredictable kinetics<br>• Harder to adjust rapidly<br><br>Only use SubQ for mild DKA if IV not available</div></div>
-            <div class="why-chain"><div class="why-chain-title">🔗 WHY Chain: Glucose Goals</div>
-                <div class="why-item"><div class="why-q">Why not drop glucose faster?</div>Rapid osmolality changes can cause cerebral edema, especially in children. Steady 50-70 mg/dL/hr is safe.</div>
-                <div class="why-item"><div class="why-q">Why keep glucose 150-200?</div>You need continued insulin to clear ketones. If glucose drops too low, you'll have to stop insulin before ketosis resolves.</div>
-            </div>
-            <button class="btn" onclick="nextStage()">Anion Gap Monitoring →</button></div></div>`;
-    }
-
-    function renderAnionGap() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 7 of 14</div><div class="scene-title">Following the Gap</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> DKA triad: Hyperglycemia (usually >250), Ketosis, Acidosis (pH <7.3)</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> What's the role of bicarbonate therapy in severe DKA (pH <6.9)?</p>
-                </div>
-                <div class="rdx-clinical-pearl" style="background:#fef2f2; border:1px solid #ef4444; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #ef4444;">
-                    <p style="margin:0; color:#991b1b; font-size:0.9rem;"><strong>⚠️ Don't Miss:</strong> Correct sodium for glucose: Add 1.6 mEq/L per 100 mg/dL glucose >100</p>
-                </div>
-            <div class="boards-tip"><div class="boards-tip-title">📚 Anion Gap Calculation</div><div class="pathway">AG = Na - (Cl + HCO3)<br>Normal = 8-12<br><br>This patient: 131 - (98 + 8) = <strong>25</strong> (elevated)</div></div>
-            <div class="mechanism-box"><div class="mechanism-title">🧬 Why Follow the Gap?</div><div class="pathway">Ketoacids (β-hydroxybutyrate, acetoacetate)<br>→ Unmeasured anions<br>→ Elevated anion gap<br><br>As DKA resolves:<br>• Ketones metabolized to HCO3<br>• Gap closes<br>• HCO3 normalizes<br><br><strong>Gap closure = DKA resolution</strong><br>More reliable than glucose or pH alone!</div></div>
-            <div class="alert-box"><div class="alert-title">⚠️ β-Hydroxybutyrate vs Ketone Testing</div><p>Urine ketones detect acetoacetate, NOT β-hydroxybutyrate (the predominant ketone in DKA). During treatment, β-HB converts to acetoacetate → urine ketones may transiently INCREASE even as patient improves. Follow the anion gap, not urine ketones!</p></div>
-            <div class="why-chain"><div class="why-chain-title">🔗 WHY Chain: Delta-Delta</div>
-                <div class="why-item"><div class="why-q">What is delta-delta?</div>Compares change in AG to change in HCO3. In pure DKA, they should change 1:1 (delta ratio 1-2).</div>
-                <div class="why-item"><div class="why-q">Why check it?</div>Delta >2 suggests concurrent metabolic alkalosis. Delta <1 suggests concurrent non-AG acidosis. DKA patients often have mixed disorders.</div>
-            </div>
-            <button class="btn" onclick="nextStage()">Bicarbonate Controversy →</button></div></div>`;
-    }
-
-    function renderBicarb() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 8 of 14</div><div class="scene-title">To Give Bicarb or Not?</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Fluid first! Start with 1-2L NS in first hour, then reassess</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> How does SGLT2 inhibitor-associated euglycemic DKA differ in management?</p>
-                </div>
-            <div class="alert-box"><div class="alert-title">🚨 Bicarbonate Is Almost Never Indicated!</div><p>Routine bicarbonate administration in DKA does NOT improve outcomes and may cause harm.</p></div>
-            <div class="mechanism-box"><div class="mechanism-title">🧬 Why NOT to Give Bicarb</div><div class="pathway"><strong>Theoretical harms:</strong><br>• Paradoxical CNS acidosis (CO2 crosses BBB faster)<br>• Worsened hypokalemia (alkalosis shifts K+ into cells)<br>• Delayed ketone clearance<br>• Tissue hypoxia (left-shift of O2-Hgb curve)<br><br><strong>Studies show:</strong><br>No benefit in pH >6.9<br>Possible harm in pediatric patients</div></div>
-            <div class="boards-tip"><div class="boards-tip-title">📚 When Bicarb MAY Be Considered</div>
-            <table class="comparison-table">
-                <tr><th>Indication</th><th>Dose</th></tr>
-                <tr><td>pH <6.9 (severe acidosis)</td><td>100 mEq NaHCO3 in 400 mL over 2h</td></tr>
-                <tr><td>Life-threatening hyperkalemia</td><td>As temporizing measure</td></tr>
-            </table>
-            <p style="margin-top:8px;">Even at pH <6.9, evidence is weak. Many centers don't give bicarb at all.</p></div>
-            <div class="why-chain"><div class="why-chain-title">🔗 WHY Chain: Acidosis Self-Corrects</div>
-                <div class="why-item"><div class="why-q">How does acidosis resolve without bicarb?</div>Insulin stops ketogenesis. Existing ketones are metabolized to bicarbonate. The body regenerates its own buffer.</div>
-            </div>
-            <button class="btn" onclick="nextStage()">Cerebral Edema →</button></div></div>`;
-    }
-
-    function renderCerebralEdema() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 9 of 14</div><div class="scene-title">The Dreaded Complication</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Potassium before insulin: If K <3.3, hold insulin until K repleted</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> When should you suspect cerebral edema (especially in pediatrics)?</p>
-                </div>
-                <div class="rdx-clinical-pearl" style="background:#fefce8; border:1px solid #eab308; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #eab308;">
-                    <p style="margin:0; color:#854d0e; font-size:0.9rem;"><strong>🚫 Common Mistake:</strong> Don't drop glucose too fast (>100/hr) - risk of cerebral edema</p>
-                </div>
-            <div class="alert-box"><div class="alert-title">🚨 Cerebral Edema: Rare But Deadly</div><p>Occurs in ~1% of pediatric DKA but mortality is 20-25%. Much rarer in adults. Watch for neurologic changes!</p></div>
-            <div class="mechanism-box"><div class="mechanism-title">🧬 Cerebral Edema Mechanism</div><div class="pathway">Brain adapts to hyperosmolality by:<br>→ Generating idiogenic osmoles (taurine, etc.)<br>→ These take time to dissipate<br><br>Rapid correction of hyperosmolality:<br>→ Osmotic gradient favors water into brain<br>→ Brain swelling<br>→ Increased ICP<br>→ Herniation<br><br>Risk factors:<br>• Young age (<5 years)<br>• New-onset DM<br>• Longer symptom duration<br>• Severe acidosis at presentation<br>• Excessive fluid administration</div></div>
-            <div class="boards-tip"><div class="boards-tip-title">📚 Warning Signs & Management</div>
-            <table class="comparison-table">
-                <tr><th>Warning Signs</th><th>Management</th></tr>
-                <tr><td>Headache, confusion worsening</td><td>Reduce fluid rate</td></tr>
-                <tr><td>Bradycardia, HTN (Cushing)</td><td>Mannitol 0.5-1 g/kg IV</td></tr>
-                <tr><td>Pupil changes, posturing</td><td>Hypertonic saline (3%)</td></tr>
-                <tr><td>Seizures</td><td>Elevate HOB, intubate if needed</td></tr>
-            </table></div>
-            <button class="btn" onclick="nextStage()">Transition to SubQ →</button></div></div>`;
-    }
-
-    function renderTransition() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 10 of 14</div><div class="scene-title">DKA Resolution Criteria</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Anion gap = Na - (Cl + HCO3); normal 8-12, DKA typically >20</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> How do you transition from IV to subcutaneous insulin optimally?</p>
-                </div>
-            <div class="boards-tip"><div class="boards-tip-title">📚 When Is DKA Resolved?</div>
-            <table class="comparison-table">
-                <tr><th>Parameter</th><th>Target</th></tr>
-                <tr><td>Glucose</td><td><200 mg/dL</td></tr>
-                <tr><td>pH</td><td>>7.30</td></tr>
-                <tr><td>Bicarbonate</td><td>≥18 mEq/L</td></tr>
-                <tr><td>Anion gap</td><td>≤12</td></tr>
-            </table>
-            <p style="margin-top:8px;">Need at least 2 of these (glucose + one other) to confirm resolution.</p></div>
-            <div class="mechanism-box"><div class="mechanism-title">🧬 Transition Protocol</div><div class="pathway"><strong>Prerequisites:</strong><br>• DKA resolved (above criteria)<br>• Patient eating<br>• No nausea/vomiting<br><br><strong>Steps:</strong><br>1. Give SubQ long-acting insulin (glargine/detemir)<br>2. Continue IV insulin for 2-4 HOURS after SubQ<br>3. Then discontinue IV insulin<br>4. Start meal-time rapid-acting insulin<br><br>⚠️ NEVER stop IV before SubQ has had time to work!<br>Gap in insulin → rebound DKA within hours</div></div>
-            <div class="why-chain"><div class="why-chain-title">🔗 WHY Chain: The Overlap</div>
-                <div class="why-item"><div class="why-q">Why overlap IV and SubQ?</div>SubQ long-acting insulin takes 2-4 hours to start working. If you stop IV before this, patient has no insulin coverage → ketogenesis restarts.</div>
-            </div>
-            <button class="btn" onclick="nextStage()">DKA vs HHS →</button></div></div>`;
-    }
-
-    function renderHHS() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 11 of 14</div><div class="scene-title">Hyperosmolar Hyperglycemic State</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Look for precipitant: Infection, Infarction, Insulin non-compliance</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> Discuss the two-bag system for glucose/insulin management</p>
-                </div>
-                <div class="rdx-clinical-pearl" style="background:#f5f3ff; border:1px solid #8b5cf6; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #8b5cf6;">
-                    <p style="margin:0; color:#5b21b6; font-size:0.9rem;"><strong>📋 Board Tip:</strong> Beta-hydroxybutyrate is more accurate than urine ketones for monitoring</p>
-                </div>
-            <div class="boards-tip"><div class="boards-tip-title">📚 DKA vs HHS</div>
-            <table class="comparison-table">
-                <tr><th>Feature</th><th>DKA</th><th>HHS</th></tr>
-                <tr><td>Typical patient</td><td>Type 1 DM, younger</td><td>Type 2 DM, elderly</td></tr>
-                <tr><td>Glucose</td><td>>250 (often 300-800)</td><td>>600 (often >1000)</td></tr>
-                <tr><td>pH</td><td><7.30</td><td>>7.30</td></tr>
-                <tr><td>Ketones</td><td>Strongly positive</td><td>Negative or trace</td></tr>
-                <tr><td>Osmolality</td><td>Variable</td><td>>320 mOsm/kg</td></tr>
-                <tr><td>Mental status</td><td>Variable</td><td>Often severely altered</td></tr>
-                <tr><td>Mortality</td><td>~1%</td><td>10-20%</td></tr>
-            </table></div>
-            <div class="mechanism-box"><div class="mechanism-title">🧬 Why No Ketosis in HHS?</div><div class="pathway">HHS patients have SOME residual insulin<br>→ Enough to suppress lipolysis/ketogenesis<br>→ But not enough for glucose uptake<br><br>Result:<br>• Extreme hyperglycemia (no ketone "ceiling")<br>• Profound dehydration (10-12 L deficit)<br>• Hyperosmolality → coma<br>• But minimal acidosis</div></div>
-            <div class="alert-box"><div class="alert-title">⚠️ HHS Treatment Differences</div><p>HHS needs MORE fluids (bigger deficit), LESS insulin (more sensitive), and SLOWER correction (high stroke risk). Fluid resuscitation is even more critical than in DKA.</p></div>
-            <button class="btn" onclick="nextStage()">Finding the Precipitant →</button></div></div>`;
-    }
-
-    function renderPrecipitants() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 12 of 14</div><div class="scene-title">What Caused This?</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Check glucose hourly; goal is drop of 50-70 mg/dL per hour</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> When should this patient be admitted to ICU vs floor?</p>
-                </div>
-            <div class="boards-tip"><div class="boards-tip-title">📚 Common DKA Precipitants (The 5 I's)</div>
-            <table class="comparison-table">
-                <tr><th>I</th><th>Precipitant</th><th>Notes</th></tr>
-                <tr><td><strong>I</strong>nfection</td><td>UTI, pneumonia, sepsis</td><td>Most common cause (~40%)</td></tr>
-                <tr><td><strong>I</strong>nsulin (lack of)</td><td>Non-compliance, pump failure</td><td>~25% of cases</td></tr>
-                <tr><td><strong>I</strong>nfarction</td><td>MI, stroke, mesenteric</td><td>Stress hormones trigger DKA</td></tr>
-                <tr><td><strong>I</strong>ntoxication</td><td>Alcohol, cocaine</td><td>Also consider drugs of abuse</td></tr>
-                <tr><td><strong>I</strong>atrogenic</td><td>Steroids, SGLT2i, antipsychotics</td><td>Medication-induced</td></tr>
-            </table></div>
-            <div class="alert-box"><div class="alert-title">🚨 Always Look for Infection!</div><p>Patients may not have fever (hypothermia possible), and WBC is often elevated from stress demargination even without infection. Get cultures, UA, CXR on everyone.</p></div>
-            <div class="mechanism-box"><div class="mechanism-title">🧬 New-Onset T1DM</div><div class="pathway">~20% of DKA is the presenting event of T1DM<br><br>Autoimmune destruction of β-cells<br>→ Eventually insufficient insulin<br>→ DKA is first presentation<br><br>Classic history: Weeks of polyuria, polydipsia,<br>weight loss, then acute decompensation</div></div>
-            <div class="narrative"><p><strong>This patient:</strong> Ran out of insulin = <span class="highlight">insulin non-compliance</span> as precipitant</p></div>
-            <button class="btn" onclick="nextStage()">Prevention →</button></div></div>`;
-    }
-
-    function renderPrevention() {
-        return `<div class="scene"><div class="scene-header"><div class="scene-phase">Stage 13 of 14</div><div class="scene-title">Preventing Recurrence</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> DKA triad: Hyperglycemia (usually >250), Ketosis, Acidosis (pH <7.3)</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> What's the role of bicarbonate therapy in severe DKA (pH <6.9)?</p>
-                </div>
-                <div class="rdx-clinical-pearl" style="background:#eff6ff; border:1px solid #3b82f6; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #3b82f6;">
-                    <p style="margin:0; color:#1e40af; font-size:0.9rem;"><strong>💡 Clinical Pearl:</strong> Continue insulin drip until anion gap closes, not just until glucose normalizes</p>
-                </div>
-            <div class="boards-tip"><div class="boards-tip-title">📚 Sick Day Rules for Diabetics</div>
-            <ul style="margin-left:20px;line-height:2;">
-                <li><strong>NEVER stop insulin</strong> - may need MORE when sick</li>
-                <li>Check blood glucose every 4 hours</li>
-                <li>Check urine/blood ketones if glucose >300</li>
-                <li>Stay hydrated (sugar-free fluids)</li>
-                <li>Contact provider if vomiting, ketones present, or glucose stays >300</li>
-            </ul></div>
-            <div class="mechanism-box"><div class="mechanism-title">🧬 Why Insulin Needs INCREASE When Sick</div><div class="pathway">Illness → stress hormones (cortisol, catecholamines)<br>→ Insulin resistance increases<br>→ MORE insulin needed, not less<br><br>Common mistake: Patient feels sick, not eating<br>→ "I don't need insulin if I'm not eating"<br>→ DKA develops</div></div>
-            <div class="tips">
-                <div class="pearl"><div class="tip-header">✓ Before Discharge</div><ul style="margin-left:16px;"><li>Ensure patient has insulin and supplies</li><li>Diabetes education consult</li><li>Address barriers (cost, access)</li><li>Follow-up within 1 week</li></ul></div>
-                <div class="pitfall"><div class="tip-header">✗ Recurrence Risk Factors</div><ul style="margin-left:16px;"><li>Prior DKA episodes</li><li>Psychiatric comorbidity</li><li>Substance abuse</li><li>Limited access to healthcare</li></ul></div>
-            </div>
-            <button class="btn" onclick="nextStage()">Debrief →</button></div></div>`;
-    }
-
-    function renderDebrief() {
-        return `<div class="scene"><div style="text-align:center;padding:40px;"><div style="font-size:4rem;margin-bottom:12px;">🍬</div><div style="font-size:1.8rem;font-weight:700;color:#4ade80;">DKA Mastery Complete!</div></div><div class="scene-body">
-                <div class="rdx-hint-beginner" style="display:none; background:#ecfdf5; border:1px solid #6ee7b7; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #10b981;">
-                    <p style="margin:0; color:#065f46; font-size:0.9rem;">🌱 <strong>Beginner Hint:</strong> Fluid first! Start with 1-2L NS in first hour, then reassess</p>
-                </div>
-                <div class="rdx-hint-advanced" style="display:none; background:#fef3c7; border:1px solid #fcd34d; border-radius:8px; padding:12px 16px; margin:12px 0; border-left:4px solid #f59e0b;">
-                    <p style="margin:0; color:#92400e; font-size:0.9rem;">🎯 <strong>Advanced Challenge:</strong> How does SGLT2 inhibitor-associated euglycemic DKA differ in management?</p>
-                </div>
-            <div class="boards-tip"><div class="boards-tip-title">📚 High-Yield Summary</div>
-            <table class="comparison-table">
-                <tr><th>Concept</th><th>Key Point</th></tr>
-                <tr><td>Diagnosis</td><td>Hyperglycemia + ketosis + acidosis (AG elevation)</td></tr>
-                <tr><td>Fluids</td><td>NS first (1-1.5L), then based on corrected Na</td></tr>
-                <tr><td>Potassium</td><td>HOLD insulin if K+ <3.3; total body K+ is LOW</td></tr>
-                <tr><td>Insulin</td><td>0.1 u/kg/hr; target glucose drop 50-70/hr</td></tr>
-                <tr><td>Resolution</td><td>AG closed, pH >7.30, HCO3 ≥18</td></tr>
-                <tr><td>Bicarb</td><td>Almost never indicated (maybe if pH <6.9)</td></tr>
-                <tr><td>Transition</td><td>Overlap SubQ and IV insulin by 2-4 hours</td></tr>
-            </table></div>
-            <div class="why-chain"><div class="why-chain-title">🔗 Master WHY Chain</div>
-                <div class="why-item"><div class="why-q">Why is K+ high but total body low?</div>Acidosis + insulin deficiency shift K+ extracellularly; osmotic diuresis causes massive K+ losses.</div>
-                <div class="why-item"><div class="why-q">Why follow anion gap?</div>Gap closure = ketone clearance = true DKA resolution. More reliable than glucose or urine ketones.</div>
-                <div class="why-item"><div class="why-q">Why overlap insulins?</div>SubQ takes hours to work; stopping IV before overlap → ketogenesis restarts → rebound DKA.</div>
-            </div>
-            <div class="tips">
-                <div class="pearl"><div class="tip-header">✓ Clinical Pearls</div><ul style="margin-left:16px;"><li>Fluids before insulin</li><li>K+ before insulin</li><li>Add dextrose when glucose <200</li><li>Always find the precipitant</li></ul></div>
-                <div class="pitfall"><div class="tip-header">✗ Avoid These Pitfalls</div><ul style="margin-left:16px;"><li>Starting insulin when K+ <3.3</li><li>Stopping IV insulin without SubQ overlap</li><li>Giving bicarb routinely</li><li>Using urine ketones to guide treatment</li></ul></div>
-            </div>
-            <button class="btn" onclick="location.reload()">🔄 Restart Case</button></div></div>`;
-    }
-
-    function nextStage() { state.stage++; render(); }
-    render();
-    </script>
-
-<!-- ==================== REASONDX ENHANCED FEATURES ==================== -->
-<style>
-/* Enhanced Feature Styles */
-.rdx-difficulty-panel {
-    background: white;
-    border-radius: 16px;
-    padding: 16px 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    z-index: 1000;
-    max-width: 300px;
-}
-.rdx-diff-btn {
-    padding: 8px 16px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 0.85rem;
-    transition: all 0.2s;
-    margin: 2px;
-}
-.rdx-diff-btn.active {
-    background: #3b82f6;
-    color: white;
-}
-.rdx-diff-btn:not(.active) {
-    background: #f1f5f9;
-    color: #475569;
-}
-.rdx-diff-btn:hover:not(.active) {
-    background: #e2e8f0;
-}
-.rdx-refs-panel {
-    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-    border: 1px solid #93c5fd;
-    border-radius: 12px;
-    padding: 16px 20px;
-    margin: 20px auto;
-    max-width: 900px;
-}
-.rdx-refs-title {
-    font-weight: 700;
-    color: #1e40af;
-    margin-bottom: 8px;
-}
-.rdx-refs-links {
-    font-size: 0.9rem;
-    line-height: 1.8;
-}
-.rdx-refs-links a {
-    color: #2563eb;
-    text-decoration: none;
-}
-.rdx-refs-links a:hover {
-    text-decoration: underline;
-}
-.rdx-debrief-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0,0,0,0.8);
-    z-index: 2000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-.rdx-debrief-panel {
-    background: white;
-    border-radius: 20px;
-    padding: 32px;
-    max-width: 800px;
-    width: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
-    color: #1f2937;
-}
-.rdx-path-item {
-    padding: 12px 16px;
-    border-radius: 8px;
-    margin-bottom: 8px;
-}
-.rdx-path-optimal {
-    background: #dcfce7;
-    border-left: 4px solid #22c55e;
-}
-.rdx-path-suboptimal {
-    background: #fef9c3;
-    border-left: 4px solid #eab308;
-}
-.rdx-path-wrong {
-    background: #fecaca;
-    border-left: 4px solid #ef4444;
-}
-.rdx-hint-beginner {
-    background: #ecfdf5;
-    border: 1px solid #6ee7b7;
-    padding: 10px 14px;
-    border-radius: 8px;
-    margin: 8px 0;
-    font-size: 0.9rem;
-    display: none;
-}
-.rdx-hint-advanced {
-    background: #fef3c7;
-    border: 1px solid #fcd34d;
-    padding: 10px 14px;
-    border-radius: 8px;
-    margin: 8px 0;
-    font-size: 0.9rem;
-    display: none;
-}
-</style>
-
-<div class="rdx-difficulty-panel" id="rdxDifficultyPanel">
-    <div style="font-weight:600;color:#374151;margin-bottom:8px;font-size:0.85rem;">📊 Difficulty Level</div>
-    <div style="display:flex;gap:4px;flex-wrap:wrap;">
-        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('beginner')" id="rdx-btn-beginner">🌱 Beginner</button>
-        <button class="rdx-diff-btn active" onclick="rdxSetDifficulty('intermediate')" id="rdx-btn-intermediate">📚 Standard</button>
-        <button class="rdx-diff-btn" onclick="rdxSetDifficulty('advanced')" id="rdx-btn-advanced">🎯 Advanced</button>
+    <div class="score-tracker">
+        <div class="score-label">Score</div>
+        <div><span class="score-value" id="score">0</span> / <span id="maxScore">0</span></div>
     </div>
-</div>
-
-
-<!-- CROSS-PLATFORM LEARNING LINKS -->
-<div class="rdx-crossplatform" style="background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; margin: 20px auto; max-width: 1000px; border: 1px solid #cbd5e1;">
-    <h4 style="font-weight: 700; color: #1e293b; margin-bottom: 16px; font-size: 18px;">🎯 Continue Your Learning</h4>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
-        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #8b5cf6;">
-            <h5 style="color: #8b5cf6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">📚 MechanismDx</h5>
-            <a href="../mechanism/diabetes-dka-module.html" style="display: block; color: #2563eb; font-size: 14px;">→ DKA</a>
-        </div>
-        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #3b82f6;">
-            <h5 style="color: #3b82f6; font-weight: 600; margin-bottom: 6px; font-size: 14px;">🎮 Related Cases</h5>
-            <a href="peds-dka-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Peds Dka</a>
-            <a href="hypoglycemia-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Hypoglycemia</a>
-            <a href="hhs-dka-comparison-expanded-adventure.html" style="display: block; color: #2563eb; font-size: 14px; margin: 4px 0;">→ Hhs Dka Comparison</a>
-        </div>
-        <div style="background: white; border-radius: 8px; padding: 14px; border-left: 4px solid #10b981;">
-            <h5 style="color: #10b981; font-weight: 600; margin-bottom: 6px; font-size: 14px;">💬 CoachDx</h5>
-            <a href="../CoachDx/mentor-chat.html" style="display: block; color: #2563eb; font-size: 14px;">→ Practice with AI Coach</a>
-            <a href="../CoachDx/sbar-trainer.html" style="display: block; color: #2563eb; font-size: 14px;">→ SBAR Communication</a>
+    
+    <div class="difficulty-panel">
+        <div class="diff-label">📊 Difficulty</div>
+        <div class="diff-btns">
+            <button class="diff-btn" id="diff-beginner" onclick="setDifficulty('beginner', this)">🌱 Beginner</button>
+            <button class="diff-btn active" id="diff-standard" onclick="setDifficulty('standard', this)">📚 Standard</button>
+            <button class="diff-btn" id="diff-advanced" onclick="setDifficulty('advanced', this)">🎯 Advanced</button>
         </div>
     </div>
-</div>
-<!-- END CROSS-PLATFORM LINKS -->
-<div class="rdx-refs-panel" id="rdxRefsPanel">
-    <div class="rdx-refs-title">📚 References & Evidence-Based Resources</div>
-    <div class="rdx-refs-links"><a href="https://professional.diabetes.org/content-page/practice-guidelines-resources" target="_blank" class="text-blue-600 hover:underline">ADA Diabetes Guidelines</a> | <a href="https://www.ncbi.nlm.nih.gov/books/NBK560723/" target="_blank" class="text-blue-600 hover:underline">StatPearls: Endocrine Emergencies</a></div>
-</div>
+    
+    <div class="container">
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width: 0%"></div>
 
-<div class="rdx-debrief-overlay" id="rdxDebriefOverlay" style="display:none;">
-    <div class="rdx-debrief-panel" id="rdxDebriefContent"></div>
+<!-- Open Access References Panel -->
+<div class="references-panel" id="referencesPanel">
+    <div class="references-header">
+        <span>📚</span> Open-Access References
+        <button onclick="toggleReferences()" class="refs-toggle">▼</button>
+    </div>
+    <div class="references-content" id="referencesContent">
+        <a href="https://www.ncbi.nlm.nih.gov/books/NBK560723/" target="_blank" rel="noopener">DKA - StatPearls (StatPearls)</a>
+<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6820766/" target="_blank" rel="noopener">DKA Management (PMC)</a>
+    </div>
 </div>
+</div>
+        <div id="scene-container"></div>
+    </div>
 
 <script>
-// ReasonDx Enhanced Features Module
-(function() {
-    // Decision tracking
-    window.rdxDecisionPath = window.rdxDecisionPath || [];
-    window.rdxTotalScore = window.rdxTotalScore || 0;
-    window.rdxMaxScore = window.rdxMaxScore || 0;
-    window.rdxDifficulty = 'intermediate';
-    
-    // Difficulty control
-    window.rdxSetDifficulty = function(level) {
-        window.rdxDifficulty = level;
-        document.querySelectorAll('.rdx-diff-btn').forEach(btn => btn.classList.remove('active'));
-        document.getElementById('rdx-btn-' + level).classList.add('active');
-        
-        // Update hint visibility
-        document.querySelectorAll('.rdx-hint-beginner').forEach(el => {
-            el.style.display = level === 'beginner' ? 'block' : 'none';
-        });
-        document.querySelectorAll('.rdx-hint-advanced').forEach(el => {
-            el.style.display = level === 'advanced' ? 'block' : 'none';
-        });
-    };
-    
-    // Track a decision
-    window.rdxTrackDecision = function(stageId, stageTitle, choiceId, choiceText, outcome, points, maxPoints, isOptimal, optimalChoice, optimalText) {
-        window.rdxDecisionPath.push({
-            stage: stageId,
-            title: stageTitle,
-            choice: choiceId,
-            choiceText: choiceText,
-            outcome: outcome,
-            points: points,
-            maxPoints: maxPoints,
-            isOptimal: isOptimal,
-            optimalChoice: optimalChoice,
-            optimalText: optimalText
-        });
-        window.rdxTotalScore += points;
-        window.rdxMaxScore += maxPoints;
-    };
-    
-    // Show visual debrief
-    window.rdxShowDebrief = function() {
-        const percentage = window.rdxMaxScore > 0 ? Math.round((window.rdxTotalScore / window.rdxMaxScore) * 100) : 0;
-        
-        let grade, gradeColor, gradeEmoji;
-        if (percentage >= 90) { grade = 'Outstanding!'; gradeColor = '#16a34a'; gradeEmoji = '🏆'; }
-        else if (percentage >= 80) { grade = 'Excellent!'; gradeColor = '#2563eb'; gradeEmoji = '⭐'; }
-        else if (percentage >= 70) { grade = 'Good Work!'; gradeColor = '#ca8a04'; gradeEmoji = '👍'; }
-        else { grade = 'Keep Learning!'; gradeColor = '#dc2626'; gradeEmoji = '📚'; }
-        
-        let pathHTML = '';
-        if (window.rdxDecisionPath.length > 0) {
-            pathHTML = window.rdxDecisionPath.map(d => {
-                let pathClass = d.isOptimal ? 'rdx-path-optimal' : 
-                               (d.points >= d.maxPoints * 0.5 ? 'rdx-path-suboptimal' : 'rdx-path-wrong');
-                let icon = d.isOptimal ? '✓' : (d.points >= d.maxPoints * 0.5 ? '~' : '✗');
-                return '<div class="' + pathClass + ' rdx-path-item">' +
-                    '<div style="display:flex;justify-content:space-between;align-items:start;">' +
-                    '<div>' +
-                    '<strong>' + icon + ' Stage ' + d.stage + ':</strong> ' + d.title +
-                    '<div style="font-size:0.9rem;margin-top:4px;">Your choice: <strong>' + d.choice + '</strong> - ' + d.outcome + '</div>' +
-                    (!d.isOptimal ? '<div style="font-size:0.85rem;color:#6b7280;margin-top:4px;">💡 Better: ' + d.optimalChoice + '</div>' : '') +
-                    '</div>' +
-                    '<span style="font-size:0.85rem;font-weight:600;background:#f3f4f6;padding:4px 8px;border-radius:4px;">' + d.points + '/' + d.maxPoints + '</span>' +
-                    '</div></div>';
-            }).join('');
-        } else {
-            pathHTML = '<p style="color:#6b7280;text-align:center;padding:20px;">Complete the case to see your decision path!</p>';
+let currentStage = 0;
+let score = 0;
+let maxScore = 0;
+let difficulty = 'standard';
+let answeredQuestions = new Set();
+let decisionPath = [];
+
+const stages = [
+    {
+        "title": "Initial Presentation",
+        "content": "<div class=\"narrative\">\n                <p>A <span class=\"highlight\">24-year-old woman</span> with type 1 diabetes is brought to the ED by her roommate. She has had 2 days of nausea, vomiting, and abdominal pain. Her roommate reports she ran out of insulin 3 days ago.</p>\n                <p style=\"margin-top:12px;\"><strong>Appearance:</strong> Lethargic, deep rapid breathing, fruity odor on breath</p>\n            </div>\n            <div class=\"patient-card\">\n                <h4>Initial Assessment</h4>\n                <div class=\"vitals-grid\">\n                    <div class=\"vital-item\"><div class=\"vital-label\">HR</div><div class=\"vital-value abnormal\">118</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">BP</div><div class=\"vital-value abnormal\">98/62</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">RR</div><div class=\"vital-value abnormal\">28, deep</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">Temp</div><div class=\"vital-value normal\">99.1 F</div></div>\n                    <div class=\"vital-item\"><div class=\"vital-label\">Glucose</div><div class=\"vital-value abnormal\">486</div></div>\n                </div>\n            </div>",
+        "hint_beginner": "What is the breathing pattern called? What causes the fruity breath odor?",
+        "hint_advanced": "Why might temperature be misleadingly normal or low in DKA even with infection?",
+        "question": {
+            "prompt": "What is this respiratory pattern known as, and what does it indicate?",
+            "options": [
+                {
+                    "text": "Kussmaul respirations - respiratory compensation for metabolic acidosis",
+                    "correct": true
+                },
+                {
+                    "text": "Cheyne-Stokes respirations - brainstem dysfunction from hyperglycemia",
+                    "correct": false
+                },
+                {
+                    "text": "Hyperventilation syndrome - anxiety response causing respiratory alkalosis",
+                    "correct": false
+                },
+                {
+                    "text": "Agonal respirations - impending cardiopulmonary arrest",
+                    "correct": false
+                },
+                {
+                    "text": "Biot respirations - increased intracranial pressure from cerebral edema",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Kussmaul respirations (deep, rapid breathing) represent respiratory compensation for metabolic acidosis. The body hyperventilates to lower pCO2 and raise pH. The fruity odor is acetone on the breath.",
+                "incorrect": "This deep, rapid pattern is Kussmaul respirations - compensation for metabolic acidosis. The lungs blow off CO2 to raise pH. Cheyne-Stokes is crescendo-decrescendo. Biot is irregular with pauses."
+            },
+            "teaching": "<h4>\ud83d\udcda Classic DKA Presentation</h4>\n                    <ul>\n                        <li><strong>Kussmaul respirations:</strong> Deep, rapid breathing (CO2 compensation)</li>\n                        <li><strong>Fruity breath:</strong> Acetone odor</li>\n                        <li><strong>Dehydration:</strong> Osmotic diuresis</li>\n                        <li><strong>Abdominal pain:</strong> Common, can mimic acute abdomen</li>\n                    </ul>",
+            "points": 10
         }
-        
-        document.getElementById('rdxDebriefContent').innerHTML = 
-            '<div style="text-align:center;margin-bottom:24px;">' +
-            '<div style="font-size:4rem;margin-bottom:16px;">' + gradeEmoji + '</div>' +
-            '<h2 style="font-size:1.75rem;font-weight:700;color:#1f2937;">Case Complete!</h2>' +
-            '<div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-top:16px;">' +
-            '<span style="font-size:2.5rem;font-weight:700;color:' + gradeColor + ';">' + percentage + '%</span>' +
-            '<span style="font-size:1.25rem;color:#6b7280;">' + grade + '</span>' +
-            '</div></div>' +
-            '<h3 style="font-weight:700;color:#374151;margin-bottom:16px;">📊 Your Decision Path</h3>' +
-            '<div style="margin-bottom:24px;">' + pathHTML + '</div>' +
-            '<div style="background:#f9fafb;border-radius:12px;padding:16px;margin-bottom:24px;">' +
-            '<h4 style="font-weight:600;color:#374151;margin-bottom:8px;">🎯 Performance Legend</h4>' +
-            '<div style="display:flex;flex-wrap:wrap;gap:16px;font-size:0.9rem;">' +
-            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#22c55e;border-radius:2px;"></span> Optimal</span>' +
-            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#eab308;border-radius:2px;"></span> Suboptimal</span>' +
-            '<span style="display:flex;align-items:center;gap:6px;"><span style="width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> Incorrect</span>' +
-            '</div></div>' +
-            '<div style="display:flex;gap:12px;">' +
-            '<button onclick="document.getElementById(\'rdxDebriefOverlay\').style.display=\'none\'" style="flex:1;padding:14px;background:#f3f4f6;border:none;border-radius:12px;font-weight:600;cursor:pointer;">Close</button>' +
-            '<button onclick="location.reload()" style="flex:1;padding:14px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:white;border:none;border-radius:12px;font-weight:600;cursor:pointer;">🔄 Try Again</button>' +
-            '</div>';
-        
-        document.getElementById('rdxDebriefOverlay').style.display = 'flex';
-    };
-    
-    // Auto-inject hint examples into existing content
-    window.rdxInit = function() {
-        // Could add dynamic hint injection here based on difficulty
-        console.log('ReasonDx Enhanced Features loaded for: Dka Expanded Adventure');
-    };
-    
-    // Initialize on load
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', window.rdxInit);
-    } else {
-        window.rdxInit();
+    },
+    {
+        "title": "Laboratory Evaluation",
+        "content": "<div class=\"narrative\">\n                <p>Initial labs: Glucose 486, pH 7.18, pCO2 22, HCO3 8, Na 128, K 5.8, Cl 98, Anion gap 22, Ketones positive</p>\n            </div>",
+        "hint_beginner": "What causes a high anion gap acidosis in DKA?",
+        "hint_advanced": "Her serum K is 5.8 - is total body potassium high, low, or normal?",
+        "question": {
+            "prompt": "The serum K is 5.8. What does this indicate about total body potassium?",
+            "options": [
+                {
+                    "text": "Total body K is DEPLETED despite elevated serum K; acidosis shifts K extracellularly",
+                    "correct": true
+                },
+                {
+                    "text": "Total body K is ELEVATED; hyperkalemia is expected in DKA",
+                    "correct": false
+                },
+                {
+                    "text": "Total body K is NORMAL; serum level accurately reflects stores",
+                    "correct": false
+                },
+                {
+                    "text": "Cannot determine without 24-hour urine K collection",
+                    "correct": false
+                },
+                {
+                    "text": "Total body K is only depleted if serum K is below normal",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Despite high serum K, total body K is severely DEPLETED. Acidosis and insulin deficiency shift K from ICF to ECF. Osmotic diuresis causes massive urinary K losses. When you give insulin, K shifts back into cells causing dangerous hypokalemia.",
+                "incorrect": "Critical concept: serum K does NOT reflect total body stores in DKA. The elevated serum K is due to transcellular shifts, but total body K is depleted from urinary losses."
+            },
+            "teaching": "<h4>\ud83d\udcda Potassium in DKA</h4>\n                    <p><strong>Why serum K appears high despite total body depletion:</strong></p>\n                    <ul>\n                        <li>Acidosis: H+ enters cells, K+ exits</li>\n                        <li>Insulin deficiency: Insulin normally drives K into cells</li>\n                        <li>Hyperosmolality: Water shifts pull K with it</li>\n                    </ul>\n                    <p><strong>Clinical rule:</strong> If initial K less than 3.3, hold insulin until K is repleted!</p>",
+            "points": 15
+        }
+    },
+    {
+        "title": "Fluid Selection",
+        "content": "<div class=\"narrative\">\n                <p>Ready to begin treatment. Patient weighs 65 kg with estimated 6-8 L fluid deficit.</p>\n            </div>",
+        "hint_beginner": "What is the first priority - insulin or fluids? What fluid initially?",
+        "hint_advanced": "When do you switch from NS to half-normal saline?",
+        "question": {
+            "prompt": "What is the most appropriate initial fluid?",
+            "options": [
+                {
+                    "text": "Normal saline 1-2 L bolus in first hour, then 250-500 mL/hour",
+                    "correct": true
+                },
+                {
+                    "text": "Half-normal saline 500 mL/hour to avoid hypernatremia",
+                    "correct": false
+                },
+                {
+                    "text": "D5W 250 mL/hour since glucose will drop rapidly",
+                    "correct": false
+                },
+                {
+                    "text": "Lactated Ringers as more physiologic than NS",
+                    "correct": false
+                },
+                {
+                    "text": "No fluids initially - start insulin first",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Fluid resuscitation is FIRST priority - even before insulin. Start NS 1-2 L in first hour. Continue 250-500 mL/hr. Switch to 0.45% NS when corrected Na is normal/high.",
+                "incorrect": "Normal saline first! Initial priority is volume. NS is isotonic and safe. Switch to 0.45% NS later based on sodium. Never D5W initially."
+            },
+            "teaching": "<h4>\ud83d\udcda DKA Fluid Management</h4>\n                    <ul>\n                        <li><strong>First 1-2 hours:</strong> NS 1-2 L bolus</li>\n                        <li><strong>Then:</strong> NS 250-500 mL/hr</li>\n                        <li><strong>Switch to 0.45% NS</strong> when corrected Na normal/high</li>\n                        <li><strong>Add D5</strong> when glucose reaches 200-250</li>\n                    </ul>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Potassium Management",
+        "content": "<div class=\"narrative\">\n                <p>First liter NS infusing. K level: 5.8 mEq/L. Ready to start insulin.</p>\n            </div>",
+        "hint_beginner": "At what K level should you hold insulin?",
+        "hint_advanced": "How many mEq K might this patient need over 24 hours?",
+        "question": {
+            "prompt": "With K 5.8, what is appropriate management?",
+            "options": [
+                {
+                    "text": "Start insulin now; add K replacement when K falls below 5.0-5.2",
+                    "correct": true
+                },
+                {
+                    "text": "Hold insulin until K below 5.0 to avoid hyperkalemia",
+                    "correct": false
+                },
+                {
+                    "text": "Give calcium gluconate prophylactically",
+                    "correct": false
+                },
+                {
+                    "text": "Start K replacement immediately despite high serum K",
+                    "correct": false
+                },
+                {
+                    "text": "No K management until K falls below 3.5",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "With K 5.8, start insulin (K will drop rapidly). Add K to fluids when K falls below 5.0-5.2. If initial K were less than 3.3, HOLD insulin until K repleted. Monitor K every 2 hours.",
+                "incorrect": "Key thresholds: K less than 3.3 = hold insulin. K 3.3-5.2 = insulin + K together. K greater than 5.2 = insulin, hold K initially."
+            },
+            "teaching": "<h4>\ud83d\udcda K Management in DKA</h4>\n                    <table>\n                        <tr><th>Initial K</th><th>Action</th></tr>\n                        <tr><td>Less than 3.3</td><td>HOLD insulin, give K until greater than 3.3</td></tr>\n                        <tr><td>3.3-5.2</td><td>Start insulin + add K to fluids</td></tr>\n                        <tr><td>Greater than 5.2</td><td>Start insulin, hold K initially</td></tr>\n                    </table>",
+            "points": 15
+        }
+    },
+    {
+        "title": "Insulin Therapy",
+        "content": "<div class=\"narrative\">\n                <p>Volume resuscitation underway. K being monitored. Time for insulin.</p>\n            </div>",
+        "hint_beginner": "What is the standard insulin regimen for DKA?",
+        "hint_advanced": "What is the target glucose decline per hour?",
+        "question": {
+            "prompt": "What is the most appropriate insulin regimen?",
+            "options": [
+                {
+                    "text": "Regular insulin IV 0.1 units/kg/hour; target glucose decrease 50-75 mg/dL per hour",
+                    "correct": true
+                },
+                {
+                    "text": "Insulin lispro 10 units SQ now, then 5 units every hour",
+                    "correct": false
+                },
+                {
+                    "text": "Regular insulin 0.3 units/kg IV bolus then high-dose infusion",
+                    "correct": false
+                },
+                {
+                    "text": "NPH insulin 20 units SQ for sustained control",
+                    "correct": false
+                },
+                {
+                    "text": "Hold insulin until glucose falls below 300 with fluids alone",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Standard: regular insulin IV 0.1 units/kg/hour. Can give 0.1 units/kg bolus first. Target glucose decrease 50-75 mg/dL per hour. Do not stop insulin until anion gap closes.",
+                "incorrect": "IV regular insulin infusion is standard. SQ acceptable for mild DKA only. Never high-dose insulin (hypokalemia risk). Insulin essential - fluids alone wont clear ketones."
+            },
+            "teaching": "<h4>\ud83d\udcda Insulin in DKA</h4>\n                    <ul>\n                        <li>Regular insulin 0.1 units/kg/hr IV</li>\n                        <li>Target: glucose drop 50-75 mg/dL per hour</li>\n                        <li>When glucose 200-250: add D5 to fluids, reduce insulin</li>\n                        <li>Continue until anion gap closes</li>\n                    </ul>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Bicarbonate Decision",
+        "content": "<div class=\"narrative\">\n                <p>Medical student notes pH 7.18 and asks about sodium bicarbonate.</p>\n            </div>",
+        "hint_beginner": "Is bicarbonate routinely recommended in DKA?",
+        "hint_advanced": "What are the potential harms of bicarbonate therapy?",
+        "question": {
+            "prompt": "Should you give sodium bicarbonate?",
+            "options": [
+                {
+                    "text": "No - bicarbonate not routinely recommended; consider only if pH less than 6.9",
+                    "correct": true
+                },
+                {
+                    "text": "Yes - pH less than 7.2 requires bicarbonate to prevent arrhythmias",
+                    "correct": false
+                },
+                {
+                    "text": "Yes - give 1-2 amps bicarbonate to all DKA patients",
+                    "correct": false
+                },
+                {
+                    "text": "No - bicarbonate contraindicated because it worsens hyperkalemia",
+                    "correct": false
+                },
+                {
+                    "text": "Yes - as isotonic bicarbonate solution over 2 hours",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Bicarbonate NOT routinely recommended. Potential harms: paradoxical CNS acidosis, hypokalemia, delayed ketone clearance. Consider only if pH less than 6.9-7.0 with hemodynamic compromise.",
+                "incorrect": "Bicarbonate not indicated for pH greater than 6.9-7.0. Harms: paradoxical CNS acidosis, worsening hypokalemia, impaired O2 delivery. Acidosis corrects with insulin and fluids."
+            },
+            "teaching": "<h4>\ud83d\udcda Bicarbonate in DKA</h4>\n                    <p><strong>Routine use: NOT RECOMMENDED</strong></p>\n                    <p>Consider only if pH less than 6.9 with hemodynamic instability</p>\n                    <p><strong>Potential harms:</strong></p>\n                    <ul>\n                        <li>Paradoxical CSF acidosis</li>\n                        <li>Hypokalemia</li>\n                        <li>Impaired tissue O2 delivery</li>\n                    </ul>",
+            "points": 10
+        }
+    },
+    {
+        "title": "Glucose at 200",
+        "content": "<div class=\"narrative\">\n                <p>Four hours later: Glucose 218, pH 7.28, HCO3 14, K 3.6, Anion gap 16. Glucose approaching 200.</p>\n            </div>",
+        "hint_beginner": "When glucose reaches 200, should you stop insulin?",
+        "hint_advanced": "What is the resolution criteria for DKA beyond just glucose normalization?",
+        "question": {
+            "prompt": "Glucose is approaching 200. Should you stop insulin?",
+            "options": [
+                {
+                    "text": "No - add D5 to fluids and reduce insulin rate, but continue until anion gap closes",
+                    "correct": true
+                },
+                {
+                    "text": "Yes - stop insulin when glucose below 250 to prevent hypoglycemia",
+                    "correct": false
+                },
+                {
+                    "text": "Yes - glucose less than 200 with improving pH means DKA is resolved",
+                    "correct": false
+                },
+                {
+                    "text": "No - maintain same insulin rate until pH greater than 7.35",
+                    "correct": false
+                },
+                {
+                    "text": "Yes - transition to subcutaneous insulin now that glucose is controlled",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Do NOT stop insulin when glucose reaches 200. Add dextrose to fluids and reduce insulin rate, but CONTINUE until anion gap closes. DKA resolution requires: glucose less than 200, anion gap less than 12, HCO3 greater than 15, pH greater than 7.3.",
+                "incorrect": "Critical error to stop insulin based on glucose alone! Ketoacidosis persists even after glucose normalizes. Continue insulin (with D5 in fluids) until anion gap closes. The gap is still 16 - she still has DKA."
+            },
+            "teaching": "<h4>\ud83d\udcda DKA Resolution Criteria</h4>\n                    <p><strong>ALL of the following must be met:</strong></p>\n                    <ul>\n                        <li>Glucose less than 200 mg/dL</li>\n                        <li>Anion gap less than 12 (or normal for lab)</li>\n                        <li>Serum HCO3 greater than or equal to 15</li>\n                        <li>pH greater than 7.3</li>\n                    </ul>\n                    <p><strong>Key point:</strong> Continue IV insulin until ALL criteria met, then overlap with SQ insulin by 1-2 hours before stopping IV.</p>",
+            "points": 15
+        }
+    },
+    {
+        "title": "Precipitant Investigation",
+        "content": "<div class=\"narrative\">\n                <p>DKA is resolving. You investigate the precipitant beyond medication non-compliance.</p>\n            </div>",
+        "hint_beginner": "What are common DKA precipitants beyond insulin omission?",
+        "hint_advanced": "Why is infection sometimes masked in DKA presentation?",
+        "question": {
+            "prompt": "What is the most common precipitant of DKA that should always be evaluated?",
+            "options": [
+                {
+                    "text": "Infection - most common precipitant; fever may be masked by dehydration and acidosis",
+                    "correct": true
+                },
+                {
+                    "text": "Myocardial infarction - should get troponin on all DKA patients",
+                    "correct": false
+                },
+                {
+                    "text": "Pancreatitis - abdominal pain in DKA always indicates pancreatitis",
+                    "correct": false
+                },
+                {
+                    "text": "Medication non-compliance is always the sole cause if patient admits to missing insulin",
+                    "correct": false
+                },
+                {
+                    "text": "New-onset diabetes - DKA only occurs in previously undiagnosed patients",
+                    "correct": false
+                }
+            ],
+            "explanation": {
+                "correct": "Infection is the most common DKA precipitant (30-50%). Always look for UTI, pneumonia, skin infection. Fever may be masked by peripheral vasodilation and dehydration in DKA. Other precipitants: MI, CVA, pancreatitis, drugs (steroids, cocaine), pregnancy.",
+                "incorrect": "Infection is the most common precipitant. Even if patient admits to missing insulin, always look for underlying infection. Temperature may be misleadingly normal in DKA due to peripheral vasodilation."
+            },
+            "teaching": "<h4>\ud83d\udcda DKA Precipitants</h4>\n                    <p><strong>The 5 Is:</strong></p>\n                    <ul>\n                        <li><strong>Infection</strong> (most common - 30-50%)</li>\n                        <li><strong>Insulin omission/insufficiency</strong></li>\n                        <li><strong>Infarction</strong> (MI, CVA)</li>\n                        <li><strong>Intoxication</strong> (cocaine, alcohol)</li>\n                        <li><strong>Iatrogenic</strong> (steroids, SGLT2 inhibitors)</li>\n                    </ul>\n                    <p><em>Also: pregnancy, pancreatitis, new-onset T1DM</em></p>",
+            "points": 10
+        }
     }
-})();
+];
+
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
+function setDifficulty(level, btn) {
+    difficulty = level;
+    document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    document.querySelectorAll('.hint-beginner').forEach(el => {
+        el.style.display = level === 'beginner' ? 'block' : 'none';
+    });
+    document.querySelectorAll('.hint-advanced').forEach(el => {
+        el.style.display = level === 'advanced' ? 'block' : 'none';
+    });
+}
+
+function renderStage(index) {
+    const stage = stages[index];
+    const container = document.getElementById('scene-container');
+    const letters = ['A', 'B', 'C', 'D', 'E'];
+    const shuffledOptions = shuffleArray(stage.question.options);
+    
+    const optionsHTML = shuffledOptions.map((opt, i) => `
+        <div class="mcq-option" data-correct="${opt.correct}" data-text="${opt.text.replace(/"/g, '&quot;')}" onclick="selectOption(this)">
+            <span class="option-letter">${letters[i]}</span>
+            <span class="option-text">${opt.text}</span>
+        </div>
+    `).join('');
+    
+    container.innerHTML = `
+        <div class="scene">
+            <div class="scene-header">
+                <div class="scene-phase">Stage ${index + 1} of ${stages.length}</div>
+                <div class="scene-title">${stage.title}</div>
+            </div>
+            <div class="scene-body">
+                ${stage.content}
+                
+                <div class="hint-beginner">🌱 <strong>Hint:</strong> ${stage.hint_beginner}</div>
+                <div class="hint-advanced">🎯 <strong>Challenge:</strong> ${stage.hint_advanced}</div>
+                
+                <div class="question-box">
+                    <div class="question-prompt">${stage.question.prompt}</div>
+                    <div class="mcq-options" id="options-container">${optionsHTML}</div>
+                    
+                    <div class="feedback correct-feedback" id="feedback-correct">
+                        <div class="feedback-title">✓ Correct!</div>
+                        <div class="feedback-explanation">${stage.question.explanation.correct}</div>
+                    </div>
+                    <div class="feedback incorrect-feedback" id="feedback-incorrect">
+                        <div class="feedback-title">✗ Not quite</div>
+                        <div class="feedback-explanation">${stage.question.explanation.incorrect}</div>
+                    </div>
+                    
+                    <div class="teaching-point" id="teaching">
+                        ${stage.question.teaching}
+                    </div>
+                    
+                    <button class="btn" id="nextBtn" onclick="nextStage()">Continue →</button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Apply difficulty
+    document.querySelectorAll('.hint-beginner').forEach(el => {
+        el.style.display = difficulty === 'beginner' ? 'block' : 'none';
+    });
+    document.querySelectorAll('.hint-advanced').forEach(el => {
+        el.style.display = difficulty === 'advanced' ? 'block' : 'none';
+    });
+    
+    document.getElementById('progress').style.width = ((index + 1) / stages.length * 100) + '%';
+}
+
+function selectOption(element) {
+    if (answeredQuestions.has(currentStage)) return;
+    answeredQuestions.add(currentStage);
+    
+    const stage = stages[currentStage];
+    const isCorrect = element.dataset.correct === 'true';
+    const selectedText = element.dataset.text;
+    
+    // Track decision
+    decisionPath.push({
+        stage: currentStage + 1,
+        title: stage.title,
+        correct: isCorrect,
+        selected: selectedText,
+        points: isCorrect ? stage.question.points : 0,
+        maxPoints: stage.question.points
+    });
+    
+    // Mark options
+    document.querySelectorAll('.mcq-option').forEach(opt => {
+        opt.classList.add('disabled');
+        if (opt.dataset.correct === 'true') opt.classList.add('correct');
+    });
+    
+    if (!isCorrect) element.classList.add('incorrect');
+    
+    // Update score
+    if (isCorrect) {
+        score += stage.question.points;
+        document.getElementById('feedback-correct').classList.add('show');
+    } else {
+        document.getElementById('feedback-incorrect').classList.add('show');
+    }
+    
+    maxScore += stage.question.points;
+    document.getElementById('score').textContent = score;
+    document.getElementById('maxScore').textContent = maxScore;
+    
+    document.getElementById('teaching').classList.add('show');
+    document.getElementById('nextBtn').classList.add('show');
+}
+
+function nextStage() {
+    currentStage++;
+    if (currentStage < stages.length) {
+        renderStage(currentStage);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+        showCompletion();
+    }
+}
+
+function showCompletion() {
+    const percentage = Math.round((score / maxScore) * 100);
+    let grade, color, emoji;
+    if (percentage >= 90) { grade = 'Outstanding!'; color = '#22c55e'; emoji = '🏆'; }
+    else if (percentage >= 80) { grade = 'Excellent Work!'; color = '#3b82f6'; emoji = '⭐'; }
+    else if (percentage >= 70) { grade = 'Good Progress!'; color = '#eab308'; emoji = '👍'; }
+    else { grade = 'Keep Practicing!'; color = '#f87171'; emoji = '📚'; }
+    
+    const pathHTML = decisionPath.map(d => {
+        const icon = d.correct ? '✓' : '✗';
+        const cls = d.correct ? 'color: #4ade80' : 'color: #f87171';
+        return `<div style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between;">
+            <span><span style="${cls}; font-weight: 700;">${icon}</span> Stage ${d.stage}: ${d.title}</span>
+            <span style="color: #94a3b8;">${d.points}/${d.maxPoints}</span>
+        </div>`;
+    }).join('');
+    
+    document.getElementById('scene-container').innerHTML = `
+        <div class="scene completion">
+            <div style="font-size: 4rem; margin-bottom: 16px;">${emoji}</div>
+            <div class="completion-grade" style="color: ${color};">${grade}</div>
+            <div class="completion-percent" style="color: ${color};">${percentage}%</div>
+            <div class="completion-score">Final Score: ${score} / ${maxScore}</div>
+            <div class="completion-message">You've completed this Socratic Case</div>
+            
+            <div class="completion-breakdown">
+                <h4>📋 Your Decision Path</h4>
+                ${pathHTML}
+            </div>
+            
+            <div class="crossplatform">
+                <h4>🎯 Continue Learning</h4>
+                <div class="crossplatform-links">
+                    <a href="../mechanism/dka-module.html" class="crossplatform-link">📚 DKA Pathophysiology</a>
+<a href="hhs-socratic-adventure.html" class="crossplatform-link">🎯 HHS Comparison</a>
+
+                </div>
+            </div>
+            
+            <button class="btn show" onclick="location.reload()" style="margin-top: 24px;">Try Again</button>
+        </div>
+    `;
+}
+
+// Initialize
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => renderStage(0));
+} else {
+    renderStage(0);
+}
+
+
+// Visual Debrief Functions
+function showDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (!overlay) return;
+    
+    const percentage = Math.round((score / maxScore) * 100) || 0;
+    let grade, gradeEmoji, gradeColor;
+    
+    if (percentage >= 90) { grade = 'Outstanding!'; gradeEmoji = '🏆'; gradeColor = '#22c55e'; }
+    else if (percentage >= 80) { grade = 'Excellent!'; gradeEmoji = '🌟'; gradeColor = '#3b82f6'; }
+    else if (percentage >= 70) { grade = 'Good Work!'; gradeEmoji = '👍'; gradeColor = '#f59e0b'; }
+    else { grade = 'Keep Learning!'; gradeEmoji = '📚'; gradeColor = '#ef4444'; }
+    
+    let pathHTML = '';
+    if (typeof decisionPath !== 'undefined' && decisionPath.length > 0) {
+        pathHTML = decisionPath.map(d => {
+            const pathClass = d.isOptimal ? 'path-optimal' : (d.points >= (d.maxPoints || 10) * 0.5 ? 'path-suboptimal' : 'path-incorrect');
+            const icon = d.isOptimal ? '✓' : (d.points >= (d.maxPoints || 10) * 0.5 ? '~' : '✗');
+            return `
+                <div class="path-item ${pathClass}">
+                    <div style="display:flex;justify-content:space-between;align-items:start;">
+                        <div>
+                            <div class="path-stage">${icon} Stage ${d.stage}: ${d.title}</div>
+                            <div class="path-choice">Your choice: <strong>${d.choice || d.selectedText || 'N/A'}</strong></div>
+                            ${!d.isOptimal && d.optimalChoice ? `<div class="path-better">💡 Better choice: ${d.optimalChoice}</div>` : ''}
+                        </div>
+                        <div class="path-points" style="color:${d.isOptimal ? '#22c55e' : '#f59e0b'}">${d.points}/${d.maxPoints || 10}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    
+    document.getElementById('debriefContent').innerHTML = `
+        <div class="debrief-header">
+            <div class="debrief-grade">${gradeEmoji}</div>
+            <div class="debrief-score" style="color:${gradeColor}">${percentage}%</div>
+            <div class="debrief-label">${grade}</div>
+        </div>
+        <div class="decision-path">
+            <h3>📊 Your Decision Path</h3>
+            ${pathHTML || '<p style="color:#6b7280;text-align:center;">Complete the case to see your decisions!</p>'}
+        </div>
+        <div class="debrief-summary">
+            <h4>🎯 Performance Legend</h4>
+            <ul>
+                <li><span style="color:#22c55e;font-weight:600;">✓ Green</span> = Optimal choice (full points)</li>
+                <li><span style="color:#f59e0b;font-weight:600;">~ Yellow</span> = Acceptable but not optimal (partial points)</li>
+                <li><span style="color:#ef4444;font-weight:600;">✗ Red</span> = Incorrect (minimal/no points)</li>
+            </ul>
+        </div>
+        <button class="debrief-btn" onclick="location.reload()">🔄 Try Again</button>
+    `;
+    
+    overlay.classList.add('show');
+}
+
+function closeDebrief() {
+    const overlay = document.getElementById('debriefOverlay');
+    if (overlay) overlay.classList.remove('show');
+}
+
+function toggleReferences() {
+    const content = document.getElementById('referencesContent');
+    const toggle = document.querySelector('.refs-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'flex';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
 </script>
-<!-- ==================== END REASONDX ENHANCED FEATURES ==================== -->
+
+<!-- Visual Debrief Overlay -->
+<div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+    <div class="debrief-content" id="debriefContent"></div>
+</div>
 
 </body>
 </html>

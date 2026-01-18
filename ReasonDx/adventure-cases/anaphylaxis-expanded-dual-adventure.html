@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anaphylaxis | Dual-Mode Clinical Case</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; min-height: 100vh; color: #e2e8f0; line-height: 1.6; padding: 20px; transition: background 0.3s; }
+        body.adult { background: linear-gradient(135deg, #dc2626 0%, #1e3a8a 100%); }
+        body.peds { background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%); }
+        .container { max-width: 900px; margin: 0 auto; }
+        .mode-toggle { display: flex; justify-content: center; margin-bottom: 20px; background: rgba(0,0,0,0.3); border-radius: 12px; padding: 4px; }
+        .mode-btn { flex: 1; padding: 12px 24px; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; transition: all 0.3s; background: transparent; color: #e2e8f0; font-size: 1rem; }
+        .mode-btn:hover { background: rgba(255,255,255,0.1); }
+        .mode-btn.active { background: rgba(255,255,255,0.25); }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-radius: 16px; margin-bottom: 20px; background: rgba(0,0,0,0.2); }
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-bottom: 20px; overflow: hidden; }
+        .progress-fill { height: 100%; border-radius: 3px; transition: width 0.3s; background: linear-gradient(90deg, #3b82f6, #8b5cf6); }
+        .scene { background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 20px; backdrop-filter: blur(10px); }
+        .scene-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .scene-phase { font-size: 0.8rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; }
+        .scene-title { font-size: 1.5rem; font-weight: 700; margin-top: 4px; }
+        .narrative { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px 20px; margin: 16px 0; border-left: 4px solid #3b82f6; line-height: 1.7; }
+        .highlight { color: #60a5fa; font-weight: 600; }
+        .critical { color: #f87171; font-weight: 600; }
+        .lab-value { color: #fbbf24; font-weight: 600; }
+        .question-box { background: linear-gradient(135deg, rgba(59,130,246,0.15), rgba(139,92,246,0.15)); border: 1px solid rgba(59,130,246,0.3); border-radius: 12px; padding: 20px; margin: 20px 0; }
+        .question-prompt { font-size: 1.1rem; font-weight: 600; margin-bottom: 16px; }
+        .mcq-options { display: flex; flex-direction: column; gap: 10px; }
+        .mcq-option { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all 0.2s; display: flex; align-items: flex-start; gap: 12px; }
+        .mcq-option:hover:not(.disabled) { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.3); }
+        .mcq-option.correct { background: rgba(34,197,94,0.2); border-color: #22c55a; }
+        .mcq-option.incorrect { background: rgba(239,68,68,0.2); border-color: #ef4444; }
+        .mcq-option.disabled { opacity: 0.6; cursor: not-allowed; }
+        .option-letter { width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; }
+        .feedback { display: none; padding: 16px; border-radius: 10px; margin-top: 16px; }
+        .feedback.show { display: block; }
+        .correct-feedback { background: rgba(34,197,94,0.2); border: 1px solid #22c55a; }
+        .incorrect-feedback { background: rgba(239,68,68,0.2); border: 1px solid #ef4444; }
+        .teaching-point { background: rgba(251,191,36,0.15); border: 1px solid rgba(251,191,36,0.4); border-radius: 12px; padding: 20px; margin-top: 16px; display: none; }
+        .teaching-point.show { display: block; }
+        .teaching-point h4 { color: #fbbf24; margin-bottom: 12px; }
+        .teaching-point ul, .teaching-point ol { margin-left: 20px; margin-top: 8px; }
+        .teaching-point li { margin-bottom: 6px; }
+        .btn { display: none; padding: 16px 28px; border: none; border-radius: 12px; color: white; font-weight: 600; cursor: pointer; width: 100%; margin-top: 16px; font-size: 1rem; background: linear-gradient(135deg, #3b82f6, #8b5cf6); }
+        .btn.show { display: block; }
+        .btn:hover { opacity: 0.9; }
+        .score-tracker { position: fixed; top: 20px; right: 20px; background: rgba(0,0,0,0.4); backdrop-filter: blur(10px); padding: 12px 20px; border-radius: 12px; text-align: center; z-index: 100; }
+        .score-value { font-size: 1.5rem; font-weight: 700; }
+        .debrief-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.85); z-index: 1000; display: none; overflow-y: auto; padding: 20px; }
+        .debrief-overlay.show { display: flex; justify-content: center; align-items: flex-start; }
+        .debrief-content { background: white; border-radius: 16px; max-width: 800px; width: 100%; padding: 32px; margin: 40px auto; color: #1f2937; }
+        .path-item { padding: 12px 16px; border-radius: 8px; margin-bottom: 8px; }
+        .path-optimal { background: #dcfce7; border-left: 4px solid #22c55e; }
+        .path-suboptimal { background: #fef3c7; border-left: 4px solid #f59e0b; }
+        .path-incorrect { background: #fee2e2; border-left: 4px solid #ef4444; }
+        .refs { margin-top: 24px; padding: 16px; background: rgba(255,255,255,0.05); border-radius: 12px; }
+        .refs h4 { color: #94a3b8; margin-bottom: 12px; font-size: 0.9rem; }
+        .refs a { color: #60a5fa; text-decoration: none; display: block; margin-bottom: 8px; }
+        .refs a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body class="adult">
+    <div class="score-tracker">
+        <div style="font-size:0.8rem;color:#94a3b8">Score</div>
+        <div><span class="score-value" id="score">0</span> / <span id="maxScore">60</span></div>
+    </div>
+    <div class="container">
+        <div class="mode-toggle">
+            <button class="mode-btn active" onclick="setMode('adult')">🏥 Adult</button>
+            <button class="mode-btn" onclick="setMode('peds')">👶 Pediatric</button>
+        </div>
+        <div class="header">
+            <div style="font-size:1.3rem;font-weight:700" id="caseTitle">🏥 Anaphylaxis</div>
+            <div id="stageIndicator">Stage 1 of 6</div>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="progress" style="width:0%"></div></div>
+        <div id="scene-container"></div>
+    </div>
+    <div class="debrief-overlay" id="debriefOverlay" onclick="if(event.target===this)closeDebrief()">
+        <div class="debrief-content" id="debriefContent"></div>
+    </div>
+    <script>
+    let currentStage = 0;
+    let currentMode = 'adult';
+    let score = 0;
+    let decisionPath = [];
+    const maxScore = 60;
+    
+    const stages = {
+        adult: [{
+            title: "Recognition",
+            narrative: `A <span class="highlight">35-year-old woman</span> develops <span class="critical">hives, lip swelling, and difficulty breathing</span> 10 minutes after eating shrimp.<br><br><strong>Vitals:</strong> HR 120, BP 88/52, RR 28, SpO2 91%<br><strong>Exam:</strong> Diffuse urticaria, angioedema of lips, audible wheezing`,
+            question: "What is the FIRST treatment priority?",
+            options: [{text:"Intramuscular epinephrine 0.3-0.5 mg in the anterolateral thigh",correct:true,points:10},{text:"IV diphenhydramine",correct:false,points:2},{text:"IV steroids",correct:false,points:2},{text:"Nebulized albuterol first",correct:false,points:3}],
+            teaching: `<h4>Anaphylaxis = EPINEPHRINE FIRST</h4><ul><li><strong>IM Epinephrine 0.3-0.5 mg</strong> (1:1000) in anterolateral thigh</li><li>Can repeat every 5-15 minutes</li><li>Antihistamines and steroids are ADJUNCTS, not first-line</li><li>No contraindications to epinephrine in anaphylaxis</li></ul>`
+        },{
+            title: "Adjunctive Treatments",
+            narrative: `Epinephrine given. Symptoms improving but still has hives and wheezing.`,
+            question: "What adjunctive treatments should be given?",
+            options: [{text:"IV fluids + H1 blocker + H2 blocker + steroids + albuterol for wheezing",correct:true,points:10},{text:"H1 blocker alone is sufficient",correct:false,points:3},{text:"Steroids will work immediately",correct:false,points:2},{text:"No additional treatment needed",correct:false,points:1}],
+            teaching: `<h4>Anaphylaxis Adjunctive Therapy</h4><ul><li><strong>IV fluids:</strong> 1-2L crystalloid bolus for hypotension</li><li><strong>H1 blocker:</strong> Diphenhydramine 25-50 mg IV</li><li><strong>H2 blocker:</strong> Famotidine 20 mg IV</li><li><strong>Steroids:</strong> Methylprednisolone 125 mg IV (prevents biphasic)</li><li><strong>Albuterol:</strong> For bronchospasm</li></ul>`
+        },{
+            title: "Refractory Anaphylaxis",
+            narrative: `Despite 2 doses of IM epinephrine, patient remains hypotensive (BP 78/44).`,
+            question: "What is the next step for refractory anaphylaxis?",
+            options: [{text:"IV epinephrine infusion (1-4 mcg/min) + aggressive fluid resuscitation",correct:true,points:10},{text:"More IM epinephrine only",correct:false,points:3},{text:"Higher dose steroids",correct:false,points:2},{text:"Just continue IV fluids",correct:false,points:4}],
+            teaching: `<h4>Refractory Anaphylaxis</h4><ul><li><strong>IV epinephrine infusion</strong> - start 1-4 mcg/min, titrate to effect</li><li>May need up to 10-15 mcg/min</li><li>Consider glucagon if on beta-blockers</li><li>Aggressive fluid resuscitation (2-4L may be needed)</li></ul>`
+        },{
+            title: "Observation Period",
+            narrative: `Patient stabilizes after treatment.`,
+            question: "How long should anaphylaxis patients be observed?",
+            options: [{text:"Minimum 4-6 hours; longer if severe or required multiple epinephrine doses",correct:true,points:10},{text:"1 hour is sufficient",correct:false,points:2},{text:"24 hours for everyone",correct:false,points:4},{text:"Can discharge immediately after improvement",correct:false,points:0}],
+            teaching: `<h4>Observation Period</h4><ul><li><strong>Minimum 4-6 hours</strong> observation</li><li>Biphasic reactions occur in 1-20% of cases</li><li>Longer observation if: severe initial reaction, multiple epi doses, history of biphasic</li><li>Some protocols suggest 24 hours for severe cases</li></ul>`
+        },{
+            title: "Discharge Planning",
+            narrative: `Patient ready for discharge after 6 hours of observation.`,
+            question: "What must be prescribed at discharge?",
+            options: [{text:"Epinephrine auto-injector (2 doses) + allergy referral + anaphylaxis action plan",correct:true,points:10},{text:"Antihistamines only",correct:false,points:2},{text:"Steroids only",correct:false,points:2},{text:"No prescriptions needed",correct:false,points:0}],
+            teaching: `<h4>Discharge Requirements</h4><ul><li><strong>Epinephrine auto-injectors</strong> - prescribe 2!</li><li>Written anaphylaxis action plan</li><li>Allergy/immunology referral</li><li>Consider short course of steroids and antihistamines</li><li>Medical alert bracelet</li></ul>`
+        },{
+            title: "Prevention & Education",
+            narrative: `Follow-up appointment scheduled.`,
+            question: "What is the role of allergen testing after anaphylaxis?",
+            options: [{text:"Confirm trigger, identify cross-reactive allergens, guide avoidance and immunotherapy",correct:true,points:10},{text:"Testing is not helpful",correct:false,points:0},{text:"Only needed if trigger unknown",correct:false,points:4},{text:"Wait 1 year before testing",correct:false,points:2}],
+            teaching: `<h4>Allergy Follow-up</h4><ul><li>Testing confirms trigger and identifies cross-reactivity</li><li>Wait 4-6 weeks after reaction for accurate skin testing</li><li>Component testing for risk stratification</li><li>Consider immunotherapy options (venom, some foods)</li></ul>`
+        }],
+        peds: [{
+            title: "Pediatric Anaphylaxis Recognition",
+            narrative: `A <span class="highlight">4-year-old boy</span> develops <span class="critical">hives, facial swelling, and vomiting</span> after eating a peanut butter cookie.<br><br><strong>Vitals:</strong> HR 150, BP 70/40, RR 32<br><strong>Exam:</strong> Diffuse urticaria, periorbital edema, drooling<br><strong>Weight:</strong> 18 kg`,
+            question: "What is the correct epinephrine dose for this child?",
+            options: [{text:"0.01 mg/kg IM (max 0.3 mg) = 0.18 mg for this 18 kg child",correct:true,points:10},{text:"0.5 mg IM like adults",correct:false,points:2},{text:"0.01 mg/kg IV push",correct:false,points:3},{text:"Benadryl first, then epinephrine if no improvement",correct:false,points:0}],
+            teaching: `<h4>Pediatric Epinephrine Dosing</h4><ul><li><strong>0.01 mg/kg IM</strong> (1:1000 concentration)</li><li>Maximum 0.3 mg in children, 0.5 mg in adolescents/adults</li><li>EpiPen Jr (0.15 mg) for 15-30 kg</li><li>EpiPen (0.3 mg) for > 30 kg</li><li>Anterolateral thigh is preferred site</li></ul>`
+        },{
+            title: "Pediatric Adjunctive Treatment",
+            narrative: `Epinephrine given. Child still has some hives but breathing improved.`,
+            question: "What is the appropriate diphenhydramine dose for this 18 kg child?",
+            options: [{text:"1-1.25 mg/kg IV = approximately 20 mg",correct:true,points:10},{text:"50 mg like adults",correct:false,points:2},{text:"5 mg total",correct:false,points:3},{text:"Diphenhydramine is contraindicated in children",correct:false,points:0}],
+            teaching: `<h4>Pediatric Adjunctive Dosing</h4><ul><li><strong>Diphenhydramine:</strong> 1-1.25 mg/kg IV/IM (max 50 mg)</li><li><strong>Methylprednisolone:</strong> 1-2 mg/kg IV (max 125 mg)</li><li><strong>Albuterol:</strong> 2.5-5 mg nebulized</li><li><strong>IV fluids:</strong> 20 mL/kg bolus for hypotension</li></ul>`
+        },{
+            title: "Pediatric Refractory Anaphylaxis",
+            narrative: `After 2 IM epinephrine doses and 40 mL/kg fluid, child remains hypotensive.`,
+            question: "What is the next step?",
+            options: [{text:"IV epinephrine infusion 0.1-1 mcg/kg/min",correct:true,points:10},{text:"Continue IM epinephrine only",correct:false,points:3},{text:"More steroids",correct:false,points:2},{text:"Stop fluids",correct:false,points:0}],
+            teaching: `<h4>Pediatric Refractory Anaphylaxis</h4><ul><li><strong>IV epinephrine infusion:</strong> 0.1-1 mcg/kg/min</li><li>Continue fluid resuscitation</li><li>Consider glucagon if on beta-blockers</li><li>ICU admission for monitoring</li></ul>`
+        },{
+            title: "Pediatric Observation",
+            narrative: `Child stabilizes after treatment.`,
+            question: "What is the recommended observation period for children after anaphylaxis?",
+            options: [{text:"4-6 hours minimum; admit if severe or multiple epinephrine doses",correct:true,points:10},{text:"1 hour then discharge",correct:false,points:1},{text:"No observation needed",correct:false,points:0},{text:"30 minutes is sufficient",correct:false,points:2}],
+            teaching: `<h4>Pediatric Observation</h4><ul><li>Same as adults: <strong>4-6 hours minimum</strong></li><li>Lower threshold to admit children</li><li>Ensure family has epinephrine auto-injector</li><li>Allergy referral essential</li></ul>`
+        },{
+            title: "Pediatric Discharge Planning",
+            narrative: `Child stable and ready for discharge.`,
+            question: "What is essential for pediatric discharge after anaphylaxis?",
+            options: [{text:"EpiPen Jr or EpiPen (weight-based) × 2, school/daycare action plan, allergy referral",correct:true,points:10},{text:"Benadryl prescription only",correct:false,points:2},{text:"Verbal instructions sufficient",correct:false,points:1},{text:"No specific requirements",correct:false,points:0}],
+            teaching: `<h4>Pediatric Discharge Essentials</h4><ul><li><strong>EpiPen Jr</strong> (0.15 mg) for 15-30 kg</li><li><strong>EpiPen</strong> (0.3 mg) for > 30 kg</li><li>School/daycare anaphylaxis action plan</li><li>Caregiver education on auto-injector use</li><li>Allergy referral for testing</li></ul>`
+        },{
+            title: "Pediatric Long-term Management",
+            narrative: `Planning for follow-up care.`,
+            question: "What long-term management should be arranged for this child?",
+            options: [{text:"Allergy testing, food challenge if appropriate, school 504 plan, epi training for caregivers",correct:true,points:10},{text:"Avoid allergen forever, no testing needed",correct:false,points:3},{text:"Reintroduce food at home to test tolerance",correct:false,points:0},{text:"No follow-up needed",correct:false,points:0}],
+            teaching: `<h4>Pediatric Long-term Care</h4><ul><li>Allergy testing 4-6 weeks after reaction</li><li>Supervised oral food challenge if outgrowth suspected</li><li>School 504 plan for accommodations</li><li>Epi training for all caregivers</li><li>Consider OIT (oral immunotherapy) for select patients</li></ul>`
+        }]
+    };
+    
+    function setMode(mode) {
+        currentMode = mode;
+        currentStage = 0;
+        score = 0;
+        decisionPath = [];
+        document.body.className = mode;
+        document.querySelectorAll('.mode-btn').forEach((b,i) => {
+            b.classList.toggle('active', (mode === 'adult' && i === 0) || (mode === 'peds' && i === 1));
+        });
+        document.getElementById('score').textContent = '0';
+        document.getElementById('caseTitle').innerHTML = mode === 'adult' ? '🏥 Anaphylaxis' : '👶 Anaphylaxis (Pediatric)';
+        renderStage();
+    }
+    
+    function renderStage() {
+        const stage = stages[currentMode][currentStage];
+        document.getElementById('stageIndicator').textContent = `Stage ${currentStage + 1} of ${stages[currentMode].length}`;
+        document.getElementById('progress').style.width = ((currentStage + 1) / stages[currentMode].length * 100) + '%';
+        
+        let optionsHtml = stage.options.map((opt, i) => `
+            <div class="mcq-option" onclick="checkAnswer(${i})" data-index="${i}">
+                <div class="option-letter">${String.fromCharCode(65 + i)}</div>
+                <div>${opt.text}</div>
+            </div>
+        `).join('');
+        
+        document.getElementById('scene-container').innerHTML = `
+            <div class="scene">
+                <div class="scene-header">
+                    <div class="scene-phase">Stage ${currentStage + 1} of ${stages[currentMode].length}</div>
+                    <div class="scene-title">${stage.title}</div>
+                </div>
+                <div class="narrative">${stage.narrative}</div>
+                <div class="question-box">
+                    <div class="question-prompt">${stage.question}</div>
+                    <div class="mcq-options">${optionsHtml}</div>
+                    <div class="feedback correct-feedback" id="fb-correct">✓ Correct!</div>
+                    <div class="feedback incorrect-feedback" id="fb-incorrect">✗ Not quite</div>
+                    <div class="teaching-point" id="teaching">${stage.teaching}</div>
+                    <button class="btn" id="next-btn" onclick="nextStage()">${currentStage < stages[currentMode].length - 1 ? 'Continue →' : 'View Results →'}</button>
+                </div>
+            </div>
+        `;
+    }
+    
+    function checkAnswer(index) {
+        const stage = stages[currentMode][currentStage];
+        const options = document.querySelectorAll('.mcq-option');
+        const selected = stage.options[index];
+        
+        options.forEach((opt, i) => {
+            opt.classList.add('disabled');
+            if (stage.options[i].correct) opt.classList.add('correct');
+            else if (i === index) opt.classList.add('incorrect');
+        });
+        
+        const points = selected.points;
+        score += points;
+        document.getElementById('score').textContent = score;
+        
+        decisionPath.push({
+            stage: currentStage + 1,
+            title: stage.title,
+            choice: selected.text.substring(0, 50) + '...',
+            points: points,
+            maxPoints: 10,
+            isOptimal: selected.correct,
+            optimalChoice: stage.options.find(o => o.correct)?.text.substring(0, 50) + '...'
+        });
+        
+        if (selected.correct) document.getElementById('fb-correct').classList.add('show');
+        else document.getElementById('fb-incorrect').classList.add('show');
+        document.getElementById('teaching').classList.add('show');
+        document.getElementById('next-btn').classList.add('show');
+    }
+    
+    function nextStage() {
+        currentStage++;
+        if (currentStage < stages[currentMode].length) renderStage();
+        else showDebrief();
+    }
+    
+    function showDebrief() {
+        const percentage = Math.round((score / maxScore) * 100);
+        let grade, emoji, color;
+        if (percentage >= 90) { grade = 'Outstanding!'; emoji = '🏆'; color = '#22c55e'; }
+        else if (percentage >= 80) { grade = 'Excellent!'; emoji = '🌟'; color = '#3b82f6'; }
+        else if (percentage >= 70) { grade = 'Good Work!'; emoji = '👍'; color = '#f59e0b'; }
+        else { grade = 'Keep Learning!'; emoji = '📚'; color = '#ef4444'; }
+        
+        const pathHtml = decisionPath.map(d => `
+            <div class="path-item ${d.isOptimal ? 'path-optimal' : d.points >= 5 ? 'path-suboptimal' : 'path-incorrect'}">
+                <div style="display:flex;justify-content:space-between;">
+                    <div>
+                        <strong>${d.isOptimal ? '✓' : '○'} Stage ${d.stage}:</strong> ${d.title}<br>
+                        <span style="font-size:0.9rem;color:#666;">Your choice: ${d.choice}</span>
+                        ${!d.isOptimal ? `<br><span style="font-size:0.85rem;color:#888;">💡 Better: ${d.optimalChoice}</span>` : ''}
+                    </div>
+                    <div style="font-weight:600;color:${d.isOptimal ? '#22c55e' : '#f59e0b'};">${d.points}/10</div>
+                </div>
+            </div>
+        `).join('');
+        
+        document.getElementById('debriefContent').innerHTML = `
+            <div style="text-align:center;margin-bottom:24px;">
+                <div style="font-size:4rem;">${emoji}</div>
+                <div style="font-size:2.5rem;font-weight:700;color:${color}">${percentage}%</div>
+                <div style="color:#666;">${grade}</div>
+            </div>
+            <h3 style="margin:20px 0 16px;font-weight:700;">📊 Your Decision Path (${currentMode === 'adult' ? 'Adult' : 'Pediatric'} Mode)</h3>
+            ${pathHtml}
+            <button onclick="location.reload()" style="width:100%;padding:16px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:white;border:none;border-radius:12px;font-size:1.1rem;font-weight:600;cursor:pointer;margin-top:24px;">🔄 Try Again</button>
+        `;
+        document.getElementById('debriefOverlay').classList.add('show');
+    }
+    
+    function closeDebrief() { document.getElementById('debriefOverlay').classList.remove('show'); }
+    renderStage();
+    </script>
+</body>
+</html>
