@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clinical Adventures | ReasonDx</title>
     <style>
-        /* Light mode default - clean medical look */
         :root {
             --bg: #f8fafc;
             --bg-secondary: #ffffff;
@@ -19,7 +18,6 @@
             --accent-light: rgba(37,99,235,0.1);
         }
         
-        /* Dark mode option */
         [data-theme="dark"] {
             --bg: #0F172A;
             --bg-secondary: #1E293B;
@@ -31,20 +29,6 @@
             --muted: #94A3B8;
             --accent: #3B82F6;
             --accent-light: rgba(59,130,246,0.15);
-        }
-        
-        /* Sepia option */
-        [data-theme="sepia"] {
-            --bg: #f5f0e6;
-            --bg-secondary: #faf6eb;
-            --card: #faf6eb;
-            --card-hover: #f0e9d6;
-            --border: #d4c4a8;
-            --text: #3d3425;
-            --text-secondary: #5c4f3a;
-            --muted: #8b7355;
-            --accent: #8b5a2b;
-            --accent-light: rgba(139,90,43,0.1);
         }
         
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -74,7 +58,6 @@
             justify-content: center; 
             gap: 8px; 
             flex-wrap: wrap;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
         .nav-bar a { 
             color: var(--text-secondary); 
@@ -82,7 +65,6 @@
             padding: 8px 16px; 
             border-radius: 8px; 
             transition: all 0.2s;
-            font-size: 0.95rem;
         }
         .nav-bar a:hover { background: var(--accent-light); color: var(--accent); }
         
@@ -98,1852 +80,702 @@
         .stat-card { 
             background: var(--card); 
             border: 1px solid var(--border); 
+            padding: 16px 28px; 
             border-radius: 12px; 
-            padding: 16px 24px; 
-            text-align: center; 
-            min-width: 110px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            text-align: center;
         }
-        .stat-value { font-size: 1.8rem; font-weight: 700; color: var(--accent); }
-        .stat-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+        .stat-number { font-size: 2rem; font-weight: 700; color: var(--accent); }
+        .stat-label { font-size: 0.85rem; color: var(--muted); }
         
-        .search-filter { 
-            display: flex; 
-            gap: 10px; 
-            max-width: 700px; 
-            margin: 0 auto 28px; 
-            flex-wrap: wrap; 
-            justify-content: center; 
+        .filter-bar {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
         }
-        .search-input { 
-            flex: 1; 
-            min-width: 260px; 
-            padding: 12px 18px; 
-            border-radius: 10px; 
-            border: 1px solid var(--border); 
-            background: var(--card); 
-            color: var(--text); 
-            font-size: 0.95rem;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-        }
-        .search-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-light); }
-        .filter-btn { 
-            padding: 10px 18px; 
-            border-radius: 8px; 
-            border: 1px solid var(--border); 
-            background: var(--card); 
-            color: var(--text-secondary); 
-            cursor: pointer; 
+        .filter-btn {
+            padding: 8px 16px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: var(--card);
+            color: var(--text-secondary);
+            cursor: pointer;
             transition: all 0.2s;
             font-size: 0.9rem;
         }
-        .filter-btn:hover { background: var(--accent-light); color: var(--accent); border-color: var(--accent); }
-        .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
         
-        .category { margin-bottom: 36px; }
+        .category { margin-bottom: 40px; }
         .category-header { 
             display: flex; 
             align-items: center; 
             gap: 12px; 
-            margin-bottom: 16px; 
-            padding-bottom: 12px; 
-            border-bottom: 2px solid var(--border); 
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
         }
-        .category-icon { font-size: 1.4rem; }
-        .category-title { font-size: 1.3rem; font-weight: 700; color: var(--text); }
+        .category-icon { font-size: 1.5rem; }
+        .category-title { font-size: 1.3rem; font-weight: 700; }
         .category-count { 
-            color: white; 
+            background: var(--accent-light); 
+            color: var(--accent); 
             padding: 4px 12px; 
-            border-radius: 20px; 
-            font-size: 0.75rem; 
-            font-weight: 600; 
+            border-radius: 12px; 
+            font-size: 0.8rem; 
+            font-weight: 600;
         }
         
         .cases-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-            gap: 14px; 
+            gap: 16px; 
         }
         
-        .case-card { 
-            background: var(--card); 
-            border: 1px solid var(--border); 
-            border-radius: 10px; 
-            overflow: hidden; 
-            transition: all 0.2s; 
-            cursor: pointer; 
-            text-decoration: none; 
-            color: inherit; 
+        .case-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.2s;
             display: block;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
-        .case-card:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+        .case-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
             border-color: var(--accent);
         }
-        
-        .case-banner { height: 5px; }
-        .case-body { padding: 14px 16px; }
-        .case-top { display: flex; align-items: flex-start; gap: 12px; }
-        .case-emoji { font-size: 1.8rem; line-height: 1; }
-        .case-info { flex: 1; }
-        .case-title { font-size: 0.95rem; font-weight: 600; color: var(--text); margin-bottom: 2px; }
-        .case-subtitle { font-size: 0.8rem; color: var(--muted); }
-        .case-meta { display: flex; gap: 6px; margin-top: 10px; }
-        .meta-tag { 
-            background: var(--accent-light); 
-            padding: 3px 8px; 
-            border-radius: 5px; 
-            font-size: 0.7rem; 
-            color: var(--muted);
+        .case-title { font-weight: 600; margin-bottom: 8px; }
+        .case-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+        .badge {
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
         }
+        .badge-adventure { background: #dbeafe; color: #1d4ed8; }
+        .badge-dual { background: #f3e8ff; color: #7c3aed; }
+        .badge-new { background: #dcfce7; color: #166534; }
         
-        .theme-toggle { 
-            position: fixed; 
-            top: 12px; 
-            right: 12px; 
-            z-index: 1000; 
-            display: flex; 
-            gap: 6px; 
-            background: var(--card); 
-            padding: 6px 10px; 
-            border-radius: 20px;
+        .search-box {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto 24px;
+            display: block;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px;
             border: 1px solid var(--border);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 24px;
+            background: var(--card);
+            color: var(--text);
+            font-size: 1rem;
         }
-        .theme-btn { 
-            width: 22px; 
-            height: 22px; 
-            border-radius: 50%; 
-            border: 2px solid var(--border); 
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        .theme-btn:hover { transform: scale(1.1); }
-        
-        @media (max-width: 768px) {
-            .header h1 { font-size: 1.6rem; }
-            .cases-grid { grid-template-columns: 1fr; }
-            .stats-bar { gap: 8px; }
-            .stat-card { min-width: 85px; padding: 12px; }
-            .stat-value { font-size: 1.4rem; }
-            .nav-bar { gap: 4px; padding: 10px 12px; }
-            .nav-bar a { padding: 6px 10px; font-size: 0.85rem; }
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--accent);
         }
     </style>
 </head>
 <body>
-
-<div class="theme-toggle">
-    <button class="theme-btn" onclick="document.body.removeAttribute('data-theme')" style="background: #f8fafc;" title="Light (Default)"></button>
-    <button class="theme-btn" onclick="document.body.setAttribute('data-theme','dark')" style="background: #1e293b;" title="Dark"></button>
-    <button class="theme-btn" onclick="document.body.setAttribute('data-theme','sepia')" style="background: #f5f0e6;" title="Sepia"></button>
-</div>
-
-<header class="header">
-    <h1>🏥 Clinical Adventures</h1>
-    <p>93 Interactive Cases for Clinical Excellence</p>
-</header>
-
-<nav class="nav-bar">
-    <a href="../index.html">🏠 DxSuite Home</a>
-    <a href="index.html">📚 ReasonDx</a>
-    <a href="../mechanism/index.html">🔬 MechanismDx</a>
-    <a href="../CoachDx/index.html">💬 CoachDx</a>
-</nav>
-
-<main class="main">
-    <div class="stats-bar">
-        <div class="stat-card">
-            <div class="stat-value">93</div>
-            <div class="stat-label">Total Cases</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-value">14</div>
-            <div class="stat-label">Categories</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-value">19</div>
-            <div class="stat-label">Allergy/Immuno</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-value">9</div>
-            <div class="stat-label">Pediatrics</div>
-        </div>
-    </div>
-
-    <div class="search-filter">
-        <input type="text" class="search-input" placeholder="🔍 Search by topic, diagnosis, or keyword..." oninput="filterCases(this.value)">
-        <button class="filter-btn active" onclick="filterDifficulty('all', this)">All</button>
-        <button class="filter-btn" onclick="filterDifficulty('Intermediate', this)">Intermediate</button>
-        <button class="filter-btn" onclick="filterDifficulty('Advanced', this)">Advanced</button>
-    </div>
-
-    <section class="category" data-category="cardio">
-        <div class="category-header">
-            <span class="category-icon">❤️</span>
-            <span class="category-title">Cardiovascular</span>
-            <span class="category-count" style="background: #DC2626;">9 cases</span>
-        </div>
-        <div class="cases-grid">
-            <a href="adventure-cases/acls-rhythms-expanded-adventure.html" class="case-card" data-tags="acls rhythms" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #DC2626;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">❤️</div>
-                        <div class="case-info">
-                            <div class="case-title">Acls Rhythms</div>
-                            <div class="case-subtitle">Cardiac Arrest Recognition</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/acs-expanded-adventure.html" class="case-card" data-tags="acs" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #DC2626;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">❤️</div>
-                        <div class="case-info">
-                            <div class="case-title">Acs</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/afib-expanded-adventure.html" class="case-card" data-tags="afib" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #DC2626;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">💓</div>
-                        <div class="case-info">
-                            <div class="case-title">Afib</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/aortic-dissection-expanded-adventure.html" class="case-card" data-tags="aortic dissection" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #DC2626;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">❤️</div>
-                        <div class="case-info">
-                            <div class="case-title">Aortic Dissection</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/chest-pain-expanded-dual-adventure.html" class="case-card" data-tags="chest pain expanded" data-difficulty="Advanced">
-                <div class="case-banner" style="background: #DC2626;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">💔</div>
-                        <div class="case-info">
-                            <div class="case-title">Chest Pain Expanded</div>
-                            <div class="case-subtitle">Adult Chest Pain</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Advanced</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/heart-failure-expanded-adventure.html" class="case-card" data-tags="heart failure" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #DC2626;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">💔</div>
-                        <div class="case-info">
-                            <div class="case-title">Heart Failure</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/htn-emergency-expanded-adventure.html" class="case-card" data-tags="htn emergency" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #DC2626;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">📈</div>
-                        <div class="case-info">
-                            <div class="case-title">Htn Emergency</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/svt-wpw-expanded-adventure.html" class="case-card" data-tags="svt wpw" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #DC2626;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">💓</div>
-                        <div class="case-info">
-                            <div class="case-title">Svt Wpw</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/syncope-expanded-dual-adventure.html" class="case-card" data-tags="syncope expanded" data-difficulty="Advanced">
-                <div class="case-banner" style="background: #DC2626;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🫁</div>
-                        <div class="case-info">
-                            <div class="case-title">Syncope Expanded</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Advanced</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </section>
-
-    <section class="category" data-category="pulm">
-        <div class="category-header">
-            <span class="category-icon">🫁</span>
-            <span class="category-title">Pulmonary</span>
-            <span class="category-count" style="background: #0284C7;">4 cases</span>
-        </div>
-        <div class="cases-grid">
-            <a href="adventure-cases/copd-exacerbation-expanded-adventure.html" class="case-card" data-tags="copd exacerbation" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #0284C7;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">💨</div>
-                        <div class="case-info">
-                            <div class="case-title">Copd Exacerbation</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/pe-expanded-adventure.html" class="case-card" data-tags="pe" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #0284C7;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🫁</div>
-                        <div class="case-info">
-                            <div class="case-title">Pe</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/pneumonia-expanded-dual-adventure.html" class="case-card" data-tags="pneumonia expanded" data-difficulty="Advanced">
-                <div class="case-banner" style="background: #0284C7;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🌬️</div>
-                        <div class="case-info">
-                            <div class="case-title">Pneumonia Expanded</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Advanced</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/tension-ptx-expanded-adventure.html" class="case-card" data-tags="tension ptx" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #0284C7;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🫁</div>
-                        <div class="case-info">
-                            <div class="case-title">Tension Ptx</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </section>
-
-    <section class="category" data-category="neuro">
-        <div class="category-header">
-            <span class="category-icon">🧠</span>
-            <span class="category-title">Neurology</span>
-            <span class="category-count" style="background: #7C3AED;">7 cases</span>
-        </div>
-        <div class="cases-grid">
-            <a href="adventure-cases/delirium-expanded-adventure.html" class="case-card" data-tags="delirium" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #7C3AED;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">😶‍🌫️</div>
-                        <div class="case-info">
-                            <div class="case-title">Delirium</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/meningitis-expanded-adventure.html" class="case-card" data-tags="meningitis" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #7C3AED;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🧠</div>
-                        <div class="case-info">
-                            <div class="case-title">Meningitis</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/sah-expanded-adventure.html" class="case-card" data-tags="sah" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #7C3AED;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🧠</div>
-                        <div class="case-info">
-                            <div class="case-title">Sah</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/spinal-cord-compression-expanded-adventure.html" class="case-card" data-tags="spinal cord compression" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #7C3AED;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🦴</div>
-                        <div class="case-info">
-                            <div class="case-title">Spinal Cord Compression</div>
-                            <div class="case-subtitle">Spinal Cord Compression</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/status-epilepticus-expanded-dual-adventure.html" class="case-card" data-tags="status epilepticus expanded" data-difficulty="Advanced">
-                <div class="case-banner" style="background: #7C3AED;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">👂</div>
-                        <div class="case-info">
-                            <div class="case-title">Status Epilepticus Expanded</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Advanced</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/stroke-expanded-adventure.html" class="case-card" data-tags="stroke" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #7C3AED;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🧠</div>
-                        <div class="case-info">
-                            <div class="case-title">Stroke</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/tbi-icp-expanded-adventure.html" class="case-card" data-tags="tbi icp" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #7C3AED;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🧠</div>
-                        <div class="case-info">
-                            <div class="case-title">Tbi Icp</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </section>
-
-    <section class="category" data-category="gi">
-        <div class="category-header">
-            <span class="category-icon">🔥</span>
-            <span class="category-title">GI / Hepatology</span>
-            <span class="category-count" style="background: #D97706;">8 cases</span>
-        </div>
-        <div class="cases-grid">
-            <a href="adventure-cases/acute-abdomen-expanded-adventure.html" class="case-card" data-tags="acute abdomen" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #D97706;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">👂</div>
-                        <div class="case-info">
-                            <div class="case-title">Acute Abdomen</div>
-                            <div class="case-subtitle">Acute Abdomen</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/alf-expanded-adventure.html" class="case-card" data-tags="alf" data-difficulty="Advanced">
-                <div class="case-banner" style="background: #D97706;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🫀</div>
-                        <div class="case-info">
-                            <div class="case-title">Alf</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Advanced</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/appendicitis-expanded-dual-adventure.html" class="case-card" data-tags="appendicitis expanded" data-difficulty="Advanced">
-                <div class="case-banner" style="background: #D97706;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🎯</div>
-                        <div class="case-info">
-                            <div class="case-title">Appendicitis Expanded</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Advanced</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/cdiff-expanded-adventure.html" class="case-card" data-tags="cdiff" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #D97706;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🦠</div>
-                        <div class="case-info">
-                            <div class="case-title">Cdiff</div>
-                            <div class="case-subtitle">C. difficile Colitis</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/cholecystitis-expanded-adventure.html" class="case-card" data-tags="cholecystitis" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #D97706;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">💎</div>
-                        <div class="case-info">
-                            <div class="case-title">Cholecystitis</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/gi-bleed-expanded-adventure.html" class="case-card" data-tags="gi bleed" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #D97706;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🩸</div>
-                        <div class="case-info">
-                            <div class="case-title">Gi Bleed</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/pancreatitis-expanded-adventure.html" class="case-card" data-tags="pancreatitis" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #D97706;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🔥</div>
-                        <div class="case-info">
-                            <div class="case-title">Pancreatitis</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/sbo-expanded-adventure.html" class="case-card" data-tags="sbo" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #D97706;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🚫</div>
-                        <div class="case-info">
-                            <div class="case-title">Sbo</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </section>
-
-    <section class="category" data-category="renal">
-        <div class="category-header">
-            <span class="category-icon">🧪</span>
-            <span class="category-title">Renal / Electrolytes</span>
-            <span class="category-count" style="background: #0891B2;">8 cases</span>
-        </div>
-        <div class="cases-grid">
-            <a href="adventure-cases/acid-base-expanded-dual-adventure.html" class="case-card" data-tags="acid base expanded" data-difficulty="Advanced">
-                <div class="case-banner" style="background: #0891B2;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">⚗️</div>
-                        <div class="case-info">
-                            <div class="case-title">Acid Base Expanded</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Advanced</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/aki-expanded-adventure.html" class="case-card" data-tags="aki" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #0891B2;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🧪</div>
-                        <div class="case-info">
-                            <div class="case-title">Aki</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/aki-workup-expanded-adventure.html" class="case-card" data-tags="aki workup" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #0891B2;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🧪</div>
-                        <div class="case-info">
-                            <div class="case-title">Aki Workup</div>
-                            <div class="case-subtitle">Recognizing AKI</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/electrolyte-emergencies-expanded-adventure.html" class="case-card" data-tags="electrolyte emergencies" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #0891B2;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">⚡</div>
-                        <div class="case-info">
-                            <div class="case-title">Electrolyte Emergencies</div>
-                            <div class="case-subtitle">Severe Hyperkalemia - Initial Ma...</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/hyperkalemia-expanded-dual-adventure.html" class="case-card" data-tags="hyperkalemia expanded" data-difficulty="Advanced">
-                <div class="case-banner" style="background: #0891B2;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">⚡</div>
-                        <div class="case-info">
-                            <div class="case-title">Hyperkalemia Expanded</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Advanced</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/hyponatremia-expanded-dual-adventure.html" class="case-card" data-tags="hyponatremia expanded" data-difficulty="Advanced">
-                <div class="case-banner" style="background: #0891B2;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🧂</div>
-                        <div class="case-info">
-                            <div class="case-title">Hyponatremia Expanded</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Advanced</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/pyelonephritis-expanded-adventure.html" class="case-card" data-tags="pyelonephritis" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #0891B2;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">👂</div>
-                        <div class="case-info">
-                            <div class="case-title">Pyelonephritis</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/rhabdomyolysis-expanded-adventure.html" class="case-card" data-tags="rhabdomyolysis" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #0891B2;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">💪</div>
-                        <div class="case-info">
-                            <div class="case-title">Rhabdomyolysis</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </section>
-
-    <section class="category" data-category="endo">
-        <div class="category-header">
-            <span class="category-icon">🦋</span>
-            <span class="category-title">Endocrine</span>
-            <span class="category-count" style="background: #059669;">5 cases</span>
-        </div>
-        <div class="cases-grid">
-            <a href="adventure-cases/adrenal-crisis-expanded-adventure.html" class="case-card" data-tags="adrenal crisis" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #059669;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">⚠️</div>
-                        <div class="case-info">
-                            <div class="case-title">Adrenal Crisis</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/dka-expanded-adventure.html" class="case-card" data-tags="dka" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #059669;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">💉</div>
-                        <div class="case-info">
-                            <div class="case-title">Dka</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/hhs-dka-comparison-expanded-adventure.html" class="case-card" data-tags="hhs dka comparison" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #059669;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">💉</div>
-                        <div class="case-info">
-                            <div class="case-title">Hhs Dka Comparison</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/hypoglycemia-expanded-adventure.html" class="case-card" data-tags="hypoglycemia" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #059669;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🍬</div>
-                        <div class="case-info">
-                            <div class="case-title">Hypoglycemia</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/thyroid-storm-expanded-adventure.html" class="case-card" data-tags="thyroid storm" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #059669;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🦋</div>
-                        <div class="case-info">
-                            <div class="case-title">Thyroid Storm</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </section>
-
-    <section class="category" data-category="id">
-        <div class="category-header">
-            <span class="category-icon">🦠</span>
-            <span class="category-title">Infectious Disease</span>
-            <span class="category-count" style="background: #DC2626;">3 cases</span>
-        </div>
-        <div class="cases-grid">
-            <a href="adventure-cases/cellulitis-necfasc-expanded-adventure.html" class="case-card" data-tags="cellulitis necfasc" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #DC2626;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🦠</div>
-                        <div class="case-info">
-                            <div class="case-title">Cellulitis Necfasc</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/dfi-expanded-adventure.html" class="case-card" data-tags="dfi" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #DC2626;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🦶</div>
-                        <div class="case-info">
-                            <div class="case-title">Dfi</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/sepsis-expanded-adventure.html" class="case-card" data-tags="sepsis" data-difficulty="Advanced">
-                <div class="case-banner" style="background: #DC2626;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🦠</div>
-                        <div class="case-info">
-                            <div class="case-title">Sepsis</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Advanced</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </section>
-
-    <section class="category" data-category="heme">
-        <div class="category-header">
-            <span class="category-icon">🩸</span>
-            <span class="category-title">Hematology / Oncology</span>
-            <span class="category-count" style="background: #DB2777;">4 cases</span>
-        </div>
-        <div class="cases-grid">
-            <a href="adventure-cases/dic-expanded-adventure.html" class="case-card" data-tags="dic" data-difficulty="Advanced">
-                <div class="case-banner" style="background: #DB2777;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🩸</div>
-                        <div class="case-info">
-                            <div class="case-title">Dic</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Advanced</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/neutropenic-fever-expanded-dual-adventure.html" class="case-card" data-tags="neutropenic fever expanded" data-difficulty="Advanced">
-                <div class="case-banner" style="background: #DB2777;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🦠</div>
-                        <div class="case-info">
-                            <div class="case-title">Neutropenic Fever Expanded</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Advanced</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/shock-expanded-dual-adventure.html" class="case-card" data-tags="shock expanded" data-difficulty="Advanced">
-                <div class="case-banner" style="background: #DB2777;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">📊</div>
-                        <div class="case-info">
-                            <div class="case-title">Shock Expanded</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Advanced</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/ttp-hus-expanded-dual-adventure.html" class="case-card" data-tags="ttp hus expanded" data-difficulty="Advanced">
-                <div class="case-banner" style="background: #DB2777;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🔬</div>
-                        <div class="case-info">
-                            <div class="case-title">Ttp Hus Expanded</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Advanced</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </section>
-
-    <section class="category" data-category="ai">
-        <div class="category-header">
-            <span class="category-icon">⚡</span>
-            <span class="category-title">Allergy / Immunology</span>
-            <span class="category-count" style="background: #9333EA;">19 cases</span>
-        </div>
-        <div class="cases-grid">
-            <a href="adventure-cases/allergic-rhinitis-expanded-adventure.html" class="case-card" data-tags="allergic rhinitis" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #9333EA;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🤧</div>
-                        <div class="case-info">
-                            <div class="case-title">Allergic Rhinitis</div>
-                            <div class="case-subtitle">Classic Presentation</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/anaphylaxis-expanded-adventure.html" class="case-card" data-tags="anaphylaxis" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #9333EA;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">⚡</div>
-                        <div class="case-info">
-                            <div class="case-title">Anaphylaxis</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/angioedema-expanded-adventure.html" class="case-card" data-tags="angioedema" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #9333EA;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">😮</div>
-                        <div class="case-info">
-                            <div class="case-title">Angioedema</div>
-                            <div class="case-subtitle">Angioedema</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/asthma-biologics-expanded-adventure.html" class="case-card" data-tags="asthma biologics" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #9333EA;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🌬️</div>
-                        <div class="case-info">
-                            <div class="case-title">Asthma Biologics</div>
-                            <div class="case-subtitle">Asthma Biologics Selection</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/asthma-exacerbation-expanded-dual-adventure.html" class="case-card" data-tags="asthma exacerbation expanded" data-difficulty="Advanced">
-                <div class="case-banner" style="background: #9333EA;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🌬️</div>
-                        <div class="case-info">
-                            <div class="case-title">Asthma Exacerbation Expanded</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Advanced</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/asthma-phenotyping-expanded-adventure.html" class="case-card" data-tags="asthma phenotyping" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #9333EA;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🌬️</div>
-                        <div class="case-info">
-                            <div class="case-title">Asthma Phenotyping</div>
-                            <div class="case-subtitle">Initial Presentation</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/atopic-dermatitis-expanded-adventure.html" class="case-card" data-tags="atopic dermatitis" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #9333EA;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🧴</div>
-                        <div class="case-info">
-                            <div class="case-title">Atopic Dermatitis</div>
-                            <div class="case-subtitle">WHY is routine elimination harmf...</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/contact-dermatitis-expanded-adventure.html" class="case-card" data-tags="contact dermatitis" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #9333EA;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🧪</div>
-                        <div class="case-info">
-                            <div class="case-title">Contact Dermatitis</div>
-                            <div class="case-subtitle">Differentiating Contact Dermatit...</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/dress-scar-expanded-adventure.html" class="case-card" data-tags="dress scar" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #9333EA;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">💊</div>
-                        <div class="case-info">
-                            <div class="case-title">Dress Scar</div>
-                            <div class="case-subtitle">WHY are long-term sequelae so im...</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/drug-allergy-expanded-adventure.html" class="case-card" data-tags="drug allergy" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #9333EA;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">💊</div>
-                        <div class="case-info">
-                            <div class="case-title">Drug Allergy</div>
-                            <div class="case-subtitle">WHY do AERD patients react to NS...</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/eosinophilia-expanded-adventure.html" class="case-card" data-tags="eosinophilia" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #9333EA;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🔬</div>
-                        <div class="case-info">
-                            <div class="case-title">Eosinophilia</div>
-                            <div class="case-subtitle">Eosinophilia Workup</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/food-allergy-expanded-dual-adventure.html" class="case-card" data-tags="food allergy expanded" data-difficulty="Advanced">
-                <div class="case-banner" style="background: #9333EA;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🥜</div>
-                        <div class="case-info">
-                            <div class="case-title">Food Allergy Expanded</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Advanced</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/hae-expanded-adventure.html" class="case-card" data-tags="hae" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #9333EA;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">💧</div>
-                        <div class="case-info">
-                            <div class="case-title">Hae</div>
-                            <div class="case-subtitle">Hereditary Angioedema</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/immunodeficiency-expanded-adventure.html" class="case-card" data-tags="immunodeficiency" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #9333EA;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🛡️</div>
-                        <div class="case-info">
-                            <div class="case-title">Immunodeficiency</div>
-                            <div class="case-subtitle">Immunodeficiency Workup</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/mast-cell-expanded-adventure.html" class="case-card" data-tags="mast cell" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #9333EA;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🔬</div>
-                        <div class="case-info">
-                            <div class="case-title">Mast Cell</div>
-                            <div class="case-subtitle">Mast Cell Disorders</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/penicillin-delabeling-expanded-adventure.html" class="case-card" data-tags="penicillin delabeling" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #9333EA;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">💊</div>
-                        <div class="case-info">
-                            <div class="case-title">Penicillin Delabeling</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/urticaria-expanded-adventure.html" class="case-card" data-tags="urticaria" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #9333EA;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🔴</div>
-                        <div class="case-info">
-                            <div class="case-title">Urticaria</div>
-                            <div class="case-subtitle">Urticaria Workup</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/venom-allergy-comprehensive-adventure.html" class="case-card" data-tags="venom allergy comprehensive" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #9333EA;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🐝</div>
-                        <div class="case-info">
-                            <div class="case-title">Venom Allergy Comprehensive</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/venom-vit-expanded-adventure.html" class="case-card" data-tags="venom vit" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #9333EA;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🐝</div>
-                        <div class="case-info">
-                            <div class="case-title">Venom Vit</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </section>
-
-    <section class="category" data-category="peds">
-        <div class="category-header">
-            <span class="category-icon">👶</span>
-            <span class="category-title">Pediatrics</span>
-            <span class="category-count" style="background: #EC4899;">9 cases</span>
-        </div>
-        <div class="cases-grid">
-            <a href="adventure-cases/bronchiolitis-expanded-adventure.html" class="case-card" data-tags="bronchiolitis" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #EC4899;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">👶</div>
-                        <div class="case-info">
-                            <div class="case-title">Bronchiolitis</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/croup-expanded-adventure.html" class="case-card" data-tags="croup" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #EC4899;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🦭</div>
-                        <div class="case-info">
-                            <div class="case-title">Croup</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/febrile-seizure-expanded-adventure.html" class="case-card" data-tags="febrile seizure" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #EC4899;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">⚡</div>
-                        <div class="case-info">
-                            <div class="case-title">Febrile Seizure</div>
-                            <div class="case-subtitle">Febrile Seizures</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/intussusception-expanded-adventure.html" class="case-card" data-tags="intussusception" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #EC4899;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">👶</div>
-                        <div class="case-info">
-                            <div class="case-title">Intussusception</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/kawasaki-expanded-adventure.html" class="case-card" data-tags="kawasaki" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #EC4899;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🧪</div>
-                        <div class="case-info">
-                            <div class="case-title">Kawasaki</div>
-                            <div class="case-subtitle">Kawasaki Disease</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/peds-dka-adventure.html" class="case-card" data-tags="peds dka" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #EC4899;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">💉</div>
-                        <div class="case-info">
-                            <div class="case-title">Peds Dka</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/peds-febrile-seizure-expanded-adventure.html" class="case-card" data-tags="peds febrile seizure" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #EC4899;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">⚡</div>
-                        <div class="case-info">
-                            <div class="case-title">Peds Febrile Seizure</div>
-                            <div class="case-subtitle">Initial Presentation</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/peds-kawasaki-expanded-adventure.html" class="case-card" data-tags="peds kawasaki" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #EC4899;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🧪</div>
-                        <div class="case-info">
-                            <div class="case-title">Peds Kawasaki</div>
-                            <div class="case-subtitle">Initial Presentation</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/pyloric-stenosis-expanded-adventure.html" class="case-card" data-tags="pyloric stenosis" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #EC4899;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🍼</div>
-                        <div class="case-info">
-                            <div class="case-title">Pyloric Stenosis</div>
-                            <div class="case-subtitle">Long-Term Outcomes</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </section>
-
-    <section class="category" data-category="obgyn">
-        <div class="category-header">
-            <span class="category-icon">🤰</span>
-            <span class="category-title">OB/GYN</span>
-            <span class="category-count" style="background: #F43F5E;">6 cases</span>
-        </div>
-        <div class="cases-grid">
-            <a href="adventure-cases/ectopic-pregnancy-expanded-adventure.html" class="case-card" data-tags="ectopic pregnancy" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #F43F5E;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">⚠️</div>
-                        <div class="case-info">
-                            <div class="case-title">Ectopic Pregnancy</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/ovarian-torsion-expanded-adventure.html" class="case-card" data-tags="ovarian torsion" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #F43F5E;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">⚠️</div>
-                        <div class="case-info">
-                            <div class="case-title">Ovarian Torsion</div>
-                            <div class="case-subtitle">Ovarian Torsion</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/pid-toa-expanded-adventure.html" class="case-card" data-tags="pid toa" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #F43F5E;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🔥</div>
-                        <div class="case-info">
-                            <div class="case-title">Pid Toa</div>
-                            <div class="case-subtitle">Outpatient vs Inpatient</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/placental-abruption-expanded-adventure.html" class="case-card" data-tags="placental abruption" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #F43F5E;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🩸</div>
-                        <div class="case-info">
-                            <div class="case-title">Placental Abruption</div>
-                            <div class="case-subtitle">Chronic Hypertension and Abrupti...</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/pph-expanded-adventure.html" class="case-card" data-tags="pph" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #F43F5E;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🩸</div>
-                        <div class="case-info">
-                            <div class="case-title">Pph</div>
-                            <div class="case-subtitle">Postpartum Hemorrhage</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/preeclampsia-expanded-adventure.html" class="case-card" data-tags="preeclampsia" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #F43F5E;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🤰</div>
-                        <div class="case-info">
-                            <div class="case-title">Preeclampsia</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </section>
-
-    <section class="category" data-category="tox">
-        <div class="category-header">
-            <span class="category-icon">☠️</span>
-            <span class="category-title">Toxicology</span>
-            <span class="category-count" style="background: #65A30D;">4 cases</span>
-        </div>
-        <div class="cases-grid">
-            <a href="adventure-cases/alcohol-withdrawal-expanded-adventure.html" class="case-card" data-tags="alcohol withdrawal" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #65A30D;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🍺</div>
-                        <div class="case-info">
-                            <div class="case-title">Alcohol Withdrawal</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/apap-overdose-expanded-adventure.html" class="case-card" data-tags="apap overdose" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #65A30D;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">💊</div>
-                        <div class="case-info">
-                            <div class="case-title">Apap Overdose</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/opioid-overdose-expanded-adventure.html" class="case-card" data-tags="opioid overdose" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #65A30D;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">💊</div>
-                        <div class="case-info">
-                            <div class="case-title">Opioid Overdose</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/toxidromes-expanded-dual-adventure.html" class="case-card" data-tags="toxidromes expanded" data-difficulty="Advanced">
-                <div class="case-banner" style="background: #65A30D;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">☠️</div>
-                        <div class="case-info">
-                            <div class="case-title">Toxidromes Expanded</div>
-                            <div class="case-subtitle"></div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Advanced</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </section>
-
-    <section class="category" data-category="psych">
-        <div class="category-header">
-            <span class="category-icon">🧠</span>
-            <span class="category-title">Psychiatry</span>
-            <span class="category-count" style="background: #4F46E5;">3 cases</span>
-        </div>
-        <div class="cases-grid">
-            <a href="adventure-cases/bipolar-disorder-expanded-adventure.html" class="case-card" data-tags="bipolar disorder" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #4F46E5;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🎭</div>
-                        <div class="case-info">
-                            <div class="case-title">Bipolar Disorder</div>
-                            <div class="case-subtitle">Mixed Features</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/depression-expanded-adventure.html" class="case-card" data-tags="depression" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #4F46E5;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🌧️</div>
-                        <div class="case-info">
-                            <div class="case-title">Depression</div>
-                            <div class="case-subtitle">Major Depression & Suicidality</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/psychosis-expanded-adventure.html" class="case-card" data-tags="psychosis" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #4F46E5;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">🌀</div>
-                        <div class="case-info">
-                            <div class="case-title">Psychosis</div>
-                            <div class="case-subtitle">Negative Symptoms</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </section>
-
-    <section class="category" data-category="other">
-        <div class="category-header">
-            <span class="category-icon">🏥</span>
-            <span class="category-title">Specialty / Other</span>
-            <span class="category-count" style="background: #64748B;">4 cases</span>
-        </div>
-        <div class="cases-grid">
-            <a href="adventure-cases/dermatologic-emergencies-expanded-adventure.html" class="case-card" data-tags="dermatologic emergencies" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #64748B;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">👂</div>
-                        <div class="case-info">
-                            <div class="case-title">Dermatologic Emergencies</div>
-                            <div class="case-subtitle">Calciphylaxis</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/ent-emergencies-expanded-adventure.html" class="case-card" data-tags="ent emergencies" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #64748B;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">👂</div>
-                        <div class="case-info">
-                            <div class="case-title">Ent Emergencies</div>
-                            <div class="case-subtitle">ENT Emergencies</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/eye-emergencies-expanded-adventure.html" class="case-card" data-tags="eye emergencies" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #64748B;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">👁️</div>
-                        <div class="case-info">
-                            <div class="case-title">Eye Emergencies</div>
-                            <div class="case-subtitle">Eye Emergencies</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-            <a href="adventure-cases/rheum-emergencies-expanded-adventure.html" class="case-card" data-tags="rheum emergencies" data-difficulty="Intermediate">
-                <div class="case-banner" style="background: #64748B;"></div>
-                <div class="case-body">
-                    <div class="case-top">
-                        <div class="case-emoji">👂</div>
-                        <div class="case-info">
-                            <div class="case-title">Rheum Emergencies</div>
-                            <div class="case-subtitle">Vasculitis with Mononeuritis Mul...</div>
-                        </div>
-                    </div>
-                    <div class="case-meta">
-                        <span class="meta-tag">Intermediate</span>
-                        <span class="meta-tag">10 stages</span>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </section>
-
-</main>
-
-<script>
-    let currentDifficulty = 'all';
-    let currentSearch = '';
+    <header class="header">
+        <h1>🎮 Clinical Adventures</h1>
+        <p>Interactive case-based learning with branching decisions</p>
+    </header>
     
-    function filterCases(query) {
-        currentSearch = query.toLowerCase().trim();
-        applyFilters();
-    }
+    <nav class="nav-bar">
+        <a href="index.html">← Back to ReasonDx</a>
+        <a href="#cardiology">Cardiology</a>
+        <a href="#pulmonary">Pulmonary</a>
+        <a href="#neuro">Neuro</a>
+        <a href="#gi">GI</a>
+        <a href="#allergy">Allergy/Immunology</a>
+        <a href="#peds">Pediatrics</a>
+    </nav>
     
-    function filterDifficulty(diff, btn) {
-        currentDifficulty = diff;
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        applyFilters();
-    }
-    
-    function applyFilters() {
-        document.querySelectorAll('.case-card').forEach(card => {
-            const tags = (card.dataset.tags || '').toLowerCase();
-            const title = card.querySelector('.case-title')?.textContent.toLowerCase() || '';
-            const subtitle = card.querySelector('.case-subtitle')?.textContent.toLowerCase() || '';
-            const difficulty = card.dataset.difficulty;
-            
-            const matchSearch = !currentSearch || tags.includes(currentSearch) || title.includes(currentSearch) || subtitle.includes(currentSearch);
-            const matchDiff = currentDifficulty === 'all' || difficulty === currentDifficulty;
-            
-            card.style.display = (matchSearch && matchDiff) ? '' : 'none';
-        });
+    <main class="main">
+        <div class="stats-bar">
+            <div class="stat-card">
+                <div class="stat-number">112</div>
+                <div class="stat-label">Total Cases</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">18</div>
+                <div class="stat-label">Adventure Format</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Dual-Mode (Adult/Peds)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">91</div>
+                <div class="stat-label">Standard Cases</div>
+            </div>
+        </div>
         
-        document.querySelectorAll('.category').forEach(cat => {
-            const visible = cat.querySelectorAll('.case-card:not([style*="display: none"])').length;
-            cat.style.display = visible > 0 ? '' : 'none';
-        });
-    }
-</script>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="🔍 Search cases..." onkeyup="filterCases()">
+        </div>
+        
+        <div class="filter-bar">
+            <button class="filter-btn active" onclick="filterByType('all')">All Cases</button>
+            <button class="filter-btn" onclick="filterByType('adventure')">Adventure Only</button>
+            <button class="filter-btn" onclick="filterByType('dual')">Dual-Mode</button>
+            <button class="filter-btn" onclick="filterByType('standard')">Standard</button>
+        </div>
+        
+        <!-- Cardiology -->
+        <section class="category" id="cardiology">
+            <div class="category-header">
+                <span class="category-icon">❤️</span>
+                <span class="category-title">Cardiology</span>
+                <span class="category-count">8 cases</span>
+            </div>
+            <div class="cases-grid">
+                <a href="adventure-cases/acls-rhythms-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">ACLS Rhythms</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/acs-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">Acute Coronary Syndrome</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="adventure-cases/afib-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">Atrial Fibrillation</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="adventure-cases/aortic-dissection-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Aortic Dissection</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/heart-failure-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">Heart Failure</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="adventure-cases/htn-emergency-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">Hypertensive Emergency</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="adventure-cases/svt-wpw-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">SVT / WPW</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/syncope-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Syncope</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Pulmonary -->
+        <section class="category" id="pulmonary">
+            <div class="category-header">
+                <span class="category-icon">🫁</span>
+                <span class="category-title">Pulmonary</span>
+                <span class="category-count">6 cases</span>
+            </div>
+            <div class="cases-grid">
+                <a href="adventure-cases/asthma-exacerbation-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Asthma Exacerbation</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/copd-exacerbation-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">COPD Exacerbation</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/pe-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">Pulmonary Embolism</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="adventure-cases/pneumonia-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Pneumonia</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/tension-ptx-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Tension Pneumothorax</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/dvt-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">DVT</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Neurology -->
+        <section class="category" id="neuro">
+            <div class="category-header">
+                <span class="category-icon">🧠</span>
+                <span class="category-title">Neurology</span>
+                <span class="category-count">8 cases</span>
+            </div>
+            <div class="cases-grid">
+                <a href="adventure-cases/delirium-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Delirium</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/meningitis-expanded-dual-adventure.html" class="case-card" data-type="dual">
+                    <div class="case-title">Meningitis</div>
+                    <div class="case-badges"><span class="badge badge-dual">Dual-Mode</span><span class="badge badge-new">NEW</span></div>
+                </a>
+                <a href="adventure-cases/sah-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Subarachnoid Hemorrhage</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/spinal-cord-compression-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Spinal Cord Compression</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/status-epilepticus-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Status Epilepticus</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/stroke-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">Stroke</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="adventure-cases/tbi-icp-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">TBI / ICP Management</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/febrile-seizure-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Febrile Seizure</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- GI / Abdominal -->
+        <section class="category" id="gi">
+            <div class="category-header">
+                <span class="category-icon">🏥</span>
+                <span class="category-title">GI / Abdominal</span>
+                <span class="category-count">10 cases</span>
+            </div>
+            <div class="cases-grid">
+                <a href="adventure-cases/acute-abdomen-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Acute Abdomen</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/alf-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Acute Liver Failure</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/appendicitis-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Appendicitis</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/cdiff-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">C. diff Colitis</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/cholecystitis-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Cholecystitis</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/gi-bleed-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">GI Bleed</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="adventure-cases/pancreatitis-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Pancreatitis</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/sbo-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Small Bowel Obstruction</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/dfi-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Diabetic Foot Infection</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/cellulitis-necfasc-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Cellulitis / Nec Fasc</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Renal / Metabolic -->
+        <section class="category" id="renal">
+            <div class="category-header">
+                <span class="category-icon">💧</span>
+                <span class="category-title">Renal / Metabolic</span>
+                <span class="category-count">10 cases</span>
+            </div>
+            <div class="cases-grid">
+                <a href="adventure-cases/acid-base-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Acid-Base Disorders</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/aki-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">Acute Kidney Injury</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="adventure-cases/aki-workup-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">AKI Workup</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/dka-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">DKA</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="adventure-cases/hhs-dka-comparison-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">HHS vs DKA</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/hyperkalemia-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Hyperkalemia</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/hypoglycemia-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Hypoglycemia</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/hyponatremia-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Hyponatremia</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/electrolyte-emergencies-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Electrolyte Emergencies</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/rhabdomyolysis-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Rhabdomyolysis</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Allergy / Immunology -->
+        <section class="category" id="allergy">
+            <div class="category-header">
+                <span class="category-icon">🦠</span>
+                <span class="category-title">Allergy / Immunology</span>
+                <span class="category-count">18 cases</span>
+            </div>
+            <div class="cases-grid">
+                <a href="adventure-cases/anaphylaxis-expanded-dual-adventure.html" class="case-card" data-type="dual">
+                    <div class="case-title">Anaphylaxis</div>
+                    <div class="case-badges"><span class="badge badge-dual">Dual-Mode</span><span class="badge badge-new">NEW</span></div>
+                </a>
+                <a href="adventure-cases/angioedema-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">Angioedema</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="adventure-cases/allergic-rhinitis-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Allergic Rhinitis</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/asthma-biologics-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Asthma Biologics</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/asthma-phenotyping-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Asthma Phenotyping</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/atopic-dermatitis-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Atopic Dermatitis</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/contact-dermatitis-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Contact Dermatitis</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/drug-allergy-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">Drug Allergy</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="adventure-cases/dress-scar-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">DRESS / SCAR</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/eosinophilia-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Eosinophilia</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/food-allergy-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">Food Allergy</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="adventure-cases/hae-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Hereditary Angioedema</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/immunodeficiency-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Immunodeficiency</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/mast-cell-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Mast Cell Disorders</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/penicillin-delabeling-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Penicillin Delabeling</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/urticaria-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">Urticaria</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="adventure-cases/urticaria-angioedema-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Urticaria-Angioedema</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/venom-allergy-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">Venom Allergy</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+                <a href="adventure-cases/venom-vit-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Venom Immunotherapy</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Critical Care / Sepsis -->
+        <section class="category" id="critical">
+            <div class="category-header">
+                <span class="category-icon">🚨</span>
+                <span class="category-title">Critical Care / Sepsis</span>
+                <span class="category-count">5 cases</span>
+            </div>
+            <div class="cases-grid">
+                <a href="adventure-cases/sepsis-expanded-dual-adventure.html" class="case-card" data-type="dual">
+                    <div class="case-title">Sepsis & Septic Shock</div>
+                    <div class="case-badges"><span class="badge badge-dual">Dual-Mode</span><span class="badge badge-new">NEW</span></div>
+                </a>
+                <a href="adventure-cases/shock-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Shock</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/neutropenic-fever-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Neutropenic Fever</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/dic-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">DIC</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/ttp-hus-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">TTP / HUS</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Pediatrics -->
+        <section class="category" id="peds">
+            <div class="category-header">
+                <span class="category-icon">👶</span>
+                <span class="category-title">Pediatrics</span>
+                <span class="category-count">7 cases</span>
+            </div>
+            <div class="cases-grid">
+                <a href="adventure-cases/bronchiolitis-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Bronchiolitis</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/croup-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Croup</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/intussusception-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Intussusception</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/kawasaki-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Kawasaki Disease</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/peds-dka-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Pediatric DKA</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/pyloric-stenosis-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Pyloric Stenosis</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/febrile-seizure-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Febrile Seizure</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- OB/GYN -->
+        <section class="category" id="obgyn">
+            <div class="category-header">
+                <span class="category-icon">🤰</span>
+                <span class="category-title">OB/GYN</span>
+                <span class="category-count">6 cases</span>
+            </div>
+            <div class="cases-grid">
+                <a href="adventure-cases/ectopic-pregnancy-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Ectopic Pregnancy</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/ovarian-torsion-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Ovarian Torsion</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/pid-toa-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">PID / TOA</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/placental-abruption-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Placental Abruption</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/pph-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Postpartum Hemorrhage</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/preeclampsia-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Preeclampsia</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Toxicology -->
+        <section class="category" id="tox">
+            <div class="category-header">
+                <span class="category-icon">☠️</span>
+                <span class="category-title">Toxicology</span>
+                <span class="category-count">4 cases</span>
+            </div>
+            <div class="cases-grid">
+                <a href="adventure-cases/apap-overdose-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Acetaminophen Overdose</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/alcohol-withdrawal-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Alcohol Withdrawal</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/opioid-overdose-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Opioid Overdose</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/toxidromes-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Toxidromes</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Endocrine -->
+        <section class="category" id="endo">
+            <div class="category-header">
+                <span class="category-icon">🧬</span>
+                <span class="category-title">Endocrine</span>
+                <span class="category-count">3 cases</span>
+            </div>
+            <div class="cases-grid">
+                <a href="adventure-cases/adrenal-crisis-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Adrenal Crisis</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/thyroid-storm-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Thyroid Storm</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/pyelonephritis-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Pyelonephritis</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Psychiatry -->
+        <section class="category" id="psych">
+            <div class="category-header">
+                <span class="category-icon">🧠</span>
+                <span class="category-title">Psychiatry</span>
+                <span class="category-count">3 cases</span>
+            </div>
+            <div class="cases-grid">
+                <a href="adventure-cases/bipolar-disorder-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Bipolar Disorder</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/depression-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Depression</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/psychosis-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Psychosis</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Other Specialties -->
+        <section class="category" id="other">
+            <div class="category-header">
+                <span class="category-icon">🏥</span>
+                <span class="category-title">Other Specialties</span>
+                <span class="category-count">6 cases</span>
+            </div>
+            <div class="cases-grid">
+                <a href="adventure-cases/chest-pain-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Chest Pain Workup</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/dermatologic-emergencies-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Dermatologic Emergencies</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/ent-emergencies-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">ENT Emergencies</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/eye-emergencies-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Eye Emergencies</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/rheum-emergencies-expanded.html" class="case-card" data-type="standard">
+                    <div class="case-title">Rheumatologic Emergencies</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Standard</span></div>
+                </a>
+                <a href="adventure-cases/copd-expanded-adventure.html" class="case-card" data-type="adventure">
+                    <div class="case-title">COPD (Adventure)</div>
+                    <div class="case-badges"><span class="badge badge-adventure">Adventure</span></div>
+                </a>
+            </div>
+        </section>
+    </main>
+    
+    <script>
+        function filterCases() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            document.querySelectorAll('.case-card').forEach(card => {
+                const title = card.querySelector('.case-title').textContent.toLowerCase();
+                card.style.display = title.includes(query) ? 'block' : 'none';
+            });
+        }
+        
+        function filterByType(type) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.querySelectorAll('.case-card').forEach(card => {
+                if (type === 'all') {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = card.dataset.type === type ? 'block' : 'none';
+                }
+            });
+        }
+    </script>
 </body>
 </html>
